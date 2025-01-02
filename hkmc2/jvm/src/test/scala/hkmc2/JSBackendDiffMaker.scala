@@ -68,6 +68,14 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       val jsb = new JSBuilder
         with JSBuilderArgNumSanityChecks(instrument = false)
       val le = low.program(blk)
+      
+      if showLoweredTree.isSet then
+        output(s"Lowered:")
+        output(le.showAsTree)
+      
+      val deforest = new Deforest
+      deforest(le)
+      
       val nestedScp = baseScp.nest
       val je = nestedScp.givenIn:
         jsb.program(le, N, wd)
@@ -84,12 +92,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       val jsb = new JSBuilder
         with JSBuilderArgNumSanityChecks(noSanityCheck.isUnset)
       val le = low.program(blk)
-      if showLoweredTree.isSet then
-        output(s"Lowered:")
-        output(le.showAsTree)
-      if ppLoweredTree.isSet then
-        output(s"Pretty Lowered:")
-        output(Printer.mkDocument(le)(using summon[Raise], baseScp.nest).toString)
+      
+      // if ppLoweredTree.isSet then
+      //   output(s"Pretty Lowered:")
+      //   output(Printer.mkDocument(le)(using summon[Raise], baseScp.nest).toString)
       
       // * Note that the codegen scope is not in sync with curCtx in terms of its `this` symbol.
       // * We do not nest TopLevelSymbol in codegen `Scope`s
