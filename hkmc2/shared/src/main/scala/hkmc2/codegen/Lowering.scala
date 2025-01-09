@@ -241,7 +241,7 @@ class Lowering(using TL, Raise, Elaborator.State):
           subTerm(scrut): sr =>
             tl.log(s"Binding scrut $scrut to $sr ${summon[Subst].map}")
             // val cse = 
-            def mkMatch(cse: Case -> Block) = Match(sr, cse :: Nil,
+            def mkMatch(cse: Case -> Block) = Match((sr.asInstanceOf[Value.Ref]), cse :: Nil,
                 S(go(restSplit, topLevel = true)),
                 End()
               )

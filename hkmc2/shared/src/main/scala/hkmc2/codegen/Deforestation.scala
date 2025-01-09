@@ -19,7 +19,8 @@ enum ProdStrat:
 
 
 enum ConsStrat:
-  case Dtor(scrut: Value.Ref)
+  // case Destruct
+  case Dtor(scrut: Value.Ref, arms: Ls[Case -> Block])
   case FieldSel(field: Tree.Ident, consVar: ConsVar, sym: Opt[TermSymbol])
   case ConsFun(l: Ls[ProdStrat], r: ConsStrat)
   case ConsVar(uid: StratVarId, name: Str = "") extends ConsStrat with StratVarTrait(uid, name)
@@ -30,6 +31,32 @@ trait StratVarTrait(uid: StratVarId, name: Str):
   lazy val asProdStrat = ProdStrat.ProdVar(uid, name)
   lazy val asConsStrat = ConsStrat.ConsVar(uid, name)
 
+extension (b: Block)
+  // TODO: similar to Block.mapTail?
+  def mapRes(f: Result => Block): Block = b match
+    case Return(res, implct) => f(res)
+    case Assign(lhs, rhs, rest: End) => Assign(lhs, rhs, f(Value.Ref(lhs)))
+    case Assign(lhs, rhs, rest) => Assign(lhs, rhs, rest.mapRes(f))
+    case Define(defn, rest) => Define(defn, rest.mapRes(f))
+    case Match(scrut, arms, dflt, rest) => ???
+    case Throw(exc) => ???
+    case Label(label, body, rest) => ???
+    case Break(label) => ???
+    case Continue(label) => ???
+    case Begin(sub, rest) => ???
+    case TryBlock(sub, finallyDo, rest) => ???
+    case AssignField(_, _, _, _) => ???
+    case HandleBlock(lhs, res, cls, handlers, body, rest) => ???
+    case HandleBlockReturn(res) => ???
+    case End(msg) => ???
+  
+  def replaceAssignments(args: List[Path]): Block = args match
+    case head :: tail => b match
+      case Assign(lhs, rhs, rest) => Assign(lhs, head, rest.replaceAssignments(tail))
+    case Nil => b
+  
+  
+
 class Deforest(using TL, Raise, Elaborator.State):
   import ProdStrat.*
   import ConsStrat.*
@@ -38,19 +65,21 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def apply(p: Program) =
     processBlock(p.main)
-    constraints.foreach(println)
-    println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    // constraints.foreach(println)
+    // println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     resolveConstraints
 
     println("upper:")
     upperBounds.foreach(u => println("\t" + u))
     println("lower:")
     lowerBounds.foreach(l => println("\t" + l))
-    println("ctor -> dtor:")
-    ctorDests.foreach(l => println("\t" + l._1 + " ===> " + l._2))
-    println("dtor -> ctor:")
-    dtorSources.foreach(l => println("\t" + l._1 + " ===> " + l._2))
     
+    // println("ctor -> dtor:")
+    // ctorDests.foreach(l => println("\t" + l._1.toString() + " ===> " + l._2.size))
+    // println("dtor -> ctor:")
+    // dtorSources.foreach(l => println("\t" + l._1.toString().take(20) + " ===> " + l._2.toString().take(20)))
+    
+    rewrite(p)
     
   
   val vuid = StratVarId.State()
@@ -87,7 +116,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val scrutStrat = processResult(scrut)
       if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.foreach { case (Case.Cls(s, _), body) => 
-          constrain(scrutStrat, Dtor(scrut))
+          constrain(scrutStrat, Dtor(scrut, arms))
           processBlock(body)(using S(scrutStrat -> s))
         }
       else
@@ -111,7 +140,10 @@ class Deforest(using TL, Raise, Elaborator.State):
       processBlock(rest)
     case Define(defn, rest) =>
       defn match
-        case FunDefn(sym, params, body) => NoProd // TODO:
+        case FunDefn(sym, params, body) =>
+          val param = params.head match
+            case ParamList(flags, params, restParam) => params
+          constrFun(param, body) // TODO: handle mutiple param list
         case ValDefn(owner, k, sym, rhs) => NoProd // TODO:
         case ClsLikeDefn(sym, k, parentSym, methods, privateFields, publicFields, preCtor, ctor) => NoProd
 
@@ -198,7 +230,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  val ctorDests = mutable.Map.empty[Call | Select, Ls[Value.Ref]].withDefaultValue(Nil)
+  val ctorDests = mutable.Map.empty[Call | Select, Map[Value.Ref, Ls[Case -> Block]]].withDefaultValue(Map.empty)
   val dtorSources = mutable.Map.empty[Value.Ref, Ls[Call | Select]].withDefaultValue(Nil)
   
   def resolveConstraints: Unit =
@@ -212,8 +244,11 @@ class Deforest(using TL, Raise, Elaborator.State):
       cache += c
       
       (prod, cons) match
-        case (Ctor(ctor, args, expr), Dtor(scrut)) =>
-          ctorDests += expr -> (scrut :: ctorDests(expr))
+        case (Ctor(ctor, args, expr), Dtor(scrut, arms)) =>
+          ctorDests += expr -> (ctorDests(expr).updatedWith(scrut){
+            case None => Some(arms)
+            case Some(v) => Some(arms ::: v)
+          })
           dtorSources += scrut -> (expr :: dtorSources(scrut))
           // TODO: keep track of this ctor to dtor
         case (Ctor(ctor, args, _), FieldSel(field, consVar, clsSym)) =>
@@ -229,13 +264,13 @@ class Deforest(using TL, Raise, Elaborator.State):
           upperBounds += uid -> (cons :: upperBounds(uid))
           lowerBounds(uid).foreach(p => handle(p -> cons))
         case (Ctor(ctor, args, _), NoCons) => ()
-        case (ProdFun(l, r), Dtor(cls)) => ???
+        case (ProdFun(l, r), Dtor(cls, _)) => ???
         case (ProdFun(l, r), FieldSel(field, consVar, _)) => ???
         case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
           lc.zip(lp).foreach(handle)
           handle(rp, rc)
         case (ProdFun(l, r), NoCons) => ()
-        case (NoProd, Dtor(cls)) => ()
+        case (NoProd, Dtor(cls, _)) => ()
         case (NoProd, FieldSel(field, consVar, _)) => ()
         case (NoProd, ConsFun(l, r)) => ()
         case (NoProd, NoCons) => ()
@@ -244,24 +279,33 @@ class Deforest(using TL, Raise, Elaborator.State):
       
   
   
-  def rewrite(p: Program) = ???
+  def rewrite(p: Program) =
+    Program(
+      p.imports,
+      rewriteBlock(p.main)
+    )
   
   def rewriteBlock(b: Block): Block = b match
-    case Match(scrut, arms, dflt, rest) =>
+    case mat@Match(scrut, arms, dflt, rest) =>
       if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
-        ??? // TODO: dtor, check strat
+        println(dtorSources.contains(scrut))
+        // TODO:
+        rest match
+          case End(msg) => Return(scrut, true)
+          case _ => rest
       else
         Match(scrut, arms.map{ (cse, blk) => (cse, rewriteBlock(blk)) }, dflt.map(rewriteBlock), rewriteBlock(rest))
-    case Return(res, implct) => Return(rewriteResult(res), implct)
-    case Assign(lhs, rhs, rest) => Assign(lhs, rewriteResult(rhs), rewriteBlock(rest))
+    case Return(res, implct) =>
+      rewriteResult(res)(r => Return(r, implct))
+    case Assign(lhs, rhs, rest) =>
+      rewriteResult(rhs)(r => Assign(lhs, r, rewriteBlock(rest)))
     case Begin(sub, rest) => Begin(rewriteBlock(sub), rewriteBlock(rest))
     case d@Define(defn, rest) =>
-      // TODO:
-      ???
-      
-    
+      defn match
+        case FunDefn(sym, params, body) => Define(FunDefn(sym, params, rewriteBlock(body)), rewriteBlock(rest))
+        case _ => d
     case End(msg) => End(msg)
-    case Throw(exc) => Throw(rewriteResult(exc))
+    case Throw(exc) => rewriteResult(exc)(Throw.apply)
     
     case AssignField(lhs, nme, rhs, rest) => ???
     case Label(label, body, rest) => ???
@@ -270,26 +314,44 @@ class Deforest(using TL, Raise, Elaborator.State):
     case TryBlock(sub, finallyDo, rest) => ???
   
   
-  def rewriteResult(r: Result): Result = r match
-    case c@Call(f, args) =>
+  def rewriteResult(r: Result)(k: Result => Block): Block = r match
+    case call@Call(f, args) =>
       f match
         case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
-          case None => c
-          case Some(c) => ??? // TODO: ctor, check strat
+          case None => k(call)
+          case Some(c) =>
+            ctorDests(call).headOption match
+              case None => k(call)
+              case Some(dest) =>
+                val body = dest._2.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
+                println(call.toString() + " ----> " + body)
+                body.replaceAssignments(args.map(a => a.value)).mapRes(k)
         case Value.Ref(l) => l.asCls match
-          case None => c
-          case Some(c) => ??? // TODO: ctor, check strat
+          case None => k(call)
+          case Some(c) =>
+            val body = ctorDests(call).head._2.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
+            println(call.toString() + " ----> " + body)
+            body.replaceAssignments(args.map(a => a.value)).mapRes(k)
         case Value.Lam(params, body) =>
-          Call(Value.Lam(params, rewriteBlock(body)), args)(c.isMlsFun)
-    case Instantiate(cls, args) => r
+          k(Call(Value.Lam(params, rewriteBlock(body)), args)(call.isMlsFun))
+    case Instantiate(cls, args) => k(r)
     case s@Select(p, nme) => s.symbol.flatMap(f => f.asMod) match
-      case None => s
-      case Some(value) => ??? // TODO: ctor, check strat
+      case None => k(s)
+      case Some(mod) =>
+        ctorDests.get(s) match
+          case None => 
+            k(s)
+          case Some(dests) =>
+            val body = dests.head._2.find{ case (Case.Cls(m, _) -> body) => m === mod }.get._2
+            println(mod.toString + " ----> " + body)
+            
+            body.mapRes(k)
+            
     
-    case Value.Ref(l) => Value.Ref(l)
-    case Value.This(sym) => Value.This(sym)
-    case Value.Lit(lit) => Value.Lit(lit)
-    case Value.Lam(params, body) => Value.Lam(params, rewriteBlock(body))
-    case Value.Arr(elems) => Value.Arr(elems)
+    case Value.Ref(l) => k(Value.Ref(l))
+    case Value.This(sym) => k(Value.This(sym))
+    case Value.Lit(lit) => k(Value.Lit(lit))
+    case Value.Lam(params, body) => k(Value.Lam(params, rewriteBlock(body)))
+    case Value.Arr(elems) => k(Value.Arr(elems))
   
   

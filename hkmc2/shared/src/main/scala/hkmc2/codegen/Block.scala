@@ -68,7 +68,7 @@ end Block
 sealed abstract class BlockTail extends Block
 
 case class Match(
-  scrut: Path,
+  scrut: Value.Ref,
   arms: Ls[Case -> Block],
   dflt: Opt[Block],
   rest: Block,

@@ -63,7 +63,7 @@ class FlowSymbol(label: Str)(using State) extends Symbol:
   val outFlows2: mutable.Buffer[Consumer] = mutable.Buffer.empty
   val inFlows: mutable.Buffer[ConcreteProd] = mutable.Buffer.empty
   override def toString: Str =
-    label + State.dbgUid(uid)
+    label + State.dbgUid(uid) + "---(flowSym)"
 
 
 sealed trait LocalSymbol extends Symbol
@@ -77,7 +77,7 @@ abstract class BlockLocalSymbol(name: Str)(using State) extends FlowSymbol(name)
 class TempSymbol(val trm: Opt[Term], dbgNme: Str = "tmp")(using State) extends BlockLocalSymbol(dbgNme):
   val nameHints: MutSet[Str] = MutSet.empty
   override def toLoc: Option[Loc] = trm.flatMap(_.toLoc)
-  override def toString: Str = s"$$${super.toString}"
+  override def toString: Str = s"$$${super.toString}---(tmpSym)"
 
 
 // * When instantiating forall-qualified TVs, we need to duplicate the information
@@ -86,7 +86,7 @@ class TempSymbol(val trm: Opt[Term], dbgNme: Str = "tmp")(using State) extends B
 class InstSymbol(val origin: Symbol)(using State) extends LocalSymbol:
   override def nme: Str = origin.nme
   override def toLoc: Option[Loc] = origin.toLoc
-  override def toString: Str = origin.toString
+  override def toString: Str = origin.toString + "---(instSym)"
 
 
 class VarSymbol(val id: Ident)(using State) extends BlockLocalSymbol(id.name) with NamedSymbol:
@@ -97,7 +97,7 @@ class BuiltinSymbol
     (val nme: Str, val binary: Bool, val unary: Bool, val nullary: Bool, val functionLike: Bool)(using State)
     extends Symbol:
   def toLoc: Option[Loc] = N
-  override def toString: Str = s"builtin:$nme${State.dbgUid(uid)}"
+  override def toString: Str = s"builtin:$nme${State.dbgUid(uid)}---(builtin)"
 
 
 /** This is the outside-facing symbol associated to a possibly-overloaded
@@ -124,7 +124,7 @@ class BlockMemberSymbol(val nme: Str, val trees: Ls[Tree])(using State)
     modTree.isDefined || trmTree.isDefined || clsTree.exists(_.paramLists.nonEmpty)
   
   override def toString: Str =
-    s"member:$nme${State.dbgUid(uid)}"
+    s"member:$nme${State.dbgUid(uid)}---(blkMem)"
 
   override val isGetter: Bool = // TODO: this should be checked based on a special syntax for getter
     trmImplTree.exists(t => t.k === Fun && t.paramLists.isEmpty)
@@ -143,7 +143,7 @@ class TermSymbol(val k: TermDefKind, val owner: Opt[InnerSymbol], val id: Tree.I
   def nme: Str = id.name
   def name: Str = nme
   def toLoc: Option[Loc] = id.toLoc
-  override def toString: Str = s"${owner.getOrElse("")}.${id.name}"
+  override def toString: Str = s"${owner.getOrElse("")}.${id.name}---(termSym)"
 
 
 sealed trait CtorSymbol extends Symbol
@@ -190,7 +190,7 @@ class ModuleSymbol(val tree: Tree.TypeDef, val id: Tree.Ident)(using State)
 class TypeAliasSymbol(val id: Tree.Ident)(using State) extends MemberSymbol[TypeDef]:
   def nme = id.name
   def toLoc: Option[Loc] = id.toLoc // TODO track source tree of type alias here
-  override def toString: Str = s"module:${id.name}${State.dbgUid(uid)}"
+  override def toString: Str = s"typeAlias:${id.name}${State.dbgUid(uid)}"
 
 class PatternSymbol(val id: Tree.Ident)(using State)
     extends MemberSymbol[PatternDef] with CtorSymbol with InnerSymbol:
@@ -202,6 +202,6 @@ class TopLevelSymbol(blockNme: Str)(using State)
     extends MemberSymbol[ModuleDef] with InnerSymbol:
   def nme = blockNme
   def toLoc: Option[Loc] = N
-  override def toString: Str = s"globalThis:$blockNme${State.dbgUid(uid)}"
+  override def toString: Str = s"globalThis:$blockNme${State.dbgUid(uid)}---(topLvl)"
 
 
