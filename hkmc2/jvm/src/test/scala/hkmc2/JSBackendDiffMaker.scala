@@ -51,6 +51,46 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   override def run(): Unit =
     try super.run() finally if hostCreated then host.terminate()
   
+  
+  def mkQuery(prefix: Str, jsStr: Str)(using Raise) =
+    import hkmc2.Message.MessageContext
+    val queryStr = jsStr.replaceAll("\n", " ")
+    val (reply, stderr) = host.query(queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
+    reply match
+      case ReplHost.Result(content, stdout) =>
+        if silent.isUnset then
+          stdout match
+            case None | Some("") =>
+            case Some(str) =>
+              str.splitSane('\n').foreach: line =>
+                output(s"> ${line}")
+          content match
+          case "undefined" =>
+          case "null" =>
+          case _ =>
+            expect.get match
+              case S(expected) if content != expected => raise:
+                ErrorReport(msg"Expected: ${expected}, got: ${content}" -> N :: Nil,
+                  source = Diagnostic.Source.Runtime)
+              case _ => output(s"$prefix= ${content}")
+      case ReplHost.Empty =>
+      case ReplHost.Unexecuted(message) => ???
+      case ReplHost.Error(isSyntaxError, message, otherOutputs) =>
+        if otherOutputs.nonEmpty then
+          otherOutputs.splitSane('\n').foreach: line =>
+            output(s"> ${line}")
+        
+        if (isSyntaxError) then
+          // If there is a syntax error in the generated code,
+          // it should be a code generation error.
+          raise(ErrorReport(msg"[Uncaught SyntaxError] ${message}" -> N :: Nil,
+            source = Diagnostic.Source.Compilation))
+        else
+          // Otherwise, it is considered a simple runtime error.
+          raise(ErrorReport(msg"${message}" -> N :: Nil,
+            source = Diagnostic.Source.Runtime))
+    if stderr.nonEmpty then output(s"// Standard Error:\n${stderr}")
+  
   override def processTerm(blk: semantics.Term.Blk, inImport: Bool)(using Raise): Unit =
     super.processTerm(blk, inImport)
     val outerRaise: Raise = summon
@@ -69,11 +109,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       val jsb = new JSBuilder
         with JSBuilderArgNumSanityChecks(instrument = false)
       val le = low.program(blk)
-      
-      if showLoweredTree.isSet then
-        output(s"Lowered:")
-        output(le.showAsTree)
-        
       val nestedScp = baseScp.nest
       val je = nestedScp.givenIn:
         jsb.program(le, N, wd)
@@ -91,7 +126,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         val je = nestedScp.givenIn:
           jsb.program(deforestRes, N, wd)
         output("==== JS (deforested): ====")
-        output(je.stripBreaks.mkString(100))
+        
+        val jsStr = je.stripBreaks.mkString(100)
+        output(jsStr)
+        mkQuery("", jsStr)
         output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
       
     if js.isSet && !showingJSYieldedCompileError then
@@ -123,45 +161,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       if showSanitizedJS.isSet then
         output(s"JS:")
         output(jsStr)
-      def mkQuery(prefix: Str, jsStr: Str) =
-        import hkmc2.Message.MessageContext
-        val queryStr = jsStr.replaceAll("\n", " ")
-        val (reply, stderr) = host.query(queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
-        reply match
-          case ReplHost.Result(content, stdout) =>
-            if silent.isUnset then
-              stdout match
-                case None | Some("") =>
-                case Some(str) =>
-                  str.splitSane('\n').foreach: line =>
-                    output(s"> ${line}")
-              content match
-              case "undefined" =>
-              case "null" =>
-              case _ =>
-                expect.get match
-                  case S(expected) if content != expected => raise:
-                    ErrorReport(msg"Expected: ${expected}, got: ${content}" -> N :: Nil,
-                      source = Diagnostic.Source.Runtime)
-                  case _ => output(s"$prefix= ${content}")
-          case ReplHost.Empty =>
-          case ReplHost.Unexecuted(message) => ???
-          case ReplHost.Error(isSyntaxError, message, otherOutputs) =>
-            if otherOutputs.nonEmpty then
-              otherOutputs.splitSane('\n').foreach: line =>
-                output(s"> ${line}")
-            
-            if (isSyntaxError) then
-              // If there is a syntax error in the generated code,
-              // it should be a code generation error.
-              raise(ErrorReport(msg"[Uncaught SyntaxError] ${message}" -> N :: Nil,
-                source = Diagnostic.Source.Compilation))
-            else
-              // Otherwise, it is considered a simple runtime error.
-              raise(ErrorReport(msg"${message}" -> N :: Nil,
-                source = Diagnostic.Source.Runtime))
-        if stderr.nonEmpty then output(s"// Standard Error:\n${stderr}")
-      
       
       if traceJS.isSet then
         host.execute(
