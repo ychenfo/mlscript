@@ -10,9 +10,10 @@ import scala.collection.mutable
 
 type StratVar
 type StratVarId = Uid[StratVar]
+type ClsOrModSymbol = ClassSymbol | ModuleSymbol
 
 enum ProdStrat:
-  case Ctor(ctor: ClassSymbol | ModuleSymbol, args: Map[TermSymbol, ProdStrat], expr: Call | Select)
+  case Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: Call | Select)
   case ProdFun(l: Ls[ConsStrat], r: ProdStrat)
   case ProdVar(uid: StratVarId, name: Str = "") extends ProdStrat with StratVarTrait(uid, name)
   case NoProd
@@ -28,6 +29,9 @@ enum ConsStrat:
 
 trait StratVarTrait(uid: StratVarId, name: Str):
   this: ProdStrat.ProdVar | ConsStrat.ConsVar =>
+  
+  val filter = mutable.Map.empty[ProdStrat.ProdVar, Ls[ClsOrModSymbol]].withDefaultValue(Nil)
+  
   lazy val asProdStrat = ProdStrat.ProdVar(uid, name)
   lazy val asConsStrat = ConsStrat.ConsVar(uid, name)
 
@@ -35,7 +39,7 @@ extension (b: Block)
   // TODO: similar to Block.mapTail?
   def mapRes(f: Result => Block): Block = b match
     case Return(res, implct) => f(res)
-    case Assign(lhs, rhs, rest: End) => Assign(lhs, rhs, f(Value.Ref(lhs)))
+    case Assign(lhs, rhs, rest: End) => f(rhs)
     case Assign(lhs, rhs, rest) => Assign(lhs, rhs, rest.mapRes(f))
     case Define(defn, rest) => Define(defn, rest.mapRes(f))
     case Match(scrut, arms, dflt, rest) => ???
@@ -90,14 +94,12 @@ class Deforest(using TL, Raise, Elaborator.State):
   // currently, symbols that shouldn't be read from ctx are symbols for ctors (class/object) blkMem symbols
   // TODO: ctor as a function?
   def getStratOfSym(s: Symbol) =
-    // s.asMod.fold(
-      s match
-        case _: BuiltinSymbol => NoProd
-        case _: TopLevelSymbol => NoProd
-        case _: BlockMemberSymbol => symToStrat(s)
-        case _: LocalSymbol => symToStrat(s)
-        case _: FlowSymbol => symToStrat(s)
-    // )(m => Ctor(m, Map.empty))
+    s match
+      case _: BuiltinSymbol => NoProd
+      case _: TopLevelSymbol => NoProd
+      case _: BlockMemberSymbol => symToStrat(s) // For `fun` and `let` only, not classes or modules?
+      case _: LocalSymbol => symToStrat(s)
+      case _: FlowSymbol => symToStrat(s)
   
   // def getClsFields(s: ClassSymbol) = s.tree.paramLists.head.fields.map {
   //   case Tree.InfixApp(id: Tree.Ident, kw, rhs) => id
@@ -105,25 +107,44 @@ class Deforest(using TL, Raise, Elaborator.State):
   // }
   def getClsFields(s: ClassSymbol) = s.tree.clsParams
 
-  def freshVar(nme: String = ""): ProdVar -> ConsVar =
+  def freshVar(nme: String = "")(using filter: Opt[ProdVar -> ClsOrModSymbol] = N): ProdVar -> ConsVar =
     val newId = vuid.nextUid
-    ProdVar(newId, nme) -> ConsVar(newId, nme)
+    val p: ProdVar = ProdVar(newId, nme)
+    val c: ConsVar = ConsVar(newId, nme)
+    filter.foreach{ case v -> cls =>
+      p.filter.updateWith(v){
+        case None => Some(cls :: Nil)
+        case Some(value) => Some(cls :: value)
+      }
+      c.filter.updateWith(v){
+        case None => Some(cls :: Nil)
+        case Some(value) => Some(cls :: value)
+      }
+    }
+    p -> c
     
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
-  def processBlock(b: Block)(using inArm: Option[ProdStrat -> (ClassSymbol | ModuleSymbol)] = N): ProdStrat = b match
+  def processBlock(b: Block)(using inArm: Option[ProdVar -> ClsOrModSymbol] = N): ProdStrat = b match
     case Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
-      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
-        arms.foreach { case (Case.Cls(s, _), body) => 
+      val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
+        arms.map { case (Case.Cls(s, _), body) => 
           constrain(scrutStrat, Dtor(scrut, arms))
-          processBlock(body)(using S(scrutStrat -> s))
+          // TODO: fix this "asInstanceOf"?
+          processBlock(body)(using S(scrutStrat.asInstanceOf[ProdStrat.ProdVar] -> s))
         }
       else
         arms.map{ case (_, armBody) => processBlock(armBody) }
       // TODO: dflt?
-      dflt.map(processBlock)
-      processBlock(rest)
+      val dfltRes = dflt.map(processBlock)
+      rest match
+        case End(msg) =>
+          val matchRes = freshVar()
+          armsRes.appendedAll(dfltRes).foreach: r =>
+            constrain(r, matchRes._2)
+          matchRes._1
+        case _ => processBlock(rest)
 
     case Return(res, implct) => processResult(res)
     case Assign(lhs, rhs, rest) =>
@@ -143,10 +164,14 @@ class Deforest(using TL, Raise, Elaborator.State):
         case FunDefn(sym, params, body) =>
           val param = params.head match
             case ParamList(flags, params, restParam) => params
-          constrFun(param, body) // TODO: handle mutiple param list
+          val funStrat = constrFun(param, body) // TODO: handle mutiple param list
+          val funSymStratVar = freshVar(sym.nme)
+          symToStrat += sym -> funSymStratVar._1
+          constrain(funStrat, funSymStratVar._2)
+          funSymStratVar._1
         case ValDefn(owner, k, sym, rhs) => NoProd // TODO:
         case ClsLikeDefn(sym, k, parentSym, methods, privateFields, publicFields, preCtor, ctor) => NoProd
-
+      processBlock(rest)
     case End(msg) => NoProd
     case Throw(exc) => NoProd
     case AssignField(lhs, nme, rhs, rest) => ???
@@ -155,7 +180,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     case Continue(label) => ???
     case TryBlock(sub, finallyDo, rest) => ???
   
-  def constrFun(params: Ls[Param], body: Block) =
+  def constrFun(params: Ls[Param], body: Block)(using inArm: Option[ProdVar -> ClsOrModSymbol] = N) =
     val paramSyms = params.map{ case Param(_, sym, _) => sym }
     val paramStrats = paramSyms.map{ sym => freshVar(sym.name) }
     symToStrat.addAll(paramSyms.zip(paramStrats.map(_._1)))
@@ -163,30 +188,36 @@ class Deforest(using TL, Raise, Elaborator.State):
     constrain(processBlock(body), res._2)
     ProdFun(paramStrats.map(_._2), res._1)
   
-  def processResult(r: Result)(using inArm: Option[ProdStrat -> (ClassSymbol | ModuleSymbol)]): ProdStrat = r match
+  def processResult(r: Result)(using inArm: Option[ProdVar -> ClsOrModSymbol]): ProdStrat = r match
     case c@Call(f, args) =>
       val argsTpe = args.map { case Arg(false, value) => 
         processResult(value)
       }
       f match
-        case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
-          case Some(s) =>
-            val clsFields = getClsFields(s)
-            Ctor(s, clsFields.zip(argsTpe).toMap, c)
-          case _ =>
-            val pStrat = processResult(p)
-            val tpeVar = freshVar()
-            constrain(pStrat, FieldSel(nme, tpeVar._2, N))
-            val appRes = freshVar()
-            constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
-            appRes._1
+        case s@Select(p, nme) =>
+          s.symbol.map(_.asCls) match
+            case None =>
+              val pStrat = processResult(p)
+              val tpeVar = freshVar()
+              constrain(pStrat, FieldSel(nme, tpeVar._2, N))
+              val appRes = freshVar()
+              constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
+              appRes._1
+            case Some(None) =>
+              val funSym = s.symbol.get
+              val appRes = freshVar("call_" + funSym.nme + "_res")
+              constrain(getStratOfSym(funSym), ConsFun(argsTpe, appRes._2))
+              appRes._1
+            case Some(Some(s)) =>
+              val clsFields = getClsFields(s)
+              Ctor(s, clsFields.zip(argsTpe).toMap, c)
         case Value.Ref(l) =>
           l.asCls match
             case Some(s) =>
               val clsFields = getClsFields(s)
               Ctor(s, clsFields.zip(argsTpe).toMap, c)
-            case _ =>
-              val appRes = freshVar()
+            case _ => // then it is a function
+              val appRes = freshVar("call_" + l.nme + "_res")
               constrain(getStratOfSym(l), ConsFun(argsTpe, appRes._2))
               appRes._1
         case lam@Value.Lam(params, body) =>
@@ -291,7 +322,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         println(dtorSources.contains(scrut))
         // TODO:
         rest match
-          case End(msg) => Return(scrut, true)
+          case End(msg) => Return(scrut, false) // TODO: true or false?
           case _ => rest
       else
         Match(scrut, arms.map{ (cse, blk) => (cse, rewriteBlock(blk)) }, dflt.map(rewriteBlock), rewriteBlock(rest))
