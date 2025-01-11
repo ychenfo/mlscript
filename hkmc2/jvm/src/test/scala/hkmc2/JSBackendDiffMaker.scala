@@ -119,8 +119,14 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       if deforestFlag.isSet then
         val deforest = new Deforest
         output(">>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        val deforestRes = deforest(le)
         if showLoweredTree.isSet then
+          output("==== Non-inserted lowered tree ====")
+          output(le.showAsTree)
+        
+        val deforestRes = deforest(le)
+        
+        if showLoweredTree.isSet then
+          output("\n==== deforested tree ====")
           output(deforestRes.showAsTree)
         val nestedScp = baseScp.nest
         val je = nestedScp.givenIn:
