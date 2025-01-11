@@ -162,11 +162,11 @@ class Deforest(using TL, Raise, Elaborator.State):
     case Define(defn, rest) =>
       defn match
         case FunDefn(sym, params, body) =>
+          val funSymStratVar = freshVar(sym.nme)
+          symToStrat += sym -> funSymStratVar._1
           val param = params.head match
             case ParamList(flags, params, restParam) => params
           val funStrat = constrFun(param, body) // TODO: handle mutiple param list
-          val funSymStratVar = freshVar(sym.nme)
-          symToStrat += sym -> funSymStratVar._1
           constrain(funStrat, funSymStratVar._2)
           funSymStratVar._1
         case ValDefn(owner, k, sym, rhs) => NoProd // TODO:
@@ -318,8 +318,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def rewriteBlock(b: Block): Block = b match
     case mat@Match(scrut, arms, dflt, rest) =>
-      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
-        println(dtorSources.contains(scrut))
+      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && dtorSources.contains(scrut) then
         // TODO:
         rest match
           case End(msg) => Return(scrut, false) // TODO: true or false?
