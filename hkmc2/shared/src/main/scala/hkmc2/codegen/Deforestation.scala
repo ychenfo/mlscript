@@ -12,28 +12,38 @@ type StratVar
 type StratVarId = Uid[StratVar]
 type ClsOrModSymbol = ClassSymbol | ModuleSymbol
 
-enum ProdStrat:
-  case Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: Call | Select)
-  case ProdFun(l: Ls[ConsStrat], r: ProdStrat)
-  case ProdVar(uid: StratVarId, name: Str = "") extends ProdStrat with StratVarTrait(uid, name)
-  case NoProd
+sealed abstract class Strat
+
+sealed abstract class ProdStrat extends Strat
+
+sealed abstract class ConsStrat extends Strat
+
+// enum ProdStrat:
+case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: Call | Select) extends ProdStrat
+case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
+case class ProdVar(uid: StratVarId, name: Str = "") extends ProdStrat with StratVarTrait(uid, name)
+case object NoProd extends ProdStrat
 
 
-enum ConsStrat:
-  // case Destruct
-  case Dtor(scrut: Value.Ref, arms: Ls[Case -> Block])
-  case FieldSel(field: Tree.Ident, consVar: ConsVar, sym: Opt[TermSymbol])
-  case ConsFun(l: Ls[ProdStrat], r: ConsStrat)
-  case ConsVar(uid: StratVarId, name: Str = "") extends ConsStrat with StratVarTrait(uid, name)
-  case NoCons
+// enum ConsStrat:
+case class Dtor(scrut: Value.Ref, arms: Ls[Case -> Block]) extends ConsStrat
+case class FieldSel(field: Tree.Ident, consVar: ConsVar, sym: Opt[TermSymbol]) extends ConsStrat with FieldSelTrait
+case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
+case class ConsVar(uid: StratVarId, name: Str = "") extends ConsStrat with StratVarTrait(uid, name)
+case object NoCons extends ConsStrat
+
+trait FieldSelTrait:
+  this: FieldSel =>
+  val filter = mutable.Map.empty[ProdVar, Ls[ClsOrModSymbol]].withDefaultValue(Nil)
+  
+  def updateFilter(p: ProdVar, c: Ls[ClsOrModSymbol]) =
+    filter += p -> (c ::: filter(p))
 
 trait StratVarTrait(uid: StratVarId, name: Str):
-  this: ProdStrat.ProdVar | ConsStrat.ConsVar =>
+  this: ProdVar | ConsVar =>
   
-  val filter = mutable.Map.empty[ProdStrat.ProdVar, Ls[ClsOrModSymbol]].withDefaultValue(Nil)
-  
-  lazy val asProdStrat = ProdStrat.ProdVar(uid, name)
-  lazy val asConsStrat = ConsStrat.ConsVar(uid, name)
+  lazy val asProdStrat = ProdVar(uid, name)
+  lazy val asConsStrat = ConsVar(uid, name)
 
 extension (b: Block)
   // TODO: similar to Block.mapTail?
@@ -62,8 +72,8 @@ extension (b: Block)
   
 
 class Deforest(using TL, Raise, Elaborator.State):
-  import ProdStrat.*
-  import ConsStrat.*
+  // import ProdStrat.*
+  // import ConsStrat.*
   
   object StratVarId extends Uid.Handler[StratVar]
   
@@ -90,7 +100,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
   
-  val symToStrat = mutable.Map.empty[Symbol, ProdStrat.ProdVar]
+  val symToStrat = mutable.Map.empty[Symbol, ProdVar]
   // currently, symbols that shouldn't be read from ctx are symbols for ctors (class/object) blkMem symbols
   // TODO: ctor as a function?
   def getStratOfSym(s: Symbol) =
@@ -111,16 +121,16 @@ class Deforest(using TL, Raise, Elaborator.State):
     val newId = vuid.nextUid
     val p: ProdVar = ProdVar(newId, nme)
     val c: ConsVar = ConsVar(newId, nme)
-    filter.foreach{ case v -> cls =>
-      p.filter.updateWith(v){
-        case None => Some(cls :: Nil)
-        case Some(value) => Some(cls :: value)
-      }
-      c.filter.updateWith(v){
-        case None => Some(cls :: Nil)
-        case Some(value) => Some(cls :: value)
-      }
-    }
+    // filter.foreach{ case v -> cls =>
+    //   p.filter.updateWith(v){
+    //     case None => Some(cls :: Nil)
+    //     case Some(value) => Some(cls :: value)
+    //   }
+    //   c.filter.updateWith(v){
+    //     case None => Some(cls :: Nil)
+    //     case Some(value) => Some(cls :: value)
+    //   }
+    // }
     p -> c
     
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
@@ -132,7 +142,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         arms.map { case (Case.Cls(s, _), body) => 
           constrain(scrutStrat, Dtor(scrut, arms))
           // TODO: fix this "asInstanceOf"?
-          processBlock(body)(using S(scrutStrat.asInstanceOf[ProdStrat.ProdVar] -> s))
+          processBlock(body)(using S(scrutStrat.asInstanceOf[ProdVar] -> s))
         }
       else
         arms.map{ case (_, armBody) => processBlock(armBody) }
@@ -243,7 +253,9 @@ class Deforest(using TL, Raise, Elaborator.State):
           case Some(armP -> clsSym) if armP === pStrat =>
             assert(sel.symbol.exists(_.isInstanceOf[TermSymbol]))
             val tpeVar = freshVar()
-            constrain(pStrat, FieldSel(nme, tpeVar._2, sel.symbol.map(_.asInstanceOf[TermSymbol])))
+            val selStrat = FieldSel(nme, tpeVar._2, sel.symbol.map(_.asInstanceOf[TermSymbol]))
+            selStrat.updateFilter(armP, clsSym :: Nil)
+            constrain(pStrat, selStrat)
             tpeVar._1
           case _ =>
             val tpeVar = freshVar()
@@ -288,12 +300,25 @@ class Deforest(using TL, Raise, Elaborator.State):
           else
             args.find(a => a._1.id == field).map(p => handle(p._2 -> consVar))
         case (Ctor(ctor, args, _), ConsFun(l, r)) => ???
+        
+        case (p@ProdVar(uid, name), _) =>
+          upperBounds += uid -> (cons :: upperBounds(uid))
+          lowerBounds(uid).foreach{ l =>
+            (l, cons) match
+              case (l: ProdVar, sel@FieldSel(field, consVar, sym)) =>
+                sel.updateFilter(l, sel.filter(p))
+                handle(l -> cons)
+              case (Ctor(ctor, args, expr), sel@FieldSel(field, consVar, sym)) =>
+                if sel.filter(p).contains(ctor) then
+                  handle(l -> cons)
+                else
+                  ()
+              case _ => handle(p -> cons)
+          }
+          // lowerBounds(uid).foreach(p => handle(p -> cons))
         case (_, ConsVar(uid, name)) =>
           lowerBounds += uid -> (prod :: lowerBounds(uid))
           upperBounds(uid).foreach(c => handle(prod -> c))
-        case (ProdVar(uid, name), _) =>
-          upperBounds += uid -> (cons :: upperBounds(uid))
-          lowerBounds(uid).foreach(p => handle(p -> cons))
         case (Ctor(ctor, args, _), NoCons) => ()
         case (ProdFun(l, r), Dtor(cls, _)) => ???
         case (ProdFun(l, r), FieldSel(field, consVar, _)) => ???
