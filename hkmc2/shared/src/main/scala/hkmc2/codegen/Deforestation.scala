@@ -52,7 +52,8 @@ extension (b: Block)
     case Assign(lhs, rhs, rest: End) => f(rhs)
     case Assign(lhs, rhs, rest) => Assign(lhs, rhs, rest.mapRes(f))
     case Define(defn, rest) => Define(defn, rest.mapRes(f))
-    case Match(scrut, arms, dflt, rest) => ???
+    // case Match(scrut, arms, dflt, e: End) => Match(scrut, arms)
+    // case Match(scrut, arms, dflt, rest) => Match(scrut, arms, dflt, rest.mapRes(f))
     case Throw(exc) => ???
     case Label(label, body, rest) => ???
     case Break(label) => ???
@@ -87,6 +88,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     upperBounds.foreach(u => println("\t" + u))
     println("lower:")
     lowerBounds.foreach(l => println("\t" + l))
+    println("==============================")
     
     // println("ctor -> dtor:")
     // ctorDests.foreach(l => println("\t" + l._1.toString() + " ===> " + l._2.size))
@@ -295,10 +297,10 @@ class Deforest(using TL, Raise, Elaborator.State):
           dtorSources += scrut -> (expr :: dtorSources(scrut))
           // TODO: keep track of this ctor to dtor
         case (Ctor(ctor, args, _), FieldSel(field, consVar, clsSym)) =>
-          if clsSym.isDefined then
-            args.get(clsSym.get).map(p => handle(p -> consVar))
-          else
-            args.find(a => a._1.id == field).map(p => handle(p._2 -> consVar))
+          // if clsSym.isDefined then
+          //   args.get(clsSym.get).map(p => handle(p -> consVar))
+          // else
+          args.find(a => a._1.id == field).map(p => handle(p._2 -> consVar))
         case (Ctor(ctor, args, _), ConsFun(l, r)) => ???
         
         case (p@ProdVar(uid, name), _) =>
@@ -313,7 +315,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                   handle(l -> cons)
                 else
                   ()
-              case _ => handle(p -> cons)
+              case _ => handle(l -> cons)
           }
           // lowerBounds(uid).foreach(p => handle(p -> cons))
         case (_, ConsVar(uid, name)) =>
@@ -323,6 +325,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         case (ProdFun(l, r), Dtor(cls, _)) => ???
         case (ProdFun(l, r), FieldSel(field, consVar, _)) => ???
         case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
+          println(s">>>>>>>>>>>>>>>>>>>>>>>> $prod ->>> $cons <<<<<<<<<<<<<<<<<<<<<<<")
           lc.zip(lp).foreach(handle)
           handle(rp, rc)
         case (ProdFun(l, r), NoCons) => ()
@@ -346,7 +349,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && dtorSources.contains(scrut) then
         // TODO:
         rest match
-          case End(msg) => Return(scrut, false) // TODO: true or false?
+          case End(msg) => Return(scrut, true) // TODO: true or false?
           case _ => rest
       else
         Match(scrut, arms.map{ (cse, blk) => (cse, rewriteBlock(blk)) }, dflt.map(rewriteBlock), rewriteBlock(rest))
@@ -375,12 +378,18 @@ class Deforest(using TL, Raise, Elaborator.State):
         case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
           case None => k(call)
           case Some(c) =>
+            assert(ctorDests(call).size == 1)
             ctorDests(call).headOption match
               case None => k(call)
               case Some(dest) =>
                 val body = dest._2.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
                 println(call.toString() + " ----> " + body)
-                body.replaceAssignments(args.map(a => a.value)).mapRes(k)
+                
+                val newArgs = args.map(_ => TempSymbol(N))
+                args.zip(newArgs).foldRight[Block](body.replaceAssignments(newArgs.map(a => Value.Ref(a))).mapRes(k)){ case ((a, tmp), rest) =>
+                  rewriteResult(a.value): r =>
+                    Assign(tmp, r, rest)
+                }
         case Value.Ref(l) => l.asCls match
           case None => k(call)
           case Some(c) =>
