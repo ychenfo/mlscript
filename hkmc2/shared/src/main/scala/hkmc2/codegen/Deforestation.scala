@@ -27,7 +27,7 @@ case object NoProd extends ProdStrat
 
 // enum ConsStrat:
 case class Dtor(scrut: Value.Ref, arms: Ls[Case -> Block]) extends ConsStrat
-case class FieldSel(field: Tree.Ident, consVar: ConsVar, sym: Opt[TermSymbol]) extends ConsStrat with FieldSelTrait
+case class FieldSel(field: Tree.Ident, consVar: ConsVar) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
 case class ConsVar(uid: StratVarId, name: Str = "") extends ConsStrat with StratVarTrait(uid, name)
 case object NoCons extends ConsStrat
@@ -211,7 +211,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             case None =>
               val pStrat = processResult(p)
               val tpeVar = freshVar()
-              constrain(pStrat, FieldSel(nme, tpeVar._2, N))
+              constrain(pStrat, FieldSel(nme, tpeVar._2))
               val appRes = freshVar()
               constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
               appRes._1
@@ -253,15 +253,15 @@ class Deforest(using TL, Raise, Elaborator.State):
         val pStrat = processResult(p)
         inArm match
           case Some(armP -> clsSym) if armP === pStrat =>
-            assert(sel.symbol.exists(_.isInstanceOf[TermSymbol]))
+            // assert(sel.symbol.exists(_.isInstanceOf[TermSymbol]))
             val tpeVar = freshVar()
-            val selStrat = FieldSel(nme, tpeVar._2, sel.symbol.map(_.asInstanceOf[TermSymbol]))
+            val selStrat = FieldSel(nme, tpeVar._2)
             selStrat.updateFilter(armP, clsSym :: Nil)
             constrain(pStrat, selStrat)
             tpeVar._1
           case _ =>
             val tpeVar = freshVar()
-            constrain(pStrat, FieldSel(nme, tpeVar._2, N))
+            constrain(pStrat, FieldSel(nme, tpeVar._2))
             tpeVar._1
             
     case Value.Ref(l) => getStratOfSym(l)
@@ -296,7 +296,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           })
           dtorSources += scrut -> (expr :: dtorSources(scrut))
           // TODO: keep track of this ctor to dtor
-        case (Ctor(ctor, args, _), FieldSel(field, consVar, clsSym)) =>
+        case (Ctor(ctor, args, _), FieldSel(field, consVar)) =>
           // if clsSym.isDefined then
           //   args.get(clsSym.get).map(p => handle(p -> consVar))
           // else
@@ -307,10 +307,10 @@ class Deforest(using TL, Raise, Elaborator.State):
           upperBounds += uid -> (cons :: upperBounds(uid))
           lowerBounds(uid).foreach{ l =>
             (l, cons) match
-              case (l: ProdVar, sel@FieldSel(field, consVar, sym)) =>
+              case (l: ProdVar, sel@FieldSel(field, consVar)) =>
                 sel.updateFilter(l, sel.filter(p))
                 handle(l -> cons)
-              case (Ctor(ctor, args, expr), sel@FieldSel(field, consVar, sym)) =>
+              case (Ctor(ctor, args, expr), sel@FieldSel(field, consVar)) =>
                 if sel.filter(p).contains(ctor) then
                   handle(l -> cons)
                 else
@@ -323,14 +323,14 @@ class Deforest(using TL, Raise, Elaborator.State):
           upperBounds(uid).foreach(c => handle(prod -> c))
         case (Ctor(ctor, args, _), NoCons) => ()
         case (ProdFun(l, r), Dtor(cls, _)) => ???
-        case (ProdFun(l, r), FieldSel(field, consVar, _)) => ???
+        case (ProdFun(l, r), FieldSel(field, consVar)) => ???
         case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
           println(s">>>>>>>>>>>>>>>>>>>>>>>> $prod ->>> $cons <<<<<<<<<<<<<<<<<<<<<<<")
           lc.zip(lp).foreach(handle)
           handle(rp, rc)
         case (ProdFun(l, r), NoCons) => ()
         case (NoProd, Dtor(cls, _)) => ()
-        case (NoProd, FieldSel(field, consVar, _)) => ()
+        case (NoProd, FieldSel(field, consVar)) => ()
         case (NoProd, ConsFun(l, r)) => ()
         case (NoProd, NoCons) => ()
       
