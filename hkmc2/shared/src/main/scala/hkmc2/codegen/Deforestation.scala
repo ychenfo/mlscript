@@ -252,7 +252,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       case _ => 
         val pStrat = processResult(p)
         inArm match
-          case Some(armP -> clsSym) if armP === pStrat =>
+          case Some(armP -> clsSym) =>
             // assert(sel.symbol.exists(_.isInstanceOf[TermSymbol]))
             val tpeVar = freshVar()
             val selStrat = FieldSel(nme, tpeVar._2)
