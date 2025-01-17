@@ -27,7 +27,7 @@ case object NoProd extends ProdStrat
 
 // enum ConsStrat:
 case class Dtor(scrut: Value.Ref, arms: Ls[Case -> Block]) extends ConsStrat
-case class FieldSel(field: Tree.Ident, consVar: ConsVar) extends ConsStrat with FieldSelTrait
+case class FieldSel(field: Tree.Ident, consVar: ConsVar, expr: Select) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
 case class ConsVar(uid: StratVarId, name: Str = "") extends ConsStrat with StratVarTrait(uid, name)
 case object NoCons extends ConsStrat
@@ -44,6 +44,20 @@ trait StratVarTrait(uid: StratVarId, name: Str):
   
   lazy val asProdStrat = ProdVar(uid, name)
   lazy val asConsStrat = ConsVar(uid, name)
+
+extension (r: Result)
+  def replaceSelect(using p: Set[Select], args: Map[Tree.Ident, Path]): Result = r match
+    case c@Call(f, args) => Call(f, args.map{case Arg(spread, value) => Arg(spread, value.replaceSelect.asInstanceOf[Path])})(c.isMlsFun)
+    case sel@Select(path, nme) =>
+      if p.contains(sel) then args(nme) else sel
+    case _ => r
+    // case Value.Ref(l) => r
+    // case Instantiate(cls, args) => ???
+    // case Value.This(sym) => ???
+    // case Value.Lit(lit) => ???
+    // case Value.Lam(params, body) => ???
+    // case Value.Arr(elems) => ???
+  
 
 extension (b: Block)
   // TODO: similar to Block.mapTail?
@@ -64,6 +78,24 @@ extension (b: Block)
     case HandleBlock(lhs, res, cls, handlers, body, rest) => ???
     case HandleBlockReturn(res) => ???
     case End(msg) => ???
+  
+  def replaceSelect(using p: Set[Select], args: Map[Tree.Ident, Path]): Block = b match
+    case Assign(lhs, rhs, rest) => Assign(lhs, rhs.replaceSelect, rest.replaceSelect)
+    case Return(res, implct) => Return(res.replaceSelect, implct)
+    case Match(scrut, arms, dflt, rest) => ???
+    case _ => b
+    // case Throw(exc) => ???
+    // case Label(label, body, rest) => ???
+    // case Break(label) => ???
+    // case Continue(label) => ???
+    // case Begin(sub, rest) => ???
+    // case TryBlock(sub, finallyDo, rest) => ???
+    // case AssignField(_, _, _, _) => ???
+    // case Define(defn, rest) => ???
+    // case HandleBlock(lhs, res, cls, handlers, body, rest) => ???
+    // case HandleBlockReturn(res) => ???
+    // case End(msg) => ???
+  
   
   def replaceAssignments(args: List[Path]): Block = args match
     case head :: tail => b match
@@ -211,7 +243,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             case None =>
               val pStrat = processResult(p)
               val tpeVar = freshVar()
-              constrain(pStrat, FieldSel(nme, tpeVar._2))
+              constrain(pStrat, FieldSel(nme, tpeVar._2, s))
               val appRes = freshVar()
               constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
               appRes._1
@@ -252,16 +284,16 @@ class Deforest(using TL, Raise, Elaborator.State):
       case _ => 
         val pStrat = processResult(p)
         inArm match
-          case Some(armP -> clsSym) =>
+          case Some(armP -> clsSym) if armP === pStrat =>
             // assert(sel.symbol.exists(_.isInstanceOf[TermSymbol]))
             val tpeVar = freshVar()
-            val selStrat = FieldSel(nme, tpeVar._2)
+            val selStrat = FieldSel(nme, tpeVar._2, sel)
             selStrat.updateFilter(armP, clsSym :: Nil)
             constrain(pStrat, selStrat)
             tpeVar._1
           case _ =>
             val tpeVar = freshVar()
-            constrain(pStrat, FieldSel(nme, tpeVar._2))
+            constrain(pStrat, FieldSel(nme, tpeVar._2, sel))
             tpeVar._1
             
     case Value.Ref(l) => getStratOfSym(l)
@@ -277,6 +309,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   val ctorDests = mutable.Map.empty[Call | Select, Map[Value.Ref, Ls[Case -> Block]]].withDefaultValue(Map.empty)
   val dtorSources = mutable.Map.empty[Value.Ref, Ls[Call | Select]].withDefaultValue(Nil)
+  
+  val rewritingSel = mutable.Set.empty[Select]
   
   def resolveConstraints: Unit =
     
@@ -296,21 +330,24 @@ class Deforest(using TL, Raise, Elaborator.State):
           })
           dtorSources += scrut -> (expr :: dtorSources(scrut))
           // TODO: keep track of this ctor to dtor
-        case (Ctor(ctor, args, _), FieldSel(field, consVar)) =>
+        case (Ctor(ctor, args, _), FieldSel(field, consVar, sel)) =>
           // if clsSym.isDefined then
           //   args.get(clsSym.get).map(p => handle(p -> consVar))
-          // else
-          args.find(a => a._1.id == field).map(p => handle(p._2 -> consVar))
+          // else  
+          args.find(a => a._1.id == field).map(p =>
+            rewritingSel.add(sel)
+            handle(p._2 -> consVar)
+          )
         case (Ctor(ctor, args, _), ConsFun(l, r)) => ???
         
         case (p@ProdVar(uid, name), _) =>
           upperBounds += uid -> (cons :: upperBounds(uid))
           lowerBounds(uid).foreach{ l =>
             (l, cons) match
-              case (l: ProdVar, sel@FieldSel(field, consVar)) =>
+              case (l: ProdVar, sel@FieldSel(field, consVar, selExpr)) =>
                 sel.updateFilter(l, sel.filter(p))
                 handle(l -> cons)
-              case (Ctor(ctor, args, expr), sel@FieldSel(field, consVar)) =>
+              case (Ctor(ctor, args, expr), sel@FieldSel(field, consVar, selExpr)) =>
                 if sel.filter(p).contains(ctor) then
                   handle(l -> cons)
                 else
@@ -323,14 +360,14 @@ class Deforest(using TL, Raise, Elaborator.State):
           upperBounds(uid).foreach(c => handle(prod -> c))
         case (Ctor(ctor, args, _), NoCons) => ()
         case (ProdFun(l, r), Dtor(cls, _)) => ???
-        case (ProdFun(l, r), FieldSel(field, consVar)) => ???
+        case (ProdFun(l, r), FieldSel(field, consVar, sel)) => ???
         case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
           println(s">>>>>>>>>>>>>>>>>>>>>>>> $prod ->>> $cons <<<<<<<<<<<<<<<<<<<<<<<")
           lc.zip(lp).foreach(handle)
           handle(rp, rc)
         case (ProdFun(l, r), NoCons) => ()
         case (NoProd, Dtor(cls, _)) => ()
-        case (NoProd, FieldSel(field, consVar)) => ()
+        case (NoProd, FieldSel(field, consVar, sel)) => ()
         case (NoProd, ConsFun(l, r)) => ()
         case (NoProd, NoCons) => ()
       
@@ -386,7 +423,13 @@ class Deforest(using TL, Raise, Elaborator.State):
                 println(call.toString() + " ----> " + body)
                 
                 val newArgs = args.map(_ => TempSymbol(N))
-                args.zip(newArgs).foldRight[Block](body.replaceAssignments(newArgs.map(a => Value.Ref(a))).mapRes(k)){ case ((a, tmp), rest) =>
+                // args.zip(newArgs).foldRight[Block](body.replaceAssignments(newArgs.map(a => Value.Ref(a))).mapRes(k)){ case ((a, tmp), rest) =>
+                //   rewriteResult(a.value): r =>
+                //     Assign(tmp, r, rest)
+                // }
+                val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
+                
+                args.zip(newArgs).foldRight[Block](body.replaceSelect(using rewritingSel.toSet, idsToArgs).mapRes(k)){ case ((a, tmp), rest) =>
                   rewriteResult(a.value): r =>
                     Assign(tmp, r, rest)
                 }
@@ -395,7 +438,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           case Some(c) =>
             val body = ctorDests(call).head._2.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
             println(call.toString() + " ----> " + body)
-            body.replaceAssignments(args.map(a => a.value)).mapRes(k)
+            body.replaceAssignments(args.map(a => a.value)).mapRes(k) // TODO:
         case Value.Lam(params, body) =>
           k(Call(Value.Lam(params, rewriteBlock(body)), args)(call.isMlsFun))
     case Instantiate(cls, args) => k(r)
