@@ -112,20 +112,20 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def apply(p: Program) =
     processBlock(p.main)
-    // constraints.foreach(println)
-    // println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+    // constraints.foreach(tl.log)
+    // tl.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>")
     resolveConstraints
 
-    println("upper:")
-    upperBounds.foreach(u => println("\t" + u))
-    println("lower:")
-    lowerBounds.foreach(l => println("\t" + l))
-    println("==============================")
+    tl.log("upper:")
+    upperBounds.foreach(u => tl.log("\t" + u))
+    tl.log("lower:")
+    lowerBounds.foreach(l => tl.log("\t" + l))
+    tl.log("-----------------------------------------")
     
-    // println("ctor -> dtor:")
-    // ctorDests.foreach(l => println("\t" + l._1.toString() + " ===> " + l._2.size))
-    // println("dtor -> ctor:")
-    // dtorSources.foreach(l => println("\t" + l._1.toString().take(20) + " ===> " + l._2.toString().take(20)))
+    // tl.log("ctor -> dtor:")
+    // ctorDests.foreach(l => tl.log("\t" + l._1.toString() + " ===> " + l._2.size))
+    // tl.log("dtor -> ctor:")
+    // dtorSources.foreach(l => tl.log("\t" + l._1.toString().take(20) + " ===> " + l._2.toString().take(20)))
     
     rewrite(p)
     
@@ -362,7 +362,6 @@ class Deforest(using TL, Raise, Elaborator.State):
         case (ProdFun(l, r), Dtor(cls, _)) => ???
         case (ProdFun(l, r), FieldSel(field, consVar, sel)) => ???
         case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
-          println(s">>>>>>>>>>>>>>>>>>>>>>>> $prod ->>> $cons <<<<<<<<<<<<<<<<<<<<<<<")
           lc.zip(lp).foreach(handle)
           handle(rp, rc)
         case (ProdFun(l, r), NoCons) => ()
@@ -420,7 +419,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               case None => k(call)
               case Some(dest) =>
                 val body = dest._2.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
-                println(call.toString() + " ----> " + body)
+                tl.log(call.toString() + " ----> " + body)
                 
                 val newArgs = args.map(_ => TempSymbol(N))
                 // args.zip(newArgs).foldRight[Block](body.replaceAssignments(newArgs.map(a => Value.Ref(a))).mapRes(k)){ case ((a, tmp), rest) =>
@@ -435,10 +434,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 }
         case Value.Ref(l) => l.asCls match
           case None => k(call)
-          case Some(c) =>
-            val body = ctorDests(call).head._2.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
-            println(call.toString() + " ----> " + body)
-            body.replaceAssignments(args.map(a => a.value)).mapRes(k) // TODO:
+          case Some(c) => ??? // TODO:
         case Value.Lam(params, body) =>
           k(Call(Value.Lam(params, rewriteBlock(body)), args)(call.isMlsFun))
     case Instantiate(cls, args) => k(r)
@@ -449,10 +445,10 @@ class Deforest(using TL, Raise, Elaborator.State):
           case None => 
             k(s)
           case Some(dests) =>
-            val body = dests.head._2.find{ case (Case.Cls(m, _) -> body) => m === mod }.get._2
-            println(mod.toString + " ----> " + body)
+            val body = dests.map(d => d._2.find{ case (Case.Cls(m, _) -> body) => m === mod }.get._2)
+            tl.log(mod.toString + " ----> " + body)
             
-            body.mapRes(k)
+            body.head.mapRes(k)
             
     
     case Value.Ref(l) => k(Value.Ref(l))

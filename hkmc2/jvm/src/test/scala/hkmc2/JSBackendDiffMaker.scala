@@ -27,6 +27,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   val traceJS = NullaryCommand("traceJS")
   val handler = NullaryCommand("handler")
   val deforestFlag = NullaryCommand("deforest")
+  val deforestInfo = NullaryCommand("deforestInfo")
   val expect = Command("expect"): ln =>
     ln.trim
   
@@ -39,6 +40,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   
   val replTL = new TraceLogger:
     override def doTrace = showRepl.isSet
+    override def emitDbg(str: String): Unit = output(str)
+  
+  val deforestTL = new TraceLogger:
+    override def doTrace: Bool = deforestInfo.isSet
     override def emitDbg(str: String): Unit = output(str)
   
   lazy val host =
@@ -117,10 +122,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       output(jsStr)
         
       if deforestFlag.isSet then
-        val deforest = new Deforest
+        val deforest = new Deforest(using deforestTL)
         output(">>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>")
         if showLoweredTree.isSet then
-          output("==== Non-inserted lowered tree ====")
+          output("\n==== Non-inserted lowered tree ====")
           output(le.showAsTree)
         
         val deforestRes = deforest(le)
@@ -128,6 +133,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         if showLoweredTree.isSet then
           output("\n==== deforested tree ====")
           output(deforestRes.showAsTree)
+          output("\n")
         val nestedScp = baseScp.nest
         val je = nestedScp.givenIn:
           jsb.program(deforestRes, N, wd)

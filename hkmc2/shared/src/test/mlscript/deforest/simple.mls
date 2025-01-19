@@ -232,12 +232,13 @@ c(g(true))
 //│ = 11
 
 
+// FIXME: shouldn't fuse this...
 :sjs
 :deforest
 let s = if true then AA(A) else BB(B)
 if s is
-  AA then s.x // NOTE: this s.x should only get A as its lower bound
-  BB then s.x // NOTE: this s.x should only get A as its lower bound
+  AA then s.x
+  BB then s.x
 //│ JS (unsanitized):
 //│ let scrut, scrut1, tmp;
 //│ scrut = true;
