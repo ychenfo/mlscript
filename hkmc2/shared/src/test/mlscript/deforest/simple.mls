@@ -7,188 +7,69 @@ class BB(x)
 
 :sjs
 :deforest
-let x = if true then A else B
-if x is
-  A then 1
-  B then 2
+fun test() =
+  let x = if true then A else B
+  if x is
+    A then 1
+    B then 2
+test()
 //│ JS (unsanitized):
-//│ let scrut, scrut1, tmp;
-//│ scrut = true;
-//│ if (scrut) {
-//│   tmp = this.A;
-//│ } else {
-//│   tmp = this.B;
-//│ }
-//│ this.x = tmp;
-//│ scrut1 = this.x;
-//│ if (scrut1 instanceof this.A.class) {
-//│   1
-//│ } else {
-//│   if (scrut1 instanceof this.B.class) {
-//│     2
+//│ function test() {
+//│   let x, scrut, tmp;
+//│   scrut = true;
+//│   if (scrut) {
+//│     tmp = globalThis.A;
 //│   } else {
-//│     throw new this.Error("match error");
+//│     tmp = globalThis.B;
 //│   }
-//│ }
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let scrut, scrut1, tmp;
-//│ scrut = true;
-//│ if (scrut) {
-//│   tmp = 1;
-//│ } else {
-//│   tmp = 2;
-//│ }
-//│ this.x = tmp;
-//│ scrut1 = this.x;
-//│ scrut1
-//│ = 1
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 1
-//│ x = A { class: [class A] }
-
-
-:sjs
-:deforest
-let x = if true then AA(A) else BB(B)
-if x is
-  AA(x) then x
-  BB(x) then x
-//│ JS (unsanitized):
-//│ let scrut, scrut1, param0, x, param01, x1, tmp;
-//│ scrut = true;
-//│ if (scrut) {
-//│   tmp = this.AA(this.A);
-//│ } else {
-//│   tmp = this.BB(this.B);
-//│ }
-//│ this.x = tmp;
-//│ scrut1 = this.x;
-//│ if (scrut1 instanceof this.AA.class) {
-//│   param01 = scrut1.x;
-//│   x1 = param01;
-//│   x1
-//│ } else {
-//│   if (scrut1 instanceof this.BB.class) {
-//│     param0 = scrut1.x;
-//│     x = param0;
-//│     x
-//│   } else {
-//│     throw new this.Error("match error");
-//│   }
-//│ }
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let scrut, scrut1, param0, x, param01, x1, tmp, tmp1, tmp2;
-//│ scrut = true;
-//│ if (scrut) {
-//│   tmp1 = this.A;
-//│   param01 = tmp1;
-//│   x1 = param01;
-//│   tmp = x1;
-//│ } else {
-//│   tmp2 = this.B;
-//│   param0 = tmp2;
-//│   x = param0;
-//│   tmp = x;
-//│ }
-//│ this.x = tmp;
-//│ scrut1 = this.x;
-//│ scrut1
-//│ = A { class: [class A] }
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = A { class: [class A] }
-//│ x = AA { x: A { class: [class A] } }
-
-:sjs
-:deforest
-fun f(a) = if a is
-  A then 1
-  B then 2
-let x = if true then AA(A) else BB(B)
-if x is
-  AA(x) then f(x)
-  BB(x) then f(x)
-//│ JS (unsanitized):
-//│ let scrut, scrut1, param0, x, param01, x1, tmp;
-//│ function f(a) {
-//│   if (a instanceof globalThis.A.class) {
+//│   x = tmp;
+//│   if (x instanceof globalThis.A.class) {
 //│     return 1;
 //│   } else {
-//│     if (a instanceof globalThis.B.class) {
+//│     if (x instanceof globalThis.B.class) {
 //│       return 2;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ }
-//│ scrut = true;
-//│ if (scrut) {
-//│   tmp = this.AA(this.A);
-//│ } else {
-//│   tmp = this.BB(this.B);
-//│ }
-//│ this.x = tmp;
-//│ scrut1 = this.x;
-//│ if (scrut1 instanceof this.AA.class) {
-//│   param01 = scrut1.x;
-//│   x1 = param01;
-//│   this.f(x1)
-//│ } else {
-//│   if (scrut1 instanceof this.BB.class) {
-//│     param0 = scrut1.x;
-//│     x = param0;
-//│     this.f(x)
-//│   } else {
-//│     throw new this.Error("match error");
-//│   }
-//│ }
+//│ this.test()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let scrut, scrut1, param0, x, param01, x1, tmp, tmp1, tmp2;
-//│ function f(a) {
-//│   a
+//│ function test() {
+//│   let x, scrut, tmp;
+//│   scrut = true;
+//│   if (scrut) {
+//│     tmp = 1;
+//│   } else {
+//│     tmp = 2;
+//│   }
+//│   x = tmp;
+//│   x
 //│ }
-//│ scrut = true;
-//│ if (scrut) {
-//│   tmp1 = 1;
-//│   param01 = tmp1;
-//│   x1 = param01;
-//│   tmp = this.f(x1);
-//│ } else {
-//│   tmp2 = 2;
-//│   param0 = tmp2;
-//│   x = param0;
-//│   tmp = this.f(x);
-//│ }
-//│ this.x = tmp;
-//│ scrut1 = this.x;
-//│ scrut1
+//│ this.test()
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
-//│ x = AA { x: A { class: [class A] } }
 
 
 :sjs
 :deforest
-fun g(x) = if true then AA(11) else BB(22)
-fun c(x) = if x is
-  AA(x) then x
-  BB(x) then x
-c(g(true))
+fun test() =
+  let x = if true then AA(A) else BB(B)
+  if x is
+    AA(x) then x
+    BB(x) then x
+test()
 //│ JS (unsanitized):
-//│ let tmp;
-//│ function g(x) {
-//│   let scrut;
+//│ function test() {
+//│   let x, scrut, param0, x1, param01, x2, tmp;
 //│   scrut = true;
 //│   if (scrut) {
-//│     return globalThis.AA(11);
+//│     tmp = globalThis.AA(globalThis.A);
 //│   } else {
-//│     return globalThis.BB(22);
+//│     tmp = globalThis.BB(globalThis.B);
 //│   }
-//│ }
-//│ function c(x) {
-//│   let param0, x1, param01, x2;
+//│   x = tmp;
 //│   if (x instanceof globalThis.AA.class) {
 //│     param01 = x.x;
 //│     x2 = param01;
@@ -203,31 +84,172 @@ c(g(true))
 //│     }
 //│   }
 //│ }
-//│ tmp = this.g(true);
-//│ this.c(tmp)
+//│ this.test()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let tmp;
-//│ function g(x) {
-//│   let scrut, param0, x1, param01, x2, tmp1, tmp2;
+//│ function test() {
+//│   let x, scrut, param0, x1, param01, x2, tmp, tmp1, tmp2;
 //│   scrut = true;
 //│   if (scrut) {
-//│     tmp1 = 11;
+//│     tmp1 = globalThis.A;
 //│     param01 = tmp1;
 //│     x2 = param01;
-//│     return x2;
+//│     tmp = x2;
 //│   } else {
-//│     tmp2 = 22;
+//│     tmp2 = globalThis.B;
 //│     param0 = tmp2;
 //│     x1 = param0;
-//│     return x1;
+//│     tmp = x1;
 //│   }
-//│ }
-//│ function c(x) {
+//│   x = tmp;
 //│   x
 //│ }
-//│ tmp = this.g(true);
-//│ this.c(tmp)
+//│ this.test()
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = A { class: [class A] }
+
+
+:sjs
+:deforest
+fun f(a) = if a is
+  A then 1
+  B then 2
+fun test() =
+  let x = if true then AA(A) else BB(B)
+  if x is
+    AA(x) then f(x)
+    BB(x) then f(x)
+test()
+//│ JS (unsanitized):
+//│ function f(a) {
+//│   if (a instanceof globalThis.A.class) {
+//│     return 1;
+//│   } else {
+//│     if (a instanceof globalThis.B.class) {
+//│       return 2;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│ }
+//│ function test() {
+//│   let x, scrut, param0, x1, param01, x2, tmp;
+//│   scrut = true;
+//│   if (scrut) {
+//│     tmp = globalThis.AA(globalThis.A);
+//│   } else {
+//│     tmp = globalThis.BB(globalThis.B);
+//│   }
+//│   x = tmp;
+//│   if (x instanceof globalThis.AA.class) {
+//│     param01 = x.x;
+//│     x2 = param01;
+//│     return globalThis.f(x2);
+//│   } else {
+//│     if (x instanceof globalThis.BB.class) {
+//│       param0 = x.x;
+//│       x1 = param0;
+//│       return globalThis.f(x1);
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│ }
+//│ this.test()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ function f(a) {
+//│   a
+//│ }
+//│ function test() {
+//│   let x, scrut, param0, x1, param01, x2, tmp, tmp1, tmp2;
+//│   scrut = true;
+//│   if (scrut) {
+//│     tmp1 = 1;
+//│     param01 = tmp1;
+//│     x2 = param01;
+//│     tmp = globalThis.f(x2);
+//│   } else {
+//│     tmp2 = 2;
+//│     param0 = tmp2;
+//│     x1 = param0;
+//│     tmp = globalThis.f(x1);
+//│   }
+//│   x = tmp;
+//│   x
+//│ }
+//│ this.test()
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 1
+
+
+:sjs
+:deforest
+fun test() =
+  fun g(x) = if true then AA(11) else BB(22)
+  fun c(x) = if x is
+    AA(x) then x
+    BB(x) then x
+  c(g(true))
+test()
+//│ JS (unsanitized):
+//│ function test() {
+//│   let tmp;
+//│   function g(x) {
+//│     let scrut;
+//│     scrut = true;
+//│     if (scrut) {
+//│       return globalThis.AA(11);
+//│     } else {
+//│       return globalThis.BB(22);
+//│     }
+//│   }
+//│   function c(x) {
+//│     let param0, x1, param01, x2;
+//│     if (x instanceof globalThis.AA.class) {
+//│       param01 = x.x;
+//│       x2 = param01;
+//│       return x2;
+//│     } else {
+//│       if (x instanceof globalThis.BB.class) {
+//│         param0 = x.x;
+//│         x1 = param0;
+//│         return x1;
+//│       } else {
+//│         throw new globalThis.Error("match error");
+//│       }
+//│     }
+//│   }
+//│   tmp = g(true);
+//│   return c(tmp);
+//│ }
+//│ this.test()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ function test() {
+//│   let tmp;
+//│   function g(x) {
+//│     let scrut, param0, x1, param01, x2, tmp1, tmp2;
+//│     scrut = true;
+//│     if (scrut) {
+//│       tmp1 = 11;
+//│       param01 = tmp1;
+//│       x2 = param01;
+//│       return x2;
+//│     } else {
+//│       tmp2 = 22;
+//│       param0 = tmp2;
+//│       x1 = param0;
+//│       return x1;
+//│     }
+//│   }
+//│   function c(x) {
+//│     x
+//│   }
+//│   tmp = g(true);
+//│   return c(tmp);
+//│ }
+//│ this.test()
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 11
 
