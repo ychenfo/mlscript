@@ -102,6 +102,23 @@ extension (b: Block)
       case Assign(lhs, rhs, rest) => Assign(lhs, head, rest.replaceAssignments(tail))
     case Nil => b
   
+  def hasImplctRet: Boolean = b match
+    case Match(scrut, arms, dflt, rest) => arms.map(a => a._2).appendedAll(dflt).exists(b => b.hasImplctRet)
+    case Return(res, implct) => implct
+    case Assign(lhs, rhs, rest) => rest.hasImplctRet
+    case Define(defn, rest) => rest.hasImplctRet
+    case End(msg) => false
+    case _ => false
+    // case Throw(exc) => 
+    // case Label(label, body, rest) =>
+    // case Break(label) =>
+    // case Continue(label) =>
+    // case Begin(sub, rest) =>
+    // case TryBlock(sub, finallyDo, rest) =>
+    // case AssignField(symbol) =>
+    // case HandleBlock(lhs, res, cls, handlers, body, rest) =>
+    // case HandleBlockReturn(res) =>
+  
   
 
 class Deforest(using TL, Raise, Elaborator.State):
@@ -385,7 +402,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && dtorSources.contains(scrut) then
         // TODO:
         rest match
-          case End(msg) => Return(scrut, true) // TODO: true or false?
+          case End(msg) => Return(scrut, mat.hasImplctRet) // TODO: true or false?
           case _ => rest
       else
         Match(scrut, arms.map{ (cse, blk) => (cse, rewriteBlock(blk)) }, dflt.map(rewriteBlock), rewriteBlock(rest))
@@ -414,7 +431,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
           case None => k(call)
           case Some(c) =>
-            assert(ctorDests(call).size == 1)
+            assert(ctorDests(call).size == 1, s"$call has more than one destination")
             ctorDests(call).headOption match
               case None => k(call)
               case Some(dest) =>
@@ -445,10 +462,11 @@ class Deforest(using TL, Raise, Elaborator.State):
           case None => 
             k(s)
           case Some(dests) =>
-            val body = dests.map(d => d._2.find{ case (Case.Cls(m, _) -> body) => m === mod }.get._2)
+            val body = dests.map(d => d._2.find{ case (Case.Cls(m, _) -> body) => m === mod }.get)
+            assert(body.size == 1, s"$s has more than one destination")
             tl.log(mod.toString + " ----> " + body)
             
-            body.head.mapRes(k)
+            body.head._2.mapRes(k)
             
     
     case Value.Ref(l) => k(Value.Ref(l))

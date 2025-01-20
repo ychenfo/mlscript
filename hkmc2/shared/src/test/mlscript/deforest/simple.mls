@@ -45,9 +45,10 @@ test()
 //│     tmp = 2;
 //│   }
 //│   x = tmp;
-//│   x
+//│   return x;
 //│ }
 //│ this.test()
+//│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -102,9 +103,10 @@ test()
 //│     tmp = x1;
 //│   }
 //│   x = tmp;
-//│   x
+//│   return x;
 //│ }
 //│ this.test()
+//│ = A { class: [class A] }
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = A { class: [class A] }
 
@@ -159,7 +161,7 @@ test()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
 //│ function f(a) {
-//│   a
+//│   return a;
 //│ }
 //│ function test() {
 //│   let x, scrut, param0, x1, param01, x2, tmp, tmp1, tmp2;
@@ -176,9 +178,10 @@ test()
 //│     tmp = globalThis.f(x1);
 //│   }
 //│   x = tmp;
-//│   x
+//│   return x;
 //│ }
 //│ this.test()
+//│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -244,12 +247,13 @@ test()
 //│     }
 //│   }
 //│   function c(x) {
-//│     x
+//│     return x;
 //│   }
 //│   tmp = g(true);
 //│   return c(tmp);
 //│ }
 //│ this.test()
+//│ = 11
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 11
 
@@ -370,9 +374,10 @@ map(enumFromTo(1, 4))
 //│   }
 //│ }
 //│ function map(ls) {
-//│   ls
+//│   return ls;
 //│ }
 //│ tmp = this.enumFromTo(1, 4);
 //│ this.map(tmp)
+//│ = Cons { h: 5, t: Cons { h: 6, t: Cons { h: 7, t: [Nil] } } }
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons { h: 5, t: Cons { h: 6, t: Cons { h: 7, t: [Nil] } } }
