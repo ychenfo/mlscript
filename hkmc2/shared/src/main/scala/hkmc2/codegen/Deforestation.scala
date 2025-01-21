@@ -7,7 +7,6 @@ import syntax.{Literal, Tree}
 import utils.{TL, tl}
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
-import hkmc2.syntax.Keyword.__
 
 type StratVar
 type StratVarId = Uid[StratVar]
@@ -326,7 +325,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
   val ctorDests = mutable.Map.empty[Call | Select, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[Select])].withDefaultValue(Map.empty -> Nil)
-  val dtorSources = mutable.Map.empty[Value.Ref, Ls[Call | Select]].withDefaultValue(Nil)
+  val dtorSources = mutable.Map.empty[Value.Ref | Select, Ls[Call | Select]].withDefaultValue(Nil)
   
   
   def resolveConstraints: Unit =
@@ -360,6 +359,10 @@ class Deforest(using TL, Raise, Elaborator.State):
           ctorDests.updateWith(expr){
             case Some(d -> s) => Some(d -> (sel :: s))
             case None => Some(Map.empty -> (sel :: Nil))
+          }
+          dtorSources.updateWith(sel){
+            case None => Some(expr :: Nil)
+            case Some(value) => Some(expr :: value)
           }
           args.find(a => a._1.id == field).map(p =>
             // rewritingSel.add(sel)
@@ -409,26 +412,63 @@ class Deforest(using TL, Raise, Elaborator.State):
     constraints.foreach(c => handle(c)(using mutable.Set.empty))
   
   
+  // ======== after resolving constraints ======
+  
+  def resolveClashes =
+    type CtorToDtor = Map[Call | Select, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[Select])]
+    type DtorToCtor = Map[Value.Ref | Select, Ls[Call | Select]]
+    
+    def removeCtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[Call | Select]): CtorToDtor -> DtorToCtor =
+      if rm.isEmpty then
+        ctorDests -> dtorSources
+      else
+        val (newCtorDests, toDelete) = ctorDests.partition(c => !rm(c._1))
+        removeDtor(newCtorDests, dtorSources, toDelete.values.flatMap[Value.Ref | Select]{ case (mat -> sels) => mat.keySet ++ sels }.toSet)
+    
+    def removeDtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[Value.Ref | Select]): CtorToDtor -> DtorToCtor =
+      if rm.isEmpty then
+        ctorDests -> dtorSources
+      else
+        val (newDtorSources, toDelete) = dtorSources.partition(d => !rm(d._1))
+        removeCtor(ctorDests, newDtorSources, toDelete.values.flatten.toSet)
+    
+    val ctorToDtor = ctorDests.toMap
+    val dtorToCtor = dtorSources.toMap
+    
+    removeCtor(
+      ctorToDtor,
+      dtorToCtor,
+      ctorToDtor.filterNot { case (_, dests) =>
+        val (dtors, sels) = dests
+        (dtors.size == 0 && sels.size == 1)
+        || (dtors.size == 1 && {
+          val Value.Ref(scrut) = dtors.head._1
+          sels.forall { case Select(Value.Ref(l), nme) => l == scrut; case _ => false }
+        })
+      }.keySet
+    )
+    
+  
   
   def filteredCtorDests: Map[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select] =
     val res = mutable.Map.empty[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select]
-    ctorDests.foreach { case (ctor, dests) =>
+    resolveClashes._1.foreach { case (ctor, dests) =>
       val (dtors, sels) = dests
       val filteredDtor = {
         if dtors.size == 0 && sels.size == 1 then Some(sels.head)
         else if dtors.size == 0 && sels.size > 1 then
+          throw Error("more than one consumer")
           None
-          // throw Error("more than one consumer") TODO:
         else if dtors.size > 1 then
+          throw Error("more than one consumer")
           None
-          // throw Error("more than one consumer") TODO:
         else if dtors.size == 1 then
           val Value.Ref(scrut) = dtors.head._1
           if sels.forall{ case Select(Value.Ref(l), nme) => l == scrut; case _ => false } then
             Some(dtors.head._1 -> (dtors.head._2 -> sels))
           else
+            throw Error("more than one consumer")
             None
-            // throw Error("more than one consumer") TODO:
         else ???
       }
       res.updateWith(ctor){_ => filteredDtor}
