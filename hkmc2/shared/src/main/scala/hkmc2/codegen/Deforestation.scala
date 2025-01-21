@@ -7,6 +7,7 @@ import syntax.{Literal, Tree}
 import utils.{TL, tl}
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
+import hkmc2.syntax.Keyword.__
 
 type StratVar
 type StratVarId = Uid[StratVar]
@@ -374,16 +375,25 @@ class Deforest(using TL, Raise, Elaborator.State):
                 sel.updateFilter(l, sel.filter(p))
                 handle(l -> cons)
               case (Ctor(ctor, args, expr), sel@FieldSel(field, consVar, selExpr)) =>
-                if sel.filter(p).contains(ctor) then
+                if sel.filter.get(p).forall(_.contains(ctor)) then
                   handle(l -> cons)
                 else
                   ()
               case _ => handle(l -> cons)
           }
-          // lowerBounds(uid).foreach(p => handle(p -> cons))
-        case (_, ConsVar(uid, name)) =>
+        case (_, c@ConsVar(uid, name)) =>
           lowerBounds += uid -> (prod :: lowerBounds(uid))
-          upperBounds(uid).foreach(c => handle(prod -> c))
+          upperBounds(uid).foreach { u =>
+            (prod, u) match
+              case (Ctor(ctor, args, expr), sel@FieldSel(field, consVar, selExpr)) =>
+                if sel.filter.get(c.asProdStrat).forall(_.contains(ctor)) then
+                  handle(prod -> u)
+                else
+                  ()
+              case (_: ProdVar, _) => ??? // unreachable, should be handled above
+              case _ => handle(prod -> u)
+          }
+          // upperBounds(uid).foreach(c => handle(prod -> c))
         case (Ctor(ctor, args, _), NoCons) => ()
         case (ProdFun(l, r), Dtor(cls, _)) => ???
         case (ProdFun(l, r), FieldSel(field, consVar, sel)) => ???
