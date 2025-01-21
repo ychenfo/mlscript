@@ -324,10 +324,9 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  val ctorDests = mutable.Map.empty[Call | Select, Map[Value.Ref, Ls[Case -> Block]]].withDefaultValue(Map.empty)
+  val ctorDests = mutable.Map.empty[Call | Select, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[Select])].withDefaultValue(Map.empty -> Nil)
   val dtorSources = mutable.Map.empty[Value.Ref, Ls[Call | Select]].withDefaultValue(Nil)
   
-  val rewritingSel = mutable.Set.empty[Select]
   
   def resolveConstraints: Unit =
     
@@ -341,18 +340,28 @@ class Deforest(using TL, Raise, Elaborator.State):
       
       (prod, cons) match
         case (Ctor(ctor, args, expr), Dtor(scrut, arms)) =>
-          ctorDests += expr -> (ctorDests(expr).updatedWith(scrut){
-            case None => Some(arms)
-            case Some(v) => Some(arms ::: v)
-          })
+          ctorDests.updateWith(expr){
+            case Some(d -> s) =>
+              Some(
+                (d.updatedWith(scrut){
+                  case None => Some(arms)
+                  case Some(v) => Some(arms ::: v)
+                }) -> s
+              )
+            case None => Some(Map(scrut -> arms) -> Nil)
+          }
           dtorSources += scrut -> (expr :: dtorSources(scrut))
           // TODO: keep track of this ctor to dtor
-        case (Ctor(ctor, args, _), FieldSel(field, consVar, sel)) =>
+        case (Ctor(ctor, args, expr), FieldSel(field, consVar, sel)) =>
           // if clsSym.isDefined then
           //   args.get(clsSym.get).map(p => handle(p -> consVar))
           // else  
+          ctorDests.updateWith(expr){
+            case Some(d -> s) => Some(d -> (sel :: s))
+            case None => Some(Map.empty -> (sel :: Nil))
+          }
           args.find(a => a._1.id == field).map(p =>
-            rewritingSel.add(sel)
+            // rewritingSel.add(sel)
             handle(p._2 -> consVar)
           )
         case (Ctor(ctor, args, _), ConsFun(l, r)) => ???
@@ -388,8 +397,42 @@ class Deforest(using TL, Raise, Elaborator.State):
         case (NoProd, NoCons) => ()
       
     constraints.foreach(c => handle(c)(using mutable.Set.empty))
-      
   
+  
+  
+  def filteredCtorDests: Map[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select] =
+    val res = mutable.Map.empty[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select]
+    ctorDests.foreach { case (ctor, dests) =>
+      val (dtors, sels) = dests
+      val filteredDtor = {
+        if dtors.size == 0 && sels.size == 1 then Some(sels.head)
+        else if dtors.size == 0 && sels.size > 1 then
+          None
+          // throw Error("more than one consumer") TODO:
+        else if dtors.size > 1 then
+          None
+          // throw Error("more than one consumer") TODO:
+        else if dtors.size == 1 then
+          val Value.Ref(scrut) = dtors.head._1
+          if sels.forall{ case Select(Value.Ref(l), nme) => l == scrut; case _ => false } then
+            Some(dtors.head._1 -> (dtors.head._2 -> sels))
+          else
+            None
+            // throw Error("more than one consumer") TODO:
+        else ???
+      }
+      res.updateWith(ctor){_ => filteredDtor}
+    }
+    res.toMap
+  
+  def rewritingSel = filteredCtorDests.values.flatMap {
+    case Select(p, nme) => None // TODO:
+    case scrut -> (_ -> sels) => sels
+  }
+  
+  def filteredDtors = filteredCtorDests.values.collect {
+    case (scrut -> _) => scrut
+  }.toSet
   
   def rewrite(p: Program) =
     Program(
@@ -399,7 +442,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def rewriteBlock(b: Block): Block = b match
     case mat@Match(scrut, arms, dflt, rest) =>
-      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && dtorSources.contains(scrut) then
+      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut) then
         // TODO:
         rest match
           case End(msg) => Return(scrut, mat.hasImplctRet) // TODO: true or false?
@@ -431,11 +474,12 @@ class Deforest(using TL, Raise, Elaborator.State):
         case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
           case None => k(call)
           case Some(c) =>
-            assert(ctorDests(call).size == 1, s"$call has more than one destination")
-            ctorDests(call).headOption match
+            // assert(ctorDests(call).size == 1, s"$call has more than one destination")
+            filteredCtorDests.get(call) match
               case None => k(call)
-              case Some(dest) =>
-                val body = dest._2.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
+              case Some(Select(p, nme)) => ???
+              case Some(scrut -> (arms, sels)) =>
+                val body = arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
                 tl.log(call.toString() + " ----> " + body)
                 
                 val newArgs = args.map(_ => TempSymbol(N))
@@ -458,15 +502,15 @@ class Deforest(using TL, Raise, Elaborator.State):
     case s@Select(p, nme) => s.symbol.flatMap(f => f.asMod) match
       case None => k(s)
       case Some(mod) =>
-        ctorDests.get(s) match
+        filteredCtorDests.get(s) match
           case None => 
             k(s)
-          case Some(dests) =>
-            val body = dests.map(d => d._2.find{ case (Case.Cls(m, _) -> body) => m === mod }.get)
-            assert(body.size == 1, s"$s has more than one destination")
+          case Some(Select(p, nme)) => ??? // TODO:
+          case Some(scrut -> (arms, sels)) =>
+            val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
             tl.log(mod.toString + " ----> " + body)
             
-            body.head._2.mapRes(k)
+            body._2.mapRes(k)
             
     
     case Value.Ref(l) => k(Value.Ref(l))

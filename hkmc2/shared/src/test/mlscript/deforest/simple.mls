@@ -258,7 +258,6 @@ test()
 //│ = 11
 
 
-// FIXME: shouldn't fuse this...
 :sjs
 :deforest
 let s = if true then AA(A) else BB(B)
@@ -286,18 +285,24 @@ if s is
 //│ }
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let scrut, scrut1, tmp, tmp1, tmp2;
+//│ let scrut, scrut1, tmp;
 //│ scrut = true;
 //│ if (scrut) {
-//│   tmp1 = this.A;
-//│   tmp = tmp1;
+//│   tmp = this.AA(this.A);
 //│ } else {
-//│   tmp2 = this.B;
-//│   tmp = tmp2;
+//│   tmp = this.BB(this.B);
 //│ }
 //│ this.s = tmp;
 //│ scrut1 = this.s;
-//│ scrut1
+//│ if (scrut1 instanceof this.AA.class) {
+//│   this.s.x
+//│ } else {
+//│   if (scrut1 instanceof this.BB.class) {
+//│     this.s.x
+//│   } else {
+//│     throw new this.Error("match error");
+//│   }
+//│ }
 //│ = A { class: [class A] }
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = A { class: [class A] }
