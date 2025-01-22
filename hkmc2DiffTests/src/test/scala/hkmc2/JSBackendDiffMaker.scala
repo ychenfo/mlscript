@@ -51,12 +51,18 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     val h = ReplHost(rootPath)
     h
   
+  lazy val hostDeforest =
+    hostCreated = true
+    given TL = replTL
+    val h = ReplHost(rootPath)
+    h
+  
   private var hostCreated = false
   override def run(): Unit =
     try super.run() finally if hostCreated then host.terminate()
   
   
-  def mkQuery(prefix: Str, preStr: Str, jsStr: Str)(using Raise) =
+  def mkQuery(prefix: Str, preStr: Str, jsStr: Str)(using host: ReplHost = host, r: Raise) =
     import hkmc2.Message.MessageContext
     val queryStr = jsStr.replaceAll("\n", " ")
     val (reply, stderr) = host.query(preStr, queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
@@ -133,7 +139,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           output("\n==== deforested tree ====")
           output(deforestRes.showAsTree)
           output("\n")
-        val nestedScp = baseScp.nest
+        val nestedScp = baseScp
         val (pre, je) = nestedScp.givenIn:
           jsb.worksheet(deforestRes)
         output("==== JS (deforested): ====")
@@ -142,7 +148,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         val preStr = pre.stripBreaks.mkString(100)
         output(preStr)
         output(jsStr)
-        mkQuery("", preStr, jsStr)
+        mkQuery("", preStr, jsStr)(using hostDeforest)
         output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
       
     if js.isSet && !showingJSYieldedCompileError then
@@ -181,6 +187,9 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           "globalThis.Predef.TraceLogger.resetIndent(0)")
       
       mkQuery("", preStr, jsStr)
+      
+      if deforestFlag.isSet && showJS.isUnset then // TODO: refine this logic...
+        mkQuery("", preStr, jsStr)(using hostDeforest)
       
       if traceJS.isSet then
         host.execute("globalThis.Predef.TraceLogger.enabled = false")

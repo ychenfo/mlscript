@@ -33,8 +33,10 @@ object StratVarState:
     val c = s.asConsStrat
     p -> c
 
+    
+type CtorExpr = Call | Select | Value.Ref
 // enum ProdStrat:
-case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat])(val expr: Call | Select) extends ProdStrat
+case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat])(val expr: CtorExpr) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
 case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s)
 case object NoProd extends ProdStrat
@@ -311,7 +313,10 @@ class Deforest(using TL, Raise, Elaborator.State):
             constrain(pStrat, FieldSel(nme, tpeVar._2)(sel))
             tpeVar._1
             
-    case Value.Ref(l) => getStratOfSym(l)
+    case v@Value.Ref(l) => l.asMod match
+      case None => getStratOfSym(l)
+      case Some(m) => Ctor(m, Map.empty)(v)
+    
     case Value.This(sym) => ???
     case Value.Lit(lit) => NoProd
     case Value.Lam(ParamList(_, params, N), body) =>
@@ -322,8 +327,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  val ctorDests = mutable.Map.empty[Call | Select, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[Select])].withDefaultValue(Map.empty -> Nil)
-  val dtorSources = mutable.Map.empty[Value.Ref | Select, Ls[Call | Select]].withDefaultValue(Nil)
+  val ctorDests = mutable.Map.empty[CtorExpr, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[Select])].withDefaultValue(Map.empty -> Nil)
+  val dtorSources = mutable.Map.empty[Value.Ref | Select, Ls[CtorExpr]].withDefaultValue(Nil)
   
   
   def resolveConstraints: Unit =
@@ -413,10 +418,10 @@ class Deforest(using TL, Raise, Elaborator.State):
   // ======== after resolving constraints ======
   
   lazy val resolveClashes =
-    type CtorToDtor = Map[Call | Select, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[Select])]
-    type DtorToCtor = Map[Value.Ref | Select, Ls[Call | Select]]
+    type CtorToDtor = Map[CtorExpr, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[Select])]
+    type DtorToCtor = Map[Value.Ref | Select, Ls[CtorExpr]]
     
-    def removeCtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[Call | Select]): CtorToDtor -> DtorToCtor =
+    def removeCtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[CtorExpr]): CtorToDtor -> DtorToCtor =
       if rm.isEmpty then
         ctorDests -> dtorSources
       else
@@ -448,8 +453,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     
   
   
-  lazy val filteredCtorDests: Map[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select] =
-    val res = mutable.Map.empty[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select]
+  lazy val filteredCtorDests: Map[CtorExpr, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select] =
+    val res = mutable.Map.empty[CtorExpr, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select]
     resolveClashes._1.foreach { case (ctor, dests) =>
       val (dtors, sels) = dests
       val filteredDtor = {
@@ -518,41 +523,42 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def rewriteResult(r: Result)(k: Result => Block): Block = r match
     case call@Call(f, args) =>
+      def handleCtorCall(c: ClassSymbol) =
+        // assert(ctorDests(call).size == 1, s"$call has more than one destination")
+        filteredCtorDests.get(call) match
+          case None =>
+            val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
+              val tmpSym = TempSymbol(N)
+              v -> tmpSym
+            }
+            newArgSyms.foldRight(
+              k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
+            ){ case (arg, sym) -> rest =>
+                rewriteResult(arg)(r => Assign(sym, r, rest)) }
+          case Some(Select(p, nme)) => ???
+          case Some(scrut -> (arms, sels)) =>
+            val body = arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
+            tl.log(call.toString() + " ----> " + body)
+            
+            val newArgs = args.map(_ => TempSymbol(N))
+            // args.zip(newArgs).foldRight[Block](body.replaceAssignments(newArgs.map(a => Value.Ref(a))).mapRes(k)){ case ((a, tmp), rest) =>
+            //   rewriteResult(a.value): r =>
+            //     Assign(tmp, r, rest)
+            // }
+            val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
+            
+            args.zip(newArgs).foldRight[Block](body.replaceSelect(using rewritingSel.toSet, idsToArgs).mapRes(k)){ case ((a, tmp), rest) =>
+              rewriteResult(a.value): r =>
+                Assign(tmp, r, rest)
+            }
       f match
         case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
           case None =>
             k(call) // TODO: args need to be rewritten
-          case Some(c) =>
-            // assert(ctorDests(call).size == 1, s"$call has more than one destination")
-            filteredCtorDests.get(call) match
-              case None =>
-                val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
-                  val tmpSym = TempSymbol(N)
-                  v -> tmpSym
-                }
-                newArgSyms.foldRight(
-                  k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
-                ){ case (arg, sym) -> rest =>
-                    rewriteResult(arg)(r => Assign(sym, r, rest)) }
-              case Some(Select(p, nme)) => ???
-              case Some(scrut -> (arms, sels)) =>
-                val body = arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
-                tl.log(call.toString() + " ----> " + body)
-                
-                val newArgs = args.map(_ => TempSymbol(N))
-                // args.zip(newArgs).foldRight[Block](body.replaceAssignments(newArgs.map(a => Value.Ref(a))).mapRes(k)){ case ((a, tmp), rest) =>
-                //   rewriteResult(a.value): r =>
-                //     Assign(tmp, r, rest)
-                // }
-                val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
-                
-                args.zip(newArgs).foldRight[Block](body.replaceSelect(using rewritingSel.toSet, idsToArgs).mapRes(k)){ case ((a, tmp), rest) =>
-                  rewriteResult(a.value): r =>
-                    Assign(tmp, r, rest)
-                }
+          case Some(c) => handleCtorCall(c)
         case Value.Ref(l) => l.asCls match
           case None => k(call) // TODO: args need to be rewritten
-          case Some(c) => ??? // TODO:
+          case Some(c) => handleCtorCall(c)
         case Value.Lam(params, body) =>
           k(Call(Value.Lam(params, rewriteBlock(body)), args)(call.isMlsFun))
     case Instantiate(cls, args) => k(r)
@@ -562,7 +568,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         filteredCtorDests.get(s) match
           case None => 
             k(s)
-          case Some(Select(p, nme)) => ??? // TODO:
+          case Some(Select(p, nme)) => ??? // TODO: a select consumes an object
           case Some(scrut -> (arms, sels)) =>
             val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
             tl.log(mod.toString + " ----> " + body)
@@ -570,7 +576,17 @@ class Deforest(using TL, Raise, Elaborator.State):
             body._2.mapRes(k)
             
     
-    case Value.Ref(l) => k(Value.Ref(l))
+    case r@Value.Ref(l) => l.asMod match
+      case None => k(r)
+      case Some(mod) =>
+        filteredCtorDests.get(r) match
+          case None => 
+            k(r)
+          case Some(Select(p, nme)) => ??? // TODO: a select consumes an object
+          case Some(scrut -> (arms, sels)) =>
+            val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
+            tl.log(mod.toString + " ----> " + body)
+            body._2.mapRes(k)
     case Value.This(sym) => k(Value.This(sym))
     case Value.Lit(lit) => k(Value.Lit(lit))
     case Value.Lam(params, body) => k(Value.Lam(params, rewriteBlock(body)))
