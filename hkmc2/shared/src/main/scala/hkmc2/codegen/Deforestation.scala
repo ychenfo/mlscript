@@ -21,6 +21,8 @@ sealed abstract class ConsStrat extends Strat
 class StratVarState(val uid: StratVarId, val name: Str = ""):
   lazy val asProdStrat = ProdVar(this)
   lazy val asConsStrat = ConsVar(this)
+  
+  override def toString(): String = s"${if name.isEmpty() then "var" else name}@${uid}"
 
 object StratVarState:
   
@@ -151,6 +153,11 @@ class Deforest(using TL, Raise, Elaborator.State):
     // ctorDests.foreach(l => tl.log("\t" + l._1.toString() + " ===> " + l._2.size))
     // tl.log("dtor -> ctor:")
     // dtorSources.foreach(l => tl.log("\t" + l._1.toString().take(20) + " ===> " + l._2.toString().take(20)))
+    
+    tl.log("ctor -> dtor")
+    resolveClashes._1.foreach(u => tl.log("\t" + u))
+    tl.log("dtor -> ctor")
+    resolveClashes._2.foreach(l => tl.log("\t" + l))
     
     rewrite(p)
     
@@ -405,7 +412,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   // ======== after resolving constraints ======
   
-  def resolveClashes =
+  lazy val resolveClashes =
     type CtorToDtor = Map[Call | Select, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[Select])]
     type DtorToCtor = Map[Value.Ref | Select, Ls[Call | Select]]
     
@@ -441,7 +448,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     
   
   
-  def filteredCtorDests: Map[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select] =
+  lazy val filteredCtorDests: Map[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select] =
     val res = mutable.Map.empty[Call | Select, (Value.Ref -> (Ls[Case -> Block] -> Ls[Select])) | Select]
     resolveClashes._1.foreach { case (ctor, dests) =>
       val (dtors, sels) = dests
@@ -466,12 +473,12 @@ class Deforest(using TL, Raise, Elaborator.State):
     }
     res.toMap
   
-  def rewritingSel = filteredCtorDests.values.flatMap {
+  lazy val rewritingSel = filteredCtorDests.values.flatMap {
     case Select(p, nme) => None // TODO:
     case scrut -> (_ -> sels) => sels
   }
   
-  def filteredDtors = filteredCtorDests.values.collect {
+  lazy val filteredDtors = filteredCtorDests.values.collect {
     case (scrut -> _) => scrut
   }.toSet
   
@@ -513,11 +520,20 @@ class Deforest(using TL, Raise, Elaborator.State):
     case call@Call(f, args) =>
       f match
         case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
-          case None => k(call)
+          case None =>
+            k(call) // TODO: args need to be rewritten
           case Some(c) =>
             // assert(ctorDests(call).size == 1, s"$call has more than one destination")
             filteredCtorDests.get(call) match
-              case None => k(call)
+              case None =>
+                val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
+                  val tmpSym = TempSymbol(N)
+                  v -> tmpSym
+                }
+                newArgSyms.foldRight(
+                  k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
+                ){ case (arg, sym) -> rest =>
+                    rewriteResult(arg)(r => Assign(sym, r, rest)) }
               case Some(Select(p, nme)) => ???
               case Some(scrut -> (arms, sels)) =>
                 val body = arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
@@ -535,7 +551,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                     Assign(tmp, r, rest)
                 }
         case Value.Ref(l) => l.asCls match
-          case None => k(call)
+          case None => k(call) // TODO: args need to be rewritten
           case Some(c) => ??? // TODO:
         case Value.Lam(params, body) =>
           k(Call(Value.Lam(params, rewriteBlock(body)), args)(call.isMlsFun))
