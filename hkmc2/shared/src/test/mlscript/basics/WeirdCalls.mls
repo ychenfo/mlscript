@@ -1,0 +1,79 @@
+:js
+
+
+// TODO: should report that such `print` reference does not do anything in statement position
+print
+(
+  "A"
+)
+//│ = 'A'
+
+:fixme
+print
+  (
+    "A"
+  )
+//│ ╔══[ERROR] Illegal juxtaposition right-hand side.
+//│ ║  l.13: 	  (
+//│ ║        	  ^
+//│ ║  l.14: 	    "A"
+//│ ║        	^^^^^^^
+//│ ║  l.15: 	  )
+//│ ╙──      	^^^
+//│ = [Function: print]
+
+:pe
+print of
+(
+  "A"
+)
+//│ ╔══[PARSE ERROR] Expected an expression; found new line instead
+//│ ║  l.26: 	print of
+//│ ║        	        ^
+//│ ║  l.27: 	(
+//│ ╙──      	
+
+:pe
+print of
+("A")
+//│ ╔══[PARSE ERROR] Expected an expression; found new line instead
+//│ ║  l.37: 	print of
+//│ ║        	        ^
+//│ ║  l.38: 	("A")
+//│ ╙──      	
+
+print of
+  (
+    "A"
+  )
+//│ > A
+
+:pe
+print of
+  (
+    "A"
+)
+//│ ╔══[PARSE ERROR] Mistmatched closing indentation
+//│ ║  l.54: 	    "A"
+//│ ║        	       ^
+//│ ║  l.55: 	)
+//│ ║        	
+//│ ╟── does not correspond to opening parenthesis
+//│ ║  l.53: 	  (
+//│ ╙──      	  ^
+//│ ╔══[PARSE ERROR] Unexpected closing parenthesis
+//│ ║  l.55: 	)
+//│ ╙──      	^
+//│ > A
+
+print of (
+  "A"
+)
+//│ > A
+
+print(
+  "A"
+)
+//│ > A
+
+

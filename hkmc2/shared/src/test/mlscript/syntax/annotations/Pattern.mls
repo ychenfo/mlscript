@@ -1,0 +1,9 @@
+module compile
+
+class SomePattern
+
+:w
+fun foo(x) = if x is @compile SomePattern then "yes" else "no"
+//│ ╔══[WARNING] Cannot compile the class `SomePattern`
+//│ ║  l.6: 	fun foo(x) = if x is @compile SomePattern then "yes" else "no"
+//│ ╙──     	                              ^^^^^^^^^^^

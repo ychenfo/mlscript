@@ -1,0 +1,20 @@
+
+:global
+:llir
+:cpp
+
+
+:todo
+:ge
+fun oops(a) =
+  class A with
+    fun m = a
+  let x = 1
+
+:ge
+let x = "oops"
+x.m
+//│ ═══[COMPILATION ERROR] Unsupported selection by users
+//│ Stopped due to an error during the Llir generation
+
+

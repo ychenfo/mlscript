@@ -227,7 +227,7 @@ class ParseRules(using State):
                       End(None)
                     )
                 ) { case (rhs, (S(defs), body)) => (rhs, defs, body) }
-        ) { case (lhs, (rhs, defs, body))=> Handle(lhs, rhs, defs, body) }
+        ) { case (lhs, (rhs, defs, body))=> Hndl(lhs, rhs, defs, body) }
     ,
     Kw(`new`):
       ParseRule("`new` keyword")(
@@ -272,6 +272,13 @@ class ParseRules(using State):
               )
         ) { case (name, body) => Region(name, body) }
     ,
+    Kw(`outer`):
+      ParseRule("outer binding operator")(
+        Expr(
+          ParseRule("`outer` binding name")(End(()))
+        ){ (body, _: Unit) => Outer(S(body)) },
+        End(Outer(N))
+      ),
     Kw(`fun`)(termDefBody(Fun)),
     Kw(`val`)(termDefBody(ImmutVal)),
     typeAliasLike(`type`, Als),
@@ -286,7 +293,11 @@ class ParseRules(using State):
           case (body, _) => Open(body)}*),
     modified(`abstract`, Kw(`class`)(typeDeclBody(Cls))),
     modified(`mut`),
-    modified(`do`),
+    Kw(`do`):
+      ParseRule(s"`do` keyword")(
+        exprOrBlk(ParseRule(s"`do` body")(End(()))):
+          case (body, ()) => Tree.Modified(`do`, N, body)
+        *),
     modified(`virtual`),
     modified(`override`),
     modified(`declare`),

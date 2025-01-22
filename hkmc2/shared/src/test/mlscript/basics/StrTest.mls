@@ -1,0 +1,69 @@
+:js
+
+import "../../mlscript-compile/Str.mls"
+
+open Str
+
+
+concat of "a", "b", "c"
+//│ = 'abc'
+
+concat of
+  "a"
+  "b"
+  "c"
+//│ = 'abc'
+
+
+// TODO (~) should be sanitized
+
+(~)("a", "b", "c")
+//│ = 'ab'
+
+
+(~)("a")
+//│ = 'aundefined'
+
+:ge
+~"a"
+//│ ╔══[COMPILATION ERROR] Unexpected type annotations ~"a"
+//│ ║  l.28: 	~"a"
+//│ ╙──      	 ^^^
+
+
+:ge
+~("a", "b")
+//│ ╔══[COMPILATION ERROR] Unexpected type annotations ~{ "a"; "b" }
+//│ ║  l.35: 	~("a", "b")
+//│ ╙──      	       ^^^
+
+
+:pe
+:ge
+~ of "a", "b"
+//│ ╔══[PARSE ERROR] Expected start of statement in this position; found 'of' keyword instead
+//│ ║  l.43: 	~ of "a", "b"
+//│ ╙──      	  ^^
+//│ ╔══[PARSE ERROR] Expected end of input; found literal instead
+//│ ║  l.43: 	~ of "a", "b"
+//│ ╙──      	     ^^^
+//│ ═══[COMPILATION ERROR] Unexpected type annotations ~<error>
+
+(~) of "a", "b"
+//│ = 'ab'
+
+
+fun test(...xs) =
+  concat of ...xs, "!"
+
+test("a", "b", "c")
+//│ = 'abc!'
+
+
+"a" Str.concat2("b")
+//│ = 'ab'
+
+"a" Str.concat2 of "b"
+//│ = 'ab'
+
+

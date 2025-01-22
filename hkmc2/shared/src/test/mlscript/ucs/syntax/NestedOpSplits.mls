@@ -11,7 +11,7 @@ fun f(x) =
 //│ Blk:
 //│   stats = Ls of 
 //│     TermDefinition:
-//│       owner = S of globalThis:block#1
+//│       owner = N
 //│       k = Fun
 //│       sym = member:f
 //│       params = Ls of 
@@ -60,6 +60,7 @@ fun f(x) =
 //│           tail = Else of Lit of IntLit of 1
 //│       resSym = ‹result of member:f›
 //│       flags = ()
+//│       annotations = Nil
 //│   res = Lit of UnitLit of true
 
 

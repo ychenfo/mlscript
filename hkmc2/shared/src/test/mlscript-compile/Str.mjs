@@ -1,13 +1,17 @@
+let Str1;
 const Str$class = class Str {
   constructor() {}
-  concat(a, b) {
+  concat2(a, b) {
     return a + b;
   } 
-  string(value) {
+  concat(...xs) {
+    return xs.join("") ?? null;
+  } 
+  from(value) {
     return globalThis.String(value) ?? null;
   }
   toString() { return "Str"; }
-}; const Str = new Str$class;
-Str.class = Str$class;
+}; Str1 = new Str$class;
+Str1.class = Str$class;
 null
-export default Str;
+let Str = Str1; export default Str;

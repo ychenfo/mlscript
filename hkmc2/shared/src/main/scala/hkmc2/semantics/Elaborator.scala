@@ -18,16 +18,16 @@ import Keyword.{`let`, `set`}
 
 object Elaborator:
   
-  private val binaryOps = Set(
+  val binaryOps = Set(
     ",",
     "+", "-", "*", "/", "%",
     "==", "!=", "<", "<=", ">", ">=",
-    "===",
+    "===", "!==",
     "&&", "||")
-  private val unaryOps = Set("-", "+", "!", "~")
-  private val anyOps = Set("super")
-  private val builtins = binaryOps ++ unaryOps ++ anyOps
-  private val aliasOps = Map(
+  val unaryOps = Set("-", "+", "!", "~")
+  val anyOps = Set("super")
+  val builtins = binaryOps ++ unaryOps ++ anyOps
+  val aliasOps = Map(
     ";" -> ",",
     "+." -> "+",
     "-." -> "-",
@@ -51,12 +51,8 @@ object Elaborator:
         case (nme, sym) =>
           val elem = out orElse outer match
             case S(outer) => Ctx.SelElem(outer, sym.nme, S(sym))
-            case N => sym: Ctx.Elem
-          if sym.isGetter && !(out.exists:
-            case _: ClassSymbol | _: ModuleSymbol => true // * A getter inside class/module can be invoked directly
-            case _: BlockMemberSymbol | _: TermSymbol | _: TypeAliasSymbol | _: PatternSymbol | _: TopLevelSymbol => false)
-          then nme -> Ctx.GetElem(elem)
-          else nme -> elem
+            case N => Ctx.RefElem(sym)
+          nme -> elem
       )
     
     def nest(outer: Opt[InnerSymbol]): Ctx = Ctx(outer, Some(this), Map.empty)
@@ -72,11 +68,16 @@ object Elaborator:
     // * Method `getBuiltin` is used to look up built-in symbols in the context of builtin symbols.
     def getBuiltin(nme: Str): Opt[Ctx.Elem] =
       parent.filter(_.parent.nonEmpty).fold(env.get(nme))(_.getBuiltin(nme))
+    
+    // TODO only store this in the top-level context!
     object Builtins:
       private def assumeBuiltin(nme: Str): Symbol =
         getBuiltin(nme)
           .getOrElse(throw new NoSuchElementException(s"builtin $nme not in ${parent.map(_.env.keySet)}"))
           .symbol.getOrElse(throw new NoSuchElementException(s"builtin symbol $nme"))
+      private def assumeBuiltinTpe(nme: Str): TypeSymbol =
+        assumeBuiltin(nme).asTpe.getOrElse(throw new NoSuchElementException(
+          s"builtin type symbol $nme"))
       private def assumeBuiltinCls(nme: Str): ClassSymbol =
         assumeBuiltin(nme).asCls.getOrElse(throw new NoSuchElementException(
           s"builtin class symbol $nme"))
@@ -86,6 +87,8 @@ object Elaborator:
       val Int = assumeBuiltinCls("Int")
       val Num = assumeBuiltinCls("Num")
       val Str = assumeBuiltinCls("Str")
+      val untyped = assumeBuiltinTpe("untyped")
+      // println(s"Builtins: $Int, $Num, $Str, $untyped")
       val Predef = assumeBuiltinMod("Predef")
       def getBuiltinOp(op: Str): Opt[Str] =
         if getBuiltin(op).isDefined then builtinBinOps.get(op) else N
@@ -98,22 +101,16 @@ object Elaborator:
     final case class RefElem(val sym: Symbol) extends Elem:
       val nme = sym.nme
       def ref(id: Tree.Ident)(using Elaborator.State): Term =
-        require(id.name == nme)
-        Term.Ref(sym)(id, 666) // TODO 666
+        // * Note: due to symbolic ops, we may have `id.name =/= nme`;
+        // * e.g., we can have `id.name = "|>"` and `nme = "pipe"`.
+        Term.Ref(sym)(id, 666) // FIXME: 666 is a temporary placeholder
       def symbol = S(sym)
     final case class SelElem(val base: Elem, val nme: Str, val symOpt: Opt[FieldSymbol]) extends Elem:
       def ref(id: Tree.Ident)(using Elaborator.State): Term =
-        // * Note: due to symbolic ops, we may have `id.name =/= nme`;
-        // * e.g., we can have `id.name = "|>"` and `nme = "pipe"`.
+        // * Same remark as in RefElem#ref
         Term.SynthSel(base.ref(Ident(base.nme)),
           new Tree.Ident(nme).withLocOf(id))(symOpt)
       def symbol = symOpt
-    final case class GetElem(val base: Elem) extends Elem:
-      def nme: Str = base.nme
-      def ref(id: Tree.Ident)(using Elaborator.State): Term =
-        val emptyTup: Tree.Tup = Tree.Tup(Nil)
-        Term.App(base.ref(id), Term.Tup(Nil)(emptyTup))(Tree.App(id, emptyTup), FlowSymbol("‹get-res›"))
-      def symbol: Opt[Symbol] = base.symbol
     given Conversion[Symbol, Elem] = RefElem(_)
     val empty: Ctx = Ctx(N, N, Map.empty)
   
@@ -127,7 +124,11 @@ object Elaborator:
     val globalThisSymbol = TopLevelSymbol("globalThis")
     val builtinOpsMap =
       val baseBuiltins = builtins.map: op =>
-          op -> BuiltinSymbol(op, binary = binaryOps(op), unary = unaryOps(op), nullary = false, functionLike = anyOps(op))
+          op -> BuiltinSymbol(op,
+            binary = binaryOps(op),
+            unary = unaryOps(op),
+            nullary = false,
+            functionLike = anyOps(op))
         .toMap
       baseBuiltins ++ aliasOps.map:
         case (alias, base) => alias -> baseBuiltins(base)
@@ -136,9 +137,11 @@ object Elaborator:
       "globalThis" -> globalThisSymbol,
     ))
     def dbg: Bool = false
-    def dbgUid(uid: Uid[Symbol]): Str = if dbg then s"‹$uid›" else ""
+    def dbgUid(uid: Uid[Symbol]): Str =
+      if dbg then s"‹$uid›" else ""
+      // ^ we do not display the uid by default to avoid polluting diff-test outputs
   transparent inline def State(using state: State): State = state
-
+  
 end Elaborator
 
 
@@ -150,8 +153,8 @@ class Elaborator(val tl: TraceLogger, val wd: os.Path)
 extends Importer:
   import tl.*
   
-  def mkLetBinding(sym: LocalSymbol, rhs: Term): Ls[Statement] =
-    LetDecl(sym) :: DefineVar(sym, rhs) :: Nil
+  def mkLetBinding(sym: LocalSymbol, rhs: Term, annotations: Ls[Annot]): Ls[Statement] =
+    LetDecl(sym, annotations) :: DefineVar(sym, rhs) :: Nil
   
   def resolveField(srcTree: Tree, base: Opt[Symbol], nme: Ident): Opt[FieldSymbol] =
     base match
@@ -168,6 +171,14 @@ extends Importer:
         N
     case _ => N
   
+  /** To perform a reverse lookup for a term that references a symbol in the current context. */
+  def reference(target: ClassSymbol | ModuleSymbol): Ctxl[Opt[Term]] =
+    def go(ctx: Ctx): Opt[Term] =
+      ctx.env.values.collectFirst:
+        case elem if elem.symbol.flatMap(_.asClsLike).contains(target) => elem.ref(target.id)
+      .orElse(ctx.parent.flatMap(go))
+    go(ctx).map(Term.SynthSel(_, Ident("class"))(S(target)))
+  
   def cls(tree: Tree, inAppPrefix: Bool): Ctxl[Term] = trace[Term](s"Elab class ${tree.showDbg}", r => s"~> $r"):
     val trm = term(tree, inAppPrefix)
     trm.symbol match
@@ -178,9 +189,29 @@ extends Importer:
       else Term.SynthSel(trm, Ident("class"))(mem.clsTree.orElse(mem.modTree).map(_.symbol))
     case _ => trm
   
+  def annot(tree: Tree): Ctxl[Opt[Annot]] = tree match
+    case Keywrd(kw @ (Keyword.`abstract` | Keyword.`declare`)) => S(Annot.Modifier(kw))
+    case _ => term(tree) match
+      case Term.Error => N
+      case trm =>
+        trm.symbol match
+        case S(sym) =>
+          sym.asTpe match
+          case S(ctx.Builtins.untyped) =>
+            return S(Annot.Untyped)
+          case _ => ()
+        case _ => ()
+        S(Annot.Trm(trm))
+  
   def term(tree: Tree, inAppPrefix: Bool = false): Ctxl[Term] =
   trace[Term](s"Elab term ${tree.showDbg}", r => s"~> $r"):
     tree.desugared match
+    case Bra(k, e) =>
+      k match
+      case BracketKind.Round =>
+      case _ =>
+        raise(ErrorReport(msg"Unsupported ${k.name} in this position" -> tree.toLoc :: Nil))
+      term(e)
     case Block(s :: Nil) =>
       term(s)
     case Block(sts) =>
@@ -205,21 +236,21 @@ extends Importer:
         val lt = term(lhs)
         val sym = TempSymbol(S(lt), "old")
         Term.Blk(
-        LetDecl(sym) :: DefineVar(sym, lt) :: Nil, Term.Try(Term.Blk(
+        LetDecl(sym, Nil) :: DefineVar(sym, lt) :: Nil, Term.Try(Term.Blk(
           Term.Assgn(lt, term(rhs)) :: Nil,
           term(bod),
         ), Term.Assgn(lt, sym.ref(id))))
       case _ => ??? // TODO error
-    case Handle(id, cls, blk, S(bod)) =>
-      term(Block(Handle(id, cls, blk, N) :: bod :: Nil))
-    case Handle(id: Ident, cls: Ident, Block(sts), N) =>
+    case Hndl(id, cls, blk, S(bod)) =>
+      term(Block(Hndl(id, cls, blk, N) :: bod :: Nil))
+    case Hndl(id: Ident, cls: Ident, Block(sts), N) =>
       raise(ErrorReport(
         msg"Expected a body for handle bindings in expression position" ->
           tree.toLoc :: Nil))
           
-      block(Handle(id, cls, Block(sts), N) :: Nil)._1
+      block(Hndl(id, cls, Block(sts), N) :: Nil)._1
       
-    case h: Handle =>
+    case h: Hndl =>
       raise(ErrorReport(
         msg"Unsupported handle binding shape" ->
           h.toLoc :: Nil))
@@ -232,7 +263,7 @@ extends Importer:
         Term.Error
     case id @ Ident(name) =>
       ctx.get(name) match
-      case S(sym) => sym.ref(id)
+      case S(elem) => elem.ref(id)
       case N =>
         state.builtinOpsMap.get(name) match
         case S(bi) => bi.ref(id)
@@ -260,14 +291,24 @@ extends Importer:
         case InfixApp(id: Tree.Ident, Keyword.`restricts`, lb) => (genSym(id), N, S(lb))
         case InfixApp(InfixApp(id: Tree.Ident, Keyword.`extends`, ub), Keyword.`restricts`, lb) => (genSym(id), S(ub), S(lb))
       )
-      if syms.length != tvs.length then
+      val outer = (tvs.collect:
+        case Outer(S(name: Tree.Ident)) => genSym(name)
+        case Outer(N) => genSym(Tree.Ident("outer"))
+      ) match
+        case ot :: Nil => S(ot)
+        case _ :: rest =>
+          raise(ErrorReport(msg"Only one outer variable can be bound." -> tree.toLoc :: Nil))
+          N
+        case Nil => N
+      
+      if syms.length + outer.count(_ => true) != tvs.length then
         raise(ErrorReport(msg"Illegal forall annotation." -> tree.toLoc :: Nil))
         Term.Error
       else
         val nestCtx = ctx ++ boundVars
         val bds = syms.map:
           case (sym, ub, lb) => QuantVar(sym, ub.map(ub => term(ub)(using nestCtx)), lb.map(lb => term(lb)(using nestCtx)))
-        Term.Forall(bds, term(body)(using nestCtx))
+        Term.Forall(bds, outer, term(body)(using nestCtx))
     case InfixApp(lhs, Keyword.`->`, Effectful(eff, rhs)) =>
       Term.FunTy(term(lhs), term(rhs), S(term(eff)))
     case InfixApp(lhs, Keyword.`->`, rhs) =>
@@ -279,8 +320,12 @@ extends Importer:
     case InfixApp(lhs, Keyword.`:`, rhs) =>
       Term.Asc(term(lhs), term(rhs))
     case tree @ InfixApp(lhs, Keyword.`is` | Keyword.`and`, rhs) =>
-      val des = new Desugarer(this)(tree)
-      val nor = new ucs.Normalization(tl)(des)
+      val des = new ucs.Desugarer(this)(tree)
+      scoped("ucs:desugared"):
+        log(s"Desugared:\n${Split.display(des)}")
+      val nor = new ucs.Normalization(this)(des)
+      scoped("ucs:normalized"):
+        log(s"Normalized:\n${Split.display(nor)}")
       Term.IfLike(Keyword.`if`, des)(nor)
     case app @ PartialApp(lhs, args) =>
       var params: Ls[Param] = Nil
@@ -307,18 +352,25 @@ extends Importer:
       Term.CompType(term(lhs), term(rhs), false)
     case App(Ident(":="), Tree.Tup(lhs :: rhs :: Nil)) =>
       Term.SetRef(term(lhs), term(rhs))
-    case App(Ident("#"), Tree.Tup(SynthSel(pre, idn: Ident) :: (idp: Ident) :: Nil)) =>
-      Term.SelProj(term(pre), term(idn), idp)
-    case App(Ident("#"), Tree.Tup(SynthSel(pre, Ident(name)) :: App(Ident(proj), args) :: Nil)) =>
-      term(App(App(Ident("#"), Tree.Tup(SynthSel(pre, Ident(name)) :: Ident(proj) :: Nil)), args))
     case App(Ident("#"), Tree.Tup(Sel(pre, idn: Ident) :: (idp: Ident) :: Nil)) =>
-      Term.SelProj(term(pre), term(idn), idp)
+      val c = cls(idn, inAppPrefix = false)
+      val f = c.symbol.flatMap(_.asCls) match
+        case S(cls: ClassSymbol) =>
+          cls.tree.allSymbols.get(idp.name) match
+          case S(fld: FieldSymbol) => S(fld)
+          case _ =>
+            raise(ErrorReport(msg"Class '${cls.nme}' does not contain member '${idp.name}'." -> idp.toLoc :: Nil))
+            N
+        case _ =>
+          raise(ErrorReport(msg"Identifier `${idn.name}` does not name a known class symbol." -> idn.toLoc :: Nil))
+          N
+      Term.SelProj(term(pre), c, idp)(f)
     case App(Ident("#"), Tree.Tup(Sel(pre, Ident(name)) :: App(Ident(proj), args) :: Nil)) =>
       term(App(App(Ident("#"), Tree.Tup(Sel(pre, Ident(name)) :: Ident(proj) :: Nil)), args))
     case App(Ident("!"), Tree.Tup(rhs :: Nil)) =>
       Term.Deref(term(rhs))
     case App(Ident("~"), Tree.Tup(rhs :: Nil)) =>
-      term(rhs)
+      Term.Neg(term(rhs))
     case tree @ App(lhs, OpBlock(ops)) =>
       ops.foldLeft(term(lhs)):
         case (acc, (op, arg)) =>
@@ -369,9 +421,37 @@ extends Importer:
     case Sel(pre, nme) =>
       val preTrm = term(pre)
       val sym = resolveField(nme, preTrm.symbol, nme)
-      if inAppPrefix
-      then Term.SynthSel(preTrm, nme)(sym)
-      else Term.Sel(preTrm, nme)(sym)
+      Term.Sel(preTrm, nme)(sym)
+    case MemberProj(ct, nme) =>
+      val c = cls(ct, inAppPrefix = false)
+      val f = c.symbol.flatMap(_.asCls) match
+        case S(cls: ClassSymbol) =>
+          cls.tree.allSymbols.get(nme.name) match
+          case S(fld: FieldSymbol) => S(fld)
+          case _ =>
+            raise(ErrorReport(msg"Class '${cls.nme}' does not contain member '${nme.name}'." -> nme.toLoc :: Nil))
+            N
+        case _ =>
+          raise:
+            ErrorReport:
+              msg"${ct.describe.capitalize} is not a known class." -> ct.toLoc ::
+              msg"Note: any expression of the form `‹expression›::‹identifier›` is a member projection;" -> N ::
+              msg"  add a space before ‹identifier› to make it an operator application." -> N ::
+              Nil
+          N
+      val self = VarSymbol(Ident("self"))
+      val args = VarSymbol(Ident("args"))
+      val ps = ParamList(ParamListFlags.empty,
+        Param(FldFlags.empty, self, N) :: Nil,
+        S:
+          Param(FldFlags.empty, args, N)
+      )
+      val rs = FlowSymbol("‹app-res›")
+      Term.Lam(ps,
+        Term.App(Term.SelProj(self.ref(), c, nme)(f), args.ref())(
+          Tree.App(nme, Tree.Tup(Nil)) // FIXME
+          , rs)
+      )
     case tree @ Tup(fields) =>
       Term.Tup(fields.map(fld(_)))(tree)
     case New(body) => // TODO handle Under
@@ -383,10 +463,10 @@ extends Importer:
       // case _ =>
       //   raise(ErrorReport(msg"Illegal new expression." -> tree.toLoc :: Nil))
     case tree @ Tree.IfLike(kw, _, split) =>
-      val desugared = new Desugarer(this)(tree)
+      val desugared = new ucs.Desugarer(this)(tree)
       scoped("ucs:desugared"):
         log(s"Desugared:\n${Split.display(desugared)}")
-      val normalized = new ucs.Normalization(tl)(desugared)
+      val normalized = new ucs.Normalization(this)(desugared)
       scoped("ucs:normalized"):
         log(s"Normalized:\n${Split.display(normalized)}")
       Term.IfLike(kw, desugared)(normalized)
@@ -394,10 +474,10 @@ extends Importer:
     case Tree.Unquoted(body) => Term.Unquoted(term(body))
     case tree @ Tree.Case(_, branches) =>
       val scrut = VarSymbol(Ident("caseScrut"))
-      val des = new Desugarer(this)(tree, scrut)
+      val des = new ucs.Desugarer(this)(tree, scrut)
       scoped("ucs:desugared"):
         log(s"Desugared:\n${Split.display(des)}")
-      val nor = new ucs.Normalization(tl)(des)
+      val nor = new ucs.Normalization(this)(des)
       scoped("ucs:normalized"):
         log(s"Normalized:\n${Split.display(nor)}")
       Term.Lam(PlainParamList(
@@ -416,6 +496,14 @@ extends Importer:
       val nestCtx = ctx + (id.name -> sym)
       Term.Region(sym, term(body)(using nestCtx))
     case Tree.RegRef(reg, value) => Term.RegRef(term(reg), term(value))
+    case Outer(S(_)) =>
+      raise(ErrorReport(msg"Illegal outer binding." -> tree.toLoc :: Nil))
+      Term.Error
+    case Outer(N) => ctx.get("outer") match
+      case S(sym) => sym.ref(Tree.Ident("outer"))
+      case N =>
+        raise(ErrorReport(msg"Illegal outer reference." -> tree.toLoc :: Nil))
+        Term.Error
     case Empty() =>
       raise(ErrorReport(msg"A term was expected in this position, but no term was found." -> tree.toLoc :: Nil))
       Term.Error
@@ -456,14 +544,22 @@ extends Importer:
           go(acc, trees)
       
       go(term(lhs), rhs :: Nil)
-    case Open(body) =>
+    case Open(op) =>
       raise(ErrorReport(msg"Illegal position for 'open' statement." -> tree.toLoc :: Nil))
       Term.Error
+    case OpenIn(op, body) =>
+      term(Block(Open(op) :: body :: Nil), inAppPrefix)
     case Spread(kw, kwLoc, body) =>
       raise(ErrorReport(msg"Illegal position for '${kw.name}' spread operator." -> tree.toLoc :: Nil))
       Term.Error
     case Under() =>
       raise(ErrorReport(msg"Illegal position for '_' placeholder." -> tree.toLoc :: Nil))
+      Term.Error
+    case Annotated(lhs, rhs) =>
+      annot(lhs).fold(term(rhs))(ann =>
+        Term.Annotated(ann, term(rhs)))
+    case Keywrd(kw) =>
+      raise(ErrorReport(msg"Unexpected keyword '${kw.name}' in this position." -> tree.toLoc :: Nil))
       Term.Error
     // case _ =>
     //   ???
@@ -519,12 +615,28 @@ extends Importer:
           newSignatureTrees += name -> sig
     
     // TODO extract this into a separate method
+    // * @param funs:
+    // *  While elaborating a block, we move all function definitions to the top (similar to JS function semantics)
     @tailrec
-    def go(sts: Ls[Tree], acc: Ls[Statement]): Ctxl[(Term.Blk, Ctx)] = sts match
+    def go(sts: Ls[Tree], funs: Ls[TermDefinition], annotations: Ls[Annot], acc: Ls[Statement]): Ctxl[(Term.Blk, Ctx)] =
+      /** Call this function when the following term cannot be annotated. */
+      def reportUnusedAnnotations: Unit = if annotations.nonEmpty then raise:
+        WarningReport:
+          msg"This annotation has no effect" -> (annotations.foldLeft[Opt[Loc]](N):
+            case (acc, ann) => acc match
+              case N => ann.toLoc
+              case S(loc) => S(loc ++ ann.toLoc)
+          ) :: (sts.headOption match
+            case N => msg"A target term is expected at the end of block" -> blk.toLoc.map(_.right)
+            case S(head) => msg"Annotations are not supported on ${head.describe} terms." -> head.toLoc
+          ) :: Nil
+      sts match
       case Nil =>
+        reportUnusedAnnotations
         val res = unit
-        (Term.Blk(acc.reverse, res), ctx)
+        (Term.Blk(funs reverse_::: acc.reverse, res), ctx)
       case Open(bod) :: sts =>
+        reportUnusedAnnotations
         bod match
           case Jux(bse, Block(sts)) =>
             some(bse -> some(sts))
@@ -535,7 +647,7 @@ extends Importer:
             raise(ErrorReport(msg"Illegal 'open' statement shape." -> bod.toLoc :: Nil))
             N
         match
-        case N => go(sts, acc)
+        case N => go(sts, funs, annotations, acc)
         case S((base, importedTrees)) =>
           base match
           case baseId: Ident =>
@@ -559,14 +671,15 @@ extends Importer:
                     raise(ErrorReport(msg"Illegal 'open' statement element." -> t.toLoc :: Nil))
                     Nil
               (ctx elem_++ importedNames).givenIn:
-                go(sts, acc)
+                go(sts, funs, Nil, acc)
             case N =>
               raise(ErrorReport(msg"Name not found: ${baseId.name}" -> baseId.toLoc :: Nil))
-              go(sts, acc)
+              go(sts, funs, Nil, acc)
           case _ =>
             raise(ErrorReport(msg"Illegal 'open' statement base." -> base.toLoc :: Nil))
-            go(sts, acc)
+            go(sts, funs, Nil, acc)
       case (m @ Modified(Keyword.`import`, absLoc, arg)) :: sts =>
+        reportUnusedAnnotations
         val (newCtx, newAcc) = arg match
           case Tree.StrLit(path) =>
             val stmt = importPath(path)
@@ -578,7 +691,7 @@ extends Importer:
               arg.toLoc :: Nil))
             (ctx, acc)
         newCtx.givenIn:
-          go(sts, newAcc)
+          go(sts, funs, Nil, newAcc)
       
       case (hd @ LetLike(`let`, Apps(id: Ident, tups), rhso, N)) :: sts if id.name.headOption.exists(_.isLower) =>
         val sym =
@@ -588,68 +701,84 @@ extends Importer:
           case S(rhs) =>
             val rrhs = tups.foldRight(rhs):
               Tree.InfixApp(_, Keyword.`=>`, _)
-            mkLetBinding(sym, term(rrhs)) reverse_::: acc
+            mkLetBinding(sym, term(rrhs), annotations) reverse_::: acc
           case N =>
             if tups.nonEmpty then
               raise(ErrorReport(msg"Expected a right-hand side for let bindings with parameters" -> hd.toLoc :: Nil))
-            LetDecl(sym) :: acc
+            LetDecl(sym, annotations) :: acc
         (ctx + (id.name -> sym)) givenIn:
-          go(sts, newAcc)
+          go(sts, funs, Nil, newAcc)
       case (tree @ LetLike(`let`, lhs, S(rhs), N)) :: sts =>
         raise(ErrorReport(msg"Unsupported let binding shape" -> tree.toLoc :: Nil))
-        go(sts, Term.Error :: acc)
-      case (hd @ Handle(id: Ident, cls: Ident, Block(sts_), N)) :: sts =>
-        val sym = fieldOrVarSym(HandlerBind, id)
-        log(s"Processing `handle` statement $id (${sym}) ${ctx.outer}")
-
-        val elabed = block(sts_)._1
-        
-        elabed.res match
-          case Term.Lit(UnitLit(true)) => 
-          case trm => raise(WarningReport(msg"Terms in handler block do nothing" -> trm.toLoc :: Nil))
-
-        val tds = elabed.stats.map {
-          case td @ TermDefinition(owner, Fun, sym, params, sign, body, resSym, flags) =>
-            params.reverse match
-              case ParamList(_, value :: Nil, _) :: newParams =>
-                val newTd = TermDefinition(owner, Fun, sym, newParams.reverse, sign, body, resSym, flags)
-                S(HandlerTermDefinition(value.sym, newTd))
-              case _ => 
-                raise(ErrorReport(msg"Handler function is missing resumption parameter" -> td.toLoc :: Nil))
-                None
-              
-          case st => 
-            raise(ErrorReport(msg"Only function definitions are allowed in handler blocks" -> st.toLoc :: Nil))
-            None
-        }.collect { case Some(x) => x }
-
-        val newAcc = Term.Handle(sym, term(cls), tds) :: acc
-        ctx + (id.name -> sym) givenIn:
-          go(sts, newAcc)
-      case (tree @ Handle(_, _, _, N)) :: sts =>
+        go(sts, funs, Nil, Term.Error :: acc)
+      case (hd @ Hndl(id: Ident, cls: Ident, Block(sts_), N)) :: sts =>
+        reportUnusedAnnotations
+        val res: Term.Blk = ctx.nest(N).givenIn:
+          val sym = fieldOrVarSym(HandlerBind, id)
+          log(s"Processing `handle` statement $id (${sym}) ${ctx.outer}")
+          
+          // TODO: shouldn't need uid here
+          val derivedClsSym = ClassSymbol(Tree.TypeDef(syntax.Cls, Tree.Error(), N, N), Tree.Ident(s"${cls.name}$$${id.name}$$${State.suid.nextUid}"))
+          derivedClsSym.defn = S(ClassDef(
+            N, syntax.Cls, derivedClsSym,
+            BlockMemberSymbol(derivedClsSym.name, Nil),
+            Nil, N, ObjBody(Term.Blk(Nil, Term.Lit(Tree.UnitLit(true)))), List()))
+          
+          val elabed = ctx.nest(S(derivedClsSym)).givenIn:
+            block(sts_)._1
+          
+          elabed.res match
+            case Term.Lit(UnitLit(true)) => 
+            case trm => raise(WarningReport(msg"Terms in handler block do nothing" -> trm.toLoc :: Nil))
+          
+          val tds = elabed.stats.map {
+            case td @ TermDefinition(owner, Fun, sym, params, sign, body, resSym, flags, annotations) =>
+              params.reverse match
+                case ParamList(_, value :: Nil, _) :: newParams =>
+                  val newTd = TermDefinition(owner, Fun, sym, newParams.reverse, sign, body, resSym, flags, annotations)
+                  S(HandlerTermDefinition(value.sym, newTd))
+                case _ => 
+                  raise(ErrorReport(msg"Handler function is missing resumption parameter" -> td.toLoc :: Nil))
+                  None
+                
+            case st => 
+              raise(ErrorReport(msg"Only function definitions are allowed in handler blocks" -> st.toLoc :: Nil))
+              None
+          }.collect { case Some(x) => x }
+          
+          val newAcc = funs ::: Handle(sym, term(cls), derivedClsSym, tds) :: acc
+          val newCtx = ctx + (id.name -> sym)
+          val body = block(sts)(using newCtx)._1
+          Term.Blk(newAcc.reverse, body) // <<<<<<<<<<<<<<<<<<<<<<<<<<< FIXME scope problem (not calling `go`)
+        (res, ctx)
+      case (tree @ Hndl(_, _, _, N)) :: sts =>
         raise(ErrorReport(msg"Unsupported handle binding shape" -> tree.toLoc :: Nil))
-        go(sts, Term.Error :: acc)
-
+        go(sts, funs, Nil, Term.Error :: acc)
+      
       case Def(lhs, rhs) :: sts =>
+        reportUnusedAnnotations
         lhs match
         case id: Ident =>
           val r = term(rhs)
           ctx.get(id.name) match
           case S(elem) =>
             elem.symbol match
-            case S(sym: LocalSymbol) => go(sts, DefineVar(sym, r) :: acc)
+            case S(sym: LocalSymbol) => go(sts, funs, Nil, DefineVar(sym, r) :: acc)
           case N =>
             // TODO lookup in members? inherited/refined stuff?
             raise(ErrorReport(msg"Name not found: ${id.name}" -> id.toLoc :: Nil))
-            go(sts, Term.Error :: acc)
+            go(sts, funs, Nil, Term.Error :: acc)
         case App(base, args) =>
-          go(Def(base, InfixApp(args, Keyword.`=>`, rhs)) :: sts, acc)
+          go(Def(base, InfixApp(args, Keyword.`=>`, rhs)) :: sts, funs, Nil, acc)
         case _ =>
           raise(ErrorReport(msg"Unrecognized definitional assignment left-hand side: ${lhs.describe}"
             -> lhs.toLoc :: Nil)) // TODO BE
-          go(sts, Term.Error :: acc)
+          go(sts, funs, Nil, Term.Error :: acc)
       case (td @ TermDef(k, nme, rhs)) :: sts =>
         log(s"Processing term definition $nme")
+        td.symbName match
+        case S(L(d)) => raise(d)
+        case _ => ()
         td.name match
           case R(id) =>
             val sym = members.getOrElse(id.name, die)
@@ -661,18 +790,18 @@ extends Importer:
                 case S(t) => typeParams(t)
                 case N => (N, ctx)
               // * Add parameters to context
-              val (pss, newCtx) =
-                td.paramLists.foldLeft(Ls[ParamList](), newCtx1):
-                  case ((pss, ctx), ps) => 
-                    val (qs, newCtx) = params(ps)(using ctx)
-                    (pss :+ qs, newCtx)
+              var newCtx = newCtx1
+              val pss = td.paramLists.map: ps =>
+                val (res, newCtx2) = params(ps)(using newCtx)
+                newCtx = newCtx2
+                res
               // * Elaborate signature
               val st = td.annotatedResultType.orElse(newSignatureTrees.get(id.name))
               val s = st.map(term(_)(using newCtx))
               val b = rhs.map(term(_)(using newCtx))
               val r = FlowSymbol(s"‹result of ${sym}›")
               val tdf = TermDefinition(owner, k, sym, pss, s, b, r, 
-                TermDefFlags.empty.copy(isModMember = isModMember))
+                TermDefFlags.empty.copy(isModMember = isModMember), annotations)
               sym.defn = S(tdf)
               
               // indicates if the function really returns a module
@@ -686,11 +815,11 @@ extends Importer:
               s match
                 case N if em => raise:
                   ErrorReport:
-                    msg"Function returning module values must have explicit return types." ->
+                    msg"Functions returning module values must have explicit return types." ->
                     td.head.toLoc :: Nil
                 case S(t) if em && ModuleChecker.isTypeParam(t) => raise:
                   ErrorReport:
-                    msg"Function returning module values must have concrete return types." ->
+                    msg"Functions returning module values must have concrete return types." ->
                     td.head.toLoc :: Nil
                 case S(_) if em && !mm => raise:
                   ErrorReport:
@@ -703,17 +832,24 @@ extends Importer:
                 case _ => ()
               
               tdf
-            go(sts, tdf :: acc)
+            tdf.k match
+            case Fun => go(sts, tdf :: funs, Nil, acc)
+            case _ => go(sts, funs, Nil, tdf :: acc)
           case L(d) =>
+            reportUnusedAnnotations
             raise(d)
-            go(sts, acc)
+            go(sts, funs, Nil, acc)
       case (td @ TypeDef(k, head, extension, body)) :: sts =>
         assert((k is Als) || (k is Cls) || (k is Mod) || (k is Obj) || (k is Pat), k)
+        td.symbName match
+        case S(L(d)) => raise(d)
+        case _ => ()
         val nme = td.name match
           case R(id) => id
           case L(d) =>
             raise(d)
-            new Ident("<error>") // TODO improve
+            return go(sts, funs, Nil, acc)
+        val sym = members.getOrElse(nme.name, lastWords(s"Symbol not found: ${nme.name}"))
         var newCtx = ctx.nest(S(td.symbol).collectFirst{
           case s: InnerSymbol => s })
         val tps = td.typeParams match
@@ -757,7 +893,7 @@ extends Importer:
             assert(body.isEmpty)
             val d =
               given Ctx = newCtx
-              semantics.TypeDef(alsSym, tps, extension.map(term(_)), N)
+              semantics.TypeDef(alsSym, tps, extension.map(term(_)), N, annotations)
             alsSym.defn = S(d)
             d
         case Pat =>
@@ -765,10 +901,31 @@ extends Importer:
           val owner = ctx.outer
           newCtx.nest(S(patSym)).givenIn:
             assert(body.isEmpty)
+            td.extension match
+              case N => raise(ErrorReport(msg"Pattern definitions must have a body." -> td.toLoc :: Nil))
+              case S(tree) =>
+                val (patternParams, extractionParams) = ps match // Filter out pattern parameters.
+                  case S(ParamList(_, params, _)) => params.partition:
+                    case param @ Param(FldFlags(false, false, false, false, true), _, _) => true
+                    case param @ Param(FldFlags(_, _, _, _, false), _, _) => false
+                  case N => (Nil, Nil)
+                // TODO: Implement extraction parameters.
+                if extractionParams.nonEmpty then
+                  raise(ErrorReport(msg"Pattern extraction parameters are not yet supported." ->
+                    Loc(extractionParams.iterator.map(_.sym)) :: Nil))
+                log(s"pattern parameters: ${patternParams.mkString("{ ", ", ", " }")}")
+                patSym.patternParams = patternParams
+                val split = ucs.DeBrujinSplit.elaborate(patternParams, tree, this)
+                scoped("ucs:rp:elaborated"):
+                  log(s"elaborated ${patSym.nme}:\n${split.display}")
+                patSym.split = split
             log(s"pattern body is ${td.extension}")
             val translate = new ucs.Translator(this)
-            val bod = translate(ps.map(_.params).getOrElse(Nil), td.extension.getOrElse(die))
-            val pd = PatternDef(owner, patSym, tps, ps, ObjBody(Term.Blk(bod, Term.Lit(UnitLit(true)))))
+            val bod = translate(
+              patSym.patternParams,
+              Nil, // ps.map(_.params).getOrElse(Nil), // TODO[Luyu]: remove pattern parameters
+              td.extension.getOrElse(die))
+            val pd = PatternDef(owner, patSym, sym, tps, ps, ObjBody(Term.Blk(bod, Term.Lit(UnitLit(true)))), annotations)
             patSym.defn = S(pd)
             pd
         case k: (Mod.type | Obj.type) =>
@@ -782,7 +939,7 @@ extends Importer:
                 // case S(t) => block(t :: Nil)
                 case S(t) => ???
                 case N => (new Term.Blk(Nil, Term.Lit(UnitLit(true))), ctx)
-              ModuleDef(owner, clsSym, tps, ps, k, ObjBody(bod))
+              ModuleDef(owner, clsSym, sym, tps, ps, k, ObjBody(bod), annotations)
             clsSym.defn = S(cd)
             cd
         case Cls =>
@@ -796,28 +953,24 @@ extends Importer:
                 // case S(t) => block(t :: Nil)
                 case S(t) => ???
                 case N => (new Term.Blk(Nil, Term.Lit(UnitLit(true))), ctx)
-              ClassDef(owner, Cls, clsSym, tps, ps, ObjBody(bod))
+              ClassDef(owner, Cls, clsSym, sym, tps, ps, ObjBody(bod), annotations)
             clsSym.defn = S(cd)
             cd
-        go(sts, defn :: acc)
-        
-      case Modified(Keyword.`abstract`, absLoc, body) :: sts =>
-        ???
-        // TODO: pass abstract to `go`
-        go(body :: sts, acc)
-      case Modified(Keyword.`declare`, absLoc, body) :: sts =>
-        // TODO: pass declare to `go`
-        go(body :: sts, acc)
-      case (result: Tree) :: Nil =>
-        val res = term(result)
-        (Term.Blk(acc.reverse, res), ctx)
+        sym.defn = S(defn)
+        go(sts, funs, Nil, defn :: acc)
+      case Annotated(annotation, target) :: sts =>
+        go(target :: sts, funs, annotations ++ annot(annotation), acc)
       case (st: Tree) :: sts =>
-        val res = term(st) // TODO reject plain term statements? Currently, `(1, 2)` is allowed to elaborate (tho it should be rejected in type checking later)
-        go(sts, res :: acc)
+        // TODO reject plain term statements? Currently, `(1, 2)` is allowed to elaborate (tho it should be rejected in type checking later)
+        val res = annotations.foldLeft(term(st)):
+          case (acc, ann) => Term.Annotated(ann, acc)
+        sts match
+        case Nil => (Term.Blk(funs reverse_::: acc.reverse, res), ctx)
+        case _ => go(sts, funs, Nil, res :: acc)
     end go
     
     c.withMembers(members, c.outer).givenIn:
-      go(blk.desugStmts, Nil)
+      go(blk.desugStmts, Nil, Nil, Nil)
   
   
   def fieldOrVarSym(k: TermDefKind, id: Ident)(using Ctx): LocalSymbol & NamedSymbol =
@@ -834,6 +987,8 @@ extends Importer:
           raise(ErrorReport(msg"Module parameters must have concrete types." -> t.toLoc :: Nil))
         case _ => ()
       ps
+    case TypeDef(Pat, inner, N, N) =>
+      param(inner).map(_.mapSecond(p => p.copy(flags = p.flags.copy(pat = true))))
     case _ =>
       t.asParam.map: (isSpd, p, t) =>
         isSpd -> Param(FldFlags.empty, fieldOrVarSym(ParamBind, p), t.map(term(_)))
@@ -900,7 +1055,7 @@ extends Importer:
   def computeVariances(s: Statement): Unit =
     val trav = VarianceTraverser()
     def go(s: Statement): Unit = s match
-      case TermDefinition(_, k, sym, pss, sign, body, r, _) =>
+      case TermDefinition(_, k, sym, pss, sign, body, r, _, _) =>
         pss.foreach(ps => ps.params.foreach(trav.traverseType(S(false))))
         sign.foreach(trav.traverseType(S(true)))
         body match
@@ -1011,7 +1166,7 @@ extends Importer:
         traverseType(pol.!)(l)
         traverseType(pol)(r)
         e.foreach(e => traverseType(pol)(e))
-      case Term.Forall(_, body) =>
+      case Term.Forall(_, _, body) =>
         traverseType(pol)(body)
       case Term.WildcardTy(in, out) =>
         in.foreach(t => traverseType(pol.!)(t))
@@ -1023,6 +1178,8 @@ extends Importer:
         // fields.foreach(f => traverseType(pol)(f.value))
         fields.foreach(traverseType(pol))
       // case _ => ???
+      case Term.Neg(ty) => 
+        traverseType(pol.!)(ty)
     def traverseType(pol: Pol)(f: Elem): Unit = f match
       case f: Fld =>
         traverseType(pol)(f.term)

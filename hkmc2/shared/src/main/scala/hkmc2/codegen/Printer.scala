@@ -57,15 +57,27 @@ object Printer:
     case End(msg) => doc"end ${msg}"
   
   def mkDocument(defn: Defn)(using Raise, Scope): Document = defn match
-    case FunDefn(sym, params, body) =>
-      val docParams = doc"${params.map(_.params.map(x => summon[Scope].allocateName(x.sym)).mkString("(", ", ", ")")).mkString}"
+    case FunDefn(own, sym, params, body) =>
+      val docParams = doc"${own.fold("")(_.toString+"::")}${params.map(_.params.map(x => summon[Scope].allocateName(x.sym)).mkString("(", ", ", ")")).mkString}"
       val docBody = mkDocument(body)
       doc"fun ${sym.nme}${docParams} { #{  # ${docBody} #}  # }"
     case ValDefn(owner, k, sym, rhs) =>
       doc"val ${sym.nme} = ${mkDocument(rhs)}"
-    case ClsLikeDefn(sym, k, parentSym, methods, privateFields, publicFields, preCtor, ctor) =>
-      doc"class ${sym.nme} #{  #} "
-
+    case ClsLikeDefn(own, _, sym, k, paramsOpt, parentSym, methods, privateFields, publicFields, preCtor, ctor) =>
+      def optFldBody(t: semantics.TermDefinition) =
+        t.body match
+          case Some(x) => doc" = ..."
+          case None => doc""
+      val clsParams = paramsOpt.fold(Nil)(_.paramSyms)
+      val ctorParams = clsParams.map(p => summon[Scope].allocateName(p))
+      val privFields = privateFields.map(x => doc"let ${x.id.name} = ...").mkDocument(sep = doc" # ")
+      val pubFields = publicFields.map(x => doc"${x.k.str} ${x.sym.nme}${optFldBody(x)}").mkDocument(sep = doc" # ")
+      val docPrivFlds = if privateFields.isEmpty then doc"" else doc" # ${privFields}"
+      val docPubFlds = if publicFields.isEmpty then doc"" else doc" # ${pubFields}"
+      val docBody = if publicFields.isEmpty && privateFields.isEmpty then doc"" else doc" { #{ ${docPrivFlds}${docPubFlds} #}  # }"
+      val docCtorParams = if clsParams.isEmpty then doc"" else doc"(${ctorParams.mkString(", ")})"
+      doc"class ${own.fold("")(_.toString+"::")}${sym.nme}${docCtorParams}${docBody}"
+  
   def mkDocument(arg: Arg)(using Raise, Scope): Document =
     val doc = mkDocument(arg.value)
     if arg.spread

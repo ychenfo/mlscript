@@ -43,19 +43,22 @@ enum Tree extends AutoLocated:
   case Error()
   case Under()
   case Ident(name: Str)
+  case Keywrd(kw: Keyword)
   case IntLit(value: BigInt)          extends Tree with Literal
   case DecLit(value: BigDecimal)      extends Tree with Literal
   case StrLit(value: Str)             extends Tree with Literal
-  case UnitLit(undefinedOrNull: Bool) extends Tree with Literal
+  case UnitLit(isNullNotUndefined: Bool) extends Tree with Literal
   case BoolLit(value: Bool)           extends Tree with Literal
+  case Bra(k: BracketKind, inner: Tree)
   case Block(stmts: Ls[Tree])(using State) extends Tree with semantics.BlockImpl
   case OpBlock(items: Ls[Tree -> Tree])
   case LetLike(kw: Keyword.letLike, lhs: Tree, rhs: Opt[Tree], body: Opt[Tree])
-  case Handle(lhs: Tree, cls: Tree, defs: Tree, body: Opt[Tree])
+  case Hndl(lhs: Tree, cls: Tree, defs: Tree, body: Opt[Tree])
   case Def(lhs: Tree, rhs: Tree)
   case TermDef(k: TermDefKind, head: Tree, rhs: Opt[Tree]) extends Tree with TermDefImpl
   case TypeDef(k: TypeDefKind, head: Tree, extension: Opt[Tree], body: Opt[Tree])(using State) extends Tree with TypeDefImpl
-  case Open(body: Tree)
+  case Open(opened: Tree)
+  case OpenIn(opened: Tree, body: Tree)
   case Modified(modifier: Keyword, modLoc: Opt[Loc], body: Tree)
   case Quoted(body: Tree)
   case Unquoted(body: Tree)
@@ -65,6 +68,7 @@ enum Tree extends AutoLocated:
   case Jux(lhs: Tree, rhs: Tree)
   case SynthSel(prefix: Tree, name: Ident)
   case Sel(prefix: Tree, name: Ident)
+  case MemberProj(cls: Tree, name: Ident)
   case InfixApp(lhs: Tree, kw: Keyword.Infix, rhs: Tree)
   case New(body: Tree)
   case IfLike(kw: Keyword.`if`.type | Keyword.`while`.type, kwLoc: Opt[Loc], split: Tree)
@@ -74,15 +78,18 @@ enum Tree extends AutoLocated:
   case Region(name: Tree, body: Tree)
   case RegRef(reg: Tree, value: Tree)
   case Effectful(eff: Tree, body: Tree)
+  case Outer(name: Opt[Tree])
   case Spread(kw: Keyword.Ellipsis, kwLoc: Opt[Loc], body: Opt[Tree])
+  case Annotated(annotation: Tree, target: Tree)
 
   def children: Ls[Tree] = this match
     case _: Empty | _: Error | _: Ident | _: Literal | _: Under => Nil
+    case Bra(_, e) => e :: Nil
     case Block(stmts) => stmts
     case OpBlock(items) => items.flatMap:
       case (op, body) => op :: body :: Nil
     case LetLike(kw, lhs, rhs, body) => lhs :: Nil ++ rhs ++ body
-    case Handle(lhs, rhs, defs, body) => body match
+    case Hndl(lhs, rhs, defs, body) => body match
       case Some(value) => lhs :: rhs :: defs :: value :: Nil
       case None => lhs :: rhs :: defs :: Nil
     case TypeDef(k, head, extension, body) =>
@@ -102,16 +109,20 @@ enum Tree extends AutoLocated:
     case Region(name, body) => name :: body :: Nil
     case RegRef(reg, value) => reg :: value :: Nil
     case Effectful(eff, body) => eff :: body :: Nil
+    case Outer(name) => name.toList
     case TyTup(tys) => tys
     case SynthSel(prefix, name) => prefix :: Nil
     case Sel(prefix, name) => prefix :: Nil
     case Open(bod) => bod :: Nil
     case Def(lhs, rhs) => lhs :: rhs :: Nil
     case Spread(_, _, body) => body.toList
+    case Annotated(annotation, target) => annotation :: target :: Nil
+    case MemberProj(cls, name) => cls :: Nil
+    case Keywrd(kw) => Nil
   
   def describe: Str = this match
     case Empty() => "empty"
-    case Error() => "error"
+    case Error() => "<erroneous syntax>"
     case Under() => "underscore"
     case Ident(name) => "identifier"
     case IntLit(value) => "integer literal"
@@ -119,6 +130,7 @@ enum Tree extends AutoLocated:
     case StrLit(value) => "string literal"
     case UnitLit(value) => if value then "null" else "undefined"
     case BoolLit(value) => s"$value literal"
+    case Bra(k, _) => k.name + " section"
     case Block(stmts) => "block"
     case OpBlock(_) => "operator block"
     case LetLike(kw, lhs, rhs, body) => kw.name
@@ -141,9 +153,18 @@ enum Tree extends AutoLocated:
     case Region(name, body) => "region"
     case RegRef(reg, value) => "region reference"
     case Effectful(eff, body) => "effectful"
-    case Handle(_, _, _, _) => "handle"
+    case Outer(_) => "outer binding"
+    case Hndl(_, _, _, _) => "handle"
     case Def(lhs, rhs) => "defining assignment"
     case Spread(_, _, _) => "spread"
+    case Annotated(_, _) => "annotated"
+    case Open(_) => "open"
+    case MemberProj(_, _) => "member projection"
+    case Keywrd(kw) => s"'${kw.name}' keyword"
+    
+  def deparenthesized: Tree = this match
+    case Bra(BracketKind.Round, inner) => inner.deparenthesized
+    case _ => this
   
   def showDbg: Str = toString // TODO
   
@@ -154,18 +175,16 @@ enum Tree extends AutoLocated:
       LetLike(kw, Ident("_").withLocOf(und), r, b)
     
     case Modified(Keyword.`declare`, modLoc, s) =>
-      // TODO handle `declare` modifier!
-      s
+      Annotated(Keywrd(Keyword.`declare`), s) // TODO properly attach location
     case Modified(Keyword.`abstract`, modLoc, s) =>
-      // TODO handle `declare` modifier!
-      s
+      Annotated(Keywrd(Keyword.`abstract`), s) // TODO properly attach location
     case Modified(Keyword.`mut`, modLoc, TermDef(ImmutVal, anme, rhs)) =>
-      TermDef(MutVal, anme, rhs).desugared
+      TermDef(MutVal, anme, rhs).withLocOf(this).desugared
     case LetLike(letLike, App(f @ Ident(nme), Tup((id: Ident) :: r :: Nil)), N, bodo)
     if nme.endsWith("=") =>
-      LetLike(letLike, id, S(App(Ident(nme.init), Tup(id :: r :: Nil))), bodo).desugared
+      LetLike(letLike, id, S(App(Ident(nme.init), Tup(id :: r :: Nil))), bodo).withLocOf(this).desugared
     case _ => this
-
+  
   /** S(true) means eager spread, S(false) means lazy spread, N means no spread. */
   def asParam: Opt[(Opt[Bool], Ident, Opt[Tree])] = this match
     case und: Under => S(N, new Ident("_").withLocOf(und), N)
@@ -201,6 +220,17 @@ object Apps:
   def unapply(t: Tree): S[(Tree, Ls[Tup])] = t match
     case App(Apps(base, args), arg: Tup) => S(base, args :+ arg)
     case t => S(t, Nil)
+    
+object PossiblyAnnotated:
+  def apply(t: Tree, anns: Ls[Tree]): Tree = anns.foldRight(t)(Annotated(_, _))
+  def unapply(t: Tree): Opt[(Ls[Tree], Tree)] = t match
+    case Annotated(q, PossiblyAnnotated(qs, target)) => S(q :: qs, target)
+    case other => S((Nil, other))
+
+object PossiblyParenthesized:
+  def unapply(t: Tree): S[Tree] = t match
+    case Bra(BracketKind.Round, inner) => S(inner)
+    case _ => S(t)
 
 /** Matches applications with underscores in some argument and/or prefix positions. */
 object PartialApp:
@@ -229,7 +259,8 @@ case object ParamBind extends ValLike("", "parameter")
 case object Fun extends TermDefKind("fun", "function")
 sealed abstract class TypeDefKind(desc: Str) extends DeclKind(desc)
 sealed trait ObjDefKind
-sealed trait ClsLikeKind extends ObjDefKind
+sealed trait ClsLikeKind extends ObjDefKind:
+  val desc: Str
 case object Cls extends TypeDefKind("class") with ClsLikeKind
 case object Trt extends TypeDefKind("trait") with ObjDefKind
 case object Mxn extends TypeDefKind("mixin")
@@ -247,71 +278,78 @@ trait TermDefImpl extends TypeOrTermDef:
 trait TypeOrTermDef:
   this: TypeDef | TermDef =>
   
+  def k: DeclKind
   def head: Tree
   
+  type MaybeIdent = Diagnostic \/ Ident
+  
   lazy val (symbName, name, paramLists, typeParams, annotatedResultType)
-      : (Opt[Tree], Diagnostic \/ Ident, Ls[Tup], Opt[TyTup], Opt[Tree]) =
-    def rec(t: Tree, symbName: Opt[Tree]): 
-      (Opt[Tree], Diagnostic \/ Ident, Ls[Tup], Opt[TyTup], Opt[Tree]) = 
+      : (Opt[MaybeIdent], MaybeIdent, Ls[Tup], Opt[TyTup], Opt[Tree]) =
+    def rec(t: Tree, symbName: Opt[MaybeIdent], annot: Opt[Tree]): 
+      (Opt[MaybeIdent], MaybeIdent, Ls[Tup], Opt[TyTup], Opt[Tree]) = 
       t match
       
-      // fun f: Int
-      // fun f(n1: Int): Int
-      // fun f(n1: Int)(nn: Int): Int
-      case InfixApp(Apps(id: Ident, paramLists), Keyword.`:`, sign) =>
-        (symbName, R(id), paramLists, N, S(sign))
-      
-      // fun f[T]: Int
-      // fun f[T](n1: Int): Int
-      // fun f[T](n1: Int)(nn: Int): Int
-      case InfixApp(Apps(App(id: Ident, typeParams: TyTup), paramLists), Keyword.`:`, ret) =>
-        (symbName, R(id), paramLists, S(typeParams), S(ret))
-      
-      case InfixApp(Jux(lhs, rhs), Keyword.`:`, ret) =>
-        rec(InfixApp(rhs, Keyword.`:`, ret), S(lhs))
+      case InfixApp(tree, Keyword.`:`, ann) =>
+        rec(tree, symbName, S(ann))
       
       case InfixApp(derived, Keyword.`extends`, base) =>
         // TODO handle `extends`!
-        rec(derived, symbName)
+        rec(derived, symbName, annot)
       
       // fun f
       // fun f(n1: Int)
       // fun f(n1: Int)(nn: Int)
-      case Apps(id: Ident, paramLists) =>
-        (symbName, R(id), paramLists, N, N)
+      case Apps(PossiblyParenthesized(id: Ident), paramLists) =>
+        (symbName, R(id), paramLists, N, annot)
       
       // fun f[T]
       // fun f[T](n1: Int)
       // fun f[T](n1: Int)(nn: Int)
-      case Apps(App(id: Ident, typeParams: TyTup), paramLists) =>
-        (symbName, R(id), paramLists, S(typeParams), N)
-
-      case Jux(lhs, rhs) => // happens in `fun (op) nme` form
-        require(symbName.isEmpty) // TOOD
-        rec(rhs, S(lhs))
+      case Apps(App(PossiblyParenthesized(id: Ident), typeParams: TyTup), paramLists) =>
+        (symbName, R(id), paramLists, S(typeParams), annot)
       
+      case Jux(id: Ident, rhs) =>
+        val err = L:
+          ErrorReport:
+            msg"Invalid ${k.desc} definition head: unexpected ${rhs.describe} in this position" -> rhs.toLoc :: Nil
+        (S(err), R(id), Nil, N, annot)
+      
+      case Jux(lhs, rhs) => // happens in `fun (op) nme` form
+        val sn = lhs match
+          case Bra(BracketKind.Round, id: Ident) =>
+            require(symbName.isEmpty) // TODO
+            R(id)
+          case Bra(BracketKind.Round, lhs) =>
+            L:
+              ErrorReport:
+                msg"This ${lhs.describe} is not a valid symbolic name" -> lhs.toLoc :: Nil
+          case tree =>
+            L:
+              ErrorReport:
+                msg"Invalid ${k.desc} definition head: unexpected ${lhs.describe} in this position" -> lhs.toLoc :: Nil
+        rec(rhs, S(sn), annot)
+        
       case _ =>
         (N, L(ErrorReport(
-          msg"Expected a valid definition head, found ${t.describe} instead" -> t.toLoc :: Nil)),
-          Nil, N, N)
+          msg"Expected a valid ${k.desc} definition head; found ${t.describe} instead" -> t.toLoc :: Nil)),
+          Nil, N, annot)
       
-    rec(head, N)
+    rec(head, N, N)
   
-  lazy val symbolicName: Opt[Ident] = symbName match
-    case S(id: Ident) => S(id)
-    case _ => N
-
 end TypeOrTermDef
 
 
-trait TypeDefImpl(using semantics.Elaborator.State) extends TypeOrTermDef:
+trait TypeDefImpl(using State) extends TypeOrTermDef:
   this: TypeDef =>
   
   lazy val symbol = k match
     case Cls => semantics.ClassSymbol(this, name.getOrElse(Ident("<error>")))
     case Mod | Obj => semantics.ModuleSymbol(this, name.getOrElse(Ident("<error>")))
     case Als => semantics.TypeAliasSymbol(name.getOrElse(Ident("<error>")))
-    case Pat => semantics.PatternSymbol(name.getOrElse(Ident("<error>")))
+    case Pat => semantics.PatternSymbol(
+      name.getOrElse(Ident("<error>")),
+      paramLists.headOption,
+      extension.getOrElse(die))
     case Trt | Mxn => ???
   
   lazy val definedSymbols: Map[Str, semantics.BlockMemberSymbol] =
@@ -329,4 +367,6 @@ trait TypeDefImpl(using semantics.Elaborator.State) extends TypeOrTermDef:
         case (S(spd), id, _) => ??? // spreads are not allowed in class parameters
         case (N, id, _) => semantics.TermSymbol(ParamBind, symbol.asClsLike, id)
       .toList
+    
+  lazy val allSymbols = definedSymbols ++ clsParams.map(s => s.nme -> s).toMap
 

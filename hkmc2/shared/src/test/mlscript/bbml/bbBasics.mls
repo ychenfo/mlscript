@@ -20,7 +20,7 @@ false
 
 fun id(x) = x
 id
-//│ Type: forall 'x: 'x -> 'x
+//│ Type: ['x] -> 'x -> 'x
 
 fun inc(x) = x + 1
 //│ Type: ⊤
@@ -260,6 +260,18 @@ fact(1)
 //│ Type: Int
 
 
+fun fact2 = x => fact2(1)
+//│ Type: ⊤
+
+fun fact2 = x => if x is
+  n then fact2(n - 1)
+//│ Type: ⊤
+
+fun fact2(x) = if x is
+  n then fact2(n - 1)
+//│ Type: ⊤
+
+
 fun fact2 = case
   0 then 1
   n then n * fact2(n - 1)
@@ -280,7 +292,7 @@ new Foo(x => x)
 
 fun f(g) = new Foo(g)
 f
-//│ Type: forall 'A: ('A -> 'A) -> Foo['A]
+//│ Type: ['A] -> ('A -> 'A) -> Foo['A]
 
 f(x => x).Foo#x
 //│ Type: ('A) ->{⊥} 'A
@@ -296,7 +308,7 @@ throw new Error("oops")
 :e
 throw 42
 //│ ╔══[ERROR] Type error in throw
-//│ ║  l.297: 	throw 42
+//│ ║  l.309: 	throw 42
 //│ ║         	      ^^
 //│ ╙── because: cannot constrain  Int  <:  Error
 //│ Type: ⊥
