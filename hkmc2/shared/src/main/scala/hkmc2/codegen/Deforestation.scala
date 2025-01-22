@@ -22,6 +22,17 @@ class StratVarState(val uid: StratVarId, val name: Str = ""):
   lazy val asProdStrat = ProdVar(this)
   lazy val asConsStrat = ConsVar(this)
 
+object StratVarState:
+  private object StateHandler extends Uid.Handler[StratVar]
+  private val vuid = StateHandler.State()
+  
+  def freshVar(nme: String = "") =
+    val newId = vuid.nextUid
+    val s = StratVarState(newId, nme)
+    val p = s.asProdStrat
+    val c = s.asConsStrat
+    p -> c
+
 // enum ProdStrat:
 case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat])(val expr: Call | Select) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
@@ -127,10 +138,6 @@ extension (b: Block)
   
 
 class Deforest(using TL, Raise, Elaborator.State):
-  // import ProdStrat.*
-  // import ConsStrat.*
-  
-  object StratVarId extends Uid.Handler[StratVar]
   
   def apply(p: Program) =
     processBlock(p.main)
@@ -150,7 +157,6 @@ class Deforest(using TL, Raise, Elaborator.State):
     rewrite(p)
     
   
-  val vuid = StratVarId.State()
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
   
@@ -167,13 +173,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def getClsFields(s: ClassSymbol) = s.tree.clsParams
 
-  def freshVar(nme: String = "")(using filter: Opt[ProdVar -> ClsOrModSymbol] = N): ProdVar -> ConsVar =
-    val newId = vuid.nextUid
-    val s = StratVarState(newId, nme)
-    val p: ProdVar = ProdVar(s)
-    val c: ConsVar = ConsVar(s)
-    p -> c
-    
+  import StratVarState.freshVar
+  
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
   def processBlock(b: Block)(using inArm: Option[ProdVar -> ClsOrModSymbol] = N): ProdStrat = b match
