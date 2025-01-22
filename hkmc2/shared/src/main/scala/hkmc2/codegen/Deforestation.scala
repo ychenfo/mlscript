@@ -23,10 +23,8 @@ class StratVarState(val uid: StratVarId, val name: Str = ""):
   lazy val asConsStrat = ConsVar(this)
 
 object StratVarState:
-  private object StateHandler extends Uid.Handler[StratVar]
-  private val vuid = StateHandler.State()
   
-  def freshVar(nme: String = "") =
+  def freshVar(nme: String = "")(using vuid: Uid.Handler[StratVar]#State) =
     val newId = vuid.nextUid
     val s = StratVarState(newId, nme)
     val p = s.asProdStrat
@@ -173,6 +171,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def getClsFields(s: ClassSymbol) = s.tree.clsParams
 
+  object StratVarUidHandler extends Uid.Handler[StratVar]()
+  given Uid.Handler[StratVar]#State = StratVarUidHandler.State()
   import StratVarState.freshVar
   
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
