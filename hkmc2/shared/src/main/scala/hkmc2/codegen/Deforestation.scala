@@ -4,7 +4,7 @@ package codegen
 import semantics.*
 import semantics.Elaborator.State
 import syntax.{Literal, Tree}
-import utils.{TL, tl}
+import utils.{TL, tl, SymbolSubst}
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
 
@@ -490,106 +490,109 @@ class Deforest(using TL, Raise, Elaborator.State):
   def rewrite(p: Program) =
     Program(
       p.imports,
-      rewriteBlock(p.main)
+      DeforestTransformer.applyBlock(p.main)
     )
   
-  def rewriteBlock(b: Block): Block = b match
-    case mat@Match(scrut, arms, dflt, rest) =>
-      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut) then
-        // TODO:
-        rest match
-          case End(msg) => Return(scrut, mat.hasImplctRet) // TODO: true or false?
-          case _ => rest
-      else
-        Match(scrut, arms.map{ (cse, blk) => (cse, rewriteBlock(blk)) }, dflt.map(rewriteBlock), rewriteBlock(rest))
-    case Return(res, implct) =>
-      rewriteResult(res)(r => Return(r, implct))
-    case Assign(lhs, rhs, rest) =>
-      rewriteResult(rhs)(r => Assign(lhs, r, rewriteBlock(rest)))
-    case Begin(sub, rest) => Begin(rewriteBlock(sub), rewriteBlock(rest))
-    case d@Define(defn, rest) =>
-      defn match
-        case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, rewriteBlock(body)), rewriteBlock(rest))
-        case _ => d
-    case End(msg) => End(msg)
-    case Throw(exc) => rewriteResult(exc)(Throw.apply)
+  object DeforestTransformer extends BlockTransformer(new SymbolSubst()):
     
-    case AssignField(lhs, nme, rhs, rest) => ???
-    case Label(label, body, rest) => ???
-    case Break(label) => Break(label)
-    case Continue(label) => ???
-    case TryBlock(sub, finallyDo, rest) => ???
-  
-  
-  def rewriteResult(r: Result)(k: Result => Block): Block = r match
-    case call@Call(f, args) =>
-      def handleCtorCall(c: ClassSymbol) =
-        // assert(ctorDests(call).size == 1, s"$call has more than one destination")
-        filteredCtorDests.get(call) match
-          case None =>
-            val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
-              val tmpSym = TempSymbol(N)
-              v -> tmpSym
-            }
-            newArgSyms.foldRight(
-              k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
-            ){ case (arg, sym) -> rest =>
-                rewriteResult(arg)(r => Assign(sym, r, rest)) }
-          case Some(Select(p, nme)) => ???
-          case Some(scrut -> (arms, sels)) =>
-            val body = arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
-            tl.log(call.toString() + " ----> " + body)
-            
-            val newArgs = args.map(_ => TempSymbol(N))
-            // args.zip(newArgs).foldRight[Block](body.replaceAssignments(newArgs.map(a => Value.Ref(a))).mapRes(k)){ case ((a, tmp), rest) =>
-            //   rewriteResult(a.value): r =>
-            //     Assign(tmp, r, rest)
-            // }
-            val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
-            
-            args.zip(newArgs).foldRight[Block](body.replaceSelect(using rewritingSel.toSet, idsToArgs).mapRes(k)){ case ((a, tmp), rest) =>
-              rewriteResult(a.value): r =>
-                Assign(tmp, r, rest)
-            }
-      f match
-        case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
-          case None =>
-            k(call) // TODO: args need to be rewritten
-          case Some(c) => handleCtorCall(c)
-        case Value.Ref(l) => l.asCls match
-          case None => k(call) // TODO: args need to be rewritten
-          case Some(c) => handleCtorCall(c)
-        case Value.Lam(params, body) =>
-          k(Call(Value.Lam(params, rewriteBlock(body)), args)(call.isMlsFun))
-    case Instantiate(cls, args) => k(r)
-    case s@Select(p, nme) => s.symbol.flatMap(f => f.asMod) match
-      case None => k(s)
-      case Some(mod) =>
-        filteredCtorDests.get(s) match
-          case None => 
-            k(s)
-          case Some(Select(p, nme)) => ??? // TODO: a select consumes an object
-          case Some(scrut -> (arms, sels)) =>
-            val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
-            tl.log(mod.toString + " ----> " + body)
-            
-            body._2.mapRes(k)
-            
+    override def applyBlock(b: Block): Block = b match
+      case mat@Match(scrut, arms, dflt, rest) =>
+        if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut) then
+          // TODO:
+          rest match
+            case End(msg) => Return(scrut, mat.hasImplctRet) // TODO: true or false?
+            case _ => rest
+        else
+          Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
+      case Return(res, implct) =>
+        applyResult2(res)(r => Return(r, implct))
+      case Assign(lhs, rhs, rest) =>
+        applyResult2(rhs)(r => Assign(lhs, r, applyBlock(rest)))
+      case Begin(sub, rest) => Begin(applyBlock(sub), applyBlock(rest))
+      case d@Define(defn, rest) =>
+        defn match
+          case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, applyBlock(body)), applyBlock(rest))
+          case _ => d
+      case End(msg) => End(msg)
+      case Throw(exc) => applyResult2(exc)(Throw.apply)
+      
+      case _ => super.applyBlock(b)
+      // case AssignField(lhs, nme, rhs, rest) => ???
+      // case Label(label, body, rest) => ???
+      // case Break(label) => Break(label)
+      // case Continue(label) => ???
+      // case TryBlock(sub, finallyDo, rest) => ???
     
-    case r@Value.Ref(l) => l.asMod match
-      case None => k(r)
-      case Some(mod) =>
-        filteredCtorDests.get(r) match
-          case None => 
-            k(r)
-          case Some(Select(p, nme)) => ??? // TODO: a select consumes an object
-          case Some(scrut -> (arms, sels)) =>
-            val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
-            tl.log(mod.toString + " ----> " + body)
-            body._2.mapRes(k)
-    case Value.This(sym) => k(Value.This(sym))
-    case Value.Lit(lit) => k(Value.Lit(lit))
-    case Value.Lam(params, body) => k(Value.Lam(params, rewriteBlock(body)))
-    case Value.Arr(elems) => k(Value.Arr(elems))
-  
-  
+    
+    override def applyResult2(r: Result)(k: Result => Block): Block = r match
+      case call@Call(f, args) =>
+        def handleCtorCall(c: ClassSymbol) =
+          // assert(ctorDests(call).size == 1, s"$call has more than one destination")
+          filteredCtorDests.get(call) match
+            case None =>
+              val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
+                val tmpSym = TempSymbol(N)
+                v -> tmpSym
+              }
+              newArgSyms.foldRight(
+                k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
+              ){ case (arg, sym) -> rest =>
+                  applyResult2(arg)(r => Assign(sym, r, rest)) }
+            case Some(Select(p, nme)) => ???
+            case Some(scrut -> (arms, sels)) =>
+              val body = arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
+              tl.log(call.toString() + " ----> " + body)
+              
+              val newArgs = args.map(_ => TempSymbol(N))
+              // args.zip(newArgs).foldRight[Block](body.replaceAssignments(newArgs.map(a => Value.Ref(a))).mapRes(k)){ case ((a, tmp), rest) =>
+              //   applyResult2(a.value): r =>
+              //     Assign(tmp, r, rest)
+              // }
+              val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
+              
+              args.zip(newArgs).foldRight[Block](body.replaceSelect(using rewritingSel.toSet, idsToArgs).mapRes(k)){ case ((a, tmp), rest) =>
+                applyResult2(a.value): r =>
+                  Assign(tmp, r, rest)
+              }
+        f match
+          case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
+            case None =>
+              k(call) // TODO: args need to be rewritten
+            case Some(c) => handleCtorCall(c)
+          case Value.Ref(l) => l.asCls match
+            case None => k(call) // TODO: args need to be rewritten
+            case Some(c) => handleCtorCall(c)
+          case Value.Lam(params, body) =>
+            k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun))
+      case Instantiate(cls, args) => k(r)
+      case s@Select(p, nme) => s.symbol.flatMap(f => f.asMod) match
+        case None => k(s)
+        case Some(mod) =>
+          filteredCtorDests.get(s) match
+            case None => 
+              k(s)
+            case Some(Select(p, nme)) => ??? // TODO: a select consumes an object
+            case Some(scrut -> (arms, sels)) =>
+              val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
+              tl.log(mod.toString + " ----> " + body)
+              
+              body._2.mapRes(k)
+              
+      
+      case r@Value.Ref(l) => l.asMod match
+        case None => k(r)
+        case Some(mod) =>
+          filteredCtorDests.get(r) match
+            case None => 
+              k(r)
+            case Some(Select(p, nme)) => ??? // TODO: a select consumes an object
+            case Some(scrut -> (arms, sels)) =>
+              val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
+              tl.log(mod.toString + " ----> " + body)
+              body._2.mapRes(k)
+      case Value.This(sym) => k(Value.This(sym))
+      case Value.Lit(lit) => k(Value.Lit(lit))
+      case Value.Lam(params, body) => k(Value.Lam(params, applyBlock(body)))
+      case Value.Arr(elems) => k(Value.Arr(elems))
+    
+    
