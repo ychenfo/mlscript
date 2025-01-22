@@ -56,27 +56,27 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     try super.run() finally if hostCreated then host.terminate()
   
   
-  def mkQuery(prefix: Str, jsStr: Str)(using Raise) =
+  def mkQuery(prefix: Str, preStr: Str, jsStr: Str)(using Raise) =
     import hkmc2.Message.MessageContext
     val queryStr = jsStr.replaceAll("\n", " ")
-    val (reply, stderr) = host.query(queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
+    val (reply, stderr) = host.query(preStr, queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
     reply match
       case ReplHost.Result(content, stdout) =>
-        if silent.isUnset then
-          stdout match
-            case None | Some("") =>
-            case Some(str) =>
-              str.splitSane('\n').foreach: line =>
-                output(s"> ${line}")
-          content match
-          case "undefined" =>
-          case "null" =>
-          case _ =>
-            expect.get match
-              case S(expected) if content != expected => raise:
-                ErrorReport(msg"Expected: ${expected}, got: ${content}" -> N :: Nil,
-                  source = Diagnostic.Source.Runtime)
-              case _ => output(s"$prefix= ${content}")
+        stdout match
+        case None | Some("") =>
+        case Some(str) =>
+          str.splitSane('\n').foreach: line =>
+            output(s"> ${line}")
+        expect.get match
+        case S(expected) if content != expected && prefix == "" => raise:
+          ErrorReport(msg"Expected: ${expected}, got: ${content}" -> N :: Nil,
+            source = Diagnostic.Source.Runtime)
+        case _ =>
+        content match
+        case "undefined" =>
+        case "null" =>
+        case _ =>
+          if silent.isUnset then output(s"$prefix= ${content}")
       case ReplHost.Empty =>
       case ReplHost.Unexecuted(message) => ???
       case ReplHost.Error(isSyntaxError, message, otherOutputs) =>
@@ -134,13 +134,15 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           output(deforestRes.showAsTree)
           output("\n")
         val nestedScp = baseScp.nest
-        val je = nestedScp.givenIn:
-          jsb.program(deforestRes, N, wd)
+        val (pre, je) = nestedScp.givenIn:
+          jsb.worksheet(deforestRes)
         output("==== JS (deforested): ====")
         
         val jsStr = je.stripBreaks.mkString(100)
+        val preStr = pre.stripBreaks.mkString(100)
+        output(preStr)
         output(jsStr)
-        mkQuery("", jsStr)
+        mkQuery("", preStr, jsStr)
         output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
       
     if js.isSet && !showingJSYieldedCompileError then
@@ -198,6 +200,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         val je = nestedScp.givenIn:
           jsb.block(le)
         val jsStr = je.stripBreaks.mkString(100)
-        mkQuery(s"$nme ", jsStr)
+        mkQuery(s"$nme ", "", jsStr)
       
       

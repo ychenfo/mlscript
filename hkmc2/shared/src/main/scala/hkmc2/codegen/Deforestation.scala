@@ -10,7 +10,7 @@ import scala.collection.mutable
 
 type StratVar
 type StratVarId = Uid[StratVar]
-type ClsOrModSymbol = ClassSymbol | ModuleSymbol
+type ClsOrModSymbol = ClassLikeSymbol
 
 sealed abstract class Strat
 
@@ -91,7 +91,7 @@ extension (b: Block)
     case Begin(sub, rest) => ???
     case TryBlock(sub, finallyDo, rest) => ???
     case AssignField(_, _, _, _) => ???
-    case HandleBlock(lhs, res, cls, handlers, body, rest) => ???
+    case _: HandleBlock => ???
     case HandleBlockReturn(res) => ???
     case End(msg) => ???
   
@@ -220,7 +220,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       processBlock(rest)
     case Define(defn, rest) =>
       defn match
-        case FunDefn(sym, params, body) =>
+        case FunDefn(_, sym, params, body) =>
           val funSymStratVar = freshVar(sym.nme)
           symToStrat += sym -> funSymStratVar._1
           val param = params.head match
@@ -229,7 +229,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           constrain(funStrat, funSymStratVar._2)
           funSymStratVar._1
         case ValDefn(owner, k, sym, rhs) => NoProd // TODO:
-        case ClsLikeDefn(sym, k, parentSym, methods, privateFields, publicFields, preCtor, ctor) => NoProd
+        case _: ClsLikeDefn => NoProd
       processBlock(rest)
     case End(msg) => NoProd
     case Throw(exc) => NoProd
@@ -504,7 +504,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     case Begin(sub, rest) => Begin(rewriteBlock(sub), rewriteBlock(rest))
     case d@Define(defn, rest) =>
       defn match
-        case FunDefn(sym, params, body) => Define(FunDefn(sym, params, rewriteBlock(body)), rewriteBlock(rest))
+        case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, rewriteBlock(body)), rewriteBlock(rest))
         case _ => d
     case End(msg) => End(msg)
     case Throw(exc) => rewriteResult(exc)(Throw.apply)

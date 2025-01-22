@@ -41,7 +41,7 @@ class BlockTransformer(subst: SymbolSubst):
       if (scrut2 is scrut) &&
           (arms2 is arms) &&
           (dflt2 is dflt) && (rst2 is rst)
-        then b else Match(scrut2, arms2, dflt2, rst2)
+        then b else Match(scrut2.asInstanceOf[Value.Ref], arms2, dflt2, rst2)
     case Label(lbl, bod, rst) =>
       val lbl2 = applyLocal(lbl)
       val bod2 = applyBlock(bod)
