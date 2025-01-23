@@ -231,7 +231,18 @@ class Deforest(using TL, Raise, Elaborator.State):
           constrain(funStrat, funSymStratVar._2)
           funSymStratVar._1
         case ValDefn(owner, k, sym, rhs) => NoProd // TODO:
-        case _: ClsLikeDefn => NoProd
+        case c: ClsLikeDefn if c.sym.asMod.isDefined =>
+          c.methods.foreach{ case FunDefn(_, sym, params, body) => 
+            val funSymStratVar = freshVar(sym.nme)
+            symToStrat += sym -> funSymStratVar._1
+            val param = params.head match
+              case ParamList(flags, params, restParam) => params
+            val funStrat = constrFun(param, body) // TODO: handle mutiple param list
+            constrain(funStrat, funSymStratVar._2)
+            funSymStratVar._1
+          }
+          processBlock(c.ctor)
+        case _ => ??? // TODO:
       processBlock(rest)
     case End(msg) => NoProd
     case Throw(exc) => NoProd
@@ -512,7 +523,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       case d@Define(defn, rest) =>
         defn match
           case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, applyBlock(body)), applyBlock(rest))
-          case _ => d
+          case _ => super.applyBlock(d)
       case End(msg) => End(msg)
       case Throw(exc) => applyResult2(exc)(Throw.apply)
       
