@@ -530,6 +530,7 @@ sum(enumFromTo(1,10))
 //│ = 45
 
 
+// TODO:
 :sjs
 :deforest
 module Test with
@@ -607,7 +608,7 @@ module Test with
 //│ ==== JS (deforested): ====
 //│ let Test1;
 //│ const Test$class = class Test {
-//│   #s;
+//│   #s1;
 //│   constructor() {
 //│     let scrut, scrut1, tmp4, tmp5, tmp6;
 //│     scrut = true;
@@ -618,13 +619,13 @@ module Test with
 //│       tmp6 = B1;
 //│       tmp4 = BB1(tmp6);
 //│     }
-//│     this.#s = tmp4;
-//│     scrut1 = this.#s;
+//│     this.#s1 = tmp4;
+//│     scrut1 = this.#s1;
 //│     if (scrut1 instanceof AA1.class) {
-//│       this.f1(this.#s.x)
+//│       this.f1(this.#s1.x)
 //│     } else {
 //│       if (scrut1 instanceof BB1.class) {
-//│         this.f2(this.#s.x)
+//│         this.f2(this.#s1.x)
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
