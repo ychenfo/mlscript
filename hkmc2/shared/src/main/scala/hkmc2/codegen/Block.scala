@@ -231,6 +231,14 @@ enum Case:
     case Cls(_, path) => path.freeVars
     case Tup(_, _) => Set.empty
 
+type ResultId = Uid[Result]
+object ResultUidHandler extends Uid.Handler[Result]
+object ResultUid extends ResultUidHandler.State:
+  val uidToResult = collection.mutable.Map.empty[ResultId, Result]
+  def apply(id: ResultId) = uidToResult(id)
+  
+  
+
 sealed abstract class Result:
 
   lazy val freeVars: Set[Local] = this match
@@ -242,6 +250,11 @@ sealed abstract class Result:
     case Value.Lit(lit) => Set.empty
     case Value.Lam(params, body) => body.freeVars -- params.paramSyms
     case Value.Arr(elems) => elems.flatMap(_.value.freeVars).toSet
+  
+  lazy val uid =
+    val id = ResultUid.nextUid
+    ResultUid.uidToResult.addOne(id -> this)
+    id
   
 // type Local = LocalSymbol
 type Local = Symbol
