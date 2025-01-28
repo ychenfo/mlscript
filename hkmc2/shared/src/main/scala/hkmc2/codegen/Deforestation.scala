@@ -87,7 +87,6 @@ extension (r: Result)
   
 
 extension (b: Block)
-  // TODO: similar to Block.mapTail?
   def mapRes(f: Result => Block): Block = b match
     case Return(res, implct) => f(res)
     case Assign(lhs, rhs, rest: End) => f(rhs)
@@ -374,7 +373,6 @@ class Deforest(using TL, Raise, Elaborator.State):
             case None => Some(Map(scrut -> arms) -> Nil)
           }
           dtorSources += DtorExpr.Match(scrut) -> (ctorStrat.expr :: dtorSources(DtorExpr.Match(scrut)))
-          // TODO: keep track of this ctor to dtor
         case (ctorStrat@Ctor(ctor, args), selDtor@FieldSel(field, consVar)) =>
           // if clsSym.isDefined then
           //   args.get(clsSym.get).map(p => handle(p -> consVar))
