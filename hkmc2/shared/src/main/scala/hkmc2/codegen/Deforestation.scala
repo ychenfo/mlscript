@@ -551,18 +551,29 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     override def applyResult2(r: Result)(k: Result => Block): Block = r match
       case call@Call(f, args) =>
+        def handleNormalCall(args: List[Arg]) =
+          val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
+            val tmpSym = TempSymbol(N)
+            v -> tmpSym
+          }
+          newArgSyms.foldRight(
+            k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
+          ){ case (arg, sym) -> rest =>
+              applyResult2(arg)(r => Assign(sym, r, rest)) }
+          
         def handleCtorCall(c: ClassSymbol) =
           // assert(ctorDests(call).size == 1, s"$call has more than one destination")
           filteredCtorDests.get(call.uid) match
             case None =>
-              val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
-                val tmpSym = TempSymbol(N)
-                v -> tmpSym
-              }
-              newArgSyms.foldRight(
-                k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
-              ){ case (arg, sym) -> rest =>
-                  applyResult2(arg)(r => Assign(sym, r, rest)) }
+              handleNormalCall(args)
+              // val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
+              //   val tmpSym = TempSymbol(N)
+              //   v -> tmpSym
+              // }
+              // newArgSyms.foldRight(
+              //   k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
+              // ){ case (arg, sym) -> rest =>
+              //     applyResult2(arg)(r => Assign(sym, r, rest)) }
             case Some(CtorFinalDest.Match(scrut, arms, sels)) =>
               val body = arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
               tl.log(call.toString() + " ----> " + body)
@@ -579,13 +590,17 @@ class Deforest(using TL, Raise, Elaborator.State):
                   Assign(tmp, r, rest)
               }
             case Some(_) => ???
+        
         f match
           case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
             case None =>
-              k(call) // TODO: args need to be rewritten
+              handleNormalCall(args)
+              // k(call) // TODO: args need to be rewritten
             case Some(c) => handleCtorCall(c)
           case Value.Ref(l) => l.asCls match
-            case None => k(call) // TODO: args need to be rewritten
+            case None =>
+              handleNormalCall(args)
+              // k(call) // TODO: args need to be rewritten
             case Some(c) => handleCtorCall(c)
           case Value.Lam(params, body) =>
             k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun))

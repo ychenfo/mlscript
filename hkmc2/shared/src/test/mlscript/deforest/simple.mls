@@ -337,18 +337,18 @@ test()
 //│ ==== JS (deforested): ====
 //│ let test13;
 //│ test13 = function test() {
-//│   let c, g, tmp;
+//│   let c, g, tmp, tmp1, tmp2;
 //│   g = function g(x) {
-//│     let scrut, param0, x1, param01, x2, tmp1, tmp2;
+//│     let scrut, param0, x1, param01, x2, tmp3, tmp4;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp1 = 11;
-//│       param01 = tmp1;
+//│       tmp3 = 11;
+//│       param01 = tmp3;
 //│       x2 = param01;
 //│       return x2;
 //│     } else {
-//│       tmp2 = 22;
-//│       param0 = tmp2;
+//│       tmp4 = 22;
+//│       param0 = tmp4;
 //│       x1 = param0;
 //│       return x1;
 //│     }
@@ -356,8 +356,10 @@ test()
 //│   c = function c(x) {
 //│     return x;
 //│   };
-//│   tmp = g(true);
-//│   return c(tmp);
+//│   tmp1 = true;
+//│   tmp = g(tmp1);
+//│   tmp2 = tmp;
+//│   return c(tmp2);
 //│ };
 //│ test13()
 //│ = 11
@@ -416,22 +418,28 @@ map(enumFromTo(1, 4))
 //│ map1(tmp)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let enumFromTo1, map1, tmp;
+//│ let enumFromTo1, map1, tmp, tmp1, tmp2, tmp3;
 //│ enumFromTo1 = function enumFromTo(a, b) {
-//│   let scrut, param0, param1, h, t, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
-//│   scrut = a < b;
+//│   let scrut, param0, param1, h, t, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+//│   tmp8 = a;
+//│   tmp9 = b;
+//│   scrut = tmp8 < tmp9;
 //│   if (scrut === true) {
-//│     tmp1 = a + 1;
-//│     tmp2 = enumFromTo1(tmp1, b);
-//│     tmp5 = a;
-//│     tmp6 = tmp2;
-//│     param0 = tmp5;
-//│     param1 = tmp6;
+//│     tmp10 = a;
+//│     tmp11 = 1;
+//│     tmp4 = tmp10 + tmp11;
+//│     tmp12 = tmp4;
+//│     tmp13 = b;
+//│     tmp5 = enumFromTo1(tmp12, tmp13);
+//│     tmp14 = a;
+//│     tmp15 = tmp5;
+//│     param0 = tmp14;
+//│     param1 = tmp15;
 //│     h = param0;
 //│     t = param1;
-//│     tmp3 = h + 4;
-//│     tmp4 = map1(t);
-//│     return Cons1(tmp3, tmp4);
+//│     tmp6 = h + 4;
+//│     tmp7 = map1(t);
+//│     return Cons1(tmp6, tmp7);
 //│   } else {
 //│     return Nil1;
 //│   }
@@ -439,8 +447,11 @@ map(enumFromTo(1, 4))
 //│ map1 = function map(ls) {
 //│   return ls;
 //│ };
-//│ tmp = enumFromTo1(1, 4);
-//│ map1(tmp)
+//│ tmp1 = 1;
+//│ tmp2 = 4;
+//│ tmp = enumFromTo1(tmp1, tmp2);
+//│ tmp3 = tmp;
+//│ map1(tmp3)
 //│ = Cons { h: 5, t: Cons { h: 6, t: Cons { h: 7, t: [Nil] } } }
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons { h: 5, t: Cons { h: 6, t: Cons { h: 7, t: [Nil] } } }
@@ -468,20 +479,20 @@ fun sum(ls) = if ls is
   Cons(h, t) then h + sum(t)
 sum(enumFromTo(1,10))
 //│ JS (unsanitized):
-//│ let enumFromTo4, sum1, tmp2;
+//│ let enumFromTo4, sum1, tmp5;
 //│ enumFromTo4 = function enumFromTo(a, b) {
-//│   let scrut, tmp3, tmp4;
+//│   let scrut, tmp6, tmp7;
 //│   scrut = a < b;
 //│   if (scrut === true) {
-//│     tmp3 = a + 1;
-//│     tmp4 = enumFromTo4(tmp3, b);
-//│     return Cons1(a, tmp4);
+//│     tmp6 = a + 1;
+//│     tmp7 = enumFromTo4(tmp6, b);
+//│     return Cons1(a, tmp7);
 //│   } else {
 //│     return Nil1;
 //│   }
 //│ };
 //│ sum1 = function sum(ls) {
-//│   let param0, param1, h, t, tmp3;
+//│   let param0, param1, h, t, tmp6;
 //│   if (ls instanceof Nil1.class) {
 //│     return 0;
 //│   } else {
@@ -490,32 +501,38 @@ sum(enumFromTo(1,10))
 //│       param1 = ls.t;
 //│       h = param0;
 //│       t = param1;
-//│       tmp3 = sum1(t);
-//│       return h + tmp3;
+//│       tmp6 = sum1(t);
+//│       return h + tmp6;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ };
-//│ tmp2 = enumFromTo4(1, 10);
-//│ sum1(tmp2)
+//│ tmp5 = enumFromTo4(1, 10);
+//│ sum1(tmp5)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let enumFromTo4, sum1, tmp2;
+//│ let enumFromTo4, sum1, tmp5, tmp6, tmp7, tmp8;
 //│ enumFromTo4 = function enumFromTo(a, b) {
-//│   let scrut, param0, param1, h, t, tmp3, tmp4, tmp5, tmp6, tmp7;
-//│   scrut = a < b;
+//│   let scrut, param0, param1, h, t, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19;
+//│   tmp12 = a;
+//│   tmp13 = b;
+//│   scrut = tmp12 < tmp13;
 //│   if (scrut === true) {
-//│     tmp3 = a + 1;
-//│     tmp4 = enumFromTo4(tmp3, b);
-//│     tmp6 = a;
-//│     tmp7 = tmp4;
-//│     param0 = tmp6;
-//│     param1 = tmp7;
+//│     tmp14 = a;
+//│     tmp15 = 1;
+//│     tmp9 = tmp14 + tmp15;
+//│     tmp16 = tmp9;
+//│     tmp17 = b;
+//│     tmp10 = enumFromTo4(tmp16, tmp17);
+//│     tmp18 = a;
+//│     tmp19 = tmp10;
+//│     param0 = tmp18;
+//│     param1 = tmp19;
 //│     h = param0;
 //│     t = param1;
-//│     tmp5 = sum1(t);
-//│     return h + tmp5;
+//│     tmp11 = sum1(t);
+//│     return h + tmp11;
 //│   } else {
 //│     return 0;
 //│   }
@@ -523,8 +540,11 @@ sum(enumFromTo(1,10))
 //│ sum1 = function sum(ls) {
 //│   return ls;
 //│ };
-//│ tmp2 = enumFromTo4(1, 10);
-//│ sum1(tmp2)
+//│ tmp6 = 1;
+//│ tmp7 = 10;
+//│ tmp5 = enumFromTo4(tmp6, tmp7);
+//│ tmp8 = tmp5;
+//│ sum1(tmp8)
 //│ = 45
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 45
@@ -551,14 +571,14 @@ module Test with
 //│ const Test$class = class Test {
 //│   #s;
 //│   constructor() {
-//│     let scrut, scrut1, tmp4;
+//│     let scrut, scrut1, tmp10;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp4 = AA1(A1);
+//│       tmp10 = AA1(A1);
 //│     } else {
-//│       tmp4 = BB1(B1);
+//│       tmp10 = BB1(B1);
 //│     }
-//│     this.#s = tmp4;
+//│     this.#s = tmp10;
 //│     scrut1 = this.#s;
 //│     if (scrut1 instanceof AA1.class) {
 //│       this.f1(this.#s.x)
@@ -610,22 +630,24 @@ module Test with
 //│ const Test$class = class Test {
 //│   #s1;
 //│   constructor() {
-//│     let scrut, scrut1, tmp4, tmp5, tmp6;
+//│     let scrut, scrut1, tmp10, tmp11, tmp12, tmp13, tmp14;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp5 = A1;
-//│       tmp4 = AA1(tmp5);
+//│       tmp11 = A1;
+//│       tmp10 = AA1(tmp11);
 //│     } else {
-//│       tmp6 = B1;
-//│       tmp4 = BB1(tmp6);
+//│       tmp12 = B1;
+//│       tmp10 = BB1(tmp12);
 //│     }
-//│     this.#s1 = tmp4;
+//│     this.#s1 = tmp10;
 //│     scrut1 = this.#s1;
 //│     if (scrut1 instanceof AA1.class) {
-//│       this.f1(this.#s1.x)
+//│       tmp13 = this.#s1.x;
+//│       this.f1(tmp13)
 //│     } else {
 //│       if (scrut1 instanceof BB1.class) {
-//│         this.f2(this.#s1.x)
+//│         tmp14 = this.#s1.x;
+//│         this.f2(tmp14)
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
