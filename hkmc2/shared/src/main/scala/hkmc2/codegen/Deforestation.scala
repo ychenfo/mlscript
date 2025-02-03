@@ -575,7 +575,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               
               val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
               
-              args.zip(newArgs).foldRight[Block](body.replaceSelect(using sels.toSet, idsToArgs).mapRes(k)){ case ((a, tmp), rest) =>
+              args.zip(newArgs).foldRight[Block](applyBlock(body.replaceSelect(using sels.toSet, idsToArgs)).mapRes(k)){ case ((a, tmp), rest) =>
                 applyResult2(a.value): r =>
                   Assign(tmp, r, rest)
               }

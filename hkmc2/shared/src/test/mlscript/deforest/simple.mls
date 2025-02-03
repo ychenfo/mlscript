@@ -172,18 +172,20 @@ test()
 //│   return a;
 //│ };
 //│ test7 = function test() {
-//│   let x, scrut, param0, x1, param01, x2, tmp, tmp1, tmp2;
+//│   let x, scrut, param0, x1, param01, x2, tmp, tmp1, tmp2, tmp3, tmp4;
 //│   scrut = true;
 //│   if (scrut === true) {
 //│     tmp1 = 1;
 //│     param01 = tmp1;
 //│     x2 = param01;
-//│     tmp = f1(x2);
+//│     tmp2 = x2;
+//│     tmp = f1(tmp2);
 //│   } else {
-//│     tmp2 = 2;
-//│     param0 = tmp2;
+//│     tmp3 = 2;
+//│     param0 = tmp3;
 //│     x1 = param0;
-//│     tmp = f1(x1);
+//│     tmp4 = x1;
+//│     tmp = f1(tmp4);
 //│   }
 //│   x = tmp;
 //│   return x;
@@ -273,14 +275,16 @@ test()
 //│   return a;
 //│ };
 //│ test10 = function test() {
-//│   let x, scrut, tmp, tmp1, tmp2;
+//│   let x, scrut, tmp, tmp1, tmp2, tmp3, tmp4;
 //│   scrut = true;
 //│   if (scrut === true) {
 //│     tmp1 = 1;
-//│     tmp = f12(tmp1);
+//│     tmp2 = tmp1;
+//│     tmp = f12(tmp2);
 //│   } else {
-//│     tmp2 = 5;
-//│     tmp = f22(tmp2);
+//│     tmp3 = 5;
+//│     tmp4 = tmp3;
+//│     tmp = f22(tmp4);
 //│   }
 //│   x = tmp;
 //│   return x;
@@ -420,7 +424,7 @@ map(enumFromTo(1, 4))
 //│ ==== JS (deforested): ====
 //│ let enumFromTo1, map1, tmp, tmp1, tmp2, tmp3;
 //│ enumFromTo1 = function enumFromTo(a, b) {
-//│   let scrut, param0, param1, h, t, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+//│   let scrut, param0, param1, h, t, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20;
 //│   tmp8 = a;
 //│   tmp9 = b;
 //│   scrut = tmp8 < tmp9;
@@ -437,9 +441,14 @@ map(enumFromTo(1, 4))
 //│     param1 = tmp15;
 //│     h = param0;
 //│     t = param1;
-//│     tmp6 = h + 4;
-//│     tmp7 = map1(t);
-//│     return Cons1(tmp6, tmp7);
+//│     tmp16 = h;
+//│     tmp17 = 4;
+//│     tmp6 = tmp16 + tmp17;
+//│     tmp18 = t;
+//│     tmp7 = map1(tmp18);
+//│     tmp19 = tmp6;
+//│     tmp20 = tmp7;
+//│     return Cons1(tmp19, tmp20);
 //│   } else {
 //│     return Nil1;
 //│   }
@@ -514,7 +523,7 @@ sum(enumFromTo(1,10))
 //│ ==== JS (deforested): ====
 //│ let enumFromTo4, sum1, tmp5, tmp6, tmp7, tmp8;
 //│ enumFromTo4 = function enumFromTo(a, b) {
-//│   let scrut, param0, param1, h, t, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19;
+//│   let scrut, param0, param1, h, t, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22;
 //│   tmp12 = a;
 //│   tmp13 = b;
 //│   scrut = tmp12 < tmp13;
@@ -531,8 +540,11 @@ sum(enumFromTo(1,10))
 //│     param1 = tmp19;
 //│     h = param0;
 //│     t = param1;
-//│     tmp11 = sum1(t);
-//│     return h + tmp11;
+//│     tmp20 = t;
+//│     tmp11 = sum1(tmp20);
+//│     tmp21 = h;
+//│     tmp22 = tmp11;
+//│     return tmp21 + tmp22;
 //│   } else {
 //│     return 0;
 //│   }
