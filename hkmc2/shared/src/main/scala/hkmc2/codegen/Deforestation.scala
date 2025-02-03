@@ -503,10 +503,10 @@ class Deforest(using TL, Raise, Elaborator.State):
     }
     res.toMap
   
-  lazy val rewritingSel = filteredCtorDests.values.flatMap {
-    case CtorFinalDest.Match(_, _, sels) => sels
-    case _ => Nil // TODO:
-  }
+  lazy val rewritingSelConsumer = filteredCtorDests.values.flatMap {
+    case CtorFinalDest.Match(_, _, sels) => None
+    case CtorFinalDest.Sel(s) => Some(s)
+  }.toSet
   
   lazy val filteredDtors = filteredCtorDests.values.collect {
     case CtorFinalDest.Match(scrut, _, _) => scrut
@@ -575,11 +575,14 @@ class Deforest(using TL, Raise, Elaborator.State):
               
               val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
               
-              args.zip(newArgs).foldRight[Block](body.replaceSelect(using rewritingSel.toSet, idsToArgs).mapRes(k)){ case ((a, tmp), rest) =>
+              args.zip(newArgs).foldRight[Block](body.replaceSelect(using sels.toSet, idsToArgs).mapRes(k)){ case ((a, tmp), rest) =>
                 applyResult2(a.value): r =>
                   Assign(tmp, r, rest)
               }
-            case Some(_) => ???
+            case Some(CtorFinalDest.Sel(s)) =>
+              val selFieldName = ResultUid(s) match { case Select(p, nme) => nme }
+              val idx = getClsFields(c).indexWhere(s => s.id === selFieldName)
+              k(args(idx).value)
         
         f match
           case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
@@ -594,7 +597,11 @@ class Deforest(using TL, Raise, Elaborator.State):
             k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun))
       case Instantiate(cls, args) => k(r)
       case s@Select(p, nme) => s.symbol.flatMap(f => f.asMod) match
-        case None => k(s)
+        case None =>
+          if rewritingSelConsumer.contains(s.uid) then
+            k(p)
+          else
+            k(s)
         case Some(mod) =>
           filteredCtorDests.get(s.uid) match
             case None => 
@@ -604,7 +611,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               tl.log(mod.toString + " ----> " + body)
               
               body._2.mapRes(k)
-            case Some(_) => ??? // TODO: a select consumes an object
+            case Some(_) => ??? // TODO: a selection on a module consumes it
       
       case r@Value.Ref(l) => l.asMod match
         case None => k(r)
@@ -616,7 +623,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               tl.log(mod.toString + " ----> " + body)
               body._2.mapRes(k)
-            case Some(_) => ??? // TODO: a select consumes an object
+            case Some(_) => ??? // TODO: a selection on a module consumes it
       case Value.This(sym) => k(Value.This(sym))
       case Value.Lit(lit) => k(Value.Lit(lit))
       case Value.Lam(params, body) => k(Value.Lam(params, applyBlock(body)))
