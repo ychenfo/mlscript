@@ -43,7 +43,7 @@ case object NoProd extends ProdStrat
 
 
 // enum ConsStrat:
-case class Dtor(scrut: Value.Ref, arms: Ls[Case -> Block]) extends ConsStrat
+case class Dtor(scrut: ResultId, arms: Ls[Case -> Block]) extends ConsStrat
 case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
 case class ConsVar(s: StratVarState) extends ConsStrat with StratVarTrait(s)
@@ -51,11 +51,11 @@ case object NoCons extends ConsStrat
 
 
 enum DtorExpr:
-  case Match(s: Value.Ref)
+  case Match(s: ResultId)
   case Sel(s: ResultId)
 
 enum CtorFinalDest:
-  case Match(scrut: Value.Ref, arms: Ls[Case -> Block], selInArms: Ls[ResultId])
+  case Match(scrut: ResultId, arms: Ls[Case -> Block], selInArms: Ls[ResultId])
   case Sel(s: ResultId)
 
 trait FieldSelTrait:
@@ -212,7 +212,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val scrutStrat = processResult(scrut)
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map { case (Case.Cls(s, _), body) => 
-          constrain(scrutStrat, Dtor(scrut, arms))
+          constrain(scrutStrat, Dtor(scrut.uid, arms))
           // TODO: fix this "asInstanceOf"?
           processBlock(body)(using S(scrutStrat.asInstanceOf[ProdVar] -> s))
         }
@@ -359,7 +359,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  val ctorDests = mutable.Map.empty[ResultId, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[ResultId])].withDefaultValue(Map.empty -> Nil)
+  val ctorDests = mutable.Map.empty[ResultId, (Map[ResultId, Ls[Case -> Block]] -> Ls[ResultId])].withDefaultValue(Map.empty -> Nil)
   val dtorSources = mutable.Map.empty[DtorExpr, Ls[ResultId]].withDefaultValue(Nil)
   
   
@@ -449,7 +449,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   // ======== after resolving constraints ======
   
   lazy val resolveClashes =
-    type CtorToDtor = Map[CtorExpr, (Map[Value.Ref, Ls[Case -> Block]] -> Ls[ResultId])]
+    type CtorToDtor = Map[CtorExpr, (Map[ResultId, Ls[Case -> Block]] -> Ls[ResultId])]
     type DtorToCtor = Map[DtorExpr, Ls[CtorExpr]]
     
     def removeCtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[CtorExpr]): CtorToDtor -> DtorToCtor =
@@ -478,7 +478,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         val (dtors, sels) = dests
         (dtors.size == 0 && sels.size == 1)
         || (dtors.size == 1 && {
-          val Value.Ref(scrut) = dtors.head._1
+          val Value.Ref(scrut) = ResultUid(dtors.head._1)
           sels.forall { s => ResultUid(s) match
             case Select(Value.Ref(l), nme) => l == scrut
             case _ => false }
@@ -501,7 +501,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           throw Error("more than one consumer")
           None
         else if dtors.size == 1 then
-          val Value.Ref(scrut) = dtors.head._1
+          val Value.Ref(scrut) = ResultUid(dtors.head._1)
           if sels.forall{ s => ResultUid(s) match
             case Select(Value.Ref(l), nme) => l == scrut
             case _ => false
@@ -535,7 +535,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
-        if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut) then
+        if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
           // TODO:
           rest match
             case End(msg) => Return(scrut, mat.hasImplctRet) // TODO: true or false?
