@@ -16,7 +16,7 @@ x => if x is Pair(A, B) then 1
 //│     param1 = x.b;
 //│     if (param0 instanceof A1) {
 //│       if (param1 instanceof B1) {
-//│         return 1;
+//│         return 1
 //│       } else {
 //│         throw new this.Error("match error");
 //│       }
@@ -27,7 +27,7 @@ x => if x is Pair(A, B) then 1
 //│     throw new this.Error("match error");
 //│   }
 //│ }
-//│ = [Function (anonymous)]
+//│ = [function block$res2]
 
 
 // :e // FIXME: should be an exhaustiveness error
@@ -36,22 +36,22 @@ fun f(x) = if x is
   Pair(A, A) then 1
   Pair(B, B) then 2
 //│ JS (unsanitized):
-//│ let f1;
-//│ f1 = function f(x) {
+//│ let f;
+//│ f = function f(x) {
 //│   let param0, param1;
 //│   if (x instanceof Pair1.class) {
 //│     param0 = x.a;
 //│     param1 = x.b;
 //│     if (param0 instanceof A1) {
 //│       if (param1 instanceof A1) {
-//│         return 1;
+//│         return 1
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
 //│     } else {
 //│       if (param0 instanceof B1) {
 //│         if (param1 instanceof B1) {
-//│           return 2;
+//│           return 2
 //│         } else {
 //│           throw new globalThis.Error("match error");
 //│         }
@@ -63,6 +63,5 @@ fun f(x) = if x is
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ null
 
 

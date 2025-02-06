@@ -35,7 +35,7 @@ object Parser:
       "", // `of` rhs
       ",",
       // ^ for keywords
-      // ";",
+      ";",
       // "=", // higher than || means `a == 1 || b` parses surprisingly
       "@",
       ":",
@@ -538,7 +538,7 @@ abstract class Parser(
           val res = bk match
             case Square => Tup(sts).withLoc(S(loc))
             case Round => sts match
-              case Nil => UnitLit(true).withLoc(S(loc))
+              case Nil => Unt().withLoc(S(loc))
               case e :: Nil => Bra(Round, e).withLoc(S(loc))
               case es => Bra(Round, Block(es).withLoc(S(loc)))
           exprCont(res, prec, allowNewlines = true)
@@ -744,7 +744,12 @@ abstract class Parser(
         val res = acc match
           case _ => InfixApp(PlainTup(acc), kw, rhs)
         exprCont(res, prec, allowNewlines)
-      case (IDENT(".", _), l0) :: (br @ BRACKETS(Round, toks), l1) :: _ =>
+      case (IDENT(".", _), l0) :: (br @ BRACKETS(bk @ (Round | Square), toks), l1) :: _ =>
+        consume
+        consume
+        val inner = rec(toks, S(br.innerLoc), br.describe).concludeWith(_.expr(0))
+        exprCont(DynAccess(acc, inner, bk is Square), prec, allowNewlines)
+      case (IDENT(".", _), l0) :: (br @ BRACKETS(Curly, toks), l1) :: _ =>
         consume
         consume
         val inner = rec(toks, S(br.innerLoc), br.describe).concludeWith(_.expr(0))

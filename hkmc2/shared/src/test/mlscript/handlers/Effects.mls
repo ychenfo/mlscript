@@ -15,25 +15,25 @@ handle h = Effect with
 h.perform()
 //│ = 42
 
-:expect 'b'
+:expect "b"
 handle h = Effect with
   fun perform(arg)(k) = "b"
 h.perform("k")
-//│ = 'b'
+//│ = "b"
 
-:expect 'k'
+:expect "k"
 handle h = Effect with
   fun perform(arg)(k) = arg
 h.perform("k")
-//│ = 'k'
+//│ = "k"
 
-:expect 'k'
+:expect "k"
 handle h = Effect with
   fun perform(arg)(k) = k(arg)
 h.perform("k")
-//│ = 'k'
+//│ = "k"
 
-:expect 'hi'
+:expect "hi"
 fun foo(e) = e.perform("hi")
 handle h = Effect with
   fun perform(arg)(k) =
@@ -41,20 +41,20 @@ handle h = Effect with
     k(arg)
 foo(h)
 //│ > hi
-//│ = 'hi'
+//│ = "hi"
 
 fun foo(e) = e.perform("hi")
 
-:expect 'Hello World!'
+:expect "Hello World!"
 handle h = Effect with
   fun perform(arg)(k) =
     print(arg)
     k(arg)
 (() => h.perform("Hello") + " World!")()
 //│ > Hello
-//│ = 'Hello World!'
+//│ = "Hello World!"
 
-:expect '54321'
+:expect "54321"
 let result = ""
 handle h = Effect with
   fun perform(arg)(k) =
@@ -68,19 +68,19 @@ in
   h.perform("4")
   h.perform("5")
 result
-//│ = '54321'
-//│ result = '54321'
+//│ = "54321"
+//│ result = "54321"
 
-:expect 'b'
+:expect "b"
 handle h = Effect with
   fun perform(arg)(k) =
     print(arg)
     "b"
 h.perform("t")
 //│ > t
-//│ = 'b'
+//│ = "b"
 
-:expect 'Hello World!'
+:expect "Hello World!"
 fun foo(h) =
   print("Entering foo")
   let result = h.perform("Hello")
@@ -105,9 +105,9 @@ result
 //│ > mainbody end
 //│ > handler finished
 //│ > handler finished
-//│ = 'Hello World!'
+//│ = "Hello World!"
 
-:expect 'Hello World!'
+:expect "Hello World!"
 fun foo(h) =
   print("Entering foo")
   let result = h.perform("Hello")
@@ -146,7 +146,7 @@ result
 //│ > mainbody end
 //│ > handler finished
 //│ > handler finished
-//│ = 'Hello World!'
+//│ = "Hello World!"
 
 // Float out definitions
 :sjs
@@ -156,24 +156,24 @@ if true do
   fun f() = 3
   f()
 //│ JS (unsanitized):
-//│ let tmp11, handleBlock$23;
-//│ handleBlock$23 = function handleBlock$() {
-//│   let h, scrut, f, tmp12, res, Cont$, Effect$h$;
-//│   Effect$h$ = class Effect$h$ extends Effect1 {
+//│ let tmp11, handleBlock$11;
+//│ handleBlock$11 = function handleBlock$() {
+//│   let f, h, scrut, tmp12, Cont$24, Handler$h$12;
+//│   Handler$h$12 = class Handler$h$11 extends Effect1 {
 //│     constructor() {
 //│       let tmp13;
 //│       tmp13 = super();
 //│     }
 //│     perform(arg) {
 //│       return globalThis.Predef.__mkEffect(h, (k) => {
-//│         return arg;
-//│       });
+//│         return arg
+//│       })
 //│     }
-//│     toString() { return "Effect$h$"; }
+//│     toString() { return "Handler$h$"; }
 //│   };
-//│   h = new Effect$h$();
-//│   Cont$ = function Cont$(pc1) { return new Cont$.class(pc1); };
-//│   Cont$.class = class Cont$ extends globalThis.Predef.__Cont.class {
+//│   h = new Handler$h$12();
+//│   Cont$24 = function Cont$(pc1) { return new Cont$.class(pc1); };
+//│   Cont$24.class = class Cont$23 extends globalThis.Predef.__Cont.class {
 //│     constructor(pc) {
 //│       let tmp13;
 //│       tmp13 = super(null, null);
@@ -181,42 +181,56 @@ if true do
 //│     }
 //│     resume(value$) {
 //│       if (this.pc === 0) {
-//│         res = value$;
+//│         tmp12 = value$;
 //│       }
 //│       contLoop: while (true) {
 //│         if (this.pc === 1) {
-//│           return tmp12;
+//│           return tmp12
 //│         } else if (this.pc === 0) {
-//│           tmp12 = res;
+//│           if (tmp12 instanceof globalThis.Predef.__Return.class) {
+//│             return tmp12
+//│           }
 //│           this.pc = 1;
 //│           continue contLoop;
 //│         }
 //│         break;
 //│       }
 //│     }
-//│     toString() { return "Cont$(" + this.pc + ")"; }
+//│     toString() { return "Cont$(" + globalThis.Predef.render(this.pc) + ")"; }
 //│   };
 //│   f = function f() {
-//│     return 3;
+//│     return 3
 //│   };
 //│   scrut = true;
 //│   if (scrut === true) {
-//│     res = f();
-//│     if (res instanceof globalThis.Predef.__EffectSig.class) {
-//│       res.tail.next = new Cont$(0);
-//│       return globalThis.Predef.__handleBlockImpl(res, h);
+//│     tmp12 = f();
+//│     if (tmp12 instanceof globalThis.Predef.__EffectSig.class) {
+//│       tmp12.tail.next = new Cont$24(0);
+//│       return globalThis.Predef.__handleBlockImpl(tmp12, h)
 //│     }
-//│     tmp12 = res;
+//│     if (tmp12 instanceof globalThis.Predef.__Return.class) {
+//│       return tmp12
+//│     }
 //│   } else {
-//│     tmp12 = null;
+//│     tmp12 = runtime.Unit;
 //│   }
-//│   return tmp12;
+//│   return tmp12
 //│ };
-//│ tmp11 = handleBlock$23();
+//│ tmp11 = handleBlock$11();
 //│ if (tmp11 instanceof this.Predef.__EffectSig.class) {
 //│   throw new this.Error("Unhandled effects");
 //│ }
 //│ tmp11
+//│ = 3
+
+module A with
+  class Effect(x) with
+    fun test() = x
+    fun perform(arg)
+handle h = A.Effect(3) with
+  fun perform()(k) =
+    this.test()
+h.perform()
 //│ = 3
 
 fun f(perform) =

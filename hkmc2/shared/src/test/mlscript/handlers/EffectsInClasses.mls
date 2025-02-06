@@ -15,10 +15,10 @@ class Lol(h) with
 //│ Lol1.class = class Lol {
 //│   constructor(h) {
 //│     this.h = h;
-//│     let tmp, res, res1, Cont$;
+//│     let tmp, res, Cont$1;
 //│     const this$Lol = this;
-//│     Cont$ = function Cont$(pc1) { return new Cont$.class(pc1); };
-//│     Cont$.class = class Cont$ extends globalThis.Predef.__Cont.class {
+//│     Cont$1 = function Cont$(pc1) { return new Cont$.class(pc1); };
+//│     Cont$1.class = class Cont$ extends globalThis.Predef.__Cont.class {
 //│       constructor(pc) {
 //│         let tmp1;
 //│         tmp1 = super(null, null);
@@ -26,19 +26,18 @@ class Lol(h) with
 //│       }
 //│       resume(value$) {
 //│         if (this.pc === 0) {
-//│           res = value$;
+//│           tmp = value$;
 //│         } else if (this.pc === 1) {
-//│           res1 = value$;
+//│           res = value$;
 //│         }
 //│         contLoop: while (true) {
 //│           if (this.pc === 2) {
-//│             return this$Lol;
+//│             return this$Lol
 //│           } else if (this.pc === 0) {
-//│             tmp = res;
-//│             res1 = Predef.print(tmp);
-//│             if (res1 instanceof globalThis.Predef.__EffectSig.class) {
+//│             res = Predef.print(tmp);
+//│             if (res instanceof globalThis.Predef.__EffectSig.class) {
 //│               this.pc = 1;
-//│               return globalThis.Predef.__appendInCont(res1, this);
+//│               return globalThis.Predef.__appendInCont(res, this)
 //│             }
 //│             this.pc = 1;
 //│             continue contLoop;
@@ -49,26 +48,43 @@ class Lol(h) with
 //│           break;
 //│         }
 //│       }
-//│       toString() { return "Cont$(" + this.pc + ")"; }
+//│       toString() { return "Cont$(" + globalThis.Predef.render(this.pc) + ")"; }
 //│     };
-//│     res = this.h.perform("k") ?? null;
+//│     tmp = runtime.safeCall(this.h.perform("k"));
+//│     if (tmp instanceof globalThis.Predef.__EffectSig.class) {
+//│       tmp.tail.next = new Cont$1.class(0);
+//│       tmp.tail = tmp.tail.next;
+//│       return tmp
+//│     }
+//│     res = Predef.print(tmp);
 //│     if (res instanceof globalThis.Predef.__EffectSig.class) {
-//│       res.tail.next = new Cont$.class(0);
+//│       res.tail.next = new Cont$1.class(1);
 //│       res.tail = res.tail.next;
-//│       return res;
+//│       return res
 //│     }
-//│     tmp = res;
-//│     res1 = Predef.print(tmp);
-//│     if (res1 instanceof globalThis.Predef.__EffectSig.class) {
-//│       res1.tail.next = new Cont$.class(1);
-//│       res1.tail = res1.tail.next;
-//│       return res1;
-//│     }
-//│     res1
+//│     res
 //│   }
-//│   toString() { return "Lol(" + this.h + ")"; }
+//│   toString() { return "Lol(" + globalThis.Predef.render(this.h) + ")"; }
 //│ };
-//│ null
+
+
+// * This is a weird use of effect handlers where an effect is raised during the construction of a handler.
+// * The most natural semantics (following what normal constructors currently do)
+// *  is for the handler to not yet be constructed but to be constructed and executed normally after resumption.
+// * See full discussion at: https://github.com/hkust-taco/mlscript/pull/268#discussion_r1938523085
+:fixme
+handle h = Effect with
+  fun perform(arg)(k) =
+    print(arg)
+    k()
+abstract class Eff with
+  fun test()
+  h.perform("x")
+handle k = Eff with
+  fun test()(k) = k()
+k.test()
+print("test")
+//│ ═══[RUNTIME ERROR] TypeError: k.test is not a function
 
 
 let oops = 
@@ -78,11 +94,11 @@ let oops =
       "b"
   Lol(h)
 //│ > k
-//│ oops = 'b'
+//│ oops = "b"
 
-:expect 'b'
+:expect "b"
 oops
-//│ = 'b'
+//│ = "b"
 
 let oops = 
   handle h = Effect with
@@ -91,11 +107,11 @@ let oops =
       "b"
   new Lol(h)
 //│ > k
-//│ oops = 'b'
+//│ oops = "b"
 
-:expect 'b'
+:expect "b"
 oops
-//│ = 'b'
+//│ = "b"
 
 
 let oops = 
@@ -106,9 +122,9 @@ let oops =
   Lol(h)
 //│ > k
 //│ > b
-//│ oops = Lol { h: Effect$h$ {} }
+//│ oops = Lol(Handler$h$)
 
 oops.h
-//│ = Effect$h$ {}
+//│ = Handler$h$
 
 

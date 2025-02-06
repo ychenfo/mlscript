@@ -18,15 +18,14 @@ object Test with
 //│   foo() {
 //│     let tmp;
 //│     tmp = Predef.print(Test1);
-//│     return Test1.x;
+//│     return Test1.x
 //│   }
 //│   toString() { return "Test"; }
 //│ }; Test1 = new Test$class;
 //│ Test1.class = Test$class;
-//│ null
 
 Test
-//│ = Test { x: 12, class: [class Test] }
+//│ = Test
 
 print(Test)
 //│ > Test
@@ -41,12 +40,12 @@ Test.foo()
 :sjs
 val Test = "oops"
 //│ JS (unsanitized):
-//│ let Test3; Test3 = "oops"; null
-//│ Test = 'oops'
+//│ let Test2; Test2 = "oops";
+//│ Test = "oops"
 
 :re
 Test.foo()
-//│ ═══[RUNTIME ERROR] TypeError: Test3.foo is not a function
+//│ ═══[RUNTIME ERROR] TypeError: Test2.foo is not a function
 
 
 :sjs
@@ -55,28 +54,33 @@ let f = () => x
 let x = 2
 f()
 //│ JS (unsanitized):
-//│ let x, f, x1; x = 1; f = () => { return x; }; x1 = 2; f() ?? null
+//│ let x, f, x1; x = 1; f = () => { return x }; x1 = 2; runtime.safeCall(f())
 //│ = 1
-//│ f = [Function: f]
+//│ f = [function f]
 //│ x = 2
 
 
-:sjs
+:ssjs
+:e
 module Test with
   val x = 1
   let x = 2
-//│ JS (unsanitized):
-//│ let Test5;
-//│ const Test$class1 = class Test {
-//│   #x;
-//│   constructor() {
+//│ ╔══[ERROR] Name 'x' is already used
+//│ ║  l.67: 	  let x = 2
+//│ ║        	      ^^^^^
+//│ ╟── by a member declared in the same block
+//│ ║  l.66: 	  val x = 1
+//│ ╙──      	      ^^^^^
+//│ JS:
+//│ Test4 = class Test3 {
+//│   static #x;
+//│   static {
 //│     this.x = 1;
 //│     this.#x = 2;
 //│   }
-//│   toString() { return "Test"; }
-//│ }; Test5 = new Test$class1;
-//│ Test5.class = Test$class1;
-//│ null
+//│   static toString() { return "Test"; }
+//│ };
+//│ block$res8 = undefined;
 
 Test.x
 //│ = 1
@@ -118,13 +122,12 @@ class Cls(x) with
 //│   get bar() {
 //│     return this.#x1;
 //│   }
-//│   toString() { return "Cls(" + this.x + ")"; }
+//│   toString() { return "Cls(" + globalThis.Predef.render(this.x) + ")"; }
 //│ };
-//│ null
 
 let cls = Cls(10)
 //│ > 10 22
-//│ cls = Cls { x: 10 }
+//│ cls = Cls(10)
 
 :expect 10
 cls.x
@@ -148,6 +151,44 @@ fun foo() =
     A
 
 foo()
-//│ = A { class: [class A] }
+//│ = A
+
+
+:sjs
+module Whoops with
+  val v = this
+  fun f() = "Hello"
+  module Whoops with
+    val w = this
+    fun g() = f()
+//│ JS (unsanitized):
+//│ let Whoops2;
+//│ Whoops2 = class Whoops {
+//│   static {
+//│     this.v = Whoops;
+//│     this.Whoops = class Whoops1 {
+//│       static {
+//│         this.w = Whoops1;
+//│       }
+//│       static g() {
+//│         return Whoops.f()
+//│       }
+//│       static toString() { return "Whoops"; }
+//│     };
+//│   }
+//│   static f() {
+//│     return "Hello"
+//│   }
+//│   static toString() { return "Whoops"; }
+//│ };
+
+Whoops.f()
+//│ = "Hello"
+
+Whoops.Whoops
+//│ = Whoops
+
+Whoops.Whoops.g()
+//│ = "Hello"
 
 

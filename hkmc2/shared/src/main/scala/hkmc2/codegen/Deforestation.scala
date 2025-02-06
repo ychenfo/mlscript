@@ -74,7 +74,7 @@ trait StratVarTrait(stratState: StratVarState):
 
 extension (r: Result)
   def replaceSelect(using p: Set[ResultId], args: Map[Tree.Ident, Path]): Result = r match
-    case c@Call(f, args) => Call(f, args.map{case Arg(spread, value) => Arg(spread, value.replaceSelect.asInstanceOf[Path])})(c.isMlsFun)
+    case c@Call(f, args) => Call(f, args.map{case Arg(spread, value) => Arg(spread, value.replaceSelect.asInstanceOf[Path])})(c.isMlsFun, c.mayRaiseEffects)
     case sel@Select(path, nme) =>
       if p.contains(sel.uid) then args(nme) else sel
     case _ => r
@@ -557,7 +557,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             v -> tmpSym
           }
           newArgSyms.foldRight(
-            k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun))
+            k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun, call.mayRaiseEffects))
           ){ case (arg, sym) -> rest =>
               applyResult2(arg)(r => Assign(sym, r, rest)) // TODO: avoid new tmpvars when args are not rewritten...
           }
@@ -594,7 +594,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               handleNormalCall(args)
             case Some(c) => handleCtorCall(c)
           case Value.Lam(params, body) =>
-            k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun))
+            k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun, call.mayRaiseEffects))
       case Instantiate(cls, args) => k(r)
       case s@Select(p, nme) => s.symbol.flatMap(f => f.asMod) match
         case None =>

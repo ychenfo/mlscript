@@ -1,30 +1,29 @@
+import runtime from "./Runtime.mjs";
 import Predef from "./Predef.mjs";
 let Example1;
-const Example$class = class Example {
-  constructor() {}
-  funnySlash(f, arg) {
-    return f(arg) ?? null;
+Example1 = class Example {
+  static {}
+  static funnySlash(f, arg) {
+    return runtime.safeCall(f(arg))
   } 
-  inc(x) {
-    return x + 1;
+  static inc(x) {
+    return x + 1
   } 
-  test(x1) {
+  static test(x1) {
     if (globalThis.Number.isInteger(x1)) {
-      return "int";
+      return "int"
     } else {
       if (typeof x1 === 'number') {
-        return "num";
+        return "num"
       } else {
         if (typeof x1 === 'string') {
-          return "str";
+          return "str"
         } else {
-          return "other";
+          return "other"
         }
       }
     }
   }
-  toString() { return "Example"; }
-}; Example1 = new Example$class;
-Example1.class = Example$class;
-null
+  static toString() { return "Example"; }
+};
 let Example = Example1; export default Example;

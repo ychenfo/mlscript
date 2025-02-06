@@ -1,17 +1,16 @@
+import runtime from "./Runtime.mjs";
 let Str1;
-const Str$class = class Str {
-  constructor() {}
-  concat2(a, b) {
-    return a + b;
+Str1 = class Str {
+  static {}
+  static concat2(a, b) {
+    return a + b
   } 
-  concat(...xs) {
-    return xs.join("") ?? null;
+  static concat(...xs) {
+    return runtime.safeCall(xs.join(""))
   } 
-  from(value) {
-    return globalThis.String(value) ?? null;
+  static from(value) {
+    return runtime.safeCall(globalThis.String(value))
   }
-  toString() { return "Str"; }
-}; Str1 = new Str$class;
-Str1.class = Str$class;
-null
+  static toString() { return "Str"; }
+};
 let Str = Str1; export default Str;

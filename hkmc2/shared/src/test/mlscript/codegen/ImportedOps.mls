@@ -11,22 +11,22 @@ fun foo() =
   "a" ~ "b" ~ "c"
 foo()
 //│ JS (unsanitized):
-//│ let foo1;
-//│ foo1 = function foo() {
+//│ let foo;
+//│ foo = function foo() {
 //│   let tmp;
 //│   tmp = M1.concat("a", "b");
-//│   return M1.concat(tmp, "c");
+//│   return M1.concat(tmp, "c")
 //│ };
-//│ foo1()
-//│ = 'abc'
+//│ foo()
+//│ = "abc"
 
 let name = "_"
-//│ name = '_'
+//│ name = "_"
 
 let display(balance) = balance
-//│ display = [Function: display]
+//│ display = [function display]
 
 "b" ~ display("-")
-//│ = 'b-'
+//│ = "b-"
 
 

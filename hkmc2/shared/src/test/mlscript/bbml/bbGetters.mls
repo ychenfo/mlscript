@@ -56,7 +56,7 @@ fun test2() =
 //│ Type: ⊤
 
 test2
-//│ = [Function: test2]
+//│ = [function test2]
 //│ Type: () -> (Int -> Int)
 
 test2()(5)
@@ -75,8 +75,8 @@ fun test2() =
   funny
 //│ ═══[WARNING] Pure expression in statement position
 //│ JS (unsanitized):
-//│ let test25;
-//│ test25 = function test2() {
+//│ let test22;
+//│ test22 = function test2() {
 //│   let funny, tmp1;
 //│   funny = function funny() {
 //│     return (caseScrut) => {
@@ -85,13 +85,12 @@ fun test2() =
 //│       tmp2 = funny();
 //│       tmp3 = n - 1;
 //│       tmp4 = tmp2(tmp3);
-//│       return tmp4 + 1;
-//│     };
+//│       return tmp4 + 1
+//│     }
 //│   };
 //│   tmp1 = funny();
-//│   return tmp1;
+//│   return tmp1
 //│ };
-//│ null
 //│ ═══[WARNING] Pure expression in statement position
 //│ ╔══[ERROR] Function definition shape not yet supported for funny
 //│ ║  l.74: 	    case n then funny(n - 1) + 1
@@ -106,7 +105,7 @@ fun test2() =
 fun test3 =
   log("Hi")
 //│ ╔══[ERROR] Function definition shape not yet supported for test3
-//│ ║  l.107: 	  log("Hi")
+//│ ║  l.106: 	  log("Hi")
 //│ ╙──       	  ^^^^^^^^^
 //│ Type: ⊤
 
