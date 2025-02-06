@@ -64,6 +64,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     hostDeforestCreated = true
     given TL = replTL
     val h = ReplHost(rootPath)
+    h.execute(s"const $runtimeNme = (await import(\"${runtimeFile}\")).default;") match
+    case ReplHost.Result(msg) =>
+      if msg.startsWith("Uncaught") then output(s"Failed to load runtime: $msg")
+    case r => output(s"Failed to load runtime: $r")
     h
   
   private var hostCreated = false
@@ -281,7 +285,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
             .foreach: line =>
               output(s"> ${line}")
       
-      if (deforestFlag.isUnset || showJS.isUnset) then
+      if deforestFlag.isSet && showJS.isUnset then
         mkQuery("", preStr, jsStr)(using hostDeforest)(_ => ())
       
       

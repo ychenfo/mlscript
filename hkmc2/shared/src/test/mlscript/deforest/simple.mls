@@ -1,6 +1,7 @@
 :js
-
 :deforest
+
+
 object A
 object B
 object C
@@ -8,7 +9,6 @@ class AA(x)
 class BB(x)
 
 :sjs
-:deforest
 fun test() =
   let x = if true then A else B
   if x is
@@ -58,7 +58,6 @@ test()
 //│ = 1
 
 :sjs
-:deforest
 fun test() =
   let x = if true then AA(A) else BB(B)
   if x is
@@ -119,7 +118,6 @@ test()
 
 
 :sjs
-:deforest
 fun f(a) = if a is
   A then 1
   B then 2
@@ -199,7 +197,6 @@ test()
 
 
 :sjs
-:deforest
 fun f1(a) = if a is
   A then 1
   B then 2
@@ -298,7 +295,6 @@ test()
 
 
 :sjs
-:deforest
 fun test() =
   fun g(x) = if true then AA(11) else BB(22)
   fun c(x) = if x is
@@ -379,12 +375,11 @@ test()
 
 
 
-:deforest
+
 object Nil
 class Cons(h, t)
 
 :sjs
-:deforest
 fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
 fun map(ls) = if ls is
   Nil then Nil
@@ -473,7 +468,6 @@ map(enumFromTo(1, 4))
 
 // // FIXME:
 // :sjs
-// :deforest
 // fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
 // fun map(f, ls) =
 //   (if ls is
@@ -485,7 +479,6 @@ map(enumFromTo(1, 4))
 
 
 :sjs
-:deforest
 fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
 fun sum(ls) = if ls is
   Nil then 0
@@ -569,7 +562,6 @@ sum(enumFromTo(1,10))
 
 // TODO:
 :sjs
-:deforest
 module Test with
   fun f1(a) = if a is
     A then 1
