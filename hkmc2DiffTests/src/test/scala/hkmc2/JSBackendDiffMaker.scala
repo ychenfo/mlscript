@@ -81,8 +81,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   private val DEFAULT_STACK_LIMT = 500
   
   
-  def mkQuery(prefix: Str, preStr: Str, jsStr: Str)(using host: ReplHost = host, r: Raise)(k: Str => Unit) =
-    import hkmc2.Message.MessageContext
+  def mkQuery(preStr: Str, jsStr: Str)(using host: ReplHost = host, r: Raise)(k: Str => Unit) =
     val queryStr = jsStr.replaceAll("\n", " ")
     val (reply, stderr) = host.query(preStr, queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
     reply match
@@ -93,7 +92,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         if otherOutputs.nonEmpty then
           otherOutputs.splitSane('\n').foreach: line =>
             output(s"> ${line}")
-        
         if (isSyntaxError) then
           // If there is a syntax error in the generated code,
           // it should be a code generation error.
@@ -182,7 +180,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         
         
         hostDeforest.execute(s"$resNme = undefined")
-        mkQuery("", preStr, jsStr)(using hostDeforest): stdout =>
+        mkQuery(preStr, jsStr)(using hostDeforest): stdout =>
           stdout.splitSane('\n').init
             .foreach: line =>
               output(s"> ${line}")
@@ -210,7 +208,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
             val je = baseScp.givenIn:
               jsb.block(le, endSemi = false)
             val jsStr = je.stripBreaks.mkString(100)
-            mkQuery("", "", jsStr)(using hostDeforest): out =>
+            mkQuery("", jsStr)(using hostDeforest): out =>
               val result = out.splitSane('\n').init.mkString // should always ends with "undefined" (TODO: check)
               expect match
               case S(expected) if result =/= expected => raise:
@@ -280,13 +278,13 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       // * Sometimes the JS block won't execute due to a syntax or runtime error so we always set this first
       host.execute(s"$resNme = undefined")
       
-      mkQuery("", preStr, jsStr): stdout =>
+      mkQuery(preStr, jsStr): stdout =>
           stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
             .foreach: line =>
               output(s"> ${line}")
       
       if deforestFlag.isSet && showJS.isUnset then
-        mkQuery("", preStr, jsStr)(using hostDeforest)(_ => ())
+        mkQuery(preStr, jsStr)(using hostDeforest)(_ => ())
       
       
       
@@ -316,7 +314,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           val je = nestedScp.givenIn:
             jsb.block(le, endSemi = false)
           val jsStr = je.stripBreaks.mkString(100)
-          mkQuery("", "", jsStr): out =>
+          mkQuery("", jsStr): out =>
             val result = out.splitSane('\n').init.mkString // should always ends with "undefined" (TODO: check)
             expect match
             case S(expected) if result =/= expected => raise:
