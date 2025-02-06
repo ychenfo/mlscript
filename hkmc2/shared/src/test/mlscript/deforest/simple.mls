@@ -559,6 +559,63 @@ sum(enumFromTo(1,10))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 45
 
+:sjs
+fun test() =
+  let x = B
+  if x is
+    A then 1
+    B then 3
+  if x is
+    B then 2
+test()
+//│ JS (unsanitized):
+//│ let test5;
+//│ test5 = function test() {
+//│   let x, tmp10;
+//│   x = B1;
+//│   if (x instanceof A1.class) {
+//│     tmp10 = 1;
+//│   } else {
+//│     if (x instanceof B1.class) {
+//│       tmp10 = 3;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│   if (x instanceof B1.class) {
+//│     return 2
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ test5()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test5;
+//│ test5 = function test() {
+//│   let x, tmp10;
+//│   x = B1;
+//│   if (x instanceof A1.class) {
+//│     tmp10 = 1;
+//│   } else {
+//│     if (x instanceof B1.class) {
+//│       tmp10 = 3;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│   if (x instanceof B1.class) {
+//│     return 2
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ block$res17 = test5();
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+
 
 // TODO:
 :sjs
@@ -692,5 +749,5 @@ module Test with
 //│   }
 //│   static toString() { return "Test"; }
 //│ };
-//│ block$res17 = undefined;
+//│ block$res19 = undefined;
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
