@@ -61,14 +61,18 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     h
   
   lazy val hostDeforest =
-    hostCreated = true
+    hostDeforestCreated = true
     given TL = replTL
     val h = ReplHost(rootPath)
     h
   
   private var hostCreated = false
+  private var hostDeforestCreated = false
+  
   override def run(): Unit =
-    try super.run() finally if hostCreated then host.terminate()
+    try super.run() finally
+      if hostCreated then host.terminate()
+      if hostDeforestCreated then hostDeforest.terminate()
 
   private val DEFAULT_STACK_LIMT = 500
   
@@ -173,7 +177,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         output(jsStr)
         
         
-        host.execute(s"$resNme = undefined")
+        hostDeforest.execute(s"$resNme = undefined")
         mkQuery("", preStr, jsStr)(using hostDeforest): stdout =>
           stdout.splitSane('\n').init
             .foreach: line =>
@@ -277,7 +281,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
             .foreach: line =>
               output(s"> ${line}")
       
-      if deforestFlag.isUnset || showJS.isUnset then
+      if (deforestFlag.isUnset || showJS.isUnset) then
         mkQuery("", preStr, jsStr)(using hostDeforest)(_ => ())
       
       
