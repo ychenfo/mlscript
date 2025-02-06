@@ -84,7 +84,15 @@ extension (r: Result)
     // case Value.Lit(lit) => ???
     // case Value.Lam(params, body) => ???
     // case Value.Arr(elems) => ???
-  
+
+extension (m: Match)
+  def mergeArms: Match =
+    val Match(s, arms, dflt, rest) = m
+    dflt.map(_.mergeMatchArms).fold(m){
+      case m@Match(s2, arms2, dflt2, _: End) if s2 === s =>
+        Match(s, arms ::: arms2, dflt2, rest.mergeMatchArms)
+      case d => Match(s, arms, S(d), rest)
+    }
 
 extension (b: Block)
   def mapRes(f: Result => Block): Block = b match
@@ -145,12 +153,17 @@ extension (b: Block)
     // case HandleBlock(lhs, res, cls, handlers, body, rest) =>
     // case HandleBlockReturn(res) =>
   
-  
+  def mergeMatchArms: Block =
+    object MergeMatchArmTransformer extends BlockTransformer(new SymbolSubst()):
+      override def applyBlock(b: Block): Block = b match
+        case m: Match => m.mergeArms
+        case _ => super.applyBlock(b)
+    MergeMatchArmTransformer.applyBlock(b)
 
 class Deforest(using TL, Raise, Elaborator.State):
   
   def apply(p: Program) =
-    processBlock(p.main)
+    processBlock(p.main.mergeMatchArms)
     resolveConstraints
 
     tl.log("upper:")
