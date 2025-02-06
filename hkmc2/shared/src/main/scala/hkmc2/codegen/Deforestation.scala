@@ -315,8 +315,8 @@ class Deforest(using TL, Raise, Elaborator.State):
       freshVar()._1
 
     case sel@Select(p, nme) => sel.symbol match
-      case Some(s) if s.asMod.isDefined =>
-        Ctor(s.asMod.get, Map.empty)(sel.uid)
+      case Some(s) if s.asObj.isDefined =>
+        Ctor(s.asObj.get, Map.empty)(sel.uid)
       case _ => 
         val pStrat = processResult(p)
         inArm match
@@ -332,7 +332,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid))
             tpeVar._1
             
-    case v@Value.Ref(l) => l.asMod match
+    case v@Value.Ref(l) => l.asObj match
       case None => getStratOfSym(l)
       case Some(m) => Ctor(m, Map.empty)(v.uid)
     
@@ -596,7 +596,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           case Value.Lam(params, body) =>
             k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun, call.mayRaiseEffects))
       case Instantiate(cls, args) => k(r)
-      case s@Select(p, nme) => s.symbol.flatMap(f => f.asMod) match
+      case s@Select(p, nme) => s.symbol.flatMap(f => f.asObj) match
         case None =>
           if rewritingSelConsumer.contains(s.uid) then
             k(p)
@@ -613,7 +613,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               body._2.mapRes(k)
             case Some(_) => ??? // TODO: a selection on a module consumes it
       
-      case r@Value.Ref(l) => l.asMod match
+      case r@Value.Ref(l) => l.asObj match
         case None => k(r)
         case Some(mod) =>
           filteredCtorDests.get(r.uid) match

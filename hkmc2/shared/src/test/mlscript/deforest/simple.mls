@@ -16,8 +16,8 @@ fun test() =
     B then 2
 test()
 //│ JS (unsanitized):
-//│ let test1;
-//│ test1 = function test() {
+//│ let test;
+//│ test = function test() {
 //│   let x, scrut, tmp;
 //│   scrut = true;
 //│   if (scrut === true) {
@@ -27,20 +27,20 @@ test()
 //│   }
 //│   x = tmp;
 //│   if (x instanceof A1.class) {
-//│     return 1;
+//│     return 1
 //│   } else {
 //│     if (x instanceof B1.class) {
-//│       return 2;
+//│       return 2
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ };
-//│ test1()
+//│ test()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let test1;
-//│ test1 = function test() {
+//│ let test;
+//│ test = function test() {
 //│   let x, scrut, tmp;
 //│   scrut = true;
 //│   if (scrut === true) {
@@ -49,10 +49,9 @@ test()
 //│     tmp = 2;
 //│   }
 //│   x = tmp;
-//│   return x;
+//│   return x
 //│ };
-//│ test1()
-//│ = 1
+//│ test()
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -66,8 +65,8 @@ fun test() =
     BB(x) then x
 test()
 //│ JS (unsanitized):
-//│ let test4;
-//│ test4 = function test() {
+//│ let test1;
+//│ test1 = function test() {
 //│   let x, scrut, param0, x1, param01, x2, tmp;
 //│   scrut = true;
 //│   if (scrut === true) {
@@ -79,22 +78,22 @@ test()
 //│   if (x instanceof AA1.class) {
 //│     param01 = x.x;
 //│     x2 = param01;
-//│     return x2;
+//│     return x2
 //│   } else {
 //│     if (x instanceof BB1.class) {
 //│       param0 = x.x;
 //│       x1 = param0;
-//│       return x1;
+//│       return x1
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ };
-//│ test4()
+//│ test1()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let test4;
-//│ test4 = function test() {
+//│ let test1;
+//│ test1 = function test() {
 //│   let x, scrut, param0, x1, param01, x2, tmp, tmp1, tmp2;
 //│   scrut = true;
 //│   if (scrut === true) {
@@ -109,12 +108,11 @@ test()
 //│     tmp = x1;
 //│   }
 //│   x = tmp;
-//│   return x;
+//│   return x
 //│ };
-//│ test4()
-//│ = A { class: [class A] }
+//│ test1()
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = A { class: [class A] }
+//│ = A
 
 
 :sjs
@@ -129,19 +127,19 @@ fun test() =
     BB(x) then f(x)
 test()
 //│ JS (unsanitized):
-//│ let test7, f1;
-//│ f1 = function f(a) {
+//│ let test2, f;
+//│ f = function f(a) {
 //│   if (a instanceof A1.class) {
-//│     return 1;
+//│     return 1
 //│   } else {
 //│     if (a instanceof B1.class) {
-//│       return 2;
+//│       return 2
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ };
-//│ test7 = function test() {
+//│ test2 = function test() {
 //│   let x, scrut, param0, x1, param01, x2, tmp;
 //│   scrut = true;
 //│   if (scrut === true) {
@@ -153,25 +151,25 @@ test()
 //│   if (x instanceof AA1.class) {
 //│     param01 = x.x;
 //│     x2 = param01;
-//│     return f1(x2);
+//│     return f(x2)
 //│   } else {
 //│     if (x instanceof BB1.class) {
 //│       param0 = x.x;
 //│       x1 = param0;
-//│       return f1(x1);
+//│       return f(x1)
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ };
-//│ test7()
+//│ test2()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let test7, f1;
-//│ f1 = function f(a) {
-//│   return a;
+//│ let test2, f;
+//│ f = function f(a) {
+//│   return a
 //│ };
-//│ test7 = function test() {
+//│ test2 = function test() {
 //│   let x, scrut, param0, x1, param01, x2, tmp, tmp1, tmp2, tmp3, tmp4;
 //│   scrut = true;
 //│   if (scrut === true) {
@@ -179,22 +177,20 @@ test()
 //│     param01 = tmp1;
 //│     x2 = param01;
 //│     tmp2 = x2;
-//│     tmp = f1(tmp2);
+//│     tmp = f(tmp2);
 //│   } else {
 //│     tmp3 = 2;
 //│     param0 = tmp3;
 //│     x1 = param0;
 //│     tmp4 = x1;
-//│     tmp = f1(tmp4);
+//│     tmp = f(tmp4);
 //│   }
 //│   x = tmp;
-//│   return x;
+//│   return x
 //│ };
-//│ test7()
-//│ = 1
+//│ test2()
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
-
 
 
 :sjs
@@ -214,38 +210,38 @@ fun test() =
     BB then f2(x.x)
 test()
 //│ JS (unsanitized):
-//│ let test10, f12, f22;
-//│ f12 = function f1(a) {
+//│ let test3, f1, f2;
+//│ f1 = function f1(a) {
 //│   if (a instanceof A1.class) {
-//│     return 1;
+//│     return 1
 //│   } else {
 //│     if (a instanceof B1.class) {
-//│       return 2;
+//│       return 2
 //│     } else {
 //│       if (a instanceof C1.class) {
-//│         return 3;
+//│         return 3
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
 //│     }
 //│   }
 //│ };
-//│ f22 = function f2(a) {
+//│ f2 = function f2(a) {
 //│   if (a instanceof A1.class) {
-//│     return 4;
+//│     return 4
 //│   } else {
 //│     if (a instanceof B1.class) {
-//│       return 5;
+//│       return 5
 //│     } else {
 //│       if (a instanceof C1.class) {
-//│         return 6;
+//│         return 6
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
 //│     }
 //│   }
 //│ };
-//│ test10 = function test() {
+//│ test3 = function test() {
 //│   let x, scrut, tmp;
 //│   scrut = true;
 //│   if (scrut === true) {
@@ -255,42 +251,41 @@ test()
 //│   }
 //│   x = tmp;
 //│   if (x instanceof AA1.class) {
-//│     return f12(x.x);
+//│     return f1(x.x)
 //│   } else {
 //│     if (x instanceof BB1.class) {
-//│       return f22(x.x);
+//│       return f2(x.x)
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ };
-//│ test10()
+//│ test3()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let test10, f12, f22;
-//│ f12 = function f1(a) {
-//│   return a;
+//│ let test3, f1, f2;
+//│ f1 = function f1(a) {
+//│   return a
 //│ };
-//│ f22 = function f2(a) {
-//│   return a;
+//│ f2 = function f2(a) {
+//│   return a
 //│ };
-//│ test10 = function test() {
+//│ test3 = function test() {
 //│   let x, scrut, tmp, tmp1, tmp2, tmp3, tmp4;
 //│   scrut = true;
 //│   if (scrut === true) {
 //│     tmp1 = 1;
 //│     tmp2 = tmp1;
-//│     tmp = f12(tmp2);
+//│     tmp = f1(tmp2);
 //│   } else {
 //│     tmp3 = 5;
 //│     tmp4 = tmp3;
-//│     tmp = f22(tmp4);
+//│     tmp = f2(tmp4);
 //│   }
 //│   x = tmp;
-//│   return x;
+//│   return x
 //│ };
-//│ test10()
-//│ = 1
+//│ test3()
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -305,16 +300,16 @@ fun test() =
   c(g(true))
 test()
 //│ JS (unsanitized):
-//│ let test13;
-//│ test13 = function test() {
+//│ let test4;
+//│ test4 = function test() {
 //│   let c, g, tmp;
 //│   g = function g(x) {
 //│     let scrut;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       return AA1(11);
+//│       return AA1(11)
 //│     } else {
-//│       return BB1(22);
+//│       return BB1(22)
 //│     }
 //│   };
 //│   c = function c(x) {
@@ -322,25 +317,25 @@ test()
 //│     if (x instanceof AA1.class) {
 //│       param01 = x.x;
 //│       x2 = param01;
-//│       return x2;
+//│       return x2
 //│     } else {
 //│       if (x instanceof BB1.class) {
 //│         param0 = x.x;
 //│         x1 = param0;
-//│         return x1;
+//│         return x1
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
 //│     }
 //│   };
 //│   tmp = g(true);
-//│   return c(tmp);
+//│   return c(tmp)
 //│ };
-//│ test13()
+//│ test4()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let test13;
-//│ test13 = function test() {
+//│ let test4;
+//│ test4 = function test() {
 //│   let c, g, tmp, tmp1, tmp2;
 //│   g = function g(x) {
 //│     let scrut, param0, x1, param01, x2, tmp3, tmp4;
@@ -349,24 +344,23 @@ test()
 //│       tmp3 = 11;
 //│       param01 = tmp3;
 //│       x2 = param01;
-//│       return x2;
+//│       return x2
 //│     } else {
 //│       tmp4 = 22;
 //│       param0 = tmp4;
 //│       x1 = param0;
-//│       return x1;
+//│       return x1
 //│     }
 //│   };
 //│   c = function c(x) {
-//│     return x;
+//│     return x
 //│   };
 //│   tmp1 = true;
 //│   tmp = g(tmp1);
 //│   tmp2 = tmp;
-//│   return c(tmp2);
+//│   return c(tmp2)
 //│ };
-//│ test13()
-//│ = 11
+//│ test4()
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 11
 
@@ -388,22 +382,22 @@ fun map(ls) = if ls is
   Cons(h, t) then Cons(h + 4, map(t))
 map(enumFromTo(1, 4))
 //│ JS (unsanitized):
-//│ let enumFromTo1, map1, tmp;
-//│ enumFromTo1 = function enumFromTo(a, b) {
+//│ let enumFromTo, map, tmp;
+//│ enumFromTo = function enumFromTo(a, b) {
 //│   let scrut, tmp1, tmp2;
 //│   scrut = a < b;
 //│   if (scrut === true) {
 //│     tmp1 = a + 1;
-//│     tmp2 = enumFromTo1(tmp1, b);
-//│     return Cons1(a, tmp2);
+//│     tmp2 = enumFromTo(tmp1, b);
+//│     return Cons1(a, tmp2)
 //│   } else {
-//│     return Nil1;
+//│     return Nil1
 //│   }
 //│ };
-//│ map1 = function map(ls) {
+//│ map = function map(ls) {
 //│   let param0, param1, h, t, tmp1, tmp2;
 //│   if (ls instanceof Nil1.class) {
-//│     return Nil1;
+//│     return Nil1
 //│   } else {
 //│     if (ls instanceof Cons1.class) {
 //│       param0 = ls.h;
@@ -411,19 +405,19 @@ map(enumFromTo(1, 4))
 //│       h = param0;
 //│       t = param1;
 //│       tmp1 = h + 4;
-//│       tmp2 = map1(t);
-//│       return Cons1(tmp1, tmp2);
+//│       tmp2 = map(t);
+//│       return Cons1(tmp1, tmp2)
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ };
-//│ tmp = enumFromTo1(1, 4);
-//│ map1(tmp)
+//│ tmp = enumFromTo(1, 4);
+//│ map(tmp)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let enumFromTo1, map1, tmp, tmp1, tmp2, tmp3;
-//│ enumFromTo1 = function enumFromTo(a, b) {
+//│ let enumFromTo, map, tmp, tmp1, tmp2, tmp3;
+//│ enumFromTo = function enumFromTo(a, b) {
 //│   let scrut, param0, param1, h, t, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20;
 //│   tmp8 = a;
 //│   tmp9 = b;
@@ -434,7 +428,7 @@ map(enumFromTo(1, 4))
 //│     tmp4 = tmp10 + tmp11;
 //│     tmp12 = tmp4;
 //│     tmp13 = b;
-//│     tmp5 = enumFromTo1(tmp12, tmp13);
+//│     tmp5 = enumFromTo(tmp12, tmp13);
 //│     tmp14 = a;
 //│     tmp15 = tmp5;
 //│     param0 = tmp14;
@@ -445,25 +439,24 @@ map(enumFromTo(1, 4))
 //│     tmp17 = 4;
 //│     tmp6 = tmp16 + tmp17;
 //│     tmp18 = t;
-//│     tmp7 = map1(tmp18);
+//│     tmp7 = map(tmp18);
 //│     tmp19 = tmp6;
 //│     tmp20 = tmp7;
-//│     return Cons1(tmp19, tmp20);
+//│     return Cons1(tmp19, tmp20)
 //│   } else {
-//│     return Nil1;
+//│     return Nil1
 //│   }
 //│ };
-//│ map1 = function map(ls) {
-//│   return ls;
+//│ map = function map(ls) {
+//│   return ls
 //│ };
 //│ tmp1 = 1;
 //│ tmp2 = 4;
-//│ tmp = enumFromTo1(tmp1, tmp2);
+//│ tmp = enumFromTo(tmp1, tmp2);
 //│ tmp3 = tmp;
-//│ map1(tmp3)
-//│ = Cons { h: 5, t: Cons { h: 6, t: Cons { h: 7, t: [Nil] } } }
+//│ map(tmp3)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = Cons { h: 5, t: Cons { h: 6, t: Cons { h: 7, t: [Nil] } } }
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
 
 
 
@@ -488,41 +481,41 @@ fun sum(ls) = if ls is
   Cons(h, t) then h + sum(t)
 sum(enumFromTo(1,10))
 //│ JS (unsanitized):
-//│ let enumFromTo4, sum1, tmp5;
-//│ enumFromTo4 = function enumFromTo(a, b) {
+//│ let enumFromTo1, sum, tmp5;
+//│ enumFromTo1 = function enumFromTo(a, b) {
 //│   let scrut, tmp6, tmp7;
 //│   scrut = a < b;
 //│   if (scrut === true) {
 //│     tmp6 = a + 1;
-//│     tmp7 = enumFromTo4(tmp6, b);
-//│     return Cons1(a, tmp7);
+//│     tmp7 = enumFromTo1(tmp6, b);
+//│     return Cons1(a, tmp7)
 //│   } else {
-//│     return Nil1;
+//│     return Nil1
 //│   }
 //│ };
-//│ sum1 = function sum(ls) {
+//│ sum = function sum(ls) {
 //│   let param0, param1, h, t, tmp6;
 //│   if (ls instanceof Nil1.class) {
-//│     return 0;
+//│     return 0
 //│   } else {
 //│     if (ls instanceof Cons1.class) {
 //│       param0 = ls.h;
 //│       param1 = ls.t;
 //│       h = param0;
 //│       t = param1;
-//│       tmp6 = sum1(t);
-//│       return h + tmp6;
+//│       tmp6 = sum(t);
+//│       return h + tmp6
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   }
 //│ };
-//│ tmp5 = enumFromTo4(1, 10);
-//│ sum1(tmp5)
+//│ tmp5 = enumFromTo1(1, 10);
+//│ sum(tmp5)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let enumFromTo4, sum1, tmp5, tmp6, tmp7, tmp8;
-//│ enumFromTo4 = function enumFromTo(a, b) {
+//│ let enumFromTo1, sum, tmp5, tmp6, tmp7, tmp8;
+//│ enumFromTo1 = function enumFromTo(a, b) {
 //│   let scrut, param0, param1, h, t, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22;
 //│   tmp12 = a;
 //│   tmp13 = b;
@@ -533,7 +526,7 @@ sum(enumFromTo(1,10))
 //│     tmp9 = tmp14 + tmp15;
 //│     tmp16 = tmp9;
 //│     tmp17 = b;
-//│     tmp10 = enumFromTo4(tmp16, tmp17);
+//│     tmp10 = enumFromTo1(tmp16, tmp17);
 //│     tmp18 = a;
 //│     tmp19 = tmp10;
 //│     param0 = tmp18;
@@ -541,23 +534,22 @@ sum(enumFromTo(1,10))
 //│     h = param0;
 //│     t = param1;
 //│     tmp20 = t;
-//│     tmp11 = sum1(tmp20);
+//│     tmp11 = sum(tmp20);
 //│     tmp21 = h;
 //│     tmp22 = tmp11;
-//│     return tmp21 + tmp22;
+//│     return tmp21 + tmp22
 //│   } else {
-//│     return 0;
+//│     return 0
 //│   }
 //│ };
-//│ sum1 = function sum(ls) {
-//│   return ls;
+//│ sum = function sum(ls) {
+//│   return ls
 //│ };
 //│ tmp6 = 1;
 //│ tmp7 = 10;
-//│ tmp5 = enumFromTo4(tmp6, tmp7);
+//│ tmp5 = enumFromTo1(tmp6, tmp7);
 //│ tmp8 = tmp5;
-//│ sum1(tmp8)
-//│ = 45
+//│ sum(tmp8)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 45
 
@@ -580,9 +572,9 @@ module Test with
     BB then f2(s.x)
 //│ JS (unsanitized):
 //│ let Test1;
-//│ const Test$class = class Test {
-//│   #s;
-//│   constructor() {
+//│ Test1 = class Test {
+//│   static #s;
+//│   static {
 //│     let scrut, scrut1, tmp10;
 //│     scrut = true;
 //│     if (scrut === true) {
@@ -593,55 +585,53 @@ module Test with
 //│     this.#s = tmp10;
 //│     scrut1 = this.#s;
 //│     if (scrut1 instanceof AA1.class) {
-//│       this.f1(this.#s.x)
+//│       Test.f1(this.#s.x)
 //│     } else {
 //│       if (scrut1 instanceof BB1.class) {
-//│         this.f2(this.#s.x)
+//│         Test.f2(this.#s.x)
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
 //│     }
 //│   }
-//│   f1(a) {
+//│   static f1(a) {
 //│     if (a instanceof A1.class) {
-//│       return 1;
+//│       return 1
 //│     } else {
 //│       if (a instanceof B1.class) {
-//│         return 2;
+//│         return 2
 //│       } else {
 //│         if (a instanceof C1.class) {
-//│           return 3;
+//│           return 3
 //│         } else {
 //│           throw new globalThis.Error("match error");
 //│         }
 //│       }
 //│     }
 //│   } 
-//│   f2(a1) {
+//│   static f2(a1) {
 //│     if (a1 instanceof A1.class) {
-//│       return 4;
+//│       return 4
 //│     } else {
 //│       if (a1 instanceof B1.class) {
-//│         return 5;
+//│         return 5
 //│       } else {
 //│         if (a1 instanceof C1.class) {
-//│           return 6;
+//│           return 6
 //│         } else {
 //│           throw new globalThis.Error("match error");
 //│         }
 //│       }
 //│     }
 //│   }
-//│   toString() { return "Test"; }
-//│ }; Test1 = new Test$class;
-//│ Test1.class = Test$class;
-//│ null
+//│   static toString() { return "Test"; }
+//│ };
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
 //│ let Test1;
-//│ const Test$class = class Test {
-//│   #s1;
-//│   constructor() {
+//│ Test1 = class Test {
+//│   static #s1;
+//│   static {
 //│     let scrut, scrut1, tmp10, tmp11, tmp12, tmp13, tmp14;
 //│     scrut = true;
 //│     if (scrut === true) {
@@ -655,48 +645,46 @@ module Test with
 //│     scrut1 = this.#s1;
 //│     if (scrut1 instanceof AA1.class) {
 //│       tmp13 = this.#s1.x;
-//│       this.f1(tmp13)
+//│       Test.f1(tmp13)
 //│     } else {
 //│       if (scrut1 instanceof BB1.class) {
 //│         tmp14 = this.#s1.x;
-//│         this.f2(tmp14)
+//│         Test.f2(tmp14)
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
 //│     }
 //│   }
-//│   f1(a) {
+//│   static f1(a) {
 //│     if (a instanceof A1.class) {
-//│       return 1;
+//│       return 1
 //│     } else {
 //│       if (a instanceof B1.class) {
-//│         return 2;
+//│         return 2
 //│       } else {
 //│         if (a instanceof C1.class) {
-//│           return 3;
+//│           return 3
 //│         } else {
 //│           throw new globalThis.Error("match error");
 //│         }
 //│       }
 //│     }
 //│   } 
-//│   f2(a1) {
+//│   static f2(a1) {
 //│     if (a1 instanceof A1.class) {
-//│       return 4;
+//│       return 4
 //│     } else {
 //│       if (a1 instanceof B1.class) {
-//│         return 5;
+//│         return 5
 //│       } else {
 //│         if (a1 instanceof C1.class) {
-//│           return 6;
+//│           return 6
 //│         } else {
 //│           throw new globalThis.Error("match error");
 //│         }
 //│       }
 //│     }
 //│   }
-//│   toString() { return "Test"; }
-//│ }; Test1 = new Test$class;
-//│ Test1.class = Test$class;
-//│ null
+//│   static toString() { return "Test"; }
+//│ };
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

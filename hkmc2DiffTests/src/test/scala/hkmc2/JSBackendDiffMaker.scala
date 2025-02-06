@@ -157,7 +157,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         val preStr = pre.stripBreaks.mkString(100)
         output(preStr)
         output(jsStr)
-        mkQuery("", preStr, jsStr)(using hostDeforest)
+        mkQuery("", preStr, jsStr)(using hostDeforest): stdout =>
+          stdout.splitSane('\n').init
+            .foreach: line =>
+              output(s"> ${line}")
         output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
       
     if js.isSet then
@@ -216,11 +219,19 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       // * Sometimes the JS block won't execute due to a syntax or runtime error so we always set this first
       host.execute(s"$resNme = undefined")
       
-      if deforestFlag.isSet && showJS.isUnset then // TODO: refine this logic...
-        mkQuery("", preStr, jsStr): stdout =>
+      mkQuery("", preStr, jsStr): stdout =>
           stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
             .foreach: line =>
               output(s"> ${line}")
+      
+      if deforestFlag.isSet && showJS.isUnset then // TODO: refine this logic...
+        mkQuery("", preStr, jsStr)(using hostDeforest): stdout =>
+          stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
+            .foreach: line =>
+              output(s"> ${line}")
+      
+      
+      
       if traceJS.isSet then
         host.execute("globalThis.Predef.TraceLogger.enabled = false")
       
