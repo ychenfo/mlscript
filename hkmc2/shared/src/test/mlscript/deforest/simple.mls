@@ -51,10 +51,11 @@ test()
 //│   x = tmp;
 //│   return x
 //│ };
-//│ test()
+//│ block$res2 = test();
+//│ undefined
+//│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
-
 
 :sjs
 :deforest
@@ -110,7 +111,9 @@ test()
 //│   x = tmp;
 //│   return x
 //│ };
-//│ test1()
+//│ block$res4 = test1();
+//│ undefined
+//│ = A
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = A
 
@@ -188,7 +191,9 @@ test()
 //│   x = tmp;
 //│   return x
 //│ };
-//│ test2()
+//│ block$res6 = test2();
+//│ undefined
+//│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -285,7 +290,9 @@ test()
 //│   x = tmp;
 //│   return x
 //│ };
-//│ test3()
+//│ block$res8 = test3();
+//│ undefined
+//│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -360,7 +367,9 @@ test()
 //│   tmp2 = tmp;
 //│   return c(tmp2)
 //│ };
-//│ test4()
+//│ block$res10 = test4();
+//│ undefined
+//│ = 11
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 11
 
@@ -454,7 +463,9 @@ map(enumFromTo(1, 4))
 //│ tmp2 = 4;
 //│ tmp = enumFromTo(tmp1, tmp2);
 //│ tmp3 = tmp;
-//│ map(tmp3)
+//│ block$res13 = map(tmp3);
+//│ undefined
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 
@@ -549,7 +560,9 @@ sum(enumFromTo(1,10))
 //│ tmp7 = 10;
 //│ tmp5 = enumFromTo1(tmp6, tmp7);
 //│ tmp8 = tmp5;
-//│ sum(tmp8)
+//│ block$res15 = sum(tmp8);
+//│ undefined
+//│ = 45
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 45
 
@@ -687,4 +700,5 @@ module Test with
 //│   }
 //│   static toString() { return "Test"; }
 //│ };
+//│ block$res17 = undefined;
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

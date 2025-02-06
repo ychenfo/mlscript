@@ -148,19 +148,72 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           output("\n==== deforested tree ====")
           output(deforestRes.showAsTree)
           output("\n")
-        val nestedScp = baseScp
-        val (pre, je) = nestedScp.givenIn:
-          jsb.worksheet(deforestRes)
+          
+        val resSym = new TempSymbol(S(blk), "block$res")  
+        
+        val resNme = baseScp.allocateName(resSym)
+        
+        val le0 = deforestRes.copy(main = deforestRes.main.mapTail:
+          case e: End =>
+            Assign(resSym, Value.Lit(syntax.Tree.UnitLit(false)), e)
+          case Return(res, implct) =>
+            assert(implct)
+            Assign(resSym, res, Return(Value.Lit(syntax.Tree.UnitLit(false)), true))
+          case _: HandleBlockReturn => ???
+          case tl: (Throw | Break | Continue) => tl
+        )
+        
+        val (pre, je) = baseScp.givenIn:
+          jsb.worksheet(le0)
         output("==== JS (deforested): ====")
         
         val jsStr = je.stripBreaks.mkString(100)
         val preStr = pre.stripBreaks.mkString(100)
         output(preStr)
         output(jsStr)
+        
+        
+        host.execute(s"$resNme = undefined")
         mkQuery("", preStr, jsStr)(using hostDeforest): stdout =>
           stdout.splitSane('\n').init
             .foreach: line =>
               output(s"> ${line}")
+        
+        if silent.isUnset then 
+          import Elaborator.Ctx.*
+          def definedValues = curCtx.env.iterator.flatMap:
+            case (nme, e @ (_: RefElem | SelElem(RefElem(_: InnerSymbol), _, _))) =>
+              e.symbol match
+              case S(ts: TermSymbol) if ts.k.isInstanceOf[syntax.ValLike] => S((nme, ts, N))
+              case S(ts: BlockMemberSymbol)
+                if ts.trmImplTree.exists(_.k.isInstanceOf[syntax.ValLike]) => S((nme, ts, N))
+              case S(vs: VarSymbol) => S((nme, vs, N))
+              case _ => N
+            case _ => N
+          val valuesToPrint = ("", resSym, expect.get) +: definedValues.toSeq.sortBy(_._1)
+          valuesToPrint.foreach: (nme, sym, expect) =>
+            val le =
+              import codegen.*
+              Return(
+                Call(
+                  Value.Ref(Elaborator.State.globalThisSymbol).selSN("Predef").selSN("printRaw"),
+                  Arg(false, Value.Ref(sym)) :: Nil)(true, false),
+              implct = true)
+            val je = baseScp.givenIn:
+              jsb.block(le, endSemi = false)
+            val jsStr = je.stripBreaks.mkString(100)
+            mkQuery("", "", jsStr)(using hostDeforest): out =>
+              val result = out.splitSane('\n').init.mkString // should always ends with "undefined" (TODO: check)
+              expect match
+              case S(expected) if result =/= expected => raise:
+                ErrorReport(msg"Expected: '${expected}', got: '${result}'" -> N :: Nil,
+                  source = Diagnostic.Source.Runtime)
+              case _ => ()
+              result match
+              case "undefined" =>
+              case "()" =>
+              case _ =>
+                output(s"${if nme.isEmpty then "" else s"$nme "}= ${result.indentNewLines("| ")}")
         output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
       
     if js.isSet then
@@ -224,11 +277,8 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
             .foreach: line =>
               output(s"> ${line}")
       
-      if deforestFlag.isSet && showJS.isUnset then // TODO: refine this logic...
-        mkQuery("", preStr, jsStr)(using hostDeforest): stdout =>
-          stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
-            .foreach: line =>
-              output(s"> ${line}")
+      if deforestFlag.isUnset || showJS.isUnset then
+        mkQuery("", preStr, jsStr)(using hostDeforest)(_ => ())
       
       
       
