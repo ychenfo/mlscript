@@ -43,7 +43,7 @@ case object NoProd extends ProdStrat
 
 
 // enum ConsStrat:
-case class Dtor(scrut: ResultId, arms: Ls[Case -> Block]) extends ConsStrat
+case class Dtor(scrut: ResultId)(val arms: Ls[Case -> Block]) extends ConsStrat
 case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
 case class ConsVar(s: StratVarState) extends ConsStrat with StratVarTrait(s)
@@ -212,7 +212,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val scrutStrat = processResult(scrut)
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map { case (Case.Cls(s, _), body) => 
-          constrain(scrutStrat, Dtor(scrut.uid, arms))
+          constrain(scrutStrat, Dtor(scrut.uid)(arms))
           // TODO: fix this "asInstanceOf"?
           processBlock(body)(using S(scrutStrat.asInstanceOf[ProdVar] -> s))
         }
@@ -374,16 +374,16 @@ class Deforest(using TL, Raise, Elaborator.State):
       cache += c
       
       (prod, cons) match
-        case (ctorStrat@Ctor(ctor, args), Dtor(scrut, arms)) =>
+        case (ctorStrat@Ctor(ctor, args), dtorStrat@Dtor(scrut)) =>
           ctorDests.updateWith(ctorStrat.expr){
             case Some(d -> s) =>
               Some(
                 (d.updatedWith(scrut){
-                  case None => Some(arms)
-                  case Some(v) => Some(arms ::: v)
+                  case None => Some(dtorStrat.arms)
+                  case Some(v) => Some(dtorStrat.arms ::: v)
                 }) -> s
               )
-            case None => Some(Map(scrut -> arms) -> Nil)
+            case None => Some(Map(scrut -> dtorStrat.arms) -> Nil)
           }
           dtorSources += DtorExpr.Match(scrut) -> (ctorStrat.expr :: dtorSources(DtorExpr.Match(scrut)))
         case (ctorStrat@Ctor(ctor, args), selDtor@FieldSel(field, consVar)) =>
@@ -432,13 +432,13 @@ class Deforest(using TL, Raise, Elaborator.State):
           }
           // upperBounds(uid).foreach(c => handle(prod -> c))
         case (Ctor(ctor, args), NoCons) => ()
-        case (ProdFun(l, r), Dtor(cls, _)) => ???
+        case (ProdFun(l, r), Dtor(cls)) => ???
         case (ProdFun(l, r), FieldSel(field, consVar)) => ???
         case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
           lc.zip(lp).foreach(handle)
           handle(rp, rc)
         case (ProdFun(l, r), NoCons) => ()
-        case (NoProd, Dtor(cls, _)) => ()
+        case (NoProd, Dtor(cls)) => ()
         case (NoProd, FieldSel(field, consVar)) => ()
         case (NoProd, ConsFun(l, r)) => ()
         case (NoProd, NoCons) => ()
