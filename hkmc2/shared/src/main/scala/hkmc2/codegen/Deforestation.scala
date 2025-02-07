@@ -88,11 +88,20 @@ extension (r: Result)
 extension (m: Match)
   def mergeArms: Match =
     val Match(s, arms, dflt, rest) = m
-    dflt.map(_.mergeMatchArms).fold(m){
+    dflt.map(_.mergeMatchArms).fold(m):
       case m@Match(s2, arms2, dflt2, _: End) if s2 === s =>
-        Match(s, arms ::: arms2, dflt2, rest.mergeMatchArms)
-      case d => Match(s, arms, S(d), rest)
-    }
+        Match(
+          s,
+          (arms ::: arms2).map((cse, b) => (cse, b.mergeMatchArms)),
+          dflt2,
+          rest.mergeMatchArms
+        )
+      case d => Match(
+        s,
+        arms.map((cse, b) => (cse, b.mergeMatchArms)),
+        S(d),
+        rest.mergeMatchArms
+      )
 
 extension (b: Block)
   def mapRes(f: Result => Block): Block = b match
