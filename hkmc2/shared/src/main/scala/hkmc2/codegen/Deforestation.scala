@@ -204,7 +204,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     s match
       case _: BuiltinSymbol => NoProd
       case _: TopLevelSymbol => NoProd
-      case _: BlockMemberSymbol => symToStrat(s) // For `fun` and `let` only, not classes or modules?
+      case _: BlockMemberSymbol => symToStrat.getOrElse(s, {tl.log(""); NoProd}) // For `fun` and `let` only, not classes or modules?
       case _: LocalSymbol => symToStrat(s)
       case _: FlowSymbol => symToStrat(s)
   
