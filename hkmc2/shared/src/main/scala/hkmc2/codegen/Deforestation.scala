@@ -57,7 +57,7 @@ enum DtorExpr:
   case Sel(s: ResultId)
 
 enum CtorFinalDest:
-  case Match(scrut: ResultId, arms: Ls[Case -> Block], selInArms: Ls[ResultId])
+  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId])
   case Sel(s: ResultId)
 
 trait FieldSelTrait:
@@ -521,7 +521,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             case Select(Value.Ref(l), nme) => l == scrut
             case _ => false
           } then
-            Some(CtorFinalDest.Match(dtors.head._1, dtors.head._2.arms, sels))
+            Some(CtorFinalDest.Match(dtors.head._1, dtors.head._2, sels))
           else
             throw Error("more than one consumer")
             None
@@ -595,8 +595,8 @@ class Deforest(using TL, Raise, Elaborator.State):
           filteredCtorDests.get(call.uid) match
             case None =>
               handleNormalCall(args)
-            case Some(CtorFinalDest.Match(scrut, arms, sels)) =>
-              val body = arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
+            case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
+              val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
               tl.log(call.toString() + " ----> " + body)
               
               val newArgs = args.map(_ => TempSymbol(N))
@@ -634,8 +634,8 @@ class Deforest(using TL, Raise, Elaborator.State):
           filteredCtorDests.get(s.uid) match
             case None => 
               k(s)
-            case Some(CtorFinalDest.Match(scrut, arms, sels)) =>
-              val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
+            case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
+              val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               tl.log(mod.toString + " ----> " + body)
               
               body._2.mapRes(k)
@@ -647,8 +647,8 @@ class Deforest(using TL, Raise, Elaborator.State):
           filteredCtorDests.get(r.uid) match
             case None => 
               k(r)
-            case Some(CtorFinalDest.Match(scrut, arms, sels)) =>
-              val body = arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
+            case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
+              val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               tl.log(mod.toString + " ----> " + body)
               body._2.mapRes(k)
             case Some(_) => ??? // TODO: a selection on a module consumes it
