@@ -207,7 +207,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       case _: BuiltinSymbol => NoProd
       case _: TopLevelSymbol => NoProd
       case _: BlockMemberSymbol => symToStrat.getOrElse(s, {tl.log(s"${s.nme} no strat"); NoProd}) // For `fun` and `let` only, not classes or modules?
-      case _: LocalSymbol => symToStrat(s)
+      case _: LocalSymbol => symToStrat.getOrElse(s, NoProd)
       case _: FlowSymbol => symToStrat(s)
   
   def getClsFields(s: ClassSymbol) = s.tree.clsParams
@@ -253,6 +253,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       processBlock(sub)
       processBlock(rest)
     case Define(defn, rest) =>
+      processBlock(rest)
       defn match
         case FunDefn(_, sym, params, body) =>
           val funSymStratVar = freshVar(sym.nme)
@@ -275,7 +276,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           }
           processBlock(c.ctor)
         case _ => ??? // TODO:
-      processBlock(rest)
+      
     case End(msg) => NoProd
     case Throw(exc) => NoProd
     case AssignField(lhs, nme, rhs, rest) => ???
