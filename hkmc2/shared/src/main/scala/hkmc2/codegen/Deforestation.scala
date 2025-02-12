@@ -173,7 +173,16 @@ extension (b: Block)
 
 class Deforest(using TL, Raise, Elaborator.State):
   
+  object StratVarUidHandler extends Uid.Handler[StratVar]()
+  given Uid.Handler[StratVar]#State = StratVarUidHandler.State()
+  import StratVarState.freshVar
+  
   def apply(p: Program) =
+    // allocate type vars for defined symbols in the blocks
+    symToStrat.init(p.main)
+    // p.main.definedVars.foreach: v => 
+    //   symToStrat += v -> freshVar(v.nme)._1
+  
     processBlock(p.main.mergeMatchArms)
     resolveConstraints
 
@@ -199,22 +208,48 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
   
-  val symToStrat = mutable.Map.empty[Symbol, ProdVar]
-  // currently, symbols that shouldn't be read from ctx are symbols for ctors (class/object) blkMem symbols
-  // TODO: ctor as a function?
-  def getStratOfSym(s: Symbol) =
-    s match
-      case _: BuiltinSymbol => NoProd
-      case _: TopLevelSymbol => NoProd
-      case _: BlockMemberSymbol => symToStrat.getOrElse(s, {tl.log(s"${s.nme} no strat"); NoProd}) // For `fun` and `let` only, not classes or modules?
-      case _: LocalSymbol => symToStrat.getOrElse(s, NoProd)
-      case _: FlowSymbol => symToStrat(s)
+  object symToStrat:
+    val store = mutable.Map.empty[Symbol, ProdVar]
+    
+    def init(p: Block) =
+      if store.isEmpty then
+        object AllVarsSymbolSubst extends SymbolSubst:
+          override def mapBlockMemberSym(s: BlockMemberSymbol): BlockMemberSymbol =
+            store += s -> freshVar(s.nme)._1; s
+          override def mapFlowSym(s: FlowSymbol): FlowSymbol =
+            store += s -> freshVar(s.nme)._1; s
+          override def mapTempSym(s: TempSymbol): TempSymbol =
+            store += s -> freshVar(s.nme)._1; s
+          override def mapVarSym(s: VarSymbol): VarSymbol =
+            store += s -> freshVar(s.nme)._1; s
+          override def mapInstSym(s: InstSymbol): InstSymbol =
+            store += s -> freshVar(s.nme)._1; s
+          override def mapTermSym(s: TermSymbol): TermSymbol =
+            store += s -> freshVar(s.nme)._1; s
+          override def mapClsSym(s: ClassSymbol): ClassSymbol =
+            store += s -> freshVar(s.nme)._1; s
+          override def mapModuleSym(s: ModuleSymbol): ModuleSymbol =
+            store += s -> freshVar(s.nme)._1; s
+        object FreshVarForAllVars extends BlockTransformer(AllVarsSymbolSubst)
+        FreshVarForAllVars.applyBlock(p)
+    
+    // currently, symbols that shouldn't be read from ctx are symbols for ctors (class/object) blkMem symbols
+    // TODO: ctor as a function?
+    def getStratOfSym(s: Symbol) =
+      s match
+        case _: BuiltinSymbol => NoProd
+        case _: TopLevelSymbol => NoProd
+        case _: BlockMemberSymbol => store.getOrElse(s, {tl.log(s"${s.nme} no strat"); NoProd}) // For `fun` and `let` only, not classes or modules?
+        case _: LocalSymbol => store.getOrElse(s, NoProd)
+        case _: FlowSymbol => store(s)
+    def get(s: Symbol) = store.get(s)
+    def +=(e: Symbol -> ProdVar) = store += e
+    def addAll(es: Iterable[Symbol -> ProdVar]) = es.foreach(store += _)
+    def apply(s: Symbol) = store(s)
   
   def getClsFields(s: ClassSymbol) = s.tree.clsParams
 
-  object StratVarUidHandler extends Uid.Handler[StratVar]()
-  given Uid.Handler[StratVar]#State = StratVarUidHandler.State()
-  import StratVarState.freshVar
+  
   
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
@@ -242,10 +277,10 @@ class Deforest(using TL, Raise, Elaborator.State):
     case Return(res, implct) => processResult(res)
     case Assign(lhs, rhs, rest) =>
       symToStrat.get(lhs) match
-        case None =>
-          val lhsTpeVar = freshVar(lhs.nme)
-          constrain(processResult(rhs), lhsTpeVar._2)
-          symToStrat += lhs -> lhsTpeVar._1
+        // case None =>
+        //   val lhsTpeVar = freshVar(lhs.nme)
+        //   constrain(processResult(rhs), lhsTpeVar._2)
+        //   symToStrat += lhs -> lhsTpeVar._1
         case Some(v) =>
           constrain(processResult(rhs), v.asConsStrat)
       processBlock(rest)
@@ -256,13 +291,14 @@ class Deforest(using TL, Raise, Elaborator.State):
       processBlock(rest)
       defn match
         case FunDefn(_, sym, params, body) =>
-          val funSymStratVar = freshVar(sym.nme)
-          symToStrat += sym -> funSymStratVar._1
+          // val funSymStratVar = freshVar(sym.nme)
+          // symToStrat += sym -> funSymStratVar._1
+          val funSymStratVar = symToStrat(sym)
           val param = params.head match
             case ParamList(flags, params, restParam) => params
           val funStrat = constrFun(param, body) // TODO: handle mutiple param list
-          constrain(funStrat, funSymStratVar._2)
-          funSymStratVar._1
+          constrain(funStrat, funSymStratVar.asConsStrat)
+          funSymStratVar
         case ValDefn(owner, k, sym, rhs) => NoProd // TODO:
         case c: ClsLikeDefn if c.sym.asMod.isDefined =>
           c.methods.foreach{ case FunDefn(_, sym, params, body) => 
@@ -311,7 +347,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             case Some(None) =>
               val funSym = s.symbol.get
               val appRes = freshVar("call_" + funSym.nme + "_res")
-              constrain(getStratOfSym(funSym), ConsFun(argsTpe, appRes._2))
+              constrain(symToStrat.getStratOfSym(funSym), ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(Some(s)) =>
               val clsFields = getClsFields(s)
@@ -323,7 +359,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               Ctor(s, clsFields.zip(argsTpe).toMap)(c.uid)
             case _ => // then it is a function
               val appRes = freshVar("call_" + l.nme + "_res")
-              constrain(getStratOfSym(l), ConsFun(argsTpe, appRes._2))
+              constrain(symToStrat.getStratOfSym(l), ConsFun(argsTpe, appRes._2))
               appRes._1
         case lam@Value.Lam(params, body) =>
           val funTpe = processResult(lam)
@@ -358,7 +394,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             tpeVar._1
             
     case v@Value.Ref(l) => l.asObj match
-      case None => getStratOfSym(l)
+      case None => symToStrat.getStratOfSym(l)
       case Some(m) => Ctor(m, Map.empty)(v.uid)
     
     case Value.This(sym) => ???
