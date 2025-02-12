@@ -288,7 +288,6 @@ class Deforest(using TL, Raise, Elaborator.State):
       processBlock(sub)
       processBlock(rest)
     case Define(defn, rest) =>
-      processBlock(rest)
       defn match
         case FunDefn(_, sym, params, body) =>
           // val funSymStratVar = freshVar(sym.nme)
@@ -312,7 +311,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           }
           processBlock(c.ctor)
         case _ => ??? // TODO:
-      
+      processBlock(rest)
     case End(msg) => NoProd
     case Throw(exc) => NoProd
     case AssignField(lhs, nme, rhs, rest) => ???
@@ -323,11 +322,11 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def constrFun(params: Ls[Param], body: Block)(using inArm: Option[ProdVar -> ClsOrModSymbol] = N) =
     val paramSyms = params.map{ case Param(_, sym, _) => sym }
-    val paramStrats = paramSyms.map{ sym => freshVar(sym.name) }
-    symToStrat.addAll(paramSyms.zip(paramStrats.map(_._1)))
+    val paramStrats = paramSyms.map{ sym => symToStrat(sym) }
+    symToStrat.addAll(paramSyms.zip(paramStrats))
     val res = freshVar()
     constrain(processBlock(body), res._2)
-    ProdFun(paramStrats.map(_._2), res._1)
+    ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   
   def processResult(r: Result)(using inArm: Option[ProdVar -> ClsOrModSymbol]): ProdStrat = r match
     case c@Call(f, args) =>
