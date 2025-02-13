@@ -106,24 +106,6 @@ extension (m: Match)
       )
 
 extension (b: Block)
-  def mapRes(f: Result => Block): Block = b match
-    case Return(res, implct) => f(res)
-    case Assign(lhs, rhs, rest: End) => f(rhs)
-    case Assign(lhs, rhs, rest) => Assign(lhs, rhs, rest.mapRes(f))
-    case Define(defn, rest) => Define(defn, rest.mapRes(f))
-    // case Match(scrut, arms, dflt, e: End) => Match(scrut, arms)
-    // case Match(scrut, arms, dflt, rest) => Match(scrut, arms, dflt, rest.mapRes(f))
-    case Throw(exc) => ???
-    case Label(label, body, rest) => ???
-    case Break(label) => ???
-    case Continue(label) => ???
-    case Begin(sub, rest) => ???
-    case TryBlock(sub, finallyDo, rest) => ???
-    case AssignField(_, _, _, _) => ???
-    case _: HandleBlock => ???
-    case HandleBlockReturn(res) => ???
-    case End(msg) => ???
-  
   def replaceSelect(using p: Set[ResultId], args: Map[Tree.Ident, Path]): Block = b match
     case Assign(lhs, rhs, rest) => Assign(lhs, rhs.replaceSelect, rest.replaceSelect)
     case Return(res, implct) => Return(res.replaceSelect, implct)
@@ -141,28 +123,18 @@ extension (b: Block)
     // case HandleBlockReturn(res) => ???
     // case End(msg) => ???
   
+  def hasExplicitRet: Boolean =
+    object HasExplicitRetTransformer extends BlockTransformer(new SymbolSubst()):
+      var flag = false
+      override def applyBlock(b: Block): Block = b match
+        case Return(_, imp) => flag = !imp; b
+        case Define(defn, rest) => applyBlock(rest)
+        case _ => super.applyBlock(b)
+      override def applyResult(r: Result): Result = r
+    
+    HasExplicitRetTransformer.applyBlock(b)
+    HasExplicitRetTransformer.flag
   
-  def replaceAssignments(args: List[Path]): Block = args match
-    case head :: tail => b match
-      case Assign(lhs, rhs, rest) => Assign(lhs, head, rest.replaceAssignments(tail))
-    case Nil => b
-  
-  def hasImplctRet: Boolean = b match
-    case Match(scrut, arms, dflt, rest) => arms.map(a => a._2).appendedAll(dflt).exists(b => b.hasImplctRet)
-    case Return(res, implct) => implct
-    case Assign(lhs, rhs, rest) => rest.hasImplctRet
-    case Define(defn, rest) => rest.hasImplctRet
-    case End(msg) => false
-    case _ => false
-    // case Throw(exc) => 
-    // case Label(label, body, rest) =>
-    // case Break(label) =>
-    // case Continue(label) =>
-    // case Begin(sub, rest) =>
-    // case TryBlock(sub, finallyDo, rest) =>
-    // case AssignField(symbol) =>
-    // case HandleBlock(lhs, res, cls, handlers, body, rest) =>
-    // case HandleBlockReturn(res) =>
   
   def mergeMatchArms: Block =
     object MergeMatchArmTransformer extends BlockTransformer(new SymbolSubst()):
@@ -674,7 +646,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
           
-          Return(Call(scrut, Nil)(false, false), rest.hasImplctRet) // TODO: free var application
+          Return(Call(scrut, Nil)(false, false), !rest.hasExplicitRet) // TODO: free var application
         else
           Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
       case Return(res, implct) =>
@@ -695,7 +667,12 @@ class Deforest(using TL, Raise, Elaborator.State):
       // case Continue(label) => ???
       // case TryBlock(sub, finallyDo, rest) => ???
     
-    def makeLambda(body: Block) = Value.Lam(ParamList(ParamListFlags.empty, Nil, N), body)
+    def makeLambda(body: Block) = Value.Lam(
+      ParamList(ParamListFlags.empty, Nil, N),
+      body.mapTail:
+        case Return(res, implct) => Return(res, false)
+        case t => t
+    )
     
     override def applyResult2(r: Result)(k: Result => Block): Block = r match
       case call@Call(f, args) =>
