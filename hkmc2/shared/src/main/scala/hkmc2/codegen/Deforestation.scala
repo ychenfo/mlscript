@@ -74,19 +74,6 @@ trait StratVarTrait(stratState: StratVarState):
   lazy val asConsStrat = stratState.asConsStrat
   lazy val uid = stratState.uid
 
-extension (r: Result)
-  def replaceSelect(using p: Set[ResultId], args: Map[Tree.Ident, Path]): Result = r match
-    case c@Call(f, args) => Call(f, args.map{case Arg(spread, value) => Arg(spread, value.replaceSelect.asInstanceOf[Path])})(c.isMlsFun, c.mayRaiseEffects)
-    case sel@Select(path, nme) =>
-      if p.contains(sel.uid) then args(nme) else sel
-    case _ => r
-    // case Value.Ref(l) => r
-    // case Instantiate(cls, args) => ???
-    // case Value.This(sym) => ???
-    // case Value.Lit(lit) => ???
-    // case Value.Lam(params, body) => ???
-    // case Value.Arr(elems) => ???
-
 extension (m: Match)
   def mergeArms: Match =
     val Match(s, arms, dflt, rest) = m
@@ -106,22 +93,12 @@ extension (m: Match)
       )
 
 extension (b: Block)
-  def replaceSelect(using p: Set[ResultId], args: Map[Tree.Ident, Path]): Block = b match
-    case Assign(lhs, rhs, rest) => Assign(lhs, rhs.replaceSelect, rest.replaceSelect)
-    case Return(res, implct) => Return(res.replaceSelect, implct)
-    case Match(scrut, arms, dflt, rest) => ???
-    case _ => b
-    // case Throw(exc) => ???
-    // case Label(label, body, rest) => ???
-    // case Break(label) => ???
-    // case Continue(label) => ???
-    // case Begin(sub, rest) => ???
-    // case TryBlock(sub, finallyDo, rest) => ???
-    // case AssignField(_, _, _, _) => ???
-    // case Define(defn, rest) => ???
-    // case HandleBlock(lhs, res, cls, handlers, body, rest) => ???
-    // case HandleBlockReturn(res) => ???
-    // case End(msg) => ???
+  def replaceSelect(using ss: Set[ResultId], args: Map[Tree.Ident, Path]): Block =
+    object ReplaceSelectTransformer extends BlockTransformer(new SymbolSubst()):
+      override def applyPath(p: Path): Path = p match
+        case s@Select(_, nme) if ss(s.uid) => args(nme)
+        case _ => p
+    ReplaceSelectTransformer.applyBlock(b)
   
   def hasExplicitRet: Boolean =
     object HasExplicitRetTransformer extends BlockTransformer(new SymbolSubst()):
@@ -645,8 +622,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
-          
-          Return(Call(scrut, Nil)(false, false), !rest.hasExplicitRet) // TODO: free var application
+          val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
+          Return(Call(scrut, Nil)(false, false), !needExplicitRet) // TODO: free var application
         else
           Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
       case Return(res, implct) =>
@@ -695,14 +672,14 @@ class Deforest(using TL, Raise, Elaborator.State):
             case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
               val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
               // tl.log(call.toString() + " ----> " + body)
-              val bodyAndRest = Begin(body, expr.rest) // TODO: need return, and make it a lambda?
               
               val newArgs = args.map(_ => TempSymbol(N))
               
               val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
+              val bodyAndRest = Begin(body.replaceSelect(using sels.toSet, idsToArgs), expr.rest)
               
               args.zip(newArgs).foldRight[Block](k(makeLambda(
-                applyBlock(bodyAndRest.replaceSelect(using sels.toSet, idsToArgs))
+                applyBlock(bodyAndRest)
               ))){ case ((a, tmp), rest) =>
                 applyResult2(a.value): r =>
                   Assign(tmp, r, rest)
