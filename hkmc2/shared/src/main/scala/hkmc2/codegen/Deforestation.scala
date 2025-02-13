@@ -170,6 +170,89 @@ extension (b: Block)
         case m: Match => m.mergeArms
         case _ => super.applyBlock(b)
     MergeMatchArmTransformer.applyBlock(b)
+  
+  def flattened = b.flatten(identity)
+      
+  private def flatten(k: End => Block): Block = b match
+    case Match(scrut, arms, dflt, rest) =>
+      val newRest = rest.flatten(k)
+      val newArms = arms.mapConserve: arm =>
+        val newBody = arm._2.flattened
+        if newBody is arm._2 then arm else (arm._1, newBody)
+      val newDflt = dflt.map(_.flattened)
+      if (newRest is rest) && (newArms is arms) && (dflt is newDflt)
+      then b
+      else Match(scrut, newArms, newDflt, newRest)
+
+    case Label(label, body, rest) =>
+      val newBody = body.flattened
+      val newRest = rest.flatten(k)
+      if (newBody is body) && (newRest is rest)
+      then b
+      else Label(label, newBody, newRest)
+      
+    case Begin(sub, rest) =>
+      sub.flatten(_ => rest.flatten(k))
+    
+    case TryBlock(sub, finallyDo, rest) =>
+      val newSub = sub.flattened
+      val newFinallyDo = finallyDo.flattened
+      val newRest = rest.flatten(k)
+      if (newSub is sub) && (newFinallyDo is finallyDo) && (newRest is rest)
+      then b
+      else TryBlock(newSub, newFinallyDo, newRest)
+      
+    case Assign(lhs, rhs, rest) =>
+      val newRest = rest.flatten(k)
+      if newRest is rest
+      then b
+      else Assign(lhs, rhs, newRest)
+      
+    case a@AssignField(lhs, nme, rhs, rest) =>
+      val newRest = rest.flatten(k)
+      if newRest is rest
+      then b
+      else AssignField(lhs, nme, rhs, newRest)(a.symbol)
+      
+    case AssignDynField(lhs, fld, arrayIdx, rhs, rest) =>
+      val newRest = rest.flatten(k)
+      if newRest is rest
+      then b
+      else AssignDynField(lhs, fld, arrayIdx, rhs, newRest)
+    
+    case Define(defn, rest) =>
+      val newDefn = defn match
+        case d: FunDefn =>
+          val newBody = d.body.flattened
+          if newBody is d.body
+          then d
+          else d.copy(body = newBody)
+        case v: ValDefn => v
+        case c: ClsLikeDefn =>
+          val newPreCtor = c.preCtor.flattened
+          val newCtor = c.ctor.flattened
+          if (newPreCtor is c.preCtor) && (newCtor is c.ctor)
+          then c
+          else c.copy(preCtor = newPreCtor, ctor = newCtor)
+      
+      val newRest = rest.flatten(k)
+      if (newDefn is defn) && (newRest is rest)
+      then b
+      else Define(newDefn, newRest)
+    
+    case HandleBlock(lhs, res, par, args, cls, handlers, body, rest) =>
+      val newHandlers = handlers.mapConserve: h =>
+        val newBody = h.body.flattened
+        if newBody is h.body then h else h.copy(body = newBody)
+      val newBody = body.flattened
+      val newRest = rest.flatten(k)
+      if (newHandlers is handlers) && (newBody is body) && (newRest is rest)
+      then b
+      else HandleBlock(lhs, res, par, args, cls, newHandlers, newBody, newRest)
+
+    case e: End => k(e)
+    case t: BlockTail => b
+  
 
 class Deforest(using TL, Raise, Elaborator.State):
   
@@ -178,12 +261,15 @@ class Deforest(using TL, Raise, Elaborator.State):
   import StratVarState.freshVar
   
   def apply(p: Program) =
+    val flattenP = p.main.flattened
+    val mergedArms = flattenP.mergeMatchArms
+  
     // allocate type vars for defined symbols in the blocks
     symToStrat.init(p.main)
     // p.main.definedVars.foreach: v => 
     //   symToStrat += v -> freshVar(v.nme)._1
   
-    processBlock(p.main.mergeMatchArms)
+    processBlock(mergedArms)
     resolveConstraints
 
     tl.log("upper:")
@@ -202,7 +288,10 @@ class Deforest(using TL, Raise, Elaborator.State):
     tl.log("dtor -> ctor")
     resolveClashes._2.foreach(l => tl.log("\t" + l))
     
-    rewrite(p)
+    Program(
+      p.imports,
+      rewrite(mergedArms)
+    )
     
   
   
@@ -576,28 +665,22 @@ class Deforest(using TL, Raise, Elaborator.State):
     case CtorFinalDest.Match(scrut, _, _) => scrut
   }.toSet
   
-  def rewrite(p: Program) =
-    Program(
-      p.imports,
-      DeforestTransformer.applyBlock(p.main)
-    )
+  def rewrite(p: Block) =
+    DeforestTransformer.applyBlock(p)
   
   object DeforestTransformer extends BlockTransformer(new SymbolSubst()):
     
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
-          // TODO:
-          rest match
-            case End(msg) => Return(scrut, mat.hasImplctRet) // TODO: true or false?
-            case _ => rest
+          
+          Return(Call(scrut, Nil)(false, false), rest.hasImplctRet) // TODO: free var application
         else
           Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
       case Return(res, implct) =>
         applyResult2(res)(r => Return(r, implct))
       case Assign(lhs, rhs, rest) =>
         applyResult2(rhs)(r => Assign(lhs, r, applyBlock(rest)))
-      case Begin(sub, rest) => Begin(applyBlock(sub), applyBlock(rest))
       case d@Define(defn, rest) =>
         defn match
           case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, applyBlock(body)), applyBlock(rest))
@@ -612,6 +695,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       // case Continue(label) => ???
       // case TryBlock(sub, finallyDo, rest) => ???
     
+    def makeLambda(body: Block) = Value.Lam(ParamList(ParamListFlags.empty, Nil, N), body)
     
     override def applyResult2(r: Result)(k: Result => Block): Block = r match
       case call@Call(f, args) =>
@@ -633,13 +717,16 @@ class Deforest(using TL, Raise, Elaborator.State):
               handleNormalCall(args)
             case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
               val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
-              tl.log(call.toString() + " ----> " + body)
+              // tl.log(call.toString() + " ----> " + body)
+              val bodyAndRest = Begin(body, expr.rest) // TODO: need return, and make it a lambda?
               
               val newArgs = args.map(_ => TempSymbol(N))
               
               val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
               
-              args.zip(newArgs).foldRight[Block](applyBlock(body.replaceSelect(using sels.toSet, idsToArgs)).mapRes(k)){ case ((a, tmp), rest) =>
+              args.zip(newArgs).foldRight[Block](k(makeLambda(
+                applyBlock(bodyAndRest.replaceSelect(using sels.toSet, idsToArgs))
+              ))){ case ((a, tmp), rest) =>
                 applyResult2(a.value): r =>
                   Assign(tmp, r, rest)
               }
@@ -672,9 +759,9 @@ class Deforest(using TL, Raise, Elaborator.State):
               k(s)
             case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
               val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
-              tl.log(mod.toString + " ----> " + body)
-              
-              body._2.mapRes(k)
+              // tl.log(mod.toString + " ----> " + body)
+              val bodyAndRest = Begin(body._2, expr.rest)
+              k(makeLambda(bodyAndRest))
             case Some(_) => ??? // TODO: a selection on a module consumes it
       
       case r@Value.Ref(l) => l.asObj match
@@ -685,8 +772,9 @@ class Deforest(using TL, Raise, Elaborator.State):
               k(r)
             case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
               val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
-              tl.log(mod.toString + " ----> " + body)
-              body._2.mapRes(k)
+              // tl.log(mod.toString + " ----> " + body)
+              val bodyAndRest = Begin(body._2, expr.rest)
+              k(makeLambda(bodyAndRest))
             case Some(_) => ??? // TODO: a selection on a module consumes it
       case Value.This(sym) => k(Value.This(sym))
       case Value.Lit(lit) => k(Value.Lit(lit))
