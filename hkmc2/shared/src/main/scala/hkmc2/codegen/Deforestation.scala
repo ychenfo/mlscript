@@ -651,6 +651,31 @@ class Deforest(using TL, Raise, Elaborator.State):
         case t => t
     )
     
+    object matchRest:
+      val store = mutable.Map.empty[ResultId, FunDefn]
+      
+      def getOrElse(s: ResultId, restRewritten: Block): Opt[Symbol] =
+        store.get(s) match
+          case Some(s) => Some(s.sym)
+          case None if restRewritten.isInstanceOf[End] || (resolveClashes._2(DtorExpr.Match(s)).length == 1) => None
+          case _ => // now need to build a new function and update the store
+            val sym = BlockMemberSymbol(s"match_${s}_rest", Nil)
+            val freeVarsAndTheirNewSyms = restRewritten.freeVars.map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
+            
+            object ReplaceLocalSymTransformer extends BlockTransformer(new SymbolSubst()):
+              override def applyLocal(sym: Local): Local = freeVarsAndTheirNewSyms.getOrElse(sym, sym)
+            
+            // val newVars = freeVars.
+            val newFunDef = FunDefn(
+              N,
+              sym,
+              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N) :: Nil,
+              ReplaceLocalSymTransformer.applyBlock(restRewritten)
+            )
+            store += s -> newFunDef
+            Some(sym)
+      
+    
     override def applyResult2(r: Result)(k: Result => Block): Block = r match
       case call@Call(f, args) =>
         def handleNormalCall(args: List[Arg]) =
@@ -676,7 +701,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               val newArgs = args.map(_ => TempSymbol(N))
               
               val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
-              val bodyAndRest = Begin(body.replaceSelect(using sels.toSet, idsToArgs), expr.rest)
+              val bodyAndRest = Begin(body.replaceSelect(using sels.toSet, idsToArgs), applyBlock(expr.rest))
               
               args.zip(newArgs).foldRight[Block](k(makeLambda(
                 applyBlock(bodyAndRest)
@@ -714,7 +739,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
               val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               // tl.log(mod.toString + " ----> " + body)
-              val bodyAndRest = Begin(body._2, expr.rest)
+              val bodyAndRest = Begin(body._2, applyBlock(expr.rest))
               k(makeLambda(bodyAndRest))
             case Some(_) => ??? // TODO: a selection on a module consumes it
       
@@ -727,7 +752,9 @@ class Deforest(using TL, Raise, Elaborator.State):
             case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
               val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               // tl.log(mod.toString + " ----> " + body)
-              val bodyAndRest = Begin(body._2, expr.rest)
+              
+              // val bodyAndRest = Begin(body._2, applyBlock(expr.rest))
+              val bodyAndRest = Begin(body._2, applyBlock(expr.rest))
               k(makeLambda(bodyAndRest))
             case Some(_) => ??? // TODO: a selection on a module consumes it
       case Value.This(sym) => k(Value.This(sym))
