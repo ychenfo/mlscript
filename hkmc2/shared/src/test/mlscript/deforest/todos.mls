@@ -1,0 +1,146 @@
+:js
+:deforest
+
+object A
+object B
+object C
+class AA(x)
+class BB(x)
+
+
+// TODO: how to keep track of the correct s.x
+:sjs
+module Test with
+  fun f1(a) = if a is
+    A then 1
+    B then 2
+    C then 3
+  fun f2(a) = if a is
+    A then 4
+    B then 5
+    C then 6
+  let s = if true then AA(A) else BB(B)
+  if s is
+    AA then f1(s.x)
+    BB then f2(s.x)
+//│ JS (unsanitized):
+//│ let Test1;
+//│ Test1 = class Test {
+//│   static #s;
+//│   static {
+//│     let scrut, scrut1, tmp;
+//│     scrut = true;
+//│     if (scrut === true) {
+//│       tmp = AA1(A1);
+//│     } else {
+//│       tmp = BB1(B1);
+//│     }
+//│     this.#s = tmp;
+//│     scrut1 = this.#s;
+//│     if (scrut1 instanceof AA1.class) {
+//│       Test.f1(this.#s.x)
+//│     } else {
+//│       if (scrut1 instanceof BB1.class) {
+//│         Test.f2(this.#s.x)
+//│       } else {
+//│         throw new globalThis.Error("match error");
+//│       }
+//│     }
+//│   }
+//│   static f1(a) {
+//│     if (a instanceof A1.class) {
+//│       return 1
+//│     } else {
+//│       if (a instanceof B1.class) {
+//│         return 2
+//│       } else {
+//│         if (a instanceof C1.class) {
+//│           return 3
+//│         } else {
+//│           throw new globalThis.Error("match error");
+//│         }
+//│       }
+//│     }
+//│   } 
+//│   static f2(a1) {
+//│     if (a1 instanceof A1.class) {
+//│       return 4
+//│     } else {
+//│       if (a1 instanceof B1.class) {
+//│         return 5
+//│       } else {
+//│         if (a1 instanceof C1.class) {
+//│           return 6
+//│         } else {
+//│           throw new globalThis.Error("match error");
+//│         }
+//│       }
+//│     }
+//│   }
+//│   static toString() { return "Test"; }
+//│ };
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let Test1;
+//│ Test1 = class Test {
+//│   static #s1;
+//│   static {
+//│     let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4;
+//│     scrut = true;
+//│     if (scrut === true) {
+//│       tmp1 = A1;
+//│       tmp = AA1(tmp1);
+//│     } else {
+//│       tmp2 = B1;
+//│       tmp = BB1(tmp2);
+//│     }
+//│     this.#s1 = tmp;
+//│     scrut1 = this.#s1;
+//│     if (scrut1 instanceof AA1.class) {
+//│       tmp3 = this.#s1.x;
+//│       Test.f1(tmp3)
+//│     } else if (scrut1 instanceof BB1.class) {
+//│       tmp4 = this.#s1.x;
+//│       Test.f2(tmp4)
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│   static f1(a) {
+//│     if (a instanceof A1.class) {
+//│       return 1
+//│     } else if (a instanceof B1.class) {
+//│       return 2
+//│     } else if (a instanceof C1.class) {
+//│       return 3
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } 
+//│   static f2(a1) {
+//│     if (a1 instanceof A1.class) {
+//│       return 4
+//│     } else if (a1 instanceof B1.class) {
+//│       return 5
+//│     } else if (a1 instanceof C1.class) {
+//│       return 6
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│   static toString() { return "Test"; }
+//│ };
+//│ block$res2 = undefined;
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+// // FIXME: free var
+// :sjs
+// fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+// fun map(f, ls) =
+//   (if ls is
+//     Nil then f => Nil
+//     Cons(h, t) then f => Cons(f(h), map(f, t))
+//   )(f)
+// map(x => x + 4, enumFromTo(1, 4))
