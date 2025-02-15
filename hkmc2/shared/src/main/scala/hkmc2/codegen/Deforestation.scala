@@ -646,10 +646,14 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     def makeLambda(body: Block) = Value.Lam(
       ParamList(ParamListFlags.empty, Nil, N),
-      body.mapTail:
+      body.flattened.mapTail:
         case Return(res, implct) => Return(res, false)
         case t => t
     )
+    
+    def setupBodyAndRest(body: Block, rest: Block, scrut: ResultId, sel: Set[ResultId], selMap: Map[Tree.Ident, Value]) =
+      val lambdaBody = Begin(applyBlock(body).replaceSelect(using sel, selMap), applyBlock(rest))
+      makeLambda(lambdaBody)
     
     object matchRest:
       val store = mutable.Map.empty[ResultId, FunDefn]
@@ -701,11 +705,10 @@ class Deforest(using TL, Raise, Elaborator.State):
               val newArgs = args.map(_ => TempSymbol(N))
               
               val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
-              val bodyAndRest = Begin(body.replaceSelect(using sels.toSet, idsToArgs), applyBlock(expr.rest))
               
-              args.zip(newArgs).foldRight[Block](k(makeLambda(
-                applyBlock(bodyAndRest)
-              ))){ case ((a, tmp), rest) =>
+              val bodyAndRestInLam = setupBodyAndRest(body, expr.rest, scrut, sels.toSet, idsToArgs)
+              
+              args.zip(newArgs).foldRight[Block](k(bodyAndRestInLam)){ case ((a, tmp), rest) =>
                 applyResult2(a.value): r =>
                   Assign(tmp, r, rest)
               }
@@ -739,8 +742,8 @@ class Deforest(using TL, Raise, Elaborator.State):
             case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
               val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               // tl.log(mod.toString + " ----> " + body)
-              val bodyAndRest = Begin(body._2, applyBlock(expr.rest))
-              k(makeLambda(bodyAndRest))
+              val bodyAndRestInLam = setupBodyAndRest(body._2, expr.rest, scrut, Set.empty, Map.empty)
+              k(bodyAndRestInLam)
             case Some(_) => ??? // TODO: a selection on a module consumes it
       
       case r@Value.Ref(l) => l.asObj match
@@ -753,9 +756,8 @@ class Deforest(using TL, Raise, Elaborator.State):
               val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               // tl.log(mod.toString + " ----> " + body)
               
-              // val bodyAndRest = Begin(body._2, applyBlock(expr.rest))
-              val bodyAndRest = Begin(body._2, applyBlock(expr.rest))
-              k(makeLambda(bodyAndRest))
+              val bodyAndRestInLam = setupBodyAndRest(body._2, expr.rest, scrut, Set.empty, Map.empty)
+              k(bodyAndRestInLam)
             case Some(_) => ??? // TODO: a selection on a module consumes it
       case Value.This(sym) => k(Value.This(sym))
       case Value.Lit(lit) => k(Value.Lit(lit))

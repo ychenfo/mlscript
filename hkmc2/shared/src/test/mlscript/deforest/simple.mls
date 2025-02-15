@@ -45,11 +45,11 @@ test()
 //│   scrut = true;
 //│   if (scrut === true) {
 //│     tmp = () => {
-//│       return 1;
+//│       return 1
 //│     };
 //│   } else {
 //│     tmp = () => {
-//│       return 2;
+//│       return 2
 //│     };
 //│   }
 //│   x = tmp;
@@ -106,7 +106,7 @@ test()
 //│       let param0, x1;
 //│       param0 = tmp1;
 //│       x1 = param0;
-//│       return x1;
+//│       return x1
 //│     };
 //│   } else {
 //│     tmp2 = B1;
@@ -114,7 +114,7 @@ test()
 //│       let param0, x1;
 //│       param0 = tmp2;
 //│       x1 = param0;
-//│       return x1;
+//│       return x1
 //│     };
 //│   }
 //│   x = tmp;
@@ -185,25 +185,25 @@ test()
 //│   scrut = true;
 //│   if (scrut === true) {
 //│     tmp1 = () => {
-//│       return 1;
+//│       return 1
 //│     };
 //│     tmp = () => {
 //│       let param0, x1, tmp3;
 //│       param0 = tmp1;
 //│       x1 = param0;
 //│       tmp3 = x1;
-//│       return f(tmp3);
+//│       return f(tmp3)
 //│     };
 //│   } else {
 //│     tmp2 = () => {
-//│       return 2;
+//│       return 2
 //│     };
 //│     tmp = () => {
 //│       let param0, x1, tmp3;
 //│       param0 = tmp2;
 //│       x1 = param0;
 //│       tmp3 = x1;
-//│       return f(tmp3);
+//│       return f(tmp3)
 //│     };
 //│   }
 //│   x = tmp;
@@ -298,21 +298,21 @@ test()
 //│   scrut = true;
 //│   if (scrut === true) {
 //│     tmp1 = () => {
-//│       return 1;
+//│       return 1
 //│     };
 //│     tmp = () => {
 //│       let tmp3;
 //│       tmp3 = tmp1;
-//│       return f1(tmp3);
+//│       return f1(tmp3)
 //│     };
 //│   } else {
 //│     tmp2 = () => {
-//│       return 5;
+//│       return 5
 //│     };
 //│     tmp = () => {
 //│       let tmp3;
 //│       tmp3 = tmp2;
-//│       return f2(tmp3);
+//│       return f2(tmp3)
 //│     };
 //│   }
 //│   x = tmp;
@@ -380,7 +380,7 @@ test()
 //│         let param0, x1;
 //│         param0 = tmp3;
 //│         x1 = param0;
-//│         return x1;
+//│         return x1
 //│       }
 //│     } else {
 //│       tmp4 = 22;
@@ -388,7 +388,7 @@ test()
 //│         let param0, x1;
 //│         param0 = tmp4;
 //│         x1 = param0;
-//│         return x1;
+//│         return x1
 //│       }
 //│     }
 //│   };
@@ -485,11 +485,11 @@ map(enumFromTo(1, 4))
 //│       tmp15 = map(tmp18);
 //│       tmp19 = tmp14;
 //│       tmp20 = tmp15;
-//│       return Cons1(tmp19, tmp20);
+//│       return Cons1(tmp19, tmp20)
 //│     }
 //│   } else {
 //│     return () => {
-//│       return Nil1;
+//│       return Nil1
 //│     }
 //│   }
 //│ };
@@ -574,11 +574,11 @@ sum(enumFromTo(1,10))
 //│       tmp19 = sum(tmp20);
 //│       tmp21 = h;
 //│       tmp22 = tmp19;
-//│       return tmp21 + tmp22;
+//│       return tmp21 + tmp22
 //│     }
 //│   } else {
 //│     return () => {
-//│       return 0;
+//│       return 0
 //│     }
 //│   }
 //│ };
@@ -654,6 +654,50 @@ test()
 
 
 
-
-
-
+:sjs
+fun test() =
+  let x = A
+  let y = B
+  if x is
+    A then 1
+  if y is
+    B then 2
+test()
+//│ JS (unsanitized):
+//│ let test6;
+//│ test6 = function test() {
+//│   let x, y, tmp10;
+//│   x = A1;
+//│   y = B1;
+//│   if (x instanceof A1.class) {
+//│     tmp10 = 1;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   if (y instanceof B1.class) {
+//│     return 2
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ test6()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test6;
+//│ test6 = function test() {
+//│   let x, y;
+//│   x = () => {
+//│     let tmp10;
+//│     tmp10 = 1;
+//│     return runtime.safeCall(y())
+//│   };
+//│   y = () => {
+//│     return 2
+//│   };
+//│   return runtime.safeCall(x())
+//│ };
+//│ block$res19 = test6();
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2

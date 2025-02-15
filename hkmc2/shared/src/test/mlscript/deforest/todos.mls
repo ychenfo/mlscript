@@ -7,6 +7,48 @@ object C
 class AA(x)
 class BB(x)
 
+// FIXME: still lacks a return in the rewritten lambda for `y`
+:sjs
+let x = A
+let y = B
+if x is
+  A then 1
+if y is
+  B then 2
+//│ JS (unsanitized):
+//│ let x, y, tmp;
+//│ x = A1;
+//│ y = B1;
+//│ if (x instanceof A1.class) {
+//│   tmp = 1;
+//│ } else {
+//│   throw new this.Error("match error");
+//│ }
+//│ if (y instanceof B1.class) {
+//│   2
+//│ } else {
+//│   throw new this.Error("match error");
+//│ }
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let x, y;
+//│ x = () => {
+//│   let tmp;
+//│   tmp = 1;
+//│   return runtime.safeCall(y())
+//│ };
+//│ y = () => {
+//│   return 2
+//│ };
+//│ block$res2 = runtime.safeCall(x());
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+//│ x = A
+//│ y = B
+
+
 
 // TODO: how to keep track of the correct s.x
 :sjs
@@ -28,14 +70,14 @@ module Test with
 //│ Test1 = class Test {
 //│   static #s;
 //│   static {
-//│     let scrut, scrut1, tmp;
+//│     let scrut, scrut1, tmp1;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp = AA1(A1);
+//│       tmp1 = AA1(A1);
 //│     } else {
-//│       tmp = BB1(B1);
+//│       tmp1 = BB1(B1);
 //│     }
-//│     this.#s = tmp;
+//│     this.#s = tmp1;
 //│     scrut1 = this.#s;
 //│     if (scrut1 instanceof AA1.class) {
 //│       Test.f1(this.#s.x)
@@ -85,23 +127,23 @@ module Test with
 //│ Test1 = class Test {
 //│   static #s1;
 //│   static {
-//│     let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4;
+//│     let scrut, scrut1, tmp1, tmp2, tmp3, tmp4, tmp5;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp1 = A1;
-//│       tmp = AA1(tmp1);
+//│       tmp2 = A1;
+//│       tmp1 = AA1(tmp2);
 //│     } else {
-//│       tmp2 = B1;
-//│       tmp = BB1(tmp2);
+//│       tmp3 = B1;
+//│       tmp1 = BB1(tmp3);
 //│     }
-//│     this.#s1 = tmp;
+//│     this.#s1 = tmp1;
 //│     scrut1 = this.#s1;
 //│     if (scrut1 instanceof AA1.class) {
-//│       tmp3 = this.#s1.x;
-//│       Test.f1(tmp3)
-//│     } else if (scrut1 instanceof BB1.class) {
 //│       tmp4 = this.#s1.x;
-//│       Test.f2(tmp4)
+//│       Test.f1(tmp4)
+//│     } else if (scrut1 instanceof BB1.class) {
+//│       tmp5 = this.#s1.x;
+//│       Test.f2(tmp5)
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
@@ -130,7 +172,7 @@ module Test with
 //│   }
 //│   static toString() { return "Test"; }
 //│ };
-//│ block$res2 = undefined;
+//│ block$res4 = undefined;
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
