@@ -93,6 +93,8 @@ extension (m: Match)
       )
 
 extension (b: Block)
+  def sortedFvs = (b.freeVars -- b.definedVars).toList.sortBy(_.uid)
+
   def replaceSelect(using ss: Set[ResultId], args: Map[Tree.Ident, Path]): Block =
     object ReplaceSelectTransformer extends BlockTransformer(new SymbolSubst()):
       override def applyPath(p: Path): Path = p match
@@ -615,7 +617,9 @@ class Deforest(using TL, Raise, Elaborator.State):
   }.toSet
   
   def rewrite(p: Block) =
-    DeforestTransformer.applyBlock(p)
+    val rest = DeforestTransformer.applyBlock(p)
+    val newDefs = DeforestTransformer.matchRest.getAllFunDefs
+    newDefs(rest)
   
   object DeforestTransformer extends BlockTransformer(new SymbolSubst()):
     
@@ -652,8 +656,24 @@ class Deforest(using TL, Raise, Elaborator.State):
     )
     
     def setupBodyAndRest(body: Block, rest: Block, scrut: ResultId, sel: Set[ResultId], selMap: Map[Tree.Ident, Value]) =
-      val lambdaBody = Begin(applyBlock(body).replaceSelect(using sel, selMap), applyBlock(rest))
-      makeLambda(lambdaBody)
+      val rewrittenRest = applyBlock(rest)
+      val restFunOrRestBlock = matchRest.getOrElse(scrut, rewrittenRest)
+      restFunOrRestBlock match
+        case None => 
+          val lambdaBody = Begin(applyBlock(body).replaceSelect(using sel, selMap), rewrittenRest)
+          makeLambda(lambdaBody)
+        case Some(f) =>
+          val lambdaBody = Begin(
+            applyBlock(body).replaceSelect(using sel, selMap),
+            Return(
+              Call(
+                Value.Ref(f),
+                rewrittenRest.sortedFvs.map(a => Arg(false, Value.Ref(a))))(true, false),
+              false
+            )
+          )
+          makeLambda(lambdaBody)
+      
     
     object matchRest:
       val store = mutable.Map.empty[ResultId, FunDefn]
@@ -663,13 +683,14 @@ class Deforest(using TL, Raise, Elaborator.State):
           case Some(s) => Some(s.sym)
           case None if restRewritten.isInstanceOf[End] || (resolveClashes._2(DtorExpr.Match(s)).length == 1) => None
           case _ => // now need to build a new function and update the store
-            val sym = BlockMemberSymbol(s"match_${s}_rest", Nil)
-            val freeVarsAndTheirNewSyms = restRewritten.freeVars.map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
+            val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
+            val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
+            val freeVarsAndTheirNewSyms = restRewritten.sortedFvs.map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
             
             object ReplaceLocalSymTransformer extends BlockTransformer(new SymbolSubst()):
+              // FIXME: depends on my hacky change (d4358d7) to blocktransformer to work...
               override def applyLocal(sym: Local): Local = freeVarsAndTheirNewSyms.getOrElse(sym, sym)
             
-            // val newVars = freeVars.
             val newFunDef = FunDefn(
               N,
               sym,
@@ -678,6 +699,10 @@ class Deforest(using TL, Raise, Elaborator.State):
             )
             store += s -> newFunDef
             Some(sym)
+      
+      def getAllFunDefs: Block => Block =
+        store.values.foldRight(identity: Block => Block): (defn, k) =>
+          r => Define(defn, k(r))
       
     
     override def applyResult2(r: Result)(k: Result => Block): Block = r match

@@ -701,3 +701,69 @@ test()
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
+
+
+:sjs
+fun c(a) =
+  val x = if a is
+    A then 1
+    B then 2
+  print(x)
+  x
+c(A) + c(B)
+//│ JS (unsanitized):
+//│ let c, tmp10, tmp11;
+//│ c = function c(a) {
+//│   let x, tmp12, tmp13;
+//│   if (a instanceof A1.class) {
+//│     tmp12 = 1;
+//│   } else {
+//│     if (a instanceof B1.class) {
+//│       tmp12 = 2;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│   x = tmp12;
+//│   tmp13 = Predef.print(x);
+//│   return x
+//│ };
+//│ tmp10 = c(A1);
+//│ tmp11 = c(B1);
+//│ tmp10 + tmp11
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, match_a_rest;
+//│ match_a_rest = function match_a_rest(tmp16) {
+//│   let x, tmp17, tmp18;
+//│   x = tmp16;
+//│   tmp18 = x;
+//│   tmp17 = Predef.print(tmp18);
+//│   return x
+//│ };
+//│ c = function c(a) {
+//│   return runtime.safeCall(a())
+//│ };
+//│ tmp12 = () => {
+//│   let tmp16;
+//│   tmp16 = 1;
+//│   return match_a_rest(tmp16)
+//│ };
+//│ tmp10 = c(tmp12);
+//│ tmp13 = () => {
+//│   let tmp16;
+//│   tmp16 = 2;
+//│   return match_a_rest(tmp16)
+//│ };
+//│ tmp11 = c(tmp13);
+//│ tmp14 = tmp10;
+//│ tmp15 = tmp11;
+//│ block$res21 = tmp14 + tmp15;
+//│ undefined
+//│ > 1
+//│ > 2
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ > 1
+//│ > 2
+//│ = 3
