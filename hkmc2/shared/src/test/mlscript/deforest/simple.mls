@@ -686,15 +686,15 @@ test()
 //│ let test6;
 //│ test6 = function test() {
 //│   let x, y;
-//│   x = () => {
+//│   x = (y1) => {
 //│     let tmp10;
 //│     tmp10 = 1;
-//│     return runtime.safeCall(y())
+//│     return runtime.safeCall(y1())
 //│   };
 //│   y = () => {
 //│     return 2
 //│   };
-//│   return runtime.safeCall(x())
+//│   return runtime.safeCall(x(y))
 //│ };
 //│ block$res19 = test6();
 //│ undefined
@@ -767,3 +767,105 @@ c(A) + c(B)
 //│ > 1
 //│ > 2
 //│ = 3
+
+
+
+// simple free var example
+:sjs
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun map(f, ls) =
+  if ls is
+    Nil then Nil
+    Cons(h, t) then Cons(f(h), map(f, t))
+map(x => x + 4, enumFromTo(1, 4))
+//│ JS (unsanitized):
+//│ let enumFromTo2, map1, tmp18;
+//│ enumFromTo2 = function enumFromTo(a, b) {
+//│   let scrut, tmp19, tmp20;
+//│   scrut = a < b;
+//│   if (scrut === true) {
+//│     tmp19 = a + 1;
+//│     tmp20 = enumFromTo2(tmp19, b);
+//│     return Cons1(a, tmp20)
+//│   } else {
+//│     return Nil1
+//│   }
+//│ };
+//│ map1 = function map(f3, ls) {
+//│   let param0, param1, h, t, tmp19, tmp20;
+//│   if (ls instanceof Nil1.class) {
+//│     return Nil1
+//│   } else {
+//│     if (ls instanceof Cons1.class) {
+//│       param0 = ls.h;
+//│       param1 = ls.t;
+//│       h = param0;
+//│       t = param1;
+//│       tmp19 = runtime.safeCall(f3(h));
+//│       tmp20 = map1(f3, t);
+//│       return Cons1(tmp19, tmp20)
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│ };
+//│ tmp18 = enumFromTo2(1, 4);
+//│ map1((x) => {
+//│   return x + 4
+//│ }, tmp18)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let enumFromTo2, map1, tmp18, tmp19, tmp20, tmp21, tmp22;
+//│ enumFromTo2 = function enumFromTo(a, b) {
+//│   let scrut, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32;
+//│   tmp25 = a;
+//│   tmp26 = b;
+//│   scrut = tmp25 < tmp26;
+//│   if (scrut === true) {
+//│     tmp27 = a;
+//│     tmp28 = 1;
+//│     tmp23 = tmp27 + tmp28;
+//│     tmp29 = tmp23;
+//│     tmp30 = b;
+//│     tmp24 = enumFromTo2(tmp29, tmp30);
+//│     tmp31 = a;
+//│     tmp32 = tmp24;
+//│     return (f3) => {
+//│       let param0, param1, h, t, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39;
+//│       param0 = tmp31;
+//│       param1 = tmp32;
+//│       h = param0;
+//│       t = param1;
+//│       tmp35 = h;
+//│       tmp33 = runtime.safeCall(f3(tmp35));
+//│       tmp36 = f3;
+//│       tmp37 = t;
+//│       tmp34 = map1(tmp36, tmp37);
+//│       tmp38 = tmp33;
+//│       tmp39 = tmp34;
+//│       return Cons1(tmp38, tmp39)
+//│     }
+//│   } else {
+//│     return () => {
+//│       return Nil1
+//│     }
+//│   }
+//│ };
+//│ map1 = function map(f3, ls) {
+//│   return runtime.safeCall(ls(f3))
+//│ };
+//│ tmp19 = 1;
+//│ tmp20 = 4;
+//│ tmp18 = enumFromTo2(tmp19, tmp20);
+//│ tmp21 = (x) => {
+//│   let tmp23, tmp24;
+//│   tmp23 = x;
+//│   tmp24 = 4;
+//│   return tmp23 + tmp24
+//│ };
+//│ tmp22 = tmp18;
+//│ block$res23 = map1(tmp21, tmp22);
+//│ undefined
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = Cons(5, Cons(6, Cons(7, Nil)))

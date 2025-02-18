@@ -99,9 +99,10 @@ extension (b: Block)
       override def applyLocal(sym: Local): Local = freeVarsAndTheirNewSyms.getOrElse(sym, sym)
     ReplaceLocalSymTransformer.applyBlock(b)
 
-  def sortedFvs = (b.freeVars -- b.definedVars).toList.sortBy(_.uid)
+  // TODO: freeVars does not include any vars in function caller positions...
+  def sortedFvs = (b.freeVars -- b.definedVars).filterNot(v => v.asClsLike.isDefined).toList.sortBy(_.uid)
 
-  def replaceSelect(using ss: Set[ResultId], args: Map[Tree.Ident, Path]): Block =
+  def replaceSelect(using ss: Set[ResultId], args: Map[Tree.Ident, Value.Ref]): Block =
     object ReplaceSelectTransformer extends BlockTransformer(new SymbolSubst()):
       override def applyPath(p: Path): Path = p match
         case s@Select(_, nme) if ss(s.uid) => args(nme)
@@ -633,7 +634,15 @@ class Deforest(using TL, Raise, Elaborator.State):
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
           val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
-          Return(Call(scrut, Nil)(false, false), !needExplicitRet) // TODO: free var application
+          val freeVars =
+            (arms.flatMap(_._2.sortedFvs) ::: dflt.fold(Nil)(_.sortedFvs) ::: rest.sortedFvs)
+            .filterNot(
+              v => v == scrut.l ||
+              (arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b)))(v) // TODO: shouldn't intersect with dflt since it's just throw Error?
+            ) // not scrut (which will be selected on, or those defined in arms or dflt, but later refered to in the rest)
+            .sortBy(_.uid)
+            .map(v => Arg(false, Value.Ref(v)))
+          Return(Call(scrut, freeVars)(false, false), !needExplicitRet) // TODO: free var application
         else
           Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
       case Return(res, implct) =>
@@ -654,26 +663,31 @@ class Deforest(using TL, Raise, Elaborator.State):
       // case Continue(label) => ???
       // case TryBlock(sub, finallyDo, rest) => ???
     
-    def makeLambda(body: Block) =
+    def makeLambda(body: Block, freeVarsAndTheirNewSyms: Map[Symbol, VarSymbol]) =
       val bodyFlattened = body.flattened // otherwise mapTail to make all return explicit may not work
-      val freeVarsAndTheirNewSyms = bodyFlattened.sortedFvs.map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
       val newBody = bodyFlattened.replaceSymbols(freeVarsAndTheirNewSyms)
       Value.Lam(
-        ParamList(ParamListFlags.empty, Nil, N),
-        bodyFlattened.mapTail:
+        ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
+        newBody.mapTail:
           case Return(res, implct) => Return(res, false)
           case t => t
       )
     
-    def setupBodyAndRest(body: Block, rest: Block, scrut: ResultId, sel: Set[ResultId], selMap: Map[Tree.Ident, Value]) =
-      val rewrittenRest = applyBlock(rest)
+    def setupBodyAndRest(body: Block, rest: Block, scrut: ResultId, sel: Set[ResultId], selMap: Map[Tree.Ident, Value.Ref]) =
+      val rewrittenBody = applyBlock(body).replaceSelect(using sel, selMap)
+      val rewrittenRest = applyBlock(rest) // TODO: avoid rewriting it more than once
+      val freeVarsAndTheirNewSyms =
+        (rewrittenBody.sortedFvs ::: rest.sortedFvs) // TODO: why it's rest.sortedFvs instead of rewrittenRest??
+          .map(s => s -> VarSymbol(Tree.Ident(s.nme)))
+          .filterNot(x => selMap.valuesIterator.map(v => v.l).contains(x._1) || rewrittenBody.definedVars(x._1))
+          .toMap
       val restFunOrRestBlock = matchRest.getOrElse(scrut, rewrittenRest)
       val lambdaBody = restFunOrRestBlock match
         case None => 
-          Begin(applyBlock(body).replaceSelect(using sel, selMap), rewrittenRest)
+          Begin(rewrittenBody.replaceSelect(using sel, selMap), rewrittenRest)
         case Some(f) =>
           Begin(
-            applyBlock(body).replaceSelect(using sel, selMap),
+            rewrittenBody.replaceSelect(using sel, selMap),
             Return(
               Call(
                 Value.Ref(f),
@@ -681,7 +695,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               false
             )
           )
-      makeLambda(lambdaBody)  
+      makeLambda(lambdaBody, freeVarsAndTheirNewSyms)  
       
     
     object matchRest:
@@ -734,7 +748,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               
               val newArgs = args.map(_ => TempSymbol(N))
               
-              val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s))).toMap
+              val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s).asInstanceOf[Value.Ref])).toMap
               
               val bodyAndRestInLam = setupBodyAndRest(body, expr.rest, scrut, sels.toSet, idsToArgs)
               
