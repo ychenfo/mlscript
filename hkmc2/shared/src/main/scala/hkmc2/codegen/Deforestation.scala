@@ -110,7 +110,7 @@ extension (b: Block)
     ReplaceSelectTransformer.applyBlock(b)
   
   def hasExplicitRet: Boolean =
-    object HasExplicitRetTransformer extends BlockTransformer(new SymbolSubst()):
+    object HasExplicitRetTransformer extends BlockTransformerShallow(new SymbolSubst()):
       var flag = false
       override def applyBlock(b: Block): Block = b match
         case Return(_, imp) => flag = !imp; b
@@ -638,7 +638,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             (arms.flatMap(_._2.sortedFvs) ::: dflt.fold(Nil)(_.sortedFvs) ::: rest.sortedFvs)
             .filterNot(
               v => v == scrut.l ||
-              (arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b)))(v) // TODO: shouldn't intersect with dflt since it's just throw Error?
+              (arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b)))(v) // TODO: shouldn't intersect with dflt since it just throws Error? 
             ) // not scrut (which will be selected on, or those defined in arms or dflt, but later refered to in the rest)
             .sortBy(_.uid)
             .map(v => Arg(false, Value.Ref(v)))
