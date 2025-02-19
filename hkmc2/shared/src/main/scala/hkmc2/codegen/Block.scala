@@ -254,7 +254,7 @@ enum Case:
 
   lazy val freeVars: Set[Local] = this match
     case Lit(_) => Set.empty
-    case Cls(_, path) => path.freeVars
+    case Cls(_, path) => Set.empty //path.freeVars
     case Tup(_, _) => Set.empty
 
 type ResultId = Uid[Result]
@@ -277,13 +277,13 @@ sealed abstract class Result:
     case _ => Nil
   
   lazy val freeVars: Set[Local] = this match
-    case Call(fun, args) => args.flatMap(_.value.freeVars).toSet
+    case Call(fun, args) => fun.freeVars ++ args.flatMap(_.value.freeVars).toSet
     case Instantiate(cls, args) => args.flatMap(_.freeVars).toSet
     case Select(qual, name) => qual.freeVars 
     case Value.Ref(l) => Set(l)
     case Value.This(sym) => Set.empty
     case Value.Lit(lit) => Set.empty
-    case Value.Lam(params, body) => body.freeVars -- params.paramSyms
+    case Value.Lam(params, body) => body.freeVars -- body.definedVars -- params.paramSyms
     case Value.Arr(elems) => elems.flatMap(_.value.freeVars).toSet
   
   lazy val uid =
