@@ -43,8 +43,11 @@ case object NoProd extends ProdStrat
 
 
 // enum ConsStrat:
-case class Dtor(scrut: ResultId)(val expr: Match) extends ConsStrat:
+case class Dtor(scrut: ResultId)(val expr: Match)(using d: Deforest) extends ConsStrat:
   assert(scrut === expr.scrut.uid)
+  d.matchScrutToMatchBlock.updateWith(scrut):
+    case None => Some(expr)
+    case Some(exist) => ??? // should only update once
 
 case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
@@ -271,6 +274,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
   
+  val matchScrutToMatchBlock = mutable.Map.empty[ResultId, Match]
   object symToStrat:
     val store = mutable.Map.empty[Symbol, ProdVar]
     
@@ -319,9 +323,9 @@ class Deforest(using TL, Raise, Elaborator.State):
   def processBlock(b: Block)(using inArm: Option[ProdVar -> ClsOrModSymbol] = N): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
+      constrain(scrutStrat, Dtor(scrut.uid)(m)(using this))
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map { case (Case.Cls(s, _), body) => 
-          constrain(scrutStrat, Dtor(scrut.uid)(m))
           // TODO: fix this "asInstanceOf"?
           processBlock(body)(using S(scrutStrat.asInstanceOf[ProdVar] -> s))
         }
