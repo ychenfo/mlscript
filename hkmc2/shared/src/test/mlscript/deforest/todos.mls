@@ -10,6 +10,9 @@ class BB(x)
 object Nil
 class Cons(h, t)
 
+object None
+class Some(x)
+
 // FIXME: why it's different when all in a function?
 :sjs
 let x = A
@@ -43,7 +46,7 @@ if y is
 //│ y = () => {
 //│   return 2
 //│ };
-//│ block$res3 = runtime.safeCall(x(y));
+//│ block$res4 = runtime.safeCall(x(y));
 //│ undefined
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -175,7 +178,96 @@ module Test with
 //│   }
 //│   static toString() { return "Test"; }
 //│ };
-//│ block$res5 = undefined;
+//│ block$res6 = undefined;
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+
+
+// FIXME: the `Cons` branch does use `a`, but should also take that argument
+:sjs
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun last(ls, a) = if ls is
+  Nil then a
+  Cons(h, t) then last(t, Some(h))
+last(enumFromTo(1, 10), None)
+//│ JS (unsanitized):
+//│ let last, enumFromTo, tmp1;
+//│ enumFromTo = function enumFromTo(a, b) {
+//│   let scrut, tmp2, tmp3;
+//│   scrut = a < b;
+//│   if (scrut === true) {
+//│     tmp2 = a + 1;
+//│     tmp3 = enumFromTo(tmp2, b);
+//│     return Cons1(a, tmp3)
+//│   } else {
+//│     return Nil1
+//│   }
+//│ };
+//│ last = function last(ls, a) {
+//│   let param0, param1, h, t, tmp2;
+//│   if (ls instanceof Nil1.class) {
+//│     return a
+//│   } else {
+//│     if (ls instanceof Cons1.class) {
+//│       param0 = ls.h;
+//│       param1 = ls.t;
+//│       h = param0;
+//│       t = param1;
+//│       tmp2 = Some1(h);
+//│       return last(t, tmp2)
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│ };
+//│ tmp1 = enumFromTo(1, 10);
+//│ last(tmp1, None1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let last, enumFromTo, tmp1, tmp2, tmp3, tmp4, tmp5;
+//│ enumFromTo = function enumFromTo(a, b) {
+//│   let scrut, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+//│   tmp8 = a;
+//│   tmp9 = b;
+//│   scrut = tmp8 < tmp9;
+//│   if (scrut === true) {
+//│     tmp10 = a;
+//│     tmp11 = 1;
+//│     tmp6 = tmp10 + tmp11;
+//│     tmp12 = tmp6;
+//│     tmp13 = b;
+//│     tmp7 = enumFromTo(tmp12, tmp13);
+//│     tmp14 = a;
+//│     tmp15 = tmp7;
+//│     return () => {
+//│       let param0, param1, h, t, tmp16, tmp17, tmp18, tmp19;
+//│       param0 = tmp14;
+//│       param1 = tmp15;
+//│       h = param0;
+//│       t = param1;
+//│       tmp17 = h;
+//│       tmp16 = Some1(tmp17);
+//│       tmp18 = t;
+//│       tmp19 = tmp16;
+//│       return last(tmp18, tmp19)
+//│     }
+//│   } else {
+//│     return (a1) => {
+//│       return a1
+//│     }
+//│   }
+//│ };
+//│ last = function last(ls, a) {
+//│   return runtime.safeCall(ls(a))
+//│ };
+//│ tmp2 = 1;
+//│ tmp3 = 10;
+//│ tmp1 = enumFromTo(tmp2, tmp3);
+//│ tmp4 = tmp1;
+//│ tmp5 = None1;
+//│ block$res8 = last(tmp4, tmp5);
+//│ undefined
+//│ = Some(9)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = Some(9)
 

@@ -7,6 +7,8 @@ object B
 object C
 class AA(x)
 class BB(x)
+object None
+class Some(x)
 
 :sjs
 fun test() =
@@ -990,3 +992,95 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
+
+
+
+:sjs
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun sum(ls, a) = if ls is
+  Nil then a
+  Cons(h, t) then sum(t, h + a)
+sum(enumFromTo(1, 10), 0)
+//│ JS (unsanitized):
+//│ let enumFromTo4, sum1, tmp30;
+//│ enumFromTo4 = function enumFromTo(a, b) {
+//│   let scrut, tmp31, tmp32;
+//│   scrut = a < b;
+//│   if (scrut === true) {
+//│     tmp31 = a + 1;
+//│     tmp32 = enumFromTo4(tmp31, b);
+//│     return Cons1(a, tmp32)
+//│   } else {
+//│     return Nil1
+//│   }
+//│ };
+//│ sum1 = function sum(ls, a) {
+//│   let param0, param1, h, t, tmp31;
+//│   if (ls instanceof Nil1.class) {
+//│     return a
+//│   } else {
+//│     if (ls instanceof Cons1.class) {
+//│       param0 = ls.h;
+//│       param1 = ls.t;
+//│       h = param0;
+//│       t = param1;
+//│       tmp31 = h + a;
+//│       return sum1(t, tmp31)
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│ };
+//│ tmp30 = enumFromTo4(1, 10);
+//│ sum1(tmp30, 0)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let enumFromTo4, sum1, tmp30, tmp31, tmp32, tmp33, tmp34;
+//│ enumFromTo4 = function enumFromTo(a, b) {
+//│   let scrut, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44;
+//│   tmp37 = a;
+//│   tmp38 = b;
+//│   scrut = tmp37 < tmp38;
+//│   if (scrut === true) {
+//│     tmp39 = a;
+//│     tmp40 = 1;
+//│     tmp35 = tmp39 + tmp40;
+//│     tmp41 = tmp35;
+//│     tmp42 = b;
+//│     tmp36 = enumFromTo4(tmp41, tmp42);
+//│     tmp43 = a;
+//│     tmp44 = tmp36;
+//│     return (a1) => {
+//│       let param0, param1, h, t, tmp45, tmp46, tmp47, tmp48, tmp49;
+//│       param0 = tmp43;
+//│       param1 = tmp44;
+//│       h = param0;
+//│       t = param1;
+//│       tmp46 = h;
+//│       tmp47 = a1;
+//│       tmp45 = tmp46 + tmp47;
+//│       tmp48 = t;
+//│       tmp49 = tmp45;
+//│       return sum1(tmp48, tmp49)
+//│     }
+//│   } else {
+//│     return (a1) => {
+//│       return a1
+//│     }
+//│   }
+//│ };
+//│ sum1 = function sum(ls, a) {
+//│   return runtime.safeCall(ls(a))
+//│ };
+//│ tmp31 = 1;
+//│ tmp32 = 10;
+//│ tmp30 = enumFromTo4(tmp31, tmp32);
+//│ tmp33 = tmp30;
+//│ tmp34 = 0;
+//│ block$res27 = sum1(tmp33, tmp34);
+//│ undefined
+//│ = 45
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 45
+
+
