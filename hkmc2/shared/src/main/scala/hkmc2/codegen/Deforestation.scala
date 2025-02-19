@@ -36,7 +36,7 @@ object StratVarState:
 
 type CtorExpr = ResultId
 // enum ProdStrat:
-case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat])(val expr: CtorExpr) extends ProdStrat
+case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: CtorExpr) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
 case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s)
 case object NoProd extends ProdStrat
@@ -413,12 +413,12 @@ class Deforest(using TL, Raise, Elaborator.State):
               appRes._1
             case Some(Some(s)) =>
               val clsFields = getClsFields(s)
-              Ctor(s, clsFields.zip(argsTpe).toMap)(c.uid)
+              Ctor(s, clsFields.zip(argsTpe).toMap, c.uid)
         case Value.Ref(l) =>
           l.asCls match
             case Some(s) =>
               val clsFields = getClsFields(s)
-              Ctor(s, clsFields.zip(argsTpe).toMap)(c.uid)
+              Ctor(s, clsFields.zip(argsTpe).toMap, c.uid)
             case _ => // then it is a function
               val appRes = freshVar("call_" + l.nme + "_res")
               constrain(symToStrat.getStratOfSym(l), ConsFun(argsTpe, appRes._2))
@@ -439,7 +439,7 @@ class Deforest(using TL, Raise, Elaborator.State):
 
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
-        Ctor(s.asObj.get, Map.empty)(sel.uid)
+        Ctor(s.asObj.get, Map.empty, sel.uid)
       case _ => 
         val pStrat = processResult(p)
         inArm match
@@ -457,7 +457,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             
     case v@Value.Ref(l) => l.asObj match
       case None => symToStrat.getStratOfSym(l)
-      case Some(m) => Ctor(m, Map.empty)(v.uid)
+      case Some(m) => Ctor(m, Map.empty, v.uid)
     
     case Value.This(sym) => ???
     case Value.Lit(lit) => NoProd
@@ -505,20 +505,20 @@ class Deforest(using TL, Raise, Elaborator.State):
       cache += c
       
       (prod, cons) match
-        case (ctorStrat@Ctor(ctor, args), dtorStrat@Dtor(scrut)) =>
-          ctorDests.update(ctorStrat.expr, dtorStrat.expr)
-          dtorSources.update(scrut, ctorStrat.expr)
-        case (ctorStrat@Ctor(ctor, args), selDtor@FieldSel(field, consVar)) =>
+        case (Ctor(ctor, args, expr), dtorStrat@Dtor(scrut)) =>
+          ctorDests.update(expr, dtorStrat.expr)
+          dtorSources.update(scrut, expr)
+        case (Ctor(ctor, args, expr), selDtor@FieldSel(field, consVar)) =>
           // if clsSym.isDefined then
           //   args.get(clsSym.get).map(p => handle(p -> consVar))
           // else  
-          ctorDests.update(ctorStrat.expr, selDtor.expr)
-          dtorSources.update(selDtor.expr, ctorStrat.expr)
+          ctorDests.update(expr, selDtor.expr)
+          dtorSources.update(selDtor.expr, expr)
           args.find(a => a._1.id == field).map(p =>
             // rewritingSel.add(sel)
             handle(p._2 -> consVar)
           )
-        case (Ctor(ctor, args), ConsFun(l, r)) => ???
+        case (Ctor(ctor, args, _), ConsFun(l, r)) => ???
         
         case (p: ProdVar, _) =>
           upperBounds += p.uid -> (cons :: upperBounds(p.uid))
@@ -527,7 +527,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               case (l: ProdVar, sel@FieldSel(field, consVar)) =>
                 sel.updateFilter(l, sel.filter(p))
                 handle(l -> cons)
-              case (Ctor(ctor, args), sel@FieldSel(field, consVar)) =>
+              case (Ctor(ctor, args, _), sel@FieldSel(field, consVar)) =>
                 if sel.filter.get(p).forall(_.contains(ctor)) then
                   handle(l -> cons)
                 else
@@ -538,7 +538,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           lowerBounds += c.uid -> (prod :: lowerBounds(c.uid))
           upperBounds(c.uid).foreach { u =>
             (prod, u) match
-              case (Ctor(ctor, args), sel@FieldSel(field, consVar)) =>
+              case (Ctor(ctor, args, _), sel@FieldSel(field, consVar)) =>
                 if sel.filter.get(c.asProdStrat).forall(_.contains(ctor)) then
                   handle(prod -> u)
                 else
@@ -547,7 +547,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               case _ => handle(prod -> u)
           }
           // upperBounds(uid).foreach(c => handle(prod -> c))
-        case (Ctor(ctor, args), NoCons) => ()
+        case (Ctor(ctor, args, _), NoCons) => ()
         case (ProdFun(l, r), Dtor(cls)) => ???
         case (ProdFun(l, r), FieldSel(field, consVar)) => ???
         case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
