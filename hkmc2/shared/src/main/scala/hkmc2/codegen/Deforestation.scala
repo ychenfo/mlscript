@@ -100,7 +100,7 @@ extension (b: Block)
     ReplaceLocalSymTransformer.applyBlock(b)
 
   // TODO: freeVars does not include any vars in function caller positions...
-  def sortedFvs = (b.freeVars -- b.definedVars).filterNot(v => v.asClsLike.isDefined).toList.sortBy(_.uid)
+  def sortedFvs(using alwaysDefined: Set[Symbol]) = (b.freeVars -- b.definedVars -- alwaysDefined).filterNot(v => v.asClsLike.isDefined).toList.sortBy(_.uid)
 
   def replaceSelect(using ss: Set[ResultId], args: Map[Tree.Ident, Value.Ref]): Block =
     object ReplaceSelectTransformer extends BlockTransformer(new SymbolSubst()):
@@ -222,10 +222,10 @@ class Deforest(using TL, Raise, Elaborator.State):
     val flattenP = p.main.flattened
     val mergedArms = flattenP.mergeMatchArms
   
+    globallyDefinedVars.init(mergedArms)
+    
     // allocate type vars for defined symbols in the blocks
-    symToStrat.init(p.main)
-    // p.main.definedVars.foreach: v => 
-    //   symToStrat += v -> freshVar(v.nme)._1
+    symToStrat.init(mergedArms)
   
     processBlock(mergedArms)
     resolveConstraints
@@ -250,8 +250,25 @@ class Deforest(using TL, Raise, Elaborator.State):
       p.imports,
       rewrite(mergedArms)
     )
-    
   
+  // these are never considered as free vars (because of their symbol type)
+  // currently cannot distinguish toplevel `let` and function params (both are varsymbol)
+  // so toplevel `let`s are not considered globally defined vars for now...
+  object globallyDefinedVars:
+    val store = mutable.Set.empty[Symbol]
+    
+    def apply(s: Symbol) = store.contains(s)
+    
+    def init(b: Block) =
+      object Subst extends SymbolSubst:
+        // only consider block member symbols as globally defined
+        override def mapBlockMemberSym(s: BlockMemberSymbol): BlockMemberSymbol =
+          store += s; s
+        override def mapBuiltInSym(s: BuiltinSymbol): BuiltinSymbol =
+          store += s; s
+      
+      object FreshVarForAllVars extends BlockTransformer(Subst)
+      FreshVarForAllVars.applyBlock(b)
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
   
@@ -262,20 +279,24 @@ class Deforest(using TL, Raise, Elaborator.State):
       if store.isEmpty then
         object AllVarsSymbolSubst extends SymbolSubst:
           override def mapBlockMemberSym(s: BlockMemberSymbol): BlockMemberSymbol =
+            println("blkmem: " + s.nme)
             store += s -> freshVar(s.nme)._1; s
           override def mapFlowSym(s: FlowSymbol): FlowSymbol =
             store += s -> freshVar(s.nme)._1; s
           override def mapTempSym(s: TempSymbol): TempSymbol =
             store += s -> freshVar(s.nme)._1; s
           override def mapVarSym(s: VarSymbol): VarSymbol =
+            println("var: " + s.nme)
             store += s -> freshVar(s.nme)._1; s
           override def mapInstSym(s: InstSymbol): InstSymbol =
             store += s -> freshVar(s.nme)._1; s
           override def mapTermSym(s: TermSymbol): TermSymbol =
             store += s -> freshVar(s.nme)._1; s
           override def mapClsSym(s: ClassSymbol): ClassSymbol =
+            println("cls: " + s.nme)
             store += s -> freshVar(s.nme)._1; s
           override def mapModuleSym(s: ModuleSymbol): ModuleSymbol =
+            println("mod: " + s.nme)
             store += s -> freshVar(s.nme)._1; s
         object FreshVarForAllVars extends BlockTransformer(AllVarsSymbolSubst)
         FreshVarForAllVars.applyBlock(p)
@@ -624,24 +645,37 @@ class Deforest(using TL, Raise, Elaborator.State):
   }.toSet
   
   def rewrite(p: Block) =
-    val rest = DeforestTransformer.applyBlock(p)
-    val newDefs = DeforestTransformer.matchRest.getAllFunDefs
+    val deforestTransformer = DeforestTransformer(using globallyDefinedVars.store.toSet)
+    val rest = deforestTransformer.applyBlock(p)
+    val newDefs = deforestTransformer.matchRest.getAllFunDefs
     newDefs(rest)
   
-  object DeforestTransformer extends BlockTransformer(new SymbolSubst()):
+  class DeforestTransformer(using Set[Symbol]) extends BlockTransformer(new SymbolSubst()):
     
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
           val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
           val freeVars =
-            (arms.flatMap(_._2.sortedFvs) ::: dflt.fold(Nil)(_.sortedFvs) ::: rest.sortedFvs)
-            .filterNot(
-              v => v == scrut.l ||
-              (arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b)))(v) // TODO: shouldn't intersect with dflt since it just throws Error? 
-            ) // not scrut (which will be selected on, or those defined in arms or dflt, but later refered to in the rest)
-            .sortBy(_.uid)
-            .map(v => Arg(false, Value.Ref(v)))
+            // println(rest.sortedFvs)
+            println(arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b)).map(_.uid))
+            val res = (arms.flatMap(_._2.sortedFvs) ::: dflt.fold(Nil)(_.sortedFvs) ::: rest.sortedFvs).distinct
+            println(arms.flatMap(_._2.sortedFvs))
+            println(dflt.fold(Nil)(_.sortedFvs))
+            println(rest.sortedFvs.map(_.uid))
+            val res2 = 
+              res
+              .filterNot(
+                v =>
+                  val isScrut = v == scrut.l
+                  val armsDefinedIntersection = arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b))
+                  // println(armsDefinedIntersection.size)
+                  isScrut || armsDefinedIntersection.contains(v) // TODO: shouldn't intersect with dflt since it just throws Error? 
+              ) // not scrut (which will be selected on, or those defined in arms or dflt, but later refered to in the rest)
+              .sortBy(_.uid)
+              .map(v => Arg(false, Value.Ref(v)))
+            println(res2.map(a => a.value.asInstanceOf[Value.Ref].l.uid))
+            res2
           Return(Call(scrut, freeVars)(false, false), !needExplicitRet) // TODO: free var application
         else
           Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
@@ -678,9 +712,11 @@ class Deforest(using TL, Raise, Elaborator.State):
       val rewrittenRest = applyBlock(rest) // TODO: avoid rewriting it more than once
       val freeVarsAndTheirNewSyms =
         (rewrittenBody.sortedFvs ::: rest.sortedFvs) // TODO: why it's rest.sortedFvs instead of rewrittenRest??
+          .distinct
           .map(s => s -> VarSymbol(Tree.Ident(s.nme)))
           .filterNot(x => selMap.valuesIterator.map(v => v.l).contains(x._1) || rewrittenBody.definedVars(x._1))
           .toMap
+      println(s">>> ${freeVarsAndTheirNewSyms.size}")
       val restFunOrRestBlock = matchRest.getOrElse(scrut, rewrittenRest)
       val lambdaBody = restFunOrRestBlock match
         case None => 
