@@ -271,3 +271,97 @@ last(enumFromTo(1, 10), None)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Some(9)
 
+:fixme
+:sjs
+fun c(x) = if x is
+  AA then
+    if A is
+      A then x.x
+c(AA(2))
+//│ JS (unsanitized):
+//│ let c, tmp7;
+//│ c = function c(x1) {
+//│   let scrut;
+//│   if (x1 instanceof AA1.class) {
+//│     scrut = A1;
+//│     if (scrut instanceof A1.class) {
+//│       return x1.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp7 = AA1(2);
+//│ c(tmp7)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c, tmp7, tmp8, tmp9;
+//│ c = function c(x1) {
+//│   return runtime.safeCall(x1())
+//│ };
+//│ tmp8 = 2;
+//│ tmp7 = (x1) => {
+//│   let scrut;
+//│   scrut = (x2) => {
+//│     return x2.x
+//│   };
+//│   return runtime.safeCall(scrut(x1))
+//│ };
+//│ tmp9 = tmp7;
+//│ block$res10 = c(tmp9);
+//│ undefined
+//│ ═══[RUNTIME ERROR] TypeError: Cannot read properties of undefined (reading 'x')
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+
+
+:fixme
+:expect 5
+:sjs
+fun c(x) =
+  let t = x.x
+  let n = if x is
+    AA then 2
+  n + t
+c(AA(3))
+//│ JS (unsanitized):
+//│ let c1, tmp11;
+//│ c1 = function c(x1) {
+//│   let t, n, tmp12;
+//│   t = x1.x;
+//│   if (x1 instanceof AA1.class) {
+//│     tmp12 = 2;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   n = tmp12;
+//│   return n + t
+//│ };
+//│ tmp11 = AA1(3);
+//│ c1(tmp11)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c1, tmp11, tmp12, tmp13;
+//│ c1 = function c(x1) {
+//│   let t;
+//│   t = x1.x;
+//│   return runtime.safeCall(x1(t))
+//│ };
+//│ tmp12 = 3;
+//│ tmp11 = (t) => {
+//│   let n, tmp14, tmp15, tmp16;
+//│   tmp14 = 2;
+//│   n = tmp14;
+//│   tmp15 = n;
+//│   tmp16 = t;
+//│   return tmp15 + tmp16
+//│ };
+//│ tmp13 = tmp11;
+//│ block$res12 = c1(tmp13);
+//│ undefined
+//│ ═══[RUNTIME ERROR] Expected: '5', got: 'NaN'
+//│ = NaN
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 5
