@@ -5,10 +5,10 @@
 object A
 object B
 object C
-class AA(x)
-class BB(x)
+class AA(aa)
+class BB(bb)
 object None
-class Some(x)
+class Some(value)
 
 :sjs
 fun test() =
@@ -82,12 +82,12 @@ test()
 //│   }
 //│   x = tmp;
 //│   if (x instanceof AA1.class) {
-//│     param01 = x.x;
+//│     param01 = x.aa;
 //│     x2 = param01;
 //│     return x2
 //│   } else {
 //│     if (x instanceof BB1.class) {
-//│       param0 = x.x;
+//│       param0 = x.bb;
 //│       x1 = param0;
 //│       return x1
 //│     } else {
@@ -162,12 +162,12 @@ test()
 //│   }
 //│   x = tmp;
 //│   if (x instanceof AA1.class) {
-//│     param01 = x.x;
+//│     param01 = x.aa;
 //│     x2 = param01;
 //│     return f(x2)
 //│   } else {
 //│     if (x instanceof BB1.class) {
-//│       param0 = x.x;
+//│       param0 = x.bb;
 //│       x1 = param0;
 //│       return f(x1)
 //│     } else {
@@ -231,8 +231,8 @@ fun f2(a) = if a is
 fun test() =
   let x = if true then AA(A) else BB(B)
   if x is
-    AA then f1(x.x)
-    BB then f2(x.x)
+    AA then f1(x.aa)
+    BB then f2(x.bb)
 test()
 //│ JS (unsanitized):
 //│ let test3, f1, f2;
@@ -276,10 +276,10 @@ test()
 //│   }
 //│   x = tmp;
 //│   if (x instanceof AA1.class) {
-//│     return f1(x.x)
+//│     return f1(x.aa)
 //│   } else {
 //│     if (x instanceof BB1.class) {
-//│       return f2(x.x)
+//│       return f2(x.bb)
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
@@ -351,12 +351,12 @@ test()
 //│   c = function c(x) {
 //│     let param0, x1, param01, x2;
 //│     if (x instanceof AA1.class) {
-//│       param01 = x.x;
+//│       param01 = x.aa;
 //│       x2 = param01;
 //│       return x2
 //│     } else {
 //│       if (x instanceof BB1.class) {
-//│         param0 = x.x;
+//│         param0 = x.bb;
 //│         x1 = param0;
 //│         return x1
 //│       } else {
