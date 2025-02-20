@@ -708,10 +708,10 @@ class Deforest(using TL, Raise, Elaborator.State):
       val restFunOrRestBlock = matchRest.getOrElse(scrut, rewrittenRest)
       val lambdaBody = restFunOrRestBlock match
         case None => 
-          Begin(rewrittenBody.replaceSelect(using sel, selMap), rewrittenRest)
+          Begin(rewrittenBody, rewrittenRest)
         case Some(f) =>
           Begin(
-            rewrittenBody.replaceSelect(using sel, selMap),
+            rewrittenBody,
             Return(
               Call(
                 Value.Ref(f),
