@@ -320,14 +320,14 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
-  def processBlock(b: Block)(using inArm: Option[ProdVar -> ClsOrModSymbol] = N): ProdStrat = b match
+  def processBlock(b: Block)(using inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol]): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
       constrain(scrutStrat, Dtor(scrut.uid)(m)(using this))
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map { case (Case.Cls(s, _), body) => 
           // TODO: fix this "asInstanceOf"?
-          processBlock(body)(using S(scrutStrat.asInstanceOf[ProdVar] -> s))
+          processBlock(body)(using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s))
         }
       else
         arms.map{ case (_, armBody) => processBlock(armBody) }
@@ -387,7 +387,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     case Continue(label) => ???
     case TryBlock(sub, finallyDo, rest) => ???
   
-  def constrFun(params: Ls[Param], body: Block)(using inArm: Option[ProdVar -> ClsOrModSymbol] = N) =
+  def constrFun(params: Ls[Param], body: Block)(using inArm: Map[ProdVar, ClsOrModSymbol]) =
     val paramSyms = params.map{ case Param(_, sym, _) => sym }
     val paramStrats = paramSyms.map{ sym => symToStrat(sym) }
     symToStrat.addAll(paramSyms.zip(paramStrats))
@@ -395,7 +395,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     constrain(processBlock(body), res._2)
     ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   
-  def processResult(r: Result)(using inArm: Option[ProdVar -> ClsOrModSymbol]): ProdStrat = r match
+  def processResult(r: Result)(using inArm: Map[ProdVar, ClsOrModSymbol]): ProdStrat = r match
     case c@Call(f, args) =>
       val argsTpe = args.map { case Arg(false, value) => 
         processResult(value)
@@ -446,18 +446,29 @@ class Deforest(using TL, Raise, Elaborator.State):
         Ctor(s.asObj.get, Map.empty, sel.uid)
       case _ => 
         val pStrat = processResult(p)
-        inArm match
-          case Some(armP -> clsSym) if armP === pStrat =>
-            // assert(sel.symbol.exists(_.isInstanceOf[TermSymbol]))
+        pStrat match
+          case ProdVar(pStratVar) if inArm.contains(pStratVar.asProdStrat) =>
             val tpeVar = freshVar()
             val selStrat = FieldSel(nme, tpeVar._2)(sel.uid)
-            selStrat.updateFilter(armP, clsSym :: Nil)
+            selStrat.updateFilter(pStratVar.asProdStrat, inArm(pStratVar.asProdStrat) :: Nil)
             constrain(pStrat, selStrat)
             tpeVar._1
           case _ =>
             val tpeVar = freshVar()
             constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid))
             tpeVar._1
+        
+        // if inArm.contains(pStrat) then
+        //   // assert(sel.symbol.exists(_.isInstanceOf[TermSymbol]))
+        //   val tpeVar = freshVar()
+        //   val selStrat = FieldSel(nme, tpeVar._2)(sel.uid)
+        //   selStrat.updateFilter(pStrat, inArm(pStrat) :: Nil)
+        //   constrain(pStrat, selStrat)
+        //   tpeVar._1
+        // else
+        //   val tpeVar = freshVar()
+        //   constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid))
+        //   tpeVar._1
             
     case v@Value.Ref(l) => l.asObj match
       case None => symToStrat.getStratOfSym(l)
@@ -620,7 +631,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           None
         else if dtors.size == 1 then
           val Value.Ref(scrut) = ResultUid(dtors.head._1)
-          if sels.forall{ s => ResultUid(s) match
+          if sels.forall{ s => ResultUid(s) match // FIXME: this will include selects that are not in the arms
             case Select(Value.Ref(l), nme) => l == scrut
             case _ => false
           } then
