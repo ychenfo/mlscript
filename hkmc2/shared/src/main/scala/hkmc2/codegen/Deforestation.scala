@@ -643,6 +643,18 @@ class Deforest(using TL, Raise, Elaborator.State):
     case CtorFinalDest.Match(scrut, _, _) => scrut
   }.toSet
   
+  lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
+    resolveClashes._2.keys.flatMap{
+      case DtorExpr.Match(s) =>
+        val Match(scrut, arms, dflt, rest) = matchScrutToMatchBlock(s)
+        val fvsInallBodiesAndRest = (rest :: arms.map(_._2).appendedAll(dflt)).flatMap(b => b.sortedFvs(using globallyDefinedVars.store.toSet))
+        // NOTE: doesn't intersect with defined vars in dflt because it may be only `throw error`
+        val definedInAllArms = arms.map(_._2.definedVars).reduce((a, b) => a.intersect(b))
+        Some(s -> fvsInallBodiesAndRest.filterNot(a => (a.uid == scrut.l.uid) || definedInAllArms.contains(a)).distinct.sortBy(_.uid))
+      case DtorExpr.Sel(s) => None
+    }.toMap
+      
+  
   def rewrite(p: Block) =
     val deforestTransformer = DeforestTransformer(using globallyDefinedVars.store.toSet)
     val rest = deforestTransformer.applyBlock(p)
@@ -655,16 +667,16 @@ class Deforest(using TL, Raise, Elaborator.State):
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
           val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
-          val freeVars =
-            val definedInAllArms = arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b))
-            val res = (arms.flatMap(_._2.sortedFvs) ::: dflt.fold(Nil)(_.sortedFvs) ::: rest.sortedFvs).distinct
-            res.filterNot(
-                v =>
-                  val isScrut = v == scrut.l
-                  isScrut || definedInAllArms.contains(v) // TODO: shouldn't intersect with dflt since it just throws Error? 
-              ) // not scrut (which will be selected on, or those defined in arms or dflt, but later refered to in the rest)
-              .sortBy(_.uid)
-              .map(v => Arg(false, Value.Ref(v)))
+          val freeVars = scopeExtrusionInfo(scrut.uid).map(v => Arg(false, Value.Ref(v)))
+            // val definedInAllArms = arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b))
+            // val res = (arms.flatMap(_._2.sortedFvs) ::: dflt.fold(Nil)(_.sortedFvs) ::: rest.sortedFvs).distinct
+            // res.filterNot(
+            //     v =>
+            //       val isScrut = v == scrut.l
+            //       isScrut || definedInAllArms.contains(v) // TODO: shouldn't intersect with dflt since it just throws Error? 
+            //   ) // not scrut (which will be selected on, or those defined in arms or dflt, but later refered to in the rest)
+            //   .sortBy(_.uid)
+            //   .map(v => Arg(false, Value.Ref(v)))
           Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
         else
           Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
@@ -699,12 +711,13 @@ class Deforest(using TL, Raise, Elaborator.State):
     def setupBodyAndRest(body: Block, rest: Block, scrut: ResultId, sel: Set[ResultId], selMap: Map[Tree.Ident, Value.Ref]) =
       val rewrittenBody = applyBlock(body).replaceSelect(using sel, selMap)
       val rewrittenRest = applyBlock(rest) // TODO: avoid rewriting it more than once
-      val freeVarsAndTheirNewSyms =
-        (rewrittenBody.sortedFvs ::: rewrittenRest.sortedFvs)
-          .distinct
-          .map(s => s -> VarSymbol(Tree.Ident(s.nme)))
-          .filterNot(x => selMap.valuesIterator.map(v => v.l).contains(x._1) || rewrittenBody.definedVars(x._1))
-          .toMap
+      // should first rewrite, then replace symbol, otherwise the exprids will change?
+      val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
+        // (rewrittenBody.sortedFvs ::: rewrittenRest.sortedFvs)
+        //   .distinct
+        //   .map(s => s -> VarSymbol(Tree.Ident(s.nme)))
+        //   .filterNot(x => selMap.valuesIterator.map(v => v.l).contains(x._1) || rewrittenBody.definedVars(x._1))
+        //   .toMap
       val restFunOrRestBlock = matchRest.getOrElse(scrut, rewrittenRest)
       val lambdaBody = restFunOrRestBlock match
         case None => 

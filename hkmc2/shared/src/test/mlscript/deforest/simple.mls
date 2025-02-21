@@ -848,7 +848,7 @@ map(x => x + 4, enumFromTo(1, 4))
 //│       return Cons1(tmp38, tmp39)
 //│     }
 //│   } else {
-//│     return () => {
+//│     return (f3) => {
 //│       return Nil1
 //│     }
 //│   }
