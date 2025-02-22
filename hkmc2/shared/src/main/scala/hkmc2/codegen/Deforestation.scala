@@ -49,7 +49,7 @@ case class Dtor(scrut: ResultId)(val expr: Match)(using d: Deforest) extends Con
     case None => Some(expr)
     case Some(exist) => ??? // should only update once
 
-case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId) extends ConsStrat with FieldSelTrait
+case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: Set[ResultId]) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
 case class ConsVar(s: StratVarState) extends ConsStrat with StratVarTrait(s)
 case object NoCons extends ConsStrat
@@ -320,14 +320,17 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
-  def processBlock(b: Block)(using inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol]): ProdStrat = b match
+  def processBlock(b: Block)(using
+    inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
+    matching: Set[ResultId] = Set.empty[ResultId]
+  ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
       constrain(scrutStrat, Dtor(scrut.uid)(m)(using this))
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map { case (Case.Cls(s, _), body) => 
           // TODO: fix this "asInstanceOf"?
-          processBlock(body)(using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s))
+          processBlock(body)(using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s), matching + scrut.uid)
         }
       else
         arms.map{ case (_, armBody) => processBlock(armBody) }
@@ -387,7 +390,10 @@ class Deforest(using TL, Raise, Elaborator.State):
     case Continue(label) => ???
     case TryBlock(sub, finallyDo, rest) => ???
   
-  def constrFun(params: Ls[Param], body: Block)(using inArm: Map[ProdVar, ClsOrModSymbol]) =
+  def constrFun(params: Ls[Param], body: Block)(using
+    inArm: Map[ProdVar, ClsOrModSymbol],
+    matching: Set[ResultId]
+  ) =
     val paramSyms = params.map{ case Param(_, sym, _) => sym }
     val paramStrats = paramSyms.map{ sym => symToStrat(sym) }
     symToStrat.addAll(paramSyms.zip(paramStrats))
@@ -395,7 +401,10 @@ class Deforest(using TL, Raise, Elaborator.State):
     constrain(processBlock(body), res._2)
     ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   
-  def processResult(r: Result)(using inArm: Map[ProdVar, ClsOrModSymbol]): ProdStrat = r match
+  def processResult(r: Result)(using
+    inArm: Map[ProdVar, ClsOrModSymbol],
+    matching: Set[ResultId]
+  ): ProdStrat = r match
     case c@Call(f, args) =>
       val argsTpe = args.map { case Arg(false, value) => 
         processResult(value)
@@ -406,7 +415,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             case None =>
               val pStrat = processResult(p)
               val tpeVar = freshVar()
-              constrain(pStrat, FieldSel(nme, tpeVar._2)(s.uid))
+              constrain(pStrat, FieldSel(nme, tpeVar._2)(s.uid, matching))
               val appRes = freshVar()
               constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
               appRes._1
@@ -449,13 +458,13 @@ class Deforest(using TL, Raise, Elaborator.State):
         pStrat match
           case ProdVar(pStratVar) if inArm.contains(pStratVar.asProdStrat) =>
             val tpeVar = freshVar()
-            val selStrat = FieldSel(nme, tpeVar._2)(sel.uid)
+            val selStrat = FieldSel(nme, tpeVar._2)(sel.uid, matching)
             selStrat.updateFilter(pStratVar.asProdStrat, inArm(pStratVar.asProdStrat) :: Nil)
             constrain(pStrat, selStrat)
             tpeVar._1
           case _ =>
             val tpeVar = freshVar()
-            constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid))
+            constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid, matching))
             tpeVar._1
         
         // if inArm.contains(pStrat) then
