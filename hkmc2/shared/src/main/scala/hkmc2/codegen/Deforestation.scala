@@ -588,6 +588,24 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   // ======== after resolving constraints ======
   
+  def handleCtors[A](c: ResultId, k: (ResultId, Select | Value.Ref, ClsOrModSymbol, Ls[Arg]) => A): Opt[A] =
+    ResultUid(c) match
+      case Call(fun, args) => fun match
+        case s: Select if s.symbol.flatMap(_.asCls).isDefined =>
+          Some(k(c, s, s.symbol.get.asCls.get, args))
+        case v: Value.Ref if v.l.asCls.isDefined =>
+          Some(k(c, v, v.l.asCls.get, args))
+        case _ => None
+      case s: Select if s.symbol.flatMap(_.asObj).isDefined =>
+        Some(k(c, s, s.symbol.get.asObj.get, Nil))
+      case v: Value.Ref if v.l.asObj.isDefined =>
+        Some(k(c, v, v.l.asObj.get, Nil))
+      case _ => None
+  
+  def getClsSymOfUid(c: CtorExpr): ClsOrModSymbol =
+    handleCtors(c, (_, _, s, _) => s).get
+    
+  
   lazy val resolveClashes =
     type CtorToDtor = Map[CtorExpr, CtorDest]
     type DtorToCtor = Map[DtorExpr, Ls[CtorExpr]]
@@ -611,7 +629,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     val ctorToDtor = ctorDests.ctorDests.toMap
     val dtorToCtor = dtorSources.dtorSources.toMap
     
-    removeCtor(
+    val removeClashes = removeCtor(
       ctorToDtor,
       dtorToCtor,
       ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels) =>
@@ -624,6 +642,58 @@ class Deforest(using TL, Raise, Elaborator.State):
         })
       }.keySet
     )
+    
+    val removeCycle = {
+      def getCtorInArm(ctor: CtorExpr, dtor: Match): Set[CtorExpr] =
+        val ctorSym = getClsSymOfUid(ctor)
+        val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.get._2
+        
+        object GetCtorsTransformer extends BlockTransformer(new SymbolSubst()):
+          val ctors = mutable.Set.empty[ResultId]
+          override def applyResult(r: Result): Result =
+            handleCtors(
+              r.uid,
+              (id, f, clsOrMod, args) =>
+                ctors += id
+                args.foreach { case Arg(_, value) => applyResult(value) }
+            ) match
+              case Some(_) => r
+              case None => r match
+                case Call(_, args) =>
+                  args.foreach { case Arg(_, value) => applyResult(value) }; r
+                case Instantiate(cls, args) =>
+                  args.foreach(applyResult); r
+                case _ => r
+  
+        GetCtorsTransformer.applyBlock(arm)
+        GetCtorsTransformer.ctors.toSet
+      
+      def findCycle(ctor: CtorExpr, dtor: Match): Set[CtorExpr] =
+        val cache = mutable.Set(ctor)
+        def go(ctorAndMatches: Set[CtorExpr -> Match]): Set[CtorExpr] =
+          val newCtorsAndNewMatches =
+            ctorAndMatches.flatMap((c, m) => getCtorInArm(c, m)).flatMap: c =>
+              removeClashes._1.get(c).flatMap:
+                case CtorDest(matches, sels) => matches.values.headOption.map(m => c -> m)
+          val cycled = newCtorsAndNewMatches.filter(c => !cache.add(c._1))
+          if newCtorsAndNewMatches.isEmpty then
+            Set.empty
+          else if cycled.nonEmpty then
+            cycled.map(_._1)
+          else
+            go(newCtorsAndNewMatches)
+        go(Set(ctor -> dtor))
+      
+      val toRmCtor = removeClashes._1.flatMap:
+        case (c, CtorDest(matches, sels)) => 
+          assert(matches.size <= 1)
+          matches.values.flatMap(m => findCycle(c, m))
+      
+      removeCtor(removeClashes._1, removeClashes._2, toRmCtor.toSet)
+    }
+
+    val finalRes = removeCycle
+    finalRes
     
   
   

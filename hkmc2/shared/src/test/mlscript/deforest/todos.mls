@@ -318,3 +318,60 @@ c(AA(2))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
+
+
+:sjs
+fun f(x) = if x is
+  Some then if x.x > 1 then f(Some(x.x - 1)) else 0
+f(Some(2))
+//│ JS (unsanitized):
+//│ let f, tmp11;
+//│ f = function f(x1) {
+//│   let scrut, tmp12, tmp13;
+//│   if (x1 instanceof Some1.class) {
+//│     scrut = x1.x > 1;
+//│     if (scrut === true) {
+//│       tmp12 = x1.x - 1;
+//│       tmp13 = Some1(tmp12);
+//│       return f(tmp13)
+//│     } else {
+//│       return 0
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp11 = Some1(2);
+//│ f(tmp11)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f, tmp11, tmp12, tmp13;
+//│ f = function f(x1) {
+//│   let scrut, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
+//│   if (x1 instanceof Some1.class) {
+//│     tmp16 = x1.x;
+//│     tmp17 = 1;
+//│     scrut = tmp16 > tmp17;
+//│     if (scrut === true) {
+//│       tmp18 = x1.x;
+//│       tmp19 = 1;
+//│       tmp14 = tmp18 - tmp19;
+//│       tmp20 = tmp14;
+//│       tmp15 = Some1(tmp20);
+//│       tmp21 = tmp15;
+//│       return f(tmp21)
+//│     } else {
+//│       return 0
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp12 = 2;
+//│ tmp11 = Some1(tmp12);
+//│ tmp13 = tmp11;
+//│ block$res12 = f(tmp13);
+//│ undefined
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 0
