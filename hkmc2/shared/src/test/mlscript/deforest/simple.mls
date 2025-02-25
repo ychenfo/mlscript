@@ -1084,3 +1084,52 @@ sum(enumFromTo(1, 10), 0)
 //│ = 45
 
 
+
+
+:expect 5
+:sjs
+fun c(x) =
+  let t = x.x
+  let n = if x is
+    AA then 2
+  n + t
+c(AA(3))
+//│ JS (unsanitized):
+//│ let c1, tmp36;
+//│ c1 = function c(x) {
+//│   let t, n, tmp37;
+//│   t = x.x;
+//│   if (x instanceof AA1.class) {
+//│     tmp37 = 2;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   n = tmp37;
+//│   return n + t
+//│ };
+//│ tmp36 = AA1(3);
+//│ c1(tmp36)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c1, tmp36, tmp37, tmp38;
+//│ c1 = function c(x) {
+//│   let t, n, tmp39, tmp40, tmp41;
+//│   t = x.x;
+//│   if (x instanceof AA1.class) {
+//│     tmp39 = 2;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   n = tmp39;
+//│   tmp40 = n;
+//│   tmp41 = t;
+//│   return tmp40 + tmp41
+//│ };
+//│ tmp37 = 3;
+//│ tmp36 = AA1(tmp37);
+//│ tmp38 = tmp36;
+//│ block$res29 = c1(tmp38);
+//│ undefined
+//│ = 5
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 5

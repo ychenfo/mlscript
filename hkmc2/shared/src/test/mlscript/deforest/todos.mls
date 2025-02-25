@@ -239,7 +239,7 @@ last(enumFromTo(1, 10), None)
 //│     tmp7 = enumFromTo(tmp12, tmp13);
 //│     tmp14 = a;
 //│     tmp15 = tmp7;
-//│     return () => {
+//│     return (a1) => {
 //│       let param0, param1, h, t, tmp16, tmp17, tmp18, tmp19;
 //│       param0 = tmp14;
 //│       param1 = tmp15;
@@ -271,6 +271,8 @@ last(enumFromTo(1, 10), None)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Some(9)
 
+
+// if we replace `x.x` first, the nested pat mat will not be fused...
 :fixme
 :sjs
 fun c(x) = if x is
@@ -302,66 +304,17 @@ c(AA(2))
 //│   return runtime.safeCall(x1())
 //│ };
 //│ tmp8 = 2;
-//│ tmp7 = (x1) => {
+//│ tmp7 = () => {
 //│   let scrut;
-//│   scrut = (x2) => {
-//│     return x2.x
+//│   scrut = (x1) => {
+//│     return x1.x
 //│   };
-//│   return runtime.safeCall(scrut(x1))
+//│   return runtime.safeCall(scrut(x_not_in_scope))
 //│ };
 //│ tmp9 = tmp7;
 //│ block$res10 = c(tmp9);
 //│ undefined
-//│ ═══[RUNTIME ERROR] TypeError: Cannot read properties of undefined (reading 'x')
+//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
-
-:fixme
-:expect 5
-:sjs
-fun c(x) =
-  let t = x.x
-  let n = if x is
-    AA then 2
-  n + t
-c(AA(3))
-//│ JS (unsanitized):
-//│ let c1, tmp11;
-//│ c1 = function c(x1) {
-//│   let t, n, tmp12;
-//│   t = x1.x;
-//│   if (x1 instanceof AA1.class) {
-//│     tmp12 = 2;
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│   n = tmp12;
-//│   return n + t
-//│ };
-//│ tmp11 = AA1(3);
-//│ c1(tmp11)
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let c1, tmp11, tmp12, tmp13;
-//│ c1 = function c(x1) {
-//│   let t;
-//│   t = x1.x;
-//│   return runtime.safeCall(x1(t))
-//│ };
-//│ tmp12 = 3;
-//│ tmp11 = (t) => {
-//│   let n, tmp14, tmp15, tmp16;
-//│   tmp14 = 2;
-//│   n = tmp14;
-//│   tmp15 = n;
-//│   tmp16 = t;
-//│   return tmp15 + tmp16
-//│ };
-//│ tmp13 = tmp11;
-//│ block$res12 = c1(tmp13);
-//│ undefined
-//│ ═══[RUNTIME ERROR] Expected: '5', got: 'NaN'
-//│ = NaN
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 5

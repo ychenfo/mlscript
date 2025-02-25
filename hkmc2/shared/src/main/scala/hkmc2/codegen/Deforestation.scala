@@ -493,14 +493,14 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  case class CtorDest(matches: Map[ResultId, Match], sels: Ls[ResultId])
+  case class CtorDest(matches: Map[ResultId, Match], sels: Ls[FieldSel])
   
   object ctorDests:
     val ctorDests = mutable.Map.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil))
     def update(ctor: CtorExpr, m: Match) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels))
       case None => Some(CtorDest(Map(m.scrut.uid -> m), Nil))
-    def update(ctor: CtorExpr, s: ResultId) = ctorDests.updateWith(ctor):
+    def update(ctor: CtorExpr, s: FieldSel) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels)) => Some(CtorDest(matches, s :: sels))
       case None => Some(CtorDest(Map.empty, s :: Nil))
     def get(ctor: CtorExpr) = ctorDests.get(ctor)
@@ -536,7 +536,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           // if clsSym.isDefined then
           //   args.get(clsSym.get).map(p => handle(p -> consVar))
           // else  
-          ctorDests.update(expr, selDtor.expr)
+          ctorDests.update(expr, selDtor)
           dtorSources.update(selDtor.expr, expr)
           args.find(a => a._1.id == field).map(p =>
             // rewritingSel.add(sel)
@@ -598,7 +598,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       else
         val (newCtorDests, toDelete) = ctorDests.partition(c => !rm(c._1))
         removeDtor(newCtorDests, dtorSources, toDelete.values.flatMap[DtorExpr]{ case CtorDest(mat, sels) =>
-          mat.keySet.map(s => DtorExpr.Match(s)) ++ sels.map(s => DtorExpr.Sel(s))
+          mat.keySet.map(s => DtorExpr.Match(s)) ++ sels.map(s => DtorExpr.Sel(s.expr))
         }.toSet)
     
     def removeDtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[DtorExpr]): CtorToDtor -> DtorToCtor =
@@ -617,9 +617,9 @@ class Deforest(using TL, Raise, Elaborator.State):
       ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels) =>
         (dtors.size == 0 && sels.size == 1)
         || (dtors.size == 1 && {
-          val Value.Ref(scrut) = ResultUid(dtors.head._1)
-          sels.forall { s => ResultUid(s) match
-            case Select(Value.Ref(l), nme) => l == scrut
+          val scrutRef@Value.Ref(scrut) = ResultUid(dtors.head._1)
+          sels.forall { s => ResultUid(s.expr) match
+            case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
             case _ => false }
         })
       }.keySet
@@ -631,7 +631,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     val res = mutable.Map.empty[CtorExpr, CtorFinalDest]
     resolveClashes._1.foreach { case (ctor, CtorDest(dtors, sels)) =>
       val filteredDtor = {
-        if dtors.size == 0 && sels.size == 1 then Some(CtorFinalDest.Sel(sels.head))
+        if dtors.size == 0 && sels.size == 1 then Some(CtorFinalDest.Sel(sels.head.expr))
         else if dtors.size == 0 && sels.size > 1 then
           throw Error("more than one consumer")
           None
@@ -639,12 +639,12 @@ class Deforest(using TL, Raise, Elaborator.State):
           throw Error("more than one consumer")
           None
         else if dtors.size == 1 then
-          val Value.Ref(scrut) = ResultUid(dtors.head._1)
-          if sels.forall{ s => ResultUid(s) match // FIXME: this will include selects that are not in the arms
-            case Select(Value.Ref(l), nme) => l == scrut
+          val scrutRef@Value.Ref(scrut) = ResultUid(dtors.head._1)
+          if sels.forall{ s => ResultUid(s.expr) match
+            case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
             case _ => false
           } then
-            Some(CtorFinalDest.Match(dtors.head._1, dtors.head._2, sels))
+            Some(CtorFinalDest.Match(dtors.head._1, dtors.head._2, sels.map(_.expr)))
           else
             throw Error("more than one consumer")
             None
