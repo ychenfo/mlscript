@@ -133,23 +133,19 @@ module Test with
 //│ Test1 = class Test {
 //│   static #s1;
 //│   static {
-//│     let scrut, scrut1, tmp1, tmp2, tmp3, tmp4, tmp5;
+//│     let scrut, scrut1, tmp1;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp2 = A1;
-//│       tmp1 = AA1(tmp2);
+//│       tmp1 = AA1(A1);
 //│     } else {
-//│       tmp3 = B1;
-//│       tmp1 = BB1(tmp3);
+//│       tmp1 = BB1(B1);
 //│     }
 //│     this.#s1 = tmp1;
 //│     scrut1 = this.#s1;
 //│     if (scrut1 instanceof AA1.class) {
-//│       tmp4 = this.#s1.x;
-//│       Test.f1(tmp4)
+//│       Test.f1(this.#s1.x)
 //│     } else if (scrut1 instanceof BB1.class) {
-//│       tmp5 = this.#s1.x;
-//│       Test.f2(tmp5)
+//│       Test.f2(this.#s1.x)
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
@@ -224,32 +220,23 @@ last(enumFromTo(1, 10), None)
 //│ last(tmp1, None1)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let last, enumFromTo, tmp1, tmp2, tmp3, tmp4, tmp5;
+//│ let last, enumFromTo, tmp1;
 //│ enumFromTo = function enumFromTo(a, b) {
-//│   let scrut, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
-//│   tmp8 = a;
-//│   tmp9 = b;
-//│   scrut = tmp8 < tmp9;
+//│   let scrut, tmp2, tmp3, tmp4, tmp5;
+//│   scrut = a < b;
 //│   if (scrut === true) {
-//│     tmp10 = a;
-//│     tmp11 = 1;
-//│     tmp6 = tmp10 + tmp11;
-//│     tmp12 = tmp6;
-//│     tmp13 = b;
-//│     tmp7 = enumFromTo(tmp12, tmp13);
-//│     tmp14 = a;
-//│     tmp15 = tmp7;
+//│     tmp2 = a + 1;
+//│     tmp3 = enumFromTo(tmp2, b);
+//│     tmp4 = a;
+//│     tmp5 = tmp3;
 //│     return (a1) => {
-//│       let param0, param1, h, t, tmp16, tmp17, tmp18, tmp19;
-//│       param0 = tmp14;
-//│       param1 = tmp15;
+//│       let param0, param1, h, t, tmp6;
+//│       param0 = tmp4;
+//│       param1 = tmp5;
 //│       h = param0;
 //│       t = param1;
-//│       tmp17 = h;
-//│       tmp16 = Some1(tmp17);
-//│       tmp18 = t;
-//│       tmp19 = tmp16;
-//│       return last(tmp18, tmp19)
+//│       tmp6 = Some1(h);
+//│       return last(t, tmp6)
 //│     }
 //│   } else {
 //│     return (a1) => {
@@ -260,12 +247,8 @@ last(enumFromTo(1, 10), None)
 //│ last = function last(ls, a) {
 //│   return runtime.safeCall(ls(a))
 //│ };
-//│ tmp2 = 1;
-//│ tmp3 = 10;
-//│ tmp1 = enumFromTo(tmp2, tmp3);
-//│ tmp4 = tmp1;
-//│ tmp5 = None1;
-//│ block$res8 = last(tmp4, tmp5);
+//│ tmp1 = enumFromTo(1, 10);
+//│ block$res8 = last(tmp1, None1);
 //│ undefined
 //│ = Some(9)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -281,7 +264,7 @@ fun c(x) = if x is
       A then x.x
 c(AA(2))
 //│ JS (unsanitized):
-//│ let c, tmp7;
+//│ let c, tmp3;
 //│ c = function c(x1) {
 //│   let scrut;
 //│   if (x1 instanceof AA1.class) {
@@ -295,24 +278,23 @@ c(AA(2))
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp7 = AA1(2);
-//│ c(tmp7)
+//│ tmp3 = AA1(2);
+//│ c(tmp3)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c, tmp7, tmp8, tmp9;
+//│ let c, tmp3, tmp4;
 //│ c = function c(x1) {
 //│   return runtime.safeCall(x1())
 //│ };
-//│ tmp8 = 2;
-//│ tmp7 = () => {
+//│ tmp4 = 2;
+//│ tmp3 = () => {
 //│   let scrut;
 //│   scrut = (x1) => {
 //│     return x1.x
 //│   };
 //│   return runtime.safeCall(scrut(x_not_in_scope))
 //│ };
-//│ tmp9 = tmp7;
-//│ block$res10 = c(tmp9);
+//│ block$res10 = c(tmp3);
 //│ undefined
 //│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -325,15 +307,15 @@ fun f(x) = if x is
   Some then if x.x > 1 then f(Some(x.x - 1)) else 0
 f(Some(2))
 //│ JS (unsanitized):
-//│ let f, tmp11;
+//│ let f, tmp6;
 //│ f = function f(x1) {
-//│   let scrut, tmp12, tmp13;
+//│   let scrut, tmp7, tmp8;
 //│   if (x1 instanceof Some1.class) {
 //│     scrut = x1.x > 1;
 //│     if (scrut === true) {
-//│       tmp12 = x1.x - 1;
-//│       tmp13 = Some1(tmp12);
-//│       return f(tmp13)
+//│       tmp7 = x1.x - 1;
+//│       tmp8 = Some1(tmp7);
+//│       return f(tmp8)
 //│     } else {
 //│       return 0
 //│     }
@@ -341,25 +323,19 @@ f(Some(2))
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp11 = Some1(2);
-//│ f(tmp11)
+//│ tmp6 = Some1(2);
+//│ f(tmp6)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f, tmp11, tmp12, tmp13;
+//│ let f, tmp6;
 //│ f = function f(x1) {
-//│   let scrut, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
+//│   let scrut, tmp7, tmp8;
 //│   if (x1 instanceof Some1.class) {
-//│     tmp16 = x1.x;
-//│     tmp17 = 1;
-//│     scrut = tmp16 > tmp17;
+//│     scrut = x1.x > 1;
 //│     if (scrut === true) {
-//│       tmp18 = x1.x;
-//│       tmp19 = 1;
-//│       tmp14 = tmp18 - tmp19;
-//│       tmp20 = tmp14;
-//│       tmp15 = Some1(tmp20);
-//│       tmp21 = tmp15;
-//│       return f(tmp21)
+//│       tmp7 = x1.x - 1;
+//│       tmp8 = Some1(tmp7);
+//│       return f(tmp8)
 //│     } else {
 //│       return 0
 //│     }
@@ -367,10 +343,8 @@ f(Some(2))
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp12 = 2;
-//│ tmp11 = Some1(tmp12);
-//│ tmp13 = tmp11;
-//│ block$res12 = f(tmp13);
+//│ tmp6 = Some1(2);
+//│ block$res12 = f(tmp6);
 //│ undefined
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -854,16 +854,12 @@ class Deforest(using TL, Raise, Elaborator.State):
     override def applyResult2(r: Result)(k: Result => Block): Block = r match
       case call@Call(f, args) =>
         def handleNormalCall(args: List[Arg]) =
-          val newArgSyms = args.map{ case Arg(false, v) => // TODO: spread..?
-            val tmpSym = TempSymbol(N)
-            v -> tmpSym
-          }
-          newArgSyms.foldRight(
-            k(Call(f, newArgSyms.map{ case _ -> s => Arg(false, Value.Ref(s)) })(call.isMlsFun, call.mayRaiseEffects))
-          ){ case (arg, sym) -> rest =>
-              applyResult2(arg)(r => Assign(sym, r, rest)) // TODO: avoid new tmpvars when args are not rewritten...
-          }
-          
+          var newArgs: Ls[Arg] = Nil
+          val ks = args.map:
+            case Arg(spread, value) => applyResult2(value): r =>
+              newArgs = Arg(spread, r.asInstanceOf[Path]) :: newArgs
+              End()
+          ks.foldRight(k(Call(f, newArgs.reverse)(call.isMlsFun, call.mayRaiseEffects))) { case (blk, r) => Begin(blk, r) }.flatten(identity)
         def handleCtorCall(c: ClassSymbol) =
           // assert(ctorDests(call).size == 1, s"$call has more than one destination")
           filteredCtorDests.get(call.uid) match
