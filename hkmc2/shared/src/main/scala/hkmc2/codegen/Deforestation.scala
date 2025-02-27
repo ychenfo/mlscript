@@ -855,11 +855,17 @@ class Deforest(using TL, Raise, Elaborator.State):
       case call@Call(f, args) =>
         def handleNormalCall(args: List[Arg]) =
           var newArgs: Ls[Arg] = Nil
-          val ks = args.map:
+          args.foreach:
             case Arg(spread, value) => applyResult2(value): r =>
+              // since the arguments must be paths,
+              // and calls with parameters are not paths,
+              // so paths will always be rewritten to paths,
+              // and there won't be more blocks added by `applyResult2(value)`
+              // so just use a dummy `End` here, to use `applyResult2` as `applyResult`
               newArgs = Arg(spread, r.asInstanceOf[Path]) :: newArgs
               End()
-          ks.foldRight(k(Call(f, newArgs.reverse)(call.isMlsFun, call.mayRaiseEffects))) { case (blk, r) => Begin(blk, r) }.flatten(identity)
+          k(Call(f, newArgs.reverse)(call.isMlsFun, call.mayRaiseEffects))
+          
         def handleCtorCall(c: ClassSymbol) =
           // assert(ctorDests(call).size == 1, s"$call has more than one destination")
           filteredCtorDests.get(call.uid) match

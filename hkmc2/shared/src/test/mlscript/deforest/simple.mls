@@ -1075,3 +1075,52 @@ f(A, B)
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
+
+
+:sjs
+fun f(x) = if x is
+  Some then if x.x > 1 then f(Some(x.x - 1)) else 0
+f(Some(2))
+//│ JS (unsanitized):
+//│ let f4, tmp16;
+//│ f4 = function f(x) {
+//│   let scrut, tmp17, tmp18;
+//│   if (x instanceof Some1.class) {
+//│     scrut = x.x > 1;
+//│     if (scrut === true) {
+//│       tmp17 = x.x - 1;
+//│       tmp18 = Some1(tmp17);
+//│       return f4(tmp18)
+//│     } else {
+//│       return 0
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp16 = Some1(2);
+//│ f4(tmp16)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f4, tmp16;
+//│ f4 = function f(x) {
+//│   let scrut, tmp17, tmp18;
+//│   if (x instanceof Some1.class) {
+//│     scrut = x.x > 1;
+//│     if (scrut === true) {
+//│       tmp17 = x.x - 1;
+//│       tmp18 = Some1(tmp17);
+//│       return f4(tmp18)
+//│     } else {
+//│       return 0
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp16 = Some1(2);
+//│ block$res33 = f4(tmp16);
+//│ undefined
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 0
