@@ -800,19 +800,13 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     def setupBodyAndRest(body: Block, rest: Block, scrut: ResultId, sel: Set[ResultId], selMap: Map[Tree.Ident, Value.Ref]) =
       val rewrittenBody = applyBlock(body).replaceSelect(using sel, selMap)
-      val rewrittenRest = applyBlock(rest) // TODO: avoid rewriting it more than once
-      // should first rewrite, then replace symbol, otherwise the exprids will change?
+      // should first rewrite, then replace symbol, otherwise the exprids will change
       val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
-        // (rewrittenBody.sortedFvs ::: rewrittenRest.sortedFvs)
-        //   .distinct
-        //   .map(s => s -> VarSymbol(Tree.Ident(s.nme)))
-        //   .filterNot(x => selMap.valuesIterator.map(v => v.l).contains(x._1) || rewrittenBody.definedVars(x._1))
-        //   .toMap
-      val restFunOrRestBlock = matchRest.getOrElse(scrut, rewrittenRest)
+      val restFunOrRestBlock = matchRest.getOrElse(scrut, rest)
       val lambdaBody = restFunOrRestBlock match
-        case None => 
+        case N -> rewrittenRest => 
           Begin(rewrittenBody, rewrittenRest)
-        case Some(f) =>
+        case Some(f) -> rewrittenRest =>
           Begin(
             rewrittenBody,
             Return(
@@ -822,17 +816,22 @@ class Deforest(using TL, Raise, Elaborator.State):
               false
             )
           )
-      makeLambda(lambdaBody, freeVarsAndTheirNewSyms)  
+      makeLambda(lambdaBody, freeVarsAndTheirNewSyms)
       
     
     object matchRest:
-      val store = mutable.Map.empty[ResultId, FunDefn]
+      val store = mutable.Map.empty[ResultId, Opt[FunDefn] -> Block]
       
-      def getOrElse(s: ResultId, restRewritten: Block): Opt[Symbol] =
+      // returns the symbol for the rest function (if any), and the rewritten rest block
+      def getOrElse(s: ResultId, restBeforeRewriting: Block): Opt[Symbol] -> Block =
         store.get(s) match
-          case Some(s) => Some(s.sym)
-          case None if restRewritten.isInstanceOf[End] || (resolveClashes._2(DtorExpr.Match(s)).length == 1) => None
+          case Some(f, b) => f.map(_.sym) -> b
+          case None if restBeforeRewriting.isInstanceOf[End] || (resolveClashes._2(DtorExpr.Match(s)).length == 1) =>
+            val res = N -> applyBlock(restBeforeRewriting)
+            store += s -> res
+            res
           case _ => // now need to build a new function and update the store
+            val restRewritten = applyBlock(restBeforeRewriting)
             val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
             val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
             val freeVarsAndTheirNewSyms = restRewritten.sortedFvs.map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
@@ -843,13 +842,15 @@ class Deforest(using TL, Raise, Elaborator.State):
               ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N) :: Nil,
               restRewritten.replaceSymbols(freeVarsAndTheirNewSyms)
             )
-            store += s -> newFunDef
-            Some(sym)
+            store += s -> (Some(newFunDef) -> restRewritten)
+            Some(sym) -> restRewritten
       
       def getAllFunDefs: Block => Block =
-        store.values.foldRight(identity: Block => Block): (defn, k) =>
-          r => Define(defn, k(r))
-      
+        store.values.foldRight(identity: Block => Block):
+          case (defn -> _, k) =>
+            r => defn match
+              case None => k(r)
+              case Some(defn) => Define(defn, k(r))
     
     override def applyResult2(r: Result)(k: Result => Block): Block = r match
       case call@Call(f, args) =>
