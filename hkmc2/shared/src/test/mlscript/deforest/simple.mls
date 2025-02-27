@@ -1124,3 +1124,95 @@ f(Some(2))
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 0
+
+
+
+:sjs
+let x = A
+let y = B
+if x is
+  A then 1
+if y is
+  B then 2
+//│ JS (unsanitized):
+//│ let x, y, tmp18;
+//│ x = A1;
+//│ y = B1;
+//│ if (x instanceof A1.class) {
+//│   tmp18 = 1;
+//│ } else {
+//│   throw new this.Error("match error");
+//│ }
+//│ if (y instanceof B1.class) {
+//│   2
+//│ } else {
+//│   throw new this.Error("match error");
+//│ }
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let x, y;
+//│ x = (y1) => {
+//│   let tmp18;
+//│   tmp18 = 1;
+//│   return runtime.safeCall(y1())
+//│ };
+//│ y = () => {
+//│   return 2
+//│ };
+//│ block$res35 = runtime.safeCall(x(y));
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+//│ x = A
+//│ y = B
+
+
+
+:sjs
+fun test() =
+  let x = A
+  let y = B
+  if x is
+    A then 1
+  if y is
+    B then 2
+test()
+//│ JS (unsanitized):
+//│ let test7;
+//│ test7 = function test() {
+//│   let x1, y1, tmp19;
+//│   x1 = A1;
+//│   y1 = B1;
+//│   if (x1 instanceof A1.class) {
+//│     tmp19 = 1;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   if (y1 instanceof B1.class) {
+//│     return 2
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ test7()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test7;
+//│ test7 = function test() {
+//│   let x1, y1;
+//│   x1 = (y2) => {
+//│     let tmp19;
+//│     tmp19 = 1;
+//│     return runtime.safeCall(y2())
+//│   };
+//│   y1 = () => {
+//│     return 2
+//│   };
+//│   return runtime.safeCall(x1(y1))
+//│ };
+//│ block$res37 = test7();
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2

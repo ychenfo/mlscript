@@ -13,47 +13,6 @@ class Cons(h, t)
 object None
 class Some(x)
 
-// FIXME: why it's different when all in a function?
-:sjs
-let x = A
-let y = B
-if x is
-  A then 1
-if y is
-  B then 2
-//│ JS (unsanitized):
-//│ let x, y, tmp;
-//│ x = A1;
-//│ y = B1;
-//│ if (x instanceof A1.class) {
-//│   tmp = 1;
-//│ } else {
-//│   throw new this.Error("match error");
-//│ }
-//│ if (y instanceof B1.class) {
-//│   2
-//│ } else {
-//│   throw new this.Error("match error");
-//│ }
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let x, y;
-//│ x = (y1) => {
-//│   let tmp;
-//│   tmp = 1;
-//│   return runtime.safeCall(y1())
-//│ };
-//│ y = () => {
-//│   return 2
-//│ };
-//│ block$res4 = runtime.safeCall(x(y));
-//│ undefined
-//│ = 2
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 2
-//│ x = A
-//│ y = B
-
 
 
 // TODO: how to keep track of the correct s.x
@@ -76,14 +35,14 @@ module Test with
 //│ Test1 = class Test {
 //│   static #s;
 //│   static {
-//│     let scrut, scrut1, tmp1;
+//│     let scrut, scrut1, tmp;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp1 = AA1(A1);
+//│       tmp = AA1(A1);
 //│     } else {
-//│       tmp1 = BB1(B1);
+//│       tmp = BB1(B1);
 //│     }
-//│     this.#s = tmp1;
+//│     this.#s = tmp;
 //│     scrut1 = this.#s;
 //│     if (scrut1 instanceof AA1.class) {
 //│       Test.f1(this.#s.x)
@@ -133,14 +92,14 @@ module Test with
 //│ Test1 = class Test {
 //│   static #s1;
 //│   static {
-//│     let scrut, scrut1, tmp1;
+//│     let scrut, scrut1, tmp;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp1 = AA1(A1);
+//│       tmp = AA1(A1);
 //│     } else {
-//│       tmp1 = BB1(B1);
+//│       tmp = BB1(B1);
 //│     }
-//│     this.#s1 = tmp1;
+//│     this.#s1 = tmp;
 //│     scrut1 = this.#s1;
 //│     if (scrut1 instanceof AA1.class) {
 //│       Test.f1(this.#s1.x)
@@ -174,85 +133,9 @@ module Test with
 //│   }
 //│   static toString() { return "Test"; }
 //│ };
-//│ block$res6 = undefined;
+//│ block$res4 = undefined;
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-
-
-// FIXME: the `Cons` branch does use `a`, but should also take that argument
-:sjs
-fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
-fun last(ls, a) = if ls is
-  Nil then a
-  Cons(h, t) then last(t, Some(h))
-last(enumFromTo(1, 10), None)
-//│ JS (unsanitized):
-//│ let last, enumFromTo, tmp1;
-//│ enumFromTo = function enumFromTo(a, b) {
-//│   let scrut, tmp2, tmp3;
-//│   scrut = a < b;
-//│   if (scrut === true) {
-//│     tmp2 = a + 1;
-//│     tmp3 = enumFromTo(tmp2, b);
-//│     return Cons1(a, tmp3)
-//│   } else {
-//│     return Nil1
-//│   }
-//│ };
-//│ last = function last(ls, a) {
-//│   let param0, param1, h, t, tmp2;
-//│   if (ls instanceof Nil1.class) {
-//│     return a
-//│   } else {
-//│     if (ls instanceof Cons1.class) {
-//│       param0 = ls.h;
-//│       param1 = ls.t;
-//│       h = param0;
-//│       t = param1;
-//│       tmp2 = Some1(h);
-//│       return last(t, tmp2)
-//│     } else {
-//│       throw new globalThis.Error("match error");
-//│     }
-//│   }
-//│ };
-//│ tmp1 = enumFromTo(1, 10);
-//│ last(tmp1, None1)
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let last, enumFromTo, tmp1;
-//│ enumFromTo = function enumFromTo(a, b) {
-//│   let scrut, tmp2, tmp3, tmp4, tmp5;
-//│   scrut = a < b;
-//│   if (scrut === true) {
-//│     tmp2 = a + 1;
-//│     tmp3 = enumFromTo(tmp2, b);
-//│     tmp4 = a;
-//│     tmp5 = tmp3;
-//│     return (a1) => {
-//│       let param0, param1, h, t, tmp6;
-//│       param0 = tmp4;
-//│       param1 = tmp5;
-//│       h = param0;
-//│       t = param1;
-//│       tmp6 = Some1(h);
-//│       return last(t, tmp6)
-//│     }
-//│   } else {
-//│     return (a1) => {
-//│       return a1
-//│     }
-//│   }
-//│ };
-//│ last = function last(ls, a) {
-//│   return runtime.safeCall(ls(a))
-//│ };
-//│ tmp1 = enumFromTo(1, 10);
-//│ block$res8 = last(tmp1, None1);
-//│ undefined
-//│ = Some(9)
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = Some(9)
 
 
 // NOTE: if we replace `x.x` first, the nested pat mat will not be fused...
@@ -264,13 +147,13 @@ fun c(x) = if x is
       A then x.x
 c(AA(2))
 //│ JS (unsanitized):
-//│ let c, tmp3;
-//│ c = function c(x1) {
+//│ let c, tmp;
+//│ c = function c(x) {
 //│   let scrut;
-//│   if (x1 instanceof AA1.class) {
+//│   if (x instanceof AA1.class) {
 //│     scrut = A1;
 //│     if (scrut instanceof A1.class) {
-//│       return x1.x
+//│       return x.x
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
@@ -278,24 +161,24 @@ c(AA(2))
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp3 = AA1(2);
-//│ c(tmp3)
+//│ tmp = AA1(2);
+//│ c(tmp)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c, tmp3;
-//│ c = function c(x1) {
+//│ let c, tmp;
+//│ c = function c(x) {
 //│   let scrut;
-//│   if (x1 instanceof AA1.class) {
-//│     scrut = (x2) => {
-//│       return x2.x
+//│   if (x instanceof AA1.class) {
+//│     scrut = (x1) => {
+//│       return x1.x
 //│     };
-//│     return runtime.safeCall(scrut(x1))
+//│     return runtime.safeCall(scrut(x))
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp3 = AA1(2);
-//│ block$res10 = c(tmp3);
+//│ tmp = AA1(2);
+//│ block$res6 = c(tmp);
 //│ undefined
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
