@@ -255,8 +255,8 @@ last(enumFromTo(1, 10), None)
 //│ = Some(9)
 
 
-// if we replace `x.x` first, the nested pat mat will not be fused...
-:fixme
+// NOTE: if we replace `x.x` first, the nested pat mat will not be fused...
+// currently this is fine because `x.x` is not considered to be inside the matching arm...
 :sjs
 fun c(x) = if x is
   AA then
@@ -282,21 +282,22 @@ c(AA(2))
 //│ c(tmp3)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c, tmp3, tmp4;
+//│ let c, tmp3;
 //│ c = function c(x1) {
-//│   return runtime.safeCall(x1())
-//│ };
-//│ tmp4 = 2;
-//│ tmp3 = () => {
 //│   let scrut;
-//│   scrut = (x1) => {
-//│     return x1.x
-//│   };
-//│   return runtime.safeCall(scrut(x_not_in_scope))
+//│   if (x1 instanceof AA1.class) {
+//│     scrut = (x2) => {
+//│       return x2.x
+//│     };
+//│     return runtime.safeCall(scrut(x1))
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
 //│ };
+//│ tmp3 = AA1(2);
 //│ block$res10 = c(tmp3);
 //│ undefined
-//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
+//│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 

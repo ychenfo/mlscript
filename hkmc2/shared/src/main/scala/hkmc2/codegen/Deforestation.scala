@@ -49,7 +49,7 @@ case class Dtor(scrut: ResultId)(val expr: Match)(using d: Deforest) extends Con
     case None => Some(expr)
     case Some(exist) => ??? // should only update once
 
-case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: Set[ResultId]) extends ConsStrat with FieldSelTrait
+case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: Opt[ResultId]) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
 case class ConsVar(s: StratVarState) extends ConsStrat with StratVarTrait(s)
 case object NoCons extends ConsStrat
@@ -322,7 +322,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def processBlock(b: Block)(using
     inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
-    matching: Set[ResultId] = Set.empty[ResultId]
+    matching: Opt[ResultId] = None
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
@@ -330,7 +330,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map { case (Case.Cls(s, _), body) => 
           // TODO: fix this "asInstanceOf"?
-          processBlock(body)(using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s), matching + scrut.uid)
+          processBlock(body)(using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s), Some(scrut.uid))
         }
       else
         arms.map{ case (_, armBody) => processBlock(armBody) }
@@ -392,7 +392,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def constrFun(params: Ls[Param], body: Block)(using
     inArm: Map[ProdVar, ClsOrModSymbol],
-    matching: Set[ResultId]
+    matching: Opt[ResultId]
   ) =
     val paramSyms = params.map{ case Param(_, sym, _) => sym }
     val paramStrats = paramSyms.map{ sym => symToStrat(sym) }
@@ -403,7 +403,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def processResult(r: Result)(using
     inArm: Map[ProdVar, ClsOrModSymbol],
-    matching: Set[ResultId]
+    matching: Opt[ResultId]
   ): ProdStrat = r match
     case c@Call(f, args) =>
       val argsTpe = args.map { case Arg(false, value) => 
