@@ -802,7 +802,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val rewrittenBody = applyBlock(body).replaceSelect(using sel, selMap)
       // should first rewrite, then replace symbol, otherwise the exprids will change
       val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
-      val restFunOrRestBlock = matchRest.getOrElse(scrut, rest)
+      val restFunOrRestBlock = matchRest.getOrElseUpdate(scrut, rest)
       val lambdaBody = restFunOrRestBlock match
         case N -> rewrittenRest => 
           Begin(rewrittenBody, rewrittenRest)
@@ -823,7 +823,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val store = mutable.Map.empty[ResultId, Opt[FunDefn] -> Block]
       
       // returns the symbol for the rest function (if any), and the rewritten rest block
-      def getOrElse(s: ResultId, restBeforeRewriting: Block): Opt[Symbol] -> Block =
+      def getOrElseUpdate(s: ResultId, restBeforeRewriting: Block): Opt[Symbol] -> Block =
         store.get(s) match
           case Some(f, b) => f.map(_.sym) -> b
           case None if restBeforeRewriting.isInstanceOf[End] || (resolveClashes._2(DtorExpr.Match(s)).length == 1) =>
