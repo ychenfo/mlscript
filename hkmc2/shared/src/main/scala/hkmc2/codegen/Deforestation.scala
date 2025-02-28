@@ -758,15 +758,6 @@ class Deforest(using TL, Raise, Elaborator.State):
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
           val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
           val freeVars = scopeExtrusionInfo(scrut.uid).map(v => Arg(false, Value.Ref(v)))
-            // val definedInAllArms = arms.map(_._2.definedVars).fold(arms.head._2.definedVars)((a, b) => a.intersect(b))
-            // val res = (arms.flatMap(_._2.sortedFvs) ::: dflt.fold(Nil)(_.sortedFvs) ::: rest.sortedFvs).distinct
-            // res.filterNot(
-            //     v =>
-            //       val isScrut = v == scrut.l
-            //       isScrut || definedInAllArms.contains(v) // TODO: shouldn't intersect with dflt since it just throws Error? 
-            //   ) // not scrut (which will be selected on, or those defined in arms or dflt, but later refered to in the rest)
-            //   .sortBy(_.uid)
-            //   .map(v => Arg(false, Value.Ref(v)))
           Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
         else
           Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
@@ -780,23 +771,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           case _ => super.applyBlock(d)
       case End(msg) => End(msg)
       case Throw(exc) => applyResult2(exc)(Throw.apply)
-      
       case _ => super.applyBlock(b)
-      // case AssignField(lhs, nme, rhs, rest) => ???
-      // case Label(label, body, rest) => ???
-      // case Break(label) => Break(label)
-      // case Continue(label) => ???
-      // case TryBlock(sub, finallyDo, rest) => ???
-    
-    def makeLambda(body: Block, freeVarsAndTheirNewSyms: Map[Symbol, VarSymbol]) =
-      val bodyFlattened = body.flattened // otherwise mapTail to make all return explicit may not work
-      val newBody = bodyFlattened.replaceSymbols(freeVarsAndTheirNewSyms)
-      Value.Lam(
-        ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
-        newBody.mapTail:
-          case Return(res, implct) => Return(res, false)
-          case t => t
-      )
     
     def setupBodyAndRest(body: Block, rest: Block, scrut: ResultId, sel: Set[ResultId], selMap: Map[Tree.Ident, Value.Ref]) =
       val rewrittenBody = applyBlock(body).replaceSelect(using sel, selMap)
@@ -816,7 +791,14 @@ class Deforest(using TL, Raise, Elaborator.State):
               false
             )
           )
-      makeLambda(lambdaBody, freeVarsAndTheirNewSyms)
+      val bodyFlattened = lambdaBody.flattened // otherwise mapTail to make all return explicit may not work
+      val newBody = bodyFlattened.replaceSymbols(freeVarsAndTheirNewSyms)
+      Value.Lam(
+        ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
+        newBody.mapTail:
+          case Return(res, implct) => Return(res, false)
+          case t => t
+      )
       
     
     object matchRest:
