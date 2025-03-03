@@ -777,19 +777,19 @@ class Deforest(using TL, Raise, Elaborator.State):
     object matchArms:
       val store = mutable.Map.empty[ResultId, Map[ClsOrModSymbol, FunDefn]].withDefaultValue(Map.empty)
       
-      // return either a function symbol, which needs to be applied to the class fields
-      // or a lambda, which needs to have its class fields replaced
+      // return a lambda, which either calls the extracted arm function, or contains the computations in matching arms
       def getOrElseUpdate(scrut: ResultId, m: Match, cls: ClsOrModSymbol, sel: Set[ResultId], selMap: Map[Tree.Ident, Value.Ref]) =
         assert(scrut === m.scrut.uid)
+        val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
         store.get(scrut).flatMap(_.get(cls)) match
           case None => // not registered before, or this branch of this match will only appear once
             val body = m.arms.find{ case (Case.Cls(c1, _) -> _) => c1 === cls }.get._2 // TODO: handle wildcard case
             val rest = m.rest
             val bodyInitRewritten = applyBlock(body)
-            val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
-            val restFunOrRestBlock = matchRest.getOrElseUpdate(scrut, rest) match
+            
+            val makeBody = matchRest.getOrElseUpdate(scrut, rest) match
               case N -> rewrittenRest => (bodyBlk: Block) =>
-                Begin(bodyBlk, rewrittenRest).flattened.replaceSymbols(freeVarsAndTheirNewSyms).mapTail:
+                Begin(bodyBlk, rewrittenRest).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
                   case Return(res, implct) => Return(res, false)
                   case t => t
               case Some(f) -> rewrittenRest => (bodyBlk: Block) =>
@@ -801,10 +801,9 @@ class Deforest(using TL, Raise, Elaborator.State):
                       rewrittenRest.sortedFvs.map(a => Arg(false, Value.Ref(a))))(true, false),
                     false
                   )
-                ).flattened.replaceSymbols(freeVarsAndTheirNewSyms).mapTail:
+                ).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
                   case Return(res, implct) => Return(res, false)
                   case t => t
-                
             
             if resolveClashes._2(DtorExpr.Match(scrut)).distinct.count(getClsSymOfUid(_) === cls) > 1 then
               // make a function, and register, and return a lambda calling that function with correct arguments
@@ -813,27 +812,9 @@ class Deforest(using TL, Raise, Elaborator.State):
               val newSelMapSyms = selMap.map { case (id, r) => id -> VarSymbol(Tree.Ident("field_" + id.name)) }
               val newSelMaps = newSelMapSyms.map { case (id, s) => id -> Value.Ref(s).asInstanceOf[Value.Ref] }
               val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, newSelMaps)
-              
-              // val freeVarsAndTheirNewSymsInBody = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
               val freeVarsAndTheirNewSymsInLam = freeVarsAndTheirNewSyms.map(s => s._1 -> VarSymbol(s._2.id))
               
-              // val funBody1 = restFunOrRestBlock match
-              //   case N -> rewrittenRest =>
-              //     Begin(bodyReplaceSel, rewrittenRest)
-              //   case Some(f) -> rewrittenRest =>
-              //     Begin(
-              //       bodyReplaceSel,
-              //       Return(
-              //         Call(
-              //           Value.Ref(f),
-              //           rewrittenRest.sortedFvs.map(a => Arg(false, Value.Ref(a))))(true, false),
-              //         false
-              //       )
-              //     )
-              // val funBody2 = funBody1.flattened
-              // val funBody3 = funBody2.replaceSymbols(freeVarsAndTheirNewSymsInBody.toMap)
-              val funBody = restFunOrRestBlock(bodyReplaceSel)
-              
+              val funBody = makeBody(bodyReplaceSel)
               val funSym = BlockMemberSymbol(s"match_${ResultUid(scrut).asInstanceOf[Value.Ref].l.nme}_branch_${cls.nme}", Nil)
               val newDef = FunDefn(
                 N,
@@ -847,35 +828,16 @@ class Deforest(using TL, Raise, Elaborator.State):
               )
               store += (scrut -> (store(scrut) + (cls -> newDef)))
               Value.Lam(
-                ParamList(ParamListFlags.empty, freeVarsAndTheirNewSymsInLam.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
+                ParamList(ParamListFlags.empty, freeVarsAndTheirNewSymsInLam.map(s => Param(FldFlags.empty, s._2, N)), N),
                 Return(
-                  Call(Value.Ref(funSym), freeVarsAndTheirNewSymsInLam.values.map(a => Arg(false, Value.Ref(a))).toList ::: selMap.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
+                  Call(Value.Ref(funSym), freeVarsAndTheirNewSymsInLam.map(a => Arg(false, Value.Ref(a._2))) ::: selMap.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
                   false
                 )
               )
             else
               // make a lambda, and replace the selections
-              val rewrittenBody = bodyInitRewritten.replaceSelect(using sel, selMap)
-              // should first rewrite, then replace symbol, otherwise the exprids will change
-              // val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
-              
-              // val lambdaBody = restFunOrRestBlock match
-              //   case N -> rewrittenRest => 
-              //     Begin(rewrittenBody, rewrittenRest)
-              //   case Some(f) -> rewrittenRest =>
-              //     Begin(
-              //       rewrittenBody,
-              //       Return(
-              //         Call(
-              //           Value.Ref(f),
-              //           rewrittenRest.sortedFvs.map(a => Arg(false, Value.Ref(a))))(true, false),
-              //         false
-              //       )
-              //     )
-              // val bodyFlattened = lambdaBody.flattened // otherwise mapTail to make all return explicit may not work
-              // val newBody = bodyFlattened.replaceSymbols(freeVarsAndTheirNewSyms)
-              val lambdaBody = restFunOrRestBlock(rewrittenBody)
-              
+              val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, selMap)
+              val lambdaBody = makeBody(bodyReplaceSel)
               Value.Lam(
                 ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
                 lambdaBody
@@ -883,11 +845,10 @@ class Deforest(using TL, Raise, Elaborator.State):
             
           case Some(f) =>
             // return a lambda that calls f with correct arguments
-            val freeVarsAndTheirNewSymsInLam = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
             Value.Lam(
-              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSymsInLam.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
+              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)), N),
               Return(
-                  Call(Value.Ref(f.sym), freeVarsAndTheirNewSymsInLam.values.map(a => Arg(false, Value.Ref(a))).toList ::: selMap.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
+                  Call(Value.Ref(f.sym), freeVarsAndTheirNewSyms.map(a => Arg(false, Value.Ref(a._2))) ::: selMap.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
                   false
                 )
             )
