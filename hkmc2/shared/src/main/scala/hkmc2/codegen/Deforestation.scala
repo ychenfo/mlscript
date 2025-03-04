@@ -754,6 +754,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   class DeforestTransformer(using nonFreeVars: Set[Symbol]) extends BlockTransformer(new SymbolSubst()):
     
+    var replaceSelInfo = Map.empty[ResultId, Set[ResultId] -> Map[Tree.Ident, Value.Ref]]
+    
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
@@ -785,7 +787,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           case None => // not registered before, or this branch of this match will only appear once
             val body = m.arms.find{ case (Case.Cls(c1, _) -> _) => c1 === cls }.get._2 // TODO: handle wildcard case
             val rest = m.rest
-            val bodyInitRewritten = applyBlock(body)
+            
             
             val makeBody = matchRest.getOrElseUpdate(scrut, rest) match
               case N -> rewrittenRest => (bodyBlk: Block) =>
@@ -810,8 +812,14 @@ class Deforest(using TL, Raise, Elaborator.State):
               // arguments for lambda: free vars
               // arguments for that function: free vars and pattern vars
               val newSelMapSyms = selMap.map { case (id, r) => id -> VarSymbol(Tree.Ident("field_" + id.name)) }
-              val newSelMaps = newSelMapSyms.map { case (id, s) => id -> Value.Ref(s).asInstanceOf[Value.Ref] }
-              val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, newSelMaps)
+              val newSelMaps = newSelMapSyms.map { case (id, s) => id -> Value.Ref(s).asInstanceOf[Value.Ref] }              
+              
+              replaceSelInfo += scrut -> (sel -> newSelMaps)
+              val bodyReplaceSel = applyBlock(body)
+              replaceSelInfo -= scrut
+              
+              // val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, newSelMaps)
+              
               val freeVarsAndTheirNewSymsInLam = freeVarsAndTheirNewSyms.map(s => s._1 -> VarSymbol(s._2.id))
               
               val funBody = makeBody(bodyReplaceSel)
@@ -836,7 +844,13 @@ class Deforest(using TL, Raise, Elaborator.State):
               )
             else
               // make a lambda, and replace the selections
-              val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, selMap)
+              
+              replaceSelInfo += scrut -> (sel -> selMap)
+              val bodyReplaceSel = applyBlock(body)
+              replaceSelInfo -= scrut
+              
+              // val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, selMap)
+              
               val lambdaBody = makeBody(bodyReplaceSel)
               Value.Lam(
                 ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
@@ -946,7 +960,9 @@ class Deforest(using TL, Raise, Elaborator.State):
           if rewritingSelConsumer.contains(s.uid) then
             k(p)
           else
-            k(s)
+            replaceSelInfo.values.find(v => v._1.contains(s.uid)) match
+              case None => k(s)
+              case Some(v) => k(v._2(nme))
         case Some(mod) =>
           filteredCtorDests.get(s.uid) match
             case None => 
