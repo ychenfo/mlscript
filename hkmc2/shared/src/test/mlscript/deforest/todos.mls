@@ -139,7 +139,9 @@ module Test with
 
 
 // NOTE: if we replace `x.x` first, the nested pat mat will not be fused...
-// currently this is fine because `x.x` is not considered to be inside the matching arm...
+// we can perform the replacing of `x.x` and rewriting at the same time, but
+// then there will be a non-existing free var `x`
+:fixme
 :sjs
 fun c(x) = if x is
   AA then
@@ -165,22 +167,21 @@ c(AA(2))
 //│ c(tmp)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c, tmp;
+//│ let c, tmp, tmp1;
 //│ c = function c(x) {
-//│   let scrut;
-//│   if (x instanceof AA1.class) {
-//│     scrut = (x1) => {
-//│       return x1.x
-//│     };
-//│     return runtime.safeCall(scrut(x))
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
+//│   return runtime.safeCall(x())
 //│ };
-//│ tmp = AA1(2);
+//│ tmp1 = 2;
+//│ tmp = () => {
+//│   let scrut;
+//│   scrut = (x) => {
+//│     return tmp1
+//│   };
+//│   return runtime.safeCall(scrut(x_not_in_scope))
+//│ };
 //│ block$res6 = c(tmp);
 //│ undefined
-//│ = 2
+//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
