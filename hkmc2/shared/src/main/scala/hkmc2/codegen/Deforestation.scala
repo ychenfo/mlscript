@@ -506,14 +506,14 @@ class Deforest(using TL, Raise, Elaborator.State):
     def get(ctor: CtorExpr) = ctorDests.get(ctor)
   
   object dtorSources:
-    val dtorSources = mutable.Map.empty[DtorExpr, Ls[ResultId]].withDefaultValue(Nil)
+    val dtorSources = mutable.Map.empty[DtorExpr, Set[ResultId]].withDefaultValue(Set.empty)
     private def getDtorExprOfResultId(i: ResultId) = ResultUid(i) match
       case s: Select => DtorExpr.Sel(i)
       case r: Value.Ref => DtorExpr.Match(i)
       case _ => ??? // unreachable
     def update(dtor: ResultId, ctor: ResultId) =
       val dtorExpr = getDtorExprOfResultId(dtor)
-      dtorSources += dtorExpr -> (ctor :: dtorSources(dtorExpr))
+      dtorSources += dtorExpr -> (dtorSources(dtorExpr) + ctor)
     def get(dtor: ResultId) = dtorSources.get(getDtorExprOfResultId(dtor))
       
   
@@ -608,7 +608,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   lazy val resolveClashes =
     type CtorToDtor = Map[CtorExpr, CtorDest]
-    type DtorToCtor = Map[DtorExpr, Ls[CtorExpr]]
+    type DtorToCtor = Map[DtorExpr, Set[CtorExpr]]
     
     def removeCtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[CtorExpr]): CtorToDtor -> DtorToCtor =
       if rm.isEmpty then
@@ -805,7 +805,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                   case Return(res, implct) => Return(res, false)
                   case t => t
             
-            if resolveClashes._2(DtorExpr.Match(scrut)).distinct.count(getClsSymOfUid(_) === cls) > 1 then
+            if resolveClashes._2(DtorExpr.Match(scrut)).count(getClsSymOfUid(_) === cls) > 1 then
               // make a function, and register, and return a lambda calling that function with correct arguments
               // arguments for lambda: free vars
               // arguments for that function: free vars and pattern vars
@@ -864,7 +864,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       def getOrElseUpdate(s: ResultId, restBeforeRewriting: Block): Opt[Symbol] -> Block =
         store.get(s) match
           case Some(f, b) => f.map(_.sym) -> b
-          case None if restBeforeRewriting.isInstanceOf[End] || (resolveClashes._2(DtorExpr.Match(s)).length == 1) =>
+          case None if restBeforeRewriting.isInstanceOf[End] || (resolveClashes._2(DtorExpr.Match(s)).size == 1) =>
             val res = N -> applyBlock(restBeforeRewriting)
             store += s -> res
             res
