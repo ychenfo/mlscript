@@ -156,6 +156,23 @@ c(AA(2))
 //│ tmp = AA1(2);
 //│ c(tmp)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: x (class hkmc2.semantics.VarSymbol)
+//│ ==== JS (deforested): ====
+//│ let c, tmp, tmp1;
+//│ c = function c(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ tmp1 = 2;
+//│ tmp = () => {
+//│   let scrut;
+//│   scrut = (x) => {
+//│     return tmp1
+//│   };
+//│   return runtime.safeCall(scrut(x_not_in_scope))
+//│ };
+//│ block$res6 = c(tmp);
+//│ undefined
+//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
 
 

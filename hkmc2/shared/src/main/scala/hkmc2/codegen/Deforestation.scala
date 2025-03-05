@@ -88,21 +88,20 @@ extension (b: Block)
 
   def sortedFvs(using alwaysDefined: Set[Symbol]) = (b.freeVars -- b.definedVars -- alwaysDefined).filterNot(v => v.asClsLike.isDefined).toList.sortBy(_.uid)
 
-  def replaceSelect(using ss: Set[ResultId], args: Map[Tree.Ident, Value.Ref]): Block =
-    object ReplaceSelectTransformer extends BlockTransformer(new SymbolSubst()):
-      override def applyPath(p: Path): Path = p match
-        case s@Select(_, nme) if ss(s.uid) => args(nme)
-        case _ => p
-    ReplaceSelectTransformer.applyBlock(b)
+  // def replaceSelect(using ss: Set[ResultId], args: Map[Tree.Ident, Value.Ref]): Block =
+  //   object ReplaceSelectTransformer extends BlockTransformer(new SymbolSubst()):
+  //     override def applyPath(p: Path): Path = p match
+  //       case s@Select(_, nme) if ss(s.uid) => args(nme)
+  //       case _ => p
+  //   ReplaceSelectTransformer.applyBlock(b)
   
   def hasExplicitRet: Boolean =
-    object HasExplicitRetTransformer extends BlockTransformerShallow(new SymbolSubst()):
+    object HasExplicitRetTransformer extends BlockTraverserShallow(new SymbolSubst()):
       var flag = false
-      override def applyBlock(b: Block): Block = b match
-        case Return(_, imp) => flag = !imp; b
+      override def applyBlock(b: Block): Unit = b match
+        case Return(_, imp) => flag = !imp
         case Define(defn, rest) => applyBlock(rest)
         case _ => super.applyBlock(b)
-      override def applyResult(r: Result): Result = r
     
     HasExplicitRetTransformer.applyBlock(b)
     HasExplicitRetTransformer.flag
@@ -164,7 +163,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         override def mapBuiltInSym(s: BuiltinSymbol): BuiltinSymbol =
           store += s; s
       
-      object FreshVarForAllVars extends BlockTransformer(Subst)
+      object FreshVarForAllVars extends BlockTraverser(Subst)
       FreshVarForAllVars.applyBlock(b)
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
@@ -192,7 +191,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             store += s -> freshVar(s.nme)._1; s
           override def mapModuleSym(s: ModuleSymbol): ModuleSymbol =
             store += s -> freshVar(s.nme)._1; s
-        object FreshVarForAllVars extends BlockTransformer(AllVarsSymbolSubst)
+        object FreshVarForAllVars extends BlockTraverser(AllVarsSymbolSubst)
         FreshVarForAllVars.applyBlock(p)
     
     // currently, symbols that shouldn't be read from ctx are symbols for ctors (class/object) blkMem symbols
@@ -543,22 +542,22 @@ class Deforest(using TL, Raise, Elaborator.State):
         val ctorSym = getClsSymOfUid(ctor)
         val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.get._2
         
-        object GetCtorsTransformer extends BlockTransformer(new SymbolSubst()):
+        object GetCtorsTransformer extends BlockTraverser(new SymbolSubst()):
           val ctors = mutable.Set.empty[ResultId]
-          override def applyResult(r: Result): Result =
+          override def applyResult(r: Result): Unit =
             handleCtors(
               r.uid,
               (id, f, clsOrMod, args) =>
                 ctors += id
                 args.foreach { case Arg(_, value) => applyResult(value) }
             ) match
-              case Some(_) => r
+              case Some(_) => ()
               case None => r match
                 case Call(_, args) =>
-                  args.foreach { case Arg(_, value) => applyResult(value) }; r
+                  args.foreach { case Arg(_, value) => applyResult(value) }
                 case Instantiate(cls, args) =>
-                  args.foreach(applyResult); r
-                case _ => r
+                  args.foreach(applyResult)
+                case _ => ()
   
         GetCtorsTransformer.applyBlock(arm)
         GetCtorsTransformer.ctors.toSet
