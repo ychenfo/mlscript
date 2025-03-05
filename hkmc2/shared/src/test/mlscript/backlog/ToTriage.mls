@@ -405,3 +405,10 @@ Foo(1)
 
 // ——— ——— ———
 
+if x > 0
+  then A
+  then B
+//│ /!!!\ Uncaught error: scala.MatchError: InfixApp(App(Ident(>),Tup(List(Ident(x), IntLit(0)))),keyword 'then',Ident(A)) (of class hkmc2.syntax.Tree$InfixApp)
+
+// ——— ——— ———
+

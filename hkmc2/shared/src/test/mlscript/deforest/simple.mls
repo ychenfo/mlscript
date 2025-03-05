@@ -5,12 +5,12 @@
 object A
 object B
 object C
-class AA(x)
-class BB(x)
+class AA(aa)
+class BB(bb)
 class AAA(x, y)
 class BBB(x, y)
 object None
-class Some(x)
+class Some(value)
 
 :sjs
 fun test() =
@@ -82,11 +82,11 @@ test()
 //│   }
 //│   x = tmp;
 //│   if (x instanceof AA1.class) {
-//│     param01 = x.x;
+//│     param01 = x.aa;
 //│     x2 = param01;
 //│     return x2
 //│   } else if (x instanceof BB1.class) {
-//│     param0 = x.x;
+//│     param0 = x.bb;
 //│     x1 = param0;
 //│     return x1
 //│   } else {
@@ -158,11 +158,11 @@ test()
 //│   }
 //│   x = tmp;
 //│   if (x instanceof AA1.class) {
-//│     param01 = x.x;
+//│     param01 = x.aa;
 //│     x2 = param01;
 //│     return f(x2)
 //│   } else if (x instanceof BB1.class) {
-//│     param0 = x.x;
+//│     param0 = x.bb;
 //│     x1 = param0;
 //│     return f(x1)
 //│   } else {
@@ -223,8 +223,8 @@ fun f2(a) = if a is
 fun test() =
   let x = if true then AA(A) else BB(B)
   if x is
-    AA then f1(x.x)
-    BB then f2(x.x)
+    AA then f1(x.aa)
+    BB then f2(x.bb)
 test()
 //│ JS (unsanitized):
 //│ let test3, f1, f2;
@@ -260,9 +260,9 @@ test()
 //│   }
 //│   x = tmp;
 //│   if (x instanceof AA1.class) {
-//│     return f1(x.x)
+//│     return f1(x.aa)
 //│   } else if (x instanceof BB1.class) {
-//│     return f2(x.x)
+//│     return f2(x.bb)
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
@@ -329,11 +329,11 @@ test()
 //│   c = function c(x) {
 //│     let param0, x1, param01, x2;
 //│     if (x instanceof AA1.class) {
-//│       param01 = x.x;
+//│       param01 = x.aa;
 //│       x2 = param01;
 //│       return x2
 //│     } else if (x instanceof BB1.class) {
-//│       param0 = x.x;
+//│       param0 = x.bb;
 //│       x1 = param0;
 //│       return x1
 //│     } else {
@@ -925,7 +925,7 @@ sum(enumFromTo(1, 10), 0)
 :expect 5
 :sjs
 fun c(x) =
-  let t = x.x
+  let t = x.aa
   let n = if x is
     AA then 2
   n + t
@@ -934,7 +934,7 @@ c(AA(3))
 //│ let c1, tmp13;
 //│ c1 = function c(x) {
 //│   let t, n, tmp14;
-//│   t = x.x;
+//│   t = x.aa;
 //│   if (x instanceof AA1.class) {
 //│     tmp14 = 2;
 //│   } else {
@@ -950,7 +950,7 @@ c(AA(3))
 //│ let c1, tmp13;
 //│ c1 = function c(x) {
 //│   let t, n, tmp14;
-//│   t = x.x;
+//│   t = x.aa;
 //│   if (x instanceof AA1.class) {
 //│     tmp14 = 2;
 //│   } else {
@@ -1006,16 +1006,16 @@ f(A, B)
 
 :sjs
 fun f(x) = if x is
-  Some then if x.x > 1 then f(Some(x.x - 1)) else 0
+  Some then if x.value > 1 then f(Some(x.value - 1)) else 0
 f(Some(2))
 //│ JS (unsanitized):
 //│ let f4, tmp15;
 //│ f4 = function f(x) {
 //│   let scrut, tmp16, tmp17;
 //│   if (x instanceof Some1.class) {
-//│     scrut = x.x > 1;
+//│     scrut = x.value > 1;
 //│     if (scrut === true) {
-//│       tmp16 = x.x - 1;
+//│       tmp16 = x.value - 1;
 //│       tmp17 = Some1(tmp16);
 //│       return f4(tmp17)
 //│     } else {
@@ -1033,9 +1033,9 @@ f(Some(2))
 //│ f4 = function f(x) {
 //│   let scrut, tmp16, tmp17;
 //│   if (x instanceof Some1.class) {
-//│     scrut = x.x > 1;
+//│     scrut = x.value > 1;
 //│     if (scrut === true) {
-//│       tmp16 = x.x - 1;
+//│       tmp16 = x.value - 1;
 //│       tmp17 = Some1(tmp16);
 //│       return f4(tmp17)
 //│     } else {
@@ -1256,9 +1256,9 @@ f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 fun c1(x) = if x is
   AA then
     if A is
-      A then x.x
+      A then x.aa
 fun c2(x) = if x is
-  AA then x.x
+  AA then x.aa
 fun p(a) = c1(a) + c2(a)
 p(AA(1))
 //│ JS (unsanitized):
@@ -1268,7 +1268,7 @@ p(AA(1))
 //│   if (x1 instanceof AA1.class) {
 //│     scrut = A1;
 //│     if (scrut instanceof A1.class) {
-//│       return x1.x
+//│       return x1.aa
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
@@ -1278,7 +1278,7 @@ p(AA(1))
 //│ };
 //│ c2 = function c2(x1) {
 //│   if (x1 instanceof AA1.class) {
-//│     return x1.x
+//│     return x1.aa
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
@@ -1298,7 +1298,7 @@ p(AA(1))
 //│   let scrut;
 //│   if (x1 instanceof AA1.class) {
 //│     scrut = (x2) => {
-//│       return x2.x
+//│       return x2.aa
 //│     };
 //│     return runtime.safeCall(scrut(x1))
 //│   } else {
@@ -1307,7 +1307,7 @@ p(AA(1))
 //│ };
 //│ c2 = function c2(x1) {
 //│   if (x1 instanceof AA1.class) {
-//│     return x1.x
+//│     return x1.aa
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
