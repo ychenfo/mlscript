@@ -133,8 +133,9 @@ enum Tree extends AutoLocated:
     case IntLit(value) => "integer literal"
     case DecLit(value) => "decimal literal"
     case StrLit(value) => "string literal"
-    case UnitLit(value) => if value then "null" else "undefined"
     case BoolLit(value) => s"$value literal"
+    case UnitLit(value) => if value then "null" else "undefined"
+    case Unt() => "unit"
     case Bra(k, _) => k.name + " section"
     case Block(stmts) => "block"
     case OpBlock(_) => "operator block"
@@ -168,6 +169,7 @@ enum Tree extends AutoLocated:
     case Open(_) => "open"
     case MemberProj(_, _) => "member projection"
     case Keywrd(kw) => s"'${kw.name}' keyword"
+    case Unt() => "unit"
     
   def deparenthesized: Tree = this match
     case Bra(BracketKind.Round, inner) => inner.deparenthesized
@@ -181,34 +183,51 @@ enum Tree extends AutoLocated:
     case LetLike(kw, und @ Under(), r, b) =>
       LetLike(kw, Ident("_").withLocOf(und), r, b)
     
-    case Modified(Keyword.`declare`, modLoc, s) =>
-      Annotated(Keywrd(Keyword.`declare`), s) // TODO properly attach location
-    case Modified(Keyword.`abstract`, modLoc, s) =>
-      Annotated(Keywrd(Keyword.`abstract`), s) // TODO properly attach location
-    case Modified(Keyword.`mut`, modLoc, TermDef(ImmutVal, anme, rhs)) =>
-      TermDef(MutVal, anme, rhs).withLocOf(this).desugared
-    case LetLike(letLike, App(f @ Ident(nme), Tup((id: Ident) :: r :: Nil)), N, bodo)
+    case PossiblyAnnotated(anns, m: Modified) =>
+      PossiblyAnnotated(anns,
+        m match
+        case Modified(Keyword.`declare`, modLoc, s) =>
+          Annotated(Keywrd(Keyword.`declare`), s.desugared) // TODO properly attach location
+        case Modified(Keyword.`abstract`, modLoc, s) =>
+          Annotated(Keywrd(Keyword.`abstract`), s.desugared) // TODO properly attach location
+        case Modified(Keyword.`mut`, modLoc, TermDef(ImmutVal, anme, rhs)) =>
+          TermDef(MutVal, anme, rhs).withLocOf(this).desugared
+        case _ => m
+      )
+    
+    case PossiblyAnnotated(anns, LetLike(letLike, App(f @ Ident(nme), Tup((id: Ident) :: r :: Nil)), N, bodo))
     if nme.endsWith("=") =>
-      LetLike(letLike, id, S(App(Ident(nme.init), Tup(id :: r :: Nil))), bodo).withLocOf(this).desugared
+      PossiblyAnnotated(anns, LetLike(letLike, id, S(App(Ident(nme.init), Tup(id :: r :: Nil))), bodo).withLocOf(this).desugared)
+    
     case _ => this
   
-  /** S(true) means eager spread, S(false) means lazy spread, N means no spread. */
-  def asParam: Opt[(Opt[Bool], Ident, Opt[Tree])] = this match
+  /** 
+   * Parameter `inUsing` means the param list is modified by `using`.
+   * In the first result, `S(true)` means eager spread, `S(false)` means lazy spread, and `N` means no spread.
+   */
+  def asParam(inUsing: Bool): Opt[(Opt[Bool], Ident, Opt[Tree])] = this match
     case und: Under => S(N, new Ident("_").withLocOf(und), N)
+    // * In `using` clauses, identifiers are understood as type names for unnamed contextual parameters:
+    case id: Ident if inUsing => S(N, Ident(""), S(id))
     case id: Ident => S(N, id, N)
     case Spread(Keyword.`..`, _, S(id: Ident)) => S(S(false), id, N)
     case Spread(Keyword.`...`, _, S(id: Ident)) => S(S(true), id, N)
     case Spread(Keyword.`..`, _, S(und: Under)) => S(S(false), new Ident("_").withLocOf(und), N)
     case Spread(Keyword.`...`, _, S(und: Under)) => S(S(true), new Ident("_").withLocOf(und), N)
     case InfixApp(lhs: Ident, Keyword.`:`, rhs) => S(N, lhs, S(rhs))
-    case TermDef(ImmutVal, inner, _) => inner.asParam
+    case TermDef(ImmutVal, inner, _) => inner.asParam(inUsing)
+    case Modified(Keyword.`using`, _, inner) => inner match
+      // Param of form (using name: Type). Parse it as usual.
+      case inner: InfixApp => inner.asParam(inUsing)
+      // Param of form (using Type). Synthesize an identifier for it.
+      case _ => S(N, Ident(""), S(inner))
   
   def isModuleModifier: Bool = this match
     case Tree.TypeDef(Mod, _, N, N) => true
     case _ => false
 
 object Tree:
-  val DummyApp: App = App(Dummy, Dummy)
+  val DummyApp: App = App(Dummy, Dummy) // TODO change the places where this is used
   val DummyTup: Tup = Tup(Dummy :: Nil)
   def DummyTypeDef(k: TypeDefKind)(using State): TypeDef =
     Tree.TypeDef(syntax.Cls, Tree.Dummy, N, N)
@@ -268,6 +287,7 @@ case object LetBind extends ValLike("let", "let binding")
 case object HandlerBind extends TermDefKind("handler", "handler binding")
 case object ParamBind extends ValLike("", "parameter")
 case object Fun extends TermDefKind("fun", "function")
+case object Ins extends TermDefKind("use", "implicit instance")
 sealed abstract class TypeDefKind(desc: Str) extends DeclKind(desc)
 sealed trait ObjDefKind
 sealed trait ClsLikeKind extends ObjDefKind:
@@ -285,6 +305,9 @@ case object Pat extends TypeDefKind("pattern") with ClsLikeKind
 trait TermDefImpl extends TypeOrTermDef:
   this: TermDef =>
   
+  def sParameterizedMethod: Bool =
+    (k is Fun) && paramLists.length > 0
+  
 
 trait TypeOrTermDef:
   this: TypeDef | TermDef =>
@@ -296,9 +319,23 @@ trait TypeOrTermDef:
   
   lazy val (symbName, name, paramLists, typeParams, annotatedResultType)
       : (Opt[MaybeIdent], MaybeIdent, Ls[Tup], Opt[TyTup], Opt[Tree]) =
+    val k = this match
+      case td: TypeDef => td.k
+      case td: TermDef => td.k
     def rec(t: Tree, symbName: Opt[MaybeIdent], annot: Opt[Tree]): 
       (Opt[MaybeIdent], MaybeIdent, Ls[Tup], Opt[TyTup], Opt[Tree]) = 
       t match
+      
+      // use Foo as foo = ...
+      case InfixApp(typ, Keyword.`as`, id: Ident) if k == Ins =>
+        (S(R(id)), R(id), Nil, N, S(typ))
+      
+      // use Foo = ...
+      case typ if k == Ins =>
+        val name = typ.toString()
+        val id: Ident = Ident(s"instance$$$name")
+        (S(R(id)), R(id), Nil, N, S(typ))
+      
       
       case InfixApp(tree, Keyword.`:`, ann) =>
         rec(tree, symbName, S(ann))
@@ -377,7 +414,7 @@ trait TypeDefImpl(using State) extends TypeOrTermDef:
   
   lazy val clsParams: Ls[semantics.TermSymbol] =
     this.paramLists.headOption.fold(Nil): tup =>
-      tup.fields.iterator.flatMap(_.asParam).map:
+      tup.fields.iterator.flatMap(_.asParam(false)).map:
         case (S(spd), id, _) => ??? // spreads are not allowed in class parameters
         case (N, id, _) => semantics.TermSymbol(ParamBind, symbol.asClsLike, id)
       .toList

@@ -25,6 +25,7 @@ abstract class CodeBuilder:
 class JSBuilder(using TL, State, Ctx) extends CodeBuilder:
   
   def checkMLsCalls: Bool = false
+  def checkSelections: Bool = false
   
   val builtinOpsBase: Ls[Str] = Ls(
     "+", "-", "*", "/", "%",
@@ -61,7 +62,7 @@ class JSBuilder(using TL, State, Ctx) extends CodeBuilder:
     case ts: semantics.TermSymbol =>
       ts.owner match
       case S(owner) =>
-        doc"${result(Value.This(owner))}.${
+        doc"${getVar(owner)}.${
           if (ts.k is syntax.LetBind) && !owner.isInstanceOf[semantics.TopLevelSymbol]
           then "#" + owner.privatesScope.lookup_!(ts)
           else ts.id.name
@@ -143,6 +144,14 @@ class JSBuilder(using TL, State, Ctx) extends CodeBuilder:
     case Value.Arr(es) if es.isEmpty => doc"[]"
     case Value.Arr(es) =>
       doc"[ #{  # ${es.map(argument).mkDocument(doc", # ")} #}  # ]"
+    case Value.Rcd(flds) =>
+      doc"{ #  #{ ${
+        flds.map:
+          case RcdArg(S(idx), v) =>
+            doc"${result(idx)}: ${result(v)}"
+          case RcdArg(N, v) => ???
+        .mkDocument(", ")
+      } #}  # }"
   
   def returningTerm(t: Block, endSemi: Bool)(using Raise, Scope): Document =
     def mkSemi = if endSemi then ";" else ""
@@ -159,8 +168,10 @@ class JSBuilder(using TL, State, Ctx) extends CodeBuilder:
       def mkThis(sym: InnerSymbol): Document =
         result(Value.This(sym))
       val resJS = defn match
-      case ValDefn(own, k: syntax.Val, sym, p) =>
+      case ValDefn(own, k, sym, p) =>
         val sym = defn.sym
+        // * Currently we allow `val` outside of object/module scopes,
+        // * in which case it has no owner and is just a glorified local variable rather than a field.
         own match
         case N =>
           doc"${getVar(sym)} = ${result(p)};${returningTerm(rst, endSemi)}"
@@ -179,24 +190,44 @@ class JSBuilder(using TL, State, Ctx) extends CodeBuilder:
             val result = pss.foldRight(bod):
               case (ps, block) => 
                 Return(Lam(ps, block), false)
-            val (params, bodyDoc) = setupFunction(some(sym.nme), ps, result)
-            doc"${getVar(sym)} = function ${sym.nme}($params) ${ braced(bodyDoc) };"
-          case ClsLikeDefn(ownr, isym, sym, kind, paramsOpt, par, mtds, privFlds, _pubFlds, preCtor, ctor) =>
+            val name = if sym.nameIsMeaningful then S(sym.nme) else N
+            val (params, bodyDoc) = setupFunction(name, ps, result)
+            if sym.nameIsMeaningful then
+              doc"${getVar(sym)} = function ${sym.nme}($params) ${ braced(bodyDoc) };"
+            else
+              // in JS, let name = (0, function (args) => {} ) prevents function's name from being bound to `name`
+              doc"${getVar(sym)} = (undefined, function ($params) ${ braced(bodyDoc) });"
+          case ClsLikeDefn(ownr, isym, sym, kind, paramsOpt, auxParams, par, mtds, privFlds, _pubFlds, preCtor, ctor) =>
             // * Note: `_pubFlds` is not used because in JS, fields are not declared
             val clsParams = paramsOpt.fold(Nil)(_.paramSyms)
             val ctorParams = clsParams.map(p => p -> scope.allocateName(p))
+            val ctorAuxParams = auxParams.map(ps => ps.params.map(p => p.sym -> scope.allocateName(p.sym)))
+
             val isModule = kind is syntax.Mod
             val mtdPrefix = if isModule then "static " else ""
+
             val privs =
               val scp = isym.asInstanceOf[InnerSymbol].privatesScope
               privFlds.map: fld =>
                   val nme = scp.allocateName(fld)
                   doc" # $mtdPrefix#$nme;"
                 .mkDocument(doc"")
-            val preCtorCode = ctorParams.foldLeft(body(preCtor, endSemi = true)):
+            val preCtorCode = (ctorParams ++ ctorAuxParams.flatMap(ps => ps)).foldLeft(body(preCtor, endSemi = true)):
               case (acc, (sym, nme)) =>
                 doc"$acc # this.${sym.name} = $nme;"
             val ctorCode = doc"$preCtorCode${body(ctor, endSemi = false)}"
+
+            val ctorBod = if auxParams.isEmpty then
+              doc"${braced(ctorCode)}"
+            else
+              val pss = ctorAuxParams.map(_.map(_._2))
+              val newCtorCode = doc"$ctorCode # return this;"
+              val ctorBraced = doc"${ braced(newCtorCode) }"
+              val funBod = pss.foldRight(ctorBraced):
+                case (psDoc, doc) => doc"(${psDoc.mkDocument(", ")}) => $doc"
+
+              doc"${ braced(doc" # return $funBod") }"
+            
             val ctorOrStatic = if isModule
               then doc"static"
               else doc"constructor(${
@@ -206,7 +237,20 @@ class JSBuilder(using TL, State, Ctx) extends CodeBuilder:
                 par.map(p => s" extends ${result(p)}").getOrElse("")
               } { #{ ${
                 privs
-              } # $ctorOrStatic ${ braced(ctorCode) }${
+              } # $ctorOrStatic $ctorBod${
+                if checkSelections && !isModule
+                then mtds
+                  .flatMap:
+                    case td @ FunDefn(_, _, ps :: pss, bod) => S:
+                      doc" # get ${td.sym.nme}$$__checkNotMethod() { ${
+                        getVar(State.runtimeSymbol)
+                      }.deboundMethod(${JSBuilder.makeStringLiteral(td.sym.nme)}, ${
+                        JSBuilder.makeStringLiteral(sym.nme)
+                      }); }"
+                    case _ => N
+                  .mkDocument(" ")
+                else doc""
+              }${
                 mtds.map: 
                   case td @ FunDefn(_, _, ps :: pss, bod) =>
                     val result = pss.foldRight(bod):
@@ -247,11 +291,24 @@ class JSBuilder(using TL, State, Ctx) extends CodeBuilder:
                 else doc"const $clsTmp = ${clsJS}; ${v} = new ${clsTmp
                   }; # ${v}.class = $clsTmp;"
             else
-              val fun = paramsOpt match
-                case S(params) =>
-                  val (ps, bod) = setupFunction(some(sym.nme), params, End())
-                  S(doc"function ${sym.nme}($ps) { return new ${sym.nme}.class($ps); }")
-                case N => N
+              val paramsAll = paramsOpt match
+                case None => auxParams
+                case Some(value) => value :: auxParams
+              
+              val fun = paramsAll match
+                case ps_ :: pss_ =>
+                  val (ps, _) = setupFunction(some(sym.nme), ps_, End())
+                  val pss = pss_.map(setupFunction(N, _, End())._1)
+                  val paramsDoc = pss.foldLeft(doc"($ps)"):
+                    case (doc, ps) => doc"${doc}(${ps})"
+                  val extraBrace = if paramsOpt.isDefined then "" else "()"
+                  val bod = braced(doc" # return new ${sym.nme}.class$extraBrace$paramsDoc;")
+                  val funBod = pss.foldRight(bod):
+                    case (psDoc, doc_) => doc"($psDoc) => $doc_"
+                  val funBodRet = if pss.isEmpty then funBod else braced(doc" # return $funBod")
+                  S(doc"function ${sym.nme}($ps) ${ funBodRet }")
+                case Nil => N
+              
               ownr match
               case S(owner) =>
                 val ths = mkThis(owner)
@@ -521,11 +578,13 @@ object JSBuilder:
 end JSBuilder
 
 
-trait JSBuilderArgNumSanityChecks
-    (instrument: Bool)(using Elaborator.State)
+trait JSBuilderArgNumSanityChecks(using Config, Elaborator.State)
     extends JSBuilder:
   
+  val instrument: Bool = config.sanityChecks.isDefined
+  
   override def checkMLsCalls: Bool = instrument
+  override def checkSelections: Bool = instrument
   
   val functionParamVarargSymbol = semantics.TempSymbol(N, "args")
   

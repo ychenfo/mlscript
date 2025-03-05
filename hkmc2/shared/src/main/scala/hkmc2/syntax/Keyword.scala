@@ -96,6 +96,8 @@ object Keyword:
   val `super` = Keyword("super", N, N)
   val `new` = Keyword("new", N, curPrec) // TODO: check the prec
   // val `namespace` = Keyword("namespace", N, N)
+  val `use` = Keyword("use", N, curPrec)
+  val `using` = Keyword("using", N, N)
   val `module` = Keyword("module", N, curPrec)
   val `object` = Keyword("object", N, curPrec)
   val `open` = Keyword("open", N, curPrec)
@@ -119,11 +121,16 @@ object Keyword:
   val `outer` = Keyword("outer", N, N)
   val `pattern` = Keyword("pattern", N, N)
   
+  val `->` = Keyword("->", nextPrec, eqPrec)
+  
+  val maxPrec = curPrec
+  
   // * The lambda operator is special:
   // *  it should associate very strongly on the left and very loosely on the right
   // *  so that we can write things like `f() |> x => x is 0` ie `(f()) |> (x => (x is 0))`
-  val `=>` = Keyword("=>", nextPrec, eqPrec)
-  val `->` = Keyword("->", curPrec, eqPrec)
+  // * Currently, the precedence of normal operators starts at the maximum precedence of keywords,
+  // * so we need to start the precedence of `=>` to account for that.
+  val `=>` = Keyword("=>", S(_curPrec + charPrecList.length), eqPrec)
   
   val __ = Keyword("_", N, N)
   
@@ -137,6 +144,5 @@ object Keyword:
   
   type letLike = `let`.type | `set`.type
   
-  val maxPrec = curPrec
   
 

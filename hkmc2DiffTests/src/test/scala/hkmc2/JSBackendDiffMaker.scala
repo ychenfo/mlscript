@@ -23,14 +23,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   val showSanitizedJS = NullaryCommand("ssjs")
   val showJS = NullaryCommand("sjs")
   val showRepl = NullaryCommand("showRepl")
-  val noSanityCheck = NullaryCommand("noSanityCheck")
   val traceJS = NullaryCommand("traceJS")
-  val handler = NullaryCommand("handler")
   val deforestFlag = NullaryCommand("deforest")
   val deforestInfo = NullaryCommand("deforestInfo")
   val expect = Command("expect"): ln =>
-    ln.trim
-  val stackSafe = Command("stackSafe"): ln =>
     ln.trim
   
   private val baseScp: utils.Scope =
@@ -78,7 +74,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       if hostCreated then host.terminate()
       if hostDeforestCreated then hostDeforest.terminate()
 
-  private val DEFAULT_STACK_LIMT = 500
   
   
   def mkQuery(preStr: Str, jsStr: Str)(using host: ReplHost = host, r: Raise)(k: Str => Unit) =
@@ -103,22 +98,12 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
             source = Diagnostic.Source.Runtime))
     if stderr.nonEmpty then output(s"// Standard Error:\n${stderr}")
   
-  override def processTerm(blk: semantics.Term.Blk, inImport: Bool)(using Raise): Unit =
+  override def processTerm(blk: semantics.Term.Blk, inImport: Bool)(using Config, Raise): Unit =
     super.processTerm(blk, inImport)
+    
     val outerRaise: Raise = summon
     val reportedMessages = mutable.Set.empty[Str]
-    val stackLimit = stackSafe.get match
-      case None => None
-      case Some("off") => None
-      case Some(value) => value.toIntOption match
-        case None => Some(DEFAULT_STACK_LIMT)
-        case Some(value) =>
-          if value < 0 then
-            failures += 1
-            output("/!\\ Stack limit must be positive, but the stack limit here is set to " + value)
-            Some(DEFAULT_STACK_LIMT)
-          else
-            Some(value)
+    
     if showJS.isSet then
       given Raise =
         case d @ ErrorReport(source = Source.Compilation) =>
@@ -127,12 +112,9 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         case d => outerRaise(d)
       given Elaborator.Ctx = curCtx
       val low = ltl.givenIn:
-        new codegen.Lowering(lowerHandlers = handler.isSet, stackLimit = stackLimit)
-          with codegen.LoweringSelSanityChecks(instrument = false)
-          with codegen.LoweringTraceLog(instrument = false)
+        codegen.Lowering()
       val jsb = ltl.givenIn:
         new JSBuilder
-          with JSBuilderArgNumSanityChecks(instrument = false)
       val le = low.program(blk)
       val nestedScp = baseScp.nest
       val je = nestedScp.givenIn:
@@ -230,12 +212,12 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
             output(s"Skipping already reported diagnostic: ${e.mainMsg}")
         case d => outerRaise(d)
       val low = ltl.givenIn:
-        new codegen.Lowering(lowerHandlers = handler.isSet, stackLimit = stackLimit)
-          with codegen.LoweringSelSanityChecks(noSanityCheck.isUnset)
+        new codegen.Lowering()
+          with codegen.LoweringSelSanityChecks
           with codegen.LoweringTraceLog(traceJS.isSet)
       val jsb = ltl.givenIn:
           new JSBuilder
-            with JSBuilderArgNumSanityChecks(noSanityCheck.isUnset)
+            with JSBuilderArgNumSanityChecks
       val resSym = new TempSymbol(S(blk), "block$res")
       val lowered0 = low.program(blk)
       val le = lowered0.copy(main = lowered0.main.mapTail:
@@ -321,10 +303,11 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
               ErrorReport(msg"Expected: '${expected}', got: '${result}'" -> N :: Nil,
                 source = Diagnostic.Source.Runtime)
             case _ => ()
+            val anon = nme.isEmpty
             result match
-            case "undefined" =>
-            case "()" =>
+            case "undefined" if anon =>
+            case "()" if anon =>
             case _ =>
-              output(s"${if nme.isEmpty then "" else s"$nme "}= ${result.indentNewLines("| ")}")
+              output(s"${if anon then "" else s"$nme "}= ${result.indentNewLines("| ")}")
       
       
