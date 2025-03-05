@@ -789,8 +789,6 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 
-
-:fixme
 :sjs
 fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
 fun map(f, ls) =
@@ -843,7 +841,58 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ });
 //│ map2(lambda2, tmp10)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: $tmp (class hkmc2.semantics.TempSymbol)
+//│ ==== JS (deforested): ====
+//│ let enumFromTo3, map2, tmp10, lambda2, match_ls_rest;
+//│ match_ls_rest = function match_ls_rest(f3, tmp11) {
+//│   return runtime.safeCall(tmp11(f3))
+//│ };
+//│ enumFromTo3 = function enumFromTo(a, b) {
+//│   let scrut, tmp11, tmp12, tmp13, tmp14;
+//│   scrut = a < b;
+//│   if (scrut === true) {
+//│     tmp11 = a + 1;
+//│     tmp12 = enumFromTo3(tmp11, b);
+//│     tmp13 = a;
+//│     tmp14 = tmp12;
+//│     return (f3) => {
+//│       let param0, param1, h, t, tmp15, tmp16, lambda3;
+//│       param0 = tmp13;
+//│       param1 = tmp14;
+//│       h = param0;
+//│       t = param1;
+//│       lambda3 = (undefined, function (f4) {
+//│         let tmp17, tmp18;
+//│         tmp17 = runtime.safeCall(f4(h));
+//│         tmp18 = map2(f4, t);
+//│         return Cons1(tmp17, tmp18)
+//│       });
+//│       tmp16 = lambda3;
+//│       tmp15 = tmp16;
+//│       return match_ls_rest(f3, tmp15)
+//│     }
+//│   } else {
+//│     return (f3) => {
+//│       let tmp15, lambda3;
+//│       lambda3 = (undefined, function (f4) {
+//│         return Nil1
+//│       });
+//│       tmp15 = lambda3;
+//│       return match_ls_rest(f3, tmp15)
+//│     }
+//│   }
+//│ };
+//│ map2 = function map(f3, ls) {
+//│   return runtime.safeCall(ls(f3))
+//│ };
+//│ tmp10 = enumFromTo3(1, 4);
+//│ lambda2 = (undefined, function (x) {
+//│   return x + 4
+//│ });
+//│ block$res25 = map2(lambda2, tmp10);
+//│ undefined
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
 
 
 
@@ -854,20 +903,20 @@ fun sum(ls, a) = if ls is
   Cons(h, t) then sum(t, h + a)
 sum(enumFromTo(1, 10), 0)
 //│ JS (unsanitized):
-//│ let enumFromTo4, sum1, tmp11;
+//│ let enumFromTo4, sum1, tmp12;
 //│ enumFromTo4 = function enumFromTo(a, b) {
-//│   let scrut, tmp12, tmp13;
+//│   let scrut, tmp13, tmp14;
 //│   scrut = a < b;
 //│   if (scrut === true) {
-//│     tmp12 = a + 1;
-//│     tmp13 = enumFromTo4(tmp12, b);
-//│     return Cons1(a, tmp13)
+//│     tmp13 = a + 1;
+//│     tmp14 = enumFromTo4(tmp13, b);
+//│     return Cons1(a, tmp14)
 //│   } else {
 //│     return Nil1
 //│   }
 //│ };
 //│ sum1 = function sum(ls, a) {
-//│   let param0, param1, h, t, tmp12;
+//│   let param0, param1, h, t, tmp13;
 //│   if (ls instanceof Nil1.class) {
 //│     return a
 //│   } else if (ls instanceof Cons1.class) {
@@ -875,33 +924,33 @@ sum(enumFromTo(1, 10), 0)
 //│     param1 = ls.t;
 //│     h = param0;
 //│     t = param1;
-//│     tmp12 = h + a;
-//│     return sum1(t, tmp12)
+//│     tmp13 = h + a;
+//│     return sum1(t, tmp13)
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp11 = enumFromTo4(1, 10);
-//│ sum1(tmp11, 0)
+//│ tmp12 = enumFromTo4(1, 10);
+//│ sum1(tmp12, 0)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let enumFromTo4, sum1, tmp11;
+//│ let enumFromTo4, sum1, tmp12;
 //│ enumFromTo4 = function enumFromTo(a, b) {
-//│   let scrut, tmp12, tmp13, tmp14, tmp15;
+//│   let scrut, tmp13, tmp14, tmp15, tmp16;
 //│   scrut = a < b;
 //│   if (scrut === true) {
-//│     tmp12 = a + 1;
-//│     tmp13 = enumFromTo4(tmp12, b);
-//│     tmp14 = a;
-//│     tmp15 = tmp13;
+//│     tmp13 = a + 1;
+//│     tmp14 = enumFromTo4(tmp13, b);
+//│     tmp15 = a;
+//│     tmp16 = tmp14;
 //│     return (a1) => {
-//│       let param0, param1, h, t, tmp16;
-//│       param0 = tmp14;
-//│       param1 = tmp15;
+//│       let param0, param1, h, t, tmp17;
+//│       param0 = tmp15;
+//│       param1 = tmp16;
 //│       h = param0;
 //│       t = param1;
-//│       tmp16 = h + a1;
-//│       return sum1(t, tmp16)
+//│       tmp17 = h + a1;
+//│       return sum1(t, tmp17)
 //│     }
 //│   } else {
 //│     return (a1) => {
@@ -912,8 +961,8 @@ sum(enumFromTo(1, 10), 0)
 //│ sum1 = function sum(ls, a) {
 //│   return runtime.safeCall(ls(a))
 //│ };
-//│ tmp11 = enumFromTo4(1, 10);
-//│ block$res26 = sum1(tmp11, 0);
+//│ tmp12 = enumFromTo4(1, 10);
+//│ block$res27 = sum1(tmp12, 0);
 //│ undefined
 //│ = 45
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -931,36 +980,36 @@ fun c(x) =
   n + t
 c(AA(3))
 //│ JS (unsanitized):
-//│ let c1, tmp13;
+//│ let c1, tmp14;
 //│ c1 = function c(x) {
-//│   let t, n, tmp14;
+//│   let t, n, tmp15;
 //│   t = x.aa;
 //│   if (x instanceof AA1.class) {
-//│     tmp14 = 2;
+//│     tmp15 = 2;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   n = tmp14;
+//│   n = tmp15;
 //│   return n + t
 //│ };
-//│ tmp13 = AA1(3);
-//│ c1(tmp13)
+//│ tmp14 = AA1(3);
+//│ c1(tmp14)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c1, tmp13;
+//│ let c1, tmp14;
 //│ c1 = function c(x) {
-//│   let t, n, tmp14;
+//│   let t, n, tmp15;
 //│   t = x.aa;
 //│   if (x instanceof AA1.class) {
-//│     tmp14 = 2;
+//│     tmp15 = 2;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   n = tmp14;
+//│   n = tmp15;
 //│   return n + t
 //│ };
-//│ tmp13 = AA1(3);
-//│ block$res28 = c1(tmp13);
+//│ tmp14 = AA1(3);
+//│ block$res29 = c1(tmp14);
 //│ undefined
 //│ = 5
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -993,7 +1042,7 @@ f(A, B)
 //│ f3 = function f(a, b) {
 //│   return runtime.safeCall(a(b))
 //│ };
-//│ block$res30 = f3((b) => {
+//│ block$res31 = f3((b) => {
 //│   return runtime.safeCall(b())
 //│ }, () => {
 //│   return 3
@@ -1009,15 +1058,15 @@ fun f(x) = if x is
   Some then if x.value > 1 then f(Some(x.value - 1)) else 0
 f(Some(2))
 //│ JS (unsanitized):
-//│ let f4, tmp15;
+//│ let f4, tmp16;
 //│ f4 = function f(x) {
-//│   let scrut, tmp16, tmp17;
+//│   let scrut, tmp17, tmp18;
 //│   if (x instanceof Some1.class) {
 //│     scrut = x.value > 1;
 //│     if (scrut === true) {
-//│       tmp16 = x.value - 1;
-//│       tmp17 = Some1(tmp16);
-//│       return f4(tmp17)
+//│       tmp17 = x.value - 1;
+//│       tmp18 = Some1(tmp17);
+//│       return f4(tmp18)
 //│     } else {
 //│       return 0
 //│     }
@@ -1025,19 +1074,19 @@ f(Some(2))
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp15 = Some1(2);
-//│ f4(tmp15)
+//│ tmp16 = Some1(2);
+//│ f4(tmp16)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f4, tmp15;
+//│ let f4, tmp16;
 //│ f4 = function f(x) {
-//│   let scrut, tmp16, tmp17;
+//│   let scrut, tmp17, tmp18;
 //│   if (x instanceof Some1.class) {
 //│     scrut = x.value > 1;
 //│     if (scrut === true) {
-//│       tmp16 = x.value - 1;
-//│       tmp17 = Some1(tmp16);
-//│       return f4(tmp17)
+//│       tmp17 = x.value - 1;
+//│       tmp18 = Some1(tmp17);
+//│       return f4(tmp18)
 //│     } else {
 //│       return 0
 //│     }
@@ -1045,8 +1094,8 @@ f(Some(2))
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp15 = Some1(2);
-//│ block$res32 = f4(tmp15);
+//│ tmp16 = Some1(2);
+//│ block$res33 = f4(tmp16);
 //│ undefined
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1062,11 +1111,11 @@ if x is
 if y is
   B then 2
 //│ JS (unsanitized):
-//│ let x, y, tmp17;
+//│ let x, y, tmp18;
 //│ x = A1;
 //│ y = B1;
 //│ if (x instanceof A1.class) {
-//│   tmp17 = 1;
+//│   tmp18 = 1;
 //│ } else {
 //│   throw new this.Error("match error");
 //│ }
@@ -1079,14 +1128,14 @@ if y is
 //│ ==== JS (deforested): ====
 //│ let x, y;
 //│ x = (y1) => {
-//│   let tmp17;
-//│   tmp17 = 1;
+//│   let tmp18;
+//│   tmp18 = 1;
 //│   return runtime.safeCall(y1())
 //│ };
 //│ y = () => {
 //│   return 2
 //│ };
-//│ block$res34 = runtime.safeCall(x(y));
+//│ block$res35 = runtime.safeCall(x(y));
 //│ undefined
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1108,11 +1157,11 @@ test()
 //│ JS (unsanitized):
 //│ let test7;
 //│ test7 = function test() {
-//│   let x1, y1, tmp18;
+//│   let x1, y1, tmp19;
 //│   x1 = A1;
 //│   y1 = B1;
 //│   if (x1 instanceof A1.class) {
-//│     tmp18 = 1;
+//│     tmp19 = 1;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
@@ -1129,8 +1178,8 @@ test()
 //│ test7 = function test() {
 //│   let x1, y1;
 //│   x1 = (y2) => {
-//│     let tmp18;
-//│     tmp18 = 1;
+//│     let tmp19;
+//│     tmp19 = 1;
 //│     return runtime.safeCall(y2())
 //│   };
 //│   y1 = () => {
@@ -1138,7 +1187,7 @@ test()
 //│   };
 //│   return runtime.safeCall(x1(y1))
 //│ };
-//│ block$res36 = test7();
+//│ block$res37 = test7();
 //│ undefined
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1154,98 +1203,98 @@ fun f(x, y) =
   a + 3
 f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 //│ JS (unsanitized):
-//│ let f5, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27;
+//│ let f5, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28;
 //│ f5 = function f(x1, y1) {
-//│   let a, param0, param1, n, m, param01, param11, n1, m1, tmp28, tmp29, tmp30;
+//│   let a, param0, param1, n, m, param01, param11, n1, m1, tmp29, tmp30, tmp31;
 //│   if (x1 instanceof AAA1.class) {
 //│     param01 = x1.x;
 //│     param11 = x1.y;
 //│     n1 = param01;
 //│     m1 = param11;
-//│     tmp28 = y1 + n1;
-//│     tmp29 = tmp28 - m1;
+//│     tmp29 = y1 + n1;
+//│     tmp30 = tmp29 - m1;
 //│   } else if (x1 instanceof BBB1.class) {
 //│     param0 = x1.x;
 //│     param1 = x1.y;
 //│     n = param0;
 //│     m = param1;
-//│     tmp30 = m + 1;
-//│     tmp29 = tmp30 - n;
+//│     tmp31 = m + 1;
+//│     tmp30 = tmp31 - n;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   a = tmp29;
+//│   a = tmp30;
 //│   return a + 3
 //│ };
-//│ tmp18 = AAA1(1, 3);
-//│ tmp19 = f5(tmp18, 1);
-//│ tmp20 = BBB1(2, 3);
-//│ tmp21 = f5(tmp20, 2);
-//│ tmp22 = tmp19 + tmp21;
-//│ tmp23 = AAA1(3, 2);
-//│ tmp24 = f5(tmp23, 4);
-//│ tmp25 = tmp22 + tmp24;
-//│ tmp26 = BBB1(4, 6);
-//│ tmp27 = f5(tmp26, 0);
-//│ tmp25 + tmp27
+//│ tmp19 = AAA1(1, 3);
+//│ tmp20 = f5(tmp19, 1);
+//│ tmp21 = BBB1(2, 3);
+//│ tmp22 = f5(tmp21, 2);
+//│ tmp23 = tmp20 + tmp22;
+//│ tmp24 = AAA1(3, 2);
+//│ tmp25 = f5(tmp24, 4);
+//│ tmp26 = tmp23 + tmp25;
+//│ tmp27 = BBB1(4, 6);
+//│ tmp28 = f5(tmp27, 0);
+//│ tmp26 + tmp28
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f5, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, match_x_rest, match_x_branch_AAA, tmp30, tmp31, match_x_branch_BBB, tmp32, tmp33, tmp34, tmp35;
+//│ let f5, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, match_x_rest, match_x_branch_AAA, tmp31, tmp32, match_x_branch_BBB, tmp33, tmp34, tmp35, tmp36;
 //│ match_x_branch_AAA = function match_x_branch_AAA(y1, field_x, field_y) {
-//│   let param0, param1, n, m, tmp36, tmp37;
+//│   let param0, param1, n, m, tmp37, tmp38;
 //│   param0 = field_x;
 //│   param1 = field_y;
 //│   n = param0;
 //│   m = param1;
-//│   tmp36 = y1 + n;
-//│   tmp37 = tmp36 - m;
-//│   return match_x_rest(tmp37)
+//│   tmp37 = y1 + n;
+//│   tmp38 = tmp37 - m;
+//│   return match_x_rest(tmp38)
 //│ };
 //│ match_x_branch_BBB = function match_x_branch_BBB(y1, field_x, field_y) {
-//│   let param0, param1, n, m, tmp36, tmp37;
+//│   let param0, param1, n, m, tmp37, tmp38;
 //│   param0 = field_x;
 //│   param1 = field_y;
 //│   n = param0;
 //│   m = param1;
-//│   tmp37 = m + 1;
-//│   tmp36 = tmp37 - n;
-//│   return match_x_rest(tmp36)
+//│   tmp38 = m + 1;
+//│   tmp37 = tmp38 - n;
+//│   return match_x_rest(tmp37)
 //│ };
-//│ match_x_rest = function match_x_rest(tmp36) {
+//│ match_x_rest = function match_x_rest(tmp37) {
 //│   let a;
-//│   a = tmp36;
+//│   a = tmp37;
 //│   return a + 3
 //│ };
 //│ f5 = function f(x1, y1) {
 //│   return runtime.safeCall(x1(y1))
 //│ };
-//│ tmp28 = 1;
-//│ tmp29 = 3;
-//│ tmp18 = (y1) => {
-//│   return match_x_branch_AAA(y1, tmp28, tmp29)
+//│ tmp29 = 1;
+//│ tmp30 = 3;
+//│ tmp19 = (y1) => {
+//│   return match_x_branch_AAA(y1, tmp29, tmp30)
 //│ };
-//│ tmp19 = f5(tmp18, 1);
-//│ tmp30 = 2;
-//│ tmp31 = 3;
-//│ tmp20 = (y1) => {
-//│   return match_x_branch_BBB(y1, tmp30, tmp31)
-//│ };
-//│ tmp21 = f5(tmp20, 2);
-//│ tmp22 = tmp19 + tmp21;
+//│ tmp20 = f5(tmp19, 1);
+//│ tmp31 = 2;
 //│ tmp32 = 3;
-//│ tmp33 = 2;
-//│ tmp23 = (y1) => {
-//│   return match_x_branch_AAA(y1, tmp32, tmp33)
+//│ tmp21 = (y1) => {
+//│   return match_x_branch_BBB(y1, tmp31, tmp32)
 //│ };
-//│ tmp24 = f5(tmp23, 4);
-//│ tmp25 = tmp22 + tmp24;
-//│ tmp34 = 4;
-//│ tmp35 = 6;
-//│ tmp26 = (y1) => {
-//│   return match_x_branch_BBB(y1, tmp34, tmp35)
+//│ tmp22 = f5(tmp21, 2);
+//│ tmp23 = tmp20 + tmp22;
+//│ tmp33 = 3;
+//│ tmp34 = 2;
+//│ tmp24 = (y1) => {
+//│   return match_x_branch_AAA(y1, tmp33, tmp34)
 //│ };
-//│ tmp27 = f5(tmp26, 0);
-//│ block$res38 = tmp25 + tmp27;
+//│ tmp25 = f5(tmp24, 4);
+//│ tmp26 = tmp23 + tmp25;
+//│ tmp35 = 4;
+//│ tmp36 = 6;
+//│ tmp27 = (y1) => {
+//│   return match_x_branch_BBB(y1, tmp35, tmp36)
+//│ };
+//│ tmp28 = f5(tmp27, 0);
+//│ block$res39 = tmp26 + tmp28;
 //│ undefined
 //│ = 21
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1262,7 +1311,7 @@ fun c2(x) = if x is
 fun p(a) = c1(a) + c2(a)
 p(AA(1))
 //│ JS (unsanitized):
-//│ let p, c11, c2, tmp46;
+//│ let p, c11, c2, tmp47;
 //│ c11 = function c1(x1) {
 //│   let scrut;
 //│   if (x1 instanceof AA1.class) {
@@ -1284,16 +1333,16 @@ p(AA(1))
 //│   }
 //│ };
 //│ p = function p(a) {
-//│   let tmp47, tmp48;
-//│   tmp47 = c11(a);
-//│   tmp48 = c2(a);
-//│   return tmp47 + tmp48
+//│   let tmp48, tmp49;
+//│   tmp48 = c11(a);
+//│   tmp49 = c2(a);
+//│   return tmp48 + tmp49
 //│ };
-//│ tmp46 = AA1(1);
-//│ p(tmp46)
+//│ tmp47 = AA1(1);
+//│ p(tmp47)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let p, c11, c2, tmp46;
+//│ let p, c11, c2, tmp47;
 //│ c11 = function c1(x1) {
 //│   let scrut;
 //│   if (x1 instanceof AA1.class) {
@@ -1313,13 +1362,13 @@ p(AA(1))
 //│   }
 //│ };
 //│ p = function p(a) {
-//│   let tmp47, tmp48;
-//│   tmp47 = c11(a);
-//│   tmp48 = c2(a);
-//│   return tmp47 + tmp48
+//│   let tmp48, tmp49;
+//│   tmp48 = c11(a);
+//│   tmp49 = c2(a);
+//│   return tmp48 + tmp49
 //│ };
-//│ tmp46 = AA1(1);
-//│ block$res40 = p(tmp46);
+//│ tmp47 = AA1(1);
+//│ block$res41 = p(tmp47);
 //│ undefined
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -310,7 +310,7 @@ sealed abstract class Defn:
       preCtor :: ctor :: mtds.flatMap(_.subBlocks)
   
   lazy val freeVars: Set[Local] = this match
-    case FunDefn(own, sym, params, body) => body.freeVars -- params.flatMap(_.paramSyms) - sym
+    case FunDefn(own, sym, params, body) => body.freeVars -- params.flatMap(_.paramSyms) - sym -- body.definedVars
     case ValDefn(owner, k, sym, rhs) => rhs.freeVars
     case ClsLikeDefn(own, isym, sym, k, paramsOpt, auxParams, parentSym, 
       methods, privateFields, publicFields, preCtor, ctor) =>
