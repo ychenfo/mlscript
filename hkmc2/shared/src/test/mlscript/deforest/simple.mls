@@ -46,16 +46,16 @@ test()
 //│   let x, scrut, tmp;
 //│   scrut = true;
 //│   if (scrut === true) {
-//│     tmp = (globalThis) => {
+//│     tmp = () => {
 //│       return 1
 //│     };
 //│   } else {
-//│     tmp = (globalThis) => {
+//│     tmp = () => {
 //│       return 2
 //│     };
 //│   }
 //│   x = tmp;
-//│   return runtime.safeCall(x(globalThis))
+//│   return runtime.safeCall(x())
 //│ };
 //│ block$res2 = test();
 //│ undefined
@@ -102,7 +102,7 @@ test()
 //│   scrut = true;
 //│   if (scrut === true) {
 //│     tmp1 = A1;
-//│     tmp = (globalThis) => {
+//│     tmp = () => {
 //│       let param0, x1;
 //│       param0 = tmp1;
 //│       x1 = param0;
@@ -110,7 +110,7 @@ test()
 //│     };
 //│   } else {
 //│     tmp2 = B1;
-//│     tmp = (globalThis) => {
+//│     tmp = () => {
 //│       let param0, x1;
 //│       param0 = tmp2;
 //│       x1 = param0;
@@ -118,7 +118,7 @@ test()
 //│     };
 //│   }
 //│   x = tmp;
-//│   return runtime.safeCall(x(globalThis))
+//│   return runtime.safeCall(x())
 //│ };
 //│ block$res4 = test1();
 //│ undefined
@@ -174,26 +174,26 @@ test()
 //│ ==== JS (deforested): ====
 //│ let test2, f;
 //│ f = function f(a) {
-//│   return runtime.safeCall(a(globalThis))
+//│   return runtime.safeCall(a())
 //│ };
 //│ test2 = function test() {
 //│   let x, scrut, tmp, tmp1, tmp2;
 //│   scrut = true;
 //│   if (scrut === true) {
-//│     tmp1 = (globalThis) => {
+//│     tmp1 = () => {
 //│       return 1
 //│     };
-//│     tmp = (globalThis) => {
+//│     tmp = () => {
 //│       let param0, x1;
 //│       param0 = tmp1;
 //│       x1 = param0;
 //│       return f(x1)
 //│     };
 //│   } else {
-//│     tmp2 = (globalThis) => {
+//│     tmp2 = () => {
 //│       return 2
 //│     };
-//│     tmp = (globalThis) => {
+//│     tmp = () => {
 //│       let param0, x1;
 //│       param0 = tmp2;
 //│       x1 = param0;
@@ -201,7 +201,7 @@ test()
 //│     };
 //│   }
 //│   x = tmp;
-//│   return runtime.safeCall(x(globalThis))
+//│   return runtime.safeCall(x())
 //│ };
 //│ block$res6 = test2();
 //│ undefined
@@ -272,31 +272,31 @@ test()
 //│ ==== JS (deforested): ====
 //│ let test3, f1, f2;
 //│ f1 = function f1(a) {
-//│   return runtime.safeCall(a(globalThis))
+//│   return runtime.safeCall(a())
 //│ };
 //│ f2 = function f2(a) {
-//│   return runtime.safeCall(a(globalThis))
+//│   return runtime.safeCall(a())
 //│ };
 //│ test3 = function test() {
 //│   let x, scrut, tmp, tmp1, tmp2;
 //│   scrut = true;
 //│   if (scrut === true) {
-//│     tmp1 = (globalThis) => {
+//│     tmp1 = () => {
 //│       return 1
 //│     };
-//│     tmp = (globalThis) => {
+//│     tmp = () => {
 //│       return f1(tmp1)
 //│     };
 //│   } else {
-//│     tmp2 = (globalThis) => {
+//│     tmp2 = () => {
 //│       return 5
 //│     };
-//│     tmp = (globalThis) => {
+//│     tmp = () => {
 //│       return f2(tmp2)
 //│     };
 //│   }
 //│   x = tmp;
-//│   return runtime.safeCall(x(globalThis))
+//│   return runtime.safeCall(x())
 //│ };
 //│ block$res8 = test3();
 //│ undefined
@@ -354,7 +354,7 @@ test()
 //│     scrut = true;
 //│     if (scrut === true) {
 //│       tmp1 = 11;
-//│       return (globalThis) => {
+//│       return () => {
 //│         let param0, x1;
 //│         param0 = tmp1;
 //│         x1 = param0;
@@ -362,7 +362,7 @@ test()
 //│       }
 //│     } else {
 //│       tmp2 = 22;
-//│       return (globalThis) => {
+//│       return () => {
 //│         let param0, x1;
 //│         param0 = tmp2;
 //│         x1 = param0;
@@ -371,7 +371,7 @@ test()
 //│     }
 //│   };
 //│   c = function c(x) {
-//│     return runtime.safeCall(x(globalThis))
+//│     return runtime.safeCall(x())
 //│   };
 //│   tmp = g(true);
 //│   return c(tmp)
@@ -440,7 +440,7 @@ map(enumFromTo(1, 4))
 //│     tmp2 = enumFromTo(tmp1, b);
 //│     tmp3 = a;
 //│     tmp4 = tmp2;
-//│     return (globalThis) => {
+//│     return () => {
 //│       let param0, param1, h, t, tmp5, tmp6;
 //│       param0 = tmp3;
 //│       param1 = tmp4;
@@ -451,13 +451,13 @@ map(enumFromTo(1, 4))
 //│       return Cons1(tmp5, tmp6)
 //│     }
 //│   } else {
-//│     return (globalThis) => {
+//│     return () => {
 //│       return Nil1
 //│     }
 //│   }
 //│ };
 //│ map = function map(ls) {
-//│   return runtime.safeCall(ls(globalThis))
+//│   return runtime.safeCall(ls())
 //│ };
 //│ tmp = enumFromTo(1, 4);
 //│ block$res13 = map(tmp);
@@ -516,7 +516,7 @@ sum(enumFromTo(1,10))
 //│     tmp4 = enumFromTo1(tmp3, b);
 //│     tmp5 = a;
 //│     tmp6 = tmp4;
-//│     return (globalThis) => {
+//│     return () => {
 //│       let param0, param1, h, t, tmp7;
 //│       param0 = tmp5;
 //│       param1 = tmp6;
@@ -526,13 +526,13 @@ sum(enumFromTo(1,10))
 //│       return h + tmp7
 //│     }
 //│   } else {
-//│     return (globalThis) => {
+//│     return () => {
 //│       return 0
 //│     }
 //│   }
 //│ };
 //│ sum = function sum(ls) {
-//│   return runtime.safeCall(ls(globalThis))
+//│   return runtime.safeCall(ls())
 //│ };
 //│ tmp2 = enumFromTo1(1, 10);
 //│ block$res15 = sum(tmp2);
@@ -630,15 +630,15 @@ test()
 //│ let test6;
 //│ test6 = function test() {
 //│   let x, y;
-//│   x = (globalThis, y1) => {
+//│   x = (y1) => {
 //│     let tmp4;
 //│     tmp4 = 1;
-//│     return runtime.safeCall(y1(globalThis))
+//│     return runtime.safeCall(y1())
 //│   };
-//│   y = (globalThis) => {
+//│   y = () => {
 //│     return 2
 //│   };
-//│   return runtime.safeCall(x(globalThis, y))
+//│   return runtime.safeCall(x(y))
 //│ };
 //│ block$res19 = test6();
 //│ undefined
@@ -683,14 +683,14 @@ c(A) + c(B)
 //│   return x
 //│ };
 //│ c = function c(a) {
-//│   return runtime.safeCall(a(globalThis))
+//│   return runtime.safeCall(a())
 //│ };
-//│ tmp4 = c((globalThis) => {
+//│ tmp4 = c(() => {
 //│   let tmp6;
 //│   tmp6 = 1;
 //│   return match_a_rest(tmp6)
 //│ });
-//│ tmp5 = c((globalThis) => {
+//│ tmp5 = c(() => {
 //│   let tmp6;
 //│   tmp6 = 2;
 //│   return match_a_rest(tmp6)
@@ -760,7 +760,7 @@ map(x => x + 4, enumFromTo(1, 4))
 //│     tmp10 = enumFromTo2(tmp9, b);
 //│     tmp11 = a;
 //│     tmp12 = tmp10;
-//│     return (globalThis, f3) => {
+//│     return (f3) => {
 //│       let param0, param1, h, t, tmp13, tmp14;
 //│       param0 = tmp11;
 //│       param1 = tmp12;
@@ -771,13 +771,13 @@ map(x => x + 4, enumFromTo(1, 4))
 //│       return Cons1(tmp13, tmp14)
 //│     }
 //│   } else {
-//│     return (globalThis, f3) => {
+//│     return (f3) => {
 //│       return Nil1
 //│     }
 //│   }
 //│ };
 //│ map1 = function map(f3, ls) {
-//│   return runtime.safeCall(ls(globalThis, f3))
+//│   return runtime.safeCall(ls(f3))
 //│ };
 //│ tmp8 = enumFromTo2(1, 4);
 //│ lambda = (undefined, function (x) {
@@ -894,7 +894,7 @@ sum(enumFromTo(1, 10), 0)
 //│     tmp13 = enumFromTo4(tmp12, b);
 //│     tmp14 = a;
 //│     tmp15 = tmp13;
-//│     return (globalThis, a1) => {
+//│     return (a1) => {
 //│       let param0, param1, h, t, tmp16;
 //│       param0 = tmp14;
 //│       param1 = tmp15;
@@ -904,13 +904,13 @@ sum(enumFromTo(1, 10), 0)
 //│       return sum1(t, tmp16)
 //│     }
 //│   } else {
-//│     return (globalThis, a1) => {
+//│     return (a1) => {
 //│       return a1
 //│     }
 //│   }
 //│ };
 //│ sum1 = function sum(ls, a) {
-//│   return runtime.safeCall(ls(globalThis, a))
+//│   return runtime.safeCall(ls(a))
 //│ };
 //│ tmp11 = enumFromTo4(1, 10);
 //│ block$res26 = sum1(tmp11, 0);
@@ -991,11 +991,11 @@ f(A, B)
 //│ ==== JS (deforested): ====
 //│ let f3;
 //│ f3 = function f(a, b) {
-//│   return runtime.safeCall(a(globalThis, b))
+//│   return runtime.safeCall(a(b))
 //│ };
-//│ block$res30 = f3((globalThis, b) => {
-//│   return runtime.safeCall(b(globalThis))
-//│ }, (globalThis) => {
+//│ block$res30 = f3((b) => {
+//│   return runtime.safeCall(b())
+//│ }, () => {
 //│   return 3
 //│ });
 //│ undefined
@@ -1078,15 +1078,15 @@ if y is
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
 //│ let x, y;
-//│ x = (globalThis, y1) => {
+//│ x = (y1) => {
 //│   let tmp17;
 //│   tmp17 = 1;
-//│   return runtime.safeCall(y1(globalThis))
+//│   return runtime.safeCall(y1())
 //│ };
-//│ y = (globalThis) => {
+//│ y = () => {
 //│   return 2
 //│ };
-//│ block$res34 = runtime.safeCall(x(this, y));
+//│ block$res34 = runtime.safeCall(x(y));
 //│ undefined
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1128,15 +1128,15 @@ test()
 //│ let test7;
 //│ test7 = function test() {
 //│   let x1, y1;
-//│   x1 = (globalThis, y2) => {
+//│   x1 = (y2) => {
 //│     let tmp18;
 //│     tmp18 = 1;
-//│     return runtime.safeCall(y2(globalThis))
+//│     return runtime.safeCall(y2())
 //│   };
-//│   y1 = (globalThis) => {
+//│   y1 = () => {
 //│     return 2
 //│   };
-//│   return runtime.safeCall(x1(globalThis, y1))
+//│   return runtime.safeCall(x1(y1))
 //│ };
 //│ block$res36 = test7();
 //│ undefined
@@ -1191,7 +1191,7 @@ f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
 //│ let f5, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, match_x_rest, match_x_branch_AAA, tmp30, tmp31, match_x_branch_BBB, tmp32, tmp33, tmp34, tmp35;
-//│ match_x_branch_AAA = function match_x_branch_AAA(globalThis, y1, field_x, field_y) {
+//│ match_x_branch_AAA = function match_x_branch_AAA(y1, field_x, field_y) {
 //│   let param0, param1, n, m, tmp36, tmp37;
 //│   param0 = field_x;
 //│   param1 = field_y;
@@ -1201,7 +1201,7 @@ f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 //│   tmp37 = tmp36 - m;
 //│   return match_x_rest(tmp37)
 //│ };
-//│ match_x_branch_BBB = function match_x_branch_BBB(globalThis, y1, field_x, field_y) {
+//│ match_x_branch_BBB = function match_x_branch_BBB(y1, field_x, field_y) {
 //│   let param0, param1, n, m, tmp36, tmp37;
 //│   param0 = field_x;
 //│   param1 = field_y;
@@ -1217,32 +1217,32 @@ f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 //│   return a + 3
 //│ };
 //│ f5 = function f(x1, y1) {
-//│   return runtime.safeCall(x1(globalThis, y1))
+//│   return runtime.safeCall(x1(y1))
 //│ };
 //│ tmp28 = 1;
 //│ tmp29 = 3;
-//│ tmp18 = (globalThis, y1) => {
-//│   return match_x_branch_AAA(globalThis, y1, tmp28, tmp29)
+//│ tmp18 = (y1) => {
+//│   return match_x_branch_AAA(y1, tmp28, tmp29)
 //│ };
 //│ tmp19 = f5(tmp18, 1);
 //│ tmp30 = 2;
 //│ tmp31 = 3;
-//│ tmp20 = (globalThis, y1) => {
-//│   return match_x_branch_BBB(globalThis, y1, tmp30, tmp31)
+//│ tmp20 = (y1) => {
+//│   return match_x_branch_BBB(y1, tmp30, tmp31)
 //│ };
 //│ tmp21 = f5(tmp20, 2);
 //│ tmp22 = tmp19 + tmp21;
 //│ tmp32 = 3;
 //│ tmp33 = 2;
-//│ tmp23 = (globalThis, y1) => {
-//│   return match_x_branch_AAA(globalThis, y1, tmp32, tmp33)
+//│ tmp23 = (y1) => {
+//│   return match_x_branch_AAA(y1, tmp32, tmp33)
 //│ };
 //│ tmp24 = f5(tmp23, 4);
 //│ tmp25 = tmp22 + tmp24;
 //│ tmp34 = 4;
 //│ tmp35 = 6;
-//│ tmp26 = (globalThis, y1) => {
-//│   return match_x_branch_BBB(globalThis, y1, tmp34, tmp35)
+//│ tmp26 = (y1) => {
+//│   return match_x_branch_BBB(y1, tmp34, tmp35)
 //│ };
 //│ tmp27 = f5(tmp26, 0);
 //│ block$res38 = tmp25 + tmp27;
@@ -1297,10 +1297,10 @@ p(AA(1))
 //│ c11 = function c1(x1) {
 //│   let scrut;
 //│   if (x1 instanceof AA1.class) {
-//│     scrut = (globalThis, x2) => {
+//│     scrut = (x2) => {
 //│       return x2.x
 //│     };
-//│     return runtime.safeCall(scrut(globalThis, x1))
+//│     return runtime.safeCall(scrut(x1))
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }

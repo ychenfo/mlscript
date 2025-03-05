@@ -157,6 +157,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     def init(b: Block) =
       object Subst extends SymbolSubst:
         // only consider block member symbols as globally defined
+        override def mapTopLevelSym(s: TopLevelSymbol): TopLevelSymbol =
+          store += s; s
         override def mapBlockMemberSym(s: BlockMemberSymbol): BlockMemberSymbol =
           store += s; s
         override def mapBuiltInSym(s: BuiltinSymbol): BuiltinSymbol =
