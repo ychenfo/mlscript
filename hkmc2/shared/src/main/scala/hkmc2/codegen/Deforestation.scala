@@ -77,23 +77,7 @@ trait StratVarTrait(stratState: StratVarState):
   lazy val asConsStrat = stratState.asConsStrat
   lazy val uid = stratState.uid
 
-extension (m: Match)
-  def mergeArms: Match =
-    val Match(s, arms, dflt, rest) = m
-    dflt.map(_.mergeMatchArms).fold(m):
-      case m@Match(s2, arms2, dflt2, _: End) if s2 === s =>
-        Match(
-          s,
-          (arms ::: arms2).map((cse, b) => (cse, b.mergeMatchArms)),
-          dflt2,
-          rest.mergeMatchArms
-        )
-      case d => Match(
-        s,
-        arms.map((cse, b) => (cse, b.mergeMatchArms)),
-        S(d),
-        rest.mergeMatchArms
-      )
+
 
 extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
@@ -122,97 +106,7 @@ extension (b: Block)
     
     HasExplicitRetTransformer.applyBlock(b)
     HasExplicitRetTransformer.flag
-  
-  
-  def mergeMatchArms: Block =
-    object MergeMatchArmTransformer extends BlockTransformer(new SymbolSubst()):
-      override def applyBlock(b: Block): Block = b match
-        case m: Match => m.mergeArms
-        case _ => super.applyBlock(b)
-    MergeMatchArmTransformer.applyBlock(b)
-  
-  def flattened = b.flatten(identity)
-      
-  private def flatten(k: End => Block): Block = b match
-    case Match(scrut, arms, dflt, rest) =>
-      val newRest = rest.flatten(k)
-      val newArms = arms.mapConserve: arm =>
-        val newBody = arm._2.flattened
-        if newBody is arm._2 then arm else (arm._1, newBody)
-      val newDflt = dflt.map(_.flattened)
-      if (newRest is rest) && (newArms is arms) && (dflt is newDflt)
-      then b
-      else Match(scrut, newArms, newDflt, newRest)
 
-    case Label(label, body, rest) =>
-      val newBody = body.flattened
-      val newRest = rest.flatten(k)
-      if (newBody is body) && (newRest is rest)
-      then b
-      else Label(label, newBody, newRest)
-      
-    case Begin(sub, rest) =>
-      sub.flatten(_ => rest.flatten(k))
-    
-    case TryBlock(sub, finallyDo, rest) =>
-      val newSub = sub.flattened
-      val newFinallyDo = finallyDo.flattened
-      val newRest = rest.flatten(k)
-      if (newSub is sub) && (newFinallyDo is finallyDo) && (newRest is rest)
-      then b
-      else TryBlock(newSub, newFinallyDo, newRest)
-      
-    case Assign(lhs, rhs, rest) =>
-      val newRest = rest.flatten(k)
-      if newRest is rest
-      then b
-      else Assign(lhs, rhs, newRest)
-      
-    case a@AssignField(lhs, nme, rhs, rest) =>
-      val newRest = rest.flatten(k)
-      if newRest is rest
-      then b
-      else AssignField(lhs, nme, rhs, newRest)(a.symbol)
-      
-    case AssignDynField(lhs, fld, arrayIdx, rhs, rest) =>
-      val newRest = rest.flatten(k)
-      if newRest is rest
-      then b
-      else AssignDynField(lhs, fld, arrayIdx, rhs, newRest)
-    
-    case Define(defn, rest) =>
-      val newDefn = defn match
-        case d: FunDefn =>
-          val newBody = d.body.flattened
-          if newBody is d.body
-          then d
-          else d.copy(body = newBody)
-        case v: ValDefn => v
-        case c: ClsLikeDefn =>
-          val newPreCtor = c.preCtor.flattened
-          val newCtor = c.ctor.flattened
-          if (newPreCtor is c.preCtor) && (newCtor is c.ctor)
-          then c
-          else c.copy(preCtor = newPreCtor, ctor = newCtor)
-      
-      val newRest = rest.flatten(k)
-      if (newDefn is defn) && (newRest is rest)
-      then b
-      else Define(newDefn, newRest)
-    
-    case HandleBlock(lhs, res, par, args, cls, handlers, body, rest) =>
-      val newHandlers = handlers.mapConserve: h =>
-        val newBody = h.body.flattened
-        if newBody is h.body then h else h.copy(body = newBody)
-      val newBody = body.flattened
-      val newRest = rest.flatten(k)
-      if (newHandlers is handlers) && (newBody is body) && (newRest is rest)
-      then b
-      else HandleBlock(lhs, res, par, args, cls, newHandlers, newBody, newRest)
-
-    case e: End => k(e)
-    case t: BlockTail => b
-  
 
 class Deforest(using TL, Raise, Elaborator.State):
   
@@ -221,15 +115,14 @@ class Deforest(using TL, Raise, Elaborator.State):
   import StratVarState.freshVar
   
   def apply(p: Program) =
-    val flattenP = p.main.flattened
-    val mergedArms = flattenP.mergeMatchArms
-  
-    globallyDefinedVars.init(mergedArms)
+    val mainBlk = p.main
+    
+    globallyDefinedVars.init(mainBlk)
     
     // allocate type vars for defined symbols in the blocks
-    symToStrat.init(mergedArms)
+    symToStrat.init(mainBlk)
   
-    processBlock(mergedArms)
+    processBlock(mainBlk)
     resolveConstraints
 
     tl.log("upper:")
@@ -250,7 +143,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     Program(
       p.imports,
-      rewrite(mergedArms)
+      rewrite(mainBlk)
     )
   
   // these are never considered as free vars (because of their symbol type)
