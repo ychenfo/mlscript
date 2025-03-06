@@ -156,6 +156,62 @@ c(AA(2))
 //│ tmp = AA1(2);
 //│ c(tmp)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: x (class hkmc2.semantics.VarSymbol)
+//│ ==== JS (deforested): ====
+//│ let c, tmp, tmp1;
+//│ c = function c(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ tmp1 = 2;
+//│ tmp = () => {
+//│   let scrut;
+//│   scrut = (x) => {
+//│     return tmp1
+//│   };
+//│   return runtime.safeCall(scrut(x_not_in_scope))
+//│ };
+//│ block$res6 = c(tmp);
+//│ undefined
+//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
 
 
+:fixme
+:sjs
+fun c(x, y) = if x is
+  AA then
+    if y is
+      A then x.x
+c(AA(2), A)
+//│ JS (unsanitized):
+//│ let c1, tmp3;
+//│ c1 = function c(x, y) {
+//│   if (x instanceof AA1.class) {
+//│     if (y instanceof A1.class) {
+//│       return x.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp3 = AA1(2);
+//│ c1(tmp3, A1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c1, tmp3, tmp4;
+//│ c1 = function c(x, y) {
+//│   return runtime.safeCall(x(y))
+//│ };
+//│ tmp4 = 2;
+//│ tmp3 = (y) => {
+//│   return runtime.safeCall(y(x_not_in_scope))
+//│ };
+//│ block$res8 = c1(tmp3, (x) => {
+//│   return x.x
+//│ });
+//│ undefined
+//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
