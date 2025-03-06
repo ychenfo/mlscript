@@ -147,15 +147,15 @@ extension (b: Block)
   //   ReplaceSelectTransformer.applyBlock(b)
   
   def hasExplicitRet: Boolean =
-    object HasExplicitRetTransformer extends BlockTraverserShallow(new SymbolSubst()):
+    object HasExplicitRetTraverser extends BlockTraverserShallow(new SymbolSubst()):
       var flag = false
       override def applyBlock(b: Block): Unit = b match
         case Return(_, imp) => flag = !imp
         case Define(defn, rest) => applyBlock(rest)
         case _ => super.applyBlock(b)
     
-    HasExplicitRetTransformer.applyBlock(b)
-    HasExplicitRetTransformer.flag
+    HasExplicitRetTraverser.applyBlock(b)
+    HasExplicitRetTraverser.flag
 
 
 class Deforest(using TL, Raise, Elaborator.State):
@@ -593,7 +593,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         val ctorSym = getClsSymOfUid(ctor)
         val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.get._2
         
-        object GetCtorsTransformer extends BlockTraverser(new SymbolSubst()):
+        object GetCtorsTraverser extends BlockTraverser(new SymbolSubst()):
           val ctors = mutable.Set.empty[ResultId]
           override def applyResult(r: Result): Unit =
             handleCtors(
@@ -610,8 +610,8 @@ class Deforest(using TL, Raise, Elaborator.State):
                   args.foreach(applyResult)
                 case _ => ()
   
-        GetCtorsTransformer.applyBlock(arm)
-        GetCtorsTransformer.ctors.toSet
+        GetCtorsTraverser.applyBlock(arm)
+        GetCtorsTraverser.ctors.toSet
       
       def findCycle(ctor: CtorExpr, dtor: Match): Set[CtorExpr] =
         val cache = mutable.Set(ctor)
