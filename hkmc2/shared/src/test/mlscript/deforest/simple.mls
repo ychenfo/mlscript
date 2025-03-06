@@ -9,6 +9,7 @@ class AA(aa)
 class BB(bb)
 class AAA(x, y)
 class BBB(x, y)
+class CCC(c)
 object None
 class Some(value)
 
@@ -1373,3 +1374,148 @@ p(AA(1))
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
+
+
+
+:sjs
+fun c(x, y) = if x is
+  AA(a) then
+    if y is
+      A then a
+c(AA(2), A)
+//│ JS (unsanitized):
+//│ let c3, tmp49;
+//│ c3 = function c(x1, y1) {
+//│   let param0, a;
+//│   if (x1 instanceof AA1.class) {
+//│     param0 = x1.aa;
+//│     a = param0;
+//│     if (y1 instanceof A1.class) {
+//│       return a
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp49 = AA1(2);
+//│ c3(tmp49, A1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c3, tmp49, tmp50;
+//│ c3 = function c(x1, y1) {
+//│   return runtime.safeCall(x1(y1))
+//│ };
+//│ tmp50 = 2;
+//│ tmp49 = (y1) => {
+//│   let param0, a;
+//│   param0 = tmp50;
+//│   a = param0;
+//│   return runtime.safeCall(y1(a))
+//│ };
+//│ block$res43 = c3(tmp49, (a) => {
+//│   return a
+//│ });
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+
+
+:sjs
+fun f(x, y) =
+  let a = if x is
+    AAA(n, m) then y + n - m
+    CCC(n) then n + 1
+  a + 3
+f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4) + f(CCC(4), 0)
+//│ JS (unsanitized):
+//│ let f6, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61;
+//│ f6 = function f(x1, y1) {
+//│   let a, param0, n, param01, param1, n1, m, tmp62, tmp63;
+//│   if (x1 instanceof AAA1.class) {
+//│     param01 = x1.x;
+//│     param1 = x1.y;
+//│     n1 = param01;
+//│     m = param1;
+//│     tmp62 = y1 + n1;
+//│     tmp63 = tmp62 - m;
+//│   } else if (x1 instanceof CCC1.class) {
+//│     param0 = x1.c;
+//│     n = param0;
+//│     tmp63 = n + 1;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   a = tmp63;
+//│   return a + 3
+//│ };
+//│ tmp52 = AAA1(1, 3);
+//│ tmp53 = f6(tmp52, 1);
+//│ tmp54 = CCC1(2);
+//│ tmp55 = f6(tmp54, 2);
+//│ tmp56 = tmp53 + tmp55;
+//│ tmp57 = AAA1(3, 2);
+//│ tmp58 = f6(tmp57, 4);
+//│ tmp59 = tmp56 + tmp58;
+//│ tmp60 = CCC1(4);
+//│ tmp61 = f6(tmp60, 0);
+//│ tmp59 + tmp61
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f6, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, match_x_rest1, match_x_branch_AAA1, tmp64, match_x_branch_CCC, tmp65, tmp66, tmp67;
+//│ match_x_branch_AAA1 = function match_x_branch_AAA(y1, field_x, field_y) {
+//│   let param0, param1, n, m, tmp68, tmp69;
+//│   param0 = field_x;
+//│   param1 = field_y;
+//│   n = param0;
+//│   m = param1;
+//│   tmp68 = y1 + n;
+//│   tmp69 = tmp68 - m;
+//│   return match_x_rest1(tmp69)
+//│ };
+//│ match_x_branch_CCC = function match_x_branch_CCC(y1, field_c) {
+//│   let param0, n, tmp68;
+//│   param0 = field_c;
+//│   n = param0;
+//│   tmp68 = n + 1;
+//│   return match_x_rest1(tmp68)
+//│ };
+//│ match_x_rest1 = function match_x_rest(tmp68) {
+//│   let a;
+//│   a = tmp68;
+//│   return a + 3
+//│ };
+//│ f6 = function f(x1, y1) {
+//│   return runtime.safeCall(x1(y1))
+//│ };
+//│ tmp62 = 1;
+//│ tmp63 = 3;
+//│ tmp52 = (y1) => {
+//│   return match_x_branch_AAA1(y1, tmp62, tmp63)
+//│ };
+//│ tmp53 = f6(tmp52, 1);
+//│ tmp64 = 2;
+//│ tmp54 = (y1) => {
+//│   return match_x_branch_CCC(y1, tmp64)
+//│ };
+//│ tmp55 = f6(tmp54, 2);
+//│ tmp56 = tmp53 + tmp55;
+//│ tmp65 = 3;
+//│ tmp66 = 2;
+//│ tmp57 = (y1) => {
+//│   return match_x_branch_AAA1(y1, tmp65, tmp66)
+//│ };
+//│ tmp58 = f6(tmp57, 4);
+//│ tmp59 = tmp56 + tmp58;
+//│ tmp67 = 4;
+//│ tmp60 = (y1) => {
+//│   return match_x_branch_CCC(y1, tmp67)
+//│ };
+//│ tmp61 = f6(tmp60, 0);
+//│ block$res45 = tmp59 + tmp61;
+//│ undefined
+//│ = 24
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 24
