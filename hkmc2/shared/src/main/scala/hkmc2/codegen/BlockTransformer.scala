@@ -122,7 +122,7 @@ class BlockTransformer(subst: SymbolSubst):
   
   def applyValue(v: Value): Value = v match
     case Value.Ref(l) =>
-      val l2 = applyLocal(l)
+      val l2 = l.subst
       if (l2 is l) then v else Value.Ref(l2)
     case Value.This(sym) =>
       val sym2 = sym.subst

@@ -82,8 +82,9 @@ trait StratVarTrait(stratState: StratVarState):
 extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
     object ReplaceLocalSymTransformer extends BlockTransformer(new SymbolSubst()):
-      // FIXME: depends on my hacky change (d4358d7) to blocktransformer to work...
-      override def applyLocal(sym: Local): Local = freeVarsAndTheirNewSyms.getOrElse(sym, sym)
+      override def applyValue(v: Value): Value = v match
+        case Value.Ref(l) => Value.Ref(freeVarsAndTheirNewSyms.getOrElse(l, l))
+        case _ => super.applyValue(v)
     ReplaceLocalSymTransformer.applyBlock(b)
 
   def sortedFvs(using alwaysDefined: Set[Symbol]) =
