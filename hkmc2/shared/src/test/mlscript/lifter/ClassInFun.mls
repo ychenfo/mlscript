@@ -12,210 +12,18 @@ fun f() =
   h.perform()
   1
 f() + f() + f()
-//│ JS (unsanitized):
-//│ let f, Effect1, tmp, handleBlock$, Cont$func$f$ClassInFun$_mls_L7_95_118$1, Cont$handleBlock$h$1, Handler$h$1, lambda, f$, Cont$func$f$ClassInFun$_mls_L7_95_118$$ctor, Cont$func$f$ClassInFun$_mls_L7_95_118$$, Cont$handleBlock$h$$ctor, Cont$handleBlock$h$$, lambda$;
-//│ Effect1 = class Effect {
-//│   constructor() {}
-//│   toString() { return "Effect"; }
-//│ };
-//│ lambda$ = function lambda$(Handler$h$$instance, k) {
-//│   return runtime.safeCall(k())
-//│ };
-//│ lambda = (undefined, function (Handler$h$$instance) {
-//│   return (k) => {
-//│     return lambda$(Handler$h$$instance, k)
-//│   }
-//│ });
-//│ Handler$h$1 = class Handler$h$ extends Effect1 {
-//│   constructor() {
-//│     let tmp1;
-//│     tmp1 = super();
-//│   }
-//│   perform() {
-//│     let lambda$this;
-//│     lambda$this = runtime.safeCall(lambda(this));
-//│     return runtime.mkEffect(this, lambda$this)
-//│   }
-//│   toString() { return "Handler$h$"; }
-//│ };
-//│ Cont$handleBlock$h$$ = function Cont$handleBlock$h$$(h$0, tmp$1, tmp$2, tmp$3, tmp$4, pc) {
-//│   let tmp1;
-//│   tmp1 = new Cont$handleBlock$h$1.class(pc);
-//│   return tmp1(h$0, tmp$1, tmp$2, tmp$3, tmp$4)
-//│ };
-//│ Cont$handleBlock$h$$ctor = function Cont$handleBlock$h$$ctor(h$0, tmp$1, tmp$2, tmp$3, tmp$4) {
-//│   return (pc) => {
-//│     let tmp1;
-//│     tmp1 = new Cont$handleBlock$h$1.class(pc);
-//│     return tmp1(h$0, tmp$1, tmp$2, tmp$3, tmp$4)
-//│   }
-//│ };
-//│ Cont$handleBlock$h$1 = function Cont$handleBlock$h$(pc1) {
-//│   return (h$01, tmp$11, tmp$21, tmp$31, tmp$41) => {
-//│     return new Cont$handleBlock$h$.class(pc1)(h$01, tmp$11, tmp$21, tmp$31, tmp$41);
-//│   }
-//│ };
-//│ Cont$handleBlock$h$1.class = class Cont$handleBlock$h$ extends runtime.FunctionContFrame.class {
-//│   constructor(pc) {
-//│     return (h$0, tmp$1, tmp$2, tmp$3, tmp$4) => {
-//│       let tmp1;
-//│       tmp1 = super(null);
-//│       this.pc = pc;
-//│       this.h$0 = h$0;
-//│       this.tmp$1 = tmp$1;
-//│       this.tmp$2 = tmp$2;
-//│       this.tmp$3 = tmp$3;
-//│       this.tmp$4 = tmp$4;
-//│       return this;
-//│     }
-//│   }
-//│   resume(value$) {
-//│     if (this.pc === 2) {
-//│       this.tmp$1 = value$;
-//│     } else if (this.pc === 3) {
-//│       this.tmp$2 = value$;
-//│     } else if (this.pc === 4) {
-//│       this.tmp$4 = value$;
-//│     }
-//│     contLoop: while (true) {
-//│       if (this.pc === 7) {
-//│         this.tmp$1 = f$(this.h$0);
-//│         if (this.tmp$1 instanceof runtime.EffectSig.class) {
-//│           this.pc = 2;
-//│           this.tmp$1.contTrace.last.next = this;
-//│           this.tmp$1.contTrace.last = this;
-//│           return this.tmp$1
-//│         }
-//│         this.pc = 2;
-//│         continue contLoop;
-//│       } else if (this.pc === 2) {
-//│         this.pc = 6;
-//│         continue contLoop;
-//│       } else if (this.pc === 6) {
-//│         this.tmp$2 = f$(this.h$0);
-//│         if (this.tmp$2 instanceof runtime.EffectSig.class) {
-//│           this.pc = 3;
-//│           this.tmp$2.contTrace.last.next = this;
-//│           this.tmp$2.contTrace.last = this;
-//│           return this.tmp$2
-//│         }
-//│         this.pc = 3;
-//│         continue contLoop;
-//│       } else if (this.pc === 3) {
-//│         this.tmp$3 = this.tmp$1 + this.tmp$2;
-//│         this.pc = 5;
-//│         continue contLoop;
-//│       } else if (this.pc === 5) {
-//│         this.tmp$4 = f$(this.h$0);
-//│         if (this.tmp$4 instanceof runtime.EffectSig.class) {
-//│           this.pc = 4;
-//│           this.tmp$4.contTrace.last.next = this;
-//│           this.tmp$4.contTrace.last = this;
-//│           return this.tmp$4
-//│         }
-//│         this.pc = 4;
-//│         continue contLoop;
-//│       } else if (this.pc === 4) {
-//│         return this.tmp$3 + this.tmp$4
-//│       }
-//│       break;
-//│     }
-//│   }
-//│   toString() { return "Cont$handleBlock$h$(" + globalThis.Predef.render(this.pc) + ")"; }
-//│ };
-//│ Cont$func$f$ClassInFun$_mls_L7_95_118$$ = function Cont$func$f$ClassInFun$_mls_L7_95_118$$(h$0, tmp$1, pc) {
-//│   let tmp1;
-//│   tmp1 = new Cont$func$f$ClassInFun$_mls_L7_95_118$1.class(pc);
-//│   return tmp1(h$0, tmp$1)
-//│ };
-//│ Cont$func$f$ClassInFun$_mls_L7_95_118$$ctor = function Cont$func$f$ClassInFun$_mls_L7_95_118$$ctor(h$0, tmp$1) {
-//│   return (pc) => {
-//│     let tmp1;
-//│     tmp1 = new Cont$func$f$ClassInFun$_mls_L7_95_118$1.class(pc);
-//│     return tmp1(h$0, tmp$1)
-//│   }
-//│ };
-//│ Cont$func$f$ClassInFun$_mls_L7_95_118$1 = function Cont$func$f$ClassInFun$_mls_L7_95_118$(pc1) {
-//│   return (h$01, tmp$11) => {
-//│     return new Cont$func$f$ClassInFun$_mls_L7_95_118$.class(pc1)(h$01, tmp$11);
-//│   }
-//│ };
-//│ Cont$func$f$ClassInFun$_mls_L7_95_118$1.class = class Cont$func$f$ClassInFun$_mls_L7_95_118$ extends runtime.FunctionContFrame.class {
-//│   constructor(pc) {
-//│     return (h$0, tmp$1) => {
-//│       let tmp1;
-//│       tmp1 = super(null);
-//│       this.pc = pc;
-//│       this.h$0 = h$0;
-//│       this.tmp$1 = tmp$1;
-//│       return this;
-//│     }
-//│   }
-//│   resume(value$) {
-//│     if (this.pc === 0) {
-//│       this.tmp$1 = value$;
-//│     }
-//│     contLoop: while (true) {
-//│       if (this.pc === 1) {
-//│         this.tmp$1 = runtime.safeCall(this.h$0.perform());
-//│         if (this.tmp$1 instanceof runtime.EffectSig.class) {
-//│           this.pc = 0;
-//│           this.tmp$1.contTrace.last.next = this;
-//│           this.tmp$1.contTrace.last = this;
-//│           return this.tmp$1
-//│         }
-//│         this.pc = 0;
-//│         continue contLoop;
-//│       } else if (this.pc === 0) {
-//│         return 1
-//│       }
-//│       break;
-//│     }
-//│   }
-//│   toString() { return "Cont$func$f$ClassInFun$_mls_L7_95_118$(" + globalThis.Predef.render(this.pc) + ")"; }
-//│ };
-//│ f$ = function f$(h) {
-//│   let tmp1;
-//│   tmp1 = runtime.safeCall(h.perform());
-//│   if (tmp1 instanceof runtime.EffectSig.class) {
-//│     tmp1.contTrace.last.next = Cont$func$f$ClassInFun$_mls_L7_95_118$$(h, tmp1, 0);
-//│     tmp1.contTrace.last = tmp1.contTrace.last.next;
-//│     return tmp1
-//│   }
-//│   return 1
-//│ };
-//│ f = function f(h) {
-//│   return () => {
-//│     return f$(h)
-//│   }
-//│ };
-//│ handleBlock$ = function handleBlock$() {
-//│   let h, tmp1, tmp2, tmp3, tmp4;
-//│   h = new Handler$h$1();
-//│   tmp1 = f$(h);
-//│   if (tmp1 instanceof runtime.EffectSig.class) {
-//│     tmp1.contTrace.last.next = Cont$handleBlock$h$$(h, tmp1, tmp2, tmp3, tmp4, 2);
-//│     return runtime.handleBlockImpl(tmp1, h)
-//│   }
-//│   tmp2 = f$(h);
-//│   if (tmp2 instanceof runtime.EffectSig.class) {
-//│     tmp2.contTrace.last.next = Cont$handleBlock$h$$(h, tmp1, tmp2, tmp3, tmp4, 3);
-//│     return runtime.handleBlockImpl(tmp2, h)
-//│   }
-//│   tmp3 = tmp1 + tmp2;
-//│   tmp4 = f$(h);
-//│   if (tmp4 instanceof runtime.EffectSig.class) {
-//│     tmp4.contTrace.last.next = Cont$handleBlock$h$$(h, tmp1, tmp2, tmp3, tmp4, 4);
-//│     return runtime.handleBlockImpl(tmp4, h)
-//│   }
-//│   return tmp3 + tmp4
-//│ };
-//│ tmp = handleBlock$();
-//│ if (tmp instanceof runtime.EffectSig.class) {
-//│   throw new this.Error("Unhandled effects");
-//│ }
-//│ tmp
-//│ = 3
+//│ FAILURE: Unexpected exception
+//│ /!!!\ Uncaught error: java.lang.ClassCastException: class hkmc2.codegen.Select cannot be cast to class hkmc2.codegen.Value$Ref (hkmc2.codegen.Select and hkmc2.codegen.Value$Ref are in unnamed module of loader 'app')
+//│ 	at: hkmc2.codegen.BlockTransformer.applyBlock(BlockTransformer.scala:46)
+//│ 	at: hkmc2.codegen.BlockTransformerShallow.applyBlock(BlockTransformer.scala:250)
+//│ 	at: hkmc2.Lifter$BlockRewriter.applyBlock(Lifter.scala:620)
+//│ 	at: hkmc2.codegen.BlockTransformer.applySubBlock(BlockTransformer.scala:16)
+//│ 	at: hkmc2.codegen.BlockTransformer.applyBlock(BlockTransformer.scala:49)
+//│ 	at: hkmc2.codegen.BlockTransformerShallow.applyBlock(BlockTransformer.scala:250)
+//│ 	at: hkmc2.Lifter$BlockRewriter.applyBlock(Lifter.scala:620)
+//│ 	at: hkmc2.codegen.BlockTransformer.applySubBlock(BlockTransformer.scala:16)
+//│ 	at: hkmc2.codegen.BlockTransformer.applyBlock(BlockTransformer.scala:42)
+//│ 	at: hkmc2.codegen.BlockTransformerShallow.applyBlock(BlockTransformer.scala:250)
 
 :expect 1
 :sjs
@@ -225,17 +33,17 @@ fun f(x) =
   Test()
 f(1).get()
 //│ JS (unsanitized):
-//│ let Test1, f1, tmp1, Test$ctor, Test$;
+//│ let Test1, f, tmp, Test$ctor, Test$;
 //│ Test$ = function Test$(x$0) {
-//│   let tmp2;
-//│   tmp2 = new Test1.class();
-//│   return tmp2(x$0)
+//│   let tmp1;
+//│   tmp1 = new Test1.class();
+//│   return tmp1(x$0)
 //│ };
 //│ Test$ctor = function Test$ctor(x$0) {
 //│   return () => {
-//│     let tmp2;
-//│     tmp2 = new Test1.class();
-//│     return tmp2(x$0)
+//│     let tmp1;
+//│     tmp1 = new Test1.class();
+//│     return tmp1(x$0)
 //│   }
 //│ };
 //│ Test1 = function Test() {
@@ -255,11 +63,11 @@ f(1).get()
 //│   }
 //│   toString() { return "Test(" + "" + ")"; }
 //│ };
-//│ f1 = function f(x) {
+//│ f = function f(x) {
 //│   return Test$(x)
 //│ };
-//│ tmp1 = f1(1);
-//│ runtime.safeCall(tmp1.get())
+//│ tmp = f(1);
+//│ runtime.safeCall(tmp.get())
 //│ = 1
 
 :expect 1
@@ -275,7 +83,7 @@ fun f(used1, unused1) =
   Test(unused1)
 f(1, 2).get()
 //│ JS (unsanitized):
-//│ let h, Test3, g, f2, tmp2, Test$ctor1, Test$1, g$, h$;
+//│ let h, Test3, g, f1, tmp1, Test$ctor1, Test$1, g$, h$;
 //│ h$ = function h$(used3) {
 //│   return used3
 //│ };
@@ -285,10 +93,10 @@ f(1, 2).get()
 //│   }
 //│ };
 //│ g$ = function g$(used1, g_arg) {
-//│   let used3, tmp3;
+//│   let used3, tmp2;
 //│   used3 = 2;
-//│   tmp3 = h$(used3);
-//│   return used1 + tmp3
+//│   tmp2 = h$(used3);
+//│   return used1 + tmp2
 //│ };
 //│ g = function g(used1) {
 //│   return (g_arg) => {
@@ -296,15 +104,15 @@ f(1, 2).get()
 //│   }
 //│ };
 //│ Test$1 = function Test$(used1$0, a) {
-//│   let tmp3;
-//│   tmp3 = new Test3.class(a);
-//│   return tmp3(used1$0)
+//│   let tmp2;
+//│   tmp2 = new Test3.class(a);
+//│   return tmp2(used1$0)
 //│ };
 //│ Test$ctor1 = function Test$ctor(used1$0) {
 //│   return (a) => {
-//│     let tmp3;
-//│     tmp3 = new Test3.class(a);
-//│     return tmp3(used1$0)
+//│     let tmp2;
+//│     tmp2 = new Test3.class(a);
+//│     return tmp2(used1$0)
 //│   }
 //│ };
 //│ Test3 = function Test(a1) {
@@ -325,13 +133,13 @@ f(1, 2).get()
 //│   }
 //│   toString() { return "Test(" + globalThis.Predef.render(this.a) + ")"; }
 //│ };
-//│ f2 = function f(used1, unused1) {
+//│ f1 = function f(used1, unused1) {
 //│   let unused2;
 //│   unused2 = 2;
 //│   return Test$1(used1, unused1)
 //│ };
-//│ tmp2 = f2(1, 2);
-//│ runtime.safeCall(tmp2.get())
+//│ tmp1 = f1(1, 2);
+//│ runtime.safeCall(tmp1.get())
 //│ = 1
 
 :expect 1
@@ -360,7 +168,7 @@ fun f(used1, unused1) =
   new Test
 f(1, 2).get()
 //│ JS (unsanitized):
-//│ let h2, Test7, g2, f4, tmp4, Test$ctor3, Test$3, g$2, h$2;
+//│ let h2, Test7, g2, f3, tmp3, Test$ctor3, Test$3, g$2, h$2;
 //│ h$2 = function h$(used3) {
 //│   return used3
 //│ };
@@ -370,10 +178,10 @@ f(1, 2).get()
 //│   }
 //│ };
 //│ g$2 = function g$(used1, g_arg) {
-//│   let used3, tmp5;
+//│   let used3, tmp4;
 //│   used3 = 2;
-//│   tmp5 = h$2(used3);
-//│   return used1 + tmp5
+//│   tmp4 = h$2(used3);
+//│   return used1 + tmp4
 //│ };
 //│ g2 = function g(used1) {
 //│   return (g_arg) => {
@@ -381,15 +189,15 @@ f(1, 2).get()
 //│   }
 //│ };
 //│ Test$3 = function Test$(used1$0) {
-//│   let tmp5;
-//│   tmp5 = new Test7.class();
-//│   return tmp5(used1$0)
+//│   let tmp4;
+//│   tmp4 = new Test7.class();
+//│   return tmp4(used1$0)
 //│ };
 //│ Test$ctor3 = function Test$ctor(used1$0) {
 //│   return () => {
-//│     let tmp5;
-//│     tmp5 = new Test7.class();
-//│     return tmp5(used1$0)
+//│     let tmp4;
+//│     tmp4 = new Test7.class();
+//│     return tmp4(used1$0)
 //│   }
 //│ };
 //│ Test7 = function Test(used1$01) {
@@ -407,13 +215,13 @@ f(1, 2).get()
 //│   }
 //│   toString() { return "Test"; }
 //│ };
-//│ f4 = function f(used1, unused1) {
+//│ f3 = function f(used1, unused1) {
 //│   let unused2;
 //│   unused2 = 2;
 //│   return Test$3(used1)
 //│ };
-//│ tmp4 = f4(1, 2);
-//│ runtime.safeCall(tmp4.get())
+//│ tmp3 = f3(1, 2);
+//│ runtime.safeCall(tmp3.get())
 //│ = 1
 
 :sjs
@@ -425,17 +233,17 @@ fun f(x) =
   x
 f(1)
 //│ JS (unsanitized):
-//│ let A1, f5, A$ctor, A$, f$capture1;
+//│ let A1, f4, A$ctor, A$, f$capture1;
 //│ A$ = function A$(f$capture$0) {
-//│   let tmp5;
-//│   tmp5 = new A1.class();
-//│   return tmp5(f$capture$0)
+//│   let tmp4;
+//│   tmp4 = new A1.class();
+//│   return tmp4(f$capture$0)
 //│ };
 //│ A$ctor = function A$ctor(f$capture$0) {
 //│   return () => {
-//│     let tmp5;
-//│     tmp5 = new A1.class();
-//│     return tmp5(f$capture$0)
+//│     let tmp4;
+//│     tmp4 = new A1.class();
+//│     return tmp4(f$capture$0)
 //│   }
 //│ };
 //│ A1 = function A() {
@@ -465,14 +273,14 @@ f(1)
 //│   }
 //│   toString() { return "f$capture(" + globalThis.Predef.render(this.x0$) + ")"; }
 //│ };
-//│ f5 = function f(x) {
-//│   let tmp5, tmp6, capture;
+//│ f4 = function f(x) {
+//│   let tmp4, tmp5, capture;
 //│   capture = new f$capture1(x);
-//│   tmp5 = A$(capture);
-//│   tmp6 = runtime.safeCall(tmp5.f());
+//│   tmp4 = A$(capture);
+//│   tmp5 = runtime.safeCall(tmp4.f());
 //│   return capture.x0$
 //│ };
-//│ f5(1)
+//│ f4(1)
 //│ = 2
 
 // only w should be in a capture
@@ -494,17 +302,17 @@ fun f() =
   Good()
 f().foo()
 //│ JS (unsanitized):
-//│ let Bad1, Good1, f6, tmp5, Bad$ctor, Bad$, Good$ctor, Good$, f$capture3;
+//│ let Bad1, Good1, f5, tmp4, Bad$ctor, Bad$, Good$ctor, Good$, f$capture3;
 //│ Good$ = function Good$(x$1, y$2, z$3, f$capture$0) {
-//│   let tmp6;
-//│   tmp6 = new Good1.class();
-//│   return tmp6(x$1, y$2, z$3, f$capture$0)
+//│   let tmp5;
+//│   tmp5 = new Good1.class();
+//│   return tmp5(x$1, y$2, z$3, f$capture$0)
 //│ };
 //│ Good$ctor = function Good$ctor(x$1, y$2, z$3, f$capture$0) {
 //│   return () => {
-//│     let tmp6;
-//│     tmp6 = new Good1.class();
-//│     return tmp6(x$1, y$2, z$3, f$capture$0)
+//│     let tmp5;
+//│     tmp5 = new Good1.class();
+//│     return tmp5(x$1, y$2, z$3, f$capture$0)
 //│   }
 //│ };
 //│ Good1 = function Good() {
@@ -523,24 +331,24 @@ f().foo()
 //│     }
 //│   }
 //│   foo() {
-//│     let tmp6, tmp7;
+//│     let tmp5, tmp6;
 //│     this.z$3 = 100;
-//│     tmp6 = this.x$1 + this.y$2;
-//│     tmp7 = tmp6 + this.z$3;
-//│     return tmp7 + this.f$capture$0.w0$
+//│     tmp5 = this.x$1 + this.y$2;
+//│     tmp6 = tmp5 + this.z$3;
+//│     return tmp6 + this.f$capture$0.w0$
 //│   }
 //│   toString() { return "Good(" + "" + ")"; }
 //│ };
 //│ Bad$ = function Bad$(f$capture$0) {
-//│   let tmp6;
-//│   tmp6 = new Bad1.class();
-//│   return tmp6(f$capture$0)
+//│   let tmp5;
+//│   tmp5 = new Bad1.class();
+//│   return tmp5(f$capture$0)
 //│ };
 //│ Bad$ctor = function Bad$ctor(f$capture$0) {
 //│   return () => {
-//│     let tmp6;
-//│     tmp6 = new Bad1.class();
-//│     return tmp6(f$capture$0)
+//│     let tmp5;
+//│     tmp5 = new Bad1.class();
+//│     return tmp5(f$capture$0)
 //│   }
 //│ };
 //│ Bad1 = function Bad() {
@@ -570,19 +378,19 @@ f().foo()
 //│   }
 //│   toString() { return "f$capture(" + globalThis.Predef.render(this.w0$) + ")"; }
 //│ };
-//│ f6 = function f() {
-//│   let x, y, z, tmp6, tmp7, capture;
+//│ f5 = function f() {
+//│   let x, y, z, tmp5, tmp6, capture;
 //│   capture = new f$capture3(null);
 //│   x = 1;
 //│   y = 10;
 //│   z = 10;
 //│   capture.w0$ = 1000;
-//│   tmp6 = Bad$(capture);
-//│   tmp7 = runtime.safeCall(tmp6.foo());
+//│   tmp5 = Bad$(capture);
+//│   tmp6 = runtime.safeCall(tmp5.foo());
 //│   return Good$(x, y, z, capture)
 //│ };
-//│ tmp5 = f6();
-//│ runtime.safeCall(tmp5.foo())
+//│ tmp4 = f5();
+//│ runtime.safeCall(tmp4.foo())
 //│ = 10111
 
 :fixme
@@ -623,7 +431,18 @@ fun sum(n) =
   else
     n + sum(n - 1)
 sum(100)
-//│ = 5050
+//│ FAILURE: Unexpected exception
+//│ /!!!\ Uncaught error: java.lang.ClassCastException: class hkmc2.codegen.Select cannot be cast to class hkmc2.codegen.Value$Ref (hkmc2.codegen.Select and hkmc2.codegen.Value$Ref are in unnamed module of loader 'app')
+//│ 	at: hkmc2.codegen.BlockTransformer.applyBlock(BlockTransformer.scala:46)
+//│ 	at: hkmc2.codegen.BlockTransformerShallow.applyBlock(BlockTransformer.scala:250)
+//│ 	at: hkmc2.Lifter$BlockRewriter.applyBlock(Lifter.scala:620)
+//│ 	at: hkmc2.codegen.BlockTransformer.applySubBlock(BlockTransformer.scala:16)
+//│ 	at: hkmc2.codegen.BlockTransformer.applyBlock(BlockTransformer.scala:49)
+//│ 	at: hkmc2.codegen.BlockTransformerShallow.applyBlock(BlockTransformer.scala:250)
+//│ 	at: hkmc2.Lifter$BlockRewriter.applyBlock(Lifter.scala:620)
+//│ 	at: hkmc2.codegen.BlockTransformer.applySubBlock(BlockTransformer.scala:16)
+//│ 	at: hkmc2.codegen.BlockTransformer.applyBlock(BlockTransformer.scala:42)
+//│ 	at: hkmc2.codegen.BlockTransformerShallow.applyBlock(BlockTransformer.scala:250)
 
 // instance checks
 
@@ -650,7 +469,7 @@ fun f(x) =
 f(2).get()
 //│ ═══[WARNING] Cannot yet lift class `Test` as it is used as a first-class class.
 //│ JS (unsanitized):
-//│ let h3, f9, tmp12, h$3;
+//│ let h3, f8, tmp11, h$3;
 //│ h$3 = function h$(Test$instance, x) {
 //│   return x
 //│ };
@@ -659,7 +478,7 @@ f(2).get()
 //│     return h$3(Test$instance, x)
 //│   }
 //│ };
-//│ f9 = function f(x) {
+//│ f8 = function f(x) {
 //│   let Test10, foo1;
 //│   Test10 = function Test() {
 //│     return new Test.class();
@@ -674,8 +493,8 @@ f(2).get()
 //│   foo1 = Test10;
 //│   return runtime.safeCall(foo1())
 //│ };
-//│ tmp12 = f9(2);
-//│ runtime.safeCall(tmp12.get())
+//│ tmp11 = f8(2);
+//│ runtime.safeCall(tmp11.get())
 //│ ═══[WARNING] Cannot yet lift class `Test` as it is used as a first-class class.
 //│ = 2
 

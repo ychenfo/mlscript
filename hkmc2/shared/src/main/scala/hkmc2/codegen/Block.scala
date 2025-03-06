@@ -310,7 +310,7 @@ sealed abstract class Defn:
       preCtor :: ctor :: mtds.flatMap(_.subBlocks)
   
   lazy val freeVars: Set[Local] = this match
-    case FunDefn(own, sym, params, body) => body.freeVars -- params.flatMap(_.paramSyms) - sym -- body.definedVars
+    case FunDefn(own, sym, params, body) => body.freeVars -- params.flatMap(_.paramSyms) - sym
     case ValDefn(owner, k, sym, rhs) => rhs.freeVars
     case ClsLikeDefn(own, isym, sym, k, paramsOpt, auxParams, parentSym, 
       methods, privateFields, publicFields, preCtor, ctor) =>
@@ -381,7 +381,7 @@ enum Case:
 
   lazy val freeVars: Set[Local] = this match
     case Lit(_) => Set.empty
-    case Cls(_, path) => Set.empty //path.freeVars
+    case Cls(_, path) => path.freeVars
     case Tup(_, _) => Set.empty
   
   lazy val freeVarsLLIR: Set[Local] = this match
@@ -417,7 +417,7 @@ sealed abstract class Result:
     case Value.Ref(l) => Set(l)
     case Value.This(sym) => Set.empty
     case Value.Lit(lit) => Set.empty
-    case Value.Lam(params, body) => body.freeVars -- body.definedVars -- params.paramSyms
+    case Value.Lam(params, body) => body.freeVars -- params.paramSyms
     case Value.Arr(elems) => elems.flatMap(_.value.freeVars).toSet
     case DynSelect(qual, fld, arrayIdx) => qual.freeVars ++ fld.freeVars
 
