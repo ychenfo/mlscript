@@ -680,11 +680,11 @@ class Deforest(using TL, Raise, Elaborator.State):
   lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
     resolveClashes._2.keys.flatMap{
       case DtorExpr.Match(s) =>
-        val Match(scrut, arms, dflt, rest) = matchScrutToMatchBlock(s)
+        val Match(Value.Ref(l), arms, dflt, rest) = matchScrutToMatchBlock(s)
         val fvsInallBodiesAndRest = (rest :: arms.map(_._2).appendedAll(dflt)).flatMap(b => b.sortedFvs(using globallyDefinedVars.store.toSet))
         // NOTE: doesn't intersect with defined vars in dflt because it may be only `throw error`
         val definedInAllArms = arms.map(_._2.definedVars).reduce((a, b) => a.intersect(b))
-        Some(s -> fvsInallBodiesAndRest.filterNot(a => (a.uid == scrut.l.uid) || definedInAllArms.contains(a)).distinct.sortBy(_.uid))
+        Some(s -> fvsInallBodiesAndRest.filterNot(a => (a.uid == l.uid) || definedInAllArms.contains(a)).distinct.sortBy(_.uid))
       case DtorExpr.Sel(s) => None
     }.toMap
       

@@ -502,7 +502,7 @@ class HandlerLowering(paths: HandlerPaths)(using TL, Raise, Elaborator.State, El
     // match block representing the function body
     val mainMatchCases = parts.toList.map(b => (Case.Lit(Tree.IntLit(b.id)), transformPart(b.blk)))
     val mainMatchBlk = Match(
-      pcSymbol.asPath.asInstanceOf[Value.Ref],
+      pcSymbol.asPath,
       mainMatchCases,
       N,
       End()
@@ -525,7 +525,7 @@ class HandlerLowering(paths: HandlerPaths)(using TL, Raise, Elaborator.State, El
         lbl
       else
         Match(
-          pcSymbol.asPath.asInstanceOf[Value.Ref],
+          pcSymbol.asPath,
           assignedResumedCases,
           N,
           lbl

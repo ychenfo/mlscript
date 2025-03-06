@@ -253,7 +253,7 @@ end Block
 sealed abstract class BlockTail extends Block
 
 case class Match(
-  scrut: Value.Ref,
+  scrut: Path,
   arms: Ls[Case -> Block],
   dflt: Opt[Block],
   rest: Block,
@@ -487,7 +487,7 @@ extension (k: Block => Block)
   def define(defn: Defn) = k.chain(Define(defn, _))
   def end = k.rest(End())
   def ifthen(scrut: Path, cse: Case, trm: Block, els: Opt[Block] = N): Block => Block =
-    k.chain(Match(scrut.asInstanceOf[Value.Ref], cse -> trm :: Nil, els, _))
+    k.chain(Match(scrut, cse -> trm :: Nil, els, _))
   def label(label: Local, body: Block) = k.chain(Label(label, body, _))
   def ret(r: Result) = k.rest(Return(r, false))
   def staticif(b: Boolean, f: (Block => Block) => (Block => Block)) = if b then k.transform(f) else k

@@ -454,7 +454,7 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
           subTerm_nonTail(scrut): sr =>
             tl.log(s"Binding scrut $scrut to $sr (${summon[Subst].map})")
             // val cse = 
-            def mkMatch(cse: Case -> Block) = Match((sr.asInstanceOf[Value.Ref]), cse :: Nil,
+            def mkMatch(cse: Case -> Block) = Match(sr, cse :: Nil,
                 S(go(restSplit, topLevel = true)),
                 End()
               )
