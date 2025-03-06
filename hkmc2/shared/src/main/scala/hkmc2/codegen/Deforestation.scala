@@ -86,7 +86,57 @@ extension (b: Block)
       override def applyLocal(sym: Local): Local = freeVarsAndTheirNewSyms.getOrElse(sym, sym)
     ReplaceLocalSymTransformer.applyBlock(b)
 
-  def sortedFvs(using alwaysDefined: Set[Symbol]) = (b.freeVars -- b.definedVars -- alwaysDefined).filterNot(v => v.asClsLike.isDefined).toList.sortBy(_.uid)
+  def sortedFvs(using alwaysDefined: Set[Symbol]) =
+    object DeforestationFreeVarTraverser extends BlockTraverser(new SymbolSubst()):
+      val ctx = mutable.Set.from(alwaysDefined)
+      val result = mutable.Set.empty[Symbol]
+      
+      override def applyBlock(b: Block): Unit = b match
+        case Match(scrut, arms, dflt, rest) =>
+          applyPath(scrut)
+          (arms.map(_._2) ++ dflt).foreach: a =>
+            // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
+            // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
+            val realArm = Begin(a, rest).flattened
+            applyBlock(realArm)
+
+        case Assign(lhs, rhs, rest) =>
+          applyResult(rhs)
+          ctx += lhs
+          applyBlock(rest)
+          ctx -= lhs
+        case Begin(sub, rest) => applyBlock(b.flattened)
+        case Define(defn, rest) => defn match
+          case FunDefn(owner, sym, params, body) =>
+            val paramSymbols = params.flatMap:
+              case ParamList(flags, params, restParam) => (params ++ restParam).map:
+                case Param(flags, sym, sign) => sym
+            ctx += sym
+            ctx ++= paramSymbols
+            applyBlock(body)
+            ctx --= paramSymbols
+            applyBlock(rest)
+            ctx -= sym
+          case ValDefn(owner, k, sym, rhs) =>
+            ctx += sym
+            applyPath(rhs)
+            applyBlock(rest)
+            ctx -= sym
+          case c: ClsLikeDefn => result ++= c.freeVars // TODO: just use the `freeVars` lazy val for ClsLikeDefns for now...
+        
+        case _ => super.applyBlock(b)
+      
+      override def applyValue(v: Value): Unit = v match
+        case Value.Ref(l) => if !ctx.contains(l) then result += l
+        case _ => super.applyValue(v)
+      
+      override def applyLam(l: Value.Lam): Unit =
+        val paramSymbols = l.params.params.map(p => p.sym)
+        ctx ++= paramSymbols
+        applyBlock(l.body)
+        ctx --= paramSymbols
+    DeforestationFreeVarTraverser.applyBlock(b)
+    DeforestationFreeVarTraverser.result.toList.sortBy(_.uid)
 
   // def replaceSelect(using ss: Set[ResultId], args: Map[Tree.Ident, Value.Ref]): Block =
   //   object ReplaceSelectTransformer extends BlockTransformer(new SymbolSubst()):
