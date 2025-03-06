@@ -49,7 +49,7 @@ case class Dtor(scrut: ResultId)(val expr: Match)(using d: Deforest) extends Con
     case None => Some(expr)
     case Some(exist) => ??? // should only update once
 
-case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: Set[ResultId]) extends ConsStrat with FieldSelTrait
+case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: Map[ResultId, ClsOrModSymbol]) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
 case class ConsVar(s: StratVarState) extends ConsStrat with StratVarTrait(s)
 case object NoCons extends ConsStrat
@@ -267,7 +267,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def processBlock(b: Block)(using
     inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
-    matching: Set[ResultId] = Set.empty
+    matching: Map[ResultId, ClsOrModSymbol] = Map.empty[ResultId, ClsOrModSymbol]
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
@@ -275,7 +275,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map { case (Case.Cls(s, _), body) => 
           // TODO: fix this "asInstanceOf"?
-          processBlock(body)(using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s), matching + scrut.uid)
+          processBlock(body)(using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s), matching + (scrut.uid -> s))
         }
       else
         arms.map{ case (_, armBody) => processBlock(armBody) }
@@ -337,7 +337,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def constrFun(params: Ls[Param], body: Block)(using
     inArm: Map[ProdVar, ClsOrModSymbol],
-    matching: Set[ResultId]
+    matching: Map[ResultId, ClsOrModSymbol]
   ) =
     val paramSyms = params.map{ case Param(_, sym, _) => sym }
     val paramStrats = paramSyms.map{ sym => symToStrat(sym) }
@@ -348,7 +348,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def processResult(r: Result)(using
     inArm: Map[ProdVar, ClsOrModSymbol],
-    matching: Set[ResultId]
+    matching: Map[ResultId, ClsOrModSymbol]
   ): ProdStrat = r match
     case c@Call(f, args) =>
       val argsTpe = args.map { case Arg(false, value) => 
@@ -659,6 +659,20 @@ class Deforest(using TL, Raise, Elaborator.State):
             case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
             case _ => false
           } then
+            val selMaps = dtors.head._2.arms.flatMap {
+              case (Case.Cls(c, _), body) => c.asCls.map: c =>
+                c -> getClsFields(c).map { f =>
+                  // find the sels in inside this arm to be replaced
+                  val selToBeReplaced = sels.filter { case fs: FieldSel => fs.inMatching(dtors.head._1) === c }
+                  
+                  // if a branch is used multiple times, later it will be a function, so use var here
+                  // if a branch is used once, it will just be a lambda, so tempvar here
+                  val varSymInsteadOfTempSym = resolveClashes._2(DtorExpr.Match(dtors.head._1)).count(getClsSymOfUid(_) === c) > 1
+                  val sym = if varSymInsteadOfTempSym
+                    then VarSymbol(Tree.Ident(s"${c.name}_${f.id.name}"))
+                    else TempSymbol(N, s"${c.name}_${f.id.name}")
+                  (f.id -> sym) }.toMap
+              }.toMap
             Some(CtorFinalDest.Match(dtors.head._1, dtors.head._2, sels.map(_.expr)))
           else
             throw Error("more than one consumer")
@@ -688,14 +702,14 @@ class Deforest(using TL, Raise, Elaborator.State):
   class DeforestTransformer(using nonFreeVars: Set[Symbol]) extends BlockTransformer(new SymbolSubst()):
     
     lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
-      resolveClashes._2.keys.flatMap{
-        case DtorExpr.Match(s) =>
-          val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = matchScrutToMatchBlock(s)
-          Some(s -> matchExpr.sortedFvs.filterNot(_.uid === l.uid))
-        case DtorExpr.Sel(s) => None
+      filteredCtorDests.values.flatMap{
+        case CtorFinalDest.Match(scrut, expr, selInArms) =>
+          val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
+          Some(scrut -> matchExpr.sortedFvs.filterNot(_.uid === l.uid))
+        case CtorFinalDest.Sel(s) => None
       }.toMap
     
-    var replaceSelInfo = Map.empty[ResultId, Set[ResultId] -> Map[Tree.Ident, Value.Ref]]
+    val replaceSelInfo = mutable.Map.empty[ResultId, Set[ResultId] -> Map[Tree.Ident, Value.Ref]]
     
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
