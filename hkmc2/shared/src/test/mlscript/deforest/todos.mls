@@ -131,7 +131,6 @@ module Test with
 // NOTE: if we replace `x.x` first, the nested pat mat will not be fused...
 // we can perform the replacing of `x.x` and rewriting at the same time, but
 // then there will be a non-existing free var `x`
-:fixme
 :sjs
 fun c(x) = if x is
   AA then
@@ -164,19 +163,18 @@ c(AA(2))
 //│ AA_x = 2;
 //│ tmp = () => {
 //│   let scrut;
-//│   scrut = (x) => {
-//│     return AA_x
+//│   scrut = (AA_x1) => {
+//│     return AA_x1
 //│   };
-//│   return runtime.safeCall(scrut(x_not_in_scope))
+//│   return runtime.safeCall(scrut(AA_x))
 //│ };
 //│ block$res6 = c(tmp);
 //│ undefined
-//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
+//│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
 
-:fixme
 :sjs
 fun c(x, y) = if x is
   AA then
@@ -206,19 +204,18 @@ c(AA(2), A)
 //│ };
 //│ AA_x1 = 2;
 //│ tmp2 = (y) => {
-//│   return runtime.safeCall(y(x_not_in_scope))
+//│   return runtime.safeCall(y(AA_x1))
 //│ };
-//│ block$res8 = c1(tmp2, (x) => {
-//│   return AA_x1
+//│ block$res8 = c1(tmp2, (AA_x2) => {
+//│   return AA_x2
 //│ });
 //│ undefined
-//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
+//│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
 
 
-:fixme
 :sjs
 fun c(x, y) = if x is
   AA then
@@ -254,14 +251,71 @@ c(p(), A)
 //│   let AA_x2;
 //│   AA_x2 = 2;
 //│   return (y) => {
-//│     return runtime.safeCall(y(x_not_in_scope))
+//│     return runtime.safeCall(y(AA_x2))
 //│   }
 //│ };
 //│ tmp4 = p();
-//│ block$res10 = c2(tmp4, (x) => {
-//│   return AA_x_not_in_scope
+//│ block$res10 = c2(tmp4, (AA_x2) => {
+//│   return AA_x2
 //│ });
 //│ undefined
-//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
+//│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
+
+
+
+
+:sjs
+fun c(x, y) = if x is
+  AA then
+    let a = if y is
+      A then 1
+    a + x.x
+fun p() = AA(2)
+c(p(), A)
+//│ JS (unsanitized):
+//│ let p1, c3, tmp6;
+//│ c3 = function c(x, y) {
+//│   let a, tmp7;
+//│   if (x instanceof AA1.class) {
+//│     if (y instanceof A1.class) {
+//│       tmp7 = 1;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     a = tmp7;
+//│     return a + x.x
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ p1 = function p() {
+//│   return AA1(2)
+//│ };
+//│ tmp6 = p1();
+//│ c3(tmp6, A1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let p1, c3, tmp6;
+//│ c3 = function c(x, y) {
+//│   return runtime.safeCall(x(y))
+//│ };
+//│ p1 = function p() {
+//│   let AA_x2;
+//│   AA_x2 = 2;
+//│   return (y) => {
+//│     return runtime.safeCall(y(AA_x2))
+//│   }
+//│ };
+//│ tmp6 = p1();
+//│ block$res12 = c3(tmp6, (AA_x2) => {
+//│   let a, tmp7;
+//│   tmp7 = 1;
+//│   a = tmp7;
+//│   return a + AA_x2
+//│ });
+//│ undefined
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 3
