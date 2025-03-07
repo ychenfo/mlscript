@@ -87,7 +87,7 @@ extension (b: Block)
         case _ => super.applyValue(v)
     ReplaceLocalSymTransformer.applyBlock(b)
 
-  def sortedFvs(using alwaysDefined: Set[Symbol]) =
+  def sortedFvs(using alwaysDefined: Set[Symbol], selsToBeReplaced: Map[ResultId, Symbol] = Map.empty) =
     object DeforestationFreeVarTraverser extends BlockTraverser(new SymbolSubst()):
       val ctx = mutable.Set.from(alwaysDefined)
       val result = mutable.Set.empty[Symbol]
@@ -127,6 +127,11 @@ extension (b: Block)
         
         case _ => super.applyBlock(b)
       
+      override def applyPath(p: Path): Unit = p match
+        case p @ Select(qual, name) =>
+          selsToBeReplaced.get(p.uid).fold(super.applyPath(p))(s => result += s)
+        case _ => super.applyPath(p)
+        
       override def applyValue(v: Value): Unit = v match
         case Value.Ref(l) => if !ctx.contains(l) then result += l
         case _ => super.applyValue(v)
@@ -731,20 +736,28 @@ class Deforest(using TL, Raise, Elaborator.State):
     newDefsArms(newDefsRest(rest))
   
   class DeforestTransformer(using nonFreeVars: Set[Symbol]) extends BlockTransformer(new SymbolSubst()):
-    
-    lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
-      filteredCtorDests.values.flatMap{
-        case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
-          val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
-          Some(scrut -> matchExpr.sortedFvs.filterNot(_.uid === l.uid))
-        case CtorFinalDest.Sel(s) => None
-      }.toMap
-    
-    val replaceSelInfo =
+    val replaceSelInfo: Map[ResultId, Symbol] =
       filteredCtorDests.values.flatMap { 
         case CtorFinalDest.Match(_, _, _, selMaps) => selMaps._2.values.flatMap(m => m.toList)
         case CtorFinalDest.Sel(s) => Nil
       }.toMap
+  
+    lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
+      val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
+      filteredCtorDests.values.foreach:
+        case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
+          toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2.values.flatMap(m => m.iterator))
+        
+    
+      filteredCtorDests.values.flatMap{
+        case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
+          val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
+          val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrut).keys
+          Some(scrut -> matchExpr.sortedFvs(using nonFreeVars, selReplacementNotForThisSel).filterNot(_.uid === l.uid))
+        case CtorFinalDest.Sel(s) => None
+      }.toMap
+    
+    
     println(replaceSelInfo.map(x => x._2))
     
     val replaceSelInfo2 = mutable.Map.empty[ResultId, Set[ResultId] -> Map[Tree.Ident, Value.Ref]]
