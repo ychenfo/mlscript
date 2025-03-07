@@ -1,0 +1,206 @@
+:js
+:deforest
+
+object A
+object B
+object C
+class AA(x)
+class BB(x)
+
+object Nil
+class Cons(h, t)
+
+object None
+class Some(x)
+
+
+
+
+:sjs
+fun c(x) = if x is
+  AA then
+    if A is
+      A then x.x
+c(AA(2))
+//│ JS (unsanitized):
+//│ let c, tmp;
+//│ c = function c(x) {
+//│   let scrut;
+//│   if (x instanceof AA1.class) {
+//│     scrut = A1;
+//│     if (scrut instanceof A1.class) {
+//│       return x.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp = AA1(2);
+//│ c(tmp)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c, tmp, AA_x;
+//│ c = function c(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ AA_x = 2;
+//│ tmp = () => {
+//│   let scrut;
+//│   scrut = (AA_x1) => {
+//│     return AA_x1
+//│   };
+//│   return runtime.safeCall(scrut(AA_x))
+//│ };
+//│ block$res4 = c(tmp);
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+
+
+:sjs
+fun c(x, y) = if x is
+  AA then
+    if y is
+      A then x.x
+c(AA(2), A)
+//│ JS (unsanitized):
+//│ let c1, tmp2;
+//│ c1 = function c(x, y) {
+//│   if (x instanceof AA1.class) {
+//│     if (y instanceof A1.class) {
+//│       return x.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp2 = AA1(2);
+//│ c1(tmp2, A1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c1, tmp2, AA_x1;
+//│ c1 = function c(x, y) {
+//│   return runtime.safeCall(x(y))
+//│ };
+//│ AA_x1 = 2;
+//│ tmp2 = (y) => {
+//│   return runtime.safeCall(y(AA_x1))
+//│ };
+//│ block$res6 = c1(tmp2, (AA_x2) => {
+//│   return AA_x2
+//│ });
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+
+
+
+:sjs
+fun c(x, y) = if x is
+  AA then
+    if y is
+      A then x.x
+fun p() = AA(2)
+c(p(), A)
+//│ JS (unsanitized):
+//│ let p, c2, tmp4;
+//│ c2 = function c(x, y) {
+//│   if (x instanceof AA1.class) {
+//│     if (y instanceof A1.class) {
+//│       return x.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ p = function p() {
+//│   return AA1(2)
+//│ };
+//│ tmp4 = p();
+//│ c2(tmp4, A1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let p, c2, tmp4;
+//│ c2 = function c(x, y) {
+//│   return runtime.safeCall(x(y))
+//│ };
+//│ p = function p() {
+//│   let AA_x2;
+//│   AA_x2 = 2;
+//│   return (y) => {
+//│     return runtime.safeCall(y(AA_x2))
+//│   }
+//│ };
+//│ tmp4 = p();
+//│ block$res8 = c2(tmp4, (AA_x2) => {
+//│   return AA_x2
+//│ });
+//│ undefined
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+
+
+
+
+:sjs
+fun c(x, y) = if x is
+  AA then
+    let a = if y is
+      A then 1
+    a + x.x
+fun p() = AA(2)
+c(p(), A)
+//│ JS (unsanitized):
+//│ let p1, c3, tmp6;
+//│ c3 = function c(x, y) {
+//│   let a, tmp7;
+//│   if (x instanceof AA1.class) {
+//│     if (y instanceof A1.class) {
+//│       tmp7 = 1;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     a = tmp7;
+//│     return a + x.x
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ p1 = function p() {
+//│   return AA1(2)
+//│ };
+//│ tmp6 = p1();
+//│ c3(tmp6, A1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let p1, c3, tmp6;
+//│ c3 = function c(x, y) {
+//│   return runtime.safeCall(x(y))
+//│ };
+//│ p1 = function p() {
+//│   let AA_x2;
+//│   AA_x2 = 2;
+//│   return (y) => {
+//│     return runtime.safeCall(y(AA_x2))
+//│   }
+//│ };
+//│ tmp6 = p1();
+//│ block$res10 = c3(tmp6, (AA_x2) => {
+//│   let a, tmp7;
+//│   tmp7 = 1;
+//│   a = tmp7;
+//│   return a + AA_x2
+//│ });
+//│ undefined
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 3
