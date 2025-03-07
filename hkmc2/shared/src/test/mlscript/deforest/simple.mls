@@ -99,21 +99,21 @@ test()
 //│ ==== JS (deforested): ====
 //│ let test1;
 //│ test1 = function test() {
-//│   let x, scrut, tmp, tmp1, tmp2;
+//│   let x, scrut, tmp, AA_aa, BB_bb;
 //│   scrut = true;
 //│   if (scrut === true) {
-//│     tmp1 = A1;
+//│     AA_aa = A1;
 //│     tmp = () => {
 //│       let param0, x1;
-//│       param0 = tmp1;
+//│       param0 = AA_aa;
 //│       x1 = param0;
 //│       return x1
 //│     };
 //│   } else {
-//│     tmp2 = B1;
+//│     BB_bb = B1;
 //│     tmp = () => {
 //│       let param0, x1;
-//│       param0 = tmp2;
+//│       param0 = BB_bb;
 //│       x1 = param0;
 //│       return x1
 //│     };
@@ -178,25 +178,25 @@ test()
 //│   return runtime.safeCall(a())
 //│ };
 //│ test2 = function test() {
-//│   let x, scrut, tmp, tmp1, tmp2;
+//│   let x, scrut, tmp, AA_aa, BB_bb;
 //│   scrut = true;
 //│   if (scrut === true) {
-//│     tmp1 = () => {
+//│     AA_aa = () => {
 //│       return 1
 //│     };
 //│     tmp = () => {
 //│       let param0, x1;
-//│       param0 = tmp1;
+//│       param0 = AA_aa;
 //│       x1 = param0;
 //│       return f(x1)
 //│     };
 //│   } else {
-//│     tmp2 = () => {
+//│     BB_bb = () => {
 //│       return 2
 //│     };
 //│     tmp = () => {
 //│       let param0, x1;
-//│       param0 = tmp2;
+//│       param0 = BB_bb;
 //│       x1 = param0;
 //│       return f(x1)
 //│     };
@@ -279,21 +279,21 @@ test()
 //│   return runtime.safeCall(a())
 //│ };
 //│ test3 = function test() {
-//│   let x, scrut, tmp, tmp1, tmp2;
+//│   let x, scrut, tmp, AA_aa, BB_bb;
 //│   scrut = true;
 //│   if (scrut === true) {
-//│     tmp1 = () => {
+//│     AA_aa = () => {
 //│       return 1
 //│     };
 //│     tmp = () => {
-//│       return f1(tmp1)
+//│       return f1(AA_aa)
 //│     };
 //│   } else {
-//│     tmp2 = () => {
+//│     BB_bb = () => {
 //│       return 5
 //│     };
 //│     tmp = () => {
-//│       return f2(tmp2)
+//│       return f2(BB_bb)
 //│     };
 //│   }
 //│   x = tmp;
@@ -351,21 +351,21 @@ test()
 //│ test4 = function test() {
 //│   let c, g, tmp;
 //│   g = function g(x) {
-//│     let scrut, tmp1, tmp2;
+//│     let scrut, AA_aa, BB_bb;
 //│     scrut = true;
 //│     if (scrut === true) {
-//│       tmp1 = 11;
+//│       AA_aa = 11;
 //│       return () => {
 //│         let param0, x1;
-//│         param0 = tmp1;
+//│         param0 = AA_aa;
 //│         x1 = param0;
 //│         return x1
 //│       }
 //│     } else {
-//│       tmp2 = 22;
+//│       BB_bb = 22;
 //│       return () => {
 //│         let param0, x1;
-//│         param0 = tmp2;
+//│         param0 = BB_bb;
 //│         x1 = param0;
 //│         return x1
 //│       }
@@ -434,22 +434,22 @@ map(enumFromTo(1, 4))
 //│ ==== JS (deforested): ====
 //│ let enumFromTo, map, tmp;
 //│ enumFromTo = function enumFromTo(a, b) {
-//│   let scrut, tmp1, tmp2, tmp3, tmp4;
+//│   let scrut, tmp1, tmp2, Cons_t, Cons_h;
 //│   scrut = a < b;
 //│   if (scrut === true) {
 //│     tmp1 = a + 1;
 //│     tmp2 = enumFromTo(tmp1, b);
-//│     tmp3 = a;
-//│     tmp4 = tmp2;
+//│     Cons_h = a;
+//│     Cons_t = tmp2;
 //│     return () => {
-//│       let param0, param1, h, t, tmp5, tmp6;
-//│       param0 = tmp3;
-//│       param1 = tmp4;
+//│       let param0, param1, h, t, tmp3, tmp4;
+//│       param0 = Cons_h;
+//│       param1 = Cons_t;
 //│       h = param0;
 //│       t = param1;
-//│       tmp5 = h + 4;
-//│       tmp6 = map(t);
-//│       return Cons1(tmp5, tmp6)
+//│       tmp3 = h + 4;
+//│       tmp4 = map(t);
+//│       return Cons1(tmp3, tmp4)
 //│     }
 //│   } else {
 //│     return () => {
@@ -510,21 +510,21 @@ sum(enumFromTo(1,10))
 //│ ==== JS (deforested): ====
 //│ let enumFromTo1, sum, tmp2;
 //│ enumFromTo1 = function enumFromTo(a, b) {
-//│   let scrut, tmp3, tmp4, tmp5, tmp6;
+//│   let scrut, tmp3, tmp4, Cons_t, Cons_h;
 //│   scrut = a < b;
 //│   if (scrut === true) {
 //│     tmp3 = a + 1;
 //│     tmp4 = enumFromTo1(tmp3, b);
-//│     tmp5 = a;
-//│     tmp6 = tmp4;
+//│     Cons_h = a;
+//│     Cons_t = tmp4;
 //│     return () => {
-//│       let param0, param1, h, t, tmp7;
-//│       param0 = tmp5;
-//│       param1 = tmp6;
+//│       let param0, param1, h, t, tmp5;
+//│       param0 = Cons_h;
+//│       param1 = Cons_t;
 //│       h = param0;
 //│       t = param1;
-//│       tmp7 = sum(t);
-//│       return h + tmp7
+//│       tmp5 = sum(t);
+//│       return h + tmp5
 //│     }
 //│   } else {
 //│     return () => {
@@ -754,22 +754,22 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ ==== JS (deforested): ====
 //│ let enumFromTo2, map1, tmp8, lambda;
 //│ enumFromTo2 = function enumFromTo(a, b) {
-//│   let scrut, tmp9, tmp10, tmp11, tmp12;
+//│   let scrut, tmp9, tmp10, Cons_t, Cons_h;
 //│   scrut = a < b;
 //│   if (scrut === true) {
 //│     tmp9 = a + 1;
 //│     tmp10 = enumFromTo2(tmp9, b);
-//│     tmp11 = a;
-//│     tmp12 = tmp10;
+//│     Cons_h = a;
+//│     Cons_t = tmp10;
 //│     return (f3) => {
-//│       let param0, param1, h, t, tmp13, tmp14;
-//│       param0 = tmp11;
-//│       param1 = tmp12;
+//│       let param0, param1, h, t, tmp11, tmp12;
+//│       param0 = Cons_h;
+//│       param1 = Cons_t;
 //│       h = param0;
 //│       t = param1;
-//│       tmp13 = runtime.safeCall(f3(h));
-//│       tmp14 = map1(f3, t);
-//│       return Cons1(tmp13, tmp14)
+//│       tmp11 = runtime.safeCall(f3(h));
+//│       tmp12 = map1(f3, t);
+//│       return Cons1(tmp11, tmp12)
 //│     }
 //│   } else {
 //│     return (f3) => {
@@ -848,37 +848,37 @@ map(x => x + 4, enumFromTo(1, 4))
 //│   return runtime.safeCall(tmp11(f3))
 //│ };
 //│ enumFromTo3 = function enumFromTo(a, b) {
-//│   let scrut, tmp11, tmp12, tmp13, tmp14;
+//│   let scrut, tmp11, tmp12, Cons_t, Cons_h;
 //│   scrut = a < b;
 //│   if (scrut === true) {
 //│     tmp11 = a + 1;
 //│     tmp12 = enumFromTo3(tmp11, b);
-//│     tmp13 = a;
-//│     tmp14 = tmp12;
+//│     Cons_h = a;
+//│     Cons_t = tmp12;
 //│     return (f3) => {
-//│       let param0, param1, h, t, tmp15, tmp16, lambda3;
-//│       param0 = tmp13;
-//│       param1 = tmp14;
+//│       let param0, param1, h, t, tmp13, tmp14, lambda3;
+//│       param0 = Cons_h;
+//│       param1 = Cons_t;
 //│       h = param0;
 //│       t = param1;
 //│       lambda3 = (undefined, function (f4) {
-//│         let tmp17, tmp18;
-//│         tmp17 = runtime.safeCall(f4(h));
-//│         tmp18 = map2(f4, t);
-//│         return Cons1(tmp17, tmp18)
+//│         let tmp15, tmp16;
+//│         tmp15 = runtime.safeCall(f4(h));
+//│         tmp16 = map2(f4, t);
+//│         return Cons1(tmp15, tmp16)
 //│       });
-//│       tmp16 = lambda3;
-//│       tmp15 = tmp16;
-//│       return match_ls_rest(f3, tmp15)
+//│       tmp14 = lambda3;
+//│       tmp13 = tmp14;
+//│       return match_ls_rest(f3, tmp13)
 //│     }
 //│   } else {
 //│     return (f3) => {
-//│       let tmp15, lambda3;
+//│       let tmp13, lambda3;
 //│       lambda3 = (undefined, function (f4) {
 //│         return Nil1
 //│       });
-//│       tmp15 = lambda3;
-//│       return match_ls_rest(f3, tmp15)
+//│       tmp13 = lambda3;
+//│       return match_ls_rest(f3, tmp13)
 //│     }
 //│   }
 //│ };
@@ -937,21 +937,21 @@ sum(enumFromTo(1, 10), 0)
 //│ ==== JS (deforested): ====
 //│ let enumFromTo4, sum1, tmp12;
 //│ enumFromTo4 = function enumFromTo(a, b) {
-//│   let scrut, tmp13, tmp14, tmp15, tmp16;
+//│   let scrut, tmp13, tmp14, Cons_t, Cons_h;
 //│   scrut = a < b;
 //│   if (scrut === true) {
 //│     tmp13 = a + 1;
 //│     tmp14 = enumFromTo4(tmp13, b);
-//│     tmp15 = a;
-//│     tmp16 = tmp14;
+//│     Cons_h = a;
+//│     Cons_t = tmp14;
 //│     return (a1) => {
-//│       let param0, param1, h, t, tmp17;
-//│       param0 = tmp15;
-//│       param1 = tmp16;
+//│       let param0, param1, h, t, tmp15;
+//│       param0 = Cons_h;
+//│       param1 = Cons_t;
 //│       h = param0;
 //│       t = param1;
-//│       tmp17 = h + a1;
-//│       return sum1(t, tmp17)
+//│       tmp15 = h + a1;
+//│       return sum1(t, tmp15)
 //│     }
 //│   } else {
 //│     return (a1) => {
@@ -1240,59 +1240,59 @@ f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 //│ tmp26 + tmp28
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f5, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, match_x_rest, match_x_branch_AAA, tmp31, tmp32, match_x_branch_BBB, tmp33, tmp34, tmp35, tmp36;
-//│ match_x_branch_AAA = function match_x_branch_AAA(y1, field_x, field_y) {
-//│   let param0, param1, n, m, tmp37, tmp38;
-//│   param0 = field_x;
-//│   param1 = field_y;
+//│ let f5, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, AAA_x_tmp, AAA_y_tmp, match_x_rest, match_x_branch_AAA, BBB_x_tmp, BBB_y_tmp, match_x_branch_BBB, AAA_x_tmp1, AAA_y_tmp1, BBB_x_tmp1, BBB_y_tmp1;
+//│ match_x_branch_AAA = function match_x_branch_AAA(y1, AAA_x, AAA_y) {
+//│   let param0, param1, n, m, tmp29, tmp30;
+//│   param0 = AAA_x;
+//│   param1 = AAA_y;
 //│   n = param0;
 //│   m = param1;
-//│   tmp37 = y1 + n;
-//│   tmp38 = tmp37 - m;
-//│   return match_x_rest(tmp38)
+//│   tmp29 = y1 + n;
+//│   tmp30 = tmp29 - m;
+//│   return match_x_rest(tmp30)
 //│ };
-//│ match_x_branch_BBB = function match_x_branch_BBB(y1, field_x, field_y) {
-//│   let param0, param1, n, m, tmp37, tmp38;
-//│   param0 = field_x;
-//│   param1 = field_y;
+//│ match_x_branch_BBB = function match_x_branch_BBB(y1, BBB_x, BBB_y) {
+//│   let param0, param1, n, m, tmp29, tmp30;
+//│   param0 = BBB_x;
+//│   param1 = BBB_y;
 //│   n = param0;
 //│   m = param1;
-//│   tmp38 = m + 1;
-//│   tmp37 = tmp38 - n;
-//│   return match_x_rest(tmp37)
+//│   tmp30 = m + 1;
+//│   tmp29 = tmp30 - n;
+//│   return match_x_rest(tmp29)
 //│ };
-//│ match_x_rest = function match_x_rest(tmp37) {
+//│ match_x_rest = function match_x_rest(tmp29) {
 //│   let a;
-//│   a = tmp37;
+//│   a = tmp29;
 //│   return a + 3
 //│ };
 //│ f5 = function f(x1, y1) {
 //│   return runtime.safeCall(x1(y1))
 //│ };
-//│ tmp29 = 1;
-//│ tmp30 = 3;
+//│ AAA_x_tmp = 1;
+//│ AAA_y_tmp = 3;
 //│ tmp19 = (y1) => {
-//│   return match_x_branch_AAA(y1, tmp29, tmp30)
+//│   return match_x_branch_AAA(y1, AAA_x_tmp, AAA_y_tmp)
 //│ };
 //│ tmp20 = f5(tmp19, 1);
-//│ tmp31 = 2;
-//│ tmp32 = 3;
+//│ BBB_x_tmp = 2;
+//│ BBB_y_tmp = 3;
 //│ tmp21 = (y1) => {
-//│   return match_x_branch_BBB(y1, tmp31, tmp32)
+//│   return match_x_branch_BBB(y1, BBB_x_tmp, BBB_y_tmp)
 //│ };
 //│ tmp22 = f5(tmp21, 2);
 //│ tmp23 = tmp20 + tmp22;
-//│ tmp33 = 3;
-//│ tmp34 = 2;
+//│ AAA_x_tmp1 = 3;
+//│ AAA_y_tmp1 = 2;
 //│ tmp24 = (y1) => {
-//│   return match_x_branch_AAA(y1, tmp33, tmp34)
+//│   return match_x_branch_AAA(y1, AAA_x_tmp1, AAA_y_tmp1)
 //│ };
 //│ tmp25 = f5(tmp24, 4);
 //│ tmp26 = tmp23 + tmp25;
-//│ tmp35 = 4;
-//│ tmp36 = 6;
+//│ BBB_x_tmp1 = 4;
+//│ BBB_y_tmp1 = 6;
 //│ tmp27 = (y1) => {
-//│   return match_x_branch_BBB(y1, tmp35, tmp36)
+//│   return match_x_branch_BBB(y1, BBB_x_tmp1, BBB_y_tmp1)
 //│ };
 //│ tmp28 = f5(tmp27, 0);
 //│ block$res39 = tmp26 + tmp28;
@@ -1312,7 +1312,7 @@ fun c2(x) = if x is
 fun p(a) = c1(a) + c2(a)
 p(AA(1))
 //│ JS (unsanitized):
-//│ let p, c11, c2, tmp47;
+//│ let p, c11, c2, tmp39;
 //│ c11 = function c1(x1) {
 //│   let scrut;
 //│   if (x1 instanceof AA1.class) {
@@ -1334,16 +1334,16 @@ p(AA(1))
 //│   }
 //│ };
 //│ p = function p(a) {
-//│   let tmp48, tmp49;
-//│   tmp48 = c11(a);
-//│   tmp49 = c2(a);
-//│   return tmp48 + tmp49
+//│   let tmp40, tmp41;
+//│   tmp40 = c11(a);
+//│   tmp41 = c2(a);
+//│   return tmp40 + tmp41
 //│ };
-//│ tmp47 = AA1(1);
-//│ p(tmp47)
+//│ tmp39 = AA1(1);
+//│ p(tmp39)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let p, c11, c2, tmp47;
+//│ let p, c11, c2, tmp39;
 //│ c11 = function c1(x1) {
 //│   let scrut;
 //│   if (x1 instanceof AA1.class) {
@@ -1363,13 +1363,13 @@ p(AA(1))
 //│   }
 //│ };
 //│ p = function p(a) {
-//│   let tmp48, tmp49;
-//│   tmp48 = c11(a);
-//│   tmp49 = c2(a);
-//│   return tmp48 + tmp49
+//│   let tmp40, tmp41;
+//│   tmp40 = c11(a);
+//│   tmp41 = c2(a);
+//│   return tmp40 + tmp41
 //│ };
-//│ tmp47 = AA1(1);
-//│ block$res41 = p(tmp47);
+//│ tmp39 = AA1(1);
+//│ block$res41 = p(tmp39);
 //│ undefined
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1384,7 +1384,7 @@ fun c(x, y) = if x is
       A then a
 c(AA(2), A)
 //│ JS (unsanitized):
-//│ let c3, tmp49;
+//│ let c3, tmp41;
 //│ c3 = function c(x1, y1) {
 //│   let param0, a;
 //│   if (x1 instanceof AA1.class) {
@@ -1399,22 +1399,22 @@ c(AA(2), A)
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp49 = AA1(2);
-//│ c3(tmp49, A1)
+//│ tmp41 = AA1(2);
+//│ c3(tmp41, A1)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c3, tmp49, tmp50;
+//│ let c3, tmp41, AA_aa;
 //│ c3 = function c(x1, y1) {
 //│   return runtime.safeCall(x1(y1))
 //│ };
-//│ tmp50 = 2;
-//│ tmp49 = (y1) => {
+//│ AA_aa = 2;
+//│ tmp41 = (y1) => {
 //│   let param0, a;
-//│   param0 = tmp50;
+//│   param0 = AA_aa;
 //│   a = param0;
 //│   return runtime.safeCall(y1(a))
 //│ };
-//│ block$res43 = c3(tmp49, (a) => {
+//│ block$res43 = c3(tmp41, (a) => {
 //│   return a
 //│ });
 //│ undefined
@@ -1431,90 +1431,90 @@ fun f(x, y) =
   a + 3
 f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4) + f(CCC(4), 0)
 //│ JS (unsanitized):
-//│ let f6, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61;
+//│ let f6, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52;
 //│ f6 = function f(x1, y1) {
-//│   let a, param0, n, param01, param1, n1, m, tmp62, tmp63;
+//│   let a, param0, n, param01, param1, n1, m, tmp53, tmp54;
 //│   if (x1 instanceof AAA1.class) {
 //│     param01 = x1.x;
 //│     param1 = x1.y;
 //│     n1 = param01;
 //│     m = param1;
-//│     tmp62 = y1 + n1;
-//│     tmp63 = tmp62 - m;
+//│     tmp53 = y1 + n1;
+//│     tmp54 = tmp53 - m;
 //│   } else if (x1 instanceof CCC1.class) {
 //│     param0 = x1.c;
 //│     n = param0;
-//│     tmp63 = n + 1;
+//│     tmp54 = n + 1;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   a = tmp63;
+//│   a = tmp54;
 //│   return a + 3
 //│ };
-//│ tmp52 = AAA1(1, 3);
-//│ tmp53 = f6(tmp52, 1);
-//│ tmp54 = CCC1(2);
-//│ tmp55 = f6(tmp54, 2);
-//│ tmp56 = tmp53 + tmp55;
-//│ tmp57 = AAA1(3, 2);
-//│ tmp58 = f6(tmp57, 4);
-//│ tmp59 = tmp56 + tmp58;
-//│ tmp60 = CCC1(4);
-//│ tmp61 = f6(tmp60, 0);
-//│ tmp59 + tmp61
+//│ tmp43 = AAA1(1, 3);
+//│ tmp44 = f6(tmp43, 1);
+//│ tmp45 = CCC1(2);
+//│ tmp46 = f6(tmp45, 2);
+//│ tmp47 = tmp44 + tmp46;
+//│ tmp48 = AAA1(3, 2);
+//│ tmp49 = f6(tmp48, 4);
+//│ tmp50 = tmp47 + tmp49;
+//│ tmp51 = CCC1(4);
+//│ tmp52 = f6(tmp51, 0);
+//│ tmp50 + tmp52
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f6, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, match_x_rest1, match_x_branch_AAA1, tmp64, match_x_branch_CCC, tmp65, tmp66, tmp67;
-//│ match_x_branch_AAA1 = function match_x_branch_AAA(y1, field_x, field_y) {
-//│   let param0, param1, n, m, tmp68, tmp69;
-//│   param0 = field_x;
-//│   param1 = field_y;
+//│ let f6, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, AAA_x_tmp2, AAA_y_tmp2, match_x_rest1, match_x_branch_AAA1, CCC_c_tmp, match_x_branch_CCC, AAA_x_tmp3, AAA_y_tmp3, CCC_c_tmp1;
+//│ match_x_branch_AAA1 = function match_x_branch_AAA(y1, AAA_x, AAA_y) {
+//│   let param0, param1, n, m, tmp53, tmp54;
+//│   param0 = AAA_x;
+//│   param1 = AAA_y;
 //│   n = param0;
 //│   m = param1;
-//│   tmp68 = y1 + n;
-//│   tmp69 = tmp68 - m;
-//│   return match_x_rest1(tmp69)
+//│   tmp53 = y1 + n;
+//│   tmp54 = tmp53 - m;
+//│   return match_x_rest1(tmp54)
 //│ };
-//│ match_x_branch_CCC = function match_x_branch_CCC(y1, field_c) {
-//│   let param0, n, tmp68;
-//│   param0 = field_c;
+//│ match_x_branch_CCC = function match_x_branch_CCC(y1, CCC_c) {
+//│   let param0, n, tmp53;
+//│   param0 = CCC_c;
 //│   n = param0;
-//│   tmp68 = n + 1;
-//│   return match_x_rest1(tmp68)
+//│   tmp53 = n + 1;
+//│   return match_x_rest1(tmp53)
 //│ };
-//│ match_x_rest1 = function match_x_rest(tmp68) {
+//│ match_x_rest1 = function match_x_rest(tmp53) {
 //│   let a;
-//│   a = tmp68;
+//│   a = tmp53;
 //│   return a + 3
 //│ };
 //│ f6 = function f(x1, y1) {
 //│   return runtime.safeCall(x1(y1))
 //│ };
-//│ tmp62 = 1;
-//│ tmp63 = 3;
-//│ tmp52 = (y1) => {
-//│   return match_x_branch_AAA1(y1, tmp62, tmp63)
+//│ AAA_x_tmp2 = 1;
+//│ AAA_y_tmp2 = 3;
+//│ tmp43 = (y1) => {
+//│   return match_x_branch_AAA1(y1, AAA_x_tmp2, AAA_y_tmp2)
 //│ };
-//│ tmp53 = f6(tmp52, 1);
-//│ tmp64 = 2;
-//│ tmp54 = (y1) => {
-//│   return match_x_branch_CCC(y1, tmp64)
+//│ tmp44 = f6(tmp43, 1);
+//│ CCC_c_tmp = 2;
+//│ tmp45 = (y1) => {
+//│   return match_x_branch_CCC(y1, CCC_c_tmp)
 //│ };
-//│ tmp55 = f6(tmp54, 2);
-//│ tmp56 = tmp53 + tmp55;
-//│ tmp65 = 3;
-//│ tmp66 = 2;
-//│ tmp57 = (y1) => {
-//│   return match_x_branch_AAA1(y1, tmp65, tmp66)
+//│ tmp46 = f6(tmp45, 2);
+//│ tmp47 = tmp44 + tmp46;
+//│ AAA_x_tmp3 = 3;
+//│ AAA_y_tmp3 = 2;
+//│ tmp48 = (y1) => {
+//│   return match_x_branch_AAA1(y1, AAA_x_tmp3, AAA_y_tmp3)
 //│ };
-//│ tmp58 = f6(tmp57, 4);
-//│ tmp59 = tmp56 + tmp58;
-//│ tmp67 = 4;
-//│ tmp60 = (y1) => {
-//│   return match_x_branch_CCC(y1, tmp67)
+//│ tmp49 = f6(tmp48, 4);
+//│ tmp50 = tmp47 + tmp49;
+//│ CCC_c_tmp1 = 4;
+//│ tmp51 = (y1) => {
+//│   return match_x_branch_CCC(y1, CCC_c_tmp1)
 //│ };
-//│ tmp61 = f6(tmp60, 0);
-//│ block$res45 = tmp59 + tmp61;
+//│ tmp52 = f6(tmp51, 0);
+//│ block$res45 = tmp50 + tmp52;
 //│ undefined
 //│ = 24
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -1531,68 +1531,68 @@ fun f(x, y) =
   a + 3
 f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4)
 //│ JS (unsanitized):
-//│ let f7, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84;
+//│ let f7, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69;
 //│ f7 = function f(x1, y1) {
-//│   let a, param0, n, tmp85;
+//│   let a, param0, n, tmp70;
 //│   if (x1 instanceof AAA1.class) {
-//│     tmp85 = y1 + x1.y;
+//│     tmp70 = y1 + x1.y;
 //│   } else if (x1 instanceof CCC1.class) {
 //│     param0 = x1.c;
 //│     n = param0;
-//│     tmp85 = n + 1;
+//│     tmp70 = n + 1;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   a = tmp85;
+//│   a = tmp70;
 //│   return a + 3
 //│ };
-//│ tmp78 = AAA1(1, 3);
-//│ tmp79 = f7(tmp78, 1);
-//│ tmp80 = CCC1(2);
-//│ tmp81 = f7(tmp80, 2);
-//│ tmp82 = tmp79 + tmp81;
-//│ tmp83 = AAA1(3, 2);
-//│ tmp84 = f7(tmp83, 4);
-//│ tmp82 + tmp84
+//│ tmp63 = AAA1(1, 3);
+//│ tmp64 = f7(tmp63, 1);
+//│ tmp65 = CCC1(2);
+//│ tmp66 = f7(tmp65, 2);
+//│ tmp67 = tmp64 + tmp66;
+//│ tmp68 = AAA1(3, 2);
+//│ tmp69 = f7(tmp68, 4);
+//│ tmp67 + tmp69
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f7, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, match_x_rest2, match_x_branch_AAA2, tmp87, tmp88, tmp89;
-//│ match_x_branch_AAA2 = function match_x_branch_AAA(y1, field_x, field_y) {
-//│   let tmp90;
-//│   tmp90 = y1 + field_y;
-//│   return match_x_rest2(tmp90)
+//│ let f7, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, CCC_c, AAA_x_unused, AAA_y_tmp4, match_x_rest2, match_x_branch_AAA2, AAA_x_unused1, AAA_y_tmp5;
+//│ match_x_branch_AAA2 = function match_x_branch_AAA(y1, AAA_y) {
+//│   let tmp70;
+//│   tmp70 = y1 + AAA_y;
+//│   return match_x_rest2(tmp70)
 //│ };
-//│ match_x_rest2 = function match_x_rest(tmp90) {
+//│ match_x_rest2 = function match_x_rest(tmp70) {
 //│   let a;
-//│   a = tmp90;
+//│   a = tmp70;
 //│   return a + 3
 //│ };
 //│ f7 = function f(x1, y1) {
 //│   return runtime.safeCall(x1(y1))
 //│ };
-//│ tmp85 = 1;
-//│ tmp86 = 3;
-//│ tmp78 = (y1) => {
-//│   return match_x_branch_AAA2(y1, tmp85, tmp86)
+//│ AAA_x_unused = 1;
+//│ AAA_y_tmp4 = 3;
+//│ tmp63 = (y1) => {
+//│   return match_x_branch_AAA2(y1, AAA_y_tmp4)
 //│ };
-//│ tmp79 = f7(tmp78, 1);
-//│ tmp87 = 2;
-//│ tmp80 = (y1) => {
-//│   let param0, n, tmp90;
-//│   param0 = tmp87;
+//│ tmp64 = f7(tmp63, 1);
+//│ CCC_c = 2;
+//│ tmp65 = (y1) => {
+//│   let param0, n, tmp70;
+//│   param0 = CCC_c;
 //│   n = param0;
-//│   tmp90 = n + 1;
-//│   return match_x_rest2(tmp90)
+//│   tmp70 = n + 1;
+//│   return match_x_rest2(tmp70)
 //│ };
-//│ tmp81 = f7(tmp80, 2);
-//│ tmp82 = tmp79 + tmp81;
-//│ tmp88 = 3;
-//│ tmp89 = 2;
-//│ tmp83 = (y1) => {
-//│   return match_x_branch_AAA2(y1, tmp88, tmp89)
+//│ tmp66 = f7(tmp65, 2);
+//│ tmp67 = tmp64 + tmp66;
+//│ AAA_x_unused1 = 3;
+//│ AAA_y_tmp5 = 2;
+//│ tmp68 = (y1) => {
+//│   return match_x_branch_AAA2(y1, AAA_y_tmp5)
 //│ };
-//│ tmp84 = f7(tmp83, 4);
-//│ block$res47 = tmp82 + tmp84;
+//│ tmp69 = f7(tmp68, 4);
+//│ block$res47 = tmp67 + tmp69;
 //│ undefined
 //│ = 22
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

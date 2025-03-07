@@ -157,15 +157,15 @@ c(AA(2))
 //│ c(tmp)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c, tmp, tmp1;
+//│ let c, tmp, AA_x;
 //│ c = function c(x) {
 //│   return runtime.safeCall(x())
 //│ };
-//│ tmp1 = 2;
+//│ AA_x = 2;
 //│ tmp = () => {
 //│   let scrut;
 //│   scrut = (x) => {
-//│     return tmp1
+//│     return AA_x
 //│   };
 //│   return runtime.safeCall(scrut(x_not_in_scope))
 //│ };
@@ -184,7 +184,7 @@ fun c(x, y) = if x is
       A then x.x
 c(AA(2), A)
 //│ JS (unsanitized):
-//│ let c1, tmp3;
+//│ let c1, tmp2;
 //│ c1 = function c(x, y) {
 //│   if (x instanceof AA1.class) {
 //│     if (y instanceof A1.class) {
@@ -196,20 +196,70 @@ c(AA(2), A)
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp3 = AA1(2);
-//│ c1(tmp3, A1)
+//│ tmp2 = AA1(2);
+//│ c1(tmp2, A1)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c1, tmp3, tmp4;
+//│ let c1, tmp2, AA_x1;
 //│ c1 = function c(x, y) {
 //│   return runtime.safeCall(x(y))
 //│ };
-//│ tmp4 = 2;
-//│ tmp3 = (y) => {
+//│ AA_x1 = 2;
+//│ tmp2 = (y) => {
 //│   return runtime.safeCall(y(x_not_in_scope))
 //│ };
-//│ block$res8 = c1(tmp3, (x) => {
-//│   return x.x
+//│ block$res8 = c1(tmp2, (x) => {
+//│   return AA_x1
+//│ });
+//│ undefined
+//│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+
+
+
+:fixme
+:sjs
+fun c(x, y) = if x is
+  AA then
+    if y is
+      A then x.x
+fun p() = AA(2)
+c(p(), A)
+//│ JS (unsanitized):
+//│ let p, c2, tmp4;
+//│ c2 = function c(x, y) {
+//│   if (x instanceof AA1.class) {
+//│     if (y instanceof A1.class) {
+//│       return x.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ p = function p() {
+//│   return AA1(2)
+//│ };
+//│ tmp4 = p();
+//│ c2(tmp4, A1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let p, c2, tmp4;
+//│ c2 = function c(x, y) {
+//│   return runtime.safeCall(x(y))
+//│ };
+//│ p = function p() {
+//│   let AA_x2;
+//│   AA_x2 = 2;
+//│   return (y) => {
+//│     return runtime.safeCall(y(x_not_in_scope))
+//│   }
+//│ };
+//│ tmp4 = p();
+//│ block$res10 = c2(tmp4, (x) => {
+//│   return AA_x_not_in_scope
 //│ });
 //│ undefined
 //│ ═══[RUNTIME ERROR] ReferenceError: x_not_in_scope is not defined
