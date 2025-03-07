@@ -401,9 +401,7 @@ extends Importer:
     case InfixApp(lhs, Keyword.`as`, rhs) =>
       Term.Asc(term(lhs), term(rhs))
     case InfixApp(lhs, Keyword.`:`, rhs) =>
-      raise:
-        ErrorReport(msg"Unexpected colon in this position." -> tree.toLoc :: Nil, S(tree))
-      term(lhs)
+      block(tree :: Nil, hasResult = false)._1
     case tree @ InfixApp(lhs, Keyword.`is` | Keyword.`and`, rhs) =>
       val des = new ucs.Desugarer(this)(tree)
       scoped("ucs:desugared"):
@@ -668,7 +666,7 @@ extends Importer:
     case DynAccess(obj, fld, ai) =>
       Term.DynSel(term(obj), term(fld), ai)
     case Spread(kw, kwLoc, body) =>
-      raise(ErrorReport(msg"Illegal position for '${kw.name}' spread operator." -> tree.toLoc :: Nil))
+      raise(ErrorReport(msg"Illegal position for '${kw.name}' spread operator." -> kwLoc :: Nil))
       Term.Error
     case Under() =>
       raise(ErrorReport(msg"Illegal position for '_' placeholder." -> tree.toLoc :: Nil))
@@ -733,6 +731,8 @@ extends Importer:
         t
   
   def fld(tree: Tree): Ctxl[Elem] = tree match
+    case InfixApp(id: Ident, Keyword.`:`, rhs) =>
+      Fld(FldFlags.empty, Term.Lit(StrLit(id.name).withLocOf(id)), S(term(rhs)))
     case InfixApp(lhs, Keyword.`:`, rhs) =>
       Fld(FldFlags.empty, term(lhs), S(term(rhs)))
     case Spread(Keyword.`..`, _, S(trm)) =>
@@ -870,6 +870,9 @@ extends Importer:
         newCtx.givenIn:
           go(sts, funs, Nil, newAcc)
       
+      case Spread(Keyword.`...`, kwLoc, S(body)) :: sts =>
+        reportUnusedAnnotations
+        go(sts, funs, Nil, RcdSpread(term(body)) :: acc)
       case InfixApp(lhs, Keyword.`:`, rhs) :: sts =>
         var newCtx = ctx
         val newAcc = lhs match
@@ -1140,7 +1143,7 @@ extends Importer:
   def mkBlk(funs: Ls[TermDefinition], acc: Ls[Statement], res: Opt[Term], hasResult: Bool): Blk | Rcd =
     // TODO forbid certain kinds of terms in records
     val isRcd = acc.exists:
-      case RcdField(_, _) => true
+      case _: (RcdField | RcdSpread) => true
       case _ => false
     if isRcd then Term.Rcd(funs reverse_::: (res.toList ::: acc).reverse)
     else Blk(funs reverse_::: acc.reverse, res.getOrElse:
