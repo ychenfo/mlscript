@@ -733,6 +733,8 @@ class Deforest(using TL, Raise, Elaborator.State):
         case CtorFinalDest.Sel(s) => Nil
       }.toMap
     
+    val replaceSelInfo2 = mutable.Map.empty[ResultId, Set[ResultId] -> Map[Tree.Ident, Value.Ref]]
+    
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
@@ -792,9 +794,9 @@ class Deforest(using TL, Raise, Elaborator.State):
               val newSelMapSyms = selMap.map { case (id, r) => id -> VarSymbol(Tree.Ident("field_" + id.name)) }
               val newSelMaps = newSelMapSyms.map { case (id, s) => id -> Value.Ref(s).asInstanceOf[Value.Ref] }              
               
-              // replaceSelInfo += scrut -> (sel -> newSelMaps)
+              replaceSelInfo2 += scrut -> (sel -> newSelMaps)
               val bodyReplaceSel = applyBlock(body)
-              // replaceSelInfo -= scrut
+              replaceSelInfo2 -= scrut
               
               // val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, newSelMaps)
               
@@ -823,9 +825,9 @@ class Deforest(using TL, Raise, Elaborator.State):
             else
               // make a lambda, and replace the selections
               
-              // replaceSelInfo += scrut -> (sel -> selMap)
+              replaceSelInfo2 += scrut -> (sel -> selMap)
               val bodyReplaceSel = applyBlock(body)
-              // replaceSelInfo -= scrut
+              replaceSelInfo2 -= scrut
               
               // val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, selMap)
               
@@ -906,12 +908,32 @@ class Deforest(using TL, Raise, Elaborator.State):
               val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
               // tl.log(call.toString() + " ----> " + body)
               
+              // use pre-determined symbols, create temp symbols for un-used fields
+              val usedFieldIdentToSymbolsToBeReplaced = selsMap._1(c)
+              val allFieldIdentToSymbolsToBeReplaced = getClsFields(c).map: f =>
+                f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"field_${f.id}_unused"))
+              
+              // if all vars are temp vars, no need to create more temp vars
+              // otherwise, create temps for var symbols (which will be function params with these temp vars flowing in)
+              val assignedTempSyms = if allFieldIdentToSymbolsToBeReplaced.forall(_._2.isInstanceOf[TempSymbol]) then
+                allFieldIdentToSymbolsToBeReplaced.map(_._2.asInstanceOf[TempSymbol])
+              else
+                allFieldIdentToSymbolsToBeReplaced.map { case (id, s) => s match
+                  case ts: TempSymbol => ts
+                  case vs: VarSymbol => TempSymbol(N, s"${vs.name}_tmp")
+                }
+              
+              
+              
               val newArgs = args.map(_ => TempSymbol(N))
               
-              // FIXME: use pre-determined symbols
+              // FIXME: use pre-determined symbols, create temp symbols for un-used fields
               val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s).asInstanceOf[Value.Ref])).toMap
               
               val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, c, sels.toSet, idsToArgs)
+              
+              // args.zip(assignedTempSyms).foldRight[Block](k(bodyAndRestInLam)):
+              //   case ((a, tmp), rest) => applyResult2(a.value) { r => Assign(tmp, r, rest) }
               
               args.zip(newArgs).foldRight[Block](k(bodyAndRestInLam)){ case ((a, tmp), rest) =>
                 applyResult2(a.value): r =>
@@ -939,9 +961,12 @@ class Deforest(using TL, Raise, Elaborator.State):
           if rewritingSelConsumer.contains(s.uid) then
             k(p)
           else
-            replaceSelInfo.get(s.uid) match
+            // val _ = replaceSelInfo.get(s.uid) match
+            //   case None => k(s)
+            //   case Some(v) => k(Value.Ref(v))
+            replaceSelInfo2.values.find(v => v._1.contains(s.uid)) match
               case None => k(s)
-              case Some(v) => k(Value.Ref(v))
+              case Some(v) => k(v._2(nme))
         case Some(mod) =>
           filteredCtorDests.get(s.uid) match
             case None => 

@@ -1519,3 +1519,81 @@ f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4) + f(CCC(4), 0)
 //│ = 24
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 24
+
+
+
+
+:sjs
+fun f(x, y) =
+  let a = if x is
+    AAA then y + x.y
+    CCC(n) then n + 1
+  a + 3
+f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4)
+//│ JS (unsanitized):
+//│ let f7, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84;
+//│ f7 = function f(x1, y1) {
+//│   let a, param0, n, tmp85;
+//│   if (x1 instanceof AAA1.class) {
+//│     tmp85 = y1 + x1.y;
+//│   } else if (x1 instanceof CCC1.class) {
+//│     param0 = x1.c;
+//│     n = param0;
+//│     tmp85 = n + 1;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   a = tmp85;
+//│   return a + 3
+//│ };
+//│ tmp78 = AAA1(1, 3);
+//│ tmp79 = f7(tmp78, 1);
+//│ tmp80 = CCC1(2);
+//│ tmp81 = f7(tmp80, 2);
+//│ tmp82 = tmp79 + tmp81;
+//│ tmp83 = AAA1(3, 2);
+//│ tmp84 = f7(tmp83, 4);
+//│ tmp82 + tmp84
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f7, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, match_x_rest2, match_x_branch_AAA2, tmp87, tmp88, tmp89;
+//│ match_x_branch_AAA2 = function match_x_branch_AAA(y1, field_x, field_y) {
+//│   let tmp90;
+//│   tmp90 = y1 + field_y;
+//│   return match_x_rest2(tmp90)
+//│ };
+//│ match_x_rest2 = function match_x_rest(tmp90) {
+//│   let a;
+//│   a = tmp90;
+//│   return a + 3
+//│ };
+//│ f7 = function f(x1, y1) {
+//│   return runtime.safeCall(x1(y1))
+//│ };
+//│ tmp85 = 1;
+//│ tmp86 = 3;
+//│ tmp78 = (y1) => {
+//│   return match_x_branch_AAA2(y1, tmp85, tmp86)
+//│ };
+//│ tmp79 = f7(tmp78, 1);
+//│ tmp87 = 2;
+//│ tmp80 = (y1) => {
+//│   let param0, n, tmp90;
+//│   param0 = tmp87;
+//│   n = param0;
+//│   tmp90 = n + 1;
+//│   return match_x_rest2(tmp90)
+//│ };
+//│ tmp81 = f7(tmp80, 2);
+//│ tmp82 = tmp79 + tmp81;
+//│ tmp88 = 3;
+//│ tmp89 = 2;
+//│ tmp83 = (y1) => {
+//│   return match_x_branch_AAA2(y1, tmp88, tmp89)
+//│ };
+//│ tmp84 = f7(tmp83, 4);
+//│ block$res47 = tmp82 + tmp84;
+//│ undefined
+//│ = 22
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 22
