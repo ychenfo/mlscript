@@ -609,7 +609,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     // we need only one CtorFinalDest per arm
     val handledMatches = mutable.Map.empty[ClsOrModSymbol, Opt[CtorFinalDest]]
     
-    resolveClashes._1.foreach { case (ctor, CtorDest(dtors, sels)) =>
+    resolveClashes._1.toSortedMap.foreach { case (ctor, CtorDest(dtors, sels)) =>
       val filteredDtor = {
         if dtors.size == 0 && sels.size == 1 then Some(CtorFinalDest.Sel(sels.head.expr))
         else if dtors.size == 0 && sels.size > 1 then

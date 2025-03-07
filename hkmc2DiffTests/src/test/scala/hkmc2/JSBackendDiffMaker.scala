@@ -310,4 +310,4 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
             case _ =>
               output(s"${if anon then "" else s"$nme "}= ${result.indentNewLines("| ")}")
       
-      
+
