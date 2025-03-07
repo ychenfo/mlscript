@@ -60,7 +60,7 @@ enum DtorExpr:
   case Sel(s: ResultId)
 
 enum CtorFinalDest:
-  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId])
+  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[ClassSymbol, Map[Tree.Ident, Symbol]] -> Map[ClassSymbol, Map[ResultId, Symbol]])
   case Sel(s: ResultId)
 
 trait FieldSelTrait:
@@ -659,21 +659,39 @@ class Deforest(using TL, Raise, Elaborator.State):
             case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
             case _ => false
           } then
-            val selMaps = dtors.head._2.arms.flatMap {
-              case (Case.Cls(c, _), body) => c.asCls.map: c =>
-                c -> getClsFields(c).map { f =>
-                  // find the sels in inside this arm to be replaced
-                  val selToBeReplaced = sels.filter { case fs: FieldSel => fs.inMatching(dtors.head._1) === c }
-                  
-                  // if a branch is used multiple times, later it will be a function, so use var here
-                  // if a branch is used once, it will just be a lambda, so tempvar here
-                  val varSymInsteadOfTempSym = resolveClashes._2(DtorExpr.Match(dtors.head._1)).count(getClsSymOfUid(_) === c) > 1
-                  val sym = if varSymInsteadOfTempSym
-                    then VarSymbol(Tree.Ident(s"${c.name}_${f.id.name}"))
-                    else TempSymbol(N, s"${c.name}_${f.id.name}")
-                  (f.id -> sym) }.toMap
-              }.toMap
-            Some(CtorFinalDest.Match(dtors.head._1, dtors.head._2, sels.map(_.expr)))
+            val fieldNameToSymToBeReplaced = mutable.Map.empty[ClassSymbol, Map[Tree.Ident, Symbol]]
+            val selectionUidsToSymToBeReplaced = mutable.Map.empty[ClassSymbol, Map[ResultId, Symbol]]
+            dtors.head._2.arms.foreach:
+              case (Case.Cls(c, _), body) => c.asCls.foreach: c =>
+                // if this arm is used more than once, should be var symbol because the arm body will be
+                // extracted to a function, otherwise just temp symbol
+                val varSymInsteadOfTempSym = resolveClashes._2(DtorExpr.Match(dtors.head._1)).count(getClsSymOfUid(_) === c) > 1
+                val selsInArms = sels.filter { fs => fs.inMatching(dtors.head._1) === c }
+                selsInArms.foreach: fs =>
+                  assert(getClsFields(c).map(_.id).contains(fs.field))
+                  fieldNameToSymToBeReplaced.updateWith(c):
+                    case None =>
+                      val sym = if varSymInsteadOfTempSym
+                        then VarSymbol(Tree.Ident(s"${c.name}_${fs.field.name}"))
+                        else TempSymbol(N, s"${c.name}_${fs.field.name}")
+                      Some(Map(fs.field -> sym))
+                    case Some(v) =>
+                      if !v.contains(fs.field) then
+                        val sym = if varSymInsteadOfTempSym
+                        then VarSymbol(Tree.Ident(s"${c.name}_${fs.field.name}"))
+                        else TempSymbol(N, s"${c.name}_${fs.field.name}")
+                        Some(v + (fs.field -> sym))
+                      else Some(v)
+                  val sym = fieldNameToSymToBeReplaced(c)(fs.field)
+                  selectionUidsToSymToBeReplaced.updateWith(c):
+                    case None => Some(Map(fs.expr -> sym))
+                    case Some(v) => Some(v + (fs.expr -> sym))
+            Some(CtorFinalDest.Match(
+              dtors.head._1,
+              dtors.head._2,
+              sels.map(_.expr),
+              fieldNameToSymToBeReplaced.toMap -> selectionUidsToSymToBeReplaced.toMap
+            ))
           else
             throw Error("more than one consumer")
             None
@@ -684,12 +702,12 @@ class Deforest(using TL, Raise, Elaborator.State):
     res.toMap
   
   lazy val rewritingSelConsumer = filteredCtorDests.values.flatMap {
-    case CtorFinalDest.Match(_, _, sels) => None
+    case CtorFinalDest.Match(_, _, _, _) => None
     case CtorFinalDest.Sel(s) => Some(s)
   }.toSet
   
   lazy val filteredDtors = filteredCtorDests.values.collect {
-    case CtorFinalDest.Match(scrut, _, _) => scrut
+    case CtorFinalDest.Match(scrut, _, _, _) => scrut
   }.toSet
   
   def rewrite(p: Block) =
@@ -703,13 +721,17 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
       filteredCtorDests.values.flatMap{
-        case CtorFinalDest.Match(scrut, expr, selInArms) =>
+        case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
           val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
           Some(scrut -> matchExpr.sortedFvs.filterNot(_.uid === l.uid))
         case CtorFinalDest.Sel(s) => None
       }.toMap
     
-    val replaceSelInfo = mutable.Map.empty[ResultId, Set[ResultId] -> Map[Tree.Ident, Value.Ref]]
+    val replaceSelInfo =
+      filteredCtorDests.values.flatMap { 
+        case CtorFinalDest.Match(_, _, _, selMaps) => selMaps._2.values.flatMap(m => m.toList)
+        case CtorFinalDest.Sel(s) => Nil
+      }.toMap
     
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
@@ -736,6 +758,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       
       // return a lambda, which either calls the extracted arm function, or contains the computations in matching arms
       def getOrElseUpdate(scrut: ResultId, m: Match, cls: ClsOrModSymbol, sel: Set[ResultId], selMap: Map[Tree.Ident, Value.Ref]) =
+        // FIXME: change to use pre-determined symbols
         assert(scrut === m.scrut.uid)
         val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
         store.get(scrut).flatMap(_.get(cls)) match
@@ -769,9 +792,9 @@ class Deforest(using TL, Raise, Elaborator.State):
               val newSelMapSyms = selMap.map { case (id, r) => id -> VarSymbol(Tree.Ident("field_" + id.name)) }
               val newSelMaps = newSelMapSyms.map { case (id, s) => id -> Value.Ref(s).asInstanceOf[Value.Ref] }              
               
-              replaceSelInfo += scrut -> (sel -> newSelMaps)
+              // replaceSelInfo += scrut -> (sel -> newSelMaps)
               val bodyReplaceSel = applyBlock(body)
-              replaceSelInfo -= scrut
+              // replaceSelInfo -= scrut
               
               // val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, newSelMaps)
               
@@ -800,9 +823,9 @@ class Deforest(using TL, Raise, Elaborator.State):
             else
               // make a lambda, and replace the selections
               
-              replaceSelInfo += scrut -> (sel -> selMap)
+              // replaceSelInfo += scrut -> (sel -> selMap)
               val bodyReplaceSel = applyBlock(body)
-              replaceSelInfo -= scrut
+              // replaceSelInfo -= scrut
               
               // val bodyReplaceSel = bodyInitRewritten.replaceSelect(using sel, selMap)
               
@@ -879,12 +902,13 @@ class Deforest(using TL, Raise, Elaborator.State):
           filteredCtorDests.get(call.uid) match
             case None =>
               handleNormalCall(args)
-            case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
+            case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
               val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.get._2
               // tl.log(call.toString() + " ----> " + body)
               
               val newArgs = args.map(_ => TempSymbol(N))
               
+              // FIXME: use pre-determined symbols
               val idsToArgs = getClsFields(c).map(s => s.id).zip(newArgs.map(s => Value.Ref(s).asInstanceOf[Value.Ref])).toMap
               
               val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, c, sels.toSet, idsToArgs)
@@ -915,14 +939,14 @@ class Deforest(using TL, Raise, Elaborator.State):
           if rewritingSelConsumer.contains(s.uid) then
             k(p)
           else
-            replaceSelInfo.values.find(v => v._1.contains(s.uid)) match
+            replaceSelInfo.get(s.uid) match
               case None => k(s)
-              case Some(v) => k(v._2(nme))
+              case Some(v) => k(Value.Ref(v))
         case Some(mod) =>
           filteredCtorDests.get(s.uid) match
             case None => 
               k(s)
-            case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
+            case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
               val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               // tl.log(mod.toString + " ----> " + body)
               val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, mod, Set.empty, Map.empty)
@@ -935,7 +959,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           filteredCtorDests.get(r.uid) match
             case None => 
               k(r)
-            case Some(CtorFinalDest.Match(scrut, expr, sels)) =>
+            case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
               val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.get
               // tl.log(mod.toString + " ----> " + body)
               
