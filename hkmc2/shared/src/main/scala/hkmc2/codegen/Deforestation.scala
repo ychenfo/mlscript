@@ -60,7 +60,7 @@ enum DtorExpr:
   case Sel(s: ResultId)
 
 enum CtorFinalDest:
-  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[ClassSymbol, Map[Tree.Ident, Symbol]] -> Map[ClassSymbol, Map[ResultId, Symbol]])
+  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])
   case Sel(s: ResultId)
 
 trait FieldSelTrait:
@@ -671,8 +671,8 @@ class Deforest(using TL, Raise, Elaborator.State):
               case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
               case _ => false
             } then
-              val fieldNameToSymToBeReplaced = mutable.Map.empty[ClassSymbol, Map[Tree.Ident, Symbol]]
-              val selectionUidsToSymToBeReplaced = mutable.Map.empty[ClassSymbol, Map[ResultId, Symbol]]
+              val fieldNameToSymToBeReplaced = mutable.Map.empty[Tree.Ident, Symbol]
+              val selectionUidsToSymToBeReplaced = mutable.Map.empty[ResultId, Symbol]
               println(dtors.head._2.arms.length)
               dtors.head._2.arms.foreach:
                 case (Case.Cls(cOrMod, _), body) if cOrMod.asCls.fold(false)(_ === currentCtorCls) =>
@@ -684,24 +684,29 @@ class Deforest(using TL, Raise, Elaborator.State):
                   println(s"in arm: ${c}; sel in arms: ${selsInArms}; all sels: ${sels}")
                   selsInArms.foreach: fs =>
                     assert(getClsFields(c).map(_.id).contains(fs.field))
-                    fieldNameToSymToBeReplaced.updateWith(c):
-                      case None =>
-                        val sym = if varSymInsteadOfTempSym
-                          then VarSymbol(Tree.Ident(s"${c.name}_${fs.field.name}"))
-                          else TempSymbol(N, s"${c.name}_${fs.field.name}")
-                        Some(Map(fs.field -> sym))
-                      case Some(v) =>
-                        if !v.contains(fs.field) then
-                          val sym = if varSymInsteadOfTempSym
-                            then VarSymbol(Tree.Ident(s"${c.name}_${fs.field.name}"))
-                            else TempSymbol(N, s"${c.name}_${fs.field.name}")
-                          Some(v + (fs.field -> sym))
-                        else Some(v)
-                    val sym = fieldNameToSymToBeReplaced(c)(fs.field)
+                    // fieldNameToSymToBeReplaced.updateWith(c):
+                    //   case None =>
+                    //     val sym = if varSymInsteadOfTempSym
+                    //       then VarSymbol(Tree.Ident(s"${c.name}_${fs.field.name}"))
+                    //       else TempSymbol(N, s"${c.name}_${fs.field.name}")
+                    //     Some(Map(fs.field -> sym))
+                    //   case Some(v) =>
+                    //     if !v.contains(fs.field) then
+                    //       val sym = if varSymInsteadOfTempSym
+                    //         then VarSymbol(Tree.Ident(s"${c.name}_${fs.field.name}"))
+                    //         else TempSymbol(N, s"${c.name}_${fs.field.name}")
+                    //       Some(v + (fs.field -> sym))
+                    //     else Some(v)
+                    fieldNameToSymToBeReplaced.updateWith(fs.field):
+                      case Some(v) => Some(v)
+                      case None => Some(if varSymInsteadOfTempSym
+                        then VarSymbol(Tree.Ident(s"${c.name}_${fs.field.name}"))
+                        else TempSymbol(N, s"${c.name}_${fs.field.name}"))
+                    val sym = fieldNameToSymToBeReplaced(fs.field)
                     println("herer" + sym)
-                    selectionUidsToSymToBeReplaced.updateWith(c):
-                      case None => Some(Map(fs.expr -> sym))
-                      case Some(v) => Some(v + (fs.expr -> sym))
+                    selectionUidsToSymToBeReplaced.addOne(fs.expr -> sym)
+                      // case None => Some(Map(fs.expr -> sym))
+                      // case Some(v) => Some(v + (fs.expr -> sym))
                 case _ => ()
               Some(CtorFinalDest.Match(
                 dtors.head._1,
@@ -738,7 +743,10 @@ class Deforest(using TL, Raise, Elaborator.State):
   class DeforestTransformer(using nonFreeVars: Set[Symbol]) extends BlockTransformer(new SymbolSubst()):
     val replaceSelInfo: Map[ResultId, Symbol] =
       filteredCtorDests.values.flatMap { 
-        case CtorFinalDest.Match(_, _, _, selMaps) => selMaps._2.values.flatMap(m => m.toList)
+        case CtorFinalDest.Match(_, _, _, selMaps) =>
+          // assert(selMaps._1.size <= 1)
+          // assert(selMaps._2.size <= 1)
+          selMaps._2
         case CtorFinalDest.Sel(s) => Nil
       }.toMap
   
@@ -746,7 +754,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
       filteredCtorDests.values.foreach:
         case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
-          toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2.values.flatMap(m => m.iterator))
+          toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
         
     
       filteredCtorDests.values.flatMap{
@@ -950,7 +958,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               // tl.log(call.toString() + " ----> " + body)
               
               // use pre-determined symbols, create temp symbols for un-used fields
-              val usedFieldIdentToSymbolsToBeReplaced = selsMap._1(c)
+              val usedFieldIdentToSymbolsToBeReplaced = selsMap._1
               val allFieldIdentToSymbolsToBeReplaced = getClsFields(c).map: f =>
                 f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"${c.name}_${f.id.name}_unused"))
               
@@ -977,7 +985,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 c,
                 sels.toSet,
                 assignedTempSyms.filter(a => usedFieldIdentToSymbolsToBeReplaced.contains(a._1)).map(a => a._1 -> Value.Ref(a._2).asInstanceOf[Value.Ref]).toMap,
-                selsMap._1(c) -> selsMap._2(c))
+                selsMap._1 -> selsMap._2)
               // val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, c, sels.toSet, idsToArgs)
               
               args.zip(assignedTempSyms.map(_._2)).foldRight[Block](k(bodyAndRestInLam)):
