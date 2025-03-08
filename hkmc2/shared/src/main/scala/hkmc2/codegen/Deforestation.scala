@@ -221,19 +221,11 @@ class Deforest(using TL, Raise, Elaborator.State):
         object AllVarsSymbolSubst extends SymbolSubst:
           override def mapBlockMemberSym(s: BlockMemberSymbol): BlockMemberSymbol =
             store += s -> freshVar(s.nme)._1; s
-          override def mapFlowSym(s: FlowSymbol): FlowSymbol =
-            store += s -> freshVar(s.nme)._1; s
           override def mapTempSym(s: TempSymbol): TempSymbol =
             store += s -> freshVar(s.nme)._1; s
           override def mapVarSym(s: VarSymbol): VarSymbol =
             store += s -> freshVar(s.nme)._1; s
-          override def mapInstSym(s: InstSymbol): InstSymbol =
-            store += s -> freshVar(s.nme)._1; s
           override def mapTermSym(s: TermSymbol): TermSymbol =
-            store += s -> freshVar(s.nme)._1; s
-          override def mapClsSym(s: ClassSymbol): ClassSymbol =
-            store += s -> freshVar(s.nme)._1; s
-          override def mapModuleSym(s: ModuleSymbol): ModuleSymbol =
             store += s -> freshVar(s.nme)._1; s
         object FreshVarForAllVars extends BlockTraverser(AllVarsSymbolSubst)
         FreshVarForAllVars.applyBlock(p)
@@ -245,9 +237,8 @@ class Deforest(using TL, Raise, Elaborator.State):
         case _: TopLevelSymbol => NoProd
         case _: BlockMemberSymbol => store(s)
         case _: LocalSymbol => store(s)
-    def get(s: Symbol) = store.get(s)
     def +=(e: Symbol -> ProdVar) = store += e
-    def addAll(es: Iterable[Symbol -> ProdVar]) = es.foreach(store += _)
+    def addAll(es: Iterable[Symbol -> ProdVar]) = store.addAll(es)
     def apply(s: Symbol) = store(s)
   
   def getClsFields(s: ClassSymbol) = s.tree.clsParams
