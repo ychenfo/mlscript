@@ -1633,3 +1633,169 @@ c(BB(3), 0)
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 0
+
+:sjs
+fun f(a) = if a is
+  AA(BB(B)) then 3
+f(AA(BB(B)))
+//│ JS (unsanitized):
+//│ let f8, tmp79, tmp80;
+//│ f8 = function f(a) {
+//│   let param0, param01;
+//│   if (a instanceof AA1.class) {
+//│     param0 = a.aa;
+//│     if (param0 instanceof BB1.class) {
+//│       param01 = param0.bb;
+//│       if (param01 instanceof B1.class) {
+//│         return 3
+//│       } else {
+//│         throw new globalThis.Error("match error");
+//│       }
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp79 = BB1(B1);
+//│ tmp80 = AA1(tmp79);
+//│ f8(tmp80)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f8, tmp79, tmp80, BB_bb, AA_aa1;
+//│ f8 = function f(a) {
+//│   return runtime.safeCall(a(BB_bb))
+//│ };
+//│ BB_bb = () => {
+//│   return 3
+//│ };
+//│ tmp79 = () => {
+//│   let param0;
+//│   param0 = BB_bb;
+//│   return runtime.safeCall(param0())
+//│ };
+//│ AA_aa1 = tmp79;
+//│ tmp80 = (BB_bb1) => {
+//│   let param0;
+//│   param0 = AA_aa1;
+//│   return runtime.safeCall(param0())
+//│ };
+//│ block$res51 = f8(tmp80);
+//│ undefined
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 3
+
+
+:sjs
+fun f(x) = if x is
+  AA(b) then g(b)
+fun g(b) = if b is
+  AA(a) then a + 1
+f(AA(AA(0)))
+//│ JS (unsanitized):
+//│ let f9, g, tmp83, tmp84;
+//│ f9 = function f(x1) {
+//│   let param0, b;
+//│   if (x1 instanceof AA1.class) {
+//│     param0 = x1.aa;
+//│     b = param0;
+//│     return g(b)
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ g = function g(b) {
+//│   let param0, a;
+//│   if (b instanceof AA1.class) {
+//│     param0 = b.aa;
+//│     a = param0;
+//│     return a + 1
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp83 = AA1(0);
+//│ tmp84 = AA1(tmp83);
+//│ f9(tmp84)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f9, g, tmp83, tmp84, AA_aa2, AA_aa3;
+//│ f9 = function f(x1) {
+//│   return runtime.safeCall(x1())
+//│ };
+//│ g = function g(b) {
+//│   return runtime.safeCall(b())
+//│ };
+//│ AA_aa2 = 0;
+//│ tmp83 = () => {
+//│   let param0, a;
+//│   param0 = AA_aa2;
+//│   a = param0;
+//│   return a + 1
+//│ };
+//│ AA_aa3 = tmp83;
+//│ tmp84 = () => {
+//│   let param0, b;
+//│   param0 = AA_aa3;
+//│   b = param0;
+//│   return g(b)
+//│ };
+//│ block$res53 = f9(tmp84);
+//│ undefined
+//│ = 1
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 1
+
+
+:sjs
+fun c2(x) = if x is
+  AA(AA(a)) then a
+c2(AA(AA(0)))
+//│ JS (unsanitized):
+//│ let c21, tmp87, tmp88;
+//│ c21 = function c2(x1) {
+//│   let param0, param01, a;
+//│   if (x1 instanceof AA1.class) {
+//│     param0 = x1.aa;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.aa;
+//│       a = param01;
+//│       return a
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp87 = AA1(0);
+//│ tmp88 = AA1(tmp87);
+//│ c21(tmp88)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c21, tmp87, tmp88, AA_aa4, AA_aa5;
+//│ c21 = function c2(x1) {
+//│   return runtime.safeCall(x1(AA_aa4))
+//│ };
+//│ AA_aa4 = 0;
+//│ tmp87 = () => {
+//│   let param0, a;
+//│   param0 = AA_aa4;
+//│   a = param0;
+//│   return a
+//│ };
+//│ AA_aa5 = tmp87;
+//│ tmp88 = (AA_aa6) => {
+//│   let param0;
+//│   param0 = AA_aa5;
+//│   return runtime.safeCall(param0())
+//│ };
+//│ block$res55 = c21(tmp88);
+//│ undefined
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 0
+
+

@@ -178,12 +178,14 @@ class Deforest(using TL, Raise, Elaborator.State):
     tl.log("lower:")
     lowerBounds.foreach(l => tl.log("\t" + l))
     tl.log("-----------------------------------------")
-    
-    
     tl.log("ctor -> dtor")
     resolveClashes._1.foreach(u => tl.log("\t" + u))
     tl.log("dtor -> ctor")
     resolveClashes._2.foreach(l => tl.log("\t" + l))
+    tl.log("-----------------------------------------")
+    filteredCtorDests.foreach:
+      case (ctorUid, CtorFinalDest.Sel(s)) => tl.log("\t" + ctorUid + " --sel--> " + s)
+      case (ctorUid, CtorFinalDest.Match(scrut, _, _, _)) => tl.log("\t" + ctorUid + " --mat-->" + scrut )
     
     Program(
       p.imports,
@@ -597,8 +599,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   lazy val filteredCtorDests: Map[CtorExpr, CtorFinalDest] =
     val res = mutable.Map.empty[CtorExpr, CtorFinalDest]
     
-    // we need only one CtorFinalDest per arm
-    val handledMatches = mutable.Map.empty[ClsOrModSymbol, Opt[CtorFinalDest]]
+    // we need only one CtorFinalDest per arm for each pat mat expr
+    val handledMatches = mutable.Map.empty[ResultId -> ClsOrModSymbol, Opt[CtorFinalDest]]
     
     resolveClashes._1.toSortedMap.foreach { case (ctor, CtorDest(dtors, sels)) =>
       val filteredDtor = {
@@ -611,8 +613,8 @@ class Deforest(using TL, Raise, Elaborator.State):
           None
         else if dtors.size == 1 then
           val currentCtorCls = getClsSymOfUid(ctor)
-          handledMatches.getOrElseUpdate(currentCtorCls, {
-            val scrutRef@Value.Ref(scrut) = ResultUid(dtors.head._1)
+          val scrutRef@Value.Ref(scrut) = ResultUid(dtors.head._1)
+          handledMatches.getOrElseUpdate(scrutRef.uid -> currentCtorCls, {
 
             if sels.forall{ s => ResultUid(s.expr) match
               case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
@@ -691,7 +693,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
           val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
           val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrut).keys
-          Some(scrut -> matchExpr.sortedFvs(using nonFreeVars, selReplacementNotForThisSel).filterNot(_.uid === l.uid))
+          Some(scrut -> matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel))
         case CtorFinalDest.Sel(s) => None
       }.toMap
     
