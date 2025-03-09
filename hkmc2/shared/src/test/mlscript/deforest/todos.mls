@@ -126,3 +126,171 @@ module Test with
 //│ block$res4 = undefined;
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+
+:fixme
+:sjs
+fun f(x) = if x is
+  AA(AA(a)) then g(a)
+fun g(x) = if x is
+  AA(b) then f(b)
+  A then 42
+f(AA(AA(AA(AA(AA(A))))))
+//│ JS (unsanitized):
+//│ let f, g, tmp, tmp1, tmp2, tmp3, tmp4;
+//│ f = function f(x) {
+//│   let param0, param01, a;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       a = param01;
+//│       return g(a)
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ g = function g(x) {
+//│   let param0, b;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     b = param0;
+//│     return f(b)
+//│   } else if (x instanceof A1.class) {
+//│     return 42
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp = AA1(A1);
+//│ tmp1 = AA1(tmp);
+//│ tmp2 = AA1(tmp1);
+//│ tmp3 = AA1(tmp2);
+//│ tmp4 = AA1(tmp3);
+//│ f(tmp4)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: AA_x (class hkmc2.semantics.VarSymbol)
+
+
+
+// FIXME: tmp11 takes an unused parameter AA_x3
+:sjs
+fun f(x) = if x is
+  AA(AA(a)) then a
+f(AA(AA(A)))
+//│ JS (unsanitized):
+//│ let f1, tmp5, tmp6;
+//│ f1 = function f(x) {
+//│   let param0, param01, a;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       a = param01;
+//│       return a
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp5 = AA1(A1);
+//│ tmp6 = AA1(tmp5);
+//│ f1(tmp6)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f1, tmp5, tmp6, AA_x1, AA_x2;
+//│ f1 = function f(x) {
+//│   return runtime.safeCall(x(AA_x1))
+//│ };
+//│ AA_x1 = A1;
+//│ tmp5 = () => {
+//│   let param0, a;
+//│   param0 = AA_x1;
+//│   a = param0;
+//│   return a
+//│ };
+//│ AA_x2 = tmp5;
+//│ tmp6 = (AA_x3) => {
+//│   let param0;
+//│   param0 = AA_x2;
+//│   return runtime.safeCall(param0())
+//│ };
+//│ block$res7 = f1(tmp6);
+//│ undefined
+//│ = A
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = A
+
+:fixme
+:sjs
+fun f(x) = if x is
+  AA(AA(a)) then a
+fun p() = AA(AA(A))
+f(p())
+//│ JS (unsanitized):
+//│ let p, f2, tmp9;
+//│ f2 = function f(x) {
+//│   let param0, param01, a;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       a = param01;
+//│       return a
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ p = function p() {
+//│   let tmp10;
+//│   tmp10 = AA1(A1);
+//│   return AA1(tmp10)
+//│ };
+//│ tmp9 = p();
+//│ f2(tmp9)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: $AA_x (class hkmc2.semantics.TempSymbol)
+
+
+
+:fixme
+:sjs
+fun f(x) =
+  if x is
+    AA(AA(a)) then a
+  3
+f(AA(AA(A))) + f(AA(AA(A)))
+//│ JS (unsanitized):
+//│ let f3, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+//│ f3 = function f(x) {
+//│   let param0, param01, a, tmp16;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       a = param01;
+//│       tmp16 = a;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   return 3
+//│ };
+//│ tmp10 = AA1(A1);
+//│ tmp11 = AA1(tmp10);
+//│ tmp12 = f3(tmp11);
+//│ tmp13 = AA1(A1);
+//│ tmp14 = AA1(tmp13);
+//│ tmp15 = f3(tmp14);
+//│ tmp12 + tmp15
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: AA_x (class hkmc2.semantics.VarSymbol)
