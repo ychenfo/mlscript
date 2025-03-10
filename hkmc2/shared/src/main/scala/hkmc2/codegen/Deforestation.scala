@@ -682,28 +682,44 @@ class Deforest(using TL, Raise, Elaborator.State):
         case CtorFinalDest.Sel(s) => Nil
       }.toMap
     
-    lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
-      val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
+    // lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
+    //   val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
+    //   filteredCtorDests.values.foreach:
+    //     case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
+    //       toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
+        
+    
+    //   filteredCtorDests.values.flatMap{
+    //     case CtorFinalDest.Match(scrut, expr, _, _) =>
+    //       val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
+    //       val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrut).keys
+    //       Some(scrut -> matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel))
+    //     case CtorFinalDest.Sel(s) => None
+    //   }.toMap
+    object scopeExtrusionInfo:
+      val store = mutable.Map.empty[ResultId, List[Symbol]]
+      
+      private val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
       filteredCtorDests.values.foreach:
         case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
           toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
-        
-    
-      filteredCtorDests.values.flatMap{
-        case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
-          val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
-          val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrut).keys
-          Some(scrut -> matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel))
-        case CtorFinalDest.Sel(s) => None
-      }.toMap
-    
+      
+      def apply(scrutExprId: ResultId, m: Match) = store.getOrElseUpdate(
+        scrutExprId,
+        {
+          assert(m.scrut.uid === scrutExprId)
+          val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
+          val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrutExprId).keys
+          matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel)
+        }
+      )
 
     
     override def applyBlock(b: Block): Block = b match
       case mat@Match(scrut, arms, dflt, rest) =>
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
           val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
-          val freeVars = scopeExtrusionInfo(scrut.uid).map(v => Arg(false, Value.Ref(v)))
+          val freeVars = scopeExtrusionInfo(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
           Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
         else
           Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
@@ -732,7 +748,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         preComputedSymbols: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol] = Map.empty -> Map.empty
       ) =
         assert(scrut === m.scrut.uid)
-        val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
+        val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut, m).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
         store.get(scrut).flatMap(_.get(cls)) match
           case None => // not registered before, or this branch of this match will only appear once
             val body = m.arms.find{ case (Case.Cls(c1, _) -> _) => c1 === cls }.map(_._2).orElse(m.dflt).get
