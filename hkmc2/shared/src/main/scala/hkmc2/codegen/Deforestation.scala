@@ -87,7 +87,7 @@ extension (b: Block)
         case _ => super.applyValue(v)
     ReplaceLocalSymTransformer.applyBlock(b)
 
-  def sortedFvs(using alwaysDefined: Set[Symbol], selsToBeReplaced: Map[ResultId, Symbol] = Map.empty) =
+  def sortedFvs(using alwaysDefined: Set[Symbol], selsToBeReplaced: Map[ResultId, Symbol] = Map.empty, dt: DeforestTransformer) =
     object DeforestationFreeVarTraverser extends BlockTraverser(new SymbolSubst()):
       val ctx = mutable.Set.from(alwaysDefined)
       val result = mutable.Set.empty[Symbol]
@@ -668,300 +668,303 @@ class Deforest(using TL, Raise, Elaborator.State):
   }.toSet
   
   def rewrite(p: Block) =
-    val deforestTransformer = DeforestTransformer(using globallyDefinedVars.store.toSet)
+    val deforestTransformer = DeforestTransformer(using this)
     val rest = deforestTransformer.applyBlock(p)
     val newDefsRest = deforestTransformer.matchRest.getAllFunDefs
     val newDefsArms = deforestTransformer.matchArms.getAllFunDefs
     newDefsArms(newDefsRest(rest))
   
-  class DeforestTransformer(using nonFreeVars: Set[Symbol]) extends BlockTransformer(new SymbolSubst()):
-    val replaceSelInfo: Map[ResultId, Symbol] =
-      filteredCtorDests.values.flatMap { 
-        case CtorFinalDest.Match(_, _, _, selMaps) =>
-          selMaps._2
-        case CtorFinalDest.Sel(s) => Nil
-      }.toMap
-    
-    // lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
-    //   val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
-    //   filteredCtorDests.values.foreach:
-    //     case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
-    //       toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
-        
-    
-    //   filteredCtorDests.values.flatMap{
-    //     case CtorFinalDest.Match(scrut, expr, _, _) =>
-    //       val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
-    //       val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrut).keys
-    //       Some(scrut -> matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel))
-    //     case CtorFinalDest.Sel(s) => None
-    //   }.toMap
-    object scopeExtrusionInfo:
-      val store = mutable.Map.empty[ResultId, List[Symbol]]
-      
-      private val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
-      filteredCtorDests.values.foreach:
-        case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
-          toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
-      
-      def apply(scrutExprId: ResultId, m: Match) = store.getOrElseUpdate(
-        scrutExprId,
-        {
-          assert(m.scrut.uid === scrutExprId)
-          val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
-          val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrutExprId).keys
-          matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel)
-        }
-      )
+class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
+  given DeforestTransformer = this
+  given nonFreeVars: Set[Symbol] = d.globallyDefinedVars.store.toSet
 
-    
-    override def applyBlock(b: Block): Block = b match
-      case mat@Match(scrut, arms, dflt, rest) =>
-        if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && filteredDtors.contains(scrut.uid) then
-          val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
-          val freeVars = scopeExtrusionInfo(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
-          Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
-        else
-          Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
-      case Return(res, implct) =>
-        applyResult2(res)(r => Return(r, implct))
-      case Assign(lhs, rhs, rest) =>
-        applyResult2(rhs)(r => Assign(lhs, r, applyBlock(rest)))
-      case d@Define(defn, rest) =>
-        defn match
-          case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, applyBlock(body)), applyBlock(rest))
-          case _ => super.applyBlock(d)
-      case End(msg) => End(msg)
-      case Throw(exc) => applyResult2(exc)(Throw.apply)
-      case _ => super.applyBlock(b)
-    
-    object matchArms:
-      val store = mutable.Map.empty[ResultId, Map[ClsOrModSymbol, FunDefn]].withDefaultValue(Map.empty)
+  val replaceSelInfo: Map[ResultId, Symbol] =
+    d.filteredCtorDests.values.flatMap { 
+      case CtorFinalDest.Match(_, _, _, selMaps) =>
+        selMaps._2
+      case CtorFinalDest.Sel(s) => Nil
+    }.toMap
+  
+  // lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
+  //   val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
+  //   filteredCtorDests.values.foreach:
+  //     case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
+  //       toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
       
-      // return a lambda, which either calls the extracted arm function, or contains the computations in matching arms
-      def getOrElseUpdate(
-        scrut: ResultId,
-        m: Match,
-        cls: ClsOrModSymbol,
-        sel: Set[ResultId],
-        currentUsedCtorArgsToFields: Map[Tree.Ident, Value.Ref],
-        preComputedSymbols: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol] = Map.empty -> Map.empty
-      ) =
-        assert(scrut === m.scrut.uid)
-        val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut, m).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
-        store.get(scrut).flatMap(_.get(cls)) match
-          case None => // not registered before, or this branch of this match will only appear once
-            val body = m.arms.find{ case (Case.Cls(c1, _) -> _) => c1 === cls }.map(_._2).orElse(m.dflt).get
-            val rest = m.rest
-            
-            
-            val makeBody = matchRest.getOrElseUpdate(scrut, rest) match
-              case N -> rewrittenRest => (bodyBlk: Block) =>
-                Begin(bodyBlk, rewrittenRest).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
-                  case Return(res, implct) => Return(res, false)
-                  case t => t
-              case Some(f) -> rewrittenRest => (bodyBlk: Block) =>
-                Begin(
-                  bodyBlk,
-                  Return(
-                    Call(
-                      Value.Ref(f),
-                      rewrittenRest.sortedFvs.map(a => Arg(false, Value.Ref(a))))(true, false),
-                    false
-                  )
-                ).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
-                  case Return(res, implct) => Return(res, false)
-                  case t => t
-            
-            if resolveClashes._2(DtorExpr.Match(scrut)).count(getClsSymOfUid(_) === cls) > 1 then
-              // make a function, and register, and return a lambda calling that function with correct arguments
-              // arguments for lambda: free vars
-              // arguments for that function: free vars and pattern vars
-              
-              val bodyReplaceSel = applyBlock(body)
-              
-              val freeVarsAndTheirNewSymsInLam = freeVarsAndTheirNewSyms.map(s => s._1 -> VarSymbol(s._2.id))
-              val funBody = makeBody(bodyReplaceSel)
-              val funSym = BlockMemberSymbol(s"match_${ResultUid(scrut).asInstanceOf[Value.Ref].l.nme}_branch_${cls.nme}", Nil)
-              val newDef = FunDefn(
-                N,
-                funSym,
-                ParamList(
-                  ParamListFlags.empty,
-                  freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)).toList 
-                    ::: preComputedSymbols._1.toList.sortBy(_._1.name).map(v =>
-                      
-                      Param(FldFlags.empty, v._2.asInstanceOf[VarSymbol], N)
-                    ),
-                  N
-                ) :: Nil,
-                funBody
-              )
-              store += (scrut -> (store(scrut) + (cls -> newDef)))
-              Value.Lam(
-                ParamList(ParamListFlags.empty, freeVarsAndTheirNewSymsInLam.map(s => Param(FldFlags.empty, s._2, N)), N),
-                Return(
-                  Call(Value.Ref(funSym), freeVarsAndTheirNewSymsInLam.map(a => Arg(false, Value.Ref(a._2))) ::: currentUsedCtorArgsToFields.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
-                  false
-                )
-              )
-            else
-              val bodyReplaceSel = applyBlock(body)
-              val lambdaBody = makeBody(bodyReplaceSel)
-              Value.Lam(
-                ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
-                lambdaBody
-              )
-            
-          case Some(f) =>
-            // return a lambda that calls f with correct arguments
-            Value.Lam(
-              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)), N),
-              Return(
-                  Call(Value.Ref(f.sym), freeVarsAndTheirNewSyms.map(a => Arg(false, Value.Ref(a._2))) ::: currentUsedCtorArgsToFields.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
-                  false
-                )
-            )
-      
-      def getAllFunDefs: Block => Block =
-        store.values.flatMap(v => v.values).foldRight(identity: Block => Block):
-          case (defn, k) => r => Define(defn, k(r))
+  
+  //   filteredCtorDests.values.flatMap{
+  //     case CtorFinalDest.Match(scrut, expr, _, _) =>
+  //       val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
+  //       val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrut).keys
+  //       Some(scrut -> matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel))
+  //     case CtorFinalDest.Sel(s) => None
+  //   }.toMap
+  object scopeExtrusionInfo:
+    val store = mutable.Map.empty[ResultId, List[Symbol]]
     
-    object matchRest:
-      val store = mutable.Map.empty[ResultId, Opt[FunDefn] -> Block]
-      
-      // returns the symbol for the rest function (if any), and the rewritten rest block
-      def getOrElseUpdate(s: ResultId, restBeforeRewriting: Block): Opt[Symbol] -> Block =
-        store.get(s) match
-          case Some(f, b) => f.map(_.sym) -> b
-          case None if restBeforeRewriting.isInstanceOf[End] || (resolveClashes._2(DtorExpr.Match(s)).size == 1) =>
-            val res = N -> applyBlock(restBeforeRewriting)
-            store += s -> res
-            res
-          case _ => // now need to build a new function and update the store
-            val restRewritten = applyBlock(restBeforeRewriting)
-            val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
-            val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
-            val freeVarsAndTheirNewSyms = restRewritten.sortedFvs.map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
-            
-            val newFunDef = FunDefn(
-              N,
-              sym,
-              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N) :: Nil,
-              restRewritten.replaceSymbols(freeVarsAndTheirNewSyms)
-            )
-            store += s -> (Some(newFunDef) -> restRewritten)
-            Some(sym) -> restRewritten
-      
-      def getAllFunDefs: Block => Block =
-        store.values.foldRight(identity: Block => Block):
-          case (defn -> _, k) =>
-            r => defn match
-              case None => k(r)
-              case Some(defn) => Define(defn, k(r))
+    private val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
+    d.filteredCtorDests.values.foreach:
+      case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
+        toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
     
-    override def applyResult2(r: Result)(k: Result => Block): Block = r match
-      case call@Call(f, args) =>
-        def handleNormalCall(args: List[Arg]) =
-          var newArgs: Ls[Arg] = Nil
-          args.foreach:
-            case Arg(spread, value) => applyResult2(value): r =>
-              // since the arguments must be paths,
-              // and calls with parameters are not paths,
-              // so paths will always be rewritten to paths,
-              // and there won't be more blocks added by `applyResult2(value)`
-              // so just use a dummy `End` here, to use `applyResult2` as `applyResult`
-              newArgs = Arg(spread, r.asInstanceOf[Path]) :: newArgs
-              End()
-          k(Call(f, newArgs.reverse)(call.isMlsFun, call.mayRaiseEffects))
+    def apply(scrutExprId: ResultId, m: Match) = store.getOrElseUpdate(
+      scrutExprId,
+      {
+        assert(m.scrut.uid === scrutExprId)
+        val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
+        val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrutExprId).keys
+        matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel)
+      }
+    )
+
+  
+  override def applyBlock(b: Block): Block = b match
+    case mat@Match(scrut, arms, dflt, rest) =>
+      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) then
+        val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
+        val freeVars = scopeExtrusionInfo(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
+        Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
+      else
+        Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
+    case Return(res, implct) =>
+      applyResult2(res)(r => Return(r, implct))
+    case Assign(lhs, rhs, rest) =>
+      applyResult2(rhs)(r => Assign(lhs, r, applyBlock(rest)))
+    case d@Define(defn, rest) =>
+      defn match
+        case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, applyBlock(body)), applyBlock(rest))
+        case _ => super.applyBlock(d)
+    case End(msg) => End(msg)
+    case Throw(exc) => applyResult2(exc)(Throw.apply)
+    case _ => super.applyBlock(b)
+  
+  object matchArms:
+    val store = mutable.Map.empty[ResultId, Map[ClsOrModSymbol, FunDefn]].withDefaultValue(Map.empty)
+    
+    // return a lambda, which either calls the extracted arm function, or contains the computations in matching arms
+    def getOrElseUpdate(
+      scrut: ResultId,
+      m: Match,
+      cls: ClsOrModSymbol,
+      sel: Set[ResultId],
+      currentUsedCtorArgsToFields: Map[Tree.Ident, Value.Ref],
+      preComputedSymbols: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol] = Map.empty -> Map.empty
+    ) =
+      assert(scrut === m.scrut.uid)
+      val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut, m).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
+      store.get(scrut).flatMap(_.get(cls)) match
+        case None => // not registered before, or this branch of this match will only appear once
+          val body = m.arms.find{ case (Case.Cls(c1, _) -> _) => c1 === cls }.map(_._2).orElse(m.dflt).get
+          val rest = m.rest
           
-        def handleCtorCall(c: ClassSymbol) =
-          filteredCtorDests.get(call.uid) match
-            case None =>
-              handleNormalCall(args)
-            case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
-              val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.map(_._2).orElse(expr.dflt).get
-              
-              // use pre-determined symbols, create temp symbols for un-used fields
-              val usedFieldIdentToSymbolsToBeReplaced = selsMap._1
-              val allFieldIdentToSymbolsToBeReplaced = getClsFields(c).map: f =>
-                f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"${c.name}_${f.id.name}_unused"))
-              
-              // if all vars are temp vars, no need to create more temp vars
-              // otherwise, create temps for var symbols (which will be function params with these temp vars flowing in)
-              val assignedTempSyms =
-                if allFieldIdentToSymbolsToBeReplaced.forall(_._2.isInstanceOf[TempSymbol]) then
-                  allFieldIdentToSymbolsToBeReplaced.map(a => a._1 -> a._2.asInstanceOf[TempSymbol])
-                else
-                  allFieldIdentToSymbolsToBeReplaced.map { case (id, s) => s match
-                    case ts: TempSymbol => id -> ts
-                    case vs: VarSymbol => id -> TempSymbol(N, s"${vs.name}_tmp")
-                  }
-
-              val newArgs = args.map(_ => TempSymbol(N))
-              
-              val bodyAndRestInLam = matchArms.getOrElseUpdate(
-                scrut,
-                expr,
-                c,
-                sels.toSet,
-                assignedTempSyms.filter(a => usedFieldIdentToSymbolsToBeReplaced.contains(a._1)).map(a => a._1 -> Value.Ref(a._2).asInstanceOf[Value.Ref]).toMap,
-                selsMap._1 -> selsMap._2)
-              
-              args.zip(assignedTempSyms.map(_._2)).foldRight[Block](k(bodyAndRestInLam)):
-                case ((a, tmp), rest) => applyResult2(a.value) { r => Assign(tmp, r, rest) }
-              
-            case Some(CtorFinalDest.Sel(s)) =>
-              val selFieldName = ResultUid(s) match { case Select(p, nme) => nme }
-              val idx = getClsFields(c).indexWhere(s => s.id === selFieldName)
-              k(args(idx).value)
-        
-        f match
-          case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
-            case None =>
-              handleNormalCall(args)
-            case Some(c) => handleCtorCall(c)
-          case Value.Ref(l) => l.asCls match
-            case None =>
-              handleNormalCall(args)
-            case Some(c) => handleCtorCall(c)
-          case Value.Lam(params, body) =>
-            k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun, call.mayRaiseEffects))
-      case Instantiate(cls, args) => k(r)
-      case s@Select(p, nme) => s.symbol.flatMap(f => f.asObj) match
-        case None =>
-          if rewritingSelConsumer.contains(s.uid) then
-            k(p)
+          
+          val makeBody = matchRest.getOrElseUpdate(scrut, rest) match
+            case N -> rewrittenRest => (bodyBlk: Block) =>
+              Begin(bodyBlk, rewrittenRest).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
+                case Return(res, implct) => Return(res, false)
+                case t => t
+            case Some(f) -> rewrittenRest => (bodyBlk: Block) =>
+              Begin(
+                bodyBlk,
+                Return(
+                  Call(
+                    Value.Ref(f),
+                    rewrittenRest.sortedFvs.map(a => Arg(false, Value.Ref(a))))(true, false),
+                  false
+                )
+              ).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
+                case Return(res, implct) => Return(res, false)
+                case t => t
+          
+          if d.resolveClashes._2(DtorExpr.Match(scrut)).count(d.getClsSymOfUid(_) === cls) > 1 then
+            // make a function, and register, and return a lambda calling that function with correct arguments
+            // arguments for lambda: free vars
+            // arguments for that function: free vars and pattern vars
+            
+            val bodyReplaceSel = applyBlock(body)
+            
+            val freeVarsAndTheirNewSymsInLam = freeVarsAndTheirNewSyms.map(s => s._1 -> VarSymbol(s._2.id))
+            val funBody = makeBody(bodyReplaceSel)
+            val funSym = BlockMemberSymbol(s"match_${ResultUid(scrut).asInstanceOf[Value.Ref].l.nme}_branch_${cls.nme}", Nil)
+            val newDef = FunDefn(
+              N,
+              funSym,
+              ParamList(
+                ParamListFlags.empty,
+                freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)).toList 
+                  ::: preComputedSymbols._1.toList.sortBy(_._1.name).map(v =>
+                    
+                    Param(FldFlags.empty, v._2.asInstanceOf[VarSymbol], N)
+                  ),
+                N
+              ) :: Nil,
+              funBody
+            )
+            store += (scrut -> (store(scrut) + (cls -> newDef)))
+            Value.Lam(
+              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSymsInLam.map(s => Param(FldFlags.empty, s._2, N)), N),
+              Return(
+                Call(Value.Ref(funSym), freeVarsAndTheirNewSymsInLam.map(a => Arg(false, Value.Ref(a._2))) ::: currentUsedCtorArgsToFields.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
+                false
+              )
+            )
           else
-            replaceSelInfo.get(s.uid) match
-              case None => k(s)
-              case Some(v) => k(Value.Ref(v))
+            val bodyReplaceSel = applyBlock(body)
+            val lambdaBody = makeBody(bodyReplaceSel)
+            Value.Lam(
+              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
+              lambdaBody
+            )
+          
+        case Some(f) =>
+          // return a lambda that calls f with correct arguments
+          Value.Lam(
+            ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)), N),
+            Return(
+                Call(Value.Ref(f.sym), freeVarsAndTheirNewSyms.map(a => Arg(false, Value.Ref(a._2))) ::: currentUsedCtorArgsToFields.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
+                false
+              )
+          )
+    
+    def getAllFunDefs: Block => Block =
+      store.values.flatMap(v => v.values).foldRight(identity: Block => Block):
+        case (defn, k) => r => Define(defn, k(r))
+  
+  object matchRest:
+    val store = mutable.Map.empty[ResultId, Opt[FunDefn] -> Block]
+    
+    // returns the symbol for the rest function (if any), and the rewritten rest block
+    def getOrElseUpdate(s: ResultId, restBeforeRewriting: Block): Opt[Symbol] -> Block =
+      store.get(s) match
+        case Some(f, b) => f.map(_.sym) -> b
+        case None if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).size == 1) =>
+          val res = N -> applyBlock(restBeforeRewriting)
+          store += s -> res
+          res
+        case _ => // now need to build a new function and update the store
+          val restRewritten = applyBlock(restBeforeRewriting)
+          val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
+          val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
+          val freeVarsAndTheirNewSyms = restRewritten.sortedFvs.map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
+          
+          val newFunDef = FunDefn(
+            N,
+            sym,
+            ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N) :: Nil,
+            restRewritten.replaceSymbols(freeVarsAndTheirNewSyms)
+          )
+          store += s -> (Some(newFunDef) -> restRewritten)
+          Some(sym) -> restRewritten
+    
+    def getAllFunDefs: Block => Block =
+      store.values.foldRight(identity: Block => Block):
+        case (defn -> _, k) =>
+          r => defn match
+            case None => k(r)
+            case Some(defn) => Define(defn, k(r))
+  
+  override def applyResult2(r: Result)(k: Result => Block): Block = r match
+    case call@Call(f, args) =>
+      def handleNormalCall(args: List[Arg]) =
+        var newArgs: Ls[Arg] = Nil
+        args.foreach:
+          case Arg(spread, value) => applyResult2(value): r =>
+            // since the arguments must be paths,
+            // and calls with parameters are not paths,
+            // so paths will always be rewritten to paths,
+            // and there won't be more blocks added by `applyResult2(value)`
+            // so just use a dummy `End` here, to use `applyResult2` as `applyResult`
+            newArgs = Arg(spread, r.asInstanceOf[Path]) :: newArgs
+            End()
+        k(Call(f, newArgs.reverse)(call.isMlsFun, call.mayRaiseEffects))
+        
+      def handleCtorCall(c: ClassSymbol) =
+        d.filteredCtorDests.get(call.uid) match
+          case None =>
+            handleNormalCall(args)
+          case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
+            val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.map(_._2).orElse(expr.dflt).get
+            
+            // use pre-determined symbols, create temp symbols for un-used fields
+            val usedFieldIdentToSymbolsToBeReplaced = selsMap._1
+            val allFieldIdentToSymbolsToBeReplaced = d.getClsFields(c).map: f =>
+              f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"${c.name}_${f.id.name}_unused"))
+            
+            // if all vars are temp vars, no need to create more temp vars
+            // otherwise, create temps for var symbols (which will be function params with these temp vars flowing in)
+            val assignedTempSyms =
+              if allFieldIdentToSymbolsToBeReplaced.forall(_._2.isInstanceOf[TempSymbol]) then
+                allFieldIdentToSymbolsToBeReplaced.map(a => a._1 -> a._2.asInstanceOf[TempSymbol])
+              else
+                allFieldIdentToSymbolsToBeReplaced.map { case (id, s) => s match
+                  case ts: TempSymbol => id -> ts
+                  case vs: VarSymbol => id -> TempSymbol(N, s"${vs.name}_tmp")
+                }
 
-        case Some(mod) =>
-          filteredCtorDests.get(s.uid) match
-            case None => 
-              k(s)
-            case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
-              val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.map(_._2).orElse(expr.dflt).get
-              val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, mod, Set.empty, Map.empty)
-              k(bodyAndRestInLam)
-            case Some(_) => ??? // a selection on a module consumes it
+            val newArgs = args.map(_ => TempSymbol(N))
+            
+            val bodyAndRestInLam = matchArms.getOrElseUpdate(
+              scrut,
+              expr,
+              c,
+              sels.toSet,
+              assignedTempSyms.filter(a => usedFieldIdentToSymbolsToBeReplaced.contains(a._1)).map(a => a._1 -> Value.Ref(a._2).asInstanceOf[Value.Ref]).toMap,
+              selsMap._1 -> selsMap._2)
+            
+            args.zip(assignedTempSyms.map(_._2)).foldRight[Block](k(bodyAndRestInLam)):
+              case ((a, tmp), rest) => applyResult2(a.value) { r => Assign(tmp, r, rest) }
+            
+          case Some(CtorFinalDest.Sel(s)) =>
+            val selFieldName = ResultUid(s) match { case Select(p, nme) => nme }
+            val idx = d.getClsFields(c).indexWhere(s => s.id === selFieldName)
+            k(args(idx).value)
       
-      case r@Value.Ref(l) => l.asObj match
-        case None => k(r)
-        case Some(mod) =>
-          filteredCtorDests.get(r.uid) match
-            case None => 
-              k(r)
-            case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
-              val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.map(_._2).orElse(expr.dflt).get
-              
-              val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, mod, Set.empty, Map.empty)
-              k(bodyAndRestInLam)
-            case Some(_) => ??? // a selection on a module consumes it
-      case Value.This(sym) => k(Value.This(sym))
-      case Value.Lit(lit) => k(Value.Lit(lit))
-      case Value.Lam(params, body) => k(Value.Lam(params, applyBlock(body)))
-      case Value.Arr(elems) => k(Value.Arr(elems))
+      f match
+        case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
+          case None =>
+            handleNormalCall(args)
+          case Some(c) => handleCtorCall(c)
+        case Value.Ref(l) => l.asCls match
+          case None =>
+            handleNormalCall(args)
+          case Some(c) => handleCtorCall(c)
+        case Value.Lam(params, body) =>
+          k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun, call.mayRaiseEffects))
+    case Instantiate(cls, args) => k(r)
+    case s@Select(p, nme) => s.symbol.flatMap(f => f.asObj) match
+      case None =>
+        if d.rewritingSelConsumer.contains(s.uid) then
+          k(p)
+        else
+          replaceSelInfo.get(s.uid) match
+            case None => k(s)
+            case Some(v) => k(Value.Ref(v))
+
+      case Some(mod) =>
+        d.filteredCtorDests.get(s.uid) match
+          case None => 
+            k(s)
+          case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
+            val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.map(_._2).orElse(expr.dflt).get
+            val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, mod, Set.empty, Map.empty)
+            k(bodyAndRestInLam)
+          case Some(_) => ??? // a selection on a module consumes it
     
-    
+    case r@Value.Ref(l) => l.asObj match
+      case None => k(r)
+      case Some(mod) =>
+        d.filteredCtorDests.get(r.uid) match
+          case None => 
+            k(r)
+          case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
+            val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.map(_._2).orElse(expr.dflt).get
+            
+            val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, mod, Set.empty, Map.empty)
+            k(bodyAndRestInLam)
+          case Some(_) => ??? // a selection on a module consumes it
+    case Value.This(sym) => k(Value.This(sym))
+    case Value.Lit(lit) => k(Value.Lit(lit))
+    case Value.Lam(params, body) => k(Value.Lam(params, applyBlock(body)))
+    case Value.Arr(elems) => k(Value.Arr(elems))
+  
+  
