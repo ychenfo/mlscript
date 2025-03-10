@@ -77,6 +77,81 @@ trait StratVarTrait(stratState: StratVarState):
   lazy val asConsStrat = stratState.asConsStrat
   lazy val uid = stratState.uid
 
+class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser(new SymbolSubst()):
+  val ctx = mutable.Set.from(alwaysDefined)
+  val result = mutable.Set.empty[Symbol]
+  
+  override def applyBlock(b: Block): Unit = b match
+    case Match(scrut, arms, dflt, rest) =>
+      applyPath(scrut)
+      (arms.map(_._2) ++ dflt).foreach: a =>
+        // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
+        // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
+        val realArm = Begin(a, rest).flattened
+        applyBlock(realArm)
+
+    case Assign(lhs, rhs, rest) =>
+      applyResult(rhs)
+      ctx += lhs
+      applyBlock(rest)
+      ctx -= lhs
+    case Begin(sub, rest) => applyBlock(b.flattened)
+    case Define(defn, rest) => defn match
+      case FunDefn(owner, sym, params, body) =>
+        val paramSymbols = params.flatMap:
+          case ParamList(flags, params, restParam) => (params ++ restParam).map:
+            case Param(flags, sym, sign) => sym
+        ctx += sym
+        ctx ++= paramSymbols
+        applyBlock(body)
+        ctx --= paramSymbols
+        applyBlock(rest)
+        ctx -= sym
+      case ValDefn(owner, k, sym, rhs) =>
+        ctx += sym
+        applyPath(rhs)
+        applyBlock(rest)
+        ctx -= sym
+      case c: ClsLikeDefn => ??? // not supported
+    
+    case _ => super.applyBlock(b)
+      
+  override def applyValue(v: Value): Unit = v match
+    case Value.Ref(l) => if !ctx.contains(l) then result += l
+    case _ => super.applyValue(v)
+  
+  override def applyLam(l: Value.Lam): Unit =
+    val paramSymbols = l.params.params.map(p => p.sym)
+    ctx ++= paramSymbols
+    applyBlock(l.body)
+    ctx --= paramSymbols
+
+class DeforestationFreeVarTraverser(using
+  alwaysDefined: Set[Symbol],
+  selsToBeReplaced: Map[ResultId, Symbol] = Map.empty,
+  selsReplacementByCurrentMatch: Iterable[Symbol],
+  dt: DeforestTransformer
+) extends FreeVarTraverser(alwaysDefined):  
+  override def applyBlock(b: Block): Unit = b match
+    // a nested match
+    case m@Match(scrut, arms, dflt, rest) =>
+      result ++= dt.freeVarsOfNonTransformedMatches(scrut.uid, m)
+      
+      // scruts of sub-matches are also free vars
+      val Value.Ref(l) = scrut
+      if !ctx(l) then result += l
+      
+      // free vars in nested-matches reported by freeVarsOfNonTransformedMatches may also contain
+      // spurious ones: those that are going to be substitued by the current match,
+      // and those that are in the ctx
+      result --= selsReplacementByCurrentMatch
+      result --= ctx
+    case _ => super.applyBlock(b)
+  
+  override def applyPath(p: Path): Unit = p match
+    case p @ Select(qual, name) =>
+      selsToBeReplaced.get(p.uid).fold(super.applyPath(p))(s => result += s)
+    case _ => super.applyPath(p)
 
 
 extension (b: Block)
@@ -87,62 +162,10 @@ extension (b: Block)
         case _ => super.applyValue(v)
     ReplaceLocalSymTransformer.applyBlock(b)
 
-  def sortedFvs(using alwaysDefined: Set[Symbol], selsToBeReplaced: Map[ResultId, Symbol] = Map.empty, dt: DeforestTransformer) =
-    object DeforestationFreeVarTraverser extends BlockTraverser(new SymbolSubst()):
-      val ctx = mutable.Set.from(alwaysDefined)
-      val result = mutable.Set.empty[Symbol]
-      
-      override def applyBlock(b: Block): Unit = b match
-        case Match(scrut, arms, dflt, rest) =>
-          applyPath(scrut)
-          (arms.map(_._2) ++ dflt).foreach: a =>
-            // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
-            // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
-            val realArm = Begin(a, rest).flattened
-            applyBlock(realArm)
-
-        case Assign(lhs, rhs, rest) =>
-          applyResult(rhs)
-          ctx += lhs
-          applyBlock(rest)
-          ctx -= lhs
-        case Begin(sub, rest) => applyBlock(b.flattened)
-        case Define(defn, rest) => defn match
-          case FunDefn(owner, sym, params, body) =>
-            val paramSymbols = params.flatMap:
-              case ParamList(flags, params, restParam) => (params ++ restParam).map:
-                case Param(flags, sym, sign) => sym
-            ctx += sym
-            ctx ++= paramSymbols
-            applyBlock(body)
-            ctx --= paramSymbols
-            applyBlock(rest)
-            ctx -= sym
-          case ValDefn(owner, k, sym, rhs) =>
-            ctx += sym
-            applyPath(rhs)
-            applyBlock(rest)
-            ctx -= sym
-          case c: ClsLikeDefn => ??? // not supported
-        
-        case _ => super.applyBlock(b)
-      
-      override def applyPath(p: Path): Unit = p match
-        case p @ Select(qual, name) =>
-          selsToBeReplaced.get(p.uid).fold(super.applyPath(p))(s => result += s)
-        case _ => super.applyPath(p)
-        
-      override def applyValue(v: Value): Unit = v match
-        case Value.Ref(l) => if !ctx.contains(l) then result += l
-        case _ => super.applyValue(v)
-      
-      override def applyLam(l: Value.Lam): Unit =
-        val paramSymbols = l.params.params.map(p => p.sym)
-        ctx ++= paramSymbols
-        applyBlock(l.body)
-        ctx --= paramSymbols
-    DeforestationFreeVarTraverser.applyBlock(b)
-    DeforestationFreeVarTraverser.result.toList.sortBy(_.uid)
+  def sortedFvs(using alwaysDefined: Set[Symbol]) =
+    val traverser = FreeVarTraverser(alwaysDefined)
+    traverser.applyBlock(b)
+    traverser.result.toList.sortBy(_.uid)
   
   def hasExplicitRet: Boolean =
     object HasExplicitRetTraverser extends BlockTraverserShallow(new SymbolSubst()):
@@ -685,21 +708,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       case CtorFinalDest.Sel(s) => Nil
     }.toMap
   
-  // lazy val scopeExtrusionInfo: Map[ResultId, List[Symbol]] =
-  //   val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
-  //   filteredCtorDests.values.foreach:
-  //     case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
-  //       toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
-      
-  
-  //   filteredCtorDests.values.flatMap{
-  //     case CtorFinalDest.Match(scrut, expr, _, _) =>
-  //       val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = expr
-  //       val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrut).keys
-  //       Some(scrut -> matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel))
-  //     case CtorFinalDest.Sel(s) => None
-  //   }.toMap
-  object scopeExtrusionInfo:
+  object freeVarsOfNonTransformedMatches:
     val store = mutable.Map.empty[ResultId, List[Symbol]]
     
     private val toBeReplacedForAllBranches = mutable.Map.empty[ResultId, Map[ResultId, Symbol]].withDefaultValue(Map.empty)
@@ -713,7 +722,16 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
         assert(m.scrut.uid === scrutExprId)
         val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
         val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrutExprId).keys
-        matchExpr.sortedFvs(using nonFreeVars + l, selReplacementNotForThisSel)
+        
+        val traverser = DeforestationFreeVarTraverser(using nonFreeVars + l, selReplacementNotForThisSel, toBeReplacedForAllBranches(scrutExprId).values)
+        traverser.applyPath(m.scrut)
+        (arms.map(_._2) ++ dflt).foreach: a =>
+          // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
+          // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
+          val realArm = Begin(a, rest).flattened
+          traverser.applyBlock(realArm)
+        
+        traverser.result.toList.sortBy(_.uid)
       }
     )
 
@@ -722,7 +740,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
     case mat@Match(scrut, arms, dflt, rest) =>
       if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) then
         val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
-        val freeVars = scopeExtrusionInfo(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
+        val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
         Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
       else
         Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
@@ -751,7 +769,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       preComputedSymbols: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol] = Map.empty -> Map.empty
     ) =
       assert(scrut === m.scrut.uid)
-      val freeVarsAndTheirNewSyms = scopeExtrusionInfo(scrut, m).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
+      val freeVarsAndTheirNewSyms = freeVarsOfNonTransformedMatches(scrut, m).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
       store.get(scrut).flatMap(_.get(cls)) match
         case None => // not registered before, or this branch of this match will only appear once
           val body = m.arms.find{ case (Case.Cls(c1, _) -> _) => c1 === cls }.map(_._2).orElse(m.dflt).get

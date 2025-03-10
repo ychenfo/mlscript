@@ -1665,7 +1665,7 @@ f(AA(BB(B)))
 //│ ==== JS (deforested): ====
 //│ let f8, tmp79, tmp80, BB_bb, AA_aa1;
 //│ f8 = function f(a) {
-//│   return runtime.safeCall(a(BB_bb))
+//│   return runtime.safeCall(a())
 //│ };
 //│ BB_bb = () => {
 //│   return 3
@@ -1676,7 +1676,7 @@ f(AA(BB(B)))
 //│   return runtime.safeCall(param0())
 //│ };
 //│ AA_aa1 = tmp79;
-//│ tmp80 = (BB_bb1) => {
+//│ tmp80 = () => {
 //│   let param0;
 //│   param0 = AA_aa1;
 //│   return runtime.safeCall(param0())
@@ -1777,7 +1777,7 @@ c2(AA(AA(0)))
 //│ ==== JS (deforested): ====
 //│ let c21, tmp87, tmp88, AA_aa4, AA_aa5;
 //│ c21 = function c2(x1) {
-//│   return runtime.safeCall(x1(AA_aa4))
+//│   return runtime.safeCall(x1())
 //│ };
 //│ AA_aa4 = 0;
 //│ tmp87 = () => {
@@ -1787,7 +1787,7 @@ c2(AA(AA(0)))
 //│   return a
 //│ };
 //│ AA_aa5 = tmp87;
-//│ tmp88 = (AA_aa6) => {
+//│ tmp88 = () => {
 //│   let param0;
 //│   param0 = AA_aa5;
 //│   return runtime.safeCall(param0())

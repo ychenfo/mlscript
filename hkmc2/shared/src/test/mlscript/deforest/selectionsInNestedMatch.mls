@@ -204,3 +204,206 @@ c(p(), A)
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
+
+
+
+
+:sjs
+fun f(x) = if x is
+  AA(AA(a)) then g(a)
+fun g(x) = if x is
+  AA(b) then f(b)
+  A then 42
+f(AA(AA(AA(AA(AA(A))))))
+//│ JS (unsanitized):
+//│ let f, g, tmp8, tmp9, tmp10, tmp11, tmp12;
+//│ f = function f(x) {
+//│   let param0, param01, a;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       a = param01;
+//│       return g(a)
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ g = function g(x) {
+//│   let param0, b;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     b = param0;
+//│     return f(b)
+//│   } else if (x instanceof A1.class) {
+//│     return 42
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp8 = AA1(A1);
+//│ tmp9 = AA1(tmp8);
+//│ tmp10 = AA1(tmp9);
+//│ tmp11 = AA1(tmp10);
+//│ tmp12 = AA1(tmp11);
+//│ f(tmp12)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f, g, tmp8, tmp9, tmp10, tmp11, tmp12, AA_x2, AA_x_tmp, match_param0_branch_AA, AA_x_tmp1, match_x_branch_AA, AA_x_tmp2, AA_x_tmp3;
+//│ match_x_branch_AA = function match_x_branch_AA(AA_x3) {
+//│   let param0;
+//│   param0 = AA_x3;
+//│   return runtime.safeCall(param0())
+//│ };
+//│ match_param0_branch_AA = function match_param0_branch_AA(AA_x3) {
+//│   let param0, a;
+//│   param0 = AA_x3;
+//│   a = param0;
+//│   return g(a)
+//│ };
+//│ f = function f(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ g = function g(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ AA_x_tmp = () => {
+//│   return 42
+//│ };
+//│ tmp8 = () => {
+//│   return match_param0_branch_AA(AA_x_tmp)
+//│ };
+//│ AA_x_tmp1 = tmp8;
+//│ tmp9 = () => {
+//│   return match_x_branch_AA(AA_x_tmp1)
+//│ };
+//│ AA_x2 = tmp9;
+//│ tmp10 = () => {
+//│   let param0, b;
+//│   param0 = AA_x2;
+//│   b = param0;
+//│   return f(b)
+//│ };
+//│ AA_x_tmp2 = tmp10;
+//│ tmp11 = () => {
+//│   return match_param0_branch_AA(AA_x_tmp2)
+//│ };
+//│ AA_x_tmp3 = tmp11;
+//│ tmp12 = () => {
+//│   return match_x_branch_AA(AA_x_tmp3)
+//│ };
+//│ block$res12 = f(tmp12);
+//│ undefined
+//│ = 42
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 42
+
+:sjs
+fun f(x) = if x is
+  AA(AA(a)) then a
+f(AA(AA(A)))
+//│ JS (unsanitized):
+//│ let f1, tmp18, tmp19;
+//│ f1 = function f(x) {
+//│   let param0, param01, a;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       a = param01;
+//│       return a
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp18 = AA1(A1);
+//│ tmp19 = AA1(tmp18);
+//│ f1(tmp19)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f1, tmp18, tmp19, AA_x3, AA_x4;
+//│ f1 = function f(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ AA_x3 = A1;
+//│ tmp18 = () => {
+//│   let param0, a;
+//│   param0 = AA_x3;
+//│   a = param0;
+//│   return a
+//│ };
+//│ AA_x4 = tmp18;
+//│ tmp19 = () => {
+//│   let param0;
+//│   param0 = AA_x4;
+//│   return runtime.safeCall(param0())
+//│ };
+//│ block$res14 = f1(tmp19);
+//│ undefined
+//│ = A
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = A
+
+:sjs
+fun f(x) = if x is
+  AA(AA(a)) then a
+fun p() = AA(AA(A))
+f(p())
+//│ JS (unsanitized):
+//│ let p2, f2, tmp22;
+//│ f2 = function f(x) {
+//│   let param0, param01, a;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       a = param01;
+//│       return a
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ p2 = function p() {
+//│   let tmp23;
+//│   tmp23 = AA1(A1);
+//│   return AA1(tmp23)
+//│ };
+//│ tmp22 = p2();
+//│ f2(tmp22)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let p2, f2, tmp22;
+//│ f2 = function f(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ p2 = function p() {
+//│   let tmp23, AA_x5, AA_x6;
+//│   AA_x5 = A1;
+//│   tmp23 = () => {
+//│     let param0, a;
+//│     param0 = AA_x5;
+//│     a = param0;
+//│     return a
+//│   };
+//│   AA_x6 = tmp23;
+//│   return () => {
+//│     let param0;
+//│     param0 = AA_x6;
+//│     return runtime.safeCall(param0())
+//│   }
+//│ };
+//│ tmp22 = p2();
+//│ block$res16 = f2(tmp22);
+//│ undefined
+//│ = A
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = A

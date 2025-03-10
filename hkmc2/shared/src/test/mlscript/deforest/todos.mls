@@ -127,285 +127,81 @@ module Test with
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-:fixme
+// FIXME: `rest` is missing after the transformation...
 :sjs
-fun f(x) = if x is
-  AA(AA(a)) then g(a)
-fun g(x) = if x is
-  AA(b) then f(b)
-  A then 42
-f(AA(AA(AA(AA(AA(A))))))
+fun f(x) =
+  let t = if x is
+    AA(AA(a)) then a
+  t + 3
+f(AA(AA(A))) + f(AA(AA(A)))
 //│ JS (unsanitized):
-//│ let f, g, tmp, tmp1, tmp2, tmp3, tmp4;
+//│ let f, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
 //│ f = function f(x) {
-//│   let param0, param01, a;
+//│   let t, param0, param01, a, tmp6;
 //│   if (x instanceof AA1.class) {
 //│     param0 = x.x;
 //│     if (param0 instanceof AA1.class) {
 //│       param01 = param0.x;
 //│       a = param01;
-//│       return g(a)
+//│       tmp6 = a;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│ };
-//│ g = function g(x) {
-//│   let param0, b;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
-//│     b = param0;
-//│     return f(b)
-//│   } else if (x instanceof A1.class) {
-//│     return 42
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
+//│   t = tmp6;
+//│   return t + 3
 //│ };
 //│ tmp = AA1(A1);
 //│ tmp1 = AA1(tmp);
-//│ tmp2 = AA1(tmp1);
-//│ tmp3 = AA1(tmp2);
+//│ tmp2 = f(tmp1);
+//│ tmp3 = AA1(A1);
 //│ tmp4 = AA1(tmp3);
-//│ f(tmp4)
+//│ tmp5 = f(tmp4);
+//│ tmp2 + tmp5
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f, g, tmp, tmp1, tmp2, tmp3, tmp4, AA_x, AA_x_tmp, match_param0_branch_AA, AA_x_tmp1, match_x_branch_AA, AA_x_tmp2, AA_x_tmp3;
-//│ match_x_branch_AA = function match_x_branch_AA(AA_x1, AA_x2) {
+//│ let f, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, AA_x_tmp, match_param0_branch_AA, AA_x_tmp1, match_x_rest, match_x_branch_AA, AA_x_tmp2, AA_x_tmp3;
+//│ match_x_branch_AA = function match_x_branch_AA(AA_x) {
 //│   let param0;
-//│   param0 = AA_x2;
+//│   param0 = AA_x;
 //│   return runtime.safeCall(param0())
 //│ };
-//│ match_param0_branch_AA = function match_param0_branch_AA(AA_x1) {
-//│   let param0, a;
-//│   param0 = AA_x1;
+//│ match_param0_branch_AA = function match_param0_branch_AA(AA_x) {
+//│   let param0, a, tmp6;
+//│   param0 = AA_x;
 //│   a = param0;
-//│   return g(a)
+//│   tmp6 = a;
+//│ };
+//│ match_x_rest = function match_x_rest(tmp6) {
+//│   let t;
+//│   t = tmp6;
+//│   return t + 3
 //│ };
 //│ f = function f(x) {
-//│   return runtime.safeCall(x(AA_x_not_in_scope))
-//│ };
-//│ g = function g(x) {
 //│   return runtime.safeCall(x())
 //│ };
-//│ AA_x_tmp = () => {
-//│   return 42
-//│ };
+//│ AA_x_tmp = A1;
 //│ tmp = () => {
 //│   return match_param0_branch_AA(AA_x_tmp)
 //│ };
 //│ AA_x_tmp1 = tmp;
-//│ tmp1 = (AA_x1) => {
-//│   return match_x_branch_AA(AA_x1, AA_x_tmp1)
+//│ tmp1 = () => {
+//│   return match_x_branch_AA(AA_x_tmp1)
 //│ };
-//│ AA_x = tmp1;
-//│ tmp2 = () => {
-//│   let param0, b;
-//│   param0 = AA_x;
-//│   b = param0;
-//│   return f(b)
-//│ };
-//│ AA_x_tmp2 = tmp2;
+//│ tmp2 = f(tmp1);
+//│ AA_x_tmp2 = A1;
 //│ tmp3 = () => {
 //│   return match_param0_branch_AA(AA_x_tmp2)
 //│ };
 //│ AA_x_tmp3 = tmp3;
-//│ tmp4 = (AA_x1) => {
-//│   return match_x_branch_AA(AA_x1, AA_x_tmp3)
+//│ tmp4 = () => {
+//│   return match_x_branch_AA(AA_x_tmp3)
 //│ };
-//│ block$res6 = f(tmp4);
+//│ tmp5 = f(tmp4);
+//│ block$res6 = tmp2 + tmp5;
 //│ undefined
-//│ ═══[RUNTIME ERROR] ReferenceError: AA_x_not_in_scope is not defined
+//│ = "()()"
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 42
-
-
-
-// FIXME: tmp11 takes an unused parameter AA_x3
-:sjs
-fun f(x) = if x is
-  AA(AA(a)) then a
-f(AA(AA(A)))
-//│ JS (unsanitized):
-//│ let f1, tmp10, tmp11;
-//│ f1 = function f(x) {
-//│   let param0, param01, a;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
-//│     if (param0 instanceof AA1.class) {
-//│       param01 = param0.x;
-//│       a = param01;
-//│       return a
-//│     } else {
-//│       throw new globalThis.Error("match error");
-//│     }
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ tmp10 = AA1(A1);
-//│ tmp11 = AA1(tmp10);
-//│ f1(tmp11)
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let f1, tmp10, tmp11, AA_x1, AA_x2;
-//│ f1 = function f(x) {
-//│   return runtime.safeCall(x(AA_x1))
-//│ };
-//│ AA_x1 = A1;
-//│ tmp10 = () => {
-//│   let param0, a;
-//│   param0 = AA_x1;
-//│   a = param0;
-//│   return a
-//│ };
-//│ AA_x2 = tmp10;
-//│ tmp11 = (AA_x3) => {
-//│   let param0;
-//│   param0 = AA_x2;
-//│   return runtime.safeCall(param0())
-//│ };
-//│ block$res8 = f1(tmp11);
-//│ undefined
-//│ = A
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = A
-
-:fixme
-:sjs
-fun f(x) = if x is
-  AA(AA(a)) then a
-fun p() = AA(AA(A))
-f(p())
-//│ JS (unsanitized):
-//│ let p, f2, tmp14;
-//│ f2 = function f(x) {
-//│   let param0, param01, a;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
-//│     if (param0 instanceof AA1.class) {
-//│       param01 = param0.x;
-//│       a = param01;
-//│       return a
-//│     } else {
-//│       throw new globalThis.Error("match error");
-//│     }
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ p = function p() {
-//│   let tmp15;
-//│   tmp15 = AA1(A1);
-//│   return AA1(tmp15)
-//│ };
-//│ tmp14 = p();
-//│ f2(tmp14)
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let p, f2, tmp14;
-//│ f2 = function f(x) {
-//│   return runtime.safeCall(x(AA_x_not_in_scope))
-//│ };
-//│ p = function p() {
-//│   let tmp15, AA_x3, AA_x4;
-//│   AA_x3 = A1;
-//│   tmp15 = () => {
-//│     let param0, a;
-//│     param0 = AA_x3;
-//│     a = param0;
-//│     return a
-//│   };
-//│   AA_x4 = tmp15;
-//│   return (AA_x5) => {
-//│     let param0;
-//│     param0 = AA_x4;
-//│     return runtime.safeCall(param0())
-//│   }
-//│ };
-//│ tmp14 = p();
-//│ block$res10 = f2(tmp14);
-//│ undefined
-//│ ═══[RUNTIME ERROR] ReferenceError: AA_x_not_in_scope is not defined
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = A
-
-
-
-:fixme
-:sjs
-fun f(x) =
-  if x is
-    AA(AA(a)) then a
-  3
-f(AA(AA(A))) + f(AA(AA(A)))
-//│ JS (unsanitized):
-//│ let f3, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
-//│ f3 = function f(x) {
-//│   let param0, param01, a, tmp22;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
-//│     if (param0 instanceof AA1.class) {
-//│       param01 = param0.x;
-//│       a = param01;
-//│       tmp22 = a;
-//│     } else {
-//│       throw new globalThis.Error("match error");
-//│     }
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│   return 3
-//│ };
-//│ tmp16 = AA1(A1);
-//│ tmp17 = AA1(tmp16);
-//│ tmp18 = f3(tmp17);
-//│ tmp19 = AA1(A1);
-//│ tmp20 = AA1(tmp19);
-//│ tmp21 = f3(tmp20);
-//│ tmp18 + tmp21
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let f3, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, AA_x_tmp4, match_param0_branch_AA1, AA_x_tmp5, match_x_rest, match_x_branch_AA1, AA_x_tmp6, AA_x_tmp7;
-//│ match_x_branch_AA1 = function match_x_branch_AA(AA_x3, AA_x4) {
-//│   let param0;
-//│   param0 = AA_x4;
-//│   return runtime.safeCall(param0())
-//│ };
-//│ match_param0_branch_AA1 = function match_param0_branch_AA(AA_x3) {
-//│   let param0, a, tmp22;
-//│   param0 = AA_x3;
-//│   a = param0;
-//│   tmp22 = a;
-//│ };
-//│ match_x_rest = function match_x_rest() {
-//│   return 3
-//│ };
-//│ f3 = function f(x) {
-//│   return runtime.safeCall(x(AA_x_not_in_scope))
-//│ };
-//│ AA_x_tmp4 = A1;
-//│ tmp16 = () => {
-//│   return match_param0_branch_AA1(AA_x_tmp4)
-//│ };
-//│ AA_x_tmp5 = tmp16;
-//│ tmp17 = (AA_x3) => {
-//│   return match_x_branch_AA1(AA_x3, AA_x_tmp5)
-//│ };
-//│ tmp18 = f3(tmp17);
-//│ AA_x_tmp6 = A1;
-//│ tmp19 = () => {
-//│   return match_param0_branch_AA1(AA_x_tmp6)
-//│ };
-//│ AA_x_tmp7 = tmp19;
-//│ tmp20 = (AA_x3) => {
-//│   return match_x_branch_AA1(AA_x3, AA_x_tmp7)
-//│ };
-//│ tmp21 = f3(tmp20);
-//│ block$res12 = tmp18 + tmp21;
-//│ undefined
-//│ ═══[RUNTIME ERROR] ReferenceError: AA_x_not_in_scope is not defined
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 6
+//│ = "A3A3"
