@@ -205,3 +205,62 @@ f(AA(AA(A))) + f(AA(AA(A)))
 //│ = "()()"
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = "A3A3"
+
+
+:sjs
+fun f(x) =
+  let n = if x is
+    AA(a) then
+      if a is
+        AA(m) then m
+  n + 2
+f(AA(AA(3)))
+//│ JS (unsanitized):
+//│ let f1, tmp12, tmp13;
+//│ f1 = function f(x) {
+//│   let n, param0, a, param01, m, tmp14, tmp15;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     a = param0;
+//│     if (a instanceof AA1.class) {
+//│       param01 = a.x;
+//│       m = param01;
+//│       tmp14 = m;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     tmp15 = tmp14;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   n = tmp15;
+//│   return n + 2
+//│ };
+//│ tmp12 = AA1(3);
+//│ tmp13 = AA1(tmp12);
+//│ f1(tmp13)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f1, tmp12, tmp13, AA_x, AA_x1;
+//│ f1 = function f(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ AA_x = 3;
+//│ tmp12 = () => {
+//│   let param0, m, tmp14, tmp15;
+//│   param0 = AA_x;
+//│   m = param0;
+//│   tmp14 = m;
+//│   tmp15 = tmp14;
+//│ };
+//│ AA_x1 = tmp12;
+//│ tmp13 = () => {
+//│   let param0, a;
+//│   param0 = AA_x1;
+//│   a = param0;
+//│   return runtime.safeCall(a())
+//│ };
+//│ block$res8 = f1(tmp13);
+//│ undefined
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 5
