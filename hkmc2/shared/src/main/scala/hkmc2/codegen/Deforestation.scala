@@ -91,6 +91,8 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser(new Sy
       (arms.map(_._2) ++ dflt).foreach: a =>
         // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
         // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
+        // this also makes sure that the free vars in the `rest` of outter
+        // matches can be counted as free vars for the inner match
         val realArm = Begin(a, rest).flattened
         applyBlock(realArm)
 
@@ -762,7 +764,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
     case _ => super.applyBlock(b)
   
   object matchArms:
-    val store = mutable.Map.empty[ResultId, Map[ClsOrModSymbol, FunDefn]].withDefaultValue(Map.empty)
+    val store = LinkedHashMap.empty[ResultId, Map[ClsOrModSymbol, FunDefn]].withDefaultValue(Map.empty)
     
     // return a lambda, which either calls the extracted arm function, or contains the computations in matching arms
     def getOrElseUpdate(
@@ -854,21 +856,44 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
         case (defn, k) => r => Define(defn, k(r))
   
   object matchRest:
-    val store = mutable.Map.empty[ResultId, Opt[FunDefn] -> Block]
+    val store = LinkedHashMap.empty[ResultId, Opt[FunDefn] -> Block]
+    
+    def getAllDefined = store.valuesIterator.flatMap(_._1.map(_.sym))
     
     // returns the symbol for the rest function (if any), and the rewritten rest block
     def getOrElseUpdate(s: ResultId, restBeforeRewriting: Block): Opt[Symbol] -> Block =
       store.get(s) match
         case Some(f, b) => f.map(_.sym) -> b
         case None if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).size == 1) =>
-          val res = N -> applyBlock(restBeforeRewriting)
+          val parentRest = d.matchScrutToParentMatchScrut(s).map: p =>
+            getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest)
+          val res =
+            N ->
+            (parentRest match
+              case None => applyBlock(restBeforeRewriting)
+              case Some(Some(s), b) => Begin(
+                applyBlock(restBeforeRewriting),
+                Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+              case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
+            )
+          
+          // val res = N -> applyBlock(restBeforeRewriting)
           store += s -> res
           res
         case _ => // now need to build a new function and update the store
-          val restRewritten = applyBlock(restBeforeRewriting)
+          val parentRest = d.matchScrutToParentMatchScrut(s).map: p =>
+            getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest)
+          val restRewritten = parentRest match
+            case None => applyBlock(restBeforeRewriting)
+            case Some(Some(s), b) => Begin(
+              applyBlock(restBeforeRewriting),
+              Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+            case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
+            
+          // val restRewritten = applyBlock(restBeforeRewriting)
           val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
           val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
-          val freeVarsAndTheirNewSyms = restRewritten.sortedFvs.map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
+          val freeVarsAndTheirNewSyms = restRewritten.sortedFvs(using nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
           
           val newFunDef = FunDefn(
             N,

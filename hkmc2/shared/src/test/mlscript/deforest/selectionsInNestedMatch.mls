@@ -253,16 +253,16 @@ f(AA(AA(AA(AA(AA(A))))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
 //│ let f, g, tmp8, tmp9, tmp10, tmp11, tmp12, AA_x2, AA_x_tmp, match_param0_branch_AA, AA_x_tmp1, match_x_branch_AA, AA_x_tmp2, AA_x_tmp3;
-//│ match_x_branch_AA = function match_x_branch_AA(AA_x3) {
-//│   let param0;
-//│   param0 = AA_x3;
-//│   return runtime.safeCall(param0())
-//│ };
 //│ match_param0_branch_AA = function match_param0_branch_AA(AA_x3) {
 //│   let param0, a;
 //│   param0 = AA_x3;
 //│   a = param0;
 //│   return g(a)
+//│ };
+//│ match_x_branch_AA = function match_x_branch_AA(AA_x3) {
+//│   let param0;
+//│   param0 = AA_x3;
+//│   return runtime.safeCall(param0())
 //│ };
 //│ f = function f(x) {
 //│   return runtime.safeCall(x())

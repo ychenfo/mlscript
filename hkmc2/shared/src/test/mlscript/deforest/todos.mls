@@ -162,17 +162,18 @@ f(AA(AA(A))) + f(AA(AA(A)))
 //│ tmp2 + tmp5
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, AA_x_tmp, match_param0_branch_AA, AA_x_tmp1, match_x_rest, match_x_branch_AA, AA_x_tmp2, AA_x_tmp3;
-//│ match_x_branch_AA = function match_x_branch_AA(AA_x) {
-//│   let param0;
-//│   param0 = AA_x;
-//│   return runtime.safeCall(param0())
-//│ };
+//│ let f, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, AA_x_tmp, match_x_rest, match_param0_branch_AA, AA_x_tmp1, match_x_branch_AA, AA_x_tmp2, AA_x_tmp3;
 //│ match_param0_branch_AA = function match_param0_branch_AA(AA_x) {
 //│   let param0, a, tmp6;
 //│   param0 = AA_x;
 //│   a = param0;
 //│   tmp6 = a;
+//│   return match_x_rest(tmp6)
+//│ };
+//│ match_x_branch_AA = function match_x_branch_AA(AA_x) {
+//│   let param0;
+//│   param0 = AA_x;
+//│   return runtime.safeCall(param0())
 //│ };
 //│ match_x_rest = function match_x_rest(tmp6) {
 //│   let t;
@@ -202,7 +203,7 @@ f(AA(AA(A))) + f(AA(AA(A)))
 //│ tmp5 = f(tmp4);
 //│ block$res6 = tmp2 + tmp5;
 //│ undefined
-//│ = "()()"
+//│ = "A3A3"
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = "A3A3"
 
@@ -247,11 +248,13 @@ f(AA(AA(3)))
 //│ };
 //│ AA_x = 3;
 //│ tmp12 = () => {
-//│   let param0, m, tmp14, tmp15;
+//│   let n, param0, m, tmp14, tmp15;
 //│   param0 = AA_x;
 //│   m = param0;
 //│   tmp14 = m;
 //│   tmp15 = tmp14;
+//│   n = tmp15;
+//│   return n + 2
 //│ };
 //│ AA_x1 = tmp12;
 //│ tmp13 = () => {
@@ -262,5 +265,105 @@ f(AA(AA(3)))
 //│ };
 //│ block$res8 = f1(tmp13);
 //│ undefined
+//│ = 5
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 5
+
+
+
+
+
+
+
+
+
+:sjs
+fun f(x, y) =
+  let n = if x is
+    AA(a) then
+      if a is
+        AA(m) then m
+  n + 2 + y
+f(AA(AA(3)), 9) + f(AA(AA(4)), 10)
+//│ JS (unsanitized):
+//│ let f2, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
+//│ f2 = function f(x, y) {
+//│   let n, param0, a, param01, m, tmp22, tmp23, tmp24;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     a = param0;
+//│     if (a instanceof AA1.class) {
+//│       param01 = a.x;
+//│       m = param01;
+//│       tmp22 = m;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     tmp23 = tmp22;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   n = tmp23;
+//│   tmp24 = n + 2;
+//│   return tmp24 + y
+//│ };
+//│ tmp16 = AA1(3);
+//│ tmp17 = AA1(tmp16);
+//│ tmp18 = f2(tmp17, 9);
+//│ tmp19 = AA1(4);
+//│ tmp20 = AA1(tmp19);
+//│ tmp21 = f2(tmp20, 10);
+//│ tmp18 + tmp21
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f2, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, AA_x_tmp4, match_x_rest1, match_a_rest, match_a_branch_AA, AA_x_tmp5, match_x_branch_AA1, AA_x_tmp6, AA_x_tmp7;
+//│ match_a_branch_AA = function match_a_branch_AA(y, AA_x2) {
+//│   let param0, m, tmp22;
+//│   param0 = AA_x2;
+//│   m = param0;
+//│   tmp22 = m;
+//│   return match_a_rest(y, tmp22, match_x_rest1)
+//│ };
+//│ match_x_branch_AA1 = function match_x_branch_AA(y, AA_x2) {
+//│   let param0, a;
+//│   param0 = AA_x2;
+//│   a = param0;
+//│   return runtime.safeCall(a(y))
+//│ };
+//│ match_x_rest1 = function match_x_rest(y, tmp22) {
+//│   let n, tmp23;
+//│   n = tmp22;
+//│   tmp23 = n + 2;
+//│   return tmp23 + y
+//│ };
+//│ match_a_rest = function match_a_rest(y, tmp22) {
+//│   let tmp23;
+//│   tmp23 = tmp22;
+//│   return match_x_rest1(y, tmp23)
+//│ };
+//│ f2 = function f(x, y) {
+//│   return runtime.safeCall(x(y))
+//│ };
+//│ AA_x_tmp4 = 3;
+//│ tmp16 = (y) => {
+//│   return match_a_branch_AA(y, AA_x_tmp4)
+//│ };
+//│ AA_x_tmp5 = tmp16;
+//│ tmp17 = (y) => {
+//│   return match_x_branch_AA1(y, AA_x_tmp5)
+//│ };
+//│ tmp18 = f2(tmp17, 9);
+//│ AA_x_tmp6 = 4;
+//│ tmp19 = (y) => {
+//│   return match_a_branch_AA(y, AA_x_tmp6)
+//│ };
+//│ AA_x_tmp7 = tmp19;
+//│ tmp20 = (y) => {
+//│   return match_x_branch_AA1(y, AA_x_tmp7)
+//│ };
+//│ tmp21 = f2(tmp20, 10);
+//│ block$res10 = tmp18 + tmp21;
+//│ undefined
+//│ = 30
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 30
