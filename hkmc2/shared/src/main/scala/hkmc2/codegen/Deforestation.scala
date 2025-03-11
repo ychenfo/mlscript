@@ -7,6 +7,7 @@ import syntax.{Literal, Tree}
 import utils.{TL, tl, SymbolSubst}
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
+import scala.collection.mutable.LinkedHashMap
 
 type StratVar
 type StratVarId = Uid[StratVar]
@@ -43,13 +44,16 @@ case object NoProd extends ProdStrat
 
 
 
-case class Dtor(scrut: ResultId)(val expr: Match)(using d: Deforest) extends ConsStrat:
+case class Dtor(scrut: ResultId)(val expr: Match, val outterMatch: Option[ResultId])(using d: Deforest) extends ConsStrat:
   assert(scrut === expr.scrut.uid)
   d.matchScrutToMatchBlock.updateWith(scrut):
     case None => Some(expr)
     case Some(exist) => ??? // should only update once
+  d.matchScrutToParentMatchScrut.updateWith(scrut):
+    case None => Some(outterMatch)
+    case Some(_) => ??? // should only update once
 
-case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: Map[ResultId, ClsOrModSymbol]) extends ConsStrat with FieldSelTrait
+case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: LinkedHashMap[ResultId, ClsOrModSymbol]) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
 case class ConsVar(s: StratVarState) extends ConsStrat with StratVarTrait(s)
 case object NoCons extends ConsStrat
@@ -60,7 +64,7 @@ enum DtorExpr:
   case Sel(s: ResultId)
 
 enum CtorFinalDest:
-  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])
+  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])(val inMatch: Option[ResultId])
   case Sel(s: ResultId)
 
 trait FieldSelTrait:
@@ -238,6 +242,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
   
   val matchScrutToMatchBlock = mutable.Map.empty[ResultId, Match]
+  val matchScrutToParentMatchScrut = mutable.Map.empty[ResultId, Option[ResultId]]
   object symToStrat:
     val store = mutable.Map.empty[Symbol, ProdVar]
     
@@ -273,12 +278,12 @@ class Deforest(using TL, Raise, Elaborator.State):
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
   def processBlock(b: Block)(using
-    inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
-    matching: Map[ResultId, ClsOrModSymbol] = Map.empty[ResultId, ClsOrModSymbol]
+    inArm: LinkedHashMap[ProdVar, ClsOrModSymbol] = LinkedHashMap.empty[ProdVar, ClsOrModSymbol],
+    matching: LinkedHashMap[ResultId, ClsOrModSymbol] = LinkedHashMap.empty[ResultId, ClsOrModSymbol]
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
-      constrain(scrutStrat, Dtor(scrut.uid)(m)(using this))
+      constrain(scrutStrat, Dtor(scrut.uid)(m, matching.lastOption.map(_._1))(using this))
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map:
           case (Case.Cls(s, _), body) => 
@@ -334,8 +339,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     case Throw(exc) => NoProd
   
   def constrFun(params: Ls[Param], body: Block)(using
-    inArm: Map[ProdVar, ClsOrModSymbol],
-    matching: Map[ResultId, ClsOrModSymbol]
+    inArm: LinkedHashMap[ProdVar, ClsOrModSymbol],
+    matching: LinkedHashMap[ResultId, ClsOrModSymbol]
   ) =
     val paramSyms = params.map:
       case Param(_, sym, _) => sym
@@ -346,8 +351,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   
   def processResult(r: Result)(using
-    inArm: Map[ProdVar, ClsOrModSymbol],
-    matching: Map[ResultId, ClsOrModSymbol]
+    inArm: LinkedHashMap[ProdVar, ClsOrModSymbol],
+    matching: LinkedHashMap[ResultId, ClsOrModSymbol]
   ): ProdStrat = r match
     case c@Call(f, args) =>
       val argsTpe = args.map:
@@ -670,7 +675,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 dtors.head._2,
                 sels.map(_.expr),
                 fieldNameToSymToBeReplaced.toMap -> selectionUidsToSymToBeReplaced.toMap
-              ))
+              )(matchScrutToParentMatchScrut(dtors.head._1)))
             else
               throw Error("more than one consumer")
               None
