@@ -742,27 +742,6 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       }
     )
 
-  
-  override def applyBlock(b: Block): Block = b match
-    case mat@Match(scrut, arms, dflt, rest) =>
-      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) then
-        val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
-        val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
-        Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
-      else
-        Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
-    case Return(res, implct) =>
-      applyResult2(res)(r => Return(r, implct))
-    case Assign(lhs, rhs, rest) =>
-      applyResult2(rhs)(r => Assign(lhs, r, applyBlock(rest)))
-    case d@Define(defn, rest) =>
-      defn match
-        case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, applyBlock(body)), applyBlock(rest))
-        case _ => super.applyBlock(d)
-    case End(msg) => End(msg)
-    case Throw(exc) => applyResult2(exc)(Throw.apply)
-    case _ => super.applyBlock(b)
-  
   object matchArms:
     val store = LinkedHashMap.empty[ResultId, Map[ClsOrModSymbol, FunDefn]].withDefaultValue(Map.empty)
     
@@ -877,7 +856,6 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
               case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
             )
           
-          // val res = N -> applyBlock(restBeforeRewriting)
           store += s -> res
           res
         case _ => // now need to build a new function and update the store
@@ -889,8 +867,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
               applyBlock(restBeforeRewriting),
               Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
             case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
-            
-          // val restRewritten = applyBlock(restBeforeRewriting)
+          
           val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
           val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
           val freeVarsAndTheirNewSyms = restRewritten.sortedFvs(using nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
@@ -910,6 +887,28 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           r => defn match
             case None => k(r)
             case Some(defn) => Define(defn, k(r))
+  
+  
+  override def applyBlock(b: Block): Block = b match
+    case mat@Match(scrut, arms, dflt, rest) =>
+      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) then
+        val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
+        val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
+        Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
+      else
+        Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
+    case Return(res, implct) =>
+      applyResult2(res)(r => Return(r, implct))
+    case Assign(lhs, rhs, rest) =>
+      applyResult2(rhs)(r => Assign(lhs, r, applyBlock(rest)))
+    case d@Define(defn, rest) =>
+      defn match
+        case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, applyBlock(body)), applyBlock(rest))
+        case _ => super.applyBlock(d)
+    case End(msg) => End(msg)
+    case Throw(exc) => applyResult2(exc)(Throw.apply)
+    case _ => super.applyBlock(b)
+  
   
   override def applyResult2(r: Result)(k: Result => Block): Block = r match
     case call@Call(f, args) =>
