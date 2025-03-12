@@ -2034,3 +2034,30 @@ f(AA(AA(3)), 9) + f(AA(AA(4)), 10)
 //│ = 30
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 30
+
+
+
+:sjs
+fun f(x) = x.aa.aa
+f(AA(AA(3)))
+//│ JS (unsanitized):
+//│ let f13, tmp119, tmp120;
+//│ f13 = function f(x1) {
+//│   return x1.aa.aa
+//│ };
+//│ tmp119 = AA1(3);
+//│ tmp120 = AA1(tmp119);
+//│ f13(tmp120)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f13, tmp119, tmp120;
+//│ f13 = function f(x1) {
+//│   return x1
+//│ };
+//│ tmp119 = 3;
+//│ tmp120 = tmp119;
+//│ block$res63 = f13(tmp120);
+//│ undefined
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 3

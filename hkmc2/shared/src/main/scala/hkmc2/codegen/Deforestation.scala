@@ -982,10 +982,10 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
     case s@Select(p, nme) => s.symbol.flatMap(f => f.asObj) match
       case None =>
         if d.rewritingSelConsumer.contains(s.uid) then
-          k(p)
+          applyResult2(p)(k)
         else
           replaceSelInfo.get(s.uid) match
-            case None => k(s)
+            case None => applyResult2(p)(r => k(Select(r.asInstanceOf[Path], nme)(N)))
             case Some(v) => k(Value.Ref(v))
 
       case Some(mod) =>
