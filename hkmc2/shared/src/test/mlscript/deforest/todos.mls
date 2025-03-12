@@ -15,7 +15,12 @@ class Some(x)
 
 
 
-// TODO: how to keep track of the correct s.x
+// TODO: keep track of the equality between `Test.#s` and scrut.
+// The `s` in `if s is ...` is actually `Test.#s`,
+// and `s.x`s in branches are actually `Test.#s.x`.
+// This causes that `Test.#s` has 3 consumption sites,
+// and the `A` or `B` in `Test.#s.x` cannot get the branch-specific information
+// to be considered as having only 1 consumption site.
 :sjs
 module Test with
   fun f1(a) = if a is
@@ -125,4 +130,139 @@ module Test with
 //│ };
 //│ block$res4 = undefined;
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// if `Test.#s.x` is always consumed by `f`
+// the `A` and `B` can be fused, but not the outer `AA` or `BB`
+:sjs
+module Test with
+  fun f(a) = if a is
+    A then 1
+    B then 2
+    C then 3
+  let s = if true then AA(A) else BB(B)
+  if s is
+    AA then f(s.x)
+    BB then f(s.x)
+//│ JS (unsanitized):
+//│ let Test3;
+//│ Test3 = class Test {
+//│   static #s;
+//│   static {
+//│     let scrut, scrut1, tmp;
+//│     scrut = true;
+//│     if (scrut === true) {
+//│       tmp = AA1(A1);
+//│     } else {
+//│       tmp = BB1(B1);
+//│     }
+//│     Test.#s = tmp;
+//│     scrut1 = Test.#s;
+//│     if (scrut1 instanceof AA1.class) {
+//│       Test.f(Test.#s.x)
+//│     } else if (scrut1 instanceof BB1.class) {
+//│       Test.f(Test.#s.x)
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│   static f(a) {
+//│     if (a instanceof A1.class) {
+//│       return 1
+//│     } else if (a instanceof B1.class) {
+//│       return 2
+//│     } else if (a instanceof C1.class) {
+//│       return 3
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│   static toString() { return "Test"; }
+//│ };
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let Test3;
+//│ Test3 = class Test {
+//│   static #s1;
+//│   static {
+//│     let scrut, scrut1, tmp;
+//│     scrut = true;
+//│     if (scrut === true) {
+//│       tmp = AA1(() => {
+//│         return 1
+//│       });
+//│     } else {
+//│       tmp = BB1(() => {
+//│         return 2
+//│       });
+//│     }
+//│     Test.#s1 = tmp;
+//│     scrut1 = Test.#s1;
+//│     if (scrut1 instanceof AA1.class) {
+//│       Test.f(Test.#s1.x)
+//│     } else if (scrut1 instanceof BB1.class) {
+//│       Test.f(Test.#s1.x)
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   }
+//│   static f(a) {
+//│     return runtime.safeCall(a())
+//│   }
+//│   static toString() { return "Test"; }
+//│ };
+//│ block$res6 = undefined;
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// similar as above, since `x.x` is considered as being consumed
+// at two places,the inner match is not fused
+:sjs
+fun f(x) = if x is
+  AA then if x.x is
+    AA then x.x.x
+f(AA(AA(3)))
+//│ JS (unsanitized):
+//│ let f, tmp, tmp1;
+//│ f = function f(x) {
+//│   let scrut;
+//│   if (x instanceof AA1.class) {
+//│     scrut = x.x;
+//│     if (scrut instanceof AA1.class) {
+//│       return x.x.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp = AA1(3);
+//│ tmp1 = AA1(tmp);
+//│ f(tmp1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f, tmp, tmp1, AA_x;
+//│ f = function f(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ tmp = AA1(3);
+//│ AA_x = tmp;
+//│ tmp1 = () => {
+//│   let scrut;
+//│   scrut = AA_x;
+//│   if (scrut instanceof AA1.class) {
+//│     return AA_x.x
+//│   } else {
+//│     throw new this.Error("match error");
+//│   }
+//│ };
+//│ block$res8 = f(tmp1);
+//│ undefined
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 3
+
+
+
 
