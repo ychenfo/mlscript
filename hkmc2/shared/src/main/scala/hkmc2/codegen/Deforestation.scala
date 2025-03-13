@@ -890,53 +890,32 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
   
   
   override def applyBlock(b: Block): Block = b match
-    case mat@Match(scrut, arms, dflt, rest) =>
-      if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) then
-        val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
-        val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
-        Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
-      else
-        Match(scrut, arms.map{ (cse, blk) => (cse, applyBlock(blk)) }, dflt.map(applyBlock), applyBlock(rest))
-    case Return(res, implct) =>
-      applyResult2(res)(r => Return(r, implct))
-    case Assign(lhs, rhs, rest) =>
-      applyResult2(rhs)(r => Assign(lhs, r, applyBlock(rest)))
-    case d@Define(defn, rest) =>
-      defn match
-        case FunDefn(o, sym, params, body) => Define(FunDefn(o, sym, params, applyBlock(body)), applyBlock(rest))
-        case _ => super.applyBlock(d)
-    case End(msg) => End(msg)
-    case Throw(exc) => applyResult2(exc)(Throw.apply)
+    case mat@Match(scrut, arms, dflt, rest) if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) =>
+      val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
+      val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
+      Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
     case _ => super.applyBlock(b)
   
+  override def applyResult(r: Result): Result = r match
+    case _: Call =>
+      // calls to fusing contructors are handled in `applyResult2`
+      // here we only handle calls to non-fusing constructors and functions
+      assert(!d.filteredCtorDests.isDefinedAt(r.uid))
+      super.applyResult(r)
+    case _ => super.applyResult(r)
   
   override def applyResult2(r: Result)(k: Result => Block): Block = r match
-    case call@Call(f, args) =>
-      def handleNormalCall(args: List[Arg]) =
-        var newArgs: Ls[Arg] = Nil
-        args.foreach:
-          case Arg(spread, value) => applyResult2(value): r =>
-            // since the arguments must be paths,
-            // and calls with parameters are not paths,
-            // so paths will always be rewritten to paths,
-            // and there won't be more blocks added by `applyResult2(value)`
-            // so just use a dummy `End` here, to use `applyResult2` as `applyResult`
-            newArgs = Arg(spread, r.asInstanceOf[Path]) :: newArgs
-            End()
-        k(Call(f, newArgs.reverse)(call.isMlsFun, call.mayRaiseEffects))
-        
+    case call@Call(f, args) if d.filteredCtorDests.isDefinedAt(call.uid) =>
       def handleCtorCall(c: ClassSymbol) =
-        d.filteredCtorDests.get(call.uid) match
-          case None =>
-            handleNormalCall(args)
-          case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
+        d.filteredCtorDests.get(call.uid).get match
+          case CtorFinalDest.Match(scrut, expr, sels, selsMap) =>
             val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.map(_._2).orElse(expr.dflt).get
-            
+        
             // use pre-determined symbols, create temp symbols for un-used fields
             val usedFieldIdentToSymbolsToBeReplaced = selsMap._1
             val allFieldIdentToSymbolsToBeReplaced = d.getClsFields(c).map: f =>
               f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"${c.name}_${f.id.name}_unused"))
-            
+        
             // if all vars are temp vars, no need to create more temp vars
             // otherwise, create temps for var symbols (which will be function params with these temp vars flowing in)
             val assignedTempSyms =
@@ -949,7 +928,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
                 }
 
             val newArgs = args.map(_ => TempSymbol(N))
-            
+        
             val bodyAndRestInLam = matchArms.getOrElseUpdate(
               scrut,
               expr,
@@ -957,61 +936,44 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
               sels.toSet,
               assignedTempSyms.filter(a => usedFieldIdentToSymbolsToBeReplaced.contains(a._1)).map(a => a._1 -> Value.Ref(a._2).asInstanceOf[Value.Ref]).toMap,
               selsMap._1 -> selsMap._2)
-            
+        
             args.zip(assignedTempSyms.map(_._2)).foldRight[Block](k(bodyAndRestInLam)):
               case ((a, tmp), rest) => applyResult2(a.value) { r => Assign(tmp, r, rest) }
-            
-          case Some(CtorFinalDest.Sel(s)) =>
+        
+          case CtorFinalDest.Sel(s) =>
             val selFieldName = ResultUid(s) match { case Select(p, nme) => nme }
             val idx = d.getClsFields(c).indexWhere(s => s.id === selFieldName)
             k(args(idx).value)
-      
       f match
-        case s@Select(p, nme) => s.symbol.flatMap(_.asCls) match
-          case None =>
-            handleNormalCall(args)
-          case Some(c) => handleCtorCall(c)
-        case Value.Ref(l) => l.asCls match
-          case None =>
-            handleNormalCall(args)
-          case Some(c) => handleCtorCall(c)
-        case Value.Lam(params, body) =>
-          k(Call(Value.Lam(params, applyBlock(body)), args)(call.isMlsFun, call.mayRaiseEffects))
-    case Instantiate(cls, args) => k(r)
-    case s@Select(p, nme) => s.symbol.flatMap(f => f.asObj) match
-      case None =>
-        if d.rewritingSelConsumer.contains(s.uid) then
-          applyResult2(p)(k)
-        else
-          replaceSelInfo.get(s.uid) match
-            case None => applyResult2(p)(r => k(Select(r.asInstanceOf[Path], nme)(N)))
-            case Some(v) => k(Value.Ref(v))
+        case s: Select => handleCtorCall(s.symbol.get.asCls.get)
+        case Value.Ref(l) => handleCtorCall(l.asCls.get)
+        case _ => ???
+    case _ => super.applyResult2(r)(k)
+  
+  def handleObjFusing(objCallExprUid: CtorExpr, objClsSym: ModuleSymbol) =
+    // must be a pat mat on objects; no support for selection on objects yet
+    val CtorFinalDest.Match(scrut, expr, sels, selsMap) = d.filteredCtorDests(objCallExprUid): @unchecked
+    val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === objClsSym }.map(_._2).orElse(expr.dflt).get
+    matchArms.getOrElseUpdate(scrut, expr, objClsSym, Set.empty, Map.empty)
 
-      case Some(mod) =>
-        d.filteredCtorDests.get(s.uid) match
-          case None => 
-            k(s)
-          case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
-            val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.map(_._2).orElse(expr.dflt).get
-            val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, mod, Set.empty, Map.empty)
-            k(bodyAndRestInLam)
-          case Some(_) => ??? // a selection on a module consumes it
+  override def applyPath(p: Path): Path = p match
+    // a selection which is a consumer on its own
+    case s@Select(p, nme) if d.rewritingSelConsumer.contains(s.uid) => applyPath(p)
     
+    // a selection inside a fusing match that needs to be replaced by pre-computed symbols
+    case s@Select(p, nme) if replaceSelInfo.get(s.uid).isDefined => Value.Ref(replaceSelInfo(s.uid))
+    
+    case s@Select(p, nme) => s.symbol.flatMap(_.asObj) match
+      // a fusing object constructor
+      case Some(obj) if d.filteredCtorDests.isDefinedAt(s.uid) => handleObjFusing(s.uid, obj)
+      case _ => super.applyPath(s)
+    
+    case v: Value => applyValue(v)
+    case _ => super.applyPath(p)
+  
+  override def applyValue(v: Value): Value = v match
     case r@Value.Ref(l) => l.asObj match
-      case None => k(r)
-      case Some(mod) =>
-        d.filteredCtorDests.get(r.uid) match
-          case None => 
-            k(r)
-          case Some(CtorFinalDest.Match(scrut, expr, sels, selsMap)) =>
-            val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === mod }.map(_._2).orElse(expr.dflt).get
-            
-            val bodyAndRestInLam = matchArms.getOrElseUpdate(scrut, expr, mod, Set.empty, Map.empty)
-            k(bodyAndRestInLam)
-          case Some(_) => ??? // a selection on a module consumes it
-    case Value.This(sym) => k(Value.This(sym))
-    case Value.Lit(lit) => k(Value.Lit(lit))
-    case Value.Lam(params, body) => k(Value.Lam(params, applyBlock(body)))
-    case Value.Arr(elems) => k(Value.Arr(elems))
-  
-  
+      case None => r
+      case Some(obj) if d.filteredCtorDests.isDefinedAt(r.uid) => handleObjFusing(r.uid, obj)
+      case _ => super.applyValue(v)
+    case _ => super.applyValue(v)
