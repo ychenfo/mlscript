@@ -728,6 +728,9 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       {
         assert(m.scrut.uid === scrutExprId)
         val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
+        val parentMatchRest = d.matchScrutToParentMatchScrut(m.scrut.uid).flatMap: p =>
+          if !d.filteredDtors.contains(p) then Some(d.matchScrutToMatchBlock(p).rest)
+          else None
         val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrutExprId).keys
         
         val traverser = DeforestationFreeVarTraverser(using nonFreeVars + l, selReplacementNotForThisSel, toBeReplacedForAllBranches(scrutExprId).values)
@@ -735,7 +738,8 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
         (arms.map(_._2) ++ dflt).foreach: a =>
           // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
           // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
-          val realArm = Begin(a, rest).flattened
+          // Also take care of the `rest` of its parent match block if it's not getting fused.
+          val realArm = Begin(a, parentMatchRest.fold(rest)(p => Begin(rest, p))).flattened
           traverser.applyBlock(realArm)
         
         traverser.result.toList.sortBy(_.uid)
@@ -844,8 +848,9 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       store.get(s) match
         case Some(f, b) => f.map(_.sym) -> b
         case None if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).size == 1) =>
-          val parentRest = d.matchScrutToParentMatchScrut(s).map: p =>
-            getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest)
+          val parentRest = d.matchScrutToParentMatchScrut(s).flatMap: p =>
+            if !d.filteredDtors.contains(p) then Some(None, d.matchScrutToMatchBlock(p).rest)
+            else Some(getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest))
           val res =
             N ->
             (parentRest match
@@ -859,8 +864,9 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           store += s -> res
           res
         case _ => // now need to build a new function and update the store
-          val parentRest = d.matchScrutToParentMatchScrut(s).map: p =>
-            getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest)
+          val parentRest = d.matchScrutToParentMatchScrut(s).flatMap: p =>
+            if !d.filteredDtors.contains(p) then Some(None, d.matchScrutToMatchBlock(p).rest)
+            else Some(getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest))
           val restRewritten = parentRest match
             case None => applyBlock(restBeforeRewriting)
             case Some(Some(s), b) => Begin(
@@ -891,7 +897,10 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
   
   override def applyBlock(b: Block): Block = b match
     case mat@Match(scrut, arms, dflt, rest) if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) =>
-      val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet)
+      val parentMatchRest = d.matchScrutToParentMatchScrut(scrut.uid).flatMap: p =>
+        if !d.filteredDtors.contains(p) then Some(d.matchScrutToMatchBlock(p).rest)
+        else None
+      val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || parentMatchRest.fold(false)(_.hasExplicitRet)
       val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
       Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
     case _ => super.applyBlock(b)
