@@ -147,7 +147,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           case Return(res, implct) =>
             assert(implct)
             Assign(resSym, res, Return(Value.Lit(syntax.Tree.UnitLit(false)), true))
-          case _: HandleBlockReturn => ???
           case tl: (Throw | Break | Continue) => tl
         )
         

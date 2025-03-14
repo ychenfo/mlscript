@@ -5,13 +5,13 @@
 object A
 object B
 object C
-class AA(aa)
-class BB(bb)
-class AAA(x, y)
-class BBB(x, y)
-class CCC(c)
+class AA(val aa)
+class BB(val bb)
+class AAA(val x, val y)
+class BBB(val x, val y)
+class CCC(val c)
 object None
-class Some(value)
+class Some(val value)
 
 :sjs
 fun test() =
@@ -391,7 +391,7 @@ test()
 
 
 object Nil
-class Cons(h, t)
+class Cons(val h, val t)
 
 :sjs
 fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil

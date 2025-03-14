@@ -4,14 +4,14 @@
 object A
 object B
 object C
-class AA(x)
-class BB(x)
+class AA(val x)
+class BB(val x)
 
 object Nil
-class Cons(h, t)
+class Cons(val h, val t)
 
 object None
-class Some(x)
+class Some(val x)
 
 
 :sjs

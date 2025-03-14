@@ -81,7 +81,7 @@ trait StratVarTrait(stratState: StratVarState):
   lazy val asConsStrat = stratState.asConsStrat
   lazy val uid = stratState.uid
 
-class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser(new SymbolSubst()):
+class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
   val ctx = mutable.Set.from(alwaysDefined)
   val result = mutable.Set.empty[Symbol]
   
@@ -174,7 +174,7 @@ extension (b: Block)
     traverser.result.toList.sortBy(_.uid)
   
   def hasExplicitRet: Boolean =
-    object HasExplicitRetTraverser extends BlockTraverserShallow(new SymbolSubst()):
+    object HasExplicitRetTraverser extends BlockTraverserShallow:
       var flag = false
       override def applyBlock(b: Block): Unit = b match
         case Return(_, imp) => flag = !imp
@@ -228,17 +228,13 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     def apply(s: Symbol) = store.contains(s)
     
-    def init(b: Block) =
-      object Subst extends SymbolSubst:
-        
-        override def mapTopLevelSym(s: TopLevelSymbol): TopLevelSymbol =
-          store += s; s
-        override def mapBlockMemberSym(s: BlockMemberSymbol): BlockMemberSymbol =
-          store += s; s
-        override def mapBuiltInSym(s: BuiltinSymbol): BuiltinSymbol =
-          store += s; s
-      
-      object FreshVarForAllVars extends BlockTraverser(Subst)
+    def init(b: Block) =      
+      object FreshVarForAllVars extends BlockTraverser:
+        override def applySymbol(sym: Symbol): Unit = sym match
+          case _: TopLevelSymbol => store += sym
+          case _: BlockMemberSymbol => store += sym
+          case _: BuiltinSymbol => store += sym
+          case _ => ()
       FreshVarForAllVars.applyBlock(b)
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
@@ -248,19 +244,16 @@ class Deforest(using TL, Raise, Elaborator.State):
   object symToStrat:
     val store = mutable.Map.empty[Symbol, ProdVar]
     
-    def init(p: Block) =
-      if store.isEmpty then
-        object AllVarsSymbolSubst extends SymbolSubst:
-          override def mapBlockMemberSym(s: BlockMemberSymbol): BlockMemberSymbol =
-            store += s -> freshVar(s.nme)._1; s
-          override def mapTempSym(s: TempSymbol): TempSymbol =
-            store += s -> freshVar(s.nme)._1; s
-          override def mapVarSym(s: VarSymbol): VarSymbol =
-            store += s -> freshVar(s.nme)._1; s
-          override def mapTermSym(s: TermSymbol): TermSymbol =
-            store += s -> freshVar(s.nme)._1; s
-        object FreshVarForAllVars extends BlockTraverser(AllVarsSymbolSubst)
-        FreshVarForAllVars.applyBlock(p)
+    def init(p: Block) = if store.isEmpty then
+      object FreshVarForAllVars extends BlockTraverser:
+        override def applySymbol(s: Symbol): Unit = s match
+          case _: BlockMemberSymbol => store += s -> freshVar(s.nme)._1
+          case _: TempSymbol => store += s -> freshVar(s.nme)._1
+          case _: VarSymbol => store += s -> freshVar(s.nme)._1
+          case _: TermSymbol => store += s -> freshVar(s.nme)._1
+          case _ => ()
+          
+      FreshVarForAllVars.applyBlock(p)
     
     // TODO: ctor as a function?
     def getStratOfSym(s: Symbol) =
@@ -577,7 +570,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         val ctorSym = getClsSymOfUid(ctor)
         val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.map(_._2).orElse(dtor.dflt).get
         
-        object GetCtorsTraverser extends BlockTraverser(new SymbolSubst()):
+        object GetCtorsTraverser extends BlockTraverser:
           val ctors = mutable.Set.empty[ResultId]
           override def applyResult(r: Result): Unit =
             handleCtors(
