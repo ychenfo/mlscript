@@ -266,3 +266,128 @@ f(AA(AA(3)))
 
 
 
+:fixme
+:sjs
+fun test(x, y, z, i) =
+  let k = if x is
+    AA(a) then
+      let m = if y is
+        AA(a1) then a1 + i
+      let n = if z is
+        BB(a2) then a2 - i
+      m + n
+  k + i
+test(AA(1), AA(2), BB(3), 4) + test(AA(1), AA(2), BB(3), 4)
+//│ JS (unsanitized):
+//│ let test, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11;
+//│ test = function test(x, y, z, i) {
+//│   let k, param0, a, m, param01, a1, n, param02, a2, tmp12, tmp13, tmp14;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     a = param0;
+//│     if (y instanceof AA1.class) {
+//│       param01 = y.x;
+//│       a1 = param01;
+//│       tmp12 = a1 + i;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     m = tmp12;
+//│     if (z instanceof BB1.class) {
+//│       param02 = z.x;
+//│       a2 = param02;
+//│       tmp13 = a2 - i;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     n = tmp13;
+//│     tmp14 = m + n;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   k = tmp14;
+//│   return k + i
+//│ };
+//│ tmp4 = AA1(1);
+//│ tmp5 = AA1(2);
+//│ tmp6 = BB1(3);
+//│ tmp7 = test(tmp4, tmp5, tmp6, 4);
+//│ tmp8 = AA1(1);
+//│ tmp9 = AA1(2);
+//│ tmp10 = BB1(3);
+//│ tmp11 = test(tmp8, tmp9, tmp10, 4);
+//│ tmp7 + tmp11
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, AA_x_tmp, match_x_rest, match_x_branch_AA, AA_x_tmp1, match_y_rest, match_y_branch_AA, BB_x_tmp, match_z_rest, match_z_branch_BB, AA_x_tmp2, AA_x_tmp3, BB_x_tmp1;
+//│ match_x_branch_AA = function match_x_branch_AA(y, z, i, AA_x1) {
+//│   let param0, a;
+//│   param0 = AA_x1;
+//│   a = param0;
+//│   return runtime.safeCall(y(z, i))
+//│ };
+//│ match_y_branch_AA = function match_y_branch_AA(z, i, AA_x1) {
+//│   let param0, a1, tmp12;
+//│   param0 = AA_x1;
+//│   a1 = param0;
+//│   tmp12 = a1 + i;
+//│   return match_y_rest(z, i, tmp12)
+//│ };
+//│ match_z_branch_BB = function match_z_branch_BB(i, m, BB_x) {
+//│   let param0, a2, tmp12;
+//│   param0 = BB_x;
+//│   a2 = param0;
+//│   tmp12 = a2 - i;
+//│   return match_z_rest(i, m, tmp12, match_x_rest)
+//│ };
+//│ match_x_rest = function match_x_rest(i, tmp12) {
+//│   let k;
+//│   k = tmp12;
+//│   return k + i
+//│ };
+//│ match_y_rest = function match_y_rest(z, i, tmp12) {
+//│   let m;
+//│   m = tmp12;
+//│   runtime.safeCall(z(i, m));
+//│   return match_x_rest(i, tmp_not_in_scope)
+//│ };
+//│ match_z_rest = function match_z_rest(i, m, tmp12) {
+//│   let n, tmp13;
+//│   n = tmp12;
+//│   tmp13 = m + n;
+//│   return match_x_rest(i, tmp13)
+//│ };
+//│ test = function test(x, y, z, i) {
+//│   return runtime.safeCall(x(y, z, i))
+//│ };
+//│ AA_x_tmp = 1;
+//│ tmp4 = (y, z, i) => {
+//│   return match_x_branch_AA(y, z, i, AA_x_tmp)
+//│ };
+//│ AA_x_tmp1 = 2;
+//│ tmp5 = (z, i) => {
+//│   return match_y_branch_AA(z, i, AA_x_tmp1)
+//│ };
+//│ BB_x_tmp = 3;
+//│ tmp6 = (i, m) => {
+//│   return match_z_branch_BB(i, m, BB_x_tmp)
+//│ };
+//│ tmp7 = test(tmp4, tmp5, tmp6, 4);
+//│ AA_x_tmp2 = 1;
+//│ tmp8 = (y, z, i) => {
+//│   return match_x_branch_AA(y, z, i, AA_x_tmp2)
+//│ };
+//│ AA_x_tmp3 = 2;
+//│ tmp9 = (z, i) => {
+//│   return match_y_branch_AA(z, i, AA_x_tmp3)
+//│ };
+//│ BB_x_tmp1 = 3;
+//│ tmp10 = (i, m) => {
+//│   return match_z_branch_BB(i, m, BB_x_tmp1)
+//│ };
+//│ tmp11 = test(tmp8, tmp9, tmp10, 4);
+//│ block$res10 = tmp7 + tmp11;
+//│ undefined
+//│ ═══[RUNTIME ERROR] ReferenceError: tmp_not_in_scope is not defined
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 18
