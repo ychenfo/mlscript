@@ -6,6 +6,7 @@ object B
 object C
 class AA(val x)
 class BB(val x)
+class CC(val x)
 
 object Nil
 class Cons(val h, val t)
@@ -507,22 +508,27 @@ test(p) + f(p)
 
 
 
-
+// TODO: need to include computations
+// from matches multiple levels up.
+// and a `return` is missing: deciding whether
+// a `return` is needed requires looking up all
+// the computations of the specific branch up to
+// all its continutaions.
 :fixme
 :sjs
 fun test(x) =
   let t = if x is
     AA(AA(AA(a))) then a
-    AA(_) then 5
-  t + 5
+    AA(x) then x
+  t + "5"
 fun f(a) = if a is
-  AA(AA) then 0
-let p = AA(AA(AA(10)))
-test(p) + f(p)
+  AA(AA) then "0"
+let p = AA(AA(AA("10")))
+test(p) + f(p) + test(AA("3"))
 //│ JS (unsanitized):
-//│ let test2, f2, p1, tmp30, tmp31, tmp32, tmp33, tmp34;
+//│ let test2, f2, p1, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37;
 //│ test2 = function test(x) {
-//│   let t, param0, param01, param02, a, tmp35;
+//│   let t, param0, x1, param01, param02, a, tmp38;
 //│   if (x instanceof AA1.class) {
 //│     param0 = x.x;
 //│     if (param0 instanceof AA1.class) {
@@ -530,25 +536,27 @@ test(p) + f(p)
 //│       if (param01 instanceof AA1.class) {
 //│         param02 = param01.x;
 //│         a = param02;
-//│         tmp35 = a;
+//│         tmp38 = a;
 //│       } else {
-//│         tmp35 = 5;
+//│         x1 = param0;
+//│         tmp38 = x1;
 //│       }
 //│     } else {
-//│       tmp35 = 5;
+//│       x1 = param0;
+//│       tmp38 = x1;
 //│     }
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   t = tmp35;
-//│   return t + 5
+//│   t = tmp38;
+//│   return t + "5"
 //│ };
 //│ f2 = function f(a) {
 //│   let param0;
 //│   if (a instanceof AA1.class) {
 //│     param0 = a.x;
 //│     if (param0 instanceof AA1.class) {
-//│       return 0
+//│       return "0"
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
@@ -556,38 +564,42 @@ test(p) + f(p)
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp30 = AA1(10);
+//│ tmp30 = AA1("10");
 //│ tmp31 = AA1(tmp30);
 //│ tmp32 = AA1(tmp31);
 //│ p1 = tmp32;
 //│ tmp33 = test2(p1);
 //│ tmp34 = f2(p1);
-//│ tmp33 + tmp34
+//│ tmp35 = tmp33 + tmp34;
+//│ tmp36 = AA1("3");
+//│ tmp37 = test2(tmp36);
+//│ tmp35 + tmp37
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let test2, f2, p1, tmp30, tmp31, tmp32, tmp33, tmp34, AA_x2;
+//│ let test2, f2, p1, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, AA_x2;
 //│ test2 = function test(x) {
-//│   let t, param0, param01, tmp35;
+//│   let t, param0, x1, param01, tmp38;
 //│   if (x instanceof AA1.class) {
 //│     param0 = x.x;
 //│     if (param0 instanceof AA1.class) {
 //│       param01 = param0.x;
-//│       runtime.safeCall(param01())
+//│       runtime.safeCall(param01(param0))
 //│     } else {
-//│       tmp35 = 5;
+//│       x1 = param0;
+//│       tmp38 = x1;
 //│     }
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   t = tmp35;
-//│   return t + 5
+//│   t = tmp38;
+//│   return t + "5"
 //│ };
 //│ f2 = function f(a) {
 //│   let param0;
 //│   if (a instanceof AA1.class) {
 //│     param0 = a.x;
 //│     if (param0 instanceof AA1.class) {
-//│       return 0
+//│       return "0"
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
@@ -595,22 +607,25 @@ test(p) + f(p)
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ AA_x2 = 10;
-//│ tmp30 = () => {
-//│   let param0, a, tmp35;
-//│   param0 = AA_x2;
-//│   a = param0;
-//│   tmp35 = a;
+//│ AA_x2 = "10";
+//│ tmp30 = (param0) => {
+//│   let param01, a, tmp38;
+//│   param01 = AA_x2;
+//│   a = param01;
+//│   tmp38 = a;
 //│ };
 //│ tmp31 = AA1(tmp30);
 //│ tmp32 = AA1(tmp31);
 //│ p1 = tmp32;
 //│ tmp33 = test2(p1);
 //│ tmp34 = f2(p1);
-//│ block$res14 = tmp33 + tmp34;
+//│ tmp35 = tmp33 + tmp34;
+//│ tmp36 = AA1("3");
+//│ tmp37 = test2(tmp36);
+//│ block$res14 = tmp35 + tmp37;
 //│ undefined
-//│ = NaN
+//│ = "undefined5035"
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ ═══[RUNTIME ERROR] The result from deforestated program ("NaN") is different from the one computed by the original prorgam ("15")
-//│ = 15
-//│ p = AA(AA(AA(10)))
+//│ ═══[RUNTIME ERROR] The result from deforestated program (""undefined5035"") is different from the one computed by the original prorgam (""105035"")
+//│ = "105035"
+//│ p = AA(AA(AA("10")))

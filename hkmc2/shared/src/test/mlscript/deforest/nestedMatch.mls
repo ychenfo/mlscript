@@ -6,6 +6,7 @@ object B
 object C
 class AA(val x)
 class BB(val x)
+class CC(val x)
 
 object Nil
 class Cons(val h, val t)
@@ -595,3 +596,126 @@ test(AA(1), AA(2), BB(3), 4) + test(AA(1), AA(2), BB(3), 4)
 //│ = 10
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 10
+
+
+// only the match in the middle is fused
+:sjs
+fun f1(x) = if x is
+  AA(x1) then
+    if x1 is
+      BB(x2) then
+        if x2 is
+          CC(x3) then x3
+fun f2(x) = if x is AA then "f2" + x.x
+fun f3(x) = if x is CC then "f3" + x.x
+fun aa(x) = AA(x)
+let cc = CC("cc")
+f1(aa(BB(cc))) + f2(aa("0")) + f3(cc)
+//│ JS (unsanitized):
+//│ let aa, f11, f21, f31, cc, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81;
+//│ f11 = function f1(x) {
+//│   let param0, x1, param01, x2, param02, x3;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     x1 = param0;
+//│     if (x1 instanceof BB1.class) {
+//│       param01 = x1.x;
+//│       x2 = param01;
+//│       if (x2 instanceof CC1.class) {
+//│         param02 = x2.x;
+//│         x3 = param02;
+//│         return x3
+//│       } else {
+//│         throw new globalThis.Error("match error");
+//│       }
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ f21 = function f2(x) {
+//│   if (x instanceof AA1.class) {
+//│     return "f2" + x.x
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ f31 = function f3(x) {
+//│   if (x instanceof CC1.class) {
+//│     return "f3" + x.x
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ aa = function aa(x) {
+//│   return AA1(x)
+//│ };
+//│ tmp74 = CC1("cc");
+//│ cc = tmp74;
+//│ tmp75 = BB1(cc);
+//│ tmp76 = aa(tmp75);
+//│ tmp77 = f11(tmp76);
+//│ tmp78 = aa("0");
+//│ tmp79 = f21(tmp78);
+//│ tmp80 = tmp77 + tmp79;
+//│ tmp81 = f31(cc);
+//│ tmp80 + tmp81
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let aa, f11, f21, f31, cc, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, BB_x1;
+//│ f11 = function f1(x) {
+//│   let param0, x1;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     x1 = param0;
+//│     return runtime.safeCall(x1())
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ f21 = function f2(x) {
+//│   if (x instanceof AA1.class) {
+//│     return "f2" + x.x
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ f31 = function f3(x) {
+//│   if (x instanceof CC1.class) {
+//│     return "f3" + x.x
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ aa = function aa(x) {
+//│   return AA1(x)
+//│ };
+//│ tmp74 = CC1("cc");
+//│ cc = tmp74;
+//│ BB_x1 = cc;
+//│ tmp75 = () => {
+//│   let param0, x2, param01, x3;
+//│   param0 = BB_x1;
+//│   x2 = param0;
+//│   if (x2 instanceof CC1.class) {
+//│     param01 = x2.x;
+//│     x3 = param01;
+//│     return x3
+//│   } else {
+//│     throw new this.Error("match error");
+//│   }
+//│ };
+//│ tmp76 = aa(tmp75);
+//│ tmp77 = f11(tmp76);
+//│ tmp78 = aa("0");
+//│ tmp79 = f21(tmp78);
+//│ tmp80 = tmp77 + tmp79;
+//│ tmp81 = f31(cc);
+//│ block$res18 = tmp80 + tmp81;
+//│ undefined
+//│ = "ccf20f3cc"
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = "ccf20f3cc"
+//│ cc = CC("cc")
