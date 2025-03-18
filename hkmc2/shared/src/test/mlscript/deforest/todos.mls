@@ -266,6 +266,7 @@ f(AA(AA(3)))
 
 
 
+// FIXME: fused matches should always be considered as in tail positions
 :fixme
 :sjs
 fun test(x, y, z, i) =
@@ -391,3 +392,224 @@ test(AA(1), AA(2), BB(3), 4) + test(AA(1), AA(2), BB(3), 4)
 //│ ═══[RUNTIME ERROR] ReferenceError: tmp_not_in_scope is not defined
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 18
+
+
+// FIXME:
+// - need to include the computation in the `rest` from
+// matches multiple levels up
+// - how to deal with the original `rest` from matches multiple levels up?
+:fixme
+:sjs
+fun test(x) =
+  let t = if x is
+    AA(AA(AA(a))) then a
+  t + 5
+fun f(a) = if a is
+  AA(AA) then 0
+let p = AA(AA(AA(10)))
+test(p) + f(p)
+//│ JS (unsanitized):
+//│ let test1, f1, p, tmp20, tmp21, tmp22, tmp23, tmp24;
+//│ test1 = function test(x) {
+//│   let t, param0, param01, param02, a, tmp25;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       if (param01 instanceof AA1.class) {
+//│         param02 = param01.x;
+//│         a = param02;
+//│         tmp25 = a;
+//│       } else {
+//│         throw new globalThis.Error("match error");
+//│       }
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   t = tmp25;
+//│   return t + 5
+//│ };
+//│ f1 = function f(a) {
+//│   let param0;
+//│   if (a instanceof AA1.class) {
+//│     param0 = a.x;
+//│     if (param0 instanceof AA1.class) {
+//│       return 0
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp20 = AA1(10);
+//│ tmp21 = AA1(tmp20);
+//│ tmp22 = AA1(tmp21);
+//│ p = tmp22;
+//│ tmp23 = test1(p);
+//│ tmp24 = f1(p);
+//│ tmp23 + tmp24
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test1, f1, p, tmp20, tmp21, tmp22, tmp23, tmp24, AA_x1;
+//│ test1 = function test(x) {
+//│   let t, param0, param01;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       runtime.safeCall(param01())
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   t = tmp_not_in_scope;
+//│   return t + 5
+//│ };
+//│ f1 = function f(a) {
+//│   let param0;
+//│   if (a instanceof AA1.class) {
+//│     param0 = a.x;
+//│     if (param0 instanceof AA1.class) {
+//│       return 0
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ AA_x1 = 10;
+//│ tmp20 = () => {
+//│   let param0, a, tmp25;
+//│   param0 = AA_x1;
+//│   a = param0;
+//│   tmp25 = a;
+//│ };
+//│ tmp21 = AA1(tmp20);
+//│ tmp22 = AA1(tmp21);
+//│ p = tmp22;
+//│ tmp23 = test1(p);
+//│ tmp24 = f1(p);
+//│ block$res12 = tmp23 + tmp24;
+//│ undefined
+//│ ═══[RUNTIME ERROR] ReferenceError: tmp_not_in_scope is not defined
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 15
+//│ p = AA(AA(AA(10)))
+
+
+
+
+:expect 15
+:fixme
+:sjs
+fun test(x) =
+  let t = if x is
+    AA(AA(AA(a))) then a
+    AA(_) then 5
+  t + 5
+fun f(a) = if a is
+  AA(AA) then 0
+let p = AA(AA(AA(10)))
+test(p) + f(p)
+//│ JS (unsanitized):
+//│ let test2, f2, p1, tmp30, tmp31, tmp32, tmp33, tmp34;
+//│ test2 = function test(x) {
+//│   let t, param0, param01, param02, a, tmp35;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       if (param01 instanceof AA1.class) {
+//│         param02 = param01.x;
+//│         a = param02;
+//│         tmp35 = a;
+//│       } else {
+//│         tmp35 = 5;
+//│       }
+//│     } else {
+//│       tmp35 = 5;
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   t = tmp35;
+//│   return t + 5
+//│ };
+//│ f2 = function f(a) {
+//│   let param0;
+//│   if (a instanceof AA1.class) {
+//│     param0 = a.x;
+//│     if (param0 instanceof AA1.class) {
+//│       return 0
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp30 = AA1(10);
+//│ tmp31 = AA1(tmp30);
+//│ tmp32 = AA1(tmp31);
+//│ p1 = tmp32;
+//│ tmp33 = test2(p1);
+//│ tmp34 = f2(p1);
+//│ tmp33 + tmp34
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test2, f2, p1, tmp30, tmp31, tmp32, tmp33, tmp34, AA_x2;
+//│ test2 = function test(x) {
+//│   let t, param0, param01, tmp35;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       runtime.safeCall(param01())
+//│     } else {
+//│       tmp35 = 5;
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   t = tmp35;
+//│   return t + 5
+//│ };
+//│ f2 = function f(a) {
+//│   let param0;
+//│   if (a instanceof AA1.class) {
+//│     param0 = a.x;
+//│     if (param0 instanceof AA1.class) {
+//│       return 0
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ AA_x2 = 10;
+//│ tmp30 = () => {
+//│   let param0, a, tmp35;
+//│   param0 = AA_x2;
+//│   a = param0;
+//│   tmp35 = a;
+//│ };
+//│ tmp31 = AA1(tmp30);
+//│ tmp32 = AA1(tmp31);
+//│ p1 = tmp32;
+//│ tmp33 = test2(p1);
+//│ tmp34 = f2(p1);
+//│ block$res14 = tmp33 + tmp34;
+//│ undefined
+//│ ═══[RUNTIME ERROR] Expected: '15', got: 'NaN'
+//│ = NaN
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 15
+//│ p = AA(AA(AA(10)))
