@@ -103,6 +103,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     
     val outerRaise: Raise = summon
     val reportedMessages = mutable.Set.empty[Str]
+    var deforestResult: Opt[Str] = None
     
     if showJS.isSet then
       given Raise =
@@ -196,6 +197,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
                 ErrorReport(msg"Expected: '${expected}', got: '${result}'" -> N :: Nil,
                   source = Diagnostic.Source.Runtime)
               case _ => ()
+              if sym === resSym then deforestResult = S(result)
               result match
               case "undefined" =>
               case "()" =>
@@ -301,6 +303,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
               ErrorReport(msg"Expected: '${expected}', got: '${result}'" -> N :: Nil,
                 source = Diagnostic.Source.Runtime)
             case _ => ()
+            if sym === resSym && deforestFlag.isSet && deforestResult.fold(false)(_ != result) then raise:
+              ErrorReport(
+                msg"The result from deforestated program (\"${deforestResult.get}\") is different from the one computed by the original prorgam (\"${result}\")" -> N :: Nil,
+                source = Diagnostic.Source.Runtime)
             val anon = nme.isEmpty
             result match
             case "undefined" if anon =>

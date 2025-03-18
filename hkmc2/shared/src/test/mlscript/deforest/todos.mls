@@ -391,6 +391,7 @@ test(AA(1), AA(2), BB(3), 4) + test(AA(1), AA(2), BB(3), 4)
 //│ undefined
 //│ ═══[RUNTIME ERROR] ReferenceError: tmp_not_in_scope is not defined
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ ═══[RUNTIME ERROR] The result from deforestated program ("undefined") is different from the one computed by the original prorgam ("18")
 //│ = 18
 
 
@@ -500,13 +501,13 @@ test(p) + f(p)
 //│ undefined
 //│ ═══[RUNTIME ERROR] ReferenceError: tmp_not_in_scope is not defined
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ ═══[RUNTIME ERROR] The result from deforestated program ("undefined") is different from the one computed by the original prorgam ("15")
 //│ = 15
 //│ p = AA(AA(AA(10)))
 
 
 
 
-:expect 15
 :fixme
 :sjs
 fun test(x) =
@@ -608,8 +609,8 @@ test(p) + f(p)
 //│ tmp34 = f2(p1);
 //│ block$res14 = tmp33 + tmp34;
 //│ undefined
-//│ ═══[RUNTIME ERROR] Expected: '15', got: 'NaN'
 //│ = NaN
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ ═══[RUNTIME ERROR] The result from deforestated program ("NaN") is different from the one computed by the original prorgam ("15")
 //│ = 15
 //│ p = AA(AA(AA(10)))
