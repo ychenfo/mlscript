@@ -719,3 +719,127 @@ f1(aa(BB(cc))) + f2(aa("0")) + f3(cc)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = "ccf20f3cc"
 //│ cc = CC("cc")
+
+
+
+:sjs
+fun c(x, y) = if x is
+  AA then
+    let t = if y is
+      A then 2
+    t + x.x
+let y = A
+c(AA(2), y)
+//│ JS (unsanitized):
+//│ let c, y, tmp90;
+//│ c = function c(x, y1) {
+//│   let t, tmp91;
+//│   if (x instanceof AA1.class) {
+//│     if (y1 instanceof A1.class) {
+//│       tmp91 = 2;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     t = tmp91;
+//│     return t + x.x
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ y = A1;
+//│ tmp90 = AA1(2);
+//│ c(tmp90, y)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c, y, tmp90, AA_x5;
+//│ c = function c(x, y1) {
+//│   return runtime.safeCall(x(y1))
+//│ };
+//│ y = (AA_x6) => {
+//│   let t, tmp91;
+//│   tmp91 = 2;
+//│   t = tmp91;
+//│   return t + AA_x6
+//│ };
+//│ AA_x5 = 2;
+//│ tmp90 = (y1) => {
+//│   return runtime.safeCall(y1(AA_x5))
+//│ };
+//│ block$res20 = c(tmp90, y);
+//│ undefined
+//│ = 4
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 4
+//│ y = A
+
+
+:sjs
+fun c(x, y) = if x is
+  AA then
+    let t = if y is
+      A then 2 + x.x
+    t + x.x
+fun c2(y) = if y is A then 3
+let y = A
+c(AA(2), y) + c2(y)
+//│ JS (unsanitized):
+//│ let c1, c21, y1, tmp92, tmp93, tmp94;
+//│ c1 = function c(x, y2) {
+//│   let t, tmp95;
+//│   if (x instanceof AA1.class) {
+//│     if (y2 instanceof A1.class) {
+//│       tmp95 = 2 + x.x;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     t = tmp95;
+//│     return t + x.x
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ c21 = function c2(y2) {
+//│   if (y2 instanceof A1.class) {
+//│     return 3
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ y1 = A1;
+//│ tmp92 = AA1(2);
+//│ tmp93 = c1(tmp92, y1);
+//│ tmp94 = c21(y1);
+//│ tmp93 + tmp94
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c1, c21, y1, tmp92, tmp93, tmp94, AA_x6;
+//│ c1 = function c(x, y2) {
+//│   return runtime.safeCall(x(y2))
+//│ };
+//│ c21 = function c2(y2) {
+//│   if (y2 instanceof A1.class) {
+//│     return 3
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ y1 = A1;
+//│ AA_x6 = 2;
+//│ tmp92 = (y2) => {
+//│   let t, tmp95;
+//│   if (y2 instanceof A1.class) {
+//│     tmp95 = 2 + AA_x6;
+//│   } else {
+//│     throw new this.Error("match error");
+//│   }
+//│   t = tmp95;
+//│   return t + AA_x6
+//│ };
+//│ tmp93 = c1(tmp92, y1);
+//│ tmp94 = c21(y1);
+//│ block$res22 = tmp93 + tmp94;
+//│ undefined
+//│ = 9
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 9
+//│ y = A

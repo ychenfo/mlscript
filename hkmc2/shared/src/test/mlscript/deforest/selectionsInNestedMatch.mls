@@ -407,3 +407,57 @@ f(p())
 //│ = A
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = A
+
+
+
+:sjs
+fun c(x, y) =
+  let t = if x is
+    AA then
+      if A is
+        A then x.x
+  t + y
+c(AA(2), 10)
+//│ JS (unsanitized):
+//│ let c4, tmp24;
+//│ c4 = function c(x, y) {
+//│   let t, scrut, tmp25, tmp26;
+//│   if (x instanceof AA1.class) {
+//│     scrut = A1;
+//│     if (scrut instanceof A1.class) {
+//│       tmp25 = x.x;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     tmp26 = tmp25;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   t = tmp26;
+//│   return t + y
+//│ };
+//│ tmp24 = AA1(2);
+//│ c4(tmp24, 10)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c4, tmp24, AA_x5;
+//│ c4 = function c(x, y) {
+//│   return runtime.safeCall(x(y))
+//│ };
+//│ AA_x5 = 2;
+//│ tmp24 = (y) => {
+//│   let scrut;
+//│   scrut = (y1, AA_x6) => {
+//│     let t, tmp25, tmp26;
+//│     tmp25 = AA_x6;
+//│     tmp26 = tmp25;
+//│     t = tmp26;
+//│     return t + y1
+//│   };
+//│   return runtime.safeCall(scrut(y, AA_x5))
+//│ };
+//│ block$res18 = c4(tmp24, 10);
+//│ undefined
+//│ = 12
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 12
