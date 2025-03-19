@@ -64,7 +64,7 @@ enum DtorExpr:
   case Sel(s: ResultId)
 
 enum CtorFinalDest:
-  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])(val inMatch: Option[ResultId])
+  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])
   case Sel(s: ResultId)
 
 trait FieldSelTrait:
@@ -670,7 +670,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 dtors.head._2,
                 sels.map(_.expr),
                 fieldNameToSymToBeReplaced.toMap -> selectionUidsToSymToBeReplaced.toMap
-              )(matchScrutToParentMatchScrut(dtors.head._1)))
+              ))
             else
               throw Error("more than one consumer")
               None
