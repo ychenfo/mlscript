@@ -89,7 +89,7 @@ f(a, 2) + g(a) + f(BB(3), 2) + f(AA(AA(4)), 5)
 //│   m = tmp11;
 //│   tmp12 = m + 9;
 //│   t = tmp12;
-//│   return t + y
+//│   return t + y;
 //│ };
 //│ f = function f(x, y) {
 //│   let t, param0, b, param01, a1, tmp11;
@@ -198,7 +198,7 @@ f(AA(AA(3)), 9) + f(AA(AA(4)), 10)
 //│   let n, tmp29;
 //│   n = tmp28;
 //│   tmp29 = n + 2;
-//│   return tmp29 + y
+//│   return tmp29 + y;
 //│ };
 //│ match_a_rest1 = function match_a_rest(y, tmp28) {
 //│   let tmp29;
@@ -347,7 +347,7 @@ f(AA(AA(A))) + f(AA(AA(A)))
 //│ match_x_rest1 = function match_x_rest(tmp44) {
 //│   let t;
 //│   t = tmp44;
-//│   return t + 3
+//│   return t + 3;
 //│ };
 //│ f3 = function f(x) {
 //│   return runtime.safeCall(x())

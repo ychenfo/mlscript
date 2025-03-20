@@ -708,6 +708,21 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       case CtorFinalDest.Sel(s) => Nil
     }.toMap
   
+  def parentMatchesUptoAFusingOne(scrutId: ResultId) =
+    def go(scrutId: ResultId): List[ResultId] -> Opt[ResultId] =
+      d.matchScrutToParentMatchScrut(scrutId).fold(Nil -> N): r =>
+        if d.filteredDtors.contains(r)
+        then Nil -> S(r)
+        else
+          val res = go(r)
+          (r :: res._1) -> res._2
+    go(scrutId)
+  
+  def allParentMatches(scrutId: ResultId) =
+    def go(scrutId: ResultId): List[ResultId] =
+      d.matchScrutToParentMatchScrut(scrutId).fold(Nil)(r => r :: go(r))
+    go(scrutId)
+  
   object freeVarsOfNonTransformedMatches:
     val store = mutable.Map.empty[ResultId, List[Symbol]]
     
@@ -721,9 +736,15 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       {
         assert(m.scrut.uid === scrutExprId)
         val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
-        val parentMatchRest = d.matchScrutToParentMatchScrut(m.scrut.uid).flatMap: p =>
-          if !d.filteredDtors.contains(p) then Some(d.matchScrutToMatchBlock(p).rest)
-          else None
+        // val parentMatchRest = d.matchScrutToParentMatchScrut(m.scrut.uid).flatMap: p =>
+        //   if !d.filteredDtors.contains(p) then Some(d.matchScrutToMatchBlock(p).rest)
+        //   else None
+        // val parentMatchRest = parentMatchesUptoAFusingOne(m.scrut.uid).foldRight[Opt[Block]](None): (p, acc) =>
+        //   acc.fold(Some(d.matchScrutToMatchBlock(p).rest))(accBlk => Some(Begin(d.matchScrutToMatchBlock(p).rest, accBlk)))
+        val parentMatchRest = allParentMatches(m.scrut.uid).foldRight[Block](End("")): (p, acc) =>
+          Begin(d.matchScrutToMatchBlock(p).rest, acc)
+          
+          
         val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrutExprId).keys
         
         val traverser = DeforestationFreeVarTraverser(using nonFreeVars + l, selReplacementNotForThisSel, toBeReplacedForAllBranches(scrutExprId).values)
@@ -732,7 +753,8 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
           // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
           // Also take care of the `rest` of its parent match block if it's not getting fused.
-          val realArm = Begin(a, parentMatchRest.fold(rest)(p => Begin(rest, p))).flattened
+          // val realArm = Begin(a, parentMatchRest.fold(rest)(p => Begin(rest, p))).flattened
+          val realArm = Begin(a, Begin(rest, parentMatchRest)).flattened
           traverser.applyBlock(realArm)
         
         traverser.result.toList.sortBy(_.uid)
@@ -841,31 +863,64 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       store.get(s) match
         case Some(f, b) => f.map(_.sym) -> b
         case None if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).size == 1) =>
-          val parentRest = d.matchScrutToParentMatchScrut(s).flatMap: p =>
-            if !d.filteredDtors.contains(p) then Some(None, d.matchScrutToMatchBlock(p).rest)
-            else Some(getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest))
+          // val parentRest = d.matchScrutToParentMatchScrut(s).flatMap: p =>
+          //   if !d.filteredDtors.contains(p) then Some(None, d.matchScrutToMatchBlock(p).rest)
+          //   else Some(getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest))
+          
+          val parentRestInfo = parentMatchesUptoAFusingOne(s) match
+            case ps -> Some(theFusingOne) =>
+              ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } ->
+              getOrElseUpdate(theFusingOne, d.matchScrutToMatchBlock(theFusingOne).rest)
+            case ps -> None => 
+              ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } -> None
+          
           val res =
             N ->
-            (parentRest match
-              case None => applyBlock(restBeforeRewriting)
-              case Some(Some(s), b) => Begin(
+            (parentRestInfo match
+              case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
+              case bd -> (Some(s), b) => Begin(
                 applyBlock(restBeforeRewriting),
-                Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
-              case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
-            )
+                Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false)) // FIXME: b is a pre-rewritten block, should use another f.v. traverser
+              case bd -> (None, b) => applyBlock(Begin(restBeforeRewriting, Begin(bd, b))
+            ))
+          
+          // val res =
+          //   N ->
+          //   (parentRest match
+          //     case None => applyBlock(restBeforeRewriting)
+          //     case Some(Some(s), b) => Begin(
+          //       applyBlock(restBeforeRewriting),
+          //       Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+          //     case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
+          //   )
           
           store += s -> res
           res
         case _ => // now need to build a new function and update the store
-          val parentRest = d.matchScrutToParentMatchScrut(s).flatMap: p =>
-            if !d.filteredDtors.contains(p) then Some(None, d.matchScrutToMatchBlock(p).rest)
-            else Some(getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest))
-          val restRewritten = parentRest match
-            case None => applyBlock(restBeforeRewriting)
-            case Some(Some(s), b) => Begin(
+          // val parentRest = d.matchScrutToParentMatchScrut(s).flatMap: p =>
+          //   if !d.filteredDtors.contains(p) then Some(None, d.matchScrutToMatchBlock(p).rest)
+          //   else Some(getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest))
+          
+          val parentRestInfo = parentMatchesUptoAFusingOne(s) match
+            case ps -> Some(theFusingOne) =>
+              ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } ->
+              getOrElseUpdate(theFusingOne, d.matchScrutToMatchBlock(theFusingOne).rest)
+            case ps -> None => 
+              ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } -> None
+          
+          // val restRewritten = parentRest match
+          //   case None => applyBlock(restBeforeRewriting)
+          //   case Some(Some(s), b) => Begin(
+          //     applyBlock(restBeforeRewriting),
+          //     Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+          //   case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
+          
+          val restRewritten = parentRestInfo match
+            case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
+            case bd -> (Some(s), b) => Begin(
               applyBlock(restBeforeRewriting),
-              Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
-            case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
+              Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false)) // FIXME: b is a pre-rewritten block, should use another f.v. traverser
+            case bd -> (None, b) => applyBlock(Begin(restBeforeRewriting, Begin(bd, b)))
           
           val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
           val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
@@ -890,10 +945,12 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
   
   override def applyBlock(b: Block): Block = b match
     case mat@Match(scrut, arms, dflt, rest) if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) =>
-      val parentMatchRest = d.matchScrutToParentMatchScrut(scrut.uid).flatMap: p =>
-        if !d.filteredDtors.contains(p) then Some(d.matchScrutToMatchBlock(p).rest)
-        else None
-      val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || parentMatchRest.fold(false)(_.hasExplicitRet)
+      // val parentMatchRest = d.matchScrutToParentMatchScrut(scrut.uid).flatMap: p =>
+      //   if !d.filteredDtors.contains(p) then Some(d.matchScrutToMatchBlock(p).rest)
+      //   else None
+      val oneOfParentMatchRestHasExplicitRet = allParentMatches(scrut.uid).foldRight(false) { (pid, acc) => acc || d.matchScrutToMatchBlock(pid).rest.hasExplicitRet }
+      // val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || parentMatchRest.fold(false)(_.hasExplicitRet)
+      val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || oneOfParentMatchRestHasExplicitRet
       val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
       Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
     case _ => super.applyBlock(b)
