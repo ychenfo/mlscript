@@ -843,3 +843,121 @@ c(AA(2), y) + c2(y)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 9
 //│ y = A
+
+
+// need to include computations of `rest` from more than one levels of parent matches
+:sjs
+fun test(x) =
+  let t = if x is
+    AA(AA(AA(a))) then a
+    AA(x) then x
+  t + "5"
+fun f(a) = if a is
+  AA(AA) then "0"
+let p = AA(AA(AA("10")))
+test(p) + f(p) + test(AA("3"))
+//│ JS (unsanitized):
+//│ let test1, f5, p, tmp98, tmp99, tmp100, tmp101, tmp102, tmp103, tmp104, tmp105;
+//│ test1 = function test(x) {
+//│   let t, param0, x1, param01, param02, a1, tmp106;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       if (param01 instanceof AA1.class) {
+//│         param02 = param01.x;
+//│         a1 = param02;
+//│         tmp106 = a1;
+//│       } else {
+//│         x1 = param0;
+//│         tmp106 = x1;
+//│       }
+//│     } else {
+//│       x1 = param0;
+//│       tmp106 = x1;
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   t = tmp106;
+//│   return t + "5"
+//│ };
+//│ f5 = function f(a1) {
+//│   let param0;
+//│   if (a1 instanceof AA1.class) {
+//│     param0 = a1.x;
+//│     if (param0 instanceof AA1.class) {
+//│       return "0"
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp98 = AA1("10");
+//│ tmp99 = AA1(tmp98);
+//│ tmp100 = AA1(tmp99);
+//│ p = tmp100;
+//│ tmp101 = test1(p);
+//│ tmp102 = f5(p);
+//│ tmp103 = tmp101 + tmp102;
+//│ tmp104 = AA1("3");
+//│ tmp105 = test1(tmp104);
+//│ tmp103 + tmp105
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test1, f5, p, tmp98, tmp99, tmp100, tmp101, tmp102, tmp103, tmp104, tmp105, AA_x7;
+//│ test1 = function test(x) {
+//│   let t, param0, x1, param01, tmp106;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       return runtime.safeCall(param01(param0))
+//│     } else {
+//│       x1 = param0;
+//│       tmp106 = x1;
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   t = tmp106;
+//│   return t + "5"
+//│ };
+//│ f5 = function f(a1) {
+//│   let param0;
+//│   if (a1 instanceof AA1.class) {
+//│     param0 = a1.x;
+//│     if (param0 instanceof AA1.class) {
+//│       return "0"
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ AA_x7 = "10";
+//│ tmp98 = (param0) => {
+//│   let t, param01, a1, tmp106;
+//│   param01 = AA_x7;
+//│   a1 = param01;
+//│   tmp106 = a1;
+//│   t = tmp106;
+//│   return t + "5"
+//│ };
+//│ tmp99 = AA1(tmp98);
+//│ tmp100 = AA1(tmp99);
+//│ p = tmp100;
+//│ tmp101 = test1(p);
+//│ tmp102 = f5(p);
+//│ tmp103 = tmp101 + tmp102;
+//│ tmp104 = AA1("3");
+//│ tmp105 = test1(tmp104);
+//│ block$res24 = tmp103 + tmp105;
+//│ undefined
+//│ = "105035"
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = "105035"
+//│ p = AA(AA(AA("10")))
