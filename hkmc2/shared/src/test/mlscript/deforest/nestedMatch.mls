@@ -961,3 +961,98 @@ test(p) + f(p) + test(AA("3"))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = "105035"
 //│ p = AA(AA(AA("10")))
+
+
+
+
+:sjs
+fun f(x, y) =
+  let tmp = BB(y + 1)
+  if tmp is
+    BB then
+      let m = if x is
+        AA then
+          if AA(2) is
+            AA(yf) then yf
+      if AA(3) is
+        AA then m + tmp.x
+let aa = AA(3)
+f(aa, 3) + f(aa, 4)
+//│ JS (unsanitized):
+//│ let f6, aa1, tmp114, tmp115, tmp116;
+//│ f6 = function f(x, y2) {
+//│   let tmp117, m, scrut, param0, yf, scrut1, tmp118, tmp119, tmp120, tmp121;
+//│   tmp118 = y2 + 1;
+//│   tmp119 = BB1(tmp118);
+//│   tmp117 = tmp119;
+//│   if (tmp117 instanceof BB1.class) {
+//│     if (x instanceof AA1.class) {
+//│       scrut = AA1(2);
+//│       if (scrut instanceof AA1.class) {
+//│         param0 = scrut.x;
+//│         yf = param0;
+//│         tmp120 = yf;
+//│       } else {
+//│         throw new globalThis.Error("match error");
+//│       }
+//│       tmp121 = tmp120;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     m = tmp121;
+//│     scrut1 = AA1(3);
+//│     if (scrut1 instanceof AA1.class) {
+//│       return m + tmp117.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp114 = AA1(3);
+//│ aa1 = tmp114;
+//│ tmp115 = f6(aa1, 3);
+//│ tmp116 = f6(aa1, 4);
+//│ tmp115 + tmp116
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let f6, aa1, tmp114, tmp115, tmp116, AA_x_unused;
+//│ f6 = function f(x, y2) {
+//│   let tmp117, tmp118, tmp119, BB_x2;
+//│   tmp118 = y2 + 1;
+//│   BB_x2 = tmp118;
+//│   tmp119 = (x1) => {
+//│     return runtime.safeCall(x1(BB_x2))
+//│   };
+//│   tmp117 = tmp119;
+//│   return runtime.safeCall(tmp117(x))
+//│ };
+//│ AA_x_unused = 3;
+//│ tmp114 = (BB_x2) => {
+//│   let scrut, AA_x8;
+//│   AA_x8 = 2;
+//│   scrut = (BB_x3) => {
+//│     let m, param0, yf, scrut1, tmp117, tmp118, AA_x_unused1;
+//│     param0 = AA_x8;
+//│     yf = param0;
+//│     tmp117 = yf;
+//│     tmp118 = tmp117;
+//│     m = tmp118;
+//│     AA_x_unused1 = 3;
+//│     scrut1 = (m1, BB_x4) => {
+//│       return m1 + BB_x4
+//│     };
+//│     return runtime.safeCall(scrut1(m, BB_x3))
+//│   };
+//│   return runtime.safeCall(scrut(BB_x2))
+//│ };
+//│ aa1 = tmp114;
+//│ tmp115 = f6(aa1, 3);
+//│ tmp116 = f6(aa1, 4);
+//│ block$res26 = tmp115 + tmp116;
+//│ undefined
+//│ = 13
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 13
+//│ aa = AA(3)

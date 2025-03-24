@@ -880,7 +880,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
               case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
               case bd -> (Some(s), b) => Begin(
                 applyBlock(restBeforeRewriting),
-                Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false)) // FIXME: b is a pre-rewritten block, should use another f.v. traverser
+                Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
               case bd -> (None, b) => applyBlock(Begin(restBeforeRewriting, Begin(bd, b))
             ))
           
@@ -903,9 +903,13 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           
           val parentRestInfo = parentMatchesUptoAFusingOne(s) match
             case ps -> Some(theFusingOne) =>
+              // return the original rests from unfused parent matches,
+              // and the function symbol for the `rest` of the fusing parent match (if any)
+              // and the rewritten `rest` block of that fusing parent match
               ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } ->
               getOrElseUpdate(theFusingOne, d.matchScrutToMatchBlock(theFusingOne).rest)
             case ps -> None => 
+              // return the original rests from unfused parent matches, and none (meaning that there is no fusing parent match)  
               ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } -> None
           
           // val restRewritten = parentRest match
@@ -919,7 +923,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
             case bd -> (Some(s), b) => Begin(
               applyBlock(restBeforeRewriting),
-              Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false)) // FIXME: b is a pre-rewritten block, should use another f.v. traverser
+              Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
             case bd -> (None, b) => applyBlock(Begin(restBeforeRewriting, Begin(bd, b)))
           
           val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
