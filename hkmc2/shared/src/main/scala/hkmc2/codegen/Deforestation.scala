@@ -881,8 +881,8 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
               case bd -> (Some(s), b) => Begin(
                 applyBlock(restBeforeRewriting),
                 Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
-              case bd -> (None, b) => applyBlock(Begin(restBeforeRewriting, Begin(bd, b))
-            ))
+              case bd -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
+            )
           
           // val res =
           //   N ->
@@ -924,7 +924,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             case bd -> (Some(s), b) => Begin(
               applyBlock(restBeforeRewriting),
               Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
-            case bd -> (None, b) => applyBlock(Begin(restBeforeRewriting, Begin(bd, b)))
+            case bd -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
           
           val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
           val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
