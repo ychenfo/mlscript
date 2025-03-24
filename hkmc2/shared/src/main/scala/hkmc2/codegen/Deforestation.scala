@@ -81,6 +81,12 @@ trait StratVarTrait(stratState: StratVarState):
   lazy val asConsStrat = stratState.asConsStrat
   lazy val uid = stratState.uid
 
+
+// Compute free vars for a block, without considering deforestation, used on transformed blocks
+// This means that for matches we don't need to consider the extra
+// free vars that may be introduced by deforestation:
+// 1. the free vars from the `rest` of the their parent matches
+// 2. the free vars caused by the substitution of selections of scrutinees of their parent matches
 class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
   val ctx = mutable.Set.from(alwaysDefined)
   val result = mutable.Set.empty[Symbol]
@@ -91,9 +97,7 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
       (arms.map(_._2) ++ dflt).foreach: a =>
         // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
         // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
-        // this also makes sure that the free vars in the `rest` of outter
-        // matches can be counted as free vars for the inner match
-        val realArm = Begin(a, rest).flattened
+        val realArm = Begin(a, rest)
         applyBlock(realArm)
 
     case Assign(lhs, rhs, rest) =>
@@ -132,6 +136,14 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
     applyBlock(l.body)
     ctx --= paramSymbols
 
+// Compute free vars for a Match block, considering deforestations. Used on non-transformed blocks
+// Make use of `freeVarsOfNonTransformedMatches`, which computes the free vars _after transformation_
+// from non-transformed matches (either fusing or un-fusing matches).
+// Sources of additional free vars for fusing matches:
+//   - the free vars from the `rest` of the their parent matches
+//   - the free vars caused by the substitution of selections of scrutinees of their parent matches
+// Otherwise, additional free vars come from fusing matches that are contained in the block,
+// and this is handled by freeVarsOfNonTransformedMatches
 class DeforestationFreeVarTraverser(using
   alwaysDefined: Set[Symbol],
   selsToBeReplaced: Map[ResultId, Symbol] = Map.empty,
@@ -143,7 +155,8 @@ class DeforestationFreeVarTraverser(using
     case m@Match(scrut, arms, dflt, rest) =>
       result ++= dt.freeVarsOfNonTransformedMatches(scrut.uid, m)
       
-      // scruts of sub-matches are also free vars
+      // sub-matches' scruts (which are not included in freeVarsOfNonTransformedMatches)
+      // are also free vars
       val Value.Ref(l) = scrut
       if !ctx(l) then result += l
       
@@ -736,11 +749,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       {
         assert(m.scrut.uid === scrutExprId)
         val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
-        // val parentMatchRest = d.matchScrutToParentMatchScrut(m.scrut.uid).flatMap: p =>
-        //   if !d.filteredDtors.contains(p) then Some(d.matchScrutToMatchBlock(p).rest)
-        //   else None
-        // val parentMatchRest = parentMatchesUptoAFusingOne(m.scrut.uid).foldRight[Opt[Block]](None): (p, acc) =>
-        //   acc.fold(Some(d.matchScrutToMatchBlock(p).rest))(accBlk => Some(Begin(d.matchScrutToMatchBlock(p).rest, accBlk)))
+
         val parentMatchRest = allParentMatches(m.scrut.uid).foldRight[Block](End("")): (p, acc) =>
           Begin(d.matchScrutToMatchBlock(p).rest, acc)
           
@@ -752,8 +761,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
         (arms.map(_._2) ++ dflt).foreach: a =>
           // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
           // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
-          // Also take care of the `rest` of its parent match block if it's not getting fused.
-          // val realArm = Begin(a, parentMatchRest.fold(rest)(p => Begin(rest, p))).flattened
+          // Also take care of the `rest`s of its parent match blocks.
           val realArm = Begin(a, Begin(rest, parentMatchRest)).flattened
           traverser.applyBlock(realArm)
         
@@ -863,10 +871,6 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       store.get(s) match
         case Some(f, b) => f.map(_.sym) -> b
         case None if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).size == 1) =>
-          // val parentRest = d.matchScrutToParentMatchScrut(s).flatMap: p =>
-          //   if !d.filteredDtors.contains(p) then Some(None, d.matchScrutToMatchBlock(p).rest)
-          //   else Some(getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest))
-          
           val parentRestInfo = parentMatchesUptoAFusingOne(s) match
             case ps -> Some(theFusingOne) =>
               ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } ->
@@ -876,31 +880,22 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           
           val res =
             N ->
+            // bd: original `rest`s of non-fusing parent matches
             (parentRestInfo match
+              // None: there is no fusing parent match
               case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
+              // (Some(s), b): there is a fusing parent match, and its `rest` is extracted into a function with symbol `s`,
+              // and the transformed `rest` is b
               case bd -> (Some(s), b) => Begin(
                 applyBlock(restBeforeRewriting),
                 Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+              // (None, b): there is a fusing parent match, and its `rest` is not extracted into a function
               case bd -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
             )
           
-          // val res =
-          //   N ->
-          //   (parentRest match
-          //     case None => applyBlock(restBeforeRewriting)
-          //     case Some(Some(s), b) => Begin(
-          //       applyBlock(restBeforeRewriting),
-          //       Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
-          //     case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
-          //   )
-          
           store += s -> res
           res
-        case _ => // now need to build a new function and update the store
-          // val parentRest = d.matchScrutToParentMatchScrut(s).flatMap: p =>
-          //   if !d.filteredDtors.contains(p) then Some(None, d.matchScrutToMatchBlock(p).rest)
-          //   else Some(getOrElseUpdate(p, d.matchScrutToMatchBlock(p).rest))
-          
+        case _ => // now need to build a new function and update the store          
           val parentRestInfo = parentMatchesUptoAFusingOne(s) match
             case ps -> Some(theFusingOne) =>
               // return the original rests from unfused parent matches,
@@ -911,13 +906,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             case ps -> None => 
               // return the original rests from unfused parent matches, and none (meaning that there is no fusing parent match)  
               ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } -> None
-          
-          // val restRewritten = parentRest match
-          //   case None => applyBlock(restBeforeRewriting)
-          //   case Some(Some(s), b) => Begin(
-          //     applyBlock(restBeforeRewriting),
-          //     Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
-          //   case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
+
           
           val restRewritten = parentRestInfo match
             case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
@@ -949,11 +938,9 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
   
   override def applyBlock(b: Block): Block = b match
     case mat@Match(scrut, arms, dflt, rest) if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) =>
-      // val parentMatchRest = d.matchScrutToParentMatchScrut(scrut.uid).flatMap: p =>
-      //   if !d.filteredDtors.contains(p) then Some(d.matchScrutToMatchBlock(p).rest)
-      //   else None
+      // since all fusing matches will be considered to be in the tail position,
+      // if any of the parent `rest`s has explicit return, the rewritten match will have explicit return
       val oneOfParentMatchRestHasExplicitRet = allParentMatches(scrut.uid).foldRight(false) { (pid, acc) => acc || d.matchScrutToMatchBlock(pid).rest.hasExplicitRet }
-      // val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || parentMatchRest.fold(false)(_.hasExplicitRet)
       val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || oneOfParentMatchRestHasExplicitRet
       val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
       Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
