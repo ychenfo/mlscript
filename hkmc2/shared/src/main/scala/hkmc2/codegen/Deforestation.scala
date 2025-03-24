@@ -168,7 +168,7 @@ extension (b: Block)
         case _ => super.applyValue(v)
     ReplaceLocalSymTransformer.applyBlock(b)
 
-  def sortedFvs(using alwaysDefined: Set[Symbol]) =
+  def sortedFvsForTransformedBlocks(using alwaysDefined: Set[Symbol]) =
     val traverser = FreeVarTraverser(alwaysDefined)
     traverser.applyBlock(b)
     traverser.result.toList.sortBy(_.uid)
@@ -792,7 +792,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
                 Return(
                   Call(
                     Value.Ref(f),
-                    rewrittenRest.sortedFvs.map(a => Arg(false, Value.Ref(a))))(true, false),
+                    rewrittenRest.sortedFvsForTransformedBlocks.map(a => Arg(false, Value.Ref(a))))(true, false),
                   false
                 )
               ).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
@@ -880,7 +880,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
               case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
               case bd -> (Some(s), b) => Begin(
                 applyBlock(restBeforeRewriting),
-                Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false)) // FIXME: b is a pre-rewritten block, should use another f.v. traverser
+                Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false)) // FIXME: b is a pre-rewritten block, should use another f.v. traverser
               case bd -> (None, b) => applyBlock(Begin(restBeforeRewriting, Begin(bd, b))
             ))
           
@@ -890,7 +890,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           //     case None => applyBlock(restBeforeRewriting)
           //     case Some(Some(s), b) => Begin(
           //       applyBlock(restBeforeRewriting),
-          //       Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+          //       Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
           //     case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
           //   )
           
@@ -912,19 +912,19 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           //   case None => applyBlock(restBeforeRewriting)
           //   case Some(Some(s), b) => Begin(
           //     applyBlock(restBeforeRewriting),
-          //     Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+          //     Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
           //   case Some(None, b) => Begin(applyBlock(restBeforeRewriting), b)
           
           val restRewritten = parentRestInfo match
             case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
             case bd -> (Some(s), b) => Begin(
               applyBlock(restBeforeRewriting),
-              Return(Call(Value.Ref(s), b.sortedFvs(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false)) // FIXME: b is a pre-rewritten block, should use another f.v. traverser
+              Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false)) // FIXME: b is a pre-rewritten block, should use another f.v. traverser
             case bd -> (None, b) => applyBlock(Begin(restBeforeRewriting, Begin(bd, b)))
           
           val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
           val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
-          val freeVarsAndTheirNewSyms = restRewritten.sortedFvs(using nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
+          val freeVarsAndTheirNewSyms = restRewritten.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
           
           val newFunDef = FunDefn(
             N,
