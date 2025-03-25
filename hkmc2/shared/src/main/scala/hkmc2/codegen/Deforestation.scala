@@ -870,32 +870,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
     def getOrElseUpdate(s: ResultId, restBeforeRewriting: Block): Opt[Symbol] -> Block =
       store.get(s) match
         case Some(f, b) => f.map(_.sym) -> b
-        case None if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).size == 1) =>
-          val parentRestInfo = parentMatchesUptoAFusingOne(s) match
-            case ps -> Some(theFusingOne) =>
-              ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } ->
-              getOrElseUpdate(theFusingOne, d.matchScrutToMatchBlock(theFusingOne).rest)
-            case ps -> None => 
-              ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } -> None
-          
-          val res =
-            N ->
-            // bd: original `rest`s of non-fusing parent matches
-            (parentRestInfo match
-              // None: there is no fusing parent match
-              case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
-              // (Some(s), b): there is a fusing parent match, and its `rest` is extracted into a function with symbol `s`,
-              // and the transformed `rest` is b
-              case bd -> (Some(s), b) => Begin(
-                applyBlock(restBeforeRewriting),
-                Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
-              // (None, b): there is a fusing parent match, and its `rest` is not extracted into a function
-              case bd -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
-            )
-          
-          store += s -> res
-          res
-        case _ => // now need to build a new function and update the store          
+        case _ =>
           val parentRestInfo = parentMatchesUptoAFusingOne(s) match
             case ps -> Some(theFusingOne) =>
               // return the original rests from unfused parent matches,
@@ -906,27 +881,36 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             case ps -> None => 
               // return the original rests from unfused parent matches, and none (meaning that there is no fusing parent match)  
               ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } -> None
-
           
+          // bd: original `rest`s of non-fusing parent matches
           val restRewritten = parentRestInfo match
+            // None: there is no fusing parent match
             case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
+            // (Some(s), b): there is a fusing parent match, and its `rest` is extracted into a function with symbol `s`,
+            // and the transformed `rest` is b
             case bd -> (Some(s), b) => Begin(
               applyBlock(restBeforeRewriting),
               Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+            // (None, b): there is a fusing parent match, and its `rest` is not extracted into a function
             case bd -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
           
-          val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
-          val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
-          val freeVarsAndTheirNewSyms = restRewritten.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
-          
-          val newFunDef = FunDefn(
-            N,
-            sym,
-            ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N) :: Nil,
-            restRewritten.replaceSymbols(freeVarsAndTheirNewSyms)
-          )
-          store += s -> (Some(newFunDef) -> restRewritten)
-          Some(sym) -> restRewritten
+          // no need to build a new function for empty rest, or if the rest is only going to be used once
+          if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).size == 1) then
+            val res = N -> restRewritten
+            store += s -> res
+            res
+          else // build a new function and update the store
+            val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
+            val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
+            val freeVarsAndTheirNewSyms = restRewritten.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
+            val newFunDef = FunDefn(
+              N,
+              sym,
+              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N) :: Nil,
+              restRewritten.replaceSymbols(freeVarsAndTheirNewSyms)
+            )
+            store += s -> (Some(newFunDef) -> restRewritten)
+            Some(sym) -> restRewritten
     
     def getAllFunDefs: Block => Block =
       store.values.foldRight(identity: Block => Block):
