@@ -237,18 +237,18 @@ class Deforest(using TL, Raise, Elaborator.State):
   // these are never considered as free vars (because of their symbol type)
   // consider TopLevelSym, BlockMemberSymbols and BuiltInSyms as globally defined...
   object globallyDefinedVars:
-    val store = mutable.Set.empty[Symbol]
+    val store = mutable.Set.from[Symbol](State.globalThisSymbol ::State.runtimeSymbol :: Nil)
     
     def apply(s: Symbol) = store.contains(s)
     
     def init(b: Block) =      
-      object FreshVarForAllVars extends BlockTraverser:
+      (new BlockTraverser:
         override def applySymbol(sym: Symbol): Unit = sym match
           case _: TopLevelSymbol => store += sym
           case _: BlockMemberSymbol => store += sym
           case _: BuiltinSymbol => store += sym
           case _ => ()
-      FreshVarForAllVars.applyBlock(b)
+      ).applyBlock(b)
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
   

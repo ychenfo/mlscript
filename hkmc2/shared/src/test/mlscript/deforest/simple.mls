@@ -1916,3 +1916,47 @@ mapHead(x => x, AAA(1, AAA(2, None)))
 //│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
+
+
+:sjs
+fun test() =
+  let k
+  if A is
+    A then
+      k = 3
+  k + 2
+test()
+//│ JS (unsanitized):
+//│ let test8;
+//│ test8 = function test() {
+//│   let k, scrut, tmp105;
+//│   k = undefined;
+//│   scrut = A1;
+//│   if (scrut instanceof A1.class) {
+//│     k = 3;
+//│     tmp105 = runtime.Unit;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   return k + 2
+//│ };
+//│ test8()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test8;
+//│ test8 = function test() {
+//│   let k, scrut;
+//│   k = undefined;
+//│   scrut = () => {
+//│     let tmp105;
+//│     k = 3;
+//│     tmp105 = runtime.Unit;
+//│     return k + 2
+//│   };
+//│   return runtime.safeCall(scrut())
+//│ };
+//│ block$res59 = test8();
+//│ undefined
+//│ = 5
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 5
