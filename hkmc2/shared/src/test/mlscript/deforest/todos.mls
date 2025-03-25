@@ -629,3 +629,109 @@ f(AA(3), 3, true, 10) + f(AA(5), 4, false, 20)
 //│ = 41
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 41
+
+
+
+:sjs
+fun test(n, p, q) =
+  n +
+  if AA(0) is
+    AA then
+      let k = if p is
+        AA(x) then x
+      if q is
+        AA(y) then k + y
+test(3, AA(2), AA(3)) + test(3, AA(2), AA(3))
+//│ JS (unsanitized):
+//│ let test2, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43;
+//│ test2 = function test(n, p1, q) {
+//│   let scrut, k, param0, x, param01, y, tmp44, tmp45, tmp46;
+//│   scrut = AA1(0);
+//│   if (scrut instanceof AA1.class) {
+//│     if (p1 instanceof AA1.class) {
+//│       param0 = p1.x;
+//│       x = param0;
+//│       tmp44 = x;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     k = tmp44;
+//│     if (q instanceof AA1.class) {
+//│       param01 = q.x;
+//│       y = param01;
+//│       tmp45 = k + y;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     tmp46 = tmp45;
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   return n + tmp46
+//│ };
+//│ tmp38 = AA1(2);
+//│ tmp39 = AA1(3);
+//│ tmp40 = test2(3, tmp38, tmp39);
+//│ tmp41 = AA1(2);
+//│ tmp42 = AA1(3);
+//│ tmp43 = test2(3, tmp41, tmp42);
+//│ tmp40 + tmp43
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test2, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, AA_x_tmp4, match_p_rest, match_p_branch_AA, AA_x_tmp5, match_q_rest, match_q_branch_AA, AA_x_tmp6, AA_x_tmp7;
+//│ match_p_branch_AA = function match_p_branch_AA(n, q, AA_x2) {
+//│   let param0, x, tmp44;
+//│   param0 = AA_x2;
+//│   x = param0;
+//│   tmp44 = x;
+//│   return match_p_rest(n, q, tmp44)
+//│ };
+//│ match_q_branch_AA = function match_q_branch_AA(n, k, AA_x2) {
+//│   let param0, y, tmp44;
+//│   param0 = AA_x2;
+//│   y = param0;
+//│   tmp44 = k + y;
+//│   return match_q_rest(n, tmp44)
+//│ };
+//│ match_p_rest = function match_p_rest(n, q, tmp44) {
+//│   let k;
+//│   k = tmp44;
+//│   return runtime.safeCall(q(n, k));
+//│   return n + tmp_not_in_scope;
+//│ };
+//│ match_q_rest = function match_q_rest(n, tmp44) {
+//│   let tmp45;
+//│   tmp45 = tmp44;
+//│   return n + tmp45;
+//│ };
+//│ test2 = function test(n, p1, q) {
+//│   let scrut, AA_x_unused2;
+//│   AA_x_unused2 = 0;
+//│   scrut = (n1, p2, q1) => {
+//│     return runtime.safeCall(p2(n1, q1))
+//│   };
+//│   return runtime.safeCall(scrut(n, p1, q))
+//│ };
+//│ AA_x_tmp4 = 2;
+//│ tmp38 = (n, q) => {
+//│   return match_p_branch_AA(n, q, AA_x_tmp4)
+//│ };
+//│ AA_x_tmp5 = 3;
+//│ tmp39 = (n, k) => {
+//│   return match_q_branch_AA(n, k, AA_x_tmp5)
+//│ };
+//│ tmp40 = test2(3, tmp38, tmp39);
+//│ AA_x_tmp6 = 2;
+//│ tmp41 = (n, q) => {
+//│   return match_p_branch_AA(n, q, AA_x_tmp6)
+//│ };
+//│ AA_x_tmp7 = 3;
+//│ tmp42 = (n, k) => {
+//│   return match_q_branch_AA(n, k, AA_x_tmp7)
+//│ };
+//│ tmp43 = test2(3, tmp41, tmp42);
+//│ block$res16 = tmp40 + tmp43;
+//│ undefined
+//│ = 16
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 16
