@@ -672,8 +672,8 @@ class Deforest(using TL, Raise, Elaborator.State):
                     fieldNameToSymToBeReplaced.updateWith(fs.field):
                       case Some(v) => Some(v)
                       case None => Some(if varSymInsteadOfTempSym
-                        then VarSymbol(Tree.Ident(s"${c.name}_${fs.field.name}"))
-                        else TempSymbol(N, s"${c.name}_${fs.field.name}"))
+                        then VarSymbol(Tree.Ident(s"_deforest_${c.name}_${fs.field.name}"))
+                        else TempSymbol(N, s"_deforest_${c.name}_${fs.field.name}"))
                     val sym = fieldNameToSymToBeReplaced(fs.field)
                     
                     selectionUidsToSymToBeReplaced.addOne(fs.expr -> sym)
@@ -949,7 +949,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             // use pre-determined symbols, create temp symbols for un-used fields
             val usedFieldIdentToSymbolsToBeReplaced = selsMap._1
             val allFieldIdentToSymbolsToBeReplaced = d.getClsFields(c).map: f =>
-              f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"${c.name}_${f.id.name}_unused"))
+              f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"_deforest_${c.name}_${f.id.name}_unused"))
         
             // if all vars are temp vars, no need to create more temp vars
             // otherwise, create temps for var symbols (which will be function params with these temp vars flowing in)

@@ -41,17 +41,17 @@ c(AA(2))
 //│ c(tmp)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c, tmp, AA_x;
+//│ let c, tmp, _deforest_AA_x;
 //│ c = function c(x) {
 //│   return runtime.safeCall(x())
 //│ };
-//│ AA_x = 2;
+//│ _deforest_AA_x = 2;
 //│ tmp = () => {
 //│   let scrut;
-//│   scrut = (AA_x1) => {
-//│     return AA_x1
+//│   scrut = (_deforest_AA_x1) => {
+//│     return _deforest_AA_x1
 //│   };
-//│   return runtime.safeCall(scrut(AA_x))
+//│   return runtime.safeCall(scrut(_deforest_AA_x))
 //│ };
 //│ block$res4 = c(tmp);
 //│ undefined
@@ -83,16 +83,16 @@ c(AA(2), A)
 //│ c1(tmp2, A1)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c1, tmp2, AA_x1;
+//│ let c1, tmp2, _deforest_AA_x1;
 //│ c1 = function c(x, y) {
 //│   return runtime.safeCall(x(y))
 //│ };
-//│ AA_x1 = 2;
+//│ _deforest_AA_x1 = 2;
 //│ tmp2 = (y) => {
-//│   return runtime.safeCall(y(AA_x1))
+//│   return runtime.safeCall(y(_deforest_AA_x1))
 //│ };
-//│ block$res6 = c1(tmp2, (AA_x2) => {
-//│   return AA_x2
+//│ block$res6 = c1(tmp2, (_deforest_AA_x2) => {
+//│   return _deforest_AA_x2
 //│ });
 //│ undefined
 //│ = 2
@@ -133,15 +133,15 @@ c(p(), A)
 //│   return runtime.safeCall(x(y))
 //│ };
 //│ p = function p() {
-//│   let AA_x2;
-//│   AA_x2 = 2;
+//│   let _deforest_AA_x2;
+//│   _deforest_AA_x2 = 2;
 //│   return (y) => {
-//│     return runtime.safeCall(y(AA_x2))
+//│     return runtime.safeCall(y(_deforest_AA_x2))
 //│   }
 //│ };
 //│ tmp4 = p();
-//│ block$res8 = c2(tmp4, (AA_x2) => {
-//│   return AA_x2
+//│ block$res8 = c2(tmp4, (_deforest_AA_x2) => {
+//│   return _deforest_AA_x2
 //│ });
 //│ undefined
 //│ = 2
@@ -187,18 +187,18 @@ c(p(), A)
 //│   return runtime.safeCall(x(y))
 //│ };
 //│ p1 = function p() {
-//│   let AA_x2;
-//│   AA_x2 = 2;
+//│   let _deforest_AA_x2;
+//│   _deforest_AA_x2 = 2;
 //│   return (y) => {
-//│     return runtime.safeCall(y(AA_x2))
+//│     return runtime.safeCall(y(_deforest_AA_x2))
 //│   }
 //│ };
 //│ tmp6 = p1();
-//│ block$res10 = c3(tmp6, (AA_x2) => {
+//│ block$res10 = c3(tmp6, (_deforest_AA_x2) => {
 //│   let a, tmp7;
 //│   tmp7 = 1;
 //│   a = tmp7;
-//│   return a + AA_x2
+//│   return a + _deforest_AA_x2
 //│ });
 //│ undefined
 //│ = 3
@@ -252,16 +252,16 @@ f(AA(AA(AA(AA(AA(A))))))
 //│ f(tmp12)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f, g, tmp8, tmp9, tmp10, tmp11, tmp12, AA_x2, AA_x_tmp, match_param0_branch_AA, AA_x_tmp1, match_x_branch_AA, AA_x_tmp2, AA_x_tmp3;
-//│ match_param0_branch_AA = function match_param0_branch_AA(AA_x3) {
+//│ let f, g, tmp8, tmp9, tmp10, tmp11, tmp12, _deforest_AA_x2, _deforest_AA_x_tmp, match_param0_branch_AA, _deforest_AA_x_tmp1, match_x_branch_AA, _deforest_AA_x_tmp2, _deforest_AA_x_tmp3;
+//│ match_param0_branch_AA = function match_param0_branch_AA(_deforest_AA_x3) {
 //│   let param0, a;
-//│   param0 = AA_x3;
+//│   param0 = _deforest_AA_x3;
 //│   a = param0;
 //│   return g(a)
 //│ };
-//│ match_x_branch_AA = function match_x_branch_AA(AA_x3) {
+//│ match_x_branch_AA = function match_x_branch_AA(_deforest_AA_x3) {
 //│   let param0;
-//│   param0 = AA_x3;
+//│   param0 = _deforest_AA_x3;
 //│   return runtime.safeCall(param0())
 //│ };
 //│ f = function f(x) {
@@ -270,30 +270,30 @@ f(AA(AA(AA(AA(AA(A))))))
 //│ g = function g(x) {
 //│   return runtime.safeCall(x())
 //│ };
-//│ AA_x_tmp = () => {
+//│ _deforest_AA_x_tmp = () => {
 //│   return 42
 //│ };
 //│ tmp8 = () => {
-//│   return match_param0_branch_AA(AA_x_tmp)
+//│   return match_param0_branch_AA(_deforest_AA_x_tmp)
 //│ };
-//│ AA_x_tmp1 = tmp8;
+//│ _deforest_AA_x_tmp1 = tmp8;
 //│ tmp9 = () => {
-//│   return match_x_branch_AA(AA_x_tmp1)
+//│   return match_x_branch_AA(_deforest_AA_x_tmp1)
 //│ };
-//│ AA_x2 = tmp9;
+//│ _deforest_AA_x2 = tmp9;
 //│ tmp10 = () => {
 //│   let param0, b;
-//│   param0 = AA_x2;
+//│   param0 = _deforest_AA_x2;
 //│   b = param0;
 //│   return f(b)
 //│ };
-//│ AA_x_tmp2 = tmp10;
+//│ _deforest_AA_x_tmp2 = tmp10;
 //│ tmp11 = () => {
-//│   return match_param0_branch_AA(AA_x_tmp2)
+//│   return match_param0_branch_AA(_deforest_AA_x_tmp2)
 //│ };
-//│ AA_x_tmp3 = tmp11;
+//│ _deforest_AA_x_tmp3 = tmp11;
 //│ tmp12 = () => {
-//│   return match_x_branch_AA(AA_x_tmp3)
+//│   return match_x_branch_AA(_deforest_AA_x_tmp3)
 //│ };
 //│ block$res12 = f(tmp12);
 //│ undefined
@@ -327,21 +327,21 @@ f(AA(AA(A)))
 //│ f1(tmp19)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let f1, tmp18, tmp19, AA_x3, AA_x4;
+//│ let f1, tmp18, tmp19, _deforest_AA_x3, _deforest_AA_x4;
 //│ f1 = function f(x) {
 //│   return runtime.safeCall(x())
 //│ };
-//│ AA_x3 = A1;
+//│ _deforest_AA_x3 = A1;
 //│ tmp18 = () => {
 //│   let param0, a;
-//│   param0 = AA_x3;
+//│   param0 = _deforest_AA_x3;
 //│   a = param0;
 //│   return a
 //│ };
-//│ AA_x4 = tmp18;
+//│ _deforest_AA_x4 = tmp18;
 //│ tmp19 = () => {
 //│   let param0;
-//│   param0 = AA_x4;
+//│   param0 = _deforest_AA_x4;
 //│   return runtime.safeCall(param0())
 //│ };
 //│ block$res14 = f1(tmp19);
@@ -386,18 +386,18 @@ f(p())
 //│   return runtime.safeCall(x())
 //│ };
 //│ p2 = function p() {
-//│   let tmp23, AA_x5, AA_x6;
-//│   AA_x5 = A1;
+//│   let tmp23, _deforest_AA_x5, _deforest_AA_x6;
+//│   _deforest_AA_x5 = A1;
 //│   tmp23 = () => {
 //│     let param0, a;
-//│     param0 = AA_x5;
+//│     param0 = _deforest_AA_x5;
 //│     a = param0;
 //│     return a
 //│   };
-//│   AA_x6 = tmp23;
+//│   _deforest_AA_x6 = tmp23;
 //│   return () => {
 //│     let param0;
-//│     param0 = AA_x6;
+//│     param0 = _deforest_AA_x6;
 //│     return runtime.safeCall(param0())
 //│   }
 //│ };
@@ -440,21 +440,21 @@ c(AA(2), 10)
 //│ c4(tmp24, 10)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let c4, tmp24, AA_x5;
+//│ let c4, tmp24, _deforest_AA_x5;
 //│ c4 = function c(x, y) {
 //│   return runtime.safeCall(x(y))
 //│ };
-//│ AA_x5 = 2;
+//│ _deforest_AA_x5 = 2;
 //│ tmp24 = (y) => {
 //│   let scrut;
-//│   scrut = (y1, AA_x6) => {
+//│   scrut = (y1, _deforest_AA_x6) => {
 //│     let t, tmp25, tmp26;
-//│     tmp25 = AA_x6;
+//│     tmp25 = _deforest_AA_x6;
 //│     tmp26 = tmp25;
 //│     t = tmp26;
 //│     return t + y1
 //│   };
-//│   return runtime.safeCall(scrut(y, AA_x5))
+//│   return runtime.safeCall(scrut(y, _deforest_AA_x5))
 //│ };
 //│ block$res18 = c4(tmp24, 10);
 //│ undefined
