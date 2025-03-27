@@ -169,15 +169,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         
         if silent.isUnset then 
           import Elaborator.Ctx.*
-          // def definedValues = curCtx.env.iterator.flatMap:
-          //   case (nme, e @ (_: RefElem | SelElem(RefElem(_: InnerSymbol), _, _))) =>
-          //     e.symbol match
-          //     case S(ts: TermSymbol) if ts.k.isInstanceOf[syntax.ValLike] => S((nme, ts, N))
-          //     case S(ts: BlockMemberSymbol)
-          //       if ts.trmImplTree.exists(_.k.isInstanceOf[syntax.ValLike]) => S((nme, ts, N))
-          //     case S(vs: VarSymbol) => S((nme, vs, N))
-          //     case _ => N
-          //   case _ => N
           val valuesToPrint = List(("", resSym, expect.get))
           valuesToPrint.foreach: (nme, sym, expect) =>
             val le =

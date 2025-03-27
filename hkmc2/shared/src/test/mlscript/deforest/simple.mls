@@ -1960,3 +1960,41 @@ test()
 //│ = 5
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 5
+
+:sjs
+fun test(a) = if a is
+  AA then 1
+  else 2
+test(B) + test(C)
+//│ JS (unsanitized):
+//│ let test9, tmp105, tmp106;
+//│ test9 = function test(a) {
+//│   if (a instanceof AA1.class) {
+//│     return 1
+//│   } else {
+//│     return 2
+//│   }
+//│ };
+//│ tmp105 = test9(B1);
+//│ tmp106 = test9(C1);
+//│ tmp105 + tmp106
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test9, tmp105, tmp106, match_a_branch_dflt;
+//│ match_a_branch_dflt = function match_a_branch_dflt() {
+//│   return 2
+//│ };
+//│ test9 = function test(a) {
+//│   return runtime.safeCall(a())
+//│ };
+//│ tmp105 = test9(() => {
+//│   return match_a_branch_dflt()
+//│ });
+//│ tmp106 = test9(() => {
+//│   return match_a_branch_dflt()
+//│ });
+//│ block$res61 = tmp105 + tmp106;
+//│ undefined
+//│ = 4
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 4

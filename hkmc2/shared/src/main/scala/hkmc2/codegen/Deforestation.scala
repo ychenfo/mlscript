@@ -770,7 +770,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
     )
 
   object matchArms:
-    val store = LinkedHashMap.empty[ResultId, Map[ClsOrModSymbol, FunDefn]].withDefaultValue(Map.empty)
+    val store = LinkedHashMap.empty[ResultId, Map[ClsOrModSymbol | None.type, FunDefn]].withDefaultValue(Map.empty)
     
     // return a lambda, which either calls the extracted arm function, or contains the computations in matching arms
     def getOrElseUpdate(
@@ -783,12 +783,10 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
     ) =
       assert(scrut === m.scrut.uid)
       val freeVarsAndTheirNewSyms = freeVarsOfNonTransformedMatches(scrut, m).map(s => s -> VarSymbol(Tree.Ident(s.nme)))
-      store.get(scrut).flatMap(_.get(cls)) match
+      val (body, isDflt) = m.arms.find{ case (Case.Cls(c1, _) -> _) => c1 === cls }.map(_._2 -> false).orElse(m.dflt.map(_ -> true)).get
+      store.get(scrut).flatMap(_.get(if isDflt then None else cls)) match
         case None => // not registered before, or this branch of this match will only appear once
-          val body = m.arms.find{ case (Case.Cls(c1, _) -> _) => c1 === cls }.map(_._2).orElse(m.dflt).get
           val rest = m.rest
-          
-          
           val makeBody = matchRest.getOrElseUpdate(scrut, rest) match
             case N -> rewrittenRest => (bodyBlk: Block) =>
               Begin(bodyBlk, rewrittenRest).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
@@ -807,7 +805,10 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
                 case Return(res, implct) => Return(res, false)
                 case t => t
           
-          if d.resolveClashes._2(DtorExpr.Match(scrut)).count(d.getClsSymOfUid(_) === cls) > 1 then
+          if d.resolveClashes._2(DtorExpr.Match(scrut)).count{c =>
+            if !isDflt then d.getClsSymOfUid(c) === cls
+            else m.arms.find{ case (Case.Cls(c1, _), _) => c1 === d.getClsSymOfUid(c) }.isEmpty
+           } > 1 then
             // make a function, and register, and return a lambda calling that function with correct arguments
             // arguments for lambda: free vars
             // arguments for that function: free vars and pattern vars
@@ -816,7 +817,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             
             val freeVarsAndTheirNewSymsInLam = freeVarsAndTheirNewSyms.map(s => s._1 -> VarSymbol(s._2.id))
             val funBody = makeBody(bodyReplaceSel)
-            val funSym = BlockMemberSymbol(s"match_${ResultUid(scrut).asInstanceOf[Value.Ref].l.nme}_branch_${cls.nme}", Nil)
+            val funSym = BlockMemberSymbol(s"match_${ResultUid(scrut).asInstanceOf[Value.Ref].l.nme}_branch_${if isDflt then "dflt" else cls.nme}", Nil)
             val newDef = FunDefn(
               N,
               funSym,
@@ -831,7 +832,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
               ) :: Nil,
               funBody
             )
-            store += (scrut -> (store(scrut) + (cls -> newDef)))
+            store += (scrut -> (store(scrut) + ((if isDflt then None else cls) -> newDef)))
             Value.Lam(
               ParamList(ParamListFlags.empty, freeVarsAndTheirNewSymsInLam.map(s => Param(FldFlags.empty, s._2, N)), N),
               Return(
