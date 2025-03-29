@@ -466,7 +466,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   object dtorSources:
     val dtorSources = mutable.Map.empty[DtorExpr, Set[ResultId]].withDefaultValue(Set.empty)
-    private def getDtorExprOfResultId(i: ResultId) = ResultUid(i) match
+    private def getDtorExprOfResultId(i: ResultId) = i.getResult match
       case s: Select => DtorExpr.Sel(i)
       case r: Value.Ref => DtorExpr.Match(i)
       case _ => ??? // unreachable
@@ -568,8 +568,8 @@ class Deforest(using TL, Raise, Elaborator.State):
       ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels) =>
         (dtors.size == 0 && sels.size == 1)
         || (dtors.size == 1 && {
-          val scrutRef@Value.Ref(scrut) = ResultUid(dtors.head._1)
-          sels.forall { s => ResultUid(s.expr) match
+          val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
+          sels.forall { s => s.expr.getResult match
             case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
             case _ => false }
         })
@@ -645,10 +645,10 @@ class Deforest(using TL, Raise, Elaborator.State):
           None
         else if dtors.size == 1 then
           val currentCtorCls = getClsSymOfUid(ctor)
-          val scrutRef@Value.Ref(scrut) = ResultUid(dtors.head._1)
+          val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
           handledMatches.getOrElseUpdate(scrutRef.uid -> currentCtorCls, {
 
-            if sels.forall{ s => ResultUid(s.expr) match
+            if sels.forall{ s => s.expr.getResult match
               case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
               case _ => false
             } then
@@ -813,7 +813,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             
             val freeVarsAndTheirNewSymsInLam = freeVarsAndTheirNewSyms.map(s => s._1 -> VarSymbol(s._2.id))
             val funBody = makeBody(bodyReplaceSel)
-            val funSym = BlockMemberSymbol(s"match_${ResultUid(scrut).asInstanceOf[Value.Ref].l.nme}_branch_${if isDflt then "dflt" else cls.nme}", Nil)
+            val funSym = BlockMemberSymbol(s"match_${scrut.getResult.asInstanceOf[Value.Ref].l.nme}_branch_${if isDflt then "dflt" else cls.nme}", Nil)
             val newDef = FunDefn(
               N,
               funSym,
@@ -897,7 +897,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             store += s -> res
             res
           else // build a new function and update the store
-            val scrutName = ResultUid(s).asInstanceOf[Value.Ref].l.nme
+            val scrutName = s.getResult.asInstanceOf[Value.Ref].l.nme
             val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
             val freeVarsAndTheirNewSyms = restRewritten.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
             val newFunDef = FunDefn(
@@ -972,7 +972,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
               case ((a, tmp), rest) => applyResult2(a.value) { r => Assign(tmp, r, rest) }
         
           case CtorFinalDest.Sel(s) =>
-            val selFieldName = ResultUid(s) match { case Select(p, nme) => nme }
+            val selFieldName = s.getResult match { case Select(p, nme) => nme }
             val idx = d.getClsFields(c).indexWhere(s => s.id === selFieldName)
             k(args(idx).value)
       f match
