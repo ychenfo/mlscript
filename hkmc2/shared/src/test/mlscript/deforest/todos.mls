@@ -320,13 +320,87 @@ test(AA(1), AA(2), BB(3), 4) + test(AA(1), AA(2), BB(3), 4)
 //│ tmp11 = test(tmp8, tmp9, tmp10, 4);
 //│ tmp7 + tmp11
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: $tmp (class hkmc2.semantics.TempSymbol)
+//│ ==== JS (deforested): ====
+//│ let test, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, _deforest_AA_x_tmp, match_x_rest, match_x_branch_AA, _deforest_AA_x_tmp1, match_y_rest, match_y_branch_AA, _deforest_BB_x_tmp, match_z_rest, match_z_branch_BB, _deforest_AA_x_tmp2, _deforest_AA_x_tmp3, _deforest_BB_x_tmp1;
+//│ match_x_branch_AA = function match_x_branch_AA(y, z, i, _deforest_AA_x1) {
+//│   let param0, a;
+//│   param0 = _deforest_AA_x1;
+//│   a = param0;
+//│   return runtime.safeCall(y(z, i))
+//│ };
+//│ match_y_branch_AA = function match_y_branch_AA(z, i, _deforest_AA_x1) {
+//│   let param0, a1, tmp12;
+//│   param0 = _deforest_AA_x1;
+//│   a1 = param0;
+//│   tmp12 = a1 + i;
+//│   return match_y_rest(z, i, tmp12)
+//│ };
+//│ match_z_branch_BB = function match_z_branch_BB(i, m, _deforest_BB_x) {
+//│   let param0, a2, tmp12;
+//│   param0 = _deforest_BB_x;
+//│   a2 = param0;
+//│   tmp12 = a2 - i;
+//│   return match_z_rest(i, m, tmp12, match_x_rest)
+//│ };
+//│ match_x_rest = function match_x_rest(i, tmp12) {
+//│   let k;
+//│   k = tmp12;
+//│   return k + i;
+//│ };
+//│ match_y_rest = function match_y_rest(z, i, tmp12) {
+//│   let m;
+//│   m = tmp12;
+//│   return runtime.safeCall(z(i, m));
+//│   return match_x_rest(i, tmp_not_in_scope)
+//│ };
+//│ match_z_rest = function match_z_rest(i, m, tmp12) {
+//│   let n, tmp13;
+//│   n = tmp12;
+//│   tmp13 = m + n;
+//│   return match_x_rest(i, tmp13)
+//│ };
+//│ test = function test(x, y, z, i) {
+//│   return runtime.safeCall(x(y, z, i))
+//│ };
+//│ _deforest_AA_x_tmp = 1;
+//│ tmp4 = (y, z, i) => {
+//│   return match_x_branch_AA(y, z, i, _deforest_AA_x_tmp)
+//│ };
+//│ _deforest_AA_x_tmp1 = 2;
+//│ tmp5 = (z, i) => {
+//│   return match_y_branch_AA(z, i, _deforest_AA_x_tmp1)
+//│ };
+//│ _deforest_BB_x_tmp = 3;
+//│ tmp6 = (i, m) => {
+//│   return match_z_branch_BB(i, m, _deforest_BB_x_tmp)
+//│ };
+//│ tmp7 = test(tmp4, tmp5, tmp6, 4);
+//│ _deforest_AA_x_tmp2 = 1;
+//│ tmp8 = (y, z, i) => {
+//│   return match_x_branch_AA(y, z, i, _deforest_AA_x_tmp2)
+//│ };
+//│ _deforest_AA_x_tmp3 = 2;
+//│ tmp9 = (z, i) => {
+//│   return match_y_branch_AA(z, i, _deforest_AA_x_tmp3)
+//│ };
+//│ _deforest_BB_x_tmp1 = 3;
+//│ tmp10 = (i, m) => {
+//│   return match_z_branch_BB(i, m, _deforest_BB_x_tmp1)
+//│ };
+//│ tmp11 = test(tmp8, tmp9, tmp10, 4);
+//│ block$res10 = tmp7 + tmp11;
+//│ undefined
+//│ = 18
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 18
+//│ FAILURE: Unexpected lack of error to fix
 
 
 // FIXME:
 // - need to include the computation in the `rest` from
 // matches multiple levels up
 // - how to deal with the original `rest` from matches multiple levels up?
+// - (after rewriting it becomes dead code)
 :fixme
 :sjs
 fun test(x) =
@@ -338,9 +412,9 @@ fun f(a) = if a is
 let p = AA(AA(AA(10)))
 test(p) + f(p)
 //│ JS (unsanitized):
-//│ let test1, f1, p, tmp12, tmp13, tmp14, tmp15, tmp16;
+//│ let test1, f1, p, tmp20, tmp21, tmp22, tmp23, tmp24;
 //│ test1 = function test(x) {
-//│   let t, param0, param01, param02, a, tmp17;
+//│   let t, param0, param01, param02, a, tmp25;
 //│   if (x instanceof AA1.class) {
 //│     param0 = x.x;
 //│     if (param0 instanceof AA1.class) {
@@ -348,7 +422,7 @@ test(p) + f(p)
 //│       if (param01 instanceof AA1.class) {
 //│         param02 = param01.x;
 //│         a = param02;
-//│         tmp17 = a;
+//│         tmp25 = a;
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
@@ -358,7 +432,7 @@ test(p) + f(p)
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   t = tmp17;
+//│   t = tmp25;
 //│   return t + 5
 //│ };
 //│ f1 = function f(a) {
@@ -374,15 +448,66 @@ test(p) + f(p)
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp12 = AA1(10);
-//│ tmp13 = AA1(tmp12);
-//│ tmp14 = AA1(tmp13);
-//│ p = tmp14;
-//│ tmp15 = test1(p);
-//│ tmp16 = f1(p);
-//│ tmp15 + tmp16
+//│ tmp20 = AA1(10);
+//│ tmp21 = AA1(tmp20);
+//│ tmp22 = AA1(tmp21);
+//│ p = tmp22;
+//│ tmp23 = test1(p);
+//│ tmp24 = f1(p);
+//│ tmp23 + tmp24
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: $tmp (class hkmc2.semantics.TempSymbol)
+//│ ==== JS (deforested): ====
+//│ let test1, f1, p, tmp20, tmp21, tmp22, tmp23, tmp24, _deforest_AA_x1;
+//│ test1 = function test(x) {
+//│   let t, param0, param01;
+//│   if (x instanceof AA1.class) {
+//│     param0 = x.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       return runtime.safeCall(param01())
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   t = tmp_not_in_scope;
+//│   return t + 5
+//│ };
+//│ f1 = function f(a) {
+//│   let param0;
+//│   if (a instanceof AA1.class) {
+//│     param0 = a.x;
+//│     if (param0 instanceof AA1.class) {
+//│       return 0
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ _deforest_AA_x1 = 10;
+//│ tmp20 = () => {
+//│   let t, param0, a, tmp25;
+//│   param0 = _deforest_AA_x1;
+//│   a = param0;
+//│   tmp25 = a;
+//│   t = tmp25;
+//│   return t + 5
+//│ };
+//│ tmp21 = AA1(tmp20);
+//│ tmp22 = AA1(tmp21);
+//│ p = tmp22;
+//│ tmp23 = test1(p);
+//│ tmp24 = f1(p);
+//│ block$res12 = tmp23 + tmp24;
+//│ undefined
+//│ = 15
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 15
+//│ p = AA(AA(AA(10)))
+//│ FAILURE: Unexpected lack of error to fix
 
 
 
@@ -401,51 +526,111 @@ fun f(x, y, z, k) =
         AA then m + k
 f(AA(3), 3, true, 10) + f(AA(5), 4, false, 20)
 //│ JS (unsanitized):
-//│ let f2, tmp17, tmp18, tmp19, tmp20;
+//│ let f2, tmp30, tmp31, tmp32, tmp33;
 //│ f2 = function f(x, y, z, k) {
-//│   let tmp21, m, scrut, param0, yf, scrut1, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28;
+//│   let tmp34, m, scrut, param0, yf, scrut1, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41;
 //│   if (z === true) {
-//│     tmp22 = y + 1;
-//│     tmp23 = BB1(tmp22);
+//│     tmp35 = y + 1;
+//│     tmp36 = BB1(tmp35);
 //│   } else {
-//│     tmp24 = y - 1;
-//│     tmp23 = BB1(tmp24);
+//│     tmp37 = y - 1;
+//│     tmp36 = BB1(tmp37);
 //│   }
-//│   tmp21 = tmp23;
-//│   if (tmp21 instanceof BB1.class) {
+//│   tmp34 = tmp36;
+//│   if (tmp34 instanceof BB1.class) {
 //│     if (x instanceof AA1.class) {
 //│       scrut = AA1(2);
 //│       if (scrut instanceof AA1.class) {
 //│         param0 = scrut.x;
 //│         yf = param0;
-//│         tmp25 = yf;
+//│         tmp38 = yf;
 //│       } else {
 //│         throw new globalThis.Error("match error");
 //│       }
-//│       tmp26 = tmp25;
+//│       tmp39 = tmp38;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
-//│     m = tmp26;
+//│     m = tmp39;
 //│     scrut1 = AA1(3);
 //│     if (scrut1 instanceof AA1.class) {
-//│       tmp27 = m + k;
+//│       tmp40 = m + k;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
-//│     tmp28 = tmp27;
+//│     tmp41 = tmp40;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   return tmp21.x + tmp28
+//│   return tmp34.x + tmp41
 //│ };
-//│ tmp17 = AA1(3);
-//│ tmp18 = f2(tmp17, 3, true, 10);
-//│ tmp19 = AA1(5);
-//│ tmp20 = f2(tmp19, 4, false, 20);
-//│ tmp18 + tmp20
+//│ tmp30 = AA1(3);
+//│ tmp31 = f2(tmp30, 3, true, 10);
+//│ tmp32 = AA1(5);
+//│ tmp33 = f2(tmp32, 4, false, 20);
+//│ tmp31 + tmp33
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: $tmp (class hkmc2.semantics.TempSymbol)
+//│ ==== JS (deforested): ====
+//│ let f2, tmp30, tmp31, tmp32, tmp33, _deforest_AA_x_unused, match_x_rest1, match_x_branch_AA1, _deforest_AA_x_unused1;
+//│ match_x_branch_AA1 = function match_x_branch_AA(k, tmp34) {
+//│   let scrut, _deforest_AA_x2;
+//│   _deforest_AA_x2 = 2;
+//│   scrut = (k1, tmp35) => {
+//│     let param0, yf, tmp36, tmp37;
+//│     param0 = _deforest_AA_x2;
+//│     yf = param0;
+//│     tmp36 = yf;
+//│     tmp37 = tmp36;
+//│     return match_x_rest1(k1, tmp35, tmp37)
+//│   };
+//│   return runtime.safeCall(scrut(k, tmp34))
+//│ };
+//│ match_x_rest1 = function match_x_rest(k, tmp34, tmp35) {
+//│   let m, scrut, _deforest_AA_x_unused2;
+//│   m = tmp35;
+//│   _deforest_AA_x_unused2 = 3;
+//│   scrut = (k1, tmp36, m1) => {
+//│     let tmp37, tmp38;
+//│     tmp37 = m1 + k1;
+//│     tmp38 = tmp37;
+//│     return tmp36.x + tmp38
+//│   };
+//│   return runtime.safeCall(scrut(k, tmp34, m));
+//│   return tmp34.x + tmp_not_in_scope;
+//│ };
+//│ f2 = function f(x, y, z, k) {
+//│   let tmp34, tmp35, tmp36, tmp37;
+//│   if (z === true) {
+//│     tmp35 = y + 1;
+//│     tmp36 = BB1(tmp35);
+//│   } else {
+//│     tmp37 = y - 1;
+//│     tmp36 = BB1(tmp37);
+//│   }
+//│   tmp34 = tmp36;
+//│   if (tmp34 instanceof BB1.class) {
+//│     return runtime.safeCall(x(k, tmp34))
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   return tmp34.x + tmp_not_in_scope
+//│ };
+//│ _deforest_AA_x_unused = 3;
+//│ tmp30 = (k, tmp34) => {
+//│   return match_x_branch_AA1(k, tmp34)
+//│ };
+//│ tmp31 = f2(tmp30, 3, true, 10);
+//│ _deforest_AA_x_unused1 = 5;
+//│ tmp32 = (k, tmp34) => {
+//│   return match_x_branch_AA1(k, tmp34)
+//│ };
+//│ tmp33 = f2(tmp32, 4, false, 20);
+//│ block$res14 = tmp31 + tmp33;
+//│ undefined
+//│ = 41
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 41
+//│ FAILURE: Unexpected lack of error to fix
 
 
 :fixme
@@ -460,41 +645,99 @@ fun test(n, p, q) =
         AA(y) then k + y
 test(3, AA(2), AA(3)) + test(3, AA(2), AA(3))
 //│ JS (unsanitized):
-//│ let test2, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26;
+//│ let test2, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43;
 //│ test2 = function test(n, p1, q) {
-//│   let scrut, k, param0, x, param01, y, tmp27, tmp28, tmp29;
+//│   let scrut, k, param0, x, param01, y, tmp44, tmp45, tmp46;
 //│   scrut = AA1(0);
 //│   if (scrut instanceof AA1.class) {
 //│     if (p1 instanceof AA1.class) {
 //│       param0 = p1.x;
 //│       x = param0;
-//│       tmp27 = x;
+//│       tmp44 = x;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
-//│     k = tmp27;
+//│     k = tmp44;
 //│     if (q instanceof AA1.class) {
 //│       param01 = q.x;
 //│       y = param01;
-//│       tmp28 = k + y;
+//│       tmp45 = k + y;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
-//│     tmp29 = tmp28;
+//│     tmp46 = tmp45;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
-//│   return n + tmp29
+//│   return n + tmp46
 //│ };
-//│ tmp21 = AA1(2);
-//│ tmp22 = AA1(3);
-//│ tmp23 = test2(3, tmp21, tmp22);
-//│ tmp24 = AA1(2);
-//│ tmp25 = AA1(3);
-//│ tmp26 = test2(3, tmp24, tmp25);
-//│ tmp23 + tmp26
+//│ tmp38 = AA1(2);
+//│ tmp39 = AA1(3);
+//│ tmp40 = test2(3, tmp38, tmp39);
+//│ tmp41 = AA1(2);
+//│ tmp42 = AA1(3);
+//│ tmp43 = test2(3, tmp41, tmp42);
+//│ tmp40 + tmp43
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: $tmp (class hkmc2.semantics.TempSymbol)
+//│ ==== JS (deforested): ====
+//│ let test2, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, _deforest_AA_x_tmp4, match_p_rest, match_p_branch_AA, _deforest_AA_x_tmp5, match_q_rest, match_q_branch_AA, _deforest_AA_x_tmp6, _deforest_AA_x_tmp7;
+//│ match_p_branch_AA = function match_p_branch_AA(n, q, _deforest_AA_x2) {
+//│   let param0, x, tmp44;
+//│   param0 = _deforest_AA_x2;
+//│   x = param0;
+//│   tmp44 = x;
+//│   return match_p_rest(n, q, tmp44)
+//│ };
+//│ match_q_branch_AA = function match_q_branch_AA(n, k, _deforest_AA_x2) {
+//│   let param0, y, tmp44;
+//│   param0 = _deforest_AA_x2;
+//│   y = param0;
+//│   tmp44 = k + y;
+//│   return match_q_rest(n, tmp44)
+//│ };
+//│ match_p_rest = function match_p_rest(n, q, tmp44) {
+//│   let k;
+//│   k = tmp44;
+//│   return runtime.safeCall(q(n, k));
+//│   return n + tmp_not_in_scope;
+//│ };
+//│ match_q_rest = function match_q_rest(n, tmp44) {
+//│   let tmp45;
+//│   tmp45 = tmp44;
+//│   return n + tmp45;
+//│ };
+//│ test2 = function test(n, p1, q) {
+//│   let scrut, _deforest_AA_x_unused2;
+//│   _deforest_AA_x_unused2 = 0;
+//│   scrut = (n1, p2, q1) => {
+//│     return runtime.safeCall(p2(n1, q1))
+//│   };
+//│   return runtime.safeCall(scrut(n, p1, q))
+//│ };
+//│ _deforest_AA_x_tmp4 = 2;
+//│ tmp38 = (n, q) => {
+//│   return match_p_branch_AA(n, q, _deforest_AA_x_tmp4)
+//│ };
+//│ _deforest_AA_x_tmp5 = 3;
+//│ tmp39 = (n, k) => {
+//│   return match_q_branch_AA(n, k, _deforest_AA_x_tmp5)
+//│ };
+//│ tmp40 = test2(3, tmp38, tmp39);
+//│ _deforest_AA_x_tmp6 = 2;
+//│ tmp41 = (n, q) => {
+//│   return match_p_branch_AA(n, q, _deforest_AA_x_tmp6)
+//│ };
+//│ _deforest_AA_x_tmp7 = 3;
+//│ tmp42 = (n, k) => {
+//│   return match_q_branch_AA(n, k, _deforest_AA_x_tmp7)
+//│ };
+//│ tmp43 = test2(3, tmp41, tmp42);
+//│ block$res16 = tmp40 + tmp43;
+//│ undefined
+//│ = 16
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 16
+//│ FAILURE: Unexpected lack of error to fix
 
 
 
@@ -517,9 +760,9 @@ let a = A
 fun c(a) = if a is A then 0
 test(1, AA(2), AA(3), a) + test(2, AA(2), AA(3), a) + c(a)
 //│ JS (unsanitized):
-//│ let c, test3, a, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34;
+//│ let c, test3, a, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57;
 //│ test3 = function test(n, p1, q, a1) {
-//│   let o, k, param0, x, param01, y, tmp35, tmp36, tmp37, tmp38;
+//│   let o, k, param0, x, param01, y, tmp58, tmp59, tmp60, tmp61;
 //│   o = undefined;
 //│   if (a1 instanceof A1.class) {
 //│     k = undefined;
@@ -527,20 +770,20 @@ test(1, AA(2), AA(3), a) + test(2, AA(2), AA(3), a) + c(a)
 //│       param0 = p1.x;
 //│       x = param0;
 //│       k = x;
-//│       tmp35 = runtime.Unit;
+//│       tmp58 = runtime.Unit;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
 //│     if (q instanceof AA1.class) {
 //│       param01 = q.x;
 //│       y = param01;
-//│       tmp36 = k + y;
-//│       o = tmp36;
-//│       tmp37 = runtime.Unit;
+//│       tmp59 = k + y;
+//│       o = tmp59;
+//│       tmp60 = runtime.Unit;
 //│     } else {
 //│       throw new globalThis.Error("match error");
 //│     }
-//│     tmp38 = tmp37;
+//│     tmp61 = tmp60;
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
@@ -554,14 +797,87 @@ test(1, AA(2), AA(3), a) + test(2, AA(2), AA(3), a) + c(a)
 //│   }
 //│ };
 //│ a = A1;
-//│ tmp27 = AA1(2);
-//│ tmp28 = AA1(3);
-//│ tmp29 = test3(1, tmp27, tmp28, a);
-//│ tmp30 = AA1(2);
-//│ tmp31 = AA1(3);
-//│ tmp32 = test3(2, tmp30, tmp31, a);
-//│ tmp33 = tmp29 + tmp32;
-//│ tmp34 = c(a);
-//│ tmp33 + tmp34
+//│ tmp50 = AA1(2);
+//│ tmp51 = AA1(3);
+//│ tmp52 = test3(1, tmp50, tmp51, a);
+//│ tmp53 = AA1(2);
+//│ tmp54 = AA1(3);
+//│ tmp55 = test3(2, tmp53, tmp54, a);
+//│ tmp56 = tmp52 + tmp55;
+//│ tmp57 = c(a);
+//│ tmp56 + tmp57
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: hkmc2.InternalError: Not in scope: o (class hkmc2.semantics.VarSymbol)
+//│ ==== JS (deforested): ====
+//│ let c, test3, a, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, _deforest_AA_x_tmp8, match_p_rest1, match_p_branch_AA1, _deforest_AA_x_tmp9, match_q_rest1, match_q_branch_AA1, _deforest_AA_x_tmp10, _deforest_AA_x_tmp11;
+//│ match_p_branch_AA1 = function match_p_branch_AA(n, q, _deforest_AA_x2) {
+//│   let k, param0, x, tmp58;
+//│   param0 = _deforest_AA_x2;
+//│   x = param0;
+//│   k = x;
+//│   tmp58 = runtime.Unit;
+//│   return match_p_rest1(n, q, k)
+//│ };
+//│ match_q_branch_AA1 = function match_q_branch_AA(n, k, _deforest_AA_x2) {
+//│   let o, param0, y, tmp58, tmp59;
+//│   param0 = _deforest_AA_x2;
+//│   y = param0;
+//│   tmp58 = k + y;
+//│   o = tmp58;
+//│   tmp59 = runtime.Unit;
+//│   return match_q_rest1(n, o, tmp59)
+//│ };
+//│ match_p_rest1 = function match_p_rest(n, q, k) {
+//│   return runtime.safeCall(q(n, k));
+//│   return o_not_in_scope + n;
+//│ };
+//│ match_q_rest1 = function match_q_rest(n, o, tmp58) {
+//│   let tmp59;
+//│   tmp59 = tmp58;
+//│   return o + n;
+//│ };
+//│ test3 = function test(n, p1, q, a1) {
+//│   let o, k;
+//│   o = undefined;
+//│   if (a1 instanceof A1.class) {
+//│     k = undefined;
+//│     return runtime.safeCall(p1(n, q))
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│   return o + n
+//│ };
+//│ c = function c(a1) {
+//│   if (a1 instanceof A1.class) {
+//│     return 0
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ a = A1;
+//│ _deforest_AA_x_tmp8 = 2;
+//│ tmp50 = (n, q) => {
+//│   return match_p_branch_AA1(n, q, _deforest_AA_x_tmp8)
+//│ };
+//│ _deforest_AA_x_tmp9 = 3;
+//│ tmp51 = (n, k) => {
+//│   return match_q_branch_AA1(n, k, _deforest_AA_x_tmp9)
+//│ };
+//│ tmp52 = test3(1, tmp50, tmp51, a);
+//│ _deforest_AA_x_tmp10 = 2;
+//│ tmp53 = (n, q) => {
+//│   return match_p_branch_AA1(n, q, _deforest_AA_x_tmp10)
+//│ };
+//│ _deforest_AA_x_tmp11 = 3;
+//│ tmp54 = (n, k) => {
+//│   return match_q_branch_AA1(n, k, _deforest_AA_x_tmp11)
+//│ };
+//│ tmp55 = test3(2, tmp53, tmp54, a);
+//│ tmp56 = tmp52 + tmp55;
+//│ tmp57 = c(a);
+//│ block$res18 = tmp56 + tmp57;
+//│ undefined
+//│ = 13
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 13
+//│ a = A
+//│ FAILURE: Unexpected lack of error to fix
