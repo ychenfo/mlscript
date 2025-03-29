@@ -37,6 +37,23 @@ object StratVarState:
 
 type CtorExpr = ResultId
 
+extension (i: ResultId)
+  def getResult = ResultUid(i)
+  def handleCtorIds[A](k: (ResultId, Select | Value.Ref, ClsOrModSymbol, Ls[Arg]) => A) =
+    i.getResult match
+      case Call(fun, args) => fun match
+        case s: Select if s.symbol.flatMap(_.asCls).isDefined =>
+          Some(k(i, s, s.symbol.get.asCls.get, args))
+        case v: Value.Ref if v.l.asCls.isDefined =>
+          Some(k(i, v, v.l.asCls.get, args))
+        case _ => None
+      case s: Select if s.symbol.flatMap(_.asObj).isDefined =>
+        Some(k(i, s, s.symbol.get.asObj.get, Nil))
+      case v: Value.Ref if v.l.asObj.isDefined =>
+        Some(k(i, v, v.l.asObj.get, Nil))
+      case _ => None
+  def getClsSymOfUid = i.handleCtorIds((_, _, s, _) => s).get
+
 case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: CtorExpr) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
 case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s)
@@ -191,7 +208,6 @@ extension (b: Block)
       var flag = false
       override def applyBlock(b: Block): Unit = b match
         case Return(_, imp) => flag = !imp
-        case Define(defn, rest) => applyBlock(rest)
         case _ => super.applyBlock(b)
     
     HasExplicitRetTraverser.applyBlock(b)
@@ -522,25 +538,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   
   // ======== after resolving constraints ======
-  
-  def handleCtors[A](c: ResultId, k: (ResultId, Select | Value.Ref, ClsOrModSymbol, Ls[Arg]) => A): Opt[A] =
-    ResultUid(c) match
-      case Call(fun, args) => fun match
-        case s: Select if s.symbol.flatMap(_.asCls).isDefined =>
-          Some(k(c, s, s.symbol.get.asCls.get, args))
-        case v: Value.Ref if v.l.asCls.isDefined =>
-          Some(k(c, v, v.l.asCls.get, args))
-        case _ => None
-      case s: Select if s.symbol.flatMap(_.asObj).isDefined =>
-        Some(k(c, s, s.symbol.get.asObj.get, Nil))
-      case v: Value.Ref if v.l.asObj.isDefined =>
-        Some(k(c, v, v.l.asObj.get, Nil))
-      case _ => None
-  
-  def getClsSymOfUid(c: CtorExpr): ClsOrModSymbol =
-    handleCtors(c, (_, _, s, _) => s).get
     
-  
   lazy val resolveClashes =
     type CtorToDtor = Map[CtorExpr, CtorDest]
     type DtorToCtor = Map[DtorExpr, Set[CtorExpr]]
@@ -586,12 +584,10 @@ class Deforest(using TL, Raise, Elaborator.State):
         object GetCtorsTraverser extends BlockTraverser:
           val ctors = mutable.Set.empty[ResultId]
           override def applyResult(r: Result): Unit =
-            handleCtors(
-              r.uid,
-              (id, f, clsOrMod, args) =>
-                ctors += id
-                args.foreach { case Arg(_, value) => applyResult(value) }
-            ) match
+            r.uid.handleCtorIds{ (id, f, clsOrMod, args) =>
+              ctors += id
+              args.foreach { case Arg(_, value) => applyResult(value) }
+            } match
               case Some(_) => ()
               case None => r match
                 case Call(_, args) =>
@@ -806,8 +802,8 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
                 case t => t
           
           if d.resolveClashes._2(DtorExpr.Match(scrut)).count{c =>
-            if !isDflt then d.getClsSymOfUid(c) === cls
-            else m.arms.find{ case (Case.Cls(c1, _), _) => c1 === d.getClsSymOfUid(c) }.isEmpty
+            if !isDflt then c.getClsSymOfUid === cls
+            else m.arms.find{ case (Case.Cls(c1, _), _) => c1 === c.getClsSymOfUid }.isEmpty
            } > 1 then
             // make a function, and register, and return a lambda calling that function with correct arguments
             // arguments for lambda: free vars
@@ -896,7 +892,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             case bd -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
           
           // no need to build a new function for empty rest, or if the rest is only going to be used once
-          if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).size == 1) then
+          if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).map(c => c.getClsSymOfUid).size == 1) then
             val res = N -> restRewritten
             store += s -> res
             res

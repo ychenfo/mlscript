@@ -1797,18 +1797,14 @@ outer1(p, 1, 2) + outer2(p, 3, 4) + inner(AA(5), 6)
 //│ tmp91 + tmp93
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let outer1, outer2, inner, p1, tmp87, tmp88, tmp89, tmp90, tmp91, tmp92, tmp93, _deforest_AA_aa_tmp, match_x_rest3, match_x_branch_AA, _deforest_AA_aa_tmp1;
+//│ let outer1, outer2, inner, p1, tmp87, tmp88, tmp89, tmp90, tmp91, tmp92, tmp93, _deforest_AA_aa_tmp, match_x_branch_AA, _deforest_AA_aa_tmp1;
 //│ match_x_branch_AA = function match_x_branch_AA(y1, _deforest_AA_aa3) {
-//│   let param0, a, tmp94;
+//│   let t, param0, a, tmp94;
 //│   param0 = _deforest_AA_aa3;
 //│   a = param0;
 //│   tmp94 = a + y1;
-//│   return match_x_rest3(y1, tmp94)
-//│ };
-//│ match_x_rest3 = function match_x_rest(y1, tmp94) {
-//│   let t;
 //│   t = tmp94;
-//│   return t * y1;
+//│   return t * y1
 //│ };
 //│ inner = function inner(x1, y1) {
 //│   return runtime.safeCall(x1(y1))
