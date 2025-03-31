@@ -348,7 +348,7 @@ test(AA(1), AA(2), BB(3), 4) + test(AA(1), BB(2), BB(3), 4)
 //│   m = tmp12;
 //│   return runtime.safeCall(z(i, m));
 //│   k = tmp_not_in_scope;
-//│   return k + i;
+//│   return k + i
 //│ };
 //│ test = function test(x, y, z, i) {
 //│   return runtime.safeCall(x(y, z, i))
@@ -819,7 +819,12 @@ test(p(BB(3))) + test(p(CC(3))) + c(p(0))
 //│ tmp64 + tmp66
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ==== JS (deforested): ====
-//│ let p2, c, test3, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, _deforest_BB_x1, _deforest_CC_x;
+//│ let p2, c, test3, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, _deforest_BB_x1, _deforest_CC_x, match_param0_rest;
+//│ match_param0_rest = function match_param0_rest(tmp67) {
+//│   let n;
+//│   n = tmp67;
+//│   return n + 3;
+//│ };
 //│ test3 = function test(x) {
 //│   let n, param0;
 //│   if (x instanceof AA1.class) {
@@ -843,23 +848,21 @@ test(p(BB(3))) + test(p(CC(3))) + c(p(0))
 //│ };
 //│ _deforest_BB_x1 = 3;
 //│ tmp58 = () => {
-//│   let n, param0, b, tmp67;
+//│   let param0, b, tmp67;
 //│   param0 = _deforest_BB_x1;
 //│   b = param0;
 //│   tmp67 = b;
-//│   n = tmp67;
-//│   return n + 3
+//│   return match_param0_rest(tmp67)
 //│ };
 //│ tmp59 = p2(tmp58);
 //│ tmp60 = test3(tmp59);
 //│ _deforest_CC_x = 3;
 //│ tmp61 = () => {
-//│   let n, param0, c1, tmp67;
+//│   let param0, c1, tmp67;
 //│   param0 = _deforest_CC_x;
 //│   c1 = param0;
 //│   tmp67 = c1;
-//│   n = tmp67;
-//│   return n + 3
+//│   return match_param0_rest(tmp67)
 //│ };
 //│ tmp62 = p2(tmp61);
 //│ tmp63 = test3(tmp62);

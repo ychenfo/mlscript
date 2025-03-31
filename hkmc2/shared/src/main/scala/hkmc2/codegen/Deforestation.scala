@@ -868,31 +868,40 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       store.get(s) match
         case Some(f, b) => f.map(_.sym) -> b
         case _ =>
+          // return all blocks concat together using `Begin`, and return if all of them are `End` blocks
+          def concatAllRestBlocksOfMatches(ps: List[ResultId]) =
+            ps.foldRight[Block -> Bool](End("") -> true){ (pid, acc) =>
+              val b = d.matchScrutToMatchBlock(pid).rest
+              Begin(b, acc._1) -> (acc._2 && b.isInstanceOf[End])
+            }
           val parentRestInfo = parentMatchesUptoAFusingOne(s) match
             case ps -> Some(theFusingOne) =>
               // return the original rests from unfused parent matches,
               // and the function symbol for the `rest` of the fusing parent match (if any)
               // and the rewritten `rest` block of that fusing parent match
-              ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } ->
+              concatAllRestBlocksOfMatches(ps) ->
               getOrElseUpdate(theFusingOne, d.matchScrutToMatchBlock(theFusingOne).rest)
             case ps -> None => 
               // return the original rests from unfused parent matches, and none (meaning that there is no fusing parent match)  
-              ps.foldRight[Block](End("")){ (pid, acc) => Begin(d.matchScrutToMatchBlock(pid).rest, acc) } -> None
+              concatAllRestBlocksOfMatches(ps) -> None
           
           // bd: original `rest`s of non-fusing parent matches
           val restRewritten = parentRestInfo match
             // None: there is no fusing parent match
-            case bd -> None => applyBlock(Begin(restBeforeRewriting, bd))
+            case (bd, false) -> None => applyBlock(Begin(restBeforeRewriting, bd))
+            case (bd, true) -> None => applyBlock(restBeforeRewriting)
             // (Some(s), b): there is a fusing parent match, and its `rest` is extracted into a function with symbol `s`,
             // and the transformed `rest` is b
-            case bd -> (Some(s), b) => Begin(
+            case (bd, _) -> (Some(s), b) => Begin(
               applyBlock(restBeforeRewriting),
               Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
             // (None, b): there is a fusing parent match, and its `rest` is not extracted into a function
-            case bd -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
+            case (bd, false) -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
+            case (bd, true) -> (None, b) => Begin(applyBlock(restBeforeRewriting), b)
           
           // no need to build a new function for empty rest, or if the rest is only going to be used once
-          if restBeforeRewriting.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).map(c => c.getClsSymOfUid).size == 1) then
+          if (restBeforeRewriting.isInstanceOf[End] && parentRestInfo._1._2)
+            || (d.resolveClashes._2(DtorExpr.Match(s)).map(c => c.getClsSymOfUid).size == 1) then
             val res = N -> restRewritten
             store += s -> res
             res
