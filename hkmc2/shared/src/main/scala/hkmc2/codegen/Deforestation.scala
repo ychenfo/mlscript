@@ -872,7 +872,9 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           def concatAllRestBlocksOfMatches(ps: List[ResultId]) =
             ps.foldRight[Block -> Bool](End("") -> true){ (pid, acc) =>
               val b = d.matchScrutToMatchBlock(pid).rest
-              Begin(b, acc._1) -> (acc._2 && b.isInstanceOf[End])
+              val isEnd = b.isInstanceOf[End]
+              if isEnd then acc._1 -> (acc._2 && isEnd)
+              else Begin(b, acc._1) -> (acc._2 && isEnd)
             }
           val parentRestInfo = parentMatchesUptoAFusingOne(s) match
             case ps -> Some(theFusingOne) =>
