@@ -252,9 +252,9 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       host.execute(s"$resNme = undefined")
       
       mkQuery(preStr, jsStr): stdout =>
-          stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
-            .foreach: line =>
-              output(s"> ${line}")
+        stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
+          .foreach: line =>
+            output(s"> ${line}")
       
       if deforestFlag.isSet && showJS.isUnset then
         mkQuery(preStr, jsStr)(using hostDeforest)(_ => ())

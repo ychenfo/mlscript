@@ -98,6 +98,7 @@ trait StratVarTrait(stratState: StratVarState):
   lazy val asConsStrat = stratState.asConsStrat
   lazy val uid = stratState.uid
 
+final case class NotDeforestableException(msg: String) extends Exception(msg)
 
 // Compute free vars for a block, without considering deforestation, used on transformed blocks
 // This means that for matches we don't need to consider the extra
@@ -236,7 +237,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   given Uid.Handler[StratVar]#State = StratVarUidHandler.State()
   import StratVarState.freshVar
   
-  def apply(p: Program) =
+  def apply(p: Program): Program =
     val mainBlk = p.main
     
     globallyDefinedVars.init(mainBlk)
@@ -244,8 +245,15 @@ class Deforest(using TL, Raise, Elaborator.State):
     // allocate type vars for defined symbols in the blocks
     symToStrat.init(mainBlk)
   
-    processBlock(mainBlk)
+    try
+      processBlock(mainBlk)
+    catch
+      case NotDeforestableException(msg) =>
+        // return the original program if deforestation is not applicable
+        return p
+    
     resolveConstraints
+    
 
     tl.log("upper:")
     upperBounds.foreach(u => tl.log("\t" + u))
@@ -359,21 +367,10 @@ class Deforest(using TL, Raise, Elaborator.State):
           val funStrat = constrFun(param, body) // TODO: handle mutiple param list
           constrain(funStrat, funSymStratVar.asConsStrat)
           funSymStratVar
-        case ValDefn(owner, k, sym, rhs) => ???
+        case v: ValDefn => throw NotDeforestableException("No support for `ValDefn` yet")
         // only handle code inside module for now to show the
         // todo case of if scrut being not the same as what the user writes
-        case c: ClsLikeDefn if c.sym.asMod.isDefined =>
-          c.methods.foreach:
-            case FunDefn(_, sym, params, body) => 
-              val funSymStratVar = freshVar(sym.nme)
-              symToStrat += sym -> funSymStratVar._1
-              val param = params.head match
-                case ParamList(flags, params, restParam) => params
-              val funStrat = constrFun(param, body) // TODO: handle mutiple param list
-              constrain(funStrat, funSymStratVar._2)
-              funSymStratVar._1
-          processBlock(c.ctor)
-        case _ => ???
+        case c: ClsLikeDefn => throw NotDeforestableException("No support for `ClsLikeDefn` yet")
       processBlock(rest)
     case End(msg) => NoProd
     case Throw(exc) => NoProd
@@ -430,12 +427,12 @@ class Deforest(using TL, Raise, Elaborator.State):
           val appRes = freshVar()
           constrain(funTpe, ConsFun(argsTpe, appRes._2))
           appRes._1
-          
-        case Value.This(sym) => ???
+        
+        case Value.This(sym) => throw NotDeforestableException("No support for `this` as a callee yet")
         case Value.Lit(lit) => ???
         case Value.Arr(elems) => ???
 
-    case Instantiate(cls, args) => ???
+    case Instantiate(cls, args) => throw NotDeforestableException("No support for `instantiate` yet")
 
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
@@ -458,11 +455,11 @@ class Deforest(using TL, Raise, Elaborator.State):
       case None => symToStrat.getStratOfSym(l)
       case Some(m) => Ctor(m, Map.empty, v.uid)
     
-    case Value.This(sym) => ???
+    case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
     case Value.Lit(lit) => NoProd
     case Value.Lam(ParamList(_, params, N), body) =>
       constrFun(params, body)
-    case Value.Arr(elems) => ???
+    case Value.Arr(elems) => throw NotDeforestableException("No support for arrays yet")
   
   
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
