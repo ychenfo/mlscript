@@ -212,6 +212,22 @@ extension (b: Block)
     
     HasExplicitRetTraverser.applyBlock(b)
     HasExplicitRetTraverser.flag
+  
+  def willBeNonEndTailBlock(using d: Deforest): Bool =
+    object WillBeNonEndTailBlockTraverser extends BlockTraverserShallow:
+      var flag = false
+      override def applyBlock(b: Block): Unit = b match
+        case Match(scrut, arms, dflt, rest) =>
+          flag =
+            d.filteredDtors(scrut.uid) ||
+            (arms.forall { case (_, b) => b.willBeNonEndTailBlock } && dflt.fold(true)(_.willBeNonEndTailBlock)) ||
+            rest.willBeNonEndTailBlock
+        case _: End => ()
+        case _: BlockTail => flag = true
+        case _ => super.applyBlock(b)
+    WillBeNonEndTailBlockTraverser.applyBlock(b)
+    WillBeNonEndTailBlockTraverser.flag
+      
 
 
 class Deforest(using TL, Raise, Elaborator.State):
@@ -934,6 +950,8 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || oneOfParentMatchRestHasExplicitRet
       val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
       Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
+    case Match(scrut, arms, dflt, rest) if dflt.fold(true)(_.willBeNonEndTailBlock) && arms.forall { case (_, body) => body.willBeNonEndTailBlock } =>
+      super.applyBlock(Match(scrut, arms, dflt, End("")))
     case _ => super.applyBlock(b)
   
   override def applyResult(r: Result): Result = r match
