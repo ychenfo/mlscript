@@ -465,27 +465,37 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  case class CtorDest(matches: Map[ResultId, Match], sels: Ls[FieldSel])
-  
+  case class CtorDest(matches: Map[ResultId, Match], sels: Ls[FieldSel], noCons: Bool)
+  case class DtorSource(ctors: Set[CtorExpr], noProd: Bool)
   object ctorDests:
-    val ctorDests = mutable.Map.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil))
+    val ctorDests = mutable.Map.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil, false))
     def update(ctor: CtorExpr, m: Match) = ctorDests.updateWith(ctor):
-      case Some(CtorDest(matches, sels)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels))
-      case None => Some(CtorDest(Map(m.scrut.uid -> m), Nil))
+      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels, noCons))
+      case None => Some(CtorDest(Map(m.scrut.uid -> m), Nil, false))
     def update(ctor: CtorExpr, s: FieldSel) = ctorDests.updateWith(ctor):
-      case Some(CtorDest(matches, sels)) => Some(CtorDest(matches, s :: sels))
-      case None => Some(CtorDest(Map.empty, s :: Nil))
+      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, s :: sels, noCons))
+      case None => Some(CtorDest(Map.empty, s :: Nil, false))
+    def update(ctor: CtorExpr, n: NoCons.type) = ctorDests.updateWith(ctor):
+      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, sels, true))
+      case None => Some(CtorDest(Map.empty, Nil, true))
     def get(ctor: CtorExpr) = ctorDests.get(ctor)
   
   object dtorSources:
-    val dtorSources = mutable.Map.empty[DtorExpr, Set[ResultId]].withDefaultValue(Set.empty)
+    val dtorSources = mutable.Map.empty[DtorExpr, DtorSource].withDefaultValue(DtorSource(Set.empty, false))
     private def getDtorExprOfResultId(i: ResultId) = i.getResult match
       case s: Select => DtorExpr.Sel(i)
       case r: Value.Ref => DtorExpr.Match(i)
       case _ => ??? // unreachable
     def update(dtor: ResultId, ctor: ResultId) =
       val dtorExpr = getDtorExprOfResultId(dtor)
-      dtorSources += dtorExpr -> (dtorSources(dtorExpr) + ctor)
+      dtorSources.updateWith(dtorExpr):
+        case None => Some(DtorSource(Set(ctor), false))
+        case Some(DtorSource(ctors, noProd)) => Some(DtorSource(ctors + ctor, noProd))
+    def update(dtor: ResultId, noProd: NoProd.type) =
+      val dtorExpr = getDtorExprOfResultId(dtor)
+      dtorSources.updateWith(dtorExpr):
+        case None => Some(DtorSource(Set.empty, true))
+        case Some(DtorSource(ctors, noProd)) => Some(DtorSource(ctors, true))
     def get(dtor: ResultId) = dtorSources.get(getDtorExprOfResultId(dtor))
       
   
@@ -509,7 +519,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           dtorSources.update(selDtor.expr, expr)
           args.find(a => a._1.id == field).map: p =>
             handle(p._2 -> consVar)
-        case (Ctor(ctor, args, _), ConsFun(l, r)) => ???
+        case (Ctor(ctor, args, _), ConsFun(l, r)) => () // ignore
         
         case (p: ProdVar, _) =>
           upperBounds += p.uid -> (cons :: upperBounds(p.uid))
@@ -535,16 +545,22 @@ class Deforest(using TL, Raise, Elaborator.State):
                   ()
               case (_: ProdVar, _) => ??? // unreachable, should be handled above
               case _ => handle(prod -> u)
-        case (Ctor(ctor, args, _), NoCons) => ()
-        case (ProdFun(l, r), Dtor(cls)) => ???
-        case (ProdFun(l, r), FieldSel(field, consVar)) => ???
+        case (Ctor(ctor, args, expr), NoCons) =>
+          ctorDests.update(expr, NoCons)
+          args.valuesIterator.foreach(a => handle(a, NoCons))
+        case (ProdFun(l, r), Dtor(cls)) => () // ignore
+        case (ProdFun(l, r), FieldSel(field, consVar)) => () // ignore
         case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
           lc.zip(lp).foreach(handle)
           handle(rp, rc)
-        case (ProdFun(l, r), NoCons) => ()
-        case (NoProd, Dtor(cls)) => ()
-        case (NoProd, FieldSel(field, consVar)) => ()
-        case (NoProd, ConsFun(l, r)) => ()
+        case (ProdFun(l, r), NoCons) =>
+          l.foreach(a => handle(NoProd, a))
+          handle(r, NoCons)
+        case (NoProd, Dtor(scrut)) => dtorSources.update(scrut, NoProd)
+        case (NoProd, fSel@FieldSel(field, consVar)) => dtorSources.update(fSel.expr, NoProd)
+        case (NoProd, ConsFun(l, r)) =>
+          l.foreach(a => handle(a, NoCons))
+          handle(NoProd, r)
         case (NoProd, NoCons) => ()
       
     constraints.foreach(c => handle(c)(using mutable.Set.empty))
@@ -554,14 +570,14 @@ class Deforest(using TL, Raise, Elaborator.State):
     
   lazy val resolveClashes =
     type CtorToDtor = Map[CtorExpr, CtorDest]
-    type DtorToCtor = Map[DtorExpr, Set[CtorExpr]]
+    type DtorToCtor = Map[DtorExpr, DtorSource]
     
     def removeCtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[CtorExpr]): CtorToDtor -> DtorToCtor =
       if rm.isEmpty then
         ctorDests -> dtorSources
       else
         val (newCtorDests, toDelete) = ctorDests.partition(c => !rm(c._1))
-        removeDtor(newCtorDests, dtorSources, toDelete.values.flatMap[DtorExpr]{ case CtorDest(mat, sels) =>
+        removeDtor(newCtorDests, dtorSources, toDelete.values.flatMap[DtorExpr]{ case CtorDest(mat, sels, _) =>
           mat.keySet.map(s => DtorExpr.Match(s)) ++ sels.map(s => DtorExpr.Sel(s.expr))
         }.toSet)
     
@@ -570,24 +586,28 @@ class Deforest(using TL, Raise, Elaborator.State):
         ctorDests -> dtorSources
       else
         val (newDtorSources, toDelete) = dtorSources.partition(d => !rm(d._1))
-        removeCtor(ctorDests, newDtorSources, toDelete.values.flatten.toSet)
+        removeCtor(ctorDests, newDtorSources, toDelete.values.map(_.ctors).flatten.toSet)
     
     val ctorToDtor = ctorDests.ctorDests.toMap
     val dtorToCtor = dtorSources.dtorSources.toMap
     
-    val removeClashes = removeCtor(
-      ctorToDtor,
-      dtorToCtor,
-      ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels) =>
-        (dtors.size == 0 && sels.size == 1)
-        || (dtors.size == 1 && {
-          val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
-          sels.forall { s => s.expr.getResult match
-            case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
-            case _ => false }
-        })
-      }.keySet
-    )
+    val removeClashes =
+      val tmpRes = removeCtor(
+        ctorToDtor,
+        dtorToCtor,
+        ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels, noCons) =>
+          ((dtors.size == 0 && sels.size == 1)
+          || (dtors.size == 1 && {
+            val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
+            sels.forall { s => s.expr.getResult match
+              case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
+              case _ => false }
+          }))
+          && !noCons
+        }.keySet
+      )
+      removeDtor(tmpRes._1, tmpRes._2, tmpRes._2.filter(_._2.noProd).keySet)
+    
     
     val removeCycle = {
       def getCtorInArm(ctor: CtorExpr, dtor: Match): Set[CtorExpr] =
@@ -618,7 +638,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           val newCtorsAndNewMatches =
             ctorAndMatches.flatMap((c, m) => getCtorInArm(c, m)).flatMap: c =>
               removeClashes._1.get(c).flatMap:
-                case CtorDest(matches, sels) => matches.values.headOption.map(m => c -> m)
+                case CtorDest(matches, sels, false) => matches.values.headOption.map(m => c -> m)
           val cycled = newCtorsAndNewMatches.filter(c => !cache.add(c._1))
           if newCtorsAndNewMatches.isEmpty then
             Set.empty
@@ -629,7 +649,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         go(Set(ctor -> dtor))
       
       val toRmCtor = removeClashes._1.flatMap:
-        case (c, CtorDest(matches, sels)) => 
+        case (c, CtorDest(matches, sels, false)) => 
           assert(matches.size <= 1)
           matches.values.flatMap(m => findCycle(c, m))
       
@@ -647,7 +667,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     // we need only one CtorFinalDest per arm for each pat mat expr
     val handledMatches = mutable.Map.empty[ResultId -> ClsOrModSymbol, Opt[CtorFinalDest]]
     
-    resolveClashes._1.toSortedMap.foreach { case (ctor, CtorDest(dtors, sels)) =>
+    resolveClashes._1.toSortedMap.foreach { case (ctor, CtorDest(dtors, sels, false)) =>
       val filteredDtor = {
         if dtors.size == 0 && sels.size == 1 then Some(CtorFinalDest.Sel(sels.head.expr))
         else if dtors.size == 0 && sels.size > 1 then
@@ -673,7 +693,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                   val c = cOrMod.asCls.get
                   // if this arm is used more than once, should be var symbol because the arm body will be
                   // extracted to a function, otherwise just temp symbol
-                  val varSymInsteadOfTempSym = resolveClashes._2(DtorExpr.Match(dtors.head._1)).count(getClsSymOfUid(_) === c) > 1
+                  val varSymInsteadOfTempSym = resolveClashes._2(DtorExpr.Match(dtors.head._1)).ctors.count(getClsSymOfUid(_) === c) > 1
                   val selsInArms = sels.filter { fs => fs.inMatching(dtors.head._1) === c }
                   
                   selsInArms.foreach: fs =>
@@ -814,7 +834,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
                 case Return(res, implct) => Return(res, false)
                 case t => t
           
-          if d.resolveClashes._2(DtorExpr.Match(scrut)).count{c =>
+          if d.resolveClashes._2(DtorExpr.Match(scrut)).ctors.count{c =>
             if !isDflt then c.getClsSymOfUid === cls
             else m.arms.find{ case (Case.Cls(c1, _), _) => c1 === c.getClsSymOfUid }.isEmpty
            } > 1 then
@@ -914,7 +934,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
             nonFlatten.flattened
           
           // no need to build a new function for empty rest, or if the rest is only going to be used once
-          if restRewritten.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).map(c => c.getClsSymOfUid).size == 1) then
+          if restRewritten.isInstanceOf[End] || (d.resolveClashes._2(DtorExpr.Match(s)).ctors.map(c => c.getClsSymOfUid).size == 1) then
             val res = N -> restRewritten
             store += s -> res
             res
