@@ -781,7 +781,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
     
     def apply(scrutExprId: ResultId, m: Match) = store.getOrElseUpdate(
       scrutExprId,
-      {
+      locally:
         assert(m.scrut.uid === scrutExprId)
         val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
 
@@ -801,7 +801,6 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           traverser.applyBlock(realArm)
         
         traverser.result.toList.sortBy(_.uid)
-      }
     )
 
   object matchArms:

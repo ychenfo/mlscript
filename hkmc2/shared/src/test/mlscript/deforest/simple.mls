@@ -6,13 +6,13 @@
 object A
 object B
 object C
-class AA(val aa)
-class BB(val bb)
-class AAA(val x, val y)
-class BBB(val x, val y)
-class CCC(val c)
+data class AA(aa)
+data class BB(bb)
+data class AAA(x, y)
+data class BBB(x, y)
+data class CCC(c)
 object None
-class Some(val value)
+data class Some(value)
 
 fun test() =
   let x = if true then A else B
@@ -112,7 +112,7 @@ test()
 
 
 object Nil
-class Cons(val h, val t)
+data class Cons(h, t)
 
 fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
 fun map(ls) = if ls is

@@ -5,15 +5,15 @@
 object A
 object B
 object C
-class AA(val x)
-class BB(val x)
-class CC(val x)
+data class AA(x)
+data class BB(x)
+data class CC(x)
 
 object Nil
-class Cons(val h, val t)
+data class Cons(h, t)
 
 object None
-class Some(val x)
+data class Some(x)
 
 
 fun f(x, y) =
