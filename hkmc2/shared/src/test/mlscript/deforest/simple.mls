@@ -1994,3 +1994,84 @@ test(B) + test(C)
 //│ = 4
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 4
+
+
+
+// technically ill-typed, so `AA(3)` (which flows to `z`) is not fused
+:sjs
+fun test(x, y, z) = if x is
+  AA(a) then
+    let m = if y is
+      AA(a1) then a1 + z
+    let n = if z is
+      AA(a2) then a2 - z
+    m + n
+test(AA(1), AA(2), AA(3))
+//│ JS (unsanitized):
+//│ let test10, tmp109, tmp110, tmp111;
+//│ test10 = function test(x1, y1, z) {
+//│   let param0, a, m, param01, a1, n, param02, a2, tmp112, tmp113;
+//│   if (x1 instanceof AA1.class) {
+//│     param0 = x1.aa;
+//│     a = param0;
+//│     if (y1 instanceof AA1.class) {
+//│       param01 = y1.aa;
+//│       a1 = param01;
+//│       tmp112 = a1 + z;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     m = tmp112;
+//│     if (z instanceof AA1.class) {
+//│       param02 = z.aa;
+//│       a2 = param02;
+//│       tmp113 = a2 - z;
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│     n = tmp113;
+//│     return m + n
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp109 = AA1(1);
+//│ tmp110 = AA1(2);
+//│ tmp111 = AA1(3);
+//│ test10(tmp109, tmp110, tmp111)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let test10, tmp109, tmp110, tmp111, _deforest_AA_aa3, _deforest_AA_aa4;
+//│ test10 = function test(x1, y1, z) {
+//│   return runtime.safeCall(x1(y1, z))
+//│ };
+//│ _deforest_AA_aa3 = 1;
+//│ tmp109 = (y1, z) => {
+//│   let param0, a;
+//│   param0 = _deforest_AA_aa3;
+//│   a = param0;
+//│   return runtime.safeCall(y1(z))
+//│ };
+//│ _deforest_AA_aa4 = 2;
+//│ tmp110 = (z) => {
+//│   let m, param0, a1, n, param01, a2, tmp112, tmp113;
+//│   param0 = _deforest_AA_aa4;
+//│   a1 = param0;
+//│   tmp112 = a1 + z;
+//│   m = tmp112;
+//│   if (z instanceof AA1.class) {
+//│     param01 = z.aa;
+//│     a2 = param01;
+//│     tmp113 = a2 - z;
+//│   } else {
+//│     throw new this.Error("match error");
+//│   }
+//│   n = tmp113;
+//│   return m + n
+//│ };
+//│ tmp111 = AA1(3);
+//│ block$res63 = test10(tmp109, tmp110, tmp111);
+//│ undefined
+//│ = "2AA(3)NaN"
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = "2AA(3)NaN"
