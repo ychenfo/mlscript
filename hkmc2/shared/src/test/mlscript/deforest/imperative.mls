@@ -12,74 +12,23 @@ object B
 // class Some(value)
 
 // * Not fused: two `x is A` consumers
-:sjs
 let x = if true then A else B
 fun foo(x) =
   if x is A do print(123)
   if x is
     A then 1
     B then 2
-//│ JS (unsanitized):
-//│ let foo, x, scrut, tmp;
-//│ foo = function foo(x1) {
-//│   let tmp1;
-//│   if (x1 instanceof A1.class) {
-//│     tmp1 = Predef.print(123);
-//│   } else {
-//│     tmp1 = runtime.Unit;
-//│   }
-//│   if (x1 instanceof A1.class) {
-//│     return 1
-//│   } else if (x1 instanceof B1.class) {
-//│     return 2
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ scrut = true;
-//│ if (scrut === true) {
-//│   tmp = A1;
-//│ } else {
-//│   tmp = B1;
-//│ }
-//│ x = tmp;
-//│ No fusion opportunity
 //│ x = A
 //│ No fusion opportunity
 
 // * We could make it work. But it's a special case that's probably not very important
-:sjs
 let x = if true then A else B
 fun foo(x) =
   if x is A do print(123)
   if x is B do print(456)
-//│ JS (unsanitized):
-//│ let foo1, x1, scrut1, tmp1;
-//│ foo1 = function foo(x2) {
-//│   let tmp2;
-//│   if (x2 instanceof A1.class) {
-//│     tmp2 = Predef.print(123);
-//│   } else {
-//│     tmp2 = runtime.Unit;
-//│   }
-//│   if (x2 instanceof B1.class) {
-//│     return Predef.print(456)
-//│   } else {
-//│     return runtime.Unit
-//│   }
-//│ };
-//│ scrut1 = true;
-//│ if (scrut1 === true) {
-//│   tmp1 = A1;
-//│ } else {
-//│   tmp1 = B1;
-//│ }
-//│ x1 = tmp1;
-//│ No fusion opportunity
 //│ x = A
 //│ No fusion opportunity
 
-:sjs
 fun foo(k, x) =
   if x === 0 do k(A)
   k(if x > 0
@@ -89,67 +38,6 @@ fun bar(v) = if v is
   A then 1
   B then 2
 foo(bar, 123)
-//│ JS (unsanitized):
-//│ let bar, foo2;
-//│ foo2 = function foo(k, x2) {
-//│   let scrut2, scrut3, tmp2, tmp3;
-//│   scrut2 = x2 === 0;
-//│   if (scrut2 === true) {
-//│     tmp2 = runtime.safeCall(k(A1));
-//│   } else {
-//│     tmp2 = runtime.Unit;
-//│   }
-//│   scrut3 = x2 > 0;
-//│   if (scrut3 === true) {
-//│     tmp3 = A1;
-//│   } else {
-//│     tmp3 = B1;
-//│   }
-//│   return runtime.safeCall(k(tmp3))
-//│ };
-//│ bar = function bar(v) {
-//│   if (v instanceof A1.class) {
-//│     return 1
-//│   } else if (v instanceof B1.class) {
-//│     return 2
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ foo2(bar, 123)
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let bar, foo2, match_v_branch_A;
-//│ match_v_branch_A = function match_v_branch_A() {
-//│   return 1
-//│ };
-//│ foo2 = function foo(k, x2) {
-//│   let scrut2, scrut3, tmp2, tmp3;
-//│   scrut2 = x2 === 0;
-//│   if (scrut2 === true) {
-//│     tmp2 = runtime.safeCall(k(() => {
-//│       return match_v_branch_A()
-//│     }));
-//│   } else {
-//│     tmp2 = runtime.Unit;
-//│   }
-//│   scrut3 = x2 > 0;
-//│   if (scrut3 === true) {
-//│     tmp3 = () => {
-//│       return match_v_branch_A()
-//│     };
-//│   } else {
-//│     tmp3 = () => {
-//│       return 2
-//│     };
-//│   }
-//│   return runtime.safeCall(k(tmp3))
-//│ };
-//│ bar = function bar(v) {
-//│   return runtime.safeCall(v())
-//│ };
-//│ foo2(bar, 123)
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 1
