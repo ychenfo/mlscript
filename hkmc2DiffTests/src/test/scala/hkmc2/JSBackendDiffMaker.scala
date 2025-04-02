@@ -56,24 +56,11 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     case r => output(s"Failed to load runtime: $r")
     h
   
-  lazy val hostDeforest =
-    hostDeforestCreated = true
-    // given TL = replTL
-    // val h = ReplHost(rootPath)
-    // h.execute(s"const $runtimeNme = (await import(\"${runtimeFile}\")).default;") match
-    // case ReplHost.Result(msg) =>
-    //   if msg.startsWith("Uncaught") then output(s"Failed to load runtime: $msg")
-    // case r => output(s"Failed to load runtime: $r")
-    // h
-    host
-    
   private var hostCreated = false
-  private var hostDeforestCreated = false
   
   override def run(): Unit =
     try super.run() finally
       if hostCreated then host.terminate()
-      if hostDeforestCreated then hostDeforest.terminate()
 
   
   
@@ -104,7 +91,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     
     val outerRaise: Raise = summon
     val reportedMessages = mutable.Set.empty[Str]
-    var deforestResult: Opt[Str] = None
+    var correctResult: Opt[Str] = None
     
     if showJS.isSet then
       given Raise =
@@ -127,78 +114,24 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         
       if deforestFlag.isSet then
         val deforest = new Deforest(using deforestTL)
-        output(">>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>")
-        if showLoweredTree.isSet then
-          output("\n==== Non-inserted lowered tree ====")
-          output(le.showAsTree)
-        
-        val (deforestRes, deforestStat) = deforest(le)
-        
-        if showLoweredTree.isSet then
-          output("\n==== deforested tree ====")
-          output(deforestRes.showAsTree)
-          output("\n")
-          
-        val resSym = new TempSymbol(S(blk), "block$res")  
-        
-        val resNme = baseScp.allocateName(resSym)
-        
-        val le0 = deforestRes.copy(main = deforestRes.main.mapTail:
-          case e: End =>
-            Assign(resSym, Value.Lit(syntax.Tree.UnitLit(false)), e)
-          case Return(res, implct) =>
-            assert(implct)
-            Assign(resSym, res, Return(Value.Lit(syntax.Tree.UnitLit(false)), true))
-          case tl: (Throw | Break | Continue) => tl
-        )
-        
-        val (pre, je) = baseScp.givenIn:
-          jsb.worksheet(le0)
-        output("==== JS (deforested): ====")
-        
-        val jsStr = je.stripBreaks.mkString(100)
-        val preStr = pre.stripBreaks.mkString(100)
-        output(preStr)
-        output(jsStr)
-        
-        
-        hostDeforest.execute(s"$resNme = undefined")
-        mkQuery(preStr, jsStr)(using hostDeforest): stdout =>
-          stdout.splitSane('\n').init
-            .foreach: line =>
-              output(s"> ${line}")
-        
-        if silent.isUnset then 
-          import Elaborator.Ctx.*
-          val valuesToPrint = List(("", resSym, expect.get))
-          valuesToPrint.foreach: (nme, sym, expect) =>
-            val le =
-              import codegen.*
-              Return(
-                Call(
-                  Value.Ref(Elaborator.State.globalThisSymbol).selSN("Predef").selSN("printRaw"),
-                  Arg(false, Value.Ref(sym)) :: Nil)(true, false),
-              implct = true)
-            val je = baseScp.givenIn:
-              jsb.block(le, endSemi = false)
+        val deforestRes -> _ -> num = deforest(le)
+        deforestRes match
+          case None => ()
+          case Some(_) if num == 0 => output("No fusion opportunity")
+          case Some(deforestRes) =>
+            output(">>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            if showLoweredTree.isSet then
+              output("\n==== deforested tree ====")
+              output(deforestRes.showAsTree)
+              output("\n")
+            
+            val je = baseScp.nest.givenIn:
+              jsb.program(deforestRes, N, wd)
+            output("==== JS (deforested): ====")
             val jsStr = je.stripBreaks.mkString(100)
-            mkQuery("", jsStr)(using hostDeforest): out =>
-              val result = out.splitSane('\n').init.mkString // should always ends with "undefined" (TODO: check)
-              expect match
-              case S(expected) if result =/= expected => raise:
-                ErrorReport(msg"Expected: '${expected}', got: '${result}'" -> N :: Nil,
-                  source = Diagnostic.Source.Runtime)
-              case _ => ()
-              if sym === resSym then deforestResult = S(result)
-              result match
-              case "undefined" =>
-              case "()" =>
-              case _ =>
-                output(s"${if nme.isEmpty then "" else s"$nme "}= ${result.indentNewLines("| ")}")
+            output(jsStr)
+            output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
           
-        output(deforestStat)
-        output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
-      
     if js.isSet then
       given Elaborator.Ctx = curCtx
       given Raise =
@@ -259,10 +192,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           .foreach: line =>
             output(s"> ${line}")
       
-      // if deforestFlag.isSet && showJS.isUnset then
-      //   mkQuery(preStr, jsStr)(using hostDeforest)(_ => ())
-      
-      
       
       if traceJS.isSet then
         host.execute("globalThis.Predef.TraceLogger.enabled = false")
@@ -297,15 +226,83 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
               ErrorReport(msg"Expected: '${expected}', got: '${result}'" -> N :: Nil,
                 source = Diagnostic.Source.Runtime)
             case _ => ()
-            if sym === resSym && deforestFlag.isSet && deforestResult.fold(false)(_ != result) then raise:
-              ErrorReport(
-                msg"The result from deforestated program (\"${deforestResult.get}\") is different from the one computed by the original prorgam (\"${result}\")" -> N :: Nil,
-                source = Diagnostic.Source.Runtime)
             val anon = nme.isEmpty
+            if sym === resSym then correctResult = S(result)
             result match
             case "undefined" if anon =>
             case "()" if anon =>
             case _ =>
               output(s"${if anon then "" else s"$nme "}= ${result.indentNewLines("| ")}")
       
-
+      if deforestFlag.isSet then
+        
+        val deforestLow = ltl.givenIn:
+          codegen.Lowering()
+        val lowered0 = deforestLow.program(blk)
+        val deforest = new Deforest(using deforestTL)
+        val maybeDeforestRes -> deforestStat -> num = deforest(lowered0)
+        maybeDeforestRes match
+          case None => ()
+          case Some(_) if num == 0 => output("No fusion opportunity")
+          case Some(deforestRes) =>
+            output(">>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>")
+            val resSym = new TempSymbol(S(blk), "block$res_deforest")
+            val resNme = nestedScp.allocateName(resSym)
+            val le = deforestRes.copy(main = deforestRes.main.mapTail:
+              case e: End =>
+                Assign(resSym, Value.Lit(syntax.Tree.UnitLit(false)), e)
+              case Return(res, implct) =>
+                assert(implct)
+                Assign(resSym, res, Return(Value.Lit(syntax.Tree.UnitLit(false)), true))
+              case tl: (Throw | Break | Continue) => tl
+            )
+            val (pre, js) = nestedScp.givenIn:
+              jsb.worksheet(le)
+            val preStr = pre.stripBreaks.mkString(100)
+            val jsStr = js.stripBreaks.mkString(100)
+            if showSanitizedJS.isSet then
+              output(s"JS:")
+              output(jsStr)
+            
+            host.execute(s"$resNme = undefined")
+            
+            mkQuery(preStr, jsStr): stdout =>
+              stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
+                .foreach: line =>
+                  output(s"> ${line}")
+            
+            if silent.isUnset then 
+              import Elaborator.Ctx.*
+              val valuesToPrint = ("", resSym, expect.get) :: Nil
+              valuesToPrint.foreach: (nme, sym, expect) =>
+                val le =
+                  import codegen.*
+                  Return(
+                    Call(
+                      Value.Ref(Elaborator.State.globalThisSymbol).selSN("Predef").selSN("printRaw"),
+                      Arg(false, Value.Ref(sym)) :: Nil)(true, false),
+                  implct = true)
+                val je = nestedScp.givenIn:
+                  jsb.block(le, endSemi = false)
+                val jsStr = je.stripBreaks.mkString(100)
+                mkQuery("", jsStr): out =>
+                  val result = out.splitSane('\n').init.mkString // should always ends with "undefined" (TODO: check)
+                  expect match
+                  case S(expected) if result =/= expected => raise:
+                    ErrorReport(msg"Expected: '${expected}', got: '${result}'" -> N :: Nil,
+                      source = Diagnostic.Source.Runtime)
+                  case _ => ()
+                  val anon = nme.isEmpty
+                  if sym === resSym && correctResult.fold(false)(_ != result) then raise:
+                    ErrorReport(
+                      msg"The result from deforestated program (\"${result}\") is different from the one computed by the original prorgam (\"${correctResult.get}\")" -> N :: Nil,
+                      source = Diagnostic.Source.Runtime)
+                  result match
+                  case "undefined" if anon =>
+                  case "()" if anon =>
+                  case _ =>
+                    output(s"${if anon then "" else s"$nme "}= ${result.indentNewLines("| ")}")
+            
+            output(deforestStat)
+            output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
+          

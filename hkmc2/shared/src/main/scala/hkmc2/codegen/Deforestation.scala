@@ -237,7 +237,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   given Uid.Handler[StratVar]#State = StratVarUidHandler.State()
   import StratVarState.freshVar
   
-  def apply(p: Program): Program -> String =
+  def apply(p: Program): Opt[Program] -> String -> Int =
     val mainBlk = p.main
     
     globallyDefinedVars.init(mainBlk)
@@ -249,8 +249,8 @@ class Deforest(using TL, Raise, Elaborator.State):
       processBlock(mainBlk)
     catch
       case NotDeforestableException(msg) =>
-        // return the original program if deforestation is not applicable
-        return p -> ""
+        // return None if deforestation is not applicable
+        return N -> "" -> 0
     
     resolveConstraints
     
@@ -275,15 +275,10 @@ class Deforest(using TL, Raise, Elaborator.State):
       case (ctorUid, CtorFinalDest.Match(scrut, expr, _, _)) =>
         "\t" + ctorUid.getClsSymOfUid.nme + " --match--> " + s"`if ${expr.scrut.asInstanceOf[Value.Ref].l.nme} is ...`"
     
-    Program(
-      p.imports,
-      rewrite(mainBlk)
-    ) ->
-      locally:
-        if filteredCtorDests.nonEmpty then
-          s"${filteredCtorDests.size} fusion opportunities:\n${fusionStat.toList.sorted.mkString("\n")}"
-        else
-          s"0 fusion opportunity"
+    if filteredCtorDests.nonEmpty then
+      S(Program(p.imports, rewrite(mainBlk))) -> s"${filteredCtorDests.size} fusion opportunities:\n${fusionStat.toList.sorted.mkString("\n")}" -> filteredCtorDests.size
+    else
+      S(p) -> s"0 fusion opportunity" -> 0
   
   // these are never considered as free vars (because of their symbol type)
   // consider TopLevelSym, BlockMemberSymbols and BuiltInSyms as globally defined...

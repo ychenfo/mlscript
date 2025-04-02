@@ -1,6 +1,7 @@
 :js
 :deforest
 
+//│ No fusion opportunity
 object A
 object B
 object C
@@ -53,14 +54,15 @@ c(AA(2))
 //│   };
 //│   return runtime.safeCall(scrut(_deforest_AA_x))
 //│ };
-//│ block$res4 = c(tmp);
-//│ undefined
+//│ c(tmp)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 2
 //│ 2 fusion opportunities:
 //│ 	A --match--> `if scrut is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 2
 
 
 :sjs
@@ -94,16 +96,17 @@ c(AA(2), A)
 //│ tmp2 = (y) => {
 //│   return runtime.safeCall(y(_deforest_AA_x1))
 //│ };
-//│ block$res6 = c1(tmp2, (_deforest_AA_x2) => {
+//│ c1(tmp2, (_deforest_AA_x2) => {
 //│   return _deforest_AA_x2
-//│ });
-//│ undefined
+//│ })
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 2
 //│ 2 fusion opportunities:
 //│ 	A --match--> `if y is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 2
 
 
 
@@ -146,16 +149,17 @@ c(p(), A)
 //│   }
 //│ };
 //│ tmp4 = p();
-//│ block$res8 = c2(tmp4, (_deforest_AA_x2) => {
+//│ c2(tmp4, (_deforest_AA_x2) => {
 //│   return _deforest_AA_x2
-//│ });
-//│ undefined
+//│ })
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 2
 //│ 2 fusion opportunities:
 //│ 	A --match--> `if y is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 2
 
 
 
@@ -203,19 +207,20 @@ c(p(), A)
 //│   }
 //│ };
 //│ tmp6 = p1();
-//│ block$res10 = c3(tmp6, (_deforest_AA_x2) => {
+//│ c3(tmp6, (_deforest_AA_x2) => {
 //│   let a, tmp7;
 //│   tmp7 = 1;
 //│   a = tmp7;
 //│   return a + _deforest_AA_x2
-//│ });
-//│ undefined
+//│ })
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 3
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 3
 //│ 2 fusion opportunities:
 //│ 	A --match--> `if y is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 3
 
 
 
@@ -307,8 +312,10 @@ f(AA(AA(AA(AA(AA(A))))))
 //│ tmp12 = () => {
 //│   return match_x_branch_AA(_deforest_AA_x_tmp3)
 //│ };
-//│ block$res12 = f(tmp12);
-//│ undefined
+//│ f(tmp12)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 42
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 42
 //│ 6 fusion opportunities:
 //│ 	A --match--> `if x is ...`
@@ -318,7 +325,6 @@ f(AA(AA(AA(AA(AA(A))))))
 //│ 	AA --match--> `if x is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 42
 
 :sjs
 fun f(x) = if x is
@@ -363,14 +369,15 @@ f(AA(AA(A)))
 //│   param0 = _deforest_AA_x4;
 //│   return runtime.safeCall(param0())
 //│ };
-//│ block$res14 = f1(tmp19);
-//│ undefined
+//│ f1(tmp19)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = A
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = A
 //│ 2 fusion opportunities:
 //│ 	AA --match--> `if param0 is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = A
 
 :sjs
 fun f(x) = if x is
@@ -424,14 +431,15 @@ f(p())
 //│   }
 //│ };
 //│ tmp22 = p2();
-//│ block$res16 = f2(tmp22);
-//│ undefined
+//│ f2(tmp22)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = A
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = A
 //│ 2 fusion opportunities:
 //│ 	AA --match--> `if param0 is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = A
 
 
 
@@ -481,11 +489,12 @@ c(AA(2), 10)
 //│   };
 //│   return runtime.safeCall(scrut(y, _deforest_AA_x5))
 //│ };
-//│ block$res18 = c4(tmp24, 10);
-//│ undefined
+//│ c4(tmp24, 10)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 12
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 12
 //│ 2 fusion opportunities:
 //│ 	A --match--> `if scrut is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 12

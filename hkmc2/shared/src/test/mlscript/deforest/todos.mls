@@ -1,6 +1,7 @@
 :js
 :deforest
 
+//│ No fusion opportunity
 object A
 object B
 object C
@@ -57,13 +58,14 @@ f(AA(AA(3)))
 //│     throw new this.Error("match error");
 //│   }
 //│ };
-//│ block$res4 = f(tmp1);
-//│ undefined
+//│ f(tmp1)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 3
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 3
 //│ 1 fusion opportunities:
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 3
 
 
 // TODO: the computation of `t + 5 * 4 - 3 + 2 - 1` is still duplicated...
@@ -199,13 +201,14 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ tmp13 = test(tmp12);
 //│ tmp14 = tmp9 + tmp13;
 //│ tmp15 = test(B1);
-//│ block$res6 = tmp14 + tmp15;
-//│ undefined
+//│ tmp14 + tmp15
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 78
+//│ p = AA(AA(AA(10)))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 78
 //│ 2 fusion opportunities:
 //│ 	AA --match--> `if param0 is ...`
 //│ 	AA --match--> `if param0 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-//│ = 78
-//│ p = AA(AA(AA(10)))
 
