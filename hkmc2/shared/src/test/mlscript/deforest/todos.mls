@@ -60,6 +60,8 @@ f(AA(AA(3)))
 //│ block$res4 = f(tmp1);
 //│ undefined
 //│ = 3
+//│ 1 fusion opportunities:
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
 
@@ -200,6 +202,9 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ block$res6 = tmp14 + tmp15;
 //│ undefined
 //│ = 78
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if param0 is ...`
+//│ 	AA --match--> `if param0 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 78
 //│ p = AA(AA(AA(10)))

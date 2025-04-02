@@ -132,7 +132,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           output("\n==== Non-inserted lowered tree ====")
           output(le.showAsTree)
         
-        val deforestRes = deforest(le)
+        val (deforestRes, deforestStat) = deforest(le)
         
         if showLoweredTree.isSet then
           output("\n==== deforested tree ====")
@@ -195,6 +195,8 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
               case "()" =>
               case _ =>
                 output(s"${if nme.isEmpty then "" else s"$nme "}= ${result.indentNewLines("| ")}")
+          
+        output(deforestStat)
         output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
       
     if js.isSet then

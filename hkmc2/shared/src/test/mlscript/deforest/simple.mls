@@ -61,6 +61,9 @@ test()
 //│ block$res2 = test();
 //│ undefined
 //│ = 1
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if x is ...`
+//│ 	B --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -124,6 +127,9 @@ test()
 //│ block$res4 = test1();
 //│ undefined
 //│ = A
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if x is ...`
+//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = A
 
@@ -207,6 +213,11 @@ test()
 //│ block$res6 = test2();
 //│ undefined
 //│ = 1
+//│ 4 fusion opportunities:
+//│ 	A --match--> `if a is ...`
+//│ 	AA --match--> `if x is ...`
+//│ 	B --match--> `if a is ...`
+//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -302,6 +313,11 @@ test()
 //│ block$res8 = test3();
 //│ undefined
 //│ = 1
+//│ 4 fusion opportunities:
+//│ 	A --match--> `if a is ...`
+//│ 	AA --match--> `if x is ...`
+//│ 	B --match--> `if a is ...`
+//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -380,6 +396,9 @@ test()
 //│ block$res10 = test4();
 //│ undefined
 //│ = 11
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if x is ...`
+//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 11
 
@@ -464,6 +483,9 @@ map(enumFromTo(1, 4))
 //│ block$res13 = map(tmp);
 //│ undefined
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 
@@ -539,6 +561,9 @@ sum(enumFromTo(1,10))
 //│ block$res15 = sum(tmp2);
 //│ undefined
 //│ = 45
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 45
 
@@ -594,6 +619,7 @@ test()
 //│ block$res17 = test5();
 //│ undefined
 //│ = 2
+//│ 0 fusion opportunity
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
@@ -644,6 +670,9 @@ test()
 //│ block$res19 = test6();
 //│ undefined
 //│ = 2
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if x is ...`
+//│ 	B --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
@@ -701,6 +730,9 @@ c(A) + c(B)
 //│ > 1
 //│ > 2
 //│ = 3
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if a is ...`
+//│ 	B --match--> `if a is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ > 1
 //│ > 2
@@ -787,6 +819,9 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ block$res23 = map1(lambda, tmp8);
 //│ undefined
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 
@@ -892,6 +927,9 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ block$res25 = map2(lambda2, tmp10);
 //│ undefined
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 
@@ -966,6 +1004,9 @@ sum(enumFromTo(1, 10), 0)
 //│ block$res27 = sum1(tmp12, 0);
 //│ undefined
 //│ = 45
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 45
 
@@ -1013,6 +1054,7 @@ c(AA(3))
 //│ block$res29 = c1(tmp14);
 //│ undefined
 //│ = 5
+//│ 0 fusion opportunity
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 5
 
@@ -1050,6 +1092,9 @@ f(A, B)
 //│ });
 //│ undefined
 //│ = 3
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if a is ...`
+//│ 	B --match--> `if b is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
 
@@ -1099,6 +1144,7 @@ f(Some(2))
 //│ block$res33 = f4(tmp16);
 //│ undefined
 //│ = 0
+//│ 0 fusion opportunity
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 0
 
@@ -1139,6 +1185,9 @@ if y is
 //│ block$res35 = runtime.safeCall(x(y));
 //│ undefined
 //│ = 2
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if x is ...`
+//│ 	B --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 //│ x = A
@@ -1191,6 +1240,9 @@ test()
 //│ block$res37 = test7();
 //│ undefined
 //│ = 2
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if x is ...`
+//│ 	B --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
@@ -1298,6 +1350,11 @@ f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 //│ block$res39 = tmp26 + tmp28;
 //│ undefined
 //│ = 21
+//│ 4 fusion opportunities:
+//│ 	AAA --match--> `if x is ...`
+//│ 	AAA --match--> `if x is ...`
+//│ 	BBB --match--> `if x is ...`
+//│ 	BBB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 21
 
@@ -1372,6 +1429,8 @@ p(AA(1))
 //│ block$res41 = p(tmp39);
 //│ undefined
 //│ = 2
+//│ 1 fusion opportunities:
+//│ 	A --match--> `if scrut is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
@@ -1419,6 +1478,9 @@ c(AA(2), A)
 //│ });
 //│ undefined
 //│ = 2
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if y is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
@@ -1517,6 +1579,11 @@ f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4) + f(CCC(4), 0)
 //│ block$res45 = tmp50 + tmp52;
 //│ undefined
 //│ = 24
+//│ 4 fusion opportunities:
+//│ 	AAA --match--> `if x is ...`
+//│ 	AAA --match--> `if x is ...`
+//│ 	CCC --match--> `if x is ...`
+//│ 	CCC --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 24
 
@@ -1595,6 +1662,10 @@ f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4)
 //│ block$res47 = tmp67 + tmp69;
 //│ undefined
 //│ = 22
+//│ 3 fusion opportunities:
+//│ 	AAA --match--> `if x is ...`
+//│ 	AAA --match--> `if x is ...`
+//│ 	CCC --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 22
 
@@ -1631,6 +1702,8 @@ c(BB(3), 0)
 //│ block$res49 = c4(tmp77, 0);
 //│ undefined
 //│ = 0
+//│ 1 fusion opportunities:
+//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 0
 
@@ -1694,6 +1767,9 @@ f(AA(AA(0)))
 //│ block$res51 = f8(tmp80);
 //│ undefined
 //│ = 1
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if b is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -1715,6 +1791,9 @@ f(AA(AA(3)))
 //│ let f9, tmp83, tmp84;
 //│ f9 = function f(x1) { return x1 }; tmp83 = 3; tmp84 = tmp83; block$res53 = f9(tmp84); undefined
 //│ = 3
+//│ 2 fusion opportunities:
+//│ 	AA --sel--> `.Ident(aa)`
+//│ 	AA --sel--> `.Ident(aa)`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
 
@@ -1858,6 +1937,9 @@ outer1(p, 1, 2) + outer2(p, 3, 4) + inner(AA(5), 6)
 //│ block$res55 = tmp91 + tmp93;
 //│ undefined
 //│ = 103
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if x is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 103
 //│ p = AA(AA(3))
@@ -1910,6 +1992,8 @@ mapHead(x => x, AAA(1, AAA(2, None)))
 //│ block$res57 = mapHead(lambda4, tmp102);
 //│ undefined
 //│ = 1
+//│ 1 fusion opportunities:
+//│ 	AAA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 
@@ -1954,6 +2038,8 @@ test()
 //│ block$res59 = test8();
 //│ undefined
 //│ = 5
+//│ 1 fusion opportunities:
+//│ 	A --match--> `if scrut is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 5
 
@@ -1992,6 +2078,9 @@ test(B) + test(C)
 //│ block$res61 = tmp105 + tmp106;
 //│ undefined
 //│ = 4
+//│ 2 fusion opportunities:
+//│ 	B --match--> `if a is ...`
+//│ 	C --match--> `if a is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 4
 
@@ -2073,5 +2162,8 @@ test(AA(1), AA(2), AA(3))
 //│ block$res63 = test10(tmp109, tmp110, tmp111);
 //│ undefined
 //│ = "2AA(3)NaN"
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if x is ...`
+//│ 	AA --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = "2AA(3)NaN"

@@ -56,6 +56,9 @@ c(AA(2))
 //│ block$res4 = c(tmp);
 //│ undefined
 //│ = 2
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if scrut is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
@@ -96,6 +99,9 @@ c(AA(2), A)
 //│ });
 //│ undefined
 //│ = 2
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if y is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
@@ -145,6 +151,9 @@ c(p(), A)
 //│ });
 //│ undefined
 //│ = 2
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if y is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 
@@ -202,6 +211,9 @@ c(p(), A)
 //│ });
 //│ undefined
 //│ = 3
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if y is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
 
@@ -298,6 +310,13 @@ f(AA(AA(AA(AA(AA(A))))))
 //│ block$res12 = f(tmp12);
 //│ undefined
 //│ = 42
+//│ 6 fusion opportunities:
+//│ 	A --match--> `if x is ...`
+//│ 	AA --match--> `if param0 is ...`
+//│ 	AA --match--> `if param0 is ...`
+//│ 	AA --match--> `if x is ...`
+//│ 	AA --match--> `if x is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 42
 
@@ -347,6 +366,9 @@ f(AA(AA(A)))
 //│ block$res14 = f1(tmp19);
 //│ undefined
 //│ = A
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if param0 is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = A
 
@@ -405,6 +427,9 @@ f(p())
 //│ block$res16 = f2(tmp22);
 //│ undefined
 //│ = A
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if param0 is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = A
 
@@ -459,5 +484,8 @@ c(AA(2), 10)
 //│ block$res18 = c4(tmp24, 10);
 //│ undefined
 //│ = 12
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if scrut is ...`
+//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 12
