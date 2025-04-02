@@ -967,7 +967,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || oneOfParentMatchRestHasExplicitRet
       val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
       Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
-    case Match(scrut, arms, dflt, rest) if dflt.fold(true)(_.willBeNonEndTailBlock) && arms.forall { case (_, body) => body.willBeNonEndTailBlock } =>
+    case Match(scrut, arms, dflt, rest) if dflt.fold(false)(_.willBeNonEndTailBlock) && arms.forall { case (_, body) => body.willBeNonEndTailBlock } =>
       super.applyBlock(Match(scrut, arms, dflt, End("")))
     case _ => super.applyBlock(b)
   
