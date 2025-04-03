@@ -982,7 +982,9 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
     case Match(scrut, arms, dflt, rest)
     if
-      // TODO: explain what this does;
+      // If all the arms end with non-`End` blocks, then the `rest` of this `Match` will never be executed,
+      // and we remove the `rest` in this case. This prevents `rest` to use variables that become
+      // undefined because computation in arms that defines them are moved away. 
       // TODO: it will become unnecessary once we have proper binding declarations in the Block IR
       // and all uses of never-assigned variables will be known to be dead code
       dflt.fold(false)(_.willBeNonEndTailBlock) && arms.forall { case (_, body) => body.willBeNonEndTailBlock }
