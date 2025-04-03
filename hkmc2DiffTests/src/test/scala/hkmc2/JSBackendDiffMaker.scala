@@ -57,34 +57,8 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     h
   
   private var hostCreated = false
-  
   override def run(): Unit =
-    try super.run() finally
-      if hostCreated then host.terminate()
-
-  
-  
-  def mkQuery(preStr: Str, jsStr: Str)(using host: ReplHost = host, r: Raise)(k: Str => Unit) =
-    val queryStr = jsStr.replaceAll("\n", " ")
-    val (reply, stderr) = host.query(preStr, queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
-    reply match
-      case ReplHost.Result(content) => k(content)
-      case ReplHost.Empty =>
-      case ReplHost.Unexecuted(message) => ???
-      case ReplHost.Error(isSyntaxError, message, otherOutputs) =>
-        if otherOutputs.nonEmpty then
-          otherOutputs.splitSane('\n').foreach: line =>
-            output(s"> ${line}")
-        if (isSyntaxError) then
-          // If there is a syntax error in the generated code,
-          // it should be a code generation error.
-          raise(ErrorReport(msg"[Uncaught SyntaxError] ${message}" -> N :: Nil,
-            source = Diagnostic.Source.Compilation))
-        else
-          // Otherwise, it is considered a simple runtime error.
-          raise(ErrorReport(msg"${message}" -> N :: Nil,
-            source = Diagnostic.Source.Runtime))
-    if stderr.nonEmpty then output(s"// Standard Error:\n${stderr}")
+    try super.run() finally if hostCreated then host.terminate()
   
   override def processTerm(blk: semantics.Term.Blk, inImport: Bool)(using Config, Raise): Unit =
     super.processTerm(blk, inImport)
@@ -178,6 +152,27 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       if showSanitizedJS.isSet then
         output(s"JS:")
         output(jsStr)
+      def mkQuery(preStr: Str, jsStr: Str)(k: Str => Unit) =
+        val queryStr = jsStr.replaceAll("\n", " ")
+        val (reply, stderr) = host.query(preStr, queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
+        reply match
+          case ReplHost.Result(content) => k(content)
+          case ReplHost.Empty =>
+          case ReplHost.Unexecuted(message) => ???
+          case ReplHost.Error(isSyntaxError, message, otherOutputs) =>
+            if otherOutputs.nonEmpty then
+              otherOutputs.splitSane('\n').foreach: line =>
+                output(s"> ${line}")
+            if (isSyntaxError) then
+              // If there is a syntax error in the generated code,
+              // it should be a code generation error.
+              raise(ErrorReport(msg"[Uncaught SyntaxError] ${message}" -> N :: Nil,
+                source = Diagnostic.Source.Compilation))
+            else
+              // Otherwise, it is considered a simple runtime error.
+              raise(ErrorReport(msg"${message}" -> N :: Nil,
+                source = Diagnostic.Source.Runtime))
+        if stderr.nonEmpty then output(s"// Standard Error:\n${stderr}")
       
       if traceJS.isSet then
         host.execute(
@@ -191,8 +186,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
           .foreach: line =>
             output(s"> ${line}")
-      
-      
       if traceJS.isSet then
         host.execute("globalThis.Predef.TraceLogger.enabled = false")
       
@@ -235,7 +228,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
               output(s"${if anon then "" else s"$nme "}= ${result.indentNewLines("| ")}")
       
       if deforestFlag.isSet then
-        
         val deforestLow = ltl.givenIn:
           codegen.Lowering()
         val lowered0 = deforestLow.program(blk)
