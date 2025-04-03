@@ -517,3 +517,40 @@ test(AA(1), AA(2), AA(3))
 //│ 	AA --match--> `if x is ...`
 //│ 	AA --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun test(x) =
+  let t = id of
+    if x is
+      AA(a) then a
+      BB(a) then a
+  t(123).c + 5 * 4 - 3 + 2 - 1
+let p = if true then AA(CCC) else BB(CCC)
+test(p)
+//│ = 141
+//│ p = AA([function CCC])
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 141
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if x is ...`
+//│ 	BB --match--> `if x is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun test(x, y) =
+  let t =
+    if y is CCC then
+      if x is
+        AA(a) then a
+        BB(a) then a
+  t(123).c + 5 * 4 - 3 + 2 - 1
+let p = if true then AA(CCC) else BB(CCC)
+test(p, id(CCC(123)))
+//│ = 141
+//│ p = AA([function CCC])
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 141
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if x is ...`
+//│ 	BB --match--> `if x is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
