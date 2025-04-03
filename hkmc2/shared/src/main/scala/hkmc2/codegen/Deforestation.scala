@@ -153,6 +153,10 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
     ctx ++= paramSymbols
     applyBlock(l.body)
     ctx --= paramSymbols
+  
+  def analyze(b: Block) =
+    applyBlock(b)
+    result.toList.sortBy(_.uid)
 
 // Compute free vars for a Match block, considering deforestations. Used on non-transformed blocks
 // Make use of `freeVarsOfNonTransformedMatches`, which computes the free vars _after transformation_
@@ -190,47 +194,51 @@ class DeforestationFreeVarTraverser(using
       selsToBeReplaced.get(p.uid).fold(super.applyPath(p))(s => result += s)
     case _ => super.applyPath(p)
 
+class WillBeNonEndTailBlockTraverser(using d: Deforest) extends BlockTraverserShallow:
+  var flag = false
+  override def applyBlock(b: Block): Unit = b match
+    case Match(scrut, arms, dflt, rest) =>
+      flag =
+        d.filteredDtors(scrut.uid) ||
+        (arms.forall { case (_, b) => b.willBeNonEndTailBlock } && dflt.fold(true)(_.willBeNonEndTailBlock)) ||
+        rest.willBeNonEndTailBlock
+    case _: End => ()
+    case _: BlockTail => flag = true
+    case _ => super.applyBlock(b)
+  def analyze(b: Block): Bool =
+    applyBlock(b)
+    flag  
 
+class ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) extends
+  BlockTransformer(new SymbolSubst()):
+  override def applyValue(v: Value): Value = v match
+    case Value.Ref(l) => Value.Ref(freeVarsAndTheirNewSyms.getOrElse(l, l))
+    case _ => super.applyValue(v)
+
+object HasExplicitRetTraverser extends BlockTraverserShallow:
+  var flag = false
+  override def applyBlock(b: Block): Unit = b match
+    case Return(_, imp) => flag = !imp
+    case _ => super.applyBlock(b)
+  
+  def analyze(b: Block) =
+    flag = false
+    applyBlock(b)
+    flag
+  
 extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
-    object ReplaceLocalSymTransformer extends BlockTransformer(new SymbolSubst()):
-      override def applyValue(v: Value): Value = v match
-        case Value.Ref(l) => Value.Ref(freeVarsAndTheirNewSyms.getOrElse(l, l))
-        case _ => super.applyValue(v)
-    ReplaceLocalSymTransformer.applyBlock(b)
+    ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms).applyBlock(b)
 
   def sortedFvsForTransformedBlocks(using alwaysDefined: Set[Symbol]) =
-    val traverser = FreeVarTraverser(alwaysDefined)
-    traverser.applyBlock(b)
-    traverser.result.toList.sortBy(_.uid)
+    FreeVarTraverser(alwaysDefined).analyze(b)
   
   def hasExplicitRet: Boolean =
-    object HasExplicitRetTraverser extends BlockTraverserShallow:
-      var flag = false
-      override def applyBlock(b: Block): Unit = b match
-        case Return(_, imp) => flag = !imp
-        case _ => super.applyBlock(b)
-    
-    HasExplicitRetTraverser.applyBlock(b)
-    HasExplicitRetTraverser.flag
+    HasExplicitRetTraverser.analyze(b)
   
   def willBeNonEndTailBlock(using d: Deforest): Bool =
-    object WillBeNonEndTailBlockTraverser extends BlockTraverserShallow:
-      var flag = false
-      override def applyBlock(b: Block): Unit = b match
-        case Match(scrut, arms, dflt, rest) =>
-          flag =
-            d.filteredDtors(scrut.uid) ||
-            (arms.forall { case (_, b) => b.willBeNonEndTailBlock } && dflt.fold(true)(_.willBeNonEndTailBlock)) ||
-            rest.willBeNonEndTailBlock
-        case _: End => ()
-        case _: BlockTail => flag = true
-        case _ => super.applyBlock(b)
-    WillBeNonEndTailBlockTraverser.applyBlock(b)
-    WillBeNonEndTailBlockTraverser.flag
-      
-
-
+    WillBeNonEndTailBlockTraverser().analyze(b)
+    
 class Deforest(using TL, Raise, Elaborator.State):
   
   object StratVarUidHandler extends Uid.Handler[StratVar]()
@@ -972,7 +980,13 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || oneOfParentMatchRestHasExplicitRet
       val freeVars = freeVarsOfNonTransformedMatches(scrut.uid, mat).map(v => Arg(false, Value.Ref(v)))
       Return(Call(scrut, freeVars)(false, false), !needExplicitRet)
-    case Match(scrut, arms, dflt, rest) if dflt.fold(false)(_.willBeNonEndTailBlock) && arms.forall { case (_, body) => body.willBeNonEndTailBlock } =>
+    case Match(scrut, arms, dflt, rest)
+    if
+      // TODO: explain what this does;
+      // TODO: it will become unnecessary once we have proper binding declarations in the Block IR
+      // and all uses of never-assigned variables will be known to be dead code
+      dflt.fold(false)(_.willBeNonEndTailBlock) && arms.forall { case (_, body) => body.willBeNonEndTailBlock }
+    =>
       super.applyBlock(Match(scrut, arms, dflt, End("")))
     case _ => super.applyBlock(b)
   
