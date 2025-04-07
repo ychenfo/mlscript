@@ -554,3 +554,25 @@ test(p, id(CCC(123)))
 //│ 	AA --match--> `if x is ...`
 //│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:sjs
+fun f(x) = if x is
+  A then 1
+f(id(A)) + f(A)
+//│ JS (unsanitized):
+//│ let f10, tmp121, tmp122, tmp123;
+//│ f10 = function f(x1) {
+//│   if (x1 instanceof A1.class) {
+//│     return 1
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp121 = Predef.id(A1);
+//│ tmp122 = f10(tmp121);
+//│ tmp123 = f10(A1);
+//│ tmp122 + tmp123
+//│ No fusion opportunity
+//│ = 2
+//│ No fusion opportunity

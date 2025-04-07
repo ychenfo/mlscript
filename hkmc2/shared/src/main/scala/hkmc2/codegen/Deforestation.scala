@@ -310,17 +310,30 @@ class Deforest(using TL, Raise, Elaborator.State):
   val matchScrutToParentMatchScrut = mutable.Map.empty[ResultId, Option[ResultId]]
   object symToStrat:
     val store = mutable.Map.empty[Symbol, ProdVar]
+    val funSymsWithDefn = mutable.Set.empty[BlockMemberSymbol]
+    val usedFunSym = mutable.Set.empty[BlockMemberSymbol]
     
-    def init(p: Block) = if store.isEmpty then
-      object FreshVarForAllVars extends BlockTraverser:
-        override def applySymbol(s: Symbol): Unit = s match
-          case _: BlockMemberSymbol => store += s -> freshVar(s.nme)._1
-          case _: TempSymbol => store += s -> freshVar(s.nme)._1
-          case _: VarSymbol => store += s -> freshVar(s.nme)._1
-          case _: TermSymbol => store += s -> freshVar(s.nme)._1
-          case _ => ()
+    def init(p: Block) =
+      if store.isEmpty then
+        object FreshVarForAllVars extends BlockTraverser:
+          override def applySymbol(s: Symbol): Unit = s match
+            case b: BlockMemberSymbol =>
+              store += s -> freshVar(s.nme)._1
+              b.trmImplTree.foreach: t =>
+                if t.k is syntax.Fun then usedFunSym += b
+            case _: TempSymbol => store += s -> freshVar(s.nme)._1
+            case _: VarSymbol => store += s -> freshVar(s.nme)._1
+            case _: TermSymbol => store += s -> freshVar(s.nme)._1
+            case _ => ()
           
-      FreshVarForAllVars.applyBlock(p)
+          override def applyFunDefn(fun: FunDefn): Unit =
+            funSymsWithDefn += fun.sym
+            super.applyFunDefn(fun)
+            
+        FreshVarForAllVars.applyBlock(p)
+      usedFunSym.diff(funSymsWithDefn).foreach: funSymsWithoutDefn =>
+        constrain(NoProd, store(funSymsWithoutDefn).asConsStrat)
+      
     
     // TODO: ctor as a function?
     def getStratOfSym(s: Symbol) =
