@@ -81,7 +81,7 @@ enum DtorExpr:
   case Sel(s: ResultId)
 
 enum CtorFinalDest:
-  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])
+  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Set[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])
   case Sel(s: ResultId)
 
 trait FieldSelTrait:
@@ -262,20 +262,25 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     resolveConstraints
     
-
-    tl.log("upper:")
-    upperBounds.foreach(u => tl.log("\t" + u))
-    tl.log("lower:")
-    lowerBounds.foreach(l => tl.log("\t" + l))
     tl.log("-----------------------------------------")
-    tl.log("ctor -> dtor")
-    resolveClashes._1.foreach(u => tl.log("\t" + u))
-    tl.log("dtor -> ctor")
-    resolveClashes._2.foreach(l => tl.log("\t" + l))
+    ctorDests.ctorDests.foreach:
+      case (ctorExprId, CtorDest(matches, sels, noCons)) =>
+        val ctorName = ctorExprId.getClsSymOfUid.nme + s"(id:$ctorExprId)"
+        val matchExprScruts = "if " + matches.map{(s, m) =>
+          m.scrut.asInstanceOf[Value.Ref].l.nme + s"(id:$s)"
+        }.toList.sorted.mkString(" | ") + " then ... "
+        val selExpr = sels.map{
+          case sel@FieldSel(s, v) => s".${s.name}(id:${sel.expr})"
+        }.toList.sorted.mkString(" | ")
+        tl.log(s"$ctorName\n\t --- match ---> $matchExprScruts\n\t --- sels ---> $selExpr\n\tNoCons: $noCons")
+    tl.log("-----------------------------------------")
+    dtorSources.dtorSources.foreach:
+      case (d, DtorSource(ctors, noProd)) =>
+        tl.log(s"$d <--- ${ctors.map(c => c.getClsSymOfUid.nme + s"(id:$c)").toList.mkString(" | ")} <--- (NoProd: $noProd)")
     tl.log("-----------------------------------------")
     filteredCtorDests.foreach:
-      case (ctorUid, CtorFinalDest.Sel(s)) => tl.log("\t" + ctorUid + " --sel--> " + s)
-      case (ctorUid, CtorFinalDest.Match(scrut, _, _, _)) => tl.log("\t" + ctorUid + " --mat-->" + scrut )
+      case (ctorUid, CtorFinalDest.Sel(s)) => tl.log(s"${ctorUid.getClsSymOfUid.nme}(id:$ctorUid) --sel--> " + s)
+      case (ctorUid, CtorFinalDest.Match(scrut, _, _, _)) => tl.log(s"${ctorUid.getClsSymOfUid.nme}(id:$ctorUid) --mat--> " + scrut )
     
     val fusionStat = filteredCtorDests.map:
       case (ctorUid, CtorFinalDest.Sel(s)) =>
@@ -492,19 +497,19 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  case class CtorDest(matches: Map[ResultId, Match], sels: Ls[FieldSel], noCons: Bool)
+  case class CtorDest(matches: Map[ResultId, Match], sels: Set[FieldSel], noCons: Bool)
   case class DtorSource(ctors: Set[CtorExpr], noProd: Bool)
   object ctorDests:
-    val ctorDests = mutable.Map.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil, false))
+    val ctorDests = mutable.Map.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Set.empty, false))
     def update(ctor: CtorExpr, m: Match) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels, noCons))
-      case None => Some(CtorDest(Map(m.scrut.uid -> m), Nil, false))
+      case None => Some(CtorDest(Map(m.scrut.uid -> m), Set.empty, false))
     def update(ctor: CtorExpr, s: FieldSel) = ctorDests.updateWith(ctor):
-      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, s :: sels, noCons))
-      case None => Some(CtorDest(Map.empty, s :: Nil, false))
+      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, sels + s, noCons))
+      case None => Some(CtorDest(Map.empty, Set(s), false))
     def update(ctor: CtorExpr, n: NoCons.type) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, sels, true))
-      case None => Some(CtorDest(Map.empty, Nil, true))
+      case None => Some(CtorDest(Map.empty, Set.empty, true))
     def get(ctor: CtorExpr) = ctorDests.get(ctor)
   
   object dtorSources:
@@ -603,6 +608,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       if rm.isEmpty then
         ctorDests -> dtorSources
       else
+        tl.log("rm ctor: " + rm.map(c => c.getClsSymOfUid.nme).mkString(" | "))
         val (newCtorDests, toDelete) = ctorDests.partition(c => !rm(c._1))
         removeDtor(newCtorDests, dtorSources, toDelete.values.flatMap[DtorExpr]{ case CtorDest(mat, sels, _) =>
           mat.keySet.map(s => DtorExpr.Match(s)) ++ sels.map(s => DtorExpr.Sel(s.expr))
@@ -612,6 +618,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       if rm.isEmpty then
         ctorDests -> dtorSources
       else
+        tl.log("rm dtor: " + rm.mkString(" | "))
         val (newDtorSources, toDelete) = dtorSources.partition(d => !rm(d._1))
         removeCtor(ctorDests, newDtorSources, toDelete.values.map(_.ctors).flatten.toSet)
     
