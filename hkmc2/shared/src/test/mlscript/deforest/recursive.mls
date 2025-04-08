@@ -1,0 +1,181 @@
+:js
+:deforest
+
+//│ No fusion opportunity
+
+
+object Nil
+data class Cons(h, t)
+
+
+fun mk(n) = if n < 0 then Nil else Cons(n, mk(n - 1))
+fun map(f, xs) = if xs is
+  Nil then Nil
+  Cons(x, xs) then Cons(f(x), map(f, xs))
+fun map1(f, xs) = if xs is
+  Nil then Nil
+  Cons(x, xs) then Cons(f(x), map1(f, xs))
+fun incr(x) = x + 1
+fun double(x) = x * 2
+fun test(ls) = map1(incr, map(double, ls))
+test(id(mk(5)))
+//│ = Cons(11, Cons(9, Cons(7, Cons(5, Cons(3, Cons(1, Nil))))))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(11, Cons(9, Cons(7, Cons(5, Cons(3, Cons(1, Nil))))))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if xs is ...`
+//│ 	Nil --match--> `if xs is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun map(ls) = if ls is
+  Nil then Nil
+  Cons(h, t) then Cons(h + 4, map(t))
+map(enumFromTo(1, 4))
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun sum(ls) = if ls is
+  Nil then 0
+  Cons(h, t) then h + sum(t)
+sum(enumFromTo(1,10))
+//│ = 45
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 45
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun map(f, ls) =
+  if ls is
+    Nil then Nil
+    Cons(h, t) then Cons(f(h), map(f, t))
+map(x => x + 4, enumFromTo(1, 4))
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun map(f, ls) =
+  (if ls is
+    Nil then f => Nil
+    Cons(h, t) then f => Cons(f(h), map(f, t))
+  )(f)
+map(x => x + 4, enumFromTo(1, 4))
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(5, Cons(6, Cons(7, Nil)))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun sum(ls, a) = if ls is
+  Nil then a
+  Cons(h, t) then sum(t, h + a)
+sum(enumFromTo(1, 10), 0)
+//│ = 45
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 45
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls is ...`
+//│ 	Nil --match--> `if ls is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+fun mk(n) = if n < 0 then Nil else Cons(n, mk(n - 1))
+fun incr(x) = x + 1
+fun map(f, xs_map) = if xs_map is
+  Nil then Nil
+  Cons(x, xs) then Cons(f(x), map(f, xs))
+fun rev(xs_rev, acc) = if xs_rev is
+  Cons(x, xs) then rev(xs, Cons(x, acc))
+  Nil then acc
+fun test(xs) = map(incr, rev(xs, Nil))
+test(id(mk(5)))
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if xs_map is ...`
+//│ 	Nil --match--> `if xs_map is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+fun mk(n) = if n < 0 then Nil else Cons(n, mk(n - 1))
+fun incr(x) = x + 1
+fun map(f, xs_map) = if xs_map is
+  Nil then Nil
+  Cons(x, xs) then Cons(f(x), map(f, xs))
+fun rev(xs_rev, acc) = if xs_rev is
+  Cons(x, xs) then rev(xs, Cons(x, acc))
+  Nil then acc
+fun test(xs) = rev(map(incr, xs), Nil)
+test(id(mk(3)))
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if xs_rev is ...`
+//│ 	Nil --match--> `if xs_rev is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+data class Pair(a, b)
+
+
+fun pair_up(xs) =
+  if xs is
+    Cons(x, xss) then
+      if xss is
+        Cons(y, xs) then Cons(Pair(x, y), pair_up(xs))
+        else Nil
+    else Nil
+fun mk(n) = if n > 0 then Cons(n - 1, Cons(n, Cons(n + 1, mk(n - 1)))) else Nil
+fun test(x) = pair_up(mk(x))
+test(4)
+//│ = Cons(Pair(3, 4), Cons(Pair(5, 2), Cons(Pair(3, 4), Cons(Pair(1, 2), Cons(Pair(3, 0), Cons(Pair(1, 2), Nil))))))
+//│ No fusion opportunity
+
+
+
+fun mk(n) = if n > 0 then Cons(n, mk(n - 1)) else Nil
+fun mk2d(n) = if n > 0 then Cons(mk(n), mk2d(n - 1)) else Nil
+fun append(xs, ys) = if xs is
+  Nil then ys
+  Cons(x, xs) then Cons(x, append(xs, ys))
+fun sum(ls_sum) = if ls_sum is
+  Nil then 0
+  Cons(x, xs) then x + sum(xs)
+fun flatten(ls_flatten) = if ls_flatten is
+  Nil then Nil
+  Cons(x, xs) then append(x, flatten(xs))
+fun test(ls) = sum(flatten(ls))
+test(id(mk2d(4)))
+//│ = 20
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 20
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls_sum is ...`
+//│ 	Nil --match--> `if ls_sum is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -107,43 +107,6 @@ test()
 
 
 
-
-
-
-
-object Nil
-data class Cons(h, t)
-
-fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
-fun map(ls) = if ls is
-  Nil then Nil
-  Cons(h, t) then Cons(h + 4, map(t))
-map(enumFromTo(1, 4))
-//│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
-
-
-fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
-fun sum(ls) = if ls is
-  Nil then 0
-  Cons(h, t) then h + sum(t)
-sum(enumFromTo(1,10))
-//│ = 45
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 45
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
 // multiple match, no fusion
 fun test() =
   let x = B
@@ -197,49 +160,7 @@ c(A) + c(B)
 
 
 // simple free var example
-fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
-fun map(f, ls) =
-  if ls is
-    Nil then Nil
-    Cons(h, t) then Cons(f(h), map(f, t))
-map(x => x + 4, enumFromTo(1, 4))
-//│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
-fun map(f, ls) =
-  (if ls is
-    Nil then f => Nil
-    Cons(h, t) then f => Cons(f(h), map(f, t))
-  )(f)
-map(x => x + 4, enumFromTo(1, 4))
-//│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-
-
-fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
-fun sum(ls, a) = if ls is
-  Nil then a
-  Cons(h, t) then sum(t, h + a)
-sum(enumFromTo(1, 10), 0)
-//│ = 45
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 45
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -561,7 +482,7 @@ fun f(x) = if x is
   A then 1
 f(id(A)) + f(A)
 //│ JS (unsanitized):
-//│ let f10, tmp121, tmp122, tmp123;
+//│ let f10, tmp111, tmp112, tmp113;
 //│ f10 = function f(x1) {
 //│   if (x1 instanceof A1.class) {
 //│     return 1
@@ -569,10 +490,10 @@ f(id(A)) + f(A)
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp121 = Predef.id(A1);
-//│ tmp122 = f10(tmp121);
-//│ tmp123 = f10(A1);
-//│ tmp122 + tmp123
+//│ tmp111 = Predef.id(A1);
+//│ tmp112 = f10(tmp111);
+//│ tmp113 = f10(A1);
+//│ tmp112 + tmp113
 //│ No fusion opportunity
 //│ = 2
 //│ No fusion opportunity
@@ -583,14 +504,14 @@ fun f(x) = if x is
   A then 0
   B then 1
 fun g(x) = if x is
-  Nil then A
-  Cons then B
-f(g(Nil))
+  AA then A
+  BB then B
+f(g(AA(1)))
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 0
 //│ 3 fusion opportunities:
 //│ 	A --match--> `if x is ...`
+//│ 	AA --match--> `if x is ...`
 //│ 	B --match--> `if x is ...`
-//│ 	Nil --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
