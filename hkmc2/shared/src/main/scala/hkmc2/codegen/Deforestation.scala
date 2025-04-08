@@ -405,7 +405,9 @@ class Deforest(using TL, Raise, Elaborator.State):
         case c: ClsLikeDefn => throw NotDeforestableException("No support for `ClsLikeDefn` yet")
       processBlock(rest)
     case End(msg) => NoProd
-    case Throw(exc) => NoProd
+    // make it a type var instead of `NoProd` so that things like `throw match error` in
+    // default else branches do not block fusion...
+    case Throw(exc) => freshVar("throw")._1
   
   def constrFun(params: Ls[Param], body: Block)(using
     inArm: LinkedHashMap[ProdVar, ClsOrModSymbol],

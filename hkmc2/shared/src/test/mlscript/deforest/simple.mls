@@ -576,3 +576,21 @@ f(id(A)) + f(A)
 //│ No fusion opportunity
 //│ = 2
 //│ No fusion opportunity
+
+
+
+fun f(x) = if x is
+  A then 0
+  B then 1
+fun g(x) = if x is
+  Nil then A
+  Cons then B
+f(g(Nil))
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 0
+//│ 3 fusion opportunities:
+//│ 	A --match--> `if x is ...`
+//│ 	B --match--> `if x is ...`
+//│ 	Nil --match--> `if x is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
