@@ -6,7 +6,12 @@
 
 object Nil
 data class (::) Cons(h, t)
-
+object None
+data class Some(v)
+object A
+object B
+data class T(n, l, r)
+object L
 
 fun mk(n) = if n < 0 then Nil else n :: mk(n - 1)
 fun map(f, ls_map) = if ls_map is
@@ -179,3 +184,116 @@ test(id(mk2d(4)))
 //│ 	Cons --match--> `if ls_sum is ...`
 //│ 	Nil --match--> `if ls_sum is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun count(c, xs) = if xs is
+  h :: t then count(c + 1, t)
+  Nil then c
+fun rev(a, ys) = if ys is
+  h :: t then rev(h :: a, t)
+  Nil then a
+count(0, rev(Nil, 1 :: 2 :: Nil))
+//│ = 2
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 2
+//│ 5 fusion opportunities:
+//│ 	Cons --match--> `if xs is ...`
+//│ 	Cons --match--> `if ys is ...`
+//│ 	Cons --match--> `if ys is ...`
+//│ 	Nil --match--> `if xs is ...`
+//│ 	Nil --match--> `if ys is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun last(ls) = if ls is
+  h :: t and t is
+    Nil then Some(h)
+    _ :: _ then last(t)
+  Nil then None
+let p = 1 :: 2 :: Nil
+last(p)
+//│ = Some(2)
+//│ p = Cons(1, Cons(2, Nil))
+//│ No fusion opportunity
+
+
+
+fun map(f, xs_map) = if xs_map is
+  Nil then Nil
+  x :: xs then f(x) :: map(f, xs)
+map(x => if x is A then 1 else 0, A :: B :: Nil)
+//│ = Cons(1, Cons(0, Nil))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(1, Cons(0, Nil))
+//│ 5 fusion opportunities:
+//│ 	A --match--> `if x is ...`
+//│ 	B --match--> `if x is ...`
+//│ 	Cons --match--> `if xs_map is ...`
+//│ 	Cons --match--> `if xs_map is ...`
+//│ 	Nil --match--> `if xs_map is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun c(x) = if x is
+  T(n, l, r) then T of
+    if n is
+      A then 0
+      B then 1
+    c(l)
+    c(r)
+  L then L
+c(T(A, T(B, L, L), T(A, L, L)))
+//│ = T(0, T(1, L, L), T(0, L, L))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = T(0, T(1, L, L), T(0, L, L))
+//│ 10 fusion opportunities:
+//│ 	A --match--> `if n is ...`
+//│ 	A --match--> `if n is ...`
+//│ 	B --match--> `if n is ...`
+//│ 	L --match--> `if x is ...`
+//│ 	L --match--> `if x is ...`
+//│ 	L --match--> `if x is ...`
+//│ 	L --match--> `if x is ...`
+//│ 	T --match--> `if x is ...`
+//│ 	T --match--> `if x is ...`
+//│ 	T --match--> `if x is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun max(ms, m) = if ms is
+  h :: t and
+    h > m then max(t, h)
+    else max(t, m)
+  Nil then m
+max(3 :: 2 :: 4 :: 1 :: 0 :: Nil, 0)
+//│ = 4
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 4
+//│ 6 fusion opportunities:
+//│ 	Cons --match--> `if ms is ...`
+//│ 	Cons --match--> `if ms is ...`
+//│ 	Cons --match--> `if ms is ...`
+//│ 	Cons --match--> `if ms is ...`
+//│ 	Cons --match--> `if ms is ...`
+//│ 	Nil --match--> `if ms is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun filter(ls, f) = if ls is
+  h :: t and
+    f(h) then h :: filter(t, f)
+    else filter(t, f)
+  Nil then Nil
+fun last(ls_last) =
+  fun go(a, ls_go) = if ls_go is
+    Nil then a
+    h :: t then go(h, t)
+  if ls_last is
+    h :: t then Some(go(h, t))
+    Nil then None
+fun lastFilter(ls, f) = last(filter(ls, f))
+lastFilter(id(1 :: 2 :: 3 :: 4 :: 5 :: Nil), x => (x % 2 == 0))
+//│ = Some(4)
+//│ No fusion opportunity
+
+

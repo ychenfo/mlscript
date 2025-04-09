@@ -515,3 +515,16 @@ f(g(AA(1)))
 //│ 	AA --match--> `if x is ...`
 //│ 	B --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun f(a, b) = if a is
+  A and b is B then 1
+  else 0
+f(A, B)
+//│ = 1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 1
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if a is ...`
+//│ 	B --match--> `if b is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
