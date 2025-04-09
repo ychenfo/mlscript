@@ -5,16 +5,16 @@
 
 
 object Nil
-data class Cons(h, t)
+data class (::) Cons(h, t)
 data class Pair(a, b)
 
 fun zip(xs_zip, ys_zip) = if
-  xs_zip is Cons(x, xt) and ys_zip is Cons(y, yt) then Cons(Pair(x, y), zip(xt, yt))
+  xs_zip is x :: xt and ys_zip is y :: yt then Pair(x, y) :: zip(xt, yt)
   else Nil
 fun unzip(ls_unzip) = if ls_unzip is
-  Cons(Pair(a, b), t) and unzip(t) is Pair(atail, btail) then Pair(Cons(a, atail), Cons(b, btail))
+  Pair(a, b) :: t and unzip(t) is Pair(atail, btail) then Pair(a :: atail, b :: btail)
   Nil then Pair(Nil, Nil)
-fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun enumFromTo(a, b) = if a < b then a :: enumFromTo(a + 1, b) else Nil
 fun testUnzipZip(n) = unzip(zip(id(enumFromTo(1, n)), id(enumFromTo(2, n + 3))))
 testUnzipZip(3)
 //│ = Pair(Cons(1, Cons(2, Nil)), Cons(2, Cons(3, Nil)))
@@ -30,12 +30,12 @@ testUnzipZip(3)
 
 
 fun zip(xs_zip, ys_zip) = if
-  xs_zip is Cons(x, xt) and ys_zip is Cons(y, yt) then Cons(Pair(x, y), zip(xt, yt))
+  xs_zip is x :: xt and ys_zip is y :: yt then Pair(x, y) :: zip(xt, yt)
   else Nil
 fun unzip(ls_unzip) = if ls_unzip is
-  Cons(Pair(a, b), t) and unzip(t) is Pair(atail, btail) then Pair(Cons(a, atail), Cons(b, btail))
+  Pair(a, b) :: t and unzip(t) is Pair(atail, btail) then Pair(a :: atail, b :: btail)
   Nil then Pair(Nil, Nil)
-fun makeZippedList(n) = if n > 0 then Cons(Pair(n, n + 1), makeZippedList(n - 1)) else Nil
+fun makeZippedList(n) = if n > 0 then Pair(n, n + 1) :: makeZippedList(n - 1) else Nil
 fun testZipUnzip(n) = if unzip(id(makeZippedList(n))) is
   Pair(xs, ys) then zip(xs, ys)
 testZipUnzip(3)
@@ -52,13 +52,13 @@ testZipUnzip(3)
 
 
 fun zip(xs_zip, ys_zip) = if
-  xs_zip is Cons(x, xt) and ys_zip is Cons(y, yt) then Cons(Pair(x, y), zip(xt, yt))
+  xs_zip is x :: xt and ys_zip is y :: yt then Pair(x, y) :: zip(xt, yt)
   else Nil
 fun unzip(ls_unzip) = if ls_unzip is
-  Cons(Pair(a, b), t) and unzip(t) is Pair(atail, btail) then Pair(Cons(a, atail), Cons(b, btail))
+  Pair(a, b) :: t and unzip(t) is Pair(atail, btail) then Pair(a :: atail, b :: btail)
   Nil then Pair(Nil, Nil)
 fun map(f, ls_map) = if ls_map is
-  Cons(h, t) then Cons(f(h), map(f, t))
+  h :: t then f(h) :: map(f, t)
   Nil then Nil
 fun makeZippedList(n) = if n > 0 then Cons(Pair(n, n + 1), makeZippedList(n - 1)) else Nil
 fun testZipMapBothUnzip(n) = if unzip(id(makeZippedList(n))) is

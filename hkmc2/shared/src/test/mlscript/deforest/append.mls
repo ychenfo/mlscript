@@ -1,0 +1,58 @@
+:js
+:deforest
+
+//│ No fusion opportunity
+
+
+object Nil
+data class (::) Cons(h, t)
+
+
+
+fun append1(xs1, ys) = if xs1 is
+  h :: t then h :: append1(t, ys)
+  Nil then ys
+fun append2(xs2, ys) = if xs2 is
+  h :: t then h :: append2(t, ys)
+  Nil then ys
+fun appendThree(xs, ys, zs) =
+  append1(append2(xs, ys), zs)
+appendThree of
+  id(1 :: 2 :: Nil)
+  id(3 :: 4 :: Nil)
+  id(5 :: 6 :: Nil)
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ No fusion opportunity
+
+
+
+
+fun idList(l) = if l is
+  h :: t then h :: idList(t)
+  Nil then Nil
+fun append(xs, ys) = if xs is
+  h :: t then h :: append(t, ys)
+  Nil then idList(ys)
+fun appendThree(xs, ys, zs) =
+  append(append(xs, ys), zs)
+appendThree of
+  id(1 :: 2 :: Nil)
+  id(3 :: 4 :: Nil)
+  id(5 :: 6 :: Nil)
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ No fusion opportunity
+
+
+
+fun append(xs, ys) = if xs is
+  h :: t then h :: append(t, ys)
+  Nil then idList(ys)
+fun concat(lss) = if lss is
+  hh :: tt then append(hh, concat(tt))
+  Nil then Nil
+concat of id of
+  (1 :: 2 :: Nil) ::
+  (3 :: 4 :: Nil) ::
+  (5 :: 6 :: Nil) :: Nil
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ No fusion opportunity
