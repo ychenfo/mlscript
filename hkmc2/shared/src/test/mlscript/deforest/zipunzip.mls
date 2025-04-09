@@ -1,0 +1,78 @@
+:js
+:deforest
+
+//│ No fusion opportunity
+
+
+object Nil
+data class Cons(h, t)
+data class Pair(a, b)
+
+fun zip(xs_zip, ys_zip) = if
+  xs_zip is Cons(x, xt) and ys_zip is Cons(y, yt) then Cons(Pair(x, y), zip(xt, yt))
+  else Nil
+fun unzip(ls_unzip) = if ls_unzip is
+  Cons(Pair(a, b), t) and unzip(t) is Pair(atail, btail) then Pair(Cons(a, atail), Cons(b, btail))
+  Nil then Pair(Nil, Nil)
+fun enumFromTo(a, b) = if a < b then Cons(a, enumFromTo(a + 1, b)) else Nil
+fun testUnzipZip(n) = unzip(zip(id(enumFromTo(1, n)), id(enumFromTo(2, n + 3))))
+testUnzipZip(3)
+//│ = Pair(Cons(1, Cons(2, Nil)), Cons(2, Cons(3, Nil)))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Pair(Cons(1, Cons(2, Nil)), Cons(2, Cons(3, Nil)))
+//│ 4 fusion opportunities:
+//│ 	Cons --match--> `if ls_unzip is ...`
+//│ 	Nil --match--> `if ls_unzip is ...`
+//│ 	Nil --match--> `if ls_unzip is ...`
+//│ 	Pair --match--> `if param0 is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+fun zip(xs_zip, ys_zip) = if
+  xs_zip is Cons(x, xt) and ys_zip is Cons(y, yt) then Cons(Pair(x, y), zip(xt, yt))
+  else Nil
+fun unzip(ls_unzip) = if ls_unzip is
+  Cons(Pair(a, b), t) and unzip(t) is Pair(atail, btail) then Pair(Cons(a, atail), Cons(b, btail))
+  Nil then Pair(Nil, Nil)
+fun makeZippedList(n) = if n > 0 then Cons(Pair(n, n + 1), makeZippedList(n - 1)) else Nil
+fun testZipUnzip(n) = if unzip(id(makeZippedList(n))) is
+  Pair(xs, ys) then zip(xs, ys)
+testZipUnzip(3)
+//│ = Cons(Pair(3, 4), Cons(Pair(2, 3), Cons(Pair(1, 2), Nil)))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(Pair(3, 4), Cons(Pair(2, 3), Cons(Pair(1, 2), Nil)))
+//│ 4 fusion opportunities:
+//│ 	Cons --match--> `if xs_zip is ...`
+//│ 	Cons --match--> `if ys_zip is ...`
+//│ 	Nil --match--> `if xs_zip is ...`
+//│ 	Nil --match--> `if ys_zip is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+fun zip(xs_zip, ys_zip) = if
+  xs_zip is Cons(x, xt) and ys_zip is Cons(y, yt) then Cons(Pair(x, y), zip(xt, yt))
+  else Nil
+fun unzip(ls_unzip) = if ls_unzip is
+  Cons(Pair(a, b), t) and unzip(t) is Pair(atail, btail) then Pair(Cons(a, atail), Cons(b, btail))
+  Nil then Pair(Nil, Nil)
+fun map(f, ls_map) = if ls_map is
+  Cons(h, t) then Cons(f(h), map(f, t))
+  Nil then Nil
+fun makeZippedList(n) = if n > 0 then Cons(Pair(n, n + 1), makeZippedList(n - 1)) else Nil
+fun testZipMapBothUnzip(n) = if unzip(id(makeZippedList(n))) is
+  Pair(xs, ys) then zip(
+    map(x => x + 1, xs),
+    map(x => x * x, ys)
+  )
+testZipMapBothUnzip(4)
+//│ = Cons(Pair(5, 25), Cons(Pair(4, 16), Cons(Pair(3, 9), Cons(Pair(2, 4), Nil))))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = Cons(Pair(5, 25), Cons(Pair(4, 16), Cons(Pair(3, 9), Cons(Pair(2, 4), Nil))))
+//│ 4 fusion opportunities:
+//│ 	Cons --match--> `if ls_map is ...`
+//│ 	Cons --match--> `if ls_map is ...`
+//│ 	Nil --match--> `if ls_map is ...`
+//│ 	Nil --match--> `if ls_map is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
