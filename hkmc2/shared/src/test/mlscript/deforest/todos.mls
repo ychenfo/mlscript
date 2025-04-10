@@ -213,3 +213,12 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
+// TODO: currently nothing is done at all when seeing
+// `Define` blocks defining things other than functions
+data class Global(x)
+fun test() =
+  data class Local(x)
+  if Global(1) is
+    Global(x) then Local(x + 1)
+test()
+//│ = Local(2)

@@ -145,7 +145,12 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
     case _ => super.applyBlock(b)
       
   override def applyValue(v: Value): Unit = v match
-    case Value.Ref(l) => if !ctx.contains(l) then result += l
+    case Value.Ref(l) => l match
+      // builtin symbols and toplevel symbols are always in scope
+      case _: (BuiltinSymbol | TopLevelSymbol) => ()
+      // NOTE: assume all class definitions are in the toplevel
+      case b: BlockMemberSymbol if b.asClsLike.isDefined => ()
+      case _ => if !ctx.contains(l) then result += l
     case _ => super.applyValue(v)
   
   override def applyLam(l: Value.Lam): Unit =
@@ -251,7 +256,7 @@ extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
     ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms).applyBlock(b)
 
-  def sortedFvsForTransformedBlocks(using alwaysDefined: Set[Symbol]) =
+  def sortedFvsForTransformedBlocks(alwaysDefined: Set[Symbol]) =
     FreeVarTraverser(alwaysDefined).analyze(b)
   
   def hasExplicitRet: Boolean =
@@ -321,14 +326,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     def apply(s: Symbol) = store.contains(s)
     
-    def init(b: Block) =      
-      (new BlockTraverser:
-        override def applySymbol(sym: Symbol): Unit = sym match
-          case _: TopLevelSymbol => store += sym
-          case _: BlockMemberSymbol => store += sym
-          case _: BuiltinSymbol => store += sym
-          case _ => ()
-      ).applyBlock(b)
+    def init(b: Block) = store ++= b.definedVars
   
   var constraints: Ls[ProdStrat -> ConsStrat] = Nil
   
@@ -357,6 +355,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             super.applyFunDefn(fun)
             
         FreshVarForAllVars.applyBlock(p)
+      // `NoProd` to block fusion for those functions that are imported from elsewhere
       usedFunSym.diff(funSymsWithDefn).foreach: funSymsWithoutDefn =>
         constrain(NoProd, store(funSymsWithoutDefn).asConsStrat)
       
@@ -798,7 +797,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
 class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
   self =>
-  given nonFreeVars: Set[Symbol] = d.globallyDefinedVars.store.toSet
+  val nonFreeVars: Set[Symbol] = d.globallyDefinedVars.store.toSet
 
   val replaceSelInfo: Map[ResultId, Symbol] =
     d.filteredCtorDests.values.flatMap { 
@@ -874,7 +873,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
                 Return(
                   Call(
                     Value.Ref(f),
-                    rewrittenRest.sortedFvsForTransformedBlocks.map(a => Arg(false, Value.Ref(a))))(true, false),
+                    rewrittenRest.sortedFvsForTransformedBlocks(nonFreeVars).map(a => Arg(false, Value.Ref(a))))(true, false),
                   false
                 )
               ).flattened.replaceSymbols(freeVarsAndTheirNewSyms.toMap).mapTail:
@@ -975,7 +974,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
               // and the transformed `rest` is b
               case bd -> (Some(s), b) => Begin(
                 applyBlock(restBeforeRewriting),
-                Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
+                Return(Call(Value.Ref(s), b.sortedFvsForTransformedBlocks(nonFreeVars ++ getAllDefined).map(a => Arg(false, Value.Ref(a))))(true, false), false))
               // (None, b): there is a fusing parent match, and its `rest` is not extracted into a function
               case bd -> (None, b) => Begin(applyBlock(Begin(restBeforeRewriting, bd)), b)
             nonFlatten.flattened
@@ -988,7 +987,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
           else // build a new function and update the store
             val scrutName = s.getResult.asInstanceOf[Value.Ref].l.nme
             val sym = BlockMemberSymbol(s"match_${scrutName}_rest", Nil)
-            val freeVarsAndTheirNewSyms = restRewritten.sortedFvsForTransformedBlocks(using nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
+            val freeVarsAndTheirNewSyms = restRewritten.sortedFvsForTransformedBlocks(nonFreeVars ++ getAllDefined).map(s => s -> VarSymbol(Tree.Ident(s.nme))).toMap
             val newFunDef = FunDefn(
               N,
               sym,
