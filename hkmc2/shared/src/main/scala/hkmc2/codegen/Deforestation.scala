@@ -168,8 +168,9 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
 // and this is handled by freeVarsOfNonTransformedMatches
 class DeforestationFreeVarTraverser(using
   alwaysDefined: Set[Symbol],
-  selsToBeReplaced: Map[ResultId, Symbol] = Map.empty,
-  selsReplacementByCurrentMatch: Iterable[Symbol],
+  selsToBeReplaced: Map[ResultId, Symbol],
+  selsReplacementByCurrentMatch: Map[ResultId, Symbol],
+  currentMatchScrut: Symbol,
   dt: DeforestTransformer
 ) extends FreeVarTraverser(alwaysDefined):  
   override def applyBlock(b: Block): Unit = b match
@@ -185,13 +186,16 @@ class DeforestationFreeVarTraverser(using
       // free vars in nested-matches reported by freeVarsOfNonTransformedMatches may also contain
       // spurious ones: those that are going to be substitued by the current match,
       // and those that are in the ctx
-      result --= selsReplacementByCurrentMatch
+      result --= selsReplacementByCurrentMatch.values
       result --= ctx
     case _ => super.applyBlock(b)
   
   override def applyPath(p: Path): Unit = p match
-    case p @ Select(qual, name) =>
-      selsToBeReplaced.get(p.uid).fold(super.applyPath(p))(s => result += s)
+    case p @ Select(qual, name) => selsToBeReplaced.get(p.uid) match
+      case None => qual match
+        case Value.Ref(l) if l == currentMatchScrut => ()
+        case _ => super.applyPath(p)
+      case Some(s) => result += s
     case _ => super.applyPath(p)
 
 class WillBeNonEndTailBlockTraverser(using d: Deforest) extends BlockTraverserShallow:
@@ -821,8 +825,7 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
           
         val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrutExprId).keys
         
-        val traverser = DeforestationFreeVarTraverser(using nonFreeVars + l, selReplacementNotForThisSel, toBeReplacedForAllBranches(scrutExprId).values)
-        traverser.applyPath(m.scrut)
+        val traverser = DeforestationFreeVarTraverser(using nonFreeVars, selReplacementNotForThisSel, toBeReplacedForAllBranches(scrutExprId), l)
         (arms.map(_._2) ++ dflt).foreach: a =>
           // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
           // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
