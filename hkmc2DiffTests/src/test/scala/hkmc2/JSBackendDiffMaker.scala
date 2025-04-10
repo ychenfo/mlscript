@@ -297,4 +297,3 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
             
             output(deforestStat)
             output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
-          

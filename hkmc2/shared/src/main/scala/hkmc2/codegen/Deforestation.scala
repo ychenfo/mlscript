@@ -233,7 +233,7 @@ class WillBeNonEndTailBlockTraverser(using d: Deforest) extends BlockTraverserSh
     case _ => super.applyBlock(b)
   def analyze(b: Block): Bool =
     applyBlock(b)
-    flag  
+    flag
 
 class ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) extends
   BlockTransformer(new SymbolSubst()):
@@ -899,7 +899,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
               funSym,
               ParamList(
                 ParamListFlags.empty,
-                freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)).toList 
+                freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)).toList
                   ::: preComputedSymbols._1.toList.sortBy(_._1.name).map(v =>
                     
                     Param(FldFlags.empty, v._2.asInstanceOf[VarSymbol], N)
