@@ -166,7 +166,7 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
 //   - the free vars caused by the substitution of selections of scrutinees of their parent matches
 // Otherwise, additional free vars come from fusing matches that are contained in the block,
 // and this is handled by freeVarsOfNonTransformedMatches
-class DeforestationFreeVarTraverser(using
+class DeforestationFreeVarTraverserForMatch(
   alwaysDefined: Set[Symbol],
   selsToBeReplaced: Map[ResultId, Symbol],
   selsReplacementByCurrentMatch: Map[ResultId, Symbol],
@@ -193,10 +193,27 @@ class DeforestationFreeVarTraverser(using
   override def applyPath(p: Path): Unit = p match
     case p @ Select(qual, name) => selsToBeReplaced.get(p.uid) match
       case None => qual match
+        // if it is the scrut of current match and the computation containing
+        // this selection is moved, then the selection will be replaced and there will be no free vars
         case Value.Ref(l) if l == currentMatchScrut => ()
         case _ => super.applyPath(p)
       case Some(s) => result += s
     case _ => super.applyPath(p)
+  
+  override def analyze(m: Block): List[Symbol] =
+    require(m.isInstanceOf[Match])
+    val matchExpr@Match(scrut@Value.Ref(l), arms, dflt, rest) = m
+    val parentMatchRest = dt.allParentMatches(scrut.uid).foldRight[Block](End("")): (p, acc) =>
+      Begin(dt.d.matchScrutToMatchBlock(p).rest, acc)
+    (arms.map(_._2) ++ dflt).foreach: a =>
+      // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
+      // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
+      // Also take care of the `rest`s of its parent match blocks.
+      val realArm = Begin(a, Begin(rest, parentMatchRest)).flattened
+      applyBlock(realArm)
+    
+    result.toList.sortBy(_.uid)
+    
 
 class WillBeNonEndTailBlockTraverser(using d: Deforest) extends BlockTraverserShallow:
   var flag = false
@@ -779,8 +796,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     val newDefsArms = deforestTransformer.matchArms.getAllFunDefs
     newDefsArms(newDefsRest(rest))
   
-class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
-  given DeforestTransformer = this
+class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
+  self =>
   given nonFreeVars: Set[Symbol] = d.globallyDefinedVars.store.toSet
 
   val replaceSelInfo: Map[ResultId, Symbol] =
@@ -817,23 +834,15 @@ class DeforestTransformer(using d: Deforest, elabState: Elaborator.State) extend
       scrutExprId,
       locally:
         assert(m.scrut.uid === scrutExprId)
-        val matchExpr@Match(Value.Ref(l), arms, dflt, rest) = m
-
-        val parentMatchRest = allParentMatches(m.scrut.uid).foldRight[Block](End("")): (p, acc) =>
-          Begin(d.matchScrutToMatchBlock(p).rest, acc)
-          
-          
+        val Match(Value.Ref(l), _, _, _) = m
         val selReplacementNotForThisSel = replaceSelInfo -- toBeReplacedForAllBranches(scrutExprId).keys
-        
-        val traverser = DeforestationFreeVarTraverser(using nonFreeVars, selReplacementNotForThisSel, toBeReplacedForAllBranches(scrutExprId), l)
-        (arms.map(_._2) ++ dflt).foreach: a =>
-          // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
-          // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
-          // Also take care of the `rest`s of its parent match blocks.
-          val realArm = Begin(a, Begin(rest, parentMatchRest)).flattened
-          traverser.applyBlock(realArm)
-        
-        traverser.result.toList.sortBy(_.uid)
+        DeforestationFreeVarTraverserForMatch(
+          nonFreeVars,
+          selReplacementNotForThisSel,
+          toBeReplacedForAllBranches(scrutExprId),
+          l,
+          self
+        ).analyze(m)
     )
 
   object matchArms:
