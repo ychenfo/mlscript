@@ -24,7 +24,23 @@ appendThree of
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
 //│ No fusion opportunity
 
-
+// maybe the fusion target for the previous program
+fun appendReified(ys, zs) = if ys is
+  h :: t then h :: appendReified(t, zs)
+  Nil then zs
+fun append1(ys, zs) = ys(zs)
+fun append2(xs, ys) = 
+  if xs is
+    h :: t then
+      zs => h :: append1(append2(t, ys), zs)        // normal fusion
+    Nil then zs => appendReified(ys, zs)            // reified
+fun test(xs, ys, zs) = append1(append2(xs, ys), zs)
+test of
+  id(1 :: 2 :: Nil)
+  id(3 :: 4 :: Nil)
+  id(5 :: 6 :: Nil)
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ No fusion opportunity
 
 
 fun idList(l) = if l is

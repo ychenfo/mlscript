@@ -737,42 +737,41 @@ class Deforest(using TL, Raise, Elaborator.State):
           val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
           handledMatches.getOrElseUpdate(
             scrutRef.uid -> currentCtorCls,
-            locally:
-              if sels.forall{ s => s.expr.getResult match
-                case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
-                case _ => false
-              } then
-                val fieldNameToSymToBeReplaced = mutable.Map.empty[Tree.Ident, Symbol]
-                val selectionUidsToSymToBeReplaced = mutable.Map.empty[ResultId, Symbol]
-                
-                dtors.head._2.arms.foreach:
-                  case (Case.Cls(cOrMod, _), body) if cOrMod.asCls.fold(false)(_ === currentCtorCls) =>
-                    val c = cOrMod.asCls.get
-                    // if this arm is used more than once, should be var symbol because the arm body will be
-                    // extracted to a function, otherwise just temp symbol
-                    val varSymInsteadOfTempSym = resolveClashes._2(DtorExpr.Match(dtors.head._1)).ctors.count(getClsSymOfUid(_) === c) > 1
-                    val selsInArms = sels.filter { fs => fs.inMatching(dtors.head._1) === c }
+            if sels.forall{ s => s.expr.getResult match
+              case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
+              case _ => false
+            } then
+              val fieldNameToSymToBeReplaced = mutable.Map.empty[Tree.Ident, Symbol]
+              val selectionUidsToSymToBeReplaced = mutable.Map.empty[ResultId, Symbol]
+              
+              dtors.head._2.arms.foreach:
+                case (Case.Cls(cOrMod, _), body) if cOrMod.asCls.fold(false)(_ === currentCtorCls) =>
+                  val c = cOrMod.asCls.get
+                  // if this arm is used more than once, should be var symbol because the arm body will be
+                  // extracted to a function, otherwise just temp symbol
+                  val varSymInsteadOfTempSym = resolveClashes._2(DtorExpr.Match(dtors.head._1)).ctors.count(getClsSymOfUid(_) === c) > 1
+                  val selsInArms = sels.filter { fs => fs.inMatching(dtors.head._1) === c }
+                  
+                  selsInArms.foreach: fs =>
+                    assert(getClsFields(c).map(_.id).contains(fs.field))
+                    fieldNameToSymToBeReplaced.updateWith(fs.field):
+                      case Some(v) => Some(v)
+                      case None => Some(if varSymInsteadOfTempSym
+                        then VarSymbol(Tree.Ident(s"_deforest_${c.name}_${fs.field.name}"))
+                        else TempSymbol(N, s"_deforest_${c.name}_${fs.field.name}"))
+                    val sym = fieldNameToSymToBeReplaced(fs.field)
                     
-                    selsInArms.foreach: fs =>
-                      assert(getClsFields(c).map(_.id).contains(fs.field))
-                      fieldNameToSymToBeReplaced.updateWith(fs.field):
-                        case Some(v) => Some(v)
-                        case None => Some(if varSymInsteadOfTempSym
-                          then VarSymbol(Tree.Ident(s"_deforest_${c.name}_${fs.field.name}"))
-                          else TempSymbol(N, s"_deforest_${c.name}_${fs.field.name}"))
-                      val sym = fieldNameToSymToBeReplaced(fs.field)
-                      
-                      selectionUidsToSymToBeReplaced.addOne(fs.expr -> sym)
-                  case _ => ()
-                Some(CtorFinalDest.Match(
-                  dtors.head._1,
-                  dtors.head._2,
-                  sels.map(_.expr),
-                  fieldNameToSymToBeReplaced.toMap -> selectionUidsToSymToBeReplaced.toMap
-                ))
-              else
-                throw Error("more than one consumer")
-                None
+                    selectionUidsToSymToBeReplaced.addOne(fs.expr -> sym)
+                case _ => ()
+              Some(CtorFinalDest.Match(
+                dtors.head._1,
+                dtors.head._2,
+                sels.map(_.expr),
+                fieldNameToSymToBeReplaced.toMap -> selectionUidsToSymToBeReplaced.toMap
+              ))
+            else
+              throw Error("more than one consumer")
+              None
           )
         else ???
       }
