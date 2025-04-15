@@ -290,7 +290,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     tl.log("-----------------------------------------")
     ctorDests.ctorDests.foreach:
-      case (ctorExprId, CtorDest(matches, sels, noCons)) =>
+      case (ctorExprId, CtorDest(matches, sels, noCons)) => tl.log:
         val ctorName = ctorExprId.getClsSymOfUid.nme + s"(id:$ctorExprId)"
         val matchExprScruts = "if " + matches.map{(s, m) =>
           m.scrut.asInstanceOf[Value.Ref].l.nme + s"(id:$s)"
@@ -298,7 +298,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         val selExpr = sels.map{
           case sel@FieldSel(s, v) => s".${s.name}(id:${sel.expr})"
         }.toList.sorted.mkString(" | ")
-        tl.log(s"$ctorName\n\t --- match ---> $matchExprScruts\n\t --- sels ---> $selExpr\n\tNoCons: $noCons")
+        s"$ctorName\n\t --- match ---> $matchExprScruts\n\t --- sels ---> $selExpr\n\tNoCons: $noCons"
     tl.log("-----------------------------------------")
     dtorSources.dtorSources.foreach:
       case (d, DtorSource(ctors, noProd)) =>
@@ -1035,48 +1035,44 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
   
   override def applyResult2(r: Result)(k: Result => Block): Block = r match
     case call@Call(f, args) if d.filteredCtorDests.isDefinedAt(call.uid) =>
-      def handleCtorCall(c: ClassSymbol) =
-        d.filteredCtorDests.get(call.uid).get match
-          case CtorFinalDest.Match(scrut, expr, sels, selsMap) =>
-            val body = expr.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === c }.map(_._2).orElse(expr.dflt).get
-        
-            // use pre-determined symbols, create temp symbols for un-used fields
-            val usedFieldIdentToSymbolsToBeReplaced = selsMap._1
-            val allFieldIdentToSymbolsToBeReplaced = d.getClsFields(c).map: f =>
-              f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"_deforest_${c.name}_${f.id.name}_unused"))
-        
-            // if all vars are temp vars, no need to create more temp vars
-            // otherwise, create temps for var symbols (which will be function params with these temp vars flowing in)
-            val assignedTempSyms =
-              if allFieldIdentToSymbolsToBeReplaced.forall(_._2.isInstanceOf[TempSymbol]) then
-                allFieldIdentToSymbolsToBeReplaced.map(a => a._1 -> a._2.asInstanceOf[TempSymbol])
-              else
-                allFieldIdentToSymbolsToBeReplaced.map { case (id, s) => s match
-                  case ts: TempSymbol => id -> ts
-                  case vs: VarSymbol => id -> TempSymbol(N, s"${vs.name}_tmp")
-                }
-
-            val newArgs = args.map(_ => TempSymbol(N))
-        
-            val bodyAndRestInLam = matchArms.getOrElseUpdate(
-              scrut,
-              expr,
-              c,
-              sels.toSet,
-              assignedTempSyms.filter(a => usedFieldIdentToSymbolsToBeReplaced.contains(a._1)).map(a => a._1 -> Value.Ref(a._2).asInstanceOf[Value.Ref]).toMap,
-              selsMap._1 -> selsMap._2)
-        
-            args.zip(assignedTempSyms.map(_._2)).foldRight[Block](k(bodyAndRestInLam)):
-              case ((a, tmp), rest) => applyResult2(a.value) { r => Assign(tmp, r, rest) }
-        
-          case CtorFinalDest.Sel(s) =>
-            val selFieldName = s.getResult match { case Select(p, nme) => nme }
-            val idx = d.getClsFields(c).indexWhere(s => s.id === selFieldName)
-            k(args(idx).value)
-      f match
-        case s: Select => handleCtorCall(s.symbol.get.asCls.get)
-        case Value.Ref(l) => handleCtorCall(l.asCls.get)
+      val c = f match
+        case s: Select => s.symbol.get.asCls.get
+        case Value.Ref(l) => l.asCls.get
         case _ => ???
+      d.filteredCtorDests.get(call.uid).get match
+        case CtorFinalDest.Match(scrut, expr, sels, selsMap) =>
+          // use pre-determined symbols, create temp symbols for un-used fields
+          val usedFieldIdentToSymbolsToBeReplaced = selsMap._1
+          val allFieldIdentToSymbolsToBeReplaced = d.getClsFields(c).map: f =>
+            f.id -> usedFieldIdentToSymbolsToBeReplaced.getOrElse(f.id, TempSymbol(N, s"_deforest_${c.name}_${f.id.name}_unused"))
+      
+          // if all vars are temp vars, no need to create more temp vars
+          // otherwise, create temps for var symbols (which will be function params with these temp vars flowing in)
+          val assignedTempSyms =
+            if allFieldIdentToSymbolsToBeReplaced.forall(_._2.isInstanceOf[TempSymbol]) then
+              allFieldIdentToSymbolsToBeReplaced.map(a => a._1 -> a._2.asInstanceOf[TempSymbol])
+            else
+              allFieldIdentToSymbolsToBeReplaced.map { case (id, s) => s match
+                case ts: TempSymbol => id -> ts
+                case vs: VarSymbol => id -> TempSymbol(N, s"${vs.name}_tmp")
+              }
+      
+          val bodyAndRestInLam = matchArms.getOrElseUpdate(
+            scrut,
+            expr,
+            c,
+            sels.toSet,
+            assignedTempSyms.filter(a => usedFieldIdentToSymbolsToBeReplaced.contains(a._1)).map(a => a._1 -> Value.Ref(a._2).asInstanceOf[Value.Ref]).toMap,
+            selsMap._1 -> selsMap._2)
+      
+          args.zip(assignedTempSyms.map(_._2)).foldRight[Block](k(bodyAndRestInLam)):
+            case ((a, tmp), rest) => applyResult2(a.value) { r => Assign(tmp, r, rest) }
+      
+        case CtorFinalDest.Sel(s) =>
+          val selFieldName = s.getResult match { case Select(p, nme) => nme }
+          val idx = d.getClsFields(c).indexWhere(s => s.id === selFieldName)
+          k(args(idx).value)
+      
     case _ => super.applyResult2(r)(k)
   
   def handleObjFusing(objCallExprUid: CtorExpr, objClsSym: ModuleSymbol) =
