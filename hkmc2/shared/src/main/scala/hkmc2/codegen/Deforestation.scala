@@ -4,7 +4,7 @@ package codegen
 import semantics.*
 import semantics.Elaborator.State
 import syntax.{Literal, Tree}
-import utils.{TL, tl, SymbolSubst}
+import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
 import scala.collection.mutable.LinkedHashMap
@@ -61,14 +61,16 @@ case object NoProd extends ProdStrat
 
 
 
-case class Dtor(scrut: ResultId)(val expr: Match, val outterMatch: Option[ResultId])(using d: Deforest) extends ConsStrat:
-  assert(scrut === expr.scrut.uid)
-  d.matchScrutToMatchBlock.updateWith(scrut):
+class Dtor(val expr: Match, val outterMatch: Option[ResultId])(using d: Deforest) extends ConsStrat:
+  d.matchScrutToMatchBlock.updateWith(expr.scrut.uid):
     case None => Some(expr)
-    case Some(exist) => ??? // should only update once
-  d.matchScrutToParentMatchScrut.updateWith(scrut):
+    case Some(_) => lastWords(s"should only update once (uid: ${expr.scrut.uid})")
+  d.matchScrutToParentMatchScrut.updateWith(expr.scrut.uid):
     case None => Some(outterMatch)
-    case Some(_) => ??? // should only update once
+    case Some(_) => lastWords(s"should only update once (uid: ${expr.scrut.uid})")
+object Dtor:
+  def unapply(d: Dtor): Opt[ResultId] = S(d.expr.scrut.uid)
+    
 
 case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: LinkedHashMap[ResultId, ClsOrModSymbol]) extends ConsStrat with FieldSelTrait
 case class ConsFun(l: Ls[ProdStrat], r: ConsStrat) extends ConsStrat
@@ -235,8 +237,7 @@ class WillBeNonEndTailBlockTraverser(using d: Deforest) extends BlockTraverserSh
     applyBlock(b)
     flag
 
-class ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) extends
-  BlockTransformer(new SymbolSubst()):
+class ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) extends BlockTransformer(new SymbolSubst()):
   override def applyValue(v: Value): Value = v match
     case Value.Ref(l) => Value.Ref(freeVarsAndTheirNewSyms.getOrElse(l, l))
     case _ => super.applyValue(v)
@@ -383,7 +384,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
-      constrain(scrutStrat, Dtor(scrut.uid)(m, matching.lastOption.map(_._1))(using this))
+      constrain(scrutStrat, Dtor(m, matching.lastOption.map(_._1))(using this))
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map:
           case (Case.Cls(s, _), body) => 
@@ -415,13 +416,11 @@ class Deforest(using TL, Raise, Elaborator.State):
         case FunDefn(_, sym, params, body) =>
           val funSymStratVar = symToStrat(sym)
           val param = params.head match
-            case ParamList(flags, params, restParam) => params
-          val funStrat = constrFun(param, body) // TODO: handle mutiple param list
+            case ParamList(flags, params, N) => params // TODO: handle mutiple param list
+          val funStrat = constrFun(param, body)
           constrain(funStrat, funSymStratVar.asConsStrat)
           funSymStratVar
         case v: ValDefn => throw NotDeforestableException("No support for `ValDefn` yet")
-        // only handle code inside module for now to show the
-        // todo case of if scrut being not the same as what the user writes
         case c: ClsLikeDefn => throw NotDeforestableException("No support for `ClsLikeDefn` yet")
       processBlock(rest)
     case End(msg) => NoProd
