@@ -548,3 +548,25 @@ c1(app(AA)) + c1(AA(2)) + c2(AA(3)) + c2(A)
 //│ 	A --match--> `if x is ...`
 //│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+:re
+fun p(x) = if x
+  then new AA(2)
+  else BB(3)
+fun c(x) = if x is
+  AA(a) then a
+  BB(b) then b
+  else throw (if A is A then Error("e1") else Error("e2"))
+print(c(p(true)) + c(p(false)))
+c(B)
+//│ > 5
+//│ ═══[RUNTIME ERROR] Error: e1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ > 5
+//│ ═══[RUNTIME ERROR] Error: e1
+//│ 4 fusion opportunities:
+//│ 	A --match--> `if scrut is ...`
+//│ 	AA --match--> `if x is ...`
+//│ 	B --match--> `if x is ...`
+//│ 	BB --match--> `if x is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

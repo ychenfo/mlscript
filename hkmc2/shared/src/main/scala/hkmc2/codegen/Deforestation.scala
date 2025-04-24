@@ -39,13 +39,15 @@ object StratVarState:
 extension (i: ResultId)
   def getResult(using d: Deforest) = d.resultIdToResult(i)
   def handleCtorIds[A](k: (ResultId, Select | Value.Ref, ClsOrModSymbol, Ls[Arg]) => A)(using Deforest) =
+    def handleCallLike(f: Path, args: Ls[Arg]) = f match
+      case s: Select if s.symbol.flatMap(_.asCls).isDefined =>
+        Some(k(i, s, s.symbol.get.asCls.get, args))
+      case v: Value.Ref if v.l.asCls.isDefined =>
+        Some(k(i, v, v.l.asCls.get, args))
+      case _ => None
     i.getResult match
-      case Call(fun, args) => fun match
-        case s: Select if s.symbol.flatMap(_.asCls).isDefined =>
-          Some(k(i, s, s.symbol.get.asCls.get, args))
-        case v: Value.Ref if v.l.asCls.isDefined =>
-          Some(k(i, v, v.l.asCls.get, args))
-        case _ => None
+      case Call(fun, args) => handleCallLike(fun, args)
+      case Instantiate(cls, args) => handleCallLike(cls, args.map(Arg(false, _)))
       case s: Select if s.symbol.flatMap(_.asObj).isDefined =>
         Some(k(i, s, s.symbol.get.asObj.get, Nil))
       case v: Value.Ref if v.l.asObj.isDefined =>
@@ -436,7 +438,9 @@ class Deforest(using TL, Raise, Elaborator.State):
     case End(msg) => NoProd
     // make it a type var instead of `NoProd` so that things like `throw match error` in
     // default else branches do not block fusion...
-    case Throw(exc) => freshVar("throw")._1
+    case Throw(exc) =>
+      processResult(exc)
+      freshVar("throw")._1
   
   def constrFun(params: Ls[Param], body: Block)(using
     inArm: LinkedHashMap[ProdVar, ClsOrModSymbol],
@@ -453,10 +457,9 @@ class Deforest(using TL, Raise, Elaborator.State):
   def processResult(r: Result)(using
     inArm: LinkedHashMap[ProdVar, ClsOrModSymbol],
     matching: LinkedHashMap[ResultId, ClsOrModSymbol]
-  ): ProdStrat = r match
-    case c@Call(f, args) =>
-      val argsTpe = args.map:
-        case Arg(false, value) => processResult(value)
+  ): ProdStrat =
+    def handleCallLike(f: Path, args: Ls[Path], c: Result) =
+      val argsTpe = args.map(processResult)
       f match
         case s@Select(p, nme) =>
           s.symbol.map(_.asCls) match
@@ -493,8 +496,10 @@ class Deforest(using TL, Raise, Elaborator.State):
         case Value.This(sym) => throw NotDeforestableException("No support for `this` as a callee yet")
         case Value.Lit(lit) => ???
         case Value.Arr(elems) => ???
+    r match
+    case c@Call(f, args) => handleCallLike(f, args.map {case Arg(false, value) => value}, c)
 
-    case Instantiate(cls, args) => throw NotDeforestableException("No support for `instantiate` yet")
+    case i@Instantiate(cls, args) => handleCallLike(cls, args, i)
 
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
@@ -1041,13 +1046,13 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
       super.applyResult(r)
     case _ => super.applyResult(r)
   
-  override def applyResult2(r: Result)(k: Result => Block): Block = r match
-    case call@Call(f, args) if d.filteredCtorDests.isDefinedAt(call.uid) =>
+  override def applyResult2(r: Result)(k: Result => Block): Block = 
+    def handleCallLike(f: Path, args: Ls[Path], uid: ResultId) =
       val c = f match
         case s: Select => s.symbol.get.asCls.get
         case Value.Ref(l) => l.asCls.get
         case _ => ???
-      d.filteredCtorDests.get(call.uid).get match
+      d.filteredCtorDests.get(uid).get match
         case CtorFinalDest.Match(scrut, expr, sels, selsMap) =>
           // use pre-determined symbols, create temp symbols for un-used fields
           val usedFieldIdentToSymbolsToBeReplaced = selsMap._1
@@ -1074,13 +1079,18 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
             selsMap._1 -> selsMap._2)
       
           args.zip(assignedTempSyms.map(_._2)).foldRight[Block](k(bodyAndRestInLam)):
-            case ((a, tmp), rest) => applyResult2(a.value) { r => Assign(tmp, r, rest) }
+            case ((a, tmp), rest) => applyResult2(a) { r => Assign(tmp, r, rest) }
       
         case CtorFinalDest.Sel(s) =>
           val selFieldName = s.getResult match { case Select(p, nme) => nme }
           val idx = d.getClsFields(c).indexWhere(s => s.id === selFieldName)
-          k(args(idx).value)
+          k(args(idx))
       
+    r match
+    case call@Call(f, args) if d.filteredCtorDests.isDefinedAt(call.uid) =>
+      handleCallLike(f, args.map { case Arg(false, value) => value }, call.uid)
+    case ins@Instantiate(cls, args) if d.filteredCtorDests.isDefinedAt(ins.uid) =>
+      handleCallLike(cls, args, ins.uid)
     case _ => super.applyResult2(r)(k)
   
   def handleObjFusing(objCallExprUid: ResultId, objClsSym: ModuleSymbol) =
