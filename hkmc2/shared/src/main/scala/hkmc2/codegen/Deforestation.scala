@@ -36,8 +36,6 @@ object StratVarState:
     p -> c
 
 
-type CtorExpr = ResultId
-
 extension (i: ResultId)
   def getResult(using d: Deforest) = d.resultIdToResult(i)
   def handleCtorIds[A](k: (ResultId, Select | Value.Ref, ClsOrModSymbol, Ls[Arg]) => A)(using Deforest) =
@@ -55,7 +53,7 @@ extension (i: ResultId)
       case _ => None
   def getClsSymOfUid(using Deforest) = i.handleCtorIds((_, _, s, _) => s).get
 
-case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: CtorExpr) extends ProdStrat
+case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: ResultId) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
 case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s)
 case object NoProd extends ProdStrat
@@ -530,19 +528,19 @@ class Deforest(using TL, Raise, Elaborator.State):
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
   case class CtorDest(matches: Map[ResultId, Match], sels: Set[FieldSel], noCons: Bool)
-  case class DtorSource(ctors: Set[CtorExpr], noProd: Bool)
+  case class DtorSource(ctors: Set[ResultId], noProd: Bool)
   object ctorDests:
     val ctorDests = mutable.Map.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Set.empty, false))
-    def update(ctor: CtorExpr, m: Match) = ctorDests.updateWith(ctor):
+    def update(ctor: ResultId, m: Match) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels, noCons))
       case None => Some(CtorDest(Map(m.scrut.uid -> m), Set.empty, false))
-    def update(ctor: CtorExpr, s: FieldSel) = ctorDests.updateWith(ctor):
+    def update(ctor: ResultId, s: FieldSel) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, sels + s, noCons))
       case None => Some(CtorDest(Map.empty, Set(s), false))
-    def update(ctor: CtorExpr, n: NoCons.type) = ctorDests.updateWith(ctor):
+    def update(ctor: ResultId, n: NoCons.type) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, sels, true))
       case None => Some(CtorDest(Map.empty, Set.empty, true))
-    def get(ctor: CtorExpr) = ctorDests.get(ctor)
+    def get(ctor: ResultId) = ctorDests.get(ctor)
   
   object dtorSources:
     val dtorSources = mutable.Map.empty[DtorExpr, DtorSource].withDefaultValue(DtorSource(Set.empty, false))
@@ -633,10 +631,10 @@ class Deforest(using TL, Raise, Elaborator.State):
   // ======== after resolving constraints ======
     
   lazy val resolveClashes =
-    type CtorToDtor = Map[CtorExpr, CtorDest]
+    type CtorToDtor = Map[ResultId, CtorDest]
     type DtorToCtor = Map[DtorExpr, DtorSource]
     
-    def removeCtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[CtorExpr]): CtorToDtor -> DtorToCtor =
+    def removeCtor(ctorDests: CtorToDtor, dtorSources: DtorToCtor, rm: Set[ResultId]): CtorToDtor -> DtorToCtor =
       if rm.isEmpty then
         ctorDests -> dtorSources
       else
@@ -676,7 +674,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     
     val removeCycle = {
-      def getCtorInArm(ctor: CtorExpr, dtor: Match): Set[CtorExpr] =
+      def getCtorInArm(ctor: ResultId, dtor: Match): Set[ResultId] =
         val ctorSym = getClsSymOfUid(ctor)
         val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.map(_._2).orElse(dtor.dflt).get
         
@@ -698,9 +696,9 @@ class Deforest(using TL, Raise, Elaborator.State):
         GetCtorsTraverser.applyBlock(arm)
         GetCtorsTraverser.ctors.toSet
       
-      def findCycle(ctor: CtorExpr, dtor: Match): Set[CtorExpr] =
+      def findCycle(ctor: ResultId, dtor: Match): Set[ResultId] =
         val cache = mutable.Set(ctor)
-        def go(ctorAndMatches: Set[CtorExpr -> Match]): Set[CtorExpr] =
+        def go(ctorAndMatches: Set[ResultId -> Match]): Set[ResultId] =
           val newCtorsAndNewMatches =
             ctorAndMatches.flatMap((c, m) => getCtorInArm(c, m)).flatMap: c =>
               removeClashes._1.get(c).flatMap:
@@ -727,8 +725,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     
   
   
-  lazy val filteredCtorDests: Map[CtorExpr, CtorFinalDest] =
-    val res = mutable.Map.empty[CtorExpr, CtorFinalDest]
+  lazy val filteredCtorDests: Map[ResultId, CtorFinalDest] =
+    val res = mutable.Map.empty[ResultId, CtorFinalDest]
     
     // we need only one CtorFinalDest per arm for each pat mat expr
     val handledMatches = mutable.Map.empty[ResultId -> ClsOrModSymbol, Opt[CtorFinalDest]]
@@ -1085,7 +1083,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
       
     case _ => super.applyResult2(r)(k)
   
-  def handleObjFusing(objCallExprUid: CtorExpr, objClsSym: ModuleSymbol) =
+  def handleObjFusing(objCallExprUid: ResultId, objClsSym: ModuleSymbol) =
     // must be a pat mat on objects; no support for selection on objects yet
     val CtorFinalDest.Match(scrut, expr, sels, selsMap) = d.filteredCtorDests(objCallExprUid): @unchecked
     val body = expr.arms.find{ case (Case.Cls(m, _) -> body) => m === objClsSym }.map(_._2).orElse(expr.dflt).get
