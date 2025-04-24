@@ -26,9 +26,9 @@ class StratVarState(val uid: StratVarId, val name: Str = ""):
   
   override def toString(): String = s"${if name.isEmpty() then "var" else name}@${uid}"
 
+object StratVarUidHandler extends Uid.Handler[StratVar]
 object StratVarState:
-  
-  def freshVar(nme: String = "")(using vuid: Uid.Handler[StratVar]#State) =
+  def freshVar(nme: String = "")(using vuid: StratVarUidHandler.State) =
     val newId = vuid.nextUid
     val s = StratVarState(newId, nme)
     val p = s.asProdStrat
@@ -270,8 +270,7 @@ extension (b: Block)
     
 class Deforest(using TL, Raise, Elaborator.State):
   
-  object StratVarUidHandler extends Uid.Handler[StratVar]()
-  given Uid.Handler[StratVar]#State = StratVarUidHandler.State()
+  given StratVarUidHandler.State = StratVarUidHandler.State()
   given Deforest = this
   import StratVarState.freshVar
   
