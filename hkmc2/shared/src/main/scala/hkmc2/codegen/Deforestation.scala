@@ -8,6 +8,7 @@ import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
 import scala.collection.mutable.LinkedHashMap
+import Result.ResultId
 
 type StratVar
 type StratVarId = Uid[StratVar]
@@ -38,8 +39,8 @@ object StratVarState:
 type CtorExpr = ResultId
 
 extension (i: ResultId)
-  def getResult = ResultUid(i)
-  def handleCtorIds[A](k: (ResultId, Select | Value.Ref, ClsOrModSymbol, Ls[Arg]) => A) =
+  def getResult(using d: Deforest) = d.resultIdToResult(i)
+  def handleCtorIds[A](k: (ResultId, Select | Value.Ref, ClsOrModSymbol, Ls[Arg]) => A)(using Deforest) =
     i.getResult match
       case Call(fun, args) => fun match
         case s: Select if s.symbol.flatMap(_.asCls).isDefined =>
@@ -52,7 +53,7 @@ extension (i: ResultId)
       case v: Value.Ref if v.l.asObj.isDefined =>
         Some(k(i, v, v.l.asObj.get, Nil))
       case _ => None
-  def getClsSymOfUid = i.handleCtorIds((_, _, s, _) => s).get
+  def getClsSymOfUid(using Deforest) = i.handleCtorIds((_, _, s, _) => s).get
 
 case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: CtorExpr) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
@@ -69,7 +70,7 @@ class Dtor(val expr: Match, val outterMatch: Option[ResultId])(using d: Deforest
     case None => Some(outterMatch)
     case Some(_) => lastWords(s"should only update once (uid: ${expr.scrut.uid})")
 object Dtor:
-  def unapply(d: Dtor): Opt[ResultId] = S(d.expr.scrut.uid)
+  def unapply(d: Dtor)(using Deforest): Opt[ResultId] = S(d.expr.scrut.uid)
     
 
 case class FieldSel(field: Tree.Ident, consVar: ConsVar)(val expr: ResultId, val inMatching: LinkedHashMap[ResultId, ClsOrModSymbol]) extends ConsStrat with FieldSelTrait
@@ -179,7 +180,8 @@ class DeforestationFreeVarTraverserForMatch(
   selsReplacementByCurrentMatch: Map[ResultId, Symbol],
   currentMatchScrut: Symbol,
   dt: DeforestTransformer
-) extends FreeVarTraverser(alwaysDefined):  
+) extends FreeVarTraverser(alwaysDefined):
+  given Deforest = dt.d
   override def applyBlock(b: Block): Unit = b match
     // a nested match
     case m@Match(scrut, arms, dflt, rest) =>
@@ -270,7 +272,11 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   object StratVarUidHandler extends Uid.Handler[StratVar]()
   given Uid.Handler[StratVar]#State = StratVarUidHandler.State()
+  given Deforest = this
   import StratVarState.freshVar
+  
+  
+  val resultIdToResult = mutable.Map.empty[ResultId, Result]
   
   def apply(p: Program): Opt[Program] -> String -> Int =
     val mainBlk = p.main
@@ -311,7 +317,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     val fusionStat = filteredCtorDests.map:
       case (ctorUid, CtorFinalDest.Sel(s)) =>
-        "\t" + ctorUid.getClsSymOfUid.nme + " --sel--> " + s"`.${ResultUid(s).asInstanceOf[Select].name}`"
+        "\t" + ctorUid.getClsSymOfUid.nme + " --sel--> " + s"`.${resultIdToResult(s).asInstanceOf[Select].name}`"
       case (ctorUid, CtorFinalDest.Match(scrut, expr, _, _)) =>
         "\t" + ctorUid.getClsSymOfUid.nme + " --match--> " + s"`if ${expr.scrut.asInstanceOf[Value.Ref].l.nme} is ...`"
     
@@ -384,7 +390,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
-      constrain(scrutStrat, Dtor(m, matching.lastOption.map(_._1))(using this))
+      constrain(scrutStrat, Dtor(m, matching.lastOption.map(_._1)))
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map:
           case (Case.Cls(s, _), body) => 
@@ -447,7 +453,6 @@ class Deforest(using TL, Raise, Elaborator.State):
     case c@Call(f, args) =>
       val argsTpe = args.map:
         case Arg(false, value) => processResult(value)
-      
       f match
         case s@Select(p, nme) =>
           s.symbol.map(_.asCls) match
@@ -788,7 +793,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   }.toSet
   
   def rewrite(p: Block) =
-    val deforestTransformer = DeforestTransformer(using this)
+    val deforestTransformer = DeforestTransformer()
     val rest = deforestTransformer.applyBlock(p)
     val newDefsRest = deforestTransformer.matchRest.getAllFunDefs
     val newDefsArms = deforestTransformer.matchArms.getAllFunDefs

@@ -406,14 +406,13 @@ enum Case:
 
 sealed trait TrivialResult extends Result
 
-type ResultId = Uid[Result]
-object ResultUidHandler extends Uid.Handler[Result]
-object ResultUid extends ResultUidHandler.State:
-  val uidToResult = collection.mutable.Map.empty[ResultId, Result]
-  def apply(id: ResultId) = uidToResult(id)
+object Result:
+  opaque type ResultId = Int
+  given Ordering[ResultId] with
+    def compare(x: ResultId, y: ResultId): Int = x.compare(y)
   
+  private def ResultId(v: Int): ResultId = v
   
-
 
 sealed abstract class Result extends AutoLocated:
 
@@ -468,10 +467,14 @@ sealed abstract class Result extends AutoLocated:
     case DynSelect(qual, fld, arrayIdx) => qual.freeVarsLLIR ++ fld.freeVarsLLIR
     case Value.Rcd(args) => args.flatMap(arg => arg.idx.fold(Set.empty)(_.freeVarsLLIR) ++ arg.value.freeVarsLLIR).toSet
   
-  lazy val uid =
-    val id = ResultUid.nextUid
-    ResultUid.uidToResult.addOne(id -> this)
-    id
+  // for deforestation
+  import Result.*
+  lazy val uidValue: ResultId = ResultId(System.identityHashCode(this))
+  def uid(using d: Deforest) =
+    d.resultIdToResult.updateWith(this.uidValue):
+      case N => S(this)
+      case S(r) => assert(this is r); S(this)
+    uidValue
   
 // type Local = LocalSymbol
 type Local = Symbol
