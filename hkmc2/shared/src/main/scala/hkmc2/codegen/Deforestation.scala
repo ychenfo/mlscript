@@ -366,11 +366,18 @@ class Deforest(using TL, Raise, Elaborator.State):
         constrain(NoProd, store(funSymsWithoutDefn).asConsStrat)
       
     
-    // TODO: ctor as a function?
     def getStratOfSym(s: Symbol) =
       s match
         case _: BuiltinSymbol => NoProd
         case _: TopLevelSymbol => NoProd
+        // TODO: cannot fuse intermediate values created by
+        // calling data constructors passed around like functions,
+        // like `fun app(ctor) = ctor(1); if app(AA) is AA(x) then x`;
+        // immediate data constructor calls are handled directly,
+        // so if this method is called on a ClsLike symbol,
+        // it means that this constructor is passed around like a function,
+        // which we can't fuse for now
+        case _ if s.asCls.isDefined => NoProd
         case _: BlockMemberSymbol => store(s)
         case _: LocalSymbol => store(s)
     def +=(e: Symbol -> ProdVar) = store += e

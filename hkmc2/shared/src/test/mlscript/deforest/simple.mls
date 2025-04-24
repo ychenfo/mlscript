@@ -528,3 +528,23 @@ f(A, B)
 //│ 	A --match--> `if a is ...`
 //│ 	B --match--> `if b is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// cannot fuse intermediate values created by
+// calling data constructors passed around like functions,
+// so `c1` is not fused.
+fun app(f) = f(1)
+fun identity(x) = x
+fun c1(x) = if x is
+  AA(i) then i
+fun c2(x) = if x is
+  AA(i) then i
+  A then 0
+c1(app(AA)) + c1(AA(2)) + c2(AA(3)) + c2(A)
+//│ = 6
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 6
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if x is ...`
+//│ 	AA --match--> `if x is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
