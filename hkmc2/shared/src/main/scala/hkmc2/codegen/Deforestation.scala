@@ -552,7 +552,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     private def getDtorExprOfResultId(i: ResultId) = i.getResult match
       case s: Select => DtorExpr.Sel(i)
       case r: Value.Ref => DtorExpr.Match(i)
-      case _ => ??? // unreachable
+      case r => lastWords(s"try to get dtor expr from ResultId, but get $r")
     def update(dtor: ResultId, ctor: ResultId) =
       val dtorExpr = getDtorExprOfResultId(dtor)
       dtorSources.updateWith(dtorExpr):
@@ -610,7 +610,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                   handle(prod -> u)
                 else
                   ()
-              case (_: ProdVar, _) => ??? // unreachable, should be handled above
+              case (_: ProdVar, _) => die
               case _ => handle(prod -> u)
         case (Ctor(ctor, args, expr), NoCons) =>
           ctorDests.update(expr, NoCons)
@@ -786,7 +786,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               throw Error("more than one consumer")
               None
           )
-        else ???
+        else die
       }
       res.updateWith(ctor){_ => filteredDtor}
     }
