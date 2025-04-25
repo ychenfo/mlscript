@@ -734,17 +734,15 @@ class Deforest(using TL, Raise, Elaborator.State):
     val res = mutable.Map.empty[ResultId, CtorFinalDest]
     
     // we need only one CtorFinalDest per arm for each pat mat expr
-    val handledMatches = mutable.Map.empty[ResultId -> ClsOrModSymbol, Opt[CtorFinalDest]]
+    val handledMatches = mutable.Map.empty[ResultId -> ClsOrModSymbol, CtorFinalDest]
     
     resolveClashes._1.toSortedMap.foreach { case (ctor, CtorDest(dtors, sels, false)) =>
       val filteredDtor = {
-        if dtors.size == 0 && sels.size == 1 then Some(CtorFinalDest.Sel(sels.head.expr))
+        if dtors.size == 0 && sels.size == 1 then CtorFinalDest.Sel(sels.head.expr)
         else if dtors.size == 0 && sels.size > 1 then
-          throw Error("more than one consumer")
-          None
+          lastWords("more than one consumer")
         else if dtors.size > 1 then
-          throw Error("more than one consumer")
-          None
+          lastWords("more than one consumer")
         else if dtors.size == 1 then
           val currentCtorCls = getClsSymOfUid(ctor)
           val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
@@ -776,19 +774,18 @@ class Deforest(using TL, Raise, Elaborator.State):
                     
                     selectionUidsToSymToBeReplaced.addOne(fs.expr -> sym)
                 case _ => ()
-              Some(CtorFinalDest.Match(
+              CtorFinalDest.Match(
                 dtors.head._1,
                 dtors.head._2,
                 sels.map(_.expr),
                 fieldNameToSymToBeReplaced.toMap -> selectionUidsToSymToBeReplaced.toMap
-              ))
+              )
             else
-              throw Error("more than one consumer")
-              None
+              lastWords("more than one consumer")
           )
         else die
       }
-      res.updateWith(ctor){_ => filteredDtor}
+      res.updateWith(ctor){_ => Some(filteredDtor)}
     }
     res.toMap
   
