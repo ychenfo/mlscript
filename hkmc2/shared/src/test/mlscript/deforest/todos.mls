@@ -16,7 +16,7 @@ object None
 data class Some(x)
 
 
-// similar as above, since `x.x` is considered as being consumed
+// since `x.x` is considered as being consumed
 // at two places,the inner match is not fused
 :sjs
 fun f(x) = if x is
