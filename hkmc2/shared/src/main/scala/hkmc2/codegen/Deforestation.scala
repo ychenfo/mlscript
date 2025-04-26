@@ -130,8 +130,8 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
     case Define(defn, rest) => defn match
       case FunDefn(owner, sym, params, body) =>
         val paramSymbols = params.flatMap:
-          case ParamList(flags, params, restParam) => (params ++ restParam).map:
-            case Param(flags, sym, sign) => sym
+          case ParamList(_, params, restParam) => (params ++ restParam).map:
+            case Param(sym = sym, _) => sym
         ctx += sym
         ctx ++= paramSymbols
         applyBlock(body)
@@ -447,7 +447,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     matching: LinkedHashMap[ResultId, ClsOrModSymbol]
   ) =
     val paramSyms = params.map:
-      case Param(_, sym, _) => sym
+      case Param(sym = sym, _) => sym
     val paramStrats = paramSyms.map(symToStrat.apply)
     symToStrat.addAll(paramSyms.zip(paramStrats))
     val res = freshVar()
@@ -908,10 +908,9 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
               funSym,
               ParamList(
                 ParamListFlags.empty,
-                freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)).toList
+                freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N, Modulefulness.none)).toList
                   ::: preComputedSymbols._1.toList.sortBy(_._1.name).map(v =>
-                    
-                    Param(FldFlags.empty, v._2.asInstanceOf[VarSymbol], N)
+                    Param(FldFlags.empty, v._2.asInstanceOf[VarSymbol], N, Modulefulness.none)
                   ),
                 N
               ) :: Nil,
@@ -919,7 +918,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
             )
             store += (scrut -> (store(scrut) + ((if isDflt then None else cls) -> newDef)))
             Value.Lam(
-              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSymsInLam.map(s => Param(FldFlags.empty, s._2, N)), N),
+              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSymsInLam.map(s => Param(FldFlags.empty, s._2, N, Modulefulness.none)), N),
               Return(
                 Call(Value.Ref(funSym), freeVarsAndTheirNewSymsInLam.map(a => Arg(false, Value.Ref(a._2))) ::: currentUsedCtorArgsToFields.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
                 false
@@ -929,14 +928,14 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
             val bodyReplaceSel = applyBlock(body)
             val lambdaBody = makeBody(bodyReplaceSel)
             Value.Lam(
-              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N),
+              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N, Modulefulness.none)).toList, N),
               lambdaBody
             )
           
         case Some(f) =>
           // return a lambda that calls f with correct arguments
           Value.Lam(
-            ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N)), N),
+            ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.map(s => Param(FldFlags.empty, s._2, N, Modulefulness.none)), N),
             Return(
                 Call(Value.Ref(f.sym), freeVarsAndTheirNewSyms.map(a => Arg(false, Value.Ref(a._2))) ::: currentUsedCtorArgsToFields.toList.sortBy(_._1.name).map(a => Arg(false, a._2)))(true, false),
                 false
@@ -1001,7 +1000,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
             val newFunDef = FunDefn(
               N,
               sym,
-              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N)).toList, N) :: Nil,
+              ParamList(ParamListFlags.empty, freeVarsAndTheirNewSyms.values.map(s => Param(FldFlags.empty, s, N, Modulefulness.none)).toList, N) :: Nil,
               restRewritten.replaceSymbols(freeVarsAndTheirNewSyms)
             )
             store += s -> (Some(newFunDef) -> restRewritten)

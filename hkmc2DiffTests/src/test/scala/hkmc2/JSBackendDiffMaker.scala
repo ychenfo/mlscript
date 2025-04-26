@@ -174,8 +174,8 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       def executeJS(preStr: Str, jsStr: Str, resNme: Str) =
         if traceJS.isSet then
           host.execute(
-            "globalThis.Predef.TraceLogger.enabled = true; " +
-            "globalThis.Predef.TraceLogger.resetIndent(0)")
+            s"$runtimeNme.TraceLogger.enabled = true; " +
+            s"$runtimeNme.TraceLogger.resetIndent(0)")
         
         // * Sometimes the JS block won't execute due to a syntax or runtime error so we always set this first
         host.execute(s"$resNme = undefined")
@@ -184,14 +184,14 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           stdout.foreach: line =>
             output(s"> ${line}")
         if traceJS.isSet then
-          host.execute("globalThis.Predef.TraceLogger.enabled = false")
+          host.execute(s"$runtimeNme.TraceLogger.enabled = false")
       
       def handleDefinedValues(nme: Str, sym: Symbol, expect: Opt[Str])(handleResult: Str => Unit) =
         val le =
           import codegen.*
           Return(
             Call(
-              Value.Ref(Elaborator.State.globalThisSymbol).selSN("Predef").selSN("printRaw"),
+              Value.Ref(Elaborator.State.runtimeSymbol).selSN("printRaw"),
               Arg(false, Value.Ref(sym)) :: Nil)(true, false),
           implct = true)
         val je = baseScp.givenIn:
