@@ -84,7 +84,7 @@ enum DtorExpr:
   case Sel(s: ResultId)
 
 enum CtorFinalDest:
-  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Set[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])
+  case Match(scrut: ResultId, expr: codegen.Match, selInArms: Ls[ResultId], selMaps: Map[Tree.Ident, Symbol] -> Map[ResultId, Symbol])
   case Sel(s: ResultId)
 
 trait FieldSelTrait:
@@ -244,7 +244,7 @@ class ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) e
     case Value.Ref(l) => Value.Ref(freeVarsAndTheirNewSyms.getOrElse(l, l))
     case _ => super.applyValue(v)
 
-object HasExplicitRetTraverser extends BlockTraverserShallow:
+class HasExplicitRetTraverser extends BlockTraverserShallow:
   var flag = false
   override def applyBlock(b: Block): Unit = b match
     case Return(_, imp) => flag = !imp
@@ -263,7 +263,7 @@ extension (b: Block)
     FreeVarTraverser(alwaysDefined).analyze(b)
   
   def hasExplicitRet: Boolean =
-    HasExplicitRetTraverser.analyze(b)
+    HasExplicitRetTraverser().analyze(b)
   
   def willBeNonEndTailBlock(using d: Deforest): Bool =
     WillBeNonEndTailBlockTraverser().analyze(b)
@@ -532,19 +532,19 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  case class CtorDest(matches: Map[ResultId, Match], sels: Set[FieldSel], noCons: Bool)
+  case class CtorDest(matches: Map[ResultId, Match], sels: Ls[FieldSel], noCons: Bool)
   case class DtorSource(ctors: Set[ResultId], noProd: Bool)
   object ctorDests:
-    val ctorDests = mutable.LinkedHashMap.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Set.empty, false))
+    val ctorDests = mutable.LinkedHashMap.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil, false))
     def update(ctor: ResultId, m: Match) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels, noCons))
-      case None => Some(CtorDest(Map(m.scrut.uid -> m), Set.empty, false))
+      case None => Some(CtorDest(Map(m.scrut.uid -> m), Nil, false))
     def update(ctor: ResultId, s: FieldSel) = ctorDests.updateWith(ctor):
-      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, sels + s, noCons))
-      case None => Some(CtorDest(Map.empty, Set(s), false))
+      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, s :: sels, noCons))
+      case None => Some(CtorDest(Map.empty, s :: Nil, false))
     def update(ctor: ResultId, n: NoCons.type) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, sels, true))
-      case None => Some(CtorDest(Map.empty, Set.empty, true))
+      case None => Some(CtorDest(Map.empty, Nil, true))
     def get(ctor: ResultId) = ctorDests.get(ctor)
   
   object dtorSources:

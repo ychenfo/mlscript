@@ -1,0 +1,164 @@
+:js
+
+data class A(a)
+data class B(a, b, c, d, e)
+
+:deforest
+:sjs
+if B(1,2,3,4,5) is
+  B(a,b,c,d,e) then 0
+//│ JS (unsanitized):
+//│ let scrut, param0, param1, param2, param3, param4, a, b, c, d, e;
+//│ scrut = B1(1, 2, 3, 4, 5);
+//│ if (scrut instanceof B1.class) {
+//│   param0 = scrut.a;
+//│   param1 = scrut.b;
+//│   param2 = scrut.c;
+//│   param3 = scrut.d;
+//│   param4 = scrut.e;
+//│   a = param0;
+//│   b = param1;
+//│   c = param2;
+//│   d = param3;
+//│   e = param4;
+//│   0
+//│ } else {
+//│   throw new this.Error("match error");
+//│ }
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let scrut, _deforest_B_e, _deforest_B_d, _deforest_B_c, _deforest_B_b, _deforest_B_a;
+//│ _deforest_B_a = 1;
+//│ _deforest_B_b = 2;
+//│ _deforest_B_c = 3;
+//│ _deforest_B_d = 4;
+//│ _deforest_B_e = 5;
+//│ scrut = () => {
+//│   let param0, param1, param2, param3, param4, a, b, c, d, e;
+//│   param0 = _deforest_B_a;
+//│   param1 = _deforest_B_b;
+//│   param2 = _deforest_B_c;
+//│   param3 = _deforest_B_d;
+//│   param4 = _deforest_B_e;
+//│   a = param0;
+//│   b = param1;
+//│   c = param2;
+//│   d = param3;
+//│   e = param4;
+//│   return 0
+//│ };
+//│ runtime.safeCall(scrut())
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 0
+//│ 1 fusion opportunities:
+//│ 	B --match--> `if scrut is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:sjs
+:deforest
+fun c2(x) = if x is
+  A(A(A(A(A(A(a)))))) then a
+c2 of A(A(A(A(A(A(1))))))
+//│ JS (unsanitized):
+//│ let c2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+//│ c2 = function c2(x) {
+//│   let param01, param02, param03, param04, param05, param06, a1;
+//│   if (x instanceof A1.class) {
+//│     param01 = x.a;
+//│     if (param01 instanceof A1.class) {
+//│       param02 = param01.a;
+//│       if (param02 instanceof A1.class) {
+//│         param03 = param02.a;
+//│         if (param03 instanceof A1.class) {
+//│           param04 = param03.a;
+//│           if (param04 instanceof A1.class) {
+//│             param05 = param04.a;
+//│             if (param05 instanceof A1.class) {
+//│               param06 = param05.a;
+//│               a1 = param06;
+//│               return a1
+//│             } else {
+//│               throw new globalThis.Error("match error");
+//│             }
+//│           } else {
+//│             throw new globalThis.Error("match error");
+//│           }
+//│         } else {
+//│           throw new globalThis.Error("match error");
+//│         }
+//│       } else {
+//│         throw new globalThis.Error("match error");
+//│       }
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp = A1(1);
+//│ tmp1 = A1(tmp);
+//│ tmp2 = A1(tmp1);
+//│ tmp3 = A1(tmp2);
+//│ tmp4 = A1(tmp3);
+//│ tmp5 = A1(tmp4);
+//│ c2(tmp5)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ==== JS (deforested): ====
+//│ let c2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_A_a, _deforest_A_a1, _deforest_A_a2, _deforest_A_a3, _deforest_A_a4, _deforest_A_a5;
+//│ c2 = function c2(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ _deforest_A_a5 = 1;
+//│ tmp = () => {
+//│   let param01, a1;
+//│   param01 = _deforest_A_a5;
+//│   a1 = param01;
+//│   return a1
+//│ };
+//│ _deforest_A_a4 = tmp;
+//│ tmp1 = () => {
+//│   let param01;
+//│   param01 = _deforest_A_a4;
+//│   return runtime.safeCall(param01())
+//│ };
+//│ _deforest_A_a3 = tmp1;
+//│ tmp2 = () => {
+//│   let param01;
+//│   param01 = _deforest_A_a3;
+//│   return runtime.safeCall(param01())
+//│ };
+//│ _deforest_A_a2 = tmp2;
+//│ tmp3 = () => {
+//│   let param01;
+//│   param01 = _deforest_A_a2;
+//│   return runtime.safeCall(param01())
+//│ };
+//│ _deforest_A_a1 = tmp3;
+//│ tmp4 = () => {
+//│   let param01;
+//│   param01 = _deforest_A_a1;
+//│   return runtime.safeCall(param01())
+//│ };
+//│ _deforest_A_a = tmp4;
+//│ tmp5 = () => {
+//│   let param01;
+//│   param01 = _deforest_A_a;
+//│   return runtime.safeCall(param01())
+//│ };
+//│ c2(tmp5)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 1
+//│ 6 fusion opportunities:
+//│ 	A --match--> `if param0 is ...`
+//│ 	A --match--> `if param0 is ...`
+//│ 	A --match--> `if param0 is ...`
+//│ 	A --match--> `if param0 is ...`
+//│ 	A --match--> `if param0 is ...`
+//│ 	A --match--> `if x is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
