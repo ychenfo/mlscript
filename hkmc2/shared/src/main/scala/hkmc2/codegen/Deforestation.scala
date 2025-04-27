@@ -14,11 +14,9 @@ type StratVar
 type StratVarId = Uid[StratVar]
 type ClsOrModSymbol = ClassLikeSymbol
 
-sealed abstract class Strat
+sealed abstract class ProdStrat
 
-sealed abstract class ProdStrat extends Strat
-
-sealed abstract class ConsStrat extends Strat
+sealed abstract class ConsStrat
 
 class StratVarState(val uid: StratVarId, val name: Str = ""):
   lazy val asProdStrat = ProdVar(this)
@@ -325,8 +323,6 @@ class Deforest(using TL, Raise, Elaborator.State):
     else
       S(p) -> s"0 fusion opportunity" -> 0
   
-  // these are never considered as free vars (because of their symbol type)
-  // consider TopLevelSym, BlockMemberSymbols and BuiltInSyms as globally defined...
   object globallyDefinedVars:
     val store = mutable.Set.from[Symbol](State.globalThisSymbol ::State.runtimeSymbol :: Nil)
     
@@ -391,7 +387,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
   def processBlock(b: Block)(using
-    inArm: LinkedHashMap[ProdVar, ClsOrModSymbol] = LinkedHashMap.empty[ProdVar, ClsOrModSymbol],
+    inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
     matching: LinkedHashMap[ResultId, ClsOrModSymbol] = LinkedHashMap.empty[ResultId, ClsOrModSymbol]
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
@@ -443,7 +439,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       freshVar("throw")._1
   
   def constrFun(params: Ls[Param], body: Block)(using
-    inArm: LinkedHashMap[ProdVar, ClsOrModSymbol],
+    inArm: Map[ProdVar, ClsOrModSymbol],
     matching: LinkedHashMap[ResultId, ClsOrModSymbol]
   ) =
     val paramSyms = params.map:
@@ -455,7 +451,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   
   def processResult(r: Result)(using
-    inArm: LinkedHashMap[ProdVar, ClsOrModSymbol],
+    inArm: Map[ProdVar, ClsOrModSymbol],
     matching: LinkedHashMap[ResultId, ClsOrModSymbol]
   ): ProdStrat =
     def handleCallLike(f: Path, args: Ls[Path], c: Result) =
@@ -636,7 +632,6 @@ class Deforest(using TL, Raise, Elaborator.State):
   // ======== after resolving constraints ======
     
   lazy val resolveClashes =
-    
     val ctorToDtor = ctorDests.ctorDests
     val dtorToCtor = dtorSources.dtorSources
     
@@ -647,84 +642,72 @@ class Deforest(using TL, Raise, Elaborator.State):
         val toDeleteDtors = rm.flatMap(r => ctorToDtor.remove(r)).flatMap:
           case CtorDest(mat, sels, _) => mat.keySet.map(s => DtorExpr.Match(s)) ++ sels.map(s => DtorExpr.Sel(s.expr))
         removeDtor(toDeleteDtors)
-        // val (newCtorDests, toDelete) = ctorDests.partition(c => !rm(c._1))
-        // removeDtor(newCtorDests, dtorSources, toDelete.values.flatMap[DtorExpr]{ case CtorDest(mat, sels, _) =>
-        //   mat.keySet.map(s => DtorExpr.Match(s)) ++ sels.map(s => DtorExpr.Sel(s.expr))
-        // }.toSet)
     
     def removeDtor(rm: Set[DtorExpr]): Unit =
       if rm.isEmpty then ()
       else
         tl.log("rm dtor: " + rm.mkString(" | "))
-        // val (newDtorSources, toDelete) = dtorSources.partition(d => !rm(d._1))
         val toDeleteCtors = rm.flatMap(r => dtorToCtor.remove(r)).flatMap(_.ctors)
         removeCtor(toDeleteCtors)
     
-    val removeClashes =
-      removeCtor(
-        ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels, noCons) =>
-          ((dtors.size == 0 && sels.size == 1)
-          || (dtors.size == 1 && {
-            val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
-            sels.forall { s => s.expr.getResult match
-              case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
-              case _ => false }
-          }))
-          && !noCons
-        }.keySet.toSet
-      )
-      removeDtor(dtorToCtor.filter(_._2.noProd).keySet.toSet)
+    // remove clashes:
+    removeCtor(
+      ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels, noCons) =>
+        ((dtors.size == 0 && sels.size == 1)
+        || (dtors.size == 1 && {
+          val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
+          sels.forall { s => s.expr.getResult match
+            case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
+            case _ => false }
+        }))
+        && !noCons
+      }.keySet.toSet
+    )
+    removeDtor(dtorToCtor.filter(_._2.noProd).keySet.toSet)
     
-    
-    val removeCycle = {
-      def getCtorInArm(ctor: ResultId, dtor: Match): Set[ResultId] =
-        val ctorSym = getClsSymOfUid(ctor)
-        val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.map(_._2).orElse(dtor.dflt).get
-        
-        object GetCtorsTraverser extends BlockTraverser:
-          val ctors = mutable.Set.empty[ResultId]
-          override def applyResult(r: Result): Unit =
-            r.uid.handleCtorIds{ (id, f, clsOrMod, args) =>
-              ctors += id
-              args.foreach { case Arg(_, value) => applyResult(value) }
-            } match
-              case Some(_) => ()
-              case None => r match
-                case Call(_, args) =>
-                  args.foreach { case Arg(_, value) => applyResult(value) }
-                case Instantiate(cls, args) =>
-                  args.foreach(applyResult)
-                case _ => ()
-  
-        GetCtorsTraverser.applyBlock(arm)
-        GetCtorsTraverser.ctors.toSet
+    // remove cycle:
+    def getCtorInArm(ctor: ResultId, dtor: Match): Set[ResultId] =
+      val ctorSym = getClsSymOfUid(ctor)
+      val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.map(_._2).orElse(dtor.dflt).get
       
-      def findCycle(ctor: ResultId, dtor: Match): Set[ResultId] =
-        val cache = mutable.Set(ctor)
-        def go(ctorAndMatches: Set[ResultId -> Match]): Set[ResultId] =
-          val newCtorsAndNewMatches =
-            ctorAndMatches.flatMap((c, m) => getCtorInArm(c, m)).flatMap: c =>
-              ctorToDtor.get(c).flatMap:
-                case CtorDest(matches, sels, false) => matches.values.headOption.map(m => c -> m)
-          val cycled = newCtorsAndNewMatches.filter(c => !cache.add(c._1))
-          if newCtorsAndNewMatches.isEmpty then
-            Set.empty
-          else if cycled.nonEmpty then
-            cycled.map(_._1)
-          else
-            go(newCtorsAndNewMatches)
-        go(Set(ctor -> dtor))
-      
-      val toRmCtor = ctorToDtor.flatMap:
-        case (c, CtorDest(matches, sels, false)) => 
-          assert(matches.size <= 1)
-          matches.values.flatMap(m => findCycle(c, m))
-      
-      removeCtor(toRmCtor.toSet)
-    }
+      object GetCtorsTraverser extends BlockTraverser:
+        val ctors = mutable.Set.empty[ResultId]
+        override def applyResult(r: Result): Unit =
+          r.uid.handleCtorIds{ (id, f, clsOrMod, args) =>
+            ctors += id
+            args.foreach { case Arg(_, value) => applyResult(value) }
+          } match
+            case Some(_) => ()
+            case None => r match
+              case Call(_, args) =>
+                args.foreach { case Arg(_, value) => applyResult(value) }
+              case Instantiate(cls, args) =>
+                args.foreach(applyResult)
+              case _ => ()
 
-    val finalRes = removeCycle
-    // finalRes
+      GetCtorsTraverser.applyBlock(arm)
+      GetCtorsTraverser.ctors.toSet
+    def findCycle(ctor: ResultId, dtor: Match): Set[ResultId] =
+      val cache = mutable.Set(ctor)
+      def go(ctorAndMatches: Set[ResultId -> Match]): Set[ResultId] =
+        val newCtorsAndNewMatches =
+          ctorAndMatches.flatMap((c, m) => getCtorInArm(c, m)).flatMap: c =>
+            ctorToDtor.get(c).flatMap:
+              case CtorDest(matches, sels, false) => matches.values.headOption.map(m => c -> m)
+        val cycled = newCtorsAndNewMatches.filter(c => !cache.add(c._1))
+        if newCtorsAndNewMatches.isEmpty then
+          Set.empty
+        else if cycled.nonEmpty then
+          cycled.map(_._1)
+        else
+          go(newCtorsAndNewMatches)
+      go(Set(ctor -> dtor))
+    val toRmCtor = ctorToDtor.flatMap:
+      case (c, CtorDest(matches, sels, false)) => 
+        assert(matches.size <= 1)
+        matches.values.flatMap(m => findCycle(c, m))
+    removeCtor(toRmCtor.toSet)
+
     ctorToDtor -> dtorToCtor
     
   
