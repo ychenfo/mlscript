@@ -408,9 +408,6 @@ sealed trait TrivialResult extends Result
 
 object Result:
   opaque type ResultId = Int
-  given Ordering[ResultId] with
-    def compare(x: ResultId, y: ResultId): Int = x.compare(y)
-  
   private def ResultId(v: Int): ResultId = v
   
 
@@ -468,10 +465,10 @@ sealed abstract class Result extends AutoLocated:
     case Value.Rcd(args) => args.flatMap(arg => arg.idx.fold(Set.empty)(_.freeVarsLLIR) ++ arg.value.freeVarsLLIR).toSet
   
   // for deforestation
-  import Result.*
-  lazy val uidValue: ResultId = ResultId(System.identityHashCode(this))
   def uid(using d: Deforest) =
-    d.resultIdToResult.updateWith(this.uidValue):
+    import Result.*
+    val uidValue = ResultId(System.identityHashCode(this))
+    d.resultIdToResult.updateWith(uidValue):
       case N => S(this)
       case S(r) => assert(this is r); S(this)
     uidValue
