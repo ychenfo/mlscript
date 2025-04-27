@@ -423,8 +423,9 @@ class Deforest(using TL, Raise, Elaborator.State):
       defn match
         case FunDefn(_, sym, params, body) =>
           val funSymStratVar = symToStrat(sym)
-          val param = params.head match
-            case ParamList(flags, params, N) => params // TODO: handle mutiple param list
+          val param = params match
+            // TODO: handle `restParam` and mutiple param list
+            case ParamList(flags, params, N) :: Nil => params
           val funStrat = constrFun(param, body)
           constrain(funStrat, funSymStratVar.asConsStrat)
           funSymStratVar
