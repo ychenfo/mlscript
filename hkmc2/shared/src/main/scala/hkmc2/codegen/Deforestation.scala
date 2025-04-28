@@ -53,7 +53,7 @@ extension (i: ResultId)
       case _ => None
   def getClsSymOfUid(using Deforest) = i.handleCtorIds((_, _, s, _) => s).get
 
-case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: ResultId) extends ProdStrat
+case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: ResultId)(val inDef: Opt[BlockMemberSymbol]) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
 case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s)
 case object NoProd extends ProdStrat
@@ -389,7 +389,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def processBlock(b: Block)(using
     inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
-    matching: LinkedHashMap[ResultId, ClsOrModSymbol] = LinkedHashMap.empty[ResultId, ClsOrModSymbol]
+    matching: LinkedHashMap[ResultId, ClsOrModSymbol] = LinkedHashMap.empty[ResultId, ClsOrModSymbol],
+    inDef: Opt[BlockMemberSymbol] = N
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
@@ -427,7 +428,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           val param = params match
             // TODO: handle `restParam` and mutiple param list
             case ParamList(flags, params, N) :: Nil => params
-          val funStrat = constrFun(param, body)
+          val funStrat = constrFun(param, body)(using inArm, matching, S(sym))
           constrain(funStrat, funSymStratVar.asConsStrat)
           funSymStratVar
         case v: ValDefn => throw NotDeforestableException("No support for `ValDefn` yet")
@@ -442,7 +443,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def constrFun(params: Ls[Param], body: Block)(using
     inArm: Map[ProdVar, ClsOrModSymbol],
-    matching: LinkedHashMap[ResultId, ClsOrModSymbol]
+    matching: LinkedHashMap[ResultId, ClsOrModSymbol],
+    inDef: Opt[BlockMemberSymbol]
   ) =
     val paramSyms = params.map:
       case Param(sym = sym, _) => sym
@@ -454,7 +456,8 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def processResult(r: Result)(using
     inArm: Map[ProdVar, ClsOrModSymbol],
-    matching: LinkedHashMap[ResultId, ClsOrModSymbol]
+    matching: LinkedHashMap[ResultId, ClsOrModSymbol],
+    inDef: Opt[BlockMemberSymbol]
   ): ProdStrat =
     def handleCallLike(f: Path, args: Ls[Path], c: Result) =
       val argsTpe = args.map(processResult)
@@ -475,12 +478,12 @@ class Deforest(using TL, Raise, Elaborator.State):
               appRes._1
             case Some(Some(s)) =>
               val clsFields = getClsFields(s)
-              Ctor(s, clsFields.zip(argsTpe).toMap, c.uid)
+              Ctor(s, clsFields.zip(argsTpe).toMap, c.uid)(inDef)
         case Value.Ref(l) =>
           l.asCls match
             case Some(s) =>
               val clsFields = getClsFields(s)
-              Ctor(s, clsFields.zip(argsTpe).toMap, c.uid)
+              Ctor(s, clsFields.zip(argsTpe).toMap, c.uid)(inDef)
             case _ => // then it is a function
               val appRes = freshVar("call_" + l.nme + "_res")
               constrain(symToStrat.getStratOfSym(l), ConsFun(argsTpe, appRes._2))
@@ -501,7 +504,7 @@ class Deforest(using TL, Raise, Elaborator.State):
 
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
-        Ctor(s.asObj.get, Map.empty, sel.uid)
+        Ctor(s.asObj.get, Map.empty, sel.uid)(inDef)
       case _ => 
         val pStrat = processResult(p)
         pStrat match
@@ -518,7 +521,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             
     case v@Value.Ref(l) => l.asObj match
       case None => symToStrat.getStratOfSym(l)
-      case Some(m) => Ctor(m, Map.empty, v.uid)
+      case Some(m) => Ctor(m, Map.empty, v.uid)(inDef)
     
     case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
     case Value.Lit(lit) => NoProd
