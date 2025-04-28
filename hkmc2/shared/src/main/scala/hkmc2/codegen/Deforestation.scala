@@ -101,7 +101,8 @@ trait StratVarTrait(stratState: StratVarState):
 
 final case class NotDeforestableException(msg: String) extends Exception(msg)
 
-// Compute free vars for a block, without considering deforestation, used on transformed blocks
+// Compute free vars for a block, without considering deforestation.
+// Used on blocks after the deforestation transformation.
 // This means that for matches we don't need to consider the extra
 // free vars that may be introduced by deforestation:
 // 1. the free vars from the `rest` of the their parent matches
