@@ -570,3 +570,15 @@ c(B)
 //│ 	B --match--> `if x is ...`
 //│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+fun f(a, b) = if a is
+  AA(x) then x + b.bb
+f(AA(1), BB(2))
+//│ = 3
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 3
+//│ 2 fusion opportunities:
+//│ 	AA --match--> `if a is ...`
+//│ 	BB --sel--> `.Ident(bb)`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

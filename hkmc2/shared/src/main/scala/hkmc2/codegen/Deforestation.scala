@@ -228,7 +228,7 @@ class WillBeNonEndTailBlockTraverser(using d: Deforest) extends BlockTraverserSh
   override def applyBlock(b: Block): Unit = b match
     case Match(scrut, arms, dflt, rest) =>
       flag =
-        d.filteredDtors(scrut.uid) ||
+        d.rewritingMatchConsumers(scrut.uid) ||
         (arms.forall { case (_, b) => b.willBeNonEndTailBlock } && dflt.fold(true)(_.willBeNonEndTailBlock)) ||
         rest.willBeNonEndTailBlock
     case _: End => ()
@@ -773,13 +773,12 @@ class Deforest(using TL, Raise, Elaborator.State):
     }
     res.toMap
   
-  lazy val rewritingSelConsumer = filteredCtorDests.values.flatMap {
-    case CtorFinalDest.Match(_, _, _, _) => None
-    case CtorFinalDest.Sel(s) => Some(s)
+  lazy val rewritingSelConsumers = filteredCtorDests.values.collect {
+    case CtorFinalDest.Sel(s) => s
   }.toSet
   
-  lazy val filteredDtors = filteredCtorDests.values.collect {
-    case CtorFinalDest.Match(scrut, _, _, _) => scrut
+  lazy val rewritingMatchConsumers = filteredCtorDests.values.collect {
+    case CtorFinalDest.Match(scrut = s, _) => s
   }.toSet
   
   def rewrite(p: Block) =
@@ -803,7 +802,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
   def parentMatchesUptoAFusingOne(scrutId: ResultId) =
     def go(scrutId: ResultId): List[ResultId] -> Opt[ResultId] =
       d.matchScrutToParentMatchScrut(scrutId).fold(Nil -> N): r =>
-        if d.filteredDtors.contains(r)
+        if d.rewritingMatchConsumers.contains(r)
         then Nil -> S(r)
         else
           val res = go(r)
@@ -822,6 +821,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
     d.filteredCtorDests.values.foreach:
       case CtorFinalDest.Match(scrut, expr, selInArms, selMaps) =>
         toBeReplacedForAllBranches += scrut -> (toBeReplacedForAllBranches(scrut) ++ selMaps._2)
+      case CtorFinalDest.Sel(s) => ()
     
     def apply(scrutExprId: ResultId, m: Match) = store.getOrElseUpdate(
       scrutExprId,
@@ -999,7 +999,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
   
   
   override def applyBlock(b: Block): Block = b match
-    case mat@Match(scrut, arms, dflt, rest) if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.filteredDtors.contains(scrut.uid) =>
+    case mat@Match(scrut, arms, dflt, rest) if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } && d.rewritingMatchConsumers.contains(scrut.uid) =>
       // since all fusing matches will be considered to be in the tail position,
       // if any of the parent `rest`s has explicit return, the rewritten match will have explicit return
       val oneOfParentMatchRestHasExplicitRet = allParentMatches(scrut.uid).foldRight(false) { (pid, acc) => acc || d.matchScrutToMatchBlock(pid).rest.hasExplicitRet }
@@ -1081,7 +1081,7 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
 
   override def applyPath(p: Path): Path = p match
     // a selection which is a consumer on its own
-    case s@Select(p, nme) if d.rewritingSelConsumer.contains(s.uid) => applyPath(p)
+    case s@Select(p, nme) if d.rewritingSelConsumers.contains(s.uid) => applyPath(p)
     
     // a selection inside a fusing match that needs to be replaced by pre-computed symbols
     case s@Select(p, nme) if replaceSelInfo.get(s.uid).isDefined => Value.Ref(replaceSelInfo(s.uid))
