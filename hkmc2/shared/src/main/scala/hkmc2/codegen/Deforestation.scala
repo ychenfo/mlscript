@@ -18,7 +18,7 @@ sealed abstract class ProdStrat
 
 sealed abstract class ConsStrat
 
-class StratVarState(val uid: StratVarId, val name: Str = ""):
+class StratVarState(val uid: StratVarId, val name: Str = "", val funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]]):
   lazy val asProdStrat = ProdVar(this)
   lazy val asConsStrat = ConsVar(this)
   
@@ -26,9 +26,13 @@ class StratVarState(val uid: StratVarId, val name: Str = ""):
 
 object StratVarUidHandler extends Uid.Handler[StratVar]
 object StratVarState:
-  def freshVar(nme: String = "")(using vuid: StratVarUidHandler.State) =
+  // funRetOrArg:
+  // None: not representing the parameter type or return type of a function
+  // Some(Left): parameter type
+  // Some(right): return type
+  def freshVar(nme: String = "", funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]] = N)(using vuid: StratVarUidHandler.State) =
     val newId = vuid.nextUid
-    val s = StratVarState(newId, nme)
+    val s = StratVarState(newId, nme, funRetOrArg)
     val p = s.asProdStrat
     val c = s.asConsStrat
     p -> c
@@ -343,19 +347,23 @@ class Deforest(using TL, Raise, Elaborator.State):
     def init(p: Block) =
       if store.isEmpty then
         object FreshVarForAllVars extends BlockTraverser:
+          var funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]] = N
+            
           override def applySymbol(s: Symbol): Unit = s match
             case b: BlockMemberSymbol =>
               store += s -> freshVar(s.nme)._1
               b.trmImplTree.foreach: t =>
                 if t.k is syntax.Fun then usedFunSym += b
             case _: TempSymbol => store += s -> freshVar(s.nme)._1
-            case _: VarSymbol => store += s -> freshVar(s.nme)._1
+            case _: VarSymbol => store += s -> freshVar(s.nme, funRetOrArg)._1
             case _: TermSymbol => store += s -> freshVar(s.nme)._1
             case _ => ()
           
           override def applyFunDefn(fun: FunDefn): Unit =
             funSymsWithDefn += fun.sym
+            funRetOrArg = S(L(fun.sym))
             super.applyFunDefn(fun)
+            funRetOrArg = N
             
         FreshVarForAllVars.applyBlock(p)
       // `NoProd` to block fusion for those functions that are imported from elsewhere
@@ -449,8 +457,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     val paramSyms = params.map:
       case Param(sym = sym, _) => sym
     val paramStrats = paramSyms.map(symToStrat.apply)
-    symToStrat.addAll(paramSyms.zip(paramStrats))
-    val res = freshVar()
+    // symToStrat.addAll(paramSyms.zip(paramStrats))
+    val res = freshVar(s"${inDef.fold("")(_.nme + "_")}fun_res", inDef.map(L.apply))
     constrain(processBlock(body), res._2)
     ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   

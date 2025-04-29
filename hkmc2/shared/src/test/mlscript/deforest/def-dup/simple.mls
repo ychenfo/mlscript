@@ -1,0 +1,22 @@
+:js
+:deforest
+
+//│ No fusion opportunity
+
+data class A(x)
+
+
+// `A(1)` is in the definition of `test`, but
+// no duplication is helpful
+fun test() =
+  let p = A(1)
+  let a = if p is
+    A(x) then x
+  let b = if p is
+    A(x) then x
+  a + b
+test() + test()
+//│ = 4
+//│ No fusion opportunity
+
+
