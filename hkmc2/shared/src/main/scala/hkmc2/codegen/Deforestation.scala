@@ -18,7 +18,7 @@ sealed abstract class ProdStrat
 
 sealed abstract class ConsStrat
 
-class StratVarState(val uid: StratVarId, val name: Str = "", val funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]]):
+class StratVarState(val uid: StratVarId, val name: Str, val funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]]):
   lazy val asProdStrat = ProdVar(this)
   lazy val asConsStrat = ConsVar(this)
   
@@ -498,7 +498,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               appRes._1
         case lam@Value.Lam(params, body) =>
           val funTpe = processResult(lam)
-          val appRes = freshVar()
+          val appRes = freshVar("call_lam_res")
           constrain(funTpe, ConsFun(argsTpe, appRes._2))
           appRes._1
         
