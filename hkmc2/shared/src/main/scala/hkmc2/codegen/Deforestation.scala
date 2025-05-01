@@ -253,6 +253,21 @@ class HasExplicitRetTraverser extends BlockTraverserShallow:
     flag = false
     applyBlock(b)
     flag
+
+class GetCtorsTraverser(using Deforest) extends BlockTraverser:
+  val ctors = mutable.Set.empty[ResultId]
+  override def applyResult(r: Result): Unit =
+    r.uid.handleCtorIds{ (id, f, clsOrMod, args) =>
+      ctors += id
+      args.foreach { case Arg(_, value) => applyResult(value) }
+    } match
+      case Some(_) => ()
+      case None => r match
+        case Call(_, args) =>
+          args.foreach { case Arg(_, value) => applyResult(value) }
+        case Instantiate(cls, args) =>
+          args.foreach(applyResult)
+        case _ => ()
   
 extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
@@ -637,19 +652,29 @@ class Deforest(using TL, Raise, Elaborator.State):
     val ctorToDtor = ctorDests.ctorDests
     val dtorToCtor = dtorSources.dtorSources
     
-    def removeCtor(rm: Set[ResultId]): Unit =
-      if rm.isEmpty then ()
-      else
+    def removeCtor(rm: Iterable[ResultId]): Unit =
+      if rm.nonEmpty then
         tl.log("rm ctor: " + rm.map(c => c.getClsSymOfUid.nme).mkString(" | "))
-        val toDeleteDtors = rm.flatMap(r => ctorToDtor.remove(r)).flatMap:
-          case CtorDest(mat, sels, _) => mat.keySet.map(s => DtorExpr.Match(s)) ++ sels.map(s => DtorExpr.Sel(s.expr))
+        var toDeleteDtors: Ls[DtorExpr] = Nil
+        for
+          r <- rm
+          CtorDest(mat, sels, _) <- ctorToDtor.remove(r)
+        do
+          mat.keys.foreach: s =>
+            toDeleteDtors = DtorExpr.Match(s) :: toDeleteDtors
+          sels.foreach: s =>
+            toDeleteDtors = DtorExpr.Sel(s.expr) :: toDeleteDtors
         removeDtor(toDeleteDtors)
     
-    def removeDtor(rm: Set[DtorExpr]): Unit =
-      if rm.isEmpty then ()
-      else
+    def removeDtor(rm: Iterable[DtorExpr]): Unit =
+      if rm.nonEmpty then
         tl.log("rm dtor: " + rm.mkString(" | "))
-        val toDeleteCtors = rm.flatMap(r => dtorToCtor.remove(r)).flatMap(_.ctors)
+        var toDeleteCtors: Ls[ResultId] = Nil
+        for
+          r <- rm
+          c <- dtorToCtor.remove(r)
+          x <- c.ctors
+        do toDeleteCtors = x :: toDeleteCtors
         removeCtor(toDeleteCtors)
     
     // remove clashes:
@@ -663,52 +688,45 @@ class Deforest(using TL, Raise, Elaborator.State):
             case _ => false }
         }))
         && !noCons
-      }.keySet.toSet
+      }.keys
     )
-    removeDtor(dtorToCtor.filter(_._2.noProd).keySet.toSet)
+    removeDtor(dtorToCtor.filter(_._2.noProd).keys)
     
     // remove cycle:
-    def getCtorInArm(ctor: ResultId, dtor: Match): Set[ResultId] =
+    def getCtorInArm(ctor: ResultId, dtor: Match) =
       val ctorSym = getClsSymOfUid(ctor)
       val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.map(_._2).orElse(dtor.dflt).get
-      
-      object GetCtorsTraverser extends BlockTraverser:
-        val ctors = mutable.Set.empty[ResultId]
-        override def applyResult(r: Result): Unit =
-          r.uid.handleCtorIds{ (id, f, clsOrMod, args) =>
-            ctors += id
-            args.foreach { case Arg(_, value) => applyResult(value) }
-          } match
-            case Some(_) => ()
-            case None => r match
-              case Call(_, args) =>
-                args.foreach { case Arg(_, value) => applyResult(value) }
-              case Instantiate(cls, args) =>
-                args.foreach(applyResult)
-              case _ => ()
-
-      GetCtorsTraverser.applyBlock(arm)
-      GetCtorsTraverser.ctors.toSet
-    def findCycle(ctor: ResultId, dtor: Match): Set[ResultId] =
+      val traverser = GetCtorsTraverser()
+      traverser.applyBlock(arm)
+      traverser.ctors
+    
+    def findCycle(ctor: ResultId, dtor: Match): Ls[ResultId] =
       val cache = mutable.Set(ctor)
-      def go(ctorAndMatches: Set[ResultId -> Match]): Set[ResultId] =
-        val newCtorsAndNewMatches =
-          ctorAndMatches.flatMap((c, m) => getCtorInArm(c, m)).flatMap: c =>
-            ctorToDtor.get(c).flatMap:
-              case CtorDest(matches, sels, false) => matches.values.headOption.map(m => c -> m)
+      def go(ctorAndMatches: Ls[ResultId -> Match]): Ls[ResultId] =
+        var newCtorsAndNewMatches: Ls[ResultId -> Match] = Nil
+        for
+          (c, m) <- ctorAndMatches
+          c <- getCtorInArm(c, m)
+          CtorDest(matches, sels, _) <- ctorToDtor.get(c)
+          m <- matches.values.headOption
+        do newCtorsAndNewMatches = (c -> m) :: newCtorsAndNewMatches
         val cycled = newCtorsAndNewMatches.filter(c => !cache.add(c._1))
         if newCtorsAndNewMatches.isEmpty then
-          Set.empty
+          Nil
         else if cycled.nonEmpty then
           cycled.map(_._1)
         else
           go(newCtorsAndNewMatches)
-      go(Set(ctor -> dtor))
-    val toRmCtor = ctorToDtor.flatMap:
-      case (c, CtorDest(matches, sels, false)) => 
-        assert(matches.size <= 1)
-        matches.values.flatMap(m => findCycle(c, m))
-    removeCtor(toRmCtor.toSet)
+      go(Ls(ctor -> dtor))
+    
+    var toRmCtor: Ls[ResultId] = Nil
+    for
+      (c, CtorDest(matches, sels, _)) <- ctorToDtor
+      m <- matches.values
+      x <- findCycle(c, m)
+    do toRmCtor = x :: toRmCtor
+    
+    removeCtor(toRmCtor)
 
     ctorToDtor -> dtorToCtor
     
