@@ -651,45 +651,30 @@ class Deforest(using TL, Raise, Elaborator.State):
     val ctorToDtor = ctorDests.ctorDests
     val dtorToCtor = dtorSources.dtorSources
     
-    def removeCtor(rm: Iterable[ResultId]): Unit =
-      if rm.nonEmpty then
-        tl.log("rm ctor: " + rm.map(c => c.getClsSymOfUid.nme).mkString(" | "))
-        var toDeleteDtors: Ls[DtorExpr] = Nil
-        for
-          r <- rm
-          CtorDest(mat, sels, _) <- ctorToDtor.remove(r)
-        do
-          mat.keys.foreach: s =>
-            toDeleteDtors = DtorExpr.Match(s) :: toDeleteDtors
-          sels.foreach: s =>
-            toDeleteDtors = DtorExpr.Sel(s.expr) :: toDeleteDtors
-        removeDtor(toDeleteDtors)
+    def removeCtor(rm: ResultId): Unit =
+      for CtorDest(mat, sels, _) <- ctorToDtor.remove(rm) do
+        for s <- mat.keys do removeDtor(DtorExpr.Match(s))
+        for s <- sels do removeDtor(DtorExpr.Sel(s.expr))
     
-    def removeDtor(rm: Iterable[DtorExpr]): Unit =
-      if rm.nonEmpty then
-        tl.log("rm dtor: " + rm.mkString(" | "))
-        var toDeleteCtors: Ls[ResultId] = Nil
-        for
-          r <- rm
-          c <- dtorToCtor.remove(r)
-          x <- c.ctors
-        do toDeleteCtors = x :: toDeleteCtors
-        removeCtor(toDeleteCtors)
+    def removeDtor(rm: DtorExpr) =
+      for
+        c <- dtorToCtor.remove(rm)
+        x <- c.ctors
+      do
+        removeCtor(x)
     
     // remove clashes:
-    removeCtor(
-      ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels, noCons) =>
-        ((dtors.size == 0 && sels.size == 1)
-        || (dtors.size == 1 && {
-          val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
-          sels.forall { s => s.expr.getResult match
-            case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
-            case _ => false }
-        }))
-        && !noCons
-      }.keys
-    )
-    removeDtor(dtorToCtor.filter(_._2.noProd).keys)
+    ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels, noCons) =>
+      ((dtors.size == 0 && sels.size == 1)
+      || (dtors.size == 1 && {
+        val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
+        sels.forall { s => s.expr.getResult match
+          case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
+          case _ => false }
+      }))
+      && !noCons
+    }.keys.foreach(removeCtor)
+    dtorToCtor.filter(_._2.noProd).keys.foreach(removeDtor)
     
     // remove cycle:
     def getCtorInArm(ctor: ResultId, dtor: Match) =
@@ -718,14 +703,11 @@ class Deforest(using TL, Raise, Elaborator.State):
           go(newCtorsAndNewMatches)
       go(Ls(ctor -> dtor))
     
-    var toRmCtor: Ls[ResultId] = Nil
     for
       (c, CtorDest(matches, sels, _)) <- ctorToDtor
       m <- matches.values
       x <- findCycle(c, m)
-    do toRmCtor = x :: toRmCtor
-    
-    removeCtor(toRmCtor)
+    do removeCtor(x)
 
     ctorToDtor -> dtorToCtor
     
