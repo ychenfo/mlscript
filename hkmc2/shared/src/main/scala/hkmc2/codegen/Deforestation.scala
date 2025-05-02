@@ -18,7 +18,7 @@ sealed abstract class ProdStrat
 
 sealed abstract class ConsStrat
 
-class StratVarState(val uid: StratVarId, val name: Str, val funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]], val isCallRes: Opt[ResultId]):
+class StratVarState(val uid: StratVarId, val name: Str, val funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]], val isCallRes: Opt[ResultId -> Symbol]):
   lazy val asProdStrat = ProdVar(this)
   lazy val asConsStrat = ConsVar(this)
   
@@ -30,7 +30,7 @@ object StratVarState:
   // None: not representing the parameter type or return type of a function
   // Some(Left): parameter type
   // Some(right): return type
-  def freshVar(nme: String = "", isCallRes: Opt[ResultId], funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]] = N)(using vuid: StratVarUidHandler.State) =
+  def freshVar(nme: String = "", isCallRes: Opt[ResultId -> Symbol], funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]] = N)(using vuid: StratVarUidHandler.State) =
     val newId = vuid.nextUid
     val s = StratVarState(newId, nme, funRetOrArg, isCallRes)
     val p = s.asProdStrat
@@ -279,6 +279,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
+  val funSymToFunDef = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   
   def apply(p: Program): Opt[Program] -> String -> Int =
     val mainBlk = p.main
@@ -431,7 +432,8 @@ class Deforest(using TL, Raise, Elaborator.State):
       processBlock(rest)
     case Define(defn, rest) =>
       defn match
-        case FunDefn(_, sym, params, body) =>
+        case fDef@FunDefn(_, sym, params, body) =>
+          funSymToFunDef += sym -> fDef
           val funSymStratVar = symToStrat(sym)
           val param = params match
             // TODO: handle `restParam` and mutiple param list
@@ -476,12 +478,15 @@ class Deforest(using TL, Raise, Elaborator.State):
               val pStrat = processResult(p)
               val tpeVar = freshVar("", N)
               constrain(pStrat, FieldSel(nme, tpeVar._2)(s.uid, matching))
-              val appRes = freshVar("", S(c.uid))
+              val appRes = freshVar("", N) // unknown function symbol
               constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(None) =>
               val funSym = s.symbol.get
-              val appRes = freshVar("call_" + funSym.nme + "_res", S(c.uid))
+              val appRes = freshVar(
+                "call_" + funSym.nme + "_res",
+                s.symbol.flatMap(_.asBlkMember.map(c.uid -> _)) // if `f` has a blockMemberSymbol, then record it
+              )
               constrain(symToStrat.getStratOfSym(funSym), ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(Some(s)) =>
@@ -493,12 +498,15 @@ class Deforest(using TL, Raise, Elaborator.State):
               val clsFields = getClsFields(s)
               Ctor(s, clsFields.zip(argsTpe).toMap, c.uid)(inDef)
             case _ => // then it is a function
-              val appRes = freshVar("call_" + l.nme + "_res", S(c.uid))
+              val appRes = freshVar(
+                "call_" + l.nme + "_res",
+                l.asBlkMember.map(c.uid -> _) // if `f` has a blockMemberSymbol, then record it
+              )
               constrain(symToStrat.getStratOfSym(l), ConsFun(argsTpe, appRes._2))
               appRes._1
         case lam@Value.Lam(params, body) =>
           val funTpe = processResult(lam)
-          val appRes = freshVar("call_lam_res", S(c.uid))
+          val appRes = freshVar("call_lam_res", N)
           constrain(funTpe, ConsFun(argsTpe, appRes._2))
           appRes._1
         
