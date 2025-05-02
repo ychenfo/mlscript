@@ -549,19 +549,19 @@ class Deforest(using TL, Raise, Elaborator.State):
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
-  case class CtorDest(matches: Map[ResultId, Match], sels: Ls[FieldSel], noCons: Bool)
+  case class CtorDest(matches: Map[ResultId, Match], sels: Ls[FieldSel], noCons: Bool, callResVars: Ls[StratVarState])
   case class DtorSource(ctors: Set[ResultId], noProd: Bool)
   object ctorDests:
-    val ctorDests = mutable.LinkedHashMap.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil, false))
+    val ctorDests = mutable.LinkedHashMap.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil, false, Nil))
     def update(ctor: ResultId, m: Match) = ctorDests.updateWith(ctor):
-      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels, noCons))
-      case None => Some(CtorDest(Map(m.scrut.uid -> m), Nil, false))
+      case Some(CtorDest(matches, sels, noCons, vars)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels, noCons, vars))
+      case None => Some(CtorDest(Map(m.scrut.uid -> m), Nil, false, Nil))
     def update(ctor: ResultId, s: FieldSel) = ctorDests.updateWith(ctor):
-      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, s :: sels, noCons))
-      case None => Some(CtorDest(Map.empty, s :: Nil, false))
+      case Some(CtorDest(matches, sels, noCons, vars)) => Some(CtorDest(matches, s :: sels, noCons, vars))
+      case None => Some(CtorDest(Map.empty, s :: Nil, false, Nil))
     def update(ctor: ResultId, n: NoCons.type) = ctorDests.updateWith(ctor):
-      case Some(CtorDest(matches, sels, noCons)) => Some(CtorDest(matches, sels, true))
-      case None => Some(CtorDest(Map.empty, Nil, true))
+      case Some(CtorDest(matches, sels, noCons, vars)) => Some(CtorDest(matches, sels, true, vars))
+      case None => Some(CtorDest(Map.empty, Nil, true, Nil))
     def get(ctor: ResultId) = ctorDests.get(ctor)
   
   object dtorSources:
