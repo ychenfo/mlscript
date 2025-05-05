@@ -659,6 +659,32 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   // ======== after resolving constraints ======
     
+  lazy val findDefDupChances =
+    // clash potentially solvable by duplicating def only if *all* the call-res vars have exact only one dtor
+    def checkStratVar(v: StratVarState): Bool -> Opt[Dtor] =
+      var dtor: Opt[Dtor] = N
+      var dtorCount = 0
+      var hasNoCons = false
+      upperBounds(v.uid).foreach:
+        case d: Dtor => dtorCount += 1; dtor = S(d)
+        // TODO: consider about field selection as dtor... also about field sel inside branches
+        case FieldSel(expr, inMatching) => ???
+        case ConsFun(l, r) => lastWords("ctor has ConsFun")
+        case ConsVar(s) => ()
+        case NoCons => hasNoCons = true
+      if dtorCount == 1 && !hasNoCons then true -> dtor
+      else if dtorCount == 0 && !hasNoCons then true -> N
+      else false -> N
+    def getDuplicatableCalls(vs: Ls[StratVarState]): Iterable[ResultId -> Symbol] =
+      val info = vs.map(x => x -> checkStratVar(x))
+      // if all of the call-res vars only have one dtor, then
+      // find the call-reses that causes clash and thus need to be duplicated
+      if info.forall(_._2._1) then
+        info.map(x => x._1.callResOf.get -> x._2._2.get).groupBy(_._2).values.withFilter(_.size > 1).flatMap(l => l.map(_._1))
+      else
+        Nil
+    ctorDests.ctorDests.values.flatMap(x => getDuplicatableCalls(x.callResVars))
+    
   lazy val resolveClashes =
     val ctorToDtor = ctorDests.ctorDests
     val dtorToCtor = dtorSources.dtorSources
