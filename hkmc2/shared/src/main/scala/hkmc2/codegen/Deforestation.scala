@@ -281,7 +281,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
   val funSymToFunDef = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   
-  def apply(p: Program): Opt[Program] -> String -> Int =
+  def apply(p: Program, duplicate: Bool = false): Opt[Program] -> String -> Int =
     val mainBlk = p.main
     
     globallyDefinedVars.init(mainBlk)
@@ -298,36 +298,47 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     resolveConstraints
     
-    tl.log("-----------------------------------------")
-    ctorDests.ctorDests.foreach:
-      case (ctorExprId, CtorDest(matches, sels, noCons, _)) => tl.log:
-        val ctorName = ctorExprId.getClsSymOfUid.nme + s"(id:$ctorExprId)"
-        val matchExprScruts = "if " + matches.map{(s, m) =>
-          m.scrut.asInstanceOf[Value.Ref].l.nme + s"(id:$s)"
-        }.toList.sorted.mkString(" | ") + " then ... "
-        val selExpr = sels.map{
-          case sel@FieldSel(s, v) => s".${s.name}(id:${sel.expr})"
-        }.toList.sorted.mkString(" | ")
-        s"$ctorName\n\t --- match ---> $matchExprScruts\n\t --- sels ---> $selExpr\n\tNoCons: $noCons"
-    tl.log("-----------------------------------------")
-    dtorSources.dtorSources.foreach:
-      case (d, DtorSource(ctors, noProd)) =>
-        tl.log(s"$d <--- ${ctors.map(c => c.getClsSymOfUid.nme + s"(id:$c)").toList.mkString(" | ")} <--- (NoProd: $noProd)")
-    tl.log("-----------------------------------------")
-    filteredCtorDests.foreach:
-      case (ctorUid, CtorFinalDest.Sel(s)) => tl.log(s"${ctorUid.getClsSymOfUid.nme}(id:$ctorUid) --sel--> " + s)
-      case (ctorUid, CtorFinalDest.Match(scrut, _, _, _)) => tl.log(s"${ctorUid.getClsSymOfUid.nme}(id:$ctorUid) --mat--> " + scrut )
-    
-    val fusionStat = filteredCtorDests.map:
-      case (ctorUid, CtorFinalDest.Sel(s)) =>
-        "\t" + ctorUid.getClsSymOfUid.nme + " --sel--> " + s"`.${resultIdToResult(s).asInstanceOf[Select].name}`"
-      case (ctorUid, CtorFinalDest.Match(scrut, expr, _, _)) =>
-        "\t" + ctorUid.getClsSymOfUid.nme + " --match--> " + s"`if ${expr.scrut.asInstanceOf[Value.Ref].l.nme} is ...`"
-    
-    if filteredCtorDests.nonEmpty then
-      S(Program(p.imports, rewrite(mainBlk))) -> s"${filteredCtorDests.size} fusion opportunities:\n${fusionStat.toList.sorted.mkString("\n")}" -> filteredCtorDests.size
+    val defDuplicateInfo = findDefDupChances
+    tl.log("duplication chances:")
+    defDuplicateInfo.foreach: (r, s) =>
+      tl.log(s"\t${r.getResult} <-- dup --> $s")
+    if duplicate then
+      val defDuplicateInfo = findDefDupChances
+      ???
     else
-      S(p) -> s"0 fusion opportunity" -> 0
+      // tl.log("-----------------------------------------")
+      // upperBounds.foreach: (v, u) =>
+        
+      tl.log("-----------------------------------------")
+      ctorDests.ctorDests.foreach:
+        case (ctorExprId, CtorDest(matches, sels, noCons, _)) => tl.log:
+          val ctorName = ctorExprId.getClsSymOfUid.nme + s"(id:$ctorExprId)"
+          val matchExprScruts = "if " + matches.map{(s, m) =>
+            m.scrut.asInstanceOf[Value.Ref].l.nme + s"(id:$s)"
+          }.toList.sorted.mkString(" | ") + " then ... "
+          val selExpr = sels.map{
+            case sel@FieldSel(s, v) => s".${s.name}(id:${sel.expr})"
+          }.toList.sorted.mkString(" | ")
+          s"$ctorName\n\t --- match ---> $matchExprScruts\n\t --- sels ---> $selExpr\n\tNoCons: $noCons"
+      tl.log("-----------------------------------------")
+      dtorSources.dtorSources.foreach:
+        case (d, DtorSource(ctors, noProd)) =>
+          tl.log(s"$d <--- ${ctors.map(c => c.getClsSymOfUid.nme + s"(id:$c)").toList.mkString(" | ")} <--- (NoProd: $noProd)")
+      tl.log("-----------------------------------------")
+      filteredCtorDests.foreach:
+        case (ctorUid, CtorFinalDest.Sel(s)) => tl.log(s"${ctorUid.getClsSymOfUid.nme}(id:$ctorUid) --sel--> " + s)
+        case (ctorUid, CtorFinalDest.Match(scrut, _, _, _)) => tl.log(s"${ctorUid.getClsSymOfUid.nme}(id:$ctorUid) --mat--> " + scrut )
+      
+      val fusionStat = filteredCtorDests.map:
+        case (ctorUid, CtorFinalDest.Sel(s)) =>
+          "\t" + ctorUid.getClsSymOfUid.nme + " --sel--> " + s"`.${resultIdToResult(s).asInstanceOf[Select].name}`"
+        case (ctorUid, CtorFinalDest.Match(scrut, expr, _, _)) =>
+          "\t" + ctorUid.getClsSymOfUid.nme + " --match--> " + s"`if ${expr.scrut.asInstanceOf[Value.Ref].l.nme} is ...`"
+      
+      if filteredCtorDests.nonEmpty then
+        S(Program(p.imports, rewrite(mainBlk))) -> s"${filteredCtorDests.size} fusion opportunities:\n${fusionStat.toList.sorted.mkString("\n")}" -> filteredCtorDests.size
+      else
+        S(p) -> s"0 fusion opportunity" -> 0
   
   object globallyDefinedVars:
     val store = mutable.Set.from[Symbol](State.globalThisSymbol ::State.runtimeSymbol :: Nil)
@@ -460,7 +471,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       case Param(sym = sym, _) => sym
     val paramStrats = paramSyms.map(symToStrat.apply)
     // symToStrat.addAll(paramSyms.zip(paramStrats))
-    val res = freshVar(s"${inDef.fold("")(_.nme + "_")}fun_res", N, inDef.map(L.apply))
+    val res = freshVar(s"${inDef.fold("wer")(_.nme + "_")}fun_res", N, inDef.map(L.apply))
     constrain(processBlock(body), res._2)
     ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   
@@ -476,9 +487,9 @@ class Deforest(using TL, Raise, Elaborator.State):
           s.symbol.map(_.asCls) match
             case None =>
               val pStrat = processResult(p)
-              val tpeVar = freshVar("", N)
+              val tpeVar = freshVar("1", N)
               constrain(pStrat, FieldSel(nme, tpeVar._2)(s.uid, matching))
-              val appRes = freshVar("", N) // unknown function symbol
+              val appRes = freshVar("2", N) // unknown function symbol
               constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(None) =>
@@ -525,13 +536,13 @@ class Deforest(using TL, Raise, Elaborator.State):
         val pStrat = processResult(p)
         pStrat match
           case ProdVar(pStratVar) if inArm.contains(pStratVar.asProdStrat) =>
-            val tpeVar = freshVar("", N)
+            val tpeVar = freshVar("3", N)
             val selStrat = FieldSel(nme, tpeVar._2)(sel.uid, matching)
             selStrat.updateFilter(pStratVar.asProdStrat, inArm(pStratVar.asProdStrat) :: Nil)
             constrain(pStrat, selStrat)
             tpeVar._1
           case _ =>
-            val tpeVar = freshVar("", N)
+            val tpeVar = freshVar("4", N)
             constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid, matching))
             tpeVar._1
             
@@ -658,15 +669,25 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   
   // ======== after resolving constraints ======
-    
+  
+  // def finishUpperAndLowerBounds =
+  def allUpperBoundsOf(k: StratVarId, cache: Set[StratVarId]): Set[ConsStrat] =
+    upperBounds(k).toSet.flatMap:
+      case u@ConsVar(s) if !cache.contains(s.uid) => allUpperBoundsOf(s.uid, cache + s.uid) + u
+      case u => Set(u)
+
   lazy val findDefDupChances =
     // clash potentially solvable by duplicating def only if *all* the call-res vars have exact only one dtor
     def checkStratVar(v: StratVarState): Bool -> Opt[Dtor] =
+      assert(v.callResOf.isDefined)
+      tl.log(allUpperBoundsOf(v.uid, Set(v.uid)))
       var dtor: Opt[Dtor] = N
       var dtorCount = 0
       var hasNoCons = false
-      upperBounds(v.uid).foreach:
-        case d: Dtor => dtorCount += 1; dtor = S(d)
+      allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
+        case d: Dtor =>
+          tl.log("dtor")
+          dtorCount += 1; dtor = S(d)
         // TODO: consider about field selection as dtor... also about field sel inside branches
         case FieldSel(expr, inMatching) => ???
         case ConsFun(l, r) => lastWords("ctor has ConsFun")
@@ -676,11 +697,16 @@ class Deforest(using TL, Raise, Elaborator.State):
       else if dtorCount == 0 && !hasNoCons then true -> N
       else false -> N
     def getDuplicatableCalls(vs: Ls[StratVarState]): Iterable[ResultId -> Symbol] =
+      tl.log(vs.map(v => v.callResOf.map((r, s) => s"(${r.getResult}, ${s.nme})")).mkString(" | "))
       val info = vs.map(x => x -> checkStratVar(x))
       // if all of the call-res vars only have one dtor, then
       // find the call-reses that causes clash and thus need to be duplicated
       if info.forall(_._2._1) then
-        info.map(x => x._1.callResOf.get -> x._2._2.get).groupBy(_._2).values.withFilter(_.size > 1).flatMap(l => l.map(_._1))
+        // tl.log("true")
+        val tmp = info.withFilter(_._2._2.isDefined).map(x => x._1.callResOf.get -> x._2._2.get)
+        tl.log(tmp.size)
+        tmp.groupBy(_._2).values.withFilter(_.size > 1).flatMap(l => l.map(_._1))
+        
       else
         Nil
     ctorDests.ctorDests.values.flatMap(x => getDuplicatableCalls(x.callResVars))
@@ -838,7 +864,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     val rest = deforestTransformer.applyBlock(p)
     val newDefsRest = deforestTransformer.matchRest.getAllFunDefs
     val newDefsArms = deforestTransformer.matchArms.getAllFunDefs
-    newDefsArms(newDefsRest(rest))
+    newDefsArms(newDefsRest(rest))  
   
 class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
   self =>
