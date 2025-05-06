@@ -471,7 +471,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       case Param(sym = sym, _) => sym
     val paramStrats = paramSyms.map(symToStrat.apply)
     // symToStrat.addAll(paramSyms.zip(paramStrats))
-    val res = freshVar(s"${inDef.fold("wer")(_.nme + "_")}fun_res", N, inDef.map(L.apply))
+    val res = freshVar(s"${inDef.fold("")(_.nme + "_")}fun_res", N, inDef.map(L.apply))
     constrain(processBlock(body), res._2)
     ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   
@@ -487,9 +487,9 @@ class Deforest(using TL, Raise, Elaborator.State):
           s.symbol.map(_.asCls) match
             case None =>
               val pStrat = processResult(p)
-              val tpeVar = freshVar("1", N)
+              val tpeVar = freshVar("", N)
               constrain(pStrat, FieldSel(nme, tpeVar._2)(s.uid, matching))
-              val appRes = freshVar("2", N) // unknown function symbol
+              val appRes = freshVar("", N) // unknown function symbol
               constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(None) =>
@@ -536,13 +536,13 @@ class Deforest(using TL, Raise, Elaborator.State):
         val pStrat = processResult(p)
         pStrat match
           case ProdVar(pStratVar) if inArm.contains(pStratVar.asProdStrat) =>
-            val tpeVar = freshVar("3", N)
+            val tpeVar = freshVar("", N)
             val selStrat = FieldSel(nme, tpeVar._2)(sel.uid, matching)
             selStrat.updateFilter(pStratVar.asProdStrat, inArm(pStratVar.asProdStrat) :: Nil)
             constrain(pStrat, selStrat)
             tpeVar._1
           case _ =>
-            val tpeVar = freshVar("4", N)
+            val tpeVar = freshVar("", N)
             constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid, matching))
             tpeVar._1
             
