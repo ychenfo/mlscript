@@ -717,7 +717,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           case _ => Nil
       else
         Nil
-    ctorDests.ctorDests.values.flatMap(x => getDuplicatableCalls(x.callResVars))
+    ctorDests.ctorDests.values.flatMap(x => getDuplicatableCalls(x.callResVars)).toMap
     
   lazy val resolveClashes =
     val ctorToDtor = ctorDests.ctorDests
