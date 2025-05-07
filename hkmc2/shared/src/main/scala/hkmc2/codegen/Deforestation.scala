@@ -670,7 +670,6 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   // ======== after resolving constraints ======
   
-  // def finishUpperAndLowerBounds =
   def allUpperBoundsOf(k: StratVarId, cache: Set[StratVarId]): Set[ConsStrat] =
     upperBounds(k).toSet.flatMap:
       case u@ConsVar(s) if !cache.contains(s.uid) => allUpperBoundsOf(s.uid, cache + s.uid) + u
@@ -680,16 +679,16 @@ class Deforest(using TL, Raise, Elaborator.State):
     // clash potentially solvable by duplicating def only if *all* the call-res vars have exact only one dtor
     def checkStratVar(v: StratVarState): Bool -> Opt[Dtor] =
       assert(v.callResOf.isDefined)
-      tl.log(allUpperBoundsOf(v.uid, Set(v.uid)))
+      // tl.log(allUpperBoundsOf(v.uid, Set(v.uid)))
       var dtor: Opt[Dtor] = N
       var dtorCount = 0
       var hasNoCons = false
       allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
         case d: Dtor =>
-          tl.log("dtor")
+          // tl.log("dtor")
           dtorCount += 1; dtor = S(d)
         // TODO: consider about field selection as dtor... also about field sel inside branches
-        case FieldSel(expr, inMatching) => ???
+        case FieldSel(expr, inMatching) => ()
         case ConsFun(l, r) => lastWords("ctor has ConsFun")
         case ConsVar(s) => ()
         case NoCons => hasNoCons = true
@@ -697,16 +696,25 @@ class Deforest(using TL, Raise, Elaborator.State):
       else if dtorCount == 0 && !hasNoCons then true -> N
       else false -> N
     def getDuplicatableCalls(vs: Ls[StratVarState]): Iterable[ResultId -> Symbol] =
-      tl.log(vs.map(v => v.callResOf.map((r, s) => s"(${r.getResult}, ${s.nme})")).mkString(" | "))
+      // tl.log(vs.map(v => v.callResOf.map((r, s) => s"(${r.getResult}, ${s.nme})").get).mkString(" | "))
       val info = vs.map(x => x -> checkStratVar(x))
       // if all of the call-res vars only have one dtor, then
       // find the call-reses that causes clash and thus need to be duplicated
       if info.forall(_._2._1) then
-        // tl.log("true")
-        val tmp = info.withFilter(_._2._2.isDefined).map(x => x._1.callResOf.get -> x._2._2.get)
-        tl.log(tmp.size)
-        tmp.groupBy(_._2).values.withFilter(_.size > 1).flatMap(l => l.map(_._1))
-        
+        // TODO: optimize logic
+        info
+          .withFilter(_._2._2.isDefined) // discard those without a dtor
+          .map(x => x._1.callResOf.get -> x._2._2.get) // get a list of (callSiteInfo, Dtor)
+          .groupBy(_._2) // group by the dtor
+          .toList
+          .sortBy(entry => entry._2.size) // sort by the number of call sites for lesser duplication
+        match
+          // only has one dtor, no need to duplicate
+          case h :: Nil => Nil
+          // more than one dtors, duplicate those with less call sites
+          case heads :+ last => heads.flatMap(x => x._2.map(_._1))
+          // no dtor, no need for duplication
+          case _ => Nil
       else
         Nil
     ctorDests.ctorDests.values.flatMap(x => getDuplicatableCalls(x.callResVars))
