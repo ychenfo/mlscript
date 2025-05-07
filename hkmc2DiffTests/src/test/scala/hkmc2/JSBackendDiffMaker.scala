@@ -25,6 +25,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   val showRepl = NullaryCommand("showRepl")
   val traceJS = NullaryCommand("traceJS")
   val deforestFlag = NullaryCommand("deforest")
+  val deforestDupFlag = NullaryCommand("deforestDup")
   val deforestInfo = NullaryCommand("deforestInfo")
   val expect = Command("expect"): ln =>
     ln.trim
@@ -88,7 +89,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         
       if deforestFlag.isSet then
         val deforest = new Deforest(using deforestTL)
-        val deforestRes -> _ -> num = deforest(le)
+        val deforestRes -> _ -> num = deforest(le, deforestDupFlag.isSet, output.apply)
         deforestRes match
           case None => ()
           case Some(_) if num == 0 => output("No fusion opportunity")
@@ -246,7 +247,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           codegen.Lowering()
         val lowered0 = deforestLow.program(blk)
         val deforest = new Deforest(using deforestTL)
-        val maybeDeforestRes -> deforestStat -> num = deforest(lowered0)
+        val maybeDeforestRes -> deforestStat -> num = deforest(lowered0, deforestDupFlag.isSet, output.apply)
         maybeDeforestRes match
           case None => ()
           case Some(_) if num == 0 => output("No fusion opportunity")

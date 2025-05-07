@@ -281,7 +281,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
   val funSymToFunDef = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   
-  def apply(p: Program, duplicate: Bool = false): Opt[Program] -> String -> Int =
+  def apply(p: Program, duplicate: Bool = false, output: String => Unit): Opt[Program] -> String -> Int =
     val mainBlk = p.main
     
     globallyDefinedVars.init(mainBlk)
@@ -298,14 +298,14 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     resolveConstraints
     
-    val defDuplicateInfo = findDefDupChances
-    tl.log("duplication chances:")
-    defDuplicateInfo.foreach: (r, s) =>
-      tl.log(s"\t${r.getResult} <-- dup --> $s")
+    
     if duplicate then
-      val defDuplicateInfo = findDefDupChances
-      ???
-    else
+      // val defDuplicateInfo = findDefDupChances
+      output("duplication chances:")
+      findDefDupChances.foreach: (r, s) =>
+        output(s"\t${r.getResult} <-- dup --> $s")
+    // TODO: def dup: change later
+    if true then
       // tl.log("-----------------------------------------")
       // upperBounds.foreach: (v, u) =>
         
@@ -339,6 +339,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         S(Program(p.imports, rewrite(mainBlk))) -> s"${filteredCtorDests.size} fusion opportunities:\n${fusionStat.toList.sorted.mkString("\n")}" -> filteredCtorDests.size
       else
         S(p) -> s"0 fusion opportunity" -> 0
+    else die
   
   object globallyDefinedVars:
     val store = mutable.Set.from[Symbol](State.globalThisSymbol ::State.runtimeSymbol :: Nil)
