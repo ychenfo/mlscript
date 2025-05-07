@@ -705,15 +705,15 @@ class Deforest(using TL, Raise, Elaborator.State):
         // TODO: optimize logic
         info
           .withFilter(_._2._2.isDefined) // discard those without a dtor
-          .map(x => x._1.callResOf.get -> x._2._2.get) // get a list of (callSiteInfo, Dtor)
+          .map(x => x._1 -> x._2._2.get) // get a list of (callSiteInfoVar, Dtor)
           .groupBy(_._2) // group by the dtor
           .toList
-          .sortBy(entry => entry._2.size) // sort by the number of call sites for lesser duplication
+          .sortBy((_, callsites) => callsites.size -> callsites.headOption.map(_._1.uid)) // sort by the number of call sites for lesser duplication, and the callres var id for determinism
         match
           // only has one dtor, no need to duplicate
           case h :: Nil => Nil
           // more than one dtors, duplicate those with less call sites
-          case heads :+ last => heads.flatMap(x => x._2.map(_._1))
+          case heads :+ last => heads.flatMap(x => x._2.map(_._1.callResOf.get))
           // no dtor, no need for duplication
           case _ => Nil
       else

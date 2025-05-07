@@ -24,13 +24,15 @@ test() + test()
 //│ No fusion opportunity
 
 :deforestDup
-fun p() = A(3)
+fun p(d) = A(3)
 fun c1(x) = if x is A then 1
 fun c2(x) = if x is A then 2
-c1(p()) + c2(p())
+fun test() =
+  c1(p(1)) + c2(p(2))
+test()
 //│ = 3
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List()) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p
 //│ No fusion opportunity
 
 
@@ -47,7 +49,7 @@ fun f2(ls) = if ls is
 f1(to(4)) + f2(to(5))
 //│ = 10
 //│ duplication chances:
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:to
+//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:to
 //│ No fusion opportunity
 
 
