@@ -686,7 +686,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       var hasNoCons = false
       allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
         case d: Dtor =>
-          // tl.log("dtor")
+          tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
           dtorCount += 1; dtor = S(d)
         // TODO: consider about field selection as dtor... also about field sel inside branches
         case FieldSel(expr, inMatching) => ()

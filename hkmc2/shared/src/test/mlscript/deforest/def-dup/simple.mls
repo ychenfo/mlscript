@@ -38,18 +38,31 @@ test()
 
 
 :deforestDup
-// two calls to `to` should be able to be duplicated
-fun to(n) = if n > 0 then n :: to(n - 1) else Nil
-fun f1(ls) = if ls is
+// calls to `to` should be able to be duplicated
+fun to(n) =
+  if n > 0 then
+    let m = n - 1
+    n :: to(m)
+  else
+    Nil
+fun f1(ls1) = if ls1 is
   h :: t then h
   Nil then 2
-fun f2(ls) = if ls is
-  h :: t then h + 1
+fun f2(ls2) = if ls2 is
+  h :: t then h
   Nil then 3
-f1(to(4)) + f2(to(5))
-//│ = 10
+fun f3(ls3) = if ls3 is
+  h :: t then h
+  Nil then 4
+fun f4(ls4) = if ls4 is
+  h :: t then h
+  Nil then 5
+f1(to(4)) + f2(to(5)) + f3(to(6)) + f4(to(7))
+//│ = 22
 //│ duplication chances:
 //│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:to
+//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:to
+//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(6))))) <-- dup --> member:to
 //│ No fusion opportunity
 
 
