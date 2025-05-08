@@ -425,7 +425,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         case None => Some(caller)
         case _ => die
     def isObviousRecursiveCall(c: ResultId) =
-      tl.log("checking callsite: " + c.getResult.toString() + s"@$c")
+      // tl.log("checking callsite: " + c.getResult.toString() + s"@$c")
       val sym = c.getFunCallBlkMemSyn.get
       callSiteInDefInfo.get(c).fold(false)(_ is sym)
   
@@ -708,29 +708,30 @@ class Deforest(using TL, Raise, Elaborator.State):
 
   lazy val findDefDupChances =
     // clash potentially solvable by duplicating def only if *all* the call-res vars that we care have exact only one dtor
-    def checkStratVar(v: StratVarState): Bool -> Opt[Dtor] =
-      assert(v.callResOf.isDefined)
-      // tl.log(allUpperBoundsOf(v.uid, Set(v.uid)))
-      var dtor: Opt[Dtor] = N
-      var dtorCount = 0
-      var hasNoCons = false
-      
-      // ignore obvious recursive call sites: won't duplicate them anyway since we are not aligning recursion length
-      if callInfo.isObviousRecursiveCall(v.callResOf.get._1) then true -> N
-      else
-        allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
-          case d: Dtor =>
-            tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
-            dtorCount += 1; dtor = S(d)
-          // DefDupTODO: consider about field selection as dtor... also about field sel inside branches
-          case FieldSel(expr, inMatching) => ()
-          case ConsFun(l, r) => lastWords("ctor has ConsFun")
-          case ConsVar(s) => ()
-          case NoCons => hasNoCons = true
+    object checkStratVar:
+      val cache = mutable.Map.empty[StratVarState, Bool -> Opt[Dtor]]
+      def apply(v: StratVarState): Bool -> Opt[Dtor] = cache.getOrElseUpdate.curried(v):
+        assert(v.callResOf.isDefined)
+        var dtor: Opt[Dtor] = N
+        var dtorCount = 0
+        var hasNoCons = false
         
-        if dtorCount == 1 && !hasNoCons then true -> dtor
-        else if dtorCount == 0 && !hasNoCons then true -> N
-        else false -> N
+        // ignore obvious recursive call sites: won't duplicate them anyway since we are not aligning recursion length
+        if callInfo.isObviousRecursiveCall(v.callResOf.get._1) then true -> N
+        else
+          allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
+            case d: Dtor =>
+              tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
+              dtorCount += 1; dtor = S(d)
+            // DefDupTODO: consider about field selection as dtor... also about field sel inside branches
+            case FieldSel(expr, inMatching) => ()
+            case ConsFun(l, r) => lastWords("ctor has ConsFun")
+            case ConsVar(s) => ()
+            case NoCons => hasNoCons = true
+          
+          if dtorCount == 1 && !hasNoCons then true -> dtor
+          else if dtorCount == 0 && !hasNoCons then true -> N
+          else false -> N
     
     
     def getDuplicatableCalls(vs: Ls[StratVarState]): Iterable[ResultId -> Symbol] =
