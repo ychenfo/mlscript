@@ -310,7 +310,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       output("duplication chances:")
       findDefDupChances.foreach: (r, s) =>
         output(s"\t${r.getResult} <-- dup --> $s")
-    // TODO: def dup: change later
+    // DefDupTODO: def dup: change later
     if true then
       // tl.log("-----------------------------------------")
       // upperBounds.foreach: (v, u) =>
@@ -722,7 +722,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           case d: Dtor =>
             tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
             dtorCount += 1; dtor = S(d)
-          // TODO: consider about field selection as dtor... also about field sel inside branches
+          // DefDupTODO: consider about field selection as dtor... also about field sel inside branches
           case FieldSel(expr, inMatching) => ()
           case ConsFun(l, r) => lastWords("ctor has ConsFun")
           case ConsVar(s) => ()
@@ -739,7 +739,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       // if all of the call-res vars only have one dtor, then
       // find the call-reses that causes clash and thus need to be duplicated
       if info.forall(_._2._1) then
-        // TODO: optimize logic
+        // DefDupTODO: optimize logic
         info
           .withFilter(_._2._2.isDefined) // discard those without a dtor
           .map(x => x._1 -> x._2._2.get) // get a list of (callSiteInfoVar, Dtor)
