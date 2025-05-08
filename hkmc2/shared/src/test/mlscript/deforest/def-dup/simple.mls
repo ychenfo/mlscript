@@ -36,6 +36,23 @@ test()
 //│ No fusion opportunity
 
 
+:deforestDup
+fun p(x) = A(x)
+fun f1(a1) = if a1 is A(aa) then aa
+fun f2(a2) = if a2 is A(aa) then aa
+fun f3(a3) = if a3 is A(aa) then aa
+fun f4(a4) = if a4 is A(aa) then aa
+fun f5(a5) = if a5 is A(aa) then aa
+f1(p(1)) + f2(p(2)) + f3(p(3)) + f4(p(4)) + f5(p(5))
+//│ = 15
+//│ duplication chances:
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p
+//│ No fusion opportunity
+
+
 
 :deforestDup
 // calls to `to` should be able to be duplicated
@@ -46,19 +63,19 @@ fun to(n) =
   else
     Nil
 fun f1(ls1) = if ls1 is
-  h :: t then h
+  h :: t then h + f1(t)
   Nil then 2
 fun f2(ls2) = if ls2 is
-  h :: t then h
+  h :: t then h + f2(t)
   Nil then 3
 fun f3(ls3) = if ls3 is
-  h :: t then h
+  h :: t then h + f3(t)
   Nil then 4
 fun f4(ls4) = if ls4 is
-  h :: t then h
+  h :: t then h + f4(t)
   Nil then 5
 f1(to(4)) + f2(to(5)) + f3(to(6)) + f4(to(7))
-//│ = 22
+//│ = 88
 //│ duplication chances:
 //│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:to
 //│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:to

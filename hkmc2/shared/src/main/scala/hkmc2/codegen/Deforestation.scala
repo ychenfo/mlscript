@@ -56,6 +56,12 @@ extension (i: ResultId)
         Some(k(i, v, v.l.asObj.get, Nil))
       case _ => None
   def getClsSymOfUid(using Deforest) = i.handleCtorIds((_, _, s, _) => s).get
+  def getFunCallBlkMemSyn(using Deforest) = i.getResult match
+    case Call(fun, _) => fun match
+      case s: Select => s.symbol.flatMap(_.asBlkMember)
+      case v: Value.Ref => v.l.asBlkMember
+      case _ => N
+    case _ => N
 
 case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: ResultId)(val inDef: Opt[BlockMemberSymbol]) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
@@ -408,6 +414,22 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
+  object callInfo:
+    val store = mutable.Map.empty[Symbol, Ls[ResultId -> Symbol]]
+    val callSiteInDefInfo = mutable.Map.empty[ResultId, Symbol]
+    def update(caller: Symbol, callee: Symbol, callResultId: ResultId) =
+      store.updateWith(caller):
+        case None => Some((callResultId -> callee) :: Nil)
+        case Some(l) => Some((callResultId -> callee) :: l)
+      callSiteInDefInfo.updateWith(callResultId):
+        case None => Some(caller)
+        case _ => die
+    def isObviousRecursiveCall(c: ResultId) =
+      tl.log("checking callsite: " + c.getResult.toString() + s"@$c")
+      val sym = c.getFunCallBlkMemSyn.get
+      callSiteInDefInfo.get(c).fold(false)(_ is sym)
+  
+  
   def processBlock(b: Block)(using
     inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
     matching: LinkedHashMap[ResultId, ClsOrModSymbol] = LinkedHashMap.empty[ResultId, ClsOrModSymbol],
@@ -499,6 +521,10 @@ class Deforest(using TL, Raise, Elaborator.State):
                 "call_" + funSym.nme + "_res",
                 s.symbol.flatMap(_.asBlkMember.map(c.uid -> _)) // if `f` has a blockMemberSymbol, then record it
               )
+              for
+                caller <- inDef
+                callee <- s.symbol.flatMap(_.asBlkMember)
+              do callInfo.update(caller, callee, c.uid)
               constrain(symToStrat.getStratOfSym(funSym), ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(Some(s)) =>
@@ -514,6 +540,10 @@ class Deforest(using TL, Raise, Elaborator.State):
                 "call_" + l.nme + "_res",
                 l.asBlkMember.map(c.uid -> _) // if `f` has a blockMemberSymbol, then record it
               )
+              for
+                caller <- inDef
+                callee <- l.asBlkMember
+              do callInfo.update(caller, callee, c.uid)
               constrain(symToStrat.getStratOfSym(l), ConsFun(argsTpe, appRes._2))
               appRes._1
         case lam@Value.Lam(params, body) =>
@@ -677,25 +707,32 @@ class Deforest(using TL, Raise, Elaborator.State):
       case u => Set(u)
 
   lazy val findDefDupChances =
-    // clash potentially solvable by duplicating def only if *all* the call-res vars have exact only one dtor
+    // clash potentially solvable by duplicating def only if *all* the call-res vars that we care have exact only one dtor
     def checkStratVar(v: StratVarState): Bool -> Opt[Dtor] =
       assert(v.callResOf.isDefined)
       // tl.log(allUpperBoundsOf(v.uid, Set(v.uid)))
       var dtor: Opt[Dtor] = N
       var dtorCount = 0
       var hasNoCons = false
-      allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
-        case d: Dtor =>
-          tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
-          dtorCount += 1; dtor = S(d)
-        // TODO: consider about field selection as dtor... also about field sel inside branches
-        case FieldSel(expr, inMatching) => ()
-        case ConsFun(l, r) => lastWords("ctor has ConsFun")
-        case ConsVar(s) => ()
-        case NoCons => hasNoCons = true
-      if dtorCount == 1 && !hasNoCons then true -> dtor
-      else if dtorCount == 0 && !hasNoCons then true -> N
-      else false -> N
+      
+      // ignore obvious recursive call sites: won't duplicate them anyway since we are not aligning recursion length
+      if callInfo.isObviousRecursiveCall(v.callResOf.get._1) then true -> N
+      else
+        allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
+          case d: Dtor =>
+            tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
+            dtorCount += 1; dtor = S(d)
+          // TODO: consider about field selection as dtor... also about field sel inside branches
+          case FieldSel(expr, inMatching) => ()
+          case ConsFun(l, r) => lastWords("ctor has ConsFun")
+          case ConsVar(s) => ()
+          case NoCons => hasNoCons = true
+        
+        if dtorCount == 1 && !hasNoCons then true -> dtor
+        else if dtorCount == 0 && !hasNoCons then true -> N
+        else false -> N
+    
+    
     def getDuplicatableCalls(vs: Ls[StratVarState]): Iterable[ResultId -> Symbol] =
       // tl.log(vs.map(v => v.callResOf.map((r, s) => s"(${r.getResult}, ${s.nme})").get).mkString(" | "))
       val info = vs.map(x => x -> checkStratVar(x))
