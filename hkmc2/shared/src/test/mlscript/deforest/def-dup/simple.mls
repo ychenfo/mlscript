@@ -83,3 +83,22 @@ f1(to(4)) + f2(to(5)) + f3(to(6)) + f4(to(7))
 //│ No fusion opportunity
 
 
+:deforestDup
+fun to(n) =
+  if n > 0 then
+    let m = n - 1
+    n :: to(m)
+  else
+    Nil
+fun f1(ls1) = if ls1 is
+  h :: t then h + f1(t)
+  Nil then 2
+f1(to(4))
+//│ = 12
+//│ duplication chances:
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 12
+//│ 2 fusion opportunities:
+//│ 	Cons --match--> `if ls1 is ...`
+//│ 	Nil --match--> `if ls1 is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

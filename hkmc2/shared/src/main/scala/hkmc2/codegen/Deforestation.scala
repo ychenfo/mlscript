@@ -307,6 +307,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     if duplicate then
       // val defDuplicateInfo = findDefDupChances
+      // DefDupTODO: do not use `output` from difftest here
       output("duplication chances:")
       findDefDupChances.foreach: (r, s) =>
         output(s"\t${r.getResult} <-- dup --> $s")
@@ -707,49 +708,58 @@ class Deforest(using TL, Raise, Elaborator.State):
       case u => Set(u)
 
   lazy val findDefDupChances =
-    // clash potentially solvable by duplicating def only if *all* the call-res vars that we care have exact only one dtor
     object checkStratVar:
       val cache = mutable.Map.empty[StratVarState, Bool -> Opt[Dtor]]
+      // A clash from a function callsite potentially solvable by duplicating def only
+      // if *all* the call-res vars that we care have exact only one dtor.
+      // This function checks if a single callsite is solvable, and
+      // return (solvable -> corresponding pat mat dtor).
       def apply(v: StratVarState): Bool -> Opt[Dtor] = cache.getOrElseUpdate.curried(v):
         assert(v.callResOf.isDefined)
         var dtor: Opt[Dtor] = N
         var dtorCount = 0
         var hasNoCons = false
         
-        // ignore obvious recursive call sites: won't duplicate them anyway since we are not aligning recursion length
-        if callInfo.isObviousRecursiveCall(v.callResOf.get._1) then true -> N
-        else
-          allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
-            case d: Dtor =>
-              tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
-              dtorCount += 1; dtor = S(d)
-            // DefDupTODO: consider about field selection as dtor... also about field sel inside branches
-            case FieldSel(expr, inMatching) => ()
-            case ConsFun(l, r) => lastWords("ctor has ConsFun")
-            case ConsVar(s) => ()
-            case NoCons => hasNoCons = true
-          
-          if dtorCount == 1 && !hasNoCons then true -> dtor
-          else if dtorCount == 0 && !hasNoCons then true -> N
-          else false -> N
+        allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
+          case d: Dtor =>
+            tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
+            dtorCount += 1; dtor = S(d)
+          // DefDupTODO: consider about field selection as dtor... also about field sel inside branches
+          case FieldSel(expr, inMatching) => ()
+          case ConsFun(l, r) => lastWords("ctor has ConsFun")
+          case ConsVar(s) => ()
+          case NoCons => hasNoCons = true
+        
+        if dtorCount == 1 && !hasNoCons then true -> dtor
+        else if dtorCount == 0 && !hasNoCons then true -> N
+        else false -> N
     
     
     def getDuplicatableCalls(vs: Ls[StratVarState]): Iterable[ResultId -> Symbol] =
       // tl.log(vs.map(v => v.callResOf.map((r, s) => s"(${r.getResult}, ${s.nme})").get).mkString(" | "))
       val info = vs.map(x => x -> checkStratVar(x))
-      // if all of the call-res vars only have one dtor, then
-      // find the call-reses that causes clash and thus need to be duplicated
-      if info.forall(_._2._1) then
-        // DefDupTODO: optimize logic
+      // If all of the call-res vars are "solvable", then
+      // find the call-reses that causes clash and thus need to be duplicated.
+      // Optimistically ignore problems caused by
+      // obvious recursive call sites (which will not be duplicated anyway currently)
+      if info.forall:
+        case (callSite, isSolvable -> dtor) =>
+          isSolvable ||
+          callInfo.isObviousRecursiveCall(callSite.callResOf.get._1)
+      then
         info
-          .withFilter(_._2._2.isDefined) // discard those without a dtor
-          .map(x => x._1 -> x._2._2.get) // get a list of (callSiteInfoVar, Dtor)
-          .groupBy(_._2) // group by the dtor
+          .filter:
+            case (callSite, isSolvable -> dtor) =>
+              dtor.isDefined // discard those without a dtor
+              !callInfo.isObviousRecursiveCall(callSite.callResOf.get._1) // and those that are obviously recursive calls
+          .groupBy(_._2._2.get) // group by the dtor
           .toList
-          .sortBy((_, callsites) => callsites.size -> callsites.headOption.map(_._1.uid)) // sort by the number of call sites for lesser duplication, and the callres var id for determinism
+          .sortBy: (_, callsites) =>
+            // sort by the number of call sites for lesser duplication, and the callres var id for determinism
+            callsites.size -> callsites.headOption.map(_._1.uid)
         match
           // only has one dtor, no need to duplicate
-          case h :: Nil => Nil
+          case h :: Nil => Nil // h._2.map(_._1.callResOf.get)
           // more than one dtors, duplicate those with less call sites
           case heads :+ last => heads.flatMap(x => x._2.map(_._1.callResOf.get))
           // no dtor, no need for duplication
