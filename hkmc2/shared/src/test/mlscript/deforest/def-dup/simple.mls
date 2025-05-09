@@ -102,3 +102,19 @@ f1(to(4))
 //│ 	Cons --match--> `if ls1 is ...`
 //│ 	Nil --match--> `if ls1 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+:deforestDup
+fun map(ls, f) = if ls is
+  Nil then Nil
+  h :: t then f(h) :: map(t, f)
+fun succ(x) = x + 1
+fun double(x) = x * 2
+fun test() =
+  map(map(1 :: 2 :: Nil, succ), double)
+test()
+//│ = Cons(4, Cons(6, Nil))
+//│ duplication chances:
+//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map
+//│ No fusion opportunity

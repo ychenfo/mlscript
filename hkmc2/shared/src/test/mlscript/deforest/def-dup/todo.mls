@@ -1,0 +1,55 @@
+:js
+:deforest
+
+//│ No fusion opportunity
+
+data class A(x)
+
+data class (::) Cons(h, t)
+object Nil
+
+
+:deforestDup
+// TODO: how to duplicate this?
+// * The real flow of the program:
+// ctor─►toRes┌─►wrapRes1─►f1Consumer
+//            └─►wrapRes2─►f2Consumer
+// * The flow we currently got:
+//          ┌────►f1Consumer
+// ctor┬─►toRes──►f2Consumer
+//     ├───►wrapRes1─►f1Consumer
+//     └───►wrapRes2─►f2Consumer
+// and there are programs that
+// have this flow and cannot be optimized after duplication
+fun to(n) = if n > 0 then n :: to(n - 1) else Nil
+fun f1(ls) = if ls is
+  h :: t then h
+  Nil then 2
+fun f2(ls) = if ls is
+  h :: t then h + 1
+  Nil then 3
+fun wrap(n) = to(n)
+f1(wrap(4)) + f2(wrap(5))
+//│ = 10
+//│ duplication chances:
+//│ No fusion opportunity
+
+
+:deforestDup
+fun to(n) = if n > 0 then n :: to(n - 1) else Nil
+fun f1(ls) = if ls is
+  h :: t then h
+  Nil then 2
+fun f2(ls) = if ls is
+  h :: t then h + 1
+  Nil then 3
+fun badWrap(n) =
+  let x = to(n)
+  f1(x) + f2(x)
+  x
+f1(wrap(4)) + f2(wrap(5))
+//│ = 10
+//│ duplication chances:
+//│ No fusion opportunity
+
+

@@ -70,7 +70,7 @@ case object NoProd extends ProdStrat
 
 
 
-class Dtor(val expr: Match, val outterMatch: Option[ResultId])(using d: Deforest) extends ConsStrat:
+class Dtor(val expr: Match, val outterMatch: Option[ResultId], val inDef: Option[BlockMemberSymbol])(using d: Deforest) extends ConsStrat:
   d.matchScrutToMatchBlock.updateWith(expr.scrut.uid):
     case None => Some(expr)
     case Some(_) => lastWords(s"should only update once (uid: ${expr.scrut.uid})")
@@ -438,7 +438,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
-      constrain(scrutStrat, Dtor(m, matching.lastOption.map(_._1)))
+      constrain(scrutStrat, Dtor(m, matching.lastOption.map(_._1), inDef))
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map:
           case (Case.Cls(s, _), body) => 
@@ -761,10 +761,15 @@ class Deforest(using TL, Raise, Elaborator.State):
             // sort by the number of call sites for lesser duplication, and the callres var id for determinism
             callsites.size -> callsites.headOption.map(_._1.uid)
         match
-          // only has one dtor, no need to duplicate
-          case h :: Nil =>
-            // h._2.map(_._1.callResOf.get)
-            Nil
+          // only has one dtor
+          case (dtor, callsites) :: Nil =>
+            callsites
+              .withFilter: (callsite, info) =>
+                assert(info._2.get is dtor)
+                // it is a potential duplicate where the call res of a function
+                // is consumed by the body of the same function
+                dtor.inDef.fold(false)(_ is callsite.callResOf.get._2)
+              .map(_._1.callResOf.get)
           // more than one dtors, duplicate those with less call sites
           case heads :+ last => heads.flatMap(x => x._2.map(_._1.callResOf.get))
           // no dtor, no need for duplication
