@@ -444,7 +444,8 @@ class Deforest(using TL, Raise, Elaborator.State):
           case (Case.Cls(s, _), body) => 
             processBlock(body)(
               using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s),
-              matching + (scrut.uid -> s)
+              matching + (scrut.uid -> s),
+              inDef
             )
       else
         arms.map:
@@ -491,6 +492,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     matching: LinkedHashMap[ResultId, ClsOrModSymbol],
     inDef: Opt[BlockMemberSymbol]
   ) =
+    tl.log(s"constr fun body: $inDef")
     val paramSyms = params.map:
       case Param(sym = sym, _) => sym
     val paramStrats = paramSyms.map(symToStrat.apply)
@@ -504,6 +506,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     matching: LinkedHashMap[ResultId, ClsOrModSymbol],
     inDef: Opt[BlockMemberSymbol]
   ): ProdStrat =
+    tl.log(s"========== processing: ${r.toString()} <<<<< in $inDef")
     def handleCallLike(f: Path, args: Ls[Path], c: Result) =
       val argsTpe = args.map(processResult)
       f match
@@ -759,7 +762,9 @@ class Deforest(using TL, Raise, Elaborator.State):
             callsites.size -> callsites.headOption.map(_._1.uid)
         match
           // only has one dtor, no need to duplicate
-          case h :: Nil => Nil // h._2.map(_._1.callResOf.get)
+          case h :: Nil =>
+            // h._2.map(_._1.callResOf.get)
+            Nil
           // more than one dtors, duplicate those with less call sites
           case heads :+ last => heads.flatMap(x => x._2.map(_._1.callResOf.get))
           // no dtor, no need for duplication
