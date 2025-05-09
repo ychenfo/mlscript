@@ -750,7 +750,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         info
           .filter:
             case (callSite, isSolvable -> dtor) =>
-              dtor.isDefined // discard those without a dtor
+              dtor.isDefined && // discard those without a dtor
               !callInfo.isObviousRecursiveCall(callSite.callResOf.get._1) // and those that are obviously recursive calls
           .groupBy(_._2._2.get) // group by the dtor
           .toList
