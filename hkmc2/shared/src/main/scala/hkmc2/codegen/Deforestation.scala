@@ -1010,6 +1010,46 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
       // If all the arms end with non-`End` blocks, then the `rest` of this `Match` will never be executed,
       // and we remove the `rest` in this case. This prevents `rest` to use variables that become
       // undefined because computation in arms that defines them are moved away. 
+      // One example illustrating the case of "deadcode using never assigned variable causing scope error during JS generation" is as follows:
+      // The mlscript program is:
+      // ```
+      // fun test(x) =
+      //   let t = if x is
+      //     AA(AA(a)) then a
+      //   t + 5
+      // fun f(a) = if a is
+      //   AA then 0
+      // let p = AA(AA(10))
+      // test(p) + f(p)
+      // ```
+      // After lowering, it is essentially:
+      // ```
+      // fun test(x) =
+      //   if x is AA(param0) then
+      //     if param0 is AA(param1) then
+      //       a = param1
+      //       tmpRes = a
+      //     else throw "match error"
+      //   else throw "match error"
+      //   t = tmpRes
+      //   return t + 5
+      // fun f(a) = if a is AA then 0
+      // let p = AA(AA(10))
+      // test(p) + f(p)
+      // ```
+      // And after fusion, the program (before the removal of dead code causing scope error) is:
+      // ```
+      // fun test(x) =
+      //   if x is AA(param0) then
+      //     param0()
+      //   else throw "match error"
+      //   t = tmpRes      // <--- this `tmpRes` without binding site causes scope error
+      //   return t + 5
+      // fun f(a) = if a is AA then 0
+      // let p = AA of
+      //   () => a = 10; tmpRes = a; t = tmpRes; return t + 5;
+      // test(p) + f(p)
+      // ```
       // TODO: it will become unnecessary once we have proper binding declarations in the Block IR
       // and all uses of never-assigned variables will be known to be dead code
       dflt.fold(false)(_.willBeNonEndTailBlock) && arms.forall { case (_, body) => body.willBeNonEndTailBlock }
