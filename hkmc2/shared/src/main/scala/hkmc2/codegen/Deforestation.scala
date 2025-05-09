@@ -24,13 +24,12 @@ class StratVarState(val uid: StratVarId, val name: Str, val funRetOrArg: Opt[Eit
   
   override def toString(): String = s"${if name.isEmpty() then "var" else name}@${uid}"
 
-object StratVarUidHandler extends Uid.Handler[StratVar]
 object StratVarState:
   // funRetOrArg:
   // None: not representing the parameter type or return type of a function
   // Some(Left): parameter type
   // Some(right): return type
-  def freshVar(nme: String = "", callResOf: Opt[ResultId -> Symbol], funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]] = N)(using vuid: StratVarUidHandler.State) =
+  def freshVar(nme: String = "", callResOf: Opt[ResultId -> Symbol], funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]] = N)(using vuid: Uid.StratVar.State) =
     val newId = vuid.nextUid
     val s = StratVarState(newId, nme, funRetOrArg, callResOf)
     val p = s.asProdStrat
@@ -263,6 +262,21 @@ class HasExplicitRetTraverser extends BlockTraverserShallow:
     flag = false
     applyBlock(b)
     flag
+
+class GetCtorsTraverser(using Deforest) extends BlockTraverser:
+  val ctors = mutable.Set.empty[ResultId]
+  override def applyResult(r: Result): Unit =
+    r.uid.handleCtorIds{ (id, f, clsOrMod, args) =>
+      ctors += id
+      args.foreach { case Arg(_, value) => applyResult(value) }
+    } match
+      case Some(_) => ()
+      case None => r match
+        case Call(_, args) =>
+          args.foreach { case Arg(_, value) => applyResult(value) }
+        case Instantiate(cls, args) =>
+          args.foreach(applyResult)
+        case _ => ()
   
 extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
@@ -279,7 +293,7 @@ extension (b: Block)
     
 class Deforest(using TL, Raise, Elaborator.State):
   
-  given StratVarUidHandler.State = StratVarUidHandler.State()
+  given Uid.StratVar.State = Uid.StratVar.State()
   given Deforest = this
   import StratVarState.freshVar
   
@@ -782,78 +796,63 @@ class Deforest(using TL, Raise, Elaborator.State):
     val ctorToDtor = ctorDests.ctorDests
     val dtorToCtor = dtorSources.dtorSources
     
-    def removeCtor(rm: Set[ResultId]): Unit =
-      if rm.isEmpty then ()
-      else
-        tl.log("rm ctor: " + rm.map(c => c.getClsSymOfUid.nme).mkString(" | "))
-        val toDeleteDtors = rm.flatMap(r => ctorToDtor.remove(r)).flatMap:
-          case CtorDest(mat, sels, _, _) => mat.keySet.map(s => DtorExpr.Match(s)) ++ sels.map(s => DtorExpr.Sel(s.expr))
-        removeDtor(toDeleteDtors)
+    def removeCtor(rm: ResultId): Unit =
+      for CtorDest(mat, sels, _, _) <- ctorToDtor.remove(rm) do
+        for s <- mat.keys do removeDtor(DtorExpr.Match(s))
+        for s <- sels do removeDtor(DtorExpr.Sel(s.expr))
     
-    def removeDtor(rm: Set[DtorExpr]): Unit =
-      if rm.isEmpty then ()
-      else
-        tl.log("rm dtor: " + rm.mkString(" | "))
-        val toDeleteCtors = rm.flatMap(r => dtorToCtor.remove(r)).flatMap(_.ctors)
-        removeCtor(toDeleteCtors)
+    def removeDtor(rm: DtorExpr) =
+      for
+        c <- dtorToCtor.remove(rm)
+        x <- c.ctors
+      do
+        removeCtor(x)
     
     // remove clashes:
-    removeCtor(
-      ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels, noCons, _) =>
-        ((dtors.size == 0 && sels.size == 1)
-        || (dtors.size == 1 && {
-          val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
-          sels.forall { s => s.expr.getResult match
-            case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
-            case _ => false }
-        }))
-        && !noCons
-      }.keySet.toSet
-    )
-    removeDtor(dtorToCtor.filter(_._2.noProd).keySet.toSet)
+    ctorToDtor.filterNot { case _ -> CtorDest(dtors, sels, noCons, _) =>
+      ((dtors.size == 0 && sels.size == 1)
+      || (dtors.size == 1 && {
+        val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
+        sels.forall { s => s.expr.getResult match
+          case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid) // need to be in the matching arms, and checking the scrutinee
+          case _ => false }
+      }))
+      && !noCons
+    }.keys.foreach(removeCtor)
+    dtorToCtor.filter(_._2.noProd).keys.foreach(removeDtor)
     
     // remove cycle:
-    def getCtorInArm(ctor: ResultId, dtor: Match): Set[ResultId] =
+    def getCtorInArm(ctor: ResultId, dtor: Match) =
       val ctorSym = getClsSymOfUid(ctor)
       val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.map(_._2).orElse(dtor.dflt).get
-      
-      object GetCtorsTraverser extends BlockTraverser:
-        val ctors = mutable.Set.empty[ResultId]
-        override def applyResult(r: Result): Unit =
-          r.uid.handleCtorIds{ (id, f, clsOrMod, args) =>
-            ctors += id
-            args.foreach { case Arg(_, value) => applyResult(value) }
-          } match
-            case Some(_) => ()
-            case None => r match
-              case Call(_, args) =>
-                args.foreach { case Arg(_, value) => applyResult(value) }
-              case Instantiate(cls, args) =>
-                args.foreach(applyResult)
-              case _ => ()
-
-      GetCtorsTraverser.applyBlock(arm)
-      GetCtorsTraverser.ctors.toSet
-    def findCycle(ctor: ResultId, dtor: Match): Set[ResultId] =
+      val traverser = GetCtorsTraverser()
+      traverser.applyBlock(arm)
+      traverser.ctors
+    
+    def findCycle(ctor: ResultId, dtor: Match): Ls[ResultId] =
       val cache = mutable.Set(ctor)
-      def go(ctorAndMatches: Set[ResultId -> Match]): Set[ResultId] =
-        val newCtorsAndNewMatches =
-          ctorAndMatches.flatMap((c, m) => getCtorInArm(c, m)).flatMap: c =>
-            ctorToDtor.get(c).flatMap:
-              case CtorDest(matches, sels, false, _) => matches.values.headOption.map(m => c -> m)
+      def go(ctorAndMatches: Ls[ResultId -> Match]): Ls[ResultId] =
+        var newCtorsAndNewMatches: Ls[ResultId -> Match] = Nil
+        for
+          (c, m) <- ctorAndMatches
+          c <- getCtorInArm(c, m)
+          CtorDest(matches, sels, _, _) <- ctorToDtor.get(c)
+          m <- matches.values.headOption
+        do newCtorsAndNewMatches = (c -> m) :: newCtorsAndNewMatches
         val cycled = newCtorsAndNewMatches.filter(c => !cache.add(c._1))
         if newCtorsAndNewMatches.isEmpty then
-          Set.empty
+          Nil
         else if cycled.nonEmpty then
           cycled.map(_._1)
         else
           go(newCtorsAndNewMatches)
-      go(Set(ctor -> dtor))
-    val toRmCtor = ctorToDtor.flatMap:
-      case (c, CtorDest(matches, sels, false, _)) => 
-        assert(matches.size <= 1)
-        matches.values.flatMap(m => findCycle(c, m))
-    removeCtor(toRmCtor.toSet)
+      go(Ls(ctor -> dtor))
+    
+    for
+      (c, CtorDest(matches, sels, _, _)) <- ctorToDtor
+      m <- matches.values
+      x <- findCycle(c, m)
+    do removeCtor(x)
 
     ctorToDtor -> dtorToCtor
     
@@ -1156,6 +1155,46 @@ class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) ex
       // If all the arms end with non-`End` blocks, then the `rest` of this `Match` will never be executed,
       // and we remove the `rest` in this case. This prevents `rest` to use variables that become
       // undefined because computation in arms that defines them are moved away. 
+      // One example illustrating the case of "deadcode using never assigned variable causing scope error during JS generation" is as follows:
+      // The mlscript program is:
+      // ```
+      // fun test(x) =
+      //   let t = if x is
+      //     AA(AA(a)) then a
+      //   t + 5
+      // fun f(a) = if a is
+      //   AA then 0
+      // let p = AA(AA(10))
+      // test(p) + f(p)
+      // ```
+      // After lowering, it is essentially:
+      // ```
+      // fun test(x) =
+      //   if x is AA(param0) then
+      //     if param0 is AA(param1) then
+      //       a = param1
+      //       tmpRes = a
+      //     else throw "match error"
+      //   else throw "match error"
+      //   t = tmpRes
+      //   return t + 5
+      // fun f(a) = if a is AA then 0
+      // let p = AA(AA(10))
+      // test(p) + f(p)
+      // ```
+      // And after fusion, the program (before the removal of dead code causing scope error) is:
+      // ```
+      // fun test(x) =
+      //   if x is AA(param0) then
+      //     param0()
+      //   else throw "match error"
+      //   t = tmpRes      // <--- this `tmpRes` without binding site causes scope error
+      //   return t + 5
+      // fun f(a) = if a is AA then 0
+      // let p = AA of
+      //   () => a = 10; tmpRes = a; t = tmpRes; return t + 5;
+      // test(p) + f(p)
+      // ```
       // TODO: it will become unnecessary once we have proper binding declarations in the Block IR
       // and all uses of never-assigned variables will be known to be dead code
       dflt.fold(false)(_.willBeNonEndTailBlock) && arms.forall { case (_, body) => body.willBeNonEndTailBlock }
