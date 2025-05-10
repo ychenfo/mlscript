@@ -324,6 +324,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       // DefDupTODO: do not use `output` from difftest here
       output("duplication chances:")
       findDefDupChances.foreach: (r, s) =>
+        assert(r.getFunCallBlkMemSyn.get is s)
         output(s"\t${r.getResult} <-- dup --> $s")
     // DefDupTODO: def dup: change later
     if true then
@@ -753,6 +754,9 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     
     def getDuplicatableCalls(vs: Ls[StratVarState]): Iterable[ResultId -> Symbol] =
+      def notOnlyOneCallSite(s: Symbol) =
+        // TODO:
+        true
       // tl.log(vs.map(v => v.callResOf.map((r, s) => s"(${r.getResult}, ${s.nme})").get).mkString(" | "))
       val info = vs.map(x => x -> checkStratVar(x))
       // If all of the call-res vars are "solvable", then
@@ -772,8 +776,9 @@ class Deforest(using TL, Raise, Elaborator.State):
           .groupBy(_._2._2.get) // group by the dtor
           .toList
           .sortBy: (_, callsites) =>
+            // DefDupTODO: sorting should be based on the number of distinct callers
             // sort by the number of call sites for lesser duplication, and the callres var id for determinism
-            callsites.size -> callsites.headOption.map(_._1.uid)
+            callsites.map(_._1.callResOf.get._2).filter(notOnlyOneCallSite).toSet.size -> callsites.headOption.map(_._1.uid)
         match
           // only has one dtor
           case (dtor, callsites) :: Nil =>
@@ -785,7 +790,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 dtor.inDef.fold(false)(_ is callsite.callResOf.get._2)
               .map(_._1.callResOf.get)
           // more than one dtors, duplicate those with less call sites
-          case heads :+ last => heads.flatMap(x => x._2.map(_._1.callResOf.get))
+          case heads :+ last => heads.flatMap(x => x._2.map(_._1.callResOf.get).filter(callSite => notOnlyOneCallSite(callSite._2)))
           // no dtor, no need for duplication
           case _ => Nil
       else
