@@ -47,7 +47,7 @@ fun badWrap(n) =
   let x = to(n)
   f1(x) + f2(x)
   x
-f1(wrap(4)) + f2(wrap(5))
+f1(badWrap(4)) + f2(badWrap(5))
 //│ = 10
 //│ duplication chances:
 //│ No fusion opportunity
