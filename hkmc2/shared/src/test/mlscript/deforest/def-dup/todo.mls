@@ -19,7 +19,8 @@ object Nil
 // ctor┬─►toRes──►f2Consumer
 //     ├───►wrapRes1─►f1Consumer
 //     └───►wrapRes2─►f2Consumer
-// and there are programs that
+// This program can be fused if we duplicate `wrap(4)` and `wrap(5)` AND the `to(n)` inside them.
+// But there are programs that
 // have this flow and cannot be optimized after duplication
 fun to(n) = if n > 0 then n :: to(n - 1) else Nil
 fun f1(ls) = if ls is
@@ -34,7 +35,8 @@ f1(wrap(4)) + f2(wrap(5))
 //│ duplication chances:
 //│ No fusion opportunity
 
-
+// This program cannot be fused no matter how we duplicate,
+// and it has essentially the same flow as the program above
 :deforestDup
 fun to(n) = if n > 0 then n :: to(n - 1) else Nil
 fun f1(ls) = if ls is
@@ -53,3 +55,86 @@ f1(badWrap(4)) + f2(badWrap(5))
 //│ No fusion opportunity
 
 
+
+// TODO: want to find duplication chance for either `p(1)` or `p(2)` (probably `p(2)`)                                 
+// ctor─┬►pRes1───┬──►f1Consumer
+//      │         └──►f2Consumer
+//      └►pRes2──────►f3Consumer
+:deforestDup
+fun p(x) = A(x)
+let one = p(1)
+let two = p(2)
+fun f1(p) = if p is A(a) then a + 1
+fun f2(p) = if p is A(b) then b + 2
+fun f3(p) = if p is A(c) then c + 3
+f1(one) + f2(one) + f3(two)
+//│ = 10
+//│ one = A(1)
+//│ two = A(2)
+//│ duplication chances:
+//│ No fusion opportunity
+
+
+// TODO: no duplication of `p(1)` or `p(2)` is helpful in this case
+// but duplicating `f2(two)` AND `p(2)` is helpful...
+// ctor─┬─►pRes1─┬──►f1Consumer
+//      │        └──►f2Consumer
+//      │                ▲
+//      └─►pRes2 ────────┘
+:deforestDup
+fun p(x) = A(x)
+let one = p(1)
+let two = p(2)
+fun f1(p) = if p is A(a) then a + 1
+fun f2(p) = if p is A(b) then b + 2
+f1(one) + f2(one) + f2(two)
+//│ = 9
+//│ one = A(1)
+//│ two = A(2)
+//│ duplication chances:
+//│ No fusion opportunity
+
+
+// `wrap` is not duplicated because we should sort by the number of distinct caller symbols, instead of the number of callsites
+// TODO: group callsites, so that `p(3)` and `p(4)` uses the same duplicated `p`
+// TODO: g2 is marked as duplicated because its res is also consumed by f2,
+// but we can filter it since it's only called once
+:deforestDup
+fun p(x) = A(x)
+fun g1(b) = if b then p(1) else p(2)
+fun wrap(b) = g1(b)
+fun g2(b) = if b then p(3) else p(4)
+fun f1(p) = if p is A(a) then a + 1
+fun f2(p) = if p is A(b) then b + 2
+f1(wrap(true)) + f2(g2(false))
+//│ = 8
+//│ duplication chances:
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p
+//│ 	Call(Ref(member:g2),List(Arg(false,Lit(BoolLit(false))))) <-- dup --> member:g2
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p
+//│ No fusion opportunity
+
+
+
+
+// TODO: no duplication seems to be helpful for this program
+// can we avoid duplicating this? since the constructor calls
+// are not in the definitions that we are duplicating...
+:deforestDup
+fun p(a) = a
+fun f1(a1) = if a1 is A(x1) then x1
+fun f2(a2) = if a2 is A(x2) then x2 + 1
+fun test() =
+  let x = A(1)
+  let y = A(2)
+  let res1 = p(if true then x else y) // both x and y flows into this callsiteres
+  let res2 = p(x) // x flows into this callsiteres
+  let res3 = p(y) // y flows into this callsiteres
+  // f1(res1) + f2(res1) + f1(res2) + f2(res3)
+  f1(res1) + f1(res2) + f2(res3)
+test()
+//│ = 5
+//│ duplication chances:
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p
+//│ No fusion opportunity
