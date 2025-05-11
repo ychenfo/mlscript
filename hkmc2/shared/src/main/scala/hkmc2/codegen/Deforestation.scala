@@ -322,11 +322,17 @@ class Deforest(using TL, Raise, Elaborator.State):
     if duplicate then
       // val defDuplicateInfo = findDefDupChances
       // DefDupTODO: do not use `output` from difftest here
-      output("duplication chances:")
-      findDefDupChances.foreach: (r, s) =>
-        output(s"\t${r.getResult} <-- dup --> $s@${s.uid}")
+      val numOfChances = findDefDupChances.size
+      if numOfChances > 0 then
+        output("duplication chances:")
+        findDefDupChances.foreach: (r, s) =>
+          output(s"\t${r.getResult} <-- dup --> $s@${s.uid}")
+        output("=========")
+        val defDupper = new DefDupTransformer
+        S(defDupper(p)) -> s"$numOfChances dup chances" -> numOfChances
+      else N -> "no duplication chance" -> 0
     // DefDupTODO: def dup: change later
-    if true then
+    else
       // tl.log("-----------------------------------------")
       // upperBounds.foreach: (v, u) =>
         
@@ -360,7 +366,6 @@ class Deforest(using TL, Raise, Elaborator.State):
         S(Program(p.imports, rewrite(mainBlk))) -> s"${filteredCtorDests.size} fusion opportunities:\n${fusionStat.toList.sorted.mkString("\n")}" -> filteredCtorDests.size
       else
         S(p) -> s"0 fusion opportunity" -> 0
-    else die
   
   object globallyDefinedVars:
     val store = mutable.Set.from[Symbol](State.globalThisSymbol ::State.runtimeSymbol :: Nil)
@@ -786,7 +791,8 @@ class Deforest(using TL, Raise, Elaborator.State):
           case callSiteId -> calleeSym -> _ =>
             assert(calleeSym is sharedCalleeSym)
             callSiteId -> newCalleeSym
-            
+    
+  lazy val defDupMap = findDefDupChances.toMap
         
     
     
@@ -929,8 +935,77 @@ class Deforest(using TL, Raise, Elaborator.State):
     val rest = deforestTransformer.applyBlock(p)
     val newDefsRest = deforestTransformer.matchRest.getAllFunDefs
     val newDefsArms = deforestTransformer.matchArms.getAllFunDefs
-    newDefsArms(newDefsRest(rest))  
+    newDefsArms(newDefsRest(rest))
+
+// this duplicator needs to deeply copy:
+// the ResultIds (related to ctor ids and match scrut ids) should not be messed up
+class DefDuplicator(newFunSym: BlockMemberSymbol)(using val d: Deforest, defDupTransformer: DefDupTransformer, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
+  val argSubst = mutable.Map.empty[Symbol, VarSymbol]
   
+  override def applyResult(r: Result): Result = r match
+    case c@Call(f, args) if d.defDupMap.contains(r.uid) =>
+      val newSym = d.defDupMap(r.uid)
+      defDupTransformer.newDefs.makeDefn(r.uid.getFunCallBlkMemSyn.get, newSym)
+      val args2 = args.mapConserve(applyArg)
+      Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
+    case c@Call(fun, args) => Call(applyPath(fun), args.map(applyArg))(c.isMlsFun, c.mayRaiseEffects)
+    case Instantiate(cls, args) => Instantiate(applyPath(cls), args.map(applyPath))
+    case p: Path => applyPath(p)
+  
+  override def applyPath(p: Path): Path = p match
+    case s@Select(p, symbol) => Select(applyPath(p), symbol)(s.symbol)
+    case DynSelect(qual, fld, arrayIdx) => DynSelect(applyPath(qual), applyPath(fld), arrayIdx)
+    case v: Value => applyValue(v)
+  
+  override def applyValue(v: Value): Value = v match
+    case v@Value.Ref(s) => argSubst.get(s).fold(v.copy())(Value.Ref(_))
+    case v: Value.This => v.copy()
+    case v: Value.Lit => v.copy()
+    case v: Value.Lam => v.copy()
+    case v: Value.Arr => v.copy()
+    case v: Value.Rcd => v.copy()
+  
+  override def applyParamList(pl: ParamList): ParamList =
+    def applyParam(p: Param): Param =
+      val sym2 = VarSymbol(p.sym.id)
+      argSubst += p.sym -> sym2
+      p.copy(sym = sym2)
+    val params2 = pl.params.map(applyParam)
+    val rest2 = pl.restParam.map(applyParam)
+    ParamList(pl.flags, params2, rest2)
+  
+  override def applyFunDefn(fun: FunDefn): FunDefn =
+    val params2 = fun.params.map(applyParamList)
+    val body2 = applySubBlock(fun.body)
+    FunDefn(fun.owner, newFunSym, params2, body2)
+    
+
+class DefDupTransformer(using val d: Deforest, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
+  self =>
+  object newDefs:
+    val store = mutable.Map.empty[Symbol, FunDefn]
+    def makeDefn(oldS: BlockMemberSymbol, newS: BlockMemberSymbol): Unit = store.getOrElseUpdate.curried(newS):
+      val originalDefn = d.funSymToFunDef(oldS)
+      self.givenIn:
+        DefDuplicator(newS).applyFunDefn(originalDefn)
+    def apply(b: Block) =
+      store.values.toList.sortBy(_.sym.uid).foldRight(b)(Define(_, _))
+  
+  override def applyResult(r: Result): Result = r match
+    case c@Call(f, args) if d.defDupMap.contains(r.uid) =>
+      val newSym = d.defDupMap(r.uid)
+      newDefs.makeDefn(r.uid.getFunCallBlkMemSyn.get, newSym)
+      val args2 = args.mapConserve(applyArg)
+      Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
+    case _ => super.applyResult(r)
+
+  def apply(p: Program): Program =
+    val newMainBlock = applyBlock(p.main)
+    val newMainBlockWithNewDefns = newDefs(newMainBlock)
+    Program(p.imports, newMainBlockWithNewDefns)
+  
+  
+
 class DeforestTransformer(using val d: Deforest, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
   self =>
   val nonFreeVars: Set[Symbol] = d.globallyDefinedVars.store.toSet

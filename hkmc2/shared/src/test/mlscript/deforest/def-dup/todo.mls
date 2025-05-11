@@ -35,7 +35,11 @@ f1(wrap(4)) + f2(wrap(5))
 //│ duplication chances:
 //│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:wrap_duplicated@929
 //│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:wrap_duplicated@930
-//│ No fusion opportunity
+//│ =========
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 10
+//│ 2 dup chances
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // This program cannot be fused no matter how we duplicate,
 // and it has essentially the same flow as the program above
@@ -54,9 +58,13 @@ fun badWrap(n) =
 f1(badWrap(4)) + f2(badWrap(5))
 //│ = 10
 //│ duplication chances:
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@993
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@994
-//│ No fusion opportunity
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@996
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@997
+//│ =========
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 10
+//│ 2 dup chances
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -77,8 +85,12 @@ f1(one) + f2(one) + f2(two)
 //│ one = A(1)
 //│ two = A(2)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1038
-//│ No fusion opportunity
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1044
+//│ =========
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 9
+//│ 1 dup chances
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -100,10 +112,14 @@ fun test() =
 test()
 //│ = 5
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1098
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1098
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1099
-//│ No fusion opportunity
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1106
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1106
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1107
+//│ =========
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 5
+//│ 3 dup chances
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -121,6 +137,10 @@ f1(p(1, clashed)) + f2(p(2, clashed))
 //│ = 4
 //│ clashed = A(3)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1139
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1140
-//│ No fusion opportunity
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1150
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1151
+//│ =========
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 4
+//│ 2 dup chances
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
