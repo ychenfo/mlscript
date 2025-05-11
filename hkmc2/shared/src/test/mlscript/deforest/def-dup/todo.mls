@@ -60,26 +60,6 @@ f1(badWrap(4)) + f2(badWrap(5))
 
 
 
-// TODO: want to find duplication chance for either `p(1)` or `p(2)` (probably `p(2)`)                                 
-// ctor─┬►pRes1───┬──►f1Consumer
-//      │         └──►f2Consumer
-//      └►pRes2──────►f3Consumer
-:deforestDup
-fun p(x) = A(x)
-let one = p(1)
-let two = p(2)
-fun f1(p) = if p is A(a) then a + 1
-fun f2(p) = if p is A(b) then b + 2
-fun f3(p) = if p is A(c) then c + 3
-f1(one) + f2(one) + f3(two)
-//│ = 10
-//│ one = A(1)
-//│ two = A(2)
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1045
-//│ No fusion opportunity
-
-
 // TODO: no duplication of `p(1)` or `p(2)` is helpful in this case
 // but duplicating `f2(two)` AND `p(2)` is helpful...
 // ctor─┬─►pRes1─┬──►f1Consumer
@@ -97,7 +77,7 @@ f1(one) + f2(one) + f2(two)
 //│ one = A(1)
 //│ two = A(2)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1088
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1038
 //│ No fusion opportunity
 
 
@@ -120,9 +100,9 @@ fun test() =
 test()
 //│ = 5
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1148
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1148
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1149
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1098
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1098
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1099
 //│ No fusion opportunity
 
 
@@ -141,23 +121,6 @@ f1(p(1, clashed)) + f2(p(2, clashed))
 //│ = 4
 //│ clashed = A(3)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1189
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1190
-//│ No fusion opportunity
-
-
-
-// TODO: but for this example it will be a pity to not duplicate `id(A(1))` and `id(A(2))`...
-// A(1)─┬─►id1Res───►f1Consumer
-//      │                      
-// A(2)─┴─►id2Res───►f2Consumer
-:deforestDup
-fun id(x) = x
-fun f1(a) = if a is A(i) then i
-fun f2(a) = if a is A(i) then i + 1
-f1(id(A(1))) + f2(id(A(2)))
-//│ = 4
-//│ duplication chances:
-//│ 	Call(Ref(member:id),List(Arg(false,Ref($tmp)))) <-- dup --> member:id_duplicated@1229
-//│ 	Call(Ref(member:id),List(Arg(false,Ref($tmp)))) <-- dup --> member:id_duplicated@1230
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1139
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1140
 //│ No fusion opportunity

@@ -138,3 +138,41 @@ f1(wrap(true)) + f2(g2(false))
 //│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p_duplicated@1252
 //│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p_duplicated@1252
 //│ No fusion opportunity
+
+
+
+
+// ctor─┬►pRes1───┬──►f1Consumer
+//      │         └──►f2Consumer
+//      └►pRes2──────►f3Consumer
+:deforestDup
+fun p(x) = A(x)
+let one = p(1)
+let two = p(2)
+fun f1(p) = if p is A(a) then a + 1
+fun f2(p) = if p is A(b) then b + 2
+fun f3(p) = if p is A(c) then c + 3
+f1(one) + f2(one) + f3(two)
+//│ = 10
+//│ one = A(1)
+//│ two = A(2)
+//│ duplication chances:
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1302
+//│ No fusion opportunity
+
+
+// for this example it will be a pity to not duplicate `id(A(1))` and `id(A(2))`,
+// although the ctors are not located in the definition of `id`
+// A(1)─┬─►id1Res───►f1Consumer
+//      │                      
+// A(2)─┴─►id2Res───►f2Consumer
+:deforestDup
+fun id(x) = x
+fun f1(a) = if a is A(i) then i
+fun f2(a) = if a is A(i) then i + 1
+f1(id(A(1))) + f2(id(A(2)))
+//│ = 4
+//│ duplication chances:
+//│ 	Call(Ref(member:id),List(Arg(false,Ref($tmp)))) <-- dup --> member:id_duplicated@1341
+//│ 	Call(Ref(member:id),List(Arg(false,Ref($tmp)))) <-- dup --> member:id_duplicated@1342
+//│ No fusion opportunity
