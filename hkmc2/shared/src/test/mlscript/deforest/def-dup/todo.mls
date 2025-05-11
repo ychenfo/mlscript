@@ -101,28 +101,6 @@ f1(one) + f2(one) + f2(two)
 //│ No fusion opportunity
 
 
-// `wrap` is not duplicated because we should sort by the number of distinct caller symbols, instead of the number of callsites
-// TODO: group callsites, so that `p(3)` and `p(4)` uses the same duplicated `p`
-// TODO: g2 is marked as duplicated because its res is also consumed by f2,
-// but we can filter it since it's only called once
-:deforestDup
-fun p(x) = A(x)
-fun g1(b) = if b then p(1) else p(2)
-fun wrap(b) = g1(b)
-fun g2(b) = if b then p(3) else p(4)
-fun f1(p) = if p is A(a) then a + 1
-fun f2(p) = if p is A(b) then b + 2
-f1(wrap(true)) + f2(g2(false))
-//│ = 8
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1140
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1140
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p_duplicated@1141
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p_duplicated@1141
-//│ No fusion opportunity
-
-
-
 
 // TODO: no duplication seems to be helpful for this program
 // can we avoid duplicating this? since the constructor calls
@@ -142,27 +120,44 @@ fun test() =
 test()
 //│ = 5
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1201
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1201
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1202
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1148
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1148
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1149
 //│ No fusion opportunity
 
 
 
-
+// TODO: no duplication seem to be helpful, and maybe we can also
+// avoid this, because for the `clashedCtor` flows into pRes1 and pRes2
+// its ctor expr also does not locate in the definition of `p`
 :deforestDup
 fun f1(a1) = if a1 is A(x1) then x1
 fun f2(a2) = if a2 is A(x2) then x2 + 1
-fun f3(a3) = if a3 is A(x3) then x3 + 2
-fun f4(a4) = if a4 is A(x4) then x4 + 3
 fun p(x, clashedCtor) =
   if true then A(x)
   else clashedCtor
 let clashed = A(3)
-f1(p(1, clashed)) + f2(p(2, clashed)) + f3(clashed) + f4(clashed)
-//│ = 15
+f1(p(1, clashed)) + f2(p(2, clashed))
+//│ = 4
 //│ clashed = A(3)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1268
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1269
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1189
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1190
+//│ No fusion opportunity
+
+
+
+// TODO: but for this example it will be a pity to not duplicate `id(A(1))` and `id(A(2))`...
+// A(1)─┬─►id1Res───►f1Consumer
+//      │                      
+// A(2)─┴─►id2Res───►f2Consumer
+:deforestDup
+fun id(x) = x
+fun f1(a) = if a is A(i) then i
+fun f2(a) = if a is A(i) then i + 1
+f1(id(A(1))) + f2(id(A(2)))
+//│ = 4
+//│ duplication chances:
+//│ 	Call(Ref(member:id),List(Arg(false,Ref($tmp)))) <-- dup --> member:id_duplicated@1229
+//│ 	Call(Ref(member:id),List(Arg(false,Ref($tmp)))) <-- dup --> member:id_duplicated@1230
 //│ No fusion opportunity

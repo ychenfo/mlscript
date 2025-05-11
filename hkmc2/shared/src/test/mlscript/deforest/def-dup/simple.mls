@@ -121,3 +121,20 @@ test()
 //│ duplication chances:
 //│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1199
 //│ No fusion opportunity
+
+
+:deforestDup
+fun p(x) = A(x)
+fun g1(b) = if b then p(1) else p(2)
+fun wrap(b) = g1(b)
+fun g2(b) = if b then p(3) else p(4)
+fun f1(p) = if p is A(a) then a + 1
+fun f2(p) = if p is A(b) then b + 2
+f1(wrap(true)) + f2(g2(false))
+//│ = 8
+//│ duplication chances:
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1251
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1251
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p_duplicated@1252
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p_duplicated@1252
+//│ No fusion opportunity
