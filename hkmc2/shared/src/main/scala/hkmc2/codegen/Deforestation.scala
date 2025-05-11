@@ -323,9 +323,8 @@ class Deforest(using TL, Raise, Elaborator.State):
       // val defDuplicateInfo = findDefDupChances
       // DefDupTODO: do not use `output` from difftest here
       output("duplication chances:")
-      findDefDupChances.foreach: (r, s) =>
-        assert(r.getFunCallBlkMemSyn.get is s)
-        output(s"\t${r.getResult} <-- dup --> $s")
+      findDefDupChances2.foreach: (r, s) =>
+        output(s"\t${r.getResult} <-- dup --> $s@${s.uid}")
     // DefDupTODO: def dup: change later
     if true then
       // tl.log("-----------------------------------------")
@@ -431,20 +430,36 @@ class Deforest(using TL, Raise, Elaborator.State):
   def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
   
   object callInfo:
-    val store = mutable.Map.empty[Symbol, Ls[ResultId -> Symbol]]
+    val callerToCallSitesInside = mutable.Map.empty[Symbol, Ls[ResultId -> Symbol]]
     val callSiteInDefInfo = mutable.Map.empty[ResultId, Symbol]
-    def update(caller: Symbol, callee: Symbol, callResultId: ResultId) =
-      store.updateWith(caller):
-        case None => Some((callResultId -> callee) :: Nil)
-        case Some(l) => Some((callResultId -> callee) :: l)
-      callSiteInDefInfo.updateWith(callResultId):
-        case None => Some(caller)
-        case _ => die
+    val fnSymToAllCallSites = mutable.Map.empty[Symbol, Ls[ResultId]]
+    
+    var callSiteStableId = 0
+    val callSiteStableIdStore = mutable.Map.empty[ResultId, Int]
+    def update(caller: Opt[Symbol], callee: Symbol, callResultId: ResultId) =
+      caller.foreach: caller =>
+        callerToCallSitesInside.updateWith(caller):
+          case None => Some((callResultId -> callee) :: Nil)
+          case Some(l) => Some((callResultId -> callee) :: l)
+        callSiteInDefInfo.updateWith(callResultId):
+          case None => Some(caller)
+          case _ => die
+      fnSymToAllCallSites.updateWith(callee):
+        case None => Some(callResultId :: Nil)
+        case Some(l) => Some(callResultId :: l)
+      callSiteStableIdStore.updateWith(callResultId):
+        case None => callSiteStableId += 1; Some(callSiteStableId)
+        case Some(_) => die
+        
     def isObviousRecursiveCall(c: ResultId) =
       // tl.log("checking callsite: " + c.getResult.toString() + s"@$c")
       val sym = c.getFunCallBlkMemSyn.get
       callSiteInDefInfo.get(c).fold(false)(_ is sym)
-  
+    def getAllCallSites(s: Symbol) = fnSymToAllCallSites(s)
+    
+    def getCallSiteStableId(callSiteId: ResultId) =
+      callSiteStableIdStore(callSiteId)
+        
   
   def processBlock(b: Block)(using
     inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
@@ -540,10 +555,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 "call_" + funSym.nme + "_res",
                 s.symbol.flatMap(_.asBlkMember.map(c.uid -> _)) // if `f` has a blockMemberSymbol, then record it
               )
-              for
-                caller <- inDef
-                callee <- s.symbol.flatMap(_.asBlkMember)
-              do callInfo.update(caller, callee, c.uid)
+              for callee <- s.symbol.flatMap(_.asBlkMember) do callInfo.update(inDef, callee, c.uid)
               constrain(symToStrat.getStratOfSym(funSym), ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(Some(s)) =>
@@ -559,10 +571,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 "call_" + l.nme + "_res",
                 l.asBlkMember.map(c.uid -> _) // if `f` has a blockMemberSymbol, then record it
               )
-              for
-                caller <- inDef
-                callee <- l.asBlkMember
-              do callInfo.update(caller, callee, c.uid)
+              for callee <- l.asBlkMember do callInfo.update(inDef, callee, c.uid)
               constrain(symToStrat.getStratOfSym(l), ConsFun(argsTpe, appRes._2))
               appRes._1
         case lam@Value.Lam(params, body) =>
@@ -796,7 +805,63 @@ class Deforest(using TL, Raise, Elaborator.State):
       else
         Nil
     ctorDests.ctorDests.values.flatMap(x => getDuplicatableCalls(x.callResVars)).toMap
+  
+  lazy val findDefDupChances2 =
+    val callResToCtorsCallsFlowingIntoThem =
+      ctorDests.ctorDests
+        .flatMap[ResultId -> StratVarState]:
+          case (ctorCallId, CtorDest(callResVars = vs, _)) => vs.map(ctorCallId -> _)
+        .groupBy(_._2)
     
+    def duplicatable(v: StratVarState): Opt[ResultId -> Symbol -> Dtor] =
+      val callSiteId -> calleeSym = v.callResOf.get
+      // if this is the only call site, no reason to duplicate
+      if callInfo.getAllCallSites(calleeSym).size == 1 then N
+      // if this is a obvious recursive call site, do not duplicate
+      else if callInfo.isObviousRecursiveCall(callSiteId) then N
+      else
+        val dtors = allUpperBoundsOf(v.uid, Set.empty).filter(c => c.isInstanceOf[Dtor])
+        // if this call result is not consumed by any dtor, do not duplicate
+        if dtors.size == 0 then N
+        // if this call result is consumed by multiple dtors, do not duplicate because it's helpless
+        else if dtors.size > 1 then N
+        else // if there is only one dtor for the call result...
+          val dtor = dtors.head.asInstanceOf[Dtor]
+          // it is a potential duplicate chance if the call res of a function
+          // is consumed by the body of the same function
+          if dtor.inDef.fold(false)(_ is calleeSym) then S(callSiteId -> calleeSym -> dtor)
+          else
+            // if all ctors flowing into this call res does not have a clash, no dup
+            if callResToCtorsCallsFlowingIntoThem(v).forall: (ctorCallId, fnCallSite) =>
+              val CtorDest(matches, sels, noCons, _) = ctorDests.get(ctorCallId).get
+              !noCons && matches.size == 1
+            then N
+            else S(callSiteId -> calleeSym -> dtor)
+    
+    val allDuplicatableCallSites = ctorDests.ctorDests
+      .flatMap:
+        case _ -> CtorDest(callResVars = vs) => vs
+      .toSet
+      .flatMap(duplicatable)
+    
+    allDuplicatableCallSites
+      .groupBy:
+        case _ -> calleeSym -> dtor => calleeSym -> dtor
+      .values
+      .toList
+      .sortBy(x => callInfo.getCallSiteStableId(x.head._1._1))
+      .flatMap: setOfCallSites =>
+        val sharedCalleeSym = setOfCallSites.head._1._2
+        val newCalleeSym = new BlockMemberSymbol(sharedCalleeSym.nme + "_duplicated", Nil, true)
+        setOfCallSites.map:
+          case callSiteId -> calleeSym -> _ =>
+            assert(calleeSym is sharedCalleeSym)
+            callSiteId -> newCalleeSym
+            
+        
+    
+    
+  
   lazy val resolveClashes =
     val ctorToDtor = ctorDests.ctorDests
     val dtorToCtor = dtorSources.dtorSources

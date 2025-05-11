@@ -33,6 +33,8 @@ fun wrap(n) = to(n)
 f1(wrap(4)) + f2(wrap(5))
 //│ = 10
 //│ duplication chances:
+//│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:wrap_duplicated@929
+//│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:wrap_duplicated@930
 //│ No fusion opportunity
 
 // This program cannot be fused no matter how we duplicate,
@@ -52,6 +54,8 @@ fun badWrap(n) =
 f1(badWrap(4)) + f2(badWrap(5))
 //│ = 10
 //│ duplication chances:
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@993
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@994
 //│ No fusion opportunity
 
 
@@ -72,6 +76,7 @@ f1(one) + f2(one) + f3(two)
 //│ one = A(1)
 //│ two = A(2)
 //│ duplication chances:
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1045
 //│ No fusion opportunity
 
 
@@ -92,6 +97,7 @@ f1(one) + f2(one) + f2(two)
 //│ one = A(1)
 //│ two = A(2)
 //│ duplication chances:
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1088
 //│ No fusion opportunity
 
 
@@ -109,9 +115,10 @@ fun f2(p) = if p is A(b) then b + 2
 f1(wrap(true)) + f2(g2(false))
 //│ = 8
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p
-//│ 	Call(Ref(member:g2),List(Arg(false,Lit(BoolLit(false))))) <-- dup --> member:g2
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1140
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1140
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p_duplicated@1141
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p_duplicated@1141
 //│ No fusion opportunity
 
 
@@ -135,6 +142,27 @@ fun test() =
 test()
 //│ = 5
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1201
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1201
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1202
+//│ No fusion opportunity
+
+
+
+
+:deforestDup
+fun f1(a1) = if a1 is A(x1) then x1
+fun f2(a2) = if a2 is A(x2) then x2 + 1
+fun f3(a3) = if a3 is A(x3) then x3 + 2
+fun f4(a4) = if a4 is A(x4) then x4 + 3
+fun p(x, clashedCtor) =
+  if true then A(x)
+  else clashedCtor
+let clashed = A(3)
+f1(p(1, clashed)) + f2(p(2, clashed)) + f3(clashed) + f4(clashed)
+//│ = 15
+//│ clashed = A(3)
+//│ duplication chances:
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1268
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1269
 //│ No fusion opportunity

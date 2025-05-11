@@ -32,7 +32,8 @@ fun test() =
 test()
 //│ = 3
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@937
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@938
 //│ No fusion opportunity
 
 
@@ -46,10 +47,11 @@ fun f5(a5) = if a5 is A(aa) then aa
 f1(p(1)) + f2(p(2)) + f3(p(3)) + f4(p(4)) + f5(p(5))
 //│ = 15
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1016
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1017
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p_duplicated@1018
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p_duplicated@1019
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:p_duplicated@1020
 //│ No fusion opportunity
 
 
@@ -77,9 +79,10 @@ fun f4(ls4) = if ls4 is
 f1(to(4)) + f2(to(5)) + f3(to(6)) + f4(to(7))
 //│ = 88
 //│ duplication chances:
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:to
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:to
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(6))))) <-- dup --> member:to
+//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:to_duplicated@1118
+//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:to_duplicated@1119
+//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(6))))) <-- dup --> member:to_duplicated@1120
+//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(7))))) <-- dup --> member:to_duplicated@1121
 //│ No fusion opportunity
 
 
@@ -116,5 +119,5 @@ fun test() =
 test()
 //│ = Cons(4, Cons(6, Nil))
 //│ duplication chances:
-//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map
+//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1199
 //│ No fusion opportunity
