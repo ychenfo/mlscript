@@ -841,7 +841,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     val allDuplicatableCallSites = ctorDests.ctorDests
       .flatMap:
         case _ -> CtorDest(callResVars = vs) => vs
-      .toSet
+      .toList
+      .distinct
       .flatMap(duplicatable)
     
     allDuplicatableCallSites
