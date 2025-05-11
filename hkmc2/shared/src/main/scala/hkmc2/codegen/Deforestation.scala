@@ -323,7 +323,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       // val defDuplicateInfo = findDefDupChances
       // DefDupTODO: do not use `output` from difftest here
       output("duplication chances:")
-      findDefDupChances2.foreach: (r, s) =>
+      findDefDupChances.foreach: (r, s) =>
         output(s"\t${r.getResult} <-- dup --> $s@${s.uid}")
     // DefDupTODO: def dup: change later
     if true then
@@ -733,80 +733,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     upperBounds(k).toSet.flatMap:
       case u@ConsVar(s) if !cache.contains(s.uid) => allUpperBoundsOf(s.uid, cache + s.uid) + u
       case u => Set(u)
-
-  lazy val findDefDupChances =
-    object checkStratVar:
-      val cache = mutable.Map.empty[StratVarState, Bool -> Opt[Dtor]]
-      // A clash from a function callsite potentially solvable by duplicating def only
-      // if *all* the call-res vars that we care have exact only one dtor.
-      // This function checks if a single callsite is solvable, and
-      // return (solvable -> corresponding pat mat dtor).
-      def apply(v: StratVarState): Bool -> Opt[Dtor] = cache.getOrElseUpdate.curried(v):
-        assert(v.callResOf.isDefined)
-        var dtor: Opt[Dtor] = N
-        var dtorCount = 0
-        var hasNoCons = false
-        
-        allUpperBoundsOf(v.uid, Set(v.uid)).foreach:
-          case d: Dtor =>
-            tl.log(s"> ${v.callResOf.map(_._1.getResult).get} ::: dtor ::: ${d.expr}")
-            dtorCount += 1; dtor = S(d)
-          // DefDupTODO: consider about field selection as dtor... also about field sel inside branches
-          case FieldSel(expr, inMatching) => ()
-          case ConsFun(l, r) => lastWords("ctor has ConsFun")
-          case ConsVar(s) => ()
-          case NoCons => hasNoCons = true
-        
-        if dtorCount == 1 && !hasNoCons then true -> dtor
-        else if dtorCount == 0 && !hasNoCons then true -> N
-        else false -> N
-    
-    
-    def getDuplicatableCalls(vs: Ls[StratVarState]): Iterable[ResultId -> Symbol] =
-      def notOnlyOneCallSite(s: Symbol) =
-        // TODO:
-        true
-      // tl.log(vs.map(v => v.callResOf.map((r, s) => s"(${r.getResult}, ${s.nme})").get).mkString(" | "))
-      val info = vs.map(x => x -> checkStratVar(x))
-      // If all of the call-res vars are "solvable", then
-      // find the call-reses that causes clash and thus need to be duplicated.
-      // Optimistically ignore problems caused by
-      // obvious recursive call sites (which will not be duplicated anyway currently)
-      if info.forall:
-        case (callSite, isSolvable -> dtor) =>
-          isSolvable ||
-          callInfo.isObviousRecursiveCall(callSite.callResOf.get._1)
-      then
-        info
-          .filter:
-            case (callSite, isSolvable -> dtor) =>
-              dtor.isDefined && // discard those without a dtor
-              !callInfo.isObviousRecursiveCall(callSite.callResOf.get._1) // and those that are obviously recursive calls
-          .groupBy(_._2._2.get) // group by the dtor
-          .toList
-          .sortBy: (_, callsites) =>
-            // DefDupTODO: sorting should be based on the number of distinct callers
-            // sort by the number of call sites for lesser duplication, and the callres var id for determinism
-            callsites.map(_._1.callResOf.get._2).filter(notOnlyOneCallSite).toSet.size -> callsites.headOption.map(_._1.uid)
-        match
-          // only has one dtor
-          case (dtor, callsites) :: Nil =>
-            callsites
-              .withFilter: (callsite, info) =>
-                assert(info._2.get is dtor)
-                // it is a potential duplicate where the call res of a function
-                // is consumed by the body of the same function
-                dtor.inDef.fold(false)(_ is callsite.callResOf.get._2)
-              .map(_._1.callResOf.get)
-          // more than one dtors, duplicate those with less call sites
-          case heads :+ last => heads.flatMap(x => x._2.map(_._1.callResOf.get).filter(callSite => notOnlyOneCallSite(callSite._2)))
-          // no dtor, no need for duplication
-          case _ => Nil
-      else
-        Nil
-    ctorDests.ctorDests.values.flatMap(x => getDuplicatableCalls(x.callResVars)).toMap
   
-  lazy val findDefDupChances2 =
+  lazy val findDefDupChances =
     val callResToCtorsCallsFlowingIntoThem =
       ctorDests.ctorDests
         .flatMap[ResultId -> StratVarState]:
