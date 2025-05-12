@@ -55,7 +55,7 @@ extension (i: ResultId)
         Some(k(i, v, v.l.asObj.get, Nil))
       case _ => None
   def getClsSymOfUid(using Deforest) = i.handleCtorIds((_, _, s, _) => s).get
-  def getFunCallBlkMemSyn(using Deforest) = i.getResult match
+  def getFunCallBlkMemSym(using Deforest) = i.getResult match
     case Call(fun, _) => fun match
       case s: Select => s.symbol.flatMap(_.asBlkMember)
       case v: Value.Ref => v.l.asBlkMember
@@ -462,7 +462,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         
     def isObviousRecursiveCall(c: ResultId) =
       // tl.log("checking callsite: " + c.getResult.toString() + s"@$c")
-      val sym = c.getFunCallBlkMemSyn.get
+      val sym = c.getFunCallBlkMemSym.get
       callSiteInDefInfo.get(c).fold(false)(_ is sym)
     def getAllCallSites(s: Symbol) = fnSymToAllCallSites(s)
     
@@ -953,7 +953,7 @@ class DefDuplicator(newFunSym: BlockMemberSymbol, callSiteId: ResultId)(using va
   override def applyResult(r: Result): Result = r match
     case c@Call(f, args) if d.defDupMap.contains(r.uid) =>
       val newSym = d.defDupMap(r.uid)
-      defDupTransformer.newDefs.makeDefn(r.uid.getFunCallBlkMemSyn.get, newSym, c.uid)
+      defDupTransformer.newDefs.makeDefn(r.uid.getFunCallBlkMemSym.get, newSym, c.uid)
       val args2 = args.map(applyArg)
       Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
     case c@Call(fun, args) =>
@@ -961,7 +961,7 @@ class DefDuplicator(newFunSym: BlockMemberSymbol, callSiteId: ResultId)(using va
       val flowsIntoTheDuplicatedDef = currentCallSiteResVar.fold(false): v =>
         val callerCallSiteStratVar = d.callInfo.getCallSiteResultVar(callSiteId).get
         d.allUpperBoundsOf(v.uid).contains(callerCallSiteStratVar.asConsStrat)
-      val symOfFun = c.uid.getFunCallBlkMemSyn
+      val symOfFun = c.uid.getFunCallBlkMemSym
       symOfFun match
         case Some(sym) if flowsIntoTheDuplicatedDef =>
           // further duplicate this call site
@@ -1015,7 +1015,7 @@ class DefDupTransformer(using val d: Deforest, elabState: Elaborator.State) exte
   override def applyResult(r: Result): Result = r match
     case c@Call(f, args) if d.defDupMap.contains(r.uid) =>
       val newSym = d.defDupMap(r.uid)
-      newDefs.makeDefn(r.uid.getFunCallBlkMemSyn.get, newSym, c.uid)
+      newDefs.makeDefn(r.uid.getFunCallBlkMemSym.get, newSym, c.uid)
       val args2 = args.mapConserve(applyArg)
       Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
     case _ => super.applyResult(r)
