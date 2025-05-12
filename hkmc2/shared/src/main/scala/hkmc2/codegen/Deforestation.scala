@@ -334,6 +334,9 @@ class Deforest(using TL, Raise, Elaborator.State):
       
       val newDeforest = new Deforest
       val pAfterDup = if dupRes._2 > 0 then dupRes._1._1.get else p
+      
+      output("\n\n\n\n\nvvvvvvvvvvvvv\n dup done\n^^^^^^^^^^^^^^^^^\n\n\n\n\n\n\n\n")
+      
       newDeforest(pAfterDup, false, output)
       
     // DefDupTODO: def dup: change later
@@ -351,7 +354,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           val selExpr = sels.map{
             case sel@FieldSel(s, v) => s".${s.name}(id:${sel.expr})"
           }.toList.sorted.mkString(" | ")
-          s"$ctorName\n\t --- match ---> $matchExprScruts\n\t --- sels ---> $selExpr\n\tNoCons: $noCons"
+          s"${ctorExprId.getResult}\n\t --- match ---> $matchExprScruts\n\t --- sels ---> $selExpr\n\tNoCons: $noCons"
       tl.log("-----------------------------------------")
       dtorSources.dtorSources.foreach:
         case (d, DtorSource(ctors, noProd)) =>
@@ -551,8 +554,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     inArm: Map[ProdVar, ClsOrModSymbol],
     matching: LinkedHashMap[ResultId, ClsOrModSymbol],
     inDef: Opt[BlockMemberSymbol]
-  ): ProdStrat =
-    tl.log(s"========== processing: ${r.toString()} <<<<< in $inDef")
+  ): ProdStrat = tl.trace[ProdStrat](s"========== processing: ${r.toString()} <<<<< in $inDef", _.toString()):
     def handleCallLike(f: Path, args: Ls[Path], c: Result) =
       val argsTpe = args.map(processResult)
       f match
@@ -952,29 +954,42 @@ class Deforest(using TL, Raise, Elaborator.State):
 
 // this duplicator needs to deeply copy, because
 // the ResultIds (related to ctor ids and match scrut ids) should not be messed up
-class DefDuplicator(newFunSym: BlockMemberSymbol, callSiteId: ResultId)(using val d: Deforest, defDupTransformer: DefDupTransformer, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
+class DefDuplicator(
+  oldFunSym: BlockMemberSymbol,
+  newFunSym: BlockMemberSymbol,
+  callSiteId: ResultId,
+  cache: Map[ResultId, BlockMemberSymbol]
+)(using val d: Deforest, defDupTransformer: DefDupTransformer, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
   val argSubst = mutable.Map.empty[Symbol, VarSymbol]
   
   override def applyResult(r: Result): Result = r match
+    // if this is a callsite that is pre-computed to have a duplication:
     case c@Call(f, args) if d.defDupMap.contains(r.uid) =>
       val newSym = d.defDupMap(r.uid)
-      defDupTransformer.newDefs.makeDefn(r.uid.getFunCallBlkMemSym.get, newSym, c.uid)
+      defDupTransformer.newDefs.makeDefn(r.uid.getFunCallBlkMemSym.get, newSym, c.uid, cache + (c.uid -> newSym))
       val args2 = args.map(applyArg)
       Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
     case c@Call(fun, args) =>
-      val currentCallSiteResVar = d.callInfo.getCallSiteResultVar(c.uid)
-      val flowsIntoTheDuplicatedDef = currentCallSiteResVar.fold(false): v =>
-        val callerCallSiteStratVar = d.callInfo.getCallSiteResultVar(callSiteId).get
-        d.allUpperBoundsOf(v.uid).contains(callerCallSiteStratVar.asConsStrat)
       val symOfFun = c.uid.getFunCallBlkMemSym
-      symOfFun match
-        case Some(sym) if flowsIntoTheDuplicatedDef =>
-          // further duplicate this call site
-          val newSym = new BlockMemberSymbol(sym.nme + "_duplicated", Nil, true)
-          defDupTransformer.newDefs.makeDefn(sym, newSym, c.uid)
-          val args2 = args.map(applyArg)
-          Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
-        case _ => Call(applyPath(fun), args.map(applyArg))(c.isMlsFun, c.mayRaiseEffects)
+      // if this is a call site that is obviously recursive
+      if symOfFun.fold(false)(_ is oldFunSym) then
+        Call(Value.Ref(newFunSym), args.map(applyArg))(true, c.mayRaiseEffects)
+      else
+        cache.get(c.uid) match
+          case Some(sym) => Call(Value.Ref(sym), args.map(applyArg))(true, c.mayRaiseEffects)
+          case None =>
+            val currentCallSiteResVar = d.callInfo.getCallSiteResultVar(c.uid)
+            val flowsIntoTheDuplicatedDef = currentCallSiteResVar.fold(false): v =>
+              val callerCallSiteStratVar = d.callInfo.getCallSiteResultVar(callSiteId).get
+              d.allUpperBoundsOf(v.uid).contains(callerCallSiteStratVar.asConsStrat)
+            symOfFun match
+              case Some(sym) if flowsIntoTheDuplicatedDef =>
+                // further duplicate this call site
+                val newSym = new BlockMemberSymbol(sym.nme + "_nested_duplicated", Nil, true)
+                defDupTransformer.newDefs.makeDefn(sym, newSym, c.uid, cache + (c.uid -> newSym))
+                val args2 = args.map(applyArg)
+                Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
+              case _ => Call(applyPath(fun), args.map(applyArg))(c.isMlsFun, c.mayRaiseEffects)
     case Instantiate(cls, args) => Instantiate(applyPath(cls), args.map(applyPath))
     case p: Path => applyPath(p)
   
@@ -983,13 +998,21 @@ class DefDuplicator(newFunSym: BlockMemberSymbol, callSiteId: ResultId)(using va
     case DynSelect(qual, fld, arrayIdx) => DynSelect(applyPath(qual), applyPath(fld), arrayIdx)
     case v: Value => applyValue(v)
   
+  // override def applyValue(v: Value): Value = v match
+  //   case v@Value.Ref(s) => argSubst.get(s).fold(v.copy())(Value.Ref(_))
+  //   case v: Value.This => v.copy()
+  //   case v: Value.Lit => v.copy()
+  //   case v: Value.Lam => v.copy()
+  //   case v: Value.Arr => v.copy()
+  //   case v: Value.Rcd => v.copy()
   override def applyValue(v: Value): Value = v match
-    case v@Value.Ref(s) => argSubst.get(s).fold(v.copy())(Value.Ref(_))
-    case v: Value.This => v.copy()
-    case v: Value.Lit => v.copy()
-    case v: Value.Lam => v.copy()
-    case v: Value.Arr => v.copy()
-    case v: Value.Rcd => v.copy()
+    case Value.Ref(l) => argSubst.get(l).fold(Value.Ref(l))(Value.Ref(_))
+    case Value.This(sym) => Value.This(sym)
+    case Value.Lit(lit) => Value.Lit(lit)
+    case Value.Lam(params, body) => Value.Lam(params, body)
+    case Value.Arr(elems) => Value.Arr(elems)
+    case Value.Rcd(elems) => Value.Rcd(elems)
+  
   
   override def applyParamList(pl: ParamList): ParamList =
     def applyParam(p: Param): Param =
@@ -1004,23 +1027,31 @@ class DefDuplicator(newFunSym: BlockMemberSymbol, callSiteId: ResultId)(using va
     val params2 = fun.params.map(applyParamList)
     val body2 = applySubBlock(fun.body)
     FunDefn(fun.owner, newFunSym, params2, body2)
+  
+  def apply(fun: FunDefn) =
+    applyFunDefn(fun)
     
 
 class DefDupTransformer(using val d: Deforest, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
   self =>
   object newDefs:
     val store = mutable.Map.empty[Symbol, FunDefn]
-    def makeDefn(oldS: BlockMemberSymbol, newS: BlockMemberSymbol, callSiteId: ResultId): Unit = store.getOrElseUpdate.curried(newS):
+    def makeDefn(
+      oldS: BlockMemberSymbol,
+      newS: BlockMemberSymbol,
+      callSiteId: ResultId,
+      cache: Map[ResultId, BlockMemberSymbol]
+    ): Unit = store.getOrElseUpdate.curried(newS):
       val originalDefn = d.funSymToFunDef(oldS)
       self.givenIn:
-        DefDuplicator(newS, callSiteId).applyFunDefn(originalDefn)
+        DefDuplicator(oldS, newS, callSiteId, cache)(originalDefn)
     def apply(b: Block) =
       store.values.toList.sortBy(_.sym.uid).foldRight(b)(Define(_, _))
   
   override def applyResult(r: Result): Result = r match
     case c@Call(f, args) if d.defDupMap.contains(r.uid) =>
       val newSym = d.defDupMap(r.uid)
-      newDefs.makeDefn(r.uid.getFunCallBlkMemSym.get, newSym, c.uid)
+      newDefs.makeDefn(r.uid.getFunCallBlkMemSym.get, newSym, c.uid, Map(c.uid -> newSym))
       val args2 = args.mapConserve(applyArg)
       Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
     case _ => super.applyResult(r)
