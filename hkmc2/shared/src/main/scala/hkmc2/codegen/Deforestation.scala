@@ -960,7 +960,7 @@ class DefDuplicator(
   callSiteId: ResultId,
   cache: Map[ResultId, BlockMemberSymbol]
 )(using val d: Deforest, defDupTransformer: DefDupTransformer, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
-  val argSubst = mutable.Map.empty[Symbol, VarSymbol]
+  val localSymSubst = mutable.Map.empty[Symbol, Symbol]
   
   override def applyResult(r: Result): Result = r match
     // if this is a callsite that is pre-computed to have a duplication:
@@ -998,15 +998,8 @@ class DefDuplicator(
     case DynSelect(qual, fld, arrayIdx) => DynSelect(applyPath(qual), applyPath(fld), arrayIdx)
     case v: Value => applyValue(v)
   
-  // override def applyValue(v: Value): Value = v match
-  //   case v@Value.Ref(s) => argSubst.get(s).fold(v.copy())(Value.Ref(_))
-  //   case v: Value.This => v.copy()
-  //   case v: Value.Lit => v.copy()
-  //   case v: Value.Lam => v.copy()
-  //   case v: Value.Arr => v.copy()
-  //   case v: Value.Rcd => v.copy()
   override def applyValue(v: Value): Value = v match
-    case Value.Ref(l) => argSubst.get(l).fold(Value.Ref(l))(Value.Ref(_))
+    case Value.Ref(l) => localSymSubst.get(l).fold(Value.Ref(l))(Value.Ref(_))
     case Value.This(sym) => Value.This(sym)
     case Value.Lit(lit) => Value.Lit(lit)
     case Value.Lam(params, body) => Value.Lam(params, body)
@@ -1017,14 +1010,21 @@ class DefDuplicator(
   override def applyParamList(pl: ParamList): ParamList =
     def applyParam(p: Param): Param =
       val sym2 = VarSymbol(p.sym.id)
-      argSubst += p.sym -> sym2
+      localSymSubst += p.sym -> sym2
       p.copy(sym = sym2)
     val params2 = pl.params.map(applyParam)
     val rest2 = pl.restParam.map(applyParam)
     ParamList(pl.flags, params2, rest2)
   
+  override def applyLocal(sym: Local): Local =
+    localSymSubst.getOrElse.curried(sym):
+      // tl.log(s"$sym not subst")
+      sym
+  
   override def applyFunDefn(fun: FunDefn): FunDefn =
     val params2 = fun.params.map(applyParamList)
+    fun.body.definedVars.foreach: v =>
+      localSymSubst += v -> TempSymbol(N, v.nme)
     val body2 = applySubBlock(fun.body)
     FunDefn(fun.owner, newFunSym, params2, body2)
   
