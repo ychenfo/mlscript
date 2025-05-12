@@ -653,3 +653,39 @@ f1(id(A(1))) + f2(id(A(2)))
 //│ = 4
 //│ 2 dup chances
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+
+
+:deforestDup
+// * The real flow of the program:
+// ctor─►toRes┌─►wrapRes1─►f1Consumer
+//            └─►wrapRes2─►f2Consumer
+// * The flow we currently got:
+//          ┌────►f1Consumer
+// ctor┬─►toRes──►f2Consumer
+//     ├───►wrapRes1─►f1Consumer
+//     └───►wrapRes2─►f2Consumer
+// This program can be fused if we duplicate `wrap(4)` and `wrap(5)` AND the `to(n)` inside them.
+// But there are programs that
+// have this same flow and cannot be optimized after duplication
+fun to(n) = if n > 0 then n :: to(n - 1) else Nil
+fun f1(ls) = if ls is
+  h :: t then h
+  Nil then 2
+fun f2(ls) = if ls is
+  h :: t then h + 1
+  Nil then 3
+fun wrap(n) = to(n)
+f1(wrap(4)) + f2(wrap(5))
+//│ = 10
+//│ duplication chances:
+//│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:wrap_duplicated@1470
+//│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:wrap_duplicated@1471
+//│ =========
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 10
+//│ 2 dup chances
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

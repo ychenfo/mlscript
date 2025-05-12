@@ -9,40 +9,19 @@ data class (::) Cons(h, t)
 object Nil
 
 
-:deforestDup
-// TODO: how to duplicate this?
-// * The real flow of the program:
-// ctor─►toRes┌─►wrapRes1─►f1Consumer
-//            └─►wrapRes2─►f2Consumer
-// * The flow we currently got:
-//          ┌────►f1Consumer
-// ctor┬─►toRes──►f2Consumer
-//     ├───►wrapRes1─►f1Consumer
-//     └───►wrapRes2─►f2Consumer
-// This program can be fused if we duplicate `wrap(4)` and `wrap(5)` AND the `to(n)` inside them.
-// But there are programs that
-// have this flow and cannot be optimized after duplication
-fun to(n) = if n > 0 then n :: to(n - 1) else Nil
-fun f1(ls) = if ls is
-  h :: t then h
-  Nil then 2
-fun f2(ls) = if ls is
-  h :: t then h + 1
-  Nil then 3
-fun wrap(n) = to(n)
-f1(wrap(4)) + f2(wrap(5))
-//│ = 10
-//│ duplication chances:
-//│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:wrap_duplicated@929
-//│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:wrap_duplicated@930
-//│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 10
-//│ 2 dup chances
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-// This program cannot be fused no matter how we duplicate,
-// and it has essentially the same flow as the program above
+// TODO: This program cannot be fused no matter how we duplicate, and we creately useless duplications.
+// But it has essentially the same flow as the program below, which we create useful duplications
+// ```
+// fun to(n) = if n > 0 then n :: to(n - 1) else Nil
+// fun f1(ls) = if ls is
+//   h :: t then h
+//   Nil then 2
+// fun f2(ls) = if ls is
+//   h :: t then h + 1
+//   Nil then 3
+// fun wrap(n) = to(n)
+// f1(wrap(4)) + f2(wrap(5))
+// ```
 :deforestDup
 fun to(n) = if n > 0 then n :: to(n - 1) else Nil
 fun f1(ls) = if ls is
@@ -58,8 +37,8 @@ fun badWrap(n) =
 f1(badWrap(4)) + f2(badWrap(5))
 //│ = 10
 //│ duplication chances:
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@1000
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@1001
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@941
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@942
 //│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 10
@@ -85,7 +64,7 @@ f1(one) + f2(one) + f2(two)
 //│ one = A(1)
 //│ two = A(2)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1052
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@993
 //│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 9
@@ -112,9 +91,9 @@ fun test() =
 test()
 //│ = 5
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1114
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1114
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1115
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1055
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1055
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1056
 //│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 5
@@ -137,8 +116,8 @@ f1(p(1, clashed)) + f2(p(2, clashed))
 //│ = 4
 //│ clashed = A(3)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1158
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1159
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1099
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1100
 //│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 4
