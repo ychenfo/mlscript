@@ -58,8 +58,8 @@ fun badWrap(n) =
 f1(badWrap(4)) + f2(badWrap(5))
 //│ = 10
 //│ duplication chances:
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@996
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@997
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@1000
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@1001
 //│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 10
@@ -85,7 +85,7 @@ f1(one) + f2(one) + f2(two)
 //│ one = A(1)
 //│ two = A(2)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1044
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1052
 //│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 9
@@ -112,9 +112,9 @@ fun test() =
 test()
 //│ = 5
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1106
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1106
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1107
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1114
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1114
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1115
 //│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 5
@@ -137,8 +137,8 @@ f1(p(1, clashed)) + f2(p(2, clashed))
 //│ = 4
 //│ clashed = A(3)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1150
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1151
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1158
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1159
 //│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ = 4

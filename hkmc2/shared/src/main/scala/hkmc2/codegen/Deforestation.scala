@@ -438,10 +438,11 @@ class Deforest(using TL, Raise, Elaborator.State):
     val callerToCallSitesInside = mutable.Map.empty[Symbol, Ls[ResultId -> Symbol]]
     val callSiteInDefInfo = mutable.Map.empty[ResultId, Symbol]
     val fnSymToAllCallSites = mutable.Map.empty[Symbol, Ls[ResultId]]
+    val callSiteIdToCallResVar = mutable.Map.empty[ResultId, StratVarState]
     
     var callSiteStableId = 0
     val callSiteStableIdStore = mutable.Map.empty[ResultId, Int]
-    def update(caller: Opt[Symbol], callee: Symbol, callResultId: ResultId) =
+    def update(caller: Opt[Symbol], callee: Symbol, callResultId: ResultId, callResVar: StratVarState) =
       caller.foreach: caller =>
         callerToCallSitesInside.updateWith(caller):
           case None => Some((callResultId -> callee) :: Nil)
@@ -455,6 +456,9 @@ class Deforest(using TL, Raise, Elaborator.State):
       callSiteStableIdStore.updateWith(callResultId):
         case None => callSiteStableId += 1; Some(callSiteStableId)
         case Some(_) => die
+      callSiteIdToCallResVar.updateWith(callResultId):
+        case None => Some(callResVar)
+        case Some(_) => die
         
     def isObviousRecursiveCall(c: ResultId) =
       // tl.log("checking callsite: " + c.getResult.toString() + s"@$c")
@@ -464,6 +468,8 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     def getCallSiteStableId(callSiteId: ResultId) =
       callSiteStableIdStore(callSiteId)
+    def getCallSiteResultVar(callSiteId: ResultId) =
+      callSiteIdToCallResVar.get(callSiteId)
         
   
   def processBlock(b: Block)(using
@@ -560,7 +566,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 "call_" + funSym.nme + "_res",
                 s.symbol.flatMap(_.asBlkMember.map(c.uid -> _)) // if `f` has a blockMemberSymbol, then record it
               )
-              for callee <- s.symbol.flatMap(_.asBlkMember) do callInfo.update(inDef, callee, c.uid)
+              for callee <- s.symbol.flatMap(_.asBlkMember) do callInfo.update(inDef, callee, c.uid, appRes._1.s)
               constrain(symToStrat.getStratOfSym(funSym), ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(Some(s)) =>
@@ -576,7 +582,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 "call_" + l.nme + "_res",
                 l.asBlkMember.map(c.uid -> _) // if `f` has a blockMemberSymbol, then record it
               )
-              for callee <- l.asBlkMember do callInfo.update(inDef, callee, c.uid)
+              for callee <- l.asBlkMember do callInfo.update(inDef, callee, c.uid, appRes._1.s)
               constrain(symToStrat.getStratOfSym(l), ConsFun(argsTpe, appRes._2))
               appRes._1
         case lam@Value.Lam(params, body) =>
@@ -734,10 +740,12 @@ class Deforest(using TL, Raise, Elaborator.State):
   
   // ======== after resolving constraints ======
   
-  def allUpperBoundsOf(k: StratVarId, cache: Set[StratVarId]): Set[ConsStrat] =
-    upperBounds(k).toSet.flatMap:
-      case u@ConsVar(s) if !cache.contains(s.uid) => allUpperBoundsOf(s.uid, cache + s.uid) + u
-      case u => Set(u)
+  def allUpperBoundsOf(k: StratVarId) =
+    def go(k: StratVarId, cache: Set[StratVarId]): Set[ConsStrat] =
+      upperBounds(k).toSet.flatMap:
+        case u@ConsVar(s) if !cache.contains(s.uid) => go(s.uid, cache + s.uid) + u
+        case u => Set(u)
+    go(k, Set.empty)
   
   lazy val findDefDupChances =
     val callResToCtorsCallsFlowingIntoThem =
@@ -753,7 +761,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       // if this is a obvious recursive call site, do not duplicate
       else if callInfo.isObviousRecursiveCall(callSiteId) then N
       else
-        val dtors = allUpperBoundsOf(v.uid, Set.empty).filter(c => c.isInstanceOf[Dtor])
+        val dtors = allUpperBoundsOf(v.uid).filter(c => c.isInstanceOf[Dtor])
         // if this call result is not consumed by any dtor, do not duplicate
         if dtors.size == 0 then N
         // if this call result is consumed by multiple dtors, do not duplicate because it's helpless
@@ -937,18 +945,31 @@ class Deforest(using TL, Raise, Elaborator.State):
     val newDefsArms = deforestTransformer.matchArms.getAllFunDefs
     newDefsArms(newDefsRest(rest))
 
-// this duplicator needs to deeply copy:
+// this duplicator needs to deeply copy, because
 // the ResultIds (related to ctor ids and match scrut ids) should not be messed up
-class DefDuplicator(newFunSym: BlockMemberSymbol)(using val d: Deforest, defDupTransformer: DefDupTransformer, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
+class DefDuplicator(newFunSym: BlockMemberSymbol, callSiteId: ResultId)(using val d: Deforest, defDupTransformer: DefDupTransformer, elabState: Elaborator.State) extends BlockTransformer(new SymbolSubst()):
   val argSubst = mutable.Map.empty[Symbol, VarSymbol]
   
   override def applyResult(r: Result): Result = r match
     case c@Call(f, args) if d.defDupMap.contains(r.uid) =>
       val newSym = d.defDupMap(r.uid)
-      defDupTransformer.newDefs.makeDefn(r.uid.getFunCallBlkMemSyn.get, newSym)
-      val args2 = args.mapConserve(applyArg)
+      defDupTransformer.newDefs.makeDefn(r.uid.getFunCallBlkMemSyn.get, newSym, c.uid)
+      val args2 = args.map(applyArg)
       Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
-    case c@Call(fun, args) => Call(applyPath(fun), args.map(applyArg))(c.isMlsFun, c.mayRaiseEffects)
+    case c@Call(fun, args) =>
+      val currentCallSiteResVar = d.callInfo.getCallSiteResultVar(c.uid)
+      val flowsIntoTheDuplicatedDef = currentCallSiteResVar.fold(false): v =>
+        val callerCallSiteStratVar = d.callInfo.getCallSiteResultVar(callSiteId).get
+        d.allUpperBoundsOf(v.uid).contains(callerCallSiteStratVar.asConsStrat)
+      val symOfFun = c.uid.getFunCallBlkMemSyn
+      symOfFun match
+        case Some(sym) if flowsIntoTheDuplicatedDef =>
+          // further duplicate this call site
+          val newSym = new BlockMemberSymbol(sym.nme + "_duplicated", Nil, true)
+          defDupTransformer.newDefs.makeDefn(sym, newSym, c.uid)
+          val args2 = args.map(applyArg)
+          Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
+        case _ => Call(applyPath(fun), args.map(applyArg))(c.isMlsFun, c.mayRaiseEffects)
     case Instantiate(cls, args) => Instantiate(applyPath(cls), args.map(applyPath))
     case p: Path => applyPath(p)
   
@@ -984,17 +1005,17 @@ class DefDupTransformer(using val d: Deforest, elabState: Elaborator.State) exte
   self =>
   object newDefs:
     val store = mutable.Map.empty[Symbol, FunDefn]
-    def makeDefn(oldS: BlockMemberSymbol, newS: BlockMemberSymbol): Unit = store.getOrElseUpdate.curried(newS):
+    def makeDefn(oldS: BlockMemberSymbol, newS: BlockMemberSymbol, callSiteId: ResultId): Unit = store.getOrElseUpdate.curried(newS):
       val originalDefn = d.funSymToFunDef(oldS)
       self.givenIn:
-        DefDuplicator(newS).applyFunDefn(originalDefn)
+        DefDuplicator(newS, callSiteId).applyFunDefn(originalDefn)
     def apply(b: Block) =
       store.values.toList.sortBy(_.sym.uid).foldRight(b)(Define(_, _))
   
   override def applyResult(r: Result): Result = r match
     case c@Call(f, args) if d.defDupMap.contains(r.uid) =>
       val newSym = d.defDupMap(r.uid)
-      newDefs.makeDefn(r.uid.getFunCallBlkMemSyn.get, newSym)
+      newDefs.makeDefn(r.uid.getFunCallBlkMemSyn.get, newSym, c.uid)
       val args2 = args.mapConserve(applyArg)
       Call(Value.Ref(newSym), args2)(true, c.mayRaiseEffects)
     case _ => super.applyResult(r)
