@@ -323,7 +323,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       // val defDuplicateInfo = findDefDupChances
       // DefDupTODO: do not use `output` from difftest here
       val numOfChances = findDefDupChances.size
-      if numOfChances > 0 then
+      val dupRes = if numOfChances > 0 then
         output("duplication chances:")
         findDefDupChances.foreach: (r, s) =>
           output(s"\t${r.getResult} <-- dup --> $s@${s.uid}")
@@ -331,6 +331,11 @@ class Deforest(using TL, Raise, Elaborator.State):
         val defDupper = new DefDupTransformer
         S(defDupper(p)) -> s"$numOfChances dup chances" -> numOfChances
       else N -> "no duplication chance" -> 0
+      
+      val newDeforest = new Deforest
+      val pAfterDup = if dupRes._2 > 0 then dupRes._1._1.get else p
+      newDeforest(pAfterDup, false, output)
+      
     // DefDupTODO: def dup: change later
     else
       // tl.log("-----------------------------------------")

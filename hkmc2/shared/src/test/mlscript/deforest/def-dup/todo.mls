@@ -40,10 +40,7 @@ f1(badWrap(4)) + f2(badWrap(5))
 //│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@941
 //│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@942
 //│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 10
-//│ 2 dup chances
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
 
 
 
@@ -64,12 +61,9 @@ f1(one) + f2(one) + f2(two)
 //│ one = A(1)
 //│ two = A(2)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@993
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@992
 //│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 9
-//│ 1 dup chances
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
 
 
 
@@ -91,14 +85,11 @@ fun test() =
 test()
 //│ = 5
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1055
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1055
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1056
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1053
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1053
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1054
 //│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 5
-//│ 3 dup chances
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
 
 
 
@@ -116,10 +107,7 @@ f1(p(1, clashed)) + f2(p(2, clashed))
 //│ = 4
 //│ clashed = A(3)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1099
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1100
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1096
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1097
 //│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 4
-//│ 2 dup chances
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
