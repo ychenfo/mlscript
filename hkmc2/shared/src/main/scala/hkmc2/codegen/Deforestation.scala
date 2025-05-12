@@ -335,7 +335,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       val newDeforest = new Deforest
       val pAfterDup = if dupRes._2 > 0 then dupRes._1._1.get else p
       
-      output("\n\n\n\n\nvvvvvvvvvvvvv\n dup done\n^^^^^^^^^^^^^^^^^\n\n\n\n\n\n\n\n")
+      // output("\n\n\n\n\nvvvvvvvvvvvvv\n dup done\n^^^^^^^^^^^^^^^^^\n\n\n\n\n\n\n\n")
       
       newDeforest(pAfterDup, false, output)
       
