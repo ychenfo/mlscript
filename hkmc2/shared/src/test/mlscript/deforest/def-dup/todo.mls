@@ -1,9 +1,7 @@
 :js
 :deforest
 
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ 0 fusion opportunity
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
 
 data class A(x)
 
@@ -39,13 +37,10 @@ fun badWrap(n) =
 f1(badWrap(4)) + f2(badWrap(5))
 //│ = 10
 //│ duplication chances:
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@938
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@939
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@941
+//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@942
 //│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 10
-//│ 0 fusion opportunity
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
 
 
 
@@ -66,12 +61,9 @@ f1(one) + f2(one) + f2(two)
 //│ one = A(1)
 //│ two = A(2)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1005
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1008
 //│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 9
-//│ 0 fusion opportunity
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
 
 
 
@@ -93,14 +85,11 @@ fun test() =
 test()
 //│ = 5
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1066
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1066
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1067
+//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1069
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1069
+//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1070
 //│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 5
-//│ 0 fusion opportunity
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
 
 
 
@@ -118,39 +107,10 @@ f1(p(1, clashed)) + f2(p(2, clashed))
 //│ = 4
 //│ clashed = A(3)
 //│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1109
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1110
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1112
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1113
 //│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 4
-//│ 0 fusion opportunity
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ No fusion opportunity
 
 
 
-
-// TODO: forget to not dup recursive calls
-:deforestDup
-fun to(n, acc) = if n == 0 then acc else to(n - 1, n :: acc)
-fun f1(ls, acc) = if ls is
-  Nil then acc
-  h :: t then f1(t, acc + h)
-fun f2(ls, acc) = if ls is
-  Nil then acc
-  h :: t then f2(t, acc + h + 1)
-f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
-//│ = 51
-//│ duplication chances:
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))), Arg(false,Ref(member:Nil)))) <-- dup --> member:to_duplicated@1184
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(6))), Arg(false,Ref(member:Nil)))) <-- dup --> member:to_duplicated@1184
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))), Arg(false,Ref(member:Nil)))) <-- dup --> member:to_duplicated@1185
-//│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ = 51
-//│ 5 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
