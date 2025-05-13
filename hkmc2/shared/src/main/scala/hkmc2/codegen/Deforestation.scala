@@ -761,7 +761,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           case (ctorCallId, CtorDest(callResVars = vs, _)) => vs.map(ctorCallId -> _)
         .groupBy(_._2)
     
-    def duplicatable(v: StratVarState): Opt[ResultId -> Symbol -> Dtor] =
+    def duplicatable(v: StratVarState): Opt[ResultId -> Symbol -> Dtor -> Bool] =
       val callSiteId -> calleeSym = v.callResOf.get
       // if this is the only call site, no reason to duplicate
       if callInfo.getAllCallSites(calleeSym).size == 1 then N
@@ -777,14 +777,14 @@ class Deforest(using TL, Raise, Elaborator.State):
           val dtor = dtors.head.asInstanceOf[Dtor]
           // it is a potential duplicate chance if the call res of a function
           // is consumed by the body of the same function
-          if dtor.inDef.fold(false)(_ is calleeSym) then S(callSiteId -> calleeSym -> dtor)
+          if dtor.inDef.fold(false)(_ is calleeSym) then S(callSiteId -> calleeSym -> dtor -> true)
           else
             // if all ctors flowing into this call res does not have a clash, no dup
             if callResToCtorsCallsFlowingIntoThem(v).forall: (ctorCallId, fnCallSite) =>
               val CtorDest(matches, sels, noCons, _) = ctorDests.get(ctorCallId).get
               !noCons && matches.size == 1
             then N
-            else S(callSiteId -> calleeSym -> dtor)
+            else S(callSiteId -> calleeSym -> dtor -> false)
     
     val allDuplicatableCallSites = ctorDests.ctorDests
       .flatMap:
@@ -795,15 +795,16 @@ class Deforest(using TL, Raise, Elaborator.State):
     
     allDuplicatableCallSites
       .groupBy:
-        case _ -> calleeSym -> dtor => calleeSym -> dtor
+        case _ -> calleeSym -> dtor -> isRecursive => calleeSym -> dtor
       .values
       .toList
-      .sortBy(x => callInfo.getCallSiteStableId(x.head._1._1))
+      .sortBy(x => callInfo.getCallSiteStableId(x.head._1._1._1))
       .flatMap: setOfCallSites =>
-        val sharedCalleeSym = setOfCallSites.head._1._2
+        // setOfCallSites.groupBy(_._2)
+        val sharedCalleeSym = setOfCallSites.head._1._1._2
         val newCalleeSym = new BlockMemberSymbol(sharedCalleeSym.nme + "_duplicated", Nil, true)
         setOfCallSites.map:
-          case callSiteId -> calleeSym -> _ =>
+          case callSiteId -> calleeSym -> _  -> _ =>
             assert(calleeSym is sharedCalleeSym)
             callSiteId -> newCalleeSym
     

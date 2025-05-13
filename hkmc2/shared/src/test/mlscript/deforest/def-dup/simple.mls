@@ -846,3 +846,22 @@ f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
 //│ 	Nil --match--> `if ls is ...`
 //│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// TODO: don't group two maps together
+:deforestDup
+fun map(ls, f) = if ls is
+  Nil then Nil
+  h :: t then f(h) :: map(t, f)
+fun succ(x) = x + 1
+fun double(x) = x * 2
+fun triple(x) = x * 3
+fun test() =
+  map(map(map(1 :: 2 :: Nil, succ), double), triple)
+test()
+//│ = Cons(12, Cons(18, Nil))
+//│ duplication chances:
+//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1750
+//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:double)))) <-- dup --> member:map_duplicated@1750
+//│ =========
+//│ No fusion opportunity
