@@ -848,20 +848,42 @@ f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-// TODO: don't group two maps together
+// // TODO: don't group two maps together
+// :deforestDup
+// fun map(ls, f) = if ls is
+//   Nil then Nil
+//   h :: t then f(h) :: map(t, f)
+// fun succ(x) = x + 1
+// fun double(x) = x * 2
+// fun triple(x) = x * 3
+// fun test() =
+//   map(map(map(1 :: 2 :: Nil, succ), double), triple)
+// test()
+// //│ = Cons(12, Cons(18, Nil))
+// //│ duplication chances:
+// //│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1750
+// //│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:double)))) <-- dup --> member:map_duplicated@1750
+// //│ =========
+// //│ No fusion opportunity
+
+
+
 :deforestDup
-fun map(ls, f) = if ls is
-  Nil then Nil
-  h :: t then f(h) :: map(t, f)
-fun succ(x) = x + 1
-fun double(x) = x * 2
-fun triple(x) = x * 3
+fun p(x) = A(x)
+fun f1(a1) = if a1 is A(a) then a + 1
+fun f2(a2) = if a2 is A(a) then a + 2
+fun wrap(a) = a
 fun test() =
-  map(map(map(1 :: 2 :: Nil, succ), double), triple)
+  f1(wrap(p(2))) + f2(p(1))
 test()
-//│ = Cons(12, Cons(18, Nil))
+//│ = 6
 //│ duplication chances:
-//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1750
-//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:double)))) <-- dup --> member:map_duplicated@1750
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1745
+//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1746
 //│ =========
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ = 6
+//│ 2 fusion opportunities:
+//│ 	A --match--> `if a1 is ...`
+//│ 	A --match--> `if a2 is ...`
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
