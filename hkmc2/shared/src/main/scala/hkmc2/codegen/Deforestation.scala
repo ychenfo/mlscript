@@ -117,10 +117,19 @@ case object NoProd extends ProdStrat
 class Dtor(val expr: Match, val outterMatch: Option[ResultId], val inDef: Option[BlockMemberSymbol])(using d: Deforest) extends ConsStrat:
   d.matchScrutToMatchBlock.updateWith(expr.scrut.uid):
     case None => Some(expr)
-    case Some(_) => lastWords(s"should only update once (uid: ${expr.scrut.uid})")
+    case Some(v) =>
+      // lastWords(s"should only update once (uid: ${expr.scrut.uid})")
+      assert(v is expr)
+      Some(expr)
   d.matchScrutToParentMatchScrut.updateWith(expr.scrut.uid):
     case None => Some(outterMatch)
-    case Some(_) => lastWords(s"should only update once (uid: ${expr.scrut.uid})")
+    case Some(v) =>
+      // lastWords(s"should only update once (uid: ${expr.scrut.uid})")
+      v match
+        case None => assert(outterMatch is None)
+        case Some(value) => assert(outterMatch.get is value)
+      Some(v)
+      
 object Dtor:
   def unapply(d: Dtor)(using Deforest): Opt[ResultId] = S(d.expr.scrut.uid)
     
