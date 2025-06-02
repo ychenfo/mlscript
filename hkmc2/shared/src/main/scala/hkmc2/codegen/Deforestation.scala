@@ -322,7 +322,16 @@ class GetCtorsTraverser(using Deforest) extends BlockTraverser:
         case Instantiate(cls, args) =>
           args.foreach(applyResult)
         case _ => ()
+
+// TODO: move more traversal of blocks that are irrelevant
+// to constraint generation to this place
+class DeforestPrepareTraverser(using d: Deforest) extends BlockTraverser:
+  override def applyFunDefn(fun: FunDefn): Unit =
+    val fDef@FunDefn(_, sym, params, body) = fun
+    d.funSymToFunDef += sym -> fDef
   
+  
+
 extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
     ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms).applyBlock(b)
@@ -346,6 +355,13 @@ class Deforest(using TL, Raise, Elaborator.State):
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
   val funSymToFunDef = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   
+  // def instantiate(referSite: ResultId): ProdStrat =
+  //   val funSym = referSite.getFunCallBlkMemSym.orElse:
+  //     referSite.getResult match
+  //       case sel: Select => sel.symbol.flatMap(_.asBlkMember)
+  //       case Value.Ref(l) => l.asBlkMember
+  //       case _ => N
+  
   def apply(p: Program, duplicate: Bool = false, output: String => Unit): Opt[Program] -> String -> Int =
     val mainBlk = p.main
     
@@ -354,6 +370,9 @@ class Deforest(using TL, Raise, Elaborator.State):
     // allocate type vars for defined symbols in the blocks
     symToStrat.init(mainBlk)
   
+    val prepare = new DeforestPrepareTraverser
+    prepare.applyBlock(mainBlk)
+    
     try
       processBlock(mainBlk)
     catch
@@ -464,7 +483,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         constrain(NoProd, store(funSymsWithoutDefn).asConsStrat)(using N)
       
     
-    def getStratOfSym(s: Symbol) =
+    def getStratOfSym(s: Symbol, refSite: ResultId) =
       s match
         case _: BuiltinSymbol => NoProd
         case _: TopLevelSymbol => NoProd
@@ -476,7 +495,13 @@ class Deforest(using TL, Raise, Elaborator.State):
         // it means that this constructor is passed around like a function,
         // which we can't fuse for now
         case _ if s.asCls.isDefined => NoProd
-        case _: BlockMemberSymbol => store(s)
+        case s: BlockMemberSymbol =>
+          val res = store(s)
+          if s.trmImplTree.fold(false)(_.k is syntax.Fun) then
+            res.instantiate(refSite)
+          else
+            res
+          
         case _: LocalSymbol => store(s)
     def +=(e: Symbol -> ProdVar) = store += e
     def addAll(es: Iterable[Symbol -> ProdVar]) = store.addAll(es)
@@ -489,6 +514,16 @@ class Deforest(using TL, Raise, Elaborator.State):
     val store = mutable.Map.empty[BlockMemberSymbol, Ls[ProdStrat -> ConsStrat]]
     def get = store.get
     def updateWith = store.updateWith
+    def getOrUpdate(sym: BlockMemberSymbol) =
+      store.getOrElse.curried(sym):
+        val fDef@FunDefn(_, _, params, body) = funSymToFunDef(sym)
+        val funSymStratVar = symToStrat(sym)
+        val param = params match
+          // TODO: handle `restParam` and mutiple param list
+          case ParamList(flags, params, N) :: Nil => params
+        val funStrat = constrFun(param, body)(using Map.empty, mutable.LinkedHashMap.empty, S(sym))
+        constrain(funStrat, funSymStratVar.asConsStrat)(using S(sym))
+        store.get(sym).get
     
   def constrain(p: ProdStrat, c: ConsStrat)(using inDef: Opt[BlockMemberSymbol]) =
     inDef.foreach: i =>
@@ -572,8 +607,8 @@ class Deforest(using TL, Raise, Elaborator.State):
       processBlock(rest)
     case Define(defn, rest) =>
       defn match
-        case fDef@FunDefn(_, sym, params, body) =>
-          funSymToFunDef += sym -> fDef
+        case fDef@FunDefn(_, sym, params, body) if !inDefConstraints.store.contains(sym) =>
+          // funSymToFunDef += sym -> fDef
           val funSymStratVar = symToStrat(sym)
           val param = params match
             // TODO: handle `restParam` and mutiple param list
@@ -630,7 +665,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 inDef
               )
               for callee <- s.symbol.flatMap(_.asBlkMember) do callInfo.update(inDef, callee, c.uid, appRes._1.s)
-              constrain(symToStrat.getStratOfSym(funSym), ConsFun(argsTpe, appRes._2))
+              constrain(symToStrat.getStratOfSym(funSym, r.uid), ConsFun(argsTpe, appRes._2))
               appRes._1
             case Some(Some(s)) =>
               val clsFields = getClsFields(s)
@@ -647,7 +682,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 inDef
               )
               for callee <- l.asBlkMember do callInfo.update(inDef, callee, c.uid, appRes._1.s)
-              constrain(symToStrat.getStratOfSym(l), ConsFun(argsTpe, appRes._2))
+              constrain(symToStrat.getStratOfSym(l, r.uid), ConsFun(argsTpe, appRes._2))
               appRes._1
         case lam@Value.Lam(params, body) =>
           val funTpe = processResult(lam)
@@ -681,7 +716,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             tpeVar._1
             
     case v@Value.Ref(l) => l.asObj match
-      case None => symToStrat.getStratOfSym(l)
+      case None => symToStrat.getStratOfSym(l, r.uid)
       case Some(m) => Ctor(m, Map.empty, v.uid, N)(inDef)
     
     case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
