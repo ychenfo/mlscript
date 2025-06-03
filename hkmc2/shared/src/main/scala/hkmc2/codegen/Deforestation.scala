@@ -14,48 +14,7 @@ type StratVar
 type StratVarId = Uid[StratVar]
 type ClsOrModSymbol = ClassLikeSymbol
 
-sealed abstract class ProdStrat:
-  def instantiate(referSite: ResultId)(using d: Deforest): ProdStrat =
-    val funSym = referSite.getFunCallBlkMemSym.orElse:
-      referSite.getResult match
-        case sel: Select => sel.symbol.flatMap(_.asBlkMember)
-        case Value.Ref(l) => l.asBlkMember
-        case _ => N
-    funSym match
-      case None => this
-      case Some(funSym) =>
-        val constr = d.inDefConstraints.get(funSym)
-        constr match
-          case None => this
-          case Some(constrLs) =>
-            val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
-            def duplicateVarState(s: StratVarState) =
-              stratVarMap.getOrElseUpdate.curried(s):
-                StratVarState.freshVar(s.name, s.callResOf, s.inDef, s.funRetOrArg)(using d.stratVarUidState)._1.s
-            def duplicateProdStrat(s: ProdStrat): ProdStrat = s match
-              case c@Ctor(ctor, args, expr, instId) => Ctor(ctor, args.view.mapValues(duplicateProdStrat).toMap, expr, instId.map(referSite :: _))(c.inDef)
-              case ProdFun(l, r) => ProdFun(l.map(duplicateConsStrat), duplicateProdStrat(r))
-              case p@ProdVar(s) =>
-                if s.inDef === S(funSym) then
-                  duplicateVarState(s).asProdStrat
-                else p
-              case NoProd => NoProd
-            def duplicateConsStrat(s: ConsStrat): ConsStrat = s match
-              case d: Dtor => Dtor(d.expr, d.outterMatch, d.inDef)
-              case s@FieldSel(expr, inMatching) => FieldSel(expr, inMatching)(s.expr, s.inMatching)
-              case ConsFun(l, r) => ConsFun(l.map(duplicateProdStrat), duplicateConsStrat(r))
-              case c@ConsVar(s) =>
-                if s.inDef === S(funSym) then
-                  duplicateVarState(s).asConsStrat
-                else c
-              case NoCons => NoCons
-            
-            val newProd = duplicateProdStrat(this)
-            constrLs.foreach:
-              case p -> c =>
-                d.constraints ::= (duplicateProdStrat(p) -> duplicateConsStrat(c))
-            newProd
-
+sealed abstract class ProdStrat
 sealed abstract class ConsStrat
 
 class StratVarState(val uid: StratVarId, val name: Str, val funRetOrArg: Opt[Either[BlockMemberSymbol, BlockMemberSymbol]], val callResOf: Opt[ResultId -> Symbol], val inDef: Opt[BlockMemberSymbol]):
@@ -108,8 +67,49 @@ extension (i: ResultId)
 //  - Some(ls): non-top-level
 case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: ResultId, instantiationId: Opt[Ls[ResultId]])(val inDef: Opt[BlockMemberSymbol]) extends ProdStrat
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
-    
-case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s)
+
+case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s):
+  def instantiate(referSite: ResultId)(using d: Deforest): ProdStrat =
+    val funSym = referSite.getFunCallBlkMemSym.orElse:
+      referSite.getResult match
+        case sel: Select => sel.symbol.flatMap(_.asBlkMember)
+        case Value.Ref(l) => l.asBlkMember
+        case _ => N
+    funSym match
+      case None => this
+      case Some(funSym) =>
+        val constr = d.inDefConstraints.get(funSym)
+        constr match
+          case None => this
+          case Some(constrLs) =>
+            val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
+            def duplicateVarState(s: StratVarState) =
+              stratVarMap.getOrElseUpdate.curried(s):
+                StratVarState.freshVar(s.name, s.callResOf, s.inDef, s.funRetOrArg)(using d.stratVarUidState)._1.s
+            def duplicateProdStrat(s: ProdStrat): ProdStrat = s match
+              case c@Ctor(ctor, args, expr, instId) => Ctor(ctor, args.view.mapValues(duplicateProdStrat).toMap, expr, instId.map(referSite :: _))(c.inDef)
+              case ProdFun(l, r) => ProdFun(l.map(duplicateConsStrat), duplicateProdStrat(r))
+              case p@ProdVar(s) =>
+                if s.inDef === S(funSym) || (p.s is this.s) then
+                  duplicateVarState(s).asProdStrat
+                else p
+              case NoProd => NoProd
+            def duplicateConsStrat(s: ConsStrat): ConsStrat = s match
+              case d: Dtor => Dtor(d.expr, d.outterMatch, d.inDef)
+              case s@FieldSel(expr, inMatching) => FieldSel(expr, inMatching)(s.expr, s.inMatching)
+              case ConsFun(l, r) => ConsFun(l.map(duplicateProdStrat), duplicateConsStrat(r))
+              case c@ConsVar(s) =>
+                if s.inDef === S(funSym) || (c.s is this.s) then
+                  duplicateVarState(s).asConsStrat
+                else c
+              case NoCons => NoCons
+            
+            val newProd = duplicateProdStrat(this)
+            constrLs.foreach:
+              case p -> c =>
+                d.constraints ::= (duplicateProdStrat(p) -> duplicateConsStrat(c))
+            newProd
+
 case object NoProd extends ProdStrat
 
 
@@ -414,8 +414,11 @@ class Deforest(using TL, Raise, Elaborator.State):
       
     // DefDupTODO: def dup: change later
     else
-      // tl.log("-----------------------------------------")
-      // upperBounds.foreach: (v, u) =>
+      // upperBounds.foreach:
+        // case (v, u) => v 
+      tl.log("-----------------------------------------")
+      constraints.foreach:
+        case (p, c) => tl.log(s"${p} --> $c")
         
       tl.log("-----------------------------------------")
       ctorDests.ctorDests.foreach:
