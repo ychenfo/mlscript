@@ -88,7 +88,13 @@ case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s):
           stratVarMap.getOrElseUpdate.curried(s):
             StratVarState.freshVar(s.name, s.callResOf, s.inDef, s.funRetOrArg)(using d.stratVarUidState)._1.s
         def duplicateProdStrat(s: ProdStrat): ProdStrat = s match
-          case c@Ctor(ctor, args, expr, instId) => Ctor(ctor, args.view.mapValues(duplicateProdStrat).toMap, expr, instId.map(referSite :: _))(c.inDef)
+          case c@Ctor(ctor, args, expr, instId) => Ctor(
+              ctor,
+              args.view.mapValues(duplicateProdStrat).toMap,
+              expr,
+              instId.fold(Some(referSite :: Nil))(l => Some(referSite :: l))
+              // instId.map(referSite :: _)
+            )(c.inDef)
           case ProdFun(l, r) => ProdFun(l.map(duplicateConsStrat), duplicateProdStrat(r))
           case p@ProdVar(s) =>
             if s.inDef === S(funSym) || (p.s is this.s) then
