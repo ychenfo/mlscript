@@ -82,6 +82,7 @@ case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s):
         constr match
           case None => this
           case Some(constrLs) =>
+            // println(s"instantiate: $funSym @ ${referSite.getResult} : ${constrLs}")
             val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
             def duplicateVarState(s: StratVarState) =
               stratVarMap.getOrElseUpdate.curried(s):
@@ -383,7 +384,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     prepare.applyBlock(mainBlk)
     
     try
-      processBlock(mainBlk)
+      processBlock(mainBlk)(using true)
     catch
       case NotDeforestableException(msg) =>
         // return None if deforestation is not applicable
@@ -492,7 +493,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         FreshVarForAllVars.applyBlock(p)
       // `NoProd` to block fusion for those functions that are imported from elsewhere
       usedFunSym.diff(funSymsWithDefn).foreach: funSymsWithoutDefn =>
-        constrain(NoProd, store(funSymsWithoutDefn).asConsStrat)(using N)
+        constrain(NoProd, store(funSymsWithoutDefn).asConsStrat, true)(using N)
       
     
     def getStratOfSym(s: Symbol, refSite: ResultId) =
@@ -534,15 +535,16 @@ class Deforest(using TL, Raise, Elaborator.State):
           // TODO: handle `restParam` and mutiple param list
           case ParamList(flags, params, N) :: Nil => params
         val funStrat = constrFun(param, body)(using Map.empty, mutable.LinkedHashMap.empty, S(sym))
-        constrain(funStrat, funSymStratVar.asConsStrat)(using S(sym))
+        constrain(funStrat, funSymStratVar.asConsStrat, false)(using S(sym))
         store.get(sym).get
     
-  def constrain(p: ProdStrat, c: ConsStrat)(using inDef: Opt[BlockMemberSymbol]) =
+  def constrain(p: ProdStrat, c: ConsStrat, addToConstrList: Bool)(using inDef: Opt[BlockMemberSymbol]) =
     inDef.foreach: i =>
       inDefConstraints.updateWith(i):
         case None => Some((p -> c) :: Nil)
         case Some(value) => Some((p -> c) :: value)
-    constraints ::= p -> c
+    if addToConstrList then
+      constraints ::= p -> c
   
   object callInfo:
     val callerToCallSitesInside = mutable.Map.empty[Symbol, Ls[ResultId -> Symbol]]
@@ -583,18 +585,20 @@ class Deforest(using TL, Raise, Elaborator.State):
         
   
   def processBlock(b: Block)(using
+    addToConstrList: Bool,
     inArm: Map[ProdVar, ClsOrModSymbol] = Map.empty[ProdVar, ClsOrModSymbol],
     matching: LinkedHashMap[ResultId, ClsOrModSymbol] = LinkedHashMap.empty[ResultId, ClsOrModSymbol],
     inDef: Opt[BlockMemberSymbol] = N
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
-      constrain(scrutStrat, Dtor(m, matching.lastOption.map(_._1), inDef))
+      constrain(scrutStrat, Dtor(m, matching.lastOption.map(_._1), inDef), addToConstrList)
       val armsRes = if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
         arms.map:
           case (Case.Cls(s, _), body) => 
-            processBlock(body)(
-              using inArm + (scrutStrat.asInstanceOf[ProdVar] -> s),
+            processBlock(body)(using
+              addToConstrList,
+              inArm + (scrutStrat.asInstanceOf[ProdVar] -> s),
               matching + (scrut.uid -> s),
               inDef
             )
@@ -606,13 +610,13 @@ class Deforest(using TL, Raise, Elaborator.State):
         case End(msg) =>
           val matchRes = freshVar("", N, inDef)
           armsRes.appendedAll(dfltRes).foreach: r =>
-            constrain(r, matchRes._2)
+            constrain(r, matchRes._2, addToConstrList)
           matchRes._1
         case _ => processBlock(rest)
 
     case Return(res, implct) => processResult(res)
     case Assign(lhs, rhs, rest) =>
-      constrain(processResult(rhs), symToStrat(lhs).asConsStrat)
+      constrain(processResult(rhs), symToStrat(lhs).asConsStrat, addToConstrList)
       processBlock(rest)
     case Begin(sub, rest) =>
       processBlock(sub)
@@ -626,7 +630,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             // TODO: handle `restParam` and mutiple param list
             case ParamList(flags, params, N) :: Nil => params
           val funStrat = constrFun(param, body)(using inArm, matching, S(sym))
-          constrain(funStrat, funSymStratVar.asConsStrat)(using S(sym))
+          constrain(funStrat, funSymStratVar.asConsStrat, false)(using S(sym))
           funSymStratVar
         case v: ValDefn => throw NotDeforestableException("No support for `ValDefn` yet")
         case c: ClsLikeDefn => throw NotDeforestableException("No support for `ClsLikeDefn` yet")
@@ -649,10 +653,11 @@ class Deforest(using TL, Raise, Elaborator.State):
     val paramStrats = paramSyms.map(symToStrat.apply)
     // symToStrat.addAll(paramSyms.zip(paramStrats))
     val res = freshVar(s"${inDef.fold("")(_.nme + "_")}fun_res", N, inDef, inDef.map(L.apply))
-    constrain(processBlock(body), res._2)
+    constrain(processBlock(body)(using false, inArm, matching, inDef), res._2, false)
     ProdFun(paramStrats.map(s => s.asConsStrat), res._1)
   
   def processResult(r: Result)(using
+    addToConstrList: Bool,
     inArm: Map[ProdVar, ClsOrModSymbol],
     matching: LinkedHashMap[ResultId, ClsOrModSymbol],
     inDef: Opt[BlockMemberSymbol]
@@ -665,9 +670,9 @@ class Deforest(using TL, Raise, Elaborator.State):
             case None =>
               val pStrat = processResult(p)
               val tpeVar = freshVar("", N, inDef)
-              constrain(pStrat, FieldSel(nme, tpeVar._2)(s.uid, matching))
+              constrain(pStrat, FieldSel(nme, tpeVar._2)(s.uid, matching), addToConstrList)
               val appRes = freshVar("", N, inDef) // unknown function symbol
-              constrain(tpeVar._1, ConsFun(argsTpe, appRes._2))
+              constrain(tpeVar._1, ConsFun(argsTpe, appRes._2), addToConstrList)
               appRes._1
             case Some(None) =>
               val funSym = s.symbol.get
@@ -677,7 +682,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 inDef
               )
               for callee <- s.symbol.flatMap(_.asBlkMember) do callInfo.update(inDef, callee, c.uid, appRes._1.s)
-              constrain(symToStrat.getStratOfSym(funSym, r.uid), ConsFun(argsTpe, appRes._2))
+              constrain(symToStrat.getStratOfSym(funSym, r.uid), ConsFun(argsTpe, appRes._2), addToConstrList)
               appRes._1
             case Some(Some(s)) =>
               val clsFields = getClsFields(s)
@@ -694,12 +699,12 @@ class Deforest(using TL, Raise, Elaborator.State):
                 inDef
               )
               for callee <- l.asBlkMember do callInfo.update(inDef, callee, c.uid, appRes._1.s)
-              constrain(symToStrat.getStratOfSym(l, r.uid), ConsFun(argsTpe, appRes._2))
+              constrain(symToStrat.getStratOfSym(l, r.uid), ConsFun(argsTpe, appRes._2), addToConstrList)
               appRes._1
         case lam@Value.Lam(params, body) =>
           val funTpe = processResult(lam)
           val appRes = freshVar("call_lam_res", N, inDef)
-          constrain(funTpe, ConsFun(argsTpe, appRes._2))
+          constrain(funTpe, ConsFun(argsTpe, appRes._2), addToConstrList)
           appRes._1
         
         case Value.This(sym) => throw NotDeforestableException("No support for `this` as a callee yet")
@@ -720,11 +725,11 @@ class Deforest(using TL, Raise, Elaborator.State):
             val tpeVar = freshVar("", N, inDef)
             val selStrat = FieldSel(nme, tpeVar._2)(sel.uid, matching)
             selStrat.updateFilter(pStratVar.asProdStrat, inArm(pStratVar.asProdStrat) :: Nil)
-            constrain(pStrat, selStrat)
+            constrain(pStrat, selStrat, addToConstrList)
             tpeVar._1
           case _ =>
             val tpeVar = freshVar("", N, inDef)
-            constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid, matching))
+            constrain(pStrat, FieldSel(nme, tpeVar._2)(sel.uid, matching), addToConstrList)
             tpeVar._1
             
     case v@Value.Ref(l) => l.asObj match
