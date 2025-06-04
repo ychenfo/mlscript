@@ -365,7 +365,13 @@ extension (b: Block)
   
   def willBeNonEndTailBlock(using d: Deforest): Bool =
     WillBeNonEndTailBlockTraverser().analyze(b)
-    
+
+
+type CtorExprAndInstId = ResultId -> Opt[Ls[ResultId]]
+extension (c: CtorExprAndInstId)
+  def getResult(using Deforest): Result = c._1.getResult
+  def getClsSymOfUid(using Deforest): ClassLikeSymbol = c._1.getClsSymOfUid
+
 class Deforest(using TL, Raise, Elaborator.State):
   
   given stratVarUidState: Uid.StratVar.State = Uid.StratVar.State()
@@ -758,22 +764,22 @@ class Deforest(using TL, Raise, Elaborator.State):
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   
   case class CtorDest(matches: Map[ResultId, Match], sels: Ls[FieldSel], noCons: Bool, callResVars: Ls[StratVarState])
-  case class DtorSource(ctors: Set[ResultId], noProd: Bool)
+  case class DtorSource(ctors: Set[CtorExprAndInstId], noProd: Bool)
   object ctorDests:
-    val ctorDests = mutable.LinkedHashMap.empty[ResultId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil, false, Nil))
-    def update(ctor: ResultId, m: Match) = ctorDests.updateWith(ctor):
+    val ctorDests = mutable.LinkedHashMap.empty[CtorExprAndInstId, CtorDest].withDefaultValue(CtorDest(Map.empty, Nil, false, Nil))
+    def update(ctor: CtorExprAndInstId, m: Match) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons, vars)) => Some(CtorDest(matches + (m.scrut.uid -> m), sels, noCons, vars))
       case None => Some(CtorDest(Map(m.scrut.uid -> m), Nil, false, Nil))
-    def update(ctor: ResultId, s: FieldSel) = ctorDests.updateWith(ctor):
+    def update(ctor: CtorExprAndInstId, s: FieldSel) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons, vars)) => Some(CtorDest(matches, s :: sels, noCons, vars))
       case None => Some(CtorDest(Map.empty, s :: Nil, false, Nil))
-    def update(ctor: ResultId, n: NoCons.type) = ctorDests.updateWith(ctor):
+    def update(ctor: CtorExprAndInstId, n: NoCons.type) = ctorDests.updateWith(ctor):
       case Some(CtorDest(matches, sels, noCons, vars)) => Some(CtorDest(matches, sels, true, vars))
       case None => Some(CtorDest(Map.empty, Nil, true, Nil))
-    def update(ctor: ResultId, v: StratVarState) = ctorDests.updateWith(ctor):
+    def update(ctor: CtorExprAndInstId, v: StratVarState) = ctorDests.updateWith(ctor):
       case Some(dests) => Some(dests.copy(callResVars = v :: dests.callResVars))
       case None => Some(CtorDest(Map.empty, Nil, false, v :: Nil))
-    def get(ctor: ResultId) = ctorDests.get(ctor)
+    def get(ctor: CtorExprAndInstId) = ctorDests.get(ctor)
   
   object dtorSources:
     val dtorSources = mutable.Map.empty[DtorExpr, DtorSource].withDefaultValue(DtorSource(Set.empty, false))
@@ -781,7 +787,7 @@ class Deforest(using TL, Raise, Elaborator.State):
       case s: Select => DtorExpr.Sel(i)
       case r: Value.Ref => DtorExpr.Match(i)
       case r => lastWords(s"try to get dtor expr from ResultId, but get $r")
-    def update(dtor: ResultId, ctor: ResultId) =
+    def update(dtor: ResultId, ctor: CtorExprAndInstId) =
       val dtorExpr = getDtorExprOfResultId(dtor)
       dtorSources.updateWith(dtorExpr):
         case None => Some(DtorSource(Set(ctor), false))
@@ -806,12 +812,12 @@ class Deforest(using TL, Raise, Elaborator.State):
       cache += c
       
       (prod, cons) match
-        case (Ctor(ctor, args, expr, _), dtorStrat@Dtor(scrut)) =>
-          ctorDests.update(expr, dtorStrat.expr)
-          dtorSources.update(scrut, expr)
-        case (Ctor(ctor, args, expr, _), selDtor@FieldSel(field, consVar)) =>
-          ctorDests.update(expr, selDtor)
-          dtorSources.update(selDtor.expr, expr)
+        case (Ctor(ctor, args, expr, instId), dtorStrat@Dtor(scrut)) =>
+          ctorDests.update(expr -> instId, dtorStrat.expr)
+          dtorSources.update(scrut, expr -> instId)
+        case (Ctor(ctor, args, expr, instId), selDtor@FieldSel(field, consVar)) =>
+          ctorDests.update(expr -> instId, selDtor)
+          dtorSources.update(selDtor.expr, expr -> instId)
           args.find(a => a._1.id == field).map: p =>
             handle(p._2 -> consVar)
         case (Ctor(ctor, args, _, _), ConsFun(l, r)) => () // ignore
@@ -831,7 +837,7 @@ class Deforest(using TL, Raise, Elaborator.State):
               case _ => handle(l -> cons)
         case (_, c: ConsVar) =>
           prod -> c match
-            case Ctor(expr = e, _) -> _ if c.s.callResOf.isDefined => ctorDests.update(e, c.s)
+            case Ctor(expr = e, instantiationId = instId, _) -> _ if c.s.callResOf.isDefined => ctorDests.update(e -> instId, c.s)
             case _ => ()
           
           lowerBounds += c.uid -> (prod :: lowerBounds(c.uid))
@@ -844,8 +850,8 @@ class Deforest(using TL, Raise, Elaborator.State):
                   ()
               case (_: ProdVar, _) => die
               case _ => handle(prod -> u)
-        case (Ctor(ctor, args, expr, _), NoCons) =>
-          ctorDests.update(expr, NoCons)
+        case (Ctor(ctor, args, expr, instId), NoCons) =>
+          ctorDests.update(expr -> instId, NoCons)
           args.valuesIterator.foreach(a => handle(a, NoCons))
         case (ProdFun(l, r), Dtor(cls)) => () // ignore
         case (ProdFun(l, r), FieldSel(field, consVar)) => () // ignore
@@ -877,7 +883,7 @@ class Deforest(using TL, Raise, Elaborator.State):
   lazy val findDefDupChances =
     val callResToCtorsCallsFlowingIntoThem =
       ctorDests.ctorDests
-        .flatMap[ResultId -> StratVarState]:
+        .flatMap[CtorExprAndInstId -> StratVarState]:
           case (ctorCallId, CtorDest(callResVars = vs, _)) => vs.map(ctorCallId -> _)
         .groupBy(_._2)
     
@@ -937,7 +943,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     val ctorToDtor = ctorDests.ctorDests
     val dtorToCtor = dtorSources.dtorSources
     
-    def removeCtor(rm: ResultId): Unit =
+    def removeCtor(rm: CtorExprAndInstId): Unit =
       for CtorDest(mat, sels, _, _) <- ctorToDtor.remove(rm) do
         for s <- mat.keys do removeDtor(DtorExpr.Match(s))
         for s <- sels do removeDtor(DtorExpr.Sel(s.expr))
@@ -992,7 +998,7 @@ class Deforest(using TL, Raise, Elaborator.State):
     for
       (c, CtorDest(matches, sels, _, _)) <- ctorToDtor
       m <- matches.values
-      x <- findCycle(c, m)
+      x <- findCycle(c._1, m)
     do removeCtor(x)
 
     ctorToDtor -> dtorToCtor
