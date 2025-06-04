@@ -69,7 +69,7 @@ case class Ctor(ctor: ClsOrModSymbol, args: Map[TermSymbol, ProdStrat], expr: Re
 case class ProdFun(l: Ls[ConsStrat], r: ProdStrat) extends ProdStrat
 
 case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s):
-  def instantiate(referSite: ResultId)(using d: Deforest): ProdStrat =
+  def instantiate(referSite: ResultId, inDef: Opt[BlockMemberSymbol])(using d: Deforest): ProdStrat =
     val funSym = referSite.getFunCallBlkMemSym.orElse:
       referSite.getResult match
         case sel: Select => sel.symbol.flatMap(_.asBlkMember)
@@ -78,38 +78,43 @@ case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s):
     funSym match
       case None => this
       case Some(funSym) =>
-        val constr = d.inDefConstraints.get(funSym)
-        constr match
-          case None => this
-          case Some(constrLs) =>
-            // println(s"instantiate: $funSym @ ${referSite.getResult} : ${constrLs}")
-            val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
-            def duplicateVarState(s: StratVarState) =
-              stratVarMap.getOrElseUpdate.curried(s):
-                StratVarState.freshVar(s.name, s.callResOf, s.inDef, s.funRetOrArg)(using d.stratVarUidState)._1.s
-            def duplicateProdStrat(s: ProdStrat): ProdStrat = s match
-              case c@Ctor(ctor, args, expr, instId) => Ctor(ctor, args.view.mapValues(duplicateProdStrat).toMap, expr, instId.map(referSite :: _))(c.inDef)
-              case ProdFun(l, r) => ProdFun(l.map(duplicateConsStrat), duplicateProdStrat(r))
-              case p@ProdVar(s) =>
-                if s.inDef === S(funSym) || (p.s is this.s) then
-                  duplicateVarState(s).asProdStrat
-                else p
-              case NoProd => NoProd
-            def duplicateConsStrat(s: ConsStrat): ConsStrat = s match
-              case d: Dtor => Dtor(d.expr, d.outterMatch, d.inDef)
-              case s@FieldSel(expr, inMatching) => FieldSel(expr, inMatching)(s.expr, s.inMatching)
-              case ConsFun(l, r) => ConsFun(l.map(duplicateProdStrat), duplicateConsStrat(r))
-              case c@ConsVar(s) =>
-                if s.inDef === S(funSym) || (c.s is this.s) then
-                  duplicateVarState(s).asConsStrat
-                else c
-              case NoCons => NoCons
-            
-            val newProd = duplicateProdStrat(this)
-            constrLs.foreach:
-              case p -> c =>
-                d.constraints ::= (duplicateProdStrat(p) -> duplicateConsStrat(c))
-            newProd
+        val constrLs = d.inDefConstraints.getOrUpdate(funSym)
+        // constr match
+        //   case None => this
+        //   case Some(constrLs) =>
+        println(s"instantiate: $funSym @ ${referSite.getResult} : ${constrLs}")
+        val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
+        def duplicateVarState(s: StratVarState) =
+          stratVarMap.getOrElseUpdate.curried(s):
+            StratVarState.freshVar(s.name, s.callResOf, s.inDef, s.funRetOrArg)(using d.stratVarUidState)._1.s
+        def duplicateProdStrat(s: ProdStrat): ProdStrat = s match
+          case c@Ctor(ctor, args, expr, instId) => Ctor(ctor, args.view.mapValues(duplicateProdStrat).toMap, expr, instId.map(referSite :: _))(c.inDef)
+          case ProdFun(l, r) => ProdFun(l.map(duplicateConsStrat), duplicateProdStrat(r))
+          case p@ProdVar(s) =>
+            if s.inDef === S(funSym) || (p.s is this.s) then
+              duplicateVarState(s).asProdStrat
+            else p
+          case NoProd => NoProd
+        def duplicateConsStrat(s: ConsStrat): ConsStrat = s match
+          case d: Dtor => Dtor(d.expr, d.outterMatch, d.inDef)
+          case s@FieldSel(expr, inMatching) => FieldSel(expr, inMatching)(s.expr, s.inMatching)
+          case ConsFun(l, r) => ConsFun(l.map(duplicateProdStrat), duplicateConsStrat(r))
+          case c@ConsVar(s) =>
+            if s.inDef === S(funSym) || (c.s is this.s) then
+              duplicateVarState(s).asConsStrat
+            else c
+          case NoCons => NoCons
+        
+        val newProd = duplicateProdStrat(this)
+        constrLs.foreach:
+          case p -> c =>
+            val constr = duplicateProdStrat(p) -> duplicateConsStrat(c)
+            d.constraints ::= constr
+            inDef.foreach: inFunDef =>
+              d.inDefConstraints.updateWith(inFunDef):
+                case S(ls) => S(constr :: ls)
+                case N => S(constr :: Nil)
+        newProd
 
 case object NoProd extends ProdStrat
 
@@ -496,7 +501,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         constrain(NoProd, store(funSymsWithoutDefn).asConsStrat, true)(using N)
       
     
-    def getStratOfSym(s: Symbol, refSite: ResultId) =
+    def getStratOfSym(s: Symbol, refSite: ResultId, inDef: Option[BlockMemberSymbol]) =
       s match
         case _: BuiltinSymbol => NoProd
         case _: TopLevelSymbol => NoProd
@@ -511,7 +516,7 @@ class Deforest(using TL, Raise, Elaborator.State):
         case s: BlockMemberSymbol =>
           val res = store(s)
           if s.trmImplTree.fold(false)(_.k is syntax.Fun) then
-            res.instantiate(refSite)
+            res.instantiate(refSite, inDef)
           else
             res
           
@@ -682,7 +687,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 inDef
               )
               for callee <- s.symbol.flatMap(_.asBlkMember) do callInfo.update(inDef, callee, c.uid, appRes._1.s)
-              constrain(symToStrat.getStratOfSym(funSym, r.uid), ConsFun(argsTpe, appRes._2), addToConstrList)
+              constrain(symToStrat.getStratOfSym(funSym, r.uid, inDef), ConsFun(argsTpe, appRes._2), addToConstrList)
               appRes._1
             case Some(Some(s)) =>
               val clsFields = getClsFields(s)
@@ -699,7 +704,7 @@ class Deforest(using TL, Raise, Elaborator.State):
                 inDef
               )
               for callee <- l.asBlkMember do callInfo.update(inDef, callee, c.uid, appRes._1.s)
-              constrain(symToStrat.getStratOfSym(l, r.uid), ConsFun(argsTpe, appRes._2), addToConstrList)
+              constrain(symToStrat.getStratOfSym(l, r.uid, inDef), ConsFun(argsTpe, appRes._2), addToConstrList)
               appRes._1
         case lam@Value.Lam(params, body) =>
           val funTpe = processResult(lam)
@@ -733,7 +738,7 @@ class Deforest(using TL, Raise, Elaborator.State):
             tpeVar._1
             
     case v@Value.Ref(l) => l.asObj match
-      case None => symToStrat.getStratOfSym(l, r.uid)
+      case None => symToStrat.getStratOfSym(l, r.uid, inDef)
       case Some(m) => Ctor(m, Map.empty, v.uid, N)(inDef)
     
     case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
