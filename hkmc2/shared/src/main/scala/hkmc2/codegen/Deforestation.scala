@@ -116,11 +116,12 @@ case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s):
         constrLs.foreach:
           case p -> c =>
             val constr = duplicateProdStrat(p) -> duplicateConsStrat(c)
-            d.constraints ::= constr
-            inDef.foreach: inFunDef =>
-              d.inDefConstraints.updateWith(inFunDef):
-                case S(ls) => S(constr :: ls)
-                case N => S(constr :: Nil)
+            inDef match
+              case None => d.constraints ::= constr
+              case Some(inFunDef) =>
+                d.inDefConstraints.updateWith(inFunDef):
+                  case S(ls) => S(constr :: ls)
+                  case N => S(constr :: Nil)
         newProd
 
 case object NoProd extends ProdStrat
