@@ -86,7 +86,8 @@ case class ProdVar(s: StratVarState) extends ProdStrat with StratVarTrait(s):
         val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
         def duplicateVarState(s: StratVarState) =
           stratVarMap.getOrElseUpdate.curried(s):
-            StratVarState.freshVar(s.name, s.callResOf, s.inDef, s.funRetOrArg)(using d.stratVarUidState)._1.s
+            // update `inDef` because the new strat var is considered to be generated inside the new definition
+            StratVarState.freshVar(s.name, s.callResOf, inDef, s.funRetOrArg)(using d.stratVarUidState)._1.s
         def duplicateProdStrat(s: ProdStrat): ProdStrat = s match
           case c@Ctor(ctor, args, expr, instId) => Ctor(
               ctor,
@@ -969,40 +970,98 @@ class Deforest(using TL, Raise, Elaborator.State):
     dtorToCtor.filter(_._2.noProd).keys.foreach(removeDtor)
     
     // remove cycle:
-    def getCtorInArm(ctor: ResultId, dtor: Match) =
-      val ctorSym = getClsSymOfUid(ctor)
-      val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.map(_._2).orElse(dtor.dflt).get
-      val traverser = GetCtorsTraverser()
-      traverser.applyBlock(arm)
-      traverser.ctors
+    // def getCtorInArm(ctor: ResultId, dtor: Match) =
+    //   val ctorSym = getClsSymOfUid(ctor)
+    //   val arm = dtor.arms.find{ case (Case.Cls(c1, _) -> body) => c1 === ctorSym }.map(_._2).orElse(dtor.dflt).get
+    //   val traverser = GetCtorsTraverser()
+    //   traverser.applyBlock(arm)
+    //   traverser.ctors
     
-    def findCycle(ctor: ResultId, dtor: Match): Ls[ResultId] =
-      val cache = mutable.Set(ctor)
-      def go(ctorAndMatches: Ls[ResultId -> Match]): Ls[ResultId] =
-        var newCtorsAndNewMatches: Ls[ResultId -> Match] = Nil
-        for
-          (c, m) <- ctorAndMatches
-          c <- getCtorInArm(c, m)
-          CtorDest(matches, sels, _, _) <- ctorToDtor.get(c)
-          m <- matches.values.headOption
-        do newCtorsAndNewMatches = (c -> m) :: newCtorsAndNewMatches
-        val cycled = newCtorsAndNewMatches.filter(c => !cache.add(c._1))
-        if newCtorsAndNewMatches.isEmpty then
-          Nil
-        else if cycled.nonEmpty then
-          cycled.map(_._1)
-        else
-          go(newCtorsAndNewMatches)
-      go(Ls(ctor -> dtor))
+    // def findCycle(ctor: ResultId, dtor: Match): Ls[ResultId] =
+    //   val cache = mutable.Set(ctor)
+    //   def go(ctorAndMatches: Ls[ResultId -> Match]): Ls[ResultId] =
+    //     var newCtorsAndNewMatches: Ls[ResultId -> Match] = Nil
+    //     for
+    //       (c, m) <- ctorAndMatches
+    //       c <- getCtorInArm(c, m)
+    //       CtorDest(matches, sels, _, _) <- ctorToDtor.get(c)
+    //       m <- matches.values.headOption
+    //     do newCtorsAndNewMatches = (c -> m) :: newCtorsAndNewMatches
+    //     val cycled = newCtorsAndNewMatches.filter(c => !cache.add(c._1))
+    //     if newCtorsAndNewMatches.isEmpty then
+    //       Nil
+    //     else if cycled.nonEmpty then
+    //       cycled.map(_._1)
+    //     else
+    //       go(newCtorsAndNewMatches)
+    //   go(Ls(ctor -> dtor))
     
-    for
-      (c, CtorDest(matches, sels, _, _)) <- ctorToDtor
-      m <- matches.values
-      x <- findCycle(c._1, m)
-    do removeCtor(x)
+    // for
+    //   (c, CtorDest(matches, sels, _, _)) <- ctorToDtor
+    //   m <- matches.values
+    //   x <- findCycle(c._1, m)
+    // do removeCtor(x)
 
     ctorToDtor -> dtorToCtor
     
+  lazy val filteredCtorDests2: Map[CtorExprAndInstId, CtorFinalDest] =
+    val res = mutable.Map.empty[CtorExprAndInstId, CtorFinalDest]
+    
+    // we need only one CtorFinalDest per arm for each pat mat expr
+    val handledMatches = mutable.Map.empty[ResultId -> ClsOrModSymbol, CtorFinalDest]
+    
+    resolveClashes._1.foreach { case (ctor, CtorDest(dtors, sels, false, _)) =>
+      val filteredDtor = {
+        if dtors.size == 0 && sels.size == 1 then CtorFinalDest.Sel(sels.head.expr)
+        else if dtors.size == 0 && sels.size > 1 then
+          lastWords("more than one consumer")
+        else if dtors.size > 1 then
+          lastWords("more than one consumer")
+        else if dtors.size == 1 then
+          val currentCtorCls = getClsSymOfUid(ctor)
+          val scrutRef@Value.Ref(scrut) = dtors.head._1.getResult
+          handledMatches.getOrElseUpdate(
+            scrutRef.uid -> currentCtorCls,
+            if sels.forall{ s => s.expr.getResult match
+              case Select(Value.Ref(l), nme) => (l === scrut) && s.inMatching.contains(scrutRef.uid)
+              case _ => false
+            } then
+              val fieldNameToSymToBeReplaced = mutable.Map.empty[Tree.Ident, Symbol]
+              val selectionUidsToSymToBeReplaced = mutable.Map.empty[ResultId, Symbol]
+              
+              dtors.head._2.arms.foreach:
+                case (Case.Cls(cOrMod, _), body) if cOrMod.asCls.fold(false)(_ === currentCtorCls) =>
+                  val c = cOrMod.asCls.get
+                  // if this arm is used more than once, should be var symbol because the arm body will be
+                  // extracted to a function, otherwise just temp symbol
+                  val varSymInsteadOfTempSym = resolveClashes._2(DtorExpr.Match(dtors.head._1)).ctors.count(getClsSymOfUid(_) === c) > 1
+                  val selsInArms = sels.filter { fs => fs.inMatching(dtors.head._1) === c }
+                  
+                  selsInArms.foreach: fs =>
+                    assert(getClsFields(c).map(_.id).contains(fs.field))
+                    fieldNameToSymToBeReplaced.updateWith(fs.field):
+                      case Some(v) => Some(v)
+                      case None => Some(if varSymInsteadOfTempSym
+                        then VarSymbol(Tree.Ident(s"_deforest_${c.name}_${fs.field.name}"))
+                        else TempSymbol(N, s"_deforest_${c.name}_${fs.field.name}"))
+                    val sym = fieldNameToSymToBeReplaced(fs.field)
+                    
+                    selectionUidsToSymToBeReplaced.addOne(fs.expr -> sym)
+                case _ => ()
+              CtorFinalDest.Match(
+                dtors.head._1,
+                dtors.head._2,
+                sels.map(_.expr),
+                fieldNameToSymToBeReplaced.toMap -> selectionUidsToSymToBeReplaced.toMap
+              )
+            else
+              lastWords("more than one consumer")
+          )
+        else die
+      }
+      res.updateWith(ctor){_ => Some(filteredDtor)}
+    }
+    res.toMap
   
   
   lazy val filteredCtorDests: Map[ResultId, CtorFinalDest] =
@@ -1060,7 +1119,7 @@ class Deforest(using TL, Raise, Elaborator.State):
           )
         else die
       }
-      res.updateWith(ctor){_ => Some(filteredDtor)}
+      res.updateWith(ctor._1){_ => Some(filteredDtor)}
     }
     res.toMap
   
