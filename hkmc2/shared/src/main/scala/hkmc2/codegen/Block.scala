@@ -473,6 +473,13 @@ sealed abstract class Result extends AutoLocated:
       case S(r) => assert(this is r); S(this)
     uidValue
   
+  def uid =
+    import Result.*
+    val uidValue = ResultId(System.identityHashCode(this))
+    uidValue
+  
+  
+  
 // type Local = LocalSymbol
 type Local = Symbol
 
