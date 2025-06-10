@@ -3,8 +3,7 @@ package codegen
 package deforest
 
 import semantics.*
-import semantics.Elaborator.State
-import syntax.{Literal, Tree}
+import syntax.Tree
 import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
