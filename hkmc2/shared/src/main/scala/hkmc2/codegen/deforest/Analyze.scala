@@ -62,9 +62,10 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
       case Value.Ref(l) => l.asBlkMember.get
       case s: Select => s.symbol.flatMap(_.asBlkMember).get
       case _ => die
+    val instantiatingRecursiveGroup = d.funSymToProdStratScheme.recursiveGroups(instantiatingFunSym)
     val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
     def duplicateVarState(s: StratVarState) =
-      if s.generatedForDef.fold(false)(_ is instantiatingFunSym) then
+      if s.generatedForDef.fold(false)(instantiatingRecursiveGroup.contains) then
         stratVarMap.getOrElseUpdate.curried(s):
           StratVarState.freshVar(s.name, cc.forFun)(using d.stratVarUidState)
       else
@@ -188,29 +189,14 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   class ConstraintsAndCacheHitCollector(val forFun: Opt[BlockMemberSymbol]):
     var constraints: Ls[ProdStrat -> ConsStrat] = Nil
     var cacheHit: Ls[BlockMemberSymbol] = Nil // TODO: a better name to say it actually get the symbol of funs in a recursive group
-    private def check(p: ProdStrat): Unit = p match
-      case ProdVar(s) => check(s)
-      case _ => ()
-    private def check(c: ConsStrat): Unit = c match
-      case ConsVar(s) => check(s)
-      case _ => ()
-    private def check(s: StratVarState): Unit = (s.generatedForDef, forFun) match
-      case (S(s1), S(s2)) => assert(s1 is s2)
-      case _ => ()
-    def constrain(p: ProdStrat, c: ConsStrat) =
-      check(p)
-      check(c)
-      constraints ::= p -> c
-    def constrain(cs: Ls[ProdStrat -> ConsStrat]) =
-      cs.foreach: (p, c) =>
-        check(p)
-        check(c)
-      constraints :::= cs
+    def constrain(p: ProdStrat, c: ConsStrat) = constraints ::= p -> c
+    def constrain(cs: Ls[ProdStrat -> ConsStrat]) = constraints :::= cs
     def hit(s: BlockMemberSymbol) = cacheHit ::= s
     def hit(ss: Ls[BlockMemberSymbol]) = cacheHit :::= ss
   
   object funSymToProdStratScheme:
     val store = mutable.Map.empty[BlockMemberSymbol, ProdStratScheme]
+    val recursiveGroups = mutable.Map.empty[BlockMemberSymbol, Ls[BlockMemberSymbol]]
     def getOrUpdate(s: BlockMemberSymbol)(using processingDefs: Ls[BlockMemberSymbol], cc: ConstraintsAndCacheHitCollector): ProdVar | ProdStratScheme =
       preAnalyzer.getFunDefnForSym(s) match
         // not a fun defined in the current block, just return its prodvar
@@ -235,8 +221,14 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                   cc.hit(h)
                 preAnalyzer.getProdVarForSym(s)
               else
-                (s :: newcc.cacheHit).foreach: f =>
-                  store.getOrElseUpdate(f, ProdStratScheme(preAnalyzer.getProdVarForSym(f).s, newcc.constraints))
+                val recursiveGroupMembers = (s :: newcc.cacheHit).distinct
+                recursiveGroupMembers.foreach: f =>
+                  store.updateWith(f):
+                    case N => S(ProdStratScheme(preAnalyzer.getProdVarForSym(f).s, newcc.constraints))
+                    case S(_) => die // this means the scc is not computed corrrectely
+                  recursiveGroups.updateWith(f):
+                    case N => S(recursiveGroupMembers)
+                    case S(_) => die // this means the scc is not computed corrrectely
                 store(s)
             case _ => die // die if something occurs twice in the processing list
   
