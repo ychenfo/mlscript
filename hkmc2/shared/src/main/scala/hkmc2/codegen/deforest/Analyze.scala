@@ -57,7 +57,7 @@ class Dtor(
 
 class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat]):
   def instantiate(referSite: ResultId)(using d: DeforestConstraintsCollector, cc: d.ConstraintsAndCacheHitCollector): ProdVar =
-    val instantiatingFunSym = d.preAnalyzer.resultIdToResult(referSite) match
+    val instantiatingFunSym = d.preAnalyzer.getResult(referSite) match
       case Value.Ref(l) => l.asBlkMember.get
       case s: Select => s.symbol.flatMap(_.asBlkMember).get
       case _ => die
@@ -117,7 +117,14 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
     resultIdToResult(id).getCtorSymFromCtorLikeExpr
   def getMatchFromMatchScrutExprId(scrutExprId: ResultId): Opt[Match] =
     matchScrutToMatchBlock.get(scrutExprId)
-  
+  def getResult(id: ResultId) = resultIdToResult(id)
+  def getStableResultId(id: ResultId) = resultIdToStableId.getOrElseUpdate.curried(id):
+    val prev = stableResuldIt
+    stableResuldIt += 1
+    prev
+    
+  private val resultIdToStableId = mutable.Map.empty[ResultId, Int]  
+  private var stableResuldIt = 0
   private var inMatchScrutsArms: Ls[ResultId -> Opt[ClassLikeSymbol]] = Nil
   private def inMatchScruts = inMatchScrutsArms.unzip._1
   private var inFunDef: Opt[BlockMemberSymbol] = N
@@ -521,10 +528,10 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
         mats.size == 0 && sels.size == 1 ||
         mats.size == 1 && locally:
           val matScrutExprId = mats.head.scrutExprId
-          val matScrutSym = preAnalyzer.resultIdToResult(matScrutExprId).asInstanceOf[Value.Ref].l
+          val matScrutSym = preAnalyzer.getResult(matScrutExprId).asInstanceOf[Value.Ref].l
           sels.forall: s =>
             val selExprId = s.exprId
-            preAnalyzer.resultIdToResult(selExprId) match
+            preAnalyzer.getResult(selExprId) match
               case Select(Value.Ref(l), _) => 
                 preAnalyzer.selsToMatchingArms(selExprId).exists(_._1 === matScrutExprId) && (l is matScrutSym)
               case _ => false
