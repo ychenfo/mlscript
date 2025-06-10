@@ -358,7 +358,15 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     case c@Call(f, args) => handleCallLike(f, args.map {case Arg(false, value) => value}, c)
     case i@Instantiate(cls, args) => handleCallLike(cls, args, i)
     case sel@Select(p, nme) => sel.symbol match
-      case Some(s) if s.asObj.isDefined => new Ctor(sel.uid, N, s.asObj.get, Nil)
+      case Some(s) if s.asObj.isDefined =>
+          new Ctor(sel.uid, N, s.asObj.get, Nil)
+      case Some(s) if s.asBlkMember.exists(_.trmImplTree.exists(_.k is syntax.Fun)) &&
+        preAnalyzer.definedFunSyms.contains(s.asBlkMember.get) =>
+        funSymToProdStratScheme.getOrUpdate(s.asBlkMember.get) match
+          case v: ProdVar => v
+          case t: ProdStratScheme =>
+            val instantiated = t.instantiate(sel.uid)(using this, cc)
+            instantiated
       case _ => 
         val pStrat = processResult(p)
         pStrat match
@@ -382,7 +390,16 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
             tpeVar.asProdStrat
                 
     case v@Value.Ref(l) => l.asObj match
-      case None => preAnalyzer.getProdVarForSym(l)
+      case None =>
+        if l.asBlkMember.exists(_.trmImplTree.exists(_.k is syntax.Fun)) &&
+          preAnalyzer.definedFunSyms.contains(l.asBlkMember.get) then
+          funSymToProdStratScheme.getOrUpdate(l.asBlkMember.get) match
+            case v: ProdVar => v
+            case t: ProdStratScheme =>
+              val instantiated = t.instantiate(v.uid)(using this, cc)
+              instantiated
+        else
+          preAnalyzer.getProdVarForSym(l)
       case Some(m) => new Ctor(v.uid, N, m, Nil)
     
     case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
@@ -453,7 +470,7 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
         upperBounds(c.uid).foreach: u =>
           (prod, u) match
             case (ctor: Ctor, sel: FieldSel) =>
-              if sel.filter.get(c.asProdStrat).forall(_.contains(ctor)) then
+              if sel.filter.get(c.asProdStrat).forall(_.contains(ctor.ctor)) then
                 handle(prod -> u)
             case (_: ProdVar, _) => die
             case _ => handle(prod -> u)
