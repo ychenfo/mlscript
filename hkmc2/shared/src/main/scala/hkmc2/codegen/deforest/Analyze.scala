@@ -98,6 +98,7 @@ class DeforestPreAnalyzer(b: Block) extends BlockTraverser:
   given stratVarUidState: Uid.StratVarNew.State = new Uid.StratVarNew.State
   import StratVarState.freshVar
   
+  val noProdStratVar = freshVar("primitive", N).asProdStrat
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
   val funSymToFun = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   val matchScrutToMatchBlock = mutable.Map.empty[ResultId, Match]
@@ -107,7 +108,10 @@ class DeforestPreAnalyzer(b: Block) extends BlockTraverser:
   val symToStratVar = mutable.Map.empty[Symbol, ProdVar]
   val usedFunSyms = mutable.Set.empty[BlockMemberSymbol]
   lazy val definedFunSyms = funSymToFun.keySet
-  def getProdVarForSym(s: Symbol) = symToStratVar(s)
+  def getProdVarForSym(s: Symbol) = s match
+    case _: (BuiltinSymbol | TopLevelSymbol) => noProdStratVar
+    case _ if s.asCls.isDefined => noProdStratVar
+    case _ => symToStratVar(s)
   def getFunDefnForSym(s: BlockMemberSymbol) = funSymToFun.get(s)
   def getCtorSymFromCtorLikeExprId(id: ResultId): Opt[ClassLikeSymbol] =
     resultIdToResult(id).getCtorSymFromCtorLikeExpr
@@ -125,9 +129,11 @@ class DeforestPreAnalyzer(b: Block) extends BlockTraverser:
     super.applyFunDefn(fun)
     inFunDef = N
   
-  override def applySymbol(s: Symbol): Unit = symToStratVar.updateWith(s):
-    case N => S(freshVar(s.nme, inFunDef).asProdStrat)
-    case S(x) => S(x)
+  override def applySymbol(s: Symbol): Unit = s match
+    case s: (BlockMemberSymbol | TempSymbol | VarSymbol | TermSymbol) => symToStratVar.updateWith(s):
+      case N => S(freshVar(s.nme, inFunDef).asProdStrat)
+      case S(x) => S(x)
+    case _ => ()
   
   override def applyResult(r: Result): Unit =
     resultIdToResult += r.uid -> r
@@ -189,9 +195,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       case ConsVar(s) => check(s)
       case _ => ()
     private def check(s: StratVarState): Unit = (s.generatedForDef, forFun) match
-      case (N, N) => ()
       case (S(s1), S(s2)) => assert(s1 is s2)
-      case _ => die
+      case _ => ()
     def constrain(p: ProdStrat, c: ConsStrat) =
       check(p)
       check(c)
@@ -239,6 +244,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     val cc = new ConstraintsAndCacheHitCollector(N)
     val strat = processBlock(b)(using Nil, cc)
     cc.constrain(strat, NoCons)
+    cc.constrain(preAnalyzer.noProdStratVar, NoCons)
+    cc.constrain(NoProd, preAnalyzer.noProdStratVar.asConsStrat)
     // TODO: for used but not defined fun syms, constrain them with NoProd
     // TODO: for defined but not fun syms, constrain them with NoCons
     cc.constraints
