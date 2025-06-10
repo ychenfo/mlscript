@@ -23,12 +23,15 @@ object StratVarState:
   def freshVar(nme: String, generatedForDef: Opt[BlockMemberSymbol])(using vuid: Uid.StratVarNew.State) =
     val newId = vuid.nextUid
     StratVarState(newId, nme, generatedForDef)
+trait StratVar(s: StratVarState):
+  this: ProdVar | ConsVar =>
+  def asProdStrat = s.asProdStrat
+  def asConsStrat = s.asConsStrat
+  def uid = s.uid
 
 // TODO: examine what info is really needed in the ctors
 sealed abstract class ProdStrat
-case class ProdVar(s: StratVarState) extends ProdStrat:
-  lazy val asProdStrat = ProdVar(this.s)
-  lazy val asConsStrat = ConsVar(this.s)
+case class ProdVar(s: StratVarState) extends ProdStrat with StratVar(s)
 case class ProdFun(params: Ls[ConsStrat], res: ProdStrat) extends ProdStrat
 case object NoProd extends ProdStrat
 class Ctor(
@@ -38,7 +41,7 @@ class Ctor(
   val args: Ls[TermSymbol -> ProdStrat]) extends ProdStrat
 
 sealed abstract class ConsStrat
-case class ConsVar(s: StratVarState) extends ConsStrat
+case class ConsVar(s: StratVarState) extends ConsStrat with StratVar(s)
 case class ConsFun(params: Ls[ProdStrat], res: ConsStrat) extends ConsStrat
 case object NoCons extends ConsStrat
 class FieldSel(
@@ -106,6 +109,10 @@ class DeforestPreAnalyzer(b: Block) extends BlockTraverser:
   lazy val definedFunSyms = funSymToFun.keySet
   def getProdVarForSym(s: Symbol) = symToStratVar(s)
   def getFunDefnForSym(s: BlockMemberSymbol) = funSymToFun.get(s)
+  def getCtorSymFromCtorLikeExprId(id: ResultId): Opt[ClassLikeSymbol] =
+    resultIdToResult(id).getCtorSymFromCtorLikeExpr
+  def getMatchFromMatchScrutExprId(scrutExprId: ResultId): Opt[Match] =
+    matchScrutToMatchBlock.get(scrutExprId)
   
   private var inMatchScrutsArms: Ls[ResultId -> Opt[ClassLikeSymbol]] = Nil
   private def inMatchScruts = inMatchScrutsArms.unzip._1
@@ -166,8 +173,8 @@ class DeforestPreAnalyzer(b: Block) extends BlockTraverser:
     case _ => super.applyBlock(b)
   
   applyBlock(b)
-  
-    
+
+
 class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   given stratVarUidState: Uid.StratVarNew.State = preAnalyzer.stratVarUidState
   import StratVarState.freshVar
@@ -392,4 +399,198 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       ProdFun(paramSyms, res.asProdStrat)
     case Value.Arr(elems) => throw NotDeforestableException("No support for arrays yet")
   
-class DeforestConstrainSolver()
+class DeforestConstrainSolver(val preAnalyzer: DeforestPreAnalyzer, constraints: Ls[ProdStrat -> ConsStrat]):
+  val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
+  val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
+  object ctorDests:
+    val store = mutable.LinkedHashMap.empty[Ctor, Ls[Dtor | FieldSel] -> Bool]
+    def update(c: Ctor, d: Dtor | FieldSel | NoCons.type) = d match
+      case NoCons => store.updateWith(c):
+        case S(l -> _) => S(l, true)
+        case N => S(Nil, true)
+      case d: (Dtor | FieldSel) => store.updateWith(c):
+        case S(l -> b) => S(d :: l, b)
+        case N => S(d :: Nil, false)
+    def get(c: Ctor) = store.get(c).map(l => l._1.distinct -> l._2)
+  object dtorSources:
+    val store = mutable.Map.empty[Dtor | FieldSel, Ls[Ctor] -> Bool]
+    def update(d: Dtor | FieldSel, c: Ctor | NoProd.type) = c match
+      case NoProd => store.updateWith(d):
+        case S(l -> _) => S(l, true)
+        case N => S(Nil, true)
+      case c: Ctor => store.updateWith(d):
+        case S(l -> b) => S(c :: l, b)
+        case N => S(c :: Nil, false)
+  
+  private def handle(constraint: ProdStrat -> ConsStrat)(using cache: mutable.Set[ProdStrat -> ConsStrat]): Unit =
+    val prod = constraint._1
+    val cons = constraint._2
+    val proceed = cache.add(constraint)
+    
+    if proceed then constraint match
+      case (c: Ctor, d: Dtor) =>
+        ctorDests.update(c, d)
+        dtorSources.update(d, c)
+      case (c: Ctor, d: FieldSel) =>
+        ctorDests.update(c, d)
+        dtorSources.update(d, c)
+        c.args.find(a => a._1.id == d.field).map: p =>
+          handle(p._2 -> d.consVar)
+      case (c: Ctor, d: ConsFun) => () // ignore, TODO: maybe a warning?
+      case (p: ProdVar, _) =>
+        upperBounds += p.uid -> (cons :: upperBounds(p.uid))
+        lowerBounds(p.uid).foreach: l =>
+          (l, cons) match
+            case (l: ProdVar, sel: FieldSel) =>
+              sel.updateFilter(l, sel.filter(p))
+              handle(l -> cons)
+            case (c: Ctor, sel: FieldSel) =>
+              if sel.filter.get(p).forall(_.contains(c.ctor)) then
+                handle(l -> cons)
+            case _ => handle(l -> cons)
+      case (_, c: ConsVar) =>
+        lowerBounds += c.uid -> (prod :: lowerBounds(c.uid))
+        upperBounds(c.uid).foreach: u =>
+          (prod, u) match
+            case (ctor: Ctor, sel: FieldSel) =>
+              if sel.filter.get(c.asProdStrat).forall(_.contains(ctor)) then
+                handle(prod -> u)
+            case (_: ProdVar, _) => die
+            case _ => handle(prod -> u)
+      case (ctor: Ctor, NoCons) =>
+        ctorDests.update(ctor, NoCons)
+        ctor.args.foreach(a => handle(a._2, NoCons))
+      case (ProdFun(l, r), _: Dtor) => () // ignore
+      case (ProdFun(l, r), _: FieldSel) => () // ignore
+      case (ProdFun(lp, rp), ConsFun(lc, rc)) =>
+        lc.zip(lp).foreach(handle)
+        handle(rp, rc)
+      case (ProdFun(l, r), NoCons) =>
+        l.foreach(a => handle(NoProd, a))
+        handle(r, NoCons)
+      case (NoProd, d: Dtor) => dtorSources.update(d, NoProd)
+      case (NoProd, fSel: FieldSel) => dtorSources.update(fSel, NoProd)
+      case (NoProd, ConsFun(l, r)) =>
+        l.foreach(a => handle(a, NoCons))
+        handle(NoProd, r)
+      case (NoProd, NoCons) => ()
+    
+  locally:
+    given mutable.Set[ProdStrat -> ConsStrat] = mutable.Set.empty
+    constraints.foreach(handle)
+  
+  val resolveClashes =
+    val ctorToDtor = ctorDests.store.clone()
+    val dtorToCtor = dtorSources.store.clone()
+    def removeCtor(rm: (Ctor | ResultId)): Unit = rm match
+      case rm: Ctor =>
+        for
+          (dtors, _) <- ctorToDtor.remove(rm)
+          dtor <- dtors
+        do removeDtor(dtor)
+      case rmId: ResultId =>
+        for rm <- ctorToDtor.keySet.filter(x => x.exprId is rmId) do removeCtor(rm)
+    def removeDtor(rm: Dtor | FieldSel) =
+      for (ctors, _) <- dtorToCtor.remove(rm)
+          x <- ctors do removeCtor(x)
+    
+    // remove clashes
+    for
+      (rm, dtors -> noCons) <- ctorToDtor
+      (mats, sels) = dtors.partitionMap:
+        case d: Dtor => L(d)
+        case s: FieldSel => R(s)
+      if noCons || !locally:
+        mats.size == 0 && sels.size == 1 ||
+        mats.size == 1 && locally:
+          val matScrutExprId = mats.head.scrutExprId
+          val matScrutSym = preAnalyzer.resultIdToResult(matScrutExprId).asInstanceOf[Value.Ref].l
+          sels.forall: s =>
+            val selExprId = s.exprId
+            preAnalyzer.resultIdToResult(selExprId) match
+              case Select(Value.Ref(l), _) => 
+                preAnalyzer.selsToMatchingArms(selExprId).exists(_._1 === matScrutExprId) && (l is matScrutSym)
+              case _ => false
+    do removeCtor(rm)
+    for
+      case (rm, _ -> true) <- dtorToCtor
+    do removeDtor(rm)
+    
+    // remove cycle
+    def getCtorInArm(ctorExprId: ResultId , dtorScrutExprId: ResultId) =
+      val ctorSym = preAnalyzer.getCtorSymFromCtorLikeExprId(ctorExprId).get
+      val dtor = preAnalyzer.getMatchFromMatchScrutExprId(dtorScrutExprId).get
+      val arm =
+        dtor.arms.find:
+          case (Case.Cls(c1, _) -> body) => c1 is ctorSym
+        .map(_._2).orElse(dtor.dflt).get
+      val traverser = new GetCtorsTraverser()
+      traverser.applyBlock(arm)
+      traverser.ctors
+    def findCycle(c: Ctor, d: Dtor): Ls[ResultId] =
+      val cache = mutable.Set(c.exprId)
+      def go(ctorAndMatchesScrutExprIds: Ls[ResultId -> ResultId]): Ls[ResultId] =
+        val newCtorsAndNewMatches = for
+          (c, m) <- ctorAndMatchesScrutExprIds
+          c <- getCtorInArm(c, m)
+          (_, ds -> noCons) <- ctorToDtor.filter(x => x._1.exprId is c)
+          _ = assert(!noCons)
+          (mats, _) = ds.partitionMap:
+            case d: Dtor => L(d)
+            case s: FieldSel => R(s)
+          m <- mats.headOption
+        yield c -> m.scrutExprId
+        val cycled = newCtorsAndNewMatches.filter:
+          c => !cache.add(c._1)
+        if newCtorsAndNewMatches.isEmpty then
+          Nil
+        else if cycled.nonEmpty then
+          cycled.map(_._1)
+        else
+          go(newCtorsAndNewMatches)
+      c.instantiationId -> d.instantiationId match
+        case S(id1) -> S(id2) if id1 == id2 =>
+          go(Ls(c.exprId -> d.scrutExprId))
+        case _ => Nil
+    for
+      (ctor, dtors -> noCons) <- ctorToDtor
+      (mats, sels) = dtors.partitionMap:
+        case d: Dtor => L(d)
+        case s: FieldSel => R(s)
+      _ = assert(!noCons && mats.size <= 1)
+      dtor <- mats
+      rm <- findCycle(ctor, dtor)
+    do removeCtor(rm)
+    
+    ctorToDtor -> dtorToCtor
+
+
+
+class GetCtorsTraverser() extends BlockTraverser:
+  var ctors = Set.empty[ResultId]
+  override def applyResult(r: Result): Unit = r match
+    case Call(f, args) =>
+      if f.asClsSymbol.isDefined then ctors += r.uid
+      args.foreach:
+        case Arg(false, v) => applyResult(v)
+    case Instantiate(cls, args) =>
+      if cls.asClsSymbol.isDefined then ctors += r.uid
+      args.foreach(applyResult)
+    case p: Path => if p.asObjSymbol.isDefined then ctors += r.uid
+
+extension (p: Path)
+  def asClsSymbol = p match
+    case s: Select => s.symbol.flatMap(_.asCls)
+    case Value.Ref(l) => l.asCls
+    case _ => N
+  def asObjSymbol = p match
+    case s: Select => s.symbol.flatMap(_.asObj)
+    case Value.Ref(l) => l.asObj
+    case _ => N
+
+extension (r: Result)
+  def getCtorSymFromCtorLikeExpr = r match
+    case Call(f, _) => f.asClsSymbol
+    case Instantiate(cls, _) => cls.asClsSymbol
+    case p: Path => p.asObjSymbol
+
