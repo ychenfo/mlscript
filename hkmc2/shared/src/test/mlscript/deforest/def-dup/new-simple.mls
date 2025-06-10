@@ -1,0 +1,48 @@
+:js
+
+data class A(x)
+data class (::) Cons(h, t)
+object Nil
+
+
+
+// :sjs
+// :deforest
+// fun to(n, acc) = if n == 0 then acc else to(n - 1, n :: acc)
+// fun f1(ls1, acc) = if ls1 is
+//   Nil then acc
+//   h :: t then f1(t, acc + h)
+// fun f2(ls2, acc) = if ls2 is
+//   Nil then acc
+//   hh :: tt then f2(tt, acc + hh + 1)
+// f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
+
+// :sjs
+// :deforest
+// fun id(x) = x
+// fun f1(a) = if a is A then 1
+// fun f2(a) = if a is A then 2
+// f1(id(A(1))) + f2(id(A(2)))
+
+
+
+// :sjs
+// :deforest
+// fun p(x) = A(x)
+// fun wrap1(x) = p(x)
+// fun wrap(x) = wrap1(x)
+// fun f1(a1) = if a1 is A then 1
+// fun f2(a2) = if a2 is A then 2
+// f1(wrap(1)) + f2(wrap(2))
+
+// :sjs
+// :deforest
+// fun fffff(x) = if x == 0 then Nil else x :: fffff1(x - 1)
+// fun fffff1(x) = if x == 0 then Nil else x :: fffff(x - 1)
+// fun cons(a) = if a is
+//   Nil then 0
+//   h :: t then h + cons(t)
+// fun cons1(a1) = if a1 is
+//   Nil then 1
+//   h :: t then h + cons1(t)
+// cons(fffff(0)) + cons1(fffff(1))
