@@ -94,7 +94,7 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
       cc.constrain(duplicateProdStrat(p), duplicateConsStrat(c))
     newProd
 
-class DeforestPreAnalyzer(b: Block) extends BlockTraverser:
+class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
   given stratVarUidState: Uid.StratVarNew.State = new Uid.StratVarNew.State
   import StratVarState.freshVar
   
@@ -185,6 +185,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   given stratVarUidState: Uid.StratVarNew.State = preAnalyzer.stratVarUidState
   import StratVarState.freshVar
   
+  val constraints = processTopLevel(preAnalyzer.b)
   class ConstraintsAndCacheHitCollector(val forFun: Opt[BlockMemberSymbol]):
     var constraints: Ls[ProdStrat -> ConsStrat] = Nil
     var cacheHit: Ls[BlockMemberSymbol] = Nil // TODO: a better name to say it actually get the symbol of funs in a recursive group
@@ -252,7 +253,6 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     cc.constrain(ProdFun(paramSyms, res.asProdStrat), thisFunVar.asConsStrat)
     cc
   
-  // returns the cache-hit set of function symbols
   def processBlock(b: Block)(using
     processingDefs: Ls[BlockMemberSymbol],
     cc: ConstraintsAndCacheHitCollector
@@ -296,7 +296,6 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       processResult(exc)
       freshVar("throw", processingDefs.headOption).asProdStrat
 
-  
   def processResult(r: Result)(using
     processingDefs: Ls[BlockMemberSymbol],
     cc: ConstraintsAndCacheHitCollector
@@ -396,8 +395,11 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       cc.constrain(bodyStrat, res.asConsStrat)
       ProdFun(paramSyms, res.asProdStrat)
     case Value.Arr(elems) => throw NotDeforestableException("No support for arrays yet")
-  
-class DeforestConstrainSolver(val preAnalyzer: DeforestPreAnalyzer, constraints: Ls[ProdStrat -> ConsStrat]):
+
+
+class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
+  val preAnalyzer = collector.preAnalyzer
+  val constraints = collector.constraints
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
   val lowerBounds = mutable.Map.empty[StratVarId, Ls[ProdStrat]].withDefaultValue(Nil)
   object ctorDests:
