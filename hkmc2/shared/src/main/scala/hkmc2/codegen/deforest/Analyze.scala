@@ -486,8 +486,8 @@ class DeforestConstrainSolver(val preAnalyzer: DeforestPreAnalyzer, constraints:
           (dtors, _) <- ctorToDtor.remove(rm)
           dtor <- dtors
         do removeDtor(dtor)
-      case rmId: ResultId =>
-        for rm <- ctorToDtor.keySet.filter(x => x.exprId is rmId) do removeCtor(rm)
+      case _ =>
+        for rm <- ctorToDtor.keySet.filter(x => x.exprId == rm) do removeCtor(rm)
     def removeDtor(rm: Dtor | FieldSel) =
       for (ctors, _) <- dtorToCtor.remove(rm)
           x <- ctors do removeCtor(x)
@@ -522,8 +522,7 @@ class DeforestConstrainSolver(val preAnalyzer: DeforestPreAnalyzer, constraints:
         dtor.arms.find:
           case (Case.Cls(c1, _) -> body) => c1 is ctorSym
         .map(_._2).orElse(dtor.dflt).get
-      val traverser = new GetCtorsTraverser()
-      traverser.applyBlock(arm)
+      val traverser = new GetCtorsTraverser(arm)
       traverser.ctors
     def findCycle(c: Ctor, d: Dtor): Ls[ResultId] =
       val cache = mutable.Set(c.exprId)
@@ -531,15 +530,15 @@ class DeforestConstrainSolver(val preAnalyzer: DeforestPreAnalyzer, constraints:
         val newCtorsAndNewMatches = for
           (c, m) <- ctorAndMatchesScrutExprIds
           c <- getCtorInArm(c, m)
-          (_, ds -> noCons) <- ctorToDtor.filter(x => x._1.exprId is c)
+          (_, ds -> noCons) <- ctorToDtor.filter(x => x._1.exprId == c)
           _ = assert(!noCons)
           (mats, _) = ds.partitionMap:
             case d: Dtor => L(d)
             case s: FieldSel => R(s)
           m <- mats.headOption
         yield c -> m.scrutExprId
-        val cycled = newCtorsAndNewMatches.filter:
-          c => !cache.add(c._1)
+        val cycled = newCtorsAndNewMatches.filter: c =>
+          !cache.add(c._1)
         if newCtorsAndNewMatches.isEmpty then
           Nil
         else if cycled.nonEmpty then
@@ -564,7 +563,7 @@ class DeforestConstrainSolver(val preAnalyzer: DeforestPreAnalyzer, constraints:
 
 
 
-class GetCtorsTraverser() extends BlockTraverser:
+class GetCtorsTraverser(b: Block) extends BlockTraverser:
   var ctors = Set.empty[ResultId]
   override def applyResult(r: Result): Unit = r match
     case Call(f, args) =>
@@ -575,6 +574,7 @@ class GetCtorsTraverser() extends BlockTraverser:
       if cls.asClsSymbol.isDefined then ctors += r.uid
       args.foreach(applyResult)
     case p: Path => if p.asObjSymbol.isDefined then ctors += r.uid
+  applyBlock(b)
 
 extension (p: Path)
   def asClsSymbol = p match
