@@ -18,15 +18,15 @@ fun f2(ls2, acc) = if ls2 is
 f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
 //│ = 51
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Ref(member:Nil)@0@None -->
+//│ Ref(member:Nil)@0@Some(List()) -->
 //│ 	Ref(ls1)@Some(List(1))
 //│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@Some(List(3)) -->
 //│ 	Ref(ls1)@Some(List(1))
-//│ Ref(member:Nil)@4@None -->
+//│ Ref(member:Nil)@4@Some(List()) -->
 //│ 	Ref(ls2)@Some(List(5))
 //│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@Some(List(6)) -->
 //│ 	Ref(ls2)@Some(List(5))
-//│ Ref(member:Nil)@7@None -->
+//│ Ref(member:Nil)@7@Some(List()) -->
 //│ 	Ref(ls1)@Some(List(8))
 //│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@Some(List(9)) -->
 //│ 	Ref(ls1)@Some(List(8))
@@ -40,9 +40,9 @@ fun f2(a2) = if a2 is A then 2
 f1(id(A(1))) + f2(id(A(2)))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(2)))))@0@None -->
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(2)))))@0@Some(List()) -->
 //│ 	Ref(a2)@Some(List(1))
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@2@None -->
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@2@Some(List()) -->
 //│ 	Ref(a1)@Some(List(3))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -105,11 +105,11 @@ map(map(1 :: 2 :: Nil, x => x + 1), x => x * 2)
 //│ 	Ref(ls)@Some(List(2))
 //│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@Some(List(1)) -->
 //│ 	Ref(ls)@Some(List(2))
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@None -->
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@Some(List()) -->
 //│ 	Ref(ls)@Some(List(1))
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@None -->
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@Some(List()) -->
 //│ 	Ref(ls)@Some(List(1))
-//│ Ref(member:Nil)@6@None -->
+//│ Ref(member:Nil)@6@Some(List()) -->
 //│ 	Ref(ls)@Some(List(1))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -122,11 +122,11 @@ fun map(ls, f) = if ls is
 map(1 :: 2 :: Nil, x => x + 1)
 //│ = Cons(2, Cons(3, Nil))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@0@None -->
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@0@Some(List()) -->
 //│ 	Ref(ls)@Some(List(1))
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@2@None -->
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@2@Some(List()) -->
 //│ 	Ref(ls)@Some(List(1))
-//│ Ref(member:Nil)@3@None -->
+//│ Ref(member:Nil)@3@Some(List()) -->
 //│ 	Ref(ls)@Some(List(1))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -151,9 +151,9 @@ fun c1(x) = if x is
 c1(1 :: Nil)
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(member:Nil))))@0@None -->
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(member:Nil))))@0@Some(List()) -->
 //│ 	Ref(x)@Some(List(1))
-//│ Ref(member:Nil)@2@None -->
+//│ Ref(member:Nil)@2@Some(List()) -->
 //│ 	Ref(t)@Some(List(1))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -213,6 +213,24 @@ dtor(A(B(0)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(4)))))@0@Some(List(1)) -->
 //│ 	Ref(y)@Some(List(1, 2))
-//│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@3@None -->
+//│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@3@Some(List()) -->
 //│ 	Ref(x)@Some(List(1))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun localFuse(x) = if A(x) is
+  A(y) then B(y)
+if localFuse(3) is
+  B(a) then a
+localFuse(4)
+//│ = B(4)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@Some(List(1)) -->
+//│ 	Ref($scrut)@Some(List(1))
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@Some(List(2)) -->
+//│ 	Ref($scrut)@Some(List(2))
+//│ Call(Ref(member:B),List(Arg(false,Ref(y))))@3@Some(List(2)) -->
+//│ 	Ref($scrut)@Some(List())
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+

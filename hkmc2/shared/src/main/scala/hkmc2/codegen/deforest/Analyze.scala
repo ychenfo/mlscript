@@ -122,6 +122,15 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
     val prev = stableResuldIt
     stableResuldIt += 1
     prev
+  def getReferredFunSym(id: ResultId) =
+    def chk(s: BlockMemberSymbol) =
+      assert(s.trmImplTree.exists(_.k is syntax.Fun))
+      s
+    resultIdToResult(id) match
+      case s: Select => chk(s.symbol.get.asBlkMember.get)
+      case Value.Ref(l) => chk(l.asBlkMember.get)
+      case _ => die
+  
     
   private val resultIdToStableId = mutable.Map.empty[ResultId, Int]  
   private var stableResuldIt = 0
@@ -266,7 +275,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   ): ProdStrat = b match
     case m@Match(scrut, arms, dflt, rest) =>
       val scrutStrat = processResult(scrut)
-      cc.constrain(scrutStrat, new Dtor(scrut.uid, N))
+      cc.constrain(scrutStrat, new Dtor(scrut.uid, cc.forFun.fold(S(Nil))(_ => N)))
       val armsRes =
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
           arms.map:
@@ -277,7 +286,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       val dfltRes = dflt.map(processBlock)
       rest match
         case End(msg) =>
-          val matchRes = freshVar("", processingDefs.headOption)
+          val matchRes = freshVar("", cc.forFun)
           armsRes.appendedAll(dfltRes).foreach: r =>
             cc.constrain(r, matchRes.asConsStrat)
           matchRes.asProdStrat
@@ -301,13 +310,14 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     // default else branches do not block fusion...
     case Throw(exc) =>
       processResult(exc)
-      freshVar("throw", processingDefs.headOption).asProdStrat
+      freshVar("throw", cc.forFun).asProdStrat
 
   def processResult(r: Result)(using
     processingDefs: Ls[BlockMemberSymbol],
     cc: ConstraintsAndCacheHitCollector
   ): ProdStrat =
-    val generatedForDef = processingDefs.headOption
+    val generatedForDef = cc.forFun
+    val instantiationId = cc.forFun.fold(S(Nil))(_ => N)
     def handleCallLike(f: Path, args: Ls[Path], c: Result): ProdStrat =
       val argsTpe = args.map(processResult)
       f match
@@ -335,12 +345,12 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
               appRes.asProdStrat
             case Some(Some(s)) =>
               val clsFields = s.tree.clsParams
-              new Ctor(c.uid, N, s, clsFields.zip(argsTpe))
+              new Ctor(c.uid, instantiationId, s, clsFields.zip(argsTpe))
         case Value.Ref(funSym) =>
           funSym.asCls match
             case Some(s) =>
               val clsFields = s.tree.clsParams
-              new Ctor(c.uid, N, s, clsFields.zip(argsTpe))
+              new Ctor(c.uid, instantiationId, s, clsFields.zip(argsTpe))
             case _ => // then it is a function
               val appRes = freshVar("call_" + funSym.nme + "_res", generatedForDef)
               funSym.asBlkMember match
@@ -366,7 +376,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     case i@Instantiate(cls, args) => handleCallLike(cls, args, i)
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
-          new Ctor(sel.uid, N, s.asObj.get, Nil)
+          new Ctor(sel.uid, instantiationId, s.asObj.get, Nil)
       case Some(s) if s.asBlkMember.exists(_.trmImplTree.exists(_.k is syntax.Fun)) &&
         preAnalyzer.definedFunSyms.contains(s.asBlkMember.get) =>
         funSymToProdStratScheme.getOrUpdate(s.asBlkMember.get) match
@@ -407,7 +417,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
               instantiated
         else
           preAnalyzer.getProdVarForSym(l)
-      case Some(m) => new Ctor(v.uid, N, m, Nil)
+      case Some(m) => new Ctor(v.uid, instantiationId, m, Nil)
     
     case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
     case Value.Lit(lit) => NoProd
@@ -450,7 +460,9 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
     val prod = constraint._1
     val cons = constraint._2
     val proceed = cache.add(constraint)
-    
+    assert:
+      (!prod.isInstanceOf[Ctor] || prod.asInstanceOf[Ctor].instantiationId.isDefined) &&
+      (!cons.isInstanceOf[Dtor] || cons.asInstanceOf[Dtor].instantiationId.isDefined)
     if proceed then constraint match
       case (c: Ctor, d: Dtor) =>
         ctorDests.update(c, d)
@@ -504,7 +516,7 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
     constraints.foreach(handle)
   
   val resolveClashes =
-    val ctorToDtor = ctorDests.store.clone()
+    val ctorToDtor = ctorDests.store.clone() // TODO: clone is only helpful for debugging
     val dtorToCtor = dtorSources.store.clone()
     def removeCtor(rm: (Ctor | ResultId)): Unit = rm match
       case rm: Ctor =>
