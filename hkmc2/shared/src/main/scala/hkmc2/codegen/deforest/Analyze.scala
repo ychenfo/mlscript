@@ -7,7 +7,6 @@ import syntax.Tree
 import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
-import scala.collection.mutable.LinkedHashMap
 import Result.ResultId
 
 final case class NotDeforestableException(msg: String) extends Exception(msg)
@@ -405,7 +404,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
             val tpeVar = freshVar("sel_res", generatedForDef)
             cc.constrain(pStrat, new FieldSel(sel.uid, nme, tpeVar.asConsStrat))
             tpeVar.asProdStrat
-                
+            
     case v@Value.Ref(l) => l.asObj match
       case None =>
         if l.asBlkMember.exists(_.trmImplTree.exists(_.k is syntax.Fun)) &&
@@ -447,7 +446,7 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
         case N => S(d :: Nil, false)
     def get(c: Ctor) = store.get(c).map(l => l._1.distinct -> l._2)
   object dtorSources:
-    val store = mutable.Map.empty[Dtor | FieldSel, Ls[Ctor] -> Bool]
+    val store = mutable.LinkedHashMap.empty[Dtor | FieldSel, Ls[Ctor] -> Bool]
     def update(d: Dtor | FieldSel, c: Ctor | NoProd.type) = c match
       case NoProd => store.updateWith(d):
         case S(l -> _) => S(l, true)
