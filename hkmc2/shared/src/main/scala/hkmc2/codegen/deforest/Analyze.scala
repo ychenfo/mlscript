@@ -559,7 +559,13 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
         dtor.arms.find:
           case (Case.Cls(c1, _) -> body) => c1 is ctorSym
         .map(_._2).orElse(dtor.dflt).get
-      val traverser = new GetCtorsTraverser(arm)
+      val armAndMatchRest =
+        preAnalyzer
+        .matchScrutToParentMatchScruts(dtorScrutExprId)
+        .foldLeft(Begin(arm, dtor.rest)): (acc, x) =>
+          val newRest = preAnalyzer.getMatchFromMatchScrutExprId(x).get.rest
+          Begin(acc, newRest)
+      val traverser = new GetCtorsTraverser(armAndMatchRest)
       traverser.ctors
     def findCycle(c: Ctor, d: Dtor): Ls[ResultId] =
       val cache = mutable.Set(c.exprId)
