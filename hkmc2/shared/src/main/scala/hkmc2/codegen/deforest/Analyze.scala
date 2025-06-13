@@ -12,6 +12,7 @@ import Result.ResultId
 final case class NotDeforestableException(msg: String) extends Exception(msg)
 
 type StratVarId = Uid[StratVarState]
+type InstantiationId = Ls[ResultId]
 
 class StratVarState(val uid: StratVarId, val name: Str, val generatedForDef: Opt[BlockMemberSymbol]):
   lazy val asProdStrat = ProdVar(this)
@@ -34,7 +35,7 @@ case class ProdFun(params: Ls[ConsStrat], res: ProdStrat) extends ProdStrat
 case object NoProd extends ProdStrat
 class Ctor(
   val exprId: ResultId,
-  val instantiationId: Opt[Ls[ResultId]],
+  val instantiationId: Opt[InstantiationId],
   val ctor: ClassLikeSymbol,
   val args: Ls[TermSymbol -> ProdStrat]) extends ProdStrat
 
@@ -44,6 +45,7 @@ case class ConsFun(params: Ls[ProdStrat], res: ConsStrat) extends ConsStrat
 case object NoCons extends ConsStrat
 class FieldSel(
   val exprId: ResultId,
+  val instantiationId: Opt[InstantiationId],
   val field: Tree.Ident,
   val consVar: ConsVar) extends ConsStrat:
     val filter = mutable.Map.empty[ProdVar, Ls[ClassLikeSymbol]].withDefaultValue(Nil)
@@ -52,7 +54,7 @@ class FieldSel(
 
 class Dtor(
   val scrutExprId: ResultId,
-  val instantiationId: Opt[Ls[ResultId]]) extends ConsStrat
+  val instantiationId: Opt[InstantiationId]) extends ConsStrat
 
 class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat]):
   def instantiate(referSite: ResultId)(using d: DeforestConstraintsCollector, cc: d.ConstraintsAndCacheHitCollector): ProdVar =
@@ -62,6 +64,8 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
       case _ => die
     val instantiatingRecursiveGroup = d.funSymToProdStratScheme.recursiveGroups(instantiatingFunSym)
     val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
+    def updateInstantiationId(instId: Opt[InstantiationId]) =
+      S(instId.fold(referSite :: Nil)(l => referSite :: l))
     def duplicateVarState(s: StratVarState) =
       if s.generatedForDef.fold(false)(instantiatingRecursiveGroup.contains) then
         stratVarMap.getOrElseUpdate.curried(s):
@@ -74,7 +78,7 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
       case NoProd => NoProd
       case c: Ctor => new Ctor(
         c.exprId,
-        S(c.instantiationId.fold(referSite :: Nil)(l => referSite :: l)),
+        updateInstantiationId(c.instantiationId),
         c.ctor,
         c.args.map((a, b) => a -> duplicateProdStrat(b))
       )
@@ -83,11 +87,15 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
       case ConsFun(params, res) => ConsFun(params.map(duplicateProdStrat), duplicateConsStrat(res))
       case NoCons => NoCons
       case fSel: FieldSel =>
-        val res = new FieldSel(fSel.exprId, fSel.field, duplicateVarState(fSel.consVar.s).asConsStrat)
+        val res = new FieldSel(
+          fSel.exprId,
+          updateInstantiationId(fSel.instantiationId),
+          fSel.field,
+          duplicateVarState(fSel.consVar.s).asConsStrat)
         fSel.filter.foreach: (p, ls) =>
           res.updateFilter(duplicateVarState(p.s).asProdStrat, ls)
         res
-      case dtor: Dtor => new Dtor(dtor.scrutExprId, S(dtor.instantiationId.fold(referSite :: Nil)(l => referSite :: l)))
+      case dtor: Dtor => new Dtor(dtor.scrutExprId, updateInstantiationId(dtor.instantiationId))
     val newProd = duplicateVarState(s).asProdStrat
     constraints.foreach: (p, c) =>
       cc.constrain(duplicateProdStrat(p), duplicateConsStrat(c))
@@ -103,7 +111,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
   val matchScrutToMatchBlock = mutable.Map.empty[ResultId, Match]
   val matchScrutToParentMatchScruts = mutable.Map.empty[ResultId, Ls[ResultId]]
   val matchScrutInFunDef = mutable.Map.empty[ResultId, Opt[BlockMemberSymbol]]
-  val selsToMatchingArms = mutable.Map.empty[ResultId, Ls[ResultId -> Opt[ClassLikeSymbol]]]
+  val selsToMatchingArmsContainingIt = mutable.Map.empty[ResultId, Ls[ResultId -> Opt[ClassLikeSymbol]]]
   val symToStratVar = mutable.Map.empty[Symbol, ProdVar]
   val usedFunSyms = mutable.Set.empty[BlockMemberSymbol]
   lazy val definedFunSyms = funSymToFun.keySet
@@ -157,7 +165,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
   override def applyPath(p: Path): Unit =
     resultIdToResult += p.uid -> p
     p match
-      case s@Select(path, nme) => selsToMatchingArms += s.uid -> inMatchScrutsArms
+      case s@Select(path, nme) => selsToMatchingArmsContainingIt += s.uid -> inMatchScrutsArms
       case _ => ()
     super.applyPath(p)
   
@@ -325,7 +333,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
             case None =>
               val pStrat = processResult(p)
               val tpeVar = freshVar("", generatedForDef)
-              cc.constrain(pStrat, new FieldSel(s.uid, nme, tpeVar.asConsStrat))
+              cc.constrain(pStrat, new FieldSel(s.uid, instantiationId, nme, tpeVar.asConsStrat))
               val appRes = freshVar("", generatedForDef) // unknown function symbol
               cc.constrain(tpeVar.asProdStrat, ConsFun(argsTpe, appRes.asConsStrat))
               appRes.asProdStrat
@@ -387,7 +395,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
         val pStrat = processResult(p)
         pStrat match
           case ProdVar(pStratVar) =>
-            val inMatchingArm = preAnalyzer.selsToMatchingArms(sel.uid).flatMap:
+            val inMatchingArm = preAnalyzer.selsToMatchingArmsContainingIt(sel.uid).flatMap:
               case (scrutUid, S(inArm)) =>
                 preAnalyzer.matchScrutToMatchBlock(scrutUid).scrut match
                   case Value.Ref(l) =>
@@ -395,14 +403,14 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                   case _ => N
               case _ => N
             val tpeVar = freshVar("sel_res", generatedForDef)
-            val selStrat = new FieldSel(sel.uid, nme, tpeVar.asConsStrat)
+            val selStrat = new FieldSel(sel.uid, instantiationId, nme, tpeVar.asConsStrat)
             inMatchingArm.foreach: (p, c) =>
               selStrat.updateFilter(p, c :: Nil)
             cc.constrain(pStrat, selStrat)
             tpeVar.asProdStrat
           case _ =>
             val tpeVar = freshVar("sel_res", generatedForDef)
-            cc.constrain(pStrat, new FieldSel(sel.uid, nme, tpeVar.asConsStrat))
+            cc.constrain(pStrat, new FieldSel(sel.uid, instantiationId, nme, tpeVar.asConsStrat))
             tpeVar.asProdStrat
             
     case v@Value.Ref(l) => l.asObj match
@@ -539,12 +547,15 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
         mats.size == 0 && sels.size == 1 ||
         mats.size == 1 && locally:
           val matScrutExprId = mats.head.scrutExprId
+          val matExprInstantiationId = mats.head.instantiationId.get
           val matScrutSym = preAnalyzer.getResult(matScrutExprId).asInstanceOf[Value.Ref].l
           sels.forall: s =>
             val selExprId = s.exprId
             preAnalyzer.getResult(selExprId) match
               case Select(Value.Ref(l), _) => 
-                preAnalyzer.selsToMatchingArms(selExprId).exists(_._1 === matScrutExprId) && (l is matScrutSym)
+                preAnalyzer.selsToMatchingArmsContainingIt(selExprId).exists(_._1 === matScrutExprId) &&
+                (l is matScrutSym) &&
+                s.instantiationId.get == matExprInstantiationId
               case _ => false
     do removeCtor(rm)
     for

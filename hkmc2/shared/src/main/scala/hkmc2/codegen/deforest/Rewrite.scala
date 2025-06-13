@@ -11,24 +11,22 @@ import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
 import Result.ResultId
 
-type InstantiationId = Ls[ResultId]
-extension (instId: InstantiationId)
-  def makeSuffix(preAnalyzer: DeforestPreAnalyzer) =
-    instId.map(preAnalyzer.getStableResultId).mkString("_")
 
 type CtorId = ResultId -> InstantiationId
 type MatchId = ResultId -> InstantiationId
+type SelId = ResultId -> InstantiationId
 
 enum FinalDest:
-  case Match(val matchId: MatchId, val arm: Opt[ClassLikeSymbol], val selsInArm: Ls[ResultId])
-  case Sel(val s: ResultId)
+  case Match(val matchId: MatchId, val arm: Opt[ClassLikeSymbol], val selsInArm: Ls[SelId])
+  case Sel(val s: SelId)
+
   
 class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.State):
   val preAnalyzer = sol.preAnalyzer
 
-  val instIdToMappingFromOldToNewSyms = mutable.Map.empty[Ls[ResultId], Map[BlockMemberSymbol, BlockMemberSymbol]]
+  val instIdToMappingFromOldToNewSyms = mutable.Map.empty[InstantiationId, Map[BlockMemberSymbol, BlockMemberSymbol]]
   // need to be ordered because we need to traverse it to generate new fun def bodies
-  val newSymToInstIdAndOldSym = mutable.LinkedHashMap.empty[BlockMemberSymbol, Ls[ResultId] -> BlockMemberSymbol]
+  val newSymToInstIdAndOldSym = mutable.LinkedHashMap.empty[BlockMemberSymbol, InstantiationId -> BlockMemberSymbol]
   locally:
     for
       (ctor, _) <- sol.resolveClashes._1
@@ -48,8 +46,10 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     // TODO: can merge all ids that *only* have dtor to one id, but also need to consider all other
     // referred functions along the way
     for
-      case (dtor: Dtor, _) <- sol.resolveClashes._2
-      instantiationId = dtor.instantiationId.get
+      (dtorOrSel, _) <- sol.resolveClashes._2
+      instantiationId = dtorOrSel match
+        case f: FieldSel => f.instantiationId.get
+        case d: Dtor => d.instantiationId.get
       case instId@(invokedReferSite :: _) <- instantiationId.scanRight(Nil)(_ :: _)
     do instIdToMappingFromOldToNewSyms.getOrElseUpdate.curried(instId):
       val invokedFunSym = preAnalyzer.getReferredFunSym(invokedReferSite)
@@ -75,22 +75,30 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
         val ctorFinalDest =
           if dtor.isEmpty then
             assert(sel.size == 1)
-            FinalDest.Sel(sel.head.exprId)
+            FinalDest.Sel(sel.head.exprId -> sel.head.instantiationId.get)
           else
             assert(dtor.size == 1)
-            val dtorScrutExprId = dtor.head.scrutExprId
-            val distinctSels = sel.map(_.exprId).distinct // need to preserve order
-            distinctSels.foreach: s =>
-              assert(preAnalyzer.selsToMatchingArms(s).exists(_._1 == dtorScrutExprId))
+            val dtorScrutExprId = dtor.head.scrutExprId -> dtor.head.instantiationId.get
+            val distinctSels = sel
+              .map: s =>
+                assert(s.instantiationId.get == dtorScrutExprId._2)
+                s.exprId -> s.instantiationId.get
+              .distinct // need to preserve order
+            assert:
+              distinctSels.forall: s =>
+                preAnalyzer.selsToMatchingArmsContainingIt(s._1).exists: armInfo =>
+                  armInfo._1 == dtorScrutExprId._1 &&
+                  armInfo._2.fold(true): clsSym =>
+                     clsSym is c.ctor
             val ctorCls = preAnalyzer.getCtorSymFromCtorLikeExprId(c.exprId).get
-            val whichArm = preAnalyzer.matchScrutToMatchBlock(dtorScrutExprId).arms
+            val whichArm = preAnalyzer.matchScrutToMatchBlock(dtorScrutExprId._1).arms
               .flatMap: x =>
                 x._1 match
                   case Case.Cls(cls, _) => if (cls is ctorCls) then S(cls) else N
                   case _ => die
               .headOption
             FinalDest.Match(
-              dtorScrutExprId -> dtor.head.instantiationId.get,
+              dtorScrutExprId,
               whichArm,
               distinctSels
             )
@@ -124,7 +132,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
   
   val finalDestToSymbolsToReplaceSelInArms = mutable.Map.empty[
     FinalDest,
-    Map[ResultId, (TempSymbol | VarSymbol)] -> Map[Tree.Ident, (TempSymbol | VarSymbol)]]
+    Map[SelId, (TempSymbol | VarSymbol)] -> Map[Tree.Ident, (TempSymbol | VarSymbol)]]
   val finalDestToMatchArmFunSymbols = mutable.LinkedHashMap.empty[FinalDest, BlockMemberSymbol]
   locally:
     def updateSelReplacementMaps(matchArmDest: FinalDest.Match, useVarSym: Bool) =
@@ -133,9 +141,9 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
       case N => ()
       case Some(cls) =>
         val selNameToNewSymbol = mutable.Map.empty[Tree.Ident, (TempSymbol | VarSymbol)]
-        val selExprIdToNewSymbol = mutable.Map.empty[ResultId, (TempSymbol | VarSymbol)]
+        val selExprIdToNewSymbol = mutable.Map.empty[SelId, (TempSymbol | VarSymbol)]
         for selId <- selsInArm do
-          val selName = preAnalyzer.getResult(selId).asInstanceOf[Select].name
+          val selName = preAnalyzer.getResult(selId._1).asInstanceOf[Select].name
           val sym = selNameToNewSymbol.getOrElseUpdate.curried(selName):
             if useVarSym then VarSymbol(Tree.Ident(s"_deforest_${cls.nme}_${selName}"))
             else TempSymbol(N, s"_deforest_${cls.nme}_${selName}")
@@ -162,6 +170,12 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     finalDestToMatchArmFunSymbols.values +
     State.globalThisSymbol +
     State.runtimeSymbol
+  
+  // val sel
+  
+  // object freeVarsOfMatchesConsideringDeforestation:
+  //   val store = mutable.Map.empty[MatchId, Ls[Symbol]]
+  //   val matchIdToSymbolsToReplacedInAll
 
 
 
@@ -229,7 +243,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           Return(
             Call(Value.Ref(sym), freeVars.map(a => Arg(false, Value.Ref(a))))(true, false),
             false)
-
+  
   object matchArmsOfFusingMatches:
     val store = mutable.Map.empty[FinalDest.Match, Either[FunDefn -> Ls[Symbol], Block]]
     
@@ -351,5 +365,7 @@ extension (ps: Ls[VarSymbol])
     ps.map(s => Param(FldFlags.empty, s, N, Modulefulness.none)),
     N)
 
-
+extension (instId: InstantiationId)
+  def makeSuffix(preAnalyzer: DeforestPreAnalyzer) =
+    instId.map(preAnalyzer.getStableResultId).mkString("_")
 

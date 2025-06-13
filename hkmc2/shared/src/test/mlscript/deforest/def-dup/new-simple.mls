@@ -234,3 +234,29 @@ localFuse(4)
 //│ 	Ref($scrut)@Some(List())
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+
+
+// cyclic strategy, shouldn't fuse
+:deforest
+fun f(x) =
+  let res = if x is
+    A(x) then x
+  if res > 0 then f(A(res - 1)) else 0
+f(A(4))
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+// shouldn't have any fusion due to strategy clash
+:deforest
+fun g(x) = if x is
+  A(a) then a
+fun f(x) = x.x
+let o = A(1)
+g(o) + f(o) + o.x
+//│ = 3
+//│ o = A(1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
