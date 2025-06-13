@@ -332,7 +332,7 @@ class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends Block
         applyPath(rhs)
         applyBlock(rest)
         ctx -= sym
-      case c: ClsLikeDefn => ??? // not supported
+      case c: ClsLikeDefn => die // not supported
     
     case _ => super.applyBlock(b)
       

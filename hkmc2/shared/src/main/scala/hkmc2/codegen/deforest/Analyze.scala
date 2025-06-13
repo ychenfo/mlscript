@@ -376,8 +376,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
           cc.constrain(funTpe, ConsFun(argsTpe, appRes.asConsStrat))
           appRes.asProdStrat
         case Value.This(sym) => throw NotDeforestableException("No support for `this` as a callee yet")
-        case Value.Lit(lit) => ???
-        case Value.Arr(elems) => ???
+        case Value.Lit(lit) => lastWords(s"try to call literal $lit")
+        case Value.Arr(elems) => lastWords(s"try to call array $elems")
     r match
     case c@Call(f, args) => handleCallLike(f, args.map {case Arg(false, value) => value}, c)
     case i@Instantiate(cls, args) => handleCallLike(cls, args, i)
