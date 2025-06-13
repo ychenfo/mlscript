@@ -22,6 +22,7 @@ enum FinalDest:
 
   
 class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.State):
+  drwp =>
   val preAnalyzer = sol.preAnalyzer
 
   val instIdToMappingFromOldToNewSyms = mutable.Map.empty[InstantiationId, Map[BlockMemberSymbol, BlockMemberSymbol]]
@@ -133,10 +134,13 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
   val finalDestToSymbolsToReplaceSelInArms = mutable.Map.empty[
     FinalDest,
     Map[SelId, (TempSymbol | VarSymbol)] -> Map[Tree.Ident, (TempSymbol | VarSymbol)]]
+  val fusingMatchIdToSymbolsToReplacedInAllBranches = mutable.Map.empty[
+    MatchId,
+    Map[SelId, (TempSymbol | VarSymbol)]]
   val finalDestToMatchArmFunSymbols = mutable.LinkedHashMap.empty[FinalDest, BlockMemberSymbol]
   locally:
     def updateSelReplacementMaps(matchArmDest: FinalDest.Match, useVarSym: Bool) =
-      val FinalDest.Match(_, cls, selsInArm) = matchArmDest
+      val FinalDest.Match(matchId, cls, selsInArm) = matchArmDest
       cls match
       case N => ()
       case Some(cls) =>
@@ -144,11 +148,14 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
         val selExprIdToNewSymbol = mutable.Map.empty[SelId, (TempSymbol | VarSymbol)]
         for selId <- selsInArm do
           val selName = preAnalyzer.getResult(selId._1).asInstanceOf[Select].name
+          val symName = s"_deforest_${cls.nme}_${selName}_${selId._2.makeSuffix(preAnalyzer)}"
           val sym = selNameToNewSymbol.getOrElseUpdate.curried(selName):
-            if useVarSym then VarSymbol(Tree.Ident(s"_deforest_${cls.nme}_${selName}"))
-            else TempSymbol(N, s"_deforest_${cls.nme}_${selName}")
+            if useVarSym then VarSymbol(Tree.Ident(symName)) else TempSymbol(N, symName)
           selExprIdToNewSymbol += selId -> sym
         finalDestToSymbolsToReplaceSelInArms += matchArmDest -> (selExprIdToNewSymbol.toMap -> selNameToNewSymbol.toMap)
+        fusingMatchIdToSymbolsToReplacedInAllBranches.updateWith(matchId):
+          case N => S(selExprIdToNewSymbol.toMap)
+          case S(x) => S(x ++ selExprIdToNewSymbol.toMap)
     finalDestToCtorIds.foreach:
       case (_: FinalDest.Match) -> ctorIds if ctorIds.size < 1 => die
       case (matchArmDest@FinalDest.Match(matchId, cls, _)) -> ctorIds =>
@@ -171,11 +178,13 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     State.globalThisSymbol +
     State.runtimeSymbol
   
-  // val sel
+  val selIdsToSymbolsToReplace =
+    finalDestToSymbolsToReplaceSelInArms.values.flatMap(_._1).toMap
   
-  // object freeVarsOfMatchesConsideringDeforestation:
-  //   val store = mutable.Map.empty[MatchId, Ls[Symbol]]
-  //   val matchIdToSymbolsToReplacedInAll
+  object freeVarsOfOriginalMatchesConsideringDeforestation:
+    val store = mutable.Map.empty[MatchId, Ls[Symbol]]
+    def apply(m: MatchId) = store.getOrElseUpdate.curried(m):
+      new FreeVarTraverserForMatchConsideringDeforestation(m, drwp).freeVars
 
 
 
@@ -288,9 +297,9 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
 // free vars that may be introduced by deforestation:
 // 1. the free vars from the `rest` of the their parent matches
 // 2. the free vars caused by the substitution of selections of scrutinees of their parent matches
-class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
-  val ctx = mutable.Set.from(alwaysDefined)
-  val result = mutable.Set.empty[Symbol]
+class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends BlockTraverser:
+  protected val ctx = mutable.Set.from(alwaysDefined)
+  protected val result = mutable.Set.empty[Symbol]
   
   override def applyBlock(b: Block): Unit = b match
     case Match(scrut, arms, dflt, rest) =>
@@ -342,9 +351,69 @@ class FreeVarTraverser(alwaysDefined: Set[Symbol]) extends BlockTraverser:
     applyBlock(l.body)
     ctx --= paramSymbols
   
-  def analyze(b: Block) =
-    applyBlock(b)
-    result.toList.sortBy(_.uid)
+  protected def analyze: Unit = applyBlock(blk)
+  
+  analyze
+  
+  val freeVars = result.toList.sortBy(_.uid)
+
+// Used on match blocks before deforestation transformation
+// Compute free vars considering new vars introduced by deforestation
+class FreeVarTraverserForMatchConsideringDeforestation(
+  matchId: MatchId,
+  drwp: DeforestRewritePrepare
+) extends FreeVarTraverser(drwp.preAnalyzer.matchScrutToMatchBlock(matchId._1), drwp.alwaysNonFreeVars):
+  val instantiationId = matchId._2
+  val preAnalyzer = drwp.preAnalyzer
+  
+  val selsReplacementByCurrentMatch =
+    drwp.fusingMatchIdToSymbolsToReplacedInAllBranches(matchId)
+  val selsReplacementNotForThisMatch =
+    drwp.selIdsToSymbolsToReplace --
+    selsReplacementByCurrentMatch.keySet
+  val currentMatchScrutSymbol = blk.asInstanceOf[Match].scrut.asInstanceOf[Value.Ref].l
+  
+
+  override def applyBlock(b: Block): Unit = b match
+    // a nested match
+    case m@Match(scrut, _, _, _) =>
+      result ++= drwp.freeVarsOfOriginalMatchesConsideringDeforestation(scrut.uid -> instantiationId)
+      
+      // sub-matches' scruts (which are not included in freeVarsOfNonTransformedMatches)
+      // are also free vars
+      val Value.Ref(l) = scrut: @unchecked
+      if !ctx(l) then result += l
+      
+      // free vars in nested-matches reported by freeVarsOfNonTransformedMatches may also contain
+      // spurious ones: those that are going to be substitued by the current match,
+      // and those that are in the ctx
+      result --= selsReplacementByCurrentMatch.values
+      result --= ctx
+    case _ => super.applyBlock(b)
+  
+  override def applyPath(p: Path): Unit = p match
+    case p@Select(qual, name) => selsReplacementNotForThisMatch.get(p.uid -> instantiationId) match
+      case None => qual match
+        // if it is the scrut of current match and the computation containing
+        // this selection is moved, then the selection will be replaced and there will be no free vars
+        case Value.Ref(l) if l == currentMatchScrutSymbol => ()
+        case _ => super.applyPath(p)
+      case Some(s) => result += s
+    case _ => super.applyPath(p)
+  
+  override def analyze: Unit =
+    val Match(_, arms, dflt, rest) = blk: @unchecked
+    val parentMatchRest = drwp.preAnalyzer
+      .matchScrutToParentMatchScruts(matchId._1)
+      .foldRight[Block](End("")): (p, acc) =>
+        Begin(preAnalyzer.matchScrutToMatchBlock(p).rest, acc)
+    (arms.map(_._2) ++ dflt).foreach: a =>
+      // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
+      // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
+      // Also take care of the `rest`s of its parent match blocks.
+      val realArm = Begin(a, Begin(rest, parentMatchRest)).flattened
+      applyBlock(realArm)
+
 
 
 class ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) extends BlockTransformer(new SymbolSubst()):
@@ -357,7 +426,7 @@ extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
     new ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms).applyBlock(b)
   def sortedFvsForTransformedBlocks(alwaysDefined: Set[Symbol]) =
-    new FreeVarTraverser(alwaysDefined).analyze(b)
+    new FreeVarTraverser(b, alwaysDefined).freeVars
 
 extension (ps: Ls[VarSymbol])
   def asParamList = ParamList(
