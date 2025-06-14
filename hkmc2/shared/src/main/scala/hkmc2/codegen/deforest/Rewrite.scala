@@ -25,6 +25,10 @@ enum FinalDest:
   // to only consider `matchId` and `arm` (i.e. the match arm).
   case Match(val matchId: MatchId, val arm: Opt[ClassLikeSymbol])(val selsInArm: Ls[SelId], val tmpSymbolForASpecificCtorId: Ls[TempSymbol])
   case Sel(val s: SelId)
+  def toString(pre: DeforestPreAnalyzer): String = this match
+    case Match(matchId, arm) => pre.resultIdToResult(matchId._1).toString() + "@" + matchId._2.makeSuffix(pre) + "@" + arm.fold("dflt")(_.nme)
+    case Sel(s) => pre.resultIdToResult(s._1).toString() + "@" + s._2.makeSuffix(pre)
+  
 
   
 class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.State):
@@ -71,50 +75,52 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
       mapping.toMap
   
   val finalDestToCtorIds = mutable.LinkedHashMap.empty[FinalDest, Set[CtorId]]
-  val ctorIdToFinalDest: Map[CtorId, FinalDest] = sol.resolveClashes._1
-    .map:
-      case (c: Ctor, dtors -> noCons) =>
-        assert(!noCons)
-        val (dtor, sel) = dtors.partitionMap:
-          case d: Dtor => L(d)
-          case s: FieldSel => R(s)
-        val ctorExprId = c.exprId -> c.instantiationId.get
-        val ctorFinalDest =
-          if dtor.isEmpty then
-            assert(sel.size == 1)
-            FinalDest.Sel(sel.head.exprId -> sel.head.instantiationId.get)
-          else
-            assert(dtor.size == 1)
-            val dtorScrutExprId = dtor.head.scrutExprId -> dtor.head.instantiationId.get
-            val distinctSels = sel
-              .map: s =>
-                assert(s.instantiationId.get == dtorScrutExprId._2)
-                s.exprId -> s.instantiationId.get
-              .distinct // need to preserve order
-            assert:
-              distinctSels.forall: s =>
-                preAnalyzer.selsToMatchingArmsContainingIt(s._1).exists: armInfo =>
-                  armInfo._1 == dtorScrutExprId._1 &&
-                  armInfo._2.fold(true): clsSym =>
-                     clsSym is c.ctor
-            val ctorCls = preAnalyzer.getCtorSymFromCtorLikeExprId(c.exprId).get
-            val whichArm = preAnalyzer.matchScrutToMatchBlock(dtorScrutExprId._1).arms
-              .flatMap: x =>
-                x._1 match
-                  case Case.Cls(cls, _) => if (cls is ctorCls) then S(cls) else N
-                  case _ => die
-              .headOption
-            val tmpSymbolsForFieldsOfCtor = ctorCls.asCls
-              .map: cls =>
-                cls.tree.clsParams.map: fieldName =>
-                  TempSymbol(N, fieldName.name)
-              .getOrElse(Nil)
-            FinalDest.Match(dtorScrutExprId, whichArm)(distinctSels, tmpSymbolsForFieldsOfCtor)
-        finalDestToCtorIds.updateWith(ctorFinalDest):
-          case N => S(Set(ctorExprId))
-          case S(s) => S(s + ctorExprId)
-        ctorExprId -> ctorFinalDest
-    .toMap
+  val ctorIdToFinalDest = mutable.LinkedHashMap.empty[CtorId, FinalDest]
+  sol.resolveClashes._1.foreach:
+    case (c: Ctor, dtors -> noCons) =>
+      assert(!noCons)
+      val (dtor, sel) = dtors.partitionMap:
+        case d: Dtor => L(d)
+        case s: FieldSel => R(s)
+      val ctorExprId = c.exprId -> c.instantiationId.get
+      val ctorFinalDest =
+        if dtor.isEmpty then
+          assert(sel.size == 1)
+          FinalDest.Sel(sel.head.exprId -> sel.head.instantiationId.get)
+        else
+          assert(dtor.size == 1)
+          val dtorScrutExprId = dtor.head.scrutExprId -> dtor.head.instantiationId.get
+          val distinctSels = sel
+            .map: s =>
+              assert(s.instantiationId.get == dtorScrutExprId._2)
+              s.exprId -> s.instantiationId.get
+            .distinct // need to preserve order
+          assert:
+            distinctSels.forall: s =>
+              preAnalyzer.selsToMatchingArmsContainingIt(s._1).exists: armInfo =>
+                armInfo._1 == dtorScrutExprId._1 &&
+                armInfo._2.fold(true): clsSym =>
+                    clsSym is c.ctor
+          val ctorCls = preAnalyzer.getCtorSymFromCtorLikeExprId(c.exprId).get
+          val whichArm = preAnalyzer.matchScrutToMatchBlock(dtorScrutExprId._1).arms
+            .flatMap: x =>
+              x._1 match
+                case Case.Cls(cls, _) => if (cls is ctorCls) then S(cls) else N
+                case _ => die
+            .headOption
+          val tmpSymbolsForFieldsOfCtor = ctorCls.asCls
+            .map: cls =>
+              cls.tree.clsParams.map: fieldName =>
+                TempSymbol(N, fieldName.name)
+            .getOrElse(Nil)
+          FinalDest.Match(dtorScrutExprId, whichArm)(distinctSels, tmpSymbolsForFieldsOfCtor)
+      finalDestToCtorIds.updateWith(ctorFinalDest):
+        case N => S(Set(ctorExprId))
+        case S(s) => S(s + ctorExprId)
+      ctorIdToFinalDest.updateWith(ctorExprId): 
+        case N => S(ctorFinalDest)
+        case S(_) => die
+  
   val rewritingMatchIds -> rewritingSelIds = finalDestToCtorIds.keySet.partitionMap:
     case FinalDest.Match(matchId, _) => L(matchId)
     case FinalDest.Sel(s) => R(s)
@@ -257,28 +263,60 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             false)
   
   object matchArmsOfFusingMatches:
-    val store = mutable.Map.empty[FinalDest.Match, Either[FunDefn -> Ls[Symbol], Block]]
+    val store = mutable.Map.empty[FinalDest.Match, Either[FunDefn, Block]]
     
     // return a lambda, which either calls the extracted arm function
     // or contains the computations in matching arms
-    def getOrElseUpdate(dest: FinalDest.Match): Value.Lam =
-      val freeVarsAndTheirSyms = rewritePrepare
-        .freeVarsOfOriginalMatchesConsideringDeforestation(dest.matchId)
-        .map: x =>
-          x -> VarSymbol(Tree.Ident(x.nme))
+    def getOrElseUpdate(ctorId: CtorId): Value.Lam =
+      val dest = rewritePrepare.ctorIdToFinalDest(ctorId).asInstanceOf[FinalDest.Match]
+      val freeVarsInTheMatch =
+        rewritePrepare.freeVarsOfOriginalMatchesConsideringDeforestation(dest.matchId)
       val armFunOrBlk = store.updateWith(dest):
         case S(R(_)) => die
         case S(f@L(_)) => S(f)
-        case N => S(???)
+        case N => S:
+          val transformedRest = matchRestOfFusingMatches.getOrElseUpdate(dest.matchId)
+          val originalMatchArmBody =
+            val matchExpr = preAnalyzer.matchScrutToMatchBlock(dest.matchId._1)
+            dest.arm.fold(matchExpr.dflt.get): armCls =>
+              matchExpr.arms.find(a => a._1.asInstanceOf[Case.Cls].cls is armCls).get._2
+          // this rewrittenBody here already has its selection replaced with
+          // the pre-computed var symbols (if the arm is used multiple times)
+          // or the temp symbols (if the arm is used only once)
+          val rewrittenBody = Begin(Transform(dest.matchId._2)(originalMatchArmBody), transformedRest).flattened
+          rewritePrepare.finalDestToMatchArmFunSymbols.get(dest) match
+            case N => R(rewrittenBody)
+            case Some(funSym) =>
+              val freeVarSymForFunDef = freeVarsInTheMatch.map: x =>
+                VarSymbol(Tree.Ident(x.nme))
+              val funBody = rewrittenBody.replaceSymbols(freeVarsInTheMatch.zip(freeVarSymForFunDef).toMap).mapTail:
+                case Return(res, implct) => Return(res, false)
+                case t => t
+              val varSymbolsThatReplacedSelections =
+                // the order is the same as class ctor param
+                preAnalyzer.getCtorSymFromCtorLikeExprId(ctorId._1).get.asCls.fold(Nil): c =>
+                  c.tree.clsParams.map: p =>
+                    rewritePrepare.finalDestToSymbolsToReplaceSelInArms(dest)._2(Tree.Ident(p.name))
+              L(FunDefn(
+                N,
+                funSym,
+                (freeVarSymForFunDef ::: varSymbolsThatReplacedSelections).asParamList :: Nil,
+                funBody))
+      val symsForArmFreeVarsInLam = freeVarsInTheMatch.map: x =>
+        VarSymbol(Tree.Ident(x.nme))
       armFunOrBlk.get match
-        case Left(fdefn -> syms) =>
-          Value.Lam.apply.curried(freeVarsAndTheirSyms.unzip._2.asParamList):
-            Return(
-              Call(Value.Ref(fdefn.sym), freeVarsAndTheirSyms.unzip._2.asArgsList ::: Nil)(true, false), // FIXME: not nil!
-              false)
-          .asInstanceOf[Value.Lam]
-          // ???
-        case Right(value) => ???
+        case L(fdefn) => Value.Lam(
+          symsForArmFreeVarsInLam.asParamList,
+          Return(
+            Call(
+              Value.Ref(fdefn.sym),
+              symsForArmFreeVarsInLam.asArgsList ::: dest.tmpSymbolForASpecificCtorId.asArgsList)(true, false),
+            false))
+        case R(b) => Value.Lam(
+          symsForArmFreeVarsInLam.asParamList,
+          b.replaceSymbols(freeVarsInTheMatch.zip(symsForArmFreeVarsInLam).toMap).mapTail:
+            case Return(res, implct) => Return(res, false)
+            case t => t)
       
       
   

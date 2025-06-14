@@ -30,6 +30,13 @@ f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
 //│ 	Ref(ls1)@Some(List(8))
 //│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@Some(List(9)) -->
 //│ 	Ref(ls1)@Some(List(8))
+//│ ------------------------------------
+//│ Ref(member:Nil)@0@ --> Ref(ls1)@1@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@3 --> Ref(ls1)@1@Cons
+//│ Ref(member:Nil)@4@ --> Ref(ls2)@5@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@6 --> Ref(ls2)@5@Cons
+//│ Ref(member:Nil)@7@ --> Ref(ls1)@8@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@9 --> Ref(ls1)@8@Cons
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -44,6 +51,9 @@ f1(id(A(1))) + f2(id(A(2)))
 //│ 	Ref(a2)@Some(List(1))
 //│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@2@Some(List()) -->
 //│ 	Ref(a1)@Some(List(3))
+//│ ------------------------------------
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(2)))))@0@ --> Ref(a2)@1@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@2@ --> Ref(a1)@3@A
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -60,6 +70,9 @@ f1(wrap(1)) + f2(wrap(2))
 //│ 	Ref(a2)@Some(List(4))
 //│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@Some(List(5, 2, 3)) -->
 //│ 	Ref(a1)@Some(List(6))
+//│ ------------------------------------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@1_2_3 --> Ref(a2)@4@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@5_2_3 --> Ref(a1)@6@A
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -91,6 +104,15 @@ cons(f(0)) + cons1(f(1))
 //│ 	Ref(a)@Some(List(7))
 //│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@5@Some(List(6)) -->
 //│ 	Ref(a)@Some(List(7))
+//│ ------------------------------------
+//│ Ref(member:Nil)@0@1 --> Ref(a1)@2@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@3@1 --> Ref(a1)@2@Cons
+//│ Ref(member:Nil)@4@1 --> Ref(a1)@2@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@5@1 --> Ref(a1)@2@Cons
+//│ Ref(member:Nil)@0@6 --> Ref(a)@7@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@3@6 --> Ref(a)@7@Cons
+//│ Ref(member:Nil)@4@6 --> Ref(a)@7@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@5@6 --> Ref(a)@7@Cons
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -111,6 +133,12 @@ map(map(1 :: 2 :: Nil, x => x + 1), x => x * 2)
 //│ 	Ref(ls)@Some(List(1))
 //│ Ref(member:Nil)@6@Some(List()) -->
 //│ 	Ref(ls)@Some(List(1))
+//│ ------------------------------------
+//│ Ref(member:Nil)@0@1 --> Ref(ls)@2@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@1 --> Ref(ls)@2@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@ --> Ref(ls)@1@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@ --> Ref(ls)@1@Cons
+//│ Ref(member:Nil)@6@ --> Ref(ls)@1@Nil
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -128,6 +156,10 @@ map(1 :: 2 :: Nil, x => x + 1)
 //│ 	Ref(ls)@Some(List(1))
 //│ Ref(member:Nil)@3@Some(List()) -->
 //│ 	Ref(ls)@Some(List(1))
+//│ ------------------------------------
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@0@ --> Ref(ls)@1@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@2@ --> Ref(ls)@1@Cons
+//│ Ref(member:Nil)@3@ --> Ref(ls)@1@Nil
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -139,6 +171,7 @@ fun f(x) = if x is
 f(Nil)
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ------------------------------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -155,6 +188,9 @@ c1(1 :: Nil)
 //│ 	Ref(x)@Some(List(1))
 //│ Ref(member:Nil)@2@Some(List()) -->
 //│ 	Ref(t)@Some(List(1))
+//│ ------------------------------------
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(member:Nil))))@0@ --> Ref(x)@1@Cons
+//│ Ref(member:Nil)@2@ --> Ref(t)@1@Nil
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -177,6 +213,9 @@ apply(f)
 //│ 	Ref(x)@Some(List(2))
 //│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@3@Some(List(1)) -->
 //│ 	Ref(y1)@Some(List(2, 4))
+//│ ------------------------------------
+//│ Call(Ref(member:A),List(Arg(false,Ref(inner))))@0@1 --> Ref(x)@2@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@3@1 --> Ref(y1)@2_4@A
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -215,6 +254,9 @@ dtor(A(B(0)))
 //│ 	Ref(y)@Some(List(1, 2))
 //│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@3@Some(List()) -->
 //│ 	Ref(x)@Some(List(1))
+//│ ------------------------------------
+//│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(4)))))@0@1 --> Ref(y)@1_2@B
+//│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@3@ --> Ref(x)@1@A
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -232,6 +274,10 @@ localFuse(4)
 //│ 	Ref($scrut)@Some(List(2))
 //│ Call(Ref(member:B),List(Arg(false,Ref(y))))@3@Some(List(2)) -->
 //│ 	Ref($scrut)@Some(List())
+//│ ------------------------------------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@1 --> Ref($scrut)@1@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@2 --> Ref($scrut)@2@A
+//│ Call(Ref(member:B),List(Arg(false,Ref(y))))@3@2 --> Ref($scrut)@@B
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -245,6 +291,7 @@ fun f(x) =
 f(A(4))
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ------------------------------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -259,4 +306,5 @@ g(o) + f(o) + o.x
 //│ = 3
 //│ o = A(1)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ------------------------------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
