@@ -211,6 +211,28 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
 class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elaborator.State):
   val preAnalyzer = rewritePrepare.preAnalyzer
   
+  def apply() =
+    rewritePrepare.newSymToInstIdAndOldSym.foldRight(Transform(Nil)(preAnalyzer.b)):
+      case (newSym -> (instId -> oldSym), acc) =>
+        // 1. find original fundefs
+        // 2. transform fun body under the specific instantiation id
+        // 3. accumulate the definition
+        val FunDefn(_, _, param, body) = preAnalyzer.getFunDefnForSym(oldSym).get
+        val oldToNewParam = mutable.Map.empty[VarSymbol, VarSymbol]
+        val newParam = param.map: 
+          case ParamList(flags, params, restParam) =>
+            def makeNewParam(p: Param) = 
+              val Param(flags, sym, sign, modulefulness) = p
+              val newSym = VarSymbol(sym.id)
+              oldToNewParam += sym -> newSym
+              Param(flags, newSym, sign, modulefulness)
+            val newParams = params.map(makeNewParam)
+            val newRestParam = restParam.map(makeNewParam)
+            ParamList(flags, newParams, newRestParam)
+        val newBody = Transform(instId)(body).replaceSymbols(oldToNewParam.toMap)
+        val newFunDefn = FunDefn(N, newSym, newParam, newBody)
+        Define(newFunDefn, acc)
+  
   object matchRestOfFusingMatches:
     // from match scrut expr id to either a function def with a set of args that should be applied
     val store = mutable.Map.empty[MatchId, Either[FunDefn -> Ls[Symbol], Block]]
@@ -330,31 +352,6 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           b.replaceSymbols(freeVarsInTheMatch.zip(symsForArmFreeVarsInLam).toMap).mapTail:
             case Return(res, implct) => Return(res, false)
             case t => t)
-      
-      
-  
-  
-  // val matchArmBodyFunDefns = mutable.Map.empty[FinalDest.Match, FunDefn]
-  // val finalDestToMatchArmBody: Map[FinalDest.Match, Ls[TempSymbol] => Result] =
-  //   rewritePrepare.finalDestToCtorIds.collect:
-  //     case matchArmDest@FinalDest.Match(matchId, arm) -> ctorIds =>
-  //       if ctorIds.size < 1 then die
-  //       else if ctorIds.size == 1 then ???
-  //       else ???
-  //   ???
-        
-        
-      
-  // val duplicatedFuns = newSymToInstIdAndOldSym.foldRight(sol.preAnalyzer.b):
-  //   case (newSym -> instId, acc) =>
-      // 1. find original fundefs
-      // 2. transform fun body under the specific instantiation id
-      // 3. accumulate the definition
-      // ???
-  // object transformers:
-  //   val store = mutable.Map.empty[InstantiationId, Transform]
-  //   def apply(instId: InstantiationId) =
-  //     store.getOrElseUpdate(instId, new Transform(instId))
   
   private val uselessSymbolSubst = new SymbolSubst
   // rewrite ctor and dtors
@@ -451,6 +448,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
         case _ => super.applyValue(v)
       case _ => super.applyValue(v)
     
+    override def applyFunDefn(fun: FunDefn): FunDefn = fun
     def apply(b: Block) = applyBlock(b)
 
 
