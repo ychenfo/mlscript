@@ -159,7 +159,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     MatchId,
     Map[SelId, TempSymbol]]
   // if a key doesn't exist, it means the final dest is only used once
-  val finalDestToMatchArmFunSymbols = mutable.LinkedHashMap.empty[FinalDest, BlockMemberSymbol]
+  val finalDestToMatchArmFunSymbols = mutable.Map.empty[FinalDest, BlockMemberSymbol]
   val selIdsInAllArmsToSymbolsToReplace = mutable.Map.empty[SelId, TempSymbol | VarSymbol]
   locally:
     def matDestToTempSymbolMap(mat: FinalDest.Match) =
@@ -210,10 +210,6 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     finalDestToMatchArmFunSymbols.values +
     State.globalThisSymbol +
     State.runtimeSymbol
-  
-  
-
-  
   
   object freeVarsOfOriginalMatchesConsideringDeforestation:
     val store = mutable.Map.empty[MatchId, Ls[Symbol]]
