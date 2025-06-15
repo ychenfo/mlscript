@@ -551,7 +551,6 @@ class FreeVarTraverserForMatchConsideringDeforestation(
   val selsReplacementByCurrentMatch =
     drwp.fusingMatchIdToVarSymbolsToReplacedInAllBranches.getOrElse[Map[SelId, VarSymbol | TempSymbol]](matchId, Map.empty) ++
     drwp.fusingMatchIdToTmpSymbolsToReplacedInAllBranches.getOrElse(matchId, Map.empty)
-  println(selsReplacementByCurrentMatch.size)
   val selsReplacementNotForThisMatch =
     drwp.selIdsInArmToSymbolsToReplace.toMap --
     selsReplacementByCurrentMatch.keySet
@@ -651,5 +650,5 @@ extension (ss: Ls[Symbol])
 
 extension (instId: InstantiationId)
   def makeSuffix(preAnalyzer: DeforestPreAnalyzer) =
-    instId.map(preAnalyzer.getStableResultId).mkString("_")
+    "inst_" + instId.map(preAnalyzer.getStableResultId).mkString("_") + "_tsni"
 
