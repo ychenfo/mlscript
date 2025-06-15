@@ -42,7 +42,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     for
       (ctor, _) <- sol.resolveClashes._1
       instantiationId = ctor.instantiationId.get
-      case instId@(invokedReferSite :: _) <- instantiationId.scanRight(Nil)(_ :: _)
+      case instId@(_ :+ invokedReferSite) <- instantiationId.scanLeft(Nil)(_ :+ _)
     do instIdToMappingFromOldToNewSyms.getOrElseUpdate.curried(instId):
       val invokedFunSym = preAnalyzer.getReferredFunSym(invokedReferSite)
       val recursiveGroupFunSym = sol.collector.funSymToProdStratScheme.recursiveGroups(invokedFunSym)
@@ -452,7 +452,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId)
         case _ => s.symbol.flatMap(_.asBlkMember) match
           case Some(blk) if blk.trmImplTree.fold(false)(_.k is syntax.Fun) =>
-            val newInstId = s.uid :: instId
+            val newInstId = instId :+ s.uid
             rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)): m => // FIXME: correctly rename recursive groups
               Value.Ref(m(blk))
           case _ => super.applyPath(s)
@@ -465,7 +465,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId)
         case None => l.asBlkMember match
           case Some(blk) if blk.trmImplTree.fold(false)(_.k is syntax.Fun) =>
-            val newInstId = r.uid :: instId
+            val newInstId = instId :+ r.uid
             rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyValue(v)): m => // FIXME: correctly rename recursive groups
               Value.Ref(m(blk))
           case _ => super.applyValue(v)
