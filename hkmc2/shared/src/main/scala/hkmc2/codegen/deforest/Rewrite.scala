@@ -61,7 +61,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
       instantiationId = dtorOrSel match
         case f: FieldSel => f.instantiationId.get
         case d: Dtor => d.instantiationId.get
-      case instId@(invokedReferSite :: _) <- instantiationId.scanRight(Nil)(_ :: _)
+      case instId@(_ :+ invokedReferSite) <- instantiationId.scanLeft(Nil)(_ :+ _)
     do instIdToMappingFromOldToNewSyms.getOrElseUpdate.curried(instId):
       val invokedFunSym = preAnalyzer.getReferredFunSym(invokedReferSite)
       val recursiveGroupFunSym = sol.collector.funSymToProdStratScheme.recursiveGroups(invokedFunSym)
@@ -452,8 +452,11 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId)
         case _ => s.symbol.flatMap(_.asBlkMember) match
           case Some(blk) if blk.trmImplTree.fold(false)(_.k is syntax.Fun) =>
-            val newInstId = instId :+ s.uid
-            rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)): m => // FIXME: correctly rename recursive groups
+            val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
+              val currentSym = preAnalyzer.getReferredFunSym(currentReferSite)
+              rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
+            val newInstId = if inTheSameRecursiveGroup then instId else instId :+ s.uid
+            rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)): m =>
               Value.Ref(m(blk))
           case _ => super.applyPath(s)
       case v: Value => applyValue(v)
@@ -465,8 +468,11 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId)
         case None => l.asBlkMember match
           case Some(blk) if blk.trmImplTree.fold(false)(_.k is syntax.Fun) =>
-            val newInstId = instId :+ r.uid
-            rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyValue(v)): m => // FIXME: correctly rename recursive groups
+            val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
+              val currentSym = preAnalyzer.getReferredFunSym(currentReferSite)
+              rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
+            val newInstId = if inTheSameRecursiveGroup then instId else instId :+ r.uid
+            rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyValue(v)): m =>
               Value.Ref(m(blk))
           case _ => super.applyValue(v)
         case _ => super.applyValue(v)
