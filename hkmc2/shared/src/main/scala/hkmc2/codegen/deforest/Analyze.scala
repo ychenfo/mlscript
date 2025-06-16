@@ -138,23 +138,30 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
       case Value.Ref(l) => chk(l.asBlkMember.get)
       case _ => die
   
-    
+  
   private val resultIdToStableId = mutable.Map.empty[ResultId, Int]  
   private var stableResuldIt = 0
   private var inMatchScrutsArms: Ls[ResultId -> Opt[ClassLikeSymbol]] = Nil
   private def inMatchScruts = inMatchScrutsArms.unzip._1
   private var inFunDef: Opt[BlockMemberSymbol] = N
+  private var symsDefinedInFun: Opt[Set[Symbol]] = N
   override def applyFunDefn(fun: FunDefn): Unit =
     funSymToFun += fun.sym -> fun
     inFunDef match
-      case N => inFunDef = S(fun.sym)
+      case N =>
+        inFunDef = S(fun.sym)
+        symsDefinedInFun = S(fun.body.definedVars)
       case S(value) => throw NotDeforestableException("not expecting nested function definitions")
     super.applyFunDefn(fun)
     inFunDef = N
+    symsDefinedInFun = N
   
   override def applySymbol(s: Symbol): Unit = s match
     case s: (BlockMemberSymbol | TempSymbol | VarSymbol | TermSymbol) => symToStratVar.updateWith(s):
-      case N => S(freshVar(s.nme, inFunDef).asProdStrat)
+      case N =>
+        val inFunOrNot = inFunDef.fold(false): _ =>
+          symsDefinedInFun.get.contains(s)
+        S(freshVar(s.nme, if inFunOrNot then inFunDef else N).asProdStrat)
       case S(x) => S(x)
     case _ => ()
   
