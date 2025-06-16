@@ -186,7 +186,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
             val selExprIdToNewSymbol = mutable.Map.empty[SelId, VarSymbol]
             for selId <- matchArmDest.selsInArm do
               val selName = preAnalyzer.getResult(selId._1).asInstanceOf[Select].name
-              val symName = s"_deforest_${cls.nme}_${selName}_${selId._2.makeSuffix(preAnalyzer)}"
+              val symName = s"_deforest_${cls.nme}_${selName.name}_${selId._2.makeSuffix(preAnalyzer)}"
               val sym = selNameToNewSymbol.getOrElseUpdate.curried(selName):
                 VarSymbol(Tree.Ident(symName))
               selExprIdToNewSymbol += selId -> sym

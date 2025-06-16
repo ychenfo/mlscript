@@ -553,7 +553,7 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
             val selExprId = s.exprId
             preAnalyzer.getResult(selExprId) match
               case Select(Value.Ref(l), _) => 
-                preAnalyzer.selsToMatchingArmsContainingIt(selExprId).exists(_._1 === matScrutExprId) &&
+                preAnalyzer.selsToMatchingArmsContainingIt(selExprId).exists(_._1 == matScrutExprId) &&
                 (l is matScrutSym) &&
                 s.instantiationId.get == matExprInstantiationId
               case _ => false
