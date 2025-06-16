@@ -133,7 +133,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     // the keySet of linkedHashMap
     for
       case (FinalDest.Match(matchId, _), _) <- finalDestToCtorIds
-      numOfMatchingArms = finalDestToCtorIds.keys.count:
+      numOfMatchingArms = finalDestToCtorIds.keySet.count:
         case FinalDest.Match(matId, _) => matId == matchId
         case _ => false
       if numOfMatchingArms > 1
@@ -145,6 +145,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
             s"match_${scrutName}_rest_${matchId._2.makeSuffix(preAnalyzer)}",
             Nil))
         case S(x) => S(x)
+  
   
   // if a key doesn't exist, it means the final dest is only used once
   val finalDestToVarSymbolsToReplaceSelInArms = mutable.Map.empty[
@@ -259,9 +260,14 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     
     // returns the block of match rest, or a `Return` block that calls the function extracted
     // from the match rest
-    def getOrElseUpdate(matchId: MatchId): Block =
-      store.get(matchId) match
-      case S(R(blk)) => if blk.isInstanceOf[End] then blk else die
+    private val outsideQueryAvailable = mutable.Set.empty[MatchId]
+    opaque type IsInnerCall = Bool
+    def getOrElseUpdate(matchId: MatchId)(using inner: IsInnerCall = false): Block = store.get(matchId) match
+      case S(R(blk)) =>
+        if inner || blk.isInstanceOf[End] || outsideQueryAvailable.remove(matchId) then
+          blk
+        else
+          lastWords(s"match rest $blk was expected to be used only once, but now it's used more than once")
       case S(L(fdef -> args)) =>
         Return(
           Call(Value.Ref(fdef.sym), args.map(a => Arg(false, Value.Ref(a))))(true, false),
@@ -282,14 +288,16 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             if isEnd then acc else Begin(acc, parentMatchRest)
         val withTheRestOfPossiblyFusingMatch = thePossiblyFusingOne.headOption
           .fold(withAllParentMatchesRests): scrutExprIdOfTheFusingOne =>
-            Begin(withAllParentMatchesRests, getOrElseUpdate(scrutExprIdOfTheFusingOne, instantiationId))
+            Begin(withAllParentMatchesRests, getOrElseUpdate(scrutExprIdOfTheFusingOne, instantiationId)(using true))
           .flattened
         
+        // if the rest is empty or only going to be used once,
+        // then no need to build a function for it
         val noNeedToBuild =
           withTheRestOfPossiblyFusingMatch.isInstanceOf[End] ||
           rewritePrepare.fusingMatchIdToMatchRestFunSymbols.get(matchId).isEmpty
-        // no need to build a new function for empty rest, or if the rest is only going to be used once
         if noNeedToBuild then
+          if inner then outsideQueryAvailable += matchId
           store.updateWith(matchId):
             case S(_) => die
             case N => S(R(withTheRestOfPossiblyFusingMatch))
