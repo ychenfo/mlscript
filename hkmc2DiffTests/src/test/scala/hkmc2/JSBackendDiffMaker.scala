@@ -25,7 +25,6 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   val showRepl = NullaryCommand("showRepl")
   val traceJS = NullaryCommand("traceJS")
   val deforestFlag = NullaryCommand("deforest")
-  val deforestDupFlag = NullaryCommand("deforestDup")
   val deforestInfo = NullaryCommand("deforestInfo")
   val expect = Command("expect"): ln =>
     ln.trim
@@ -92,25 +91,19 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       output(jsStr)
         
       if deforestFlag.isSet then
-        val deforest = new Deforest(using deforestTL)
-        val deforestRes -> _ -> num = deforest(le, deforestDupFlag.isSet, output.apply)
-        deforestRes match
-          case None => ()
-          case Some(_) if num == 0 => output("No fusion opportunity")
-          case Some(deforestRes) =>
-            output(">>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>")
-            if showLoweredTree.isSet then
-              output("\n==== deforested tree ====")
-              output(deforestRes.showAsTree)
-              output("\n")
-            
-            val je = baseScp.nest.givenIn:
-              jsb.program(deforestRes, N, wd)
-            output("==== JS (deforested): ====")
-            val jsStr = je.stripBreaks.mkString(100)
-            output(jsStr)
-            output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
-          
+        import codegen.deforest.*
+        output(">>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>")
+        val pre = new DeforestPreAnalyzer(le.main)
+        val col = new DeforestConstraintsCollector(pre)
+        val ana = new DeforestConstrainSolver(col)
+        val rwp = new DeforestRewritePrepare(ana)
+        val rw = new DeforestRewriter(rwp)
+        val deforestRes = rw()
+        val jsStr = baseScp.nest.givenIn:
+          jsb.program(Program(Nil, deforestRes), N, wd).stripBreaks.mkString(100)
+        output(jsStr)
+        output("<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<")
+    
     if js.isSet then
       given Elaborator.Ctx = curCtx
       given Raise =
@@ -247,27 +240,50 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           handleDefinedValues(nme, sym, expected)(if sym === resSym then r => correctResult = S(r) else _ => ())
       
       if deforestFlag.isSet then
+        import codegen.deforest.*
+        output(">>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>")
         val deforestLow = ltl.givenIn:
           codegen.Lowering()
-        val lowered0 = deforestLow.program(blk)
-        val deforest = new Deforest(using deforestTL)
-        val maybeDeforestRes -> deforestStat -> num = deforest(lowered0, deforestDupFlag.isSet, output.apply)
-        maybeDeforestRes match
-          case None => ()
-          case Some(_) if num == 0 => output("No fusion opportunity")
-          case Some(deforestRes) =>
-            output(">>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>")
-            val resSym -> resNme = getResSymAndResNme("block$res_deforest")
-            val le = assignResultSymForBlock(deforestRes, resSym)
-            val (preStr, jsStr) = mkJS(le)
-            executeJS(preStr, jsStr, resNme)
-            
-            if silent.isUnset then 
-              handleDefinedValues("", resSym, expect.get): result =>
-                if correctResult.fold(false)(_ != result) then raise:
-                  ErrorReport(
-                    msg"The result from deforestated program (\"${result}\") is different from the one computed by the original prorgam (\"${correctResult.get}\")" -> N :: Nil,
-                    source = Diagnostic.Source.Runtime)
-            
-            output(deforestStat)
-            output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        val le = deforestLow.program(blk)
+        val pre = new DeforestPreAnalyzer(le.main)
+        val col = new DeforestConstraintsCollector(pre)
+        if deforestInfo.isSet then
+          col.constraints.foreach: (p, c) =>
+            output(s"$p --> $c")
+        val ana = new DeforestConstrainSolver(col)
+        val rwp = new DeforestRewritePrepare(ana)
+        output("---------- deforest summary ----------")
+        rwp.ctorIdToFinalDest.foreach:
+          case (ctorid -> dest) =>
+            output:
+              pre.getResult(ctorid._1).toString() +
+              "@" +
+              pre.getStableResultId(ctorid._1) +
+              "@" +
+              ctorid._2.makeSuffix(pre) +
+              " --> " +
+              dest.toString(pre)
+        val rw = new DeforestRewriter(rwp)
+        val deforestRes = rw()
+        val resSym -> resNme = getResSymAndResNme("block$res_deforest")
+        val deforestRes2 = assignResultSymForBlock(Program(Nil, deforestRes), resSym)
+        if showLoweredTree.isSet then
+          output(s"Lowered:")
+          output(deforestRes2.showAsTree)
+        if ppLoweredTree.isSet then
+          output(s"Pretty Lowered:")
+          output(Printer.mkDocument(deforestRes2)(using summon[Raise], baseScp).toString)
+        val (preStr, jsStr) = mkJS(deforestRes2)
+        if showSanitizedJS.isSet then
+          output("------ deforested sanitized js -------")
+          output(jsStr)
+        output("-------------- executing -------------")
+        executeJS(preStr, jsStr, resNme)
+        if silent.isUnset then 
+          handleDefinedValues("", resSym, expect.get): result =>
+            if correctResult.fold(false)(_ != result) then raise:
+              ErrorReport(
+                msg"The result from deforestated program (\"${result}\") is different from the one computed by the original prorgam (\"${correctResult.get}\")" -> N :: Nil,
+                source = Diagnostic.Source.Runtime)
+        output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
+

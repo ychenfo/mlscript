@@ -18,157 +18,14 @@ fun f2(ls2, acc) = if ls2 is
 f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
 //│ = 51
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Ref(member:Nil)@0@Some(List()) -->
-//│ 	Ref(ls1)@Some(List(1))
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@Some(List(3)) -->
-//│ 	Ref(ls1)@Some(List(1))
-//│ Ref(member:Nil)@4@Some(List()) -->
-//│ 	Ref(ls2)@Some(List(5))
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@Some(List(6)) -->
-//│ 	Ref(ls2)@Some(List(5))
-//│ Ref(member:Nil)@7@Some(List()) -->
-//│ 	Ref(ls1)@Some(List(8))
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@Some(List(9)) -->
-//│ 	Ref(ls1)@Some(List(8))
-//│ ------------------------------------
-//│ Ref(member:Nil)@0@inst__tsni --> Ref(ls1)@inst_1_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@inst_3_tsni --> Ref(ls1)@inst_1_tsni@Cons
-//│ Ref(member:Nil)@4@inst__tsni --> Ref(ls2)@inst_5_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@inst_6_tsni --> Ref(ls2)@inst_5_tsni@Cons
-//│ Ref(member:Nil)@7@inst__tsni --> Ref(ls1)@inst_8_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@2@inst_9_tsni --> Ref(ls1)@inst_8_tsni@Cons
-//│ ==== JS (deforested): ====
-//│ to_inst_3_tsni = function to_inst_3_tsni(n, acc) {
-//│   let scrut, tmp14, tmp15, h, t;
-//│   scrut = n == 0;
-//│   if (scrut === true) {
-//│     return acc
-//│   } else {
-//│     tmp14 = n - 1;
-//│     h = n;
-//│     t = acc;
-//│     tmp15 = (acc1) => {
-//│       let param0, param1, h1, t1, tmp16;
-//│       param0 = h;
-//│       param1 = t;
-//│       h1 = param0;
-//│       t1 = param1;
-//│       tmp16 = acc1 + h1;
-//│       return f1_inst_1_tsni(t1, tmp16)
-//│     };
-//│     return to_inst_3_tsni(tmp14, tmp15)
-//│   }
-//│ };
-//│ to_inst_6_tsni = function to_inst_6_tsni(n, acc) {
-//│   let scrut, tmp14, tmp15, h, t;
-//│   scrut = n == 0;
-//│   if (scrut === true) {
-//│     return acc
-//│   } else {
-//│     tmp14 = n - 1;
-//│     h = n;
-//│     t = acc;
-//│     tmp15 = (acc1) => {
-//│       let param0, param1, hh, tt, tmp16, tmp17;
-//│       param0 = h;
-//│       param1 = t;
-//│       hh = param0;
-//│       tt = param1;
-//│       tmp16 = acc1 + hh;
-//│       tmp17 = tmp16 + 1;
-//│       return f2_inst_5_tsni(tt, tmp17)
-//│     };
-//│     return to_inst_6_tsni(tmp14, tmp15)
-//│   }
-//│ };
-//│ to_inst_9_tsni = function to_inst_9_tsni(n, acc) {
-//│   let scrut, tmp14, tmp15, h, t;
-//│   scrut = n == 0;
-//│   if (scrut === true) {
-//│     return acc
-//│   } else {
-//│     tmp14 = n - 1;
-//│     h = n;
-//│     t = acc;
-//│     tmp15 = (acc1) => {
-//│       let param0, param1, h1, t1, tmp16;
-//│       param0 = h;
-//│       param1 = t;
-//│       h1 = param0;
-//│       t1 = param1;
-//│       tmp16 = acc1 + h1;
-//│       return f1_inst_8_tsni(t1, tmp16)
-//│     };
-//│     return to_inst_9_tsni(tmp14, tmp15)
-//│   }
-//│ };
-//│ f1_inst_1_tsni = function f1_inst_1_tsni(ls1, acc) {
-//│   return runtime.safeCall(ls1(acc))
-//│ };
-//│ f2_inst_5_tsni = function f2_inst_5_tsni(ls2, acc) {
-//│   return runtime.safeCall(ls2(acc))
-//│ };
-//│ f1_inst_8_tsni = function f1_inst_8_tsni(ls1, acc) {
-//│   return runtime.safeCall(ls1(acc))
-//│ };
-//│ to = function to(n, acc) {
-//│   let scrut, tmp14, tmp15;
-//│   scrut = n == 0;
-//│   if (scrut === true) {
-//│     return acc
-//│   } else {
-//│     tmp14 = n - 1;
-//│     tmp15 = Cons1(n, acc);
-//│     return to(tmp14, tmp15)
-//│   }
-//│ };
-//│ f1 = function f1(ls1, acc) {
-//│   let param0, param1, h, t, tmp14;
-//│   if (ls1 instanceof Nil1.class) {
-//│     return acc
-//│   } else if (ls1 instanceof Cons1.class) {
-//│     param0 = ls1.h;
-//│     param1 = ls1.t;
-//│     h = param0;
-//│     t = param1;
-//│     tmp14 = acc + h;
-//│     return f1(t, tmp14)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f2 = function f2(ls2, acc) {
-//│   let param0, param1, hh, tt, tmp14, tmp15;
-//│   if (ls2 instanceof Nil1.class) {
-//│     return acc
-//│   } else if (ls2 instanceof Cons1.class) {
-//│     param0 = ls2.h;
-//│     param1 = ls2.t;
-//│     hh = param0;
-//│     tt = param1;
-//│     tmp14 = acc + hh;
-//│     tmp15 = tmp14 + 1;
-//│     return f2(tt, tmp15)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ tmp7 = to_inst_9_tsni(4, (acc) => {
-//│   return acc
-//│ });
-//│ tmp8 = f1_inst_8_tsni(tmp7, 0);
-//│ tmp9 = to_inst_6_tsni(5, (acc) => {
-//│   return acc
-//│ });
-//│ tmp10 = f2_inst_5_tsni(tmp9, 0);
-//│ tmp11 = tmp8 + tmp10;
-//│ tmp12 = to_inst_3_tsni(6, (acc) => {
-//│   return acc
-//│ });
-//│ tmp13 = f1_inst_1_tsni(tmp12, 0);
-//│ block$res_deforest = tmp11 + tmp13;
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@6@inst__tsni --> Ref(ls1)@inst_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@7@inst_0_tsni --> Ref(ls1)@inst_3_tsni@Cons
+//│ Ref(member:Nil)@8@inst__tsni --> Ref(ls2)@inst_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@7@inst_1_tsni --> Ref(ls2)@inst_4_tsni@Cons
+//│ Ref(member:Nil)@9@inst__tsni --> Ref(ls1)@inst_5_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@7@inst_2_tsni --> Ref(ls1)@inst_5_tsni@Cons
+//│ -------------- executing -------------
 //│ = 51
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -180,52 +37,10 @@ fun f2(a2) = if a2 is A then 2
 f1(id(A(1))) + f2(id(A(2)))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(2)))))@0@Some(List()) -->
-//│ 	Ref(a2)@Some(List(1))
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@2@Some(List()) -->
-//│ 	Ref(a1)@Some(List(3))
-//│ ------------------------------------
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(2)))))@0@inst__tsni --> Ref(a2)@inst_1_tsni@A
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@2@inst__tsni --> Ref(a1)@inst_3_tsni@A
-//│ ==== JS (deforested): ====
-//│ f2_inst_1_tsni = function f2_inst_1_tsni(a2) {
-//│   return runtime.safeCall(a2())
-//│ };
-//│ f1_inst_3_tsni = function f1_inst_3_tsni(a1) {
-//│   return runtime.safeCall(a1())
-//│ };
-//│ id = function id(x2) {
-//│   return x2
-//│ };
-//│ f11 = function f1(a1) {
-//│   if (a1 instanceof A1.class) {
-//│     return 1
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f21 = function f2(a2) {
-//│   if (a2 instanceof A1.class) {
-//│     return 2
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ x1 = 1;
-//│ tmp20 = () => {
-//│   return 1
-//│ };
-//│ tmp21 = id(tmp20);
-//│ tmp22 = f1_inst_3_tsni(tmp21);
-//│ x = 2;
-//│ tmp23 = () => {
-//│   return 2
-//│ };
-//│ tmp24 = id(tmp23);
-//│ tmp25 = f2_inst_1_tsni(tmp24);
-//│ block$res_deforest1 = tmp22 + tmp25;
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(2)))))@2@inst__tsni --> Ref(a2)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@3@inst__tsni --> Ref(a1)@inst_1_tsni@A
+//│ -------------- executing -------------
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -239,76 +54,10 @@ fun f2(a2) = if a2 is A then 2
 f1(wrap(1)) + f2(wrap(2))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@Some(List(1, 2, 3)) -->
-//│ 	Ref(a2)@Some(List(4))
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@Some(List(5, 2, 3)) -->
-//│ 	Ref(a1)@Some(List(6))
-//│ ------------------------------------
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@inst_1_2_3_tsni --> Ref(a2)@inst_4_tsni@A
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@inst_5_2_3_tsni --> Ref(a1)@inst_6_tsni@A
-//│ ==== JS (deforested): ====
-//│ wrap_inst_1_tsni = function wrap_inst_1_tsni(x2) {
-//│   return wrap1_inst_1_2_tsni(x2)
-//│ };
-//│ wrap1_inst_1_2_tsni = function wrap1_inst_1_2_tsni(x2) {
-//│   return p_inst_1_2_3_tsni(x2)
-//│ };
-//│ p_inst_1_2_3_tsni = function p_inst_1_2_3_tsni(x2) {
-//│   let x3;
-//│   x3 = x2;
-//│   return () => {
-//│     return 2
-//│   }
-//│ };
-//│ wrap_inst_5_tsni = function wrap_inst_5_tsni(x2) {
-//│   return wrap1_inst_5_2_tsni(x2)
-//│ };
-//│ wrap1_inst_5_2_tsni = function wrap1_inst_5_2_tsni(x2) {
-//│   return p_inst_5_2_3_tsni(x2)
-//│ };
-//│ p_inst_5_2_3_tsni = function p_inst_5_2_3_tsni(x2) {
-//│   let x3;
-//│   x3 = x2;
-//│   return () => {
-//│     return 1
-//│   }
-//│ };
-//│ f2_inst_4_tsni = function f2_inst_4_tsni(a2) {
-//│   return runtime.safeCall(a2())
-//│ };
-//│ f1_inst_6_tsni = function f1_inst_6_tsni(a1) {
-//│   return runtime.safeCall(a1())
-//│ };
-//│ p = function p(x2) {
-//│   return A1(x2)
-//│ };
-//│ wrap1 = function wrap1(x2) {
-//│   return p(x2)
-//│ };
-//│ wrap = function wrap(x2) {
-//│   return wrap1(x2)
-//│ };
-//│ f12 = function f1(a1) {
-//│   if (a1 instanceof A1.class) {
-//│     return 1
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f22 = function f2(a2) {
-//│   if (a2 instanceof A1.class) {
-//│     return 2
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ tmp30 = wrap_inst_5_tsni(1);
-//│ tmp31 = f1_inst_6_tsni(tmp30);
-//│ tmp32 = wrap_inst_1_tsni(2);
-//│ tmp33 = f2_inst_4_tsni(tmp32);
-//│ block$res_deforest2 = tmp31 + tmp33;
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@6@inst_0_1_2_tsni --> Ref(a2)@inst_4_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@6@inst_3_1_2_tsni --> Ref(a1)@inst_5_tsni@A
+//│ -------------- executing -------------
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -325,189 +74,16 @@ fun cons1(a1) = if a1 is
 cons(f(0)) + cons1(f(1))
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Ref(member:Nil)@0@Some(List(1)) -->
-//│ 	Ref(a1)@Some(List(2))
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@3@Some(List(1)) -->
-//│ 	Ref(a1)@Some(List(2))
-//│ Ref(member:Nil)@4@Some(List(1)) -->
-//│ 	Ref(a1)@Some(List(2))
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@5@Some(List(1)) -->
-//│ 	Ref(a1)@Some(List(2))
-//│ Ref(member:Nil)@0@Some(List(6)) -->
-//│ 	Ref(a)@Some(List(7))
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@3@Some(List(6)) -->
-//│ 	Ref(a)@Some(List(7))
-//│ Ref(member:Nil)@4@Some(List(6)) -->
-//│ 	Ref(a)@Some(List(7))
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@5@Some(List(6)) -->
-//│ 	Ref(a)@Some(List(7))
-//│ ------------------------------------
-//│ Ref(member:Nil)@0@inst_1_tsni --> Ref(a1)@inst_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@3@inst_1_tsni --> Ref(a1)@inst_2_tsni@Cons
-//│ Ref(member:Nil)@4@inst_1_tsni --> Ref(a1)@inst_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@5@inst_1_tsni --> Ref(a1)@inst_2_tsni@Cons
-//│ Ref(member:Nil)@0@inst_6_tsni --> Ref(a)@inst_7_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@3@inst_6_tsni --> Ref(a)@inst_7_tsni@Cons
-//│ Ref(member:Nil)@4@inst_6_tsni --> Ref(a)@inst_7_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@5@inst_6_tsni --> Ref(a)@inst_7_tsni@Cons
-//│ ==== JS (deforested): ====
-//│ match_a1_arm_Nil_inst_2_tsni = function match_a1_arm_Nil_inst_2_tsni() {
-//│   return 1
-//│ };
-//│ match_a1_arm_Cons_inst_2_tsni = function match_a1_arm_Cons_inst_2_tsni(_deforest_Cons_Ident$_h$__inst_2_tsni, _deforest_Cons_Ident$_t$__inst_2_tsni) {
-//│   let param0, param1, h, t, tmp42;
-//│   param0 = _deforest_Cons_Ident$_h$__inst_2_tsni;
-//│   param1 = _deforest_Cons_Ident$_t$__inst_2_tsni;
-//│   h = param0;
-//│   t = param1;
-//│   tmp42 = cons1_inst_2_tsni(t);
-//│   return h + tmp42
-//│ };
-//│ match_a_arm_Nil_inst_7_tsni = function match_a_arm_Nil_inst_7_tsni() {
-//│   return 0
-//│ };
-//│ match_a_arm_Cons_inst_7_tsni = function match_a_arm_Cons_inst_7_tsni(_deforest_Cons_Ident$_h$__inst_7_tsni, _deforest_Cons_Ident$_t$__inst_7_tsni) {
-//│   let param0, param1, h, t, tmp42;
-//│   param0 = _deforest_Cons_Ident$_h$__inst_7_tsni;
-//│   param1 = _deforest_Cons_Ident$_t$__inst_7_tsni;
-//│   h = param0;
-//│   t = param1;
-//│   tmp42 = cons_inst_7_tsni(t);
-//│   return h + tmp42
-//│ };
-//│ f_inst_1_tsni = function f_inst_1_tsni(x2) {
-//│   let scrut, tmp42, tmp43, h, t;
-//│   scrut = x2 == 0;
-//│   if (scrut === true) {
-//│     return () => {
-//│       return match_a1_arm_Nil_inst_2_tsni()
-//│     }
-//│   } else {
-//│     tmp42 = x2 - 1;
-//│     tmp43 = g_inst_1_tsni(tmp42);
-//│     h = x2;
-//│     t = tmp43;
-//│     return () => {
-//│       return match_a1_arm_Cons_inst_2_tsni(h, t)
-//│     }
-//│   }
-//│ };
-//│ g_inst_1_tsni = function g_inst_1_tsni(y) {
-//│   let scrut, tmp42, tmp43, h, t;
-//│   scrut = y == 0;
-//│   if (scrut === true) {
-//│     return () => {
-//│       return match_a1_arm_Nil_inst_2_tsni()
-//│     }
-//│   } else {
-//│     tmp42 = y - 1;
-//│     tmp43 = f_inst_1_tsni(tmp42);
-//│     h = y;
-//│     t = tmp43;
-//│     return () => {
-//│       return match_a1_arm_Cons_inst_2_tsni(h, t)
-//│     }
-//│   }
-//│ };
-//│ f_inst_6_tsni = function f_inst_6_tsni(x2) {
-//│   let scrut, tmp42, tmp43, h, t;
-//│   scrut = x2 == 0;
-//│   if (scrut === true) {
-//│     return () => {
-//│       return match_a_arm_Nil_inst_7_tsni()
-//│     }
-//│   } else {
-//│     tmp42 = x2 - 1;
-//│     tmp43 = g_inst_6_tsni(tmp42);
-//│     h = x2;
-//│     t = tmp43;
-//│     return () => {
-//│       return match_a_arm_Cons_inst_7_tsni(h, t)
-//│     }
-//│   }
-//│ };
-//│ g_inst_6_tsni = function g_inst_6_tsni(y) {
-//│   let scrut, tmp42, tmp43, h, t;
-//│   scrut = y == 0;
-//│   if (scrut === true) {
-//│     return () => {
-//│       return match_a_arm_Nil_inst_7_tsni()
-//│     }
-//│   } else {
-//│     tmp42 = y - 1;
-//│     tmp43 = f_inst_6_tsni(tmp42);
-//│     h = y;
-//│     t = tmp43;
-//│     return () => {
-//│       return match_a_arm_Cons_inst_7_tsni(h, t)
-//│     }
-//│   }
-//│ };
-//│ cons1_inst_2_tsni = function cons1_inst_2_tsni(a1) {
-//│   return runtime.safeCall(a1())
-//│ };
-//│ cons_inst_7_tsni = function cons_inst_7_tsni(a) {
-//│   return runtime.safeCall(a())
-//│ };
-//│ f = function f(x2) {
-//│   let scrut, tmp42, tmp43;
-//│   scrut = x2 == 0;
-//│   if (scrut === true) {
-//│     return Nil1
-//│   } else {
-//│     tmp42 = x2 - 1;
-//│     tmp43 = g(tmp42);
-//│     return Cons1(x2, tmp43)
-//│   }
-//│ };
-//│ g = function g(y) {
-//│   let scrut, tmp42, tmp43;
-//│   scrut = y == 0;
-//│   if (scrut === true) {
-//│     return Nil1
-//│   } else {
-//│     tmp42 = y - 1;
-//│     tmp43 = f(tmp42);
-//│     return Cons1(y, tmp43)
-//│   }
-//│ };
-//│ cons = function cons(a) {
-//│   let param0, param1, h, t, tmp42;
-//│   if (a instanceof Nil1.class) {
-//│     return 0
-//│   } else if (a instanceof Cons1.class) {
-//│     param0 = a.h;
-//│     param1 = a.t;
-//│     h = param0;
-//│     t = param1;
-//│     tmp42 = cons(t);
-//│     return h + tmp42
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ cons1 = function cons1(a1) {
-//│   let param0, param1, h, t, tmp42;
-//│   if (a1 instanceof Nil1.class) {
-//│     return 1
-//│   } else if (a1 instanceof Cons1.class) {
-//│     param0 = a1.h;
-//│     param1 = a1.t;
-//│     h = param0;
-//│     t = param1;
-//│     tmp42 = cons1(t);
-//│     return h + tmp42
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ tmp38 = f_inst_6_tsni(0);
-//│ tmp39 = cons_inst_7_tsni(tmp38);
-//│ tmp40 = f_inst_1_tsni(1);
-//│ tmp41 = cons1_inst_2_tsni(tmp40);
-//│ block$res_deforest3 = tmp39 + tmp41;
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@4@inst_0_tsni --> Ref(a1)@inst_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@5@inst_0_tsni --> Ref(a1)@inst_2_tsni@Cons
+//│ Ref(member:Nil)@6@inst_0_tsni --> Ref(a1)@inst_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@7@inst_0_tsni --> Ref(a1)@inst_2_tsni@Cons
+//│ Ref(member:Nil)@4@inst_1_tsni --> Ref(a)@inst_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@5@inst_1_tsni --> Ref(a)@inst_3_tsni@Cons
+//│ Ref(member:Nil)@6@inst_1_tsni --> Ref(a)@inst_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(y)), Arg(false,Ref($tmp))))@7@inst_1_tsni --> Ref(a)@inst_3_tsni@Cons
+//│ -------------- executing -------------
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -519,89 +95,13 @@ fun map(ls, f) = if ls is
 map(map(1 :: 2 :: Nil, x => x + 1), x => x * 2)
 //│ = Cons(4, Cons(6, Nil))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Ref(member:Nil)@0@Some(List(1)) -->
-//│ 	Ref(ls)@Some(List(2))
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@Some(List(1)) -->
-//│ 	Ref(ls)@Some(List(2))
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@Some(List()) -->
-//│ 	Ref(ls)@Some(List(1))
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@Some(List()) -->
-//│ 	Ref(ls)@Some(List(1))
-//│ Ref(member:Nil)@6@Some(List()) -->
-//│ 	Ref(ls)@Some(List(1))
-//│ ------------------------------------
-//│ Ref(member:Nil)@0@inst_1_tsni --> Ref(ls)@inst_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@inst_1_tsni --> Ref(ls)@inst_2_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(ls)@inst_1_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@inst__tsni --> Ref(ls)@inst_1_tsni@Cons
-//│ Ref(member:Nil)@6@inst__tsni --> Ref(ls)@inst_1_tsni@Nil
-//│ ==== JS (deforested): ====
-//│ match_ls_arm_Cons_inst_1_tsni = function match_ls_arm_Cons_inst_1_tsni(f3, _deforest_Cons_Ident$_h$__inst_1_tsni, _deforest_Cons_Ident$_t$__inst_1_tsni) {
-//│   let param0, param1, h2, t2, tmp48, tmp49, h3, t3;
-//│   param0 = _deforest_Cons_Ident$_h$__inst_1_tsni;
-//│   param1 = _deforest_Cons_Ident$_t$__inst_1_tsni;
-//│   h2 = param0;
-//│   t2 = param1;
-//│   tmp48 = runtime.safeCall(f3(h2));
-//│   tmp49 = map_inst_1_tsni(t2, f3);
-//│   h3 = tmp48;
-//│   t3 = tmp49;
-//│   return (f4) => {
-//│     param0 = h3;
-//│     param1 = t3;
-//│     h2 = param0;
-//│     t2 = param1;
-//│     tmp48 = runtime.safeCall(f4(h2));
-//│     tmp49 = map_inst_2_tsni(t2, f4);
-//│     return Cons1(tmp48, tmp49)
-//│   }
-//│ };
-//│ map_inst_1_tsni = function map_inst_1_tsni(ls, f3) {
-//│   return runtime.safeCall(ls(f3))
-//│ };
-//│ map_inst_2_tsni = function map_inst_2_tsni(ls, f3) {
-//│   return runtime.safeCall(ls(f3))
-//│ };
-//│ map = function map(ls, f3) {
-//│   let param0, param1, h2, t2, tmp48, tmp49;
-//│   if (ls instanceof Nil1.class) {
-//│     return Nil1
-//│   } else if (ls instanceof Cons1.class) {
-//│     param0 = ls.h;
-//│     param1 = ls.t;
-//│     h2 = param0;
-//│     t2 = param1;
-//│     tmp48 = runtime.safeCall(f3(h2));
-//│     tmp49 = map(t2, f3);
-//│     return Cons1(tmp48, tmp49)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ h1 = 2;
-//│ t1 = (f3) => {
-//│   return (f4) => {
-//│     return Nil1
-//│   }
-//│ };
-//│ tmp45 = (f3) => {
-//│   return match_ls_arm_Cons_inst_1_tsni(f3, h1, t1)
-//│ };
-//│ h = 1;
-//│ t = tmp45;
-//│ tmp46 = (f3) => {
-//│   return match_ls_arm_Cons_inst_1_tsni(f3, h, t)
-//│ };
-//│ lambda2 = (undefined, function (x2) {
-//│   return x2 + 1
-//│ });
-//│ tmp47 = map_inst_1_tsni(tmp46, lambda2);
-//│ lambda3 = (undefined, function (x2) {
-//│   return x2 * 2
-//│ });
-//│ block$res_deforest4 = map_inst_2_tsni(tmp47, lambda3);
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@6@inst__tsni --> Ref(ls)@inst_0_tsni@Nil
+//│ -------------- executing -------------
 //│ = Cons(4, Cons(6, Nil))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -614,64 +114,11 @@ fun map(ls, f) = if ls is
 map(1 :: 2 :: Nil, x => x + 1)
 //│ = Cons(2, Cons(3, Nil))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@0@Some(List()) -->
-//│ 	Ref(ls)@Some(List(1))
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@2@Some(List()) -->
-//│ 	Ref(ls)@Some(List(1))
-//│ Ref(member:Nil)@3@Some(List()) -->
-//│ 	Ref(ls)@Some(List(1))
-//│ ------------------------------------
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@0@inst__tsni --> Ref(ls)@inst_1_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@2@inst__tsni --> Ref(ls)@inst_1_tsni@Cons
-//│ Ref(member:Nil)@3@inst__tsni --> Ref(ls)@inst_1_tsni@Nil
-//│ ==== JS (deforested): ====
-//│ match_ls_arm_Cons_inst_1_tsni1 = function match_ls_arm_Cons_inst_1_tsni(f3, _deforest_Cons_Ident$_h$__inst_1_tsni, _deforest_Cons_Ident$_t$__inst_1_tsni) {
-//│   let param0, param1, h4, t4, tmp52, tmp53;
-//│   param0 = _deforest_Cons_Ident$_h$__inst_1_tsni;
-//│   param1 = _deforest_Cons_Ident$_t$__inst_1_tsni;
-//│   h4 = param0;
-//│   t4 = param1;
-//│   tmp52 = runtime.safeCall(f3(h4));
-//│   tmp53 = map_inst_1_tsni1(t4, f3);
-//│   return Cons1(tmp52, tmp53)
-//│ };
-//│ map_inst_1_tsni1 = function map_inst_1_tsni(ls, f3) {
-//│   return runtime.safeCall(ls(f3))
-//│ };
-//│ map1 = function map(ls, f3) {
-//│   let param0, param1, h4, t4, tmp52, tmp53;
-//│   if (ls instanceof Nil1.class) {
-//│     return Nil1
-//│   } else if (ls instanceof Cons1.class) {
-//│     param0 = ls.h;
-//│     param1 = ls.t;
-//│     h4 = param0;
-//│     t4 = param1;
-//│     tmp52 = runtime.safeCall(f3(h4));
-//│     tmp53 = map1(t4, f3);
-//│     return Cons1(tmp52, tmp53)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ h3 = 2;
-//│ t3 = (f3) => {
-//│   return Nil1
-//│ };
-//│ tmp50 = (f3) => {
-//│   return match_ls_arm_Cons_inst_1_tsni1(f3, h3, t3)
-//│ };
-//│ h2 = 1;
-//│ t2 = tmp50;
-//│ tmp51 = (f3) => {
-//│   return match_ls_arm_Cons_inst_1_tsni1(f3, h2, t2)
-//│ };
-//│ lambda5 = (undefined, function (x2) {
-//│   return x2 + 1
-//│ });
-//│ block$res_deforest5 = map_inst_1_tsni1(tmp51, lambda5);
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@2@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@3@inst__tsni --> Ref(ls)@inst_0_tsni@Nil
+//│ -------------- executing -------------
 //│ = Cons(2, Cons(3, Nil))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -684,21 +131,8 @@ fun f(x) = if x is
 f(Nil)
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ------------------------------------
-//│ ==== JS (deforested): ====
-//│ f3 = function f(x2) {
-//│   let param0, tmp52;
-//│   if (x2 instanceof A1.class) {
-//│     param0 = x2.x;
-//│     tmp52 = A1(2);
-//│     return f3(tmp52)
-//│   } else {
-//│     return 0
-//│   }
-//│ };
-//│ block$res_deforest6 = f3(Nil1);
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -712,48 +146,10 @@ fun c1(x) = if x is
 c1(1 :: Nil)
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(member:Nil))))@0@Some(List()) -->
-//│ 	Ref(x)@Some(List(1))
-//│ Ref(member:Nil)@2@Some(List()) -->
-//│ 	Ref(t)@Some(List(1))
-//│ ------------------------------------
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(member:Nil))))@0@inst__tsni --> Ref(x)@inst_1_tsni@Cons
-//│ Ref(member:Nil)@2@inst__tsni --> Ref(t)@inst_1_tsni@Nil
-//│ ==== JS (deforested): ====
-//│ c1_inst_1_tsni = function c1_inst_1_tsni(x2) {
-//│   return runtime.safeCall(x2())
-//│ };
-//│ c1 = function c1(x2) {
-//│   let param0, param1, h5, t5;
-//│   if (x2 instanceof Cons1.class) {
-//│     param0 = x2.h;
-//│     param1 = x2.t;
-//│     h5 = param0;
-//│     t5 = param1;
-//│     if (t5 instanceof Nil1.class) {
-//│       return 0
-//│     } else {
-//│       throw new globalThis.Error("match error");
-//│     }
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ h4 = 1;
-//│ t4 = () => {
-//│   return 0
-//│ };
-//│ tmp53 = () => {
-//│   let param0, param1, h5, t5;
-//│   param0 = h4;
-//│   param1 = t4;
-//│   h5 = param0;
-//│   t5 = param1;
-//│   return runtime.safeCall(t5())
-//│ };
-//│ block$res_deforest7 = c1_inst_1_tsni(tmp53);
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(member:Nil))))@1@inst__tsni --> Ref(x)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@2@inst__tsni --> Ref(t)@inst_0_tsni@Nil
+//│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -773,144 +169,28 @@ fun apply(f) =
 apply(f)
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:A),List(Arg(false,Ref(inner))))@0@Some(List(1)) -->
-//│ 	Ref(x)@Some(List(2))
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@3@Some(List(1)) -->
-//│ 	Ref(y1)@Some(List(2, 4))
-//│ ------------------------------------
-//│ Call(Ref(member:A),List(Arg(false,Ref(inner))))@0@inst_1_tsni --> Ref(x)@inst_2_tsni@A
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@3@inst_1_tsni --> Ref(y1)@inst_2_4_tsni@A
-//│ ==== JS (deforested): ====
-//│ apply_inst_1_tsni = function apply_inst_1_tsni(f5) {
-//│   let inner, tmp54, tmp55, x2, x3;
-//│   x3 = 0;
-//│   tmp54 = () => {
-//│     return 0
-//│   };
-//│   inner = tmp54;
-//│   x2 = inner;
-//│   tmp55 = () => {
-//│     return g1_inst_2_4_tsni(x2)
-//│   };
-//│   return runtime.safeCall(f5(tmp55))
-//│ };
-//│ f_inst_2_tsni = function f_inst_2_tsni(x2) {
-//│   return runtime.safeCall(x2())
-//│ };
-//│ g1_inst_2_4_tsni = function g1_inst_2_4_tsni(y1) {
-//│   return runtime.safeCall(y1())
-//│ };
-//│ f4 = function f(x2) {
-//│   if (x2 instanceof A1.class) {
-//│     return g1(x2.x)
-//│   } else if (x2 instanceof B1.class) {
-//│     return g2(x2.x)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ g1 = function g1(y1) {
-//│   if (y1 instanceof A1.class) {
-//│     return 0
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ g2 = function g2(y2) {
-//│   if (y2 instanceof A1.class) {
-//│     return 1
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ apply = function apply(f5) {
-//│   let inner, tmp54, tmp55;
-//│   tmp54 = A1(0);
-//│   inner = tmp54;
-//│   tmp55 = A1(inner);
-//│   return runtime.safeCall(f5(tmp55))
-//│ };
-//│ block$res_deforest8 = apply_inst_1_tsni(f_inst_2_tsni);
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Ref(inner))))@3@inst_0_tsni --> Ref(x)@inst_1_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@4@inst_0_tsni --> Ref(y1)@inst_1_2_tsni@A
+//│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
-:sjs
+
 :deforest
 fun inner(y, z) = if y is
   B then z
 fun dtor(x) = if x is
   A then inner(B(4), x.x)
 dtor(A(B(0)))
-//│ JS (unsanitized):
-//│ let dtor, inner, tmp54, tmp55;
-//│ inner = function inner(y, z) {
-//│   if (y instanceof B1.class) {
-//│     return z
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ dtor = function dtor(x2) {
-//│   let tmp56;
-//│   if (x2 instanceof A1.class) {
-//│     tmp56 = B1(4);
-//│     return inner(tmp56, x2.x)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ tmp54 = B1(0);
-//│ tmp55 = A1(tmp54);
-//│ dtor(tmp55)
 //│ = B(0)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(4)))))@0@Some(List(1)) -->
-//│ 	Ref(y)@Some(List(1, 2))
-//│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@3@Some(List()) -->
-//│ 	Ref(x)@Some(List(1))
-//│ ------------------------------------
-//│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(4)))))@0@inst_1_tsni --> Ref(y)@inst_1_2_tsni@B
-//│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@3@inst__tsni --> Ref(x)@inst_1_tsni@A
-//│ ==== JS (deforested): ====
-//│ dtor_inst_1_tsni = function dtor_inst_1_tsni(x3) {
-//│   return runtime.safeCall(x3())
-//│ };
-//│ inner_inst_1_2_tsni = function inner_inst_1_2_tsni(y, z) {
-//│   return runtime.safeCall(y(z))
-//│ };
-//│ inner = function inner(y, z) {
-//│   if (y instanceof B1.class) {
-//│     return z
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ dtor = function dtor(x3) {
-//│   let tmp58;
-//│   if (x3 instanceof A1.class) {
-//│     tmp58 = B1(4);
-//│     return inner(tmp58, x3.x)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ tmp56 = B1(0);
-//│ x2 = tmp56;
-//│ tmp57 = () => {
-//│   let tmp58, x3;
-//│   x3 = 4;
-//│   tmp58 = (z) => {
-//│     return z
-//│   };
-//│   return inner_inst_1_2_tsni(tmp58, x2)
-//│ };
-//│ block$res_deforest9 = dtor_inst_1_tsni(tmp57);
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(4)))))@2@inst_0_tsni --> Ref(y)@inst_0_1_tsni@B
+//│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@3@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ -------------- executing -------------
 //│ = B(0)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -923,61 +203,11 @@ if localFuse(3) is
 localFuse(4)
 //│ = B(4)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@Some(List(1)) -->
-//│ 	Ref($scrut)@Some(List(1))
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@Some(List(2)) -->
-//│ 	Ref($scrut)@Some(List(2))
-//│ Call(Ref(member:B),List(Arg(false,Ref(y))))@3@Some(List(2)) -->
-//│ 	Ref($scrut)@Some(List())
-//│ ------------------------------------
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@0@inst_2_tsni --> Ref($scrut)@inst_2_tsni@A
-//│ Call(Ref(member:B),List(Arg(false,Ref(y))))@3@inst_2_tsni --> Ref($scrut)@inst__tsni@B
-//│ ==== JS (deforested): ====
-//│ localFuse_inst_1_tsni = function localFuse_inst_1_tsni(x3) {
-//│   let scrut1, x4;
-//│   x4 = x3;
-//│   scrut1 = () => {
-//│     let param01, y;
-//│     param01 = x4;
-//│     y = param01;
-//│     return B1(y)
-//│   };
-//│   return runtime.safeCall(scrut1())
-//│ };
-//│ localFuse_inst_2_tsni = function localFuse_inst_2_tsni(x3) {
-//│   let scrut1, x4;
-//│   x4 = x3;
-//│   scrut1 = () => {
-//│     let param01, y, x5;
-//│     param01 = x4;
-//│     y = param01;
-//│     x5 = y;
-//│     return () => {
-//│       let tmp59;
-//│       param0 = x5;
-//│       a = param0;
-//│       tmp59 = a;
-//│       return localFuse_inst_1_tsni(4)
-//│     }
-//│   };
-//│   return runtime.safeCall(scrut1())
-//│ };
-//│ localFuse = function localFuse(x3) {
-//│   let scrut1, param01, y;
-//│   scrut1 = A1(x3);
-//│   if (scrut1 instanceof A1.class) {
-//│     param01 = scrut1.x;
-//│     y = param01;
-//│     return B1(y)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ scrut = localFuse_inst_2_tsni(3);
-//│ block$res_deforest10 = runtime.safeCall(scrut());
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@2@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
+//│ Call(Ref(member:B),List(Arg(false,Ref(y))))@3@inst_1_tsni --> Ref($scrut)@inst__tsni@B
+//│ -------------- executing -------------
 //│ = B(4)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -992,31 +222,8 @@ fun f(x) =
 f(A(4))
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ------------------------------------
-//│ ==== JS (deforested): ====
-//│ f5 = function f(x3) {
-//│   let res, param01, x4, scrut1, tmp61, tmp62, tmp63;
-//│   if (x3 instanceof A1.class) {
-//│     param01 = x3.x;
-//│     x4 = param01;
-//│     tmp61 = x4;
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│   res = tmp61;
-//│   scrut1 = res > 0;
-//│   if (scrut1 === true) {
-//│     tmp62 = res - 1;
-//│     tmp63 = A1(tmp62);
-//│     return f5(tmp63)
-//│   } else {
-//│     return 0
-//│   }
-//│ };
-//│ tmp60 = A1(4);
-//│ block$res_deforest11 = f5(tmp60);
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
@@ -1032,28 +239,7 @@ g(o) + f(o) + o.x
 //│ = 3
 //│ o = A(1)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ------------------------------------
-//│ ==== JS (deforested): ====
-//│ g3 = function g(x3) {
-//│   let param01, a1;
-//│   if (x3 instanceof A1.class) {
-//│     param01 = x3.x;
-//│     a1 = param01;
-//│     return a1
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f6 = function f(x3) {
-//│   return x3.x
-//│ };
-//│ tmp65 = A1(1);
-//│ o = tmp65;
-//│ tmp66 = g3(o);
-//│ tmp67 = f6(o);
-//│ tmp68 = tmp66 + tmp67;
-//│ block$res_deforest12 = tmp68 + o.x;
-//│ undefined
-//│ -------- executing ----------
+//│ ---------- deforest summary ----------
+//│ -------------- executing -------------
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
