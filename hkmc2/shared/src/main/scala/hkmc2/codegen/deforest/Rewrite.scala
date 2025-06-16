@@ -446,7 +446,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     
     override def applyPath(p: Path): Path = p match
       // a selection which is a consumer on its own
-      case s: Select if rewritePrepare.rewritingSelIds(s.uid.withInstId) => applyPath(p)
+      case Select(qual, _) if rewritePrepare.rewritingSelIds(p.uid.withInstId) => applyPath(qual)
       // a selection inside a fusing match that needs to be replaced by pre-computed symbols
       case s: Select if rewritePrepare.selIdsInAllArmsToSymbolsToReplace.get(s.uid.withInstId).isDefined =>
         Value.Ref(rewritePrepare.selIdsInAllArmsToSymbolsToReplace(s.uid.withInstId))
