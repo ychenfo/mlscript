@@ -146,15 +146,17 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
   private var inFunDef: Opt[BlockMemberSymbol] = N
   private var symsDefinedForFun: Opt[Set[Symbol]] = N
   override def applyFunDefn(fun: FunDefn): Unit =
-    funSymToFun += fun.sym -> fun
     inFunDef match
       case N =>
+        funSymToFun += fun.sym -> fun
         inFunDef = S(fun.sym)
         symsDefinedForFun = S(fun.body.definedVars ++ fun.params.flatMap(_.params.map(_.sym)) + fun.sym)
-      case S(value) => throw NotDeforestableException("not expecting nested function definitions")
-    super.applyFunDefn(fun)
-    inFunDef = N
-    symsDefinedForFun = N
+        super.applyFunDefn(fun)
+        inFunDef = N
+        symsDefinedForFun = N
+      case S(value) =>
+        // nothing special for non-top-level functions
+        super.applyFunDefn(fun)
   
   override def applySymbol(s: Symbol): Unit = s match
     case s: BlockMemberSymbol if s.trmImplTree.fold(false)(_.k is syntax.Fun) => symToStratVar.updateWith(s):
@@ -323,7 +325,16 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       processBlock(rest)
     case Define(defn, rest) =>
       defn match
-        case f: FunDefn => () // skip as toplevel fundefs are processed when needed
+        case FunDefn(_, sym, params, body) =>
+          if processingDefs.nonEmpty then
+            val paramSyms = params.head.params.map: // TODO: handle multiple param list and the `restParam`
+              case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
+            val bodyStrat = processBlock(body)
+            val res = freshVar(s"${sym.nme}_res", cc.forFun)
+            cc.constrain(bodyStrat, res.asConsStrat)
+            cc.constrain(ProdFun(paramSyms, res.asProdStrat), preAnalyzer.getProdVarForSym(sym).asConsStrat)
+          else
+            () // skip toplevel fundefs are they are processed when needed
         case v: ValDefn => throw NotDeforestableException("No support for `ValDefn` yet")
         case c: ClsLikeDefn => throw NotDeforestableException("No support for `ClsLikeDefn` yet")
       processBlock(rest)

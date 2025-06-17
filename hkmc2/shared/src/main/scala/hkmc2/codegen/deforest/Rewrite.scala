@@ -482,7 +482,11 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
         case _ => super.applyValue(v)
       case _ => super.applyValue(v)
     
-    override def applyFunDefn(fun: FunDefn): FunDefn = fun
+    override def applyFunDefn(fun: FunDefn): FunDefn =
+      if instId.isEmpty then
+        fun // skip top level functions
+      else
+        super.applyFunDefn(fun)
     def apply(b: Block) = applyBlock(b)
 
 
