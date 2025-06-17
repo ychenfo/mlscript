@@ -464,15 +464,6 @@ sealed abstract class Result extends AutoLocated:
     case DynSelect(qual, fld, arrayIdx) => qual.freeVarsLLIR ++ fld.freeVarsLLIR
     case Value.Rcd(args) => args.flatMap(arg => arg.idx.fold(Set.empty)(_.freeVarsLLIR) ++ arg.value.freeVarsLLIR).toSet
   
-  // for deforestation
-  def uid(using d: Deforest) =
-    import Result.*
-    val uidValue = ResultId(System.identityHashCode(this))
-    d.resultIdToResult.updateWith(uidValue):
-      case N => S(this)
-      case S(r) => assert(this is r); S(this)
-    uidValue
-  
   def uid =
     import Result.*
     val uidValue = ResultId(System.identityHashCode(this))

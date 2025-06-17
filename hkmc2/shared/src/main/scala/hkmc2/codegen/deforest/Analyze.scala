@@ -19,7 +19,7 @@ class StratVarState(val uid: StratVarId, val name: Str, val generatedForDef: Opt
   lazy val asConsStrat = ConsVar(this)
   override def toString(): String = s"${if name.isEmpty() then "var" else name}@${uid}"
 object StratVarState:
-  def freshVar(nme: String, generatedForDef: Opt[BlockMemberSymbol])(using vuid: Uid.StratVarNew.State) =
+  def freshVar(nme: String, generatedForDef: Opt[BlockMemberSymbol])(using vuid: Uid.StratVar.State) =
     val newId = vuid.nextUid
     StratVarState(newId, nme, generatedForDef)
 trait StratVar(s: StratVarState):
@@ -102,7 +102,7 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
     newProd
 
 class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
-  given stratVarUidState: Uid.StratVarNew.State = new Uid.StratVarNew.State
+  given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
   
   val noProdStratVar = freshVar("primitive", N).asProdStrat
@@ -220,7 +220,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
 
 
 class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
-  given stratVarUidState: Uid.StratVarNew.State = preAnalyzer.stratVarUidState
+  given stratVarUidState: Uid.StratVar.State = preAnalyzer.stratVarUidState
   import StratVarState.freshVar
   
   val constraints = processTopLevel(preAnalyzer.b)
