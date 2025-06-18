@@ -17,7 +17,7 @@ type InstantiationId = Ls[ResultId]
 class StratVarState(val uid: StratVarId, val name: Str, val generatedForDef: Opt[BlockMemberSymbol]):
   lazy val asProdStrat = ProdVar(this)
   lazy val asConsStrat = ConsVar(this)
-  override def toString(): String = s"${if name.isEmpty() then "var" else name}@${uid}"
+  override def toString(): String = s"${if name.isEmpty() then "var" else name}@${uid}@$generatedForDef"
 object StratVarState:
   def freshVar(nme: String, generatedForDef: Opt[BlockMemberSymbol])(using vuid: Uid.StratVar.State) =
     val newId = vuid.nextUid
@@ -182,7 +182,11 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
   override def applyPath(p: Path): Unit =
     resultIdToResult += p.uid -> p
     p match
-      case s@Select(path, nme) => selsToMatchingArmsContainingIt += s.uid -> inMatchScrutsArms
+      case s@Select(path, nme) =>
+        selsToMatchingArmsContainingIt += s.uid -> inMatchScrutsArms
+        s.symbol.flatMap(_.asBlkMember).foreach: b =>
+          b.trmTree.foreach: t =>
+            if t.k is syntax.Fun then usedFunSyms += b
       case _ => ()
     super.applyPath(p)
   
@@ -240,7 +244,9 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     def getOrUpdate(s: BlockMemberSymbol)(using processingDefs: Ls[BlockMemberSymbol], cc: ConstraintsAndCacheHitCollector): ProdVar | ProdStratScheme =
       preAnalyzer.getFunDefnForSym(s) match
         // not a fun defined in the current block, just return its prodvar
-        case None => preAnalyzer.getProdVarForSym(s)
+        case None =>
+          preAnalyzer.noProdStratVar
+          // preAnalyzer.getProdVarForSym(s) // TODO: consider functions being imported?
         case Some(funDefn) => store.get(s) match
           case Some(scheme) => scheme
           case None => processingDefs.filter(_ is s) match
