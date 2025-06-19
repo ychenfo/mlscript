@@ -16,7 +16,7 @@ type CtorId = ResultId -> InstantiationId
 type MatchId = ResultId -> InstantiationId
 type SelId = ResultId -> InstantiationId
 
-// TODO: maybe better design this to not use secondary param list for case class
+
 enum FinalDest:
   // A match arm is considered a final destination.
   // `selsInArm` totally depends on `matchId` and `arm`, while
@@ -55,7 +55,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
         old -> newSymbol
       mapping.toMap
     // TODO: can merge all ids that *only* have dtor to one id, but also need to consider all other
-    // referred functions along the way
+    // referred functions along the way?
     for
       (dtorOrSel, _) <- sol.resolveClashes._2
       instantiationId = dtorOrSel match
