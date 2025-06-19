@@ -455,7 +455,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
         case Some(obj) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(s.uid.withInstId) =>
           matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId)
         case _ => s.symbol.flatMap(_.asBlkMember) match
-          case Some(blk) if blk.trmImplTree.fold(false)(_.k is syntax.Fun) =>
+          case Some(blk) if blk.isFunction && preAnalyzer.topLevelDefinedFunSyms.contains(blk) =>
             val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
               val currentSym = preAnalyzer.getReferredFunSym(currentReferSite)
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
@@ -471,8 +471,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
         case Some(obj) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId) =>
           matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId)
         case None => l.asBlkMember match
-          // case Some(blk) if blk.trmImplTree.fold(false)(_.k is syntax.Fun) =>
-          case Some(blk) if preAnalyzer.topLevelDefinedFunSyms.contains(blk) =>
+          case Some(blk) if blk.isFunction && preAnalyzer.topLevelDefinedFunSyms.contains(blk) =>
             val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
               val currentSym = preAnalyzer.getReferredFunSym(currentReferSite)
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)

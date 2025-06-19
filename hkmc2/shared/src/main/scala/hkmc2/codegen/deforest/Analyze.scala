@@ -132,7 +132,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
     prev
   def getReferredFunSym(id: ResultId) =
     def chk(s: BlockMemberSymbol) =
-      // assert(s.trmImplTree.exists(_.k is syntax.Fun))
+      assert(s.isFunction)
       s
     resultIdToResult(id) match
       case s: Select => chk(s.symbol.get.asBlkMember.get)
@@ -161,7 +161,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
         super.applyFunDefn(fun)
   
   override def applySymbol(s: Symbol): Unit = s match
-    case s: BlockMemberSymbol if s.trmImplTree.fold(false)(_.k is syntax.Fun) => symToStratVar.updateWith(s):
+    case s: BlockMemberSymbol if s.isFunction => symToStratVar.updateWith(s):
       case N => S(freshVar(s.nme, S(s)).asProdStrat)
       case S(x) => S(x)
     // term symbol: variable in patterns so they are always inside the current fundefn (if any)
@@ -186,18 +186,14 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
     p match
       case s@Select(path, nme) =>
         selsToMatchingArmsContainingIt += s.uid -> inMatchScrutsArms
-        s.symbol.flatMap(_.asBlkMember).foreach: b =>
-          b.trmTree.foreach: t =>
-            if t.k is syntax.Fun then usedFunSyms += b
+        if s.symbol.exists(_.isFunction) then usedFunSyms += s.symbol.get.asBlkMember.get
       case _ => ()
     super.applyPath(p)
   
   override def applyValue(v: Value): Unit =
     resultIdToResult += v.uid -> v
     v match
-      case Value.Ref(l) => l.asBlkMember.foreach: b =>
-        b.trmTree.foreach: t =>
-          if t.k is syntax.Fun then usedFunSyms += b
+      case Value.Ref(l) if l.isFunction => usedFunSyms += l.asBlkMember.get
       case _ => ()
     super.applyValue(v)
   
@@ -422,7 +418,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
           new Ctor(sel.uid, instantiationId, s.asObj.get, Nil)
-      case Some(s) if s.asBlkMember.exists(_.trmImplTree.exists(_.k is syntax.Fun)) &&
+      case Some(s) if s.isFunction &&
         preAnalyzer.topLevelDefinedFunSyms.contains(s.asBlkMember.get) =>
         funSymToProdStratScheme.getOrUpdate(s.asBlkMember.get) match
           case v: ProdVar => v

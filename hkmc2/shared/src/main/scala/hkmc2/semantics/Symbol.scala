@@ -29,6 +29,7 @@ abstract class Symbol(using State) extends Located:
   def refsNumber: Int = directRefs.size
   
   def isModule: Bool = asMod.nonEmpty
+  def isFunction: Bool = asBlkMember.exists(b => b.isFunctionSymbol)
   
   def asCls: Opt[ClassSymbol] = this match
     case cls: ClassSymbol => S(cls)
@@ -156,6 +157,7 @@ class BlockMemberSymbol(val nme: Str, val trees: Ls[Tree], val nameIsMeaningful:
     case t: Tree.TermDef if t.rhs.isDefined => t
   
   def isParameterizedMethod: Bool = trmTree.exists(_.sParameterizedMethod)
+  def isFunctionSymbol: Bool = trmTree.exists(_.k is syntax.Fun)
   
   lazy val hasLiftedClass: Bool =
     objTree.isDefined || trmTree.isDefined || clsTree.exists(_.paramLists.nonEmpty)
