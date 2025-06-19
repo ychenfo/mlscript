@@ -107,19 +107,20 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
   
   val noProdStratVar = freshVar("primitive", N).asProdStrat
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
-  val funSymToFun = mutable.Map.empty[BlockMemberSymbol, FunDefn]
+  val topLevelFunSymToFun = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   val matchScrutToMatchBlock = mutable.Map.empty[ResultId, Match]
   val matchScrutToParentMatchScruts = mutable.Map.empty[ResultId, Ls[ResultId]]
   val matchScrutInFunDef = mutable.Map.empty[ResultId, Opt[BlockMemberSymbol]]
   val selsToMatchingArmsContainingIt = mutable.Map.empty[ResultId, Ls[ResultId -> Opt[ClassLikeSymbol]]]
   val symToStratVar = mutable.Map.empty[Symbol, ProdVar]
   val usedFunSyms = mutable.Set.empty[BlockMemberSymbol]
-  lazy val definedFunSyms = funSymToFun.keySet
+  lazy val topLevelDefinedFunSyms = topLevelFunSymToFun.keySet
+  val nonTopLevelDefinedFunSyms = mutable.Set.empty[BlockMemberSymbol]
   def getProdVarForSym(s: Symbol) = s match
     case _: (BuiltinSymbol | TopLevelSymbol) => noProdStratVar
     case _ if s.asCls.isDefined => noProdStratVar
     case _ => symToStratVar(s)
-  def getFunDefnForSym(s: BlockMemberSymbol) = funSymToFun.get(s)
+  def getTopLevelFunDefnForSym(s: BlockMemberSymbol) = topLevelFunSymToFun.get(s)
   def getCtorSymFromCtorLikeExprId(id: ResultId): Opt[ClassLikeSymbol] =
     resultIdToResult(id).getCtorSymFromCtorLikeExpr
   def getMatchFromMatchScrutExprId(scrutExprId: ResultId): Opt[Match] =
@@ -131,7 +132,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
     prev
   def getReferredFunSym(id: ResultId) =
     def chk(s: BlockMemberSymbol) =
-      assert(s.trmImplTree.exists(_.k is syntax.Fun))
+      // assert(s.trmImplTree.exists(_.k is syntax.Fun))
       s
     resultIdToResult(id) match
       case s: Select => chk(s.symbol.get.asBlkMember.get)
@@ -148,7 +149,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
   override def applyFunDefn(fun: FunDefn): Unit =
     inFunDef match
       case N =>
-        funSymToFun += fun.sym -> fun
+        topLevelFunSymToFun += fun.sym -> fun
         inFunDef = S(fun.sym)
         symsDefinedForFun = S(fun.body.definedVars ++ fun.params.flatMap(_.params.map(_.sym)) + fun.sym)
         super.applyFunDefn(fun)
@@ -156,6 +157,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
         symsDefinedForFun = N
       case S(value) =>
         // nothing special for non-top-level functions
+        nonTopLevelDefinedFunSyms += fun.sym
         super.applyFunDefn(fun)
   
   override def applySymbol(s: Symbol): Unit = s match
@@ -242,11 +244,11 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     val store = mutable.Map.empty[BlockMemberSymbol, ProdStratScheme]
     val recursiveGroups = mutable.Map.empty[BlockMemberSymbol, Ls[BlockMemberSymbol]]
     def getOrUpdate(s: BlockMemberSymbol)(using processingDefs: Ls[BlockMemberSymbol], cc: ConstraintsAndCacheHitCollector): ProdVar | ProdStratScheme =
-      preAnalyzer.getFunDefnForSym(s) match
+      preAnalyzer.getTopLevelFunDefnForSym(s) match
         // not a fun defined in the current block, just return its prodvar
         case None =>
-          preAnalyzer.noProdStratVar
-          // preAnalyzer.getProdVarForSym(s) // TODO: consider functions being imported?
+          // preAnalyzer.noProdStratVar
+          preAnalyzer.getProdVarForSym(s) // TODO: consider functions being imported?
         case Some(funDefn) => store.get(s) match
           case Some(scheme) => scheme
           case None => processingDefs.filter(_ is s) match
@@ -284,7 +286,11 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     cc.constrain(strat, NoCons)
     cc.constrain(preAnalyzer.noProdStratVar, NoCons)
     cc.constrain(NoProd, preAnalyzer.noProdStratVar.asConsStrat)
-    // TODO: for used but not defined fun syms, constrain them with NoProd
+    preAnalyzer.usedFunSyms
+      .diff(preAnalyzer.topLevelDefinedFunSyms)
+      .diff(preAnalyzer.nonTopLevelDefinedFunSyms)
+      .foreach: usedButNotDefined =>
+        cc.constrain(NoProd, preAnalyzer.getProdVarForSym(usedButNotDefined).asConsStrat)
     // TODO: for defined but not fun syms, constrain them with NoCons
     cc.constraints
   
@@ -417,7 +423,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       case Some(s) if s.asObj.isDefined =>
           new Ctor(sel.uid, instantiationId, s.asObj.get, Nil)
       case Some(s) if s.asBlkMember.exists(_.trmImplTree.exists(_.k is syntax.Fun)) &&
-        preAnalyzer.definedFunSyms.contains(s.asBlkMember.get) =>
+        preAnalyzer.topLevelDefinedFunSyms.contains(s.asBlkMember.get) =>
         funSymToProdStratScheme.getOrUpdate(s.asBlkMember.get) match
           case v: ProdVar => v
           case t: ProdStratScheme =>
@@ -447,8 +453,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
             
     case v@Value.Ref(l) => l.asObj match
       case None =>
-        if l.asBlkMember.exists(_.trmImplTree.exists(_.k is syntax.Fun)) &&
-          preAnalyzer.definedFunSyms.contains(l.asBlkMember.get) then
+        // println(s"ref $l: ${l.asBlkMember.map(_.trees)}")
+        if l.asBlkMember.exists(preAnalyzer.topLevelDefinedFunSyms.contains) then
           funSymToProdStratScheme.getOrUpdate(l.asBlkMember.get) match
             case v: ProdVar => v
             case t: ProdStratScheme =>

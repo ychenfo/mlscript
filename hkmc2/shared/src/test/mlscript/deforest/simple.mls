@@ -1,7 +1,11 @@
 :js
 :deforest
 
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 object A
 object B
@@ -13,6 +17,9 @@ data class BBB(x, y)
 data class CCC(c)
 object None
 data class Some(value)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun test() =
   let x = if true then A else B
@@ -22,10 +29,11 @@ fun test() =
 test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst_0_tsni --> Ref(x)@inst_0_tsni@A
+//│ Ref(member:B)@2@inst_0_tsni --> Ref(x)@inst_0_tsni@B
+//│ -------------- executing -------------
 //│ = 1
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if x is ...`
-//│ 	B --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun test() =
@@ -36,10 +44,11 @@ fun test() =
 test()
 //│ = A
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ -------------- executing -------------
 //│ = A
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if x is ...`
-//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -54,12 +63,13 @@ fun test() =
 test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@3@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@4@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ Ref(member:A)@5@inst_0_tsni --> Ref(a)@inst_0_1_tsni@A
+//│ Ref(member:B)@6@inst_0_tsni --> Ref(a)@inst_0_2_tsni@B
+//│ -------------- executing -------------
 //│ = 1
-//│ 4 fusion opportunities:
-//│ 	A --match--> `if a is ...`
-//│ 	AA --match--> `if x is ...`
-//│ 	B --match--> `if a is ...`
-//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -80,12 +90,13 @@ fun test() =
 test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@3@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@4@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ Ref(member:A)@5@inst_0_tsni --> Ref(a)@inst_0_1_tsni@A
+//│ Ref(member:B)@6@inst_0_tsni --> Ref(a)@inst_0_2_tsni@B
+//│ -------------- executing -------------
 //│ = 1
-//│ 4 fusion opportunities:
-//│ 	A --match--> `if a is ...`
-//│ 	AA --match--> `if x is ...`
-//│ 	B --match--> `if a is ...`
-//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -98,10 +109,11 @@ fun test() =
 test()
 //│ = 11
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(11)))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(22)))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ -------------- executing -------------
 //│ = 11
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if x is ...`
-//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -117,7 +129,12 @@ fun test() =
     B then 2
 test()
 //│ = 2
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -131,10 +148,11 @@ fun test() =
 test()
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst_0_tsni --> Ref(x)@inst_0_tsni@A
+//│ Ref(member:B)@2@inst_0_tsni --> Ref(y)@inst_0_tsni@B
+//│ -------------- executing -------------
 //│ = 2
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if x is ...`
-//│ 	B --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -149,12 +167,13 @@ c(A) + c(B)
 //│ > 2
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:B)@2@inst__tsni --> Ref(a)@inst_0_tsni@B
+//│ Ref(member:A)@3@inst__tsni --> Ref(a)@inst_1_tsni@A
+//│ -------------- executing -------------
 //│ > 1
 //│ > 2
 //│ = 3
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if a is ...`
-//│ 	B --match--> `if a is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -173,7 +192,12 @@ fun c(x) =
   n + t
 c(AA(3))
 //│ = 5
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 5
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -183,10 +207,11 @@ fun f(a, b) = if a is
 f(A, B)
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst__tsni --> Ref(a)@inst_0_tsni@A
+//│ Ref(member:B)@2@inst__tsni --> Ref(b)@inst_0_tsni@B
+//│ -------------- executing -------------
 //│ = 3
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if a is ...`
-//│ 	B --match--> `if b is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -194,7 +219,12 @@ fun f(x) = if x is
   Some then if x.value > 1 then f(Some(x.value - 1)) else 0
 f(Some(2))
 //│ = 0
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -208,10 +238,11 @@ if y is
 //│ x = A
 //│ y = B
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:B)@0@inst__tsni --> Ref(y)@inst__tsni@B
+//│ Ref(member:A)@1@inst__tsni --> Ref(x)@inst__tsni@A
+//│ -------------- executing -------------
 //│ = 2
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if x is ...`
-//│ 	B --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -226,10 +257,11 @@ fun test() =
 test()
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst_0_tsni --> Ref(x)@inst_0_tsni@A
+//│ Ref(member:B)@2@inst_0_tsni --> Ref(y)@inst_0_tsni@B
+//│ -------------- executing -------------
 //│ = 2
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if x is ...`
-//│ 	B --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -242,12 +274,13 @@ fun f(x, y) =
 f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 //│ = 21
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:BBB),List(Arg(false,Lit(IntLit(4))), Arg(false,Lit(IntLit(6)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@BBB
+//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(3))), Arg(false,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_1_tsni@AAA
+//│ Call(Ref(member:BBB),List(Arg(false,Lit(IntLit(2))), Arg(false,Lit(IntLit(3)))))@6@inst__tsni --> Ref(x)@inst_2_tsni@BBB
+//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(1))), Arg(false,Lit(IntLit(3)))))@7@inst__tsni --> Ref(x)@inst_3_tsni@AAA
+//│ -------------- executing -------------
 //│ = 21
-//│ 4 fusion opportunities:
-//│ 	AAA --match--> `if x is ...`
-//│ 	AAA --match--> `if x is ...`
-//│ 	BBB --match--> `if x is ...`
-//│ 	BBB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -261,9 +294,10 @@ fun p(a) = c1(a) + c2(a)
 p(AA(1))
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@2@inst_0_1_tsni --> Ref($scrut)@inst_0_1_tsni@A
+//│ -------------- executing -------------
 //│ = 2
-//│ 1 fusion opportunities:
-//│ 	A --match--> `if scrut is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -275,10 +309,11 @@ fun c(x, y) = if x is
 c(AA(2), A)
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst__tsni --> Ref(y)@inst_0_tsni@A
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ -------------- executing -------------
 //│ = 2
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if y is ...`
-//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -290,12 +325,13 @@ fun f(x, y) =
 f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4) + f(CCC(4), 0)
 //│ = 24
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:CCC),List(Arg(false,Lit(IntLit(4)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@CCC
+//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(3))), Arg(false,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_1_tsni@AAA
+//│ Call(Ref(member:CCC),List(Arg(false,Lit(IntLit(2)))))@6@inst__tsni --> Ref(x)@inst_2_tsni@CCC
+//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(1))), Arg(false,Lit(IntLit(3)))))@7@inst__tsni --> Ref(x)@inst_3_tsni@AAA
+//│ -------------- executing -------------
 //│ = 24
-//│ 4 fusion opportunities:
-//│ 	AAA --match--> `if x is ...`
-//│ 	AAA --match--> `if x is ...`
-//│ 	CCC --match--> `if x is ...`
-//│ 	CCC --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -309,11 +345,12 @@ fun f(x, y) =
 f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4)
 //│ = 22
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(3))), Arg(false,Lit(IntLit(2)))))@3@inst__tsni --> Ref(x)@inst_0_tsni@AAA
+//│ Call(Ref(member:CCC),List(Arg(false,Lit(IntLit(2)))))@4@inst__tsni --> Ref(x)@inst_1_tsni@CCC
+//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(1))), Arg(false,Lit(IntLit(3)))))@5@inst__tsni --> Ref(x)@inst_2_tsni@AAA
+//│ -------------- executing -------------
 //│ = 22
-//│ 3 fusion opportunities:
-//│ 	AAA --match--> `if x is ...`
-//│ 	AAA --match--> `if x is ...`
-//│ 	CCC --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -323,9 +360,10 @@ fun c(x, m) = if x is
 c(BB(3), 0)
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(3)))))@1@inst__tsni --> Ref(x)@inst_0_tsni@dflt
+//│ -------------- executing -------------
 //│ = 0
-//│ 1 fusion opportunities:
-//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -338,10 +376,11 @@ fun g(b) = if b is
 f(AA(AA(0)))
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(0)))))@3@inst__tsni --> Ref(b)@inst_0_1_tsni@AA
+//│ -------------- executing -------------
 //│ = 1
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if b is ...`
-//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -350,10 +389,11 @@ fun f(x) = x.aa.aa
 f(AA(AA(3)))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@1@inst__tsni --> Select(Ref(x),Ident(aa))@inst_0_tsni
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@2@inst__tsni --> Select(Select(Ref(x),Ident(aa)),Ident(aa))@inst_0_tsni
+//│ -------------- executing -------------
 //│ = 3
-//│ 2 fusion opportunities:
-//│ 	AA --sel--> `.Ident(aa)`
-//│ 	AA --sel--> `.Ident(aa)`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun inner(x, y) =
@@ -376,10 +416,10 @@ outer1(p, 1, 2) + outer2(p, 3, 4) + inner(AA(5), 6)
 //│ = 103
 //│ p = AA(AA(3))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(5)))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ -------------- executing -------------
 //│ = 103
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if x is ...`
-//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -388,9 +428,10 @@ fun mapHead(f, x) = if x is
 mapHead(x => x, AAA(1, AAA(2, None)))
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AAA
+//│ -------------- executing -------------
 //│ = 1
-//│ 1 fusion opportunities:
-//│ 	AAA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -403,9 +444,10 @@ fun test() =
 test()
 //│ = 5
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ -------------- executing -------------
 //│ = 5
-//│ 1 fusion opportunities:
-//│ 	A --match--> `if scrut is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun test(a) = if a is
@@ -414,10 +456,11 @@ fun test(a) = if a is
 test(B) + test(C)
 //│ = 4
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:C)@2@inst__tsni --> Ref(a)@inst_0_tsni@dflt
+//│ Ref(member:B)@3@inst__tsni --> Ref(a)@inst_1_tsni@dflt
+//│ -------------- executing -------------
 //│ = 4
-//│ 2 fusion opportunities:
-//│ 	B --match--> `if a is ...`
-//│ 	C --match--> `if a is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -433,10 +476,11 @@ fun test(x, y, z) = if x is
 test(AA(1), AA(2), AA(3))
 //│ = "2AA(3)NaN"
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@1@inst__tsni --> Ref(y)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(1)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ -------------- executing -------------
 //│ = "2AA(3)NaN"
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if x is ...`
-//│ 	AA --match--> `if y is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -451,10 +495,11 @@ test(p)
 //│ = 141
 //│ p = AA([function CCC])
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:CCC))))@1@inst__tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:CCC))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ -------------- executing -------------
 //│ = 141
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if x is ...`
-//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -470,10 +515,11 @@ test(p, id(CCC(123)))
 //│ = 141
 //│ p = AA([function CCC])
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:CCC))))@1@inst__tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:CCC))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ -------------- executing -------------
 //│ = 141
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if x is ...`
-//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -482,21 +528,44 @@ fun f(x) = if x is
   A then 1
 f(id(A)) + f(A)
 //│ JS (unsanitized):
-//│ let f10, tmp111, tmp112, tmp113;
-//│ f10 = function f(x1) {
-//│   if (x1 instanceof A1.class) {
+//│ let f10, tmp113, tmp114, tmp115;
+//│ f10 = function f(x10) {
+//│   if (x10 instanceof A1.class) {
 //│     return 1
 //│   } else {
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ tmp111 = Predef.id(A1);
-//│ tmp112 = f10(tmp111);
-//│ tmp113 = f10(A1);
-//│ tmp112 + tmp113
-//│ No fusion opportunity
+//│ tmp113 = Predef.id(A1);
+//│ tmp114 = f10(tmp113);
+//│ tmp115 = f10(A1);
+//│ tmp114 + tmp115
+//│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ let f10, tmp113, tmp114, tmp115, f_inst_0_tsni6;
+//│ f_inst_0_tsni6 = function f_inst_0_tsni(x10) {
+//│   return runtime.safeCall(x10())
+//│ };
+//│ f10 = function f(x10) {
+//│   if (x10 instanceof A1.class) {
+//│     return 1
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp113 = Predef.id(A1);
+//│ tmp114 = f10(tmp113);
+//│ tmp115 = f_inst_0_tsni6(() => {
+//│   return 1
+//│ });
+//│ tmp114 + tmp115
+//│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ -------------- executing -------------
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -509,11 +578,12 @@ fun g(x) = if x is
 f(g(AA(1)))
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@2@inst_0_tsni --> Ref(x)@inst_1_tsni@A
+//│ Ref(member:B)@3@inst_0_tsni --> Ref(x)@inst_1_tsni@B
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(1)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ -------------- executing -------------
 //│ = 0
-//│ 3 fusion opportunities:
-//│ 	A --match--> `if x is ...`
-//│ 	AA --match--> `if x is ...`
-//│ 	B --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -523,10 +593,11 @@ fun f(a, b) = if a is
 f(A, B)
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst__tsni --> Ref(a)@inst_0_tsni@A
+//│ Ref(member:B)@2@inst__tsni --> Ref(b)@inst_0_tsni@B
+//│ -------------- executing -------------
 //│ = 1
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if a is ...`
-//│ 	B --match--> `if b is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -543,10 +614,12 @@ fun c2(x) = if x is
 c1(app(AA)) + c1(AA(2)) + c2(AA(3)) + c2(A)
 //│ = 6
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@3@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@4@inst__tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_2_tsni@AA
+//│ -------------- executing -------------
 //│ = 6
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if x is ...`
-//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 :re
@@ -562,13 +635,18 @@ c(B)
 //│ > 5
 //│ ═══[RUNTIME ERROR] Error: e1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@5@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Ref(member:B)@6@inst__tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:A)@5@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
+//│ Instantiate(Select(Ref(member:AA),Ident(class)),List(Lit(IntLit(2))))@7@inst_2_tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(3)))))@8@inst_2_tsni --> Ref(x)@inst_1_tsni@BB
+//│ Ref(member:A)@5@inst_3_tsni --> Ref($scrut)@inst_3_tsni@A
+//│ Instantiate(Select(Ref(member:AA),Ident(class)),List(Lit(IntLit(2))))@7@inst_4_tsni --> Ref(x)@inst_3_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(3)))))@8@inst_4_tsni --> Ref(x)@inst_3_tsni@BB
+//│ -------------- executing -------------
 //│ > 5
 //│ ═══[RUNTIME ERROR] Error: e1
-//│ 4 fusion opportunities:
-//│ 	A --match--> `if scrut is ...`
-//│ 	AA --match--> `if x is ...`
-//│ 	B --match--> `if x is ...`
-//│ 	BB --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -577,8 +655,9 @@ fun f(a, b) = if a is
 f(AA(1), BB(2))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(2)))))@1@inst__tsni --> Select(Ref(b),Ident(bb))@inst_0_tsni
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(1)))))@2@inst__tsni --> Ref(a)@inst_0_tsni@AA
+//│ -------------- executing -------------
 //│ = 3
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if a is ...`
-//│ 	BB --sel--> `.Ident(bb)`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

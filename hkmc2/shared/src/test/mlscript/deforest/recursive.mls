@@ -1,7 +1,11 @@
 :js
 :deforest
 
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 object Nil
@@ -12,6 +16,9 @@ object A
 object B
 data class T(n, l, r)
 object L
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun mk(n) = if n < 0 then Nil else n :: mk(n - 1)
 fun map(f, ls_map) = if ls_map is
@@ -26,10 +33,11 @@ fun test(ls) = map1(incr, map(double, ls))
 test(id(mk(5)))
 //│ = Cons(11, Cons(9, Cons(7, Cons(5, Cons(3, Cons(1, Nil))))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@inst_0_1_tsni --> Ref(ls_map1)@inst_0_2_tsni@Cons
+//│ Ref(member:Nil)@4@inst_0_1_tsni --> Ref(ls_map1)@inst_0_2_tsni@Nil
+//│ -------------- executing -------------
 //│ = Cons(11, Cons(9, Cons(7, Cons(5, Cons(3, Cons(1, Nil))))))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls_map1 is ...`
-//│ 	Nil --match--> `if ls_map1 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -41,10 +49,11 @@ fun map(ls) = if ls is
 map(enumFromTo(1, 4))
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
+//│ -------------- executing -------------
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun enumFromTo(a, b) = if a < b then a :: enumFromTo(a + 1, b) else Nil
@@ -54,10 +63,11 @@ fun sum(ls) = if ls is
 sum(enumFromTo(1,10))
 //│ = 45
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
+//│ -------------- executing -------------
 //│ = 45
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun enumFromTo(a, b) = if a < b then a :: enumFromTo(a + 1, b) else Nil
@@ -68,10 +78,11 @@ fun map(f, ls) =
 map(x => x + 4, enumFromTo(1, 4))
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
+//│ -------------- executing -------------
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun enumFromTo(a, b) = if a < b then a :: enumFromTo(a + 1, b) else Nil
@@ -83,10 +94,11 @@ fun map(f, ls) =
 map(x => x + 4, enumFromTo(1, 4))
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
+//│ -------------- executing -------------
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -98,10 +110,11 @@ fun sum(ls, a) = if ls is
 sum(enumFromTo(1, 10), 0)
 //│ = 45
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
+//│ -------------- executing -------------
 //│ = 45
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -118,10 +131,11 @@ fun test(xs) = map(incr, rev(xs, Nil))
 test(id(mk(5)))
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@3@inst_0_tsni --> Ref(xs_map)@inst_0_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref(acc))))@4@inst_0_1_tsni --> Ref(xs_map)@inst_0_2_tsni@Cons
+//│ -------------- executing -------------
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if xs_map is ...`
-//│ 	Nil --match--> `if xs_map is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -138,15 +152,19 @@ fun test(xs) = rev(map(incr, xs), Nil)
 test(id(mk(3)))
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@3@inst_0_1_tsni --> Ref(xs_rev)@inst_0_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@4@inst_0_1_tsni --> Ref(xs_rev)@inst_0_2_tsni@Cons
+//│ -------------- executing -------------
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if xs_rev is ...`
-//│ 	Nil --match--> `if xs_rev is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
 data class Pair(a, b)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 fun pair_up(xs) =
@@ -160,7 +178,12 @@ fun mk(n) = if n > 0 then (n - 1) :: n :: (n + 1) :: mk(n - 1) else Nil
 fun test(x) = pair_up(mk(x))
 test(4)
 //│ = Cons(Pair(3, 4), Cons(Pair(5, 2), Cons(Pair(3, 4), Cons(Pair(1, 2), Cons(Pair(3, 0), Cons(Pair(1, 2), Nil))))))
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = Cons(Pair(3, 4), Cons(Pair(5, 2), Cons(Pair(3, 4), Cons(Pair(1, 2), Cons(Pair(3, 0), Cons(Pair(1, 2), Nil))))))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -179,10 +202,11 @@ fun test(ls) = sum(flatten(ls))
 test(id(mk2d(4)))
 //│ = 20
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@4@inst_0_1_2_tsni --> Ref(ls_sum)@inst_0_3_tsni@Cons
+//│ Ref(member:Nil)@5@inst_0_1_tsni --> Ref(ls_sum)@inst_0_3_tsni@Nil
+//│ -------------- executing -------------
 //│ = 20
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls_sum is ...`
-//│ 	Nil --match--> `if ls_sum is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -195,13 +219,14 @@ fun rev(a, ys) = if ys is
 count(0, rev(Nil, 1 :: 2 :: Nil))
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@2@inst__tsni --> Ref(xs)@inst_1_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref(a))))@3@inst_0_tsni --> Ref(xs)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(ys)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@inst__tsni --> Ref(ys)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@6@inst__tsni --> Ref(ys)@inst_0_tsni@Nil
+//│ -------------- executing -------------
 //│ = 2
-//│ 5 fusion opportunities:
-//│ 	Cons --match--> `if xs is ...`
-//│ 	Cons --match--> `if ys is ...`
-//│ 	Cons --match--> `if ys is ...`
-//│ 	Nil --match--> `if xs is ...`
-//│ 	Nil --match--> `if ys is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -214,7 +239,12 @@ let p = 1 :: 2 :: Nil
 last(p)
 //│ = Some(2)
 //│ p = Cons(1, Cons(2, Nil))
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = Some(2)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -224,13 +254,14 @@ fun map(f, xs_map) = if xs_map is
 map(x => if x is A then 1 else 0, A :: B :: Nil)
 //│ = Cons(1, Cons(0, Nil))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(member:A)), Arg(false,Ref($tmp))))@2@inst__tsni --> Ref(xs_map)@inst_0_tsni@Cons
+//│ Ref(member:A)@3@inst__tsni --> Ref(x)@inst_1_tsni@A
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(member:B)), Arg(false,Ref(member:Nil))))@4@inst__tsni --> Ref(xs_map)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@5@inst__tsni --> Ref(xs_map)@inst_0_tsni@Nil
+//│ Ref(member:B)@6@inst__tsni --> Ref(x)@inst_1_tsni@dflt
+//│ -------------- executing -------------
 //│ = Cons(1, Cons(0, Nil))
-//│ 5 fusion opportunities:
-//│ 	A --match--> `if x is ...`
-//│ 	B --match--> `if x is ...`
-//│ 	Cons --match--> `if xs_map is ...`
-//│ 	Cons --match--> `if xs_map is ...`
-//│ 	Nil --match--> `if xs_map is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -245,18 +276,19 @@ fun c(x) = if x is
 c(T(A, T(B, L, L), T(A, L, L)))
 //│ = T(0, T(1, L, L), T(0, L, L))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:T),List(Arg(false,Ref(member:A)), Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@T
+//│ Ref(member:A)@2@inst__tsni --> Ref(n)@inst_0_tsni@A
+//│ Call(Ref(member:T),List(Arg(false,Ref(member:A)), Arg(false,Ref(member:L)), Arg(false,Ref(member:L))))@3@inst__tsni --> Ref(x)@inst_0_tsni@T
+//│ Ref(member:L)@4@inst__tsni --> Ref(x)@inst_0_tsni@L
+//│ Ref(member:L)@5@inst__tsni --> Ref(x)@inst_0_tsni@L
+//│ Ref(member:A)@6@inst__tsni --> Ref(n)@inst_0_tsni@A
+//│ Call(Ref(member:T),List(Arg(false,Ref(member:B)), Arg(false,Ref(member:L)), Arg(false,Ref(member:L))))@7@inst__tsni --> Ref(x)@inst_0_tsni@T
+//│ Ref(member:L)@8@inst__tsni --> Ref(x)@inst_0_tsni@L
+//│ Ref(member:L)@9@inst__tsni --> Ref(x)@inst_0_tsni@L
+//│ Ref(member:B)@10@inst__tsni --> Ref(n)@inst_0_tsni@B
+//│ -------------- executing -------------
 //│ = T(0, T(1, L, L), T(0, L, L))
-//│ 10 fusion opportunities:
-//│ 	A --match--> `if n is ...`
-//│ 	A --match--> `if n is ...`
-//│ 	B --match--> `if n is ...`
-//│ 	L --match--> `if x is ...`
-//│ 	L --match--> `if x is ...`
-//│ 	L --match--> `if x is ...`
-//│ 	L --match--> `if x is ...`
-//│ 	T --match--> `if x is ...`
-//│ 	T --match--> `if x is ...`
-//│ 	T --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -268,14 +300,15 @@ fun max(ms, m) = if ms is
 max(3 :: 2 :: 4 :: 1 :: 0 :: Nil, 0)
 //│ = 4
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(3))), Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref($tmp))))@2@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(4))), Arg(false,Ref($tmp))))@3@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(0))), Arg(false,Ref(member:Nil))))@5@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@6@inst__tsni --> Ref(ms)@inst_0_tsni@Nil
+//│ -------------- executing -------------
 //│ = 4
-//│ 6 fusion opportunities:
-//│ 	Cons --match--> `if ms is ...`
-//│ 	Cons --match--> `if ms is ...`
-//│ 	Cons --match--> `if ms is ...`
-//│ 	Cons --match--> `if ms is ...`
-//│ 	Cons --match--> `if ms is ...`
-//│ 	Nil --match--> `if ms is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -294,6 +327,11 @@ fun last(ls_last) =
 fun lastFilter(ls, f) = last(filter(ls, f))
 lastFilter(id(1 :: 2 :: 3 :: 4 :: 5 :: Nil), x => (x % 2 == 0))
 //│ = Some(4)
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = Some(4)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 

@@ -1,19 +1,32 @@
 :js
 :deforest
 
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 object A
 object B
 object C
 data class AA(x)
 data class BB(x)
 data class CC(x)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 object Nil
 data class Cons(h, t)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 object None
 data class Some(x)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 // since `x.x` is considered as being consumed
@@ -41,30 +54,43 @@ f(AA(AA(3)))
 //│ tmp = AA1(3);
 //│ tmp1 = AA1(tmp);
 //│ f(tmp1)
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let f, tmp, tmp1, _deforest_AA_x;
-//│ f = function f(x) {
-//│   return runtime.safeCall(x())
+//│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ let f, tmp, tmp1, f_inst_0_tsni, x;
+//│ f_inst_0_tsni = function f_inst_0_tsni(x1) {
+//│   return runtime.safeCall(x1())
+//│ };
+//│ f = function f(x1) {
+//│   let scrut;
+//│   if (x1 instanceof AA1.class) {
+//│     scrut = x1.x;
+//│     if (scrut instanceof AA1.class) {
+//│       return x1.x.x
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
 //│ };
 //│ tmp = AA1(3);
-//│ _deforest_AA_x = tmp;
+//│ x = tmp;
 //│ tmp1 = () => {
 //│   let scrut;
-//│   scrut = _deforest_AA_x;
+//│   scrut = x;
 //│   if (scrut instanceof AA1.class) {
-//│     return _deforest_AA_x.x
+//│     return x.x
 //│   } else {
 //│     throw new this.Error("match error");
 //│   }
 //│ };
-//│ f(tmp1)
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ f_inst_0_tsni(tmp1)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ -------------- executing -------------
 //│ = 3
-//│ 1 fusion opportunities:
-//│ 	AA --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -81,10 +107,10 @@ let p = AA(AA(AA(10)))
 test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ JS (unsanitized):
 //│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
-//│ test = function test(x) {
+//│ test = function test(x1) {
 //│   let t, param0, param01, param02, a, tmp16, tmp17, tmp18, tmp19, tmp20;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
+//│   if (x1 instanceof AA1.class) {
+//│     param0 = x1.x;
 //│     if (param0 instanceof AA1.class) {
 //│       param01 = param0.x;
 //│       if (param01 instanceof AA1.class) {
@@ -134,14 +160,27 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ tmp14 = tmp9 + tmp13;
 //│ tmp15 = test(B1);
 //│ tmp14 + tmp15
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, _deforest_AA_x_tmp, match_param0_branch_AA, _deforest_AA_x_tmp1;
-//│ match_param0_branch_AA = function match_param0_branch_AA(_deforest_AA_x1) {
-//│   let t, param0, a, tmp16, tmp17, tmp18, tmp19, tmp20;
-//│   param0 = _deforest_AA_x1;
-//│   a = param0;
-//│   tmp16 = a;
+//│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, test_inst_0_tsni, test_inst_1_tsni, test_inst_2_tsni, x1, x2, x3, x4;
+//│ test_inst_0_tsni = function test_inst_0_tsni(x5) {
+//│   return runtime.safeCall(x5())
+//│ };
+//│ test_inst_1_tsni = function test_inst_1_tsni(x5) {
+//│   return runtime.safeCall(x5())
+//│ };
+//│ test_inst_2_tsni = function test_inst_2_tsni(x5) {
+//│   let t, param0, param01, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   if (x5 instanceof AA1.class) {
+//│     param0 = x5.x;
+//│     if (param0 instanceof AA1.class) {
+//│       param01 = param0.x;
+//│       return runtime.safeCall(param01())
+//│     } else {
+//│       tmp16 = 4;
+//│     }
+//│   } else {
+//│     tmp16 = 4;
+//│   }
 //│   t = tmp16;
 //│   tmp17 = 5 * 4;
 //│   tmp18 = t + tmp17;
@@ -149,13 +188,19 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│   tmp20 = tmp19 + 2;
 //│   return tmp20 - 1
 //│ };
-//│ test = function test(x) {
-//│   let t, param0, param01, tmp16, tmp17, tmp18, tmp19, tmp20;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
+//│ test = function test(x5) {
+//│   let t, param0, param01, param02, a, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   if (x5 instanceof AA1.class) {
+//│     param0 = x5.x;
 //│     if (param0 instanceof AA1.class) {
 //│       param01 = param0.x;
-//│       return runtime.safeCall(param01())
+//│       if (param01 instanceof AA1.class) {
+//│         param02 = param01.x;
+//│         a = param02;
+//│         tmp16 = a;
+//│       } else {
+//│         tmp16 = 4;
+//│       }
 //│     } else {
 //│       tmp16 = 4;
 //│     }
@@ -182,34 +227,75 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ _deforest_AA_x_tmp = 10;
+//│ x4 = 10;
 //│ tmp4 = () => {
-//│   return match_param0_branch_AA(_deforest_AA_x_tmp)
+//│   let t, param0, a, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   param0 = x4;
+//│   a = param0;
+//│   tmp16 = a;
+//│   t = tmp16;
+//│   tmp17 = 5 * 4;
+//│   tmp18 = t + tmp17;
+//│   tmp19 = tmp18 - 3;
+//│   tmp20 = tmp19 + 2;
+//│   return tmp20 - 1
 //│ };
 //│ tmp5 = AA1(tmp4);
 //│ tmp6 = AA1(tmp5);
 //│ p = tmp6;
-//│ tmp7 = test(p);
+//│ tmp7 = test_inst_2_tsni(p);
 //│ tmp8 = f1(p);
 //│ tmp9 = tmp7 + tmp8;
-//│ _deforest_AA_x_tmp1 = 10;
+//│ x3 = 10;
 //│ tmp10 = () => {
-//│   return match_param0_branch_AA(_deforest_AA_x_tmp1)
+//│   let t, param0, a, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   param0 = x3;
+//│   a = param0;
+//│   tmp16 = a;
+//│   t = tmp16;
+//│   tmp17 = 5 * 4;
+//│   tmp18 = t + tmp17;
+//│   tmp19 = tmp18 - 3;
+//│   tmp20 = tmp19 + 2;
+//│   return tmp20 - 1
 //│ };
-//│ tmp11 = AA1(tmp10);
-//│ tmp12 = AA1(tmp11);
-//│ tmp13 = test(tmp12);
+//│ x2 = tmp10;
+//│ tmp11 = () => {
+//│   let param0;
+//│   param0 = x2;
+//│   return runtime.safeCall(param0())
+//│ };
+//│ x1 = tmp11;
+//│ tmp12 = () => {
+//│   let param0;
+//│   param0 = x1;
+//│   return runtime.safeCall(param0())
+//│ };
+//│ tmp13 = test_inst_1_tsni(tmp12);
 //│ tmp14 = tmp9 + tmp13;
-//│ tmp15 = test(B1);
+//│ tmp15 = test_inst_0_tsni(() => {
+//│   let t, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   tmp16 = 4;
+//│   t = tmp16;
+//│   tmp17 = 5 * 4;
+//│   tmp18 = t + tmp17;
+//│   tmp19 = tmp18 - 3;
+//│   tmp20 = tmp19 + 2;
+//│   return tmp20 - 1
+//│ });
 //│ tmp14 + tmp15
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 78
 //│ p = AA(AA(AA(10)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:B)@3@inst__tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@5@inst__tsni --> Ref($param0)@inst_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(10)))))@6@inst__tsni --> Ref($param0)@inst_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(10)))))@7@inst__tsni --> Ref($param0)@inst_2_tsni@AA
+//│ -------------- executing -------------
 //│ = 78
-//│ 2 fusion opportunities:
-//│ 	AA --match--> `if param0 is ...`
-//│ 	AA --match--> `if param0 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -222,3 +308,6 @@ fun test() =
     Global(x) then Local(x + 1)
 test()
 //│ = Local(2)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

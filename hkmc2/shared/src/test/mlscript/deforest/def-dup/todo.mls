@@ -1,28 +1,25 @@
 :js
 :deforest
 
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 data class A(x)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 data class (::) Cons(h, t)
 object Nil
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-// TODO: This program cannot be fused no matter how we duplicate, and we creately useless duplications.
-// But it has essentially the same flow as the program below, which we create useful duplications
-// ```
-// fun to(n) = if n > 0 then n :: to(n - 1) else Nil
-// fun f1(ls) = if ls is
-//   h :: t then h
-//   Nil then 2
-// fun f2(ls) = if ls is
-//   h :: t then h + 1
-//   Nil then 3
-// fun wrap(n) = to(n)
-// f1(wrap(4)) + f2(wrap(5))
-// ```
-:deforestDup
+
 fun to(n) = if n > 0 then n :: to(n - 1) else Nil
 fun f1(ls) = if ls is
   h :: t then h
@@ -36,21 +33,16 @@ fun badWrap(n) =
   x
 f1(badWrap(4)) + f2(badWrap(5))
 //│ = 10
-//│ duplication chances:
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:badWrap_duplicated@941
-//│ 	Call(Ref(member:badWrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:badWrap_duplicated@942
-//│ =========
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 10
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
-// TODO: no duplication of `p(1)` or `p(2)` is helpful in this case
-// but duplicating `f2(two)` AND `p(2)` is helpful...
-// ctor─┬─►pRes1─┬──►f1Consumer
-//      │        └──►f2Consumer
-//      │                ▲
-//      └─►pRes2 ────────┘
-:deforestDup
+
 fun p(x) = A(x)
 let one = p(1)
 let two = p(2)
@@ -60,17 +52,15 @@ f1(one) + f2(one) + f2(two)
 //│ = 9
 //│ one = A(1)
 //│ two = A(2)
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1008
-//│ =========
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@2@inst_0_tsni --> Ref(p)@inst_1_tsni@A
+//│ -------------- executing -------------
+//│ = 9
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
-// TODO: no duplication seems to be helpful for this program
-// can we avoid duplicating this? since the constructor calls
-// are not in the definitions that we are duplicating...
-:deforestDup
 fun p(a) = a
 fun f1(a1) = if a1 is A(x1) then x1
 fun f2(a2) = if a2 is A(x2) then x2 + 1
@@ -84,19 +74,15 @@ fun test() =
   f1(res1) + f1(res2) + f2(res3)
 test()
 //│ = 5
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Ref($tmp)))) <-- dup --> member:p_duplicated@1069
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(x)))) <-- dup --> member:p_duplicated@1069
-//│ 	Call(Ref(member:p),List(Arg(false,Ref(y)))) <-- dup --> member:p_duplicated@1070
-//│ =========
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 5
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
-// TODO: no duplication seem to be helpful, and maybe we can also
-// avoid this, because for the `clashedCtor` flows into pRes1 and pRes2
-// its ctor expr also does not locate in the definition of `p`
-:deforestDup
 fun f1(a1) = if a1 is A(x1) then x1
 fun f2(a2) = if a2 is A(x2) then x2 + 1
 fun p(x, clashedCtor) =
@@ -106,11 +92,12 @@ let clashed = A(3)
 f1(p(1, clashed)) + f2(p(2, clashed))
 //│ = 4
 //│ clashed = A(3)
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1112
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(clashed)))) <-- dup --> member:p_duplicated@1113
-//│ =========
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 4
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 

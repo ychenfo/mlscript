@@ -228,7 +228,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
         // 1. find original fundefs
         // 2. transform fun body under the specific instantiation id
         // 3. accumulate the definition
-        val FunDefn(_, _, param, body) = preAnalyzer.getFunDefnForSym(oldSym).get
+        val FunDefn(_, _, param, body) = preAnalyzer.getTopLevelFunDefnForSym(oldSym).get
         val oldToNewParam = mutable.Map.empty[VarSymbol, VarSymbol]
         val newParam = param.map: 
           case ParamList(flags, params, restParam) =>
@@ -471,7 +471,8 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
         case Some(obj) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId) =>
           matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId)
         case None => l.asBlkMember match
-          case Some(blk) if blk.trmImplTree.fold(false)(_.k is syntax.Fun) =>
+          // case Some(blk) if blk.trmImplTree.fold(false)(_.k is syntax.Fun) =>
+          case Some(blk) if preAnalyzer.topLevelDefinedFunSyms.contains(blk) =>
             val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
               val currentSym = preAnalyzer.getReferredFunSym(currentReferSite)
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)

@@ -1,11 +1,18 @@
 :js
 :deforest
 
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 object Nil
 data class (::) Cons(h, t)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -22,7 +29,12 @@ appendThree of
   id(3 :: 4 :: Nil)
   id(5 :: 6 :: Nil)
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // maybe the fusion target for the previous program
 fun appendReified(ys, zs) = if ys is
@@ -40,7 +52,12 @@ test of
   id(3 :: 4 :: Nil)
   id(5 :: 6 :: Nil)
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 fun idList(l) = if l is
@@ -56,7 +73,14 @@ appendThree of
   id(3 :: 4 :: Nil)
   id(5 :: 6 :: Nil)
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@4@inst_0_1_2_tsni --> Ref(xs)@inst_0_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@5@inst_0_1_2_tsni --> Ref(xs)@inst_0_3_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@6@inst_0_1_tsni --> Ref(xs)@inst_0_3_tsni@Cons
+//│ -------------- executing -------------
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
@@ -71,4 +95,9 @@ concat of id of
   (3 :: 4 :: Nil) ::
   (5 :: 6 :: Nil) :: Nil
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

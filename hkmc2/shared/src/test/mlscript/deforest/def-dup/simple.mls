@@ -1,14 +1,24 @@
 :js
 :deforest
 
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 data class A(x)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 data class (::) Cons(h, t)
 object Nil
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-:deforestDup
+
 // `A(1)` is in the definition of `test`, but
 // no duplication is helpful
 fun test() =
@@ -20,99 +30,31 @@ fun test() =
   a + b
 test() + test()
 //│ = 4
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 4
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-:sjs
-:deforestDup
+
 fun p(d) = A(3)
 fun c1(x) = if x is A then 1
 fun c2(x) = if x is A then 2
 fun test() =
   c1(p(1)) + c2(p(2))
 test()
-//│ JS (unsanitized):
-//│ let p, test1, c1, c2;
-//│ p = function p(d) {
-//│   return A1(3)
-//│ };
-//│ c1 = function c1(x) {
-//│   if (x instanceof A1.class) {
-//│     return 1
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ c2 = function c2(x) {
-//│   if (x instanceof A1.class) {
-//│     return 2
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ test1 = function test() {
-//│   let tmp2, tmp3, tmp4, tmp5;
-//│   tmp2 = p(1);
-//│   tmp3 = c1(tmp2);
-//│   tmp4 = p(2);
-//│   tmp5 = c2(tmp4);
-//│   return tmp3 + tmp5
-//│ };
-//│ test1()
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@931
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@932
-//│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let p, test1, c1, c2, p_duplicated, p_duplicated1;
-//│ p_duplicated = function p_duplicated(d) {
-//│   let _deforest_A_x_unused;
-//│   _deforest_A_x_unused = 3;
-//│   return () => {
-//│     return 1
-//│   }
-//│ };
-//│ p_duplicated1 = function p_duplicated(d) {
-//│   let _deforest_A_x_unused;
-//│   _deforest_A_x_unused = 3;
-//│   return () => {
-//│     return 2
-//│   }
-//│ };
-//│ p = function p(d) {
-//│   return A1(3)
-//│ };
-//│ c1 = function c1(x) {
-//│   return runtime.safeCall(x())
-//│ };
-//│ c2 = function c2(x) {
-//│   return runtime.safeCall(x())
-//│ };
-//│ test1 = function test() {
-//│   let tmp2, tmp3, tmp4, tmp5;
-//│   tmp2 = p_duplicated(1);
-//│   tmp3 = c1(tmp2);
-//│   tmp4 = p_duplicated1(2);
-//│   tmp5 = c2(tmp4);
-//│   return tmp3 + tmp5
-//│ };
-//│ test1()
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@947
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@948
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(3)))))@5@inst_0_1_tsni --> Ref(x)@inst_0_3_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(3)))))@5@inst_0_2_tsni --> Ref(x)@inst_0_4_tsni@A
+//│ -------------- executing -------------
 //│ = 3
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if x is ...`
-//│ 	A --match--> `if x is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-:sjs
-:deforestDup
+
 fun p(x) = A(x)
 fun f1(a1) = if a1 is A(aa) then aa
 fun f2(a2) = if a2 is A(aa) then aa
@@ -120,189 +62,20 @@ fun f3(a3) = if a3 is A(aa) then aa
 fun f4(a4) = if a4 is A(aa) then aa
 fun f5(a5) = if a5 is A(aa) then aa
 f1(p(1)) + f2(p(2)) + f3(p(3)) + f4(p(4)) + f5(p(5))
-//│ JS (unsanitized):
-//│ let f1, f5, f3, p1, f4, f2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
-//│ p1 = function p(x) {
-//│   return A1(x)
-//│ };
-//│ f1 = function f1(a1) {
-//│   let param0, aa;
-//│   if (a1 instanceof A1.class) {
-//│     param0 = a1.x;
-//│     aa = param0;
-//│     return aa
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f2 = function f2(a2) {
-//│   let param0, aa;
-//│   if (a2 instanceof A1.class) {
-//│     param0 = a2.x;
-//│     aa = param0;
-//│     return aa
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f3 = function f3(a3) {
-//│   let param0, aa;
-//│   if (a3 instanceof A1.class) {
-//│     param0 = a3.x;
-//│     aa = param0;
-//│     return aa
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f4 = function f4(a4) {
-//│   let param0, aa;
-//│   if (a4 instanceof A1.class) {
-//│     param0 = a4.x;
-//│     aa = param0;
-//│     return aa
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f5 = function f5(a5) {
-//│   let param0, aa;
-//│   if (a5 instanceof A1.class) {
-//│     param0 = a5.x;
-//│     aa = param0;
-//│     return aa
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ tmp2 = p1(1);
-//│ tmp3 = f1(tmp2);
-//│ tmp4 = p1(2);
-//│ tmp5 = f2(tmp4);
-//│ tmp6 = tmp3 + tmp5;
-//│ tmp7 = p1(3);
-//│ tmp8 = f3(tmp7);
-//│ tmp9 = tmp6 + tmp8;
-//│ tmp10 = p1(4);
-//│ tmp11 = f4(tmp10);
-//│ tmp12 = tmp9 + tmp11;
-//│ tmp13 = p1(5);
-//│ tmp14 = f5(tmp13);
-//│ tmp12 + tmp14
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1016
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1017
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p_duplicated@1018
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p_duplicated@1019
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:p_duplicated@1020
-//│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let f1, f5, f3, p1, f4, f2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, p_duplicated2, p_duplicated3, p_duplicated4, p_duplicated5, p_duplicated6;
-//│ p_duplicated2 = function p_duplicated(x) {
-//│   let _deforest_A_x;
-//│   _deforest_A_x = x;
-//│   return () => {
-//│     let param0, aa;
-//│     param0 = _deforest_A_x;
-//│     aa = param0;
-//│     return aa
-//│   }
-//│ };
-//│ p_duplicated3 = function p_duplicated(x) {
-//│   let _deforest_A_x;
-//│   _deforest_A_x = x;
-//│   return () => {
-//│     let param0, aa;
-//│     param0 = _deforest_A_x;
-//│     aa = param0;
-//│     return aa
-//│   }
-//│ };
-//│ p_duplicated4 = function p_duplicated(x) {
-//│   let _deforest_A_x;
-//│   _deforest_A_x = x;
-//│   return () => {
-//│     let param0, aa;
-//│     param0 = _deforest_A_x;
-//│     aa = param0;
-//│     return aa
-//│   }
-//│ };
-//│ p_duplicated5 = function p_duplicated(x) {
-//│   let _deforest_A_x;
-//│   _deforest_A_x = x;
-//│   return () => {
-//│     let param0, aa;
-//│     param0 = _deforest_A_x;
-//│     aa = param0;
-//│     return aa
-//│   }
-//│ };
-//│ p_duplicated6 = function p_duplicated(x) {
-//│   let _deforest_A_x;
-//│   _deforest_A_x = x;
-//│   return () => {
-//│     let param0, aa;
-//│     param0 = _deforest_A_x;
-//│     aa = param0;
-//│     return aa
-//│   }
-//│ };
-//│ p1 = function p(x) {
-//│   return A1(x)
-//│ };
-//│ f1 = function f1(a1) {
-//│   return runtime.safeCall(a1())
-//│ };
-//│ f2 = function f2(a2) {
-//│   return runtime.safeCall(a2())
-//│ };
-//│ f3 = function f3(a3) {
-//│   return runtime.safeCall(a3())
-//│ };
-//│ f4 = function f4(a4) {
-//│   return runtime.safeCall(a4())
-//│ };
-//│ f5 = function f5(a5) {
-//│   return runtime.safeCall(a5())
-//│ };
-//│ tmp2 = p_duplicated2(1);
-//│ tmp3 = f1(tmp2);
-//│ tmp4 = p_duplicated3(2);
-//│ tmp5 = f2(tmp4);
-//│ tmp6 = tmp3 + tmp5;
-//│ tmp7 = p_duplicated4(3);
-//│ tmp8 = f3(tmp7);
-//│ tmp9 = tmp6 + tmp8;
-//│ tmp10 = p_duplicated5(4);
-//│ tmp11 = f4(tmp10);
-//│ tmp12 = tmp9 + tmp11;
-//│ tmp13 = p_duplicated6(5);
-//│ tmp14 = f5(tmp13);
-//│ tmp12 + tmp14
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 15
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1059
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1060
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p_duplicated@1061
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p_duplicated@1062
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:p_duplicated@1063
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@10@inst_0_tsni --> Ref(a5)@inst_5_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@10@inst_1_tsni --> Ref(a4)@inst_6_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@10@inst_2_tsni --> Ref(a3)@inst_7_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@10@inst_3_tsni --> Ref(a2)@inst_8_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@10@inst_4_tsni --> Ref(a1)@inst_9_tsni@A
+//│ -------------- executing -------------
 //│ = 15
-//│ 5 fusion opportunities:
-//│ 	A --match--> `if a1 is ...`
-//│ 	A --match--> `if a2 is ...`
-//│ 	A --match--> `if a3 is ...`
-//│ 	A --match--> `if a4 is ...`
-//│ 	A --match--> `if a5 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-:sjs
-:deforestDup
+
 // calls to `to` should be able to be duplicated
 fun to(n) =
   if n > 0 then
@@ -323,254 +96,23 @@ fun f4(ls4) = if ls4 is
   h :: t then h + f4(t)
   Nil then 5
 f1(to(4)) + f2(to(5)) + f3(to(6)) + f4(to(7))
-//│ JS (unsanitized):
-//│ let f11, to, f31, f41, f21, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37;
-//│ to = function to(n) {
-//│   let scrut, m, tmp38, tmp39;
-//│   scrut = n > 0;
-//│   if (scrut === true) {
-//│     tmp38 = n - 1;
-//│     m = tmp38;
-//│     tmp39 = to(m);
-//│     return Cons1(n, tmp39)
-//│   } else {
-//│     return Nil1
-//│   }
-//│ };
-//│ f11 = function f1(ls1) {
-//│   let param0, param1, h, t, tmp38;
-//│   if (ls1 instanceof Cons1.class) {
-//│     param0 = ls1.h;
-//│     param1 = ls1.t;
-//│     h = param0;
-//│     t = param1;
-//│     tmp38 = f11(t);
-//│     return h + tmp38
-//│   } else if (ls1 instanceof Nil1.class) {
-//│     return 2
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f21 = function f2(ls2) {
-//│   let param0, param1, h, t, tmp38;
-//│   if (ls2 instanceof Cons1.class) {
-//│     param0 = ls2.h;
-//│     param1 = ls2.t;
-//│     h = param0;
-//│     t = param1;
-//│     tmp38 = f21(t);
-//│     return h + tmp38
-//│   } else if (ls2 instanceof Nil1.class) {
-//│     return 3
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f31 = function f3(ls3) {
-//│   let param0, param1, h, t, tmp38;
-//│   if (ls3 instanceof Cons1.class) {
-//│     param0 = ls3.h;
-//│     param1 = ls3.t;
-//│     h = param0;
-//│     t = param1;
-//│     tmp38 = f31(t);
-//│     return h + tmp38
-//│   } else if (ls3 instanceof Nil1.class) {
-//│     return 4
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ f41 = function f4(ls4) {
-//│   let param0, param1, h, t, tmp38;
-//│   if (ls4 instanceof Cons1.class) {
-//│     param0 = ls4.h;
-//│     param1 = ls4.t;
-//│     h = param0;
-//│     t = param1;
-//│     tmp38 = f41(t);
-//│     return h + tmp38
-//│   } else if (ls4 instanceof Nil1.class) {
-//│     return 5
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ tmp28 = to(4);
-//│ tmp29 = f11(tmp28);
-//│ tmp30 = to(5);
-//│ tmp31 = f21(tmp30);
-//│ tmp32 = tmp29 + tmp31;
-//│ tmp33 = to(6);
-//│ tmp34 = f31(tmp33);
-//│ tmp35 = tmp32 + tmp34;
-//│ tmp36 = to(7);
-//│ tmp37 = f41(tmp36);
-//│ tmp35 + tmp37
-//│ duplication chances:
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:to_duplicated@1154
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:to_duplicated@1155
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(6))))) <-- dup --> member:to_duplicated@1156
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(7))))) <-- dup --> member:to_duplicated@1157
-//│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let f11, to, f31, f41, f21, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, to_duplicated, to_duplicated1, to_duplicated2, to_duplicated3;
-//│ to_duplicated = function to_duplicated(n) {
-//│   let tmp38, m, tmp39, scrut, _deforest_Cons_t, _deforest_Cons_h;
-//│   scrut = n > 0;
-//│   if (scrut === true) {
-//│     tmp39 = n - 1;
-//│     m = tmp39;
-//│     tmp38 = to_duplicated(m);
-//│     _deforest_Cons_h = n;
-//│     _deforest_Cons_t = tmp38;
-//│     return () => {
-//│       let param0, param1, h, t, tmp40;
-//│       param0 = _deforest_Cons_h;
-//│       param1 = _deforest_Cons_t;
-//│       h = param0;
-//│       t = param1;
-//│       tmp40 = f11(t);
-//│       return h + tmp40
-//│     }
-//│   } else {
-//│     return () => {
-//│       return 2
-//│     }
-//│   }
-//│ };
-//│ to_duplicated1 = function to_duplicated(n) {
-//│   let tmp38, m, tmp39, scrut, _deforest_Cons_t, _deforest_Cons_h;
-//│   scrut = n > 0;
-//│   if (scrut === true) {
-//│     tmp39 = n - 1;
-//│     m = tmp39;
-//│     tmp38 = to_duplicated1(m);
-//│     _deforest_Cons_h = n;
-//│     _deforest_Cons_t = tmp38;
-//│     return () => {
-//│       let param0, param1, h, t, tmp40;
-//│       param0 = _deforest_Cons_h;
-//│       param1 = _deforest_Cons_t;
-//│       h = param0;
-//│       t = param1;
-//│       tmp40 = f21(t);
-//│       return h + tmp40
-//│     }
-//│   } else {
-//│     return () => {
-//│       return 3
-//│     }
-//│   }
-//│ };
-//│ to_duplicated2 = function to_duplicated(n) {
-//│   let tmp38, m, tmp39, scrut, _deforest_Cons_t, _deforest_Cons_h;
-//│   scrut = n > 0;
-//│   if (scrut === true) {
-//│     tmp39 = n - 1;
-//│     m = tmp39;
-//│     tmp38 = to_duplicated2(m);
-//│     _deforest_Cons_h = n;
-//│     _deforest_Cons_t = tmp38;
-//│     return () => {
-//│       let param0, param1, h, t, tmp40;
-//│       param0 = _deforest_Cons_h;
-//│       param1 = _deforest_Cons_t;
-//│       h = param0;
-//│       t = param1;
-//│       tmp40 = f31(t);
-//│       return h + tmp40
-//│     }
-//│   } else {
-//│     return () => {
-//│       return 4
-//│     }
-//│   }
-//│ };
-//│ to_duplicated3 = function to_duplicated(n) {
-//│   let tmp38, m, tmp39, scrut, _deforest_Cons_t, _deforest_Cons_h;
-//│   scrut = n > 0;
-//│   if (scrut === true) {
-//│     tmp39 = n - 1;
-//│     m = tmp39;
-//│     tmp38 = to_duplicated3(m);
-//│     _deforest_Cons_h = n;
-//│     _deforest_Cons_t = tmp38;
-//│     return () => {
-//│       let param0, param1, h, t, tmp40;
-//│       param0 = _deforest_Cons_h;
-//│       param1 = _deforest_Cons_t;
-//│       h = param0;
-//│       t = param1;
-//│       tmp40 = f41(t);
-//│       return h + tmp40
-//│     }
-//│   } else {
-//│     return () => {
-//│       return 5
-//│     }
-//│   }
-//│ };
-//│ to = function to(n) {
-//│   let scrut, m, tmp38, tmp39;
-//│   scrut = n > 0;
-//│   if (scrut === true) {
-//│     tmp38 = n - 1;
-//│     m = tmp38;
-//│     tmp39 = to(m);
-//│     return Cons1(n, tmp39)
-//│   } else {
-//│     return Nil1
-//│   }
-//│ };
-//│ f11 = function f1(ls1) {
-//│   return runtime.safeCall(ls1())
-//│ };
-//│ f21 = function f2(ls2) {
-//│   return runtime.safeCall(ls2())
-//│ };
-//│ f31 = function f3(ls3) {
-//│   return runtime.safeCall(ls3())
-//│ };
-//│ f41 = function f4(ls4) {
-//│   return runtime.safeCall(ls4())
-//│ };
-//│ tmp28 = to_duplicated(4);
-//│ tmp29 = f11(tmp28);
-//│ tmp30 = to_duplicated1(5);
-//│ tmp31 = f21(tmp30);
-//│ tmp32 = tmp29 + tmp31;
-//│ tmp33 = to_duplicated2(6);
-//│ tmp34 = f31(tmp33);
-//│ tmp35 = tmp32 + tmp34;
-//│ tmp36 = to_duplicated3(7);
-//│ tmp37 = f41(tmp36);
-//│ tmp35 + tmp37
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 88
-//│ duplication chances:
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:to_duplicated@1220
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:to_duplicated@1221
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(6))))) <-- dup --> member:to_duplicated@1222
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(7))))) <-- dup --> member:to_duplicated@1223
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref($tmp))))@8@inst_0_tsni --> Ref(ls4)@inst_4_tsni@Cons
+//│ Ref(member:Nil)@9@inst_0_tsni --> Ref(ls4)@inst_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref($tmp))))@8@inst_1_tsni --> Ref(ls3)@inst_5_tsni@Cons
+//│ Ref(member:Nil)@9@inst_1_tsni --> Ref(ls3)@inst_5_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref($tmp))))@8@inst_2_tsni --> Ref(ls2)@inst_6_tsni@Cons
+//│ Ref(member:Nil)@9@inst_2_tsni --> Ref(ls2)@inst_6_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref($tmp))))@8@inst_3_tsni --> Ref(ls1)@inst_7_tsni@Cons
+//│ Ref(member:Nil)@9@inst_3_tsni --> Ref(ls1)@inst_7_tsni@Nil
+//│ -------------- executing -------------
 //│ = 88
-//│ 8 fusion opportunities:
-//│ 	Cons --match--> `if ls1 is ...`
-//│ 	Cons --match--> `if ls2 is ...`
-//│ 	Cons --match--> `if ls3 is ...`
-//│ 	Cons --match--> `if ls4 is ...`
-//│ 	Nil --match--> `if ls1 is ...`
-//│ 	Nil --match--> `if ls2 is ...`
-//│ 	Nil --match--> `if ls3 is ...`
-//│ 	Nil --match--> `if ls4 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-:deforestDup
+
 fun to(n) =
   if n > 0 then
     let m = n - 1
@@ -583,15 +125,15 @@ fun f1(ls1) = if ls1 is
 f1(to(4))
 //│ = 12
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls1)@inst_1_tsni@Cons
+//│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls1)@inst_1_tsni@Nil
+//│ -------------- executing -------------
 //│ = 12
-//│ 2 fusion opportunities:
-//│ 	Cons --match--> `if ls1 is ...`
-//│ 	Nil --match--> `if ls1 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-:deforestDup
-:sjs
+
 fun map(ls, f) = if ls is
   Nil then Nil
   h :: t then f(h) :: map(t, f)
@@ -600,114 +142,20 @@ fun double(x) = x * 2
 fun test() =
   map(map(1 :: 2 :: Nil, succ), double)
 test()
-//│ JS (unsanitized):
-//│ let succ, test2, double1, map;
-//│ map = function map(ls, f) {
-//│   let param0, param1, h, t, tmp50, tmp51;
-//│   if (ls instanceof Nil1.class) {
-//│     return Nil1
-//│   } else if (ls instanceof Cons1.class) {
-//│     param0 = ls.h;
-//│     param1 = ls.t;
-//│     h = param0;
-//│     t = param1;
-//│     tmp50 = runtime.safeCall(f(h));
-//│     tmp51 = map(t, f);
-//│     return Cons1(tmp50, tmp51)
-//│   } else {
-//│     throw new globalThis.Error("match error");
-//│   }
-//│ };
-//│ succ = function succ(x) {
-//│   return x + 1
-//│ };
-//│ double1 = function (x) {
-//│   return x * 2
-//│ };
-//│ test2 = function test() {
-//│   let tmp50, tmp51, tmp52;
-//│   tmp50 = Cons1(2, Nil1);
-//│   tmp51 = Cons1(1, tmp50);
-//│   tmp52 = map(tmp51, succ);
-//│   return map(tmp52, double1)
-//│ };
-//│ test2()
-//│ duplication chances:
-//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1323
-//│ =========
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ==== JS (deforested): ====
-//│ let succ, test2, double1, map, map_duplicated, match_ls_branch_Cons;
-//│ match_ls_branch_Cons = function match_ls_branch_Cons(f, _deforest_Cons_h, _deforest_Cons_t) {
-//│   let param0, t, tmp50, param1, h, tmp51, _deforest_Cons_t1, _deforest_Cons_h1;
-//│   param0 = _deforest_Cons_h;
-//│   param1 = _deforest_Cons_t;
-//│   h = param0;
-//│   t = param1;
-//│   tmp51 = runtime.safeCall(f(h));
-//│   tmp50 = map_duplicated(t, f);
-//│   _deforest_Cons_h1 = tmp51;
-//│   _deforest_Cons_t1 = tmp50;
-//│   return (f6) => {
-//│     let param01, param11, h1, t1, tmp52, tmp53;
-//│     param01 = _deforest_Cons_h1;
-//│     param11 = _deforest_Cons_t1;
-//│     h1 = param01;
-//│     t1 = param11;
-//│     tmp52 = runtime.safeCall(f6(h1));
-//│     tmp53 = map(t1, f6);
-//│     return Cons1(tmp52, tmp53)
-//│   }
-//│ };
-//│ map_duplicated = function map_duplicated(ls, f) {
-//│   return runtime.safeCall(ls(f))
-//│ };
-//│ map = function map(ls, f) {
-//│   return runtime.safeCall(ls(f))
-//│ };
-//│ succ = function succ(x) {
-//│   return x + 1
-//│ };
-//│ double1 = function (x) {
-//│   return x * 2
-//│ };
-//│ test2 = function test() {
-//│   let tmp50, tmp51, tmp52, _deforest_Cons_h_tmp, _deforest_Cons_t_tmp, _deforest_Cons_h_tmp1, _deforest_Cons_t_tmp1;
-//│   _deforest_Cons_h_tmp = 2;
-//│   _deforest_Cons_t_tmp = (f) => {
-//│     return (f6) => {
-//│       return Nil1
-//│     }
-//│   };
-//│   tmp50 = (f) => {
-//│     return match_ls_branch_Cons(f, _deforest_Cons_h_tmp, _deforest_Cons_t_tmp)
-//│   };
-//│   _deforest_Cons_h_tmp1 = 1;
-//│   _deforest_Cons_t_tmp1 = tmp50;
-//│   tmp51 = (f) => {
-//│     return match_ls_branch_Cons(f, _deforest_Cons_h_tmp1, _deforest_Cons_t_tmp1)
-//│   };
-//│   tmp52 = map_duplicated(tmp51, succ);
-//│   return map(tmp52, double1)
-//│ };
-//│ test2()
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Cons(4, Cons(6, Nil))
-//│ duplication chances:
-//│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1359
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@3@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@4@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
+//│ Ref(member:Nil)@5@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Nil
+//│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(ls)@inst_0_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@7@inst_0_1_tsni --> Ref(ls)@inst_0_2_tsni@Cons
+//│ -------------- executing -------------
 //│ = Cons(4, Cons(6, Nil))
-//│ 5 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-:deforestDup
+
 fun p(x) = A(x)
 fun g1(b) = if b then p(1) else p(2)
 fun wrap(b) = g1(b)
@@ -716,26 +164,19 @@ fun f1(p) = if p is A(a) then a + 1
 fun f2(p) = if p is A(b) then b + 2
 f1(wrap(true)) + f2(g2(false))
 //│ = 8
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1435
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1435
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(3))))) <-- dup --> member:p_duplicated@1436
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:p_duplicated@1436
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@9@inst_0_1_tsni --> Ref(p)@inst_7_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@9@inst_0_2_tsni --> Ref(p)@inst_7_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@9@inst_3_4_5_tsni --> Ref(p)@inst_8_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@9@inst_3_4_6_tsni --> Ref(p)@inst_8_tsni@A
+//│ -------------- executing -------------
 //│ = 8
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if p is ...`
-//│ 	A --match--> `if p is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
 
-// ctor─┬►pRes1───┬──►f1Consumer
-//      │         └──►f2Consumer
-//      └►pRes2──────►f3Consumer
-:deforestDup
 fun p(x) = A(x)
 let one = p(1)
 let two = p(2)
@@ -746,36 +187,26 @@ f1(one) + f2(one) + f3(two)
 //│ = 10
 //│ one = A(1)
 //│ two = A(2)
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1491
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@2@inst_0_tsni --> Ref(p)@inst_1_tsni@A
+//│ -------------- executing -------------
 //│ = 10
-//│ 1 fusion opportunities:
-//│ 	A --match--> `if p is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-// for this example it will be a pity to not duplicate `id(A(1))` and `id(A(2))`,
-// although the ctors are not located in the definition of `id`
-// A(1)─┬─►id1Res───►f1Consumer
-//      │                      
-// A(2)─┴─►id2Res───►f2Consumer
-:deforestDup
+
 fun id(x) = x
 fun f1(a) = if a is A(i) then i
 fun f2(a) = if a is A(i) then i + 1
 f1(id(A(1))) + f2(id(A(2)))
 //│ = 4
-//│ duplication chances:
-//│ 	Call(Ref(member:id),List(Arg(false,Ref($tmp)))) <-- dup --> member:id_duplicated@1533
-//│ 	Call(Ref(member:id),List(Arg(false,Ref($tmp)))) <-- dup --> member:id_duplicated@1534
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(2)))))@2@inst__tsni --> Ref(a)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@3@inst__tsni --> Ref(a)@inst_1_tsni@A
+//│ -------------- executing -------------
 //│ = 4
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if a is ...`
-//│ 	A --match--> `if a is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -783,18 +214,7 @@ f1(id(A(1))) + f2(id(A(2)))
 
 
 
-:deforestDup
-// * The real flow of the program:
-// ctor─►toRes┌─►wrapRes1─►f1Consumer
-//            └─►wrapRes2─►f2Consumer
-// * The flow we currently got:
-//          ┌────►f1Consumer
-// ctor┬─►toRes──►f2Consumer
-//     ├───►wrapRes1─►f1Consumer
-//     └───►wrapRes2─►f2Consumer
-// This program can be fused if we duplicate `wrap(4)` and `wrap(5)` AND the `to(n)` inside them.
-// But there are programs that
-// have this same flow and cannot be optimized after duplication
+
 fun to(n) = if n > 0 then n :: to(n - 1) else Nil
 fun f1(ls) = if ls is
   h :: t then h
@@ -805,24 +225,21 @@ fun f2(ls) = if ls is
 fun wrap(n) = to(n)
 f1(wrap(4)) + f2(wrap(5))
 //│ = 10
-//│ duplication chances:
-//│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(4))))) <-- dup --> member:wrap_duplicated@1590
-//│ 	Call(Ref(member:wrap),List(Arg(false,Lit(IntLit(5))))) <-- dup --> member:wrap_duplicated@1591
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref($tmp))))@5@inst_0_1_tsni --> Ref(ls)@inst_3_tsni@Cons
+//│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(ls)@inst_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref($tmp))))@5@inst_2_1_tsni --> Ref(ls)@inst_4_tsni@Cons
+//│ Ref(member:Nil)@6@inst_2_1_tsni --> Ref(ls)@inst_4_tsni@Nil
+//│ -------------- executing -------------
 //│ = 10
-//│ 4 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
 
 
-:deforestDup
+
 fun to(n, acc) = if n == 0 then acc else to(n - 1, n :: acc)
 fun f1(ls, acc) = if ls is
   Nil then acc
@@ -832,43 +249,52 @@ fun f2(ls, acc) = if ls is
   h :: t then f2(t, acc + h + 1)
 f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
 //│ = 51
-//│ duplication chances:
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(4))), Arg(false,Ref(member:Nil)))) <-- dup --> member:to_duplicated@1676
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(6))), Arg(false,Ref(member:Nil)))) <-- dup --> member:to_duplicated@1676
-//│ 	Call(Ref(member:to),List(Arg(false,Lit(IntLit(5))), Arg(false,Ref(member:Nil)))) <-- dup --> member:to_duplicated@1677
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@6@inst__tsni --> Ref(ls)@inst_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@7@inst_0_tsni --> Ref(ls)@inst_3_tsni@Cons
+//│ Ref(member:Nil)@8@inst__tsni --> Ref(ls)@inst_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@7@inst_1_tsni --> Ref(ls)@inst_4_tsni@Cons
+//│ Ref(member:Nil)@9@inst__tsni --> Ref(ls)@inst_5_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(n)), Arg(false,Ref(acc))))@7@inst_2_tsni --> Ref(ls)@inst_5_tsni@Cons
+//│ -------------- executing -------------
 //│ = 51
-//│ 5 fusion opportunities:
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Cons --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
-//│ 	Nil --match--> `if ls is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-// // TODO: don't group two maps together
-// :deforestDup
-// fun map(ls, f) = if ls is
-//   Nil then Nil
-//   h :: t then f(h) :: map(t, f)
-// fun succ(x) = x + 1
-// fun double(x) = x * 2
-// fun triple(x) = x * 3
-// fun test() =
-//   map(map(map(1 :: 2 :: Nil, succ), double), triple)
-// test()
+
+fun map(ls, f) = if ls is
+  Nil then Nil
+  h :: t then f(h) :: map(t, f)
+fun succ(x) = x + 1
+fun double(x) = x * 2
+fun triple(x) = x * 3
+fun test() =
+  map(map(map(1 :: 2 :: Nil, succ), double), triple)
+test()
 // //│ = Cons(12, Cons(18, Nil))
 // //│ duplication chances:
 // //│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1750
 // //│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:double)))) <-- dup --> member:map_duplicated@1750
 // //│ =========
 // //│ No fusion opportunity
+//│ = Cons(12, Cons(18, Nil))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
+//│ Ref(member:Nil)@6@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Nil
+//│ Ref(member:Nil)@7@inst_0_1_tsni --> Ref(ls)@inst_0_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@8@inst_0_1_tsni --> Ref(ls)@inst_0_2_tsni@Cons
+//│ Ref(member:Nil)@7@inst_0_2_tsni --> Ref(ls)@inst_0_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@8@inst_0_2_tsni --> Ref(ls)@inst_0_3_tsni@Cons
+//│ -------------- executing -------------
+//│ = Cons(12, Cons(18, Nil))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 
-:deforestDup
+
 fun p(x) = A(x)
 fun f1(a1) = if a1 is A(a) then a + 1
 fun f2(a2) = if a2 is A(a) then a + 2
@@ -877,13 +303,10 @@ fun test() =
   f1(wrap(p(2))) + f2(p(1))
 test()
 //│ = 6
-//│ duplication chances:
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(2))))) <-- dup --> member:p_duplicated@1745
-//│ 	Call(Ref(member:p),List(Arg(false,Lit(IntLit(1))))) <-- dup --> member:p_duplicated@1746
-//│ =========
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@5@inst_0_1_tsni --> Ref(a1)@inst_0_3_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@5@inst_0_2_tsni --> Ref(a2)@inst_0_4_tsni@A
+//│ -------------- executing -------------
 //│ = 6
-//│ 2 fusion opportunities:
-//│ 	A --match--> `if a1 is ...`
-//│ 	A --match--> `if a2 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

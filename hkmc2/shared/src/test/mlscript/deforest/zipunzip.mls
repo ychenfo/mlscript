@@ -1,12 +1,19 @@
 :js
 :deforest
 
-//│ No fusion opportunity
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 object Nil
 data class (::) Cons(h, t)
 data class Pair(a, b)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun zip(xs_zip, ys_zip) = if
   xs_zip is x :: xt and ys_zip is y :: yt then Pair(x, y) :: zip(xt, yt)
@@ -19,12 +26,13 @@ fun testUnzipZip(n) = unzip(zip(id(enumFromTo(1, n)), id(enumFromTo(2, n + 3))))
 testUnzipZip(3)
 //│ = Pair(Cons(1, Cons(2, Nil)), Cons(2, Cons(3, Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@inst_0_1_tsni --> Ref(ls_unzip)@inst_0_2_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(false,Ref(x)), Arg(false,Ref(y))))@4@inst_0_1_tsni --> Ref($param0)@inst_0_2_tsni@Pair
+//│ Ref(member:Nil)@5@inst_0_1_tsni --> Ref(ls_unzip)@inst_0_2_tsni@Nil
+//│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(ls_unzip)@inst_0_2_tsni@Nil
+//│ -------------- executing -------------
 //│ = Pair(Cons(1, Cons(2, Nil)), Cons(2, Cons(3, Nil)))
-//│ 4 fusion opportunities:
-//│ 	Cons --match--> `if ls_unzip is ...`
-//│ 	Nil --match--> `if ls_unzip is ...`
-//│ 	Nil --match--> `if ls_unzip is ...`
-//│ 	Pair --match--> `if param0 is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -41,12 +49,13 @@ fun testZipUnzip(n) = if unzip(id(makeZippedList(n))) is
 testZipUnzip(3)
 //│ = Cons(Pair(3, 4), Cons(Pair(2, 3), Cons(Pair(1, 2), Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@3@inst_0_1_tsni --> Ref(xs_zip)@inst_0_2_tsni@dflt
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref(atail))))@4@inst_0_1_tsni --> Ref(xs_zip)@inst_0_2_tsni@Cons
+//│ Ref(member:Nil)@5@inst_0_1_tsni --> Ref(ys_zip)@inst_0_2_tsni@dflt
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(b)), Arg(false,Ref(btail))))@6@inst_0_1_tsni --> Ref(ys_zip)@inst_0_2_tsni@Cons
+//│ -------------- executing -------------
 //│ = Cons(Pair(3, 4), Cons(Pair(2, 3), Cons(Pair(1, 2), Nil)))
-//│ 4 fusion opportunities:
-//│ 	Cons --match--> `if xs_zip is ...`
-//│ 	Cons --match--> `if ys_zip is ...`
-//│ 	Nil --match--> `if xs_zip is ...`
-//│ 	Nil --match--> `if ys_zip is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -69,10 +78,15 @@ fun testZipMapBothUnzip(n) = if unzip(id(makeZippedList(n))) is
 testZipMapBothUnzip(4)
 //│ = Cons(Pair(5, 25), Cons(Pair(4, 16), Cons(Pair(3, 9), Cons(Pair(2, 4), Nil))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@5@inst_0_1_tsni --> Ref(ls_map)@inst_0_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref(atail))))@6@inst_0_1_tsni --> Ref(ls_map)@inst_0_2_tsni@Cons
+//│ Ref(member:Nil)@7@inst_0_1_tsni --> Ref(ls_map)@inst_0_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(b)), Arg(false,Ref(btail))))@8@inst_0_1_tsni --> Ref(ls_map)@inst_0_3_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@9@inst_0_2_tsni --> Ref(xs_zip)@inst_0_4_tsni@Cons
+//│ Ref(member:Nil)@10@inst_0_2_tsni --> Ref(xs_zip)@inst_0_4_tsni@dflt
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@9@inst_0_3_tsni --> Ref(ys_zip)@inst_0_4_tsni@Cons
+//│ Ref(member:Nil)@10@inst_0_3_tsni --> Ref(ys_zip)@inst_0_4_tsni@dflt
+//│ -------------- executing -------------
 //│ = Cons(Pair(5, 25), Cons(Pair(4, 16), Cons(Pair(3, 9), Cons(Pair(2, 4), Nil))))
-//│ 4 fusion opportunities:
-//│ 	Cons --match--> `if ls_map is ...`
-//│ 	Cons --match--> `if ls_map is ...`
-//│ 	Nil --match--> `if ls_map is ...`
-//│ 	Nil --match--> `if ls_map is ...`
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
