@@ -1,0 +1,96 @@
+:js
+
+
+data class AA(x)
+data class BB(x)
+object A
+object B
+
+// TODO: should fuse `A` and `B` with the pattern match in `f`
+:deforest
+fun f(a) = if a is
+  A then 1
+  B then 2
+fun test() =
+  let x = if true then AA(A) else BB(B)
+  if x is
+    AA(x) then f(x)
+    BB(x) then f(x)
+test()
+//│ = 1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ -------------- executing -------------
+//│ = 1
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// TODO: fusion opportunity is lost
+// when instantiation ids of dtors are also tracked
+:deforest
+fun inner(x) = if x is A then 0 else 1
+fun outter1(x) = inner(x)
+fun outter2(x) = inner(x)
+fun test() =
+  let x = A
+  outter1(x) + outter2(x)
+test()
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// TODO: duplicated instantiations of the consumer `f`
+:sjs
+:deforest
+fun f(x) = if x is A then 1
+f(A) + f(A)
+//│ JS (unsanitized):
+//│ let f1, tmp, tmp1;
+//│ f1 = function f(x) {
+//│   if (x instanceof A1.class) {
+//│     return 1
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp = f1(A1);
+//│ tmp1 = f1(A1);
+//│ tmp + tmp1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ let f1, tmp, tmp1, f_inst_0_tsni, f_inst_1_tsni;
+//│ f_inst_0_tsni = function f_inst_0_tsni(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ f_inst_1_tsni = function f_inst_1_tsni(x) {
+//│   return runtime.safeCall(x())
+//│ };
+//│ f1 = function f(x) {
+//│   if (x instanceof A1.class) {
+//│     return 1
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ tmp = f_inst_1_tsni(() => {
+//│   return 1
+//│ });
+//│ tmp1 = f_inst_0_tsni(() => {
+//│   return 1
+//│ });
+//│ tmp + tmp1
+//│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 2
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@2@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ Ref(member:A)@3@inst__tsni --> Ref(x)@inst_1_tsni@A
+//│ -------------- executing -------------
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
