@@ -69,6 +69,16 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
   
   def returnedTerm(t: st)(using Subst): Block = term(t)(Ret)
   
+  def parentConstructor(cls: Term, argss: Ls[Ls[Term]])(using Subst) = 
+    if argss.length > 1 then 
+      raise:
+        ErrorReport(
+          msg"Extending a class with multiple parameter lists is not supported" -> Loc(cls :: argss.flatten) :: Nil,
+          source = Diagnostic.Source.Compilation
+        )
+    plainArgs(argss.headOr(Nil)): args =>
+      Return(Call(Value.Ref(State.builtinOpsMap("super")), args)(true, true), implct = true)
+  
   // * Used to work around Scala's @tailrec annotation for those few calls that are not in tail position.
   final def term_nonTail(t: st, inStmtPos: Bool = false)(k: Result => Block)(using Subst): Block =
     term(t: st, inStmtPos: Bool)(k)
@@ -166,7 +176,7 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
         val (mtds, publicFlds, privateFlds, ctor) = gatherMembers(cls.body)
         cls.ext match
         case N =>
-          Define(ClsLikeDefn(cls.owner, cls.sym, cls.bsym, cls.kind, cls.paramsOpt, Nil, N,
+          Define(ClsLikeDefn(cls.owner, cls.sym, cls.bsym, cls.kind, cls.paramsOpt, cls.auxParams, N,
                 mtds,
                 privateFlds,
                 publicFlds,
@@ -177,12 +187,10 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
         case S(ext) =>
           assert(k isnt syntax.Mod) // modules can't extend things and can't have super calls
           subTerm(ext.cls): clsp =>
-            val pctor = // TODO dedup with New case
-              plainArgs(ext.args): args =>
-                Return(Call(Value.Ref(State.builtinOpsMap("super")), args)(true, true), implct = true)
+            val pctor = parentConstructor(ext.cls, ext.argss)
             Define(
               ClsLikeDefn(
-                cls.owner, cls.sym, cls.bsym, cls.kind, cls.paramsOpt, Nil, S(clsp),
+                cls.owner, cls.sym, cls.bsym, cls.kind, cls.paramsOpt, cls.auxParams, S(clsp),
                 mtds, privateFlds, publicFlds, pctor, ctor
               ),
               blockImpl(stats, res)(k)
@@ -220,7 +228,7 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
       args(fs)(args => k(Value.Arr(args)))
     case ref @ st.Ref(sym) =>
       sym match
-      case ctx.builtins.source.bms | ctx.builtins.js.bms | ctx.builtins.debug.bms =>
+      case ctx.builtins.source.bms | ctx.builtins.js.bms | ctx.builtins.debug.bms | ctx.builtins.annotations.bms =>
         raise:
           ErrorReport(
             msg"Module '${sym.nme}' is virtual (i.e., \"compiler fiction\"); cannot be used directly" -> t.toLoc ::
@@ -466,30 +474,48 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
               )
             pat match
               case Pattern.Lit(lit) => mkMatch(Case.Lit(lit) -> go(tail, topLevel = false))
-              case Pattern.ClassLike(cls: ClassSymbol, _trm, _args0, _refined)
-                  // Do not elaborate `_trm` when the `cls` is virtual.
-                  if Elaborator.ctx.builtins.virtualClasses contains cls =>
-                // [invariant:0] Some classes (e.g., `Int`) from `Prelude` do
-                // not exist at runtime. If we do lowering on `trm`, backends
-                // (e.g., `JSBuilder`) will not be able to handle the corresponding selections.
-                // In this case the second parameter of `Case.Cls` will not be used.
-                // So we make it `Predef.unreachable` here.
-                mkMatch(Case.Cls(cls, unreachableFn) -> go(tail, topLevel = false))
-              case Pattern.ClassLike(cls, trm, args0, _refined) =>
-                subTerm_nonTail(trm): st =>
-                  val args = args0.getOrElse(Nil)
-                  val clsParams = cls match
-                    case cls: ClassSymbol => cls.tree.clsParams
-                    case _: ModuleSymbol => Nil
-                  assert(args0.isEmpty || clsParams.length === args.length)
+              case Pattern.ClassLike(ctor, argsOpt, _mode, _refined) =>
+                /** Make a continuation that creates the match. */
+                def k(ctorSym: ClassLikeSymbol, clsParams: Ls[TermSymbol])(st: Path): Block =
+                  val args = argsOpt.map(_.map(_.scrutinee)).getOrElse(Nil)
+                  // Normalization should reject cases where the user provides
+                  // more sub-patterns than there are actual class parameters.
+                  assert(argsOpt.isEmpty || args.length <= clsParams.length, (argsOpt, clsParams))
                   def mkArgs(args: Ls[TermSymbol -> BlockLocalSymbol])(using Subst): Case -> Block = args match
                     case Nil =>
-                      Case.Cls(cls, st) -> go(tail, topLevel = false)
+                      Case.Cls(ctorSym, st) -> go(tail, topLevel = false)
                     case (param, arg) :: args =>
                       val (cse, blk) = mkArgs(args)
                       (cse, Assign(arg, Select(sr, param.id/*FIXME incorrect Ident?*/)(S(param)), blk))
-                  mkMatch(mkArgs(clsParams.iterator.zip(args).collect { case (s1, S(s2)) => (s1, s2) }.toList))
+                  mkMatch(mkArgs(clsParams.iterator.zip(args).toList))
+                ctor.symbol.flatMap(_.asClsOrMod) match
+                  case S(cls: ClassSymbol) if ctx.builtins.virtualClasses contains cls =>
+                    // [invariant:0] Some classes (e.g., `Int`) from `Prelude` do
+                    // not exist at runtime. If we do lowering on `trm`, backends
+                    // (e.g., `JSBuilder`) will not be able to handle the corresponding selections.
+                    // In this case the second parameter of `Case.Cls` will not be used.
+                    // So we do not elaborate `ctor` when the `cls` is virtual
+                    // and use it `Predef.unreachable` here.
+                    k(cls, Nil)(unreachableFn)
+                  case S(cls: ClassSymbol) => subTerm_nonTail(ctor)(k(cls, cls.tree.clsParams))
+                  case S(mod: ModuleSymbol) => subTerm_nonTail(ctor)(k(mod, Nil))
+                  case N =>
+                    // Normalization have already checked the constructor
+                    // resolves to a class or module. Branches with unresolved
+                    // constructors should have been removed.
+                    lastWords("Pattern.ClassLike: constructor is neither a class nor a module")
               case Pattern.Tuple(len, inf) => mkMatch(Case.Tup(len, inf) -> go(tail, topLevel = false))
+              case Pattern.Record(entries) =>
+                val objectSym = ctx.builtins.Object
+                mkMatch( // checking that we have an object
+                  Case.Cls(objectSym, Value.Ref(BuiltinSymbol(objectSym.nme, false, false, true, false))),
+                  entries.foldRight(go(tail, topLevel = false)):
+                    case ((fieldName, fieldSymbol), blk) =>
+                      mkMatch(
+                        Case.Field(fieldName, safe = true), // we know we have an object, no need to check again
+                        Assign(fieldSymbol, Select(sr, fieldName)(N), blk)
+                      )
+                )
         case Split.Else(els) =>
           if k.isInstanceOf[TailOp] && isIf then term_nonTail(els)(k)
           else
@@ -502,11 +528,17 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
           Throw(Instantiate(Select(Value.Ref(State.globalThisSymbol), Tree.Ident("Error"))(N),
             Value.Lit(syntax.Tree.StrLit("match error")) :: Nil)) // TODO add failed-match scrutinee info
       
-      if k.isInstanceOf[TailOp] && isIf then go(iftrm.normalized, topLevel = true)
+      val normalize = ucs.Normalization()
+      val normalized = tl.scoped("ucs:normalize"):
+        normalize(iftrm.desugared)
+      tl.scoped("ucs:normalized"):
+        tl.log(s"Normalized:\n${Split.display(normalized)}")
+
+      if k.isInstanceOf[TailOp] && isIf then go(normalized, topLevel = true)
       else
         val body = if isWhile
-          then Label(lbl, go(iftrm.normalized, topLevel = true), End())
-          else go(iftrm.normalized, topLevel = true)
+          then Label(lbl, go(normalized, topLevel = true), End())
+          else go(normalized, topLevel = true)
         Begin(
           body,
           if usesResTmp then k(Value.Ref(l))
@@ -527,18 +559,27 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
           k(DynSelect(p, f, ai))
       
       
-    case New(cls, as, N) =>
+    case New(cls, ass, N) =>
       subTerm(cls): sr =>
-        subTerms(as): asr =>
+        val head = ass.headOr(Nil)
+        val tail = ass.tailOr(Nil)
+        tail match
+        case Nil => subTerms(head): asr =>
           k(Instantiate(sr, asr))
+        case tail => subTerms(head): asr =>
+          val z = tail.foldLeft[Path => Block](k): (acc, args) => 
+            inner =>
+              plainArgs(args): args =>
+                val ts = TempSymbol(N)
+                Assign(ts, Call(inner, args)(true, true), acc(Value.Ref(ts)))
+          val ts = TempSymbol(N)
+          Assign(ts, Instantiate(sr, asr), z(Value.Ref(ts)))
       
-    case New(cls, as, S((isym, rft))) =>
+    case New(cls, ass, S((isym, rft))) =>
       subTerm(cls): clsp =>
         val sym = new BlockMemberSymbol(isym.name, Nil)
         val (mtds, publicFlds, privateFlds, ctor) = gatherMembers(rft)
-        val pctor =
-          plainArgs(as): args =>
-            Return(Call(Value.Ref(State.builtinOpsMap("super")), args)(true, true), implct = true)
+        val pctor = parentConstructor(cls, ass)
         val clsDef = ClsLikeDefn(N, isym, sym, syntax.Cls, N, Nil, S(clsp),
           mtds, privateFlds, publicFlds, pctor, ctor)
         Define(clsDef, term_nonTail(New(sym.ref().noIArgs, Nil, N))(k))
@@ -586,6 +627,12 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
         msg"This annotation has no effect." -> ann.toLoc ::
         msg"Such annotations are not supported on ${receiver.describe} terms." -> receiver.toLoc :: Nil))
       term(receiver)(k)
+    case use: Summon =>
+      warnStmt
+      use.sym match
+        case S(_: ErrorSymbol) => End("missing instance")
+        case S(sym) => k(subst(Value.Ref(sym)))
+        case N => lastWords(s"unresolved summon: ${use}")
     case Error => End("error")
     
     // case _ =>

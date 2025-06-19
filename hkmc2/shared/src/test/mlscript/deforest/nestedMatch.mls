@@ -45,10 +45,8 @@ f(a, 2) + g(a) + f(BB(3), 2) + f(AA(AA(4)), 5)
 //│ a = AA(AA(3))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@3@inst__tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(4)))))@4@inst__tsni --> Ref(a)@inst_0_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(3)))))@5@inst__tsni --> Ref(x)@inst_1_tsni@BB
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@6@inst__tsni --> Ref(a)@inst_2_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(3)))))@3@inst__tsni --> Ref(x)@inst_1_tsni@BB
 //│ -------------- executing -------------
 //│ = 37
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -46,9 +46,10 @@ fun foo(x) =
 
 fun foo(k, x) =
   if x === 0 do k(A)
-  k(if x > 0
-    then A
-    else B)
+  k of
+    if x > 0
+      then A
+      else B
 fun bar(v) = if v is
   A then 1
   B then 2
