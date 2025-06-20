@@ -467,7 +467,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       val res = freshVar(s"lam_res", generatedForDef)
       cc.constrain(bodyStrat, res.asConsStrat)
       ProdFun(paramSyms, res.asProdStrat)
-    case Value.Arr(elems) => throw NotDeforestableException("No support for arrays yet")
+    case Value.Arr(elems) =>
+      NoProd
 
 
 class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
