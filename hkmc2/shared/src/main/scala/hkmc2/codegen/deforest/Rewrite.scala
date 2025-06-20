@@ -249,6 +249,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
   
   object matchRestOfFusingMatches:
     // from match scrut expr id to either a function def with a set of args that should be applied
+    // or a block containing the computation in the `rest` of the match
     val store = mutable.Map.empty[MatchId, Either[FunDefn -> Ls[Symbol], Block]]
     def getAllFunDefs =
       rewritePrepare.fusingMatchIdToMatchRestFunSymbols.foldRight(identity: Block => Block):
