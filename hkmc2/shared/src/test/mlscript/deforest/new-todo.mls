@@ -6,29 +6,34 @@ data class BB(x)
 object A
 object B
 
-// TODO: should fuse `A` and `B` with the pattern match in `f`
+// TODO: should fuse `A` with the pattern match in `f`.
+// This is because the same symbol is used for the `x`s
+// introduced in the patterns of both branches, causing
+// `A` also flows into consumers in `g1` and `g2`
 :deforest
-fun f(a) = if a is
-  A then 1
-  B then 2
+fun f(x) = if x is A then 1 else 2
+fun g1(x) = if x is A then 2 else 3
+fun g2(x) = if x is A then 3 else 4
 fun test() =
-  let x = if true then AA(A) else BB(B)
-  if x is
+  let prod = if true then AA(A) else BB(B)
+  if prod is
     AA(x) then f(x)
-    BB(x) then f(x)
+    BB(x) then g1(x) + g2(x)
 test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@1@inst_0_tsni --> Ref(prod)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@2@inst_0_tsni --> Ref(prod)@inst_0_tsni@BB
 //│ -------------- executing -------------
 //│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
 // TODO: fusion opportunity is lost
-// when instantiation ids of dtors are also tracked
+// when instantiation ids of dtors are also tracked:
+// two call sites to `inner` leads to two `inner`s
+// to be called, causing a clashing consumer.
 :deforest
 fun inner(x) = if x is A then 0 else 1
 fun outter1(x) = inner(x)
@@ -93,4 +98,29 @@ f(A) + f(A)
 //│ Ref(member:A)@3@inst__tsni --> Ref(x)@inst_1_tsni@A
 //│ -------------- executing -------------
 //│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// TODO: after lowering the definition of `f` is located before the
+// defining site of `x`, so that `f` is not in the `rest` of the fusing
+// pattern matching and `x` in `f` becomes free.
+:re
+:ge
+:deforest
+fun test() =
+  let x = if A is
+    A then 1
+  fun f() = x
+  f()
+test()
+//│ = 1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ ╔══[COMPILATION ERROR] No definition found in scope for 'x'
+//│ ║  l.111: 	  let x = if A is
+//│ ╙──       	      ^
+//│ -------------- executing -------------
+//│ ═══[RUNTIME ERROR] ReferenceError: x is not defined
+//│ ═══[RUNTIME ERROR] The result from deforestated program ("undefined") is different from the one computed by the original prorgam ("1")
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
