@@ -15,7 +15,7 @@ object B
 // object None
 // class Some(value)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ Not deforestable: Only support top-level module definitions now
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // * Not fused: two `x is A` consumers

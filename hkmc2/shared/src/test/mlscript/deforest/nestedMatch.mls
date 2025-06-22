@@ -13,19 +13,19 @@ data class AA(x)
 data class BB(x)
 data class CC(x)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ Not deforestable: Only support top-level module definitions now
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 object Nil
 data class Cons(h, t)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ Not deforestable: Only support top-level module definitions now
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 object None
 data class Some(x)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ Not deforestable: Only support top-level module definitions now
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 

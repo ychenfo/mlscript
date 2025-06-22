@@ -9,13 +9,13 @@
 
 data class A(x)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ Not deforestable: Only support top-level module definitions now
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 data class (::) Cons(h, t)
 object Nil
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ Not deforestable: Only support top-level module definitions now
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 

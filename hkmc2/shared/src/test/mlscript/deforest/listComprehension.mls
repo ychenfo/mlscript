@@ -12,7 +12,7 @@ data class Pair(a, b)
 object A
 object B
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ Not deforestable: Only support top-level module definitions now
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 

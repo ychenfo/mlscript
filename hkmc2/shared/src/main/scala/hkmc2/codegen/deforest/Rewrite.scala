@@ -221,10 +221,12 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
 
 class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elaborator.State):
   val preAnalyzer = rewritePrepare.preAnalyzer
+  val inModSym = preAnalyzer.inModuleInfo.map:
+    case m -> _ -> _ => m
   
   def apply() =
-    val withDuplicatedDefs = rewritePrepare.newSymToInstIdAndOldSym.foldRight(Transform(Nil)(preAnalyzer.b)):
-      case (newSym -> (instId -> oldSym), acc) =>
+    val duplicatedDefs = rewritePrepare.newSymToInstIdAndOldSym.map:
+      case newSym -> (instId -> oldSym) =>
         // 1. find original fundefs
         // 2. transform fun body under the specific instantiation id
         // 3. accumulate the definition
@@ -241,23 +243,50 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             val newRestParam = restParam.map(makeNewParam)
             ParamList(flags, newParams, newRestParam)
         val newBody = Transform(instId)(body).replaceSymbols(oldToNewParam.toMap)
-        val newFunDefn = FunDefn(N, newSym, newParam, newBody)
-        Define(newFunDefn, acc)
-    matchRestOfFusingMatches.getAllFunDefs:
-      matchArmsOfFusingMatches.getAllFunDefs:
-        withDuplicatedDefs
+        FunDefn(inModSym, newSym, newParam, newBody)
+    preAnalyzer.inModuleInfo match
+    case None =>
+      val withDuplicatedDefs = duplicatedDefs.foldRight(Transform(Nil)(preAnalyzer.b)):
+        case (newFunDefn, acc) =>
+          Define(newFunDefn, acc)
+      matchRestOfFusingMatches.prependAllFunDefs:
+        matchArmsOfFusingMatches.prependAllFunDefs:
+          withDuplicatedDefs
+    case Some(inMod -> mainBody -> mDef) =>
+      val newMainFun = FunDefn(
+        S(inMod),
+        BlockMemberSymbol("main_deforest", Nil, true),
+        PlainParamList(Nil) :: Nil,
+        Transform(Nil)(mainBody))
+      Define(
+        mDef.copy(
+          methods = newMainFun ::
+            (duplicatedDefs ++
+            matchRestOfFusingMatches.getAllFunDefs ++
+            matchArmsOfFusingMatches.getAllFunDefs ++
+            mDef.methods).toList,
+          preCtor = Transform(Nil)(mDef.preCtor),
+          ctor = Transform(Nil)(mDef.ctor)),
+        End(""))
   
   object matchRestOfFusingMatches:
     // from match scrut expr id to either a function def with a set of args that should be applied
     // or a block containing the computation in the `rest` of the match
     val store = mutable.Map.empty[MatchId, Either[FunDefn -> Ls[Symbol], Block]]
-    def getAllFunDefs =
+    def prependAllFunDefs =
       rewritePrepare.fusingMatchIdToMatchRestFunSymbols.foldRight(identity: Block => Block):
         case matchId -> _ -> k => store(matchId) match
           case Left(fdef -> _) => r => Define(fdef, k(r))
           case Right(b) =>
             assert(b.isInstanceOf[End])
             k
+    def getAllFunDefs =
+      for
+        (matchId, _) <- rewritePrepare.fusingMatchIdToMatchRestFunSymbols
+        if store(matchId).isLeft
+      yield
+        val L(fdefn, _) = store(matchId): @unchecked
+        fdefn
     
     // returns the block of match rest, or a `Return` block that calls the function extracted
     // from the match rest
@@ -308,7 +337,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           val freeVars = withTheRestOfPossiblyFusingMatch
             .sortedFvsForTransformedBlocks(rewritePrepare.alwaysNonFreeVars)
           val newSymbols = freeVars.map(s => VarSymbol(Tree.Ident(s.nme)))
-          val newFunDef = FunDefn(N, sym, newSymbols.asParamList :: Nil,
+          val newFunDef = FunDefn(inModSym, sym, newSymbols.asParamList :: Nil,
             withTheRestOfPossiblyFusingMatch.replaceSymbols(freeVars.zip(newSymbols).toMap))
           store.updateWith(matchId):
             case S(_) => die
@@ -319,14 +348,21 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
   
   object matchArmsOfFusingMatches:
     val store = mutable.Map.empty[FinalDest.Match, Either[FunDefn, Block]]
-    def getAllFunDefs =
+    def prependAllFunDefs =
       rewritePrepare.finalDestToCtorIds.keys.foldRight(identity: Block => Block):
         case (m: FinalDest.Match, acc) =>
           store.get(m) match
             case S(L(fdefn)) => rest => Define(fdefn, acc(rest))
             case _ => acc
         case (_, acc) => acc
-        
+    def getAllFunDefs =
+      for
+        case (m: FinalDest.Match, _) <- rewritePrepare.finalDestToCtorIds
+        if store.get(m).exists(x => x.isLeft)
+      yield
+        val L(fdef) = store(m): @unchecked
+        fdef
+    
     // return a lambda, which either calls the extracted arm function
     // or contains the computations in matching arms
     def getOrElseUpdate(ctorId: CtorId): Value.Lam =
@@ -362,7 +398,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
                       .finalDestToVarSymbolsToReplaceSelInArms(dest)._2
                       .getOrElse(Tree.Ident(p.name), VarSymbol(Tree.Ident(s"_unused_${p.name}")))
               L(FunDefn(
-                N,
+                inModSym,
                 funSym,
                 (freeVarSymForFunDef ::: varSymbolsThatReplacedSelections).asParamList :: Nil,
                 funBody))
@@ -462,7 +498,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
             val newInstId = if inTheSameRecursiveGroup then instId else instId :+ s.uid
             rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)): m =>
-              Value.Ref(m(blk))
+              Select(p, Tree.Ident(m(blk).nme))(S(m(blk)))
           case _ => super.applyPath(s)
       case v: Value => applyValue(v)
       case _ => super.applyPath(p)
@@ -542,7 +578,7 @@ class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends Block
       // builtin symbols and toplevel symbols are always in scope
       case _: (BuiltinSymbol | TopLevelSymbol) => ()
       // NOTE: assume all class definitions are in the toplevel
-      case b: BlockMemberSymbol if b.asClsLike.isDefined => ()
+      case b if b.asClsLike.isDefined || b.asMod.isDefined => ()
       case _ => if !ctx.contains(l) then result += l
     case _ => super.applyValue(v)
   

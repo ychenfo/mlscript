@@ -12,7 +12,7 @@ object Nil
 data class (::) Cons(h, t)
 data class Pair(a, b)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: No support for `ClsLikeDefn` yet
+//│ Not deforestable: Only support top-level module definitions now
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 fun zip(xs_zip, ys_zip) = if

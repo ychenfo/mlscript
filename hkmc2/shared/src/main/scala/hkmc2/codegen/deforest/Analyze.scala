@@ -105,6 +105,18 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
   given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
   
+  var inModuleInfo: Option[InnerSymbol -> Block -> ClsLikeDefn] = N
+  b match
+    case Define(m: ClsLikeDefn, _: End) if m.k is syntax.Mod =>
+      m.methods.foreach:
+        // TODO: check if just using the content in the main function is ok...
+        case fdefn =>
+          if fdefn.sym.nme == "main" &&
+          fdefn.params.headOption.exists(ps => (ps.params is Nil) && (ps.restParam is N)) then
+            assert(fdefn.owner.isDefined && inModuleInfo.isEmpty)
+            val moduleTopLevel = Begin(m.preCtor, m.ctor)
+            inModuleInfo = S(fdefn.owner.get -> fdefn.body -> m)
+    case _ => ()
   val noProdStratVar = freshVar("primitive", N).asProdStrat
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
   val topLevelFunSymToFun = mutable.Map.empty[BlockMemberSymbol, FunDefn]
@@ -227,7 +239,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   given stratVarUidState: Uid.StratVar.State = preAnalyzer.stratVarUidState
   import StratVarState.freshVar
   
-  val constraints = processTopLevel(preAnalyzer.b)
+  val constraints = processTopLevel
   class ConstraintsAndCacheHitCollector(val forFun: Opt[BlockMemberSymbol]):
     var constraints: Ls[ProdStrat -> ConsStrat] = Nil
     var trackedFunctionSymbolsInOneRecGroup: Ls[BlockMemberSymbol] = Nil
@@ -275,9 +287,12 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                 store(s)
             case _ => die // die if something occurs twice in the processing list
   
-  def processTopLevel(b: Block): Ls[ProdStrat -> ConsStrat] =
+  def processTopLevel: Ls[ProdStrat -> ConsStrat] =
     val cc = new ConstraintsAndCacheHitCollector(N)
-    val strat = processBlock(b)(using Nil, cc)
+    val strat = processBlock(
+      preAnalyzer.inModuleInfo.fold(preAnalyzer.b):
+        case _ -> mainBody -> modDef => Begin(mainBody, Begin(modDef.preCtor, modDef.ctor))
+    )(using Nil, cc)
     cc.constrain(strat, NoCons)
     cc.constrain(preAnalyzer.noProdStratVar, NoCons)
     cc.constrain(NoProd, preAnalyzer.noProdStratVar.asConsStrat)
@@ -341,8 +356,13 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
             cc.constrain(ProdFun(paramSyms, res.asProdStrat), preAnalyzer.getProdVarForSym(sym).asConsStrat)
           else
             () // skip toplevel fundefs are they are processed when needed
-        case v: ValDefn => throw NotDeforestableException("No support for `ValDefn` yet")
-        case c: ClsLikeDefn => throw NotDeforestableException("No support for `ClsLikeDefn` yet")
+        case ValDefn(_, _, sym, rhs) =>
+          val valStrat = preAnalyzer.getProdVarForSym(sym)
+          val stratRhs = processResult(rhs)
+          cc.constrain(stratRhs, valStrat.asConsStrat)
+          // throw NotDeforestableException("No support for `ValDefn` yet")
+        case c: ClsLikeDefn =>
+          throw NotDeforestableException("Only support top-level module definitions now")
       processBlock(rest)
     case End(msg) => NoProd
     // make it a type var instead of `NoProd` so that things like `throw match error` in
