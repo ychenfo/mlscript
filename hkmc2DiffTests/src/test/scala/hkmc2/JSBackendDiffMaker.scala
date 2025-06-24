@@ -98,7 +98,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       if deforestFlag.isSet then
         import codegen.deforest.*
         output(">>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>")
-        Deforest(le) match
+        Deforest(le, wd) match
           case R(msg) => output(s"Not deforestable: $msg")
           case L(deforestRes -> _ -> _) =>
             val jsStr = baseScp.nest.givenIn:
@@ -247,7 +247,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         val deforestLow = ltl.givenIn:
           codegen.Lowering()
         val le = deforestLow.program(blk)
-        Deforest(le) match
+        Deforest(le, wd) match
           case R(msg) => output(s"Not deforestable: $msg")
           case L(deforestRes -> summary -> detail) =>
             if deforestInfo.isSet then

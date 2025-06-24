@@ -101,7 +101,11 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
       cc.constrain(duplicateProdStrat(p), duplicateConsStrat(c))
     newProd
 
-class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
+class DeforestPreAnalyzer(
+  val b: Block,
+  val importedFunDefs: Ls[BlockMemberSymbol -> FunDefn],
+  val innerImportedSymbol2OutterImportedSym: Opt[InnerSymbol -> BlockMemberSymbol]
+) extends BlockTraverser:
   given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
   
@@ -119,7 +123,7 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
     case _ => ()
   val noProdStratVar = freshVar("primitive", N).asProdStrat
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
-  val topLevelFunSymToFun = mutable.Map.empty[BlockMemberSymbol, FunDefn]
+  val topLevelFunSymToFun = mutable.Map.from(importedFunDefs)
   val matchScrutToMatchBlock = mutable.Map.empty[ResultId, Match]
   val matchScrutToParentMatchScruts = mutable.Map.empty[ResultId, Ls[ResultId]]
   val matchScrutInFunDef = mutable.Map.empty[ResultId, Opt[BlockMemberSymbol]]
@@ -232,6 +236,8 @@ class DeforestPreAnalyzer(val b: Block) extends BlockTraverser:
       applySubBlock(rest)
     case _ => super.applyBlock(b)
   
+  importedFunDefs.foreach: (_, fdefn) =>
+    applyFunDefn(fdefn)
   applyBlock(b)
 
 

@@ -240,6 +240,7 @@ object Elaborator:
       baseBuiltins ++ aliasOps.map:
         case (alias, base) => alias -> baseBuiltins(base)
     val seqSymbol = TermSymbol(ImmutVal, N, Ident(";"))
+    val importedFileNameToSemBlk = mutable.Map.empty[os.Path, Blk -> BlockMemberSymbol -> Ctx]
     def init(using State): Ctx = Ctx.empty.copy(env = Map(
       "globalThis" -> globalThisSymbol,
     ))

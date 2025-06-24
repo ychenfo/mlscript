@@ -300,7 +300,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           lastWords(s"match rest $blk was expected to be used only once, but now it's used more than once")
       case S(L(fdef -> args)) =>
         Return(
-          Call(Value.Ref(fdef.sym), args.map(a => Arg(false, Value.Ref(a))))(true, false),
+          Call(callNewFun(fdef.sym), args.map(a => Arg(false, Value.Ref(a))))(true, false),
           false)
       case N =>
         val scrutExprId -> instantiationId = matchId
@@ -343,7 +343,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             case S(_) => die
             case N => S(L(newFunDef -> freeVars))
           Return(
-            Call(Value.Ref(sym), freeVars.map(a => Arg(false, Value.Ref(a))))(true, false),
+            Call(callNewFun(sym), freeVars.map(a => Arg(false, Value.Ref(a))))(true, false),
             false)
   
   object matchArmsOfFusingMatches:
@@ -409,7 +409,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           symsForArmFreeVarsInLam.asParamList,
           Return(
             Call(
-              Value.Ref(fdefn.sym),
+              callNewFun(fdefn.sym),
               symsForArmFreeVarsInLam.asArgsList ::: dest.tmpSymbolForASpecificCtorId.asArgsList)(true, false),
             false))
         case R(b) => Value.Lam(
@@ -417,6 +417,12 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           b.replaceSymbols(freeVarsInTheMatch.zip(symsForArmFreeVarsInLam).toMap).mapTail:
             case Return(res, implct) => Return(res, false)
             case t => t)
+  
+  
+  private def callNewFun(sym: BlockMemberSymbol): Path =
+    preAnalyzer.inModuleInfo.fold(Value.Ref(sym)):
+      case innerSym -> _ -> _ =>
+        Select(Value.Ref(innerSym), Tree.Ident(sym.nme))(S(sym))
   
   private val uselessSymbolSubst = new SymbolSubst
   // rewrite ctor and dtors
@@ -498,7 +504,9 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
             val newInstId = if inTheSameRecursiveGroup then instId else instId :+ s.uid
             rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)): m =>
-              Select(p, Tree.Ident(m(blk).nme))(S(m(blk)))
+              preAnalyzer.inModuleInfo.fold(Value.Ref(m(blk))):
+                case mod -> _ -> _ =>
+                  Select(Value.Ref(mod.asMod.get), Tree.Ident(m(blk).nme))(S(m(blk)))
           case _ => super.applyPath(s)
       case v: Value => applyValue(v)
       case _ => super.applyPath(p)
@@ -515,7 +523,10 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             val newInstId = if inTheSameRecursiveGroup then instId else instId :+ r.uid
             rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyValue(v)): m =>
               Value.Ref(m(blk))
-          case _ => super.applyValue(v)
+          case _ =>
+            preAnalyzer.innerImportedSymbol2OutterImportedSym.fold(super.applyValue(v)):
+              case (in, out) =>
+                if l is in then Value.Ref(out) else super.applyValue(v)
         case _ => super.applyValue(v)
       case _ => super.applyValue(v)
     

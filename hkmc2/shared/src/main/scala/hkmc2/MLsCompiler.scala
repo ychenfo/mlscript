@@ -11,6 +11,7 @@ import hkmc2.semantics.Resolver
 import semantics.Elaborator.Ctx
 import hkmc2.syntax.Keyword.`override`
 import semantics.Elaborator.State
+import hkmc2.codegen.deforest.Deforest
 
 
 class ParserSetup(file: os.Path, dbgParsing: Bool)(using Elaborator.State, Raise):
@@ -38,7 +39,7 @@ class ParserSetup(file: os.Path, dbgParsing: Bool)(using Elaborator.State, Raise
 
 
 // * The weird type of `mkOutput` is to allow wrapping the reporting of diagnostics in synchronized blocks
-class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Unit)(using Config):
+class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Unit)(using cfg: Config):
   
   val runtimeFile: os.Path = preludeFile/os.up/os.up/os.up/"mlscript-compile"/"Runtime.mjs"
   val termFile: os.Path = preludeFile/os.up/os.up/os.up/"mlscript-compile"/"Term.mjs"
@@ -95,6 +96,29 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
       val jsb = ltl.givenIn:
         codegen.js.JSBuilder()
       val le = low.program(blk)
+      
+      val lowered =
+        if !file.toString.contains("nofib") then // TODO:
+          le
+        else
+          val deforestLow = ltl.givenIn:
+            new codegen.Lowering()
+          val deforestResult = Deforest(deforestLow.program(blk), wd)(using
+            cfg,
+            ltl,
+            raise,
+            newCtx,
+            new Deforest.State())
+          deforestResult match
+            case Right(msg) =>
+              println(msg) // TODO: no println
+              le
+            case Left(prog -> summary -> detail) =>
+              if summary.nonEmpty then
+                println("-----summary-----")
+                println(summary.mapLines(l => s"\t$l")) // TODO: no println
+              prog
+            
       val baseScp: utils.Scope =
         utils.Scope.empty
       // * This line serves for `import.meta.url`, which retrieves directory and file names of mjs files.
@@ -104,7 +128,7 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
       val nme = file.baseName
       val exportedSymbol = parsed.definedSymbols.find(_._1 === nme).map(_._2)
       val je = nestedScp.givenIn:
-        jsb.program(le, exportedSymbol, wd)
+        jsb.program(lowered, exportedSymbol, wd)
       val jsStr = je.stripBreaks.mkString(100)
       val out = file / os.up / (file.baseName + ".mjs")
       os.write.over(out, jsStr)
