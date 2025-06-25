@@ -84,7 +84,7 @@ object Lifter:
   def getVars(d: Defn)(using state: State): Set[Local] = d match
     case f: FunDefn =>
       (f.body.definedVars ++ f.params.flatMap(_.paramSyms)).collect:
-        case s: FlowSymbol if !(s is state.runtimeSymbol) => s
+        case s: FlowSymbol if !(s is state.runtimeSymbol) => s // FIXME: doesn't this test always fail?
     case c: ClsLikeDefn =>
       (c.preCtor.definedVars ++ c.ctor.definedVars).collect:
         case s: FlowSymbol if !(s is state.runtimeSymbol) => s
