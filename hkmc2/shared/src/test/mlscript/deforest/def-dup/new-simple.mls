@@ -96,3 +96,21 @@ f()
 //│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// using `let` to declare local functions helps to avoid the problem
+// caused by reordering nested `fun` functions.
+:deforest
+fun test() =
+  let x = if A(0) is
+    A then 1
+  let f() = x
+  f()
+test()
+//│ = 1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ -------------- executing -------------
+//│ = 1
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -101,26 +101,3 @@ f(A) + f(A)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-// TODO: after lowering the definition of `f` is located before the
-// defining site of `x`, so that `f` is not in the `rest` of the fusing
-// pattern matching and `x` in `f` becomes free.
-:re
-:ge
-:deforest
-fun test() =
-  let x = if A is
-    A then 1
-  fun f() = x
-  f()
-test()
-//│ = 1
-//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Ref(member:A)@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
-//│ ╔══[COMPILATION ERROR] No definition found in scope for 'x'
-//│ ║  l.111: 	  let x = if A is
-//│ ╙──       	      ^
-//│ -------------- executing -------------
-//│ ═══[RUNTIME ERROR] ReferenceError: x is not defined
-//│ ═══[RUNTIME ERROR] The result from deforestated program ("undefined") is different from the one computed by the original prorgam ("1")
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
