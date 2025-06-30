@@ -42,7 +42,7 @@ class Importer:
         
       case "mls" =>
         val _ -> sym -> _ =
-          self.state.importedFileNameToSemBlk.getOrElseUpdate.curried(file):
+          // self.state.importedFileNameToSemBlk.getOrElseUpdate.curried(file):
             tl.trace(s">>> Importing $file"):
               val block = os.read(file)
               val fph = new FastParseHelpers(block)

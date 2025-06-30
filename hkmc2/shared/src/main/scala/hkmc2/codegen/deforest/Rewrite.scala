@@ -119,7 +119,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
         case S(s) => S(s + ctorExprId)
       ctorIdToFinalDest.updateWith(ctorExprId): 
         case N => S(ctorFinalDest)
-        case S(_) => die
+        case S(x) => S(x) // FIXME:
   
   val rewritingMatchIds -> rewritingSelIds = finalDestToCtorIds.keySet.partitionMap:
     case FinalDest.Match(matchId, _) => L(matchId)
@@ -221,15 +221,14 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
 
 class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elaborator.State):
   val preAnalyzer = rewritePrepare.preAnalyzer
-  val inModSym = preAnalyzer.inModuleInfo.map:
-    case m -> _ -> _ => m
+  // val inModSym = preAnalyzer.inModuleInfo.map:
+  //   case m -> _ -> _ => m
   
   def apply() =
     val duplicatedDefs = rewritePrepare.newSymToInstIdAndOldSym.map:
       case newSym -> (instId -> oldSym) =>
         // 1. find original fundefs
         // 2. transform fun body under the specific instantiation id
-        // 3. accumulate the definition
         val FunDefn(_, _, param, body) = preAnalyzer.getTopLevelFunDefnForSym(oldSym).get
         val oldToNewParam = mutable.Map.empty[VarSymbol, VarSymbol]
         val newParam = param.map: 
@@ -243,31 +242,39 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             val newRestParam = restParam.map(makeNewParam)
             ParamList(flags, newParams, newRestParam)
         val newBody = Transform(instId)(body).replaceSymbols(oldToNewParam.toMap)
-        FunDefn(inModSym, newSym, newParam, newBody)
-    preAnalyzer.inModuleInfo match
-    case None =>
-      val withDuplicatedDefs = duplicatedDefs.foldRight(Transform(Nil)(preAnalyzer.b)):
-        case (newFunDefn, acc) =>
-          Define(newFunDefn, acc)
-      matchRestOfFusingMatches.prependAllFunDefs:
-        matchArmsOfFusingMatches.prependAllFunDefs:
-          withDuplicatedDefs
-    case Some(inMod -> mainBody -> mDef) =>
-      val newMainFun = FunDefn(
-        S(inMod),
-        BlockMemberSymbol("main_deforest", Nil, true),
-        PlainParamList(Nil) :: Nil,
-        Transform(Nil)(mainBody))
-      Define(
-        mDef.copy(
-          methods = newMainFun ::
-            (duplicatedDefs ++
-            matchRestOfFusingMatches.getAllFunDefs ++
-            matchArmsOfFusingMatches.getAllFunDefs ++
-            mDef.methods).toList,
-          preCtor = Transform(Nil)(mDef.preCtor),
-          ctor = Transform(Nil)(mDef.ctor)),
-        End(""))
+        // the owner is `N` because duplicated functions shouldn't be inside any module
+        FunDefn(N, newSym, newParam, newBody)
+    
+    val withDuplicatedDefs = duplicatedDefs.foldRight(Transform(Nil)(preAnalyzer.b)):
+      case (newFunDefn, acc) =>
+        Define(newFunDefn, acc)
+    matchRestOfFusingMatches.prependAllFunDefs:
+      matchArmsOfFusingMatches.prependAllFunDefs:
+        withDuplicatedDefs
+    // preAnalyzer.inModuleInfo match
+    // case None =>
+    //   val withDuplicatedDefs = duplicatedDefs.foldRight(Transform(Nil)(preAnalyzer.b)):
+    //     case (newFunDefn, acc) =>
+    //       Define(newFunDefn, acc)
+    //   matchRestOfFusingMatches.prependAllFunDefs:
+    //     matchArmsOfFusingMatches.prependAllFunDefs:
+    //       withDuplicatedDefs
+    // case Some(inMod -> mainBody -> mDef) =>
+    //   val newMainFun = FunDefn(
+    //     S(inMod),
+    //     BlockMemberSymbol("main_deforest", Nil, true),
+    //     PlainParamList(Nil) :: Nil,
+    //     Transform(Nil)(mainBody))
+    //   Define(
+    //     mDef.copy(
+    //       methods = newMainFun ::
+    //         (duplicatedDefs ++
+    //         matchRestOfFusingMatches.getAllFunDefs ++
+    //         matchArmsOfFusingMatches.getAllFunDefs ++
+    //         mDef.methods).toList,
+    //       preCtor = Transform(Nil)(mDef.preCtor),
+    //       ctor = Transform(Nil)(mDef.ctor)),
+    //     End(""))
   
   object matchRestOfFusingMatches:
     // from match scrut expr id to either a function def with a set of args that should be applied
@@ -337,7 +344,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           val freeVars = withTheRestOfPossiblyFusingMatch
             .sortedFvsForTransformedBlocks(rewritePrepare.alwaysNonFreeVars)
           val newSymbols = freeVars.map(s => VarSymbol(Tree.Ident(s.nme)))
-          val newFunDef = FunDefn(inModSym, sym, newSymbols.asParamList :: Nil,
+          val newFunDef = FunDefn(N, sym, newSymbols.asParamList :: Nil,
             withTheRestOfPossiblyFusingMatch.replaceSymbols(freeVars.zip(newSymbols).toMap))
           store.updateWith(matchId):
             case S(_) => die
@@ -398,7 +405,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
                       .finalDestToVarSymbolsToReplaceSelInArms(dest)._2
                       .getOrElse(Tree.Ident(p.name), VarSymbol(Tree.Ident(s"_unused_${p.name}")))
               L(FunDefn(
-                inModSym,
+                N,
                 funSym,
                 (freeVarSymForFunDef ::: varSymbolsThatReplacedSelections).asParamList :: Nil,
                 funBody))
@@ -420,9 +427,10 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
   
   
   private def callNewFun(sym: BlockMemberSymbol): Path =
-    preAnalyzer.inModuleInfo.fold(Value.Ref(sym)):
-      case innerSym -> _ -> _ =>
-        Select(Value.Ref(innerSym), Tree.Ident(sym.nme))(S(sym))
+    Value.Ref(sym)
+    // preAnalyzer.inModuleInfo.fold(Value.Ref(sym)):
+    //   case innerSym -> _ -> _ =>
+    //     Select(Value.Ref(innerSym), Tree.Ident(sym.nme))(S(sym))
   
   private val uselessSymbolSubst = new SymbolSubst
   // rewrite ctor and dtors
@@ -504,9 +512,10 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
             val newInstId = if inTheSameRecursiveGroup then instId else instId :+ s.uid
             rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)): m =>
-              preAnalyzer.inModuleInfo.fold(Value.Ref(m(blk))):
-                case mod -> _ -> _ =>
-                  Select(Value.Ref(mod.asMod.get), Tree.Ident(m(blk).nme))(S(m(blk)))
+              Value.Ref(m(blk))
+              // preAnalyzer.inModuleInfo.fold(Value.Ref(m(blk))):
+              //   case mod -> _ -> _ =>
+              //     Select(Value.Ref(mod.asMod.get), Tree.Ident(m(blk).nme))(S(m(blk)))
           case _ => super.applyPath(s)
       case v: Value => applyValue(v)
       case _ => super.applyPath(p)
@@ -532,7 +541,8 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     
     override def applyFunDefn(fun: FunDefn): FunDefn =
       if instId.isEmpty then
-        fun // skip top level functions
+        super.applyFunDefn(fun)
+        // fun // skip top level functions // TODO: should not skip, should rewrite their body inplace
       else
         super.applyFunDefn(fun)
     def apply(b: Block) = applyBlock(b)

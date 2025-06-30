@@ -30,7 +30,7 @@ class CompileTestRunner
     .filter(_.ext in validExt)
     
   protected lazy val compileTestFiles = allFiles.filter: file =>
-      file.segments.contains("mlscript-compile")
+      file.segments.contains("mlscript-compile")// && file.segments.contains("nofib")
   
   // TODO dedup path stuff with DiffTestRunner?
   compileTestFiles.foreach: file =>

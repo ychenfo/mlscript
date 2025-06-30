@@ -103,12 +103,14 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
         else
           val deforestLow = ltl.givenIn:
             new codegen.Lowering()
-          val deforestResult = Deforest(deforestLow.program(blk), wd)(using
+          val deforestResult = Deforest.apply(deforestLow.program(blk), wd)(using
             cfg,
             ltl,
             raise,
             newCtx,
-            new Deforest.State())
+            new Deforest.State(),
+            State,
+            preludeFile)
           deforestResult match
             case Right(msg) =>
               println(msg) // TODO: no println
