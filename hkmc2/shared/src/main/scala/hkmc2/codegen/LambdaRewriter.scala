@@ -11,7 +11,7 @@ object LambdaRewriter:
   def desugar(b: Block)(using State) =
     def rewriteOneBlk(b: Block) = b match
       case Assign(lhs, Value.Lam(params, body), rest) if !lhs.isInstanceOf[TempSymbol] =>
-        val newSym = BlockMemberSymbol(lhs.nme, Nil,
+        val newSym = BlockMemberSymbol(lhs.nme, syntax.Tree.DummyTermDef(syntax.Fun) :: Nil,
           nameIsMeaningful = true // TODO: lhs.nme is not always meaningful
         )
         val blk = blockBuilder
@@ -26,7 +26,7 @@ object LambdaRewriter:
             case lam: Value.Lam => 
               val sym = BlockMemberSymbol(
                 "lambda",
-                syntax.Tree.TermDef(syntax.Fun, syntax.Tree.Empty(), N) :: Nil,
+                syntax.Tree.DummyTermDef(syntax.Fun) :: Nil,
                 nameIsMeaningful = false)
               lambdasList ::= (sym -> super.applyLam(lam))
               Value.Ref(sym)
