@@ -23,8 +23,10 @@ test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@1@inst_0_tsni --> Ref(prod)@inst_0_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@2@inst_0_tsni --> Ref(prod)@inst_0_tsni@BB
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@1@inst__tsni --> Ref(prod)@inst__tsni@BB
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst__tsni --> Ref(prod)@inst__tsni@AA
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst_0_tsni --> Ref(prod)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@1@inst_0_tsni --> Ref(prod)@inst_0_tsni@BB
 //│ -------------- executing -------------
 //│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -101,3 +103,19 @@ f(A) + f(A)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
+// NOTE: after trying to fuse both the original body and the instance's body,
+// the `A` in this program is not fused anymore
+:deforest
+let x = A
+fun f() =
+  if x is
+    A then 0
+f()
+//│ = 0
+//│ x = A
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

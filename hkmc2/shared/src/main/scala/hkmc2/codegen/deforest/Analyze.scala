@@ -402,6 +402,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     case Throw(exc) =>
       processResult(exc)
       freshVar("throw", cc.forFun).asProdStrat
+    case _ => throw NotDeforestableException(s"not supported: $b")
 
   def processResult(r: Result)(using
     processingDefs: Ls[BlockMemberSymbol],
