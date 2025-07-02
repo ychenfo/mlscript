@@ -110,18 +110,6 @@ class DeforestPreAnalyzer(
   given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
   
-  // var inModuleInfo: Option[InnerSymbol -> Block -> ClsLikeDefn] = N
-  // b match
-  //   case Define(m: ClsLikeDefn, _: End) if m.k is syntax.Mod =>
-  //     m.methods.foreach:
-  //       // TODO: check if just using the content in the main function is ok...
-  //       case fdefn =>
-  //         if fdefn.sym.nme == "main" &&
-  //         fdefn.params.headOption.exists(ps => (ps.params is Nil) && (ps.restParam is N)) then
-  //           assert(fdefn.owner.isDefined && inModuleInfo.isEmpty)
-  //           val moduleTopLevel = Begin(m.preCtor, m.ctor)
-  //           inModuleInfo = S(fdefn.owner.get -> fdefn.body -> m)
-  //   case _ => ()
   // this contains
   // - top level computations // TODO: how???? or can current implementation hanlde it already?
   // - preCtor and Ctor in module definitions
@@ -281,9 +269,9 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     val recursiveGroups = mutable.Map.empty[BlockMemberSymbol, Ls[BlockMemberSymbol]]
     def getOrUpdate(s: BlockMemberSymbol)(using processingDefs: Ls[BlockMemberSymbol], cc: ConstraintsAndCacheHitCollector): ProdVar | ProdStratScheme =
       preAnalyzer.getTopLevelFunDefnForSym(s) match
-        // not a fun defined in the current block, just return its prodvar
+        // not a fun whose definition is visible for fusion, just return its prodvar
         case None =>
-          preAnalyzer.getProdVarForSym(s) // TODO: consider functions being imported?
+          preAnalyzer.getProdVarForSym(s)
         case Some(funDefn) => store.get(s) match
           case Some(scheme) => scheme
           case None => processingDefs.filter(_ is s) match
@@ -331,19 +319,10 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
         val bodyStrat = processBlock(body)(using Nil, cc)
         cc.constrain(bodyStrat, NoCons)
     
-    
-    // val strat = processBlock(
-    //   preAnalyzer.inModuleInfo.fold(preAnalyzer.b):
-    //     case _ -> mainBody -> modDef => Begin(mainBody, Begin(modDef.preCtor, modDef.ctor))
-    // )(using Nil, cc)
-    // cc.constrain(strat, NoCons)
-    
-    // println(preAnalyzer.topLevelDefinedFunSyms)
     preAnalyzer.usedFunSyms
       .diff(preAnalyzer.topLevelDefinedFunSyms)
       .diff(preAnalyzer.nonTopLevelDefinedFunSyms)
       .foreach: usedButNotDefined =>
-        // println(s"used but not defn $usedButNotDefined")
         cc.constrain(NoProd, preAnalyzer.getProdVarForSym(usedButNotDefined).asConsStrat)
     cc.constraints
   
@@ -759,14 +738,4 @@ extension (r: Result)
     case Call(f, _) => f.asClsSymbol
     case Instantiate(cls, _) => cls.asClsSymbol
     case p: Path => p.asObjSymbol
-
-class GetInfoOfCurrentFile extends BlockTraverser:
-  // this contains
-  // - top level computations
-  // - preCtor and Ctor in module definitions
-  // - bodies of exported module functions
-  // and their corresponding correct root instantiation id?
-  var topLvlComputations: Ls[Block -> InstantiationId] = Nil // instantitaion ids of these blocks should start with a special ResultId
-  // var 
-  ???
 
