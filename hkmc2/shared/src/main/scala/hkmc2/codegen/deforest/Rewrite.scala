@@ -497,9 +497,10 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
               case Arg(false, value) => value
         case ins@Instantiate(cls, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(ins.uid.withInstId) =>
           handleCallLike(cls, ins.uid)(args)
-        case v@Value.Arr(elems) => handleCallLike(v, v.uid):
-          elems.map:
-            case Arg(false, value) => value
+        case v@Value.Arr(elems) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(v.uid.withInstId) =>
+          handleCallLike(v, v.uid):
+            elems.map:
+              case Arg(false, value) => value
         case _ => super.applyResult2(r)(k)
     
     override def applyPath(p: Path): Path = p match
@@ -742,6 +743,3 @@ extension (clsSym: ClassSymbol)
     pre.arrBlkMemSym.store.find(_._2 is clsSym) match
       case None => N
       case Some(n, _) => S(n)
-  def isArrClsSym(pre: DeforestPreAnalyzer) =
-    pre.arrBlkMemSym.store.find(_._2 is clsSym).isDefined
-      
