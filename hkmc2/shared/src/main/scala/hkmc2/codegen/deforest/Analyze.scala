@@ -105,8 +105,8 @@ class DeforestPreAnalyzer(
   val b: Block,
   val importedFunDefs: Ls[BlockMemberSymbol -> FunDefn],
   val innerImportedSymbol2OutterImportedSym: Opt[InnerSymbol -> BlockMemberSymbol],
-  val importedByImported: Ls[Symbol -> Str],
-) extends BlockTraverser:
+  val importedByImported: Ls[Symbol -> Str]
+)(using val elabState: Elaborator.State) extends BlockTraverser:
   given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
   
@@ -116,7 +116,10 @@ class DeforestPreAnalyzer(
   // - exported module functions
   // and their corresponding correct root instantiation id?
   var topLevelLikeComputations: Ls[Block | FunDefn] = Nil
-  
+  object arrBlkMemSym:
+    val store = mutable.Map.empty[Int, ClassSymbol]
+    def apply(n: Int) = store.getOrElseUpdate.curried(n):
+      ClassSymbol(Tree.DummyTypeDef(syntax.Cls), Tree.Ident(s"Deforest_Arr_$n"))
   val noProdStratVar = freshVar("primitive", N).asProdStrat
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
   val topLevelFunSymToFun = mutable.Map.from(importedFunDefs)
@@ -134,7 +137,7 @@ class DeforestPreAnalyzer(
     case _ => symToStratVar(s)
   def getTopLevelFunDefnForSym(s: BlockMemberSymbol) = topLevelFunSymToFun.get(s)
   def getCtorSymFromCtorLikeExprId(id: ResultId): Opt[ClassLikeSymbol] =
-    resultIdToResult(id).getCtorSymFromCtorLikeExpr
+    resultIdToResult(id).getCtorSymFromCtorLikeExpr(using this)
   def getMatchFromMatchScrutExprId(scrutExprId: ResultId): Opt[Match] =
     matchScrutToMatchBlock.get(scrutExprId)
   def getResult(id: ResultId) = resultIdToResult(id)
@@ -253,6 +256,7 @@ class DeforestPreAnalyzer(
 
 class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   given stratVarUidState: Uid.StratVar.State = preAnalyzer.stratVarUidState
+  given elabState: Elaborator.State = preAnalyzer.elabState
   import StratVarState.freshVar
   
   val constraints = processTopLevel
@@ -347,7 +351,9 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       val armsRes =
         if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Cls] } then
           arms.map:
-            case (Case.Cls(clsSym, _), body) => processBlock(body)
+            case (Case.Cls(clsSym, _), body) => processBlock(body) // TODO: no need for this clsSym
+        else if arms.forall{ case (cse, _) => cse.isInstanceOf[Case.Tup] } then
+          arms.map(a => processBlock(a._2))
         else
           arms.map:
             case (_, armBody) => processBlock(armBody)
@@ -514,7 +520,12 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       cc.constrain(bodyStrat, res.asConsStrat)
       ProdFun(paramSyms, res.asProdStrat)
     case Value.Arr(elems) =>
-      NoProd
+      val args = elems.zipWithIndex.map:
+        case (Arg(false, value), n) =>
+          TermSymbol(syntax.ImmutVal, N, Tree.Ident(n.toString())) ->
+          processResult(value)
+        case _ => throw NotDeforestableException("no support for array with spread")
+      new Ctor(r.uid, instantiationId, preAnalyzer.arrBlkMemSym(elems.length), args)
 
 
 class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
@@ -660,6 +671,7 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
       val arm =
         dtor.arms.find:
           case (Case.Cls(c1, _) -> body) => c1 is ctorSym
+          case (Case.Tup(len, _) -> _) => preAnalyzer.arrBlkMemSym(len) is ctorSym
         .map(_._2).orElse(dtor.dflt).get
       val armAndMatchRest =
         preAnalyzer
@@ -734,8 +746,9 @@ extension (p: Path)
     case _ => N
 
 extension (r: Result)
-  def getCtorSymFromCtorLikeExpr = r match
+  def getCtorSymFromCtorLikeExpr(using pre: DeforestPreAnalyzer) = r match
     case Call(f, _) => f.asClsSymbol
     case Instantiate(cls, _) => cls.asClsSymbol
+    case Value.Arr(elems) => S(pre.arrBlkMemSym(elems.length))
     case p: Path => p.asObjSymbol
 

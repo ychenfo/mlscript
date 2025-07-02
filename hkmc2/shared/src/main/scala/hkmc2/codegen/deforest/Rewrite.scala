@@ -106,12 +106,13 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
             .flatMap: x =>
               x._1 match
                 case Case.Cls(cls, _) => if (cls is ctorCls) then S(cls) else N
+                case Case.Tup(len, _) => if (preAnalyzer.arrBlkMemSym(len) is ctorCls) then S(ctorCls) else N
                 case _ => die
             .headOption
           val tmpSymbolsForFieldsOfCtor = ctorCls.asCls
             .map: cls =>
-              cls.tree.clsParams.map: fieldName =>
-                TempSymbol(N, fieldName.name)
+              cls.getClsParamNames(preAnalyzer).map: fieldName =>
+                TempSymbol(N, s"_deforest_${cls.nme}_$fieldName")
             .getOrElse(Nil)
           FinalDest.Match(dtorScrutExprId, whichArm)(distinctSels, tmpSymbolsForFieldsOfCtor)
       finalDestToCtorIds.updateWith(ctorFinalDest):
@@ -166,9 +167,9 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     def matDestToTempSymbolMap(mat: FinalDest.Match) =
       mat.arm.fold(Nil): c =>
         mat.selsInArm.map: selId =>
-          val ctorFieldNames = c.asCls.get.tree.clsParams
+          val ctorFieldNames = c.asCls.get.getClsParamNames(preAnalyzer)
           val selName = preAnalyzer.getResult(selId._1).asInstanceOf[Select].name
-          val idx = ctorFieldNames.indexWhere(_.id == selName)
+          val idx = ctorFieldNames.indexWhere(_ == selName.name)
           selId -> mat.tmpSymbolForASpecificCtorId(idx)
     for case (c, matchArmDest@FinalDest.Match(matchId, cls)) <- ctorIdToFinalDest do
       val numOfCtors = finalDestToCtorIds(matchArmDest).size
@@ -384,7 +385,10 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           val originalMatchArmBody =
             val matchExpr = preAnalyzer.matchScrutToMatchBlock(dest.matchId._1)
             dest.arm.fold(matchExpr.dflt.get): armCls =>
-              matchExpr.arms.find(a => a._1.asInstanceOf[Case.Cls].cls is armCls).get._2
+              armCls.asCls.flatMap(c => c.getArrClsSymSize(preAnalyzer)) match
+                case N =>
+                  matchExpr.arms.find(a => a._1.asInstanceOf[Case.Cls].cls is armCls).get._2
+                case S(n) => matchExpr.arms.find(a => a._1.asInstanceOf[Case.Tup].len == n).get._2
           // this rewrittenBody here already has its selection replaced with
           // the pre-computed var symbols (if the arm is used multiple times)
           // or the temp symbols (if the arm is used only once)
@@ -400,10 +404,10 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
               val varSymbolsThatReplacedSelections =
                 // the order is the same as class ctor param
                 preAnalyzer.getCtorSymFromCtorLikeExprId(ctorId._1).get.asCls.fold(Nil): c =>
-                  c.tree.clsParams.map: p =>
+                  c.getClsParamNames(preAnalyzer).map: p =>
                     rewritePrepare
                       .finalDestToVarSymbolsToReplaceSelInArms(dest)._2
-                      .getOrElse(Tree.Ident(p.name), VarSymbol(Tree.Ident(s"_unused_${p.name}")))
+                      .getOrElse(Tree.Ident(p), VarSymbol(Tree.Ident(s"_unused_${p}")))
               L(FunDefn(
                 N,
                 funSym,
@@ -470,7 +474,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
       case _ => super.applyResult(r)
     
     override def applyResult2(r: Result)(k: Result => Block): Block =
-      def handleCallLike(f: Path, ctorResId: ResultId)(args: Ls[Path]) =
+      def handleCallLike(_f: Path, ctorResId: ResultId)(args: Ls[Path]) = // TODO: remove the first parameter?
         val c = preAnalyzer.getCtorSymFromCtorLikeExprId(ctorResId).get.asCls.get
         rewritePrepare.ctorIdToFinalDest(ctorResId.withInstId) match
           case matchDest@FinalDest.Match(matchId, whichArm) =>
@@ -483,8 +487,8 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
                   applyResult2(arg): r =>
                     Assign(tmpSym, r, rest)
           case FinalDest.Sel(s) =>
-            val selFieldName = preAnalyzer.getResult(s._1).asInstanceOf[Select].name
-            val idx = c.tree.clsParams.indexWhere(_.id == selFieldName)
+            val selFieldName = preAnalyzer.getResult(s._1).asInstanceOf[Select].name.name
+            val idx = c.getClsParamNames(preAnalyzer).indexWhere(_ == selFieldName)
             k(args(idx))
       r match
         case call@Call(f, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(call.uid.withInstId) =>
@@ -493,6 +497,9 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
               case Arg(false, value) => value
         case ins@Instantiate(cls, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(ins.uid.withInstId) =>
           handleCallLike(cls, ins.uid)(args)
+        case v@Value.Arr(elems) => handleCallLike(v, v.uid):
+          elems.map:
+            case Arg(false, value) => value
         case _ => super.applyResult2(r)(k)
     
     override def applyPath(p: Path): Path = p match
@@ -726,3 +733,15 @@ extension (instId: InstantiationId)
   def makeSuffix(preAnalyzer: DeforestPreAnalyzer) =
     "inst_" + instId.map(preAnalyzer.getStableResultId).mkString("_") + "_tsni"
 
+extension (clsSym: ClassSymbol)
+  def getClsParamNames(pre: DeforestPreAnalyzer) =
+    pre.arrBlkMemSym.store.find(_._2 is clsSym) match
+      case None => clsSym.tree.clsParams.map(_.nme)
+      case Some(n, _) => Ls.range(0, n).map(_.toString())
+  def getArrClsSymSize(pre: DeforestPreAnalyzer) =
+    pre.arrBlkMemSym.store.find(_._2 is clsSym) match
+      case None => N
+      case Some(n, _) => S(n)
+  def isArrClsSym(pre: DeforestPreAnalyzer) =
+    pre.arrBlkMemSym.store.find(_._2 is clsSym).isDefined
+      
