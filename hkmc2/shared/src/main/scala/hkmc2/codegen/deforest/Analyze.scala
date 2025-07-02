@@ -249,8 +249,6 @@ class DeforestPreAnalyzer(
     case clsLike: ClsLikeDefn if clsLike.k is syntax.Mod =>
       topLevelLikeComputations ::= clsLike.preCtor
       topLevelLikeComputations ::= clsLike.ctor
-      clsLike.methods.foreach: m =>
-        topLevelLikeComputations ::= m.body
       super.applyDefn(defn)
     case _: ClsLikeDefn =>
       shouldCollectFunDefn = false
@@ -340,10 +338,12 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     // )(using Nil, cc)
     // cc.constrain(strat, NoCons)
     
+    // println(preAnalyzer.topLevelDefinedFunSyms)
     preAnalyzer.usedFunSyms
       .diff(preAnalyzer.topLevelDefinedFunSyms)
       .diff(preAnalyzer.nonTopLevelDefinedFunSyms)
       .foreach: usedButNotDefined =>
+        // println(s"used but not defn $usedButNotDefined")
         cc.constrain(NoProd, preAnalyzer.getProdVarForSym(usedButNotDefined).asConsStrat)
     cc.constraints
   
@@ -577,8 +577,11 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
       case (c: Ctor, d: FieldSel) =>
         ctorDests.update(c, d)
         dtorSources.update(d, c)
-        c.args.find(a => a._1.id == d.field).map: p =>
-          handle(p._2 -> d.consVar)
+        c.args.find(a => a._1.id == d.field) match
+          case None =>
+            handle(c, NoCons)
+            handle(NoProd, d.consVar)
+          case Some(p) => handle(p._2 -> d.consVar)
       case (c: Ctor, d: ConsFun) => ()
       case (p: ProdVar, _) =>
         upperBounds += p.uid -> (cons :: upperBounds(p.uid))
@@ -625,16 +628,21 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
   val resolveClashes =
     val ctorToDtor = ctorDests.store
     val dtorToCtor = dtorSources.store
+    
+    val toRmCtor = mutable.Set.empty[Ctor]
+    val toRmDtor = mutable.Set.empty[Dtor | FieldSel]
     def removeCtor(rm: (Ctor | ResultId)): Unit = rm match
       case rm: Ctor =>
+        if toRmCtor.add(rm) then
         for
-          (dtors, _) <- ctorToDtor.remove(rm)
+          (dtors, _) <- ctorToDtor.get(rm)
           dtor <- dtors
         do removeDtor(dtor)
       case _ =>
         for rm <- ctorToDtor.keySet.filter(x => x.exprId == rm) do removeCtor(rm)
     def removeDtor(rm: Dtor | FieldSel) =
-      for (ctors, _) <- dtorToCtor.remove(rm)
+      if toRmDtor.add(rm) then
+      for (ctors, _) <- dtorToCtor.get(rm)
           x <- ctors do removeCtor(x)
     
     // remove clashes
@@ -661,6 +669,10 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
     for
       case (rm, _ -> true) <- dtorToCtor
     do removeDtor(rm)
+    toRmCtor.foreach(rm => ctorToDtor.remove(rm))
+    toRmDtor.foreach(rm => dtorToCtor.remove(rm))
+    toRmCtor.clear()
+    toRmDtor.clear()
     
     // remove cycle
     def getCtorInArm(ctorExprId: ResultId , dtorScrutExprId: ResultId) =
@@ -712,6 +724,8 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
       dtor <- mats
       rm <- findCycle(ctor, dtor)
     do removeCtor(rm)
+    toRmCtor.foreach(rm => ctorToDtor.remove(rm))
+    toRmDtor.foreach(rm => dtorToCtor.remove(rm))
     
     ctorToDtor -> dtorToCtor
 

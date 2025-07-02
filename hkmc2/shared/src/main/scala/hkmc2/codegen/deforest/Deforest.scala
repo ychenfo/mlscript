@@ -53,43 +53,25 @@ object Deforest:
       then os.Path(path)
       else wd / os.RelPath(path)
     assert(file.ext == "mls")
-    val preludeParse = ParserSetup(preludeFile, false)
-    val mainParse = ParserSetup(file, false)
-    val elab = Elaborator(tl, wd, Elaborator.Ctx.empty)
-    val initState = elabSt.init.nestLocal
-    val (pblk, newCtx) = elab.importFrom(preludeParse.resultBlk)(using initState)
-    newCtx.nestLocal.givenIn:
-      val elab = Elaborator(tl, wd, newCtx)
-      val parsed = mainParse.resultBlk
-      val (blk0, _) = elab.importFrom(parsed)
+    val semBlk -> outterSym -> newCtx = elabSt.importedFileNameToSemBlk(file)
+    val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
       val resolver = Resolver(tl)
-      resolver.traverseBlock(blk0)(using Resolver.ICtx.empty)
-      val blk = new semantics.Term.Blk(
-        semantics.Import(elabSt.runtimeSymbol, (preludeFile/os.up/os.up/os.up/"mlscript-compile"/"Runtime.mjs").toString) :: blk0.stats,
-        blk0.res
-      )
-      val low = tl.givenIn:
-        new codegen.Lowering()
-      val prog = low.program(blk)
-    // val semBlk -> outterSym -> newCtx = elabSt.importedFileNameToSemBlk(file)
-    // val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
-    //   val resolver = Resolver(tl)
-    //   resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty)
-    //   val low = codegen.Lowering()(using
-    //     cfg,
-    //     tl,
-    //     raise,
-    //     elabSt,
-    //     newCtx)
-    //   low.program(semBlk)
+      resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty)
+      val low = codegen.Lowering()(using
+        cfg,
+        tl,
+        raise,
+        elabSt,
+        newCtx)
+      low.program(semBlk)
     
-      prog.main match
-        case Define(defn: ClsLikeDefn, rest) if defn.k is syntax.Mod =>
-          println(s"${defn.sym}: ${defn.sym.uid}")
-          // println(s"$outterSym: ${outterSym.uid}")
-          defn.isym -> defn.sym -> defn.methods.map:
-            case fdef@FunDefn(sym = sym, _) => sym -> fdef
-        case _ => lastWords("expect a module def")
+    prog.main match
+      case Define(defn: ClsLikeDefn, rest) if defn.k is syntax.Mod =>
+        println(s"${defn.sym}: ${defn.sym.uid}")
+        // println(s"$outterSym: ${outterSym.uid}")
+        defn.isym -> defn.sym -> defn.methods.map:
+          case fdef@FunDefn(sym = sym, _) => sym -> fdef
+      case _ => lastWords("expect a module def")
         
   def deforestImport2(path: Str, wd: os.Path)(using
     cfg: Config,
