@@ -26,24 +26,24 @@ if B(1,2,3,4,5) is
 //│   throw new this.Error("match error");
 //│ }
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ let scrut, a, b, c, d, e;
-//│ a = 1;
-//│ b = 2;
-//│ c = 3;
-//│ d = 4;
-//│ e = 5;
+//│ let scrut, _deforest_B_a, _deforest_B_b, _deforest_B_c, _deforest_B_d, _deforest_B_e;
+//│ _deforest_B_a = 1;
+//│ _deforest_B_b = 2;
+//│ _deforest_B_c = 3;
+//│ _deforest_B_d = 4;
+//│ _deforest_B_e = 5;
 //│ scrut = () => {
-//│   let param0, param1, param2, param3, param4, a1, b1, c1, d1, e1;
-//│   param0 = a;
-//│   param1 = b;
-//│   param2 = c;
-//│   param3 = d;
-//│   param4 = e;
-//│   a1 = param0;
-//│   b1 = param1;
-//│   c1 = param2;
-//│   d1 = param3;
-//│   e1 = param4;
+//│   let param0, param1, param2, param3, param4, a, b, c, d, e;
+//│   param0 = _deforest_B_a;
+//│   param1 = _deforest_B_b;
+//│   param2 = _deforest_B_c;
+//│   param3 = _deforest_B_d;
+//│   param4 = _deforest_B_e;
+//│   a = param0;
+//│   b = param1;
+//│   c = param2;
+//│   d = param3;
+//│   e = param4;
 //│   return 0
 //│ };
 //│ runtime.safeCall(scrut())
@@ -65,7 +65,7 @@ c2 of A(A(A(A(A(A(1))))))
 //│ JS (unsanitized):
 //│ let c2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
 //│ c2 = function c2(x) {
-//│   let param01, param02, param03, param04, param05, param06, a2;
+//│   let param01, param02, param03, param04, param05, param06, a1;
 //│   if (x instanceof A1.class) {
 //│     param01 = x.a;
 //│     if (param01 instanceof A1.class) {
@@ -78,8 +78,8 @@ c2 of A(A(A(A(A(A(1))))))
 //│             param05 = param04.a;
 //│             if (param05 instanceof A1.class) {
 //│               param06 = param05.a;
-//│               a2 = param06;
-//│               return a2
+//│               a1 = param06;
+//│               return a1
 //│             } else {
 //│               throw new globalThis.Error("match error");
 //│             }
@@ -107,12 +107,12 @@ c2 of A(A(A(A(A(A(1))))))
 //│ tmp5 = A1(tmp4);
 //│ c2(tmp5)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ let c2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, c2_inst_0_tsni, a2, a3, a4, a5, a6, a7;
+//│ let c2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, c2_inst_0_tsni, _deforest_A_a, _deforest_A_a1, _deforest_A_a2, _deforest_A_a3, _deforest_A_a4, _deforest_A_a5;
 //│ c2_inst_0_tsni = function c2_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())
 //│ };
 //│ c2 = function c2(x) {
-//│   let param01, param02, param03, param04, param05, param06, a8;
+//│   let param01, param02, param03, param04, param05, param06, a1;
 //│   if (x instanceof A1.class) {
 //│     param01 = x.a;
 //│     if (param01 instanceof A1.class) {
@@ -125,8 +125,8 @@ c2 of A(A(A(A(A(A(1))))))
 //│             param05 = param04.a;
 //│             if (param05 instanceof A1.class) {
 //│               param06 = param05.a;
-//│               a8 = param06;
-//│               return a8
+//│               a1 = param06;
+//│               return a1
 //│             } else {
 //│               throw new globalThis.Error("match error");
 //│             }
@@ -146,41 +146,41 @@ c2 of A(A(A(A(A(A(1))))))
 //│     throw new globalThis.Error("match error");
 //│   }
 //│ };
-//│ a7 = 1;
+//│ _deforest_A_a5 = 1;
 //│ tmp = () => {
-//│   let param01, a8;
-//│   param01 = a7;
-//│   a8 = param01;
-//│   return a8
+//│   let param01, a1;
+//│   param01 = _deforest_A_a5;
+//│   a1 = param01;
+//│   return a1
 //│ };
-//│ a6 = tmp;
+//│ _deforest_A_a4 = tmp;
 //│ tmp1 = () => {
 //│   let param01;
-//│   param01 = a6;
+//│   param01 = _deforest_A_a4;
 //│   return runtime.safeCall(param01())
 //│ };
-//│ a5 = tmp1;
+//│ _deforest_A_a3 = tmp1;
 //│ tmp2 = () => {
 //│   let param01;
-//│   param01 = a5;
+//│   param01 = _deforest_A_a3;
 //│   return runtime.safeCall(param01())
 //│ };
-//│ a4 = tmp2;
+//│ _deforest_A_a2 = tmp2;
 //│ tmp3 = () => {
 //│   let param01;
-//│   param01 = a4;
+//│   param01 = _deforest_A_a2;
 //│   return runtime.safeCall(param01())
 //│ };
-//│ a3 = tmp3;
+//│ _deforest_A_a1 = tmp3;
 //│ tmp4 = () => {
 //│   let param01;
-//│   param01 = a3;
+//│   param01 = _deforest_A_a1;
 //│   return runtime.safeCall(param01())
 //│ };
-//│ a2 = tmp4;
+//│ _deforest_A_a = tmp4;
 //│ tmp5 = () => {
 //│   let param01;
-//│   param01 = a2;
+//│   param01 = _deforest_A_a;
 //│   return runtime.safeCall(param01())
 //│ };
 //│ c2_inst_0_tsni(tmp5)

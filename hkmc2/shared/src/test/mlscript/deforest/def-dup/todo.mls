@@ -9,13 +9,17 @@
 
 data class A(x)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: Only support top-level module definitions now
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 data class (::) Cons(h, t)
 object Nil
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: Only support top-level module definitions now
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 

@@ -15,7 +15,9 @@ object B
 // object None
 // class Some(value)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: Only support top-level module definitions now
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 // * Not fused: two `x is A` consumers

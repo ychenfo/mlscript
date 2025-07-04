@@ -12,19 +12,25 @@ object C
 data class AA(x)
 data class BB(x)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: Only support top-level module definitions now
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 object Nil
 data class Cons(h, t)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: Only support top-level module definitions now
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 object None
 data class Some(x)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: Only support top-level module definitions now
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -38,6 +44,7 @@ c(AA(2))
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst__tsni --> Ref($scrut)@inst__tsni@A
 //│ Ref(member:A)@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
 //│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
@@ -154,6 +161,7 @@ c(AA(2), 10)
 //│ = 12
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
+//│ Ref(member:A)@1@inst__tsni --> Ref($scrut)@inst__tsni@A
 //│ Ref(member:A)@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
 //│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
