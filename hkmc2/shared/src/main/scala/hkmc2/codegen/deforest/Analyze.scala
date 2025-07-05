@@ -247,6 +247,14 @@ class DeforestPreAnalyzer(
       shouldCollectFunDefn = true
     case _ => super.applyDefn(defn)
   
+  override def applyArg(arg: Arg): Unit =
+    if arg.spread then throw NotDeforestableException(s"no support for spread args: $arg")
+    super.applyArg(arg)
+  
+  override def applyParamList(pl: ParamList): Unit =
+    if pl.restParam.isDefined then throw NotDeforestableException(s"no support for `restParam`: $pl")
+    super.applyParamList(pl)
+  
   shouldCollectFunDefn = false
   importedFunDefs.foreach: (_, fdefn) =>
     applyFunDefn(fdefn)

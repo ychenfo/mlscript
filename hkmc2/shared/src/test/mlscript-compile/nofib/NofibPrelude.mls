@@ -10,17 +10,6 @@ object None extends Option
 
 fun fromSome(s) = if s is Some(x) then x
 
-data class Lazy[out A](init: () -> A) with
-  mut val cached: Option[A] = None
-  fun get() =
-    if cached is
-      Some(v) then v
-      else
-        let v = init()
-        set cached = Some(v)
-        v
-fun lazy(x) = Lazy(x)
-fun force(x) = if x is Lazy then x.Lazy#get()
 
 abstract class List[out T]: Cons[T] | Nil
 data class (::) Cons[out T](head: T, tail: List[T]) extends List[T] with
