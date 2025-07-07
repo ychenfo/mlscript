@@ -16,27 +16,6 @@ let Predef1;
     this.render = Rendering.render;
     this.assert = globalThis.console.assert;
     this.foldl = Predef.fold;
-    this.Lazy = function Lazy(init1) {
-      return new Lazy.class(init1);
-    };
-    this.Lazy.class = class Lazy {
-      constructor(init) {
-        this.init = init;
-        this.cached = undefined;
-      }
-      get() {
-        let scrut, tmp;
-        scrut = this.cached;
-        if (scrut === undefined) {
-          tmp = runtime.safeCall(this.init());
-          this.cached = tmp;
-          return this.cached
-        } else {
-          return this.cached
-        }
-      }
-      toString() { return "Lazy(" + runtime.render(this.init) + ")"; }
-    };
   }
   static id(x) {
     return x
@@ -184,16 +163,6 @@ let Predef1;
   } 
   static raiseUnhandledEffect() {
     return Runtime.mkEffect(Runtime.FatalEffect, null)
-  } 
-  static lazy(x8) {
-    return runtime.safeCall(Predef.Lazy(x8))
-  } 
-  static force(x9) {
-    if (x9 instanceof Predef.Lazy.class) {
-      return x9.get()
-    } else {
-      throw new globalThis.Error("match error");
-    }
   }
   static toString() { return "Predef"; }
 });

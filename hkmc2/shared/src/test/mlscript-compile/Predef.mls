@@ -94,14 +94,4 @@ fun enterHandleBlock(handler, body) =
 fun raiseUnhandledEffect() =
   Runtime.mkEffect(Runtime.FatalEffect, null)
 
-data class Lazy[out A](init: () -> A) with
-  mut val cached: A = undefined
-  fun get() =
-    if cached is
-      undefined then
-        set cached = init()
-        cached
-      else cached
-fun lazy(x) = Lazy(x)
-fun force(x) = if x is Lazy then x.Lazy#get()
 

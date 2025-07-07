@@ -15,15 +15,17 @@ case class ImportedInfo(
   otherImports: Ls[Symbol -> Str],
   innerSymbolsToOutterSymbols: Ls[InnerSymbol -> BlockMemberSymbol],
   funAndDefs: Ls[BlockMemberSymbol -> FunDefn],
-  lazyAndForceSymbols: Ls[Symbol])
+  lazySymbols: Ls[Symbol],
+  forceSymbols: Ls[Symbol])
 
 object ImportedInfo:
-  val empty = ImportedInfo(Nil, Nil, Nil, Nil)
+  val empty = ImportedInfo(Nil, Nil, Nil, Nil, Nil)
 
 class GetInfoOfImportedFile(publicModName: String) extends BlockTraverser:
   var funAndDefs: Ls[BlockMemberSymbol -> FunDefn] = Nil
   var innerToOutter: Opt[InnerSymbol -> BlockMemberSymbol] = N
-  var lazyAndForceSymbols: Ls[Symbol] = Nil
+  var lazySymbols: Ls[Symbol] = Nil
+  var forceSymbols: Ls[Symbol] = Nil
   // private var shouldCollectFunDefn = false
   override def applyDefn(defn: Defn): Unit = defn match
     case clsLike: ClsLikeDefn if (clsLike.k is syntax.Mod) && clsLike.sym.nme === publicModName =>
@@ -33,12 +35,14 @@ class GetInfoOfImportedFile(publicModName: String) extends BlockTraverser:
       super.applyDefn(defn)
       // shouldCollectFunDefn = false
     case lzClass: ClsLikeDefn if (lzClass.k is syntax.Cls) && lzClass.sym.nme === "Lazy" =>
-      lazyAndForceSymbols ::= lzClass.sym
+      lazySymbols ::= lzClass.sym
     case _ => super.applyDefn(defn)
   
   override def applyFunDefn(fun: FunDefn): Unit =
-    if fun.sym.nme === "lazy" || fun.sym.nme === "force" then
-      lazyAndForceSymbols ::= fun.sym
+    if fun.sym.nme === "lazy" then
+      lazySymbols ::= fun.sym
+    if fun.sym.nme === "force" then
+      forceSymbols ::= fun.sym
     // else if shouldCollectFunDefn then
     //   funAndDefs ::= fun.sym -> fun
 
@@ -107,7 +111,8 @@ object Deforest:
       Nil,
       traverser.innerToOutter.toList,
       traverser.funAndDefs,
-      traverser.lazyAndForceSymbols)
+      traverser.lazySymbols,
+      traverser.forceSymbols)
   
   def apply(p: Program, wd: os.Path)(using
     cfg: Config,

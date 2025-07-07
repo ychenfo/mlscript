@@ -195,10 +195,13 @@ class DeforestPreAnalyzer(
     // term symbol: variable in patterns so they are always inside the current fundefn (if any)
     // FIXME: check
     case s: (TermSymbol | TempSymbol | FlowSymbol) => symToStratVar.updateWith(s):
-      case N => S(freshVar(s.nme, inFunDef).asProdStrat)
+      case N =>
+        // println(s"new for $s")
+        S(freshVar(s.nme, inFunDef).asProdStrat)
       case S(x) => S(x)
     case v: (BlockMemberSymbol | VarSymbol) => symToStratVar.updateWith(s):
       case N =>
+        // println(s"new !! for $v")
         val inFunOrNot = inFunDef.fold(false): _ =>
           symsDefinedForFun.get.contains(s)
         S(freshVar(s.nme, if inFunOrNot then inFunDef else N).asProdStrat)
@@ -438,6 +441,32 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     def handleCallLike(f: Path, args: Ls[Path], c: Result): ProdStrat =
       val argsTpe = args.map(processResult)
       f match
+        case s: Select if s.symbol.exists(preAnalyzer.importedInfo.forceSymbols.contains) =>
+          val arg :: Nil = args: @unchecked
+          processResult(arg)
+        case Value.Ref(l) if preAnalyzer.importedInfo.forceSymbols.contains(l) =>
+          val arg :: Nil = args: @unchecked
+          processResult(arg)
+        case s: Select if s.symbol.exists(preAnalyzer.importedInfo.lazySymbols.contains) =>
+          val (arg@Value.Ref(lamSym: BlockMemberSymbol)) :: Nil = args: @unchecked
+          val res = freshVar("lz_res", generatedForDef)
+          val lamStrat = funSymToProdStratScheme.getOrUpdate(lamSym) match
+            case t: ProdStratScheme =>
+              val instantiated = t.instantiate(arg.uid)(using this, cc)
+              cc.constrain(instantiated, ConsFun(argsTpe, res.asConsStrat))
+              instantiated
+          cc.constrain(lamStrat, ConsFun(Nil, res.asConsStrat))
+          res.asProdStrat
+        case Value.Ref(l) if preAnalyzer.importedInfo.lazySymbols.contains(l) =>
+          val (arg@Value.Ref(lamSym: BlockMemberSymbol)) :: Nil = args: @unchecked
+          val res = freshVar("lz_res", generatedForDef)
+          val lamStrat = funSymToProdStratScheme.getOrUpdate(lamSym) match
+            case t: ProdStratScheme =>
+              val instantiated = t.instantiate(arg.uid)(using this, cc)
+              cc.constrain(instantiated, ConsFun(argsTpe, res.asConsStrat))
+              instantiated
+          cc.constrain(lamStrat, ConsFun(Nil, res.asConsStrat))
+          res.asProdStrat
         case s@Select(p, nme) =>
           s.symbol.map(_.asCls) match
             case None =>
