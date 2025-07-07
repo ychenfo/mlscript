@@ -541,9 +541,11 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyValue(v)): m =>
               Value.Ref(m(blk))
           case _ =>
-            preAnalyzer.innerImportedSymbol2OutterImportedSym.fold(super.applyValue(v)):
-              case (in, out) =>
-                if l is in then Value.Ref(out) else super.applyValue(v)
+            preAnalyzer.importedInfo.innerSymbolsToOutterSymbols
+              .find: (in, out) =>
+                l is in
+              .fold(super.applyValue(v)): (in, out) =>
+                Value.Ref(out)
         case _ => super.applyValue(v)
       case _ => super.applyValue(v)
     

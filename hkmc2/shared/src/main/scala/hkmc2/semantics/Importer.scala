@@ -67,11 +67,11 @@ class Importer:
                   prelude.copy(mode = Mode.Light).nestLocal
 
               val elab = Elaborator(tl, file / os.up, prelude)
-              val (semBlk, _) = elab.importFrom(resBlk)
+              val (semBlk, newnewCtx) = elab.importFrom(resBlk)
               
               
               resBlk.definedSymbols.find(_._1 === nme) match
-              case Some(nme -> sym) => semBlk -> sym -> newCtx
+              case Some(nme -> sym) => semBlk -> sym -> newnewCtx
               case None => lastWords(s"File $file does not define a symbol named $nme")
         
         val jsFile = file / os.up / (file.baseName + ".mjs")

@@ -8,99 +8,106 @@ import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
 import Result.ResultId
+import hkmc2.Config.LiftDefns
 
 
-case class ImportedProgramInfo(
-  imports: Ls[Symbol -> Str],
+case class ImportedInfo(
+  otherImports: Ls[Symbol -> Str],
   innerSymbolsToOutterSymbols: Ls[InnerSymbol -> BlockMemberSymbol],
-  funAndDefs: Ls[BlockMemberSymbol -> FunDefn])
+  funAndDefs: Ls[BlockMemberSymbol -> FunDefn],
+  lazyAndForceSymbols: Ls[Symbol])
 
+object ImportedInfo:
+  val empty = ImportedInfo(Nil, Nil, Nil, Nil)
 
-class GetInfoOfImportedFile extends BlockTraverser:
-  var innerSymbolsToOutterSymbols: Ls[InnerSymbol -> BlockMemberSymbol] = Nil
+class GetInfoOfImportedFile(publicModName: String) extends BlockTraverser:
   var funAndDefs: Ls[BlockMemberSymbol -> FunDefn] = Nil
-  
-  private var shouldCollectFunDefn = true
+  var innerToOutter: Opt[InnerSymbol -> BlockMemberSymbol] = N
+  var lazyAndForceSymbols: Ls[Symbol] = Nil
+  // private var shouldCollectFunDefn = false
   override def applyDefn(defn: Defn): Unit = defn match
-    case clsLike: ClsLikeDefn if clsLike.k is syntax.Mod =>
-      innerSymbolsToOutterSymbols ::= clsLike.isym -> clsLike.sym
+    case clsLike: ClsLikeDefn if (clsLike.k is syntax.Mod) && clsLike.sym.nme === publicModName =>
+      innerToOutter = S(clsLike.isym -> clsLike.sym)
+      funAndDefs :::= clsLike.methods.map(f => f.sym -> f)
+      // shouldCollectFunDefn = true
       super.applyDefn(defn)
-    case _: ClsLikeDefn =>
-      shouldCollectFunDefn = false
-      super.applyDefn(defn)
-      shouldCollectFunDefn = true
+      // shouldCollectFunDefn = false
+    case lzClass: ClsLikeDefn if (lzClass.k is syntax.Cls) && lzClass.sym.nme === "Lazy" =>
+      lazyAndForceSymbols ::= lzClass.sym
     case _ => super.applyDefn(defn)
   
   override def applyFunDefn(fun: FunDefn): Unit =
-    if shouldCollectFunDefn then funAndDefs ::= fun.sym -> fun
+    if fun.sym.nme === "lazy" || fun.sym.nme === "force" then
+      lazyAndForceSymbols ::= fun.sym
+    // else if shouldCollectFunDefn then
+    //   funAndDefs ::= fun.sym -> fun
 
 
 object Deforest:
   class State:
     val importedFileNameToLoweredBlock = collection.mutable.Map.empty[os.Path, Program]
-    val topLevelFunSymToFunDefn = collection.mutable.Map.empty[BlockMemberSymbol, FunDefn]
   
-  def deforestImport(path: Str, wd: os.Path)(using
-    cfg: Config,
-    tl: TL,
-    raise: Raise,
-    st: State,
-    elabSt: Elaborator.State,
-    preludeFile: os.Path,
-  ): InnerSymbol -> BlockMemberSymbol -> Ls[BlockMemberSymbol -> FunDefn] =
-    val file =
-      if path.startsWith("/")
-      then os.Path(path)
-      else wd / os.RelPath(path)
-    assert(file.ext == "mls")
-    val semBlk -> outterSym -> newCtx = elabSt.importedFileNameToSemBlk(file)
-    val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
-      val resolver = Resolver(tl)
-      resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty)
-      val low = codegen.Lowering()(using
-        cfg,
-        tl,
-        raise,
-        elabSt,
-        newCtx)
-      low.program(semBlk)
-    
-    prog.main match
-      case Define(defn: ClsLikeDefn, rest) if defn.k is syntax.Mod =>
-        println(s"${defn.sym}: ${defn.sym.uid}")
-        // println(s"$outterSym: ${outterSym.uid}")
-        defn.isym -> defn.sym -> defn.methods.map:
-          case fdef@FunDefn(sym = sym, _) => sym -> fdef
-      case _ => lastWords("expect a module def")
-        
+  // def deforestImport(path: Str, wd: os.Path)(using
+  //   cfg: Config,
+  //   tl: TL,
+  //   raise: Raise,
+  //   st: State,
+  //   elabSt: Elaborator.State,
+  //   ctx: Elaborator.Ctx,
+  // ): ImportedInfo =
+  //   val file =
+  //     if path.startsWith("/")
+  //     then os.Path(path)
+  //     else wd / os.RelPath(path)
+  //   assert(file.ext == "mls")
+  //   val semBlk -> _ -> newCtx = elabSt.importedFileNameToSemBlk(file)
+  //   val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
+  //     val resolver = Resolver(tl)
+  //     resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty) // TODO: is this ICtx.empty correct?
+  //     val low = codegen.Lowering()(using
+  //       cfg,
+  //       tl,
+  //       raise,
+  //       elabSt,
+  //       newCtx)
+  //     low.program(semBlk)
+
+  //   prog.main match
+  //     case Define(defn: ClsLikeDefn, rest) if defn.k is syntax.Mod =>
+  //       // println(s"${defn.sym}: ${defn.sym.uid}")
+  //       // println(s"${defn.sym}: ${defn.isym}")
+  //       // println(s"$outterSym: ${outterSym.uid}")
+  //       defn.isym -> defn.sym -> defn.methods.map:
+  //         case fdef@FunDefn(sym = sym, _) => sym -> fdef
+  //     case _ => lastWords("expect a module def")
+  
+  
   def deforestImport2(path: Str, wd: os.Path)(using
     cfg: Config,
     tl: TL,
     raise: Raise,
     st: State,
     elabSt: Elaborator.State,
-  ) =
+  ): ImportedInfo =
     val file =
       if path.startsWith("/")
       then os.Path(path)
       else wd / os.RelPath(path)
     assert(file.ext == "mls")
-    val semBlk -> outterSym -> newCtx = elabSt.importedFileNameToSemBlk(file)
+    val semBlk -> _ -> newCtx = elabSt.importedFileNameToSemBlk(file)
     val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
       val resolver = Resolver(tl)
       resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty)
       val low = codegen.Lowering()(using
-        cfg,
-        tl,
-        raise,
-        elabSt,
-        newCtx)
+      cfg.copy(liftDefns = S(LiftDefns())), tl, raise, elabSt, newCtx)
       low.program(semBlk)
-    val traverser = new GetInfoOfImportedFile
+    val traverser = new GetInfoOfImportedFile(file.baseName)
     traverser.applyBlock(prog.main)
-    traverser.innerSymbolsToOutterSymbols ->
-    traverser.funAndDefs
-    
+    ImportedInfo(
+      Nil,
+      traverser.innerToOutter.toList,
+      traverser.funAndDefs,
+      traverser.lazyAndForceSymbols)
   
   def apply(p: Program, wd: os.Path)(using
     cfg: Config,
@@ -111,34 +118,27 @@ object Deforest:
     elabSt: Elaborator.State,
     preludeFile: os.Path
   ): Either[Program -> String -> String, String] =
-    val innerToOutterSym -> importedFunAndDefns = p.imports
-      .find: (outterSym, path) =>
-        path.contains("NofibPrelude.mjs") // TODO: use config instead of hard code
-      .fold(N -> Nil): (outterSym, path)  =>
-        deforestImport(path.replace(".mjs", ".mls"), wd) match
-          case inner -> outter -> funDefs =>
-            println(s"$outter: ${outter.uid}")
-            println(s"$outterSym: ${outterSym.uid}")
-            // assert(outter is outterSym)
-            S(inner -> outter) -> funDefs
-    val specialImports = p.imports
-      .filter: (_, path) =>
-        path.contains("NofibPrelude")
-    
-    
-    // val in2out -> impFunDef = p.imports
+    // val innerToOutterSym -> importedFunAndDefns = p.imports
     //   .find: (outterSym, path) =>
     //     path.contains("NofibPrelude.mjs") // TODO: use config instead of hard code
-    //   .fold(Nil -> Nil): (outterSym, path)  =>
-    //     deforestImport2(path.replace(".mjs", ".mls"), wd)
-    // val importedFileInfo = ImportedProgramInfo(
-    //   p.imports,
-    //   in2out,
-    //   impFunDef)
-          
-        
+    //   .fold(N -> Nil): (outterSym, path)  =>
+    //     deforestImport(path.replace(".mjs", ".mls"), wd) match
+    //       case inner -> outter -> funDefs =>
+    //         // println(s"$outter: ${outter.uid}")
+    //         // println(s"$outterSym: ${outterSym.uid}")
+    //         // assert(outter is outterSym)
+    //         S(inner -> outter) -> funDefs
+    // val specialImports = p.imports
+    //   .filter: (_, path) =>
+    //     path.contains("NofibPrelude")
+    
+    val importedInfo = p.imports
+      .find: (outterSym, path) =>
+        path.contains("NofibPrelude.mjs")
+      .fold(ImportedInfo.empty): (outterSym, path) =>
+        deforestImport2(path.replace(".mjs", ".mls"), wd)
     try
-      val pre = new DeforestPreAnalyzer(p.main, importedFunAndDefns, innerToOutterSym, p.imports)
+      val pre = new DeforestPreAnalyzer(p.main, importedInfo)
       val col = new DeforestConstraintsCollector(pre)
       val ana = new DeforestConstrainSolver(col)
       val rwp = new DeforestRewritePrepare(ana)

@@ -103,9 +103,7 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
 
 class DeforestPreAnalyzer(
   val b: Block,
-  val importedFunDefs: Ls[BlockMemberSymbol -> FunDefn],
-  val innerImportedSymbol2OutterImportedSym: Opt[InnerSymbol -> BlockMemberSymbol],
-  val importedByImported: Ls[Symbol -> Str]
+  val importedInfo: ImportedInfo
 )(using val elabState: Elaborator.State) extends BlockTraverser:
   given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
@@ -122,7 +120,7 @@ class DeforestPreAnalyzer(
       ClassSymbol(Tree.DummyTypeDef(syntax.Cls), Tree.Ident(s"Deforest_Arr_$n"))
   val noProdStratVar = freshVar("primitive", N).asProdStrat
   val resultIdToResult = mutable.Map.empty[ResultId, Result]
-  val topLevelFunSymToFun = mutable.Map.from(importedFunDefs)
+  val topLevelFunSymToFun = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   val matchScrutToMatchBlock = mutable.Map.empty[ResultId, Match]
   val matchScrutToParentMatchScruts = mutable.Map.empty[ResultId, Ls[ResultId]]
   val matchScrutInFunDef = mutable.Map.empty[ResultId, Opt[BlockMemberSymbol]]
@@ -154,25 +152,39 @@ class DeforestPreAnalyzer(
       case Value.Ref(l) => chk(l.asBlkMember.get)
       case _ => die
   
-  private var shouldCollectFunDefn = true
+  // should only consider imported functions, top level functions and functions inside modules
+  private var shouldConsiderFunDefn = true
+  // imported functions referring to privately defined `val` or `let`s are not handleable
+  private var importedFunctionHandleable = true
+  // indicate if a block contains features that current implementation cannot handle (other than side effects)
+  private var handleable = true
+  // if a function is imported or not
+  private var imported = false
   private val resultIdToStableId = mutable.Map.empty[ResultId, Int]  
   private var stableResuldIt = 0
   private var inMatchScrutsArms: Ls[ResultId -> Opt[ClassLikeSymbol]] = Nil
   private def inMatchScruts = inMatchScrutsArms.unzip._1
   private var inFunDef: Opt[BlockMemberSymbol] = N
   private var symsDefinedForFun: Opt[Set[Symbol]] = N
+  private def maybeCollectFun(fun: FunDefn) =
+    if shouldConsiderFunDefn && handleable && (imported && importedFunctionHandleable) || !imported then
+      topLevelFunSymToFun += fun.sym -> fun
+    if !imported && shouldConsiderFunDefn && handleable then
+      topLevelLikeComputations ::= fun
+  private def isPrivatelyDefined(s: Symbol) =
+    imported && false // TODO:
   override def applyFunDefn(fun: FunDefn): Unit =
     inFunDef match
       case N =>
-        if shouldCollectFunDefn then topLevelLikeComputations ::= fun
-        topLevelFunSymToFun += fun.sym -> fun
+        handleable = true
         inFunDef = S(fun.sym)
         symsDefinedForFun = S(fun.body.definedVars ++ fun.params.flatMap(_.params.map(_.sym)) + fun.sym)
         super.applyFunDefn(fun)
+        maybeCollectFun(fun)
         inFunDef = N
         symsDefinedForFun = N
       case S(value) =>
-        // nothing special for non-top-level functions
+        // nothing special for non-top-level functions // TODO: after ensuring lift before deforest just panic here
         nonTopLevelDefinedFunSyms += fun.sym
         super.applyFunDefn(fun)
   
@@ -181,7 +193,8 @@ class DeforestPreAnalyzer(
       case N => S(freshVar(s.nme, S(s)).asProdStrat)
       case S(x) => S(x)
     // term symbol: variable in patterns so they are always inside the current fundefn (if any)
-    case s: (TermSymbol | TempSymbol) => symToStratVar.updateWith(s):
+    // FIXME: check
+    case s: (TermSymbol | TempSymbol | FlowSymbol) => symToStratVar.updateWith(s):
       case N => S(freshVar(s.nme, inFunDef).asProdStrat)
       case S(x) => S(x)
     case v: (BlockMemberSymbol | VarSymbol) => symToStratVar.updateWith(s):
@@ -202,7 +215,11 @@ class DeforestPreAnalyzer(
     p match
       case s@Select(path, nme) =>
         selsToMatchingArmsContainingIt += s.uid -> inMatchScrutsArms
-        if s.symbol.exists(_.isFunction) then usedFunSyms += s.symbol.get.asBlkMember.get
+        s.symbol match
+          case None => ()
+          case Some(sym) =>
+            if isPrivatelyDefined(sym) then handleable = false
+            if sym.isFunction then usedFunSyms += s.symbol.get.asBlkMember.get
       case _ => ()
     super.applyPath(p)
   
@@ -210,6 +227,9 @@ class DeforestPreAnalyzer(
     resultIdToResult += v.uid -> v
     v match
       case Value.Ref(l) if l.isFunction => usedFunSyms += l.asBlkMember.get
+      case Value.Ref(l) =>
+        if isPrivatelyDefined(l) then handleable = false
+      case Value.This(_) => handleable = false
       case _ => ()
     super.applyValue(v)
   
@@ -241,24 +261,21 @@ class DeforestPreAnalyzer(
       topLevelLikeComputations ::= clsLike.preCtor
       topLevelLikeComputations ::= clsLike.ctor
       super.applyDefn(defn)
-    case _: ClsLikeDefn =>
-      shouldCollectFunDefn = false
-      super.applyDefn(defn)
-      shouldCollectFunDefn = true
+    case _: ClsLikeDefn => () // no need to traverse class defn body at all
     case _ => super.applyDefn(defn)
   
   override def applyArg(arg: Arg): Unit =
-    if arg.spread then throw NotDeforestableException(s"no support for spread args: $arg")
+    if arg.spread then handleable = false
     super.applyArg(arg)
   
   override def applyParamList(pl: ParamList): Unit =
-    if pl.restParam.isDefined then throw NotDeforestableException(s"no support for `restParam`: $pl")
+    if pl.restParam.isDefined then handleable = false
     super.applyParamList(pl)
   
-  shouldCollectFunDefn = false
-  importedFunDefs.foreach: (_, fdefn) =>
+  imported = true
+  importedInfo.funAndDefs.foreach: (_, fdefn) =>
     applyFunDefn(fdefn)
-  shouldCollectFunDefn = true
+  imported = false
   applyBlock(b)
 
 
