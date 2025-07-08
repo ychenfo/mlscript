@@ -440,6 +440,21 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     val instantiationId = cc.forFun.fold(S(Nil))(_ => N)
     def handleCallLike(f: Path, args: Ls[Path], c: Result): ProdStrat =
       val argsTpe = args.map(processResult)
+      def lookThroughLazy(args: Ls[Path]) =
+        args match
+          case (arg@Value.Ref(lamSym: BlockMemberSymbol)) :: Nil =>
+            val res = freshVar("lz_res", generatedForDef)
+            val lamStrat = funSymToProdStratScheme.getOrUpdate(lamSym) match
+              case t: ProdStratScheme =>
+                t.instantiate(arg.uid)(using this, cc)
+              case s: ProdVar => s // TODO: check
+            cc.constrain(lamStrat, ConsFun(Nil, res.asConsStrat))
+            res.asProdStrat
+          case (arg@Value.Ref(lamSym)) :: Nil =>
+            val lamStrat = preAnalyzer.getProdVarForSym(lamSym)
+            val res = freshVar("lz_res", generatedForDef)
+            cc.constrain(lamStrat, ConsFun(Nil, res.asConsStrat))
+            res.asProdStrat
       f match
         case s: Select if s.symbol.exists(preAnalyzer.importedInfo.forceSymbols.contains) =>
           val arg :: Nil = args: @unchecked
@@ -448,25 +463,9 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
           val arg :: Nil = args: @unchecked
           processResult(arg)
         case s: Select if s.symbol.exists(preAnalyzer.importedInfo.lazySymbols.contains) =>
-          val (arg@Value.Ref(lamSym: BlockMemberSymbol)) :: Nil = args: @unchecked
-          val res = freshVar("lz_res", generatedForDef)
-          val lamStrat = funSymToProdStratScheme.getOrUpdate(lamSym) match
-            case t: ProdStratScheme =>
-              val instantiated = t.instantiate(arg.uid)(using this, cc)
-              cc.constrain(instantiated, ConsFun(argsTpe, res.asConsStrat))
-              instantiated
-          cc.constrain(lamStrat, ConsFun(Nil, res.asConsStrat))
-          res.asProdStrat
+          lookThroughLazy(args)
         case Value.Ref(l) if preAnalyzer.importedInfo.lazySymbols.contains(l) =>
-          val (arg@Value.Ref(lamSym: BlockMemberSymbol)) :: Nil = args: @unchecked
-          val res = freshVar("lz_res", generatedForDef)
-          val lamStrat = funSymToProdStratScheme.getOrUpdate(lamSym) match
-            case t: ProdStratScheme =>
-              val instantiated = t.instantiate(arg.uid)(using this, cc)
-              cc.constrain(instantiated, ConsFun(argsTpe, res.asConsStrat))
-              instantiated
-          cc.constrain(lamStrat, ConsFun(Nil, res.asConsStrat))
-          res.asProdStrat
+          lookThroughLazy(args)
         case s@Select(p, nme) =>
           s.symbol.map(_.asCls) match
             case None =>
@@ -530,27 +529,33 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
           case t: ProdStratScheme =>
             val instantiated = t.instantiate(sel.uid)(using this, cc)
             instantiated
-      case _ => 
-        val pStrat = processResult(p)
-        pStrat match
-          case ProdVar(pStratVar) =>
-            val inMatchingArm = preAnalyzer.selsToMatchingArmsContainingIt(sel.uid).flatMap:
-              case (scrutUid, S(inArm)) =>
-                preAnalyzer.matchScrutToMatchBlock(scrutUid).scrut match
-                  case Value.Ref(l) =>
-                    S(preAnalyzer.getProdVarForSym(l) -> inArm)
-                  case _ => N
-              case _ => N
-            val tpeVar = freshVar("sel_res", generatedForDef)
-            val selStrat = new FieldSel(sel.uid, instantiationId, nme, tpeVar.asConsStrat)
-            inMatchingArm.foreach: (p, c) =>
-              selStrat.updateFilter(p, c :: Nil)
-            cc.constrain(pStrat, selStrat)
-            tpeVar.asProdStrat
+      // case Some(s) => preAnalyzer.getProdVarForSym(s)
+      case _ =>
+        p match
+          // special case for selecting from a module...
+          case Value.Ref(l) if l.asMod.isDefined && sel.symbol.isDefined =>
+            preAnalyzer.getProdVarForSym(sel.symbol.get)
           case _ =>
-            val tpeVar = freshVar("sel_res", generatedForDef)
-            cc.constrain(pStrat, new FieldSel(sel.uid, instantiationId, nme, tpeVar.asConsStrat))
-            tpeVar.asProdStrat
+            val pStrat = processResult(p)
+            pStrat match
+              case ProdVar(pStratVar) =>
+                val inMatchingArm = preAnalyzer.selsToMatchingArmsContainingIt(sel.uid).flatMap:
+                  case (scrutUid, S(inArm)) =>
+                    preAnalyzer.matchScrutToMatchBlock(scrutUid).scrut match
+                      case Value.Ref(l) =>
+                        S(preAnalyzer.getProdVarForSym(l) -> inArm)
+                      case _ => N
+                  case _ => N
+                val tpeVar = freshVar("sel_res", generatedForDef)
+                val selStrat = new FieldSel(sel.uid, instantiationId, nme, tpeVar.asConsStrat)
+                inMatchingArm.foreach: (p, c) =>
+                  selStrat.updateFilter(p, c :: Nil)
+                cc.constrain(pStrat, selStrat)
+                tpeVar.asProdStrat
+              case _ =>
+                val tpeVar = freshVar("sel_res", generatedForDef)
+                cc.constrain(pStrat, new FieldSel(sel.uid, instantiationId, nme, tpeVar.asConsStrat))
+                tpeVar.asProdStrat
             
     case v@Value.Ref(l) => l.asObj match
       case None =>
@@ -787,6 +792,7 @@ class GetCtorsTraverser(b: Block) extends BlockTraverser:
     case Instantiate(cls, args) =>
       if cls.asClsSymbol.isDefined then ctors += r.uid
       args.foreach(applyResult)
+    case Value.Arr(_) => ctors += r.uid
     case p: Path => if p.asObjSymbol.isDefined then ctors += r.uid
   applyBlock(b)
 

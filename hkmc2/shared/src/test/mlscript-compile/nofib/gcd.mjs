@@ -1,0 +1,830 @@
+import runtime from "./../Runtime.mjs";
+import Term from "./../Term.mjs";
+import NofibPrelude from "./NofibPrelude.mjs";
+let gcd1, g_inst_0_tsni, quotRem_inst_0_1_tsni, quotRem_inst_1_tsni, g_inst_2_tsni, quotRem_inst_2_1_tsni, map_inst_3_tsni, test_inst_4_tsni, gcdE_inst_4_5_tsni, g_inst_4_5_2_tsni, quotRem_inst_4_5_2_1_tsni, map_inst_4_3_tsni, testGcd_nofib_inst_6_tsni, test_inst_6_4_tsni, map_inst_6_4_3_tsni, gcdE_inst_6_4_5_tsni, g_inst_6_4_5_2_tsni, quotRem_inst_6_4_5_2_1_tsni, map_inst_7_tsni, map_inst_4_7_tsni, map_inst_6_4_7_tsni, match_u1u2u3_arm_Deforest_Arr_3_inst_0_tsni, match_v1v2v3_arm_Deforest_Arr_3_inst_0_tsni, match_u1u2u3_arm_Deforest_Arr_3_inst_2_tsni, match_v1v2v3_arm_Deforest_Arr_3_inst_2_tsni, match_u1u2u3_arm_Deforest_Arr_3_inst_4_5_2_tsni, match_v1v2v3_arm_Deforest_Arr_3_inst_4_5_2_tsni, match_v1v2v3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni, match_u1u2u3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni;
+match_u1u2u3_arm_Deforest_Arr_3_inst_0_tsni = function match_u1u2u3_arm_Deforest_Arr_3_inst_0_tsni(v1v2v3, _deforest_Deforest_Arr_3_0_inst_0_tsni, _deforest_Deforest_Arr_3_1_inst_0_tsni, _deforest_Deforest_Arr_3_2_inst_0_tsni) {
+  let first2, first1, first0, u1, u2, u3;
+  first0 = _deforest_Deforest_Arr_3_0_inst_0_tsni;
+  first1 = _deforest_Deforest_Arr_3_1_inst_0_tsni;
+  first2 = _deforest_Deforest_Arr_3_2_inst_0_tsni;
+  u1 = first0;
+  u2 = first1;
+  u3 = first2;
+  return runtime.safeCall(v1v2v3(u1, u2, u3))
+};
+match_v1v2v3_arm_Deforest_Arr_3_inst_0_tsni = function match_v1v2v3_arm_Deforest_Arr_3_inst_0_tsni(u1, u2, u3, _deforest_Deforest_Arr_3_0_inst_0_tsni, _deforest_Deforest_Arr_3_1_inst_0_tsni, _deforest_Deforest_Arr_3_2_inst_0_tsni) {
+  let first2, first1, first0, v1, v2, v3, scrut, scrut1, arr;
+  first0 = _deforest_Deforest_Arr_3_0_inst_0_tsni;
+  first1 = _deforest_Deforest_Arr_3_1_inst_0_tsni;
+  first2 = _deforest_Deforest_Arr_3_2_inst_0_tsni;
+  v1 = first0;
+  v2 = first1;
+  v3 = first2;
+  scrut1 = v3 == 0;
+  if (scrut1 === true) {
+    arr = [
+      u3,
+      u1,
+      u2
+    ];
+    return arr
+  } else {
+    scrut = quotRem_inst_0_1_tsni(u3, v3);
+    return runtime.safeCall(scrut(u1, u2, v1, v2, v3))
+  }
+};
+match_u1u2u3_arm_Deforest_Arr_3_inst_2_tsni = function match_u1u2u3_arm_Deforest_Arr_3_inst_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_0_inst_2_tsni, _deforest_Deforest_Arr_3_1_inst_2_tsni, _deforest_Deforest_Arr_3_2_inst_2_tsni) {
+  let first2, first1, first0, u1, u2, u3;
+  first0 = _deforest_Deforest_Arr_3_0_inst_2_tsni;
+  first1 = _deforest_Deforest_Arr_3_1_inst_2_tsni;
+  first2 = _deforest_Deforest_Arr_3_2_inst_2_tsni;
+  u1 = first0;
+  u2 = first1;
+  u3 = first2;
+  return runtime.safeCall(v1v2v3(u1, u2, u3))
+};
+match_v1v2v3_arm_Deforest_Arr_3_inst_2_tsni = function match_v1v2v3_arm_Deforest_Arr_3_inst_2_tsni(u1, u2, u3, _deforest_Deforest_Arr_3_0_inst_2_tsni, _deforest_Deforest_Arr_3_1_inst_2_tsni, _deforest_Deforest_Arr_3_2_inst_2_tsni) {
+  let first2, first1, first0, v1, v2, v3, scrut, scrut1, arr;
+  first0 = _deforest_Deforest_Arr_3_0_inst_2_tsni;
+  first1 = _deforest_Deforest_Arr_3_1_inst_2_tsni;
+  first2 = _deforest_Deforest_Arr_3_2_inst_2_tsni;
+  v1 = first0;
+  v2 = first1;
+  v3 = first2;
+  scrut1 = v3 == 0;
+  if (scrut1 === true) {
+    arr = [
+      u3,
+      u1,
+      u2
+    ];
+    return arr
+  } else {
+    scrut = quotRem_inst_2_1_tsni(u3, v3);
+    return runtime.safeCall(scrut(u1, u2, v1, v2, v3))
+  }
+};
+match_u1u2u3_arm_Deforest_Arr_3_inst_4_5_2_tsni = function match_u1u2u3_arm_Deforest_Arr_3_inst_4_5_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_0_inst_4_5_2_tsni, _deforest_Deforest_Arr_3_1_inst_4_5_2_tsni, _deforest_Deforest_Arr_3_2_inst_4_5_2_tsni) {
+  let first2, first1, first0, u1, u2, u3;
+  first0 = _deforest_Deforest_Arr_3_0_inst_4_5_2_tsni;
+  first1 = _deforest_Deforest_Arr_3_1_inst_4_5_2_tsni;
+  first2 = _deforest_Deforest_Arr_3_2_inst_4_5_2_tsni;
+  u1 = first0;
+  u2 = first1;
+  u3 = first2;
+  return runtime.safeCall(v1v2v3(u1, u2, u3))
+};
+match_v1v2v3_arm_Deforest_Arr_3_inst_4_5_2_tsni = function match_v1v2v3_arm_Deforest_Arr_3_inst_4_5_2_tsni(u1, u2, u3, _deforest_Deforest_Arr_3_0_inst_4_5_2_tsni, _deforest_Deforest_Arr_3_1_inst_4_5_2_tsni, _deforest_Deforest_Arr_3_2_inst_4_5_2_tsni) {
+  let first2, first1, first0, v1, v2, v3, scrut, scrut1, arr;
+  first0 = _deforest_Deforest_Arr_3_0_inst_4_5_2_tsni;
+  first1 = _deforest_Deforest_Arr_3_1_inst_4_5_2_tsni;
+  first2 = _deforest_Deforest_Arr_3_2_inst_4_5_2_tsni;
+  v1 = first0;
+  v2 = first1;
+  v3 = first2;
+  scrut1 = v3 == 0;
+  if (scrut1 === true) {
+    arr = [
+      u3,
+      u1,
+      u2
+    ];
+    return arr
+  } else {
+    scrut = quotRem_inst_4_5_2_1_tsni(u3, v3);
+    return runtime.safeCall(scrut(u1, u2, v1, v2, v3))
+  }
+};
+match_v1v2v3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni = function match_v1v2v3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni(u1, u2, u3, _deforest_Deforest_Arr_3_0_inst_6_4_5_2_tsni, _deforest_Deforest_Arr_3_1_inst_6_4_5_2_tsni, _deforest_Deforest_Arr_3_2_inst_6_4_5_2_tsni) {
+  let first2, first1, first0, v1, v2, v3, scrut, scrut1, arr;
+  first0 = _deforest_Deforest_Arr_3_0_inst_6_4_5_2_tsni;
+  first1 = _deforest_Deforest_Arr_3_1_inst_6_4_5_2_tsni;
+  first2 = _deforest_Deforest_Arr_3_2_inst_6_4_5_2_tsni;
+  v1 = first0;
+  v2 = first1;
+  v3 = first2;
+  scrut1 = v3 == 0;
+  if (scrut1 === true) {
+    arr = [
+      u3,
+      u1,
+      u2
+    ];
+    return arr
+  } else {
+    scrut = quotRem_inst_6_4_5_2_1_tsni(u3, v3);
+    return runtime.safeCall(scrut(u1, u2, v1, v2, v3))
+  }
+};
+match_u1u2u3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni = function match_u1u2u3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_0_inst_6_4_5_2_tsni, _deforest_Deforest_Arr_3_1_inst_6_4_5_2_tsni, _deforest_Deforest_Arr_3_2_inst_6_4_5_2_tsni) {
+  let first2, first1, first0, u1, u2, u3;
+  first0 = _deforest_Deforest_Arr_3_0_inst_6_4_5_2_tsni;
+  first1 = _deforest_Deforest_Arr_3_1_inst_6_4_5_2_tsni;
+  first2 = _deforest_Deforest_Arr_3_2_inst_6_4_5_2_tsni;
+  u1 = first0;
+  u2 = first1;
+  u3 = first2;
+  return runtime.safeCall(v1v2v3(u1, u2, u3))
+};
+g_inst_0_tsni = function g_inst_0_tsni(u1u2u3, v1v2v3) {
+  return runtime.safeCall(u1u2u3(v1v2v3))
+};
+quotRem_inst_0_1_tsni = function quotRem_inst_0_1_tsni(a, b) {
+  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  tmp = NofibPrelude.intQuot(a, b);
+  tmp1 = NofibPrelude.intRem(a, b);
+  _deforest_Deforest_Arr_2_0 = tmp;
+  _deforest_Deforest_Arr_2_1 = tmp1;
+  arr = (u1, u2, v1, v2, v3) => {
+    let first1, first0, q, r, arr1, tmp2, tmp3, tmp4, tmp5, arr2, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+    first0 = _deforest_Deforest_Arr_2_0;
+    first1 = _deforest_Deforest_Arr_2_1;
+    q = first0;
+    r = first1;
+    _deforest_Deforest_Arr_3_0 = v1;
+    _deforest_Deforest_Arr_3_1 = v2;
+    _deforest_Deforest_Arr_3_2 = v3;
+    arr1 = (v1v2v3) => {
+      return match_u1u2u3_arm_Deforest_Arr_3_inst_0_tsni(v1v2v3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+    };
+    tmp2 = q * v1;
+    tmp3 = u1 - tmp2;
+    tmp4 = q * v2;
+    tmp5 = u2 - tmp4;
+    _deforest_Deforest_Arr_3_01 = tmp3;
+    _deforest_Deforest_Arr_3_11 = tmp5;
+    _deforest_Deforest_Arr_3_21 = r;
+    arr2 = (u11, u21, u3) => {
+      return match_v1v2v3_arm_Deforest_Arr_3_inst_0_tsni(u11, u21, u3, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21)
+    };
+    return g_inst_0_tsni(arr1, arr2)
+  };
+  return arr
+};
+quotRem_inst_1_tsni = function quotRem_inst_1_tsni(a, b) {
+  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  tmp = NofibPrelude.intQuot(a, b);
+  tmp1 = NofibPrelude.intRem(a, b);
+  _deforest_Deforest_Arr_2_0 = tmp;
+  _deforest_Deforest_Arr_2_1 = tmp1;
+  arr = (u1, u2, v1, v2, v3) => {
+    let first1, first0, q, r, arr1, tmp2, tmp3, tmp4, tmp5, arr2, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+    first0 = _deforest_Deforest_Arr_2_0;
+    first1 = _deforest_Deforest_Arr_2_1;
+    q = first0;
+    r = first1;
+    _deforest_Deforest_Arr_3_01 = v1;
+    _deforest_Deforest_Arr_3_11 = v2;
+    _deforest_Deforest_Arr_3_21 = v3;
+    arr1 = (v1v2v3) => {
+      return match_u1u2u3_arm_Deforest_Arr_3_inst_0_tsni(v1v2v3, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21)
+    };
+    tmp2 = q * v1;
+    tmp3 = u1 - tmp2;
+    tmp4 = q * v2;
+    tmp5 = u2 - tmp4;
+    _deforest_Deforest_Arr_3_0 = tmp3;
+    _deforest_Deforest_Arr_3_1 = tmp5;
+    _deforest_Deforest_Arr_3_2 = r;
+    arr2 = (u11, u21, u3) => {
+      return match_v1v2v3_arm_Deforest_Arr_3_inst_0_tsni(u11, u21, u3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+    };
+    return g_inst_0_tsni(arr1, arr2)
+  };
+  return arr
+};
+g_inst_2_tsni = function g_inst_2_tsni(u1u2u3, v1v2v3) {
+  return runtime.safeCall(u1u2u3(v1v2v3))
+};
+quotRem_inst_2_1_tsni = function quotRem_inst_2_1_tsni(a, b) {
+  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  tmp = NofibPrelude.intQuot(a, b);
+  tmp1 = NofibPrelude.intRem(a, b);
+  _deforest_Deforest_Arr_2_0 = tmp;
+  _deforest_Deforest_Arr_2_1 = tmp1;
+  arr = (u1, u2, v1, v2, v3) => {
+    let first1, first0, q, r, arr1, tmp2, tmp3, tmp4, tmp5, arr2, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+    first0 = _deforest_Deforest_Arr_2_0;
+    first1 = _deforest_Deforest_Arr_2_1;
+    q = first0;
+    r = first1;
+    _deforest_Deforest_Arr_3_0 = v1;
+    _deforest_Deforest_Arr_3_1 = v2;
+    _deforest_Deforest_Arr_3_2 = v3;
+    arr1 = (v1v2v3) => {
+      return match_u1u2u3_arm_Deforest_Arr_3_inst_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+    };
+    tmp2 = q * v1;
+    tmp3 = u1 - tmp2;
+    tmp4 = q * v2;
+    tmp5 = u2 - tmp4;
+    _deforest_Deforest_Arr_3_01 = tmp3;
+    _deforest_Deforest_Arr_3_11 = tmp5;
+    _deforest_Deforest_Arr_3_21 = r;
+    arr2 = (u11, u21, u3) => {
+      return match_v1v2v3_arm_Deforest_Arr_3_inst_2_tsni(u11, u21, u3, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21)
+    };
+    return g_inst_2_tsni(arr1, arr2)
+  };
+  return arr
+};
+map_inst_3_tsni = function map_inst_3_tsni(f, xs) {
+  let param0, param1, x, xs1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  if (xs instanceof NofibPrelude.Cons.class) {
+    param0 = xs.head;
+    param1 = xs.tail;
+    x = param0;
+    xs1 = param1;
+    tmp = runtime.safeCall(f(x));
+    tmp1 = map_inst_3_tsni(f, xs1);
+    _deforest_Cons_head = tmp;
+    _deforest_Cons_tail = tmp1;
+    return (f1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = runtime.safeCall(f1(x));
+      tmp1 = map_inst_7_tsni(f1, xs1);
+      return NofibPrelude.Cons(tmp, tmp1)
+    }
+  } else if (xs instanceof NofibPrelude.Nil.class) {
+    return (f1) => {
+      return NofibPrelude.Nil
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+test_inst_4_tsni = function test_inst_4_tsni(d) {
+  let lscomp1, ns, ms, tripls, rs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, lambda, lambda1;
+  lscomp1 = function lscomp1(p1) {
+    let lscomp2, param0, param1, h1, t1;
+    if (p1 instanceof NofibPrelude.Nil.class) {
+      return NofibPrelude.Nil
+    } else if (p1 instanceof NofibPrelude.Cons.class) {
+      param0 = p1.head;
+      param1 = p1.tail;
+      h1 = param0;
+      t1 = param1;
+      lscomp2 = function lscomp2(p2) {
+        let param01, param11, h2, t2, arr, tmp9;
+        if (p2 instanceof NofibPrelude.Nil.class) {
+          return lscomp1(t1)
+        } else if (p2 instanceof NofibPrelude.Cons.class) {
+          param01 = p2.head;
+          param11 = p2.tail;
+          h2 = param01;
+          t2 = param11;
+          arr = [
+            h1,
+            h2
+          ];
+          tmp9 = lscomp2(t2);
+          return NofibPrelude.Cons(arr, tmp9)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      };
+      return lscomp2(ms)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  };
+  tmp = 5000 + d;
+  tmp1 = NofibPrelude.enumFromTo(5000, tmp);
+  ns = tmp1;
+  tmp2 = 10000 + d;
+  tmp3 = NofibPrelude.enumFromTo(10000, tmp2);
+  ms = tmp3;
+  lambda = (undefined, function (caseScrut) {
+    let first1, first0, x, y, tmp9, arr;
+    if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
+      first0 = caseScrut[0];
+      first1 = caseScrut[1];
+      x = first0;
+      y = first1;
+      tmp9 = gcdE_inst_4_5_tsni(x, y);
+      arr = [
+        x,
+        y,
+        tmp9
+      ];
+      return arr
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  });
+  tmp4 = lambda;
+  tmp5 = lscomp1(ns);
+  tmp6 = map_inst_4_3_tsni(tmp4, tmp5);
+  tripls = tmp6;
+  lambda1 = (undefined, function (caseScrut) {
+    let first2, first1, first0, d1, d2, first21, first11, first01, gg, u, v, tmp9, tmp10;
+    if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 3) {
+      first0 = caseScrut[0];
+      first1 = caseScrut[1];
+      first2 = caseScrut[2];
+      d1 = first0;
+      d2 = first1;
+      if (globalThis.Array.isArray(first2) && first2.length === 3) {
+        first01 = first2[0];
+        first11 = first2[1];
+        first21 = first2[2];
+        gg = first01;
+        u = first11;
+        v = first21;
+        tmp9 = gg + u;
+        tmp10 = tmp9 + v;
+        return NofibPrelude.abs(tmp10)
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  });
+  tmp7 = lambda1;
+  tmp8 = map_inst_4_7_tsni(tmp7, tripls);
+  rs = tmp8;
+  return gcd.max_(rs)
+};
+gcdE_inst_4_5_tsni = function gcdE_inst_4_5_tsni(x, y) {
+  let scrut, arr, arr1, arr2, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+  scrut = x == 0;
+  if (scrut === true) {
+    arr = [
+      y,
+      0,
+      1
+    ];
+    return arr
+  } else {
+    _deforest_Deforest_Arr_3_01 = 1;
+    _deforest_Deforest_Arr_3_11 = 0;
+    _deforest_Deforest_Arr_3_21 = x;
+    arr1 = (v1v2v3) => {
+      return match_u1u2u3_arm_Deforest_Arr_3_inst_4_5_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21)
+    };
+    _deforest_Deforest_Arr_3_0 = 0;
+    _deforest_Deforest_Arr_3_1 = 1;
+    _deforest_Deforest_Arr_3_2 = y;
+    arr2 = (u1, u2, u3) => {
+      return match_v1v2v3_arm_Deforest_Arr_3_inst_4_5_2_tsni(u1, u2, u3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+    };
+    return g_inst_4_5_2_tsni(arr1, arr2)
+  }
+};
+g_inst_4_5_2_tsni = function g_inst_4_5_2_tsni(u1u2u3, v1v2v3) {
+  return runtime.safeCall(u1u2u3(v1v2v3))
+};
+quotRem_inst_4_5_2_1_tsni = function quotRem_inst_4_5_2_1_tsni(a, b) {
+  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  tmp = NofibPrelude.intQuot(a, b);
+  tmp1 = NofibPrelude.intRem(a, b);
+  _deforest_Deforest_Arr_2_0 = tmp;
+  _deforest_Deforest_Arr_2_1 = tmp1;
+  arr = (u1, u2, v1, v2, v3) => {
+    let first1, first0, q, r, arr1, tmp2, tmp3, tmp4, tmp5, arr2, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+    first0 = _deforest_Deforest_Arr_2_0;
+    first1 = _deforest_Deforest_Arr_2_1;
+    q = first0;
+    r = first1;
+    _deforest_Deforest_Arr_3_0 = v1;
+    _deforest_Deforest_Arr_3_1 = v2;
+    _deforest_Deforest_Arr_3_2 = v3;
+    arr1 = (v1v2v3) => {
+      return match_u1u2u3_arm_Deforest_Arr_3_inst_4_5_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+    };
+    tmp2 = q * v1;
+    tmp3 = u1 - tmp2;
+    tmp4 = q * v2;
+    tmp5 = u2 - tmp4;
+    _deforest_Deforest_Arr_3_01 = tmp3;
+    _deforest_Deforest_Arr_3_11 = tmp5;
+    _deforest_Deforest_Arr_3_21 = r;
+    arr2 = (u11, u21, u3) => {
+      return match_v1v2v3_arm_Deforest_Arr_3_inst_4_5_2_tsni(u11, u21, u3, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21)
+    };
+    return g_inst_4_5_2_tsni(arr1, arr2)
+  };
+  return arr
+};
+map_inst_4_3_tsni = function map_inst_4_3_tsni(f, xs) {
+  let param0, param1, x, xs1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  if (xs instanceof NofibPrelude.Cons.class) {
+    param0 = xs.head;
+    param1 = xs.tail;
+    x = param0;
+    xs1 = param1;
+    tmp = runtime.safeCall(f(x));
+    tmp1 = map_inst_4_3_tsni(f, xs1);
+    _deforest_Cons_head = tmp;
+    _deforest_Cons_tail = tmp1;
+    return (f1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = runtime.safeCall(f1(x));
+      tmp1 = map_inst_4_7_tsni(f1, xs1);
+      return NofibPrelude.Cons(tmp, tmp1)
+    }
+  } else if (xs instanceof NofibPrelude.Nil.class) {
+    return (f1) => {
+      return NofibPrelude.Nil
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+testGcd_nofib_inst_6_tsni = function testGcd_nofib_inst_6_tsni(x) {
+  return test_inst_6_4_tsni(x)
+};
+test_inst_6_4_tsni = function test_inst_6_4_tsni(d) {
+  let lscomp1, ns, ms, tripls, rs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, lambda, lambda1;
+  lscomp1 = function lscomp1(p1) {
+    let lscomp2, param0, param1, h1, t1;
+    if (p1 instanceof NofibPrelude.Nil.class) {
+      return NofibPrelude.Nil
+    } else if (p1 instanceof NofibPrelude.Cons.class) {
+      param0 = p1.head;
+      param1 = p1.tail;
+      h1 = param0;
+      t1 = param1;
+      lscomp2 = function lscomp2(p2) {
+        let param01, param11, h2, t2, arr, tmp9;
+        if (p2 instanceof NofibPrelude.Nil.class) {
+          return lscomp1(t1)
+        } else if (p2 instanceof NofibPrelude.Cons.class) {
+          param01 = p2.head;
+          param11 = p2.tail;
+          h2 = param01;
+          t2 = param11;
+          arr = [
+            h1,
+            h2
+          ];
+          tmp9 = lscomp2(t2);
+          return NofibPrelude.Cons(arr, tmp9)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      };
+      return lscomp2(ms)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  };
+  tmp = 5000 + d;
+  tmp1 = NofibPrelude.enumFromTo(5000, tmp);
+  ns = tmp1;
+  tmp2 = 10000 + d;
+  tmp3 = NofibPrelude.enumFromTo(10000, tmp2);
+  ms = tmp3;
+  lambda = (undefined, function (caseScrut) {
+    let first1, first0, x, y, tmp9, arr;
+    if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
+      first0 = caseScrut[0];
+      first1 = caseScrut[1];
+      x = first0;
+      y = first1;
+      tmp9 = gcdE_inst_6_4_5_tsni(x, y);
+      arr = [
+        x,
+        y,
+        tmp9
+      ];
+      return arr
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  });
+  tmp4 = lambda;
+  tmp5 = lscomp1(ns);
+  tmp6 = map_inst_6_4_3_tsni(tmp4, tmp5);
+  tripls = tmp6;
+  lambda1 = (undefined, function (caseScrut) {
+    let first2, first1, first0, d1, d2, first21, first11, first01, gg, u, v, tmp9, tmp10;
+    if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 3) {
+      first0 = caseScrut[0];
+      first1 = caseScrut[1];
+      first2 = caseScrut[2];
+      d1 = first0;
+      d2 = first1;
+      if (globalThis.Array.isArray(first2) && first2.length === 3) {
+        first01 = first2[0];
+        first11 = first2[1];
+        first21 = first2[2];
+        gg = first01;
+        u = first11;
+        v = first21;
+        tmp9 = gg + u;
+        tmp10 = tmp9 + v;
+        return NofibPrelude.abs(tmp10)
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  });
+  tmp7 = lambda1;
+  tmp8 = map_inst_6_4_7_tsni(tmp7, tripls);
+  rs = tmp8;
+  return gcd.max_(rs)
+};
+map_inst_6_4_3_tsni = function map_inst_6_4_3_tsni(f, xs) {
+  let param0, param1, x, xs1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  if (xs instanceof NofibPrelude.Cons.class) {
+    param0 = xs.head;
+    param1 = xs.tail;
+    x = param0;
+    xs1 = param1;
+    tmp = runtime.safeCall(f(x));
+    tmp1 = map_inst_6_4_3_tsni(f, xs1);
+    _deforest_Cons_head = tmp;
+    _deforest_Cons_tail = tmp1;
+    return (f1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = runtime.safeCall(f1(x));
+      tmp1 = map_inst_6_4_7_tsni(f1, xs1);
+      return NofibPrelude.Cons(tmp, tmp1)
+    }
+  } else if (xs instanceof NofibPrelude.Nil.class) {
+    return (f1) => {
+      return NofibPrelude.Nil
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+gcdE_inst_6_4_5_tsni = function gcdE_inst_6_4_5_tsni(x, y) {
+  let scrut, arr, arr1, arr2, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+  scrut = x == 0;
+  if (scrut === true) {
+    arr = [
+      y,
+      0,
+      1
+    ];
+    return arr
+  } else {
+    _deforest_Deforest_Arr_3_0 = 1;
+    _deforest_Deforest_Arr_3_1 = 0;
+    _deforest_Deforest_Arr_3_2 = x;
+    arr1 = (v1v2v3) => {
+      return match_u1u2u3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+    };
+    _deforest_Deforest_Arr_3_01 = 0;
+    _deforest_Deforest_Arr_3_11 = 1;
+    _deforest_Deforest_Arr_3_21 = y;
+    arr2 = (u1, u2, u3) => {
+      return match_v1v2v3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni(u1, u2, u3, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21)
+    };
+    return g_inst_6_4_5_2_tsni(arr1, arr2)
+  }
+};
+g_inst_6_4_5_2_tsni = function g_inst_6_4_5_2_tsni(u1u2u3, v1v2v3) {
+  return runtime.safeCall(u1u2u3(v1v2v3))
+};
+quotRem_inst_6_4_5_2_1_tsni = function quotRem_inst_6_4_5_2_1_tsni(a, b) {
+  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  tmp = NofibPrelude.intQuot(a, b);
+  tmp1 = NofibPrelude.intRem(a, b);
+  _deforest_Deforest_Arr_2_0 = tmp;
+  _deforest_Deforest_Arr_2_1 = tmp1;
+  arr = (u1, u2, v1, v2, v3) => {
+    let first1, first0, q, r, arr1, tmp2, tmp3, tmp4, tmp5, arr2, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+    first0 = _deforest_Deforest_Arr_2_0;
+    first1 = _deforest_Deforest_Arr_2_1;
+    q = first0;
+    r = first1;
+    _deforest_Deforest_Arr_3_01 = v1;
+    _deforest_Deforest_Arr_3_11 = v2;
+    _deforest_Deforest_Arr_3_21 = v3;
+    arr1 = (v1v2v3) => {
+      return match_u1u2u3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21)
+    };
+    tmp2 = q * v1;
+    tmp3 = u1 - tmp2;
+    tmp4 = q * v2;
+    tmp5 = u2 - tmp4;
+    _deforest_Deforest_Arr_3_0 = tmp3;
+    _deforest_Deforest_Arr_3_1 = tmp5;
+    _deforest_Deforest_Arr_3_2 = r;
+    arr2 = (u11, u21, u3) => {
+      return match_v1v2v3_arm_Deforest_Arr_3_inst_6_4_5_2_tsni(u11, u21, u3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+    };
+    return g_inst_6_4_5_2_tsni(arr1, arr2)
+  };
+  return arr
+};
+map_inst_7_tsni = function map_inst_7_tsni(f, xs) {
+  return runtime.safeCall(xs(f))
+};
+map_inst_4_7_tsni = function map_inst_4_7_tsni(f, xs) {
+  return runtime.safeCall(xs(f))
+};
+map_inst_6_4_7_tsni = function map_inst_6_4_7_tsni(f, xs) {
+  return runtime.safeCall(xs(f))
+};
+(class gcd {
+  static {
+    gcd1 = gcd;
+  }
+  static g(u1u2u3, v1v2v3) {
+    let first2, first1, first0, u1, u2, u3, first21, first11, first01, v1, v2, v3, scrut, scrut1, arr;
+    if (globalThis.Array.isArray(u1u2u3) && u1u2u3.length === 3) {
+      first0 = u1u2u3[0];
+      first1 = u1u2u3[1];
+      first2 = u1u2u3[2];
+      u1 = first0;
+      u2 = first1;
+      u3 = first2;
+      if (globalThis.Array.isArray(v1v2v3) && v1v2v3.length === 3) {
+        first01 = v1v2v3[0];
+        first11 = v1v2v3[1];
+        first21 = v1v2v3[2];
+        v1 = first01;
+        v2 = first11;
+        v3 = first21;
+        scrut1 = v3 == 0;
+        if (scrut1 === true) {
+          arr = [
+            u3,
+            u1,
+            u2
+          ];
+          return arr
+        } else {
+          scrut = quotRem_inst_1_tsni(u3, v3);
+          return runtime.safeCall(scrut(u1, u2, v1, v2, v3))
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } 
+  static gcdE(x, y) {
+    let scrut, arr, arr1, arr2, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+    scrut = x == 0;
+    if (scrut === true) {
+      arr = [
+        y,
+        0,
+        1
+      ];
+      return arr
+    } else {
+      _deforest_Deforest_Arr_3_01 = 1;
+      _deforest_Deforest_Arr_3_11 = 0;
+      _deforest_Deforest_Arr_3_21 = x;
+      arr1 = (v1v2v31) => {
+        return match_u1u2u3_arm_Deforest_Arr_3_inst_2_tsni(v1v2v31, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21)
+      };
+      _deforest_Deforest_Arr_3_0 = 0;
+      _deforest_Deforest_Arr_3_1 = 1;
+      _deforest_Deforest_Arr_3_2 = y;
+      arr2 = (u1, u2, u3) => {
+        return match_v1v2v3_arm_Deforest_Arr_3_inst_2_tsni(u1, u2, u3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+      };
+      return g_inst_2_tsni(arr1, arr2)
+    }
+  } 
+  static max_(ls) {
+    let param0, param1, x1, param01, param11, y1, xs, scrut, x2, tmp, tmp1;
+    if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
+      x2 = param0;
+      x1 = param0;
+      if (param1 instanceof NofibPrelude.Nil.class) {
+        return x2
+      } else if (param1 instanceof NofibPrelude.Cons.class) {
+        param01 = param1.head;
+        param11 = param1.tail;
+        y1 = param01;
+        xs = param11;
+        scrut = x1 < y1;
+        if (scrut === true) {
+          tmp = NofibPrelude.Cons(y1, xs);
+          return gcd.max_(tmp)
+        } else {
+          tmp1 = NofibPrelude.Cons(x1, xs);
+          return gcd.max_(tmp1)
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } 
+  static test(d) {
+    let lscomp1, ns, ms, tripls, rs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, lambda, lambda1;
+    lscomp1 = function lscomp1(p1) {
+      let lscomp2, param0, param1, h1, t1;
+      if (p1 instanceof NofibPrelude.Nil.class) {
+        return NofibPrelude.Nil
+      } else if (p1 instanceof NofibPrelude.Cons.class) {
+        param0 = p1.head;
+        param1 = p1.tail;
+        h1 = param0;
+        t1 = param1;
+        lscomp2 = function lscomp2(p2) {
+          let param01, param11, h2, t2, arr, tmp9;
+          if (p2 instanceof NofibPrelude.Nil.class) {
+            return lscomp1(t1)
+          } else if (p2 instanceof NofibPrelude.Cons.class) {
+            param01 = p2.head;
+            param11 = p2.tail;
+            h2 = param01;
+            t2 = param11;
+            arr = [
+              h1,
+              h2
+            ];
+            tmp9 = lscomp2(t2);
+            return NofibPrelude.Cons(arr, tmp9)
+          } else {
+            throw new globalThis.Error("match error");
+          }
+        };
+        return lscomp2(ms)
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    };
+    tmp = 5000 + d;
+    tmp1 = NofibPrelude.enumFromTo(5000, tmp);
+    ns = tmp1;
+    tmp2 = 10000 + d;
+    tmp3 = NofibPrelude.enumFromTo(10000, tmp2);
+    ms = tmp3;
+    lambda = (undefined, function (caseScrut) {
+      let first1, first0, x1, y1, tmp9, arr;
+      if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
+        first0 = caseScrut[0];
+        first1 = caseScrut[1];
+        x1 = first0;
+        y1 = first1;
+        tmp9 = gcd.gcdE(x1, y1);
+        arr = [
+          x1,
+          y1,
+          tmp9
+        ];
+        return arr
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    });
+    tmp4 = lambda;
+    tmp5 = lscomp1(ns);
+    tmp6 = map_inst_3_tsni(tmp4, tmp5);
+    tripls = tmp6;
+    lambda1 = (undefined, function (caseScrut) {
+      let first2, first1, first0, d1, d2, first21, first11, first01, gg, u, v, tmp9, tmp10;
+      if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 3) {
+        first0 = caseScrut[0];
+        first1 = caseScrut[1];
+        first2 = caseScrut[2];
+        d1 = first0;
+        d2 = first1;
+        if (globalThis.Array.isArray(first2) && first2.length === 3) {
+          first01 = first2[0];
+          first11 = first2[1];
+          first21 = first2[2];
+          gg = first01;
+          u = first11;
+          v = first21;
+          tmp9 = gg + u;
+          tmp10 = tmp9 + v;
+          return NofibPrelude.abs(tmp10)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    });
+    tmp7 = lambda1;
+    tmp8 = map_inst_7_tsni(tmp7, tripls);
+    rs = tmp8;
+    return gcd.max_(rs)
+  } 
+  static testGcd_nofib(x1) {
+    return test_inst_4_tsni(x1)
+  } 
+  static main() {
+    return testGcd_nofib_inst_6_tsni(40)
+  }
+  static toString() { return "gcd"; }
+});
+let gcd = gcd1; export default gcd;

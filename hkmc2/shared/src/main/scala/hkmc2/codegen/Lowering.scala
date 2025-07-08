@@ -225,7 +225,9 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
     case st.Asc(lhs, rhs) =>
       term(lhs, inStmtPos = inStmtPos)(k)
     case st.Tup(fs) =>
-      args(fs)(args => k(Value.Arr(args)))
+      args(fs): args =>
+        val tmpSym = TempSymbol(N, "arr")
+        Assign(tmpSym, Value.Arr(args), k(Value.Ref(tmpSym)))
     case ref @ st.Ref(sym) =>
       sym match
       case ctx.builtins.source.bms | ctx.builtins.js.bms | ctx.builtins.debug.bms | ctx.builtins.annotations.bms =>
