@@ -32,22 +32,26 @@ fun test(a) =
 //│       tmp = Predef.print(a);
 //│     }
 //│     f(c) {
-//│       return [
+//│       let arr;
+//│       arr = [
 //│         a,
 //│         this.b,
 //│         c
-//│       ]
+//│       ];
+//│       return arr
 //│     } 
 //│     g(d) {
 //│       let h;
 //│       const this$Inner = this;
 //│       h = function h(e) {
-//│         return [
+//│         let arr;
+//│         arr = [
 //│           a,
 //│           this$Inner.b,
 //│           d,
 //│           e
-//│         ]
+//│         ];
+//│         return arr
 //│       };
 //│       return h(d)
 //│     }
@@ -77,17 +81,19 @@ fun test(a) =
 //│ JS (unsanitized):
 //│ let test2;
 //│ test2 = function test(a) {
-//│   let C11, C21, tmp1, tmp2;
+//│   let C11, C21, tmp1, tmp2, arr;
 //│   C11 = function C1(b1) {
 //│     return new C1.class(b1);
 //│   };
 //│   C11.class = class C1 {
 //│     constructor(b) {
+//│       let arr1;
 //│       this.b = b;
-//│       Predef.print([
+//│       arr1 = [
 //│         a,
 //│         this.b
-//│       ])
+//│       ];
+//│       Predef.print(arr1)
 //│     }
 //│     toString() { return "C1(" + runtime.render(this.b) + ")"; }
 //│   };
@@ -96,20 +102,23 @@ fun test(a) =
 //│   };
 //│   C21.class = class C2 {
 //│     constructor(b) {
+//│       let arr1;
 //│       this.b = b;
-//│       Predef.print([
+//│       arr1 = [
 //│         a,
 //│         this.b
-//│       ])
+//│       ];
+//│       Predef.print(arr1)
 //│     }
 //│     toString() { return "C2(" + runtime.render(this.b) + ")"; }
 //│   };
 //│   tmp1 = C11(1);
 //│   tmp2 = C21(2);
-//│   return [
+//│   arr = [
 //│     tmp1,
 //│     tmp2
-//│   ]
+//│   ];
+//│   return arr
 //│ };
 
 test(123)

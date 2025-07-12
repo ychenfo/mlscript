@@ -549,7 +549,7 @@ let Runtime1;
     return runtime.safeCall(globalThis.console.log(tmp2))
   } 
   static debugContTrace(contTrace) {
-    let scrut, scrut1, vis2, hl2, cur, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
+    let scrut, scrut1, vis2, hl2, cur, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, arr, tmp5, tmp6, arr1, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
     if (contTrace instanceof Runtime.ContTrace.class) {
       tmp = globalThis.console.log("resumed: ", contTrace.resumed);
       scrut = contTrace.last === contTrace;
@@ -568,13 +568,15 @@ let Runtime1;
       vis2 = tmp3;
       tmp4 = new globalThis.Map();
       hl2 = tmp4;
-      tmp5 = new globalThis.Set([
+      arr = [
         contTrace.last
-      ]);
+      ];
+      tmp5 = new globalThis.Set(arr);
       tmp6 = hl2.set("last", tmp5);
-      tmp7 = new globalThis.Set([
+      arr1 = [
         contTrace.lastHandler
-      ]);
+      ];
+      tmp7 = new globalThis.Set(arr1);
       tmp8 = hl2.set("last-handler", tmp7);
       tmp9 = Runtime.showFunctionContChain(contTrace.next, hl2, vis2, 0);
       tmp10 = runtime.safeCall(globalThis.console.log(tmp9));

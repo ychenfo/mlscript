@@ -136,7 +136,7 @@ algc_inst_0_tsni = function algc_inst_0_tsni(m, n, xs, ys) {
   }
 };
 zip_inst_0_1_tsni = function zip_inst_0_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -147,10 +147,9 @@ zip_inst_0_1_tsni = function zip_inst_0_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_0_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -168,6 +167,8 @@ zip_inst_0_1_tsni = function zip_inst_0_1_tsni(xs, ys) {
           return findk_inst_0_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_0_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -187,7 +188,7 @@ zip_inst_0_1_tsni = function zip_inst_0_1_tsni(xs, ys) {
   }
 };
 zip_inst_0_2_tsni = function zip_inst_0_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -198,10 +199,9 @@ zip_inst_0_2_tsni = function zip_inst_0_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_0_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -219,6 +219,8 @@ zip_inst_0_2_tsni = function zip_inst_0_2_tsni(xs, ys) {
           return findk_inst_0_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_0_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -317,7 +319,7 @@ algc_inst_3_tsni = function algc_inst_3_tsni(m, n, xs, ys) {
   }
 };
 zip_inst_3_1_tsni = function zip_inst_3_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -328,10 +330,9 @@ zip_inst_3_1_tsni = function zip_inst_3_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_3_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -349,6 +350,8 @@ zip_inst_3_1_tsni = function zip_inst_3_1_tsni(xs, ys) {
           return findk_inst_3_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_3_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -368,7 +371,7 @@ zip_inst_3_1_tsni = function zip_inst_3_1_tsni(xs, ys) {
   }
 };
 zip_inst_3_2_tsni = function zip_inst_3_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -379,10 +382,9 @@ zip_inst_3_2_tsni = function zip_inst_3_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_3_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -400,6 +402,8 @@ zip_inst_3_2_tsni = function zip_inst_3_2_tsni(xs, ys) {
           return findk_inst_3_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_3_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -419,7 +423,7 @@ zip_inst_3_2_tsni = function zip_inst_3_2_tsni(xs, ys) {
   }
 };
 zip_inst_2_tsni = function zip_inst_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -430,10 +434,9 @@ zip_inst_2_tsni = function zip_inst_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -451,6 +454,8 @@ zip_inst_2_tsni = function zip_inst_2_tsni(xs, ys) {
           return findk_inst_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -549,7 +554,7 @@ algc_inst_4_tsni = function algc_inst_4_tsni(m, n, xs, ys) {
   }
 };
 zip_inst_4_1_tsni = function zip_inst_4_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -560,10 +565,9 @@ zip_inst_4_1_tsni = function zip_inst_4_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_4_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -581,6 +585,8 @@ zip_inst_4_1_tsni = function zip_inst_4_1_tsni(xs, ys) {
           return findk_inst_4_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_4_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -600,7 +606,7 @@ zip_inst_4_1_tsni = function zip_inst_4_1_tsni(xs, ys) {
   }
 };
 zip_inst_4_2_tsni = function zip_inst_4_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -611,10 +617,9 @@ zip_inst_4_2_tsni = function zip_inst_4_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_4_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -632,6 +637,8 @@ zip_inst_4_2_tsni = function zip_inst_4_2_tsni(xs, ys) {
           return findk_inst_4_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_4_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -730,7 +737,7 @@ algc_inst_5_tsni = function algc_inst_5_tsni(m, n, xs, ys) {
   }
 };
 zip_inst_5_1_tsni = function zip_inst_5_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -741,10 +748,9 @@ zip_inst_5_1_tsni = function zip_inst_5_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_5_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -762,6 +768,8 @@ zip_inst_5_1_tsni = function zip_inst_5_1_tsni(xs, ys) {
           return findk_inst_5_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_5_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -781,7 +789,7 @@ zip_inst_5_1_tsni = function zip_inst_5_1_tsni(xs, ys) {
   }
 };
 zip_inst_5_2_tsni = function zip_inst_5_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -792,10 +800,9 @@ zip_inst_5_2_tsni = function zip_inst_5_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_5_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -813,6 +820,8 @@ zip_inst_5_2_tsni = function zip_inst_5_2_tsni(xs, ys) {
           return findk_inst_5_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_5_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -832,7 +841,7 @@ zip_inst_5_2_tsni = function zip_inst_5_2_tsni(xs, ys) {
   }
 };
 zip_inst_1_tsni = function zip_inst_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -843,10 +852,9 @@ zip_inst_1_tsni = function zip_inst_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -864,6 +872,8 @@ zip_inst_1_tsni = function zip_inst_1_tsni(xs, ys) {
           return findk_inst_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -962,7 +972,7 @@ algc_inst_6_tsni = function algc_inst_6_tsni(m, n, xs, ys) {
   }
 };
 zip_inst_6_1_tsni = function zip_inst_6_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -973,10 +983,9 @@ zip_inst_6_1_tsni = function zip_inst_6_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_6_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -994,6 +1003,8 @@ zip_inst_6_1_tsni = function zip_inst_6_1_tsni(xs, ys) {
           return findk_inst_6_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_6_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -1013,7 +1024,7 @@ zip_inst_6_1_tsni = function zip_inst_6_1_tsni(xs, ys) {
   }
 };
 zip_inst_6_2_tsni = function zip_inst_6_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1024,10 +1035,9 @@ zip_inst_6_2_tsni = function zip_inst_6_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_6_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -1045,6 +1055,8 @@ zip_inst_6_2_tsni = function zip_inst_6_2_tsni(xs, ys) {
           return findk_inst_6_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_6_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -1150,7 +1162,7 @@ algc_inst_7_6_tsni = function algc_inst_7_6_tsni(m, n, xs, ys) {
   }
 };
 zip_inst_7_6_2_tsni = function zip_inst_7_6_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1161,10 +1173,9 @@ zip_inst_7_6_2_tsni = function zip_inst_7_6_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_7_6_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -1182,6 +1193,8 @@ zip_inst_7_6_2_tsni = function zip_inst_7_6_2_tsni(xs, ys) {
           return findk_inst_7_6_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_7_6_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -1201,7 +1214,7 @@ zip_inst_7_6_2_tsni = function zip_inst_7_6_2_tsni(xs, ys) {
   }
 };
 zip_inst_7_6_1_tsni = function zip_inst_7_6_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1212,10 +1225,9 @@ zip_inst_7_6_1_tsni = function zip_inst_7_6_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_7_6_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -1233,6 +1245,8 @@ zip_inst_7_6_1_tsni = function zip_inst_7_6_1_tsni(xs, ys) {
           return findk_inst_7_6_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_7_6_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -1344,7 +1358,7 @@ algc_inst_8_7_6_tsni = function algc_inst_8_7_6_tsni(m, n, xs, ys) {
   }
 };
 zip_inst_8_7_6_1_tsni = function zip_inst_8_7_6_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1355,10 +1369,9 @@ zip_inst_8_7_6_1_tsni = function zip_inst_8_7_6_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_8_7_6_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -1376,6 +1389,8 @@ zip_inst_8_7_6_1_tsni = function zip_inst_8_7_6_1_tsni(xs, ys) {
           return findk_inst_8_7_6_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_8_7_6_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -1395,7 +1410,7 @@ zip_inst_8_7_6_1_tsni = function zip_inst_8_7_6_1_tsni(xs, ys) {
   }
 };
 zip_inst_8_7_6_2_tsni = function zip_inst_8_7_6_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1406,10 +1421,9 @@ zip_inst_8_7_6_2_tsni = function zip_inst_8_7_6_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_8_7_6_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -1427,6 +1441,8 @@ zip_inst_8_7_6_2_tsni = function zip_inst_8_7_6_2_tsni(xs, ys) {
           return findk_inst_8_7_6_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_8_7_6_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -1541,7 +1557,7 @@ algc_inst_9_8_7_6_tsni = function algc_inst_9_8_7_6_tsni(m, n, xs, ys) {
   }
 };
 zip_inst_9_8_7_6_2_tsni = function zip_inst_9_8_7_6_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1552,10 +1568,9 @@ zip_inst_9_8_7_6_2_tsni = function zip_inst_9_8_7_6_2_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_9_8_7_6_2_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -1573,6 +1588,8 @@ zip_inst_9_8_7_6_2_tsni = function zip_inst_9_8_7_6_2_tsni(xs, ys) {
           return findk_inst_9_8_7_6_11_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_9_8_7_6_2_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -1592,7 +1609,7 @@ zip_inst_9_8_7_6_2_tsni = function zip_inst_9_8_7_6_2_tsni(xs, ys) {
   }
 };
 zip_inst_9_8_7_6_1_tsni = function zip_inst_9_8_7_6_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1603,10 +1620,9 @@ zip_inst_9_8_7_6_1_tsni = function zip_inst_9_8_7_6_1_tsni(xs, ys) {
       param11 = ys.tail;
       y = param01;
       ys1 = param11;
-      tmp = zip_inst_9_8_7_6_1_tsni(xs1, ys1);
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      _deforest_Cons_head = (k, km, m, param12) => {
+      arr = (k, km, m, param12) => {
         let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
@@ -1624,6 +1640,8 @@ zip_inst_9_8_7_6_1_tsni = function zip_inst_9_8_7_6_1_tsni(xs, ys) {
           return findk_inst_9_8_7_6_10_tsni(tmp4, km, m, xys)
         }
       };
+      tmp = zip_inst_9_8_7_6_1_tsni(xs1, ys1);
+      _deforest_Cons_head = arr;
       _deforest_Cons_tail = tmp;
       return (k, km, m) => {
         let param02, param12;
@@ -1701,7 +1719,7 @@ findk_inst_9_8_7_6_10_tsni = function findk_inst_9_8_7_6_10_tsni(k, km, m, ls) {
     lcss1 = lcss;
   }
   static algb2(x, k0j1, k1j1, yss) {
-    let param0, param1, first1, first0, y, k0j, ys, kjcurr, scrut, tmp, tmp1;
+    let param0, param1, first1, first0, y, k0j, ys, kjcurr, scrut, tmp, arr, tmp1;
     if (yss instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (yss instanceof NofibPrelude.Cons.class) {
@@ -1720,11 +1738,12 @@ findk_inst_9_8_7_6_10_tsni = function findk_inst_9_8_7_6_10_tsni(k, km, m, ls) {
           tmp = NofibPrelude.max(k1j1, k0j);
         }
         kjcurr = tmp;
-        tmp1 = lcss.algb2(x, k0j, kjcurr, ys);
-        return NofibPrelude.Cons([
+        arr = [
           y,
           kjcurr
-        ], tmp1)
+        ];
+        tmp1 = lcss.algb2(x, k0j, kjcurr, ys);
+        return NofibPrelude.Cons(arr, tmp1)
       } else {
         throw new globalThis.Error("match error");
       }
@@ -1750,17 +1769,18 @@ findk_inst_9_8_7_6_10_tsni = function findk_inst_9_8_7_6_10_tsni(k, km, m, ls) {
   static algb(xs, ys) {
     let listcomp_fun, tmp, tmp1;
     listcomp_fun = function listcomp_fun(listcomp_fun_para) {
-      let param0, param1, listcomp_fun_ls_h, listcomp_fun_ls_t, tmp2;
+      let param0, param1, listcomp_fun_ls_h, listcomp_fun_ls_t, arr, tmp2;
       if (listcomp_fun_para instanceof NofibPrelude.Cons.class) {
         param0 = listcomp_fun_para.head;
         param1 = listcomp_fun_para.tail;
         listcomp_fun_ls_h = param0;
         listcomp_fun_ls_t = param1;
-        tmp2 = listcomp_fun(listcomp_fun_ls_t);
-        return NofibPrelude.Cons([
+        arr = [
           listcomp_fun_ls_h,
           0
-        ], tmp2)
+        ];
+        tmp2 = listcomp_fun(listcomp_fun_ls_t);
+        return NofibPrelude.Cons(arr, tmp2)
       } else if (listcomp_fun_para instanceof NofibPrelude.Nil.class) {
         return NofibPrelude.Nil
       } else {

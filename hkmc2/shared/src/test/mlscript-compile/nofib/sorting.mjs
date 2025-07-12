@@ -335,7 +335,7 @@ lines_inst_3_tsni = function lines_inst_3_tsni(s) {
   }
 };
 break__inst_3_4_tsni = function break__inst_3_4_tsni(p, ls) {
-  let param0, param1, x1, xs2, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     arr = [
       NofibPrelude.Nil,
@@ -348,12 +348,12 @@ break__inst_3_4_tsni = function break__inst_3_4_tsni(p, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    x1 = param0;
-    xs2 = param1;
-    scrut1 = runtime.safeCall(p(x1));
+    x = param0;
+    xs = param1;
+    scrut1 = runtime.safeCall(p(x));
     if (scrut1 === true) {
-      _deforest_Cons_head = x1;
-      _deforest_Cons_tail = xs2;
+      _deforest_Cons_head = x;
+      _deforest_Cons_tail = xs;
       tmp = () => {
         let param01, param11, s__, tmp2;
         param01 = _deforest_Cons_head;
@@ -367,13 +367,13 @@ break__inst_3_4_tsni = function break__inst_3_4_tsni(p, ls) {
       ];
       return arr1
     } else {
-      scrut = break__inst_3_4_tsni(p, xs2);
+      scrut = break__inst_3_4_tsni(p, xs);
       if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
         first0 = scrut[0];
         first1 = scrut[1];
         ys = first0;
         zs = first1;
-        tmp1 = NofibPrelude.Cons(x1, ys);
+        tmp1 = NofibPrelude.Cons(x, ys);
         arr2 = [
           tmp1,
           zs
@@ -388,7 +388,7 @@ break__inst_3_4_tsni = function break__inst_3_4_tsni(p, ls) {
   }
 };
 break__inst_4_tsni = function break__inst_4_tsni(p, ls) {
-  let param0, param1, x1, xs2, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     arr = [
       NofibPrelude.Nil,
@@ -401,12 +401,12 @@ break__inst_4_tsni = function break__inst_4_tsni(p, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    x1 = param0;
-    xs2 = param1;
-    scrut1 = runtime.safeCall(p(x1));
+    x = param0;
+    xs = param1;
+    scrut1 = runtime.safeCall(p(x));
     if (scrut1 === true) {
-      _deforest_Cons_head = x1;
-      _deforest_Cons_tail = xs2;
+      _deforest_Cons_head = x;
+      _deforest_Cons_tail = xs;
       tmp = () => {
         let param01, param11, s__, tmp2;
         param01 = _deforest_Cons_head;
@@ -420,13 +420,13 @@ break__inst_4_tsni = function break__inst_4_tsni(p, ls) {
       ];
       return arr1
     } else {
-      scrut = break__inst_4_tsni(p, xs2);
+      scrut = break__inst_4_tsni(p, xs);
       if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
         first0 = scrut[0];
         first1 = scrut[1];
         ys = first0;
         zs = first1;
-        tmp1 = NofibPrelude.Cons(x1, ys);
+        tmp1 = NofibPrelude.Cons(x, ys);
         arr2 = [
           tmp1,
           zs
@@ -769,7 +769,7 @@ lines_inst_10_tsni = function lines_inst_10_tsni(s) {
   }
 };
 break__inst_10_4_tsni = function break__inst_10_4_tsni(p, ls) {
-  let param0, param1, x1, xs2, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     arr = [
       NofibPrelude.Nil,
@@ -782,12 +782,12 @@ break__inst_10_4_tsni = function break__inst_10_4_tsni(p, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    x1 = param0;
-    xs2 = param1;
-    scrut1 = runtime.safeCall(p(x1));
+    x = param0;
+    xs = param1;
+    scrut1 = runtime.safeCall(p(x));
     if (scrut1 === true) {
-      _deforest_Cons_head = x1;
-      _deforest_Cons_tail = xs2;
+      _deforest_Cons_head = x;
+      _deforest_Cons_tail = xs;
       tmp = () => {
         let param01, param11, s__, tmp2;
         param01 = _deforest_Cons_head;
@@ -801,13 +801,13 @@ break__inst_10_4_tsni = function break__inst_10_4_tsni(p, ls) {
       ];
       return arr1
     } else {
-      scrut = break__inst_10_4_tsni(p, xs2);
+      scrut = break__inst_10_4_tsni(p, xs);
       if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
         first0 = scrut[0];
         first1 = scrut[1];
         ys = first0;
         zs = first1;
-        tmp1 = NofibPrelude.Cons(x1, ys);
+        tmp1 = NofibPrelude.Cons(x, ys);
         arr2 = [
           tmp1,
           zs
@@ -1498,7 +1498,7 @@ lines_inst_11_10_tsni = function lines_inst_11_10_tsni(s) {
   }
 };
 break__inst_11_10_4_tsni = function break__inst_11_10_4_tsni(p, ls) {
-  let param0, param1, x1, xs2, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     arr = [
       NofibPrelude.Nil,
@@ -1511,12 +1511,12 @@ break__inst_11_10_4_tsni = function break__inst_11_10_4_tsni(p, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    x1 = param0;
-    xs2 = param1;
-    scrut1 = runtime.safeCall(p(x1));
+    x = param0;
+    xs = param1;
+    scrut1 = runtime.safeCall(p(x));
     if (scrut1 === true) {
-      _deforest_Cons_head = x1;
-      _deforest_Cons_tail = xs2;
+      _deforest_Cons_head = x;
+      _deforest_Cons_tail = xs;
       tmp = () => {
         let param01, param11, s__, tmp2;
         param01 = _deforest_Cons_head;
@@ -1530,13 +1530,13 @@ break__inst_11_10_4_tsni = function break__inst_11_10_4_tsni(p, ls) {
       ];
       return arr1
     } else {
-      scrut = break__inst_11_10_4_tsni(p, xs2);
+      scrut = break__inst_11_10_4_tsni(p, xs);
       if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
         first0 = scrut[0];
         first1 = scrut[1];
         ys = first0;
         zs = first1;
-        tmp1 = NofibPrelude.Cons(x1, ys);
+        tmp1 = NofibPrelude.Cons(x, ys);
         arr2 = [
           tmp1,
           zs
@@ -1768,7 +1768,7 @@ lines_inst_23_11_10_tsni = function lines_inst_23_11_10_tsni(s) {
   }
 };
 break__inst_23_11_10_4_tsni = function break__inst_23_11_10_4_tsni(p, ls) {
-  let param0, param1, x1, xs2, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     arr = [
       NofibPrelude.Nil,
@@ -1781,12 +1781,12 @@ break__inst_23_11_10_4_tsni = function break__inst_23_11_10_4_tsni(p, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    x1 = param0;
-    xs2 = param1;
-    scrut1 = runtime.safeCall(p(x1));
+    x = param0;
+    xs = param1;
+    scrut1 = runtime.safeCall(p(x));
     if (scrut1 === true) {
-      _deforest_Cons_head = x1;
-      _deforest_Cons_tail = xs2;
+      _deforest_Cons_head = x;
+      _deforest_Cons_tail = xs;
       tmp = () => {
         let param01, param11, s__, tmp2;
         param01 = _deforest_Cons_head;
@@ -1800,13 +1800,13 @@ break__inst_23_11_10_4_tsni = function break__inst_23_11_10_4_tsni(p, ls) {
       ];
       return arr1
     } else {
-      scrut = break__inst_23_11_10_4_tsni(p, xs2);
+      scrut = break__inst_23_11_10_4_tsni(p, xs);
       if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
         first0 = scrut[0];
         first1 = scrut[1];
         ys = first0;
         zs = first1;
-        tmp1 = NofibPrelude.Cons(x1, ys);
+        tmp1 = NofibPrelude.Cons(x, ys);
         arr2 = [
           tmp1,
           zs

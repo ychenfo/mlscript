@@ -37,11 +37,13 @@ data class Outer(a, b) with
 //│         Predef.print(tmp5)
 //│       }
 //│       i1(d) {
-//│         return [
+//│         let arr;
+//│         arr = [
 //│           this$Outer.b,
 //│           this.c,
 //│           d
-//│         ]
+//│         ];
+//│         return arr
 //│       }
 //│       toString() { return "Inner(" + runtime.render(this.c) + ")"; }
 //│     };
