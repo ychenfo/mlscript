@@ -424,10 +424,8 @@ f(AA(3), 3, true, 10) + f(AA(5), 4, false, 20)
 //│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@2@inst__tsni --> Ref($scrut)@inst__tsni@AA
 //│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@3@inst__tsni --> Ref($scrut)@inst__tsni@AA
 //│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@AA
 //│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(5)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@3@inst_1_tsni --> Ref($scrut)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@2@inst_1_tsni --> Ref($scrut)@inst_1_tsni@AA
 //│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@5@inst__tsni --> Ref(x)@inst_1_tsni@AA
 //│ -------------- executing -------------
 //│ = 41

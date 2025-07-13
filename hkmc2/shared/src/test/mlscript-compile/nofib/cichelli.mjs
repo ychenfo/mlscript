@@ -2,7 +2,7 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let cichelli1, concat_inst_0_tsni, append_inst_0_1_tsni, map_inst_2_tsni, ends_inst_3_tsni, attribkeys_inst_4_tsni, map_inst_4_5_tsni, blocked__inst_6_tsni, ends_inst_6_7_tsni, blocked__inst_8_tsni, ends_inst_8_7_tsni, assocm_inst_9_tsni, findhash__inst_10_tsni, hinsert_inst_10_11_tsni, assocm_inst_10_9_tsni, findhash_inst_12_tsni, findhash__inst_12_10_tsni, assocm_inst_12_10_9_tsni, hinsert_inst_12_10_11_tsni, blocked_inst_13_tsni, blocked__inst_13_8_tsni, ends_inst_13_8_7_tsni, append_inst_13_8_14_tsni, append_inst_15_tsni, take_inst_16_tsni, cichelli_inst_17_tsni, take_inst_17_16_tsni, append_inst_17_15_tsni, blocked_inst_17_13_tsni, blocked__inst_17_13_8_tsni, ends_inst_17_13_8_7_tsni, findhash_inst_17_12_tsni, findhash__inst_17_12_10_tsni, hinsert_inst_17_12_10_11_tsni, assocm_inst_17_12_10_9_tsni, append_inst_17_13_8_14_tsni, prog_inst_18_tsni, cichelli_inst_18_17_tsni, findhash_inst_18_17_12_tsni, findhash__inst_18_17_12_10_tsni, assocm_inst_18_17_12_10_9_tsni, hinsert_inst_18_17_12_10_11_tsni, blocked_inst_18_17_13_tsni, blocked__inst_18_17_13_8_tsni, ends_inst_18_17_13_8_7_tsni, append_inst_18_17_13_8_14_tsni, append_inst_18_17_15_tsni, take_inst_18_17_16_tsni, histo_inst_19_tsni, foldr_inst_19_20_tsni, subset_inst_6_21_tsni, all_inst_6_21_22_tsni, subset_inst_8_21_tsni, all_inst_8_21_22_tsni, hash_inst_10_23_tsni, minm_inst_10_11_24_tsni, maxm_inst_10_11_25_tsni, inList_inst_10_11_26_tsni, inList_inst_12_10_11_26_tsni, maxm_inst_12_10_11_25_tsni, minm_inst_12_10_11_24_tsni, hash_inst_12_10_23_tsni, subset_inst_13_8_21_tsni, all_inst_13_8_21_22_tsni, attribkeys_inst_27_tsni, map_inst_27_5_tsni, attribkeys_inst_17_27_tsni, map_inst_17_27_5_tsni, subset_inst_17_13_8_21_tsni, all_inst_17_13_8_21_22_tsni, hash_inst_17_12_10_23_tsni, minm_inst_17_12_10_11_24_tsni, maxm_inst_17_12_10_11_25_tsni, inList_inst_17_12_10_11_26_tsni, inList_inst_18_17_12_10_11_26_tsni, maxm_inst_18_17_12_10_11_25_tsni, minm_inst_18_17_12_10_11_24_tsni, hash_inst_18_17_12_10_23_tsni, subset_inst_18_17_13_8_21_tsni, all_inst_18_17_13_8_21_22_tsni, attribkeys_inst_18_17_27_tsni, map_inst_18_17_27_5_tsni, match_xs_arm_Cons_inst_0_1_tsni, match_ls_arm_Cons_inst_6_21_22_tsni, match_ls_arm_Cons_inst_8_21_22_tsni, match_first0_arm_None_inst__tsni, match_first0_arm_None_inst_10_tsni, match_first0_arm_None_inst_12_10_tsni, match_ls_arm_Cons_inst_13_8_21_22_tsni, match_ks_arm_Cons_inst_12_10_tsni, match_xs_arm_Cons_inst_27_5_tsni, match_xs_arm_Nil_inst_27_5_tsni, match_xs_arm_Nil_inst_17_27_5_tsni, match_xs_arm_Cons_inst_17_27_5_tsni, match_ls_arm_Cons_inst_17_13_8_21_22_tsni, match_first0_arm_None_inst_17_12_10_tsni, match_ks_arm_Cons_inst_17_12_10_tsni, match_first0_arm_None_inst_18_17_12_10_tsni, match_ls_arm_Cons_inst_18_17_13_8_21_22_tsni, match_ks_arm_Cons_inst_18_17_12_10_tsni, match_xs_arm_Cons_inst_18_17_27_5_tsni, match_xs_arm_Nil_inst_18_17_27_5_tsni;
+let cichelli1, concat_inst_0_tsni, append_inst_0_1_tsni, map_inst_2_tsni, ends_inst_3_tsni, attribkeys_inst_4_tsni, map_inst_4_5_tsni, blocked__inst_6_tsni, ends_inst_6_7_tsni, blocked__inst_8_tsni, ends_inst_8_7_tsni, assocm_inst_9_tsni, findhash__inst_10_tsni, assocm_inst_10_9_tsni, findhash_inst_11_tsni, findhash__inst_11_10_tsni, assocm_inst_11_10_9_tsni, blocked_inst_12_tsni, blocked__inst_12_8_tsni, ends_inst_12_8_7_tsni, append_inst_12_8_13_tsni, append_inst_14_tsni, take_inst_15_tsni, cichelli_inst_16_tsni, take_inst_16_15_tsni, append_inst_16_14_tsni, blocked_inst_16_12_tsni, blocked__inst_16_12_8_tsni, ends_inst_16_12_8_7_tsni, findhash_inst_16_11_tsni, findhash__inst_16_11_10_tsni, assocm_inst_16_11_10_9_tsni, append_inst_16_12_8_13_tsni, prog_inst_17_tsni, cichelli_inst_17_16_tsni, findhash_inst_17_16_11_tsni, findhash__inst_17_16_11_10_tsni, assocm_inst_17_16_11_10_9_tsni, blocked_inst_17_16_12_tsni, blocked__inst_17_16_12_8_tsni, ends_inst_17_16_12_8_7_tsni, append_inst_17_16_12_8_13_tsni, append_inst_17_16_14_tsni, take_inst_17_16_15_tsni, histo_inst_18_tsni, foldr_inst_18_19_tsni, subset_inst_6_20_tsni, all_inst_6_20_21_tsni, subset_inst_8_20_tsni, all_inst_8_20_21_tsni, hash_inst_10_22_tsni, hash_inst_11_10_22_tsni, subset_inst_12_8_20_tsni, all_inst_12_8_20_21_tsni, attribkeys_inst_23_tsni, map_inst_23_5_tsni, attribkeys_inst_16_23_tsni, map_inst_16_23_5_tsni, subset_inst_16_12_8_20_tsni, all_inst_16_12_8_20_21_tsni, hash_inst_16_11_10_22_tsni, hash_inst_17_16_11_10_22_tsni, subset_inst_17_16_12_8_20_tsni, all_inst_17_16_12_8_20_21_tsni, attribkeys_inst_17_16_23_tsni, map_inst_17_16_23_5_tsni, match_xs_arm_Cons_inst_0_1_tsni, match_ls_arm_Cons_inst_6_20_21_tsni, match_ls_arm_Cons_inst_8_20_21_tsni, match_first0_arm_None_inst__tsni, match_first0_arm_None_inst_10_tsni, match_first0_arm_None_inst_11_10_tsni, match_ls_arm_Cons_inst_12_8_20_21_tsni, match_ks_arm_Cons_inst_11_10_tsni, match_xs_arm_Cons_inst_23_5_tsni, match_xs_arm_Nil_inst_23_5_tsni, match_xs_arm_Nil_inst_16_23_5_tsni, match_xs_arm_Cons_inst_16_23_5_tsni, match_ls_arm_Cons_inst_16_12_8_20_21_tsni, match_first0_arm_None_inst_16_11_10_tsni, match_ks_arm_Cons_inst_16_11_10_tsni, match_first0_arm_None_inst_17_16_11_10_tsni, match_ls_arm_Cons_inst_17_16_12_8_20_21_tsni, match_ks_arm_Cons_inst_17_16_11_10_tsni, match_xs_arm_Cons_inst_17_16_23_5_tsni, match_xs_arm_Nil_inst_17_16_23_5_tsni;
 match_xs_arm_Cons_inst_0_1_tsni = function match_xs_arm_Cons_inst_0_1_tsni(ys, _deforest_Cons_head_inst_0_1_tsni, _deforest_Cons_tail_inst_0_1_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_0_1_tsni;
@@ -18,32 +18,32 @@ match_xs_arm_Cons_inst_0_1_tsni = function match_xs_arm_Cons_inst_0_1_tsni(ys, _
     param11 = _deforest_Cons_tail;
     h = param01;
     t = param11;
-    tmp1 = foldr_inst_19_20_tsni(f, z, t);
+    tmp1 = foldr_inst_18_19_tsni(f, z, t);
     return runtime.safeCall(f(h, tmp1))
   }
 };
-match_ls_arm_Cons_inst_6_21_22_tsni = function match_ls_arm_Cons_inst_6_21_22_tsni(p, _deforest_Cons_head_inst_6_21_22_tsni, _deforest_Cons_tail_inst_6_21_22_tsni) {
+match_ls_arm_Cons_inst_6_20_21_tsni = function match_ls_arm_Cons_inst_6_20_21_tsni(p, _deforest_Cons_head_inst_6_20_21_tsni, _deforest_Cons_tail_inst_6_20_21_tsni) {
   let param0, param1, h, t, scrut;
-  param0 = _deforest_Cons_head_inst_6_21_22_tsni;
-  param1 = _deforest_Cons_tail_inst_6_21_22_tsni;
+  param0 = _deforest_Cons_head_inst_6_20_21_tsni;
+  param1 = _deforest_Cons_tail_inst_6_20_21_tsni;
   h = param0;
   t = param1;
   scrut = runtime.safeCall(p(h));
   if (scrut === true) {
-    return all_inst_6_21_22_tsni(p, t)
+    return all_inst_6_20_21_tsni(p, t)
   } else {
     return false
   }
 };
-match_ls_arm_Cons_inst_8_21_22_tsni = function match_ls_arm_Cons_inst_8_21_22_tsni(p, _deforest_Cons_head_inst_8_21_22_tsni, _deforest_Cons_tail_inst_8_21_22_tsni) {
+match_ls_arm_Cons_inst_8_20_21_tsni = function match_ls_arm_Cons_inst_8_20_21_tsni(p, _deforest_Cons_head_inst_8_20_21_tsni, _deforest_Cons_tail_inst_8_20_21_tsni) {
   let param0, param1, h, t, scrut;
-  param0 = _deforest_Cons_head_inst_8_21_22_tsni;
-  param1 = _deforest_Cons_tail_inst_8_21_22_tsni;
+  param0 = _deforest_Cons_head_inst_8_20_21_tsni;
+  param1 = _deforest_Cons_tail_inst_8_20_21_tsni;
   h = param0;
   t = param1;
   scrut = runtime.safeCall(p(h));
   if (scrut === true) {
-    return all_inst_8_21_22_tsni(p, t)
+    return all_inst_8_20_21_tsni(p, t)
   } else {
     return false
   }
@@ -270,7 +270,7 @@ match_first0_arm_None_inst_10_tsni = function match_first0_arm_None_inst_10_tsni
     throw new globalThis.Error("match error");
   }
 };
-match_first0_arm_None_inst_12_10_tsni = function match_first0_arm_None_inst_12_10_tsni(tryy, a, z, first1) {
+match_first0_arm_None_inst_11_10_tsni = function match_first0_arm_None_inst_11_10_tsni(tryy, a, z, first1) {
   let lscomp1, param0, zc, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda, lambda1, lambda2;
   if (first1 instanceof NofibPrelude.None.class) {
     scrut = a === z;
@@ -381,23 +381,23 @@ match_first0_arm_None_inst_12_10_tsni = function match_first0_arm_None_inst_12_1
     throw new globalThis.Error("match error");
   }
 };
-match_ls_arm_Cons_inst_13_8_21_22_tsni = function match_ls_arm_Cons_inst_13_8_21_22_tsni(p, _deforest_Cons_head_inst_13_8_21_22_tsni, _deforest_Cons_tail_inst_13_8_21_22_tsni) {
+match_ls_arm_Cons_inst_12_8_20_21_tsni = function match_ls_arm_Cons_inst_12_8_20_21_tsni(p, _deforest_Cons_head_inst_12_8_20_21_tsni, _deforest_Cons_tail_inst_12_8_20_21_tsni) {
   let param0, param1, h, t, scrut;
-  param0 = _deforest_Cons_head_inst_13_8_21_22_tsni;
-  param1 = _deforest_Cons_tail_inst_13_8_21_22_tsni;
+  param0 = _deforest_Cons_head_inst_12_8_20_21_tsni;
+  param1 = _deforest_Cons_tail_inst_12_8_20_21_tsni;
   h = param0;
   t = param1;
   scrut = runtime.safeCall(p(h));
   if (scrut === true) {
-    return all_inst_13_8_21_22_tsni(p, t)
+    return all_inst_12_8_20_21_tsni(p, t)
   } else {
     return false
   }
 };
-match_ks_arm_Cons_inst_12_10_tsni = function match_ks_arm_Cons_inst_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head_inst_12_10_tsni, _deforest_Cons_tail_inst_12_10_tsni) {
+match_ks_arm_Cons_inst_11_10_tsni = function match_ks_arm_Cons_inst_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head_inst_11_10_tsni, _deforest_Cons_tail_inst_11_10_tsni) {
   let tryy, param0, param1, param01, param11, param2, param3, s, a, z, n, ks, scrut, tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-  param0 = _deforest_Cons_head_inst_12_10_tsni;
-  param1 = _deforest_Cons_tail_inst_12_10_tsni;
+  param0 = _deforest_Cons_head_inst_11_10_tsni;
+  param1 = _deforest_Cons_tail_inst_11_10_tsni;
   if (param0 instanceof cichelli.K.class) {
     param01 = param0.s;
     param11 = param0.c1;
@@ -409,7 +409,7 @@ match_ks_arm_Cons_inst_12_10_tsni = function match_ks_arm_Cons_inst_12_10_tsni(k
     n = param3;
     ks = param1;
     tryy = function tryy(newAssocs) {
-      let newCharAssocs, scrut1, tmp2, tmp3, tmp4, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
+      let newCharAssocs, scrut1, param02, newKeyHashSet, tmp2, tmp3, tmp4, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
       tmp2 = NofibPrelude.append(newAssocs, charAssocs);
       newCharAssocs = tmp2;
       _deforest_K_s = s;
@@ -417,8 +417,8 @@ match_ks_arm_Cons_inst_12_10_tsni = function match_ks_arm_Cons_inst_12_10_tsni(k
       _deforest_K_c2 = z;
       _deforest_K_i = n;
       tmp3 = (cvs) => {
-        let param02, param12, param21, param31, a1, z1, n1, tmp5, tmp6, tmp7;
-        param02 = _deforest_K_s;
+        let param03, param12, param21, param31, a1, z1, n1, tmp5, tmp6, tmp7;
+        param03 = _deforest_K_s;
         param12 = _deforest_K_c1;
         param21 = _deforest_K_c2;
         param31 = _deforest_K_i;
@@ -430,11 +430,19 @@ match_ks_arm_Cons_inst_12_10_tsni = function match_ks_arm_Cons_inst_12_10_tsni(k
         tmp7 = cichelli.assoc(z1, cvs);
         return tmp6 + tmp7
       };
-      tmp4 = hash_inst_12_10_23_tsni(newCharAssocs, tmp3);
-      scrut1 = hinsert_inst_12_10_11_tsni(tmp4, keyHashSet);
-      return runtime.safeCall(scrut1(ks, newCharAssocs))
+      tmp4 = hash_inst_11_10_22_tsni(newCharAssocs, tmp3);
+      scrut1 = cichelli.hinsert(tmp4, keyHashSet);
+      if (scrut1 instanceof NofibPrelude.None.class) {
+        return runtime.safeCall(cichelli.NotEver(1))
+      } else if (scrut1 instanceof NofibPrelude.Some.class) {
+        param02 = scrut1.x;
+        newKeyHashSet = param02;
+        return findhash__inst_11_10_tsni(newKeyHashSet, newCharAssocs, ks)
+      } else {
+        throw new globalThis.Error("match error");
+      }
     };
-    tmp = assocm_inst_12_10_9_tsni(a, charAssocs);
+    tmp = assocm_inst_11_10_9_tsni(a, charAssocs);
     tmp1 = cichelli.assocm(z, charAssocs);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = tmp1;
@@ -450,46 +458,46 @@ match_ks_arm_Cons_inst_12_10_tsni = function match_ks_arm_Cons_inst_12_10_tsni(k
     throw new globalThis.Error("match error");
   }
 };
-match_xs_arm_Cons_inst_27_5_tsni = function match_xs_arm_Cons_inst_27_5_tsni(f, _deforest_Cons_head_inst_27_5_tsni, _deforest_Cons_tail_inst_27_5_tsni) {
+match_xs_arm_Cons_inst_23_5_tsni = function match_xs_arm_Cons_inst_23_5_tsni(f, _deforest_Cons_head_inst_23_5_tsni, _deforest_Cons_tail_inst_23_5_tsni) {
   let param0, param1, x, xs, tmp, tmp1;
-  param0 = _deforest_Cons_head_inst_27_5_tsni;
-  param1 = _deforest_Cons_tail_inst_27_5_tsni;
+  param0 = _deforest_Cons_head_inst_23_5_tsni;
+  param1 = _deforest_Cons_tail_inst_23_5_tsni;
   x = param0;
   xs = param1;
   tmp = runtime.safeCall(f(x));
-  tmp1 = map_inst_27_5_tsni(f, xs);
+  tmp1 = map_inst_23_5_tsni(f, xs);
   return NofibPrelude.Cons(tmp, tmp1)
 };
-match_xs_arm_Nil_inst_27_5_tsni = function match_xs_arm_Nil_inst_27_5_tsni(f) {
+match_xs_arm_Nil_inst_23_5_tsni = function match_xs_arm_Nil_inst_23_5_tsni(f) {
   return NofibPrelude.Nil
 };
-match_xs_arm_Nil_inst_17_27_5_tsni = function match_xs_arm_Nil_inst_17_27_5_tsni(f) {
+match_xs_arm_Nil_inst_16_23_5_tsni = function match_xs_arm_Nil_inst_16_23_5_tsni(f) {
   return NofibPrelude.Nil
 };
-match_xs_arm_Cons_inst_17_27_5_tsni = function match_xs_arm_Cons_inst_17_27_5_tsni(f, _deforest_Cons_head_inst_17_27_5_tsni, _deforest_Cons_tail_inst_17_27_5_tsni) {
+match_xs_arm_Cons_inst_16_23_5_tsni = function match_xs_arm_Cons_inst_16_23_5_tsni(f, _deforest_Cons_head_inst_16_23_5_tsni, _deforest_Cons_tail_inst_16_23_5_tsni) {
   let param0, param1, x, xs, tmp, tmp1;
-  param0 = _deforest_Cons_head_inst_17_27_5_tsni;
-  param1 = _deforest_Cons_tail_inst_17_27_5_tsni;
+  param0 = _deforest_Cons_head_inst_16_23_5_tsni;
+  param1 = _deforest_Cons_tail_inst_16_23_5_tsni;
   x = param0;
   xs = param1;
   tmp = runtime.safeCall(f(x));
-  tmp1 = map_inst_17_27_5_tsni(f, xs);
+  tmp1 = map_inst_16_23_5_tsni(f, xs);
   return NofibPrelude.Cons(tmp, tmp1)
 };
-match_ls_arm_Cons_inst_17_13_8_21_22_tsni = function match_ls_arm_Cons_inst_17_13_8_21_22_tsni(p, _deforest_Cons_head_inst_17_13_8_21_22_tsni, _deforest_Cons_tail_inst_17_13_8_21_22_tsni) {
+match_ls_arm_Cons_inst_16_12_8_20_21_tsni = function match_ls_arm_Cons_inst_16_12_8_20_21_tsni(p, _deforest_Cons_head_inst_16_12_8_20_21_tsni, _deforest_Cons_tail_inst_16_12_8_20_21_tsni) {
   let param0, param1, h, t, scrut;
-  param0 = _deforest_Cons_head_inst_17_13_8_21_22_tsni;
-  param1 = _deforest_Cons_tail_inst_17_13_8_21_22_tsni;
+  param0 = _deforest_Cons_head_inst_16_12_8_20_21_tsni;
+  param1 = _deforest_Cons_tail_inst_16_12_8_20_21_tsni;
   h = param0;
   t = param1;
   scrut = runtime.safeCall(p(h));
   if (scrut === true) {
-    return all_inst_17_13_8_21_22_tsni(p, t)
+    return all_inst_16_12_8_20_21_tsni(p, t)
   } else {
     return false
   }
 };
-match_first0_arm_None_inst_17_12_10_tsni = function match_first0_arm_None_inst_17_12_10_tsni(tryy, a, z, first1) {
+match_first0_arm_None_inst_16_11_10_tsni = function match_first0_arm_None_inst_16_11_10_tsni(tryy, a, z, first1) {
   let lscomp1, param0, zc, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda, lambda1, lambda2;
   if (first1 instanceof NofibPrelude.None.class) {
     scrut = a === z;
@@ -600,10 +608,10 @@ match_first0_arm_None_inst_17_12_10_tsni = function match_first0_arm_None_inst_1
     throw new globalThis.Error("match error");
   }
 };
-match_ks_arm_Cons_inst_17_12_10_tsni = function match_ks_arm_Cons_inst_17_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head_inst_17_12_10_tsni, _deforest_Cons_tail_inst_17_12_10_tsni) {
+match_ks_arm_Cons_inst_16_11_10_tsni = function match_ks_arm_Cons_inst_16_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head_inst_16_11_10_tsni, _deforest_Cons_tail_inst_16_11_10_tsni) {
   let tryy, param0, param1, param01, param11, param2, param3, s, a, z, n, ks, scrut, tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-  param0 = _deforest_Cons_head_inst_17_12_10_tsni;
-  param1 = _deforest_Cons_tail_inst_17_12_10_tsni;
+  param0 = _deforest_Cons_head_inst_16_11_10_tsni;
+  param1 = _deforest_Cons_tail_inst_16_11_10_tsni;
   if (param0 instanceof cichelli.K.class) {
     param01 = param0.s;
     param11 = param0.c1;
@@ -615,7 +623,7 @@ match_ks_arm_Cons_inst_17_12_10_tsni = function match_ks_arm_Cons_inst_17_12_10_
     n = param3;
     ks = param1;
     tryy = function tryy(newAssocs) {
-      let newCharAssocs, scrut1, tmp2, tmp3, tmp4, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
+      let newCharAssocs, scrut1, param02, newKeyHashSet, tmp2, tmp3, tmp4, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
       tmp2 = NofibPrelude.append(newAssocs, charAssocs);
       newCharAssocs = tmp2;
       _deforest_K_s = s;
@@ -623,8 +631,8 @@ match_ks_arm_Cons_inst_17_12_10_tsni = function match_ks_arm_Cons_inst_17_12_10_
       _deforest_K_c2 = z;
       _deforest_K_i = n;
       tmp3 = (cvs) => {
-        let param02, param12, param21, param31, a1, z1, n1, tmp5, tmp6, tmp7;
-        param02 = _deforest_K_s;
+        let param03, param12, param21, param31, a1, z1, n1, tmp5, tmp6, tmp7;
+        param03 = _deforest_K_s;
         param12 = _deforest_K_c1;
         param21 = _deforest_K_c2;
         param31 = _deforest_K_i;
@@ -636,11 +644,19 @@ match_ks_arm_Cons_inst_17_12_10_tsni = function match_ks_arm_Cons_inst_17_12_10_
         tmp7 = cichelli.assoc(z1, cvs);
         return tmp6 + tmp7
       };
-      tmp4 = hash_inst_17_12_10_23_tsni(newCharAssocs, tmp3);
-      scrut1 = hinsert_inst_17_12_10_11_tsni(tmp4, keyHashSet);
-      return runtime.safeCall(scrut1(ks, newCharAssocs))
+      tmp4 = hash_inst_16_11_10_22_tsni(newCharAssocs, tmp3);
+      scrut1 = cichelli.hinsert(tmp4, keyHashSet);
+      if (scrut1 instanceof NofibPrelude.None.class) {
+        return runtime.safeCall(cichelli.NotEver(1))
+      } else if (scrut1 instanceof NofibPrelude.Some.class) {
+        param02 = scrut1.x;
+        newKeyHashSet = param02;
+        return findhash__inst_16_11_10_tsni(newKeyHashSet, newCharAssocs, ks)
+      } else {
+        throw new globalThis.Error("match error");
+      }
     };
-    tmp = assocm_inst_17_12_10_9_tsni(a, charAssocs);
+    tmp = assocm_inst_16_11_10_9_tsni(a, charAssocs);
     tmp1 = cichelli.assocm(z, charAssocs);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = tmp1;
@@ -656,7 +672,7 @@ match_ks_arm_Cons_inst_17_12_10_tsni = function match_ks_arm_Cons_inst_17_12_10_
     throw new globalThis.Error("match error");
   }
 };
-match_first0_arm_None_inst_18_17_12_10_tsni = function match_first0_arm_None_inst_18_17_12_10_tsni(tryy, a, z, first1) {
+match_first0_arm_None_inst_17_16_11_10_tsni = function match_first0_arm_None_inst_17_16_11_10_tsni(tryy, a, z, first1) {
   let lscomp1, param0, zc, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda, lambda1, lambda2;
   if (first1 instanceof NofibPrelude.None.class) {
     scrut = a === z;
@@ -767,23 +783,23 @@ match_first0_arm_None_inst_18_17_12_10_tsni = function match_first0_arm_None_ins
     throw new globalThis.Error("match error");
   }
 };
-match_ls_arm_Cons_inst_18_17_13_8_21_22_tsni = function match_ls_arm_Cons_inst_18_17_13_8_21_22_tsni(p, _deforest_Cons_head_inst_18_17_13_8_21_22_tsni, _deforest_Cons_tail_inst_18_17_13_8_21_22_tsni) {
+match_ls_arm_Cons_inst_17_16_12_8_20_21_tsni = function match_ls_arm_Cons_inst_17_16_12_8_20_21_tsni(p, _deforest_Cons_head_inst_17_16_12_8_20_21_tsni, _deforest_Cons_tail_inst_17_16_12_8_20_21_tsni) {
   let param0, param1, h, t, scrut;
-  param0 = _deforest_Cons_head_inst_18_17_13_8_21_22_tsni;
-  param1 = _deforest_Cons_tail_inst_18_17_13_8_21_22_tsni;
+  param0 = _deforest_Cons_head_inst_17_16_12_8_20_21_tsni;
+  param1 = _deforest_Cons_tail_inst_17_16_12_8_20_21_tsni;
   h = param0;
   t = param1;
   scrut = runtime.safeCall(p(h));
   if (scrut === true) {
-    return all_inst_18_17_13_8_21_22_tsni(p, t)
+    return all_inst_17_16_12_8_20_21_tsni(p, t)
   } else {
     return false
   }
 };
-match_ks_arm_Cons_inst_18_17_12_10_tsni = function match_ks_arm_Cons_inst_18_17_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head_inst_18_17_12_10_tsni, _deforest_Cons_tail_inst_18_17_12_10_tsni) {
+match_ks_arm_Cons_inst_17_16_11_10_tsni = function match_ks_arm_Cons_inst_17_16_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head_inst_17_16_11_10_tsni, _deforest_Cons_tail_inst_17_16_11_10_tsni) {
   let tryy, param0, param1, param01, param11, param2, param3, s, a, z, n, ks, scrut, tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-  param0 = _deforest_Cons_head_inst_18_17_12_10_tsni;
-  param1 = _deforest_Cons_tail_inst_18_17_12_10_tsni;
+  param0 = _deforest_Cons_head_inst_17_16_11_10_tsni;
+  param1 = _deforest_Cons_tail_inst_17_16_11_10_tsni;
   if (param0 instanceof cichelli.K.class) {
     param01 = param0.s;
     param11 = param0.c1;
@@ -795,7 +811,7 @@ match_ks_arm_Cons_inst_18_17_12_10_tsni = function match_ks_arm_Cons_inst_18_17_
     n = param3;
     ks = param1;
     tryy = function tryy(newAssocs) {
-      let newCharAssocs, scrut1, tmp2, tmp3, tmp4, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
+      let newCharAssocs, scrut1, param02, newKeyHashSet, tmp2, tmp3, tmp4, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
       tmp2 = NofibPrelude.append(newAssocs, charAssocs);
       newCharAssocs = tmp2;
       _deforest_K_s = s;
@@ -803,8 +819,8 @@ match_ks_arm_Cons_inst_18_17_12_10_tsni = function match_ks_arm_Cons_inst_18_17_
       _deforest_K_c2 = z;
       _deforest_K_i = n;
       tmp3 = (cvs) => {
-        let param02, param12, param21, param31, a1, z1, n1, tmp5, tmp6, tmp7;
-        param02 = _deforest_K_s;
+        let param03, param12, param21, param31, a1, z1, n1, tmp5, tmp6, tmp7;
+        param03 = _deforest_K_s;
         param12 = _deforest_K_c1;
         param21 = _deforest_K_c2;
         param31 = _deforest_K_i;
@@ -816,11 +832,19 @@ match_ks_arm_Cons_inst_18_17_12_10_tsni = function match_ks_arm_Cons_inst_18_17_
         tmp7 = cichelli.assoc(z1, cvs);
         return tmp6 + tmp7
       };
-      tmp4 = hash_inst_18_17_12_10_23_tsni(newCharAssocs, tmp3);
-      scrut1 = hinsert_inst_18_17_12_10_11_tsni(tmp4, keyHashSet);
-      return runtime.safeCall(scrut1(ks, newCharAssocs))
+      tmp4 = hash_inst_17_16_11_10_22_tsni(newCharAssocs, tmp3);
+      scrut1 = cichelli.hinsert(tmp4, keyHashSet);
+      if (scrut1 instanceof NofibPrelude.None.class) {
+        return runtime.safeCall(cichelli.NotEver(1))
+      } else if (scrut1 instanceof NofibPrelude.Some.class) {
+        param02 = scrut1.x;
+        newKeyHashSet = param02;
+        return findhash__inst_17_16_11_10_tsni(newKeyHashSet, newCharAssocs, ks)
+      } else {
+        throw new globalThis.Error("match error");
+      }
     };
-    tmp = assocm_inst_18_17_12_10_9_tsni(a, charAssocs);
+    tmp = assocm_inst_17_16_11_10_9_tsni(a, charAssocs);
     tmp1 = cichelli.assocm(z, charAssocs);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = tmp1;
@@ -836,17 +860,17 @@ match_ks_arm_Cons_inst_18_17_12_10_tsni = function match_ks_arm_Cons_inst_18_17_
     throw new globalThis.Error("match error");
   }
 };
-match_xs_arm_Cons_inst_18_17_27_5_tsni = function match_xs_arm_Cons_inst_18_17_27_5_tsni(f, _deforest_Cons_head_inst_18_17_27_5_tsni, _deforest_Cons_tail_inst_18_17_27_5_tsni) {
+match_xs_arm_Cons_inst_17_16_23_5_tsni = function match_xs_arm_Cons_inst_17_16_23_5_tsni(f, _deforest_Cons_head_inst_17_16_23_5_tsni, _deforest_Cons_tail_inst_17_16_23_5_tsni) {
   let param0, param1, x, xs, tmp, tmp1;
-  param0 = _deforest_Cons_head_inst_18_17_27_5_tsni;
-  param1 = _deforest_Cons_tail_inst_18_17_27_5_tsni;
+  param0 = _deforest_Cons_head_inst_17_16_23_5_tsni;
+  param1 = _deforest_Cons_tail_inst_17_16_23_5_tsni;
   x = param0;
   xs = param1;
   tmp = runtime.safeCall(f(x));
-  tmp1 = map_inst_18_17_27_5_tsni(f, xs);
+  tmp1 = map_inst_17_16_23_5_tsni(f, xs);
   return NofibPrelude.Cons(tmp, tmp1)
 };
-match_xs_arm_Nil_inst_18_17_27_5_tsni = function match_xs_arm_Nil_inst_18_17_27_5_tsni(f) {
+match_xs_arm_Nil_inst_17_16_23_5_tsni = function match_xs_arm_Nil_inst_17_16_23_5_tsni(f) {
   return NofibPrelude.Nil
 };
 concat_inst_0_tsni = function concat_inst_0_tsni(ls) {
@@ -953,7 +977,7 @@ blocked__inst_6_tsni = function blocked__inst_6_tsni(ds, ls) {
     lambda = (undefined, function (x) {
       let tmp4;
       tmp4 = ends_inst_6_7_tsni(x);
-      return subset_inst_6_21_tsni(tmp4, ds_)
+      return subset_inst_6_20_tsni(tmp4, ds_)
     });
     scrut = cichelli.partition_(lambda, ks);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
@@ -985,12 +1009,12 @@ ends_inst_6_7_tsni = function ends_inst_6_7_tsni(k) {
       return true
     };
     tmp = (p) => {
-      return match_ls_arm_Cons_inst_6_21_22_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
+      return match_ls_arm_Cons_inst_6_20_21_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp;
     return (p) => {
-      return match_ls_arm_Cons_inst_6_21_22_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_ls_arm_Cons_inst_6_20_21_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
@@ -1011,7 +1035,7 @@ blocked__inst_8_tsni = function blocked__inst_8_tsni(ds, ls) {
     lambda = (undefined, function (x) {
       let tmp4;
       tmp4 = ends_inst_8_7_tsni(x);
-      return subset_inst_8_21_tsni(tmp4, ds_)
+      return subset_inst_8_20_tsni(tmp4, ds_)
     });
     scrut = cichelli.partition_(lambda, ks);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
@@ -1043,12 +1067,12 @@ ends_inst_8_7_tsni = function ends_inst_8_7_tsni(k) {
       return true
     };
     tmp = (p) => {
-      return match_ls_arm_Cons_inst_8_21_22_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
+      return match_ls_arm_Cons_inst_8_20_21_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp;
     return (p) => {
-      return match_ls_arm_Cons_inst_8_21_22_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_ls_arm_Cons_inst_8_20_21_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
@@ -1126,7 +1150,7 @@ findhash__inst_10_tsni = function findhash__inst_10_tsni(keyHashSet, charAssocs,
       n = param3;
       ks1 = param1;
       tryy = function tryy(newAssocs) {
-        let newCharAssocs, scrut1, tmp2, tmp3, tmp4, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
+        let newCharAssocs, scrut1, param02, newKeyHashSet, tmp2, tmp3, tmp4, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
         tmp2 = NofibPrelude.append(newAssocs, charAssocs);
         newCharAssocs = tmp2;
         _deforest_K_s = s;
@@ -1134,8 +1158,8 @@ findhash__inst_10_tsni = function findhash__inst_10_tsni(keyHashSet, charAssocs,
         _deforest_K_c2 = z;
         _deforest_K_i = n;
         tmp3 = (cvs) => {
-          let param02, param12, param21, param31, a1, z1, n1, tmp5, tmp6, tmp7;
-          param02 = _deforest_K_s;
+          let param03, param12, param21, param31, a1, z1, n1, tmp5, tmp6, tmp7;
+          param03 = _deforest_K_s;
           param12 = _deforest_K_c1;
           param21 = _deforest_K_c2;
           param31 = _deforest_K_i;
@@ -1147,9 +1171,17 @@ findhash__inst_10_tsni = function findhash__inst_10_tsni(keyHashSet, charAssocs,
           tmp7 = cichelli.assoc(z1, cvs);
           return tmp6 + tmp7
         };
-        tmp4 = hash_inst_10_23_tsni(newCharAssocs, tmp3);
-        scrut1 = hinsert_inst_10_11_tsni(tmp4, keyHashSet);
-        return runtime.safeCall(scrut1(ks1, newCharAssocs))
+        tmp4 = hash_inst_10_22_tsni(newCharAssocs, tmp3);
+        scrut1 = cichelli.hinsert(tmp4, keyHashSet);
+        if (scrut1 instanceof NofibPrelude.None.class) {
+          return runtime.safeCall(cichelli.NotEver(1))
+        } else if (scrut1 instanceof NofibPrelude.Some.class) {
+          param02 = scrut1.x;
+          newKeyHashSet = param02;
+          return findhash__inst_10_tsni(newKeyHashSet, newCharAssocs, ks1)
+        } else {
+          throw new globalThis.Error("match error");
+        }
       };
       tmp = assocm_inst_10_9_tsni(a, charAssocs);
       tmp1 = cichelli.assocm(z, charAssocs);
@@ -1165,71 +1197,6 @@ findhash__inst_10_tsni = function findhash__inst_10_tsni(keyHashSet, charAssocs,
       return runtime.safeCall(scrut(tryy, a, z))
     } else {
       throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-hinsert_inst_10_11_tsni = function hinsert_inst_10_11_tsni(h, hh) {
-  let param0, param1, param2, lo, hi, hs, lo_, hi_, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Some_x, _deforest_Some_x1, _deforest_Some_x2, _deforest_Cons_head, _deforest_Cons_tail;
-  if (hh instanceof cichelli.H.class) {
-    param0 = hh.f;
-    param1 = hh.s;
-    param2 = hh.ls;
-    lo = param0;
-    hi = param1;
-    hs = param2;
-    tmp = minm_inst_10_11_24_tsni(lo, h);
-    lo_ = tmp;
-    tmp1 = maxm_inst_10_11_25_tsni(hi, h);
-    hi_ = tmp1;
-    tmp2 = inList_inst_10_11_26_tsni(h, hs);
-    tmp3 = 1 + hi_;
-    tmp4 = tmp3 - lo_;
-    tmp5 = tmp4 > cichelli.numberofkeys;
-    scrut = tmp2 || tmp5;
-    if (scrut === true) {
-      return (ks, newCharAssocs) => {
-        return runtime.safeCall(cichelli.NotEver(1))
-      }
-    } else {
-      _deforest_Some_x1 = lo_;
-      tmp6 = (y) => {
-        let param01, x;
-        param01 = _deforest_Some_x1;
-        x = param01;
-        return NofibPrelude.min(x, y)
-      };
-      _deforest_Some_x2 = hi_;
-      tmp7 = (y) => {
-        let param01, x;
-        param01 = _deforest_Some_x2;
-        x = param01;
-        return NofibPrelude.max(x, y)
-      };
-      _deforest_Cons_head = h;
-      _deforest_Cons_tail = hs;
-      tmp8 = (x) => {
-        let param01, param11, h1, t, scrut1;
-        param01 = _deforest_Cons_head;
-        param11 = _deforest_Cons_tail;
-        h1 = param01;
-        t = param11;
-        scrut1 = x === h1;
-        if (scrut1 === true) {
-          return true
-        } else {
-          return inList_inst_10_11_26_tsni(x, t)
-        }
-      };
-      tmp9 = runtime.safeCall(cichelli.H(tmp6, tmp7, tmp8));
-      _deforest_Some_x = tmp9;
-      return (ks, newCharAssocs) => {
-        let param01, newKeyHashSet;
-        param01 = _deforest_Some_x;
-        newKeyHashSet = param01;
-        return findhash__inst_10_tsni(newKeyHashSet, newCharAssocs, ks)
-      }
     }
   } else {
     throw new globalThis.Error("match error");
@@ -1289,21 +1256,15 @@ assocm_inst_10_9_tsni = function assocm_inst_10_9_tsni(x, yz) {
     }
   }
 };
-findhash_inst_12_tsni = function findhash_inst_12_tsni(keys) {
+findhash_inst_11_tsni = function findhash_inst_11_tsni(keys) {
   let tmp;
-  tmp = runtime.safeCall(cichelli.H((y) => {
-    return y
-  }, (y) => {
-    return y
-  }, (x) => {
-    return false
-  }));
-  return findhash__inst_12_10_tsni(tmp, NofibPrelude.Nil, keys)
+  tmp = runtime.safeCall(cichelli.H(NofibPrelude.None, NofibPrelude.None, NofibPrelude.Nil));
+  return findhash__inst_11_10_tsni(tmp, NofibPrelude.Nil, keys)
 };
-findhash__inst_12_10_tsni = function findhash__inst_12_10_tsni(keyHashSet, charAssocs, ks) {
+findhash__inst_11_10_tsni = function findhash__inst_11_10_tsni(keyHashSet, charAssocs, ks) {
   return runtime.safeCall(ks(keyHashSet, charAssocs))
 };
-assocm_inst_12_10_9_tsni = function assocm_inst_12_10_9_tsni(x, yz) {
+assocm_inst_11_10_9_tsni = function assocm_inst_11_10_9_tsni(x, yz) {
   let param0, param1, first1, first0, y, z, yzs, scrut, _deforest_Some_x;
   if (yz instanceof NofibPrelude.Cons.class) {
     param0 = yz.head;
@@ -1344,88 +1305,23 @@ assocm_inst_12_10_9_tsni = function assocm_inst_12_10_9_tsni(x, yz) {
           }
         }
       } else {
-        return assocm_inst_12_10_9_tsni(x, yzs)
+        return assocm_inst_11_10_9_tsni(x, yzs)
       }
     } else {
       return (tryy, a, z1, first11) => {
-        return match_first0_arm_None_inst_12_10_tsni(tryy, a, z1, first11)
+        return match_first0_arm_None_inst_11_10_tsni(tryy, a, z1, first11)
       }
     }
   } else {
     return (tryy, a, z1, first11) => {
-      return match_first0_arm_None_inst_12_10_tsni(tryy, a, z1, first11)
+      return match_first0_arm_None_inst_11_10_tsni(tryy, a, z1, first11)
     }
   }
 };
-hinsert_inst_12_10_11_tsni = function hinsert_inst_12_10_11_tsni(h, hh) {
-  let param0, param1, param2, lo, hi, hs, lo_, hi_, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Some_x, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Some_x1, _deforest_Some_x2;
-  if (hh instanceof cichelli.H.class) {
-    param0 = hh.f;
-    param1 = hh.s;
-    param2 = hh.ls;
-    lo = param0;
-    hi = param1;
-    hs = param2;
-    tmp = minm_inst_12_10_11_24_tsni(lo, h);
-    lo_ = tmp;
-    tmp1 = maxm_inst_12_10_11_25_tsni(hi, h);
-    hi_ = tmp1;
-    tmp2 = inList_inst_12_10_11_26_tsni(h, hs);
-    tmp3 = 1 + hi_;
-    tmp4 = tmp3 - lo_;
-    tmp5 = tmp4 > cichelli.numberofkeys;
-    scrut = tmp2 || tmp5;
-    if (scrut === true) {
-      return (ks, newCharAssocs) => {
-        return runtime.safeCall(cichelli.NotEver(1))
-      }
-    } else {
-      _deforest_Some_x2 = lo_;
-      tmp6 = (y) => {
-        let param01, x;
-        param01 = _deforest_Some_x2;
-        x = param01;
-        return NofibPrelude.min(x, y)
-      };
-      _deforest_Some_x1 = hi_;
-      tmp7 = (y) => {
-        let param01, x;
-        param01 = _deforest_Some_x1;
-        x = param01;
-        return NofibPrelude.max(x, y)
-      };
-      _deforest_Cons_head = h;
-      _deforest_Cons_tail = hs;
-      tmp8 = (x) => {
-        let param01, param11, h1, t, scrut1;
-        param01 = _deforest_Cons_head;
-        param11 = _deforest_Cons_tail;
-        h1 = param01;
-        t = param11;
-        scrut1 = x === h1;
-        if (scrut1 === true) {
-          return true
-        } else {
-          return inList_inst_12_10_11_26_tsni(x, t)
-        }
-      };
-      tmp9 = runtime.safeCall(cichelli.H(tmp6, tmp7, tmp8));
-      _deforest_Some_x = tmp9;
-      return (ks, newCharAssocs) => {
-        let param01, newKeyHashSet;
-        param01 = _deforest_Some_x;
-        newKeyHashSet = param01;
-        return findhash__inst_12_10_tsni(newKeyHashSet, newCharAssocs, ks)
-      }
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
+blocked_inst_12_tsni = function blocked_inst_12_tsni(ls) {
+  return blocked__inst_12_8_tsni(NofibPrelude.Nil, ls)
 };
-blocked_inst_13_tsni = function blocked_inst_13_tsni(ls) {
-  return blocked__inst_13_8_tsni(NofibPrelude.Nil, ls)
-};
-blocked__inst_13_8_tsni = function blocked__inst_13_8_tsni(ds, ls) {
+blocked__inst_12_8_tsni = function blocked__inst_12_8_tsni(ds, ls) {
   let param0, param1, k, ks, ds_, scrut, first1, first0, det, rest, tmp, tmp1, tmp2, tmp3, lambda, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return (keyHashSet, charAssocs) => {
@@ -1441,8 +1337,8 @@ blocked__inst_13_8_tsni = function blocked__inst_13_8_tsni(ds, ls) {
     ds_ = tmp1;
     lambda = (undefined, function (x) {
       let tmp4;
-      tmp4 = ends_inst_13_8_7_tsni(x);
-      return subset_inst_13_8_21_tsni(tmp4, ds_)
+      tmp4 = ends_inst_12_8_7_tsni(x);
+      return subset_inst_12_8_20_tsni(tmp4, ds_)
     });
     scrut = cichelli.partition_(lambda, ks);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
@@ -1450,12 +1346,12 @@ blocked__inst_13_8_tsni = function blocked__inst_13_8_tsni(ds, ls) {
       first1 = scrut[1];
       det = first0;
       rest = first1;
-      tmp2 = blocked__inst_13_8_tsni(ds_, rest);
-      tmp3 = append_inst_13_8_14_tsni(det, tmp2);
+      tmp2 = blocked__inst_12_8_tsni(ds_, rest);
+      tmp3 = append_inst_12_8_13_tsni(det, tmp2);
       _deforest_Cons_head = k;
       _deforest_Cons_tail = tmp3;
       return (keyHashSet, charAssocs) => {
-        return match_ks_arm_Cons_inst_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
+        return match_ks_arm_Cons_inst_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
       }
     } else {
       throw new globalThis.Error("match error");
@@ -1464,7 +1360,7 @@ blocked__inst_13_8_tsni = function blocked__inst_13_8_tsni(ds, ls) {
     throw new globalThis.Error("match error");
   }
 };
-ends_inst_13_8_7_tsni = function ends_inst_13_8_7_tsni(k) {
+ends_inst_12_8_7_tsni = function ends_inst_12_8_7_tsni(k) {
   let param0, param1, param2, param3, a, z, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   if (k instanceof cichelli.K.class) {
     param0 = k.s;
@@ -1478,18 +1374,18 @@ ends_inst_13_8_7_tsni = function ends_inst_13_8_7_tsni(k) {
       return true
     };
     tmp = (p) => {
-      return match_ls_arm_Cons_inst_13_8_21_22_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
+      return match_ls_arm_Cons_inst_12_8_20_21_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp;
     return (p) => {
-      return match_ls_arm_Cons_inst_13_8_21_22_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_ls_arm_Cons_inst_12_8_20_21_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_13_8_14_tsni = function append_inst_13_8_14_tsni(xs, ys) {
+append_inst_12_8_13_tsni = function append_inst_12_8_13_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1498,17 +1394,17 @@ append_inst_13_8_14_tsni = function append_inst_13_8_14_tsni(xs, ys) {
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_13_8_14_tsni(xs1, ys);
+    tmp = append_inst_12_8_13_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return (keyHashSet, charAssocs) => {
-      return match_ks_arm_Cons_inst_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_ks_arm_Cons_inst_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_15_tsni = function append_inst_15_tsni(xs, ys) {
+append_inst_14_tsni = function append_inst_14_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1517,21 +1413,21 @@ append_inst_15_tsni = function append_inst_15_tsni(xs, ys) {
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_tsni(xs1, ys);
+    tmp = append_inst_14_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return (f) => {
-      return match_xs_arm_Cons_inst_27_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_xs_arm_Cons_inst_23_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-take_inst_16_tsni = function take_inst_16_tsni(n, ls) {
+take_inst_15_tsni = function take_inst_15_tsni(n, ls) {
   let param0, param1, h, t, scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return (f) => {
-      return match_xs_arm_Nil_inst_27_5_tsni(f)
+      return match_xs_arm_Nil_inst_23_5_tsni(f)
     }
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
@@ -1541,38 +1437,38 @@ take_inst_16_tsni = function take_inst_16_tsni(n, ls) {
     scrut = n <= 0;
     if (scrut === true) {
       return (f) => {
-        return match_xs_arm_Nil_inst_27_5_tsni(f)
+        return match_xs_arm_Nil_inst_23_5_tsni(f)
       }
     } else {
       tmp = n - 1;
-      tmp1 = take_inst_16_tsni(tmp, t);
+      tmp1 = take_inst_15_tsni(tmp, t);
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp1;
       return (f) => {
-        return match_xs_arm_Cons_inst_27_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
+        return match_xs_arm_Cons_inst_23_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
       }
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-cichelli_inst_17_tsni = function cichelli_inst_17_tsni(n) {
+cichelli_inst_16_tsni = function cichelli_inst_16_tsni(n) {
   let attribkeys_, hashkeys, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   tmp = NofibPrelude.intMod(n, 2);
-  tmp1 = take_inst_17_16_tsni(tmp, cichelli.keys);
-  tmp2 = append_inst_17_15_tsni(cichelli.keys, tmp1);
-  tmp3 = attribkeys_inst_17_27_tsni(tmp2);
+  tmp1 = take_inst_16_15_tsni(tmp, cichelli.keys);
+  tmp2 = append_inst_16_14_tsni(cichelli.keys, tmp1);
+  tmp3 = attribkeys_inst_16_23_tsni(tmp2);
   attribkeys_ = tmp3;
   tmp4 = cichelli.freqsorted(attribkeys_);
-  tmp5 = blocked_inst_17_13_tsni(tmp4);
+  tmp5 = blocked_inst_16_12_tsni(tmp4);
   hashkeys = tmp5;
-  return findhash_inst_17_12_tsni(hashkeys)
+  return findhash_inst_16_11_tsni(hashkeys)
 };
-take_inst_17_16_tsni = function take_inst_17_16_tsni(n, ls) {
+take_inst_16_15_tsni = function take_inst_16_15_tsni(n, ls) {
   let param0, param1, h, t, scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return (f) => {
-      return match_xs_arm_Nil_inst_17_27_5_tsni(f)
+      return match_xs_arm_Nil_inst_16_23_5_tsni(f)
     }
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
@@ -1582,22 +1478,22 @@ take_inst_17_16_tsni = function take_inst_17_16_tsni(n, ls) {
     scrut = n <= 0;
     if (scrut === true) {
       return (f) => {
-        return match_xs_arm_Nil_inst_17_27_5_tsni(f)
+        return match_xs_arm_Nil_inst_16_23_5_tsni(f)
       }
     } else {
       tmp = n - 1;
-      tmp1 = take_inst_17_16_tsni(tmp, t);
+      tmp1 = take_inst_16_15_tsni(tmp, t);
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp1;
       return (f) => {
-        return match_xs_arm_Cons_inst_17_27_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
+        return match_xs_arm_Cons_inst_16_23_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
       }
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_17_15_tsni = function append_inst_17_15_tsni(xs, ys) {
+append_inst_16_14_tsni = function append_inst_16_14_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1606,20 +1502,20 @@ append_inst_17_15_tsni = function append_inst_17_15_tsni(xs, ys) {
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_17_15_tsni(xs1, ys);
+    tmp = append_inst_16_14_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return (f) => {
-      return match_xs_arm_Cons_inst_17_27_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_xs_arm_Cons_inst_16_23_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-blocked_inst_17_13_tsni = function blocked_inst_17_13_tsni(ls) {
-  return blocked__inst_17_13_8_tsni(NofibPrelude.Nil, ls)
+blocked_inst_16_12_tsni = function blocked_inst_16_12_tsni(ls) {
+  return blocked__inst_16_12_8_tsni(NofibPrelude.Nil, ls)
 };
-blocked__inst_17_13_8_tsni = function blocked__inst_17_13_8_tsni(ds, ls) {
+blocked__inst_16_12_8_tsni = function blocked__inst_16_12_8_tsni(ds, ls) {
   let param0, param1, k, ks, ds_, scrut, first1, first0, det, rest, tmp, tmp1, tmp2, tmp3, lambda, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return (keyHashSet, charAssocs) => {
@@ -1635,8 +1531,8 @@ blocked__inst_17_13_8_tsni = function blocked__inst_17_13_8_tsni(ds, ls) {
     ds_ = tmp1;
     lambda = (undefined, function (x) {
       let tmp4;
-      tmp4 = ends_inst_17_13_8_7_tsni(x);
-      return subset_inst_17_13_8_21_tsni(tmp4, ds_)
+      tmp4 = ends_inst_16_12_8_7_tsni(x);
+      return subset_inst_16_12_8_20_tsni(tmp4, ds_)
     });
     scrut = cichelli.partition_(lambda, ks);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
@@ -1644,12 +1540,12 @@ blocked__inst_17_13_8_tsni = function blocked__inst_17_13_8_tsni(ds, ls) {
       first1 = scrut[1];
       det = first0;
       rest = first1;
-      tmp2 = blocked__inst_17_13_8_tsni(ds_, rest);
-      tmp3 = append_inst_17_13_8_14_tsni(det, tmp2);
+      tmp2 = blocked__inst_16_12_8_tsni(ds_, rest);
+      tmp3 = append_inst_16_12_8_13_tsni(det, tmp2);
       _deforest_Cons_head = k;
       _deforest_Cons_tail = tmp3;
       return (keyHashSet, charAssocs) => {
-        return match_ks_arm_Cons_inst_17_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
+        return match_ks_arm_Cons_inst_16_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
       }
     } else {
       throw new globalThis.Error("match error");
@@ -1658,7 +1554,7 @@ blocked__inst_17_13_8_tsni = function blocked__inst_17_13_8_tsni(ds, ls) {
     throw new globalThis.Error("match error");
   }
 };
-ends_inst_17_13_8_7_tsni = function ends_inst_17_13_8_7_tsni(k) {
+ends_inst_16_12_8_7_tsni = function ends_inst_16_12_8_7_tsni(k) {
   let param0, param1, param2, param3, a, z, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   if (k instanceof cichelli.K.class) {
     param0 = k.s;
@@ -1672,97 +1568,26 @@ ends_inst_17_13_8_7_tsni = function ends_inst_17_13_8_7_tsni(k) {
       return true
     };
     tmp = (p) => {
-      return match_ls_arm_Cons_inst_17_13_8_21_22_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
+      return match_ls_arm_Cons_inst_16_12_8_20_21_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp;
     return (p) => {
-      return match_ls_arm_Cons_inst_17_13_8_21_22_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_ls_arm_Cons_inst_16_12_8_20_21_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-findhash_inst_17_12_tsni = function findhash_inst_17_12_tsni(keys) {
+findhash_inst_16_11_tsni = function findhash_inst_16_11_tsni(keys) {
   let tmp;
-  tmp = runtime.safeCall(cichelli.H((y) => {
-    return y
-  }, (y) => {
-    return y
-  }, (x) => {
-    return false
-  }));
-  return findhash__inst_17_12_10_tsni(tmp, NofibPrelude.Nil, keys)
+  tmp = runtime.safeCall(cichelli.H(NofibPrelude.None, NofibPrelude.None, NofibPrelude.Nil));
+  return findhash__inst_16_11_10_tsni(tmp, NofibPrelude.Nil, keys)
 };
-findhash__inst_17_12_10_tsni = function findhash__inst_17_12_10_tsni(keyHashSet, charAssocs, ks) {
+findhash__inst_16_11_10_tsni = function findhash__inst_16_11_10_tsni(keyHashSet, charAssocs, ks) {
   return runtime.safeCall(ks(keyHashSet, charAssocs))
 };
-hinsert_inst_17_12_10_11_tsni = function hinsert_inst_17_12_10_11_tsni(h, hh) {
-  let param0, param1, param2, lo, hi, hs, lo_, hi_, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Some_x, _deforest_Some_x1, _deforest_Some_x2, _deforest_Cons_head, _deforest_Cons_tail;
-  if (hh instanceof cichelli.H.class) {
-    param0 = hh.f;
-    param1 = hh.s;
-    param2 = hh.ls;
-    lo = param0;
-    hi = param1;
-    hs = param2;
-    tmp = minm_inst_17_12_10_11_24_tsni(lo, h);
-    lo_ = tmp;
-    tmp1 = maxm_inst_17_12_10_11_25_tsni(hi, h);
-    hi_ = tmp1;
-    tmp2 = inList_inst_17_12_10_11_26_tsni(h, hs);
-    tmp3 = 1 + hi_;
-    tmp4 = tmp3 - lo_;
-    tmp5 = tmp4 > cichelli.numberofkeys;
-    scrut = tmp2 || tmp5;
-    if (scrut === true) {
-      return (ks, newCharAssocs) => {
-        return runtime.safeCall(cichelli.NotEver(1))
-      }
-    } else {
-      _deforest_Some_x1 = lo_;
-      tmp6 = (y) => {
-        let param01, x;
-        param01 = _deforest_Some_x1;
-        x = param01;
-        return NofibPrelude.min(x, y)
-      };
-      _deforest_Some_x2 = hi_;
-      tmp7 = (y) => {
-        let param01, x;
-        param01 = _deforest_Some_x2;
-        x = param01;
-        return NofibPrelude.max(x, y)
-      };
-      _deforest_Cons_head = h;
-      _deforest_Cons_tail = hs;
-      tmp8 = (x) => {
-        let param01, param11, h1, t, scrut1;
-        param01 = _deforest_Cons_head;
-        param11 = _deforest_Cons_tail;
-        h1 = param01;
-        t = param11;
-        scrut1 = x === h1;
-        if (scrut1 === true) {
-          return true
-        } else {
-          return inList_inst_17_12_10_11_26_tsni(x, t)
-        }
-      };
-      tmp9 = runtime.safeCall(cichelli.H(tmp6, tmp7, tmp8));
-      _deforest_Some_x = tmp9;
-      return (ks, newCharAssocs) => {
-        let param01, newKeyHashSet;
-        param01 = _deforest_Some_x;
-        newKeyHashSet = param01;
-        return findhash__inst_17_12_10_tsni(newKeyHashSet, newCharAssocs, ks)
-      }
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-assocm_inst_17_12_10_9_tsni = function assocm_inst_17_12_10_9_tsni(x, yz) {
+assocm_inst_16_11_10_9_tsni = function assocm_inst_16_11_10_9_tsni(x, yz) {
   let param0, param1, first1, first0, y, z, yzs, scrut, _deforest_Some_x;
   if (yz instanceof NofibPrelude.Cons.class) {
     param0 = yz.head;
@@ -1803,20 +1628,20 @@ assocm_inst_17_12_10_9_tsni = function assocm_inst_17_12_10_9_tsni(x, yz) {
           }
         }
       } else {
-        return assocm_inst_17_12_10_9_tsni(x, yzs)
+        return assocm_inst_16_11_10_9_tsni(x, yzs)
       }
     } else {
       return (tryy, a, z1, first11) => {
-        return match_first0_arm_None_inst_17_12_10_tsni(tryy, a, z1, first11)
+        return match_first0_arm_None_inst_16_11_10_tsni(tryy, a, z1, first11)
       }
     }
   } else {
     return (tryy, a, z1, first11) => {
-      return match_first0_arm_None_inst_17_12_10_tsni(tryy, a, z1, first11)
+      return match_first0_arm_None_inst_16_11_10_tsni(tryy, a, z1, first11)
     }
   }
 };
-append_inst_17_13_8_14_tsni = function append_inst_17_13_8_14_tsni(xs, ys) {
+append_inst_16_12_8_13_tsni = function append_inst_16_12_8_13_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1825,46 +1650,40 @@ append_inst_17_13_8_14_tsni = function append_inst_17_13_8_14_tsni(xs, ys) {
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_17_13_8_14_tsni(xs1, ys);
+    tmp = append_inst_16_12_8_13_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return (keyHashSet, charAssocs) => {
-      return match_ks_arm_Cons_inst_17_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_ks_arm_Cons_inst_16_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-prog_inst_18_tsni = function prog_inst_18_tsni(n) {
-  return cichelli_inst_18_17_tsni(n)
+prog_inst_17_tsni = function prog_inst_17_tsni(n) {
+  return cichelli_inst_17_16_tsni(n)
 };
-cichelli_inst_18_17_tsni = function cichelli_inst_18_17_tsni(n) {
+cichelli_inst_17_16_tsni = function cichelli_inst_17_16_tsni(n) {
   let attribkeys_, hashkeys, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   tmp = NofibPrelude.intMod(n, 2);
-  tmp1 = take_inst_18_17_16_tsni(tmp, cichelli.keys);
-  tmp2 = append_inst_18_17_15_tsni(cichelli.keys, tmp1);
-  tmp3 = attribkeys_inst_18_17_27_tsni(tmp2);
+  tmp1 = take_inst_17_16_15_tsni(tmp, cichelli.keys);
+  tmp2 = append_inst_17_16_14_tsni(cichelli.keys, tmp1);
+  tmp3 = attribkeys_inst_17_16_23_tsni(tmp2);
   attribkeys_ = tmp3;
   tmp4 = cichelli.freqsorted(attribkeys_);
-  tmp5 = blocked_inst_18_17_13_tsni(tmp4);
+  tmp5 = blocked_inst_17_16_12_tsni(tmp4);
   hashkeys = tmp5;
-  return findhash_inst_18_17_12_tsni(hashkeys)
+  return findhash_inst_17_16_11_tsni(hashkeys)
 };
-findhash_inst_18_17_12_tsni = function findhash_inst_18_17_12_tsni(keys) {
+findhash_inst_17_16_11_tsni = function findhash_inst_17_16_11_tsni(keys) {
   let tmp;
-  tmp = runtime.safeCall(cichelli.H((y) => {
-    return y
-  }, (y) => {
-    return y
-  }, (x) => {
-    return false
-  }));
-  return findhash__inst_18_17_12_10_tsni(tmp, NofibPrelude.Nil, keys)
+  tmp = runtime.safeCall(cichelli.H(NofibPrelude.None, NofibPrelude.None, NofibPrelude.Nil));
+  return findhash__inst_17_16_11_10_tsni(tmp, NofibPrelude.Nil, keys)
 };
-findhash__inst_18_17_12_10_tsni = function findhash__inst_18_17_12_10_tsni(keyHashSet, charAssocs, ks) {
+findhash__inst_17_16_11_10_tsni = function findhash__inst_17_16_11_10_tsni(keyHashSet, charAssocs, ks) {
   return runtime.safeCall(ks(keyHashSet, charAssocs))
 };
-assocm_inst_18_17_12_10_9_tsni = function assocm_inst_18_17_12_10_9_tsni(x, yz) {
+assocm_inst_17_16_11_10_9_tsni = function assocm_inst_17_16_11_10_9_tsni(x, yz) {
   let param0, param1, first1, first0, y, z, yzs, scrut, _deforest_Some_x;
   if (yz instanceof NofibPrelude.Cons.class) {
     param0 = yz.head;
@@ -1905,88 +1724,23 @@ assocm_inst_18_17_12_10_9_tsni = function assocm_inst_18_17_12_10_9_tsni(x, yz) 
           }
         }
       } else {
-        return assocm_inst_18_17_12_10_9_tsni(x, yzs)
+        return assocm_inst_17_16_11_10_9_tsni(x, yzs)
       }
     } else {
       return (tryy, a, z1, first11) => {
-        return match_first0_arm_None_inst_18_17_12_10_tsni(tryy, a, z1, first11)
+        return match_first0_arm_None_inst_17_16_11_10_tsni(tryy, a, z1, first11)
       }
     }
   } else {
     return (tryy, a, z1, first11) => {
-      return match_first0_arm_None_inst_18_17_12_10_tsni(tryy, a, z1, first11)
+      return match_first0_arm_None_inst_17_16_11_10_tsni(tryy, a, z1, first11)
     }
   }
 };
-hinsert_inst_18_17_12_10_11_tsni = function hinsert_inst_18_17_12_10_11_tsni(h, hh) {
-  let param0, param1, param2, lo, hi, hs, lo_, hi_, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Some_x, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Some_x1, _deforest_Some_x2;
-  if (hh instanceof cichelli.H.class) {
-    param0 = hh.f;
-    param1 = hh.s;
-    param2 = hh.ls;
-    lo = param0;
-    hi = param1;
-    hs = param2;
-    tmp = minm_inst_18_17_12_10_11_24_tsni(lo, h);
-    lo_ = tmp;
-    tmp1 = maxm_inst_18_17_12_10_11_25_tsni(hi, h);
-    hi_ = tmp1;
-    tmp2 = inList_inst_18_17_12_10_11_26_tsni(h, hs);
-    tmp3 = 1 + hi_;
-    tmp4 = tmp3 - lo_;
-    tmp5 = tmp4 > cichelli.numberofkeys;
-    scrut = tmp2 || tmp5;
-    if (scrut === true) {
-      return (ks, newCharAssocs) => {
-        return runtime.safeCall(cichelli.NotEver(1))
-      }
-    } else {
-      _deforest_Some_x2 = lo_;
-      tmp6 = (y) => {
-        let param01, x;
-        param01 = _deforest_Some_x2;
-        x = param01;
-        return NofibPrelude.min(x, y)
-      };
-      _deforest_Some_x1 = hi_;
-      tmp7 = (y) => {
-        let param01, x;
-        param01 = _deforest_Some_x1;
-        x = param01;
-        return NofibPrelude.max(x, y)
-      };
-      _deforest_Cons_head = h;
-      _deforest_Cons_tail = hs;
-      tmp8 = (x) => {
-        let param01, param11, h1, t, scrut1;
-        param01 = _deforest_Cons_head;
-        param11 = _deforest_Cons_tail;
-        h1 = param01;
-        t = param11;
-        scrut1 = x === h1;
-        if (scrut1 === true) {
-          return true
-        } else {
-          return inList_inst_18_17_12_10_11_26_tsni(x, t)
-        }
-      };
-      tmp9 = runtime.safeCall(cichelli.H(tmp6, tmp7, tmp8));
-      _deforest_Some_x = tmp9;
-      return (ks, newCharAssocs) => {
-        let param01, newKeyHashSet;
-        param01 = _deforest_Some_x;
-        newKeyHashSet = param01;
-        return findhash__inst_18_17_12_10_tsni(newKeyHashSet, newCharAssocs, ks)
-      }
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
+blocked_inst_17_16_12_tsni = function blocked_inst_17_16_12_tsni(ls) {
+  return blocked__inst_17_16_12_8_tsni(NofibPrelude.Nil, ls)
 };
-blocked_inst_18_17_13_tsni = function blocked_inst_18_17_13_tsni(ls) {
-  return blocked__inst_18_17_13_8_tsni(NofibPrelude.Nil, ls)
-};
-blocked__inst_18_17_13_8_tsni = function blocked__inst_18_17_13_8_tsni(ds, ls) {
+blocked__inst_17_16_12_8_tsni = function blocked__inst_17_16_12_8_tsni(ds, ls) {
   let param0, param1, k, ks, ds_, scrut, first1, first0, det, rest, tmp, tmp1, tmp2, tmp3, lambda, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return (keyHashSet, charAssocs) => {
@@ -2002,8 +1756,8 @@ blocked__inst_18_17_13_8_tsni = function blocked__inst_18_17_13_8_tsni(ds, ls) {
     ds_ = tmp1;
     lambda = (undefined, function (x) {
       let tmp4;
-      tmp4 = ends_inst_18_17_13_8_7_tsni(x);
-      return subset_inst_18_17_13_8_21_tsni(tmp4, ds_)
+      tmp4 = ends_inst_17_16_12_8_7_tsni(x);
+      return subset_inst_17_16_12_8_20_tsni(tmp4, ds_)
     });
     scrut = cichelli.partition_(lambda, ks);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
@@ -2011,12 +1765,12 @@ blocked__inst_18_17_13_8_tsni = function blocked__inst_18_17_13_8_tsni(ds, ls) {
       first1 = scrut[1];
       det = first0;
       rest = first1;
-      tmp2 = blocked__inst_18_17_13_8_tsni(ds_, rest);
-      tmp3 = append_inst_18_17_13_8_14_tsni(det, tmp2);
+      tmp2 = blocked__inst_17_16_12_8_tsni(ds_, rest);
+      tmp3 = append_inst_17_16_12_8_13_tsni(det, tmp2);
       _deforest_Cons_head = k;
       _deforest_Cons_tail = tmp3;
       return (keyHashSet, charAssocs) => {
-        return match_ks_arm_Cons_inst_18_17_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
+        return match_ks_arm_Cons_inst_17_16_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
       }
     } else {
       throw new globalThis.Error("match error");
@@ -2025,7 +1779,7 @@ blocked__inst_18_17_13_8_tsni = function blocked__inst_18_17_13_8_tsni(ds, ls) {
     throw new globalThis.Error("match error");
   }
 };
-ends_inst_18_17_13_8_7_tsni = function ends_inst_18_17_13_8_7_tsni(k) {
+ends_inst_17_16_12_8_7_tsni = function ends_inst_17_16_12_8_7_tsni(k) {
   let param0, param1, param2, param3, a, z, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   if (k instanceof cichelli.K.class) {
     param0 = k.s;
@@ -2039,18 +1793,18 @@ ends_inst_18_17_13_8_7_tsni = function ends_inst_18_17_13_8_7_tsni(k) {
       return true
     };
     tmp = (p) => {
-      return match_ls_arm_Cons_inst_18_17_13_8_21_22_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
+      return match_ls_arm_Cons_inst_17_16_12_8_20_21_tsni(p, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp;
     return (p) => {
-      return match_ls_arm_Cons_inst_18_17_13_8_21_22_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_ls_arm_Cons_inst_17_16_12_8_20_21_tsni(p, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_18_17_13_8_14_tsni = function append_inst_18_17_13_8_14_tsni(xs, ys) {
+append_inst_17_16_12_8_13_tsni = function append_inst_17_16_12_8_13_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -2059,17 +1813,17 @@ append_inst_18_17_13_8_14_tsni = function append_inst_18_17_13_8_14_tsni(xs, ys)
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_18_17_13_8_14_tsni(xs1, ys);
+    tmp = append_inst_17_16_12_8_13_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return (keyHashSet, charAssocs) => {
-      return match_ks_arm_Cons_inst_18_17_12_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_ks_arm_Cons_inst_17_16_11_10_tsni(keyHashSet, charAssocs, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_18_17_15_tsni = function append_inst_18_17_15_tsni(xs, ys) {
+append_inst_17_16_14_tsni = function append_inst_17_16_14_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -2078,21 +1832,21 @@ append_inst_18_17_15_tsni = function append_inst_18_17_15_tsni(xs, ys) {
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_18_17_15_tsni(xs1, ys);
+    tmp = append_inst_17_16_14_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return (f) => {
-      return match_xs_arm_Cons_inst_18_17_27_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
+      return match_xs_arm_Cons_inst_17_16_23_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-take_inst_18_17_16_tsni = function take_inst_18_17_16_tsni(n, ls) {
+take_inst_17_16_15_tsni = function take_inst_17_16_15_tsni(n, ls) {
   let param0, param1, h, t, scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return (f) => {
-      return match_xs_arm_Nil_inst_18_17_27_5_tsni(f)
+      return match_xs_arm_Nil_inst_17_16_23_5_tsni(f)
     }
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
@@ -2102,82 +1856,64 @@ take_inst_18_17_16_tsni = function take_inst_18_17_16_tsni(n, ls) {
     scrut = n <= 0;
     if (scrut === true) {
       return (f) => {
-        return match_xs_arm_Nil_inst_18_17_27_5_tsni(f)
+        return match_xs_arm_Nil_inst_17_16_23_5_tsni(f)
       }
     } else {
       tmp = n - 1;
-      tmp1 = take_inst_18_17_16_tsni(tmp, t);
+      tmp1 = take_inst_17_16_15_tsni(tmp, t);
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp1;
       return (f) => {
-        return match_xs_arm_Cons_inst_18_17_27_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
+        return match_xs_arm_Cons_inst_17_16_23_5_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
       }
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-histo_inst_19_tsni = function histo_inst_19_tsni(ls) {
-  return foldr_inst_19_20_tsni(cichelli.histins, NofibPrelude.Nil, ls)
+histo_inst_18_tsni = function histo_inst_18_tsni(ls) {
+  return foldr_inst_18_19_tsni(cichelli.histins, NofibPrelude.Nil, ls)
 };
-foldr_inst_19_20_tsni = function foldr_inst_19_20_tsni(f, z, xs) {
+foldr_inst_18_19_tsni = function foldr_inst_18_19_tsni(f, z, xs) {
   return runtime.safeCall(xs(f, z))
 };
-subset_inst_6_21_tsni = function subset_inst_6_21_tsni(xs, ys) {
+subset_inst_6_20_tsni = function subset_inst_6_20_tsni(xs, ys) {
   let lambda;
   lambda = (undefined, function (x) {
     return NofibPrelude.inList(x, ys)
   });
-  return all_inst_6_21_22_tsni(lambda, xs)
+  return all_inst_6_20_21_tsni(lambda, xs)
 };
-all_inst_6_21_22_tsni = function all_inst_6_21_22_tsni(p, ls) {
+all_inst_6_20_21_tsni = function all_inst_6_20_21_tsni(p, ls) {
   return runtime.safeCall(ls(p))
 };
-subset_inst_8_21_tsni = function subset_inst_8_21_tsni(xs, ys) {
+subset_inst_8_20_tsni = function subset_inst_8_20_tsni(xs, ys) {
   let lambda;
   lambda = (undefined, function (x) {
     return NofibPrelude.inList(x, ys)
   });
-  return all_inst_8_21_22_tsni(lambda, xs)
+  return all_inst_8_20_21_tsni(lambda, xs)
 };
-all_inst_8_21_22_tsni = function all_inst_8_21_22_tsni(p, ls) {
+all_inst_8_20_21_tsni = function all_inst_8_20_21_tsni(p, ls) {
   return runtime.safeCall(ls(p))
 };
-hash_inst_10_23_tsni = function hash_inst_10_23_tsni(cvs, k) {
+hash_inst_10_22_tsni = function hash_inst_10_22_tsni(cvs, k) {
   return runtime.safeCall(k(cvs))
 };
-minm_inst_10_11_24_tsni = function minm_inst_10_11_24_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-maxm_inst_10_11_25_tsni = function maxm_inst_10_11_25_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-inList_inst_10_11_26_tsni = function inList_inst_10_11_26_tsni(x, ls) {
-  return runtime.safeCall(ls(x))
-};
-inList_inst_12_10_11_26_tsni = function inList_inst_12_10_11_26_tsni(x, ls) {
-  return runtime.safeCall(ls(x))
-};
-maxm_inst_12_10_11_25_tsni = function maxm_inst_12_10_11_25_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-minm_inst_12_10_11_24_tsni = function minm_inst_12_10_11_24_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-hash_inst_12_10_23_tsni = function hash_inst_12_10_23_tsni(cvs, k) {
+hash_inst_11_10_22_tsni = function hash_inst_11_10_22_tsni(cvs, k) {
   return runtime.safeCall(k(cvs))
 };
-subset_inst_13_8_21_tsni = function subset_inst_13_8_21_tsni(xs, ys) {
+subset_inst_12_8_20_tsni = function subset_inst_12_8_20_tsni(xs, ys) {
   let lambda;
   lambda = (undefined, function (x) {
     return NofibPrelude.inList(x, ys)
   });
-  return all_inst_13_8_21_22_tsni(lambda, xs)
+  return all_inst_12_8_20_21_tsni(lambda, xs)
 };
-all_inst_13_8_21_22_tsni = function all_inst_13_8_21_22_tsni(p, ls) {
+all_inst_12_8_20_21_tsni = function all_inst_12_8_20_21_tsni(p, ls) {
   return runtime.safeCall(ls(p))
 };
-attribkeys_inst_27_tsni = function attribkeys_inst_27_tsni(ks) {
+attribkeys_inst_23_tsni = function attribkeys_inst_23_tsni(ks) {
   let tmp, lambda;
   lambda = (undefined, function (k) {
     let tmp1, tmp2, tmp3;
@@ -2187,12 +1923,12 @@ attribkeys_inst_27_tsni = function attribkeys_inst_27_tsni(ks) {
     return runtime.safeCall(cichelli.K(k, tmp1, tmp2, tmp3))
   });
   tmp = lambda;
-  return map_inst_27_5_tsni(tmp, ks)
+  return map_inst_23_5_tsni(tmp, ks)
 };
-map_inst_27_5_tsni = function map_inst_27_5_tsni(f, xs) {
+map_inst_23_5_tsni = function map_inst_23_5_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-attribkeys_inst_17_27_tsni = function attribkeys_inst_17_27_tsni(ks) {
+attribkeys_inst_16_23_tsni = function attribkeys_inst_16_23_tsni(ks) {
   let tmp, lambda;
   lambda = (undefined, function (k) {
     let tmp1, tmp2, tmp3;
@@ -2202,56 +1938,38 @@ attribkeys_inst_17_27_tsni = function attribkeys_inst_17_27_tsni(ks) {
     return runtime.safeCall(cichelli.K(k, tmp1, tmp2, tmp3))
   });
   tmp = lambda;
-  return map_inst_17_27_5_tsni(tmp, ks)
+  return map_inst_16_23_5_tsni(tmp, ks)
 };
-map_inst_17_27_5_tsni = function map_inst_17_27_5_tsni(f, xs) {
+map_inst_16_23_5_tsni = function map_inst_16_23_5_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-subset_inst_17_13_8_21_tsni = function subset_inst_17_13_8_21_tsni(xs, ys) {
+subset_inst_16_12_8_20_tsni = function subset_inst_16_12_8_20_tsni(xs, ys) {
   let lambda;
   lambda = (undefined, function (x) {
     return NofibPrelude.inList(x, ys)
   });
-  return all_inst_17_13_8_21_22_tsni(lambda, xs)
+  return all_inst_16_12_8_20_21_tsni(lambda, xs)
 };
-all_inst_17_13_8_21_22_tsni = function all_inst_17_13_8_21_22_tsni(p, ls) {
+all_inst_16_12_8_20_21_tsni = function all_inst_16_12_8_20_21_tsni(p, ls) {
   return runtime.safeCall(ls(p))
 };
-hash_inst_17_12_10_23_tsni = function hash_inst_17_12_10_23_tsni(cvs, k) {
+hash_inst_16_11_10_22_tsni = function hash_inst_16_11_10_22_tsni(cvs, k) {
   return runtime.safeCall(k(cvs))
 };
-minm_inst_17_12_10_11_24_tsni = function minm_inst_17_12_10_11_24_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-maxm_inst_17_12_10_11_25_tsni = function maxm_inst_17_12_10_11_25_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-inList_inst_17_12_10_11_26_tsni = function inList_inst_17_12_10_11_26_tsni(x, ls) {
-  return runtime.safeCall(ls(x))
-};
-inList_inst_18_17_12_10_11_26_tsni = function inList_inst_18_17_12_10_11_26_tsni(x, ls) {
-  return runtime.safeCall(ls(x))
-};
-maxm_inst_18_17_12_10_11_25_tsni = function maxm_inst_18_17_12_10_11_25_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-minm_inst_18_17_12_10_11_24_tsni = function minm_inst_18_17_12_10_11_24_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-hash_inst_18_17_12_10_23_tsni = function hash_inst_18_17_12_10_23_tsni(cvs, k) {
+hash_inst_17_16_11_10_22_tsni = function hash_inst_17_16_11_10_22_tsni(cvs, k) {
   return runtime.safeCall(k(cvs))
 };
-subset_inst_18_17_13_8_21_tsni = function subset_inst_18_17_13_8_21_tsni(xs, ys) {
+subset_inst_17_16_12_8_20_tsni = function subset_inst_17_16_12_8_20_tsni(xs, ys) {
   let lambda;
   lambda = (undefined, function (x) {
     return NofibPrelude.inList(x, ys)
   });
-  return all_inst_18_17_13_8_21_22_tsni(lambda, xs)
+  return all_inst_17_16_12_8_20_21_tsni(lambda, xs)
 };
-all_inst_18_17_13_8_21_22_tsni = function all_inst_18_17_13_8_21_22_tsni(p, ls) {
+all_inst_17_16_12_8_20_21_tsni = function all_inst_17_16_12_8_20_21_tsni(p, ls) {
   return runtime.safeCall(ls(p))
 };
-attribkeys_inst_18_17_27_tsni = function attribkeys_inst_18_17_27_tsni(ks) {
+attribkeys_inst_17_16_23_tsni = function attribkeys_inst_17_16_23_tsni(ks) {
   let tmp, lambda;
   lambda = (undefined, function (k) {
     let tmp1, tmp2, tmp3;
@@ -2261,9 +1979,9 @@ attribkeys_inst_18_17_27_tsni = function attribkeys_inst_18_17_27_tsni(ks) {
     return runtime.safeCall(cichelli.K(k, tmp1, tmp2, tmp3))
   });
   tmp = lambda;
-  return map_inst_18_17_27_5_tsni(tmp, ks)
+  return map_inst_17_16_23_5_tsni(tmp, ks)
 };
-map_inst_18_17_27_5_tsni = function map_inst_18_17_27_5_tsni(f, xs) {
+map_inst_17_16_23_5_tsni = function map_inst_17_16_23_5_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
 (class cichelli {
@@ -2343,7 +2061,7 @@ map_inst_18_17_27_5_tsni = function map_inst_18_17_27_5_tsni(f, xs) {
     tmp45 = attribkeys_inst_4_tsni(cichelli.keys);
     tmp46 = map_inst_2_tsni(ends_inst_3_tsni, tmp45);
     tmp47 = concat_inst_0_tsni(tmp46);
-    tmp48 = histo_inst_19_tsni(tmp47);
+    tmp48 = histo_inst_18_tsni(tmp47);
     this.freqtab = tmp48;
     tmp49 = NofibPrelude.listLen(cichelli.freqtab);
     this.maxval = tmp49;
@@ -2807,13 +2525,7 @@ map_inst_18_17_27_5_tsni = function map_inst_18_17_27_5_tsni(f, xs) {
   } 
   static findhash(keys) {
     let tmp;
-    tmp = runtime.safeCall(cichelli.H((y2) => {
-      return y2
-    }, (y2) => {
-      return y2
-    }, (x7) => {
-      return false
-    }));
+    tmp = runtime.safeCall(cichelli.H(NofibPrelude.None, NofibPrelude.None, NofibPrelude.Nil));
     return findhash__inst_10_tsni(tmp, NofibPrelude.Nil, keys)
   } 
   static freq(c) {
@@ -2852,21 +2564,21 @@ map_inst_18_17_27_5_tsni = function map_inst_18_17_27_5_tsni(f, xs) {
   static cichelli(n) {
     let attribkeys_, hashkeys, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
     tmp = NofibPrelude.intMod(n, 2);
-    tmp1 = take_inst_16_tsni(tmp, cichelli.keys);
-    tmp2 = append_inst_15_tsni(cichelli.keys, tmp1);
-    tmp3 = attribkeys_inst_27_tsni(tmp2);
+    tmp1 = take_inst_15_tsni(tmp, cichelli.keys);
+    tmp2 = append_inst_14_tsni(cichelli.keys, tmp1);
+    tmp3 = attribkeys_inst_23_tsni(tmp2);
     attribkeys_ = tmp3;
     tmp4 = cichelli.freqsorted(attribkeys_);
-    tmp5 = blocked_inst_13_tsni(tmp4);
+    tmp5 = blocked_inst_12_tsni(tmp4);
     hashkeys = tmp5;
-    return findhash_inst_12_tsni(hashkeys)
+    return findhash_inst_11_tsni(hashkeys)
   } 
   static prog(n1) {
-    return cichelli_inst_17_tsni(n1)
+    return cichelli_inst_16_tsni(n1)
   } 
   static main() {
     let tmp;
-    tmp = prog_inst_18_tsni(6);
+    tmp = prog_inst_17_tsni(6);
     return runtime.safeCall(tmp.toString())
   }
   static toString() { return "cichelli"; }

@@ -559,7 +559,6 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
             
     case v@Value.Ref(l) => l.asObj match
       case None =>
-        // println(s"ref $l: ${l.asBlkMember.map(_.trees)}")
         if l.asBlkMember.exists(preAnalyzer.topLevelDefinedFunSyms.contains) then
           funSymToProdStratScheme.getOrUpdate(l.asBlkMember.get) match
             case v: ProdVar => v
@@ -681,15 +680,18 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
     
     val toRmCtor = mutable.Set.empty[Ctor]
     val toRmDtor = mutable.Set.empty[Dtor | FieldSel]
-    def removeCtor(rm: (Ctor | ResultId)): Unit = rm match
+    def removeCtor(rm: (Ctor | CtorId)): Unit = rm match
       case rm: Ctor =>
         if toRmCtor.add(rm) then
         for
           (dtors, _) <- ctorToDtor.get(rm)
           dtor <- dtors
         do removeDtor(dtor)
-      case _ =>
-        for rm <- ctorToDtor.keySet.filter(x => x.exprId == rm) do removeCtor(rm)
+      case rm: CtorId =>
+        for
+          rm <- ctorToDtor.keySet.filter: x =>
+            x.exprId === rm._1 && x.instantiationId.fold(false)(_ === rm._2)
+        do removeCtor(rm)
     def removeDtor(rm: Dtor | FieldSel) =
       if toRmDtor.add(rm) then
       for (ctors, _) <- dtorToCtor.get(rm)
@@ -725,35 +727,35 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
     toRmDtor.clear()
     
     // remove cycle
-    def getCtorInArm(ctorExprId: ResultId , dtorScrutExprId: ResultId) =
-      val ctorSym = preAnalyzer.getCtorSymFromCtorLikeExprId(ctorExprId).get
-      val dtor = preAnalyzer.getMatchFromMatchScrutExprId(dtorScrutExprId).get
+    def getCtorInArm(ctorExprId: CtorId , dtorScrutExprId: MatchId) =
+      val ctorSym = preAnalyzer.getCtorSymFromCtorLikeExprId(ctorExprId._1).get
+      val dtor = preAnalyzer.getMatchFromMatchScrutExprId(dtorScrutExprId._1).get
       val arm =
         dtor.arms.find:
           case (Case.Cls(c1, _) -> body) => c1 is ctorSym
           case (Case.Tup(len, _) -> _) => preAnalyzer.arrBlkMemSym(len) is ctorSym
         .map(_._2).orElse(dtor.dflt).get
-      val armAndMatchRest =
-        preAnalyzer
-        .matchScrutToParentMatchScruts(dtorScrutExprId)
+      val armAndMatchRest = preAnalyzer
+        .matchScrutToParentMatchScruts(dtorScrutExprId._1)
         .foldLeft(Begin(arm, dtor.rest)): (acc, x) =>
           val newRest = preAnalyzer.getMatchFromMatchScrutExprId(x).get.rest
           Begin(acc, newRest)
       val traverser = new GetCtorsTraverser(armAndMatchRest)
-      traverser.ctors
-    def findCycle(c: Ctor, d: Dtor): Ls[ResultId] =
-      val cache = mutable.Set(c.exprId)
-      def go(ctorAndMatchesScrutExprIds: Ls[ResultId -> ResultId]): Ls[ResultId] =
+      traverser.ctors.map(_ -> dtorScrutExprId._2)
+    def findCycle(c: Ctor, d: Dtor): Ls[CtorId] =
+      val cache = mutable.Set(c.exprId -> c.instantiationId.get)
+      def go(ctorAndMatchesScrutExprIds: Ls[CtorId -> MatchId]): Ls[CtorId] =
         val newCtorsAndNewMatches = for
           (c, m) <- ctorAndMatchesScrutExprIds
           c <- getCtorInArm(c, m)
-          (_, ds -> noCons) <- ctorToDtor.filter(x => x._1.exprId == c)
+          (_, ds -> noCons) <- ctorToDtor.filter: x =>
+            (x._1.exprId === c._1) && (x._1.instantiationId.fold(false)(_ === c._2))
           _ = assert(!noCons)
           (mats, _) = ds.partitionMap:
             case d: Dtor => L(d)
             case s: FieldSel => R(s)
           m <- mats.headOption
-        yield c -> m.scrutExprId
+        yield c -> (m.scrutExprId -> m.instantiationId.get)
         val cycled = newCtorsAndNewMatches.filter: c =>
           !cache.add(c._1)
         if newCtorsAndNewMatches.isEmpty then
@@ -763,8 +765,8 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
         else
           go(newCtorsAndNewMatches)
       c.instantiationId -> d.instantiationId match
-        case S(id1) -> S(id2) if id1 == id2 =>
-          go(Ls(c.exprId -> d.scrutExprId))
+        case S(id1) -> S(id2) =>
+          go(Ls((c.exprId -> id1) -> (d.scrutExprId -> id2)))
         case _ => Nil
     for
       (ctor, dtors -> noCons) <- ctorToDtor
@@ -792,7 +794,10 @@ class GetCtorsTraverser(b: Block) extends BlockTraverser:
     case Instantiate(cls, args) =>
       if cls.asClsSymbol.isDefined then ctors += r.uid
       args.foreach(applyResult)
-    case Value.Arr(_) => ctors += r.uid
+    case Value.Arr(elems) =>
+      ctors += r.uid
+      elems.foreach:
+        case Arg(false, v) => applyResult(v)
     case p: Path => if p.asObjSymbol.isDefined then ctors += r.uid
   applyBlock(b)
 

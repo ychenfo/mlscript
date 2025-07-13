@@ -2,7 +2,7 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let calendar1, map_inst_0_tsni, groop_inst_1_tsni, groop_inst_2_tsni, zipWith_inst_3_tsni, emptyPic_inst_4_tsni, replicate_inst_4_5_tsni, map_inst_6_tsni, scanl_inst_7_tsni, monthLengths_inst_8_tsni, space_inst_9_tsni, replicate_inst_9_10_tsni, rjustify_inst_11_tsni, space_inst_11_9_tsni, replicate_inst_11_9_10_tsni, enumFromTo_inst_12_tsni, space_inst_13_tsni, replicate_inst_13_10_tsni, unlines_inst_14_tsni, map_inst_14_0_tsni, enumFromTo_inst_15_tsni, concat_inst_16_tsni, append_inst_16_17_tsni, testCalendar_nofib_inst_18_tsni, cal_inst_18_19_tsni, unlines_inst_18_19_14_tsni, map_inst_18_19_14_0_tsni, monthLengths_inst_18_19_20_tsni, firstDays_inst_18_19_21_tsni, monthLengths_inst_18_19_21_8_tsni, scanl_inst_18_19_21_7_tsni, map_inst_18_19_21_6_tsni, take_inst_18_19_21_22_tsni, block_inst_18_19_23_tsni, groop_inst_18_19_23_1_tsni, dates_inst_18_19_24_tsni, date_inst_18_19_24_25_tsni, rjustify_inst_18_19_24_25_11_tsni, space_inst_18_19_24_25_11_9_tsni, replicate_inst_18_19_24_25_11_9_10_tsni, enumFromTo_inst_18_19_24_12_tsni, cjustify_inst_18_19_26_tsni, space_inst_18_19_26_13_tsni, replicate_inst_18_19_26_13_10_tsni, zipWith_inst_18_19_27_tsni, zipWith_inst_18_19_28_tsni, block_inst_18_19_29_tsni, groop_inst_18_19_29_1_tsni, zip3_inst_18_19_30_tsni, cjustify_inst_18_19_31_tsni, space_inst_18_19_31_13_tsni, replicate_inst_18_19_31_13_10_tsni, enumFromTo_inst_18_15_tsni, map_inst_18_32_tsni, concat_inst_33_tsni, map_inst_34_tsni, map_inst_35_tsni, emptyPic_inst_36_tsni, append_inst_37_tsni, take_inst_22_tsni, append_inst_38_tsni, append_inst_11_38_tsni, map_inst_39_tsni, append_inst_40_tsni, concat_inst_14_33_tsni, emptyPic_inst_41_tsni, emptyPic_inst_42_tsni, map_inst_32_tsni, nofibListToString_inst_43_tsni, concat_inst_18_19_14_33_tsni, emptyPic_inst_18_19_41_tsni, emptyPic_inst_18_19_42_tsni, map_inst_18_19_23_34_tsni, append_inst_18_19_24_25_11_38_tsni, map_inst_18_19_24_39_tsni, append_inst_18_19_44_tsni, append_inst_18_19_26_40_tsni, append_inst_18_19_45_tsni, append_inst_18_19_46_tsni, map_inst_18_19_29_34_tsni, map_inst_18_19_47_tsni, emptyPic_inst_18_19_48_tsni, append_inst_18_19_31_40_tsni, match_xs_arm_Nil_inst_37_tsni, match_xs_arm_Cons_inst_6_tsni, match_ls_arm_Cons_inst_7_tsni, match_xs_arm_Cons_inst_18_19_30_tsni, match_zs_arm_Cons_inst_18_19_30_tsni, match_ls_arm_Cons_inst_18_19_21_7_tsni, match_xs_arm_Cons_inst_18_19_21_6_tsni, match_ys_arm_default_inst_18_19_30_tsni, match_xs_arm_Nil_inst_18_19_45_tsni, match_xss_arm_default_inst_18_19_27_tsni, match_xs_arm_Nil_inst_18_19_47_tsni;
+let calendar1, map_inst_0_tsni, groop_inst_1_tsni, groop_inst_2_tsni, zipWith_inst_3_tsni, emptyPic_inst_4_tsni, replicate_inst_4_5_tsni, map_inst_6_tsni, scanl_inst_7_tsni, monthLengths_inst_8_tsni, space_inst_9_tsni, replicate_inst_9_10_tsni, rjustify_inst_11_tsni, space_inst_11_9_tsni, replicate_inst_11_9_10_tsni, enumFromTo_inst_12_tsni, space_inst_13_tsni, replicate_inst_13_10_tsni, unlines_inst_14_tsni, map_inst_14_0_tsni, enumFromTo_inst_15_tsni, concat_inst_16_tsni, append_inst_16_17_tsni, testCalendar_nofib_inst_18_tsni, cal_inst_18_19_tsni, unlines_inst_18_19_14_tsni, map_inst_18_19_14_0_tsni, monthLengths_inst_18_19_20_tsni, firstDays_inst_18_19_21_tsni, monthLengths_inst_18_19_21_8_tsni, scanl_inst_18_19_21_7_tsni, map_inst_18_19_21_6_tsni, take_inst_18_19_21_22_tsni, block_inst_18_19_23_tsni, groop_inst_18_19_23_1_tsni, dates_inst_18_19_24_tsni, date_inst_18_19_24_25_tsni, rjustify_inst_18_19_24_25_11_tsni, space_inst_18_19_24_25_11_9_tsni, replicate_inst_18_19_24_25_11_9_10_tsni, enumFromTo_inst_18_19_24_12_tsni, cjustify_inst_18_19_26_tsni, space_inst_18_19_26_13_tsni, replicate_inst_18_19_26_13_10_tsni, zipWith_inst_18_19_27_tsni, zipWith_inst_18_19_28_tsni, block_inst_18_19_29_tsni, groop_inst_18_19_29_1_tsni, zip3_inst_18_19_30_tsni, cjustify_inst_18_19_31_tsni, space_inst_18_19_31_13_tsni, replicate_inst_18_19_31_13_10_tsni, enumFromTo_inst_18_15_tsni, map_inst_18_32_tsni, concat_inst_33_tsni, map_inst_34_tsni, map_inst_35_tsni, emptyPic_inst_36_tsni, append_inst_37_tsni, take_inst_22_tsni, append_inst_38_tsni, append_inst_11_38_tsni, map_inst_39_tsni, append_inst_40_tsni, concat_inst_14_33_tsni, emptyPic_inst_41_tsni, emptyPic_inst_42_tsni, map_inst_32_tsni, nofibListToString_inst_43_tsni, concat_inst_18_19_14_33_tsni, emptyPic_inst_18_19_41_tsni, emptyPic_inst_18_19_42_tsni, map_inst_18_19_23_34_tsni, append_inst_18_19_24_25_11_38_tsni, map_inst_18_19_24_39_tsni, append_inst_18_19_44_tsni, append_inst_18_19_26_40_tsni, append_inst_18_19_45_tsni, append_inst_18_19_46_tsni, map_inst_18_19_29_34_tsni, emptyPic_inst_18_19_47_tsni, append_inst_18_19_31_40_tsni, match_xs_arm_Nil_inst_37_tsni, match_xs_arm_Cons_inst_6_tsni, match_ls_arm_Cons_inst_7_tsni, match_xs_arm_Cons_inst_18_19_30_tsni, match_zs_arm_Cons_inst_18_19_30_tsni, match_ls_arm_Cons_inst_18_19_21_7_tsni, match_xs_arm_Cons_inst_18_19_21_6_tsni, match_ys_arm_default_inst_18_19_30_tsni, match_xs_arm_Nil_inst_18_19_45_tsni, match_xss_arm_default_inst_18_19_27_tsni;
 match_xs_arm_Nil_inst_37_tsni = function match_xs_arm_Nil_inst_37_tsni(ys) {
   return ys
 };
@@ -55,7 +55,7 @@ match_xs_arm_Cons_inst_18_19_30_tsni = function match_xs_arm_Cons_inst_18_19_30_
   return runtime.safeCall(ys(zs, x, xs))
 };
 match_zs_arm_Cons_inst_18_19_30_tsni = function match_zs_arm_Cons_inst_18_19_30_tsni(x, xs, y, ys, _deforest_Cons_head_inst_18_19_30_tsni, _deforest_Cons_tail_inst_18_19_30_tsni) {
-  let param0, param1, z, zs, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2;
+  let param0, param1, z, zs, arr, tmp, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2;
   param0 = _deforest_Cons_head_inst_18_19_30_tsni;
   param1 = _deforest_Cons_tail_inst_18_19_30_tsni;
   z = param0;
@@ -76,18 +76,7 @@ match_zs_arm_Cons_inst_18_19_30_tsni = function match_zs_arm_Cons_inst_18_19_30_
     return append_inst_18_19_46_tsni(tmp1, tmp2)
   };
   tmp = zip3_inst_18_19_30_tsni(xs, ys, zs);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
-  return (f) => {
-    let param01, param11, x1, xs1, tmp1, tmp2;
-    param01 = _deforest_Cons_head;
-    param11 = _deforest_Cons_tail;
-    x1 = param01;
-    xs1 = param11;
-    tmp1 = runtime.safeCall(f(x1));
-    tmp2 = map_inst_18_19_47_tsni(f, xs1);
-    return NofibPrelude.Cons(tmp1, tmp2)
-  }
+  return NofibPrelude.Cons(arr, tmp)
 };
 match_ls_arm_Cons_inst_18_19_21_7_tsni = function match_ls_arm_Cons_inst_18_19_21_7_tsni(f, q, _deforest_Cons_head_inst_18_19_21_7_tsni, _deforest_Cons_tail_inst_18_19_21_7_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -141,9 +130,7 @@ match_xs_arm_Cons_inst_18_19_21_6_tsni = function match_xs_arm_Cons_inst_18_19_2
   }
 };
 match_ys_arm_default_inst_18_19_30_tsni = function match_ys_arm_default_inst_18_19_30_tsni(zs, x, xs) {
-  return (f) => {
-    return match_xs_arm_Nil_inst_18_19_47_tsni(f)
-  }
+  return NofibPrelude.Nil
 };
 match_xs_arm_Nil_inst_18_19_45_tsni = function match_xs_arm_Nil_inst_18_19_45_tsni(ys) {
   return ys
@@ -152,9 +139,6 @@ match_xss_arm_default_inst_18_19_27_tsni = function match_xss_arm_default_inst_1
   return (ys) => {
     return match_xs_arm_Nil_inst_18_19_45_tsni(ys)
   }
-};
-match_xs_arm_Nil_inst_18_19_47_tsni = function match_xs_arm_Nil_inst_18_19_47_tsni(f) {
-  return NofibPrelude.Nil
 };
 map_inst_0_tsni = function map_inst_0_tsni(f, xs) {
   let param0, param1, x, xs1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -598,7 +582,7 @@ cal_inst_18_19_tsni = function cal_inst_18_19_tsni(year) {
       tmp11 = NofibPrelude.replicate(w, " ");
       return NofibPrelude.replicate(h, tmp11)
     };
-    tmp10 = emptyPic_inst_18_19_48_tsni(arr2);
+    tmp10 = emptyPic_inst_18_19_47_tsni(arr2);
     return NofibPrelude.Cons(tmp9, tmp10)
   };
   body = function body(yr) {
@@ -609,7 +593,7 @@ cal_inst_18_19_tsni = function cal_inst_18_19_tsni(year) {
       tmp9 = pic(x);
       return pad(tmp9)
     });
-    tmp8 = map_inst_18_19_47_tsni(lambda, tmp7);
+    tmp8 = NofibPrelude.map(lambda, tmp7);
     return block_inst_18_19_29_tsni(3, tmp8)
   };
   pic = function pic(mnfdml) {
@@ -749,9 +733,7 @@ monthLengths_inst_18_19_20_tsni = function monthLengths_inst_18_19_20_tsni(year)
   feb = tmp;
   _deforest_Cons_head11 = 31;
   _deforest_Cons_tail11 = (x, xs, y, ys) => {
-    return (f) => {
-      return match_xs_arm_Nil_inst_18_19_47_tsni(f)
-    }
+    return NofibPrelude.Nil
   };
   tmp1 = (x, xs, y, ys) => {
     return match_zs_arm_Cons_inst_18_19_30_tsni(x, xs, y, ys, _deforest_Cons_head11, _deforest_Cons_tail11)
@@ -1320,10 +1302,7 @@ append_inst_18_19_46_tsni = function append_inst_18_19_46_tsni(xs, ys) {
 map_inst_18_19_29_34_tsni = function map_inst_18_19_29_34_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-map_inst_18_19_47_tsni = function map_inst_18_19_47_tsni(f, xs) {
-  return runtime.safeCall(xs(f))
-};
-emptyPic_inst_18_19_48_tsni = function emptyPic_inst_18_19_48_tsni(hw) {
+emptyPic_inst_18_19_47_tsni = function emptyPic_inst_18_19_47_tsni(hw) {
   return runtime.safeCall(hw())
 };
 append_inst_18_19_31_40_tsni = function append_inst_18_19_31_40_tsni(xs, ys) {
@@ -1347,9 +1326,7 @@ append_inst_18_19_31_40_tsni = function append_inst_18_19_31_40_tsni(xs, ys) {
     tmp11 = NofibPrelude.nofibStringToList("December");
     _deforest_Cons_head11 = tmp11;
     _deforest_Cons_tail11 = (ys, zs) => {
-      return (f) => {
-        return match_xs_arm_Nil_inst_18_19_47_tsni(f)
-      }
+      return NofibPrelude.Nil
     };
     tmp12 = (ys, zs) => {
       return match_xs_arm_Cons_inst_18_19_30_tsni(ys, zs, _deforest_Cons_head11, _deforest_Cons_tail11)
