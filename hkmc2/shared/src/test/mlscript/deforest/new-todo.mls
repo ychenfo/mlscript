@@ -115,7 +115,25 @@ f()
 //│ x = A
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:A)@0@inst__tsni --> Ref(x)@inst__tsni@A
+//│ 
 //│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// FIXME:
+:fixme
+:deforest
+let lsit = [2, 1]
+let useless = if lsit is [a, b] then 0
+//│ lsit = [2, 1]
+//│ useless = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Arr(List(Arg(false,Lit(IntLit(2))), Arg(false,Lit(IntLit(1)))))@0@inst__tsni --> Ref(lsit)@inst__tsni@Deforest_Arr_2
+//│ -------------- executing -------------
+//│ ═══[RUNTIME ERROR] The result from deforestated program ("()") is different from the one computed by the original prorgam ("undefined")
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+

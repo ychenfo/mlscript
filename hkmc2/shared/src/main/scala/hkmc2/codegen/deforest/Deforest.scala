@@ -35,7 +35,7 @@ class GetInfoOfImportedFile(publicModName: String) extends BlockTraverser:
       super.applyDefn(defn)
       // shouldCollectFunDefn = false
     case lzClass: ClsLikeDefn if (lzClass.k is syntax.Cls) && lzClass.sym.nme === "Lazy" =>
-      lazySymbols ::= lzClass.sym
+      lazySymbols ::= lzClass.isym // the symbol attached to select is the inner symbol
     case _ => super.applyDefn(defn)
   
   override def applyFunDefn(fun: FunDefn): Unit =

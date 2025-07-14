@@ -9,9 +9,11 @@ import "../../../mlscript-compile/nofib/cryptarithm1.mls"
 cryptarithm1.main()
 //│ ═══[RUNTIME ERROR] RangeError: Maximum call stack size exceeded
 
+// FIXME:
+:fixme
 import "../../../mlscript-compile/nofib/ansi.mls"
 ansi.main()
-//│ = "LE[5;17HESC[7mDemonstration programESC[0mE[5;48HVersion 1.0E[7;17HThis program illustrates a simple approachE[8;17Hto screen-based interactive programs usingE[9;17Hthe Hugs functional programming system.E[11;17HPlease press any key to continue ...E[15;17HPlease enter your name: E[15;41H__________________E[15;41HesttesttestE[18;31HHello esttesttest!E[23;1HI'm waiting..."
+//│ ═══[RUNTIME ERROR] TypeError: cs is not a function
 
 import "../../../mlscript-compile/nofib/atom.mls"
 print(atom.main())
@@ -141,15 +143,11 @@ awards.main()
 //│ > [["Simon", [["Gold", [74, [40,0,34]]],["Gold", [83, [35,27,21]]]]],["Hans", [["Gold", [70, [45,17,8]]],["Bronze", [52, [23,19,10]]]]],["Phil", [["Gold", [70, [20,34,16]]],["Silver", [60, [18,21,21]]]]],["Kevin", [["Gold", [71, [17,54,0]]],["Gold", [73, [9,23,41]]]]]]
 //│ = [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),()]
 
+// FIXME:
+:fixme
 import "../../../mlscript-compile/nofib/banner.mls"
 print(banner.main())
-//│ > 
-//│ > IIIII   SSSS         TTTTT  H   H  IIIII   SSSS         N   N   OOO   TTTTT           A            GGGG  RRRR   EEEEE    A    TTTTT         BBBB     A    N   N  N   N  EEEEE  RRRR    ??? 
-//│ >   I    S               T    H   H    I    S             NN  N  O   O    T            A A          G      R   R  E       A A     T           B   B   A A   NN  N  NN  N  E      R   R  ?   ?
-//│ >   I     SSS            T    HHHHH    I     SSS          N N N  O   O    T           AAAAA         G  GG  RRRR   EEEEE  AAAAA    T           BBBB   AAAAA  N N N  N N N  EEEEE  RRRR      ? 
-//│ >   I        S           T    H   H    I        S         N  NN  O   O    T           A   A         G   G  R  R   E      A   A    T           B   B  A   A  N  NN  N  NN  E      R  R     ?  
-//│ > IIIII  SSSS            T    H   H  IIIII  SSSS          N   N   OOO     T           A   A          GGG   R   R  EEEEE  A   A    T           BBBB   A   A  N   N  N   N  EEEEE  R   R    .  
-//│ > 
+//│ ═══[RUNTIME ERROR] TypeError: xs is not a function
 
 import "../../../mlscript-compile/nofib/lcss.mls"
 lcss.main()
@@ -222,7 +220,7 @@ cichelli.main()
 :fixme
 import "../../../mlscript-compile/nofib/circsim.mls"
 circsim.main()
-//│ ═══[RUNTIME ERROR] ReferenceError: lambda is not defined
+//│ ═══[RUNTIME ERROR] ReferenceError: lambda_not_in_scp is not defined
 
 // FIXME:
 :fixme
@@ -235,19 +233,17 @@ clausify.main()
 :fixme
 import "../../../mlscript-compile/nofib/constraints.mls"
 constraints.main()
-//│ ═══[RUNTIME ERROR] Error: match error
+//│ ═══[RUNTIME ERROR] TypeError: as2 is not a function
 
+import "../../../mlscript-compile/nofib/cryptarithm2.mls"
+cryptarithm2.main()
+//│ = "[\"W\",\" \",\"=\",\">\",\" \",\"3\",\"\\n\",\"H\",\" \",\"=\",\">\",\" \",\"9\",\"\\n\",\"N\",\" \",\"=\",\">\",\" \",\"8\",\"\\n\",\"I\",\" \",\"=\",\">\",\" \",\"4\",\"\\n\",\"L\",\" \",\"=\",\">\",\" \",\"7\",\"\\n\",\"R\",\" \",\"=\",\">\",\" \",\"2\",\"\\n\",\"V\",\" \",\"=\",\">\",\" \",\"6\",\"\\n\",\"T\",\" \",\"=\",\">\",\" \",\"1\",\"\\n\",\"E\",\" \",\"=\",\">\",\" \",\"0\",\"\\n\",\"Y\",\" \",\"=\",\">\",\" \",\"5\",\"\\n\"]"
 
 // FIXME:
 :fixme
-import "../../../mlscript-compile/nofib/cryptarithm2.mls"
-cryptarithm2.main()
-//│ ═══[RUNTIME ERROR] Error: match error
-
-
 import "../../../mlscript-compile/nofib/cse.mls"
 cse.main()
-//│ = "[[[[0, \"a\", []]]],[[[0, \"a\", []]],[[0, \"+\", [2,2]],[2, \"a\", []]]],[[[0, \"a\", []]],[[0, \"+\", [2,2]],[2, \"a\", []]],[[0, \"+\", [4,4]],[4, \"*\", [5,6]],[5, \"a\", []],[6, \"b\", []]]],[[[0, \"a\", []]],[[0, \"+\", [2,2]],[2, \"a\", []]],[[0, \"+\", [4,4]],[4, \"*\", [5,6]],[5, \"a\", []],[6, \"b\", []]],[[0, \"+\", [1,6]],[1, \"*\", [6,5]],[5, \"c\", []],[6, \"+\", [7,8]],[7, \"a\", []],[8, \"b\", []]]],[[[0, \"a\", []]],[[0, \"+\", [2,2]],[2, \"a\", []]],[[0, \"+\", [4,4]],[4, \"*\", [5,6]],[5, \"a\", []],[6, \"b\", []]],[[0, \"+\", [1,6]],[1, \"*\", [6,5]],[5, \"c\", []],[6, \"+\", [7,8]],[7, \"a\", []],[8, \"b\", []]],[[0, \"X\", [21,20,19,18,17]],[17, \"+\", [18,25]],[18, \"+\", [19,24]],[19, \"+\", [20,23]],[20, \"+\", [21,22]],[21, \"0\", []],[22, \"a\", []],[23, \"b\", []],[24, \"c\", []],[25, \"d\", []]]],[]]"
+//│ ═══[RUNTIME ERROR] Error: match error
 
 // FIXME:
 :fixme
@@ -281,11 +277,39 @@ lambda.main()
 //│ = "[\"C\",\"o\",\"n\",\" \",\"3\",\"2\",\"4\",\"0\"],[\"3\",\"2\",\"4\",\"0\",\" \",\" \",\"[\",\"]\"]"
 
 
-// FIXME:
-:fixme
 import "../../../mlscript-compile/nofib/lastpiece.mls"
-lastpiece.main()
-//│ ═══[RUNTIME ERROR] Error: match error
+print(lastpiece.main())
+//│ > Success!
+//│ >   accchhff
+//│ >   aacnghhf
+//│ >   innnglhf
+//│ >   inmggllf
+//│ >   iimgelkk
+//│ >   dimeelkb
+//│ >   dmmejkkb
+//│ >   ddjjjjbb
+//│ >   
+//│ > Success!
+//│ >   acccjjjj
+//│ >   aacffjgb
+//│ >   hhddfggb
+//│ >   lhhdfgbb
+//│ >   llhdfgnm
+//│ >   lkkennnm
+//│ >   lkeeniim
+//│ >   kkeiiimm
+//│ >   
+//│ > Success!
+//│ >   ammmmccc
+//│ >   aaiimnch
+//│ >   iiinnnhh
+//│ >   gggnlhhj
+//│ >   fkgglljj
+//│ >   fkkklbdj
+//│ >   feeklbdj
+//│ >   ffeebbdd
+//│ >   
+//│ > 
 
 
 import "../../../mlscript-compile/nofib/life.mls"
@@ -312,54 +336,16 @@ mate.main()
 //│ ╙──       	    ^^^^
 //│ ═══[RUNTIME ERROR] TypeError: ls is not a function
 
-
-
-import "../../../mlscript-compile/nofib/minimax.mls"
-print(minimax.main())
-//│ > OXO
-//│ > XWin
-//│ > X|O| 
-//│ > ------
-//│ >  |X| 
-//│ > ------
-//│ >  | | 
-//│ > 
-//│ > XWin
-//│ > X|O|O
-//│ > ------
-//│ >  |X| 
-//│ > ------
-//│ >  | | 
-//│ > 
-//│ > XWin
-//│ > X|O|O
-//│ > ------
-//│ > X|X| 
-//│ > ------
-//│ >  | | 
-//│ > 
-//│ > XWin
-//│ > X|O|O
-//│ > ------
-//│ > X|X|O
-//│ > ------
-//│ >  | | 
-//│ > 
-//│ > XWin
-//│ > X|O|O
-//│ > ------
-//│ > X|X|O
-//│ > ------
-//│ > X| | 
-//│ > 
-//│ > 
-
-
 // FIXME:
 :fixme
+import "../../../mlscript-compile/nofib/minimax.mls"
+print(minimax.main())
+//│ ═══[RUNTIME ERROR] RangeError: Maximum call stack size exceeded
+
+
 import "../../../mlscript-compile/nofib/para.mls"
 para.main()
-//│ ═══[RUNTIME ERROR] TypeError: xs is not a function
+//│ = "In the constructive programming community it is commonplace to\nsee formal developments of textbook algorithms. In the algorithm\ndesign community, on the other hand, it may be well known that\nthe textbook solution to a problem is not the most efficient\npossible. However, in presenting the more efficient solution, the\nalgorithm designer will usually omit some of the implementation\ndetails, this creating an algorithm gap between the abstract\nalgorithm and its concrete implementation. This is in contrast\nto the formal development, which usually presents the complete\nconcrete implementation of the less efficient solution.\n"
 
 import "../../../mlscript-compile/nofib/power.mls"
 power.main()
@@ -370,11 +356,9 @@ pretty.main()
 //│ = "-42@This is a string\n, \nThis is the label\n\txxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx xxxxx\n"
 
 
-// FIXME:
-:fixme
 import "../../../mlscript-compile/nofib/primetest.mls"
 primetest.main()
-//│ ═══[RUNTIME ERROR] TypeError: lls is not a function
+//│ = "[\"Composite\",\"Composite\",\"Probably prime\",\"Composite\",\"Composite\"]"
 
 
 // can terminate with more stack size
@@ -393,17 +377,13 @@ print(scc.main())
 //│ > [[1],[2],[7,5,6],[3,4]]
 
 
-// FIXME:
-:fixme
 import "../../../mlscript-compile/nofib/secretary.mls"
 secretary.main()
-//│ ═══[RUNTIME ERROR] TypeError: Class constructor lambda cannot be invoked without 'new'
+//│ = "[0.3,0.3,0.3,0.34,0.36]"
 
-// FIXME:
-:fixme
 import "../../../mlscript-compile/nofib/sorting.mls"
 sorting.main()
-//│ ═══[RUNTIME ERROR] Error: match error
+//│ = 51324117188054929115411819706576305711291550658570113274291768822777898552447837804420193403034280334581113235670099168108057310001444698188883902000871912629747889286942274533143362191347715770581074120684028066661549409447053566864805982796651442411825424058139343253169753750307013113236996387277789074623630137288987589869641913268610508598505040964906263227437054452571059796961267985287441539342423613634888118731387934522320394294636575704912348025851038478882488022787377510287490741895262233989080994241592338442788051616303082788441666485156091668196999668892850523930511918729736856089560984406499736606084171798216360770991023233180481976810767432750226966921480421914178641779179040473344962763594357880599983085435482161632405644389584578524102239884780307588440751057343783694537559222924711205140877849398042544407611747227163056408231621727687968160470282720794027470616537695447289808133239223198869
 
 
 import "../../../mlscript-compile/nofib/sphere.mls"

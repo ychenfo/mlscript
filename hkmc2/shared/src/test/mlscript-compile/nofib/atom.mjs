@@ -1,20 +1,11 @@
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
-let atom1, testforce_inst_0_tsni, scalarMut_inst_0_1_tsni, take_lz_inst_2_tsni, testAtom_nofib_inst_3_tsni, testforce_inst_3_0_tsni, scalarMut_inst_3_0_1_tsni, take_lz_inst_3_2_tsni, dotMult_inst_0_4_tsni, dotMult_inst_3_0_4_tsni, match_ls_arm_Nil_inst_3_tsni, match_ls_arm_Cons_inst_3_tsni;
-match_ls_arm_Nil_inst_3_tsni = function match_ls_arm_Nil_inst_3_tsni(lscomp) {
-  return NofibPrelude.Nil
-};
-match_ls_arm_Cons_inst_3_tsni = function match_ls_arm_Cons_inst_3_tsni(lscomp, _deforest_Cons_head_inst_3_tsni, _deforest_Cons_tail_inst_3_tsni) {
-  let param0, param1, state, t, tmp, tmp1, tmp2;
-  param0 = _deforest_Cons_head_inst_3_tsni;
-  param1 = _deforest_Cons_tail_inst_3_tsni;
-  state = param0;
-  t = param1;
-  tmp = atom.show(state);
-  tmp1 = NofibPrelude.stringConcat(tmp, "\n");
-  tmp2 = lscomp(t);
-  return NofibPrelude.Cons(tmp1, tmp2)
+let atom1, testforce_inst_0_tsni, scalarMut_inst_0_1_tsni, testAtom_nofib_inst_2_tsni, show_inst_2_3_tsni, testforce_inst_2_0_tsni, scalarMut_inst_2_0_1_tsni, take_lz_inst_2_4_tsni, dotMult_inst_0_5_tsni, stringListConcat_inst_2_3_6_tsni, dotMult_inst_2_0_5_tsni, stringListConcat_inst_2_7_tsni, match_ls_arm_Nil_inst_2_tsni;
+match_ls_arm_Nil_inst_2_tsni = function match_ls_arm_Nil_inst_2_tsni(lscomp) {
+  return () => {
+    return ""
+  }
 };
 testforce_inst_0_tsni = function testforce_inst_0_tsni(k, ss) {
   let tmp, lambda;
@@ -32,7 +23,7 @@ testforce_inst_0_tsni = function testforce_inst_0_tsni(k, ss) {
         atoms = param1;
         tmp1 = - 1.0;
         tmp2 = scalarMut_inst_0_1_tsni(tmp1, k);
-        tmp3 = dotMult_inst_0_4_tsni(tmp2, pos);
+        tmp3 = dotMult_inst_0_5_tsni(tmp2, pos);
         tmp4 = testforce_inst_0_tsni(k, atoms);
         return NofibPrelude.LzCons(tmp3, tmp4)
       } else {
@@ -48,39 +39,7 @@ testforce_inst_0_tsni = function testforce_inst_0_tsni(k, ss) {
 scalarMut_inst_0_1_tsni = function scalarMut_inst_0_1_tsni(c, fs) {
   return runtime.safeCall(fs(c))
 };
-take_lz_inst_2_tsni = function take_lz_inst_2_tsni(n, ls) {
-  let scrut, scrut1, param0, param1, h, t, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  scrut = n > 0;
-  if (scrut === true) {
-    scrut1 = NofibPrelude.force(ls);
-    if (scrut1 instanceof NofibPrelude.LzNil.class) {
-      return (lscomp) => {
-        return match_ls_arm_Nil_inst_3_tsni(lscomp)
-      }
-    } else if (scrut1 instanceof NofibPrelude.LzCons.class) {
-      param0 = scrut1.head;
-      param1 = scrut1.tail;
-      h = param0;
-      t = param1;
-      tmp = n - 1;
-      tmp1 = take_lz_inst_2_tsni(tmp, t);
-      _deforest_Cons_head = h;
-      _deforest_Cons_tail = tmp1;
-      return (lscomp) => {
-        return match_ls_arm_Cons_inst_3_tsni(lscomp, _deforest_Cons_head, _deforest_Cons_tail)
-      }
-    } else {
-      return (lscomp) => {
-        return match_ls_arm_Nil_inst_3_tsni(lscomp)
-      }
-    }
-  } else {
-    return (lscomp) => {
-      return match_ls_arm_Nil_inst_3_tsni(lscomp)
-    }
-  }
-};
-testAtom_nofib_inst_3_tsni = function testAtom_nofib_inst_3_tsni(n) {
+testAtom_nofib_inst_2_tsni = function testAtom_nofib_inst_2_tsni(n) {
   let lscomp, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, _deforest_Cons_head, _deforest_Cons_tail;
   lscomp = function lscomp(ls) {
     return runtime.safeCall(ls(lscomp))
@@ -98,7 +57,7 @@ testAtom_nofib_inst_3_tsni = function testAtom_nofib_inst_3_tsni(n) {
     f = param0;
     fs = param1;
     tmp7 = c * f;
-    tmp8 = scalarMut_inst_3_0_1_tsni(c, fs);
+    tmp8 = scalarMut_inst_2_0_1_tsni(c, fs);
     _deforest_Cons_head1 = tmp7;
     _deforest_Cons_tail1 = tmp8;
     return (gs) => {
@@ -113,7 +72,7 @@ testAtom_nofib_inst_3_tsni = function testAtom_nofib_inst_3_tsni(n) {
         g = param02;
         gs1 = param12;
         tmp9 = f1 * g;
-        tmp10 = dotMult_inst_3_0_4_tsni(fs1, gs1);
+        tmp10 = dotMult_inst_2_0_5_tsni(fs1, gs1);
         return NofibPrelude.Cons(tmp9, tmp10)
       } else {
         return NofibPrelude.Nil
@@ -123,12 +82,54 @@ testAtom_nofib_inst_3_tsni = function testAtom_nofib_inst_3_tsni(n) {
   tmp1 = NofibPrelude.Cons(1.0, NofibPrelude.Nil);
   tmp2 = NofibPrelude.Cons(0.0, NofibPrelude.Nil);
   tmp3 = atom.State(tmp1, tmp2);
-  tmp4 = atom.runExperiment(testforce_inst_3_0_tsni, 0.02, tmp, tmp3);
-  tmp5 = take_lz_inst_3_2_tsni(n, tmp4);
+  tmp4 = atom.runExperiment(testforce_inst_2_0_tsni, 0.02, tmp, tmp3);
+  tmp5 = take_lz_inst_2_4_tsni(n, tmp4);
   tmp6 = lscomp(tmp5);
-  return NofibPrelude.stringListConcat(tmp6)
+  return stringListConcat_inst_2_7_tsni(tmp6)
 };
-testforce_inst_3_0_tsni = function testforce_inst_3_0_tsni(k, ss) {
+show_inst_2_3_tsni = function show_inst_2_3_tsni(s) {
+  let lscomp, param0, param1, pos, vel, tmp;
+  lscomp = function lscomp(ls) {
+    let param01, param11, component, t, tmp1, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
+    if (ls instanceof NofibPrelude.Nil.class) {
+      return () => {
+        return ""
+      }
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param01 = ls.head;
+      param11 = ls.tail;
+      component = param01;
+      t = param11;
+      tmp1 = NofibPrelude.stringOfFloat(component);
+      tmp2 = NofibPrelude.stringConcat(tmp1, "\t");
+      tmp3 = lscomp(t);
+      _deforest_Cons_head = tmp2;
+      _deforest_Cons_tail = tmp3;
+      return () => {
+        let param02, param12, h, t1, tmp4;
+        param02 = _deforest_Cons_head;
+        param12 = _deforest_Cons_tail;
+        h = param02;
+        t1 = param12;
+        tmp4 = stringListConcat_inst_2_3_6_tsni(t1);
+        return NofibPrelude.stringConcat(h, tmp4)
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  };
+  if (s instanceof atom.State.class) {
+    param0 = s.position;
+    param1 = s.velocity;
+    pos = param0;
+    vel = param1;
+    tmp = lscomp(pos);
+    return stringListConcat_inst_2_3_6_tsni(tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+testforce_inst_2_0_tsni = function testforce_inst_2_0_tsni(k, ss) {
   let tmp, lambda;
   lambda = (undefined, function () {
     let scrut, param0, param1, param01, param11, pos, vel, atoms, tmp1, tmp2, tmp3, tmp4;
@@ -143,9 +144,9 @@ testforce_inst_3_0_tsni = function testforce_inst_3_0_tsni(k, ss) {
         vel = param11;
         atoms = param1;
         tmp1 = - 1.0;
-        tmp2 = scalarMut_inst_3_0_1_tsni(tmp1, k);
-        tmp3 = dotMult_inst_3_0_4_tsni(tmp2, pos);
-        tmp4 = testforce_inst_3_0_tsni(k, atoms);
+        tmp2 = scalarMut_inst_2_0_1_tsni(tmp1, k);
+        tmp3 = dotMult_inst_2_0_5_tsni(tmp2, pos);
+        tmp4 = testforce_inst_2_0_tsni(k, atoms);
         return NofibPrelude.LzCons(tmp3, tmp4)
       } else {
         throw new globalThis.Error("match error");
@@ -157,17 +158,17 @@ testforce_inst_3_0_tsni = function testforce_inst_3_0_tsni(k, ss) {
   tmp = lambda;
   return NofibPrelude.lazy(tmp)
 };
-scalarMut_inst_3_0_1_tsni = function scalarMut_inst_3_0_1_tsni(c, fs) {
+scalarMut_inst_2_0_1_tsni = function scalarMut_inst_2_0_1_tsni(c, fs) {
   return runtime.safeCall(fs(c))
 };
-take_lz_inst_3_2_tsni = function take_lz_inst_3_2_tsni(n, ls) {
+take_lz_inst_2_4_tsni = function take_lz_inst_2_4_tsni(n, ls) {
   let scrut, scrut1, param0, param1, h, t, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   scrut = n > 0;
   if (scrut === true) {
     scrut1 = NofibPrelude.force(ls);
     if (scrut1 instanceof NofibPrelude.LzNil.class) {
       return (lscomp) => {
-        return match_ls_arm_Nil_inst_3_tsni(lscomp)
+        return match_ls_arm_Nil_inst_2_tsni(lscomp)
       }
     } else if (scrut1 instanceof NofibPrelude.LzCons.class) {
       param0 = scrut1.head;
@@ -175,28 +176,52 @@ take_lz_inst_3_2_tsni = function take_lz_inst_3_2_tsni(n, ls) {
       h = param0;
       t = param1;
       tmp = n - 1;
-      tmp1 = take_lz_inst_3_2_tsni(tmp, t);
+      tmp1 = take_lz_inst_2_4_tsni(tmp, t);
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp1;
       return (lscomp) => {
-        return match_ls_arm_Cons_inst_3_tsni(lscomp, _deforest_Cons_head, _deforest_Cons_tail)
+        let param01, param11, state, t1, tmp2, tmp3, tmp4, _deforest_Cons_head1, _deforest_Cons_tail1;
+        param01 = _deforest_Cons_head;
+        param11 = _deforest_Cons_tail;
+        state = param01;
+        t1 = param11;
+        tmp2 = show_inst_2_3_tsni(state);
+        tmp3 = NofibPrelude.stringConcat(tmp2, "\n");
+        tmp4 = lscomp(t1);
+        _deforest_Cons_head1 = tmp3;
+        _deforest_Cons_tail1 = tmp4;
+        return () => {
+          let param02, param12, h1, t2, tmp5;
+          param02 = _deforest_Cons_head1;
+          param12 = _deforest_Cons_tail1;
+          h1 = param02;
+          t2 = param12;
+          tmp5 = stringListConcat_inst_2_7_tsni(t2);
+          return NofibPrelude.stringConcat(h1, tmp5)
+        }
       }
     } else {
       return (lscomp) => {
-        return match_ls_arm_Nil_inst_3_tsni(lscomp)
+        return match_ls_arm_Nil_inst_2_tsni(lscomp)
       }
     }
   } else {
     return (lscomp) => {
-      return match_ls_arm_Nil_inst_3_tsni(lscomp)
+      return match_ls_arm_Nil_inst_2_tsni(lscomp)
     }
   }
 };
-dotMult_inst_0_4_tsni = function dotMult_inst_0_4_tsni(fs, gs) {
+dotMult_inst_0_5_tsni = function dotMult_inst_0_5_tsni(fs, gs) {
   return runtime.safeCall(fs(gs))
 };
-dotMult_inst_3_0_4_tsni = function dotMult_inst_3_0_4_tsni(fs, gs) {
+stringListConcat_inst_2_3_6_tsni = function stringListConcat_inst_2_3_6_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+dotMult_inst_2_0_5_tsni = function dotMult_inst_2_0_5_tsni(fs, gs) {
   return runtime.safeCall(fs(gs))
+};
+stringListConcat_inst_2_7_tsni = function stringListConcat_inst_2_7_tsni(ls) {
+  return runtime.safeCall(ls())
 };
 (class atom {
   static {
@@ -418,7 +443,7 @@ dotMult_inst_3_0_4_tsni = function dotMult_inst_3_0_4_tsni(fs, gs) {
           g = param02;
           gs3 = param12;
           tmp9 = f1 * g;
-          tmp10 = dotMult_inst_0_4_tsni(fs4, gs3);
+          tmp10 = dotMult_inst_0_5_tsni(fs4, gs3);
           return NofibPrelude.Cons(tmp9, tmp10)
         } else {
           return NofibPrelude.Nil
@@ -429,12 +454,12 @@ dotMult_inst_3_0_4_tsni = function dotMult_inst_3_0_4_tsni(fs, gs) {
     tmp2 = NofibPrelude.Cons(0.0, NofibPrelude.Nil);
     tmp3 = atom.State(tmp1, tmp2);
     tmp4 = atom.runExperiment(testforce_inst_0_tsni, 0.02, tmp, tmp3);
-    tmp5 = take_lz_inst_2_tsni(n, tmp4);
+    tmp5 = NofibPrelude.take_lz(n, tmp4);
     tmp6 = lscomp(tmp5);
     return NofibPrelude.stringListConcat(tmp6)
   } 
   static main() {
-    return testAtom_nofib_inst_3_tsni(20)
+    return testAtom_nofib_inst_2_tsni(20)
   }
   static toString() { return "atom"; }
 });

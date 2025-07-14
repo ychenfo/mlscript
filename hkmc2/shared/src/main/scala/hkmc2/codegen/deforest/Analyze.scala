@@ -178,7 +178,8 @@ class DeforestPreAnalyzer(
       case N =>
         handleable = true
         inFunDef = S(fun.sym)
-        symsDefinedForFun = S(fun.body.definedVars ++ fun.params.flatMap(_.params.map(_.sym)) + fun.sym)
+        // symsDefinedForFun = S(fun.body.definedVars ++ fun.params.flatMap(_.params.map(_.sym)) + fun.sym)
+        symsDefinedForFun = S(fun.deforestDefinedVars)
         super.applyFunDefn(fun)
         maybeCollectFun(fun)
         inFunDef = N
@@ -189,17 +190,17 @@ class DeforestPreAnalyzer(
         super.applyFunDefn(fun)
   
   override def applySymbol(s: Symbol): Unit = s match
-    case s: BlockMemberSymbol if s.isFunction => symToStratVar.updateWith(s):
+    case s: BlockMemberSymbol if s.isFunction && symsDefinedForFun.fold(true)(x => !x.contains(s)) => symToStratVar.updateWith(s):
       case N => S(freshVar(s.nme, S(s)).asProdStrat)
       case S(x) => S(x)
     // term symbol: variable in patterns so they are always inside the current fundefn (if any)
     // FIXME: check
-    case s: (TermSymbol | TempSymbol | FlowSymbol) => symToStratVar.updateWith(s):
-      case N =>
-        // println(s"new for $s")
-        S(freshVar(s.nme, inFunDef).asProdStrat)
-      case S(x) => S(x)
-    case v: (BlockMemberSymbol | VarSymbol) => symToStratVar.updateWith(s):
+    // case s: (TermSymbol | TempSymbol | FlowSymbol) => symToStratVar.updateWith(s):
+    //   case N =>
+    //     println(s"new for $s(${s.getClass()}) in $inFunDef")
+    //     S(freshVar(s.nme, inFunDef).asProdStrat)
+    //   case S(x) => S(x)
+    case v: (BlockMemberSymbol | VarSymbol | TermSymbol | TempSymbol | FlowSymbol) => symToStratVar.updateWith(s):
       case N =>
         // println(s"new !! for $v")
         val inFunOrNot = inFunDef.fold(false): _ =>
@@ -800,6 +801,36 @@ class GetCtorsTraverser(b: Block) extends BlockTraverser:
         case Arg(false, v) => applyResult(v)
     case p: Path => if p.asObjSymbol.isDefined then ctors += r.uid
   applyBlock(b)
+
+extension (fun: FunDefn)
+  def deforestDefinedVars: Set[Local] =
+    fun.body.deforestDefinedVars ++ fun.params.flatMap(_.params.map(_.sym)) + fun.sym
+    
+extension (b: Block)
+  def deforestDefinedVars: Set[Local] = b match
+    case _: Return | _: Throw => Set.empty
+    case Begin(sub, rst) => sub.deforestDefinedVars ++ rst.deforestDefinedVars
+    case Assign(l: TermSymbol, r, rst) => rst.deforestDefinedVars
+    case Assign(l, r, rst) => rst.deforestDefinedVars + l
+    case AssignField(l, n, r, rst) => rst.deforestDefinedVars
+    case AssignDynField(l, n, ai, r, rst) => rst.deforestDefinedVars
+    case Match(scrut, arms, dflt, rst) =>
+      arms.flatMap(_._2.deforestDefinedVars).toSet ++ dflt.toList.flatMap(_.deforestDefinedVars) ++ rst.deforestDefinedVars
+    case End(_) => Set.empty
+    case Break(_) => Set.empty
+    case Continue(_) => Set.empty
+    case Define(defn, rst) =>
+      val rest = rst.deforestDefinedVars
+      if defn.isOwned then rest else
+        defn match
+          case fdef: FunDefn => rest ++ fdef.deforestDefinedVars
+          case ValDefn(owner, k, sym, rhs) => rest + defn.sym
+          case _ => ???
+    // Note that the handler's LHS and body are not part of the current block, so we do not consider them here.
+    case HandleBlock(lhs, res, par, args, cls, hdr, bod, rst) => rst.deforestDefinedVars + res
+    case TryBlock(sub, fin, rst) => sub.deforestDefinedVars ++ fin.deforestDefinedVars ++ rst.deforestDefinedVars
+    case Label(lbl, bod, rst) => bod.deforestDefinedVars ++ rst.deforestDefinedVars
+
 
 extension (p: Path)
   def asClsSymbol = p match

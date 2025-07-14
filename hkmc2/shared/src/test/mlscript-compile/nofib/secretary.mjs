@@ -2,34 +2,77 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let secretary1, testSecretary_nofib_inst_0_tsni, sim_inst_0_1_tsni, nub_lz_inst_0_1_2_tsni, nubBy_lz_inst_0_1_2_3_tsni, enumFromTo_inst_4_tsni, enumFromTo_inst_0_4_tsni, listEq_inst_0_1_5_tsni, take_lz_inst_0_1_6_tsni, match_ls_arm_Nil_inst_0_tsni, match_ls_arm_Cons_inst_0_tsni;
-match_ls_arm_Nil_inst_0_tsni = function match_ls_arm_Nil_inst_0_tsni(listcomp, n) {
-  return NofibPrelude.Nil
+let secretary1, simulate_inst_0_tsni, enumFromTo_inst_0_1_tsni, testSecretary_nofib_inst_2_tsni, sim_inst_2_3_tsni, simulate_inst_2_3_0_tsni, enumFromTo_inst_2_3_0_1_tsni, enumFromTo_inst_2_4_tsni, filter_inst_0_5_tsni, filter_inst_2_3_0_5_tsni, listEq_inst_2_3_6_tsni;
+simulate_inst_0_tsni = function simulate_inst_0_tsni(n, m, proc) {
+  let lscomp, tmp, tmp1, tmp2, tmp3, lambda;
+  lscomp = function lscomp(ls) {
+    return runtime.safeCall(ls(lscomp, m, proc))
+  };
+  tmp = enumFromTo_inst_0_1_tsni(1, n);
+  tmp1 = lscomp(tmp);
+  lambda = (undefined, function (x) {
+    return x
+  });
+  tmp2 = filter_inst_0_5_tsni(lambda, tmp1);
+  tmp3 = NofibPrelude.listLen(tmp2);
+  return tmp3 / n
 };
-match_ls_arm_Cons_inst_0_tsni = function match_ls_arm_Cons_inst_0_tsni(listcomp, n, _deforest_Cons_head_inst_0_tsni, _deforest_Cons_tail_inst_0_tsni) {
-  let param0, param1, h, t, tmp, tmp1;
-  param0 = _deforest_Cons_head_inst_0_tsni;
-  param1 = _deforest_Cons_tail_inst_0_tsni;
-  h = param0;
-  t = param1;
-  tmp = sim_inst_0_1_tsni(n, h);
-  tmp1 = listcomp(t);
-  return NofibPrelude.Cons(tmp, tmp1)
+enumFromTo_inst_0_1_tsni = function enumFromTo_inst_0_1_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_0_1_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (lscomp, m, proc) => {
+      let param0, param1, seed, t, tmp2, tmp3, tmp4, _deforest_Cons_head1, _deforest_Cons_tail1;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      seed = param0;
+      t = param1;
+      tmp2 = secretary.infRand(m, seed);
+      tmp3 = runtime.safeCall(proc(tmp2));
+      tmp4 = lscomp(t);
+      _deforest_Cons_head1 = tmp3;
+      _deforest_Cons_tail1 = tmp4;
+      return (f) => {
+        let param01, param11, h, t1, scrut1, tmp5;
+        param01 = _deforest_Cons_head1;
+        param11 = _deforest_Cons_tail1;
+        h = param01;
+        t1 = param11;
+        scrut1 = runtime.safeCall(f(h));
+        if (scrut1 === true) {
+          tmp5 = filter_inst_0_5_tsni(f, t1);
+          return NofibPrelude.Cons(h, tmp5)
+        } else {
+          return filter_inst_0_5_tsni(f, t1)
+        }
+      }
+    }
+  } else {
+    return (lscomp, m, proc) => {
+      return (f) => {
+        return NofibPrelude.Nil
+      }
+    }
+  }
 };
-testSecretary_nofib_inst_0_tsni = function testSecretary_nofib_inst_0_tsni(n) {
+testSecretary_nofib_inst_2_tsni = function testSecretary_nofib_inst_2_tsni(n) {
   let listcomp, tmp;
   listcomp = function listcomp(ls) {
     return runtime.safeCall(ls(listcomp, n))
   };
-  tmp = enumFromTo_inst_0_4_tsni(35, 39);
+  tmp = enumFromTo_inst_2_4_tsni(35, 39);
   return listcomp(tmp)
 };
-sim_inst_0_1_tsni = function sim_inst_0_1_tsni(n, k) {
+sim_inst_2_3_tsni = function sim_inst_2_3_tsni(n, k) {
   let proc;
   proc = function proc(rs) {
     let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda, _deforest_Cons_head, _deforest_Cons_tail;
-    tmp = nub_lz_inst_0_1_2_tsni(rs);
-    tmp1 = take_lz_inst_0_1_6_tsni(100, tmp);
+    tmp = NofibPrelude.nub_lz(rs);
+    tmp1 = NofibPrelude.take_lz(100, tmp);
     xs = tmp1;
     best = 100;
     tmp2 = NofibPrelude.take(k, xs);
@@ -62,7 +105,7 @@ sim_inst_0_1_tsni = function sim_inst_0_1_tsni(n, k) {
         ty = param11;
         scrut = hx == hy;
         if (scrut === true) {
-          return listEq_inst_0_1_5_tsni(tx, ty)
+          return listEq_inst_2_3_6_tsni(tx, ty)
         } else {
           return false
         }
@@ -71,67 +114,98 @@ sim_inst_0_1_tsni = function sim_inst_0_1_tsni(n, k) {
       }
     };
     tmp7 = NofibPrelude.take(1, afterk);
-    return listEq_inst_0_1_5_tsni(tmp6, tmp7)
+    return listEq_inst_2_3_6_tsni(tmp6, tmp7)
   };
-  return secretary.simulate(n, 100, proc)
+  return simulate_inst_2_3_0_tsni(n, 100, proc)
 };
-nub_lz_inst_0_1_2_tsni = function nub_lz_inst_0_1_2_tsni(ls) {
-  return nubBy_lz_inst_0_1_2_3_tsni(lambda, ls)
+simulate_inst_2_3_0_tsni = function simulate_inst_2_3_0_tsni(n, m, proc) {
+  let lscomp, tmp, tmp1, tmp2, tmp3, lambda;
+  lscomp = function lscomp(ls) {
+    return runtime.safeCall(ls(lscomp, m, proc))
+  };
+  tmp = enumFromTo_inst_2_3_0_1_tsni(1, n);
+  tmp1 = lscomp(tmp);
+  lambda = (undefined, function (x) {
+    return x
+  });
+  tmp2 = filter_inst_2_3_0_5_tsni(lambda, tmp1);
+  tmp3 = NofibPrelude.listLen(tmp2);
+  return tmp3 / n
 };
-nubBy_lz_inst_0_1_2_3_tsni = function nubBy_lz_inst_0_1_2_3_tsni(eq, ls) {
-  let tmp, _deforest_Lazy_init;
-  tmp = runtime.safeCall(lambda(eq, ls));
-  _deforest_Lazy_init = tmp;
-  return (n) => {
-    return NofibPrelude.Nil
-  }
-};
-enumFromTo_inst_4_tsni = function enumFromTo_inst_4_tsni(a, b) {
+enumFromTo_inst_2_3_0_1_tsni = function enumFromTo_inst_2_3_0_1_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   scrut = a <= b;
   if (scrut === true) {
     tmp = a + 1;
-    tmp1 = enumFromTo_inst_4_tsni(tmp, b);
+    tmp1 = enumFromTo_inst_2_3_0_1_tsni(tmp, b);
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
-    return (listcomp, n) => {
-      return match_ls_arm_Cons_inst_0_tsni(listcomp, n, _deforest_Cons_head, _deforest_Cons_tail)
+    return (lscomp, m, proc) => {
+      let param0, param1, seed, t, tmp2, tmp3, tmp4, _deforest_Cons_head1, _deforest_Cons_tail1;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      seed = param0;
+      t = param1;
+      tmp2 = secretary.infRand(m, seed);
+      tmp3 = runtime.safeCall(proc(tmp2));
+      tmp4 = lscomp(t);
+      _deforest_Cons_head1 = tmp3;
+      _deforest_Cons_tail1 = tmp4;
+      return (f) => {
+        let param01, param11, h, t1, scrut1, tmp5;
+        param01 = _deforest_Cons_head1;
+        param11 = _deforest_Cons_tail1;
+        h = param01;
+        t1 = param11;
+        scrut1 = runtime.safeCall(f(h));
+        if (scrut1 === true) {
+          tmp5 = filter_inst_2_3_0_5_tsni(f, t1);
+          return NofibPrelude.Cons(h, tmp5)
+        } else {
+          return filter_inst_2_3_0_5_tsni(f, t1)
+        }
+      }
     }
   } else {
-    return (listcomp, n) => {
-      return match_ls_arm_Nil_inst_0_tsni(listcomp, n)
+    return (lscomp, m, proc) => {
+      return (f) => {
+        return NofibPrelude.Nil
+      }
     }
   }
 };
-enumFromTo_inst_0_4_tsni = function enumFromTo_inst_0_4_tsni(a, b) {
+enumFromTo_inst_2_4_tsni = function enumFromTo_inst_2_4_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   scrut = a <= b;
   if (scrut === true) {
     tmp = a + 1;
-    tmp1 = enumFromTo_inst_0_4_tsni(tmp, b);
+    tmp1 = enumFromTo_inst_2_4_tsni(tmp, b);
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (listcomp, n) => {
-      return match_ls_arm_Cons_inst_0_tsni(listcomp, n, _deforest_Cons_head, _deforest_Cons_tail)
+      let param0, param1, h, t, tmp2, tmp3;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      h = param0;
+      t = param1;
+      tmp2 = sim_inst_2_3_tsni(n, h);
+      tmp3 = listcomp(t);
+      return NofibPrelude.Cons(tmp2, tmp3)
     }
   } else {
     return (listcomp, n) => {
-      return match_ls_arm_Nil_inst_0_tsni(listcomp, n)
+      return NofibPrelude.Nil
     }
   }
 };
-listEq_inst_0_1_5_tsni = function listEq_inst_0_1_5_tsni(xs, ys) {
+filter_inst_0_5_tsni = function filter_inst_0_5_tsni(f, ls) {
+  return runtime.safeCall(ls(f))
+};
+filter_inst_2_3_0_5_tsni = function filter_inst_2_3_0_5_tsni(f, ls) {
+  return runtime.safeCall(ls(f))
+};
+listEq_inst_2_3_6_tsni = function listEq_inst_2_3_6_tsni(xs, ys) {
   return runtime.safeCall(xs(ys))
-};
-take_lz_inst_0_1_6_tsni = function take_lz_inst_0_1_6_tsni(n, ls) {
-  let scrut, scrut1;
-  scrut = n > 0;
-  if (scrut === true) {
-    scrut1 = NofibPrelude.force(ls);
-    return runtime.safeCall(scrut1(n))
-  } else {
-    return NofibPrelude.Nil
-  }
 };
 (class secretary {
   static {
@@ -206,7 +280,7 @@ take_lz_inst_0_1_6_tsni = function take_lz_inst_0_1_6_tsni(n, ls) {
       tmp7 = NofibPrelude.take(1, afterk);
       return NofibPrelude.listEq(tmp6, tmp7)
     };
-    return secretary.simulate(n1, 100, proc1)
+    return simulate_inst_0_tsni(n1, 100, proc1)
   } 
   static testSecretary_nofib(n2) {
     let listcomp, tmp;
@@ -226,12 +300,12 @@ take_lz_inst_0_1_6_tsni = function take_lz_inst_0_1_6_tsni(n, ls) {
         throw new globalThis.Error("match error");
       }
     };
-    tmp = enumFromTo_inst_4_tsni(35, 39);
+    tmp = NofibPrelude.enumFromTo(35, 39);
     return listcomp(tmp)
   } 
   static main() {
     let tmp;
-    tmp = testSecretary_nofib_inst_0_tsni(50);
+    tmp = testSecretary_nofib_inst_2_tsni(50);
     return runtime.safeCall(tmp.toString())
   }
   static toString() { return "secretary"; }

@@ -45,7 +45,7 @@ fun maxLevel(ls) = if ls is
 
 fun complete(csp, s) = if csp is CSP(v, _, _) then maxLevel(s) == v
 
-fun safe(as1, as2) = if as1 is Assign(i, m) and as2 is Assign(j, n) then not(m == n) and not(abs(i - j) == abs(m - n))
+fun safe(as1, as2) = if as1 is Assign(i, m) and as2 is Assign(j, n) then Predef.not(m == n) and Predef.not(abs(i - j) == abs(m - n))
 
 fun queens(n) = CSP(n, n, safe)
 
@@ -62,7 +62,7 @@ fun filterTree(p, t) =
   fun f1(a, cs) = Node(a, filter(x => p(label(x)), cs))
   foldTree(f1, t)
 
-fun prune(p, t) = filterTree(x => not(p(x)), t)
+fun prune(p, t) = filterTree(x => Predef.not(p(x)), t)
 
 fun leaves(t) = if t is
   Node(leaf, Nil) then leaf :: Nil
@@ -87,7 +87,7 @@ fun mkTree(csp) = if csp is CSP(vars, vals, rel) then
 
 fun earliestInconsistency(csp, aas) = if csp is CSP(vars, vals, rel) and aas is
   Nil then None
-  a :: as_ and filter(x => not(rel(a, x)), reverse(as_)) is
+  a :: as_ and filter(x => Predef.not(rel(a, x)), reverse(as_)) is
     Nil then None
     b :: _ then Some([level(a), level(b)])
 
@@ -104,7 +104,7 @@ fun btsolver0(csp) =
       mapTree of
         fst
         prune of
-          x => not(snd(x) === None)
+          x => Predef.not(snd(x) === None)
           labelInconsistencies(csp, mkTree(csp))
 
 // -- Figure 6. Conflict-directed solving of CSPs.
@@ -155,7 +155,7 @@ fun fillTable(s, csp, tbl) = if s is
   Nil then tbl
   Assign(var_, val_) :: as_ and csp is CSP(vars, vals, rel) then
     fun f4(cs, varval) = if varval is [varr, vall] and
-      cs === Unknown and not(rel(Assign(var_, val_), Assign(varr, vall))) then Known(var_ :: varr :: Nil)
+      cs === Unknown and Predef.not(rel(Assign(var_, val_), Assign(varr, vall))) then Known(var_ :: varr :: Nil)
       else cs
 
     fun lscomp1(ls) = if ls is
