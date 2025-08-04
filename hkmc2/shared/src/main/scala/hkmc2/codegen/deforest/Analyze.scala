@@ -172,7 +172,7 @@ class DeforestPreAnalyzer(
     if !imported && shouldConsiderFunDefn && handleable then
       topLevelLikeComputations ::= fun
   private def isPrivatelyDefined(s: Symbol) =
-    imported && false // TODO:
+    imported && importedInfo.privateSymbols.contains(s)
   override def applyFunDefn(fun: FunDefn): Unit =
     inFunDef match
       case N =>
@@ -230,8 +230,8 @@ class DeforestPreAnalyzer(
   override def applyValue(v: Value): Unit =
     resultIdToResult += v.uid -> v
     v match
-      case Value.Ref(l) if l.isFunction => usedFunSyms += l.asBlkMember.get
       case Value.Ref(l) =>
+        if l.isFunction then usedFunSyms += l.asBlkMember.get
         if isPrivatelyDefined(l) then handleable = false
       case Value.This(_) => handleable = false
       case _ => ()

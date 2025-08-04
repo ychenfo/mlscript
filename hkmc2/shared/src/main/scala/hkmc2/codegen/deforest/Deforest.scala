@@ -16,16 +16,18 @@ case class ImportedInfo(
   innerSymbolsToOutterSymbols: Ls[InnerSymbol -> BlockMemberSymbol],
   funAndDefs: Ls[BlockMemberSymbol -> FunDefn],
   lazySymbols: Ls[Symbol],
-  forceSymbols: Ls[Symbol])
+  forceSymbols: Ls[Symbol],
+  privateSymbols: Ls[BlockMemberSymbol])
 
 object ImportedInfo:
-  val empty = ImportedInfo(Nil, Nil, Nil, Nil, Nil)
+  val empty = ImportedInfo(Nil, Nil, Nil, Nil, Nil, Nil)
 
 class GetInfoOfImportedFile(publicModName: String) extends BlockTraverser:
   var funAndDefs: Ls[BlockMemberSymbol -> FunDefn] = Nil
   var innerToOutter: Opt[InnerSymbol -> BlockMemberSymbol] = N
   var lazySymbols: Ls[Symbol] = Nil
   var forceSymbols: Ls[Symbol] = Nil
+  var privateFunSyms = Set.empty[BlockMemberSymbol]
   // private var shouldCollectFunDefn = false
   override def applyDefn(defn: Defn): Unit = defn match
     case clsLike: ClsLikeDefn if (clsLike.k is syntax.Mod) && clsLike.sym.nme === publicModName =>
@@ -39,52 +41,21 @@ class GetInfoOfImportedFile(publicModName: String) extends BlockTraverser:
     case _ => super.applyDefn(defn)
   
   override def applyFunDefn(fun: FunDefn): Unit =
+    privateFunSyms += fun.sym
     if fun.sym.nme === "lazy" then
       lazySymbols ::= fun.sym
     if fun.sym.nme === "force" then
       forceSymbols ::= fun.sym
     // else if shouldCollectFunDefn then
     //   funAndDefs ::= fun.sym -> fun
-
+  
+  def apply(b: Block): Unit =
+    applyBlock(b)
+    privateFunSyms = privateFunSyms -- funAndDefs.keys
 
 object Deforest:
   class State:
     val importedFileNameToLoweredBlock = collection.mutable.Map.empty[os.Path, Program]
-  
-  // def deforestImport(path: Str, wd: os.Path)(using
-  //   cfg: Config,
-  //   tl: TL,
-  //   raise: Raise,
-  //   st: State,
-  //   elabSt: Elaborator.State,
-  //   ctx: Elaborator.Ctx,
-  // ): ImportedInfo =
-  //   val file =
-  //     if path.startsWith("/")
-  //     then os.Path(path)
-  //     else wd / os.RelPath(path)
-  //   assert(file.ext == "mls")
-  //   val semBlk -> _ -> newCtx = elabSt.importedFileNameToSemBlk(file)
-  //   val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
-  //     val resolver = Resolver(tl)
-  //     resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty) // TODO: is this ICtx.empty correct?
-  //     val low = codegen.Lowering()(using
-  //       cfg,
-  //       tl,
-  //       raise,
-  //       elabSt,
-  //       newCtx)
-  //     low.program(semBlk)
-
-  //   prog.main match
-  //     case Define(defn: ClsLikeDefn, rest) if defn.k is syntax.Mod =>
-  //       // println(s"${defn.sym}: ${defn.sym.uid}")
-  //       // println(s"${defn.sym}: ${defn.isym}")
-  //       // println(s"$outterSym: ${outterSym.uid}")
-  //       defn.isym -> defn.sym -> defn.methods.map:
-  //         case fdef@FunDefn(sym = sym, _) => sym -> fdef
-  //     case _ => lastWords("expect a module def")
-  
   
   def deforestImport2(path: Str, wd: os.Path)(using
     cfg: Config,
@@ -106,13 +77,14 @@ object Deforest:
       cfg.copy(liftDefns = S(LiftDefns())), tl, raise, elabSt, newCtx)
       low.program(semBlk)
     val traverser = new GetInfoOfImportedFile(file.baseName)
-    traverser.applyBlock(prog.main)
+    traverser(prog.main)
     ImportedInfo(
       Nil,
       traverser.innerToOutter.toList,
       traverser.funAndDefs,
       traverser.lazySymbols,
-      traverser.forceSymbols)
+      traverser.forceSymbols,
+      traverser.privateFunSyms.toList.sortBy(_.uid))
   
   def apply(p: Program, wd: os.Path)(using
     cfg: Config,
