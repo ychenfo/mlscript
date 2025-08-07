@@ -2,7 +2,7 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let boyer21, makelemmas_inst_0_tsni, strToToken_inst_0_1_tsni, getToken_inst_0_1_2_tsni, strToToken_inst_3_tsni, getToken_inst_3_2_tsni, cdr_inst_4_tsni, cdr_inst_5_tsni, cdr_inst_6_tsni, cdr_inst_7_tsni, cdr_inst_8_tsni, cdr_inst_9_tsni, tautologyp_inst_10_tsni, cadr_inst_10_11_tsni, cdr_inst_10_11_4_tsni, caddr_inst_10_12_tsni, cdr_inst_10_12_5_tsni, cdr_inst_10_12_6_tsni, cadr_inst_10_13_tsni, cdr_inst_10_13_4_tsni, caddr_inst_10_14_tsni, cdr_inst_10_14_5_tsni, cdr_inst_10_14_6_tsni, car_inst_10_14_15_tsni, car_inst_10_13_16_tsni, car_inst_10_12_15_tsni, car_inst_10_11_16_tsni, caddr_inst_14_tsni, cdr_inst_14_6_tsni, cdr_inst_14_5_tsni, car_inst_14_15_tsni, tautologyp_inst_17_tsni, cadr_inst_17_11_tsni, cdr_inst_17_11_4_tsni, caddr_inst_17_12_tsni, cdr_inst_17_12_5_tsni, cdr_inst_17_12_6_tsni, cadr_inst_17_13_tsni, cdr_inst_17_13_4_tsni, caddr_inst_17_14_tsni, cdr_inst_17_14_5_tsni, cdr_inst_17_14_6_tsni, car_inst_17_14_15_tsni, car_inst_17_13_16_tsni, car_inst_17_12_15_tsni, car_inst_17_11_16_tsni, cadr_inst_13_tsni, cdr_inst_13_4_tsni, car_inst_13_16_tsni, tautologyp_inst_18_tsni, cadr_inst_18_11_tsni, cdr_inst_18_11_4_tsni, caddr_inst_18_12_tsni, cdr_inst_18_12_5_tsni, cdr_inst_18_12_6_tsni, cadr_inst_18_13_tsni, cdr_inst_18_13_4_tsni, caddr_inst_18_14_tsni, cdr_inst_18_14_5_tsni, cdr_inst_18_14_6_tsni, car_inst_18_14_15_tsni, car_inst_18_13_16_tsni, car_inst_18_12_15_tsni, car_inst_18_11_16_tsni, caddr_inst_12_tsni, cdr_inst_12_6_tsni, cdr_inst_12_5_tsni, car_inst_12_15_tsni, tautologyp_inst_19_tsni, cadr_inst_19_11_tsni, cdr_inst_19_11_4_tsni, caddr_inst_19_12_tsni, cdr_inst_19_12_5_tsni, cdr_inst_19_12_6_tsni, cadr_inst_19_13_tsni, cdr_inst_19_13_4_tsni, caddr_inst_19_14_tsni, cdr_inst_19_14_5_tsni, cdr_inst_19_14_6_tsni, car_inst_19_14_15_tsni, car_inst_19_13_16_tsni, car_inst_19_12_15_tsni, car_inst_19_11_16_tsni, cadr_inst_11_tsni, cdr_inst_11_4_tsni, car_inst_11_16_tsni, strToToken_inst_20_tsni, getToken_inst_20_2_tsni, getToken_inst_2_tsni, makelemmas_inst_21_tsni, strToToken_inst_21_1_tsni, getToken_inst_21_1_2_tsni, strToToken_inst_1_tsni, getToken_inst_1_2_tsni, car_inst_22_tsni, addlemmalst_inst_23_tsni, addlemma_inst_23_24_tsni, car_inst_23_24_22_tsni, addlemma_inst_24_tsni, car_inst_24_22_tsni, applysubst_inst_25_tsni, applysubstlst_inst_25_tsni, applysubst_inst_26_tsni, applysubstlst_inst_26_tsni, applysubst_inst_27_tsni, applysubstlst_inst_27_tsni, onewayunify1_inst_28_tsni, onewayunify1lst_inst_28_tsni, car_inst_28_29_tsni, onewayunify1_inst_30_tsni, onewayunify1lst_inst_30_tsni, car_inst_30_29_tsni, onewayunify1_inst_31_tsni, onewayunify1lst_inst_31_tsni, car_inst_31_29_tsni, car_inst_29_tsni, onewayunify1_inst_32_tsni, onewayunify1lst_inst_32_tsni, car_inst_32_29_tsni, rewrite_inst_33_tsni, rewritewithlemmas_inst_33_tsni, rewriteargs_inst_33_tsni, cadr_inst_33_34_tsni, cdr_inst_33_34_4_tsni, onewayunify_inst_33_35_tsni, onewayunify1_inst_33_35_32_tsni, onewayunify1lst_inst_33_35_32_tsni, car_inst_33_35_32_29_tsni, caddr_inst_33_36_tsni, cdr_inst_33_36_5_tsni, cdr_inst_33_36_6_tsni, applysubst_inst_33_37_tsni, applysubstlst_inst_33_37_tsni, car_inst_33_36_15_tsni, rewrite_inst_38_tsni, rewritewithlemmas_inst_38_tsni, rewriteargs_inst_38_tsni, cadr_inst_38_34_tsni, cdr_inst_38_34_4_tsni, onewayunify_inst_38_35_tsni, onewayunify1_inst_38_35_32_tsni, onewayunify1lst_inst_38_35_32_tsni, car_inst_38_35_32_29_tsni, caddr_inst_38_36_tsni, cdr_inst_38_36_5_tsni, cdr_inst_38_36_6_tsni, applysubst_inst_38_37_tsni, applysubstlst_inst_38_37_tsni, car_inst_38_36_15_tsni, applysubst_inst_37_tsni, applysubstlst_inst_37_tsni, caddr_inst_36_tsni, cdr_inst_36_6_tsni, cdr_inst_36_5_tsni, car_inst_36_15_tsni, onewayunify_inst_35_tsni, onewayunify1_inst_35_32_tsni, onewayunify1lst_inst_35_32_tsni, car_inst_35_32_29_tsni, cadr_inst_34_tsni, cdr_inst_34_4_tsni, rewrite_inst_39_tsni, rewritewithlemmas_inst_39_tsni, rewriteargs_inst_39_tsni, cadr_inst_39_34_tsni, cdr_inst_39_34_4_tsni, onewayunify_inst_39_35_tsni, onewayunify1_inst_39_35_32_tsni, onewayunify1lst_inst_39_35_32_tsni, car_inst_39_35_32_29_tsni, caddr_inst_39_36_tsni, cdr_inst_39_36_5_tsni, cdr_inst_39_36_6_tsni, applysubst_inst_39_37_tsni, applysubstlst_inst_39_37_tsni, car_inst_39_36_15_tsni, rewrite_inst_40_tsni, rewritewithlemmas_inst_40_tsni, rewriteargs_inst_40_tsni, cadr_inst_40_34_tsni, cdr_inst_40_34_4_tsni, onewayunify_inst_40_35_tsni, onewayunify1_inst_40_35_32_tsni, onewayunify1lst_inst_40_35_32_tsni, car_inst_40_35_32_29_tsni, caddr_inst_40_36_tsni, cdr_inst_40_36_5_tsni, cdr_inst_40_36_6_tsni, applysubst_inst_40_37_tsni, applysubstlst_inst_40_37_tsni, car_inst_40_36_15_tsni, rewrite_inst_41_tsni, rewritewithlemmas_inst_41_tsni, rewriteargs_inst_41_tsni, cadr_inst_41_34_tsni, cdr_inst_41_34_4_tsni, onewayunify_inst_41_35_tsni, onewayunify1_inst_41_35_32_tsni, onewayunify1lst_inst_41_35_32_tsni, car_inst_41_35_32_29_tsni, caddr_inst_41_36_tsni, cdr_inst_41_36_5_tsni, cdr_inst_41_36_6_tsni, applysubst_inst_41_37_tsni, applysubstlst_inst_41_37_tsni, car_inst_41_36_15_tsni, rewrite_inst_42_tsni, rewritewithlemmas_inst_42_tsni, rewriteargs_inst_42_tsni, cadr_inst_42_34_tsni, cdr_inst_42_34_4_tsni, onewayunify_inst_42_35_tsni, onewayunify1_inst_42_35_32_tsni, onewayunify1lst_inst_42_35_32_tsni, car_inst_42_35_32_29_tsni, caddr_inst_42_36_tsni, cdr_inst_42_36_5_tsni, cdr_inst_42_36_6_tsni, applysubst_inst_42_37_tsni, applysubstlst_inst_42_37_tsni, car_inst_42_36_15_tsni, strToToken_inst_43_tsni, getToken_inst_43_2_tsni, subterm_inst_44_tsni, strToToken_inst_44_43_tsni, getToken_inst_44_43_2_tsni, teststatement_inst_45_tsni, subterm_inst_45_44_tsni, strToToken_inst_45_44_43_tsni, getToken_inst_45_44_43_2_tsni, testresult_inst_46_tsni, teststatement_inst_46_45_tsni, subterm_inst_46_45_44_tsni, strToToken_inst_46_45_44_43_tsni, getToken_inst_46_45_44_43_2_tsni, testBoyer2_nofib_inst_47_tsni, testresult_inst_47_46_tsni, teststatement_inst_47_46_45_tsni, subterm_inst_47_46_45_44_tsni, strToToken_inst_47_46_45_44_43_tsni, getToken_inst_47_46_45_44_43_2_tsni, addlemmalst_inst_48_tsni, car_inst_16_tsni, car_inst_15_tsni, car_inst_49_tsni, falsep_inst_50_tsni, truep_inst_51_tsni, falsep_inst_52_tsni, truep_inst_53_tsni, truep_inst_54_tsni, tv_inst_55_tsni, tv_inst_23_24_55_tsni, tv_inst_24_55_tsni, assoc_inst_25_56_tsni, lispListEq_inst_25_56_57_tsni, assoc_inst_26_56_tsni, lispListEq_inst_26_56_57_tsni, assoc_inst_27_56_tsni, lispListEq_inst_27_56_57_tsni, assoc_inst_56_tsni, lispListEq_inst_56_57_tsni, lispListEq_inst_28_58_tsni, lispListEq_inst_30_58_tsni, lispListEq_inst_31_58_tsni, lispListEq_inst_58_tsni, lispListEq_inst_32_58_tsni, car_inst_33_34_16_tsni, lispListEq_inst_33_35_32_58_tsni, assoc_inst_33_37_56_tsni, lispListEq_inst_33_37_56_57_tsni, car_inst_38_34_16_tsni, lispListEq_inst_38_35_32_58_tsni, assoc_inst_38_37_56_tsni, lispListEq_inst_38_37_56_57_tsni, assoc_inst_37_56_tsni, lispListEq_inst_37_56_57_tsni, lispListEq_inst_35_32_58_tsni, car_inst_34_16_tsni, car_inst_39_34_16_tsni, lispListEq_inst_39_35_32_58_tsni, assoc_inst_39_37_56_tsni, lispListEq_inst_39_37_56_57_tsni, car_inst_40_34_16_tsni, lispListEq_inst_40_35_32_58_tsni, assoc_inst_40_37_56_tsni, lispListEq_inst_40_37_56_57_tsni, car_inst_41_34_16_tsni, lispListEq_inst_41_35_32_58_tsni, assoc_inst_41_37_56_tsni, lispListEq_inst_41_37_56_57_tsni, car_inst_42_34_16_tsni, lispListEq_inst_42_35_32_58_tsni, assoc_inst_42_37_56_tsni, lispListEq_inst_42_37_56_57_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni, match_rules_arm_Cons_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_tsni, match_x_arm_default_inst_16_tsni, match_x_arm_default_inst_15_tsni, match_x_arm_default_inst_5_tsni, match_x_arm_default_inst_49_tsni, match_x_arm_default_inst_7_tsni, match_x_arm_default_inst_8_tsni, match_x_arm_default_inst_10_11_16_tsni, match_x_arm_default_inst_10_12_15_tsni, match_x_arm_default_inst_10_12_5_tsni, match_x_arm_default_inst_10_13_16_tsni, match_x_arm_default_inst_10_14_15_tsni, match_x_arm_default_inst_10_14_5_tsni, match_f_arm_Nill_inst_10_tsni, match_x_arm_default_inst_14_5_tsni, match_x_arm_default_inst_14_15_tsni, match_x_arm_default_inst_17_11_16_tsni, match_x_arm_default_inst_17_12_15_tsni, match_x_arm_default_inst_17_12_5_tsni, match_x_arm_default_inst_17_13_16_tsni, match_x_arm_default_inst_17_14_15_tsni, match_x_arm_default_inst_17_14_5_tsni, match_f_arm_Nill_inst_17_tsni, match_x_arm_default_inst_13_16_tsni, match_x_arm_default_inst_18_11_16_tsni, match_x_arm_default_inst_18_12_15_tsni, match_x_arm_default_inst_18_12_5_tsni, match_x_arm_default_inst_18_13_16_tsni, match_x_arm_default_inst_18_14_15_tsni, match_x_arm_default_inst_18_14_5_tsni, match_f_arm_Nill_inst_18_tsni, match_x_arm_default_inst_12_5_tsni, match_x_arm_default_inst_12_15_tsni, match_x_arm_default_inst_19_11_16_tsni, match_x_arm_default_inst_19_12_15_tsni, match_x_arm_default_inst_19_12_5_tsni, match_x_arm_default_inst_19_13_16_tsni, match_x_arm_default_inst_19_14_15_tsni, match_x_arm_default_inst_19_14_5_tsni, match_f_arm_Nill_inst_19_tsni, match_x_arm_default_inst_11_16_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_tsni, match_scrut_arm_Deforest_Arr_2_inst__tsni, match_scrut_arm_Deforest_Arr_2_inst_21_1_tsni, match_scrut_arm_Deforest_Arr_2_inst_1_tsni, match_x_arm_default_inst_55_tsni, match_x_arm_default_inst_23_24_55_tsni, match_x_arm_default_inst_24_55_tsni, match_x_arm_Nill_inst_28_58_tsni, match_x_arm_Nill_inst_30_58_tsni, match_x_arm_Nill_inst_31_58_tsni, match_x_arm_Nill_inst_58_tsni, match_x_arm_Nill_inst_32_58_tsni, match_x_arm_default_inst_33_34_16_tsni, match_x_arm_Nill_inst_33_35_32_58_tsni, match_x_arm_default_inst_33_36_15_tsni, match_x_arm_default_inst_33_36_5_tsni, match_x_arm_Nill_inst_33_37_tsni, match_x_arm_default_inst_38_34_16_tsni, match_x_arm_Nill_inst_38_35_32_58_tsni, match_x_arm_default_inst_38_36_15_tsni, match_x_arm_default_inst_38_36_5_tsni, match_x_arm_Nill_inst_38_37_tsni, match_x_arm_default_inst_36_5_tsni, match_x_arm_default_inst_36_15_tsni, match_x_arm_Nill_inst_37_tsni, match_x_arm_Nill_inst_35_32_58_tsni, match_x_arm_default_inst_34_16_tsni, match_x_arm_default_inst_39_34_16_tsni, match_x_arm_Nill_inst_39_35_32_58_tsni, match_x_arm_default_inst_39_36_15_tsni, match_x_arm_default_inst_39_36_5_tsni, match_x_arm_Nill_inst_39_37_tsni, match_x_arm_default_inst_40_34_16_tsni, match_x_arm_Nill_inst_40_35_32_58_tsni, match_x_arm_default_inst_40_36_15_tsni, match_x_arm_default_inst_40_36_5_tsni, match_x_arm_Nill_inst_40_37_tsni, match_x_arm_default_inst_41_34_16_tsni, match_x_arm_Nill_inst_41_35_32_58_tsni, match_x_arm_default_inst_41_36_15_tsni, match_x_arm_default_inst_41_36_5_tsni, match_x_arm_Nill_inst_41_37_tsni, match_x_arm_default_inst_42_34_16_tsni, match_x_arm_Nill_inst_42_35_32_58_tsni, match_x_arm_default_inst_42_36_15_tsni, match_x_arm_default_inst_42_36_5_tsni, match_x_arm_Nill_inst_42_37_tsni, match_scrut_arm_Deforest_Arr_2_inst_43_tsni, match_scrut_arm_Deforest_Arr_2_inst_44_43_tsni, match_scrut_arm_Deforest_Arr_2_inst_45_44_43_tsni, match_scrut_arm_Deforest_Arr_2_inst_46_45_44_43_tsni, match_scrut_arm_Deforest_Arr_2_inst_47_46_45_44_43_tsni;
+let boyer21, makelemmas_inst_0_tsni, strToToken_inst_0_1_tsni, getToken_inst_0_1_2_tsni, strToToken_inst_3_tsni, getToken_inst_3_2_tsni, cdr_inst_4_5_tsni, cdr_inst_6_7_tsni, cdr_inst_6_8_tsni, cdr_inst_9_10_tsni, cdr_inst_9_11_tsni, cdr_inst_9_12_tsni, cadr_inst_13_14_tsni, cdr_inst_13_14_5_tsni, caddr_inst_13_15_tsni, cdr_inst_13_15_8_tsni, cdr_inst_13_15_7_tsni, cadr_inst_13_16_tsni, cdr_inst_13_16_5_tsni, caddr_inst_13_17_tsni, cdr_inst_13_17_8_tsni, cdr_inst_13_17_7_tsni, getToken_inst_18_2_tsni, strToToken_inst_19_1_tsni, getToken_inst_19_1_2_tsni, car_inst_20_21_tsni, addlemma_inst_22_23_tsni, car_inst_22_23_21_tsni, car_inst_24_25_tsni, car_inst_26_25_tsni, onewayunify1_inst_27_28_tsni, onewayunify1lst_inst_27_28_tsni, car_inst_27_28_25_tsni, cadr_inst_29_30_tsni, cdr_inst_29_30_5_tsni, onewayunify_inst_29_31_tsni, onewayunify1_inst_29_31_28_tsni, onewayunify1lst_inst_29_31_28_tsni, car_inst_29_31_28_25_tsni, caddr_inst_29_32_tsni, cdr_inst_29_32_8_tsni, cdr_inst_29_32_7_tsni, applysubst_inst_29_33_tsni, applysubstlst_inst_29_33_tsni, car_inst_29_32_34_tsni, cadr_inst_35_30_tsni, cdr_inst_35_30_5_tsni, onewayunify_inst_35_31_tsni, onewayunify1_inst_35_31_28_tsni, onewayunify1lst_inst_35_31_28_tsni, car_inst_35_31_28_25_tsni, caddr_inst_35_32_tsni, cdr_inst_35_32_8_tsni, cdr_inst_35_32_7_tsni, applysubst_inst_35_33_tsni, applysubstlst_inst_35_33_tsni, car_inst_35_32_34_tsni, cadr_inst_36_30_tsni, cdr_inst_36_30_5_tsni, onewayunify_inst_36_31_tsni, onewayunify1_inst_36_31_28_tsni, onewayunify1lst_inst_36_31_28_tsni, car_inst_36_31_28_25_tsni, caddr_inst_36_32_tsni, cdr_inst_36_32_8_tsni, cdr_inst_36_32_7_tsni, applysubst_inst_36_33_tsni, applysubstlst_inst_36_33_tsni, car_inst_36_32_34_tsni, strToToken_inst_37_38_tsni, getToken_inst_37_38_2_tsni, subterm_inst_39_40_tsni, strToToken_inst_39_40_38_tsni, getToken_inst_39_40_38_2_tsni, teststatement_inst_41_42_tsni, subterm_inst_41_42_40_tsni, strToToken_inst_41_42_40_38_tsni, getToken_inst_41_42_40_38_2_tsni, testresult_inst_43_44_tsni, teststatement_inst_43_44_42_tsni, subterm_inst_43_44_42_40_tsni, strToToken_inst_43_44_42_40_38_tsni, getToken_inst_43_44_42_40_38_2_tsni, testBoyer2_nofib_inst_45_46_tsni, testresult_inst_45_46_44_tsni, teststatement_inst_45_46_44_42_tsni, subterm_inst_45_46_44_42_40_tsni, strToToken_inst_45_46_44_42_40_38_tsni, getToken_inst_45_46_44_42_40_38_2_tsni, addlemmalst_inst_47_tsni, car_inst_4_48_tsni, car_inst_6_34_tsni, car_inst_9_49_tsni, truep_inst_13_50_tsni, truep_inst_13_51_tsni, falsep_inst_13_52_tsni, truep_inst_13_53_tsni, car_inst_13_14_48_tsni, falsep_inst_13_54_tsni, car_inst_13_15_34_tsni, car_inst_13_16_48_tsni, car_inst_13_17_34_tsni, tv_inst_20_55_tsni, tv_inst_22_23_55_tsni, assoc_inst_56_57_tsni, lispListEq_inst_56_57_58_tsni, assoc_inst_59_57_tsni, lispListEq_inst_59_57_58_tsni, lispListEq_inst_24_60_tsni, lispListEq_inst_26_60_tsni, lispListEq_inst_27_28_60_tsni, car_inst_29_30_48_tsni, lispListEq_inst_29_31_28_60_tsni, assoc_inst_29_33_57_tsni, lispListEq_inst_29_33_57_58_tsni, car_inst_35_30_48_tsni, lispListEq_inst_35_31_28_60_tsni, assoc_inst_35_33_57_tsni, lispListEq_inst_35_33_57_58_tsni, car_inst_36_30_48_tsni, lispListEq_inst_36_31_28_60_tsni, assoc_inst_36_33_57_tsni, lispListEq_inst_36_33_57_58_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni, match_rules_arm_Cons_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_tsni, match_x_arm_default_inst_4_48_tsni, match_x_arm_default_inst_6_8_tsni, match_x_arm_default_inst_6_34_tsni, match_x_arm_default_inst_9_11_tsni, match_x_arm_default_inst_9_12_tsni, match_x_arm_default_inst_9_49_tsni, match_x_arm_default_inst_13_14_48_tsni, match_x_arm_default_inst_13_15_34_tsni, match_x_arm_default_inst_13_15_8_tsni, match_x_arm_default_inst_13_16_48_tsni, match_x_arm_default_inst_13_17_34_tsni, match_x_arm_default_inst_13_17_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_18_tsni, match_scrut_arm_Deforest_Arr_2_inst_19_1_tsni, match_x_arm_default_inst_20_55_tsni, match_x_arm_default_inst_22_23_55_tsni, match_x_arm_Nill_inst_24_60_tsni, match_x_arm_Nill_inst_26_60_tsni, match_x_arm_Nill_inst_27_28_60_tsni, match_x_arm_default_inst_29_30_48_tsni, match_x_arm_Nill_inst_29_31_28_60_tsni, match_x_arm_default_inst_29_32_34_tsni, match_x_arm_default_inst_29_32_8_tsni, match_x_arm_Nill_inst_29_33_tsni, match_x_arm_default_inst_35_30_48_tsni, match_x_arm_Nill_inst_35_31_28_60_tsni, match_x_arm_default_inst_35_32_34_tsni, match_x_arm_default_inst_35_32_8_tsni, match_x_arm_Nill_inst_35_33_tsni, match_x_arm_default_inst_36_30_48_tsni, match_x_arm_Nill_inst_36_31_28_60_tsni, match_x_arm_default_inst_36_32_34_tsni, match_x_arm_default_inst_36_32_8_tsni, match_x_arm_Nill_inst_36_33_tsni, match_scrut_arm_Deforest_Arr_2_inst_37_38_tsni, match_scrut_arm_Deforest_Arr_2_inst_39_40_38_tsni, match_scrut_arm_Deforest_Arr_2_inst_41_42_40_38_tsni, match_scrut_arm_Deforest_Arr_2_inst_43_44_42_40_38_tsni, match_scrut_arm_Deforest_Arr_2_inst_45_46_44_42_40_38_tsni;
 match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni(_deforest_Deforest_Arr_2_0_inst_0_1_tsni, _deforest_Deforest_Arr_2_1_inst_0_1_tsni) {
   let first1, first0, a, b, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_0_1_tsni;
@@ -30,7 +30,7 @@ match_rules_arm_Cons_inst_0_tsni = function match_rules_arm_Cons_inst_0_tsni(_de
     h1 = param01;
     t1 = param11;
     tmp3 = boyer2.addlemma(h1, term);
-    return addlemmalst_inst_48_tsni(t1, tmp3)
+    return addlemmalst_inst_47_tsni(t1, tmp3)
   }
 };
 match_scrut_arm_Deforest_Arr_2_inst_3_tsni = function match_scrut_arm_Deforest_Arr_2_inst_3_tsni(_deforest_Deforest_Arr_2_0_inst_3_tsni, _deforest_Deforest_Arr_2_1_inst_3_tsni) {
@@ -42,476 +42,209 @@ match_scrut_arm_Deforest_Arr_2_inst_3_tsni = function match_scrut_arm_Deforest_A
   tmp = strToToken_inst_3_tsni(b);
   return NofibPrelude.Cons(a, tmp)
 };
-match_x_arm_default_inst_16_tsni = function match_x_arm_default_inst_16_tsni() {
+match_x_arm_default_inst_4_48_tsni = function match_x_arm_default_inst_4_48_tsni() {
   return boyer2.Nill
 };
-match_x_arm_default_inst_15_tsni = function match_x_arm_default_inst_15_tsni() {
+match_x_arm_default_inst_6_8_tsni = function match_x_arm_default_inst_6_8_tsni() {
+  return () => {
+    return match_x_arm_default_inst_6_34_tsni()
+  }
+};
+match_x_arm_default_inst_6_34_tsni = function match_x_arm_default_inst_6_34_tsni() {
   return boyer2.Nill
 };
-match_x_arm_default_inst_5_tsni = function match_x_arm_default_inst_5_tsni() {
+match_x_arm_default_inst_9_11_tsni = function match_x_arm_default_inst_9_11_tsni() {
   return () => {
-    return match_x_arm_default_inst_15_tsni()
+    return match_x_arm_default_inst_9_12_tsni()
   }
 };
-match_x_arm_default_inst_49_tsni = function match_x_arm_default_inst_49_tsni() {
+match_x_arm_default_inst_9_12_tsni = function match_x_arm_default_inst_9_12_tsni() {
+  return () => {
+    return match_x_arm_default_inst_9_49_tsni()
+  }
+};
+match_x_arm_default_inst_9_49_tsni = function match_x_arm_default_inst_9_49_tsni() {
   return boyer2.Nill
 };
-match_x_arm_default_inst_7_tsni = function match_x_arm_default_inst_7_tsni() {
+match_x_arm_default_inst_13_14_48_tsni = function match_x_arm_default_inst_13_14_48_tsni() {
+  return boyer2.Nill
+};
+match_x_arm_default_inst_13_15_34_tsni = function match_x_arm_default_inst_13_15_34_tsni() {
+  return boyer2.Nill
+};
+match_x_arm_default_inst_13_15_8_tsni = function match_x_arm_default_inst_13_15_8_tsni() {
   return () => {
-    return match_x_arm_default_inst_49_tsni()
+    return match_x_arm_default_inst_13_15_34_tsni()
   }
 };
-match_x_arm_default_inst_8_tsni = function match_x_arm_default_inst_8_tsni() {
+match_x_arm_default_inst_13_16_48_tsni = function match_x_arm_default_inst_13_16_48_tsni() {
+  return boyer2.Nill
+};
+match_x_arm_default_inst_13_17_34_tsni = function match_x_arm_default_inst_13_17_34_tsni() {
+  return boyer2.Nill
+};
+match_x_arm_default_inst_13_17_8_tsni = function match_x_arm_default_inst_13_17_8_tsni() {
   return () => {
-    return match_x_arm_default_inst_7_tsni()
+    return match_x_arm_default_inst_13_17_34_tsni()
   }
 };
-match_x_arm_default_inst_10_11_16_tsni = function match_x_arm_default_inst_10_11_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_10_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_10_12_15_tsni = function match_x_arm_default_inst_10_12_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_10_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_10_12_5_tsni = function match_x_arm_default_inst_10_12_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_10_12_15_tsni()
-  }
-};
-match_x_arm_default_inst_10_13_16_tsni = function match_x_arm_default_inst_10_13_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_10_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_10_14_15_tsni = function match_x_arm_default_inst_10_14_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_10_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_10_14_5_tsni = function match_x_arm_default_inst_10_14_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_10_14_15_tsni()
-  }
-};
-match_f_arm_Nill_inst_10_tsni = function match_f_arm_Nill_inst_10_tsni(truelst, falselst) {
-  return false
-};
-match_x_arm_default_inst_14_5_tsni = function match_x_arm_default_inst_14_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_14_15_tsni()
-  }
-};
-match_x_arm_default_inst_14_15_tsni = function match_x_arm_default_inst_14_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_10_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_17_11_16_tsni = function match_x_arm_default_inst_17_11_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_17_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_17_12_15_tsni = function match_x_arm_default_inst_17_12_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_17_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_17_12_5_tsni = function match_x_arm_default_inst_17_12_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_17_12_15_tsni()
-  }
-};
-match_x_arm_default_inst_17_13_16_tsni = function match_x_arm_default_inst_17_13_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_17_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_17_14_15_tsni = function match_x_arm_default_inst_17_14_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_17_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_17_14_5_tsni = function match_x_arm_default_inst_17_14_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_17_14_15_tsni()
-  }
-};
-match_f_arm_Nill_inst_17_tsni = function match_f_arm_Nill_inst_17_tsni(truelst, falselst) {
-  return false
-};
-match_x_arm_default_inst_13_16_tsni = function match_x_arm_default_inst_13_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_17_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_18_11_16_tsni = function match_x_arm_default_inst_18_11_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_18_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_18_12_15_tsni = function match_x_arm_default_inst_18_12_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_18_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_18_12_5_tsni = function match_x_arm_default_inst_18_12_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_18_12_15_tsni()
-  }
-};
-match_x_arm_default_inst_18_13_16_tsni = function match_x_arm_default_inst_18_13_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_18_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_18_14_15_tsni = function match_x_arm_default_inst_18_14_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_18_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_18_14_5_tsni = function match_x_arm_default_inst_18_14_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_18_14_15_tsni()
-  }
-};
-match_f_arm_Nill_inst_18_tsni = function match_f_arm_Nill_inst_18_tsni(truelst, falselst) {
-  return false
-};
-match_x_arm_default_inst_12_5_tsni = function match_x_arm_default_inst_12_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_12_15_tsni()
-  }
-};
-match_x_arm_default_inst_12_15_tsni = function match_x_arm_default_inst_12_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_18_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_19_11_16_tsni = function match_x_arm_default_inst_19_11_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_19_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_19_12_15_tsni = function match_x_arm_default_inst_19_12_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_19_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_19_12_5_tsni = function match_x_arm_default_inst_19_12_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_19_12_15_tsni()
-  }
-};
-match_x_arm_default_inst_19_13_16_tsni = function match_x_arm_default_inst_19_13_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_19_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_19_14_15_tsni = function match_x_arm_default_inst_19_14_15_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_19_tsni(truelst, falselst)
-  }
-};
-match_x_arm_default_inst_19_14_5_tsni = function match_x_arm_default_inst_19_14_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_19_14_15_tsni()
-  }
-};
-match_f_arm_Nill_inst_19_tsni = function match_f_arm_Nill_inst_19_tsni(truelst, falselst) {
-  return false
-};
-match_x_arm_default_inst_11_16_tsni = function match_x_arm_default_inst_11_16_tsni() {
-  return (truelst, falselst) => {
-    return match_f_arm_Nill_inst_19_tsni(truelst, falselst)
-  }
-};
-match_scrut_arm_Deforest_Arr_2_inst_20_tsni = function match_scrut_arm_Deforest_Arr_2_inst_20_tsni(_deforest_Deforest_Arr_2_0_inst_20_tsni, _deforest_Deforest_Arr_2_1_inst_20_tsni) {
+match_scrut_arm_Deforest_Arr_2_inst_18_tsni = function match_scrut_arm_Deforest_Arr_2_inst_18_tsni(_deforest_Deforest_Arr_2_0_inst_18_tsni, _deforest_Deforest_Arr_2_1_inst_18_tsni) {
   let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_20_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_20_tsni;
+  first0 = _deforest_Deforest_Arr_2_0_inst_18_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_18_tsni;
   a = first0;
   b = first1;
-  tmp = strToToken_inst_20_tsni(b);
+  tmp = boyer2.strToToken(b);
   return NofibPrelude.Cons(a, tmp)
 };
-match_scrut_arm_Deforest_Arr_2_inst__tsni = function match_scrut_arm_Deforest_Arr_2_inst__tsni(_deforest_Deforest_Arr_2_0_inst__tsni, _deforest_Deforest_Arr_2_1_inst__tsni) {
+match_scrut_arm_Deforest_Arr_2_inst_19_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_19_1_tsni(_deforest_Deforest_Arr_2_0_inst_19_1_tsni, _deforest_Deforest_Arr_2_1_inst_19_1_tsni) {
   let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst__tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst__tsni;
+  first0 = _deforest_Deforest_Arr_2_0_inst_19_1_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_19_1_tsni;
   a = first0;
   b = first1;
-  tmp = strToToken_inst_20_tsni(b);
+  tmp = strToToken_inst_19_1_tsni(b);
   return NofibPrelude.Cons(a, tmp)
 };
-match_scrut_arm_Deforest_Arr_2_inst_21_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_21_1_tsni(_deforest_Deforest_Arr_2_0_inst_21_1_tsni, _deforest_Deforest_Arr_2_1_inst_21_1_tsni) {
-  let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_21_1_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_21_1_tsni;
-  a = first0;
-  b = first1;
-  tmp = strToToken_inst_21_1_tsni(b);
-  return NofibPrelude.Cons(a, tmp)
-};
-match_scrut_arm_Deforest_Arr_2_inst_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_1_tsni(_deforest_Deforest_Arr_2_0_inst_1_tsni, _deforest_Deforest_Arr_2_1_inst_1_tsni) {
-  let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_1_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_1_tsni;
-  a = first0;
-  b = first1;
-  tmp = strToToken_inst_1_tsni(b);
-  return NofibPrelude.Cons(a, tmp)
-};
-match_x_arm_default_inst_55_tsni = function match_x_arm_default_inst_55_tsni() {
+match_x_arm_default_inst_20_55_tsni = function match_x_arm_default_inst_20_55_tsni() {
   throw new globalThis.Error("match error");
 };
-match_x_arm_default_inst_23_24_55_tsni = function match_x_arm_default_inst_23_24_55_tsni() {
+match_x_arm_default_inst_22_23_55_tsni = function match_x_arm_default_inst_22_23_55_tsni() {
   throw new globalThis.Error("match error");
 };
-match_x_arm_default_inst_24_55_tsni = function match_x_arm_default_inst_24_55_tsni() {
-  throw new globalThis.Error("match error");
-};
-match_x_arm_Nill_inst_28_58_tsni = function match_x_arm_Nill_inst_28_58_tsni(y) {
+match_x_arm_Nill_inst_24_60_tsni = function match_x_arm_Nill_inst_24_60_tsni(y) {
   if (y instanceof boyer2.Nill.class) {
     return true
   } else {
     return false
   }
 };
-match_x_arm_Nill_inst_30_58_tsni = function match_x_arm_Nill_inst_30_58_tsni(y) {
+match_x_arm_Nill_inst_26_60_tsni = function match_x_arm_Nill_inst_26_60_tsni(y) {
   if (y instanceof boyer2.Nill.class) {
     return true
   } else {
     return false
   }
 };
-match_x_arm_Nill_inst_31_58_tsni = function match_x_arm_Nill_inst_31_58_tsni(y) {
+match_x_arm_Nill_inst_27_28_60_tsni = function match_x_arm_Nill_inst_27_28_60_tsni(y) {
   if (y instanceof boyer2.Nill.class) {
     return true
   } else {
     return false
   }
 };
-match_x_arm_Nill_inst_58_tsni = function match_x_arm_Nill_inst_58_tsni(y) {
-  if (y instanceof boyer2.Nill.class) {
-    return true
-  } else {
-    return false
-  }
-};
-match_x_arm_Nill_inst_32_58_tsni = function match_x_arm_Nill_inst_32_58_tsni(y) {
-  if (y instanceof boyer2.Nill.class) {
-    return true
-  } else {
-    return false
-  }
-};
-match_x_arm_default_inst_33_34_16_tsni = function match_x_arm_default_inst_33_34_16_tsni() {
+match_x_arm_default_inst_29_30_48_tsni = function match_x_arm_default_inst_29_30_48_tsni() {
   return boyer2.Nill
 };
-match_x_arm_Nill_inst_33_35_32_58_tsni = function match_x_arm_Nill_inst_33_35_32_58_tsni(y) {
+match_x_arm_Nill_inst_29_31_28_60_tsni = function match_x_arm_Nill_inst_29_31_28_60_tsni(y) {
   if (y instanceof boyer2.Nill.class) {
     return true
   } else {
     return false
   }
 };
-match_x_arm_default_inst_33_36_15_tsni = function match_x_arm_default_inst_33_36_15_tsni() {
+match_x_arm_default_inst_29_32_34_tsni = function match_x_arm_default_inst_29_32_34_tsni() {
   return (alist) => {
-    return match_x_arm_Nill_inst_33_37_tsni(alist)
+    return match_x_arm_Nill_inst_29_33_tsni(alist)
   }
 };
-match_x_arm_default_inst_33_36_5_tsni = function match_x_arm_default_inst_33_36_5_tsni() {
+match_x_arm_default_inst_29_32_8_tsni = function match_x_arm_default_inst_29_32_8_tsni() {
   return () => {
-    return match_x_arm_default_inst_33_36_15_tsni()
+    return match_x_arm_default_inst_29_32_34_tsni()
   }
 };
-match_x_arm_Nill_inst_33_37_tsni = function match_x_arm_Nill_inst_33_37_tsni(alist) {
+match_x_arm_Nill_inst_29_33_tsni = function match_x_arm_Nill_inst_29_33_tsni(alist) {
   return boyer2.Nill
 };
-match_x_arm_default_inst_38_34_16_tsni = function match_x_arm_default_inst_38_34_16_tsni() {
+match_x_arm_default_inst_35_30_48_tsni = function match_x_arm_default_inst_35_30_48_tsni() {
   return boyer2.Nill
 };
-match_x_arm_Nill_inst_38_35_32_58_tsni = function match_x_arm_Nill_inst_38_35_32_58_tsni(y) {
+match_x_arm_Nill_inst_35_31_28_60_tsni = function match_x_arm_Nill_inst_35_31_28_60_tsni(y) {
   if (y instanceof boyer2.Nill.class) {
     return true
   } else {
     return false
   }
 };
-match_x_arm_default_inst_38_36_15_tsni = function match_x_arm_default_inst_38_36_15_tsni() {
+match_x_arm_default_inst_35_32_34_tsni = function match_x_arm_default_inst_35_32_34_tsni() {
   return (alist) => {
-    return match_x_arm_Nill_inst_38_37_tsni(alist)
+    return match_x_arm_Nill_inst_35_33_tsni(alist)
   }
 };
-match_x_arm_default_inst_38_36_5_tsni = function match_x_arm_default_inst_38_36_5_tsni() {
+match_x_arm_default_inst_35_32_8_tsni = function match_x_arm_default_inst_35_32_8_tsni() {
   return () => {
-    return match_x_arm_default_inst_38_36_15_tsni()
+    return match_x_arm_default_inst_35_32_34_tsni()
   }
 };
-match_x_arm_Nill_inst_38_37_tsni = function match_x_arm_Nill_inst_38_37_tsni(alist) {
+match_x_arm_Nill_inst_35_33_tsni = function match_x_arm_Nill_inst_35_33_tsni(alist) {
   return boyer2.Nill
 };
-match_x_arm_default_inst_36_5_tsni = function match_x_arm_default_inst_36_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_36_15_tsni()
-  }
-};
-match_x_arm_default_inst_36_15_tsni = function match_x_arm_default_inst_36_15_tsni() {
-  return (alist) => {
-    return match_x_arm_Nill_inst_37_tsni(alist)
-  }
-};
-match_x_arm_Nill_inst_37_tsni = function match_x_arm_Nill_inst_37_tsni(alist) {
+match_x_arm_default_inst_36_30_48_tsni = function match_x_arm_default_inst_36_30_48_tsni() {
   return boyer2.Nill
 };
-match_x_arm_Nill_inst_35_32_58_tsni = function match_x_arm_Nill_inst_35_32_58_tsni(y) {
+match_x_arm_Nill_inst_36_31_28_60_tsni = function match_x_arm_Nill_inst_36_31_28_60_tsni(y) {
   if (y instanceof boyer2.Nill.class) {
     return true
   } else {
     return false
   }
 };
-match_x_arm_default_inst_34_16_tsni = function match_x_arm_default_inst_34_16_tsni() {
-  return boyer2.Nill
-};
-match_x_arm_default_inst_39_34_16_tsni = function match_x_arm_default_inst_39_34_16_tsni() {
-  return boyer2.Nill
-};
-match_x_arm_Nill_inst_39_35_32_58_tsni = function match_x_arm_Nill_inst_39_35_32_58_tsni(y) {
-  if (y instanceof boyer2.Nill.class) {
-    return true
-  } else {
-    return false
-  }
-};
-match_x_arm_default_inst_39_36_15_tsni = function match_x_arm_default_inst_39_36_15_tsni() {
+match_x_arm_default_inst_36_32_34_tsni = function match_x_arm_default_inst_36_32_34_tsni() {
   return (alist) => {
-    return match_x_arm_Nill_inst_39_37_tsni(alist)
+    return match_x_arm_Nill_inst_36_33_tsni(alist)
   }
 };
-match_x_arm_default_inst_39_36_5_tsni = function match_x_arm_default_inst_39_36_5_tsni() {
+match_x_arm_default_inst_36_32_8_tsni = function match_x_arm_default_inst_36_32_8_tsni() {
   return () => {
-    return match_x_arm_default_inst_39_36_15_tsni()
+    return match_x_arm_default_inst_36_32_34_tsni()
   }
 };
-match_x_arm_Nill_inst_39_37_tsni = function match_x_arm_Nill_inst_39_37_tsni(alist) {
+match_x_arm_Nill_inst_36_33_tsni = function match_x_arm_Nill_inst_36_33_tsni(alist) {
   return boyer2.Nill
 };
-match_x_arm_default_inst_40_34_16_tsni = function match_x_arm_default_inst_40_34_16_tsni() {
-  return boyer2.Nill
-};
-match_x_arm_Nill_inst_40_35_32_58_tsni = function match_x_arm_Nill_inst_40_35_32_58_tsni(y) {
-  if (y instanceof boyer2.Nill.class) {
-    return true
-  } else {
-    return false
-  }
-};
-match_x_arm_default_inst_40_36_15_tsni = function match_x_arm_default_inst_40_36_15_tsni() {
-  return (alist) => {
-    return match_x_arm_Nill_inst_40_37_tsni(alist)
-  }
-};
-match_x_arm_default_inst_40_36_5_tsni = function match_x_arm_default_inst_40_36_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_40_36_15_tsni()
-  }
-};
-match_x_arm_Nill_inst_40_37_tsni = function match_x_arm_Nill_inst_40_37_tsni(alist) {
-  return boyer2.Nill
-};
-match_x_arm_default_inst_41_34_16_tsni = function match_x_arm_default_inst_41_34_16_tsni() {
-  return boyer2.Nill
-};
-match_x_arm_Nill_inst_41_35_32_58_tsni = function match_x_arm_Nill_inst_41_35_32_58_tsni(y) {
-  if (y instanceof boyer2.Nill.class) {
-    return true
-  } else {
-    return false
-  }
-};
-match_x_arm_default_inst_41_36_15_tsni = function match_x_arm_default_inst_41_36_15_tsni() {
-  return (alist) => {
-    return match_x_arm_Nill_inst_41_37_tsni(alist)
-  }
-};
-match_x_arm_default_inst_41_36_5_tsni = function match_x_arm_default_inst_41_36_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_41_36_15_tsni()
-  }
-};
-match_x_arm_Nill_inst_41_37_tsni = function match_x_arm_Nill_inst_41_37_tsni(alist) {
-  return boyer2.Nill
-};
-match_x_arm_default_inst_42_34_16_tsni = function match_x_arm_default_inst_42_34_16_tsni() {
-  return boyer2.Nill
-};
-match_x_arm_Nill_inst_42_35_32_58_tsni = function match_x_arm_Nill_inst_42_35_32_58_tsni(y) {
-  if (y instanceof boyer2.Nill.class) {
-    return true
-  } else {
-    return false
-  }
-};
-match_x_arm_default_inst_42_36_15_tsni = function match_x_arm_default_inst_42_36_15_tsni() {
-  return (alist) => {
-    return match_x_arm_Nill_inst_42_37_tsni(alist)
-  }
-};
-match_x_arm_default_inst_42_36_5_tsni = function match_x_arm_default_inst_42_36_5_tsni() {
-  return () => {
-    return match_x_arm_default_inst_42_36_15_tsni()
-  }
-};
-match_x_arm_Nill_inst_42_37_tsni = function match_x_arm_Nill_inst_42_37_tsni(alist) {
-  return boyer2.Nill
-};
-match_scrut_arm_Deforest_Arr_2_inst_43_tsni = function match_scrut_arm_Deforest_Arr_2_inst_43_tsni(_deforest_Deforest_Arr_2_0_inst_43_tsni, _deforest_Deforest_Arr_2_1_inst_43_tsni) {
+match_scrut_arm_Deforest_Arr_2_inst_37_38_tsni = function match_scrut_arm_Deforest_Arr_2_inst_37_38_tsni(_deforest_Deforest_Arr_2_0_inst_37_38_tsni, _deforest_Deforest_Arr_2_1_inst_37_38_tsni) {
   let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_43_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_43_tsni;
+  first0 = _deforest_Deforest_Arr_2_0_inst_37_38_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_37_38_tsni;
   a = first0;
   b = first1;
-  tmp = strToToken_inst_43_tsni(b);
+  tmp = strToToken_inst_37_38_tsni(b);
   return NofibPrelude.Cons(a, tmp)
 };
-match_scrut_arm_Deforest_Arr_2_inst_44_43_tsni = function match_scrut_arm_Deforest_Arr_2_inst_44_43_tsni(_deforest_Deforest_Arr_2_0_inst_44_43_tsni, _deforest_Deforest_Arr_2_1_inst_44_43_tsni) {
+match_scrut_arm_Deforest_Arr_2_inst_39_40_38_tsni = function match_scrut_arm_Deforest_Arr_2_inst_39_40_38_tsni(_deforest_Deforest_Arr_2_0_inst_39_40_38_tsni, _deforest_Deforest_Arr_2_1_inst_39_40_38_tsni) {
   let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_44_43_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_44_43_tsni;
+  first0 = _deforest_Deforest_Arr_2_0_inst_39_40_38_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_39_40_38_tsni;
   a = first0;
   b = first1;
-  tmp = strToToken_inst_44_43_tsni(b);
+  tmp = strToToken_inst_39_40_38_tsni(b);
   return NofibPrelude.Cons(a, tmp)
 };
-match_scrut_arm_Deforest_Arr_2_inst_45_44_43_tsni = function match_scrut_arm_Deforest_Arr_2_inst_45_44_43_tsni(_deforest_Deforest_Arr_2_0_inst_45_44_43_tsni, _deforest_Deforest_Arr_2_1_inst_45_44_43_tsni) {
+match_scrut_arm_Deforest_Arr_2_inst_41_42_40_38_tsni = function match_scrut_arm_Deforest_Arr_2_inst_41_42_40_38_tsni(_deforest_Deforest_Arr_2_0_inst_41_42_40_38_tsni, _deforest_Deforest_Arr_2_1_inst_41_42_40_38_tsni) {
   let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_45_44_43_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_45_44_43_tsni;
+  first0 = _deforest_Deforest_Arr_2_0_inst_41_42_40_38_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_41_42_40_38_tsni;
   a = first0;
   b = first1;
-  tmp = strToToken_inst_45_44_43_tsni(b);
+  tmp = strToToken_inst_41_42_40_38_tsni(b);
   return NofibPrelude.Cons(a, tmp)
 };
-match_scrut_arm_Deforest_Arr_2_inst_46_45_44_43_tsni = function match_scrut_arm_Deforest_Arr_2_inst_46_45_44_43_tsni(_deforest_Deforest_Arr_2_0_inst_46_45_44_43_tsni, _deforest_Deforest_Arr_2_1_inst_46_45_44_43_tsni) {
+match_scrut_arm_Deforest_Arr_2_inst_43_44_42_40_38_tsni = function match_scrut_arm_Deforest_Arr_2_inst_43_44_42_40_38_tsni(_deforest_Deforest_Arr_2_0_inst_43_44_42_40_38_tsni, _deforest_Deforest_Arr_2_1_inst_43_44_42_40_38_tsni) {
   let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_46_45_44_43_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_46_45_44_43_tsni;
+  first0 = _deforest_Deforest_Arr_2_0_inst_43_44_42_40_38_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_43_44_42_40_38_tsni;
   a = first0;
   b = first1;
-  tmp = strToToken_inst_46_45_44_43_tsni(b);
+  tmp = strToToken_inst_43_44_42_40_38_tsni(b);
   return NofibPrelude.Cons(a, tmp)
 };
-match_scrut_arm_Deforest_Arr_2_inst_47_46_45_44_43_tsni = function match_scrut_arm_Deforest_Arr_2_inst_47_46_45_44_43_tsni(_deforest_Deforest_Arr_2_0_inst_47_46_45_44_43_tsni, _deforest_Deforest_Arr_2_1_inst_47_46_45_44_43_tsni) {
+match_scrut_arm_Deforest_Arr_2_inst_45_46_44_42_40_38_tsni = function match_scrut_arm_Deforest_Arr_2_inst_45_46_44_42_40_38_tsni(_deforest_Deforest_Arr_2_0_inst_45_46_44_42_40_38_tsni, _deforest_Deforest_Arr_2_1_inst_45_46_44_42_40_38_tsni) {
   let first1, first0, a, b, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_47_46_45_44_43_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_47_46_45_44_43_tsni;
+  first0 = _deforest_Deforest_Arr_2_0_inst_45_46_44_42_40_38_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_45_46_44_42_40_38_tsni;
   a = first0;
   b = first1;
-  tmp = strToToken_inst_47_46_45_44_43_tsni(b);
+  tmp = strToToken_inst_45_46_44_42_40_38_tsni(b);
   return NofibPrelude.Cons(a, tmp)
 };
 makelemmas_inst_0_tsni = function makelemmas_inst_0_tsni(rules) {
@@ -639,7 +372,7 @@ getToken_inst_3_2_tsni = function getToken_inst_3_2_tsni(s) {
     throw new globalThis.Error("match error");
   }
 };
-cdr_inst_4_tsni = function cdr_inst_4_tsni(x) {
+cdr_inst_4_5_tsni = function cdr_inst_4_5_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -650,19 +383,16 @@ cdr_inst_4_tsni = function cdr_inst_4_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_16_tsni()
+        return match_x_arm_default_inst_4_48_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_16_tsni()
+      return match_x_arm_default_inst_4_48_tsni()
     }
   }
 };
-cdr_inst_5_tsni = function cdr_inst_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_6_tsni = function cdr_inst_6_tsni(x) {
+cdr_inst_6_7_tsni = function cdr_inst_6_7_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -673,22 +403,19 @@ cdr_inst_6_tsni = function cdr_inst_6_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_5_tsni()
+        return match_x_arm_default_inst_6_8_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_5_tsni()
+      return match_x_arm_default_inst_6_8_tsni()
     }
   }
 };
-cdr_inst_7_tsni = function cdr_inst_7_tsni(x) {
+cdr_inst_6_8_tsni = function cdr_inst_6_8_tsni(x) {
   return runtime.safeCall(x())
 };
-cdr_inst_8_tsni = function cdr_inst_8_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_9_tsni = function cdr_inst_9_tsni(x) {
+cdr_inst_9_10_tsni = function cdr_inst_9_10_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -699,687 +426,197 @@ cdr_inst_9_tsni = function cdr_inst_9_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_8_tsni()
+        return match_x_arm_default_inst_9_11_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_8_tsni()
+      return match_x_arm_default_inst_9_11_tsni()
     }
   }
 };
-tautologyp_inst_10_tsni = function tautologyp_inst_10_tsni(f_truelst_falselst) {
-  let first2, first1, first0, f, truelst, falselst;
-  if (globalThis.Array.isArray(f_truelst_falselst) && f_truelst_falselst.length === 3) {
-    first0 = f_truelst_falselst[0];
-    first1 = f_truelst_falselst[1];
-    first2 = f_truelst_falselst[2];
-    f = first0;
-    truelst = first1;
-    falselst = first2;
-    return runtime.safeCall(f(truelst, falselst))
+cdr_inst_9_11_tsni = function cdr_inst_9_11_tsni(x) {
+  return runtime.safeCall(x())
+};
+cdr_inst_9_12_tsni = function cdr_inst_9_12_tsni(x) {
+  return runtime.safeCall(x())
+};
+cadr_inst_13_14_tsni = function cadr_inst_13_14_tsni(x) {
+  let tmp;
+  tmp = cdr_inst_13_14_5_tsni(x);
+  return car_inst_13_14_48_tsni(tmp)
+};
+cdr_inst_13_14_5_tsni = function cdr_inst_13_14_5_tsni(x) {
+  let param0, first1, first0, b;
+  if (x instanceof boyer2.Conss.class) {
+    param0 = x.a;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      b = first1;
+      return b
+    } else {
+      return () => {
+        return match_x_arm_default_inst_13_14_48_tsni()
+      }
+    }
+  } else {
+    return () => {
+      return match_x_arm_default_inst_13_14_48_tsni()
+    }
+  }
+};
+caddr_inst_13_15_tsni = function caddr_inst_13_15_tsni(x) {
+  let tmp, tmp1;
+  tmp = cdr_inst_13_15_7_tsni(x);
+  tmp1 = cdr_inst_13_15_8_tsni(tmp);
+  return car_inst_13_15_34_tsni(tmp1)
+};
+cdr_inst_13_15_8_tsni = function cdr_inst_13_15_8_tsni(x) {
+  return runtime.safeCall(x())
+};
+cdr_inst_13_15_7_tsni = function cdr_inst_13_15_7_tsni(x) {
+  let param0, first1, first0, b;
+  if (x instanceof boyer2.Conss.class) {
+    param0 = x.a;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      b = first1;
+      return b
+    } else {
+      return () => {
+        return match_x_arm_default_inst_13_15_8_tsni()
+      }
+    }
+  } else {
+    return () => {
+      return match_x_arm_default_inst_13_15_8_tsni()
+    }
+  }
+};
+cadr_inst_13_16_tsni = function cadr_inst_13_16_tsni(x) {
+  let tmp;
+  tmp = cdr_inst_13_16_5_tsni(x);
+  return car_inst_13_16_48_tsni(tmp)
+};
+cdr_inst_13_16_5_tsni = function cdr_inst_13_16_5_tsni(x) {
+  let param0, first1, first0, b;
+  if (x instanceof boyer2.Conss.class) {
+    param0 = x.a;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      b = first1;
+      return b
+    } else {
+      return () => {
+        return match_x_arm_default_inst_13_16_48_tsni()
+      }
+    }
+  } else {
+    return () => {
+      return match_x_arm_default_inst_13_16_48_tsni()
+    }
+  }
+};
+caddr_inst_13_17_tsni = function caddr_inst_13_17_tsni(x) {
+  let tmp, tmp1;
+  tmp = cdr_inst_13_17_7_tsni(x);
+  tmp1 = cdr_inst_13_17_8_tsni(tmp);
+  return car_inst_13_17_34_tsni(tmp1)
+};
+cdr_inst_13_17_8_tsni = function cdr_inst_13_17_8_tsni(x) {
+  return runtime.safeCall(x())
+};
+cdr_inst_13_17_7_tsni = function cdr_inst_13_17_7_tsni(x) {
+  let param0, first1, first0, b;
+  if (x instanceof boyer2.Conss.class) {
+    param0 = x.a;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      b = first1;
+      return b
+    } else {
+      return () => {
+        return match_x_arm_default_inst_13_17_8_tsni()
+      }
+    }
+  } else {
+    return () => {
+      return match_x_arm_default_inst_13_17_8_tsni()
+    }
+  }
+};
+getToken_inst_18_2_tsni = function getToken_inst_18_2_tsni(s) {
+  let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
+  if (s instanceof NofibPrelude.Nil.class) {
+    _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
+    _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
+    arr = () => {
+      return match_scrut_arm_Deforest_Arr_2_inst_18_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+    };
+    return arr
+  } else if (s instanceof NofibPrelude.Cons.class) {
+    param0 = s.head;
+    param1 = s.tail;
+    h = param0;
+    t = param1;
+    scrut2 = h === " ";
+    if (scrut2 === true) {
+      return getToken_inst_18_2_tsni(t)
+    } else {
+      tmp = h === "(";
+      tmp1 = h === ")";
+      scrut1 = tmp || tmp1;
+      if (scrut1 === true) {
+        tmp2 = NofibPrelude.Cons(h, NofibPrelude.Nil);
+        _deforest_Deforest_Arr_2_01 = tmp2;
+        _deforest_Deforest_Arr_2_11 = t;
+        arr1 = () => {
+          return match_scrut_arm_Deforest_Arr_2_inst_18_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+        };
+        return arr1
+      } else {
+        scrut = boyer2.restOfToken(t);
+        if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
+          first0 = scrut[0];
+          first1 = scrut[1];
+          a = first0;
+          b = first1;
+          tmp3 = NofibPrelude.Cons(h, a);
+          _deforest_Deforest_Arr_2_02 = tmp3;
+          _deforest_Deforest_Arr_2_12 = b;
+          arr2 = () => {
+            return match_scrut_arm_Deforest_Arr_2_inst_18_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
+          };
+          return arr2
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      }
+    }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-cadr_inst_10_11_tsni = function cadr_inst_10_11_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_10_11_4_tsni(x);
-  return car_inst_10_11_16_tsni(tmp)
-};
-cdr_inst_10_11_4_tsni = function cdr_inst_10_11_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_10_11_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_10_11_16_tsni()
-    }
-  }
-};
-caddr_inst_10_12_tsni = function caddr_inst_10_12_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_10_12_6_tsni(x);
-  tmp1 = cdr_inst_10_12_5_tsni(tmp);
-  return car_inst_10_12_15_tsni(tmp1)
-};
-cdr_inst_10_12_5_tsni = function cdr_inst_10_12_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_10_12_6_tsni = function cdr_inst_10_12_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_10_12_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_10_12_5_tsni()
-    }
-  }
-};
-cadr_inst_10_13_tsni = function cadr_inst_10_13_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_10_13_4_tsni(x);
-  return car_inst_10_13_16_tsni(tmp)
-};
-cdr_inst_10_13_4_tsni = function cdr_inst_10_13_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_10_13_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_10_13_16_tsni()
-    }
-  }
-};
-caddr_inst_10_14_tsni = function caddr_inst_10_14_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_10_14_6_tsni(x);
-  tmp1 = cdr_inst_10_14_5_tsni(tmp);
-  return car_inst_10_14_15_tsni(tmp1)
-};
-cdr_inst_10_14_5_tsni = function cdr_inst_10_14_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_10_14_6_tsni = function cdr_inst_10_14_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_10_14_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_10_14_5_tsni()
-    }
-  }
-};
-car_inst_10_14_15_tsni = function car_inst_10_14_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_10_13_16_tsni = function car_inst_10_13_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_10_12_15_tsni = function car_inst_10_12_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_10_11_16_tsni = function car_inst_10_11_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-caddr_inst_14_tsni = function caddr_inst_14_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_14_6_tsni(x);
-  tmp1 = cdr_inst_14_5_tsni(tmp);
-  return car_inst_14_15_tsni(tmp1)
-};
-cdr_inst_14_6_tsni = function cdr_inst_14_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_14_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_14_5_tsni()
-    }
-  }
-};
-cdr_inst_14_5_tsni = function cdr_inst_14_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_14_15_tsni = function car_inst_14_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-tautologyp_inst_17_tsni = function tautologyp_inst_17_tsni(f_truelst_falselst) {
-  let first2, first1, first0, f, truelst, falselst;
-  if (globalThis.Array.isArray(f_truelst_falselst) && f_truelst_falselst.length === 3) {
-    first0 = f_truelst_falselst[0];
-    first1 = f_truelst_falselst[1];
-    first2 = f_truelst_falselst[2];
-    f = first0;
-    truelst = first1;
-    falselst = first2;
-    return runtime.safeCall(f(truelst, falselst))
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_17_11_tsni = function cadr_inst_17_11_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_17_11_4_tsni(x);
-  return car_inst_17_11_16_tsni(tmp)
-};
-cdr_inst_17_11_4_tsni = function cdr_inst_17_11_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_17_11_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_17_11_16_tsni()
-    }
-  }
-};
-caddr_inst_17_12_tsni = function caddr_inst_17_12_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_17_12_6_tsni(x);
-  tmp1 = cdr_inst_17_12_5_tsni(tmp);
-  return car_inst_17_12_15_tsni(tmp1)
-};
-cdr_inst_17_12_5_tsni = function cdr_inst_17_12_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_17_12_6_tsni = function cdr_inst_17_12_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_17_12_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_17_12_5_tsni()
-    }
-  }
-};
-cadr_inst_17_13_tsni = function cadr_inst_17_13_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_17_13_4_tsni(x);
-  return car_inst_17_13_16_tsni(tmp)
-};
-cdr_inst_17_13_4_tsni = function cdr_inst_17_13_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_17_13_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_17_13_16_tsni()
-    }
-  }
-};
-caddr_inst_17_14_tsni = function caddr_inst_17_14_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_17_14_6_tsni(x);
-  tmp1 = cdr_inst_17_14_5_tsni(tmp);
-  return car_inst_17_14_15_tsni(tmp1)
-};
-cdr_inst_17_14_5_tsni = function cdr_inst_17_14_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_17_14_6_tsni = function cdr_inst_17_14_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_17_14_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_17_14_5_tsni()
-    }
-  }
-};
-car_inst_17_14_15_tsni = function car_inst_17_14_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_17_13_16_tsni = function car_inst_17_13_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_17_12_15_tsni = function car_inst_17_12_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_17_11_16_tsni = function car_inst_17_11_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-cadr_inst_13_tsni = function cadr_inst_13_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_13_4_tsni(x);
-  return car_inst_13_16_tsni(tmp)
-};
-cdr_inst_13_4_tsni = function cdr_inst_13_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_13_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_13_16_tsni()
-    }
-  }
-};
-car_inst_13_16_tsni = function car_inst_13_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-tautologyp_inst_18_tsni = function tautologyp_inst_18_tsni(f_truelst_falselst) {
-  let first2, first1, first0, f, truelst, falselst;
-  if (globalThis.Array.isArray(f_truelst_falselst) && f_truelst_falselst.length === 3) {
-    first0 = f_truelst_falselst[0];
-    first1 = f_truelst_falselst[1];
-    first2 = f_truelst_falselst[2];
-    f = first0;
-    truelst = first1;
-    falselst = first2;
-    return runtime.safeCall(f(truelst, falselst))
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_18_11_tsni = function cadr_inst_18_11_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_18_11_4_tsni(x);
-  return car_inst_18_11_16_tsni(tmp)
-};
-cdr_inst_18_11_4_tsni = function cdr_inst_18_11_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_18_11_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_18_11_16_tsni()
-    }
-  }
-};
-caddr_inst_18_12_tsni = function caddr_inst_18_12_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_18_12_6_tsni(x);
-  tmp1 = cdr_inst_18_12_5_tsni(tmp);
-  return car_inst_18_12_15_tsni(tmp1)
-};
-cdr_inst_18_12_5_tsni = function cdr_inst_18_12_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_18_12_6_tsni = function cdr_inst_18_12_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_18_12_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_18_12_5_tsni()
-    }
-  }
-};
-cadr_inst_18_13_tsni = function cadr_inst_18_13_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_18_13_4_tsni(x);
-  return car_inst_18_13_16_tsni(tmp)
-};
-cdr_inst_18_13_4_tsni = function cdr_inst_18_13_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_18_13_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_18_13_16_tsni()
-    }
-  }
-};
-caddr_inst_18_14_tsni = function caddr_inst_18_14_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_18_14_6_tsni(x);
-  tmp1 = cdr_inst_18_14_5_tsni(tmp);
-  return car_inst_18_14_15_tsni(tmp1)
-};
-cdr_inst_18_14_5_tsni = function cdr_inst_18_14_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_18_14_6_tsni = function cdr_inst_18_14_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_18_14_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_18_14_5_tsni()
-    }
-  }
-};
-car_inst_18_14_15_tsni = function car_inst_18_14_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_18_13_16_tsni = function car_inst_18_13_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_18_12_15_tsni = function car_inst_18_12_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_18_11_16_tsni = function car_inst_18_11_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-caddr_inst_12_tsni = function caddr_inst_12_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_12_6_tsni(x);
-  tmp1 = cdr_inst_12_5_tsni(tmp);
-  return car_inst_12_15_tsni(tmp1)
-};
-cdr_inst_12_6_tsni = function cdr_inst_12_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_12_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_12_5_tsni()
-    }
-  }
-};
-cdr_inst_12_5_tsni = function cdr_inst_12_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_12_15_tsni = function car_inst_12_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-tautologyp_inst_19_tsni = function tautologyp_inst_19_tsni(f_truelst_falselst) {
-  let first2, first1, first0, f, truelst, falselst;
-  if (globalThis.Array.isArray(f_truelst_falselst) && f_truelst_falselst.length === 3) {
-    first0 = f_truelst_falselst[0];
-    first1 = f_truelst_falselst[1];
-    first2 = f_truelst_falselst[2];
-    f = first0;
-    truelst = first1;
-    falselst = first2;
-    return runtime.safeCall(f(truelst, falselst))
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_19_11_tsni = function cadr_inst_19_11_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_19_11_4_tsni(x);
-  return car_inst_19_11_16_tsni(tmp)
-};
-cdr_inst_19_11_4_tsni = function cdr_inst_19_11_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_19_11_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_19_11_16_tsni()
-    }
-  }
-};
-caddr_inst_19_12_tsni = function caddr_inst_19_12_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_19_12_6_tsni(x);
-  tmp1 = cdr_inst_19_12_5_tsni(tmp);
-  return car_inst_19_12_15_tsni(tmp1)
-};
-cdr_inst_19_12_5_tsni = function cdr_inst_19_12_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_19_12_6_tsni = function cdr_inst_19_12_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_19_12_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_19_12_5_tsni()
-    }
-  }
-};
-cadr_inst_19_13_tsni = function cadr_inst_19_13_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_19_13_4_tsni(x);
-  return car_inst_19_13_16_tsni(tmp)
-};
-cdr_inst_19_13_4_tsni = function cdr_inst_19_13_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_19_13_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_19_13_16_tsni()
-    }
-  }
-};
-caddr_inst_19_14_tsni = function caddr_inst_19_14_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_19_14_6_tsni(x);
-  tmp1 = cdr_inst_19_14_5_tsni(tmp);
-  return car_inst_19_14_15_tsni(tmp1)
-};
-cdr_inst_19_14_5_tsni = function cdr_inst_19_14_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_19_14_6_tsni = function cdr_inst_19_14_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_19_14_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_19_14_5_tsni()
-    }
-  }
-};
-car_inst_19_14_15_tsni = function car_inst_19_14_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_19_13_16_tsni = function car_inst_19_13_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_19_12_15_tsni = function car_inst_19_12_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-car_inst_19_11_16_tsni = function car_inst_19_11_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-cadr_inst_11_tsni = function cadr_inst_11_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_11_4_tsni(x);
-  return car_inst_11_16_tsni(tmp)
-};
-cdr_inst_11_4_tsni = function cdr_inst_11_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_11_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_11_16_tsni()
-    }
-  }
-};
-car_inst_11_16_tsni = function car_inst_11_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-strToToken_inst_20_tsni = function strToToken_inst_20_tsni(s) {
+strToToken_inst_19_1_tsni = function strToToken_inst_19_1_tsni(s) {
   let scrut;
   if (s instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else {
-    scrut = getToken_inst_20_2_tsni(s);
+    scrut = getToken_inst_19_1_2_tsni(s);
     return runtime.safeCall(scrut())
   }
 };
-getToken_inst_20_2_tsni = function getToken_inst_20_2_tsni(s) {
+getToken_inst_19_1_2_tsni = function getToken_inst_19_1_2_tsni(s) {
   let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
   if (s instanceof NofibPrelude.Nil.class) {
     _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
     _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
     arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst_20_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+      return match_scrut_arm_Deforest_Arr_2_inst_19_1_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
     return arr
   } else if (s instanceof NofibPrelude.Cons.class) {
@@ -1389,7 +626,7 @@ getToken_inst_20_2_tsni = function getToken_inst_20_2_tsni(s) {
     t = param1;
     scrut2 = h === " ";
     if (scrut2 === true) {
-      return getToken_inst_20_2_tsni(t)
+      return getToken_inst_19_1_2_tsni(t)
     } else {
       tmp = h === "(";
       tmp1 = h === ")";
@@ -1399,7 +636,7 @@ getToken_inst_20_2_tsni = function getToken_inst_20_2_tsni(s) {
         _deforest_Deforest_Arr_2_01 = tmp2;
         _deforest_Deforest_Arr_2_11 = t;
         arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst_20_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+          return match_scrut_arm_Deforest_Arr_2_inst_19_1_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
         };
         return arr1
       } else {
@@ -1413,7 +650,7 @@ getToken_inst_20_2_tsni = function getToken_inst_20_2_tsni(s) {
           _deforest_Deforest_Arr_2_02 = tmp3;
           _deforest_Deforest_Arr_2_12 = b;
           arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst_20_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
+            return match_scrut_arm_Deforest_Arr_2_inst_19_1_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
           };
           return arr2
         } else {
@@ -1425,198 +662,7 @@ getToken_inst_20_2_tsni = function getToken_inst_20_2_tsni(s) {
     throw new globalThis.Error("match error");
   }
 };
-getToken_inst_2_tsni = function getToken_inst_2_tsni(s) {
-  let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
-  if (s instanceof NofibPrelude.Nil.class) {
-    _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
-    _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
-    arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst__tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr
-  } else if (s instanceof NofibPrelude.Cons.class) {
-    param0 = s.head;
-    param1 = s.tail;
-    h = param0;
-    t = param1;
-    scrut2 = h === " ";
-    if (scrut2 === true) {
-      return getToken_inst_2_tsni(t)
-    } else {
-      tmp = h === "(";
-      tmp1 = h === ")";
-      scrut1 = tmp || tmp1;
-      if (scrut1 === true) {
-        tmp2 = NofibPrelude.Cons(h, NofibPrelude.Nil);
-        _deforest_Deforest_Arr_2_01 = tmp2;
-        _deforest_Deforest_Arr_2_11 = t;
-        arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst__tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr1
-      } else {
-        scrut = boyer2.restOfToken(t);
-        if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-          first0 = scrut[0];
-          first1 = scrut[1];
-          a = first0;
-          b = first1;
-          tmp3 = NofibPrelude.Cons(h, a);
-          _deforest_Deforest_Arr_2_02 = tmp3;
-          _deforest_Deforest_Arr_2_12 = b;
-          arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst__tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
-          };
-          return arr2
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-makelemmas_inst_21_tsni = function makelemmas_inst_21_tsni(rules) {
-  let param0, param1, h, t, tmp, tmp1, tmp2;
-  if (rules instanceof NofibPrelude.Nil.class) {
-    return NofibPrelude.Nil
-  } else if (rules instanceof NofibPrelude.Cons.class) {
-    param0 = rules.head;
-    param1 = rules.tail;
-    h = param0;
-    t = param1;
-    tmp = strToToken_inst_21_1_tsni(h);
-    tmp1 = boyer2.mkLispList(tmp);
-    tmp2 = makelemmas_inst_21_tsni(t);
-    return NofibPrelude.Cons(tmp1, tmp2)
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-strToToken_inst_21_1_tsni = function strToToken_inst_21_1_tsni(s) {
-  let scrut;
-  if (s instanceof NofibPrelude.Nil.class) {
-    return NofibPrelude.Nil
-  } else {
-    scrut = getToken_inst_21_1_2_tsni(s);
-    return runtime.safeCall(scrut())
-  }
-};
-getToken_inst_21_1_2_tsni = function getToken_inst_21_1_2_tsni(s) {
-  let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
-  if (s instanceof NofibPrelude.Nil.class) {
-    _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
-    _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
-    arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst_21_1_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr
-  } else if (s instanceof NofibPrelude.Cons.class) {
-    param0 = s.head;
-    param1 = s.tail;
-    h = param0;
-    t = param1;
-    scrut2 = h === " ";
-    if (scrut2 === true) {
-      return getToken_inst_21_1_2_tsni(t)
-    } else {
-      tmp = h === "(";
-      tmp1 = h === ")";
-      scrut1 = tmp || tmp1;
-      if (scrut1 === true) {
-        tmp2 = NofibPrelude.Cons(h, NofibPrelude.Nil);
-        _deforest_Deforest_Arr_2_01 = tmp2;
-        _deforest_Deforest_Arr_2_11 = t;
-        arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst_21_1_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr1
-      } else {
-        scrut = boyer2.restOfToken(t);
-        if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-          first0 = scrut[0];
-          first1 = scrut[1];
-          a = first0;
-          b = first1;
-          tmp3 = NofibPrelude.Cons(h, a);
-          _deforest_Deforest_Arr_2_02 = tmp3;
-          _deforest_Deforest_Arr_2_12 = b;
-          arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst_21_1_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
-          };
-          return arr2
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-strToToken_inst_1_tsni = function strToToken_inst_1_tsni(s) {
-  let scrut;
-  if (s instanceof NofibPrelude.Nil.class) {
-    return NofibPrelude.Nil
-  } else {
-    scrut = getToken_inst_1_2_tsni(s);
-    return runtime.safeCall(scrut())
-  }
-};
-getToken_inst_1_2_tsni = function getToken_inst_1_2_tsni(s) {
-  let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
-  if (s instanceof NofibPrelude.Nil.class) {
-    _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
-    _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
-    arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst_1_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr
-  } else if (s instanceof NofibPrelude.Cons.class) {
-    param0 = s.head;
-    param1 = s.tail;
-    h = param0;
-    t = param1;
-    scrut2 = h === " ";
-    if (scrut2 === true) {
-      return getToken_inst_1_2_tsni(t)
-    } else {
-      tmp = h === "(";
-      tmp1 = h === ")";
-      scrut1 = tmp || tmp1;
-      if (scrut1 === true) {
-        tmp2 = NofibPrelude.Cons(h, NofibPrelude.Nil);
-        _deforest_Deforest_Arr_2_01 = tmp2;
-        _deforest_Deforest_Arr_2_11 = t;
-        arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst_1_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr1
-      } else {
-        scrut = boyer2.restOfToken(t);
-        if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-          first0 = scrut[0];
-          first1 = scrut[1];
-          a = first0;
-          b = first1;
-          tmp3 = NofibPrelude.Cons(h, a);
-          _deforest_Deforest_Arr_2_02 = tmp3;
-          _deforest_Deforest_Arr_2_12 = b;
-          arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst_1_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
-          };
-          return arr2
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-car_inst_22_tsni = function car_inst_22_tsni(x) {
+car_inst_20_21_tsni = function car_inst_20_21_tsni(x) {
   let param0, first1, first0, a;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -1627,31 +673,16 @@ car_inst_22_tsni = function car_inst_22_tsni(x) {
       return a
     } else {
       return () => {
-        return match_x_arm_default_inst_55_tsni()
+        return match_x_arm_default_inst_20_55_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_55_tsni()
+      return match_x_arm_default_inst_20_55_tsni()
     }
   }
 };
-addlemmalst_inst_23_tsni = function addlemmalst_inst_23_tsni(lspls, term) {
-  let param0, param1, h, t, tmp;
-  if (lspls instanceof NofibPrelude.Nil.class) {
-    return term
-  } else if (lspls instanceof NofibPrelude.Cons.class) {
-    param0 = lspls.head;
-    param1 = lspls.tail;
-    h = param0;
-    t = param1;
-    tmp = addlemma_inst_23_24_tsni(h, term);
-    return addlemmalst_inst_23_tsni(t, tmp)
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-addlemma_inst_23_24_tsni = function addlemma_inst_23_24_tsni(lspls, term) {
+addlemma_inst_22_23_tsni = function addlemma_inst_22_23_tsni(lspls, term) {
   let param0, first1, first0, x, y, z, scrut, scrut1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1;
   if (lspls instanceof boyer2.Nill.class) {
     return term
@@ -1675,8 +706,8 @@ addlemma_inst_23_24_tsni = function addlemma_inst_23_24_tsni(lspls, term) {
         tmp3 = boyer2.atom(z);
         scrut1 = Predef.not(tmp3);
         if (scrut1 === true) {
-          tmp4 = car_inst_23_24_22_tsni(z);
-          tmp5 = tv_inst_23_24_55_tsni(tmp4);
+          tmp4 = car_inst_22_23_21_tsni(z);
+          tmp5 = tv_inst_22_23_55_tsni(tmp4);
           arr = [
             x,
             y
@@ -1701,7 +732,7 @@ addlemma_inst_23_24_tsni = function addlemma_inst_23_24_tsni(lspls, term) {
     throw new globalThis.Error("match error");
   }
 };
-car_inst_23_24_22_tsni = function car_inst_23_24_22_tsni(x) {
+car_inst_22_23_21_tsni = function car_inst_22_23_21_tsni(x) {
   let param0, first1, first0, a;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -1712,66 +743,16 @@ car_inst_23_24_22_tsni = function car_inst_23_24_22_tsni(x) {
       return a
     } else {
       return () => {
-        return match_x_arm_default_inst_23_24_55_tsni()
+        return match_x_arm_default_inst_22_23_55_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_23_24_55_tsni()
+      return match_x_arm_default_inst_22_23_55_tsni()
     }
   }
 };
-addlemma_inst_24_tsni = function addlemma_inst_24_tsni(lspls, term) {
-  let param0, first1, first0, x, y, z, scrut, scrut1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1;
-  if (lspls instanceof boyer2.Nill.class) {
-    return term
-  } else if (lspls instanceof boyer2.Atom.class) {
-    param0 = lspls.a;
-    x1 = param0;
-    throw new globalThis.Error("error");
-  } else if (lspls instanceof boyer2.Conss.class) {
-    param0 = lspls.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x = first0;
-      y = first1;
-      tmp = boyer2.car(y);
-      z = tmp;
-      tmp1 = boyer2.tv(x);
-      tmp2 = NofibPrelude.nofibStringToList("equal");
-      scrut = NofibPrelude.listEq(tmp1, tmp2);
-      if (scrut === true) {
-        tmp3 = boyer2.atom(z);
-        scrut1 = Predef.not(tmp3);
-        if (scrut1 === true) {
-          tmp4 = car_inst_24_22_tsni(z);
-          tmp5 = tv_inst_24_55_tsni(tmp4);
-          arr = [
-            x,
-            y
-          ];
-          tmp6 = runtime.safeCall(boyer2.Conss(arr));
-          arr1 = [
-            tmp5,
-            tmp6,
-            term
-          ];
-          return boyer2.addtoLUT(arr1)
-        } else {
-          throw new globalThis.Error("error");
-        }
-      } else {
-        throw new globalThis.Error("error");
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-car_inst_24_22_tsni = function car_inst_24_22_tsni(x) {
+car_inst_24_25_tsni = function car_inst_24_25_tsni(x) {
   let param0, first1, first0, a;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -1781,278 +762,37 @@ car_inst_24_22_tsni = function car_inst_24_22_tsni(x) {
       a = first0;
       return a
     } else {
-      return () => {
-        return match_x_arm_default_inst_24_55_tsni()
+      return (y) => {
+        return match_x_arm_Nill_inst_24_60_tsni(y)
       }
     }
   } else {
-    return () => {
-      return match_x_arm_default_inst_24_55_tsni()
+    return (y) => {
+      return match_x_arm_Nill_inst_24_60_tsni(y)
     }
   }
 };
-applysubst_inst_25_tsni = function applysubst_inst_25_tsni(alist, x) {
-  let param0, first1, first0, x1, y, x2, scrut, param01, first11, first01, y1, tmp, arr, tmp1, arr1, _deforest_Atom_a;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x2 = param0;
-    _deforest_Atom_a = x2;
-    tmp = (y2) => {
-      let param02, param03, a, b;
-      param02 = _deforest_Atom_a;
-      a = param02;
-      if (y2 instanceof boyer2.Atom.class) {
-        param03 = y2.a;
-        b = param03;
-        return NofibPrelude.listEq(a, b)
-      } else {
-        return false
-      }
-    };
-    arr = [
-      tmp,
-      alist
-    ];
-    scrut = assoc_inst_25_56_tsni(arr);
-    if (scrut instanceof boyer2.Conss.class) {
-      param01 = scrut.a;
-      if (globalThis.Array.isArray(param01) && param01.length === 2) {
-        first01 = param01[0];
-        first11 = param01[1];
-        y1 = first11;
-        return y1
-      } else {
-        return runtime.safeCall(boyer2.Atom(x2))
-      }
-    } else {
-      return runtime.safeCall(boyer2.Atom(x2))
-    }
-  } else if (x instanceof boyer2.Conss.class) {
+car_inst_26_25_tsni = function car_inst_26_25_tsni(x) {
+  let param0, first1, first0, a;
+  if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
     if (globalThis.Array.isArray(param0) && param0.length === 2) {
       first0 = param0[0];
       first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp1 = applysubstlst_inst_25_tsni(alist, y);
-      arr1 = [
-        x1,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr1))
+      a = first0;
+      return a
     } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-applysubstlst_inst_25_tsni = function applysubstlst_inst_25_tsni(alist, y) {
-  let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
-  if (y instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (y instanceof boyer2.Atom.class) {
-    param0 = y.a;
-    x1 = param0;
-    throw new globalThis.Error("error");
-  } else if (y instanceof boyer2.Conss.class) {
-    param0 = y.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x = first0;
-      y1 = first1;
-      tmp = applysubst_inst_25_tsni(alist, x);
-      tmp1 = applysubstlst_inst_25_tsni(alist, y1);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-applysubst_inst_26_tsni = function applysubst_inst_26_tsni(alist, x) {
-  let param0, first1, first0, x1, y, x2, scrut, param01, first11, first01, y1, tmp, arr, tmp1, arr1, _deforest_Atom_a;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x2 = param0;
-    _deforest_Atom_a = x2;
-    tmp = (y2) => {
-      let param02, param03, a, b;
-      param02 = _deforest_Atom_a;
-      a = param02;
-      if (y2 instanceof boyer2.Atom.class) {
-        param03 = y2.a;
-        b = param03;
-        return NofibPrelude.listEq(a, b)
-      } else {
-        return false
+      return (y) => {
+        return match_x_arm_Nill_inst_26_60_tsni(y)
       }
-    };
-    arr = [
-      tmp,
-      alist
-    ];
-    scrut = assoc_inst_26_56_tsni(arr);
-    if (scrut instanceof boyer2.Conss.class) {
-      param01 = scrut.a;
-      if (globalThis.Array.isArray(param01) && param01.length === 2) {
-        first01 = param01[0];
-        first11 = param01[1];
-        y1 = first11;
-        return y1
-      } else {
-        return runtime.safeCall(boyer2.Atom(x2))
-      }
-    } else {
-      return runtime.safeCall(boyer2.Atom(x2))
-    }
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp1 = applysubstlst_inst_26_tsni(alist, y);
-      arr1 = [
-        x1,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr1))
-    } else {
-      throw new globalThis.Error("match error");
     }
   } else {
-    throw new globalThis.Error("match error");
+    return (y) => {
+      return match_x_arm_Nill_inst_26_60_tsni(y)
+    }
   }
 };
-applysubstlst_inst_26_tsni = function applysubstlst_inst_26_tsni(alist, y) {
-  let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
-  if (y instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (y instanceof boyer2.Atom.class) {
-    param0 = y.a;
-    x1 = param0;
-    throw new globalThis.Error("error");
-  } else if (y instanceof boyer2.Conss.class) {
-    param0 = y.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x = first0;
-      y1 = first1;
-      tmp = applysubst_inst_26_tsni(alist, x);
-      tmp1 = applysubstlst_inst_26_tsni(alist, y1);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-applysubst_inst_27_tsni = function applysubst_inst_27_tsni(alist, x) {
-  let param0, first1, first0, x1, y, x2, scrut, param01, first11, first01, y1, tmp, arr, tmp1, arr1, _deforest_Atom_a;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x2 = param0;
-    _deforest_Atom_a = x2;
-    tmp = (y2) => {
-      let param02, param03, a, b;
-      param02 = _deforest_Atom_a;
-      a = param02;
-      if (y2 instanceof boyer2.Atom.class) {
-        param03 = y2.a;
-        b = param03;
-        return NofibPrelude.listEq(a, b)
-      } else {
-        return false
-      }
-    };
-    arr = [
-      tmp,
-      alist
-    ];
-    scrut = assoc_inst_27_56_tsni(arr);
-    if (scrut instanceof boyer2.Conss.class) {
-      param01 = scrut.a;
-      if (globalThis.Array.isArray(param01) && param01.length === 2) {
-        first01 = param01[0];
-        first11 = param01[1];
-        y1 = first11;
-        return y1
-      } else {
-        return runtime.safeCall(boyer2.Atom(x2))
-      }
-    } else {
-      return runtime.safeCall(boyer2.Atom(x2))
-    }
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp1 = applysubstlst_inst_27_tsni(alist, y);
-      arr1 = [
-        x1,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr1))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-applysubstlst_inst_27_tsni = function applysubstlst_inst_27_tsni(alist, y) {
-  let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
-  if (y instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (y instanceof boyer2.Atom.class) {
-    param0 = y.a;
-    x1 = param0;
-    throw new globalThis.Error("error");
-  } else if (y instanceof boyer2.Conss.class) {
-    param0 = y.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x = first0;
-      y1 = first1;
-      tmp = applysubst_inst_27_tsni(alist, x);
-      tmp1 = applysubstlst_inst_27_tsni(alist, y1);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-onewayunify1_inst_28_tsni = function onewayunify1_inst_28_tsni(t1, t2, u) {
+onewayunify1_inst_27_28_tsni = function onewayunify1_inst_27_28_tsni(t1, t2, u) {
   let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
   scrut2 = boyer2.atom(t2);
   if (scrut2 === true) {
@@ -2116,13 +856,13 @@ onewayunify1_inst_28_tsni = function onewayunify1_inst_28_tsni(t1, t2, u) {
       ];
       return arr8
     } else {
-      tmp5 = car_inst_28_29_tsni(t1);
+      tmp5 = car_inst_27_28_25_tsni(t1);
       tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_28_58_tsni(tmp5, tmp6);
+      scrut = lispListEq_inst_27_28_60_tsni(tmp5, tmp6);
       if (scrut === true) {
         tmp7 = boyer2.cdr(t1);
         tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_28_tsni(tmp7, tmp8, u)
+        return onewayunify1lst_inst_27_28_tsni(tmp7, tmp8, u)
       } else {
         arr9 = [
           false,
@@ -2133,7 +873,7 @@ onewayunify1_inst_28_tsni = function onewayunify1_inst_28_tsni(t1, t2, u) {
     }
   }
 };
-onewayunify1lst_inst_28_tsni = function onewayunify1lst_inst_28_tsni(l1, l2, u) {
+onewayunify1lst_inst_27_28_tsni = function onewayunify1lst_inst_27_28_tsni(l1, l2, u) {
   let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
   if (l1 instanceof boyer2.Nill.class) {
     arr = [
@@ -2144,7 +884,7 @@ onewayunify1lst_inst_28_tsni = function onewayunify1lst_inst_28_tsni(l1, l2, u) 
   } else {
     tmp = boyer2.car(l1);
     tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_28_tsni(tmp, tmp1, u);
+    scrut = onewayunify1_inst_27_28_tsni(tmp, tmp1, u);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
       first0 = scrut[0];
       first1 = scrut[1];
@@ -2153,7 +893,7 @@ onewayunify1lst_inst_28_tsni = function onewayunify1lst_inst_28_tsni(l1, l2, u) 
       if (b === true) {
         tmp2 = boyer2.cdr(l1);
         tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_28_tsni(tmp2, tmp3, u1)
+        return onewayunify1lst_inst_27_28_tsni(tmp2, tmp3, u1)
       } else {
         arr1 = [
           false,
@@ -2166,7 +906,7 @@ onewayunify1lst_inst_28_tsni = function onewayunify1lst_inst_28_tsni(l1, l2, u) 
     }
   }
 };
-car_inst_28_29_tsni = function car_inst_28_29_tsni(x) {
+car_inst_27_28_25_tsni = function car_inst_27_28_25_tsni(x) {
   let param0, first1, first0, a;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -2177,536 +917,21 @@ car_inst_28_29_tsni = function car_inst_28_29_tsni(x) {
       return a
     } else {
       return (y) => {
-        return match_x_arm_Nill_inst_28_58_tsni(y)
+        return match_x_arm_Nill_inst_27_28_60_tsni(y)
       }
     }
   } else {
     return (y) => {
-      return match_x_arm_Nill_inst_28_58_tsni(y)
+      return match_x_arm_Nill_inst_27_28_60_tsni(y)
     }
   }
 };
-onewayunify1_inst_30_tsni = function onewayunify1_inst_30_tsni(t1, t2, u) {
-  let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
-  scrut2 = boyer2.atom(t2);
-  if (scrut2 === true) {
-    arr = [
-      t2,
-      u
-    ];
-    scrut3 = boyer2.assoc(arr);
-    if (scrut3 instanceof boyer2.Conss.class) {
-      param0 = scrut3.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
-        y = first1;
-        tmp = boyer2.lispListEq(t1, y);
-        arr1 = [
-          tmp,
-          u
-        ];
-        return arr1
-      } else {
-        arr2 = [
-          t2,
-          t1
-        ];
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
-        arr3 = [
-          tmp1,
-          u
-        ];
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
-        arr4 = [
-          true,
-          tmp2
-        ];
-        return arr4
-      }
-    } else {
-      arr5 = [
-        t2,
-        t1
-      ];
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
-      arr6 = [
-        tmp3,
-        u
-      ];
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
-      arr7 = [
-        true,
-        tmp4
-      ];
-      return arr7
-    }
-  } else {
-    scrut1 = boyer2.atom(t1);
-    if (scrut1 === true) {
-      arr8 = [
-        false,
-        u
-      ];
-      return arr8
-    } else {
-      tmp5 = car_inst_30_29_tsni(t1);
-      tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_30_58_tsni(tmp5, tmp6);
-      if (scrut === true) {
-        tmp7 = boyer2.cdr(t1);
-        tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_30_tsni(tmp7, tmp8, u)
-      } else {
-        arr9 = [
-          false,
-          u
-        ];
-        return arr9
-      }
-    }
-  }
-};
-onewayunify1lst_inst_30_tsni = function onewayunify1lst_inst_30_tsni(l1, l2, u) {
-  let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
-  if (l1 instanceof boyer2.Nill.class) {
-    arr = [
-      true,
-      u
-    ];
-    return arr
-  } else {
-    tmp = boyer2.car(l1);
-    tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_30_tsni(tmp, tmp1, u);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u1 = first1;
-      if (b === true) {
-        tmp2 = boyer2.cdr(l1);
-        tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_30_tsni(tmp2, tmp3, u1)
-      } else {
-        arr1 = [
-          false,
-          u1
-        ];
-        return arr1
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }
-};
-car_inst_30_29_tsni = function car_inst_30_29_tsni(x) {
-  let param0, first1, first0, a;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      a = first0;
-      return a
-    } else {
-      return (y) => {
-        return match_x_arm_Nill_inst_30_58_tsni(y)
-      }
-    }
-  } else {
-    return (y) => {
-      return match_x_arm_Nill_inst_30_58_tsni(y)
-    }
-  }
-};
-onewayunify1_inst_31_tsni = function onewayunify1_inst_31_tsni(t1, t2, u) {
-  let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
-  scrut2 = boyer2.atom(t2);
-  if (scrut2 === true) {
-    arr = [
-      t2,
-      u
-    ];
-    scrut3 = boyer2.assoc(arr);
-    if (scrut3 instanceof boyer2.Conss.class) {
-      param0 = scrut3.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
-        y = first1;
-        tmp = boyer2.lispListEq(t1, y);
-        arr1 = [
-          tmp,
-          u
-        ];
-        return arr1
-      } else {
-        arr2 = [
-          t2,
-          t1
-        ];
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
-        arr3 = [
-          tmp1,
-          u
-        ];
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
-        arr4 = [
-          true,
-          tmp2
-        ];
-        return arr4
-      }
-    } else {
-      arr5 = [
-        t2,
-        t1
-      ];
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
-      arr6 = [
-        tmp3,
-        u
-      ];
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
-      arr7 = [
-        true,
-        tmp4
-      ];
-      return arr7
-    }
-  } else {
-    scrut1 = boyer2.atom(t1);
-    if (scrut1 === true) {
-      arr8 = [
-        false,
-        u
-      ];
-      return arr8
-    } else {
-      tmp5 = car_inst_31_29_tsni(t1);
-      tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_31_58_tsni(tmp5, tmp6);
-      if (scrut === true) {
-        tmp7 = boyer2.cdr(t1);
-        tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_31_tsni(tmp7, tmp8, u)
-      } else {
-        arr9 = [
-          false,
-          u
-        ];
-        return arr9
-      }
-    }
-  }
-};
-onewayunify1lst_inst_31_tsni = function onewayunify1lst_inst_31_tsni(l1, l2, u) {
-  let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
-  if (l1 instanceof boyer2.Nill.class) {
-    arr = [
-      true,
-      u
-    ];
-    return arr
-  } else {
-    tmp = boyer2.car(l1);
-    tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_31_tsni(tmp, tmp1, u);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u1 = first1;
-      if (b === true) {
-        tmp2 = boyer2.cdr(l1);
-        tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_31_tsni(tmp2, tmp3, u1)
-      } else {
-        arr1 = [
-          false,
-          u1
-        ];
-        return arr1
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }
-};
-car_inst_31_29_tsni = function car_inst_31_29_tsni(x) {
-  let param0, first1, first0, a;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      a = first0;
-      return a
-    } else {
-      return (y) => {
-        return match_x_arm_Nill_inst_31_58_tsni(y)
-      }
-    }
-  } else {
-    return (y) => {
-      return match_x_arm_Nill_inst_31_58_tsni(y)
-    }
-  }
-};
-car_inst_29_tsni = function car_inst_29_tsni(x) {
-  let param0, first1, first0, a;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      a = first0;
-      return a
-    } else {
-      return (y) => {
-        return match_x_arm_Nill_inst_58_tsni(y)
-      }
-    }
-  } else {
-    return (y) => {
-      return match_x_arm_Nill_inst_58_tsni(y)
-    }
-  }
-};
-onewayunify1_inst_32_tsni = function onewayunify1_inst_32_tsni(t1, t2, u) {
-  let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
-  scrut2 = boyer2.atom(t2);
-  if (scrut2 === true) {
-    arr = [
-      t2,
-      u
-    ];
-    scrut3 = boyer2.assoc(arr);
-    if (scrut3 instanceof boyer2.Conss.class) {
-      param0 = scrut3.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
-        y = first1;
-        tmp = boyer2.lispListEq(t1, y);
-        arr1 = [
-          tmp,
-          u
-        ];
-        return arr1
-      } else {
-        arr2 = [
-          t2,
-          t1
-        ];
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
-        arr3 = [
-          tmp1,
-          u
-        ];
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
-        arr4 = [
-          true,
-          tmp2
-        ];
-        return arr4
-      }
-    } else {
-      arr5 = [
-        t2,
-        t1
-      ];
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
-      arr6 = [
-        tmp3,
-        u
-      ];
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
-      arr7 = [
-        true,
-        tmp4
-      ];
-      return arr7
-    }
-  } else {
-    scrut1 = boyer2.atom(t1);
-    if (scrut1 === true) {
-      arr8 = [
-        false,
-        u
-      ];
-      return arr8
-    } else {
-      tmp5 = car_inst_32_29_tsni(t1);
-      tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_32_58_tsni(tmp5, tmp6);
-      if (scrut === true) {
-        tmp7 = boyer2.cdr(t1);
-        tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_32_tsni(tmp7, tmp8, u)
-      } else {
-        arr9 = [
-          false,
-          u
-        ];
-        return arr9
-      }
-    }
-  }
-};
-onewayunify1lst_inst_32_tsni = function onewayunify1lst_inst_32_tsni(l1, l2, u) {
-  let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
-  if (l1 instanceof boyer2.Nill.class) {
-    arr = [
-      true,
-      u
-    ];
-    return arr
-  } else {
-    tmp = boyer2.car(l1);
-    tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_32_tsni(tmp, tmp1, u);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u1 = first1;
-      if (b === true) {
-        tmp2 = boyer2.cdr(l1);
-        tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_32_tsni(tmp2, tmp3, u1)
-      } else {
-        arr1 = [
-          false,
-          u1
-        ];
-        return arr1
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }
-};
-car_inst_32_29_tsni = function car_inst_32_29_tsni(x) {
-  let param0, first1, first0, a;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      a = first0;
-      return a
-    } else {
-      return (y) => {
-        return match_x_arm_Nill_inst_32_58_tsni(y)
-      }
-    }
-  } else {
-    return (y) => {
-      return match_x_arm_Nill_inst_32_58_tsni(y)
-    }
-  }
-};
-rewrite_inst_33_tsni = function rewrite_inst_33_tsni(x, term) {
-  let param0, first1, first0, l1, l2, x1, tmp, arr, tmp1, tmp2, arr1, tmp3;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      l1 = first0;
-      l2 = first1;
-      tmp = rewriteargs_inst_33_tsni(l2, term);
-      arr = [
-        l1,
-        tmp
-      ];
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
-      tmp2 = boyer2.tv(l1);
-      arr1 = [
-        tmp2,
-        term
-      ];
-      tmp3 = boyer2.getLUT(arr1);
-      return rewritewithlemmas_inst_33_tsni(tmp1, tmp3, term)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewritewithlemmas_inst_33_tsni = function rewritewithlemmas_inst_33_tsni(t, l, term) {
-  let param0, param1, lh, lt, scrut, first1, first0, b, u, tmp, tmp1, tmp2;
-  if (l instanceof NofibPrelude.Nil.class) {
-    return t
-  } else if (l instanceof NofibPrelude.Cons.class) {
-    param0 = l.head;
-    param1 = l.tail;
-    lh = param0;
-    lt = param1;
-    tmp = cadr_inst_33_34_tsni(lh);
-    scrut = onewayunify_inst_33_35_tsni(t, tmp);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u = first1;
-      if (b === true) {
-        tmp1 = caddr_inst_33_36_tsni(lh);
-        tmp2 = applysubst_inst_33_37_tsni(u, tmp1);
-        return rewrite_inst_33_tsni(tmp2, term)
-      } else {
-        return rewritewithlemmas_inst_33_tsni(t, lt, term)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewriteargs_inst_33_tsni = function rewriteargs_inst_33_tsni(x, term) {
-  let param0, first1, first0, x1, y, tmp, tmp1, arr;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    throw new globalThis.Error("error");
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp = rewrite_inst_33_tsni(x1, term);
-      tmp1 = rewriteargs_inst_33_tsni(y, term);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_33_34_tsni = function cadr_inst_33_34_tsni(x) {
+cadr_inst_29_30_tsni = function cadr_inst_29_30_tsni(x) {
   let tmp;
-  tmp = cdr_inst_33_34_4_tsni(x);
-  return car_inst_33_34_16_tsni(tmp)
+  tmp = cdr_inst_29_30_5_tsni(x);
+  return car_inst_29_30_48_tsni(tmp)
 };
-cdr_inst_33_34_4_tsni = function cdr_inst_33_34_4_tsni(x) {
+cdr_inst_29_30_5_tsni = function cdr_inst_29_30_5_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -2717,19 +942,19 @@ cdr_inst_33_34_4_tsni = function cdr_inst_33_34_4_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_33_34_16_tsni()
+        return match_x_arm_default_inst_29_30_48_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_33_34_16_tsni()
+      return match_x_arm_default_inst_29_30_48_tsni()
     }
   }
 };
-onewayunify_inst_33_35_tsni = function onewayunify_inst_33_35_tsni(t1, t2) {
-  return onewayunify1_inst_33_35_32_tsni(t1, t2, boyer2.Nill)
+onewayunify_inst_29_31_tsni = function onewayunify_inst_29_31_tsni(t1, t2) {
+  return onewayunify1_inst_29_31_28_tsni(t1, t2, boyer2.Nill)
 };
-onewayunify1_inst_33_35_32_tsni = function onewayunify1_inst_33_35_32_tsni(t1, t2, u) {
+onewayunify1_inst_29_31_28_tsni = function onewayunify1_inst_29_31_28_tsni(t1, t2, u) {
   let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
   scrut2 = boyer2.atom(t2);
   if (scrut2 === true) {
@@ -2793,13 +1018,13 @@ onewayunify1_inst_33_35_32_tsni = function onewayunify1_inst_33_35_32_tsni(t1, t
       ];
       return arr8
     } else {
-      tmp5 = car_inst_33_35_32_29_tsni(t1);
+      tmp5 = car_inst_29_31_28_25_tsni(t1);
       tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_33_35_32_58_tsni(tmp5, tmp6);
+      scrut = lispListEq_inst_29_31_28_60_tsni(tmp5, tmp6);
       if (scrut === true) {
         tmp7 = boyer2.cdr(t1);
         tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_33_35_32_tsni(tmp7, tmp8, u)
+        return onewayunify1lst_inst_29_31_28_tsni(tmp7, tmp8, u)
       } else {
         arr9 = [
           false,
@@ -2810,7 +1035,7 @@ onewayunify1_inst_33_35_32_tsni = function onewayunify1_inst_33_35_32_tsni(t1, t
     }
   }
 };
-onewayunify1lst_inst_33_35_32_tsni = function onewayunify1lst_inst_33_35_32_tsni(l1, l2, u) {
+onewayunify1lst_inst_29_31_28_tsni = function onewayunify1lst_inst_29_31_28_tsni(l1, l2, u) {
   let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
   if (l1 instanceof boyer2.Nill.class) {
     arr = [
@@ -2821,7 +1046,7 @@ onewayunify1lst_inst_33_35_32_tsni = function onewayunify1lst_inst_33_35_32_tsni
   } else {
     tmp = boyer2.car(l1);
     tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_33_35_32_tsni(tmp, tmp1, u);
+    scrut = onewayunify1_inst_29_31_28_tsni(tmp, tmp1, u);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
       first0 = scrut[0];
       first1 = scrut[1];
@@ -2830,7 +1055,7 @@ onewayunify1lst_inst_33_35_32_tsni = function onewayunify1lst_inst_33_35_32_tsni
       if (b === true) {
         tmp2 = boyer2.cdr(l1);
         tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_33_35_32_tsni(tmp2, tmp3, u1)
+        return onewayunify1lst_inst_29_31_28_tsni(tmp2, tmp3, u1)
       } else {
         arr1 = [
           false,
@@ -2843,7 +1068,7 @@ onewayunify1lst_inst_33_35_32_tsni = function onewayunify1lst_inst_33_35_32_tsni
     }
   }
 };
-car_inst_33_35_32_29_tsni = function car_inst_33_35_32_29_tsni(x) {
+car_inst_29_31_28_25_tsni = function car_inst_29_31_28_25_tsni(x) {
   let param0, first1, first0, a;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -2854,25 +1079,25 @@ car_inst_33_35_32_29_tsni = function car_inst_33_35_32_29_tsni(x) {
       return a
     } else {
       return (y) => {
-        return match_x_arm_Nill_inst_33_35_32_58_tsni(y)
+        return match_x_arm_Nill_inst_29_31_28_60_tsni(y)
       }
     }
   } else {
     return (y) => {
-      return match_x_arm_Nill_inst_33_35_32_58_tsni(y)
+      return match_x_arm_Nill_inst_29_31_28_60_tsni(y)
     }
   }
 };
-caddr_inst_33_36_tsni = function caddr_inst_33_36_tsni(x) {
+caddr_inst_29_32_tsni = function caddr_inst_29_32_tsni(x) {
   let tmp, tmp1;
-  tmp = cdr_inst_33_36_6_tsni(x);
-  tmp1 = cdr_inst_33_36_5_tsni(tmp);
-  return car_inst_33_36_15_tsni(tmp1)
+  tmp = cdr_inst_29_32_7_tsni(x);
+  tmp1 = cdr_inst_29_32_8_tsni(tmp);
+  return car_inst_29_32_34_tsni(tmp1)
 };
-cdr_inst_33_36_5_tsni = function cdr_inst_33_36_5_tsni(x) {
+cdr_inst_29_32_8_tsni = function cdr_inst_29_32_8_tsni(x) {
   return runtime.safeCall(x())
 };
-cdr_inst_33_36_6_tsni = function cdr_inst_33_36_6_tsni(x) {
+cdr_inst_29_32_7_tsni = function cdr_inst_29_32_7_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -2883,19 +1108,19 @@ cdr_inst_33_36_6_tsni = function cdr_inst_33_36_6_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_33_36_5_tsni()
+        return match_x_arm_default_inst_29_32_8_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_33_36_5_tsni()
+      return match_x_arm_default_inst_29_32_8_tsni()
     }
   }
 };
-applysubst_inst_33_37_tsni = function applysubst_inst_33_37_tsni(alist, x) {
+applysubst_inst_29_33_tsni = function applysubst_inst_29_33_tsni(alist, x) {
   return runtime.safeCall(x(alist))
 };
-applysubstlst_inst_33_37_tsni = function applysubstlst_inst_33_37_tsni(alist, y) {
+applysubstlst_inst_29_33_tsni = function applysubstlst_inst_29_33_tsni(alist, y) {
   let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
   if (y instanceof boyer2.Nill.class) {
     return boyer2.Nill
@@ -2910,8 +1135,8 @@ applysubstlst_inst_33_37_tsni = function applysubstlst_inst_33_37_tsni(alist, y)
       first1 = param0[1];
       x = first0;
       y1 = first1;
-      tmp = applysubst_inst_33_37_tsni(alist, x);
-      tmp1 = applysubstlst_inst_33_37_tsni(alist, y1);
+      tmp = applysubst_inst_29_33_tsni(alist, x);
+      tmp1 = applysubstlst_inst_29_33_tsni(alist, y1);
       arr = [
         tmp,
         tmp1
@@ -2924,108 +1149,15 @@ applysubstlst_inst_33_37_tsni = function applysubstlst_inst_33_37_tsni(alist, y)
     throw new globalThis.Error("match error");
   }
 };
-car_inst_33_36_15_tsni = function car_inst_33_36_15_tsni(x) {
+car_inst_29_32_34_tsni = function car_inst_29_32_34_tsni(x) {
   return runtime.safeCall(x())
 };
-rewrite_inst_38_tsni = function rewrite_inst_38_tsni(x, term) {
-  let param0, first1, first0, l1, l2, x1, tmp, arr, tmp1, tmp2, arr1, tmp3;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      l1 = first0;
-      l2 = first1;
-      tmp = rewriteargs_inst_38_tsni(l2, term);
-      arr = [
-        l1,
-        tmp
-      ];
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
-      tmp2 = boyer2.tv(l1);
-      arr1 = [
-        tmp2,
-        term
-      ];
-      tmp3 = boyer2.getLUT(arr1);
-      return rewritewithlemmas_inst_38_tsni(tmp1, tmp3, term)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewritewithlemmas_inst_38_tsni = function rewritewithlemmas_inst_38_tsni(t, l, term) {
-  let param0, param1, lh, lt, scrut, first1, first0, b, u, tmp, tmp1, tmp2;
-  if (l instanceof NofibPrelude.Nil.class) {
-    return t
-  } else if (l instanceof NofibPrelude.Cons.class) {
-    param0 = l.head;
-    param1 = l.tail;
-    lh = param0;
-    lt = param1;
-    tmp = cadr_inst_38_34_tsni(lh);
-    scrut = onewayunify_inst_38_35_tsni(t, tmp);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u = first1;
-      if (b === true) {
-        tmp1 = caddr_inst_38_36_tsni(lh);
-        tmp2 = applysubst_inst_38_37_tsni(u, tmp1);
-        return rewrite_inst_38_tsni(tmp2, term)
-      } else {
-        return rewritewithlemmas_inst_38_tsni(t, lt, term)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewriteargs_inst_38_tsni = function rewriteargs_inst_38_tsni(x, term) {
-  let param0, first1, first0, x1, y, tmp, tmp1, arr;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    throw new globalThis.Error("error");
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp = rewrite_inst_38_tsni(x1, term);
-      tmp1 = rewriteargs_inst_38_tsni(y, term);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_38_34_tsni = function cadr_inst_38_34_tsni(x) {
+cadr_inst_35_30_tsni = function cadr_inst_35_30_tsni(x) {
   let tmp;
-  tmp = cdr_inst_38_34_4_tsni(x);
-  return car_inst_38_34_16_tsni(tmp)
+  tmp = cdr_inst_35_30_5_tsni(x);
+  return car_inst_35_30_48_tsni(tmp)
 };
-cdr_inst_38_34_4_tsni = function cdr_inst_38_34_4_tsni(x) {
+cdr_inst_35_30_5_tsni = function cdr_inst_35_30_5_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -3036,19 +1168,19 @@ cdr_inst_38_34_4_tsni = function cdr_inst_38_34_4_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_38_34_16_tsni()
+        return match_x_arm_default_inst_35_30_48_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_38_34_16_tsni()
+      return match_x_arm_default_inst_35_30_48_tsni()
     }
   }
 };
-onewayunify_inst_38_35_tsni = function onewayunify_inst_38_35_tsni(t1, t2) {
-  return onewayunify1_inst_38_35_32_tsni(t1, t2, boyer2.Nill)
+onewayunify_inst_35_31_tsni = function onewayunify_inst_35_31_tsni(t1, t2) {
+  return onewayunify1_inst_35_31_28_tsni(t1, t2, boyer2.Nill)
 };
-onewayunify1_inst_38_35_32_tsni = function onewayunify1_inst_38_35_32_tsni(t1, t2, u) {
+onewayunify1_inst_35_31_28_tsni = function onewayunify1_inst_35_31_28_tsni(t1, t2, u) {
   let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
   scrut2 = boyer2.atom(t2);
   if (scrut2 === true) {
@@ -3112,13 +1244,13 @@ onewayunify1_inst_38_35_32_tsni = function onewayunify1_inst_38_35_32_tsni(t1, t
       ];
       return arr8
     } else {
-      tmp5 = car_inst_38_35_32_29_tsni(t1);
+      tmp5 = car_inst_35_31_28_25_tsni(t1);
       tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_38_35_32_58_tsni(tmp5, tmp6);
+      scrut = lispListEq_inst_35_31_28_60_tsni(tmp5, tmp6);
       if (scrut === true) {
         tmp7 = boyer2.cdr(t1);
         tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_38_35_32_tsni(tmp7, tmp8, u)
+        return onewayunify1lst_inst_35_31_28_tsni(tmp7, tmp8, u)
       } else {
         arr9 = [
           false,
@@ -3129,7 +1261,7 @@ onewayunify1_inst_38_35_32_tsni = function onewayunify1_inst_38_35_32_tsni(t1, t
     }
   }
 };
-onewayunify1lst_inst_38_35_32_tsni = function onewayunify1lst_inst_38_35_32_tsni(l1, l2, u) {
+onewayunify1lst_inst_35_31_28_tsni = function onewayunify1lst_inst_35_31_28_tsni(l1, l2, u) {
   let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
   if (l1 instanceof boyer2.Nill.class) {
     arr = [
@@ -3140,7 +1272,7 @@ onewayunify1lst_inst_38_35_32_tsni = function onewayunify1lst_inst_38_35_32_tsni
   } else {
     tmp = boyer2.car(l1);
     tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_38_35_32_tsni(tmp, tmp1, u);
+    scrut = onewayunify1_inst_35_31_28_tsni(tmp, tmp1, u);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
       first0 = scrut[0];
       first1 = scrut[1];
@@ -3149,7 +1281,7 @@ onewayunify1lst_inst_38_35_32_tsni = function onewayunify1lst_inst_38_35_32_tsni
       if (b === true) {
         tmp2 = boyer2.cdr(l1);
         tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_38_35_32_tsni(tmp2, tmp3, u1)
+        return onewayunify1lst_inst_35_31_28_tsni(tmp2, tmp3, u1)
       } else {
         arr1 = [
           false,
@@ -3162,7 +1294,7 @@ onewayunify1lst_inst_38_35_32_tsni = function onewayunify1lst_inst_38_35_32_tsni
     }
   }
 };
-car_inst_38_35_32_29_tsni = function car_inst_38_35_32_29_tsni(x) {
+car_inst_35_31_28_25_tsni = function car_inst_35_31_28_25_tsni(x) {
   let param0, first1, first0, a;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -3173,25 +1305,25 @@ car_inst_38_35_32_29_tsni = function car_inst_38_35_32_29_tsni(x) {
       return a
     } else {
       return (y) => {
-        return match_x_arm_Nill_inst_38_35_32_58_tsni(y)
+        return match_x_arm_Nill_inst_35_31_28_60_tsni(y)
       }
     }
   } else {
     return (y) => {
-      return match_x_arm_Nill_inst_38_35_32_58_tsni(y)
+      return match_x_arm_Nill_inst_35_31_28_60_tsni(y)
     }
   }
 };
-caddr_inst_38_36_tsni = function caddr_inst_38_36_tsni(x) {
+caddr_inst_35_32_tsni = function caddr_inst_35_32_tsni(x) {
   let tmp, tmp1;
-  tmp = cdr_inst_38_36_6_tsni(x);
-  tmp1 = cdr_inst_38_36_5_tsni(tmp);
-  return car_inst_38_36_15_tsni(tmp1)
+  tmp = cdr_inst_35_32_7_tsni(x);
+  tmp1 = cdr_inst_35_32_8_tsni(tmp);
+  return car_inst_35_32_34_tsni(tmp1)
 };
-cdr_inst_38_36_5_tsni = function cdr_inst_38_36_5_tsni(x) {
+cdr_inst_35_32_8_tsni = function cdr_inst_35_32_8_tsni(x) {
   return runtime.safeCall(x())
 };
-cdr_inst_38_36_6_tsni = function cdr_inst_38_36_6_tsni(x) {
+cdr_inst_35_32_7_tsni = function cdr_inst_35_32_7_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -3202,19 +1334,19 @@ cdr_inst_38_36_6_tsni = function cdr_inst_38_36_6_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_38_36_5_tsni()
+        return match_x_arm_default_inst_35_32_8_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_38_36_5_tsni()
+      return match_x_arm_default_inst_35_32_8_tsni()
     }
   }
 };
-applysubst_inst_38_37_tsni = function applysubst_inst_38_37_tsni(alist, x) {
+applysubst_inst_35_33_tsni = function applysubst_inst_35_33_tsni(alist, x) {
   return runtime.safeCall(x(alist))
 };
-applysubstlst_inst_38_37_tsni = function applysubstlst_inst_38_37_tsni(alist, y) {
+applysubstlst_inst_35_33_tsni = function applysubstlst_inst_35_33_tsni(alist, y) {
   let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
   if (y instanceof boyer2.Nill.class) {
     return boyer2.Nill
@@ -3229,8 +1361,8 @@ applysubstlst_inst_38_37_tsni = function applysubstlst_inst_38_37_tsni(alist, y)
       first1 = param0[1];
       x = first0;
       y1 = first1;
-      tmp = applysubst_inst_38_37_tsni(alist, x);
-      tmp1 = applysubstlst_inst_38_37_tsni(alist, y1);
+      tmp = applysubst_inst_35_33_tsni(alist, x);
+      tmp1 = applysubstlst_inst_35_33_tsni(alist, y1);
       arr = [
         tmp,
         tmp1
@@ -3243,48 +1375,15 @@ applysubstlst_inst_38_37_tsni = function applysubstlst_inst_38_37_tsni(alist, y)
     throw new globalThis.Error("match error");
   }
 };
-car_inst_38_36_15_tsni = function car_inst_38_36_15_tsni(x) {
+car_inst_35_32_34_tsni = function car_inst_35_32_34_tsni(x) {
   return runtime.safeCall(x())
 };
-applysubst_inst_37_tsni = function applysubst_inst_37_tsni(alist, x) {
-  return runtime.safeCall(x(alist))
+cadr_inst_36_30_tsni = function cadr_inst_36_30_tsni(x) {
+  let tmp;
+  tmp = cdr_inst_36_30_5_tsni(x);
+  return car_inst_36_30_48_tsni(tmp)
 };
-applysubstlst_inst_37_tsni = function applysubstlst_inst_37_tsni(alist, y) {
-  let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
-  if (y instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (y instanceof boyer2.Atom.class) {
-    param0 = y.a;
-    x1 = param0;
-    throw new globalThis.Error("error");
-  } else if (y instanceof boyer2.Conss.class) {
-    param0 = y.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x = first0;
-      y1 = first1;
-      tmp = applysubst_inst_37_tsni(alist, x);
-      tmp1 = applysubstlst_inst_37_tsni(alist, y1);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-caddr_inst_36_tsni = function caddr_inst_36_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_36_6_tsni(x);
-  tmp1 = cdr_inst_36_5_tsni(tmp);
-  return car_inst_36_15_tsni(tmp1)
-};
-cdr_inst_36_6_tsni = function cdr_inst_36_6_tsni(x) {
+cdr_inst_36_30_5_tsni = function cdr_inst_36_30_5_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -3295,25 +1394,19 @@ cdr_inst_36_6_tsni = function cdr_inst_36_6_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_36_5_tsni()
+        return match_x_arm_default_inst_36_30_48_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_36_5_tsni()
+      return match_x_arm_default_inst_36_30_48_tsni()
     }
   }
 };
-cdr_inst_36_5_tsni = function cdr_inst_36_5_tsni(x) {
-  return runtime.safeCall(x())
+onewayunify_inst_36_31_tsni = function onewayunify_inst_36_31_tsni(t1, t2) {
+  return onewayunify1_inst_36_31_28_tsni(t1, t2, boyer2.Nill)
 };
-car_inst_36_15_tsni = function car_inst_36_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-onewayunify_inst_35_tsni = function onewayunify_inst_35_tsni(t1, t2) {
-  return onewayunify1_inst_35_32_tsni(t1, t2, boyer2.Nill)
-};
-onewayunify1_inst_35_32_tsni = function onewayunify1_inst_35_32_tsni(t1, t2, u) {
+onewayunify1_inst_36_31_28_tsni = function onewayunify1_inst_36_31_28_tsni(t1, t2, u) {
   let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
   scrut2 = boyer2.atom(t2);
   if (scrut2 === true) {
@@ -3377,13 +1470,13 @@ onewayunify1_inst_35_32_tsni = function onewayunify1_inst_35_32_tsni(t1, t2, u) 
       ];
       return arr8
     } else {
-      tmp5 = car_inst_35_32_29_tsni(t1);
+      tmp5 = car_inst_36_31_28_25_tsni(t1);
       tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_35_32_58_tsni(tmp5, tmp6);
+      scrut = lispListEq_inst_36_31_28_60_tsni(tmp5, tmp6);
       if (scrut === true) {
         tmp7 = boyer2.cdr(t1);
         tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_35_32_tsni(tmp7, tmp8, u)
+        return onewayunify1lst_inst_36_31_28_tsni(tmp7, tmp8, u)
       } else {
         arr9 = [
           false,
@@ -3394,7 +1487,7 @@ onewayunify1_inst_35_32_tsni = function onewayunify1_inst_35_32_tsni(t1, t2, u) 
     }
   }
 };
-onewayunify1lst_inst_35_32_tsni = function onewayunify1lst_inst_35_32_tsni(l1, l2, u) {
+onewayunify1lst_inst_36_31_28_tsni = function onewayunify1lst_inst_36_31_28_tsni(l1, l2, u) {
   let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
   if (l1 instanceof boyer2.Nill.class) {
     arr = [
@@ -3405,7 +1498,7 @@ onewayunify1lst_inst_35_32_tsni = function onewayunify1lst_inst_35_32_tsni(l1, l
   } else {
     tmp = boyer2.car(l1);
     tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_35_32_tsni(tmp, tmp1, u);
+    scrut = onewayunify1_inst_36_31_28_tsni(tmp, tmp1, u);
     if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
       first0 = scrut[0];
       first1 = scrut[1];
@@ -3414,7 +1507,7 @@ onewayunify1lst_inst_35_32_tsni = function onewayunify1lst_inst_35_32_tsni(l1, l
       if (b === true) {
         tmp2 = boyer2.cdr(l1);
         tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_35_32_tsni(tmp2, tmp3, u1)
+        return onewayunify1lst_inst_36_31_28_tsni(tmp2, tmp3, u1)
       } else {
         arr1 = [
           false,
@@ -3427,7 +1520,7 @@ onewayunify1lst_inst_35_32_tsni = function onewayunify1lst_inst_35_32_tsni(l1, l
     }
   }
 };
-car_inst_35_32_29_tsni = function car_inst_35_32_29_tsni(x) {
+car_inst_36_31_28_25_tsni = function car_inst_36_31_28_25_tsni(x) {
   let param0, first1, first0, a;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -3438,305 +1531,25 @@ car_inst_35_32_29_tsni = function car_inst_35_32_29_tsni(x) {
       return a
     } else {
       return (y) => {
-        return match_x_arm_Nill_inst_35_32_58_tsni(y)
+        return match_x_arm_Nill_inst_36_31_28_60_tsni(y)
       }
     }
   } else {
     return (y) => {
-      return match_x_arm_Nill_inst_35_32_58_tsni(y)
+      return match_x_arm_Nill_inst_36_31_28_60_tsni(y)
     }
   }
 };
-cadr_inst_34_tsni = function cadr_inst_34_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_34_4_tsni(x);
-  return car_inst_34_16_tsni(tmp)
-};
-cdr_inst_34_4_tsni = function cdr_inst_34_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_34_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_34_16_tsni()
-    }
-  }
-};
-rewrite_inst_39_tsni = function rewrite_inst_39_tsni(x, term) {
-  let param0, first1, first0, l1, l2, x1, tmp, arr, tmp1, tmp2, arr1, tmp3;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      l1 = first0;
-      l2 = first1;
-      tmp = rewriteargs_inst_39_tsni(l2, term);
-      arr = [
-        l1,
-        tmp
-      ];
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
-      tmp2 = boyer2.tv(l1);
-      arr1 = [
-        tmp2,
-        term
-      ];
-      tmp3 = boyer2.getLUT(arr1);
-      return rewritewithlemmas_inst_39_tsni(tmp1, tmp3, term)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewritewithlemmas_inst_39_tsni = function rewritewithlemmas_inst_39_tsni(t, l, term) {
-  let param0, param1, lh, lt, scrut, first1, first0, b, u, tmp, tmp1, tmp2;
-  if (l instanceof NofibPrelude.Nil.class) {
-    return t
-  } else if (l instanceof NofibPrelude.Cons.class) {
-    param0 = l.head;
-    param1 = l.tail;
-    lh = param0;
-    lt = param1;
-    tmp = cadr_inst_39_34_tsni(lh);
-    scrut = onewayunify_inst_39_35_tsni(t, tmp);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u = first1;
-      if (b === true) {
-        tmp1 = caddr_inst_39_36_tsni(lh);
-        tmp2 = applysubst_inst_39_37_tsni(u, tmp1);
-        return rewrite_inst_39_tsni(tmp2, term)
-      } else {
-        return rewritewithlemmas_inst_39_tsni(t, lt, term)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewriteargs_inst_39_tsni = function rewriteargs_inst_39_tsni(x, term) {
-  let param0, first1, first0, x1, y, tmp, tmp1, arr;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    throw new globalThis.Error("error");
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp = rewrite_inst_39_tsni(x1, term);
-      tmp1 = rewriteargs_inst_39_tsni(y, term);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_39_34_tsni = function cadr_inst_39_34_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_39_34_4_tsni(x);
-  return car_inst_39_34_16_tsni(tmp)
-};
-cdr_inst_39_34_4_tsni = function cdr_inst_39_34_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_39_34_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_39_34_16_tsni()
-    }
-  }
-};
-onewayunify_inst_39_35_tsni = function onewayunify_inst_39_35_tsni(t1, t2) {
-  return onewayunify1_inst_39_35_32_tsni(t1, t2, boyer2.Nill)
-};
-onewayunify1_inst_39_35_32_tsni = function onewayunify1_inst_39_35_32_tsni(t1, t2, u) {
-  let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
-  scrut2 = boyer2.atom(t2);
-  if (scrut2 === true) {
-    arr = [
-      t2,
-      u
-    ];
-    scrut3 = boyer2.assoc(arr);
-    if (scrut3 instanceof boyer2.Conss.class) {
-      param0 = scrut3.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
-        y = first1;
-        tmp = boyer2.lispListEq(t1, y);
-        arr1 = [
-          tmp,
-          u
-        ];
-        return arr1
-      } else {
-        arr2 = [
-          t2,
-          t1
-        ];
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
-        arr3 = [
-          tmp1,
-          u
-        ];
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
-        arr4 = [
-          true,
-          tmp2
-        ];
-        return arr4
-      }
-    } else {
-      arr5 = [
-        t2,
-        t1
-      ];
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
-      arr6 = [
-        tmp3,
-        u
-      ];
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
-      arr7 = [
-        true,
-        tmp4
-      ];
-      return arr7
-    }
-  } else {
-    scrut1 = boyer2.atom(t1);
-    if (scrut1 === true) {
-      arr8 = [
-        false,
-        u
-      ];
-      return arr8
-    } else {
-      tmp5 = car_inst_39_35_32_29_tsni(t1);
-      tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_39_35_32_58_tsni(tmp5, tmp6);
-      if (scrut === true) {
-        tmp7 = boyer2.cdr(t1);
-        tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_39_35_32_tsni(tmp7, tmp8, u)
-      } else {
-        arr9 = [
-          false,
-          u
-        ];
-        return arr9
-      }
-    }
-  }
-};
-onewayunify1lst_inst_39_35_32_tsni = function onewayunify1lst_inst_39_35_32_tsni(l1, l2, u) {
-  let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
-  if (l1 instanceof boyer2.Nill.class) {
-    arr = [
-      true,
-      u
-    ];
-    return arr
-  } else {
-    tmp = boyer2.car(l1);
-    tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_39_35_32_tsni(tmp, tmp1, u);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u1 = first1;
-      if (b === true) {
-        tmp2 = boyer2.cdr(l1);
-        tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_39_35_32_tsni(tmp2, tmp3, u1)
-      } else {
-        arr1 = [
-          false,
-          u1
-        ];
-        return arr1
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }
-};
-car_inst_39_35_32_29_tsni = function car_inst_39_35_32_29_tsni(x) {
-  let param0, first1, first0, a;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      a = first0;
-      return a
-    } else {
-      return (y) => {
-        return match_x_arm_Nill_inst_39_35_32_58_tsni(y)
-      }
-    }
-  } else {
-    return (y) => {
-      return match_x_arm_Nill_inst_39_35_32_58_tsni(y)
-    }
-  }
-};
-caddr_inst_39_36_tsni = function caddr_inst_39_36_tsni(x) {
+caddr_inst_36_32_tsni = function caddr_inst_36_32_tsni(x) {
   let tmp, tmp1;
-  tmp = cdr_inst_39_36_6_tsni(x);
-  tmp1 = cdr_inst_39_36_5_tsni(tmp);
-  return car_inst_39_36_15_tsni(tmp1)
+  tmp = cdr_inst_36_32_7_tsni(x);
+  tmp1 = cdr_inst_36_32_8_tsni(tmp);
+  return car_inst_36_32_34_tsni(tmp1)
 };
-cdr_inst_39_36_5_tsni = function cdr_inst_39_36_5_tsni(x) {
+cdr_inst_36_32_8_tsni = function cdr_inst_36_32_8_tsni(x) {
   return runtime.safeCall(x())
 };
-cdr_inst_39_36_6_tsni = function cdr_inst_39_36_6_tsni(x) {
+cdr_inst_36_32_7_tsni = function cdr_inst_36_32_7_tsni(x) {
   let param0, first1, first0, b;
   if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -3747,19 +1560,19 @@ cdr_inst_39_36_6_tsni = function cdr_inst_39_36_6_tsni(x) {
       return b
     } else {
       return () => {
-        return match_x_arm_default_inst_39_36_5_tsni()
+        return match_x_arm_default_inst_36_32_8_tsni()
       }
     }
   } else {
     return () => {
-      return match_x_arm_default_inst_39_36_5_tsni()
+      return match_x_arm_default_inst_36_32_8_tsni()
     }
   }
 };
-applysubst_inst_39_37_tsni = function applysubst_inst_39_37_tsni(alist, x) {
+applysubst_inst_36_33_tsni = function applysubst_inst_36_33_tsni(alist, x) {
   return runtime.safeCall(x(alist))
 };
-applysubstlst_inst_39_37_tsni = function applysubstlst_inst_39_37_tsni(alist, y) {
+applysubstlst_inst_36_33_tsni = function applysubstlst_inst_36_33_tsni(alist, y) {
   let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
   if (y instanceof boyer2.Nill.class) {
     return boyer2.Nill
@@ -3774,8 +1587,8 @@ applysubstlst_inst_39_37_tsni = function applysubstlst_inst_39_37_tsni(alist, y)
       first1 = param0[1];
       x = first0;
       y1 = first1;
-      tmp = applysubst_inst_39_37_tsni(alist, x);
-      tmp1 = applysubstlst_inst_39_37_tsni(alist, y1);
+      tmp = applysubst_inst_36_33_tsni(alist, x);
+      tmp1 = applysubstlst_inst_36_33_tsni(alist, y1);
       arr = [
         tmp,
         tmp1
@@ -3788,982 +1601,25 @@ applysubstlst_inst_39_37_tsni = function applysubstlst_inst_39_37_tsni(alist, y)
     throw new globalThis.Error("match error");
   }
 };
-car_inst_39_36_15_tsni = function car_inst_39_36_15_tsni(x) {
+car_inst_36_32_34_tsni = function car_inst_36_32_34_tsni(x) {
   return runtime.safeCall(x())
 };
-rewrite_inst_40_tsni = function rewrite_inst_40_tsni(x, term) {
-  let param0, first1, first0, l1, l2, x1, tmp, arr, tmp1, tmp2, arr1, tmp3;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      l1 = first0;
-      l2 = first1;
-      tmp = rewriteargs_inst_40_tsni(l2, term);
-      arr = [
-        l1,
-        tmp
-      ];
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
-      tmp2 = boyer2.tv(l1);
-      arr1 = [
-        tmp2,
-        term
-      ];
-      tmp3 = boyer2.getLUT(arr1);
-      return rewritewithlemmas_inst_40_tsni(tmp1, tmp3, term)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewritewithlemmas_inst_40_tsni = function rewritewithlemmas_inst_40_tsni(t, l, term) {
-  let param0, param1, lh, lt, scrut, first1, first0, b, u, tmp, tmp1, tmp2;
-  if (l instanceof NofibPrelude.Nil.class) {
-    return t
-  } else if (l instanceof NofibPrelude.Cons.class) {
-    param0 = l.head;
-    param1 = l.tail;
-    lh = param0;
-    lt = param1;
-    tmp = cadr_inst_40_34_tsni(lh);
-    scrut = onewayunify_inst_40_35_tsni(t, tmp);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u = first1;
-      if (b === true) {
-        tmp1 = caddr_inst_40_36_tsni(lh);
-        tmp2 = applysubst_inst_40_37_tsni(u, tmp1);
-        return rewrite_inst_40_tsni(tmp2, term)
-      } else {
-        return rewritewithlemmas_inst_40_tsni(t, lt, term)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewriteargs_inst_40_tsni = function rewriteargs_inst_40_tsni(x, term) {
-  let param0, first1, first0, x1, y, tmp, tmp1, arr;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    throw new globalThis.Error("error");
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp = rewrite_inst_40_tsni(x1, term);
-      tmp1 = rewriteargs_inst_40_tsni(y, term);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_40_34_tsni = function cadr_inst_40_34_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_40_34_4_tsni(x);
-  return car_inst_40_34_16_tsni(tmp)
-};
-cdr_inst_40_34_4_tsni = function cdr_inst_40_34_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_40_34_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_40_34_16_tsni()
-    }
-  }
-};
-onewayunify_inst_40_35_tsni = function onewayunify_inst_40_35_tsni(t1, t2) {
-  return onewayunify1_inst_40_35_32_tsni(t1, t2, boyer2.Nill)
-};
-onewayunify1_inst_40_35_32_tsni = function onewayunify1_inst_40_35_32_tsni(t1, t2, u) {
-  let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
-  scrut2 = boyer2.atom(t2);
-  if (scrut2 === true) {
-    arr = [
-      t2,
-      u
-    ];
-    scrut3 = boyer2.assoc(arr);
-    if (scrut3 instanceof boyer2.Conss.class) {
-      param0 = scrut3.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
-        y = first1;
-        tmp = boyer2.lispListEq(t1, y);
-        arr1 = [
-          tmp,
-          u
-        ];
-        return arr1
-      } else {
-        arr2 = [
-          t2,
-          t1
-        ];
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
-        arr3 = [
-          tmp1,
-          u
-        ];
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
-        arr4 = [
-          true,
-          tmp2
-        ];
-        return arr4
-      }
-    } else {
-      arr5 = [
-        t2,
-        t1
-      ];
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
-      arr6 = [
-        tmp3,
-        u
-      ];
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
-      arr7 = [
-        true,
-        tmp4
-      ];
-      return arr7
-    }
-  } else {
-    scrut1 = boyer2.atom(t1);
-    if (scrut1 === true) {
-      arr8 = [
-        false,
-        u
-      ];
-      return arr8
-    } else {
-      tmp5 = car_inst_40_35_32_29_tsni(t1);
-      tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_40_35_32_58_tsni(tmp5, tmp6);
-      if (scrut === true) {
-        tmp7 = boyer2.cdr(t1);
-        tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_40_35_32_tsni(tmp7, tmp8, u)
-      } else {
-        arr9 = [
-          false,
-          u
-        ];
-        return arr9
-      }
-    }
-  }
-};
-onewayunify1lst_inst_40_35_32_tsni = function onewayunify1lst_inst_40_35_32_tsni(l1, l2, u) {
-  let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
-  if (l1 instanceof boyer2.Nill.class) {
-    arr = [
-      true,
-      u
-    ];
-    return arr
-  } else {
-    tmp = boyer2.car(l1);
-    tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_40_35_32_tsni(tmp, tmp1, u);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u1 = first1;
-      if (b === true) {
-        tmp2 = boyer2.cdr(l1);
-        tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_40_35_32_tsni(tmp2, tmp3, u1)
-      } else {
-        arr1 = [
-          false,
-          u1
-        ];
-        return arr1
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }
-};
-car_inst_40_35_32_29_tsni = function car_inst_40_35_32_29_tsni(x) {
-  let param0, first1, first0, a;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      a = first0;
-      return a
-    } else {
-      return (y) => {
-        return match_x_arm_Nill_inst_40_35_32_58_tsni(y)
-      }
-    }
-  } else {
-    return (y) => {
-      return match_x_arm_Nill_inst_40_35_32_58_tsni(y)
-    }
-  }
-};
-caddr_inst_40_36_tsni = function caddr_inst_40_36_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_40_36_6_tsni(x);
-  tmp1 = cdr_inst_40_36_5_tsni(tmp);
-  return car_inst_40_36_15_tsni(tmp1)
-};
-cdr_inst_40_36_5_tsni = function cdr_inst_40_36_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_40_36_6_tsni = function cdr_inst_40_36_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_40_36_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_40_36_5_tsni()
-    }
-  }
-};
-applysubst_inst_40_37_tsni = function applysubst_inst_40_37_tsni(alist, x) {
-  return runtime.safeCall(x(alist))
-};
-applysubstlst_inst_40_37_tsni = function applysubstlst_inst_40_37_tsni(alist, y) {
-  let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
-  if (y instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (y instanceof boyer2.Atom.class) {
-    param0 = y.a;
-    x1 = param0;
-    throw new globalThis.Error("error");
-  } else if (y instanceof boyer2.Conss.class) {
-    param0 = y.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x = first0;
-      y1 = first1;
-      tmp = applysubst_inst_40_37_tsni(alist, x);
-      tmp1 = applysubstlst_inst_40_37_tsni(alist, y1);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-car_inst_40_36_15_tsni = function car_inst_40_36_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-rewrite_inst_41_tsni = function rewrite_inst_41_tsni(x, term) {
-  let param0, first1, first0, l1, l2, x1, tmp, arr, tmp1, tmp2, arr1, tmp3;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      l1 = first0;
-      l2 = first1;
-      tmp = rewriteargs_inst_41_tsni(l2, term);
-      arr = [
-        l1,
-        tmp
-      ];
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
-      tmp2 = boyer2.tv(l1);
-      arr1 = [
-        tmp2,
-        term
-      ];
-      tmp3 = boyer2.getLUT(arr1);
-      return rewritewithlemmas_inst_41_tsni(tmp1, tmp3, term)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewritewithlemmas_inst_41_tsni = function rewritewithlemmas_inst_41_tsni(t, l, term) {
-  let param0, param1, lh, lt, scrut, first1, first0, b, u, tmp, tmp1, tmp2;
-  if (l instanceof NofibPrelude.Nil.class) {
-    return t
-  } else if (l instanceof NofibPrelude.Cons.class) {
-    param0 = l.head;
-    param1 = l.tail;
-    lh = param0;
-    lt = param1;
-    tmp = cadr_inst_41_34_tsni(lh);
-    scrut = onewayunify_inst_41_35_tsni(t, tmp);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u = first1;
-      if (b === true) {
-        tmp1 = caddr_inst_41_36_tsni(lh);
-        tmp2 = applysubst_inst_41_37_tsni(u, tmp1);
-        return rewrite_inst_41_tsni(tmp2, term)
-      } else {
-        return rewritewithlemmas_inst_41_tsni(t, lt, term)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewriteargs_inst_41_tsni = function rewriteargs_inst_41_tsni(x, term) {
-  let param0, first1, first0, x1, y, tmp, tmp1, arr;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    throw new globalThis.Error("error");
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp = rewrite_inst_41_tsni(x1, term);
-      tmp1 = rewriteargs_inst_41_tsni(y, term);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_41_34_tsni = function cadr_inst_41_34_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_41_34_4_tsni(x);
-  return car_inst_41_34_16_tsni(tmp)
-};
-cdr_inst_41_34_4_tsni = function cdr_inst_41_34_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_41_34_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_41_34_16_tsni()
-    }
-  }
-};
-onewayunify_inst_41_35_tsni = function onewayunify_inst_41_35_tsni(t1, t2) {
-  return onewayunify1_inst_41_35_32_tsni(t1, t2, boyer2.Nill)
-};
-onewayunify1_inst_41_35_32_tsni = function onewayunify1_inst_41_35_32_tsni(t1, t2, u) {
-  let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
-  scrut2 = boyer2.atom(t2);
-  if (scrut2 === true) {
-    arr = [
-      t2,
-      u
-    ];
-    scrut3 = boyer2.assoc(arr);
-    if (scrut3 instanceof boyer2.Conss.class) {
-      param0 = scrut3.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
-        y = first1;
-        tmp = boyer2.lispListEq(t1, y);
-        arr1 = [
-          tmp,
-          u
-        ];
-        return arr1
-      } else {
-        arr2 = [
-          t2,
-          t1
-        ];
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
-        arr3 = [
-          tmp1,
-          u
-        ];
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
-        arr4 = [
-          true,
-          tmp2
-        ];
-        return arr4
-      }
-    } else {
-      arr5 = [
-        t2,
-        t1
-      ];
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
-      arr6 = [
-        tmp3,
-        u
-      ];
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
-      arr7 = [
-        true,
-        tmp4
-      ];
-      return arr7
-    }
-  } else {
-    scrut1 = boyer2.atom(t1);
-    if (scrut1 === true) {
-      arr8 = [
-        false,
-        u
-      ];
-      return arr8
-    } else {
-      tmp5 = car_inst_41_35_32_29_tsni(t1);
-      tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_41_35_32_58_tsni(tmp5, tmp6);
-      if (scrut === true) {
-        tmp7 = boyer2.cdr(t1);
-        tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_41_35_32_tsni(tmp7, tmp8, u)
-      } else {
-        arr9 = [
-          false,
-          u
-        ];
-        return arr9
-      }
-    }
-  }
-};
-onewayunify1lst_inst_41_35_32_tsni = function onewayunify1lst_inst_41_35_32_tsni(l1, l2, u) {
-  let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
-  if (l1 instanceof boyer2.Nill.class) {
-    arr = [
-      true,
-      u
-    ];
-    return arr
-  } else {
-    tmp = boyer2.car(l1);
-    tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_41_35_32_tsni(tmp, tmp1, u);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u1 = first1;
-      if (b === true) {
-        tmp2 = boyer2.cdr(l1);
-        tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_41_35_32_tsni(tmp2, tmp3, u1)
-      } else {
-        arr1 = [
-          false,
-          u1
-        ];
-        return arr1
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }
-};
-car_inst_41_35_32_29_tsni = function car_inst_41_35_32_29_tsni(x) {
-  let param0, first1, first0, a;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      a = first0;
-      return a
-    } else {
-      return (y) => {
-        return match_x_arm_Nill_inst_41_35_32_58_tsni(y)
-      }
-    }
-  } else {
-    return (y) => {
-      return match_x_arm_Nill_inst_41_35_32_58_tsni(y)
-    }
-  }
-};
-caddr_inst_41_36_tsni = function caddr_inst_41_36_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_41_36_6_tsni(x);
-  tmp1 = cdr_inst_41_36_5_tsni(tmp);
-  return car_inst_41_36_15_tsni(tmp1)
-};
-cdr_inst_41_36_5_tsni = function cdr_inst_41_36_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_41_36_6_tsni = function cdr_inst_41_36_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_41_36_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_41_36_5_tsni()
-    }
-  }
-};
-applysubst_inst_41_37_tsni = function applysubst_inst_41_37_tsni(alist, x) {
-  return runtime.safeCall(x(alist))
-};
-applysubstlst_inst_41_37_tsni = function applysubstlst_inst_41_37_tsni(alist, y) {
-  let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
-  if (y instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (y instanceof boyer2.Atom.class) {
-    param0 = y.a;
-    x1 = param0;
-    throw new globalThis.Error("error");
-  } else if (y instanceof boyer2.Conss.class) {
-    param0 = y.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x = first0;
-      y1 = first1;
-      tmp = applysubst_inst_41_37_tsni(alist, x);
-      tmp1 = applysubstlst_inst_41_37_tsni(alist, y1);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-car_inst_41_36_15_tsni = function car_inst_41_36_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-rewrite_inst_42_tsni = function rewrite_inst_42_tsni(x, term) {
-  let param0, first1, first0, l1, l2, x1, tmp, arr, tmp1, tmp2, arr1, tmp3;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      l1 = first0;
-      l2 = first1;
-      tmp = rewriteargs_inst_42_tsni(l2, term);
-      arr = [
-        l1,
-        tmp
-      ];
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
-      tmp2 = boyer2.tv(l1);
-      arr1 = [
-        tmp2,
-        term
-      ];
-      tmp3 = boyer2.getLUT(arr1);
-      return rewritewithlemmas_inst_42_tsni(tmp1, tmp3, term)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewritewithlemmas_inst_42_tsni = function rewritewithlemmas_inst_42_tsni(t, l, term) {
-  let param0, param1, lh, lt, scrut, first1, first0, b, u, tmp, tmp1, tmp2;
-  if (l instanceof NofibPrelude.Nil.class) {
-    return t
-  } else if (l instanceof NofibPrelude.Cons.class) {
-    param0 = l.head;
-    param1 = l.tail;
-    lh = param0;
-    lt = param1;
-    tmp = cadr_inst_42_34_tsni(lh);
-    scrut = onewayunify_inst_42_35_tsni(t, tmp);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u = first1;
-      if (b === true) {
-        tmp1 = caddr_inst_42_36_tsni(lh);
-        tmp2 = applysubst_inst_42_37_tsni(u, tmp1);
-        return rewrite_inst_42_tsni(tmp2, term)
-      } else {
-        return rewritewithlemmas_inst_42_tsni(t, lt, term)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-rewriteargs_inst_42_tsni = function rewriteargs_inst_42_tsni(x, term) {
-  let param0, first1, first0, x1, y, tmp, tmp1, arr;
-  if (x instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (x instanceof boyer2.Atom.class) {
-    param0 = x.a;
-    throw new globalThis.Error("error");
-  } else if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x1 = first0;
-      y = first1;
-      tmp = rewrite_inst_42_tsni(x1, term);
-      tmp1 = rewriteargs_inst_42_tsni(y, term);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-cadr_inst_42_34_tsni = function cadr_inst_42_34_tsni(x) {
-  let tmp;
-  tmp = cdr_inst_42_34_4_tsni(x);
-  return car_inst_42_34_16_tsni(tmp)
-};
-cdr_inst_42_34_4_tsni = function cdr_inst_42_34_4_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_42_34_16_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_42_34_16_tsni()
-    }
-  }
-};
-onewayunify_inst_42_35_tsni = function onewayunify_inst_42_35_tsni(t1, t2) {
-  return onewayunify1_inst_42_35_32_tsni(t1, t2, boyer2.Nill)
-};
-onewayunify1_inst_42_35_32_tsni = function onewayunify1_inst_42_35_32_tsni(t1, t2, u) {
-  let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9;
-  scrut2 = boyer2.atom(t2);
-  if (scrut2 === true) {
-    arr = [
-      t2,
-      u
-    ];
-    scrut3 = boyer2.assoc(arr);
-    if (scrut3 instanceof boyer2.Conss.class) {
-      param0 = scrut3.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
-        y = first1;
-        tmp = boyer2.lispListEq(t1, y);
-        arr1 = [
-          tmp,
-          u
-        ];
-        return arr1
-      } else {
-        arr2 = [
-          t2,
-          t1
-        ];
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
-        arr3 = [
-          tmp1,
-          u
-        ];
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
-        arr4 = [
-          true,
-          tmp2
-        ];
-        return arr4
-      }
-    } else {
-      arr5 = [
-        t2,
-        t1
-      ];
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
-      arr6 = [
-        tmp3,
-        u
-      ];
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
-      arr7 = [
-        true,
-        tmp4
-      ];
-      return arr7
-    }
-  } else {
-    scrut1 = boyer2.atom(t1);
-    if (scrut1 === true) {
-      arr8 = [
-        false,
-        u
-      ];
-      return arr8
-    } else {
-      tmp5 = car_inst_42_35_32_29_tsni(t1);
-      tmp6 = boyer2.car(t2);
-      scrut = lispListEq_inst_42_35_32_58_tsni(tmp5, tmp6);
-      if (scrut === true) {
-        tmp7 = boyer2.cdr(t1);
-        tmp8 = boyer2.cdr(t2);
-        return onewayunify1lst_inst_42_35_32_tsni(tmp7, tmp8, u)
-      } else {
-        arr9 = [
-          false,
-          u
-        ];
-        return arr9
-      }
-    }
-  }
-};
-onewayunify1lst_inst_42_35_32_tsni = function onewayunify1lst_inst_42_35_32_tsni(l1, l2, u) {
-  let scrut, first1, first0, b, u1, arr, tmp, tmp1, tmp2, tmp3, arr1;
-  if (l1 instanceof boyer2.Nill.class) {
-    arr = [
-      true,
-      u
-    ];
-    return arr
-  } else {
-    tmp = boyer2.car(l1);
-    tmp1 = boyer2.car(l2);
-    scrut = onewayunify1_inst_42_35_32_tsni(tmp, tmp1, u);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
-      b = first0;
-      u1 = first1;
-      if (b === true) {
-        tmp2 = boyer2.cdr(l1);
-        tmp3 = boyer2.cdr(l2);
-        return onewayunify1lst_inst_42_35_32_tsni(tmp2, tmp3, u1)
-      } else {
-        arr1 = [
-          false,
-          u1
-        ];
-        return arr1
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }
-};
-car_inst_42_35_32_29_tsni = function car_inst_42_35_32_29_tsni(x) {
-  let param0, first1, first0, a;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      a = first0;
-      return a
-    } else {
-      return (y) => {
-        return match_x_arm_Nill_inst_42_35_32_58_tsni(y)
-      }
-    }
-  } else {
-    return (y) => {
-      return match_x_arm_Nill_inst_42_35_32_58_tsni(y)
-    }
-  }
-};
-caddr_inst_42_36_tsni = function caddr_inst_42_36_tsni(x) {
-  let tmp, tmp1;
-  tmp = cdr_inst_42_36_6_tsni(x);
-  tmp1 = cdr_inst_42_36_5_tsni(tmp);
-  return car_inst_42_36_15_tsni(tmp1)
-};
-cdr_inst_42_36_5_tsni = function cdr_inst_42_36_5_tsni(x) {
-  return runtime.safeCall(x())
-};
-cdr_inst_42_36_6_tsni = function cdr_inst_42_36_6_tsni(x) {
-  let param0, first1, first0, b;
-  if (x instanceof boyer2.Conss.class) {
-    param0 = x.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      b = first1;
-      return b
-    } else {
-      return () => {
-        return match_x_arm_default_inst_42_36_5_tsni()
-      }
-    }
-  } else {
-    return () => {
-      return match_x_arm_default_inst_42_36_5_tsni()
-    }
-  }
-};
-applysubst_inst_42_37_tsni = function applysubst_inst_42_37_tsni(alist, x) {
-  return runtime.safeCall(x(alist))
-};
-applysubstlst_inst_42_37_tsni = function applysubstlst_inst_42_37_tsni(alist, y) {
-  let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
-  if (y instanceof boyer2.Nill.class) {
-    return boyer2.Nill
-  } else if (y instanceof boyer2.Atom.class) {
-    param0 = y.a;
-    x1 = param0;
-    throw new globalThis.Error("error");
-  } else if (y instanceof boyer2.Conss.class) {
-    param0 = y.a;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
-      x = first0;
-      y1 = first1;
-      tmp = applysubst_inst_42_37_tsni(alist, x);
-      tmp1 = applysubstlst_inst_42_37_tsni(alist, y1);
-      arr = [
-        tmp,
-        tmp1
-      ];
-      return runtime.safeCall(boyer2.Conss(arr))
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-car_inst_42_36_15_tsni = function car_inst_42_36_15_tsni(x) {
-  return runtime.safeCall(x())
-};
-strToToken_inst_43_tsni = function strToToken_inst_43_tsni(s) {
+strToToken_inst_37_38_tsni = function strToToken_inst_37_38_tsni(s) {
   let scrut;
   if (s instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else {
-    scrut = getToken_inst_43_2_tsni(s);
+    scrut = getToken_inst_37_38_2_tsni(s);
     return runtime.safeCall(scrut())
   }
 };
-getToken_inst_43_2_tsni = function getToken_inst_43_2_tsni(s) {
+getToken_inst_37_38_2_tsni = function getToken_inst_37_38_2_tsni(s) {
   let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
   if (s instanceof NofibPrelude.Nil.class) {
     _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
     _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
     arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst_43_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+      return match_scrut_arm_Deforest_Arr_2_inst_37_38_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
     return arr
   } else if (s instanceof NofibPrelude.Cons.class) {
@@ -4773,7 +1629,7 @@ getToken_inst_43_2_tsni = function getToken_inst_43_2_tsni(s) {
     t = param1;
     scrut2 = h === " ";
     if (scrut2 === true) {
-      return getToken_inst_43_2_tsni(t)
+      return getToken_inst_37_38_2_tsni(t)
     } else {
       tmp = h === "(";
       tmp1 = h === ")";
@@ -4783,7 +1639,7 @@ getToken_inst_43_2_tsni = function getToken_inst_43_2_tsni(s) {
         _deforest_Deforest_Arr_2_01 = tmp2;
         _deforest_Deforest_Arr_2_11 = t;
         arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst_43_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+          return match_scrut_arm_Deforest_Arr_2_inst_37_38_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
         };
         return arr1
       } else {
@@ -4797,7 +1653,7 @@ getToken_inst_43_2_tsni = function getToken_inst_43_2_tsni(s) {
           _deforest_Deforest_Arr_2_02 = tmp3;
           _deforest_Deforest_Arr_2_12 = b;
           arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst_43_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
+            return match_scrut_arm_Deforest_Arr_2_inst_37_38_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
           };
           return arr2
         } else {
@@ -4809,7 +1665,7 @@ getToken_inst_43_2_tsni = function getToken_inst_43_2_tsni(s) {
     throw new globalThis.Error("match error");
   }
 };
-subterm_inst_44_tsni = function subterm_inst_44_tsni(i) {
+subterm_inst_39_40_tsni = function subterm_inst_39_40_tsni(i) {
   let c, str, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
   tmp = NofibPrelude.stringOfInt(i);
   tmp1 = NofibPrelude.stringConcat("c", tmp);
@@ -4820,25 +1676,25 @@ subterm_inst_44_tsni = function subterm_inst_44_tsni(i) {
   tmp5 = NofibPrelude.stringConcat("( ( x f ( plus ( plus a b )( plus ", tmp4);
   str = tmp5;
   tmp6 = NofibPrelude.nofibStringToList(str);
-  tmp7 = strToToken_inst_44_43_tsni(tmp6);
+  tmp7 = strToToken_inst_39_40_38_tsni(tmp6);
   return boyer2.mkLispList(tmp7)
 };
-strToToken_inst_44_43_tsni = function strToToken_inst_44_43_tsni(s) {
+strToToken_inst_39_40_38_tsni = function strToToken_inst_39_40_38_tsni(s) {
   let scrut;
   if (s instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else {
-    scrut = getToken_inst_44_43_2_tsni(s);
+    scrut = getToken_inst_39_40_38_2_tsni(s);
     return runtime.safeCall(scrut())
   }
 };
-getToken_inst_44_43_2_tsni = function getToken_inst_44_43_2_tsni(s) {
+getToken_inst_39_40_38_2_tsni = function getToken_inst_39_40_38_2_tsni(s) {
   let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
   if (s instanceof NofibPrelude.Nil.class) {
     _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
     _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
     arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst_44_43_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+      return match_scrut_arm_Deforest_Arr_2_inst_39_40_38_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
     return arr
   } else if (s instanceof NofibPrelude.Cons.class) {
@@ -4848,7 +1704,7 @@ getToken_inst_44_43_2_tsni = function getToken_inst_44_43_2_tsni(s) {
     t = param1;
     scrut2 = h === " ";
     if (scrut2 === true) {
-      return getToken_inst_44_43_2_tsni(t)
+      return getToken_inst_39_40_38_2_tsni(t)
     } else {
       tmp = h === "(";
       tmp1 = h === ")";
@@ -4858,7 +1714,7 @@ getToken_inst_44_43_2_tsni = function getToken_inst_44_43_2_tsni(s) {
         _deforest_Deforest_Arr_2_01 = tmp2;
         _deforest_Deforest_Arr_2_11 = t;
         arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst_44_43_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+          return match_scrut_arm_Deforest_Arr_2_inst_39_40_38_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
         };
         return arr1
       } else {
@@ -4872,7 +1728,7 @@ getToken_inst_44_43_2_tsni = function getToken_inst_44_43_2_tsni(s) {
           _deforest_Deforest_Arr_2_02 = tmp3;
           _deforest_Deforest_Arr_2_12 = b;
           arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst_44_43_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
+            return match_scrut_arm_Deforest_Arr_2_inst_39_40_38_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
           };
           return arr2
         } else {
@@ -4884,12 +1740,12 @@ getToken_inst_44_43_2_tsni = function getToken_inst_44_43_2_tsni(s) {
     throw new globalThis.Error("match error");
   }
 };
-teststatement_inst_45_tsni = function teststatement_inst_45_tsni(i) {
+teststatement_inst_41_42_tsni = function teststatement_inst_41_42_tsni(i) {
   let tmp;
-  tmp = subterm_inst_45_44_tsni(i);
+  tmp = subterm_inst_41_42_40_tsni(i);
   return boyer2.applysubst(tmp, boyer2.statement)
 };
-subterm_inst_45_44_tsni = function subterm_inst_45_44_tsni(i) {
+subterm_inst_41_42_40_tsni = function subterm_inst_41_42_40_tsni(i) {
   let c, str, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
   tmp = NofibPrelude.stringOfInt(i);
   tmp1 = NofibPrelude.stringConcat("c", tmp);
@@ -4900,25 +1756,25 @@ subterm_inst_45_44_tsni = function subterm_inst_45_44_tsni(i) {
   tmp5 = NofibPrelude.stringConcat("( ( x f ( plus ( plus a b )( plus ", tmp4);
   str = tmp5;
   tmp6 = NofibPrelude.nofibStringToList(str);
-  tmp7 = strToToken_inst_45_44_43_tsni(tmp6);
+  tmp7 = strToToken_inst_41_42_40_38_tsni(tmp6);
   return boyer2.mkLispList(tmp7)
 };
-strToToken_inst_45_44_43_tsni = function strToToken_inst_45_44_43_tsni(s) {
+strToToken_inst_41_42_40_38_tsni = function strToToken_inst_41_42_40_38_tsni(s) {
   let scrut;
   if (s instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else {
-    scrut = getToken_inst_45_44_43_2_tsni(s);
+    scrut = getToken_inst_41_42_40_38_2_tsni(s);
     return runtime.safeCall(scrut())
   }
 };
-getToken_inst_45_44_43_2_tsni = function getToken_inst_45_44_43_2_tsni(s) {
+getToken_inst_41_42_40_38_2_tsni = function getToken_inst_41_42_40_38_2_tsni(s) {
   let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
   if (s instanceof NofibPrelude.Nil.class) {
     _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
     _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
     arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst_45_44_43_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+      return match_scrut_arm_Deforest_Arr_2_inst_41_42_40_38_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
     return arr
   } else if (s instanceof NofibPrelude.Cons.class) {
@@ -4928,7 +1784,7 @@ getToken_inst_45_44_43_2_tsni = function getToken_inst_45_44_43_2_tsni(s) {
     t = param1;
     scrut2 = h === " ";
     if (scrut2 === true) {
-      return getToken_inst_45_44_43_2_tsni(t)
+      return getToken_inst_41_42_40_38_2_tsni(t)
     } else {
       tmp = h === "(";
       tmp1 = h === ")";
@@ -4938,7 +1794,7 @@ getToken_inst_45_44_43_2_tsni = function getToken_inst_45_44_43_2_tsni(s) {
         _deforest_Deforest_Arr_2_01 = tmp2;
         _deforest_Deforest_Arr_2_11 = t;
         arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst_45_44_43_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+          return match_scrut_arm_Deforest_Arr_2_inst_41_42_40_38_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
         };
         return arr1
       } else {
@@ -4952,7 +1808,7 @@ getToken_inst_45_44_43_2_tsni = function getToken_inst_45_44_43_2_tsni(s) {
           _deforest_Deforest_Arr_2_02 = tmp3;
           _deforest_Deforest_Arr_2_12 = b;
           arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst_45_44_43_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
+            return match_scrut_arm_Deforest_Arr_2_inst_41_42_40_38_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
           };
           return arr2
         } else {
@@ -4964,17 +1820,17 @@ getToken_inst_45_44_43_2_tsni = function getToken_inst_45_44_43_2_tsni(s) {
     throw new globalThis.Error("match error");
   }
 };
-testresult_inst_46_tsni = function testresult_inst_46_tsni(i) {
+testresult_inst_43_44_tsni = function testresult_inst_43_44_tsni(i) {
   let tmp;
-  tmp = teststatement_inst_46_45_tsni(i);
+  tmp = teststatement_inst_43_44_42_tsni(i);
   return boyer2.tautp(tmp)
 };
-teststatement_inst_46_45_tsni = function teststatement_inst_46_45_tsni(i) {
+teststatement_inst_43_44_42_tsni = function teststatement_inst_43_44_42_tsni(i) {
   let tmp;
-  tmp = subterm_inst_46_45_44_tsni(i);
+  tmp = subterm_inst_43_44_42_40_tsni(i);
   return boyer2.applysubst(tmp, boyer2.statement)
 };
-subterm_inst_46_45_44_tsni = function subterm_inst_46_45_44_tsni(i) {
+subterm_inst_43_44_42_40_tsni = function subterm_inst_43_44_42_40_tsni(i) {
   let c, str, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
   tmp = NofibPrelude.stringOfInt(i);
   tmp1 = NofibPrelude.stringConcat("c", tmp);
@@ -4985,25 +1841,25 @@ subterm_inst_46_45_44_tsni = function subterm_inst_46_45_44_tsni(i) {
   tmp5 = NofibPrelude.stringConcat("( ( x f ( plus ( plus a b )( plus ", tmp4);
   str = tmp5;
   tmp6 = NofibPrelude.nofibStringToList(str);
-  tmp7 = strToToken_inst_46_45_44_43_tsni(tmp6);
+  tmp7 = strToToken_inst_43_44_42_40_38_tsni(tmp6);
   return boyer2.mkLispList(tmp7)
 };
-strToToken_inst_46_45_44_43_tsni = function strToToken_inst_46_45_44_43_tsni(s) {
+strToToken_inst_43_44_42_40_38_tsni = function strToToken_inst_43_44_42_40_38_tsni(s) {
   let scrut;
   if (s instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else {
-    scrut = getToken_inst_46_45_44_43_2_tsni(s);
+    scrut = getToken_inst_43_44_42_40_38_2_tsni(s);
     return runtime.safeCall(scrut())
   }
 };
-getToken_inst_46_45_44_43_2_tsni = function getToken_inst_46_45_44_43_2_tsni(s) {
+getToken_inst_43_44_42_40_38_2_tsni = function getToken_inst_43_44_42_40_38_2_tsni(s) {
   let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
   if (s instanceof NofibPrelude.Nil.class) {
     _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
     _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
     arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst_46_45_44_43_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+      return match_scrut_arm_Deforest_Arr_2_inst_43_44_42_40_38_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
     return arr
   } else if (s instanceof NofibPrelude.Cons.class) {
@@ -5013,7 +1869,7 @@ getToken_inst_46_45_44_43_2_tsni = function getToken_inst_46_45_44_43_2_tsni(s) 
     t = param1;
     scrut2 = h === " ";
     if (scrut2 === true) {
-      return getToken_inst_46_45_44_43_2_tsni(t)
+      return getToken_inst_43_44_42_40_38_2_tsni(t)
     } else {
       tmp = h === "(";
       tmp1 = h === ")";
@@ -5023,7 +1879,7 @@ getToken_inst_46_45_44_43_2_tsni = function getToken_inst_46_45_44_43_2_tsni(s) 
         _deforest_Deforest_Arr_2_01 = tmp2;
         _deforest_Deforest_Arr_2_11 = t;
         arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst_46_45_44_43_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+          return match_scrut_arm_Deforest_Arr_2_inst_43_44_42_40_38_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
         };
         return arr1
       } else {
@@ -5037,7 +1893,7 @@ getToken_inst_46_45_44_43_2_tsni = function getToken_inst_46_45_44_43_2_tsni(s) 
           _deforest_Deforest_Arr_2_02 = tmp3;
           _deforest_Deforest_Arr_2_12 = b;
           arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst_46_45_44_43_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
+            return match_scrut_arm_Deforest_Arr_2_inst_43_44_42_40_38_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
           };
           return arr2
         } else {
@@ -5049,22 +1905,22 @@ getToken_inst_46_45_44_43_2_tsni = function getToken_inst_46_45_44_43_2_tsni(s) 
     throw new globalThis.Error("match error");
   }
 };
-testBoyer2_nofib_inst_47_tsni = function testBoyer2_nofib_inst_47_tsni(n) {
+testBoyer2_nofib_inst_45_46_tsni = function testBoyer2_nofib_inst_45_46_tsni(n) {
   let tmp;
-  tmp = testresult_inst_47_46_tsni(n);
+  tmp = testresult_inst_45_46_44_tsni(n);
   return boyer2.report(tmp)
 };
-testresult_inst_47_46_tsni = function testresult_inst_47_46_tsni(i) {
+testresult_inst_45_46_44_tsni = function testresult_inst_45_46_44_tsni(i) {
   let tmp;
-  tmp = teststatement_inst_47_46_45_tsni(i);
+  tmp = teststatement_inst_45_46_44_42_tsni(i);
   return boyer2.tautp(tmp)
 };
-teststatement_inst_47_46_45_tsni = function teststatement_inst_47_46_45_tsni(i) {
+teststatement_inst_45_46_44_42_tsni = function teststatement_inst_45_46_44_42_tsni(i) {
   let tmp;
-  tmp = subterm_inst_47_46_45_44_tsni(i);
+  tmp = subterm_inst_45_46_44_42_40_tsni(i);
   return boyer2.applysubst(tmp, boyer2.statement)
 };
-subterm_inst_47_46_45_44_tsni = function subterm_inst_47_46_45_44_tsni(i) {
+subterm_inst_45_46_44_42_40_tsni = function subterm_inst_45_46_44_42_40_tsni(i) {
   let c, str, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
   tmp = NofibPrelude.stringOfInt(i);
   tmp1 = NofibPrelude.stringConcat("c", tmp);
@@ -5075,25 +1931,25 @@ subterm_inst_47_46_45_44_tsni = function subterm_inst_47_46_45_44_tsni(i) {
   tmp5 = NofibPrelude.stringConcat("( ( x f ( plus ( plus a b )( plus ", tmp4);
   str = tmp5;
   tmp6 = NofibPrelude.nofibStringToList(str);
-  tmp7 = strToToken_inst_47_46_45_44_43_tsni(tmp6);
+  tmp7 = strToToken_inst_45_46_44_42_40_38_tsni(tmp6);
   return boyer2.mkLispList(tmp7)
 };
-strToToken_inst_47_46_45_44_43_tsni = function strToToken_inst_47_46_45_44_43_tsni(s) {
+strToToken_inst_45_46_44_42_40_38_tsni = function strToToken_inst_45_46_44_42_40_38_tsni(s) {
   let scrut;
   if (s instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else {
-    scrut = getToken_inst_47_46_45_44_43_2_tsni(s);
+    scrut = getToken_inst_45_46_44_42_40_38_2_tsni(s);
     return runtime.safeCall(scrut())
   }
 };
-getToken_inst_47_46_45_44_43_2_tsni = function getToken_inst_47_46_45_44_43_2_tsni(s) {
+getToken_inst_45_46_44_42_40_38_2_tsni = function getToken_inst_45_46_44_42_40_38_2_tsni(s) {
   let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
   if (s instanceof NofibPrelude.Nil.class) {
     _deforest_Deforest_Arr_2_0 = NofibPrelude.Nil;
     _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
     arr = () => {
-      return match_scrut_arm_Deforest_Arr_2_inst_47_46_45_44_43_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+      return match_scrut_arm_Deforest_Arr_2_inst_45_46_44_42_40_38_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
     return arr
   } else if (s instanceof NofibPrelude.Cons.class) {
@@ -5103,7 +1959,7 @@ getToken_inst_47_46_45_44_43_2_tsni = function getToken_inst_47_46_45_44_43_2_ts
     t = param1;
     scrut2 = h === " ";
     if (scrut2 === true) {
-      return getToken_inst_47_46_45_44_43_2_tsni(t)
+      return getToken_inst_45_46_44_42_40_38_2_tsni(t)
     } else {
       tmp = h === "(";
       tmp1 = h === ")";
@@ -5113,7 +1969,7 @@ getToken_inst_47_46_45_44_43_2_tsni = function getToken_inst_47_46_45_44_43_2_ts
         _deforest_Deforest_Arr_2_01 = tmp2;
         _deforest_Deforest_Arr_2_11 = t;
         arr1 = () => {
-          return match_scrut_arm_Deforest_Arr_2_inst_47_46_45_44_43_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+          return match_scrut_arm_Deforest_Arr_2_inst_45_46_44_42_40_38_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
         };
         return arr1
       } else {
@@ -5127,7 +1983,7 @@ getToken_inst_47_46_45_44_43_2_tsni = function getToken_inst_47_46_45_44_43_2_ts
           _deforest_Deforest_Arr_2_02 = tmp3;
           _deforest_Deforest_Arr_2_12 = b;
           arr2 = () => {
-            return match_scrut_arm_Deforest_Arr_2_inst_47_46_45_44_43_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
+            return match_scrut_arm_Deforest_Arr_2_inst_45_46_44_42_40_38_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
           };
           return arr2
         } else {
@@ -5139,345 +1995,52 @@ getToken_inst_47_46_45_44_43_2_tsni = function getToken_inst_47_46_45_44_43_2_ts
     throw new globalThis.Error("match error");
   }
 };
-addlemmalst_inst_48_tsni = function addlemmalst_inst_48_tsni(lspls, term) {
+addlemmalst_inst_47_tsni = function addlemmalst_inst_47_tsni(lspls, term) {
   return runtime.safeCall(lspls(term))
 };
-car_inst_16_tsni = function car_inst_16_tsni(x) {
+car_inst_4_48_tsni = function car_inst_4_48_tsni(x) {
   return runtime.safeCall(x())
 };
-car_inst_15_tsni = function car_inst_15_tsni(x) {
+car_inst_6_34_tsni = function car_inst_6_34_tsni(x) {
   return runtime.safeCall(x())
 };
-car_inst_49_tsni = function car_inst_49_tsni(x) {
+car_inst_9_49_tsni = function car_inst_9_49_tsni(x) {
   return runtime.safeCall(x())
 };
-falsep_inst_50_tsni = function falsep_inst_50_tsni(term_l) {
+truep_inst_13_50_tsni = function truep_inst_13_50_tsni(term_l) {
   return runtime.safeCall(term_l())
 };
-truep_inst_51_tsni = function truep_inst_51_tsni(term_l) {
+truep_inst_13_51_tsni = function truep_inst_13_51_tsni(term_l) {
   return runtime.safeCall(term_l())
 };
-falsep_inst_52_tsni = function falsep_inst_52_tsni(term_l) {
+falsep_inst_13_52_tsni = function falsep_inst_13_52_tsni(term_l) {
   return runtime.safeCall(term_l())
 };
-truep_inst_53_tsni = function truep_inst_53_tsni(term_l) {
+truep_inst_13_53_tsni = function truep_inst_13_53_tsni(term_l) {
   return runtime.safeCall(term_l())
 };
-truep_inst_54_tsni = function truep_inst_54_tsni(term_l) {
+car_inst_13_14_48_tsni = function car_inst_13_14_48_tsni(x) {
+  return runtime.safeCall(x())
+};
+falsep_inst_13_54_tsni = function falsep_inst_13_54_tsni(term_l) {
   return runtime.safeCall(term_l())
 };
-tv_inst_55_tsni = function tv_inst_55_tsni(x) {
+car_inst_13_15_34_tsni = function car_inst_13_15_34_tsni(x) {
   return runtime.safeCall(x())
 };
-tv_inst_23_24_55_tsni = function tv_inst_23_24_55_tsni(x) {
+car_inst_13_16_48_tsni = function car_inst_13_16_48_tsni(x) {
   return runtime.safeCall(x())
 };
-tv_inst_24_55_tsni = function tv_inst_24_55_tsni(x) {
+car_inst_13_17_34_tsni = function car_inst_13_17_34_tsni(x) {
   return runtime.safeCall(x())
 };
-assoc_inst_25_56_tsni = function assoc_inst_25_56_tsni(term_x_y) {
-  let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
-  if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
-    first0 = term_x_y[0];
-    first1 = term_x_y[1];
-    term = first0;
-    if (first1 instanceof boyer2.Conss.class) {
-      param0 = first1.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first01 = param0[0];
-        first11 = param0[1];
-        x = first01;
-        y = first11;
-        if (x instanceof boyer2.Conss.class) {
-          param01 = x.a;
-          if (globalThis.Array.isArray(param01) && param01.length === 2) {
-            first02 = param01[0];
-            first12 = param01[1];
-            if (first02 instanceof boyer2.Atom.class) {
-              param02 = first02.a;
-              key = param02;
-              rest = first12;
-              tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_25_56_57_tsni(term, tmp);
-              if (scrut === true) {
-                return x
-              } else {
-                arr = [
-                  term,
-                  y
-                ];
-                return assoc_inst_25_56_tsni(arr)
-              }
-            } else {
-              return boyer2.Nill
-            }
-          } else {
-            return boyer2.Nill
-          }
-        } else {
-          return boyer2.Nill
-        }
-      } else {
-        return boyer2.Nill
-      }
-    } else {
-      return boyer2.Nill
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-lispListEq_inst_25_56_57_tsni = function lispListEq_inst_25_56_57_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-assoc_inst_26_56_tsni = function assoc_inst_26_56_tsni(term_x_y) {
-  let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
-  if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
-    first0 = term_x_y[0];
-    first1 = term_x_y[1];
-    term = first0;
-    if (first1 instanceof boyer2.Conss.class) {
-      param0 = first1.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first01 = param0[0];
-        first11 = param0[1];
-        x = first01;
-        y = first11;
-        if (x instanceof boyer2.Conss.class) {
-          param01 = x.a;
-          if (globalThis.Array.isArray(param01) && param01.length === 2) {
-            first02 = param01[0];
-            first12 = param01[1];
-            if (first02 instanceof boyer2.Atom.class) {
-              param02 = first02.a;
-              key = param02;
-              rest = first12;
-              tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_26_56_57_tsni(term, tmp);
-              if (scrut === true) {
-                return x
-              } else {
-                arr = [
-                  term,
-                  y
-                ];
-                return assoc_inst_26_56_tsni(arr)
-              }
-            } else {
-              return boyer2.Nill
-            }
-          } else {
-            return boyer2.Nill
-          }
-        } else {
-          return boyer2.Nill
-        }
-      } else {
-        return boyer2.Nill
-      }
-    } else {
-      return boyer2.Nill
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-lispListEq_inst_26_56_57_tsni = function lispListEq_inst_26_56_57_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-assoc_inst_27_56_tsni = function assoc_inst_27_56_tsni(term_x_y) {
-  let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
-  if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
-    first0 = term_x_y[0];
-    first1 = term_x_y[1];
-    term = first0;
-    if (first1 instanceof boyer2.Conss.class) {
-      param0 = first1.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first01 = param0[0];
-        first11 = param0[1];
-        x = first01;
-        y = first11;
-        if (x instanceof boyer2.Conss.class) {
-          param01 = x.a;
-          if (globalThis.Array.isArray(param01) && param01.length === 2) {
-            first02 = param01[0];
-            first12 = param01[1];
-            if (first02 instanceof boyer2.Atom.class) {
-              param02 = first02.a;
-              key = param02;
-              rest = first12;
-              tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_27_56_57_tsni(term, tmp);
-              if (scrut === true) {
-                return x
-              } else {
-                arr = [
-                  term,
-                  y
-                ];
-                return assoc_inst_27_56_tsni(arr)
-              }
-            } else {
-              return boyer2.Nill
-            }
-          } else {
-            return boyer2.Nill
-          }
-        } else {
-          return boyer2.Nill
-        }
-      } else {
-        return boyer2.Nill
-      }
-    } else {
-      return boyer2.Nill
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-lispListEq_inst_27_56_57_tsni = function lispListEq_inst_27_56_57_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-assoc_inst_56_tsni = function assoc_inst_56_tsni(term_x_y) {
-  let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
-  if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
-    first0 = term_x_y[0];
-    first1 = term_x_y[1];
-    term = first0;
-    if (first1 instanceof boyer2.Conss.class) {
-      param0 = first1.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first01 = param0[0];
-        first11 = param0[1];
-        x = first01;
-        y = first11;
-        if (x instanceof boyer2.Conss.class) {
-          param01 = x.a;
-          if (globalThis.Array.isArray(param01) && param01.length === 2) {
-            first02 = param01[0];
-            first12 = param01[1];
-            if (first02 instanceof boyer2.Atom.class) {
-              param02 = first02.a;
-              key = param02;
-              rest = first12;
-              tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_56_57_tsni(term, tmp);
-              if (scrut === true) {
-                return x
-              } else {
-                arr = [
-                  term,
-                  y
-                ];
-                return assoc_inst_56_tsni(arr)
-              }
-            } else {
-              return boyer2.Nill
-            }
-          } else {
-            return boyer2.Nill
-          }
-        } else {
-          return boyer2.Nill
-        }
-      } else {
-        return boyer2.Nill
-      }
-    } else {
-      return boyer2.Nill
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-lispListEq_inst_56_57_tsni = function lispListEq_inst_56_57_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-lispListEq_inst_28_58_tsni = function lispListEq_inst_28_58_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-lispListEq_inst_30_58_tsni = function lispListEq_inst_30_58_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-lispListEq_inst_31_58_tsni = function lispListEq_inst_31_58_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-lispListEq_inst_58_tsni = function lispListEq_inst_58_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-lispListEq_inst_32_58_tsni = function lispListEq_inst_32_58_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-car_inst_33_34_16_tsni = function car_inst_33_34_16_tsni(x) {
+tv_inst_20_55_tsni = function tv_inst_20_55_tsni(x) {
   return runtime.safeCall(x())
 };
-lispListEq_inst_33_35_32_58_tsni = function lispListEq_inst_33_35_32_58_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-assoc_inst_33_37_56_tsni = function assoc_inst_33_37_56_tsni(term_x_y) {
-  let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
-  if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
-    first0 = term_x_y[0];
-    first1 = term_x_y[1];
-    term = first0;
-    if (first1 instanceof boyer2.Conss.class) {
-      param0 = first1.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first01 = param0[0];
-        first11 = param0[1];
-        x = first01;
-        y = first11;
-        if (x instanceof boyer2.Conss.class) {
-          param01 = x.a;
-          if (globalThis.Array.isArray(param01) && param01.length === 2) {
-            first02 = param01[0];
-            first12 = param01[1];
-            if (first02 instanceof boyer2.Atom.class) {
-              param02 = first02.a;
-              key = param02;
-              rest = first12;
-              tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_33_37_56_57_tsni(term, tmp);
-              if (scrut === true) {
-                return x
-              } else {
-                arr = [
-                  term,
-                  y
-                ];
-                return assoc_inst_33_37_56_tsni(arr)
-              }
-            } else {
-              return boyer2.Nill
-            }
-          } else {
-            return boyer2.Nill
-          }
-        } else {
-          return boyer2.Nill
-        }
-      } else {
-        return boyer2.Nill
-      }
-    } else {
-      return boyer2.Nill
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-lispListEq_inst_33_37_56_57_tsni = function lispListEq_inst_33_37_56_57_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-car_inst_38_34_16_tsni = function car_inst_38_34_16_tsni(x) {
+tv_inst_22_23_55_tsni = function tv_inst_22_23_55_tsni(x) {
   return runtime.safeCall(x())
 };
-lispListEq_inst_38_35_32_58_tsni = function lispListEq_inst_38_35_32_58_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-assoc_inst_38_37_56_tsni = function assoc_inst_38_37_56_tsni(term_x_y) {
+assoc_inst_56_57_tsni = function assoc_inst_56_57_tsni(term_x_y) {
   let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
   if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
     first0 = term_x_y[0];
@@ -5500,7 +2063,7 @@ assoc_inst_38_37_56_tsni = function assoc_inst_38_37_56_tsni(term_x_y) {
               key = param02;
               rest = first12;
               tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_38_37_56_57_tsni(term, tmp);
+              scrut = lispListEq_inst_56_57_58_tsni(term, tmp);
               if (scrut === true) {
                 return x
               } else {
@@ -5508,7 +2071,7 @@ assoc_inst_38_37_56_tsni = function assoc_inst_38_37_56_tsni(term_x_y) {
                   term,
                   y
                 ];
-                return assoc_inst_38_37_56_tsni(arr)
+                return assoc_inst_56_57_tsni(arr)
               }
             } else {
               return boyer2.Nill
@@ -5529,10 +2092,10 @@ assoc_inst_38_37_56_tsni = function assoc_inst_38_37_56_tsni(term_x_y) {
     throw new globalThis.Error("match error");
   }
 };
-lispListEq_inst_38_37_56_57_tsni = function lispListEq_inst_38_37_56_57_tsni(x, y) {
+lispListEq_inst_56_57_58_tsni = function lispListEq_inst_56_57_58_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-assoc_inst_37_56_tsni = function assoc_inst_37_56_tsni(term_x_y) {
+assoc_inst_59_57_tsni = function assoc_inst_59_57_tsni(term_x_y) {
   let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
   if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
     first0 = term_x_y[0];
@@ -5555,7 +2118,7 @@ assoc_inst_37_56_tsni = function assoc_inst_37_56_tsni(term_x_y) {
               key = param02;
               rest = first12;
               tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_37_56_57_tsni(term, tmp);
+              scrut = lispListEq_inst_59_57_58_tsni(term, tmp);
               if (scrut === true) {
                 return x
               } else {
@@ -5563,7 +2126,7 @@ assoc_inst_37_56_tsni = function assoc_inst_37_56_tsni(term_x_y) {
                   term,
                   y
                 ];
-                return assoc_inst_37_56_tsni(arr)
+                return assoc_inst_59_57_tsni(arr)
               }
             } else {
               return boyer2.Nill
@@ -5584,22 +2147,25 @@ assoc_inst_37_56_tsni = function assoc_inst_37_56_tsni(term_x_y) {
     throw new globalThis.Error("match error");
   }
 };
-lispListEq_inst_37_56_57_tsni = function lispListEq_inst_37_56_57_tsni(x, y) {
+lispListEq_inst_59_57_58_tsni = function lispListEq_inst_59_57_58_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-lispListEq_inst_35_32_58_tsni = function lispListEq_inst_35_32_58_tsni(x, y) {
+lispListEq_inst_24_60_tsni = function lispListEq_inst_24_60_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-car_inst_34_16_tsni = function car_inst_34_16_tsni(x) {
+lispListEq_inst_26_60_tsni = function lispListEq_inst_26_60_tsni(x, y) {
+  return runtime.safeCall(x(y))
+};
+lispListEq_inst_27_28_60_tsni = function lispListEq_inst_27_28_60_tsni(x, y) {
+  return runtime.safeCall(x(y))
+};
+car_inst_29_30_48_tsni = function car_inst_29_30_48_tsni(x) {
   return runtime.safeCall(x())
 };
-car_inst_39_34_16_tsni = function car_inst_39_34_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-lispListEq_inst_39_35_32_58_tsni = function lispListEq_inst_39_35_32_58_tsni(x, y) {
+lispListEq_inst_29_31_28_60_tsni = function lispListEq_inst_29_31_28_60_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-assoc_inst_39_37_56_tsni = function assoc_inst_39_37_56_tsni(term_x_y) {
+assoc_inst_29_33_57_tsni = function assoc_inst_29_33_57_tsni(term_x_y) {
   let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
   if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
     first0 = term_x_y[0];
@@ -5622,7 +2188,7 @@ assoc_inst_39_37_56_tsni = function assoc_inst_39_37_56_tsni(term_x_y) {
               key = param02;
               rest = first12;
               tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_39_37_56_57_tsni(term, tmp);
+              scrut = lispListEq_inst_29_33_57_58_tsni(term, tmp);
               if (scrut === true) {
                 return x
               } else {
@@ -5630,7 +2196,7 @@ assoc_inst_39_37_56_tsni = function assoc_inst_39_37_56_tsni(term_x_y) {
                   term,
                   y
                 ];
-                return assoc_inst_39_37_56_tsni(arr)
+                return assoc_inst_29_33_57_tsni(arr)
               }
             } else {
               return boyer2.Nill
@@ -5651,16 +2217,16 @@ assoc_inst_39_37_56_tsni = function assoc_inst_39_37_56_tsni(term_x_y) {
     throw new globalThis.Error("match error");
   }
 };
-lispListEq_inst_39_37_56_57_tsni = function lispListEq_inst_39_37_56_57_tsni(x, y) {
+lispListEq_inst_29_33_57_58_tsni = function lispListEq_inst_29_33_57_58_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-car_inst_40_34_16_tsni = function car_inst_40_34_16_tsni(x) {
+car_inst_35_30_48_tsni = function car_inst_35_30_48_tsni(x) {
   return runtime.safeCall(x())
 };
-lispListEq_inst_40_35_32_58_tsni = function lispListEq_inst_40_35_32_58_tsni(x, y) {
+lispListEq_inst_35_31_28_60_tsni = function lispListEq_inst_35_31_28_60_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-assoc_inst_40_37_56_tsni = function assoc_inst_40_37_56_tsni(term_x_y) {
+assoc_inst_35_33_57_tsni = function assoc_inst_35_33_57_tsni(term_x_y) {
   let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
   if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
     first0 = term_x_y[0];
@@ -5683,7 +2249,7 @@ assoc_inst_40_37_56_tsni = function assoc_inst_40_37_56_tsni(term_x_y) {
               key = param02;
               rest = first12;
               tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_40_37_56_57_tsni(term, tmp);
+              scrut = lispListEq_inst_35_33_57_58_tsni(term, tmp);
               if (scrut === true) {
                 return x
               } else {
@@ -5691,7 +2257,7 @@ assoc_inst_40_37_56_tsni = function assoc_inst_40_37_56_tsni(term_x_y) {
                   term,
                   y
                 ];
-                return assoc_inst_40_37_56_tsni(arr)
+                return assoc_inst_35_33_57_tsni(arr)
               }
             } else {
               return boyer2.Nill
@@ -5712,16 +2278,16 @@ assoc_inst_40_37_56_tsni = function assoc_inst_40_37_56_tsni(term_x_y) {
     throw new globalThis.Error("match error");
   }
 };
-lispListEq_inst_40_37_56_57_tsni = function lispListEq_inst_40_37_56_57_tsni(x, y) {
+lispListEq_inst_35_33_57_58_tsni = function lispListEq_inst_35_33_57_58_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-car_inst_41_34_16_tsni = function car_inst_41_34_16_tsni(x) {
+car_inst_36_30_48_tsni = function car_inst_36_30_48_tsni(x) {
   return runtime.safeCall(x())
 };
-lispListEq_inst_41_35_32_58_tsni = function lispListEq_inst_41_35_32_58_tsni(x, y) {
+lispListEq_inst_36_31_28_60_tsni = function lispListEq_inst_36_31_28_60_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-assoc_inst_41_37_56_tsni = function assoc_inst_41_37_56_tsni(term_x_y) {
+assoc_inst_36_33_57_tsni = function assoc_inst_36_33_57_tsni(term_x_y) {
   let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
   if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
     first0 = term_x_y[0];
@@ -5744,7 +2310,7 @@ assoc_inst_41_37_56_tsni = function assoc_inst_41_37_56_tsni(term_x_y) {
               key = param02;
               rest = first12;
               tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_41_37_56_57_tsni(term, tmp);
+              scrut = lispListEq_inst_36_33_57_58_tsni(term, tmp);
               if (scrut === true) {
                 return x
               } else {
@@ -5752,7 +2318,7 @@ assoc_inst_41_37_56_tsni = function assoc_inst_41_37_56_tsni(term_x_y) {
                   term,
                   y
                 ];
-                return assoc_inst_41_37_56_tsni(arr)
+                return assoc_inst_36_33_57_tsni(arr)
               }
             } else {
               return boyer2.Nill
@@ -5773,68 +2339,7 @@ assoc_inst_41_37_56_tsni = function assoc_inst_41_37_56_tsni(term_x_y) {
     throw new globalThis.Error("match error");
   }
 };
-lispListEq_inst_41_37_56_57_tsni = function lispListEq_inst_41_37_56_57_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-car_inst_42_34_16_tsni = function car_inst_42_34_16_tsni(x) {
-  return runtime.safeCall(x())
-};
-lispListEq_inst_42_35_32_58_tsni = function lispListEq_inst_42_35_32_58_tsni(x, y) {
-  return runtime.safeCall(x(y))
-};
-assoc_inst_42_37_56_tsni = function assoc_inst_42_37_56_tsni(term_x_y) {
-  let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
-  if (globalThis.Array.isArray(term_x_y) && term_x_y.length === 2) {
-    first0 = term_x_y[0];
-    first1 = term_x_y[1];
-    term = first0;
-    if (first1 instanceof boyer2.Conss.class) {
-      param0 = first1.a;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first01 = param0[0];
-        first11 = param0[1];
-        x = first01;
-        y = first11;
-        if (x instanceof boyer2.Conss.class) {
-          param01 = x.a;
-          if (globalThis.Array.isArray(param01) && param01.length === 2) {
-            first02 = param01[0];
-            first12 = param01[1];
-            if (first02 instanceof boyer2.Atom.class) {
-              param02 = first02.a;
-              key = param02;
-              rest = first12;
-              tmp = runtime.safeCall(boyer2.Atom(key));
-              scrut = lispListEq_inst_42_37_56_57_tsni(term, tmp);
-              if (scrut === true) {
-                return x
-              } else {
-                arr = [
-                  term,
-                  y
-                ];
-                return assoc_inst_42_37_56_tsni(arr)
-              }
-            } else {
-              return boyer2.Nill
-            }
-          } else {
-            return boyer2.Nill
-          }
-        } else {
-          return boyer2.Nill
-        }
-      } else {
-        return boyer2.Nill
-      }
-    } else {
-      return boyer2.Nill
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, y) {
+lispListEq_inst_36_33_57_58_tsni = function lispListEq_inst_36_33_57_58_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
 (class boyer2 {
@@ -6541,7 +3046,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
     };
     this.rules = tmp214;
     tmp215 = makelemmas_inst_0_tsni(boyer2.rules);
-    tmp216 = addlemmalst_inst_48_tsni(tmp215, boyer2.Empty);
+    tmp216 = addlemmalst_inst_47_tsni(tmp215, boyer2.Empty);
     this.lemmas = tmp216;
   }
   static lispListEq(x, y) {
@@ -6857,21 +3362,21 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
   } 
   static cadr(x5) {
     let tmp;
-    tmp = cdr_inst_4_tsni(x5);
-    return car_inst_16_tsni(tmp)
+    tmp = cdr_inst_4_5_tsni(x5);
+    return car_inst_4_48_tsni(tmp)
   } 
   static caddr(x6) {
     let tmp, tmp1;
-    tmp = cdr_inst_6_tsni(x6);
-    tmp1 = cdr_inst_5_tsni(tmp);
-    return car_inst_15_tsni(tmp1)
+    tmp = cdr_inst_6_7_tsni(x6);
+    tmp1 = cdr_inst_6_8_tsni(tmp);
+    return car_inst_6_34_tsni(tmp1)
   } 
   static cadddr(x7) {
     let tmp, tmp1, tmp2;
-    tmp = cdr_inst_9_tsni(x7);
-    tmp1 = cdr_inst_8_tsni(tmp);
-    tmp2 = cdr_inst_7_tsni(tmp1);
-    return car_inst_49_tsni(tmp2)
+    tmp = cdr_inst_9_10_tsni(x7);
+    tmp1 = cdr_inst_9_11_tsni(tmp);
+    tmp2 = cdr_inst_9_12_tsni(tmp1);
+    return car_inst_9_49_tsni(tmp2)
   } 
   static tautologyp(f_truelst_falselst) {
     let first2, first1, first0, f, truelst, falselst, param0, first11, first01, x8, y1, param01, param02, param1, param03, param11, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, x9, tmp, arr, arr1, tmp1, arr2, arr3, tmp2, arr4, tmp3, arr5, tmp4, arr6, tmp5, arr7, tmp6, arr8, tmp7, tmp8, arr9, tmp9, arr10, tmp10, tmp11, arr11, tmp12, arr12, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
@@ -6888,12 +3393,12 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
         param0 = f.a;
         x9 = param0;
         tmp = runtime.safeCall(boyer2.Atom(x9));
-        _deforest_Deforest_Arr_2_04 = tmp;
-        _deforest_Deforest_Arr_2_14 = truelst;
+        _deforest_Deforest_Arr_2_0 = tmp;
+        _deforest_Deforest_Arr_2_1 = truelst;
         arr = () => {
           let first12, first02, term, l, param04, first13, first03, param05, param06, param12, arr13, arr14, arr15, arr16, arr17, arr18, arr19;
-          first02 = _deforest_Deforest_Arr_2_04;
-          first12 = _deforest_Deforest_Arr_2_14;
+          first02 = _deforest_Deforest_Arr_2_0;
+          first12 = _deforest_Deforest_Arr_2_1;
           if (first02 instanceof boyer2.Nill.class) {
             return false
           } else if (first02 instanceof boyer2.Conss.class) {
@@ -6974,7 +3479,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
             return boyer2.lispmember(arr19)
           }
         };
-        return truep_inst_54_tsni(arr)
+        return truep_inst_13_50_tsni(arr)
       } else if (f instanceof boyer2.Conss.class) {
         param0 = f.a;
         if (globalThis.Array.isArray(param0) && param0.length === 2) {
@@ -6987,12 +3492,12 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
             y1
           ];
           tmp1 = runtime.safeCall(boyer2.Conss(arr1));
-          _deforest_Deforest_Arr_2_03 = tmp1;
-          _deforest_Deforest_Arr_2_13 = truelst;
+          _deforest_Deforest_Arr_2_01 = tmp1;
+          _deforest_Deforest_Arr_2_11 = truelst;
           arr2 = () => {
             let first12, first02, term, l, param04, first13, first03, param05, param06, param12, arr13, arr14, arr15, arr16, arr17, arr18, arr19;
-            first02 = _deforest_Deforest_Arr_2_03;
-            first12 = _deforest_Deforest_Arr_2_13;
+            first02 = _deforest_Deforest_Arr_2_01;
+            first12 = _deforest_Deforest_Arr_2_11;
             if (first02 instanceof boyer2.Nill.class) {
               return false
             } else if (first02 instanceof boyer2.Conss.class) {
@@ -7073,7 +3578,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
               return boyer2.lispmember(arr19)
             }
           };
-          scrut5 = truep_inst_53_tsni(arr2);
+          scrut5 = truep_inst_13_51_tsni(arr2);
           if (scrut5 === true) {
             return true
           } else {
@@ -7168,7 +3673,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
                 return boyer2.lispmember(arr19)
               }
             };
-            scrut4 = falsep_inst_52_tsni(arr4);
+            scrut4 = falsep_inst_13_52_tsni(arr4);
             if (scrut4 === true) {
               return false
             } else {
@@ -7184,12 +3689,12 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
                       if (param03 === "f") {
                         if (param11 instanceof NofibPrelude.Nil.class) {
                           tmp3 = boyer2.car(y1);
-                          _deforest_Deforest_Arr_2_01 = tmp3;
-                          _deforest_Deforest_Arr_2_11 = truelst;
+                          _deforest_Deforest_Arr_2_03 = tmp3;
+                          _deforest_Deforest_Arr_2_13 = truelst;
                           arr5 = () => {
                             let first12, first02, term, l, param04, first13, first03, param05, param06, param12, arr13, arr14, arr15, arr16, arr17, arr18, arr19;
-                            first02 = _deforest_Deforest_Arr_2_01;
-                            first12 = _deforest_Deforest_Arr_2_11;
+                            first02 = _deforest_Deforest_Arr_2_03;
+                            first12 = _deforest_Deforest_Arr_2_13;
                             if (first02 instanceof boyer2.Nill.class) {
                               return false
                             } else if (first02 instanceof boyer2.Conss.class) {
@@ -7270,23 +3775,23 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
                               return boyer2.lispmember(arr19)
                             }
                           };
-                          scrut3 = truep_inst_51_tsni(arr5);
+                          scrut3 = truep_inst_13_53_tsni(arr5);
                           if (scrut3 === true) {
-                            tmp4 = cadr_inst_11_tsni(y1);
+                            tmp4 = cadr_inst_13_14_tsni(y1);
                             arr6 = [
                               tmp4,
                               truelst,
                               falselst
                             ];
-                            return tautologyp_inst_19_tsni(arr6)
+                            return boyer2.tautologyp(arr6)
                           } else {
                             tmp5 = boyer2.car(y1);
-                            _deforest_Deforest_Arr_2_0 = tmp5;
-                            _deforest_Deforest_Arr_2_1 = falselst;
+                            _deforest_Deforest_Arr_2_04 = tmp5;
+                            _deforest_Deforest_Arr_2_14 = falselst;
                             arr7 = () => {
                               let first12, first02, term, l, param04, first13, first03, param05, param06, param12, arr13, arr14, arr15, arr16, arr17, arr18, arr19;
-                              first02 = _deforest_Deforest_Arr_2_0;
-                              first12 = _deforest_Deforest_Arr_2_1;
+                              first02 = _deforest_Deforest_Arr_2_04;
+                              first12 = _deforest_Deforest_Arr_2_14;
                               if (first02 instanceof boyer2.Nill.class) {
                                 return false
                               } else if (first02 instanceof boyer2.Conss.class) {
@@ -7367,17 +3872,17 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
                                 return boyer2.lispmember(arr19)
                               }
                             };
-                            scrut2 = falsep_inst_50_tsni(arr7);
+                            scrut2 = falsep_inst_13_54_tsni(arr7);
                             if (scrut2 === true) {
-                              tmp6 = caddr_inst_12_tsni(y1);
+                              tmp6 = caddr_inst_13_15_tsni(y1);
                               arr8 = [
                                 tmp6,
                                 truelst,
                                 falselst
                               ];
-                              return tautologyp_inst_18_tsni(arr8)
+                              return boyer2.tautologyp(arr8)
                             } else {
-                              tmp7 = cadr_inst_13_tsni(y1);
+                              tmp7 = cadr_inst_13_16_tsni(y1);
                               tmp8 = boyer2.car(y1);
                               arr9 = [
                                 tmp8,
@@ -7389,9 +3894,9 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
                                 tmp9,
                                 falselst
                               ];
-                              scrut = tautologyp_inst_17_tsni(arr10);
+                              scrut = boyer2.tautologyp(arr10);
                               if (scrut === true) {
-                                tmp10 = caddr_inst_14_tsni(y1);
+                                tmp10 = caddr_inst_13_17_tsni(y1);
                                 tmp11 = boyer2.car(y1);
                                 arr11 = [
                                   tmp11,
@@ -7403,7 +3908,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
                                   truelst,
                                   tmp12
                                 ];
-                                scrut1 = tautologyp_inst_10_tsni(arr12);
+                                scrut1 = boyer2.tautologyp(arr12);
                                 if (scrut1 === true) {
                                   return true
                                 } else {
@@ -7777,7 +4282,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
     if (s2 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else {
-      scrut = getToken_inst_2_tsni(s2);
+      scrut = getToken_inst_18_2_tsni(s2);
       return runtime.safeCall(scrut())
     }
   } 
@@ -8007,9 +4512,9 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
       param1 = rules.tail;
       h = param0;
       t1 = param1;
-      tmp = strToToken_inst_1_tsni(h);
+      tmp = strToToken_inst_19_1_tsni(h);
       tmp1 = boyer2.mkLispList(tmp);
-      tmp2 = makelemmas_inst_21_tsni(t1);
+      tmp2 = boyer2.makelemmas(t1);
       return NofibPrelude.Cons(tmp1, tmp2)
     } else {
       throw new globalThis.Error("match error");
@@ -8039,8 +4544,8 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
           tmp3 = boyer2.atom(z);
           scrut1 = Predef.not(tmp3);
           if (scrut1 === true) {
-            tmp4 = car_inst_22_tsni(z);
-            tmp5 = tv_inst_55_tsni(tmp4);
+            tmp4 = car_inst_20_21_tsni(z);
+            tmp5 = tv_inst_20_55_tsni(tmp4);
             arr = [
               x8,
               y1
@@ -8074,8 +4579,8 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
       param1 = lspls1.tail;
       h = param0;
       t1 = param1;
-      tmp = addlemma_inst_24_tsni(h, term1);
-      return addlemmalst_inst_23_tsni(t1, tmp)
+      tmp = addlemma_inst_22_23_tsni(h, term1);
+      return boyer2.addlemmalst(t1, tmp)
     } else {
       throw new globalThis.Error("match error");
     }
@@ -8095,8 +4600,8 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
         first1 = param0[1];
         x8 = first0;
         y2 = first1;
-        tmp = applysubst_inst_26_tsni(alist, x8);
-        tmp1 = applysubstlst_inst_25_tsni(alist, y2);
+        tmp = boyer2.applysubst(alist, x8);
+        tmp1 = boyer2.applysubstlst(alist, y2);
         arr = [
           tmp,
           tmp1
@@ -8133,7 +4638,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
         tmp,
         alist1
       ];
-      scrut = assoc_inst_56_tsni(arr);
+      scrut = assoc_inst_59_57_tsni(arr);
       if (scrut instanceof boyer2.Conss.class) {
         param01 = scrut.a;
         if (globalThis.Array.isArray(param01) && param01.length === 2) {
@@ -8154,7 +4659,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
         first1 = param0[1];
         x9 = first0;
         y2 = first1;
-        tmp1 = applysubstlst_inst_27_tsni(alist1, y2);
+        tmp1 = boyer2.applysubstlst(alist1, y2);
         arr1 = [
           x9,
           tmp1
@@ -8178,7 +4683,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
     } else {
       tmp = boyer2.car(l1);
       tmp1 = boyer2.car(l2);
-      scrut = onewayunify1_inst_30_tsni(tmp, tmp1, u);
+      scrut = boyer2.onewayunify1(tmp, tmp1, u);
       if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
         first0 = scrut[0];
         first1 = scrut[1];
@@ -8187,7 +4692,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
         if (b === true) {
           tmp2 = boyer2.cdr(l1);
           tmp3 = boyer2.cdr(l2);
-          return onewayunify1lst_inst_28_tsni(tmp2, tmp3, u1)
+          return boyer2.onewayunify1lst(tmp2, tmp3, u1)
         } else {
           arr1 = [
             false,
@@ -8264,13 +4769,13 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
         ];
         return arr8
       } else {
-        tmp5 = car_inst_29_tsni(t1);
+        tmp5 = car_inst_26_25_tsni(t1);
         tmp6 = boyer2.car(t2);
-        scrut = lispListEq_inst_58_tsni(tmp5, tmp6);
+        scrut = lispListEq_inst_26_60_tsni(tmp5, tmp6);
         if (scrut === true) {
           tmp7 = boyer2.cdr(t1);
           tmp8 = boyer2.cdr(t2);
-          return onewayunify1lst_inst_31_tsni(tmp7, tmp8, u1)
+          return boyer2.onewayunify1lst(tmp7, tmp8, u1)
         } else {
           arr9 = [
             false,
@@ -8282,7 +4787,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
     }
   } 
   static onewayunify(t11, t21) {
-    return onewayunify1_inst_32_tsni(t11, t21, boyer2.Nill)
+    return onewayunify1_inst_27_28_tsni(t11, t21, boyer2.Nill)
   } 
   static rewritewithlemmas(t3, l, term2) {
     let param0, param1, lh, lt, scrut, first1, first0, b, u2, tmp, tmp1, tmp2;
@@ -8293,19 +4798,19 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
       param1 = l.tail;
       lh = param0;
       lt = param1;
-      tmp = cadr_inst_34_tsni(lh);
-      scrut = onewayunify_inst_35_tsni(t3, tmp);
+      tmp = cadr_inst_29_30_tsni(lh);
+      scrut = onewayunify_inst_29_31_tsni(t3, tmp);
       if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
         first0 = scrut[0];
         first1 = scrut[1];
         b = first0;
         u2 = first1;
         if (b === true) {
-          tmp1 = caddr_inst_36_tsni(lh);
-          tmp2 = applysubst_inst_37_tsni(u2, tmp1);
-          return rewrite_inst_38_tsni(tmp2, term2)
+          tmp1 = caddr_inst_29_32_tsni(lh);
+          tmp2 = applysubst_inst_29_33_tsni(u2, tmp1);
+          return boyer2.rewrite(tmp2, term2)
         } else {
-          return rewritewithlemmas_inst_33_tsni(t3, lt, term2)
+          return boyer2.rewritewithlemmas(t3, lt, term2)
         }
       } else {
         throw new globalThis.Error("match error");
@@ -8328,8 +4833,8 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
         first1 = param0[1];
         x10 = first0;
         y2 = first1;
-        tmp = rewrite_inst_40_tsni(x10, term3);
-        tmp1 = rewriteargs_inst_39_tsni(y2, term3);
+        tmp = boyer2.rewrite(x10, term3);
+        tmp1 = boyer2.rewriteargs(y2, term3);
         arr = [
           tmp,
           tmp1
@@ -8357,7 +4862,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
         first1 = param0[1];
         l11 = first0;
         l21 = first1;
-        tmp = rewriteargs_inst_42_tsni(l21, term4);
+        tmp = boyer2.rewriteargs(l21, term4);
         arr = [
           l11,
           tmp
@@ -8369,7 +4874,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
           term4
         ];
         tmp3 = boyer2.getLUT(arr1);
-        return rewritewithlemmas_inst_41_tsni(tmp1, tmp3, term4)
+        return boyer2.rewritewithlemmas(tmp1, tmp3, term4)
       } else {
         throw new globalThis.Error("match error");
       }
@@ -8388,7 +4893,7 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
     tmp5 = NofibPrelude.stringConcat("( ( x f ( plus ( plus a b )( plus ", tmp4);
     str = tmp5;
     tmp6 = NofibPrelude.nofibStringToList(str);
-    tmp7 = strToToken_inst_43_tsni(tmp6);
+    tmp7 = strToToken_inst_37_38_tsni(tmp6);
     return boyer2.mkLispList(tmp7)
   } 
   static report(b) {
@@ -8410,21 +4915,21 @@ lispListEq_inst_42_37_56_57_tsni = function lispListEq_inst_42_37_56_57_tsni(x, 
   } 
   static teststatement(i1) {
     let tmp;
-    tmp = subterm_inst_44_tsni(i1);
+    tmp = subterm_inst_39_40_tsni(i1);
     return boyer2.applysubst(tmp, boyer2.statement)
   } 
   static testresult(i2) {
     let tmp;
-    tmp = teststatement_inst_45_tsni(i2);
+    tmp = teststatement_inst_41_42_tsni(i2);
     return boyer2.tautp(tmp)
   } 
   static testBoyer2_nofib(n) {
     let tmp;
-    tmp = testresult_inst_46_tsni(n);
+    tmp = testresult_inst_43_44_tsni(n);
     return boyer2.report(tmp)
   } 
   static main() {
-    return testBoyer2_nofib_inst_47_tsni(3)
+    return testBoyer2_nofib_inst_45_46_tsni(3)
   }
   static toString() { return "boyer2"; }
 });

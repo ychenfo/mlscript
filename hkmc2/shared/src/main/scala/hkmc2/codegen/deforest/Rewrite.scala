@@ -43,6 +43,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
       (ctor, _) <- sol.resolveClashes._1
       instantiationId = ctor.instantiationId.get
       case instId@(_ :+ invokedReferSite) <- instantiationId.scanLeft(Nil)(_ :+ _)
+      if !preAnalyzer.dummyRefsInstantiationIds.contains(instId)
     do instIdToMappingFromOldToNewSyms.getOrElseUpdate.curried(instId):
       val invokedFunSym = preAnalyzer.getReferredFunSym(invokedReferSite)
       val recursiveGroupFunSym = sol.collector.funSymToProdStratScheme.recursiveGroups(invokedFunSym)
@@ -62,6 +63,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
         case f: FieldSel => f.instantiationId.get
         case d: Dtor => d.instantiationId.get
       case instId@(_ :+ invokedReferSite) <- instantiationId.scanLeft(Nil)(_ :+ _)
+      if !preAnalyzer.dummyRefsInstantiationIds.contains(instId)
     do instIdToMappingFromOldToNewSyms.getOrElseUpdate.curried(instId):
       val invokedFunSym = preAnalyzer.getReferredFunSym(invokedReferSite)
       val recursiveGroupFunSym = sol.collector.funSymToProdStratScheme.recursiveGroups(invokedFunSym)
@@ -120,7 +122,10 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
         case S(s) => S(s + ctorExprId)
       ctorIdToFinalDest.updateWith(ctorExprId): 
         case N => S(ctorFinalDest)
-        case S(x) => S(x) // FIXME:
+        case S(x) => die
+          // assert(x == ctorFinalDest)
+          // S(x)
+          // S(x) // FIXME:
   
   val rewritingMatchIds -> rewritingSelIds = finalDestToCtorIds.keySet.partitionMap:
     case FinalDest.Match(matchId, _) => L(matchId)
@@ -377,10 +382,11 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
       val dest = rewritePrepare.ctorIdToFinalDest(ctorId).asInstanceOf[FinalDest.Match]
       val freeVarsInTheMatch =
         rewritePrepare.freeVarsOfOriginalMatchesConsideringDeforestation(dest.matchId)
-      val armFunOrBlk = store.updateWith(dest):
-        case S(R(_)) => die
-        case S(f@L(_)) => S(f)
-        case N => S:
+      val exist = store.get(dest)
+      val armFunOrBlk = exist match
+        case Some(R(a)) => lastWords(s"$a in ${dest.matchId._2.toReadableCallPath(preAnalyzer)}")
+        case Some(f@L(_)) => f
+        case None =>
           val transformedRest = matchRestOfFusingMatches.getOrElseUpdate(dest.matchId)
           val originalMatchArmBody =
             val matchExpr = preAnalyzer.matchScrutToMatchBlock(dest.matchId._1)
@@ -393,7 +399,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           // the pre-computed var symbols (if the arm is used multiple times)
           // or the temp symbols (if the arm is used only once)
           val rewrittenBody = Begin(Transform(dest.matchId._2)(originalMatchArmBody), transformedRest).flattened
-          rewritePrepare.finalDestToMatchArmFunSymbols.get(dest) match
+          val res = rewritePrepare.finalDestToMatchArmFunSymbols.get(dest) match
             case N => R(rewrittenBody)
             case Some(funSym) =>
               val freeVarSymForFunDef = freeVarsInTheMatch.map: x =>
@@ -413,9 +419,13 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
                 funSym,
                 (freeVarSymForFunDef ::: varSymbolsThatReplacedSelections).asParamList :: Nil,
                 funBody))
+          store.updateWith(dest):
+            case None => S(res)
+            case Some(x) => lastWords(s"already exist? $x")
+          res
       val symsForArmFreeVarsInLam = freeVarsInTheMatch.map: x =>
         VarSymbol(Tree.Ident(x.nme))
-      armFunOrBlk.get match
+      armFunOrBlk match
         case L(fdefn) => Value.Lam(
           symsForArmFreeVarsInLam.asParamList,
           Return(
@@ -551,11 +561,36 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     
     override def applyFunDefn(fun: FunDefn): FunDefn =
       if instId.isEmpty then
-        super.applyFunDefn(fun)
+        preAnalyzer.dummyRefsToTopLevelLikeFuns.get(fun.sym) match
+          case Some(ref) =>
+            // val FunDefn(_, _, param, body) = preAnalyzer.getTopLevelFunDefnForSym(oldSym).get
+            val param = fun.params
+            val body = fun.body
+            val oldToNewParam = mutable.Map.empty[VarSymbol, VarSymbol]
+            val newParam = param.map: 
+              case ParamList(flags, params, restParam) =>
+                def makeNewParam(p: Param) = 
+                  val Param(flags, sym, sign, modulefulness) = p
+                  val newSym = VarSymbol(sym.id)
+                  oldToNewParam += sym -> newSym
+                  Param(flags, newSym, sign, modulefulness)
+                val newParams = params.map(makeNewParam)
+                val newRestParam = restParam.map(makeNewParam)
+                ParamList(flags, newParams, newRestParam)
+            val newBody = Transform(ref.uid :: Nil)(body).replaceSymbols(oldToNewParam.toMap)
+            // the owner is `N` because duplicated functions shouldn't be inside any module
+            FunDefn(fun.owner, fun.sym, newParam, newBody)
+            // Transform(ref.uid :: Nil).applyFunDefn(fun)
+          case None => fun // skip other top level functions
+        
+        // super.applyFunDefn(fun)
         // fun // skip top level functions // TODO: should not skip, should rewrite their body inplace
+        // Transform()
       else
         super.applyFunDefn(fun)
-    def apply(b: Block) = applyBlock(b)
+    def apply(b: Block) =
+      // println(s"transforming ${instId.toReadableCallPath(preAnalyzer)}")
+      applyBlock(b)
 
 
 
@@ -735,6 +770,8 @@ extension (ss: Ls[Symbol])
 extension (instId: InstantiationId)
   def makeSuffix(preAnalyzer: DeforestPreAnalyzer) =
     "inst_" + instId.map(preAnalyzer.getStableResultId).mkString("_") + "_tsni"
+  def toReadableCallPath(preAnalyzer: DeforestPreAnalyzer) =
+    instId.map(x => preAnalyzer.getReferredFunSym(x).nme).mkString("_")
 
 extension (clsSym: ClassSymbol)
   def getClsParamNames(pre: DeforestPreAnalyzer) =

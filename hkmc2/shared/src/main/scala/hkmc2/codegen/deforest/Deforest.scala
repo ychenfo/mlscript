@@ -59,11 +59,11 @@ object Deforest:
   
   def deforestImport2(path: Str, wd: os.Path)(using
     cfg: Config,
-    tl: TL,
     raise: Raise,
     st: State,
     elabSt: Elaborator.State,
   ): ImportedInfo =
+    given TraceLogger = new TraceLogger{override def doTrace: Bool = false}
     val file =
       if path.startsWith("/")
       then os.Path(path)
@@ -116,6 +116,7 @@ object Deforest:
         deforestImport2(path.replace(".mjs", ".mls"), wd)
     try
       val pre = new DeforestPreAnalyzer(p.main, importedInfo)
+      // println(pre.dummyRefsToTopLevelLikeFuns.view.mapValues(v => v.uid).toMap)
       val col = new DeforestConstraintsCollector(pre)
       val ana = new DeforestConstrainSolver(col)
       val rwp = new DeforestRewritePrepare(ana)
@@ -134,6 +135,11 @@ object Deforest:
           " --> " +
           dest.toString(pre)
         .mkString("\n")
+      // println(detail)
+      // println("++++++++++++++++")
+      // println(summary)
+      // println("++++++++++++++++")
+      // println(rwp.ctorIdToFinalDest)
       val deforestRes = rw()
       L:
         Program(p.imports, deforestRes) -> summary -> detail

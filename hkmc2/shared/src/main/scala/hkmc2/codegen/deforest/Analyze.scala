@@ -33,11 +33,20 @@ sealed abstract class ProdStrat
 case class ProdVar(s: StratVarState) extends ProdStrat with StratVar(s)
 case class ProdFun(params: Ls[ConsStrat], res: ProdStrat) extends ProdStrat
 case object NoProd extends ProdStrat
+
+// val UNIQE = mutable.Set.empty[CtorId]
+// def register(c: Ctor)(using pre: DeforestPreAnalyzer) =
+//   c.instantiationId match
+//     case None => ()
+//     case Some(instId) => 
+//       if !UNIQE.add(c.exprId -> instId) then lastWords(s"${c.ctor}@${instId.toReadableCallPath(pre)} again")
+
 class Ctor(
   val exprId: ResultId,
   val instantiationId: Opt[InstantiationId],
   val ctor: ClassLikeSymbol,
-  val args: Ls[TermSymbol -> ProdStrat]) extends ProdStrat
+  val args: Ls[TermSymbol -> ProdStrat])(using pre: DeforestPreAnalyzer) extends ProdStrat
+    // register(this)
 
 sealed abstract class ConsStrat
 case class ConsVar(s: StratVarState) extends ConsStrat with StratVar(s)
@@ -57,7 +66,8 @@ class Dtor(
   val instantiationId: Opt[InstantiationId]) extends ConsStrat
 
 class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat]):
-  def instantiate(referSite: ResultId)(using d: DeforestConstraintsCollector, cc: d.ConstraintsAndCacheHitCollector): ProdVar =
+  def instantiate(referSite: ResultId)(using d: DeforestConstraintsCollector, cc: d.ConstraintsAndCacheHitCollector): ProdVar = d.preAnalyzer.tl.trace(s"inst ${d.preAnalyzer.getReferredFunSym(referSite)} under ${cc.forFun}"):
+    given DeforestPreAnalyzer = d.preAnalyzer
     val instantiatingFunSym = d.preAnalyzer.getResult(referSite) match
       case Value.Ref(l) => l.asBlkMember.get
       case s: Select => s.symbol.flatMap(_.asBlkMember).get
@@ -104,7 +114,7 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
 class DeforestPreAnalyzer(
   val b: Block,
   val importedInfo: ImportedInfo
-)(using val elabState: Elaborator.State) extends BlockTraverser:
+)(using val elabState: Elaborator.State, val tl: TraceLogger) extends BlockTraverser:
   given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
   
@@ -114,6 +124,8 @@ class DeforestPreAnalyzer(
   // - exported module functions
   // and their corresponding correct root instantiation id?
   var topLevelLikeComputations: Ls[Block | FunDefn] = Nil
+  var dummyRefsToTopLevelLikeFuns = Map.empty[BlockMemberSymbol, Value.Ref]
+  lazy val dummyRefsInstantiationIds: Set[InstantiationId] = dummyRefsToTopLevelLikeFuns.values.map(_.uid :: Nil).toSet
   object arrBlkMemSym:
     val store = mutable.Map.empty[Int, ClassSymbol]
     def apply(n: Int) = store.getOrElseUpdate.curried(n):
@@ -171,6 +183,9 @@ class DeforestPreAnalyzer(
       topLevelFunSymToFun += fun.sym -> fun
     if !imported && shouldConsiderFunDefn && handleable then
       topLevelLikeComputations ::= fun
+      val dummyRef = Value.Ref(fun.sym)
+      resultIdToResult += dummyRef.uid -> dummyRef
+      dummyRefsToTopLevelLikeFuns += fun.sym -> dummyRef.asInstanceOf[Value.Ref]
   private def isPrivatelyDefined(s: Symbol) =
     imported && importedInfo.privateSymbols.contains(s)
   override def applyFunDefn(fun: FunDefn): Unit =
@@ -286,6 +301,7 @@ class DeforestPreAnalyzer(
 class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   given stratVarUidState: Uid.StratVar.State = preAnalyzer.stratVarUidState
   given elabState: Elaborator.State = preAnalyzer.elabState
+  given DeforestPreAnalyzer = preAnalyzer
   import StratVarState.freshVar
   
   val constraints = processTopLevel
@@ -314,26 +330,29 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                 cc.hit(h)
               preAnalyzer.getProdVarForSym(sym)
             case Nil => 
-              // start processing this function, if the cache hit contains the currently processing defs functions
-              // then: 1. the referred function belongs to the same recursion group and need to share the constraints 2. return the prodvar
-              // else: we found a new recursive group, for each member of the group, update the store with the correct type scheme and return the type scheme
-              val newcc = processFunDefn(funDefn, processingDefs)
-              if newcc.trackedFunctionSymbolsInOneRecGroup.exists(x => processingDefs.contains(x)) then
-                cc.hit(newcc.trackedFunctionSymbolsInOneRecGroup)
-                cc.constrain(newcc.constraints)
-                processingDefs.headOption.foreach: h =>
-                  cc.hit(h)
+              if cc.trackedFunctionSymbolsInOneRecGroup.contains(s) then
                 preAnalyzer.getProdVarForSym(s)
               else
-                val recursiveGroupMembers = (s :: newcc.trackedFunctionSymbolsInOneRecGroup).distinct
-                recursiveGroupMembers.foreach: f =>
-                  store.updateWith(f):
-                    case N => S(ProdStratScheme(preAnalyzer.getProdVarForSym(f).s, newcc.constraints))
-                    case S(_) => die // this means the scc is not computed corrrectely
-                  recursiveGroups.updateWith(f):
-                    case N => S(recursiveGroupMembers)
-                    case S(_) => die // this means the scc is not computed corrrectely
-                store(s)
+                // start processing this function, if the cache hit contains the currently processing defs functions
+                // then: 1. the referred function belongs to the same recursion group and need to share the constraints 2. return the prodvar
+                // else: we found a new recursive group, for each member of the group, update the store with the correct type scheme and return the type scheme
+                val newcc = processFunDefn(funDefn, processingDefs)
+                if newcc.trackedFunctionSymbolsInOneRecGroup.exists(x => processingDefs.contains(x)) then
+                  cc.hit(newcc.trackedFunctionSymbolsInOneRecGroup)
+                  cc.constrain(newcc.constraints)
+                  processingDefs.headOption.foreach: h =>
+                    cc.hit(h)
+                  preAnalyzer.getProdVarForSym(s)
+                else
+                  val recursiveGroupMembers = (s :: newcc.trackedFunctionSymbolsInOneRecGroup).distinct
+                  recursiveGroupMembers.foreach: f =>
+                    store.updateWith(f):
+                      case N => S(ProdStratScheme(preAnalyzer.getProdVarForSym(f).s, newcc.constraints))
+                      case S(_) => die // this means the scc is not computed corrrectely
+                    recursiveGroups.updateWith(f):
+                      case N => S(recursiveGroupMembers)
+                      case S(_) => die // this means the scc is not computed corrrectely
+                  store(s)
             case _ => die // die if something occurs twice in the processing list
   
   def processTopLevel: Ls[ProdStrat -> ConsStrat] =
@@ -346,11 +365,10 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     
     preAnalyzer.topLevelLikeComputations.foreach: 
       case b: Block => processBlock(b)(using Nil, cc)
-      case FunDefn(_, _, params, body) =>
-        params.head.params.foreach: // TODO: handle multiple param list and the `restParam`
-          case Param(sym = sym, _) => cc.constrain(NoProd, preAnalyzer.getProdVarForSym(sym).asConsStrat)
-        val bodyStrat = processBlock(body)(using Nil, cc)
+      case FunDefn(_, sym, params, body) =>
+        val bodyStrat = processResult(preAnalyzer.dummyRefsToTopLevelLikeFuns(sym))(using Nil, cc).asInstanceOf[ProdVar]
         cc.constrain(bodyStrat, NoCons)
+        cc.constrain(NoProd, bodyStrat.asConsStrat)
     
     preAnalyzer.usedFunSyms
       .diff(preAnalyzer.topLevelDefinedFunSyms)
@@ -440,7 +458,6 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     val generatedForDef = cc.forFun
     val instantiationId = cc.forFun.fold(S(Nil))(_ => N)
     def handleCallLike(f: Path, args: Ls[Path], c: Result): ProdStrat =
-      val argsTpe = args.map(processResult)
       def lookThroughLazy(args: Ls[Path]) =
         args match
           case (arg@Value.Ref(lamSym: BlockMemberSymbol)) :: Nil =>
@@ -468,6 +485,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
         case Value.Ref(l) if preAnalyzer.importedInfo.lazySymbols.contains(l) =>
           lookThroughLazy(args)
         case s@Select(p, nme) =>
+          val argsTpe = args.map(processResult)
           s.symbol.map(_.asCls) match
             case None =>
               val pStrat = processResult(p)
@@ -493,6 +511,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
               val clsFields = s.tree.clsParams
               new Ctor(c.uid, instantiationId, s, clsFields.zip(argsTpe))
         case Value.Ref(funSym) =>
+          val argsTpe = args.map(processResult)
           funSym.asCls match
             case Some(s) =>
               val clsFields = s.tree.clsParams
@@ -510,6 +529,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                       cc.constrain(instantiated, ConsFun(argsTpe, appRes.asConsStrat))
               appRes.asProdStrat
         case lam@Value.Lam(params, body) =>
+          val argsTpe = args.map(processResult)
           val funTpe = processResult(lam)
           val appRes = freshVar("call_lam_res", generatedForDef)
           cc.constrain(funTpe, ConsFun(argsTpe, appRes.asConsStrat))
@@ -701,8 +721,11 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
     // remove clashes
     for
       (rm, dtors -> noCons) <- ctorToDtor
+      _ = assert(rm.instantiationId.isDefined)
       (mats, sels) = dtors.partitionMap:
-        case d: Dtor => L(d)
+        case d: Dtor =>
+          assert(d.instantiationId.isDefined)
+          L(d)
         case s: FieldSel => R(s)
       if noCons || !locally:
         mats.size == 0 && sels.size == 1 ||

@@ -2,27 +2,7 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let mandel1, mandel_inst_0_tsni, comp_times_inst_0_1_tsni, parallelMandel_inst_2_tsni, whenDiverge_inst_2_3_tsni, mandel_inst_2_3_0_tsni, comp_times_inst_2_3_0_1_tsni, map_inst_2_4_tsni, mandelset_inst_5_tsni, enumFromTo_inst_5_6_tsni, enumFromTo_inst_5_7_tsni, parallelMandel_inst_5_2_tsni, whenDiverge_inst_5_2_3_tsni, mandel_inst_5_2_3_0_tsni, comp_times_inst_5_2_3_0_1_tsni, map_inst_5_2_4_tsni, testMandel_nofib_inst_8_tsni, mandelset_inst_8_5_tsni, parallelMandel_inst_8_5_2_tsni, whenDiverge_inst_8_5_2_3_tsni, mandel_inst_8_5_2_3_0_tsni, comp_times_inst_8_5_2_3_0_1_tsni, map_inst_8_5_2_4_tsni, enumFromTo_inst_8_5_6_tsni, enumFromTo_inst_8_5_7_tsni, comp_plus_inst_0_9_tsni, comp_plus_inst_2_3_0_9_tsni, map_inst_10_tsni, comp_plus_inst_5_2_3_0_9_tsni, map_inst_5_10_tsni, comp_plus_inst_8_5_2_3_0_9_tsni, map_inst_8_5_10_tsni;
-mandel_inst_0_tsni = function mandel_inst_0_tsni(c) {
-  let infiniteMandel;
-  infiniteMandel = function infiniteMandel() {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let tmp1, tmp2, lambda1;
-      tmp1 = infiniteMandel();
-      lambda1 = (undefined, function (z) {
-        let tmp3;
-        tmp3 = comp_times_inst_0_1_tsni(z, z);
-        return comp_plus_inst_0_9_tsni(tmp3, c)
-      });
-      tmp2 = NofibPrelude.map_lz(lambda1, tmp1);
-      return NofibPrelude.LzCons(c, tmp2)
-    });
-    tmp = lambda;
-    return NofibPrelude.lazy(tmp)
-  };
-  return infiniteMandel()
-};
+let mandel1, comp_times_inst_0_1_tsni, mandel_inst_2_3_tsni, comp_times_inst_2_3_1_tsni, whenDiverge_inst_4_5_tsni, mandel_inst_4_5_3_tsni, comp_times_inst_4_5_3_1_tsni, enumFromTo_inst_6_7_tsni, enumFromTo_inst_6_8_tsni, parallelMandel_inst_6_9_tsni, whenDiverge_inst_6_9_5_tsni, mandel_inst_6_9_5_3_tsni, comp_times_inst_6_9_5_3_1_tsni, map_inst_6_9_10_tsni, mandelset_inst_11_12_tsni, parallelMandel_inst_11_12_9_tsni, whenDiverge_inst_11_12_9_5_tsni, mandel_inst_11_12_9_5_3_tsni, comp_times_inst_11_12_9_5_3_1_tsni, map_inst_11_12_9_10_tsni, enumFromTo_inst_11_12_7_tsni, enumFromTo_inst_11_12_8_tsni, testMandel_nofib_inst_13_14_tsni, mandelset_inst_13_14_12_tsni, enumFromTo_inst_13_14_12_7_tsni, enumFromTo_inst_13_14_12_8_tsni, parallelMandel_inst_13_14_12_9_tsni, whenDiverge_inst_13_14_12_9_5_tsni, mandel_inst_13_14_12_9_5_3_tsni, comp_times_inst_13_14_12_9_5_3_1_tsni, map_inst_13_14_12_9_10_tsni, comp_plus_inst_0_15_tsni, comp_plus_inst_2_3_15_tsni, comp_plus_inst_4_5_3_15_tsni, comp_plus_inst_6_9_5_3_15_tsni, map_inst_6_16_tsni, comp_plus_inst_11_12_9_5_3_15_tsni, map_inst_11_12_16_tsni, comp_plus_inst_13_14_12_9_5_3_15_tsni, map_inst_13_14_12_16_tsni;
 comp_times_inst_0_1_tsni = function comp_times_inst_0_1_tsni(x, y) {
   let param0, param1, a, b, param01, param11, c, d, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Complex_r, _deforest_Complex_i;
   if (x instanceof mandel.Complex.class) {
@@ -68,41 +48,7 @@ comp_times_inst_0_1_tsni = function comp_times_inst_0_1_tsni(x, y) {
     throw new globalThis.Error("match error");
   }
 };
-parallelMandel_inst_2_tsni = function parallelMandel_inst_2_tsni(mat, limit, radius) {
-  let lambda;
-  lambda = (undefined, function (c) {
-    return whenDiverge_inst_2_3_tsni(limit, radius, c)
-  });
-  return map_inst_2_4_tsni(lambda, mat)
-};
-whenDiverge_inst_2_3_tsni = function whenDiverge_inst_2_3_tsni(limit, radius, c) {
-  let walkIt, tmp, tmp1;
-  walkIt = function walkIt(ls) {
-    let scrut, param0, param1, x, xs, scrut1, tmp2;
-    scrut = NofibPrelude.force(ls);
-    if (scrut instanceof NofibPrelude.LzNil.class) {
-      return 0
-    } else if (scrut instanceof NofibPrelude.LzCons.class) {
-      param0 = scrut.head;
-      param1 = scrut.tail;
-      x = param0;
-      xs = param1;
-      scrut1 = mandel.diverge(x, radius);
-      if (scrut1 === true) {
-        return 0
-      } else {
-        tmp2 = walkIt(xs);
-        return 1 + tmp2
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  };
-  tmp = mandel_inst_2_3_0_tsni(c);
-  tmp1 = NofibPrelude.take_lz_lz(limit, tmp);
-  return walkIt(tmp1)
-};
-mandel_inst_2_3_0_tsni = function mandel_inst_2_3_0_tsni(c) {
+mandel_inst_2_3_tsni = function mandel_inst_2_3_tsni(c) {
   let infiniteMandel;
   infiniteMandel = function infiniteMandel() {
     let tmp, lambda;
@@ -111,8 +57,8 @@ mandel_inst_2_3_0_tsni = function mandel_inst_2_3_0_tsni(c) {
       tmp1 = infiniteMandel();
       lambda1 = (undefined, function (z) {
         let tmp3;
-        tmp3 = comp_times_inst_2_3_0_1_tsni(z, z);
-        return comp_plus_inst_2_3_0_9_tsni(tmp3, c)
+        tmp3 = comp_times_inst_2_3_1_tsni(z, z);
+        return comp_plus_inst_2_3_15_tsni(tmp3, c)
       });
       tmp2 = NofibPrelude.map_lz(lambda1, tmp1);
       return NofibPrelude.LzCons(c, tmp2)
@@ -122,7 +68,7 @@ mandel_inst_2_3_0_tsni = function mandel_inst_2_3_0_tsni(c) {
   };
   return infiniteMandel()
 };
-comp_times_inst_2_3_0_1_tsni = function comp_times_inst_2_3_0_1_tsni(x, y) {
+comp_times_inst_2_3_1_tsni = function comp_times_inst_2_3_1_tsni(x, y) {
   let param0, param1, a, b, param01, param11, c, d, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Complex_r, _deforest_Complex_i;
   if (x instanceof mandel.Complex.class) {
     param0 = x.r;
@@ -167,35 +113,276 @@ comp_times_inst_2_3_0_1_tsni = function comp_times_inst_2_3_0_1_tsni(x, y) {
     throw new globalThis.Error("match error");
   }
 };
-map_inst_2_4_tsni = function map_inst_2_4_tsni(f, xs) {
-  let param0, param1, x, xs1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = runtime.safeCall(f(x));
-    tmp1 = map_inst_2_4_tsni(f, xs1);
-    _deforest_Cons_head = tmp;
-    _deforest_Cons_tail = tmp1;
-    return (f1) => {
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
+whenDiverge_inst_4_5_tsni = function whenDiverge_inst_4_5_tsni(limit, radius, c) {
+  let walkIt, tmp, tmp1;
+  walkIt = function walkIt(ls) {
+    let scrut, param0, param1, x, xs, scrut1, tmp2;
+    scrut = NofibPrelude.force(ls);
+    if (scrut instanceof NofibPrelude.LzNil.class) {
+      return 0
+    } else if (scrut instanceof NofibPrelude.LzCons.class) {
+      param0 = scrut.head;
+      param1 = scrut.tail;
       x = param0;
-      xs1 = param1;
-      tmp = runtime.safeCall(f1(x));
-      tmp1 = map_inst_10_tsni(f1, xs1);
-      return NofibPrelude.Cons(tmp, tmp1)
+      xs = param1;
+      scrut1 = mandel.diverge(x, radius);
+      if (scrut1 === true) {
+        return 0
+      } else {
+        tmp2 = walkIt(xs);
+        return 1 + tmp2
+      }
+    } else {
+      throw new globalThis.Error("match error");
     }
-  } else if (xs instanceof NofibPrelude.Nil.class) {
-    return (f1) => {
-      return NofibPrelude.Nil
+  };
+  tmp = mandel_inst_4_5_3_tsni(c);
+  tmp1 = NofibPrelude.take_lz_lz(limit, tmp);
+  return walkIt(tmp1)
+};
+mandel_inst_4_5_3_tsni = function mandel_inst_4_5_3_tsni(c) {
+  let infiniteMandel;
+  infiniteMandel = function infiniteMandel() {
+    let tmp, lambda;
+    lambda = (undefined, function () {
+      let tmp1, tmp2, lambda1;
+      tmp1 = infiniteMandel();
+      lambda1 = (undefined, function (z) {
+        let tmp3;
+        tmp3 = comp_times_inst_4_5_3_1_tsni(z, z);
+        return comp_plus_inst_4_5_3_15_tsni(tmp3, c)
+      });
+      tmp2 = NofibPrelude.map_lz(lambda1, tmp1);
+      return NofibPrelude.LzCons(c, tmp2)
+    });
+    tmp = lambda;
+    return NofibPrelude.lazy(tmp)
+  };
+  return infiniteMandel()
+};
+comp_times_inst_4_5_3_1_tsni = function comp_times_inst_4_5_3_1_tsni(x, y) {
+  let param0, param1, a, b, param01, param11, c, d, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Complex_r, _deforest_Complex_i;
+  if (x instanceof mandel.Complex.class) {
+    param0 = x.r;
+    param1 = x.i;
+    a = param0;
+    b = param1;
+    if (y instanceof mandel.Complex.class) {
+      param01 = y.r;
+      param11 = y.i;
+      c = param01;
+      d = param11;
+      tmp = a * c;
+      tmp1 = b * d;
+      tmp2 = tmp - tmp1;
+      tmp3 = a * d;
+      tmp4 = b * c;
+      tmp5 = tmp3 + tmp4;
+      _deforest_Complex_r = tmp2;
+      _deforest_Complex_i = tmp5;
+      return (y1) => {
+        let param02, param12, a1, b1, param03, param13, c1, d1, tmp6, tmp7;
+        param02 = _deforest_Complex_r;
+        param12 = _deforest_Complex_i;
+        a1 = param02;
+        b1 = param12;
+        if (y1 instanceof mandel.Complex.class) {
+          param03 = y1.r;
+          param13 = y1.i;
+          c1 = param03;
+          d1 = param13;
+          tmp6 = a1 + c1;
+          tmp7 = b1 + d1;
+          return mandel.Complex(tmp6, tmp7)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      }
+    } else {
+      throw new globalThis.Error("match error");
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-mandelset_inst_5_tsni = function mandelset_inst_5_tsni(x, y, x_, y_, screenX, screenY, lIMIT) {
+enumFromTo_inst_6_7_tsni = function enumFromTo_inst_6_7_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_6_7_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
+      let param0, param1, s, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      s = param0;
+      t2 = param1;
+      tmp2 = windowToViewport(s, t);
+      tmp3 = lscomp2(t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
+      return (f) => {
+        let param01, param11, x, xs, tmp4, tmp5, _deforest_Cons_head2, _deforest_Cons_tail2;
+        param01 = _deforest_Cons_head1;
+        param11 = _deforest_Cons_tail1;
+        x = param01;
+        xs = param11;
+        tmp4 = runtime.safeCall(f(x));
+        tmp5 = map_inst_6_9_10_tsni(f, xs);
+        _deforest_Cons_head2 = tmp4;
+        _deforest_Cons_tail2 = tmp5;
+        return (f1) => {
+          param01 = _deforest_Cons_head2;
+          param11 = _deforest_Cons_tail2;
+          x = param01;
+          xs = param11;
+          tmp4 = runtime.safeCall(f1(x));
+          tmp5 = map_inst_6_16_tsni(f1, xs);
+          return NofibPrelude.Cons(tmp4, tmp5)
+        }
+      }
+    }
+  } else {
+    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
+      return lscomp1(t1)
+    }
+  }
+};
+enumFromTo_inst_6_8_tsni = function enumFromTo_inst_6_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_6_8_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (windowToViewport, lscomp1, screenX) => {
+      let lscomp2, param0, param1, t, t1, tmp2;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      t = param0;
+      t1 = param1;
+      lscomp2 = function lscomp2(ls2) {
+        return runtime.safeCall(ls2(lscomp2, windowToViewport, lscomp1, t, t1))
+      };
+      tmp2 = enumFromTo_inst_6_7_tsni(1, screenX);
+      return lscomp2(tmp2)
+    }
+  } else {
+    return (windowToViewport, lscomp1, screenX) => {
+      return (f) => {
+        return (f1) => {
+          return NofibPrelude.Nil
+        }
+      }
+    }
+  }
+};
+parallelMandel_inst_6_9_tsni = function parallelMandel_inst_6_9_tsni(mat, limit, radius) {
+  let lambda;
+  lambda = (undefined, function (c) {
+    return whenDiverge_inst_6_9_5_tsni(limit, radius, c)
+  });
+  return map_inst_6_9_10_tsni(lambda, mat)
+};
+whenDiverge_inst_6_9_5_tsni = function whenDiverge_inst_6_9_5_tsni(limit, radius, c) {
+  let walkIt, tmp, tmp1;
+  walkIt = function walkIt(ls) {
+    let scrut, param0, param1, x, xs, scrut1, tmp2;
+    scrut = NofibPrelude.force(ls);
+    if (scrut instanceof NofibPrelude.LzNil.class) {
+      return 0
+    } else if (scrut instanceof NofibPrelude.LzCons.class) {
+      param0 = scrut.head;
+      param1 = scrut.tail;
+      x = param0;
+      xs = param1;
+      scrut1 = mandel.diverge(x, radius);
+      if (scrut1 === true) {
+        return 0
+      } else {
+        tmp2 = walkIt(xs);
+        return 1 + tmp2
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  };
+  tmp = mandel_inst_6_9_5_3_tsni(c);
+  tmp1 = NofibPrelude.take_lz_lz(limit, tmp);
+  return walkIt(tmp1)
+};
+mandel_inst_6_9_5_3_tsni = function mandel_inst_6_9_5_3_tsni(c) {
+  let infiniteMandel;
+  infiniteMandel = function infiniteMandel() {
+    let tmp, lambda;
+    lambda = (undefined, function () {
+      let tmp1, tmp2, lambda1;
+      tmp1 = infiniteMandel();
+      lambda1 = (undefined, function (z) {
+        let tmp3;
+        tmp3 = comp_times_inst_6_9_5_3_1_tsni(z, z);
+        return comp_plus_inst_6_9_5_3_15_tsni(tmp3, c)
+      });
+      tmp2 = NofibPrelude.map_lz(lambda1, tmp1);
+      return NofibPrelude.LzCons(c, tmp2)
+    });
+    tmp = lambda;
+    return NofibPrelude.lazy(tmp)
+  };
+  return infiniteMandel()
+};
+comp_times_inst_6_9_5_3_1_tsni = function comp_times_inst_6_9_5_3_1_tsni(x, y) {
+  let param0, param1, a, b, param01, param11, c, d, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Complex_r, _deforest_Complex_i;
+  if (x instanceof mandel.Complex.class) {
+    param0 = x.r;
+    param1 = x.i;
+    a = param0;
+    b = param1;
+    if (y instanceof mandel.Complex.class) {
+      param01 = y.r;
+      param11 = y.i;
+      c = param01;
+      d = param11;
+      tmp = a * c;
+      tmp1 = b * d;
+      tmp2 = tmp - tmp1;
+      tmp3 = a * d;
+      tmp4 = b * c;
+      tmp5 = tmp3 + tmp4;
+      _deforest_Complex_r = tmp2;
+      _deforest_Complex_i = tmp5;
+      return (y1) => {
+        let param02, param12, a1, b1, param03, param13, c1, d1, tmp6, tmp7;
+        param02 = _deforest_Complex_r;
+        param12 = _deforest_Complex_i;
+        a1 = param02;
+        b1 = param12;
+        if (y1 instanceof mandel.Complex.class) {
+          param03 = y1.r;
+          param13 = y1.i;
+          c1 = param03;
+          d1 = param13;
+          tmp6 = a1 + c1;
+          tmp7 = b1 + d1;
+          return mandel.Complex(tmp6, tmp7)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+map_inst_6_9_10_tsni = function map_inst_6_9_10_tsni(f, xs) {
+  return runtime.safeCall(xs(f))
+};
+mandelset_inst_11_12_tsni = function mandelset_inst_11_12_tsni(x, y, x_, y_, screenX, screenY, lIMIT) {
   let windowToViewport, lscomp1, prettyRGB, result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
   prettyRGB = function prettyRGB(s) {
     let t, tmp8, arr;
@@ -223,100 +410,25 @@ mandelset_inst_5_tsni = function mandelset_inst_5_tsni(x, y, x_, y_, screenX, sc
   lscomp1 = function lscomp1(ls1) {
     return runtime.safeCall(ls1(windowToViewport, lscomp1, screenX))
   };
-  tmp = enumFromTo_inst_5_7_tsni(1, screenY);
+  tmp = enumFromTo_inst_11_12_8_tsni(1, screenY);
   tmp1 = lscomp1(tmp);
   tmp2 = x_ - x;
   tmp3 = y_ - y;
   tmp4 = NofibPrelude.max(tmp2, tmp3);
   tmp5 = tmp4 / 2;
-  tmp6 = parallelMandel_inst_5_2_tsni(tmp1, lIMIT, tmp5);
+  tmp6 = parallelMandel_inst_11_12_9_tsni(tmp1, lIMIT, tmp5);
   result = tmp6;
-  tmp7 = map_inst_5_10_tsni(prettyRGB, result);
+  tmp7 = map_inst_11_12_16_tsni(prettyRGB, result);
   return mandel.createPixmap(screenX, screenY, lIMIT, tmp7)
 };
-enumFromTo_inst_5_6_tsni = function enumFromTo_inst_5_6_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  scrut = a <= b;
-  if (scrut === true) {
-    tmp = a + 1;
-    tmp1 = enumFromTo_inst_5_6_tsni(tmp, b);
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = tmp1;
-    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
-      let param0, param1, s, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1;
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
-      s = param0;
-      t2 = param1;
-      tmp2 = windowToViewport(s, t);
-      tmp3 = lscomp2(t2);
-      _deforest_Cons_head1 = tmp2;
-      _deforest_Cons_tail1 = tmp3;
-      return (f) => {
-        let param01, param11, x, xs, tmp4, tmp5, _deforest_Cons_head2, _deforest_Cons_tail2;
-        param01 = _deforest_Cons_head1;
-        param11 = _deforest_Cons_tail1;
-        x = param01;
-        xs = param11;
-        tmp4 = runtime.safeCall(f(x));
-        tmp5 = map_inst_5_2_4_tsni(f, xs);
-        _deforest_Cons_head2 = tmp4;
-        _deforest_Cons_tail2 = tmp5;
-        return (f1) => {
-          param01 = _deforest_Cons_head2;
-          param11 = _deforest_Cons_tail2;
-          x = param01;
-          xs = param11;
-          tmp4 = runtime.safeCall(f1(x));
-          tmp5 = map_inst_5_10_tsni(f1, xs);
-          return NofibPrelude.Cons(tmp4, tmp5)
-        }
-      }
-    }
-  } else {
-    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
-      return lscomp1(t1)
-    }
-  }
-};
-enumFromTo_inst_5_7_tsni = function enumFromTo_inst_5_7_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  scrut = a <= b;
-  if (scrut === true) {
-    tmp = a + 1;
-    tmp1 = enumFromTo_inst_5_7_tsni(tmp, b);
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = tmp1;
-    return (windowToViewport, lscomp1, screenX) => {
-      let lscomp2, param0, param1, t, t1, tmp2;
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
-      t = param0;
-      t1 = param1;
-      lscomp2 = function lscomp2(ls2) {
-        return runtime.safeCall(ls2(lscomp2, windowToViewport, lscomp1, t, t1))
-      };
-      tmp2 = enumFromTo_inst_5_6_tsni(1, screenX);
-      return lscomp2(tmp2)
-    }
-  } else {
-    return (windowToViewport, lscomp1, screenX) => {
-      return (f) => {
-        return (f1) => {
-          return NofibPrelude.Nil
-        }
-      }
-    }
-  }
-};
-parallelMandel_inst_5_2_tsni = function parallelMandel_inst_5_2_tsni(mat, limit, radius) {
+parallelMandel_inst_11_12_9_tsni = function parallelMandel_inst_11_12_9_tsni(mat, limit, radius) {
   let lambda;
   lambda = (undefined, function (c) {
-    return whenDiverge_inst_5_2_3_tsni(limit, radius, c)
+    return whenDiverge_inst_11_12_9_5_tsni(limit, radius, c)
   });
-  return map_inst_5_2_4_tsni(lambda, mat)
+  return map_inst_11_12_9_10_tsni(lambda, mat)
 };
-whenDiverge_inst_5_2_3_tsni = function whenDiverge_inst_5_2_3_tsni(limit, radius, c) {
+whenDiverge_inst_11_12_9_5_tsni = function whenDiverge_inst_11_12_9_5_tsni(limit, radius, c) {
   let walkIt, tmp, tmp1;
   walkIt = function walkIt(ls) {
     let scrut, param0, param1, x, xs, scrut1, tmp2;
@@ -339,11 +451,11 @@ whenDiverge_inst_5_2_3_tsni = function whenDiverge_inst_5_2_3_tsni(limit, radius
       throw new globalThis.Error("match error");
     }
   };
-  tmp = mandel_inst_5_2_3_0_tsni(c);
+  tmp = mandel_inst_11_12_9_5_3_tsni(c);
   tmp1 = NofibPrelude.take_lz_lz(limit, tmp);
   return walkIt(tmp1)
 };
-mandel_inst_5_2_3_0_tsni = function mandel_inst_5_2_3_0_tsni(c) {
+mandel_inst_11_12_9_5_3_tsni = function mandel_inst_11_12_9_5_3_tsni(c) {
   let infiniteMandel;
   infiniteMandel = function infiniteMandel() {
     let tmp, lambda;
@@ -352,8 +464,8 @@ mandel_inst_5_2_3_0_tsni = function mandel_inst_5_2_3_0_tsni(c) {
       tmp1 = infiniteMandel();
       lambda1 = (undefined, function (z) {
         let tmp3;
-        tmp3 = comp_times_inst_5_2_3_0_1_tsni(z, z);
-        return comp_plus_inst_5_2_3_0_9_tsni(tmp3, c)
+        tmp3 = comp_times_inst_11_12_9_5_3_1_tsni(z, z);
+        return comp_plus_inst_11_12_9_5_3_15_tsni(tmp3, c)
       });
       tmp2 = NofibPrelude.map_lz(lambda1, tmp1);
       return NofibPrelude.LzCons(c, tmp2)
@@ -363,7 +475,7 @@ mandel_inst_5_2_3_0_tsni = function mandel_inst_5_2_3_0_tsni(c) {
   };
   return infiniteMandel()
 };
-comp_times_inst_5_2_3_0_1_tsni = function comp_times_inst_5_2_3_0_1_tsni(x, y) {
+comp_times_inst_11_12_9_5_3_1_tsni = function comp_times_inst_11_12_9_5_3_1_tsni(x, y) {
   let param0, param1, a, b, param01, param11, c, d, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Complex_r, _deforest_Complex_i;
   if (x instanceof mandel.Complex.class) {
     param0 = x.r;
@@ -408,10 +520,85 @@ comp_times_inst_5_2_3_0_1_tsni = function comp_times_inst_5_2_3_0_1_tsni(x, y) {
     throw new globalThis.Error("match error");
   }
 };
-map_inst_5_2_4_tsni = function map_inst_5_2_4_tsni(f, xs) {
+map_inst_11_12_9_10_tsni = function map_inst_11_12_9_10_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-testMandel_nofib_inst_8_tsni = function testMandel_nofib_inst_8_tsni(dummy) {
+enumFromTo_inst_11_12_7_tsni = function enumFromTo_inst_11_12_7_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_11_12_7_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
+      let param0, param1, s, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      s = param0;
+      t2 = param1;
+      tmp2 = windowToViewport(s, t);
+      tmp3 = lscomp2(t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
+      return (f) => {
+        let param01, param11, x, xs, tmp4, tmp5, _deforest_Cons_head2, _deforest_Cons_tail2;
+        param01 = _deforest_Cons_head1;
+        param11 = _deforest_Cons_tail1;
+        x = param01;
+        xs = param11;
+        tmp4 = runtime.safeCall(f(x));
+        tmp5 = map_inst_11_12_9_10_tsni(f, xs);
+        _deforest_Cons_head2 = tmp4;
+        _deforest_Cons_tail2 = tmp5;
+        return (f1) => {
+          param01 = _deforest_Cons_head2;
+          param11 = _deforest_Cons_tail2;
+          x = param01;
+          xs = param11;
+          tmp4 = runtime.safeCall(f1(x));
+          tmp5 = map_inst_11_12_16_tsni(f1, xs);
+          return NofibPrelude.Cons(tmp4, tmp5)
+        }
+      }
+    }
+  } else {
+    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
+      return lscomp1(t1)
+    }
+  }
+};
+enumFromTo_inst_11_12_8_tsni = function enumFromTo_inst_11_12_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_11_12_8_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (windowToViewport, lscomp1, screenX) => {
+      let lscomp2, param0, param1, t, t1, tmp2;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      t = param0;
+      t1 = param1;
+      lscomp2 = function lscomp2(ls2) {
+        return runtime.safeCall(ls2(lscomp2, windowToViewport, lscomp1, t, t1))
+      };
+      tmp2 = enumFromTo_inst_11_12_7_tsni(1, screenX);
+      return lscomp2(tmp2)
+    }
+  } else {
+    return (windowToViewport, lscomp1, screenX) => {
+      return (f) => {
+        return (f1) => {
+          return NofibPrelude.Nil
+        }
+      }
+    }
+  }
+};
+testMandel_nofib_inst_13_14_tsni = function testMandel_nofib_inst_13_14_tsni(dummy) {
   let minx, miny, maxx, maxy, screenX, screenY, limit, tmp, tmp1;
   tmp = - 2.0;
   minx = tmp;
@@ -422,9 +609,9 @@ testMandel_nofib_inst_8_tsni = function testMandel_nofib_inst_8_tsni(dummy) {
   screenX = 25;
   screenY = 25;
   limit = 75;
-  return mandelset_inst_8_5_tsni(minx, miny, maxx, maxy, screenX, screenY, limit)
+  return mandelset_inst_13_14_12_tsni(minx, miny, maxx, maxy, screenX, screenY, limit)
 };
-mandelset_inst_8_5_tsni = function mandelset_inst_8_5_tsni(x, y, x_, y_, screenX, screenY, lIMIT) {
+mandelset_inst_13_14_12_tsni = function mandelset_inst_13_14_12_tsni(x, y, x_, y_, screenX, screenY, lIMIT) {
   let windowToViewport, lscomp1, prettyRGB, result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
   prettyRGB = function prettyRGB(s) {
     let t, tmp8, arr;
@@ -452,25 +639,100 @@ mandelset_inst_8_5_tsni = function mandelset_inst_8_5_tsni(x, y, x_, y_, screenX
   lscomp1 = function lscomp1(ls1) {
     return runtime.safeCall(ls1(windowToViewport, lscomp1, screenX))
   };
-  tmp = enumFromTo_inst_8_5_7_tsni(1, screenY);
+  tmp = enumFromTo_inst_13_14_12_8_tsni(1, screenY);
   tmp1 = lscomp1(tmp);
   tmp2 = x_ - x;
   tmp3 = y_ - y;
   tmp4 = NofibPrelude.max(tmp2, tmp3);
   tmp5 = tmp4 / 2;
-  tmp6 = parallelMandel_inst_8_5_2_tsni(tmp1, lIMIT, tmp5);
+  tmp6 = parallelMandel_inst_13_14_12_9_tsni(tmp1, lIMIT, tmp5);
   result = tmp6;
-  tmp7 = map_inst_8_5_10_tsni(prettyRGB, result);
+  tmp7 = map_inst_13_14_12_16_tsni(prettyRGB, result);
   return mandel.createPixmap(screenX, screenY, lIMIT, tmp7)
 };
-parallelMandel_inst_8_5_2_tsni = function parallelMandel_inst_8_5_2_tsni(mat, limit, radius) {
+enumFromTo_inst_13_14_12_7_tsni = function enumFromTo_inst_13_14_12_7_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_13_14_12_7_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
+      let param0, param1, s, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      s = param0;
+      t2 = param1;
+      tmp2 = windowToViewport(s, t);
+      tmp3 = lscomp2(t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
+      return (f) => {
+        let param01, param11, x, xs, tmp4, tmp5, _deforest_Cons_head2, _deforest_Cons_tail2;
+        param01 = _deforest_Cons_head1;
+        param11 = _deforest_Cons_tail1;
+        x = param01;
+        xs = param11;
+        tmp4 = runtime.safeCall(f(x));
+        tmp5 = map_inst_13_14_12_9_10_tsni(f, xs);
+        _deforest_Cons_head2 = tmp4;
+        _deforest_Cons_tail2 = tmp5;
+        return (f1) => {
+          param01 = _deforest_Cons_head2;
+          param11 = _deforest_Cons_tail2;
+          x = param01;
+          xs = param11;
+          tmp4 = runtime.safeCall(f1(x));
+          tmp5 = map_inst_13_14_12_16_tsni(f1, xs);
+          return NofibPrelude.Cons(tmp4, tmp5)
+        }
+      }
+    }
+  } else {
+    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
+      return lscomp1(t1)
+    }
+  }
+};
+enumFromTo_inst_13_14_12_8_tsni = function enumFromTo_inst_13_14_12_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_13_14_12_8_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (windowToViewport, lscomp1, screenX) => {
+      let lscomp2, param0, param1, t, t1, tmp2;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      t = param0;
+      t1 = param1;
+      lscomp2 = function lscomp2(ls2) {
+        return runtime.safeCall(ls2(lscomp2, windowToViewport, lscomp1, t, t1))
+      };
+      tmp2 = enumFromTo_inst_13_14_12_7_tsni(1, screenX);
+      return lscomp2(tmp2)
+    }
+  } else {
+    return (windowToViewport, lscomp1, screenX) => {
+      return (f) => {
+        return (f1) => {
+          return NofibPrelude.Nil
+        }
+      }
+    }
+  }
+};
+parallelMandel_inst_13_14_12_9_tsni = function parallelMandel_inst_13_14_12_9_tsni(mat, limit, radius) {
   let lambda;
   lambda = (undefined, function (c) {
-    return whenDiverge_inst_8_5_2_3_tsni(limit, radius, c)
+    return whenDiverge_inst_13_14_12_9_5_tsni(limit, radius, c)
   });
-  return map_inst_8_5_2_4_tsni(lambda, mat)
+  return map_inst_13_14_12_9_10_tsni(lambda, mat)
 };
-whenDiverge_inst_8_5_2_3_tsni = function whenDiverge_inst_8_5_2_3_tsni(limit, radius, c) {
+whenDiverge_inst_13_14_12_9_5_tsni = function whenDiverge_inst_13_14_12_9_5_tsni(limit, radius, c) {
   let walkIt, tmp, tmp1;
   walkIt = function walkIt(ls) {
     let scrut, param0, param1, x, xs, scrut1, tmp2;
@@ -493,11 +755,11 @@ whenDiverge_inst_8_5_2_3_tsni = function whenDiverge_inst_8_5_2_3_tsni(limit, ra
       throw new globalThis.Error("match error");
     }
   };
-  tmp = mandel_inst_8_5_2_3_0_tsni(c);
+  tmp = mandel_inst_13_14_12_9_5_3_tsni(c);
   tmp1 = NofibPrelude.take_lz_lz(limit, tmp);
   return walkIt(tmp1)
 };
-mandel_inst_8_5_2_3_0_tsni = function mandel_inst_8_5_2_3_0_tsni(c) {
+mandel_inst_13_14_12_9_5_3_tsni = function mandel_inst_13_14_12_9_5_3_tsni(c) {
   let infiniteMandel;
   infiniteMandel = function infiniteMandel() {
     let tmp, lambda;
@@ -506,8 +768,8 @@ mandel_inst_8_5_2_3_0_tsni = function mandel_inst_8_5_2_3_0_tsni(c) {
       tmp1 = infiniteMandel();
       lambda1 = (undefined, function (z) {
         let tmp3;
-        tmp3 = comp_times_inst_8_5_2_3_0_1_tsni(z, z);
-        return comp_plus_inst_8_5_2_3_0_9_tsni(tmp3, c)
+        tmp3 = comp_times_inst_13_14_12_9_5_3_1_tsni(z, z);
+        return comp_plus_inst_13_14_12_9_5_3_15_tsni(tmp3, c)
       });
       tmp2 = NofibPrelude.map_lz(lambda1, tmp1);
       return NofibPrelude.LzCons(c, tmp2)
@@ -517,7 +779,7 @@ mandel_inst_8_5_2_3_0_tsni = function mandel_inst_8_5_2_3_0_tsni(c) {
   };
   return infiniteMandel()
 };
-comp_times_inst_8_5_2_3_0_1_tsni = function comp_times_inst_8_5_2_3_0_1_tsni(x, y) {
+comp_times_inst_13_14_12_9_5_3_1_tsni = function comp_times_inst_13_14_12_9_5_3_1_tsni(x, y) {
   let param0, param1, a, b, param01, param11, c, d, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Complex_r, _deforest_Complex_i;
   if (x instanceof mandel.Complex.class) {
     param0 = x.r;
@@ -562,103 +824,34 @@ comp_times_inst_8_5_2_3_0_1_tsni = function comp_times_inst_8_5_2_3_0_1_tsni(x, 
     throw new globalThis.Error("match error");
   }
 };
-map_inst_8_5_2_4_tsni = function map_inst_8_5_2_4_tsni(f, xs) {
+map_inst_13_14_12_9_10_tsni = function map_inst_13_14_12_9_10_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-enumFromTo_inst_8_5_6_tsni = function enumFromTo_inst_8_5_6_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  scrut = a <= b;
-  if (scrut === true) {
-    tmp = a + 1;
-    tmp1 = enumFromTo_inst_8_5_6_tsni(tmp, b);
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = tmp1;
-    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
-      let param0, param1, s, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1;
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
-      s = param0;
-      t2 = param1;
-      tmp2 = windowToViewport(s, t);
-      tmp3 = lscomp2(t2);
-      _deforest_Cons_head1 = tmp2;
-      _deforest_Cons_tail1 = tmp3;
-      return (f) => {
-        let param01, param11, x, xs, tmp4, tmp5, _deforest_Cons_head2, _deforest_Cons_tail2;
-        param01 = _deforest_Cons_head1;
-        param11 = _deforest_Cons_tail1;
-        x = param01;
-        xs = param11;
-        tmp4 = runtime.safeCall(f(x));
-        tmp5 = map_inst_8_5_2_4_tsni(f, xs);
-        _deforest_Cons_head2 = tmp4;
-        _deforest_Cons_tail2 = tmp5;
-        return (f1) => {
-          param01 = _deforest_Cons_head2;
-          param11 = _deforest_Cons_tail2;
-          x = param01;
-          xs = param11;
-          tmp4 = runtime.safeCall(f1(x));
-          tmp5 = map_inst_8_5_10_tsni(f1, xs);
-          return NofibPrelude.Cons(tmp4, tmp5)
-        }
-      }
-    }
-  } else {
-    return (lscomp2, windowToViewport, lscomp1, t, t1) => {
-      return lscomp1(t1)
-    }
-  }
-};
-enumFromTo_inst_8_5_7_tsni = function enumFromTo_inst_8_5_7_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  scrut = a <= b;
-  if (scrut === true) {
-    tmp = a + 1;
-    tmp1 = enumFromTo_inst_8_5_7_tsni(tmp, b);
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = tmp1;
-    return (windowToViewport, lscomp1, screenX) => {
-      let lscomp2, param0, param1, t, t1, tmp2;
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
-      t = param0;
-      t1 = param1;
-      lscomp2 = function lscomp2(ls2) {
-        return runtime.safeCall(ls2(lscomp2, windowToViewport, lscomp1, t, t1))
-      };
-      tmp2 = enumFromTo_inst_8_5_6_tsni(1, screenX);
-      return lscomp2(tmp2)
-    }
-  } else {
-    return (windowToViewport, lscomp1, screenX) => {
-      return (f) => {
-        return (f1) => {
-          return NofibPrelude.Nil
-        }
-      }
-    }
-  }
-};
-comp_plus_inst_0_9_tsni = function comp_plus_inst_0_9_tsni(x, y) {
+comp_plus_inst_0_15_tsni = function comp_plus_inst_0_15_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-comp_plus_inst_2_3_0_9_tsni = function comp_plus_inst_2_3_0_9_tsni(x, y) {
+comp_plus_inst_2_3_15_tsni = function comp_plus_inst_2_3_15_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-map_inst_10_tsni = function map_inst_10_tsni(f, xs) {
+comp_plus_inst_4_5_3_15_tsni = function comp_plus_inst_4_5_3_15_tsni(x, y) {
+  return runtime.safeCall(x(y))
+};
+comp_plus_inst_6_9_5_3_15_tsni = function comp_plus_inst_6_9_5_3_15_tsni(x, y) {
+  return runtime.safeCall(x(y))
+};
+map_inst_6_16_tsni = function map_inst_6_16_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-comp_plus_inst_5_2_3_0_9_tsni = function comp_plus_inst_5_2_3_0_9_tsni(x, y) {
+comp_plus_inst_11_12_9_5_3_15_tsni = function comp_plus_inst_11_12_9_5_3_15_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-map_inst_5_10_tsni = function map_inst_5_10_tsni(f, xs) {
+map_inst_11_12_16_tsni = function map_inst_11_12_16_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-comp_plus_inst_8_5_2_3_0_9_tsni = function comp_plus_inst_8_5_2_3_0_9_tsni(x, y) {
+comp_plus_inst_13_14_12_9_5_3_15_tsni = function comp_plus_inst_13_14_12_9_5_3_15_tsni(x, y) {
   return runtime.safeCall(x(y))
 };
-map_inst_8_5_10_tsni = function map_inst_8_5_10_tsni(f, xs) {
+map_inst_13_14_12_16_tsni = function map_inst_13_14_12_16_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
 (class mandel {
@@ -762,8 +955,8 @@ map_inst_8_5_10_tsni = function map_inst_8_5_10_tsni(f, xs) {
         tmp1 = infiniteMandel();
         lambda1 = (undefined, function (z) {
           let tmp3;
-          tmp3 = mandel.comp_times(z, z);
-          return mandel.comp_plus(tmp3, c1)
+          tmp3 = comp_times_inst_0_1_tsni(z, z);
+          return comp_plus_inst_0_15_tsni(tmp3, c1)
         });
         tmp2 = NofibPrelude.map_lz(lambda1, tmp1);
         return NofibPrelude.LzCons(c1, tmp2)
@@ -801,14 +994,14 @@ map_inst_8_5_10_tsni = function map_inst_8_5_10_tsni(f, xs) {
         throw new globalThis.Error("match error");
       }
     };
-    tmp = mandel_inst_0_tsni(c2);
+    tmp = mandel_inst_2_3_tsni(c2);
     tmp1 = NofibPrelude.take_lz_lz(limit, tmp);
     return walkIt(tmp1)
   } 
   static parallelMandel(mat, limit1, radius2) {
     let lambda;
     lambda = (undefined, function (c3) {
-      return mandel.whenDiverge(limit1, radius2, c3)
+      return whenDiverge_inst_4_5_tsni(limit1, radius2, c3)
     });
     return NofibPrelude.map(lambda, mat)
   } 
@@ -838,45 +1031,17 @@ map_inst_8_5_10_tsni = function map_inst_8_5_10_tsni(f, xs) {
       return mandel.Complex(tmp11, tmp15)
     };
     lscomp1 = function lscomp1(ls1) {
-      let lscomp2, param0, param1, t, t1, tmp8;
-      if (ls1 instanceof NofibPrelude.Nil.class) {
-        return NofibPrelude.Nil
-      } else if (ls1 instanceof NofibPrelude.Cons.class) {
-        param0 = ls1.head;
-        param1 = ls1.tail;
-        t = param0;
-        t1 = param1;
-        lscomp2 = function lscomp2(ls2) {
-          let param01, param11, s, t2, tmp9, tmp10;
-          if (ls2 instanceof NofibPrelude.Nil.class) {
-            return lscomp1(t1)
-          } else if (ls2 instanceof NofibPrelude.Cons.class) {
-            param01 = ls2.head;
-            param11 = ls2.tail;
-            s = param01;
-            t2 = param11;
-            tmp9 = windowToViewport(s, t);
-            tmp10 = lscomp2(t2);
-            return NofibPrelude.Cons(tmp9, tmp10)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        };
-        tmp8 = NofibPrelude.enumFromTo(1, screenX);
-        return lscomp2(tmp8)
-      } else {
-        throw new globalThis.Error("match error");
-      }
+      return runtime.safeCall(ls1(windowToViewport, lscomp1, screenX))
     };
-    tmp = NofibPrelude.enumFromTo(1, screenY);
+    tmp = enumFromTo_inst_6_8_tsni(1, screenY);
     tmp1 = lscomp1(tmp);
     tmp2 = x_ - x2;
     tmp3 = y_ - y2;
     tmp4 = NofibPrelude.max(tmp2, tmp3);
     tmp5 = tmp4 / 2;
-    tmp6 = parallelMandel_inst_2_tsni(tmp1, lIMIT, tmp5);
+    tmp6 = parallelMandel_inst_6_9_tsni(tmp1, lIMIT, tmp5);
     result = tmp6;
-    tmp7 = map_inst_10_tsni(prettyRGB, result);
+    tmp7 = map_inst_6_16_tsni(prettyRGB, result);
     return mandel.createPixmap(screenX, screenY, lIMIT, tmp7)
   } 
   static testMandel_nofib(dummy) {
@@ -890,11 +1055,11 @@ map_inst_8_5_10_tsni = function map_inst_8_5_10_tsni(f, xs) {
     screenX1 = 25;
     screenY1 = 25;
     limit2 = 75;
-    return mandelset_inst_5_tsni(minx, miny, maxx, maxy, screenX1, screenY1, limit2)
+    return mandelset_inst_11_12_tsni(minx, miny, maxx, maxy, screenX1, screenY1, limit2)
   } 
   static main() {
     let tmp;
-    tmp = testMandel_nofib_inst_8_tsni(0);
+    tmp = testMandel_nofib_inst_13_14_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
   static toString() { return "mandel"; }
