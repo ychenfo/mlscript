@@ -77,12 +77,12 @@ appendThree of
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@4@inst_0_tsni --> Ref(xs)@inst_3_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@5@inst_0_1_tsni --> Ref(xs)@inst_3_tsni@Cons
-//│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(xs)@inst_3_tsni@Nil
-//│ Ref(member:Nil)@6@inst_2_0_1_tsni --> Ref(xs)@inst_2_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@5@inst_2_0_1_tsni --> Ref(xs)@inst_2_3_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@4@inst_2_0_tsni --> Ref(xs)@inst_2_3_tsni@Cons
+//│ Ref(member:Nil)@5@inst_0_1_2_tsni --> Ref(xs)@inst_0_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@6@inst_0_1_2_tsni --> Ref(xs)@inst_0_4_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@7@inst_0_1_tsni --> Ref(xs)@inst_0_4_tsni@Cons
+//│ Ref(member:Nil)@5@inst_3_1_2_tsni --> Ref(xs)@inst_3_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@6@inst_3_1_2_tsni --> Ref(xs)@inst_3_4_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref($tmp))))@7@inst_3_1_tsni --> Ref(xs)@inst_3_4_tsni@Cons
 //│ -------------- executing -------------
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

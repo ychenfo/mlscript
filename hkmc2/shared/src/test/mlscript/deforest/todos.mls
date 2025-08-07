@@ -307,6 +307,7 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 
 // TODO: currently nothing is done at all when seeing
 // `Define` blocks defining things other than functions
+:todo
 data class Global(x)
 fun test() =
   data class Local(x)
@@ -315,9 +316,4 @@ fun test() =
 test()
 //│ = Local(2)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:Global),List(Arg(false,Lit(IntLit(1)))))@1@inst__tsni --> Ref($scrut)@inst__tsni@Global
-//│ Call(Ref(member:Global),List(Arg(false,Lit(IntLit(1)))))@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@Global
-//│ -------------- executing -------------
-//│ = Local(2)
-//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ /!!!\ Uncaught error: scala.NotImplementedError: an implementation is missing

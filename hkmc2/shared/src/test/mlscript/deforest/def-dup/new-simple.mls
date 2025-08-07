@@ -95,7 +95,7 @@ test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@1@inst__tsni --> Ref($scrut)@inst__tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@1@inst_2_tsni --> Ref($scrut)@inst_2_tsni@A
 //│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
 //│ -------------- executing -------------
 //│ = 1

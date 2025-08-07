@@ -36,10 +36,10 @@ test(id(mk(5)))
 //│ = Cons(11, Cons(9, Cons(7, Cons(5, Cons(3, Cons(1, Nil))))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@inst_0_tsni --> Ref(ls_map1)@inst_2_tsni@Cons
-//│ Ref(member:Nil)@4@inst_0_tsni --> Ref(ls_map1)@inst_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@3@inst_1_0_tsni --> Ref(ls_map1)@inst_1_2_tsni@Cons
-//│ Ref(member:Nil)@4@inst_1_0_tsni --> Ref(ls_map1)@inst_1_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@4@inst_0_1_tsni --> Ref(ls_map1)@inst_0_3_tsni@Cons
+//│ Ref(member:Nil)@5@inst_0_1_tsni --> Ref(ls_map1)@inst_0_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@4@inst_2_1_tsni --> Ref(ls_map1)@inst_2_3_tsni@Cons
+//│ Ref(member:Nil)@5@inst_2_1_tsni --> Ref(ls_map1)@inst_2_3_tsni@Nil
 //│ -------------- executing -------------
 //│ = Cons(11, Cons(9, Cons(7, Cons(5, Cons(3, Cons(1, Nil))))))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -136,10 +136,10 @@ test(id(mk(5)))
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:Nil)@3@inst__tsni --> Ref(xs_map)@inst_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref(acc))))@4@inst_0_tsni --> Ref(xs_map)@inst_2_tsni@Cons
-//│ Ref(member:Nil)@3@inst_1_tsni --> Ref(xs_map)@inst_1_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref(acc))))@4@inst_1_0_tsni --> Ref(xs_map)@inst_1_2_tsni@Cons
+//│ Ref(member:Nil)@4@inst_0_tsni --> Ref(xs_map)@inst_0_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref(acc))))@5@inst_0_1_tsni --> Ref(xs_map)@inst_0_3_tsni@Cons
+//│ Ref(member:Nil)@4@inst_2_tsni --> Ref(xs_map)@inst_2_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref(acc))))@5@inst_2_1_tsni --> Ref(xs_map)@inst_2_3_tsni@Cons
 //│ -------------- executing -------------
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -159,10 +159,10 @@ test(id(mk(3)))
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:Nil)@3@inst_0_tsni --> Ref(xs_rev)@inst_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@4@inst_0_tsni --> Ref(xs_rev)@inst_2_tsni@Cons
-//│ Ref(member:Nil)@3@inst_1_0_tsni --> Ref(xs_rev)@inst_1_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@4@inst_1_0_tsni --> Ref(xs_rev)@inst_1_2_tsni@Cons
+//│ Ref(member:Nil)@4@inst_0_1_tsni --> Ref(xs_rev)@inst_0_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@5@inst_0_1_tsni --> Ref(xs_rev)@inst_0_3_tsni@Cons
+//│ Ref(member:Nil)@4@inst_2_1_tsni --> Ref(xs_rev)@inst_2_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@5@inst_2_1_tsni --> Ref(xs_rev)@inst_2_3_tsni@Cons
 //│ -------------- executing -------------
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -213,10 +213,10 @@ test(id(mk2d(4)))
 //│ = 20
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:Nil)@4@inst_0_tsni --> Ref(ls_sum)@inst_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@5@inst_0_1_tsni --> Ref(ls_sum)@inst_3_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@5@inst_2_0_1_tsni --> Ref(ls_sum)@inst_2_3_tsni@Cons
-//│ Ref(member:Nil)@4@inst_2_0_tsni --> Ref(ls_sum)@inst_2_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@5@inst_0_1_2_tsni --> Ref(ls_sum)@inst_0_4_tsni@Cons
+//│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(ls_sum)@inst_0_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@5@inst_3_1_2_tsni --> Ref(ls_sum)@inst_3_4_tsni@Cons
+//│ Ref(member:Nil)@6@inst_3_1_tsni --> Ref(ls_sum)@inst_3_4_tsni@Nil
 //│ -------------- executing -------------
 //│ = 20
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
