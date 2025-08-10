@@ -685,7 +685,9 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
         l.foreach(a => handle(NoProd, a))
         handle(r, NoCons)
       case (NoProd, d: Dtor) => dtorSources.update(d, NoProd)
-      case (NoProd, fSel: FieldSel) => dtorSources.update(fSel, NoProd)
+      case (NoProd, fSel: FieldSel) =>
+        dtorSources.update(fSel, NoProd)
+        handle(NoProd, fSel.consVar)
       case (NoProd, ConsFun(l, r)) =>
         l.foreach(a => handle(a, NoCons))
         handle(NoProd, r)

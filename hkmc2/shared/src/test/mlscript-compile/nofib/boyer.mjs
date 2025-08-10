@@ -1,7 +1,7 @@
 import runtime from "./../Runtime.mjs";
 import Term1 from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
-let boyer1, find_inst_0_1_tsni, find_inst_2_1_tsni, one_way_unify1_inst_3_4_tsni, one_way_unify1_lst_inst_3_4_tsni, find_inst_3_4_1_tsni, find_inst_5_6_tsni, one_way_unify_inst_7_8_tsni, one_way_unify1_inst_7_8_4_tsni, one_way_unify1_lst_inst_7_8_4_tsni, find_inst_7_8_4_1_tsni, apply_subst_inst_7_9_tsni, find_inst_7_9_6_tsni, one_way_unify_inst_10_8_tsni, one_way_unify1_inst_10_8_4_tsni, one_way_unify1_lst_inst_10_8_4_tsni, find_inst_10_8_4_1_tsni, apply_subst_inst_10_9_tsni, find_inst_10_9_6_tsni, one_way_unify_inst_11_8_tsni, one_way_unify1_inst_11_8_4_tsni, one_way_unify1_lst_inst_11_8_4_tsni, find_inst_11_8_4_1_tsni, apply_subst_inst_11_9_tsni, find_inst_11_9_6_tsni, rewrite_inst_12_13_tsni, rewrite_with_lemmas_inst_12_13_tsni, rewrite_with_lemmas_helper_inst_12_13_tsni, apply_subst_inst_12_13_9_tsni, find_inst_12_13_9_6_tsni, one_way_unify_inst_12_13_8_tsni, one_way_unify1_inst_12_13_8_4_tsni, one_way_unify1_lst_inst_12_13_8_4_tsni, find_inst_12_13_8_4_1_tsni, apply_subst_inst_14_15_tsni, find_inst_14_15_6_tsni, tautp_inst_14_16_tsni, rewrite_inst_14_16_13_tsni, rewrite_with_lemmas_inst_14_16_13_tsni, rewrite_with_lemmas_helper_inst_14_16_13_tsni, one_way_unify_inst_14_16_13_8_tsni, one_way_unify1_inst_14_16_13_8_4_tsni, one_way_unify1_lst_inst_14_16_13_8_4_tsni, find_inst_14_16_13_8_4_1_tsni, apply_subst_inst_14_16_13_9_tsni, find_inst_14_16_13_9_6_tsni, test0_inst_17_18_tsni, tautp_inst_17_18_16_tsni, rewrite_inst_17_18_16_13_tsni, rewrite_with_lemmas_inst_17_18_16_13_tsni, rewrite_with_lemmas_helper_inst_17_18_16_13_tsni, apply_subst_inst_17_18_16_13_9_tsni, find_inst_17_18_16_13_9_6_tsni, one_way_unify_inst_17_18_16_13_8_tsni, one_way_unify1_inst_17_18_16_13_8_4_tsni, one_way_unify1_lst_inst_17_18_16_13_8_4_tsni, find_inst_17_18_16_13_8_4_1_tsni, apply_subst_inst_17_18_15_tsni, find_inst_17_18_15_6_tsni, replicate_inst_17_19_tsni, testBoyer_nofib_inst_20_21_tsni, test0_inst_20_21_18_tsni, apply_subst_inst_20_21_18_15_tsni, find_inst_20_21_18_15_6_tsni, tautp_inst_20_21_18_16_tsni, rewrite_inst_20_21_18_16_13_tsni, rewrite_with_lemmas_inst_20_21_18_16_13_tsni, rewrite_with_lemmas_helper_inst_20_21_18_16_13_tsni, one_way_unify_inst_20_21_18_16_13_8_tsni, one_way_unify1_inst_20_21_18_16_13_8_4_tsni, one_way_unify1_lst_inst_20_21_18_16_13_8_4_tsni, find_inst_20_21_18_16_13_8_4_1_tsni, apply_subst_inst_20_21_18_16_13_9_tsni, find_inst_20_21_18_16_13_9_6_tsni, replicate_inst_20_21_19_tsni, all_inst_17_22_tsni, all_inst_20_21_22_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_2_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_5_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_10_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_10_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_12_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_12_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_15_tsni, match_ls_arm_Cons_inst_14_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_14_15_6_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_16_13_9_tsni, match_lss_arm_Nil_inst_14_16_13_tsni, match_lss_arm_Cons_inst_14_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_15_tsni, match_ls_arm_Cons_inst_17_18_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_17_18_15_6_tsni, match_lss_arm_Cons_inst_17_18_16_13_tsni, match_lss_arm_Nil_inst_17_18_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_17_18_16_13_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_15_tsni, match_ls_arm_Cons_inst_20_21_18_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_20_21_18_15_6_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_16_13_9_tsni, match_lss_arm_Nil_inst_20_21_18_16_13_tsni, match_lss_arm_Cons_inst_20_21_18_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_20_21_18_16_13_tsni;
+let boyer1, find_inst_0_1_tsni, find_inst_2_1_tsni, one_way_unify1_inst_3_4_tsni, one_way_unify1_lst_inst_3_4_tsni, find_inst_3_4_1_tsni, find_inst_5_6_tsni, one_way_unify_inst_7_8_tsni, one_way_unify1_inst_7_8_4_tsni, one_way_unify1_lst_inst_7_8_4_tsni, find_inst_7_8_4_1_tsni, apply_subst_inst_7_9_tsni, find_inst_7_9_6_tsni, one_way_unify_inst_10_8_tsni, one_way_unify1_inst_10_8_4_tsni, one_way_unify1_lst_inst_10_8_4_tsni, find_inst_10_8_4_1_tsni, apply_subst_inst_10_9_tsni, find_inst_10_9_6_tsni, one_way_unify_inst_11_8_tsni, one_way_unify1_inst_11_8_4_tsni, one_way_unify1_lst_inst_11_8_4_tsni, find_inst_11_8_4_1_tsni, apply_subst_inst_11_9_tsni, find_inst_11_9_6_tsni, rewrite_inst_12_13_tsni, rewrite_with_lemmas_inst_12_13_tsni, rewrite_with_lemmas_helper_inst_12_13_tsni, apply_subst_inst_12_13_9_tsni, find_inst_12_13_9_6_tsni, one_way_unify_inst_12_13_8_tsni, one_way_unify1_inst_12_13_8_4_tsni, one_way_unify1_lst_inst_12_13_8_4_tsni, find_inst_12_13_8_4_1_tsni, apply_subst_inst_14_15_tsni, find_inst_14_15_6_tsni, tautp_inst_14_16_tsni, rewrite_inst_14_16_13_tsni, rewrite_with_lemmas_inst_14_16_13_tsni, rewrite_with_lemmas_helper_inst_14_16_13_tsni, one_way_unify_inst_14_16_13_8_tsni, one_way_unify1_inst_14_16_13_8_4_tsni, one_way_unify1_lst_inst_14_16_13_8_4_tsni, find_inst_14_16_13_8_4_1_tsni, apply_subst_inst_14_16_13_9_tsni, find_inst_14_16_13_9_6_tsni, test0_inst_17_18_tsni, tautp_inst_17_18_16_tsni, rewrite_inst_17_18_16_13_tsni, rewrite_with_lemmas_inst_17_18_16_13_tsni, rewrite_with_lemmas_helper_inst_17_18_16_13_tsni, apply_subst_inst_17_18_16_13_9_tsni, find_inst_17_18_16_13_9_6_tsni, one_way_unify_inst_17_18_16_13_8_tsni, one_way_unify1_inst_17_18_16_13_8_4_tsni, one_way_unify1_lst_inst_17_18_16_13_8_4_tsni, find_inst_17_18_16_13_8_4_1_tsni, apply_subst_inst_17_18_15_tsni, find_inst_17_18_15_6_tsni, replicate_inst_17_19_tsni, testBoyer_nofib_inst_20_21_tsni, test0_inst_20_21_18_tsni, apply_subst_inst_20_21_18_15_tsni, find_inst_20_21_18_15_6_tsni, tautp_inst_20_21_18_16_tsni, rewrite_inst_20_21_18_16_13_tsni, rewrite_with_lemmas_inst_20_21_18_16_13_tsni, rewrite_with_lemmas_helper_inst_20_21_18_16_13_tsni, one_way_unify_inst_20_21_18_16_13_8_tsni, one_way_unify1_inst_20_21_18_16_13_8_4_tsni, one_way_unify1_lst_inst_20_21_18_16_13_8_4_tsni, find_inst_20_21_18_16_13_8_4_1_tsni, apply_subst_inst_20_21_18_16_13_9_tsni, find_inst_20_21_18_16_13_9_6_tsni, replicate_inst_20_21_19_tsni, all_inst_17_22_tsni, all_inst_20_21_22_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_2_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_5_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_10_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_10_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_12_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_12_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_15_tsni, match_ls_arm_Cons_inst_14_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_14_15_6_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_16_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_15_tsni, match_ls_arm_Cons_inst_17_18_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_17_18_15_6_tsni, match_lss_arm_Cons_inst_17_18_16_13_tsni, match_lss_arm_Nil_inst_17_18_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_17_18_16_13_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_15_tsni, match_ls_arm_Cons_inst_20_21_18_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_20_21_18_15_6_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_16_13_9_tsni, match_lss_arm_Nil_inst_20_21_18_16_13_tsni, match_lss_arm_Cons_inst_20_21_18_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_20_21_18_16_13_tsni;
 match_scrut_arm_Deforest_Arr_2_inst_0_tsni = function match_scrut_arm_Deforest_Arr_2_inst_0_tsni(term1, subst, vid2, _deforest_Deforest_Arr_2_0_inst_0_tsni, _deforest_Deforest_Arr_2_1_inst_0_tsni) {
   let first1, first0, found, v2, tmp, arr, arr1, tmp1, arr2;
   first0 = _deforest_Deforest_Arr_2_0_inst_0_tsni;
@@ -317,38 +317,6 @@ match_scrut_arm_Deforest_Arr_2_inst_14_16_13_9_tsni = function match_scrut_arm_D
     return value
   } else {
     return runtime.safeCall(boyer.Var(vid))
-  }
-};
-match_lss_arm_Nil_inst_14_16_13_tsni = function match_lss_arm_Nil_inst_14_16_13_tsni(term) {
-  return term
-};
-match_lss_arm_Cons_inst_14_16_13_tsni = function match_lss_arm_Cons_inst_14_16_13_tsni(term, _deforest_Cons_head_inst_14_16_13_tsni, _deforest_Cons_tail_inst_14_16_13_tsni) {
-  let param0, param1;
-  param0 = _deforest_Cons_head_inst_14_16_13_tsni;
-  param1 = _deforest_Cons_tail_inst_14_16_13_tsni;
-  return runtime.safeCall(param0(term, param1))
-};
-match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni = function match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term, param1, _deforest_Deforest_Arr_2_0_inst_14_16_13_tsni, _deforest_Deforest_Arr_2_1_inst_14_16_13_tsni) {
-  let first1, first0, lhs, rhs, ls, scrut, first11, first01, unified, subst, tmp;
-  first0 = _deforest_Deforest_Arr_2_0_inst_14_16_13_tsni;
-  first1 = _deforest_Deforest_Arr_2_1_inst_14_16_13_tsni;
-  lhs = first0;
-  rhs = first1;
-  ls = param1;
-  scrut = one_way_unify_inst_14_16_13_8_tsni(term, lhs);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first01 = scrut[0];
-    first11 = scrut[1];
-    unified = first01;
-    subst = first11;
-    if (unified === true) {
-      tmp = apply_subst_inst_14_16_13_9_tsni(subst, rhs);
-      return rewrite_inst_14_16_13_tsni(tmp)
-    } else {
-      return rewrite_with_lemmas_helper_inst_14_16_13_tsni(term, ls)
-    }
-  } else {
-    throw new globalThis.Error("match error");
   }
 };
 match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_9_tsni = function match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_9_tsni(vid, _deforest_Deforest_Arr_2_0_inst_17_18_16_13_9_tsni, _deforest_Deforest_Arr_2_1_inst_17_18_16_13_9_tsni) {
@@ -1853,7 +1821,39 @@ rewrite_with_lemmas_inst_14_16_13_tsni = function rewrite_with_lemmas_inst_14_16
   return rewrite_with_lemmas_helper_inst_14_16_13_tsni(term, tmp)
 };
 rewrite_with_lemmas_helper_inst_14_16_13_tsni = function rewrite_with_lemmas_helper_inst_14_16_13_tsni(term, lss) {
-  return runtime.safeCall(lss(term))
+  let param0, param1, first1, first0, lhs, rhs, ls, scrut, first11, first01, unified, subst, tmp;
+  if (lss instanceof NofibPrelude.Nil.class) {
+    return term
+  } else if (lss instanceof NofibPrelude.Cons.class) {
+    param0 = lss.head;
+    param1 = lss.tail;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      lhs = first0;
+      rhs = first1;
+      ls = param1;
+      scrut = one_way_unify_inst_14_16_13_8_tsni(term, lhs);
+      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
+        first01 = scrut[0];
+        first11 = scrut[1];
+        unified = first01;
+        subst = first11;
+        if (unified === true) {
+          tmp = apply_subst_inst_14_16_13_9_tsni(subst, rhs);
+          return rewrite_inst_14_16_13_tsni(tmp)
+        } else {
+          return rewrite_with_lemmas_helper_inst_14_16_13_tsni(term, ls)
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
 one_way_unify_inst_14_16_13_8_tsni = function one_way_unify_inst_14_16_13_8_tsni(term1, term2) {
   return one_way_unify1_inst_14_16_13_8_4_tsni(term1, term2, NofibPrelude.Nil)
@@ -6597,21 +6597,14 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
     one = function one() {
       let tmp51, tmp52, lambda4;
       lambda4 = (undefined, function () {
-        let tmp53, tmp54, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp53, tmp54, arr5;
         tmp53 = one();
         tmp54 = add1(zero);
-        _deforest_Deforest_Arr_2_05 = tmp53;
-        _deforest_Deforest_Arr_2_15 = tmp54;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp53,
+          tmp54
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp51 = lambda4;
       tmp52 = NofibPrelude.lazy(tmp51);
@@ -6620,22 +6613,15 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
     two = function two() {
       let tmp51, tmp52, lambda4;
       lambda4 = (undefined, function () {
-        let tmp53, tmp54, tmp55, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp53, tmp54, tmp55, arr5;
         tmp53 = two();
         tmp54 = one();
         tmp55 = add1(tmp54);
-        _deforest_Deforest_Arr_2_05 = tmp53;
-        _deforest_Deforest_Arr_2_15 = tmp55;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp53,
+          tmp55
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp51 = lambda4;
       tmp52 = NofibPrelude.lazy(tmp51);
@@ -6644,23 +6630,16 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
     four = function four() {
       let tmp51, tmp52, lambda4;
       lambda4 = (undefined, function () {
-        let tmp53, tmp54, tmp55, tmp56, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp53, tmp54, tmp55, tmp56, arr5;
         tmp53 = four();
         tmp54 = two();
         tmp55 = add1(tmp54);
         tmp56 = add1(tmp55);
-        _deforest_Deforest_Arr_2_05 = tmp53;
-        _deforest_Deforest_Arr_2_15 = tmp56;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp53,
+          tmp56
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp51 = lambda4;
       tmp52 = NofibPrelude.lazy(tmp51);
@@ -6670,9 +6649,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        return (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        }
+        return NofibPrelude.Nil
       });
       tmp52 = NofibPrelude.lazy(lambda4);
       return runtime.safeCall(boyer.Fun(boyer.ADD1, tmp51, tmp52))
@@ -6683,24 +6660,17 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp52 = NofibPrelude.Cons(b1, tmp51);
       tmp53 = NofibPrelude.Cons(a1, tmp52);
       lambda4 = (undefined, function () {
-        let tmp56, tmp57, tmp58, tmp59, tmp60, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp56, tmp57, tmp58, tmp59, tmp60, arr5;
         tmp56 = if_(x4, y, z);
         tmp57 = if_(tmp56, u, w);
         tmp58 = if_(y, u, w);
         tmp59 = if_(z, u, w);
         tmp60 = if_(x4, tmp58, tmp59);
-        _deforest_Deforest_Arr_2_05 = tmp57;
-        _deforest_Deforest_Arr_2_15 = tmp60;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp57,
+          tmp60
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp54 = lambda4;
       tmp55 = NofibPrelude.lazy(tmp54);
@@ -6710,21 +6680,14 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, arr5;
         tmp54 = not_(x4);
         tmp55 = if_(x4, boyerFalse, boyerTrue);
-        _deforest_Deforest_Arr_2_05 = tmp54;
-        _deforest_Deforest_Arr_2_15 = tmp55;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp54,
+          tmp55
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -6735,22 +6698,15 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp55, tmp56, tmp57, arr5;
         tmp55 = and_(x4, y);
         tmp56 = if_(y, boyerTrue, boyerFalse);
         tmp57 = if_(x4, tmp56, boyerFalse);
-        _deforest_Deforest_Arr_2_05 = tmp55;
-        _deforest_Deforest_Arr_2_15 = tmp57;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp55,
+          tmp57
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -6761,23 +6717,16 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, tmp58, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp55, tmp56, tmp57, tmp58, arr5;
         tmp55 = append_(x4, y);
         tmp56 = append_(tmp55, z);
         tmp57 = append_(y, z);
         tmp58 = append_(x4, tmp57);
-        _deforest_Deforest_Arr_2_05 = tmp56;
-        _deforest_Deforest_Arr_2_15 = tmp58;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp56,
+          tmp58
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -6788,9 +6737,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        return (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        }
+        return NofibPrelude.Nil
       });
       tmp53 = NofibPrelude.lazy(lambda4);
       return runtime.safeCall(boyer.Fun(boyer.CONS, tmp52, tmp53))
@@ -6799,21 +6746,14 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, arr5;
         tmp54 = cons(x4, y);
         tmp55 = consp(tmp54);
-        _deforest_Deforest_Arr_2_05 = tmp55;
-        _deforest_Deforest_Arr_2_15 = boyerTrue;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp55,
+          boyerTrue
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -6824,100 +6764,63 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, arr5, tmp56, tmp57, arr6, tmp58, tmp59, arr7, tmp60, tmp61, tmp62, tmp63, arr8, tmp64, tmp65, tmp66, tmp67, arr9, tmp68, tmp69, tmp70, tmp71, arr10, tmp72, tmp73, tmp74, tmp75, arr11, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Cons_head9, _deforest_Cons_tail9, _deforest_Cons_head10, _deforest_Cons_tail10, _deforest_Cons_head11, _deforest_Cons_tail11, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18, _deforest_Deforest_Arr_2_09, _deforest_Deforest_Arr_2_19, _deforest_Deforest_Arr_2_010, _deforest_Deforest_Arr_2_110, _deforest_Deforest_Arr_2_011, _deforest_Deforest_Arr_2_111;
+        let tmp55, arr5, tmp56, tmp57, arr6, tmp58, tmp59, arr7, tmp60, tmp61, tmp62, tmp63, arr8, tmp64, tmp65, tmp66, tmp67, arr9, tmp68, tmp69, tmp70, tmp71, arr10, tmp72, tmp73, tmp74, tmp75, arr11, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81;
         tmp55 = difference(x4, x4);
-        _deforest_Deforest_Arr_2_011 = tmp55;
-        _deforest_Deforest_Arr_2_111 = zero;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_011, _deforest_Deforest_Arr_2_111)
-        };
+        arr5 = [
+          tmp55,
+          zero
+        ];
         tmp56 = plus(x4, y);
         tmp57 = difference(tmp56, x4);
-        _deforest_Deforest_Arr_2_010 = tmp57;
-        _deforest_Deforest_Arr_2_110 = y;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_010, _deforest_Deforest_Arr_2_110)
-        };
+        arr6 = [
+          tmp57,
+          y
+        ];
         tmp58 = plus(y, x4);
         tmp59 = difference(tmp58, x4);
-        _deforest_Deforest_Arr_2_09 = tmp59;
-        _deforest_Deforest_Arr_2_19 = y;
-        arr7 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_09, _deforest_Deforest_Arr_2_19)
-        };
+        arr7 = [
+          tmp59,
+          y
+        ];
         tmp60 = plus(x4, y);
         tmp61 = plus(x4, z);
         tmp62 = difference(tmp60, tmp61);
         tmp63 = difference(y, z);
-        _deforest_Deforest_Arr_2_08 = tmp62;
-        _deforest_Deforest_Arr_2_18 = tmp63;
-        arr8 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18)
-        };
+        arr8 = [
+          tmp62,
+          tmp63
+        ];
         tmp64 = plus(x4, z);
         tmp65 = plus(y, tmp64);
         tmp66 = difference(tmp65, x4);
         tmp67 = plus(y, z);
-        _deforest_Deforest_Arr_2_07 = tmp66;
-        _deforest_Deforest_Arr_2_17 = tmp67;
-        arr9 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17)
-        };
+        arr9 = [
+          tmp66,
+          tmp67
+        ];
         tmp68 = plus(y, z);
         tmp69 = add1(tmp68);
         tmp70 = difference(tmp69, z);
         tmp71 = add1(y);
-        _deforest_Deforest_Arr_2_06 = tmp70;
-        _deforest_Deforest_Arr_2_16 = tmp71;
-        arr10 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr10 = [
+          tmp70,
+          tmp71
+        ];
         tmp72 = add1(x4);
         tmp73 = add1(tmp72);
         tmp74 = two();
         tmp75 = difference(tmp73, tmp74);
-        _deforest_Deforest_Arr_2_05 = tmp75;
-        _deforest_Deforest_Arr_2_15 = x4;
-        arr11 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head11 = arr11;
-        _deforest_Cons_tail11 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp76 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head11, _deforest_Cons_tail11)
-        };
-        _deforest_Cons_head10 = arr10;
-        _deforest_Cons_tail10 = tmp76;
-        tmp77 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head10, _deforest_Cons_tail10)
-        };
-        _deforest_Cons_head9 = arr9;
-        _deforest_Cons_tail9 = tmp77;
-        tmp78 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head9, _deforest_Cons_tail9)
-        };
-        _deforest_Cons_head8 = arr8;
-        _deforest_Cons_tail8 = tmp78;
-        tmp79 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head8, _deforest_Cons_tail8)
-        };
-        _deforest_Cons_head7 = arr7;
-        _deforest_Cons_tail7 = tmp79;
-        tmp80 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head7, _deforest_Cons_tail7)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = tmp80;
-        tmp81 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp81;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr11 = [
+          tmp75,
+          x4
+        ];
+        tmp76 = NofibPrelude.Cons(arr11, NofibPrelude.Nil);
+        tmp77 = NofibPrelude.Cons(arr10, tmp76);
+        tmp78 = NofibPrelude.Cons(arr9, tmp77);
+        tmp79 = NofibPrelude.Cons(arr8, tmp78);
+        tmp80 = NofibPrelude.Cons(arr7, tmp79);
+        tmp81 = NofibPrelude.Cons(arr6, tmp80);
+        return NofibPrelude.Cons(arr5, tmp81)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -6947,86 +6850,78 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, tmp58, tmp59, arr5, tmp60, tmp61, tmp62, tmp63, arr6, tmp64, tmp65, tmp66, tmp67, arr7, tmp68, tmp69, tmp70, tmp71, tmp72, arr8, tmp73, tmp74, tmp75, tmp76, tmp77, arr9, tmp78, tmp79, tmp80, tmp81, arr10, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, arr11, tmp88, tmp89, tmp90, tmp91, tmp92, tmp93, arr12, tmp94, tmp95, tmp96, tmp97, tmp98, tmp99, tmp100, tmp101, arr13, tmp102, tmp103, tmp104, tmp105, tmp106, tmp107, tmp108, tmp109, tmp110, tmp111, tmp112, tmp113, arr14, tmp114, tmp115, tmp116, tmp117, tmp118, tmp119, arr15, tmp120, tmp121, tmp122, tmp123, tmp124, tmp125, tmp126, tmp127, tmp128, tmp129, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Cons_head9, _deforest_Cons_tail9, _deforest_Cons_head10, _deforest_Cons_tail10, _deforest_Cons_head11, _deforest_Cons_tail11, _deforest_Cons_head12, _deforest_Cons_tail12, _deforest_Cons_head13, _deforest_Cons_tail13, _deforest_Cons_head14, _deforest_Cons_tail14, _deforest_Cons_head15, _deforest_Cons_tail15, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18, _deforest_Deforest_Arr_2_09, _deforest_Deforest_Arr_2_19, _deforest_Deforest_Arr_2_010, _deforest_Deforest_Arr_2_110, _deforest_Deforest_Arr_2_011, _deforest_Deforest_Arr_2_111, _deforest_Deforest_Arr_2_012, _deforest_Deforest_Arr_2_112, _deforest_Deforest_Arr_2_013, _deforest_Deforest_Arr_2_113, _deforest_Deforest_Arr_2_014, _deforest_Deforest_Arr_2_114, _deforest_Deforest_Arr_2_015, _deforest_Deforest_Arr_2_115;
+        let tmp55, tmp56, tmp57, tmp58, tmp59, arr5, tmp60, tmp61, tmp62, tmp63, arr6, tmp64, tmp65, tmp66, tmp67, arr7, tmp68, tmp69, tmp70, tmp71, tmp72, arr8, tmp73, tmp74, tmp75, tmp76, tmp77, arr9, tmp78, tmp79, tmp80, tmp81, arr10, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, arr11, tmp88, tmp89, tmp90, tmp91, tmp92, tmp93, arr12, tmp94, tmp95, tmp96, tmp97, tmp98, tmp99, tmp100, tmp101, arr13, tmp102, tmp103, tmp104, tmp105, tmp106, tmp107, tmp108, tmp109, tmp110, tmp111, tmp112, tmp113, arr14, tmp114, tmp115, tmp116, tmp117, tmp118, tmp119, arr15, tmp120, tmp121, tmp122, tmp123, tmp124, tmp125, tmp126, tmp127, tmp128, tmp129;
         tmp55 = plus(x4, y);
         tmp56 = equal(tmp55, zero);
         tmp57 = zerop(x4);
         tmp58 = zerop(y);
         tmp59 = and_(tmp57, tmp58);
-        _deforest_Deforest_Arr_2_015 = tmp56;
-        _deforest_Deforest_Arr_2_115 = tmp59;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_015, _deforest_Deforest_Arr_2_115)
-        };
+        arr5 = [
+          tmp56,
+          tmp59
+        ];
         tmp60 = plus(x4, y);
         tmp61 = plus(x4, z);
         tmp62 = equal(tmp60, tmp61);
         tmp63 = equal(y, z);
-        _deforest_Deforest_Arr_2_014 = tmp62;
-        _deforest_Deforest_Arr_2_114 = tmp63;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_014, _deforest_Deforest_Arr_2_114)
-        };
+        arr6 = [
+          tmp62,
+          tmp63
+        ];
         tmp64 = difference(x4, y);
         tmp65 = equal(zero, tmp64);
         tmp66 = lessp(y, x4);
         tmp67 = not_(tmp66);
-        _deforest_Deforest_Arr_2_013 = tmp65;
-        _deforest_Deforest_Arr_2_113 = tmp67;
-        arr7 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_013, _deforest_Deforest_Arr_2_113)
-        };
+        arr7 = [
+          tmp65,
+          tmp67
+        ];
         tmp68 = difference(x4, y);
         tmp69 = equal(x4, tmp68);
         tmp70 = equal(x4, zero);
         tmp71 = zerop(y);
         tmp72 = or_(tmp70, tmp71);
-        _deforest_Deforest_Arr_2_012 = tmp69;
-        _deforest_Deforest_Arr_2_112 = tmp72;
-        arr8 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_012, _deforest_Deforest_Arr_2_112)
-        };
+        arr8 = [
+          tmp69,
+          tmp72
+        ];
         tmp73 = times(x4, y);
         tmp74 = equal(tmp73, zero);
         tmp75 = zerop(x4);
         tmp76 = zerop(y);
         tmp77 = or_(tmp75, tmp76);
-        _deforest_Deforest_Arr_2_011 = tmp74;
-        _deforest_Deforest_Arr_2_111 = tmp77;
-        arr9 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_011, _deforest_Deforest_Arr_2_111)
-        };
+        arr9 = [
+          tmp74,
+          tmp77
+        ];
         tmp78 = append_(x4, y);
         tmp79 = append_(x4, z);
         tmp80 = equal(tmp78, tmp79);
         tmp81 = equal(y, z);
-        _deforest_Deforest_Arr_2_010 = tmp80;
-        _deforest_Deforest_Arr_2_110 = tmp81;
-        arr10 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_010, _deforest_Deforest_Arr_2_110)
-        };
+        arr10 = [
+          tmp80,
+          tmp81
+        ];
         tmp82 = times(x4, y);
         tmp83 = equal(y, tmp82);
         tmp84 = equal(y, zero);
         tmp85 = one();
         tmp86 = equal(x4, tmp85);
         tmp87 = or_(tmp84, tmp86);
-        _deforest_Deforest_Arr_2_09 = tmp83;
-        _deforest_Deforest_Arr_2_19 = tmp87;
-        arr11 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_09, _deforest_Deforest_Arr_2_19)
-        };
+        arr11 = [
+          tmp83,
+          tmp87
+        ];
         tmp88 = times(x4, y);
         tmp89 = equal(x4, tmp88);
         tmp90 = equal(x4, zero);
         tmp91 = one();
         tmp92 = equal(y, tmp91);
         tmp93 = or_(tmp90, tmp92);
-        _deforest_Deforest_Arr_2_08 = tmp89;
-        _deforest_Deforest_Arr_2_18 = tmp93;
-        arr12 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18)
-        };
+        arr12 = [
+          tmp89,
+          tmp93
+        ];
         tmp94 = times(x4, y);
         tmp95 = one();
         tmp96 = equal(tmp94, tmp95);
@@ -7035,11 +6930,10 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
         tmp99 = one();
         tmp100 = equal(y, tmp99);
         tmp101 = and_(tmp98, tmp100);
-        _deforest_Deforest_Arr_2_07 = tmp96;
-        _deforest_Deforest_Arr_2_17 = tmp101;
-        arr13 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17)
-        };
+        arr13 = [
+          tmp96,
+          tmp101
+        ];
         tmp102 = difference(x4, y);
         tmp103 = difference(z, y);
         tmp104 = equal(tmp102, tmp103);
@@ -7052,79 +6946,31 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
         tmp111 = equal(x4, z);
         tmp112 = if_(tmp108, tmp110, tmp111);
         tmp113 = if_(tmp105, tmp107, tmp112);
-        _deforest_Deforest_Arr_2_06 = tmp104;
-        _deforest_Deforest_Arr_2_16 = tmp113;
-        arr14 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr14 = [
+          tmp104,
+          tmp113
+        ];
         tmp114 = lessp(x4, y);
         tmp115 = equal(tmp114, z);
         tmp116 = lessp(x4, y);
         tmp117 = equal(boyerTrue, z);
         tmp118 = equal(boyerFalse, z);
         tmp119 = if_(tmp116, tmp117, tmp118);
-        _deforest_Deforest_Arr_2_05 = tmp115;
-        _deforest_Deforest_Arr_2_15 = tmp119;
-        arr15 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head15 = arr15;
-        _deforest_Cons_tail15 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp120 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head15, _deforest_Cons_tail15)
-        };
-        _deforest_Cons_head14 = arr14;
-        _deforest_Cons_tail14 = tmp120;
-        tmp121 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head14, _deforest_Cons_tail14)
-        };
-        _deforest_Cons_head13 = arr13;
-        _deforest_Cons_tail13 = tmp121;
-        tmp122 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head13, _deforest_Cons_tail13)
-        };
-        _deforest_Cons_head12 = arr12;
-        _deforest_Cons_tail12 = tmp122;
-        tmp123 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head12, _deforest_Cons_tail12)
-        };
-        _deforest_Cons_head11 = arr11;
-        _deforest_Cons_tail11 = tmp123;
-        tmp124 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head11, _deforest_Cons_tail11)
-        };
-        _deforest_Cons_head10 = arr10;
-        _deforest_Cons_tail10 = tmp124;
-        tmp125 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head10, _deforest_Cons_tail10)
-        };
-        _deforest_Cons_head9 = arr9;
-        _deforest_Cons_tail9 = tmp125;
-        tmp126 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head9, _deforest_Cons_tail9)
-        };
-        _deforest_Cons_head8 = arr8;
-        _deforest_Cons_tail8 = tmp126;
-        tmp127 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head8, _deforest_Cons_tail8)
-        };
-        _deforest_Cons_head7 = arr7;
-        _deforest_Cons_tail7 = tmp127;
-        tmp128 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head7, _deforest_Cons_tail7)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = tmp128;
-        tmp129 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp129;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr15 = [
+          tmp115,
+          tmp119
+        ];
+        tmp120 = NofibPrelude.Cons(arr15, NofibPrelude.Nil);
+        tmp121 = NofibPrelude.Cons(arr14, tmp120);
+        tmp122 = NofibPrelude.Cons(arr13, tmp121);
+        tmp123 = NofibPrelude.Cons(arr12, tmp122);
+        tmp124 = NofibPrelude.Cons(arr11, tmp123);
+        tmp125 = NofibPrelude.Cons(arr10, tmp124);
+        tmp126 = NofibPrelude.Cons(arr9, tmp125);
+        tmp127 = NofibPrelude.Cons(arr8, tmp126);
+        tmp128 = NofibPrelude.Cons(arr7, tmp127);
+        tmp129 = NofibPrelude.Cons(arr6, tmp128);
+        return NofibPrelude.Cons(arr5, tmp129)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7134,24 +6980,17 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, tmp56, tmp57, tmp58, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, tmp56, tmp57, tmp58, arr5;
         tmp54 = even_(x4);
         tmp55 = zerop(x4);
         tmp56 = sub1(x4);
         tmp57 = odd_(tmp56);
         tmp58 = if_(tmp55, boyerTrue, tmp57);
-        _deforest_Deforest_Arr_2_05 = tmp54;
-        _deforest_Deforest_Arr_2_15 = tmp58;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp54,
+          tmp58
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -7162,38 +7001,26 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, tmp58, tmp59, arr5, tmp60, tmp61, tmp62, tmp63, arr6, tmp64, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16;
+        let tmp55, tmp56, tmp57, tmp58, tmp59, arr5, tmp60, tmp61, tmp62, tmp63, arr6, tmp64;
         tmp55 = plus(y, z);
         tmp56 = exp_(x4, tmp55);
         tmp57 = exp_(x4, y);
         tmp58 = exp_(x4, z);
         tmp59 = times(tmp57, tmp58);
-        _deforest_Deforest_Arr_2_06 = tmp56;
-        _deforest_Deforest_Arr_2_16 = tmp59;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr5 = [
+          tmp56,
+          tmp59
+        ];
         tmp60 = times(y, z);
         tmp61 = exp_(x4, tmp60);
         tmp62 = exp_(x4, y);
         tmp63 = exp_(tmp62, z);
-        _deforest_Deforest_Arr_2_05 = tmp61;
-        _deforest_Deforest_Arr_2_15 = tmp63;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp64 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp64;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr6 = [
+          tmp61,
+          tmp63
+        ];
+        tmp64 = NofibPrelude.Cons(arr6, NofibPrelude.Nil);
+        return NofibPrelude.Cons(arr5, tmp64)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7203,9 +7030,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        return (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        }
+        return NofibPrelude.Nil
       });
       tmp52 = NofibPrelude.lazy(lambda4);
       return runtime.safeCall(boyer.Fun(boyer.F, tmp51, tmp52))
@@ -7215,36 +7040,24 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, arr5, tmp57, tmp58, tmp59, tmp60, tmp61, arr6, tmp62, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16;
+        let tmp55, tmp56, arr5, tmp57, tmp58, tmp59, tmp60, tmp61, arr6, tmp62;
         tmp55 = gcd_(x4, y);
         tmp56 = gcd_(y, x4);
-        _deforest_Deforest_Arr_2_06 = tmp55;
-        _deforest_Deforest_Arr_2_16 = tmp56;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr5 = [
+          tmp55,
+          tmp56
+        ];
         tmp57 = times(x4, z);
         tmp58 = times(y, z);
         tmp59 = gcd_(tmp57, tmp58);
         tmp60 = gcd_(x4, y);
         tmp61 = times(z, tmp60);
-        _deforest_Deforest_Arr_2_05 = tmp59;
-        _deforest_Deforest_Arr_2_15 = tmp61;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp62 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp62;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr6 = [
+          tmp59,
+          tmp61
+        ];
+        tmp62 = NofibPrelude.Cons(arr6, NofibPrelude.Nil);
+        return NofibPrelude.Cons(arr5, tmp62)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7292,22 +7105,15 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp55, tmp56, tmp57, arr5;
         tmp55 = implies(x4, y);
         tmp56 = if_(y, boyerTrue, boyerFalse);
         tmp57 = if_(x4, tmp56, boyerTrue);
-        _deforest_Deforest_Arr_2_05 = tmp55;
-        _deforest_Deforest_Arr_2_15 = tmp57;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp55,
+          tmp57
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7337,15 +7143,14 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, tmp56, arr5, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, arr6, tmp65, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16;
+        let tmp54, tmp55, tmp56, arr5, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, arr6, tmp65;
         tmp54 = reverse_(x4);
         tmp55 = length_(tmp54);
         tmp56 = length_(x4);
-        _deforest_Deforest_Arr_2_06 = tmp55;
-        _deforest_Deforest_Arr_2_16 = tmp56;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr5 = [
+          tmp55,
+          tmp56
+        ];
         tmp57 = cons(u, w);
         tmp58 = cons(z, tmp57);
         tmp59 = cons(y, tmp58);
@@ -7354,23 +7159,12 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
         tmp62 = four();
         tmp63 = length_(w);
         tmp64 = plus(tmp62, tmp63);
-        _deforest_Deforest_Arr_2_05 = tmp61;
-        _deforest_Deforest_Arr_2_15 = tmp64;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp65 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp65;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr6 = [
+          tmp61,
+          tmp64
+        ];
+        tmp65 = NofibPrelude.Cons(arr6, NofibPrelude.Nil);
+        return NofibPrelude.Cons(arr5, tmp65)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -7400,16 +7194,15 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, tmp58, arr5, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, arr6, tmp66, tmp67, tmp68, tmp69, arr7, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, arr8, tmp77, tmp78, tmp79, tmp80, arr9, tmp81, tmp82, tmp83, tmp84, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Cons_head9, _deforest_Cons_tail9, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18, _deforest_Deforest_Arr_2_09, _deforest_Deforest_Arr_2_19;
+        let tmp55, tmp56, tmp57, tmp58, arr5, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, arr6, tmp66, tmp67, tmp68, tmp69, arr7, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, arr8, tmp77, tmp78, tmp79, tmp80, arr9, tmp81, tmp82, tmp83, tmp84;
         tmp55 = remainder(x4, y);
         tmp56 = lessp(tmp55, y);
         tmp57 = zerop(y);
         tmp58 = not_(tmp57);
-        _deforest_Deforest_Arr_2_09 = tmp56;
-        _deforest_Deforest_Arr_2_19 = tmp58;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_09, _deforest_Deforest_Arr_2_19)
-        };
+        arr5 = [
+          tmp56,
+          tmp58
+        ];
         tmp59 = quotient(x4, y);
         tmp60 = lessp(tmp59, x4);
         tmp61 = zerop(x4);
@@ -7417,20 +7210,18 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
         tmp63 = one();
         tmp64 = lessp(tmp63, y);
         tmp65 = and_(tmp62, tmp64);
-        _deforest_Deforest_Arr_2_08 = tmp60;
-        _deforest_Deforest_Arr_2_18 = tmp65;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18)
-        };
+        arr6 = [
+          tmp60,
+          tmp65
+        ];
         tmp66 = plus(x4, y);
         tmp67 = plus(x4, z);
         tmp68 = lessp(tmp66, tmp67);
         tmp69 = lessp(y, z);
-        _deforest_Deforest_Arr_2_07 = tmp68;
-        _deforest_Deforest_Arr_2_17 = tmp69;
-        arr7 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17)
-        };
+        arr7 = [
+          tmp68,
+          tmp69
+        ];
         tmp70 = times(x4, z);
         tmp71 = times(y, z);
         tmp72 = lessp(tmp70, tmp71);
@@ -7438,47 +7229,23 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
         tmp74 = not_(tmp73);
         tmp75 = lessp(x4, y);
         tmp76 = and_(tmp74, tmp75);
-        _deforest_Deforest_Arr_2_06 = tmp72;
-        _deforest_Deforest_Arr_2_16 = tmp76;
-        arr8 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr8 = [
+          tmp72,
+          tmp76
+        ];
         tmp77 = plus(x4, y);
         tmp78 = lessp(y, tmp77);
         tmp79 = zerop(x4);
         tmp80 = not_(tmp79);
-        _deforest_Deforest_Arr_2_05 = tmp78;
-        _deforest_Deforest_Arr_2_15 = tmp80;
-        arr9 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head9 = arr9;
-        _deforest_Cons_tail9 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp81 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head9, _deforest_Cons_tail9)
-        };
-        _deforest_Cons_head8 = arr8;
-        _deforest_Cons_tail8 = tmp81;
-        tmp82 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head8, _deforest_Cons_tail8)
-        };
-        _deforest_Cons_head7 = arr7;
-        _deforest_Cons_tail7 = tmp82;
-        tmp83 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head7, _deforest_Cons_tail7)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = tmp83;
-        tmp84 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp84;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr9 = [
+          tmp78,
+          tmp80
+        ];
+        tmp81 = NofibPrelude.Cons(arr9, NofibPrelude.Nil);
+        tmp82 = NofibPrelude.Cons(arr8, tmp81);
+        tmp83 = NofibPrelude.Cons(arr7, tmp82);
+        tmp84 = NofibPrelude.Cons(arr6, tmp83);
+        return NofibPrelude.Cons(arr5, tmp84)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7488,21 +7255,14 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, arr5;
         tmp54 = nilp(x4);
         tmp55 = equal(x4, nil);
-        _deforest_Deforest_Arr_2_05 = tmp54;
-        _deforest_Deforest_Arr_2_15 = tmp55;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp54,
+          tmp55
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -7512,23 +7272,16 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, tmp56, tmp57, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, tmp56, tmp57, arr5;
         tmp54 = listp(x4);
         tmp55 = nilp(x4);
         tmp56 = consp(x4);
         tmp57 = or_(tmp55, tmp56);
-        _deforest_Deforest_Arr_2_05 = tmp54;
-        _deforest_Deforest_Arr_2_15 = tmp57;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp54,
+          tmp57
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -7539,37 +7292,25 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, tmp58, tmp59, arr5, tmp60, tmp61, tmp62, arr6, tmp63, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16;
+        let tmp55, tmp56, tmp57, tmp58, tmp59, arr5, tmp60, tmp61, tmp62, arr6, tmp63;
         tmp55 = append_(y, z);
         tmp56 = member(x4, tmp55);
         tmp57 = member(x4, y);
         tmp58 = member(x4, z);
         tmp59 = or_(tmp57, tmp58);
-        _deforest_Deforest_Arr_2_06 = tmp56;
-        _deforest_Deforest_Arr_2_16 = tmp59;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr5 = [
+          tmp56,
+          tmp59
+        ];
         tmp60 = reverse_(y);
         tmp61 = member(x4, tmp60);
         tmp62 = member(x4, y);
-        _deforest_Deforest_Arr_2_05 = tmp61;
-        _deforest_Deforest_Arr_2_15 = tmp62;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp63 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp63;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr6 = [
+          tmp61,
+          tmp62
+        ];
+        tmp63 = NofibPrelude.Cons(arr6, NofibPrelude.Nil);
+        return NofibPrelude.Cons(arr5, tmp63)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7597,22 +7338,15 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, tmp56, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, tmp56, arr5;
         tmp54 = odd_(x4);
         tmp55 = sub1(x4);
         tmp56 = even_(tmp55);
-        _deforest_Deforest_Arr_2_05 = tmp54;
-        _deforest_Deforest_Arr_2_15 = tmp56;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp54,
+          tmp56
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -7623,22 +7357,15 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp55, tmp56, tmp57, arr5;
         tmp55 = or_(x4, y);
         tmp56 = if_(y, boyerTrue, boyerFalse);
         tmp57 = if_(x4, boyerTrue, tmp56);
-        _deforest_Deforest_Arr_2_05 = tmp55;
-        _deforest_Deforest_Arr_2_15 = tmp57;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp55,
+          tmp57
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7649,51 +7376,34 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, tmp58, arr5, tmp59, tmp60, tmp61, tmp62, arr6, tmp63, tmp64, tmp65, tmp66, arr7, tmp67, tmp68, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17;
+        let tmp55, tmp56, tmp57, tmp58, arr5, tmp59, tmp60, tmp61, tmp62, arr6, tmp63, tmp64, tmp65, tmp66, arr7, tmp67, tmp68;
         tmp55 = plus(x4, y);
         tmp56 = plus(tmp55, z);
         tmp57 = plus(y, z);
         tmp58 = plus(x4, tmp57);
-        _deforest_Deforest_Arr_2_07 = tmp56;
-        _deforest_Deforest_Arr_2_17 = tmp58;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17)
-        };
+        arr5 = [
+          tmp56,
+          tmp58
+        ];
         tmp59 = remainder(x4, y);
         tmp60 = quotient(x4, y);
         tmp61 = times(y, tmp60);
         tmp62 = plus(tmp59, tmp61);
-        _deforest_Deforest_Arr_2_06 = tmp62;
-        _deforest_Deforest_Arr_2_16 = x4;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr6 = [
+          tmp62,
+          x4
+        ];
         tmp63 = add1(y);
         tmp64 = plus(x4, tmp63);
         tmp65 = plus(x4, y);
         tmp66 = add1(tmp65);
-        _deforest_Deforest_Arr_2_05 = tmp64;
-        _deforest_Deforest_Arr_2_15 = tmp66;
-        arr7 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head7 = arr7;
-        _deforest_Cons_tail7 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp67 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head7, _deforest_Cons_tail7)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = tmp67;
-        tmp68 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp68;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr7 = [
+          tmp64,
+          tmp66
+        ];
+        tmp67 = NofibPrelude.Cons(arr7, NofibPrelude.Nil);
+        tmp68 = NofibPrelude.Cons(arr6, tmp67);
+        return NofibPrelude.Cons(arr5, tmp68)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7704,7 +7414,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, arr5, tmp62, tmp63, tmp64, tmp65, arr6, tmp66, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16;
+        let tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, arr5, tmp62, tmp63, tmp64, tmp65, arr6, tmp66;
         tmp55 = plus(x4, y);
         tmp56 = plus(x4, tmp55);
         tmp57 = two();
@@ -7712,32 +7422,20 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
         tmp59 = two();
         tmp60 = quotient(y, tmp59);
         tmp61 = plus(x4, tmp60);
-        _deforest_Deforest_Arr_2_06 = tmp58;
-        _deforest_Deforest_Arr_2_16 = tmp61;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr5 = [
+          tmp58,
+          tmp61
+        ];
         tmp62 = times(y, x4);
         tmp63 = quotient(tmp62, y);
         tmp64 = zerop(y);
         tmp65 = if_(tmp64, zero, x4);
-        _deforest_Deforest_Arr_2_05 = tmp63;
-        _deforest_Deforest_Arr_2_15 = tmp65;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp66 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp66;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr6 = [
+          tmp63,
+          tmp65
+        ];
+        tmp66 = NofibPrelude.Cons(arr6, NofibPrelude.Nil);
+        return NofibPrelude.Cons(arr5, tmp66)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7748,56 +7446,34 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, arr5, tmp57, arr6, tmp58, tmp59, arr7, tmp60, tmp61, arr8, tmp62, tmp63, tmp64, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18;
+        let tmp55, tmp56, arr5, tmp57, arr6, tmp58, tmp59, arr7, tmp60, tmp61, arr8, tmp62, tmp63, tmp64;
         tmp55 = one();
         tmp56 = remainder(x4, tmp55);
-        _deforest_Deforest_Arr_2_08 = tmp56;
-        _deforest_Deforest_Arr_2_18 = zero;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18)
-        };
+        arr5 = [
+          tmp56,
+          zero
+        ];
         tmp57 = remainder(x4, x4);
-        _deforest_Deforest_Arr_2_07 = tmp57;
-        _deforest_Deforest_Arr_2_17 = zero;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17)
-        };
+        arr6 = [
+          tmp57,
+          zero
+        ];
         tmp58 = times(x4, y);
         tmp59 = remainder(tmp58, x4);
-        _deforest_Deforest_Arr_2_06 = tmp59;
-        _deforest_Deforest_Arr_2_16 = zero;
-        arr7 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr7 = [
+          tmp59,
+          zero
+        ];
         tmp60 = times(x4, y);
         tmp61 = remainder(tmp60, y);
-        _deforest_Deforest_Arr_2_05 = tmp61;
-        _deforest_Deforest_Arr_2_15 = zero;
-        arr8 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head8 = arr8;
-        _deforest_Cons_tail8 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp62 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head8, _deforest_Cons_tail8)
-        };
-        _deforest_Cons_head7 = arr7;
-        _deforest_Cons_tail7 = tmp62;
-        tmp63 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head7, _deforest_Cons_tail7)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = tmp63;
-        tmp64 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp64;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr8 = [
+          tmp61,
+          zero
+        ];
+        tmp62 = NofibPrelude.Cons(arr8, NofibPrelude.Nil);
+        tmp63 = NofibPrelude.Cons(arr7, tmp62);
+        tmp64 = NofibPrelude.Cons(arr6, tmp63);
+        return NofibPrelude.Cons(arr5, tmp64)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7807,24 +7483,17 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, tmp56, tmp57, tmp58, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, tmp56, tmp57, tmp58, arr5;
         tmp54 = append_(x4, y);
         tmp55 = reverse_(tmp54);
         tmp56 = reverse_(y);
         tmp57 = reverse_(x4);
         tmp58 = append_(tmp56, tmp57);
-        _deforest_Deforest_Arr_2_05 = tmp55;
-        _deforest_Deforest_Arr_2_15 = tmp58;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp55,
+          tmp58
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -7834,21 +7503,14 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, arr5;
         tmp54 = add1(x4);
         tmp55 = sub1(tmp54);
-        _deforest_Deforest_Arr_2_05 = tmp55;
-        _deforest_Deforest_Arr_2_15 = x4;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp55,
+          x4
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -7859,67 +7521,45 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       tmp51 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
       tmp52 = NofibPrelude.Cons(a1, tmp51);
       lambda4 = (undefined, function () {
-        let tmp55, tmp56, tmp57, tmp58, tmp59, arr5, tmp60, tmp61, tmp62, tmp63, arr6, tmp64, tmp65, tmp66, tmp67, tmp68, arr7, tmp69, tmp70, tmp71, tmp72, arr8, tmp73, tmp74, tmp75, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18;
+        let tmp55, tmp56, tmp57, tmp58, tmp59, arr5, tmp60, tmp61, tmp62, tmp63, arr6, tmp64, tmp65, tmp66, tmp67, tmp68, arr7, tmp69, tmp70, tmp71, tmp72, arr8, tmp73, tmp74, tmp75;
         tmp55 = plus(y, z);
         tmp56 = times(x4, tmp55);
         tmp57 = times(x4, y);
         tmp58 = times(x4, z);
         tmp59 = plus(tmp57, tmp58);
-        _deforest_Deforest_Arr_2_08 = tmp56;
-        _deforest_Deforest_Arr_2_18 = tmp59;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_08, _deforest_Deforest_Arr_2_18)
-        };
+        arr5 = [
+          tmp56,
+          tmp59
+        ];
         tmp60 = times(x4, y);
         tmp61 = times(tmp60, z);
         tmp62 = times(y, z);
         tmp63 = times(x4, tmp62);
-        _deforest_Deforest_Arr_2_07 = tmp61;
-        _deforest_Deforest_Arr_2_17 = tmp63;
-        arr6 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_07, _deforest_Deforest_Arr_2_17)
-        };
+        arr6 = [
+          tmp61,
+          tmp63
+        ];
         tmp64 = difference(y, z);
         tmp65 = times(x4, tmp64);
         tmp66 = times(y, x4);
         tmp67 = times(z, x4);
         tmp68 = difference(tmp66, tmp67);
-        _deforest_Deforest_Arr_2_06 = tmp65;
-        _deforest_Deforest_Arr_2_16 = tmp68;
-        arr7 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16)
-        };
+        arr7 = [
+          tmp65,
+          tmp68
+        ];
         tmp69 = add1(y);
         tmp70 = times(x4, tmp69);
         tmp71 = times(x4, y);
         tmp72 = plus(x4, tmp71);
-        _deforest_Deforest_Arr_2_05 = tmp70;
-        _deforest_Deforest_Arr_2_15 = tmp72;
-        arr8 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head8 = arr8;
-        _deforest_Cons_tail8 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        tmp73 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head8, _deforest_Cons_tail8)
-        };
-        _deforest_Cons_head7 = arr7;
-        _deforest_Cons_tail7 = tmp73;
-        tmp74 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head7, _deforest_Cons_tail7)
-        };
-        _deforest_Cons_head6 = arr6;
-        _deforest_Cons_tail6 = tmp74;
-        tmp75 = (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head6, _deforest_Cons_tail6)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = tmp75;
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr8 = [
+          tmp70,
+          tmp72
+        ];
+        tmp73 = NofibPrelude.Cons(arr8, NofibPrelude.Nil);
+        tmp74 = NofibPrelude.Cons(arr7, tmp73);
+        tmp75 = NofibPrelude.Cons(arr6, tmp74);
+        return NofibPrelude.Cons(arr5, tmp75)
       });
       tmp53 = lambda4;
       tmp54 = NofibPrelude.lazy(tmp53);
@@ -7929,21 +7569,14 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       let tmp51, tmp52, tmp53, lambda4;
       tmp51 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
       lambda4 = (undefined, function () {
-        let tmp54, tmp55, arr5, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+        let tmp54, tmp55, arr5;
         tmp54 = zerop(x4);
         tmp55 = equal(x4, zero);
-        _deforest_Deforest_Arr_2_05 = tmp54;
-        _deforest_Deforest_Arr_2_15 = tmp55;
-        arr5 = (term5, param1) => {
-          return match_param0_arm_Deforest_Arr_2_inst_14_16_13_tsni(term5, param1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
-        };
-        _deforest_Cons_head5 = arr5;
-        _deforest_Cons_tail5 = (term5) => {
-          return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-        };
-        return (term5) => {
-          return match_lss_arm_Cons_inst_14_16_13_tsni(term5, _deforest_Cons_head5, _deforest_Cons_tail5)
-        }
+        arr5 = [
+          tmp54,
+          tmp55
+        ];
+        return NofibPrelude.Cons(arr5, NofibPrelude.Nil)
       });
       tmp52 = lambda4;
       tmp53 = NofibPrelude.lazy(tmp52);
@@ -7968,33 +7601,25 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
     tmp8 = runtime.safeCall(boyer.Var(boyer.Z));
     z = tmp8;
     lambda = (undefined, function () {
-      return (term5) => {
-        return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-      }
+      return NofibPrelude.Nil
     });
     tmp9 = NofibPrelude.lazy(lambda);
     tmp10 = runtime.safeCall(boyer.Fun(boyer.FALSE, NofibPrelude.Nil, tmp9));
     boyerFalse = tmp10;
     lambda1 = (undefined, function () {
-      return (term5) => {
-        return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-      }
+      return NofibPrelude.Nil
     });
     tmp11 = NofibPrelude.lazy(lambda1);
     tmp12 = runtime.safeCall(boyer.Fun(boyer.NIL, NofibPrelude.Nil, tmp11));
     nil = tmp12;
     lambda2 = (undefined, function () {
-      return (term5) => {
-        return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-      }
+      return NofibPrelude.Nil
     });
     tmp13 = NofibPrelude.lazy(lambda2);
     tmp14 = runtime.safeCall(boyer.Fun(boyer.TRUE, NofibPrelude.Nil, tmp13));
     boyerTrue = tmp14;
     lambda3 = (undefined, function () {
-      return (term5) => {
-        return match_lss_arm_Nil_inst_14_16_13_tsni(term5)
-      }
+      return NofibPrelude.Nil
     });
     tmp15 = NofibPrelude.lazy(lambda3);
     tmp16 = runtime.safeCall(boyer.Fun(boyer.ZERO, NofibPrelude.Nil, tmp15));

@@ -9,11 +9,10 @@ import "../../../mlscript-compile/nofib/cryptarithm1.mls"
 cryptarithm1.main()
 //│ ═══[RUNTIME ERROR] RangeError: Maximum call stack size exceeded
 
-// FIXME:
-:fixme
+
 import "../../../mlscript-compile/nofib/ansi.mls"
 ansi.main()
-//│ ═══[RUNTIME ERROR] TypeError: cs is not a function
+//│ = "LE[5;17HESC[7mDemonstration programESC[0mE[5;48HVersion 1.0E[7;17HThis program illustrates a simple approachE[8;17Hto screen-based interactive programs usingE[9;17Hthe Hugs functional programming system.E[11;17HPlease press any key to continue ...E[15;17HPlease enter your name: E[15;41H__________________E[15;41HesttesttestE[18;31HHello esttesttest!E[23;1HI'm waiting..."
 
 import "../../../mlscript-compile/nofib/atom.mls"
 print(atom.main())
@@ -143,11 +142,15 @@ awards.main()
 //│ > [["Simon", [["Gold", [74, [40,0,34]]],["Gold", [83, [35,27,21]]]]],["Hans", [["Gold", [70, [45,17,8]]],["Bronze", [52, [23,19,10]]]]],["Phil", [["Gold", [70, [20,34,16]]],["Silver", [60, [18,21,21]]]]],["Kevin", [["Gold", [71, [17,54,0]]],["Gold", [73, [9,23,41]]]]]]
 //│ = [(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),(),()]
 
-// FIXME:
-:fixme
 import "../../../mlscript-compile/nofib/banner.mls"
 print(banner.main())
-//│ ═══[RUNTIME ERROR] TypeError: xs is not a function
+//│ > 
+//│ > IIIII   SSSS         TTTTT  H   H  IIIII   SSSS         N   N   OOO   TTTTT           A            GGGG  RRRR   EEEEE    A    TTTTT         BBBB     A    N   N  N   N  EEEEE  RRRR    ??? 
+//│ >   I    S               T    H   H    I    S             NN  N  O   O    T            A A          G      R   R  E       A A     T           B   B   A A   NN  N  NN  N  E      R   R  ?   ?
+//│ >   I     SSS            T    HHHHH    I     SSS          N N N  O   O    T           AAAAA         G  GG  RRRR   EEEEE  AAAAA    T           BBBB   AAAAA  N N N  N N N  EEEEE  RRRR      ? 
+//│ >   I        S           T    H   H    I        S         N  NN  O   O    T           A   A         G   G  R  R   E      A   A    T           B   B  A   A  N  NN  N  NN  E      R  R     ?  
+//│ > IIIII  SSSS            T    H   H  IIIII  SSSS          N   N   OOO     T           A   A          GGG   R   R  EEEEE  A   A    T           BBBB   A   A  N   N  N   N  EEEEE  R   R    .  
+//│ > 
 
 import "../../../mlscript-compile/nofib/lcss.mls"
 lcss.main()
@@ -226,11 +229,9 @@ clausify.main()
 //│ = "a <=\na <=\na <=\na <=\na <=\na <=\na <=\na <=\na <=\na <=\n"
 
 
-// FIXME:
-:fixme
 import "../../../mlscript-compile/nofib/constraints.mls"
 constraints.main()
-//│ ═══[RUNTIME ERROR] TypeError: as2 is not a function
+//│ = "[4,4,4,4,4]"
 
 import "../../../mlscript-compile/nofib/cryptarithm2.mls"
 cryptarithm2.main()
@@ -368,11 +369,10 @@ import "../../../mlscript-compile/nofib/rsa.mls"
 print(rsa.main())
 //│ > 27333540773077035891319648583115426924319682304972207061138531859687685497972324052329603672575247712822051033469833084249533708345668063349995687590898179232348381885068093916042332376874471111951277359240086024689478630903872483533692492045159120070581960228683268092981264305946420008131657132188411691046890656423813430758797867405414254427252889799598265252801351427969270327221859277538276931835433884202770274573975497479910055419604950116998779489424711382329456954759006285308055617249211518517251626537584144819963887585424355716160948313809816237911911714261525254960504461968887058634176692781918761529885191647640353988451378487593523928746420834635489374763284035135024554501992592243054651704669361294874639088141090295124111150498567814209355019358035109087855352831799613561922371560229756096541243234407756387955273981612894548796096568181979612805473591487774278882312329731123289196221054300160041623910405907021509065754120986913156062146884015988300349866352421512547114991188706014109057361892879580430212109312752658248376273202302160796406164353595904770530340704402942462200108055227350082862003023696909347848580847463903352486983305887517122394068078234691266091519485573727824252527733372590392886198860292659649377855405883044150450559660371076194186374359910112808222171852893169058046390627297042238730809765588373104750
 
-// FIXME:
-:fixme
+
 import "../../../mlscript-compile/nofib/scc.mls"
 print(scc.main())
-//│ ═══[RUNTIME ERROR] TypeError: param0 is not a function
+//│ > [[1],[2],[7,5,6],[3,4]]
 
 
 import "../../../mlscript-compile/nofib/secretary.mls"

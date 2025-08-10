@@ -66,42 +66,44 @@ let scc1;
   static stronglyConnComp(es, vs) {
     let swap, span_tree, new_range, arr, arr1, tmp, tmp1, tmp2, lambda, lambda1;
     swap = function swap(a) {
-      let first1, first0, f, s, arr2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let first1, first0, f, s, arr2;
       if (globalThis.Array.isArray(a) && a.length === 2) {
         first0 = a[0];
         first1 = a[1];
         f = first0;
         s = first1;
-        _deforest_Deforest_Arr_2_0 = s;
-        _deforest_Deforest_Arr_2_1 = f;
-        arr2 = (new_range1, w, param1) => {
-          let first11, first01, x, y, xys, scrut, tmp3;
-          first01 = _deforest_Deforest_Arr_2_0;
-          first11 = _deforest_Deforest_Arr_2_1;
-          x = first01;
-          y = first11;
-          xys = param1;
-          scrut = x == w;
-          if (scrut === true) {
-            tmp3 = new_range1(xys, w);
-            return NofibPrelude.Cons(y, tmp3)
-          } else {
-            return new_range1(xys, w)
-          }
-        };
+        arr2 = [
+          s,
+          f
+        ];
         return arr2
       } else {
         throw new globalThis.Error("match error");
       }
     };
     new_range = function new_range(xys, w) {
-      let param0, param1;
+      let param0, param1, first1, first0, x, y, xys1, scrut, tmp3;
       if (xys instanceof NofibPrelude.Nil.class) {
         return NofibPrelude.Nil
       } else if (xys instanceof NofibPrelude.Cons.class) {
         param0 = xys.head;
         param1 = xys.tail;
-        return runtime.safeCall(param0(new_range, w, param1))
+        if (globalThis.Array.isArray(param0) && param0.length === 2) {
+          first0 = param0[0];
+          first1 = param0[1];
+          x = first0;
+          y = first1;
+          xys1 = param1;
+          scrut = x == w;
+          if (scrut === true) {
+            tmp3 = new_range(xys1, w);
+            return NofibPrelude.Cons(y, tmp3)
+          } else {
+            return new_range(xys1, w)
+          }
+        } else {
+          throw new globalThis.Error("match error");
+        }
       } else {
         throw new globalThis.Error("match error");
       }

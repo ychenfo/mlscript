@@ -2,7 +2,7 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let constraints1, foldTree_inst_0_1_tsni, map_inst_0_1_2_tsni, filterTree_inst_3_4_tsni, foldTree_inst_3_4_1_tsni, map_inst_3_4_1_2_tsni, map_inst_5_6_tsni, enumFromTo_inst_7_8_tsni, filter_inst_9_10_tsni, earliestInconsistency_inst_11_12_tsni, filter_inst_11_12_10_tsni, mkTree_inst_13_14_tsni, enumFromTo_inst_13_14_8_tsni, labelInconsistencies_inst_13_15_tsni, earliestInconsistency_inst_13_15_12_tsni, filter_inst_13_15_12_10_tsni, initTree_inst_13_14_16_tsni, map_inst_13_14_16_17_tsni, prune_inst_13_18_tsni, filterTree_inst_13_18_4_tsni, foldTree_inst_13_18_4_1_tsni, map_inst_13_18_4_1_2_tsni, mapTree_inst_13_15_19_tsni, map_inst_13_15_19_20_tsni, filter_inst_13_18_4_21_tsni, leaves_inst_13_22_tsni, map_inst_13_22_6_tsni, mapTree_inst_13_23_tsni, mkTree_inst_24_25_tsni, enumFromTo_inst_24_25_8_tsni, prune_inst_24_26_tsni, filterTree_inst_24_26_4_tsni, foldTree_inst_24_26_4_1_tsni, map_inst_24_26_4_1_2_tsni, leaves_inst_24_27_tsni, map_inst_24_27_6_tsni, filter_inst_24_28_tsni, earliestInconsistency_inst_29_30_tsni, filter_inst_29_30_10_tsni, enumFromTo_inst_31_32_tsni, enumFromTo_inst_31_33_tsni, enumFromTo_inst_34_35_tsni, enumFromTo_inst_34_36_tsni, fillTable_inst_37_38_tsni, enumFromTo_inst_37_38_35_tsni, enumFromTo_inst_37_38_36_tsni, emptyTable_inst_39_40_tsni, enumFromTo_inst_39_40_32_tsni, enumFromTo_inst_39_40_33_tsni, cacheChecks_inst_39_41_tsni, fillTable_inst_39_41_38_tsni, enumFromTo_inst_39_41_38_35_tsni, enumFromTo_inst_39_41_38_36_tsni, lookupCache_inst_39_42_tsni, map_inst_39_41_43_tsni, mapTree_inst_39_42_44_tsni, map_inst_39_42_44_20_tsni, map_inst_45_46_tsni, map_inst_47_48_tsni, bt_inst_49_50_tsni, earliestInconsistency_inst_49_50_30_tsni, filter_inst_49_50_30_10_tsni, bj_inst_49_51_tsni, map_inst_49_51_48_tsni, mapTree_inst_49_50_52_tsni, map_inst_49_50_52_20_tsni, bt_inst_53_54_tsni, earliestInconsistency_inst_53_54_30_tsni, filter_inst_53_54_30_10_tsni, bj__inst_53_55_tsni, map_inst_53_55_46_tsni, mapTree_inst_53_54_52_tsni, map_inst_53_54_52_20_tsni, emptyTable_inst_56_57_tsni, enumFromTo_inst_56_57_32_tsni, enumFromTo_inst_56_57_33_tsni, cacheChecks_inst_56_58_tsni, fillTable_inst_56_58_38_tsni, enumFromTo_inst_56_58_38_35_tsni, enumFromTo_inst_56_58_38_36_tsni, lookupCache_inst_56_59_tsni, map_inst_56_58_43_tsni, mapTree_inst_56_59_44_tsni, map_inst_56_59_44_20_tsni, search_inst_60_61_tsni, filter_inst_60_61_28_tsni, leaves_inst_60_61_27_tsni, map_inst_60_61_27_6_tsni, prune_inst_60_61_26_tsni, filterTree_inst_60_61_26_4_tsni, foldTree_inst_60_61_26_4_1_tsni, map_inst_60_61_26_4_1_2_tsni, mkTree_inst_60_61_25_tsni, enumFromTo_inst_60_61_25_8_tsni, fc_inst_62_63_tsni, lookupCache_inst_62_63_59_tsni, mapTree_inst_62_63_59_44_tsni, map_inst_62_63_59_44_20_tsni, cacheChecks_inst_62_63_58_tsni, fillTable_inst_62_63_58_38_tsni, enumFromTo_inst_62_63_58_38_35_tsni, enumFromTo_inst_62_63_58_38_36_tsni, map_inst_62_63_58_43_tsni, emptyTable_inst_62_63_57_tsni, enumFromTo_inst_62_63_57_32_tsni, enumFromTo_inst_62_63_57_33_tsni, bjbt__inst_62_64_tsni, bj__inst_62_64_55_tsni, map_inst_62_64_55_46_tsni, bt_inst_62_64_54_tsni, earliestInconsistency_inst_62_64_54_30_tsni, filter_inst_62_64_54_30_10_tsni, mapTree_inst_62_64_54_52_tsni, map_inst_62_64_54_52_20_tsni, bjbt_inst_62_65_tsni, bj_inst_62_65_51_tsni, map_inst_62_65_51_48_tsni, bt_inst_62_65_50_tsni, earliestInconsistency_inst_62_65_50_30_tsni, filter_inst_62_65_50_30_10_tsni, mapTree_inst_62_65_50_52_tsni, map_inst_62_65_50_52_20_tsni, bm_inst_62_66_tsni, lookupCache_inst_62_66_42_tsni, mapTree_inst_62_66_42_44_tsni, map_inst_62_66_42_44_20_tsni, cacheChecks_inst_62_66_41_tsni, fillTable_inst_62_66_41_38_tsni, enumFromTo_inst_62_66_41_38_35_tsni, enumFromTo_inst_62_66_41_38_36_tsni, map_inst_62_66_41_43_tsni, emptyTable_inst_62_66_40_tsni, enumFromTo_inst_62_66_40_32_tsni, enumFromTo_inst_62_66_40_33_tsni, bt_inst_62_67_tsni, earliestInconsistency_inst_62_67_30_tsni, filter_inst_62_67_30_10_tsni, try__inst_62_68_tsni, search_inst_62_68_61_tsni, mkTree_inst_62_68_61_25_tsni, enumFromTo_inst_62_68_61_25_8_tsni, prune_inst_62_68_61_26_tsni, filterTree_inst_62_68_61_26_4_tsni, foldTree_inst_62_68_61_26_4_1_tsni, map_inst_62_68_61_26_4_1_2_tsni, leaves_inst_62_68_61_27_tsni, map_inst_62_68_61_27_6_tsni, filter_inst_62_68_61_28_tsni, testConstraints_nofib_inst_69_70_tsni, try__inst_69_70_68_tsni, search_inst_69_70_68_61_tsni, filter_inst_69_70_68_61_28_tsni, leaves_inst_69_70_68_61_27_tsni, map_inst_69_70_68_61_27_6_tsni, prune_inst_69_70_68_61_26_tsni, filterTree_inst_69_70_68_61_26_4_tsni, foldTree_inst_69_70_68_61_26_4_1_tsni, map_inst_69_70_68_61_26_4_1_2_tsni, mkTree_inst_69_70_68_61_25_tsni, enumFromTo_inst_69_70_68_61_25_8_tsni, bt_inst_69_70_67_tsni, earliestInconsistency_inst_69_70_67_30_tsni, filter_inst_69_70_67_30_10_tsni, bm_inst_69_70_66_tsni, emptyTable_inst_69_70_66_40_tsni, enumFromTo_inst_69_70_66_40_32_tsni, enumFromTo_inst_69_70_66_40_33_tsni, cacheChecks_inst_69_70_66_41_tsni, fillTable_inst_69_70_66_41_38_tsni, enumFromTo_inst_69_70_66_41_38_35_tsni, enumFromTo_inst_69_70_66_41_38_36_tsni, lookupCache_inst_69_70_66_42_tsni, map_inst_69_70_66_41_43_tsni, mapTree_inst_69_70_66_42_44_tsni, map_inst_69_70_66_42_44_20_tsni, bjbt_inst_69_70_65_tsni, bt_inst_69_70_65_50_tsni, earliestInconsistency_inst_69_70_65_50_30_tsni, filter_inst_69_70_65_50_30_10_tsni, bj_inst_69_70_65_51_tsni, map_inst_69_70_65_51_48_tsni, mapTree_inst_69_70_65_50_52_tsni, map_inst_69_70_65_50_52_20_tsni, bjbt__inst_69_70_64_tsni, bt_inst_69_70_64_54_tsni, earliestInconsistency_inst_69_70_64_54_30_tsni, filter_inst_69_70_64_54_30_10_tsni, bj__inst_69_70_64_55_tsni, map_inst_69_70_64_55_46_tsni, mapTree_inst_69_70_64_54_52_tsni, map_inst_69_70_64_54_52_20_tsni, fc_inst_69_70_63_tsni, emptyTable_inst_69_70_63_57_tsni, enumFromTo_inst_69_70_63_57_32_tsni, enumFromTo_inst_69_70_63_57_33_tsni, cacheChecks_inst_69_70_63_58_tsni, fillTable_inst_69_70_63_58_38_tsni, enumFromTo_inst_69_70_63_58_38_35_tsni, enumFromTo_inst_69_70_63_58_38_36_tsni, lookupCache_inst_69_70_63_59_tsni, map_inst_69_70_63_58_43_tsni, mapTree_inst_69_70_63_59_44_tsni, map_inst_69_70_63_59_44_20_tsni, filter_inst_0_21_tsni, filter_inst_3_4_21_tsni, concat_inst_5_71_tsni, initTree_inst_7_16_tsni, map_inst_7_16_17_tsni, map_inst_13_23_20_tsni, concat_inst_13_22_71_tsni, initTree_inst_24_25_16_tsni, map_inst_24_25_16_17_tsni, filter_inst_24_26_4_21_tsni, concat_inst_24_27_71_tsni, map_inst_24_72_tsni, zipWith_inst_34_73_tsni, zipWith_inst_34_74_tsni, checkComplete_inst_75_76_tsni, complete_inst_75_76_77_tsni, maxLevel_inst_75_76_77_78_tsni, zipWith_inst_37_38_73_tsni, zipWith_inst_37_38_74_tsni, zipWith_inst_39_41_38_73_tsni, zipWith_inst_39_41_38_74_tsni, checkComplete_inst_39_42_76_tsni, complete_inst_39_42_76_77_tsni, maxLevel_inst_39_42_76_77_78_tsni, mapTree_inst_39_79_tsni, fst_inst_39_80_tsni, map_inst_39_79_20_tsni, combine_inst_45_81_tsni, combine_inst_47_82_tsni, combine_inst_49_51_82_tsni, foldTree_inst_49_51_83_tsni, map_inst_49_51_83_2_tsni, combine_inst_53_55_81_tsni, foldTree_inst_53_55_84_tsni, map_inst_53_55_84_2_tsni, zipWith_inst_56_58_38_73_tsni, zipWith_inst_56_58_38_74_tsni, checkComplete_inst_56_59_76_tsni, complete_inst_56_59_76_77_tsni, maxLevel_inst_56_59_76_77_78_tsni, domainWipeout_inst_56_85_tsni, mapTree_inst_56_85_86_tsni, map_inst_56_85_86_20_tsni, map_inst_60_61_72_tsni, concat_inst_60_61_27_71_tsni, filter_inst_60_61_26_4_21_tsni, initTree_inst_60_61_25_16_tsni, map_inst_60_61_25_16_17_tsni, checkComplete_inst_62_63_59_76_tsni, complete_inst_62_63_59_76_77_tsni, maxLevel_inst_62_63_59_76_77_78_tsni, domainWipeout_inst_62_63_85_tsni, mapTree_inst_62_63_85_86_tsni, map_inst_62_63_85_86_20_tsni, zipWith_inst_62_63_58_38_73_tsni, zipWith_inst_62_63_58_38_74_tsni, combine_inst_62_64_55_81_tsni, foldTree_inst_62_64_55_84_tsni, map_inst_62_64_55_84_2_tsni, combine_inst_62_65_51_82_tsni, foldTree_inst_62_65_51_83_tsni, map_inst_62_65_51_83_2_tsni, checkComplete_inst_62_66_42_76_tsni, complete_inst_62_66_42_76_77_tsni, maxLevel_inst_62_66_42_76_77_78_tsni, mapTree_inst_62_66_79_tsni, map_inst_62_66_79_20_tsni, fst_inst_62_66_80_tsni, zipWith_inst_62_66_41_38_73_tsni, zipWith_inst_62_66_41_38_74_tsni, initTree_inst_62_68_61_25_16_tsni, map_inst_62_68_61_25_16_17_tsni, filter_inst_62_68_61_26_4_21_tsni, concat_inst_62_68_61_27_71_tsni, map_inst_62_68_61_72_tsni, map_inst_62_87_tsni, queens_inst_62_68_88_tsni, safe_inst_62_68_88_89_tsni, map_inst_69_70_68_61_72_tsni, concat_inst_69_70_68_61_27_71_tsni, filter_inst_69_70_68_61_26_4_21_tsni, initTree_inst_69_70_68_61_25_16_tsni, map_inst_69_70_68_61_25_16_17_tsni, map_inst_69_70_87_tsni, zipWith_inst_69_70_66_41_38_73_tsni, zipWith_inst_69_70_66_41_38_74_tsni, checkComplete_inst_69_70_66_42_76_tsni, complete_inst_69_70_66_42_76_77_tsni, maxLevel_inst_69_70_66_42_76_77_78_tsni, mapTree_inst_69_70_66_79_tsni, fst_inst_69_70_66_80_tsni, map_inst_69_70_66_79_20_tsni, queens_inst_69_70_68_88_tsni, safe_inst_69_70_68_88_89_tsni, combine_inst_69_70_65_51_82_tsni, foldTree_inst_69_70_65_51_83_tsni, map_inst_69_70_65_51_83_2_tsni, combine_inst_69_70_64_55_81_tsni, foldTree_inst_69_70_64_55_84_tsni, map_inst_69_70_64_55_84_2_tsni, zipWith_inst_69_70_63_58_38_73_tsni, zipWith_inst_69_70_63_58_38_74_tsni, checkComplete_inst_69_70_63_59_76_tsni, complete_inst_69_70_63_59_76_77_tsni, maxLevel_inst_69_70_63_59_76_77_78_tsni, domainWipeout_inst_69_70_63_85_tsni, mapTree_inst_69_70_63_85_86_tsni, map_inst_69_70_63_85_86_20_tsni, match_scrut_rest_inst_29_tsni, match_scrut_rest_inst_49_50_tsni, match_scrut_rest_inst_53_54_tsni, match_scrut_rest_inst_62_64_54_tsni, match_scrut_rest_inst_62_65_50_tsni, match_scrut_rest_inst_62_67_tsni, match_scrut_rest_inst_69_70_67_tsni, match_scrut_rest_inst_69_70_65_50_tsni, match_scrut_rest_inst_69_70_64_54_tsni, match_xs_arm_Nil_inst_7_16_17_tsni, match_xs_arm_Nil_inst_13_14_16_17_tsni, match_xs_arm_Nil_inst_24_25_16_17_tsni, match_scrut_arm_default_inst_29_tsni, match_x_arm_Deforest_Arr_2_inst_39_80_tsni, match_scrut_arm_default_inst_49_50_tsni, match_scrut_arm_default_inst_53_54_tsni, match_tp2_arm_Deforest_Arr_2_inst_56_85_tsni, match_first0_arm_Deforest_Arr_2_inst_56_85_tsni, match_xs_arm_Nil_inst_60_61_25_16_17_tsni, match_tp2_arm_Deforest_Arr_2_inst_62_63_85_tsni, match_first0_arm_Deforest_Arr_2_inst_62_63_85_tsni, match_scrut_arm_default_inst_62_64_54_tsni, match_scrut_arm_default_inst_62_65_50_tsni, match_x_arm_Deforest_Arr_2_inst_62_66_80_tsni, match_scrut_arm_default_inst_62_67_tsni, match_xs_arm_Nil_inst_62_68_61_25_16_17_tsni, match_xs_arm_Cons_inst_62_87_tsni, match_as2_arm_Assign_inst_62_68_88_89_tsni, match_xs_arm_Nil_inst_69_70_68_61_25_16_17_tsni, match_xs_arm_Cons_inst_69_70_87_tsni, match_scrut_arm_default_inst_69_70_67_tsni, match_x_arm_Deforest_Arr_2_inst_69_70_66_80_tsni, match_as2_arm_Assign_inst_69_70_68_88_89_tsni, match_scrut_arm_default_inst_69_70_65_50_tsni, match_scrut_arm_default_inst_69_70_64_54_tsni, match_tp2_arm_Deforest_Arr_2_inst_69_70_63_85_tsni, match_first0_arm_Deforest_Arr_2_inst_69_70_63_85_tsni;
+let constraints1, foldTree_inst_0_1_tsni, map_inst_0_1_2_tsni, filterTree_inst_3_4_tsni, foldTree_inst_3_4_1_tsni, map_inst_3_4_1_2_tsni, map_inst_5_6_tsni, enumFromTo_inst_7_8_tsni, filter_inst_9_10_tsni, earliestInconsistency_inst_11_12_tsni, filter_inst_11_12_10_tsni, mkTree_inst_13_14_tsni, enumFromTo_inst_13_14_8_tsni, labelInconsistencies_inst_13_15_tsni, earliestInconsistency_inst_13_15_12_tsni, filter_inst_13_15_12_10_tsni, initTree_inst_13_14_16_tsni, map_inst_13_14_16_17_tsni, prune_inst_13_18_tsni, filterTree_inst_13_18_4_tsni, foldTree_inst_13_18_4_1_tsni, map_inst_13_18_4_1_2_tsni, mapTree_inst_13_15_19_tsni, map_inst_13_15_19_20_tsni, filter_inst_13_18_4_21_tsni, leaves_inst_13_22_tsni, map_inst_13_22_6_tsni, mapTree_inst_13_23_tsni, mkTree_inst_24_25_tsni, enumFromTo_inst_24_25_8_tsni, prune_inst_24_26_tsni, filterTree_inst_24_26_4_tsni, foldTree_inst_24_26_4_1_tsni, map_inst_24_26_4_1_2_tsni, leaves_inst_24_27_tsni, map_inst_24_27_6_tsni, filter_inst_24_28_tsni, earliestInconsistency_inst_29_30_tsni, filter_inst_29_30_10_tsni, enumFromTo_inst_31_32_tsni, enumFromTo_inst_31_33_tsni, enumFromTo_inst_34_35_tsni, enumFromTo_inst_34_36_tsni, fillTable_inst_37_38_tsni, enumFromTo_inst_37_38_35_tsni, enumFromTo_inst_37_38_36_tsni, emptyTable_inst_39_40_tsni, enumFromTo_inst_39_40_32_tsni, enumFromTo_inst_39_40_33_tsni, cacheChecks_inst_39_41_tsni, fillTable_inst_39_41_38_tsni, enumFromTo_inst_39_41_38_35_tsni, enumFromTo_inst_39_41_38_36_tsni, lookupCache_inst_39_42_tsni, map_inst_39_41_43_tsni, mapTree_inst_39_42_44_tsni, map_inst_39_42_44_20_tsni, map_inst_45_46_tsni, map_inst_47_48_tsni, bt_inst_49_50_tsni, earliestInconsistency_inst_49_50_30_tsni, filter_inst_49_50_30_10_tsni, bj_inst_49_51_tsni, map_inst_49_51_48_tsni, mapTree_inst_49_50_52_tsni, map_inst_49_50_52_20_tsni, bt_inst_53_54_tsni, earliestInconsistency_inst_53_54_30_tsni, filter_inst_53_54_30_10_tsni, bj__inst_53_55_tsni, map_inst_53_55_46_tsni, mapTree_inst_53_54_52_tsni, map_inst_53_54_52_20_tsni, emptyTable_inst_56_57_tsni, enumFromTo_inst_56_57_32_tsni, enumFromTo_inst_56_57_33_tsni, cacheChecks_inst_56_58_tsni, fillTable_inst_56_58_38_tsni, enumFromTo_inst_56_58_38_35_tsni, enumFromTo_inst_56_58_38_36_tsni, lookupCache_inst_56_59_tsni, map_inst_56_58_43_tsni, mapTree_inst_56_59_44_tsni, map_inst_56_59_44_20_tsni, search_inst_60_61_tsni, filter_inst_60_61_28_tsni, leaves_inst_60_61_27_tsni, map_inst_60_61_27_6_tsni, prune_inst_60_61_26_tsni, filterTree_inst_60_61_26_4_tsni, foldTree_inst_60_61_26_4_1_tsni, map_inst_60_61_26_4_1_2_tsni, mkTree_inst_60_61_25_tsni, enumFromTo_inst_60_61_25_8_tsni, fc_inst_62_63_tsni, lookupCache_inst_62_63_59_tsni, mapTree_inst_62_63_59_44_tsni, map_inst_62_63_59_44_20_tsni, cacheChecks_inst_62_63_58_tsni, fillTable_inst_62_63_58_38_tsni, enumFromTo_inst_62_63_58_38_35_tsni, enumFromTo_inst_62_63_58_38_36_tsni, map_inst_62_63_58_43_tsni, emptyTable_inst_62_63_57_tsni, enumFromTo_inst_62_63_57_32_tsni, enumFromTo_inst_62_63_57_33_tsni, bjbt__inst_62_64_tsni, bj__inst_62_64_55_tsni, map_inst_62_64_55_46_tsni, bt_inst_62_64_54_tsni, earliestInconsistency_inst_62_64_54_30_tsni, filter_inst_62_64_54_30_10_tsni, mapTree_inst_62_64_54_52_tsni, map_inst_62_64_54_52_20_tsni, bjbt_inst_62_65_tsni, bj_inst_62_65_51_tsni, map_inst_62_65_51_48_tsni, bt_inst_62_65_50_tsni, earliestInconsistency_inst_62_65_50_30_tsni, filter_inst_62_65_50_30_10_tsni, mapTree_inst_62_65_50_52_tsni, map_inst_62_65_50_52_20_tsni, bm_inst_62_66_tsni, lookupCache_inst_62_66_42_tsni, mapTree_inst_62_66_42_44_tsni, map_inst_62_66_42_44_20_tsni, cacheChecks_inst_62_66_41_tsni, fillTable_inst_62_66_41_38_tsni, enumFromTo_inst_62_66_41_38_35_tsni, enumFromTo_inst_62_66_41_38_36_tsni, map_inst_62_66_41_43_tsni, emptyTable_inst_62_66_40_tsni, enumFromTo_inst_62_66_40_32_tsni, enumFromTo_inst_62_66_40_33_tsni, bt_inst_62_67_tsni, earliestInconsistency_inst_62_67_30_tsni, filter_inst_62_67_30_10_tsni, try__inst_62_68_tsni, search_inst_62_68_61_tsni, mkTree_inst_62_68_61_25_tsni, enumFromTo_inst_62_68_61_25_8_tsni, prune_inst_62_68_61_26_tsni, filterTree_inst_62_68_61_26_4_tsni, foldTree_inst_62_68_61_26_4_1_tsni, map_inst_62_68_61_26_4_1_2_tsni, leaves_inst_62_68_61_27_tsni, map_inst_62_68_61_27_6_tsni, filter_inst_62_68_61_28_tsni, testConstraints_nofib_inst_69_70_tsni, try__inst_69_70_68_tsni, search_inst_69_70_68_61_tsni, filter_inst_69_70_68_61_28_tsni, leaves_inst_69_70_68_61_27_tsni, map_inst_69_70_68_61_27_6_tsni, prune_inst_69_70_68_61_26_tsni, filterTree_inst_69_70_68_61_26_4_tsni, foldTree_inst_69_70_68_61_26_4_1_tsni, map_inst_69_70_68_61_26_4_1_2_tsni, mkTree_inst_69_70_68_61_25_tsni, enumFromTo_inst_69_70_68_61_25_8_tsni, bt_inst_69_70_67_tsni, earliestInconsistency_inst_69_70_67_30_tsni, filter_inst_69_70_67_30_10_tsni, bm_inst_69_70_66_tsni, emptyTable_inst_69_70_66_40_tsni, enumFromTo_inst_69_70_66_40_32_tsni, enumFromTo_inst_69_70_66_40_33_tsni, cacheChecks_inst_69_70_66_41_tsni, fillTable_inst_69_70_66_41_38_tsni, enumFromTo_inst_69_70_66_41_38_35_tsni, enumFromTo_inst_69_70_66_41_38_36_tsni, lookupCache_inst_69_70_66_42_tsni, map_inst_69_70_66_41_43_tsni, mapTree_inst_69_70_66_42_44_tsni, map_inst_69_70_66_42_44_20_tsni, bjbt_inst_69_70_65_tsni, bt_inst_69_70_65_50_tsni, earliestInconsistency_inst_69_70_65_50_30_tsni, filter_inst_69_70_65_50_30_10_tsni, bj_inst_69_70_65_51_tsni, map_inst_69_70_65_51_48_tsni, mapTree_inst_69_70_65_50_52_tsni, map_inst_69_70_65_50_52_20_tsni, bjbt__inst_69_70_64_tsni, bt_inst_69_70_64_54_tsni, earliestInconsistency_inst_69_70_64_54_30_tsni, filter_inst_69_70_64_54_30_10_tsni, bj__inst_69_70_64_55_tsni, map_inst_69_70_64_55_46_tsni, mapTree_inst_69_70_64_54_52_tsni, map_inst_69_70_64_54_52_20_tsni, fc_inst_69_70_63_tsni, emptyTable_inst_69_70_63_57_tsni, enumFromTo_inst_69_70_63_57_32_tsni, enumFromTo_inst_69_70_63_57_33_tsni, cacheChecks_inst_69_70_63_58_tsni, fillTable_inst_69_70_63_58_38_tsni, enumFromTo_inst_69_70_63_58_38_35_tsni, enumFromTo_inst_69_70_63_58_38_36_tsni, lookupCache_inst_69_70_63_59_tsni, map_inst_69_70_63_58_43_tsni, mapTree_inst_69_70_63_59_44_tsni, map_inst_69_70_63_59_44_20_tsni, filter_inst_0_21_tsni, filter_inst_3_4_21_tsni, concat_inst_5_71_tsni, initTree_inst_7_16_tsni, map_inst_7_16_17_tsni, map_inst_13_23_20_tsni, concat_inst_13_22_71_tsni, initTree_inst_24_25_16_tsni, map_inst_24_25_16_17_tsni, filter_inst_24_26_4_21_tsni, concat_inst_24_27_71_tsni, map_inst_24_72_tsni, zipWith_inst_34_73_tsni, zipWith_inst_34_74_tsni, checkComplete_inst_75_76_tsni, complete_inst_75_76_77_tsni, maxLevel_inst_75_76_77_78_tsni, zipWith_inst_37_38_73_tsni, zipWith_inst_37_38_74_tsni, zipWith_inst_39_41_38_73_tsni, zipWith_inst_39_41_38_74_tsni, checkComplete_inst_39_42_76_tsni, complete_inst_39_42_76_77_tsni, maxLevel_inst_39_42_76_77_78_tsni, mapTree_inst_39_79_tsni, fst_inst_39_80_tsni, map_inst_39_79_20_tsni, combine_inst_45_81_tsni, combine_inst_47_82_tsni, combine_inst_49_51_82_tsni, foldTree_inst_49_51_83_tsni, map_inst_49_51_83_2_tsni, combine_inst_53_55_81_tsni, foldTree_inst_53_55_84_tsni, map_inst_53_55_84_2_tsni, zipWith_inst_56_58_38_73_tsni, zipWith_inst_56_58_38_74_tsni, checkComplete_inst_56_59_76_tsni, complete_inst_56_59_76_77_tsni, maxLevel_inst_56_59_76_77_78_tsni, domainWipeout_inst_56_85_tsni, mapTree_inst_56_85_86_tsni, map_inst_56_85_86_20_tsni, map_inst_60_61_72_tsni, concat_inst_60_61_27_71_tsni, filter_inst_60_61_26_4_21_tsni, initTree_inst_60_61_25_16_tsni, map_inst_60_61_25_16_17_tsni, checkComplete_inst_62_63_59_76_tsni, complete_inst_62_63_59_76_77_tsni, maxLevel_inst_62_63_59_76_77_78_tsni, domainWipeout_inst_62_63_85_tsni, mapTree_inst_62_63_85_86_tsni, map_inst_62_63_85_86_20_tsni, zipWith_inst_62_63_58_38_73_tsni, zipWith_inst_62_63_58_38_74_tsni, combine_inst_62_64_55_81_tsni, foldTree_inst_62_64_55_84_tsni, map_inst_62_64_55_84_2_tsni, combine_inst_62_65_51_82_tsni, foldTree_inst_62_65_51_83_tsni, map_inst_62_65_51_83_2_tsni, checkComplete_inst_62_66_42_76_tsni, complete_inst_62_66_42_76_77_tsni, maxLevel_inst_62_66_42_76_77_78_tsni, mapTree_inst_62_66_79_tsni, map_inst_62_66_79_20_tsni, fst_inst_62_66_80_tsni, zipWith_inst_62_66_41_38_73_tsni, zipWith_inst_62_66_41_38_74_tsni, initTree_inst_62_68_61_25_16_tsni, map_inst_62_68_61_25_16_17_tsni, filter_inst_62_68_61_26_4_21_tsni, concat_inst_62_68_61_27_71_tsni, map_inst_62_68_61_72_tsni, map_inst_62_87_tsni, map_inst_69_70_68_61_72_tsni, concat_inst_69_70_68_61_27_71_tsni, filter_inst_69_70_68_61_26_4_21_tsni, initTree_inst_69_70_68_61_25_16_tsni, map_inst_69_70_68_61_25_16_17_tsni, map_inst_69_70_87_tsni, zipWith_inst_69_70_66_41_38_73_tsni, zipWith_inst_69_70_66_41_38_74_tsni, checkComplete_inst_69_70_66_42_76_tsni, complete_inst_69_70_66_42_76_77_tsni, maxLevel_inst_69_70_66_42_76_77_78_tsni, mapTree_inst_69_70_66_79_tsni, fst_inst_69_70_66_80_tsni, map_inst_69_70_66_79_20_tsni, combine_inst_69_70_65_51_82_tsni, foldTree_inst_69_70_65_51_83_tsni, map_inst_69_70_65_51_83_2_tsni, combine_inst_69_70_64_55_81_tsni, foldTree_inst_69_70_64_55_84_tsni, map_inst_69_70_64_55_84_2_tsni, zipWith_inst_69_70_63_58_38_73_tsni, zipWith_inst_69_70_63_58_38_74_tsni, checkComplete_inst_69_70_63_59_76_tsni, complete_inst_69_70_63_59_76_77_tsni, maxLevel_inst_69_70_63_59_76_77_78_tsni, domainWipeout_inst_69_70_63_85_tsni, mapTree_inst_69_70_63_85_86_tsni, map_inst_69_70_63_85_86_20_tsni, match_scrut_rest_inst_29_tsni, match_scrut_rest_inst_49_50_tsni, match_scrut_rest_inst_53_54_tsni, match_scrut_rest_inst_62_64_54_tsni, match_scrut_rest_inst_62_65_50_tsni, match_scrut_rest_inst_62_67_tsni, match_scrut_rest_inst_69_70_67_tsni, match_scrut_rest_inst_69_70_65_50_tsni, match_scrut_rest_inst_69_70_64_54_tsni, match_xs_arm_Nil_inst_7_16_17_tsni, match_xs_arm_Nil_inst_13_14_16_17_tsni, match_xs_arm_Nil_inst_24_25_16_17_tsni, match_scrut_arm_default_inst_29_tsni, match_x_arm_Deforest_Arr_2_inst_39_80_tsni, match_scrut_arm_default_inst_49_50_tsni, match_scrut_arm_default_inst_53_54_tsni, match_tp2_arm_Deforest_Arr_2_inst_56_85_tsni, match_first0_arm_Deforest_Arr_2_inst_56_85_tsni, match_xs_arm_Nil_inst_60_61_25_16_17_tsni, match_tp2_arm_Deforest_Arr_2_inst_62_63_85_tsni, match_first0_arm_Deforest_Arr_2_inst_62_63_85_tsni, match_scrut_arm_default_inst_62_64_54_tsni, match_scrut_arm_default_inst_62_65_50_tsni, match_x_arm_Deforest_Arr_2_inst_62_66_80_tsni, match_scrut_arm_default_inst_62_67_tsni, match_xs_arm_Nil_inst_62_68_61_25_16_17_tsni, match_xs_arm_Cons_inst_62_87_tsni, match_xs_arm_Nil_inst_69_70_68_61_25_16_17_tsni, match_xs_arm_Cons_inst_69_70_87_tsni, match_scrut_arm_default_inst_69_70_67_tsni, match_x_arm_Deforest_Arr_2_inst_69_70_66_80_tsni, match_scrut_arm_default_inst_69_70_65_50_tsni, match_scrut_arm_default_inst_69_70_64_54_tsni, match_tp2_arm_Deforest_Arr_2_inst_69_70_63_85_tsni, match_first0_arm_Deforest_Arr_2_inst_69_70_63_85_tsni;
 match_scrut_rest_inst_29_tsni = function match_scrut_rest_inst_29_tsni(s, tmp) {
   let arr;
   arr = [
@@ -254,30 +254,6 @@ match_xs_arm_Cons_inst_62_87_tsni = function match_xs_arm_Cons_inst_62_87_tsni(f
   tmp1 = map_inst_62_87_tsni(f, xs);
   return NofibPrelude.Cons(tmp, tmp1)
 };
-match_as2_arm_Assign_inst_62_68_88_89_tsni = function match_as2_arm_Assign_inst_62_68_88_89_tsni(i, m, _deforest_Assign_varr_inst_62_68_88_89_tsni, _deforest_Assign_value_inst_62_68_88_89_tsni) {
-  let param0, param1, j, n, scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-  param0 = _deforest_Assign_varr_inst_62_68_88_89_tsni;
-  param1 = _deforest_Assign_value_inst_62_68_88_89_tsni;
-  j = param0;
-  n = param1;
-  tmp = m == n;
-  scrut = Predef.not(tmp);
-  if (scrut === true) {
-    tmp1 = i - j;
-    tmp2 = NofibPrelude.abs(tmp1);
-    tmp3 = m - n;
-    tmp4 = NofibPrelude.abs(tmp3);
-    tmp5 = tmp2 == tmp4;
-    scrut1 = Predef.not(tmp5);
-    if (scrut1 === true) {
-      return true
-    } else {
-      return false
-    }
-  } else {
-    return false
-  }
-};
 match_xs_arm_Nil_inst_69_70_68_61_25_16_17_tsni = function match_xs_arm_Nil_inst_69_70_68_61_25_16_17_tsni(f) {
   return NofibPrelude.Nil
 };
@@ -303,30 +279,6 @@ match_x_arm_Deforest_Arr_2_inst_69_70_66_80_tsni = function match_x_arm_Deforest
   f = first0;
   s = first1;
   return f
-};
-match_as2_arm_Assign_inst_69_70_68_88_89_tsni = function match_as2_arm_Assign_inst_69_70_68_88_89_tsni(i, m, _deforest_Assign_varr_inst_69_70_68_88_89_tsni, _deforest_Assign_value_inst_69_70_68_88_89_tsni) {
-  let param0, param1, j, n, scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-  param0 = _deforest_Assign_varr_inst_69_70_68_88_89_tsni;
-  param1 = _deforest_Assign_value_inst_69_70_68_88_89_tsni;
-  j = param0;
-  n = param1;
-  tmp = m == n;
-  scrut = Predef.not(tmp);
-  if (scrut === true) {
-    tmp1 = i - j;
-    tmp2 = NofibPrelude.abs(tmp1);
-    tmp3 = m - n;
-    tmp4 = NofibPrelude.abs(tmp3);
-    tmp5 = tmp2 == tmp4;
-    scrut1 = Predef.not(tmp5);
-    if (scrut1 === true) {
-      return true
-    } else {
-      return false
-    }
-  } else {
-    return false
-  }
 };
 match_scrut_arm_default_inst_69_70_65_50_tsni = function match_scrut_arm_default_inst_69_70_65_50_tsni(csp, s) {
   let tmp;
@@ -3391,7 +3343,7 @@ enumFromTo_inst_62_63_58_38_35_tsni = function enumFromTo_inst_62_63_58_38_35_ts
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
       arr = (var_, val_, rel, cs) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Assign_varr, _deforest_Assign_value;
+        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
@@ -3399,11 +3351,7 @@ enumFromTo_inst_62_63_58_38_35_tsni = function enumFromTo_inst_62_63_58_38_35_ts
         scrut1 = cs === constraints.Unknown;
         if (scrut1 === true) {
           tmp3 = constraints.Assign(var_, val_);
-          _deforest_Assign_varr = varr;
-          _deforest_Assign_value = vall;
-          tmp4 = (i, m) => {
-            return match_as2_arm_Assign_inst_62_68_88_89_tsni(i, m, _deforest_Assign_varr, _deforest_Assign_value)
-          };
+          tmp4 = constraints.Assign(varr, vall);
           tmp5 = runtime.safeCall(rel(tmp3, tmp4));
           scrut2 = Predef.not(tmp5);
           if (scrut2 === true) {
@@ -4275,7 +4223,7 @@ enumFromTo_inst_62_66_41_38_35_tsni = function enumFromTo_inst_62_66_41_38_35_ts
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
       arr = (var_, val_, rel, cs) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Assign_varr, _deforest_Assign_value;
+        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
@@ -4283,11 +4231,7 @@ enumFromTo_inst_62_66_41_38_35_tsni = function enumFromTo_inst_62_66_41_38_35_ts
         scrut1 = cs === constraints.Unknown;
         if (scrut1 === true) {
           tmp3 = constraints.Assign(var_, val_);
-          _deforest_Assign_varr = varr;
-          _deforest_Assign_value = vall;
-          tmp4 = (i, m) => {
-            return match_as2_arm_Assign_inst_62_68_88_89_tsni(i, m, _deforest_Assign_varr, _deforest_Assign_value)
-          };
+          tmp4 = constraints.Assign(varr, vall);
           tmp5 = runtime.safeCall(rel(tmp3, tmp4));
           scrut2 = Predef.not(tmp5);
           if (scrut2 === true) {
@@ -4571,7 +4515,7 @@ filter_inst_62_67_30_10_tsni = function filter_inst_62_67_30_10_tsni(f, ls) {
 };
 try__inst_62_68_tsni = function try__inst_62_68_tsni(n, algorithm) {
   let tmp, tmp1;
-  tmp = queens_inst_62_68_88_tsni(n);
+  tmp = constraints.queens(n);
   tmp1 = search_inst_62_68_61_tsni(algorithm, tmp);
   return NofibPrelude.listLen(tmp1)
 };
@@ -4850,7 +4794,7 @@ testConstraints_nofib_inst_69_70_tsni = function testConstraints_nofib_inst_69_7
 };
 try__inst_69_70_68_tsni = function try__inst_69_70_68_tsni(n, algorithm) {
   let tmp, tmp1;
-  tmp = queens_inst_69_70_68_88_tsni(n);
+  tmp = constraints.queens(n);
   tmp1 = search_inst_69_70_68_61_tsni(algorithm, tmp);
   return NofibPrelude.listLen(tmp1)
 };
@@ -5438,7 +5382,7 @@ enumFromTo_inst_69_70_66_41_38_35_tsni = function enumFromTo_inst_69_70_66_41_38
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
       arr = (var_, val_, rel, cs) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Assign_varr, _deforest_Assign_value;
+        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
@@ -5446,11 +5390,7 @@ enumFromTo_inst_69_70_66_41_38_35_tsni = function enumFromTo_inst_69_70_66_41_38
         scrut1 = cs === constraints.Unknown;
         if (scrut1 === true) {
           tmp3 = constraints.Assign(var_, val_);
-          _deforest_Assign_varr = varr;
-          _deforest_Assign_value = vall;
-          tmp4 = (i, m) => {
-            return match_as2_arm_Assign_inst_69_70_68_88_89_tsni(i, m, _deforest_Assign_varr, _deforest_Assign_value)
-          };
+          tmp4 = constraints.Assign(varr, vall);
           tmp5 = runtime.safeCall(rel(tmp3, tmp4));
           scrut2 = Predef.not(tmp5);
           if (scrut2 === true) {
@@ -6324,7 +6264,7 @@ enumFromTo_inst_69_70_63_58_38_35_tsni = function enumFromTo_inst_69_70_63_58_38
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
       arr = (var_, val_, rel, cs) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Assign_varr, _deforest_Assign_value;
+        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
@@ -6332,11 +6272,7 @@ enumFromTo_inst_69_70_63_58_38_35_tsni = function enumFromTo_inst_69_70_63_58_38
         scrut1 = cs === constraints.Unknown;
         if (scrut1 === true) {
           tmp3 = constraints.Assign(var_, val_);
-          _deforest_Assign_varr = varr;
-          _deforest_Assign_value = vall;
-          tmp4 = (i, m) => {
-            return match_as2_arm_Assign_inst_69_70_68_88_89_tsni(i, m, _deforest_Assign_varr, _deforest_Assign_value)
-          };
+          tmp4 = constraints.Assign(varr, vall);
           tmp5 = runtime.safeCall(rel(tmp3, tmp4));
           scrut2 = Predef.not(tmp5);
           if (scrut2 === true) {
@@ -6938,21 +6874,6 @@ map_inst_62_68_61_72_tsni = function map_inst_62_68_61_72_tsni(f, xs) {
 map_inst_62_87_tsni = function map_inst_62_87_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-queens_inst_62_68_88_tsni = function queens_inst_62_68_88_tsni(n) {
-  return runtime.safeCall(constraints.CSP(n, n, safe_inst_62_68_88_89_tsni))
-};
-safe_inst_62_68_88_89_tsni = function safe_inst_62_68_88_89_tsni(as1, as2) {
-  let param0, param1, i, m;
-  if (as1 instanceof constraints.Assign.class) {
-    param0 = as1.varr;
-    param1 = as1.value;
-    i = param0;
-    m = param1;
-    return runtime.safeCall(as2(i, m))
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
 map_inst_69_70_68_61_72_tsni = function map_inst_69_70_68_61_72_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
@@ -7034,21 +6955,6 @@ fst_inst_69_70_66_80_tsni = function fst_inst_69_70_66_80_tsni(x) {
 };
 map_inst_69_70_66_79_20_tsni = function map_inst_69_70_66_79_20_tsni(f, xs) {
   return runtime.safeCall(xs(f))
-};
-queens_inst_69_70_68_88_tsni = function queens_inst_69_70_68_88_tsni(n) {
-  return runtime.safeCall(constraints.CSP(n, n, safe_inst_69_70_68_88_89_tsni))
-};
-safe_inst_69_70_68_88_89_tsni = function safe_inst_69_70_68_88_89_tsni(as1, as2) {
-  let param0, param1, i, m;
-  if (as1 instanceof constraints.Assign.class) {
-    param0 = as1.varr;
-    param1 = as1.value;
-    i = param0;
-    m = param1;
-    return runtime.safeCall(as2(i, m))
-  } else {
-    throw new globalThis.Error("match error");
-  }
 };
 combine_inst_69_70_65_51_82_tsni = function combine_inst_69_70_65_51_82_tsni(ls, acc) {
   return runtime.safeCall(ls(acc))
