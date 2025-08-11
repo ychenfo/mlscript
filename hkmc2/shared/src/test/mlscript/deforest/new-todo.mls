@@ -23,10 +23,10 @@ test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst_1_tsni --> Ref(prod)@inst_1_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@3@inst_1_tsni --> Ref(prod)@inst_1_tsni@BB
 //│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst_0_tsni --> Ref(prod)@inst_0_tsni@AA
 //│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@3@inst_0_tsni --> Ref(prod)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst_1_tsni --> Ref(prod)@inst_1_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@3@inst_1_tsni --> Ref(prod)@inst_1_tsni@BB
 //│ -------------- executing -------------
 //│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -154,4 +154,254 @@ f([])
 //│ -------------- executing -------------
 //│ ═══[RUNTIME ERROR] ReferenceError: y_not_in_scp is not defined
 //│ ═══[RUNTIME ERROR] The result from deforestated program ("undefined") is different from the one computed by the original prorgam ("4")
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+data object C
+data object D
+
+
+:sjs
+:deforest
+fun f(x) = if g(false) is
+  A and
+    x < 1 then B
+    else f(x - 1)
+  C then D
+fun g(b) =
+  if b then
+    if f(0) is
+      B then A
+  else
+    C
+//│ JS (unsanitized):
+//│ let f4, g;
+//│ f4 = function f(x1) {
+//│   let scrut, scrut1, tmp5;
+//│   scrut = g(false);
+//│   if (scrut instanceof A1.class) {
+//│     scrut1 = x1 < 1;
+//│     if (scrut1 === true) {
+//│       return B1
+//│     } else {
+//│       tmp5 = x1 - 1;
+//│       return f4(tmp5)
+//│     }
+//│   } else if (scrut instanceof C1.class) {
+//│     return D1
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ g = function g(b1) {
+//│   let scrut;
+//│   if (b1 === true) {
+//│     scrut = f4(0);
+//│     if (scrut instanceof B1.class) {
+//│       return A1
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     return C1
+//│   }
+//│ };
+//│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ let f4, g, g_inst_0_tsni, f_inst_1_tsni1;
+//│ g_inst_0_tsni = function g_inst_0_tsni(b1) {
+//│   let scrut;
+//│   if (b1 === true) {
+//│     scrut = f4(0);
+//│     if (scrut instanceof B1.class) {
+//│       return (x1) => {
+//│         let scrut1, tmp5;
+//│         scrut1 = x1 < 1;
+//│         if (scrut1 === true) {
+//│           return B1
+//│         } else {
+//│           tmp5 = x1 - 1;
+//│           return f4(tmp5)
+//│         }
+//│       }
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     return (x1) => {
+//│       return D1
+//│     }
+//│   }
+//│ };
+//│ f_inst_1_tsni1 = function f_inst_1_tsni(x1) {
+//│   let scrut, scrut1, tmp5;
+//│   scrut = g(false);
+//│   if (scrut instanceof A1.class) {
+//│     scrut1 = x1 < 1;
+//│     if (scrut1 === true) {
+//│       return () => {
+//│         return A1
+//│       }
+//│     } else {
+//│       tmp5 = x1 - 1;
+//│       return f_inst_1_tsni1(tmp5)
+//│     }
+//│   } else if (scrut instanceof C1.class) {
+//│     return () => {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ f4 = function f(x1) {
+//│   let scrut;
+//│   scrut = g_inst_0_tsni(false);
+//│   return runtime.safeCall(scrut(x1))
+//│ };
+//│ g = function g(b1) {
+//│   let scrut;
+//│   if (b1 === true) {
+//│     scrut = f_inst_1_tsni1(0);
+//│     return runtime.safeCall(scrut())
+//│   } else {
+//│     return C1
+//│   }
+//│ };
+//│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Ref(member:C)@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@C
+//│ Ref(member:B)@4@inst_1_tsni --> Ref($scrut)@inst_1_tsni@B
+//│ Ref(member:D)@5@inst_1_tsni --> Ref($scrut)@inst_1_tsni@dflt
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:sjs
+:deforest
+module M with ...
+fun f(x) = if g(false) is
+  A and
+    x < 1 then B
+    else f(x - 1)
+  C then D
+fun g(b) =
+  if b then
+    if f(0) is
+      B then A
+  else
+    C
+//│ JS (unsanitized):
+//│ let M1;
+//│ (class M {
+//│   static {
+//│     M1 = M;
+//│   }
+//│   static f(x1) {
+//│     let scrut, scrut1, tmp5;
+//│     scrut = M.g(false);
+//│     if (scrut instanceof A1.class) {
+//│       scrut1 = x1 < 1;
+//│       if (scrut1 === true) {
+//│         return B1
+//│       } else {
+//│         tmp5 = x1 - 1;
+//│         return M.f(tmp5)
+//│       }
+//│     } else if (scrut instanceof C1.class) {
+//│       return D1
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } 
+//│   static g(b1) {
+//│     let scrut;
+//│     if (b1 === true) {
+//│       scrut = M.f(0);
+//│       if (scrut instanceof B1.class) {
+//│         return A1
+//│       } else {
+//│         throw new globalThis.Error("match error");
+//│       }
+//│     } else {
+//│       return C1
+//│     }
+//│   }
+//│   static toString() { return "M"; }
+//│ });
+//│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ let M1, g_inst_0_tsni1, f_inst_1_tsni2;
+//│ g_inst_0_tsni1 = function g_inst_0_tsni(b1) {
+//│   let scrut;
+//│   if (b1 === true) {
+//│     scrut = M.f(0);
+//│     if (scrut instanceof B1.class) {
+//│       return (x1) => {
+//│         let scrut1, tmp5;
+//│         scrut1 = x1 < 1;
+//│         if (scrut1 === true) {
+//│           return B1
+//│         } else {
+//│           tmp5 = x1 - 1;
+//│           return M.f(tmp5)
+//│         }
+//│       }
+//│     } else {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     return (x1) => {
+//│       return D1
+//│     }
+//│   }
+//│ };
+//│ f_inst_1_tsni2 = function f_inst_1_tsni(x1) {
+//│   let scrut, scrut1, tmp5;
+//│   scrut = M.g(false);
+//│   if (scrut instanceof A1.class) {
+//│     scrut1 = x1 < 1;
+//│     if (scrut1 === true) {
+//│       return () => {
+//│         return A1
+//│       }
+//│     } else {
+//│       tmp5 = x1 - 1;
+//│       return f_inst_1_tsni2(tmp5)
+//│     }
+//│   } else if (scrut instanceof C1.class) {
+//│     return () => {
+//│       throw new globalThis.Error("match error");
+//│     }
+//│   } else {
+//│     throw new globalThis.Error("match error");
+//│   }
+//│ };
+//│ (class M {
+//│   static {
+//│     M1 = M;
+//│   }
+//│   static f(x1) {
+//│     let scrut;
+//│     scrut = g_inst_0_tsni1(false);
+//│     return runtime.safeCall(scrut(x1))
+//│   } 
+//│   static g(b1) {
+//│     let scrut;
+//│     if (b1 === true) {
+//│       scrut = f_inst_1_tsni2(0);
+//│       return runtime.safeCall(scrut())
+//│     } else {
+//│       return C1
+//│     }
+//│   }
+//│   static toString() { return "M"; }
+//│ });
+//│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:A)@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Ref(member:C)@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@C
+//│ Ref(member:B)@4@inst_1_tsni --> Ref($scrut)@inst_1_tsni@B
+//│ Ref(member:D)@5@inst_1_tsni --> Ref($scrut)@inst_1_tsni@dflt
+//│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

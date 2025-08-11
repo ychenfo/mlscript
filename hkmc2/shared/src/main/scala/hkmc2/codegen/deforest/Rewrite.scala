@@ -43,13 +43,17 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
       (ctor, _) <- sol.resolveClashes._1
       instantiationId = ctor.instantiationId.get
       case instId@(_ :+ invokedReferSite) <- instantiationId.scanLeft(Nil)(_ :+ _)
-      if !preAnalyzer.dummyRefsInstantiationIds.contains(instId)
     do instIdToMappingFromOldToNewSyms.getOrElseUpdate.curried(instId):
       val invokedFunSym = preAnalyzer.getReferredFunSym(invokedReferSite)
       val recursiveGroupFunSym = sol.collector.funSymToProdStratScheme.recursiveGroups(invokedFunSym)
       val newSymSuffix = instId.makeSuffix(preAnalyzer)
       val mapping = recursiveGroupFunSym.map: old =>
-        val newSymbol = BlockMemberSymbol(old.nme + s"_$newSymSuffix", Nil, old.nameIsMeaningful)
+        val newSymbol =
+          // for dummy refer refs, since we modify the fun def in-place, no need for new symbol
+          if preAnalyzer.dummyRefsInstantiationIds.contains(instId) &&
+            (old is preAnalyzer.getReferredFunSym(instId.head)) then old
+          else
+            BlockMemberSymbol(old.nme + s"_$newSymSuffix", Nil, old.nameIsMeaningful)
         newSymToInstIdAndOldSym.updateWith(newSymbol):
           case N => S(instId -> old)
           case S(_) => die
@@ -63,13 +67,17 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
         case f: FieldSel => f.instantiationId.get
         case d: Dtor => d.instantiationId.get
       case instId@(_ :+ invokedReferSite) <- instantiationId.scanLeft(Nil)(_ :+ _)
-      if !preAnalyzer.dummyRefsInstantiationIds.contains(instId)
     do instIdToMappingFromOldToNewSyms.getOrElseUpdate.curried(instId):
       val invokedFunSym = preAnalyzer.getReferredFunSym(invokedReferSite)
       val recursiveGroupFunSym = sol.collector.funSymToProdStratScheme.recursiveGroups(invokedFunSym)
       val newSymSuffix = instId.makeSuffix(preAnalyzer)
       val mapping = recursiveGroupFunSym.map: old =>
-        val newSymbol = BlockMemberSymbol(old.nme + s"_$newSymSuffix", Nil, old.nameIsMeaningful)
+        val newSymbol =
+          // for dummy refer refs, since we modify the fun def in-place, no need for new symbol
+          if preAnalyzer.dummyRefsInstantiationIds.contains(instId) &&
+            (old is preAnalyzer.getReferredFunSym(instId.head)) then old
+          else
+            BlockMemberSymbol(old.nme + s"_$newSymSuffix", Nil, old.nameIsMeaningful)
         newSymToInstIdAndOldSym.updateWith(newSymbol):
           case N => S(instId -> old)
           case S(_) => die
@@ -227,12 +235,17 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
 
 class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elaborator.State):
   val preAnalyzer = rewritePrepare.preAnalyzer
-  // val inModSym = preAnalyzer.inModuleInfo.map:
-  //   case m -> _ -> _ => m
   
   def apply() =
-    val duplicatedDefs = rewritePrepare.newSymToInstIdAndOldSym.map:
-      case newSym -> (instId -> oldSym) =>
+    val duplicatedDefs = for
+      newSym -> (instId -> oldSym) <- rewritePrepare.newSymToInstIdAndOldSym
+      if !locally:
+        // the dummy refs are for rewriting exported module functions in-place, so no new defs
+        preAnalyzer.dummyRefsInstantiationIds.contains(instId) && locally:
+          (oldSym is preAnalyzer.getReferredFunSym(instId.head)) && locally:
+            assert(oldSym is newSym)
+            true
+    yield
         // 1. find original fundefs
         // 2. transform fun body under the specific instantiation id
         val FunDefn(_, _, param, body) = preAnalyzer.getTopLevelFunDefnForSym(oldSym).get
@@ -288,18 +301,20 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     val store = mutable.Map.empty[MatchId, Either[FunDefn -> Ls[Symbol], Block]]
     def prependAllFunDefs =
       rewritePrepare.fusingMatchIdToMatchRestFunSymbols.foldRight(identity: Block => Block):
-        case matchId -> _ -> k => store(matchId) match
-          case Left(fdef -> _) => r => Define(fdef, k(r))
-          case Right(b) =>
+        case matchId -> _ -> k => store.get(matchId) match
+          case S(Left(fdef -> _)) => r => Define(fdef, k(r))
+          case S(Right(b)) =>
             assert(b.isInstanceOf[End])
             k
-    def getAllFunDefs =
-      for
-        (matchId, _) <- rewritePrepare.fusingMatchIdToMatchRestFunSymbols
-        if store(matchId).isLeft
-      yield
-        val L(fdefn, _) = store(matchId): @unchecked
-        fdefn
+          case _ =>
+            lastWords(s"not here ${preAnalyzer.getResult(matchId._1)}@${matchId._1}@${matchId._2.toReadableCallPath(preAnalyzer)}@${matchId._2}")
+    // def getAllFunDefs =
+    //   for
+    //     (matchId, _) <- rewritePrepare.fusingMatchIdToMatchRestFunSymbols
+    //     if store(matchId).isLeft
+    //   yield
+    //     val L(fdefn, _) = store(matchId): @unchecked
+    //     fdefn
     
     // returns the block of match rest, or a `Return` block that calls the function extracted
     // from the match rest
@@ -530,7 +545,14 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
             val newInstId = if inTheSameRecursiveGroup then instId else instId :+ s.uid
             rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)): m =>
-              Value.Ref(m(blk))
+              if m(blk) is blk then
+                // the new symbol being the same as the old symbol means
+                // that this refer site should refer to the in-place rewritten
+                // function, and to refer to the function defined in the original
+                // place the selection is still needed.
+                s
+              else
+                Value.Ref(m(blk))
               // preAnalyzer.inModuleInfo.fold(Value.Ref(m(blk))):
               //   case mod -> _ -> _ =>
               //     Select(Value.Ref(mod.asMod.get), Tree.Ident(m(blk).nme))(S(m(blk)))
@@ -770,8 +792,10 @@ extension (ss: Ls[Symbol])
 extension (instId: InstantiationId)
   def makeSuffix(preAnalyzer: DeforestPreAnalyzer) =
     "inst_" + instId.map(preAnalyzer.getStableResultId).mkString("_") + "_tsni"
+    // "inst_" + instId.toReadableCallPath(preAnalyzer) + "_tsni"
   def toReadableCallPath(preAnalyzer: DeforestPreAnalyzer) =
     instId.map(x => preAnalyzer.getReferredFunSym(x).nme).mkString("_")
+    // instId.map(x => preAnalyzer.getReferredFunSym(x).nme + s"$x").mkString("_")
 
 extension (clsSym: ClassSymbol)
   def getClsParamNames(pre: DeforestPreAnalyzer) =
