@@ -136,4 +136,22 @@ let useless = if lsit is [a, b] then 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-
+// FIXME: `y` is considered to be a free var for the branch
+:fixme
+:deforest
+fun f(ls) = if ls is [] then
+  let y = 4
+  fun h(z) = if z > 0 then h(z - 1) else y
+  h(3)
+f([])
+//│ = 4
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Arr(List())@1@inst__tsni --> Ref(ls)@inst_0_tsni@Deforest_Arr_0
+//│ ╔══[COMPILATION ERROR] No definition found in scope for 'y'
+//│ ║  l.143: 	  let y = 4
+//│ ╙──       	      ^
+//│ -------------- executing -------------
+//│ ═══[RUNTIME ERROR] ReferenceError: y_not_in_scp is not defined
+//│ ═══[RUNTIME ERROR] The result from deforestated program ("undefined") is different from the one computed by the original prorgam ("4")
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
