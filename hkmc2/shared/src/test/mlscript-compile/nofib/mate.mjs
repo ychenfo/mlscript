@@ -35202,7 +35202,7 @@ append_inst_106_102_20_29_tsni = function append_inst_106_102_20_29_tsni(xs, ys)
   }
 };
 insertCompact_inst_107_tsni = function insertCompact_inst_107_tsni(mif_s, ls) {
-  let insert, ic, first1, first0, mif, s, tmp;
+  let insert, ic, first1, first0, mif, s, cs, tmp;
   if (globalThis.Array.isArray(mif_s) && mif_s.length === 2) {
     first0 = mif_s[0];
     first1 = mif_s[1];
@@ -35229,7 +35229,7 @@ insertCompact_inst_107_tsni = function insertCompact_inst_107_tsni(mif_s, ls) {
         throw new globalThis.Error("match error");
       }
     };
-    ic = function ic(ls1, cs) {
+    ic = function ic(ls1) {
       let param0, param1, first11, first01, mifs, cs_, etc, a, b, scrut, scrut1, scrut2, tmp1, arr, tmp2, tmp3, tmp4, arr1, arr2, tmp5, tmp6, arr3, tmp7, arr4, tmp8, lambda, lambda1, lambda2, lambda3;
       if (ls1 instanceof NofibPrelude.Nil.class) {
         tmp1 = NofibPrelude.Cons(mif, NofibPrelude.Nil);
@@ -35293,7 +35293,7 @@ insertCompact_inst_107_tsni = function insertCompact_inst_107_tsni(mif_s, ls) {
                   mifs,
                   cs_
                 ];
-                tmp8 = ic(etc, cs);
+                tmp8 = ic(etc);
                 return NofibPrelude.Cons(arr4, tmp8)
               } else {
                 throw globalThis.Error("compare error");
@@ -35308,7 +35308,8 @@ insertCompact_inst_107_tsni = function insertCompact_inst_107_tsni(mif_s, ls) {
       }
     };
     tmp = mate.compact(s);
-    return ic(ls, tmp)
+    cs = tmp;
+    return ic(ls)
   } else {
     throw new globalThis.Error("match error");
   }
@@ -43712,7 +43713,7 @@ compact_inst_111_112_tsni = function compact_inst_111_112_tsni(s) {
   }
 };
 insertCompact_inst_111_112_tsni = function insertCompact_inst_111_112_tsni(mif_s, ls) {
-  let insert, ic, first1, first0, mif, s, tmp;
+  let insert, ic, first1, first0, mif, s, cs, tmp;
   if (globalThis.Array.isArray(mif_s) && mif_s.length === 2) {
     first0 = mif_s[0];
     first1 = mif_s[1];
@@ -43739,7 +43740,7 @@ insertCompact_inst_111_112_tsni = function insertCompact_inst_111_112_tsni(mif_s
         throw new globalThis.Error("match error");
       }
     };
-    ic = function ic(ls1, cs) {
+    ic = function ic(ls1) {
       let param0, param1, first11, first01, mifs, cs_, etc, a, b, scrut, scrut1, scrut2, tmp1, arr, tmp2, tmp3, tmp4, arr1, arr2, tmp5, tmp6, arr3, tmp7, arr4, tmp8, lambda, lambda1, lambda2, lambda3;
       if (ls1 instanceof NofibPrelude.Nil.class) {
         tmp1 = NofibPrelude.Cons(mif, NofibPrelude.Nil);
@@ -43803,7 +43804,7 @@ insertCompact_inst_111_112_tsni = function insertCompact_inst_111_112_tsni(mif_s
                   mifs,
                   cs_
                 ];
-                tmp8 = ic(etc, cs);
+                tmp8 = ic(etc);
                 return NofibPrelude.Cons(arr4, tmp8)
               } else {
                 throw globalThis.Error("compare error");
@@ -43818,7 +43819,8 @@ insertCompact_inst_111_112_tsni = function insertCompact_inst_111_112_tsni(mif_s
       }
     };
     tmp = compact_inst_111_112_tsni(s);
-    return ic(ls, tmp)
+    cs = tmp;
+    return ic(ls)
   } else {
     throw new globalThis.Error("match error");
   }
@@ -50184,7 +50186,7 @@ replies_inst_114_115_tsni = function replies_inst_114_115_tsni(bd, c, n) {
           _deforest_Deforest_Arr_2_0 = mif;
           _deforest_Deforest_Arr_2_1 = s;
           arr = (ls) => {
-            let insert, ic, first11, first01, mif1, s1, tmp6;
+            let insert, ic, first11, first01, mif1, s1, cs, tmp6;
             first01 = _deforest_Deforest_Arr_2_0;
             first11 = _deforest_Deforest_Arr_2_1;
             mif1 = first01;
@@ -50210,7 +50212,7 @@ replies_inst_114_115_tsni = function replies_inst_114_115_tsni(bd, c, n) {
                 throw new globalThis.Error("match error");
               }
             };
-            ic = function ic(ls1, cs) {
+            ic = function ic(ls1) {
               let param02, param1, first12, first02, mifs, cs_, etc, a, b1, scrut4, scrut5, scrut6, tmp7, arr1, tmp8, tmp9, tmp10, arr2, arr3, tmp11, tmp12, arr4, tmp13, arr5, tmp14, lambda, lambda1, lambda2, lambda3;
               if (ls1 instanceof NofibPrelude.Nil.class) {
                 tmp7 = NofibPrelude.Cons(mif1, NofibPrelude.Nil);
@@ -50274,7 +50276,7 @@ replies_inst_114_115_tsni = function replies_inst_114_115_tsni(bd, c, n) {
                           mifs,
                           cs_
                         ];
-                        tmp14 = ic(etc, cs);
+                        tmp14 = ic(etc);
                         return NofibPrelude.Cons(arr5, tmp14)
                       } else {
                         throw globalThis.Error("compare error");
@@ -50289,7 +50291,8 @@ replies_inst_114_115_tsni = function replies_inst_114_115_tsni(bd, c, n) {
               }
             };
             tmp6 = compact_inst_114_116_112_tsni(s1);
-            return ic(ls, tmp6)
+            cs = tmp6;
+            return ic(ls)
           };
           tmp5 = NofibPrelude.Cons(arr, ms);
           return runtime.safeCall(NofibPrelude.Some(tmp5))
@@ -70097,7 +70100,7 @@ replies_inst_117_121_115_tsni = function replies_inst_117_121_115_tsni(bd, c, n)
           _deforest_Deforest_Arr_2_0 = mif;
           _deforest_Deforest_Arr_2_1 = s;
           arr = (ls) => {
-            let insert, ic, first11, first01, mif1, s1, tmp6;
+            let insert, ic, first11, first01, mif1, s1, cs, tmp6;
             first01 = _deforest_Deforest_Arr_2_0;
             first11 = _deforest_Deforest_Arr_2_1;
             mif1 = first01;
@@ -70123,7 +70126,7 @@ replies_inst_117_121_115_tsni = function replies_inst_117_121_115_tsni(bd, c, n)
                 throw new globalThis.Error("match error");
               }
             };
-            ic = function ic(ls1, cs) {
+            ic = function ic(ls1) {
               let param02, param1, first12, first02, mifs, cs_, etc, a, b1, scrut4, scrut5, scrut6, tmp7, arr1, tmp8, tmp9, tmp10, arr2, arr3, tmp11, tmp12, arr4, tmp13, arr5, tmp14, lambda, lambda1, lambda2, lambda3;
               if (ls1 instanceof NofibPrelude.Nil.class) {
                 tmp7 = NofibPrelude.Cons(mif1, NofibPrelude.Nil);
@@ -70187,7 +70190,7 @@ replies_inst_117_121_115_tsni = function replies_inst_117_121_115_tsni(bd, c, n)
                           mifs,
                           cs_
                         ];
-                        tmp14 = ic(etc, cs);
+                        tmp14 = ic(etc);
                         return NofibPrelude.Cons(arr5, tmp14)
                       } else {
                         throw globalThis.Error("compare error");
@@ -70202,7 +70205,8 @@ replies_inst_117_121_115_tsni = function replies_inst_117_121_115_tsni(bd, c, n)
               }
             };
             tmp6 = compact_inst_117_121_116_112_tsni(s1);
-            return ic(ls, tmp6)
+            cs = tmp6;
+            return ic(ls)
           };
           tmp5 = NofibPrelude.Cons(arr, ms);
           return runtime.safeCall(NofibPrelude.Some(tmp5))
@@ -76705,7 +76709,7 @@ replies_inst_123_124_121_115_tsni = function replies_inst_123_124_121_115_tsni(b
           _deforest_Deforest_Arr_2_0 = mif;
           _deforest_Deforest_Arr_2_1 = s;
           arr = (ls) => {
-            let insert, ic, first11, first01, mif1, s1, tmp6;
+            let insert, ic, first11, first01, mif1, s1, cs, tmp6;
             first01 = _deforest_Deforest_Arr_2_0;
             first11 = _deforest_Deforest_Arr_2_1;
             mif1 = first01;
@@ -76731,7 +76735,7 @@ replies_inst_123_124_121_115_tsni = function replies_inst_123_124_121_115_tsni(b
                 throw new globalThis.Error("match error");
               }
             };
-            ic = function ic(ls1, cs) {
+            ic = function ic(ls1) {
               let param02, param1, first12, first02, mifs, cs_, etc, a, b1, scrut4, scrut5, scrut6, tmp7, arr1, tmp8, tmp9, tmp10, arr2, arr3, tmp11, tmp12, arr4, tmp13, arr5, tmp14, lambda, lambda1, lambda2, lambda3;
               if (ls1 instanceof NofibPrelude.Nil.class) {
                 tmp7 = NofibPrelude.Cons(mif1, NofibPrelude.Nil);
@@ -76795,7 +76799,7 @@ replies_inst_123_124_121_115_tsni = function replies_inst_123_124_121_115_tsni(b
                           mifs,
                           cs_
                         ];
-                        tmp14 = ic(etc, cs);
+                        tmp14 = ic(etc);
                         return NofibPrelude.Cons(arr5, tmp14)
                       } else {
                         throw globalThis.Error("compare error");
@@ -76810,7 +76814,8 @@ replies_inst_123_124_121_115_tsni = function replies_inst_123_124_121_115_tsni(b
               }
             };
             tmp6 = compact_inst_123_124_121_116_112_tsni(s1);
-            return ic(ls, tmp6)
+            cs = tmp6;
+            return ic(ls)
           };
           tmp5 = NofibPrelude.Cons(arr, ms);
           return runtime.safeCall(NofibPrelude.Some(tmp5))
@@ -94590,7 +94595,7 @@ filter_inst_123_124_118_95_138_tsni = function filter_inst_123_124_118_95_138_ts
     }
   } 
   static insertCompact(mif_s, ls5) {
-    let insert, ic, first1, first0, mif, s8, tmp;
+    let insert, ic, first1, first0, mif, s8, cs, tmp;
     if (globalThis.Array.isArray(mif_s) && mif_s.length === 2) {
       first0 = mif_s[0];
       first1 = mif_s[1];
@@ -94617,7 +94622,7 @@ filter_inst_123_124_118_95_138_tsni = function filter_inst_123_124_118_95_138_ts
           throw new globalThis.Error("match error");
         }
       };
-      ic = function ic(ls6, cs) {
+      ic = function ic(ls6) {
         let param0, param1, first11, first01, mifs2, cs_, etc, a2, b, scrut, scrut1, scrut2, tmp1, arr, tmp2, tmp3, tmp4, arr1, arr2, tmp5, tmp6, arr3, tmp7, arr4, tmp8, lambda, lambda1, lambda2, lambda3;
         if (ls6 instanceof NofibPrelude.Nil.class) {
           tmp1 = NofibPrelude.Cons(mif, NofibPrelude.Nil);
@@ -94681,7 +94686,7 @@ filter_inst_123_124_118_95_138_tsni = function filter_inst_123_124_118_95_138_ts
                     mifs2,
                     cs_
                   ];
-                  tmp8 = ic(etc, cs);
+                  tmp8 = ic(etc);
                   return NofibPrelude.Cons(arr4, tmp8)
                 } else {
                   throw globalThis.Error("compare error");
@@ -94696,7 +94701,8 @@ filter_inst_123_124_118_95_138_tsni = function filter_inst_123_124_118_95_138_ts
         }
       };
       tmp = compact_inst_110_tsni(s8);
-      return ic(ls5, tmp)
+      cs = tmp;
+      return ic(ls5)
     } else {
       throw new globalThis.Error("match error");
     }

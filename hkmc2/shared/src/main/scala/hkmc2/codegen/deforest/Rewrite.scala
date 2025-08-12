@@ -678,7 +678,7 @@ class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends Block
   
   lazy val freeVars =
     applyBlock(blk)
-    result.toList.sortBy(_.uid)
+    (result.diff(blk.definedVars)).toList.sortBy(_.uid)
 
 // Used on match blocks before deforestation transformation
 // Compute free vars considering new vars introduced by deforestation
@@ -737,7 +737,7 @@ class FreeVarTraverserForMatchConsideringDeforestation(
       // Also take care of the `rest`s of its parent match blocks.
       val realArm = Begin(a, Begin(rest, parentMatchRest)).flattened
       applyBlock(realArm)
-    result.toList.sortBy(_.uid)
+    (result.diff(blk.definedVars)).toList.sortBy(_.uid)
 
 class ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) extends BlockTransformer(new SymbolSubst()):
   override def applyValue(v: Value): Value = v match
