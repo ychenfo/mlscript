@@ -189,9 +189,9 @@ dtor(A(B(0)))
 //│ = B(0)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(4)))))@3@inst_1_tsni --> Ref(y)@inst_1_2_tsni@B
 //│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(4)))))@3@inst_0_tsni --> Ref(y)@inst_0_2_tsni@B
-//│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(4)))))@3@inst_1_tsni --> Ref(y)@inst_1_2_tsni@B
+//│ Call(Ref(member:A),List(Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(x)@inst_1_tsni@A
 //│ -------------- executing -------------
 //│ = B(0)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -206,10 +206,10 @@ localFuse(4)
 //│ = B(4)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@2@inst_3_tsni --> Ref($scrut)@inst_3_tsni@A
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@2@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
-//│ Call(Ref(member:B),List(Arg(false,Ref(y))))@4@inst_1_tsni --> Ref($scrut)@inst__tsni@B
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@3@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@3@inst_2_tsni --> Ref($scrut)@inst_2_tsni@A
+//│ Call(Ref(member:B),List(Arg(false,Ref(y))))@4@inst_2_tsni --> Ref($scrut)@inst__tsni@B
 //│ -------------- executing -------------
 //│ = B(4)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

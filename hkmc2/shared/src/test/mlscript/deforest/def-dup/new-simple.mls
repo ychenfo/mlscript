@@ -2,6 +2,8 @@
 
 data class A(x)
 data class B(x)
+data object C
+data object D
 data class (::) Cons(h, t)
 object Nil
 
@@ -95,8 +97,8 @@ test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@1@inst_2_tsni --> Ref($scrut)@inst_2_tsni@A
-//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@2@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
 //│ -------------- executing -------------
 //│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -113,3 +115,32 @@ if [1, 2] is
 //│ -------------- executing -------------
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun f(x) = if g(false) is
+  A and
+    x < 1 then B(0)
+    else f(x - 1)
+  C then D
+fun g(b) =
+  if b then
+    if f(0) is
+      B then A(0)
+      D then A(1)
+  else
+    C
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(1)))))@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(false,Lit(IntLit(0)))))@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Ref(member:C)@4@inst_0_tsni --> Ref($scrut)@inst_0_tsni@C
+//│ Call(Ref(member:B),List(Arg(false,Lit(IntLit(0)))))@5@inst_1_tsni --> Ref($scrut)@inst_1_tsni@B
+//│ Ref(member:D)@6@inst_1_tsni --> Ref($scrut)@inst_1_tsni@D
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+[f(3), g(true)]
+//│ = [D, A(1)]
+
+
