@@ -180,7 +180,7 @@ match_ls_arm_Cons_inst_25_40_tsni = function match_ls_arm_Cons_inst_25_40_tsni(_
   return h + tmp
 };
 lscomp_inst_0_tsni = function lscomp_inst_0_tsni(ls) {
-  return runtime.safeCall(ls(lscomp_not_in_scp))
+  return runtime.safeCall(ls(lscomp))
 };
 lscomp_inst_1_tsni = function lscomp_inst_1_tsni(ls) {
   let param0, param1, first1, first0, k, rs, t, tmp, tmp1, arr, tmp2;

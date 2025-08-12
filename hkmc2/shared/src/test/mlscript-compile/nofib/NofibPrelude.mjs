@@ -1,8 +1,8 @@
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import Predef from "./../Predef.mjs";
-let NofibPrelude1, unzip_inst_0_1_tsni, reverse_inst_2_3_tsni, reverse_inst_2_4_tsni, reverse_inst_0_1_4_tsni, reverse_inst_0_1_3_tsni;
-unzip_inst_0_1_tsni = function unzip_inst_0_1_tsni(l) {
+let NofibPrelude1, unzip_inst_1_2_tsni, reverse_inst_0_3_tsni, reverse_inst_0_4_tsni, reverse_inst_1_2_4_tsni, reverse_inst_1_2_3_tsni;
+unzip_inst_1_2_tsni = function unzip_inst_1_2_tsni(l) {
   let f;
   f = function f(l1, a, b) {
     return runtime.safeCall(l1(f, a, b))
@@ -13,28 +13,28 @@ unzip_inst_0_1_tsni = function unzip_inst_0_1_tsni(l) {
     return l$_
   })
 };
-reverse_inst_2_3_tsni = function reverse_inst_2_3_tsni(l) {
+reverse_inst_0_3_tsni = function reverse_inst_0_3_tsni(l) {
   let r;
   r = function r(l$_, l1) {
     return runtime.safeCall(l1(r, l$_))
   };
   return r(NofibPrelude.Nil, l)
 };
-reverse_inst_2_4_tsni = function reverse_inst_2_4_tsni(l) {
+reverse_inst_0_4_tsni = function reverse_inst_0_4_tsni(l) {
   let r;
   r = function r(l$_, l1) {
     return runtime.safeCall(l1(r, l$_))
   };
   return r(NofibPrelude.Nil, l)
 };
-reverse_inst_0_1_4_tsni = function reverse_inst_0_1_4_tsni(l) {
+reverse_inst_1_2_4_tsni = function reverse_inst_1_2_4_tsni(l) {
   let r;
   r = function r(l$_, l1) {
     return runtime.safeCall(l1(r, l$_))
   };
   return r(NofibPrelude.Nil, l)
 };
-reverse_inst_0_1_3_tsni = function reverse_inst_0_1_3_tsni(l) {
+reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
   let r;
   r = function r(l$_, l1) {
     return runtime.safeCall(l1(r, l$_))
@@ -1061,8 +1061,8 @@ reverse_inst_0_1_3_tsni = function reverse_inst_0_1_3_tsni(l) {
     f15 = function f(l4, a13, b11) {
       let param0, param1, first1, first0, x11, y1, t3, tmp, tmp1, arr, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
       if (l4 instanceof NofibPrelude.Nil.class) {
-        tmp = reverse_inst_2_3_tsni(a13);
-        tmp1 = reverse_inst_2_4_tsni(b11);
+        tmp = reverse_inst_0_3_tsni(a13);
+        tmp1 = reverse_inst_0_4_tsni(b11);
         arr = [
           tmp,
           tmp1
@@ -1154,8 +1154,8 @@ reverse_inst_0_1_3_tsni = function reverse_inst_0_1_3_tsni(l) {
       if (ls19 instanceof NofibPrelude.Nil.class) {
         return (f15, a13, b11) => {
           let tmp2, tmp3, arr1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
-          tmp2 = reverse_inst_0_1_3_tsni(a13);
-          tmp3 = reverse_inst_0_1_4_tsni(b11);
+          tmp2 = reverse_inst_1_2_3_tsni(a13);
+          tmp3 = reverse_inst_1_2_4_tsni(b11);
           _deforest_Deforest_Arr_2_01 = tmp2;
           _deforest_Deforest_Arr_2_11 = tmp3;
           arr1 = (combine1, x12, xs14) => {
@@ -1249,7 +1249,7 @@ reverse_inst_0_1_3_tsni = function reverse_inst_0_1_3_tsni(l) {
         xs13 = param11;
         xss2 = param1;
         tmp = lscomp(xss2);
-        scrut = unzip_inst_0_1_tsni(tmp);
+        scrut = unzip_inst_1_2_tsni(tmp);
         return runtime.safeCall(scrut(combine, x11, xs13))
       } else {
         throw new globalThis.Error("match error");

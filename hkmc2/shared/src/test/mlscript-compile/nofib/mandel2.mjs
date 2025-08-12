@@ -2,8 +2,8 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let mandel21, check_perim_inst_0_1_tsni, build_tree_inst_2_3_tsni, check_perim_inst_2_3_1_tsni, testMandel2_nofib_inst_4_5_tsni, build_tree_inst_4_5_3_tsni, check_perim_inst_4_5_3_1_tsni, point_colour_inst_6_7_tsni, point_colour_inst_6_8_tsni, point_colour_inst_0_1_8_tsni, point_colour_inst_0_1_7_tsni, point_colour_inst_2_3_1_7_tsni, point_colour_inst_2_3_1_8_tsni, point_colour_inst_4_5_3_1_8_tsni, point_colour_inst_4_5_3_1_7_tsni;
-check_perim_inst_0_1_tsni = function check_perim_inst_0_1_tsni(x1y1, x2y2) {
+let mandel21, check_perim_inst_1_2_tsni, build_tree_inst_3_4_tsni, check_perim_inst_3_4_2_tsni, testMandel2_nofib_inst_5_6_tsni, build_tree_inst_5_6_4_tsni, check_perim_inst_5_6_4_2_tsni, point_colour_inst_0_7_tsni, point_colour_inst_0_8_tsni, point_colour_inst_1_2_8_tsni, point_colour_inst_1_2_7_tsni, point_colour_inst_3_4_2_7_tsni, point_colour_inst_3_4_2_8_tsni, point_colour_inst_5_6_4_2_8_tsni, point_colour_inst_5_6_4_2_7_tsni;
+check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
   let check_line, col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
@@ -91,7 +91,7 @@ check_perim_inst_0_1_tsni = function check_perim_inst_0_1_tsni(x1y1, x2y2) {
           tmp7 = mandel2.nq(y);
           return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
         };
-        col2 = point_colour_inst_0_1_7_tsni(arr);
+        col2 = point_colour_inst_1_2_7_tsni(arr);
         col3 = mandel2.point_colour(x2y2);
         _deforest_Deforest_Arr_2_0 = x1;
         _deforest_Deforest_Arr_2_1 = y2;
@@ -105,7 +105,7 @@ check_perim_inst_0_1_tsni = function check_perim_inst_0_1_tsni(x1y1, x2y2) {
           tmp7 = mandel2.nq(y);
           return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
         };
-        col4 = point_colour_inst_0_1_8_tsni(arr1);
+        col4 = point_colour_inst_1_2_8_tsni(arr1);
         scrut = col1 == col2;
         if (scrut === true) {
           scrut1 = col1 == col3;
@@ -176,7 +176,7 @@ check_perim_inst_0_1_tsni = function check_perim_inst_0_1_tsni(x1y1, x2y2) {
     throw new globalThis.Error("match error");
   }
 };
-build_tree_inst_2_3_tsni = function build_tree_inst_2_3_tsni(x1y1, x2y2) {
+build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
   let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
   if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
     first0 = x1y1[0];
@@ -188,7 +188,7 @@ build_tree_inst_2_3_tsni = function build_tree_inst_2_3_tsni(x1y1, x2y2) {
       first11 = x2y2[1];
       x2 = first01;
       y2 = first11;
-      tmp = check_perim_inst_2_3_1_tsni(x1y1, x2y2);
+      tmp = check_perim_inst_3_4_2_tsni(x1y1, x2y2);
       rec_col = tmp;
       tmp1 = - 1;
       tmp2 = rec_col == tmp1;
@@ -237,12 +237,12 @@ build_tree_inst_2_3_tsni = function build_tree_inst_2_3_tsni(x1y1, x2y2) {
         ewp4 = x2y2;
         scrut1 = split == "NS";
         if (scrut1 === true) {
-          tmp10 = build_tree_inst_2_3_tsni(nsp1, nsp2);
-          tmp11 = build_tree_inst_2_3_tsni(nsp3, nsp4);
+          tmp10 = build_tree_inst_3_4_tsni(nsp1, nsp2);
+          tmp11 = build_tree_inst_3_4_tsni(nsp3, nsp4);
           return mandel2.NS(tmp10, tmp11)
         } else {
-          tmp12 = build_tree_inst_2_3_tsni(ewp1, ewp2);
-          tmp13 = build_tree_inst_2_3_tsni(ewp3, ewp4);
+          tmp12 = build_tree_inst_3_4_tsni(ewp1, ewp2);
+          tmp13 = build_tree_inst_3_4_tsni(ewp3, ewp4);
           return mandel2.EW(tmp12, tmp13)
         }
       }
@@ -253,7 +253,7 @@ build_tree_inst_2_3_tsni = function build_tree_inst_2_3_tsni(x1y1, x2y2) {
     throw new globalThis.Error("match error");
   }
 };
-check_perim_inst_2_3_1_tsni = function check_perim_inst_2_3_1_tsni(x1y1, x2y2) {
+check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
   let check_line, col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
@@ -341,7 +341,7 @@ check_perim_inst_2_3_1_tsni = function check_perim_inst_2_3_1_tsni(x1y1, x2y2) {
           tmp7 = mandel2.nq(y);
           return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
         };
-        col2 = point_colour_inst_2_3_1_7_tsni(arr);
+        col2 = point_colour_inst_3_4_2_7_tsni(arr);
         col3 = mandel2.point_colour(x2y2);
         _deforest_Deforest_Arr_2_01 = x1;
         _deforest_Deforest_Arr_2_11 = y2;
@@ -355,7 +355,7 @@ check_perim_inst_2_3_1_tsni = function check_perim_inst_2_3_1_tsni(x1y1, x2y2) {
           tmp7 = mandel2.nq(y);
           return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
         };
-        col4 = point_colour_inst_2_3_1_8_tsni(arr1);
+        col4 = point_colour_inst_3_4_2_8_tsni(arr1);
         scrut = col1 == col2;
         if (scrut === true) {
           scrut1 = col1 == col3;
@@ -426,7 +426,7 @@ check_perim_inst_2_3_1_tsni = function check_perim_inst_2_3_1_tsni(x1y1, x2y2) {
     throw new globalThis.Error("match error");
   }
 };
-testMandel2_nofib_inst_4_5_tsni = function testMandel2_nofib_inst_4_5_tsni(n) {
+testMandel2_nofib_inst_5_6_tsni = function testMandel2_nofib_inst_5_6_tsni(n) {
   let arr, tmp, arr1, tmp1;
   arr = [
     0,
@@ -437,10 +437,10 @@ testMandel2_nofib_inst_4_5_tsni = function testMandel2_nofib_inst_4_5_tsni(n) {
     mandel2.size,
     tmp
   ];
-  tmp1 = build_tree_inst_4_5_3_tsni(arr, arr1);
+  tmp1 = build_tree_inst_5_6_4_tsni(arr, arr1);
   return mandel2.finite(tmp1)
 };
-build_tree_inst_4_5_3_tsni = function build_tree_inst_4_5_3_tsni(x1y1, x2y2) {
+build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
   let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
   if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
     first0 = x1y1[0];
@@ -452,7 +452,7 @@ build_tree_inst_4_5_3_tsni = function build_tree_inst_4_5_3_tsni(x1y1, x2y2) {
       first11 = x2y2[1];
       x2 = first01;
       y2 = first11;
-      tmp = check_perim_inst_4_5_3_1_tsni(x1y1, x2y2);
+      tmp = check_perim_inst_5_6_4_2_tsni(x1y1, x2y2);
       rec_col = tmp;
       tmp1 = - 1;
       tmp2 = rec_col == tmp1;
@@ -501,12 +501,12 @@ build_tree_inst_4_5_3_tsni = function build_tree_inst_4_5_3_tsni(x1y1, x2y2) {
         ewp4 = x2y2;
         scrut1 = split == "NS";
         if (scrut1 === true) {
-          tmp10 = build_tree_inst_4_5_3_tsni(nsp1, nsp2);
-          tmp11 = build_tree_inst_4_5_3_tsni(nsp3, nsp4);
+          tmp10 = build_tree_inst_5_6_4_tsni(nsp1, nsp2);
+          tmp11 = build_tree_inst_5_6_4_tsni(nsp3, nsp4);
           return mandel2.NS(tmp10, tmp11)
         } else {
-          tmp12 = build_tree_inst_4_5_3_tsni(ewp1, ewp2);
-          tmp13 = build_tree_inst_4_5_3_tsni(ewp3, ewp4);
+          tmp12 = build_tree_inst_5_6_4_tsni(ewp1, ewp2);
+          tmp13 = build_tree_inst_5_6_4_tsni(ewp3, ewp4);
           return mandel2.EW(tmp12, tmp13)
         }
       }
@@ -517,7 +517,7 @@ build_tree_inst_4_5_3_tsni = function build_tree_inst_4_5_3_tsni(x1y1, x2y2) {
     throw new globalThis.Error("match error");
   }
 };
-check_perim_inst_4_5_3_1_tsni = function check_perim_inst_4_5_3_1_tsni(x1y1, x2y2) {
+check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y2) {
   let check_line, col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
@@ -605,7 +605,7 @@ check_perim_inst_4_5_3_1_tsni = function check_perim_inst_4_5_3_1_tsni(x1y1, x2y
           tmp7 = mandel2.nq(y);
           return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
         };
-        col2 = point_colour_inst_4_5_3_1_7_tsni(arr);
+        col2 = point_colour_inst_5_6_4_2_7_tsni(arr);
         col3 = mandel2.point_colour(x2y2);
         _deforest_Deforest_Arr_2_0 = x1;
         _deforest_Deforest_Arr_2_1 = y2;
@@ -619,7 +619,7 @@ check_perim_inst_4_5_3_1_tsni = function check_perim_inst_4_5_3_1_tsni(x1y1, x2y
           tmp7 = mandel2.nq(y);
           return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
         };
-        col4 = point_colour_inst_4_5_3_1_8_tsni(arr1);
+        col4 = point_colour_inst_5_6_4_2_8_tsni(arr1);
         scrut = col1 == col2;
         if (scrut === true) {
           scrut1 = col1 == col3;
@@ -690,28 +690,28 @@ check_perim_inst_4_5_3_1_tsni = function check_perim_inst_4_5_3_1_tsni(x1y1, x2y
     throw new globalThis.Error("match error");
   }
 };
-point_colour_inst_6_7_tsni = function point_colour_inst_6_7_tsni(xy) {
+point_colour_inst_0_7_tsni = function point_colour_inst_0_7_tsni(xy) {
   return runtime.safeCall(xy())
 };
-point_colour_inst_6_8_tsni = function point_colour_inst_6_8_tsni(xy) {
+point_colour_inst_0_8_tsni = function point_colour_inst_0_8_tsni(xy) {
   return runtime.safeCall(xy())
 };
-point_colour_inst_0_1_8_tsni = function point_colour_inst_0_1_8_tsni(xy) {
+point_colour_inst_1_2_8_tsni = function point_colour_inst_1_2_8_tsni(xy) {
   return runtime.safeCall(xy())
 };
-point_colour_inst_0_1_7_tsni = function point_colour_inst_0_1_7_tsni(xy) {
+point_colour_inst_1_2_7_tsni = function point_colour_inst_1_2_7_tsni(xy) {
   return runtime.safeCall(xy())
 };
-point_colour_inst_2_3_1_7_tsni = function point_colour_inst_2_3_1_7_tsni(xy) {
+point_colour_inst_3_4_2_7_tsni = function point_colour_inst_3_4_2_7_tsni(xy) {
   return runtime.safeCall(xy())
 };
-point_colour_inst_2_3_1_8_tsni = function point_colour_inst_2_3_1_8_tsni(xy) {
+point_colour_inst_3_4_2_8_tsni = function point_colour_inst_3_4_2_8_tsni(xy) {
   return runtime.safeCall(xy())
 };
-point_colour_inst_4_5_3_1_8_tsni = function point_colour_inst_4_5_3_1_8_tsni(xy) {
+point_colour_inst_5_6_4_2_8_tsni = function point_colour_inst_5_6_4_2_8_tsni(xy) {
   return runtime.safeCall(xy())
 };
-point_colour_inst_4_5_3_1_7_tsni = function point_colour_inst_4_5_3_1_7_tsni(xy) {
+point_colour_inst_5_6_4_2_7_tsni = function point_colour_inst_5_6_4_2_7_tsni(xy) {
   return runtime.safeCall(xy())
 };
 (class mandel2 {
@@ -1019,7 +1019,7 @@ point_colour_inst_4_5_3_1_7_tsni = function point_colour_inst_4_5_3_1_7_tsni(xy)
             tmp7 = mandel2.nq(y5);
             return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
           };
-          col2 = point_colour_inst_6_7_tsni(arr);
+          col2 = point_colour_inst_0_7_tsni(arr);
           col3 = mandel2.point_colour(x2y2);
           _deforest_Deforest_Arr_2_01 = x11;
           _deforest_Deforest_Arr_2_11 = y21;
@@ -1033,7 +1033,7 @@ point_colour_inst_4_5_3_1_7_tsni = function point_colour_inst_4_5_3_1_7_tsni(xy)
             tmp7 = mandel2.nq(y5);
             return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
           };
-          col4 = point_colour_inst_6_8_tsni(arr1);
+          col4 = point_colour_inst_0_8_tsni(arr1);
           scrut = col1 == col2;
           if (scrut === true) {
             scrut1 = col1 == col3;
@@ -1116,7 +1116,7 @@ point_colour_inst_4_5_3_1_7_tsni = function point_colour_inst_4_5_3_1_7_tsni(xy)
         first11 = x2y21[1];
         x21 = first01;
         y21 = first11;
-        tmp = check_perim_inst_0_1_tsni(x1y11, x2y21);
+        tmp = check_perim_inst_1_2_tsni(x1y11, x2y21);
         rec_col = tmp;
         tmp1 = - 1;
         tmp2 = rec_col == tmp1;
@@ -1192,11 +1192,11 @@ point_colour_inst_4_5_3_1_7_tsni = function point_colour_inst_4_5_3_1_7_tsni(xy)
       mandel2.size,
       tmp
     ];
-    tmp1 = build_tree_inst_2_3_tsni(arr, arr1);
+    tmp1 = build_tree_inst_3_4_tsni(arr, arr1);
     return mandel2.finite(tmp1)
   } 
   static main() {
-    return testMandel2_nofib_inst_4_5_tsni(0)
+    return testMandel2_nofib_inst_5_6_tsni(0)
   }
   static toString() { return "mandel2"; }
 });

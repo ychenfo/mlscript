@@ -1,7 +1,7 @@
 import runtime from "./../Runtime.mjs";
 import Term1 from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
-let boyer1, find_inst_0_1_tsni, find_inst_2_1_tsni, one_way_unify1_inst_3_4_tsni, one_way_unify1_lst_inst_3_4_tsni, find_inst_3_4_1_tsni, find_inst_5_6_tsni, one_way_unify_inst_7_8_tsni, one_way_unify1_inst_7_8_4_tsni, one_way_unify1_lst_inst_7_8_4_tsni, find_inst_7_8_4_1_tsni, apply_subst_inst_7_9_tsni, find_inst_7_9_6_tsni, one_way_unify_inst_10_8_tsni, one_way_unify1_inst_10_8_4_tsni, one_way_unify1_lst_inst_10_8_4_tsni, find_inst_10_8_4_1_tsni, apply_subst_inst_10_9_tsni, find_inst_10_9_6_tsni, one_way_unify_inst_11_8_tsni, one_way_unify1_inst_11_8_4_tsni, one_way_unify1_lst_inst_11_8_4_tsni, find_inst_11_8_4_1_tsni, apply_subst_inst_11_9_tsni, find_inst_11_9_6_tsni, rewrite_inst_12_13_tsni, rewrite_with_lemmas_inst_12_13_tsni, rewrite_with_lemmas_helper_inst_12_13_tsni, apply_subst_inst_12_13_9_tsni, find_inst_12_13_9_6_tsni, one_way_unify_inst_12_13_8_tsni, one_way_unify1_inst_12_13_8_4_tsni, one_way_unify1_lst_inst_12_13_8_4_tsni, find_inst_12_13_8_4_1_tsni, apply_subst_inst_14_15_tsni, find_inst_14_15_6_tsni, tautp_inst_14_16_tsni, rewrite_inst_14_16_13_tsni, rewrite_with_lemmas_inst_14_16_13_tsni, rewrite_with_lemmas_helper_inst_14_16_13_tsni, one_way_unify_inst_14_16_13_8_tsni, one_way_unify1_inst_14_16_13_8_4_tsni, one_way_unify1_lst_inst_14_16_13_8_4_tsni, find_inst_14_16_13_8_4_1_tsni, apply_subst_inst_14_16_13_9_tsni, find_inst_14_16_13_9_6_tsni, test0_inst_17_18_tsni, tautp_inst_17_18_16_tsni, rewrite_inst_17_18_16_13_tsni, rewrite_with_lemmas_inst_17_18_16_13_tsni, rewrite_with_lemmas_helper_inst_17_18_16_13_tsni, apply_subst_inst_17_18_16_13_9_tsni, find_inst_17_18_16_13_9_6_tsni, one_way_unify_inst_17_18_16_13_8_tsni, one_way_unify1_inst_17_18_16_13_8_4_tsni, one_way_unify1_lst_inst_17_18_16_13_8_4_tsni, find_inst_17_18_16_13_8_4_1_tsni, apply_subst_inst_17_18_15_tsni, find_inst_17_18_15_6_tsni, replicate_inst_17_19_tsni, testBoyer_nofib_inst_20_21_tsni, test0_inst_20_21_18_tsni, apply_subst_inst_20_21_18_15_tsni, find_inst_20_21_18_15_6_tsni, tautp_inst_20_21_18_16_tsni, rewrite_inst_20_21_18_16_13_tsni, rewrite_with_lemmas_inst_20_21_18_16_13_tsni, rewrite_with_lemmas_helper_inst_20_21_18_16_13_tsni, one_way_unify_inst_20_21_18_16_13_8_tsni, one_way_unify1_inst_20_21_18_16_13_8_4_tsni, one_way_unify1_lst_inst_20_21_18_16_13_8_4_tsni, find_inst_20_21_18_16_13_8_4_1_tsni, apply_subst_inst_20_21_18_16_13_9_tsni, find_inst_20_21_18_16_13_9_6_tsni, replicate_inst_20_21_19_tsni, all_inst_17_22_tsni, all_inst_20_21_22_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_2_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_5_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_10_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_10_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_12_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_12_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_15_tsni, match_ls_arm_Cons_inst_14_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_14_15_6_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_16_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_15_tsni, match_ls_arm_Cons_inst_17_18_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_17_18_15_6_tsni, match_lss_arm_Cons_inst_17_18_16_13_tsni, match_lss_arm_Nil_inst_17_18_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_17_18_16_13_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_15_tsni, match_ls_arm_Cons_inst_20_21_18_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_20_21_18_15_6_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_16_13_9_tsni, match_lss_arm_Nil_inst_20_21_18_16_13_tsni, match_lss_arm_Cons_inst_20_21_18_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_20_21_18_16_13_tsni;
+let boyer1, one_way_unify1_lst_inst_0_tsni, find_inst_0_1_tsni, one_way_unify1_inst_2_tsni, find_inst_2_1_tsni, one_way_unify1_inst_3_4_tsni, one_way_unify1_lst_inst_3_4_tsni, find_inst_3_4_1_tsni, find_inst_5_6_tsni, rewrite_inst_7_tsni, rewrite_with_lemmas_inst_7_tsni, one_way_unify_inst_7_8_tsni, one_way_unify1_inst_7_8_4_tsni, one_way_unify1_lst_inst_7_8_4_tsni, find_inst_7_8_4_1_tsni, apply_subst_inst_7_9_tsni, find_inst_7_9_6_tsni, rewrite_inst_10_tsni, rewrite_with_lemmas_helper_inst_10_tsni, one_way_unify_inst_10_8_tsni, one_way_unify1_inst_10_8_4_tsni, one_way_unify1_lst_inst_10_8_4_tsni, find_inst_10_8_4_1_tsni, apply_subst_inst_10_9_tsni, find_inst_10_9_6_tsni, rewrite_with_lemmas_inst_11_tsni, rewrite_with_lemmas_helper_inst_11_tsni, one_way_unify_inst_11_8_tsni, one_way_unify1_inst_11_8_4_tsni, one_way_unify1_lst_inst_11_8_4_tsni, find_inst_11_8_4_1_tsni, apply_subst_inst_11_9_tsni, find_inst_11_9_6_tsni, rewrite_inst_12_13_tsni, rewrite_with_lemmas_inst_12_13_tsni, rewrite_with_lemmas_helper_inst_12_13_tsni, apply_subst_inst_12_13_9_tsni, find_inst_12_13_9_6_tsni, one_way_unify_inst_12_13_8_tsni, one_way_unify1_inst_12_13_8_4_tsni, one_way_unify1_lst_inst_12_13_8_4_tsni, find_inst_12_13_8_4_1_tsni, apply_subst_inst_14_15_tsni, find_inst_14_15_6_tsni, tautp_inst_14_16_tsni, rewrite_inst_14_16_13_tsni, rewrite_with_lemmas_inst_14_16_13_tsni, rewrite_with_lemmas_helper_inst_14_16_13_tsni, one_way_unify_inst_14_16_13_8_tsni, one_way_unify1_inst_14_16_13_8_4_tsni, one_way_unify1_lst_inst_14_16_13_8_4_tsni, find_inst_14_16_13_8_4_1_tsni, apply_subst_inst_14_16_13_9_tsni, find_inst_14_16_13_9_6_tsni, test0_inst_17_18_tsni, tautp_inst_17_18_16_tsni, rewrite_inst_17_18_16_13_tsni, rewrite_with_lemmas_inst_17_18_16_13_tsni, rewrite_with_lemmas_helper_inst_17_18_16_13_tsni, apply_subst_inst_17_18_16_13_9_tsni, find_inst_17_18_16_13_9_6_tsni, one_way_unify_inst_17_18_16_13_8_tsni, one_way_unify1_inst_17_18_16_13_8_4_tsni, one_way_unify1_lst_inst_17_18_16_13_8_4_tsni, find_inst_17_18_16_13_8_4_1_tsni, apply_subst_inst_17_18_15_tsni, find_inst_17_18_15_6_tsni, replicate_inst_17_19_tsni, testBoyer_nofib_inst_20_21_tsni, test0_inst_20_21_18_tsni, apply_subst_inst_20_21_18_15_tsni, find_inst_20_21_18_15_6_tsni, tautp_inst_20_21_18_16_tsni, rewrite_inst_20_21_18_16_13_tsni, rewrite_with_lemmas_inst_20_21_18_16_13_tsni, rewrite_with_lemmas_helper_inst_20_21_18_16_13_tsni, one_way_unify_inst_20_21_18_16_13_8_tsni, one_way_unify1_inst_20_21_18_16_13_8_4_tsni, one_way_unify1_lst_inst_20_21_18_16_13_8_4_tsni, find_inst_20_21_18_16_13_8_4_1_tsni, apply_subst_inst_20_21_18_16_13_9_tsni, find_inst_20_21_18_16_13_9_6_tsni, replicate_inst_20_21_19_tsni, all_inst_17_22_tsni, all_inst_20_21_22_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_2_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_5_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_10_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_10_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_12_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_12_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_15_tsni, match_ls_arm_Cons_inst_14_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_14_15_6_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_14_16_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_17_18_15_tsni, match_ls_arm_Cons_inst_17_18_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_17_18_15_6_tsni, match_lss_arm_Cons_inst_17_18_16_13_tsni, match_lss_arm_Nil_inst_17_18_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_17_18_16_13_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_15_tsni, match_ls_arm_Cons_inst_20_21_18_15_6_tsni, match_param0_arm_Deforest_Arr_2_inst_20_21_18_15_6_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_16_13_8_4_tsni, match_scrut_arm_Deforest_Arr_2_inst_20_21_18_16_13_9_tsni, match_lss_arm_Nil_inst_20_21_18_16_13_tsni, match_lss_arm_Cons_inst_20_21_18_16_13_tsni, match_param0_arm_Deforest_Arr_2_inst_20_21_18_16_13_tsni;
 match_scrut_arm_Deforest_Arr_2_inst_0_tsni = function match_scrut_arm_Deforest_Arr_2_inst_0_tsni(term1, subst, vid2, _deforest_Deforest_Arr_2_0_inst_0_tsni, _deforest_Deforest_Arr_2_1_inst_0_tsni) {
   let first1, first0, found, v2, tmp, arr, arr1, tmp1, arr2;
   first0 = _deforest_Deforest_Arr_2_0_inst_0_tsni;
@@ -533,6 +533,87 @@ match_param0_arm_Deforest_Arr_2_inst_20_21_18_16_13_tsni = function match_param0
     throw new globalThis.Error("match error");
   }
 };
+one_way_unify1_lst_inst_0_tsni = function one_way_unify1_lst_inst_0_tsni(tts1, tts2, subst) {
+  let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
+  if (tts1 instanceof NofibPrelude.Nil.class) {
+    if (tts2 instanceof NofibPrelude.Nil.class) {
+      arr = [
+        true,
+        subst
+      ];
+      return arr
+    } else {
+      arr1 = [
+        false,
+        NofibPrelude.Nil
+      ];
+      return arr1
+    }
+  } else if (tts1 instanceof NofibPrelude.Cons.class) {
+    param0 = tts1.head;
+    param1 = tts1.tail;
+    t1 = param0;
+    ts1 = param1;
+    if (tts2 instanceof NofibPrelude.Cons.class) {
+      param01 = tts2.head;
+      param11 = tts2.tail;
+      t2 = param01;
+      ts2 = param11;
+      scrut = boyer.one_way_unify1(t1, t2, subst);
+      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
+        first0 = scrut[0];
+        first1 = scrut[1];
+        hd_ok = first0;
+        subst_ = first1;
+        scrut1 = one_way_unify1_lst_inst_0_tsni(ts1, ts2, subst_);
+        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
+          first01 = scrut1[0];
+          first11 = scrut1[1];
+          tl_ok = first01;
+          subst__ = first11;
+          if (hd_ok === true) {
+            if (tl_ok === true) {
+              tmp = true;
+            } else {
+              tmp = false;
+            }
+          } else {
+            tmp = false;
+          }
+          arr2 = [
+            tmp,
+            subst__
+          ];
+          return arr2
+        } else {
+          arr3 = [
+            false,
+            NofibPrelude.Nil
+          ];
+          return arr3
+        }
+      } else {
+        arr4 = [
+          false,
+          NofibPrelude.Nil
+        ];
+        return arr4
+      }
+    } else {
+      arr5 = [
+        false,
+        NofibPrelude.Nil
+      ];
+      return arr5
+    }
+  } else {
+    arr6 = [
+      false,
+      NofibPrelude.Nil
+    ];
+    return arr6
+  }
+};
 find_inst_0_1_tsni = function find_inst_0_1_tsni(vid, ls) {
   let param0, param1, first1, first0, vid2, val2, bs, scrut, arr, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (ls instanceof NofibPrelude.Nil.class) {
@@ -567,6 +648,52 @@ find_inst_0_1_tsni = function find_inst_0_1_tsni(vid, ls) {
     }
   } else {
     throw new globalThis.Error("match error");
+  }
+};
+one_way_unify1_inst_2_tsni = function one_way_unify1_inst_2_tsni(term1, term2, subst) {
+  let param0, param1, param2, f1, as1, param01, param11, param21, f2, as2, scrut, vid2, scrut1, arr, arr1, arr2;
+  if (term2 instanceof boyer.Var.class) {
+    param01 = term2.i;
+    vid2 = param01;
+    scrut1 = find_inst_2_1_tsni(vid2, subst);
+    return runtime.safeCall(scrut1(term1, subst, vid2))
+  } else {
+    if (term1 instanceof boyer.Fun.class) {
+      param0 = term1.i;
+      param1 = term1.t;
+      param2 = term1.l;
+      f1 = param0;
+      as1 = param1;
+      if (term2 instanceof boyer.Fun.class) {
+        param01 = term2.i;
+        param11 = term2.t;
+        param21 = term2.l;
+        f2 = param01;
+        as2 = param11;
+        scrut = f1 === f2;
+        if (scrut === true) {
+          return boyer.one_way_unify1_lst(as1, as2, subst)
+        } else {
+          arr = [
+            false,
+            NofibPrelude.Nil
+          ];
+          return arr
+        }
+      } else {
+        arr1 = [
+          false,
+          NofibPrelude.Nil
+        ];
+        return arr1
+      }
+    } else {
+      arr2 = [
+        false,
+        NofibPrelude.Nil
+      ];
+      return arr2
+    }
   }
 };
 find_inst_2_1_tsni = function find_inst_2_1_tsni(vid, ls) {
@@ -804,6 +931,31 @@ find_inst_5_6_tsni = function find_inst_5_6_tsni(vid, ls) {
     throw new globalThis.Error("match error");
   }
 };
+rewrite_inst_7_tsni = function rewrite_inst_7_tsni(t) {
+  let param0, param1, param2, f, args, lemmas, v, tmp, tmp1;
+  if (t instanceof boyer.Var.class) {
+    param0 = t.i;
+    v = param0;
+    return runtime.safeCall(boyer.Var(v))
+  } else if (t instanceof boyer.Fun.class) {
+    param0 = t.i;
+    param1 = t.t;
+    param2 = t.l;
+    f = param0;
+    args = param1;
+    lemmas = param2;
+    tmp = NofibPrelude.map(rewrite_inst_7_tsni, args);
+    tmp1 = runtime.safeCall(boyer.Fun(f, tmp, lemmas));
+    return rewrite_with_lemmas_inst_7_tsni(tmp1, lemmas)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+rewrite_with_lemmas_inst_7_tsni = function rewrite_with_lemmas_inst_7_tsni(term, lss) {
+  let tmp;
+  tmp = NofibPrelude.force(lss);
+  return boyer.rewrite_with_lemmas_helper(term, tmp)
+};
 one_way_unify_inst_7_8_tsni = function one_way_unify_inst_7_8_tsni(term1, term2) {
   return one_way_unify1_inst_7_8_4_tsni(term1, term2, NofibPrelude.Nil)
 };
@@ -1029,6 +1181,61 @@ find_inst_7_9_6_tsni = function find_inst_7_9_6_tsni(vid, ls) {
     throw new globalThis.Error("match error");
   }
 };
+rewrite_inst_10_tsni = function rewrite_inst_10_tsni(t) {
+  let param0, param1, param2, f, args, lemmas, v, tmp, tmp1;
+  if (t instanceof boyer.Var.class) {
+    param0 = t.i;
+    v = param0;
+    return runtime.safeCall(boyer.Var(v))
+  } else if (t instanceof boyer.Fun.class) {
+    param0 = t.i;
+    param1 = t.t;
+    param2 = t.l;
+    f = param0;
+    args = param1;
+    lemmas = param2;
+    tmp = NofibPrelude.map(rewrite_inst_10_tsni, args);
+    tmp1 = runtime.safeCall(boyer.Fun(f, tmp, lemmas));
+    return boyer.rewrite_with_lemmas(tmp1, lemmas)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+rewrite_with_lemmas_helper_inst_10_tsni = function rewrite_with_lemmas_helper_inst_10_tsni(term, lss) {
+  let param0, param1, first1, first0, lhs, rhs, ls, scrut, first11, first01, unified, subst, tmp;
+  if (lss instanceof NofibPrelude.Nil.class) {
+    return term
+  } else if (lss instanceof NofibPrelude.Cons.class) {
+    param0 = lss.head;
+    param1 = lss.tail;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      lhs = first0;
+      rhs = first1;
+      ls = param1;
+      scrut = one_way_unify_inst_10_8_tsni(term, lhs);
+      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
+        first01 = scrut[0];
+        first11 = scrut[1];
+        unified = first01;
+        subst = first11;
+        if (unified === true) {
+          tmp = apply_subst_inst_10_9_tsni(subst, rhs);
+          return rewrite_inst_10_tsni(tmp)
+        } else {
+          return rewrite_with_lemmas_helper_inst_10_tsni(term, ls)
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
 one_way_unify_inst_10_8_tsni = function one_way_unify_inst_10_8_tsni(term1, term2) {
   return one_way_unify1_inst_10_8_4_tsni(term1, term2, NofibPrelude.Nil)
 };
@@ -1246,6 +1453,46 @@ find_inst_10_9_6_tsni = function find_inst_10_9_6_tsni(vid, ls) {
         return arr1
       } else {
         return find_inst_10_9_6_tsni(vid, bs)
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+rewrite_with_lemmas_inst_11_tsni = function rewrite_with_lemmas_inst_11_tsni(term, lss) {
+  let tmp;
+  tmp = NofibPrelude.force(lss);
+  return rewrite_with_lemmas_helper_inst_11_tsni(term, tmp)
+};
+rewrite_with_lemmas_helper_inst_11_tsni = function rewrite_with_lemmas_helper_inst_11_tsni(term, lss) {
+  let param0, param1, first1, first0, lhs, rhs, ls, scrut, first11, first01, unified, subst, tmp;
+  if (lss instanceof NofibPrelude.Nil.class) {
+    return term
+  } else if (lss instanceof NofibPrelude.Cons.class) {
+    param0 = lss.head;
+    param1 = lss.tail;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      lhs = first0;
+      rhs = first1;
+      ls = param1;
+      scrut = one_way_unify_inst_11_8_tsni(term, lhs);
+      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
+        first01 = scrut[0];
+        first11 = scrut[1];
+        unified = first01;
+        subst = first11;
+        if (unified === true) {
+          tmp = apply_subst_inst_11_9_tsni(subst, rhs);
+          return boyer.rewrite(tmp)
+        } else {
+          return rewrite_with_lemmas_helper_inst_11_tsni(term, ls)
+        }
+      } else {
+        throw new globalThis.Error("match error");
       }
     } else {
       throw new globalThis.Error("match error");
@@ -6294,7 +6541,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
           as2 = param11;
           scrut = f1 === f2;
           if (scrut === true) {
-            return boyer.one_way_unify1_lst(as1, as2, subst)
+            return one_way_unify1_lst_inst_0_tsni(as1, as2, subst)
           } else {
             arr = [
               false,
@@ -6344,7 +6591,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
         param11 = tts2.tail;
         t21 = param01;
         ts2 = param11;
-        scrut = boyer.one_way_unify1(t11, t21, subst1);
+        scrut = one_way_unify1_inst_2_tsni(t11, t21, subst1);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -6446,7 +6693,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
           subst3 = first11;
           if (unified === true) {
             tmp = apply_subst_inst_7_9_tsni(subst3, rhs);
-            return boyer.rewrite(tmp)
+            return rewrite_inst_7_tsni(tmp)
           } else {
             return boyer.rewrite_with_lemmas_helper(term3, ls1)
           }
@@ -6463,7 +6710,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
   static rewrite_with_lemmas(term4, lss1) {
     let tmp;
     tmp = NofibPrelude.force(lss1);
-    return boyer.rewrite_with_lemmas_helper(term4, tmp)
+    return rewrite_with_lemmas_helper_inst_10_tsni(term4, tmp)
   } 
   static rewrite(t3) {
     let param0, param1, param2, f, args, lemmas, v, tmp, tmp1;
@@ -6480,7 +6727,7 @@ all_inst_20_21_22_tsni = function all_inst_20_21_22_tsni(p, ls) {
       lemmas = param2;
       tmp = NofibPrelude.map(boyer.rewrite, args);
       tmp1 = runtime.safeCall(boyer.Fun(f, tmp, lemmas));
-      return boyer.rewrite_with_lemmas(tmp1, lemmas)
+      return rewrite_with_lemmas_inst_11_tsni(tmp1, lemmas)
     } else {
       throw new globalThis.Error("match error");
     }
