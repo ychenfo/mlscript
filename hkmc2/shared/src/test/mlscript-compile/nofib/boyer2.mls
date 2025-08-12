@@ -92,7 +92,7 @@ fun getToken(s) = if s is
   h :: t and
     (h === " ") then getToken(t)
     (h === "(") || (h === ")") then [h :: Nil, t]
-    restOfToken(t) is [a, b] then [h :: a, b]
+    boyer2.restOfToken(t) is [a, b] then [h :: a, b]
 
 fun strToToken(s) = if
   s is Nil then Nil
@@ -130,7 +130,7 @@ fun getLUT(t_lut) = if t_lut is
 
 fun makelemmas(rules) = if rules is
   Nil then Nil
-  h :: t then mkLispList(strToToken(h)) :: makelemmas(t)
+  h :: t then boyer2.mkLispList(strToToken(h)) :: makelemmas(t)
 
 fun addlemma(lspls, term) = if lspls is
   Nill then term
@@ -143,7 +143,7 @@ fun addlemma(lspls, term) = if lspls is
 
 fun addlemmalst(lspls, term) = if lspls is
   Nil then term
-  h :: t then addlemmalst(t, addlemma(h, term))
+  h :: t then addlemmalst(t, boyer2.addlemma(h, term))
 
 //│ ————————————————————————————————————————————————————————————————————————————————
 fun applysubstlst(alist, y) = if y is
@@ -195,7 +195,7 @@ fun rewrite(x, term) = if x is
   Conss([l1, l2]) then rewritewithlemmas(Conss([l1, rewriteargs(l2, term)]), getLUT([tv(l1), term]), term)
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-val statement = mkLispList(strToToken(
+val statement = boyer2.mkLispList(strToToken(
   nofibStringToList("( implies ( and ( implies x y )( and ( implies y z )( and ( implies z u )( implies u w ) ) ) )( implies x w ) )")
 ))
 //│ statement = Conss([Atom(["i","m","p","l","i","e","s"]), Conss([Conss([Atom(["a","n","d"]), Conss([Conss([Atom(["i","m","p","l","i","e","s"]), Conss([Atom(["x"]), Conss([Atom(["y"]), Nill])])]), Conss([Conss([Atom(["a","n","d"]), Conss([Conss([Atom(["i","m","p","l","i","e","s"]), Conss([Atom(["y"]), Conss([Atom(["z"]), Nill])])]), Conss([Conss([Atom(["a","n","d"]), Conss([Conss([Atom(["i","m","p","l","i","e","s"]), Conss([Atom(["z"]), Conss([Atom(["u"]), Nill])])]), Conss([Conss([Atom(["i","m","p","l","i","e","s"]), Conss([Atom(["u"]), Conss([Atom(["w"]), Nill])])]), Nill])])]), Nill])])]), Nill])])]), Conss([Conss([Atom(["i","m","p","l","i","e","s"]), Conss([Atom(["x"]), Conss([Atom(["w"]), Nill])])]), Nill])])])

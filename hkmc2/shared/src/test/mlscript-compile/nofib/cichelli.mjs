@@ -2,7 +2,7 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let cichelli1, map_inst_0_tsni, ends_inst_1_tsni, attribkeys_inst_2_tsni, map_inst_2_3_tsni, ends_inst_4_5_tsni, ends_inst_4_6_tsni, partition__inst_4_7_tsni, select_inst_4_7_8_tsni, blocked__inst_9_10_tsni, partition__inst_9_10_7_tsni, select_inst_9_10_7_8_tsni, ends_inst_9_10_6_tsni, ends_inst_9_10_5_tsni, hinsert_inst_11_12_tsni, assocm_inst_11_13_tsni, enumFromTo_lz_inst_11_14_tsni, enumFromTo_lz_inst_11_15_tsni, findhash__inst_16_17_tsni, enumFromTo_lz_inst_16_17_14_tsni, enumFromTo_lz_inst_16_17_15_tsni, assocm_inst_16_17_13_tsni, take_inst_18_19_tsni, append_inst_18_20_tsni, blocked_inst_18_21_tsni, blocked__inst_18_21_10_tsni, ends_inst_18_21_10_5_tsni, ends_inst_18_21_10_6_tsni, partition__inst_18_21_10_7_tsni, select_inst_18_21_10_7_8_tsni, findhash_inst_18_22_tsni, findhash__inst_18_22_17_tsni, assocm_inst_18_22_17_13_tsni, enumFromTo_lz_inst_18_22_17_14_tsni, enumFromTo_lz_inst_18_22_17_15_tsni, append_inst_18_21_10_23_tsni, cichelli_inst_24_25_tsni, findhash_inst_24_25_22_tsni, findhash__inst_24_25_22_17_tsni, enumFromTo_lz_inst_24_25_22_17_14_tsni, enumFromTo_lz_inst_24_25_22_17_15_tsni, assocm_inst_24_25_22_17_13_tsni, blocked_inst_24_25_21_tsni, blocked__inst_24_25_21_10_tsni, partition__inst_24_25_21_10_7_tsni, select_inst_24_25_21_10_7_8_tsni, ends_inst_24_25_21_10_6_tsni, ends_inst_24_25_21_10_5_tsni, append_inst_24_25_21_10_23_tsni, append_inst_24_25_20_tsni, take_inst_24_25_19_tsni, prog_inst_26_27_tsni, cichelli_inst_26_27_25_tsni, take_inst_26_27_25_19_tsni, append_inst_26_27_25_20_tsni, blocked_inst_26_27_25_21_tsni, blocked__inst_26_27_25_21_10_tsni, ends_inst_26_27_25_21_10_5_tsni, ends_inst_26_27_25_21_10_6_tsni, partition__inst_26_27_25_21_10_7_tsni, select_inst_26_27_25_21_10_7_8_tsni, findhash_inst_26_27_25_22_tsni, findhash__inst_26_27_25_22_17_tsni, assocm_inst_26_27_25_22_17_13_tsni, enumFromTo_lz_inst_26_27_25_22_17_14_tsni, enumFromTo_lz_inst_26_27_25_22_17_15_tsni, append_inst_26_27_25_21_10_23_tsni, concat_inst_28_tsni, append_inst_28_29_tsni, union_inst_4_30_tsni, subset_inst_4_31_tsni, all_inst_4_31_32_tsni, append_inst_4_23_tsni, append_inst_9_10_23_tsni, subset_inst_9_10_31_tsni, all_inst_9_10_31_32_tsni, union_inst_9_10_30_tsni, hash_inst_11_33_tsni, append_inst_11_34_tsni, hash_inst_16_17_33_tsni, append_inst_16_17_34_tsni, attribkeys_inst_18_35_tsni, map_inst_18_35_3_tsni, union_inst_18_21_10_30_tsni, subset_inst_18_21_10_31_tsni, all_inst_18_21_10_31_32_tsni, hash_inst_18_22_17_33_tsni, hash_inst_24_25_22_17_33_tsni, subset_inst_24_25_21_10_31_tsni, all_inst_24_25_21_10_31_32_tsni, union_inst_24_25_21_10_30_tsni, attribkeys_inst_24_25_35_tsni, map_inst_24_25_35_3_tsni, attribkeys_inst_26_27_25_35_tsni, map_inst_26_27_25_35_3_tsni, union_inst_26_27_25_21_10_30_tsni, subset_inst_26_27_25_21_10_31_tsni, all_inst_26_27_25_21_10_31_32_tsni, hash_inst_26_27_25_22_17_33_tsni, match_xs_arm_Cons_inst_28_29_tsni, match_ls_arm_Cons_inst_4_30_tsni, match_ls_arm_Cons_inst_4_31_32_tsni, match_ls_arm_Cons_inst_9_10_31_32_tsni, match_ls_arm_Cons_inst_9_10_30_tsni, match_first0_arm_None_inst_11_tsni, match_xs_arm_Cons_inst_11_34_tsni, match_xs_arm_Nil_inst_11_34_tsni, match_first0_arm_None_inst_16_17_tsni, match_xs_arm_Nil_inst_16_17_34_tsni, match_xs_arm_Cons_inst_16_17_34_tsni, match_xs_arm_Nil_inst_18_35_3_tsni, match_xs_arm_Cons_inst_18_35_3_tsni, match_ls_arm_Cons_inst_18_21_10_30_tsni, match_ls_arm_Cons_inst_18_21_10_31_32_tsni, match_first0_arm_None_inst_18_22_17_tsni, match_ks_arm_Cons_inst_18_22_17_tsni, match_first0_arm_None_inst_24_25_22_17_tsni, match_ls_arm_Cons_inst_24_25_21_10_31_32_tsni, match_ls_arm_Cons_inst_24_25_21_10_30_tsni, match_ks_arm_Cons_inst_24_25_22_17_tsni, match_xs_arm_Cons_inst_24_25_35_3_tsni, match_xs_arm_Nil_inst_24_25_35_3_tsni, match_xs_arm_Nil_inst_26_27_25_35_3_tsni, match_xs_arm_Cons_inst_26_27_25_35_3_tsni, match_ls_arm_Cons_inst_26_27_25_21_10_30_tsni, match_ls_arm_Cons_inst_26_27_25_21_10_31_32_tsni, match_first0_arm_None_inst_26_27_25_22_17_tsni, match_ks_arm_Cons_inst_26_27_25_22_17_tsni;
+let cichelli1, map_inst_0_tsni, ends_inst_1_tsni, attribkeys_inst_2_tsni, map_inst_2_3_tsni, ends_inst_4_5_tsni, ends_inst_4_6_tsni, partition__inst_4_7_tsni, select_inst_4_7_8_tsni, blocked__inst_9_10_tsni, partition__inst_9_10_7_tsni, select_inst_9_10_7_8_tsni, ends_inst_9_10_6_tsni, ends_inst_9_10_5_tsni, hinsert_inst_11_12_tsni, assocm_inst_11_13_tsni, enumFromTo_lz_inst_11_14_tsni, enumFromTo_lz_inst_11_15_tsni, findhash__inst_16_17_tsni, enumFromTo_lz_inst_16_17_14_tsni, enumFromTo_lz_inst_16_17_15_tsni, assocm_inst_16_17_13_tsni, take_inst_18_19_tsni, append_inst_18_20_tsni, blocked_inst_18_21_tsni, blocked__inst_18_21_10_tsni, ends_inst_18_21_10_5_tsni, ends_inst_18_21_10_6_tsni, partition__inst_18_21_10_7_tsni, select_inst_18_21_10_7_8_tsni, findhash_inst_18_22_tsni, findhash__inst_18_22_17_tsni, assocm_inst_18_22_17_13_tsni, enumFromTo_lz_inst_18_22_17_14_tsni, enumFromTo_lz_inst_18_22_17_15_tsni, append_inst_18_21_10_23_tsni, cichelli__inst_24_25_tsni, findhash_inst_24_25_22_tsni, findhash__inst_24_25_22_17_tsni, enumFromTo_lz_inst_24_25_22_17_14_tsni, enumFromTo_lz_inst_24_25_22_17_15_tsni, assocm_inst_24_25_22_17_13_tsni, blocked_inst_24_25_21_tsni, blocked__inst_24_25_21_10_tsni, partition__inst_24_25_21_10_7_tsni, select_inst_24_25_21_10_7_8_tsni, ends_inst_24_25_21_10_6_tsni, ends_inst_24_25_21_10_5_tsni, append_inst_24_25_21_10_23_tsni, append_inst_24_25_20_tsni, take_inst_24_25_19_tsni, prog_inst_26_27_tsni, cichelli__inst_26_27_25_tsni, take_inst_26_27_25_19_tsni, append_inst_26_27_25_20_tsni, blocked_inst_26_27_25_21_tsni, blocked__inst_26_27_25_21_10_tsni, ends_inst_26_27_25_21_10_5_tsni, ends_inst_26_27_25_21_10_6_tsni, partition__inst_26_27_25_21_10_7_tsni, select_inst_26_27_25_21_10_7_8_tsni, findhash_inst_26_27_25_22_tsni, findhash__inst_26_27_25_22_17_tsni, assocm_inst_26_27_25_22_17_13_tsni, enumFromTo_lz_inst_26_27_25_22_17_14_tsni, enumFromTo_lz_inst_26_27_25_22_17_15_tsni, append_inst_26_27_25_21_10_23_tsni, concat_inst_28_tsni, append_inst_28_29_tsni, union_inst_4_30_tsni, subset_inst_4_31_tsni, all_inst_4_31_32_tsni, append_inst_4_23_tsni, append_inst_9_10_23_tsni, subset_inst_9_10_31_tsni, all_inst_9_10_31_32_tsni, union_inst_9_10_30_tsni, hash_inst_11_33_tsni, append_inst_11_34_tsni, hash_inst_16_17_33_tsni, append_inst_16_17_34_tsni, attribkeys_inst_18_35_tsni, map_inst_18_35_3_tsni, union_inst_18_21_10_30_tsni, subset_inst_18_21_10_31_tsni, all_inst_18_21_10_31_32_tsni, hash_inst_18_22_17_33_tsni, hash_inst_24_25_22_17_33_tsni, subset_inst_24_25_21_10_31_tsni, all_inst_24_25_21_10_31_32_tsni, union_inst_24_25_21_10_30_tsni, attribkeys_inst_24_25_35_tsni, map_inst_24_25_35_3_tsni, attribkeys_inst_26_27_25_35_tsni, map_inst_26_27_25_35_3_tsni, union_inst_26_27_25_21_10_30_tsni, subset_inst_26_27_25_21_10_31_tsni, all_inst_26_27_25_21_10_31_32_tsni, hash_inst_26_27_25_22_17_33_tsni, match_xs_arm_Cons_inst_28_29_tsni, match_ls_arm_Cons_inst_4_30_tsni, match_ls_arm_Cons_inst_4_31_32_tsni, match_ls_arm_Cons_inst_9_10_31_32_tsni, match_ls_arm_Cons_inst_9_10_30_tsni, match_first0_arm_None_inst_11_tsni, match_xs_arm_Cons_inst_11_34_tsni, match_xs_arm_Nil_inst_11_34_tsni, match_first0_arm_None_inst_16_17_tsni, match_xs_arm_Nil_inst_16_17_34_tsni, match_xs_arm_Cons_inst_16_17_34_tsni, match_xs_arm_Nil_inst_18_35_3_tsni, match_xs_arm_Cons_inst_18_35_3_tsni, match_ls_arm_Cons_inst_18_21_10_30_tsni, match_ls_arm_Cons_inst_18_21_10_31_32_tsni, match_first0_arm_None_inst_18_22_17_tsni, match_ks_arm_Cons_inst_18_22_17_tsni, match_first0_arm_None_inst_24_25_22_17_tsni, match_ls_arm_Cons_inst_24_25_21_10_31_32_tsni, match_ls_arm_Cons_inst_24_25_21_10_30_tsni, match_ks_arm_Cons_inst_24_25_22_17_tsni, match_xs_arm_Cons_inst_24_25_35_3_tsni, match_xs_arm_Nil_inst_24_25_35_3_tsni, match_xs_arm_Nil_inst_26_27_25_35_3_tsni, match_xs_arm_Cons_inst_26_27_25_35_3_tsni, match_ls_arm_Cons_inst_26_27_25_21_10_30_tsni, match_ls_arm_Cons_inst_26_27_25_21_10_31_32_tsni, match_first0_arm_None_inst_26_27_25_22_17_tsni, match_ks_arm_Cons_inst_26_27_25_22_17_tsni;
 match_xs_arm_Cons_inst_28_29_tsni = function match_xs_arm_Cons_inst_28_29_tsni(ys, _deforest_Cons_head_inst_28_29_tsni, _deforest_Cons_tail_inst_28_29_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_28_29_tsni;
@@ -832,7 +832,7 @@ attribkeys_inst_2_tsni = function attribkeys_inst_2_tsni(ks) {
   lambda = (undefined, function (k) {
     let tmp1, tmp2, tmp3, _deforest_K_s, _deforest_K_c1, _deforest_K_c2, _deforest_K_i;
     tmp1 = NofibPrelude.head(k);
-    tmp2 = cichelli.last(k);
+    tmp2 = cichelli1.last(k);
     tmp3 = NofibPrelude.listLen(k);
     _deforest_K_s = k;
     _deforest_K_c1 = tmp1;
@@ -1842,7 +1842,7 @@ enumFromTo_lz_inst_18_22_17_15_tsni = function enumFromTo_lz_inst_18_22_17_15_ts
 append_inst_18_21_10_23_tsni = function append_inst_18_21_10_23_tsni(xs, ys) {
   return runtime.safeCall(xs(ys))
 };
-cichelli_inst_24_25_tsni = function cichelli_inst_24_25_tsni(n) {
+cichelli__inst_24_25_tsni = function cichelli__inst_24_25_tsni(n) {
   let attribkeys_, hashkeys, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   tmp = NofibPrelude.intMod(n, 2);
   tmp1 = take_inst_24_25_19_tsni(tmp, cichelli.keys);
@@ -2185,9 +2185,9 @@ take_inst_24_25_19_tsni = function take_inst_24_25_19_tsni(n, ls) {
   }
 };
 prog_inst_26_27_tsni = function prog_inst_26_27_tsni(n) {
-  return cichelli_inst_26_27_25_tsni(n)
+  return cichelli__inst_26_27_25_tsni(n)
 };
-cichelli_inst_26_27_25_tsni = function cichelli_inst_26_27_25_tsni(n) {
+cichelli__inst_26_27_25_tsni = function cichelli__inst_26_27_25_tsni(n) {
   let attribkeys_, hashkeys, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   tmp = NofibPrelude.intMod(n, 2);
   tmp1 = take_inst_26_27_25_19_tsni(tmp, cichelli.keys);
@@ -2594,7 +2594,7 @@ attribkeys_inst_18_35_tsni = function attribkeys_inst_18_35_tsni(ks) {
   lambda = (undefined, function (k) {
     let tmp1, tmp2, tmp3;
     tmp1 = NofibPrelude.head(k);
-    tmp2 = cichelli.last(k);
+    tmp2 = cichelli1.last(k);
     tmp3 = NofibPrelude.listLen(k);
     return runtime.safeCall(cichelli.K(k, tmp1, tmp2, tmp3))
   });
@@ -2651,7 +2651,7 @@ attribkeys_inst_24_25_35_tsni = function attribkeys_inst_24_25_35_tsni(ks) {
   lambda = (undefined, function (k) {
     let tmp1, tmp2, tmp3;
     tmp1 = NofibPrelude.head(k);
-    tmp2 = cichelli.last(k);
+    tmp2 = cichelli1.last(k);
     tmp3 = NofibPrelude.listLen(k);
     return runtime.safeCall(cichelli.K(k, tmp1, tmp2, tmp3))
   });
@@ -2666,7 +2666,7 @@ attribkeys_inst_26_27_25_35_tsni = function attribkeys_inst_26_27_25_35_tsni(ks)
   lambda = (undefined, function (k) {
     let tmp1, tmp2, tmp3;
     tmp1 = NofibPrelude.head(k);
-    tmp2 = cichelli.last(k);
+    tmp2 = cichelli1.last(k);
     tmp3 = NofibPrelude.listLen(k);
     return runtime.safeCall(cichelli.K(k, tmp1, tmp2, tmp3))
   });
@@ -2992,7 +2992,7 @@ hash_inst_26_27_25_22_17_33_tsni = function hash_inst_26_27_25_22_17_33_tsni(cvs
     lambda = (undefined, function (k1) {
       let tmp1, tmp2, tmp3;
       tmp1 = NofibPrelude.head(k1);
-      tmp2 = cichelli.last(k1);
+      tmp2 = cichelli1.last(k1);
       tmp3 = NofibPrelude.listLen(k1);
       return runtime.safeCall(cichelli.K(k1, tmp1, tmp2, tmp3))
     });
@@ -3283,7 +3283,7 @@ hash_inst_26_27_25_22_17_33_tsni = function hash_inst_26_27_25_22_17_33_tsni(cvs
       throw new globalThis.Error("match error");
     }
   } 
-  static cichelli(n) {
+  static cichelli_(n) {
     let attribkeys_, hashkeys, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
     tmp = NofibPrelude.intMod(n, 2);
     tmp1 = take_inst_18_19_tsni(tmp, cichelli.keys);
@@ -3296,7 +3296,7 @@ hash_inst_26_27_25_22_17_33_tsni = function hash_inst_26_27_25_22_17_33_tsni(cvs
     return findhash_inst_18_22_tsni(hashkeys)
   } 
   static prog(n1) {
-    return cichelli_inst_24_25_tsni(n1)
+    return cichelli__inst_24_25_tsni(n1)
   } 
   static main() {
     let tmp;

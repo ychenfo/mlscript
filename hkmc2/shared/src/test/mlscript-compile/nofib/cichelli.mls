@@ -55,7 +55,7 @@ fun union(xs, ys) =
       else lscomp(t)
   append(xs, lscomp(ys))
 
-fun attribkeys(ks) = map(k => K(k, head(k), last(k), listLen(k)), ks)
+fun attribkeys(ks) = map(k => K(k, head(k), cichelli.last(k), listLen(k)), ks)
 
 val numberofkeys = listLen(keys)
 //│ numberofkeys = 22
@@ -148,11 +148,11 @@ fun freq(c) = assoc(c, freqtab)
 fun morefreq(k1, k2) = if
   k1 is K(_, a, x, _) and k2 is K(_, b, y, _) then (freq(a) + freq(x)) > (freq(b) + freq(y))
 
-fun cichelli(n) =
+fun cichelli_(n) =
   let attribkeys_ = attribkeys(keys +: take(intMod(n, 2), keys))
   let hashkeys = blocked(freqsorted(attribkeys_))
   findhash(hashkeys)
 
-fun prog(n) = cichelli(n)
+fun prog(n) = cichelli_(n)
 
 fun main() = prog(6).toString()

@@ -180,7 +180,7 @@ match_ls_arm_Cons_inst_25_40_tsni = function match_ls_arm_Cons_inst_25_40_tsni(_
   return h + tmp
 };
 lscomp_inst_0_tsni = function lscomp_inst_0_tsni(ls) {
-  return runtime.safeCall(ls(lscomp))
+  return runtime.safeCall(ls(lscomp_not_in_scp))
 };
 lscomp_inst_1_tsni = function lscomp_inst_1_tsni(ls) {
   let param0, param1, first1, first0, k, rs, t, tmp, tmp1, arr, tmp2;
@@ -196,7 +196,7 @@ lscomp_inst_1_tsni = function lscomp_inst_1_tsni(ls) {
       rs = first1;
       t = param1;
       tmp = words_inst_1_2_tsni(k);
-      tmp1 = eliza.cycle(rs);
+      tmp1 = eliza1.cycle(rs);
       arr = [
         tmp,
         tmp1
@@ -212,7 +212,7 @@ lscomp_inst_1_tsni = function lscomp_inst_1_tsni(ls) {
 };
 words_inst_1_2_tsni = function words_inst_1_2_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_1_2_3_tsni(eliza.isSpace, s);
+  scrut = dropWhile_inst_1_2_3_tsni(eliza1.isSpace, s);
   return runtime.safeCall(scrut())
 };
 dropWhile_inst_1_2_3_tsni = function dropWhile_inst_1_2_3_tsni(f, ls) {
@@ -239,7 +239,7 @@ dropWhile_inst_1_2_3_tsni = function dropWhile_inst_1_2_3_tsni(f, ls) {
         h2h = param01;
         t2t = param11;
         tmp = NofibPrelude.Cons(h2h, t2t);
-        scrut1 = NofibPrelude.break_(eliza.isSpace, tmp);
+        scrut1 = NofibPrelude.break_(eliza1.isSpace, tmp);
         if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
           first0 = scrut1[0];
           first1 = scrut1[1];
@@ -280,7 +280,7 @@ dropWhile_inst_4_3_tsni = function dropWhile_inst_4_3_tsni(f, ls) {
         h2h = param01;
         t2t = param11;
         tmp = NofibPrelude.Cons(h2h, t2t);
-        scrut1 = NofibPrelude.break_(eliza.isSpace, tmp);
+        scrut1 = NofibPrelude.break_(eliza1.isSpace, tmp);
         if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
           first0 = scrut1[0];
           first1 = scrut1[1];
@@ -1129,7 +1129,7 @@ repeated_inst_15_17_tsni = function repeated_inst_15_17_tsni(kt_rp) {
 };
 words_inst_18_19_tsni = function words_inst_18_19_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_18_19_3_tsni(eliza.isSpace, s);
+  scrut = dropWhile_inst_18_19_3_tsni(eliza1.isSpace, s);
   return runtime.safeCall(scrut())
 };
 dropWhile_inst_18_19_3_tsni = function dropWhile_inst_18_19_3_tsni(f, ls) {
@@ -1156,7 +1156,7 @@ dropWhile_inst_18_19_3_tsni = function dropWhile_inst_18_19_3_tsni(f, ls) {
         h2h = param01;
         t2t = param11;
         tmp = NofibPrelude.Cons(h2h, t2t);
-        scrut1 = NofibPrelude.break_(eliza.isSpace, tmp);
+        scrut1 = NofibPrelude.break_(eliza1.isSpace, tmp);
         if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
           first0 = scrut1[0];
           first1 = scrut1[1];
@@ -2042,7 +2042,7 @@ map_inst_25_26_21_tsni = function map_inst_25_26_21_tsni(f, xs) {
 };
 words_inst_25_26_19_tsni = function words_inst_25_26_19_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_25_26_19_3_tsni(eliza.isSpace, s);
+  scrut = dropWhile_inst_25_26_19_3_tsni(eliza1.isSpace, s);
   return runtime.safeCall(scrut())
 };
 dropWhile_inst_25_26_19_3_tsni = function dropWhile_inst_25_26_19_3_tsni(f, ls) {
@@ -2069,7 +2069,7 @@ dropWhile_inst_25_26_19_3_tsni = function dropWhile_inst_25_26_19_3_tsni(f, ls) 
         h2h = param01;
         t2t = param11;
         tmp = NofibPrelude.Cons(h2h, t2t);
-        scrut1 = NofibPrelude.break_(eliza.isSpace, tmp);
+        scrut1 = NofibPrelude.break_(eliza1.isSpace, tmp);
         if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
           first0 = scrut1[0];
           first1 = scrut1[1];
@@ -2196,7 +2196,7 @@ append_inst_25_26_22_29_tsni = function append_inst_25_26_22_29_tsni(xs, ys) {
 };
 words_inst_30_2_tsni = function words_inst_30_2_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_30_2_3_tsni(eliza.isSpace, s);
+  scrut = dropWhile_inst_30_2_3_tsni(eliza1.isSpace, s);
   return runtime.safeCall(scrut())
 };
 dropWhile_inst_30_2_3_tsni = function dropWhile_inst_30_2_3_tsni(f, ls) {
@@ -2223,7 +2223,7 @@ dropWhile_inst_30_2_3_tsni = function dropWhile_inst_30_2_3_tsni(f, ls) {
         h2h = param01;
         t2t = param11;
         tmp = NofibPrelude.Cons(h2h, t2t);
-        scrut1 = NofibPrelude.break_(eliza.isSpace, tmp);
+        scrut1 = NofibPrelude.break_(eliza1.isSpace, tmp);
         if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
           first0 = scrut1[0];
           first1 = scrut1[1];
@@ -2912,7 +2912,7 @@ nofibListToString_inst_25_40_tsni = function nofibListToString_inst_25_40_tsni(l
           rs = first1;
           t = param1;
           tmp336 = words_inst_30_2_tsni(k);
-          tmp337 = eliza.cycle(rs);
+          tmp337 = eliza1.cycle(rs);
           arr48 = [
             tmp336,
             tmp337
@@ -2927,7 +2927,7 @@ nofibListToString_inst_25_40_tsni = function nofibListToString_inst_25_40_tsni(l
       }
     };
     tmp309 = lscomp_inst_1_tsni(eliza.respMsgs);
-    tmp310 = eliza.cycle(eliza.repeatMsgs);
+    tmp310 = eliza1.cycle(eliza.repeatMsgs);
     arr40 = [
       tmp309,
       tmp310
@@ -3147,7 +3147,7 @@ nofibListToString_inst_25_40_tsni = function nofibListToString_inst_25_40_tsni(l
   } 
   static words(s) {
     let scrut;
-    scrut = dropWhile_inst_4_3_tsni(eliza.isSpace, s);
+    scrut = dropWhile_inst_4_3_tsni(eliza1.isSpace, s);
     return runtime.safeCall(scrut())
   } 
   static unwords(ws) {

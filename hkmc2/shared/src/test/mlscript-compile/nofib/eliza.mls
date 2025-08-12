@@ -22,10 +22,10 @@ fun cycle(xs) = append_lz(xs, lazy of () => cycle(xs))
 
 fun isSpace(c) = c === " "
 
-fun words(s) = if dropWhile(isSpace, s) is
+fun words(s) = if dropWhile(eliza.isSpace, s) is
   Nil then Nil
   h2h :: t2t and
-    break_(isSpace, h2h :: t2t) is [w, s_] then w :: words(s_)
+    break_(eliza.isSpace, h2h :: t2t) is [w, s_] then w :: words(s_)
 
 fun unwords(ws) =
   fun go(ws) = if ws is
@@ -248,8 +248,8 @@ val respMsgs =
 val initial =
   fun lscomp(ls) = if ls is
     Nil then Nil
-    [k, rs] :: t then [words(k), cycle(rs)] :: lscomp(t)
-  [lscomp(respMsgs), cycle(repeatMsgs)]
+    [k, rs] :: t then [words(k), eliza.cycle(rs)] :: lscomp(t)
+  [lscomp(respMsgs), eliza.cycle(repeatMsgs)]
 //│ initial = [[[[["C","A","N"],["Y","O","U"]], Lazy([function])],[[["C","A","N"],["I"]], Lazy([function])],[[["Y","O","U"],["A","R","E"]], Lazy([function])],[[["Y","O","U","'","R","E"]], Lazy([function])],[[["I"],["D","O","N","'","T"]], Lazy([function])],[[["I"],["F","E","E","L"]], Lazy([function])],[[["W","H","Y"],["D","O","N","'","T"],["Y","O","U"]], Lazy([function])],[[["W","H","Y"],["C","A","N","'","T"],["I"]], Lazy([function])],[[["A","R","E"],["Y","O","U"]], Lazy([function])],[[["I"],["C","A","N","'","T"]], Lazy([function])],[[["I"],["A","M"]], Lazy([function])],[[["I","'","M"]], Lazy([function])],[[["Y","O","U"]], Lazy([function])],[[["Y","E","S"]], Lazy([function])],[[["N","O"]], Lazy([function])],[[["C","O","M","P","U","T","E","R"]], Lazy([function])],[[["C","O","M","P","U","T","E","R","S"]], Lazy([function])],[[["I"],["W","A","N","T"]], Lazy([function])],[[["W","H","A","T"]], Lazy([function])],[[["H","O","W"]], Lazy([function])],[[["W","H","O"]], Lazy([function])],[[["W","H","E","R","E"]], Lazy([function])],[[["W","H","E","N"]], Lazy([function])],[[["N","A","M","E"]], Lazy([function])],[[["W","H","Y"]], Lazy([function])],[[["C","A","U","S","E"]], Lazy([function])],[[["B","E","C","A","U","S","E"]], Lazy([function])],[[["D","R","E","A","M"]], Lazy([function])],[[["S","O","R","R","Y"]], Lazy([function])],[[["H","I"]], Lazy([function])],[[["D","R","E","A","M","S"]], Lazy([function])],[[["M","A","Y","B","E"]], Lazy([function])],[[["H","E","L","L","O"]], Lazy([function])],[[["A","L","W","A","Y","S"]], Lazy([function])],[[["Y","O","U","R"]], Lazy([function])],[[["A","L","I","K","E"]], Lazy([function])],[[["T","H","I","N","K"]], Lazy([function])],[[["F","R","I","E","N","D","S"]], Lazy([function])],[[["F","R","I","E","N","D"]], Lazy([function])],[[], Lazy([function])]], Lazy([function])]
 
 fun prefix(xxs, yys) = if xxs is

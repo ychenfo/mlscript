@@ -19,7 +19,7 @@ match_rules_arm_Cons_inst_0_tsni = function match_rules_arm_Cons_inst_0_tsni(_de
   h = param0;
   t = param1;
   tmp = strToToken_inst_0_1_tsni(h);
-  tmp1 = boyer2.mkLispList(tmp);
+  tmp1 = boyer21.mkLispList(tmp);
   tmp2 = makelemmas_inst_0_tsni(t);
   _deforest_Cons_head = tmp1;
   _deforest_Cons_tail = tmp2;
@@ -29,7 +29,7 @@ match_rules_arm_Cons_inst_0_tsni = function match_rules_arm_Cons_inst_0_tsni(_de
     param11 = _deforest_Cons_tail;
     h1 = param01;
     t1 = param11;
-    tmp3 = boyer2.addlemma(h1, term);
+    tmp3 = boyer21.addlemma(h1, term);
     return addlemmalst_inst_17_tsni(t1, tmp3)
   }
 };
@@ -147,7 +147,7 @@ getToken_inst_0_1_2_tsni = function getToken_inst_0_1_2_tsni(s) {
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -208,7 +208,7 @@ getToken_inst_3_2_tsni = function getToken_inst_3_2_tsni(s) {
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -260,7 +260,7 @@ getToken_inst_5_2_tsni = function getToken_inst_5_2_tsni(s) {
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -321,7 +321,7 @@ getToken_inst_6_1_2_tsni = function getToken_inst_6_1_2_tsni(s) {
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -382,7 +382,7 @@ getToken_inst_7_8_2_tsni = function getToken_inst_7_8_2_tsni(s) {
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -457,7 +457,7 @@ getToken_inst_9_10_8_2_tsni = function getToken_inst_9_10_8_2_tsni(s) {
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -537,7 +537,7 @@ getToken_inst_11_12_10_8_2_tsni = function getToken_inst_11_12_10_8_2_tsni(s) {
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -622,7 +622,7 @@ getToken_inst_13_14_12_10_8_2_tsni = function getToken_inst_13_14_12_10_8_2_tsni
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -712,7 +712,7 @@ getToken_inst_15_16_14_12_10_8_2_tsni = function getToken_inst_15_16_14_12_10_8_
         };
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t);
+        scrut = boyer21.restOfToken(t);
         if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
           first0 = scrut[0];
           first1 = scrut[1];
@@ -812,7 +812,7 @@ falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
     };
     tmp = NofibPrelude.nofibStringToList("( implies ( and ( implies x y )( and ( implies y z )( and ( implies z u )( implies u w ) ) ) )( implies x w ) )");
     tmp1 = strToToken_inst_3_tsni(tmp);
-    tmp2 = boyer2.mkLispList(tmp1);
+    tmp2 = boyer21.mkLispList(tmp1);
     this.statement = tmp2;
     tmp3 = NofibPrelude.nofibStringToList("(equal (compile form)(reverse (codegen (optimize form) (Nill) ) ) )");
     tmp4 = NofibPrelude.nofibStringToList("(equal (eqp x y)(equal (fix x)(fix y) ) )");
@@ -2666,7 +2666,7 @@ falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
           ];
           return arr1
         } else {
-          scrut = boyer2.restOfToken(t1);
+          scrut = boyer21.restOfToken(t1);
           if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
             first0 = scrut[0];
             first1 = scrut[1];
@@ -2923,7 +2923,7 @@ falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
       h = param0;
       t1 = param1;
       tmp = strToToken_inst_6_1_tsni(h);
-      tmp1 = boyer2.mkLispList(tmp);
+      tmp1 = boyer21.mkLispList(tmp);
       tmp2 = boyer2.makelemmas(t1);
       return NofibPrelude.Cons(tmp1, tmp2)
     } else {
@@ -2989,7 +2989,7 @@ falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
       param1 = lspls1.tail;
       h = param0;
       t1 = param1;
-      tmp = boyer2.addlemma(h, term1);
+      tmp = boyer21.addlemma(h, term1);
       return boyer2.addlemmalst(t1, tmp)
     } else {
       throw new globalThis.Error("match error");
