@@ -196,20 +196,20 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
         selIdsInAllArmsToSymbolsToReplace.addAll(selsToTmpSyms)
       else
         finalDestToMatchArmFunSymbols.getOrElseUpdate.curried(matchArmDest):
+          val selNameToNewSymbol = mutable.Map.empty[Tree.Ident, VarSymbol]
+          val selExprIdToNewSymbol = mutable.Map.empty[SelId, VarSymbol]
           for cls <- cls do
-            val selNameToNewSymbol = mutable.Map.empty[Tree.Ident, VarSymbol]
-            val selExprIdToNewSymbol = mutable.Map.empty[SelId, VarSymbol]
             for selId <- matchArmDest.selsInArm do
               val selName = preAnalyzer.getResult(selId._1).asInstanceOf[Select].name
               val symName = s"_deforest_${cls.nme}_${selName.name}_${selId._2.makeSuffix(preAnalyzer)}"
               val sym = selNameToNewSymbol.getOrElseUpdate.curried(selName):
                 VarSymbol(Tree.Ident(symName))
               selExprIdToNewSymbol += selId -> sym
-            finalDestToVarSymbolsToReplaceSelInArms += matchArmDest -> (selExprIdToNewSymbol.toMap -> selNameToNewSymbol.toMap)
-            fusingMatchIdToVarSymbolsToReplacedInAllBranches.updateWith(matchId):
-              case N => S(selExprIdToNewSymbol.toMap)
-              case S(x) => S(x ++ selExprIdToNewSymbol.toMap)
-            selIdsInAllArmsToSymbolsToReplace.addAll(selExprIdToNewSymbol)
+          finalDestToVarSymbolsToReplaceSelInArms += matchArmDest -> (selExprIdToNewSymbol.toMap -> selNameToNewSymbol.toMap)
+          fusingMatchIdToVarSymbolsToReplacedInAllBranches.updateWith(matchId):
+            case N => S(selExprIdToNewSymbol.toMap)
+            case S(x) => S(x ++ selExprIdToNewSymbol.toMap)
+          selIdsInAllArmsToSymbolsToReplace.addAll(selExprIdToNewSymbol)
           val scrutName = preAnalyzer.getResult(matchId._1).asInstanceOf[Value.Ref].l.nme
           val armName = cls.fold("default")(_.nme)
           val funSym = BlockMemberSymbol(
