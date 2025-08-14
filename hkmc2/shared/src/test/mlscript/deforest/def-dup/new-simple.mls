@@ -144,3 +144,17 @@ fun g(b) =
 //│ = [D, A(1)]
 
 
+// `y` should not be considered as a free var for the branch
+:deforest
+fun f(ls) = if ls is [] then
+  let y = 4
+  fun h(z) = if z > 0 then h(z - 1) else y
+  h(3)
+f([])
+//│ = 4
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Arr(List())@1@inst__tsni --> Ref(ls)@inst_0_tsni@Deforest_Arr_0
+//│ -------------- executing -------------
+//│ = 4
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

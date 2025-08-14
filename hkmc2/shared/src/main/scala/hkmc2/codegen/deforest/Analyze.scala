@@ -304,6 +304,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   given DeforestPreAnalyzer = preAnalyzer
   import StratVarState.freshVar
   
+  private var processedFun = mutable.Set.empty[BlockMemberSymbol]
+  
   val constraints = processTopLevel
   class ConstraintsAndCacheHitCollector(val forFun: Opt[BlockMemberSymbol]):
     var constraints: Ls[ProdStrat -> ConsStrat] = Nil
@@ -330,7 +332,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                 cc.hit(h)
               preAnalyzer.getProdVarForSym(sym)
             case Nil => 
-              if cc.trackedFunctionSymbolsInOneRecGroup.contains(s) then
+              if processedFun.contains(s) then
                 preAnalyzer.getProdVarForSym(s)
               else
                 // start processing this function, if the cache hit contains the currently processing defs functions
@@ -378,6 +380,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     cc.constraints
   
   def processFunDefn(defn: FunDefn, processingDefs: Ls[BlockMemberSymbol]): ConstraintsAndCacheHitCollector =
+    val notProcedBefore = processedFun.add(defn.sym)
+    assert(notProcedBefore, s"process ${defn.sym} again")
     val thisFunVar = preAnalyzer.getProdVarForSym(defn.sym)
     val paramSyms = defn.params.head.params.map: // TODO: handle multiple param list and the `restParam`
       case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat

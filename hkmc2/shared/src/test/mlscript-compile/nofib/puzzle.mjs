@@ -2,13 +2,13 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let puzzle1, writeState_inst_1_2_tsni, writeHistory_inst_3_4_tsni, writeState_inst_3_4_2_tsni, updateState_inst_5_6_tsni, itemFromTo_inst_5_7_tsni, itemFromTo_inst_5_8_tsni, itemFromTo_inst_5_9_tsni, concat_inst_5_10_tsni, append_inst_5_10_11_tsni, transfer_inst_12_13_tsni, concat_inst_12_13_10_tsni, append_inst_12_13_10_11_tsni, updateState_inst_12_13_6_tsni, itemFromTo_inst_12_13_7_tsni, itemFromTo_inst_12_13_9_tsni, itemFromTo_inst_12_13_8_tsni, writeSolutions_inst_12_14_tsni, writeHistory_inst_12_14_4_tsni, writeState_inst_12_14_4_2_tsni, testPuzzle_nofib_inst_15_16_tsni, writeSolutions_inst_15_16_14_tsni, writeHistory_inst_15_16_14_4_tsni, writeState_inst_15_16_14_4_2_tsni, transfer_inst_15_16_13_tsni, updateState_inst_15_16_13_6_tsni, itemFromTo_inst_15_16_13_7_tsni, itemFromTo_inst_15_16_13_8_tsni, itemFromTo_inst_15_16_13_9_tsni, concat_inst_15_16_13_10_tsni, append_inst_15_16_13_10_11_tsni, append_inst_15_16_14_17_tsni, append_inst_15_16_14_18_tsni, append_inst_15_16_14_4_19_tsni, append_inst_15_16_14_4_20_tsni, append_inst_15_16_14_4_2_21_tsni, writeItem_inst_15_16_14_4_2_22_tsni, append_inst_15_16_14_4_2_22_23_tsni, writeItem_inst_15_16_14_4_2_24_tsni, append_inst_15_16_14_4_2_24_23_tsni, writeItem_inst_15_16_14_4_2_25_tsni, append_inst_15_16_14_4_2_25_23_tsni, writeItem_inst_15_16_14_4_2_26_tsni, append_inst_15_16_14_4_2_26_23_tsni, append_inst_15_16_14_4_2_27_tsni, append_inst_15_16_14_4_2_26_28_tsni, append_inst_15_16_14_4_2_26_29_tsni, append_inst_15_16_14_4_2_26_30_tsni, append_inst_15_16_14_4_2_26_31_tsni, append_inst_15_16_14_4_2_26_32_tsni, append_inst_15_16_14_4_2_26_33_tsni, append_inst_15_16_14_4_2_26_34_tsni, append_inst_15_16_14_4_2_25_28_tsni, append_inst_15_16_14_4_2_25_29_tsni, append_inst_15_16_14_4_2_25_30_tsni, append_inst_15_16_14_4_2_25_31_tsni, append_inst_15_16_14_4_2_25_32_tsni, append_inst_15_16_14_4_2_25_33_tsni, append_inst_15_16_14_4_2_25_34_tsni, append_inst_15_16_14_4_2_24_28_tsni, append_inst_15_16_14_4_2_24_29_tsni, append_inst_15_16_14_4_2_24_30_tsni, append_inst_15_16_14_4_2_24_31_tsni, append_inst_15_16_14_4_2_24_32_tsni, append_inst_15_16_14_4_2_24_33_tsni, append_inst_15_16_14_4_2_24_34_tsni, append_inst_15_16_14_4_2_22_28_tsni, append_inst_15_16_14_4_2_22_29_tsni, append_inst_15_16_14_4_2_22_30_tsni, append_inst_15_16_14_4_2_22_31_tsni, append_inst_15_16_14_4_2_22_32_tsni, append_inst_15_16_14_4_2_22_33_tsni, append_inst_15_16_14_4_2_22_34_tsni, writeItem_inst_0_26_tsni, writeItem_inst_0_25_tsni, writeItem_inst_0_24_tsni, writeItem_inst_0_22_tsni, writeItem_inst_1_2_22_tsni, writeItem_inst_1_2_24_tsni, writeItem_inst_1_2_25_tsni, writeItem_inst_1_2_26_tsni, writeItem_inst_3_4_2_26_tsni, writeItem_inst_3_4_2_25_tsni, writeItem_inst_3_4_2_24_tsni, writeItem_inst_3_4_2_22_tsni, updateState_inst_5_35_tsni, concat_inst_5_36_tsni, append_inst_5_37_tsni, append_inst_12_13_37_tsni, concat_inst_12_13_36_tsni, updateState_inst_12_13_35_tsni, writeItem_inst_12_14_4_2_22_tsni, writeItem_inst_12_14_4_2_24_tsni, writeItem_inst_12_14_4_2_25_tsni, writeItem_inst_12_14_4_2_26_tsni, updateState_inst_15_16_13_35_tsni, concat_inst_15_16_13_36_tsni, append_inst_15_16_13_37_tsni, nofibListToString_inst_15_38_tsni, match_s_arm_State_inst_5_35_tsni, match_ls_arm_Cons_inst_5_tsni, match_ls_arm_Cons_inst_5_tsni1, match_ls_arm_Cons_inst_5_tsni2, match_s_arm_State_inst_12_13_35_tsni, match_ls_arm_Cons_inst_12_13_tsni, match_ls_arm_Cons_inst_12_13_tsni1, match_ls_arm_Cons_inst_12_13_tsni2, match_s_arm_State_inst_15_16_13_35_tsni, match_ls_arm_Cons_inst_15_16_13_tsni, match_ls_arm_Cons_inst_15_16_13_tsni1, match_ls_arm_Cons_inst_15_16_13_tsni2, match_ls_arm_Cons_inst_15_38_tsni;
-match_s_arm_State_inst_5_35_tsni = function match_s_arm_State_inst_5_35_tsni(i, pos, _deforest_State_b_inst_5_35_tsni, _deforest_State_e_inst_5_35_tsni, _deforest_State_l_inst_5_35_tsni, _deforest_State_a_inst_5_35_tsni) {
+let minAcc, lscomp3, lscomp2, lscomp1, puzzle1, lambda, lambda1, lambda2, lambda3, lambda$, lambda$1, lambda$2, lscomp2$, lscomp3$, lscomp1$, transfer_inst_0_tsni, lscomp2$_inst_0_tsni, lscomp3$_inst_0_tsni, updateState_inst_0_1_tsni, itemFromTo_inst_0_2_tsni, itemFromTo_inst_0_3_tsni, concat_inst_0_4_tsni, append_inst_0_4_5_tsni, transfer_inst_6_7_tsni, lscomp2$_inst_6_7_tsni, lscomp3$_inst_6_7_tsni, lscomp1$_inst_6_7_tsni, updateState_inst_6_7_1_tsni, itemFromTo_inst_6_7_2_tsni, itemFromTo_inst_6_7_3_tsni, concat_inst_6_7_4_tsni, append_inst_6_7_4_5_tsni, itemFromTo_inst_6_7_8_tsni, transfer_inst_9_tsni, lscomp2$_inst_9_tsni, lscomp1$_inst_9_tsni, itemFromTo_inst_9_8_tsni, updateState_inst_9_1_tsni, concat_inst_9_4_tsni, append_inst_9_4_5_tsni, transfer_inst_10_11_tsni, lscomp2$_inst_10_11_tsni, lscomp3$_inst_10_11_tsni, lscomp1$_inst_10_11_tsni, updateState_inst_10_11_1_tsni, itemFromTo_inst_10_11_2_tsni, concat_inst_10_11_4_tsni, append_inst_10_11_4_5_tsni, itemFromTo_inst_10_11_8_tsni, transfer_inst_12_tsni, lscomp3$_inst_12_tsni, lscomp1$_inst_12_tsni, itemFromTo_inst_12_8_tsni, updateState_inst_12_1_tsni, itemFromTo_inst_12_2_tsni, concat_inst_12_4_tsni, append_inst_12_4_5_tsni, transfer_inst_13_14_tsni, lscomp2$_inst_13_14_tsni, lscomp3$_inst_13_14_tsni, lscomp1$_inst_13_14_tsni, updateState_inst_13_14_1_tsni, itemFromTo_inst_13_14_2_tsni, itemFromTo_inst_13_14_3_tsni, concat_inst_13_14_4_tsni, append_inst_13_14_4_5_tsni, itemFromTo_inst_13_14_8_tsni, writeState_inst_15_16_tsni, lambda$_inst_17_18_tsni, writeState_inst_17_18_16_tsni, lambda_inst_19_20_tsni, lambda$_inst_19_20_18_tsni, writeState_inst_19_20_18_16_tsni, lambda$_inst_21_22_tsni, lambda_inst_21_22_20_tsni, lambda$_inst_21_22_20_18_tsni, writeState_inst_21_22_20_18_16_tsni, lambda_inst_24_25_tsni, lambda$_inst_24_25_22_tsni, lambda_inst_24_25_22_20_tsni, lambda$_inst_24_25_22_20_18_tsni, writeState_inst_24_25_22_20_18_16_tsni, writeHistory_inst_26_27_tsni, lambda_inst_26_27_25_tsni, lambda$_inst_26_27_25_22_tsni, lambda_inst_26_27_25_22_20_tsni, lambda$_inst_26_27_25_22_20_18_tsni, writeState_inst_26_27_25_22_20_18_16_tsni, lscomp2$_inst_28_tsni, lscomp3$_inst_28_tsni, lscomp1$_inst_28_tsni, itemFromTo_inst_28_8_tsni, updateState_inst_28_1_tsni, itemFromTo_inst_28_2_tsni, itemFromTo_inst_28_3_tsni, concat_inst_28_4_tsni, append_inst_28_4_5_tsni, transfer_inst_29_30_tsni, lscomp2$_inst_29_30_tsni, lscomp3$_inst_29_30_tsni, lscomp1$_inst_29_30_tsni, updateState_inst_29_30_1_tsni, itemFromTo_inst_29_30_2_tsni, itemFromTo_inst_29_30_3_tsni, concat_inst_29_30_4_tsni, append_inst_29_30_4_5_tsni, itemFromTo_inst_29_30_8_tsni, writeSolutions_inst_29_31_tsni, writeHistory_inst_29_31_27_tsni, lambda_inst_29_31_27_25_tsni, lambda$_inst_29_31_27_25_22_tsni, lambda_inst_29_31_27_25_22_20_tsni, lambda$_inst_29_31_27_25_22_20_18_tsni, writeState_inst_29_31_27_25_22_20_18_16_tsni, testPuzzle_nofib_inst_32_33_tsni, writeSolutions_inst_32_33_31_tsni, writeHistory_inst_32_33_31_27_tsni, lambda_inst_32_33_31_27_25_tsni, lambda$_inst_32_33_31_27_25_22_tsni, lambda_inst_32_33_31_27_25_22_20_tsni, lambda$_inst_32_33_31_27_25_22_20_18_tsni, writeState_inst_32_33_31_27_25_22_20_18_16_tsni, transfer_inst_32_33_30_tsni, lscomp2$_inst_32_33_30_tsni, lscomp3$_inst_32_33_30_tsni, lscomp1$_inst_32_33_30_tsni, itemFromTo_inst_32_33_30_8_tsni, updateState_inst_32_33_30_1_tsni, itemFromTo_inst_32_33_30_2_tsni, itemFromTo_inst_32_33_30_3_tsni, concat_inst_32_33_30_4_tsni, append_inst_32_33_30_4_5_tsni, append_inst_32_33_31_34_tsni, append_inst_32_33_31_35_tsni, updateState_inst_0_36_tsni, concat_inst_0_37_tsni, append_inst_0_38_tsni, concat_inst_6_7_37_tsni, updateState_inst_6_7_36_tsni, append_inst_6_7_38_tsni, updateState_inst_9_36_tsni, append_inst_9_38_tsni, updateState_inst_10_11_36_tsni, append_inst_10_11_38_tsni, updateState_inst_12_36_tsni, append_inst_12_38_tsni, updateState_inst_13_14_36_tsni, append_inst_13_14_38_tsni, writeItem_inst_15_16_39_tsni, writeItem_inst_15_16_40_tsni, writeItem_inst_15_16_41_tsni, writeItem_inst_15_16_42_tsni, writeItem_inst_17_18_16_42_tsni, writeItem_inst_17_18_16_41_tsni, writeItem_inst_17_18_16_40_tsni, writeItem_inst_17_18_16_39_tsni, writeItem_inst_19_20_18_16_39_tsni, writeItem_inst_19_20_18_16_40_tsni, writeItem_inst_19_20_18_16_41_tsni, writeItem_inst_19_20_18_16_42_tsni, writeItem_inst_21_22_20_18_16_42_tsni, writeItem_inst_21_22_20_18_16_41_tsni, writeItem_inst_21_22_20_18_16_40_tsni, writeItem_inst_21_22_20_18_16_39_tsni, writeItem_inst_23_42_tsni, writeItem_inst_23_41_tsni, writeItem_inst_23_40_tsni, writeItem_inst_23_39_tsni, writeItem_inst_24_25_22_20_18_16_39_tsni, writeItem_inst_24_25_22_20_18_16_40_tsni, writeItem_inst_24_25_22_20_18_16_41_tsni, writeItem_inst_24_25_22_20_18_16_42_tsni, writeItem_inst_26_27_25_22_20_18_16_42_tsni, writeItem_inst_26_27_25_22_20_18_16_41_tsni, writeItem_inst_26_27_25_22_20_18_16_40_tsni, writeItem_inst_26_27_25_22_20_18_16_39_tsni, updateState_inst_28_36_tsni, concat_inst_28_37_tsni, append_inst_28_38_tsni, concat_inst_29_30_37_tsni, updateState_inst_29_30_36_tsni, append_inst_29_30_38_tsni, writeItem_inst_29_31_27_25_22_20_18_16_39_tsni, writeItem_inst_29_31_27_25_22_20_18_16_40_tsni, writeItem_inst_29_31_27_25_22_20_18_16_41_tsni, writeItem_inst_29_31_27_25_22_20_18_16_42_tsni, writeItem_inst_32_33_31_27_25_22_20_18_16_42_tsni, writeItem_inst_32_33_31_27_25_22_20_18_16_41_tsni, writeItem_inst_32_33_31_27_25_22_20_18_16_40_tsni, writeItem_inst_32_33_31_27_25_22_20_18_16_39_tsni, updateState_inst_32_33_30_36_tsni, concat_inst_32_33_30_37_tsni, append_inst_32_33_30_38_tsni, nofibListToString_inst_32_43_tsni, match_s_arm_State_inst_0_36_tsni, match_ls_arm_Cons_inst_0_tsni, match_ls_arm_Cons_inst_0_tsni1, match_s_arm_State_inst_6_7_36_tsni, match_ls_arm_Cons_inst_6_7_tsni, match_ls_arm_Cons_inst_6_7_tsni1, match_ls_arm_Cons_inst_6_7_tsni2, match_ls_arm_Cons_inst_9_tsni, match_s_arm_State_inst_9_36_tsni, match_s_arm_State_inst_10_11_36_tsni, match_ls_arm_Cons_inst_10_11_tsni, match_ls_arm_Cons_inst_10_11_tsni1, match_ls_arm_Cons_inst_12_tsni, match_s_arm_State_inst_12_36_tsni, match_ls_arm_Cons_inst_12_tsni1, match_s_arm_State_inst_13_14_36_tsni, match_ls_arm_Cons_inst_13_14_tsni, match_ls_arm_Cons_inst_13_14_tsni1, match_ls_arm_Cons_inst_13_14_tsni2, match_ls_arm_Cons_inst_28_tsni, match_s_arm_State_inst_28_36_tsni, match_ls_arm_Cons_inst_28_tsni1, match_ls_arm_Cons_inst_28_tsni2, match_s_arm_State_inst_29_30_36_tsni, match_ls_arm_Cons_inst_29_30_tsni, match_ls_arm_Cons_inst_29_30_tsni1, match_ls_arm_Cons_inst_29_30_tsni2, match_ls_arm_Cons_inst_32_33_30_tsni, match_s_arm_State_inst_32_33_30_36_tsni, match_ls_arm_Cons_inst_32_33_30_tsni1, match_ls_arm_Cons_inst_32_33_30_tsni2, match_ls_arm_Cons_inst_32_43_tsni;
+match_s_arm_State_inst_0_36_tsni = function match_s_arm_State_inst_0_36_tsni(i, pos, _deforest_State_b_inst_0_36_tsni, _deforest_State_e_inst_0_36_tsni, _deforest_State_l_inst_0_36_tsni, _deforest_State_a_inst_0_36_tsni) {
   let param0, param1, param2, param3, a, b, c, d;
-  param0 = _deforest_State_b_inst_5_35_tsni;
-  param1 = _deforest_State_e_inst_5_35_tsni;
-  param2 = _deforest_State_l_inst_5_35_tsni;
-  param3 = _deforest_State_a_inst_5_35_tsni;
+  param0 = _deforest_State_b_inst_0_36_tsni;
+  param1 = _deforest_State_e_inst_0_36_tsni;
+  param2 = _deforest_State_l_inst_0_36_tsni;
+  param3 = _deforest_State_a_inst_0_36_tsni;
   a = param0;
   b = param1;
   c = param2;
@@ -25,28 +25,28 @@ match_s_arm_State_inst_5_35_tsni = function match_s_arm_State_inst_5_35_tsni(i, 
     throw new globalThis.Error("match error");
   }
 };
-match_ls_arm_Cons_inst_5_tsni = function match_ls_arm_Cons_inst_5_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_5_tsni, _deforest_Cons_tail_inst_5_tsni) {
+match_ls_arm_Cons_inst_0_tsni = function match_ls_arm_Cons_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_0_tsni, _deforest_Cons_tail_inst_0_tsni) {
   let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
-  param0 = _deforest_Cons_head_inst_5_tsni;
-  param1 = _deforest_Cons_tail_inst_5_tsni;
+  param0 = _deforest_Cons_head_inst_0_tsni;
+  param1 = _deforest_Cons_tail_inst_0_tsni;
   j = param0;
   ys = param1;
-  tmp = puzzle.position(i, dest);
-  scrut = puzzle.bankEq(tmp, location);
+  tmp = puzzle1.position(i, dest);
+  scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle.position(j, dest);
-    scrut1 = puzzle.bankEq(tmp1, location);
+    tmp1 = puzzle1.position(j, dest);
+    scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
-      tmp2 = updateState_inst_5_6_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_5_35_tsni(tmp2, j, newLocation);
+      tmp2 = updateState_inst_0_1_tsni(dest, i, newLocation);
+      tmp3 = updateState_inst_0_36_tsni(tmp2, j, newLocation);
       newDest = tmp3;
-      scrut2 = puzzle.notSeen(newDest, history);
+      scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle.u2times(i);
+        tmp4 = puzzle1.u2times(i);
         tmp5 = countdown + tmp4;
         newTime = tmp5;
-        tmp6 = puzzle.transfer(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3(ys);
+        tmp6 = transfer_inst_0_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp7 = lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
         _deforest_Cons_head = tmp6;
         _deforest_Cons_tail = tmp7;
         return () => {
@@ -55,74 +55,35 @@ match_ls_arm_Cons_inst_5_tsni = function match_ls_arm_Cons_inst_5_tsni(lscomp3, 
           param11 = _deforest_Cons_tail;
           x = param01;
           xs1 = param11;
-          tmp8 = concat_inst_5_36_tsni(xs1);
+          tmp8 = concat_inst_0_37_tsni(xs1);
           return NofibPrelude.append(x, tmp8)
         }
       } else {
-        return lscomp3(ys)
+        return lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
       }
     } else {
-      return lscomp3(ys)
+      return lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
     }
   } else {
-    return lscomp3(ys)
+    return lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
   }
 };
-match_ls_arm_Cons_inst_5_tsni1 = function match_ls_arm_Cons_inst_5_tsni(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_5_tsni, _deforest_Cons_tail_inst_5_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
-  param0 = _deforest_Cons_head_inst_5_tsni;
-  param1 = _deforest_Cons_tail_inst_5_tsni;
-  item = param0;
-  xs = param1;
-  tmp = puzzle.position(item, dest);
-  scrut = puzzle.bankEq(tmp, location);
-  if (scrut === true) {
-    tmp1 = puzzle.updateState(dest, item, newLocation);
-    newDest = tmp1;
-    scrut1 = puzzle.notSeen(newDest, history);
-    if (scrut1 === true) {
-      tmp2 = puzzle.u2times(item);
-      tmp3 = countdown + tmp2;
-      newTime = tmp3;
-      tmp4 = puzzle.transfer(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1(xs);
-      _deforest_Cons_head = tmp4;
-      _deforest_Cons_tail = tmp5;
-      return () => {
-        let param01, param11, x, xs1, tmp6;
-        param01 = _deforest_Cons_head;
-        param11 = _deforest_Cons_tail;
-        x = param01;
-        xs1 = param11;
-        tmp6 = concat_inst_5_10_tsni(xs1);
-        return append_inst_5_10_11_tsni(x, tmp6)
-      }
-    } else {
-      return lscomp1(xs)
-    }
-  } else {
-    return lscomp1(xs)
-  }
-};
-match_ls_arm_Cons_inst_5_tsni2 = function match_ls_arm_Cons_inst_5_tsni(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_5_tsni, _deforest_Cons_tail_inst_5_tsni) {
-  let lscomp3, param0, param1, i, xs, tmp, tmp1;
-  param0 = _deforest_Cons_head_inst_5_tsni;
-  param1 = _deforest_Cons_tail_inst_5_tsni;
+match_ls_arm_Cons_inst_0_tsni1 = function match_ls_arm_Cons_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_0_tsni, _deforest_Cons_tail_inst_0_tsni) {
+  let param0, param1, i, xs, tmp, tmp1;
+  param0 = _deforest_Cons_head_inst_0_tsni;
+  param1 = _deforest_Cons_tail_inst_0_tsni;
   i = param0;
   xs = param1;
-  lscomp3 = function lscomp3(ls) {
-    return runtime.safeCall(ls(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs))
-  };
-  tmp = puzzle.succItem(i);
-  tmp1 = itemFromTo_inst_5_7_tsni(tmp, puzzle.Adam);
-  return lscomp3(tmp1)
+  tmp = puzzle1.succItem(i);
+  tmp1 = itemFromTo_inst_0_2_tsni(tmp, puzzle1.Adam);
+  return lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
 };
-match_s_arm_State_inst_12_13_35_tsni = function match_s_arm_State_inst_12_13_35_tsni(i, pos, _deforest_State_b_inst_12_13_35_tsni, _deforest_State_e_inst_12_13_35_tsni, _deforest_State_l_inst_12_13_35_tsni, _deforest_State_a_inst_12_13_35_tsni) {
+match_s_arm_State_inst_6_7_36_tsni = function match_s_arm_State_inst_6_7_36_tsni(i, pos, _deforest_State_b_inst_6_7_36_tsni, _deforest_State_e_inst_6_7_36_tsni, _deforest_State_l_inst_6_7_36_tsni, _deforest_State_a_inst_6_7_36_tsni) {
   let param0, param1, param2, param3, a, b, c, d;
-  param0 = _deforest_State_b_inst_12_13_35_tsni;
-  param1 = _deforest_State_e_inst_12_13_35_tsni;
-  param2 = _deforest_State_l_inst_12_13_35_tsni;
-  param3 = _deforest_State_a_inst_12_13_35_tsni;
+  param0 = _deforest_State_b_inst_6_7_36_tsni;
+  param1 = _deforest_State_e_inst_6_7_36_tsni;
+  param2 = _deforest_State_l_inst_6_7_36_tsni;
+  param3 = _deforest_State_a_inst_6_7_36_tsni;
   a = param0;
   b = param1;
   c = param2;
@@ -139,28 +100,28 @@ match_s_arm_State_inst_12_13_35_tsni = function match_s_arm_State_inst_12_13_35_
     throw new globalThis.Error("match error");
   }
 };
-match_ls_arm_Cons_inst_12_13_tsni = function match_ls_arm_Cons_inst_12_13_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_12_13_tsni, _deforest_Cons_tail_inst_12_13_tsni) {
+match_ls_arm_Cons_inst_6_7_tsni = function match_ls_arm_Cons_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_6_7_tsni, _deforest_Cons_tail_inst_6_7_tsni) {
   let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
-  param0 = _deforest_Cons_head_inst_12_13_tsni;
-  param1 = _deforest_Cons_tail_inst_12_13_tsni;
+  param0 = _deforest_Cons_head_inst_6_7_tsni;
+  param1 = _deforest_Cons_tail_inst_6_7_tsni;
   j = param0;
   ys = param1;
-  tmp = puzzle.position(i, dest);
-  scrut = puzzle.bankEq(tmp, location);
+  tmp = puzzle1.position(i, dest);
+  scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle.position(j, dest);
-    scrut1 = puzzle.bankEq(tmp1, location);
+    tmp1 = puzzle1.position(j, dest);
+    scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
-      tmp2 = updateState_inst_12_13_6_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_12_13_35_tsni(tmp2, j, newLocation);
+      tmp2 = updateState_inst_6_7_1_tsni(dest, i, newLocation);
+      tmp3 = updateState_inst_6_7_36_tsni(tmp2, j, newLocation);
       newDest = tmp3;
-      scrut2 = puzzle.notSeen(newDest, history);
+      scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle.u2times(i);
+        tmp4 = puzzle1.u2times(i);
         tmp5 = countdown + tmp4;
         newTime = tmp5;
-        tmp6 = transfer_inst_12_13_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3(ys);
+        tmp6 = transfer_inst_6_7_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp7 = lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
         _deforest_Cons_head = tmp6;
         _deforest_Cons_tail = tmp7;
         return () => {
@@ -169,50 +130,73 @@ match_ls_arm_Cons_inst_12_13_tsni = function match_ls_arm_Cons_inst_12_13_tsni(l
           param11 = _deforest_Cons_tail;
           x = param01;
           xs1 = param11;
-          tmp8 = concat_inst_12_13_36_tsni(xs1);
+          tmp8 = concat_inst_6_7_37_tsni(xs1);
           return NofibPrelude.append(x, tmp8)
         }
       } else {
-        return lscomp3(ys)
+        return lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
       }
     } else {
-      return lscomp3(ys)
+      return lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
     }
   } else {
-    return lscomp3(ys)
+    return lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
   }
 };
-match_ls_arm_Cons_inst_12_13_tsni1 = function match_ls_arm_Cons_inst_12_13_tsni(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_12_13_tsni, _deforest_Cons_tail_inst_12_13_tsni) {
-  let lscomp3, param0, param1, i, xs, tmp, tmp1;
-  param0 = _deforest_Cons_head_inst_12_13_tsni;
-  param1 = _deforest_Cons_tail_inst_12_13_tsni;
+match_ls_arm_Cons_inst_6_7_tsni1 = function match_ls_arm_Cons_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_6_7_tsni, _deforest_Cons_tail_inst_6_7_tsni) {
+  let param0, param1, i, xs, tmp, tmp1;
+  param0 = _deforest_Cons_head_inst_6_7_tsni;
+  param1 = _deforest_Cons_tail_inst_6_7_tsni;
   i = param0;
   xs = param1;
-  lscomp3 = function lscomp3(ls) {
-    return runtime.safeCall(ls(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs))
-  };
-  tmp = puzzle.succItem(i);
-  tmp1 = itemFromTo_inst_12_13_7_tsni(tmp, puzzle.Adam);
-  return lscomp3(tmp1)
+  tmp = puzzle1.succItem(i);
+  tmp1 = itemFromTo_inst_6_7_2_tsni(tmp, puzzle1.Adam);
+  return lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
 };
-match_ls_arm_Cons_inst_12_13_tsni2 = function match_ls_arm_Cons_inst_12_13_tsni(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_12_13_tsni, _deforest_Cons_tail_inst_12_13_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
-  param0 = _deforest_Cons_head_inst_12_13_tsni;
-  param1 = _deforest_Cons_tail_inst_12_13_tsni;
+match_ls_arm_Cons_inst_6_7_tsni2 = function match_ls_arm_Cons_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_6_7_tsni, _deforest_Cons_tail_inst_6_7_tsni) {
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  param0 = _deforest_Cons_head_inst_6_7_tsni;
+  param1 = _deforest_Cons_tail_inst_6_7_tsni;
   item = param0;
   xs = param1;
-  tmp = puzzle.position(item, dest);
-  scrut = puzzle.bankEq(tmp, location);
+  tmp = puzzle1.position(item, dest);
+  scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle.updateState(dest, item, newLocation);
+    tmp1 = puzzle1.updateState(dest, item, newLocation);
     newDest = tmp1;
-    scrut1 = puzzle.notSeen(newDest, history);
+    scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle.u2times(item);
+      tmp2 = puzzle1.u2times(item);
       tmp3 = countdown + tmp2;
       newTime = tmp3;
-      tmp4 = transfer_inst_12_13_tsni(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1(xs);
+      tmp4 = transfer_inst_6_7_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp5 = lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      return NofibPrelude.Cons(tmp4, tmp5)
+    } else {
+      return lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    }
+  } else {
+    return lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+  }
+};
+match_ls_arm_Cons_inst_9_tsni = function match_ls_arm_Cons_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_9_tsni, _deforest_Cons_tail_inst_9_tsni) {
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_9_tsni;
+  param1 = _deforest_Cons_tail_inst_9_tsni;
+  item = param0;
+  xs = param1;
+  tmp = puzzle1.position(item, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.updateState(dest, item, newLocation);
+    newDest = tmp1;
+    scrut1 = puzzle1.notSeen(newDest, history);
+    if (scrut1 === true) {
+      tmp2 = puzzle1.u2times(item);
+      tmp3 = countdown + tmp2;
+      newTime = tmp3;
+      tmp4 = transfer_inst_9_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp5 = lscomp1$_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
       _deforest_Cons_head = tmp4;
       _deforest_Cons_tail = tmp5;
       return () => {
@@ -221,22 +205,22 @@ match_ls_arm_Cons_inst_12_13_tsni2 = function match_ls_arm_Cons_inst_12_13_tsni(
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_12_13_10_tsni(xs1);
-        return append_inst_12_13_10_11_tsni(x, tmp6)
+        tmp6 = concat_inst_9_4_tsni(xs1);
+        return append_inst_9_4_5_tsni(x, tmp6)
       }
     } else {
-      return lscomp1(xs)
+      return lscomp1$_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
     }
   } else {
-    return lscomp1(xs)
+    return lscomp1$_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
   }
 };
-match_s_arm_State_inst_15_16_13_35_tsni = function match_s_arm_State_inst_15_16_13_35_tsni(i, pos, _deforest_State_b_inst_15_16_13_35_tsni, _deforest_State_e_inst_15_16_13_35_tsni, _deforest_State_l_inst_15_16_13_35_tsni, _deforest_State_a_inst_15_16_13_35_tsni) {
+match_s_arm_State_inst_9_36_tsni = function match_s_arm_State_inst_9_36_tsni(i, pos, _deforest_State_b_inst_9_36_tsni, _deforest_State_e_inst_9_36_tsni, _deforest_State_l_inst_9_36_tsni, _deforest_State_a_inst_9_36_tsni) {
   let param0, param1, param2, param3, a, b, c, d;
-  param0 = _deforest_State_b_inst_15_16_13_35_tsni;
-  param1 = _deforest_State_e_inst_15_16_13_35_tsni;
-  param2 = _deforest_State_l_inst_15_16_13_35_tsni;
-  param3 = _deforest_State_a_inst_15_16_13_35_tsni;
+  param0 = _deforest_State_b_inst_9_36_tsni;
+  param1 = _deforest_State_e_inst_9_36_tsni;
+  param2 = _deforest_State_l_inst_9_36_tsni;
+  param3 = _deforest_State_a_inst_9_36_tsni;
   a = param0;
   b = param1;
   c = param2;
@@ -253,67 +237,79 @@ match_s_arm_State_inst_15_16_13_35_tsni = function match_s_arm_State_inst_15_16_
     throw new globalThis.Error("match error");
   }
 };
-match_ls_arm_Cons_inst_15_16_13_tsni = function match_ls_arm_Cons_inst_15_16_13_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_15_16_13_tsni, _deforest_Cons_tail_inst_15_16_13_tsni) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
-  param0 = _deforest_Cons_head_inst_15_16_13_tsni;
-  param1 = _deforest_Cons_tail_inst_15_16_13_tsni;
-  j = param0;
-  ys = param1;
-  tmp = puzzle.position(i, dest);
-  scrut = puzzle.bankEq(tmp, location);
-  if (scrut === true) {
-    tmp1 = puzzle.position(j, dest);
-    scrut1 = puzzle.bankEq(tmp1, location);
-    if (scrut1 === true) {
-      tmp2 = updateState_inst_15_16_13_6_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_15_16_13_35_tsni(tmp2, j, newLocation);
-      newDest = tmp3;
-      scrut2 = puzzle.notSeen(newDest, history);
-      if (scrut2 === true) {
-        tmp4 = puzzle.u2times(i);
-        tmp5 = countdown + tmp4;
-        newTime = tmp5;
-        tmp6 = transfer_inst_15_16_13_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3(ys);
-        _deforest_Cons_head = tmp6;
-        _deforest_Cons_tail = tmp7;
-        return () => {
-          let param01, param11, x, xs1, tmp8;
-          param01 = _deforest_Cons_head;
-          param11 = _deforest_Cons_tail;
-          x = param01;
-          xs1 = param11;
-          tmp8 = concat_inst_15_16_13_36_tsni(xs1);
-          return NofibPrelude.append(x, tmp8)
-        }
-      } else {
-        return lscomp3(ys)
-      }
-    } else {
-      return lscomp3(ys)
-    }
+match_s_arm_State_inst_10_11_36_tsni = function match_s_arm_State_inst_10_11_36_tsni(i, pos, _deforest_State_b_inst_10_11_36_tsni, _deforest_State_e_inst_10_11_36_tsni, _deforest_State_l_inst_10_11_36_tsni, _deforest_State_a_inst_10_11_36_tsni) {
+  let param0, param1, param2, param3, a, b, c, d;
+  param0 = _deforest_State_b_inst_10_11_36_tsni;
+  param1 = _deforest_State_e_inst_10_11_36_tsni;
+  param2 = _deforest_State_l_inst_10_11_36_tsni;
+  param3 = _deforest_State_a_inst_10_11_36_tsni;
+  a = param0;
+  b = param1;
+  c = param2;
+  d = param3;
+  if (i instanceof puzzle.Bono.class) {
+    return runtime.safeCall(puzzle.State(pos, b, c, d))
+  } else if (i instanceof puzzle.Edge.class) {
+    return runtime.safeCall(puzzle.State(a, pos, c, d))
+  } else if (i instanceof puzzle.Larry.class) {
+    return runtime.safeCall(puzzle.State(a, b, pos, d))
+  } else if (i instanceof puzzle.Adam.class) {
+    return runtime.safeCall(puzzle.State(a, b, c, pos))
   } else {
-    return lscomp3(ys)
+    throw new globalThis.Error("match error");
   }
 };
-match_ls_arm_Cons_inst_15_16_13_tsni1 = function match_ls_arm_Cons_inst_15_16_13_tsni(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_15_16_13_tsni, _deforest_Cons_tail_inst_15_16_13_tsni) {
+match_ls_arm_Cons_inst_10_11_tsni = function match_ls_arm_Cons_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_10_11_tsni, _deforest_Cons_tail_inst_10_11_tsni) {
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  param0 = _deforest_Cons_head_inst_10_11_tsni;
+  param1 = _deforest_Cons_tail_inst_10_11_tsni;
+  j = param0;
+  ys = param1;
+  tmp = puzzle1.position(i, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.position(j, dest);
+    scrut1 = puzzle1.bankEq(tmp1, location);
+    if (scrut1 === true) {
+      tmp2 = updateState_inst_10_11_1_tsni(dest, i, newLocation);
+      tmp3 = updateState_inst_10_11_36_tsni(tmp2, j, newLocation);
+      newDest = tmp3;
+      scrut2 = puzzle1.notSeen(newDest, history);
+      if (scrut2 === true) {
+        tmp4 = puzzle1.u2times(i);
+        tmp5 = countdown + tmp4;
+        newTime = tmp5;
+        tmp6 = transfer_inst_10_11_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp7 = lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        return NofibPrelude.Cons(tmp6, tmp7)
+      } else {
+        return lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+      }
+    } else {
+      return lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+    }
+  } else {
+    return lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+  }
+};
+match_ls_arm_Cons_inst_10_11_tsni1 = function match_ls_arm_Cons_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_10_11_tsni, _deforest_Cons_tail_inst_10_11_tsni) {
   let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
-  param0 = _deforest_Cons_head_inst_15_16_13_tsni;
-  param1 = _deforest_Cons_tail_inst_15_16_13_tsni;
+  param0 = _deforest_Cons_head_inst_10_11_tsni;
+  param1 = _deforest_Cons_tail_inst_10_11_tsni;
   item = param0;
   xs = param1;
-  tmp = puzzle.position(item, dest);
-  scrut = puzzle.bankEq(tmp, location);
+  tmp = puzzle1.position(item, dest);
+  scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle.updateState(dest, item, newLocation);
+    tmp1 = puzzle1.updateState(dest, item, newLocation);
     newDest = tmp1;
-    scrut1 = puzzle.notSeen(newDest, history);
+    scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle.u2times(item);
+      tmp2 = puzzle1.u2times(item);
       tmp3 = countdown + tmp2;
       newTime = tmp3;
-      tmp4 = transfer_inst_15_16_13_tsni(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1(xs);
+      tmp4 = transfer_inst_10_11_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp5 = lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
       _deforest_Cons_head = tmp4;
       _deforest_Cons_tail = tmp5;
       return () => {
@@ -322,194 +318,587 @@ match_ls_arm_Cons_inst_15_16_13_tsni1 = function match_ls_arm_Cons_inst_15_16_13
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_15_16_13_10_tsni(xs1);
-        return append_inst_15_16_13_10_11_tsni(x, tmp6)
+        tmp6 = concat_inst_10_11_4_tsni(xs1);
+        return append_inst_10_11_4_5_tsni(x, tmp6)
       }
     } else {
-      return lscomp1(xs)
+      return lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
     }
   } else {
-    return lscomp1(xs)
+    return lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
   }
 };
-match_ls_arm_Cons_inst_15_16_13_tsni2 = function match_ls_arm_Cons_inst_15_16_13_tsni(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_15_16_13_tsni, _deforest_Cons_tail_inst_15_16_13_tsni) {
-  let lscomp3, param0, param1, i, xs, tmp, tmp1;
-  param0 = _deforest_Cons_head_inst_15_16_13_tsni;
-  param1 = _deforest_Cons_tail_inst_15_16_13_tsni;
+match_ls_arm_Cons_inst_12_tsni = function match_ls_arm_Cons_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_12_tsni, _deforest_Cons_tail_inst_12_tsni) {
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_12_tsni;
+  param1 = _deforest_Cons_tail_inst_12_tsni;
+  item = param0;
+  xs = param1;
+  tmp = puzzle1.position(item, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.updateState(dest, item, newLocation);
+    newDest = tmp1;
+    scrut1 = puzzle1.notSeen(newDest, history);
+    if (scrut1 === true) {
+      tmp2 = puzzle1.u2times(item);
+      tmp3 = countdown + tmp2;
+      newTime = tmp3;
+      tmp4 = transfer_inst_12_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp5 = lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp4;
+      _deforest_Cons_tail = tmp5;
+      return () => {
+        let param01, param11, x, xs1, tmp6;
+        param01 = _deforest_Cons_head;
+        param11 = _deforest_Cons_tail;
+        x = param01;
+        xs1 = param11;
+        tmp6 = concat_inst_12_4_tsni(xs1);
+        return append_inst_12_4_5_tsni(x, tmp6)
+      }
+    } else {
+      return lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    }
+  } else {
+    return lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+  }
+};
+match_s_arm_State_inst_12_36_tsni = function match_s_arm_State_inst_12_36_tsni(i, pos, _deforest_State_b_inst_12_36_tsni, _deforest_State_e_inst_12_36_tsni, _deforest_State_l_inst_12_36_tsni, _deforest_State_a_inst_12_36_tsni) {
+  let param0, param1, param2, param3, a, b, c, d;
+  param0 = _deforest_State_b_inst_12_36_tsni;
+  param1 = _deforest_State_e_inst_12_36_tsni;
+  param2 = _deforest_State_l_inst_12_36_tsni;
+  param3 = _deforest_State_a_inst_12_36_tsni;
+  a = param0;
+  b = param1;
+  c = param2;
+  d = param3;
+  if (i instanceof puzzle.Bono.class) {
+    return runtime.safeCall(puzzle.State(pos, b, c, d))
+  } else if (i instanceof puzzle.Edge.class) {
+    return runtime.safeCall(puzzle.State(a, pos, c, d))
+  } else if (i instanceof puzzle.Larry.class) {
+    return runtime.safeCall(puzzle.State(a, b, pos, d))
+  } else if (i instanceof puzzle.Adam.class) {
+    return runtime.safeCall(puzzle.State(a, b, c, pos))
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+match_ls_arm_Cons_inst_12_tsni1 = function match_ls_arm_Cons_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_12_tsni, _deforest_Cons_tail_inst_12_tsni) {
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  param0 = _deforest_Cons_head_inst_12_tsni;
+  param1 = _deforest_Cons_tail_inst_12_tsni;
+  j = param0;
+  ys = param1;
+  tmp = puzzle1.position(i, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.position(j, dest);
+    scrut1 = puzzle1.bankEq(tmp1, location);
+    if (scrut1 === true) {
+      tmp2 = updateState_inst_12_1_tsni(dest, i, newLocation);
+      tmp3 = updateState_inst_12_36_tsni(tmp2, j, newLocation);
+      newDest = tmp3;
+      scrut2 = puzzle1.notSeen(newDest, history);
+      if (scrut2 === true) {
+        tmp4 = puzzle1.u2times(i);
+        tmp5 = countdown + tmp4;
+        newTime = tmp5;
+        tmp6 = transfer_inst_12_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp7 = lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        return NofibPrelude.Cons(tmp6, tmp7)
+      } else {
+        return lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+      }
+    } else {
+      return lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+    }
+  } else {
+    return lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+  }
+};
+match_s_arm_State_inst_13_14_36_tsni = function match_s_arm_State_inst_13_14_36_tsni(i, pos, _deforest_State_b_inst_13_14_36_tsni, _deforest_State_e_inst_13_14_36_tsni, _deforest_State_l_inst_13_14_36_tsni, _deforest_State_a_inst_13_14_36_tsni) {
+  let param0, param1, param2, param3, a, b, c, d;
+  param0 = _deforest_State_b_inst_13_14_36_tsni;
+  param1 = _deforest_State_e_inst_13_14_36_tsni;
+  param2 = _deforest_State_l_inst_13_14_36_tsni;
+  param3 = _deforest_State_a_inst_13_14_36_tsni;
+  a = param0;
+  b = param1;
+  c = param2;
+  d = param3;
+  if (i instanceof puzzle.Bono.class) {
+    return runtime.safeCall(puzzle.State(pos, b, c, d))
+  } else if (i instanceof puzzle.Edge.class) {
+    return runtime.safeCall(puzzle.State(a, pos, c, d))
+  } else if (i instanceof puzzle.Larry.class) {
+    return runtime.safeCall(puzzle.State(a, b, pos, d))
+  } else if (i instanceof puzzle.Adam.class) {
+    return runtime.safeCall(puzzle.State(a, b, c, pos))
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+match_ls_arm_Cons_inst_13_14_tsni = function match_ls_arm_Cons_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_13_14_tsni, _deforest_Cons_tail_inst_13_14_tsni) {
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  param0 = _deforest_Cons_head_inst_13_14_tsni;
+  param1 = _deforest_Cons_tail_inst_13_14_tsni;
+  j = param0;
+  ys = param1;
+  tmp = puzzle1.position(i, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.position(j, dest);
+    scrut1 = puzzle1.bankEq(tmp1, location);
+    if (scrut1 === true) {
+      tmp2 = updateState_inst_13_14_1_tsni(dest, i, newLocation);
+      tmp3 = updateState_inst_13_14_36_tsni(tmp2, j, newLocation);
+      newDest = tmp3;
+      scrut2 = puzzle1.notSeen(newDest, history);
+      if (scrut2 === true) {
+        tmp4 = puzzle1.u2times(i);
+        tmp5 = countdown + tmp4;
+        newTime = tmp5;
+        tmp6 = transfer_inst_13_14_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp7 = lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        return NofibPrelude.Cons(tmp6, tmp7)
+      } else {
+        return lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+      }
+    } else {
+      return lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+    }
+  } else {
+    return lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+  }
+};
+match_ls_arm_Cons_inst_13_14_tsni1 = function match_ls_arm_Cons_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_13_14_tsni, _deforest_Cons_tail_inst_13_14_tsni) {
+  let param0, param1, i, xs, tmp, tmp1;
+  param0 = _deforest_Cons_head_inst_13_14_tsni;
+  param1 = _deforest_Cons_tail_inst_13_14_tsni;
   i = param0;
   xs = param1;
-  lscomp3 = function lscomp3(ls) {
-    return runtime.safeCall(ls(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs))
-  };
-  tmp = puzzle.succItem(i);
-  tmp1 = itemFromTo_inst_15_16_13_7_tsni(tmp, puzzle.Adam);
-  return lscomp3(tmp1)
+  tmp = puzzle1.succItem(i);
+  tmp1 = itemFromTo_inst_13_14_2_tsni(tmp, puzzle1.Adam);
+  return lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
 };
-match_ls_arm_Cons_inst_15_38_tsni = function match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head_inst_15_38_tsni, _deforest_Cons_tail_inst_15_38_tsni) {
+match_ls_arm_Cons_inst_13_14_tsni2 = function match_ls_arm_Cons_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_13_14_tsni, _deforest_Cons_tail_inst_13_14_tsni) {
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_13_14_tsni;
+  param1 = _deforest_Cons_tail_inst_13_14_tsni;
+  item = param0;
+  xs = param1;
+  tmp = puzzle1.position(item, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.updateState(dest, item, newLocation);
+    newDest = tmp1;
+    scrut1 = puzzle1.notSeen(newDest, history);
+    if (scrut1 === true) {
+      tmp2 = puzzle1.u2times(item);
+      tmp3 = countdown + tmp2;
+      newTime = tmp3;
+      tmp4 = transfer_inst_13_14_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp5 = lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp4;
+      _deforest_Cons_tail = tmp5;
+      return () => {
+        let param01, param11, x, xs1, tmp6;
+        param01 = _deforest_Cons_head;
+        param11 = _deforest_Cons_tail;
+        x = param01;
+        xs1 = param11;
+        tmp6 = concat_inst_13_14_4_tsni(xs1);
+        return append_inst_13_14_4_5_tsni(x, tmp6)
+      }
+    } else {
+      return lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    }
+  } else {
+    return lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+  }
+};
+match_ls_arm_Cons_inst_28_tsni = function match_ls_arm_Cons_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_28_tsni, _deforest_Cons_tail_inst_28_tsni) {
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_28_tsni;
+  param1 = _deforest_Cons_tail_inst_28_tsni;
+  item = param0;
+  xs = param1;
+  tmp = puzzle1.position(item, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.updateState(dest, item, newLocation);
+    newDest = tmp1;
+    scrut1 = puzzle1.notSeen(newDest, history);
+    if (scrut1 === true) {
+      tmp2 = puzzle1.u2times(item);
+      tmp3 = countdown + tmp2;
+      newTime = tmp3;
+      tmp4 = puzzle1.transfer(source, newDest, newLocation, newTime, newHistory);
+      tmp5 = lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp4;
+      _deforest_Cons_tail = tmp5;
+      return () => {
+        let param01, param11, x, xs1, tmp6;
+        param01 = _deforest_Cons_head;
+        param11 = _deforest_Cons_tail;
+        x = param01;
+        xs1 = param11;
+        tmp6 = concat_inst_28_4_tsni(xs1);
+        return append_inst_28_4_5_tsni(x, tmp6)
+      }
+    } else {
+      return lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    }
+  } else {
+    return lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+  }
+};
+match_s_arm_State_inst_28_36_tsni = function match_s_arm_State_inst_28_36_tsni(i, pos, _deforest_State_b_inst_28_36_tsni, _deforest_State_e_inst_28_36_tsni, _deforest_State_l_inst_28_36_tsni, _deforest_State_a_inst_28_36_tsni) {
+  let param0, param1, param2, param3, a, b, c, d;
+  param0 = _deforest_State_b_inst_28_36_tsni;
+  param1 = _deforest_State_e_inst_28_36_tsni;
+  param2 = _deforest_State_l_inst_28_36_tsni;
+  param3 = _deforest_State_a_inst_28_36_tsni;
+  a = param0;
+  b = param1;
+  c = param2;
+  d = param3;
+  if (i instanceof puzzle.Bono.class) {
+    return runtime.safeCall(puzzle.State(pos, b, c, d))
+  } else if (i instanceof puzzle.Edge.class) {
+    return runtime.safeCall(puzzle.State(a, pos, c, d))
+  } else if (i instanceof puzzle.Larry.class) {
+    return runtime.safeCall(puzzle.State(a, b, pos, d))
+  } else if (i instanceof puzzle.Adam.class) {
+    return runtime.safeCall(puzzle.State(a, b, c, pos))
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+match_ls_arm_Cons_inst_28_tsni1 = function match_ls_arm_Cons_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_28_tsni, _deforest_Cons_tail_inst_28_tsni) {
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_28_tsni;
+  param1 = _deforest_Cons_tail_inst_28_tsni;
+  j = param0;
+  ys = param1;
+  tmp = puzzle1.position(i, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.position(j, dest);
+    scrut1 = puzzle1.bankEq(tmp1, location);
+    if (scrut1 === true) {
+      tmp2 = updateState_inst_28_1_tsni(dest, i, newLocation);
+      tmp3 = updateState_inst_28_36_tsni(tmp2, j, newLocation);
+      newDest = tmp3;
+      scrut2 = puzzle1.notSeen(newDest, history);
+      if (scrut2 === true) {
+        tmp4 = puzzle1.u2times(i);
+        tmp5 = countdown + tmp4;
+        newTime = tmp5;
+        tmp6 = puzzle1.transfer(source, newDest, newLocation, newTime, newHistory);
+        tmp7 = lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        _deforest_Cons_head = tmp6;
+        _deforest_Cons_tail = tmp7;
+        return () => {
+          let param01, param11, x, xs1, tmp8;
+          param01 = _deforest_Cons_head;
+          param11 = _deforest_Cons_tail;
+          x = param01;
+          xs1 = param11;
+          tmp8 = concat_inst_28_37_tsni(xs1);
+          return NofibPrelude.append(x, tmp8)
+        }
+      } else {
+        return lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+      }
+    } else {
+      return lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+    }
+  } else {
+    return lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+  }
+};
+match_ls_arm_Cons_inst_28_tsni2 = function match_ls_arm_Cons_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_28_tsni, _deforest_Cons_tail_inst_28_tsni) {
+  let param0, param1, i, xs, tmp, tmp1;
+  param0 = _deforest_Cons_head_inst_28_tsni;
+  param1 = _deforest_Cons_tail_inst_28_tsni;
+  i = param0;
+  xs = param1;
+  tmp = puzzle1.succItem(i);
+  tmp1 = itemFromTo_inst_28_2_tsni(tmp, puzzle1.Adam);
+  return lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
+};
+match_s_arm_State_inst_29_30_36_tsni = function match_s_arm_State_inst_29_30_36_tsni(i, pos, _deforest_State_b_inst_29_30_36_tsni, _deforest_State_e_inst_29_30_36_tsni, _deforest_State_l_inst_29_30_36_tsni, _deforest_State_a_inst_29_30_36_tsni) {
+  let param0, param1, param2, param3, a, b, c, d;
+  param0 = _deforest_State_b_inst_29_30_36_tsni;
+  param1 = _deforest_State_e_inst_29_30_36_tsni;
+  param2 = _deforest_State_l_inst_29_30_36_tsni;
+  param3 = _deforest_State_a_inst_29_30_36_tsni;
+  a = param0;
+  b = param1;
+  c = param2;
+  d = param3;
+  if (i instanceof puzzle.Bono.class) {
+    return runtime.safeCall(puzzle.State(pos, b, c, d))
+  } else if (i instanceof puzzle.Edge.class) {
+    return runtime.safeCall(puzzle.State(a, pos, c, d))
+  } else if (i instanceof puzzle.Larry.class) {
+    return runtime.safeCall(puzzle.State(a, b, pos, d))
+  } else if (i instanceof puzzle.Adam.class) {
+    return runtime.safeCall(puzzle.State(a, b, c, pos))
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+match_ls_arm_Cons_inst_29_30_tsni = function match_ls_arm_Cons_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_29_30_tsni, _deforest_Cons_tail_inst_29_30_tsni) {
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_29_30_tsni;
+  param1 = _deforest_Cons_tail_inst_29_30_tsni;
+  j = param0;
+  ys = param1;
+  tmp = puzzle1.position(i, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.position(j, dest);
+    scrut1 = puzzle1.bankEq(tmp1, location);
+    if (scrut1 === true) {
+      tmp2 = updateState_inst_29_30_1_tsni(dest, i, newLocation);
+      tmp3 = updateState_inst_29_30_36_tsni(tmp2, j, newLocation);
+      newDest = tmp3;
+      scrut2 = puzzle1.notSeen(newDest, history);
+      if (scrut2 === true) {
+        tmp4 = puzzle1.u2times(i);
+        tmp5 = countdown + tmp4;
+        newTime = tmp5;
+        tmp6 = transfer_inst_29_30_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp7 = lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        _deforest_Cons_head = tmp6;
+        _deforest_Cons_tail = tmp7;
+        return () => {
+          let param01, param11, x, xs1, tmp8;
+          param01 = _deforest_Cons_head;
+          param11 = _deforest_Cons_tail;
+          x = param01;
+          xs1 = param11;
+          tmp8 = concat_inst_29_30_37_tsni(xs1);
+          return NofibPrelude.append(x, tmp8)
+        }
+      } else {
+        return lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+      }
+    } else {
+      return lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+    }
+  } else {
+    return lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+  }
+};
+match_ls_arm_Cons_inst_29_30_tsni1 = function match_ls_arm_Cons_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_29_30_tsni, _deforest_Cons_tail_inst_29_30_tsni) {
+  let param0, param1, i, xs, tmp, tmp1;
+  param0 = _deforest_Cons_head_inst_29_30_tsni;
+  param1 = _deforest_Cons_tail_inst_29_30_tsni;
+  i = param0;
+  xs = param1;
+  tmp = puzzle1.succItem(i);
+  tmp1 = itemFromTo_inst_29_30_2_tsni(tmp, puzzle1.Adam);
+  return lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
+};
+match_ls_arm_Cons_inst_29_30_tsni2 = function match_ls_arm_Cons_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_29_30_tsni, _deforest_Cons_tail_inst_29_30_tsni) {
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_29_30_tsni;
+  param1 = _deforest_Cons_tail_inst_29_30_tsni;
+  item = param0;
+  xs = param1;
+  tmp = puzzle1.position(item, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.updateState(dest, item, newLocation);
+    newDest = tmp1;
+    scrut1 = puzzle1.notSeen(newDest, history);
+    if (scrut1 === true) {
+      tmp2 = puzzle1.u2times(item);
+      tmp3 = countdown + tmp2;
+      newTime = tmp3;
+      tmp4 = transfer_inst_29_30_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp5 = lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp4;
+      _deforest_Cons_tail = tmp5;
+      return () => {
+        let param01, param11, x, xs1, tmp6;
+        param01 = _deforest_Cons_head;
+        param11 = _deforest_Cons_tail;
+        x = param01;
+        xs1 = param11;
+        tmp6 = concat_inst_29_30_4_tsni(xs1);
+        return append_inst_29_30_4_5_tsni(x, tmp6)
+      }
+    } else {
+      return lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    }
+  } else {
+    return lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+  }
+};
+match_ls_arm_Cons_inst_32_33_30_tsni = function match_ls_arm_Cons_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_32_33_30_tsni, _deforest_Cons_tail_inst_32_33_30_tsni) {
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_32_33_30_tsni;
+  param1 = _deforest_Cons_tail_inst_32_33_30_tsni;
+  item = param0;
+  xs = param1;
+  tmp = puzzle1.position(item, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.updateState(dest, item, newLocation);
+    newDest = tmp1;
+    scrut1 = puzzle1.notSeen(newDest, history);
+    if (scrut1 === true) {
+      tmp2 = puzzle1.u2times(item);
+      tmp3 = countdown + tmp2;
+      newTime = tmp3;
+      tmp4 = transfer_inst_32_33_30_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp5 = lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp4;
+      _deforest_Cons_tail = tmp5;
+      return () => {
+        let param01, param11, x, xs1, tmp6;
+        param01 = _deforest_Cons_head;
+        param11 = _deforest_Cons_tail;
+        x = param01;
+        xs1 = param11;
+        tmp6 = concat_inst_32_33_30_4_tsni(xs1);
+        return append_inst_32_33_30_4_5_tsni(x, tmp6)
+      }
+    } else {
+      return lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    }
+  } else {
+    return lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+  }
+};
+match_s_arm_State_inst_32_33_30_36_tsni = function match_s_arm_State_inst_32_33_30_36_tsni(i, pos, _deforest_State_b_inst_32_33_30_36_tsni, _deforest_State_e_inst_32_33_30_36_tsni, _deforest_State_l_inst_32_33_30_36_tsni, _deforest_State_a_inst_32_33_30_36_tsni) {
+  let param0, param1, param2, param3, a, b, c, d;
+  param0 = _deforest_State_b_inst_32_33_30_36_tsni;
+  param1 = _deforest_State_e_inst_32_33_30_36_tsni;
+  param2 = _deforest_State_l_inst_32_33_30_36_tsni;
+  param3 = _deforest_State_a_inst_32_33_30_36_tsni;
+  a = param0;
+  b = param1;
+  c = param2;
+  d = param3;
+  if (i instanceof puzzle.Bono.class) {
+    return runtime.safeCall(puzzle.State(pos, b, c, d))
+  } else if (i instanceof puzzle.Edge.class) {
+    return runtime.safeCall(puzzle.State(a, pos, c, d))
+  } else if (i instanceof puzzle.Larry.class) {
+    return runtime.safeCall(puzzle.State(a, b, pos, d))
+  } else if (i instanceof puzzle.Adam.class) {
+    return runtime.safeCall(puzzle.State(a, b, c, pos))
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+match_ls_arm_Cons_inst_32_33_30_tsni1 = function match_ls_arm_Cons_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_32_33_30_tsni, _deforest_Cons_tail_inst_32_33_30_tsni) {
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  param0 = _deforest_Cons_head_inst_32_33_30_tsni;
+  param1 = _deforest_Cons_tail_inst_32_33_30_tsni;
+  j = param0;
+  ys = param1;
+  tmp = puzzle1.position(i, dest);
+  scrut = puzzle1.bankEq(tmp, location);
+  if (scrut === true) {
+    tmp1 = puzzle1.position(j, dest);
+    scrut1 = puzzle1.bankEq(tmp1, location);
+    if (scrut1 === true) {
+      tmp2 = updateState_inst_32_33_30_1_tsni(dest, i, newLocation);
+      tmp3 = updateState_inst_32_33_30_36_tsni(tmp2, j, newLocation);
+      newDest = tmp3;
+      scrut2 = puzzle1.notSeen(newDest, history);
+      if (scrut2 === true) {
+        tmp4 = puzzle1.u2times(i);
+        tmp5 = countdown + tmp4;
+        newTime = tmp5;
+        tmp6 = transfer_inst_32_33_30_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp7 = lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        _deforest_Cons_head = tmp6;
+        _deforest_Cons_tail = tmp7;
+        return () => {
+          let param01, param11, x, xs1, tmp8;
+          param01 = _deforest_Cons_head;
+          param11 = _deforest_Cons_tail;
+          x = param01;
+          xs1 = param11;
+          tmp8 = concat_inst_32_33_30_37_tsni(xs1);
+          return NofibPrelude.append(x, tmp8)
+        }
+      } else {
+        return lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+      }
+    } else {
+      return lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+    }
+  } else {
+    return lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+  }
+};
+match_ls_arm_Cons_inst_32_33_30_tsni2 = function match_ls_arm_Cons_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_32_33_30_tsni, _deforest_Cons_tail_inst_32_33_30_tsni) {
+  let param0, param1, i, xs, tmp, tmp1;
+  param0 = _deforest_Cons_head_inst_32_33_30_tsni;
+  param1 = _deforest_Cons_tail_inst_32_33_30_tsni;
+  i = param0;
+  xs = param1;
+  tmp = puzzle1.succItem(i);
+  tmp1 = itemFromTo_inst_32_33_30_2_tsni(tmp, puzzle1.Adam);
+  return lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
+};
+match_ls_arm_Cons_inst_32_43_tsni = function match_ls_arm_Cons_inst_32_43_tsni(_deforest_Cons_head_inst_32_43_tsni, _deforest_Cons_tail_inst_32_43_tsni) {
   let param0, param1, h, t, tmp;
-  param0 = _deforest_Cons_head_inst_15_38_tsni;
-  param1 = _deforest_Cons_tail_inst_15_38_tsni;
+  param0 = _deforest_Cons_head_inst_32_43_tsni;
+  param1 = _deforest_Cons_tail_inst_32_43_tsni;
   h = param0;
   t = param1;
-  tmp = nofibListToString_inst_15_38_tsni(t);
+  tmp = nofibListToString_inst_32_43_tsni(t);
   return h + tmp
 };
-writeState_inst_1_2_tsni = function writeState_inst_1_2_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
-  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
-  tmp1 = puzzle.bonoPos(state);
-  tmp2 = puzzle.edgePos(state);
-  tmp3 = puzzle.larryPos(state);
-  tmp4 = puzzle.adamPos(state);
-  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
-  tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_1_2_26_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_1_2_25_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_1_2_24_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_1_2_22_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp1, tmp9);
-  return NofibPrelude.append(tmp, tmp10)
-};
-writeHistory_inst_3_4_tsni = function writeHistory_inst_3_4_tsni(history, x) {
-  let tmp, lambda, lambda1;
-  if (history instanceof NofibPrelude.Nil.class) {
-    return x
+transfer_inst_0_tsni = function transfer_inst_0_tsni(source, dest, location, countdown, history) {
+  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  scrut = puzzle.stateEq(source, dest);
+  if (scrut === true) {
+    arr = [
+      countdown,
+      dest
+    ];
+    tmp = NofibPrelude.Cons(arr, history);
+    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
   } else {
-    lambda = (undefined, function (timestate, acc) {
-      let lambda2;
-      lambda2 = (undefined, function (s) {
-        let first1, first0, time, state, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-        if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
-          first0 = timestate[0];
-          first1 = timestate[1];
-          time = first0;
-          state = first1;
-          tmp1 = NofibPrelude.nofibStringToList("Time: ");
-          tmp2 = puzzle.totalTime(history);
-          tmp3 = tmp2 - time;
-          tmp4 = NofibPrelude.stringOfInt(tmp3);
-          tmp5 = NofibPrelude.nofibStringToList(tmp4);
-          tmp6 = runtime.safeCall(acc(s));
-          tmp7 = writeState_inst_3_4_2_tsni(state, tmp6);
-          tmp8 = NofibPrelude.Cons("\n", tmp7);
-          tmp9 = NofibPrelude.append(tmp5, tmp8);
-          return NofibPrelude.append(tmp1, tmp9)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      });
-      return lambda2
-    });
-    lambda1 = (undefined, function (x1) {
-      return x1
-    });
-    tmp = NofibPrelude.foldr(lambda, lambda1, history);
-    return runtime.safeCall(tmp(x))
+    arr1 = [
+      countdown,
+      dest
+    ];
+    tmp1 = NofibPrelude.Cons(arr1, history);
+    newHistory = tmp1;
+    tmp2 = puzzle.opposite(location);
+    newLocation = tmp2;
+    tmp3 = puzzle.itemFromTo(puzzle.Bono, puzzle.Adam);
+    tmp4 = lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
+    tmp5 = concat_inst_0_4_tsni(tmp4);
+    moveOne = tmp5;
+    tmp6 = itemFromTo_inst_0_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp7 = lscomp2$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
+    tmp8 = concat_inst_0_37_tsni(tmp7);
+    moveTwo = tmp8;
+    return append_inst_0_38_tsni(moveOne, moveTwo)
   }
 };
-writeState_inst_3_4_2_tsni = function writeState_inst_3_4_2_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
-  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
-  tmp1 = puzzle.bonoPos(state);
-  tmp2 = puzzle.edgePos(state);
-  tmp3 = puzzle.larryPos(state);
-  tmp4 = puzzle.adamPos(state);
-  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
-  tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_3_4_2_26_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_3_4_2_25_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_3_4_2_24_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_3_4_2_22_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp1, tmp9);
-  return NofibPrelude.append(tmp, tmp10)
+lscomp2$_inst_0_tsni = function lscomp2$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
 };
-updateState_inst_5_6_tsni = function updateState_inst_5_6_tsni(s, i, pos) {
+lscomp3$_inst_0_tsni = function lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
+};
+updateState_inst_0_1_tsni = function updateState_inst_0_1_tsni(s, i, pos) {
   let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
   if (s instanceof puzzle.State.class) {
     param0 = s.b;
@@ -526,7 +915,7 @@ updateState_inst_5_6_tsni = function updateState_inst_5_6_tsni(s, i, pos) {
       _deforest_State_l = c;
       _deforest_State_a = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_5_35_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+        return match_s_arm_State_inst_0_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
       }
     } else if (i instanceof puzzle.Edge.class) {
       _deforest_State_b1 = a;
@@ -534,7 +923,7 @@ updateState_inst_5_6_tsni = function updateState_inst_5_6_tsni(s, i, pos) {
       _deforest_State_l1 = c;
       _deforest_State_a1 = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_5_35_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+        return match_s_arm_State_inst_0_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
       }
     } else if (i instanceof puzzle.Larry.class) {
       _deforest_State_b2 = a;
@@ -542,7 +931,7 @@ updateState_inst_5_6_tsni = function updateState_inst_5_6_tsni(s, i, pos) {
       _deforest_State_l2 = pos;
       _deforest_State_a2 = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_5_35_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+        return match_s_arm_State_inst_0_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
       }
     } else if (i instanceof puzzle.Adam.class) {
       _deforest_State_b3 = a;
@@ -550,7 +939,7 @@ updateState_inst_5_6_tsni = function updateState_inst_5_6_tsni(s, i, pos) {
       _deforest_State_l3 = c;
       _deforest_State_a3 = pos;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_5_35_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+        return match_s_arm_State_inst_0_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
       }
     } else {
       throw new globalThis.Error("match error");
@@ -559,79 +948,68 @@ updateState_inst_5_6_tsni = function updateState_inst_5_6_tsni(s, i, pos) {
     throw new globalThis.Error("match error");
   }
 };
-itemFromTo_inst_5_7_tsni = function itemFromTo_inst_5_7_tsni(a, b) {
+itemFromTo_inst_0_2_tsni = function itemFromTo_inst_0_2_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   scrut = puzzle.itemEq(a, b);
   if (scrut === true) {
     _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return lscomp2(xs)
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return lscomp2$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
     };
-    return (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return match_ls_arm_Cons_inst_5_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_5_7_tsni(tmp, b);
+    tmp1 = itemFromTo_inst_0_2_tsni(tmp, b);
     _deforest_Cons_head1 = a;
     _deforest_Cons_tail1 = tmp1;
-    return (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return match_ls_arm_Cons_inst_5_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
 };
-itemFromTo_inst_5_8_tsni = function itemFromTo_inst_5_8_tsni(a, b) {
+itemFromTo_inst_0_3_tsni = function itemFromTo_inst_0_3_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   scrut = puzzle.itemEq(a, b);
   if (scrut === true) {
     _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return () => {
-        return (ys) => {
-          return ys
-        }
-      }
-    };
-    return (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_5_tsni1(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_5_8_tsni(tmp, b);
-    _deforest_Cons_head1 = a;
-    _deforest_Cons_tail1 = tmp1;
-    return (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_5_tsni1(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
-    }
-  }
-};
-itemFromTo_inst_5_9_tsni = function itemFromTo_inst_5_9_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
-  scrut = puzzle.itemEq(a, b);
-  if (scrut === true) {
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
       return () => {
         return NofibPrelude.Nil
       }
     };
-    return (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_5_tsni2(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_0_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_5_9_tsni(tmp, b);
+    tmp1 = itemFromTo_inst_0_3_tsni(tmp, b);
     _deforest_Cons_head1 = a;
     _deforest_Cons_tail1 = tmp1;
-    return (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_5_tsni2(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_0_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
 };
-concat_inst_5_10_tsni = function concat_inst_5_10_tsni(ls) {
-  return runtime.safeCall(ls())
+concat_inst_0_4_tsni = function concat_inst_0_4_tsni(ls) {
+  let param0, param1, x, xs, tmp;
+  if (ls instanceof NofibPrelude.Nil.class) {
+    return (ys) => {
+      return ys
+    }
+  } else if (ls instanceof NofibPrelude.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    x = param0;
+    xs = param1;
+    tmp = concat_inst_0_4_tsni(xs);
+    return append_inst_0_4_5_tsni(x, tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-append_inst_5_10_11_tsni = function append_inst_5_10_11_tsni(xs, ys) {
+append_inst_0_4_5_tsni = function append_inst_0_4_5_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -640,7 +1018,7 @@ append_inst_5_10_11_tsni = function append_inst_5_10_11_tsni(xs, ys) {
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_5_10_11_tsni(xs1, ys);
+    tmp = append_inst_0_4_5_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return (ys1) => {
@@ -648,15 +1026,15 @@ append_inst_5_10_11_tsni = function append_inst_5_10_11_tsni(xs, ys) {
       param1 = _deforest_Cons_tail;
       x = param0;
       xs1 = param1;
-      tmp = append_inst_5_37_tsni(xs1, ys1);
+      tmp = append_inst_0_38_tsni(xs1, ys1);
       return NofibPrelude.Cons(x, tmp)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-transfer_inst_12_13_tsni = function transfer_inst_12_13_tsni(source, dest, location, countdown, history) {
-  let lscomp2, lscomp1, newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+transfer_inst_6_7_tsni = function transfer_inst_6_7_tsni(source, dest, location, countdown, history) {
+  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
     arr = [
@@ -666,12 +1044,6 @@ transfer_inst_12_13_tsni = function transfer_inst_12_13_tsni(source, dest, locat
     tmp = NofibPrelude.Cons(arr, history);
     return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
   } else {
-    lscomp1 = function lscomp1(ls) {
-      return runtime.safeCall(ls(lscomp1, source, dest, location, countdown, history, newHistory, newLocation))
-    };
-    lscomp2 = function lscomp2(ls) {
-      return runtime.safeCall(ls(lscomp2, source, dest, location, countdown, history, newHistory, newLocation))
-    };
     arr1 = [
       countdown,
       dest
@@ -680,45 +1052,27 @@ transfer_inst_12_13_tsni = function transfer_inst_12_13_tsni(source, dest, locat
     newHistory = tmp1;
     tmp2 = puzzle.opposite(location);
     newLocation = tmp2;
-    tmp3 = itemFromTo_inst_12_13_8_tsni(puzzle.Bono, puzzle.Adam);
-    tmp4 = lscomp1(tmp3);
-    tmp5 = concat_inst_12_13_10_tsni(tmp4);
+    tmp3 = itemFromTo_inst_6_7_8_tsni(puzzle.Bono, puzzle.Adam);
+    tmp4 = lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
+    tmp5 = concat_inst_6_7_4_tsni(tmp4);
     moveOne = tmp5;
-    tmp6 = itemFromTo_inst_12_13_9_tsni(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2(tmp6);
-    tmp8 = concat_inst_12_13_36_tsni(tmp7);
+    tmp6 = itemFromTo_inst_6_7_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp7 = lscomp2$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
+    tmp8 = concat_inst_6_7_37_tsni(tmp7);
     moveTwo = tmp8;
-    return append_inst_12_13_37_tsni(moveOne, moveTwo)
+    return append_inst_6_7_38_tsni(moveOne, moveTwo)
   }
 };
-concat_inst_12_13_10_tsni = function concat_inst_12_13_10_tsni(ls) {
-  return runtime.safeCall(ls())
+lscomp2$_inst_6_7_tsni = function lscomp2$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
 };
-append_inst_12_13_10_11_tsni = function append_inst_12_13_10_11_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_12_13_10_11_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return (ys1) => {
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
-      x = param0;
-      xs1 = param1;
-      tmp = append_inst_12_13_37_tsni(xs1, ys1);
-      return NofibPrelude.Cons(x, tmp)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
+lscomp3$_inst_6_7_tsni = function lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
 };
-updateState_inst_12_13_6_tsni = function updateState_inst_12_13_6_tsni(s, i, pos) {
+lscomp1$_inst_6_7_tsni = function lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+updateState_inst_6_7_1_tsni = function updateState_inst_6_7_1_tsni(s, i, pos) {
   let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
   if (s instanceof puzzle.State.class) {
     param0 = s.b;
@@ -735,7 +1089,7 @@ updateState_inst_12_13_6_tsni = function updateState_inst_12_13_6_tsni(s, i, pos
       _deforest_State_l3 = c;
       _deforest_State_a3 = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_12_13_35_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+        return match_s_arm_State_inst_6_7_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
       }
     } else if (i instanceof puzzle.Edge.class) {
       _deforest_State_b2 = a;
@@ -743,7 +1097,7 @@ updateState_inst_12_13_6_tsni = function updateState_inst_12_13_6_tsni(s, i, pos
       _deforest_State_l2 = c;
       _deforest_State_a2 = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_12_13_35_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+        return match_s_arm_State_inst_6_7_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
       }
     } else if (i instanceof puzzle.Larry.class) {
       _deforest_State_b1 = a;
@@ -751,7 +1105,7 @@ updateState_inst_12_13_6_tsni = function updateState_inst_12_13_6_tsni(s, i, pos
       _deforest_State_l1 = pos;
       _deforest_State_a1 = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_12_13_35_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+        return match_s_arm_State_inst_6_7_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
       }
     } else if (i instanceof puzzle.Adam.class) {
       _deforest_State_b = a;
@@ -759,7 +1113,7 @@ updateState_inst_12_13_6_tsni = function updateState_inst_12_13_6_tsni(s, i, pos
       _deforest_State_l = c;
       _deforest_State_a = pos;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_12_13_35_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+        return match_s_arm_State_inst_6_7_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
       }
     } else {
       throw new globalThis.Error("match error");
@@ -768,339 +1122,114 @@ updateState_inst_12_13_6_tsni = function updateState_inst_12_13_6_tsni(s, i, pos
     throw new globalThis.Error("match error");
   }
 };
-itemFromTo_inst_12_13_7_tsni = function itemFromTo_inst_12_13_7_tsni(a, b) {
+itemFromTo_inst_6_7_2_tsni = function itemFromTo_inst_6_7_2_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   scrut = puzzle.itemEq(a, b);
   if (scrut === true) {
     _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return lscomp2(xs)
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return lscomp2$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
     };
-    return (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return match_ls_arm_Cons_inst_12_13_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_12_13_7_tsni(tmp, b);
+    tmp1 = itemFromTo_inst_6_7_2_tsni(tmp, b);
     _deforest_Cons_head1 = a;
     _deforest_Cons_tail1 = tmp1;
-    return (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return match_ls_arm_Cons_inst_12_13_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
 };
-itemFromTo_inst_12_13_9_tsni = function itemFromTo_inst_12_13_9_tsni(a, b) {
+itemFromTo_inst_6_7_3_tsni = function itemFromTo_inst_6_7_3_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   scrut = puzzle.itemEq(a, b);
   if (scrut === true) {
     _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
       return () => {
         return NofibPrelude.Nil
       }
     };
-    return (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_12_13_tsni1(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_6_7_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_12_13_9_tsni(tmp, b);
+    tmp1 = itemFromTo_inst_6_7_3_tsni(tmp, b);
     _deforest_Cons_head1 = a;
     _deforest_Cons_tail1 = tmp1;
-    return (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_12_13_tsni1(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_6_7_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
 };
-itemFromTo_inst_12_13_8_tsni = function itemFromTo_inst_12_13_8_tsni(a, b) {
+concat_inst_6_7_4_tsni = function concat_inst_6_7_4_tsni(ls) {
+  let param0, param1, x, xs, tmp;
+  if (ls instanceof NofibPrelude.Nil.class) {
+    return (ys) => {
+      return ys
+    }
+  } else if (ls instanceof NofibPrelude.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    x = param0;
+    xs = param1;
+    tmp = concat_inst_6_7_4_tsni(xs);
+    return append_inst_6_7_4_5_tsni(x, tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+append_inst_6_7_4_5_tsni = function append_inst_6_7_4_5_tsni(xs, ys) {
+  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  if (xs instanceof NofibPrelude.Nil.class) {
+    return ys
+  } else if (xs instanceof NofibPrelude.Cons.class) {
+    param0 = xs.head;
+    param1 = xs.tail;
+    x = param0;
+    xs1 = param1;
+    tmp = append_inst_6_7_4_5_tsni(xs1, ys);
+    _deforest_Cons_head = x;
+    _deforest_Cons_tail = tmp;
+    return (ys1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = append_inst_6_7_38_tsni(xs1, ys1);
+      return NofibPrelude.Cons(x, tmp)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+itemFromTo_inst_6_7_8_tsni = function itemFromTo_inst_6_7_8_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   scrut = puzzle.itemEq(a, b);
   if (scrut === true) {
     _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return () => {
-        return (ys) => {
-          return ys
-        }
-      }
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return NofibPrelude.Nil
     };
-    return (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_12_13_tsni2(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_6_7_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_12_13_8_tsni(tmp, b);
+    tmp1 = itemFromTo_inst_6_7_8_tsni(tmp, b);
     _deforest_Cons_head1 = a;
     _deforest_Cons_tail1 = tmp1;
-    return (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_12_13_tsni2(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_6_7_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
 };
-writeSolutions_inst_12_14_tsni = function writeSolutions_inst_12_14_tsni(solutions, count, s) {
-  let param0, param1, item, next, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
-  if (solutions instanceof NofibPrelude.Nil.class) {
-    return s
-  } else if (solutions instanceof NofibPrelude.Cons.class) {
-    param0 = solutions.head;
-    param1 = solutions.tail;
-    item = param0;
-    next = param1;
-    tmp = NofibPrelude.nofibStringToList("Solution ");
-    tmp1 = NofibPrelude.stringOfInt(count);
-    tmp2 = NofibPrelude.nofibStringToList(tmp1);
-    tmp3 = count + 1;
-    tmp4 = writeSolutions_inst_12_14_tsni(next, tmp3, s);
-    tmp5 = writeHistory_inst_12_14_4_tsni(item, tmp4);
-    tmp6 = NofibPrelude.Cons("\n", tmp5);
-    tmp7 = NofibPrelude.append(tmp2, tmp6);
-    return NofibPrelude.append(tmp, tmp7)
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-writeHistory_inst_12_14_4_tsni = function writeHistory_inst_12_14_4_tsni(history, x) {
-  let tmp, lambda, lambda1;
-  if (history instanceof NofibPrelude.Nil.class) {
-    return x
-  } else {
-    lambda = (undefined, function (timestate, acc) {
-      let lambda2;
-      lambda2 = (undefined, function (s) {
-        let first1, first0, time, state, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-        if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
-          first0 = timestate[0];
-          first1 = timestate[1];
-          time = first0;
-          state = first1;
-          tmp1 = NofibPrelude.nofibStringToList("Time: ");
-          tmp2 = puzzle.totalTime(history);
-          tmp3 = tmp2 - time;
-          tmp4 = NofibPrelude.stringOfInt(tmp3);
-          tmp5 = NofibPrelude.nofibStringToList(tmp4);
-          tmp6 = runtime.safeCall(acc(s));
-          tmp7 = writeState_inst_12_14_4_2_tsni(state, tmp6);
-          tmp8 = NofibPrelude.Cons("\n", tmp7);
-          tmp9 = NofibPrelude.append(tmp5, tmp8);
-          return NofibPrelude.append(tmp1, tmp9)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      });
-      return lambda2
-    });
-    lambda1 = (undefined, function (x1) {
-      return x1
-    });
-    tmp = NofibPrelude.foldr(lambda, lambda1, history);
-    return runtime.safeCall(tmp(x))
-  }
-};
-writeState_inst_12_14_4_2_tsni = function writeState_inst_12_14_4_2_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
-  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
-  tmp1 = puzzle.bonoPos(state);
-  tmp2 = puzzle.edgePos(state);
-  tmp3 = puzzle.larryPos(state);
-  tmp4 = puzzle.adamPos(state);
-  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
-  tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_12_14_4_2_26_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_12_14_4_2_25_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_12_14_4_2_24_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_12_14_4_2_22_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
-      return NofibPrelude.append(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
-      return NofibPrelude.append(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp1, tmp9);
-  return NofibPrelude.append(tmp, tmp10)
-};
-testPuzzle_nofib_inst_15_16_tsni = function testPuzzle_nofib_inst_15_16_tsni(x) {
-  let time, scrut, solutions, mins, tmp, tmp1, tmp2, tmp3;
-  tmp = NofibPrelude.listLen(x);
-  scrut = tmp === 1;
-  if (scrut === true) {
-    tmp1 = 0;
-  } else {
-    throw globalThis.Error("puzzle expects exactly one argument");
-  }
-  time = tmp1;
-  tmp2 = transfer_inst_15_16_13_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
-  solutions = tmp2;
-  tmp3 = puzzle.minSolutions(solutions);
-  mins = tmp3;
-  return writeSolutions_inst_15_16_14_tsni(mins, 1, () => {
-    return ""
-  })
-};
-writeSolutions_inst_15_16_14_tsni = function writeSolutions_inst_15_16_14_tsni(solutions, count, s) {
-  let param0, param1, item, next, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
-  if (solutions instanceof NofibPrelude.Nil.class) {
-    return s
-  } else if (solutions instanceof NofibPrelude.Cons.class) {
-    param0 = solutions.head;
-    param1 = solutions.tail;
-    item = param0;
-    next = param1;
-    tmp = NofibPrelude.nofibStringToList("Solution ");
-    tmp1 = NofibPrelude.stringOfInt(count);
-    tmp2 = NofibPrelude.nofibStringToList(tmp1);
-    tmp3 = count + 1;
-    tmp4 = writeSolutions_inst_15_16_14_tsni(next, tmp3, s);
-    tmp5 = writeHistory_inst_15_16_14_4_tsni(item, tmp4);
-    _deforest_Cons_head = "\n";
-    _deforest_Cons_tail = tmp5;
-    tmp6 = () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    };
-    tmp7 = append_inst_15_16_14_17_tsni(tmp2, tmp6);
-    return append_inst_15_16_14_18_tsni(tmp, tmp7)
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-writeHistory_inst_15_16_14_4_tsni = function writeHistory_inst_15_16_14_4_tsni(history, x) {
-  let tmp, lambda, lambda1;
-  if (history instanceof NofibPrelude.Nil.class) {
-    return x
-  } else {
-    lambda = (undefined, function (timestate, acc) {
-      let lambda2;
-      lambda2 = (undefined, function (s) {
-        let first1, first0, time, state, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Cons_head, _deforest_Cons_tail;
-        if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
-          first0 = timestate[0];
-          first1 = timestate[1];
-          time = first0;
-          state = first1;
-          tmp1 = NofibPrelude.nofibStringToList("Time: ");
-          tmp2 = puzzle.totalTime(history);
-          tmp3 = tmp2 - time;
-          tmp4 = NofibPrelude.stringOfInt(tmp3);
-          tmp5 = NofibPrelude.nofibStringToList(tmp4);
-          tmp6 = runtime.safeCall(acc(s));
-          tmp7 = writeState_inst_15_16_14_4_2_tsni(state, tmp6);
-          _deforest_Cons_head = "\n";
-          _deforest_Cons_tail = tmp7;
-          tmp8 = () => {
-            return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-          };
-          tmp9 = append_inst_15_16_14_4_20_tsni(tmp5, tmp8);
-          return append_inst_15_16_14_4_19_tsni(tmp1, tmp9)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      });
-      return lambda2
-    });
-    lambda1 = (undefined, function (x1) {
-      return x1
-    });
-    tmp = NofibPrelude.foldr(lambda, lambda1, history);
-    return runtime.safeCall(tmp(x))
-  }
-};
-writeState_inst_15_16_14_4_2_tsni = function writeState_inst_15_16_14_4_2_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
-  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
-  tmp1 = puzzle.bonoPos(state);
-  tmp2 = puzzle.edgePos(state);
-  tmp3 = puzzle.larryPos(state);
-  tmp4 = puzzle.adamPos(state);
-  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
-  tmp6 = append_inst_15_16_14_4_2_27_tsni(tmp5, s);
-  tmp7 = writeItem_inst_15_16_14_4_2_26_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
-      return append_inst_15_16_14_4_2_26_28_tsni(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
-      return append_inst_15_16_14_4_2_26_23_tsni(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_15_16_14_4_2_25_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
-      return append_inst_15_16_14_4_2_25_30_tsni(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
-      return append_inst_15_16_14_4_2_25_29_tsni(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_15_16_14_4_2_24_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
-      return append_inst_15_16_14_4_2_24_32_tsni(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
-      return append_inst_15_16_14_4_2_24_31_tsni(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_15_16_14_4_2_22_tsni((b, rest) => {
-    let tmp11, tmp12;
-    if (b instanceof puzzle.LeftBank.class) {
-      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
-      return append_inst_15_16_14_4_2_22_34_tsni(tmp11, rest)
-    } else if (b instanceof puzzle.RightBank.class) {
-      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
-      return append_inst_15_16_14_4_2_22_33_tsni(tmp12, rest)
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  }, tmp1, tmp9);
-  return append_inst_15_16_14_4_2_21_tsni(tmp, tmp10)
-};
-transfer_inst_15_16_13_tsni = function transfer_inst_15_16_13_tsni(source, dest, location, countdown, history) {
-  let lscomp2, lscomp1, newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+transfer_inst_9_tsni = function transfer_inst_9_tsni(source, dest, location, countdown, history) {
+  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
     arr = [
@@ -1110,12 +1239,6 @@ transfer_inst_15_16_13_tsni = function transfer_inst_15_16_13_tsni(source, dest,
     tmp = NofibPrelude.Cons(arr, history);
     return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
   } else {
-    lscomp1 = function lscomp1(ls) {
-      return runtime.safeCall(ls(lscomp1, source, dest, location, countdown, history, newHistory, newLocation))
-    };
-    lscomp2 = function lscomp2(ls) {
-      return runtime.safeCall(ls(lscomp2, source, dest, location, countdown, history, newHistory, newLocation))
-    };
     arr1 = [
       countdown,
       dest
@@ -1124,18 +1247,62 @@ transfer_inst_15_16_13_tsni = function transfer_inst_15_16_13_tsni(source, dest,
     newHistory = tmp1;
     tmp2 = puzzle.opposite(location);
     newLocation = tmp2;
-    tmp3 = itemFromTo_inst_15_16_13_8_tsni(puzzle.Bono, puzzle.Adam);
-    tmp4 = lscomp1(tmp3);
-    tmp5 = concat_inst_15_16_13_10_tsni(tmp4);
+    tmp3 = itemFromTo_inst_9_8_tsni(puzzle.Bono, puzzle.Adam);
+    tmp4 = lscomp1$_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
+    tmp5 = concat_inst_9_4_tsni(tmp4);
     moveOne = tmp5;
-    tmp6 = itemFromTo_inst_15_16_13_9_tsni(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2(tmp6);
-    tmp8 = concat_inst_15_16_13_36_tsni(tmp7);
+    tmp6 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
+    tmp7 = lscomp2$_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
+    tmp8 = NofibPrelude.concat(tmp7);
     moveTwo = tmp8;
-    return append_inst_15_16_13_37_tsni(moveOne, moveTwo)
+    return append_inst_9_38_tsni(moveOne, moveTwo)
   }
 };
-updateState_inst_15_16_13_6_tsni = function updateState_inst_15_16_13_6_tsni(s, i, pos) {
+lscomp2$_inst_9_tsni = function lscomp2$_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  let param0, param1, i, xs, tmp, tmp1;
+  if (ls instanceof NofibPrelude.Nil.class) {
+    return NofibPrelude.Nil
+  } else if (ls instanceof NofibPrelude.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    i = param0;
+    xs = param1;
+    tmp = puzzle1.succItem(i);
+    tmp1 = puzzle1.itemFromTo(tmp, puzzle1.Adam);
+    return lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lscomp1$_inst_9_tsni = function lscomp1$_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+itemFromTo_inst_9_8_tsni = function itemFromTo_inst_9_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return (ys) => {
+          return ys
+        }
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_9_8_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+updateState_inst_9_1_tsni = function updateState_inst_9_1_tsni(s, i, pos) {
   let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
   if (s instanceof puzzle.State.class) {
     param0 = s.b;
@@ -1152,7 +1319,7 @@ updateState_inst_15_16_13_6_tsni = function updateState_inst_15_16_13_6_tsni(s, 
       _deforest_State_l = c;
       _deforest_State_a = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_15_16_13_35_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+        return match_s_arm_State_inst_9_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
       }
     } else if (i instanceof puzzle.Edge.class) {
       _deforest_State_b1 = a;
@@ -1160,7 +1327,7 @@ updateState_inst_15_16_13_6_tsni = function updateState_inst_15_16_13_6_tsni(s, 
       _deforest_State_l1 = c;
       _deforest_State_a1 = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_15_16_13_35_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+        return match_s_arm_State_inst_9_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
       }
     } else if (i instanceof puzzle.Larry.class) {
       _deforest_State_b2 = a;
@@ -1168,7 +1335,7 @@ updateState_inst_15_16_13_6_tsni = function updateState_inst_15_16_13_6_tsni(s, 
       _deforest_State_l2 = pos;
       _deforest_State_a2 = d;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_15_16_13_35_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+        return match_s_arm_State_inst_9_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
       }
     } else if (i instanceof puzzle.Adam.class) {
       _deforest_State_b3 = a;
@@ -1176,7 +1343,7 @@ updateState_inst_15_16_13_6_tsni = function updateState_inst_15_16_13_6_tsni(s, 
       _deforest_State_l3 = c;
       _deforest_State_a3 = pos;
       return (i1, pos1) => {
-        return match_s_arm_State_inst_15_16_13_35_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+        return match_s_arm_State_inst_9_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
       }
     } else {
       throw new globalThis.Error("match error");
@@ -1185,79 +1352,10 @@ updateState_inst_15_16_13_6_tsni = function updateState_inst_15_16_13_6_tsni(s, 
     throw new globalThis.Error("match error");
   }
 };
-itemFromTo_inst_15_16_13_7_tsni = function itemFromTo_inst_15_16_13_7_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
-  scrut = puzzle.itemEq(a, b);
-  if (scrut === true) {
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return lscomp2(xs)
-    };
-    return (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return match_ls_arm_Cons_inst_15_16_13_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_15_16_13_7_tsni(tmp, b);
-    _deforest_Cons_head1 = a;
-    _deforest_Cons_tail1 = tmp1;
-    return (lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
-      return match_ls_arm_Cons_inst_15_16_13_tsni(lscomp3, lscomp2, source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
-    }
-  }
-};
-itemFromTo_inst_15_16_13_8_tsni = function itemFromTo_inst_15_16_13_8_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
-  scrut = puzzle.itemEq(a, b);
-  if (scrut === true) {
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return () => {
-        return (ys) => {
-          return ys
-        }
-      }
-    };
-    return (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_15_16_13_tsni1(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_15_16_13_8_tsni(tmp, b);
-    _deforest_Cons_head1 = a;
-    _deforest_Cons_tail1 = tmp1;
-    return (lscomp1, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_15_16_13_tsni1(lscomp1, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
-    }
-  }
-};
-itemFromTo_inst_15_16_13_9_tsni = function itemFromTo_inst_15_16_13_9_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
-  scrut = puzzle.itemEq(a, b);
-  if (scrut === true) {
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return () => {
-        return NofibPrelude.Nil
-      }
-    };
-    return (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_15_16_13_tsni2(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    tmp = puzzle.succItem(a);
-    tmp1 = itemFromTo_inst_15_16_13_9_tsni(tmp, b);
-    _deforest_Cons_head1 = a;
-    _deforest_Cons_tail1 = tmp1;
-    return (lscomp2, source, dest, location, countdown, history, newHistory, newLocation) => {
-      return match_ls_arm_Cons_inst_15_16_13_tsni2(lscomp2, source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
-    }
-  }
-};
-concat_inst_15_16_13_10_tsni = function concat_inst_15_16_13_10_tsni(ls) {
+concat_inst_9_4_tsni = function concat_inst_9_4_tsni(ls) {
   return runtime.safeCall(ls())
 };
-append_inst_15_16_13_10_11_tsni = function append_inst_15_16_13_10_11_tsni(xs, ys) {
+append_inst_9_4_5_tsni = function append_inst_9_4_5_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1266,7 +1364,7 @@ append_inst_15_16_13_10_11_tsni = function append_inst_15_16_13_10_11_tsni(xs, y
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_13_10_11_tsni(xs1, ys);
+    tmp = append_inst_9_4_5_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return (ys1) => {
@@ -1274,14 +1372,140 @@ append_inst_15_16_13_10_11_tsni = function append_inst_15_16_13_10_11_tsni(xs, y
       param1 = _deforest_Cons_tail;
       x = param0;
       xs1 = param1;
-      tmp = append_inst_15_16_13_37_tsni(xs1, ys1);
+      tmp = append_inst_9_38_tsni(xs1, ys1);
       return NofibPrelude.Cons(x, tmp)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_15_16_14_17_tsni = function append_inst_15_16_14_17_tsni(xs, ys) {
+transfer_inst_10_11_tsni = function transfer_inst_10_11_tsni(source, dest, location, countdown, history) {
+  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  scrut = puzzle.stateEq(source, dest);
+  if (scrut === true) {
+    arr = [
+      countdown,
+      dest
+    ];
+    tmp = NofibPrelude.Cons(arr, history);
+    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+  } else {
+    arr1 = [
+      countdown,
+      dest
+    ];
+    tmp1 = NofibPrelude.Cons(arr1, history);
+    newHistory = tmp1;
+    tmp2 = puzzle.opposite(location);
+    newLocation = tmp2;
+    tmp3 = itemFromTo_inst_10_11_8_tsni(puzzle.Bono, puzzle.Adam);
+    tmp4 = lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
+    tmp5 = concat_inst_10_11_4_tsni(tmp4);
+    moveOne = tmp5;
+    tmp6 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
+    tmp7 = lscomp2$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
+    tmp8 = NofibPrelude.concat(tmp7);
+    moveTwo = tmp8;
+    return append_inst_10_11_38_tsni(moveOne, moveTwo)
+  }
+};
+lscomp2$_inst_10_11_tsni = function lscomp2$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  let param0, param1, i, xs, tmp, tmp1;
+  if (ls instanceof NofibPrelude.Nil.class) {
+    return NofibPrelude.Nil
+  } else if (ls instanceof NofibPrelude.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    i = param0;
+    xs = param1;
+    tmp = puzzle1.succItem(i);
+    tmp1 = itemFromTo_inst_10_11_2_tsni(tmp, puzzle1.Adam);
+    return lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lscomp3$_inst_10_11_tsni = function lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
+};
+lscomp1$_inst_10_11_tsni = function lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+updateState_inst_10_11_1_tsni = function updateState_inst_10_11_1_tsni(s, i, pos) {
+  let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
+  if (s instanceof puzzle.State.class) {
+    param0 = s.b;
+    param1 = s.e;
+    param2 = s.l;
+    param3 = s.a;
+    a = param0;
+    b = param1;
+    c = param2;
+    d = param3;
+    if (i instanceof puzzle.Bono.class) {
+      _deforest_State_b3 = pos;
+      _deforest_State_e3 = b;
+      _deforest_State_l3 = c;
+      _deforest_State_a3 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_10_11_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+      }
+    } else if (i instanceof puzzle.Edge.class) {
+      _deforest_State_b2 = a;
+      _deforest_State_e2 = pos;
+      _deforest_State_l2 = c;
+      _deforest_State_a2 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_10_11_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+      }
+    } else if (i instanceof puzzle.Larry.class) {
+      _deforest_State_b1 = a;
+      _deforest_State_e1 = b;
+      _deforest_State_l1 = pos;
+      _deforest_State_a1 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_10_11_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+      }
+    } else if (i instanceof puzzle.Adam.class) {
+      _deforest_State_b = a;
+      _deforest_State_e = b;
+      _deforest_State_l = c;
+      _deforest_State_a = pos;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_10_11_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+itemFromTo_inst_10_11_2_tsni = function itemFromTo_inst_10_11_2_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return lscomp2$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_10_11_2_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+concat_inst_10_11_4_tsni = function concat_inst_10_11_4_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+append_inst_10_11_4_5_tsni = function append_inst_10_11_4_5_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1290,17 +1514,182 @@ append_inst_15_16_14_17_tsni = function append_inst_15_16_14_17_tsni(xs, ys) {
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_14_17_tsni(xs1, ys);
+    tmp = append_inst_10_11_4_5_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+    return (ys1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = append_inst_10_11_38_tsni(xs1, ys1);
+      return NofibPrelude.Cons(x, tmp)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_15_16_14_18_tsni = function append_inst_15_16_14_18_tsni(xs, ys) {
+itemFromTo_inst_10_11_8_tsni = function itemFromTo_inst_10_11_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return (ys) => {
+          return ys
+        }
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_10_11_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_10_11_8_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_10_11_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+transfer_inst_12_tsni = function transfer_inst_12_tsni(source, dest, location, countdown, history) {
+  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  scrut = puzzle.stateEq(source, dest);
+  if (scrut === true) {
+    arr = [
+      countdown,
+      dest
+    ];
+    tmp = NofibPrelude.Cons(arr, history);
+    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+  } else {
+    arr1 = [
+      countdown,
+      dest
+    ];
+    tmp1 = NofibPrelude.Cons(arr1, history);
+    newHistory = tmp1;
+    tmp2 = puzzle.opposite(location);
+    newLocation = tmp2;
+    tmp3 = itemFromTo_inst_12_8_tsni(puzzle.Bono, puzzle.Adam);
+    tmp4 = lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
+    tmp5 = concat_inst_12_4_tsni(tmp4);
+    moveOne = tmp5;
+    tmp6 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
+    tmp7 = lscomp2$(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
+    tmp8 = NofibPrelude.concat(tmp7);
+    moveTwo = tmp8;
+    return append_inst_12_38_tsni(moveOne, moveTwo)
+  }
+};
+lscomp3$_inst_12_tsni = function lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
+};
+lscomp1$_inst_12_tsni = function lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+itemFromTo_inst_12_8_tsni = function itemFromTo_inst_12_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return (ys) => {
+          return ys
+        }
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_12_8_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+updateState_inst_12_1_tsni = function updateState_inst_12_1_tsni(s, i, pos) {
+  let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
+  if (s instanceof puzzle.State.class) {
+    param0 = s.b;
+    param1 = s.e;
+    param2 = s.l;
+    param3 = s.a;
+    a = param0;
+    b = param1;
+    c = param2;
+    d = param3;
+    if (i instanceof puzzle.Bono.class) {
+      _deforest_State_b = pos;
+      _deforest_State_e = b;
+      _deforest_State_l = c;
+      _deforest_State_a = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_12_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+      }
+    } else if (i instanceof puzzle.Edge.class) {
+      _deforest_State_b1 = a;
+      _deforest_State_e1 = pos;
+      _deforest_State_l1 = c;
+      _deforest_State_a1 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_12_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+      }
+    } else if (i instanceof puzzle.Larry.class) {
+      _deforest_State_b2 = a;
+      _deforest_State_e2 = b;
+      _deforest_State_l2 = pos;
+      _deforest_State_a2 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_12_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+      }
+    } else if (i instanceof puzzle.Adam.class) {
+      _deforest_State_b3 = a;
+      _deforest_State_e3 = b;
+      _deforest_State_l3 = c;
+      _deforest_State_a3 = pos;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_12_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+itemFromTo_inst_12_2_tsni = function itemFromTo_inst_12_2_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return lscomp2$(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_12_tsni1(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_12_2_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_12_tsni1(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+concat_inst_12_4_tsni = function concat_inst_12_4_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+append_inst_12_4_5_tsni = function append_inst_12_4_5_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1309,17 +1698,156 @@ append_inst_15_16_14_18_tsni = function append_inst_15_16_14_18_tsni(xs, ys) {
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_14_18_tsni(xs1, ys);
+    tmp = append_inst_12_4_5_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+    return (ys1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = append_inst_12_38_tsni(xs1, ys1);
+      return NofibPrelude.Cons(x, tmp)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_15_16_14_4_19_tsni = function append_inst_15_16_14_4_19_tsni(xs, ys) {
+transfer_inst_13_14_tsni = function transfer_inst_13_14_tsni(source, dest, location, countdown, history) {
+  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  scrut = puzzle.stateEq(source, dest);
+  if (scrut === true) {
+    arr = [
+      countdown,
+      dest
+    ];
+    tmp = NofibPrelude.Cons(arr, history);
+    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+  } else {
+    arr1 = [
+      countdown,
+      dest
+    ];
+    tmp1 = NofibPrelude.Cons(arr1, history);
+    newHistory = tmp1;
+    tmp2 = puzzle.opposite(location);
+    newLocation = tmp2;
+    tmp3 = itemFromTo_inst_13_14_8_tsni(puzzle.Bono, puzzle.Adam);
+    tmp4 = lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
+    tmp5 = concat_inst_13_14_4_tsni(tmp4);
+    moveOne = tmp5;
+    tmp6 = itemFromTo_inst_13_14_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp7 = lscomp2$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
+    tmp8 = NofibPrelude.concat(tmp7);
+    moveTwo = tmp8;
+    return append_inst_13_14_38_tsni(moveOne, moveTwo)
+  }
+};
+lscomp2$_inst_13_14_tsni = function lscomp2$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+lscomp3$_inst_13_14_tsni = function lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
+};
+lscomp1$_inst_13_14_tsni = function lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+updateState_inst_13_14_1_tsni = function updateState_inst_13_14_1_tsni(s, i, pos) {
+  let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
+  if (s instanceof puzzle.State.class) {
+    param0 = s.b;
+    param1 = s.e;
+    param2 = s.l;
+    param3 = s.a;
+    a = param0;
+    b = param1;
+    c = param2;
+    d = param3;
+    if (i instanceof puzzle.Bono.class) {
+      _deforest_State_b3 = pos;
+      _deforest_State_e3 = b;
+      _deforest_State_l3 = c;
+      _deforest_State_a3 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_13_14_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+      }
+    } else if (i instanceof puzzle.Edge.class) {
+      _deforest_State_b2 = a;
+      _deforest_State_e2 = pos;
+      _deforest_State_l2 = c;
+      _deforest_State_a2 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_13_14_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+      }
+    } else if (i instanceof puzzle.Larry.class) {
+      _deforest_State_b1 = a;
+      _deforest_State_e1 = b;
+      _deforest_State_l1 = pos;
+      _deforest_State_a1 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_13_14_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+      }
+    } else if (i instanceof puzzle.Adam.class) {
+      _deforest_State_b = a;
+      _deforest_State_e = b;
+      _deforest_State_l = c;
+      _deforest_State_a = pos;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_13_14_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+itemFromTo_inst_13_14_2_tsni = function itemFromTo_inst_13_14_2_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return lscomp2$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_13_14_2_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+itemFromTo_inst_13_14_3_tsni = function itemFromTo_inst_13_14_3_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return NofibPrelude.Nil
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_13_14_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_13_14_3_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_13_14_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+concat_inst_13_14_4_tsni = function concat_inst_13_14_4_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+append_inst_13_14_4_5_tsni = function append_inst_13_14_4_5_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1328,17 +1856,686 @@ append_inst_15_16_14_4_19_tsni = function append_inst_15_16_14_4_19_tsni(xs, ys)
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_14_4_19_tsni(xs1, ys);
+    tmp = append_inst_13_14_4_5_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+    return (ys1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = append_inst_13_14_38_tsni(xs1, ys1);
+      return NofibPrelude.Cons(x, tmp)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_15_16_14_4_20_tsni = function append_inst_15_16_14_4_20_tsni(xs, ys) {
+itemFromTo_inst_13_14_8_tsni = function itemFromTo_inst_13_14_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return (ys) => {
+          return ys
+        }
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_13_14_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_13_14_8_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_13_14_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+writeState_inst_15_16_tsni = function writeState_inst_15_16_tsni(state, s) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp1 = puzzle.bonoPos(state);
+  tmp2 = puzzle.edgePos(state);
+  tmp3 = puzzle.larryPos(state);
+  tmp4 = puzzle.adamPos(state);
+  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp6 = NofibPrelude.append(tmp5, s);
+  tmp7 = writeItem_inst_15_16_42_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp4, tmp6);
+  tmp8 = writeItem_inst_15_16_41_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp3, tmp7);
+  tmp9 = writeItem_inst_15_16_40_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp2, tmp8);
+  tmp10 = writeItem_inst_15_16_39_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp1, tmp9);
+  return NofibPrelude.append(tmp, tmp10)
+};
+lambda$_inst_17_18_tsni = function lambda$_inst_17_18_tsni(history, timestate, acc, s) {
+  let first1, first0, time, state, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
+    first0 = timestate[0];
+    first1 = timestate[1];
+    time = first0;
+    state = first1;
+    tmp = NofibPrelude.nofibStringToList("Time: ");
+    tmp1 = puzzle1.totalTime(history);
+    tmp2 = tmp1 - time;
+    tmp3 = NofibPrelude.stringOfInt(tmp2);
+    tmp4 = NofibPrelude.nofibStringToList(tmp3);
+    tmp5 = runtime.safeCall(acc(s));
+    tmp6 = writeState_inst_17_18_16_tsni(state, tmp5);
+    tmp7 = NofibPrelude.Cons("\n", tmp6);
+    tmp8 = NofibPrelude.append(tmp4, tmp7);
+    return NofibPrelude.append(tmp, tmp8)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeState_inst_17_18_16_tsni = function writeState_inst_17_18_16_tsni(state, s) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp1 = puzzle.bonoPos(state);
+  tmp2 = puzzle.edgePos(state);
+  tmp3 = puzzle.larryPos(state);
+  tmp4 = puzzle.adamPos(state);
+  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp6 = NofibPrelude.append(tmp5, s);
+  tmp7 = writeItem_inst_17_18_16_42_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp4, tmp6);
+  tmp8 = writeItem_inst_17_18_16_41_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp3, tmp7);
+  tmp9 = writeItem_inst_17_18_16_40_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp2, tmp8);
+  tmp10 = writeItem_inst_17_18_16_39_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp1, tmp9);
+  return NofibPrelude.append(tmp, tmp10)
+};
+lambda_inst_19_20_tsni = (undefined, function (history, timestate, acc) {
+  return (s) => {
+    return lambda$_inst_19_20_18_tsni(history, timestate, acc, s)
+  }
+});
+lambda$_inst_19_20_18_tsni = function lambda$_inst_19_20_18_tsni(history, timestate, acc, s) {
+  let first1, first0, time, state, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
+    first0 = timestate[0];
+    first1 = timestate[1];
+    time = first0;
+    state = first1;
+    tmp = NofibPrelude.nofibStringToList("Time: ");
+    tmp1 = puzzle1.totalTime(history);
+    tmp2 = tmp1 - time;
+    tmp3 = NofibPrelude.stringOfInt(tmp2);
+    tmp4 = NofibPrelude.nofibStringToList(tmp3);
+    tmp5 = runtime.safeCall(acc(s));
+    tmp6 = writeState_inst_19_20_18_16_tsni(state, tmp5);
+    tmp7 = NofibPrelude.Cons("\n", tmp6);
+    tmp8 = NofibPrelude.append(tmp4, tmp7);
+    return NofibPrelude.append(tmp, tmp8)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeState_inst_19_20_18_16_tsni = function writeState_inst_19_20_18_16_tsni(state, s) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp1 = puzzle.bonoPos(state);
+  tmp2 = puzzle.edgePos(state);
+  tmp3 = puzzle.larryPos(state);
+  tmp4 = puzzle.adamPos(state);
+  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp6 = NofibPrelude.append(tmp5, s);
+  tmp7 = writeItem_inst_19_20_18_16_42_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp4, tmp6);
+  tmp8 = writeItem_inst_19_20_18_16_41_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp3, tmp7);
+  tmp9 = writeItem_inst_19_20_18_16_40_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp2, tmp8);
+  tmp10 = writeItem_inst_19_20_18_16_39_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp1, tmp9);
+  return NofibPrelude.append(tmp, tmp10)
+};
+lambda$_inst_21_22_tsni = function lambda$_inst_21_22_tsni(history, timestate, acc) {
+  return runtime.safeCall(lambda_inst_21_22_20_tsni(history, timestate, acc))
+};
+lambda_inst_21_22_20_tsni = (undefined, function (history, timestate, acc) {
+  return (s) => {
+    return lambda$_inst_21_22_20_18_tsni(history, timestate, acc, s)
+  }
+});
+lambda$_inst_21_22_20_18_tsni = function lambda$_inst_21_22_20_18_tsni(history, timestate, acc, s) {
+  let first1, first0, time, state, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
+    first0 = timestate[0];
+    first1 = timestate[1];
+    time = first0;
+    state = first1;
+    tmp = NofibPrelude.nofibStringToList("Time: ");
+    tmp1 = puzzle1.totalTime(history);
+    tmp2 = tmp1 - time;
+    tmp3 = NofibPrelude.stringOfInt(tmp2);
+    tmp4 = NofibPrelude.nofibStringToList(tmp3);
+    tmp5 = runtime.safeCall(acc(s));
+    tmp6 = writeState_inst_21_22_20_18_16_tsni(state, tmp5);
+    tmp7 = NofibPrelude.Cons("\n", tmp6);
+    tmp8 = NofibPrelude.append(tmp4, tmp7);
+    return NofibPrelude.append(tmp, tmp8)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeState_inst_21_22_20_18_16_tsni = function writeState_inst_21_22_20_18_16_tsni(state, s) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp1 = puzzle.bonoPos(state);
+  tmp2 = puzzle.edgePos(state);
+  tmp3 = puzzle.larryPos(state);
+  tmp4 = puzzle.adamPos(state);
+  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp6 = NofibPrelude.append(tmp5, s);
+  tmp7 = writeItem_inst_21_22_20_18_16_42_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp4, tmp6);
+  tmp8 = writeItem_inst_21_22_20_18_16_41_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp3, tmp7);
+  tmp9 = writeItem_inst_21_22_20_18_16_40_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp2, tmp8);
+  tmp10 = writeItem_inst_21_22_20_18_16_39_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp1, tmp9);
+  return NofibPrelude.append(tmp, tmp10)
+};
+lambda_inst_24_25_tsni = (undefined, function (history) {
+  return (timestate, acc) => {
+    return lambda$_inst_24_25_22_tsni(history, timestate, acc)
+  }
+});
+lambda$_inst_24_25_22_tsni = function lambda$_inst_24_25_22_tsni(history, timestate, acc) {
+  return runtime.safeCall(lambda_inst_24_25_22_20_tsni(history, timestate, acc))
+};
+lambda_inst_24_25_22_20_tsni = (undefined, function (history, timestate, acc) {
+  return (s) => {
+    return lambda$_inst_24_25_22_20_18_tsni(history, timestate, acc, s)
+  }
+});
+lambda$_inst_24_25_22_20_18_tsni = function lambda$_inst_24_25_22_20_18_tsni(history, timestate, acc, s) {
+  let first1, first0, time, state, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
+    first0 = timestate[0];
+    first1 = timestate[1];
+    time = first0;
+    state = first1;
+    tmp = NofibPrelude.nofibStringToList("Time: ");
+    tmp1 = puzzle1.totalTime(history);
+    tmp2 = tmp1 - time;
+    tmp3 = NofibPrelude.stringOfInt(tmp2);
+    tmp4 = NofibPrelude.nofibStringToList(tmp3);
+    tmp5 = runtime.safeCall(acc(s));
+    tmp6 = writeState_inst_24_25_22_20_18_16_tsni(state, tmp5);
+    tmp7 = NofibPrelude.Cons("\n", tmp6);
+    tmp8 = NofibPrelude.append(tmp4, tmp7);
+    return NofibPrelude.append(tmp, tmp8)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeState_inst_24_25_22_20_18_16_tsni = function writeState_inst_24_25_22_20_18_16_tsni(state, s) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp1 = puzzle.bonoPos(state);
+  tmp2 = puzzle.edgePos(state);
+  tmp3 = puzzle.larryPos(state);
+  tmp4 = puzzle.adamPos(state);
+  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp6 = NofibPrelude.append(tmp5, s);
+  tmp7 = writeItem_inst_24_25_22_20_18_16_42_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp4, tmp6);
+  tmp8 = writeItem_inst_24_25_22_20_18_16_41_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp3, tmp7);
+  tmp9 = writeItem_inst_24_25_22_20_18_16_40_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp2, tmp8);
+  tmp10 = writeItem_inst_24_25_22_20_18_16_39_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp1, tmp9);
+  return NofibPrelude.append(tmp, tmp10)
+};
+writeHistory_inst_26_27_tsni = function writeHistory_inst_26_27_tsni(history, x) {
+  let tmp, lambda$this;
+  if (history instanceof NofibPrelude.Nil.class) {
+    return x
+  } else {
+    lambda$this = runtime.safeCall(lambda_inst_26_27_25_tsni(history));
+    tmp = NofibPrelude.foldr(lambda$this, lambda2, history);
+    return runtime.safeCall(tmp(x))
+  }
+};
+lambda_inst_26_27_25_tsni = (undefined, function (history) {
+  return (timestate, acc) => {
+    return lambda$_inst_26_27_25_22_tsni(history, timestate, acc)
+  }
+});
+lambda$_inst_26_27_25_22_tsni = function lambda$_inst_26_27_25_22_tsni(history, timestate, acc) {
+  return runtime.safeCall(lambda_inst_26_27_25_22_20_tsni(history, timestate, acc))
+};
+lambda_inst_26_27_25_22_20_tsni = (undefined, function (history, timestate, acc) {
+  return (s) => {
+    return lambda$_inst_26_27_25_22_20_18_tsni(history, timestate, acc, s)
+  }
+});
+lambda$_inst_26_27_25_22_20_18_tsni = function lambda$_inst_26_27_25_22_20_18_tsni(history, timestate, acc, s) {
+  let first1, first0, time, state, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
+    first0 = timestate[0];
+    first1 = timestate[1];
+    time = first0;
+    state = first1;
+    tmp = NofibPrelude.nofibStringToList("Time: ");
+    tmp1 = puzzle1.totalTime(history);
+    tmp2 = tmp1 - time;
+    tmp3 = NofibPrelude.stringOfInt(tmp2);
+    tmp4 = NofibPrelude.nofibStringToList(tmp3);
+    tmp5 = runtime.safeCall(acc(s));
+    tmp6 = writeState_inst_26_27_25_22_20_18_16_tsni(state, tmp5);
+    tmp7 = NofibPrelude.Cons("\n", tmp6);
+    tmp8 = NofibPrelude.append(tmp4, tmp7);
+    return NofibPrelude.append(tmp, tmp8)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeState_inst_26_27_25_22_20_18_16_tsni = function writeState_inst_26_27_25_22_20_18_16_tsni(state, s) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp1 = puzzle.bonoPos(state);
+  tmp2 = puzzle.edgePos(state);
+  tmp3 = puzzle.larryPos(state);
+  tmp4 = puzzle.adamPos(state);
+  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp6 = NofibPrelude.append(tmp5, s);
+  tmp7 = writeItem_inst_26_27_25_22_20_18_16_42_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp4, tmp6);
+  tmp8 = writeItem_inst_26_27_25_22_20_18_16_41_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp3, tmp7);
+  tmp9 = writeItem_inst_26_27_25_22_20_18_16_40_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp2, tmp8);
+  tmp10 = writeItem_inst_26_27_25_22_20_18_16_39_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp1, tmp9);
+  return NofibPrelude.append(tmp, tmp10)
+};
+lscomp2$_inst_28_tsni = function lscomp2$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+lscomp3$_inst_28_tsni = function lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
+};
+lscomp1$_inst_28_tsni = function lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+itemFromTo_inst_28_8_tsni = function itemFromTo_inst_28_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return (ys) => {
+          return ys
+        }
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_28_8_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+updateState_inst_28_1_tsni = function updateState_inst_28_1_tsni(s, i, pos) {
+  let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
+  if (s instanceof puzzle.State.class) {
+    param0 = s.b;
+    param1 = s.e;
+    param2 = s.l;
+    param3 = s.a;
+    a = param0;
+    b = param1;
+    c = param2;
+    d = param3;
+    if (i instanceof puzzle.Bono.class) {
+      _deforest_State_b = pos;
+      _deforest_State_e = b;
+      _deforest_State_l = c;
+      _deforest_State_a = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_28_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+      }
+    } else if (i instanceof puzzle.Edge.class) {
+      _deforest_State_b1 = a;
+      _deforest_State_e1 = pos;
+      _deforest_State_l1 = c;
+      _deforest_State_a1 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_28_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+      }
+    } else if (i instanceof puzzle.Larry.class) {
+      _deforest_State_b2 = a;
+      _deforest_State_e2 = b;
+      _deforest_State_l2 = pos;
+      _deforest_State_a2 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_28_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+      }
+    } else if (i instanceof puzzle.Adam.class) {
+      _deforest_State_b3 = a;
+      _deforest_State_e3 = b;
+      _deforest_State_l3 = c;
+      _deforest_State_a3 = pos;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_28_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+itemFromTo_inst_28_2_tsni = function itemFromTo_inst_28_2_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return lscomp2$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_28_tsni1(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_28_2_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_28_tsni1(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+itemFromTo_inst_28_3_tsni = function itemFromTo_inst_28_3_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return NofibPrelude.Nil
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_28_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_28_3_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_28_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+concat_inst_28_4_tsni = function concat_inst_28_4_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+append_inst_28_4_5_tsni = function append_inst_28_4_5_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1347,17 +2544,158 @@ append_inst_15_16_14_4_20_tsni = function append_inst_15_16_14_4_20_tsni(xs, ys)
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_14_4_20_tsni(xs1, ys);
+    tmp = append_inst_28_4_5_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+    return (ys1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = append_inst_28_38_tsni(xs1, ys1);
+      return NofibPrelude.Cons(x, tmp)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-append_inst_15_16_14_4_2_21_tsni = function append_inst_15_16_14_4_2_21_tsni(xs, ys) {
+transfer_inst_29_30_tsni = function transfer_inst_29_30_tsni(source, dest, location, countdown, history) {
+  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  scrut = puzzle.stateEq(source, dest);
+  if (scrut === true) {
+    arr = [
+      countdown,
+      dest
+    ];
+    tmp = NofibPrelude.Cons(arr, history);
+    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+  } else {
+    arr1 = [
+      countdown,
+      dest
+    ];
+    tmp1 = NofibPrelude.Cons(arr1, history);
+    newHistory = tmp1;
+    tmp2 = puzzle.opposite(location);
+    newLocation = tmp2;
+    tmp3 = itemFromTo_inst_29_30_8_tsni(puzzle.Bono, puzzle.Adam);
+    tmp4 = lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
+    tmp5 = concat_inst_29_30_4_tsni(tmp4);
+    moveOne = tmp5;
+    tmp6 = itemFromTo_inst_29_30_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp7 = lscomp2$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
+    tmp8 = concat_inst_29_30_37_tsni(tmp7);
+    moveTwo = tmp8;
+    return append_inst_29_30_38_tsni(moveOne, moveTwo)
+  }
+};
+lscomp2$_inst_29_30_tsni = function lscomp2$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+lscomp3$_inst_29_30_tsni = function lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
+};
+lscomp1$_inst_29_30_tsni = function lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+updateState_inst_29_30_1_tsni = function updateState_inst_29_30_1_tsni(s, i, pos) {
+  let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
+  if (s instanceof puzzle.State.class) {
+    param0 = s.b;
+    param1 = s.e;
+    param2 = s.l;
+    param3 = s.a;
+    a = param0;
+    b = param1;
+    c = param2;
+    d = param3;
+    if (i instanceof puzzle.Bono.class) {
+      _deforest_State_b3 = pos;
+      _deforest_State_e3 = b;
+      _deforest_State_l3 = c;
+      _deforest_State_a3 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_29_30_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+      }
+    } else if (i instanceof puzzle.Edge.class) {
+      _deforest_State_b2 = a;
+      _deforest_State_e2 = pos;
+      _deforest_State_l2 = c;
+      _deforest_State_a2 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_29_30_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+      }
+    } else if (i instanceof puzzle.Larry.class) {
+      _deforest_State_b1 = a;
+      _deforest_State_e1 = b;
+      _deforest_State_l1 = pos;
+      _deforest_State_a1 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_29_30_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+      }
+    } else if (i instanceof puzzle.Adam.class) {
+      _deforest_State_b = a;
+      _deforest_State_e = b;
+      _deforest_State_l = c;
+      _deforest_State_a = pos;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_29_30_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+itemFromTo_inst_29_30_2_tsni = function itemFromTo_inst_29_30_2_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return lscomp2$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_29_30_2_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+itemFromTo_inst_29_30_3_tsni = function itemFromTo_inst_29_30_3_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return NofibPrelude.Nil
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_29_30_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_29_30_3_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_29_30_tsni1(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+concat_inst_29_30_4_tsni = function concat_inst_29_30_4_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+append_inst_29_30_4_5_tsni = function append_inst_29_30_4_5_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1366,20 +2704,480 @@ append_inst_15_16_14_4_2_21_tsni = function append_inst_15_16_14_4_2_21_tsni(xs,
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_21_tsni(xs1, ys);
+    tmp = append_inst_29_30_4_5_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+    return (ys1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = append_inst_29_30_38_tsni(xs1, ys1);
+      return NofibPrelude.Cons(x, tmp)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-writeItem_inst_15_16_14_4_2_22_tsni = function writeItem_inst_15_16_14_4_2_22_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
+itemFromTo_inst_29_30_8_tsni = function itemFromTo_inst_29_30_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return (ys) => {
+          return ys
+        }
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_29_30_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_29_30_8_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_29_30_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
 };
-append_inst_15_16_14_4_2_22_23_tsni = function append_inst_15_16_14_4_2_22_23_tsni(xs, ys) {
+writeSolutions_inst_29_31_tsni = function writeSolutions_inst_29_31_tsni(solutions, count, s) {
+  let param0, param1, item, next, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  if (solutions instanceof NofibPrelude.Nil.class) {
+    return s
+  } else if (solutions instanceof NofibPrelude.Cons.class) {
+    param0 = solutions.head;
+    param1 = solutions.tail;
+    item = param0;
+    next = param1;
+    tmp = NofibPrelude.nofibStringToList("Solution ");
+    tmp1 = NofibPrelude.stringOfInt(count);
+    tmp2 = NofibPrelude.nofibStringToList(tmp1);
+    tmp3 = count + 1;
+    tmp4 = writeSolutions_inst_29_31_tsni(next, tmp3, s);
+    tmp5 = writeHistory_inst_29_31_27_tsni(item, tmp4);
+    tmp6 = NofibPrelude.Cons("\n", tmp5);
+    tmp7 = NofibPrelude.append(tmp2, tmp6);
+    return NofibPrelude.append(tmp, tmp7)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeHistory_inst_29_31_27_tsni = function writeHistory_inst_29_31_27_tsni(history, x) {
+  let tmp, lambda$this;
+  if (history instanceof NofibPrelude.Nil.class) {
+    return x
+  } else {
+    lambda$this = runtime.safeCall(lambda_inst_29_31_27_25_tsni(history));
+    tmp = NofibPrelude.foldr(lambda$this, lambda2, history);
+    return runtime.safeCall(tmp(x))
+  }
+};
+lambda_inst_29_31_27_25_tsni = (undefined, function (history) {
+  return (timestate, acc) => {
+    return lambda$_inst_29_31_27_25_22_tsni(history, timestate, acc)
+  }
+});
+lambda$_inst_29_31_27_25_22_tsni = function lambda$_inst_29_31_27_25_22_tsni(history, timestate, acc) {
+  return runtime.safeCall(lambda_inst_29_31_27_25_22_20_tsni(history, timestate, acc))
+};
+lambda_inst_29_31_27_25_22_20_tsni = (undefined, function (history, timestate, acc) {
+  return (s) => {
+    return lambda$_inst_29_31_27_25_22_20_18_tsni(history, timestate, acc, s)
+  }
+});
+lambda$_inst_29_31_27_25_22_20_18_tsni = function lambda$_inst_29_31_27_25_22_20_18_tsni(history, timestate, acc, s) {
+  let first1, first0, time, state, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
+    first0 = timestate[0];
+    first1 = timestate[1];
+    time = first0;
+    state = first1;
+    tmp = NofibPrelude.nofibStringToList("Time: ");
+    tmp1 = puzzle1.totalTime(history);
+    tmp2 = tmp1 - time;
+    tmp3 = NofibPrelude.stringOfInt(tmp2);
+    tmp4 = NofibPrelude.nofibStringToList(tmp3);
+    tmp5 = runtime.safeCall(acc(s));
+    tmp6 = writeState_inst_29_31_27_25_22_20_18_16_tsni(state, tmp5);
+    tmp7 = NofibPrelude.Cons("\n", tmp6);
+    tmp8 = NofibPrelude.append(tmp4, tmp7);
+    return NofibPrelude.append(tmp, tmp8)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeState_inst_29_31_27_25_22_20_18_16_tsni = function writeState_inst_29_31_27_25_22_20_18_16_tsni(state, s) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp1 = puzzle.bonoPos(state);
+  tmp2 = puzzle.edgePos(state);
+  tmp3 = puzzle.larryPos(state);
+  tmp4 = puzzle.adamPos(state);
+  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp6 = NofibPrelude.append(tmp5, s);
+  tmp7 = writeItem_inst_29_31_27_25_22_20_18_16_42_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp4, tmp6);
+  tmp8 = writeItem_inst_29_31_27_25_22_20_18_16_41_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp3, tmp7);
+  tmp9 = writeItem_inst_29_31_27_25_22_20_18_16_40_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp2, tmp8);
+  tmp10 = writeItem_inst_29_31_27_25_22_20_18_16_39_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp1, tmp9);
+  return NofibPrelude.append(tmp, tmp10)
+};
+testPuzzle_nofib_inst_32_33_tsni = function testPuzzle_nofib_inst_32_33_tsni(x) {
+  let time, scrut, solutions, mins, tmp, tmp1, tmp2, tmp3;
+  tmp = NofibPrelude.listLen(x);
+  scrut = tmp === 1;
+  if (scrut === true) {
+    tmp1 = 0;
+  } else {
+    throw globalThis.Error("puzzle expects exactly one argument");
+  }
+  time = tmp1;
+  tmp2 = transfer_inst_32_33_30_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
+  solutions = tmp2;
+  tmp3 = puzzle.minSolutions(solutions);
+  mins = tmp3;
+  return writeSolutions_inst_32_33_31_tsni(mins, 1, () => {
+    return ""
+  })
+};
+writeSolutions_inst_32_33_31_tsni = function writeSolutions_inst_32_33_31_tsni(solutions, count, s) {
+  let param0, param1, item, next, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  if (solutions instanceof NofibPrelude.Nil.class) {
+    return s
+  } else if (solutions instanceof NofibPrelude.Cons.class) {
+    param0 = solutions.head;
+    param1 = solutions.tail;
+    item = param0;
+    next = param1;
+    tmp = NofibPrelude.nofibStringToList("Solution ");
+    tmp1 = NofibPrelude.stringOfInt(count);
+    tmp2 = NofibPrelude.nofibStringToList(tmp1);
+    tmp3 = count + 1;
+    tmp4 = writeSolutions_inst_32_33_31_tsni(next, tmp3, s);
+    tmp5 = writeHistory_inst_32_33_31_27_tsni(item, tmp4);
+    _deforest_Cons_head = "\n";
+    _deforest_Cons_tail = tmp5;
+    tmp6 = () => {
+      return match_ls_arm_Cons_inst_32_43_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+    };
+    tmp7 = append_inst_32_33_31_34_tsni(tmp2, tmp6);
+    return append_inst_32_33_31_35_tsni(tmp, tmp7)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeHistory_inst_32_33_31_27_tsni = function writeHistory_inst_32_33_31_27_tsni(history, x) {
+  let tmp, lambda$this;
+  if (history instanceof NofibPrelude.Nil.class) {
+    return x
+  } else {
+    lambda$this = runtime.safeCall(lambda_inst_32_33_31_27_25_tsni(history));
+    tmp = NofibPrelude.foldr(lambda$this, lambda2, history);
+    return runtime.safeCall(tmp(x))
+  }
+};
+lambda_inst_32_33_31_27_25_tsni = (undefined, function (history) {
+  return (timestate, acc) => {
+    return lambda$_inst_32_33_31_27_25_22_tsni(history, timestate, acc)
+  }
+});
+lambda$_inst_32_33_31_27_25_22_tsni = function lambda$_inst_32_33_31_27_25_22_tsni(history, timestate, acc) {
+  return runtime.safeCall(lambda_inst_32_33_31_27_25_22_20_tsni(history, timestate, acc))
+};
+lambda_inst_32_33_31_27_25_22_20_tsni = (undefined, function (history, timestate, acc) {
+  return (s) => {
+    return lambda$_inst_32_33_31_27_25_22_20_18_tsni(history, timestate, acc, s)
+  }
+});
+lambda$_inst_32_33_31_27_25_22_20_18_tsni = function lambda$_inst_32_33_31_27_25_22_20_18_tsni(history, timestate, acc, s) {
+  let first1, first0, time, state, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
+    first0 = timestate[0];
+    first1 = timestate[1];
+    time = first0;
+    state = first1;
+    tmp = NofibPrelude.nofibStringToList("Time: ");
+    tmp1 = puzzle1.totalTime(history);
+    tmp2 = tmp1 - time;
+    tmp3 = NofibPrelude.stringOfInt(tmp2);
+    tmp4 = NofibPrelude.nofibStringToList(tmp3);
+    tmp5 = runtime.safeCall(acc(s));
+    tmp6 = writeState_inst_32_33_31_27_25_22_20_18_16_tsni(state, tmp5);
+    tmp7 = NofibPrelude.Cons("\n", tmp6);
+    tmp8 = NofibPrelude.append(tmp4, tmp7);
+    return NofibPrelude.append(tmp, tmp8)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+writeState_inst_32_33_31_27_25_22_20_18_16_tsni = function writeState_inst_32_33_31_27_25_22_20_18_16_tsni(state, s) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp1 = puzzle.bonoPos(state);
+  tmp2 = puzzle.edgePos(state);
+  tmp3 = puzzle.larryPos(state);
+  tmp4 = puzzle.adamPos(state);
+  tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
+  tmp6 = NofibPrelude.append(tmp5, s);
+  tmp7 = writeItem_inst_32_33_31_27_25_22_20_18_16_42_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp4, tmp6);
+  tmp8 = writeItem_inst_32_33_31_27_25_22_20_18_16_41_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp3, tmp7);
+  tmp9 = writeItem_inst_32_33_31_27_25_22_20_18_16_40_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp2, tmp8);
+  tmp10 = writeItem_inst_32_33_31_27_25_22_20_18_16_39_tsni((b, rest) => {
+    let tmp11, tmp12;
+    if (b instanceof puzzle.LeftBank.class) {
+      tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
+      return NofibPrelude.append(tmp11, rest)
+    } else if (b instanceof puzzle.RightBank.class) {
+      tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
+      return NofibPrelude.append(tmp12, rest)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }, tmp1, tmp9);
+  return NofibPrelude.append(tmp, tmp10)
+};
+transfer_inst_32_33_30_tsni = function transfer_inst_32_33_30_tsni(source, dest, location, countdown, history) {
+  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  scrut = puzzle.stateEq(source, dest);
+  if (scrut === true) {
+    arr = [
+      countdown,
+      dest
+    ];
+    tmp = NofibPrelude.Cons(arr, history);
+    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+  } else {
+    arr1 = [
+      countdown,
+      dest
+    ];
+    tmp1 = NofibPrelude.Cons(arr1, history);
+    newHistory = tmp1;
+    tmp2 = puzzle.opposite(location);
+    newLocation = tmp2;
+    tmp3 = itemFromTo_inst_32_33_30_8_tsni(puzzle.Bono, puzzle.Adam);
+    tmp4 = lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
+    tmp5 = concat_inst_32_33_30_4_tsni(tmp4);
+    moveOne = tmp5;
+    tmp6 = itemFromTo_inst_32_33_30_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp7 = lscomp2$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
+    tmp8 = concat_inst_32_33_30_37_tsni(tmp7);
+    moveTwo = tmp8;
+    return append_inst_32_33_30_38_tsni(moveOne, moveTwo)
+  }
+};
+lscomp2$_inst_32_33_30_tsni = function lscomp2$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+lscomp3$_inst_32_33_30_tsni = function lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
+};
+lscomp1$_inst_32_33_30_tsni = function lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation))
+};
+itemFromTo_inst_32_33_30_8_tsni = function itemFromTo_inst_32_33_30_8_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return (ys) => {
+          return ys
+        }
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_32_33_30_8_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+updateState_inst_32_33_30_1_tsni = function updateState_inst_32_33_30_1_tsni(s, i, pos) {
+  let param0, param1, param2, param3, a, b, c, d, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3;
+  if (s instanceof puzzle.State.class) {
+    param0 = s.b;
+    param1 = s.e;
+    param2 = s.l;
+    param3 = s.a;
+    a = param0;
+    b = param1;
+    c = param2;
+    d = param3;
+    if (i instanceof puzzle.Bono.class) {
+      _deforest_State_b = pos;
+      _deforest_State_e = b;
+      _deforest_State_l = c;
+      _deforest_State_a = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_32_33_30_36_tsni(i1, pos1, _deforest_State_b, _deforest_State_e, _deforest_State_l, _deforest_State_a)
+      }
+    } else if (i instanceof puzzle.Edge.class) {
+      _deforest_State_b1 = a;
+      _deforest_State_e1 = pos;
+      _deforest_State_l1 = c;
+      _deforest_State_a1 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_32_33_30_36_tsni(i1, pos1, _deforest_State_b1, _deforest_State_e1, _deforest_State_l1, _deforest_State_a1)
+      }
+    } else if (i instanceof puzzle.Larry.class) {
+      _deforest_State_b2 = a;
+      _deforest_State_e2 = b;
+      _deforest_State_l2 = pos;
+      _deforest_State_a2 = d;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_32_33_30_36_tsni(i1, pos1, _deforest_State_b2, _deforest_State_e2, _deforest_State_l2, _deforest_State_a2)
+      }
+    } else if (i instanceof puzzle.Adam.class) {
+      _deforest_State_b3 = a;
+      _deforest_State_e3 = b;
+      _deforest_State_l3 = c;
+      _deforest_State_a3 = pos;
+      return (i1, pos1) => {
+        return match_s_arm_State_inst_32_33_30_36_tsni(i1, pos1, _deforest_State_b3, _deforest_State_e3, _deforest_State_l3, _deforest_State_a3)
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+itemFromTo_inst_32_33_30_2_tsni = function itemFromTo_inst_32_33_30_2_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return lscomp2$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_32_33_30_tsni1(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_32_33_30_2_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation, i, xs) => {
+      return match_ls_arm_Cons_inst_32_33_30_tsni1(source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+itemFromTo_inst_32_33_30_3_tsni = function itemFromTo_inst_32_33_30_3_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  scrut = puzzle.itemEq(a, b);
+  if (scrut === true) {
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return () => {
+        return NofibPrelude.Nil
+      }
+    };
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_32_33_30_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head, _deforest_Cons_tail)
+    }
+  } else {
+    tmp = puzzle.succItem(a);
+    tmp1 = itemFromTo_inst_32_33_30_3_tsni(tmp, b);
+    _deforest_Cons_head1 = a;
+    _deforest_Cons_tail1 = tmp1;
+    return (source, dest, location, countdown, history, newHistory, newLocation) => {
+      return match_ls_arm_Cons_inst_32_33_30_tsni2(source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head1, _deforest_Cons_tail1)
+    }
+  }
+};
+concat_inst_32_33_30_4_tsni = function concat_inst_32_33_30_4_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+append_inst_32_33_30_4_5_tsni = function append_inst_32_33_30_4_5_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1388,20 +3186,22 @@ append_inst_15_16_14_4_2_22_23_tsni = function append_inst_15_16_14_4_2_22_23_ts
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_22_23_tsni(xs1, ys);
+    tmp = append_inst_32_33_30_4_5_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+    return (ys1) => {
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs1 = param1;
+      tmp = append_inst_32_33_30_38_tsni(xs1, ys1);
+      return NofibPrelude.Cons(x, tmp)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-writeItem_inst_15_16_14_4_2_24_tsni = function writeItem_inst_15_16_14_4_2_24_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-append_inst_15_16_14_4_2_24_23_tsni = function append_inst_15_16_14_4_2_24_23_tsni(xs, ys) {
+append_inst_32_33_31_34_tsni = function append_inst_32_33_31_34_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1410,20 +3210,17 @@ append_inst_15_16_14_4_2_24_23_tsni = function append_inst_15_16_14_4_2_24_23_ts
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_24_23_tsni(xs1, ys);
+    tmp = append_inst_32_33_31_34_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+      return match_ls_arm_Cons_inst_32_43_tsni(_deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-writeItem_inst_15_16_14_4_2_25_tsni = function writeItem_inst_15_16_14_4_2_25_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-append_inst_15_16_14_4_2_25_23_tsni = function append_inst_15_16_14_4_2_25_23_tsni(xs, ys) {
+append_inst_32_33_31_35_tsni = function append_inst_32_33_31_35_tsni(xs, ys) {
   let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
     return ys
@@ -1432,667 +3229,380 @@ append_inst_15_16_14_4_2_25_23_tsni = function append_inst_15_16_14_4_2_25_23_ts
     param1 = xs.tail;
     x = param0;
     xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_25_23_tsni(xs1, ys);
+    tmp = append_inst_32_33_31_35_tsni(xs1, ys);
     _deforest_Cons_head = x;
     _deforest_Cons_tail = tmp;
     return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
+      return match_ls_arm_Cons_inst_32_43_tsni(_deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
     throw new globalThis.Error("match error");
   }
 };
-writeItem_inst_15_16_14_4_2_26_tsni = function writeItem_inst_15_16_14_4_2_26_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-append_inst_15_16_14_4_2_26_23_tsni = function append_inst_15_16_14_4_2_26_23_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_26_23_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_27_tsni = function append_inst_15_16_14_4_2_27_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_27_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_26_28_tsni = function append_inst_15_16_14_4_2_26_28_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_26_28_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_26_29_tsni = function append_inst_15_16_14_4_2_26_29_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_26_29_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_26_30_tsni = function append_inst_15_16_14_4_2_26_30_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_26_30_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_26_31_tsni = function append_inst_15_16_14_4_2_26_31_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_26_31_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_26_32_tsni = function append_inst_15_16_14_4_2_26_32_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_26_32_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_26_33_tsni = function append_inst_15_16_14_4_2_26_33_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_26_33_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_26_34_tsni = function append_inst_15_16_14_4_2_26_34_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_26_34_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_25_28_tsni = function append_inst_15_16_14_4_2_25_28_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_25_28_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_25_29_tsni = function append_inst_15_16_14_4_2_25_29_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_25_29_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_25_30_tsni = function append_inst_15_16_14_4_2_25_30_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_25_30_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_25_31_tsni = function append_inst_15_16_14_4_2_25_31_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_25_31_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_25_32_tsni = function append_inst_15_16_14_4_2_25_32_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_25_32_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_25_33_tsni = function append_inst_15_16_14_4_2_25_33_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_25_33_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_25_34_tsni = function append_inst_15_16_14_4_2_25_34_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_25_34_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_24_28_tsni = function append_inst_15_16_14_4_2_24_28_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_24_28_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_24_29_tsni = function append_inst_15_16_14_4_2_24_29_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_24_29_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_24_30_tsni = function append_inst_15_16_14_4_2_24_30_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_24_30_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_24_31_tsni = function append_inst_15_16_14_4_2_24_31_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_24_31_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_24_32_tsni = function append_inst_15_16_14_4_2_24_32_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_24_32_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_24_33_tsni = function append_inst_15_16_14_4_2_24_33_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_24_33_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_24_34_tsni = function append_inst_15_16_14_4_2_24_34_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_24_34_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_22_28_tsni = function append_inst_15_16_14_4_2_22_28_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_22_28_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_22_29_tsni = function append_inst_15_16_14_4_2_22_29_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_22_29_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_22_30_tsni = function append_inst_15_16_14_4_2_22_30_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_22_30_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_22_31_tsni = function append_inst_15_16_14_4_2_22_31_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_22_31_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_22_32_tsni = function append_inst_15_16_14_4_2_22_32_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_22_32_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_22_33_tsni = function append_inst_15_16_14_4_2_22_33_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_22_33_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-append_inst_15_16_14_4_2_22_34_tsni = function append_inst_15_16_14_4_2_22_34_tsni(xs, ys) {
-  let param0, param1, x, xs1, tmp, _deforest_Cons_head, _deforest_Cons_tail;
-  if (xs instanceof NofibPrelude.Nil.class) {
-    return ys
-  } else if (xs instanceof NofibPrelude.Cons.class) {
-    param0 = xs.head;
-    param1 = xs.tail;
-    x = param0;
-    xs1 = param1;
-    tmp = append_inst_15_16_14_4_2_22_34_tsni(xs1, ys);
-    _deforest_Cons_head = x;
-    _deforest_Cons_tail = tmp;
-    return () => {
-      return match_ls_arm_Cons_inst_15_38_tsni(_deforest_Cons_head, _deforest_Cons_tail)
-    }
-  } else {
-    throw new globalThis.Error("match error");
-  }
-};
-writeItem_inst_0_26_tsni = function writeItem_inst_0_26_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_0_25_tsni = function writeItem_inst_0_25_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_0_24_tsni = function writeItem_inst_0_24_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_0_22_tsni = function writeItem_inst_0_22_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_1_2_22_tsni = function writeItem_inst_1_2_22_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_1_2_24_tsni = function writeItem_inst_1_2_24_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_1_2_25_tsni = function writeItem_inst_1_2_25_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_1_2_26_tsni = function writeItem_inst_1_2_26_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_3_4_2_26_tsni = function writeItem_inst_3_4_2_26_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_3_4_2_25_tsni = function writeItem_inst_3_4_2_25_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_3_4_2_24_tsni = function writeItem_inst_3_4_2_24_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_3_4_2_22_tsni = function writeItem_inst_3_4_2_22_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-updateState_inst_5_35_tsni = function updateState_inst_5_35_tsni(s, i, pos) {
+updateState_inst_0_36_tsni = function updateState_inst_0_36_tsni(s, i, pos) {
   return runtime.safeCall(s(i, pos))
 };
-concat_inst_5_36_tsni = function concat_inst_5_36_tsni(ls) {
+concat_inst_0_37_tsni = function concat_inst_0_37_tsni(ls) {
   return runtime.safeCall(ls())
 };
-append_inst_5_37_tsni = function append_inst_5_37_tsni(xs, ys) {
+append_inst_0_38_tsni = function append_inst_0_38_tsni(xs, ys) {
   return runtime.safeCall(xs(ys))
 };
-append_inst_12_13_37_tsni = function append_inst_12_13_37_tsni(xs, ys) {
-  return runtime.safeCall(xs(ys))
-};
-concat_inst_12_13_36_tsni = function concat_inst_12_13_36_tsni(ls) {
+concat_inst_6_7_37_tsni = function concat_inst_6_7_37_tsni(ls) {
   return runtime.safeCall(ls())
 };
-updateState_inst_12_13_35_tsni = function updateState_inst_12_13_35_tsni(s, i, pos) {
+updateState_inst_6_7_36_tsni = function updateState_inst_6_7_36_tsni(s, i, pos) {
   return runtime.safeCall(s(i, pos))
 };
-writeItem_inst_12_14_4_2_22_tsni = function writeItem_inst_12_14_4_2_22_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_12_14_4_2_24_tsni = function writeItem_inst_12_14_4_2_24_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_12_14_4_2_25_tsni = function writeItem_inst_12_14_4_2_25_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-writeItem_inst_12_14_4_2_26_tsni = function writeItem_inst_12_14_4_2_26_tsni(i, b, rest) {
-  return runtime.safeCall(i(b, rest))
-};
-updateState_inst_15_16_13_35_tsni = function updateState_inst_15_16_13_35_tsni(s, i, pos) {
-  return runtime.safeCall(s(i, pos))
-};
-concat_inst_15_16_13_36_tsni = function concat_inst_15_16_13_36_tsni(ls) {
-  return runtime.safeCall(ls())
-};
-append_inst_15_16_13_37_tsni = function append_inst_15_16_13_37_tsni(xs, ys) {
+append_inst_6_7_38_tsni = function append_inst_6_7_38_tsni(xs, ys) {
   return runtime.safeCall(xs(ys))
 };
-nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(ls) {
+updateState_inst_9_36_tsni = function updateState_inst_9_36_tsni(s, i, pos) {
+  return runtime.safeCall(s(i, pos))
+};
+append_inst_9_38_tsni = function append_inst_9_38_tsni(xs, ys) {
+  return runtime.safeCall(xs(ys))
+};
+updateState_inst_10_11_36_tsni = function updateState_inst_10_11_36_tsni(s, i, pos) {
+  return runtime.safeCall(s(i, pos))
+};
+append_inst_10_11_38_tsni = function append_inst_10_11_38_tsni(xs, ys) {
+  return runtime.safeCall(xs(ys))
+};
+updateState_inst_12_36_tsni = function updateState_inst_12_36_tsni(s, i, pos) {
+  return runtime.safeCall(s(i, pos))
+};
+append_inst_12_38_tsni = function append_inst_12_38_tsni(xs, ys) {
+  return runtime.safeCall(xs(ys))
+};
+updateState_inst_13_14_36_tsni = function updateState_inst_13_14_36_tsni(s, i, pos) {
+  return runtime.safeCall(s(i, pos))
+};
+append_inst_13_14_38_tsni = function append_inst_13_14_38_tsni(xs, ys) {
+  return runtime.safeCall(xs(ys))
+};
+writeItem_inst_15_16_39_tsni = function writeItem_inst_15_16_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_15_16_40_tsni = function writeItem_inst_15_16_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_15_16_41_tsni = function writeItem_inst_15_16_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_15_16_42_tsni = function writeItem_inst_15_16_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_17_18_16_42_tsni = function writeItem_inst_17_18_16_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_17_18_16_41_tsni = function writeItem_inst_17_18_16_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_17_18_16_40_tsni = function writeItem_inst_17_18_16_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_17_18_16_39_tsni = function writeItem_inst_17_18_16_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_19_20_18_16_39_tsni = function writeItem_inst_19_20_18_16_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_19_20_18_16_40_tsni = function writeItem_inst_19_20_18_16_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_19_20_18_16_41_tsni = function writeItem_inst_19_20_18_16_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_19_20_18_16_42_tsni = function writeItem_inst_19_20_18_16_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_21_22_20_18_16_42_tsni = function writeItem_inst_21_22_20_18_16_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_21_22_20_18_16_41_tsni = function writeItem_inst_21_22_20_18_16_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_21_22_20_18_16_40_tsni = function writeItem_inst_21_22_20_18_16_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_21_22_20_18_16_39_tsni = function writeItem_inst_21_22_20_18_16_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_23_42_tsni = function writeItem_inst_23_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_23_41_tsni = function writeItem_inst_23_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_23_40_tsni = function writeItem_inst_23_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_23_39_tsni = function writeItem_inst_23_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_24_25_22_20_18_16_39_tsni = function writeItem_inst_24_25_22_20_18_16_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_24_25_22_20_18_16_40_tsni = function writeItem_inst_24_25_22_20_18_16_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_24_25_22_20_18_16_41_tsni = function writeItem_inst_24_25_22_20_18_16_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_24_25_22_20_18_16_42_tsni = function writeItem_inst_24_25_22_20_18_16_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_26_27_25_22_20_18_16_42_tsni = function writeItem_inst_26_27_25_22_20_18_16_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_26_27_25_22_20_18_16_41_tsni = function writeItem_inst_26_27_25_22_20_18_16_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_26_27_25_22_20_18_16_40_tsni = function writeItem_inst_26_27_25_22_20_18_16_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_26_27_25_22_20_18_16_39_tsni = function writeItem_inst_26_27_25_22_20_18_16_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+updateState_inst_28_36_tsni = function updateState_inst_28_36_tsni(s, i, pos) {
+  return runtime.safeCall(s(i, pos))
+};
+concat_inst_28_37_tsni = function concat_inst_28_37_tsni(ls) {
   return runtime.safeCall(ls())
 };
+append_inst_28_38_tsni = function append_inst_28_38_tsni(xs, ys) {
+  return runtime.safeCall(xs(ys))
+};
+concat_inst_29_30_37_tsni = function concat_inst_29_30_37_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+updateState_inst_29_30_36_tsni = function updateState_inst_29_30_36_tsni(s, i, pos) {
+  return runtime.safeCall(s(i, pos))
+};
+append_inst_29_30_38_tsni = function append_inst_29_30_38_tsni(xs, ys) {
+  return runtime.safeCall(xs(ys))
+};
+writeItem_inst_29_31_27_25_22_20_18_16_39_tsni = function writeItem_inst_29_31_27_25_22_20_18_16_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_29_31_27_25_22_20_18_16_40_tsni = function writeItem_inst_29_31_27_25_22_20_18_16_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_29_31_27_25_22_20_18_16_41_tsni = function writeItem_inst_29_31_27_25_22_20_18_16_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_29_31_27_25_22_20_18_16_42_tsni = function writeItem_inst_29_31_27_25_22_20_18_16_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_32_33_31_27_25_22_20_18_16_42_tsni = function writeItem_inst_32_33_31_27_25_22_20_18_16_42_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_32_33_31_27_25_22_20_18_16_41_tsni = function writeItem_inst_32_33_31_27_25_22_20_18_16_41_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_32_33_31_27_25_22_20_18_16_40_tsni = function writeItem_inst_32_33_31_27_25_22_20_18_16_40_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+writeItem_inst_32_33_31_27_25_22_20_18_16_39_tsni = function writeItem_inst_32_33_31_27_25_22_20_18_16_39_tsni(i, b, rest) {
+  return runtime.safeCall(i(b, rest))
+};
+updateState_inst_32_33_30_36_tsni = function updateState_inst_32_33_30_36_tsni(s, i, pos) {
+  return runtime.safeCall(s(i, pos))
+};
+concat_inst_32_33_30_37_tsni = function concat_inst_32_33_30_37_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+append_inst_32_33_30_38_tsni = function append_inst_32_33_30_38_tsni(xs, ys) {
+  return runtime.safeCall(xs(ys))
+};
+nofibListToString_inst_32_43_tsni = function nofibListToString_inst_32_43_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+lscomp1$ = function lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  if (ls instanceof NofibPrelude.Nil.class) {
+    return NofibPrelude.Nil
+  } else if (ls instanceof NofibPrelude.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    item = param0;
+    xs = param1;
+    tmp = puzzle1.position(item, dest);
+    scrut = puzzle1.bankEq(tmp, location);
+    if (scrut === true) {
+      tmp1 = puzzle1.updateState(dest, item, newLocation);
+      newDest = tmp1;
+      scrut1 = puzzle1.notSeen(newDest, history);
+      if (scrut1 === true) {
+        tmp2 = puzzle1.u2times(item);
+        tmp3 = countdown + tmp2;
+        newTime = tmp3;
+        tmp4 = transfer_inst_0_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp5 = lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, xs);
+        return NofibPrelude.Cons(tmp4, tmp5)
+      } else {
+        return lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, xs)
+      }
+    } else {
+      return lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, xs)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lscomp1 = function lscomp1(source, dest, location, countdown, history, newHistory, newLocation) {
+  return (ls) => {
+    return lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls)
+  }
+};
+lscomp3$ = function lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  if (ls instanceof NofibPrelude.Nil.class) {
+    return lscomp2$_inst_9_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
+  } else if (ls instanceof NofibPrelude.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    j = param0;
+    ys = param1;
+    tmp = puzzle1.position(i, dest);
+    scrut = puzzle1.bankEq(tmp, location);
+    if (scrut === true) {
+      tmp1 = puzzle1.position(j, dest);
+      scrut1 = puzzle1.bankEq(tmp1, location);
+      if (scrut1 === true) {
+        tmp2 = updateState_inst_9_1_tsni(dest, i, newLocation);
+        tmp3 = updateState_inst_9_36_tsni(tmp2, j, newLocation);
+        newDest = tmp3;
+        scrut2 = puzzle1.notSeen(newDest, history);
+        if (scrut2 === true) {
+          tmp4 = puzzle1.u2times(i);
+          tmp5 = countdown + tmp4;
+          newTime = tmp5;
+          tmp6 = transfer_inst_9_tsni(source, newDest, newLocation, newTime, newHistory);
+          tmp7 = lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+          return NofibPrelude.Cons(tmp6, tmp7)
+        } else {
+          return lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+        }
+      } else {
+        return lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+      }
+    } else {
+      return lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lscomp3 = function lscomp3(source, dest, location, countdown, history, newHistory, newLocation, i, xs) {
+  return (ls) => {
+    return lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls)
+  }
+};
+lscomp2$ = function lscomp2$(source, dest, location, countdown, history, newHistory, newLocation, ls) {
+  let param0, param1, i, xs, tmp, tmp1;
+  if (ls instanceof NofibPrelude.Nil.class) {
+    return NofibPrelude.Nil
+  } else if (ls instanceof NofibPrelude.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    i = param0;
+    xs = param1;
+    tmp = puzzle1.succItem(i);
+    tmp1 = itemFromTo_inst_12_2_tsni(tmp, puzzle1.Adam);
+    return lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lscomp2 = function lscomp2(source, dest, location, countdown, history, newHistory, newLocation) {
+  return (ls) => {
+    return lscomp2$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls)
+  }
+};
+minAcc = function minAcc(minSoFar, mins, ls) {
+  let param0, param1, history, next, total, scrut, scrut1, tmp, tmp1, tmp2;
+  if (ls instanceof NofibPrelude.Nil.class) {
+    return mins
+  } else if (ls instanceof NofibPrelude.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    history = param0;
+    next = param1;
+    tmp = puzzle1.totalTime(history);
+    total = tmp;
+    scrut1 = minSoFar < total;
+    if (scrut1 === true) {
+      return minAcc(minSoFar, mins, next)
+    } else {
+      scrut = minSoFar === total;
+      if (scrut === true) {
+        tmp1 = NofibPrelude.Cons(history, mins);
+        return minAcc(minSoFar, tmp1, next)
+      } else {
+        tmp2 = NofibPrelude.Cons(history, NofibPrelude.Nil);
+        return minAcc(total, tmp2, next)
+      }
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda$2 = function lambda$(history, timestate, acc, s) {
+  let first1, first0, time, state, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
+    first0 = timestate[0];
+    first1 = timestate[1];
+    time = first0;
+    state = first1;
+    tmp = NofibPrelude.nofibStringToList("Time: ");
+    tmp1 = puzzle1.totalTime(history);
+    tmp2 = tmp1 - time;
+    tmp3 = NofibPrelude.stringOfInt(tmp2);
+    tmp4 = NofibPrelude.nofibStringToList(tmp3);
+    tmp5 = runtime.safeCall(acc(s));
+    tmp6 = writeState_inst_15_16_tsni(state, tmp5);
+    tmp7 = NofibPrelude.Cons("\n", tmp6);
+    tmp8 = NofibPrelude.append(tmp4, tmp7);
+    return NofibPrelude.append(tmp, tmp8)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda3 = (undefined, function (history, timestate, acc) {
+  return (s) => {
+    return lambda$_inst_17_18_tsni(history, timestate, acc, s)
+  }
+});
+lambda$1 = function lambda$(history, timestate, acc) {
+  return runtime.safeCall(lambda_inst_19_20_tsni(history, timestate, acc))
+};
+lambda1 = (undefined, function (history) {
+  return (timestate, acc) => {
+    return lambda$_inst_21_22_tsni(history, timestate, acc)
+  }
+});
+lambda2 = (undefined, function (x) {
+  return x
+});
+lambda$ = function lambda$(state, caseScrut) {
+  let first1, first0, s, tmp;
+  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
+    first0 = caseScrut[0];
+    first1 = caseScrut[1];
+    s = first1;
+    tmp = puzzle1.stateEq(state, s);
+    return Predef.not(tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda = (undefined, function (state) {
+  return (caseScrut) => {
+    return lambda$(state, caseScrut)
+  }
+});
 (class puzzle {
   static {
     puzzle1 = puzzle;
@@ -2398,20 +3908,8 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
     }
   } 
   static notSeen(state, states) {
-    let tmp, lambda;
-    lambda = (undefined, function (caseScrut) {
-      let first1, first0, s8, tmp1;
-      if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-        first0 = caseScrut[0];
-        first1 = caseScrut[1];
-        s8 = first1;
-        tmp1 = puzzle.stateEq(state, s8);
-        return Predef.not(tmp1)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda(state));
     return NofibPrelude.all(tmp, states)
   } 
   static writeItem(i4, b4, rest) {
@@ -2469,7 +3967,7 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
     tmp4 = puzzle.adamPos(state1);
     tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
     tmp6 = NofibPrelude.append(tmp5, s8);
-    tmp7 = writeItem_inst_0_26_tsni((b5, rest1) => {
+    tmp7 = writeItem_inst_23_42_tsni((b5, rest1) => {
       let tmp11, tmp12;
       if (b5 instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -2481,7 +3979,7 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
         throw new globalThis.Error("match error");
       }
     }, tmp4, tmp6);
-    tmp8 = writeItem_inst_0_25_tsni((b5, rest1) => {
+    tmp8 = writeItem_inst_23_41_tsni((b5, rest1) => {
       let tmp11, tmp12;
       if (b5 instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -2493,7 +3991,7 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
         throw new globalThis.Error("match error");
       }
     }, tmp3, tmp7);
-    tmp9 = writeItem_inst_0_24_tsni((b5, rest1) => {
+    tmp9 = writeItem_inst_23_40_tsni((b5, rest1) => {
       let tmp11, tmp12;
       if (b5 instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -2505,7 +4003,7 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
         throw new globalThis.Error("match error");
       }
     }, tmp2, tmp8);
-    tmp10 = writeItem_inst_0_22_tsni((b5, rest1) => {
+    tmp10 = writeItem_inst_23_39_tsni((b5, rest1) => {
       let tmp11, tmp12;
       if (b5 instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -2537,39 +4035,12 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
     }
   } 
   static writeHistory(history1, x) {
-    let tmp, lambda, lambda1;
+    let tmp, lambda$this;
     if (history1 instanceof NofibPrelude.Nil.class) {
       return x
     } else {
-      lambda = (undefined, function (timestate, acc) {
-        let lambda2;
-        lambda2 = (undefined, function (s9) {
-          let first1, first0, time, state2, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-          if (globalThis.Array.isArray(timestate) && timestate.length === 2) {
-            first0 = timestate[0];
-            first1 = timestate[1];
-            time = first0;
-            state2 = first1;
-            tmp1 = NofibPrelude.nofibStringToList("Time: ");
-            tmp2 = puzzle.totalTime(history1);
-            tmp3 = tmp2 - time;
-            tmp4 = NofibPrelude.stringOfInt(tmp3);
-            tmp5 = NofibPrelude.nofibStringToList(tmp4);
-            tmp6 = runtime.safeCall(acc(s9));
-            tmp7 = writeState_inst_1_2_tsni(state2, tmp6);
-            tmp8 = NofibPrelude.Cons("\n", tmp7);
-            tmp9 = NofibPrelude.append(tmp5, tmp8);
-            return NofibPrelude.append(tmp1, tmp9)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        });
-        return lambda2
-      });
-      lambda1 = (undefined, function (x1) {
-        return x1
-      });
-      tmp = NofibPrelude.foldr(lambda, lambda1, history1);
+      lambda$this = runtime.safeCall(lambda_inst_24_25_tsni(history1));
+      tmp = NofibPrelude.foldr(lambda$this, lambda2, history1);
       return runtime.safeCall(tmp(x))
     }
   } 
@@ -2587,7 +4058,7 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
       tmp2 = NofibPrelude.nofibStringToList(tmp1);
       tmp3 = count + 1;
       tmp4 = puzzle.writeSolutions(next, tmp3, s9);
-      tmp5 = writeHistory_inst_3_4_tsni(item, tmp4);
+      tmp5 = writeHistory_inst_26_27_tsni(item, tmp4);
       tmp6 = NofibPrelude.Cons("\n", tmp5);
       tmp7 = NofibPrelude.append(tmp2, tmp6);
       return NofibPrelude.append(tmp, tmp7)
@@ -2596,7 +4067,7 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
     }
   } 
   static minSolutions(history2) {
-    let minAcc, param0, param1, history3, next, tmp, tmp1, tmp2;
+    let param0, param1, history3, next, tmp, tmp1, tmp2;
     if (history2 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (history2 instanceof NofibPrelude.Cons.class) {
@@ -2604,34 +4075,6 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
       param1 = history2.tail;
       history3 = param0;
       next = param1;
-      minAcc = function minAcc(minSoFar, mins, ls) {
-        let param01, param11, history4, next1, total, scrut, scrut1, tmp3, tmp4, tmp5;
-        if (ls instanceof NofibPrelude.Nil.class) {
-          return mins
-        } else if (ls instanceof NofibPrelude.Cons.class) {
-          param01 = ls.head;
-          param11 = ls.tail;
-          history4 = param01;
-          next1 = param11;
-          tmp3 = puzzle.totalTime(history4);
-          total = tmp3;
-          scrut1 = minSoFar < total;
-          if (scrut1 === true) {
-            return minAcc(minSoFar, mins, next1)
-          } else {
-            scrut = minSoFar === total;
-            if (scrut === true) {
-              tmp4 = NofibPrelude.Cons(history4, mins);
-              return minAcc(minSoFar, tmp4, next1)
-            } else {
-              tmp5 = NofibPrelude.Cons(history4, NofibPrelude.Nil);
-              return minAcc(total, tmp5, next1)
-            }
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      };
       tmp = puzzle.totalTime(history3);
       tmp1 = NofibPrelude.Cons(history3, NofibPrelude.Nil);
       tmp2 = minAcc(tmp, tmp1, next);
@@ -2654,7 +4097,7 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
     }
   } 
   static transfer(source, dest, location, countdown, history3) {
-    let lscomp2, lscomp1, newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
     scrut = puzzle.stateEq(source, dest);
     if (scrut === true) {
       arr = [
@@ -2664,12 +4107,6 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
       tmp = NofibPrelude.Cons(arr, history3);
       return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
     } else {
-      lscomp1 = function lscomp1(ls) {
-        return runtime.safeCall(ls(lscomp1, source, dest, location, countdown, history3, newHistory, newLocation))
-      };
-      lscomp2 = function lscomp2(ls) {
-        return runtime.safeCall(ls(lscomp2, source, dest, location, countdown, history3, newHistory, newLocation))
-      };
       arr1 = [
         countdown,
         dest
@@ -2678,15 +4115,15 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
       newHistory = tmp1;
       tmp2 = puzzle.opposite(location);
       newLocation = tmp2;
-      tmp3 = itemFromTo_inst_5_8_tsni(puzzle.Bono, puzzle.Adam);
-      tmp4 = lscomp1(tmp3);
-      tmp5 = concat_inst_5_10_tsni(tmp4);
+      tmp3 = itemFromTo_inst_28_8_tsni(puzzle.Bono, puzzle.Adam);
+      tmp4 = lscomp1$_inst_28_tsni(source, dest, location, countdown, history3, newHistory, newLocation, tmp3);
+      tmp5 = concat_inst_28_4_tsni(tmp4);
       moveOne = tmp5;
-      tmp6 = itemFromTo_inst_5_9_tsni(puzzle.Bono, puzzle.Larry);
-      tmp7 = lscomp2(tmp6);
-      tmp8 = concat_inst_5_36_tsni(tmp7);
+      tmp6 = itemFromTo_inst_28_3_tsni(puzzle.Bono, puzzle.Larry);
+      tmp7 = lscomp2$_inst_28_tsni(source, dest, location, countdown, history3, newHistory, newLocation, tmp6);
+      tmp8 = concat_inst_28_37_tsni(tmp7);
       moveTwo = tmp8;
-      return append_inst_5_37_tsni(moveOne, moveTwo)
+      return append_inst_28_38_tsni(moveOne, moveTwo)
     }
   } 
   static testPuzzle_nofib(x1) {
@@ -2699,17 +4136,17 @@ nofibListToString_inst_15_38_tsni = function nofibListToString_inst_15_38_tsni(l
       throw globalThis.Error("puzzle expects exactly one argument");
     }
     time = tmp1;
-    tmp2 = transfer_inst_12_13_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
+    tmp2 = transfer_inst_29_30_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
     solutions1 = tmp2;
     tmp3 = puzzle.minSolutions(solutions1);
     mins = tmp3;
-    return writeSolutions_inst_12_14_tsni(mins, 1, NofibPrelude.Nil)
+    return writeSolutions_inst_29_31_tsni(mins, 1, NofibPrelude.Nil)
   } 
   static main() {
     let tmp, tmp1;
     tmp = NofibPrelude.Cons(2, NofibPrelude.Nil);
-    tmp1 = testPuzzle_nofib_inst_15_16_tsni(tmp);
-    return nofibListToString_inst_15_38_tsni(tmp1)
+    tmp1 = testPuzzle_nofib_inst_32_33_tsni(tmp);
+    return nofibListToString_inst_32_43_tsni(tmp1)
   }
   static toString() { return "puzzle"; }
 });

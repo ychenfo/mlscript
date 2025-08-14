@@ -346,4 +346,62 @@ lastFilter(id(1 :: 2 :: 3 :: 4 :: 5 :: Nil), x => (x % 2 == 0))
 //│ = Some(4)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
+// should prevent processing a function body more than once
+:deforest
+fun g() = f()
+fun f() = g() + g()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// should prevent processing a function body more than once
+:deforest
+fun h1() = g()
+fun h2() = g()
+fun g() = f()
+fun f() = h1() + h2()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+// should prevent processing a function body more than once
+:deforest
+fun h1() = g()
+fun h2() = g() + h1()
+fun g() = f()
+fun f() = h1() + h2()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// should prevent processing a function body more than once
+:deforest
+fun main() = if
+  false then f() + g()
+  else 0
+fun f() = if
+  false then h()
+  else 0
+fun h() = if
+  false then f() + main()
+  else 0
+fun g() = if
+  false then h() + main()
+  else 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
 

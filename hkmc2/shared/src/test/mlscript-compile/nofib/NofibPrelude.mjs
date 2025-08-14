@@ -1,46 +1,705 @@
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import Predef from "./../Predef.mjs";
-let NofibPrelude1, unzip_inst_1_2_tsni, reverse_inst_0_3_tsni, reverse_inst_0_4_tsni, reverse_inst_1_2_4_tsni, reverse_inst_1_2_3_tsni;
-unzip_inst_1_2_tsni = function unzip_inst_1_2_tsni(l) {
-  let f;
-  f = function f(l1, a, b) {
-    return runtime.safeCall(l1(f, a, b))
-  };
-  return f(l, (r, l$_) => {
+let r, l, go, f, lscomp, combine, go1, NofibPrelude1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13, lambda$14, lambda$15, go$, transpose_inst_0_tsni, unzip_inst_0_1_tsni, f_inst_0_1_2_tsni, lscomp_inst_0_3_tsni, f_inst_4_2_tsni, combine_inst_5_tsni, unzip_inst_5_1_tsni, f_inst_5_1_2_tsni, lscomp_inst_5_3_tsni, reverse_inst_0_1_2_6_tsni, r_inst_0_1_2_6_7_tsni, reverse_inst_0_1_2_8_tsni, r_inst_0_1_2_8_7_tsni, reverse_inst_4_2_8_tsni, r_inst_4_2_8_7_tsni, reverse_inst_4_2_6_tsni, r_inst_4_2_6_7_tsni, reverse_inst_5_1_2_6_tsni, r_inst_5_1_2_6_7_tsni, reverse_inst_5_1_2_8_tsni, r_inst_5_1_2_8_7_tsni;
+transpose_inst_0_tsni = function transpose_inst_0_tsni(xss) {
+  let param0, param1, param01, param11, x, xs, xss1, scrut, xss2, tmp;
+  if (xss instanceof NofibPrelude.Nil.class) {
+    return NofibPrelude.Nil
+  } else if (xss instanceof NofibPrelude.Cons.class) {
+    param0 = xss.head;
+    param1 = xss.tail;
+    if (param0 instanceof NofibPrelude.Nil.class) {
+      xss2 = param1;
+      return transpose_inst_0_tsni(xss2)
+    } else if (param0 instanceof NofibPrelude.Cons.class) {
+      param01 = param0.head;
+      param11 = param0.tail;
+      x = param01;
+      xs = param11;
+      xss1 = param1;
+      tmp = lscomp_inst_0_3_tsni(xss1);
+      scrut = unzip_inst_0_1_tsni(tmp);
+      return runtime.safeCall(scrut(x, xs))
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+unzip_inst_0_1_tsni = function unzip_inst_0_1_tsni(l1) {
+  return f_inst_0_1_2_tsni(l1, (l$_) => {
     return l$_
-  }, (r, l$_) => {
+  }, (l$_) => {
     return l$_
   })
 };
-reverse_inst_0_3_tsni = function reverse_inst_0_3_tsni(l) {
-  let r;
-  r = function r(l$_, l1) {
-    return runtime.safeCall(l1(r, l$_))
-  };
-  return r(NofibPrelude.Nil, l)
+f_inst_0_1_2_tsni = function f_inst_0_1_2_tsni(l1, a, b) {
+  return runtime.safeCall(l1(a, b))
 };
-reverse_inst_0_4_tsni = function reverse_inst_0_4_tsni(l) {
-  let r;
-  r = function r(l$_, l1) {
-    return runtime.safeCall(l1(r, l$_))
-  };
-  return r(NofibPrelude.Nil, l)
+lscomp_inst_0_3_tsni = function lscomp_inst_0_3_tsni(ls) {
+  let param0, param1, h, t, param01, param11, hd, tl, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  if (ls instanceof NofibPrelude1.Nil.class) {
+    return (a, b) => {
+      let tmp1, tmp2, arr1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+      tmp1 = reverse_inst_0_1_2_6_tsni(a);
+      tmp2 = reverse_inst_0_1_2_8_tsni(b);
+      _deforest_Deforest_Arr_2_01 = tmp1;
+      _deforest_Deforest_Arr_2_11 = tmp2;
+      arr1 = (x, xs) => {
+        let first1, first0, hds, tls;
+        first0 = _deforest_Deforest_Arr_2_01;
+        first1 = _deforest_Deforest_Arr_2_11;
+        hds = first0;
+        tls = first1;
+        return combine(x, hds, xs, tls)
+      };
+      return arr1
+    }
+  } else if (ls instanceof NofibPrelude1.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    h = param0;
+    t = param1;
+    if (h instanceof NofibPrelude1.Cons.class) {
+      param01 = h.head;
+      param11 = h.tail;
+      hd = param01;
+      tl = param11;
+      _deforest_Deforest_Arr_2_0 = hd;
+      _deforest_Deforest_Arr_2_1 = tl;
+      arr = (a, b, param12) => {
+        let first1, first0, x, y, t1, tmp1, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2;
+        first0 = _deforest_Deforest_Arr_2_0;
+        first1 = _deforest_Deforest_Arr_2_1;
+        x = first0;
+        y = first1;
+        t1 = param12;
+        _deforest_Cons_head1 = x;
+        _deforest_Cons_tail1 = a;
+        tmp1 = (l$_) => {
+          let param02, param13, x1, xs, tmp3;
+          param02 = _deforest_Cons_head1;
+          param13 = _deforest_Cons_tail1;
+          x1 = param02;
+          xs = param13;
+          tmp3 = NofibPrelude1.Cons(x1, l$_);
+          return r_inst_0_1_2_6_7_tsni(tmp3, xs)
+        };
+        _deforest_Cons_head2 = y;
+        _deforest_Cons_tail2 = b;
+        tmp2 = (l$_) => {
+          let param02, param13, x1, xs, tmp3;
+          param02 = _deforest_Cons_head2;
+          param13 = _deforest_Cons_tail2;
+          x1 = param02;
+          xs = param13;
+          tmp3 = NofibPrelude1.Cons(x1, l$_);
+          return r_inst_0_1_2_8_7_tsni(tmp3, xs)
+        };
+        return f_inst_0_1_2_tsni(t1, tmp1, tmp2)
+      };
+      tmp = lscomp_inst_0_3_tsni(t);
+      _deforest_Cons_head = arr;
+      _deforest_Cons_tail = tmp;
+      return (a, b) => {
+        let param02, param12;
+        param02 = _deforest_Cons_head;
+        param12 = _deforest_Cons_tail;
+        return runtime.safeCall(param02(a, b, param12))
+      }
+    } else {
+      return lscomp_inst_0_3_tsni(t)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-reverse_inst_1_2_4_tsni = function reverse_inst_1_2_4_tsni(l) {
-  let r;
-  r = function r(l$_, l1) {
-    return runtime.safeCall(l1(r, l$_))
-  };
-  return r(NofibPrelude.Nil, l)
+f_inst_4_2_tsni = function f_inst_4_2_tsni(l1, a, b) {
+  let param0, param1, first1, first0, x, y, t, tmp, tmp1, arr, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+  if (l1 instanceof NofibPrelude1.Nil.class) {
+    tmp = reverse_inst_4_2_6_tsni(a);
+    tmp1 = reverse_inst_4_2_8_tsni(b);
+    arr = [
+      tmp,
+      tmp1
+    ];
+    return arr
+  } else if (l1 instanceof NofibPrelude1.Cons.class) {
+    param0 = l1.head;
+    param1 = l1.tail;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      x = first0;
+      y = first1;
+      t = param1;
+      _deforest_Cons_head1 = x;
+      _deforest_Cons_tail1 = a;
+      tmp2 = (l$_) => {
+        let param01, param11, x1, xs, tmp4;
+        param01 = _deforest_Cons_head1;
+        param11 = _deforest_Cons_tail1;
+        x1 = param01;
+        xs = param11;
+        tmp4 = NofibPrelude1.Cons(x1, l$_);
+        return r_inst_4_2_6_7_tsni(tmp4, xs)
+      };
+      _deforest_Cons_head = y;
+      _deforest_Cons_tail = b;
+      tmp3 = (l$_) => {
+        let param01, param11, x1, xs, tmp4;
+        param01 = _deforest_Cons_head;
+        param11 = _deforest_Cons_tail;
+        x1 = param01;
+        xs = param11;
+        tmp4 = NofibPrelude1.Cons(x1, l$_);
+        return r_inst_4_2_8_7_tsni(tmp4, xs)
+      };
+      return f_inst_4_2_tsni(t, tmp2, tmp3)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
-  let r;
-  r = function r(l$_, l1) {
-    return runtime.safeCall(l1(r, l$_))
-  };
-  return r(NofibPrelude.Nil, l)
+combine_inst_5_tsni = function combine_inst_5_tsni(y, h, ys, t) {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude1.Cons(y, h);
+  tmp1 = NofibPrelude1.Cons(ys, t);
+  tmp2 = NofibPrelude1.transpose(tmp1);
+  return NofibPrelude1.Cons(tmp, tmp2)
 };
+unzip_inst_5_1_tsni = function unzip_inst_5_1_tsni(l1) {
+  return f_inst_5_1_2_tsni(l1, (l$_) => {
+    return l$_
+  }, (l$_) => {
+    return l$_
+  })
+};
+f_inst_5_1_2_tsni = function f_inst_5_1_2_tsni(l1, a, b) {
+  return runtime.safeCall(l1(a, b))
+};
+lscomp_inst_5_3_tsni = function lscomp_inst_5_3_tsni(ls) {
+  let param0, param1, h, t, param01, param11, hd, tl, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  if (ls instanceof NofibPrelude1.Nil.class) {
+    return (a, b) => {
+      let tmp1, tmp2, arr1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+      tmp1 = reverse_inst_5_1_2_6_tsni(a);
+      tmp2 = reverse_inst_5_1_2_8_tsni(b);
+      _deforest_Deforest_Arr_2_01 = tmp1;
+      _deforest_Deforest_Arr_2_11 = tmp2;
+      arr1 = (x, xs) => {
+        let first1, first0, hds, tls;
+        first0 = _deforest_Deforest_Arr_2_01;
+        first1 = _deforest_Deforest_Arr_2_11;
+        hds = first0;
+        tls = first1;
+        return combine_inst_5_tsni(x, hds, xs, tls)
+      };
+      return arr1
+    }
+  } else if (ls instanceof NofibPrelude1.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    h = param0;
+    t = param1;
+    if (h instanceof NofibPrelude1.Cons.class) {
+      param01 = h.head;
+      param11 = h.tail;
+      hd = param01;
+      tl = param11;
+      _deforest_Deforest_Arr_2_0 = hd;
+      _deforest_Deforest_Arr_2_1 = tl;
+      arr = (a, b, param12) => {
+        let first1, first0, x, y, t1, tmp1, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2;
+        first0 = _deforest_Deforest_Arr_2_0;
+        first1 = _deforest_Deforest_Arr_2_1;
+        x = first0;
+        y = first1;
+        t1 = param12;
+        _deforest_Cons_head1 = x;
+        _deforest_Cons_tail1 = a;
+        tmp1 = (l$_) => {
+          let param02, param13, x1, xs, tmp3;
+          param02 = _deforest_Cons_head1;
+          param13 = _deforest_Cons_tail1;
+          x1 = param02;
+          xs = param13;
+          tmp3 = NofibPrelude1.Cons(x1, l$_);
+          return r_inst_5_1_2_6_7_tsni(tmp3, xs)
+        };
+        _deforest_Cons_head2 = y;
+        _deforest_Cons_tail2 = b;
+        tmp2 = (l$_) => {
+          let param02, param13, x1, xs, tmp3;
+          param02 = _deforest_Cons_head2;
+          param13 = _deforest_Cons_tail2;
+          x1 = param02;
+          xs = param13;
+          tmp3 = NofibPrelude1.Cons(x1, l$_);
+          return r_inst_5_1_2_8_7_tsni(tmp3, xs)
+        };
+        return f_inst_5_1_2_tsni(t1, tmp1, tmp2)
+      };
+      tmp = lscomp_inst_5_3_tsni(t);
+      _deforest_Cons_head = arr;
+      _deforest_Cons_tail = tmp;
+      return (a, b) => {
+        let param02, param12;
+        param02 = _deforest_Cons_head;
+        param12 = _deforest_Cons_tail;
+        return runtime.safeCall(param02(a, b, param12))
+      }
+    } else {
+      return lscomp_inst_5_3_tsni(t)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+reverse_inst_0_1_2_6_tsni = function reverse_inst_0_1_2_6_tsni(l1) {
+  return r_inst_0_1_2_6_7_tsni(NofibPrelude.Nil, l1)
+};
+r_inst_0_1_2_6_7_tsni = function r_inst_0_1_2_6_7_tsni(l$_, l1) {
+  return runtime.safeCall(l1(l$_))
+};
+reverse_inst_0_1_2_8_tsni = function reverse_inst_0_1_2_8_tsni(l1) {
+  return r_inst_0_1_2_8_7_tsni(NofibPrelude.Nil, l1)
+};
+r_inst_0_1_2_8_7_tsni = function r_inst_0_1_2_8_7_tsni(l$_, l1) {
+  return runtime.safeCall(l1(l$_))
+};
+reverse_inst_4_2_8_tsni = function reverse_inst_4_2_8_tsni(l1) {
+  return r_inst_4_2_8_7_tsni(NofibPrelude.Nil, l1)
+};
+r_inst_4_2_8_7_tsni = function r_inst_4_2_8_7_tsni(l$_, l1) {
+  return runtime.safeCall(l1(l$_))
+};
+reverse_inst_4_2_6_tsni = function reverse_inst_4_2_6_tsni(l1) {
+  return r_inst_4_2_6_7_tsni(NofibPrelude.Nil, l1)
+};
+r_inst_4_2_6_7_tsni = function r_inst_4_2_6_7_tsni(l$_, l1) {
+  return runtime.safeCall(l1(l$_))
+};
+reverse_inst_5_1_2_6_tsni = function reverse_inst_5_1_2_6_tsni(l1) {
+  return r_inst_5_1_2_6_7_tsni(NofibPrelude.Nil, l1)
+};
+r_inst_5_1_2_6_7_tsni = function r_inst_5_1_2_6_7_tsni(l$_, l1) {
+  return runtime.safeCall(l1(l$_))
+};
+reverse_inst_5_1_2_8_tsni = function reverse_inst_5_1_2_8_tsni(l1) {
+  return r_inst_5_1_2_8_7_tsni(NofibPrelude.Nil, l1)
+};
+r_inst_5_1_2_8_7_tsni = function r_inst_5_1_2_8_7_tsni(l$_, l1) {
+  return runtime.safeCall(l1(l$_))
+};
+go$ = function go$(s, i) {
+  let scrut, tmp, tmp1, tmp2;
+  scrut = i < s.length;
+  if (scrut === true) {
+    tmp = runtime.safeCall(s.charAt(i));
+    tmp1 = i + 1;
+    tmp2 = go$(s, tmp1);
+    return NofibPrelude1.Cons(tmp, tmp2)
+  } else {
+    return NofibPrelude1.Nil
+  }
+};
+go1 = function go(s) {
+  return (i) => {
+    return go$(s, i)
+  }
+};
+lambda$15 = function lambda$(x) {
+  let tmp;
+  tmp = NofibPrelude1.repeat(x);
+  return NofibPrelude1.LzCons(x, tmp)
+};
+lambda22 = (undefined, function (x) {
+  return () => {
+    return lambda$15(x)
+  }
+});
+lambda$14 = function lambda$(a) {
+  let tmp, tmp1;
+  tmp = a + 1;
+  tmp1 = NofibPrelude1.enumFrom(tmp);
+  return NofibPrelude1.LzCons(a, tmp1)
+};
+lambda21 = (undefined, function (a) {
+  return () => {
+    return lambda$14(a)
+  }
+});
+lambda19 = (undefined, function () {
+  return NofibPrelude1.LzNil
+});
+lambda$13 = function lambda$(n, x) {
+  let tmp, tmp1;
+  tmp = n - 1;
+  tmp1 = NofibPrelude1.replicate_lz(tmp, x);
+  return NofibPrelude1.LzCons(x, tmp1)
+};
+lambda20 = (undefined, function (n, x) {
+  return () => {
+    return lambda$13(n, x)
+  }
+});
+lambda$12 = function lambda$(xs, ys) {
+  let scrut, param0, param1, h, t, tmp;
+  scrut = NofibPrelude1.force(xs);
+  if (scrut instanceof NofibPrelude1.LzNil.class) {
+    return NofibPrelude1.force(ys)
+  } else if (scrut instanceof NofibPrelude1.LzCons.class) {
+    param0 = scrut.head;
+    param1 = scrut.tail;
+    h = param0;
+    t = param1;
+    tmp = NofibPrelude1.append_lz_lz(t, ys);
+    return NofibPrelude1.LzCons(h, tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda18 = (undefined, function (xs, ys) {
+  return () => {
+    return lambda$12(xs, ys)
+  }
+});
+lambda$11 = function lambda$(ys, h, t) {
+  let tmp;
+  tmp = NofibPrelude1.append_nl_lz(t, ys);
+  return NofibPrelude1.LzCons(h, tmp)
+};
+lambda17 = (undefined, function (ys, h, t) {
+  return () => {
+    return lambda$11(ys, h, t)
+  }
+});
+lambda$10 = function lambda$(f1, x) {
+  let tmp, tmp1;
+  tmp = runtime.safeCall(f1(x));
+  tmp1 = NofibPrelude1.iterate(f1, tmp);
+  return NofibPrelude1.LzCons(x, tmp1)
+};
+lambda16 = (undefined, function (f1, x) {
+  return () => {
+    return lambda$10(f1, x)
+  }
+});
+lambda$9 = function lambda$(f1, xss, yss) {
+  let scrut, param0, param1, x, xs, scrut1, param01, param11, y, ys, tmp, tmp1;
+  scrut = NofibPrelude1.force(xss);
+  if (scrut instanceof NofibPrelude1.LzCons.class) {
+    param0 = scrut.head;
+    param1 = scrut.tail;
+    x = param0;
+    xs = param1;
+    scrut1 = NofibPrelude1.force(yss);
+    if (scrut1 instanceof NofibPrelude1.LzCons.class) {
+      param01 = scrut1.head;
+      param11 = scrut1.tail;
+      y = param01;
+      ys = param11;
+      tmp = runtime.safeCall(f1(x, y));
+      tmp1 = NofibPrelude1.zipWith_lz_lz(f1, xs, ys);
+      return NofibPrelude1.LzCons(tmp, tmp1)
+    } else {
+      return NofibPrelude1.LzNil
+    }
+  } else {
+    return NofibPrelude1.LzNil
+  }
+};
+lambda15 = (undefined, function (f1, xss, yss) {
+  return () => {
+    return lambda$9(f1, xss, yss)
+  }
+});
+lambda$8 = function lambda$(x, xs, y, ys) {
+  let arr, tmp;
+  arr = [
+    x,
+    y
+  ];
+  tmp = NofibPrelude1.zip_lz_lz(xs, ys);
+  return NofibPrelude1.LzCons(arr, tmp)
+};
+lambda12 = (undefined, function (x, xs, y, ys) {
+  return () => {
+    return lambda$8(x, xs, y, ys)
+  }
+});
+lambda13 = (undefined, function () {
+  return NofibPrelude1.LzNil
+});
+lambda14 = (undefined, function () {
+  return NofibPrelude1.LzNil
+});
+lambda11 = (undefined, function () {
+  return NofibPrelude1.LzNil
+});
+lambda$7 = function lambda$(n, ls) {
+  let scrut, scrut1, param0, param1, h, t, tmp, tmp1;
+  scrut = n > 0;
+  if (scrut === true) {
+    scrut1 = NofibPrelude1.force(ls);
+    if (scrut1 instanceof NofibPrelude1.LzNil.class) {
+      return NofibPrelude1.LzNil
+    } else if (scrut1 instanceof NofibPrelude1.LzCons.class) {
+      param0 = scrut1.head;
+      param1 = scrut1.tail;
+      h = param0;
+      t = param1;
+      tmp = n - 1;
+      tmp1 = NofibPrelude1.take_lz_lz(tmp, t);
+      return NofibPrelude1.LzCons(h, tmp1)
+    } else {
+      return NofibPrelude1.LzNil
+    }
+  } else {
+    return NofibPrelude1.LzNil
+  }
+};
+lambda10 = (undefined, function (n, ls) {
+  return () => {
+    return lambda$7(n, ls)
+  }
+});
+lambda9 = (undefined, function (x, y) {
+  return x == y
+});
+lambda$6 = function lambda$(eq, h, y) {
+  let tmp;
+  tmp = runtime.safeCall(eq(h, y));
+  return Predef.not(tmp)
+};
+lambda8 = (undefined, function (eq, h) {
+  return (y) => {
+    return lambda$6(eq, h, y)
+  }
+});
+lambda$5 = function lambda$(eq, ls) {
+  let scrut, param0, param1, h, t, tmp, tmp1, lambda$this;
+  scrut = NofibPrelude1.force(ls);
+  if (scrut instanceof NofibPrelude1.LzNil.class) {
+    return NofibPrelude1.LzNil
+  } else if (scrut instanceof NofibPrelude1.LzCons.class) {
+    param0 = scrut.head;
+    param1 = scrut.tail;
+    h = param0;
+    t = param1;
+    lambda$this = runtime.safeCall(lambda8(eq, h));
+    tmp = NofibPrelude1.filter_lz(lambda$this, t);
+    tmp1 = NofibPrelude1.nubBy_lz(eq, tmp);
+    return NofibPrelude1.LzCons(h, tmp1)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda7 = (undefined, function (eq, ls) {
+  return () => {
+    return lambda$5(eq, ls)
+  }
+});
+lambda$4 = function lambda$(p, ls) {
+  let scrut, param0, param1, h, t, scrut1, tmp, tmp1;
+  scrut = NofibPrelude1.force(ls);
+  if (scrut instanceof NofibPrelude1.LzNil.class) {
+    return NofibPrelude1.LzNil
+  } else if (scrut instanceof NofibPrelude1.LzCons.class) {
+    param0 = scrut.head;
+    param1 = scrut.tail;
+    h = param0;
+    t = param1;
+    scrut1 = runtime.safeCall(p(h));
+    if (scrut1 === true) {
+      tmp = NofibPrelude1.filter_lz(p, t);
+      return NofibPrelude1.LzCons(h, tmp)
+    } else {
+      tmp1 = NofibPrelude1.filter_lz(p, t);
+      return NofibPrelude1.force(tmp1)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda6 = (undefined, function (p, ls) {
+  return () => {
+    return lambda$4(p, ls)
+  }
+});
+lambda$3 = function lambda$(f1, ls) {
+  let scrut, param0, param1, h, t, tmp, tmp1;
+  scrut = NofibPrelude1.force(ls);
+  if (scrut instanceof NofibPrelude1.LzNil.class) {
+    return NofibPrelude1.LzNil
+  } else if (scrut instanceof NofibPrelude1.LzCons.class) {
+    param0 = scrut.head;
+    param1 = scrut.tail;
+    h = param0;
+    t = param1;
+    tmp = runtime.safeCall(f1(h));
+    tmp1 = NofibPrelude1.map_lz(f1, t);
+    return NofibPrelude1.LzCons(tmp, tmp1)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda5 = (undefined, function (f1, ls) {
+  return () => {
+    return lambda$3(f1, ls)
+  }
+});
+lscomp = function lscomp(ls) {
+  let param0, param1, h, t, param01, param11, hd, tl, arr, tmp;
+  if (ls instanceof NofibPrelude1.Nil.class) {
+    return NofibPrelude1.Nil
+  } else if (ls instanceof NofibPrelude1.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    h = param0;
+    t = param1;
+    if (h instanceof NofibPrelude1.Cons.class) {
+      param01 = h.head;
+      param11 = h.tail;
+      hd = param01;
+      tl = param11;
+      arr = [
+        hd,
+        tl
+      ];
+      tmp = lscomp(t);
+      return NofibPrelude1.Cons(arr, tmp)
+    } else {
+      return lscomp(t)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+combine = function combine(y, h, ys, t) {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude1.Cons(y, h);
+  tmp1 = NofibPrelude1.Cons(ys, t);
+  tmp2 = transpose_inst_0_tsni(tmp1);
+  return NofibPrelude1.Cons(tmp, tmp2)
+};
+f = function f(l1, a, b) {
+  let param0, param1, first1, first0, x, y, t, tmp, tmp1, arr, tmp2, tmp3;
+  if (l1 instanceof NofibPrelude1.Nil.class) {
+    tmp = NofibPrelude1.reverse(a);
+    tmp1 = NofibPrelude1.reverse(b);
+    arr = [
+      tmp,
+      tmp1
+    ];
+    return arr
+  } else if (l1 instanceof NofibPrelude1.Cons.class) {
+    param0 = l1.head;
+    param1 = l1.tail;
+    if (globalThis.Array.isArray(param0) && param0.length === 2) {
+      first0 = param0[0];
+      first1 = param0[1];
+      x = first0;
+      y = first1;
+      t = param1;
+      tmp2 = NofibPrelude1.Cons(x, a);
+      tmp3 = NofibPrelude1.Cons(y, b);
+      return f(t, tmp2, tmp3)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+go = function go(xs, a) {
+  let param0, param1, h, t, tmp;
+  if (xs instanceof NofibPrelude1.Nil.class) {
+    return a
+  } else if (xs instanceof NofibPrelude1.Cons.class) {
+    param0 = xs.head;
+    param1 = xs.tail;
+    h = param0;
+    t = param1;
+    tmp = a + h;
+    return go(t, tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda4 = (undefined, function (x, y) {
+  return x == y
+});
+lambda$2 = function lambda$(eq, acc, y) {
+  return NofibPrelude1.deleteBy(eq, y, acc)
+};
+lambda3 = (undefined, function (eq) {
+  return (acc, y) => {
+    return lambda$2(eq, acc, y)
+  }
+});
+lambda$1 = function lambda$(eq, h, y) {
+  let tmp;
+  tmp = runtime.safeCall(eq(h, y));
+  return Predef.not(tmp)
+};
+lambda2 = (undefined, function (eq, h) {
+  return (y) => {
+    return lambda$1(eq, h, y)
+  }
+});
+lambda1 = (undefined, function (x, y) {
+  let scrut;
+  scrut = x > y;
+  if (scrut === true) {
+    return x
+  } else {
+    return y
+  }
+});
+l = function l(ls, a) {
+  let param0, param1, h, t, tmp;
+  if (ls instanceof NofibPrelude1.Nil.class) {
+    return a
+  } else if (ls instanceof NofibPrelude1.Cons.class) {
+    param0 = ls.head;
+    param1 = ls.tail;
+    h = param0;
+    t = param1;
+    tmp = a + 1;
+    return l(t, tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+r = function r(l$_, l1) {
+  let param0, param1, x, xs, tmp;
+  if (l1 instanceof NofibPrelude1.Cons.class) {
+    param0 = l1.head;
+    param1 = l1.tail;
+    x = param0;
+    xs = param1;
+    tmp = NofibPrelude1.Cons(x, l$_);
+    return r(tmp, xs)
+  } else {
+    return l$_
+  }
+};
+lambda$ = function lambda$(f1, g, x) {
+  let tmp;
+  tmp = runtime.safeCall(g(x));
+  return runtime.safeCall(f1(tmp))
+};
+lambda = (undefined, function (f1, g) {
+  return (x) => {
+    return lambda$(f1, g, x)
+  }
+});
 (class NofibPrelude {
   static {
     NofibPrelude1 = NofibPrelude;
@@ -301,21 +960,15 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       throw new globalThis.Error("match error");
     }
   } 
-  static compose(f, g) {
-    let lambda;
-    lambda = (undefined, function (x2) {
-      let tmp;
-      tmp = runtime.safeCall(g(x2));
-      return runtime.safeCall(f(tmp))
-    });
-    return lambda
+  static compose(f1, g) {
+    return runtime.safeCall(lambda(f1, g))
   } 
   static snd(x2) {
-    let first1, first0, f1, s1;
+    let first1, first0, f2, s1;
     if (globalThis.Array.isArray(x2) && x2.length === 2) {
       first0 = x2[0];
       first1 = x2[1];
-      f1 = first0;
+      f2 = first0;
       s1 = first1;
       return s1
     } else {
@@ -323,30 +976,30 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     }
   } 
   static fst(x3) {
-    let first1, first0, f1, s1;
+    let first1, first0, f2, s1;
     if (globalThis.Array.isArray(x3) && x3.length === 2) {
       first0 = x3[0];
       first1 = x3[1];
-      f1 = first0;
+      f2 = first0;
       s1 = first1;
-      return f1
+      return f2
     } else {
       throw new globalThis.Error("match error");
     }
   } 
-  static until(p, f1, i) {
+  static until(p, f2, i) {
     let scrut, tmp;
     scrut = runtime.safeCall(p(i));
     if (scrut === true) {
       return i
     } else {
-      tmp = runtime.safeCall(f1(i));
-      return NofibPrelude.until(p, f1, tmp)
+      tmp = runtime.safeCall(f2(i));
+      return NofibPrelude.until(p, f2, tmp)
     }
   } 
-  static flip(f2, x4, y) {
+  static flip(f3, x4, y) {
     let tmp;
-    tmp = runtime.safeCall(f2(y));
+    tmp = runtime.safeCall(f3(y));
     return runtime.safeCall(tmp(x4))
   } 
   static power(a, n) {
@@ -403,11 +1056,11 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
   static abs(x5) {
     return runtime.safeCall(globalThis.Math.abs(x5))
   } 
-  static head(l) {
+  static head(l1) {
     let param0, param1, h, t;
-    if (l instanceof NofibPrelude.Cons.class) {
-      param0 = l.head;
-      param1 = l.tail;
+    if (l1 instanceof NofibPrelude.Cons.class) {
+      param0 = l1.head;
+      param1 = l1.tail;
       h = param0;
       t = param1;
       return h
@@ -415,11 +1068,11 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       throw new globalThis.Error("match error");
     }
   } 
-  static tail(l1) {
+  static tail(l2) {
     let param0, param1, h, t;
-    if (l1 instanceof NofibPrelude.Cons.class) {
-      param0 = l1.head;
-      param1 = l1.tail;
+    if (l2 instanceof NofibPrelude.Cons.class) {
+      param0 = l2.head;
+      param1 = l2.tail;
       h = param0;
       t = param1;
       return t
@@ -427,42 +1080,28 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       throw new globalThis.Error("match error");
     }
   } 
-  static while_(p1, f3, x6) {
+  static while_(p1, f4, x6) {
     let scrut, tmp;
     scrut = runtime.safeCall(p1(x6));
     if (scrut === true) {
-      tmp = runtime.safeCall(f3(x6));
-      return NofibPrelude.while_(p1, f3, tmp)
+      tmp = runtime.safeCall(f4(x6));
+      return NofibPrelude.while_(p1, f4, tmp)
     } else {
       return x6
     }
   } 
-  static reverse(l2) {
-    let r;
-    r = function r(l$_, l3) {
-      let param0, param1, x7, xs1, tmp;
-      if (l3 instanceof NofibPrelude.Cons.class) {
-        param0 = l3.head;
-        param1 = l3.tail;
-        x7 = param0;
-        xs1 = param1;
-        tmp = NofibPrelude.Cons(x7, l$_);
-        return r(tmp, xs1)
-      } else {
-        return l$_
-      }
-    };
-    return r(NofibPrelude.Nil, l2)
+  static reverse(l3) {
+    return r(NofibPrelude.Nil, l3)
   } 
-  static map(f4, xs1) {
+  static map(f5, xs1) {
     let param0, param1, x7, xs2, tmp, tmp1;
     if (xs1 instanceof NofibPrelude.Cons.class) {
       param0 = xs1.head;
       param1 = xs1.tail;
       x7 = param0;
       xs2 = param1;
-      tmp = runtime.safeCall(f4(x7));
-      tmp1 = NofibPrelude.map(f4, xs2);
+      tmp = runtime.safeCall(f5(x7));
+      tmp1 = NofibPrelude.map(f5, xs2);
       return NofibPrelude.Cons(tmp, tmp1)
     } else if (xs1 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
@@ -471,23 +1110,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     }
   } 
   static listLen(ls1) {
-    let l3;
-    l3 = function l(ls2, a9) {
-      let param0, param1, h, t, tmp;
-      if (ls2 instanceof NofibPrelude.Nil.class) {
-        return a9
-      } else if (ls2 instanceof NofibPrelude.Cons.class) {
-        param0 = ls2.head;
-        param1 = ls2.tail;
-        h = param0;
-        t = param1;
-        tmp = a9 + 1;
-        return l3(t, tmp)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    };
-    return l3(ls1, 0)
+    return l(ls1, 0)
   } 
   static listEq(xs2, ys1) {
     let param0, param1, hx, tx, param01, param11, hy, ty, scrut;
@@ -520,7 +1143,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       return false
     }
   } 
-  static listEqBy(f5, a9, b8) {
+  static listEqBy(f6, a9, b8) {
     let param0, param1, x7, xs3, param01, param11, y1, ys2, tmp, tmp1;
     if (a9 instanceof NofibPrelude.Nil.class) {
       if (b8 instanceof NofibPrelude.Nil.class) {
@@ -538,8 +1161,8 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
         param11 = b8.tail;
         y1 = param01;
         ys2 = param11;
-        tmp = runtime.safeCall(f5(x7, y1));
-        tmp1 = NofibPrelude.listEqBy(f5, xs3, ys2);
+        tmp = runtime.safeCall(f6(x7, y1));
+        tmp1 = NofibPrelude.listEqBy(f6, xs3, ys2);
         return tmp && tmp1
       } else {
         return false
@@ -732,7 +1355,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       throw new globalThis.Error("match error");
     }
   } 
-  static filter(f6, ls8) {
+  static filter(f7, ls8) {
     let param0, param1, h, t3, scrut, tmp;
     if (ls8 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
@@ -741,12 +1364,12 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = ls8.tail;
       h = param0;
       t3 = param1;
-      scrut = runtime.safeCall(f6(h));
+      scrut = runtime.safeCall(f7(h));
       if (scrut === true) {
-        tmp = NofibPrelude.filter(f6, t3);
+        tmp = NofibPrelude.filter(f7, t3);
         return NofibPrelude.Cons(h, tmp)
       } else {
-        return NofibPrelude.filter(f6, t3)
+        return NofibPrelude.filter(f7, t3)
       }
     } else {
       throw new globalThis.Error("match error");
@@ -789,7 +1412,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       throw new globalThis.Error("match error");
     }
   } 
-  static dropWhile(f7, ls11) {
+  static dropWhile(f8, ls11) {
     let param0, param1, h, t3, scrut;
     if (ls11 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
@@ -798,9 +1421,9 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = ls11.tail;
       h = param0;
       t3 = param1;
-      scrut = runtime.safeCall(f7(h));
+      scrut = runtime.safeCall(f8(h));
       if (scrut === true) {
-        return NofibPrelude.dropWhile(f7, t3)
+        return NofibPrelude.dropWhile(f8, t3)
       } else {
         return NofibPrelude.Cons(h, t3)
       }
@@ -808,7 +1431,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       throw new globalThis.Error("match error");
     }
   } 
-  static foldl(f8, a12, xs6) {
+  static foldl(f9, a12, xs6) {
     let param0, param1, h, t3, tmp;
     if (xs6 instanceof NofibPrelude.Nil.class) {
       return a12
@@ -817,13 +1440,13 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = xs6.tail;
       h = param0;
       t3 = param1;
-      tmp = runtime.safeCall(f8(a12, h));
-      return NofibPrelude.foldl(f8, tmp, t3)
+      tmp = runtime.safeCall(f9(a12, h));
+      return NofibPrelude.foldl(f9, tmp, t3)
     } else {
       throw new globalThis.Error("match error");
     }
   } 
-  static scanl(f9, q, ls12) {
+  static scanl(f10, q, ls12) {
     let param0, param1, x9, xs7, tmp, tmp1;
     if (ls12 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Cons(q, NofibPrelude.Nil)
@@ -832,14 +1455,14 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = ls12.tail;
       x9 = param0;
       xs7 = param1;
-      tmp = runtime.safeCall(f9(q, x9));
-      tmp1 = NofibPrelude.scanl(f9, tmp, xs7);
+      tmp = runtime.safeCall(f10(q, x9));
+      tmp1 = NofibPrelude.scanl(f10, tmp, xs7);
       return NofibPrelude.Cons(q, tmp1)
     } else {
       throw new globalThis.Error("match error");
     }
   } 
-  static scanr(f10, q1, ls13) {
+  static scanr(f11, q1, ls13) {
     let param0, param1, x9, xs7, scrut, param01, param11, q2, t3, tmp, tmp1;
     if (ls13 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Cons(q1, NofibPrelude.Nil)
@@ -848,13 +1471,13 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = ls13.tail;
       x9 = param0;
       xs7 = param1;
-      scrut = NofibPrelude.scanr(f10, q1, xs7);
+      scrut = NofibPrelude.scanr(f11, q1, xs7);
       if (scrut instanceof NofibPrelude.Cons.class) {
         param01 = scrut.head;
         param11 = scrut.tail;
         q2 = param01;
         t3 = param11;
-        tmp = runtime.safeCall(f10(x9, q2));
+        tmp = runtime.safeCall(f11(x9, q2));
         tmp1 = NofibPrelude.Cons(q2, t3);
         return NofibPrelude.Cons(tmp, tmp1)
       } else {
@@ -864,7 +1487,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       throw new globalThis.Error("match error");
     }
   } 
-  static foldr(f11, z, xs7) {
+  static foldr(f12, z, xs7) {
     let param0, param1, h, t3, tmp;
     if (xs7 instanceof NofibPrelude.Nil.class) {
       return z
@@ -873,25 +1496,25 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = xs7.tail;
       h = param0;
       t3 = param1;
-      tmp = NofibPrelude.foldr(f11, z, t3);
-      return runtime.safeCall(f11(h, tmp))
+      tmp = NofibPrelude.foldr(f12, z, t3);
+      return runtime.safeCall(f12(h, tmp))
     } else {
       throw new globalThis.Error("match error");
     }
   } 
-  static foldl1(f12, ls14) {
+  static foldl1(f13, ls14) {
     let param0, param1, x9, xs8;
     if (ls14 instanceof NofibPrelude.Cons.class) {
       param0 = ls14.head;
       param1 = ls14.tail;
       x9 = param0;
       xs8 = param1;
-      return NofibPrelude.foldl(f12, x9, xs8)
+      return NofibPrelude.foldl(f13, x9, xs8)
     } else {
       throw new globalThis.Error("match error");
     }
   } 
-  static foldr1(f13, ls15) {
+  static foldr1(f14, ls15) {
     let param0, param1, x9, xs8, x10, tmp;
     if (ls15 instanceof NofibPrelude.Cons.class) {
       param0 = ls15.head;
@@ -902,28 +1525,18 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       } else {
         x9 = param0;
         xs8 = param1;
-        tmp = NofibPrelude.foldr1(f13, xs8);
-        return runtime.safeCall(f13(x9, tmp))
+        tmp = NofibPrelude.foldr1(f14, xs8);
+        return runtime.safeCall(f14(x9, tmp))
       }
     } else {
       throw new globalThis.Error("match error");
     }
   } 
   static maximum(xs8) {
-    let lambda;
-    lambda = (undefined, function (x9, y1) {
-      let scrut;
-      scrut = x9 > y1;
-      if (scrut === true) {
-        return x9
-      } else {
-        return y1
-      }
-    });
-    return NofibPrelude.foldl1(lambda, xs8)
+    return NofibPrelude.foldl1(lambda1, xs8)
   } 
   static nubBy(eq, ls16) {
-    let param0, param1, h, t3, tmp, tmp1, lambda;
+    let param0, param1, h, t3, tmp, tmp1, lambda$this;
     if (ls16 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (ls16 instanceof NofibPrelude.Cons.class) {
@@ -931,19 +1544,15 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = ls16.tail;
       h = param0;
       t3 = param1;
-      lambda = (undefined, function (y1) {
-        let tmp2;
-        tmp2 = runtime.safeCall(eq(h, y1));
-        return Predef.not(tmp2)
-      });
-      tmp = NofibPrelude.filter(lambda, t3);
+      lambda$this = runtime.safeCall(lambda2(eq, h));
+      tmp = NofibPrelude.filter(lambda$this, t3);
       tmp1 = NofibPrelude.nubBy(eq, tmp);
       return NofibPrelude.Cons(h, tmp1)
     } else {
       throw new globalThis.Error("match error");
     }
   } 
-  static zipWith(f14, xss, yss) {
+  static zipWith(f15, xss, yss) {
     let param0, param1, x9, xs9, param01, param11, y1, ys5, tmp, tmp1;
     if (xss instanceof NofibPrelude.Cons.class) {
       param0 = xss.head;
@@ -955,8 +1564,8 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
         param11 = yss.tail;
         y1 = param01;
         ys5 = param11;
-        tmp = runtime.safeCall(f14(x9, y1));
-        tmp1 = NofibPrelude.zipWith(f14, xs9, ys5);
+        tmp = runtime.safeCall(f15(x9, y1));
+        tmp1 = NofibPrelude.zipWith(f15, xs9, ys5);
         return NofibPrelude.Cons(tmp, tmp1)
       } else {
         return NofibPrelude.Nil
@@ -986,20 +1595,14 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     }
   } 
   static unionBy(eq2, xs9, ys6) {
-    let tmp, tmp1, lambda;
+    let tmp, tmp1, lambda$this;
     tmp = NofibPrelude.nubBy(eq2, ys6);
-    lambda = (undefined, function (acc, y1) {
-      return NofibPrelude.deleteBy(eq2, y1, acc)
-    });
-    tmp1 = NofibPrelude.foldl(lambda, tmp, xs9);
+    lambda$this = runtime.safeCall(lambda3(eq2));
+    tmp1 = NofibPrelude.foldl(lambda$this, tmp, xs9);
     return NofibPrelude.append(xs9, tmp1)
   } 
   static union(xs10, ys7) {
-    let lambda;
-    lambda = (undefined, function (x10, y1) {
-      return x10 == y1
-    });
-    return NofibPrelude.unionBy(lambda, xs10, ys7)
+    return NofibPrelude.unionBy(lambda4, xs10, ys7)
   } 
   static atIndex(i1, ls17) {
     let param0, param1, h, t3, scrut, tmp;
@@ -1020,22 +1623,6 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     }
   } 
   static sum(xs11) {
-    let go;
-    go = function go(xs12, a13) {
-      let param0, param1, h, t3, tmp;
-      if (xs12 instanceof NofibPrelude.Nil.class) {
-        return a13
-      } else if (xs12 instanceof NofibPrelude.Cons.class) {
-        param0 = xs12.head;
-        param1 = xs12.tail;
-        h = param0;
-        t3 = param1;
-        tmp = a13 + h;
-        return go(t3, tmp)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    };
     return go(xs11, 0)
   } 
   static null_(ls18) {
@@ -1056,60 +1643,10 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       return NofibPrelude.Cons(x10, tmp1)
     }
   } 
-  static unzip(l3) {
-    let f15;
-    f15 = function f(l4, a13, b11) {
-      let param0, param1, first1, first0, x11, y1, t3, tmp, tmp1, arr, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
-      if (l4 instanceof NofibPrelude.Nil.class) {
-        tmp = reverse_inst_0_3_tsni(a13);
-        tmp1 = reverse_inst_0_4_tsni(b11);
-        arr = [
-          tmp,
-          tmp1
-        ];
-        return arr
-      } else if (l4 instanceof NofibPrelude.Cons.class) {
-        param0 = l4.head;
-        param1 = l4.tail;
-        if (globalThis.Array.isArray(param0) && param0.length === 2) {
-          first0 = param0[0];
-          first1 = param0[1];
-          x11 = first0;
-          y1 = first1;
-          t3 = param1;
-          _deforest_Cons_head = x11;
-          _deforest_Cons_tail = a13;
-          tmp2 = (r, l$_) => {
-            let param01, param11, x12, xs12, tmp4;
-            param01 = _deforest_Cons_head;
-            param11 = _deforest_Cons_tail;
-            x12 = param01;
-            xs12 = param11;
-            tmp4 = NofibPrelude.Cons(x12, l$_);
-            return r(tmp4, xs12)
-          };
-          _deforest_Cons_head1 = y1;
-          _deforest_Cons_tail1 = b11;
-          tmp3 = (r, l$_) => {
-            let param01, param11, x12, xs12, tmp4;
-            param01 = _deforest_Cons_head1;
-            param11 = _deforest_Cons_tail1;
-            x12 = param01;
-            xs12 = param11;
-            tmp4 = NofibPrelude.Cons(x12, l$_);
-            return r(tmp4, xs12)
-          };
-          return f15(t3, tmp2, tmp3)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    };
-    return f15(l3, (r, l$_) => {
+  static unzip(l4) {
+    return f_inst_4_2_tsni(l4, (l$_) => {
       return l$_
-    }, (r, l$_) => {
+    }, (l$_) => {
       return l$_
     })
   } 
@@ -1148,92 +1685,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     }
   } 
   static transpose(xss1) {
-    let lscomp, combine, param0, param1, param01, param11, x11, xs13, xss2, scrut, xss3, tmp;
-    lscomp = function lscomp(ls19) {
-      let param02, param12, h, t3, param03, param13, hd, tl, arr, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-      if (ls19 instanceof NofibPrelude.Nil.class) {
-        return (f15, a13, b11) => {
-          let tmp2, tmp3, arr1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
-          tmp2 = reverse_inst_1_2_3_tsni(a13);
-          tmp3 = reverse_inst_1_2_4_tsni(b11);
-          _deforest_Deforest_Arr_2_01 = tmp2;
-          _deforest_Deforest_Arr_2_11 = tmp3;
-          arr1 = (combine1, x12, xs14) => {
-            let first1, first0, hds, tls;
-            first0 = _deforest_Deforest_Arr_2_01;
-            first1 = _deforest_Deforest_Arr_2_11;
-            hds = first0;
-            tls = first1;
-            return combine1(x12, hds, xs14, tls)
-          };
-          return arr1
-        }
-      } else if (ls19 instanceof NofibPrelude.Cons.class) {
-        param02 = ls19.head;
-        param12 = ls19.tail;
-        h = param02;
-        t3 = param12;
-        if (h instanceof NofibPrelude.Cons.class) {
-          param03 = h.head;
-          param13 = h.tail;
-          hd = param03;
-          tl = param13;
-          _deforest_Deforest_Arr_2_0 = hd;
-          _deforest_Deforest_Arr_2_1 = tl;
-          arr = (f15, a13, b11, param14) => {
-            let first1, first0, x12, y1, t4, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2;
-            first0 = _deforest_Deforest_Arr_2_0;
-            first1 = _deforest_Deforest_Arr_2_1;
-            x12 = first0;
-            y1 = first1;
-            t4 = param14;
-            _deforest_Cons_head2 = x12;
-            _deforest_Cons_tail2 = a13;
-            tmp2 = (r, l$_) => {
-              let param04, param15, x13, xs14, tmp4;
-              param04 = _deforest_Cons_head2;
-              param15 = _deforest_Cons_tail2;
-              x13 = param04;
-              xs14 = param15;
-              tmp4 = NofibPrelude.Cons(x13, l$_);
-              return r(tmp4, xs14)
-            };
-            _deforest_Cons_head1 = y1;
-            _deforest_Cons_tail1 = b11;
-            tmp3 = (r, l$_) => {
-              let param04, param15, x13, xs14, tmp4;
-              param04 = _deforest_Cons_head1;
-              param15 = _deforest_Cons_tail1;
-              x13 = param04;
-              xs14 = param15;
-              tmp4 = NofibPrelude.Cons(x13, l$_);
-              return r(tmp4, xs14)
-            };
-            return f15(t4, tmp2, tmp3)
-          };
-          tmp1 = lscomp(t3);
-          _deforest_Cons_head = arr;
-          _deforest_Cons_tail = tmp1;
-          return (f15, a13, b11) => {
-            let param04, param14;
-            param04 = _deforest_Cons_head;
-            param14 = _deforest_Cons_tail;
-            return runtime.safeCall(param04(f15, a13, b11, param14))
-          }
-        } else {
-          return lscomp(t3)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    };
-    combine = function combine(y1, h, ys9, t3) {
-      let tmp1, tmp2, tmp3;
-      tmp1 = NofibPrelude.Cons(y1, h);
-      tmp2 = NofibPrelude.Cons(ys9, t3);
-      tmp3 = NofibPrelude.transpose(tmp2);
-      return NofibPrelude.Cons(tmp1, tmp3)
-    };
+    let param0, param1, param01, param11, x11, xs13, xss2, scrut, xss3, tmp;
     if (xss1 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (xss1 instanceof NofibPrelude.Cons.class) {
@@ -1248,9 +1700,9 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
         x11 = param01;
         xs13 = param11;
         xss2 = param1;
-        tmp = lscomp(xss2);
-        scrut = unzip_inst_1_2_tsni(tmp);
-        return runtime.safeCall(scrut(combine, x11, xs13))
+        tmp = lscomp_inst_5_3_tsni(xss2);
+        scrut = unzip_inst_5_1_tsni(tmp);
+        return runtime.safeCall(scrut(x11, xs13))
       } else {
         throw new globalThis.Error("match error");
       }
@@ -1300,7 +1752,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       throw new globalThis.Error("match error");
     }
   } 
-  static flatMap(f15, ls20) {
+  static flatMap(f16, ls20) {
     let param0, param1, h, t3, tmp, tmp1;
     if (ls20 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
@@ -1309,95 +1761,30 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = ls20.tail;
       h = param0;
       t3 = param1;
-      tmp = runtime.safeCall(f15(h));
-      tmp1 = NofibPrelude.flatMap(f15, t3);
+      tmp = runtime.safeCall(f16(h));
+      tmp1 = NofibPrelude.flatMap(f16, t3);
       return NofibPrelude.append(tmp, tmp1)
     } else {
       throw new globalThis.Error("match error");
     }
   } 
-  static map_lz(f16, ls21) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, h, t3, tmp1, tmp2;
-      scrut = NofibPrelude.force(ls21);
-      if (scrut instanceof NofibPrelude.LzNil.class) {
-        return NofibPrelude.LzNil
-      } else if (scrut instanceof NofibPrelude.LzCons.class) {
-        param0 = scrut.head;
-        param1 = scrut.tail;
-        h = param0;
-        t3 = param1;
-        tmp1 = runtime.safeCall(f16(h));
-        tmp2 = NofibPrelude.map_lz(f16, t3);
-        return NofibPrelude.LzCons(tmp1, tmp2)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+  static map_lz(f17, ls21) {
+    let tmp;
+    tmp = runtime.safeCall(lambda5(f17, ls21));
     return NofibPrelude.lazy(tmp)
   } 
   static filter_lz(p4, ls22) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, h, t3, scrut1, tmp1, tmp2;
-      scrut = NofibPrelude.force(ls22);
-      if (scrut instanceof NofibPrelude.LzNil.class) {
-        return NofibPrelude.LzNil
-      } else if (scrut instanceof NofibPrelude.LzCons.class) {
-        param0 = scrut.head;
-        param1 = scrut.tail;
-        h = param0;
-        t3 = param1;
-        scrut1 = runtime.safeCall(p4(h));
-        if (scrut1 === true) {
-          tmp1 = NofibPrelude.filter_lz(p4, t3);
-          return NofibPrelude.LzCons(h, tmp1)
-        } else {
-          tmp2 = NofibPrelude.filter_lz(p4, t3);
-          return NofibPrelude.force(tmp2)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda6(p4, ls22));
     return runtime.safeCall(NofibPrelude.Lazy(tmp))
   } 
   static nubBy_lz(eq3, ls23) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, h, t3, tmp1, tmp2, lambda1;
-      scrut = NofibPrelude.force(ls23);
-      if (scrut instanceof NofibPrelude.LzNil.class) {
-        return NofibPrelude.LzNil
-      } else if (scrut instanceof NofibPrelude.LzCons.class) {
-        param0 = scrut.head;
-        param1 = scrut.tail;
-        h = param0;
-        t3 = param1;
-        lambda1 = (undefined, function (y1) {
-          let tmp3;
-          tmp3 = runtime.safeCall(eq3(h, y1));
-          return Predef.not(tmp3)
-        });
-        tmp1 = NofibPrelude.filter_lz(lambda1, t3);
-        tmp2 = NofibPrelude.nubBy_lz(eq3, tmp1);
-        return NofibPrelude.LzCons(h, tmp2)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda7(eq3, ls23));
     return runtime.safeCall(NofibPrelude.Lazy(tmp))
   } 
   static nub_lz(ls24) {
-    let lambda;
-    lambda = (undefined, function (x11, y1) {
-      return x11 == y1
-    });
-    return NofibPrelude.nubBy_lz(lambda, ls24)
+    return NofibPrelude.nubBy_lz(lambda9, ls24)
   } 
   static take_lz(n5, ls25) {
     let scrut, scrut1, param0, param1, h, t3, tmp, tmp1;
@@ -1422,44 +1809,19 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     }
   } 
   static take_lz_lz(n6, ls26) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, scrut1, param0, param1, h, t3, tmp1, tmp2;
-      scrut = n6 > 0;
-      if (scrut === true) {
-        scrut1 = NofibPrelude.force(ls26);
-        if (scrut1 instanceof NofibPrelude.LzNil.class) {
-          return NofibPrelude.LzNil
-        } else if (scrut1 instanceof NofibPrelude.LzCons.class) {
-          param0 = scrut1.head;
-          param1 = scrut1.tail;
-          h = param0;
-          t3 = param1;
-          tmp1 = n6 - 1;
-          tmp2 = NofibPrelude.take_lz_lz(tmp1, t3);
-          return NofibPrelude.LzCons(h, tmp2)
-        } else {
-          return NofibPrelude.LzNil
-        }
-      } else {
-        return NofibPrelude.LzNil
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda10(n6, ls26));
     return NofibPrelude.lazy(tmp)
   } 
   static drop_lz(n7, ls27) {
-    let scrut, param0, param1, h, t3, scrut1, tmp, lambda;
+    let scrut, param0, param1, h, t3, scrut1, tmp;
     scrut1 = n7 <= 0;
     if (scrut1 === true) {
       return ls27
     } else {
       scrut = NofibPrelude.force(ls27);
       if (scrut instanceof NofibPrelude.LzNil.class) {
-        lambda = (undefined, function () {
-          return NofibPrelude.LzNil
-        });
-        return NofibPrelude.lazy(lambda)
+        return NofibPrelude.lazy(lambda11)
       } else if (scrut instanceof NofibPrelude.LzCons.class) {
         param0 = scrut.head;
         param1 = scrut.tail;
@@ -1509,7 +1871,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     }
   } 
   static zip_lz_lz(xs14, ys10) {
-    let scrut, param0, param1, x11, xs15, scrut1, param01, param11, y1, ys11, tmp, lambda, lambda1, lambda2;
+    let scrut, param0, param1, x11, xs15, scrut1, param01, param11, y1, ys11, tmp;
     scrut = NofibPrelude.force(xs14);
     if (scrut instanceof NofibPrelude.LzCons.class) {
       param0 = scrut.head;
@@ -1522,60 +1884,21 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
         param11 = scrut1.tail;
         y1 = param01;
         ys11 = param11;
-        lambda = (undefined, function () {
-          let arr, tmp1;
-          arr = [
-            x11,
-            y1
-          ];
-          tmp1 = NofibPrelude.zip_lz_lz(xs15, ys11);
-          return NofibPrelude.LzCons(arr, tmp1)
-        });
-        tmp = lambda;
+        tmp = runtime.safeCall(lambda12(x11, xs15, y1, ys11));
         return NofibPrelude.lazy(tmp)
       } else {
-        lambda1 = (undefined, function () {
-          return NofibPrelude.LzNil
-        });
-        return NofibPrelude.lazy(lambda1)
+        return NofibPrelude.lazy(lambda13)
       }
     } else {
-      lambda2 = (undefined, function () {
-        return NofibPrelude.LzNil
-      });
-      return NofibPrelude.lazy(lambda2)
+      return NofibPrelude.lazy(lambda14)
     }
   } 
-  static zipWith_lz_lz(f17, xss2, yss1) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, x11, xs15, scrut1, param01, param11, y1, ys11, tmp1, tmp2;
-      scrut = NofibPrelude.force(xss2);
-      if (scrut instanceof NofibPrelude.LzCons.class) {
-        param0 = scrut.head;
-        param1 = scrut.tail;
-        x11 = param0;
-        xs15 = param1;
-        scrut1 = NofibPrelude.force(yss1);
-        if (scrut1 instanceof NofibPrelude.LzCons.class) {
-          param01 = scrut1.head;
-          param11 = scrut1.tail;
-          y1 = param01;
-          ys11 = param11;
-          tmp1 = runtime.safeCall(f17(x11, y1));
-          tmp2 = NofibPrelude.zipWith_lz_lz(f17, xs15, ys11);
-          return NofibPrelude.LzCons(tmp1, tmp2)
-        } else {
-          return NofibPrelude.LzNil
-        }
-      } else {
-        return NofibPrelude.LzNil
-      }
-    });
-    tmp = lambda;
+  static zipWith_lz_lz(f18, xss2, yss1) {
+    let tmp;
+    tmp = runtime.safeCall(lambda15(f18, xss2, yss1));
     return NofibPrelude.lazy(tmp)
   } 
-  static zipWith_lz_nl(f18, xss3, yss2) {
+  static zipWith_lz_nl(f19, xss3, yss2) {
     let scrut, param0, param1, x11, xs15, param01, param11, y1, ys11, tmp, tmp1;
     scrut = NofibPrelude.force(xss3);
     if (scrut instanceof NofibPrelude.LzCons.class) {
@@ -1588,8 +1911,8 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
         param11 = yss2.tail;
         y1 = param01;
         ys11 = param11;
-        tmp = runtime.safeCall(f18(x11, y1));
-        tmp1 = NofibPrelude.zipWith_lz_nl(f18, xs15, ys11);
+        tmp = runtime.safeCall(f19(x11, y1));
+        tmp1 = NofibPrelude.zipWith_lz_nl(f19, xs15, ys11);
         return NofibPrelude.Cons(tmp, tmp1)
       } else {
         return NofibPrelude.Nil
@@ -1598,19 +1921,13 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       return NofibPrelude.Nil
     }
   } 
-  static iterate(f19, x11) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let tmp1, tmp2;
-      tmp1 = runtime.safeCall(f19(x11));
-      tmp2 = NofibPrelude.iterate(f19, tmp1);
-      return NofibPrelude.LzCons(x11, tmp2)
-    });
-    tmp = lambda;
+  static iterate(f20, x11) {
+    let tmp;
+    tmp = runtime.safeCall(lambda16(f20, x11));
     return NofibPrelude.lazy(tmp)
   } 
   static append_nl_lz(xs15, ys11) {
-    let param0, param1, h, t3, lambda;
+    let param0, param1, h, t3, lambda$this;
     if (xs15 instanceof NofibPrelude.Nil.class) {
       return ys11
     } else if (xs15 instanceof NofibPrelude.Cons.class) {
@@ -1618,64 +1935,31 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
       param1 = xs15.tail;
       h = param0;
       t3 = param1;
-      lambda = (undefined, function () {
-        let tmp;
-        tmp = NofibPrelude.append_nl_lz(t3, ys11);
-        return NofibPrelude.LzCons(h, tmp)
-      });
-      return NofibPrelude.lazy(lambda)
+      lambda$this = runtime.safeCall(lambda17(ys11, h, t3));
+      return NofibPrelude.lazy(lambda$this)
     } else {
       throw new globalThis.Error("match error");
     }
   } 
   static append_lz_lz(xs16, ys12) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, h, t3, tmp1;
-      scrut = NofibPrelude.force(xs16);
-      if (scrut instanceof NofibPrelude.LzNil.class) {
-        return NofibPrelude.force(ys12)
-      } else if (scrut instanceof NofibPrelude.LzCons.class) {
-        param0 = scrut.head;
-        param1 = scrut.tail;
-        h = param0;
-        t3 = param1;
-        tmp1 = NofibPrelude.append_lz_lz(t3, ys12);
-        return NofibPrelude.LzCons(h, tmp1)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda18(xs16, ys12));
     return NofibPrelude.lazy(tmp)
   } 
   static replicate_lz(n9, x12) {
-    let scrut, lambda, lambda1;
+    let scrut, lambda$this;
     scrut = n9 == 0;
     if (scrut === true) {
-      lambda = (undefined, function () {
-        return NofibPrelude.LzNil
-      });
-      return NofibPrelude.lazy(lambda)
+      return NofibPrelude.lazy(lambda19)
     } else {
-      lambda1 = (undefined, function () {
-        let tmp, tmp1;
-        tmp = n9 - 1;
-        tmp1 = NofibPrelude.replicate_lz(tmp, x12);
-        return NofibPrelude.LzCons(x12, tmp1)
-      });
-      return NofibPrelude.lazy(lambda1)
+      lambda$this = runtime.safeCall(lambda20(n9, x12));
+      return NofibPrelude.lazy(lambda$this)
     }
   } 
   static enumFrom(a13) {
-    let lambda;
-    lambda = (undefined, function () {
-      let tmp, tmp1;
-      tmp = a13 + 1;
-      tmp1 = NofibPrelude.enumFrom(tmp);
-      return NofibPrelude.LzCons(a13, tmp1)
-    });
-    return NofibPrelude.lazy(lambda)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda21(a13));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static head_lz(ls29) {
     let scrut, param0, param1, h, t3;
@@ -1691,13 +1975,9 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     }
   } 
   static repeat(x13) {
-    let lambda;
-    lambda = (undefined, function () {
-      let tmp;
-      tmp = NofibPrelude.repeat(x13);
-      return NofibPrelude.LzCons(x13, tmp)
-    });
-    return NofibPrelude.lazy(lambda)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda22(x13));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static stringOfFloat(x14) {
     return x14 + ""
@@ -1742,20 +2022,7 @@ reverse_inst_1_2_3_tsni = function reverse_inst_1_2_3_tsni(l) {
     return runtime.safeCall(x22.charCodeAt(0))
   } 
   static nofibStringToList(s1) {
-    let go;
-    go = function go(i2) {
-      let scrut, tmp, tmp1, tmp2;
-      scrut = i2 < s1.length;
-      if (scrut === true) {
-        tmp = runtime.safeCall(s1.charAt(i2));
-        tmp1 = i2 + 1;
-        tmp2 = go(tmp1);
-        return NofibPrelude.Cons(tmp, tmp2)
-      } else {
-        return NofibPrelude.Nil
-      }
-    };
-    return go(0)
+    return go$(s1, 0)
   } 
   static nofibListToString(ls31) {
     let param0, param1, h, t3, tmp;

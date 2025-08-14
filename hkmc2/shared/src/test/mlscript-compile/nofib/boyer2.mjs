@@ -2,7 +2,7 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let boyer21, makelemmas_inst_0_tsni, strToToken_inst_0_1_tsni, getToken_inst_0_1_2_tsni, strToToken_inst_3_tsni, getToken_inst_3_2_tsni, getToken_inst_5_2_tsni, strToToken_inst_6_1_tsni, getToken_inst_6_1_2_tsni, strToToken_inst_7_8_tsni, getToken_inst_7_8_2_tsni, subterm_inst_9_10_tsni, strToToken_inst_9_10_8_tsni, getToken_inst_9_10_8_2_tsni, teststatement_inst_11_12_tsni, subterm_inst_11_12_10_tsni, strToToken_inst_11_12_10_8_tsni, getToken_inst_11_12_10_8_2_tsni, testresult_inst_13_14_tsni, teststatement_inst_13_14_12_tsni, subterm_inst_13_14_12_10_tsni, strToToken_inst_13_14_12_10_8_tsni, getToken_inst_13_14_12_10_8_2_tsni, testBoyer2_nofib_inst_15_16_tsni, testresult_inst_15_16_14_tsni, teststatement_inst_15_16_14_12_tsni, subterm_inst_15_16_14_12_10_tsni, strToToken_inst_15_16_14_12_10_8_tsni, getToken_inst_15_16_14_12_10_8_2_tsni, addlemmalst_inst_17_tsni, truep_inst_4_18_tsni, truep_inst_4_19_tsni, falsep_inst_4_20_tsni, truep_inst_4_21_tsni, falsep_inst_4_22_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni, match_rules_arm_Cons_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_tsni, match_scrut_arm_Deforest_Arr_2_inst_5_tsni, match_scrut_arm_Deforest_Arr_2_inst_6_1_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_9_10_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_12_10_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_13_14_12_10_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_15_16_14_12_10_8_tsni;
+let boyer21, lambda, lambda1, lambda2, lambda3, makelemmas_inst_0_tsni, strToToken_inst_0_1_tsni, getToken_inst_0_1_2_tsni, strToToken_inst_3_tsni, getToken_inst_3_2_tsni, getToken_inst_5_2_tsni, strToToken_inst_6_1_tsni, getToken_inst_6_1_2_tsni, strToToken_inst_7_8_tsni, getToken_inst_7_8_2_tsni, subterm_inst_9_10_tsni, strToToken_inst_9_10_8_tsni, getToken_inst_9_10_8_2_tsni, teststatement_inst_11_12_tsni, subterm_inst_11_12_10_tsni, strToToken_inst_11_12_10_8_tsni, getToken_inst_11_12_10_8_2_tsni, testresult_inst_13_14_tsni, teststatement_inst_13_14_12_tsni, subterm_inst_13_14_12_10_tsni, strToToken_inst_13_14_12_10_8_tsni, getToken_inst_13_14_12_10_8_2_tsni, testBoyer2_nofib_inst_15_16_tsni, testresult_inst_15_16_14_tsni, teststatement_inst_15_16_14_12_tsni, subterm_inst_15_16_14_12_10_tsni, strToToken_inst_15_16_14_12_10_8_tsni, getToken_inst_15_16_14_12_10_8_2_tsni, addlemmalst_inst_17_tsni, truep_inst_4_18_tsni, truep_inst_4_19_tsni, falsep_inst_4_20_tsni, truep_inst_4_21_tsni, falsep_inst_4_22_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni, match_rules_arm_Cons_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_tsni, match_scrut_arm_Deforest_Arr_2_inst_5_tsni, match_scrut_arm_Deforest_Arr_2_inst_6_1_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_9_10_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_12_10_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_13_14_12_10_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_15_16_14_12_10_8_tsni;
 match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni(_deforest_Deforest_Arr_2_0_inst_0_1_tsni, _deforest_Deforest_Arr_2_1_inst_0_1_tsni) {
   let first1, first0, a, b, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_0_1_tsni;
@@ -752,6 +752,18 @@ truep_inst_4_21_tsni = function truep_inst_4_21_tsni(term_l) {
 falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
   return runtime.safeCall(term_l())
 };
+lambda2 = (undefined, function (x, y) {
+  return x < y
+});
+lambda3 = (undefined, function (x, y) {
+  return x > y
+});
+lambda = (undefined, function (x, y) {
+  return x < y
+});
+lambda1 = (undefined, function (x, y) {
+  return x > y
+});
 (class boyer2 {
   static {
     boyer21 = boyer2;
@@ -2749,7 +2761,7 @@ falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
     }
   } 
   static addtoLUT(k_l_lut) {
-    let first2, first1, first0, k, l, param0, first21, first11, first01, left, first12, first02, k1, kl, right, scrut, scrut1, k2, l1, tmp, arr, arr1, tmp1, arr2, arr3, arr4, tmp2, arr5, arr6, arr7, arr8, tmp3, arr9, lambda, lambda1;
+    let first2, first1, first0, k, l, param0, first21, first11, first01, left, first12, first02, k1, kl, right, scrut, scrut1, k2, l1, tmp, arr, arr1, tmp1, arr2, arr3, arr4, tmp2, arr5, arr6, arr7, arr8, tmp3, arr9;
     if (globalThis.Array.isArray(k_l_lut) && k_l_lut.length === 3) {
       first0 = k_l_lut[0];
       first1 = k_l_lut[1];
@@ -2797,12 +2809,6 @@ falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
               ];
               return runtime.safeCall(boyer2.Node(arr3))
             } else {
-              lambda = (undefined, function (x8, y1) {
-                return x8 < y1
-              });
-              lambda1 = (undefined, function (x8, y1) {
-                return x8 > y1
-              });
               scrut = NofibPrelude.ltList(k, k1, lambda, lambda1);
               if (scrut === true) {
                 arr4 = [
@@ -2854,7 +2860,7 @@ falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
     }
   } 
   static getLUT(t_lut) {
-    let first1, first0, t1, param0, first2, first11, first01, left, first12, first02, k, kl, right, scrut, scrut1, t2, arr, arr1, lambda, lambda1;
+    let first1, first0, t1, param0, first2, first11, first01, left, first12, first02, k, kl, right, scrut, scrut1, t2, arr, arr1;
     if (globalThis.Array.isArray(t_lut) && t_lut.length === 2) {
       first0 = t_lut[0];
       first1 = t_lut[1];
@@ -2879,13 +2885,7 @@ falsep_inst_4_22_tsni = function falsep_inst_4_22_tsni(term_l) {
             if (scrut1 === true) {
               return kl
             } else {
-              lambda = (undefined, function (x8, y1) {
-                return x8 < y1
-              });
-              lambda1 = (undefined, function (x8, y1) {
-                return x8 > y1
-              });
-              scrut = NofibPrelude.ltList(t1, k, lambda, lambda1);
+              scrut = NofibPrelude.ltList(t1, k, lambda2, lambda3);
               if (scrut === true) {
                 arr = [
                   t1,

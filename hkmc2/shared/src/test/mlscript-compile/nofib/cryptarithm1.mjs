@@ -1,11 +1,14 @@
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
-let cryptarithm11, enumFromTo_inst_0_1_tsni, take_inst_0_2_tsni, enumFromTo_inst_0_3_tsni, testCryptarithm_nofib_inst_4_5_tsni, enumFromTo_inst_4_5_3_tsni, take_inst_4_5_2_tsni, enumFromTo_inst_4_5_1_tsni, permutations_inst_0_6_tsni, map_inst_0_7_tsni, map_inst_4_5_7_tsni, permutations_inst_4_5_6_tsni, match_ls_arm_Nil_inst_0_6_tsni, match_ls_arm_Nil_inst_4_5_6_tsni;
-match_ls_arm_Nil_inst_0_6_tsni = function match_ls_arm_Nil_inst_0_6_tsni() {
+let lscomp, lscomp2, lscomp1, cryptarithm11, lambda, lscomp$, lscomp1$, lscomp2$, enumFromTo_inst_0_1_tsni, take_inst_0_2_tsni, lambda_inst_3_4_tsni, take_inst_3_4_2_tsni, enumFromTo_inst_3_4_1_tsni, enumFromTo_inst_3_5_tsni, testCryptarithm_nofib_inst_6_7_tsni, enumFromTo_inst_6_7_5_tsni, lambda_inst_6_7_4_tsni, enumFromTo_inst_6_7_4_1_tsni, take_inst_6_7_4_2_tsni, permutations_inst_0_8_tsni, permutations_inst_3_4_8_tsni, map_inst_3_9_tsni, map_inst_6_7_9_tsni, permutations_inst_6_7_4_8_tsni, match_ls_arm_Nil_inst_0_8_tsni, match_ls_arm_Nil_inst_3_4_8_tsni, match_ls_arm_Nil_inst_6_7_4_8_tsni;
+match_ls_arm_Nil_inst_0_8_tsni = function match_ls_arm_Nil_inst_0_8_tsni() {
   return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
 };
-match_ls_arm_Nil_inst_4_5_6_tsni = function match_ls_arm_Nil_inst_4_5_6_tsni() {
+match_ls_arm_Nil_inst_3_4_8_tsni = function match_ls_arm_Nil_inst_3_4_8_tsni() {
+  return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
+};
+match_ls_arm_Nil_inst_6_7_4_8_tsni = function match_ls_arm_Nil_inst_6_7_4_8_tsni() {
   return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
 };
 enumFromTo_inst_0_1_tsni = function enumFromTo_inst_0_1_tsni(a, b) {
@@ -25,7 +28,7 @@ enumFromTo_inst_0_1_tsni = function enumFromTo_inst_0_1_tsni(a, b) {
       scrut1 = n <= 0;
       if (scrut1 === true) {
         return () => {
-          return match_ls_arm_Nil_inst_0_6_tsni()
+          return match_ls_arm_Nil_inst_0_8_tsni()
         }
       } else {
         tmp2 = n - 1;
@@ -33,50 +36,20 @@ enumFromTo_inst_0_1_tsni = function enumFromTo_inst_0_1_tsni(a, b) {
         _deforest_Cons_head1 = h;
         _deforest_Cons_tail1 = tmp3;
         return () => {
-          let lscomp1, param01, param11, j, js, tmp4;
+          let param01, param11, j, js, tmp4;
           param01 = _deforest_Cons_head1;
           param11 = _deforest_Cons_tail1;
           j = param01;
           js = param11;
-          lscomp1 = function lscomp1(p1) {
-            let lscomp2, param02, param12, pjs, t1, tmp5;
-            if (p1 instanceof NofibPrelude.Nil.class) {
-              return NofibPrelude.Nil
-            } else if (p1 instanceof NofibPrelude.Cons.class) {
-              param02 = p1.head;
-              param12 = p1.tail;
-              pjs = param02;
-              t1 = param12;
-              lscomp2 = function lscomp2(p2) {
-                let param03, param13, r, t2, tmp6;
-                if (p2 instanceof NofibPrelude.Nil.class) {
-                  return lscomp1(t1)
-                } else if (p2 instanceof NofibPrelude.Cons.class) {
-                  param03 = p2.head;
-                  param13 = p2.tail;
-                  r = param03;
-                  t2 = param13;
-                  tmp6 = lscomp2(t2);
-                  return NofibPrelude.Cons(r, tmp6)
-                } else {
-                  throw new globalThis.Error("match error");
-                }
-              };
-              tmp5 = cryptarithm1.addj(j, pjs);
-              return lscomp2(tmp5)
-            } else {
-              throw new globalThis.Error("match error");
-            }
-          };
-          tmp4 = permutations_inst_0_6_tsni(js);
-          return lscomp1(tmp4)
+          tmp4 = permutations_inst_0_8_tsni(js);
+          return lscomp1$(j, tmp4)
         }
       }
     }
   } else {
     return (n) => {
       return () => {
-        return match_ls_arm_Nil_inst_0_6_tsni()
+        return match_ls_arm_Nil_inst_0_8_tsni()
       }
     }
   }
@@ -84,78 +57,24 @@ enumFromTo_inst_0_1_tsni = function enumFromTo_inst_0_1_tsni(a, b) {
 take_inst_0_2_tsni = function take_inst_0_2_tsni(n, ls) {
   return runtime.safeCall(ls(n))
 };
-enumFromTo_inst_0_3_tsni = function enumFromTo_inst_0_3_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  scrut = a <= b;
-  if (scrut === true) {
-    tmp = a + 1;
-    tmp1 = enumFromTo_inst_0_3_tsni(tmp, b);
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = tmp1;
-    return (f) => {
-      let param0, param1, x, xs, tmp2, tmp3;
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
-      x = param0;
-      xs = param1;
-      tmp2 = runtime.safeCall(f(x));
-      tmp3 = map_inst_0_7_tsni(f, xs);
-      return NofibPrelude.Cons(tmp2, tmp3)
-    }
-  } else {
-    return (f) => {
-      return NofibPrelude.Nil
-    }
-  }
-};
-testCryptarithm_nofib_inst_4_5_tsni = function testCryptarithm_nofib_inst_4_5_tsni(n) {
-  let tmp, tmp1, lambda;
-  lambda = (undefined, function (i) {
-    let p0, tmp2, tmp3, tmp4, tmp5;
-    tmp2 = 9 + i;
-    tmp3 = enumFromTo_inst_4_5_1_tsni(0, tmp2);
-    tmp4 = take_inst_4_5_2_tsni(10, tmp3);
-    p0 = tmp4;
-    tmp5 = permutations_inst_4_5_6_tsni(p0);
-    return NofibPrelude.filter(cryptarithm1.condition, tmp5)
-  });
-  tmp = lambda;
-  tmp1 = enumFromTo_inst_4_5_3_tsni(1, n);
-  return map_inst_4_5_7_tsni(tmp, tmp1)
-};
-enumFromTo_inst_4_5_3_tsni = function enumFromTo_inst_4_5_3_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  scrut = a <= b;
-  if (scrut === true) {
-    tmp = a + 1;
-    tmp1 = enumFromTo_inst_4_5_3_tsni(tmp, b);
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = tmp1;
-    return (f) => {
-      let param0, param1, x, xs, tmp2, tmp3;
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
-      x = param0;
-      xs = param1;
-      tmp2 = runtime.safeCall(f(x));
-      tmp3 = map_inst_4_5_7_tsni(f, xs);
-      return NofibPrelude.Cons(tmp2, tmp3)
-    }
-  } else {
-    return (f) => {
-      return NofibPrelude.Nil
-    }
-  }
-};
-take_inst_4_5_2_tsni = function take_inst_4_5_2_tsni(n, ls) {
+lambda_inst_3_4_tsni = (undefined, function (i) {
+  let p0, tmp, tmp1, tmp2, tmp3;
+  tmp = 9 + i;
+  tmp1 = enumFromTo_inst_3_4_1_tsni(0, tmp);
+  tmp2 = take_inst_3_4_2_tsni(10, tmp1);
+  p0 = tmp2;
+  tmp3 = permutations_inst_3_4_8_tsni(p0);
+  return NofibPrelude.filter(cryptarithm11.condition, tmp3)
+});
+take_inst_3_4_2_tsni = function take_inst_3_4_2_tsni(n, ls) {
   return runtime.safeCall(ls(n))
 };
-enumFromTo_inst_4_5_1_tsni = function enumFromTo_inst_4_5_1_tsni(a, b) {
+enumFromTo_inst_3_4_1_tsni = function enumFromTo_inst_3_4_1_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   scrut = a <= b;
   if (scrut === true) {
     tmp = a + 1;
-    tmp1 = enumFromTo_inst_4_5_1_tsni(tmp, b);
+    tmp1 = enumFromTo_inst_3_4_1_tsni(tmp, b);
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (n) => {
@@ -167,73 +86,225 @@ enumFromTo_inst_4_5_1_tsni = function enumFromTo_inst_4_5_1_tsni(a, b) {
       scrut1 = n <= 0;
       if (scrut1 === true) {
         return () => {
-          return match_ls_arm_Nil_inst_4_5_6_tsni()
+          return match_ls_arm_Nil_inst_3_4_8_tsni()
         }
       } else {
         tmp2 = n - 1;
-        tmp3 = take_inst_4_5_2_tsni(tmp2, t);
+        tmp3 = take_inst_3_4_2_tsni(tmp2, t);
         _deforest_Cons_head1 = h;
         _deforest_Cons_tail1 = tmp3;
         return () => {
-          let lscomp1, param01, param11, j, js, tmp4;
+          let param01, param11, j, js, tmp4;
           param01 = _deforest_Cons_head1;
           param11 = _deforest_Cons_tail1;
           j = param01;
           js = param11;
-          lscomp1 = function lscomp1(p1) {
-            let lscomp2, param02, param12, pjs, t1, tmp5;
-            if (p1 instanceof NofibPrelude.Nil.class) {
-              return NofibPrelude.Nil
-            } else if (p1 instanceof NofibPrelude.Cons.class) {
-              param02 = p1.head;
-              param12 = p1.tail;
-              pjs = param02;
-              t1 = param12;
-              lscomp2 = function lscomp2(p2) {
-                let param03, param13, r, t2, tmp6;
-                if (p2 instanceof NofibPrelude.Nil.class) {
-                  return lscomp1(t1)
-                } else if (p2 instanceof NofibPrelude.Cons.class) {
-                  param03 = p2.head;
-                  param13 = p2.tail;
-                  r = param03;
-                  t2 = param13;
-                  tmp6 = lscomp2(t2);
-                  return NofibPrelude.Cons(r, tmp6)
-                } else {
-                  throw new globalThis.Error("match error");
-                }
-              };
-              tmp5 = cryptarithm1.addj(j, pjs);
-              return lscomp2(tmp5)
-            } else {
-              throw new globalThis.Error("match error");
-            }
-          };
-          tmp4 = permutations_inst_4_5_6_tsni(js);
-          return lscomp1(tmp4)
+          tmp4 = permutations_inst_3_4_8_tsni(js);
+          return lscomp1$(j, tmp4)
         }
       }
     }
   } else {
     return (n) => {
       return () => {
-        return match_ls_arm_Nil_inst_4_5_6_tsni()
+        return match_ls_arm_Nil_inst_3_4_8_tsni()
       }
     }
   }
 };
-permutations_inst_0_6_tsni = function permutations_inst_0_6_tsni(ls) {
+enumFromTo_inst_3_5_tsni = function enumFromTo_inst_3_5_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_3_5_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (f) => {
+      let param0, param1, x, xs, tmp2, tmp3;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs = param1;
+      tmp2 = runtime.safeCall(f(x));
+      tmp3 = map_inst_3_9_tsni(f, xs);
+      return NofibPrelude.Cons(tmp2, tmp3)
+    }
+  } else {
+    return (f) => {
+      return NofibPrelude.Nil
+    }
+  }
+};
+testCryptarithm_nofib_inst_6_7_tsni = function testCryptarithm_nofib_inst_6_7_tsni(n) {
+  let tmp, tmp1;
+  tmp = lambda_inst_6_7_4_tsni;
+  tmp1 = enumFromTo_inst_6_7_5_tsni(1, n);
+  return map_inst_6_7_9_tsni(tmp, tmp1)
+};
+enumFromTo_inst_6_7_5_tsni = function enumFromTo_inst_6_7_5_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_6_7_5_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (f) => {
+      let param0, param1, x, xs, tmp2, tmp3;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs = param1;
+      tmp2 = runtime.safeCall(f(x));
+      tmp3 = map_inst_6_7_9_tsni(f, xs);
+      return NofibPrelude.Cons(tmp2, tmp3)
+    }
+  } else {
+    return (f) => {
+      return NofibPrelude.Nil
+    }
+  }
+};
+lambda_inst_6_7_4_tsni = (undefined, function (i) {
+  let p0, tmp, tmp1, tmp2, tmp3;
+  tmp = 9 + i;
+  tmp1 = enumFromTo_inst_6_7_4_1_tsni(0, tmp);
+  tmp2 = take_inst_6_7_4_2_tsni(10, tmp1);
+  p0 = tmp2;
+  tmp3 = permutations_inst_6_7_4_8_tsni(p0);
+  return NofibPrelude.filter(cryptarithm11.condition, tmp3)
+});
+enumFromTo_inst_6_7_4_1_tsni = function enumFromTo_inst_6_7_4_1_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_6_7_4_1_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (n) => {
+      let param0, param1, h, t, scrut1, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      h = param0;
+      t = param1;
+      scrut1 = n <= 0;
+      if (scrut1 === true) {
+        return () => {
+          return match_ls_arm_Nil_inst_6_7_4_8_tsni()
+        }
+      } else {
+        tmp2 = n - 1;
+        tmp3 = take_inst_6_7_4_2_tsni(tmp2, t);
+        _deforest_Cons_head1 = h;
+        _deforest_Cons_tail1 = tmp3;
+        return () => {
+          let param01, param11, j, js, tmp4;
+          param01 = _deforest_Cons_head1;
+          param11 = _deforest_Cons_tail1;
+          j = param01;
+          js = param11;
+          tmp4 = permutations_inst_6_7_4_8_tsni(js);
+          return lscomp1$(j, tmp4)
+        }
+      }
+    }
+  } else {
+    return (n) => {
+      return () => {
+        return match_ls_arm_Nil_inst_6_7_4_8_tsni()
+      }
+    }
+  }
+};
+take_inst_6_7_4_2_tsni = function take_inst_6_7_4_2_tsni(n, ls) {
+  return runtime.safeCall(ls(n))
+};
+permutations_inst_0_8_tsni = function permutations_inst_0_8_tsni(ls) {
   return runtime.safeCall(ls())
 };
-map_inst_0_7_tsni = function map_inst_0_7_tsni(f, xs) {
-  return runtime.safeCall(xs(f))
-};
-map_inst_4_5_7_tsni = function map_inst_4_5_7_tsni(f, xs) {
-  return runtime.safeCall(xs(f))
-};
-permutations_inst_4_5_6_tsni = function permutations_inst_4_5_6_tsni(ls) {
+permutations_inst_3_4_8_tsni = function permutations_inst_3_4_8_tsni(ls) {
   return runtime.safeCall(ls())
+};
+map_inst_3_9_tsni = function map_inst_3_9_tsni(f, xs) {
+  return runtime.safeCall(xs(f))
+};
+map_inst_6_7_9_tsni = function map_inst_6_7_9_tsni(f, xs) {
+  return runtime.safeCall(xs(f))
+};
+permutations_inst_6_7_4_8_tsni = function permutations_inst_6_7_4_8_tsni(ls) {
+  return runtime.safeCall(ls())
+};
+lambda = (undefined, function (i) {
+  let p0, tmp, tmp1, tmp2, tmp3;
+  tmp = 9 + i;
+  tmp1 = enumFromTo_inst_0_1_tsni(0, tmp);
+  tmp2 = take_inst_0_2_tsni(10, tmp1);
+  p0 = tmp2;
+  tmp3 = permutations_inst_0_8_tsni(p0);
+  return NofibPrelude.filter(cryptarithm11.condition, tmp3)
+});
+lscomp2$ = function lscomp2$(j, t1, p2) {
+  let param0, param1, r, t2, tmp;
+  if (p2 instanceof NofibPrelude.Nil.class) {
+    return lscomp1$(j, t1)
+  } else if (p2 instanceof NofibPrelude.Cons.class) {
+    param0 = p2.head;
+    param1 = p2.tail;
+    r = param0;
+    t2 = param1;
+    tmp = lscomp2$(j, t1, t2);
+    return NofibPrelude.Cons(r, tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lscomp2 = function lscomp2(j, t1) {
+  return (p2) => {
+    return lscomp2$(j, t1, p2)
+  }
+};
+lscomp1$ = function lscomp1$(j, p1) {
+  let param0, param1, pjs, t1, tmp;
+  if (p1 instanceof NofibPrelude.Nil.class) {
+    return NofibPrelude.Nil
+  } else if (p1 instanceof NofibPrelude.Cons.class) {
+    param0 = p1.head;
+    param1 = p1.tail;
+    pjs = param0;
+    t1 = param1;
+    tmp = cryptarithm11.addj(j, pjs);
+    return lscomp2$(j, t1, tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lscomp1 = function lscomp1(j) {
+  return (p1) => {
+    return lscomp1$(j, p1)
+  }
+};
+lscomp$ = function lscomp$(k, p1) {
+  let param0, param1, h1, t1, tmp, tmp1;
+  if (p1 instanceof NofibPrelude.Nil.class) {
+    return NofibPrelude.Nil
+  } else if (p1 instanceof NofibPrelude.Cons.class) {
+    param0 = p1.head;
+    param1 = p1.tail;
+    h1 = param0;
+    t1 = param1;
+    tmp = NofibPrelude.Cons(k, h1);
+    tmp1 = lscomp$(k, t1);
+    return NofibPrelude.Cons(tmp, tmp1)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lscomp = function lscomp(k) {
+  return (p1) => {
+    return lscomp$(k, p1)
+  }
 };
 (class cryptarithm1 {
   static {
@@ -336,7 +407,7 @@ permutations_inst_4_5_6_tsni = function permutations_inst_4_5_6_tsni(ls) {
     }
   } 
   static addj(j, ls) {
-    let lscomp, param0, param1, k, ks, tmp, tmp1, tmp2, tmp3, tmp4;
+    let param0, param1, k, ks, tmp, tmp1, tmp2, tmp3, tmp4;
     if (ls instanceof NofibPrelude.Nil.class) {
       tmp = NofibPrelude.Cons(j, NofibPrelude.Nil);
       return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
@@ -345,33 +416,17 @@ permutations_inst_4_5_6_tsni = function permutations_inst_4_5_6_tsni(ls) {
       param1 = ls.tail;
       k = param0;
       ks = param1;
-      lscomp = function lscomp(p1) {
-        let param01, param11, h1, t1, tmp5, tmp6;
-        if (p1 instanceof NofibPrelude.Nil.class) {
-          return NofibPrelude.Nil
-        } else if (p1 instanceof NofibPrelude.Cons.class) {
-          param01 = p1.head;
-          param11 = p1.tail;
-          h1 = param01;
-          t1 = param11;
-          tmp5 = NofibPrelude.Cons(k, h1);
-          tmp6 = lscomp(t1);
-          return NofibPrelude.Cons(tmp5, tmp6)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      };
       tmp1 = NofibPrelude.Cons(k, ks);
       tmp2 = NofibPrelude.Cons(j, tmp1);
       tmp3 = cryptarithm1.addj(j, ks);
-      tmp4 = lscomp(tmp3);
+      tmp4 = lscomp$(k, tmp3);
       return NofibPrelude.Cons(tmp2, tmp4)
     } else {
       throw new globalThis.Error("match error");
     }
   } 
   static permutations(ls1) {
-    let lscomp1, param0, param1, j1, js, tmp;
+    let param0, param1, j1, js, tmp;
     if (ls1 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
     } else if (ls1 instanceof NofibPrelude.Cons.class) {
@@ -379,59 +434,20 @@ permutations_inst_4_5_6_tsni = function permutations_inst_4_5_6_tsni(ls) {
       param1 = ls1.tail;
       j1 = param0;
       js = param1;
-      lscomp1 = function lscomp1(p1) {
-        let lscomp2, param01, param11, pjs, t1, tmp1;
-        if (p1 instanceof NofibPrelude.Nil.class) {
-          return NofibPrelude.Nil
-        } else if (p1 instanceof NofibPrelude.Cons.class) {
-          param01 = p1.head;
-          param11 = p1.tail;
-          pjs = param01;
-          t1 = param11;
-          lscomp2 = function lscomp2(p2) {
-            let param02, param12, r, t2, tmp2;
-            if (p2 instanceof NofibPrelude.Nil.class) {
-              return lscomp1(t1)
-            } else if (p2 instanceof NofibPrelude.Cons.class) {
-              param02 = p2.head;
-              param12 = p2.tail;
-              r = param02;
-              t2 = param12;
-              tmp2 = lscomp2(t2);
-              return NofibPrelude.Cons(r, tmp2)
-            } else {
-              throw new globalThis.Error("match error");
-            }
-          };
-          tmp1 = cryptarithm1.addj(j1, pjs);
-          return lscomp2(tmp1)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      };
       tmp = cryptarithm1.permutations(js);
-      return lscomp1(tmp)
+      return lscomp1$(j1, tmp)
     } else {
       throw new globalThis.Error("match error");
     }
   } 
   static testCryptarithm_nofib(n) {
-    let tmp, tmp1, lambda;
-    lambda = (undefined, function (i) {
-      let p0, tmp2, tmp3, tmp4, tmp5;
-      tmp2 = 9 + i;
-      tmp3 = enumFromTo_inst_0_1_tsni(0, tmp2);
-      tmp4 = take_inst_0_2_tsni(10, tmp3);
-      p0 = tmp4;
-      tmp5 = permutations_inst_0_6_tsni(p0);
-      return NofibPrelude.filter(cryptarithm1.condition, tmp5)
-    });
-    tmp = lambda;
-    tmp1 = enumFromTo_inst_0_3_tsni(1, n);
-    return map_inst_0_7_tsni(tmp, tmp1)
+    let tmp, tmp1;
+    tmp = lambda_inst_3_4_tsni;
+    tmp1 = enumFromTo_inst_3_5_tsni(1, n);
+    return map_inst_3_9_tsni(tmp, tmp1)
   } 
   static main() {
-    return testCryptarithm_nofib_inst_4_5_tsni(1)
+    return testCryptarithm_nofib_inst_6_7_tsni(1)
   }
   static toString() { return "cryptarithm1"; }
 });

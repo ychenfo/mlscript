@@ -2,4202 +2,7677 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let power1, dotMult_inst_0_1_tsni, dotMult_inst_0_2_tsni, dotMult_inst_0_3_tsni, divPs_inst_4_5_tsni, dotMult_inst_4_5_3_tsni, dotMult_inst_4_5_2_tsni, dotMult_inst_4_5_1_tsni, divPs_inst_6_7_tsni, dotMult_inst_6_7_3_tsni, dotMult_inst_6_7_2_tsni, dotMult_inst_6_7_1_tsni, integralLz_inst_8_9_tsni, integral_inst_8_10_tsni, integralLz_inst_11_12_tsni, sinx_inst_13_14_tsni, integralLz_inst_13_14_12_tsni, cosx_inst_13_15_tsni, integral_inst_13_15_10_tsni, integralLz_inst_13_15_9_tsni, sqrtPs_inst_13_16_tsni, divPs_inst_13_16_7_tsni, dotMult_inst_13_16_7_1_tsni, dotMult_inst_13_16_7_2_tsni, dotMult_inst_13_16_7_3_tsni, sinx_inst_13_17_tsni, integralLz_inst_13_17_12_tsni, cosx_inst_13_18_tsni, integral_inst_13_18_10_tsni, integralLz_inst_13_18_9_tsni, divPs_inst_13_19_tsni, dotMult_inst_13_19_3_tsni, dotMult_inst_13_19_2_tsni, dotMult_inst_13_19_1_tsni, divPs_inst_13_20_tsni, dotMult_inst_13_20_3_tsni, dotMult_inst_13_20_2_tsni, dotMult_inst_13_20_1_tsni, revert_inst_13_21_tsni, divPs_inst_13_21_5_tsni, dotMult_inst_13_21_5_1_tsni, dotMult_inst_13_21_5_2_tsni, dotMult_inst_13_21_5_3_tsni, integral_inst_13_22_tsni, testPower_nofib_inst_23_24_tsni, revert_inst_23_24_21_tsni, divPs_inst_23_24_21_5_tsni, dotMult_inst_23_24_21_5_3_tsni, dotMult_inst_23_24_21_5_2_tsni, dotMult_inst_23_24_21_5_1_tsni, integral_inst_23_24_22_tsni, divPs_inst_23_24_20_tsni, dotMult_inst_23_24_20_1_tsni, dotMult_inst_23_24_20_2_tsni, dotMult_inst_23_24_20_3_tsni, divPs_inst_23_24_19_tsni, dotMult_inst_23_24_19_1_tsni, dotMult_inst_23_24_19_2_tsni, dotMult_inst_23_24_19_3_tsni, cosx_inst_23_24_18_tsni, integralLz_inst_23_24_18_9_tsni, integral_inst_23_24_18_10_tsni, sinx_inst_23_24_17_tsni, integralLz_inst_23_24_17_12_tsni, sqrtPs_inst_23_24_16_tsni, divPs_inst_23_24_16_7_tsni, dotMult_inst_23_24_16_7_3_tsni, dotMult_inst_23_24_16_7_2_tsni, dotMult_inst_23_24_16_7_1_tsni, cosx_inst_23_24_15_tsni, integralLz_inst_23_24_15_9_tsni, integral_inst_23_24_15_10_tsni, sinx_inst_23_24_14_tsni, integralLz_inst_23_24_14_12_tsni, negatePs_inst_0_25_tsni, negatePs_inst_0_26_tsni, negatePs_inst_0_27_tsni, negatePs_inst_4_5_27_tsni, negatePs_inst_4_5_26_tsni, negatePs_inst_4_5_25_tsni, deriv_inst_6_28_tsni, negatePs_inst_6_7_27_tsni, negatePs_inst_6_7_26_tsni, negatePs_inst_6_7_25_tsni, integral_inst_6_29_tsni, minusPs_inst_8_30_tsni, negatePs_inst_8_30_31_tsni, minusPs_inst_11_32_tsni, negatePs_inst_11_32_31_tsni, minusPs_inst_13_14_32_tsni, negatePs_inst_13_14_32_31_tsni, minusPs_inst_13_15_30_tsni, negatePs_inst_13_15_30_31_tsni, negatePs_inst_13_16_7_25_tsni, negatePs_inst_13_16_7_26_tsni, negatePs_inst_13_16_7_27_tsni, integral_inst_13_16_29_tsni, deriv_inst_13_16_28_tsni, minusPs_inst_13_17_32_tsni, negatePs_inst_13_17_32_31_tsni, minusPs_inst_13_18_30_tsni, negatePs_inst_13_18_30_31_tsni, negatePs_inst_13_19_27_tsni, negatePs_inst_13_19_26_tsni, negatePs_inst_13_19_25_tsni, negatePs_inst_13_20_27_tsni, negatePs_inst_13_20_26_tsni, negatePs_inst_13_20_25_tsni, negatePs_inst_13_21_5_25_tsni, negatePs_inst_13_21_5_26_tsni, negatePs_inst_13_21_5_27_tsni, negatePs_inst_23_24_21_5_27_tsni, negatePs_inst_23_24_21_5_26_tsni, negatePs_inst_23_24_21_5_25_tsni, negatePs_inst_23_24_20_25_tsni, negatePs_inst_23_24_20_26_tsni, negatePs_inst_23_24_20_27_tsni, negatePs_inst_23_24_19_25_tsni, negatePs_inst_23_24_19_26_tsni, negatePs_inst_23_24_19_27_tsni, minusPs_inst_23_24_18_30_tsni, negatePs_inst_23_24_18_30_31_tsni, minusPs_inst_23_24_17_32_tsni, negatePs_inst_23_24_17_32_31_tsni, deriv_inst_23_24_16_28_tsni, negatePs_inst_23_24_16_7_27_tsni, negatePs_inst_23_24_16_7_26_tsni, negatePs_inst_23_24_16_7_25_tsni, integral_inst_23_24_16_29_tsni, minusPs_inst_23_24_15_30_tsni, negatePs_inst_23_24_15_30_31_tsni, minusPs_inst_23_24_14_32_tsni, negatePs_inst_23_24_14_32_31_tsni, match_scrut_arm_Pz_inst_6_29_tsni, match_scrut_arm_Pc_inst_6_29_tsni, match_scrut_arm_Pc_inst_8_10_tsni, match_scrut_arm_Pc_inst_8_30_31_tsni, match_scrut_arm_Pc_inst_11_32_31_tsni, match_scrut_arm_Pc_inst_13_14_32_31_tsni, match_scrut_arm_Pc_inst_13_15_30_31_tsni, match_scrut_arm_Pc_inst_13_15_10_tsni, match_scrut_arm_Pz_inst_13_16_29_tsni, match_scrut_arm_Pc_inst_13_16_29_tsni, match_scrut_arm_Pc_inst_13_17_32_31_tsni, match_scrut_arm_Pc_inst_13_18_30_31_tsni, match_scrut_arm_Pc_inst_13_18_10_tsni, match_scrut_arm_Pz_inst_13_22_tsni, match_scrut_arm_Pc_inst_13_22_tsni, match_scrut_arm_Pz_inst_23_24_22_tsni, match_scrut_arm_Pc_inst_23_24_22_tsni, match_scrut_arm_Pc_inst_23_24_18_10_tsni, match_scrut_arm_Pc_inst_23_24_18_30_31_tsni, match_scrut_arm_Pc_inst_23_24_17_32_31_tsni, match_scrut_arm_Pz_inst_23_24_16_29_tsni, match_scrut_arm_Pc_inst_23_24_16_29_tsni, match_scrut_arm_Pc_inst_23_24_15_10_tsni, match_scrut_arm_Pc_inst_23_24_15_30_31_tsni, match_scrut_arm_Pc_inst_23_24_14_32_31_tsni;
-match_scrut_arm_Pz_inst_6_29_tsni = function match_scrut_arm_Pz_inst_6_29_tsni(int1, n) {
-  return power.Pz
-};
-match_scrut_arm_Pc_inst_6_29_tsni = function match_scrut_arm_Pc_inst_6_29_tsni(int1, n, _deforest_Pc_f_inst_6_29_tsni, _deforest_Pc_s_inst_6_29_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2;
-  param0 = _deforest_Pc_f_inst_6_29_tsni;
-  param1 = _deforest_Pc_s_inst_6_29_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  return power.Pc(tmp, tmp2)
-};
-match_scrut_arm_Pc_inst_8_10_tsni = function match_scrut_arm_Pc_inst_8_10_tsni(int1, n, _deforest_Pc_f_inst_8_10_tsni, _deforest_Pc_s_inst_8_10_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-  param0 = _deforest_Pc_f_inst_8_10_tsni;
-  param1 = _deforest_Pc_s_inst_8_10_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  _deforest_Pc_f = tmp;
-  _deforest_Pc_s = tmp2;
-  return () => {
-    return match_scrut_arm_Pc_inst_8_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
+let rs, deriv1, int1, int11, qs, power1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, lambda25, lambda26, lambda27, lambda28, lambda29, lambda30, lambda31, lambda32, lambda33, lambda34, lambda35, lambda36, lambda37, lambda38, lambda39, lambda40, lambda41, lambda42, lambda43, lambda44, lambda45, lambda46, lambda47, lambda48, lambda49, lambda50, lambda51, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13, lambda$14, lambda$15, lambda$16, lambda$17, lambda$18, lambda$19, lambda$20, rs$, lambda$21, lambda$22, lambda$23, lambda$24, lambda$25, lambda$26, lambda$27, lambda$28, qs$, lambda$29, lambda$30, tree_inst_0_tsni, lambda_inst_0_tsni, composeSndLz__inst_0_1_tsni, lambda_inst_0_1_tsni, lambda$_inst_0_1_tsni, compose__inst_0_1_2_tsni, lambda_inst_0_1_2_tsni, lambda$_inst_0_1_2_tsni, multPs_inst_0_1_2_3_tsni, lambda_inst_0_1_2_3_tsni, lambda$_inst_0_1_2_3_tsni, x__inst_0_1_2_3_4_tsni, lambda_inst_0_1_2_3_4_5_tsni, multPs_inst_0_1_2_6_tsni, lambda_inst_0_1_2_6_tsni, lambda$_inst_0_1_2_6_tsni, x__inst_0_1_2_6_4_tsni, lambda_inst_0_1_2_6_4_5_tsni, multPs_inst_0_1_2_7_tsni, lambda_inst_0_1_2_7_tsni, lambda$_inst_0_1_2_7_tsni, x__inst_0_1_2_7_4_tsni, lambda_inst_0_1_2_7_4_5_tsni, tree_inst_8_tsni, lambda_inst_8_tsni, composeSndLz__inst_8_1_tsni, lambda_inst_8_1_tsni, lambda$_inst_8_1_tsni, compose__inst_8_1_2_tsni, lambda_inst_8_1_2_tsni, lambda$_inst_8_1_2_tsni, multPs_inst_8_1_2_3_tsni, lambda_inst_8_1_2_3_tsni, lambda$_inst_8_1_2_3_tsni, x__inst_8_1_2_3_4_tsni, lambda_inst_8_1_2_3_4_5_tsni, multPs_inst_8_1_2_6_tsni, lambda_inst_8_1_2_6_tsni, lambda$_inst_8_1_2_6_tsni, x__inst_8_1_2_6_4_tsni, lambda_inst_8_1_2_6_4_5_tsni, multPs_inst_8_1_2_7_tsni, lambda_inst_8_1_2_7_tsni, lambda$_inst_8_1_2_7_tsni, x__inst_8_1_2_7_4_tsni, lambda_inst_8_1_2_7_4_5_tsni, qs$_inst_9_tsni, lambda_inst_9_tsni, divPs_inst_9_10_tsni, lambda_inst_9_10_tsni, lambda$_inst_9_10_tsni, lambda_inst_9_10_11_tsni, fromIntegerPs_inst_9_12_tsni, lambda_inst_9_12_13_tsni, qs$_inst_14_tsni, lambda$_inst_14_tsni, divPs_inst_14_10_tsni, lambda_inst_14_10_tsni, lambda$_inst_14_10_tsni, lambda_inst_14_10_11_tsni, fromIntegerPs_inst_14_12_tsni, lambda_inst_14_12_13_tsni, lambda_inst_15_tsni, lambda$_inst_15_tsni, divPs_inst_15_10_tsni, lambda_inst_15_10_tsni, lambda$_inst_15_10_tsni, lambda_inst_15_10_11_tsni, fromIntegerPs_inst_15_12_tsni, lambda_inst_15_12_13_tsni, qs$_inst_16_17_tsni, lambda_inst_16_17_tsni, lambda$_inst_16_17_tsni, divPs_inst_16_17_10_tsni, lambda_inst_16_17_10_tsni, lambda$_inst_16_17_10_tsni, lambda_inst_16_17_10_11_tsni, fromIntegerPs_inst_16_17_12_tsni, lambda_inst_16_17_12_13_tsni, sqrtPs_inst_18_tsni, lambda_inst_18_tsni, qs$_inst_18_19_tsni, lambda_inst_18_19_tsni, lambda$_inst_18_19_tsni, divPs_inst_18_19_10_tsni, lambda_inst_18_19_10_tsni, lambda$_inst_18_19_10_tsni, lambda_inst_18_19_10_11_tsni, fromIntegerPs_inst_18_19_12_tsni, lambda_inst_18_19_12_13_tsni, sqrtPs_inst_20_tsni, lambda$_inst_20_tsni, qs$_inst_20_19_tsni, lambda_inst_20_19_tsni, lambda$_inst_20_19_tsni, divPs_inst_20_19_10_tsni, lambda_inst_20_19_10_tsni, lambda$_inst_20_19_10_tsni, lambda_inst_20_19_10_11_tsni, fromIntegerPs_inst_20_19_12_tsni, lambda_inst_20_19_12_13_tsni, rs$_inst_21_tsni, lambda_inst_21_tsni, divPs_inst_21_22_tsni, lambda_inst_21_22_tsni, lambda$_inst_21_22_tsni, lambda_inst_21_22_11_tsni, fromIntegerPs_inst_21_23_tsni, lambda_inst_21_23_13_tsni, rs$_inst_24_tsni, lambda$_inst_24_tsni, divPs_inst_24_22_tsni, lambda_inst_24_22_tsni, lambda$_inst_24_22_tsni, lambda_inst_24_22_11_tsni, fromIntegerPs_inst_24_23_tsni, lambda_inst_24_23_13_tsni, lambda_inst_25_tsni, lambda$_inst_25_tsni, divPs_inst_25_22_tsni, lambda_inst_25_22_tsni, lambda$_inst_25_22_tsni, lambda_inst_25_22_11_tsni, fromIntegerPs_inst_25_23_tsni, lambda_inst_25_23_13_tsni, rs$_inst_26_27_tsni, lambda_inst_26_27_tsni, lambda$_inst_26_27_tsni, divPs_inst_26_27_22_tsni, lambda_inst_26_27_22_tsni, lambda$_inst_26_27_22_tsni, lambda_inst_26_27_22_11_tsni, compose__inst_26_27_28_tsni, lambda_inst_26_27_28_tsni, lambda$_inst_26_27_28_tsni, multPs_inst_26_27_28_3_tsni, lambda_inst_26_27_28_3_tsni, lambda$_inst_26_27_28_3_tsni, x__inst_26_27_28_3_4_tsni, lambda_inst_26_27_28_3_4_5_tsni, multPs_inst_26_27_28_6_tsni, lambda_inst_26_27_28_6_tsni, lambda$_inst_26_27_28_6_tsni, x__inst_26_27_28_6_4_tsni, lambda_inst_26_27_28_6_4_5_tsni, multPs_inst_26_27_28_7_tsni, lambda_inst_26_27_28_7_tsni, lambda$_inst_26_27_28_7_tsni, x__inst_26_27_28_7_4_tsni, lambda_inst_26_27_28_7_4_5_tsni, fromIntegerPs_inst_26_27_23_tsni, lambda_inst_26_27_23_13_tsni, rs$_inst_29_30_tsni, lambda_inst_29_30_tsni, lambda$_inst_29_30_tsni, divPs_inst_29_30_22_tsni, lambda_inst_29_30_22_tsni, lambda$_inst_29_30_22_tsni, lambda_inst_29_30_22_11_tsni, compose__inst_29_30_28_tsni, lambda_inst_29_30_28_tsni, lambda$_inst_29_30_28_tsni, multPs_inst_29_30_28_3_tsni, lambda_inst_29_30_28_3_tsni, lambda$_inst_29_30_28_3_tsni, x__inst_29_30_28_3_4_tsni, lambda_inst_29_30_28_3_4_5_tsni, multPs_inst_29_30_28_6_tsni, lambda_inst_29_30_28_6_tsni, lambda$_inst_29_30_28_6_tsni, x__inst_29_30_28_6_4_tsni, lambda_inst_29_30_28_6_4_5_tsni, multPs_inst_29_30_28_7_tsni, lambda_inst_29_30_28_7_tsni, lambda$_inst_29_30_28_7_tsni, x__inst_29_30_28_7_4_tsni, lambda_inst_29_30_28_7_4_5_tsni, fromIntegerPs_inst_29_30_23_tsni, lambda_inst_29_30_23_13_tsni, lambda$_inst_31_32_tsni, rs$_inst_31_32_30_tsni, lambda_inst_31_32_30_tsni, lambda$_inst_31_32_30_tsni, compose__inst_31_32_30_28_tsni, lambda_inst_31_32_30_28_tsni, lambda$_inst_31_32_30_28_tsni, multPs_inst_31_32_30_28_7_tsni, lambda_inst_31_32_30_28_7_tsni, lambda$_inst_31_32_30_28_7_tsni, x__inst_31_32_30_28_7_4_tsni, lambda_inst_31_32_30_28_7_4_5_tsni, multPs_inst_31_32_30_28_6_tsni, lambda_inst_31_32_30_28_6_tsni, lambda$_inst_31_32_30_28_6_tsni, x__inst_31_32_30_28_6_4_tsni, lambda_inst_31_32_30_28_6_4_5_tsni, multPs_inst_31_32_30_28_3_tsni, lambda_inst_31_32_30_28_3_tsni, lambda$_inst_31_32_30_28_3_tsni, x__inst_31_32_30_28_3_4_tsni, lambda_inst_31_32_30_28_3_4_5_tsni, divPs_inst_31_32_30_22_tsni, lambda_inst_31_32_30_22_tsni, lambda$_inst_31_32_30_22_tsni, lambda_inst_31_32_30_22_11_tsni, fromIntegerPs_inst_31_32_30_23_tsni, lambda_inst_31_32_30_23_13_tsni, composeSndLz__inst_33_tsni, lambda_inst_33_tsni, compose__inst_33_2_tsni, lambda_inst_33_2_tsni, lambda$_inst_33_2_tsni, multPs_inst_33_2_7_tsni, lambda_inst_33_2_7_tsni, lambda$_inst_33_2_7_tsni, x__inst_33_2_7_4_tsni, lambda_inst_33_2_7_4_5_tsni, multPs_inst_33_2_6_tsni, lambda_inst_33_2_6_tsni, lambda$_inst_33_2_6_tsni, x__inst_33_2_6_4_tsni, lambda_inst_33_2_6_4_5_tsni, multPs_inst_33_2_3_tsni, lambda_inst_33_2_3_tsni, lambda$_inst_33_2_3_tsni, x__inst_33_2_3_4_tsni, lambda_inst_33_2_3_4_5_tsni, composeSndLz__inst_34_tsni, lambda$_inst_34_tsni, compose__inst_34_2_tsni, lambda_inst_34_2_tsni, lambda$_inst_34_2_tsni, multPs_inst_34_2_7_tsni, lambda_inst_34_2_7_tsni, lambda$_inst_34_2_7_tsni, x__inst_34_2_7_4_tsni, lambda_inst_34_2_7_4_5_tsni, multPs_inst_34_2_6_tsni, lambda_inst_34_2_6_tsni, lambda$_inst_34_2_6_tsni, x__inst_34_2_6_4_tsni, lambda_inst_34_2_6_4_5_tsni, multPs_inst_34_2_3_tsni, lambda_inst_34_2_3_tsni, lambda$_inst_34_2_3_tsni, x__inst_34_2_3_4_tsni, lambda_inst_34_2_3_4_5_tsni, multPs_inst_35_36_tsni, lambda_inst_35_36_tsni, lambda$_inst_35_36_tsni, x__inst_35_36_4_tsni, lambda_inst_35_36_4_5_tsni, x__inst_35_37_tsni, lambda_inst_35_37_5_tsni, multPs_inst_35_38_tsni, lambda_inst_35_38_tsni, lambda$_inst_35_38_tsni, x__inst_35_38_4_tsni, lambda_inst_35_38_4_5_tsni, lambda$_inst_39_40_tsni, multPs_inst_39_40_38_tsni, lambda_inst_39_40_38_tsni, lambda$_inst_39_40_38_tsni, x__inst_39_40_38_4_tsni, lambda_inst_39_40_38_4_5_tsni, multPs_inst_39_40_36_tsni, lambda_inst_39_40_36_tsni, lambda$_inst_39_40_36_tsni, x__inst_39_40_36_4_tsni, lambda_inst_39_40_36_4_5_tsni, x__inst_39_40_37_tsni, lambda_inst_39_40_37_5_tsni, lambda_inst_41_42_tsni, lambda$_inst_41_42_40_tsni, multPs_inst_41_42_40_36_tsni, lambda_inst_41_42_40_36_tsni, lambda$_inst_41_42_40_36_tsni, x__inst_41_42_40_36_4_tsni, lambda_inst_41_42_40_36_4_5_tsni, x__inst_41_42_40_37_tsni, lambda_inst_41_42_40_37_5_tsni, multPs_inst_41_42_40_38_tsni, lambda_inst_41_42_40_38_tsni, lambda$_inst_41_42_40_38_tsni, x__inst_41_42_40_38_4_tsni, lambda_inst_41_42_40_38_4_5_tsni, lambda_inst_43_tsni, lambda$_inst_43_tsni, compose__inst_43_2_tsni, lambda_inst_43_2_tsni, lambda$_inst_43_2_tsni, multPs_inst_43_2_7_tsni, lambda_inst_43_2_7_tsni, lambda$_inst_43_2_7_tsni, x__inst_43_2_7_4_tsni, lambda_inst_43_2_7_4_5_tsni, multPs_inst_43_2_6_tsni, lambda_inst_43_2_6_tsni, lambda$_inst_43_2_6_tsni, x__inst_43_2_6_4_tsni, lambda_inst_43_2_6_4_5_tsni, multPs_inst_43_2_3_tsni, lambda_inst_43_2_3_tsni, lambda$_inst_43_2_3_tsni, x__inst_43_2_3_4_tsni, lambda_inst_43_2_3_4_5_tsni, lambda_inst_44_45_tsni, lambda$_inst_44_45_32_tsni, rs$_inst_44_45_32_30_tsni, lambda_inst_44_45_32_30_tsni, lambda$_inst_44_45_32_30_tsni, divPs_inst_44_45_32_30_22_tsni, lambda_inst_44_45_32_30_22_tsni, lambda$_inst_44_45_32_30_22_tsni, lambda_inst_44_45_32_30_22_11_tsni, compose__inst_44_45_32_30_28_tsni, lambda_inst_44_45_32_30_28_tsni, lambda$_inst_44_45_32_30_28_tsni, multPs_inst_44_45_32_30_28_3_tsni, lambda_inst_44_45_32_30_28_3_tsni, lambda$_inst_44_45_32_30_28_3_tsni, x__inst_44_45_32_30_28_3_4_tsni, lambda_inst_44_45_32_30_28_3_4_5_tsni, multPs_inst_44_45_32_30_28_6_tsni, lambda_inst_44_45_32_30_28_6_tsni, lambda$_inst_44_45_32_30_28_6_tsni, x__inst_44_45_32_30_28_6_4_tsni, lambda_inst_44_45_32_30_28_6_4_5_tsni, multPs_inst_44_45_32_30_28_7_tsni, lambda_inst_44_45_32_30_28_7_tsni, lambda$_inst_44_45_32_30_28_7_tsni, x__inst_44_45_32_30_28_7_4_tsni, lambda_inst_44_45_32_30_28_7_4_5_tsni, fromIntegerPs_inst_44_45_32_30_23_tsni, lambda_inst_44_45_32_30_23_13_tsni, lambda_inst_46_tsni, lambda$_inst_46_tsni, qs$_inst_46_19_tsni, lambda_inst_46_19_tsni, lambda$_inst_46_19_tsni, divPs_inst_46_19_10_tsni, lambda_inst_46_19_10_tsni, lambda$_inst_46_19_10_tsni, lambda_inst_46_19_10_11_tsni, fromIntegerPs_inst_46_19_12_tsni, lambda_inst_46_19_12_13_tsni, lambda_inst_47_tsni, lambda_inst_47_tsni1, composeSndLz__inst_47_1_tsni, lambda_inst_47_1_tsni, lambda$_inst_47_1_tsni, compose__inst_47_1_2_tsni, lambda_inst_47_1_2_tsni, lambda$_inst_47_1_2_tsni, multPs_inst_47_1_2_3_tsni, lambda_inst_47_1_2_3_tsni, lambda$_inst_47_1_2_3_tsni, x__inst_47_1_2_3_4_tsni, lambda_inst_47_1_2_3_4_5_tsni, multPs_inst_47_1_2_6_tsni, lambda_inst_47_1_2_6_tsni, lambda$_inst_47_1_2_6_tsni, x__inst_47_1_2_6_4_tsni, lambda_inst_47_1_2_6_4_5_tsni, multPs_inst_47_1_2_7_tsni, lambda_inst_47_1_2_7_tsni, lambda$_inst_47_1_2_7_tsni, x__inst_47_1_2_7_4_tsni, lambda_inst_47_1_2_7_4_5_tsni, lambda_inst_48_49_tsni, lambda_inst_48_49_50_tsni, lambda_inst_51_52_tsni, lambda_inst_51_52_53_tsni, sinx_inst_54_55_tsni, lambda_inst_54_55_52_tsni, lambda_inst_54_55_52_53_tsni, cosx_inst_54_56_tsni, lambda_inst_54_56_49_tsni, lambda_inst_54_56_49_50_tsni, powerPs_inst_54_57_tsni, multPs_inst_54_57_58_tsni, lambda_inst_54_57_58_tsni, lambda$_inst_54_57_58_tsni, x__inst_54_57_58_4_tsni, lambda_inst_54_57_58_4_5_tsni, fromIntegerPs_inst_54_59_tsni, lambda_inst_54_59_13_tsni, sqrtPs_inst_54_60_tsni, lambda_inst_54_60_tsni, lambda$_inst_54_60_tsni, qs$_inst_54_60_19_tsni, lambda_inst_54_60_19_tsni, lambda$_inst_54_60_19_tsni, divPs_inst_54_60_19_10_tsni, lambda_inst_54_60_19_10_tsni, lambda$_inst_54_60_19_10_tsni, lambda_inst_54_60_19_10_11_tsni, fromIntegerPs_inst_54_60_19_12_tsni, lambda_inst_54_60_19_12_13_tsni, sinx_inst_54_61_tsni, lambda_inst_54_61_52_tsni, lambda_inst_54_61_52_53_tsni, cosx_inst_54_62_tsni, lambda_inst_54_62_49_tsni, lambda_inst_54_62_49_50_tsni, divPs_inst_54_63_tsni, lambda_inst_54_63_tsni, lambda$_inst_54_63_tsni, lambda_inst_54_63_11_tsni, powerPs_inst_54_64_tsni, multPs_inst_54_64_58_tsni, lambda_inst_54_64_58_tsni, lambda$_inst_54_64_58_tsni, x__inst_54_64_58_4_tsni, lambda_inst_54_64_58_4_5_tsni, x__inst_54_65_tsni, lambda_inst_54_65_5_tsni, fromIntegerPs_inst_54_66_tsni, lambda_inst_54_66_13_tsni, divPs_inst_54_67_tsni, lambda_inst_54_67_tsni, lambda$_inst_54_67_tsni, lambda_inst_54_67_11_tsni, fromIntegerPs_inst_54_68_tsni, lambda_inst_54_68_13_tsni, revert_inst_54_69_tsni, lambda_inst_54_69_45_tsni, lambda$_inst_54_69_45_32_tsni, rs$_inst_54_69_45_32_30_tsni, lambda_inst_54_69_45_32_30_tsni, lambda$_inst_54_69_45_32_30_tsni, compose__inst_54_69_45_32_30_28_tsni, lambda_inst_54_69_45_32_30_28_tsni, lambda$_inst_54_69_45_32_30_28_tsni, multPs_inst_54_69_45_32_30_28_7_tsni, lambda_inst_54_69_45_32_30_28_7_tsni, lambda$_inst_54_69_45_32_30_28_7_tsni, x__inst_54_69_45_32_30_28_7_4_tsni, lambda_inst_54_69_45_32_30_28_7_4_5_tsni, multPs_inst_54_69_45_32_30_28_6_tsni, lambda_inst_54_69_45_32_30_28_6_tsni, lambda$_inst_54_69_45_32_30_28_6_tsni, x__inst_54_69_45_32_30_28_6_4_tsni, lambda_inst_54_69_45_32_30_28_6_4_5_tsni, multPs_inst_54_69_45_32_30_28_3_tsni, lambda_inst_54_69_45_32_30_28_3_tsni, lambda$_inst_54_69_45_32_30_28_3_tsni, x__inst_54_69_45_32_30_28_3_4_tsni, lambda_inst_54_69_45_32_30_28_3_4_5_tsni, divPs_inst_54_69_45_32_30_22_tsni, lambda_inst_54_69_45_32_30_22_tsni, lambda$_inst_54_69_45_32_30_22_tsni, lambda_inst_54_69_45_32_30_22_11_tsni, fromIntegerPs_inst_54_69_45_32_30_23_tsni, lambda_inst_54_69_45_32_30_23_13_tsni, tree_inst_54_70_tsni, lambda_inst_54_70_tsni, lambda_inst_54_70_tsni1, composeSndLz__inst_54_70_1_tsni, lambda_inst_54_70_1_tsni, lambda$_inst_54_70_1_tsni, compose__inst_54_70_1_2_tsni, lambda_inst_54_70_1_2_tsni, lambda$_inst_54_70_1_2_tsni, multPs_inst_54_70_1_2_7_tsni, lambda_inst_54_70_1_2_7_tsni, lambda$_inst_54_70_1_2_7_tsni, x__inst_54_70_1_2_7_4_tsni, lambda_inst_54_70_1_2_7_4_5_tsni, multPs_inst_54_70_1_2_6_tsni, lambda_inst_54_70_1_2_6_tsni, lambda$_inst_54_70_1_2_6_tsni, x__inst_54_70_1_2_6_4_tsni, lambda_inst_54_70_1_2_6_4_5_tsni, multPs_inst_54_70_1_2_3_tsni, lambda_inst_54_70_1_2_3_tsni, lambda$_inst_54_70_1_2_3_tsni, x__inst_54_70_1_2_3_4_tsni, lambda_inst_54_70_1_2_3_4_5_tsni, multPs_inst_54_70_1_71_tsni, lambda_inst_54_70_1_71_tsni, lambda$_inst_54_70_1_71_tsni, x__inst_54_70_1_71_4_tsni, lambda_inst_54_70_1_71_4_5_tsni, testPower_nofib_inst_72_73_tsni, tree_inst_72_73_70_tsni, lambda_inst_72_73_70_tsni, lambda_inst_72_73_70_tsni1, composeSndLz__inst_72_73_70_1_tsni, lambda_inst_72_73_70_1_tsni, lambda$_inst_72_73_70_1_tsni, multPs_inst_72_73_70_1_71_tsni, lambda_inst_72_73_70_1_71_tsni, lambda$_inst_72_73_70_1_71_tsni, x__inst_72_73_70_1_71_4_tsni, lambda_inst_72_73_70_1_71_4_5_tsni, compose__inst_72_73_70_1_2_tsni, lambda_inst_72_73_70_1_2_tsni, lambda$_inst_72_73_70_1_2_tsni, multPs_inst_72_73_70_1_2_3_tsni, lambda_inst_72_73_70_1_2_3_tsni, lambda$_inst_72_73_70_1_2_3_tsni, x__inst_72_73_70_1_2_3_4_tsni, lambda_inst_72_73_70_1_2_3_4_5_tsni, multPs_inst_72_73_70_1_2_6_tsni, lambda_inst_72_73_70_1_2_6_tsni, lambda$_inst_72_73_70_1_2_6_tsni, x__inst_72_73_70_1_2_6_4_tsni, lambda_inst_72_73_70_1_2_6_4_5_tsni, multPs_inst_72_73_70_1_2_7_tsni, lambda_inst_72_73_70_1_2_7_tsni, lambda$_inst_72_73_70_1_2_7_tsni, x__inst_72_73_70_1_2_7_4_tsni, lambda_inst_72_73_70_1_2_7_4_5_tsni, revert_inst_72_73_69_tsni, lambda_inst_72_73_69_45_tsni, lambda$_inst_72_73_69_45_32_tsni, rs$_inst_72_73_69_45_32_30_tsni, lambda_inst_72_73_69_45_32_30_tsni, lambda$_inst_72_73_69_45_32_30_tsni, divPs_inst_72_73_69_45_32_30_22_tsni, lambda_inst_72_73_69_45_32_30_22_tsni, lambda$_inst_72_73_69_45_32_30_22_tsni, lambda_inst_72_73_69_45_32_30_22_11_tsni, compose__inst_72_73_69_45_32_30_28_tsni, lambda_inst_72_73_69_45_32_30_28_tsni, lambda$_inst_72_73_69_45_32_30_28_tsni, multPs_inst_72_73_69_45_32_30_28_3_tsni, lambda_inst_72_73_69_45_32_30_28_3_tsni, lambda$_inst_72_73_69_45_32_30_28_3_tsni, x__inst_72_73_69_45_32_30_28_3_4_tsni, lambda_inst_72_73_69_45_32_30_28_3_4_5_tsni, multPs_inst_72_73_69_45_32_30_28_6_tsni, lambda_inst_72_73_69_45_32_30_28_6_tsni, lambda$_inst_72_73_69_45_32_30_28_6_tsni, x__inst_72_73_69_45_32_30_28_6_4_tsni, lambda_inst_72_73_69_45_32_30_28_6_4_5_tsni, multPs_inst_72_73_69_45_32_30_28_7_tsni, lambda_inst_72_73_69_45_32_30_28_7_tsni, lambda$_inst_72_73_69_45_32_30_28_7_tsni, x__inst_72_73_69_45_32_30_28_7_4_tsni, lambda_inst_72_73_69_45_32_30_28_7_4_5_tsni, fromIntegerPs_inst_72_73_69_45_32_30_23_tsni, lambda_inst_72_73_69_45_32_30_23_13_tsni, divPs_inst_72_73_67_tsni, lambda_inst_72_73_67_tsni, lambda$_inst_72_73_67_tsni, lambda_inst_72_73_67_11_tsni, powerPs_inst_72_73_64_tsni, multPs_inst_72_73_64_58_tsni, lambda_inst_72_73_64_58_tsni, lambda$_inst_72_73_64_58_tsni, x__inst_72_73_64_58_4_tsni, lambda_inst_72_73_64_58_4_5_tsni, x__inst_72_73_65_tsni, lambda_inst_72_73_65_5_tsni, fromIntegerPs_inst_72_73_66_tsni, lambda_inst_72_73_66_13_tsni, fromIntegerPs_inst_72_73_68_tsni, lambda_inst_72_73_68_13_tsni, divPs_inst_72_73_63_tsni, lambda_inst_72_73_63_tsni, lambda$_inst_72_73_63_tsni, lambda_inst_72_73_63_11_tsni, cosx_inst_72_73_62_tsni, lambda_inst_72_73_62_49_tsni, lambda_inst_72_73_62_49_50_tsni, sinx_inst_72_73_61_tsni, lambda_inst_72_73_61_52_tsni, lambda_inst_72_73_61_52_53_tsni, sqrtPs_inst_72_73_60_tsni, lambda_inst_72_73_60_tsni, lambda$_inst_72_73_60_tsni, qs$_inst_72_73_60_19_tsni, lambda_inst_72_73_60_19_tsni, lambda$_inst_72_73_60_19_tsni, divPs_inst_72_73_60_19_10_tsni, lambda_inst_72_73_60_19_10_tsni, lambda$_inst_72_73_60_19_10_tsni, lambda_inst_72_73_60_19_10_11_tsni, fromIntegerPs_inst_72_73_60_19_12_tsni, lambda_inst_72_73_60_19_12_13_tsni, powerPs_inst_72_73_57_tsni, multPs_inst_72_73_57_58_tsni, lambda_inst_72_73_57_58_tsni, lambda$_inst_72_73_57_58_tsni, x__inst_72_73_57_58_4_tsni, lambda_inst_72_73_57_58_4_5_tsni, cosx_inst_72_73_56_tsni, lambda_inst_72_73_56_49_tsni, lambda_inst_72_73_56_49_50_tsni, fromIntegerPs_inst_72_73_59_tsni, lambda_inst_72_73_59_13_tsni, sinx_inst_72_73_55_tsni, lambda_inst_72_73_55_52_tsni, lambda_inst_72_73_55_52_53_tsni, addPs_inst_9_74_tsni, lambda_inst_9_74_tsni, lambda$_inst_9_74_tsni, addPs_inst_14_74_tsni, lambda_inst_14_74_tsni, lambda$_inst_14_74_tsni, addPs_inst_15_74_tsni, lambda_inst_15_74_tsni, lambda$_inst_15_74_tsni, addPs_inst_16_17_74_tsni, lambda_inst_16_17_74_tsni, lambda$_inst_16_17_74_tsni, addPs_inst_18_19_74_tsni, lambda_inst_18_19_74_tsni, lambda$_inst_18_19_74_tsni, addPs_inst_20_19_74_tsni, lambda_inst_20_19_74_tsni, lambda$_inst_20_19_74_tsni, addPs_inst_46_19_74_tsni, lambda_inst_46_19_74_tsni, lambda$_inst_46_19_74_tsni, minusPs_inst_48_75_tsni, addPs_inst_48_75_76_tsni, lambda_inst_48_75_76_tsni, lambda$_inst_48_75_76_tsni, minusPs_inst_51_77_tsni, addPs_inst_51_77_76_tsni, lambda_inst_51_77_76_tsni, lambda$_inst_51_77_76_tsni, minusPs_inst_54_55_77_tsni, addPs_inst_54_55_77_76_tsni, lambda_inst_54_55_77_76_tsni, lambda$_inst_54_55_77_76_tsni, minusPs_inst_54_56_75_tsni, addPs_inst_54_56_75_76_tsni, lambda_inst_54_56_75_76_tsni, lambda$_inst_54_56_75_76_tsni, minusPs_inst_54_78_tsni, addPs_inst_54_78_76_tsni, lambda_inst_54_78_76_tsni, lambda$_inst_54_78_76_tsni, addPs_inst_54_60_19_74_tsni, lambda_inst_54_60_19_74_tsni, lambda$_inst_54_60_19_74_tsni, minusPs_inst_54_61_77_tsni, addPs_inst_54_61_77_76_tsni, lambda_inst_54_61_77_76_tsni, lambda$_inst_54_61_77_76_tsni, minusPs_inst_54_62_75_tsni, addPs_inst_54_62_75_76_tsni, lambda_inst_54_62_75_76_tsni, lambda$_inst_54_62_75_76_tsni, addPs_inst_54_79_tsni, lambda_inst_54_79_tsni, lambda$_inst_54_79_tsni, addPs_inst_72_73_79_tsni, lambda_inst_72_73_79_tsni, lambda$_inst_72_73_79_tsni, minusPs_inst_72_73_62_75_tsni, addPs_inst_72_73_62_75_76_tsni, lambda_inst_72_73_62_75_76_tsni, lambda$_inst_72_73_62_75_76_tsni, minusPs_inst_72_73_61_77_tsni, addPs_inst_72_73_61_77_76_tsni, lambda_inst_72_73_61_77_76_tsni, lambda$_inst_72_73_61_77_76_tsni, addPs_inst_72_73_60_19_74_tsni, lambda_inst_72_73_60_19_74_tsni, lambda$_inst_72_73_60_19_74_tsni, minusPs_inst_72_73_56_75_tsni, addPs_inst_72_73_56_75_76_tsni, lambda_inst_72_73_56_75_76_tsni, lambda$_inst_72_73_56_75_76_tsni, minusPs_inst_72_73_78_tsni, addPs_inst_72_73_78_76_tsni, lambda_inst_72_73_78_76_tsni, lambda$_inst_72_73_78_76_tsni, minusPs_inst_72_73_55_77_tsni, addPs_inst_72_73_55_77_76_tsni, lambda_inst_72_73_55_77_76_tsni, lambda$_inst_72_73_55_77_76_tsni, match_scrut_arm_Pz_inst_21_22_tsni, match_scrut_arm_Pz_inst_24_22_tsni, match_scrut_arm_Pz_inst_25_22_tsni, match_scrut_arm_Pz_inst_26_27_22_tsni, match_scrut_arm_Pz_inst_29_30_22_tsni, match_scrut_arm_Pz_inst_31_32_30_22_tsni, match_scrut_arm_Pc_inst_35_36_tsni, match_scrut_arm_Pc_inst_39_40_36_tsni, match_scrut_arm_Pc_inst_41_42_40_36_tsni, match_scrut_arm_Pz_inst_44_45_32_30_22_tsni, match_scrut_arm_Pc_inst_54_64_58_tsni, match_scrut_arm_Pz_inst_54_67_tsni, match_scrut_arm_Pz_inst_54_69_45_32_30_22_tsni, match_scrut_arm_Pz_inst_72_73_69_45_32_30_22_tsni, match_scrut_arm_Pz_inst_72_73_67_tsni, match_scrut_arm_Pc_inst_72_73_64_58_tsni;
+match_scrut_arm_Pz_inst_21_22_tsni = function match_scrut_arm_Pz_inst_21_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_21_22_11_tsni);
+      tmp1 = divPs_inst_21_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
   }
 };
-match_scrut_arm_Pc_inst_8_30_31_tsni = function match_scrut_arm_Pc_inst_8_30_31_tsni(_deforest_Pc_f_inst_8_30_31_tsni, _deforest_Pc_s_inst_8_30_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_8_30_31_tsni;
-  param1 = _deforest_Pc_s_inst_8_30_31_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_8_30_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
-};
-match_scrut_arm_Pc_inst_11_32_31_tsni = function match_scrut_arm_Pc_inst_11_32_31_tsni(_deforest_Pc_f_inst_11_32_31_tsni, _deforest_Pc_s_inst_11_32_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_11_32_31_tsni;
-  param1 = _deforest_Pc_s_inst_11_32_31_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_11_32_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
-};
-match_scrut_arm_Pc_inst_13_14_32_31_tsni = function match_scrut_arm_Pc_inst_13_14_32_31_tsni(_deforest_Pc_f_inst_13_14_32_31_tsni, _deforest_Pc_s_inst_13_14_32_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_13_14_32_31_tsni;
-  param1 = _deforest_Pc_s_inst_13_14_32_31_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_13_14_32_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
-};
-match_scrut_arm_Pc_inst_13_15_30_31_tsni = function match_scrut_arm_Pc_inst_13_15_30_31_tsni(_deforest_Pc_f_inst_13_15_30_31_tsni, _deforest_Pc_s_inst_13_15_30_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_13_15_30_31_tsni;
-  param1 = _deforest_Pc_s_inst_13_15_30_31_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_13_15_30_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
-};
-match_scrut_arm_Pc_inst_13_15_10_tsni = function match_scrut_arm_Pc_inst_13_15_10_tsni(int1, n, _deforest_Pc_f_inst_13_15_10_tsni, _deforest_Pc_s_inst_13_15_10_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-  param0 = _deforest_Pc_f_inst_13_15_10_tsni;
-  param1 = _deforest_Pc_s_inst_13_15_10_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  _deforest_Pc_f = tmp;
-  _deforest_Pc_s = tmp2;
-  return () => {
-    return match_scrut_arm_Pc_inst_13_15_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
+match_scrut_arm_Pz_inst_24_22_tsni = function match_scrut_arm_Pz_inst_24_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_24_22_11_tsni);
+      tmp1 = divPs_inst_24_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
   }
 };
-match_scrut_arm_Pz_inst_13_16_29_tsni = function match_scrut_arm_Pz_inst_13_16_29_tsni(int1, n) {
-  return power.Pz
-};
-match_scrut_arm_Pc_inst_13_16_29_tsni = function match_scrut_arm_Pc_inst_13_16_29_tsni(int1, n, _deforest_Pc_f_inst_13_16_29_tsni, _deforest_Pc_s_inst_13_16_29_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2;
-  param0 = _deforest_Pc_f_inst_13_16_29_tsni;
-  param1 = _deforest_Pc_s_inst_13_16_29_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  return power.Pc(tmp, tmp2)
-};
-match_scrut_arm_Pc_inst_13_17_32_31_tsni = function match_scrut_arm_Pc_inst_13_17_32_31_tsni(_deforest_Pc_f_inst_13_17_32_31_tsni, _deforest_Pc_s_inst_13_17_32_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_13_17_32_31_tsni;
-  param1 = _deforest_Pc_s_inst_13_17_32_31_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_13_17_32_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
-};
-match_scrut_arm_Pc_inst_13_18_30_31_tsni = function match_scrut_arm_Pc_inst_13_18_30_31_tsni(_deforest_Pc_f_inst_13_18_30_31_tsni, _deforest_Pc_s_inst_13_18_30_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_13_18_30_31_tsni;
-  param1 = _deforest_Pc_s_inst_13_18_30_31_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_13_18_30_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
-};
-match_scrut_arm_Pc_inst_13_18_10_tsni = function match_scrut_arm_Pc_inst_13_18_10_tsni(int1, n, _deforest_Pc_f_inst_13_18_10_tsni, _deforest_Pc_s_inst_13_18_10_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-  param0 = _deforest_Pc_f_inst_13_18_10_tsni;
-  param1 = _deforest_Pc_s_inst_13_18_10_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  _deforest_Pc_f = tmp;
-  _deforest_Pc_s = tmp2;
-  return () => {
-    return match_scrut_arm_Pc_inst_13_18_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
+match_scrut_arm_Pz_inst_25_22_tsni = function match_scrut_arm_Pz_inst_25_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_25_22_11_tsni);
+      tmp1 = divPs_inst_25_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
   }
 };
-match_scrut_arm_Pz_inst_13_22_tsni = function match_scrut_arm_Pz_inst_13_22_tsni(int1, n) {
-  return power.Pz
-};
-match_scrut_arm_Pc_inst_13_22_tsni = function match_scrut_arm_Pc_inst_13_22_tsni(int1, n, _deforest_Pc_f_inst_13_22_tsni, _deforest_Pc_s_inst_13_22_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2;
-  param0 = _deforest_Pc_f_inst_13_22_tsni;
-  param1 = _deforest_Pc_s_inst_13_22_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  return power.Pc(tmp, tmp2)
-};
-match_scrut_arm_Pz_inst_23_24_22_tsni = function match_scrut_arm_Pz_inst_23_24_22_tsni(int1, n) {
-  return power.Pz
-};
-match_scrut_arm_Pc_inst_23_24_22_tsni = function match_scrut_arm_Pc_inst_23_24_22_tsni(int1, n, _deforest_Pc_f_inst_23_24_22_tsni, _deforest_Pc_s_inst_23_24_22_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2;
-  param0 = _deforest_Pc_f_inst_23_24_22_tsni;
-  param1 = _deforest_Pc_s_inst_23_24_22_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  return power.Pc(tmp, tmp2)
-};
-match_scrut_arm_Pc_inst_23_24_18_10_tsni = function match_scrut_arm_Pc_inst_23_24_18_10_tsni(int1, n, _deforest_Pc_f_inst_23_24_18_10_tsni, _deforest_Pc_s_inst_23_24_18_10_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-  param0 = _deforest_Pc_f_inst_23_24_18_10_tsni;
-  param1 = _deforest_Pc_s_inst_23_24_18_10_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  _deforest_Pc_f = tmp;
-  _deforest_Pc_s = tmp2;
-  return () => {
-    return match_scrut_arm_Pc_inst_23_24_18_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
+match_scrut_arm_Pz_inst_26_27_22_tsni = function match_scrut_arm_Pz_inst_26_27_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_26_27_22_11_tsni);
+      tmp1 = divPs_inst_26_27_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
   }
 };
-match_scrut_arm_Pc_inst_23_24_18_30_31_tsni = function match_scrut_arm_Pc_inst_23_24_18_30_31_tsni(_deforest_Pc_f_inst_23_24_18_30_31_tsni, _deforest_Pc_s_inst_23_24_18_30_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_23_24_18_30_31_tsni;
-  param1 = _deforest_Pc_s_inst_23_24_18_30_31_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_23_24_18_30_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
-};
-match_scrut_arm_Pc_inst_23_24_17_32_31_tsni = function match_scrut_arm_Pc_inst_23_24_17_32_31_tsni(_deforest_Pc_f_inst_23_24_17_32_31_tsni, _deforest_Pc_s_inst_23_24_17_32_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_23_24_17_32_31_tsni;
-  param1 = _deforest_Pc_s_inst_23_24_17_32_31_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_23_24_17_32_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
-};
-match_scrut_arm_Pz_inst_23_24_16_29_tsni = function match_scrut_arm_Pz_inst_23_24_16_29_tsni(int1, n) {
-  return power.Pz
-};
-match_scrut_arm_Pc_inst_23_24_16_29_tsni = function match_scrut_arm_Pc_inst_23_24_16_29_tsni(int1, n, _deforest_Pc_f_inst_23_24_16_29_tsni, _deforest_Pc_s_inst_23_24_16_29_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2;
-  param0 = _deforest_Pc_f_inst_23_24_16_29_tsni;
-  param1 = _deforest_Pc_s_inst_23_24_16_29_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  return power.Pc(tmp, tmp2)
-};
-match_scrut_arm_Pc_inst_23_24_15_10_tsni = function match_scrut_arm_Pc_inst_23_24_15_10_tsni(int1, n, _deforest_Pc_f_inst_23_24_15_10_tsni, _deforest_Pc_s_inst_23_24_15_10_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-  param0 = _deforest_Pc_f_inst_23_24_15_10_tsni;
-  param1 = _deforest_Pc_s_inst_23_24_15_10_tsni;
-  f = param0;
-  fs_ = param1;
-  tmp = f / n;
-  tmp1 = n + 1;
-  tmp2 = int1(fs_, tmp1);
-  _deforest_Pc_f = tmp;
-  _deforest_Pc_s = tmp2;
-  return () => {
-    return match_scrut_arm_Pc_inst_23_24_15_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
+match_scrut_arm_Pz_inst_29_30_22_tsni = function match_scrut_arm_Pz_inst_29_30_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_29_30_22_11_tsni);
+      tmp1 = divPs_inst_29_30_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
   }
 };
-match_scrut_arm_Pc_inst_23_24_15_30_31_tsni = function match_scrut_arm_Pc_inst_23_24_15_30_31_tsni(_deforest_Pc_f_inst_23_24_15_30_31_tsni, _deforest_Pc_s_inst_23_24_15_30_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_23_24_15_30_31_tsni;
-  param1 = _deforest_Pc_s_inst_23_24_15_30_31_tsni;
+match_scrut_arm_Pz_inst_31_32_30_22_tsni = function match_scrut_arm_Pz_inst_31_32_30_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_31_32_30_22_11_tsni);
+      tmp1 = divPs_inst_31_32_30_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
+  }
+};
+match_scrut_arm_Pc_inst_35_36_tsni = function match_scrut_arm_Pc_inst_35_36_tsni(gss, _deforest_Pc_f_inst_35_36_tsni, _deforest_Pc_s_inst_35_36_tsni) {
+  let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  param0 = _deforest_Pc_f_inst_35_36_tsni;
+  param1 = _deforest_Pc_s_inst_35_36_tsni;
   f = param0;
   fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_23_24_15_30_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param01 = scrut.f;
+    param11 = scrut.s;
+    g = param01;
+    gs = param11;
+    tmp = f * g;
+    tmp1 = power1.dotMult(f, gs);
+    tmp2 = power1.dotMult(g, fs_);
+    tmp3 = power1.addPs(tmp1, tmp2);
+    tmp4 = x__inst_35_36_4_tsni();
+    tmp5 = multPs_inst_35_36_tsni(tmp4, fs_);
+    tmp6 = multPs_inst_35_36_tsni(tmp5, gs);
+    tmp7 = power1.addPs(tmp3, tmp6);
+    return power1.Pc(tmp, tmp7)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-match_scrut_arm_Pc_inst_23_24_14_32_31_tsni = function match_scrut_arm_Pc_inst_23_24_14_32_31_tsni(_deforest_Pc_f_inst_23_24_14_32_31_tsni, _deforest_Pc_s_inst_23_24_14_32_31_tsni) {
-  let param0, param1, f, fs_, tmp, tmp1;
-  param0 = _deforest_Pc_f_inst_23_24_14_32_31_tsni;
-  param1 = _deforest_Pc_s_inst_23_24_14_32_31_tsni;
+match_scrut_arm_Pc_inst_39_40_36_tsni = function match_scrut_arm_Pc_inst_39_40_36_tsni(gss, _deforest_Pc_f_inst_39_40_36_tsni, _deforest_Pc_s_inst_39_40_36_tsni) {
+  let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  param0 = _deforest_Pc_f_inst_39_40_36_tsni;
+  param1 = _deforest_Pc_s_inst_39_40_36_tsni;
   f = param0;
   fs_ = param1;
-  tmp = - f;
-  tmp1 = negatePs_inst_23_24_14_32_31_tsni(fs_);
-  return power.Pc(tmp, tmp1)
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param01 = scrut.f;
+    param11 = scrut.s;
+    g = param01;
+    gs = param11;
+    tmp = f * g;
+    tmp1 = power1.dotMult(f, gs);
+    tmp2 = power1.dotMult(g, fs_);
+    tmp3 = power1.addPs(tmp1, tmp2);
+    tmp4 = x__inst_39_40_36_4_tsni();
+    tmp5 = multPs_inst_39_40_36_tsni(tmp4, fs_);
+    tmp6 = multPs_inst_39_40_36_tsni(tmp5, gs);
+    tmp7 = power1.addPs(tmp3, tmp6);
+    return power1.Pc(tmp, tmp7)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-dotMult_inst_0_1_tsni = function dotMult_inst_0_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_0_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_0_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
+match_scrut_arm_Pc_inst_41_42_40_36_tsni = function match_scrut_arm_Pc_inst_41_42_40_36_tsni(gss, _deforest_Pc_f_inst_41_42_40_36_tsni, _deforest_Pc_s_inst_41_42_40_36_tsni) {
+  let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  param0 = _deforest_Pc_f_inst_41_42_40_36_tsni;
+  param1 = _deforest_Pc_s_inst_41_42_40_36_tsni;
+  f = param0;
+  fs_ = param1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param01 = scrut.f;
+    param11 = scrut.s;
+    g = param01;
+    gs = param11;
+    tmp = f * g;
+    tmp1 = power1.dotMult(f, gs);
+    tmp2 = power1.dotMult(g, fs_);
+    tmp3 = power1.addPs(tmp1, tmp2);
+    tmp4 = x__inst_41_42_40_36_4_tsni();
+    tmp5 = multPs_inst_41_42_40_36_tsni(tmp4, fs_);
+    tmp6 = multPs_inst_41_42_40_36_tsni(tmp5, gs);
+    tmp7 = power1.addPs(tmp3, tmp6);
+    return power1.Pc(tmp, tmp7)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+match_scrut_arm_Pz_inst_44_45_32_30_22_tsni = function match_scrut_arm_Pz_inst_44_45_32_30_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_44_45_32_30_22_11_tsni);
+      tmp1 = divPs_inst_44_45_32_30_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
     } else {
-      throw new globalThis.Error("match error");
+      return power1.Pz
     }
-  });
-  tmp = lambda;
+  } else {
+    return power1.Pz
+  }
+};
+match_scrut_arm_Pc_inst_54_64_58_tsni = function match_scrut_arm_Pc_inst_54_64_58_tsni(gss, _deforest_Pc_f_inst_54_64_58_tsni, _deforest_Pc_s_inst_54_64_58_tsni) {
+  let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  param0 = _deforest_Pc_f_inst_54_64_58_tsni;
+  param1 = _deforest_Pc_s_inst_54_64_58_tsni;
+  f = param0;
+  fs_ = param1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param01 = scrut.f;
+    param11 = scrut.s;
+    g = param01;
+    gs = param11;
+    tmp = f * g;
+    tmp1 = power1.dotMult(f, gs);
+    tmp2 = power1.dotMult(g, fs_);
+    tmp3 = power1.addPs(tmp1, tmp2);
+    tmp4 = x__inst_54_64_58_4_tsni();
+    tmp5 = multPs_inst_54_64_58_tsni(tmp4, fs_);
+    tmp6 = multPs_inst_54_64_58_tsni(tmp5, gs);
+    tmp7 = power1.addPs(tmp3, tmp6);
+    return power1.Pc(tmp, tmp7)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+match_scrut_arm_Pz_inst_54_67_tsni = function match_scrut_arm_Pz_inst_54_67_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_54_67_11_tsni);
+      tmp1 = divPs_inst_54_67_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
+  }
+};
+match_scrut_arm_Pz_inst_54_69_45_32_30_22_tsni = function match_scrut_arm_Pz_inst_54_69_45_32_30_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_54_69_45_32_30_22_11_tsni);
+      tmp1 = divPs_inst_54_69_45_32_30_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
+  }
+};
+match_scrut_arm_Pz_inst_72_73_69_45_32_30_22_tsni = function match_scrut_arm_Pz_inst_72_73_69_45_32_30_22_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_72_73_69_45_32_30_22_11_tsni);
+      tmp1 = divPs_inst_72_73_69_45_32_30_22_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
+  }
+};
+match_scrut_arm_Pz_inst_72_73_67_tsni = function match_scrut_arm_Pz_inst_72_73_67_tsni(gss) {
+  let scrut, param0, param1, gs, tmp, tmp1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    throw globalThis.Error("power series 0/0");
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gs = param1;
+      tmp = NofibPrelude.lazy(lambda_inst_72_73_67_11_tsni);
+      tmp1 = divPs_inst_72_73_67_tsni(tmp, gs);
+      return NofibPrelude.force(tmp1)
+    } else {
+      return power1.Pz
+    }
+  } else {
+    return power1.Pz
+  }
+};
+match_scrut_arm_Pc_inst_72_73_64_58_tsni = function match_scrut_arm_Pc_inst_72_73_64_58_tsni(gss, _deforest_Pc_f_inst_72_73_64_58_tsni, _deforest_Pc_s_inst_72_73_64_58_tsni) {
+  let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  param0 = _deforest_Pc_f_inst_72_73_64_58_tsni;
+  param1 = _deforest_Pc_s_inst_72_73_64_58_tsni;
+  f = param0;
+  fs_ = param1;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param01 = scrut.f;
+    param11 = scrut.s;
+    g = param01;
+    gs = param11;
+    tmp = f * g;
+    tmp1 = power1.dotMult(f, gs);
+    tmp2 = power1.dotMult(g, fs_);
+    tmp3 = power1.addPs(tmp1, tmp2);
+    tmp4 = x__inst_72_73_64_58_4_tsni();
+    tmp5 = multPs_inst_72_73_64_58_tsni(tmp4, fs_);
+    tmp6 = multPs_inst_72_73_64_58_tsni(tmp5, gs);
+    tmp7 = power1.addPs(tmp3, tmp6);
+    return power1.Pc(tmp, tmp7)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+tree_inst_0_tsni = function tree_inst_0_tsni() {
+  let tmp;
+  tmp = lambda_inst_0_tsni;
   return NofibPrelude.lazy(tmp)
 };
-dotMult_inst_0_2_tsni = function dotMult_inst_0_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_0_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_0_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
+lambda_inst_0_tsni = (undefined, function () {
+  let tmp, tmp1, tmp2;
+  tmp = power1.list();
+  tmp1 = NofibPrelude.lazy(lambda47);
+  tmp2 = composeSndLz__inst_0_1_tsni(tmp, tmp1);
+  return power1.Pc(0, tmp2)
+});
+composeSndLz__inst_0_1_tsni = function composeSndLz__inst_0_1_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_0_1_tsni(fss, gss));
   return NofibPrelude.lazy(tmp)
 };
-dotMult_inst_0_3_tsni = function dotMult_inst_0_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_0_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_0_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-divPs_inst_4_5_tsni = function divPs_inst_4_5_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_4_5_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return power.Pz
-        }
+lambda_inst_0_1_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_0_1_tsni(fss, gss)
+  }
+});
+lambda$_inst_0_1_tsni = function lambda$_inst_0_1_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = NofibPrelude.force(gss);
+    scrut1 = NofibPrelude.force(tmp);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp1 = NofibPrelude.lazy(lambda26);
+      return power1.Pc(f, tmp1)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda27(gs));
+        tmp2 = NofibPrelude.lazy(lambda$this);
+        tmp3 = compose__inst_0_1_2_tsni(fs_, tmp2);
+        tmp4 = power1.multPs(gs, tmp3);
+        return power1.Pc(f, tmp4)
       } else {
-        return power.Pz
+        lambda$this1 = runtime.safeCall(lambda28(f));
+        tmp5 = NofibPrelude.lazy(lambda$this1);
+        tmp6 = composeSndLz__inst_0_1_tsni(fs_, gss);
+        tmp7 = power1.multPs(gss, tmp6);
+        tmp8 = power1.addPs(tmp5, tmp7);
+        return NofibPrelude.force(tmp8)
       }
-    } else if (scrut instanceof power.Pc.class) {
+    } else {
+      lambda$this2 = runtime.safeCall(lambda30(f));
+      tmp9 = NofibPrelude.lazy(lambda$this2);
+      tmp10 = composeSndLz__inst_0_1_tsni(fs_, gss);
+      tmp11 = power1.multPs(gss, tmp10);
+      tmp12 = power1.addPs(tmp9, tmp11);
+      return NofibPrelude.force(tmp12)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+compose__inst_0_1_2_tsni = function compose__inst_0_1_2_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_0_1_2_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_0_1_2_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_0_1_2_tsni(fss, gss)
+  }
+});
+lambda$_inst_0_1_2_tsni = function lambda$_inst_0_1_2_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_0_1_2_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_0_1_2_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_0_1_2_tsni(fs_, gss);
+        tmp6 = multPs_inst_0_1_2_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_0_1_2_tsni(fs_, gss);
+      tmp10 = multPs_inst_0_1_2_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_0_1_2_3_tsni = function multPs_inst_0_1_2_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_0_1_2_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_0_1_2_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_0_1_2_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_0_1_2_3_tsni = function lambda$_inst_0_1_2_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_0_1_2_3_4_tsni = function x__inst_0_1_2_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_0_1_2_3_4_5_tsni)
+};
+lambda_inst_0_1_2_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_0_1_2_3_4_tsni();
+      tmp6 = multPs_inst_0_1_2_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_0_1_2_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_0_1_2_6_tsni = function multPs_inst_0_1_2_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_0_1_2_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_0_1_2_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_0_1_2_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_0_1_2_6_tsni = function lambda$_inst_0_1_2_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_0_1_2_6_4_tsni = function x__inst_0_1_2_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_0_1_2_6_4_5_tsni)
+};
+lambda_inst_0_1_2_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_0_1_2_6_4_tsni();
+      tmp6 = multPs_inst_0_1_2_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_0_1_2_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_0_1_2_7_tsni = function multPs_inst_0_1_2_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_0_1_2_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_0_1_2_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_0_1_2_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_0_1_2_7_tsni = function lambda$_inst_0_1_2_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_0_1_2_7_4_tsni = function x__inst_0_1_2_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_0_1_2_7_4_5_tsni)
+};
+lambda_inst_0_1_2_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_0_1_2_7_4_tsni();
+      tmp6 = multPs_inst_0_1_2_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_0_1_2_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+tree_inst_8_tsni = function tree_inst_8_tsni() {
+  let tmp;
+  tmp = lambda46;
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_8_tsni = (undefined, function () {
+  return tree_inst_8_tsni()
+});
+composeSndLz__inst_8_1_tsni = function composeSndLz__inst_8_1_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_8_1_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_8_1_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_8_1_tsni(fss, gss)
+  }
+});
+lambda$_inst_8_1_tsni = function lambda$_inst_8_1_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = NofibPrelude.force(gss);
+    scrut1 = NofibPrelude.force(tmp);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp1 = NofibPrelude.lazy(lambda26);
+      return power1.Pc(f, tmp1)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda27(gs));
+        tmp2 = NofibPrelude.lazy(lambda$this);
+        tmp3 = compose__inst_8_1_2_tsni(fs_, tmp2);
+        tmp4 = power1.multPs(gs, tmp3);
+        return power1.Pc(f, tmp4)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda28(f));
+        tmp5 = NofibPrelude.lazy(lambda$this1);
+        tmp6 = composeSndLz__inst_8_1_tsni(fs_, gss);
+        tmp7 = power1.multPs(gss, tmp6);
+        tmp8 = power1.addPs(tmp5, tmp7);
+        return NofibPrelude.force(tmp8)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda30(f));
+      tmp9 = NofibPrelude.lazy(lambda$this2);
+      tmp10 = composeSndLz__inst_8_1_tsni(fs_, gss);
+      tmp11 = power1.multPs(gss, tmp10);
+      tmp12 = power1.addPs(tmp9, tmp11);
+      return NofibPrelude.force(tmp12)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+compose__inst_8_1_2_tsni = function compose__inst_8_1_2_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_8_1_2_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_8_1_2_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_8_1_2_tsni(fss, gss)
+  }
+});
+lambda$_inst_8_1_2_tsni = function lambda$_inst_8_1_2_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_8_1_2_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_8_1_2_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_8_1_2_tsni(fs_, gss);
+        tmp6 = multPs_inst_8_1_2_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_8_1_2_tsni(fs_, gss);
+      tmp10 = multPs_inst_8_1_2_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_8_1_2_3_tsni = function multPs_inst_8_1_2_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_8_1_2_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_8_1_2_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_8_1_2_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_8_1_2_3_tsni = function lambda$_inst_8_1_2_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_8_1_2_3_4_tsni = function x__inst_8_1_2_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_8_1_2_3_4_5_tsni)
+};
+lambda_inst_8_1_2_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_8_1_2_3_4_tsni();
+      tmp6 = multPs_inst_8_1_2_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_8_1_2_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_8_1_2_6_tsni = function multPs_inst_8_1_2_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_8_1_2_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_8_1_2_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_8_1_2_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_8_1_2_6_tsni = function lambda$_inst_8_1_2_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_8_1_2_6_4_tsni = function x__inst_8_1_2_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_8_1_2_6_4_5_tsni)
+};
+lambda_inst_8_1_2_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_8_1_2_6_4_tsni();
+      tmp6 = multPs_inst_8_1_2_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_8_1_2_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_8_1_2_7_tsni = function multPs_inst_8_1_2_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_8_1_2_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_8_1_2_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_8_1_2_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_8_1_2_7_tsni = function lambda$_inst_8_1_2_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_8_1_2_7_4_tsni = function x__inst_8_1_2_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_8_1_2_7_4_5_tsni)
+};
+lambda_inst_8_1_2_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_8_1_2_7_4_tsni();
+      tmp6 = multPs_inst_8_1_2_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_8_1_2_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+qs$_inst_9_tsni = function qs$_inst_9_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_9_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_9_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$29(fs_)
+  }
+});
+divPs_inst_9_10_tsni = function divPs_inst_9_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_9_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_9_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_9_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_9_10_tsni = function lambda$_inst_9_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_9_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
       param0 = scrut.f;
       param1 = scrut.s;
       if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_4_5_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_4_5_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_4_5_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_4_5_tsni(tmp6, tmp7);
-            return power.Pc(q1, tmp8)
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_4_5_2_tsni(q, gs);
-            tmp11 = negatePs_inst_4_5_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_4_5_tsni(tmp12, tmp13);
-            return power.Pc(q, tmp14)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_4_5_3_tsni(q, gs);
-          tmp17 = negatePs_inst_4_5_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_4_5_tsni(tmp18, tmp19);
-          return power.Pc(q, tmp20)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_4_5_3_tsni = function dotMult_inst_4_5_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_4_5_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_4_5_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_4_5_2_tsni = function dotMult_inst_4_5_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_4_5_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_4_5_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_4_5_1_tsni = function dotMult_inst_4_5_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_4_5_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_4_5_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-divPs_inst_6_7_tsni = function divPs_inst_6_7_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_6_7_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return (int1, n) => {
-            return match_scrut_arm_Pz_inst_6_29_tsni(int1, n)
-          }
-        }
-      } else {
-        return (int1, n) => {
-          return match_scrut_arm_Pz_inst_6_29_tsni(int1, n)
-        }
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_6_7_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_6_7_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_6_7_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_6_7_tsni(tmp6, tmp7);
-            _deforest_Pc_f = q1;
-            _deforest_Pc_s = tmp8;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_6_29_tsni(int1, n, _deforest_Pc_f, _deforest_Pc_s)
-            }
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_6_7_2_tsni(q, gs);
-            tmp11 = negatePs_inst_6_7_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_6_7_tsni(tmp12, tmp13);
-            _deforest_Pc_f2 = q;
-            _deforest_Pc_s2 = tmp14;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_6_29_tsni(int1, n, _deforest_Pc_f2, _deforest_Pc_s2)
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_6_7_3_tsni(q, gs);
-          tmp17 = negatePs_inst_6_7_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_6_7_tsni(tmp18, tmp19);
-          _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp20;
-          return (int1, n) => {
-            return match_scrut_arm_Pc_inst_6_29_tsni(int1, n, _deforest_Pc_f1, _deforest_Pc_s1)
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_6_7_3_tsni = function dotMult_inst_6_7_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_6_7_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_6_7_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_6_7_2_tsni = function dotMult_inst_6_7_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_6_7_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_6_7_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_6_7_1_tsni = function dotMult_inst_6_7_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_6_7_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_6_7_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-integralLz_inst_8_9_tsni = function integralLz_inst_8_9_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return (int11, n1) => {
-          return () => {
-            return power.Pz
-          }
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return (int11, n1) => {
-          return match_scrut_arm_Pc_inst_8_10_tsni(int11, n1, _deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return (int11, n) => {
-      return match_scrut_arm_Pc_inst_8_10_tsni(int11, n, _deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-integral_inst_8_10_tsni = function integral_inst_8_10_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp, _deforest_Pc_f, _deforest_Pc_s;
-    tmp = int1(fs_, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp;
-    return () => {
-      return match_scrut_arm_Pc_inst_8_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  return NofibPrelude.lazy(lambda)
-};
-integralLz_inst_11_12_tsni = function integralLz_inst_11_12_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return () => {
-          return power.Pz
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return () => {
-          return match_scrut_arm_Pc_inst_11_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return () => {
-      return match_scrut_arm_Pc_inst_11_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-sinx_inst_13_14_tsni = function sinx_inst_13_14_tsni() {
-  let tmp, tmp1, tmp2, lambda;
-  lambda = (undefined, function () {
-    let tmp3, lambda1;
-    lambda1 = (undefined, function () {
-      return power.Pz
-    });
-    tmp3 = NofibPrelude.lazy(lambda1);
-    return power.Pc(1, tmp3)
-  });
-  tmp = NofibPrelude.lazy(lambda);
-  tmp1 = integralLz_inst_13_14_12_tsni(sinx_inst_13_14_tsni);
-  tmp2 = minusPs_inst_13_14_32_tsni(tmp, tmp1);
-  return power.integral(tmp2)
-};
-integralLz_inst_13_14_12_tsni = function integralLz_inst_13_14_12_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return () => {
-          return power.Pz
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return () => {
-          return match_scrut_arm_Pc_inst_13_14_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return () => {
-      return match_scrut_arm_Pc_inst_13_14_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-cosx_inst_13_15_tsni = function cosx_inst_13_15_tsni() {
-  let tmp, tmp1, tmp2, lambda;
-  lambda = (undefined, function () {
-    let tmp3, lambda1;
-    lambda1 = (undefined, function () {
-      return power.Pz
-    });
-    tmp3 = NofibPrelude.lazy(lambda1);
-    return power.Pc(1, tmp3)
-  });
-  tmp = NofibPrelude.lazy(lambda);
-  tmp1 = integralLz_inst_13_15_9_tsni(cosx_inst_13_15_tsni);
-  tmp2 = integral_inst_13_15_10_tsni(tmp1);
-  return minusPs_inst_13_15_30_tsni(tmp, tmp2)
-};
-integral_inst_13_15_10_tsni = function integral_inst_13_15_10_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp, _deforest_Pc_f, _deforest_Pc_s;
-    tmp = int1(fs_, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp;
-    return () => {
-      return match_scrut_arm_Pc_inst_13_15_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  return NofibPrelude.lazy(lambda)
-};
-integralLz_inst_13_15_9_tsni = function integralLz_inst_13_15_9_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return (int11, n1) => {
-          return () => {
-            return power.Pz
-          }
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return (int11, n1) => {
-          return match_scrut_arm_Pc_inst_13_15_10_tsni(int11, n1, _deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return (int11, n) => {
-      return match_scrut_arm_Pc_inst_13_15_10_tsni(int11, n, _deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-sqrtPs_inst_13_16_tsni = function sqrtPs_inst_13_16_tsni(fss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let qs, scrut, param0, param1, fs_, gss, scrut1, param01, param11, fs_1, tmp1, tmp2, tmp3;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      return power.Pz
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        gss = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          if (param01 === 0) {
-            fs_1 = param11;
-            tmp1 = sqrtPs_inst_13_16_tsni(fs_1);
-            return power.Pc(0, tmp1)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      } else if (param0 === 1) {
-        fs_ = param1;
-        qs = function qs() {
-          let tmp4, lambda1;
-          lambda1 = (undefined, function () {
-            let tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda2;
-            tmp5 = power.fromIntegerPs(1);
-            lambda2 = (undefined, function () {
-              let _deforest_Pc_f, _deforest_Pc_s;
-              _deforest_Pc_f = 1;
-              _deforest_Pc_s = fs_;
-              return () => {
-                let deriv1, param02, param12, fs_2, tmp12;
-                param02 = _deforest_Pc_f;
-                param12 = _deforest_Pc_s;
-                fs_2 = param12;
-                deriv1 = function deriv1(gss1, n) {
-                  let tmp13, lambda3;
-                  lambda3 = (undefined, function () {
-                    let scrut2, param03, param13, f, fs_3, tmp14, tmp15, tmp16;
-                    scrut2 = NofibPrelude.force(gss1);
-                    if (scrut2 instanceof power.Pz.class) {
-                      return power.Pz
-                    } else if (scrut2 instanceof power.Pc.class) {
-                      param03 = scrut2.f;
-                      param13 = scrut2.s;
-                      f = param03;
-                      fs_3 = param13;
-                      tmp14 = n * f;
-                      tmp15 = n + 1;
-                      tmp16 = deriv1(fs_3, tmp15);
-                      return power.Pc(tmp14, tmp16)
-                    } else {
-                      throw new globalThis.Error("match error");
-                    }
-                  });
-                  tmp13 = lambda3;
-                  return NofibPrelude.lazy(tmp13)
-                };
-                tmp12 = deriv1(fs_2, 1);
-                return NofibPrelude.force(tmp12)
-              }
-            });
-            tmp6 = NofibPrelude.lazy(lambda2);
-            tmp7 = deriv_inst_13_16_28_tsni(tmp6);
-            tmp8 = qs();
-            tmp9 = power.dotMultSndLz(2, tmp8);
-            tmp10 = divPs_inst_13_16_7_tsni(tmp7, tmp9);
-            tmp11 = integral_inst_13_16_29_tsni(tmp10);
-            return power.addPs(tmp5, tmp11)
-          });
-          tmp4 = lambda1;
-          return NofibPrelude.lazy(tmp4)
-        };
-        tmp2 = qs();
-        tmp3 = NofibPrelude.force(tmp2);
-        return NofibPrelude.force(tmp3)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-divPs_inst_13_16_7_tsni = function divPs_inst_13_16_7_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_13_16_7_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return (int1, n) => {
-            return match_scrut_arm_Pz_inst_13_16_29_tsni(int1, n)
-          }
-        }
-      } else {
-        return (int1, n) => {
-          return match_scrut_arm_Pz_inst_13_16_29_tsni(int1, n)
-        }
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_13_16_7_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_13_16_7_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_13_16_7_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_13_16_7_tsni(tmp6, tmp7);
-            _deforest_Pc_f2 = q1;
-            _deforest_Pc_s2 = tmp8;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_13_16_29_tsni(int1, n, _deforest_Pc_f2, _deforest_Pc_s2)
-            }
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_13_16_7_2_tsni(q, gs);
-            tmp11 = negatePs_inst_13_16_7_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_13_16_7_tsni(tmp12, tmp13);
-            _deforest_Pc_f1 = q;
-            _deforest_Pc_s1 = tmp14;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_13_16_29_tsni(int1, n, _deforest_Pc_f1, _deforest_Pc_s1)
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_13_16_7_3_tsni(q, gs);
-          tmp17 = negatePs_inst_13_16_7_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_13_16_7_tsni(tmp18, tmp19);
-          _deforest_Pc_f = q;
-          _deforest_Pc_s = tmp20;
-          return (int1, n) => {
-            return match_scrut_arm_Pc_inst_13_16_29_tsni(int1, n, _deforest_Pc_f, _deforest_Pc_s)
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_16_7_1_tsni = function dotMult_inst_13_16_7_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_16_7_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_16_7_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_16_7_2_tsni = function dotMult_inst_13_16_7_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_16_7_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_16_7_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_16_7_3_tsni = function dotMult_inst_13_16_7_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_16_7_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_16_7_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-sinx_inst_13_17_tsni = function sinx_inst_13_17_tsni() {
-  let tmp, tmp1, tmp2, lambda;
-  lambda = (undefined, function () {
-    let tmp3, lambda1;
-    lambda1 = (undefined, function () {
-      return power.Pz
-    });
-    tmp3 = NofibPrelude.lazy(lambda1);
-    return power.Pc(1, tmp3)
-  });
-  tmp = NofibPrelude.lazy(lambda);
-  tmp1 = integralLz_inst_13_17_12_tsni(sinx_inst_13_17_tsni);
-  tmp2 = minusPs_inst_13_17_32_tsni(tmp, tmp1);
-  return power.integral(tmp2)
-};
-integralLz_inst_13_17_12_tsni = function integralLz_inst_13_17_12_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return () => {
-          return power.Pz
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return () => {
-          return match_scrut_arm_Pc_inst_13_17_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return () => {
-      return match_scrut_arm_Pc_inst_13_17_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-cosx_inst_13_18_tsni = function cosx_inst_13_18_tsni() {
-  let tmp, tmp1, tmp2, lambda;
-  lambda = (undefined, function () {
-    let tmp3, lambda1;
-    lambda1 = (undefined, function () {
-      return power.Pz
-    });
-    tmp3 = NofibPrelude.lazy(lambda1);
-    return power.Pc(1, tmp3)
-  });
-  tmp = NofibPrelude.lazy(lambda);
-  tmp1 = integralLz_inst_13_18_9_tsni(cosx_inst_13_18_tsni);
-  tmp2 = integral_inst_13_18_10_tsni(tmp1);
-  return minusPs_inst_13_18_30_tsni(tmp, tmp2)
-};
-integral_inst_13_18_10_tsni = function integral_inst_13_18_10_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp, _deforest_Pc_f, _deforest_Pc_s;
-    tmp = int1(fs_, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp;
-    return () => {
-      return match_scrut_arm_Pc_inst_13_18_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  return NofibPrelude.lazy(lambda)
-};
-integralLz_inst_13_18_9_tsni = function integralLz_inst_13_18_9_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return (int11, n1) => {
-          return () => {
-            return power.Pz
-          }
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return (int11, n1) => {
-          return match_scrut_arm_Pc_inst_13_18_10_tsni(int11, n1, _deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return (int11, n) => {
-      return match_scrut_arm_Pc_inst_13_18_10_tsni(int11, n, _deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-divPs_inst_13_19_tsni = function divPs_inst_13_19_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_13_19_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return power.Pz
-        }
-      } else {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_13_19_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_13_19_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_13_19_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_13_19_tsni(tmp6, tmp7);
-            return power.Pc(q1, tmp8)
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_13_19_2_tsni(q, gs);
-            tmp11 = negatePs_inst_13_19_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_13_19_tsni(tmp12, tmp13);
-            return power.Pc(q, tmp14)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_13_19_3_tsni(q, gs);
-          tmp17 = negatePs_inst_13_19_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_13_19_tsni(tmp18, tmp19);
-          return power.Pc(q, tmp20)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_19_3_tsni = function dotMult_inst_13_19_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_19_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_19_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_19_2_tsni = function dotMult_inst_13_19_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_19_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_19_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_19_1_tsni = function dotMult_inst_13_19_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_19_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_19_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-divPs_inst_13_20_tsni = function divPs_inst_13_20_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_13_20_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return (int1, n) => {
-            return match_scrut_arm_Pz_inst_13_22_tsni(int1, n)
-          }
-        }
-      } else {
-        return (int1, n) => {
-          return match_scrut_arm_Pz_inst_13_22_tsni(int1, n)
-        }
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_13_20_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_13_20_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_13_20_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_13_20_tsni(tmp6, tmp7);
-            _deforest_Pc_f = q1;
-            _deforest_Pc_s = tmp8;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_13_22_tsni(int1, n, _deforest_Pc_f, _deforest_Pc_s)
-            }
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_13_20_2_tsni(q, gs);
-            tmp11 = negatePs_inst_13_20_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_13_20_tsni(tmp12, tmp13);
-            _deforest_Pc_f2 = q;
-            _deforest_Pc_s2 = tmp14;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_13_22_tsni(int1, n, _deforest_Pc_f2, _deforest_Pc_s2)
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_13_20_3_tsni(q, gs);
-          tmp17 = negatePs_inst_13_20_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_13_20_tsni(tmp18, tmp19);
-          _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp20;
-          return (int1, n) => {
-            return match_scrut_arm_Pc_inst_13_22_tsni(int1, n, _deforest_Pc_f1, _deforest_Pc_s1)
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_20_3_tsni = function dotMult_inst_13_20_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_20_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_20_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_20_2_tsni = function dotMult_inst_13_20_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_20_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_20_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_20_1_tsni = function dotMult_inst_13_20_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_20_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_20_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-revert_inst_13_21_tsni = function revert_inst_13_21_tsni(fss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(fss);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-divPs_inst_13_21_5_tsni = function divPs_inst_13_21_5_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_13_21_5_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return power.Pz
-        }
-      } else {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_13_21_5_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_13_21_5_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_13_21_5_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_13_21_5_tsni(tmp6, tmp7);
-            return power.Pc(q1, tmp8)
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_13_21_5_2_tsni(q, gs);
-            tmp11 = negatePs_inst_13_21_5_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_13_21_5_tsni(tmp12, tmp13);
-            return power.Pc(q, tmp14)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_13_21_5_3_tsni(q, gs);
-          tmp17 = negatePs_inst_13_21_5_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_13_21_5_tsni(tmp18, tmp19);
-          return power.Pc(q, tmp20)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_21_5_1_tsni = function dotMult_inst_13_21_5_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_21_5_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_21_5_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_21_5_2_tsni = function dotMult_inst_13_21_5_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_21_5_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_21_5_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_13_21_5_3_tsni = function dotMult_inst_13_21_5_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_13_21_5_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_13_21_5_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-integral_inst_13_22_tsni = function integral_inst_13_22_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp, _deforest_Pc_f, _deforest_Pc_s;
-    tmp = int1(fs_, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp;
-    return () => {
-      let rs, param0, param1, f0, kss, scrut, param01, param11, f1, gss, scrut1, fs_1, tmp1, tmp2, tmp3, tmp4, lambda1;
-      param0 = _deforest_Pc_f;
-      param1 = _deforest_Pc_s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        rs = function rs() {
-          let tmp5, lambda2;
-          lambda2 = (undefined, function () {
-            let tmp6, tmp7, tmp8, tmp9;
-            tmp6 = power.fromIntegerPs(1);
-            tmp7 = rs();
-            tmp8 = power.compose_(fs_1, tmp7);
-            tmp9 = divPs_inst_13_21_5_tsni(tmp6, tmp8);
-            return power.Pc(0, tmp9)
-          });
-          tmp5 = lambda2;
-          return NofibPrelude.lazy(tmp5)
-        };
-        tmp1 = rs();
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_9_10_11_tsni);
+        tmp1 = divPs_inst_9_10_tsni(tmp, gs);
         return NofibPrelude.force(tmp1)
       } else {
-        f0 = param0;
-        kss = param1;
-        scrut = NofibPrelude.force(kss);
-        if (scrut instanceof power.Pc.class) {
-          param01 = scrut.f;
-          param11 = scrut.s;
-          f1 = param01;
-          gss = param11;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pz.class) {
-            tmp2 = - 1;
-            tmp3 = tmp2 / f1;
-            lambda1 = (undefined, function () {
-              let tmp5, tmp6, lambda2;
-              tmp5 = 1 / f1;
-              lambda2 = (undefined, function () {
-                return power.Pz
-              });
-              tmp6 = NofibPrelude.lazy(lambda2);
-              return power.Pc(tmp5, tmp6)
-            });
-            tmp4 = NofibPrelude.lazy(lambda1);
-            return power.Pc(tmp3, tmp4)
-          } else {
-            throw new globalThis.Error("match error");
-          }
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_9_12_tsni = function fromIntegerPs_inst_9_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_9_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_9_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+qs$_inst_14_tsni = function qs$_inst_14_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda43(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda$_inst_14_tsni = function lambda$_inst_14_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_14_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$_inst_14_tsni(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_14_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_14_74_tsni(tmp, tmp6)
+};
+divPs_inst_14_10_tsni = function divPs_inst_14_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_14_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_14_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_14_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_14_10_tsni = function lambda$_inst_14_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_14_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
+      param0 = scrut.f;
+      param1 = scrut.s;
+      if (param0 === 0) {
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_14_10_11_tsni);
+        tmp1 = divPs_inst_14_10_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_14_12_tsni = function fromIntegerPs_inst_14_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_14_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_14_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+lambda_inst_15_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_15_tsni(fs_)
+  }
+});
+lambda$_inst_15_tsni = function lambda$_inst_15_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_15_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_15_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_15_74_tsni(tmp, tmp6)
+};
+divPs_inst_15_10_tsni = function divPs_inst_15_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_15_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_15_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_15_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_15_10_tsni = function lambda$_inst_15_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_15_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
+      param0 = scrut.f;
+      param1 = scrut.s;
+      if (param0 === 0) {
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_15_10_11_tsni);
+        tmp1 = divPs_inst_15_10_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_15_12_tsni = function fromIntegerPs_inst_15_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_15_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_15_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+qs$_inst_16_17_tsni = function qs$_inst_16_17_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_16_17_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_16_17_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_16_17_tsni(fs_)
+  }
+});
+lambda$_inst_16_17_tsni = function lambda$_inst_16_17_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_16_17_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$_inst_16_17_tsni(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_16_17_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_16_17_74_tsni(tmp, tmp6)
+};
+divPs_inst_16_17_10_tsni = function divPs_inst_16_17_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_16_17_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_16_17_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_16_17_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_16_17_10_tsni = function lambda$_inst_16_17_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_16_17_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
+      param0 = scrut.f;
+      param1 = scrut.s;
+      if (param0 === 0) {
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_16_17_10_11_tsni);
+        tmp1 = divPs_inst_16_17_10_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_16_17_12_tsni = function fromIntegerPs_inst_16_17_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_16_17_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_16_17_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+sqrtPs_inst_18_tsni = function sqrtPs_inst_18_tsni(fss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_18_tsni(fss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_18_tsni = (undefined, function (fss) {
+  return () => {
+    return lambda$28(fss)
+  }
+});
+qs$_inst_18_19_tsni = function qs$_inst_18_19_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_18_19_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_18_19_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_18_19_tsni(fs_)
+  }
+});
+lambda$_inst_18_19_tsni = function lambda$_inst_18_19_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_18_19_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$_inst_18_19_tsni(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_18_19_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_18_19_74_tsni(tmp, tmp6)
+};
+divPs_inst_18_19_10_tsni = function divPs_inst_18_19_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_18_19_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_18_19_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_18_19_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_18_19_10_tsni = function lambda$_inst_18_19_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_18_19_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
+      param0 = scrut.f;
+      param1 = scrut.s;
+      if (param0 === 0) {
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_18_19_10_11_tsni);
+        tmp1 = divPs_inst_18_19_10_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_18_19_12_tsni = function fromIntegerPs_inst_18_19_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_18_19_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_18_19_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+sqrtPs_inst_20_tsni = function sqrtPs_inst_20_tsni(fss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda42(fss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda$_inst_20_tsni = function lambda$_inst_20_tsni(fss) {
+  let scrut, param0, param1, fs_, gss, scrut1, param01, param11, fs_1, tmp, tmp1, tmp2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gss = param1;
+      scrut1 = NofibPrelude.force(gss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        if (param01 === 0) {
+          fs_1 = param11;
+          tmp = sqrtPs_inst_20_tsni(fs_1);
+          return power1.Pc(0, tmp)
         } else {
           throw new globalThis.Error("match error");
         }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else if (param0 === 1) {
+      fs_ = param1;
+      tmp1 = qs$_inst_20_19_tsni(fs_);
+      tmp2 = NofibPrelude.force(tmp1);
+      return NofibPrelude.force(tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+qs$_inst_20_19_tsni = function qs$_inst_20_19_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_20_19_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_20_19_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_20_19_tsni(fs_)
+  }
+});
+lambda$_inst_20_19_tsni = function lambda$_inst_20_19_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_20_19_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$_inst_20_19_tsni(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_20_19_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_20_19_74_tsni(tmp, tmp6)
+};
+divPs_inst_20_19_10_tsni = function divPs_inst_20_19_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_20_19_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_20_19_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_20_19_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_20_19_10_tsni = function lambda$_inst_20_19_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_20_19_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
+      param0 = scrut.f;
+      param1 = scrut.s;
+      if (param0 === 0) {
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_20_19_10_11_tsni);
+        tmp1 = divPs_inst_20_19_10_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_20_19_12_tsni = function fromIntegerPs_inst_20_19_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_20_19_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_20_19_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+rs$_inst_21_tsni = function rs$_inst_21_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_21_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_21_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$21(fs_)
+  }
+});
+divPs_inst_21_22_tsni = function divPs_inst_21_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_21_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_21_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_21_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_21_22_tsni = function lambda$_inst_21_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_21_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_21_22_tsni(gss)
+  }
+});
+fromIntegerPs_inst_21_23_tsni = function fromIntegerPs_inst_21_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_21_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_21_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_21_22_tsni(gss)
+  }
+});
+rs$_inst_24_tsni = function rs$_inst_24_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda33(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda$_inst_24_tsni = function lambda$_inst_24_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_24_23_tsni(1);
+  tmp1 = rs$_inst_24_tsni(fs_);
+  tmp2 = power1.compose_(fs_, tmp1);
+  tmp3 = divPs_inst_24_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+divPs_inst_24_22_tsni = function divPs_inst_24_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_24_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_24_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_24_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_24_22_tsni = function lambda$_inst_24_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_24_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_24_22_tsni(gss)
+  }
+});
+fromIntegerPs_inst_24_23_tsni = function fromIntegerPs_inst_24_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_24_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_24_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_24_22_tsni(gss)
+  }
+});
+lambda_inst_25_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_25_tsni(fs_)
+  }
+});
+lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_25_23_tsni(1);
+  tmp1 = rs$(fs_);
+  tmp2 = power1.compose_(fs_, tmp1);
+  tmp3 = divPs_inst_25_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+divPs_inst_25_22_tsni = function divPs_inst_25_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_25_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_25_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_25_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_25_22_tsni = function lambda$_inst_25_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_25_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_25_22_tsni(gss)
+  }
+});
+fromIntegerPs_inst_25_23_tsni = function fromIntegerPs_inst_25_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_25_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_25_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_25_22_tsni(gss)
+  }
+});
+rs$_inst_26_27_tsni = function rs$_inst_26_27_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_26_27_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_26_27_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_26_27_tsni(fs_)
+  }
+});
+lambda$_inst_26_27_tsni = function lambda$_inst_26_27_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_26_27_23_tsni(1);
+  tmp1 = rs$_inst_26_27_tsni(fs_);
+  tmp2 = compose__inst_26_27_28_tsni(fs_, tmp1);
+  tmp3 = divPs_inst_26_27_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+divPs_inst_26_27_22_tsni = function divPs_inst_26_27_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_26_27_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_26_27_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_26_27_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_26_27_22_tsni = function lambda$_inst_26_27_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_26_27_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_26_27_22_tsni(gss)
+  }
+});
+compose__inst_26_27_28_tsni = function compose__inst_26_27_28_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_26_27_28_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_26_27_28_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_26_27_28_tsni(fss, gss)
+  }
+});
+lambda$_inst_26_27_28_tsni = function lambda$_inst_26_27_28_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_26_27_28_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_26_27_28_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_26_27_28_tsni(fs_, gss);
+        tmp6 = multPs_inst_26_27_28_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_26_27_28_tsni(fs_, gss);
+      tmp10 = multPs_inst_26_27_28_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_26_27_28_3_tsni = function multPs_inst_26_27_28_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_26_27_28_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_26_27_28_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_26_27_28_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_26_27_28_3_tsni = function lambda$_inst_26_27_28_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_26_27_28_3_4_tsni = function x__inst_26_27_28_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_26_27_28_3_4_5_tsni)
+};
+lambda_inst_26_27_28_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_26_27_28_3_4_tsni();
+      tmp6 = multPs_inst_26_27_28_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_26_27_28_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_26_27_28_6_tsni = function multPs_inst_26_27_28_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_26_27_28_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_26_27_28_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_26_27_28_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_26_27_28_6_tsni = function lambda$_inst_26_27_28_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_26_27_28_6_4_tsni = function x__inst_26_27_28_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_26_27_28_6_4_5_tsni)
+};
+lambda_inst_26_27_28_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_26_27_28_6_4_tsni();
+      tmp6 = multPs_inst_26_27_28_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_26_27_28_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_26_27_28_7_tsni = function multPs_inst_26_27_28_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_26_27_28_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_26_27_28_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_26_27_28_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_26_27_28_7_tsni = function lambda$_inst_26_27_28_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_26_27_28_7_4_tsni = function x__inst_26_27_28_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_26_27_28_7_4_5_tsni)
+};
+lambda_inst_26_27_28_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_26_27_28_7_4_tsni();
+      tmp6 = multPs_inst_26_27_28_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_26_27_28_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+fromIntegerPs_inst_26_27_23_tsni = function fromIntegerPs_inst_26_27_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_26_27_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_26_27_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_26_27_22_tsni(gss)
+  }
+});
+rs$_inst_29_30_tsni = function rs$_inst_29_30_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_29_30_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_29_30_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_29_30_tsni(fs_)
+  }
+});
+lambda$_inst_29_30_tsni = function lambda$_inst_29_30_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_29_30_23_tsni(1);
+  tmp1 = rs$_inst_29_30_tsni(fs_);
+  tmp2 = compose__inst_29_30_28_tsni(fs_, tmp1);
+  tmp3 = divPs_inst_29_30_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+divPs_inst_29_30_22_tsni = function divPs_inst_29_30_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_29_30_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_29_30_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_29_30_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_29_30_22_tsni = function lambda$_inst_29_30_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_29_30_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_29_30_22_tsni(gss)
+  }
+});
+compose__inst_29_30_28_tsni = function compose__inst_29_30_28_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_29_30_28_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_29_30_28_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_29_30_28_tsni(fss, gss)
+  }
+});
+lambda$_inst_29_30_28_tsni = function lambda$_inst_29_30_28_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_29_30_28_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_29_30_28_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_29_30_28_tsni(fs_, gss);
+        tmp6 = multPs_inst_29_30_28_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_29_30_28_tsni(fs_, gss);
+      tmp10 = multPs_inst_29_30_28_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_29_30_28_3_tsni = function multPs_inst_29_30_28_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_29_30_28_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_29_30_28_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_29_30_28_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_29_30_28_3_tsni = function lambda$_inst_29_30_28_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_29_30_28_3_4_tsni = function x__inst_29_30_28_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_29_30_28_3_4_5_tsni)
+};
+lambda_inst_29_30_28_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_29_30_28_3_4_tsni();
+      tmp6 = multPs_inst_29_30_28_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_29_30_28_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_29_30_28_6_tsni = function multPs_inst_29_30_28_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_29_30_28_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_29_30_28_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_29_30_28_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_29_30_28_6_tsni = function lambda$_inst_29_30_28_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_29_30_28_6_4_tsni = function x__inst_29_30_28_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_29_30_28_6_4_5_tsni)
+};
+lambda_inst_29_30_28_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_29_30_28_6_4_tsni();
+      tmp6 = multPs_inst_29_30_28_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_29_30_28_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_29_30_28_7_tsni = function multPs_inst_29_30_28_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_29_30_28_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_29_30_28_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_29_30_28_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_29_30_28_7_tsni = function lambda$_inst_29_30_28_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_29_30_28_7_4_tsni = function x__inst_29_30_28_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_29_30_28_7_4_5_tsni)
+};
+lambda_inst_29_30_28_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_29_30_28_7_4_tsni();
+      tmp6 = multPs_inst_29_30_28_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_29_30_28_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+fromIntegerPs_inst_29_30_23_tsni = function fromIntegerPs_inst_29_30_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_29_30_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_29_30_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_29_30_22_tsni(gss)
+  }
+});
+lambda$_inst_31_32_tsni = function lambda$_inst_31_32_tsni(fss) {
+  let scrut, param0, param1, f0, kss, scrut1, param01, param11, f1, gss, scrut2, fs_, tmp, tmp1, tmp2, tmp3, lambda$this;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      fs_ = param1;
+      tmp = rs$_inst_31_32_30_tsni(fs_);
+      return NofibPrelude.force(tmp)
+    } else {
+      f0 = param0;
+      kss = param1;
+      scrut1 = NofibPrelude.force(kss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        f1 = param01;
+        gss = param11;
+        scrut2 = NofibPrelude.force(gss);
+        if (scrut2 instanceof power1.Pz.class) {
+          tmp1 = - 1;
+          tmp2 = tmp1 / f1;
+          lambda$this = runtime.safeCall(lambda34(f1));
+          tmp3 = NofibPrelude.lazy(lambda$this);
+          return power1.Pc(tmp2, tmp3)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      } else {
+        throw new globalThis.Error("match error");
       }
     }
-  });
-  return NofibPrelude.lazy(lambda)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-testPower_nofib_inst_23_24_tsni = function testPower_nofib_inst_23_24_tsni(p) {
+rs$_inst_31_32_30_tsni = function rs$_inst_31_32_30_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_31_32_30_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_31_32_30_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_31_32_30_tsni(fs_)
+  }
+});
+lambda$_inst_31_32_30_tsni = function lambda$_inst_31_32_30_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_31_32_30_23_tsni(1);
+  tmp1 = rs$_inst_31_32_30_tsni(fs_);
+  tmp2 = compose__inst_31_32_30_28_tsni(fs_, tmp1);
+  tmp3 = divPs_inst_31_32_30_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+compose__inst_31_32_30_28_tsni = function compose__inst_31_32_30_28_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_31_32_30_28_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_31_32_30_28_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_31_32_30_28_tsni(fss, gss)
+  }
+});
+lambda$_inst_31_32_30_28_tsni = function lambda$_inst_31_32_30_28_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_31_32_30_28_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_31_32_30_28_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_31_32_30_28_tsni(fs_, gss);
+        tmp6 = multPs_inst_31_32_30_28_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_31_32_30_28_tsni(fs_, gss);
+      tmp10 = multPs_inst_31_32_30_28_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_31_32_30_28_7_tsni = function multPs_inst_31_32_30_28_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_31_32_30_28_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_31_32_30_28_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_31_32_30_28_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_31_32_30_28_7_tsni = function lambda$_inst_31_32_30_28_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_31_32_30_28_7_4_tsni = function x__inst_31_32_30_28_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_31_32_30_28_7_4_5_tsni)
+};
+lambda_inst_31_32_30_28_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_31_32_30_28_7_4_tsni();
+      tmp6 = multPs_inst_31_32_30_28_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_31_32_30_28_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_31_32_30_28_6_tsni = function multPs_inst_31_32_30_28_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_31_32_30_28_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_31_32_30_28_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_31_32_30_28_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_31_32_30_28_6_tsni = function lambda$_inst_31_32_30_28_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_31_32_30_28_6_4_tsni = function x__inst_31_32_30_28_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_31_32_30_28_6_4_5_tsni)
+};
+lambda_inst_31_32_30_28_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_31_32_30_28_6_4_tsni();
+      tmp6 = multPs_inst_31_32_30_28_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_31_32_30_28_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_31_32_30_28_3_tsni = function multPs_inst_31_32_30_28_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_31_32_30_28_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_31_32_30_28_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_31_32_30_28_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_31_32_30_28_3_tsni = function lambda$_inst_31_32_30_28_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_31_32_30_28_3_4_tsni = function x__inst_31_32_30_28_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_31_32_30_28_3_4_5_tsni)
+};
+lambda_inst_31_32_30_28_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_31_32_30_28_3_4_tsni();
+      tmp6 = multPs_inst_31_32_30_28_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_31_32_30_28_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+divPs_inst_31_32_30_22_tsni = function divPs_inst_31_32_30_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_31_32_30_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_31_32_30_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_31_32_30_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_31_32_30_22_tsni = function lambda$_inst_31_32_30_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_31_32_30_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_31_32_30_22_tsni(gss)
+  }
+});
+fromIntegerPs_inst_31_32_30_23_tsni = function fromIntegerPs_inst_31_32_30_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_31_32_30_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_31_32_30_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_31_32_30_22_tsni(gss)
+  }
+});
+composeSndLz__inst_33_tsni = function composeSndLz__inst_33_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_33_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_33_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$15(fss, gss)
+  }
+});
+compose__inst_33_2_tsni = function compose__inst_33_2_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_33_2_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_33_2_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_33_2_tsni(fss, gss)
+  }
+});
+lambda$_inst_33_2_tsni = function lambda$_inst_33_2_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_33_2_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_33_2_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_33_2_tsni(fs_, gss);
+        tmp6 = multPs_inst_33_2_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_33_2_tsni(fs_, gss);
+      tmp10 = multPs_inst_33_2_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_33_2_7_tsni = function multPs_inst_33_2_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_33_2_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_33_2_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_33_2_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_33_2_7_tsni = function lambda$_inst_33_2_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_33_2_7_4_tsni = function x__inst_33_2_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_33_2_7_4_5_tsni)
+};
+lambda_inst_33_2_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_33_2_7_4_tsni();
+      tmp6 = multPs_inst_33_2_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_33_2_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_33_2_6_tsni = function multPs_inst_33_2_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_33_2_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_33_2_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_33_2_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_33_2_6_tsni = function lambda$_inst_33_2_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_33_2_6_4_tsni = function x__inst_33_2_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_33_2_6_4_5_tsni)
+};
+lambda_inst_33_2_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_33_2_6_4_tsni();
+      tmp6 = multPs_inst_33_2_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_33_2_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_33_2_3_tsni = function multPs_inst_33_2_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_33_2_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_33_2_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_33_2_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_33_2_3_tsni = function lambda$_inst_33_2_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_33_2_3_4_tsni = function x__inst_33_2_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_33_2_3_4_5_tsni)
+};
+lambda_inst_33_2_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_33_2_3_4_tsni();
+      tmp6 = multPs_inst_33_2_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_33_2_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+composeSndLz__inst_34_tsni = function composeSndLz__inst_34_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda25(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda$_inst_34_tsni = function lambda$_inst_34_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = NofibPrelude.force(gss);
+    scrut1 = NofibPrelude.force(tmp);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp1 = NofibPrelude.lazy(lambda26);
+      return power1.Pc(f, tmp1)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda27(gs));
+        tmp2 = NofibPrelude.lazy(lambda$this);
+        tmp3 = compose__inst_34_2_tsni(fs_, tmp2);
+        tmp4 = power1.multPs(gs, tmp3);
+        return power1.Pc(f, tmp4)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda28(f));
+        tmp5 = NofibPrelude.lazy(lambda$this1);
+        tmp6 = composeSndLz__inst_34_tsni(fs_, gss);
+        tmp7 = power1.multPs(gss, tmp6);
+        tmp8 = power1.addPs(tmp5, tmp7);
+        return NofibPrelude.force(tmp8)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda30(f));
+      tmp9 = NofibPrelude.lazy(lambda$this2);
+      tmp10 = composeSndLz__inst_34_tsni(fs_, gss);
+      tmp11 = power1.multPs(gss, tmp10);
+      tmp12 = power1.addPs(tmp9, tmp11);
+      return NofibPrelude.force(tmp12)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+compose__inst_34_2_tsni = function compose__inst_34_2_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_34_2_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_34_2_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_34_2_tsni(fss, gss)
+  }
+});
+lambda$_inst_34_2_tsni = function lambda$_inst_34_2_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_34_2_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_34_2_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_34_2_tsni(fs_, gss);
+        tmp6 = multPs_inst_34_2_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_34_2_tsni(fs_, gss);
+      tmp10 = multPs_inst_34_2_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_34_2_7_tsni = function multPs_inst_34_2_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_34_2_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_34_2_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_34_2_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_34_2_7_tsni = function lambda$_inst_34_2_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_34_2_7_4_tsni = function x__inst_34_2_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_34_2_7_4_5_tsni)
+};
+lambda_inst_34_2_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_34_2_7_4_tsni();
+      tmp6 = multPs_inst_34_2_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_34_2_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_34_2_6_tsni = function multPs_inst_34_2_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_34_2_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_34_2_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_34_2_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_34_2_6_tsni = function lambda$_inst_34_2_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_34_2_6_4_tsni = function x__inst_34_2_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_34_2_6_4_5_tsni)
+};
+lambda_inst_34_2_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_34_2_6_4_tsni();
+      tmp6 = multPs_inst_34_2_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_34_2_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_34_2_3_tsni = function multPs_inst_34_2_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_34_2_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_34_2_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_34_2_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_34_2_3_tsni = function lambda$_inst_34_2_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_34_2_3_4_tsni = function x__inst_34_2_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_34_2_3_4_5_tsni)
+};
+lambda_inst_34_2_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_34_2_3_4_tsni();
+      tmp6 = multPs_inst_34_2_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_34_2_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_35_36_tsni = function multPs_inst_35_36_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_35_36_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_35_36_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_35_36_tsni(fss, gss)
+  }
+});
+lambda$_inst_35_36_tsni = function lambda$_inst_35_36_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_35_36_4_tsni = function x__inst_35_36_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_35_36_4_5_tsni)
+};
+lambda_inst_35_36_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_35_36_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+x__inst_35_37_tsni = function x__inst_35_37_tsni() {
+  return NofibPrelude.lazy(lambda_inst_35_37_5_tsni)
+};
+lambda_inst_35_37_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_35_36_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+multPs_inst_35_38_tsni = function multPs_inst_35_38_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_35_38_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_35_38_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_35_38_tsni(fss, gss)
+  }
+});
+lambda$_inst_35_38_tsni = function lambda$_inst_35_38_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_35_38_4_tsni = function x__inst_35_38_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_35_38_4_5_tsni)
+};
+lambda_inst_35_38_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_35_38_4_tsni();
+      tmp6 = multPs_inst_35_38_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_35_38_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda$_inst_39_40_tsni = function lambda$_inst_39_40_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  tmp = NofibPrelude.force(fss);
+  scrut = NofibPrelude.force(tmp);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_39_40_37_tsni();
+      tmp6 = multPs_inst_39_40_36_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_39_40_38_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_39_40_38_tsni = function multPs_inst_39_40_38_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_39_40_38_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_39_40_38_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_39_40_38_tsni(fss, gss)
+  }
+});
+lambda$_inst_39_40_38_tsni = function lambda$_inst_39_40_38_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_39_40_38_4_tsni = function x__inst_39_40_38_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_39_40_38_4_5_tsni)
+};
+lambda_inst_39_40_38_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_39_40_38_4_tsni();
+      tmp6 = multPs_inst_39_40_38_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_39_40_38_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_39_40_36_tsni = function multPs_inst_39_40_36_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_39_40_36_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_39_40_36_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_39_40_36_tsni(fss, gss)
+  }
+});
+lambda$_inst_39_40_36_tsni = function lambda$_inst_39_40_36_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_39_40_36_4_tsni = function x__inst_39_40_36_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_39_40_36_4_5_tsni)
+};
+lambda_inst_39_40_36_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_39_40_36_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+x__inst_39_40_37_tsni = function x__inst_39_40_37_tsni() {
+  return NofibPrelude.lazy(lambda_inst_39_40_37_5_tsni)
+};
+lambda_inst_39_40_37_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_39_40_36_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+lambda_inst_41_42_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_41_42_40_tsni(fss, gss)
+  }
+});
+lambda$_inst_41_42_40_tsni = function lambda$_inst_41_42_40_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  tmp = NofibPrelude.force(fss);
+  scrut = NofibPrelude.force(tmp);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_41_42_40_37_tsni();
+      tmp6 = multPs_inst_41_42_40_36_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_41_42_40_38_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_41_42_40_36_tsni = function multPs_inst_41_42_40_36_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_41_42_40_36_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_41_42_40_36_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_41_42_40_36_tsni(fss, gss)
+  }
+});
+lambda$_inst_41_42_40_36_tsni = function lambda$_inst_41_42_40_36_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_41_42_40_36_4_tsni = function x__inst_41_42_40_36_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_41_42_40_36_4_5_tsni)
+};
+lambda_inst_41_42_40_36_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_41_42_40_36_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+x__inst_41_42_40_37_tsni = function x__inst_41_42_40_37_tsni() {
+  return NofibPrelude.lazy(lambda_inst_41_42_40_37_5_tsni)
+};
+lambda_inst_41_42_40_37_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_41_42_40_36_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+multPs_inst_41_42_40_38_tsni = function multPs_inst_41_42_40_38_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_41_42_40_38_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_41_42_40_38_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_41_42_40_38_tsni(fss, gss)
+  }
+});
+lambda$_inst_41_42_40_38_tsni = function lambda$_inst_41_42_40_38_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_41_42_40_38_4_tsni = function x__inst_41_42_40_38_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_41_42_40_38_4_5_tsni)
+};
+lambda_inst_41_42_40_38_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_41_42_40_38_4_tsni();
+      tmp6 = multPs_inst_41_42_40_38_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_41_42_40_38_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_43_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_43_tsni(fss, gss)
+  }
+});
+lambda$_inst_43_tsni = function lambda$_inst_43_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = NofibPrelude.force(gss);
+    scrut1 = NofibPrelude.force(tmp);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp1 = NofibPrelude.lazy(lambda26);
+      return power1.Pc(f, tmp1)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda27(gs));
+        tmp2 = NofibPrelude.lazy(lambda$this);
+        tmp3 = compose__inst_43_2_tsni(fs_, tmp2);
+        tmp4 = power1.multPs(gs, tmp3);
+        return power1.Pc(f, tmp4)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda28(f));
+        tmp5 = NofibPrelude.lazy(lambda$this1);
+        tmp6 = power1.composeSndLz_(fs_, gss);
+        tmp7 = power1.multPs(gss, tmp6);
+        tmp8 = power1.addPs(tmp5, tmp7);
+        return NofibPrelude.force(tmp8)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda30(f));
+      tmp9 = NofibPrelude.lazy(lambda$this2);
+      tmp10 = power1.composeSndLz_(fs_, gss);
+      tmp11 = power1.multPs(gss, tmp10);
+      tmp12 = power1.addPs(tmp9, tmp11);
+      return NofibPrelude.force(tmp12)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+compose__inst_43_2_tsni = function compose__inst_43_2_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_43_2_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_43_2_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_43_2_tsni(fss, gss)
+  }
+});
+lambda$_inst_43_2_tsni = function lambda$_inst_43_2_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_43_2_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_43_2_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_43_2_tsni(fs_, gss);
+        tmp6 = multPs_inst_43_2_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_43_2_tsni(fs_, gss);
+      tmp10 = multPs_inst_43_2_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_43_2_7_tsni = function multPs_inst_43_2_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_43_2_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_43_2_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_43_2_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_43_2_7_tsni = function lambda$_inst_43_2_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_43_2_7_4_tsni = function x__inst_43_2_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_43_2_7_4_5_tsni)
+};
+lambda_inst_43_2_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_43_2_7_4_tsni();
+      tmp6 = multPs_inst_43_2_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_43_2_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_43_2_6_tsni = function multPs_inst_43_2_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_43_2_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_43_2_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_43_2_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_43_2_6_tsni = function lambda$_inst_43_2_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_43_2_6_4_tsni = function x__inst_43_2_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_43_2_6_4_5_tsni)
+};
+lambda_inst_43_2_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_43_2_6_4_tsni();
+      tmp6 = multPs_inst_43_2_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_43_2_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_43_2_3_tsni = function multPs_inst_43_2_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_43_2_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_43_2_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_43_2_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_43_2_3_tsni = function lambda$_inst_43_2_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_43_2_3_4_tsni = function x__inst_43_2_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_43_2_3_4_5_tsni)
+};
+lambda_inst_43_2_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_43_2_3_4_tsni();
+      tmp6 = multPs_inst_43_2_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_43_2_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_44_45_tsni = (undefined, function (fss) {
+  return () => {
+    return lambda$_inst_44_45_32_tsni(fss)
+  }
+});
+lambda$_inst_44_45_32_tsni = function lambda$_inst_44_45_32_tsni(fss) {
+  let scrut, param0, param1, f0, kss, scrut1, param01, param11, f1, gss, scrut2, fs_, tmp, tmp1, tmp2, tmp3, lambda$this;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      fs_ = param1;
+      tmp = rs$_inst_44_45_32_30_tsni(fs_);
+      return NofibPrelude.force(tmp)
+    } else {
+      f0 = param0;
+      kss = param1;
+      scrut1 = NofibPrelude.force(kss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        f1 = param01;
+        gss = param11;
+        scrut2 = NofibPrelude.force(gss);
+        if (scrut2 instanceof power1.Pz.class) {
+          tmp1 = - 1;
+          tmp2 = tmp1 / f1;
+          lambda$this = runtime.safeCall(lambda34(f1));
+          tmp3 = NofibPrelude.lazy(lambda$this);
+          return power1.Pc(tmp2, tmp3)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+rs$_inst_44_45_32_30_tsni = function rs$_inst_44_45_32_30_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_44_45_32_30_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_44_45_32_30_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_44_45_32_30_tsni(fs_)
+  }
+});
+lambda$_inst_44_45_32_30_tsni = function lambda$_inst_44_45_32_30_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_44_45_32_30_23_tsni(1);
+  tmp1 = rs$_inst_44_45_32_30_tsni(fs_);
+  tmp2 = compose__inst_44_45_32_30_28_tsni(fs_, tmp1);
+  tmp3 = divPs_inst_44_45_32_30_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+divPs_inst_44_45_32_30_22_tsni = function divPs_inst_44_45_32_30_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_44_45_32_30_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_44_45_32_30_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_44_45_32_30_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_44_45_32_30_22_tsni = function lambda$_inst_44_45_32_30_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_44_45_32_30_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_44_45_32_30_22_tsni(gss)
+  }
+});
+compose__inst_44_45_32_30_28_tsni = function compose__inst_44_45_32_30_28_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_44_45_32_30_28_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_44_45_32_30_28_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_44_45_32_30_28_tsni(fss, gss)
+  }
+});
+lambda$_inst_44_45_32_30_28_tsni = function lambda$_inst_44_45_32_30_28_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_44_45_32_30_28_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_44_45_32_30_28_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_44_45_32_30_28_tsni(fs_, gss);
+        tmp6 = multPs_inst_44_45_32_30_28_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_44_45_32_30_28_tsni(fs_, gss);
+      tmp10 = multPs_inst_44_45_32_30_28_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_44_45_32_30_28_3_tsni = function multPs_inst_44_45_32_30_28_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_44_45_32_30_28_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_44_45_32_30_28_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_44_45_32_30_28_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_44_45_32_30_28_3_tsni = function lambda$_inst_44_45_32_30_28_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_44_45_32_30_28_3_4_tsni = function x__inst_44_45_32_30_28_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_44_45_32_30_28_3_4_5_tsni)
+};
+lambda_inst_44_45_32_30_28_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_44_45_32_30_28_3_4_tsni();
+      tmp6 = multPs_inst_44_45_32_30_28_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_44_45_32_30_28_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_44_45_32_30_28_6_tsni = function multPs_inst_44_45_32_30_28_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_44_45_32_30_28_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_44_45_32_30_28_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_44_45_32_30_28_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_44_45_32_30_28_6_tsni = function lambda$_inst_44_45_32_30_28_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_44_45_32_30_28_6_4_tsni = function x__inst_44_45_32_30_28_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_44_45_32_30_28_6_4_5_tsni)
+};
+lambda_inst_44_45_32_30_28_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_44_45_32_30_28_6_4_tsni();
+      tmp6 = multPs_inst_44_45_32_30_28_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_44_45_32_30_28_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_44_45_32_30_28_7_tsni = function multPs_inst_44_45_32_30_28_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_44_45_32_30_28_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_44_45_32_30_28_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_44_45_32_30_28_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_44_45_32_30_28_7_tsni = function lambda$_inst_44_45_32_30_28_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_44_45_32_30_28_7_4_tsni = function x__inst_44_45_32_30_28_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_44_45_32_30_28_7_4_5_tsni)
+};
+lambda_inst_44_45_32_30_28_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_44_45_32_30_28_7_4_tsni();
+      tmp6 = multPs_inst_44_45_32_30_28_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_44_45_32_30_28_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+fromIntegerPs_inst_44_45_32_30_23_tsni = function fromIntegerPs_inst_44_45_32_30_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_44_45_32_30_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_44_45_32_30_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_44_45_32_30_22_tsni(gss)
+  }
+});
+lambda_inst_46_tsni = (undefined, function (fss) {
+  return () => {
+    return lambda$_inst_46_tsni(fss)
+  }
+});
+lambda$_inst_46_tsni = function lambda$_inst_46_tsni(fss) {
+  let scrut, param0, param1, fs_, gss, scrut1, param01, param11, fs_1, tmp, tmp1, tmp2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gss = param1;
+      scrut1 = NofibPrelude.force(gss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        if (param01 === 0) {
+          fs_1 = param11;
+          tmp = power1.sqrtPs(fs_1);
+          return power1.Pc(0, tmp)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else if (param0 === 1) {
+      fs_ = param1;
+      tmp1 = qs$_inst_46_19_tsni(fs_);
+      tmp2 = NofibPrelude.force(tmp1);
+      return NofibPrelude.force(tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+qs$_inst_46_19_tsni = function qs$_inst_46_19_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_46_19_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_46_19_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_46_19_tsni(fs_)
+  }
+});
+lambda$_inst_46_19_tsni = function lambda$_inst_46_19_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_46_19_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$_inst_46_19_tsni(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_46_19_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_46_19_74_tsni(tmp, tmp6)
+};
+divPs_inst_46_19_10_tsni = function divPs_inst_46_19_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_46_19_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_46_19_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_46_19_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_46_19_10_tsni = function lambda$_inst_46_19_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_46_19_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
+      param0 = scrut.f;
+      param1 = scrut.s;
+      if (param0 === 0) {
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_46_19_10_11_tsni);
+        tmp1 = divPs_inst_46_19_10_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_46_19_12_tsni = function fromIntegerPs_inst_46_19_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_46_19_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_46_19_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+lambda_inst_47_tsni = (undefined, function () {
+  let tmp, tmp1, tmp2;
+  tmp = power1.list();
+  tmp1 = NofibPrelude.lazy(lambda_inst_47_tsni1);
+  tmp2 = composeSndLz__inst_47_1_tsni(tmp, tmp1);
+  return power1.Pc(0, tmp2)
+});
+lambda_inst_47_tsni1 = (undefined, function () {
+  return power1.tree()
+});
+composeSndLz__inst_47_1_tsni = function composeSndLz__inst_47_1_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_47_1_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_47_1_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_47_1_tsni(fss, gss)
+  }
+});
+lambda$_inst_47_1_tsni = function lambda$_inst_47_1_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = NofibPrelude.force(gss);
+    scrut1 = NofibPrelude.force(tmp);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp1 = NofibPrelude.lazy(lambda26);
+      return power1.Pc(f, tmp1)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda27(gs));
+        tmp2 = NofibPrelude.lazy(lambda$this);
+        tmp3 = compose__inst_47_1_2_tsni(fs_, tmp2);
+        tmp4 = power1.multPs(gs, tmp3);
+        return power1.Pc(f, tmp4)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda28(f));
+        tmp5 = NofibPrelude.lazy(lambda$this1);
+        tmp6 = composeSndLz__inst_47_1_tsni(fs_, gss);
+        tmp7 = power1.multPs(gss, tmp6);
+        tmp8 = power1.addPs(tmp5, tmp7);
+        return NofibPrelude.force(tmp8)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda30(f));
+      tmp9 = NofibPrelude.lazy(lambda$this2);
+      tmp10 = composeSndLz__inst_47_1_tsni(fs_, gss);
+      tmp11 = power1.multPs(gss, tmp10);
+      tmp12 = power1.addPs(tmp9, tmp11);
+      return NofibPrelude.force(tmp12)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+compose__inst_47_1_2_tsni = function compose__inst_47_1_2_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_47_1_2_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_47_1_2_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_47_1_2_tsni(fss, gss)
+  }
+});
+lambda$_inst_47_1_2_tsni = function lambda$_inst_47_1_2_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_47_1_2_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_47_1_2_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_47_1_2_tsni(fs_, gss);
+        tmp6 = multPs_inst_47_1_2_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_47_1_2_tsni(fs_, gss);
+      tmp10 = multPs_inst_47_1_2_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_47_1_2_3_tsni = function multPs_inst_47_1_2_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_47_1_2_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_47_1_2_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_47_1_2_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_47_1_2_3_tsni = function lambda$_inst_47_1_2_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_47_1_2_3_4_tsni = function x__inst_47_1_2_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_47_1_2_3_4_5_tsni)
+};
+lambda_inst_47_1_2_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_47_1_2_3_4_tsni();
+      tmp6 = multPs_inst_47_1_2_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_47_1_2_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_47_1_2_6_tsni = function multPs_inst_47_1_2_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_47_1_2_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_47_1_2_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_47_1_2_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_47_1_2_6_tsni = function lambda$_inst_47_1_2_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_47_1_2_6_4_tsni = function x__inst_47_1_2_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_47_1_2_6_4_5_tsni)
+};
+lambda_inst_47_1_2_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_47_1_2_6_4_tsni();
+      tmp6 = multPs_inst_47_1_2_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_47_1_2_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_47_1_2_7_tsni = function multPs_inst_47_1_2_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_47_1_2_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_47_1_2_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_47_1_2_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_47_1_2_7_tsni = function lambda$_inst_47_1_2_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_47_1_2_7_4_tsni = function x__inst_47_1_2_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_47_1_2_7_4_5_tsni)
+};
+lambda_inst_47_1_2_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_47_1_2_7_4_tsni();
+      tmp6 = multPs_inst_47_1_2_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_47_1_2_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_48_49_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_48_49_50_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_48_75_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_48_49_50_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+lambda_inst_51_52_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_51_52_53_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_51_77_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_51_52_53_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+sinx_inst_54_55_tsni = function sinx_inst_54_55_tsni() {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude.lazy(lambda_inst_54_55_52_tsni);
+  tmp1 = power.integralLz(sinx_inst_54_55_tsni);
+  tmp2 = minusPs_inst_54_55_77_tsni(tmp, tmp1);
+  return power.integral(tmp2)
+};
+lambda_inst_54_55_52_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_54_55_52_53_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_54_55_77_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_54_55_52_53_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+cosx_inst_54_56_tsni = function cosx_inst_54_56_tsni() {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude.lazy(lambda_inst_54_56_49_tsni);
+  tmp1 = power.integralLz(cosx_inst_54_56_tsni);
+  tmp2 = power.integral(tmp1);
+  return minusPs_inst_54_56_75_tsni(tmp, tmp2)
+};
+lambda_inst_54_56_49_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_54_56_49_50_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_54_56_75_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_54_56_49_50_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+powerPs_inst_54_57_tsni = function powerPs_inst_54_57_tsni(a, n) {
+  let scrut, tmp, tmp1;
+  scrut = n <= 0;
+  if (scrut === true) {
+    return power.fromIntegerPs(1)
+  } else {
+    tmp = n - 1;
+    tmp1 = powerPs_inst_54_57_tsni(a, tmp);
+    return multPs_inst_54_57_58_tsni(a, tmp1)
+  }
+};
+multPs_inst_54_57_58_tsni = function multPs_inst_54_57_58_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_57_58_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_57_58_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_57_58_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_57_58_tsni = function lambda$_inst_54_57_58_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_57_58_4_tsni = function x__inst_54_57_58_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_57_58_4_5_tsni)
+};
+lambda_inst_54_57_58_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_54_57_58_4_tsni();
+      tmp6 = multPs_inst_54_57_58_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_54_57_58_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+fromIntegerPs_inst_54_59_tsni = function fromIntegerPs_inst_54_59_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_54_59_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_54_59_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+sqrtPs_inst_54_60_tsni = function sqrtPs_inst_54_60_tsni(fss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_60_tsni(fss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_60_tsni = (undefined, function (fss) {
+  return () => {
+    return lambda$_inst_54_60_tsni(fss)
+  }
+});
+lambda$_inst_54_60_tsni = function lambda$_inst_54_60_tsni(fss) {
+  let scrut, param0, param1, fs_, gss, scrut1, param01, param11, fs_1, tmp, tmp1, tmp2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gss = param1;
+      scrut1 = NofibPrelude.force(gss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        if (param01 === 0) {
+          fs_1 = param11;
+          tmp = sqrtPs_inst_54_60_tsni(fs_1);
+          return power1.Pc(0, tmp)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else if (param0 === 1) {
+      fs_ = param1;
+      tmp1 = qs$_inst_54_60_19_tsni(fs_);
+      tmp2 = NofibPrelude.force(tmp1);
+      return NofibPrelude.force(tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+qs$_inst_54_60_19_tsni = function qs$_inst_54_60_19_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_60_19_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_60_19_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_54_60_19_tsni(fs_)
+  }
+});
+lambda$_inst_54_60_19_tsni = function lambda$_inst_54_60_19_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_54_60_19_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$_inst_54_60_19_tsni(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_54_60_19_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_54_60_19_74_tsni(tmp, tmp6)
+};
+divPs_inst_54_60_19_10_tsni = function divPs_inst_54_60_19_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_60_19_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_60_19_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_60_19_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_60_19_10_tsni = function lambda$_inst_54_60_19_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_54_60_19_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
+      param0 = scrut.f;
+      param1 = scrut.s;
+      if (param0 === 0) {
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_54_60_19_10_11_tsni);
+        tmp1 = divPs_inst_54_60_19_10_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_54_60_19_12_tsni = function fromIntegerPs_inst_54_60_19_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_54_60_19_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_54_60_19_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+sinx_inst_54_61_tsni = function sinx_inst_54_61_tsni() {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude.lazy(lambda_inst_54_61_52_tsni);
+  tmp1 = power.integralLz(sinx_inst_54_61_tsni);
+  tmp2 = minusPs_inst_54_61_77_tsni(tmp, tmp1);
+  return power.integral(tmp2)
+};
+lambda_inst_54_61_52_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_54_61_52_53_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_54_61_77_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_54_61_52_53_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+cosx_inst_54_62_tsni = function cosx_inst_54_62_tsni() {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude.lazy(lambda_inst_54_62_49_tsni);
+  tmp1 = power.integralLz(cosx_inst_54_62_tsni);
+  tmp2 = power.integral(tmp1);
+  return minusPs_inst_54_62_75_tsni(tmp, tmp2)
+};
+lambda_inst_54_62_49_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_54_62_49_50_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_54_62_75_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_54_62_49_50_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+divPs_inst_54_63_tsni = function divPs_inst_54_63_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_63_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_63_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_63_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_63_tsni = function lambda$_inst_54_63_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_54_63_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
+      param0 = scrut.f;
+      param1 = scrut.s;
+      if (param0 === 0) {
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_54_63_11_tsni);
+        tmp1 = divPs_inst_54_63_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+powerPs_inst_54_64_tsni = function powerPs_inst_54_64_tsni(a, n) {
+  let scrut, tmp, tmp1;
+  scrut = n <= 0;
+  if (scrut === true) {
+    return power.fromIntegerPs(1)
+  } else {
+    tmp = n - 1;
+    tmp1 = powerPs_inst_54_64_tsni(a, tmp);
+    return multPs_inst_54_64_58_tsni(a, tmp1)
+  }
+};
+multPs_inst_54_64_58_tsni = function multPs_inst_54_64_58_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_64_58_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_64_58_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_64_58_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_64_58_tsni = function lambda$_inst_54_64_58_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_64_58_4_tsni = function x__inst_54_64_58_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_64_58_4_5_tsni)
+};
+lambda_inst_54_64_58_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_54_64_58_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+x__inst_54_65_tsni = function x__inst_54_65_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_65_5_tsni)
+};
+lambda_inst_54_65_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_54_64_58_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+fromIntegerPs_inst_54_66_tsni = function fromIntegerPs_inst_54_66_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_54_66_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_54_66_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+divPs_inst_54_67_tsni = function divPs_inst_54_67_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_67_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_67_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_67_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_67_tsni = function lambda$_inst_54_67_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_54_67_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_54_67_tsni(gss)
+  }
+});
+fromIntegerPs_inst_54_68_tsni = function fromIntegerPs_inst_54_68_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_54_68_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_54_68_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_54_67_tsni(gss)
+  }
+});
+revert_inst_54_69_tsni = function revert_inst_54_69_tsni(fss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_69_45_tsni(fss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_69_45_tsni = (undefined, function (fss) {
+  return () => {
+    return lambda$_inst_54_69_45_32_tsni(fss)
+  }
+});
+lambda$_inst_54_69_45_32_tsni = function lambda$_inst_54_69_45_32_tsni(fss) {
+  let scrut, param0, param1, f0, kss, scrut1, param01, param11, f1, gss, scrut2, fs_, tmp, tmp1, tmp2, tmp3, lambda$this;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      fs_ = param1;
+      tmp = rs$_inst_54_69_45_32_30_tsni(fs_);
+      return NofibPrelude.force(tmp)
+    } else {
+      f0 = param0;
+      kss = param1;
+      scrut1 = NofibPrelude.force(kss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        f1 = param01;
+        gss = param11;
+        scrut2 = NofibPrelude.force(gss);
+        if (scrut2 instanceof power1.Pz.class) {
+          tmp1 = - 1;
+          tmp2 = tmp1 / f1;
+          lambda$this = runtime.safeCall(lambda34(f1));
+          tmp3 = NofibPrelude.lazy(lambda$this);
+          return power1.Pc(tmp2, tmp3)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+rs$_inst_54_69_45_32_30_tsni = function rs$_inst_54_69_45_32_30_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_69_45_32_30_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_69_45_32_30_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_54_69_45_32_30_tsni(fs_)
+  }
+});
+lambda$_inst_54_69_45_32_30_tsni = function lambda$_inst_54_69_45_32_30_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_54_69_45_32_30_23_tsni(1);
+  tmp1 = rs$_inst_54_69_45_32_30_tsni(fs_);
+  tmp2 = compose__inst_54_69_45_32_30_28_tsni(fs_, tmp1);
+  tmp3 = divPs_inst_54_69_45_32_30_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+compose__inst_54_69_45_32_30_28_tsni = function compose__inst_54_69_45_32_30_28_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_69_45_32_30_28_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_69_45_32_30_28_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_69_45_32_30_28_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_69_45_32_30_28_tsni = function lambda$_inst_54_69_45_32_30_28_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_54_69_45_32_30_28_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_54_69_45_32_30_28_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_54_69_45_32_30_28_tsni(fs_, gss);
+        tmp6 = multPs_inst_54_69_45_32_30_28_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_54_69_45_32_30_28_tsni(fs_, gss);
+      tmp10 = multPs_inst_54_69_45_32_30_28_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_54_69_45_32_30_28_7_tsni = function multPs_inst_54_69_45_32_30_28_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_69_45_32_30_28_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_69_45_32_30_28_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_69_45_32_30_28_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_69_45_32_30_28_7_tsni = function lambda$_inst_54_69_45_32_30_28_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_69_45_32_30_28_7_4_tsni = function x__inst_54_69_45_32_30_28_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_69_45_32_30_28_7_4_5_tsni)
+};
+lambda_inst_54_69_45_32_30_28_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_54_69_45_32_30_28_7_4_tsni();
+      tmp6 = multPs_inst_54_69_45_32_30_28_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_54_69_45_32_30_28_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_54_69_45_32_30_28_6_tsni = function multPs_inst_54_69_45_32_30_28_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_69_45_32_30_28_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_69_45_32_30_28_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_69_45_32_30_28_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_69_45_32_30_28_6_tsni = function lambda$_inst_54_69_45_32_30_28_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_69_45_32_30_28_6_4_tsni = function x__inst_54_69_45_32_30_28_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_69_45_32_30_28_6_4_5_tsni)
+};
+lambda_inst_54_69_45_32_30_28_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_54_69_45_32_30_28_6_4_tsni();
+      tmp6 = multPs_inst_54_69_45_32_30_28_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_54_69_45_32_30_28_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_54_69_45_32_30_28_3_tsni = function multPs_inst_54_69_45_32_30_28_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_69_45_32_30_28_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_69_45_32_30_28_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_69_45_32_30_28_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_69_45_32_30_28_3_tsni = function lambda$_inst_54_69_45_32_30_28_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_69_45_32_30_28_3_4_tsni = function x__inst_54_69_45_32_30_28_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_69_45_32_30_28_3_4_5_tsni)
+};
+lambda_inst_54_69_45_32_30_28_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_54_69_45_32_30_28_3_4_tsni();
+      tmp6 = multPs_inst_54_69_45_32_30_28_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_54_69_45_32_30_28_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+divPs_inst_54_69_45_32_30_22_tsni = function divPs_inst_54_69_45_32_30_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_69_45_32_30_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_69_45_32_30_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_69_45_32_30_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_69_45_32_30_22_tsni = function lambda$_inst_54_69_45_32_30_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_54_69_45_32_30_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_54_69_45_32_30_22_tsni(gss)
+  }
+});
+fromIntegerPs_inst_54_69_45_32_30_23_tsni = function fromIntegerPs_inst_54_69_45_32_30_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_54_69_45_32_30_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_54_69_45_32_30_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_54_69_45_32_30_22_tsni(gss)
+  }
+});
+tree_inst_54_70_tsni = function tree_inst_54_70_tsni() {
+  let tmp;
+  tmp = lambda_inst_54_70_tsni;
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_70_tsni = (undefined, function () {
+  let tmp, tmp1, tmp2;
+  tmp = power1.list();
+  tmp1 = NofibPrelude.lazy(lambda_inst_54_70_tsni1);
+  tmp2 = composeSndLz__inst_54_70_1_tsni(tmp, tmp1);
+  return power1.Pc(0, tmp2)
+});
+lambda_inst_54_70_tsni1 = (undefined, function () {
+  return tree_inst_54_70_tsni()
+});
+composeSndLz__inst_54_70_1_tsni = function composeSndLz__inst_54_70_1_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_70_1_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_70_1_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_70_1_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_70_1_tsni = function lambda$_inst_54_70_1_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = NofibPrelude.force(gss);
+    scrut1 = NofibPrelude.force(tmp);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp1 = NofibPrelude.lazy(lambda26);
+      return power1.Pc(f, tmp1)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda27(gs));
+        tmp2 = NofibPrelude.lazy(lambda$this);
+        tmp3 = compose__inst_54_70_1_2_tsni(fs_, tmp2);
+        tmp4 = multPs_inst_54_70_1_71_tsni(gs, tmp3);
+        return power1.Pc(f, tmp4)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda28(f));
+        tmp5 = NofibPrelude.lazy(lambda$this1);
+        tmp6 = composeSndLz__inst_54_70_1_tsni(fs_, gss);
+        tmp7 = power1.multPs(gss, tmp6);
+        tmp8 = power1.addPs(tmp5, tmp7);
+        return NofibPrelude.force(tmp8)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda30(f));
+      tmp9 = NofibPrelude.lazy(lambda$this2);
+      tmp10 = composeSndLz__inst_54_70_1_tsni(fs_, gss);
+      tmp11 = power1.multPs(gss, tmp10);
+      tmp12 = power1.addPs(tmp9, tmp11);
+      return NofibPrelude.force(tmp12)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+compose__inst_54_70_1_2_tsni = function compose__inst_54_70_1_2_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_70_1_2_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_70_1_2_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_70_1_2_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_70_1_2_tsni = function lambda$_inst_54_70_1_2_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_54_70_1_2_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_54_70_1_2_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_54_70_1_2_tsni(fs_, gss);
+        tmp6 = multPs_inst_54_70_1_2_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_54_70_1_2_tsni(fs_, gss);
+      tmp10 = multPs_inst_54_70_1_2_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_54_70_1_2_7_tsni = function multPs_inst_54_70_1_2_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_70_1_2_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_70_1_2_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_70_1_2_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_70_1_2_7_tsni = function lambda$_inst_54_70_1_2_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_70_1_2_7_4_tsni = function x__inst_54_70_1_2_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_70_1_2_7_4_5_tsni)
+};
+lambda_inst_54_70_1_2_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_54_70_1_2_7_4_tsni();
+      tmp6 = multPs_inst_54_70_1_2_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_54_70_1_2_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_54_70_1_2_6_tsni = function multPs_inst_54_70_1_2_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_70_1_2_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_70_1_2_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_70_1_2_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_70_1_2_6_tsni = function lambda$_inst_54_70_1_2_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_70_1_2_6_4_tsni = function x__inst_54_70_1_2_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_70_1_2_6_4_5_tsni)
+};
+lambda_inst_54_70_1_2_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_54_70_1_2_6_4_tsni();
+      tmp6 = multPs_inst_54_70_1_2_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_54_70_1_2_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_54_70_1_2_3_tsni = function multPs_inst_54_70_1_2_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_70_1_2_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_70_1_2_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_70_1_2_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_70_1_2_3_tsni = function lambda$_inst_54_70_1_2_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_70_1_2_3_4_tsni = function x__inst_54_70_1_2_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_70_1_2_3_4_5_tsni)
+};
+lambda_inst_54_70_1_2_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_54_70_1_2_3_4_tsni();
+      tmp6 = multPs_inst_54_70_1_2_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_54_70_1_2_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_54_70_1_71_tsni = function multPs_inst_54_70_1_71_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_70_1_71_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_70_1_71_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_54_70_1_71_tsni(fss, gss)
+  }
+});
+lambda$_inst_54_70_1_71_tsni = function lambda$_inst_54_70_1_71_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_54_70_1_71_4_tsni = function x__inst_54_70_1_71_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_54_70_1_71_4_5_tsni)
+};
+lambda_inst_54_70_1_71_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_54_70_1_71_4_tsni();
+      tmp6 = multPs_inst_54_70_1_71_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_54_70_1_71_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+testPower_nofib_inst_72_73_tsni = function testPower_nofib_inst_72_73_tsni(p) {
   let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26;
-  tmp = sinx_inst_23_24_14_tsni();
-  tmp1 = power.fromIntegerPs(1);
-  tmp2 = cosx_inst_23_24_15_tsni();
-  tmp3 = power.powerPs(tmp2, 2);
-  tmp4 = power.minusPs(tmp1, tmp3);
-  tmp5 = sqrtPs_inst_23_24_16_tsni(tmp4);
+  tmp = sinx_inst_72_73_55_tsni();
+  tmp1 = fromIntegerPs_inst_72_73_59_tsni(1);
+  tmp2 = cosx_inst_72_73_56_tsni();
+  tmp3 = powerPs_inst_72_73_57_tsni(tmp2, 2);
+  tmp4 = minusPs_inst_72_73_78_tsni(tmp1, tmp3);
+  tmp5 = sqrtPs_inst_72_73_60_tsni(tmp4);
   tmp6 = power.minusPs(tmp, tmp5);
   tmp7 = power.extract(p, tmp6);
-  tmp8 = sinx_inst_23_24_17_tsni();
-  tmp9 = cosx_inst_23_24_18_tsni();
-  tmp10 = divPs_inst_23_24_19_tsni(tmp8, tmp9);
-  tmp11 = power.fromIntegerPs(1);
-  tmp12 = power.fromIntegerPs(1);
-  tmp13 = power.x_();
-  tmp14 = power.powerPs(tmp13, 2);
-  tmp15 = power.addPs(tmp12, tmp14);
-  tmp16 = divPs_inst_23_24_20_tsni(tmp11, tmp15);
-  tmp17 = integral_inst_23_24_22_tsni(tmp16);
-  tmp18 = revert_inst_23_24_21_tsni(tmp17);
+  tmp8 = sinx_inst_72_73_61_tsni();
+  tmp9 = cosx_inst_72_73_62_tsni();
+  tmp10 = divPs_inst_72_73_63_tsni(tmp8, tmp9);
+  tmp11 = fromIntegerPs_inst_72_73_68_tsni(1);
+  tmp12 = fromIntegerPs_inst_72_73_66_tsni(1);
+  tmp13 = x__inst_72_73_65_tsni();
+  tmp14 = powerPs_inst_72_73_64_tsni(tmp13, 2);
+  tmp15 = addPs_inst_72_73_79_tsni(tmp12, tmp14);
+  tmp16 = divPs_inst_72_73_67_tsni(tmp11, tmp15);
+  tmp17 = power.integral(tmp16);
+  tmp18 = revert_inst_72_73_69_tsni(tmp17);
   tmp19 = power.minusPs(tmp10, tmp18);
   tmp20 = power.extract(p, tmp19);
   tmp21 = (tmp7 , tmp20);
   tmp22 = power.ts();
   tmp23 = power.extract(p, tmp22);
   tmp24 = (tmp21 , tmp23);
-  tmp25 = power.tree();
+  tmp25 = tree_inst_72_73_70_tsni();
   tmp26 = power.extract(p, tmp25);
   return (tmp24 , tmp26)
 };
-revert_inst_23_24_21_tsni = function revert_inst_23_24_21_tsni(fss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(fss);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
+tree_inst_72_73_70_tsni = function tree_inst_72_73_70_tsni() {
+  let tmp;
+  tmp = lambda_inst_72_73_70_tsni;
   return NofibPrelude.lazy(tmp)
 };
-divPs_inst_23_24_21_5_tsni = function divPs_inst_23_24_21_5_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_23_24_21_5_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return power.Pz
-        }
+lambda_inst_72_73_70_tsni = (undefined, function () {
+  let tmp, tmp1, tmp2;
+  tmp = power1.list();
+  tmp1 = NofibPrelude.lazy(lambda_inst_72_73_70_tsni1);
+  tmp2 = composeSndLz__inst_72_73_70_1_tsni(tmp, tmp1);
+  return power1.Pc(0, tmp2)
+});
+lambda_inst_72_73_70_tsni1 = (undefined, function () {
+  return tree_inst_72_73_70_tsni()
+});
+composeSndLz__inst_72_73_70_1_tsni = function composeSndLz__inst_72_73_70_1_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_70_1_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_70_1_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_70_1_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_70_1_tsni = function lambda$_inst_72_73_70_1_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = NofibPrelude.force(gss);
+    scrut1 = NofibPrelude.force(tmp);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp1 = NofibPrelude.lazy(lambda26);
+      return power1.Pc(f, tmp1)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda27(gs));
+        tmp2 = NofibPrelude.lazy(lambda$this);
+        tmp3 = compose__inst_72_73_70_1_2_tsni(fs_, tmp2);
+        tmp4 = multPs_inst_72_73_70_1_71_tsni(gs, tmp3);
+        return power1.Pc(f, tmp4)
       } else {
-        return power.Pz
+        lambda$this1 = runtime.safeCall(lambda28(f));
+        tmp5 = NofibPrelude.lazy(lambda$this1);
+        tmp6 = composeSndLz__inst_72_73_70_1_tsni(fs_, gss);
+        tmp7 = power1.multPs(gss, tmp6);
+        tmp8 = power1.addPs(tmp5, tmp7);
+        return NofibPrelude.force(tmp8)
       }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_23_24_21_5_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_23_24_21_5_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_23_24_21_5_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_23_24_21_5_tsni(tmp6, tmp7);
-            return power.Pc(q1, tmp8)
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_23_24_21_5_2_tsni(q, gs);
-            tmp11 = negatePs_inst_23_24_21_5_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_23_24_21_5_tsni(tmp12, tmp13);
-            return power.Pc(q, tmp14)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda30(f));
+      tmp9 = NofibPrelude.lazy(lambda$this2);
+      tmp10 = composeSndLz__inst_72_73_70_1_tsni(fs_, gss);
+      tmp11 = power1.multPs(gss, tmp10);
+      tmp12 = power1.addPs(tmp9, tmp11);
+      return NofibPrelude.force(tmp12)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_72_73_70_1_71_tsni = function multPs_inst_72_73_70_1_71_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_70_1_71_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_70_1_71_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_70_1_71_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_70_1_71_tsni = function lambda$_inst_72_73_70_1_71_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_70_1_71_4_tsni = function x__inst_72_73_70_1_71_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_70_1_71_4_5_tsni)
+};
+lambda_inst_72_73_70_1_71_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_72_73_70_1_71_4_tsni();
+      tmp6 = multPs_inst_72_73_70_1_71_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_72_73_70_1_71_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+compose__inst_72_73_70_1_2_tsni = function compose__inst_72_73_70_1_2_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_70_1_2_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_70_1_2_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_70_1_2_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_70_1_2_tsni = function lambda$_inst_72_73_70_1_2_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_72_73_70_1_2_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_72_73_70_1_2_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
       } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_23_24_21_5_3_tsni(q, gs);
-          tmp17 = negatePs_inst_23_24_21_5_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_23_24_21_5_tsni(tmp18, tmp19);
-          return power.Pc(q, tmp20)
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_72_73_70_1_2_tsni(fs_, gss);
+        tmp6 = multPs_inst_72_73_70_1_2_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_72_73_70_1_2_tsni(fs_, gss);
+      tmp10 = multPs_inst_72_73_70_1_2_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_72_73_70_1_2_3_tsni = function multPs_inst_72_73_70_1_2_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_70_1_2_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_70_1_2_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_70_1_2_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_70_1_2_3_tsni = function lambda$_inst_72_73_70_1_2_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_70_1_2_3_4_tsni = function x__inst_72_73_70_1_2_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_70_1_2_3_4_5_tsni)
+};
+lambda_inst_72_73_70_1_2_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_72_73_70_1_2_3_4_tsni();
+      tmp6 = multPs_inst_72_73_70_1_2_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_72_73_70_1_2_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_72_73_70_1_2_6_tsni = function multPs_inst_72_73_70_1_2_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_70_1_2_6_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_70_1_2_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_70_1_2_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_70_1_2_6_tsni = function lambda$_inst_72_73_70_1_2_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_70_1_2_6_4_tsni = function x__inst_72_73_70_1_2_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_70_1_2_6_4_5_tsni)
+};
+lambda_inst_72_73_70_1_2_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_72_73_70_1_2_6_4_tsni();
+      tmp6 = multPs_inst_72_73_70_1_2_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_72_73_70_1_2_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_72_73_70_1_2_7_tsni = function multPs_inst_72_73_70_1_2_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_70_1_2_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_70_1_2_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_70_1_2_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_70_1_2_7_tsni = function lambda$_inst_72_73_70_1_2_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_70_1_2_7_4_tsni = function x__inst_72_73_70_1_2_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_70_1_2_7_4_5_tsni)
+};
+lambda_inst_72_73_70_1_2_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_72_73_70_1_2_7_4_tsni();
+      tmp6 = multPs_inst_72_73_70_1_2_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_72_73_70_1_2_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+revert_inst_72_73_69_tsni = function revert_inst_72_73_69_tsni(fss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_69_45_tsni(fss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_69_45_tsni = (undefined, function (fss) {
+  return () => {
+    return lambda$_inst_72_73_69_45_32_tsni(fss)
+  }
+});
+lambda$_inst_72_73_69_45_32_tsni = function lambda$_inst_72_73_69_45_32_tsni(fss) {
+  let scrut, param0, param1, f0, kss, scrut1, param01, param11, f1, gss, scrut2, fs_, tmp, tmp1, tmp2, tmp3, lambda$this;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      fs_ = param1;
+      tmp = rs$_inst_72_73_69_45_32_30_tsni(fs_);
+      return NofibPrelude.force(tmp)
+    } else {
+      f0 = param0;
+      kss = param1;
+      scrut1 = NofibPrelude.force(kss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        f1 = param01;
+        gss = param11;
+        scrut2 = NofibPrelude.force(gss);
+        if (scrut2 instanceof power1.Pz.class) {
+          tmp1 = - 1;
+          tmp2 = tmp1 / f1;
+          lambda$this = runtime.safeCall(lambda34(f1));
+          tmp3 = NofibPrelude.lazy(lambda$this);
+          return power1.Pc(tmp2, tmp3)
         } else {
           throw new globalThis.Error("match error");
         }
+      } else {
+        throw new globalThis.Error("match error");
       }
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+rs$_inst_72_73_69_45_32_30_tsni = function rs$_inst_72_73_69_45_32_30_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_69_45_32_30_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_69_45_32_30_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_72_73_69_45_32_30_tsni(fs_)
+  }
+});
+lambda$_inst_72_73_69_45_32_30_tsni = function lambda$_inst_72_73_69_45_32_30_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_72_73_69_45_32_30_23_tsni(1);
+  tmp1 = rs$_inst_72_73_69_45_32_30_tsni(fs_);
+  tmp2 = compose__inst_72_73_69_45_32_30_28_tsni(fs_, tmp1);
+  tmp3 = divPs_inst_72_73_69_45_32_30_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+divPs_inst_72_73_69_45_32_30_22_tsni = function divPs_inst_72_73_69_45_32_30_22_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_69_45_32_30_22_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_69_45_32_30_22_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_69_45_32_30_22_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_69_45_32_30_22_tsni = function lambda$_inst_72_73_69_45_32_30_22_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_72_73_69_45_32_30_22_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_72_73_69_45_32_30_22_tsni(gss)
+  }
+});
+compose__inst_72_73_69_45_32_30_28_tsni = function compose__inst_72_73_69_45_32_30_28_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_69_45_32_30_28_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_69_45_32_30_28_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_69_45_32_30_28_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_69_45_32_30_28_tsni = function lambda$_inst_72_73_69_45_32_30_28_tsni(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = compose__inst_72_73_69_45_32_30_28_tsni(fs_, tmp1);
+        tmp3 = multPs_inst_72_73_69_45_32_30_28_3_tsni(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = compose__inst_72_73_69_45_32_30_28_tsni(fs_, gss);
+        tmp6 = multPs_inst_72_73_69_45_32_30_28_6_tsni(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = compose__inst_72_73_69_45_32_30_28_tsni(fs_, gss);
+      tmp10 = multPs_inst_72_73_69_45_32_30_28_7_tsni(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+multPs_inst_72_73_69_45_32_30_28_3_tsni = function multPs_inst_72_73_69_45_32_30_28_3_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_69_45_32_30_28_3_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_69_45_32_30_28_3_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_69_45_32_30_28_3_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_69_45_32_30_28_3_tsni = function lambda$_inst_72_73_69_45_32_30_28_3_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_69_45_32_30_28_3_4_tsni = function x__inst_72_73_69_45_32_30_28_3_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_69_45_32_30_28_3_4_5_tsni)
+};
+lambda_inst_72_73_69_45_32_30_28_3_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_72_73_69_45_32_30_28_3_4_tsni();
+      tmp6 = multPs_inst_72_73_69_45_32_30_28_3_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_72_73_69_45_32_30_28_3_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
     } else {
       throw new globalThis.Error("match error");
     }
-  });
-  tmp = lambda;
+  }
+});
+multPs_inst_72_73_69_45_32_30_28_6_tsni = function multPs_inst_72_73_69_45_32_30_28_6_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_69_45_32_30_28_6_tsni(fss, gss));
   return NofibPrelude.lazy(tmp)
 };
-dotMult_inst_23_24_21_5_3_tsni = function dotMult_inst_23_24_21_5_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
+lambda_inst_72_73_69_45_32_30_28_6_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_69_45_32_30_28_6_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_69_45_32_30_28_6_tsni = function lambda$_inst_72_73_69_45_32_30_28_6_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_69_45_32_30_28_6_4_tsni = function x__inst_72_73_69_45_32_30_28_6_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_69_45_32_30_28_6_4_5_tsni)
+};
+lambda_inst_72_73_69_45_32_30_28_6_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_72_73_69_45_32_30_28_6_4_tsni();
+      tmp6 = multPs_inst_72_73_69_45_32_30_28_6_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_72_73_69_45_32_30_28_6_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+multPs_inst_72_73_69_45_32_30_28_7_tsni = function multPs_inst_72_73_69_45_32_30_28_7_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_69_45_32_30_28_7_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_69_45_32_30_28_7_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_69_45_32_30_28_7_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_69_45_32_30_28_7_tsni = function lambda$_inst_72_73_69_45_32_30_28_7_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_69_45_32_30_28_7_4_tsni = function x__inst_72_73_69_45_32_30_28_7_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_69_45_32_30_28_7_4_5_tsni)
+};
+lambda_inst_72_73_69_45_32_30_28_7_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_72_73_69_45_32_30_28_7_4_tsni();
+      tmp6 = multPs_inst_72_73_69_45_32_30_28_7_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_72_73_69_45_32_30_28_7_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+fromIntegerPs_inst_72_73_69_45_32_30_23_tsni = function fromIntegerPs_inst_72_73_69_45_32_30_23_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_72_73_69_45_32_30_23_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_72_73_69_45_32_30_23_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_72_73_69_45_32_30_22_tsni(gss)
+  }
+});
+divPs_inst_72_73_67_tsni = function divPs_inst_72_73_67_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_67_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_67_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_67_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_67_tsni = function lambda$_inst_72_73_67_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_72_73_67_11_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_72_73_67_tsni(gss)
+  }
+});
+powerPs_inst_72_73_64_tsni = function powerPs_inst_72_73_64_tsni(a, n) {
+  let scrut, tmp, tmp1;
+  scrut = n <= 0;
+  if (scrut === true) {
+    return power.fromIntegerPs(1)
+  } else {
+    tmp = n - 1;
+    tmp1 = powerPs_inst_72_73_64_tsni(a, tmp);
+    return multPs_inst_72_73_64_58_tsni(a, tmp1)
+  }
+};
+multPs_inst_72_73_64_58_tsni = function multPs_inst_72_73_64_58_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_64_58_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_64_58_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_64_58_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_64_58_tsni = function lambda$_inst_72_73_64_58_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_64_58_4_tsni = function x__inst_72_73_64_58_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_64_58_4_5_tsni)
+};
+lambda_inst_72_73_64_58_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_72_73_64_58_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+x__inst_72_73_65_tsni = function x__inst_72_73_65_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_65_5_tsni)
+};
+lambda_inst_72_73_65_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    return match_scrut_arm_Pc_inst_72_73_64_58_tsni(gss, _deforest_Pc_f, _deforest_Pc_s)
+  }
+});
+fromIntegerPs_inst_72_73_66_tsni = function fromIntegerPs_inst_72_73_66_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_72_73_66_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_72_73_66_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+fromIntegerPs_inst_72_73_68_tsni = function fromIntegerPs_inst_72_73_68_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_72_73_68_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_72_73_68_13_tsni = (undefined, function () {
+  return (gss) => {
+    return match_scrut_arm_Pz_inst_72_73_67_tsni(gss)
+  }
+});
+divPs_inst_72_73_63_tsni = function divPs_inst_72_73_63_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_63_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_63_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_63_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_63_tsni = function lambda$_inst_72_73_63_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_72_73_63_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
       param0 = scrut.f;
       param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_21_5_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_21_5_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_21_5_2_tsni = function dotMult_inst_23_24_21_5_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_21_5_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_21_5_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_21_5_1_tsni = function dotMult_inst_23_24_21_5_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_21_5_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_21_5_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-integral_inst_23_24_22_tsni = function integral_inst_23_24_22_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp, _deforest_Pc_f, _deforest_Pc_s;
-    tmp = int1(fs_, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp;
-    return () => {
-      let rs, param0, param1, f0, kss, scrut, param01, param11, f1, gss, scrut1, fs_1, tmp1, tmp2, tmp3, tmp4, lambda1;
-      param0 = _deforest_Pc_f;
-      param1 = _deforest_Pc_s;
       if (param0 === 0) {
-        fs_1 = param1;
-        rs = function rs() {
-          let tmp5, lambda2;
-          lambda2 = (undefined, function () {
-            let tmp6, tmp7, tmp8, tmp9;
-            tmp6 = power.fromIntegerPs(1);
-            tmp7 = rs();
-            tmp8 = power.compose_(fs_1, tmp7);
-            tmp9 = divPs_inst_23_24_21_5_tsni(tmp6, tmp8);
-            return power.Pc(0, tmp9)
-          });
-          tmp5 = lambda2;
-          return NofibPrelude.lazy(tmp5)
-        };
-        tmp1 = rs();
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_72_73_63_11_tsni);
+        tmp1 = divPs_inst_72_73_63_tsni(tmp, gs);
         return NofibPrelude.force(tmp1)
       } else {
-        f0 = param0;
-        kss = param1;
-        scrut = NofibPrelude.force(kss);
-        if (scrut instanceof power.Pc.class) {
-          param01 = scrut.f;
-          param11 = scrut.s;
-          f1 = param01;
-          gss = param11;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pz.class) {
-            tmp2 = - 1;
-            tmp3 = tmp2 / f1;
-            lambda1 = (undefined, function () {
-              let tmp5, tmp6, lambda2;
-              tmp5 = 1 / f1;
-              lambda2 = (undefined, function () {
-                return power.Pz
-              });
-              tmp6 = NofibPrelude.lazy(lambda2);
-              return power.Pc(tmp5, tmp6)
-            });
-            tmp4 = NofibPrelude.lazy(lambda1);
-            return power.Pc(tmp3, tmp4)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
+        return power1.Pz
       }
+    } else {
+      return power1.Pz
     }
-  });
-  return NofibPrelude.lazy(lambda)
+  }
+});
+cosx_inst_72_73_62_tsni = function cosx_inst_72_73_62_tsni() {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude.lazy(lambda_inst_72_73_62_49_tsni);
+  tmp1 = power.integralLz(cosx_inst_72_73_62_tsni);
+  tmp2 = power.integral(tmp1);
+  return minusPs_inst_72_73_62_75_tsni(tmp, tmp2)
 };
-divPs_inst_23_24_20_tsni = function divPs_inst_23_24_20_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_23_24_20_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return (int1, n) => {
-            return match_scrut_arm_Pz_inst_23_24_22_tsni(int1, n)
-          }
-        }
-      } else {
-        return (int1, n) => {
-          return match_scrut_arm_Pz_inst_23_24_22_tsni(int1, n)
-        }
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_23_24_20_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_23_24_20_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_23_24_20_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_23_24_20_tsni(tmp6, tmp7);
-            _deforest_Pc_f2 = q1;
-            _deforest_Pc_s2 = tmp8;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_23_24_22_tsni(int1, n, _deforest_Pc_f2, _deforest_Pc_s2)
-            }
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_23_24_20_2_tsni(q, gs);
-            tmp11 = negatePs_inst_23_24_20_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_23_24_20_tsni(tmp12, tmp13);
-            _deforest_Pc_f1 = q;
-            _deforest_Pc_s1 = tmp14;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_23_24_22_tsni(int1, n, _deforest_Pc_f1, _deforest_Pc_s1)
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_23_24_20_3_tsni(q, gs);
-          tmp17 = negatePs_inst_23_24_20_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_23_24_20_tsni(tmp18, tmp19);
-          _deforest_Pc_f = q;
-          _deforest_Pc_s = tmp20;
-          return (int1, n) => {
-            return match_scrut_arm_Pc_inst_23_24_22_tsni(int1, n, _deforest_Pc_f, _deforest_Pc_s)
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
+lambda_inst_72_73_62_49_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_72_73_62_49_50_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_72_73_62_75_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
     } else {
       throw new globalThis.Error("match error");
     }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_20_1_tsni = function dotMult_inst_23_24_20_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_20_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_20_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_20_2_tsni = function dotMult_inst_23_24_20_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_20_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_20_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_20_3_tsni = function dotMult_inst_23_24_20_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_20_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_20_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-divPs_inst_23_24_19_tsni = function divPs_inst_23_24_19_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_23_24_19_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
-        } else {
-          return power.Pz
-        }
-      } else {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_23_24_19_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_23_24_19_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_23_24_19_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_23_24_19_tsni(tmp6, tmp7);
-            return power.Pc(q1, tmp8)
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_23_24_19_2_tsni(q, gs);
-            tmp11 = negatePs_inst_23_24_19_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_23_24_19_tsni(tmp12, tmp13);
-            return power.Pc(q, tmp14)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_23_24_19_3_tsni(q, gs);
-          tmp17 = negatePs_inst_23_24_19_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_23_24_19_tsni(tmp18, tmp19);
-          return power.Pc(q, tmp20)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_19_1_tsni = function dotMult_inst_23_24_19_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_19_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_19_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_19_2_tsni = function dotMult_inst_23_24_19_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_19_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_19_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_19_3_tsni = function dotMult_inst_23_24_19_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_19_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_19_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-cosx_inst_23_24_18_tsni = function cosx_inst_23_24_18_tsni() {
-  let tmp, tmp1, tmp2, lambda;
-  lambda = (undefined, function () {
-    let tmp3, lambda1;
-    lambda1 = (undefined, function () {
-      return power.Pz
-    });
-    tmp3 = NofibPrelude.lazy(lambda1);
-    return power.Pc(1, tmp3)
-  });
-  tmp = NofibPrelude.lazy(lambda);
-  tmp1 = integralLz_inst_23_24_18_9_tsni(cosx_inst_23_24_18_tsni);
-  tmp2 = integral_inst_23_24_18_10_tsni(tmp1);
-  return minusPs_inst_23_24_18_30_tsni(tmp, tmp2)
-};
-integralLz_inst_23_24_18_9_tsni = function integralLz_inst_23_24_18_9_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return (int11, n1) => {
-          return () => {
-            return power.Pz
-          }
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return (int11, n1) => {
-          return match_scrut_arm_Pc_inst_23_24_18_10_tsni(int11, n1, _deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return (int11, n) => {
-      return match_scrut_arm_Pc_inst_23_24_18_10_tsni(int11, n, _deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-integral_inst_23_24_18_10_tsni = function integral_inst_23_24_18_10_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp, _deforest_Pc_f, _deforest_Pc_s;
-    tmp = int1(fs_, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp;
-    return () => {
-      return match_scrut_arm_Pc_inst_23_24_18_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  return NofibPrelude.lazy(lambda)
-};
-sinx_inst_23_24_17_tsni = function sinx_inst_23_24_17_tsni() {
-  let tmp, tmp1, tmp2, lambda;
-  lambda = (undefined, function () {
-    let tmp3, lambda1;
-    lambda1 = (undefined, function () {
-      return power.Pz
-    });
-    tmp3 = NofibPrelude.lazy(lambda1);
-    return power.Pc(1, tmp3)
-  });
-  tmp = NofibPrelude.lazy(lambda);
-  tmp1 = integralLz_inst_23_24_17_12_tsni(sinx_inst_23_24_17_tsni);
-  tmp2 = minusPs_inst_23_24_17_32_tsni(tmp, tmp1);
+  }
+});
+lambda_inst_72_73_62_49_50_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+sinx_inst_72_73_61_tsni = function sinx_inst_72_73_61_tsni() {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude.lazy(lambda_inst_72_73_61_52_tsni);
+  tmp1 = power.integralLz(sinx_inst_72_73_61_tsni);
+  tmp2 = minusPs_inst_72_73_61_77_tsni(tmp, tmp1);
   return power.integral(tmp2)
 };
-integralLz_inst_23_24_17_12_tsni = function integralLz_inst_23_24_17_12_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return () => {
-          return power.Pz
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return () => {
-          return match_scrut_arm_Pc_inst_23_24_17_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return () => {
-      return match_scrut_arm_Pc_inst_23_24_17_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-sqrtPs_inst_23_24_16_tsni = function sqrtPs_inst_23_24_16_tsni(fss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let qs, scrut, param0, param1, fs_, gss, scrut1, param01, param11, fs_1, tmp1, tmp2, tmp3;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      return power.Pz
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      if (param0 === 0) {
-        gss = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          if (param01 === 0) {
-            fs_1 = param11;
-            tmp1 = sqrtPs_inst_23_24_16_tsni(fs_1);
-            return power.Pc(0, tmp1)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      } else if (param0 === 1) {
-        fs_ = param1;
-        qs = function qs() {
-          let tmp4, lambda1;
-          lambda1 = (undefined, function () {
-            let tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda2;
-            tmp5 = power.fromIntegerPs(1);
-            lambda2 = (undefined, function () {
-              let _deforest_Pc_f, _deforest_Pc_s;
-              _deforest_Pc_f = 1;
-              _deforest_Pc_s = fs_;
-              return () => {
-                let deriv1, param02, param12, fs_2, tmp12;
-                param02 = _deforest_Pc_f;
-                param12 = _deforest_Pc_s;
-                fs_2 = param12;
-                deriv1 = function deriv1(gss1, n) {
-                  let tmp13, lambda3;
-                  lambda3 = (undefined, function () {
-                    let scrut2, param03, param13, f, fs_3, tmp14, tmp15, tmp16;
-                    scrut2 = NofibPrelude.force(gss1);
-                    if (scrut2 instanceof power.Pz.class) {
-                      return power.Pz
-                    } else if (scrut2 instanceof power.Pc.class) {
-                      param03 = scrut2.f;
-                      param13 = scrut2.s;
-                      f = param03;
-                      fs_3 = param13;
-                      tmp14 = n * f;
-                      tmp15 = n + 1;
-                      tmp16 = deriv1(fs_3, tmp15);
-                      return power.Pc(tmp14, tmp16)
-                    } else {
-                      throw new globalThis.Error("match error");
-                    }
-                  });
-                  tmp13 = lambda3;
-                  return NofibPrelude.lazy(tmp13)
-                };
-                tmp12 = deriv1(fs_2, 1);
-                return NofibPrelude.force(tmp12)
-              }
-            });
-            tmp6 = NofibPrelude.lazy(lambda2);
-            tmp7 = deriv_inst_23_24_16_28_tsni(tmp6);
-            tmp8 = qs();
-            tmp9 = power.dotMultSndLz(2, tmp8);
-            tmp10 = divPs_inst_23_24_16_7_tsni(tmp7, tmp9);
-            tmp11 = integral_inst_23_24_16_29_tsni(tmp10);
-            return power.addPs(tmp5, tmp11)
-          });
-          tmp4 = lambda1;
-          return NofibPrelude.lazy(tmp4)
-        };
-        tmp2 = qs();
-        tmp3 = NofibPrelude.force(tmp2);
-        return NofibPrelude.force(tmp3)
-      } else {
-        throw new globalThis.Error("match error");
-      }
+lambda_inst_72_73_61_52_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_72_73_61_52_53_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_72_73_61_77_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
     } else {
       throw new globalThis.Error("match error");
     }
-  });
-  tmp = lambda;
+  }
+});
+lambda_inst_72_73_61_52_53_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+sqrtPs_inst_72_73_60_tsni = function sqrtPs_inst_72_73_60_tsni(fss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_60_tsni(fss));
   return NofibPrelude.lazy(tmp)
 };
-divPs_inst_23_24_16_7_tsni = function divPs_inst_23_24_16_7_tsni(fss, gss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
-    scrut = NofibPrelude.force(fss);
-    if (scrut instanceof power.Pz.class) {
-      scrut3 = NofibPrelude.force(gss);
-      if (scrut3 instanceof power.Pz.class) {
-        throw globalThis.Error("power series 0/0");
-      } else if (scrut3 instanceof power.Pc.class) {
-        param03 = scrut3.f;
-        param13 = scrut3.s;
-        if (param03 === 0) {
-          gs3 = param13;
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          tmp2 = divPs_inst_23_24_16_7_tsni(tmp1, gs3);
-          return NofibPrelude.force(tmp2)
+lambda_inst_72_73_60_tsni = (undefined, function (fss) {
+  return () => {
+    return lambda$_inst_72_73_60_tsni(fss)
+  }
+});
+lambda$_inst_72_73_60_tsni = function lambda$_inst_72_73_60_tsni(fss) {
+  let scrut, param0, param1, fs_, gss, scrut1, param01, param11, fs_1, tmp, tmp1, tmp2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gss = param1;
+      scrut1 = NofibPrelude.force(gss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        if (param01 === 0) {
+          fs_1 = param11;
+          tmp = sqrtPs_inst_72_73_60_tsni(fs_1);
+          return power1.Pc(0, tmp)
         } else {
-          return (int1, n) => {
-            return match_scrut_arm_Pz_inst_23_24_16_29_tsni(int1, n)
-          }
+          throw new globalThis.Error("match error");
         }
       } else {
-        return (int1, n) => {
-          return match_scrut_arm_Pz_inst_23_24_16_29_tsni(int1, n)
-        }
+        throw new globalThis.Error("match error");
       }
-    } else if (scrut instanceof power.Pc.class) {
+    } else if (param0 === 1) {
+      fs_ = param1;
+      tmp1 = qs$_inst_72_73_60_19_tsni(fs_);
+      tmp2 = NofibPrelude.force(tmp1);
+      return NofibPrelude.force(tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+qs$_inst_72_73_60_19_tsni = function qs$_inst_72_73_60_19_tsni(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_60_19_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_60_19_tsni = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_72_73_60_19_tsni(fs_)
+  }
+});
+lambda$_inst_72_73_60_19_tsni = function lambda$_inst_72_73_60_19_tsni(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_72_73_60_19_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$_inst_72_73_60_19_tsni(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_72_73_60_19_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_72_73_60_19_74_tsni(tmp, tmp6)
+};
+divPs_inst_72_73_60_19_10_tsni = function divPs_inst_72_73_60_19_10_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_60_19_10_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_60_19_10_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_60_19_10_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_60_19_10_tsni = function lambda$_inst_72_73_60_19_10_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+lambda_inst_72_73_60_19_10_11_tsni = (undefined, function () {
+  return (gss) => {
+    let scrut, param0, param1, gs, tmp, tmp1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut instanceof power1.Pc.class) {
       param0 = scrut.f;
       param1 = scrut.s;
       if (param0 === 0) {
-        fs_1 = param1;
-        scrut2 = NofibPrelude.force(gss);
-        if (scrut2 instanceof power.Pc.class) {
-          param02 = scrut2.f;
-          param12 = scrut2.s;
-          if (param02 === 0) {
-            gs2 = param12;
-            tmp3 = divPs_inst_23_24_16_7_tsni(fs_1, gs2);
-            return NofibPrelude.force(tmp3)
-          } else {
-            g1 = param02;
-            gs1 = param12;
-            q1 = 0;
-            tmp4 = dotMult_inst_23_24_16_7_1_tsni(q1, gs1);
-            tmp5 = negatePs_inst_23_24_16_7_25_tsni(tmp4);
-            tmp6 = power.addPs(fs_1, tmp5);
-            lambda2 = (undefined, function () {
-              return power.Pc(g1, gs1)
-            });
-            tmp7 = NofibPrelude.lazy(lambda2);
-            tmp8 = divPs_inst_23_24_16_7_tsni(tmp6, tmp7);
-            _deforest_Pc_f = q1;
-            _deforest_Pc_s = tmp8;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_23_24_16_29_tsni(int1, n, _deforest_Pc_f, _deforest_Pc_s)
-            }
-          }
+        gs = param1;
+        tmp = NofibPrelude.lazy(lambda_inst_72_73_60_19_10_11_tsni);
+        tmp1 = divPs_inst_72_73_60_19_10_tsni(tmp, gs);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  }
+});
+fromIntegerPs_inst_72_73_60_19_12_tsni = function fromIntegerPs_inst_72_73_60_19_12_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_72_73_60_19_12_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_72_73_60_19_12_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+powerPs_inst_72_73_57_tsni = function powerPs_inst_72_73_57_tsni(a, n) {
+  let scrut, tmp, tmp1;
+  scrut = n <= 0;
+  if (scrut === true) {
+    return power.fromIntegerPs(1)
+  } else {
+    tmp = n - 1;
+    tmp1 = powerPs_inst_72_73_57_tsni(a, tmp);
+    return multPs_inst_72_73_57_58_tsni(a, tmp1)
+  }
+};
+multPs_inst_72_73_57_58_tsni = function multPs_inst_72_73_57_58_tsni(fss, gss) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_57_58_tsni(fss, gss));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_57_58_tsni = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_72_73_57_58_tsni(fss, gss)
+  }
+});
+lambda$_inst_72_73_57_58_tsni = function lambda$_inst_72_73_57_58_tsni(fss, gss) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(gss))
+};
+x__inst_72_73_57_58_4_tsni = function x__inst_72_73_57_58_4_tsni() {
+  return NofibPrelude.lazy(lambda_inst_72_73_57_58_4_5_tsni)
+};
+lambda_inst_72_73_57_58_4_5_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda2);
+  _deforest_Pc_f = 0;
+  _deforest_Pc_s = tmp;
+  return (gss) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gss);
+    if (scrut instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_72_73_57_58_4_tsni();
+      tmp6 = multPs_inst_72_73_57_58_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_72_73_57_58_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+cosx_inst_72_73_56_tsni = function cosx_inst_72_73_56_tsni() {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude.lazy(lambda_inst_72_73_56_49_tsni);
+  tmp1 = power.integralLz(cosx_inst_72_73_56_tsni);
+  tmp2 = power.integral(tmp1);
+  return minusPs_inst_72_73_56_75_tsni(tmp, tmp2)
+};
+lambda_inst_72_73_56_49_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_72_73_56_49_50_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_72_73_56_75_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_72_73_56_49_50_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+fromIntegerPs_inst_72_73_59_tsni = function fromIntegerPs_inst_72_73_59_tsni(c) {
+  let scrut, lambda$this;
+  scrut = c == 0;
+  if (scrut === true) {
+    return NofibPrelude.lazy(lambda_inst_72_73_59_13_tsni)
+  } else {
+    lambda$this = runtime.safeCall(lambda5(c));
+    return NofibPrelude.lazy(lambda$this)
+  }
+};
+lambda_inst_72_73_59_13_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+sinx_inst_72_73_55_tsni = function sinx_inst_72_73_55_tsni() {
+  let tmp, tmp1, tmp2;
+  tmp = NofibPrelude.lazy(lambda_inst_72_73_55_52_tsni);
+  tmp1 = power.integralLz(sinx_inst_72_73_55_tsni);
+  tmp2 = minusPs_inst_72_73_55_77_tsni(tmp, tmp1);
+  return power.integral(tmp2)
+};
+lambda_inst_72_73_55_52_tsni = (undefined, function () {
+  let tmp, _deforest_Pc_f, _deforest_Pc_s;
+  tmp = NofibPrelude.lazy(lambda_inst_72_73_55_52_53_tsni);
+  _deforest_Pc_f = 1;
+  _deforest_Pc_s = tmp;
+  return (fss, gs) => {
+    let param0, param1, f, fs_, scrut, param01, param11, g, gs1, tmp1, tmp2;
+    param0 = _deforest_Pc_f;
+    param1 = _deforest_Pc_s;
+    f = param0;
+    fs_ = param1;
+    scrut = NofibPrelude.force(gs);
+    if (scrut instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut instanceof power1.Pc.class) {
+      param01 = scrut.f;
+      param11 = scrut.s;
+      g = param01;
+      gs1 = param11;
+      tmp1 = f + g;
+      tmp2 = addPs_inst_72_73_55_77_76_tsni(fs_, gs1);
+      return power1.Pc(tmp1, tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  }
+});
+lambda_inst_72_73_55_52_53_tsni = (undefined, function () {
+  return (fss, gs) => {
+    return NofibPrelude.force(gs)
+  }
+});
+addPs_inst_9_74_tsni = function addPs_inst_9_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_9_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_9_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_9_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_9_74_tsni = function lambda$_inst_9_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_14_74_tsni = function addPs_inst_14_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_14_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_14_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_14_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_14_74_tsni = function lambda$_inst_14_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_15_74_tsni = function addPs_inst_15_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_15_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_15_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_15_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_15_74_tsni = function lambda$_inst_15_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_16_17_74_tsni = function addPs_inst_16_17_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_16_17_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_16_17_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_16_17_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_16_17_74_tsni = function lambda$_inst_16_17_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_18_19_74_tsni = function addPs_inst_18_19_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_18_19_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_18_19_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_18_19_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_18_19_74_tsni = function lambda$_inst_18_19_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_20_19_74_tsni = function addPs_inst_20_19_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_20_19_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_20_19_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_20_19_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_20_19_74_tsni = function lambda$_inst_20_19_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_46_19_74_tsni = function addPs_inst_46_19_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_46_19_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_46_19_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_46_19_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_46_19_74_tsni = function lambda$_inst_46_19_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_48_75_tsni = function minusPs_inst_48_75_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_48_75_76_tsni(a, tmp)
+};
+addPs_inst_48_75_76_tsni = function addPs_inst_48_75_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_48_75_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_48_75_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_48_75_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_48_75_76_tsni = function lambda$_inst_48_75_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_51_77_tsni = function minusPs_inst_51_77_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_51_77_76_tsni(a, tmp)
+};
+addPs_inst_51_77_76_tsni = function addPs_inst_51_77_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_51_77_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_51_77_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_51_77_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_51_77_76_tsni = function lambda$_inst_51_77_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_54_55_77_tsni = function minusPs_inst_54_55_77_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_54_55_77_76_tsni(a, tmp)
+};
+addPs_inst_54_55_77_76_tsni = function addPs_inst_54_55_77_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_55_77_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_55_77_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_54_55_77_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_54_55_77_76_tsni = function lambda$_inst_54_55_77_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_54_56_75_tsni = function minusPs_inst_54_56_75_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_54_56_75_76_tsni(a, tmp)
+};
+addPs_inst_54_56_75_76_tsni = function addPs_inst_54_56_75_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_56_75_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_56_75_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_54_56_75_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_54_56_75_76_tsni = function lambda$_inst_54_56_75_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_54_78_tsni = function minusPs_inst_54_78_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_54_78_76_tsni(a, tmp)
+};
+addPs_inst_54_78_76_tsni = function addPs_inst_54_78_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_78_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_78_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_54_78_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_54_78_76_tsni = function lambda$_inst_54_78_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_54_60_19_74_tsni = function addPs_inst_54_60_19_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_60_19_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_60_19_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_54_60_19_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_54_60_19_74_tsni = function lambda$_inst_54_60_19_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_54_61_77_tsni = function minusPs_inst_54_61_77_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_54_61_77_76_tsni(a, tmp)
+};
+addPs_inst_54_61_77_76_tsni = function addPs_inst_54_61_77_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_61_77_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_61_77_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_54_61_77_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_54_61_77_76_tsni = function lambda$_inst_54_61_77_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_54_62_75_tsni = function minusPs_inst_54_62_75_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_54_62_75_76_tsni(a, tmp)
+};
+addPs_inst_54_62_75_76_tsni = function addPs_inst_54_62_75_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_62_75_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_62_75_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_54_62_75_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_54_62_75_76_tsni = function lambda$_inst_54_62_75_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_54_79_tsni = function addPs_inst_54_79_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_54_79_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_54_79_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_54_79_tsni(fss, gs)
+  }
+});
+lambda$_inst_54_79_tsni = function lambda$_inst_54_79_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_72_73_79_tsni = function addPs_inst_72_73_79_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_79_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_79_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_72_73_79_tsni(fss, gs)
+  }
+});
+lambda$_inst_72_73_79_tsni = function lambda$_inst_72_73_79_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_72_73_62_75_tsni = function minusPs_inst_72_73_62_75_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_72_73_62_75_76_tsni(a, tmp)
+};
+addPs_inst_72_73_62_75_76_tsni = function addPs_inst_72_73_62_75_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_62_75_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_62_75_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_72_73_62_75_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_72_73_62_75_76_tsni = function lambda$_inst_72_73_62_75_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_72_73_61_77_tsni = function minusPs_inst_72_73_61_77_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_72_73_61_77_76_tsni(a, tmp)
+};
+addPs_inst_72_73_61_77_76_tsni = function addPs_inst_72_73_61_77_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_61_77_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_61_77_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_72_73_61_77_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_72_73_61_77_76_tsni = function lambda$_inst_72_73_61_77_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+addPs_inst_72_73_60_19_74_tsni = function addPs_inst_72_73_60_19_74_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_60_19_74_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_60_19_74_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_72_73_60_19_74_tsni(fss, gs)
+  }
+});
+lambda$_inst_72_73_60_19_74_tsni = function lambda$_inst_72_73_60_19_74_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_72_73_56_75_tsni = function minusPs_inst_72_73_56_75_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_72_73_56_75_76_tsni(a, tmp)
+};
+addPs_inst_72_73_56_75_76_tsni = function addPs_inst_72_73_56_75_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_56_75_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_56_75_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_72_73_56_75_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_72_73_56_75_76_tsni = function lambda$_inst_72_73_56_75_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_72_73_78_tsni = function minusPs_inst_72_73_78_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_72_73_78_76_tsni(a, tmp)
+};
+addPs_inst_72_73_78_76_tsni = function addPs_inst_72_73_78_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_78_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_78_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_72_73_78_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_72_73_78_76_tsni = function lambda$_inst_72_73_78_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+minusPs_inst_72_73_55_77_tsni = function minusPs_inst_72_73_55_77_tsni(a, b) {
+  let tmp;
+  tmp = power.negatePs(b);
+  return addPs_inst_72_73_55_77_76_tsni(a, tmp)
+};
+addPs_inst_72_73_55_77_76_tsni = function addPs_inst_72_73_55_77_76_tsni(fss, gs) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_72_73_55_77_76_tsni(fss, gs));
+  return NofibPrelude.lazy(tmp)
+};
+lambda_inst_72_73_55_77_76_tsni = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$_inst_72_73_55_77_76_tsni(fss, gs)
+  }
+});
+lambda$_inst_72_73_55_77_76_tsni = function lambda$_inst_72_73_55_77_76_tsni(fss, gs) {
+  let scrut;
+  scrut = NofibPrelude.force(fss);
+  return runtime.safeCall(scrut(fss, gs))
+};
+lambda51 = (undefined, function () {
+  return power1.Pz
+});
+lambda50 = (undefined, function () {
+  let tmp;
+  tmp = NofibPrelude.lazy(lambda51);
+  return power1.Pc(1, tmp)
+});
+lambda49 = (undefined, function () {
+  return power1.Pz
+});
+lambda48 = (undefined, function () {
+  let tmp;
+  tmp = NofibPrelude.lazy(lambda49);
+  return power1.Pc(1, tmp)
+});
+lambda47 = (undefined, function () {
+  return tree_inst_0_tsni()
+});
+lambda46 = (undefined, function () {
+  let tmp, tmp1, tmp2;
+  tmp = power1.list();
+  tmp1 = NofibPrelude.lazy(lambda_inst_8_tsni);
+  tmp2 = composeSndLz__inst_8_1_tsni(tmp, tmp1);
+  return power1.Pc(0, tmp2)
+});
+lambda45 = (undefined, function () {
+  let tmp, tmp1, tmp2;
+  tmp = power1.ts();
+  tmp1 = power1.ts();
+  tmp2 = power1.multPs(tmp, tmp1);
+  return power1.Pc(1, tmp2)
+});
+lambda$30 = function lambda$(fs_) {
+  return power1.Pc(1, fs_)
+};
+lambda44 = (undefined, function (fs_) {
+  return () => {
+    return lambda$30(fs_)
+  }
+});
+lambda$29 = function lambda$(fs_) {
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
+  tmp = fromIntegerPs_inst_9_12_tsni(1);
+  lambda$this = runtime.safeCall(lambda44(fs_));
+  tmp1 = NofibPrelude.lazy(lambda$this);
+  tmp2 = power1.deriv(tmp1);
+  tmp3 = qs$_inst_9_tsni(fs_);
+  tmp4 = power1.dotMultSndLz(2, tmp3);
+  tmp5 = divPs_inst_9_10_tsni(tmp2, tmp4);
+  tmp6 = power1.integral(tmp5);
+  return addPs_inst_9_74_tsni(tmp, tmp6)
+};
+lambda43 = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_14_tsni(fs_)
+  }
+});
+qs$ = function qs$(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_15_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+qs = function qs(fs_) {
+  return () => {
+    return qs$_inst_16_17_tsni(fs_)
+  }
+};
+lambda$28 = function lambda$(fss) {
+  let scrut, param0, param1, fs_, gss, scrut1, param01, param11, fs_1, tmp, tmp1, tmp2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      gss = param1;
+      scrut1 = NofibPrelude.force(gss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        if (param01 === 0) {
+          fs_1 = param11;
+          tmp = sqrtPs_inst_18_tsni(fs_1);
+          return power1.Pc(0, tmp)
         } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs = param11;
-            tmp9 = f / g;
-            q = tmp9;
-            tmp10 = dotMult_inst_23_24_16_7_2_tsni(q, gs);
-            tmp11 = negatePs_inst_23_24_16_7_26_tsni(tmp10);
-            tmp12 = power.addPs(fs_, tmp11);
-            lambda3 = (undefined, function () {
-              return power.Pc(g, gs)
-            });
-            tmp13 = NofibPrelude.lazy(lambda3);
-            tmp14 = divPs_inst_23_24_16_7_tsni(tmp12, tmp13);
-            _deforest_Pc_f2 = q;
-            _deforest_Pc_s2 = tmp14;
-            return (int1, n) => {
-              return match_scrut_arm_Pc_inst_23_24_16_29_tsni(int1, n, _deforest_Pc_f2, _deforest_Pc_s2)
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
+          throw new globalThis.Error("match error");
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    } else if (param0 === 1) {
+      fs_ = param1;
+      tmp1 = qs$_inst_18_19_tsni(fs_);
+      tmp2 = NofibPrelude.force(tmp1);
+      return NofibPrelude.force(tmp2)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda42 = (undefined, function (fss) {
+  return () => {
+    return lambda$_inst_20_tsni(fss)
+  }
+});
+lambda$27 = function lambda$(fss, n) {
+  let scrut, param0, param1, f, fs_, tmp, tmp1, tmp2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = f / n;
+    tmp1 = n + 1;
+    tmp2 = int11(fs_, tmp1);
+    return power1.Pc(tmp, tmp2)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda40 = (undefined, function (fss, n) {
+  return () => {
+    return lambda$27(fss, n)
+  }
+});
+int11 = function int1(fss, n) {
+  let tmp;
+  tmp = runtime.safeCall(lambda40(fss, n));
+  return NofibPrelude.lazy(tmp)
+};
+lambda$26 = function lambda$(fs_) {
+  let tmp, tmp1;
+  tmp = runtime.safeCall(fs_());
+  tmp1 = int11(tmp, 1);
+  return power1.Pc(0, tmp1)
+};
+lambda41 = (undefined, function (fs_) {
+  return () => {
+    return lambda$26(fs_)
+  }
+});
+lambda$25 = function lambda$(fss, n) {
+  let scrut, param0, param1, f, fs_, tmp, tmp1, tmp2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = f / n;
+    tmp1 = n + 1;
+    tmp2 = int1(fs_, tmp1);
+    return power1.Pc(tmp, tmp2)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda38 = (undefined, function (fss, n) {
+  return () => {
+    return lambda$25(fss, n)
+  }
+});
+int1 = function int1(fss, n) {
+  let tmp;
+  tmp = runtime.safeCall(lambda38(fss, n));
+  return NofibPrelude.lazy(tmp)
+};
+lambda$24 = function lambda$(fs_) {
+  let tmp;
+  tmp = int1(fs_, 1);
+  return power1.Pc(0, tmp)
+};
+lambda39 = (undefined, function (fs_) {
+  return () => {
+    return lambda$24(fs_)
+  }
+});
+lambda$23 = function lambda$(gss, n) {
+  let scrut, param0, param1, f, fs_, tmp, tmp1, tmp2;
+  scrut = NofibPrelude.force(gss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = n * f;
+    tmp1 = n + 1;
+    tmp2 = deriv1(fs_, tmp1);
+    return power1.Pc(tmp, tmp2)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda37 = (undefined, function (gss, n) {
+  return () => {
+    return lambda$23(gss, n)
+  }
+});
+deriv1 = function deriv1(gss, n) {
+  let tmp;
+  tmp = runtime.safeCall(lambda37(gss, n));
+  return NofibPrelude.lazy(tmp)
+};
+lambda$22 = function lambda$(fss) {
+  let scrut, param0, param1, fs_, tmp;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    fs_ = param1;
+    tmp = deriv1(fs_, 1);
+    return NofibPrelude.force(tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda36 = (undefined, function (fss) {
+  return () => {
+    return lambda$22(fss)
+  }
+});
+lambda$21 = function lambda$(fs_) {
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = fromIntegerPs_inst_21_23_tsni(1);
+  tmp1 = rs$_inst_21_tsni(fs_);
+  tmp2 = power1.compose_(fs_, tmp1);
+  tmp3 = divPs_inst_21_22_tsni(tmp, tmp2);
+  return power1.Pc(0, tmp3)
+};
+lambda33 = (undefined, function (fs_) {
+  return () => {
+    return lambda$_inst_24_tsni(fs_)
+  }
+});
+rs$ = function rs$(fs_) {
+  let tmp;
+  tmp = runtime.safeCall(lambda_inst_25_tsni(fs_));
+  return NofibPrelude.lazy(tmp)
+};
+rs = function rs(fs_) {
+  return () => {
+    return rs$_inst_26_27_tsni(fs_)
+  }
+};
+lambda35 = (undefined, function () {
+  return power1.Pz
+});
+lambda$20 = function lambda$(f1) {
+  let tmp, tmp1;
+  tmp = 1 / f1;
+  tmp1 = NofibPrelude.lazy(lambda35);
+  return power1.Pc(tmp, tmp1)
+};
+lambda34 = (undefined, function (f1) {
+  return () => {
+    return lambda$20(f1)
+  }
+});
+lambda$19 = function lambda$(fss) {
+  let scrut, param0, param1, f0, kss, scrut1, param01, param11, f1, gss, scrut2, fs_, tmp, tmp1, tmp2, tmp3, lambda$this;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      fs_ = param1;
+      tmp = rs$_inst_29_30_tsni(fs_);
+      return NofibPrelude.force(tmp)
+    } else {
+      f0 = param0;
+      kss = param1;
+      scrut1 = NofibPrelude.force(kss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        f1 = param01;
+        gss = param11;
+        scrut2 = NofibPrelude.force(gss);
+        if (scrut2 instanceof power1.Pz.class) {
+          tmp1 = - 1;
+          tmp2 = tmp1 / f1;
+          lambda$this = runtime.safeCall(lambda34(f1));
+          tmp3 = NofibPrelude.lazy(lambda$this);
+          return power1.Pc(tmp2, tmp3)
+        } else {
+          throw new globalThis.Error("match error");
+        }
+      } else {
+        throw new globalThis.Error("match error");
+      }
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda32 = (undefined, function (fss) {
+  return () => {
+    return lambda$_inst_31_32_tsni(fss)
+  }
+});
+lambda26 = (undefined, function () {
+  return power1.Pz
+});
+lambda$18 = function lambda$(gs) {
+  return power1.Pc(0, gs)
+};
+lambda27 = (undefined, function (gs) {
+  return () => {
+    return lambda$18(gs)
+  }
+});
+lambda29 = (undefined, function () {
+  return power1.Pz
+});
+lambda$17 = function lambda$(f) {
+  let tmp;
+  tmp = NofibPrelude.lazy(lambda29);
+  return power1.Pc(f, tmp)
+};
+lambda28 = (undefined, function (f) {
+  return () => {
+    return lambda$17(f)
+  }
+});
+lambda31 = (undefined, function () {
+  return power1.Pz
+});
+lambda$16 = function lambda$(f) {
+  let tmp;
+  tmp = NofibPrelude.lazy(lambda31);
+  return power1.Pc(f, tmp)
+};
+lambda30 = (undefined, function (f) {
+  return () => {
+    return lambda$16(f)
+  }
+});
+lambda$15 = function lambda$(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = NofibPrelude.force(gss);
+    scrut1 = NofibPrelude.force(tmp);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp1 = NofibPrelude.lazy(lambda26);
+      return power1.Pc(f, tmp1)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda27(gs));
+        tmp2 = NofibPrelude.lazy(lambda$this);
+        tmp3 = compose__inst_33_2_tsni(fs_, tmp2);
+        tmp4 = power1.multPs(gs, tmp3);
+        return power1.Pc(f, tmp4)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda28(f));
+        tmp5 = NofibPrelude.lazy(lambda$this1);
+        tmp6 = composeSndLz__inst_33_tsni(fs_, gss);
+        tmp7 = power1.multPs(gss, tmp6);
+        tmp8 = power1.addPs(tmp5, tmp7);
+        return NofibPrelude.force(tmp8)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda30(f));
+      tmp9 = NofibPrelude.lazy(lambda$this2);
+      tmp10 = composeSndLz__inst_33_tsni(fs_, gss);
+      tmp11 = power1.multPs(gss, tmp10);
+      tmp12 = power1.addPs(tmp9, tmp11);
+      return NofibPrelude.force(tmp12)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda25 = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_34_tsni(fss, gss)
+  }
+});
+lambda19 = (undefined, function () {
+  return power1.Pz
+});
+lambda$14 = function lambda$(gs) {
+  return power1.Pc(0, gs)
+};
+lambda20 = (undefined, function (gs) {
+  return () => {
+    return lambda$14(gs)
+  }
+});
+lambda22 = (undefined, function () {
+  return power1.Pz
+});
+lambda$13 = function lambda$(f) {
+  let tmp;
+  tmp = NofibPrelude.lazy(lambda22);
+  return power1.Pc(f, tmp)
+};
+lambda21 = (undefined, function (f) {
+  return () => {
+    return lambda$13(f)
+  }
+});
+lambda24 = (undefined, function () {
+  return power1.Pz
+});
+lambda$12 = function lambda$(f) {
+  let tmp;
+  tmp = NofibPrelude.lazy(lambda24);
+  return power1.Pc(f, tmp)
+};
+lambda23 = (undefined, function (f) {
+  return () => {
+    return lambda$12(f)
+  }
+});
+lambda$11 = function lambda$(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      tmp = NofibPrelude.lazy(lambda19);
+      return power1.Pc(f, tmp)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      if (param01 === 0) {
+        gs = param11;
+        lambda$this = runtime.safeCall(lambda20(gs));
+        tmp1 = NofibPrelude.lazy(lambda$this);
+        tmp2 = power1.compose_(fs_, tmp1);
+        tmp3 = power1.multPs(gs, tmp2);
+        return power1.Pc(f, tmp3)
+      } else {
+        lambda$this1 = runtime.safeCall(lambda21(f));
+        tmp4 = NofibPrelude.lazy(lambda$this1);
+        tmp5 = power1.compose_(fs_, gss);
+        tmp6 = power1.multPs(gss, tmp5);
+        tmp7 = power1.addPs(tmp4, tmp6);
+        return NofibPrelude.force(tmp7)
+      }
+    } else {
+      lambda$this2 = runtime.safeCall(lambda23(f));
+      tmp8 = NofibPrelude.lazy(lambda$this2);
+      tmp9 = power1.compose_(fs_, gss);
+      tmp10 = power1.multPs(gss, tmp9);
+      tmp11 = power1.addPs(tmp8, tmp10);
+      return NofibPrelude.force(tmp11)
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+lambda18 = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$11(fss, gss)
+  }
+});
+lambda14 = (undefined, function () {
+  return power1.Pz
+});
+lambda$10 = function lambda$(g, gs) {
+  return power1.Pc(g, gs)
+};
+lambda15 = (undefined, function (g, gs) {
+  return () => {
+    return lambda$10(g, gs)
+  }
+});
+lambda$9 = function lambda$(g, gs) {
+  return power1.Pc(g, gs)
+};
+lambda16 = (undefined, function (g, gs) {
+  return () => {
+    return lambda$9(g, gs)
+  }
+});
+lambda$8 = function lambda$(g, gs) {
+  return power1.Pc(g, gs)
+};
+lambda17 = (undefined, function (g, gs) {
+  return () => {
+    return lambda$8(g, gs)
+  }
+});
+lambda$7 = function lambda$(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    scrut3 = NofibPrelude.force(gss);
+    if (scrut3 instanceof power1.Pz.class) {
+      throw globalThis.Error("power series 0/0");
+    } else if (scrut3 instanceof power1.Pc.class) {
+      param03 = scrut3.f;
+      param13 = scrut3.s;
+      if (param03 === 0) {
+        gs3 = param13;
+        tmp = NofibPrelude.lazy(lambda14);
+        tmp1 = power1.divPs(tmp, gs3);
+        return NofibPrelude.force(tmp1)
+      } else {
+        return power1.Pz
+      }
+    } else {
+      return power1.Pz
+    }
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    if (param0 === 0) {
+      fs_1 = param1;
+      scrut2 = NofibPrelude.force(gss);
+      if (scrut2 instanceof power1.Pc.class) {
+        param02 = scrut2.f;
+        param12 = scrut2.s;
+        if (param02 === 0) {
+          gs2 = param12;
+          tmp2 = power1.divPs(fs_1, gs2);
+          return NofibPrelude.force(tmp2)
+        } else {
+          g1 = param02;
+          gs1 = param12;
+          q1 = 0;
+          tmp3 = power1.dotMult(q1, gs1);
+          tmp4 = power1.negatePs(tmp3);
+          tmp5 = power1.addPs(fs_1, tmp4);
+          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          tmp6 = NofibPrelude.lazy(lambda$this);
+          tmp7 = power1.divPs(tmp5, tmp6);
+          return power1.Pc(q1, tmp7)
         }
       } else {
         f = param0;
         fs_ = param1;
         scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pc.class) {
+        if (scrut1 instanceof power1.Pc.class) {
           param01 = scrut1.f;
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp15 = f / g;
-          q = tmp15;
-          tmp16 = dotMult_inst_23_24_16_7_3_tsni(q, gs);
-          tmp17 = negatePs_inst_23_24_16_7_27_tsni(tmp16);
-          tmp18 = power.addPs(fs_, tmp17);
-          lambda4 = (undefined, function () {
-            return power.Pc(g, gs)
-          });
-          tmp19 = NofibPrelude.lazy(lambda4);
-          tmp20 = divPs_inst_23_24_16_7_tsni(tmp18, tmp19);
-          _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp20;
-          return (int1, n) => {
-            return match_scrut_arm_Pc_inst_23_24_16_29_tsni(int1, n, _deforest_Pc_f1, _deforest_Pc_s1)
-          }
+          tmp8 = f / g;
+          q = tmp8;
+          tmp9 = power1.dotMult(q, gs);
+          tmp10 = power1.negatePs(tmp9);
+          tmp11 = power1.addPs(fs_, tmp10);
+          lambda$this1 = runtime.safeCall(lambda16(g, gs));
+          tmp12 = NofibPrelude.lazy(lambda$this1);
+          tmp13 = power1.divPs(tmp11, tmp12);
+          return power1.Pc(q, tmp13)
         } else {
           throw new globalThis.Error("match error");
         }
       }
     } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_16_7_3_tsni = function dotMult_inst_23_24_16_7_3_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
       f = param0;
       fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_16_7_3_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_16_7_27_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_16_7_2_tsni = function dotMult_inst_23_24_16_7_2_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_16_7_2_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_16_7_26_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-dotMult_inst_23_24_16_7_1_tsni = function dotMult_inst_23_24_16_7_1_tsni(c, ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut, param0, param1, f, fs_, tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    scrut = NofibPrelude.force(ps);
-    if (scrut instanceof power.Pz.class) {
-      return () => {
-        return power.Pz
-      }
-    } else if (scrut instanceof power.Pc.class) {
-      param0 = scrut.f;
-      param1 = scrut.s;
-      f = param0;
-      fs_ = param1;
-      tmp1 = c * f;
-      tmp2 = dotMult_inst_23_24_16_7_1_tsni(c, fs_);
-      _deforest_Pc_f = tmp1;
-      _deforest_Pc_s = tmp2;
-      return () => {
-        let param01, param11, f1, fs_1, tmp3, tmp4;
-        param01 = _deforest_Pc_f;
-        param11 = _deforest_Pc_s;
-        f1 = param01;
-        fs_1 = param11;
-        tmp3 = - f1;
-        tmp4 = negatePs_inst_23_24_16_7_25_tsni(fs_1);
-        return power.Pc(tmp3, tmp4)
-      }
-    } else {
-      throw new globalThis.Error("match error");
-    }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-cosx_inst_23_24_15_tsni = function cosx_inst_23_24_15_tsni() {
-  let tmp, tmp1, tmp2, lambda;
-  lambda = (undefined, function () {
-    let tmp3, lambda1;
-    lambda1 = (undefined, function () {
-      return power.Pz
-    });
-    tmp3 = NofibPrelude.lazy(lambda1);
-    return power.Pc(1, tmp3)
-  });
-  tmp = NofibPrelude.lazy(lambda);
-  tmp1 = integralLz_inst_23_24_15_9_tsni(cosx_inst_23_24_15_tsni);
-  tmp2 = integral_inst_23_24_15_10_tsni(tmp1);
-  return minusPs_inst_23_24_15_30_tsni(tmp, tmp2)
-};
-integralLz_inst_23_24_15_9_tsni = function integralLz_inst_23_24_15_9_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return (int11, n1) => {
-          return () => {
-            return power.Pz
-          }
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return (int11, n1) => {
-          return match_scrut_arm_Pc_inst_23_24_15_10_tsni(int11, n1, _deforest_Pc_f, _deforest_Pc_s)
-        }
+      scrut1 = NofibPrelude.force(gss);
+      if (scrut1 instanceof power1.Pc.class) {
+        param01 = scrut1.f;
+        param11 = scrut1.s;
+        g = param01;
+        gs = param11;
+        tmp14 = f / g;
+        q = tmp14;
+        tmp15 = power1.dotMult(q, gs);
+        tmp16 = power1.negatePs(tmp15);
+        tmp17 = power1.addPs(fs_, tmp16);
+        lambda$this2 = runtime.safeCall(lambda17(g, gs));
+        tmp18 = NofibPrelude.lazy(lambda$this2);
+        tmp19 = power1.divPs(tmp17, tmp18);
+        return power1.Pc(q, tmp19)
       } else {
         throw new globalThis.Error("match error");
       }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return (int11, n) => {
-      return match_scrut_arm_Pc_inst_23_24_15_10_tsni(int11, n, _deforest_Pc_f, _deforest_Pc_s)
     }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-integral_inst_23_24_15_10_tsni = function integral_inst_23_24_15_10_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp, _deforest_Pc_f, _deforest_Pc_s;
-    tmp = int1(fs_, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp;
-    return () => {
-      return match_scrut_arm_Pc_inst_23_24_15_30_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
+lambda13 = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$7(fss, gss)
+  }
+});
+lambda$6 = function lambda$(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  tmp = NofibPrelude.force(fss);
+  scrut = NofibPrelude.force(tmp);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      g = param01;
+      gs = param11;
+      tmp1 = f * g;
+      tmp2 = power1.dotMult(f, gs);
+      tmp3 = power1.dotMult(g, fs_);
+      tmp4 = power1.addPs(tmp2, tmp3);
+      tmp5 = x__inst_35_37_tsni();
+      tmp6 = multPs_inst_35_36_tsni(tmp5, fs_);
+      tmp7 = multPs_inst_35_38_tsni(tmp6, gs);
+      tmp8 = power1.addPs(tmp4, tmp7);
+      return power1.Pc(tmp1, tmp8)
+    } else {
+      throw new globalThis.Error("match error");
     }
-  });
-  return NofibPrelude.lazy(lambda)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-sinx_inst_23_24_14_tsni = function sinx_inst_23_24_14_tsni() {
-  let tmp, tmp1, tmp2, lambda;
-  lambda = (undefined, function () {
-    let tmp3, lambda1;
-    lambda1 = (undefined, function () {
-      return power.Pz
-    });
-    tmp3 = NofibPrelude.lazy(lambda1);
-    return power.Pc(1, tmp3)
-  });
-  tmp = NofibPrelude.lazy(lambda);
-  tmp1 = integralLz_inst_23_24_14_12_tsni(sinx_inst_23_24_14_tsni);
-  tmp2 = minusPs_inst_23_24_14_32_tsni(tmp, tmp1);
-  return power.integral(tmp2)
-};
-integralLz_inst_23_24_14_12_tsni = function integralLz_inst_23_24_14_12_tsni(fs_) {
-  let int1, tmp, lambda;
-  int1 = function int1(fss, n) {
-    let tmp1, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut, param0, param1, f, fs_1, tmp2, tmp3, tmp4, _deforest_Pc_f, _deforest_Pc_s;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return () => {
-          return power.Pz
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_1 = param1;
-        tmp2 = f / n;
-        tmp3 = n + 1;
-        tmp4 = int1(fs_1, tmp3);
-        _deforest_Pc_f = tmp2;
-        _deforest_Pc_s = tmp4;
-        return () => {
-          return match_scrut_arm_Pc_inst_23_24_14_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp1 = lambda1;
-    return NofibPrelude.lazy(tmp1)
-  };
-  lambda = (undefined, function () {
-    let tmp1, tmp2, _deforest_Pc_f, _deforest_Pc_s;
-    tmp1 = runtime.safeCall(fs_());
-    tmp2 = int1(tmp1, 1);
-    _deforest_Pc_f = 0;
-    _deforest_Pc_s = tmp2;
-    return () => {
-      return match_scrut_arm_Pc_inst_23_24_14_32_31_tsni(_deforest_Pc_f, _deforest_Pc_s)
+lambda12 = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$_inst_39_40_tsni(fss, gss)
+  }
+});
+lambda$5 = function lambda$(fss, gss) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gss);
+    if (scrut1 instanceof power1.Pz.class) {
+      return power1.Pz
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      g = param01;
+      gs = param11;
+      tmp = f * g;
+      tmp1 = power1.dotMult(f, gs);
+      tmp2 = power1.dotMult(g, fs_);
+      tmp3 = power1.addPs(tmp1, tmp2);
+      tmp4 = power1.x_();
+      tmp5 = power1.multPs(tmp4, fs_);
+      tmp6 = power1.multPs(tmp5, gs);
+      tmp7 = power1.addPs(tmp3, tmp6);
+      return power1.Pc(tmp, tmp7)
+    } else {
+      throw new globalThis.Error("match error");
     }
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-negatePs_inst_0_25_tsni = function negatePs_inst_0_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
+lambda11 = (undefined, function (fss, gss) {
+  return () => {
+    return lambda$5(fss, gss)
+  }
+});
+lambda$4 = function lambda$(fss, gs) {
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs1, tmp, tmp1;
+  scrut = NofibPrelude.force(fss);
+  if (scrut instanceof power1.Pz.class) {
+    return NofibPrelude.force(gs)
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    scrut1 = NofibPrelude.force(gs);
+    if (scrut1 instanceof power1.Pz.class) {
+      return NofibPrelude.force(fss)
+    } else if (scrut1 instanceof power1.Pc.class) {
+      param01 = scrut1.f;
+      param11 = scrut1.s;
+      g = param01;
+      gs1 = param11;
+      tmp = f + g;
+      tmp1 = power1.addPs(fs_, gs1);
+      return power1.Pc(tmp, tmp1)
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-negatePs_inst_0_26_tsni = function negatePs_inst_0_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
+lambda10 = (undefined, function (fss, gs) {
+  return () => {
+    return lambda$4(fss, gs)
+  }
+});
+lambda$3 = function lambda$(ps) {
+  let scrut, param0, param1, f, fs_, tmp, tmp1;
+  scrut = NofibPrelude.force(ps);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = - f;
+    tmp1 = power1.negatePs(fs_);
+    return power1.Pc(tmp, tmp1)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-negatePs_inst_0_27_tsni = function negatePs_inst_0_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
+lambda9 = (undefined, function (ps) {
+  return () => {
+    return lambda$3(ps)
+  }
+});
+lambda$2 = function lambda$(c, ps) {
+  let scrut, param0, param1, f, fs_, tmp, tmp1, tmp2;
+  tmp = NofibPrelude.force(ps);
+  scrut = NofibPrelude.force(tmp);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp1 = c * f;
+    tmp2 = power1.dotMult(c, fs_);
+    return power1.Pc(tmp1, tmp2)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-negatePs_inst_4_5_27_tsni = function negatePs_inst_4_5_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
+lambda8 = (undefined, function (c, ps) {
+  return () => {
+    return lambda$2(c, ps)
+  }
+});
+lambda$1 = function lambda$(c, ps) {
+  let scrut, param0, param1, f, fs_, tmp, tmp1;
+  scrut = NofibPrelude.force(ps);
+  if (scrut instanceof power1.Pz.class) {
+    return power1.Pz
+  } else if (scrut instanceof power1.Pc.class) {
+    param0 = scrut.f;
+    param1 = scrut.s;
+    f = param0;
+    fs_ = param1;
+    tmp = c * f;
+    tmp1 = power1.dotMult(c, fs_);
+    return power1.Pc(tmp, tmp1)
+  } else {
+    throw new globalThis.Error("match error");
+  }
 };
-negatePs_inst_4_5_26_tsni = function negatePs_inst_4_5_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_4_5_25_tsni = function negatePs_inst_4_5_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-deriv_inst_6_28_tsni = function deriv_inst_6_28_tsni(fss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(fss);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_6_7_27_tsni = function negatePs_inst_6_7_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_6_7_26_tsni = function negatePs_inst_6_7_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_6_7_25_tsni = function negatePs_inst_6_7_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-integral_inst_6_29_tsni = function integral_inst_6_29_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp;
-    tmp = int1(fs_, 1);
-    return power.Pc(0, tmp)
-  });
-  return NofibPrelude.lazy(lambda)
-};
-minusPs_inst_8_30_tsni = function minusPs_inst_8_30_tsni(a, b) {
+lambda7 = (undefined, function (c, ps) {
+  return () => {
+    return lambda$1(c, ps)
+  }
+});
+lambda4 = (undefined, function () {
+  return power1.Pz
+});
+lambda6 = (undefined, function () {
+  return power1.Pz
+});
+lambda$ = function lambda$(c) {
   let tmp;
-  tmp = negatePs_inst_8_30_31_tsni(b);
-  return power.addPs(a, tmp)
+  tmp = NofibPrelude.lazy(lambda6);
+  return power1.Pc(c, tmp)
 };
-negatePs_inst_8_30_31_tsni = function negatePs_inst_8_30_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-minusPs_inst_11_32_tsni = function minusPs_inst_11_32_tsni(a, b) {
+lambda5 = (undefined, function (c) {
+  return () => {
+    return lambda$(c)
+  }
+});
+lambda3 = (undefined, function () {
+  return power1.Pz
+});
+lambda2 = (undefined, function () {
   let tmp;
-  tmp = negatePs_inst_11_32_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_11_32_31_tsni = function negatePs_inst_11_32_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-minusPs_inst_13_14_32_tsni = function minusPs_inst_13_14_32_tsni(a, b) {
+  tmp = NofibPrelude.lazy(lambda3);
+  return power1.Pc(1, tmp)
+});
+lambda1 = (undefined, function () {
   let tmp;
-  tmp = negatePs_inst_13_14_32_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_13_14_32_31_tsni = function negatePs_inst_13_14_32_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-minusPs_inst_13_15_30_tsni = function minusPs_inst_13_15_30_tsni(a, b) {
+  tmp = NofibPrelude.lazy(lambda2);
+  return power1.Pc(0, tmp)
+});
+lambda = (undefined, function () {
   let tmp;
-  tmp = negatePs_inst_13_15_30_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_13_15_30_31_tsni = function negatePs_inst_13_15_30_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_16_7_25_tsni = function negatePs_inst_13_16_7_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_16_7_26_tsni = function negatePs_inst_13_16_7_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_16_7_27_tsni = function negatePs_inst_13_16_7_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-integral_inst_13_16_29_tsni = function integral_inst_13_16_29_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp;
-    tmp = int1(fs_, 1);
-    return power.Pc(0, tmp)
-  });
-  return NofibPrelude.lazy(lambda)
-};
-deriv_inst_13_16_28_tsni = function deriv_inst_13_16_28_tsni(fss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(fss);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-minusPs_inst_13_17_32_tsni = function minusPs_inst_13_17_32_tsni(a, b) {
-  let tmp;
-  tmp = negatePs_inst_13_17_32_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_13_17_32_31_tsni = function negatePs_inst_13_17_32_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-minusPs_inst_13_18_30_tsni = function minusPs_inst_13_18_30_tsni(a, b) {
-  let tmp;
-  tmp = negatePs_inst_13_18_30_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_13_18_30_31_tsni = function negatePs_inst_13_18_30_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_19_27_tsni = function negatePs_inst_13_19_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_19_26_tsni = function negatePs_inst_13_19_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_19_25_tsni = function negatePs_inst_13_19_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_20_27_tsni = function negatePs_inst_13_20_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_20_26_tsni = function negatePs_inst_13_20_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_20_25_tsni = function negatePs_inst_13_20_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_21_5_25_tsni = function negatePs_inst_13_21_5_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_21_5_26_tsni = function negatePs_inst_13_21_5_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_13_21_5_27_tsni = function negatePs_inst_13_21_5_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_21_5_27_tsni = function negatePs_inst_23_24_21_5_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_21_5_26_tsni = function negatePs_inst_23_24_21_5_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_21_5_25_tsni = function negatePs_inst_23_24_21_5_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_20_25_tsni = function negatePs_inst_23_24_20_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_20_26_tsni = function negatePs_inst_23_24_20_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_20_27_tsni = function negatePs_inst_23_24_20_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_19_25_tsni = function negatePs_inst_23_24_19_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_19_26_tsni = function negatePs_inst_23_24_19_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_19_27_tsni = function negatePs_inst_23_24_19_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-minusPs_inst_23_24_18_30_tsni = function minusPs_inst_23_24_18_30_tsni(a, b) {
-  let tmp;
-  tmp = negatePs_inst_23_24_18_30_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_23_24_18_30_31_tsni = function negatePs_inst_23_24_18_30_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-minusPs_inst_23_24_17_32_tsni = function minusPs_inst_23_24_17_32_tsni(a, b) {
-  let tmp;
-  tmp = negatePs_inst_23_24_17_32_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_23_24_17_32_31_tsni = function negatePs_inst_23_24_17_32_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-deriv_inst_23_24_16_28_tsni = function deriv_inst_23_24_16_28_tsni(fss) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(fss);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_16_7_27_tsni = function negatePs_inst_23_24_16_7_27_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_16_7_26_tsni = function negatePs_inst_23_24_16_7_26_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-negatePs_inst_23_24_16_7_25_tsni = function negatePs_inst_23_24_16_7_25_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-integral_inst_23_24_16_29_tsni = function integral_inst_23_24_16_29_tsni(fs_) {
-  let int1, lambda;
-  int1 = function int1(fss, n) {
-    let tmp, lambda1;
-    lambda1 = (undefined, function () {
-      let scrut;
-      scrut = NofibPrelude.force(fss);
-      return runtime.safeCall(scrut(int1, n))
-    });
-    tmp = lambda1;
-    return NofibPrelude.lazy(tmp)
-  };
-  lambda = (undefined, function () {
-    let tmp;
-    tmp = int1(fs_, 1);
-    return power.Pc(0, tmp)
-  });
-  return NofibPrelude.lazy(lambda)
-};
-minusPs_inst_23_24_15_30_tsni = function minusPs_inst_23_24_15_30_tsni(a, b) {
-  let tmp;
-  tmp = negatePs_inst_23_24_15_30_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_23_24_15_30_31_tsni = function negatePs_inst_23_24_15_30_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
-minusPs_inst_23_24_14_32_tsni = function minusPs_inst_23_24_14_32_tsni(a, b) {
-  let tmp;
-  tmp = negatePs_inst_23_24_14_32_31_tsni(b);
-  return power.addPs(a, tmp)
-};
-negatePs_inst_23_24_14_32_31_tsni = function negatePs_inst_23_24_14_32_31_tsni(ps) {
-  let tmp, lambda;
-  lambda = (undefined, function () {
-    let scrut;
-    scrut = NofibPrelude.force(ps);
-    return runtime.safeCall(scrut())
-  });
-  tmp = lambda;
-  return NofibPrelude.lazy(tmp)
-};
+  tmp = power1.list();
+  return power1.Pc(1, tmp)
+});
 (class power {
   static {
     power1 = power;
@@ -4226,49 +7701,19 @@ negatePs_inst_23_24_14_32_31_tsni = function negatePs_inst_23_24_14_32_31_tsni(p
     this.Pz.class = Pz$class;
   }
   static list() {
-    let lambda;
-    lambda = (undefined, function () {
-      let tmp;
-      tmp = power.list();
-      return power.Pc(1, tmp)
-    });
     return NofibPrelude.lazy(lambda)
   } 
   static x_() {
-    let lambda;
-    lambda = (undefined, function () {
-      let tmp, lambda1;
-      lambda1 = (undefined, function () {
-        let tmp1, lambda2;
-        lambda2 = (undefined, function () {
-          return power.Pz
-        });
-        tmp1 = NofibPrelude.lazy(lambda2);
-        return power.Pc(1, tmp1)
-      });
-      tmp = NofibPrelude.lazy(lambda1);
-      return power.Pc(0, tmp)
-    });
-    return NofibPrelude.lazy(lambda)
+    return NofibPrelude.lazy(lambda1)
   } 
   static fromIntegerPs(c) {
-    let scrut, lambda, lambda1;
+    let scrut, lambda$this;
     scrut = c == 0;
     if (scrut === true) {
-      lambda = (undefined, function () {
-        return power.Pz
-      });
-      return NofibPrelude.lazy(lambda)
+      return NofibPrelude.lazy(lambda4)
     } else {
-      lambda1 = (undefined, function () {
-        let tmp, lambda2;
-        lambda2 = (undefined, function () {
-          return power.Pz
-        });
-        tmp = NofibPrelude.lazy(lambda2);
-        return power.Pc(c, tmp)
-      });
-      return NofibPrelude.lazy(lambda1)
+      lambda$this = runtime.safeCall(lambda5(c));
+      return NofibPrelude.lazy(lambda$this)
     }
   } 
   static extract(n, ps) {
@@ -4294,103 +7739,23 @@ negatePs_inst_23_24_14_32_31_tsni = function negatePs_inst_23_24_14_32_31_tsni(p
     }
   } 
   static dotMult(c1, ps1) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, tmp1, tmp2;
-      scrut = NofibPrelude.force(ps1);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_ = param1;
-        tmp1 = c1 * f;
-        tmp2 = power.dotMult(c1, fs_);
-        return power.Pc(tmp1, tmp2)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda7(c1, ps1));
     return NofibPrelude.lazy(tmp)
   } 
   static dotMultSndLz(c2, ps2) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, tmp1, tmp2, tmp3;
-      tmp1 = NofibPrelude.force(ps2);
-      scrut = NofibPrelude.force(tmp1);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_ = param1;
-        tmp2 = c2 * f;
-        tmp3 = power.dotMult(c2, fs_);
-        return power.Pc(tmp2, tmp3)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda8(c2, ps2));
     return NofibPrelude.lazy(tmp)
   } 
   static negatePs(ps3) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, tmp1, tmp2;
-      scrut = NofibPrelude.force(ps3);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_ = param1;
-        tmp1 = - f;
-        tmp2 = power.negatePs(fs_);
-        return power.Pc(tmp1, tmp2)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda9(ps3));
     return NofibPrelude.lazy(tmp)
   } 
   static addPs(fss, gs) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs1, tmp1, tmp2;
-      scrut = NofibPrelude.force(fss);
-      if (scrut instanceof power.Pz.class) {
-        return NofibPrelude.force(gs)
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gs);
-        if (scrut1 instanceof power.Pz.class) {
-          return NofibPrelude.force(fss)
-        } else if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs1 = param11;
-          tmp1 = f + g;
-          tmp2 = power.addPs(fs_, gs1);
-          return power.Pc(tmp1, tmp2)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda10(fss, gs));
     return NofibPrelude.lazy(tmp)
   } 
   static minusPs(a, b) {
@@ -4399,82 +7764,13 @@ negatePs_inst_23_24_14_32_31_tsni = function negatePs_inst_23_24_14_32_31_tsni(p
     return power.addPs(a, tmp)
   } 
   static multPs(fss1, gss) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
-      scrut = NofibPrelude.force(fss1);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss);
-        if (scrut1 instanceof power.Pz.class) {
-          return power.Pz
-        } else if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs1 = param11;
-          tmp1 = f * g;
-          tmp2 = power.dotMult(f, gs1);
-          tmp3 = power.dotMult(g, fs_);
-          tmp4 = power.addPs(tmp2, tmp3);
-          tmp5 = power.x_();
-          tmp6 = power.multPs(tmp5, fs_);
-          tmp7 = power.multPs(tmp6, gs1);
-          tmp8 = power.addPs(tmp4, tmp7);
-          return power.Pc(tmp1, tmp8)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda11(fss1, gss));
     return NofibPrelude.lazy(tmp)
   } 
   static multPsFstLz(fss2, gss1) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-      tmp1 = NofibPrelude.force(fss2);
-      scrut = NofibPrelude.force(tmp1);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss1);
-        if (scrut1 instanceof power.Pz.class) {
-          return power.Pz
-        } else if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          g = param01;
-          gs1 = param11;
-          tmp2 = f * g;
-          tmp3 = power.dotMult(f, gs1);
-          tmp4 = power.dotMult(g, fs_);
-          tmp5 = power.addPs(tmp3, tmp4);
-          tmp6 = power.x_();
-          tmp7 = power.multPs(tmp6, fs_);
-          tmp8 = power.multPs(tmp7, gs1);
-          tmp9 = power.addPs(tmp5, tmp8);
-          return power.Pc(tmp2, tmp9)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda_inst_41_42_tsni(fss2, gss1));
     return NofibPrelude.lazy(tmp)
   } 
   static powerPs(a1, n1) {
@@ -4489,606 +7785,103 @@ negatePs_inst_23_24_14_32_31_tsni = function negatePs_inst_23_24_14_32_31_tsni(p
     }
   } 
   static divPs(fss3, gss2) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs1, q, fs_1, scrut2, param02, param12, g1, gs2, q1, gs3, scrut3, param03, param13, gs4, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, lambda1, lambda2, lambda3, lambda4;
-      scrut = NofibPrelude.force(fss3);
-      if (scrut instanceof power.Pz.class) {
-        scrut3 = NofibPrelude.force(gss2);
-        if (scrut3 instanceof power.Pz.class) {
-          throw globalThis.Error("power series 0/0");
-        } else if (scrut3 instanceof power.Pc.class) {
-          param03 = scrut3.f;
-          param13 = scrut3.s;
-          if (param03 === 0) {
-            gs4 = param13;
-            lambda1 = (undefined, function () {
-              return power.Pz
-            });
-            tmp1 = NofibPrelude.lazy(lambda1);
-            tmp2 = power.divPs(tmp1, gs4);
-            return NofibPrelude.force(tmp2)
-          } else {
-            return power.Pz
-          }
-        } else {
-          return power.Pz
-        }
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        if (param0 === 0) {
-          fs_1 = param1;
-          scrut2 = NofibPrelude.force(gss2);
-          if (scrut2 instanceof power.Pc.class) {
-            param02 = scrut2.f;
-            param12 = scrut2.s;
-            if (param02 === 0) {
-              gs3 = param12;
-              tmp3 = power.divPs(fs_1, gs3);
-              return NofibPrelude.force(tmp3)
-            } else {
-              g1 = param02;
-              gs2 = param12;
-              q1 = 0;
-              tmp4 = dotMult_inst_0_1_tsni(q1, gs2);
-              tmp5 = negatePs_inst_0_25_tsni(tmp4);
-              tmp6 = power.addPs(fs_1, tmp5);
-              lambda2 = (undefined, function () {
-                return power.Pc(g1, gs2)
-              });
-              tmp7 = NofibPrelude.lazy(lambda2);
-              tmp8 = power.divPs(tmp6, tmp7);
-              return power.Pc(q1, tmp8)
-            }
-          } else {
-            f = param0;
-            fs_ = param1;
-            scrut1 = NofibPrelude.force(gss2);
-            if (scrut1 instanceof power.Pc.class) {
-              param01 = scrut1.f;
-              param11 = scrut1.s;
-              g = param01;
-              gs1 = param11;
-              tmp9 = f / g;
-              q = tmp9;
-              tmp10 = dotMult_inst_0_2_tsni(q, gs1);
-              tmp11 = negatePs_inst_0_26_tsni(tmp10);
-              tmp12 = power.addPs(fs_, tmp11);
-              lambda3 = (undefined, function () {
-                return power.Pc(g, gs1)
-              });
-              tmp13 = NofibPrelude.lazy(lambda3);
-              tmp14 = power.divPs(tmp12, tmp13);
-              return power.Pc(q, tmp14)
-            } else {
-              throw new globalThis.Error("match error");
-            }
-          }
-        } else {
-          f = param0;
-          fs_ = param1;
-          scrut1 = NofibPrelude.force(gss2);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            g = param01;
-            gs1 = param11;
-            tmp15 = f / g;
-            q = tmp15;
-            tmp16 = dotMult_inst_0_3_tsni(q, gs1);
-            tmp17 = negatePs_inst_0_27_tsni(tmp16);
-            tmp18 = power.addPs(fs_, tmp17);
-            lambda4 = (undefined, function () {
-              return power.Pc(g, gs1)
-            });
-            tmp19 = NofibPrelude.lazy(lambda4);
-            tmp20 = power.divPs(tmp18, tmp19);
-            return power.Pc(q, tmp20)
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda13(fss3, gss2));
     return NofibPrelude.lazy(tmp)
   } 
   static compose_(fss4, gss3) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda1, lambda2, lambda3, lambda4;
-      scrut = NofibPrelude.force(fss4);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_ = param1;
-        scrut1 = NofibPrelude.force(gss3);
-        if (scrut1 instanceof power.Pz.class) {
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp1 = NofibPrelude.lazy(lambda1);
-          return power.Pc(f, tmp1)
-        } else if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          if (param01 === 0) {
-            gs1 = param11;
-            lambda2 = (undefined, function () {
-              return power.Pc(0, gs1)
-            });
-            tmp2 = NofibPrelude.lazy(lambda2);
-            tmp3 = power.compose_(fs_, tmp2);
-            tmp4 = power.multPs(gs1, tmp3);
-            return power.Pc(f, tmp4)
-          } else {
-            lambda3 = (undefined, function () {
-              let tmp13, lambda5;
-              lambda5 = (undefined, function () {
-                return power.Pz
-              });
-              tmp13 = NofibPrelude.lazy(lambda5);
-              return power.Pc(f, tmp13)
-            });
-            tmp5 = NofibPrelude.lazy(lambda3);
-            tmp6 = power.compose_(fs_, gss3);
-            tmp7 = power.multPs(gss3, tmp6);
-            tmp8 = power.addPs(tmp5, tmp7);
-            return NofibPrelude.force(tmp8)
-          }
-        } else {
-          lambda4 = (undefined, function () {
-            let tmp13, lambda5;
-            lambda5 = (undefined, function () {
-              return power.Pz
-            });
-            tmp13 = NofibPrelude.lazy(lambda5);
-            return power.Pc(f, tmp13)
-          });
-          tmp9 = NofibPrelude.lazy(lambda4);
-          tmp10 = power.compose_(fs_, gss3);
-          tmp11 = power.multPs(gss3, tmp10);
-          tmp12 = power.addPs(tmp9, tmp11);
-          return NofibPrelude.force(tmp12)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda18(fss4, gss3));
     return NofibPrelude.lazy(tmp)
   } 
   static composeSndLz_(fss5, gss4) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let scrut, param0, param1, f, fs_, scrut1, param01, param11, gs1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, lambda1, lambda2, lambda3, lambda4;
-      scrut = NofibPrelude.force(fss5);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        f = param0;
-        fs_ = param1;
-        tmp1 = NofibPrelude.force(gss4);
-        scrut1 = NofibPrelude.force(tmp1);
-        if (scrut1 instanceof power.Pz.class) {
-          lambda1 = (undefined, function () {
-            return power.Pz
-          });
-          tmp2 = NofibPrelude.lazy(lambda1);
-          return power.Pc(f, tmp2)
-        } else if (scrut1 instanceof power.Pc.class) {
-          param01 = scrut1.f;
-          param11 = scrut1.s;
-          if (param01 === 0) {
-            gs1 = param11;
-            lambda2 = (undefined, function () {
-              return power.Pc(0, gs1)
-            });
-            tmp3 = NofibPrelude.lazy(lambda2);
-            tmp4 = power.compose_(fs_, tmp3);
-            tmp5 = power.multPs(gs1, tmp4);
-            return power.Pc(f, tmp5)
-          } else {
-            lambda3 = (undefined, function () {
-              let tmp14, lambda5;
-              lambda5 = (undefined, function () {
-                return power.Pz
-              });
-              tmp14 = NofibPrelude.lazy(lambda5);
-              return power.Pc(f, tmp14)
-            });
-            tmp6 = NofibPrelude.lazy(lambda3);
-            tmp7 = power.composeSndLz_(fs_, gss4);
-            tmp8 = power.multPs(gss4, tmp7);
-            tmp9 = power.addPs(tmp6, tmp8);
-            return NofibPrelude.force(tmp9)
-          }
-        } else {
-          lambda4 = (undefined, function () {
-            let tmp14, lambda5;
-            lambda5 = (undefined, function () {
-              return power.Pz
-            });
-            tmp14 = NofibPrelude.lazy(lambda5);
-            return power.Pc(f, tmp14)
-          });
-          tmp10 = NofibPrelude.lazy(lambda4);
-          tmp11 = power.composeSndLz_(fs_, gss4);
-          tmp12 = power.multPs(gss4, tmp11);
-          tmp13 = power.addPs(tmp10, tmp12);
-          return NofibPrelude.force(tmp13)
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda_inst_43_tsni(fss5, gss4));
     return NofibPrelude.lazy(tmp)
   } 
   static revert(fss6) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let rs, scrut, param0, param1, f0, kss, scrut1, param01, param11, f1, gss5, scrut2, fs_, tmp1, tmp2, tmp3, tmp4, lambda1;
-      scrut = NofibPrelude.force(fss6);
-      if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        if (param0 === 0) {
-          fs_ = param1;
-          rs = function rs() {
-            let tmp5, lambda2;
-            lambda2 = (undefined, function () {
-              let tmp6, tmp7, tmp8, tmp9;
-              tmp6 = power.fromIntegerPs(1);
-              tmp7 = rs();
-              tmp8 = power.compose_(fs_, tmp7);
-              tmp9 = divPs_inst_4_5_tsni(tmp6, tmp8);
-              return power.Pc(0, tmp9)
-            });
-            tmp5 = lambda2;
-            return NofibPrelude.lazy(tmp5)
-          };
-          tmp1 = rs();
-          return NofibPrelude.force(tmp1)
-        } else {
-          f0 = param0;
-          kss = param1;
-          scrut1 = NofibPrelude.force(kss);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            f1 = param01;
-            gss5 = param11;
-            scrut2 = NofibPrelude.force(gss5);
-            if (scrut2 instanceof power.Pz.class) {
-              tmp2 = - 1;
-              tmp3 = tmp2 / f1;
-              lambda1 = (undefined, function () {
-                let tmp5, tmp6, lambda2;
-                tmp5 = 1 / f1;
-                lambda2 = (undefined, function () {
-                  return power.Pz
-                });
-                tmp6 = NofibPrelude.lazy(lambda2);
-                return power.Pc(tmp5, tmp6)
-              });
-              tmp4 = NofibPrelude.lazy(lambda1);
-              return power.Pc(tmp3, tmp4)
-            } else {
-              throw new globalThis.Error("match error");
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda_inst_44_45_tsni(fss6));
     return NofibPrelude.lazy(tmp)
   } 
   static deriv(fss7) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let deriv1, scrut, param0, param1, fs_, tmp1;
-      scrut = NofibPrelude.force(fss7);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        fs_ = param1;
-        deriv1 = function deriv1(gss5, n2) {
-          let tmp2, lambda1;
-          lambda1 = (undefined, function () {
-            let scrut1, param01, param11, f, fs_1, tmp3, tmp4, tmp5;
-            scrut1 = NofibPrelude.force(gss5);
-            if (scrut1 instanceof power.Pz.class) {
-              return power.Pz
-            } else if (scrut1 instanceof power.Pc.class) {
-              param01 = scrut1.f;
-              param11 = scrut1.s;
-              f = param01;
-              fs_1 = param11;
-              tmp3 = n2 * f;
-              tmp4 = n2 + 1;
-              tmp5 = deriv1(fs_1, tmp4);
-              return power.Pc(tmp3, tmp5)
-            } else {
-              throw new globalThis.Error("match error");
-            }
-          });
-          tmp2 = lambda1;
-          return NofibPrelude.lazy(tmp2)
-        };
-        tmp1 = deriv1(fs_, 1);
-        return NofibPrelude.force(tmp1)
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda36(fss7));
     return NofibPrelude.lazy(tmp)
   } 
   static integral(fs_) {
-    let int1, lambda;
-    int1 = function int1(fss8, n2) {
-      let tmp, lambda1;
-      lambda1 = (undefined, function () {
-        let scrut, param0, param1, f, fs_1, tmp1, tmp2, tmp3;
-        scrut = NofibPrelude.force(fss8);
-        if (scrut instanceof power.Pz.class) {
-          return power.Pz
-        } else if (scrut instanceof power.Pc.class) {
-          param0 = scrut.f;
-          param1 = scrut.s;
-          f = param0;
-          fs_1 = param1;
-          tmp1 = f / n2;
-          tmp2 = n2 + 1;
-          tmp3 = int1(fs_1, tmp2);
-          return power.Pc(tmp1, tmp3)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      });
-      tmp = lambda1;
-      return NofibPrelude.lazy(tmp)
-    };
-    lambda = (undefined, function () {
-      let tmp;
-      tmp = int1(fs_, 1);
-      return power.Pc(0, tmp)
-    });
-    return NofibPrelude.lazy(lambda)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda39(fs_));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static integralLz(fs_1) {
-    let int1, tmp, lambda;
-    int1 = function int1(fss8, n2) {
-      let tmp1, lambda1;
-      lambda1 = (undefined, function () {
-        let scrut, param0, param1, f, fs_2, tmp2, tmp3, tmp4;
-        scrut = NofibPrelude.force(fss8);
-        if (scrut instanceof power.Pz.class) {
-          return power.Pz
-        } else if (scrut instanceof power.Pc.class) {
-          param0 = scrut.f;
-          param1 = scrut.s;
-          f = param0;
-          fs_2 = param1;
-          tmp2 = f / n2;
-          tmp3 = n2 + 1;
-          tmp4 = int1(fs_2, tmp3);
-          return power.Pc(tmp2, tmp4)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      });
-      tmp1 = lambda1;
-      return NofibPrelude.lazy(tmp1)
-    };
-    lambda = (undefined, function () {
-      let tmp1, tmp2;
-      tmp1 = runtime.safeCall(fs_1());
-      tmp2 = int1(tmp1, 1);
-      return power.Pc(0, tmp2)
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda41(fs_1));
     return NofibPrelude.lazy(tmp)
   } 
   static sqrtPs(fss8) {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let qs, scrut, param0, param1, fs_2, gss5, scrut1, param01, param11, fs_3, tmp1, tmp2, tmp3;
-      scrut = NofibPrelude.force(fss8);
-      if (scrut instanceof power.Pz.class) {
-        return power.Pz
-      } else if (scrut instanceof power.Pc.class) {
-        param0 = scrut.f;
-        param1 = scrut.s;
-        if (param0 === 0) {
-          gss5 = param1;
-          scrut1 = NofibPrelude.force(gss5);
-          if (scrut1 instanceof power.Pc.class) {
-            param01 = scrut1.f;
-            param11 = scrut1.s;
-            if (param01 === 0) {
-              fs_3 = param11;
-              tmp1 = power.sqrtPs(fs_3);
-              return power.Pc(0, tmp1)
-            } else {
-              throw new globalThis.Error("match error");
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        } else if (param0 === 1) {
-          fs_2 = param1;
-          qs = function qs() {
-            let tmp4, lambda1;
-            lambda1 = (undefined, function () {
-              let tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda2;
-              tmp5 = power.fromIntegerPs(1);
-              lambda2 = (undefined, function () {
-                let _deforest_Pc_f, _deforest_Pc_s;
-                _deforest_Pc_f = 1;
-                _deforest_Pc_s = fs_2;
-                return () => {
-                  let deriv1, param02, param12, fs_4, tmp12;
-                  param02 = _deforest_Pc_f;
-                  param12 = _deforest_Pc_s;
-                  fs_4 = param12;
-                  deriv1 = function deriv1(gss6, n2) {
-                    let tmp13, lambda3;
-                    lambda3 = (undefined, function () {
-                      let scrut2, param03, param13, f, fs_5, tmp14, tmp15, tmp16;
-                      scrut2 = NofibPrelude.force(gss6);
-                      if (scrut2 instanceof power.Pz.class) {
-                        return power.Pz
-                      } else if (scrut2 instanceof power.Pc.class) {
-                        param03 = scrut2.f;
-                        param13 = scrut2.s;
-                        f = param03;
-                        fs_5 = param13;
-                        tmp14 = n2 * f;
-                        tmp15 = n2 + 1;
-                        tmp16 = deriv1(fs_5, tmp15);
-                        return power.Pc(tmp14, tmp16)
-                      } else {
-                        throw new globalThis.Error("match error");
-                      }
-                    });
-                    tmp13 = lambda3;
-                    return NofibPrelude.lazy(tmp13)
-                  };
-                  tmp12 = deriv1(fs_4, 1);
-                  return NofibPrelude.force(tmp12)
-                }
-              });
-              tmp6 = NofibPrelude.lazy(lambda2);
-              tmp7 = deriv_inst_6_28_tsni(tmp6);
-              tmp8 = qs();
-              tmp9 = power.dotMultSndLz(2, tmp8);
-              tmp10 = divPs_inst_6_7_tsni(tmp7, tmp9);
-              tmp11 = integral_inst_6_29_tsni(tmp10);
-              return power.addPs(tmp5, tmp11)
-            });
-            tmp4 = lambda1;
-            return NofibPrelude.lazy(tmp4)
-          };
-          tmp2 = qs();
-          tmp3 = NofibPrelude.force(tmp2);
-          return NofibPrelude.force(tmp3)
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      } else {
-        throw new globalThis.Error("match error");
-      }
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = runtime.safeCall(lambda_inst_46_tsni(fss8));
     return NofibPrelude.lazy(tmp)
   } 
   static ts() {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let tmp1, tmp2, tmp3;
-      tmp1 = power.ts();
-      tmp2 = power.ts();
-      tmp3 = power.multPs(tmp1, tmp2);
-      return power.Pc(1, tmp3)
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = lambda45;
     return NofibPrelude.lazy(tmp)
   } 
   static tree() {
-    let tmp, lambda;
-    lambda = (undefined, function () {
-      let tmp1, tmp2, tmp3, lambda1;
-      tmp1 = power.list();
-      lambda1 = (undefined, function () {
-        return power.tree()
-      });
-      tmp2 = NofibPrelude.lazy(lambda1);
-      tmp3 = power.composeSndLz_(tmp1, tmp2);
-      return power.Pc(0, tmp3)
-    });
-    tmp = lambda;
+    let tmp;
+    tmp = lambda_inst_47_tsni;
     return NofibPrelude.lazy(tmp)
   } 
   static cosx() {
-    let tmp, tmp1, tmp2, lambda;
-    lambda = (undefined, function () {
-      let tmp3, lambda1;
-      lambda1 = (undefined, function () {
-        return power.Pz
-      });
-      tmp3 = NofibPrelude.lazy(lambda1);
-      return power.Pc(1, tmp3)
-    });
-    tmp = NofibPrelude.lazy(lambda);
-    tmp1 = integralLz_inst_8_9_tsni(power.cosx);
-    tmp2 = integral_inst_8_10_tsni(tmp1);
-    return minusPs_inst_8_30_tsni(tmp, tmp2)
+    let tmp, tmp1, tmp2;
+    tmp = NofibPrelude.lazy(lambda_inst_48_49_tsni);
+    tmp1 = power.integralLz(power.cosx);
+    tmp2 = power.integral(tmp1);
+    return minusPs_inst_48_75_tsni(tmp, tmp2)
   } 
   static sinx() {
-    let tmp, tmp1, tmp2, lambda;
-    lambda = (undefined, function () {
-      let tmp3, lambda1;
-      lambda1 = (undefined, function () {
-        return power.Pz
-      });
-      tmp3 = NofibPrelude.lazy(lambda1);
-      return power.Pc(1, tmp3)
-    });
-    tmp = NofibPrelude.lazy(lambda);
-    tmp1 = integralLz_inst_11_12_tsni(power.sinx);
-    tmp2 = minusPs_inst_11_32_tsni(tmp, tmp1);
+    let tmp, tmp1, tmp2;
+    tmp = NofibPrelude.lazy(lambda_inst_51_52_tsni);
+    tmp1 = power.integralLz(power.sinx);
+    tmp2 = minusPs_inst_51_77_tsni(tmp, tmp1);
     return power.integral(tmp2)
   } 
   static testPower_nofib(p) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26;
-    tmp = sinx_inst_13_14_tsni();
-    tmp1 = power.fromIntegerPs(1);
-    tmp2 = cosx_inst_13_15_tsni();
-    tmp3 = power.powerPs(tmp2, 2);
-    tmp4 = power.minusPs(tmp1, tmp3);
-    tmp5 = sqrtPs_inst_13_16_tsni(tmp4);
+    tmp = sinx_inst_54_55_tsni();
+    tmp1 = fromIntegerPs_inst_54_59_tsni(1);
+    tmp2 = cosx_inst_54_56_tsni();
+    tmp3 = powerPs_inst_54_57_tsni(tmp2, 2);
+    tmp4 = minusPs_inst_54_78_tsni(tmp1, tmp3);
+    tmp5 = sqrtPs_inst_54_60_tsni(tmp4);
     tmp6 = power.minusPs(tmp, tmp5);
     tmp7 = power.extract(p, tmp6);
-    tmp8 = sinx_inst_13_17_tsni();
-    tmp9 = cosx_inst_13_18_tsni();
-    tmp10 = divPs_inst_13_19_tsni(tmp8, tmp9);
-    tmp11 = power.fromIntegerPs(1);
-    tmp12 = power.fromIntegerPs(1);
-    tmp13 = power.x_();
-    tmp14 = power.powerPs(tmp13, 2);
-    tmp15 = power.addPs(tmp12, tmp14);
-    tmp16 = divPs_inst_13_20_tsni(tmp11, tmp15);
-    tmp17 = integral_inst_13_22_tsni(tmp16);
-    tmp18 = revert_inst_13_21_tsni(tmp17);
+    tmp8 = sinx_inst_54_61_tsni();
+    tmp9 = cosx_inst_54_62_tsni();
+    tmp10 = divPs_inst_54_63_tsni(tmp8, tmp9);
+    tmp11 = fromIntegerPs_inst_54_68_tsni(1);
+    tmp12 = fromIntegerPs_inst_54_66_tsni(1);
+    tmp13 = x__inst_54_65_tsni();
+    tmp14 = powerPs_inst_54_64_tsni(tmp13, 2);
+    tmp15 = addPs_inst_54_79_tsni(tmp12, tmp14);
+    tmp16 = divPs_inst_54_67_tsni(tmp11, tmp15);
+    tmp17 = power.integral(tmp16);
+    tmp18 = revert_inst_54_69_tsni(tmp17);
     tmp19 = power.minusPs(tmp10, tmp18);
     tmp20 = power.extract(p, tmp19);
     tmp21 = (tmp7 , tmp20);
     tmp22 = power.ts();
     tmp23 = power.extract(p, tmp22);
     tmp24 = (tmp21 , tmp23);
-    tmp25 = power.tree();
+    tmp25 = tree_inst_54_70_tsni();
     tmp26 = power.extract(p, tmp25);
     return (tmp24 , tmp26)
   } 
   static main() {
     let tmp;
-    tmp = testPower_nofib_inst_23_24_tsni(14);
+    tmp = testPower_nofib_inst_72_73_tsni(14);
     return runtime.safeCall(tmp.toString())
   }
   static toString() { return "power"; }

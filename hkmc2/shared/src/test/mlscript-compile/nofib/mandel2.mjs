@@ -2,9 +2,9 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let mandel21, check_perim_inst_1_2_tsni, build_tree_inst_3_4_tsni, check_perim_inst_3_4_2_tsni, testMandel2_nofib_inst_5_6_tsni, build_tree_inst_5_6_4_tsni, check_perim_inst_5_6_4_2_tsni, point_colour_inst_0_7_tsni, point_colour_inst_0_8_tsni, point_colour_inst_1_2_8_tsni, point_colour_inst_1_2_7_tsni, point_colour_inst_3_4_2_7_tsni, point_colour_inst_3_4_2_8_tsni, point_colour_inst_5_6_4_2_8_tsni, point_colour_inst_5_6_4_2_7_tsni;
+let check_line, mandel21, check_line$, check_perim_inst_1_2_tsni, build_tree_inst_3_4_tsni, check_perim_inst_3_4_2_tsni, testMandel2_nofib_inst_5_6_tsni, build_tree_inst_5_6_4_tsni, check_perim_inst_5_6_4_2_tsni, point_colour_inst_0_7_tsni, point_colour_inst_0_8_tsni, point_colour_inst_1_2_8_tsni, point_colour_inst_1_2_7_tsni, point_colour_inst_3_4_2_7_tsni, point_colour_inst_3_4_2_8_tsni, point_colour_inst_5_6_4_2_8_tsni, point_colour_inst_5_6_4_2_7_tsni;
 check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
-  let check_line, col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
   if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
@@ -17,64 +17,6 @@ check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
       first11 = x2y2[1];
       x2 = first01;
       y2 = first11;
-      check_line = function check_line(xcyc, xdyd) {
-        let first12, first02, xc, yc, first13, first03, xd, yd, finished, scrut8, scrut9, scrut10, scrut11, tmp6, tmp7, tmp8, tmp9, tmp10, arr6, arr7;
-        if (globalThis.Array.isArray(xcyc) && xcyc.length === 2) {
-          first02 = xcyc[0];
-          first12 = xcyc[1];
-          xc = first02;
-          yc = first12;
-          if (globalThis.Array.isArray(xdyd) && xdyd.length === 2) {
-            first03 = xdyd[0];
-            first13 = xdyd[1];
-            xd = first03;
-            yd = first13;
-            scrut10 = mandel2.equalp(xdyd, mandel2.right);
-            if (scrut10 === true) {
-              tmp6 = xc >= x2;
-            } else {
-              scrut9 = mandel2.equalp(xdyd, mandel2.down);
-              if (scrut9 === true) {
-                tmp6 = yc <= y2;
-              } else {
-                scrut8 = mandel2.equalp(xdyd, mandel2.left);
-                if (scrut8 === true) {
-                  tmp6 = xc <= x1;
-                } else {
-                  tmp6 = yc >= y1;
-                }
-              }
-            }
-            finished = tmp6;
-            if (finished === true) {
-              return true
-            } else {
-              tmp7 = mandel2.point_colour(xcyc);
-              tmp8 = tmp7 == col1;
-              scrut11 = Predef.not(tmp8);
-              if (scrut11 === true) {
-                return false
-              } else {
-                tmp9 = xc + xd;
-                tmp10 = yc + yd;
-                arr6 = [
-                  tmp9,
-                  tmp10
-                ];
-                arr7 = [
-                  xd,
-                  yd
-                ];
-                return check_line(arr6, arr7)
-              }
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      };
       scrut7 = mandel2.equalp(x1y1, x2y2);
       if (scrut7 === true) {
         return col1
@@ -131,28 +73,28 @@ check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
             tmp2,
             y1
           ];
-          scrut3 = check_line(arr2, mandel2.right);
+          scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
           if (scrut3 === true) {
             tmp3 = y1 + 1;
             arr3 = [
               x2,
               tmp3
             ];
-            scrut4 = check_line(arr3, mandel2.down);
+            scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
             if (scrut4 === true) {
               tmp4 = x2 - 1;
               arr4 = [
                 tmp4,
                 y2
               ];
-              scrut5 = check_line(arr4, mandel2.left);
+              scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
               if (scrut5 === true) {
                 tmp5 = y2 - 1;
                 arr5 = [
                   x1,
                   tmp5
                 ];
-                scrut6 = check_line(arr5, mandel2.up);
+                scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
                 if (scrut6 === true) {
                   return col1
                 } else {
@@ -254,7 +196,7 @@ build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
   }
 };
 check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
-  let check_line, col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
   if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
@@ -267,64 +209,6 @@ check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
       first11 = x2y2[1];
       x2 = first01;
       y2 = first11;
-      check_line = function check_line(xcyc, xdyd) {
-        let first12, first02, xc, yc, first13, first03, xd, yd, finished, scrut8, scrut9, scrut10, scrut11, tmp6, tmp7, tmp8, tmp9, tmp10, arr6, arr7;
-        if (globalThis.Array.isArray(xcyc) && xcyc.length === 2) {
-          first02 = xcyc[0];
-          first12 = xcyc[1];
-          xc = first02;
-          yc = first12;
-          if (globalThis.Array.isArray(xdyd) && xdyd.length === 2) {
-            first03 = xdyd[0];
-            first13 = xdyd[1];
-            xd = first03;
-            yd = first13;
-            scrut10 = mandel2.equalp(xdyd, mandel2.right);
-            if (scrut10 === true) {
-              tmp6 = xc >= x2;
-            } else {
-              scrut9 = mandel2.equalp(xdyd, mandel2.down);
-              if (scrut9 === true) {
-                tmp6 = yc <= y2;
-              } else {
-                scrut8 = mandel2.equalp(xdyd, mandel2.left);
-                if (scrut8 === true) {
-                  tmp6 = xc <= x1;
-                } else {
-                  tmp6 = yc >= y1;
-                }
-              }
-            }
-            finished = tmp6;
-            if (finished === true) {
-              return true
-            } else {
-              tmp7 = mandel2.point_colour(xcyc);
-              tmp8 = tmp7 == col1;
-              scrut11 = Predef.not(tmp8);
-              if (scrut11 === true) {
-                return false
-              } else {
-                tmp9 = xc + xd;
-                tmp10 = yc + yd;
-                arr6 = [
-                  tmp9,
-                  tmp10
-                ];
-                arr7 = [
-                  xd,
-                  yd
-                ];
-                return check_line(arr6, arr7)
-              }
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      };
       scrut7 = mandel2.equalp(x1y1, x2y2);
       if (scrut7 === true) {
         return col1
@@ -381,28 +265,28 @@ check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
             tmp2,
             y1
           ];
-          scrut3 = check_line(arr2, mandel2.right);
+          scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
           if (scrut3 === true) {
             tmp3 = y1 + 1;
             arr3 = [
               x2,
               tmp3
             ];
-            scrut4 = check_line(arr3, mandel2.down);
+            scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
             if (scrut4 === true) {
               tmp4 = x2 - 1;
               arr4 = [
                 tmp4,
                 y2
               ];
-              scrut5 = check_line(arr4, mandel2.left);
+              scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
               if (scrut5 === true) {
                 tmp5 = y2 - 1;
                 arr5 = [
                   x1,
                   tmp5
                 ];
-                scrut6 = check_line(arr5, mandel2.up);
+                scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
                 if (scrut6 === true) {
                   return col1
                 } else {
@@ -518,7 +402,7 @@ build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
   }
 };
 check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y2) {
-  let check_line, col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
   if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
@@ -531,64 +415,6 @@ check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y
       first11 = x2y2[1];
       x2 = first01;
       y2 = first11;
-      check_line = function check_line(xcyc, xdyd) {
-        let first12, first02, xc, yc, first13, first03, xd, yd, finished, scrut8, scrut9, scrut10, scrut11, tmp6, tmp7, tmp8, tmp9, tmp10, arr6, arr7;
-        if (globalThis.Array.isArray(xcyc) && xcyc.length === 2) {
-          first02 = xcyc[0];
-          first12 = xcyc[1];
-          xc = first02;
-          yc = first12;
-          if (globalThis.Array.isArray(xdyd) && xdyd.length === 2) {
-            first03 = xdyd[0];
-            first13 = xdyd[1];
-            xd = first03;
-            yd = first13;
-            scrut10 = mandel2.equalp(xdyd, mandel2.right);
-            if (scrut10 === true) {
-              tmp6 = xc >= x2;
-            } else {
-              scrut9 = mandel2.equalp(xdyd, mandel2.down);
-              if (scrut9 === true) {
-                tmp6 = yc <= y2;
-              } else {
-                scrut8 = mandel2.equalp(xdyd, mandel2.left);
-                if (scrut8 === true) {
-                  tmp6 = xc <= x1;
-                } else {
-                  tmp6 = yc >= y1;
-                }
-              }
-            }
-            finished = tmp6;
-            if (finished === true) {
-              return true
-            } else {
-              tmp7 = mandel2.point_colour(xcyc);
-              tmp8 = tmp7 == col1;
-              scrut11 = Predef.not(tmp8);
-              if (scrut11 === true) {
-                return false
-              } else {
-                tmp9 = xc + xd;
-                tmp10 = yc + yd;
-                arr6 = [
-                  tmp9,
-                  tmp10
-                ];
-                arr7 = [
-                  xd,
-                  yd
-                ];
-                return check_line(arr6, arr7)
-              }
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        } else {
-          throw new globalThis.Error("match error");
-        }
-      };
       scrut7 = mandel2.equalp(x1y1, x2y2);
       if (scrut7 === true) {
         return col1
@@ -645,28 +471,28 @@ check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y
             tmp2,
             y1
           ];
-          scrut3 = check_line(arr2, mandel2.right);
+          scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
           if (scrut3 === true) {
             tmp3 = y1 + 1;
             arr3 = [
               x2,
               tmp3
             ];
-            scrut4 = check_line(arr3, mandel2.down);
+            scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
             if (scrut4 === true) {
               tmp4 = x2 - 1;
               arr4 = [
                 tmp4,
                 y2
               ];
-              scrut5 = check_line(arr4, mandel2.left);
+              scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
               if (scrut5 === true) {
                 tmp5 = y2 - 1;
                 arr5 = [
                   x1,
                   tmp5
                 ];
-                scrut6 = check_line(arr5, mandel2.up);
+                scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
                 if (scrut6 === true) {
                   return col1
                 } else {
@@ -713,6 +539,69 @@ point_colour_inst_5_6_4_2_8_tsni = function point_colour_inst_5_6_4_2_8_tsni(xy)
 };
 point_colour_inst_5_6_4_2_7_tsni = function point_colour_inst_5_6_4_2_7_tsni(xy) {
   return runtime.safeCall(xy())
+};
+check_line$ = function check_line$(col1, x1, y1, x2, y2, xcyc, xdyd) {
+  let first1, first0, xc, yc, first11, first01, xd, yd, finished, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, arr, arr1;
+  if (globalThis.Array.isArray(xcyc) && xcyc.length === 2) {
+    first0 = xcyc[0];
+    first1 = xcyc[1];
+    xc = first0;
+    yc = first1;
+    if (globalThis.Array.isArray(xdyd) && xdyd.length === 2) {
+      first01 = xdyd[0];
+      first11 = xdyd[1];
+      xd = first01;
+      yd = first11;
+      scrut2 = mandel21.equalp(xdyd, mandel21.right);
+      if (scrut2 === true) {
+        tmp = xc >= x2;
+      } else {
+        scrut1 = mandel21.equalp(xdyd, mandel21.down);
+        if (scrut1 === true) {
+          tmp = yc <= y2;
+        } else {
+          scrut = mandel21.equalp(xdyd, mandel21.left);
+          if (scrut === true) {
+            tmp = xc <= x1;
+          } else {
+            tmp = yc >= y1;
+          }
+        }
+      }
+      finished = tmp;
+      if (finished === true) {
+        return true
+      } else {
+        tmp1 = mandel21.point_colour(xcyc);
+        tmp2 = tmp1 == col1;
+        scrut3 = Predef.not(tmp2);
+        if (scrut3 === true) {
+          return false
+        } else {
+          tmp3 = xc + xd;
+          tmp4 = yc + yd;
+          arr = [
+            tmp3,
+            tmp4
+          ];
+          arr1 = [
+            xd,
+            yd
+          ];
+          return check_line$(col1, x1, y1, x2, y2, arr, arr1)
+        }
+      }
+    } else {
+      throw new globalThis.Error("match error");
+    }
+  } else {
+    throw new globalThis.Error("match error");
+  }
+};
+check_line = function check_line(col1, x1, y1, x2, y2) {
+  return (xcyc, xdyd) => {
+    return check_line$(col1, x1, y1, x2, y2, xcyc, xdyd)
+  }
 };
 (class mandel2 {
   static {
@@ -932,7 +821,7 @@ point_colour_inst_5_6_4_2_7_tsni = function point_colour_inst_5_6_4_2_7_tsni(xy)
     }
   } 
   static check_perim(x1y1, x2y2) {
-    let check_line, col1, first1, first0, x11, y11, first11, first01, x21, y21, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+    let col1, first1, first0, x11, y11, first11, first01, x21, y21, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     tmp = mandel2.point_colour(x1y1);
     col1 = tmp;
     if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
@@ -945,64 +834,6 @@ point_colour_inst_5_6_4_2_7_tsni = function point_colour_inst_5_6_4_2_7_tsni(xy)
         first11 = x2y2[1];
         x21 = first01;
         y21 = first11;
-        check_line = function check_line(xcyc, xdyd) {
-          let first12, first02, xc, yc, first13, first03, xd, yd, finished, scrut8, scrut9, scrut10, scrut11, tmp6, tmp7, tmp8, tmp9, tmp10, arr6, arr7;
-          if (globalThis.Array.isArray(xcyc) && xcyc.length === 2) {
-            first02 = xcyc[0];
-            first12 = xcyc[1];
-            xc = first02;
-            yc = first12;
-            if (globalThis.Array.isArray(xdyd) && xdyd.length === 2) {
-              first03 = xdyd[0];
-              first13 = xdyd[1];
-              xd = first03;
-              yd = first13;
-              scrut10 = mandel2.equalp(xdyd, mandel2.right);
-              if (scrut10 === true) {
-                tmp6 = xc >= x21;
-              } else {
-                scrut9 = mandel2.equalp(xdyd, mandel2.down);
-                if (scrut9 === true) {
-                  tmp6 = yc <= y21;
-                } else {
-                  scrut8 = mandel2.equalp(xdyd, mandel2.left);
-                  if (scrut8 === true) {
-                    tmp6 = xc <= x11;
-                  } else {
-                    tmp6 = yc >= y11;
-                  }
-                }
-              }
-              finished = tmp6;
-              if (finished === true) {
-                return true
-              } else {
-                tmp7 = mandel2.point_colour(xcyc);
-                tmp8 = tmp7 == col1;
-                scrut11 = Predef.not(tmp8);
-                if (scrut11 === true) {
-                  return false
-                } else {
-                  tmp9 = xc + xd;
-                  tmp10 = yc + yd;
-                  arr6 = [
-                    tmp9,
-                    tmp10
-                  ];
-                  arr7 = [
-                    xd,
-                    yd
-                  ];
-                  return check_line(arr6, arr7)
-                }
-              }
-            } else {
-              throw new globalThis.Error("match error");
-            }
-          } else {
-            throw new globalThis.Error("match error");
-          }
-        };
         scrut7 = mandel2.equalp(x1y1, x2y2);
         if (scrut7 === true) {
           return col1
@@ -1059,28 +890,28 @@ point_colour_inst_5_6_4_2_7_tsni = function point_colour_inst_5_6_4_2_7_tsni(xy)
               tmp2,
               y11
             ];
-            scrut3 = check_line(arr2, mandel2.right);
+            scrut3 = check_line$(col1, x11, y11, x21, y21, arr2, mandel2.right);
             if (scrut3 === true) {
               tmp3 = y11 + 1;
               arr3 = [
                 x21,
                 tmp3
               ];
-              scrut4 = check_line(arr3, mandel2.down);
+              scrut4 = check_line$(col1, x11, y11, x21, y21, arr3, mandel2.down);
               if (scrut4 === true) {
                 tmp4 = x21 - 1;
                 arr4 = [
                   tmp4,
                   y21
                 ];
-                scrut5 = check_line(arr4, mandel2.left);
+                scrut5 = check_line$(col1, x11, y11, x21, y21, arr4, mandel2.left);
                 if (scrut5 === true) {
                   tmp5 = y21 - 1;
                   arr5 = [
                     x11,
                     tmp5
                   ];
-                  scrut6 = check_line(arr5, mandel2.up);
+                  scrut6 = check_line$(col1, x11, y11, x21, y21, arr5, mandel2.up);
                   if (scrut6 === true) {
                     return col1
                   } else {
