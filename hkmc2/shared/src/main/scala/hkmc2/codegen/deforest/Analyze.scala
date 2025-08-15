@@ -383,13 +383,17 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     val notProcedBefore = processedFun.add(defn.sym)
     assert(notProcedBefore, s"process ${defn.sym} again")
     val thisFunVar = preAnalyzer.getProdVarForSym(defn.sym)
-    val paramSyms = defn.params.head.params.map: // TODO: handle multiple param list and the `restParam`
-      case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
+    // assert(defn.params.size === 1)
+    val res = freshVar(s"${defn.sym.nme}_res", S(defn.sym))
+    val funProdStrat = defn.params.foldRight[ProdStrat](res.asProdStrat): (ps, acc) =>
+      assert(ps.restParam.isEmpty) // TODO: the `restParam`
+      val psTys = ps.params.map:
+        case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
+      ProdFun(psTys, acc)
     val cc = new ConstraintsAndCacheHitCollector(S(defn.sym))
     val bodyStrat = processBlock(defn.body)(using defn.sym :: processingDefs, cc)
-    val res = freshVar(s"${defn.sym.nme}_res", S(defn.sym))
     cc.constrain(bodyStrat, res.asConsStrat)
-    cc.constrain(ProdFun(paramSyms, res.asProdStrat), thisFunVar.asConsStrat)
+    cc.constrain(funProdStrat, thisFunVar.asConsStrat)
     cc
   
   def processBlock(b: Block)(using
@@ -428,12 +432,17 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       defn match
         case FunDefn(_, sym, params, body) =>
           if processingDefs.nonEmpty then
-            val paramSyms = params.head.params.map: // TODO: handle multiple param list and the `restParam`
+            val paramSyms = params.head.params.map:
               case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
-            val bodyStrat = processBlock(body)
             val res = freshVar(s"${sym.nme}_res", cc.forFun)
+            val funProdStrat = params.foldRight[ProdStrat](res.asProdStrat): (ps, acc) =>
+              assert(ps.restParam.isEmpty) // TODO: the `restParam`
+              val psTys = ps.params.map:
+                case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
+              ProdFun(psTys, acc)
+            val bodyStrat = processBlock(body)
             cc.constrain(bodyStrat, res.asConsStrat)
-            cc.constrain(ProdFun(paramSyms, res.asProdStrat), preAnalyzer.getProdVarForSym(sym).asConsStrat)
+            cc.constrain(funProdStrat, preAnalyzer.getProdVarForSym(sym).asConsStrat)
           else
             () // skip toplevel fundefs are they are processed when needed
         case ValDefn(_, _, sym, rhs) =>
@@ -596,8 +605,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     
     case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
     case Value.Lit(lit) => NoProd
-    case Value.Lam(ParamList(_, params, N), body) =>
-      val paramSyms = params.map: // TODO: handle multiple param list and the `restParam`
+    case Value.Lam(ParamList(_, params, N), body) => // TODO: the `restParam`
+      val paramSyms = params.map:
         case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
       val bodyStrat = processBlock(body)
       val res = freshVar(s"lam_res", generatedForDef)
