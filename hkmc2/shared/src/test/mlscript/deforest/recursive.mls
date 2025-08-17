@@ -405,3 +405,171 @@ fun g() = if
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
+
+
+
+:deforest
+fun f() =
+  if B is
+    B then h1() + h2()
+fun h1() = g1()
+fun g1() = f()
+fun h2() = g2()
+fun g2() = f()
+fun main() = f()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:B)@7@inst_0_tsni --> Ref($scrut)@inst_0_tsni@B
+//│ Ref(member:B)@7@inst_1_tsni --> Ref($scrut)@inst_1_tsni@B
+//│ Ref(member:B)@7@inst_2_tsni --> Ref($scrut)@inst_2_tsni@B
+//│ Ref(member:B)@7@inst_3_tsni --> Ref($scrut)@inst_3_tsni@B
+//│ Ref(member:B)@7@inst_4_tsni --> Ref($scrut)@inst_4_tsni@B
+//│ Ref(member:B)@7@inst_5_6_tsni --> Ref($scrut)@inst_5_6_tsni@B
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun h1() = g()
+fun h2() = g() + h2()
+fun g() = f()
+fun f() = h1() + h2()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+:deforest
+fun g() = f()
+fun f() = g()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun h1() = g()
+fun h2() = g() + h1()
+fun g() = f()
+fun f() = h1() + h2()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+:deforest
+fun g() = 0
+fun f() = f() + g()
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun h(x) = if x is
+  A then 0
+  else f()
+fun g1() = h(B)
+fun g2() = h(B)
+fun g3() = h(B)
+fun g4() = h(B)
+fun f() =
+  [g1(), g2(), g3(), g4(), h(B)]
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:B)@5@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@6@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@7@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@8@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@9@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@5@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@6@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@7@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@8@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@9@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@5@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@6@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@7@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@8@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@9@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@5@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@6@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@7@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@8@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@9@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@5@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ Ref(member:B)@6@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ Ref(member:B)@7@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ Ref(member:B)@8@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ Ref(member:B)@9@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun h(x) = if x is
+  A then 0
+  else f()
+fun g1() = h(B)
+fun g2() = h(B)
+fun f() =
+  [g1(), g2()]
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:B)@3@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@4@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@3@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@4@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@3@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@4@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+:deforest
+:lift
+fun f() =
+  fun h(x) = if x is
+    A then 0
+    else f()
+  [() => h(B), () => h(B), () => h(B), () => h(B), h(B)]
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:B)@5@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@6@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@7@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@8@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@9@inst_0_tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Ref(member:B)@5@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@6@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@7@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@8@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@9@inst_1_tsni --> Ref(x)@inst_1_tsni@dflt
+//│ Ref(member:B)@5@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@6@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@7@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@8@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@9@inst_2_tsni --> Ref(x)@inst_2_tsni@dflt
+//│ Ref(member:B)@5@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@6@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@7@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@8@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@9@inst_3_tsni --> Ref(x)@inst_3_tsni@dflt
+//│ Ref(member:B)@5@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ Ref(member:B)@6@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ Ref(member:B)@7@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ Ref(member:B)@8@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ Ref(member:B)@9@inst_4_tsni --> Ref(x)@inst_4_tsni@dflt
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -3,22 +3,22 @@ import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
 let go, cons, lscomp, cons1, maybe, conj, trailingI, ans, cons2, eliza1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda$, lambda$1, lambda$2, lambda$3, lscomp$, lambda$4, lambda$5, lambda$6, words_inst_0_1_tsni, dropWhile_inst_0_1_2_tsni, lambda_inst_3_4_tsni, words_inst_3_4_1_tsni, dropWhile_inst_3_4_1_2_tsni, take_inst_3_5_tsni, map_inst_3_6_tsni, session_inst_3_7_tsni, answer_inst_3_7_8_tsni, ans_inst_3_7_8_9_tsni, replies_inst_3_7_8_9_10_tsni, lambda_inst_3_7_8_9_10_11_tsni, lambda$_inst_3_7_8_9_10_11_12_tsni, conjug_inst_3_7_8_9_10_11_12_13_tsni, map_inst_3_7_8_9_10_11_12_13_14_tsni, conj_inst_3_7_8_9_10_11_12_13_15_tsni, lscomp$_inst_3_7_8_9_10_11_12_13_15_16_tsni, ucase_inst_3_7_8_9_10_11_12_13_15_16_17_tsni, map_inst_3_7_8_9_10_11_12_13_15_16_17_18_tsni, append_inst_3_7_8_9_10_11_12_13_15_19_tsni, lambda_inst_3_7_8_9_10_20_tsni, lambda$_inst_3_7_8_9_10_20_21_tsni, lz_map_inst_3_7_8_9_10_20_21_22_tsni, lambda_inst_3_7_8_9_10_20_21_22_tsni, lambda$_inst_3_7_8_9_10_20_21_22_tsni, repeated_inst_3_7_23_tsni, filter_inst_3_24_tsni, lambda$_inst_25_26_tsni, session_inst_25_26_7_tsni, answer_inst_25_26_7_8_tsni, ans_inst_25_26_7_8_9_tsni, replies_inst_25_26_7_8_9_10_tsni, lambda_inst_25_26_7_8_9_10_20_tsni, lambda$_inst_25_26_7_8_9_10_20_21_tsni, lz_map_inst_25_26_7_8_9_10_20_21_22_tsni, lambda_inst_25_26_7_8_9_10_20_21_22_tsni, lambda$_inst_25_26_7_8_9_10_20_21_22_tsni, lambda_inst_25_26_7_8_9_10_11_tsni, lambda$_inst_25_26_7_8_9_10_11_12_tsni, conjug_inst_25_26_7_8_9_10_11_12_13_tsni, conj_inst_25_26_7_8_9_10_11_12_13_15_tsni, append_inst_25_26_7_8_9_10_11_12_13_15_19_tsni, lscomp$_inst_25_26_7_8_9_10_11_12_13_15_16_tsni, ucase_inst_25_26_7_8_9_10_11_12_13_15_16_17_tsni, map_inst_25_26_7_8_9_10_11_12_13_15_16_17_18_tsni, map_inst_25_26_7_8_9_10_11_12_13_14_tsni, repeated_inst_25_26_7_23_tsni, filter_inst_25_26_24_tsni, map_inst_25_26_6_tsni, lambda_inst_25_26_4_tsni, words_inst_25_26_4_1_tsni, dropWhile_inst_25_26_4_1_2_tsni, take_inst_25_26_5_tsni, replies_inst_27_10_tsni, lambda_inst_27_10_20_tsni, lambda$_inst_27_10_20_21_tsni, lz_map_inst_27_10_20_21_22_tsni, lambda_inst_27_10_20_21_22_tsni, lambda$_inst_27_10_20_21_22_tsni, lambda_inst_27_10_11_tsni, lambda$_inst_27_10_11_12_tsni, conjug_inst_27_10_11_12_13_tsni, conj_inst_27_10_11_12_13_15_tsni, append_inst_27_10_11_12_13_15_19_tsni, lscomp$_inst_27_10_11_12_13_15_16_tsni, ucase_inst_27_10_11_12_13_15_16_17_tsni, map_inst_27_10_11_12_13_15_16_17_18_tsni, map_inst_27_10_11_12_13_14_tsni, conjug_inst_28_13_tsni, map_inst_28_13_14_tsni, conj_inst_28_13_15_tsni, lscomp$_inst_28_13_15_16_tsni, ucase_inst_28_13_15_16_17_tsni, map_inst_28_13_15_16_17_18_tsni, append_inst_28_13_15_19_tsni, lambda$_inst_29_12_tsni, conjug_inst_29_12_13_tsni, conj_inst_29_12_13_15_tsni, append_inst_29_12_13_15_19_tsni, lscomp$_inst_29_12_13_15_16_tsni, ucase_inst_29_12_13_15_16_17_tsni, map_inst_29_12_13_15_16_17_18_tsni, map_inst_29_12_13_14_tsni, lz_map_inst_30_22_tsni, lambda_inst_30_22_tsni, lambda$_inst_30_22_tsni, lambda$_inst_31_21_tsni, lz_map_inst_31_21_22_tsni, lambda_inst_31_21_22_tsni, lambda$_inst_31_21_22_tsni, ucase_inst_32_17_tsni, map_inst_32_17_18_tsni, lscomp$_inst_33_34_tsni, ucase_inst_33_34_17_tsni, map_inst_33_34_17_18_tsni, lscomp$_inst_35_16_tsni, ucase_inst_35_16_17_tsni, map_inst_35_16_17_18_tsni, append_inst_35_19_tsni, lscomp_inst_36_tsni, lscomp_inst_37_tsni, words_inst_37_38_tsni, dropWhile_inst_37_38_2_tsni, dropWhile_inst_39_2_tsni, conj_inst_40_15_tsni, append_inst_40_15_19_tsni, lscomp$_inst_40_15_16_tsni, ucase_inst_40_15_16_17_tsni, map_inst_40_15_16_17_18_tsni, map_inst_40_14_tsni, lambda_inst_41_11_tsni, lambda$_inst_41_11_12_tsni, conjug_inst_41_11_12_13_tsni, map_inst_41_11_12_13_14_tsni, conj_inst_41_11_12_13_15_tsni, lscomp$_inst_41_11_12_13_15_16_tsni, ucase_inst_41_11_12_13_15_16_17_tsni, map_inst_41_11_12_13_15_16_17_18_tsni, append_inst_41_11_12_13_15_19_tsni, lambda_inst_41_20_tsni, lambda$_inst_41_20_21_tsni, lz_map_inst_41_20_21_22_tsni, lambda_inst_41_20_21_22_tsni, lambda$_inst_41_20_21_22_tsni, ans_inst_42_9_tsni, replies_inst_42_9_10_tsni, lambda_inst_42_9_10_11_tsni, lambda$_inst_42_9_10_11_12_tsni, conjug_inst_42_9_10_11_12_13_tsni, map_inst_42_9_10_11_12_13_14_tsni, conj_inst_42_9_10_11_12_13_15_tsni, lscomp$_inst_42_9_10_11_12_13_15_16_tsni, ucase_inst_42_9_10_11_12_13_15_16_17_tsni, map_inst_42_9_10_11_12_13_15_16_17_18_tsni, append_inst_42_9_10_11_12_13_15_19_tsni, lambda_inst_42_9_10_20_tsni, lambda$_inst_42_9_10_20_21_tsni, lz_map_inst_42_9_10_20_21_22_tsni, lambda_inst_42_9_10_20_21_22_tsni, lambda$_inst_42_9_10_20_21_22_tsni, answer_inst_43_8_tsni, ans_inst_43_8_9_tsni, replies_inst_43_8_9_10_tsni, lambda_inst_43_8_9_10_20_tsni, lambda$_inst_43_8_9_10_20_21_tsni, lz_map_inst_43_8_9_10_20_21_22_tsni, lambda_inst_43_8_9_10_20_21_22_tsni, lambda$_inst_43_8_9_10_20_21_22_tsni, lambda_inst_43_8_9_10_11_tsni, lambda$_inst_43_8_9_10_11_12_tsni, conjug_inst_43_8_9_10_11_12_13_tsni, conj_inst_43_8_9_10_11_12_13_15_tsni, append_inst_43_8_9_10_11_12_13_15_19_tsni, lscomp$_inst_43_8_9_10_11_12_13_15_16_tsni, ucase_inst_43_8_9_10_11_12_13_15_16_17_tsni, map_inst_43_8_9_10_11_12_13_15_16_17_18_tsni, map_inst_43_8_9_10_11_12_13_14_tsni, repeated_inst_43_23_tsni, lambda_inst_44_45_tsni, lambda$_inst_44_45_26_tsni, lambda_inst_44_45_26_4_tsni, words_inst_44_45_26_4_1_tsni, dropWhile_inst_44_45_26_4_1_2_tsni, take_inst_44_45_26_5_tsni, map_inst_44_45_26_6_tsni, session_inst_44_45_26_7_tsni, answer_inst_44_45_26_7_8_tsni, ans_inst_44_45_26_7_8_9_tsni, replies_inst_44_45_26_7_8_9_10_tsni, lambda_inst_44_45_26_7_8_9_10_11_tsni, lambda$_inst_44_45_26_7_8_9_10_11_12_tsni, conjug_inst_44_45_26_7_8_9_10_11_12_13_tsni, map_inst_44_45_26_7_8_9_10_11_12_13_14_tsni, conj_inst_44_45_26_7_8_9_10_11_12_13_15_tsni, lscomp$_inst_44_45_26_7_8_9_10_11_12_13_15_16_tsni, ucase_inst_44_45_26_7_8_9_10_11_12_13_15_16_17_tsni, map_inst_44_45_26_7_8_9_10_11_12_13_15_16_17_18_tsni, append_inst_44_45_26_7_8_9_10_11_12_13_15_19_tsni, lambda_inst_44_45_26_7_8_9_10_20_tsni, lambda$_inst_44_45_26_7_8_9_10_20_21_tsni, lz_map_inst_44_45_26_7_8_9_10_20_21_22_tsni, lambda_inst_44_45_26_7_8_9_10_20_21_22_tsni, lambda$_inst_44_45_26_7_8_9_10_20_21_22_tsni, repeated_inst_44_45_26_7_23_tsni, filter_inst_44_45_26_24_tsni, enumFromTo_inst_44_46_tsni, testEliza_nofib_inst_47_48_tsni, enumFromTo_inst_47_48_46_tsni, lambda_inst_47_48_45_tsni, lambda$_inst_47_48_45_26_tsni, session_inst_47_48_45_26_7_tsni, answer_inst_47_48_45_26_7_8_tsni, ans_inst_47_48_45_26_7_8_9_tsni, replies_inst_47_48_45_26_7_8_9_10_tsni, lambda_inst_47_48_45_26_7_8_9_10_20_tsni, lambda$_inst_47_48_45_26_7_8_9_10_20_21_tsni, lz_map_inst_47_48_45_26_7_8_9_10_20_21_22_tsni, lambda_inst_47_48_45_26_7_8_9_10_20_21_22_tsni, lambda$_inst_47_48_45_26_7_8_9_10_20_21_22_tsni, lambda_inst_47_48_45_26_7_8_9_10_11_tsni, lambda$_inst_47_48_45_26_7_8_9_10_11_12_tsni, conjug_inst_47_48_45_26_7_8_9_10_11_12_13_tsni, conj_inst_47_48_45_26_7_8_9_10_11_12_13_15_tsni, append_inst_47_48_45_26_7_8_9_10_11_12_13_15_19_tsni, lscomp$_inst_47_48_45_26_7_8_9_10_11_12_13_15_16_tsni, ucase_inst_47_48_45_26_7_8_9_10_11_12_13_15_16_17_tsni, map_inst_47_48_45_26_7_8_9_10_11_12_13_15_16_17_18_tsni, map_inst_47_48_45_26_7_8_9_10_11_12_13_14_tsni, repeated_inst_47_48_45_26_7_23_tsni, filter_inst_47_48_45_26_24_tsni, map_inst_47_48_45_26_6_tsni, lambda_inst_47_48_45_26_4_tsni, words_inst_47_48_45_26_4_1_tsni, dropWhile_inst_47_48_45_26_4_1_2_tsni, take_inst_47_48_45_26_5_tsni, map_inst_47_48_49_tsni, append_inst_47_48_45_26_7_50_tsni, append_inst_47_48_45_26_7_51_tsni, words_inst_52_38_tsni, dropWhile_inst_52_38_2_tsni, trailingI_inst_3_7_8_9_10_11_12_13_53_tsni, foldr_inst_3_7_8_9_10_11_12_13_53_54_tsni, listEq_inst_3_7_8_9_10_11_12_13_15_16_55_tsni, head_inst_3_7_8_9_10_11_12_13_15_56_tsni, prefix_inst_3_7_8_9_10_20_21_57_tsni, prefix_inst_25_26_7_8_9_10_20_21_57_tsni, head_inst_25_26_7_8_9_10_11_12_13_15_56_tsni, listEq_inst_25_26_7_8_9_10_11_12_13_15_16_55_tsni, trailingI_inst_25_26_7_8_9_10_11_12_13_53_tsni, foldr_inst_25_26_7_8_9_10_11_12_13_53_54_tsni, prefix_inst_27_10_20_21_57_tsni, head_inst_27_10_11_12_13_15_56_tsni, listEq_inst_27_10_11_12_13_15_16_55_tsni, trailingI_inst_27_10_11_12_13_53_tsni, foldr_inst_27_10_11_12_13_53_54_tsni, trailingI_inst_28_13_53_tsni, foldr_inst_28_13_53_54_tsni, listEq_inst_28_13_15_16_55_tsni, head_inst_28_13_15_56_tsni, head_inst_29_12_13_15_56_tsni, listEq_inst_29_12_13_15_16_55_tsni, trailingI_inst_29_12_13_53_tsni, foldr_inst_29_12_13_53_54_tsni, prefix_inst_30_57_tsni, prefix_inst_31_21_57_tsni, listEq_inst_32_55_tsni, listEq_inst_33_34_55_tsni, listEq_inst_35_16_55_tsni, head_inst_35_56_tsni, concat_inst_58_tsni, append_inst_58_59_tsni, prepare_inst_60_tsni, lambda_inst_60_61_tsni, append_inst_62_tsni, head_inst_40_15_56_tsni, listEq_inst_40_15_16_55_tsni, trailingI_inst_40_53_tsni, foldr_inst_40_53_54_tsni, trailingI_inst_41_11_12_13_53_tsni, foldr_inst_41_11_12_13_53_54_tsni, listEq_inst_41_11_12_13_15_16_55_tsni, head_inst_41_11_12_13_15_56_tsni, prefix_inst_41_20_21_57_tsni, trailingI_inst_42_9_10_11_12_13_53_tsni, foldr_inst_42_9_10_11_12_13_53_54_tsni, listEq_inst_42_9_10_11_12_13_15_16_55_tsni, head_inst_42_9_10_11_12_13_15_56_tsni, prefix_inst_42_9_10_20_21_57_tsni, prefix_inst_43_8_9_10_20_21_57_tsni, head_inst_43_8_9_10_11_12_13_15_56_tsni, listEq_inst_43_8_9_10_11_12_13_15_16_55_tsni, trailingI_inst_43_8_9_10_11_12_13_53_tsni, foldr_inst_43_8_9_10_11_12_13_53_54_tsni, trailingI_inst_44_45_26_7_8_9_10_11_12_13_53_tsni, foldr_inst_44_45_26_7_8_9_10_11_12_13_53_54_tsni, listEq_inst_44_45_26_7_8_9_10_11_12_13_15_16_55_tsni, head_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni, prefix_inst_44_45_26_7_8_9_10_20_21_57_tsni, map_inst_44_49_tsni, prefix_inst_47_48_45_26_7_8_9_10_20_21_57_tsni, head_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni, listEq_inst_47_48_45_26_7_8_9_10_11_12_13_15_16_55_tsni, trailingI_inst_47_48_45_26_7_8_9_10_11_12_13_53_tsni, foldr_inst_47_48_45_26_7_8_9_10_11_12_13_53_54_tsni, map_inst_47_63_tsni, lambda_inst_47_64_tsni, nofibListToString_inst_47_64_65_tsni, match_xs_arm_Nil_inst_3_6_tsni, match_l_arm_Cons_inst_3_7_8_9_10_11_12_13_15_56_tsni, match_scrut_arm_Deforest_Arr_2_inst_3_7_tsni, match_l_arm_Cons_inst_25_26_7_8_9_10_11_12_13_15_56_tsni, match_scrut_arm_Deforest_Arr_2_inst_25_26_7_tsni, match_xs_arm_Nil_inst_25_26_6_tsni, match_l_arm_Cons_inst_27_10_11_12_13_15_56_tsni, match_l_arm_Cons_inst_28_13_15_56_tsni, match_l_arm_Cons_inst_29_12_13_15_56_tsni, match_l_arm_Cons_inst_35_56_tsni, match_xs_arm_Cons_inst_58_59_tsni, match_caseScrut_arm_Deforest_Arr_2_inst_60_61_tsni, match_ls_arm_Cons_inst_36_tsni, match_param0_arm_Deforest_Arr_2_inst_36_tsni, match_l_arm_Cons_inst_40_15_56_tsni, match_l_arm_Cons_inst_41_11_12_13_15_56_tsni, match_l_arm_Cons_inst_42_9_10_11_12_13_15_56_tsni, match_l_arm_Cons_inst_43_8_9_10_11_12_13_15_56_tsni, match_scrut_arm_Deforest_Arr_2_inst_43_tsni, match_xs_arm_Nil_inst_44_45_26_6_tsni, match_l_arm_Cons_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni, match_scrut_arm_Deforest_Arr_2_inst_44_45_26_7_tsni, match_l_arm_Cons_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni, match_scrut_arm_Deforest_Arr_2_inst_47_48_45_26_7_tsni, match_xs_arm_Nil_inst_47_48_45_26_6_tsni, match_ls_arm_Cons_inst_47_64_65_tsni;
-match_xs_arm_Nil_inst_3_6_tsni = function match_xs_arm_Nil_inst_3_6_tsni(f) {
+match_xs_arm_Nil_inst_3_6_tsni = (undefined, function (f) {
   return (f1) => {
     return (rs, prev) => {
       return NofibPrelude.Nil
     }
   }
-};
-match_l_arm_Cons_inst_3_7_8_9_10_11_12_13_15_56_tsni = function match_l_arm_Cons_inst_3_7_8_9_10_11_12_13_15_56_tsni(_deforest_Cons_head_inst_3_7_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_3_7_8_9_10_11_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_3_7_8_9_10_11_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_3_7_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_3_7_8_9_10_11_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_3_7_8_9_10_11_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_3_7_8_9_10_11_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_scrut_arm_Deforest_Arr_2_inst_3_7_tsni = function match_scrut_arm_Deforest_Arr_2_inst_3_7_tsni(l, ls, _deforest_Deforest_Arr_2_0_inst_3_7_tsni, _deforest_Deforest_Arr_2_1_inst_3_7_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_3_7_tsni = (undefined, function (l, ls, _deforest_Deforest_Arr_2_0_inst_3_7_tsni, _deforest_Deforest_Arr_2_1_inst_3_7_tsni) {
   let first1, first0, response, rs_, tmp, tmp1, tmp2;
   first0 = _deforest_Deforest_Arr_2_0_inst_3_7_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_3_7_tsni;
@@ -28,16 +28,16 @@ match_scrut_arm_Deforest_Arr_2_inst_3_7_tsni = function match_scrut_arm_Deforest
   tmp1 = session_inst_3_7_tsni(rs_, l, ls);
   tmp2 = NofibPrelude.append(tmp, tmp1);
   return NofibPrelude.append(response, tmp2)
-};
-match_l_arm_Cons_inst_25_26_7_8_9_10_11_12_13_15_56_tsni = function match_l_arm_Cons_inst_25_26_7_8_9_10_11_12_13_15_56_tsni(_deforest_Cons_head_inst_25_26_7_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_25_26_7_8_9_10_11_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_25_26_7_8_9_10_11_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_25_26_7_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_25_26_7_8_9_10_11_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_25_26_7_8_9_10_11_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_25_26_7_8_9_10_11_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_scrut_arm_Deforest_Arr_2_inst_25_26_7_tsni = function match_scrut_arm_Deforest_Arr_2_inst_25_26_7_tsni(l, ls, _deforest_Deforest_Arr_2_0_inst_25_26_7_tsni, _deforest_Deforest_Arr_2_1_inst_25_26_7_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_25_26_7_tsni = (undefined, function (l, ls, _deforest_Deforest_Arr_2_0_inst_25_26_7_tsni, _deforest_Deforest_Arr_2_1_inst_25_26_7_tsni) {
   let first1, first0, response, rs_, tmp, tmp1, tmp2;
   first0 = _deforest_Deforest_Arr_2_0_inst_25_26_7_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_25_26_7_tsni;
@@ -47,47 +47,47 @@ match_scrut_arm_Deforest_Arr_2_inst_25_26_7_tsni = function match_scrut_arm_Defo
   tmp1 = session_inst_25_26_7_tsni(rs_, l, ls);
   tmp2 = NofibPrelude.append(tmp, tmp1);
   return NofibPrelude.append(response, tmp2)
-};
-match_xs_arm_Nil_inst_25_26_6_tsni = function match_xs_arm_Nil_inst_25_26_6_tsni(f) {
+});
+match_xs_arm_Nil_inst_25_26_6_tsni = (undefined, function (f) {
   return (f1) => {
     return (rs, prev) => {
       return NofibPrelude.Nil
     }
   }
-};
-match_l_arm_Cons_inst_27_10_11_12_13_15_56_tsni = function match_l_arm_Cons_inst_27_10_11_12_13_15_56_tsni(_deforest_Cons_head_inst_27_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_27_10_11_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_27_10_11_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_27_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_27_10_11_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_27_10_11_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_27_10_11_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_l_arm_Cons_inst_28_13_15_56_tsni = function match_l_arm_Cons_inst_28_13_15_56_tsni(_deforest_Cons_head_inst_28_13_15_56_tsni, _deforest_Cons_tail_inst_28_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_28_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_28_13_15_56_tsni, _deforest_Cons_tail_inst_28_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_28_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_28_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_l_arm_Cons_inst_29_12_13_15_56_tsni = function match_l_arm_Cons_inst_29_12_13_15_56_tsni(_deforest_Cons_head_inst_29_12_13_15_56_tsni, _deforest_Cons_tail_inst_29_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_29_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_29_12_13_15_56_tsni, _deforest_Cons_tail_inst_29_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_29_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_29_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_l_arm_Cons_inst_35_56_tsni = function match_l_arm_Cons_inst_35_56_tsni(_deforest_Cons_head_inst_35_56_tsni, _deforest_Cons_tail_inst_35_56_tsni) {
+});
+match_l_arm_Cons_inst_35_56_tsni = (undefined, function (_deforest_Cons_head_inst_35_56_tsni, _deforest_Cons_tail_inst_35_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_35_56_tsni;
   param1 = _deforest_Cons_tail_inst_35_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_xs_arm_Cons_inst_58_59_tsni = function match_xs_arm_Cons_inst_58_59_tsni(ys, _deforest_Cons_head_inst_58_59_tsni, _deforest_Cons_tail_inst_58_59_tsni) {
+});
+match_xs_arm_Cons_inst_58_59_tsni = (undefined, function (ys, _deforest_Cons_head_inst_58_59_tsni, _deforest_Cons_tail_inst_58_59_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_58_59_tsni;
   param1 = _deforest_Cons_tail_inst_58_59_tsni;
@@ -95,8 +95,8 @@ match_xs_arm_Cons_inst_58_59_tsni = function match_xs_arm_Cons_inst_58_59_tsni(y
   xs = param1;
   tmp = append_inst_58_59_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_60_61_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_60_61_tsni(_deforest_Deforest_Arr_2_0_inst_60_61_tsni, _deforest_Deforest_Arr_2_1_inst_60_61_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_60_61_tsni = (undefined, function (_deforest_Deforest_Arr_2_0_inst_60_61_tsni, _deforest_Deforest_Arr_2_1_inst_60_61_tsni) {
   let first1, first0, w, r, tmp, arr;
   first0 = _deforest_Deforest_Arr_2_0_inst_60_61_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_60_61_tsni;
@@ -108,14 +108,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_60_61_tsni = function match_caseScrut_ar
     r
   ];
   return arr
-};
-match_ls_arm_Cons_inst_36_tsni = function match_ls_arm_Cons_inst_36_tsni(lscomp1, _deforest_Cons_head_inst_36_tsni, _deforest_Cons_tail_inst_36_tsni) {
+});
+match_ls_arm_Cons_inst_36_tsni = (undefined, function (lscomp1, _deforest_Cons_head_inst_36_tsni, _deforest_Cons_tail_inst_36_tsni) {
   let param0, param1;
   param0 = _deforest_Cons_head_inst_36_tsni;
   param1 = _deforest_Cons_tail_inst_36_tsni;
   return runtime.safeCall(param0(lscomp1, param1))
-};
-match_param0_arm_Deforest_Arr_2_inst_36_tsni = function match_param0_arm_Deforest_Arr_2_inst_36_tsni(lscomp1, param1, _deforest_Deforest_Arr_2_0_inst_36_tsni, _deforest_Deforest_Arr_2_1_inst_36_tsni) {
+});
+match_param0_arm_Deforest_Arr_2_inst_36_tsni = (undefined, function (lscomp1, param1, _deforest_Deforest_Arr_2_0_inst_36_tsni, _deforest_Deforest_Arr_2_1_inst_36_tsni) {
   let first1, first0, x, y, t, arr, arr1, tmp, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   first0 = _deforest_Deforest_Arr_2_0_inst_36_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_36_tsni;
@@ -156,40 +156,40 @@ match_param0_arm_Deforest_Arr_2_inst_36_tsni = function match_param0_arm_Defores
     tmp3 = concat_inst_58_tsni(xs);
     return append_inst_58_59_tsni(x1, tmp3)
   }
-};
-match_l_arm_Cons_inst_40_15_56_tsni = function match_l_arm_Cons_inst_40_15_56_tsni(_deforest_Cons_head_inst_40_15_56_tsni, _deforest_Cons_tail_inst_40_15_56_tsni) {
+});
+match_l_arm_Cons_inst_40_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_40_15_56_tsni, _deforest_Cons_tail_inst_40_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_40_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_40_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_l_arm_Cons_inst_41_11_12_13_15_56_tsni = function match_l_arm_Cons_inst_41_11_12_13_15_56_tsni(_deforest_Cons_head_inst_41_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_41_11_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_41_11_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_41_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_41_11_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_41_11_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_41_11_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_l_arm_Cons_inst_42_9_10_11_12_13_15_56_tsni = function match_l_arm_Cons_inst_42_9_10_11_12_13_15_56_tsni(_deforest_Cons_head_inst_42_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_42_9_10_11_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_42_9_10_11_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_42_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_42_9_10_11_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_42_9_10_11_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_42_9_10_11_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_l_arm_Cons_inst_43_8_9_10_11_12_13_15_56_tsni = function match_l_arm_Cons_inst_43_8_9_10_11_12_13_15_56_tsni(_deforest_Cons_head_inst_43_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_43_8_9_10_11_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_43_8_9_10_11_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_43_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_43_8_9_10_11_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_43_8_9_10_11_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_43_8_9_10_11_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_scrut_arm_Deforest_Arr_2_inst_43_tsni = function match_scrut_arm_Deforest_Arr_2_inst_43_tsni(l, ls, _deforest_Deforest_Arr_2_0_inst_43_tsni, _deforest_Deforest_Arr_2_1_inst_43_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_43_tsni = (undefined, function (l, ls, _deforest_Deforest_Arr_2_0_inst_43_tsni, _deforest_Deforest_Arr_2_1_inst_43_tsni) {
   let first1, first0, response, rs_, tmp, tmp1, tmp2;
   first0 = _deforest_Deforest_Arr_2_0_inst_43_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_43_tsni;
@@ -199,23 +199,23 @@ match_scrut_arm_Deforest_Arr_2_inst_43_tsni = function match_scrut_arm_Deforest_
   tmp1 = eliza.session(rs_, l, ls);
   tmp2 = NofibPrelude.append(tmp, tmp1);
   return NofibPrelude.append(response, tmp2)
-};
-match_xs_arm_Nil_inst_44_45_26_6_tsni = function match_xs_arm_Nil_inst_44_45_26_6_tsni(f) {
+});
+match_xs_arm_Nil_inst_44_45_26_6_tsni = (undefined, function (f) {
   return (f1) => {
     return (rs, prev) => {
       return NofibPrelude.Nil
     }
   }
-};
-match_l_arm_Cons_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni = function match_l_arm_Cons_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni(_deforest_Cons_head_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_44_45_26_7_8_9_10_11_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_scrut_arm_Deforest_Arr_2_inst_44_45_26_7_tsni = function match_scrut_arm_Deforest_Arr_2_inst_44_45_26_7_tsni(l, ls, _deforest_Deforest_Arr_2_0_inst_44_45_26_7_tsni, _deforest_Deforest_Arr_2_1_inst_44_45_26_7_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_44_45_26_7_tsni = (undefined, function (l, ls, _deforest_Deforest_Arr_2_0_inst_44_45_26_7_tsni, _deforest_Deforest_Arr_2_1_inst_44_45_26_7_tsni) {
   let first1, first0, response, rs_, tmp, tmp1, tmp2;
   first0 = _deforest_Deforest_Arr_2_0_inst_44_45_26_7_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_44_45_26_7_tsni;
@@ -225,16 +225,16 @@ match_scrut_arm_Deforest_Arr_2_inst_44_45_26_7_tsni = function match_scrut_arm_D
   tmp1 = session_inst_44_45_26_7_tsni(rs_, l, ls);
   tmp2 = NofibPrelude.append(tmp, tmp1);
   return NofibPrelude.append(response, tmp2)
-};
-match_l_arm_Cons_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni = function match_l_arm_Cons_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni(_deforest_Cons_head_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni) {
+});
+match_l_arm_Cons_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni = (undefined, function (_deforest_Cons_head_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni, _deforest_Cons_tail_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni) {
   let param0, param1, h, t;
   param0 = _deforest_Cons_head_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni;
   param1 = _deforest_Cons_tail_inst_47_48_45_26_7_8_9_10_11_12_13_15_56_tsni;
   h = param0;
   t = param1;
   return h
-};
-match_scrut_arm_Deforest_Arr_2_inst_47_48_45_26_7_tsni = function match_scrut_arm_Deforest_Arr_2_inst_47_48_45_26_7_tsni(l, ls, _deforest_Deforest_Arr_2_0_inst_47_48_45_26_7_tsni, _deforest_Deforest_Arr_2_1_inst_47_48_45_26_7_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_47_48_45_26_7_tsni = (undefined, function (l, ls, _deforest_Deforest_Arr_2_0_inst_47_48_45_26_7_tsni, _deforest_Deforest_Arr_2_1_inst_47_48_45_26_7_tsni) {
   let first1, first0, response, rs_, tmp, tmp1, tmp2;
   first0 = _deforest_Deforest_Arr_2_0_inst_47_48_45_26_7_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_47_48_45_26_7_tsni;
@@ -244,8 +244,8 @@ match_scrut_arm_Deforest_Arr_2_inst_47_48_45_26_7_tsni = function match_scrut_ar
   tmp1 = session_inst_47_48_45_26_7_tsni(rs_, l, ls);
   tmp2 = append_inst_47_48_45_26_7_50_tsni(tmp, tmp1);
   return append_inst_47_48_45_26_7_51_tsni(response, tmp2)
-};
-match_xs_arm_Nil_inst_47_48_45_26_6_tsni = function match_xs_arm_Nil_inst_47_48_45_26_6_tsni(f) {
+});
+match_xs_arm_Nil_inst_47_48_45_26_6_tsni = (undefined, function (f) {
   return (f1) => {
     return (rs, prev) => {
       return () => {
@@ -253,8 +253,8 @@ match_xs_arm_Nil_inst_47_48_45_26_6_tsni = function match_xs_arm_Nil_inst_47_48_
       }
     }
   }
-};
-match_ls_arm_Cons_inst_47_64_65_tsni = function match_ls_arm_Cons_inst_47_64_65_tsni(_deforest_Cons_head_inst_47_64_65_tsni, _deforest_Cons_tail_inst_47_64_65_tsni) {
+});
+match_ls_arm_Cons_inst_47_64_65_tsni = (undefined, function (_deforest_Cons_head_inst_47_64_65_tsni, _deforest_Cons_tail_inst_47_64_65_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_47_64_65_tsni;
   param1 = _deforest_Cons_tail_inst_47_64_65_tsni;
@@ -262,7 +262,7 @@ match_ls_arm_Cons_inst_47_64_65_tsni = function match_ls_arm_Cons_inst_47_64_65_
   t = param1;
   tmp = nofibListToString_inst_47_64_65_tsni(t);
   return h + tmp
-};
+});
 words_inst_0_1_tsni = function words_inst_0_1_tsni(s) {
   let scrut;
   scrut = dropWhile_inst_0_1_2_tsni(eliza1.isSpace, s);

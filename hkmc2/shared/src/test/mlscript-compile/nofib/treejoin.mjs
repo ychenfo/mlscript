@@ -3,10 +3,10 @@ import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
 let readInt_, treejoin1, lambda, lambda1, lookupT_inst_0_1_tsni, readInt_inst_2_3_tsni, readInt__inst_2_3_4_tsni, readInt_inst_2_5_tsni, readInt__inst_2_5_4_tsni, readInt_inst_2_6_tsni, readInt__inst_2_6_4_tsni, readTree_inst_7_8_tsni, readInt_inst_7_8_6_tsni, readInt__inst_7_8_6_4_tsni, readInt_inst_7_8_5_tsni, readInt__inst_7_8_5_4_tsni, readInt_inst_7_8_3_tsni, readInt__inst_7_8_3_4_tsni, readTree_inst_7_9_tsni, readInt_inst_7_9_6_tsni, readInt__inst_7_9_6_4_tsni, readInt_inst_7_9_5_tsni, readInt__inst_7_9_5_4_tsni, readInt_inst_7_9_3_tsni, readInt__inst_7_9_3_4_tsni, join_inst_7_10_tsni, lookupT_inst_7_10_1_tsni, testTreejoin_nofib_inst_11_12_tsni, join_inst_11_12_10_tsni, lookupT_inst_11_12_10_1_tsni, readTree_inst_11_12_9_tsni, readInt_inst_11_12_9_3_tsni, readInt__inst_11_12_9_3_4_tsni, readInt_inst_11_12_9_5_tsni, readInt__inst_11_12_9_5_4_tsni, readInt_inst_11_12_9_6_tsni, readInt__inst_11_12_9_6_4_tsni, readTree_inst_11_12_8_tsni, readInt_inst_11_12_8_3_tsni, readInt__inst_11_12_8_3_4_tsni, readInt_inst_11_12_8_5_tsni, readInt__inst_11_12_8_5_4_tsni, readInt_inst_11_12_8_6_tsni, readInt__inst_11_12_8_6_4_tsni, match_scrut_arm_None_inst_0_tsni, match_scrut_arm_Deforest_Arr_2_inst_2_tsni, match_scrut_arm_Deforest_Arr_2_inst_2_tsni1, match_scrut_arm_Deforest_Arr_2_inst_2_tsni2, match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni1, match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni2, match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni1, match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni2, match_scrut_arm_None_inst_7_10_tsni, match_scrut_arm_None_inst_11_12_10_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni1, match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni2, match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni, match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni1, match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni2;
-match_scrut_arm_None_inst_0_tsni = function match_scrut_arm_None_inst_0_tsni(j, a, b, c) {
+match_scrut_arm_None_inst_0_tsni = (undefined, function (j, a, b, c) {
   return j
-};
-match_scrut_arm_Deforest_Arr_2_inst_2_tsni = function match_scrut_arm_Deforest_Arr_2_inst_2_tsni(fk, t, _deforest_Deforest_Arr_2_0_inst_2_tsni, _deforest_Deforest_Arr_2_1_inst_2_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_2_tsni = (undefined, function (fk, t, _deforest_Deforest_Arr_2_0_inst_2_tsni, _deforest_Deforest_Arr_2_1_inst_2_tsni) {
   let first1, first0, f, s_, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_2_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_2_tsni;
@@ -14,8 +14,8 @@ match_scrut_arm_Deforest_Arr_2_inst_2_tsni = function match_scrut_arm_Deforest_A
   s_ = first1;
   scrut = readInt_inst_2_5_tsni(s_);
   return runtime.safeCall(scrut(fk, t, f))
-};
-match_scrut_arm_Deforest_Arr_2_inst_2_tsni1 = function match_scrut_arm_Deforest_Arr_2_inst_2_tsni(fk, t, f, _deforest_Deforest_Arr_2_0_inst_2_tsni, _deforest_Deforest_Arr_2_1_inst_2_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_2_tsni1 = (undefined, function (fk, t, f, _deforest_Deforest_Arr_2_0_inst_2_tsni, _deforest_Deforest_Arr_2_1_inst_2_tsni) {
   let first1, first0, g, s__, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_2_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_2_tsni;
@@ -23,8 +23,8 @@ match_scrut_arm_Deforest_Arr_2_inst_2_tsni1 = function match_scrut_arm_Deforest_
   s__ = first1;
   scrut = readInt_inst_2_6_tsni(s__);
   return runtime.safeCall(scrut(fk, t, f, g))
-};
-match_scrut_arm_Deforest_Arr_2_inst_2_tsni2 = function match_scrut_arm_Deforest_Arr_2_inst_2_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_2_tsni, _deforest_Deforest_Arr_2_1_inst_2_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_2_tsni2 = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_2_tsni, _deforest_Deforest_Arr_2_1_inst_2_tsni) {
   let first1, first0, h, s___, e, k, arr, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_2_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_2_tsni;
@@ -40,8 +40,8 @@ match_scrut_arm_Deforest_Arr_2_inst_2_tsni2 = function match_scrut_arm_Deforest_
   k = tmp;
   tmp1 = treejoin.insertT(k, e, t);
   return treejoin.readTree(fk, s___, tmp1)
-};
-match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni = function match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_7_8_tsni, _deforest_Deforest_Arr_2_1_inst_7_8_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_7_8_tsni, _deforest_Deforest_Arr_2_1_inst_7_8_tsni) {
   let first1, first0, h, s___, e, k, arr, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_7_8_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_7_8_tsni;
@@ -57,8 +57,8 @@ match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni = function match_scrut_arm_Deforest
   k = tmp;
   tmp1 = treejoin.insertT(k, e, t);
   return readTree_inst_7_8_tsni(fk, s___, tmp1)
-};
-match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni1 = function match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni(fk, t, f, _deforest_Deforest_Arr_2_0_inst_7_8_tsni, _deforest_Deforest_Arr_2_1_inst_7_8_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni1 = (undefined, function (fk, t, f, _deforest_Deforest_Arr_2_0_inst_7_8_tsni, _deforest_Deforest_Arr_2_1_inst_7_8_tsni) {
   let first1, first0, g, s__, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_7_8_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_7_8_tsni;
@@ -66,8 +66,8 @@ match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni1 = function match_scrut_arm_Defores
   s__ = first1;
   scrut = readInt_inst_7_8_6_tsni(s__);
   return runtime.safeCall(scrut(fk, t, f, g))
-};
-match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni2 = function match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni(fk, t, _deforest_Deforest_Arr_2_0_inst_7_8_tsni, _deforest_Deforest_Arr_2_1_inst_7_8_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni2 = (undefined, function (fk, t, _deforest_Deforest_Arr_2_0_inst_7_8_tsni, _deforest_Deforest_Arr_2_1_inst_7_8_tsni) {
   let first1, first0, f, s_, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_7_8_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_7_8_tsni;
@@ -75,8 +75,8 @@ match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni2 = function match_scrut_arm_Defores
   s_ = first1;
   scrut = readInt_inst_7_8_5_tsni(s_);
   return runtime.safeCall(scrut(fk, t, f))
-};
-match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni = function match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_7_9_tsni, _deforest_Deforest_Arr_2_1_inst_7_9_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_7_9_tsni, _deforest_Deforest_Arr_2_1_inst_7_9_tsni) {
   let first1, first0, h, s___, e, k, arr, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_7_9_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_7_9_tsni;
@@ -92,8 +92,8 @@ match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni = function match_scrut_arm_Deforest
   k = tmp;
   tmp1 = treejoin.insertT(k, e, t);
   return readTree_inst_7_9_tsni(fk, s___, tmp1)
-};
-match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni1 = function match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni(fk, t, f, _deforest_Deforest_Arr_2_0_inst_7_9_tsni, _deforest_Deforest_Arr_2_1_inst_7_9_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni1 = (undefined, function (fk, t, f, _deforest_Deforest_Arr_2_0_inst_7_9_tsni, _deforest_Deforest_Arr_2_1_inst_7_9_tsni) {
   let first1, first0, g, s__, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_7_9_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_7_9_tsni;
@@ -101,8 +101,8 @@ match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni1 = function match_scrut_arm_Defores
   s__ = first1;
   scrut = readInt_inst_7_9_6_tsni(s__);
   return runtime.safeCall(scrut(fk, t, f, g))
-};
-match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni2 = function match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni(fk, t, _deforest_Deforest_Arr_2_0_inst_7_9_tsni, _deforest_Deforest_Arr_2_1_inst_7_9_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni2 = (undefined, function (fk, t, _deforest_Deforest_Arr_2_0_inst_7_9_tsni, _deforest_Deforest_Arr_2_1_inst_7_9_tsni) {
   let first1, first0, f, s_, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_7_9_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_7_9_tsni;
@@ -110,14 +110,14 @@ match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni2 = function match_scrut_arm_Defores
   s_ = first1;
   scrut = readInt_inst_7_9_5_tsni(s_);
   return runtime.safeCall(scrut(fk, t, f))
-};
-match_scrut_arm_None_inst_7_10_tsni = function match_scrut_arm_None_inst_7_10_tsni(j, a, b, c) {
+});
+match_scrut_arm_None_inst_7_10_tsni = (undefined, function (j, a, b, c) {
   return j
-};
-match_scrut_arm_None_inst_11_12_10_tsni = function match_scrut_arm_None_inst_11_12_10_tsni(j, a, b, c) {
+});
+match_scrut_arm_None_inst_11_12_10_tsni = (undefined, function (j, a, b, c) {
   return j
-};
-match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni = function match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni(fk, t, _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni = (undefined, function (fk, t, _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni) {
   let first1, first0, f, s_, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni;
@@ -125,8 +125,8 @@ match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni = function match_scrut_arm_Defo
   s_ = first1;
   scrut = readInt_inst_11_12_9_5_tsni(s_);
   return runtime.safeCall(scrut(fk, t, f))
-};
-match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni1 = function match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni(fk, t, f, _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni1 = (undefined, function (fk, t, f, _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni) {
   let first1, first0, g, s__, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni;
@@ -134,8 +134,8 @@ match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni1 = function match_scrut_arm_Def
   s__ = first1;
   scrut = readInt_inst_11_12_9_6_tsni(s__);
   return runtime.safeCall(scrut(fk, t, f, g))
-};
-match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni2 = function match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni2 = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni) {
   let first1, first0, h, s___, e, k, arr, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni;
@@ -151,8 +151,8 @@ match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni2 = function match_scrut_arm_Def
   k = tmp;
   tmp1 = treejoin.insertT(k, e, t);
   return readTree_inst_11_12_9_tsni(fk, s___, tmp1)
-};
-match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni = function match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni(fk, t, _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni = (undefined, function (fk, t, _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni) {
   let first1, first0, f, s_, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni;
@@ -160,8 +160,8 @@ match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni = function match_scrut_arm_Defo
   s_ = first1;
   scrut = readInt_inst_11_12_8_5_tsni(s_);
   return runtime.safeCall(scrut(fk, t, f))
-};
-match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni1 = function match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni(fk, t, f, _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni1 = (undefined, function (fk, t, f, _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni) {
   let first1, first0, g, s__, scrut;
   first0 = _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni;
@@ -169,8 +169,8 @@ match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni1 = function match_scrut_arm_Def
   s__ = first1;
   scrut = readInt_inst_11_12_8_6_tsni(s__);
   return runtime.safeCall(scrut(fk, t, f, g))
-};
-match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni2 = function match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni2 = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni) {
   let first1, first0, h, s___, e, k, arr, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni;
@@ -186,7 +186,7 @@ match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni2 = function match_scrut_arm_Def
   k = tmp;
   tmp1 = treejoin.insertT(k, e, t);
   return readTree_inst_11_12_8_tsni(fk, s___, tmp1)
-};
+});
 lookupT_inst_0_1_tsni = function lookupT_inst_0_1_tsni(k, t) {
   let param0, param1, k_, e, scrut, param2, k_1, l, r, scrut1, _deforest_Some_x;
   if (t instanceof treejoin.Node.class) {

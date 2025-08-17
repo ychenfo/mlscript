@@ -223,7 +223,7 @@ class DeforestPreAnalyzer(
         S(freshVar(s.nme, if inFunOrNot then inFunDef else N).asProdStrat)
       case S(x) => S(x)
     case _: (TopLevelSymbol | BuiltinSymbol | ClassLikeSymbol) => ()
-    case _ => die
+    case _ => lastWords(s"$s")
   
   override def applyResult(r: Result): Unit =
     resultIdToResult += r.uid -> r
@@ -304,7 +304,6 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   given DeforestPreAnalyzer = preAnalyzer
   import StratVarState.freshVar
   
-  private var processedFun = mutable.Set.empty[BlockMemberSymbol]
   
   val constraints = processTopLevel
   class ConstraintsAndCacheHitCollector(val forFun: Opt[BlockMemberSymbol]):
@@ -316,9 +315,12 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     def hit(ss: Ls[BlockMemberSymbol]) = trackedFunctionSymbolsInOneRecGroup :::= ss
   
   object funSymToProdStratScheme:
+    val processedFunToCollector = mutable.Map.empty[BlockMemberSymbol, ConstraintsAndCacheHitCollector]
     val store = mutable.Map.empty[BlockMemberSymbol, ProdStratScheme]
     val recursiveGroups = mutable.Map.empty[BlockMemberSymbol, Ls[BlockMemberSymbol]]
     def getOrUpdate(s: BlockMemberSymbol)(using processingDefs: Ls[BlockMemberSymbol], cc: ConstraintsAndCacheHitCollector): ProdVar | ProdStratScheme =
+      // println:
+      //   s"get $s in $processingDefs by ${cc.forFun}(${cc.trackedFunctionSymbolsInOneRecGroup})"
       preAnalyzer.getTopLevelFunDefnForSym(s) match
         // not a fun whose definition is visible for fusion, just return its prodvar
         case None =>
@@ -332,9 +334,19 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                 cc.hit(h)
               preAnalyzer.getProdVarForSym(sym)
             case Nil => 
-              if processedFun.contains(s) then
+              // if processedFunToCollector.contains(s) then
+              // // if cc.trackedFunctionSymbolsInOneRecGroup.contains(s) then
+              //   processingDefs.headOption.foreach: h =>
+              //     cc.hit(h)
+              //   preAnalyzer.getProdVarForSym(s)
+              // else
+              processedFunToCollector.get(s) match
+              case Some(otherCC) =>
+                cc.hit(otherCC.trackedFunctionSymbolsInOneRecGroup)
+                processingDefs.headOption.foreach: h =>
+                  cc.hit(h)
                 preAnalyzer.getProdVarForSym(s)
-              else
+              case None =>
                 // start processing this function, if the cache hit contains the currently processing defs functions
                 // then: 1. the referred function belongs to the same recursion group and need to share the constraints 2. return the prodvar
                 // else: we found a new recursive group, for each member of the group, update the store with the correct type scheme and return the type scheme
@@ -380,8 +392,11 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     cc.constraints
   
   def processFunDefn(defn: FunDefn, processingDefs: Ls[BlockMemberSymbol]): ConstraintsAndCacheHitCollector =
-    val notProcedBefore = processedFun.add(defn.sym)
-    assert(notProcedBefore, s"process ${defn.sym} again")
+    val cc = funSymToProdStratScheme.processedFunToCollector
+      .updateWith(defn.sym):
+        case Some(_) => lastWords(s"process ${defn.sym} again")
+        case None => Some(new ConstraintsAndCacheHitCollector(S(defn.sym)))
+      .get
     val thisFunVar = preAnalyzer.getProdVarForSym(defn.sym)
     // assert(defn.params.size === 1)
     val res = freshVar(s"${defn.sym.nme}_res", S(defn.sym))
@@ -390,7 +405,6 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       val psTys = ps.params.map:
         case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
       ProdFun(psTys, acc)
-    val cc = new ConstraintsAndCacheHitCollector(S(defn.sym))
     val bodyStrat = processBlock(defn.body)(using defn.sym :: processingDefs, cc)
     cc.constrain(bodyStrat, res.asConsStrat)
     cc.constrain(funProdStrat, thisFunVar.asConsStrat)

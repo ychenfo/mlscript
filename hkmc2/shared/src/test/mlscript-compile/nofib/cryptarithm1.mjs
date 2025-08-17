@@ -2,15 +2,15 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 let lscomp, lscomp2, lscomp1, cryptarithm11, lambda, lscomp$, lscomp1$, lscomp2$, enumFromTo_inst_0_1_tsni, take_inst_0_2_tsni, lambda_inst_3_4_tsni, take_inst_3_4_2_tsni, enumFromTo_inst_3_4_1_tsni, enumFromTo_inst_3_5_tsni, testCryptarithm_nofib_inst_6_7_tsni, enumFromTo_inst_6_7_5_tsni, lambda_inst_6_7_4_tsni, enumFromTo_inst_6_7_4_1_tsni, take_inst_6_7_4_2_tsni, permutations_inst_0_8_tsni, permutations_inst_3_4_8_tsni, map_inst_3_9_tsni, map_inst_6_7_9_tsni, permutations_inst_6_7_4_8_tsni, match_ls_arm_Nil_inst_0_8_tsni, match_ls_arm_Nil_inst_3_4_8_tsni, match_ls_arm_Nil_inst_6_7_4_8_tsni;
-match_ls_arm_Nil_inst_0_8_tsni = function match_ls_arm_Nil_inst_0_8_tsni() {
+match_ls_arm_Nil_inst_0_8_tsni = (undefined, function () {
   return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
-};
-match_ls_arm_Nil_inst_3_4_8_tsni = function match_ls_arm_Nil_inst_3_4_8_tsni() {
+});
+match_ls_arm_Nil_inst_3_4_8_tsni = (undefined, function () {
   return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
-};
-match_ls_arm_Nil_inst_6_7_4_8_tsni = function match_ls_arm_Nil_inst_6_7_4_8_tsni() {
+});
+match_ls_arm_Nil_inst_6_7_4_8_tsni = (undefined, function () {
   return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
-};
+});
 enumFromTo_inst_0_1_tsni = function enumFromTo_inst_0_1_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   scrut = a <= b;

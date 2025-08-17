@@ -38,7 +38,7 @@ match_s__rest_inst_39_40_37_tsni = function match_s__rest_inst_39_40_37_tsni(l, 
     return doLine_inst_39_40_38_35_1_tsni(l1, lambda$this, state)
   }
 };
-match_xs_arm_Cons_inst_0_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_0_1_2_3_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_0_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_0_1_2_3_4_5_41_42_tsni) {
+match_xs_arm_Cons_inst_0_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_0_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_0_1_2_3_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_0_1_2_3_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_0_1_2_3_4_5_41_42_tsni;
@@ -46,11 +46,11 @@ match_xs_arm_Cons_inst_0_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_0_1_2_3_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_0_1_2_3_4_5_41_42_tsni = function match_xs_arm_Nil_inst_0_1_2_3_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_0_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni(cont, _deforest_Deforest_Arr_2_0_inst_0_1_tsni, _deforest_Deforest_Arr_2_1_inst_0_1_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni = (undefined, function (cont, _deforest_Deforest_Arr_2_0_inst_0_1_tsni, _deforest_Deforest_Arr_2_1_inst_0_1_tsni) {
   let first1, first0, t, rs_, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_0_1_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_0_1_tsni;
@@ -63,8 +63,8 @@ match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni = function match_scrut_arm_Deforest
     tmp1 = runtime.safeCall(cont(rs_));
     return NofibPrelude.Cons("Composite", tmp1)
   }
-};
-match_xs_arm_Cons_inst_15_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_15_1_2_3_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_15_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_15_1_2_3_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_15_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_15_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_15_1_2_3_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_15_1_2_3_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_15_1_2_3_4_5_41_42_tsni;
@@ -72,11 +72,11 @@ match_xs_arm_Cons_inst_15_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_15_1_2_3_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_15_1_2_3_4_5_41_42_tsni = function match_xs_arm_Nil_inst_15_1_2_3_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_15_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_scrut_arm_Deforest_Arr_2_inst_15_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_15_1_tsni(cont, _deforest_Deforest_Arr_2_0_inst_15_1_tsni, _deforest_Deforest_Arr_2_1_inst_15_1_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_15_1_tsni = (undefined, function (cont, _deforest_Deforest_Arr_2_0_inst_15_1_tsni, _deforest_Deforest_Arr_2_1_inst_15_1_tsni) {
   let first1, first0, t, rs_, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_15_1_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_15_1_tsni;
@@ -89,8 +89,8 @@ match_scrut_arm_Deforest_Arr_2_inst_15_1_tsni = function match_scrut_arm_Defores
     tmp1 = runtime.safeCall(cont(rs_));
     return NofibPrelude.Cons("Composite", tmp1)
   }
-};
-match_xs_arm_Cons_inst_16_4_5_41_42_tsni = function match_xs_arm_Cons_inst_16_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_16_4_5_41_42_tsni, _deforest_Cons_tail_inst_16_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_16_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_16_4_5_41_42_tsni, _deforest_Cons_tail_inst_16_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_16_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_16_4_5_41_42_tsni;
@@ -98,11 +98,11 @@ match_xs_arm_Cons_inst_16_4_5_41_42_tsni = function match_xs_arm_Cons_inst_16_4_
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_16_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_16_4_5_41_42_tsni = function match_xs_arm_Nil_inst_16_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_16_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_xs_arm_Cons_inst_17_18_4_5_41_42_tsni = function match_xs_arm_Cons_inst_17_18_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_17_18_4_5_41_42_tsni, _deforest_Cons_tail_inst_17_18_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_17_18_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_17_18_4_5_41_42_tsni, _deforest_Cons_tail_inst_17_18_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_17_18_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_17_18_4_5_41_42_tsni;
@@ -110,11 +110,11 @@ match_xs_arm_Cons_inst_17_18_4_5_41_42_tsni = function match_xs_arm_Cons_inst_17
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_17_18_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_17_18_4_5_41_42_tsni = function match_xs_arm_Nil_inst_17_18_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_17_18_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_xs_arm_Cons_inst_29_41_42_tsni = function match_xs_arm_Cons_inst_29_41_42_tsni(f3, a, _deforest_Cons_head_inst_29_41_42_tsni, _deforest_Cons_tail_inst_29_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_29_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_29_41_42_tsni, _deforest_Cons_tail_inst_29_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_29_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_29_41_42_tsni;
@@ -122,11 +122,11 @@ match_xs_arm_Cons_inst_29_41_42_tsni = function match_xs_arm_Cons_inst_29_41_42_
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_29_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_29_41_42_tsni = function match_xs_arm_Nil_inst_29_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_29_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_xs_arm_Cons_inst_30_5_41_42_tsni = function match_xs_arm_Cons_inst_30_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_30_5_41_42_tsni, _deforest_Cons_tail_inst_30_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_30_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_30_5_41_42_tsni, _deforest_Cons_tail_inst_30_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_30_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_30_5_41_42_tsni;
@@ -134,11 +134,11 @@ match_xs_arm_Cons_inst_30_5_41_42_tsni = function match_xs_arm_Cons_inst_30_5_41
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_30_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_30_5_41_42_tsni = function match_xs_arm_Nil_inst_30_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_30_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_xs_arm_Cons_inst_31_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_31_3_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_31_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_31_3_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_31_3_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_31_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_31_3_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_31_3_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_31_3_4_5_41_42_tsni;
@@ -146,11 +146,11 @@ match_xs_arm_Cons_inst_31_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_31_
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_31_3_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_31_3_4_5_41_42_tsni = function match_xs_arm_Nil_inst_31_3_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_31_3_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_xs_arm_Cons_inst_32_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_32_2_3_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_32_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_32_2_3_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_32_2_3_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_32_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_32_2_3_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_32_2_3_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_32_2_3_4_5_41_42_tsni;
@@ -158,11 +158,11 @@ match_xs_arm_Cons_inst_32_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_3
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_32_2_3_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_32_2_3_4_5_41_42_tsni = function match_xs_arm_Nil_inst_32_2_3_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_32_2_3_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_scrut_arm_Deforest_Arr_2_inst_32_tsni = function match_scrut_arm_Deforest_Arr_2_inst_32_tsni(cont, _deforest_Deforest_Arr_2_0_inst_32_tsni, _deforest_Deforest_Arr_2_1_inst_32_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_32_tsni = (undefined, function (cont, _deforest_Deforest_Arr_2_0_inst_32_tsni, _deforest_Deforest_Arr_2_1_inst_32_tsni) {
   let first1, first0, t, rs_, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_32_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_32_tsni;
@@ -175,8 +175,8 @@ match_scrut_arm_Deforest_Arr_2_inst_32_tsni = function match_scrut_arm_Deforest_
     tmp1 = runtime.safeCall(cont(rs_));
     return NofibPrelude.Cons("Composite", tmp1)
   }
-};
-match_xs_arm_Cons_inst_33_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_33_1_2_3_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_33_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_33_1_2_3_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_33_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_33_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_33_1_2_3_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_33_1_2_3_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_33_1_2_3_4_5_41_42_tsni;
@@ -184,11 +184,11 @@ match_xs_arm_Cons_inst_33_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_33_1_2_3_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_33_1_2_3_4_5_41_42_tsni = function match_xs_arm_Nil_inst_33_1_2_3_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_33_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_scrut_arm_Deforest_Arr_2_inst_33_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_33_1_tsni(cont, _deforest_Deforest_Arr_2_0_inst_33_1_tsni, _deforest_Deforest_Arr_2_1_inst_33_1_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_33_1_tsni = (undefined, function (cont, _deforest_Deforest_Arr_2_0_inst_33_1_tsni, _deforest_Deforest_Arr_2_1_inst_33_1_tsni) {
   let first1, first0, t, rs_, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_33_1_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_33_1_tsni;
@@ -201,8 +201,8 @@ match_scrut_arm_Deforest_Arr_2_inst_33_1_tsni = function match_scrut_arm_Defores
     tmp1 = runtime.safeCall(cont(rs_));
     return NofibPrelude.Cons("Composite", tmp1)
   }
-};
-match_xs_arm_Cons_inst_34_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_34_35_1_2_3_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_34_35_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_34_35_1_2_3_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_34_35_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_34_35_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_34_35_1_2_3_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_34_35_1_2_3_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_34_35_1_2_3_4_5_41_42_tsni;
@@ -210,11 +210,11 @@ match_xs_arm_Cons_inst_34_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_i
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_34_35_1_2_3_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_34_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_Nil_inst_34_35_1_2_3_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_34_35_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_scrut_arm_Deforest_Arr_2_inst_34_35_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_34_35_1_tsni(cont, _deforest_Deforest_Arr_2_0_inst_34_35_1_tsni, _deforest_Deforest_Arr_2_1_inst_34_35_1_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_34_35_1_tsni = (undefined, function (cont, _deforest_Deforest_Arr_2_0_inst_34_35_1_tsni, _deforest_Deforest_Arr_2_1_inst_34_35_1_tsni) {
   let first1, first0, t, rs_, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_34_35_1_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_34_35_1_tsni;
@@ -227,8 +227,8 @@ match_scrut_arm_Deforest_Arr_2_inst_34_35_1_tsni = function match_scrut_arm_Defo
     tmp1 = runtime.safeCall(cont(rs_));
     return NofibPrelude.Cons("Composite", tmp1)
   }
-};
-match_xs_arm_Cons_inst_36_38_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_36_38_35_1_2_3_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_36_38_35_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_36_38_35_1_2_3_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_36_38_35_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_36_38_35_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_36_38_35_1_2_3_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_36_38_35_1_2_3_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_36_38_35_1_2_3_4_5_41_42_tsni;
@@ -236,11 +236,11 @@ match_xs_arm_Cons_inst_36_38_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_Con
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_36_38_35_1_2_3_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_36_38_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_Nil_inst_36_38_35_1_2_3_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_36_38_35_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_scrut_arm_Deforest_Arr_2_inst_36_38_35_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_36_38_35_1_tsni(cont, _deforest_Deforest_Arr_2_0_inst_36_38_35_1_tsni, _deforest_Deforest_Arr_2_1_inst_36_38_35_1_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_36_38_35_1_tsni = (undefined, function (cont, _deforest_Deforest_Arr_2_0_inst_36_38_35_1_tsni, _deforest_Deforest_Arr_2_1_inst_36_38_35_1_tsni) {
   let first1, first0, t, rs_, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_36_38_35_1_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_36_38_35_1_tsni;
@@ -253,11 +253,11 @@ match_scrut_arm_Deforest_Arr_2_inst_36_38_35_1_tsni = function match_scrut_arm_D
     tmp1 = runtime.safeCall(cont(rs_));
     return NofibPrelude.Cons("Composite", tmp1)
   }
-};
-match_l_arm_Nil_inst_36_38_35_1_44_45_tsni = function match_l_arm_Nil_inst_36_38_35_1_44_45_tsni(a) {
+});
+match_l_arm_Nil_inst_36_38_35_1_44_45_tsni = (undefined, function (a) {
   return a
-};
-match_xs_arm_Cons_inst_39_40_38_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_Cons_inst_39_40_38_35_1_2_3_4_5_41_42_tsni(f3, a, _deforest_Cons_head_inst_39_40_38_35_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_39_40_38_35_1_2_3_4_5_41_42_tsni) {
+});
+match_xs_arm_Cons_inst_39_40_38_35_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a, _deforest_Cons_head_inst_39_40_38_35_1_2_3_4_5_41_42_tsni, _deforest_Cons_tail_inst_39_40_38_35_1_2_3_4_5_41_42_tsni) {
   let param0, param1, h, t, tmp;
   param0 = _deforest_Cons_head_inst_39_40_38_35_1_2_3_4_5_41_42_tsni;
   param1 = _deforest_Cons_tail_inst_39_40_38_35_1_2_3_4_5_41_42_tsni;
@@ -265,11 +265,11 @@ match_xs_arm_Cons_inst_39_40_38_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_
   t = param1;
   tmp = runtime.safeCall(f3(a, h));
   return foldl_inst_39_40_38_35_1_2_3_4_5_41_42_tsni(f3, tmp, t)
-};
-match_xs_arm_Nil_inst_39_40_38_35_1_2_3_4_5_41_42_tsni = function match_xs_arm_Nil_inst_39_40_38_35_1_2_3_4_5_41_42_tsni(f3, a) {
+});
+match_xs_arm_Nil_inst_39_40_38_35_1_2_3_4_5_41_42_tsni = (undefined, function (f3, a) {
   return a
-};
-match_scrut_arm_Deforest_Arr_2_inst_39_40_38_35_1_tsni = function match_scrut_arm_Deforest_Arr_2_inst_39_40_38_35_1_tsni(cont, _deforest_Deforest_Arr_2_0_inst_39_40_38_35_1_tsni, _deforest_Deforest_Arr_2_1_inst_39_40_38_35_1_tsni) {
+});
+match_scrut_arm_Deforest_Arr_2_inst_39_40_38_35_1_tsni = (undefined, function (cont, _deforest_Deforest_Arr_2_0_inst_39_40_38_35_1_tsni, _deforest_Deforest_Arr_2_1_inst_39_40_38_35_1_tsni) {
   let first1, first0, t, rs_, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_39_40_38_35_1_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_39_40_38_35_1_tsni;
@@ -282,10 +282,10 @@ match_scrut_arm_Deforest_Arr_2_inst_39_40_38_35_1_tsni = function match_scrut_ar
     tmp1 = runtime.safeCall(cont(rs_));
     return NofibPrelude.Cons("Composite", tmp1)
   }
-};
-match_l_arm_Nil_inst_39_40_38_35_1_44_45_tsni = function match_l_arm_Nil_inst_39_40_38_35_1_44_45_tsni(a) {
+});
+match_l_arm_Nil_inst_39_40_38_35_1_44_45_tsni = (undefined, function (a) {
   return a
-};
+});
 doInput_inst_0_tsni = function doInput_inst_0_tsni(state, lls) {
   let param0, param1, l, ls, lambda$this;
   if (lls instanceof NofibPrelude.Nil.class) {

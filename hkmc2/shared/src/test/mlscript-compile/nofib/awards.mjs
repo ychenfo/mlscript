@@ -3,7 +3,7 @@ import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
 let award, atleast, awards1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda$, award$, lambda$1, atleast$, lambda$2, findallawards_inst_0_1_tsni, lambda_inst_0_1_2_tsni, findawards_inst_0_1_2_3_tsni, awards_inst_0_1_2_3_4_tsni, perms_inst_0_1_2_3_4_5_tsni, map_inst_0_1_2_3_4_5_6_tsni, award$_inst_0_1_2_3_4_7_tsni, sort_inst_0_1_2_3_4_7_8_tsni, qsort_inst_0_1_2_3_4_7_8_9_tsni, qpart_inst_0_1_2_3_4_7_8_9_tsni, rqsort_inst_0_1_2_3_4_7_8_9_tsni, rqpart_inst_0_1_2_3_4_7_8_9_tsni, award$_inst_0_1_2_3_4_10_tsni, sort_inst_0_1_2_3_4_10_8_tsni, qsort_inst_0_1_2_3_4_10_8_9_tsni, qpart_inst_0_1_2_3_4_10_8_9_tsni, rqsort_inst_0_1_2_3_4_10_8_9_tsni, rqpart_inst_0_1_2_3_4_10_8_9_tsni, award$_inst_0_1_2_3_4_11_tsni, sort_inst_0_1_2_3_4_11_8_tsni, qsort_inst_0_1_2_3_4_11_8_9_tsni, qpart_inst_0_1_2_3_4_11_8_9_tsni, rqsort_inst_0_1_2_3_4_11_8_9_tsni, rqpart_inst_0_1_2_3_4_11_8_9_tsni, map_inst_0_1_2_3_4_10_12_tsni, map_inst_0_1_2_3_4_7_12_tsni, append_inst_0_1_2_3_4_13_tsni, lambda_inst_0_1_2_3_4_10_14_tsni, lambda$_inst_0_1_2_3_4_10_14_15_tsni, map_inst_0_1_2_3_4_11_12_tsni, lambda_inst_0_1_2_3_4_11_14_tsni, lambda$_inst_0_1_2_3_4_11_14_15_tsni, append_inst_0_1_2_3_4_16_tsni, lambda_inst_0_1_2_3_4_7_14_tsni, lambda$_inst_0_1_2_3_4_7_14_15_tsni, findawards_inst_17_3_tsni, awards_inst_17_3_4_tsni, perms_inst_17_3_4_5_tsni, map_inst_17_3_4_5_6_tsni, award$_inst_17_3_4_7_tsni, sort_inst_17_3_4_7_8_tsni, qsort_inst_17_3_4_7_8_9_tsni, qpart_inst_17_3_4_7_8_9_tsni, rqsort_inst_17_3_4_7_8_9_tsni, rqpart_inst_17_3_4_7_8_9_tsni, award$_inst_17_3_4_10_tsni, sort_inst_17_3_4_10_8_tsni, qsort_inst_17_3_4_10_8_9_tsni, qpart_inst_17_3_4_10_8_9_tsni, rqsort_inst_17_3_4_10_8_9_tsni, rqpart_inst_17_3_4_10_8_9_tsni, award$_inst_17_3_4_11_tsni, sort_inst_17_3_4_11_8_tsni, qsort_inst_17_3_4_11_8_9_tsni, qpart_inst_17_3_4_11_8_9_tsni, rqsort_inst_17_3_4_11_8_9_tsni, rqpart_inst_17_3_4_11_8_9_tsni, map_inst_17_3_4_10_12_tsni, map_inst_17_3_4_7_12_tsni, append_inst_17_3_4_13_tsni, lambda_inst_17_3_4_10_14_tsni, lambda$_inst_17_3_4_10_14_15_tsni, map_inst_17_3_4_11_12_tsni, lambda_inst_17_3_4_11_14_tsni, lambda$_inst_17_3_4_11_14_15_tsni, append_inst_17_3_4_16_tsni, lambda_inst_17_3_4_7_14_tsni, lambda$_inst_17_3_4_7_14_15_tsni, sort_inst_18_8_tsni, qsort_inst_18_8_9_tsni, qpart_inst_18_8_9_tsni, rqsort_inst_18_8_9_tsni, rqpart_inst_18_8_9_tsni, award$_inst_19_20_tsni, sort_inst_19_20_8_tsni, qsort_inst_19_20_8_9_tsni, qpart_inst_19_20_8_9_tsni, rqsort_inst_19_20_8_9_tsni, rqpart_inst_19_20_8_9_tsni, map_inst_21_6_tsni, perms_inst_22_5_tsni, map_inst_22_5_6_tsni, award$_inst_22_7_tsni, sort_inst_22_7_8_tsni, qsort_inst_22_7_8_9_tsni, qpart_inst_22_7_8_9_tsni, rqsort_inst_22_7_8_9_tsni, rqpart_inst_22_7_8_9_tsni, award$_inst_22_10_tsni, sort_inst_22_10_8_tsni, qsort_inst_22_10_8_9_tsni, qpart_inst_22_10_8_9_tsni, rqsort_inst_22_10_8_9_tsni, rqpart_inst_22_10_8_9_tsni, award$_inst_22_11_tsni, sort_inst_22_11_8_tsni, qsort_inst_22_11_8_9_tsni, qpart_inst_22_11_8_9_tsni, rqsort_inst_22_11_8_9_tsni, rqpart_inst_22_11_8_9_tsni, map_inst_22_10_12_tsni, map_inst_22_7_12_tsni, awards_inst_23_4_tsni, award$_inst_23_4_11_tsni, sort_inst_23_4_11_8_tsni, qsort_inst_23_4_11_8_9_tsni, qpart_inst_23_4_11_8_9_tsni, rqsort_inst_23_4_11_8_9_tsni, rqpart_inst_23_4_11_8_9_tsni, award$_inst_23_4_10_tsni, sort_inst_23_4_10_8_tsni, qsort_inst_23_4_10_8_9_tsni, qpart_inst_23_4_10_8_9_tsni, rqsort_inst_23_4_10_8_9_tsni, rqpart_inst_23_4_10_8_9_tsni, map_inst_23_4_10_12_tsni, award$_inst_23_4_7_tsni, sort_inst_23_4_7_8_tsni, qsort_inst_23_4_7_8_9_tsni, qpart_inst_23_4_7_8_9_tsni, rqsort_inst_23_4_7_8_9_tsni, rqpart_inst_23_4_7_8_9_tsni, map_inst_23_4_7_12_tsni, perms_inst_23_4_5_tsni, map_inst_23_4_5_6_tsni, map_inst_23_4_11_12_tsni, append_inst_23_4_13_tsni, append_inst_23_4_16_tsni, lambda_inst_23_4_7_14_tsni, lambda$_inst_23_4_7_14_15_tsni, lambda_inst_23_4_10_14_tsni, lambda$_inst_23_4_10_14_15_tsni, lambda_inst_23_4_11_14_tsni, lambda$_inst_23_4_11_14_15_tsni, lambda_inst_24_2_tsni, findawards_inst_24_2_3_tsni, awards_inst_24_2_3_4_tsni, award$_inst_24_2_3_4_11_tsni, sort_inst_24_2_3_4_11_8_tsni, qsort_inst_24_2_3_4_11_8_9_tsni, qpart_inst_24_2_3_4_11_8_9_tsni, rqsort_inst_24_2_3_4_11_8_9_tsni, rqpart_inst_24_2_3_4_11_8_9_tsni, award$_inst_24_2_3_4_10_tsni, sort_inst_24_2_3_4_10_8_tsni, qsort_inst_24_2_3_4_10_8_9_tsni, qpart_inst_24_2_3_4_10_8_9_tsni, rqsort_inst_24_2_3_4_10_8_9_tsni, rqpart_inst_24_2_3_4_10_8_9_tsni, map_inst_24_2_3_4_10_12_tsni, award$_inst_24_2_3_4_7_tsni, sort_inst_24_2_3_4_7_8_tsni, qsort_inst_24_2_3_4_7_8_9_tsni, qpart_inst_24_2_3_4_7_8_9_tsni, rqsort_inst_24_2_3_4_7_8_9_tsni, rqpart_inst_24_2_3_4_7_8_9_tsni, map_inst_24_2_3_4_7_12_tsni, perms_inst_24_2_3_4_5_tsni, map_inst_24_2_3_4_5_6_tsni, map_inst_24_2_3_4_11_12_tsni, append_inst_24_2_3_4_13_tsni, append_inst_24_2_3_4_16_tsni, lambda_inst_24_2_3_4_7_14_tsni, lambda$_inst_24_2_3_4_7_14_15_tsni, lambda_inst_24_2_3_4_10_14_tsni, lambda$_inst_24_2_3_4_10_14_15_tsni, lambda_inst_24_2_3_4_11_14_tsni, lambda$_inst_24_2_3_4_11_14_15_tsni, lambda_inst_25_26_tsni, findallawards_inst_25_26_1_tsni, lambda_inst_25_26_1_2_tsni, findawards_inst_25_26_1_2_3_tsni, awards_inst_25_26_1_2_3_4_tsni, award$_inst_25_26_1_2_3_4_11_tsni, sort_inst_25_26_1_2_3_4_11_8_tsni, qsort_inst_25_26_1_2_3_4_11_8_9_tsni, qpart_inst_25_26_1_2_3_4_11_8_9_tsni, rqsort_inst_25_26_1_2_3_4_11_8_9_tsni, rqpart_inst_25_26_1_2_3_4_11_8_9_tsni, award$_inst_25_26_1_2_3_4_10_tsni, sort_inst_25_26_1_2_3_4_10_8_tsni, qsort_inst_25_26_1_2_3_4_10_8_9_tsni, qpart_inst_25_26_1_2_3_4_10_8_9_tsni, rqsort_inst_25_26_1_2_3_4_10_8_9_tsni, rqpart_inst_25_26_1_2_3_4_10_8_9_tsni, map_inst_25_26_1_2_3_4_10_12_tsni, award$_inst_25_26_1_2_3_4_7_tsni, sort_inst_25_26_1_2_3_4_7_8_tsni, qsort_inst_25_26_1_2_3_4_7_8_9_tsni, qpart_inst_25_26_1_2_3_4_7_8_9_tsni, rqsort_inst_25_26_1_2_3_4_7_8_9_tsni, rqpart_inst_25_26_1_2_3_4_7_8_9_tsni, map_inst_25_26_1_2_3_4_7_12_tsni, perms_inst_25_26_1_2_3_4_5_tsni, map_inst_25_26_1_2_3_4_5_6_tsni, map_inst_25_26_1_2_3_4_11_12_tsni, append_inst_25_26_1_2_3_4_13_tsni, append_inst_25_26_1_2_3_4_16_tsni, lambda_inst_25_26_1_2_3_4_7_14_tsni, lambda$_inst_25_26_1_2_3_4_7_14_15_tsni, lambda_inst_25_26_1_2_3_4_10_14_tsni, lambda$_inst_25_26_1_2_3_4_10_14_15_tsni, lambda_inst_25_26_1_2_3_4_11_14_tsni, lambda$_inst_25_26_1_2_3_4_11_14_15_tsni, enumFromTo_inst_25_27_tsni, testAwards_nofib_inst_28_29_tsni, enumFromTo_inst_28_29_27_tsni, lambda_inst_28_29_26_tsni, findallawards_inst_28_29_26_1_tsni, lambda_inst_28_29_26_1_2_tsni, findawards_inst_28_29_26_1_2_3_tsni, awards_inst_28_29_26_1_2_3_4_tsni, perms_inst_28_29_26_1_2_3_4_5_tsni, map_inst_28_29_26_1_2_3_4_5_6_tsni, award$_inst_28_29_26_1_2_3_4_7_tsni, sort_inst_28_29_26_1_2_3_4_7_8_tsni, qsort_inst_28_29_26_1_2_3_4_7_8_9_tsni, qpart_inst_28_29_26_1_2_3_4_7_8_9_tsni, rqsort_inst_28_29_26_1_2_3_4_7_8_9_tsni, rqpart_inst_28_29_26_1_2_3_4_7_8_9_tsni, award$_inst_28_29_26_1_2_3_4_10_tsni, sort_inst_28_29_26_1_2_3_4_10_8_tsni, qsort_inst_28_29_26_1_2_3_4_10_8_9_tsni, qpart_inst_28_29_26_1_2_3_4_10_8_9_tsni, rqsort_inst_28_29_26_1_2_3_4_10_8_9_tsni, rqpart_inst_28_29_26_1_2_3_4_10_8_9_tsni, award$_inst_28_29_26_1_2_3_4_11_tsni, sort_inst_28_29_26_1_2_3_4_11_8_tsni, qsort_inst_28_29_26_1_2_3_4_11_8_9_tsni, qpart_inst_28_29_26_1_2_3_4_11_8_9_tsni, rqsort_inst_28_29_26_1_2_3_4_11_8_9_tsni, rqpart_inst_28_29_26_1_2_3_4_11_8_9_tsni, map_inst_28_29_26_1_2_3_4_10_12_tsni, map_inst_28_29_26_1_2_3_4_7_12_tsni, append_inst_28_29_26_1_2_3_4_13_tsni, lambda_inst_28_29_26_1_2_3_4_10_14_tsni, lambda$_inst_28_29_26_1_2_3_4_10_14_15_tsni, map_inst_28_29_26_1_2_3_4_11_12_tsni, lambda_inst_28_29_26_1_2_3_4_11_14_tsni, lambda$_inst_28_29_26_1_2_3_4_11_14_15_tsni, append_inst_28_29_26_1_2_3_4_16_tsni, lambda_inst_28_29_26_1_2_3_4_7_14_tsni, lambda$_inst_28_29_26_1_2_3_4_7_14_15_tsni, append_inst_0_1_2_3_4_5_30_tsni, append_inst_17_3_4_5_30_tsni, map_inst_18_12_tsni, map_inst_19_20_12_tsni, append_inst_21_30_tsni, append_inst_22_5_30_tsni, map_inst_22_11_12_tsni, append_inst_22_13_tsni, append_inst_22_16_tsni, append_inst_23_4_5_30_tsni, append_inst_24_2_3_4_5_30_tsni, append_inst_25_26_1_2_3_4_5_30_tsni, map_inst_25_31_tsni, map_inst_28_29_31_tsni, append_inst_28_29_26_1_2_3_4_5_30_tsni, match_xs_arm_Cons_inst_0_1_2_3_4_7_12_tsni, match_xs_arm_Cons_inst_0_1_2_3_4_10_12_tsni, match_xs_arm_Cons_inst_0_1_2_3_4_11_12_tsni, match_scrut_arm_Cons_inst_0_1_2_3_tsni, match_head__arm_Deforest_Arr_2_inst_0_1_2_3_tsni, match_xs_arm_Cons_inst_17_3_4_7_12_tsni, match_xs_arm_Cons_inst_17_3_4_10_12_tsni, match_xs_arm_Cons_inst_17_3_4_11_12_tsni, match_scrut_arm_Cons_inst_17_3_tsni, match_head__arm_Deforest_Arr_2_inst_17_3_tsni, match_xs_arm_Cons_inst_18_12_tsni, match_xs_arm_Cons_inst_19_20_12_tsni, match_xs_arm_Cons_inst_22_7_12_tsni, match_xs_arm_Cons_inst_22_10_12_tsni, match_xs_arm_Cons_inst_22_11_12_tsni, match_xs_arm_Cons_inst_23_4_11_12_tsni, match_xs_arm_Cons_inst_23_4_10_12_tsni, match_xs_arm_Cons_inst_23_4_7_12_tsni, match_scrut_arm_Cons_inst_23_tsni, match_head__arm_Deforest_Arr_2_inst_23_tsni, match_xs_arm_Cons_inst_24_2_3_4_11_12_tsni, match_xs_arm_Cons_inst_24_2_3_4_10_12_tsni, match_xs_arm_Cons_inst_24_2_3_4_7_12_tsni, match_scrut_arm_Cons_inst_24_2_3_tsni, match_head__arm_Deforest_Arr_2_inst_24_2_3_tsni, match_xs_arm_Cons_inst_25_26_1_2_3_4_11_12_tsni, match_xs_arm_Cons_inst_25_26_1_2_3_4_10_12_tsni, match_xs_arm_Cons_inst_25_26_1_2_3_4_7_12_tsni, match_scrut_arm_Cons_inst_25_26_1_2_3_tsni, match_head__arm_Deforest_Arr_2_inst_25_26_1_2_3_tsni, match_xs_arm_Cons_inst_28_29_26_1_2_3_4_7_12_tsni, match_xs_arm_Cons_inst_28_29_26_1_2_3_4_10_12_tsni, match_xs_arm_Cons_inst_28_29_26_1_2_3_4_11_12_tsni, match_scrut_arm_Cons_inst_28_29_26_1_2_3_tsni, match_head__arm_Deforest_Arr_2_inst_28_29_26_1_2_3_tsni;
-match_xs_arm_Cons_inst_0_1_2_3_4_7_12_tsni = function match_xs_arm_Cons_inst_0_1_2_3_4_7_12_tsni(f, _deforest_Cons_head_inst_0_1_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_0_1_2_3_4_7_12_tsni) {
+match_xs_arm_Cons_inst_0_1_2_3_4_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_0_1_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_0_1_2_3_4_7_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_0_1_2_3_4_7_12_tsni;
   param1 = _deforest_Cons_tail_inst_0_1_2_3_4_7_12_tsni;
@@ -26,8 +26,8 @@ match_xs_arm_Cons_inst_0_1_2_3_4_7_12_tsni = function match_xs_arm_Cons_inst_0_1
       return match_scrut_arm_Cons_inst_0_1_2_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_0_1_2_3_4_10_12_tsni = function match_xs_arm_Cons_inst_0_1_2_3_4_10_12_tsni(f, _deforest_Cons_head_inst_0_1_2_3_4_10_12_tsni, _deforest_Cons_tail_inst_0_1_2_3_4_10_12_tsni) {
+});
+match_xs_arm_Cons_inst_0_1_2_3_4_10_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_0_1_2_3_4_10_12_tsni, _deforest_Cons_tail_inst_0_1_2_3_4_10_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_0_1_2_3_4_10_12_tsni;
   param1 = _deforest_Cons_tail_inst_0_1_2_3_4_10_12_tsni;
@@ -50,8 +50,8 @@ match_xs_arm_Cons_inst_0_1_2_3_4_10_12_tsni = function match_xs_arm_Cons_inst_0_
       return match_scrut_arm_Cons_inst_0_1_2_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_0_1_2_3_4_11_12_tsni = function match_xs_arm_Cons_inst_0_1_2_3_4_11_12_tsni(f, _deforest_Cons_head_inst_0_1_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_0_1_2_3_4_11_12_tsni) {
+});
+match_xs_arm_Cons_inst_0_1_2_3_4_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_0_1_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_0_1_2_3_4_11_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_0_1_2_3_4_11_12_tsni;
   param1 = _deforest_Cons_tail_inst_0_1_2_3_4_11_12_tsni;
@@ -64,16 +64,16 @@ match_xs_arm_Cons_inst_0_1_2_3_4_11_12_tsni = function match_xs_arm_Cons_inst_0_
   return (scores) => {
     return match_scrut_arm_Cons_inst_0_1_2_3_tsni(scores, _deforest_Cons_head, _deforest_Cons_tail)
   }
-};
-match_scrut_arm_Cons_inst_0_1_2_3_tsni = function match_scrut_arm_Cons_inst_0_1_2_3_tsni(scores, _deforest_Cons_head_inst_0_1_2_3_tsni, _deforest_Cons_tail_inst_0_1_2_3_tsni) {
+});
+match_scrut_arm_Cons_inst_0_1_2_3_tsni = (undefined, function (scores, _deforest_Cons_head_inst_0_1_2_3_tsni, _deforest_Cons_tail_inst_0_1_2_3_tsni) {
   let param0, param1, head_, tail_;
   param0 = _deforest_Cons_head_inst_0_1_2_3_tsni;
   param1 = _deforest_Cons_tail_inst_0_1_2_3_tsni;
   head_ = param0;
   tail_ = param1;
   return runtime.safeCall(head_(scores))
-};
-match_head__arm_Deforest_Arr_2_inst_0_1_2_3_tsni = function match_head__arm_Deforest_Arr_2_inst_0_1_2_3_tsni(scores, _deforest_Deforest_Arr_2_0_inst_0_1_2_3_tsni, _deforest_Deforest_Arr_2_1_inst_0_1_2_3_tsni) {
+});
+match_head__arm_Deforest_Arr_2_inst_0_1_2_3_tsni = (undefined, function (scores, _deforest_Deforest_Arr_2_0_inst_0_1_2_3_tsni, _deforest_Deforest_Arr_2_1_inst_0_1_2_3_tsni) {
   let first1, first0, award1, first11, first01, sum_, perm, arr, arr1, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_0_1_2_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_0_1_2_3_tsni;
@@ -97,8 +97,8 @@ match_head__arm_Deforest_Arr_2_inst_0_1_2_3_tsni = function match_head__arm_Defo
   } else {
     throw new globalThis.Error("match error");
   }
-};
-match_xs_arm_Cons_inst_17_3_4_7_12_tsni = function match_xs_arm_Cons_inst_17_3_4_7_12_tsni(f, _deforest_Cons_head_inst_17_3_4_7_12_tsni, _deforest_Cons_tail_inst_17_3_4_7_12_tsni) {
+});
+match_xs_arm_Cons_inst_17_3_4_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_17_3_4_7_12_tsni, _deforest_Cons_tail_inst_17_3_4_7_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_17_3_4_7_12_tsni;
   param1 = _deforest_Cons_tail_inst_17_3_4_7_12_tsni;
@@ -121,8 +121,8 @@ match_xs_arm_Cons_inst_17_3_4_7_12_tsni = function match_xs_arm_Cons_inst_17_3_4
       return match_scrut_arm_Cons_inst_17_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_17_3_4_10_12_tsni = function match_xs_arm_Cons_inst_17_3_4_10_12_tsni(f, _deforest_Cons_head_inst_17_3_4_10_12_tsni, _deforest_Cons_tail_inst_17_3_4_10_12_tsni) {
+});
+match_xs_arm_Cons_inst_17_3_4_10_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_17_3_4_10_12_tsni, _deforest_Cons_tail_inst_17_3_4_10_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_17_3_4_10_12_tsni;
   param1 = _deforest_Cons_tail_inst_17_3_4_10_12_tsni;
@@ -145,8 +145,8 @@ match_xs_arm_Cons_inst_17_3_4_10_12_tsni = function match_xs_arm_Cons_inst_17_3_
       return match_scrut_arm_Cons_inst_17_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_17_3_4_11_12_tsni = function match_xs_arm_Cons_inst_17_3_4_11_12_tsni(f, _deforest_Cons_head_inst_17_3_4_11_12_tsni, _deforest_Cons_tail_inst_17_3_4_11_12_tsni) {
+});
+match_xs_arm_Cons_inst_17_3_4_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_17_3_4_11_12_tsni, _deforest_Cons_tail_inst_17_3_4_11_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_17_3_4_11_12_tsni;
   param1 = _deforest_Cons_tail_inst_17_3_4_11_12_tsni;
@@ -159,16 +159,16 @@ match_xs_arm_Cons_inst_17_3_4_11_12_tsni = function match_xs_arm_Cons_inst_17_3_
   return (scores) => {
     return match_scrut_arm_Cons_inst_17_3_tsni(scores, _deforest_Cons_head, _deforest_Cons_tail)
   }
-};
-match_scrut_arm_Cons_inst_17_3_tsni = function match_scrut_arm_Cons_inst_17_3_tsni(scores, _deforest_Cons_head_inst_17_3_tsni, _deforest_Cons_tail_inst_17_3_tsni) {
+});
+match_scrut_arm_Cons_inst_17_3_tsni = (undefined, function (scores, _deforest_Cons_head_inst_17_3_tsni, _deforest_Cons_tail_inst_17_3_tsni) {
   let param0, param1, head_, tail_;
   param0 = _deforest_Cons_head_inst_17_3_tsni;
   param1 = _deforest_Cons_tail_inst_17_3_tsni;
   head_ = param0;
   tail_ = param1;
   return runtime.safeCall(head_(scores))
-};
-match_head__arm_Deforest_Arr_2_inst_17_3_tsni = function match_head__arm_Deforest_Arr_2_inst_17_3_tsni(scores, _deforest_Deforest_Arr_2_0_inst_17_3_tsni, _deforest_Deforest_Arr_2_1_inst_17_3_tsni) {
+});
+match_head__arm_Deforest_Arr_2_inst_17_3_tsni = (undefined, function (scores, _deforest_Deforest_Arr_2_0_inst_17_3_tsni, _deforest_Deforest_Arr_2_1_inst_17_3_tsni) {
   let first1, first0, award1, first11, first01, sum_, perm, arr, arr1, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_17_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_17_3_tsni;
@@ -192,8 +192,8 @@ match_head__arm_Deforest_Arr_2_inst_17_3_tsni = function match_head__arm_Defores
   } else {
     throw new globalThis.Error("match error");
   }
-};
-match_xs_arm_Cons_inst_18_12_tsni = function match_xs_arm_Cons_inst_18_12_tsni(f, _deforest_Cons_head_inst_18_12_tsni, _deforest_Cons_tail_inst_18_12_tsni) {
+});
+match_xs_arm_Cons_inst_18_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_18_12_tsni, _deforest_Cons_tail_inst_18_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1;
   param0 = _deforest_Cons_head_inst_18_12_tsni;
   param1 = _deforest_Cons_tail_inst_18_12_tsni;
@@ -202,8 +202,8 @@ match_xs_arm_Cons_inst_18_12_tsni = function match_xs_arm_Cons_inst_18_12_tsni(f
   tmp = runtime.safeCall(f(x));
   tmp1 = map_inst_18_12_tsni(f, xs);
   return NofibPrelude.Cons(tmp, tmp1)
-};
-match_xs_arm_Cons_inst_19_20_12_tsni = function match_xs_arm_Cons_inst_19_20_12_tsni(f, _deforest_Cons_head_inst_19_20_12_tsni, _deforest_Cons_tail_inst_19_20_12_tsni) {
+});
+match_xs_arm_Cons_inst_19_20_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_19_20_12_tsni, _deforest_Cons_tail_inst_19_20_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1;
   param0 = _deforest_Cons_head_inst_19_20_12_tsni;
   param1 = _deforest_Cons_tail_inst_19_20_12_tsni;
@@ -212,8 +212,8 @@ match_xs_arm_Cons_inst_19_20_12_tsni = function match_xs_arm_Cons_inst_19_20_12_
   tmp = runtime.safeCall(f(x));
   tmp1 = map_inst_19_20_12_tsni(f, xs);
   return NofibPrelude.Cons(tmp, tmp1)
-};
-match_xs_arm_Cons_inst_22_7_12_tsni = function match_xs_arm_Cons_inst_22_7_12_tsni(f, _deforest_Cons_head_inst_22_7_12_tsni, _deforest_Cons_tail_inst_22_7_12_tsni) {
+});
+match_xs_arm_Cons_inst_22_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_22_7_12_tsni, _deforest_Cons_tail_inst_22_7_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_22_7_12_tsni;
   param1 = _deforest_Cons_tail_inst_22_7_12_tsni;
@@ -232,8 +232,8 @@ match_xs_arm_Cons_inst_22_7_12_tsni = function match_xs_arm_Cons_inst_22_7_12_ts
     tmp2 = append_inst_22_16_tsni(xs1, ys);
     return NofibPrelude.Cons(x1, tmp2)
   }
-};
-match_xs_arm_Cons_inst_22_10_12_tsni = function match_xs_arm_Cons_inst_22_10_12_tsni(f, _deforest_Cons_head_inst_22_10_12_tsni, _deforest_Cons_tail_inst_22_10_12_tsni) {
+});
+match_xs_arm_Cons_inst_22_10_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_22_10_12_tsni, _deforest_Cons_tail_inst_22_10_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_22_10_12_tsni;
   param1 = _deforest_Cons_tail_inst_22_10_12_tsni;
@@ -252,8 +252,8 @@ match_xs_arm_Cons_inst_22_10_12_tsni = function match_xs_arm_Cons_inst_22_10_12_
     tmp2 = append_inst_22_13_tsni(xs1, ys);
     return NofibPrelude.Cons(x1, tmp2)
   }
-};
-match_xs_arm_Cons_inst_22_11_12_tsni = function match_xs_arm_Cons_inst_22_11_12_tsni(f, _deforest_Cons_head_inst_22_11_12_tsni, _deforest_Cons_tail_inst_22_11_12_tsni) {
+});
+match_xs_arm_Cons_inst_22_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_22_11_12_tsni, _deforest_Cons_tail_inst_22_11_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1;
   param0 = _deforest_Cons_head_inst_22_11_12_tsni;
   param1 = _deforest_Cons_tail_inst_22_11_12_tsni;
@@ -262,8 +262,8 @@ match_xs_arm_Cons_inst_22_11_12_tsni = function match_xs_arm_Cons_inst_22_11_12_
   tmp = runtime.safeCall(f(x));
   tmp1 = map_inst_22_11_12_tsni(f, xs);
   return NofibPrelude.Cons(tmp, tmp1)
-};
-match_xs_arm_Cons_inst_23_4_11_12_tsni = function match_xs_arm_Cons_inst_23_4_11_12_tsni(f, _deforest_Cons_head_inst_23_4_11_12_tsni, _deforest_Cons_tail_inst_23_4_11_12_tsni) {
+});
+match_xs_arm_Cons_inst_23_4_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_23_4_11_12_tsni, _deforest_Cons_tail_inst_23_4_11_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_23_4_11_12_tsni;
   param1 = _deforest_Cons_tail_inst_23_4_11_12_tsni;
@@ -276,8 +276,8 @@ match_xs_arm_Cons_inst_23_4_11_12_tsni = function match_xs_arm_Cons_inst_23_4_11
   return (scores) => {
     return match_scrut_arm_Cons_inst_23_tsni(scores, _deforest_Cons_head, _deforest_Cons_tail)
   }
-};
-match_xs_arm_Cons_inst_23_4_10_12_tsni = function match_xs_arm_Cons_inst_23_4_10_12_tsni(f, _deforest_Cons_head_inst_23_4_10_12_tsni, _deforest_Cons_tail_inst_23_4_10_12_tsni) {
+});
+match_xs_arm_Cons_inst_23_4_10_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_23_4_10_12_tsni, _deforest_Cons_tail_inst_23_4_10_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_23_4_10_12_tsni;
   param1 = _deforest_Cons_tail_inst_23_4_10_12_tsni;
@@ -300,8 +300,8 @@ match_xs_arm_Cons_inst_23_4_10_12_tsni = function match_xs_arm_Cons_inst_23_4_10
       return match_scrut_arm_Cons_inst_23_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_23_4_7_12_tsni = function match_xs_arm_Cons_inst_23_4_7_12_tsni(f, _deforest_Cons_head_inst_23_4_7_12_tsni, _deforest_Cons_tail_inst_23_4_7_12_tsni) {
+});
+match_xs_arm_Cons_inst_23_4_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_23_4_7_12_tsni, _deforest_Cons_tail_inst_23_4_7_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_23_4_7_12_tsni;
   param1 = _deforest_Cons_tail_inst_23_4_7_12_tsni;
@@ -324,16 +324,16 @@ match_xs_arm_Cons_inst_23_4_7_12_tsni = function match_xs_arm_Cons_inst_23_4_7_1
       return match_scrut_arm_Cons_inst_23_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_scrut_arm_Cons_inst_23_tsni = function match_scrut_arm_Cons_inst_23_tsni(scores, _deforest_Cons_head_inst_23_tsni, _deforest_Cons_tail_inst_23_tsni) {
+});
+match_scrut_arm_Cons_inst_23_tsni = (undefined, function (scores, _deforest_Cons_head_inst_23_tsni, _deforest_Cons_tail_inst_23_tsni) {
   let param0, param1, head_, tail_;
   param0 = _deforest_Cons_head_inst_23_tsni;
   param1 = _deforest_Cons_tail_inst_23_tsni;
   head_ = param0;
   tail_ = param1;
   return runtime.safeCall(head_(scores))
-};
-match_head__arm_Deforest_Arr_2_inst_23_tsni = function match_head__arm_Deforest_Arr_2_inst_23_tsni(scores, _deforest_Deforest_Arr_2_0_inst_23_tsni, _deforest_Deforest_Arr_2_1_inst_23_tsni) {
+});
+match_head__arm_Deforest_Arr_2_inst_23_tsni = (undefined, function (scores, _deforest_Deforest_Arr_2_0_inst_23_tsni, _deforest_Deforest_Arr_2_1_inst_23_tsni) {
   let first1, first0, award1, first11, first01, sum_, perm, arr, arr1, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_23_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_23_tsni;
@@ -357,8 +357,8 @@ match_head__arm_Deforest_Arr_2_inst_23_tsni = function match_head__arm_Deforest_
   } else {
     throw new globalThis.Error("match error");
   }
-};
-match_xs_arm_Cons_inst_24_2_3_4_11_12_tsni = function match_xs_arm_Cons_inst_24_2_3_4_11_12_tsni(f, _deforest_Cons_head_inst_24_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_24_2_3_4_11_12_tsni) {
+});
+match_xs_arm_Cons_inst_24_2_3_4_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_24_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_24_2_3_4_11_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_24_2_3_4_11_12_tsni;
   param1 = _deforest_Cons_tail_inst_24_2_3_4_11_12_tsni;
@@ -371,8 +371,8 @@ match_xs_arm_Cons_inst_24_2_3_4_11_12_tsni = function match_xs_arm_Cons_inst_24_
   return (scores) => {
     return match_scrut_arm_Cons_inst_24_2_3_tsni(scores, _deforest_Cons_head, _deforest_Cons_tail)
   }
-};
-match_xs_arm_Cons_inst_24_2_3_4_10_12_tsni = function match_xs_arm_Cons_inst_24_2_3_4_10_12_tsni(f, _deforest_Cons_head_inst_24_2_3_4_10_12_tsni, _deforest_Cons_tail_inst_24_2_3_4_10_12_tsni) {
+});
+match_xs_arm_Cons_inst_24_2_3_4_10_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_24_2_3_4_10_12_tsni, _deforest_Cons_tail_inst_24_2_3_4_10_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_24_2_3_4_10_12_tsni;
   param1 = _deforest_Cons_tail_inst_24_2_3_4_10_12_tsni;
@@ -395,8 +395,8 @@ match_xs_arm_Cons_inst_24_2_3_4_10_12_tsni = function match_xs_arm_Cons_inst_24_
       return match_scrut_arm_Cons_inst_24_2_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_24_2_3_4_7_12_tsni = function match_xs_arm_Cons_inst_24_2_3_4_7_12_tsni(f, _deforest_Cons_head_inst_24_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_24_2_3_4_7_12_tsni) {
+});
+match_xs_arm_Cons_inst_24_2_3_4_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_24_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_24_2_3_4_7_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_24_2_3_4_7_12_tsni;
   param1 = _deforest_Cons_tail_inst_24_2_3_4_7_12_tsni;
@@ -419,16 +419,16 @@ match_xs_arm_Cons_inst_24_2_3_4_7_12_tsni = function match_xs_arm_Cons_inst_24_2
       return match_scrut_arm_Cons_inst_24_2_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_scrut_arm_Cons_inst_24_2_3_tsni = function match_scrut_arm_Cons_inst_24_2_3_tsni(scores, _deforest_Cons_head_inst_24_2_3_tsni, _deforest_Cons_tail_inst_24_2_3_tsni) {
+});
+match_scrut_arm_Cons_inst_24_2_3_tsni = (undefined, function (scores, _deforest_Cons_head_inst_24_2_3_tsni, _deforest_Cons_tail_inst_24_2_3_tsni) {
   let param0, param1, head_, tail_;
   param0 = _deforest_Cons_head_inst_24_2_3_tsni;
   param1 = _deforest_Cons_tail_inst_24_2_3_tsni;
   head_ = param0;
   tail_ = param1;
   return runtime.safeCall(head_(scores))
-};
-match_head__arm_Deforest_Arr_2_inst_24_2_3_tsni = function match_head__arm_Deforest_Arr_2_inst_24_2_3_tsni(scores, _deforest_Deforest_Arr_2_0_inst_24_2_3_tsni, _deforest_Deforest_Arr_2_1_inst_24_2_3_tsni) {
+});
+match_head__arm_Deforest_Arr_2_inst_24_2_3_tsni = (undefined, function (scores, _deforest_Deforest_Arr_2_0_inst_24_2_3_tsni, _deforest_Deforest_Arr_2_1_inst_24_2_3_tsni) {
   let first1, first0, award1, first11, first01, sum_, perm, arr, arr1, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_24_2_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_24_2_3_tsni;
@@ -452,8 +452,8 @@ match_head__arm_Deforest_Arr_2_inst_24_2_3_tsni = function match_head__arm_Defor
   } else {
     throw new globalThis.Error("match error");
   }
-};
-match_xs_arm_Cons_inst_25_26_1_2_3_4_11_12_tsni = function match_xs_arm_Cons_inst_25_26_1_2_3_4_11_12_tsni(f, _deforest_Cons_head_inst_25_26_1_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_4_11_12_tsni) {
+});
+match_xs_arm_Cons_inst_25_26_1_2_3_4_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_25_26_1_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_4_11_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_25_26_1_2_3_4_11_12_tsni;
   param1 = _deforest_Cons_tail_inst_25_26_1_2_3_4_11_12_tsni;
@@ -466,8 +466,8 @@ match_xs_arm_Cons_inst_25_26_1_2_3_4_11_12_tsni = function match_xs_arm_Cons_ins
   return (scores) => {
     return match_scrut_arm_Cons_inst_25_26_1_2_3_tsni(scores, _deforest_Cons_head, _deforest_Cons_tail)
   }
-};
-match_xs_arm_Cons_inst_25_26_1_2_3_4_10_12_tsni = function match_xs_arm_Cons_inst_25_26_1_2_3_4_10_12_tsni(f, _deforest_Cons_head_inst_25_26_1_2_3_4_10_12_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_4_10_12_tsni) {
+});
+match_xs_arm_Cons_inst_25_26_1_2_3_4_10_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_25_26_1_2_3_4_10_12_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_4_10_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_25_26_1_2_3_4_10_12_tsni;
   param1 = _deforest_Cons_tail_inst_25_26_1_2_3_4_10_12_tsni;
@@ -490,8 +490,8 @@ match_xs_arm_Cons_inst_25_26_1_2_3_4_10_12_tsni = function match_xs_arm_Cons_ins
       return match_scrut_arm_Cons_inst_25_26_1_2_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_25_26_1_2_3_4_7_12_tsni = function match_xs_arm_Cons_inst_25_26_1_2_3_4_7_12_tsni(f, _deforest_Cons_head_inst_25_26_1_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_4_7_12_tsni) {
+});
+match_xs_arm_Cons_inst_25_26_1_2_3_4_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_25_26_1_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_4_7_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_25_26_1_2_3_4_7_12_tsni;
   param1 = _deforest_Cons_tail_inst_25_26_1_2_3_4_7_12_tsni;
@@ -514,16 +514,16 @@ match_xs_arm_Cons_inst_25_26_1_2_3_4_7_12_tsni = function match_xs_arm_Cons_inst
       return match_scrut_arm_Cons_inst_25_26_1_2_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_scrut_arm_Cons_inst_25_26_1_2_3_tsni = function match_scrut_arm_Cons_inst_25_26_1_2_3_tsni(scores, _deforest_Cons_head_inst_25_26_1_2_3_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_tsni) {
+});
+match_scrut_arm_Cons_inst_25_26_1_2_3_tsni = (undefined, function (scores, _deforest_Cons_head_inst_25_26_1_2_3_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_tsni) {
   let param0, param1, head_, tail_;
   param0 = _deforest_Cons_head_inst_25_26_1_2_3_tsni;
   param1 = _deforest_Cons_tail_inst_25_26_1_2_3_tsni;
   head_ = param0;
   tail_ = param1;
   return runtime.safeCall(head_(scores))
-};
-match_head__arm_Deforest_Arr_2_inst_25_26_1_2_3_tsni = function match_head__arm_Deforest_Arr_2_inst_25_26_1_2_3_tsni(scores, _deforest_Deforest_Arr_2_0_inst_25_26_1_2_3_tsni, _deforest_Deforest_Arr_2_1_inst_25_26_1_2_3_tsni) {
+});
+match_head__arm_Deforest_Arr_2_inst_25_26_1_2_3_tsni = (undefined, function (scores, _deforest_Deforest_Arr_2_0_inst_25_26_1_2_3_tsni, _deforest_Deforest_Arr_2_1_inst_25_26_1_2_3_tsni) {
   let first1, first0, award1, first11, first01, sum_, perm, arr, arr1, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_25_26_1_2_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_25_26_1_2_3_tsni;
@@ -547,8 +547,8 @@ match_head__arm_Deforest_Arr_2_inst_25_26_1_2_3_tsni = function match_head__arm_
   } else {
     throw new globalThis.Error("match error");
   }
-};
-match_xs_arm_Cons_inst_28_29_26_1_2_3_4_7_12_tsni = function match_xs_arm_Cons_inst_28_29_26_1_2_3_4_7_12_tsni(f, _deforest_Cons_head_inst_28_29_26_1_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_4_7_12_tsni) {
+});
+match_xs_arm_Cons_inst_28_29_26_1_2_3_4_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_28_29_26_1_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_4_7_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_28_29_26_1_2_3_4_7_12_tsni;
   param1 = _deforest_Cons_tail_inst_28_29_26_1_2_3_4_7_12_tsni;
@@ -571,8 +571,8 @@ match_xs_arm_Cons_inst_28_29_26_1_2_3_4_7_12_tsni = function match_xs_arm_Cons_i
       return match_scrut_arm_Cons_inst_28_29_26_1_2_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_28_29_26_1_2_3_4_10_12_tsni = function match_xs_arm_Cons_inst_28_29_26_1_2_3_4_10_12_tsni(f, _deforest_Cons_head_inst_28_29_26_1_2_3_4_10_12_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_4_10_12_tsni) {
+});
+match_xs_arm_Cons_inst_28_29_26_1_2_3_4_10_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_28_29_26_1_2_3_4_10_12_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_4_10_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_28_29_26_1_2_3_4_10_12_tsni;
   param1 = _deforest_Cons_tail_inst_28_29_26_1_2_3_4_10_12_tsni;
@@ -595,8 +595,8 @@ match_xs_arm_Cons_inst_28_29_26_1_2_3_4_10_12_tsni = function match_xs_arm_Cons_
       return match_scrut_arm_Cons_inst_28_29_26_1_2_3_tsni(scores, _deforest_Cons_head1, _deforest_Cons_tail1)
     }
   }
-};
-match_xs_arm_Cons_inst_28_29_26_1_2_3_4_11_12_tsni = function match_xs_arm_Cons_inst_28_29_26_1_2_3_4_11_12_tsni(f, _deforest_Cons_head_inst_28_29_26_1_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_4_11_12_tsni) {
+});
+match_xs_arm_Cons_inst_28_29_26_1_2_3_4_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_28_29_26_1_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_4_11_12_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_28_29_26_1_2_3_4_11_12_tsni;
   param1 = _deforest_Cons_tail_inst_28_29_26_1_2_3_4_11_12_tsni;
@@ -609,16 +609,16 @@ match_xs_arm_Cons_inst_28_29_26_1_2_3_4_11_12_tsni = function match_xs_arm_Cons_
   return (scores) => {
     return match_scrut_arm_Cons_inst_28_29_26_1_2_3_tsni(scores, _deforest_Cons_head, _deforest_Cons_tail)
   }
-};
-match_scrut_arm_Cons_inst_28_29_26_1_2_3_tsni = function match_scrut_arm_Cons_inst_28_29_26_1_2_3_tsni(scores, _deforest_Cons_head_inst_28_29_26_1_2_3_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_tsni) {
+});
+match_scrut_arm_Cons_inst_28_29_26_1_2_3_tsni = (undefined, function (scores, _deforest_Cons_head_inst_28_29_26_1_2_3_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_tsni) {
   let param0, param1, head_, tail_;
   param0 = _deforest_Cons_head_inst_28_29_26_1_2_3_tsni;
   param1 = _deforest_Cons_tail_inst_28_29_26_1_2_3_tsni;
   head_ = param0;
   tail_ = param1;
   return runtime.safeCall(head_(scores))
-};
-match_head__arm_Deforest_Arr_2_inst_28_29_26_1_2_3_tsni = function match_head__arm_Deforest_Arr_2_inst_28_29_26_1_2_3_tsni(scores, _deforest_Deforest_Arr_2_0_inst_28_29_26_1_2_3_tsni, _deforest_Deforest_Arr_2_1_inst_28_29_26_1_2_3_tsni) {
+});
+match_head__arm_Deforest_Arr_2_inst_28_29_26_1_2_3_tsni = (undefined, function (scores, _deforest_Deforest_Arr_2_0_inst_28_29_26_1_2_3_tsni, _deforest_Deforest_Arr_2_1_inst_28_29_26_1_2_3_tsni) {
   let first1, first0, award1, first11, first01, sum_, perm, arr, arr1, tmp, tmp1;
   first0 = _deforest_Deforest_Arr_2_0_inst_28_29_26_1_2_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_28_29_26_1_2_3_tsni;
@@ -642,7 +642,7 @@ match_head__arm_Deforest_Arr_2_inst_28_29_26_1_2_3_tsni = function match_head__a
   } else {
     throw new globalThis.Error("match error");
   }
-};
+});
 findallawards_inst_0_1_tsni = function findallawards_inst_0_1_tsni(competitors) {
   let tmp;
   tmp = lambda_inst_0_1_2_tsni;

@@ -212,19 +212,7 @@ print(calendar.main())
 
 import "../../../mlscript-compile/nofib/cichelli.mls"
 cichelli.main()
-//│ FAILURE: Unexpected runtime error
-//│ FAILURE LOCATION: mkQuery (JSBackendDiffMaker.scala:171)
-//│ ═══[RUNTIME ERROR] Error: match error
-//│     at findhash__inst_0_tsni (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:607:11)
-//│     at file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:701:16
-//│     at tryy$ (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:4431:27)
-//│     at lambda$ (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:4537:12)
-//│     at file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:4544:12
-//│     at lambda$ (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/NofibPrelude.mjs:545:28)
-//│     at Lazy.init (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/NofibPrelude.mjs:554:12)
-//│     at Lazy.get (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/NofibPrelude.mjs:744:39)
-//│     at NofibPrelude.force (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/NofibPrelude.mjs:823:17)
-//│     at cichelli.first (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:5057:26)
+//│ = "YesIts(113994, [[\"w\", 16],[\"r\", 17],[\"o\", 11],[\"m\", 17],[\"l\", 11],[\"x\", 2],[\"n\", 11],[\"i\", 4],[\"f\", 10],[\"h\", 3],[\"g\", 0],[\"t\", 5],[\"d\", 0],[\"a\", 0],[\"s\", 2],[\"c\", 0],[\"e\", 1]])"
 
 
 import "../../../mlscript-compile/nofib/circsim.mls"
@@ -354,11 +342,45 @@ print(mate.main())
 //│ >  if P/QN6xN/QR7; 2. Q/QN1-QB2, ...; 3. B/KR4-KB2++
 //│ > 
 
-// FIXME:
-:fixme
 import "../../../mlscript-compile/nofib/minimax.mls"
 print(minimax.main())
-//│ ═══[RUNTIME ERROR] RangeError: Maximum call stack size exceeded
+//│ > OXO
+//│ > XWin
+//│ > X|O| 
+//│ > ------
+//│ >  |X| 
+//│ > ------
+//│ >  | | 
+//│ > 
+//│ > XWin
+//│ > X|O|O
+//│ > ------
+//│ >  |X| 
+//│ > ------
+//│ >  | | 
+//│ > 
+//│ > XWin
+//│ > X|O|O
+//│ > ------
+//│ > X|X| 
+//│ > ------
+//│ >  | | 
+//│ > 
+//│ > XWin
+//│ > X|O|O
+//│ > ------
+//│ > X|X|O
+//│ > ------
+//│ >  | | 
+//│ > 
+//│ > XWin
+//│ > X|O|O
+//│ > ------
+//│ > X|X|O
+//│ > ------
+//│ > X| | 
+//│ > 
+//│ > 
 
 
 import "../../../mlscript-compile/nofib/para.mls"

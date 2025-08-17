@@ -214,7 +214,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
           val armName = cls.fold("default")(_.nme)
           val funSym = BlockMemberSymbol(
             s"match_${scrutName}_arm_${armName}_${matchId._2.makeSuffix(preAnalyzer)}",
-            Nil)
+            Nil, false)
           funSym
   
   

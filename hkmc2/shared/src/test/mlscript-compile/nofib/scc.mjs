@@ -3,7 +3,7 @@ import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
 let swap, span_tree, new_range, scc1, lambda, lambda1, lambda$, lambda$1, map_inst_0_1_tsni, swap_inst_0_2_tsni, lambda$_inst_3_4_tsni, map_inst_3_4_1_tsni, swap_inst_3_4_2_tsni, lambda_inst_5_6_tsni, lambda$_inst_5_6_4_tsni, map_inst_5_6_4_1_tsni, swap_inst_5_6_4_2_tsni, new_range_inst_5_6_4_7_tsni, stronglyConnComp_inst_8_9_tsni, lambda_inst_8_9_6_tsni, lambda$_inst_8_9_6_4_tsni, map_inst_8_9_6_4_1_tsni, swap_inst_8_9_6_4_2_tsni, new_range_inst_8_9_6_4_7_tsni, lambda_inst_8_9_10_tsni, lambda$_inst_8_9_10_11_tsni, new_range_inst_8_9_10_11_12_tsni, testScc_nofib_inst_13_14_tsni, stronglyConnComp_inst_13_14_9_tsni, lambda_inst_13_14_9_10_tsni, lambda$_inst_13_14_9_10_11_tsni, new_range_inst_13_14_9_10_11_12_tsni, lambda_inst_13_14_9_6_tsni, lambda$_inst_13_14_9_6_4_tsni, map_inst_13_14_9_6_4_1_tsni, swap_inst_13_14_9_6_4_2_tsni, new_range_inst_13_14_9_6_4_7_tsni, new_range_inst_0_7_tsni, new_range_inst_3_4_7_tsni, span_tree_inst_5_15_tsni, dfs_inst_5_15_16_tsni, span_tree_inst_8_9_15_tsni, dfs_inst_8_9_15_16_tsni, dfs_inst_8_9_17_tsni, dfs_inst_13_14_9_17_tsni, span_tree_inst_13_14_9_15_tsni, dfs_inst_13_14_9_15_16_tsni, match_xs_arm_Cons_inst_8_9_17_tsni, match_xs_arm_Nil_inst_8_9_17_tsni, match_xs_arm_Nil_inst_13_14_9_17_tsni, match_xs_arm_Cons_inst_13_14_9_17_tsni;
-match_xs_arm_Cons_inst_8_9_17_tsni = function match_xs_arm_Cons_inst_8_9_17_tsni(r, vs, ns, _deforest_Cons_head_inst_8_9_17_tsni, _deforest_Cons_tail_inst_8_9_17_tsni) {
+match_xs_arm_Cons_inst_8_9_17_tsni = (undefined, function (r, vs, ns, _deforest_Cons_head_inst_8_9_17_tsni, _deforest_Cons_tail_inst_8_9_17_tsni) {
   let param0, param1, x, xs, scrut, first1, first0, vs$_, ns$_, scrut1, arr, tmp, arr1, tmp1, tmp2, tmp3, arr2;
   param0 = _deforest_Cons_head_inst_8_9_17_tsni;
   param1 = _deforest_Cons_tail_inst_8_9_17_tsni;
@@ -40,24 +40,24 @@ match_xs_arm_Cons_inst_8_9_17_tsni = function match_xs_arm_Cons_inst_8_9_17_tsni
       throw new globalThis.Error("match error");
     }
   }
-};
-match_xs_arm_Nil_inst_8_9_17_tsni = function match_xs_arm_Nil_inst_8_9_17_tsni(r, vs, ns) {
+});
+match_xs_arm_Nil_inst_8_9_17_tsni = (undefined, function (r, vs, ns) {
   let arr;
   arr = [
     vs,
     ns
   ];
   return arr
-};
-match_xs_arm_Nil_inst_13_14_9_17_tsni = function match_xs_arm_Nil_inst_13_14_9_17_tsni(r, vs, ns) {
+});
+match_xs_arm_Nil_inst_13_14_9_17_tsni = (undefined, function (r, vs, ns) {
   let arr;
   arr = [
     vs,
     ns
   ];
   return arr
-};
-match_xs_arm_Cons_inst_13_14_9_17_tsni = function match_xs_arm_Cons_inst_13_14_9_17_tsni(r, vs, ns, _deforest_Cons_head_inst_13_14_9_17_tsni, _deforest_Cons_tail_inst_13_14_9_17_tsni) {
+});
+match_xs_arm_Cons_inst_13_14_9_17_tsni = (undefined, function (r, vs, ns, _deforest_Cons_head_inst_13_14_9_17_tsni, _deforest_Cons_tail_inst_13_14_9_17_tsni) {
   let param0, param1, x, xs, scrut, first1, first0, vs$_, ns$_, scrut1, arr, tmp, arr1, tmp1, tmp2, tmp3, arr2;
   param0 = _deforest_Cons_head_inst_13_14_9_17_tsni;
   param1 = _deforest_Cons_tail_inst_13_14_9_17_tsni;
@@ -94,7 +94,7 @@ match_xs_arm_Cons_inst_13_14_9_17_tsni = function match_xs_arm_Cons_inst_13_14_9
       throw new globalThis.Error("match error");
     }
   }
-};
+});
 map_inst_0_1_tsni = function map_inst_0_1_tsni(f, xs) {
   let param0, param1, x, xs1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Cons.class) {

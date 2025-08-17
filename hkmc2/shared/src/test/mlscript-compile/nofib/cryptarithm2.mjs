@@ -96,13 +96,13 @@ match_scrut_rest_inst_112_113_111_tsni = function match_scrut_rest_inst_112_113_
     }
   }
 };
-match_m_arm_StateT_inst_4_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_4_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_4_5_6_7_8_118_119_120_tsni) {
+match_m_arm_StateT_inst_4_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_4_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_4_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_4_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_4_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_4_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_4_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_4_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_4_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_4_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_4_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_4_5_6_7_8_38_37_tsni;
@@ -131,11 +131,11 @@ match_xs_arm_Cons_inst_4_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_4_
       return append_inst_4_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_4_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_4_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_4_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_4_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_4_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_4_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_4_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_4_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_4_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_4_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_4_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_4_42_43_44_45_7_8_118_119_tsni;
@@ -143,14 +143,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_4_42_43_44_45_7_8_118_119_tsni = functio
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_4_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_4_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_4_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_4_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_4_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_4_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_4_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_4_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_4_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_4_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_4_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_4_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_4_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_4_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_4_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_4_56_6_7_8_38_37_tsni;
@@ -179,24 +179,24 @@ match_xs_arm_Cons_inst_4_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_4
       return append_inst_4_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_4_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_4_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_4_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_4_57_7_8_117_tsni = function match_m_arm_StateT_inst_4_57_7_8_117_tsni(s, _deforest_StateT_run_inst_4_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_4_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_4_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_4_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_4_57_7_8_9_tsni = function match_xs_arm_Nil_inst_4_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_4_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return ys
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_4_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_4_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_4_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_4_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_4_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_4_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_4_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_4_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_4_61_7_8_118_119_tsni;
@@ -204,14 +204,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_4_61_7_8_118_119_tsni = function match_c
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_4_61_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_4_62_7_8_117_tsni = function match_m_arm_StateT_inst_4_62_7_8_117_tsni(s, _deforest_StateT_run_inst_4_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_4_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_4_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_4_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_4_62_7_8_9_tsni = function match_xs_arm_Cons_inst_4_62_7_8_9_tsni(f, _deforest_Cons_head_inst_4_62_7_8_9_tsni, _deforest_Cons_tail_inst_4_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_4_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_4_62_7_8_9_tsni, _deforest_Cons_tail_inst_4_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_4_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_4_62_7_8_9_tsni;
@@ -230,13 +230,13 @@ match_xs_arm_Cons_inst_4_62_7_8_9_tsni = function match_xs_arm_Cons_inst_4_62_7_
     tmp2 = concat_inst_4_62_7_8_38_tsni(xs1);
     return append_inst_4_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_xs_arm_Nil_inst_4_62_7_8_9_tsni = function match_xs_arm_Nil_inst_4_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_4_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return NofibPrelude.Nil
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_4_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_4_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_4_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_4_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_4_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_4_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_4_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_4_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_4_62_7_8_118_119_tsni;
@@ -244,14 +244,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_4_62_7_8_118_119_tsni = function match_c
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_4_62_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_64_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_64_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_64_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_64_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_64_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_64_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_64_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_64_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_64_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_64_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_64_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_64_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_64_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_64_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_64_5_6_7_8_38_37_tsni;
@@ -280,11 +280,11 @@ match_xs_arm_Cons_inst_64_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_6
       return append_inst_64_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_64_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_64_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_64_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_64_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_64_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_64_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_64_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_64_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_64_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_64_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_64_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_64_42_43_44_45_7_8_118_119_tsni;
@@ -292,14 +292,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_64_42_43_44_45_7_8_118_119_tsni = functi
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_64_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_64_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_64_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_64_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_64_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_64_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_64_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_64_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_64_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_64_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_64_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_64_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_64_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_64_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_64_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_64_56_6_7_8_38_37_tsni;
@@ -328,24 +328,24 @@ match_xs_arm_Cons_inst_64_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_
       return append_inst_64_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_64_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_64_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_64_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_64_57_7_8_117_tsni = function match_m_arm_StateT_inst_64_57_7_8_117_tsni(s, _deforest_StateT_run_inst_64_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_64_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_64_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_64_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_64_57_7_8_9_tsni = function match_xs_arm_Nil_inst_64_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_64_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return ys
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_64_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_64_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_64_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_64_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_64_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_64_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_64_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_64_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_64_61_7_8_118_119_tsni;
@@ -353,14 +353,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_64_61_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_64_61_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_64_62_7_8_117_tsni = function match_m_arm_StateT_inst_64_62_7_8_117_tsni(s, _deforest_StateT_run_inst_64_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_64_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_64_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_64_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_64_62_7_8_9_tsni = function match_xs_arm_Cons_inst_64_62_7_8_9_tsni(f, _deforest_Cons_head_inst_64_62_7_8_9_tsni, _deforest_Cons_tail_inst_64_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_64_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_64_62_7_8_9_tsni, _deforest_Cons_tail_inst_64_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_64_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_64_62_7_8_9_tsni;
@@ -379,13 +379,13 @@ match_xs_arm_Cons_inst_64_62_7_8_9_tsni = function match_xs_arm_Cons_inst_64_62_
     tmp2 = concat_inst_64_62_7_8_38_tsni(xs1);
     return append_inst_64_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_xs_arm_Nil_inst_64_62_7_8_9_tsni = function match_xs_arm_Nil_inst_64_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_64_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return NofibPrelude.Nil
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_64_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_64_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_64_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_64_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_64_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_64_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_64_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_64_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_64_62_7_8_118_119_tsni;
@@ -393,14 +393,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_64_62_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_64_62_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_65_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_65_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_65_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_65_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_65_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_65_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_65_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_65_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_65_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_65_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_65_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_65_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_65_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_65_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_65_5_6_7_8_38_37_tsni;
@@ -429,11 +429,11 @@ match_xs_arm_Cons_inst_65_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_6
       return append_inst_65_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_65_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_65_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_65_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_65_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_65_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_65_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_65_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_65_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_65_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_65_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_65_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_65_42_43_44_45_7_8_118_119_tsni;
@@ -441,14 +441,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_65_42_43_44_45_7_8_118_119_tsni = functi
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_65_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_65_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_65_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_65_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_65_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_65_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_65_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_65_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_65_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_65_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_65_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_65_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_65_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_65_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_65_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_65_56_6_7_8_38_37_tsni;
@@ -477,22 +477,22 @@ match_xs_arm_Cons_inst_65_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_
       return append_inst_65_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_65_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_65_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_65_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_65_57_7_8_117_tsni = function match_m_arm_StateT_inst_65_57_7_8_117_tsni(s, _deforest_StateT_run_inst_65_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_65_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_65_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_65_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_65_57_7_8_9_tsni = function match_xs_arm_Nil_inst_65_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_65_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return NofibPrelude.Nil
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_65_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_65_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_65_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_65_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_65_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_65_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_65_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_65_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_65_61_7_8_118_119_tsni;
@@ -500,14 +500,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_65_61_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return cryptarithm21.runStateT(tmp, ss)
-};
-match_m_arm_StateT_inst_65_62_7_8_117_tsni = function match_m_arm_StateT_inst_65_62_7_8_117_tsni(s, _deforest_StateT_run_inst_65_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_65_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_65_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_65_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_65_62_7_8_9_tsni = function match_xs_arm_Cons_inst_65_62_7_8_9_tsni(f, _deforest_Cons_head_inst_65_62_7_8_9_tsni, _deforest_Cons_tail_inst_65_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_65_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_65_62_7_8_9_tsni, _deforest_Cons_tail_inst_65_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_65_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_65_62_7_8_9_tsni;
@@ -526,15 +526,15 @@ match_xs_arm_Cons_inst_65_62_7_8_9_tsni = function match_xs_arm_Cons_inst_65_62_
     tmp2 = concat_inst_65_62_7_8_38_tsni(xs1);
     return append_inst_65_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_xs_arm_Nil_inst_65_62_7_8_9_tsni = function match_xs_arm_Nil_inst_65_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_65_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return match_xs_arm_Nil_inst_65_57_7_8_38_37_tsni(ys)
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_65_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_65_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_65_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_65_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_65_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_65_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_65_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_65_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_65_62_7_8_118_119_tsni;
@@ -542,14 +542,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_65_62_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_65_62_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_65_57_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_65_57_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_65_57_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_65_57_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_65_57_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_65_57_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_65_57_7_8_38_37_tsni = function match_xs_arm_Cons_inst_65_57_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_65_57_7_8_38_37_tsni, _deforest_Cons_tail_inst_65_57_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_65_57_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_65_57_7_8_38_37_tsni, _deforest_Cons_tail_inst_65_57_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_65_57_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_65_57_7_8_38_37_tsni;
@@ -557,17 +557,17 @@ match_xs_arm_Cons_inst_65_57_7_8_38_37_tsni = function match_xs_arm_Cons_inst_65
   xs = param1;
   tmp = append_inst_65_57_7_8_38_37_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
-match_xs_arm_Nil_inst_65_57_7_8_38_37_tsni = function match_xs_arm_Nil_inst_65_57_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_65_57_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_70_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_70_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_70_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_70_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_70_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_70_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_70_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_70_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_70_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_70_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_70_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_70_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_70_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_70_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_70_5_6_7_8_38_37_tsni;
@@ -596,11 +596,11 @@ match_xs_arm_Cons_inst_70_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_7
       return append_inst_70_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_70_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_70_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_70_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_70_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_70_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_70_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_70_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_70_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_70_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_70_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_70_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_70_42_43_44_45_7_8_118_119_tsni;
@@ -608,14 +608,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_70_42_43_44_45_7_8_118_119_tsni = functi
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_70_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_70_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_70_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_70_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_70_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_70_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_70_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_70_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_70_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_70_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_70_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_70_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_70_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_70_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_70_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_70_56_6_7_8_38_37_tsni;
@@ -644,22 +644,22 @@ match_xs_arm_Cons_inst_70_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_
       return append_inst_70_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_70_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_70_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_70_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_70_57_7_8_117_tsni = function match_m_arm_StateT_inst_70_57_7_8_117_tsni(s, _deforest_StateT_run_inst_70_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_70_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_70_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_70_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_70_57_7_8_9_tsni = function match_xs_arm_Nil_inst_70_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_70_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return NofibPrelude.Nil
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_70_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_70_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_70_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_70_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_70_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_70_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_70_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_70_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_70_61_7_8_118_119_tsni;
@@ -667,14 +667,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_70_61_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return cryptarithm21.runStateT(tmp, ss)
-};
-match_m_arm_StateT_inst_70_62_7_8_117_tsni = function match_m_arm_StateT_inst_70_62_7_8_117_tsni(s, _deforest_StateT_run_inst_70_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_70_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_70_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_70_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_70_62_7_8_9_tsni = function match_xs_arm_Cons_inst_70_62_7_8_9_tsni(f, _deforest_Cons_head_inst_70_62_7_8_9_tsni, _deforest_Cons_tail_inst_70_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_70_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_70_62_7_8_9_tsni, _deforest_Cons_tail_inst_70_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_70_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_70_62_7_8_9_tsni;
@@ -693,15 +693,15 @@ match_xs_arm_Cons_inst_70_62_7_8_9_tsni = function match_xs_arm_Cons_inst_70_62_
     tmp2 = concat_inst_70_62_7_8_38_tsni(xs1);
     return append_inst_70_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_xs_arm_Nil_inst_70_62_7_8_9_tsni = function match_xs_arm_Nil_inst_70_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_70_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return match_xs_arm_Nil_inst_70_57_7_8_38_37_tsni(ys)
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_70_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_70_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_70_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_70_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_70_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_70_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_70_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_70_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_70_62_7_8_118_119_tsni;
@@ -709,14 +709,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_70_62_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_70_62_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_70_57_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_70_57_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_70_57_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_70_57_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_70_57_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_70_57_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_70_57_7_8_38_37_tsni = function match_xs_arm_Cons_inst_70_57_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_70_57_7_8_38_37_tsni, _deforest_Cons_tail_inst_70_57_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_70_57_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_70_57_7_8_38_37_tsni, _deforest_Cons_tail_inst_70_57_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_70_57_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_70_57_7_8_38_37_tsni;
@@ -724,17 +724,17 @@ match_xs_arm_Cons_inst_70_57_7_8_38_37_tsni = function match_xs_arm_Cons_inst_70
   xs = param1;
   tmp = append_inst_70_57_7_8_38_37_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
-match_xs_arm_Nil_inst_70_57_7_8_38_37_tsni = function match_xs_arm_Nil_inst_70_57_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_70_57_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_71_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_71_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_71_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_71_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_71_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_71_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_71_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_71_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_71_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_71_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_71_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_71_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_71_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_71_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_71_5_6_7_8_38_37_tsni;
@@ -763,11 +763,11 @@ match_xs_arm_Cons_inst_71_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_7
       return append_inst_71_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_71_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_71_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_71_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_71_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_71_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_71_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_71_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_71_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_71_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_71_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_71_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_71_42_43_44_45_7_8_118_119_tsni;
@@ -775,14 +775,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_71_42_43_44_45_7_8_118_119_tsni = functi
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_71_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_71_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_71_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_71_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_71_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_71_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_71_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_71_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_71_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_71_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_71_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_71_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_71_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_71_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_71_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_71_56_6_7_8_38_37_tsni;
@@ -811,24 +811,24 @@ match_xs_arm_Cons_inst_71_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_
       return append_inst_71_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_71_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_71_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_71_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_71_57_7_8_117_tsni = function match_m_arm_StateT_inst_71_57_7_8_117_tsni(s, _deforest_StateT_run_inst_71_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_71_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_71_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_71_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_71_57_7_8_9_tsni = function match_xs_arm_Nil_inst_71_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_71_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return ys
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_71_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_71_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_71_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_71_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_71_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_71_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_71_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_71_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_71_61_7_8_118_119_tsni;
@@ -836,14 +836,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_71_61_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_71_61_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_71_62_7_8_117_tsni = function match_m_arm_StateT_inst_71_62_7_8_117_tsni(s, _deforest_StateT_run_inst_71_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_71_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_71_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_71_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_71_62_7_8_9_tsni = function match_xs_arm_Cons_inst_71_62_7_8_9_tsni(f, _deforest_Cons_head_inst_71_62_7_8_9_tsni, _deforest_Cons_tail_inst_71_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_71_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_71_62_7_8_9_tsni, _deforest_Cons_tail_inst_71_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_71_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_71_62_7_8_9_tsni;
@@ -862,15 +862,15 @@ match_xs_arm_Cons_inst_71_62_7_8_9_tsni = function match_xs_arm_Cons_inst_71_62_
     tmp2 = concat_inst_71_62_7_8_38_tsni(xs1);
     return append_inst_71_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_xs_arm_Nil_inst_71_62_7_8_9_tsni = function match_xs_arm_Nil_inst_71_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_71_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return match_xs_arm_Nil_inst_71_57_7_8_38_37_tsni(ys)
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_71_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_71_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_71_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_71_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_71_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_71_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_71_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_71_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_71_62_7_8_118_119_tsni;
@@ -878,14 +878,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_71_62_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return cryptarithm21.runStateT(tmp, ss)
-};
-match_m_arm_StateT_inst_71_57_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_71_57_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_71_57_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_71_57_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_71_57_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_71_57_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_71_57_7_8_38_37_tsni = function match_xs_arm_Cons_inst_71_57_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_71_57_7_8_38_37_tsni, _deforest_Cons_tail_inst_71_57_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_71_57_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_71_57_7_8_38_37_tsni, _deforest_Cons_tail_inst_71_57_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_71_57_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_71_57_7_8_38_37_tsni;
@@ -902,17 +902,17 @@ match_xs_arm_Cons_inst_71_57_7_8_38_37_tsni = function match_xs_arm_Cons_inst_71
     tmp = append_inst_71_61_7_8_38_37_tsni(xs, ys1);
     return NofibPrelude.Cons(x, tmp)
   }
-};
-match_xs_arm_Nil_inst_71_57_7_8_38_37_tsni = function match_xs_arm_Nil_inst_71_57_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_71_57_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_72_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_72_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_72_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_72_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_72_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_72_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_72_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_72_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_72_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_72_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_72_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_72_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_72_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_72_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_72_5_6_7_8_38_37_tsni;
@@ -941,11 +941,11 @@ match_xs_arm_Cons_inst_72_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_7
       return append_inst_72_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_72_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_72_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_72_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_72_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_72_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_72_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_72_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_72_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_72_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_72_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_72_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_72_42_43_44_45_7_8_118_119_tsni;
@@ -953,14 +953,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_72_42_43_44_45_7_8_118_119_tsni = functi
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_72_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_72_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_72_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_72_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_72_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_72_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_72_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_72_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_72_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_72_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_72_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_72_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_72_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_72_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_72_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_72_56_6_7_8_38_37_tsni;
@@ -989,24 +989,24 @@ match_xs_arm_Cons_inst_72_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_
       return append_inst_72_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_72_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_72_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_72_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_72_57_7_8_117_tsni = function match_m_arm_StateT_inst_72_57_7_8_117_tsni(s, _deforest_StateT_run_inst_72_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_72_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_72_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_72_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_72_57_7_8_9_tsni = function match_xs_arm_Nil_inst_72_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_72_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return ys
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_72_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_72_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_72_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_72_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_72_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_72_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_72_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_72_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_72_61_7_8_118_119_tsni;
@@ -1014,14 +1014,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_72_61_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_72_61_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_72_62_7_8_117_tsni = function match_m_arm_StateT_inst_72_62_7_8_117_tsni(s, _deforest_StateT_run_inst_72_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_72_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_72_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_72_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_72_62_7_8_9_tsni = function match_xs_arm_Cons_inst_72_62_7_8_9_tsni(f, _deforest_Cons_head_inst_72_62_7_8_9_tsni, _deforest_Cons_tail_inst_72_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_72_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_72_62_7_8_9_tsni, _deforest_Cons_tail_inst_72_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_72_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_72_62_7_8_9_tsni;
@@ -1040,15 +1040,15 @@ match_xs_arm_Cons_inst_72_62_7_8_9_tsni = function match_xs_arm_Cons_inst_72_62_
     tmp2 = concat_inst_72_62_7_8_38_tsni(xs1);
     return append_inst_72_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_xs_arm_Nil_inst_72_62_7_8_9_tsni = function match_xs_arm_Nil_inst_72_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_72_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return match_xs_arm_Nil_inst_72_57_7_8_38_37_tsni(ys)
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_72_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_72_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_72_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_72_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_72_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_72_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_72_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_72_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_72_62_7_8_118_119_tsni;
@@ -1056,14 +1056,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_72_62_7_8_118_119_tsni = function match_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return cryptarithm21.runStateT(tmp, ss)
-};
-match_m_arm_StateT_inst_72_57_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_72_57_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_72_57_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_72_57_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_72_57_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_72_57_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_72_57_7_8_38_37_tsni = function match_xs_arm_Cons_inst_72_57_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_72_57_7_8_38_37_tsni, _deforest_Cons_tail_inst_72_57_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_72_57_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_72_57_7_8_38_37_tsni, _deforest_Cons_tail_inst_72_57_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_72_57_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_72_57_7_8_38_37_tsni;
@@ -1080,11 +1080,11 @@ match_xs_arm_Cons_inst_72_57_7_8_38_37_tsni = function match_xs_arm_Cons_inst_72
     tmp = append_inst_72_61_7_8_38_37_tsni(xs, ys1);
     return NofibPrelude.Cons(x, tmp)
   }
-};
-match_xs_arm_Nil_inst_72_57_7_8_38_37_tsni = function match_xs_arm_Nil_inst_72_57_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_72_57_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_xs_arm_Cons_inst_89_121_37_tsni = function match_xs_arm_Cons_inst_89_121_37_tsni(ys, _deforest_Cons_head_inst_89_121_37_tsni, _deforest_Cons_tail_inst_89_121_37_tsni) {
+});
+match_xs_arm_Cons_inst_89_121_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_89_121_37_tsni, _deforest_Cons_tail_inst_89_121_37_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_89_121_37_tsni;
   param1 = _deforest_Cons_tail_inst_89_121_37_tsni;
@@ -1092,17 +1092,17 @@ match_xs_arm_Cons_inst_89_121_37_tsni = function match_xs_arm_Cons_inst_89_121_3
   xs = param1;
   tmp = append_inst_89_121_37_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
-match_m_arm_StateT_inst_100_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_100_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_100_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_100_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_100_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_100_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_100_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_100_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_100_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_xs_arm_Cons_inst_100_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_100_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_100_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_100_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_100_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_100_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_100_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_100_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_100_6_7_8_38_37_tsni;
@@ -1110,14 +1110,14 @@ match_xs_arm_Cons_inst_100_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_10
   xs = param1;
   tmp = append_inst_100_6_7_8_38_37_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
-match_m_arm_StateT_inst_101_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_101_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_101_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_101_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_101_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_101_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_101_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_101_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_101_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_101_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_101_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_101_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_101_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_101_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_101_5_6_7_8_38_37_tsni;
@@ -1146,11 +1146,11 @@ match_xs_arm_Cons_inst_101_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_
       return append_inst_101_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_101_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_101_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_101_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_101_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_101_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_101_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_101_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_101_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_101_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_101_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_101_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_101_42_43_44_45_7_8_118_119_tsni;
@@ -1158,14 +1158,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_101_42_43_44_45_7_8_118_119_tsni = funct
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_101_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_101_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_101_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_101_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_101_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_101_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_101_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_101_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_101_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_101_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_101_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_101_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_101_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_101_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_101_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_101_56_6_7_8_38_37_tsni;
@@ -1194,24 +1194,24 @@ match_xs_arm_Cons_inst_101_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst
       return append_inst_101_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_101_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_101_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_101_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_101_57_7_8_117_tsni = function match_m_arm_StateT_inst_101_57_7_8_117_tsni(s, _deforest_StateT_run_inst_101_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_101_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_101_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_101_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_101_57_7_8_9_tsni = function match_xs_arm_Nil_inst_101_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_101_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return ys
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_101_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_101_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_101_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_101_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_101_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_101_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_101_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_101_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_101_61_7_8_118_119_tsni;
@@ -1219,14 +1219,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_101_61_7_8_118_119_tsni = function match
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_101_61_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_101_62_7_8_117_tsni = function match_m_arm_StateT_inst_101_62_7_8_117_tsni(s, _deforest_StateT_run_inst_101_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_101_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_101_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_101_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_101_62_7_8_9_tsni = function match_xs_arm_Cons_inst_101_62_7_8_9_tsni(f, _deforest_Cons_head_inst_101_62_7_8_9_tsni, _deforest_Cons_tail_inst_101_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_101_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_101_62_7_8_9_tsni, _deforest_Cons_tail_inst_101_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_101_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_101_62_7_8_9_tsni;
@@ -1245,13 +1245,13 @@ match_xs_arm_Cons_inst_101_62_7_8_9_tsni = function match_xs_arm_Cons_inst_101_6
     tmp2 = concat_inst_101_62_7_8_38_tsni(xs1);
     return append_inst_101_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_xs_arm_Nil_inst_101_62_7_8_9_tsni = function match_xs_arm_Nil_inst_101_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_101_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return NofibPrelude.Nil
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_101_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_101_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_101_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_101_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_101_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_101_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_101_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_101_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_101_62_7_8_118_119_tsni;
@@ -1259,30 +1259,30 @@ match_caseScrut_arm_Deforest_Arr_2_inst_101_62_7_8_118_119_tsni = function match
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_101_62_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_102_103_57_7_8_117_tsni = function match_m_arm_StateT_inst_102_103_57_7_8_117_tsni(s, _deforest_StateT_run_inst_102_103_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_102_103_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_102_103_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_102_103_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_102_103_57_7_8_9_tsni = function match_xs_arm_Nil_inst_102_103_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_102_103_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return ys
     }
   }
-};
-match_m_arm_StateT_inst_102_103_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_102_103_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_102_103_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_102_103_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_102_103_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_102_103_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_102_103_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_102_103_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_102_103_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_xs_arm_Cons_inst_102_103_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_102_103_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_102_103_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_102_103_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_102_103_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_102_103_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_102_103_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_102_103_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_102_103_56_6_7_8_38_37_tsni;
@@ -1311,8 +1311,8 @@ match_xs_arm_Cons_inst_102_103_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_
       return append_inst_102_103_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_102_103_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_102_103_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_102_103_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_102_103_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_102_103_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_102_103_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_102_103_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_102_103_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_102_103_61_7_8_118_119_tsni;
@@ -1320,19 +1320,19 @@ match_caseScrut_arm_Deforest_Arr_2_inst_102_103_61_7_8_118_119_tsni = function m
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_102_103_61_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_102_103_62_7_8_117_tsni = function match_m_arm_StateT_inst_102_103_62_7_8_117_tsni(s, _deforest_StateT_run_inst_102_103_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_102_103_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_102_103_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_102_103_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_102_103_62_7_8_9_tsni = function match_xs_arm_Nil_inst_102_103_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_102_103_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return NofibPrelude.Nil
   }
-};
-match_xs_arm_Cons_inst_102_103_62_7_8_9_tsni = function match_xs_arm_Cons_inst_102_103_62_7_8_9_tsni(f, _deforest_Cons_head_inst_102_103_62_7_8_9_tsni, _deforest_Cons_tail_inst_102_103_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_102_103_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_102_103_62_7_8_9_tsni, _deforest_Cons_tail_inst_102_103_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_102_103_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_102_103_62_7_8_9_tsni;
@@ -1351,8 +1351,8 @@ match_xs_arm_Cons_inst_102_103_62_7_8_9_tsni = function match_xs_arm_Cons_inst_1
     tmp2 = concat_inst_102_103_62_7_8_38_tsni(xs1);
     return append_inst_102_103_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_102_103_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_102_103_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_102_103_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_102_103_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_102_103_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_102_103_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_102_103_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_102_103_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_102_103_62_7_8_118_119_tsni;
@@ -1360,17 +1360,17 @@ match_caseScrut_arm_Deforest_Arr_2_inst_102_103_62_7_8_118_119_tsni = function m
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_102_103_62_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_102_103_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_102_103_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_102_103_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_102_103_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_102_103_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_102_103_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_102_103_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_102_103_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_102_103_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_xs_arm_Cons_inst_102_103_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_102_103_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_102_103_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_102_103_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_102_103_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_102_103_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_102_103_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_102_103_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_102_103_5_6_7_8_38_37_tsni;
@@ -1399,8 +1399,8 @@ match_xs_arm_Cons_inst_102_103_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_i
       return append_inst_102_103_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_102_103_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_102_103_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_102_103_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_102_103_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_102_103_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_102_103_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_102_103_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_102_103_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_102_103_42_43_44_45_7_8_118_119_tsni;
@@ -1408,8 +1408,8 @@ match_caseScrut_arm_Deforest_Arr_2_inst_102_103_42_43_44_45_7_8_118_119_tsni = f
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_102_103_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_xs_arm_Cons_inst_102_108_121_37_tsni = function match_xs_arm_Cons_inst_102_108_121_37_tsni(ys, _deforest_Cons_head_inst_102_108_121_37_tsni, _deforest_Cons_tail_inst_102_108_121_37_tsni) {
+});
+match_xs_arm_Cons_inst_102_108_121_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_102_108_121_37_tsni, _deforest_Cons_tail_inst_102_108_121_37_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_102_108_121_37_tsni;
   param1 = _deforest_Cons_tail_inst_102_108_121_37_tsni;
@@ -1417,8 +1417,8 @@ match_xs_arm_Cons_inst_102_108_121_37_tsni = function match_xs_arm_Cons_inst_102
   xs = param1;
   tmp = append_inst_102_108_121_37_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
-match_xs_arm_Cons_inst_110_111_108_121_37_tsni = function match_xs_arm_Cons_inst_110_111_108_121_37_tsni(ys, _deforest_Cons_head_inst_110_111_108_121_37_tsni, _deforest_Cons_tail_inst_110_111_108_121_37_tsni) {
+});
+match_xs_arm_Cons_inst_110_111_108_121_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_110_111_108_121_37_tsni, _deforest_Cons_tail_inst_110_111_108_121_37_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_110_111_108_121_37_tsni;
   param1 = _deforest_Cons_tail_inst_110_111_108_121_37_tsni;
@@ -1426,14 +1426,14 @@ match_xs_arm_Cons_inst_110_111_108_121_37_tsni = function match_xs_arm_Cons_inst
   xs = param1;
   tmp = append_inst_110_111_108_121_37_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
-match_m_arm_StateT_inst_110_111_103_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_110_111_103_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_110_111_103_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_110_111_103_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_110_111_103_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_110_111_103_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_110_111_103_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_110_111_103_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_110_111_103_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_110_111_103_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_110_111_103_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_110_111_103_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_110_111_103_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_110_111_103_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_110_111_103_5_6_7_8_38_37_tsni;
@@ -1462,11 +1462,11 @@ match_xs_arm_Cons_inst_110_111_103_5_6_7_8_38_37_tsni = function match_xs_arm_Co
       return append_inst_110_111_103_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_110_111_103_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_110_111_103_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_110_111_103_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_110_111_103_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_110_111_103_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_110_111_103_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_110_111_103_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_110_111_103_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_110_111_103_42_43_44_45_7_8_118_119_tsni;
@@ -1474,14 +1474,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_42_43_44_45_7_8_118_119_tsni
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_110_111_103_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_110_111_103_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_110_111_103_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_110_111_103_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_110_111_103_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_110_111_103_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_110_111_103_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_110_111_103_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_110_111_103_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_110_111_103_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_110_111_103_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_110_111_103_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_110_111_103_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_110_111_103_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_110_111_103_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_110_111_103_56_6_7_8_38_37_tsni;
@@ -1510,24 +1510,24 @@ match_xs_arm_Cons_inst_110_111_103_56_6_7_8_38_37_tsni = function match_xs_arm_C
       return append_inst_110_111_103_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_110_111_103_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_110_111_103_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_110_111_103_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_m_arm_StateT_inst_110_111_103_57_7_8_117_tsni = function match_m_arm_StateT_inst_110_111_103_57_7_8_117_tsni(s, _deforest_StateT_run_inst_110_111_103_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_110_111_103_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_110_111_103_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_110_111_103_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_110_111_103_57_7_8_9_tsni = function match_xs_arm_Nil_inst_110_111_103_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_110_111_103_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return ys
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_110_111_103_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_110_111_103_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_110_111_103_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_110_111_103_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_110_111_103_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_110_111_103_61_7_8_118_119_tsni;
@@ -1535,14 +1535,14 @@ match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_61_7_8_118_119_tsni = functi
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_110_111_103_61_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_110_111_103_62_7_8_117_tsni = function match_m_arm_StateT_inst_110_111_103_62_7_8_117_tsni(s, _deforest_StateT_run_inst_110_111_103_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_110_111_103_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_110_111_103_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_110_111_103_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Cons_inst_110_111_103_62_7_8_9_tsni = function match_xs_arm_Cons_inst_110_111_103_62_7_8_9_tsni(f, _deforest_Cons_head_inst_110_111_103_62_7_8_9_tsni, _deforest_Cons_tail_inst_110_111_103_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_110_111_103_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_110_111_103_62_7_8_9_tsni, _deforest_Cons_tail_inst_110_111_103_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_110_111_103_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_110_111_103_62_7_8_9_tsni;
@@ -1561,13 +1561,13 @@ match_xs_arm_Cons_inst_110_111_103_62_7_8_9_tsni = function match_xs_arm_Cons_in
     tmp2 = concat_inst_110_111_103_62_7_8_38_tsni(xs1);
     return append_inst_110_111_103_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_xs_arm_Nil_inst_110_111_103_62_7_8_9_tsni = function match_xs_arm_Nil_inst_110_111_103_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_110_111_103_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return NofibPrelude.Nil
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_110_111_103_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_110_111_103_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_110_111_103_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_110_111_103_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_110_111_103_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_110_111_103_62_7_8_118_119_tsni;
@@ -1575,30 +1575,30 @@ match_caseScrut_arm_Deforest_Arr_2_inst_110_111_103_62_7_8_118_119_tsni = functi
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_110_111_103_62_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_112_113_111_103_57_7_8_117_tsni = function match_m_arm_StateT_inst_112_113_111_103_57_7_8_117_tsni(s, _deforest_StateT_run_inst_112_113_111_103_57_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_112_113_111_103_57_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_112_113_111_103_57_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_112_113_111_103_57_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_112_113_111_103_57_7_8_9_tsni = function match_xs_arm_Nil_inst_112_113_111_103_57_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_112_113_111_103_57_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return (ys) => {
       return ys
     }
   }
-};
-match_m_arm_StateT_inst_112_113_111_103_56_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_112_113_111_103_56_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_112_113_111_103_56_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_112_113_111_103_56_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_112_113_111_103_56_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_112_113_111_103_56_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_112_113_111_103_56_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_112_113_111_103_56_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_112_113_111_103_56_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_xs_arm_Cons_inst_112_113_111_103_56_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_112_113_111_103_56_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_112_113_111_103_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_112_113_111_103_56_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_112_113_111_103_56_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_112_113_111_103_56_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_112_113_111_103_56_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_112_113_111_103_56_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_112_113_111_103_56_6_7_8_38_37_tsni;
@@ -1627,8 +1627,8 @@ match_xs_arm_Cons_inst_112_113_111_103_56_6_7_8_38_37_tsni = function match_xs_a
       return append_inst_112_113_111_103_61_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_61_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_61_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_112_113_111_103_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_112_113_111_103_61_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_61_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_112_113_111_103_61_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_112_113_111_103_61_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_112_113_111_103_61_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_112_113_111_103_61_7_8_118_119_tsni;
@@ -1636,19 +1636,19 @@ match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_61_7_8_118_119_tsni = fu
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_112_113_111_103_61_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_112_113_111_103_62_7_8_117_tsni = function match_m_arm_StateT_inst_112_113_111_103_62_7_8_117_tsni(s, _deforest_StateT_run_inst_112_113_111_103_62_7_8_117_tsni) {
+});
+match_m_arm_StateT_inst_112_113_111_103_62_7_8_117_tsni = (undefined, function (s, _deforest_StateT_run_inst_112_113_111_103_62_7_8_117_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_112_113_111_103_62_7_8_117_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_112_113_111_103_62_7_8_9_tsni = function match_xs_arm_Nil_inst_112_113_111_103_62_7_8_9_tsni(f) {
+});
+match_xs_arm_Nil_inst_112_113_111_103_62_7_8_9_tsni = (undefined, function (f) {
   return () => {
     return NofibPrelude.Nil
   }
-};
-match_xs_arm_Cons_inst_112_113_111_103_62_7_8_9_tsni = function match_xs_arm_Cons_inst_112_113_111_103_62_7_8_9_tsni(f, _deforest_Cons_head_inst_112_113_111_103_62_7_8_9_tsni, _deforest_Cons_tail_inst_112_113_111_103_62_7_8_9_tsni) {
+});
+match_xs_arm_Cons_inst_112_113_111_103_62_7_8_9_tsni = (undefined, function (f, _deforest_Cons_head_inst_112_113_111_103_62_7_8_9_tsni, _deforest_Cons_tail_inst_112_113_111_103_62_7_8_9_tsni) {
   let param0, param1, x, xs, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_112_113_111_103_62_7_8_9_tsni;
   param1 = _deforest_Cons_tail_inst_112_113_111_103_62_7_8_9_tsni;
@@ -1667,8 +1667,8 @@ match_xs_arm_Cons_inst_112_113_111_103_62_7_8_9_tsni = function match_xs_arm_Con
     tmp2 = concat_inst_112_113_111_103_62_7_8_38_tsni(xs1);
     return append_inst_112_113_111_103_62_7_8_38_37_tsni(x1, tmp2)
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_62_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_62_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_112_113_111_103_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_112_113_111_103_62_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_62_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_112_113_111_103_62_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_112_113_111_103_62_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_112_113_111_103_62_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_112_113_111_103_62_7_8_118_119_tsni;
@@ -1676,17 +1676,17 @@ match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_62_7_8_118_119_tsni = fu
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_112_113_111_103_62_7_8_118_119_120_tsni(tmp, ss)
-};
-match_m_arm_StateT_inst_112_113_111_103_5_6_7_8_118_119_120_tsni = function match_m_arm_StateT_inst_112_113_111_103_5_6_7_8_118_119_120_tsni(s, _deforest_StateT_run_inst_112_113_111_103_5_6_7_8_118_119_120_tsni) {
+});
+match_m_arm_StateT_inst_112_113_111_103_5_6_7_8_118_119_120_tsni = (undefined, function (s, _deforest_StateT_run_inst_112_113_111_103_5_6_7_8_118_119_120_tsni) {
   let param0, run;
   param0 = _deforest_StateT_run_inst_112_113_111_103_5_6_7_8_118_119_120_tsni;
   run = param0;
   return runtime.safeCall(run(s))
-};
-match_xs_arm_Nil_inst_112_113_111_103_5_6_7_8_38_37_tsni = function match_xs_arm_Nil_inst_112_113_111_103_5_6_7_8_38_37_tsni(ys) {
+});
+match_xs_arm_Nil_inst_112_113_111_103_5_6_7_8_38_37_tsni = (undefined, function (ys) {
   return ys
-};
-match_xs_arm_Cons_inst_112_113_111_103_5_6_7_8_38_37_tsni = function match_xs_arm_Cons_inst_112_113_111_103_5_6_7_8_38_37_tsni(ys, _deforest_Cons_head_inst_112_113_111_103_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_112_113_111_103_5_6_7_8_38_37_tsni) {
+});
+match_xs_arm_Cons_inst_112_113_111_103_5_6_7_8_38_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_112_113_111_103_5_6_7_8_38_37_tsni, _deforest_Cons_tail_inst_112_113_111_103_5_6_7_8_38_37_tsni) {
   let param0, param1, x, xs, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_112_113_111_103_5_6_7_8_38_37_tsni;
   param1 = _deforest_Cons_tail_inst_112_113_111_103_5_6_7_8_38_37_tsni;
@@ -1715,8 +1715,8 @@ match_xs_arm_Cons_inst_112_113_111_103_5_6_7_8_38_37_tsni = function match_xs_ar
       return append_inst_112_113_111_103_42_43_44_45_7_8_38_37_tsni(x2, tmp3)
     }
   }
-};
-match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni = function match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni(f, _deforest_Deforest_Arr_2_0_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni) {
+});
+match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni, _deforest_Deforest_Arr_2_1_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni) {
   let first1, first0, a, ss, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_112_113_111_103_42_43_44_45_7_8_118_119_tsni;
@@ -1724,8 +1724,8 @@ match_caseScrut_arm_Deforest_Arr_2_inst_112_113_111_103_42_43_44_45_7_8_118_119_
   ss = first1;
   tmp = runtime.safeCall(f(a));
   return runStateT_inst_112_113_111_103_42_43_44_45_7_8_118_119_120_tsni(tmp, ss)
-};
-match_xs_arm_Cons_inst_112_113_111_108_121_37_tsni = function match_xs_arm_Cons_inst_112_113_111_108_121_37_tsni(ys, _deforest_Cons_head_inst_112_113_111_108_121_37_tsni, _deforest_Cons_tail_inst_112_113_111_108_121_37_tsni) {
+});
+match_xs_arm_Cons_inst_112_113_111_108_121_37_tsni = (undefined, function (ys, _deforest_Cons_head_inst_112_113_111_108_121_37_tsni, _deforest_Cons_tail_inst_112_113_111_108_121_37_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_112_113_111_108_121_37_tsni;
   param1 = _deforest_Cons_tail_inst_112_113_111_108_121_37_tsni;
@@ -1733,7 +1733,7 @@ match_xs_arm_Cons_inst_112_113_111_108_121_37_tsni = function match_xs_arm_Cons_
   xs = param1;
   tmp = append_inst_112_113_111_108_121_37_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
+});
 lookup_inst_0_1_tsni = function lookup_inst_0_1_tsni(k, t) {
   let param0, param1, first1, first0, x, v, t1, scrut, _deforest_Some_x;
   if (t instanceof NofibPrelude.Nil.class) {

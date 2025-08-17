@@ -116,8 +116,9 @@ object Deforest:
         deforestImport2(path.replace(".mjs", ".mls"), wd)
     try
       val pre = new DeforestPreAnalyzer(p.main, importedInfo)
-      // println(pre.dummyRefsToTopLevelLikeFuns.view.mapValues(v => v.uid).toMap)
       val col = new DeforestConstraintsCollector(pre)
+      // col.funSymToProdStratScheme.recursiveGroups.foreach: g =>
+      //   println(g)
       val ana = new DeforestConstrainSolver(col)
       val rwp = new DeforestRewritePrepare(ana)
       val rw = new DeforestRewriter(rwp)

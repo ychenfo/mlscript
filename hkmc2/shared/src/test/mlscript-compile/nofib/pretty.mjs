@@ -3,7 +3,7 @@ import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
 let pp_word, pretty_stuff, pretty1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda$, lambda$1, lambda$2, pretty_stuff$, lambda$3, lambda_inst_0_1_tsni, ppStr_inst_0_1_2_tsni, lambda$_inst_3_4_tsni, lambda_inst_3_4_1_tsni, ppStr_inst_3_4_1_2_tsni, lambda_inst_5_6_tsni, lambda$_inst_5_6_4_tsni, lambda_inst_5_6_4_1_tsni, ppStr_inst_5_6_4_1_2_tsni, pretty_stuff$_inst_7_8_tsni, lambda_inst_7_8_6_tsni, lambda$_inst_7_8_6_4_tsni, lambda_inst_7_8_6_4_1_tsni, ppStr_inst_7_8_6_4_1_2_tsni, flatten_inst_9_10_tsni, flattenS_inst_9_10_tsni, cShow_inst_11_12_tsni, flatten_inst_11_12_10_tsni, flattenS_inst_11_12_10_tsni, cShow_inst_13_14_tsni, flatten_inst_13_14_10_tsni, flattenS_inst_13_14_10_tsni, pretty_stuff_inst_15_16_tsni, pretty_stuff$_inst_15_16_8_tsni, lambda_inst_15_16_8_6_tsni, lambda$_inst_15_16_8_6_4_tsni, lambda_inst_15_16_8_6_4_1_tsni, ppStr_inst_15_16_8_6_4_1_2_tsni, ppShow_inst_15_17_tsni, cShow_inst_15_17_12_tsni, flatten_inst_15_17_12_10_tsni, flattenS_inst_15_17_12_10_tsni, mkIndent_inst_15_17_12_10_18_tsni, append_inst_15_17_12_10_19_tsni, mkIndent_inst_15_17_12_10_20_tsni, append_inst_15_17_12_10_21_tsni, testPretty_nofib_inst_22_23_tsni, ppShow_inst_22_23_17_tsni, cShow_inst_22_23_17_12_tsni, flatten_inst_22_23_17_12_10_tsni, flattenS_inst_22_23_17_12_10_tsni, mkIndent_inst_22_23_17_12_10_18_tsni, mkIndent_inst_22_23_17_12_10_20_tsni, append_inst_22_23_17_12_10_19_tsni, append_inst_22_23_17_12_10_21_tsni, pretty_stuff_inst_22_23_16_tsni, pretty_stuff$_inst_22_23_16_8_tsni, lambda_inst_22_23_16_8_6_tsni, lambda$_inst_22_23_16_8_6_4_tsni, lambda_inst_22_23_16_8_6_4_1_tsni, ppStr_inst_22_23_16_8_6_4_1_2_tsni, ppHang_inst_0_24_tsni, ppHang_inst_3_4_24_tsni, ppHang_inst_5_6_4_24_tsni, ppHang_inst_7_8_6_4_24_tsni, ppHang_inst_15_16_8_6_4_24_tsni, append_inst_15_25_tsni, append_inst_22_23_25_tsni, ppHang_inst_22_23_16_8_6_4_24_tsni, match_xs_arm_Cons_inst_15_25_tsni, match_xs_arm_Cons_inst_22_23_25_tsni;
-match_xs_arm_Cons_inst_15_25_tsni = function match_xs_arm_Cons_inst_15_25_tsni(ys, _deforest_Cons_head_inst_15_25_tsni, _deforest_Cons_tail_inst_15_25_tsni) {
+match_xs_arm_Cons_inst_15_25_tsni = (undefined, function (ys, _deforest_Cons_head_inst_15_25_tsni, _deforest_Cons_tail_inst_15_25_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_15_25_tsni;
   param1 = _deforest_Cons_tail_inst_15_25_tsni;
@@ -11,8 +11,8 @@ match_xs_arm_Cons_inst_15_25_tsni = function match_xs_arm_Cons_inst_15_25_tsni(y
   xs = param1;
   tmp = append_inst_15_25_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
-match_xs_arm_Cons_inst_22_23_25_tsni = function match_xs_arm_Cons_inst_22_23_25_tsni(ys, _deforest_Cons_head_inst_22_23_25_tsni, _deforest_Cons_tail_inst_22_23_25_tsni) {
+});
+match_xs_arm_Cons_inst_22_23_25_tsni = (undefined, function (ys, _deforest_Cons_head_inst_22_23_25_tsni, _deforest_Cons_tail_inst_22_23_25_tsni) {
   let param0, param1, x, xs, tmp;
   param0 = _deforest_Cons_head_inst_22_23_25_tsni;
   param1 = _deforest_Cons_tail_inst_22_23_25_tsni;
@@ -20,7 +20,7 @@ match_xs_arm_Cons_inst_22_23_25_tsni = function match_xs_arm_Cons_inst_22_23_25_
   xs = param1;
   tmp = append_inst_22_23_25_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
-};
+});
 lambda_inst_0_1_tsni = (undefined, function (a, b) {
   let tmp;
   tmp = NofibPrelude.nofibStringToList("This is the label");

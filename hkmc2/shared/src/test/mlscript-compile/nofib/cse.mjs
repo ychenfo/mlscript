@@ -3,7 +3,7 @@ import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
 let label, labelOf, lscomp, sim, cse1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13, lambda$14, lambda$15, lambda$16, lambda$17, lscomp$, cse_inst_0_1_tsni, ltGraph_inst_0_1_2_tsni, map_inst_0_1_2_3_tsni, take_inst_0_4_tsni, set__inst_5_6_tsni, lambda_inst_5_6_7_tsni, lambda$_inst_5_6_7_8_tsni, lambda$_inst_9_10_tsni, set__inst_9_10_6_tsni, lambda_inst_9_10_6_7_tsni, lambda$_inst_9_10_6_7_8_tsni, map_inst_11_3_tsni, lambda_inst_12_13_tsni, lambda$_inst_12_13_10_tsni, set__inst_12_13_10_6_tsni, lambda_inst_12_13_10_6_7_tsni, lambda$_inst_12_13_10_6_7_8_tsni, fetch_inst_12_14_tsni, ltGraph_inst_15_2_tsni, map_inst_15_2_3_tsni, lambda_inst_16_17_tsni, cse_inst_16_17_1_tsni, ltGraph_inst_16_17_1_2_tsni, map_inst_16_17_1_2_3_tsni, take_inst_16_17_4_tsni, enumFromTo_inst_16_18_tsni, testCse_nofib_inst_19_20_tsni, enumFromTo_inst_19_20_18_tsni, lambda_inst_19_20_17_tsni, cse_inst_19_20_17_1_tsni, ltGraph_inst_19_20_17_1_2_tsni, map_inst_19_20_17_1_2_3_tsni, take_inst_19_20_17_4_tsni, concat_inst_0_1_2_21_tsni, map_inst_0_22_tsni, bind_inst_5_23_tsni, lambda_inst_5_23_24_tsni, lambda$_inst_5_23_24_25_tsni, bind_inst_9_10_23_tsni, lambda_inst_9_10_23_24_tsni, lambda$_inst_9_10_23_24_25_tsni, scanr_inst_26_tsni, scanl_inst_27_tsni, concat_inst_11_21_tsni, bind_inst_12_13_10_23_tsni, lambda_inst_12_13_10_23_24_tsni, lambda$_inst_12_13_10_23_24_25_tsni, bind_inst_12_28_tsni, lambda_inst_12_28_24_tsni, lambda$_inst_12_28_24_25_tsni, concat_inst_15_2_21_tsni, concat_inst_16_17_1_2_21_tsni, map_inst_16_17_22_tsni, map_inst_16_29_tsni, map_inst_19_20_29_tsni, concat_inst_19_20_17_1_2_21_tsni, map_inst_19_20_17_22_tsni, match_ls_arm_Cons_inst_0_4_tsni, match_xs_arm_Nil_inst_0_22_tsni, match_ls_arm_Cons_inst_26_tsni, match_ls_arm_Cons_inst_27_tsni, match_xs_arm_Nil_inst_16_17_22_tsni, match_ls_arm_Cons_inst_16_17_4_tsni, match_ls_arm_Cons_inst_19_20_17_4_tsni, match_xs_arm_Nil_inst_19_20_17_22_tsni;
-match_ls_arm_Cons_inst_0_4_tsni = function match_ls_arm_Cons_inst_0_4_tsni(n, _deforest_Cons_head_inst_0_4_tsni, _deforest_Cons_tail_inst_0_4_tsni) {
+match_ls_arm_Cons_inst_0_4_tsni = (undefined, function (n, _deforest_Cons_head_inst_0_4_tsni, _deforest_Cons_tail_inst_0_4_tsni) {
   let param0, param1, h, t, scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_0_4_tsni;
   param1 = _deforest_Cons_tail_inst_0_4_tsni;
@@ -30,11 +30,11 @@ match_ls_arm_Cons_inst_0_4_tsni = function match_ls_arm_Cons_inst_0_4_tsni(n, _d
       return NofibPrelude.Cons(tmp2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_0_22_tsni = function match_xs_arm_Nil_inst_0_22_tsni(f) {
+});
+match_xs_arm_Nil_inst_0_22_tsni = (undefined, function (f) {
   return NofibPrelude.Nil
-};
-match_ls_arm_Cons_inst_26_tsni = function match_ls_arm_Cons_inst_26_tsni(f, q, _deforest_Cons_head_inst_26_tsni, _deforest_Cons_tail_inst_26_tsni) {
+});
+match_ls_arm_Cons_inst_26_tsni = (undefined, function (f, q, _deforest_Cons_head_inst_26_tsni, _deforest_Cons_tail_inst_26_tsni) {
   let param0, param1, x, xs, scrut, param01, param11, q1, t, tmp, tmp1;
   param0 = _deforest_Cons_head_inst_26_tsni;
   param1 = _deforest_Cons_tail_inst_26_tsni;
@@ -52,8 +52,8 @@ match_ls_arm_Cons_inst_26_tsni = function match_ls_arm_Cons_inst_26_tsni(f, q, _
   } else {
     throw new globalThis.Error("match error");
   }
-};
-match_ls_arm_Cons_inst_27_tsni = function match_ls_arm_Cons_inst_27_tsni(f, q, _deforest_Cons_head_inst_27_tsni, _deforest_Cons_tail_inst_27_tsni) {
+});
+match_ls_arm_Cons_inst_27_tsni = (undefined, function (f, q, _deforest_Cons_head_inst_27_tsni, _deforest_Cons_tail_inst_27_tsni) {
   let param0, param1, x, xs, tmp, tmp1;
   param0 = _deforest_Cons_head_inst_27_tsni;
   param1 = _deforest_Cons_tail_inst_27_tsni;
@@ -62,11 +62,11 @@ match_ls_arm_Cons_inst_27_tsni = function match_ls_arm_Cons_inst_27_tsni(f, q, _
   tmp = runtime.safeCall(f(q, x));
   tmp1 = scanl_inst_27_tsni(f, tmp, xs);
   return NofibPrelude.Cons(q, tmp1)
-};
-match_xs_arm_Nil_inst_16_17_22_tsni = function match_xs_arm_Nil_inst_16_17_22_tsni(f) {
+});
+match_xs_arm_Nil_inst_16_17_22_tsni = (undefined, function (f) {
   return NofibPrelude.Nil
-};
-match_ls_arm_Cons_inst_16_17_4_tsni = function match_ls_arm_Cons_inst_16_17_4_tsni(n, _deforest_Cons_head_inst_16_17_4_tsni, _deforest_Cons_tail_inst_16_17_4_tsni) {
+});
+match_ls_arm_Cons_inst_16_17_4_tsni = (undefined, function (n, _deforest_Cons_head_inst_16_17_4_tsni, _deforest_Cons_tail_inst_16_17_4_tsni) {
   let param0, param1, h, t, scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_16_17_4_tsni;
   param1 = _deforest_Cons_tail_inst_16_17_4_tsni;
@@ -93,8 +93,8 @@ match_ls_arm_Cons_inst_16_17_4_tsni = function match_ls_arm_Cons_inst_16_17_4_ts
       return NofibPrelude.Cons(tmp2, tmp3)
     }
   }
-};
-match_ls_arm_Cons_inst_19_20_17_4_tsni = function match_ls_arm_Cons_inst_19_20_17_4_tsni(n, _deforest_Cons_head_inst_19_20_17_4_tsni, _deforest_Cons_tail_inst_19_20_17_4_tsni) {
+});
+match_ls_arm_Cons_inst_19_20_17_4_tsni = (undefined, function (n, _deforest_Cons_head_inst_19_20_17_4_tsni, _deforest_Cons_tail_inst_19_20_17_4_tsni) {
   let param0, param1, h, t, scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_19_20_17_4_tsni;
   param1 = _deforest_Cons_tail_inst_19_20_17_4_tsni;
@@ -121,10 +121,10 @@ match_ls_arm_Cons_inst_19_20_17_4_tsni = function match_ls_arm_Cons_inst_19_20_1
       return NofibPrelude.Cons(tmp2, tmp3)
     }
   }
-};
-match_xs_arm_Nil_inst_19_20_17_22_tsni = function match_xs_arm_Nil_inst_19_20_17_22_tsni(f) {
+});
+match_xs_arm_Nil_inst_19_20_17_22_tsni = (undefined, function (f) {
   return NofibPrelude.Nil
-};
+});
 cse_inst_0_1_tsni = function cse_inst_0_1_tsni(t) {
   let tmp, tmp1;
   tmp = cse.labelTree(t);

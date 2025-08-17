@@ -2,16 +2,16 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 let lscomp, lscomp1, atom1, lambda, lambda1, lambda2, lambda$, lambda$1, lambda$2, show_inst_0_1_tsni, lscomp_inst_0_1_2_tsni, testforce_inst_3_tsni, lambda_inst_3_tsni, scalarMut_inst_3_4_tsni, testforce_inst_5_tsni, lambda$_inst_5_tsni, scalarMut_inst_5_4_tsni, lambda_inst_6_tsni, lambda$_inst_6_tsni, scalarMut_inst_6_4_tsni, lscomp_inst_7_2_tsni, testforce_inst_8_9_tsni, lambda_inst_8_9_tsni, lambda$_inst_8_9_tsni, scalarMut_inst_8_9_4_tsni, lscomp_inst_8_10_tsni, show_inst_8_10_1_tsni, lscomp_inst_8_10_1_2_tsni, take_lz_inst_8_11_tsni, testAtom_nofib_inst_12_13_tsni, lscomp_inst_12_13_10_tsni, show_inst_12_13_10_1_tsni, lscomp_inst_12_13_10_1_2_tsni, take_lz_inst_12_13_11_tsni, testforce_inst_12_13_9_tsni, lambda_inst_12_13_9_tsni, lambda$_inst_12_13_9_tsni, scalarMut_inst_12_13_9_4_tsni, stringListConcat_inst_0_1_14_tsni, dotMult_inst_3_15_tsni, dotMult_inst_5_15_tsni, dotMult_inst_6_15_tsni, stringListConcat_inst_7_14_tsni, dotMult_inst_8_9_15_tsni, stringListConcat_inst_8_10_1_14_tsni, stringListConcat_inst_8_16_tsni, stringListConcat_inst_12_13_10_1_14_tsni, stringListConcat_inst_12_13_16_tsni, dotMult_inst_12_13_9_15_tsni, match_ls_arm_Nil_inst_8_10_tsni, match_ls_arm_Nil_inst_12_13_10_tsni;
-match_ls_arm_Nil_inst_8_10_tsni = function match_ls_arm_Nil_inst_8_10_tsni() {
+match_ls_arm_Nil_inst_8_10_tsni = (undefined, function () {
   return () => {
     return ""
   }
-};
-match_ls_arm_Nil_inst_12_13_10_tsni = function match_ls_arm_Nil_inst_12_13_10_tsni() {
+});
+match_ls_arm_Nil_inst_12_13_10_tsni = (undefined, function () {
   return () => {
     return ""
   }
-};
+});
 show_inst_0_1_tsni = function show_inst_0_1_tsni(s) {
   let param0, param1, pos, vel, tmp;
   if (s instanceof atom.State.class) {
