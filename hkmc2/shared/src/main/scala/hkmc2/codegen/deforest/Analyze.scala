@@ -164,6 +164,7 @@ class DeforestPreAnalyzer(
       case Value.Ref(l) => chk(l.asBlkMember.get)
       case _ => die
   
+  private var moduleFuns: Opt[Set[BlockMemberSymbol]] = N
   // should only consider imported functions, top level functions and functions inside modules
   private var shouldConsiderFunDefn = true
   // imported functions referring to privately defined `val` or `let`s are not handleable
@@ -179,7 +180,8 @@ class DeforestPreAnalyzer(
   private var inFunDef: Opt[BlockMemberSymbol] = N
   private var symsDefinedForFun: Opt[Set[Symbol]] = N
   private def maybeCollectFun(fun: FunDefn) =
-    if shouldConsiderFunDefn && handleable && (imported && importedFunctionHandleable) || !imported then
+    // if shouldConsiderFunDefn && handleable && (imported && importedFunctionHandleable) || !imported then
+    if handleable then
       topLevelFunSymToFun += fun.sym -> fun
     if !imported && shouldConsiderFunDefn && handleable then
       topLevelLikeComputations ::= fun
@@ -191,7 +193,8 @@ class DeforestPreAnalyzer(
   override def applyFunDefn(fun: FunDefn): Unit =
     inFunDef match
       case N =>
-        handleable = true
+        // handleable = true
+        handleable = moduleFuns.fold(true)(s => s.contains(fun.sym))
         inFunDef = S(fun.sym)
         // symsDefinedForFun = S(fun.body.definedVars ++ fun.params.flatMap(_.params.map(_.sym)) + fun.sym)
         symsDefinedForFun = S(fun.deforestDefinedVars)
@@ -279,7 +282,9 @@ class DeforestPreAnalyzer(
     case clsLike: ClsLikeDefn if clsLike.k is syntax.Mod =>
       topLevelLikeComputations ::= clsLike.preCtor
       topLevelLikeComputations ::= clsLike.ctor
+      moduleFuns = S(clsLike.methods.map(_.sym).toSet)
       super.applyDefn(defn)
+      moduleFuns = N
     case _: ClsLikeDefn => () // no need to traverse class defn body at all
     case _ => super.applyDefn(defn)
   
