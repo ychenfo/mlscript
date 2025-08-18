@@ -12,6 +12,7 @@ import semantics.Elaborator.Ctx
 import hkmc2.syntax.Keyword.`override`
 import semantics.Elaborator.State
 import hkmc2.codegen.deforest.Deforest
+import hkmc2.Config.LiftDefns
 
 
 class ParserSetup(file: os.Path, dbgParsing: Bool)(using Elaborator.State, Raise):
@@ -102,7 +103,8 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
           le
         else
           val deforestLow = ltl.givenIn:
-            new codegen.Lowering()
+            cfg.copy(liftDefns = S(LiftDefns())).givenIn:
+              new codegen.Lowering()
           val deforestResult = Deforest.apply(deforestLow.program(blk), wd)(using
             cfg,
             ltl,
@@ -116,9 +118,9 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
               println(msg) // TODO: no println
               le
             case Left(prog -> summary -> detail) =>
-              if summary.nonEmpty then
-                println("-----summary-----")
-                println(summary.mapLines(l => s"\t$l")) // TODO: no println
+              // if summary.nonEmpty then
+                // println("-----summary-----")
+                // println(summary.mapLines(l => s"\t$l"))
               prog
             
       val baseScp: utils.Scope =
