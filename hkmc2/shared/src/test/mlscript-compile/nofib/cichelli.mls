@@ -43,7 +43,7 @@ fun histins(x, yns) = if yns is
   [y, n] :: yns then if x === y then [y, n + 1] :: yns else [y, n] :: histins(x, yns)
   else [x, 1] :: Nil
 
-fun histo(ls) = foldr(histins, Nil, ls)
+fun histo(ls) = foldr(cichelli.histins, Nil, ls)
 
 fun subset(xs, ys) = all(x => inList(x, ys), xs)
 

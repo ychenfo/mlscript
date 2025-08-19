@@ -115,11 +115,11 @@ object Empty extends LUT
 data class Node(x: [LUT, LUTentry, LUT]) extends LUT
 
 fun addtoLUT(k_l_lut) = if k_l_lut is
-  [k, l, Empty] then Node([Empty, [k, l :: Nil], Empty])
-  [k, l, Node([left, [k1, kl], right])] and
-    listEq(k, k1) then Node([left, [k1, l :: kl], right])
-    ltList(k, k1, (x, y) => x < y, (x, y) => x > y) then Node([addtoLUT([k, l, left]), [k1, kl], right])
-    else Node([left, [k1, kl], addtoLUT([k, l, right])])
+  [k, l, boyer2.Empty] then boyer2.Node([boyer2.Empty, [k, l :: Nil], boyer2.Empty])
+  [k, l, boyer2.Node([left, [k1, kl], right])] and
+    listEq(k, k1) then boyer2.Node([left, [k1, l :: kl], right])
+    ltList(k, k1, (x, y) => x < y, (x, y) => x > y) then boyer2.Node([addtoLUT([k, l, left]), [k1, kl], right])
+    else boyer2.Node([left, [k1, kl], addtoLUT([k, l, right])])
 
 fun getLUT(t_lut) = if t_lut is
   [t, Empty] then Nil
@@ -133,12 +133,12 @@ fun makelemmas(rules) = if rules is
   h :: t then boyer2.mkLispList(strToToken(h)) :: makelemmas(t)
 
 fun addlemma(lspls, term) = if lspls is
-  Nill then term
-  Atom(x) then throw new Error("error")
-  Conss([x, y]) then
-    let z = car(y)
-    if listEq(tv(x), nofibStringToList("equal")) and (not(atom(z)))
-    then addtoLUT([tv(car(z)), Conss([x, y]), term])
+  boyer2.Nill then term
+  boyer2.Atom(x) then throw new Error("error")
+  boyer2.Conss([x, y]) then
+    let z = boyer2.car(y)
+    if listEq(boyer2.tv(x), nofibStringToList("equal")) and (not(boyer2.atom(z)))
+    then addtoLUT([boyer2.tv(boyer2.car(z)), boyer2.Conss([x, y]), term])
     else throw new Error("error")
 
 fun addlemmalst(lspls, term) = if lspls is

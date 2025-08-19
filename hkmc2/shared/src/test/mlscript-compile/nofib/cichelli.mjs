@@ -7289,7 +7289,7 @@ all_inst_21_22_54_55_tsni = function all_inst_21_22_54_55_tsni(p, ls) {
   return runtime.safeCall(ls(p))
 };
 histo_inst_56_tsni = function histo_inst_56_tsni(ls) {
-  return foldr_inst_56_57_tsni(cichelli.histins, NofibPrelude.Nil, ls)
+  return foldr_inst_56_57_tsni(cichelli1.histins, NofibPrelude.Nil, ls)
 };
 foldr_inst_56_57_tsni = function foldr_inst_56_57_tsni(f, z, xs) {
   return runtime.safeCall(xs(f, z))
@@ -8007,7 +8007,7 @@ lambda = (undefined, function (a, b) {
     }
   } 
   static histo(ls1) {
-    return NofibPrelude.foldr(cichelli.histins, NofibPrelude.Nil, ls1)
+    return NofibPrelude.foldr(cichelli1.histins, NofibPrelude.Nil, ls1)
   } 
   static subset(xs, ys) {
     let lambda$this;
