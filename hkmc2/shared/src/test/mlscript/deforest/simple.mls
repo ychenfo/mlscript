@@ -49,10 +49,10 @@ test()
 //│ = A
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@3@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst_1_tsni --> Ref(x)@inst_1_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@3@inst_1_tsni --> Ref(x)@inst_1_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Ref(member:B))))@3@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@2@inst_1_tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Ref(member:B))))@3@inst_1_tsni --> Ref(x)@inst_1_tsni@BB
 //│ -------------- executing -------------
 //│ = A
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -70,10 +70,10 @@ test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@3@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@2@inst_1_tsni --> Ref(x)@inst_1_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@3@inst_1_tsni --> Ref(x)@inst_1_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Ref(member:B))))@3@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@2@inst_1_tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Ref(member:B))))@3@inst_1_tsni --> Ref(x)@inst_1_tsni@BB
 //│ -------------- executing -------------
 //│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -97,12 +97,12 @@ test()
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@4@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@5@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@4@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Ref(member:B))))@5@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
 //│ Ref(member:A)@6@inst_0_tsni --> Ref(a)@inst_0_2_tsni@A
 //│ Ref(member:B)@7@inst_0_tsni --> Ref(a)@inst_0_3_tsni@B
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:A))))@4@inst_1_tsni --> Ref(x)@inst_1_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:B))))@5@inst_1_tsni --> Ref(x)@inst_1_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@4@inst_1_tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Ref(member:B))))@5@inst_1_tsni --> Ref(x)@inst_1_tsni@BB
 //│ Ref(member:A)@6@inst_1_tsni --> Ref(a)@inst_1_2_tsni@A
 //│ Ref(member:B)@7@inst_1_tsni --> Ref(a)@inst_1_3_tsni@B
 //│ -------------- executing -------------
@@ -120,10 +120,10 @@ test()
 //│ = 11
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(11)))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(22)))))@3@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(11)))))@2@inst_1_tsni --> Ref(x)@inst_1_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(22)))))@3@inst_1_tsni --> Ref(x)@inst_1_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(11)))))@2@inst_0_tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(22)))))@3@inst_0_tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(11)))))@2@inst_1_tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(22)))))@3@inst_1_tsni --> Ref(x)@inst_1_tsni@BB
 //│ -------------- executing -------------
 //│ = 11
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -291,10 +291,10 @@ f(AAA(1, 3), 1) + f(BBB(2, 3), 2) + f(AAA(3, 2), 4) + f(BBB(4, 6), 0)
 //│ = 21
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:BBB),List(Arg(false,Lit(IntLit(4))), Arg(false,Lit(IntLit(6)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@BBB
-//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(3))), Arg(false,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_1_tsni@AAA
-//│ Call(Ref(member:BBB),List(Arg(false,Lit(IntLit(2))), Arg(false,Lit(IntLit(3)))))@6@inst__tsni --> Ref(x)@inst_2_tsni@BBB
-//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(1))), Arg(false,Lit(IntLit(3)))))@7@inst__tsni --> Ref(x)@inst_3_tsni@AAA
+//│ Call(Ref(member:BBB),List(Arg(None,Lit(IntLit(4))), Arg(None,Lit(IntLit(6)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@BBB
+//│ Call(Ref(member:AAA),List(Arg(None,Lit(IntLit(3))), Arg(None,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_1_tsni@AAA
+//│ Call(Ref(member:BBB),List(Arg(None,Lit(IntLit(2))), Arg(None,Lit(IntLit(3)))))@6@inst__tsni --> Ref(x)@inst_2_tsni@BBB
+//│ Call(Ref(member:AAA),List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(3)))))@7@inst__tsni --> Ref(x)@inst_3_tsni@AAA
 //│ -------------- executing -------------
 //│ = 21
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -329,7 +329,7 @@ c(AA(2), A)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
 //│ Ref(member:A)@1@inst__tsni --> Ref(y)@inst_0_tsni@A
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(2)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -344,10 +344,10 @@ f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4) + f(CCC(4), 0)
 //│ = 24
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:CCC),List(Arg(false,Lit(IntLit(4)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@CCC
-//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(3))), Arg(false,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_1_tsni@AAA
-//│ Call(Ref(member:CCC),List(Arg(false,Lit(IntLit(2)))))@6@inst__tsni --> Ref(x)@inst_2_tsni@CCC
-//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(1))), Arg(false,Lit(IntLit(3)))))@7@inst__tsni --> Ref(x)@inst_3_tsni@AAA
+//│ Call(Ref(member:CCC),List(Arg(None,Lit(IntLit(4)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@CCC
+//│ Call(Ref(member:AAA),List(Arg(None,Lit(IntLit(3))), Arg(None,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_1_tsni@AAA
+//│ Call(Ref(member:CCC),List(Arg(None,Lit(IntLit(2)))))@6@inst__tsni --> Ref(x)@inst_2_tsni@CCC
+//│ Call(Ref(member:AAA),List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(3)))))@7@inst__tsni --> Ref(x)@inst_3_tsni@AAA
 //│ -------------- executing -------------
 //│ = 24
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -364,9 +364,9 @@ f(AAA(1, 3), 1) + f(CCC(2), 2) + f(AAA(3, 2), 4)
 //│ = 22
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(3))), Arg(false,Lit(IntLit(2)))))@3@inst__tsni --> Ref(x)@inst_0_tsni@AAA
-//│ Call(Ref(member:CCC),List(Arg(false,Lit(IntLit(2)))))@4@inst__tsni --> Ref(x)@inst_1_tsni@CCC
-//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(1))), Arg(false,Lit(IntLit(3)))))@5@inst__tsni --> Ref(x)@inst_2_tsni@AAA
+//│ Call(Ref(member:AAA),List(Arg(None,Lit(IntLit(3))), Arg(None,Lit(IntLit(2)))))@3@inst__tsni --> Ref(x)@inst_0_tsni@AAA
+//│ Call(Ref(member:CCC),List(Arg(None,Lit(IntLit(2)))))@4@inst__tsni --> Ref(x)@inst_1_tsni@CCC
+//│ Call(Ref(member:AAA),List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(3)))))@5@inst__tsni --> Ref(x)@inst_2_tsni@AAA
 //│ -------------- executing -------------
 //│ = 22
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -379,7 +379,7 @@ c(BB(3), 0)
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(3)))))@1@inst__tsni --> Ref(x)@inst_0_tsni@dflt
+//│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(3)))))@1@inst__tsni --> Ref(x)@inst_0_tsni@dflt
 //│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -395,8 +395,8 @@ f(AA(AA(0)))
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(0)))))@3@inst__tsni --> Ref(b)@inst_0_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(0)))))@3@inst__tsni --> Ref(b)@inst_0_1_tsni@AA
 //│ -------------- executing -------------
 //│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -408,8 +408,8 @@ f(AA(AA(3)))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@1@inst__tsni --> Select(Ref(x),Ident(aa))@inst_0_tsni
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@2@inst__tsni --> Select(Select(Ref(x),Ident(aa)),Ident(aa))@inst_0_tsni
+//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@1@inst__tsni --> Select(Ref(x),Ident(aa))@inst_0_tsni
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(3)))))@2@inst__tsni --> Select(Select(Ref(x),Ident(aa)),Ident(aa))@inst_0_tsni
 //│ -------------- executing -------------
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -435,7 +435,7 @@ outer1(p, 1, 2) + outer2(p, 3, 4) + inner(AA(5), 6)
 //│ p = AA(AA(3))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(5)))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(5)))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
 //│ = 103
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -447,7 +447,7 @@ mapHead(x => x, AAA(1, AAA(2, None)))
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AAA),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AAA
+//│ Call(Ref(member:AAA),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AAA
 //│ -------------- executing -------------
 //│ = 1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -496,8 +496,8 @@ test(AA(1), AA(2), AA(3))
 //│ = "2AA(3)NaN"
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@1@inst__tsni --> Ref(y)@inst_0_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(1)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(2)))))@1@inst__tsni --> Ref(y)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(1)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
 //│ = "2AA(3)NaN"
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -512,11 +512,11 @@ fun test(x) =
 let p = if true then AA(CCC) else BB(CCC)
 test(p)
 //│ = 141
-//│ p = AA([function CCC])
+//│ p = AA(fun CCC { class: class CCC })
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:CCC))))@1@inst__tsni --> Ref(x)@inst_0_tsni@BB
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:CCC))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Ref(member:CCC))))@1@inst__tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Ref(member:CCC))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
 //│ = 141
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -532,11 +532,11 @@ fun test(x, y) =
 let p = if true then AA(CCC) else BB(CCC)
 test(p, id(CCC(123)))
 //│ = 141
-//│ p = AA([function CCC])
+//│ p = AA(fun CCC { class: class CCC })
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:BB),List(Arg(false,Ref(member:CCC))))@1@inst__tsni --> Ref(x)@inst_0_tsni@BB
-//│ Call(Ref(member:AA),List(Arg(false,Ref(member:CCC))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Ref(member:CCC))))@1@inst__tsni --> Ref(x)@inst_0_tsni@BB
+//│ Call(Ref(member:AA),List(Arg(None,Ref(member:CCC))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
 //│ = 141
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -552,7 +552,7 @@ f(id(A)) + f(A)
 //│   if (x1 instanceof A1.class) {
 //│     return 1
 //│   } else {
-//│     throw new globalThis.Error("match error");
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ tmp113 = Predef.id(A1);
@@ -560,6 +560,9 @@ f(id(A)) + f(A)
 //│ tmp115 = f10(A1);
 //│ tmp114 + tmp115
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
+//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
+//│ 
 //│ let f10, tmp113, tmp114, tmp115, f_inst_0_tsni6;
 //│ f_inst_0_tsni6 = function f_inst_0_tsni(x1) {
 //│   return runtime.safeCall(x1())
@@ -568,14 +571,12 @@ f(id(A)) + f(A)
 //│   if (x1 instanceof A1.class) {
 //│     return 1
 //│   } else {
-//│     throw new globalThis.Error("match error");
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ tmp113 = Predef.id(A1);
 //│ tmp114 = f10(tmp113);
-//│ tmp115 = f_inst_0_tsni6(() => {
-//│   return 1
-//│ });
+//│ tmp115 = f_inst_0_tsni6(() => { return 1 });
 //│ tmp114 + tmp115
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
@@ -600,7 +601,7 @@ f(g(AA(1)))
 //│ ---------- deforest summary ----------
 //│ Ref(member:A)@2@inst_0_tsni --> Ref(x)@inst_1_tsni@A
 //│ Ref(member:B)@3@inst_0_tsni --> Ref(x)@inst_1_tsni@B
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(1)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(1)))))@4@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -635,8 +636,8 @@ c1(app(AA)) + c1(AA(2)) + c2(AA(3)) + c2(A)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
 //│ Ref(member:A)@3@inst__tsni --> Ref(x)@inst_0_tsni@A
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(3)))))@4@inst__tsni --> Ref(x)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_2_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(3)))))@4@inst__tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(2)))))@5@inst__tsni --> Ref(x)@inst_2_tsni@AA
 //│ -------------- executing -------------
 //│ = 6
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -659,11 +660,11 @@ c(B)
 //│ Ref(member:A)@6@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
 //│ Ref(member:B)@7@inst__tsni --> Ref(x)@inst_1_tsni@dflt
 //│ Ref(member:A)@6@inst_2_tsni --> Ref($scrut)@inst_2_tsni@A
-//│ Instantiate(Select(Ref(member:AA),Ident(class)),List(Lit(IntLit(2))))@8@inst_3_tsni --> Ref(x)@inst_2_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(3)))))@9@inst_3_tsni --> Ref(x)@inst_2_tsni@BB
+//│ Instantiate(false,Select(Ref(member:AA),Ident(class)),List(Arg(None,Lit(IntLit(2)))))@8@inst_3_tsni --> Ref(x)@inst_2_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(3)))))@9@inst_3_tsni --> Ref(x)@inst_2_tsni@BB
 //│ Ref(member:A)@6@inst_4_tsni --> Ref($scrut)@inst_4_tsni@A
-//│ Instantiate(Select(Ref(member:AA),Ident(class)),List(Lit(IntLit(2))))@8@inst_5_tsni --> Ref(x)@inst_4_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(3)))))@9@inst_5_tsni --> Ref(x)@inst_4_tsni@BB
+//│ Instantiate(false,Select(Ref(member:AA),Ident(class)),List(Arg(None,Lit(IntLit(2)))))@8@inst_5_tsni --> Ref(x)@inst_4_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(3)))))@9@inst_5_tsni --> Ref(x)@inst_4_tsni@BB
 //│ -------------- executing -------------
 //│ > 5
 //│ ═══[RUNTIME ERROR] Error: e1
@@ -676,8 +677,8 @@ f(AA(1), BB(2))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:BB),List(Arg(false,Lit(IntLit(2)))))@1@inst__tsni --> Select(Ref(b),Ident(bb))@inst_0_tsni
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(1)))))@2@inst__tsni --> Ref(a)@inst_0_tsni@AA
+//│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(2)))))@1@inst__tsni --> Select(Ref(b),Ident(bb))@inst_0_tsni
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(1)))))@2@inst__tsni --> Ref(a)@inst_0_tsni@AA
 //│ -------------- executing -------------
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -195,7 +195,7 @@ fun acknowledge(d, states) =
 
   let states1 = map(s => check_depth(d, s), states)
 
-  Predef.not(orList(map(s => check_requests(outports(s)), states1)))
+  not(orList(map(s => check_requests(outports(s)), states1)))
 
 
 fun pad_packets(pss) =
@@ -264,7 +264,7 @@ fun simulate_component(d, state) =
   let new_value = apply_component(compType(state), out_signals)
 
   if
-    d == pathDepth(state) and Predef.not(new_value === None) and new_value is Some(v) then update_outports(state, v)
+    d == pathDepth(state) and not(new_value === None) and new_value is Some(v) then update_outports(state, v)
     else state
 
 fun simulate_components(depth, states) = map(s => simulate_component(depth, s), states)

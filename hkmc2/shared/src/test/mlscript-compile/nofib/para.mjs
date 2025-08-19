@@ -1,8 +1,10 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let go, plus, linc, plus1, start, breakk, unknownEq, bf, old_width_hd, width_hd, myAdd, single, trim, new_, cost, drop_nofit, para1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, myAdd$, bf$, drop_nofit$, trim$, new_$, old_width_hd$, cost$, width_hd$, init__inst_0_1_tsni, splitAt_inst_0_1_2_tsni, trim$_inst_3_4_tsni, init__inst_3_4_1_tsni, splitAt_inst_3_4_1_2_tsni, init__inst_5_6_tsni, splitAt_inst_5_6_2_tsni, drop_nofit$_inst_7_8_tsni, init__inst_7_8_6_tsni, splitAt_inst_7_8_6_2_tsni, tail__inst_9_10_tsni, splitAt_inst_9_10_11_tsni, myAdd$_inst_12_13_tsni, tail__inst_12_13_10_tsni, splitAt_inst_12_13_10_11_tsni, lambda$_inst_16_17_tsni, map_inst_18_19_tsni, dropWhile_inst_20_21_tsni, break__inst_22_23_tsni, map_inst_24_25_tsni, lambda_inst_26_27_tsni, map_inst_26_27_19_tsni, formats_inst_28_29_tsni, lambda_inst_28_29_27_tsni, map_inst_28_29_27_19_tsni, splitAt_inst_30_31_tsni, splitAt_inst_32_11_tsni, splitAt_inst_33_2_tsni, lambda_inst_34_35_tsni, lambda$_inst_34_35_17_tsni, unformat_inst_36_37_tsni, lambda_inst_36_37_35_tsni, lambda$_inst_36_37_35_17_tsni, lambda_inst_38_39_tsni, lines_inst_40_41_tsni, break__inst_40_41_23_tsni, words_inst_40_42_tsni, dropWhile_inst_40_42_21_tsni, paras_inst_40_43_tsni, lambda_inst_40_43_39_tsni, unparas_inst_44_45_tsni, unformat_inst_44_45_37_tsni, lambda_inst_44_45_37_35_tsni, lambda$_inst_44_45_37_35_17_tsni, unlines_inst_44_46_tsni, map_inst_44_46_25_tsni, map_inst_44_47_tsni, unwords_inst_44_48_tsni, append_inst_44_48_49_tsni, go_inst_44_48_50_tsni, append_inst_44_48_50_51_tsni, parse_inst_52_53_tsni, paras_inst_52_53_43_tsni, lambda_inst_52_53_43_39_tsni, words_inst_52_53_42_tsni, dropWhile_inst_52_53_42_21_tsni, lines_inst_52_53_41_tsni, break__inst_52_53_41_23_tsni, filter_inst_52_53_43_54_tsni, unparse_inst_52_55_tsni, unlines_inst_52_55_46_tsni, map_inst_52_55_46_25_tsni, map_inst_52_55_47_tsni, unwords_inst_52_55_48_tsni, append_inst_52_55_48_49_tsni, go_inst_52_55_48_50_tsni, append_inst_52_55_48_50_51_tsni, unparas_inst_52_55_45_tsni, unformat_inst_52_55_45_37_tsni, lambda_inst_52_55_45_37_35_tsni, lambda$_inst_52_55_45_37_35_17_tsni, myAdd$_inst_56_57_tsni, tail__inst_56_57_10_tsni, splitAt_inst_56_57_10_11_tsni, drop_nofit$_inst_56_58_tsni, init__inst_56_58_6_tsni, splitAt_inst_56_58_6_2_tsni, trim$_inst_56_59_tsni, init__inst_56_59_1_tsni, splitAt_inst_56_59_1_2_tsni, stepr_inst_60_61_tsni, trim$_inst_60_61_59_tsni, init__inst_60_61_59_1_tsni, splitAt_inst_60_61_59_1_2_tsni, drop_nofit$_inst_60_61_58_tsni, init__inst_60_61_58_6_tsni, splitAt_inst_60_61_58_6_2_tsni, myAdd$_inst_60_61_57_tsni, tail__inst_60_61_57_10_tsni, splitAt_inst_60_61_57_10_11_tsni, tile_inst_60_62_tsni, splitAt_inst_60_62_31_tsni, parse_inst_63_64_tsni, paras_inst_63_64_43_tsni, lambda_inst_63_64_43_39_tsni, words_inst_63_64_42_tsni, dropWhile_inst_63_64_42_21_tsni, lines_inst_63_64_41_tsni, break__inst_63_64_41_23_tsni, filter_inst_63_64_43_54_tsni, par3_inst_63_65_tsni, tile_inst_63_65_62_tsni, splitAt_inst_63_65_62_31_tsni, stepr_inst_63_65_61_tsni, myAdd$_inst_63_65_61_57_tsni, tail__inst_63_65_61_57_10_tsni, splitAt_inst_63_65_61_57_10_11_tsni, drop_nofit$_inst_63_65_61_58_tsni, init__inst_63_65_61_58_6_tsni, splitAt_inst_63_65_61_58_6_2_tsni, trim$_inst_63_65_61_59_tsni, init__inst_63_65_61_59_1_tsni, splitAt_inst_63_65_61_59_1_2_tsni, concat_inst_63_66_tsni, append_inst_63_66_67_tsni, unparse_inst_63_68_tsni, unlines_inst_63_68_46_tsni, map_inst_63_68_46_25_tsni, map_inst_63_68_47_tsni, unwords_inst_63_68_48_tsni, append_inst_63_68_48_49_tsni, go_inst_63_68_48_50_tsni, append_inst_63_68_48_50_51_tsni, unparas_inst_63_68_45_tsni, unformat_inst_63_68_45_37_tsni, lambda_inst_63_68_45_37_35_tsni, lambda$_inst_63_68_45_37_35_17_tsni, fmt_inst_69_70_tsni, unparse_inst_69_70_68_tsni, unparas_inst_69_70_68_45_tsni, unformat_inst_69_70_68_45_37_tsni, lambda_inst_69_70_68_45_37_35_tsni, lambda$_inst_69_70_68_45_37_35_17_tsni, unlines_inst_69_70_68_46_tsni, map_inst_69_70_68_46_25_tsni, map_inst_69_70_68_47_tsni, unwords_inst_69_70_68_48_tsni, append_inst_69_70_68_48_49_tsni, go_inst_69_70_68_48_50_tsni, append_inst_69_70_68_48_50_51_tsni, par3_inst_69_70_65_tsni, stepr_inst_69_70_65_61_tsni, trim$_inst_69_70_65_61_59_tsni, init__inst_69_70_65_61_59_1_tsni, splitAt_inst_69_70_65_61_59_1_2_tsni, drop_nofit$_inst_69_70_65_61_58_tsni, init__inst_69_70_65_61_58_6_tsni, splitAt_inst_69_70_65_61_58_6_2_tsni, myAdd$_inst_69_70_65_61_57_tsni, tail__inst_69_70_65_61_57_10_tsni, splitAt_inst_69_70_65_61_57_10_11_tsni, tile_inst_69_70_65_62_tsni, splitAt_inst_69_70_65_62_31_tsni, concat_inst_69_70_66_tsni, append_inst_69_70_66_67_tsni, parse_inst_69_70_64_tsni, lines_inst_69_70_64_41_tsni, break__inst_69_70_64_41_23_tsni, words_inst_69_70_64_42_tsni, dropWhile_inst_69_70_64_42_21_tsni, paras_inst_69_70_64_43_tsni, lambda_inst_69_70_64_43_39_tsni, filter_inst_69_70_64_43_54_tsni, testPara_nofib_inst_71_72_tsni, fmt_inst_71_72_70_tsni, parse_inst_71_72_70_64_tsni, paras_inst_71_72_70_64_43_tsni, lambda_inst_71_72_70_64_43_39_tsni, words_inst_71_72_70_64_42_tsni, dropWhile_inst_71_72_70_64_42_21_tsni, lines_inst_71_72_70_64_41_tsni, break__inst_71_72_70_64_41_23_tsni, filter_inst_71_72_70_64_43_54_tsni, par3_inst_71_72_70_65_tsni, tile_inst_71_72_70_65_62_tsni, splitAt_inst_71_72_70_65_62_31_tsni, stepr_inst_71_72_70_65_61_tsni, myAdd$_inst_71_72_70_65_61_57_tsni, tail__inst_71_72_70_65_61_57_10_tsni, splitAt_inst_71_72_70_65_61_57_10_11_tsni, drop_nofit$_inst_71_72_70_65_61_58_tsni, init__inst_71_72_70_65_61_58_6_tsni, splitAt_inst_71_72_70_65_61_58_6_2_tsni, trim$_inst_71_72_70_65_61_59_tsni, init__inst_71_72_70_65_61_59_1_tsni, splitAt_inst_71_72_70_65_61_59_1_2_tsni, concat_inst_71_72_70_66_tsni, append_inst_71_72_70_66_67_tsni, unparse_inst_71_72_70_68_tsni, unlines_inst_71_72_70_68_46_tsni, map_inst_71_72_70_68_46_25_tsni, map_inst_71_72_70_68_47_tsni, unwords_inst_71_72_70_68_48_tsni, append_inst_71_72_70_68_48_49_tsni, go_inst_71_72_70_68_48_50_tsni, append_inst_71_72_70_68_48_50_51_tsni, unparas_inst_71_72_70_68_45_tsni, unformat_inst_71_72_70_68_45_37_tsni, lambda_inst_71_72_70_68_45_37_35_tsni, lambda$_inst_71_72_70_68_45_37_35_17_tsni, concat_inst_71_72_70_68_46_73_tsni, append_inst_71_72_70_68_46_73_67_tsni, listNeq_inst_14_74_tsni, append_inst_15_75_tsni, append_inst_16_17_75_tsni, append_inst_18_76_tsni, concat_inst_77_tsni, concat_inst_24_73_tsni, append_inst_26_27_76_tsni, append_inst_28_29_27_76_tsni, append_inst_34_35_17_75_tsni, append_inst_36_37_35_17_75_tsni, listNeq_inst_38_39_74_tsni, map_inst_40_78_tsni, listNeq_inst_40_43_39_74_tsni, append_inst_44_45_37_35_17_75_tsni, concat_inst_44_46_73_tsni, lambda_inst_44_46_79_tsni, append_inst_44_46_79_80_tsni, listNeq_inst_52_53_43_39_74_tsni, map_inst_52_53_78_tsni, map_inst_52_81_tsni, concat_inst_52_55_46_73_tsni, lambda_inst_52_55_46_79_tsni, append_inst_52_55_46_79_80_tsni, append_inst_52_55_45_37_35_17_75_tsni, listNeq_inst_63_64_43_39_74_tsni, map_inst_63_64_78_tsni, map_inst_63_82_tsni, concat_inst_63_68_46_73_tsni, lambda_inst_63_68_46_79_tsni, append_inst_63_68_46_79_80_tsni, append_inst_63_68_45_37_35_17_75_tsni, append_inst_69_70_68_45_37_35_17_75_tsni, concat_inst_69_70_68_46_73_tsni, lambda_inst_69_70_68_46_79_tsni, append_inst_69_70_68_46_79_80_tsni, map_inst_69_70_82_tsni, map_inst_69_70_64_78_tsni, listNeq_inst_69_70_64_43_39_74_tsni, listNeq_inst_71_72_70_64_43_39_74_tsni, map_inst_71_72_70_64_78_tsni, map_inst_71_72_70_82_tsni, lambda_inst_71_72_70_68_46_79_tsni, append_inst_71_72_70_68_46_79_80_tsni, append_inst_71_72_70_68_45_37_35_17_75_tsni, nofibListToString_inst_71_83_tsni, match_s__rest_inst_22_tsni, match_s__rest_inst_40_41_tsni, match_s__rest_inst_52_53_41_tsni, match_s__rest_inst_63_64_41_tsni, match_s__rest_inst_69_70_64_41_tsni, match_s__rest_inst_71_72_70_64_41_tsni, match_ls_arm_Cons_inst_77_tsni, match_xs_arm_Nil_inst_44_46_79_80_tsni, match_xs_arm_Cons_inst_44_46_79_80_tsni, match_xs_arm_Nil_inst_52_55_46_79_80_tsni, match_xs_arm_Cons_inst_52_55_46_79_80_tsni, match_xs_arm_Nil_inst_63_68_46_79_80_tsni, match_xs_arm_Cons_inst_63_68_46_79_80_tsni, match_xs_arm_Nil_inst_69_70_68_46_79_80_tsni, match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni, match_xs_arm_Nil_inst_71_72_70_68_46_79_80_tsni, match_xs_arm_Cons_inst_71_72_70_68_46_79_80_tsni, match_ls_arm_Nil_inst_71_83_tsni;
+let go, plus, linc, plus1, start, breakk, unknownEq, bf, old_width_hd, width_hd, myAdd, single, cost, leave_nofit, trim, new_, para1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, lambda25, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, myAdd$, lambda$13, bf$, lambda$14, leave_nofit$, trim$, new_$, old_width_hd$, cost$, width_hd$, init__inst_0_1_tsni, splitAt_inst_0_1_2_tsni, trim$_inst_3_4_tsni, init__inst_3_4_1_tsni, splitAt_inst_3_4_1_2_tsni, init__inst_5_6_tsni, splitAt_inst_5_6_2_tsni, leave_nofit$_inst_7_8_tsni, init__inst_7_8_6_tsni, splitAt_inst_7_8_6_2_tsni, tail__inst_9_10_tsni, splitAt_inst_9_10_11_tsni, myAdd$_inst_12_13_tsni, tail__inst_12_13_10_tsni, splitAt_inst_12_13_10_11_tsni, lambda$_inst_16_17_tsni, map_inst_18_19_tsni, leaveWhile_inst_20_21_tsni, break__inst_22_23_tsni, map_inst_24_25_tsni, lambda_inst_26_27_tsni, map_inst_26_27_19_tsni, formats_inst_28_29_tsni, lambda_inst_28_29_27_tsni, map_inst_28_29_27_19_tsni, splitAt_inst_30_31_tsni, splitAt_inst_32_11_tsni, splitAt_inst_33_2_tsni, lambda_inst_34_35_tsni, lambda$_inst_34_35_17_tsni, unformat_inst_36_37_tsni, lambda_inst_36_37_35_tsni, lambda$_inst_36_37_35_17_tsni, lambda_inst_38_39_tsni, lines_inst_40_41_tsni, break__inst_40_41_23_tsni, words_inst_40_42_tsni, leaveWhile_inst_40_42_21_tsni, paras_inst_40_43_tsni, lambda_inst_40_43_39_tsni, unparas_inst_44_45_tsni, unformat_inst_44_45_37_tsni, lambda_inst_44_45_37_35_tsni, lambda$_inst_44_45_37_35_17_tsni, unlines_inst_44_46_tsni, map_inst_44_46_25_tsni, map_inst_44_47_tsni, unwords_inst_44_48_tsni, append_inst_44_48_49_tsni, go_inst_44_48_50_tsni, append_inst_44_48_50_51_tsni, parse_inst_52_53_tsni, paras_inst_52_53_43_tsni, lambda_inst_52_53_43_39_tsni, words_inst_52_53_42_tsni, leaveWhile_inst_52_53_42_21_tsni, lines_inst_52_53_41_tsni, break__inst_52_53_41_23_tsni, filter_inst_52_53_43_54_tsni, unparse_inst_52_55_tsni, unlines_inst_52_55_46_tsni, map_inst_52_55_46_25_tsni, map_inst_52_55_47_tsni, unwords_inst_52_55_48_tsni, append_inst_52_55_48_49_tsni, go_inst_52_55_48_50_tsni, append_inst_52_55_48_50_51_tsni, unparas_inst_52_55_45_tsni, unformat_inst_52_55_45_37_tsni, lambda_inst_52_55_45_37_35_tsni, lambda$_inst_52_55_45_37_35_17_tsni, myAdd$_inst_56_57_tsni, tail__inst_56_57_10_tsni, splitAt_inst_56_57_10_11_tsni, leave_nofit$_inst_56_58_tsni, init__inst_56_58_6_tsni, splitAt_inst_56_58_6_2_tsni, trim$_inst_56_59_tsni, init__inst_56_59_1_tsni, splitAt_inst_56_59_1_2_tsni, stepr_inst_60_61_tsni, trim$_inst_60_61_59_tsni, init__inst_60_61_59_1_tsni, splitAt_inst_60_61_59_1_2_tsni, leave_nofit$_inst_60_61_58_tsni, init__inst_60_61_58_6_tsni, splitAt_inst_60_61_58_6_2_tsni, myAdd$_inst_60_61_57_tsni, tail__inst_60_61_57_10_tsni, splitAt_inst_60_61_57_10_11_tsni, tile_inst_60_62_tsni, splitAt_inst_60_62_31_tsni, parse_inst_63_64_tsni, paras_inst_63_64_43_tsni, lambda_inst_63_64_43_39_tsni, words_inst_63_64_42_tsni, leaveWhile_inst_63_64_42_21_tsni, lines_inst_63_64_41_tsni, break__inst_63_64_41_23_tsni, filter_inst_63_64_43_54_tsni, par3_inst_63_65_tsni, tile_inst_63_65_62_tsni, splitAt_inst_63_65_62_31_tsni, stepr_inst_63_65_61_tsni, myAdd$_inst_63_65_61_57_tsni, tail__inst_63_65_61_57_10_tsni, splitAt_inst_63_65_61_57_10_11_tsni, leave_nofit$_inst_63_65_61_58_tsni, init__inst_63_65_61_58_6_tsni, splitAt_inst_63_65_61_58_6_2_tsni, trim$_inst_63_65_61_59_tsni, init__inst_63_65_61_59_1_tsni, splitAt_inst_63_65_61_59_1_2_tsni, concat_inst_63_66_tsni, append_inst_63_66_67_tsni, unparse_inst_63_68_tsni, unlines_inst_63_68_46_tsni, map_inst_63_68_46_25_tsni, map_inst_63_68_47_tsni, unwords_inst_63_68_48_tsni, append_inst_63_68_48_49_tsni, go_inst_63_68_48_50_tsni, append_inst_63_68_48_50_51_tsni, unparas_inst_63_68_45_tsni, unformat_inst_63_68_45_37_tsni, lambda_inst_63_68_45_37_35_tsni, lambda$_inst_63_68_45_37_35_17_tsni, fmt_inst_69_70_tsni, unparse_inst_69_70_68_tsni, unparas_inst_69_70_68_45_tsni, unformat_inst_69_70_68_45_37_tsni, lambda_inst_69_70_68_45_37_35_tsni, lambda$_inst_69_70_68_45_37_35_17_tsni, unlines_inst_69_70_68_46_tsni, map_inst_69_70_68_46_25_tsni, map_inst_69_70_68_47_tsni, unwords_inst_69_70_68_48_tsni, append_inst_69_70_68_48_49_tsni, go_inst_69_70_68_48_50_tsni, append_inst_69_70_68_48_50_51_tsni, par3_inst_69_70_65_tsni, stepr_inst_69_70_65_61_tsni, trim$_inst_69_70_65_61_59_tsni, init__inst_69_70_65_61_59_1_tsni, splitAt_inst_69_70_65_61_59_1_2_tsni, leave_nofit$_inst_69_70_65_61_58_tsni, init__inst_69_70_65_61_58_6_tsni, splitAt_inst_69_70_65_61_58_6_2_tsni, myAdd$_inst_69_70_65_61_57_tsni, tail__inst_69_70_65_61_57_10_tsni, splitAt_inst_69_70_65_61_57_10_11_tsni, tile_inst_69_70_65_62_tsni, splitAt_inst_69_70_65_62_31_tsni, concat_inst_69_70_66_tsni, append_inst_69_70_66_67_tsni, parse_inst_69_70_64_tsni, lines_inst_69_70_64_41_tsni, break__inst_69_70_64_41_23_tsni, words_inst_69_70_64_42_tsni, leaveWhile_inst_69_70_64_42_21_tsni, paras_inst_69_70_64_43_tsni, lambda_inst_69_70_64_43_39_tsni, filter_inst_69_70_64_43_54_tsni, testPara_nofib_inst_71_72_tsni, fmt_inst_71_72_70_tsni, parse_inst_71_72_70_64_tsni, paras_inst_71_72_70_64_43_tsni, lambda_inst_71_72_70_64_43_39_tsni, words_inst_71_72_70_64_42_tsni, leaveWhile_inst_71_72_70_64_42_21_tsni, lines_inst_71_72_70_64_41_tsni, break__inst_71_72_70_64_41_23_tsni, filter_inst_71_72_70_64_43_54_tsni, par3_inst_71_72_70_65_tsni, tile_inst_71_72_70_65_62_tsni, splitAt_inst_71_72_70_65_62_31_tsni, stepr_inst_71_72_70_65_61_tsni, myAdd$_inst_71_72_70_65_61_57_tsni, tail__inst_71_72_70_65_61_57_10_tsni, splitAt_inst_71_72_70_65_61_57_10_11_tsni, leave_nofit$_inst_71_72_70_65_61_58_tsni, init__inst_71_72_70_65_61_58_6_tsni, splitAt_inst_71_72_70_65_61_58_6_2_tsni, trim$_inst_71_72_70_65_61_59_tsni, init__inst_71_72_70_65_61_59_1_tsni, splitAt_inst_71_72_70_65_61_59_1_2_tsni, concat_inst_71_72_70_66_tsni, append_inst_71_72_70_66_67_tsni, unparse_inst_71_72_70_68_tsni, unlines_inst_71_72_70_68_46_tsni, map_inst_71_72_70_68_46_25_tsni, map_inst_71_72_70_68_47_tsni, unwords_inst_71_72_70_68_48_tsni, append_inst_71_72_70_68_48_49_tsni, go_inst_71_72_70_68_48_50_tsni, append_inst_71_72_70_68_48_50_51_tsni, unparas_inst_71_72_70_68_45_tsni, unformat_inst_71_72_70_68_45_37_tsni, lambda_inst_71_72_70_68_45_37_35_tsni, lambda$_inst_71_72_70_68_45_37_35_17_tsni, concat_inst_71_72_70_68_46_73_tsni, append_inst_71_72_70_68_46_73_67_tsni, listNeq_inst_14_74_tsni, append_inst_15_75_tsni, append_inst_16_17_75_tsni, append_inst_18_76_tsni, concat_inst_77_tsni, concat_inst_24_73_tsni, append_inst_26_27_76_tsni, append_inst_28_29_27_76_tsni, append_inst_34_35_17_75_tsni, append_inst_36_37_35_17_75_tsni, listNeq_inst_38_39_74_tsni, map_inst_40_78_tsni, listNeq_inst_40_43_39_74_tsni, append_inst_44_45_37_35_17_75_tsni, concat_inst_44_46_73_tsni, lambda_inst_44_46_79_tsni, append_inst_44_46_79_80_tsni, listNeq_inst_52_53_43_39_74_tsni, map_inst_52_53_78_tsni, map_inst_52_81_tsni, concat_inst_52_55_46_73_tsni, lambda_inst_52_55_46_79_tsni, append_inst_52_55_46_79_80_tsni, append_inst_52_55_45_37_35_17_75_tsni, listNeq_inst_63_64_43_39_74_tsni, map_inst_63_64_78_tsni, map_inst_63_82_tsni, concat_inst_63_68_46_73_tsni, lambda_inst_63_68_46_79_tsni, append_inst_63_68_46_79_80_tsni, append_inst_63_68_45_37_35_17_75_tsni, append_inst_69_70_68_45_37_35_17_75_tsni, concat_inst_69_70_68_46_73_tsni, lambda_inst_69_70_68_46_79_tsni, append_inst_69_70_68_46_79_80_tsni, map_inst_69_70_82_tsni, map_inst_69_70_64_78_tsni, listNeq_inst_69_70_64_43_39_74_tsni, listNeq_inst_71_72_70_64_43_39_74_tsni, map_inst_71_72_70_64_78_tsni, map_inst_71_72_70_82_tsni, lambda_inst_71_72_70_68_46_79_tsni, append_inst_71_72_70_68_46_79_80_tsni, append_inst_71_72_70_68_45_37_35_17_75_tsni, nofibListToString_inst_71_83_tsni, match_s__rest_inst_22_tsni, match_s__rest_inst_40_41_tsni, match_s__rest_inst_52_53_41_tsni, match_s__rest_inst_63_64_41_tsni, match_s__rest_inst_69_70_64_41_tsni, match_s__rest_inst_71_72_70_64_41_tsni, match_ls_arm_Cons_inst_77_tsni, match_xs_arm_Nil_inst_44_46_79_80_tsni, match_xs_arm_Cons_inst_44_46_79_80_tsni, match_xs_arm_Nil_inst_52_55_46_79_80_tsni, match_xs_arm_Cons_inst_52_55_46_79_80_tsni, match_xs_arm_Nil_inst_63_68_46_79_80_tsni, match_xs_arm_Cons_inst_63_68_46_79_80_tsni, match_xs_arm_Nil_inst_69_70_68_46_79_80_tsni, match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni, match_xs_arm_Nil_inst_71_72_70_68_46_79_80_tsni, match_xs_arm_Cons_inst_71_72_70_68_46_79_80_tsni, match_ls_arm_Nil_inst_71_83_tsni;
 match_s__rest_inst_22_tsni = function match_s__rest_inst_22_tsni(l, tmp) {
   return NofibPrelude.Cons(l, tmp)
 };
@@ -155,17 +157,17 @@ match_ls_arm_Nil_inst_71_83_tsni = (undefined, function () {
 });
 init__inst_0_1_tsni = function init__inst_0_1_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -176,21 +178,21 @@ init__inst_0_1_tsni = function init__inst_0_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_0_1_2_tsni = function splitAt_inst_0_1_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -200,10 +202,10 @@ splitAt_inst_0_1_2_tsni = function splitAt_inst_0_1_2_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -234,17 +236,17 @@ trim$_inst_3_4_tsni = function trim$_inst_3_4_tsni(tot_width, ps_pq) {
 };
 init__inst_3_4_1_tsni = function init__inst_3_4_1_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -255,21 +257,21 @@ init__inst_3_4_1_tsni = function init__inst_3_4_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_3_4_1_2_tsni = function splitAt_inst_3_4_1_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -279,27 +281,27 @@ splitAt_inst_3_4_1_2_tsni = function splitAt_inst_3_4_1_2_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
 };
 init__inst_5_6_tsni = function init__inst_5_6_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -310,21 +312,21 @@ init__inst_5_6_tsni = function init__inst_5_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_5_6_2_tsni = function splitAt_inst_5_6_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -334,15 +336,15 @@ splitAt_inst_5_6_2_tsni = function splitAt_inst_5_6_2_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
 };
-drop_nofit$_inst_7_8_tsni = function drop_nofit$_inst_7_8_tsni(tot_width, ps_p) {
+leave_nofit$_inst_7_8_tsni = function leave_nofit$_inst_7_8_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
   scrut1 = para1.null__(ps_p);
   if (scrut1 === true) {
@@ -353,7 +355,7 @@ drop_nofit$_inst_7_8_tsni = function drop_nofit$_inst_7_8_tsni(tot_width, ps_p) 
     scrut = tmp1 > para1.maxw;
     if (scrut === true) {
       tmp2 = init__inst_7_8_6_tsni(ps_p);
-      return drop_nofit$_inst_7_8_tsni(tot_width, tmp2)
+      return leave_nofit$_inst_7_8_tsni(tot_width, tmp2)
     } else {
       return ps_p
     }
@@ -361,17 +363,17 @@ drop_nofit$_inst_7_8_tsni = function drop_nofit$_inst_7_8_tsni(tot_width, ps_p) 
 };
 init__inst_7_8_6_tsni = function init__inst_7_8_6_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -382,21 +384,21 @@ init__inst_7_8_6_tsni = function init__inst_7_8_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_7_8_6_2_tsni = function splitAt_inst_7_8_6_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -406,27 +408,27 @@ splitAt_inst_7_8_6_2_tsni = function splitAt_inst_7_8_6_2_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
 };
 tail__inst_9_10_tsni = function tail__inst_9_10_tsni(a_b) {
   let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     x = first0;
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -437,21 +439,21 @@ tail__inst_9_10_tsni = function tail__inst_9_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp2,
           y
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_9_10_11_tsni = function splitAt_inst_9_10_11_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (x, y) => {
@@ -461,28 +463,28 @@ splitAt_inst_9_10_11_tsni = function splitAt_inst_9_10_11_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp2,
       y0
-    ];
+    ]);
     return arr1
   };
   return arr
 };
 myAdd$_inst_12_13_tsni = function myAdd$_inst_12_13_tsni(tot_width, p, qr_rs) {
-  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
+  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
   tmp = para1.single_(qr_rs);
-  tmp1 = para1.null__(qr_rs);
-  scrut1 = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda24(qr_rs));
+  scrut1 = runtime.short_or(tmp, lambda$this);
   if (scrut1 === true) {
     return para1.cons_(p, qr_rs)
   } else {
     q = para1.head_(qr_rs);
     r_rs = tail__inst_12_13_10_tsni(qr_rs);
     r = para1.head_(r_rs);
-    tmp2 = bf$(tot_width, p, q);
-    tmp3 = bf$(tot_width, q, r);
-    scrut = tmp2 <= tmp3;
+    tmp1 = bf$(tot_width, p, q);
+    tmp2 = bf$(tot_width, q, r);
+    scrut = tmp1 <= tmp2;
     if (scrut === true) {
       return myAdd$_inst_12_13_tsni(tot_width, p, r_rs)
     } else {
@@ -492,17 +494,17 @@ myAdd$_inst_12_13_tsni = function myAdd$_inst_12_13_tsni(tot_width, p, qr_rs) {
 };
 tail__inst_12_13_10_tsni = function tail__inst_12_13_10_tsni(a_b) {
   let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     x = first0;
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -513,21 +515,21 @@ tail__inst_12_13_10_tsni = function tail__inst_12_13_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp2,
           y
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_12_13_10_11_tsni = function splitAt_inst_12_13_10_11_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (x, y) => {
@@ -537,10 +539,10 @@ splitAt_inst_12_13_10_11_tsni = function splitAt_inst_12_13_10_11_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp2,
       y0
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -588,10 +590,10 @@ map_inst_18_19_tsni = function map_inst_18_19_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-dropWhile_inst_20_21_tsni = function dropWhile_inst_20_21_tsni(f, ls) {
+leaveWhile_inst_20_21_tsni = function leaveWhile_inst_20_21_tsni(f, ls) {
   let param0, param1, h, t, scrut, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return () => {
@@ -604,7 +606,7 @@ dropWhile_inst_20_21_tsni = function dropWhile_inst_20_21_tsni(f, ls) {
     t = param1;
     scrut = runtime.safeCall(f(h));
     if (scrut === true) {
-      return dropWhile_inst_20_21_tsni(f, t)
+      return leaveWhile_inst_20_21_tsni(f, t)
     } else {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = t;
@@ -616,33 +618,33 @@ dropWhile_inst_20_21_tsni = function dropWhile_inst_20_21_tsni(f, ls) {
         t1 = param11;
         tmp = NofibPrelude.Cons(h1, t1);
         scrut1 = para.break_(para.isSpace, tmp);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first0 = scrut1[0];
-          first1 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first0 = runtime.Tuple.get(scrut1, 0);
+          first1 = runtime.Tuple.get(scrut1, 1);
           w = first0;
           s_ = first1;
           tmp1 = para.words(s_);
           return NofibPrelude.Cons(w, tmp1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 break__inst_22_23_tsni = function break__inst_22_23_tsni(p, xs) {
   let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       (l) => {
         let tmp2;
         tmp2 = NofibPrelude.Nil;
         return match_s__rest_inst_22_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
@@ -661,30 +663,30 @@ break__inst_22_23_tsni = function break__inst_22_23_tsni(p, xs) {
         tmp2 = para.lines(s__);
         return match_s__rest_inst_22_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_22_23_tsni(p, xs1);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_24_25_tsni = function map_inst_24_25_tsni(f, xs) {
@@ -712,14 +714,14 @@ map_inst_24_25_tsni = function map_inst_24_25_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_26_27_tsni = (undefined, function (w, ps) {
   let tmp, tmp1, lambda$this, lambda$this1;
-  lambda$this = runtime.safeCall(lambda9(w));
+  lambda$this = runtime.safeCall(lambda10(w));
   tmp = map_inst_26_27_19_tsni(lambda$this, ps);
-  lambda$this1 = runtime.safeCall(lambda10(w));
+  lambda$this1 = runtime.safeCall(lambda11(w));
   tmp1 = NofibPrelude.map(lambda$this1, ps);
   return append_inst_26_27_76_tsni(tmp, tmp1)
 });
@@ -748,20 +750,20 @@ map_inst_26_27_19_tsni = function map_inst_26_27_19_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 formats_inst_28_29_tsni = function formats_inst_28_29_tsni(txt) {
   let tmp, tmp1;
   tmp = lambda_inst_28_29_27_tsni;
-  tmp1 = lambda11;
+  tmp1 = lambda12;
   return para.fold1(tmp, tmp1, txt)
 };
 lambda_inst_28_29_27_tsni = (undefined, function (w, ps) {
   let tmp, tmp1, lambda$this, lambda$this1;
-  lambda$this = runtime.safeCall(lambda9(w));
+  lambda$this = runtime.safeCall(lambda10(w));
   tmp = map_inst_28_29_27_19_tsni(lambda$this, ps);
-  lambda$this1 = runtime.safeCall(lambda10(w));
+  lambda$this1 = runtime.safeCall(lambda11(w));
   tmp1 = NofibPrelude.map(lambda$this1, ps);
   return append_inst_28_29_27_76_tsni(tmp, tmp1)
 });
@@ -790,13 +792,13 @@ map_inst_28_29_27_19_tsni = function map_inst_28_29_27_19_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_30_31_tsni = function splitAt_inst_30_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
@@ -806,11 +808,11 @@ splitAt_inst_30_31_tsni = function splitAt_inst_30_31_tsni(n, ls) {
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
-    tmp3 = NofibPrelude.drop(l, tmp2);
-    arr1 = [
+    tmp3 = NofibPrelude.leave(l, tmp2);
+    arr1 = globalThis.Object.freeze([
       tmp3,
       m
-    ];
+    ]);
     tmp4 = para.tile(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -819,7 +821,7 @@ splitAt_inst_30_31_tsni = function splitAt_inst_30_31_tsni(n, ls) {
 splitAt_inst_32_11_tsni = function splitAt_inst_32_11_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (x, y) => {
@@ -829,10 +831,10 @@ splitAt_inst_32_11_tsni = function splitAt_inst_32_11_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp2,
       y0
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -840,7 +842,7 @@ splitAt_inst_32_11_tsni = function splitAt_inst_32_11_tsni(n, ls) {
 splitAt_inst_33_2_tsni = function splitAt_inst_33_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -850,10 +852,10 @@ splitAt_inst_33_2_tsni = function splitAt_inst_33_2_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -884,7 +886,7 @@ lambda$_inst_34_35_17_tsni = function lambda$_inst_34_35_17_tsni(a, xs, ys) {
 unformat_inst_36_37_tsni = function unformat_inst_36_37_tsni(a, l) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_36_37_35_tsni(a));
-  return para.fold1(tmp, lambda14, l)
+  return para.fold1(tmp, lambda18, l)
 };
 lambda_inst_36_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -921,20 +923,20 @@ lambda_inst_38_39_tsni = (undefined, function (x) {
 lines_inst_40_41_tsni = function lines_inst_40_41_tsni(s) {
   let scrut, first1, first0, l, s_;
   scrut = break__inst_40_41_23_tsni(lambda, s);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     l = first0;
     s_ = first1;
     return runtime.safeCall(s_(l))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 break__inst_40_41_23_tsni = function break__inst_40_41_23_tsni(p, xs) {
   let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       (l) => {
         let tmp2;
@@ -943,7 +945,7 @@ break__inst_40_41_23_tsni = function break__inst_40_41_23_tsni(p, xs) {
         };
         return match_s__rest_inst_40_41_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
@@ -962,38 +964,38 @@ break__inst_40_41_23_tsni = function break__inst_40_41_23_tsni(p, xs) {
         tmp2 = lines_inst_40_41_tsni(s__);
         return match_s__rest_inst_40_41_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_40_41_23_tsni(p, xs1);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 words_inst_40_42_tsni = function words_inst_40_42_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_40_42_21_tsni(para.isSpace, s);
+  scrut = leaveWhile_inst_40_42_21_tsni(para.isSpace, s);
   return runtime.safeCall(scrut())
 };
-dropWhile_inst_40_42_21_tsni = function dropWhile_inst_40_42_21_tsni(f, ls) {
+leaveWhile_inst_40_42_21_tsni = function leaveWhile_inst_40_42_21_tsni(f, ls) {
   let param0, param1, h, t, scrut, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return () => {
@@ -1006,7 +1008,7 @@ dropWhile_inst_40_42_21_tsni = function dropWhile_inst_40_42_21_tsni(f, ls) {
     t = param1;
     scrut = runtime.safeCall(f(h));
     if (scrut === true) {
-      return dropWhile_inst_40_42_21_tsni(f, t)
+      return leaveWhile_inst_40_42_21_tsni(f, t)
     } else {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = t;
@@ -1018,20 +1020,20 @@ dropWhile_inst_40_42_21_tsni = function dropWhile_inst_40_42_21_tsni(f, ls) {
         t1 = param11;
         tmp = NofibPrelude.Cons(h1, t1);
         scrut1 = para.break_(para.isSpace, tmp);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first0 = scrut1[0];
-          first1 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first0 = runtime.Tuple.get(scrut1, 0);
+          first1 = runtime.Tuple.get(scrut1, 1);
           w = first0;
           s_ = first1;
           tmp1 = words_inst_40_42_tsni(s_);
           return NofibPrelude.Cons(w, tmp1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 paras_inst_40_43_tsni = function paras_inst_40_43_tsni(ls) {
@@ -1054,7 +1056,7 @@ unparas_inst_44_45_tsni = function unparas_inst_44_45_tsni(ls) {
 unformat_inst_44_45_37_tsni = function unformat_inst_44_45_37_tsni(a, l) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_44_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda14, l)
+  return para.fold1(tmp, lambda18, l)
 };
 lambda_inst_44_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -1125,7 +1127,7 @@ map_inst_44_47_tsni = function map_inst_44_47_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unwords_inst_44_48_tsni = function unwords_inst_44_48_tsni(ws) {
@@ -1142,7 +1144,7 @@ unwords_inst_44_48_tsni = function unwords_inst_44_48_tsni(ws) {
     tmp = go_inst_44_48_50_tsni(ws1);
     return append_inst_44_48_49_tsni(w, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_44_48_49_tsni = function append_inst_44_48_49_tsni(xs, ys) {
@@ -1161,7 +1163,7 @@ append_inst_44_48_49_tsni = function append_inst_44_48_49_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_44_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 go_inst_44_48_50_tsni = function go_inst_44_48_50_tsni(vs) {
@@ -1183,7 +1185,7 @@ go_inst_44_48_50_tsni = function go_inst_44_48_50_tsni(vs) {
       return match_xs_arm_Cons_inst_44_46_79_80_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_44_48_50_51_tsni = function append_inst_44_48_50_51_tsni(xs, ys) {
@@ -1202,7 +1204,7 @@ append_inst_44_48_50_51_tsni = function append_inst_44_48_50_51_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_44_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 parse_inst_52_53_tsni = function parse_inst_52_53_tsni(ls) {
@@ -1227,10 +1229,10 @@ lambda_inst_52_53_43_39_tsni = (undefined, function (x) {
 });
 words_inst_52_53_42_tsni = function words_inst_52_53_42_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_52_53_42_21_tsni(para.isSpace, s);
+  scrut = leaveWhile_inst_52_53_42_21_tsni(para.isSpace, s);
   return runtime.safeCall(scrut())
 };
-dropWhile_inst_52_53_42_21_tsni = function dropWhile_inst_52_53_42_21_tsni(f, ls) {
+leaveWhile_inst_52_53_42_21_tsni = function leaveWhile_inst_52_53_42_21_tsni(f, ls) {
   let param0, param1, h, t, scrut, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return () => {
@@ -1243,7 +1245,7 @@ dropWhile_inst_52_53_42_21_tsni = function dropWhile_inst_52_53_42_21_tsni(f, ls
     t = param1;
     scrut = runtime.safeCall(f(h));
     if (scrut === true) {
-      return dropWhile_inst_52_53_42_21_tsni(f, t)
+      return leaveWhile_inst_52_53_42_21_tsni(f, t)
     } else {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = t;
@@ -1255,39 +1257,39 @@ dropWhile_inst_52_53_42_21_tsni = function dropWhile_inst_52_53_42_21_tsni(f, ls
         t1 = param11;
         tmp = NofibPrelude.Cons(h1, t1);
         scrut1 = para.break_(para.isSpace, tmp);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first0 = scrut1[0];
-          first1 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first0 = runtime.Tuple.get(scrut1, 0);
+          first1 = runtime.Tuple.get(scrut1, 1);
           w = first0;
           s_ = first1;
           tmp1 = words_inst_52_53_42_tsni(s_);
           return NofibPrelude.Cons(w, tmp1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lines_inst_52_53_41_tsni = function lines_inst_52_53_41_tsni(s) {
   let scrut, first1, first0, l, s_;
   scrut = break__inst_52_53_41_23_tsni(lambda, s);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     l = first0;
     s_ = first1;
     return runtime.safeCall(s_(l))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 break__inst_52_53_41_23_tsni = function break__inst_52_53_41_23_tsni(p, xs) {
   let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       (l) => {
         let tmp2;
@@ -1296,7 +1298,7 @@ break__inst_52_53_41_23_tsni = function break__inst_52_53_41_23_tsni(p, xs) {
         };
         return match_s__rest_inst_52_53_41_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
@@ -1315,30 +1317,30 @@ break__inst_52_53_41_23_tsni = function break__inst_52_53_41_23_tsni(p, xs) {
         tmp2 = lines_inst_52_53_41_tsni(s__);
         return match_s__rest_inst_52_53_41_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_52_53_41_23_tsni(p, xs1);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 filter_inst_52_53_43_54_tsni = function filter_inst_52_53_43_54_tsni(f, ls) {
@@ -1371,7 +1373,7 @@ filter_inst_52_53_43_54_tsni = function filter_inst_52_53_43_54_tsni(f, ls) {
       return filter_inst_52_53_43_54_tsni(f, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unparse_inst_52_55_tsni = function unparse_inst_52_55_tsni(ls) {
@@ -1426,7 +1428,7 @@ map_inst_52_55_47_tsni = function map_inst_52_55_47_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unwords_inst_52_55_48_tsni = function unwords_inst_52_55_48_tsni(ws) {
@@ -1443,7 +1445,7 @@ unwords_inst_52_55_48_tsni = function unwords_inst_52_55_48_tsni(ws) {
     tmp = go_inst_52_55_48_50_tsni(ws1);
     return append_inst_52_55_48_49_tsni(w, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_52_55_48_49_tsni = function append_inst_52_55_48_49_tsni(xs, ys) {
@@ -1462,7 +1464,7 @@ append_inst_52_55_48_49_tsni = function append_inst_52_55_48_49_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_52_55_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 go_inst_52_55_48_50_tsni = function go_inst_52_55_48_50_tsni(vs) {
@@ -1484,7 +1486,7 @@ go_inst_52_55_48_50_tsni = function go_inst_52_55_48_50_tsni(vs) {
       return match_xs_arm_Cons_inst_52_55_46_79_80_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_52_55_48_50_51_tsni = function append_inst_52_55_48_50_51_tsni(xs, ys) {
@@ -1503,7 +1505,7 @@ append_inst_52_55_48_50_51_tsni = function append_inst_52_55_48_50_51_tsni(xs, y
       return match_xs_arm_Cons_inst_52_55_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unparas_inst_52_55_45_tsni = function unparas_inst_52_55_45_tsni(ls) {
@@ -1512,7 +1514,7 @@ unparas_inst_52_55_45_tsni = function unparas_inst_52_55_45_tsni(ls) {
 unformat_inst_52_55_45_37_tsni = function unformat_inst_52_55_45_37_tsni(a, l) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_52_55_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda14, l)
+  return para.fold1(tmp, lambda18, l)
 };
 lambda_inst_52_55_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -1538,19 +1540,19 @@ lambda$_inst_52_55_45_37_35_17_tsni = function lambda$_inst_52_55_45_37_35_17_ts
   return NofibPrelude.append(xs, tmp1)
 };
 myAdd$_inst_56_57_tsni = function myAdd$_inst_56_57_tsni(tot_width, p, qr_rs) {
-  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
+  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
   tmp = para1.single_(qr_rs);
-  tmp1 = para1.null__(qr_rs);
-  scrut1 = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda24(qr_rs));
+  scrut1 = runtime.short_or(tmp, lambda$this);
   if (scrut1 === true) {
     return para1.cons_(p, qr_rs)
   } else {
     q = para1.head_(qr_rs);
     r_rs = tail__inst_56_57_10_tsni(qr_rs);
     r = para1.head_(r_rs);
-    tmp2 = bf$(tot_width, p, q);
-    tmp3 = bf$(tot_width, q, r);
-    scrut = tmp2 <= tmp3;
+    tmp1 = bf$(tot_width, p, q);
+    tmp2 = bf$(tot_width, q, r);
+    scrut = tmp1 <= tmp2;
     if (scrut === true) {
       return myAdd$_inst_56_57_tsni(tot_width, p, r_rs)
     } else {
@@ -1560,17 +1562,17 @@ myAdd$_inst_56_57_tsni = function myAdd$_inst_56_57_tsni(tot_width, p, qr_rs) {
 };
 tail__inst_56_57_10_tsni = function tail__inst_56_57_10_tsni(a_b) {
   let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     x = first0;
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -1581,21 +1583,21 @@ tail__inst_56_57_10_tsni = function tail__inst_56_57_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp2,
           y
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_56_57_10_11_tsni = function splitAt_inst_56_57_10_11_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (x, y) => {
@@ -1605,15 +1607,15 @@ splitAt_inst_56_57_10_11_tsni = function splitAt_inst_56_57_10_11_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp2,
       y0
-    ];
+    ]);
     return arr1
   };
   return arr
 };
-drop_nofit$_inst_56_58_tsni = function drop_nofit$_inst_56_58_tsni(tot_width, ps_p) {
+leave_nofit$_inst_56_58_tsni = function leave_nofit$_inst_56_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
   scrut1 = para1.null__(ps_p);
   if (scrut1 === true) {
@@ -1624,7 +1626,7 @@ drop_nofit$_inst_56_58_tsni = function drop_nofit$_inst_56_58_tsni(tot_width, ps
     scrut = tmp1 > para1.maxw;
     if (scrut === true) {
       tmp2 = init__inst_56_58_6_tsni(ps_p);
-      return drop_nofit$_inst_56_58_tsni(tot_width, tmp2)
+      return leave_nofit$_inst_56_58_tsni(tot_width, tmp2)
     } else {
       return ps_p
     }
@@ -1632,17 +1634,17 @@ drop_nofit$_inst_56_58_tsni = function drop_nofit$_inst_56_58_tsni(tot_width, ps
 };
 init__inst_56_58_6_tsni = function init__inst_56_58_6_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -1653,21 +1655,21 @@ init__inst_56_58_6_tsni = function init__inst_56_58_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_56_58_6_2_tsni = function splitAt_inst_56_58_6_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -1677,10 +1679,10 @@ splitAt_inst_56_58_6_2_tsni = function splitAt_inst_56_58_6_2_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -1711,17 +1713,17 @@ trim$_inst_56_59_tsni = function trim$_inst_56_59_tsni(tot_width, ps_pq) {
 };
 init__inst_56_59_1_tsni = function init__inst_56_59_1_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -1732,21 +1734,21 @@ init__inst_56_59_1_tsni = function init__inst_56_59_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_56_59_1_2_tsni = function splitAt_inst_56_59_1_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -1756,20 +1758,20 @@ splitAt_inst_56_59_1_2_tsni = function splitAt_inst_56_59_1_2_tsni(n, ls) {
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
 };
 stepr_inst_60_61_tsni = function stepr_inst_60_61_tsni(w, ps_tw_tl) {
   let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
-  if (globalThis.Array.isArray(ps_tw_tl) && ps_tw_tl.length === 3) {
-    first0 = ps_tw_tl[0];
-    first1 = ps_tw_tl[1];
-    first2 = ps_tw_tl[2];
+  if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
+    first0 = runtime.Tuple.get(ps_tw_tl, 0);
+    first1 = runtime.Tuple.get(ps_tw_tl, 1);
+    first2 = runtime.Tuple.get(ps_tw_tl, 2);
     ps = first0;
     tw = first1;
     tl = first2;
@@ -1781,16 +1783,16 @@ stepr_inst_60_61_tsni = function stepr_inst_60_61_tsni(w, ps_tw_tl) {
     tmp3 = para.last_(ps);
     tmp4 = new_$(tw, tl, tmp3);
     tmp5 = myAdd$_inst_60_61_57_tsni(tot_width, tmp4, ps);
-    tmp6 = drop_nofit$_inst_60_61_58_tsni(tot_width, tmp5);
+    tmp6 = leave_nofit$_inst_60_61_58_tsni(tot_width, tmp5);
     tmp7 = trim$_inst_60_61_59_tsni(tot_width, tmp6);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp7,
       tot_width,
       tot_len
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 trim$_inst_60_61_59_tsni = function trim$_inst_60_61_59_tsni(tot_width, ps_pq) {
@@ -1819,17 +1821,17 @@ trim$_inst_60_61_59_tsni = function trim$_inst_60_61_59_tsni(tot_width, ps_pq) {
 };
 init__inst_60_61_59_1_tsni = function init__inst_60_61_59_1_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -1840,21 +1842,21 @@ init__inst_60_61_59_1_tsni = function init__inst_60_61_59_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_60_61_59_1_2_tsni = function splitAt_inst_60_61_59_1_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -1864,15 +1866,15 @@ splitAt_inst_60_61_59_1_2_tsni = function splitAt_inst_60_61_59_1_2_tsni(n, ls) 
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
 };
-drop_nofit$_inst_60_61_58_tsni = function drop_nofit$_inst_60_61_58_tsni(tot_width, ps_p) {
+leave_nofit$_inst_60_61_58_tsni = function leave_nofit$_inst_60_61_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
   scrut1 = para1.null__(ps_p);
   if (scrut1 === true) {
@@ -1883,7 +1885,7 @@ drop_nofit$_inst_60_61_58_tsni = function drop_nofit$_inst_60_61_58_tsni(tot_wid
     scrut = tmp1 > para1.maxw;
     if (scrut === true) {
       tmp2 = init__inst_60_61_58_6_tsni(ps_p);
-      return drop_nofit$_inst_60_61_58_tsni(tot_width, tmp2)
+      return leave_nofit$_inst_60_61_58_tsni(tot_width, tmp2)
     } else {
       return ps_p
     }
@@ -1891,17 +1893,17 @@ drop_nofit$_inst_60_61_58_tsni = function drop_nofit$_inst_60_61_58_tsni(tot_wid
 };
 init__inst_60_61_58_6_tsni = function init__inst_60_61_58_6_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -1912,21 +1914,21 @@ init__inst_60_61_58_6_tsni = function init__inst_60_61_58_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_60_61_58_6_2_tsni = function splitAt_inst_60_61_58_6_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -1936,28 +1938,28 @@ splitAt_inst_60_61_58_6_2_tsni = function splitAt_inst_60_61_58_6_2_tsni(n, ls) 
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
 };
 myAdd$_inst_60_61_57_tsni = function myAdd$_inst_60_61_57_tsni(tot_width, p, qr_rs) {
-  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
+  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
   tmp = para1.single_(qr_rs);
-  tmp1 = para1.null__(qr_rs);
-  scrut1 = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda24(qr_rs));
+  scrut1 = runtime.short_or(tmp, lambda$this);
   if (scrut1 === true) {
     return para1.cons_(p, qr_rs)
   } else {
     q = para1.head_(qr_rs);
     r_rs = tail__inst_60_61_57_10_tsni(qr_rs);
     r = para1.head_(r_rs);
-    tmp2 = bf$(tot_width, p, q);
-    tmp3 = bf$(tot_width, q, r);
-    scrut = tmp2 <= tmp3;
+    tmp1 = bf$(tot_width, p, q);
+    tmp2 = bf$(tot_width, q, r);
+    scrut = tmp1 <= tmp2;
     if (scrut === true) {
       return myAdd$_inst_60_61_57_tsni(tot_width, p, r_rs)
     } else {
@@ -1967,17 +1969,17 @@ myAdd$_inst_60_61_57_tsni = function myAdd$_inst_60_61_57_tsni(tot_width, p, qr_
 };
 tail__inst_60_61_57_10_tsni = function tail__inst_60_61_57_10_tsni(a_b) {
   let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     x = first0;
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -1988,21 +1990,21 @@ tail__inst_60_61_57_10_tsni = function tail__inst_60_61_57_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp2,
           y
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_60_61_57_10_11_tsni = function splitAt_inst_60_61_57_10_11_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (x, y) => {
@@ -2012,19 +2014,19 @@ splitAt_inst_60_61_57_10_11_tsni = function splitAt_inst_60_61_57_10_11_tsni(n, 
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp2,
       y0
-    ];
+    ]);
     return arr1
   };
   return arr
 };
 tile_inst_60_62_tsni = function tile_inst_60_62_tsni(ws, a_b) {
   let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     if (first0 instanceof NofibPrelude.Nil.class) {
       n1 = first1;
       return NofibPrelude.Nil
@@ -2039,16 +2041,16 @@ tile_inst_60_62_tsni = function tile_inst_60_62_tsni(ws, a_b) {
       scrut = splitAt_inst_60_62_31_tsni(l, ws);
       return runtime.safeCall(scrut(m, ms, l))
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_60_62_31_tsni = function splitAt_inst_60_62_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
@@ -2058,11 +2060,11 @@ splitAt_inst_60_62_31_tsni = function splitAt_inst_60_62_31_tsni(n, ls) {
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
-    tmp3 = NofibPrelude.drop(l, tmp2);
-    arr1 = [
+    tmp3 = NofibPrelude.leave(l, tmp2);
+    arr1 = globalThis.Object.freeze([
       tmp3,
       m
-    ];
+    ]);
     tmp4 = tile_inst_60_62_tsni(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -2090,10 +2092,10 @@ lambda_inst_63_64_43_39_tsni = (undefined, function (x) {
 });
 words_inst_63_64_42_tsni = function words_inst_63_64_42_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_63_64_42_21_tsni(para.isSpace, s);
+  scrut = leaveWhile_inst_63_64_42_21_tsni(para.isSpace, s);
   return runtime.safeCall(scrut())
 };
-dropWhile_inst_63_64_42_21_tsni = function dropWhile_inst_63_64_42_21_tsni(f, ls) {
+leaveWhile_inst_63_64_42_21_tsni = function leaveWhile_inst_63_64_42_21_tsni(f, ls) {
   let param0, param1, h, t, scrut, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return () => {
@@ -2106,7 +2108,7 @@ dropWhile_inst_63_64_42_21_tsni = function dropWhile_inst_63_64_42_21_tsni(f, ls
     t = param1;
     scrut = runtime.safeCall(f(h));
     if (scrut === true) {
-      return dropWhile_inst_63_64_42_21_tsni(f, t)
+      return leaveWhile_inst_63_64_42_21_tsni(f, t)
     } else {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = t;
@@ -2118,39 +2120,39 @@ dropWhile_inst_63_64_42_21_tsni = function dropWhile_inst_63_64_42_21_tsni(f, ls
         t1 = param11;
         tmp = NofibPrelude.Cons(h1, t1);
         scrut1 = para.break_(para.isSpace, tmp);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first0 = scrut1[0];
-          first1 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first0 = runtime.Tuple.get(scrut1, 0);
+          first1 = runtime.Tuple.get(scrut1, 1);
           w = first0;
           s_ = first1;
           tmp1 = words_inst_63_64_42_tsni(s_);
           return NofibPrelude.Cons(w, tmp1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lines_inst_63_64_41_tsni = function lines_inst_63_64_41_tsni(s) {
   let scrut, first1, first0, l, s_;
   scrut = break__inst_63_64_41_23_tsni(lambda, s);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     l = first0;
     s_ = first1;
     return runtime.safeCall(s_(l))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 break__inst_63_64_41_23_tsni = function break__inst_63_64_41_23_tsni(p, xs) {
   let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       (l) => {
         let tmp2;
@@ -2159,7 +2161,7 @@ break__inst_63_64_41_23_tsni = function break__inst_63_64_41_23_tsni(p, xs) {
         };
         return match_s__rest_inst_63_64_41_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
@@ -2178,30 +2180,30 @@ break__inst_63_64_41_23_tsni = function break__inst_63_64_41_23_tsni(p, xs) {
         tmp2 = lines_inst_63_64_41_tsni(s__);
         return match_s__rest_inst_63_64_41_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_63_64_41_23_tsni(p, xs1);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 filter_inst_63_64_43_54_tsni = function filter_inst_63_64_43_54_tsni(f, ls) {
@@ -2235,7 +2237,7 @@ filter_inst_63_64_43_54_tsni = function filter_inst_63_64_43_54_tsni(f, ls) {
       return filter_inst_63_64_43_54_tsni(f, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 par3_inst_63_65_tsni = function par3_inst_63_65_tsni(ws) {
@@ -2243,21 +2245,21 @@ par3_inst_63_65_tsni = function par3_inst_63_65_tsni(ws) {
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
   tmp1 = para.scan1(stepr_inst_63_65_61_tsni, para.startr, tmp);
   zs = tmp1;
-  tmp2 = lambda19;
+  tmp2 = lambda25;
   tmp3 = NofibPrelude.map(tmp2, zs);
   tmp4 = NofibPrelude.head(zs);
   tmp5 = para.thd3(tmp4);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp3,
     tmp5
-  ];
+  ]);
   return tile_inst_63_65_62_tsni(ws, arr)
 };
 tile_inst_63_65_62_tsni = function tile_inst_63_65_62_tsni(ws, a_b) {
   let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     if (first0 instanceof NofibPrelude.Nil.class) {
       n1 = first1;
       return NofibPrelude.Nil
@@ -2272,16 +2274,16 @@ tile_inst_63_65_62_tsni = function tile_inst_63_65_62_tsni(ws, a_b) {
       scrut = splitAt_inst_63_65_62_31_tsni(l, ws);
       return runtime.safeCall(scrut(m, ms, l))
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_63_65_62_31_tsni = function splitAt_inst_63_65_62_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
@@ -2291,11 +2293,11 @@ splitAt_inst_63_65_62_31_tsni = function splitAt_inst_63_65_62_31_tsni(n, ls) {
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
-    tmp3 = NofibPrelude.drop(l, tmp2);
-    arr1 = [
+    tmp3 = NofibPrelude.leave(l, tmp2);
+    arr1 = globalThis.Object.freeze([
       tmp3,
       m
-    ];
+    ]);
     tmp4 = tile_inst_63_65_62_tsni(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -2303,10 +2305,10 @@ splitAt_inst_63_65_62_31_tsni = function splitAt_inst_63_65_62_31_tsni(n, ls) {
 };
 stepr_inst_63_65_61_tsni = function stepr_inst_63_65_61_tsni(w, ps_tw_tl) {
   let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
-  if (globalThis.Array.isArray(ps_tw_tl) && ps_tw_tl.length === 3) {
-    first0 = ps_tw_tl[0];
-    first1 = ps_tw_tl[1];
-    first2 = ps_tw_tl[2];
+  if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
+    first0 = runtime.Tuple.get(ps_tw_tl, 0);
+    first1 = runtime.Tuple.get(ps_tw_tl, 1);
+    first2 = runtime.Tuple.get(ps_tw_tl, 2);
     ps = first0;
     tw = first1;
     tl = first2;
@@ -2318,32 +2320,32 @@ stepr_inst_63_65_61_tsni = function stepr_inst_63_65_61_tsni(w, ps_tw_tl) {
     tmp3 = para.last_(ps);
     tmp4 = new_$(tw, tl, tmp3);
     tmp5 = myAdd$_inst_63_65_61_57_tsni(tot_width, tmp4, ps);
-    tmp6 = drop_nofit$_inst_63_65_61_58_tsni(tot_width, tmp5);
+    tmp6 = leave_nofit$_inst_63_65_61_58_tsni(tot_width, tmp5);
     tmp7 = trim$_inst_63_65_61_59_tsni(tot_width, tmp6);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp7,
       tot_width,
       tot_len
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 myAdd$_inst_63_65_61_57_tsni = function myAdd$_inst_63_65_61_57_tsni(tot_width, p, qr_rs) {
-  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
+  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
   tmp = para1.single_(qr_rs);
-  tmp1 = para1.null__(qr_rs);
-  scrut1 = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda24(qr_rs));
+  scrut1 = runtime.short_or(tmp, lambda$this);
   if (scrut1 === true) {
     return para1.cons_(p, qr_rs)
   } else {
     q = para1.head_(qr_rs);
     r_rs = tail__inst_63_65_61_57_10_tsni(qr_rs);
     r = para1.head_(r_rs);
-    tmp2 = bf$(tot_width, p, q);
-    tmp3 = bf$(tot_width, q, r);
-    scrut = tmp2 <= tmp3;
+    tmp1 = bf$(tot_width, p, q);
+    tmp2 = bf$(tot_width, q, r);
+    scrut = tmp1 <= tmp2;
     if (scrut === true) {
       return myAdd$_inst_63_65_61_57_tsni(tot_width, p, r_rs)
     } else {
@@ -2353,17 +2355,17 @@ myAdd$_inst_63_65_61_57_tsni = function myAdd$_inst_63_65_61_57_tsni(tot_width, 
 };
 tail__inst_63_65_61_57_10_tsni = function tail__inst_63_65_61_57_10_tsni(a_b) {
   let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     x = first0;
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -2374,21 +2376,21 @@ tail__inst_63_65_61_57_10_tsni = function tail__inst_63_65_61_57_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp2,
           y
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_63_65_61_57_10_11_tsni = function splitAt_inst_63_65_61_57_10_11_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (x, y) => {
@@ -2398,15 +2400,15 @@ splitAt_inst_63_65_61_57_10_11_tsni = function splitAt_inst_63_65_61_57_10_11_ts
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp2,
       y0
-    ];
+    ]);
     return arr1
   };
   return arr
 };
-drop_nofit$_inst_63_65_61_58_tsni = function drop_nofit$_inst_63_65_61_58_tsni(tot_width, ps_p) {
+leave_nofit$_inst_63_65_61_58_tsni = function leave_nofit$_inst_63_65_61_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
   scrut1 = para1.null__(ps_p);
   if (scrut1 === true) {
@@ -2417,7 +2419,7 @@ drop_nofit$_inst_63_65_61_58_tsni = function drop_nofit$_inst_63_65_61_58_tsni(t
     scrut = tmp1 > para1.maxw;
     if (scrut === true) {
       tmp2 = init__inst_63_65_61_58_6_tsni(ps_p);
-      return drop_nofit$_inst_63_65_61_58_tsni(tot_width, tmp2)
+      return leave_nofit$_inst_63_65_61_58_tsni(tot_width, tmp2)
     } else {
       return ps_p
     }
@@ -2425,17 +2427,17 @@ drop_nofit$_inst_63_65_61_58_tsni = function drop_nofit$_inst_63_65_61_58_tsni(t
 };
 init__inst_63_65_61_58_6_tsni = function init__inst_63_65_61_58_6_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -2446,21 +2448,21 @@ init__inst_63_65_61_58_6_tsni = function init__inst_63_65_61_58_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_63_65_61_58_6_2_tsni = function splitAt_inst_63_65_61_58_6_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -2470,10 +2472,10 @@ splitAt_inst_63_65_61_58_6_2_tsni = function splitAt_inst_63_65_61_58_6_2_tsni(n
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -2504,17 +2506,17 @@ trim$_inst_63_65_61_59_tsni = function trim$_inst_63_65_61_59_tsni(tot_width, ps
 };
 init__inst_63_65_61_59_1_tsni = function init__inst_63_65_61_59_1_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -2525,21 +2527,21 @@ init__inst_63_65_61_59_1_tsni = function init__inst_63_65_61_59_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_63_65_61_59_1_2_tsni = function splitAt_inst_63_65_61_59_1_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -2549,10 +2551,10 @@ splitAt_inst_63_65_61_59_1_2_tsni = function splitAt_inst_63_65_61_59_1_2_tsni(n
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -2583,7 +2585,7 @@ append_inst_63_66_67_tsni = function append_inst_63_66_67_tsni(xs, ys) {
       return NofibPrelude.Cons(tmp1, tmp2)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unparse_inst_63_68_tsni = function unparse_inst_63_68_tsni(ls) {
@@ -2638,7 +2640,7 @@ map_inst_63_68_47_tsni = function map_inst_63_68_47_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unwords_inst_63_68_48_tsni = function unwords_inst_63_68_48_tsni(ws) {
@@ -2655,7 +2657,7 @@ unwords_inst_63_68_48_tsni = function unwords_inst_63_68_48_tsni(ws) {
     tmp = go_inst_63_68_48_50_tsni(ws1);
     return append_inst_63_68_48_49_tsni(w, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_63_68_48_49_tsni = function append_inst_63_68_48_49_tsni(xs, ys) {
@@ -2674,7 +2676,7 @@ append_inst_63_68_48_49_tsni = function append_inst_63_68_48_49_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_63_68_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 go_inst_63_68_48_50_tsni = function go_inst_63_68_48_50_tsni(vs) {
@@ -2696,7 +2698,7 @@ go_inst_63_68_48_50_tsni = function go_inst_63_68_48_50_tsni(vs) {
       return match_xs_arm_Cons_inst_63_68_46_79_80_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_63_68_48_50_51_tsni = function append_inst_63_68_48_50_51_tsni(xs, ys) {
@@ -2715,7 +2717,7 @@ append_inst_63_68_48_50_51_tsni = function append_inst_63_68_48_50_51_tsni(xs, y
       return match_xs_arm_Cons_inst_63_68_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unparas_inst_63_68_45_tsni = function unparas_inst_63_68_45_tsni(ls) {
@@ -2724,7 +2726,7 @@ unparas_inst_63_68_45_tsni = function unparas_inst_63_68_45_tsni(ls) {
 unformat_inst_63_68_45_37_tsni = function unformat_inst_63_68_45_37_tsni(a, l) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_63_68_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda14, l)
+  return para.fold1(tmp, lambda18, l)
 };
 lambda_inst_63_68_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -2768,7 +2770,7 @@ unparas_inst_69_70_68_45_tsni = function unparas_inst_69_70_68_45_tsni(ls) {
 unformat_inst_69_70_68_45_37_tsni = function unformat_inst_69_70_68_45_37_tsni(a, l) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_69_70_68_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda14, l)
+  return para.fold1(tmp, lambda18, l)
 };
 lambda_inst_69_70_68_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -2839,7 +2841,7 @@ map_inst_69_70_68_47_tsni = function map_inst_69_70_68_47_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unwords_inst_69_70_68_48_tsni = function unwords_inst_69_70_68_48_tsni(ws) {
@@ -2856,7 +2858,7 @@ unwords_inst_69_70_68_48_tsni = function unwords_inst_69_70_68_48_tsni(ws) {
     tmp = go_inst_69_70_68_48_50_tsni(ws1);
     return append_inst_69_70_68_48_49_tsni(w, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_69_70_68_48_49_tsni = function append_inst_69_70_68_48_49_tsni(xs, ys) {
@@ -2875,7 +2877,7 @@ append_inst_69_70_68_48_49_tsni = function append_inst_69_70_68_48_49_tsni(xs, y
       return match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 go_inst_69_70_68_48_50_tsni = function go_inst_69_70_68_48_50_tsni(vs) {
@@ -2897,7 +2899,7 @@ go_inst_69_70_68_48_50_tsni = function go_inst_69_70_68_48_50_tsni(vs) {
       return match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_69_70_68_48_50_51_tsni = function append_inst_69_70_68_48_50_51_tsni(xs, ys) {
@@ -2916,7 +2918,7 @@ append_inst_69_70_68_48_50_51_tsni = function append_inst_69_70_68_48_50_51_tsni
       return match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 par3_inst_69_70_65_tsni = function par3_inst_69_70_65_tsni(ws) {
@@ -2924,22 +2926,22 @@ par3_inst_69_70_65_tsni = function par3_inst_69_70_65_tsni(ws) {
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
   tmp1 = para.scan1(stepr_inst_69_70_65_61_tsni, para.startr, tmp);
   zs = tmp1;
-  tmp2 = lambda19;
+  tmp2 = lambda25;
   tmp3 = NofibPrelude.map(tmp2, zs);
   tmp4 = NofibPrelude.head(zs);
   tmp5 = para.thd3(tmp4);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp3,
     tmp5
-  ];
+  ]);
   return tile_inst_69_70_65_62_tsni(ws, arr)
 };
 stepr_inst_69_70_65_61_tsni = function stepr_inst_69_70_65_61_tsni(w, ps_tw_tl) {
   let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
-  if (globalThis.Array.isArray(ps_tw_tl) && ps_tw_tl.length === 3) {
-    first0 = ps_tw_tl[0];
-    first1 = ps_tw_tl[1];
-    first2 = ps_tw_tl[2];
+  if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
+    first0 = runtime.Tuple.get(ps_tw_tl, 0);
+    first1 = runtime.Tuple.get(ps_tw_tl, 1);
+    first2 = runtime.Tuple.get(ps_tw_tl, 2);
     ps = first0;
     tw = first1;
     tl = first2;
@@ -2951,16 +2953,16 @@ stepr_inst_69_70_65_61_tsni = function stepr_inst_69_70_65_61_tsni(w, ps_tw_tl) 
     tmp3 = para.last_(ps);
     tmp4 = new_$(tw, tl, tmp3);
     tmp5 = myAdd$_inst_69_70_65_61_57_tsni(tot_width, tmp4, ps);
-    tmp6 = drop_nofit$_inst_69_70_65_61_58_tsni(tot_width, tmp5);
+    tmp6 = leave_nofit$_inst_69_70_65_61_58_tsni(tot_width, tmp5);
     tmp7 = trim$_inst_69_70_65_61_59_tsni(tot_width, tmp6);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp7,
       tot_width,
       tot_len
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 trim$_inst_69_70_65_61_59_tsni = function trim$_inst_69_70_65_61_59_tsni(tot_width, ps_pq) {
@@ -2989,17 +2991,17 @@ trim$_inst_69_70_65_61_59_tsni = function trim$_inst_69_70_65_61_59_tsni(tot_wid
 };
 init__inst_69_70_65_61_59_1_tsni = function init__inst_69_70_65_61_59_1_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -3010,21 +3012,21 @@ init__inst_69_70_65_61_59_1_tsni = function init__inst_69_70_65_61_59_1_tsni(a_b
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_69_70_65_61_59_1_2_tsni = function splitAt_inst_69_70_65_61_59_1_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -3034,15 +3036,15 @@ splitAt_inst_69_70_65_61_59_1_2_tsni = function splitAt_inst_69_70_65_61_59_1_2_
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
 };
-drop_nofit$_inst_69_70_65_61_58_tsni = function drop_nofit$_inst_69_70_65_61_58_tsni(tot_width, ps_p) {
+leave_nofit$_inst_69_70_65_61_58_tsni = function leave_nofit$_inst_69_70_65_61_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
   scrut1 = para1.null__(ps_p);
   if (scrut1 === true) {
@@ -3053,7 +3055,7 @@ drop_nofit$_inst_69_70_65_61_58_tsni = function drop_nofit$_inst_69_70_65_61_58_
     scrut = tmp1 > para1.maxw;
     if (scrut === true) {
       tmp2 = init__inst_69_70_65_61_58_6_tsni(ps_p);
-      return drop_nofit$_inst_69_70_65_61_58_tsni(tot_width, tmp2)
+      return leave_nofit$_inst_69_70_65_61_58_tsni(tot_width, tmp2)
     } else {
       return ps_p
     }
@@ -3061,17 +3063,17 @@ drop_nofit$_inst_69_70_65_61_58_tsni = function drop_nofit$_inst_69_70_65_61_58_
 };
 init__inst_69_70_65_61_58_6_tsni = function init__inst_69_70_65_61_58_6_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -3082,21 +3084,21 @@ init__inst_69_70_65_61_58_6_tsni = function init__inst_69_70_65_61_58_6_tsni(a_b
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_69_70_65_61_58_6_2_tsni = function splitAt_inst_69_70_65_61_58_6_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -3106,28 +3108,28 @@ splitAt_inst_69_70_65_61_58_6_2_tsni = function splitAt_inst_69_70_65_61_58_6_2_
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
 };
 myAdd$_inst_69_70_65_61_57_tsni = function myAdd$_inst_69_70_65_61_57_tsni(tot_width, p, qr_rs) {
-  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
+  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
   tmp = para1.single_(qr_rs);
-  tmp1 = para1.null__(qr_rs);
-  scrut1 = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda24(qr_rs));
+  scrut1 = runtime.short_or(tmp, lambda$this);
   if (scrut1 === true) {
     return para1.cons_(p, qr_rs)
   } else {
     q = para1.head_(qr_rs);
     r_rs = tail__inst_69_70_65_61_57_10_tsni(qr_rs);
     r = para1.head_(r_rs);
-    tmp2 = bf$(tot_width, p, q);
-    tmp3 = bf$(tot_width, q, r);
-    scrut = tmp2 <= tmp3;
+    tmp1 = bf$(tot_width, p, q);
+    tmp2 = bf$(tot_width, q, r);
+    scrut = tmp1 <= tmp2;
     if (scrut === true) {
       return myAdd$_inst_69_70_65_61_57_tsni(tot_width, p, r_rs)
     } else {
@@ -3137,17 +3139,17 @@ myAdd$_inst_69_70_65_61_57_tsni = function myAdd$_inst_69_70_65_61_57_tsni(tot_w
 };
 tail__inst_69_70_65_61_57_10_tsni = function tail__inst_69_70_65_61_57_10_tsni(a_b) {
   let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     x = first0;
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -3158,21 +3160,21 @@ tail__inst_69_70_65_61_57_10_tsni = function tail__inst_69_70_65_61_57_10_tsni(a
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp2,
           y
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_69_70_65_61_57_10_11_tsni = function splitAt_inst_69_70_65_61_57_10_11_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (x, y) => {
@@ -3182,19 +3184,19 @@ splitAt_inst_69_70_65_61_57_10_11_tsni = function splitAt_inst_69_70_65_61_57_10
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp2,
       y0
-    ];
+    ]);
     return arr1
   };
   return arr
 };
 tile_inst_69_70_65_62_tsni = function tile_inst_69_70_65_62_tsni(ws, a_b) {
   let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     if (first0 instanceof NofibPrelude.Nil.class) {
       n1 = first1;
       return NofibPrelude.Nil
@@ -3209,16 +3211,16 @@ tile_inst_69_70_65_62_tsni = function tile_inst_69_70_65_62_tsni(ws, a_b) {
       scrut = splitAt_inst_69_70_65_62_31_tsni(l, ws);
       return runtime.safeCall(scrut(m, ms, l))
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_69_70_65_62_31_tsni = function splitAt_inst_69_70_65_62_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
@@ -3228,11 +3230,11 @@ splitAt_inst_69_70_65_62_31_tsni = function splitAt_inst_69_70_65_62_31_tsni(n, 
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
-    tmp3 = NofibPrelude.drop(l, tmp2);
-    arr1 = [
+    tmp3 = NofibPrelude.leave(l, tmp2);
+    arr1 = globalThis.Object.freeze([
       tmp3,
       m
-    ];
+    ]);
     tmp4 = tile_inst_69_70_65_62_tsni(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -3264,7 +3266,7 @@ append_inst_69_70_66_67_tsni = function append_inst_69_70_66_67_tsni(xs, ys) {
       return NofibPrelude.Cons(tmp1, tmp2)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 parse_inst_69_70_64_tsni = function parse_inst_69_70_64_tsni(ls) {
@@ -3276,20 +3278,20 @@ parse_inst_69_70_64_tsni = function parse_inst_69_70_64_tsni(ls) {
 lines_inst_69_70_64_41_tsni = function lines_inst_69_70_64_41_tsni(s) {
   let scrut, first1, first0, l, s_;
   scrut = break__inst_69_70_64_41_23_tsni(lambda, s);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     l = first0;
     s_ = first1;
     return runtime.safeCall(s_(l))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 break__inst_69_70_64_41_23_tsni = function break__inst_69_70_64_41_23_tsni(p, xs) {
   let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       (l) => {
         let tmp2;
@@ -3298,7 +3300,7 @@ break__inst_69_70_64_41_23_tsni = function break__inst_69_70_64_41_23_tsni(p, xs
         };
         return match_s__rest_inst_69_70_64_41_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
@@ -3317,38 +3319,38 @@ break__inst_69_70_64_41_23_tsni = function break__inst_69_70_64_41_23_tsni(p, xs
         tmp2 = lines_inst_69_70_64_41_tsni(s__);
         return match_s__rest_inst_69_70_64_41_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_69_70_64_41_23_tsni(p, xs1);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 words_inst_69_70_64_42_tsni = function words_inst_69_70_64_42_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_69_70_64_42_21_tsni(para.isSpace, s);
+  scrut = leaveWhile_inst_69_70_64_42_21_tsni(para.isSpace, s);
   return runtime.safeCall(scrut())
 };
-dropWhile_inst_69_70_64_42_21_tsni = function dropWhile_inst_69_70_64_42_21_tsni(f, ls) {
+leaveWhile_inst_69_70_64_42_21_tsni = function leaveWhile_inst_69_70_64_42_21_tsni(f, ls) {
   let param0, param1, h, t, scrut, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return () => {
@@ -3361,7 +3363,7 @@ dropWhile_inst_69_70_64_42_21_tsni = function dropWhile_inst_69_70_64_42_21_tsni
     t = param1;
     scrut = runtime.safeCall(f(h));
     if (scrut === true) {
-      return dropWhile_inst_69_70_64_42_21_tsni(f, t)
+      return leaveWhile_inst_69_70_64_42_21_tsni(f, t)
     } else {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = t;
@@ -3373,20 +3375,20 @@ dropWhile_inst_69_70_64_42_21_tsni = function dropWhile_inst_69_70_64_42_21_tsni
         t1 = param11;
         tmp = NofibPrelude.Cons(h1, t1);
         scrut1 = para.break_(para.isSpace, tmp);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first0 = scrut1[0];
-          first1 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first0 = runtime.Tuple.get(scrut1, 0);
+          first1 = runtime.Tuple.get(scrut1, 1);
           w = first0;
           s_ = first1;
           tmp1 = words_inst_69_70_64_42_tsni(s_);
           return NofibPrelude.Cons(w, tmp1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 paras_inst_69_70_64_43_tsni = function paras_inst_69_70_64_43_tsni(ls) {
@@ -3434,7 +3436,7 @@ filter_inst_69_70_64_43_54_tsni = function filter_inst_69_70_64_43_54_tsni(f, ls
       return filter_inst_69_70_64_43_54_tsni(f, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 testPara_nofib_inst_71_72_tsni = function testPara_nofib_inst_71_72_tsni() {
@@ -3477,10 +3479,10 @@ lambda_inst_71_72_70_64_43_39_tsni = (undefined, function (x) {
 });
 words_inst_71_72_70_64_42_tsni = function words_inst_71_72_70_64_42_tsni(s) {
   let scrut;
-  scrut = dropWhile_inst_71_72_70_64_42_21_tsni(para.isSpace, s);
+  scrut = leaveWhile_inst_71_72_70_64_42_21_tsni(para.isSpace, s);
   return runtime.safeCall(scrut())
 };
-dropWhile_inst_71_72_70_64_42_21_tsni = function dropWhile_inst_71_72_70_64_42_21_tsni(f, ls) {
+leaveWhile_inst_71_72_70_64_42_21_tsni = function leaveWhile_inst_71_72_70_64_42_21_tsni(f, ls) {
   let param0, param1, h, t, scrut, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
     return () => {
@@ -3493,7 +3495,7 @@ dropWhile_inst_71_72_70_64_42_21_tsni = function dropWhile_inst_71_72_70_64_42_2
     t = param1;
     scrut = runtime.safeCall(f(h));
     if (scrut === true) {
-      return dropWhile_inst_71_72_70_64_42_21_tsni(f, t)
+      return leaveWhile_inst_71_72_70_64_42_21_tsni(f, t)
     } else {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = t;
@@ -3505,39 +3507,39 @@ dropWhile_inst_71_72_70_64_42_21_tsni = function dropWhile_inst_71_72_70_64_42_2
         t1 = param11;
         tmp = NofibPrelude.Cons(h1, t1);
         scrut1 = para.break_(para.isSpace, tmp);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first0 = scrut1[0];
-          first1 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first0 = runtime.Tuple.get(scrut1, 0);
+          first1 = runtime.Tuple.get(scrut1, 1);
           w = first0;
           s_ = first1;
           tmp1 = words_inst_71_72_70_64_42_tsni(s_);
           return NofibPrelude.Cons(w, tmp1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lines_inst_71_72_70_64_41_tsni = function lines_inst_71_72_70_64_41_tsni(s) {
   let scrut, first1, first0, l, s_;
   scrut = break__inst_71_72_70_64_41_23_tsni(lambda, s);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     l = first0;
     s_ = first1;
     return runtime.safeCall(s_(l))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 break__inst_71_72_70_64_41_23_tsni = function break__inst_71_72_70_64_41_23_tsni(p, xs) {
   let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       (l) => {
         let tmp2;
@@ -3546,7 +3548,7 @@ break__inst_71_72_70_64_41_23_tsni = function break__inst_71_72_70_64_41_23_tsni
         };
         return match_s__rest_inst_71_72_70_64_41_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
@@ -3565,30 +3567,30 @@ break__inst_71_72_70_64_41_23_tsni = function break__inst_71_72_70_64_41_23_tsni
         tmp2 = lines_inst_71_72_70_64_41_tsni(s__);
         return match_s__rest_inst_71_72_70_64_41_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_71_72_70_64_41_23_tsni(p, xs1);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 filter_inst_71_72_70_64_43_54_tsni = function filter_inst_71_72_70_64_43_54_tsni(f, ls) {
@@ -3622,7 +3624,7 @@ filter_inst_71_72_70_64_43_54_tsni = function filter_inst_71_72_70_64_43_54_tsni
       return filter_inst_71_72_70_64_43_54_tsni(f, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 par3_inst_71_72_70_65_tsni = function par3_inst_71_72_70_65_tsni(ws) {
@@ -3630,21 +3632,21 @@ par3_inst_71_72_70_65_tsni = function par3_inst_71_72_70_65_tsni(ws) {
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
   tmp1 = para.scan1(stepr_inst_71_72_70_65_61_tsni, para.startr, tmp);
   zs = tmp1;
-  tmp2 = lambda19;
+  tmp2 = lambda25;
   tmp3 = NofibPrelude.map(tmp2, zs);
   tmp4 = NofibPrelude.head(zs);
   tmp5 = para.thd3(tmp4);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp3,
     tmp5
-  ];
+  ]);
   return tile_inst_71_72_70_65_62_tsni(ws, arr)
 };
 tile_inst_71_72_70_65_62_tsni = function tile_inst_71_72_70_65_62_tsni(ws, a_b) {
   let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     if (first0 instanceof NofibPrelude.Nil.class) {
       n1 = first1;
       return NofibPrelude.Nil
@@ -3659,16 +3661,16 @@ tile_inst_71_72_70_65_62_tsni = function tile_inst_71_72_70_65_62_tsni(ws, a_b) 
       scrut = splitAt_inst_71_72_70_65_62_31_tsni(l, ws);
       return runtime.safeCall(scrut(m, ms, l))
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_71_72_70_65_62_31_tsni = function splitAt_inst_71_72_70_65_62_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
@@ -3678,11 +3680,11 @@ splitAt_inst_71_72_70_65_62_31_tsni = function splitAt_inst_71_72_70_65_62_31_ts
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
-    tmp3 = NofibPrelude.drop(l, tmp2);
-    arr1 = [
+    tmp3 = NofibPrelude.leave(l, tmp2);
+    arr1 = globalThis.Object.freeze([
       tmp3,
       m
-    ];
+    ]);
     tmp4 = tile_inst_71_72_70_65_62_tsni(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -3690,10 +3692,10 @@ splitAt_inst_71_72_70_65_62_31_tsni = function splitAt_inst_71_72_70_65_62_31_ts
 };
 stepr_inst_71_72_70_65_61_tsni = function stepr_inst_71_72_70_65_61_tsni(w, ps_tw_tl) {
   let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
-  if (globalThis.Array.isArray(ps_tw_tl) && ps_tw_tl.length === 3) {
-    first0 = ps_tw_tl[0];
-    first1 = ps_tw_tl[1];
-    first2 = ps_tw_tl[2];
+  if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
+    first0 = runtime.Tuple.get(ps_tw_tl, 0);
+    first1 = runtime.Tuple.get(ps_tw_tl, 1);
+    first2 = runtime.Tuple.get(ps_tw_tl, 2);
     ps = first0;
     tw = first1;
     tl = first2;
@@ -3705,32 +3707,32 @@ stepr_inst_71_72_70_65_61_tsni = function stepr_inst_71_72_70_65_61_tsni(w, ps_t
     tmp3 = para.last_(ps);
     tmp4 = new_$(tw, tl, tmp3);
     tmp5 = myAdd$_inst_71_72_70_65_61_57_tsni(tot_width, tmp4, ps);
-    tmp6 = drop_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, tmp5);
+    tmp6 = leave_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, tmp5);
     tmp7 = trim$_inst_71_72_70_65_61_59_tsni(tot_width, tmp6);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp7,
       tot_width,
       tot_len
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 myAdd$_inst_71_72_70_65_61_57_tsni = function myAdd$_inst_71_72_70_65_61_57_tsni(tot_width, p, qr_rs) {
-  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
+  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
   tmp = para1.single_(qr_rs);
-  tmp1 = para1.null__(qr_rs);
-  scrut1 = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda24(qr_rs));
+  scrut1 = runtime.short_or(tmp, lambda$this);
   if (scrut1 === true) {
     return para1.cons_(p, qr_rs)
   } else {
     q = para1.head_(qr_rs);
     r_rs = tail__inst_71_72_70_65_61_57_10_tsni(qr_rs);
     r = para1.head_(r_rs);
-    tmp2 = bf$(tot_width, p, q);
-    tmp3 = bf$(tot_width, q, r);
-    scrut = tmp2 <= tmp3;
+    tmp1 = bf$(tot_width, p, q);
+    tmp2 = bf$(tot_width, q, r);
+    scrut = tmp1 <= tmp2;
     if (scrut === true) {
       return myAdd$_inst_71_72_70_65_61_57_tsni(tot_width, p, r_rs)
     } else {
@@ -3740,17 +3742,17 @@ myAdd$_inst_71_72_70_65_61_57_tsni = function myAdd$_inst_71_72_70_65_61_57_tsni
 };
 tail__inst_71_72_70_65_61_57_10_tsni = function tail__inst_71_72_70_65_61_57_10_tsni(a_b) {
   let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     x = first0;
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -3761,21 +3763,21 @@ tail__inst_71_72_70_65_61_57_10_tsni = function tail__inst_71_72_70_65_61_57_10_
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp2,
           y
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_71_72_70_65_61_57_10_11_tsni = function splitAt_inst_71_72_70_65_61_57_10_11_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (x, y) => {
@@ -3785,15 +3787,15 @@ splitAt_inst_71_72_70_65_61_57_10_11_tsni = function splitAt_inst_71_72_70_65_61
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp2,
       y0
-    ];
+    ]);
     return arr1
   };
   return arr
 };
-drop_nofit$_inst_71_72_70_65_61_58_tsni = function drop_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, ps_p) {
+leave_nofit$_inst_71_72_70_65_61_58_tsni = function leave_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
   scrut1 = para1.null__(ps_p);
   if (scrut1 === true) {
@@ -3804,7 +3806,7 @@ drop_nofit$_inst_71_72_70_65_61_58_tsni = function drop_nofit$_inst_71_72_70_65_
     scrut = tmp1 > para1.maxw;
     if (scrut === true) {
       tmp2 = init__inst_71_72_70_65_61_58_6_tsni(ps_p);
-      return drop_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, tmp2)
+      return leave_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, tmp2)
     } else {
       return ps_p
     }
@@ -3812,17 +3814,17 @@ drop_nofit$_inst_71_72_70_65_61_58_tsni = function drop_nofit$_inst_71_72_70_65_
 };
 init__inst_71_72_70_65_61_58_6_tsni = function init__inst_71_72_70_65_61_58_6_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -3833,21 +3835,21 @@ init__inst_71_72_70_65_61_58_6_tsni = function init__inst_71_72_70_65_61_58_6_ts
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_71_72_70_65_61_58_6_2_tsni = function splitAt_inst_71_72_70_65_61_58_6_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -3857,10 +3859,10 @@ splitAt_inst_71_72_70_65_61_58_6_2_tsni = function splitAt_inst_71_72_70_65_61_5
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -3891,17 +3893,17 @@ trim$_inst_71_72_70_65_61_59_tsni = function trim$_inst_71_72_70_65_61_59_tsni(t
 };
 init__inst_71_72_70_65_61_59_1_tsni = function init__inst_71_72_70_65_61_59_1_tsni(a_b) {
   let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-  if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-    first0 = a_b[0];
-    first1 = a_b[1];
+  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+    first0 = runtime.Tuple.get(a_b, 0);
+    first1 = runtime.Tuple.get(a_b, 1);
     y = first0;
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else {
       scrut = para.single(x);
@@ -3912,21 +3914,21 @@ init__inst_71_72_70_65_61_59_1_tsni = function init__inst_71_72_70_65_61_59_1_ts
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           y,
           tmp2
-        ];
+        ]);
         return arr1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_inst_71_72_70_65_61_59_1_2_tsni = function splitAt_inst_71_72_70_65_61_59_1_2_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
-  tmp1 = NofibPrelude.drop(n, ls);
+  tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (y, x) => {
@@ -3936,10 +3938,10 @@ splitAt_inst_71_72_70_65_61_59_1_2_tsni = function splitAt_inst_71_72_70_65_61_5
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       y0,
       tmp2
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -3970,7 +3972,7 @@ append_inst_71_72_70_66_67_tsni = function append_inst_71_72_70_66_67_tsni(xs, y
       return NofibPrelude.Cons(tmp1, tmp2)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unparse_inst_71_72_70_68_tsni = function unparse_inst_71_72_70_68_tsni(ls) {
@@ -4027,7 +4029,7 @@ map_inst_71_72_70_68_47_tsni = function map_inst_71_72_70_68_47_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unwords_inst_71_72_70_68_48_tsni = function unwords_inst_71_72_70_68_48_tsni(ws) {
@@ -4044,7 +4046,7 @@ unwords_inst_71_72_70_68_48_tsni = function unwords_inst_71_72_70_68_48_tsni(ws)
     tmp = go_inst_71_72_70_68_48_50_tsni(ws1);
     return append_inst_71_72_70_68_48_49_tsni(w, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_71_72_70_68_48_49_tsni = function append_inst_71_72_70_68_48_49_tsni(xs, ys) {
@@ -4063,7 +4065,7 @@ append_inst_71_72_70_68_48_49_tsni = function append_inst_71_72_70_68_48_49_tsni
       return match_xs_arm_Cons_inst_71_72_70_68_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 go_inst_71_72_70_68_48_50_tsni = function go_inst_71_72_70_68_48_50_tsni(vs) {
@@ -4085,7 +4087,7 @@ go_inst_71_72_70_68_48_50_tsni = function go_inst_71_72_70_68_48_50_tsni(vs) {
       return match_xs_arm_Cons_inst_71_72_70_68_46_79_80_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_71_72_70_68_48_50_51_tsni = function append_inst_71_72_70_68_48_50_51_tsni(xs, ys) {
@@ -4104,7 +4106,7 @@ append_inst_71_72_70_68_48_50_51_tsni = function append_inst_71_72_70_68_48_50_5
       return match_xs_arm_Cons_inst_71_72_70_68_46_79_80_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unparas_inst_71_72_70_68_45_tsni = function unparas_inst_71_72_70_68_45_tsni(ls) {
@@ -4113,7 +4115,7 @@ unparas_inst_71_72_70_68_45_tsni = function unparas_inst_71_72_70_68_45_tsni(ls)
 unformat_inst_71_72_70_68_45_37_tsni = function unformat_inst_71_72_70_68_45_37_tsni(a, l) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_71_72_70_68_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda14, l)
+  return para.fold1(tmp, lambda18, l)
 };
 lambda_inst_71_72_70_68_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -4163,7 +4165,7 @@ append_inst_71_72_70_68_46_73_67_tsni = function append_inst_71_72_70_68_46_73_6
       return h + tmp1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 listNeq_inst_14_74_tsni = function listNeq_inst_14_74_tsni(xs, ys) {
@@ -4311,7 +4313,7 @@ append_inst_71_72_70_68_45_37_35_17_75_tsni = function append_inst_71_72_70_68_4
 nofibListToString_inst_71_83_tsni = function nofibListToString_inst_71_83_tsni(ls) {
   return runtime.safeCall(ls())
 };
-lambda19 = (undefined, function (x) {
+lambda25 = (undefined, function (x) {
   let tmp, tmp1;
   tmp = para1.fst3(x);
   tmp1 = para1.last_(tmp);
@@ -4377,11 +4379,11 @@ new_$ = function new_$(tw, tl, p) {
   let x, scrut, arr, tmp, tmp1, tmp2, tmp3, tmp4, arr1;
   scrut = single(p);
   if (scrut === true) {
-    arr = [
+    arr = globalThis.Object.freeze([
       tw,
       0,
       tl
-    ];
+    ]);
     return arr
   } else {
     tmp = para1.cost_tl(p);
@@ -4390,11 +4392,11 @@ new_$ = function new_$(tw, tl, p) {
     x = tmp2;
     tmp3 = x * x;
     tmp4 = tmp + tmp3;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tw,
       tmp4,
       tl
-    ];
+    ]);
     return arr1
   }
 };
@@ -4432,7 +4434,7 @@ trim = function trim(tot_width) {
     return trim$_inst_3_4_tsni(tot_width, ps_pq)
   }
 };
-drop_nofit$ = function drop_nofit$(tot_width, ps_p) {
+leave_nofit$ = function leave_nofit$(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
   scrut1 = para1.null__(ps_p);
   if (scrut1 === true) {
@@ -4443,45 +4445,54 @@ drop_nofit$ = function drop_nofit$(tot_width, ps_p) {
     scrut = tmp1 > para1.maxw;
     if (scrut === true) {
       tmp2 = init__inst_5_6_tsni(ps_p);
-      return drop_nofit$(tot_width, tmp2)
+      return leave_nofit$(tot_width, tmp2)
     } else {
       return ps_p
     }
   }
 };
-drop_nofit = function drop_nofit(tot_width) {
+leave_nofit = function leave_nofit(tot_width) {
   return (ps_p) => {
-    return drop_nofit$_inst_7_8_tsni(tot_width, ps_p)
+    return leave_nofit$_inst_7_8_tsni(tot_width, ps_p)
   }
 };
+lambda$14 = function lambda$(p) {
+  let tmp;
+  tmp = para1.cost_tl(p);
+  return tmp === 0
+};
+lambda23 = (undefined, function (p) {
+  return () => {
+    return lambda$14(p)
+  }
+});
 bf$ = function bf$(tot_width, p, q) {
-  let wqh, rqh, scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
+  let wqh, rqh, scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this;
   tmp = width_hd$(tot_width, q);
   wqh = tmp;
   tmp1 = para1.maxw - wqh;
   tmp2 = tmp1 + 1;
   rqh = tmp2;
   tmp3 = single(q);
-  tmp4 = para1.cost_tl(p);
-  tmp5 = tmp4 === 0;
-  scrut1 = tmp3 && tmp5;
+  lambda$this = runtime.safeCall(lambda23(p));
+  scrut1 = runtime.short_and(tmp3, lambda$this);
   if (scrut1 === true) {
-    tmp6 = width_hd$(tot_width, p);
-    tmp7 = para1.optw - tmp6;
-    return NofibPrelude.min(tmp7, rqh)
+    tmp4 = width_hd$(tot_width, p);
+    tmp5 = para1.optw - tmp4;
+    return NofibPrelude.min(tmp5, rqh)
   } else {
     scrut = single(q);
     if (scrut === true) {
       return rqh
     } else {
-      tmp8 = cost$(tot_width, p);
-      tmp9 = cost$(tot_width, q);
-      tmp10 = tmp8 - tmp9;
-      tmp11 = width_hd$(tot_width, p);
-      tmp12 = wqh - tmp11;
-      tmp13 = 2 * tmp12;
-      tmp14 = para1.ceildiv(tmp10, tmp13);
-      return NofibPrelude.min(tmp14, rqh)
+      tmp6 = cost$(tot_width, p);
+      tmp7 = cost$(tot_width, q);
+      tmp8 = tmp6 - tmp7;
+      tmp9 = width_hd$(tot_width, p);
+      tmp10 = wqh - tmp9;
+      tmp11 = 2 * tmp10;
+      tmp12 = para1.ceildiv(tmp8, tmp11);
+      return NofibPrelude.min(tmp12, rqh)
     }
   }
 };
@@ -4490,20 +4501,28 @@ bf = function bf(tot_width) {
     return bf$(tot_width, p, q)
   }
 };
+lambda$13 = function lambda$(qr_rs) {
+  return para1.null__(qr_rs)
+};
+lambda24 = (undefined, function (qr_rs) {
+  return () => {
+    return lambda$13(qr_rs)
+  }
+});
 myAdd$ = function myAdd$(tot_width, p, qr_rs) {
-  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
+  let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
   tmp = para1.single_(qr_rs);
-  tmp1 = para1.null__(qr_rs);
-  scrut1 = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda24(qr_rs));
+  scrut1 = runtime.short_or(tmp, lambda$this);
   if (scrut1 === true) {
     return para1.cons_(p, qr_rs)
   } else {
     q = para1.head_(qr_rs);
     r_rs = tail__inst_9_10_tsni(qr_rs);
     r = para1.head_(r_rs);
-    tmp2 = bf$(tot_width, p, q);
-    tmp3 = bf$(tot_width, q, r);
-    scrut = tmp2 <= tmp3;
+    tmp1 = bf$(tot_width, p, q);
+    tmp2 = bf$(tot_width, q, r);
+    scrut = tmp1 <= tmp2;
     if (scrut === true) {
       return myAdd$(tot_width, p, r_rs)
     } else {
@@ -4516,17 +4535,17 @@ myAdd = function myAdd(tot_width) {
     return myAdd$_inst_12_13_tsni(tot_width, p, qr_rs)
   }
 };
-lambda$8 = function lambda$(par, x) {
+lambda$12 = function lambda$(par, x) {
   let tmp;
   tmp = NofibPrelude.concat(x);
   return runtime.safeCall(par(tmp))
 };
-lambda18 = (undefined, function (par) {
+lambda22 = (undefined, function (par) {
   return (x) => {
-    return lambda$8(par, x)
+    return lambda$12(par, x)
   }
 });
-lambda17 = (undefined, function (x) {
+lambda21 = (undefined, function (x) {
   return listNeq_inst_14_74_tsni((ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
       return false
@@ -4555,23 +4574,23 @@ start = function start(a, b) {
   tmp = NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil);
   return breakk(a, b, tmp)
 };
-lambda$7 = function lambda$(a, x, y) {
+lambda$11 = function lambda$(a, x, y) {
   return breakk(a, x, y)
 };
-lambda15 = (undefined, function (a) {
+lambda19 = (undefined, function (a) {
   return (x, y) => {
-    return lambda$7(a, x, y)
+    return lambda$11(a, x, y)
   }
 });
-lambda$6 = function lambda$(a, y) {
+lambda$10 = function lambda$(a, y) {
   return start(a, y)
 };
-lambda16 = (undefined, function (a) {
+lambda20 = (undefined, function (a) {
   return (y) => {
-    return lambda$6(a, y)
+    return lambda$10(a, y)
   }
 });
-lambda$5 = function lambda$(a, xs, ys) {
+lambda$9 = function lambda$(a, xs, ys) {
   let tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   _deforest_Cons_head = a;
   _deforest_Cons_tail = (ys1) => {
@@ -4589,13 +4608,40 @@ lambda$5 = function lambda$(a, xs, ys) {
   tmp1 = append_inst_15_75_tsni(tmp, ys);
   return NofibPrelude.append(xs, tmp1)
 };
-lambda13 = (undefined, function (a) {
+lambda17 = (undefined, function (a) {
   return (xs, ys) => {
     return lambda$_inst_16_17_tsni(a, xs, ys)
   }
 });
-lambda14 = (undefined, function (x) {
+lambda18 = (undefined, function (x) {
   return x
+});
+lambda$8 = function lambda$(y) {
+  return para1.single(y)
+};
+lambda14 = (undefined, function (y) {
+  return () => {
+    return lambda$8(y)
+  }
+});
+lambda$7 = function lambda$(y) {
+  return NofibPrelude.null_(y)
+};
+lambda16 = (undefined, function (y) {
+  return () => {
+    return lambda$7(y)
+  }
+});
+lambda$6 = function lambda$(x, y) {
+  let tmp, lambda$this;
+  tmp = para1.single(x);
+  lambda$this = runtime.safeCall(lambda16(y));
+  return runtime.short_and(tmp, lambda$this)
+};
+lambda15 = (undefined, function (x, y) {
+  return () => {
+    return lambda$6(x, y)
+  }
 });
 linc = function linc(l) {
   let a, tmp, tmp1;
@@ -4609,7 +4655,7 @@ plus1 = function plus(l, n) {
   tmp = linc(l);
   return tmp + n
 };
-lambda12 = (undefined, function (x) {
+lambda13 = (undefined, function (x) {
   return 0
 });
 plus = function plus(w, n) {
@@ -4618,37 +4664,37 @@ plus = function plus(w, n) {
   tmp1 = tmp + 1;
   return tmp1 + n
 };
-lambda$4 = function lambda$(w, p) {
+lambda$5 = function lambda$(w, p) {
   return para1.new_(w, p)
 };
-lambda9 = (undefined, function (w) {
+lambda10 = (undefined, function (w) {
+  return (p) => {
+    return lambda$5(w, p)
+  }
+});
+lambda$4 = function lambda$(w, p) {
+  return para1.glue(w, p)
+};
+lambda11 = (undefined, function (w) {
   return (p) => {
     return lambda$4(w, p)
   }
 });
-lambda$3 = function lambda$(w, p) {
-  return para1.glue(w, p)
-};
-lambda10 = (undefined, function (w) {
-  return (p) => {
-    return lambda$3(w, p)
-  }
-});
-lambda8 = (undefined, function (w, ps) {
+lambda9 = (undefined, function (w, ps) {
   let tmp, tmp1, lambda$this, lambda$this1;
-  lambda$this = runtime.safeCall(lambda9(w));
+  lambda$this = runtime.safeCall(lambda10(w));
   tmp = map_inst_18_19_tsni(lambda$this, ps);
-  lambda$this1 = runtime.safeCall(lambda10(w));
+  lambda$this1 = runtime.safeCall(lambda11(w));
   tmp1 = NofibPrelude.map(lambda$this1, ps);
   return append_inst_18_76_tsni(tmp, tmp1)
 });
-lambda11 = (undefined, function (x) {
+lambda12 = (undefined, function (x) {
   let tmp, tmp1;
   tmp = NofibPrelude.Cons(x, NofibPrelude.Nil);
   tmp1 = NofibPrelude.Cons(tmp, NofibPrelude.Nil);
   return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
 });
-lambda$2 = function lambda$(f, a, b) {
+lambda$3 = function lambda$(f, a, b) {
   let scrut, tmp, tmp1;
   tmp = runtime.safeCall(f(a));
   tmp1 = runtime.safeCall(f(b));
@@ -4659,39 +4705,47 @@ lambda$2 = function lambda$(f, a, b) {
     return b
   }
 };
-lambda6 = (undefined, function (f) {
+lambda7 = (undefined, function (f) {
   return (a, b) => {
-    return lambda$2(f, a, b)
+    return lambda$3(f, a, b)
   }
 });
-lambda7 = (undefined, function (x) {
+lambda8 = (undefined, function (x) {
   return x
 });
-lambda4 = (undefined, function (a, s) {
+lambda5 = (undefined, function (a, s) {
   return NofibPrelude.Cons(a, s)
 });
-lambda5 = (undefined, function (a) {
+lambda6 = (undefined, function (a) {
   return NofibPrelude.Cons(a, NofibPrelude.Nil)
 });
-lambda$1 = function lambda$(f, a, s) {
+lambda$2 = function lambda$(f, a, s) {
   let tmp, tmp1;
   tmp = NofibPrelude.head(s);
   tmp1 = runtime.safeCall(f(a, tmp));
   return NofibPrelude.Cons(tmp1, s)
 };
-lambda2 = (undefined, function (f) {
+lambda3 = (undefined, function (f) {
   return (a, s) => {
-    return lambda$1(f, a, s)
+    return lambda$2(f, a, s)
   }
 });
-lambda$ = function lambda$(g, a) {
+lambda$1 = function lambda$(g, a) {
   let tmp;
   tmp = runtime.safeCall(g(a));
   return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
 };
-lambda3 = (undefined, function (g) {
+lambda4 = (undefined, function (g) {
   return (a) => {
-    return lambda$(g, a)
+    return lambda$1(g, a)
+  }
+});
+lambda$ = function lambda$(p, xs) {
+  return para1.all(p, xs)
+};
+lambda2 = (undefined, function (p, xs) {
+  return () => {
+    return lambda$(p, xs)
   }
 });
 lambda1 = (undefined, function (l) {
@@ -4715,7 +4769,7 @@ go = function go(vs) {
     tmp1 = NofibPrelude.append(v, tmp);
     return NofibPrelude.Cons(" ", tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 (class para {
@@ -4724,10 +4778,10 @@ go = function go(vs) {
     let arr, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Cons_head9, _deforest_Cons_tail9;
     this.maxw = 70;
     this.optw = 63;
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       NofibPrelude.Nil
-    ];
+    ]);
     this.nil_ = arr;
     tmp = NofibPrelude.nofibStringToList("In the constructive programming community it is commonplace to see ");
     tmp1 = NofibPrelude.nofibStringToList("formal developments of textbook algorithms. In the algorithm design ");
@@ -4806,16 +4860,16 @@ go = function go(vs) {
       tmp = go(ws1);
       return NofibPrelude.append(w, tmp)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static break_(p, xs) {
     let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2;
     if (xs instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else if (xs instanceof NofibPrelude.Cons.class) {
       param0 = xs.head;
@@ -4825,30 +4879,30 @@ go = function go(vs) {
       scrut1 = runtime.safeCall(p(x));
       if (scrut1 === true) {
         tmp = NofibPrelude.Cons(x, xs1);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           NofibPrelude.Nil,
           tmp
-        ];
+        ]);
         return arr1
       } else {
         scrut = para.break_(p, xs1);
-        if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-          first0 = scrut[0];
-          first1 = scrut[1];
+        if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+          first0 = runtime.Tuple.get(scrut, 0);
+          first1 = runtime.Tuple.get(scrut, 1);
           ys = first0;
           zs = first1;
           tmp1 = NofibPrelude.Cons(x, ys);
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp1,
             zs
-          ];
+          ]);
           return arr2
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static isSpace(c) {
@@ -4856,20 +4910,20 @@ go = function go(vs) {
   } 
   static words(s) {
     let scrut;
-    scrut = dropWhile_inst_20_21_tsni(para.isSpace, s);
+    scrut = leaveWhile_inst_20_21_tsni(para.isSpace, s);
     return runtime.safeCall(scrut())
   } 
   static lines(s1) {
     let scrut, first1, first0, l, s_;
     scrut = break__inst_22_23_tsni(lambda, s1);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
+    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+      first0 = runtime.Tuple.get(scrut, 0);
+      first1 = runtime.Tuple.get(scrut, 1);
       l = first0;
       s_ = first1;
       return runtime.safeCall(s_(l))
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static unlines(ls) {
@@ -4878,7 +4932,7 @@ go = function go(vs) {
     return concat_inst_24_73_tsni(tmp)
   } 
   static all(p1, xs1) {
-    let param0, param1, x, xs2, tmp, tmp1;
+    let param0, param1, x, xs2, tmp, lambda$this;
     if (xs1 instanceof NofibPrelude.Nil.class) {
       return true
     } else if (xs1 instanceof NofibPrelude.Cons.class) {
@@ -4887,10 +4941,10 @@ go = function go(vs) {
       x = param0;
       xs2 = param1;
       tmp = runtime.safeCall(p1(x));
-      tmp1 = para.all(p1, xs2);
-      return tmp && tmp1
+      lambda$this = runtime.safeCall(lambda2(p1, xs2));
+      return runtime.short_and(tmp, lambda$this)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static fold1(f, g, xs2) {
@@ -4908,17 +4962,17 @@ go = function go(vs) {
         return runtime.safeCall(f(a, tmp))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static scan1(f1, g1, xs3) {
     let tmp, lambda$this;
-    tmp = runtime.safeCall(lambda2(f1));
-    lambda$this = runtime.safeCall(lambda3(g1));
+    tmp = runtime.safeCall(lambda3(f1));
+    lambda$this = runtime.safeCall(lambda4(g1));
     return para.fold1(tmp, lambda$this, xs3)
   } 
   static tails(xs4) {
-    return para.scan1(lambda4, lambda5, xs4)
+    return para.scan1(lambda5, lambda6, xs4)
   } 
   static single(xs5) {
     let param0, param1, a;
@@ -4937,8 +4991,8 @@ go = function go(vs) {
   } 
   static minWith(f2, xs6) {
     let tmp;
-    tmp = runtime.safeCall(lambda6(f2));
-    return para.fold1(tmp, lambda7, xs6)
+    tmp = runtime.safeCall(lambda7(f2));
+    return para.fold1(tmp, lambda8, xs6)
   } 
   static new_(w, ls1) {
     let tmp;
@@ -4955,13 +5009,13 @@ go = function go(vs) {
       tmp = NofibPrelude.Cons(w1, l);
       return NofibPrelude.Cons(tmp, ls_)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static formats(txt) {
     let tmp, tmp1;
     tmp = lambda_inst_26_27_tsni;
-    tmp1 = lambda11;
+    tmp1 = lambda12;
     return para.fold1(tmp, tmp1, txt)
   } 
   static width(ls3) {
@@ -4976,7 +5030,7 @@ go = function go(vs) {
     return para.all(para.fits, a)
   } 
   static cost(ls4) {
-    return para.fold1(plus1, lambda12, ls4)
+    return para.fold1(plus1, lambda13, ls4)
   } 
   static par0(x) {
     let tmp, tmp1;
@@ -4991,44 +5045,44 @@ go = function go(vs) {
   } 
   static fst3(a_b_c) {
     let first2, first1, first0, a1, b, c1;
-    if (globalThis.Array.isArray(a_b_c) && a_b_c.length === 3) {
-      first0 = a_b_c[0];
-      first1 = a_b_c[1];
-      first2 = a_b_c[2];
+    if (runtime.Tuple.isArrayLike(a_b_c) && a_b_c.length === 3) {
+      first0 = runtime.Tuple.get(a_b_c, 0);
+      first1 = runtime.Tuple.get(a_b_c, 1);
+      first2 = runtime.Tuple.get(a_b_c, 2);
       a1 = first0;
       b = first1;
       c1 = first2;
       return a1
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static snd3(a_b_c1) {
     let first2, first1, first0, a1, b, c1;
-    if (globalThis.Array.isArray(a_b_c1) && a_b_c1.length === 3) {
-      first0 = a_b_c1[0];
-      first1 = a_b_c1[1];
-      first2 = a_b_c1[2];
+    if (runtime.Tuple.isArrayLike(a_b_c1) && a_b_c1.length === 3) {
+      first0 = runtime.Tuple.get(a_b_c1, 0);
+      first1 = runtime.Tuple.get(a_b_c1, 1);
+      first2 = runtime.Tuple.get(a_b_c1, 2);
       a1 = first0;
       b = first1;
       c1 = first2;
       return b
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static thd3(a_b_c2) {
     let first2, first1, first0, a1, b, c1;
-    if (globalThis.Array.isArray(a_b_c2) && a_b_c2.length === 3) {
-      first0 = a_b_c2[0];
-      first1 = a_b_c2[1];
-      first2 = a_b_c2[2];
+    if (runtime.Tuple.isArrayLike(a_b_c2) && a_b_c2.length === 3) {
+      first0 = runtime.Tuple.get(a_b_c2, 0);
+      first1 = runtime.Tuple.get(a_b_c2, 1);
+      first2 = runtime.Tuple.get(a_b_c2, 2);
       a1 = first0;
       b = first1;
       c1 = first2;
       return c1
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static width_tl(a_b_c3) {
@@ -5042,9 +5096,9 @@ go = function go(vs) {
   } 
   static tile(ws1, a_b) {
     let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-    if (globalThis.Array.isArray(a_b) && a_b.length === 2) {
-      first0 = a_b[0];
-      first1 = a_b[1];
+    if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
+      first0 = runtime.Tuple.get(a_b, 0);
+      first1 = runtime.Tuple.get(a_b, 1);
       if (first0 instanceof NofibPrelude.Nil.class) {
         n1 = first1;
         return NofibPrelude.Nil
@@ -5059,17 +5113,17 @@ go = function go(vs) {
         scrut = splitAt_inst_30_31_tsni(l, ws1);
         return runtime.safeCall(scrut(m, ms, l))
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static null__(a_b1) {
     let first1, first0;
-    if (globalThis.Array.isArray(a_b1) && a_b1.length === 2) {
-      first0 = a_b1[0];
-      first1 = a_b1[1];
+    if (runtime.Tuple.isArrayLike(a_b1) && a_b1.length === 2) {
+      first0 = runtime.Tuple.get(a_b1, 0);
+      first1 = runtime.Tuple.get(a_b1, 1);
       if (first0 instanceof NofibPrelude.Nil.class) {
         if (first1 instanceof NofibPrelude.Nil.class) {
           return true
@@ -5084,128 +5138,126 @@ go = function go(vs) {
     }
   } 
   static single_(a_b2) {
-    let first1, first0, x1, y, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-    if (globalThis.Array.isArray(a_b2) && a_b2.length === 2) {
-      first0 = a_b2[0];
-      first1 = a_b2[1];
+    let first1, first0, x1, y, tmp, tmp1, lambda$this, lambda$this1;
+    if (runtime.Tuple.isArrayLike(a_b2) && a_b2.length === 2) {
+      first0 = runtime.Tuple.get(a_b2, 0);
+      first1 = runtime.Tuple.get(a_b2, 1);
       x1 = first0;
       y = first1;
       tmp = NofibPrelude.null_(x1);
-      tmp1 = para.single(y);
-      tmp2 = tmp && tmp1;
-      tmp3 = para.single(x1);
-      tmp4 = NofibPrelude.null_(y);
-      tmp5 = tmp3 && tmp4;
-      return tmp2 || tmp5
+      lambda$this = runtime.safeCall(lambda14(y));
+      tmp1 = runtime.short_and(tmp, lambda$this);
+      lambda$this1 = runtime.safeCall(lambda15(x1, y));
+      return runtime.short_or(tmp1, lambda$this1)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static head_(a_b3) {
     let first1, first0, x1, y, scrut, tmp;
-    if (globalThis.Array.isArray(a_b3) && a_b3.length === 2) {
-      first0 = a_b3[0];
-      first1 = a_b3[1];
+    if (runtime.Tuple.isArrayLike(a_b3) && a_b3.length === 2) {
+      first0 = runtime.Tuple.get(a_b3, 0);
+      first1 = runtime.Tuple.get(a_b3, 1);
       x1 = first0;
       y = first1;
       tmp = NofibPrelude.null_(x1);
-      scrut = Predef.not(tmp);
+      scrut = ! tmp;
       if (scrut === true) {
         return NofibPrelude.head(x1)
       } else {
         return NofibPrelude.head(y)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static last_(a_b4) {
     let first1, first0, y, x1, scrut, tmp;
-    if (globalThis.Array.isArray(a_b4) && a_b4.length === 2) {
-      first0 = a_b4[0];
-      first1 = a_b4[1];
+    if (runtime.Tuple.isArrayLike(a_b4) && a_b4.length === 2) {
+      first0 = runtime.Tuple.get(a_b4, 0);
+      first1 = runtime.Tuple.get(a_b4, 1);
       y = first0;
       x1 = first1;
       tmp = NofibPrelude.null_(x1);
-      scrut = Predef.not(tmp);
+      scrut = ! tmp;
       if (scrut === true) {
         return NofibPrelude.head(x1)
       } else {
         return NofibPrelude.head(y)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static cons_(a1, a_b5) {
     let first1, first0, x1, y, scrut, tmp, tmp1, arr, tmp2, arr1;
-    if (globalThis.Array.isArray(a_b5) && a_b5.length === 2) {
-      first0 = a_b5[0];
-      first1 = a_b5[1];
+    if (runtime.Tuple.isArrayLike(a_b5) && a_b5.length === 2) {
+      first0 = runtime.Tuple.get(a_b5, 0);
+      first1 = runtime.Tuple.get(a_b5, 1);
       x1 = first0;
       y = first1;
       tmp = NofibPrelude.null_(y);
-      scrut = Predef.not(tmp);
+      scrut = ! tmp;
       if (scrut === true) {
         tmp1 = NofibPrelude.Cons(a1, x1);
-        arr = [
+        arr = globalThis.Object.freeze([
           tmp1,
           y
-        ];
+        ]);
         return arr
       } else {
         tmp2 = NofibPrelude.Cons(a1, NofibPrelude.Nil);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp2,
           x1
-        ];
+        ]);
         return arr1
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static snoc_(a2, a_b6) {
     let first1, first0, y, x1, scrut, tmp, tmp1, arr, tmp2, arr1;
-    if (globalThis.Array.isArray(a_b6) && a_b6.length === 2) {
-      first0 = a_b6[0];
-      first1 = a_b6[1];
+    if (runtime.Tuple.isArrayLike(a_b6) && a_b6.length === 2) {
+      first0 = runtime.Tuple.get(a_b6, 0);
+      first1 = runtime.Tuple.get(a_b6, 1);
       y = first0;
       x1 = first1;
       tmp = NofibPrelude.null_(y);
-      scrut = Predef.not(tmp);
+      scrut = ! tmp;
       if (scrut === true) {
         tmp1 = NofibPrelude.Cons(a2, x1);
-        arr = [
+        arr = globalThis.Object.freeze([
           y,
           tmp1
-        ];
+        ]);
         return arr
       } else {
         tmp2 = NofibPrelude.Cons(a2, NofibPrelude.Nil);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           x1,
           tmp2
-        ];
+        ]);
         return arr1
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static tail_(a_b7) {
     let first1, first0, x1, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-    if (globalThis.Array.isArray(a_b7) && a_b7.length === 2) {
-      first0 = a_b7[0];
-      first1 = a_b7[1];
+    if (runtime.Tuple.isArrayLike(a_b7) && a_b7.length === 2) {
+      first0 = runtime.Tuple.get(a_b7, 0);
+      first1 = runtime.Tuple.get(a_b7, 1);
       x1 = first0;
       y = first1;
       scrut2 = NofibPrelude.null_(x1);
       if (scrut2 === true) {
-        arr = [
+        arr = globalThis.Object.freeze([
           NofibPrelude.Nil,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr
       } else {
         scrut = para.single(x1);
@@ -5216,30 +5268,30 @@ go = function go(vs) {
           return runtime.safeCall(scrut1(x1, y))
         } else {
           tmp2 = NofibPrelude.tail(x1);
-          arr1 = [
+          arr1 = globalThis.Object.freeze([
             tmp2,
             y
-          ];
+          ]);
           return arr1
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static init_(a_b8) {
     let first1, first0, y, x1, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
-    if (globalThis.Array.isArray(a_b8) && a_b8.length === 2) {
-      first0 = a_b8[0];
-      first1 = a_b8[1];
+    if (runtime.Tuple.isArrayLike(a_b8) && a_b8.length === 2) {
+      first0 = runtime.Tuple.get(a_b8, 0);
+      first1 = runtime.Tuple.get(a_b8, 1);
       y = first0;
       x1 = first1;
       scrut2 = NofibPrelude.null_(x1);
       if (scrut2 === true) {
-        arr = [
+        arr = globalThis.Object.freeze([
           NofibPrelude.Nil,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr
       } else {
         scrut = para.single(x1);
@@ -5250,29 +5302,29 @@ go = function go(vs) {
           return runtime.safeCall(scrut1(y, x1))
         } else {
           tmp2 = NofibPrelude.tail(x1);
-          arr1 = [
+          arr1 = globalThis.Object.freeze([
             y,
             tmp2
-          ];
+          ]);
           return arr1
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static unformat(a3, l) {
     let tmp;
     tmp = runtime.safeCall(lambda_inst_34_35_tsni(a3));
-    return para.fold1(tmp, lambda14, l)
+    return para.fold1(tmp, lambda18, l)
   } 
   static format(a4, x1) {
     let lambda$this, lambda$this1;
     if (x1 instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
     } else {
-      lambda$this = runtime.safeCall(lambda15(a4));
-      lambda$this1 = runtime.safeCall(lambda16(a4));
+      lambda$this = runtime.safeCall(lambda19(a4));
+      lambda$this1 = runtime.safeCall(lambda20(a4));
       return para.fold1(lambda$this, lambda$this1, x1)
     }
   } 
@@ -5300,20 +5352,20 @@ go = function go(vs) {
     let scrut, arr, tmp, arr1;
     scrut = a5 <= para.maxw;
     if (scrut === true) {
-      arr = [
+      arr = globalThis.Object.freeze([
         0,
         0,
         0
-      ];
+      ]);
       tmp = para.cons_(arr, para.nil_);
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         tmp,
         a5,
         1
-      ];
+      ]);
       return arr1
     } else {
-      throw globalThis.Error("startr param error");
+      throw globalThis.Error("startr param error")
     }
   } 
   static ceildiv(n, m) {
@@ -5325,16 +5377,16 @@ go = function go(vs) {
   static fmtWith(par) {
     let tmp, tmp1, lambda$this;
     tmp = parse_inst_52_53_tsni(par);
-    lambda$this = runtime.safeCall(lambda18(par));
+    lambda$this = runtime.safeCall(lambda22(par));
     tmp1 = map_inst_52_81_tsni(lambda$this, tmp);
     return unparse_inst_52_55_tsni(tmp1)
   } 
   static stepr(w2, ps_tw_tl) {
     let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
-    if (globalThis.Array.isArray(ps_tw_tl) && ps_tw_tl.length === 3) {
-      first0 = ps_tw_tl[0];
-      first1 = ps_tw_tl[1];
-      first2 = ps_tw_tl[2];
+    if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
+      first0 = runtime.Tuple.get(ps_tw_tl, 0);
+      first1 = runtime.Tuple.get(ps_tw_tl, 1);
+      first2 = runtime.Tuple.get(ps_tw_tl, 2);
       ps = first0;
       tw = first1;
       tl = first2;
@@ -5346,16 +5398,16 @@ go = function go(vs) {
       tmp3 = para.last_(ps);
       tmp4 = new_$(tw, tl, tmp3);
       tmp5 = myAdd$_inst_56_57_tsni(tot_width, tmp4, ps);
-      tmp6 = drop_nofit$_inst_56_58_tsni(tot_width, tmp5);
+      tmp6 = leave_nofit$_inst_56_58_tsni(tot_width, tmp5);
       tmp7 = trim$_inst_56_59_tsni(tot_width, tmp6);
-      arr = [
+      arr = globalThis.Object.freeze([
         tmp7,
         tot_width,
         tot_len
-      ];
+      ]);
       return arr
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static par3(ws2) {
@@ -5363,14 +5415,14 @@ go = function go(vs) {
     tmp = NofibPrelude.map(NofibPrelude.listLen, ws2);
     tmp1 = para.scan1(stepr_inst_60_61_tsni, para.startr, tmp);
     zs = tmp1;
-    tmp2 = lambda19;
+    tmp2 = lambda25;
     tmp3 = NofibPrelude.map(tmp2, zs);
     tmp4 = NofibPrelude.head(zs);
     tmp5 = para.thd3(tmp4);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp3,
       tmp5
-    ];
+    ]);
     return tile_inst_60_62_tsni(ws2, arr)
   } 
   static fmt(x2) {
@@ -5394,6 +5446,7 @@ go = function go(vs) {
     tmp = testPara_nofib_inst_71_72_tsni();
     return nofibListToString_inst_71_83_tsni(tmp)
   }
-  static toString() { return "para"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "para"]; 
 });
 let para = para1; export default para;

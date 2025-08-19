@@ -130,14 +130,14 @@ fun empty(pos, board) = if board is r1 :: r2 :: r3 :: Nil and pos is
   [3, x] then empty_(x, r3)
 
 fun placePiece(p, board, pos) = if
-  Predef.not(empty(pos, board)) then Nil
+  not(empty(pos, board)) then Nil
   board is r1 :: r2 :: r3 :: Nil and pos is
     [1, x] then (insert(p, r1, x) :: r2 :: r3 :: Nil) :: Nil
     [2, x] then (r1 :: insert(p, r2, x) :: r3 :: Nil) :: Nil
     [3, x] then (r1 :: r2 :: insert(p, r3, x) :: Nil) :: Nil
 
 fun fullBoard(b) = andd of map of
-  x => Predef.not(eqPiece(x, Empty))
+  x => not(eqPiece(x, Empty))
   concat(b)
 
 fun newPositions(piece, board) =

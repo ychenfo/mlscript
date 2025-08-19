@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term1 from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -34,21 +36,21 @@ match_scrut_arm_Deforest_Arr_2_inst_3_tsni = (undefined, function (term1, subst,
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -60,21 +62,21 @@ match_scrut_arm_Deforest_Arr_2_inst_5_tsni = (undefined, function (term1, subst,
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -86,21 +88,21 @@ match_scrut_arm_Deforest_Arr_2_inst_6_7_tsni = (undefined, function (term1, subs
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -124,21 +126,21 @@ match_scrut_arm_Deforest_Arr_2_inst_9_10_7_tsni = (undefined, function (term1, s
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -162,21 +164,21 @@ match_scrut_arm_Deforest_Arr_2_inst_12_10_7_tsni = (undefined, function (term1, 
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -200,21 +202,21 @@ match_scrut_arm_Deforest_Arr_2_inst_13_10_7_tsni = (undefined, function (term1, 
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -250,21 +252,21 @@ match_scrut_arm_Deforest_Arr_2_inst_14_15_10_7_tsni = (undefined, function (term
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -313,21 +315,21 @@ match_scrut_arm_Deforest_Arr_2_inst_16_18_15_10_7_tsni = (undefined, function (t
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -363,21 +365,21 @@ match_scrut_arm_Deforest_Arr_2_inst_19_20_18_15_10_7_tsni = (undefined, function
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -407,9 +409,9 @@ match_param0_arm_Deforest_Arr_2_inst_19_20_18_15_tsni = (undefined, function (te
   rhs = first1;
   ls = param1;
   scrut = one_way_unify_inst_19_20_18_15_10_tsni(term, lhs);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first01 = scrut[0];
-    first11 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first01 = runtime.Tuple.get(scrut, 0);
+    first11 = runtime.Tuple.get(scrut, 1);
     unified = first01;
     subst = first11;
     if (unified === true) {
@@ -419,7 +421,7 @@ match_param0_arm_Deforest_Arr_2_inst_19_20_18_15_tsni = (undefined, function (te
       return rewrite_with_lemmas_helper_inst_19_20_18_15_tsni(term, ls)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 match_lss_arm_Nil_inst_19_20_18_15_tsni = (undefined, function (term) {
@@ -495,21 +497,21 @@ match_scrut_arm_Deforest_Arr_2_inst_120_121_20_18_15_10_7_tsni = (undefined, fun
   v2 = first1;
   if (found === true) {
     tmp = boyer.termEq(term1, v2);
-    arr = [
+    arr = globalThis.Object.freeze([
       tmp,
       subst
-    ];
+    ]);
     return arr
   } else {
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       vid2,
       term1
-    ];
+    ]);
     tmp1 = NofibPrelude.Cons(arr1, subst);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       true,
       tmp1
-    ];
+    ]);
     return arr2
   }
 });
@@ -542,9 +544,9 @@ match_param0_arm_Deforest_Arr_2_inst_120_121_20_18_15_tsni = (undefined, functio
   rhs = first1;
   ls = param1;
   scrut = one_way_unify_inst_120_121_20_18_15_10_tsni(term, lhs);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first01 = scrut[0];
-    first11 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first01 = runtime.Tuple.get(scrut, 0);
+    first11 = runtime.Tuple.get(scrut, 1);
     unified = first01;
     subst = first11;
     if (unified === true) {
@@ -554,7 +556,7 @@ match_param0_arm_Deforest_Arr_2_inst_120_121_20_18_15_tsni = (undefined, functio
       return rewrite_with_lemmas_helper_inst_120_121_20_18_15_tsni(term, ls)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 apply_subst_inst_0_tsni = function apply_subst_inst_0_tsni(subst, t) {
@@ -575,7 +577,7 @@ apply_subst_inst_0_tsni = function apply_subst_inst_0_tsni(subst, t) {
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_0_tsni = (undefined, function (subst) {
@@ -595,9 +597,9 @@ find_inst_0_1_tsni = function find_inst_0_1_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -613,10 +615,10 @@ find_inst_0_1_tsni = function find_inst_0_1_tsni(vid, ls) {
         return find_inst_0_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_2_tsni = function apply_subst_inst_2_tsni(subst, t) {
@@ -637,7 +639,7 @@ apply_subst_inst_2_tsni = function apply_subst_inst_2_tsni(subst, t) {
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$_inst_2_tsni = function lambda$_inst_2_tsni(subst, x) {
@@ -655,9 +657,9 @@ find_inst_2_1_tsni = function find_inst_2_1_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -673,26 +675,26 @@ find_inst_2_1_tsni = function find_inst_2_1_tsni(vid, ls) {
         return find_inst_2_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 one_way_unify1_lst_inst_3_tsni = function one_way_unify1_lst_inst_3_tsni(tts1, tts2, subst) {
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -706,15 +708,15 @@ one_way_unify1_lst_inst_3_tsni = function one_way_unify1_lst_inst_3_tsni(tts1, t
       t2 = param01;
       ts2 = param11;
       scrut = boyer.one_way_unify1(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_3_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -726,37 +728,37 @@ one_way_unify1_lst_inst_3_tsni = function one_way_unify1_lst_inst_3_tsni(tts1, t
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -772,9 +774,9 @@ find_inst_3_4_tsni = function find_inst_3_4_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -790,10 +792,10 @@ find_inst_3_4_tsni = function find_inst_3_4_tsni(vid, ls) {
         return find_inst_3_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 one_way_unify1_inst_5_tsni = function one_way_unify1_inst_5_tsni(term1, term2, subst) {
@@ -820,24 +822,24 @@ one_way_unify1_inst_5_tsni = function one_way_unify1_inst_5_tsni(term1, term2, s
         if (scrut === true) {
           return boyer.one_way_unify1_lst(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -854,9 +856,9 @@ find_inst_5_4_tsni = function find_inst_5_4_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -872,10 +874,10 @@ find_inst_5_4_tsni = function find_inst_5_4_tsni(vid, ls) {
         return find_inst_5_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 one_way_unify1_inst_6_7_tsni = function one_way_unify1_inst_6_7_tsni(term1, term2, subst) {
@@ -902,24 +904,24 @@ one_way_unify1_inst_6_7_tsni = function one_way_unify1_inst_6_7_tsni(term1, term
         if (scrut === true) {
           return one_way_unify1_lst_inst_6_7_tsni(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -928,16 +930,16 @@ one_way_unify1_lst_inst_6_7_tsni = function one_way_unify1_lst_inst_6_7_tsni(tts
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -951,15 +953,15 @@ one_way_unify1_lst_inst_6_7_tsni = function one_way_unify1_lst_inst_6_7_tsni(tts
       t2 = param01;
       ts2 = param11;
       scrut = one_way_unify1_inst_6_7_tsni(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_6_7_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -971,37 +973,37 @@ one_way_unify1_lst_inst_6_7_tsni = function one_way_unify1_lst_inst_6_7_tsni(tts
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -1017,9 +1019,9 @@ find_inst_6_7_4_tsni = function find_inst_6_7_4_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -1035,10 +1037,10 @@ find_inst_6_7_4_tsni = function find_inst_6_7_4_tsni(vid, ls) {
         return find_inst_6_7_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_8_tsni = (undefined, function (subst) {
@@ -1061,9 +1063,9 @@ find_inst_8_1_tsni = function find_inst_8_1_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -1079,10 +1081,10 @@ find_inst_8_1_tsni = function find_inst_8_1_tsni(vid, ls) {
         return find_inst_8_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_inst_9_tsni = function rewrite_inst_9_tsni(t) {
@@ -1102,7 +1104,7 @@ rewrite_inst_9_tsni = function rewrite_inst_9_tsni(t) {
     tmp1 = runtime.safeCall(boyer.Fun(f1, tmp, lemmas));
     return rewrite_with_lemmas_inst_9_tsni(tmp1, lemmas)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_with_lemmas_inst_9_tsni = function rewrite_with_lemmas_inst_9_tsni(term, lss) {
@@ -1137,24 +1139,24 @@ one_way_unify1_inst_9_10_7_tsni = function one_way_unify1_inst_9_10_7_tsni(term1
         if (scrut === true) {
           return one_way_unify1_lst_inst_9_10_7_tsni(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -1163,16 +1165,16 @@ one_way_unify1_lst_inst_9_10_7_tsni = function one_way_unify1_lst_inst_9_10_7_ts
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -1186,15 +1188,15 @@ one_way_unify1_lst_inst_9_10_7_tsni = function one_way_unify1_lst_inst_9_10_7_ts
       t2 = param01;
       ts2 = param11;
       scrut = one_way_unify1_inst_9_10_7_tsni(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_9_10_7_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -1206,37 +1208,37 @@ one_way_unify1_lst_inst_9_10_7_tsni = function one_way_unify1_lst_inst_9_10_7_ts
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -1252,9 +1254,9 @@ find_inst_9_10_7_4_tsni = function find_inst_9_10_7_4_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -1270,10 +1272,10 @@ find_inst_9_10_7_4_tsni = function find_inst_9_10_7_4_tsni(vid, ls) {
         return find_inst_9_10_7_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_9_11_tsni = function apply_subst_inst_9_11_tsni(subst, t) {
@@ -1294,7 +1296,7 @@ apply_subst_inst_9_11_tsni = function apply_subst_inst_9_11_tsni(subst, t) {
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_9_11_tsni = (undefined, function (subst) {
@@ -1317,9 +1319,9 @@ find_inst_9_11_1_tsni = function find_inst_9_11_1_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -1335,10 +1337,10 @@ find_inst_9_11_1_tsni = function find_inst_9_11_1_tsni(vid, ls) {
         return find_inst_9_11_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_inst_12_tsni = function rewrite_inst_12_tsni(t) {
@@ -1358,7 +1360,7 @@ rewrite_inst_12_tsni = function rewrite_inst_12_tsni(t) {
     tmp1 = runtime.safeCall(boyer.Fun(f1, tmp, lemmas));
     return boyer.rewrite_with_lemmas(tmp1, lemmas)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_with_lemmas_helper_inst_12_tsni = function rewrite_with_lemmas_helper_inst_12_tsni(term, lss) {
@@ -1368,16 +1370,16 @@ rewrite_with_lemmas_helper_inst_12_tsni = function rewrite_with_lemmas_helper_in
   } else if (lss instanceof NofibPrelude.Cons.class) {
     param0 = lss.head;
     param1 = lss.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       lhs = first0;
       rhs = first1;
       ls = param1;
       scrut = one_way_unify_inst_12_10_tsni(term, lhs);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first01 = scrut[0];
-        first11 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first01 = runtime.Tuple.get(scrut, 0);
+        first11 = runtime.Tuple.get(scrut, 1);
         unified = first01;
         subst = first11;
         if (unified === true) {
@@ -1387,13 +1389,13 @@ rewrite_with_lemmas_helper_inst_12_tsni = function rewrite_with_lemmas_helper_in
           return rewrite_with_lemmas_helper_inst_12_tsni(term, ls)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 one_way_unify_inst_12_10_tsni = function one_way_unify_inst_12_10_tsni(term1, term2) {
@@ -1423,24 +1425,24 @@ one_way_unify1_inst_12_10_7_tsni = function one_way_unify1_inst_12_10_7_tsni(ter
         if (scrut === true) {
           return one_way_unify1_lst_inst_12_10_7_tsni(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -1449,16 +1451,16 @@ one_way_unify1_lst_inst_12_10_7_tsni = function one_way_unify1_lst_inst_12_10_7_
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -1472,15 +1474,15 @@ one_way_unify1_lst_inst_12_10_7_tsni = function one_way_unify1_lst_inst_12_10_7_
       t2 = param01;
       ts2 = param11;
       scrut = one_way_unify1_inst_12_10_7_tsni(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_12_10_7_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -1492,37 +1494,37 @@ one_way_unify1_lst_inst_12_10_7_tsni = function one_way_unify1_lst_inst_12_10_7_
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -1538,9 +1540,9 @@ find_inst_12_10_7_4_tsni = function find_inst_12_10_7_4_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -1556,10 +1558,10 @@ find_inst_12_10_7_4_tsni = function find_inst_12_10_7_4_tsni(vid, ls) {
         return find_inst_12_10_7_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_12_11_tsni = function apply_subst_inst_12_11_tsni(subst, t) {
@@ -1580,7 +1582,7 @@ apply_subst_inst_12_11_tsni = function apply_subst_inst_12_11_tsni(subst, t) {
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_12_11_tsni = (undefined, function (subst) {
@@ -1603,9 +1605,9 @@ find_inst_12_11_1_tsni = function find_inst_12_11_1_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -1621,10 +1623,10 @@ find_inst_12_11_1_tsni = function find_inst_12_11_1_tsni(vid, ls) {
         return find_inst_12_11_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_with_lemmas_inst_13_tsni = function rewrite_with_lemmas_inst_13_tsni(term, lss) {
@@ -1639,16 +1641,16 @@ rewrite_with_lemmas_helper_inst_13_tsni = function rewrite_with_lemmas_helper_in
   } else if (lss instanceof NofibPrelude.Cons.class) {
     param0 = lss.head;
     param1 = lss.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       lhs = first0;
       rhs = first1;
       ls = param1;
       scrut = one_way_unify_inst_13_10_tsni(term, lhs);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first01 = scrut[0];
-        first11 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first01 = runtime.Tuple.get(scrut, 0);
+        first11 = runtime.Tuple.get(scrut, 1);
         unified = first01;
         subst = first11;
         if (unified === true) {
@@ -1658,13 +1660,13 @@ rewrite_with_lemmas_helper_inst_13_tsni = function rewrite_with_lemmas_helper_in
           return rewrite_with_lemmas_helper_inst_13_tsni(term, ls)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 one_way_unify_inst_13_10_tsni = function one_way_unify_inst_13_10_tsni(term1, term2) {
@@ -1694,24 +1696,24 @@ one_way_unify1_inst_13_10_7_tsni = function one_way_unify1_inst_13_10_7_tsni(ter
         if (scrut === true) {
           return one_way_unify1_lst_inst_13_10_7_tsni(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -1720,16 +1722,16 @@ one_way_unify1_lst_inst_13_10_7_tsni = function one_way_unify1_lst_inst_13_10_7_
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -1743,15 +1745,15 @@ one_way_unify1_lst_inst_13_10_7_tsni = function one_way_unify1_lst_inst_13_10_7_
       t2 = param01;
       ts2 = param11;
       scrut = one_way_unify1_inst_13_10_7_tsni(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_13_10_7_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -1763,37 +1765,37 @@ one_way_unify1_lst_inst_13_10_7_tsni = function one_way_unify1_lst_inst_13_10_7_
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -1809,9 +1811,9 @@ find_inst_13_10_7_4_tsni = function find_inst_13_10_7_4_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -1827,10 +1829,10 @@ find_inst_13_10_7_4_tsni = function find_inst_13_10_7_4_tsni(vid, ls) {
         return find_inst_13_10_7_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_13_11_tsni = function apply_subst_inst_13_11_tsni(subst, t) {
@@ -1851,7 +1853,7 @@ apply_subst_inst_13_11_tsni = function apply_subst_inst_13_11_tsni(subst, t) {
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_13_11_tsni = (undefined, function (subst) {
@@ -1874,9 +1876,9 @@ find_inst_13_11_1_tsni = function find_inst_13_11_1_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -1892,10 +1894,10 @@ find_inst_13_11_1_tsni = function find_inst_13_11_1_tsni(vid, ls) {
         return find_inst_13_11_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_inst_14_15_tsni = function rewrite_inst_14_15_tsni(t) {
@@ -1915,7 +1917,7 @@ rewrite_inst_14_15_tsni = function rewrite_inst_14_15_tsni(t) {
     tmp1 = runtime.safeCall(boyer.Fun(f1, tmp, lemmas));
     return rewrite_with_lemmas_inst_14_15_tsni(tmp1, lemmas)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_with_lemmas_inst_14_15_tsni = function rewrite_with_lemmas_inst_14_15_tsni(term, lss) {
@@ -1930,16 +1932,16 @@ rewrite_with_lemmas_helper_inst_14_15_tsni = function rewrite_with_lemmas_helper
   } else if (lss instanceof NofibPrelude.Cons.class) {
     param0 = lss.head;
     param1 = lss.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       lhs = first0;
       rhs = first1;
       ls = param1;
       scrut = one_way_unify_inst_14_15_10_tsni(term, lhs);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first01 = scrut[0];
-        first11 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first01 = runtime.Tuple.get(scrut, 0);
+        first11 = runtime.Tuple.get(scrut, 1);
         unified = first01;
         subst = first11;
         if (unified === true) {
@@ -1949,13 +1951,13 @@ rewrite_with_lemmas_helper_inst_14_15_tsni = function rewrite_with_lemmas_helper
           return rewrite_with_lemmas_helper_inst_14_15_tsni(term, ls)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_14_15_11_tsni = function apply_subst_inst_14_15_11_tsni(subst, t) {
@@ -1976,7 +1978,7 @@ apply_subst_inst_14_15_11_tsni = function apply_subst_inst_14_15_11_tsni(subst, 
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_14_15_11_tsni = (undefined, function (subst) {
@@ -1999,9 +2001,9 @@ find_inst_14_15_11_1_tsni = function find_inst_14_15_11_1_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -2017,10 +2019,10 @@ find_inst_14_15_11_1_tsni = function find_inst_14_15_11_1_tsni(vid, ls) {
         return find_inst_14_15_11_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 one_way_unify_inst_14_15_10_tsni = function one_way_unify_inst_14_15_10_tsni(term1, term2) {
@@ -2050,24 +2052,24 @@ one_way_unify1_inst_14_15_10_7_tsni = function one_way_unify1_inst_14_15_10_7_ts
         if (scrut === true) {
           return one_way_unify1_lst_inst_14_15_10_7_tsni(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -2076,16 +2078,16 @@ one_way_unify1_lst_inst_14_15_10_7_tsni = function one_way_unify1_lst_inst_14_15
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -2099,15 +2101,15 @@ one_way_unify1_lst_inst_14_15_10_7_tsni = function one_way_unify1_lst_inst_14_15
       t2 = param01;
       ts2 = param11;
       scrut = one_way_unify1_inst_14_15_10_7_tsni(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_14_15_10_7_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -2119,37 +2121,37 @@ one_way_unify1_lst_inst_14_15_10_7_tsni = function one_way_unify1_lst_inst_14_15
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -2165,9 +2167,9 @@ find_inst_14_15_10_7_4_tsni = function find_inst_14_15_10_7_4_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -2183,10 +2185,10 @@ find_inst_14_15_10_7_4_tsni = function find_inst_14_15_10_7_4_tsni(vid, ls) {
         return find_inst_14_15_10_7_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_16_17_tsni = function apply_subst_inst_16_17_tsni(subst, t) {
@@ -2207,7 +2209,7 @@ apply_subst_inst_16_17_tsni = function apply_subst_inst_16_17_tsni(subst, t) {
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_16_17_tsni = (undefined, function (subst) {
@@ -2243,7 +2245,7 @@ rewrite_inst_16_18_15_tsni = function rewrite_inst_16_18_15_tsni(t) {
     tmp1 = runtime.safeCall(boyer.Fun(f1, tmp, lemmas));
     return rewrite_with_lemmas_inst_16_18_15_tsni(tmp1, lemmas)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_with_lemmas_inst_16_18_15_tsni = function rewrite_with_lemmas_inst_16_18_15_tsni(term, lss) {
@@ -2258,16 +2260,16 @@ rewrite_with_lemmas_helper_inst_16_18_15_tsni = function rewrite_with_lemmas_hel
   } else if (lss instanceof NofibPrelude.Cons.class) {
     param0 = lss.head;
     param1 = lss.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       lhs = first0;
       rhs = first1;
       ls = param1;
       scrut = one_way_unify_inst_16_18_15_10_tsni(term, lhs);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first01 = scrut[0];
-        first11 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first01 = runtime.Tuple.get(scrut, 0);
+        first11 = runtime.Tuple.get(scrut, 1);
         unified = first01;
         subst = first11;
         if (unified === true) {
@@ -2277,13 +2279,13 @@ rewrite_with_lemmas_helper_inst_16_18_15_tsni = function rewrite_with_lemmas_hel
           return rewrite_with_lemmas_helper_inst_16_18_15_tsni(term, ls)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 one_way_unify_inst_16_18_15_10_tsni = function one_way_unify_inst_16_18_15_10_tsni(term1, term2) {
@@ -2313,24 +2315,24 @@ one_way_unify1_inst_16_18_15_10_7_tsni = function one_way_unify1_inst_16_18_15_1
         if (scrut === true) {
           return one_way_unify1_lst_inst_16_18_15_10_7_tsni(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -2339,16 +2341,16 @@ one_way_unify1_lst_inst_16_18_15_10_7_tsni = function one_way_unify1_lst_inst_16
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -2362,15 +2364,15 @@ one_way_unify1_lst_inst_16_18_15_10_7_tsni = function one_way_unify1_lst_inst_16
       t2 = param01;
       ts2 = param11;
       scrut = one_way_unify1_inst_16_18_15_10_7_tsni(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_16_18_15_10_7_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -2382,37 +2384,37 @@ one_way_unify1_lst_inst_16_18_15_10_7_tsni = function one_way_unify1_lst_inst_16
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -2428,9 +2430,9 @@ find_inst_16_18_15_10_7_4_tsni = function find_inst_16_18_15_10_7_4_tsni(vid, ls
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -2446,10 +2448,10 @@ find_inst_16_18_15_10_7_4_tsni = function find_inst_16_18_15_10_7_4_tsni(vid, ls
         return find_inst_16_18_15_10_7_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_16_18_15_11_tsni = function apply_subst_inst_16_18_15_11_tsni(subst, t) {
@@ -2470,7 +2472,7 @@ apply_subst_inst_16_18_15_11_tsni = function apply_subst_inst_16_18_15_11_tsni(s
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_16_18_15_11_tsni = (undefined, function (subst) {
@@ -2493,9 +2495,9 @@ find_inst_16_18_15_11_1_tsni = function find_inst_16_18_15_11_1_tsni(vid, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -2511,10 +2513,10 @@ find_inst_16_18_15_11_1_tsni = function find_inst_16_18_15_11_1_tsni(vid, ls) {
         return find_inst_16_18_15_11_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 test0_inst_19_20_tsni = function test0_inst_19_20_tsni(xxxx) {
@@ -2662,7 +2664,7 @@ rewrite_inst_19_20_18_15_tsni = function rewrite_inst_19_20_18_15_tsni(t) {
     tmp1 = runtime.safeCall(boyer.Fun(f1, tmp, lemmas));
     return rewrite_with_lemmas_inst_19_20_18_15_tsni(tmp1, lemmas)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_with_lemmas_inst_19_20_18_15_tsni = function rewrite_with_lemmas_inst_19_20_18_15_tsni(term, lss) {
@@ -2691,7 +2693,7 @@ apply_subst_inst_19_20_18_15_11_tsni = function apply_subst_inst_19_20_18_15_11_
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_19_20_18_15_11_tsni = (undefined, function (subst) {
@@ -2714,9 +2716,9 @@ find_inst_19_20_18_15_11_1_tsni = function find_inst_19_20_18_15_11_1_tsni(vid, 
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -2732,10 +2734,10 @@ find_inst_19_20_18_15_11_1_tsni = function find_inst_19_20_18_15_11_1_tsni(vid, 
         return find_inst_19_20_18_15_11_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 one_way_unify_inst_19_20_18_15_10_tsni = function one_way_unify_inst_19_20_18_15_10_tsni(term1, term2) {
@@ -2765,24 +2767,24 @@ one_way_unify1_inst_19_20_18_15_10_7_tsni = function one_way_unify1_inst_19_20_1
         if (scrut === true) {
           return one_way_unify1_lst_inst_19_20_18_15_10_7_tsni(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -2791,16 +2793,16 @@ one_way_unify1_lst_inst_19_20_18_15_10_7_tsni = function one_way_unify1_lst_inst
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -2814,15 +2816,15 @@ one_way_unify1_lst_inst_19_20_18_15_10_7_tsni = function one_way_unify1_lst_inst
       t2 = param01;
       ts2 = param11;
       scrut = one_way_unify1_inst_19_20_18_15_10_7_tsni(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_19_20_18_15_10_7_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -2834,37 +2836,37 @@ one_way_unify1_lst_inst_19_20_18_15_10_7_tsni = function one_way_unify1_lst_inst
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -2880,9 +2882,9 @@ find_inst_19_20_18_15_10_7_4_tsni = function find_inst_19_20_18_15_10_7_4_tsni(v
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -2898,10 +2900,10 @@ find_inst_19_20_18_15_10_7_4_tsni = function find_inst_19_20_18_15_10_7_4_tsni(v
         return find_inst_19_20_18_15_10_7_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_19_20_17_tsni = function apply_subst_inst_19_20_17_tsni(subst, t) {
@@ -2922,7 +2924,7 @@ apply_subst_inst_19_20_17_tsni = function apply_subst_inst_19_20_17_tsni(subst, 
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_19_20_17_tsni = (undefined, function (subst) {
@@ -37150,7 +37152,7 @@ apply_subst_inst_120_121_20_17_tsni = function apply_subst_inst_120_121_20_17_ts
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_120_121_20_17_tsni = (undefined, function (subst) {
@@ -37186,7 +37188,7 @@ rewrite_inst_120_121_20_18_15_tsni = function rewrite_inst_120_121_20_18_15_tsni
     tmp1 = runtime.safeCall(boyer.Fun(f1, tmp, lemmas));
     return rewrite_with_lemmas_inst_120_121_20_18_15_tsni(tmp1, lemmas)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rewrite_with_lemmas_inst_120_121_20_18_15_tsni = function rewrite_with_lemmas_inst_120_121_20_18_15_tsni(term, lss) {
@@ -37224,24 +37226,24 @@ one_way_unify1_inst_120_121_20_18_15_10_7_tsni = function one_way_unify1_inst_12
         if (scrut === true) {
           return one_way_unify1_lst_inst_120_121_20_18_15_10_7_tsni(as1, as2, subst)
         } else {
-          arr = [
+          arr = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr
         }
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else {
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr2
     }
   }
@@ -37250,16 +37252,16 @@ one_way_unify1_lst_inst_120_121_20_18_15_10_7_tsni = function one_way_unify1_lst
   let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
   if (tts1 instanceof NofibPrelude.Nil.class) {
     if (tts2 instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         true,
         subst
-      ];
+      ]);
       return arr
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr1
     }
   } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -37273,15 +37275,15 @@ one_way_unify1_lst_inst_120_121_20_18_15_10_7_tsni = function one_way_unify1_lst
       t2 = param01;
       ts2 = param11;
       scrut = one_way_unify1_inst_120_121_20_18_15_10_7_tsni(t1, t2, subst);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         hd_ok = first0;
         subst_ = first1;
         scrut1 = one_way_unify1_lst_inst_120_121_20_18_15_10_7_tsni(ts1, ts2, subst_);
-        if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-          first01 = scrut1[0];
-          first11 = scrut1[1];
+        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+          first01 = runtime.Tuple.get(scrut1, 0);
+          first11 = runtime.Tuple.get(scrut1, 1);
           tl_ok = first01;
           subst__ = first11;
           if (hd_ok === true) {
@@ -37293,37 +37295,37 @@ one_way_unify1_lst_inst_120_121_20_18_15_10_7_tsni = function one_way_unify1_lst
           } else {
             tmp = false;
           }
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp,
             subst__
-          ];
+          ]);
           return arr2
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr3
         }
       } else {
-        arr4 = [
+        arr4 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr4
       }
     } else {
-      arr5 = [
+      arr5 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr5
     }
   } else {
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       false,
       NofibPrelude.Nil
-    ];
+    ]);
     return arr6
   }
 };
@@ -37339,9 +37341,9 @@ find_inst_120_121_20_18_15_10_7_4_tsni = function find_inst_120_121_20_18_15_10_
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -37357,10 +37359,10 @@ find_inst_120_121_20_18_15_10_7_4_tsni = function find_inst_120_121_20_18_15_10_
         return find_inst_120_121_20_18_15_10_7_4_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 apply_subst_inst_120_121_20_18_15_11_tsni = function apply_subst_inst_120_121_20_18_15_11_tsni(subst, t) {
@@ -37381,7 +37383,7 @@ apply_subst_inst_120_121_20_18_15_11_tsni = function apply_subst_inst_120_121_20
     tmp = NofibPrelude.map(lambda$this, args);
     return runtime.safeCall(boyer.Fun(f1, tmp, ls))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_120_121_20_18_15_11_tsni = (undefined, function (subst) {
@@ -37404,9 +37406,9 @@ find_inst_120_121_20_18_15_11_1_tsni = function find_inst_120_121_20_18_15_11_1_
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       vid2 = first0;
       val2 = first1;
       bs = param1;
@@ -37422,10 +37424,10 @@ find_inst_120_121_20_18_15_11_1_tsni = function find_inst_120_121_20_18_15_11_1_
         return find_inst_120_121_20_18_15_11_1_tsni(vid, bs)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 f_inst_120_121_20_111_tsni = function f_inst_120_121_20_111_tsni(a) {
@@ -71505,10 +71507,10 @@ lambda$34 = function lambda$(zero) {
   let tmp, tmp1, arr;
   tmp = one$(zero);
   tmp1 = add1(zero);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp1
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda1 = (undefined, function (zero) {
@@ -71532,10 +71534,10 @@ lambda$33 = function lambda$(zero) {
   tmp = two$(zero);
   tmp1 = one$(zero);
   tmp2 = add1(tmp1);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda2 = (undefined, function (zero) {
@@ -71560,10 +71562,10 @@ lambda$32 = function lambda$(zero) {
   tmp1 = two$(zero);
   tmp2 = add1(tmp1);
   tmp3 = add1(tmp2);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp3
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda3 = (undefined, function (zero) {
@@ -71598,10 +71600,10 @@ lambda$31 = function lambda$(u, w, x, y, z) {
   tmp2 = if_$(u, w, x, y, z, y, u, w);
   tmp3 = if_$(u, w, x, y, z, z, u, w);
   tmp4 = if_$(u, w, x, y, z, x, tmp2, tmp3);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp4
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda5 = (undefined, function (u, w, x, y, z) {
@@ -71627,10 +71629,10 @@ lambda$30 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue) {
   let tmp, tmp1, arr;
   tmp = not_$(u, w, x, y, z, boyerFalse, boyerTrue, x);
   tmp1 = if_$(u, w, x, y, z, x, boyerFalse, boyerTrue);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp1
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda6 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue) {
@@ -71655,10 +71657,10 @@ lambda$29 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue) {
   tmp = and_$(u, w, x, y, z, boyerFalse, boyerTrue, x, y);
   tmp1 = if_$(u, w, x, y, z, y, boyerTrue, boyerFalse);
   tmp2 = if_$(u, w, x, y, z, x, tmp1, boyerFalse);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda7 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue) {
@@ -71685,10 +71687,10 @@ lambda$28 = function lambda$(x, y, z) {
   tmp1 = append_$(x, y, z, tmp, z);
   tmp2 = append_$(x, y, z, y, z);
   tmp3 = append_$(x, y, z, x, tmp2);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp3
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda8 = (undefined, function (x, y, z) {
@@ -71723,10 +71725,10 @@ lambda$27 = function lambda$(x, y, boyerTrue) {
   let tmp, tmp1, arr;
   tmp = cons(x, y);
   tmp1 = consp$(x, y, boyerTrue, tmp);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     boyerTrue
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda10 = (undefined, function (x, y, boyerTrue) {
@@ -71749,54 +71751,54 @@ consp = function consp(x, y, boyerTrue) {
 lambda$26 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   let tmp, arr, tmp1, tmp2, arr1, tmp3, tmp4, arr2, tmp5, tmp6, tmp7, tmp8, arr3, tmp9, tmp10, tmp11, tmp12, arr4, tmp13, tmp14, tmp15, tmp16, arr5, tmp17, tmp18, tmp19, tmp20, arr6, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26;
   tmp = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, x);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     zero
-  ];
+  ]);
   tmp1 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp2 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp1, x);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp2,
     y
-  ];
+  ]);
   tmp3 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, x);
   tmp4 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp3, x);
-  arr2 = [
+  arr2 = globalThis.Object.freeze([
     tmp4,
     y
-  ];
+  ]);
   tmp5 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp6 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp7 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp5, tmp6);
   tmp8 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
-  arr3 = [
+  arr3 = globalThis.Object.freeze([
     tmp7,
     tmp8
-  ];
+  ]);
   tmp9 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp10 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, tmp9);
   tmp11 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp10, x);
   tmp12 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
-  arr4 = [
+  arr4 = globalThis.Object.freeze([
     tmp11,
     tmp12
-  ];
+  ]);
   tmp13 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
   tmp14 = add1(tmp13);
   tmp15 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp14, z);
   tmp16 = add1(y);
-  arr5 = [
+  arr5 = globalThis.Object.freeze([
     tmp15,
     tmp16
-  ];
+  ]);
   tmp17 = add1(x);
   tmp18 = add1(tmp17);
   tmp19 = two$(zero);
   tmp20 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp18, tmp19);
-  arr6 = [
+  arr6 = globalThis.Object.freeze([
     tmp20,
     x
-  ];
+  ]);
   tmp21 = NofibPrelude.Cons(arr6, NofibPrelude.Nil);
   tmp22 = NofibPrelude.Cons(arr5, tmp21);
   tmp23 = NofibPrelude.Cons(arr4, tmp22);
@@ -71828,10 +71830,10 @@ lambda$25 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp = divides$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp1 = remainder$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, x);
   tmp2 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp1);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda12 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue, zero) {
@@ -71859,72 +71861,72 @@ lambda$24 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp2 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x);
   tmp3 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y);
   tmp4 = and_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp2, tmp3);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp4
-  ];
+  ]);
   tmp5 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp6 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp7 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp5, tmp6);
   tmp8 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp7,
     tmp8
-  ];
+  ]);
   tmp9 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp10 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, zero, tmp9);
   tmp11 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, x);
   tmp12 = not_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp11);
-  arr2 = [
+  arr2 = globalThis.Object.freeze([
     tmp10,
     tmp12
-  ];
+  ]);
   tmp13 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp14 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp13);
   tmp15 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, zero);
   tmp16 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y);
   tmp17 = or_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp15, tmp16);
-  arr3 = [
+  arr3 = globalThis.Object.freeze([
     tmp14,
     tmp17
-  ];
+  ]);
   tmp18 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp19 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp18, zero);
   tmp20 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x);
   tmp21 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y);
   tmp22 = or_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp20, tmp21);
-  arr4 = [
+  arr4 = globalThis.Object.freeze([
     tmp19,
     tmp22
-  ];
+  ]);
   tmp23 = append_$(x, y, z, x, y);
   tmp24 = append_$(x, y, z, x, z);
   tmp25 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp23, tmp24);
   tmp26 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
-  arr5 = [
+  arr5 = globalThis.Object.freeze([
     tmp25,
     tmp26
-  ];
+  ]);
   tmp27 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp28 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, tmp27);
   tmp29 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, zero);
   tmp30 = one$(zero);
   tmp31 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp30);
   tmp32 = or_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp29, tmp31);
-  arr6 = [
+  arr6 = globalThis.Object.freeze([
     tmp28,
     tmp32
-  ];
+  ]);
   tmp33 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp34 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp33);
   tmp35 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, zero);
   tmp36 = one$(zero);
   tmp37 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, tmp36);
   tmp38 = or_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp35, tmp37);
-  arr7 = [
+  arr7 = globalThis.Object.freeze([
     tmp34,
     tmp38
-  ];
+  ]);
   tmp39 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp40 = one$(zero);
   tmp41 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp39, tmp40);
@@ -71933,10 +71935,10 @@ lambda$24 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp44 = one$(zero);
   tmp45 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, tmp44);
   tmp46 = and_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp43, tmp45);
-  arr8 = [
+  arr8 = globalThis.Object.freeze([
     tmp41,
     tmp46
-  ];
+  ]);
   tmp47 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp48 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, z, y);
   tmp49 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp47, tmp48);
@@ -71949,20 +71951,20 @@ lambda$24 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp56 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp57 = if_$(u, w, x, y, z, tmp53, tmp55, tmp56);
   tmp58 = if_$(u, w, x, y, z, tmp50, tmp52, tmp57);
-  arr9 = [
+  arr9 = globalThis.Object.freeze([
     tmp49,
     tmp58
-  ];
+  ]);
   tmp59 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp60 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp59, z);
   tmp61 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp62 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, boyerTrue, z);
   tmp63 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, boyerFalse, z);
   tmp64 = if_$(u, w, x, y, z, tmp61, tmp62, tmp63);
-  arr10 = [
+  arr10 = globalThis.Object.freeze([
     tmp60,
     tmp64
-  ];
+  ]);
   tmp65 = NofibPrelude.Cons(arr10, NofibPrelude.Nil);
   tmp66 = NofibPrelude.Cons(arr9, tmp65);
   tmp67 = NofibPrelude.Cons(arr8, tmp66);
@@ -72000,10 +72002,10 @@ lambda$23 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp2 = sub1$(x, x);
   tmp3 = odd_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp2);
   tmp4 = if_$(u, w, x, y, z, tmp1, boyerTrue, tmp3);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp4
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda14 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue, zero) {
@@ -72030,18 +72032,18 @@ lambda$22 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp2 = exp_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp3 = exp_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp4 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp2, tmp3);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp4
-  ];
+  ]);
   tmp5 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
   tmp6 = exp_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp5);
   tmp7 = exp_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp8 = exp_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp7, z);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp6,
     tmp8
-  ];
+  ]);
   tmp9 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
   return NofibPrelude.Cons(arr, tmp9)
 };
@@ -72076,19 +72078,19 @@ lambda$21 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   let tmp, tmp1, arr, tmp2, tmp3, tmp4, tmp5, tmp6, arr1, tmp7;
   tmp = gcd_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp1 = gcd_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, x);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp1
-  ];
+  ]);
   tmp2 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp3 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
   tmp4 = gcd_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp2, tmp3);
   tmp5 = gcd_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp6 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, z, tmp5);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp4,
     tmp6
-  ];
+  ]);
   tmp7 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
   return NofibPrelude.Cons(arr, tmp7)
 };
@@ -72115,10 +72117,10 @@ lambda$20 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp = greatereqp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp1 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp2 = not_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp1);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda18 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue, zero) {
@@ -72143,10 +72145,10 @@ lambda$19 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   let tmp, tmp1, arr;
   tmp = greaterp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp1 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, x);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp1
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda19 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue, zero) {
@@ -72172,10 +72174,10 @@ lambda$18 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue) {
   tmp = implies$(u, w, x, y, z, boyerFalse, boyerTrue, x, y);
   tmp1 = if_$(u, w, x, y, z, y, boyerTrue, boyerFalse);
   tmp2 = if_$(u, w, x, y, z, x, tmp1, boyerTrue);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda20 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue) {
@@ -72202,10 +72204,10 @@ lambda$17 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue) {
   tmp1 = implies$(u, w, x, y, z, boyerFalse, boyerTrue, x, y);
   tmp2 = implies$(u, w, x, y, z, boyerFalse, boyerTrue, y, x);
   tmp3 = and_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp1, tmp2);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp3
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda21 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue) {
@@ -72231,10 +72233,10 @@ lambda$16 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp = reverse_$(x, y, z, x);
   tmp1 = length_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp);
   tmp2 = length_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp2
-  ];
+  ]);
   tmp3 = cons(u, w);
   tmp4 = cons(z, tmp3);
   tmp5 = cons(y, tmp4);
@@ -72243,10 +72245,10 @@ lambda$16 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp8 = four$(zero);
   tmp9 = length_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, w);
   tmp10 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp8, tmp9);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp7,
     tmp10
-  ];
+  ]);
   tmp11 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
   return NofibPrelude.Cons(arr, tmp11)
 };
@@ -72272,10 +72274,10 @@ lambda$15 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp = lesseqp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp1 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, x);
   tmp2 = not_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp1);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda23 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue, zero) {
@@ -72302,10 +72304,10 @@ lambda$14 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp1 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp, y);
   tmp2 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y);
   tmp3 = not_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp2);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp3
-  ];
+  ]);
   tmp4 = quotient$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp5 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp4, x);
   tmp6 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x);
@@ -72313,18 +72315,18 @@ lambda$14 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp8 = one$(zero);
   tmp9 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp8, y);
   tmp10 = and_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp7, tmp9);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp5,
     tmp10
-  ];
+  ]);
   tmp11 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp12 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp13 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp11, tmp12);
   tmp14 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
-  arr2 = [
+  arr2 = globalThis.Object.freeze([
     tmp13,
     tmp14
-  ];
+  ]);
   tmp15 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp16 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
   tmp17 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp15, tmp16);
@@ -72332,18 +72334,18 @@ lambda$14 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp19 = not_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp18);
   tmp20 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp21 = and_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp19, tmp20);
-  arr3 = [
+  arr3 = globalThis.Object.freeze([
     tmp17,
     tmp21
-  ];
+  ]);
   tmp22 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp23 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, tmp22);
   tmp24 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x);
   tmp25 = not_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp24);
-  arr4 = [
+  arr4 = globalThis.Object.freeze([
     tmp23,
     tmp25
-  ];
+  ]);
   tmp26 = NofibPrelude.Cons(arr4, NofibPrelude.Nil);
   tmp27 = NofibPrelude.Cons(arr3, tmp26);
   tmp28 = NofibPrelude.Cons(arr2, tmp27);
@@ -72372,10 +72374,10 @@ lambda$13 = function lambda$(u, w, x, y, z, boyerFalse, nil, boyerTrue, zero) {
   let tmp, tmp1, arr;
   tmp = nilp$(u, w, x, y, z, boyerFalse, nil, boyerTrue, zero, x);
   tmp1 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, nil);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp1
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda25 = (undefined, function (u, w, x, y, z, boyerFalse, nil, boyerTrue, zero) {
@@ -72401,10 +72403,10 @@ lambda$12 = function lambda$(u, w, x, y, z, boyerFalse, nil, boyerTrue, zero) {
   tmp1 = nilp$(u, w, x, y, z, boyerFalse, nil, boyerTrue, zero, x);
   tmp2 = consp$(x, y, boyerTrue, x);
   tmp3 = or_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp1, tmp2);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp3
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda26 = (undefined, function (u, w, x, y, z, boyerFalse, nil, boyerTrue, zero) {
@@ -72431,17 +72433,17 @@ lambda$11 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue) {
   tmp2 = member$(u, w, x, y, z, boyerFalse, boyerTrue, x, y);
   tmp3 = member$(u, w, x, y, z, boyerFalse, boyerTrue, x, z);
   tmp4 = or_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp2, tmp3);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp4
-  ];
+  ]);
   tmp5 = reverse_$(x, y, z, y);
   tmp6 = member$(u, w, x, y, z, boyerFalse, boyerTrue, x, tmp5);
   tmp7 = member$(u, w, x, y, z, boyerFalse, boyerTrue, x, y);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp6,
     tmp7
-  ];
+  ]);
   tmp8 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
   return NofibPrelude.Cons(arr, tmp8)
 };
@@ -72468,10 +72470,10 @@ lambda$10 = function lambda$(u, w, x, y, z, boyerFalse, nil, boyerTrue, zero) {
   tmp = nlistp$(u, w, x, y, z, boyerFalse, nil, boyerTrue, zero, x);
   tmp1 = listp$(u, w, x, y, z, boyerFalse, nil, boyerTrue, zero, x);
   tmp2 = not_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp1);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda28 = (undefined, function (u, w, x, y, z, boyerFalse, nil, boyerTrue, zero) {
@@ -72496,10 +72498,10 @@ lambda$9 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp = odd_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x);
   tmp1 = sub1$(x, x);
   tmp2 = even_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp1);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda29 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue, zero) {
@@ -72524,10 +72526,10 @@ lambda$8 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue) {
   tmp = or_$(u, w, x, y, z, boyerFalse, boyerTrue, x, y);
   tmp1 = if_$(u, w, x, y, z, y, boyerTrue, boyerFalse);
   tmp2 = if_$(u, w, x, y, z, x, boyerTrue, tmp1);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp2
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda30 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue) {
@@ -72554,26 +72556,26 @@ lambda$7 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp1 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp, z);
   tmp2 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
   tmp3 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp2);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp3
-  ];
+  ]);
   tmp4 = remainder$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp5 = quotient$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp6 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, tmp5);
   tmp7 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp4, tmp6);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp7,
     x
-  ];
+  ]);
   tmp8 = add1(y);
   tmp9 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp8);
   tmp10 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp11 = add1(tmp10);
-  arr2 = [
+  arr2 = globalThis.Object.freeze([
     tmp9,
     tmp11
-  ];
+  ]);
   tmp12 = NofibPrelude.Cons(arr2, NofibPrelude.Nil);
   tmp13 = NofibPrelude.Cons(arr1, tmp12);
   return NofibPrelude.Cons(arr, tmp13)
@@ -72605,18 +72607,18 @@ lambda$6 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp4 = two$(zero);
   tmp5 = quotient$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, tmp4);
   tmp6 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp5);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp3,
     tmp6
-  ];
+  ]);
   tmp7 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, x);
   tmp8 = quotient$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp7, y);
   tmp9 = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y);
   tmp10 = if_$(u, w, x, y, z, tmp9, zero, x);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp8,
     tmp10
-  ];
+  ]);
   tmp11 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
   return NofibPrelude.Cons(arr, tmp11)
 };
@@ -72642,27 +72644,27 @@ lambda$5 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   let tmp, tmp1, arr, tmp2, arr1, tmp3, tmp4, arr2, tmp5, tmp6, arr3, tmp7, tmp8, tmp9;
   tmp = one$(zero);
   tmp1 = remainder$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     zero
-  ];
+  ]);
   tmp2 = remainder$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, x);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp2,
     zero
-  ];
+  ]);
   tmp3 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp4 = remainder$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp3, x);
-  arr2 = [
+  arr2 = globalThis.Object.freeze([
     tmp4,
     zero
-  ];
+  ]);
   tmp5 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp6 = remainder$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp5, y);
-  arr3 = [
+  arr3 = globalThis.Object.freeze([
     tmp6,
     zero
-  ];
+  ]);
   tmp7 = NofibPrelude.Cons(arr3, NofibPrelude.Nil);
   tmp8 = NofibPrelude.Cons(arr2, tmp7);
   tmp9 = NofibPrelude.Cons(arr1, tmp8);
@@ -72693,10 +72695,10 @@ lambda$4 = function lambda$(x, y, z) {
   tmp2 = reverse_$(x, y, z, y);
   tmp3 = reverse_$(x, y, z, x);
   tmp4 = append_$(x, y, z, tmp2, tmp3);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp4
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda34 = (undefined, function (x, y, z) {
@@ -72720,10 +72722,10 @@ lambda$3 = function lambda$(x) {
   let tmp, tmp1, arr;
   tmp = add1(x);
   tmp1 = sub1$(x, tmp);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     x
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda35 = (undefined, function (x) {
@@ -72750,35 +72752,35 @@ lambda$2 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   tmp2 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp3 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, z);
   tmp4 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp2, tmp3);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp1,
     tmp4
-  ];
+  ]);
   tmp5 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp6 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp5, z);
   tmp7 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
   tmp8 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp7);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     tmp6,
     tmp8
-  ];
+  ]);
   tmp9 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, z);
   tmp10 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp9);
   tmp11 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, y, x);
   tmp12 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, z, x);
   tmp13 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp11, tmp12);
-  arr2 = [
+  arr2 = globalThis.Object.freeze([
     tmp10,
     tmp13
-  ];
+  ]);
   tmp14 = add1(y);
   tmp15 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp14);
   tmp16 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
   tmp17 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, tmp16);
-  arr3 = [
+  arr3 = globalThis.Object.freeze([
     tmp15,
     tmp17
-  ];
+  ]);
   tmp18 = NofibPrelude.Cons(arr3, NofibPrelude.Nil);
   tmp19 = NofibPrelude.Cons(arr2, tmp18);
   tmp20 = NofibPrelude.Cons(arr1, tmp19);
@@ -72806,10 +72808,10 @@ lambda$1 = function lambda$(u, w, x, y, z, boyerFalse, boyerTrue, zero) {
   let tmp, tmp1, arr;
   tmp = zerop$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x);
   tmp1 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, zero);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     tmp1
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda37 = (undefined, function (u, w, x, y, z, boyerFalse, boyerTrue, zero) {
@@ -72854,442 +72856,605 @@ lambda = (undefined, function (subst) {
     boyer1 = boyer;
     this.Id = class Id {
       constructor() {}
-      toString() { return "Id"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Id"]; 
     };
     const A$class = class A extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: A
+        })
       }
-      toString() { return "A"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "A"]; 
     };
-    this.A = new A$class;
-    this.A.class = A$class;
+    this.A = globalThis.Object.freeze(new A$class);
     const B$class = class B extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: B
+        })
       }
-      toString() { return "B"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "B"]; 
     };
-    this.B = new B$class;
-    this.B.class = B$class;
+    this.B = globalThis.Object.freeze(new B$class);
     const C$class = class C extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: C
+        })
       }
-      toString() { return "C"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "C"]; 
     };
-    this.C = new C$class;
-    this.C.class = C$class;
+    this.C = globalThis.Object.freeze(new C$class);
     const D$class = class D extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: D
+        })
       }
-      toString() { return "D"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "D"]; 
     };
-    this.D = new D$class;
-    this.D.class = D$class;
+    this.D = globalThis.Object.freeze(new D$class);
     const X$class = class X extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: X
+        })
       }
-      toString() { return "X"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "X"]; 
     };
-    this.X = new X$class;
-    this.X.class = X$class;
+    this.X = globalThis.Object.freeze(new X$class);
     const Y$class = class Y extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: Y
+        })
       }
-      toString() { return "Y"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "Y"]; 
     };
-    this.Y = new Y$class;
-    this.Y.class = Y$class;
+    this.Y = globalThis.Object.freeze(new Y$class);
     const Z$class = class Z extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: Z
+        })
       }
-      toString() { return "Z"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "Z"]; 
     };
-    this.Z = new Z$class;
-    this.Z.class = Z$class;
+    this.Z = globalThis.Object.freeze(new Z$class);
     const U$class = class U extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: U
+        })
       }
-      toString() { return "U"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "U"]; 
     };
-    this.U = new U$class;
-    this.U.class = U$class;
+    this.U = globalThis.Object.freeze(new U$class);
     const W$class = class W extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: W
+        })
       }
-      toString() { return "W"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "W"]; 
     };
-    this.W = new W$class;
-    this.W.class = W$class;
+    this.W = globalThis.Object.freeze(new W$class);
     const ADD1$class = class ADD1 extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: ADD1
+        })
       }
-      toString() { return "ADD1"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "ADD1"]; 
     };
-    this.ADD1 = new ADD1$class;
-    this.ADD1.class = ADD1$class;
+    this.ADD1 = globalThis.Object.freeze(new ADD1$class);
     const AND$class = class AND extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: AND
+        })
       }
-      toString() { return "AND"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "AND"]; 
     };
-    this.AND = new AND$class;
-    this.AND.class = AND$class;
+    this.AND = globalThis.Object.freeze(new AND$class);
     const APPEND$class = class APPEND extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: APPEND
+        })
       }
-      toString() { return "APPEND"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "APPEND"]; 
     };
-    this.APPEND = new APPEND$class;
-    this.APPEND.class = APPEND$class;
+    this.APPEND = globalThis.Object.freeze(new APPEND$class);
     const CONS$class = class CONS extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: CONS
+        })
       }
-      toString() { return "CONS"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "CONS"]; 
     };
-    this.CONS = new CONS$class;
-    this.CONS.class = CONS$class;
+    this.CONS = globalThis.Object.freeze(new CONS$class);
     const CONSP$class = class CONSP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: CONSP
+        })
       }
-      toString() { return "CONSP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "CONSP"]; 
     };
-    this.CONSP = new CONSP$class;
-    this.CONSP.class = CONSP$class;
+    this.CONSP = globalThis.Object.freeze(new CONSP$class);
     const DIFFERENCE$class = class DIFFERENCE extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: DIFFERENCE
+        })
       }
-      toString() { return "DIFFERENCE"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "DIFFERENCE"]; 
     };
-    this.DIFFERENCE = new DIFFERENCE$class;
-    this.DIFFERENCE.class = DIFFERENCE$class;
+    this.DIFFERENCE = globalThis.Object.freeze(new DIFFERENCE$class);
     const DIVIDES$class = class DIVIDES extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: DIVIDES
+        })
       }
-      toString() { return "DIVIDES"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "DIVIDES"]; 
     };
-    this.DIVIDES = new DIVIDES$class;
-    this.DIVIDES.class = DIVIDES$class;
+    this.DIVIDES = globalThis.Object.freeze(new DIVIDES$class);
     const EQUAL$class = class EQUAL extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: EQUAL
+        })
       }
-      toString() { return "EQUAL"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "EQUAL"]; 
     };
-    this.EQUAL = new EQUAL$class;
-    this.EQUAL.class = EQUAL$class;
+    this.EQUAL = globalThis.Object.freeze(new EQUAL$class);
     const EVEN$class = class EVEN extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: EVEN
+        })
       }
-      toString() { return "EVEN"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "EVEN"]; 
     };
-    this.EVEN = new EVEN$class;
-    this.EVEN.class = EVEN$class;
+    this.EVEN = globalThis.Object.freeze(new EVEN$class);
     const EXP$class = class EXP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: EXP
+        })
       }
-      toString() { return "EXP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "EXP"]; 
     };
-    this.EXP = new EXP$class;
-    this.EXP.class = EXP$class;
+    this.EXP = globalThis.Object.freeze(new EXP$class);
     const F$class = class F extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: F
+        })
       }
-      toString() { return "F"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "F"]; 
     };
-    this.F = new F$class;
-    this.F.class = F$class;
+    this.F = globalThis.Object.freeze(new F$class);
     const FALSE$class = class FALSE extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: FALSE
+        })
       }
-      toString() { return "FALSE"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "FALSE"]; 
     };
-    this.FALSE = new FALSE$class;
-    this.FALSE.class = FALSE$class;
+    this.FALSE = globalThis.Object.freeze(new FALSE$class);
     const FOUR$class = class FOUR extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: FOUR
+        })
       }
-      toString() { return "FOUR"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "FOUR"]; 
     };
-    this.FOUR = new FOUR$class;
-    this.FOUR.class = FOUR$class;
+    this.FOUR = globalThis.Object.freeze(new FOUR$class);
     const GCD$class = class GCD extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: GCD
+        })
       }
-      toString() { return "GCD"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "GCD"]; 
     };
-    this.GCD = new GCD$class;
-    this.GCD.class = GCD$class;
+    this.GCD = globalThis.Object.freeze(new GCD$class);
     const GREATEREQP$class = class GREATEREQP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: GREATEREQP
+        })
       }
-      toString() { return "GREATEREQP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "GREATEREQP"]; 
     };
-    this.GREATEREQP = new GREATEREQP$class;
-    this.GREATEREQP.class = GREATEREQP$class;
+    this.GREATEREQP = globalThis.Object.freeze(new GREATEREQP$class);
     const GREATERP$class = class GREATERP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: GREATERP
+        })
       }
-      toString() { return "GREATERP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "GREATERP"]; 
     };
-    this.GREATERP = new GREATERP$class;
-    this.GREATERP.class = GREATERP$class;
+    this.GREATERP = globalThis.Object.freeze(new GREATERP$class);
     const IF$class = class IF extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: IF
+        })
       }
-      toString() { return "IF"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "IF"]; 
     };
-    this.IF = new IF$class;
-    this.IF.class = IF$class;
+    this.IF = globalThis.Object.freeze(new IF$class);
     const IFF$class = class IFF extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: IFF
+        })
       }
-      toString() { return "IFF"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "IFF"]; 
     };
-    this.IFF = new IFF$class;
-    this.IFF.class = IFF$class;
+    this.IFF = globalThis.Object.freeze(new IFF$class);
     const IMPLIES$class = class IMPLIES extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: IMPLIES
+        })
       }
-      toString() { return "IMPLIES"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "IMPLIES"]; 
     };
-    this.IMPLIES = new IMPLIES$class;
-    this.IMPLIES.class = IMPLIES$class;
+    this.IMPLIES = globalThis.Object.freeze(new IMPLIES$class);
     const LENGTH$class = class LENGTH extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: LENGTH
+        })
       }
-      toString() { return "LENGTH"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "LENGTH"]; 
     };
-    this.LENGTH = new LENGTH$class;
-    this.LENGTH.class = LENGTH$class;
+    this.LENGTH = globalThis.Object.freeze(new LENGTH$class);
     const LESSEQP$class = class LESSEQP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: LESSEQP
+        })
       }
-      toString() { return "LESSEQP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "LESSEQP"]; 
     };
-    this.LESSEQP = new LESSEQP$class;
-    this.LESSEQP.class = LESSEQP$class;
+    this.LESSEQP = globalThis.Object.freeze(new LESSEQP$class);
     const LESSP$class = class LESSP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: LESSP
+        })
       }
-      toString() { return "LESSP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "LESSP"]; 
     };
-    this.LESSP = new LESSP$class;
-    this.LESSP.class = LESSP$class;
+    this.LESSP = globalThis.Object.freeze(new LESSP$class);
     const LISTP$class = class LISTP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: LISTP
+        })
       }
-      toString() { return "LISTP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "LISTP"]; 
     };
-    this.LISTP = new LISTP$class;
-    this.LISTP.class = LISTP$class;
+    this.LISTP = globalThis.Object.freeze(new LISTP$class);
     const MEMBER$class = class MEMBER extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: MEMBER
+        })
       }
-      toString() { return "MEMBER"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "MEMBER"]; 
     };
-    this.MEMBER = new MEMBER$class;
-    this.MEMBER.class = MEMBER$class;
+    this.MEMBER = globalThis.Object.freeze(new MEMBER$class);
     const NIL$class = class NIL extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: NIL
+        })
       }
-      toString() { return "NIL"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "NIL"]; 
     };
-    this.NIL = new NIL$class;
-    this.NIL.class = NIL$class;
+    this.NIL = globalThis.Object.freeze(new NIL$class);
     const NILP$class = class NILP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: NILP
+        })
       }
-      toString() { return "NILP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "NILP"]; 
     };
-    this.NILP = new NILP$class;
-    this.NILP.class = NILP$class;
+    this.NILP = globalThis.Object.freeze(new NILP$class);
     const NLISTP$class = class NLISTP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: NLISTP
+        })
       }
-      toString() { return "NLISTP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "NLISTP"]; 
     };
-    this.NLISTP = new NLISTP$class;
-    this.NLISTP.class = NLISTP$class;
+    this.NLISTP = globalThis.Object.freeze(new NLISTP$class);
     const NOT$class = class NOT extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: NOT
+        })
       }
-      toString() { return "NOT"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "NOT"]; 
     };
-    this.NOT = new NOT$class;
-    this.NOT.class = NOT$class;
+    this.NOT = globalThis.Object.freeze(new NOT$class);
     const ODD$class = class ODD extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: ODD
+        })
       }
-      toString() { return "ODD"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "ODD"]; 
     };
-    this.ODD = new ODD$class;
-    this.ODD.class = ODD$class;
+    this.ODD = globalThis.Object.freeze(new ODD$class);
     const ONE$class = class ONE extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: ONE
+        })
       }
-      toString() { return "ONE"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "ONE"]; 
     };
-    this.ONE = new ONE$class;
-    this.ONE.class = ONE$class;
+    this.ONE = globalThis.Object.freeze(new ONE$class);
     const OR$class = class OR extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: OR
+        })
       }
-      toString() { return "OR"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "OR"]; 
     };
-    this.OR = new OR$class;
-    this.OR.class = OR$class;
+    this.OR = globalThis.Object.freeze(new OR$class);
     const PLUS$class = class PLUS extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: PLUS
+        })
       }
-      toString() { return "PLUS"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "PLUS"]; 
     };
-    this.PLUS = new PLUS$class;
-    this.PLUS.class = PLUS$class;
+    this.PLUS = globalThis.Object.freeze(new PLUS$class);
     const QUOTIENT$class = class QUOTIENT extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: QUOTIENT
+        })
       }
-      toString() { return "QUOTIENT"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "QUOTIENT"]; 
     };
-    this.QUOTIENT = new QUOTIENT$class;
-    this.QUOTIENT.class = QUOTIENT$class;
+    this.QUOTIENT = globalThis.Object.freeze(new QUOTIENT$class);
     const REMAINDER$class = class REMAINDER extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: REMAINDER
+        })
       }
-      toString() { return "REMAINDER"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "REMAINDER"]; 
     };
-    this.REMAINDER = new REMAINDER$class;
-    this.REMAINDER.class = REMAINDER$class;
+    this.REMAINDER = globalThis.Object.freeze(new REMAINDER$class);
     const REVERSE$class = class REVERSE extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: REVERSE
+        })
       }
-      toString() { return "REVERSE"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "REVERSE"]; 
     };
-    this.REVERSE = new REVERSE$class;
-    this.REVERSE.class = REVERSE$class;
+    this.REVERSE = globalThis.Object.freeze(new REVERSE$class);
     const SUB1$class = class SUB1 extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: SUB1
+        })
       }
-      toString() { return "SUB1"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "SUB1"]; 
     };
-    this.SUB1 = new SUB1$class;
-    this.SUB1.class = SUB1$class;
+    this.SUB1 = globalThis.Object.freeze(new SUB1$class);
     const TIMES$class = class TIMES extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: TIMES
+        })
       }
-      toString() { return "TIMES"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "TIMES"]; 
     };
-    this.TIMES = new TIMES$class;
-    this.TIMES.class = TIMES$class;
+    this.TIMES = globalThis.Object.freeze(new TIMES$class);
     const TRUE$class = class TRUE extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: TRUE
+        })
       }
-      toString() { return "TRUE"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "TRUE"]; 
     };
-    this.TRUE = new TRUE$class;
-    this.TRUE.class = TRUE$class;
+    this.TRUE = globalThis.Object.freeze(new TRUE$class);
     const TWO$class = class TWO extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: TWO
+        })
       }
-      toString() { return "TWO"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "TWO"]; 
     };
-    this.TWO = new TWO$class;
-    this.TWO.class = TWO$class;
+    this.TWO = globalThis.Object.freeze(new TWO$class);
     const ZERO$class = class ZERO extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: ZERO
+        })
       }
-      toString() { return "ZERO"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "ZERO"]; 
     };
-    this.ZERO = new ZERO$class;
-    this.ZERO.class = ZERO$class;
+    this.ZERO = globalThis.Object.freeze(new ZERO$class);
     const ZEROP$class = class ZEROP extends boyer.Id {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: ZEROP
+        })
       }
-      toString() { return "ZEROP"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "ZEROP"]; 
     };
-    this.ZEROP = new ZEROP$class;
-    this.ZEROP.class = ZEROP$class;
+    this.ZEROP = globalThis.Object.freeze(new ZEROP$class);
     this.Term = class Term {
       constructor() {}
-      toString() { return "Term"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Term"]; 
     };
     this.Var = function Var(i1) {
-      return new Var.class(i1);
+      return globalThis.Object.freeze(new Var.class(i1));
     };
-    this.Var.class = class Var extends boyer.Term {
-      constructor(i) {
-        super();
-        this.i = i;
+    Object.defineProperty(this.Var, "class", {
+      enumerable: true,
+      value: class Var extends boyer.Term {
+        constructor(i) {
+          super();
+          this.i = i;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Var", ["i"]]; 
       }
-      toString() { return "Var(" + runtime.render(this.i) + ")"; }
-    };
+    });
     this.Fun = function Fun(i1, t1, l1) {
-      return new Fun.class(i1, t1, l1);
+      return globalThis.Object.freeze(new Fun.class(i1, t1, l1));
     };
-    this.Fun.class = class Fun extends boyer.Term {
-      constructor(i, t, l) {
-        super();
-        this.i = i;
-        this.t = t;
-        this.l = l;
+    Object.defineProperty(this.Fun, "class", {
+      enumerable: true,
+      value: class Fun extends boyer.Term {
+        constructor(i, t, l) {
+          super();
+          this.i = i;
+          this.t = t;
+          this.l = l;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Fun", ["i", "t", "l"]]; 
       }
-      toString() { return "Fun(" + runtime.render(this.i) + ", " + runtime.render(this.t) + ", " + runtime.render(this.l) + ")"; }
-    };
+    });
     const ERROR$class = class ERROR extends boyer.Term {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: ERROR
+        })
       }
-      toString() { return "ERROR"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "ERROR"]; 
     };
-    this.ERROR = new ERROR$class;
-    this.ERROR.class = ERROR$class;
+    this.ERROR = globalThis.Object.freeze(new ERROR$class);
   }
   static termLsEq(h1t1, h2t2) {
     let param0, param1, h1, t1, param01, param11, h2, t2, scrut;
@@ -73374,41 +73539,41 @@ lambda = (undefined, function (subst) {
     } else if (ht instanceof NofibPrelude.Nil.class) {
       return false
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static find(vid, ls) {
     let param0, param1, first1, first0, vid2, val2, bs, scrut, arr, arr1;
     if (ls instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         false,
         boyer.ERROR
-      ];
+      ]);
       return arr
     } else if (ls instanceof NofibPrelude.Cons.class) {
       param0 = ls.head;
       param1 = ls.tail;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
+      if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+        first0 = runtime.Tuple.get(param0, 0);
+        first1 = runtime.Tuple.get(param0, 1);
         vid2 = first0;
         val2 = first1;
         bs = param1;
         scrut = vid === vid2;
         if (scrut === true) {
-          arr1 = [
+          arr1 = globalThis.Object.freeze([
             true,
             val2
-          ];
+          ]);
           return arr1
         } else {
           return boyer.find(vid, bs)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static one_way_unify1(term1, term2, subst) {
@@ -73435,24 +73600,24 @@ lambda = (undefined, function (subst) {
           if (scrut === true) {
             return one_way_unify1_lst_inst_3_tsni(as1, as2, subst)
           } else {
-            arr = [
+            arr = globalThis.Object.freeze([
               false,
               NofibPrelude.Nil
-            ];
+            ]);
             return arr
           }
         } else {
-          arr1 = [
+          arr1 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr1
         }
       } else {
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr2
       }
     }
@@ -73461,16 +73626,16 @@ lambda = (undefined, function (subst) {
     let param0, param1, t11, ts1, param01, param11, t21, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
     if (tts1 instanceof NofibPrelude.Nil.class) {
       if (tts2 instanceof NofibPrelude.Nil.class) {
-        arr = [
+        arr = globalThis.Object.freeze([
           true,
           subst1
-        ];
+        ]);
         return arr
       } else {
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr1
       }
     } else if (tts1 instanceof NofibPrelude.Cons.class) {
@@ -73484,15 +73649,15 @@ lambda = (undefined, function (subst) {
         t21 = param01;
         ts2 = param11;
         scrut = one_way_unify1_inst_5_tsni(t11, t21, subst1);
-        if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-          first0 = scrut[0];
-          first1 = scrut[1];
+        if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+          first0 = runtime.Tuple.get(scrut, 0);
+          first1 = runtime.Tuple.get(scrut, 1);
           hd_ok = first0;
           subst_ = first1;
           scrut1 = boyer.one_way_unify1_lst(ts1, ts2, subst_);
-          if (globalThis.Array.isArray(scrut1) && scrut1.length === 2) {
-            first01 = scrut1[0];
-            first11 = scrut1[1];
+          if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+            first01 = runtime.Tuple.get(scrut1, 0);
+            first11 = runtime.Tuple.get(scrut1, 1);
             tl_ok = first01;
             subst__ = first11;
             if (hd_ok === true) {
@@ -73504,37 +73669,37 @@ lambda = (undefined, function (subst) {
             } else {
               tmp = false;
             }
-            arr2 = [
+            arr2 = globalThis.Object.freeze([
               tmp,
               subst__
-            ];
+            ]);
             return arr2
           } else {
-            arr3 = [
+            arr3 = globalThis.Object.freeze([
               false,
               NofibPrelude.Nil
-            ];
+            ]);
             return arr3
           }
         } else {
-          arr4 = [
+          arr4 = globalThis.Object.freeze([
             false,
             NofibPrelude.Nil
-          ];
+          ]);
           return arr4
         }
       } else {
-        arr5 = [
+        arr5 = globalThis.Object.freeze([
           false,
           NofibPrelude.Nil
-        ];
+        ]);
         return arr5
       }
     } else {
-      arr6 = [
+      arr6 = globalThis.Object.freeze([
         false,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr6
     }
   } 
@@ -73559,7 +73724,7 @@ lambda = (undefined, function (subst) {
       tmp = NofibPrelude.map(lambda$this, args);
       return runtime.safeCall(boyer.Fun(f1, tmp, ls1))
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static rewrite_with_lemmas_helper(term3, lss) {
@@ -73569,16 +73734,16 @@ lambda = (undefined, function (subst) {
     } else if (lss instanceof NofibPrelude.Cons.class) {
       param0 = lss.head;
       param1 = lss.tail;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
+      if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+        first0 = runtime.Tuple.get(param0, 0);
+        first1 = runtime.Tuple.get(param0, 1);
         lhs = first0;
         rhs = first1;
         ls1 = param1;
         scrut = one_way_unify_inst_9_10_tsni(term3, lhs);
-        if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-          first01 = scrut[0];
-          first11 = scrut[1];
+        if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+          first01 = runtime.Tuple.get(scrut, 0);
+          first11 = runtime.Tuple.get(scrut, 1);
           unified = first01;
           subst3 = first11;
           if (unified === true) {
@@ -73588,13 +73753,13 @@ lambda = (undefined, function (subst) {
             return boyer.rewrite_with_lemmas_helper(term3, ls1)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static rewrite_with_lemmas(term4, lss1) {
@@ -73619,7 +73784,7 @@ lambda = (undefined, function (subst) {
       tmp1 = runtime.safeCall(boyer.Fun(f1, tmp, lemmas));
       return rewrite_with_lemmas_inst_13_tsni(tmp1, lemmas)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static truep(x, l) {
@@ -73861,6 +74026,7 @@ lambda = (undefined, function (subst) {
   static main() {
     return testBoyer_nofib_inst_120_121_tsni(5)
   }
-  static toString() { return "boyer"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "boyer"]; 
 });
 let boyer = boyer1; export default boyer;

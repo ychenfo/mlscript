@@ -25,11 +25,11 @@ fun compareList(xs, ys) = if xs is
 
 fun gtList(a, b) = compareList(a, b) is GT
 
-fun leList(a, b) = Predef.not(gtList(a, b))
+fun leList(a, b) = not(gtList(a, b))
 
 fun ltList(a, b) = compareList(a, b) is LT
 
-fun geList(a, b) = Predef.not(ltList(a, b))
+fun geList(a, b) = not(ltList(a, b))
 
 fun eqList(a, b) = compareList(a, b) is EQ
 

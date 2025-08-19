@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -22,11 +24,11 @@ match_scrut_rest_inst_102_tsni = function match_scrut_rest_inst_102_tsni(top, bo
   tmp8 = NofibPrelude.listLen(tmp7);
   scrut1 = tmp8 > 10;
   if (scrut1 === true) {
-    throw globalThis.Error("error");
+    throw globalThis.Error("error")
   } else {
     scrut = topVal != botVal;
     if (scrut === true) {
-      throw globalThis.Error("error");
+      throw globalThis.Error("error")
     } else {
       tmp9 = lambda29;
       tmp10 = map_inst_102_109_tsni(tmp9, env);
@@ -53,11 +55,11 @@ match_scrut_rest_inst_110_111_tsni = function match_scrut_rest_inst_110_111_tsni
   tmp8 = NofibPrelude.listLen(tmp7);
   scrut1 = tmp8 > 10;
   if (scrut1 === true) {
-    throw globalThis.Error("error");
+    throw globalThis.Error("error")
   } else {
     scrut = topVal != botVal;
     if (scrut === true) {
-      throw globalThis.Error("error");
+      throw globalThis.Error("error")
     } else {
       tmp9 = lambda29;
       tmp10 = map_inst_110_111_109_tsni(tmp9, env);
@@ -84,11 +86,11 @@ match_scrut_rest_inst_112_113_111_tsni = function match_scrut_rest_inst_112_113_
   tmp8 = NofibPrelude.listLen(tmp7);
   scrut1 = tmp8 > 10;
   if (scrut1 === true) {
-    throw globalThis.Error("error");
+    throw globalThis.Error("error")
   } else {
     scrut = topVal != botVal;
     if (scrut === true) {
-      throw globalThis.Error("error");
+      throw globalThis.Error("error")
     } else {
       tmp9 = lambda29;
       tmp10 = map_inst_112_113_111_109_tsni(tmp9, env);
@@ -1738,14 +1740,14 @@ lookup_inst_0_1_tsni = function lookup_inst_0_1_tsni(k, t) {
   let param0, param1, first1, first0, x, v, t1, scrut, _deforest_Some_x;
   if (t instanceof NofibPrelude.Nil.class) {
     return () => {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -1762,10 +1764,10 @@ lookup_inst_0_1_tsni = function lookup_inst_0_1_tsni(k, t) {
         return lookup_inst_0_1_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 look$_inst_2_3_tsni = function look$_inst_2_3_tsni(env, c) {
@@ -1777,14 +1779,14 @@ lookup_inst_2_3_1_tsni = function lookup_inst_2_3_1_tsni(k, t) {
   let param0, param1, first1, first0, x, v, t1, scrut, _deforest_Some_x;
   if (t instanceof NofibPrelude.Nil.class) {
     return () => {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -1801,10 +1803,10 @@ lookup_inst_2_3_1_tsni = function lookup_inst_2_3_1_tsni(k, t) {
         return lookup_inst_2_3_1_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 solve_inst_4_tsni = function solve_inst_4_tsni(tops, bots, carry) {
@@ -1824,7 +1826,7 @@ solve_inst_4_tsni = function solve_inst_4_tsni(tops, bots, carry) {
       lambda$this = runtime.safeCall(lambda_inst_4_53_tsni(carry));
       tmp = bind_inst_4_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda_inst_4_tsni(tops, bot, botss));
     return bind_inst_4_62_tsni(tmp, lambda$this1)
@@ -1929,7 +1931,7 @@ map_inst_4_5_6_7_8_9_tsni = function map_inst_4_5_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_4_5_10_tsni = (undefined, function (c) {
@@ -1992,10 +1994,10 @@ lambda$_inst_4_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_4_5_10_11_12_
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -2127,7 +2129,7 @@ map_inst_4_5_10_11_12_13_14_23_tsni = function map_inst_4_5_10_11_12_13_14_23_ts
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_4_5_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -2376,7 +2378,7 @@ map_inst_4_5_10_11_12_39_7_8_9_tsni = function map_inst_4_5_10_11_12_39_7_8_9_ts
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_4_5_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_4_5_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -2394,9 +2396,9 @@ lookup_inst_4_5_10_11_40_tsni = function lookup_inst_4_5_10_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -2413,10 +2415,10 @@ lookup_inst_4_5_10_11_40_tsni = function lookup_inst_4_5_10_11_40_tsni(k, t) {
         return lookup_inst_4_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_4_5_10_11_41_tsni = function return__inst_4_5_10_11_41_tsni(a) {
@@ -2550,7 +2552,7 @@ map_inst_4_42_43_44_46_47_48_7_8_9_tsni = function map_inst_4_42_43_44_46_47_48_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_4_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -2581,10 +2583,10 @@ lambda_inst_4_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_4_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_4_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -2667,7 +2669,7 @@ map_inst_4_52_7_8_9_tsni = function map_inst_4_52_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_4_53_tsni = (undefined, function (carry) {
@@ -2781,7 +2783,7 @@ map_inst_4_56_6_7_8_9_tsni = function map_inst_4_56_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_4_56_10_tsni = (undefined, function (c) {
@@ -2844,10 +2846,10 @@ lambda$_inst_4_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_4_56_10_11_1
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -2979,7 +2981,7 @@ map_inst_4_56_10_11_12_13_14_23_tsni = function map_inst_4_56_10_11_12_13_14_23_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_4_56_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -3228,7 +3230,7 @@ map_inst_4_56_10_11_12_39_7_8_9_tsni = function map_inst_4_56_10_11_12_39_7_8_9_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_4_56_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_4_56_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -3246,9 +3248,9 @@ lookup_inst_4_56_10_11_40_tsni = function lookup_inst_4_56_10_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -3265,10 +3267,10 @@ lookup_inst_4_56_10_11_40_tsni = function lookup_inst_4_56_10_11_40_tsni(k, t) {
         return lookup_inst_4_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_4_56_10_11_41_tsni = function return__inst_4_56_10_11_41_tsni(a) {
@@ -3454,7 +3456,7 @@ append_inst_4_57_7_8_38_37_tsni = function append_inst_4_57_7_8_38_37_tsni(xs, y
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 bind_inst_4_62_tsni = function bind_inst_4_62_tsni(m, f) {
@@ -3534,7 +3536,7 @@ solve_inst_64_tsni = function solve_inst_64_tsni(tops, bots, carry) {
       lambda$this = runtime.safeCall(lambda_inst_64_53_tsni(carry));
       tmp = bind_inst_64_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda_inst_64_tsni(tops, bot, botss));
     return bind_inst_64_62_tsni(tmp, lambda$this1)
@@ -3640,7 +3642,7 @@ map_inst_64_5_6_7_8_9_tsni = function map_inst_64_5_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_64_5_10_tsni = (undefined, function (c) {
@@ -3703,10 +3705,10 @@ lambda$_inst_64_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_64_5_10_11_1
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -3838,7 +3840,7 @@ map_inst_64_5_10_11_12_13_14_23_tsni = function map_inst_64_5_10_11_12_13_14_23_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_64_5_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -4087,7 +4089,7 @@ map_inst_64_5_10_11_12_39_7_8_9_tsni = function map_inst_64_5_10_11_12_39_7_8_9_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_64_5_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_64_5_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -4105,9 +4107,9 @@ lookup_inst_64_5_10_11_40_tsni = function lookup_inst_64_5_10_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -4124,10 +4126,10 @@ lookup_inst_64_5_10_11_40_tsni = function lookup_inst_64_5_10_11_40_tsni(k, t) {
         return lookup_inst_64_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_64_5_10_11_41_tsni = function return__inst_64_5_10_11_41_tsni(a) {
@@ -4261,7 +4263,7 @@ map_inst_64_42_43_44_46_47_48_7_8_9_tsni = function map_inst_64_42_43_44_46_47_4
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_64_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -4292,10 +4294,10 @@ lambda_inst_64_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_64_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_64_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -4378,7 +4380,7 @@ map_inst_64_52_7_8_9_tsni = function map_inst_64_52_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_64_53_tsni = (undefined, function (carry) {
@@ -4492,7 +4494,7 @@ map_inst_64_56_6_7_8_9_tsni = function map_inst_64_56_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_64_56_10_tsni = (undefined, function (c) {
@@ -4555,10 +4557,10 @@ lambda$_inst_64_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_64_56_10_11
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -4690,7 +4692,7 @@ map_inst_64_56_10_11_12_13_14_23_tsni = function map_inst_64_56_10_11_12_13_14_2
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_64_56_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -4939,7 +4941,7 @@ map_inst_64_56_10_11_12_39_7_8_9_tsni = function map_inst_64_56_10_11_12_39_7_8_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_64_56_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_64_56_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -4957,9 +4959,9 @@ lookup_inst_64_56_10_11_40_tsni = function lookup_inst_64_56_10_11_40_tsni(k, t)
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -4976,10 +4978,10 @@ lookup_inst_64_56_10_11_40_tsni = function lookup_inst_64_56_10_11_40_tsni(k, t)
         return lookup_inst_64_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_64_56_10_11_41_tsni = function return__inst_64_56_10_11_41_tsni(a) {
@@ -5165,7 +5167,7 @@ append_inst_64_57_7_8_38_37_tsni = function append_inst_64_57_7_8_38_37_tsni(xs,
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 bind_inst_64_62_tsni = function bind_inst_64_62_tsni(m, f) {
@@ -5245,7 +5247,7 @@ solve_inst_65_tsni = function solve_inst_65_tsni(tops, bots, carry) {
       lambda$this = runtime.safeCall(lambda_inst_65_53_tsni(carry));
       tmp = bind_inst_65_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda_inst_65_tsni(tops, bot, botss));
     return bind_inst_65_62_tsni(tmp, lambda$this1)
@@ -5357,7 +5359,7 @@ map_inst_65_5_6_7_8_9_tsni = function map_inst_65_5_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_65_5_10_tsni = (undefined, function (c) {
@@ -5420,10 +5422,10 @@ lambda$_inst_65_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_65_5_10_11_1
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -5555,7 +5557,7 @@ map_inst_65_5_10_11_12_13_14_23_tsni = function map_inst_65_5_10_11_12_13_14_23_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_65_5_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -5804,7 +5806,7 @@ map_inst_65_5_10_11_12_39_7_8_9_tsni = function map_inst_65_5_10_11_12_39_7_8_9_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_65_5_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_65_5_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -5822,9 +5824,9 @@ lookup_inst_65_5_10_11_40_tsni = function lookup_inst_65_5_10_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -5841,10 +5843,10 @@ lookup_inst_65_5_10_11_40_tsni = function lookup_inst_65_5_10_11_40_tsni(k, t) {
         return lookup_inst_65_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_65_5_10_11_41_tsni = function return__inst_65_5_10_11_41_tsni(a) {
@@ -5978,7 +5980,7 @@ map_inst_65_42_43_44_46_47_48_7_8_9_tsni = function map_inst_65_42_43_44_46_47_4
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_65_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -6009,10 +6011,10 @@ lambda_inst_65_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_65_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_65_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -6095,7 +6097,7 @@ map_inst_65_52_7_8_9_tsni = function map_inst_65_52_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_65_53_tsni = (undefined, function (carry) {
@@ -6209,7 +6211,7 @@ map_inst_65_56_6_7_8_9_tsni = function map_inst_65_56_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_65_56_10_tsni = (undefined, function (c) {
@@ -6272,10 +6274,10 @@ lambda$_inst_65_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_65_56_10_11
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -6407,7 +6409,7 @@ map_inst_65_56_10_11_12_13_14_23_tsni = function map_inst_65_56_10_11_12_13_14_2
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_65_56_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -6656,7 +6658,7 @@ map_inst_65_56_10_11_12_39_7_8_9_tsni = function map_inst_65_56_10_11_12_39_7_8_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_65_56_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_65_56_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -6674,9 +6676,9 @@ lookup_inst_65_56_10_11_40_tsni = function lookup_inst_65_56_10_11_40_tsni(k, t)
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -6693,10 +6695,10 @@ lookup_inst_65_56_10_11_40_tsni = function lookup_inst_65_56_10_11_40_tsni(k, t)
         return lookup_inst_65_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_65_56_10_11_41_tsni = function return__inst_65_56_10_11_41_tsni(a) {
@@ -6928,7 +6930,7 @@ append_inst_65_61_7_8_38_37_tsni = function append_inst_65_61_7_8_38_37_tsni(xs,
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_65_62_7_8_38_tsni = function concat_inst_65_62_7_8_38_tsni(ls) {
@@ -6957,10 +6959,10 @@ lambda_inst_65_67_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_65_67_33_34_tsni = function lambda$_inst_65_67_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return match_xs_arm_Nil_inst_65_57_7_8_38_37_tsni(ys)
@@ -6996,7 +6998,7 @@ solve_inst_70_tsni = function solve_inst_70_tsni(tops, bots, carry) {
       lambda$this = runtime.safeCall(lambda_inst_70_53_tsni(carry));
       tmp = bind_inst_70_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda_inst_70_tsni(tops, bot, botss));
     return bind_inst_70_62_tsni(tmp, lambda$this1)
@@ -7111,7 +7113,7 @@ map_inst_70_5_6_7_8_9_tsni = function map_inst_70_5_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_70_5_10_tsni = (undefined, function (c) {
@@ -7174,10 +7176,10 @@ lambda$_inst_70_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_70_5_10_11_1
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -7309,7 +7311,7 @@ map_inst_70_5_10_11_12_13_14_23_tsni = function map_inst_70_5_10_11_12_13_14_23_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_70_5_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -7558,7 +7560,7 @@ map_inst_70_5_10_11_12_39_7_8_9_tsni = function map_inst_70_5_10_11_12_39_7_8_9_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_70_5_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_70_5_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -7576,9 +7578,9 @@ lookup_inst_70_5_10_11_40_tsni = function lookup_inst_70_5_10_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -7595,10 +7597,10 @@ lookup_inst_70_5_10_11_40_tsni = function lookup_inst_70_5_10_11_40_tsni(k, t) {
         return lookup_inst_70_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_70_5_10_11_41_tsni = function return__inst_70_5_10_11_41_tsni(a) {
@@ -7732,7 +7734,7 @@ map_inst_70_42_43_44_46_47_48_7_8_9_tsni = function map_inst_70_42_43_44_46_47_4
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_70_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -7763,10 +7765,10 @@ lambda_inst_70_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_70_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_70_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -7849,7 +7851,7 @@ map_inst_70_52_7_8_9_tsni = function map_inst_70_52_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_70_53_tsni = (undefined, function (carry) {
@@ -7963,7 +7965,7 @@ map_inst_70_56_6_7_8_9_tsni = function map_inst_70_56_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_70_56_10_tsni = (undefined, function (c) {
@@ -8026,10 +8028,10 @@ lambda$_inst_70_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_70_56_10_11
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -8161,7 +8163,7 @@ map_inst_70_56_10_11_12_13_14_23_tsni = function map_inst_70_56_10_11_12_13_14_2
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_70_56_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -8410,7 +8412,7 @@ map_inst_70_56_10_11_12_39_7_8_9_tsni = function map_inst_70_56_10_11_12_39_7_8_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_70_56_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_70_56_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -8428,9 +8430,9 @@ lookup_inst_70_56_10_11_40_tsni = function lookup_inst_70_56_10_11_40_tsni(k, t)
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -8447,10 +8449,10 @@ lookup_inst_70_56_10_11_40_tsni = function lookup_inst_70_56_10_11_40_tsni(k, t)
         return lookup_inst_70_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_70_56_10_11_41_tsni = function return__inst_70_56_10_11_41_tsni(a) {
@@ -8682,7 +8684,7 @@ append_inst_70_61_7_8_38_37_tsni = function append_inst_70_61_7_8_38_37_tsni(xs,
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_70_62_7_8_38_tsni = function concat_inst_70_62_7_8_38_tsni(ls) {
@@ -8711,10 +8713,10 @@ lambda_inst_70_67_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_70_67_33_34_tsni = function lambda$_inst_70_67_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return match_xs_arm_Nil_inst_70_57_7_8_38_37_tsni(ys)
@@ -8750,7 +8752,7 @@ solve_inst_71_tsni = function solve_inst_71_tsni(tops, bots, carry) {
       lambda$this = runtime.safeCall(lambda_inst_71_53_tsni(carry));
       tmp = bind_inst_71_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda_inst_71_tsni(tops, bot, botss));
     return bind_inst_71_62_tsni(tmp, lambda$this1)
@@ -8864,7 +8866,7 @@ map_inst_71_5_6_7_8_9_tsni = function map_inst_71_5_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_71_5_10_tsni = (undefined, function (c) {
@@ -8927,10 +8929,10 @@ lambda$_inst_71_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_71_5_10_11_1
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -9062,7 +9064,7 @@ map_inst_71_5_10_11_12_13_14_23_tsni = function map_inst_71_5_10_11_12_13_14_23_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_71_5_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -9311,7 +9313,7 @@ map_inst_71_5_10_11_12_39_7_8_9_tsni = function map_inst_71_5_10_11_12_39_7_8_9_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_71_5_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_71_5_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -9329,9 +9331,9 @@ lookup_inst_71_5_10_11_40_tsni = function lookup_inst_71_5_10_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -9348,10 +9350,10 @@ lookup_inst_71_5_10_11_40_tsni = function lookup_inst_71_5_10_11_40_tsni(k, t) {
         return lookup_inst_71_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_71_5_10_11_41_tsni = function return__inst_71_5_10_11_41_tsni(a) {
@@ -9485,7 +9487,7 @@ map_inst_71_42_43_44_46_47_48_7_8_9_tsni = function map_inst_71_42_43_44_46_47_4
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_71_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -9516,10 +9518,10 @@ lambda_inst_71_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_71_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_71_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -9602,7 +9604,7 @@ map_inst_71_52_7_8_9_tsni = function map_inst_71_52_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_71_53_tsni = (undefined, function (carry) {
@@ -9714,7 +9716,7 @@ map_inst_71_56_6_7_8_9_tsni = function map_inst_71_56_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_71_56_10_tsni = (undefined, function (c) {
@@ -9777,10 +9779,10 @@ lambda$_inst_71_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_71_56_10_11
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -9912,7 +9914,7 @@ map_inst_71_56_10_11_12_13_14_23_tsni = function map_inst_71_56_10_11_12_13_14_2
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_71_56_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -10161,7 +10163,7 @@ map_inst_71_56_10_11_12_39_7_8_9_tsni = function map_inst_71_56_10_11_12_39_7_8_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_71_56_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_71_56_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -10179,9 +10181,9 @@ lookup_inst_71_56_10_11_40_tsni = function lookup_inst_71_56_10_11_40_tsni(k, t)
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -10198,10 +10200,10 @@ lookup_inst_71_56_10_11_40_tsni = function lookup_inst_71_56_10_11_40_tsni(k, t)
         return lookup_inst_71_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_71_56_10_11_41_tsni = function return__inst_71_56_10_11_41_tsni(a) {
@@ -10429,7 +10431,7 @@ append_inst_71_62_7_8_38_37_tsni = function append_inst_71_62_7_8_38_37_tsni(xs,
       return match_xs_arm_Cons_inst_71_57_7_8_38_37_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_71_66_tsni = (undefined, function (_p) {
@@ -10452,10 +10454,10 @@ lambda_inst_71_67_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_71_67_33_34_tsni = function lambda$_inst_71_67_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return match_xs_arm_Nil_inst_71_57_7_8_38_37_tsni(ys)
@@ -10491,7 +10493,7 @@ solve_inst_72_tsni = function solve_inst_72_tsni(tops, bots, carry) {
       lambda$this = runtime.safeCall(lambda_inst_72_53_tsni(carry));
       tmp = bind_inst_72_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda20(tops, bot, botss));
     return bind_inst_72_62_tsni(tmp, lambda$this1)
@@ -10606,7 +10608,7 @@ map_inst_72_5_6_7_8_9_tsni = function map_inst_72_5_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_72_5_10_tsni = (undefined, function (c) {
@@ -10669,10 +10671,10 @@ lambda$_inst_72_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_72_5_10_11_1
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -10804,7 +10806,7 @@ map_inst_72_5_10_11_12_13_14_23_tsni = function map_inst_72_5_10_11_12_13_14_23_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_72_5_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -11053,7 +11055,7 @@ map_inst_72_5_10_11_12_39_7_8_9_tsni = function map_inst_72_5_10_11_12_39_7_8_9_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_72_5_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_72_5_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -11071,9 +11073,9 @@ lookup_inst_72_5_10_11_40_tsni = function lookup_inst_72_5_10_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -11090,10 +11092,10 @@ lookup_inst_72_5_10_11_40_tsni = function lookup_inst_72_5_10_11_40_tsni(k, t) {
         return lookup_inst_72_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_72_5_10_11_41_tsni = function return__inst_72_5_10_11_41_tsni(a) {
@@ -11227,7 +11229,7 @@ map_inst_72_42_43_44_46_47_48_7_8_9_tsni = function map_inst_72_42_43_44_46_47_4
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_72_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -11258,10 +11260,10 @@ lambda_inst_72_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_72_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_72_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -11344,7 +11346,7 @@ map_inst_72_52_7_8_9_tsni = function map_inst_72_52_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_72_53_tsni = (undefined, function (carry) {
@@ -11456,7 +11458,7 @@ map_inst_72_56_6_7_8_9_tsni = function map_inst_72_56_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_72_56_10_tsni = (undefined, function (c) {
@@ -11519,10 +11521,10 @@ lambda$_inst_72_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_72_56_10_11
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -11654,7 +11656,7 @@ map_inst_72_56_10_11_12_13_14_23_tsni = function map_inst_72_56_10_11_12_13_14_2
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_72_56_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -11903,7 +11905,7 @@ map_inst_72_56_10_11_12_39_7_8_9_tsni = function map_inst_72_56_10_11_12_39_7_8_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_72_56_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_72_56_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -11921,9 +11923,9 @@ lookup_inst_72_56_10_11_40_tsni = function lookup_inst_72_56_10_11_40_tsni(k, t)
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -11940,10 +11942,10 @@ lookup_inst_72_56_10_11_40_tsni = function lookup_inst_72_56_10_11_40_tsni(k, t)
         return lookup_inst_72_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_72_56_10_11_41_tsni = function return__inst_72_56_10_11_41_tsni(a) {
@@ -12171,7 +12173,7 @@ append_inst_72_62_7_8_38_37_tsni = function append_inst_72_62_7_8_38_37_tsni(xs,
       return match_xs_arm_Cons_inst_72_57_7_8_38_37_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_72_66_tsni = (undefined, function (_p) {
@@ -12194,10 +12196,10 @@ lambda_inst_72_67_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_72_67_33_34_tsni = function lambda$_inst_72_67_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return match_xs_arm_Nil_inst_72_57_7_8_38_37_tsni(ys)
@@ -12225,9 +12227,9 @@ lookup_inst_73_40_tsni = function lookup_inst_73_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -12244,10 +12246,10 @@ lookup_inst_73_40_tsni = function lookup_inst_73_40_tsni(k, t) {
         return lookup_inst_73_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 permute_inst_73_12_tsni = function permute_inst_73_12_tsni(c) {
@@ -12297,7 +12299,7 @@ map_inst_73_12_39_7_8_9_tsni = function map_inst_73_12_39_7_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_73_12_13_tsni = (undefined, function (c) {
@@ -12401,10 +12403,10 @@ lambda_inst_73_12_13_14_24_25_30_31_32_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_73_12_13_14_24_25_30_31_32_33_34_tsni = function lambda$_inst_73_12_13_14_24_25_30_31_32_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -12630,7 +12632,7 @@ map_inst_73_12_13_14_23_tsni = function map_inst_73_12_13_14_23_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_73_12_13_14_15_tsni = (undefined, function (xs) {
@@ -12662,10 +12664,10 @@ lambda$_inst_73_12_13_14_15_16_tsni = function lambda$_inst_73_12_13_14_15_16_ts
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -12736,10 +12738,10 @@ lambda$_inst_74_11_12_13_14_15_16_tsni = function lambda$_inst_74_11_12_13_14_15
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -12871,7 +12873,7 @@ map_inst_74_11_12_13_14_23_tsni = function map_inst_74_11_12_13_14_23_tsni(f, xs
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_74_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -12992,10 +12994,10 @@ lambda_inst_74_11_12_13_14_24_25_30_31_32_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_74_11_12_13_14_24_25_30_31_32_33_34_tsni = function lambda$_inst_74_11_12_13_14_24_25_30_31_32_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -13109,7 +13111,7 @@ map_inst_74_11_12_39_7_8_9_tsni = function map_inst_74_11_12_39_7_8_9_tsni(f, xs
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_74_11_12_13_14_35_7_8_38_tsni = function concat_inst_74_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -13127,9 +13129,9 @@ lookup_inst_74_11_40_tsni = function lookup_inst_74_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -13146,10 +13148,10 @@ lookup_inst_74_11_40_tsni = function lookup_inst_74_11_40_tsni(k, t) {
         return lookup_inst_74_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$_inst_76_16_tsni = function lambda$_inst_76_16_tsni(xs, x) {
@@ -13168,10 +13170,10 @@ lambda$_inst_76_16_tsni = function lambda$_inst_76_16_tsni(xs, x) {
     return foldl_inst_76_16_115_116_tsni(f, tmp2, t)
   };
   tmp1 = listDiff_inst_76_16_115_tsni(xs, tmp);
-  arr = [
+  arr = globalThis.Object.freeze([
     x,
     tmp1
-  ];
+  ]);
   return arr
 };
 bind_inst_77_26_tsni = function bind_inst_77_26_tsni(m, f) {
@@ -13276,10 +13278,10 @@ lambda_inst_77_30_31_32_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_77_30_31_32_33_34_tsni = function lambda$_inst_77_30_31_32_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -13296,15 +13298,15 @@ lambda$_inst_77_30_31_32_33_34_tsni = function lambda$_inst_77_30_31_32_33_34_ts
 };
 lambda$_inst_78_25_tsni = function lambda$_inst_78_25_tsni(c, st, iis) {
   let first1, first0, i, iss, arr, tmp, tmp1, tmp2, tmp3, lambda$this;
-  if (globalThis.Array.isArray(iis) && iis.length === 2) {
-    first0 = iis[0];
-    first1 = iis[1];
+  if (runtime.Tuple.isArrayLike(iis) && iis.length === 2) {
+    first0 = runtime.Tuple.get(iis, 0);
+    first1 = runtime.Tuple.get(iis, 1);
     i = first0;
     iss = first1;
-    arr = [
+    arr = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp = cryptarithm21.digitEnv(st);
     tmp1 = NofibPrelude.Cons(arr, tmp);
     tmp2 = cryptarithm21.Digits(iss, tmp1);
@@ -13312,7 +13314,7 @@ lambda$_inst_78_25_tsni = function lambda$_inst_78_25_tsni(c, st, iis) {
     lambda$this = runtime.safeCall(lambda_inst_78_25_30_tsni(i));
     return bind_inst_78_25_26_tsni(tmp3, lambda$this)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 bind_inst_78_25_26_tsni = function bind_inst_78_25_26_tsni(m, f) {
@@ -13361,10 +13363,10 @@ lambda_inst_78_25_30_31_32_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_78_25_30_31_32_33_34_tsni = function lambda$_inst_78_25_30_31_32_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -13464,10 +13466,10 @@ lambda$_inst_79_15_16_tsni = function lambda$_inst_79_15_16_tsni(xs, x) {
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -13597,7 +13599,7 @@ map_inst_79_23_tsni = function map_inst_79_23_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_79_24_tsni = (undefined, function (c, st) {
@@ -13718,10 +13720,10 @@ lambda_inst_79_24_25_30_31_32_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_79_24_25_30_31_32_33_34_tsni = function lambda$_inst_79_24_25_30_31_32_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -13867,10 +13869,10 @@ lambda_inst_80_14_24_25_30_31_32_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_80_14_24_25_30_31_32_33_34_tsni = function lambda$_inst_80_14_24_25_30_31_32_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -14084,7 +14086,7 @@ map_inst_80_14_23_tsni = function map_inst_80_14_23_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_80_14_15_tsni = (undefined, function (xs) {
@@ -14116,10 +14118,10 @@ lambda$_inst_80_14_15_16_tsni = function lambda$_inst_80_14_15_16_tsni(xs, x) {
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -14154,7 +14156,7 @@ map_inst_81_20_tsni = function map_inst_81_20_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_81_21_tsni = (undefined, function (s) {
@@ -14164,10 +14166,10 @@ lambda_inst_81_21_tsni = (undefined, function (s) {
 });
 lambda$_inst_81_21_22_tsni = function lambda$_inst_81_21_22_tsni(s, x) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     x,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -14213,7 +14215,7 @@ map_inst_82_19_20_tsni = function map_inst_82_19_20_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_82_19_21_tsni = (undefined, function (s) {
@@ -14223,10 +14225,10 @@ lambda_inst_82_19_21_tsni = (undefined, function (s) {
 });
 lambda$_inst_82_19_21_22_tsni = function lambda$_inst_82_19_21_22_tsni(s, x) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     x,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -14283,7 +14285,7 @@ map_inst_83_48_7_8_9_tsni = function map_inst_83_48_7_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_83_49_tsni = (undefined, function (x) {
@@ -14314,10 +14316,10 @@ lambda_inst_83_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_83_49_50_51_33_34_tsni = function lambda$_inst_83_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -14379,7 +14381,7 @@ map_inst_84_47_48_7_8_9_tsni = function map_inst_84_47_48_7_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_84_47_49_tsni = (undefined, function (x) {
@@ -14410,10 +14412,10 @@ lambda_inst_84_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_84_47_49_50_51_33_34_tsni = function lambda$_inst_84_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -14488,7 +14490,7 @@ map_inst_85_46_47_48_7_8_9_tsni = function map_inst_85_46_47_48_7_8_9_tsni(f, xs
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_85_46_47_49_tsni = (undefined, function (x) {
@@ -14519,10 +14521,10 @@ lambda_inst_85_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_85_46_47_49_50_51_33_34_tsni = function lambda$_inst_85_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -14588,7 +14590,7 @@ map_inst_85_45_7_8_9_tsni = function map_inst_85_45_7_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_85_46_47_48_7_8_38_tsni = function concat_inst_85_46_47_48_7_8_38_tsni(ls) {
@@ -14645,7 +14647,7 @@ map_inst_86_44_45_7_8_9_tsni = function map_inst_86_44_45_7_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_86_44_46_tsni = (undefined, function (r) {
@@ -14708,7 +14710,7 @@ map_inst_86_44_46_47_48_7_8_9_tsni = function map_inst_86_44_46_47_48_7_8_9_tsni
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_86_44_46_47_49_tsni = (undefined, function (x) {
@@ -14739,10 +14741,10 @@ lambda_inst_86_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_86_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_86_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -14797,7 +14799,7 @@ map_inst_87_9_tsni = function map_inst_87_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$_inst_88_8_tsni = function lambda$_inst_88_8_tsni(m, f, s) {
@@ -14832,7 +14834,7 @@ map_inst_88_8_9_tsni = function map_inst_88_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_89_90_tsni = function map_inst_89_90_tsni(f, xs) {
@@ -14860,7 +14862,7 @@ map_inst_89_90_tsni = function map_inst_89_90_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_89_91_tsni = (undefined, function (x) {
@@ -14890,7 +14892,7 @@ append_inst_89_91_92_tsni = function append_inst_89_91_92_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_89_121_37_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_93_7_tsni = (undefined, function (m, f) {
@@ -14930,7 +14932,7 @@ map_inst_93_7_8_9_tsni = function map_inst_93_7_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_94_43_tsni = (undefined, function (f) {
@@ -15004,7 +15006,7 @@ map_inst_94_43_44_46_47_48_7_8_9_tsni = function map_inst_94_43_44_46_47_48_7_8_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_94_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -15035,10 +15037,10 @@ lambda_inst_94_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_94_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_94_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -15104,7 +15106,7 @@ map_inst_94_43_44_45_7_8_9_tsni = function map_inst_94_43_44_45_7_8_9_tsni(f, xs
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_94_43_44_46_47_48_7_8_38_tsni = function concat_inst_94_43_44_46_47_48_7_8_38_tsni(ls) {
@@ -15149,7 +15151,7 @@ map_inst_95_18_19_20_tsni = function map_inst_95_18_19_20_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_95_18_19_21_tsni = (undefined, function (s) {
@@ -15159,10 +15161,10 @@ lambda_inst_95_18_19_21_tsni = (undefined, function (s) {
 });
 lambda$_inst_95_18_19_21_22_tsni = function lambda$_inst_95_18_19_21_22_tsni(s, x) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     x,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -15202,14 +15204,14 @@ map_inst_96_97_tsni = function map_inst_96_97_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_96_98_tsni = (undefined, function (caseScrut) {
   let first1, first0, a, s, _deforest_Cons_head, _deforest_Cons_tail;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     s = first1;
     _deforest_Cons_head = s;
@@ -15226,7 +15228,7 @@ lambda_inst_96_98_tsni = (undefined, function (caseScrut) {
       return NofibPrelude.Cons(x, tmp)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 lambda_inst_99_13_tsni = (undefined, function (c) {
@@ -15273,10 +15275,10 @@ lambda$_inst_99_13_14_15_16_tsni = function lambda$_inst_99_13_14_15_16_tsni(xs,
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -15408,7 +15410,7 @@ map_inst_99_13_14_23_tsni = function map_inst_99_13_14_23_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_99_13_14_24_tsni = (undefined, function (c, st) {
@@ -15529,10 +15531,10 @@ lambda_inst_99_13_14_24_25_30_31_32_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_99_13_14_24_25_30_31_32_33_34_tsni = function lambda$_inst_99_13_14_24_25_30_31_32_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -15646,7 +15648,7 @@ map_inst_99_39_7_8_9_tsni = function map_inst_99_39_7_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_99_13_14_35_7_8_38_tsni = function concat_inst_99_13_14_35_7_8_38_tsni(ls) {
@@ -15675,9 +15677,9 @@ lookup_inst_100_10_11_40_tsni = function lookup_inst_100_10_11_40_tsni(k, t) {
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -15694,10 +15696,10 @@ lookup_inst_100_10_11_40_tsni = function lookup_inst_100_10_11_40_tsni(k, t) {
         return lookup_inst_100_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 permute_inst_100_10_11_12_tsni = function permute_inst_100_10_11_12_tsni(c) {
@@ -15752,7 +15754,7 @@ map_inst_100_10_11_12_39_7_8_9_tsni = function map_inst_100_10_11_12_39_7_8_9_ts
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_100_10_11_12_13_tsni = (undefined, function (c) {
@@ -15856,10 +15858,10 @@ lambda_inst_100_10_11_12_13_14_24_25_30_31_32_33_tsni = (undefined, function (a)
 });
 lambda$_inst_100_10_11_12_13_14_24_25_30_31_32_33_34_tsni = function lambda$_inst_100_10_11_12_13_14_24_25_30_31_32_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -16090,7 +16092,7 @@ map_inst_100_10_11_12_13_14_23_tsni = function map_inst_100_10_11_12_13_14_23_ts
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_100_10_11_12_13_14_15_tsni = (undefined, function (xs) {
@@ -16122,10 +16124,10 @@ lambda$_inst_100_10_11_12_13_14_15_16_tsni = function lambda$_inst_100_10_11_12_
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -16183,7 +16185,7 @@ map_inst_100_6_7_8_9_tsni = function map_inst_100_6_7_8_9_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_100_10_11_12_39_7_8_38_tsni = function concat_inst_100_10_11_12_39_7_8_38_tsni(ls) {
@@ -16207,10 +16209,10 @@ lambda_inst_100_10_11_41_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_100_10_11_41_33_34_tsni = function lambda$_inst_100_10_11_41_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return match_xs_arm_Nil_inst_100_6_7_8_38_37_tsni(ys)
@@ -16311,7 +16313,7 @@ map_inst_101_5_6_7_8_9_tsni = function map_inst_101_5_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_101_5_10_tsni = (undefined, function (c) {
@@ -16374,10 +16376,10 @@ lambda$_inst_101_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_101_5_10_11
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -16509,7 +16511,7 @@ map_inst_101_5_10_11_12_13_14_23_tsni = function map_inst_101_5_10_11_12_13_14_2
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_101_5_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -16758,7 +16760,7 @@ map_inst_101_5_10_11_12_39_7_8_9_tsni = function map_inst_101_5_10_11_12_39_7_8_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_101_5_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_101_5_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -16776,9 +16778,9 @@ lookup_inst_101_5_10_11_40_tsni = function lookup_inst_101_5_10_11_40_tsni(k, t)
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -16795,10 +16797,10 @@ lookup_inst_101_5_10_11_40_tsni = function lookup_inst_101_5_10_11_40_tsni(k, t)
         return lookup_inst_101_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_101_5_10_11_41_tsni = function return__inst_101_5_10_11_41_tsni(a) {
@@ -16932,7 +16934,7 @@ map_inst_101_42_43_44_46_47_48_7_8_9_tsni = function map_inst_101_42_43_44_46_47
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_101_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -16963,10 +16965,10 @@ lambda_inst_101_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_101_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_101_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -17049,7 +17051,7 @@ map_inst_101_52_7_8_9_tsni = function map_inst_101_52_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_101_53_tsni = (undefined, function (carry) {
@@ -17163,7 +17165,7 @@ map_inst_101_56_6_7_8_9_tsni = function map_inst_101_56_6_7_8_9_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_101_56_10_tsni = (undefined, function (c) {
@@ -17226,10 +17228,10 @@ lambda$_inst_101_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_101_56_10_
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -17361,7 +17363,7 @@ map_inst_101_56_10_11_12_13_14_23_tsni = function map_inst_101_56_10_11_12_13_14
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_101_56_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -17610,7 +17612,7 @@ map_inst_101_56_10_11_12_39_7_8_9_tsni = function map_inst_101_56_10_11_12_39_7_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_101_56_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_101_56_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -17628,9 +17630,9 @@ lookup_inst_101_56_10_11_40_tsni = function lookup_inst_101_56_10_11_40_tsni(k, 
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -17647,10 +17649,10 @@ lookup_inst_101_56_10_11_40_tsni = function lookup_inst_101_56_10_11_40_tsni(k, 
         return lookup_inst_101_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_101_56_10_11_41_tsni = function return__inst_101_56_10_11_41_tsni(a) {
@@ -17836,7 +17838,7 @@ append_inst_101_57_7_8_38_37_tsni = function append_inst_101_57_7_8_38_37_tsni(x
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 bind_inst_101_62_tsni = function bind_inst_101_62_tsni(m, f) {
@@ -17916,7 +17918,7 @@ solve_inst_102_103_tsni = function solve_inst_102_103_tsni(tops, bots, carry) {
       lambda$this = runtime.safeCall(lambda_inst_102_103_53_tsni(carry));
       tmp = bind_inst_102_103_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda_inst_102_103_tsni(tops, bot, botss));
     return bind_inst_102_103_62_tsni(tmp, lambda$this1)
@@ -18082,7 +18084,7 @@ append_inst_102_103_57_7_8_38_37_tsni = function append_inst_102_103_57_7_8_38_3
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 guard_inst_102_103_58_tsni = function guard_inst_102_103_58_tsni(b) {
@@ -18167,9 +18169,9 @@ lookup_inst_102_103_56_10_11_40_tsni = function lookup_inst_102_103_56_10_11_40_
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -18186,10 +18188,10 @@ lookup_inst_102_103_56_10_11_40_tsni = function lookup_inst_102_103_56_10_11_40_
         return lookup_inst_102_103_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 permute_inst_102_103_56_10_11_12_tsni = function permute_inst_102_103_56_10_11_12_tsni(c) {
@@ -18244,7 +18246,7 @@ map_inst_102_103_56_10_11_12_39_7_8_9_tsni = function map_inst_102_103_56_10_11_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_102_103_56_10_11_12_13_tsni = (undefined, function (c) {
@@ -18583,7 +18585,7 @@ map_inst_102_103_56_10_11_12_13_14_23_tsni = function map_inst_102_103_56_10_11_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_102_103_56_10_11_12_13_14_15_tsni = (undefined, function (xs) {
@@ -18615,10 +18617,10 @@ lambda$_inst_102_103_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_102_10
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -18688,7 +18690,7 @@ map_inst_102_103_56_6_7_8_9_tsni = function map_inst_102_103_56_6_7_8_9_tsni(f, 
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_102_103_56_10_11_12_39_7_8_38_tsni = function concat_inst_102_103_56_10_11_12_39_7_8_38_tsni(ls) {
@@ -18778,7 +18780,7 @@ map_inst_102_103_52_7_8_9_tsni = function map_inst_102_103_52_7_8_9_tsni(f, xs) 
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_102_103_52_7_8_38_tsni = function concat_inst_102_103_52_7_8_38_tsni(ls) {
@@ -18916,7 +18918,7 @@ map_inst_102_103_42_43_44_46_47_48_7_8_9_tsni = function map_inst_102_103_42_43_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_102_103_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -18947,10 +18949,10 @@ lambda_inst_102_103_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (a) {
 });
 lambda$_inst_102_103_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_102_103_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -19025,9 +19027,9 @@ lookup_inst_102_103_5_10_11_40_tsni = function lookup_inst_102_103_5_10_11_40_ts
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -19044,10 +19046,10 @@ lookup_inst_102_103_5_10_11_40_tsni = function lookup_inst_102_103_5_10_11_40_ts
         return lookup_inst_102_103_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 permute_inst_102_103_5_10_11_12_tsni = function permute_inst_102_103_5_10_11_12_tsni(c) {
@@ -19102,7 +19104,7 @@ map_inst_102_103_5_10_11_12_39_7_8_9_tsni = function map_inst_102_103_5_10_11_12
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_102_103_5_10_11_12_13_tsni = (undefined, function (c) {
@@ -19441,7 +19443,7 @@ map_inst_102_103_5_10_11_12_13_14_23_tsni = function map_inst_102_103_5_10_11_12
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_102_103_5_10_11_12_13_14_15_tsni = (undefined, function (xs) {
@@ -19473,10 +19475,10 @@ lambda$_inst_102_103_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_102_103
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -19544,7 +19546,7 @@ map_inst_102_103_5_6_7_8_9_tsni = function map_inst_102_103_5_6_7_8_9_tsni(f, xs
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_102_103_5_10_11_12_39_7_8_38_tsni = function concat_inst_102_103_5_10_11_12_39_7_8_38_tsni(ls) {
@@ -19645,11 +19647,11 @@ map_inst_102_104_97_tsni = function map_inst_102_104_97_tsni(f, xs) {
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return () => {
       return (top, bot) => {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_102_104_98_tsni = (undefined, function (caseScrut) {
@@ -19720,14 +19722,14 @@ lookup_inst_102_106_3_1_tsni = function lookup_inst_102_106_3_1_tsni(k, t) {
   let param0, param1, first1, first0, x, v, t1, scrut, _deforest_Some_x;
   if (t instanceof NofibPrelude.Nil.class) {
     return () => {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -19744,10 +19746,10 @@ lookup_inst_102_106_3_1_tsni = function lookup_inst_102_106_3_1_tsni(k, t) {
         return lookup_inst_102_106_3_1_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_102_107_tsni = function concat_inst_102_107_tsni(ls) {
@@ -19764,7 +19766,7 @@ concat_inst_102_107_tsni = function concat_inst_102_107_tsni(ls) {
     tmp = concat_inst_102_107_tsni(xs);
     return append_inst_102_107_37_tsni(x, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_102_107_37_tsni = function append_inst_102_107_37_tsni(xs, ys) {
@@ -19788,7 +19790,7 @@ append_inst_102_107_37_tsni = function append_inst_102_107_37_tsni(xs, ys) {
       return NofibPrelude.Cons(x, tmp)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unlines_inst_102_108_tsni = function unlines_inst_102_108_tsni(ls) {
@@ -19826,7 +19828,7 @@ append_inst_102_108_91_92_tsni = function append_inst_102_108_91_92_tsni(xs, ys)
       return match_xs_arm_Cons_inst_102_108_121_37_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_102_109_tsni = function map_inst_102_109_tsni(f, xs) {
@@ -19867,7 +19869,7 @@ map_inst_102_109_tsni = function map_inst_102_109_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 puzzle_inst_110_111_tsni = function puzzle_inst_110_111_tsni(top, bot) {
@@ -19917,7 +19919,7 @@ append_inst_110_111_108_91_92_tsni = function append_inst_110_111_108_91_92_tsni
       return match_xs_arm_Cons_inst_110_111_108_121_37_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_110_111_109_tsni = function map_inst_110_111_109_tsni(f, xs) {
@@ -19958,7 +19960,7 @@ map_inst_110_111_109_tsni = function map_inst_110_111_109_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_110_111_107_tsni = function concat_inst_110_111_107_tsni(ls) {
@@ -19975,7 +19977,7 @@ concat_inst_110_111_107_tsni = function concat_inst_110_111_107_tsni(ls) {
     tmp = concat_inst_110_111_107_tsni(xs);
     return append_inst_110_111_107_37_tsni(x, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_110_111_107_37_tsni = function append_inst_110_111_107_37_tsni(xs, ys) {
@@ -19999,7 +20001,7 @@ append_inst_110_111_107_37_tsni = function append_inst_110_111_107_37_tsni(xs, y
       return NofibPrelude.Cons(x, tmp)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 look_inst_110_111_106_tsni = function look_inst_110_111_106_tsni(env) {
@@ -20016,14 +20018,14 @@ lookup_inst_110_111_106_3_1_tsni = function lookup_inst_110_111_106_3_1_tsni(k, 
   let param0, param1, first1, first0, x, v, t1, scrut, _deforest_Some_x;
   if (t instanceof NofibPrelude.Nil.class) {
     return () => {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -20040,10 +20042,10 @@ lookup_inst_110_111_106_3_1_tsni = function lookup_inst_110_111_106_3_1_tsni(k, 
         return lookup_inst_110_111_106_3_1_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 execStateT_inst_110_111_104_tsni = function execStateT_inst_110_111_104_tsni(m, s) {
@@ -20076,11 +20078,11 @@ map_inst_110_111_104_97_tsni = function map_inst_110_111_104_97_tsni(f, xs) {
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return () => {
       return (top, bot) => {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_110_111_104_98_tsni = (undefined, function (caseScrut) {
@@ -20109,7 +20111,7 @@ solve_inst_110_111_103_tsni = function solve_inst_110_111_103_tsni(tops, bots, c
       lambda$this = runtime.safeCall(lambda_inst_110_111_103_53_tsni(carry));
       tmp = bind_inst_110_111_103_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda_inst_110_111_103_tsni(tops, bot, botss));
     return bind_inst_110_111_103_62_tsni(tmp, lambda$this1)
@@ -20220,7 +20222,7 @@ map_inst_110_111_103_5_6_7_8_9_tsni = function map_inst_110_111_103_5_6_7_8_9_ts
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_110_111_103_5_10_tsni = (undefined, function (c) {
@@ -20283,10 +20285,10 @@ lambda$_inst_110_111_103_5_10_11_12_13_14_15_16_tsni = function lambda$_inst_110
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -20418,7 +20420,7 @@ map_inst_110_111_103_5_10_11_12_13_14_23_tsni = function map_inst_110_111_103_5_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_110_111_103_5_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -20667,7 +20669,7 @@ map_inst_110_111_103_5_10_11_12_39_7_8_9_tsni = function map_inst_110_111_103_5_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_110_111_103_5_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_110_111_103_5_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -20685,9 +20687,9 @@ lookup_inst_110_111_103_5_10_11_40_tsni = function lookup_inst_110_111_103_5_10_
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -20704,10 +20706,10 @@ lookup_inst_110_111_103_5_10_11_40_tsni = function lookup_inst_110_111_103_5_10_
         return lookup_inst_110_111_103_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_110_111_103_5_10_11_41_tsni = function return__inst_110_111_103_5_10_11_41_tsni(a) {
@@ -20841,7 +20843,7 @@ map_inst_110_111_103_42_43_44_46_47_48_7_8_9_tsni = function map_inst_110_111_10
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_110_111_103_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -20872,10 +20874,10 @@ lambda_inst_110_111_103_42_43_44_46_47_49_50_51_33_tsni = (undefined, function (
 });
 lambda$_inst_110_111_103_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_110_111_103_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -20958,7 +20960,7 @@ map_inst_110_111_103_52_7_8_9_tsni = function map_inst_110_111_103_52_7_8_9_tsni
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_110_111_103_53_tsni = (undefined, function (carry) {
@@ -21072,7 +21074,7 @@ map_inst_110_111_103_56_6_7_8_9_tsni = function map_inst_110_111_103_56_6_7_8_9_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_110_111_103_56_10_tsni = (undefined, function (c) {
@@ -21135,10 +21137,10 @@ lambda$_inst_110_111_103_56_10_11_12_13_14_15_16_tsni = function lambda$_inst_11
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -21270,7 +21272,7 @@ map_inst_110_111_103_56_10_11_12_13_14_23_tsni = function map_inst_110_111_103_5
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_110_111_103_56_10_11_12_13_14_24_tsni = (undefined, function (c, st) {
@@ -21519,7 +21521,7 @@ map_inst_110_111_103_56_10_11_12_39_7_8_9_tsni = function map_inst_110_111_103_5
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_110_111_103_56_10_11_12_13_14_35_7_8_38_tsni = function concat_inst_110_111_103_56_10_11_12_13_14_35_7_8_38_tsni(ls) {
@@ -21537,9 +21539,9 @@ lookup_inst_110_111_103_56_10_11_40_tsni = function lookup_inst_110_111_103_56_1
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -21556,10 +21558,10 @@ lookup_inst_110_111_103_56_10_11_40_tsni = function lookup_inst_110_111_103_56_1
         return lookup_inst_110_111_103_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 return__inst_110_111_103_56_10_11_41_tsni = function return__inst_110_111_103_56_10_11_41_tsni(a) {
@@ -21745,7 +21747,7 @@ append_inst_110_111_103_57_7_8_38_37_tsni = function append_inst_110_111_103_57_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 bind_inst_110_111_103_62_tsni = function bind_inst_110_111_103_62_tsni(m, f) {
@@ -21907,7 +21909,7 @@ solve_inst_112_113_111_103_tsni = function solve_inst_112_113_111_103_tsni(tops,
       lambda$this = runtime.safeCall(lambda_inst_112_113_111_103_53_tsni(carry));
       tmp = bind_inst_112_113_111_103_52_tsni(tmp1, lambda$this);
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
     lambda$this1 = runtime.safeCall(lambda_inst_112_113_111_103_tsni(tops, bot, botss));
     return bind_inst_112_113_111_103_62_tsni(tmp, lambda$this1)
@@ -22073,7 +22075,7 @@ append_inst_112_113_111_103_57_7_8_38_37_tsni = function append_inst_112_113_111
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 guard_inst_112_113_111_103_58_tsni = function guard_inst_112_113_111_103_58_tsni(b) {
@@ -22158,9 +22160,9 @@ lookup_inst_112_113_111_103_56_10_11_40_tsni = function lookup_inst_112_113_111_
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -22177,10 +22179,10 @@ lookup_inst_112_113_111_103_56_10_11_40_tsni = function lookup_inst_112_113_111_
         return lookup_inst_112_113_111_103_56_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 permute_inst_112_113_111_103_56_10_11_12_tsni = function permute_inst_112_113_111_103_56_10_11_12_tsni(c) {
@@ -22235,7 +22237,7 @@ map_inst_112_113_111_103_56_10_11_12_39_7_8_9_tsni = function map_inst_112_113_1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_112_113_111_103_56_10_11_12_13_tsni = (undefined, function (c) {
@@ -22574,7 +22576,7 @@ map_inst_112_113_111_103_56_10_11_12_13_14_23_tsni = function map_inst_112_113_1
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_112_113_111_103_56_10_11_12_13_14_15_tsni = (undefined, function (xs) {
@@ -22606,10 +22608,10 @@ lambda$_inst_112_113_111_103_56_10_11_12_13_14_15_16_tsni = function lambda$_ins
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -22679,7 +22681,7 @@ map_inst_112_113_111_103_56_6_7_8_9_tsni = function map_inst_112_113_111_103_56_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_112_113_111_103_56_10_11_12_39_7_8_38_tsni = function concat_inst_112_113_111_103_56_10_11_12_39_7_8_38_tsni(ls) {
@@ -22769,7 +22771,7 @@ map_inst_112_113_111_103_52_7_8_9_tsni = function map_inst_112_113_111_103_52_7_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_112_113_111_103_52_7_8_38_tsni = function concat_inst_112_113_111_103_52_7_8_38_tsni(ls) {
@@ -22907,7 +22909,7 @@ map_inst_112_113_111_103_42_43_44_46_47_48_7_8_9_tsni = function map_inst_112_11
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_112_113_111_103_42_43_44_46_47_49_tsni = (undefined, function (x) {
@@ -22938,10 +22940,10 @@ lambda_inst_112_113_111_103_42_43_44_46_47_49_50_51_33_tsni = (undefined, functi
 });
 lambda$_inst_112_113_111_103_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_112_113_111_103_42_43_44_46_47_49_50_51_33_34_tsni(a, s) {
   let arr, _deforest_Cons_head, _deforest_Cons_tail;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   _deforest_Cons_head = arr;
   _deforest_Cons_tail = (ys) => {
     return ys
@@ -23016,9 +23018,9 @@ lookup_inst_112_113_111_103_5_10_11_40_tsni = function lookup_inst_112_113_111_1
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -23035,10 +23037,10 @@ lookup_inst_112_113_111_103_5_10_11_40_tsni = function lookup_inst_112_113_111_1
         return lookup_inst_112_113_111_103_5_10_11_40_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 permute_inst_112_113_111_103_5_10_11_12_tsni = function permute_inst_112_113_111_103_5_10_11_12_tsni(c) {
@@ -23093,7 +23095,7 @@ map_inst_112_113_111_103_5_10_11_12_39_7_8_9_tsni = function map_inst_112_113_11
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_112_113_111_103_5_10_11_12_13_tsni = (undefined, function (c) {
@@ -23432,7 +23434,7 @@ map_inst_112_113_111_103_5_10_11_12_13_14_23_tsni = function map_inst_112_113_11
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_112_113_111_103_5_10_11_12_13_14_15_tsni = (undefined, function (xs) {
@@ -23464,10 +23466,10 @@ lambda$_inst_112_113_111_103_5_10_11_12_13_14_15_16_tsni = function lambda$_inst
     first1 = _deforest_Deforest_Arr_2_1;
     i = first0;
     iss = first1;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp2 = cryptarithm21.digitEnv(st);
     tmp3 = NofibPrelude.Cons(arr1, tmp2);
     tmp4 = cryptarithm21.Digits(iss, tmp3);
@@ -23535,7 +23537,7 @@ map_inst_112_113_111_103_5_6_7_8_9_tsni = function map_inst_112_113_111_103_5_6_
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_112_113_111_103_5_10_11_12_39_7_8_38_tsni = function concat_inst_112_113_111_103_5_10_11_12_39_7_8_38_tsni(ls) {
@@ -23636,11 +23638,11 @@ map_inst_112_113_111_104_97_tsni = function map_inst_112_113_111_104_97_tsni(f, 
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return () => {
       return (top, bot) => {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_112_113_111_104_98_tsni = (undefined, function (caseScrut) {
@@ -23711,14 +23713,14 @@ lookup_inst_112_113_111_106_3_1_tsni = function lookup_inst_112_113_111_106_3_1_
   let param0, param1, first1, first0, x, v, t1, scrut, _deforest_Some_x;
   if (t instanceof NofibPrelude.Nil.class) {
     return () => {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else if (t instanceof NofibPrelude.Cons.class) {
     param0 = t.head;
     param1 = t.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       x = first0;
       v = first1;
       t1 = param1;
@@ -23735,10 +23737,10 @@ lookup_inst_112_113_111_106_3_1_tsni = function lookup_inst_112_113_111_106_3_1_
         return lookup_inst_112_113_111_106_3_1_tsni(k, t1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_112_113_111_107_tsni = function concat_inst_112_113_111_107_tsni(ls) {
@@ -23755,7 +23757,7 @@ concat_inst_112_113_111_107_tsni = function concat_inst_112_113_111_107_tsni(ls)
     tmp = concat_inst_112_113_111_107_tsni(xs);
     return append_inst_112_113_111_107_37_tsni(x, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_112_113_111_107_37_tsni = function append_inst_112_113_111_107_37_tsni(xs, ys) {
@@ -23779,7 +23781,7 @@ append_inst_112_113_111_107_37_tsni = function append_inst_112_113_111_107_37_ts
       return NofibPrelude.Cons(x, tmp)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unlines_inst_112_113_111_108_tsni = function unlines_inst_112_113_111_108_tsni(ls) {
@@ -23817,7 +23819,7 @@ append_inst_112_113_111_108_91_92_tsni = function append_inst_112_113_111_108_91
       return match_xs_arm_Cons_inst_112_113_111_108_121_37_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_112_113_111_109_tsni = function map_inst_112_113_111_109_tsni(f, xs) {
@@ -23858,7 +23860,7 @@ map_inst_112_113_111_109_tsni = function map_inst_112_113_111_109_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 fromSome_inst_0_114_tsni = function fromSome_inst_0_114_tsni(s) {
@@ -23908,15 +23910,15 @@ lambda_inst_4_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_4_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_4_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_4_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_4_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_4_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -23929,15 +23931,15 @@ lambda_inst_4_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_4_5_6_7_8_118_119_tsni = function lambda$_inst_4_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_4_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_4_5_6_7_8_118_119_120_tsni = function runStateT_inst_4_5_6_7_8_118_119_120_tsni(m, s) {
@@ -23953,15 +23955,15 @@ lambda_inst_4_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_4_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_4_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_4_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_4_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_4_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -23991,15 +23993,15 @@ lambda_inst_4_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_4_52_7_8_118_119_tsni = function lambda$_inst_4_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_4_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_4_52_7_8_118_119_120_tsni = function runStateT_inst_4_52_7_8_118_119_120_tsni(m, s) {
@@ -24046,15 +24048,15 @@ lambda_inst_4_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_4_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_4_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_4_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_4_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_4_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -24067,15 +24069,15 @@ lambda_inst_4_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_4_56_6_7_8_118_119_tsni = function lambda$_inst_4_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_4_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_4_56_6_7_8_118_119_120_tsni = function runStateT_inst_4_56_6_7_8_118_119_120_tsni(m, s) {
@@ -24167,15 +24169,15 @@ lambda_inst_64_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_64_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_64_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_64_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_64_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_64_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -24188,15 +24190,15 @@ lambda_inst_64_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_64_5_6_7_8_118_119_tsni = function lambda$_inst_64_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_64_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_64_5_6_7_8_118_119_120_tsni = function runStateT_inst_64_5_6_7_8_118_119_120_tsni(m, s) {
@@ -24212,15 +24214,15 @@ lambda_inst_64_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_64_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_64_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_64_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_64_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_64_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -24250,15 +24252,15 @@ lambda_inst_64_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_64_52_7_8_118_119_tsni = function lambda$_inst_64_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_64_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_64_52_7_8_118_119_120_tsni = function runStateT_inst_64_52_7_8_118_119_120_tsni(m, s) {
@@ -24305,15 +24307,15 @@ lambda_inst_64_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_64_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_64_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_64_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_64_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_64_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -24326,15 +24328,15 @@ lambda_inst_64_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_64_56_6_7_8_118_119_tsni = function lambda$_inst_64_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_64_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_64_56_6_7_8_118_119_120_tsni = function runStateT_inst_64_56_6_7_8_118_119_120_tsni(m, s) {
@@ -24426,15 +24428,15 @@ lambda_inst_65_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_65_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_65_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_65_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_65_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_65_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -24447,15 +24449,15 @@ lambda_inst_65_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_65_5_6_7_8_118_119_tsni = function lambda$_inst_65_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_65_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_65_5_6_7_8_118_119_120_tsni = function runStateT_inst_65_5_6_7_8_118_119_120_tsni(m, s) {
@@ -24471,15 +24473,15 @@ lambda_inst_65_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_65_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_65_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_65_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_65_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_65_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -24509,15 +24511,15 @@ lambda_inst_65_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_65_52_7_8_118_119_tsni = function lambda$_inst_65_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_65_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_65_52_7_8_118_119_120_tsni = function runStateT_inst_65_52_7_8_118_119_120_tsni(m, s) {
@@ -24564,15 +24566,15 @@ lambda_inst_65_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_65_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_65_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_65_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_65_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_65_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -24585,15 +24587,15 @@ lambda_inst_65_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_65_56_6_7_8_118_119_tsni = function lambda$_inst_65_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_65_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_65_56_6_7_8_118_119_120_tsni = function runStateT_inst_65_56_6_7_8_118_119_120_tsni(m, s) {
@@ -24685,15 +24687,15 @@ lambda_inst_70_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_70_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_70_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_70_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_70_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_70_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -24706,15 +24708,15 @@ lambda_inst_70_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_70_5_6_7_8_118_119_tsni = function lambda$_inst_70_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_70_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_70_5_6_7_8_118_119_120_tsni = function runStateT_inst_70_5_6_7_8_118_119_120_tsni(m, s) {
@@ -24730,15 +24732,15 @@ lambda_inst_70_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_70_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_70_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_70_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_70_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_70_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -24768,15 +24770,15 @@ lambda_inst_70_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_70_52_7_8_118_119_tsni = function lambda$_inst_70_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_70_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_70_52_7_8_118_119_120_tsni = function runStateT_inst_70_52_7_8_118_119_120_tsni(m, s) {
@@ -24823,15 +24825,15 @@ lambda_inst_70_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_70_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_70_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_70_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_70_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_70_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -24844,15 +24846,15 @@ lambda_inst_70_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_70_56_6_7_8_118_119_tsni = function lambda$_inst_70_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_70_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_70_56_6_7_8_118_119_120_tsni = function runStateT_inst_70_56_6_7_8_118_119_120_tsni(m, s) {
@@ -24944,15 +24946,15 @@ lambda_inst_71_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_71_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_71_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_71_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_71_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_71_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -24965,15 +24967,15 @@ lambda_inst_71_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_71_5_6_7_8_118_119_tsni = function lambda$_inst_71_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_71_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_71_5_6_7_8_118_119_120_tsni = function runStateT_inst_71_5_6_7_8_118_119_120_tsni(m, s) {
@@ -24989,15 +24991,15 @@ lambda_inst_71_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_71_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_71_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_71_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_71_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_71_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -25027,15 +25029,15 @@ lambda_inst_71_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_71_52_7_8_118_119_tsni = function lambda$_inst_71_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_71_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_71_52_7_8_118_119_120_tsni = function runStateT_inst_71_52_7_8_118_119_120_tsni(m, s) {
@@ -25082,15 +25084,15 @@ lambda_inst_71_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_71_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_71_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_71_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_71_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_71_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -25103,15 +25105,15 @@ lambda_inst_71_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_71_56_6_7_8_118_119_tsni = function lambda$_inst_71_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_71_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_71_56_6_7_8_118_119_120_tsni = function runStateT_inst_71_56_6_7_8_118_119_120_tsni(m, s) {
@@ -25203,15 +25205,15 @@ lambda_inst_72_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_72_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_72_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_72_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_72_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_72_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -25224,15 +25226,15 @@ lambda_inst_72_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_72_5_6_7_8_118_119_tsni = function lambda$_inst_72_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_72_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_72_5_6_7_8_118_119_120_tsni = function runStateT_inst_72_5_6_7_8_118_119_120_tsni(m, s) {
@@ -25248,15 +25250,15 @@ lambda_inst_72_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_72_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_72_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_72_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_72_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_72_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -25286,15 +25288,15 @@ lambda_inst_72_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_72_52_7_8_118_119_tsni = function lambda$_inst_72_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_72_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_72_52_7_8_118_119_120_tsni = function runStateT_inst_72_52_7_8_118_119_120_tsni(m, s) {
@@ -25341,15 +25343,15 @@ lambda_inst_72_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_72_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_72_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_72_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_72_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_72_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -25362,15 +25364,15 @@ lambda_inst_72_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_72_56_6_7_8_118_119_tsni = function lambda$_inst_72_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_72_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_72_56_6_7_8_118_119_120_tsni = function runStateT_inst_72_56_6_7_8_118_119_120_tsni(m, s) {
@@ -25465,15 +25467,15 @@ lambda_inst_73_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_73_12_39_7_8_118_119_tsni = function lambda$_inst_73_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_73_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_73_12_39_7_8_118_119_120_tsni = function runStateT_inst_73_12_39_7_8_118_119_120_tsni(m, s) {
@@ -25526,15 +25528,15 @@ lambda_inst_74_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_74_11_12_39_7_8_118_119_tsni = function lambda$_inst_74_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_74_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_74_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_74_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -25697,15 +25699,15 @@ lambda_inst_83_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_83_48_7_8_118_119_tsni = function lambda$_inst_83_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_83_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_83_48_7_8_118_119_120_tsni = function runStateT_inst_83_48_7_8_118_119_120_tsni(m, s) {
@@ -25724,15 +25726,15 @@ lambda_inst_84_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_84_47_48_7_8_118_119_tsni = function lambda$_inst_84_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_84_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_84_47_48_7_8_118_119_120_tsni = function runStateT_inst_84_47_48_7_8_118_119_120_tsni(m, s) {
@@ -25748,15 +25750,15 @@ lambda_inst_85_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_85_46_47_48_7_8_118_119_tsni = function lambda$_inst_85_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_85_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_85_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_85_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -25772,15 +25774,15 @@ lambda_inst_85_45_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_85_45_7_8_118_119_tsni = function lambda$_inst_85_45_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_85_45_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_85_45_7_8_118_119_120_tsni = function runStateT_inst_85_45_7_8_118_119_120_tsni(m, s) {
@@ -25799,15 +25801,15 @@ lambda_inst_86_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_86_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_86_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_86_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_86_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_86_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -25820,15 +25822,15 @@ lambda_inst_86_44_45_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_86_44_45_7_8_118_119_tsni = function lambda$_inst_86_44_45_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_86_44_45_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_86_44_45_7_8_118_119_120_tsni = function runStateT_inst_86_44_45_7_8_118_119_120_tsni(m, s) {
@@ -25859,15 +25861,15 @@ lambda_inst_94_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_94_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_94_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_94_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_94_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_94_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -25883,15 +25885,15 @@ lambda_inst_94_43_44_45_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_94_43_44_45_7_8_118_119_tsni = function lambda$_inst_94_43_44_45_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_94_43_44_45_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_94_43_44_45_7_8_118_119_120_tsni = function runStateT_inst_94_43_44_45_7_8_118_119_120_tsni(m, s) {
@@ -25956,15 +25958,15 @@ lambda_inst_99_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_99_39_7_8_118_119_tsni = function lambda$_inst_99_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_99_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_99_39_7_8_118_119_120_tsni = function runStateT_inst_99_39_7_8_118_119_120_tsni(m, s) {
@@ -26014,15 +26016,15 @@ lambda_inst_100_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_100_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_100_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_100_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_100_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_100_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -26038,15 +26040,15 @@ lambda_inst_100_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_100_6_7_8_118_119_tsni = function lambda$_inst_100_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_100_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_100_6_7_8_118_119_120_tsni = function runStateT_inst_100_6_7_8_118_119_120_tsni(m, s) {
@@ -26096,15 +26098,15 @@ lambda_inst_101_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_101_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_101_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_101_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_101_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_101_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -26117,15 +26119,15 @@ lambda_inst_101_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_101_5_6_7_8_118_119_tsni = function lambda$_inst_101_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_101_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_101_5_6_7_8_118_119_120_tsni = function runStateT_inst_101_5_6_7_8_118_119_120_tsni(m, s) {
@@ -26141,15 +26143,15 @@ lambda_inst_101_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_101_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_101_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_101_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_101_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_101_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -26179,15 +26181,15 @@ lambda_inst_101_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_101_52_7_8_118_119_tsni = function lambda$_inst_101_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_101_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_101_52_7_8_118_119_120_tsni = function runStateT_inst_101_52_7_8_118_119_120_tsni(m, s) {
@@ -26234,15 +26236,15 @@ lambda_inst_101_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_101_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_101_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_101_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_101_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_101_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -26255,15 +26257,15 @@ lambda_inst_101_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_101_56_6_7_8_118_119_tsni = function lambda$_inst_101_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_101_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_101_56_6_7_8_118_119_120_tsni = function runStateT_inst_101_56_6_7_8_118_119_120_tsni(m, s) {
@@ -26394,15 +26396,15 @@ lambda_inst_102_103_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_102_103_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_102_103_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_102_103_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_102_103_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_102_103_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -26415,15 +26417,15 @@ lambda_inst_102_103_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_102_103_56_6_7_8_118_119_tsni = function lambda$_inst_102_103_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_102_103_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_102_103_56_6_7_8_118_119_120_tsni = function runStateT_inst_102_103_56_6_7_8_118_119_120_tsni(m, s) {
@@ -26442,15 +26444,15 @@ lambda_inst_102_103_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_102_103_52_7_8_118_119_tsni = function lambda$_inst_102_103_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_102_103_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_102_103_52_7_8_118_119_120_tsni = function runStateT_inst_102_103_52_7_8_118_119_120_tsni(m, s) {
@@ -26463,15 +26465,15 @@ lambda_inst_102_103_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_102_103_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_102_103_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_102_103_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_102_103_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_102_103_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -26535,15 +26537,15 @@ lambda_inst_102_103_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_102_103_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_102_103_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_102_103_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_102_103_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_102_103_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -26556,15 +26558,15 @@ lambda_inst_102_103_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_102_103_5_6_7_8_118_119_tsni = function lambda$_inst_102_103_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_102_103_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_102_103_5_6_7_8_118_119_120_tsni = function runStateT_inst_102_103_5_6_7_8_118_119_120_tsni(m, s) {
@@ -26638,15 +26640,15 @@ lambda_inst_110_111_103_5_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_110_111_103_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_110_111_103_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_110_111_103_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_110_111_103_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_110_111_103_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -26659,15 +26661,15 @@ lambda_inst_110_111_103_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_110_111_103_5_6_7_8_118_119_tsni = function lambda$_inst_110_111_103_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_110_111_103_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_110_111_103_5_6_7_8_118_119_120_tsni = function runStateT_inst_110_111_103_5_6_7_8_118_119_120_tsni(m, s) {
@@ -26683,15 +26685,15 @@ lambda_inst_110_111_103_42_43_44_46_47_48_7_8_118_tsni = (undefined, function (f
 });
 lambda$_inst_110_111_103_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_110_111_103_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_110_111_103_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_110_111_103_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_110_111_103_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -26721,15 +26723,15 @@ lambda_inst_110_111_103_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_110_111_103_52_7_8_118_119_tsni = function lambda$_inst_110_111_103_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_110_111_103_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_110_111_103_52_7_8_118_119_120_tsni = function runStateT_inst_110_111_103_52_7_8_118_119_120_tsni(m, s) {
@@ -26776,15 +26778,15 @@ lambda_inst_110_111_103_56_10_11_12_39_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_110_111_103_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_110_111_103_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_110_111_103_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_110_111_103_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_110_111_103_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -26797,15 +26799,15 @@ lambda_inst_110_111_103_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_110_111_103_56_6_7_8_118_119_tsni = function lambda$_inst_110_111_103_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_110_111_103_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_110_111_103_56_6_7_8_118_119_120_tsni = function runStateT_inst_110_111_103_56_6_7_8_118_119_120_tsni(m, s) {
@@ -26936,15 +26938,15 @@ lambda_inst_112_113_111_103_56_10_11_12_39_7_8_118_tsni = (undefined, function (
 });
 lambda$_inst_112_113_111_103_56_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_112_113_111_103_56_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_112_113_111_103_56_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_112_113_111_103_56_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_112_113_111_103_56_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -26957,15 +26959,15 @@ lambda_inst_112_113_111_103_56_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_112_113_111_103_56_6_7_8_118_119_tsni = function lambda$_inst_112_113_111_103_56_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_112_113_111_103_56_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_112_113_111_103_56_6_7_8_118_119_120_tsni = function runStateT_inst_112_113_111_103_56_6_7_8_118_119_120_tsni(m, s) {
@@ -26984,15 +26986,15 @@ lambda_inst_112_113_111_103_52_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_112_113_111_103_52_7_8_118_119_tsni = function lambda$_inst_112_113_111_103_52_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_112_113_111_103_52_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_112_113_111_103_52_7_8_118_119_120_tsni = function runStateT_inst_112_113_111_103_52_7_8_118_119_120_tsni(m, s) {
@@ -27005,15 +27007,15 @@ lambda_inst_112_113_111_103_42_43_44_46_47_48_7_8_118_tsni = (undefined, functio
 });
 lambda$_inst_112_113_111_103_42_43_44_46_47_48_7_8_118_119_tsni = function lambda$_inst_112_113_111_103_42_43_44_46_47_48_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_112_113_111_103_42_43_44_46_47_48_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_112_113_111_103_42_43_44_46_47_48_7_8_118_119_120_tsni = function runStateT_inst_112_113_111_103_42_43_44_46_47_48_7_8_118_119_120_tsni(m, s) {
@@ -27077,15 +27079,15 @@ lambda_inst_112_113_111_103_5_10_11_12_39_7_8_118_tsni = (undefined, function (f
 });
 lambda$_inst_112_113_111_103_5_10_11_12_39_7_8_118_119_tsni = function lambda$_inst_112_113_111_103_5_10_11_12_39_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_112_113_111_103_5_10_11_12_39_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_112_113_111_103_5_10_11_12_39_7_8_118_119_120_tsni = function runStateT_inst_112_113_111_103_5_10_11_12_39_7_8_118_119_120_tsni(m, s) {
@@ -27098,15 +27100,15 @@ lambda_inst_112_113_111_103_5_6_7_8_118_tsni = (undefined, function (f) {
 });
 lambda$_inst_112_113_111_103_5_6_7_8_118_119_tsni = function lambda$_inst_112_113_111_103_5_6_7_8_118_119_tsni(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return runStateT_inst_112_113_111_103_5_6_7_8_118_119_120_tsni(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 runStateT_inst_112_113_111_103_5_6_7_8_118_119_120_tsni = function runStateT_inst_112_113_111_103_5_6_7_8_118_119_120_tsni(m, s) {
@@ -27171,9 +27173,9 @@ lambda28 = (undefined, function (x, y) {
 });
 lambda29 = (undefined, function (caseScrut) {
   let first1, first0, c, i, tmp, tmp1, tmp2, tmp3;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     c = first0;
     i = first1;
     tmp = NofibPrelude.nofibStringToList(" => ");
@@ -27182,7 +27184,7 @@ lambda29 = (undefined, function (caseScrut) {
     tmp3 = NofibPrelude.append(tmp, tmp2);
     return NofibPrelude.Cons(c, tmp3)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 lambda$17 = function lambda$(carry, topNS) {
@@ -27267,10 +27269,10 @@ lambda$12 = function lambda$(xs, x) {
     return foldl_inst_75_115_116_tsni(f, tmp2, t)
   };
   tmp1 = listDiff_inst_75_115_tsni(xs, tmp);
-  arr = [
+  arr = globalThis.Object.freeze([
     x,
     tmp1
-  ];
+  ]);
   return arr
 };
 lambda15 = (undefined, function (xs) {
@@ -27288,15 +27290,15 @@ lambda17 = (undefined, function (i) {
 });
 lambda$10 = function lambda$(c, st, iis) {
   let first1, first0, i, iss, arr, tmp, tmp1, tmp2, tmp3, lambda$this;
-  if (globalThis.Array.isArray(iis) && iis.length === 2) {
-    first0 = iis[0];
-    first1 = iis[1];
+  if (runtime.Tuple.isArrayLike(iis) && iis.length === 2) {
+    first0 = runtime.Tuple.get(iis, 0);
+    first1 = runtime.Tuple.get(iis, 1);
     i = first0;
     iss = first1;
-    arr = [
+    arr = globalThis.Object.freeze([
       c,
       i
-    ];
+    ]);
     tmp = cryptarithm21.digitEnv(st);
     tmp1 = NofibPrelude.Cons(arr, tmp);
     tmp2 = cryptarithm21.Digits(iss, tmp1);
@@ -27304,7 +27306,7 @@ lambda$10 = function lambda$(c, st, iis) {
     lambda$this = runtime.safeCall(lambda_inst_77_30_tsni(i));
     return bind_inst_77_26_tsni(tmp3, lambda$this)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda16 = (undefined, function (c, st) {
@@ -27329,10 +27331,10 @@ lambda14 = (undefined, function (c) {
 });
 lambda$8 = function lambda$(s, x) {
   let arr;
-  arr = [
+  arr = globalThis.Object.freeze([
     cryptarithm21.Unit,
     s
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda13 = (undefined, function (s) {
@@ -27342,10 +27344,10 @@ lambda13 = (undefined, function (s) {
 });
 lambda11 = (undefined, function (s) {
   let arr;
-  arr = [
+  arr = globalThis.Object.freeze([
     cryptarithm21.Unit,
     s
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 });
 lambda12 = (undefined, function (s) {
@@ -27353,22 +27355,22 @@ lambda12 = (undefined, function (s) {
 });
 lambda10 = (undefined, function (caseScrut) {
   let first1, first0, a, s;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     s = first1;
     return NofibPrelude.Cons(s, NofibPrelude.Nil)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 lambda$7 = function lambda$(s, x) {
   let arr;
-  arr = [
+  arr = globalThis.Object.freeze([
     x,
     s
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda9 = (undefined, function (s) {
@@ -27420,10 +27422,10 @@ lambda5 = (undefined, function (f) {
 });
 lambda$2 = function lambda$(a, s) {
   let arr;
-  arr = [
+  arr = globalThis.Object.freeze([
     a,
     s
-  ];
+  ]);
   return NofibPrelude.Cons(arr, NofibPrelude.Nil)
 };
 lambda4 = (undefined, function (a) {
@@ -27433,15 +27435,15 @@ lambda4 = (undefined, function (a) {
 });
 lambda$1 = function lambda$(f, caseScrut) {
   let first1, first0, a, ss, tmp;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     a = first0;
     ss = first1;
     tmp = runtime.safeCall(f(a));
     return cryptarithm21.runStateT(tmp, ss)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda3 = (undefined, function (f) {
@@ -27474,40 +27476,52 @@ lambda = (undefined, function (x) {
     cryptarithm21 = cryptarithm2;
     let tmp, lambda30;
     const Unit$class = class Unit {
-      constructor() {}
-      toString() { return "Unit"; }
-    };
-    this.Unit = new Unit$class;
-    this.Unit.class = Unit$class;
-    this.StateT = function StateT(run1) {
-      return new StateT.class(run1);
-    };
-    this.StateT.class = class StateT {
-      constructor(run) {
-        this.run = run;
+      constructor() {
+        Object.defineProperty(this, "class", {
+          value: Unit
+        })
       }
-      toString() { return "StateT(" + runtime.render(this.run) + ")"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "Unit"]; 
     };
+    this.Unit = globalThis.Object.freeze(new Unit$class);
+    this.StateT = function StateT(run1) {
+      return globalThis.Object.freeze(new StateT.class(run1));
+    };
+    Object.defineProperty(this.StateT, "class", {
+      enumerable: true,
+      value: class StateT {
+        constructor(run) {
+          this.run = run;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "StateT", ["run"]]; 
+      }
+    });
     lambda30 = (undefined, function (s) {
       let arr;
-      arr = [
+      arr = globalThis.Object.freeze([
         s,
         s
-      ];
+      ]);
       return NofibPrelude.Cons(arr, NofibPrelude.Nil)
     });
     tmp = runtime.safeCall(cryptarithm2.StateT(lambda30));
     this.get = tmp;
     this.Digits = function Digits(i1, c1) {
-      return new Digits.class(i1, c1);
+      return globalThis.Object.freeze(new Digits.class(i1, c1));
     };
-    this.Digits.class = class Digits {
-      constructor(i, c) {
-        this.i = i;
-        this.c = c;
+    Object.defineProperty(this.Digits, "class", {
+      enumerable: true,
+      value: class Digits {
+        constructor(i, c) {
+          this.i = i;
+          this.c = c;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Digits", ["i", "c"]]; 
       }
-      toString() { return "Digits(" + runtime.render(this.i) + ", " + runtime.render(this.c) + ")"; }
-    };
+    });
   }
   static unlines(ls) {
     let tmp;
@@ -27521,9 +27535,9 @@ lambda = (undefined, function (x) {
     } else if (t instanceof NofibPrelude.Cons.class) {
       param0 = t.head;
       param1 = t.tail;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
+      if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+        first0 = runtime.Tuple.get(param0, 0);
+        first1 = runtime.Tuple.get(param0, 1);
         x = first0;
         v = first1;
         t1 = param1;
@@ -27534,10 +27548,10 @@ lambda = (undefined, function (x) {
           return cryptarithm2.lookup(k, t1)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static delete_(xs, e) {
@@ -27553,7 +27567,7 @@ lambda = (undefined, function (x) {
       run = param0;
       return runtime.safeCall(run(s))
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static bind(m1, f) {
@@ -27605,7 +27619,7 @@ lambda = (undefined, function (x) {
       b1 = param1;
       return a2
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static digitEnv(d1) {
@@ -27617,7 +27631,7 @@ lambda = (undefined, function (x) {
       b1 = param1;
       return b1
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static permute(c) {
@@ -27641,7 +27655,7 @@ lambda = (undefined, function (x) {
       xs1 = param1;
       return xs1
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static solve(tops, bots, carry) {
@@ -27661,7 +27675,7 @@ lambda = (undefined, function (x) {
         lambda$this = runtime.safeCall(lambda_inst_101_53_tsni(carry));
         tmp = bind_inst_101_52_tsni(tmp1, lambda$this);
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
       lambda$this1 = runtime.safeCall(lambda_inst_101_tsni(tops, bot, botss));
       return bind_inst_101_62_tsni(tmp, lambda$this1)
@@ -27722,6 +27736,7 @@ lambda = (undefined, function (x) {
     tmp = testCryptarithm2_nofib_inst_112_113_tsni(1);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return "cryptarithm2"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "cryptarithm2"]; 
 });
 let cryptarithm2 = cryptarithm21; export default cryptarithm2;

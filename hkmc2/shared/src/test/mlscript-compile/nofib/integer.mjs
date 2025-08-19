@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -44,7 +46,7 @@ lscomp1$_inst_2_3_tsni = function lscomp1$_inst_2_3_tsni(op, bstart, bstep, blim
     tmp1 = enumFromThenTo_inst_2_3_1_tsni(bstart, tmp, blim);
     return lscomp2$_inst_2_3_tsni(op, bstart, bstep, blim, a, t1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp2$_inst_2_3_tsni = function lscomp2$_inst_2_3_tsni(op, bstart, bstep, blim, a, t1, ls) {
@@ -116,7 +118,7 @@ lscomp1$_inst_6_7_tsni = function lscomp1$_inst_6_7_tsni(op, bstart, bstep, blim
     tmp1 = enumFromThenTo_inst_6_7_5_tsni(bstart, tmp, blim);
     return lscomp2$_inst_6_7_tsni(op, bstart, bstep, blim, a, t1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp2$_inst_6_7_tsni = function lscomp2$_inst_6_7_tsni(op, bstart, bstep, blim, a, t1, ls) {
@@ -4437,7 +4439,7 @@ lscomp2$1 = function lscomp2$(op, bstart, bstep, blim, a, t1, ls) {
     tmp1 = lscomp2$1(op, bstart, bstep, blim, a, t1, t2);
     return NofibPrelude.Cons(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp21 = function lscomp2(op, bstart, bstep, blim, a, t1) {
@@ -4458,7 +4460,7 @@ lscomp1$1 = function lscomp1$(op, bstart, bstep, blim, ls) {
     tmp1 = enumFromThenTo_inst_0_1_tsni(bstart, tmp, blim);
     return lscomp2$_inst_0_tsni(op, bstart, bstep, blim, a, t1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp11 = function lscomp1(op, bstart, bstep, blim) {
@@ -4479,7 +4481,7 @@ lscomp2$ = function lscomp2$(op, bstart, bstep, blim, a, t1, ls) {
     tmp1 = lscomp2$(op, bstart, bstep, blim, a, t1, t2);
     return NofibPrelude.Cons(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp2 = function lscomp2(op, bstart, bstep, blim, a, t1) {
@@ -4500,7 +4502,7 @@ lscomp1$ = function lscomp1$(op, bstart, bstep, blim, ls) {
     tmp1 = enumFromThenTo_inst_4_5_tsni(bstart, tmp, blim);
     return lscomp2$_inst_4_tsni(op, bstart, bstep, blim, a, t1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp1 = function lscomp1(op, bstart, bstep, blim) {
@@ -4564,6 +4566,7 @@ lscomp1 = function lscomp1(op, bstart, bstep, blim) {
     tmp = testInteger_nofib_inst_30_31_tsni(700000001);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return "integer"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "integer"]; 
 });
 let integer = integer1; export default integer;

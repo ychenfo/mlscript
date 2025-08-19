@@ -22,7 +22,7 @@ fun break_(p, xs) = if xs is
 
 fun isSpace(c) = c === " "
 
-fun words(s) = if dropWhile(isSpace, s) is
+fun words(s) = if leaveWhile(isSpace, s) is
   Nil then Nil
   h :: t and
     break_(isSpace, h :: t) is [w, s_] then w :: words(s_)
@@ -105,7 +105,7 @@ fun tile(ws, a_b) = if a_b is
   [m :: ms, n] then
     let l = n - m
     if splitAt(l, ws) is [ws1, ws2] then
-      ws1 :: tile(ws2, [drop(l, m :: ms), m])
+      ws1 :: tile(ws2, [leave(l, m :: ms), m])
 
 fun null__(a_b) = if a_b is [Nil, Nil] then true else false
 
@@ -116,19 +116,19 @@ val nil_ = [Nil, Nil]
 //│ nil_ = [[], []]
 
 fun head_(a_b) = if a_b is [x, y] and
-  Predef.not(null_(x)) then head(x)
+  not(null_(x)) then head(x)
   else head(y)
 
 fun last_(a_b) = if a_b is [y, x] and
-  Predef.not(null_(x)) then head(x)
+  not(null_(x)) then head(x)
   else head(y)
 
 fun cons_(a, a_b) = if a_b is [x, y] and
-  Predef.not(null_(y)) then [a :: x, y]
+  not(null_(y)) then [a :: x, y]
   else [a :: Nil, x]
 
 fun snoc_(a, a_b) = if a_b is [y, x] and
-  Predef.not(null_(y)) then [y, a :: x]
+  not(null_(y)) then [y, a :: x]
   else [x, a :: Nil]
 
 fun tail_(a_b) = if a_b is [x, y] and
@@ -188,9 +188,9 @@ fun stepr(w, ps_tw_tl) = if ps_tw_tl is [ps, tw, tl] then
     let p = last_(ps_p)
     cost(p) <= cost(q) then trim(ps_p)
     else ps_pq
-  fun drop_nofit(ps_p) = if
+  fun leave_nofit(ps_p) = if
     null__(ps_p) then ps_p
-    width_hd(last_(ps_p)) > maxw then drop_nofit(init_(ps_p))
+    width_hd(last_(ps_p)) > maxw then leave_nofit(init_(ps_p))
     else ps_p
   fun bf(p, q) =
     let wqh = width_hd(q)
@@ -206,7 +206,7 @@ fun stepr(w, ps_tw_tl) = if ps_tw_tl is [ps, tw, tl] then
     let r = head_(r_rs)
     bf(p, q) <= bf(q, r) then myAdd(p, r_rs)
     else cons_(p, qr_rs)
-  [trim(drop_nofit(myAdd(new_(last_(ps)), ps))), tot_width, tot_len]
+  [trim(leave_nofit(myAdd(new_(last_(ps)), ps))), tot_width, tot_len]
 
 fun par3(ws) =
   let zs = scan1(stepr, startr, map(listLen, ws))

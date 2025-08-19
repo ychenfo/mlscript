@@ -6,15 +6,22 @@
 :e
 fun test(x) =
   [this.a, x]
-//│ ═══[ERROR] Cannot use 'this' outside of an object scope.
+//│ ╔══[ERROR] Cannot use 'this' outside of an object scope.
+//│ ║  l.8: 	  [this.a, x]
+//│ ╙──     	   ^^^^
 //│ JS (unsanitized):
-//│ let test; test = function test(x) { let arr; arr = []; return arr };
+//│ let test; test = function test(x) { let arr; arr = globalThis.Object.freeze([]); return arr };
 
 :sjs
 fun test(x) =
   [globalThis.a, x]
 //│ JS (unsanitized):
-//│ let test1; test1 = function test(x) { let arr; arr = [ globalThis.a, x ]; return arr };
+//│ let test1;
+//│ test1 = function test(x) {
+//│   let arr;
+//│   arr = globalThis.Object.freeze([ globalThis.a, x ]);
+//│   return arr
+//│ };
 
 :re
 test(123)
@@ -51,13 +58,14 @@ module Test with
 //│   } 
 //│   static test2(x1) {
 //│     let arr;
-//│     arr = [
+//│     arr = globalThis.Object.freeze([
 //│       Test.a,
 //│       x1
-//│     ];
+//│     ]);
 //│     return arr
 //│   }
-//│   static toString() { return "Test"; }
+//│   static toString() { return runtime.render(this); }
+//│   static [definitionMetadata] = ["module", "Test"]; 
 //│ });
 
 

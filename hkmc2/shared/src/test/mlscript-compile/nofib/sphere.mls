@@ -269,7 +269,7 @@ fun lightdirection(l, pt) = if l is
 fun shadowed(pos, dir, lcolour) =
   if trace(testspheres, vecadd(pos, vecscale(dir, epsilon)), dir) is
     [is_hit, dist, sp] then
-      if Predef.not(is_hit) then
+      if not(is_hit) then
         [false, lcolour]
       else
         [true, lcolour]

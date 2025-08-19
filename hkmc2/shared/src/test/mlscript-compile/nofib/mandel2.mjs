@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -7,14 +9,14 @@ check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
   let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
-  if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
-    first0 = x1y1[0];
-    first1 = x1y1[1];
+  if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
+    first0 = runtime.Tuple.get(x1y1, 0);
+    first1 = runtime.Tuple.get(x1y1, 1);
     x1 = first0;
     y1 = first1;
-    if (globalThis.Array.isArray(x2y2) && x2y2.length === 2) {
-      first01 = x2y2[0];
-      first11 = x2y2[1];
+    if (runtime.Tuple.isArrayLike(x2y2) && x2y2.length === 2) {
+      first01 = runtime.Tuple.get(x2y2, 0);
+      first11 = runtime.Tuple.get(x2y2, 1);
       x2 = first01;
       y2 = first11;
       scrut7 = mandel2.equalp(x1y1, x2y2);
@@ -69,31 +71,31 @@ check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
           return - 1
         } else {
           tmp2 = x1 + 1;
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp2,
             y1
-          ];
+          ]);
           scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
           if (scrut3 === true) {
             tmp3 = y1 + 1;
-            arr3 = [
+            arr3 = globalThis.Object.freeze([
               x2,
               tmp3
-            ];
+            ]);
             scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
             if (scrut4 === true) {
               tmp4 = x2 - 1;
-              arr4 = [
+              arr4 = globalThis.Object.freeze([
                 tmp4,
                 y2
-              ];
+              ]);
               scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
               if (scrut5 === true) {
                 tmp5 = y2 - 1;
-                arr5 = [
+                arr5 = globalThis.Object.freeze([
                   x1,
                   tmp5
-                ];
+                ]);
                 scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
                 if (scrut6 === true) {
                   return col1
@@ -112,29 +114,29 @@ check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
   let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
-  if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
-    first0 = x1y1[0];
-    first1 = x1y1[1];
+  if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
+    first0 = runtime.Tuple.get(x1y1, 0);
+    first1 = runtime.Tuple.get(x1y1, 1);
     x1 = first0;
     y1 = first1;
-    if (globalThis.Array.isArray(x2y2) && x2y2.length === 2) {
-      first01 = x2y2[0];
-      first11 = x2y2[1];
+    if (runtime.Tuple.isArrayLike(x2y2) && x2y2.length === 2) {
+      first01 = runtime.Tuple.get(x2y2, 0);
+      first11 = runtime.Tuple.get(x2y2, 1);
       x2 = first01;
       y2 = first11;
       tmp = check_perim_inst_3_4_2_tsni(x1y1, x2y2);
       rec_col = tmp;
       tmp1 = - 1;
       tmp2 = rec_col == tmp1;
-      scrut2 = Predef.not(tmp2);
+      scrut2 = ! tmp2;
       if (scrut2 === true) {
         return runtime.safeCall(mandel2.Leaf(rec_col))
       } else {
@@ -152,29 +154,29 @@ build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
         tmp7 = y2 + y1;
         split_y = NofibPrelude.intDiv(tmp7, 2);
         nsp1 = x1y1;
-        arr = [
+        arr = globalThis.Object.freeze([
           split_x,
           y2
-        ];
+        ]);
         nsp2 = arr;
         tmp8 = split_x + 1;
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp8,
           y1
-        ];
+        ]);
         nsp3 = arr1;
         nsp4 = x2y2;
         ewp1 = x1y1;
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           x2,
           split_y
-        ];
+        ]);
         ewp2 = arr2;
         tmp9 = split_y + 1;
-        arr3 = [
+        arr3 = globalThis.Object.freeze([
           x1,
           tmp9
-        ];
+        ]);
         ewp3 = arr3;
         ewp4 = x2y2;
         scrut1 = split == "NS";
@@ -189,24 +191,24 @@ build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
   let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
-  if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
-    first0 = x1y1[0];
-    first1 = x1y1[1];
+  if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
+    first0 = runtime.Tuple.get(x1y1, 0);
+    first1 = runtime.Tuple.get(x1y1, 1);
     x1 = first0;
     y1 = first1;
-    if (globalThis.Array.isArray(x2y2) && x2y2.length === 2) {
-      first01 = x2y2[0];
-      first11 = x2y2[1];
+    if (runtime.Tuple.isArrayLike(x2y2) && x2y2.length === 2) {
+      first01 = runtime.Tuple.get(x2y2, 0);
+      first11 = runtime.Tuple.get(x2y2, 1);
       x2 = first01;
       y2 = first11;
       scrut7 = mandel2.equalp(x1y1, x2y2);
@@ -261,31 +263,31 @@ check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
           return - 1
         } else {
           tmp2 = x1 + 1;
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp2,
             y1
-          ];
+          ]);
           scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
           if (scrut3 === true) {
             tmp3 = y1 + 1;
-            arr3 = [
+            arr3 = globalThis.Object.freeze([
               x2,
               tmp3
-            ];
+            ]);
             scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
             if (scrut4 === true) {
               tmp4 = x2 - 1;
-              arr4 = [
+              arr4 = globalThis.Object.freeze([
                 tmp4,
                 y2
-              ];
+              ]);
               scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
               if (scrut5 === true) {
                 tmp5 = y2 - 1;
-                arr5 = [
+                arr5 = globalThis.Object.freeze([
                   x1,
                   tmp5
-                ];
+                ]);
                 scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
                 if (scrut6 === true) {
                   return col1
@@ -304,43 +306,43 @@ check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 testMandel2_nofib_inst_5_6_tsni = function testMandel2_nofib_inst_5_6_tsni(n) {
   let arr, tmp, arr1, tmp1;
-  arr = [
+  arr = globalThis.Object.freeze([
     0,
     0
-  ];
+  ]);
   tmp = NofibPrelude.intDiv(mandel2.size, 2);
-  arr1 = [
+  arr1 = globalThis.Object.freeze([
     mandel2.size,
     tmp
-  ];
+  ]);
   tmp1 = build_tree_inst_5_6_4_tsni(arr, arr1);
   return mandel2.finite(tmp1)
 };
 build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
   let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
-  if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
-    first0 = x1y1[0];
-    first1 = x1y1[1];
+  if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
+    first0 = runtime.Tuple.get(x1y1, 0);
+    first1 = runtime.Tuple.get(x1y1, 1);
     x1 = first0;
     y1 = first1;
-    if (globalThis.Array.isArray(x2y2) && x2y2.length === 2) {
-      first01 = x2y2[0];
-      first11 = x2y2[1];
+    if (runtime.Tuple.isArrayLike(x2y2) && x2y2.length === 2) {
+      first01 = runtime.Tuple.get(x2y2, 0);
+      first11 = runtime.Tuple.get(x2y2, 1);
       x2 = first01;
       y2 = first11;
       tmp = check_perim_inst_5_6_4_2_tsni(x1y1, x2y2);
       rec_col = tmp;
       tmp1 = - 1;
       tmp2 = rec_col == tmp1;
-      scrut2 = Predef.not(tmp2);
+      scrut2 = ! tmp2;
       if (scrut2 === true) {
         return runtime.safeCall(mandel2.Leaf(rec_col))
       } else {
@@ -358,29 +360,29 @@ build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
         tmp7 = y2 + y1;
         split_y = NofibPrelude.intDiv(tmp7, 2);
         nsp1 = x1y1;
-        arr = [
+        arr = globalThis.Object.freeze([
           split_x,
           y2
-        ];
+        ]);
         nsp2 = arr;
         tmp8 = split_x + 1;
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           tmp8,
           y1
-        ];
+        ]);
         nsp3 = arr1;
         nsp4 = x2y2;
         ewp1 = x1y1;
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           x2,
           split_y
-        ];
+        ]);
         ewp2 = arr2;
         tmp9 = split_y + 1;
-        arr3 = [
+        arr3 = globalThis.Object.freeze([
           x1,
           tmp9
-        ];
+        ]);
         ewp3 = arr3;
         ewp4 = x2y2;
         scrut1 = split == "NS";
@@ -395,24 +397,24 @@ build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y2) {
   let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = mandel2.point_colour(x1y1);
   col1 = tmp;
-  if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
-    first0 = x1y1[0];
-    first1 = x1y1[1];
+  if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
+    first0 = runtime.Tuple.get(x1y1, 0);
+    first1 = runtime.Tuple.get(x1y1, 1);
     x1 = first0;
     y1 = first1;
-    if (globalThis.Array.isArray(x2y2) && x2y2.length === 2) {
-      first01 = x2y2[0];
-      first11 = x2y2[1];
+    if (runtime.Tuple.isArrayLike(x2y2) && x2y2.length === 2) {
+      first01 = runtime.Tuple.get(x2y2, 0);
+      first11 = runtime.Tuple.get(x2y2, 1);
       x2 = first01;
       y2 = first11;
       scrut7 = mandel2.equalp(x1y1, x2y2);
@@ -467,31 +469,31 @@ check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y
           return - 1
         } else {
           tmp2 = x1 + 1;
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp2,
             y1
-          ];
+          ]);
           scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
           if (scrut3 === true) {
             tmp3 = y1 + 1;
-            arr3 = [
+            arr3 = globalThis.Object.freeze([
               x2,
               tmp3
-            ];
+            ]);
             scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
             if (scrut4 === true) {
               tmp4 = x2 - 1;
-              arr4 = [
+              arr4 = globalThis.Object.freeze([
                 tmp4,
                 y2
-              ];
+              ]);
               scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
               if (scrut5 === true) {
                 tmp5 = y2 - 1;
-                arr5 = [
+                arr5 = globalThis.Object.freeze([
                   x1,
                   tmp5
-                ];
+                ]);
                 scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
                 if (scrut6 === true) {
                   return col1
@@ -510,10 +512,10 @@ check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 point_colour_inst_0_7_tsni = function point_colour_inst_0_7_tsni(xy) {
@@ -542,14 +544,14 @@ point_colour_inst_5_6_4_2_7_tsni = function point_colour_inst_5_6_4_2_7_tsni(xy)
 };
 check_line$ = function check_line$(col1, x1, y1, x2, y2, xcyc, xdyd) {
   let first1, first0, xc, yc, first11, first01, xd, yd, finished, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, arr, arr1;
-  if (globalThis.Array.isArray(xcyc) && xcyc.length === 2) {
-    first0 = xcyc[0];
-    first1 = xcyc[1];
+  if (runtime.Tuple.isArrayLike(xcyc) && xcyc.length === 2) {
+    first0 = runtime.Tuple.get(xcyc, 0);
+    first1 = runtime.Tuple.get(xcyc, 1);
     xc = first0;
     yc = first1;
-    if (globalThis.Array.isArray(xdyd) && xdyd.length === 2) {
-      first01 = xdyd[0];
-      first11 = xdyd[1];
+    if (runtime.Tuple.isArrayLike(xdyd) && xdyd.length === 2) {
+      first01 = runtime.Tuple.get(xdyd, 0);
+      first11 = runtime.Tuple.get(xdyd, 1);
       xd = first01;
       yd = first11;
       scrut2 = mandel21.equalp(xdyd, mandel21.right);
@@ -574,28 +576,28 @@ check_line$ = function check_line$(col1, x1, y1, x2, y2, xcyc, xdyd) {
       } else {
         tmp1 = mandel21.point_colour(xcyc);
         tmp2 = tmp1 == col1;
-        scrut3 = Predef.not(tmp2);
+        scrut3 = ! tmp2;
         if (scrut3 === true) {
           return false
         } else {
           tmp3 = xc + xd;
           tmp4 = yc + yd;
-          arr = [
+          arr = globalThis.Object.freeze([
             tmp3,
             tmp4
-          ];
-          arr1 = [
+          ]);
+          arr1 = globalThis.Object.freeze([
             xd,
             yd
-          ];
+          ]);
           return check_line$(col1, x1, y1, x2, y2, arr, arr1)
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 check_line = function check_line(col1, x1, y1, x2, y2) {
@@ -609,40 +611,53 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr, arr1, tmp9, arr2, arr3;
     this.MandTree = class MandTree {
       constructor() {}
-      toString() { return "MandTree"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "MandTree"]; 
     };
     this.NS = function NS(l1, r1) {
-      return new NS.class(l1, r1);
+      return globalThis.Object.freeze(new NS.class(l1, r1));
     };
-    this.NS.class = class NS extends mandel2.MandTree {
-      constructor(l, r) {
-        super();
-        this.l = l;
-        this.r = r;
+    Object.defineProperty(this.NS, "class", {
+      enumerable: true,
+      value: class NS extends mandel2.MandTree {
+        constructor(l, r) {
+          super();
+          this.l = l;
+          this.r = r;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "NS", ["l", "r"]]; 
       }
-      toString() { return "NS(" + runtime.render(this.l) + ", " + runtime.render(this.r) + ")"; }
-    };
+    });
     this.EW = function EW(l1, r1) {
-      return new EW.class(l1, r1);
+      return globalThis.Object.freeze(new EW.class(l1, r1));
     };
-    this.EW.class = class EW extends mandel2.MandTree {
-      constructor(l, r) {
-        super();
-        this.l = l;
-        this.r = r;
+    Object.defineProperty(this.EW, "class", {
+      enumerable: true,
+      value: class EW extends mandel2.MandTree {
+        constructor(l, r) {
+          super();
+          this.l = l;
+          this.r = r;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "EW", ["l", "r"]]; 
       }
-      toString() { return "EW(" + runtime.render(this.l) + ", " + runtime.render(this.r) + ")"; }
-    };
+    });
     this.Leaf = function Leaf(colour1) {
-      return new Leaf.class(colour1);
+      return globalThis.Object.freeze(new Leaf.class(colour1));
     };
-    this.Leaf.class = class Leaf extends mandel2.MandTree {
-      constructor(colour) {
-        super();
-        this.colour = colour;
+    Object.defineProperty(this.Leaf, "class", {
+      enumerable: true,
+      value: class Leaf extends mandel2.MandTree {
+        constructor(colour) {
+          super();
+          this.colour = colour;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Leaf", ["colour"]]; 
       }
-      toString() { return "Leaf(" + runtime.render(this.colour) + ")"; }
-    };
+    });
     this.size = 200;
     tmp = - 2.25;
     this.pmn = tmp;
@@ -661,38 +676,38 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
     tmp7 = tmp5 / tmp6;
     this.delta_q = tmp7;
     tmp8 = - 1;
-    arr = [
+    arr = globalThis.Object.freeze([
       0,
       tmp8
-    ];
+    ]);
     this.up = arr;
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       0,
       1
-    ];
+    ]);
     this.down = arr1;
     tmp9 = - 1;
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       tmp9,
       0
-    ];
+    ]);
     this.left = arr2;
-    arr3 = [
+    arr3 = globalThis.Object.freeze([
       1,
       0
-    ];
+    ]);
     this.right = arr3;
   }
   static equalp(p1, p2) {
     let first1, first0, x1, x2, first11, first01, y1, y2, scrut, scrut1;
-    if (globalThis.Array.isArray(p1) && p1.length === 2) {
-      first0 = p1[0];
-      first1 = p1[1];
+    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
+      first0 = runtime.Tuple.get(p1, 0);
+      first1 = runtime.Tuple.get(p1, 1);
       x1 = first0;
       x2 = first1;
-      if (globalThis.Array.isArray(p2) && p2.length === 2) {
-        first01 = p2[0];
-        first11 = p2[1];
+      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+        first01 = runtime.Tuple.get(p2, 0);
+        first11 = runtime.Tuple.get(p2, 1);
         y1 = first01;
         y2 = first11;
         scrut = x1 == y1;
@@ -707,10 +722,10 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
           return false
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static np(x) {
@@ -781,7 +796,7 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
         return false
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static check_radius(p3, q1, k, x4, y4) {
@@ -808,30 +823,30 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
   } 
   static point_colour(xy) {
     let first1, first0, x5, y5, tmp, tmp1;
-    if (globalThis.Array.isArray(xy) && xy.length === 2) {
-      first0 = xy[0];
-      first1 = xy[1];
+    if (runtime.Tuple.isArrayLike(xy) && xy.length === 2) {
+      first0 = runtime.Tuple.get(xy, 0);
+      first1 = runtime.Tuple.get(xy, 1);
       x5 = first0;
       y5 = first1;
       tmp = mandel2.np(x5);
       tmp1 = mandel2.nq(y5);
       return mandel2.check_radius(tmp, tmp1, 0, 0.0, 0.0)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static check_perim(x1y1, x2y2) {
     let col1, first1, first0, x11, y11, first11, first01, x21, y21, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     tmp = mandel2.point_colour(x1y1);
     col1 = tmp;
-    if (globalThis.Array.isArray(x1y1) && x1y1.length === 2) {
-      first0 = x1y1[0];
-      first1 = x1y1[1];
+    if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
+      first0 = runtime.Tuple.get(x1y1, 0);
+      first1 = runtime.Tuple.get(x1y1, 1);
       x11 = first0;
       y11 = first1;
-      if (globalThis.Array.isArray(x2y2) && x2y2.length === 2) {
-        first01 = x2y2[0];
-        first11 = x2y2[1];
+      if (runtime.Tuple.isArrayLike(x2y2) && x2y2.length === 2) {
+        first01 = runtime.Tuple.get(x2y2, 0);
+        first11 = runtime.Tuple.get(x2y2, 1);
         x21 = first01;
         y21 = first11;
         scrut7 = mandel2.equalp(x1y1, x2y2);
@@ -886,31 +901,31 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
             return - 1
           } else {
             tmp2 = x11 + 1;
-            arr2 = [
+            arr2 = globalThis.Object.freeze([
               tmp2,
               y11
-            ];
+            ]);
             scrut3 = check_line$(col1, x11, y11, x21, y21, arr2, mandel2.right);
             if (scrut3 === true) {
               tmp3 = y11 + 1;
-              arr3 = [
+              arr3 = globalThis.Object.freeze([
                 x21,
                 tmp3
-              ];
+              ]);
               scrut4 = check_line$(col1, x11, y11, x21, y21, arr3, mandel2.down);
               if (scrut4 === true) {
                 tmp4 = x21 - 1;
-                arr4 = [
+                arr4 = globalThis.Object.freeze([
                   tmp4,
                   y21
-                ];
+                ]);
                 scrut5 = check_line$(col1, x11, y11, x21, y21, arr4, mandel2.left);
                 if (scrut5 === true) {
                   tmp5 = y21 - 1;
-                  arr5 = [
+                  arr5 = globalThis.Object.freeze([
                     x11,
                     tmp5
-                  ];
+                  ]);
                   scrut6 = check_line$(col1, x11, y11, x21, y21, arr5, mandel2.up);
                   if (scrut6 === true) {
                     return col1
@@ -929,29 +944,29 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static build_tree(x1y11, x2y21) {
     let first1, first0, x11, y11, first11, first01, x21, y21, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
-    if (globalThis.Array.isArray(x1y11) && x1y11.length === 2) {
-      first0 = x1y11[0];
-      first1 = x1y11[1];
+    if (runtime.Tuple.isArrayLike(x1y11) && x1y11.length === 2) {
+      first0 = runtime.Tuple.get(x1y11, 0);
+      first1 = runtime.Tuple.get(x1y11, 1);
       x11 = first0;
       y11 = first1;
-      if (globalThis.Array.isArray(x2y21) && x2y21.length === 2) {
-        first01 = x2y21[0];
-        first11 = x2y21[1];
+      if (runtime.Tuple.isArrayLike(x2y21) && x2y21.length === 2) {
+        first01 = runtime.Tuple.get(x2y21, 0);
+        first11 = runtime.Tuple.get(x2y21, 1);
         x21 = first01;
         y21 = first11;
         tmp = check_perim_inst_1_2_tsni(x1y11, x2y21);
         rec_col = tmp;
         tmp1 = - 1;
         tmp2 = rec_col == tmp1;
-        scrut2 = Predef.not(tmp2);
+        scrut2 = ! tmp2;
         if (scrut2 === true) {
           return runtime.safeCall(mandel2.Leaf(rec_col))
         } else {
@@ -969,29 +984,29 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
           tmp7 = y21 + y11;
           split_y = NofibPrelude.intDiv(tmp7, 2);
           nsp1 = x1y11;
-          arr = [
+          arr = globalThis.Object.freeze([
             split_x,
             y21
-          ];
+          ]);
           nsp2 = arr;
           tmp8 = split_x + 1;
-          arr1 = [
+          arr1 = globalThis.Object.freeze([
             tmp8,
             y11
-          ];
+          ]);
           nsp3 = arr1;
           nsp4 = x2y21;
           ewp1 = x1y11;
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             x21,
             split_y
-          ];
+          ]);
           ewp2 = arr2;
           tmp9 = split_y + 1;
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             x11,
             tmp9
-          ];
+          ]);
           ewp3 = arr3;
           ewp4 = x2y21;
           scrut1 = split == "NS";
@@ -1006,29 +1021,30 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static testMandel2_nofib(n) {
     let arr, tmp, arr1, tmp1;
-    arr = [
+    arr = globalThis.Object.freeze([
       0,
       0
-    ];
+    ]);
     tmp = NofibPrelude.intDiv(mandel2.size, 2);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       mandel2.size,
       tmp
-    ];
+    ]);
     tmp1 = build_tree_inst_3_4_tsni(arr, arr1);
     return mandel2.finite(tmp1)
   } 
   static main() {
     return testMandel2_nofib_inst_5_6_tsni(0)
   }
-  static toString() { return "mandel2"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "mandel2"]; 
 });
 let mandel2 = mandel21; export default mandel2;

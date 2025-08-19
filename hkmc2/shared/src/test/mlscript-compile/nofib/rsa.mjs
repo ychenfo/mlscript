@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -118,7 +120,7 @@ map_inst_0_1_tsni = function map_inst_0_1_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_0_2_tsni = (undefined, function (l) {
@@ -148,7 +150,7 @@ append_inst_0_2_3_tsni = function append_inst_0_2_3_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_0_11_12_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 collect_inst_4_5_tsni = function collect_inst_4_5_tsni(n, xs) {
@@ -165,7 +167,7 @@ collect_inst_4_5_tsni = function collect_inst_4_5_tsni(n, xs) {
       }
     } else {
       tmp = take_inst_4_5_6_tsni(n, xs);
-      tmp1 = NofibPrelude.drop(n, xs);
+      tmp1 = NofibPrelude.leave(n, xs);
       tmp2 = collect_inst_4_5_tsni(n, tmp1);
       _deforest_Cons_head = tmp;
       _deforest_Cons_tail = tmp2;
@@ -235,7 +237,7 @@ take_inst_4_5_6_tsni = function take_inst_4_5_6_tsni(n, ls) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unlines_inst_4_7_tsni = function unlines_inst_4_7_tsni(ls) {
@@ -273,7 +275,7 @@ append_inst_4_7_2_3_tsni = function append_inst_4_7_2_3_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_4_7_11_12_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_4_8_tsni = function map_inst_4_8_tsni(f, xs) {
@@ -322,7 +324,7 @@ append_inst_9_10_7_2_3_tsni = function append_inst_9_10_7_2_3_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_9_10_7_11_12_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_9_10_8_tsni = function map_inst_9_10_8_tsni(f, xs) {
@@ -342,7 +344,7 @@ collect_inst_9_10_5_tsni = function collect_inst_9_10_5_tsni(n, xs) {
       }
     } else {
       tmp = take_inst_9_10_5_6_tsni(n, xs);
-      tmp1 = NofibPrelude.drop(n, xs);
+      tmp1 = NofibPrelude.leave(n, xs);
       tmp2 = collect_inst_9_10_5_tsni(n, tmp1);
       _deforest_Cons_head = tmp;
       _deforest_Cons_tail = tmp2;
@@ -412,7 +414,7 @@ take_inst_9_10_5_6_tsni = function take_inst_9_10_5_6_tsni(n, ls) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_9_10_7_11_tsni = function concat_inst_9_10_7_11_tsni(ls) {
@@ -450,7 +452,7 @@ collect_inst_13_14_10_5_tsni = function collect_inst_13_14_10_5_tsni(n, xs) {
       }
     } else {
       tmp = take_inst_13_14_10_5_6_tsni(n, xs);
-      tmp1 = NofibPrelude.drop(n, xs);
+      tmp1 = NofibPrelude.leave(n, xs);
       tmp2 = collect_inst_13_14_10_5_tsni(n, tmp1);
       _deforest_Cons_head = tmp;
       _deforest_Cons_tail = tmp2;
@@ -520,7 +522,7 @@ take_inst_13_14_10_5_6_tsni = function take_inst_13_14_10_5_6_tsni(n, ls) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unlines_inst_13_14_10_7_tsni = function unlines_inst_13_14_10_7_tsni(ls) {
@@ -558,7 +560,7 @@ append_inst_13_14_10_7_2_3_tsni = function append_inst_13_14_10_7_2_3_tsni(xs, y
       return match_xs_arm_Cons_inst_13_14_10_7_11_12_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_13_14_10_8_tsni = function map_inst_13_14_10_8_tsni(f, xs) {
@@ -756,7 +758,7 @@ lambda = (undefined, function (acc, c) {
         return false
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static unlines(ls1) {
@@ -784,7 +786,7 @@ lambda = (undefined, function (acc, c) {
         return NofibPrelude.Nil
       } else {
         tmp = NofibPrelude.take(n, xs);
-        tmp1 = NofibPrelude.drop(n, xs);
+        tmp1 = NofibPrelude.leave(n, xs);
         tmp2 = rsa.collect(n, tmp1);
         return NofibPrelude.Cons(tmp, tmp2)
       }
@@ -835,6 +837,7 @@ lambda = (undefined, function (acc, c) {
   static main() {
     return testRsa_nofib_inst_13_14_tsni(0)
   }
-  static toString() { return "rsa"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "rsa"]; 
 });
 let rsa = rsa1; export default rsa;

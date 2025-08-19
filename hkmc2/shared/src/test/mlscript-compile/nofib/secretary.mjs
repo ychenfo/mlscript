@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -75,9 +77,9 @@ proc$_inst_0_1_5_6_tsni = function proc$_inst_0_1_5_6_tsni(k, rs) {
   tmp2 = NofibPrelude.take(k, xs);
   tmp3 = NofibPrelude.maximum(tmp2);
   bestk = tmp3;
-  tmp4 = NofibPrelude.drop(k, xs);
+  tmp4 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.dropWhile(lambda$this, tmp4);
+  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
   afterk = tmp5;
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
@@ -124,7 +126,7 @@ listcomp$_inst_7_8_tsni = function listcomp$_inst_7_8_tsni(n, ls) {
     tmp1 = listcomp$_inst_7_8_tsni(n, t);
     return NofibPrelude.Cons(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 sim_inst_7_8_1_tsni = function sim_inst_7_8_1_tsni(n, k) {
@@ -146,9 +148,9 @@ proc$_inst_7_8_1_5_6_tsni = function proc$_inst_7_8_1_5_6_tsni(k, rs) {
   tmp2 = NofibPrelude.take(k, xs);
   tmp3 = NofibPrelude.maximum(tmp2);
   bestk = tmp3;
-  tmp4 = NofibPrelude.drop(k, xs);
+  tmp4 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.dropWhile(lambda$this, tmp4);
+  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
   afterk = tmp5;
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
@@ -244,9 +246,9 @@ proc$_inst_10_6_tsni = function proc$_inst_10_6_tsni(k, rs) {
   tmp2 = NofibPrelude.take(k, xs);
   tmp3 = NofibPrelude.maximum(tmp2);
   bestk = tmp3;
-  tmp4 = NofibPrelude.drop(k, xs);
+  tmp4 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.dropWhile(lambda$this, tmp4);
+  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
   afterk = tmp5;
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
@@ -339,9 +341,9 @@ proc$_inst_12_5_6_tsni = function proc$_inst_12_5_6_tsni(k, rs) {
   tmp2 = NofibPrelude.take(k, xs);
   tmp3 = NofibPrelude.maximum(tmp2);
   bestk = tmp3;
-  tmp4 = NofibPrelude.drop(k, xs);
+  tmp4 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.dropWhile(lambda$this, tmp4);
+  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
   afterk = tmp5;
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
@@ -450,9 +452,9 @@ proc$_inst_13_14_1_5_6_tsni = function proc$_inst_13_14_1_5_6_tsni(k, rs) {
   tmp2 = NofibPrelude.take(k, xs);
   tmp3 = NofibPrelude.maximum(tmp2);
   bestk = tmp3;
-  tmp4 = NofibPrelude.drop(k, xs);
+  tmp4 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.dropWhile(lambda$this, tmp4);
+  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
   afterk = tmp5;
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
@@ -643,9 +645,9 @@ proc$_inst_16_17_14_1_5_6_tsni = function proc$_inst_16_17_14_1_5_6_tsni(k, rs) 
   tmp2 = NofibPrelude.take(k, xs);
   tmp3 = NofibPrelude.maximum(tmp2);
   bestk = tmp3;
-  tmp4 = NofibPrelude.drop(k, xs);
+  tmp4 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.dropWhile(lambda$this, tmp4);
+  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
   afterk = tmp5;
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
@@ -755,7 +757,7 @@ listcomp$ = function listcomp$(n, ls) {
     tmp1 = listcomp$(n, t);
     return NofibPrelude.Cons(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 listcomp = function listcomp(n) {
@@ -780,9 +782,9 @@ proc$ = function proc$(k, rs) {
   tmp2 = NofibPrelude.take(k, xs);
   tmp3 = NofibPrelude.maximum(tmp2);
   bestk = tmp3;
-  tmp4 = NofibPrelude.drop(k, xs);
+  tmp4 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.dropWhile(lambda$this, tmp4);
+  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
   afterk = tmp5;
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
@@ -835,7 +837,7 @@ lscomp$ = function lscomp$(m, proc1, ls) {
     tmp2 = lscomp$(m, proc1, t);
     return NofibPrelude.Cons(tmp1, tmp2)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp = function lscomp(m, proc1) {
@@ -902,6 +904,7 @@ f = function f(m) {
     tmp = testSecretary_nofib_inst_16_17_tsni(50);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return "secretary"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "secretary"]; 
 });
 let secretary = secretary1; export default secretary;

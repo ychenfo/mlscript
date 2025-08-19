@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -42,7 +44,7 @@ lscomp1$_inst_2_3_tsni = function lscomp1$_inst_2_3_tsni(x, y, x_, y_, screenX, 
     tmp = enumFromTo_inst_2_3_1_tsni(1, screenX);
     return lscomp2$_inst_2_3_tsni(x, y, x_, y_, screenX, screenY, t, t1, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp2$_inst_2_3_tsni = function lscomp2$_inst_2_3_tsni(x, y, x_, y_, screenX, screenY, t, t1, ls2) {
@@ -143,14 +145,14 @@ comp_times_inst_4_5_6_7_8_9_10_tsni = function comp_times_inst_4_5_6_7_8_9_10_ts
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$_inst_11_12_tsni = function lambda$_inst_11_12_tsni(limit, radius, c) {
@@ -227,14 +229,14 @@ comp_times_inst_11_12_5_6_7_8_9_10_tsni = function comp_times_inst_11_12_5_6_7_8
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 comp_times_inst_13_10_tsni = function comp_times_inst_13_10_tsni(x, y) {
@@ -272,14 +274,14 @@ comp_times_inst_13_10_tsni = function comp_times_inst_13_10_tsni(x, y) {
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$_inst_14_9_tsni = function lambda$_inst_14_9_tsni(c, z) {
@@ -322,14 +324,14 @@ comp_times_inst_14_9_10_tsni = function comp_times_inst_14_9_10_tsni(x, y) {
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 infiniteMandel$_inst_15_tsni = function infiniteMandel$_inst_15_tsni(c) {
@@ -387,14 +389,14 @@ comp_times_inst_15_8_9_10_tsni = function comp_times_inst_15_8_9_10_tsni(x, y) {
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 infiniteMandel$_inst_16_tsni = function infiniteMandel$_inst_16_tsni(c) {
@@ -454,14 +456,14 @@ comp_times_inst_16_8_9_10_tsni = function comp_times_inst_16_8_9_10_tsni(x, y) {
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_17_tsni = (undefined, function (c) {
@@ -521,14 +523,14 @@ comp_times_inst_17_8_9_10_tsni = function comp_times_inst_17_8_9_10_tsni(x, y) {
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 infiniteMandel$_inst_18_19_tsni = function infiniteMandel$_inst_18_19_tsni(c) {
@@ -593,14 +595,14 @@ comp_times_inst_18_19_8_9_10_tsni = function comp_times_inst_18_19_8_9_10_tsni(x
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 infiniteMandel$_inst_20_7_tsni = function infiniteMandel$_inst_20_7_tsni(c) {
@@ -665,14 +667,14 @@ comp_times_inst_20_7_8_9_10_tsni = function comp_times_inst_20_7_8_9_10_tsni(x, 
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 mandel_inst_21_6_tsni = function mandel_inst_21_6_tsni(c) {
@@ -740,14 +742,14 @@ comp_times_inst_21_6_7_8_9_10_tsni = function comp_times_inst_21_6_7_8_9_10_tsni
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_22_23_tsni = (undefined, function (limit, radius) {
@@ -829,14 +831,14 @@ comp_times_inst_22_23_12_5_6_7_8_9_10_tsni = function comp_times_inst_22_23_12_5
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp1$_inst_24_25_tsni = function lscomp1$_inst_24_25_tsni(x, y, x_, y_, screenX, screenY, ls1) {
@@ -1001,14 +1003,14 @@ comp_times_inst_24_27_23_12_5_6_7_8_9_10_tsni = function comp_times_inst_24_27_2
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_24_27_28_tsni = function map_inst_24_27_28_tsni(f, xs) {
@@ -1112,14 +1114,14 @@ comp_times_inst_29_30_27_23_12_5_6_7_8_9_10_tsni = function comp_times_inst_29_3
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_29_30_27_28_tsni = function map_inst_29_30_27_28_tsni(f, xs) {
@@ -1392,14 +1394,14 @@ comp_times_inst_31_32_30_27_23_12_5_6_7_8_9_10_tsni = function comp_times_inst_3
           tmp7 = b1 + d1;
           return mandel.Complex(tmp6, tmp7)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_31_32_30_27_28_tsni = function map_inst_31_32_30_27_28_tsni(f, xs) {
@@ -1460,11 +1462,11 @@ prettyRGB$ = function prettyRGB$(lIMIT, s) {
   let t, tmp, arr;
   tmp = lIMIT - s;
   t = tmp;
-  arr = [
+  arr = globalThis.Object.freeze([
     s,
     t,
     t
-  ];
+  ]);
   return arr
 };
 prettyRGB = function prettyRGB(lIMIT) {
@@ -1502,7 +1504,7 @@ lscomp2$ = function lscomp2$(x, y, x_, y_, screenX, screenY, t, t1, ls2) {
     tmp1 = lscomp2$(x, y, x_, y_, screenX, screenY, t, t1, t2);
     return NofibPrelude.Cons(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp2 = function lscomp2(x, y, x_, y_, screenX, screenY, t, t1) {
@@ -1522,7 +1524,7 @@ lscomp1$ = function lscomp1$(x, y, x_, y_, screenX, screenY, ls1) {
     tmp = enumFromTo_inst_0_1_tsni(1, screenX);
     return lscomp2$_inst_0_tsni(x, y, x_, y_, screenX, screenY, t, t1, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp1 = function lscomp1(x, y, x_, y_, screenX, screenY) {
@@ -1556,7 +1558,7 @@ walkIt$ = function walkIt$(radius, ls) {
       return 1 + tmp
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 walkIt = function walkIt(radius) {
@@ -1600,27 +1602,35 @@ infiniteMandel = function infiniteMandel(c) {
   static {
     mandel1 = mandel;
     this.Pixmap = function Pixmap(a1, b1, c1, d1) {
-      return new Pixmap.class(a1, b1, c1, d1);
+      return globalThis.Object.freeze(new Pixmap.class(a1, b1, c1, d1));
     };
-    this.Pixmap.class = class Pixmap {
-      constructor(a, b, c, d) {
-        this.a = a;
-        this.b = b;
-        this.c = c;
-        this.d = d;
+    Object.defineProperty(this.Pixmap, "class", {
+      enumerable: true,
+      value: class Pixmap {
+        constructor(a, b, c, d) {
+          this.a = a;
+          this.b = b;
+          this.c = c;
+          this.d = d;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Pixmap", ["a", "b", "c", "d"]]; 
       }
-      toString() { return "Pixmap(" + runtime.render(this.a) + ", " + runtime.render(this.b) + ", " + runtime.render(this.c) + ", " + runtime.render(this.d) + ")"; }
-    };
+    });
     this.Complex = function Complex(r1, i1) {
-      return new Complex.class(r1, i1);
+      return globalThis.Object.freeze(new Complex.class(r1, i1));
     };
-    this.Complex.class = class Complex {
-      constructor(r, i) {
-        this.r = r;
-        this.i = i;
+    Object.defineProperty(this.Complex, "class", {
+      enumerable: true,
+      value: class Complex {
+        constructor(r, i) {
+          this.r = r;
+          this.i = i;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Complex", ["r", "i"]]; 
       }
-      toString() { return "Complex(" + runtime.render(this.r) + ", " + runtime.render(this.i) + ")"; }
-    };
+    });
   }
   static createPixmap(width, height, max, colours) {
     return runtime.safeCall(mandel.Pixmap(width, height, max, colours))
@@ -1637,7 +1647,7 @@ infiniteMandel = function infiniteMandel(c) {
       tmp2 = tmp + tmp1;
       return NofibPrelude.sqrt(tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static comp_times(x, y) {
@@ -1660,10 +1670,10 @@ infiniteMandel = function infiniteMandel(c) {
         tmp5 = tmp3 + tmp4;
         return mandel.Complex(tmp2, tmp5)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static comp_plus(x1, y1) {
@@ -1682,10 +1692,10 @@ infiniteMandel = function infiniteMandel(c) {
         tmp1 = b + d;
         return mandel.Complex(tmp, tmp1)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static mandel(c1) {
@@ -1739,6 +1749,7 @@ infiniteMandel = function infiniteMandel(c) {
     tmp = testMandel_nofib_inst_31_32_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return "mandel"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "mandel"]; 
 });
 let mandel = mandel1; export default mandel;

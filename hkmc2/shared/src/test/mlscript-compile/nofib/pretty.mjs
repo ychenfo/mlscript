@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -92,10 +94,10 @@ ppStr_inst_0_1_2_tsni = function ppStr_inst_0_1_2_tsni(s, width, is_vert) {
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   }
 };
@@ -175,10 +177,10 @@ ppStr_inst_3_4_1_2_tsni = function ppStr_inst_3_4_1_2_tsni(s, width, is_vert) {
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   }
 };
@@ -263,10 +265,10 @@ ppStr_inst_5_6_4_1_2_tsni = function ppStr_inst_5_6_4_1_2_tsni(s, width, is_vert
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   }
 };
@@ -363,10 +365,10 @@ ppStr_inst_7_8_6_4_1_2_tsni = function ppStr_inst_7_8_6_4_1_2_tsni(s, width, is_
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   }
 };
@@ -432,7 +434,7 @@ flatten_inst_9_10_tsni = function flatten_inst_9_10_tsni(n, nlp, cseq, seqs) {
       return NofibPrelude.Cons(c, tmp8)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 flattenS_inst_9_10_tsni = function flattenS_inst_9_10_tsni(nlp, seqs) {
@@ -505,7 +507,7 @@ flatten_inst_11_12_10_tsni = function flatten_inst_11_12_10_tsni(n, nlp, cseq, s
       return NofibPrelude.Cons(c, tmp8)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 flattenS_inst_11_12_10_tsni = function flattenS_inst_11_12_10_tsni(nlp, seqs) {
@@ -578,7 +580,7 @@ flatten_inst_13_14_10_tsni = function flatten_inst_13_14_10_tsni(n, nlp, cseq, s
       return NofibPrelude.Cons(c, tmp8)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 flattenS_inst_13_14_10_tsni = function flattenS_inst_13_14_10_tsni(nlp, seqs) {
@@ -682,10 +684,10 @@ ppStr_inst_15_16_8_6_4_1_2_tsni = function ppStr_inst_15_16_8_6_4_1_2_tsni(s, wi
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   }
 };
@@ -703,7 +705,7 @@ ppShow_inst_15_17_tsni = function ppShow_inst_15_17_tsni(width, p) {
     sl = param3;
     return cShow_inst_15_17_12_tsni(seq)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 cShow_inst_15_17_12_tsni = function cShow_inst_15_17_12_tsni(seq) {
@@ -787,7 +789,7 @@ flatten_inst_15_17_12_10_tsni = function flatten_inst_15_17_12_10_tsni(n, nlp, c
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 flattenS_inst_15_17_12_10_tsni = function flattenS_inst_15_17_12_10_tsni(nlp, seqs) {
@@ -835,7 +837,7 @@ append_inst_15_17_12_10_19_tsni = function append_inst_15_17_12_10_19_tsni(xs, y
       return match_xs_arm_Cons_inst_15_25_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 mkIndent_inst_15_17_12_10_20_tsni = function mkIndent_inst_15_17_12_10_20_tsni(n, s) {
@@ -880,7 +882,7 @@ append_inst_15_17_12_10_21_tsni = function append_inst_15_17_12_10_21_tsni(xs, y
       return match_xs_arm_Cons_inst_15_25_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 testPretty_nofib_inst_22_23_tsni = function testPretty_nofib_inst_22_23_tsni() {
@@ -906,7 +908,7 @@ ppShow_inst_22_23_17_tsni = function ppShow_inst_22_23_17_tsni(width, p) {
     sl = param3;
     return cShow_inst_22_23_17_12_tsni(seq)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 cShow_inst_22_23_17_12_tsni = function cShow_inst_22_23_17_12_tsni(seq) {
@@ -990,7 +992,7 @@ flatten_inst_22_23_17_12_10_tsni = function flatten_inst_22_23_17_12_10_tsni(n, 
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 flattenS_inst_22_23_17_12_10_tsni = function flattenS_inst_22_23_17_12_10_tsni(nlp, seqs) {
@@ -1064,7 +1066,7 @@ append_inst_22_23_17_12_10_19_tsni = function append_inst_22_23_17_12_10_19_tsni
       return match_xs_arm_Cons_inst_22_23_25_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_22_23_17_12_10_21_tsni = function append_inst_22_23_17_12_10_21_tsni(xs, ys) {
@@ -1083,7 +1085,7 @@ append_inst_22_23_17_12_10_21_tsni = function append_inst_22_23_17_12_10_21_tsni
       return match_xs_arm_Cons_inst_22_23_25_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 pretty_stuff_inst_22_23_16_tsni = function pretty_stuff_inst_22_23_16_tsni(pp_words) {
@@ -1184,10 +1186,10 @@ ppStr_inst_22_23_16_8_6_4_1_2_tsni = function ppStr_inst_22_23_16_8_6_4_1_2_tsni
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   }
 };
@@ -1318,116 +1320,156 @@ lambda = (undefined, function (a, b) {
     pretty1 = pretty;
     this.CSeq = class CSeq {
       constructor() {}
-      toString() { return "CSeq"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "CSeq"]; 
     };
     this.CAppend = function CAppend(a1, b1) {
-      return new CAppend.class(a1, b1);
+      return globalThis.Object.freeze(new CAppend.class(a1, b1));
     };
-    this.CAppend.class = class CAppend extends pretty.CSeq {
-      constructor(a, b) {
-        super();
-        this.a = a;
-        this.b = b;
+    Object.defineProperty(this.CAppend, "class", {
+      enumerable: true,
+      value: class CAppend extends pretty.CSeq {
+        constructor(a, b) {
+          super();
+          this.a = a;
+          this.b = b;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "CAppend", ["a", "b"]]; 
       }
-      toString() { return "CAppend(" + runtime.render(this.a) + ", " + runtime.render(this.b) + ")"; }
-    };
+    });
     this.CIndent = function CIndent(a1, b1) {
-      return new CIndent.class(a1, b1);
+      return globalThis.Object.freeze(new CIndent.class(a1, b1));
     };
-    this.CIndent.class = class CIndent extends pretty.CSeq {
-      constructor(a, b) {
-        super();
-        this.a = a;
-        this.b = b;
+    Object.defineProperty(this.CIndent, "class", {
+      enumerable: true,
+      value: class CIndent extends pretty.CSeq {
+        constructor(a, b) {
+          super();
+          this.a = a;
+          this.b = b;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "CIndent", ["a", "b"]]; 
       }
-      toString() { return "CIndent(" + runtime.render(this.a) + ", " + runtime.render(this.b) + ")"; }
-    };
+    });
     this.CStr = function CStr(a1) {
-      return new CStr.class(a1);
+      return globalThis.Object.freeze(new CStr.class(a1));
     };
-    this.CStr.class = class CStr extends pretty.CSeq {
-      constructor(a) {
-        super();
-        this.a = a;
+    Object.defineProperty(this.CStr, "class", {
+      enumerable: true,
+      value: class CStr extends pretty.CSeq {
+        constructor(a) {
+          super();
+          this.a = a;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "CStr", ["a"]]; 
       }
-      toString() { return "CStr(" + runtime.render(this.a) + ")"; }
-    };
+    });
     this.CCh = function CCh(a1) {
-      return new CCh.class(a1);
+      return globalThis.Object.freeze(new CCh.class(a1));
     };
-    this.CCh.class = class CCh extends pretty.CSeq {
-      constructor(a) {
-        super();
-        this.a = a;
+    Object.defineProperty(this.CCh, "class", {
+      enumerable: true,
+      value: class CCh extends pretty.CSeq {
+        constructor(a) {
+          super();
+          this.a = a;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "CCh", ["a"]]; 
       }
-      toString() { return "CCh(" + runtime.render(this.a) + ")"; }
-    };
+    });
     const CNil$class = class CNil extends pretty.CSeq {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: CNil
+        })
       }
-      toString() { return "CNil"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "CNil"]; 
     };
-    this.CNil = new CNil$class;
-    this.CNil.class = CNil$class;
+    this.CNil = globalThis.Object.freeze(new CNil$class);
     const CNewline$class = class CNewline extends pretty.CSeq {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: CNewline
+        })
       }
-      toString() { return "CNewline"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "CNewline"]; 
     };
-    this.CNewline = new CNewline$class;
-    this.CNewline.class = CNewline$class;
+    this.CNewline = globalThis.Object.freeze(new CNewline$class);
     this.PprStyle = class PprStyle {
       constructor() {}
-      toString() { return "PprStyle"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "PprStyle"]; 
     };
     const PprForUser$class = class PprForUser extends pretty.PprStyle {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: PprForUser
+        })
       }
-      toString() { return "PprForUser"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "PprForUser"]; 
     };
-    this.PprForUser = new PprForUser$class;
-    this.PprForUser.class = PprForUser$class;
+    this.PprForUser = globalThis.Object.freeze(new PprForUser$class);
     const PprDebug$class = class PprDebug extends pretty.PprStyle {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: PprDebug
+        })
       }
-      toString() { return "PprDebug"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "PprDebug"]; 
     };
-    this.PprDebug = new PprDebug$class;
-    this.PprDebug.class = PprDebug$class;
+    this.PprDebug = globalThis.Object.freeze(new PprDebug$class);
     const PprShowAll$class = class PprShowAll extends pretty.PprStyle {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: PprShowAll
+        })
       }
-      toString() { return "PprShowAll"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "PprShowAll"]; 
     };
-    this.PprShowAll = new PprShowAll$class;
-    this.PprShowAll.class = PprShowAll$class;
+    this.PprShowAll = globalThis.Object.freeze(new PprShowAll$class);
     const PprInterface$class = class PprInterface extends pretty.PprStyle {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: PprInterface
+        })
       }
-      toString() { return "PprInterface"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "PprInterface"]; 
     };
-    this.PprInterface = new PprInterface$class;
-    this.PprInterface.class = PprInterface$class;
+    this.PprInterface = globalThis.Object.freeze(new PprInterface$class);
     this.cNil = pretty.CNil;
     this.cNL = pretty.CNewline;
     this.MkPrettyRep = function MkPrettyRep(cseq1, n1, b11, b21) {
-      return new MkPrettyRep.class(cseq1, n1, b11, b21);
+      return globalThis.Object.freeze(new MkPrettyRep.class(cseq1, n1, b11, b21));
     };
-    this.MkPrettyRep.class = class MkPrettyRep {
-      constructor(cseq, n, b1, b2) {
-        this.cseq = cseq;
-        this.n = n;
-        this.b1 = b1;
-        this.b2 = b2;
+    Object.defineProperty(this.MkPrettyRep, "class", {
+      enumerable: true,
+      value: class MkPrettyRep {
+        constructor(cseq, n, b1, b2) {
+          this.cseq = cseq;
+          this.n = n;
+          this.b1 = b1;
+          this.b2 = b2;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "MkPrettyRep", ["cseq", "n", "b1", "b2"]]; 
       }
-      toString() { return "MkPrettyRep(" + runtime.render(this.cseq) + ", " + runtime.render(this.n) + ", " + runtime.render(this.b1) + ", " + runtime.render(this.b2) + ")"; }
-    };
+    });
   }
   static cAppend(cs1, cs2) {
     return pretty.CAppend(cs1, cs2)
@@ -1466,18 +1508,18 @@ lambda = (undefined, function (a, b) {
     } else if (seqs instanceof NofibPrelude.Cons.class) {
       param0 = seqs.head;
       param1 = seqs.tail;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
+      if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+        first0 = runtime.Tuple.get(param0, 0);
+        first1 = runtime.Tuple.get(param0, 1);
         col = first0;
         seq = first1;
         seqs1 = param1;
         return pretty.flatten(col, nlp, seq, seqs1)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static flatten(n2, nlp1, cseq, seqs1) {
@@ -1489,10 +1531,10 @@ lambda = (undefined, function (a, b) {
       param1 = cseq.b;
       seq1 = param0;
       seq2 = param1;
-      arr = [
+      arr = globalThis.Object.freeze([
         n2,
         seq2
-      ];
+      ]);
       tmp = NofibPrelude.Cons(arr, seqs1);
       return pretty.flatten(n2, nlp1, seq1, tmp)
     } else if (cseq instanceof pretty.CIndent.class) {
@@ -1528,7 +1570,7 @@ lambda = (undefined, function (a, b) {
         return NofibPrelude.Cons(c1, tmp8)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static cShow(seq) {
@@ -1550,7 +1592,7 @@ lambda = (undefined, function (a, b) {
       sl = param3;
       return cShow_inst_11_12_tsni(seq1)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static ppUnformatted(p1) {
@@ -1567,7 +1609,7 @@ lambda = (undefined, function (a, b) {
       sl = param3;
       return cShow_inst_13_14_tsni(seq1)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static ppNil(width1, is_vert) {
@@ -1667,10 +1709,10 @@ lambda = (undefined, function (a, b) {
         tmp7 = pretty.andL(tmp5, tmp6);
         return runtime.safeCall(pretty.MkPrettyRep(tmp2, tmp3, tmp4, tmp7))
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static ppBesides(ps) {
@@ -1732,10 +1774,10 @@ lambda = (undefined, function (a, b) {
         tmp11 = pretty.andL(tmp9, tmp10);
         return runtime.safeCall(pretty.MkPrettyRep(tmp6, tmp7, tmp8, tmp11))
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static ppCat(ps1) {
@@ -1779,10 +1821,10 @@ lambda = (undefined, function (a, b) {
         tmp3 = pretty.andL(emp1, emp2);
         return runtime.safeCall(pretty.MkPrettyRep(tmp2, ll2, tmp3, false))
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static ppAboves(ps2, a10, b10) {
@@ -1876,13 +1918,13 @@ lambda = (undefined, function (a, b) {
             }
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static testPretty_nofib() {
@@ -1899,6 +1941,7 @@ lambda = (undefined, function (a, b) {
     tmp = testPretty_nofib_inst_22_23_tsni();
     return NofibPrelude.nofibListToString(tmp)
   }
-  static toString() { return "pretty"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "pretty"]; 
 });
 let pretty = pretty1; export default pretty;

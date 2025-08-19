@@ -34,6 +34,8 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   
   val runtimeNme = baseScp.allocateName(Elaborator.State.runtimeSymbol)
   val termNme = baseScp.allocateName(Elaborator.State.termSymbol)
+  val definitionMetadataNme = baseScp.allocateName(Elaborator.State.definitionMetadataSymbol)
+  val prettyPrintNme = baseScp.allocateName(Elaborator.State.prettyPrintSymbol)
   
   val ltl = new TraceLogger:
     override def doTrace = debugLowering.isSet || scope.exists:
@@ -58,6 +60,8 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         if msg.startsWith("Uncaught") then output(s"Failed to load $name: $msg")
       case r => output(s"Failed to load $name: $r")
     importRuntimeModule(runtimeNme, runtimeFile)
+    h.execute(s"const $definitionMetadataNme = Symbol.for(\"mlscript.definitionMetadata\");")
+    h.execute(s"const $prettyPrintNme = Symbol.for(\"mlscript.prettyPrint\");")
     if importQQ.isSet then importRuntimeModule(termNme, termFile)
     h
   
@@ -86,11 +90,11 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       val low = ltl.givenIn:
         codegen.Lowering()
       val jsb = ltl.givenIn:
-        new JSBuilder
+        JSBuilder()
       val le = low.program(blk)
       val nestedScp = baseScp.nest
       val je = nestedScp.givenIn:
-        jsb.program(le, N, wd)
+        jsb.programBody(le, N, wd)
       val jsStr = je.stripBreaks.mkString(100)
       output(s"JS (unsanitized):")
       output(jsStr)
@@ -146,15 +150,16 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           output(jsStr)
         preStr -> jsStr
       
-      def mkQuery(preStr: Str, jsStr: Str)(handleResult: Iterable[Str] => Unit) =
+      def mkQuery(preStr: Str, jsStr: Str)(k: Str => Unit) =
         val queryStr = jsStr.replaceAll("\n", " ")
         val (reply, stderr) = host.query(preStr, queryStr, !expectRuntimeOrCodeGenErrors && fixme.isUnset && todo.isUnset)
         reply match
           case ReplHost.Result(content) =>
-            val res :+ end = content.splitSane('\n') : @unchecked
-            // TODO: seems that not all programs end with "undefined" now
-            // assert(end == "undefined")
-            handleResult(res)
+            k(content)
+            // val res :+ end = content.splitSane('\n') : @unchecked
+            // // TODO: seems that not all programs end with "undefined" now
+            // // assert(end == "undefined")
+            // handleResult(res)
           case ReplHost.Empty =>
           case ReplHost.Unexecuted(message) => ???
           case ReplHost.Error(isSyntaxError, message, otherOutputs) =>
@@ -182,8 +187,9 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         host.execute(s"$resNme = undefined")
         
         mkQuery(preStr, jsStr): stdout =>
-          stdout.foreach: line =>
-            output(s"> ${line}")
+          stdout.splitSane('\n').init // should always ends with "undefined" (TODO: check)
+            .foreach: line =>
+              output(s"> ${line}")
         if traceJS.isSet then
           host.execute(s"$runtimeNme.TraceLogger.enabled = false")
       
@@ -193,25 +199,26 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           Return(
             Call(
               Value.Ref(Elaborator.State.runtimeSymbol).selSN("printRaw"),
-              Arg(false, Value.Ref(sym)) :: Nil)(true, false),
+              Arg(N, Value.Ref(sym)) :: Nil)(true, false),
           implct = true)
         val je = baseScp.givenIn:
           jsb.block(le, endSemi = false)
         val jsStr = je.stripBreaks.mkString(100)
         mkQuery("", jsStr): out =>
-          val result = out.mkString
+          // Omit the last line which is always "undefined" or the unit.
+          val result = out.lastIndexOf('\n') match
+            case n if n >= 0 => out.substring(0, n)
+            case _ => ""
           expect match
           case S(expected) if result =/= expected => raise:
             ErrorReport(msg"Expected: '${expected}', got: '${result}'" -> N :: Nil,
               source = Diagnostic.Source.Runtime)
           case _ => ()
           val anon = nme.isEmpty
-          handleResult(result)
           result match
           case "undefined" if anon =>
           case "()" if anon =>
-          case _ =>
-            output(s"${if anon then "" else s"$nme "}= ${result.indentNewLines("| ")}")
+          case _ => output(s"${if anon then "" else s"$nme "}= $result")
       
       val lowered0 = low.program(blk)
       val resSym -> resNme = getResSymAndResNme("block$res")

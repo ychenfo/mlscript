@@ -33,7 +33,7 @@ fun quickSortIntInt(xs) = if xs is
     fun lscomp2(ls) = if ls is
       Nil then Nil
       h :: t and
-        Predef.not(intintComp(h, x)) then h :: lscomp2(t)
+        not(intintComp(h, x)) then h :: lscomp2(t)
         else lscomp2(t)
     quickSortIntInt(lscomp1(xs)) +: (x :: quickSortIntInt(lscomp2(xs)))
 
@@ -48,7 +48,7 @@ fun quickSortIntChessSet(xs) = if force(xs) is
     fun lscomp2(ls) = if force(ls) is
       LzNil then lazy of () => LzNil
       LzCons(h, t) and
-        Predef.not(intChessSetComp(h, x)) then lazy of () => LzCons(h, lscomp2(t))
+        not(intChessSetComp(h, x)) then lazy of () => LzCons(h, lscomp2(t))
         else lscomp2(t)
     append_lz_lz(quickSortIntChessSet(lscomp1(xs)), lazy of () => LzCons(x, quickSortIntChessSet(lscomp2(xs))))
 
@@ -112,7 +112,7 @@ fun tup2InList(y, xs) = if xs is
     eqTup2(y, x) then true
     else tup2InList(y, xs)
 
-fun isSquareFree(x, b) = if b is Board(_, _, _, ts) then Predef.not(tup2InList(x, ts))
+fun isSquareFree(x, b) = if b is Board(_, _, _, ts) then not(tup2InList(x, ts))
 
 fun assignMoveNo(t, size, z) = if t is
   Nil then Nil

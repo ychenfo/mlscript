@@ -181,7 +181,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
       mat.arm.fold(Nil): c =>
         mat.selsInArm.map: selId =>
           val ctorFieldNames = c.asCls.get.getClsParamNames(preAnalyzer)
-          val selName = preAnalyzer.getResult(selId._1).asInstanceOf[Select].name
+          val selName = DeforestTupSelect.getDeforestSelNameFromResult(preAnalyzer.getResult(selId._1))
           val idx = ctorFieldNames.indexWhere(_ == selName.name)
           selId -> mat.tmpSymbolForASpecificCtorId(idx)
     for case (c, matchArmDest@FinalDest.Match(matchId, cls)) <- ctorIdToFinalDest do
@@ -200,7 +200,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
           val selExprIdToNewSymbol = mutable.Map.empty[SelId, VarSymbol]
           for cls <- cls do
             for selId <- matchArmDest.selsInArm do
-              val selName = preAnalyzer.getResult(selId._1).asInstanceOf[Select].name
+              val selName = DeforestTupSelect.getDeforestSelNameFromResult(preAnalyzer.getResult(selId._1))
               val symName = s"_deforest_${cls.nme}_${selName.name}_${selId._2.makeSuffix(preAnalyzer)}"
               val sym = selNameToNewSymbol.getOrElseUpdate.curried(selName):
                 VarSymbol(Tree.Ident(symName))
@@ -328,7 +328,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           lastWords(s"match rest $blk was expected to be used only once, but now it's used more than once")
       case S(L(fdef -> args)) =>
         Return(
-          Call(callNewFun(fdef.sym), args.map(a => Arg(false, Value.Ref(a))))(true, false),
+          Call(callNewFun(fdef.sym), args.map(a => Arg(N, Value.Ref(a))))(true, false),
           false)
       case N =>
         val scrutExprId -> instantiationId = matchId
@@ -371,7 +371,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             case S(_) => die
             case N => S(L(newFunDef -> freeVars))
           Return(
-            Call(callNewFun(sym), freeVars.map(a => Arg(false, Value.Ref(a))))(true, false),
+            Call(callNewFun(sym), freeVars.map(a => Arg(N, Value.Ref(a))))(true, false),
             false)
   
   object matchArmsOfFusingMatches:
@@ -512,20 +512,26 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
                   applyResult2(arg): r =>
                     Assign(tmpSym, r, rest)
           case FinalDest.Sel(s) =>
-            val selFieldName = preAnalyzer.getResult(s._1).asInstanceOf[Select].name.name
-            val idx = c.getClsParamNames(preAnalyzer).indexWhere(_ == selFieldName)
+            val selFieldName = DeforestTupSelect.getDeforestSelNameFromResult(preAnalyzer.getResult(s._1)).name
+            val idx = c.getClsParamNames(preAnalyzer).indexWhere(_ === selFieldName)
             k(args(idx))
       r match
+        case DeforestTupSelect(v, idx) if rewritePrepare.rewritingSelIds(r.uid.withInstId) =>
+          k(applyPath(v))
+        case DeforestTupSelect(v, idx) if rewritePrepare.selIdsInAllArmsToSymbolsToReplace.get(r.uid.withInstId).isDefined =>
+          k(Value.Ref(rewritePrepare.selIdsInAllArmsToSymbolsToReplace(r.uid.withInstId)))
         case call@Call(f, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(call.uid.withInstId) =>
           handleCallLike(f, call.uid):
             args.map:
-              case Arg(false, value) => value
-        case ins@Instantiate(cls, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(ins.uid.withInstId) =>
-          handleCallLike(cls, ins.uid)(args)
-        case v@Value.Arr(elems) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(v.uid.withInstId) =>
+              case Arg(N, value) => value
+        case ins@Instantiate(false, cls, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(ins.uid.withInstId) =>
+          handleCallLike(cls, ins.uid):
+            args.map:
+              case Arg(N, value) => value
+        case v@Value.Arr(false, elems) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(v.uid.withInstId) =>
           handleCallLike(v, v.uid):
             elems.map:
-              case Arg(false, value) => value
+              case Arg(N, value) => value
         case _ => super.applyResult2(r)(k)
     
     override def applyPath(p: Path): Path = p match
@@ -645,14 +651,14 @@ class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends Block
       case FunDefn(owner, sym, params, body) =>
         val paramSymbols = params.flatMap:
           case ParamList(_, params, restParam) => (params ++ restParam).map:
-            case Param(sym = sym, _) => sym
+            case Param(_, sym, _, _) => sym
         ctx += sym
         ctx ++= paramSymbols
         applyBlock(body)
         ctx --= paramSymbols
         applyBlock(rest)
         ctx -= sym
-      case ValDefn(owner, k, sym, rhs) =>
+      case ValDefn(_, sym, rhs) =>
         ctx += sym
         applyPath(rhs)
         applyBlock(rest)
@@ -714,6 +720,19 @@ class FreeVarTraverserForMatchConsideringDeforestation(
       result --= selsReplacementByCurrentMatch.values
       result --= ctx
     case _ => super.applyBlock(b)
+  
+  override def applyResult(r: Result): Unit =
+    given Elaborator.State = drwp.preAnalyzer.elabState
+    r match
+    case DeforestTupSelect(qual, name) => selsReplacementNotForThisMatch.get(r.uid -> instantiationId) match
+      case None => qual match
+        // if it is the scrut of current match and the computation containing
+        // this selection is moved, then the selection will be replaced and there will be no free vars
+        case Value.Ref(l) if l is currentMatchScrutSymbol => ()
+        case _ => super.applyResult(r)
+      case Some(s) => result += s
+    case _ => super.applyResult(r)
+    
   
   override def applyPath(p: Path): Unit = p match
     case p@Select(qual, name) => selsReplacementNotForThisMatch.get(p.uid -> instantiationId) match
@@ -787,7 +806,7 @@ extension (ps: Ls[VarSymbol])
 
 extension (ss: Ls[Symbol])
   def asArgsList = ss.map: s =>
-    Arg(false, Value.Ref(s))
+    Arg(N, Value.Ref(s))
 
 extension (instId: InstantiationId)
   def makeSuffix(preAnalyzer: DeforestPreAnalyzer) =

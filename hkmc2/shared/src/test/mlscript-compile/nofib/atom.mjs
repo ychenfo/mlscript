@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -22,7 +24,7 @@ show_inst_0_1_tsni = function show_inst_0_1_tsni(s) {
     tmp = lscomp_inst_0_1_2_tsni(pos);
     return stringListConcat_inst_0_1_14_tsni(tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp_inst_0_1_2_tsni = function lscomp_inst_0_1_2_tsni(ls) {
@@ -51,7 +53,7 @@ lscomp_inst_0_1_2_tsni = function lscomp_inst_0_1_2_tsni(ls) {
       return NofibPrelude.stringConcat(h, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 testforce_inst_3_tsni = function testforce_inst_3_tsni(k, ss) {
@@ -98,7 +100,7 @@ scalarMut_inst_3_4_tsni = function scalarMut_inst_3_4_tsni(c, fs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 testforce_inst_5_tsni = function testforce_inst_5_tsni(k, ss) {
@@ -124,10 +126,10 @@ lambda$_inst_5_tsni = function lambda$_inst_5_tsni(k, ss) {
       tmp3 = testforce_inst_5_tsni(k, atoms);
       return NofibPrelude.LzCons(tmp2, tmp3)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 scalarMut_inst_5_4_tsni = function scalarMut_inst_5_4_tsni(c, fs) {
@@ -164,7 +166,7 @@ scalarMut_inst_5_4_tsni = function scalarMut_inst_5_4_tsni(c, fs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_6_tsni = (undefined, function (k, ss) {
@@ -190,10 +192,10 @@ lambda$_inst_6_tsni = function lambda$_inst_6_tsni(k, ss) {
       tmp3 = atom1.testforce(k, atoms);
       return NofibPrelude.LzCons(tmp2, tmp3)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 scalarMut_inst_6_4_tsni = function scalarMut_inst_6_4_tsni(c, fs) {
@@ -230,7 +232,7 @@ scalarMut_inst_6_4_tsni = function scalarMut_inst_6_4_tsni(c, fs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp_inst_7_2_tsni = function lscomp_inst_7_2_tsni(ls) {
@@ -259,7 +261,7 @@ lscomp_inst_7_2_tsni = function lscomp_inst_7_2_tsni(ls) {
       return NofibPrelude.stringConcat(h, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 testforce_inst_8_9_tsni = function testforce_inst_8_9_tsni(k, ss) {
@@ -290,10 +292,10 @@ lambda$_inst_8_9_tsni = function lambda$_inst_8_9_tsni(k, ss) {
       tmp3 = testforce_inst_8_9_tsni(k, atoms);
       return NofibPrelude.LzCons(tmp2, tmp3)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 scalarMut_inst_8_9_4_tsni = function scalarMut_inst_8_9_4_tsni(c, fs) {
@@ -312,7 +314,7 @@ show_inst_8_10_1_tsni = function show_inst_8_10_1_tsni(s) {
     tmp = lscomp_inst_8_10_1_2_tsni(pos);
     return stringListConcat_inst_8_10_1_14_tsni(tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp_inst_8_10_1_2_tsni = function lscomp_inst_8_10_1_2_tsni(ls) {
@@ -341,7 +343,7 @@ lscomp_inst_8_10_1_2_tsni = function lscomp_inst_8_10_1_2_tsni(ls) {
       return NofibPrelude.stringConcat(h, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 take_lz_inst_8_11_tsni = function take_lz_inst_8_11_tsni(n, ls) {
@@ -452,7 +454,7 @@ show_inst_12_13_10_1_tsni = function show_inst_12_13_10_1_tsni(s) {
     tmp = lscomp_inst_12_13_10_1_2_tsni(pos);
     return stringListConcat_inst_12_13_10_1_14_tsni(tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp_inst_12_13_10_1_2_tsni = function lscomp_inst_12_13_10_1_2_tsni(ls) {
@@ -481,7 +483,7 @@ lscomp_inst_12_13_10_1_2_tsni = function lscomp_inst_12_13_10_1_2_tsni(ls) {
       return NofibPrelude.stringConcat(h, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 take_lz_inst_12_13_11_tsni = function take_lz_inst_12_13_11_tsni(n, ls) {
@@ -562,10 +564,10 @@ lambda$_inst_12_13_9_tsni = function lambda$_inst_12_13_9_tsni(k, ss) {
       tmp3 = testforce_inst_12_13_9_tsni(k, atoms);
       return NofibPrelude.LzCons(tmp2, tmp3)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 scalarMut_inst_12_13_9_4_tsni = function scalarMut_inst_12_13_9_4_tsni(c, fs) {
@@ -618,7 +620,7 @@ lscomp1 = function lscomp(ls) {
     tmp2 = lscomp1(t);
     return NofibPrelude.Cons(tmp1, tmp2)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$2 = function lambda$(dt, x, y) {
@@ -657,7 +659,7 @@ lscomp = function lscomp(ls) {
     tmp2 = lscomp(t);
     return NofibPrelude.Cons(tmp1, tmp2)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$ = function lambda$(k, ss) {
@@ -678,10 +680,10 @@ lambda$ = function lambda$(k, ss) {
       tmp3 = testforce_inst_3_tsni(k, atoms);
       return NofibPrelude.LzCons(tmp2, tmp3)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda = (undefined, function (k, ss) {
@@ -693,15 +695,19 @@ lambda = (undefined, function (k, ss) {
   static {
     atom1 = atom;
     this.State = function State(position1, velocity1) {
-      return new State.class(position1, velocity1);
+      return globalThis.Object.freeze(new State.class(position1, velocity1));
     };
-    this.State.class = class State {
-      constructor(position, velocity) {
-        this.position = position;
-        this.velocity = velocity;
+    Object.defineProperty(this.State, "class", {
+      enumerable: true,
+      value: class State {
+        constructor(position, velocity) {
+          this.position = position;
+          this.velocity = velocity;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "State", ["position", "velocity"]]; 
       }
-      toString() { return "State(" + runtime.render(this.position) + ", " + runtime.render(this.velocity) + ")"; }
-    };
+    });
   }
   static dotPlus(fs, gs) {
     let param0, param1, f, fs1, param01, param11, g, gs1, tmp, tmp1;
@@ -725,10 +731,10 @@ lambda = (undefined, function (k, ss) {
             tmp1 = atom.dotPlus(fs1, gs1);
             return NofibPrelude.Cons(tmp, tmp1)
           } else {
-            throw new globalThis.Error("match error");
+            throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     }
@@ -768,7 +774,7 @@ lambda = (undefined, function (k, ss) {
       tmp1 = atom.scalarMut(c, fs3);
       return NofibPrelude.Cons(tmp, tmp1)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static testforce(k, ss) {
@@ -786,7 +792,7 @@ lambda = (undefined, function (k, ss) {
       tmp = lscomp_inst_7_2_tsni(pos);
       return stringListConcat_inst_7_14_tsni(tmp)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static propagate(dt, aforce, state) {
@@ -802,7 +808,7 @@ lambda = (undefined, function (k, ss) {
       tmp3 = atom.dotPlus(vel, tmp2);
       return atom.State(tmp1, tmp3)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static runExperiment(law, dt1, param, init) {
@@ -858,6 +864,7 @@ lambda = (undefined, function (k, ss) {
   static main() {
     return testAtom_nofib_inst_12_13_tsni(20)
   }
-  static toString() { return "atom"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "atom"]; 
 });
 let atom = atom1; export default atom;

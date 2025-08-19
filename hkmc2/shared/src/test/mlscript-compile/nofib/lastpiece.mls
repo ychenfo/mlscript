@@ -451,7 +451,7 @@ fun aboveNest(p, g, k, q) = if p is
 fun nilAboveNest(g, k, q) = if
   q is Empty then Empty
   q is Nest(k1, q1) then nilAboveNest(g, k + k1, q1)
-  Predef.not(g) and (k > 0) then TextBeside(NoAnnot(Str(indent(k)), k), q)
+  not(g) and (k > 0) then TextBeside(NoAnnot(Str(indent(k)), k), q)
   else NilAbove(mkNest(k, q))
   
 fun printDoc(d) =

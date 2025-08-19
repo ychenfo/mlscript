@@ -11,7 +11,7 @@ empty.0
 :sjs
 let single = [1]
 //│ JS (unsanitized):
-//│ let single, arr1; arr1 = [ 1 ]; single = arr1;
+//│ let single, arr1; arr1 = globalThis.Object.freeze([ 1 ]); single = arr1;
 //│ single = [1]
 
 single.0
@@ -21,7 +21,7 @@ single.0
 :sjs
 val single = [1]
 //│ JS (unsanitized):
-//│ let single1, arr2; arr2 = [ 1 ]; single1 = arr2;
+//│ let single1, arr2; arr2 = globalThis.Object.freeze([ 1 ]); single1 = arr2;
 //│ single = [1]
 
 single.0
@@ -60,7 +60,7 @@ set Array.prototype.toString =
 //│ = [1, 2, 3]
 
 new Array(4)
-//│ = [undefined, undefined, undefined, undefined]
+//│ = [<4 empty items>]
 
 
 // TODO also sanity-check these accesses

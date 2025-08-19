@@ -51,16 +51,19 @@ f(AA(AA(3)))
 //│     if (scrut instanceof AA1.class) {
 //│       return x.x.x
 //│     } else {
-//│       throw new globalThis.Error("match error");
+//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│     }
 //│   } else {
-//│     throw new globalThis.Error("match error");
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ tmp = AA1(3);
 //│ tmp1 = AA1(tmp);
 //│ f(tmp1)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
+//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
+//│ 
 //│ let f, tmp, tmp1, f_inst_0_tsni, _deforest_AA_x;
 //│ f_inst_0_tsni = function f_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())
@@ -72,10 +75,10 @@ f(AA(AA(3)))
 //│     if (scrut instanceof AA1.class) {
 //│       return x.x.x
 //│     } else {
-//│       throw new globalThis.Error("match error");
+//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│     }
 //│   } else {
-//│     throw new globalThis.Error("match error");
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ tmp = AA1(3);
@@ -86,7 +89,7 @@ f(AA(AA(3)))
 //│   if (scrut instanceof AA1.class) {
 //│     return _deforest_AA_x.x
 //│   } else {
-//│     throw new this.Error("match error");
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ f_inst_0_tsni(tmp1)
@@ -94,7 +97,7 @@ f(AA(AA(3)))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AA
 //│ -------------- executing -------------
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -146,10 +149,10 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│     if (param0 instanceof AA1.class) {
 //│       return 0
 //│     } else {
-//│       throw new globalThis.Error("match error");
+//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│     }
 //│   } else {
-//│     throw new globalThis.Error("match error");
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ tmp4 = AA1(10);
@@ -167,6 +170,9 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ tmp15 = test(B1);
 //│ tmp14 + tmp15
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
+//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
+//│ 
 //│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, test_inst_0_tsni, test_inst_1_tsni, test_inst_2_tsni, _deforest_AA_x1, _deforest_AA_x2, _deforest_AA_x3, _deforest_AA_x4;
 //│ test_inst_0_tsni = function test_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())
@@ -227,10 +233,10 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│     if (param0 instanceof AA1.class) {
 //│       return 0
 //│     } else {
-//│       throw new globalThis.Error("match error");
+//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│     }
 //│   } else {
-//│     throw new globalThis.Error("match error");
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ _deforest_AA_x4 = 10;
@@ -296,10 +302,10 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
 //│ Ref(member:B)@3@inst__tsni --> Ref(x)@inst_0_tsni@dflt
-//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(x)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Ref($tmp))))@5@inst__tsni --> Ref($param0)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(10)))))@6@inst__tsni --> Ref($param0)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(false,Lit(IntLit(10)))))@7@inst__tsni --> Ref($param0)@inst_2_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@4@inst__tsni --> Ref(x)@inst_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@5@inst__tsni --> Ref($param0)@inst_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(10)))))@6@inst__tsni --> Ref($param0)@inst_1_tsni@AA
+//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(10)))))@7@inst__tsni --> Ref($param0)@inst_2_tsni@AA
 //│ -------------- executing -------------
 //│ = 78
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

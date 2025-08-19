@@ -137,7 +137,7 @@ fun addlemma(lspls, term) = if lspls is
   Atom(x) then throw new Error("error")
   Conss([x, y]) then
     let z = car(y)
-    if listEq(tv(x), nofibStringToList("equal")) and (Predef.not(atom(z)))
+    if listEq(tv(x), nofibStringToList("equal")) and (not(atom(z)))
     then addtoLUT([tv(car(z)), Conss([x, y]), term])
     else throw new Error("error")
 

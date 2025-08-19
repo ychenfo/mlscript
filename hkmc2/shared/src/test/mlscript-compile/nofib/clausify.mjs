@@ -1,8 +1,10 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let lscomp, clausify1, lambda, lscomp$, lscomp$_inst_0_1_tsni, tautclause_inst_2_3_tsni, lscomp$_inst_2_3_1_tsni, uniclHelper_inst_4_5_tsni, tautclause_inst_4_5_3_tsni, lscomp$_inst_4_5_3_1_tsni, interleave_inst_6_7_tsni, interleave_inst_6_8_tsni, unicl_inst_9_10_tsni, uniclHelper_inst_9_10_5_tsni, tautclause_inst_9_10_5_3_tsni, lscomp$_inst_9_10_5_3_1_tsni, split_inst_9_11_tsni, splitHelper_inst_9_11_12_tsni, disp_inst_9_13_tsni, interleave_inst_9_13_7_tsni, interleave_inst_9_13_8_tsni, map_inst_9_14_tsni, clauses_inst_15_16_tsni, map_inst_15_16_14_tsni, disp_inst_15_16_13_tsni, interleave_inst_15_16_13_7_tsni, interleave_inst_15_16_13_8_tsni, unicl_inst_15_16_10_tsni, uniclHelper_inst_15_16_10_5_tsni, tautclause_inst_15_16_10_5_3_tsni, lscomp$_inst_15_16_10_5_3_1_tsni, split_inst_15_16_11_tsni, splitHelper_inst_15_16_11_12_tsni, replicate_inst_15_17_tsni, map_inst_15_18_tsni, concat_inst_15_16_19_tsni, append_inst_15_16_19_20_tsni, testClausify_nofib_inst_21_22_tsni, map_inst_21_22_18_tsni, clauses_inst_21_22_16_tsni, unicl_inst_21_22_16_10_tsni, uniclHelper_inst_21_22_16_10_5_tsni, tautclause_inst_21_22_16_10_5_3_tsni, lscomp$_inst_21_22_16_10_5_3_1_tsni, split_inst_21_22_16_11_tsni, splitHelper_inst_21_22_16_11_12_tsni, disp_inst_21_22_16_13_tsni, interleave_inst_21_22_16_13_7_tsni, interleave_inst_21_22_16_13_8_tsni, map_inst_21_22_16_14_tsni, concat_inst_21_22_16_19_tsni, append_inst_21_22_16_19_20_tsni, replicate_inst_21_22_17_tsni, concat_inst_21_22_23_tsni, append_inst_21_22_23_20_tsni, listNeq_inst_0_24_tsni, listNeq_inst_2_3_24_tsni, listNeq_inst_4_5_3_24_tsni, append_inst_6_25_tsni, append_inst_6_26_tsni, listNeq_inst_9_10_5_3_24_tsni, foldr_inst_9_10_27_tsni, append_inst_9_13_25_tsni, append_inst_9_13_26_tsni, concat_inst_9_19_tsni, append_inst_15_16_13_25_tsni, append_inst_15_16_13_26_tsni, listNeq_inst_15_16_10_5_3_24_tsni, foldr_inst_15_16_10_27_tsni, concat_inst_15_23_tsni, append_inst_15_23_20_tsni, listNeq_inst_21_22_16_10_5_3_24_tsni, foldr_inst_21_22_16_10_27_tsni, append_inst_21_22_16_13_25_tsni, append_inst_21_22_16_13_26_tsni, nofibListToString_inst_21_28_tsni;
+let lscomp, clausify1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lscomp$, lscomp$_inst_0_1_tsni, tautclause_inst_2_3_tsni, lscomp$_inst_2_3_1_tsni, uniclHelper_inst_4_5_tsni, tautclause_inst_4_5_3_tsni, lscomp$_inst_4_5_3_1_tsni, interleave_inst_6_7_tsni, interleave_inst_6_8_tsni, unicl_inst_9_10_tsni, uniclHelper_inst_9_10_5_tsni, tautclause_inst_9_10_5_3_tsni, lscomp$_inst_9_10_5_3_1_tsni, split_inst_9_11_tsni, splitHelper_inst_9_11_12_tsni, disp_inst_9_13_tsni, interleave_inst_9_13_7_tsni, interleave_inst_9_13_8_tsni, map_inst_9_14_tsni, clauses_inst_15_16_tsni, map_inst_15_16_14_tsni, disp_inst_15_16_13_tsni, interleave_inst_15_16_13_7_tsni, interleave_inst_15_16_13_8_tsni, unicl_inst_15_16_10_tsni, uniclHelper_inst_15_16_10_5_tsni, tautclause_inst_15_16_10_5_3_tsni, lscomp$_inst_15_16_10_5_3_1_tsni, split_inst_15_16_11_tsni, splitHelper_inst_15_16_11_12_tsni, replicate_inst_15_17_tsni, map_inst_15_18_tsni, concat_inst_15_16_19_tsni, append_inst_15_16_19_20_tsni, testClausify_nofib_inst_21_22_tsni, map_inst_21_22_18_tsni, clauses_inst_21_22_16_tsni, unicl_inst_21_22_16_10_tsni, uniclHelper_inst_21_22_16_10_5_tsni, tautclause_inst_21_22_16_10_5_3_tsni, lscomp$_inst_21_22_16_10_5_3_1_tsni, split_inst_21_22_16_11_tsni, splitHelper_inst_21_22_16_11_12_tsni, disp_inst_21_22_16_13_tsni, interleave_inst_21_22_16_13_7_tsni, interleave_inst_21_22_16_13_8_tsni, map_inst_21_22_16_14_tsni, concat_inst_21_22_16_19_tsni, append_inst_21_22_16_19_20_tsni, replicate_inst_21_22_17_tsni, concat_inst_21_22_23_tsni, append_inst_21_22_23_20_tsni, listNeq_inst_0_24_tsni, listNeq_inst_2_3_24_tsni, listNeq_inst_4_5_3_24_tsni, append_inst_6_25_tsni, append_inst_6_26_tsni, listNeq_inst_9_10_5_3_24_tsni, foldr_inst_9_10_27_tsni, append_inst_9_13_25_tsni, append_inst_9_13_26_tsni, concat_inst_9_19_tsni, append_inst_15_16_13_25_tsni, append_inst_15_16_13_26_tsni, listNeq_inst_15_16_10_5_3_24_tsni, foldr_inst_15_16_10_27_tsni, concat_inst_15_23_tsni, append_inst_15_23_20_tsni, listNeq_inst_21_22_16_10_5_3_24_tsni, foldr_inst_21_22_16_10_27_tsni, append_inst_21_22_16_13_25_tsni, append_inst_21_22_16_13_26_tsni, nofibListToString_inst_21_28_tsni;
 lscomp$_inst_0_1_tsni = function lscomp$_inst_0_1_tsni(a, ls) {
   let param0, param1, h, t, scrut, tmp, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
@@ -48,20 +50,20 @@ lscomp$_inst_0_1_tsni = function lscomp$_inst_0_1_tsni(a, ls) {
       return lscomp$_inst_0_1_tsni(a, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 tautclause_inst_2_3_tsni = function tautclause_inst_2_3_tsni(c_a) {
   let first1, first0, c, a, tmp;
-  if (globalThis.Array.isArray(c_a) && c_a.length === 2) {
-    first0 = c_a[0];
-    first1 = c_a[1];
+  if (runtime.Tuple.isArrayLike(c_a) && c_a.length === 2) {
+    first0 = runtime.Tuple.get(c_a, 0);
+    first1 = runtime.Tuple.get(c_a, 1);
     c = first0;
     a = first1;
     tmp = lscomp$_inst_2_3_1_tsni(a, c);
     return listNeq_inst_2_3_24_tsni(tmp, NofibPrelude.Nil)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp$_inst_2_3_1_tsni = function lscomp$_inst_2_3_1_tsni(a, ls) {
@@ -109,7 +111,7 @@ lscomp$_inst_2_3_1_tsni = function lscomp$_inst_2_3_1_tsni(a, ls) {
       return lscomp$_inst_2_3_1_tsni(a, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 uniclHelper_inst_4_5_tsni = function uniclHelper_inst_4_5_tsni(p, x) {
@@ -125,15 +127,15 @@ uniclHelper_inst_4_5_tsni = function uniclHelper_inst_4_5_tsni(p, x) {
 };
 tautclause_inst_4_5_3_tsni = function tautclause_inst_4_5_3_tsni(c_a) {
   let first1, first0, c, a, tmp;
-  if (globalThis.Array.isArray(c_a) && c_a.length === 2) {
-    first0 = c_a[0];
-    first1 = c_a[1];
+  if (runtime.Tuple.isArrayLike(c_a) && c_a.length === 2) {
+    first0 = runtime.Tuple.get(c_a, 0);
+    first1 = runtime.Tuple.get(c_a, 1);
     c = first0;
     a = first1;
     tmp = lscomp$_inst_4_5_3_1_tsni(a, c);
     return listNeq_inst_4_5_3_24_tsni(tmp, NofibPrelude.Nil)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp$_inst_4_5_3_1_tsni = function lscomp$_inst_4_5_3_1_tsni(a, ls) {
@@ -181,7 +183,7 @@ lscomp$_inst_4_5_3_1_tsni = function lscomp$_inst_4_5_3_1_tsni(a, ls) {
       return lscomp$_inst_4_5_3_1_tsni(a, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 interleave_inst_6_7_tsni = function interleave_inst_6_7_tsni(xs, ys) {
@@ -208,7 +210,7 @@ interleave_inst_6_7_tsni = function interleave_inst_6_7_tsni(xs, ys) {
       return ys1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 interleave_inst_6_8_tsni = function interleave_inst_6_8_tsni(xs, ys) {
@@ -235,7 +237,7 @@ interleave_inst_6_8_tsni = function interleave_inst_6_8_tsni(xs, ys) {
       return ys1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unicl_inst_9_10_tsni = function unicl_inst_9_10_tsni(a) {
@@ -254,15 +256,15 @@ uniclHelper_inst_9_10_5_tsni = function uniclHelper_inst_9_10_5_tsni(p, x) {
 };
 tautclause_inst_9_10_5_3_tsni = function tautclause_inst_9_10_5_3_tsni(c_a) {
   let first1, first0, c, a, tmp;
-  if (globalThis.Array.isArray(c_a) && c_a.length === 2) {
-    first0 = c_a[0];
-    first1 = c_a[1];
+  if (runtime.Tuple.isArrayLike(c_a) && c_a.length === 2) {
+    first0 = runtime.Tuple.get(c_a, 0);
+    first1 = runtime.Tuple.get(c_a, 1);
     c = first0;
     a = first1;
     tmp = lscomp$_inst_9_10_5_3_1_tsni(a, c);
     return listNeq_inst_9_10_5_3_24_tsni(tmp, NofibPrelude.Nil)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp$_inst_9_10_5_3_1_tsni = function lscomp$_inst_9_10_5_3_1_tsni(a, ls) {
@@ -310,7 +312,7 @@ lscomp$_inst_9_10_5_3_1_tsni = function lscomp$_inst_9_10_5_3_1_tsni(a, ls) {
       return lscomp$_inst_9_10_5_3_1_tsni(a, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 split_inst_9_11_tsni = function split_inst_9_11_tsni(p) {
@@ -343,9 +345,9 @@ splitHelper_inst_9_11_12_tsni = function splitHelper_inst_9_11_12_tsni(p, a) {
 };
 disp_inst_9_13_tsni = function disp_inst_9_13_tsni(l_r) {
   let first1, first0, l, r, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-  if (globalThis.Array.isArray(l_r) && l_r.length === 2) {
-    first0 = l_r[0];
-    first1 = l_r[1];
+  if (runtime.Tuple.isArrayLike(l_r) && l_r.length === 2) {
+    first0 = runtime.Tuple.get(l_r, 0);
+    first1 = runtime.Tuple.get(l_r, 1);
     l = first0;
     r = first1;
     tmp = NofibPrelude.listLen(l);
@@ -360,7 +362,7 @@ disp_inst_9_13_tsni = function disp_inst_9_13_tsni(l_r) {
     tmp9 = NofibPrelude.append(tmp3, tmp8);
     return append_inst_9_13_26_tsni(tmp2, tmp9)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 interleave_inst_9_13_7_tsni = function interleave_inst_9_13_7_tsni(xs, ys) {
@@ -387,7 +389,7 @@ interleave_inst_9_13_7_tsni = function interleave_inst_9_13_7_tsni(xs, ys) {
       return ys1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 interleave_inst_9_13_8_tsni = function interleave_inst_9_13_8_tsni(xs, ys) {
@@ -414,7 +416,7 @@ interleave_inst_9_13_8_tsni = function interleave_inst_9_13_8_tsni(xs, ys) {
       return ys1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_9_14_tsni = function map_inst_9_14_tsni(f, xs) {
@@ -442,7 +444,7 @@ map_inst_9_14_tsni = function map_inst_9_14_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 clauses_inst_15_16_tsni = function clauses_inst_15_16_tsni(t) {
@@ -483,14 +485,14 @@ map_inst_15_16_14_tsni = function map_inst_15_16_14_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 disp_inst_15_16_13_tsni = function disp_inst_15_16_13_tsni(l_r) {
   let first1, first0, l, r, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-  if (globalThis.Array.isArray(l_r) && l_r.length === 2) {
-    first0 = l_r[0];
-    first1 = l_r[1];
+  if (runtime.Tuple.isArrayLike(l_r) && l_r.length === 2) {
+    first0 = runtime.Tuple.get(l_r, 0);
+    first1 = runtime.Tuple.get(l_r, 1);
     l = first0;
     r = first1;
     tmp = NofibPrelude.listLen(l);
@@ -505,7 +507,7 @@ disp_inst_15_16_13_tsni = function disp_inst_15_16_13_tsni(l_r) {
     tmp9 = NofibPrelude.append(tmp3, tmp8);
     return append_inst_15_16_13_26_tsni(tmp2, tmp9)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 interleave_inst_15_16_13_7_tsni = function interleave_inst_15_16_13_7_tsni(xs, ys) {
@@ -532,7 +534,7 @@ interleave_inst_15_16_13_7_tsni = function interleave_inst_15_16_13_7_tsni(xs, y
       return ys1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 interleave_inst_15_16_13_8_tsni = function interleave_inst_15_16_13_8_tsni(xs, ys) {
@@ -559,7 +561,7 @@ interleave_inst_15_16_13_8_tsni = function interleave_inst_15_16_13_8_tsni(xs, y
       return ys1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 unicl_inst_15_16_10_tsni = function unicl_inst_15_16_10_tsni(a) {
@@ -578,15 +580,15 @@ uniclHelper_inst_15_16_10_5_tsni = function uniclHelper_inst_15_16_10_5_tsni(p, 
 };
 tautclause_inst_15_16_10_5_3_tsni = function tautclause_inst_15_16_10_5_3_tsni(c_a) {
   let first1, first0, c, a, tmp;
-  if (globalThis.Array.isArray(c_a) && c_a.length === 2) {
-    first0 = c_a[0];
-    first1 = c_a[1];
+  if (runtime.Tuple.isArrayLike(c_a) && c_a.length === 2) {
+    first0 = runtime.Tuple.get(c_a, 0);
+    first1 = runtime.Tuple.get(c_a, 1);
     c = first0;
     a = first1;
     tmp = lscomp$_inst_15_16_10_5_3_1_tsni(a, c);
     return listNeq_inst_15_16_10_5_3_24_tsni(tmp, NofibPrelude.Nil)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp$_inst_15_16_10_5_3_1_tsni = function lscomp$_inst_15_16_10_5_3_1_tsni(a, ls) {
@@ -634,7 +636,7 @@ lscomp$_inst_15_16_10_5_3_1_tsni = function lscomp$_inst_15_16_10_5_3_1_tsni(a, 
       return lscomp$_inst_15_16_10_5_3_1_tsni(a, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 split_inst_15_16_11_tsni = function split_inst_15_16_11_tsni(p) {
@@ -728,7 +730,7 @@ append_inst_15_16_19_20_tsni = function append_inst_15_16_19_20_tsni(xs, ys) {
       return NofibPrelude.Cons(x, tmp)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 testClausify_nofib_inst_21_22_tsni = function testClausify_nofib_inst_21_22_tsni(n) {
@@ -769,15 +771,15 @@ uniclHelper_inst_21_22_16_10_5_tsni = function uniclHelper_inst_21_22_16_10_5_ts
 };
 tautclause_inst_21_22_16_10_5_3_tsni = function tautclause_inst_21_22_16_10_5_3_tsni(c_a) {
   let first1, first0, c, a, tmp;
-  if (globalThis.Array.isArray(c_a) && c_a.length === 2) {
-    first0 = c_a[0];
-    first1 = c_a[1];
+  if (runtime.Tuple.isArrayLike(c_a) && c_a.length === 2) {
+    first0 = runtime.Tuple.get(c_a, 0);
+    first1 = runtime.Tuple.get(c_a, 1);
     c = first0;
     a = first1;
     tmp = lscomp$_inst_21_22_16_10_5_3_1_tsni(a, c);
     return listNeq_inst_21_22_16_10_5_3_24_tsni(tmp, NofibPrelude.Nil)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp$_inst_21_22_16_10_5_3_1_tsni = function lscomp$_inst_21_22_16_10_5_3_1_tsni(a, ls) {
@@ -825,7 +827,7 @@ lscomp$_inst_21_22_16_10_5_3_1_tsni = function lscomp$_inst_21_22_16_10_5_3_1_ts
       return lscomp$_inst_21_22_16_10_5_3_1_tsni(a, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 split_inst_21_22_16_11_tsni = function split_inst_21_22_16_11_tsni(p) {
@@ -858,9 +860,9 @@ splitHelper_inst_21_22_16_11_12_tsni = function splitHelper_inst_21_22_16_11_12_
 };
 disp_inst_21_22_16_13_tsni = function disp_inst_21_22_16_13_tsni(l_r) {
   let first1, first0, l, r, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-  if (globalThis.Array.isArray(l_r) && l_r.length === 2) {
-    first0 = l_r[0];
-    first1 = l_r[1];
+  if (runtime.Tuple.isArrayLike(l_r) && l_r.length === 2) {
+    first0 = runtime.Tuple.get(l_r, 0);
+    first1 = runtime.Tuple.get(l_r, 1);
     l = first0;
     r = first1;
     tmp = NofibPrelude.listLen(l);
@@ -875,7 +877,7 @@ disp_inst_21_22_16_13_tsni = function disp_inst_21_22_16_13_tsni(l_r) {
     tmp9 = NofibPrelude.append(tmp3, tmp8);
     return append_inst_21_22_16_13_26_tsni(tmp2, tmp9)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 interleave_inst_21_22_16_13_7_tsni = function interleave_inst_21_22_16_13_7_tsni(xs, ys) {
@@ -902,7 +904,7 @@ interleave_inst_21_22_16_13_7_tsni = function interleave_inst_21_22_16_13_7_tsni
       return ys1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 interleave_inst_21_22_16_13_8_tsni = function interleave_inst_21_22_16_13_8_tsni(xs, ys) {
@@ -929,7 +931,7 @@ interleave_inst_21_22_16_13_8_tsni = function interleave_inst_21_22_16_13_8_tsni
       return ys1
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_21_22_16_14_tsni = function map_inst_21_22_16_14_tsni(f, xs) {
@@ -959,7 +961,7 @@ map_inst_21_22_16_14_tsni = function map_inst_21_22_16_14_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_21_22_16_19_tsni = function concat_inst_21_22_16_19_tsni(ls) {
@@ -997,7 +999,7 @@ append_inst_21_22_16_19_20_tsni = function append_inst_21_22_16_19_20_tsni(xs, y
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 replicate_inst_21_22_17_tsni = function replicate_inst_21_22_17_tsni(n, x) {
@@ -1124,7 +1126,7 @@ lscomp$ = function lscomp$(a, ls) {
       return lscomp$(a, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp = function lscomp(a) {
@@ -1132,106 +1134,188 @@ lscomp = function lscomp(a) {
     return lscomp$(a, ls)
   }
 };
-lambda = (undefined, function (s) {
+lambda$5 = function lambda$(c) {
+  return clausify1.charLeq(c, "z")
+};
+lambda2 = (undefined, function (c) {
+  return () => {
+    return lambda$5(c)
+  }
+});
+lambda$4 = function lambda$(c) {
+  return clausify1.charLeq(c, "z")
+};
+lambda3 = (undefined, function (c) {
+  return () => {
+    return lambda$4(c)
+  }
+});
+lambda$3 = function lambda$(c) {
+  return clausify1.charLeq(c, "z")
+};
+lambda4 = (undefined, function (c) {
+  return () => {
+    return lambda$3(c)
+  }
+});
+lambda$2 = function lambda$(c) {
+  return clausify1.charLeq(c, "z")
+};
+lambda5 = (undefined, function (c) {
+  return () => {
+    return lambda$2(c)
+  }
+});
+lambda$1 = function lambda$(c) {
+  return clausify1.charLeq(c, "z")
+};
+lambda6 = (undefined, function (c) {
+  return () => {
+    return lambda$1(c)
+  }
+});
+lambda1 = (undefined, function (s) {
   let tmp;
   tmp = clausify1.spri(s);
   return tmp != 0
+});
+lambda$ = function lambda$(dq) {
+  return clausify1.conjunct(dq)
+};
+lambda = (undefined, function (dq) {
+  return () => {
+    return lambda$(dq)
+  }
 });
 (class clausify {
   static {
     clausify1 = clausify;
     this.Formula = class Formula {
       constructor() {}
-      toString() { return "Formula"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Formula"]; 
     };
     this.Sym = function Sym(a1) {
-      return new Sym.class(a1);
+      return globalThis.Object.freeze(new Sym.class(a1));
     };
-    this.Sym.class = class Sym extends clausify.Formula {
-      constructor(a) {
-        super();
-        this.a = a;
+    Object.defineProperty(this.Sym, "class", {
+      enumerable: true,
+      value: class Sym extends clausify.Formula {
+        constructor(a) {
+          super();
+          this.a = a;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Sym", ["a"]]; 
       }
-      toString() { return "Sym(" + runtime.render(this.a) + ")"; }
-    };
+    });
     this.Not = function Not(a1) {
-      return new Not.class(a1);
+      return globalThis.Object.freeze(new Not.class(a1));
     };
-    this.Not.class = class Not extends clausify.Formula {
-      constructor(a) {
-        super();
-        this.a = a;
+    Object.defineProperty(this.Not, "class", {
+      enumerable: true,
+      value: class Not extends clausify.Formula {
+        constructor(a) {
+          super();
+          this.a = a;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Not", ["a"]]; 
       }
-      toString() { return "Not(" + runtime.render(this.a) + ")"; }
-    };
+    });
     this.Dis = function Dis(a1, b1) {
-      return new Dis.class(a1, b1);
+      return globalThis.Object.freeze(new Dis.class(a1, b1));
     };
-    this.Dis.class = class Dis extends clausify.Formula {
-      constructor(a, b) {
-        super();
-        this.a = a;
-        this.b = b;
+    Object.defineProperty(this.Dis, "class", {
+      enumerable: true,
+      value: class Dis extends clausify.Formula {
+        constructor(a, b) {
+          super();
+          this.a = a;
+          this.b = b;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Dis", ["a", "b"]]; 
       }
-      toString() { return "Dis(" + runtime.render(this.a) + ", " + runtime.render(this.b) + ")"; }
-    };
+    });
     this.Con = function Con(a1, b1) {
-      return new Con.class(a1, b1);
+      return globalThis.Object.freeze(new Con.class(a1, b1));
     };
-    this.Con.class = class Con extends clausify.Formula {
-      constructor(a, b) {
-        super();
-        this.a = a;
-        this.b = b;
+    Object.defineProperty(this.Con, "class", {
+      enumerable: true,
+      value: class Con extends clausify.Formula {
+        constructor(a, b) {
+          super();
+          this.a = a;
+          this.b = b;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Con", ["a", "b"]]; 
       }
-      toString() { return "Con(" + runtime.render(this.a) + ", " + runtime.render(this.b) + ")"; }
-    };
+    });
     this.Imp = function Imp(a1, b1) {
-      return new Imp.class(a1, b1);
+      return globalThis.Object.freeze(new Imp.class(a1, b1));
     };
-    this.Imp.class = class Imp extends clausify.Formula {
-      constructor(a, b) {
-        super();
-        this.a = a;
-        this.b = b;
+    Object.defineProperty(this.Imp, "class", {
+      enumerable: true,
+      value: class Imp extends clausify.Formula {
+        constructor(a, b) {
+          super();
+          this.a = a;
+          this.b = b;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Imp", ["a", "b"]]; 
       }
-      toString() { return "Imp(" + runtime.render(this.a) + ", " + runtime.render(this.b) + ")"; }
-    };
+    });
     this.Eqv = function Eqv(a1, b1) {
-      return new Eqv.class(a1, b1);
+      return globalThis.Object.freeze(new Eqv.class(a1, b1));
     };
-    this.Eqv.class = class Eqv extends clausify.Formula {
-      constructor(a, b) {
-        super();
-        this.a = a;
-        this.b = b;
+    Object.defineProperty(this.Eqv, "class", {
+      enumerable: true,
+      value: class Eqv extends clausify.Formula {
+        constructor(a, b) {
+          super();
+          this.a = a;
+          this.b = b;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Eqv", ["a", "b"]]; 
       }
-      toString() { return "Eqv(" + runtime.render(this.a) + ", " + runtime.render(this.b) + ")"; }
-    };
+    });
     this.StackFrame = class StackFrame {
       constructor() {}
-      toString() { return "StackFrame"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "StackFrame"]; 
     };
     this.Ast = function Ast(f1) {
-      return new Ast.class(f1);
+      return globalThis.Object.freeze(new Ast.class(f1));
     };
-    this.Ast.class = class Ast extends clausify.StackFrame {
-      constructor(f) {
-        super();
-        this.f = f;
+    Object.defineProperty(this.Ast, "class", {
+      enumerable: true,
+      value: class Ast extends clausify.StackFrame {
+        constructor(f) {
+          super();
+          this.f = f;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Ast", ["f"]]; 
       }
-      toString() { return "Ast(" + runtime.render(this.f) + ")"; }
-    };
+    });
     this.Lex = function Lex(s1) {
-      return new Lex.class(s1);
+      return globalThis.Object.freeze(new Lex.class(s1));
     };
-    this.Lex.class = class Lex extends clausify.StackFrame {
-      constructor(s) {
-        super();
-        this.s = s;
+    Object.defineProperty(this.Lex, "class", {
+      enumerable: true,
+      value: class Lex extends clausify.StackFrame {
+        constructor(s) {
+          super();
+          this.s = s;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Lex", ["s"]]; 
       }
-      toString() { return "Lex(" + runtime.render(this.s) + ")"; }
-    };
+    });
   }
   static charLt(a, b) {
     return a < b
@@ -1268,7 +1352,7 @@ lambda = (undefined, function (s) {
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static clauseHelper(p, x1) {
@@ -1283,52 +1367,52 @@ lambda = (undefined, function (s) {
     } else if (p instanceof clausify.Sym.class) {
       param0 = p.a;
       s1 = param0;
-      if (globalThis.Array.isArray(x1) && x1.length === 2) {
-        first0 = x1[0];
-        first1 = x1[1];
+      if (runtime.Tuple.isArrayLike(x1) && x1.length === 2) {
+        first0 = runtime.Tuple.get(x1, 0);
+        first1 = runtime.Tuple.get(x1, 1);
         c1 = first0;
         a5 = first1;
         tmp1 = clausify.insert(s1, c1);
-        arr = [
+        arr = globalThis.Object.freeze([
           tmp1,
           a5
-        ];
+        ]);
         return arr
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else if (p instanceof clausify.Not.class) {
       param0 = p.a;
       if (param0 instanceof clausify.Sym.class) {
         param01 = param0.a;
         s = param01;
-        if (globalThis.Array.isArray(x1) && x1.length === 2) {
-          first0 = x1[0];
-          first1 = x1[1];
+        if (runtime.Tuple.isArrayLike(x1) && x1.length === 2) {
+          first0 = runtime.Tuple.get(x1, 0);
+          first1 = runtime.Tuple.get(x1, 1);
           c = first0;
           a4 = first1;
           tmp2 = clausify.insert(s, a4);
-          arr1 = [
+          arr1 = globalThis.Object.freeze([
             c,
             tmp2
-          ];
+          ]);
           return arr1
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static clause(p1) {
     let arr;
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       NofibPrelude.Nil
-    ];
+    ]);
     return clausify.clauseHelper(p1, arr)
   } 
   static conjunct(p2) {
@@ -1342,7 +1426,7 @@ lambda = (undefined, function (s) {
     }
   } 
   static disin(p3) {
-    let param0, param1, p4, q, p5, q1, dp, dq, scrut, param01, param11, p6, q2, r, p7, param02, param12, q3, r1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
+    let param0, param1, p4, q, p5, q1, dp, dq, scrut, param01, param11, p6, q2, r, p7, param02, param12, q3, r1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, lambda$this;
     if (p3 instanceof clausify.Dis.class) {
       param0 = p3.a;
       param1 = p3.b;
@@ -1377,11 +1461,11 @@ lambda = (undefined, function (s) {
           tmp9 = clausify.disin(q1);
           dq = tmp9;
           tmp10 = clausify.conjunct(dp);
-          tmp11 = clausify.conjunct(dq);
-          scrut = tmp10 || tmp11;
+          lambda$this = runtime.safeCall(lambda(dq));
+          scrut = runtime.short_or(tmp10, lambda$this);
           if (scrut === true) {
-            tmp12 = clausify.Dis(dp, dq);
-            return clausify.disin(tmp12)
+            tmp11 = clausify.Dis(dp, dq);
+            return clausify.disin(tmp11)
           } else {
             return clausify.Dis(dp, dq)
           }
@@ -1392,9 +1476,9 @@ lambda = (undefined, function (s) {
       param1 = p3.b;
       p4 = param0;
       q = param1;
-      tmp13 = clausify.disin(p4);
-      tmp14 = clausify.disin(q);
-      return clausify.Con(tmp13, tmp14)
+      tmp12 = clausify.disin(p4);
+      tmp13 = clausify.disin(q);
+      return clausify.Con(tmp12, tmp13)
     } else {
       return p3
     }
@@ -1446,7 +1530,7 @@ lambda = (undefined, function (s) {
       tmp11 = clausify.elim(tmp10);
       return clausify.Con(tmp9, tmp11)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static interleave(xs, ys1) {
@@ -1461,7 +1545,7 @@ lambda = (undefined, function (s) {
     } else if (xs instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static negin(p5) {
@@ -1541,7 +1625,7 @@ lambda = (undefined, function (s) {
               if (scrut === true) {
                 return 5
               } else {
-                throw globalThis.Error(c);
+                throw globalThis.Error(c)
               }
             }
           }
@@ -1582,14 +1666,14 @@ lambda = (undefined, function (s) {
                   p8 = param01;
                   p7 = param01;
                   p6 = param01;
-                  throw new globalThis.Error("match error");
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
                 p9 = param01;
                 p8 = param01;
                 p7 = param01;
                 p6 = param01;
-                throw new globalThis.Error("match error");
+                throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else if (param03 === ">") {
               if (param11 instanceof NofibPrelude.Cons.class) {
@@ -1606,13 +1690,13 @@ lambda = (undefined, function (s) {
                   p8 = param01;
                   p7 = param01;
                   p6 = param01;
-                  throw new globalThis.Error("match error");
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
                 p8 = param01;
                 p7 = param01;
                 p6 = param01;
-                throw new globalThis.Error("match error");
+                throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else if (param03 === "|") {
               if (param11 instanceof NofibPrelude.Cons.class) {
@@ -1628,12 +1712,12 @@ lambda = (undefined, function (s) {
                 } else {
                   p7 = param01;
                   p6 = param01;
-                  throw new globalThis.Error("match error");
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
                 p7 = param01;
                 p6 = param01;
-                throw new globalThis.Error("match error");
+                throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else if (param03 === "&") {
               if (param11 instanceof NofibPrelude.Cons.class) {
@@ -1648,11 +1732,11 @@ lambda = (undefined, function (s) {
                   return NofibPrelude.Cons(tmp7, s2)
                 } else {
                   p6 = param01;
-                  throw new globalThis.Error("match error");
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
                 p6 = param01;
-                throw new globalThis.Error("match error");
+                throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else if (param03 === "~") {
               s1 = param11;
@@ -1660,27 +1744,27 @@ lambda = (undefined, function (s) {
               tmp9 = runtime.safeCall(clausify.Ast(tmp8));
               return NofibPrelude.Cons(tmp9, s1)
             } else {
-              throw new globalThis.Error("match error");
+              throw globalThis.Object.freeze(new globalThis.Error("match error"))
             }
           } else {
             p9 = param01;
             p8 = param01;
             p7 = param01;
             p6 = param01;
-            throw new globalThis.Error("match error");
+            throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
         } else {
           p9 = param01;
           p8 = param01;
           p7 = param01;
           p6 = param01;
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static spri(s1) {
@@ -1713,13 +1797,13 @@ lambda = (undefined, function (s) {
     }
   } 
   static redstar(s2) {
-    return NofibPrelude.while_(lambda, clausify.red, s2)
+    return NofibPrelude.while_(lambda1, clausify.red, s2)
   } 
   static spaces(n) {
     return NofibPrelude.replicate(n, " ")
   } 
   static parseHelper(t, s3) {
-    let param0, param1, c1, t1, scrut, scrut1, t2, scrut2, param01, param11, x2, param02, param12, param03, ss, t3, t4, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57;
+    let param0, param1, c1, t1, scrut, scrut1, t2, scrut2, param01, param11, x2, param02, param12, param03, ss, t3, t4, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
     if (t instanceof NofibPrelude.Nil.class) {
       return clausify.redstar(s3)
     } else if (t instanceof NofibPrelude.Cons.class) {
@@ -1753,134 +1837,134 @@ lambda = (undefined, function (s) {
                 c1 = param0;
                 t1 = param1;
                 tmp3 = clausify.charLeq("a", c1);
-                tmp4 = clausify.charLeq(c1, "z");
-                scrut1 = tmp3 && tmp4;
+                lambda$this = runtime.safeCall(lambda2(c1));
+                scrut1 = runtime.short_and(tmp3, lambda$this);
                 if (scrut1 === true) {
-                  tmp5 = runtime.safeCall(clausify.Sym(c1));
-                  tmp6 = runtime.safeCall(clausify.Ast(tmp5));
-                  tmp7 = NofibPrelude.Cons(tmp6, s3);
-                  return clausify.parseHelper(t1, tmp7)
+                  tmp4 = runtime.safeCall(clausify.Sym(c1));
+                  tmp5 = runtime.safeCall(clausify.Ast(tmp4));
+                  tmp6 = NofibPrelude.Cons(tmp5, s3);
+                  return clausify.parseHelper(t1, tmp6)
                 } else {
-                  tmp8 = clausify.spri(s3);
-                  tmp9 = clausify.opri(c1);
-                  scrut = tmp8 > tmp9;
+                  tmp7 = clausify.spri(s3);
+                  tmp8 = clausify.opri(c1);
+                  scrut = tmp7 > tmp8;
                   if (scrut === true) {
-                    tmp10 = NofibPrelude.Cons(c1, t1);
-                    tmp11 = clausify.red(s3);
-                    return clausify.parseHelper(tmp10, tmp11)
+                    tmp9 = NofibPrelude.Cons(c1, t1);
+                    tmp10 = clausify.red(s3);
+                    return clausify.parseHelper(tmp9, tmp10)
                   } else {
-                    tmp12 = runtime.safeCall(clausify.Lex(c1));
-                    tmp13 = NofibPrelude.Cons(tmp12, s3);
-                    return clausify.parseHelper(t1, tmp13)
+                    tmp11 = runtime.safeCall(clausify.Lex(c1));
+                    tmp12 = NofibPrelude.Cons(tmp11, s3);
+                    return clausify.parseHelper(t1, tmp12)
                   }
                 }
               }
             } else {
               c1 = param0;
               t1 = param1;
-              tmp14 = clausify.charLeq("a", c1);
-              tmp15 = clausify.charLeq(c1, "z");
-              scrut1 = tmp14 && tmp15;
+              tmp13 = clausify.charLeq("a", c1);
+              lambda$this1 = runtime.safeCall(lambda3(c1));
+              scrut1 = runtime.short_and(tmp13, lambda$this1);
               if (scrut1 === true) {
-                tmp16 = runtime.safeCall(clausify.Sym(c1));
-                tmp17 = runtime.safeCall(clausify.Ast(tmp16));
-                tmp18 = NofibPrelude.Cons(tmp17, s3);
-                return clausify.parseHelper(t1, tmp18)
+                tmp14 = runtime.safeCall(clausify.Sym(c1));
+                tmp15 = runtime.safeCall(clausify.Ast(tmp14));
+                tmp16 = NofibPrelude.Cons(tmp15, s3);
+                return clausify.parseHelper(t1, tmp16)
               } else {
-                tmp19 = clausify.spri(s3);
-                tmp20 = clausify.opri(c1);
-                scrut = tmp19 > tmp20;
+                tmp17 = clausify.spri(s3);
+                tmp18 = clausify.opri(c1);
+                scrut = tmp17 > tmp18;
                 if (scrut === true) {
-                  tmp21 = NofibPrelude.Cons(c1, t1);
-                  tmp22 = clausify.red(s3);
-                  return clausify.parseHelper(tmp21, tmp22)
+                  tmp19 = NofibPrelude.Cons(c1, t1);
+                  tmp20 = clausify.red(s3);
+                  return clausify.parseHelper(tmp19, tmp20)
                 } else {
-                  tmp23 = runtime.safeCall(clausify.Lex(c1));
-                  tmp24 = NofibPrelude.Cons(tmp23, s3);
-                  return clausify.parseHelper(t1, tmp24)
+                  tmp21 = runtime.safeCall(clausify.Lex(c1));
+                  tmp22 = NofibPrelude.Cons(tmp21, s3);
+                  return clausify.parseHelper(t1, tmp22)
                 }
               }
             }
           } else {
             c1 = param0;
             t1 = param1;
-            tmp25 = clausify.charLeq("a", c1);
-            tmp26 = clausify.charLeq(c1, "z");
-            scrut1 = tmp25 && tmp26;
+            tmp23 = clausify.charLeq("a", c1);
+            lambda$this2 = runtime.safeCall(lambda4(c1));
+            scrut1 = runtime.short_and(tmp23, lambda$this2);
             if (scrut1 === true) {
-              tmp27 = runtime.safeCall(clausify.Sym(c1));
-              tmp28 = runtime.safeCall(clausify.Ast(tmp27));
-              tmp29 = NofibPrelude.Cons(tmp28, s3);
-              return clausify.parseHelper(t1, tmp29)
+              tmp24 = runtime.safeCall(clausify.Sym(c1));
+              tmp25 = runtime.safeCall(clausify.Ast(tmp24));
+              tmp26 = NofibPrelude.Cons(tmp25, s3);
+              return clausify.parseHelper(t1, tmp26)
             } else {
-              tmp30 = clausify.spri(s3);
-              tmp31 = clausify.opri(c1);
-              scrut = tmp30 > tmp31;
+              tmp27 = clausify.spri(s3);
+              tmp28 = clausify.opri(c1);
+              scrut = tmp27 > tmp28;
               if (scrut === true) {
-                tmp32 = NofibPrelude.Cons(c1, t1);
-                tmp33 = clausify.red(s3);
-                return clausify.parseHelper(tmp32, tmp33)
+                tmp29 = NofibPrelude.Cons(c1, t1);
+                tmp30 = clausify.red(s3);
+                return clausify.parseHelper(tmp29, tmp30)
               } else {
-                tmp34 = runtime.safeCall(clausify.Lex(c1));
-                tmp35 = NofibPrelude.Cons(tmp34, s3);
-                return clausify.parseHelper(t1, tmp35)
+                tmp31 = runtime.safeCall(clausify.Lex(c1));
+                tmp32 = NofibPrelude.Cons(tmp31, s3);
+                return clausify.parseHelper(t1, tmp32)
               }
             }
           }
         } else {
           c1 = param0;
           t1 = param1;
-          tmp36 = clausify.charLeq("a", c1);
-          tmp37 = clausify.charLeq(c1, "z");
-          scrut1 = tmp36 && tmp37;
+          tmp33 = clausify.charLeq("a", c1);
+          lambda$this3 = runtime.safeCall(lambda5(c1));
+          scrut1 = runtime.short_and(tmp33, lambda$this3);
           if (scrut1 === true) {
-            tmp38 = runtime.safeCall(clausify.Sym(c1));
-            tmp39 = runtime.safeCall(clausify.Ast(tmp38));
-            tmp40 = NofibPrelude.Cons(tmp39, s3);
-            return clausify.parseHelper(t1, tmp40)
+            tmp34 = runtime.safeCall(clausify.Sym(c1));
+            tmp35 = runtime.safeCall(clausify.Ast(tmp34));
+            tmp36 = NofibPrelude.Cons(tmp35, s3);
+            return clausify.parseHelper(t1, tmp36)
           } else {
-            tmp41 = clausify.spri(s3);
-            tmp42 = clausify.opri(c1);
-            scrut = tmp41 > tmp42;
+            tmp37 = clausify.spri(s3);
+            tmp38 = clausify.opri(c1);
+            scrut = tmp37 > tmp38;
             if (scrut === true) {
-              tmp43 = NofibPrelude.Cons(c1, t1);
-              tmp44 = clausify.red(s3);
-              return clausify.parseHelper(tmp43, tmp44)
+              tmp39 = NofibPrelude.Cons(c1, t1);
+              tmp40 = clausify.red(s3);
+              return clausify.parseHelper(tmp39, tmp40)
             } else {
-              tmp45 = runtime.safeCall(clausify.Lex(c1));
-              tmp46 = NofibPrelude.Cons(tmp45, s3);
-              return clausify.parseHelper(t1, tmp46)
+              tmp41 = runtime.safeCall(clausify.Lex(c1));
+              tmp42 = NofibPrelude.Cons(tmp41, s3);
+              return clausify.parseHelper(t1, tmp42)
             }
           }
         }
       } else {
         c1 = param0;
         t1 = param1;
-        tmp47 = clausify.charLeq("a", c1);
-        tmp48 = clausify.charLeq(c1, "z");
-        scrut1 = tmp47 && tmp48;
+        tmp43 = clausify.charLeq("a", c1);
+        lambda$this4 = runtime.safeCall(lambda6(c1));
+        scrut1 = runtime.short_and(tmp43, lambda$this4);
         if (scrut1 === true) {
-          tmp49 = runtime.safeCall(clausify.Sym(c1));
-          tmp50 = runtime.safeCall(clausify.Ast(tmp49));
-          tmp51 = NofibPrelude.Cons(tmp50, s3);
-          return clausify.parseHelper(t1, tmp51)
+          tmp44 = runtime.safeCall(clausify.Sym(c1));
+          tmp45 = runtime.safeCall(clausify.Ast(tmp44));
+          tmp46 = NofibPrelude.Cons(tmp45, s3);
+          return clausify.parseHelper(t1, tmp46)
         } else {
-          tmp52 = clausify.spri(s3);
-          tmp53 = clausify.opri(c1);
-          scrut = tmp52 > tmp53;
+          tmp47 = clausify.spri(s3);
+          tmp48 = clausify.opri(c1);
+          scrut = tmp47 > tmp48;
           if (scrut === true) {
-            tmp54 = NofibPrelude.Cons(c1, t1);
-            tmp55 = clausify.red(s3);
-            return clausify.parseHelper(tmp54, tmp55)
+            tmp49 = NofibPrelude.Cons(c1, t1);
+            tmp50 = clausify.red(s3);
+            return clausify.parseHelper(tmp49, tmp50)
           } else {
-            tmp56 = runtime.safeCall(clausify.Lex(c1));
-            tmp57 = NofibPrelude.Cons(tmp56, s3);
-            return clausify.parseHelper(t1, tmp57)
+            tmp51 = runtime.safeCall(clausify.Lex(c1));
+            tmp52 = NofibPrelude.Cons(tmp51, s3);
+            return clausify.parseHelper(t1, tmp52)
           }
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static parse(t1) {
@@ -1895,13 +1979,13 @@ lambda = (undefined, function (s) {
         if (param1 instanceof NofibPrelude.Nil.class) {
           return f
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static splitHelper(p6, a4) {
@@ -1922,15 +2006,15 @@ lambda = (undefined, function (s) {
   } 
   static tautclause(c_a) {
     let first1, first0, c1, a5, tmp;
-    if (globalThis.Array.isArray(c_a) && c_a.length === 2) {
-      first0 = c_a[0];
-      first1 = c_a[1];
+    if (runtime.Tuple.isArrayLike(c_a) && c_a.length === 2) {
+      first0 = runtime.Tuple.get(c_a, 0);
+      first1 = runtime.Tuple.get(c_a, 1);
       c1 = first0;
       a5 = first1;
       tmp = lscomp$_inst_0_1_tsni(a5, c1);
       return listNeq_inst_0_24_tsni(tmp, NofibPrelude.Nil)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static uniclHelper(p8, x2) {
@@ -1949,9 +2033,9 @@ lambda = (undefined, function (s) {
   } 
   static disp(l_r) {
     let first1, first0, l, r, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-    if (globalThis.Array.isArray(l_r) && l_r.length === 2) {
-      first0 = l_r[0];
-      first1 = l_r[1];
+    if (runtime.Tuple.isArrayLike(l_r) && l_r.length === 2) {
+      first0 = runtime.Tuple.get(l_r, 0);
+      first1 = runtime.Tuple.get(l_r, 1);
       l = first0;
       r = first1;
       tmp = NofibPrelude.listLen(l);
@@ -1966,7 +2050,7 @@ lambda = (undefined, function (s) {
       tmp9 = NofibPrelude.append(tmp3, tmp8);
       return append_inst_6_26_tsni(tmp2, tmp9)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static clauses(t2) {
@@ -1993,6 +2077,7 @@ lambda = (undefined, function (s) {
     tmp = testClausify_nofib_inst_21_22_tsni(10);
     return nofibListToString_inst_21_28_tsni(tmp)
   }
-  static toString() { return "clausify"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "clausify"]; 
 });
 let clausify = clausify1; export default clausify;

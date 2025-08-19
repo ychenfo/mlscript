@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -257,7 +259,7 @@ lscomp2$ = function lscomp2$(j, t1, p2) {
     tmp = lscomp2$(j, t1, t2);
     return NofibPrelude.Cons(r, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp2 = function lscomp2(j, t1) {
@@ -277,7 +279,7 @@ lscomp1$ = function lscomp1$(j, p1) {
     tmp = cryptarithm11.addj(j, pjs);
     return lscomp2$(j, t1, tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp1 = function lscomp1(j) {
@@ -298,7 +300,7 @@ lscomp$ = function lscomp$(k, p1) {
     tmp1 = lscomp$(k, t1);
     return NofibPrelude.Cons(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp = function lscomp(k) {
@@ -373,37 +375,37 @@ lscomp = function lscomp(k) {
                           tmp4 = cryptarithm1.expand(n, i, n, e1, t, y);
                           return tmp3 == tmp4
                         } else {
-                          throw new globalThis.Error("match error");
+                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
                         }
                       } else {
-                        throw new globalThis.Error("match error");
+                        throw globalThis.Object.freeze(new globalThis.Error("match error"))
                       }
                     } else {
-                      throw new globalThis.Error("match error");
+                      throw globalThis.Object.freeze(new globalThis.Error("match error"))
                     }
                   } else {
-                    throw new globalThis.Error("match error");
+                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
                   }
                 } else {
-                  throw new globalThis.Error("match error");
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
-                throw new globalThis.Error("match error");
+                throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else {
-              throw new globalThis.Error("match error");
+              throw globalThis.Object.freeze(new globalThis.Error("match error"))
             }
           } else {
-            throw new globalThis.Error("match error");
+            throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static addj(j, ls) {
@@ -422,7 +424,7 @@ lscomp = function lscomp(k) {
       tmp4 = lscomp$(k, tmp3);
       return NofibPrelude.Cons(tmp2, tmp4)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static permutations(ls1) {
@@ -437,7 +439,7 @@ lscomp = function lscomp(k) {
       tmp = cryptarithm1.permutations(js);
       return lscomp1$(j1, tmp)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static testCryptarithm_nofib(n) {
@@ -449,6 +451,7 @@ lscomp = function lscomp(k) {
   static main() {
     return testCryptarithm_nofib_inst_6_7_tsni(1)
   }
-  static toString() { return "cryptarithm1"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "cryptarithm1"]; 
 });
 let cryptarithm1 = cryptarithm11; export default cryptarithm1;

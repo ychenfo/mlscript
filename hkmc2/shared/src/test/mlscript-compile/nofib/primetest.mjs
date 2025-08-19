@@ -1,8 +1,10 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let f, chop_, g, f1, f2, square, witness, mTest, primetest1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda$, chop_$, f$, g$, lambda$1, lambda$2, witness$, square$, mTest$, lambda$3, doInput_inst_0_tsni, lambda_inst_0_tsni, doLine_inst_0_1_tsni, multiTest_inst_0_1_2_tsni, mTest$_inst_0_1_2_3_tsni, singleTest_inst_0_1_2_3_4_tsni, random_inst_0_1_2_3_4_5_tsni, uniform_inst_0_1_2_3_4_5_6_tsni, map_inst_0_1_2_3_4_5_6_7_tsni, splitAt_lz_inst_0_1_2_3_4_5_8_tsni, chop_inst_0_1_2_3_4_5_9_tsni, chop_$_inst_0_1_2_3_4_5_9_10_tsni, divMod_inst_0_1_2_3_4_5_9_10_11_tsni, findKQ_inst_0_1_2_3_12_tsni, f_inst_0_1_2_3_12_13_tsni, divMod_inst_0_1_2_3_12_13_14_tsni, doInput_inst_15_tsni, lambda$_inst_15_tsni, doLine_inst_15_1_tsni, multiTest_inst_15_1_2_tsni, mTest$_inst_15_1_2_3_tsni, singleTest_inst_15_1_2_3_4_tsni, random_inst_15_1_2_3_4_5_tsni, uniform_inst_15_1_2_3_4_5_6_tsni, map_inst_15_1_2_3_4_5_6_7_tsni, splitAt_lz_inst_15_1_2_3_4_5_8_tsni, chop_inst_15_1_2_3_4_5_9_tsni, chop_$_inst_15_1_2_3_4_5_9_10_tsni, divMod_inst_15_1_2_3_4_5_9_10_11_tsni, findKQ_inst_15_1_2_3_12_tsni, f_inst_15_1_2_3_12_13_tsni, divMod_inst_15_1_2_3_12_13_14_tsni, findKQ_inst_16_12_tsni, f_inst_16_12_13_tsni, divMod_inst_16_12_13_14_tsni, singleTest_inst_16_4_tsni, random_inst_16_4_5_tsni, chop_inst_16_4_5_9_tsni, chop_$_inst_16_4_5_9_10_tsni, divMod_inst_16_4_5_9_10_11_tsni, splitAt_lz_inst_16_4_5_8_tsni, uniform_inst_16_4_5_6_tsni, map_inst_16_4_5_6_7_tsni, mTest$_inst_17_18_tsni, singleTest_inst_17_18_4_tsni, random_inst_17_18_4_5_tsni, uniform_inst_17_18_4_5_6_tsni, map_inst_17_18_4_5_6_7_tsni, splitAt_lz_inst_17_18_4_5_8_tsni, chop_inst_17_18_4_5_9_tsni, chop_$_inst_17_18_4_5_9_10_tsni, divMod_inst_17_18_4_5_9_10_11_tsni, findKQ_inst_17_18_12_tsni, f_inst_17_18_12_13_tsni, divMod_inst_17_18_12_13_14_tsni, divMod_inst_19_14_tsni, divMod_inst_20_11_tsni, chop_$_inst_21_22_tsni, divMod_inst_21_22_11_tsni, break__inst_23_24_tsni, chop_$_inst_25_10_tsni, divMod_inst_25_10_11_tsni, chop_inst_26_27_tsni, chop_$_inst_26_27_10_tsni, divMod_inst_26_27_10_11_tsni, f_inst_28_13_tsni, divMod_inst_28_13_14_tsni, chop_inst_29_9_tsni, chop_$_inst_29_9_10_tsni, divMod_inst_29_9_10_11_tsni, splitAt_lz_inst_29_8_tsni, uniform_inst_29_6_tsni, map_inst_29_6_7_tsni, random_inst_30_5_tsni, uniform_inst_30_5_6_tsni, map_inst_30_5_6_7_tsni, splitAt_lz_inst_30_5_8_tsni, chop_inst_30_5_9_tsni, chop_$_inst_30_5_9_10_tsni, divMod_inst_30_5_9_10_11_tsni, mTest$_inst_31_3_tsni, singleTest_inst_31_3_4_tsni, random_inst_31_3_4_5_tsni, uniform_inst_31_3_4_5_6_tsni, map_inst_31_3_4_5_6_7_tsni, splitAt_lz_inst_31_3_4_5_8_tsni, chop_inst_31_3_4_5_9_tsni, chop_$_inst_31_3_4_5_9_10_tsni, divMod_inst_31_3_4_5_9_10_11_tsni, findKQ_inst_31_3_12_tsni, f_inst_31_3_12_13_tsni, divMod_inst_31_3_12_13_14_tsni, multiTest_inst_32_2_tsni, mTest$_inst_32_2_3_tsni, findKQ_inst_32_2_3_12_tsni, f_inst_32_2_3_12_13_tsni, divMod_inst_32_2_3_12_13_14_tsni, singleTest_inst_32_2_3_4_tsni, random_inst_32_2_3_4_5_tsni, chop_inst_32_2_3_4_5_9_tsni, chop_$_inst_32_2_3_4_5_9_10_tsni, divMod_inst_32_2_3_4_5_9_10_11_tsni, splitAt_lz_inst_32_2_3_4_5_8_tsni, uniform_inst_32_2_3_4_5_6_tsni, map_inst_32_2_3_4_5_6_7_tsni, lambda_inst_33_tsni, lambda$_inst_33_tsni, doLine_inst_33_1_tsni, multiTest_inst_33_1_2_tsni, mTest$_inst_33_1_2_3_tsni, singleTest_inst_33_1_2_3_4_tsni, random_inst_33_1_2_3_4_5_tsni, uniform_inst_33_1_2_3_4_5_6_tsni, map_inst_33_1_2_3_4_5_6_7_tsni, splitAt_lz_inst_33_1_2_3_4_5_8_tsni, chop_inst_33_1_2_3_4_5_9_tsni, chop_$_inst_33_1_2_3_4_5_9_10_tsni, divMod_inst_33_1_2_3_4_5_9_10_11_tsni, findKQ_inst_33_1_2_3_12_tsni, f_inst_33_1_2_3_12_13_tsni, divMod_inst_33_1_2_3_12_13_14_tsni, doInput_inst_34_35_tsni, lambda_inst_34_35_tsni, lambda$_inst_34_35_tsni, doLine_inst_34_35_1_tsni, multiTest_inst_34_35_1_2_tsni, mTest$_inst_34_35_1_2_3_tsni, findKQ_inst_34_35_1_2_3_12_tsni, f_inst_34_35_1_2_3_12_13_tsni, divMod_inst_34_35_1_2_3_12_13_14_tsni, singleTest_inst_34_35_1_2_3_4_tsni, random_inst_34_35_1_2_3_4_5_tsni, chop_inst_34_35_1_2_3_4_5_9_tsni, chop_$_inst_34_35_1_2_3_4_5_9_10_tsni, divMod_inst_34_35_1_2_3_4_5_9_10_11_tsni, splitAt_lz_inst_34_35_1_2_3_4_5_8_tsni, uniform_inst_34_35_1_2_3_4_5_6_tsni, map_inst_34_35_1_2_3_4_5_6_7_tsni, lines_inst_36_37_tsni, break__inst_36_37_24_tsni, process_inst_36_38_tsni, doInput_inst_36_38_35_tsni, lambda_inst_36_38_35_tsni, lambda$_inst_36_38_35_tsni, doLine_inst_36_38_35_1_tsni, multiTest_inst_36_38_35_1_2_tsni, mTest$_inst_36_38_35_1_2_3_tsni, singleTest_inst_36_38_35_1_2_3_4_tsni, random_inst_36_38_35_1_2_3_4_5_tsni, uniform_inst_36_38_35_1_2_3_4_5_6_tsni, map_inst_36_38_35_1_2_3_4_5_6_7_tsni, splitAt_lz_inst_36_38_35_1_2_3_4_5_8_tsni, chop_inst_36_38_35_1_2_3_4_5_9_tsni, chop_$_inst_36_38_35_1_2_3_4_5_9_10_tsni, divMod_inst_36_38_35_1_2_3_4_5_9_10_11_tsni, findKQ_inst_36_38_35_1_2_3_12_tsni, f_inst_36_38_35_1_2_3_12_13_tsni, divMod_inst_36_38_35_1_2_3_12_13_14_tsni, testPrimetest_nofib_inst_39_40_tsni, process_inst_39_40_38_tsni, doInput_inst_39_40_38_35_tsni, lambda_inst_39_40_38_35_tsni, lambda$_inst_39_40_38_35_tsni, doLine_inst_39_40_38_35_1_tsni, multiTest_inst_39_40_38_35_1_2_tsni, mTest$_inst_39_40_38_35_1_2_3_tsni, findKQ_inst_39_40_38_35_1_2_3_12_tsni, f_inst_39_40_38_35_1_2_3_12_13_tsni, divMod_inst_39_40_38_35_1_2_3_12_13_14_tsni, singleTest_inst_39_40_38_35_1_2_3_4_tsni, random_inst_39_40_38_35_1_2_3_4_5_tsni, chop_inst_39_40_38_35_1_2_3_4_5_9_tsni, chop_$_inst_39_40_38_35_1_2_3_4_5_9_10_tsni, divMod_inst_39_40_38_35_1_2_3_4_5_9_10_11_tsni, splitAt_lz_inst_39_40_38_35_1_2_3_4_5_8_tsni, uniform_inst_39_40_38_35_1_2_3_4_5_6_tsni, map_inst_39_40_38_35_1_2_3_4_5_6_7_tsni, lines_inst_39_40_37_tsni, break__inst_39_40_37_24_tsni, makeNumber_inst_0_1_2_3_4_5_41_tsni, foldl_inst_0_1_2_3_4_5_41_42_tsni, singleTestX_inst_0_1_2_3_4_43_tsni, makeNumber_inst_15_1_2_3_4_5_41_tsni, foldl_inst_15_1_2_3_4_5_41_42_tsni, singleTestX_inst_15_1_2_3_4_43_tsni, makeNumber_inst_16_4_5_41_tsni, foldl_inst_16_4_5_41_42_tsni, singleTestX_inst_16_4_43_tsni, makeNumber_inst_17_18_4_5_41_tsni, foldl_inst_17_18_4_5_41_42_tsni, singleTestX_inst_17_18_4_43_tsni, makeNumber_inst_29_41_tsni, foldl_inst_29_41_42_tsni, makeNumber_inst_30_5_41_tsni, foldl_inst_30_5_41_42_tsni, makeNumber_inst_31_3_4_5_41_tsni, foldl_inst_31_3_4_5_41_42_tsni, singleTestX_inst_31_3_4_43_tsni, makeNumber_inst_32_2_3_4_5_41_tsni, foldl_inst_32_2_3_4_5_41_42_tsni, singleTestX_inst_32_2_3_4_43_tsni, makeNumber_inst_33_1_2_3_4_5_41_tsni, foldl_inst_33_1_2_3_4_5_41_42_tsni, singleTestX_inst_33_1_2_3_4_43_tsni, makeNumber_inst_34_35_1_2_3_4_5_41_tsni, foldl_inst_34_35_1_2_3_4_5_41_42_tsni, singleTestX_inst_34_35_1_2_3_4_43_tsni, makeNumber_inst_36_38_35_1_2_3_4_5_41_tsni, foldl_inst_36_38_35_1_2_3_4_5_41_42_tsni, singleTestX_inst_36_38_35_1_2_3_4_43_tsni, int_val_of_string_inst_36_38_35_1_44_tsni, f_inst_36_38_35_1_44_45_tsni, makeNumber_inst_39_40_38_35_1_2_3_4_5_41_tsni, foldl_inst_39_40_38_35_1_2_3_4_5_41_42_tsni, singleTestX_inst_39_40_38_35_1_2_3_4_43_tsni, int_val_of_string_inst_39_40_38_35_1_44_tsni, f_inst_39_40_38_35_1_44_45_tsni, match_s__rest_inst_23_tsni, match_s__rest_inst_36_37_tsni, match_s__rest_inst_39_40_37_tsni, match_xs_arm_Cons_inst_0_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_0_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni, match_xs_arm_Cons_inst_15_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_15_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_15_1_tsni, match_xs_arm_Cons_inst_16_4_5_41_42_tsni, match_xs_arm_Nil_inst_16_4_5_41_42_tsni, match_xs_arm_Cons_inst_17_18_4_5_41_42_tsni, match_xs_arm_Nil_inst_17_18_4_5_41_42_tsni, match_xs_arm_Cons_inst_29_41_42_tsni, match_xs_arm_Nil_inst_29_41_42_tsni, match_xs_arm_Cons_inst_30_5_41_42_tsni, match_xs_arm_Nil_inst_30_5_41_42_tsni, match_xs_arm_Cons_inst_31_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_31_3_4_5_41_42_tsni, match_xs_arm_Cons_inst_32_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_32_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_32_tsni, match_xs_arm_Cons_inst_33_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_33_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_33_1_tsni, match_xs_arm_Cons_inst_34_35_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_34_35_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_34_35_1_tsni, match_xs_arm_Cons_inst_36_38_35_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_36_38_35_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_36_38_35_1_tsni, match_l_arm_Nil_inst_36_38_35_1_44_45_tsni, match_xs_arm_Cons_inst_39_40_38_35_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_39_40_38_35_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_39_40_38_35_1_tsni, match_l_arm_Nil_inst_39_40_38_35_1_44_45_tsni;
+let f, chop_, g, f1, f2, square, witness, mTest, primetest1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda$, chop_$, f$, g$, lambda$1, lambda$2, lambda$3, lambda$4, witness$, square$, lambda$5, mTest$, lambda$6, doInput_inst_0_tsni, lambda_inst_0_tsni, doLine_inst_0_1_tsni, multiTest_inst_0_1_2_tsni, mTest$_inst_0_1_2_3_tsni, singleTest_inst_0_1_2_3_4_tsni, random_inst_0_1_2_3_4_5_tsni, uniform_inst_0_1_2_3_4_5_6_tsni, map_inst_0_1_2_3_4_5_6_7_tsni, splitAt_lz_inst_0_1_2_3_4_5_8_tsni, chop_inst_0_1_2_3_4_5_9_tsni, chop_$_inst_0_1_2_3_4_5_9_10_tsni, divMod_inst_0_1_2_3_4_5_9_10_11_tsni, findKQ_inst_0_1_2_3_12_tsni, f_inst_0_1_2_3_12_13_tsni, divMod_inst_0_1_2_3_12_13_14_tsni, doInput_inst_15_tsni, lambda$_inst_15_tsni, doLine_inst_15_1_tsni, multiTest_inst_15_1_2_tsni, mTest$_inst_15_1_2_3_tsni, singleTest_inst_15_1_2_3_4_tsni, random_inst_15_1_2_3_4_5_tsni, uniform_inst_15_1_2_3_4_5_6_tsni, map_inst_15_1_2_3_4_5_6_7_tsni, splitAt_lz_inst_15_1_2_3_4_5_8_tsni, chop_inst_15_1_2_3_4_5_9_tsni, chop_$_inst_15_1_2_3_4_5_9_10_tsni, divMod_inst_15_1_2_3_4_5_9_10_11_tsni, findKQ_inst_15_1_2_3_12_tsni, f_inst_15_1_2_3_12_13_tsni, divMod_inst_15_1_2_3_12_13_14_tsni, findKQ_inst_16_12_tsni, f_inst_16_12_13_tsni, divMod_inst_16_12_13_14_tsni, singleTest_inst_16_4_tsni, random_inst_16_4_5_tsni, chop_inst_16_4_5_9_tsni, chop_$_inst_16_4_5_9_10_tsni, divMod_inst_16_4_5_9_10_11_tsni, splitAt_lz_inst_16_4_5_8_tsni, uniform_inst_16_4_5_6_tsni, map_inst_16_4_5_6_7_tsni, mTest$_inst_17_18_tsni, singleTest_inst_17_18_4_tsni, random_inst_17_18_4_5_tsni, uniform_inst_17_18_4_5_6_tsni, map_inst_17_18_4_5_6_7_tsni, splitAt_lz_inst_17_18_4_5_8_tsni, chop_inst_17_18_4_5_9_tsni, chop_$_inst_17_18_4_5_9_10_tsni, divMod_inst_17_18_4_5_9_10_11_tsni, findKQ_inst_17_18_12_tsni, f_inst_17_18_12_13_tsni, divMod_inst_17_18_12_13_14_tsni, divMod_inst_19_14_tsni, divMod_inst_20_11_tsni, chop_$_inst_21_22_tsni, divMod_inst_21_22_11_tsni, break__inst_23_24_tsni, chop_$_inst_25_10_tsni, divMod_inst_25_10_11_tsni, chop_inst_26_27_tsni, chop_$_inst_26_27_10_tsni, divMod_inst_26_27_10_11_tsni, f_inst_28_13_tsni, divMod_inst_28_13_14_tsni, chop_inst_29_9_tsni, chop_$_inst_29_9_10_tsni, divMod_inst_29_9_10_11_tsni, splitAt_lz_inst_29_8_tsni, uniform_inst_29_6_tsni, map_inst_29_6_7_tsni, random_inst_30_5_tsni, uniform_inst_30_5_6_tsni, map_inst_30_5_6_7_tsni, splitAt_lz_inst_30_5_8_tsni, chop_inst_30_5_9_tsni, chop_$_inst_30_5_9_10_tsni, divMod_inst_30_5_9_10_11_tsni, mTest$_inst_31_3_tsni, singleTest_inst_31_3_4_tsni, random_inst_31_3_4_5_tsni, uniform_inst_31_3_4_5_6_tsni, map_inst_31_3_4_5_6_7_tsni, splitAt_lz_inst_31_3_4_5_8_tsni, chop_inst_31_3_4_5_9_tsni, chop_$_inst_31_3_4_5_9_10_tsni, divMod_inst_31_3_4_5_9_10_11_tsni, findKQ_inst_31_3_12_tsni, f_inst_31_3_12_13_tsni, divMod_inst_31_3_12_13_14_tsni, multiTest_inst_32_2_tsni, mTest$_inst_32_2_3_tsni, findKQ_inst_32_2_3_12_tsni, f_inst_32_2_3_12_13_tsni, divMod_inst_32_2_3_12_13_14_tsni, singleTest_inst_32_2_3_4_tsni, random_inst_32_2_3_4_5_tsni, chop_inst_32_2_3_4_5_9_tsni, chop_$_inst_32_2_3_4_5_9_10_tsni, divMod_inst_32_2_3_4_5_9_10_11_tsni, splitAt_lz_inst_32_2_3_4_5_8_tsni, uniform_inst_32_2_3_4_5_6_tsni, map_inst_32_2_3_4_5_6_7_tsni, lambda_inst_33_tsni, lambda$_inst_33_tsni, doLine_inst_33_1_tsni, multiTest_inst_33_1_2_tsni, mTest$_inst_33_1_2_3_tsni, singleTest_inst_33_1_2_3_4_tsni, random_inst_33_1_2_3_4_5_tsni, uniform_inst_33_1_2_3_4_5_6_tsni, map_inst_33_1_2_3_4_5_6_7_tsni, splitAt_lz_inst_33_1_2_3_4_5_8_tsni, chop_inst_33_1_2_3_4_5_9_tsni, chop_$_inst_33_1_2_3_4_5_9_10_tsni, divMod_inst_33_1_2_3_4_5_9_10_11_tsni, findKQ_inst_33_1_2_3_12_tsni, f_inst_33_1_2_3_12_13_tsni, divMod_inst_33_1_2_3_12_13_14_tsni, doInput_inst_34_35_tsni, lambda_inst_34_35_tsni, lambda$_inst_34_35_tsni, doLine_inst_34_35_1_tsni, multiTest_inst_34_35_1_2_tsni, mTest$_inst_34_35_1_2_3_tsni, findKQ_inst_34_35_1_2_3_12_tsni, f_inst_34_35_1_2_3_12_13_tsni, divMod_inst_34_35_1_2_3_12_13_14_tsni, singleTest_inst_34_35_1_2_3_4_tsni, random_inst_34_35_1_2_3_4_5_tsni, chop_inst_34_35_1_2_3_4_5_9_tsni, chop_$_inst_34_35_1_2_3_4_5_9_10_tsni, divMod_inst_34_35_1_2_3_4_5_9_10_11_tsni, splitAt_lz_inst_34_35_1_2_3_4_5_8_tsni, uniform_inst_34_35_1_2_3_4_5_6_tsni, map_inst_34_35_1_2_3_4_5_6_7_tsni, lines_inst_36_37_tsni, break__inst_36_37_24_tsni, process_inst_36_38_tsni, doInput_inst_36_38_35_tsni, lambda_inst_36_38_35_tsni, lambda$_inst_36_38_35_tsni, doLine_inst_36_38_35_1_tsni, multiTest_inst_36_38_35_1_2_tsni, mTest$_inst_36_38_35_1_2_3_tsni, singleTest_inst_36_38_35_1_2_3_4_tsni, random_inst_36_38_35_1_2_3_4_5_tsni, uniform_inst_36_38_35_1_2_3_4_5_6_tsni, map_inst_36_38_35_1_2_3_4_5_6_7_tsni, splitAt_lz_inst_36_38_35_1_2_3_4_5_8_tsni, chop_inst_36_38_35_1_2_3_4_5_9_tsni, chop_$_inst_36_38_35_1_2_3_4_5_9_10_tsni, divMod_inst_36_38_35_1_2_3_4_5_9_10_11_tsni, findKQ_inst_36_38_35_1_2_3_12_tsni, f_inst_36_38_35_1_2_3_12_13_tsni, divMod_inst_36_38_35_1_2_3_12_13_14_tsni, testPrimetest_nofib_inst_39_40_tsni, process_inst_39_40_38_tsni, doInput_inst_39_40_38_35_tsni, lambda_inst_39_40_38_35_tsni, lambda$_inst_39_40_38_35_tsni, doLine_inst_39_40_38_35_1_tsni, multiTest_inst_39_40_38_35_1_2_tsni, mTest$_inst_39_40_38_35_1_2_3_tsni, findKQ_inst_39_40_38_35_1_2_3_12_tsni, f_inst_39_40_38_35_1_2_3_12_13_tsni, divMod_inst_39_40_38_35_1_2_3_12_13_14_tsni, singleTest_inst_39_40_38_35_1_2_3_4_tsni, random_inst_39_40_38_35_1_2_3_4_5_tsni, chop_inst_39_40_38_35_1_2_3_4_5_9_tsni, chop_$_inst_39_40_38_35_1_2_3_4_5_9_10_tsni, divMod_inst_39_40_38_35_1_2_3_4_5_9_10_11_tsni, splitAt_lz_inst_39_40_38_35_1_2_3_4_5_8_tsni, uniform_inst_39_40_38_35_1_2_3_4_5_6_tsni, map_inst_39_40_38_35_1_2_3_4_5_6_7_tsni, lines_inst_39_40_37_tsni, break__inst_39_40_37_24_tsni, makeNumber_inst_0_1_2_3_4_5_41_tsni, foldl_inst_0_1_2_3_4_5_41_42_tsni, singleTestX_inst_0_1_2_3_4_43_tsni, makeNumber_inst_15_1_2_3_4_5_41_tsni, foldl_inst_15_1_2_3_4_5_41_42_tsni, singleTestX_inst_15_1_2_3_4_43_tsni, makeNumber_inst_16_4_5_41_tsni, foldl_inst_16_4_5_41_42_tsni, singleTestX_inst_16_4_43_tsni, makeNumber_inst_17_18_4_5_41_tsni, foldl_inst_17_18_4_5_41_42_tsni, singleTestX_inst_17_18_4_43_tsni, makeNumber_inst_29_41_tsni, foldl_inst_29_41_42_tsni, makeNumber_inst_30_5_41_tsni, foldl_inst_30_5_41_42_tsni, makeNumber_inst_31_3_4_5_41_tsni, foldl_inst_31_3_4_5_41_42_tsni, singleTestX_inst_31_3_4_43_tsni, makeNumber_inst_32_2_3_4_5_41_tsni, foldl_inst_32_2_3_4_5_41_42_tsni, singleTestX_inst_32_2_3_4_43_tsni, makeNumber_inst_33_1_2_3_4_5_41_tsni, foldl_inst_33_1_2_3_4_5_41_42_tsni, singleTestX_inst_33_1_2_3_4_43_tsni, makeNumber_inst_34_35_1_2_3_4_5_41_tsni, foldl_inst_34_35_1_2_3_4_5_41_42_tsni, singleTestX_inst_34_35_1_2_3_4_43_tsni, makeNumber_inst_36_38_35_1_2_3_4_5_41_tsni, foldl_inst_36_38_35_1_2_3_4_5_41_42_tsni, singleTestX_inst_36_38_35_1_2_3_4_43_tsni, int_val_of_string_inst_36_38_35_1_44_tsni, f_inst_36_38_35_1_44_45_tsni, makeNumber_inst_39_40_38_35_1_2_3_4_5_41_tsni, foldl_inst_39_40_38_35_1_2_3_4_5_41_42_tsni, singleTestX_inst_39_40_38_35_1_2_3_4_43_tsni, int_val_of_string_inst_39_40_38_35_1_44_tsni, f_inst_39_40_38_35_1_44_45_tsni, match_s__rest_inst_23_tsni, match_s__rest_inst_36_37_tsni, match_s__rest_inst_39_40_37_tsni, match_xs_arm_Cons_inst_0_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_0_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni, match_xs_arm_Cons_inst_15_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_15_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_15_1_tsni, match_xs_arm_Cons_inst_16_4_5_41_42_tsni, match_xs_arm_Nil_inst_16_4_5_41_42_tsni, match_xs_arm_Cons_inst_17_18_4_5_41_42_tsni, match_xs_arm_Nil_inst_17_18_4_5_41_42_tsni, match_xs_arm_Cons_inst_29_41_42_tsni, match_xs_arm_Nil_inst_29_41_42_tsni, match_xs_arm_Cons_inst_30_5_41_42_tsni, match_xs_arm_Nil_inst_30_5_41_42_tsni, match_xs_arm_Cons_inst_31_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_31_3_4_5_41_42_tsni, match_xs_arm_Cons_inst_32_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_32_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_32_tsni, match_xs_arm_Cons_inst_33_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_33_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_33_1_tsni, match_xs_arm_Cons_inst_34_35_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_34_35_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_34_35_1_tsni, match_xs_arm_Cons_inst_36_38_35_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_36_38_35_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_36_38_35_1_tsni, match_l_arm_Nil_inst_36_38_35_1_44_45_tsni, match_xs_arm_Cons_inst_39_40_38_35_1_2_3_4_5_41_42_tsni, match_xs_arm_Nil_inst_39_40_38_35_1_2_3_4_5_41_42_tsni, match_scrut_arm_Deforest_Arr_2_inst_39_40_38_35_1_tsni, match_l_arm_Nil_inst_39_40_38_35_1_44_45_tsni;
 match_s__rest_inst_23_tsni = function match_s__rest_inst_23_tsni(l, tmp) {
   let tt;
   tt = tmp;
@@ -298,12 +300,12 @@ doInput_inst_0_tsni = function doInput_inst_0_tsni(state, lls) {
     lambda$this = runtime.safeCall(lambda_inst_0_tsni(ls));
     return doLine_inst_0_1_tsni(l, lambda$this, state)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_0_tsni = (undefined, function (ls) {
   return (state) => {
-    return lambda$3(ls, state)
+    return lambda$6(ls, state)
   }
 });
 doLine_inst_0_1_tsni = function doLine_inst_0_1_tsni(cs, cont, rs) {
@@ -314,13 +316,13 @@ doLine_inst_0_1_tsni = function doLine_inst_0_1_tsni(cs, cont, rs) {
   return runtime.safeCall(scrut(cont))
 };
 multiTest_inst_0_1_2_tsni = function multiTest_inst_0_1_2_tsni(k, rs, n) {
-  let scrut, tmp, tmp1, tmp2, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let scrut, tmp, tmp1, arr, lambda$this, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = n <= 1;
-  tmp1 = primetest.even(n);
-  scrut = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda7(n));
+  scrut = runtime.short_or(tmp, lambda$this);
   if (scrut === true) {
-    tmp2 = n == 2;
-    _deforest_Deforest_Arr_2_0 = tmp2;
+    tmp1 = n == 2;
+    _deforest_Deforest_Arr_2_0 = tmp1;
     _deforest_Deforest_Arr_2_1 = rs;
     arr = (cont) => {
       return match_scrut_arm_Deforest_Arr_2_inst_0_1_tsni(cont, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
@@ -383,7 +385,7 @@ uniform_inst_0_1_2_3_4_5_6_tsni = function uniform_inst_0_1_2_3_4_5_6_tsni(nns, 
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -412,11 +414,11 @@ uniform_inst_0_1_2_3_4_5_6_tsni = function uniform_inst_0_1_2_3_4_5_6_tsni(nns, 
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_0_1_2_3_4_5_6_7_tsni = function map_inst_0_1_2_3_4_5_6_7_tsni(f3, xs) {
@@ -438,13 +440,13 @@ map_inst_0_1_2_3_4_5_6_7_tsni = function map_inst_0_1_2_3_4_5_6_7_tsni(f3, xs) {
       return match_xs_arm_Nil_inst_0_1_2_3_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_lz_inst_0_1_2_3_4_5_8_tsni = function splitAt_lz_inst_0_1_2_3_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -551,7 +553,7 @@ divMod_inst_0_1_2_3_12_13_14_tsni = function divMod_inst_0_1_2_3_12_13_14_tsni(a
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -566,13 +568,12 @@ divMod_inst_0_1_2_3_12_13_14_tsni = function divMod_inst_0_1_2_3_12_13_14_tsni(a
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -589,10 +590,10 @@ doInput_inst_15_tsni = function doInput_inst_15_tsni(state, lls) {
     param1 = lls.tail;
     l = param0;
     ls = param1;
-    lambda$this = runtime.safeCall(lambda5(ls));
+    lambda$this = runtime.safeCall(lambda8(ls));
     return doLine_inst_15_1_tsni(l, lambda$this, state)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$_inst_15_tsni = function lambda$_inst_15_tsni(ls, state) {
@@ -606,13 +607,13 @@ doLine_inst_15_1_tsni = function doLine_inst_15_1_tsni(cs, cont, rs) {
   return runtime.safeCall(scrut(cont))
 };
 multiTest_inst_15_1_2_tsni = function multiTest_inst_15_1_2_tsni(k, rs, n) {
-  let scrut, tmp, tmp1, tmp2, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let scrut, tmp, tmp1, arr, lambda$this, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = n <= 1;
-  tmp1 = primetest.even(n);
-  scrut = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda7(n));
+  scrut = runtime.short_or(tmp, lambda$this);
   if (scrut === true) {
-    tmp2 = n == 2;
-    _deforest_Deforest_Arr_2_0 = tmp2;
+    tmp1 = n == 2;
+    _deforest_Deforest_Arr_2_0 = tmp1;
     _deforest_Deforest_Arr_2_1 = rs;
     arr = (cont) => {
       return match_scrut_arm_Deforest_Arr_2_inst_15_1_tsni(cont, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
@@ -675,7 +676,7 @@ uniform_inst_15_1_2_3_4_5_6_tsni = function uniform_inst_15_1_2_3_4_5_6_tsni(nns
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -704,11 +705,11 @@ uniform_inst_15_1_2_3_4_5_6_tsni = function uniform_inst_15_1_2_3_4_5_6_tsni(nns
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_15_1_2_3_4_5_6_7_tsni = function map_inst_15_1_2_3_4_5_6_7_tsni(f3, xs) {
@@ -730,13 +731,13 @@ map_inst_15_1_2_3_4_5_6_7_tsni = function map_inst_15_1_2_3_4_5_6_7_tsni(f3, xs)
       return match_xs_arm_Nil_inst_15_1_2_3_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_lz_inst_15_1_2_3_4_5_8_tsni = function splitAt_lz_inst_15_1_2_3_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -843,7 +844,7 @@ divMod_inst_15_1_2_3_12_13_14_tsni = function divMod_inst_15_1_2_3_12_13_14_tsni
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -858,13 +859,12 @@ divMod_inst_15_1_2_3_12_13_14_tsni = function divMod_inst_15_1_2_3_12_13_14_tsni
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -902,7 +902,7 @@ divMod_inst_16_12_13_14_tsni = function divMod_inst_16_12_13_14_tsni(a, b) {
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -917,13 +917,12 @@ divMod_inst_16_12_13_14_tsni = function divMod_inst_16_12_13_14_tsni(a, b) {
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -978,7 +977,7 @@ divMod_inst_16_4_5_9_10_11_tsni = function divMod_inst_16_4_5_9_10_11_tsni(a, b)
 splitAt_lz_inst_16_4_5_8_tsni = function splitAt_lz_inst_16_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -1011,10 +1010,10 @@ splitAt_lz_inst_16_4_5_8_tsni = function splitAt_lz_inst_16_4_5_8_tsni(n, ls) {
           tmp6 = k - 1;
           return mTest$(n2, tmp6, rs_1)
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             rs_1
-          ];
+          ]);
           return arr3
         }
       };
@@ -1047,7 +1046,7 @@ uniform_inst_16_4_5_6_tsni = function uniform_inst_16_4_5_6_tsni(nns, rrs) {
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -1076,11 +1075,11 @@ uniform_inst_16_4_5_6_tsni = function uniform_inst_16_4_5_6_tsni(nns, rrs) {
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_16_4_5_6_7_tsni = function map_inst_16_4_5_6_7_tsni(f3, xs) {
@@ -1102,17 +1101,17 @@ map_inst_16_4_5_6_7_tsni = function map_inst_16_4_5_6_7_tsni(f3, xs) {
       return match_xs_arm_Nil_inst_16_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 mTest$_inst_17_18_tsni = function mTest$_inst_17_18_tsni(n, k, rs) {
   let scrut, scrut1, arr, tmp;
   scrut1 = k == 0;
   if (scrut1 === true) {
-    arr = [
+    arr = globalThis.Object.freeze([
       true,
       rs
-    ];
+    ]);
     return arr
   } else {
     tmp = findKQ_inst_17_18_12_tsni(n);
@@ -1157,7 +1156,7 @@ uniform_inst_17_18_4_5_6_tsni = function uniform_inst_17_18_4_5_6_tsni(nns, rrs)
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -1186,11 +1185,11 @@ uniform_inst_17_18_4_5_6_tsni = function uniform_inst_17_18_4_5_6_tsni(nns, rrs)
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_17_18_4_5_6_7_tsni = function map_inst_17_18_4_5_6_7_tsni(f3, xs) {
@@ -1212,13 +1211,13 @@ map_inst_17_18_4_5_6_7_tsni = function map_inst_17_18_4_5_6_7_tsni(f3, xs) {
       return match_xs_arm_Nil_inst_17_18_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_lz_inst_17_18_4_5_8_tsni = function splitAt_lz_inst_17_18_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -1251,10 +1250,10 @@ splitAt_lz_inst_17_18_4_5_8_tsni = function splitAt_lz_inst_17_18_4_5_8_tsni(n, 
           tmp6 = k - 1;
           return mTest$_inst_17_18_tsni(n2, tmp6, rs_1)
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             rs_1
-          ];
+          ]);
           return arr3
         }
       };
@@ -1324,7 +1323,7 @@ divMod_inst_17_18_12_13_14_tsni = function divMod_inst_17_18_12_13_14_tsni(a, b)
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -1339,13 +1338,12 @@ divMod_inst_17_18_12_13_14_tsni = function divMod_inst_17_18_12_13_14_tsni(a, b)
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -1370,10 +1368,10 @@ divMod_inst_19_14_tsni = function divMod_inst_19_14_tsni(a, b) {
       tmp2 = k + 1;
       return f2(tmp2, d)
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         k,
         q
-      ];
+      ]);
       return arr1
     }
   };
@@ -1431,14 +1429,14 @@ divMod_inst_21_22_11_tsni = function divMod_inst_21_22_11_tsni(a, b) {
 break__inst_23_24_tsni = function break__inst_23_24_tsni(p, ls) {
   let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
   if (ls instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       (l) => {
         let tmp2;
         tmp2 = NofibPrelude.Nil;
         return match_s__rest_inst_23_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
@@ -1457,30 +1455,30 @@ break__inst_23_24_tsni = function break__inst_23_24_tsni(p, ls) {
         tmp2 = primetest.lines(s__);
         return match_s__rest_inst_23_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_23_24_tsni(p, xs);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 chop_$_inst_25_10_tsni = function chop_$_inst_25_10_tsni(b, a, n) {
@@ -1562,10 +1560,10 @@ divMod_inst_28_13_14_tsni = function divMod_inst_28_13_14_tsni(a, b) {
       tmp2 = k + 1;
       return f_inst_28_13_tsni(tmp2, d)
     } else {
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         k,
         q
-      ];
+      ]);
       return arr1
     }
   };
@@ -1604,7 +1602,7 @@ divMod_inst_29_9_10_11_tsni = function divMod_inst_29_9_10_11_tsni(a, b) {
 splitAt_lz_inst_29_8_tsni = function splitAt_lz_inst_29_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -1615,10 +1613,10 @@ splitAt_lz_inst_29_8_tsni = function splitAt_lz_inst_29_8_tsni(n, ls) {
     rs2 = first1;
     tmp2 = uniform_inst_29_6_tsni(ns, rs1);
     tmp3 = makeNumber_inst_29_41_tsni(65536, tmp2);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       tmp3,
       rs2
-    ];
+    ]);
     return arr1
   };
   return arr
@@ -1646,7 +1644,7 @@ uniform_inst_29_6_tsni = function uniform_inst_29_6_tsni(nns, rrs) {
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -1675,11 +1673,11 @@ uniform_inst_29_6_tsni = function uniform_inst_29_6_tsni(nns, rrs) {
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_29_6_7_tsni = function map_inst_29_6_7_tsni(f3, xs) {
@@ -1701,7 +1699,7 @@ map_inst_29_6_7_tsni = function map_inst_29_6_7_tsni(f3, xs) {
       return match_xs_arm_Nil_inst_29_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 random_inst_30_5_tsni = function random_inst_30_5_tsni(n, rs) {
@@ -1735,7 +1733,7 @@ uniform_inst_30_5_6_tsni = function uniform_inst_30_5_6_tsni(nns, rrs) {
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -1764,11 +1762,11 @@ uniform_inst_30_5_6_tsni = function uniform_inst_30_5_6_tsni(nns, rrs) {
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_30_5_6_7_tsni = function map_inst_30_5_6_7_tsni(f3, xs) {
@@ -1790,13 +1788,13 @@ map_inst_30_5_6_7_tsni = function map_inst_30_5_6_7_tsni(f3, xs) {
       return match_xs_arm_Nil_inst_30_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_lz_inst_30_5_8_tsni = function splitAt_lz_inst_30_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -1817,10 +1815,10 @@ splitAt_lz_inst_30_5_8_tsni = function splitAt_lz_inst_30_5_8_tsni(n, ls) {
       rs_ = first11;
       tmp4 = 2 + x;
       tmp5 = primetest.singleTestX(n1, kq, tmp4);
-      arr2 = [
+      arr2 = globalThis.Object.freeze([
         tmp5,
         rs_
-      ];
+      ]);
       return arr2
     };
     return arr1
@@ -1861,10 +1859,10 @@ mTest$_inst_31_3_tsni = function mTest$_inst_31_3_tsni(n, k, rs) {
   let scrut, scrut1, arr, tmp;
   scrut1 = k == 0;
   if (scrut1 === true) {
-    arr = [
+    arr = globalThis.Object.freeze([
       true,
       rs
-    ];
+    ]);
     return arr
   } else {
     tmp = findKQ_inst_31_3_12_tsni(n);
@@ -1909,7 +1907,7 @@ uniform_inst_31_3_4_5_6_tsni = function uniform_inst_31_3_4_5_6_tsni(nns, rrs) {
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -1938,11 +1936,11 @@ uniform_inst_31_3_4_5_6_tsni = function uniform_inst_31_3_4_5_6_tsni(nns, rrs) {
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_31_3_4_5_6_7_tsni = function map_inst_31_3_4_5_6_7_tsni(f3, xs) {
@@ -1964,13 +1962,13 @@ map_inst_31_3_4_5_6_7_tsni = function map_inst_31_3_4_5_6_7_tsni(f3, xs) {
       return match_xs_arm_Nil_inst_31_3_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_lz_inst_31_3_4_5_8_tsni = function splitAt_lz_inst_31_3_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -2003,10 +2001,10 @@ splitAt_lz_inst_31_3_4_5_8_tsni = function splitAt_lz_inst_31_3_4_5_8_tsni(n, ls
           tmp6 = k - 1;
           return mTest$_inst_31_3_tsni(n2, tmp6, rs_1)
         } else {
-          arr3 = [
+          arr3 = globalThis.Object.freeze([
             false,
             rs_1
-          ];
+          ]);
           return arr3
         }
       };
@@ -2076,7 +2074,7 @@ divMod_inst_31_3_12_13_14_tsni = function divMod_inst_31_3_12_13_14_tsni(a, b) {
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -2091,13 +2089,12 @@ divMod_inst_31_3_12_13_14_tsni = function divMod_inst_31_3_12_13_14_tsni(a, b) {
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -2106,13 +2103,13 @@ divMod_inst_31_3_12_13_14_tsni = function divMod_inst_31_3_12_13_14_tsni(a, b) {
   return arr
 };
 multiTest_inst_32_2_tsni = function multiTest_inst_32_2_tsni(k, rs, n) {
-  let scrut, tmp, tmp1, tmp2, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let scrut, tmp, tmp1, arr, lambda$this, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = n <= 1;
-  tmp1 = primetest.even(n);
-  scrut = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda7(n));
+  scrut = runtime.short_or(tmp, lambda$this);
   if (scrut === true) {
-    tmp2 = n == 2;
-    _deforest_Deforest_Arr_2_0 = tmp2;
+    tmp1 = n == 2;
+    _deforest_Deforest_Arr_2_0 = tmp1;
     _deforest_Deforest_Arr_2_1 = rs;
     arr = (cont) => {
       return match_scrut_arm_Deforest_Arr_2_inst_32_tsni(cont, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
@@ -2168,7 +2165,7 @@ divMod_inst_32_2_3_12_13_14_tsni = function divMod_inst_32_2_3_12_13_14_tsni(a, 
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -2183,13 +2180,12 @@ divMod_inst_32_2_3_12_13_14_tsni = function divMod_inst_32_2_3_12_13_14_tsni(a, 
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -2244,7 +2240,7 @@ divMod_inst_32_2_3_4_5_9_10_11_tsni = function divMod_inst_32_2_3_4_5_9_10_11_ts
 splitAt_lz_inst_32_2_3_4_5_8_tsni = function splitAt_lz_inst_32_2_3_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -2314,7 +2310,7 @@ uniform_inst_32_2_3_4_5_6_tsni = function uniform_inst_32_2_3_4_5_6_tsni(nns, rr
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -2343,11 +2339,11 @@ uniform_inst_32_2_3_4_5_6_tsni = function uniform_inst_32_2_3_4_5_6_tsni(nns, rr
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_32_2_3_4_5_6_7_tsni = function map_inst_32_2_3_4_5_6_7_tsni(f3, xs) {
@@ -2369,7 +2365,7 @@ map_inst_32_2_3_4_5_6_7_tsni = function map_inst_32_2_3_4_5_6_7_tsni(f3, xs) {
       return match_xs_arm_Nil_inst_32_2_3_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_33_tsni = (undefined, function (ls) {
@@ -2388,13 +2384,13 @@ doLine_inst_33_1_tsni = function doLine_inst_33_1_tsni(cs, cont, rs) {
   return runtime.safeCall(scrut(cont))
 };
 multiTest_inst_33_1_2_tsni = function multiTest_inst_33_1_2_tsni(k, rs, n) {
-  let scrut, tmp, tmp1, tmp2, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let scrut, tmp, tmp1, arr, lambda$this, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = n <= 1;
-  tmp1 = primetest.even(n);
-  scrut = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda7(n));
+  scrut = runtime.short_or(tmp, lambda$this);
   if (scrut === true) {
-    tmp2 = n == 2;
-    _deforest_Deforest_Arr_2_0 = tmp2;
+    tmp1 = n == 2;
+    _deforest_Deforest_Arr_2_0 = tmp1;
     _deforest_Deforest_Arr_2_1 = rs;
     arr = (cont) => {
       return match_scrut_arm_Deforest_Arr_2_inst_33_1_tsni(cont, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
@@ -2457,7 +2453,7 @@ uniform_inst_33_1_2_3_4_5_6_tsni = function uniform_inst_33_1_2_3_4_5_6_tsni(nns
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -2486,11 +2482,11 @@ uniform_inst_33_1_2_3_4_5_6_tsni = function uniform_inst_33_1_2_3_4_5_6_tsni(nns
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_33_1_2_3_4_5_6_7_tsni = function map_inst_33_1_2_3_4_5_6_7_tsni(f3, xs) {
@@ -2512,13 +2508,13 @@ map_inst_33_1_2_3_4_5_6_7_tsni = function map_inst_33_1_2_3_4_5_6_7_tsni(f3, xs)
       return match_xs_arm_Nil_inst_33_1_2_3_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_lz_inst_33_1_2_3_4_5_8_tsni = function splitAt_lz_inst_33_1_2_3_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -2625,7 +2621,7 @@ divMod_inst_33_1_2_3_12_13_14_tsni = function divMod_inst_33_1_2_3_12_13_14_tsni
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -2640,13 +2636,12 @@ divMod_inst_33_1_2_3_12_13_14_tsni = function divMod_inst_33_1_2_3_12_13_14_tsni
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -2666,7 +2661,7 @@ doInput_inst_34_35_tsni = function doInput_inst_34_35_tsni(state, lls) {
     lambda$this = runtime.safeCall(lambda_inst_34_35_tsni(ls));
     return doLine_inst_34_35_1_tsni(l, lambda$this, state)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_34_35_tsni = (undefined, function (ls) {
@@ -2685,13 +2680,13 @@ doLine_inst_34_35_1_tsni = function doLine_inst_34_35_1_tsni(cs, cont, rs) {
   return runtime.safeCall(scrut(cont))
 };
 multiTest_inst_34_35_1_2_tsni = function multiTest_inst_34_35_1_2_tsni(k, rs, n) {
-  let scrut, tmp, tmp1, tmp2, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let scrut, tmp, tmp1, arr, lambda$this, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = n <= 1;
-  tmp1 = primetest.even(n);
-  scrut = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda7(n));
+  scrut = runtime.short_or(tmp, lambda$this);
   if (scrut === true) {
-    tmp2 = n == 2;
-    _deforest_Deforest_Arr_2_0 = tmp2;
+    tmp1 = n == 2;
+    _deforest_Deforest_Arr_2_0 = tmp1;
     _deforest_Deforest_Arr_2_1 = rs;
     arr = (cont) => {
       return match_scrut_arm_Deforest_Arr_2_inst_34_35_1_tsni(cont, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
@@ -2747,7 +2742,7 @@ divMod_inst_34_35_1_2_3_12_13_14_tsni = function divMod_inst_34_35_1_2_3_12_13_1
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -2762,13 +2757,12 @@ divMod_inst_34_35_1_2_3_12_13_14_tsni = function divMod_inst_34_35_1_2_3_12_13_1
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -2823,7 +2817,7 @@ divMod_inst_34_35_1_2_3_4_5_9_10_11_tsni = function divMod_inst_34_35_1_2_3_4_5_
 splitAt_lz_inst_34_35_1_2_3_4_5_8_tsni = function splitAt_lz_inst_34_35_1_2_3_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -2893,7 +2887,7 @@ uniform_inst_34_35_1_2_3_4_5_6_tsni = function uniform_inst_34_35_1_2_3_4_5_6_ts
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -2922,11 +2916,11 @@ uniform_inst_34_35_1_2_3_4_5_6_tsni = function uniform_inst_34_35_1_2_3_4_5_6_ts
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_34_35_1_2_3_4_5_6_7_tsni = function map_inst_34_35_1_2_3_4_5_6_7_tsni(f3, xs) {
@@ -2948,26 +2942,26 @@ map_inst_34_35_1_2_3_4_5_6_7_tsni = function map_inst_34_35_1_2_3_4_5_6_7_tsni(f
       return match_xs_arm_Nil_inst_34_35_1_2_3_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lines_inst_36_37_tsni = function lines_inst_36_37_tsni(s) {
   let scrut, first1, first0, l, s_;
   scrut = break__inst_36_37_24_tsni(lambda, s);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     l = first0;
     s_ = first1;
     return runtime.safeCall(s_(l))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 break__inst_36_37_24_tsni = function break__inst_36_37_24_tsni(p, ls) {
   let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   if (ls instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       (a) => {
         return match_l_arm_Nil_inst_36_38_35_1_44_45_tsni(a)
       },
@@ -2978,7 +2972,7 @@ break__inst_36_37_24_tsni = function break__inst_36_37_24_tsni(p, ls) {
         };
         return match_s__rest_inst_36_37_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
@@ -2997,18 +2991,18 @@ break__inst_36_37_24_tsni = function break__inst_36_37_24_tsni(p, ls) {
         tmp2 = lines_inst_36_37_tsni(s__);
         return match_s__rest_inst_36_37_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         (a) => {
           return match_l_arm_Nil_inst_36_38_35_1_44_45_tsni(a)
         },
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_36_37_24_tsni(p, xs);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         _deforest_Cons_head1 = x;
@@ -3024,17 +3018,17 @@ break__inst_36_37_24_tsni = function break__inst_36_37_24_tsni(p, ls) {
           tmp4 = tmp2 + tmp3;
           return f_inst_36_38_35_1_44_45_tsni(t, tmp4)
         };
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 process_inst_36_38_tsni = function process_inst_36_38_tsni(process_arg1) {
@@ -3061,13 +3055,13 @@ doLine_inst_36_38_35_1_tsni = function doLine_inst_36_38_35_1_tsni(cs, cont, rs)
   return runtime.safeCall(scrut(cont))
 };
 multiTest_inst_36_38_35_1_2_tsni = function multiTest_inst_36_38_35_1_2_tsni(k, rs, n) {
-  let scrut, tmp, tmp1, tmp2, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let scrut, tmp, tmp1, arr, lambda$this, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = n <= 1;
-  tmp1 = primetest.even(n);
-  scrut = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda7(n));
+  scrut = runtime.short_or(tmp, lambda$this);
   if (scrut === true) {
-    tmp2 = n == 2;
-    _deforest_Deforest_Arr_2_0 = tmp2;
+    tmp1 = n == 2;
+    _deforest_Deforest_Arr_2_0 = tmp1;
     _deforest_Deforest_Arr_2_1 = rs;
     arr = (cont) => {
       return match_scrut_arm_Deforest_Arr_2_inst_36_38_35_1_tsni(cont, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
@@ -3130,7 +3124,7 @@ uniform_inst_36_38_35_1_2_3_4_5_6_tsni = function uniform_inst_36_38_35_1_2_3_4_
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -3159,11 +3153,11 @@ uniform_inst_36_38_35_1_2_3_4_5_6_tsni = function uniform_inst_36_38_35_1_2_3_4_
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_36_38_35_1_2_3_4_5_6_7_tsni = function map_inst_36_38_35_1_2_3_4_5_6_7_tsni(f3, xs) {
@@ -3185,13 +3179,13 @@ map_inst_36_38_35_1_2_3_4_5_6_7_tsni = function map_inst_36_38_35_1_2_3_4_5_6_7_
       return match_xs_arm_Nil_inst_36_38_35_1_2_3_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 splitAt_lz_inst_36_38_35_1_2_3_4_5_8_tsni = function splitAt_lz_inst_36_38_35_1_2_3_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -3298,7 +3292,7 @@ divMod_inst_36_38_35_1_2_3_12_13_14_tsni = function divMod_inst_36_38_35_1_2_3_1
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -3313,13 +3307,12 @@ divMod_inst_36_38_35_1_2_3_12_13_14_tsni = function divMod_inst_36_38_35_1_2_3_1
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -3358,13 +3351,13 @@ doLine_inst_39_40_38_35_1_tsni = function doLine_inst_39_40_38_35_1_tsni(cs, con
   return runtime.safeCall(scrut(cont))
 };
 multiTest_inst_39_40_38_35_1_2_tsni = function multiTest_inst_39_40_38_35_1_2_tsni(k, rs, n) {
-  let scrut, tmp, tmp1, tmp2, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let scrut, tmp, tmp1, arr, lambda$this, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = n <= 1;
-  tmp1 = primetest.even(n);
-  scrut = tmp || tmp1;
+  lambda$this = runtime.safeCall(lambda7(n));
+  scrut = runtime.short_or(tmp, lambda$this);
   if (scrut === true) {
-    tmp2 = n == 2;
-    _deforest_Deforest_Arr_2_0 = tmp2;
+    tmp1 = n == 2;
+    _deforest_Deforest_Arr_2_0 = tmp1;
     _deforest_Deforest_Arr_2_1 = rs;
     arr = (cont) => {
       return match_scrut_arm_Deforest_Arr_2_inst_39_40_38_35_1_tsni(cont, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
@@ -3420,7 +3413,7 @@ divMod_inst_39_40_38_35_1_2_3_12_13_14_tsni = function divMod_inst_39_40_38_35_1
       _deforest_Deforest_Arr_2_01 = k;
       _deforest_Deforest_Arr_2_11 = q;
       arr1 = (n, x) => {
-        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, square$this;
+        let first11, first01, k1, q1, scrut1, param0, param1, t, ts, tmp3, tmp4, tmp5, tmp6, square$this, lambda$this, lambda$this1;
         first01 = _deforest_Deforest_Arr_2_01;
         first11 = _deforest_Deforest_Arr_2_11;
         k1 = first01;
@@ -3435,13 +3428,12 @@ divMod_inst_39_40_38_35_1_2_3_12_13_14_tsni = function divMod_inst_39_40_38_35_1
           t = param0;
           ts = param1;
           tmp5 = t == 1;
-          tmp6 = n - 1;
-          tmp7 = t == tmp6;
-          tmp8 = tmp5 || tmp7;
-          tmp9 = witness$(n, ts);
-          return tmp8 || tmp9
+          lambda$this = runtime.safeCall(lambda5(n, t));
+          tmp6 = runtime.short_or(tmp5, lambda$this);
+          lambda$this1 = runtime.safeCall(lambda6(n, ts));
+          return runtime.short_or(tmp6, lambda$this1)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       };
       return arr1
@@ -3496,7 +3488,7 @@ divMod_inst_39_40_38_35_1_2_3_4_5_9_10_11_tsni = function divMod_inst_39_40_38_3
 splitAt_lz_inst_39_40_38_35_1_2_3_4_5_8_tsni = function splitAt_lz_inst_39_40_38_35_1_2_3_4_5_8_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take_lz(n, ls);
-  tmp1 = NofibPrelude.drop_lz(n, ls);
+  tmp1 = NofibPrelude.leave_lz(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (ns) => {
@@ -3566,7 +3558,7 @@ uniform_inst_39_40_38_35_1_2_3_4_5_6_tsni = function uniform_inst_39_40_38_35_1_
       } else {
         n = param0;
         ns = param1;
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
       n = param0;
@@ -3595,11 +3587,11 @@ uniform_inst_39_40_38_35_1_2_3_4_5_6_tsni = function uniform_inst_39_40_38_35_1_
           }
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_39_40_38_35_1_2_3_4_5_6_7_tsni = function map_inst_39_40_38_35_1_2_3_4_5_6_7_tsni(f3, xs) {
@@ -3621,26 +3613,26 @@ map_inst_39_40_38_35_1_2_3_4_5_6_7_tsni = function map_inst_39_40_38_35_1_2_3_4_
       return match_xs_arm_Nil_inst_39_40_38_35_1_2_3_4_5_41_42_tsni(f4, a)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lines_inst_39_40_37_tsni = function lines_inst_39_40_37_tsni(s) {
   let scrut, first1, first0, l, s_;
   scrut = break__inst_39_40_37_24_tsni(lambda, s);
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     l = first0;
     s_ = first1;
     return runtime.safeCall(s_(l))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 break__inst_39_40_37_24_tsni = function break__inst_39_40_37_24_tsni(p, ls) {
   let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
   if (ls instanceof NofibPrelude.Nil.class) {
-    arr = [
+    arr = globalThis.Object.freeze([
       (a) => {
         return match_l_arm_Nil_inst_39_40_38_35_1_44_45_tsni(a)
       },
@@ -3651,7 +3643,7 @@ break__inst_39_40_37_24_tsni = function break__inst_39_40_37_24_tsni(p, ls) {
         };
         return match_s__rest_inst_39_40_37_tsni(l, tmp2)
       }
-    ];
+    ]);
     return arr
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
@@ -3670,18 +3662,18 @@ break__inst_39_40_37_24_tsni = function break__inst_39_40_37_24_tsni(p, ls) {
         tmp2 = lines_inst_39_40_37_tsni(s__);
         return match_s__rest_inst_39_40_37_tsni(l, tmp2)
       };
-      arr1 = [
+      arr1 = globalThis.Object.freeze([
         (a) => {
           return match_l_arm_Nil_inst_39_40_38_35_1_44_45_tsni(a)
         },
         tmp
-      ];
+      ]);
       return arr1
     } else {
       scrut = break__inst_39_40_37_24_tsni(p, xs);
-      if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-        first0 = scrut[0];
-        first1 = scrut[1];
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+        first0 = runtime.Tuple.get(scrut, 0);
+        first1 = runtime.Tuple.get(scrut, 1);
         ys = first0;
         zs = first1;
         _deforest_Cons_head1 = x;
@@ -3697,17 +3689,17 @@ break__inst_39_40_37_24_tsni = function break__inst_39_40_37_24_tsni(p, ls) {
           tmp4 = tmp2 + tmp3;
           return f_inst_39_40_38_35_1_44_45_tsni(t, tmp4)
         };
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           tmp1,
           zs
-        ];
+        ]);
         return arr2
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 makeNumber_inst_0_1_2_3_4_5_41_tsni = function makeNumber_inst_0_1_2_3_4_5_41_tsni(b, ls) {
@@ -3848,10 +3840,10 @@ int_val_of_string_inst_39_40_38_35_1_44_tsni = function int_val_of_string_inst_3
 f_inst_39_40_38_35_1_44_45_tsni = function f_inst_39_40_38_35_1_44_45_tsni(l, a) {
   return runtime.safeCall(l(a))
 };
-lambda$3 = function lambda$(ls, state) {
+lambda$6 = function lambda$(ls, state) {
   return doInput_inst_0_tsni(state, ls)
 };
-lambda5 = (undefined, function (ls) {
+lambda8 = (undefined, function (ls) {
   return (state) => {
     return lambda$_inst_15_tsni(ls, state)
   }
@@ -3860,10 +3852,10 @@ mTest$ = function mTest$(n, k, rs) {
   let scrut, scrut1, arr, tmp;
   scrut1 = k == 0;
   if (scrut1 === true) {
-    arr = [
+    arr = globalThis.Object.freeze([
       true,
       rs
-    ];
+    ]);
     return arr
   } else {
     tmp = findKQ_inst_16_12_tsni(n);
@@ -3876,6 +3868,14 @@ mTest = function mTest(n) {
     return mTest$_inst_17_18_tsni(n, k, rs)
   }
 };
+lambda$5 = function lambda$(n) {
+  return primetest1.even(n)
+};
+lambda7 = (undefined, function (n) {
+  return () => {
+    return lambda$5(n)
+  }
+});
 square$ = function square$(n, x) {
   let tmp;
   tmp = x * x;
@@ -3908,7 +3908,7 @@ witness$ = function witness$(n, ls) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 witness = function witness(n) {
@@ -3916,6 +3916,24 @@ witness = function witness(n) {
     return witness$(n, ls)
   }
 };
+lambda$4 = function lambda$(n, t) {
+  let tmp;
+  tmp = n - 1;
+  return t == tmp
+};
+lambda5 = (undefined, function (n, t) {
+  return () => {
+    return lambda$4(n, t)
+  }
+});
+lambda$3 = function lambda$(n, ts) {
+  return witness$(n, ts)
+};
+lambda6 = (undefined, function (n, ts) {
+  return () => {
+    return lambda$3(n, ts)
+  }
+});
 lambda4 = (undefined, function (x) {
   return NofibPrelude.intMod(x, 65536)
 });
@@ -4016,7 +4034,7 @@ f = function f(l, a) {
     tmp2 = tmp + tmp1;
     return f(t, tmp2)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 (class primetest {
@@ -4039,10 +4057,10 @@ f = function f(l, a) {
   static break_(p, ls) {
     let param0, param1, x2, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2;
     if (ls instanceof NofibPrelude.Nil.class) {
-      arr = [
+      arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ];
+      ]);
       return arr
     } else if (ls instanceof NofibPrelude.Cons.class) {
       param0 = ls.head;
@@ -4052,43 +4070,43 @@ f = function f(l, a) {
       scrut1 = runtime.safeCall(p(x2));
       if (scrut1 === true) {
         tmp = NofibPrelude.Cons(x2, xs);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           NofibPrelude.Nil,
           tmp
-        ];
+        ]);
         return arr1
       } else {
         scrut = primetest.break_(p, xs);
-        if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-          first0 = scrut[0];
-          first1 = scrut[1];
+        if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+          first0 = runtime.Tuple.get(scrut, 0);
+          first1 = runtime.Tuple.get(scrut, 1);
           ys = first0;
           zs = first1;
           tmp1 = NofibPrelude.Cons(x2, ys);
-          arr2 = [
+          arr2 = globalThis.Object.freeze([
             tmp1,
             zs
-          ];
+          ]);
           return arr2
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static lines(s1) {
     let scrut, first1, first0, l, s_;
     scrut = break__inst_23_24_tsni(lambda, s1);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
+    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+      first0 = runtime.Tuple.get(scrut, 0);
+      first1 = runtime.Tuple.get(scrut, 1);
       l = first0;
       s_ = first1;
       return runtime.safeCall(s_(l))
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static makeNumber(b, ls1) {
@@ -4170,16 +4188,16 @@ f = function f(l, a) {
           if (scrut3 === true) {
             return primetest.rands(s12, s21)
           } else {
-            throw new globalThis.Error("match error");
+            throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static findKQ(n1) {
@@ -4204,7 +4222,7 @@ f = function f(l, a) {
         } else {
           n2 = param0;
           ns = param1;
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
         n2 = param0;
@@ -4225,11 +4243,11 @@ f = function f(l, a) {
             return NofibPrelude.Cons(t, tmp3)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static random(n2, rs) {
@@ -4241,10 +4259,10 @@ f = function f(l, a) {
     return runtime.safeCall(scrut(ns))
   } 
   static singleTestX(n3, kq, x3) {
-    let first1, first0, k, q, scrut, param0, param1, t, ts, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, square$this;
-    if (globalThis.Array.isArray(kq) && kq.length === 2) {
-      first0 = kq[0];
-      first1 = kq[1];
+    let first1, first0, k, q, scrut, param0, param1, t, ts, tmp, tmp1, tmp2, tmp3, square$this, lambda$this, lambda$this1;
+    if (runtime.Tuple.isArrayLike(kq) && kq.length === 2) {
+      first0 = runtime.Tuple.get(kq, 0);
+      first1 = runtime.Tuple.get(kq, 1);
       k = first0;
       q = first1;
       tmp = primetest.powerMod(x3, q, n3);
@@ -4257,16 +4275,15 @@ f = function f(l, a) {
         t = param0;
         ts = param1;
         tmp2 = t == 1;
-        tmp3 = n3 - 1;
-        tmp4 = t == tmp3;
-        tmp5 = tmp2 || tmp4;
-        tmp6 = witness$(n3, ts);
-        return tmp5 || tmp6
+        lambda$this = runtime.safeCall(lambda5(n3, t));
+        tmp3 = runtime.short_or(tmp2, lambda$this);
+        lambda$this1 = runtime.safeCall(lambda6(n3, ts));
+        return runtime.short_or(tmp3, lambda$this1)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static singleTest(n4, kq1, rs1) {
@@ -4276,16 +4293,16 @@ f = function f(l, a) {
     return runtime.safeCall(scrut(n4, kq1))
   } 
   static multiTest(k, rs2, n5) {
-    let scrut, tmp, tmp1, tmp2, arr;
+    let scrut, tmp, tmp1, arr, lambda$this;
     tmp = n5 <= 1;
-    tmp1 = primetest.even(n5);
-    scrut = tmp || tmp1;
+    lambda$this = runtime.safeCall(lambda7(n5));
+    scrut = runtime.short_or(tmp, lambda$this);
     if (scrut === true) {
-      tmp2 = n5 == 2;
-      arr = [
-        tmp2,
+      tmp1 = n5 == 2;
+      arr = globalThis.Object.freeze([
+        tmp1,
         rs2
-      ];
+      ]);
       return arr
     } else {
       return mTest$_inst_31_3_tsni(n5, k, rs2)
@@ -4310,7 +4327,7 @@ f = function f(l, a) {
       lambda$this = runtime.safeCall(lambda_inst_33_tsni(ls2));
       return doLine_inst_33_1_tsni(l, lambda$this, state)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static process(process_arg1) {
@@ -4330,6 +4347,7 @@ f = function f(l, a) {
     tmp = testPrimetest_nofib_inst_39_40_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return "primetest"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "primetest"]; 
 });
 let primetest = primetest1; export default primetest;

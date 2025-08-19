@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -157,7 +159,7 @@ algc_inst_3_4_tsni = function algc_inst_3_4_tsni(m, n, xs, ys) {
         m2 = tmp;
         tmp1 = NofibPrelude.take(m2, xs);
         xs1 = tmp1;
-        tmp2 = NofibPrelude.drop(m2, xs);
+        tmp2 = NofibPrelude.leave(m2, xs);
         xs2 = tmp2;
         tmp3 = lcss.algb(xs1, ys);
         l1 = tmp3;
@@ -174,7 +176,7 @@ algc_inst_3_4_tsni = function algc_inst_3_4_tsni(m, n, xs, ys) {
         tmp12 = algc_inst_3_4_tsni(m2, k, xs1, tmp11);
         tmp13 = m - m2;
         tmp14 = n - k;
-        tmp15 = NofibPrelude.drop(k, ys);
+        tmp15 = NofibPrelude.leave(k, ys);
         tmp16 = algc_inst_3_4_tsni(tmp13, tmp14, xs2, tmp15);
         return NofibPrelude.compose(tmp12, tmp16)
       }
@@ -183,7 +185,7 @@ algc_inst_3_4_tsni = function algc_inst_3_4_tsni(m, n, xs, ys) {
       m2 = tmp17;
       tmp18 = NofibPrelude.take(m2, xs);
       xs1 = tmp18;
-      tmp19 = NofibPrelude.drop(m2, xs);
+      tmp19 = NofibPrelude.leave(m2, xs);
       xs2 = tmp19;
       tmp20 = lcss.algb(xs1, ys);
       l1 = tmp20;
@@ -200,7 +202,7 @@ algc_inst_3_4_tsni = function algc_inst_3_4_tsni(m, n, xs, ys) {
       tmp29 = algc_inst_3_4_tsni(m2, k, xs1, tmp28);
       tmp30 = m - m2;
       tmp31 = n - k;
-      tmp32 = NofibPrelude.drop(k, ys);
+      tmp32 = NofibPrelude.leave(k, ys);
       tmp33 = algc_inst_3_4_tsni(tmp30, tmp31, xs2, tmp32);
       return NofibPrelude.compose(tmp29, tmp33)
     }
@@ -338,7 +340,7 @@ algc_inst_5_6_4_tsni = function algc_inst_5_6_4_tsni(m, n, xs, ys) {
         m2 = tmp;
         tmp1 = NofibPrelude.take(m2, xs);
         xs1 = tmp1;
-        tmp2 = NofibPrelude.drop(m2, xs);
+        tmp2 = NofibPrelude.leave(m2, xs);
         xs2 = tmp2;
         tmp3 = lcss.algb(xs1, ys);
         l1 = tmp3;
@@ -355,7 +357,7 @@ algc_inst_5_6_4_tsni = function algc_inst_5_6_4_tsni(m, n, xs, ys) {
         tmp12 = algc_inst_5_6_4_tsni(m2, k, xs1, tmp11);
         tmp13 = m - m2;
         tmp14 = n - k;
-        tmp15 = NofibPrelude.drop(k, ys);
+        tmp15 = NofibPrelude.leave(k, ys);
         tmp16 = algc_inst_5_6_4_tsni(tmp13, tmp14, xs2, tmp15);
         return NofibPrelude.compose(tmp12, tmp16)
       }
@@ -364,7 +366,7 @@ algc_inst_5_6_4_tsni = function algc_inst_5_6_4_tsni(m, n, xs, ys) {
       m2 = tmp17;
       tmp18 = NofibPrelude.take(m2, xs);
       xs1 = tmp18;
-      tmp19 = NofibPrelude.drop(m2, xs);
+      tmp19 = NofibPrelude.leave(m2, xs);
       xs2 = tmp19;
       tmp20 = lcss.algb(xs1, ys);
       l1 = tmp20;
@@ -381,7 +383,7 @@ algc_inst_5_6_4_tsni = function algc_inst_5_6_4_tsni(m, n, xs, ys) {
       tmp29 = algc_inst_5_6_4_tsni(m2, k, xs1, tmp28);
       tmp30 = m - m2;
       tmp31 = n - k;
-      tmp32 = NofibPrelude.drop(k, ys);
+      tmp32 = NofibPrelude.leave(k, ys);
       tmp33 = algc_inst_5_6_4_tsni(tmp30, tmp31, xs2, tmp32);
       return NofibPrelude.compose(tmp29, tmp33)
     }
@@ -525,7 +527,7 @@ algc_inst_7_8_6_4_tsni = function algc_inst_7_8_6_4_tsni(m, n, xs, ys) {
         m2 = tmp;
         tmp1 = NofibPrelude.take(m2, xs);
         xs1 = tmp1;
-        tmp2 = NofibPrelude.drop(m2, xs);
+        tmp2 = NofibPrelude.leave(m2, xs);
         xs2 = tmp2;
         tmp3 = lcss.algb(xs1, ys);
         l1 = tmp3;
@@ -542,7 +544,7 @@ algc_inst_7_8_6_4_tsni = function algc_inst_7_8_6_4_tsni(m, n, xs, ys) {
         tmp12 = algc_inst_7_8_6_4_tsni(m2, k, xs1, tmp11);
         tmp13 = m - m2;
         tmp14 = n - k;
-        tmp15 = NofibPrelude.drop(k, ys);
+        tmp15 = NofibPrelude.leave(k, ys);
         tmp16 = algc_inst_7_8_6_4_tsni(tmp13, tmp14, xs2, tmp15);
         return NofibPrelude.compose(tmp12, tmp16)
       }
@@ -551,7 +553,7 @@ algc_inst_7_8_6_4_tsni = function algc_inst_7_8_6_4_tsni(m, n, xs, ys) {
       m2 = tmp17;
       tmp18 = NofibPrelude.take(m2, xs);
       xs1 = tmp18;
-      tmp19 = NofibPrelude.drop(m2, xs);
+      tmp19 = NofibPrelude.leave(m2, xs);
       xs2 = tmp19;
       tmp20 = lcss.algb(xs1, ys);
       l1 = tmp20;
@@ -568,7 +570,7 @@ algc_inst_7_8_6_4_tsni = function algc_inst_7_8_6_4_tsni(m, n, xs, ys) {
       tmp29 = algc_inst_7_8_6_4_tsni(m2, k, xs1, tmp28);
       tmp30 = m - m2;
       tmp31 = n - k;
-      tmp32 = NofibPrelude.drop(k, ys);
+      tmp32 = NofibPrelude.leave(k, ys);
       tmp33 = algc_inst_7_8_6_4_tsni(tmp30, tmp31, xs2, tmp32);
       return NofibPrelude.compose(tmp29, tmp33)
     }
@@ -715,7 +717,7 @@ algc_inst_9_10_8_6_4_tsni = function algc_inst_9_10_8_6_4_tsni(m, n, xs, ys) {
         m2 = tmp;
         tmp1 = NofibPrelude.take(m2, xs);
         xs1 = tmp1;
-        tmp2 = NofibPrelude.drop(m2, xs);
+        tmp2 = NofibPrelude.leave(m2, xs);
         xs2 = tmp2;
         tmp3 = lcss.algb(xs1, ys);
         l1 = tmp3;
@@ -732,7 +734,7 @@ algc_inst_9_10_8_6_4_tsni = function algc_inst_9_10_8_6_4_tsni(m, n, xs, ys) {
         tmp12 = algc_inst_9_10_8_6_4_tsni(m2, k, xs1, tmp11);
         tmp13 = m - m2;
         tmp14 = n - k;
-        tmp15 = NofibPrelude.drop(k, ys);
+        tmp15 = NofibPrelude.leave(k, ys);
         tmp16 = algc_inst_9_10_8_6_4_tsni(tmp13, tmp14, xs2, tmp15);
         return NofibPrelude.compose(tmp12, tmp16)
       }
@@ -741,7 +743,7 @@ algc_inst_9_10_8_6_4_tsni = function algc_inst_9_10_8_6_4_tsni(m, n, xs, ys) {
       m2 = tmp17;
       tmp18 = NofibPrelude.take(m2, xs);
       xs1 = tmp18;
-      tmp19 = NofibPrelude.drop(m2, xs);
+      tmp19 = NofibPrelude.leave(m2, xs);
       xs2 = tmp19;
       tmp20 = lcss.algb(xs1, ys);
       l1 = tmp20;
@@ -758,7 +760,7 @@ algc_inst_9_10_8_6_4_tsni = function algc_inst_9_10_8_6_4_tsni(m, n, xs, ys) {
       tmp29 = algc_inst_9_10_8_6_4_tsni(m2, k, xs1, tmp28);
       tmp30 = m - m2;
       tmp31 = n - k;
-      tmp32 = NofibPrelude.drop(k, ys);
+      tmp32 = NofibPrelude.leave(k, ys);
       tmp33 = algc_inst_9_10_8_6_4_tsni(tmp30, tmp31, xs2, tmp32);
       return NofibPrelude.compose(tmp29, tmp33)
     }
@@ -919,16 +921,16 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
     param1 = listcomp_fun_para.tail;
     listcomp_fun_ls_h = param0;
     listcomp_fun_ls_t = param1;
-    arr = [
+    arr = globalThis.Object.freeze([
       listcomp_fun_ls_h,
       0
-    ];
+    ]);
     tmp = listcomp_fun(listcomp_fun_ls_t);
     return NofibPrelude.Cons(arr, tmp)
   } else if (listcomp_fun_para instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 (class lcss {
@@ -942,9 +944,9 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
     } else if (yss instanceof NofibPrelude.Cons.class) {
       param0 = yss.head;
       param1 = yss.tail;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
+      if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+        first0 = runtime.Tuple.get(param0, 0);
+        first1 = runtime.Tuple.get(param0, 1);
         y = first0;
         k0j = first1;
         ys = param1;
@@ -955,17 +957,17 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
           tmp = NofibPrelude.max(k1j1, k0j);
         }
         kjcurr = tmp;
-        arr = [
+        arr = globalThis.Object.freeze([
           y,
           kjcurr
-        ];
+        ]);
         tmp1 = lcss.algb2(x, k0j, kjcurr, ys);
         return NofibPrelude.Cons(arr, tmp1)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static algb1(xss, yss1) {
@@ -980,7 +982,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
       tmp = lcss.algb2(x1, 0, 0, yss1);
       return lcss.algb1(xs, tmp)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static algb(xs, ys) {
@@ -996,9 +998,9 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
     } else if (ls instanceof NofibPrelude.Cons.class) {
       param0 = ls.head;
       param1 = ls.tail;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
+      if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+        first0 = runtime.Tuple.get(param0, 0);
+        first1 = runtime.Tuple.get(param0, 1);
         x1 = first0;
         y = first1;
         xys = param1;
@@ -1013,10 +1015,10 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
           return lcss.findk(tmp3, km, m, xys)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static algc(m1, n, xs1, ys1) {
@@ -1040,7 +1042,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
           m2 = tmp;
           tmp1 = NofibPrelude.take(m2, xs1);
           xs11 = tmp1;
-          tmp2 = NofibPrelude.drop(m2, xs1);
+          tmp2 = NofibPrelude.leave(m2, xs1);
           xs2 = tmp2;
           tmp3 = lcss.algb(xs11, ys1);
           l1 = tmp3;
@@ -1057,7 +1059,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
           tmp12 = lcss.algc(m2, k1, xs11, tmp11);
           tmp13 = m1 - m2;
           tmp14 = n - k1;
-          tmp15 = NofibPrelude.drop(k1, ys1);
+          tmp15 = NofibPrelude.leave(k1, ys1);
           tmp16 = lcss.algc(tmp13, tmp14, xs2, tmp15);
           return NofibPrelude.compose(tmp12, tmp16)
         }
@@ -1066,7 +1068,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
         m2 = tmp17;
         tmp18 = NofibPrelude.take(m2, xs1);
         xs11 = tmp18;
-        tmp19 = NofibPrelude.drop(m2, xs1);
+        tmp19 = NofibPrelude.leave(m2, xs1);
         xs2 = tmp19;
         tmp20 = lcss.algb(xs11, ys1);
         l1 = tmp20;
@@ -1083,7 +1085,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
         tmp29 = lcss.algc(m2, k1, xs11, tmp28);
         tmp30 = m1 - m2;
         tmp31 = n - k1;
-        tmp32 = NofibPrelude.drop(k1, ys1);
+        tmp32 = NofibPrelude.leave(k1, ys1);
         tmp33 = lcss.algc(tmp30, tmp31, xs2, tmp32);
         return NofibPrelude.compose(tmp29, tmp33)
       }
@@ -1110,6 +1112,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
     tmp = testLCSS_nofib_inst_9_10_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return "lcss"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "lcss"]; 
 });
 let lcss = lcss1; export default lcss;

@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -7,12 +9,17 @@ let myEmpty1;
   static {
     myEmpty1 = myEmpty;
     const X$class = class X {
-      constructor() {}
-      toString() { return "X"; }
+      constructor() {
+        Object.defineProperty(this, "class", {
+          value: X
+        })
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "X"]; 
     };
-    this.X = new X$class;
-    this.X.class = X$class;
+    this.X = globalThis.Object.freeze(new X$class);
   }
-  static toString() { return "myEmpty"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "myEmpty"]; 
 });
 let myEmpty = myEmpty1; export default myEmpty;

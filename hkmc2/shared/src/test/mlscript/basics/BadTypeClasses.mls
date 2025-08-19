@@ -4,7 +4,7 @@ module M with
   fun f(foo: Int, using bar: Int)
 //│ ╔══[ERROR] Keyword `using` must occur before all parameters.
 //│ ║  l.4: 	  fun f(foo: Int, using bar: Int)
-//│ ╙──     	                        ^^^^^^^^
+//│ ╙──     	                  ^^^^^^^^^^^^^^
 
 module M with
   fun f(using Int)
@@ -67,7 +67,7 @@ M.foo()
 :e
 fun f[T](using t: T) = t
 f
-//│ ╔══[ERROR] Cannot query instance of type ‹unspecified› (T) for call: 
+//│ ╔══[ERROR] Cannot query instance of type ‹unspecified› (type parameter T) for call: 
 //│ ║  l.69: 	f
 //│ ║        	^
 //│ ╟── Required by contextual parameter declaration: 
@@ -75,7 +75,11 @@ f
 //│ ║        	               ^^^^
 //│ ╙── Illegal query for an unspecified type variable T.
 
-:fixme // graceful error
 :e
 fun f(using t: Int = 42) = t
-//│ /!!!\ Uncaught error: scala.MatchError: TermDef(Ins,InfixApp(Ident(t),keyword ':',Ident(Int)),Some(IntLit(42))) (of class hkmc2.syntax.Tree$TermDef)
+//│ ╔══[ERROR] Expected a valid parameter, found term definition
+//│ ║  l.79: 	fun f(using t: Int = 42) = t
+//│ ╙──      	      ^^^^^^^^^^^^^^^^^
+//│ ╔══[ERROR] Name not found: t
+//│ ║  l.79: 	fun f(using t: Int = 42) = t
+//│ ╙──      	                           ^

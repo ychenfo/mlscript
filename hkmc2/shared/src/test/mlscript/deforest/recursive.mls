@@ -36,9 +36,9 @@ test(id(mk(5)))
 //│ = Cons(11, Cons(9, Cons(7, Cons(5, Cons(3, Cons(1, Nil))))))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@4@inst_0_1_tsni --> Ref(ls_map1)@inst_0_3_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@4@inst_0_1_tsni --> Ref(ls_map1)@inst_0_3_tsni@Cons
 //│ Ref(member:Nil)@5@inst_0_1_tsni --> Ref(ls_map1)@inst_0_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@4@inst_2_1_tsni --> Ref(ls_map1)@inst_2_3_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@4@inst_2_1_tsni --> Ref(ls_map1)@inst_2_3_tsni@Cons
 //│ Ref(member:Nil)@5@inst_2_1_tsni --> Ref(ls_map1)@inst_2_3_tsni@Nil
 //│ -------------- executing -------------
 //│ = Cons(11, Cons(9, Cons(7, Cons(5, Cons(3, Cons(1, Nil))))))
@@ -54,7 +54,7 @@ map(enumFromTo(1, 4))
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
 //│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
 //│ -------------- executing -------------
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
@@ -68,7 +68,7 @@ sum(enumFromTo(1,10))
 //│ = 45
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
 //│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
 //│ -------------- executing -------------
 //│ = 45
@@ -83,7 +83,7 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
 //│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
 //│ -------------- executing -------------
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
@@ -99,7 +99,7 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
 //│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
 //│ -------------- executing -------------
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
@@ -115,7 +115,7 @@ sum(enumFromTo(1, 10), 0)
 //│ = 45
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(a)), Arg(false,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
 //│ Ref(member:Nil)@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
 //│ -------------- executing -------------
 //│ = 45
@@ -137,9 +137,9 @@ test(id(mk(5)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
 //│ Ref(member:Nil)@4@inst_0_tsni --> Ref(xs_map)@inst_0_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref(acc))))@5@inst_0_1_tsni --> Ref(xs_map)@inst_0_3_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(x)), Arg(None,Ref(acc))))@5@inst_0_1_tsni --> Ref(xs_map)@inst_0_3_tsni@Cons
 //│ Ref(member:Nil)@4@inst_2_tsni --> Ref(xs_map)@inst_2_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref(acc))))@5@inst_2_1_tsni --> Ref(xs_map)@inst_2_3_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(x)), Arg(None,Ref(acc))))@5@inst_2_1_tsni --> Ref(xs_map)@inst_2_3_tsni@Cons
 //│ -------------- executing -------------
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -160,9 +160,9 @@ test(id(mk(3)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
 //│ Ref(member:Nil)@4@inst_0_1_tsni --> Ref(xs_rev)@inst_0_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@5@inst_0_1_tsni --> Ref(xs_rev)@inst_0_3_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@5@inst_0_1_tsni --> Ref(xs_rev)@inst_0_3_tsni@Cons
 //│ Ref(member:Nil)@4@inst_2_1_tsni --> Ref(xs_rev)@inst_2_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@5@inst_2_1_tsni --> Ref(xs_rev)@inst_2_3_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@5@inst_2_1_tsni --> Ref(xs_rev)@inst_2_3_tsni@Cons
 //│ -------------- executing -------------
 //│ = Cons(1, Cons(2, Cons(3, Cons(4, Nil))))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -187,12 +187,30 @@ fun pair_up(xs) =
 fun mk(n) = if n > 0 then (n - 1) :: n :: (n + 1) :: mk(n - 1) else Nil
 fun test(x) = pair_up(mk(x))
 test(4)
-//│ = Cons(Pair(3, 4), Cons(Pair(5, 2), Cons(Pair(3, 4), Cons(Pair(1, 2), Cons(Pair(3, 0), Cons(Pair(1, 2), Nil))))))
+//│ = Cons(
+//│   Pair(3, 4),
+//│   Cons(
+//│     Pair(5, 2),
+//│     Cons(
+//│       Pair(3, 4),
+//│       Cons(Pair(1, 2), Cons(Pair(3, 0), Cons(Pair(1, 2), Nil)))
+//│     )
+//│   )
+//│ )
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
 //│ 
 //│ -------------- executing -------------
-//│ = Cons(Pair(3, 4), Cons(Pair(5, 2), Cons(Pair(3, 4), Cons(Pair(1, 2), Cons(Pair(3, 0), Cons(Pair(1, 2), Nil))))))
+//│ = Cons(
+//│   Pair(3, 4),
+//│   Cons(
+//│     Pair(5, 2),
+//│     Cons(
+//│       Pair(3, 4),
+//│       Cons(Pair(1, 2), Cons(Pair(3, 0), Cons(Pair(1, 2), Nil)))
+//│     )
+//│   )
+//│ )
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -213,9 +231,9 @@ test(id(mk2d(4)))
 //│ = 20
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@5@inst_0_1_2_tsni --> Ref(ls_sum)@inst_0_4_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(x)), Arg(None,Ref($tmp))))@5@inst_0_1_2_tsni --> Ref(ls_sum)@inst_0_4_tsni@Cons
 //│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(ls_sum)@inst_0_4_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(x)), Arg(false,Ref($tmp))))@5@inst_3_1_2_tsni --> Ref(ls_sum)@inst_3_4_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(x)), Arg(None,Ref($tmp))))@5@inst_3_1_2_tsni --> Ref(ls_sum)@inst_3_4_tsni@Cons
 //│ Ref(member:Nil)@6@inst_3_1_tsni --> Ref(ls_sum)@inst_3_4_tsni@Nil
 //│ -------------- executing -------------
 //│ = 20
@@ -233,9 +251,9 @@ count(0, rev(Nil, 1 :: 2 :: Nil))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
 //│ Ref(member:Nil)@2@inst__tsni --> Ref(xs)@inst_1_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(h)), Arg(false,Ref(a))))@3@inst_0_tsni --> Ref(xs)@inst_1_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(ys)@inst_0_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref(member:Nil))))@5@inst__tsni --> Ref(ys)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(h)), Arg(None,Ref(a))))@3@inst_0_tsni --> Ref(xs)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref($tmp))))@4@inst__tsni --> Ref(ys)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(2))), Arg(None,Ref(member:Nil))))@5@inst__tsni --> Ref(ys)@inst_0_tsni@Cons
 //│ Ref(member:Nil)@6@inst__tsni --> Ref(ys)@inst_0_tsni@Nil
 //│ -------------- executing -------------
 //│ = 2
@@ -267,9 +285,9 @@ map(x => if x is A then 1 else 0, A :: B :: Nil)
 //│ = Cons(1, Cons(0, Nil))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(member:A)), Arg(false,Ref($tmp))))@2@inst__tsni --> Ref(xs_map)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(member:A)), Arg(None,Ref($tmp))))@2@inst__tsni --> Ref(xs_map)@inst_0_tsni@Cons
 //│ Ref(member:A)@3@inst__tsni --> Ref(x)@inst_1_tsni@A
-//│ Call(Ref(member:Cons),List(Arg(false,Ref(member:B)), Arg(false,Ref(member:Nil))))@4@inst__tsni --> Ref(xs_map)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(member:B)), Arg(None,Ref(member:Nil))))@4@inst__tsni --> Ref(xs_map)@inst_0_tsni@Cons
 //│ Ref(member:Nil)@5@inst__tsni --> Ref(xs_map)@inst_0_tsni@Nil
 //│ Ref(member:B)@6@inst__tsni --> Ref(x)@inst_1_tsni@dflt
 //│ -------------- executing -------------
@@ -289,13 +307,13 @@ c(T(A, T(B, L, L), T(A, L, L)))
 //│ = T(0, T(1, L, L), T(0, L, L))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:T),List(Arg(false,Ref(member:A)), Arg(false,Ref($tmp)), Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@T
+//│ Call(Ref(member:T),List(Arg(None,Ref(member:A)), Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@T
 //│ Ref(member:A)@2@inst__tsni --> Ref(n)@inst_0_tsni@A
-//│ Call(Ref(member:T),List(Arg(false,Ref(member:A)), Arg(false,Ref(member:L)), Arg(false,Ref(member:L))))@3@inst__tsni --> Ref(x)@inst_0_tsni@T
+//│ Call(Ref(member:T),List(Arg(None,Ref(member:A)), Arg(None,Ref(member:L)), Arg(None,Ref(member:L))))@3@inst__tsni --> Ref(x)@inst_0_tsni@T
 //│ Ref(member:L)@4@inst__tsni --> Ref(x)@inst_0_tsni@L
 //│ Ref(member:L)@5@inst__tsni --> Ref(x)@inst_0_tsni@L
 //│ Ref(member:A)@6@inst__tsni --> Ref(n)@inst_0_tsni@A
-//│ Call(Ref(member:T),List(Arg(false,Ref(member:B)), Arg(false,Ref(member:L)), Arg(false,Ref(member:L))))@7@inst__tsni --> Ref(x)@inst_0_tsni@T
+//│ Call(Ref(member:T),List(Arg(None,Ref(member:B)), Arg(None,Ref(member:L)), Arg(None,Ref(member:L))))@7@inst__tsni --> Ref(x)@inst_0_tsni@T
 //│ Ref(member:L)@8@inst__tsni --> Ref(x)@inst_0_tsni@L
 //│ Ref(member:L)@9@inst__tsni --> Ref(x)@inst_0_tsni@L
 //│ Ref(member:B)@10@inst__tsni --> Ref(n)@inst_0_tsni@B
@@ -313,11 +331,11 @@ max(3 :: 2 :: 4 :: 1 :: 0 :: Nil, 0)
 //│ = 4
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(3))), Arg(false,Ref($tmp))))@1@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(2))), Arg(false,Ref($tmp))))@2@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(4))), Arg(false,Ref($tmp))))@3@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(1))), Arg(false,Ref($tmp))))@4@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(false,Lit(IntLit(0))), Arg(false,Ref(member:Nil))))@5@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(3))), Arg(None,Ref($tmp))))@1@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(2))), Arg(None,Ref($tmp))))@2@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(4))), Arg(None,Ref($tmp))))@3@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref($tmp))))@4@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(0))), Arg(None,Ref(member:Nil))))@5@inst__tsni --> Ref(ms)@inst_0_tsni@Cons
 //│ Ref(member:Nil)@6@inst__tsni --> Ref(ms)@inst_0_tsni@Nil
 //│ -------------- executing -------------
 //│ = 4

@@ -230,6 +230,10 @@ class DeforestPreAnalyzer(
   
   override def applyResult(r: Result): Unit =
     resultIdToResult += r.uid -> r
+    r match
+      case DeforestTupSelect(scrut, idx) =>
+        selsToMatchingArmsContainingIt += r.uid -> inMatchScrutsArms
+      case _ => ()
     super.applyResult(r)
   
   override def applyPath(p: Path): Unit =
@@ -289,7 +293,7 @@ class DeforestPreAnalyzer(
     case _ => super.applyDefn(defn)
   
   override def applyArg(arg: Arg): Unit =
-    if arg.spread then handleable = false
+    if arg.spread.isDefined then handleable = false
     super.applyArg(arg)
   
   override def applyParamList(pl: ParamList): Unit =
@@ -408,7 +412,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     val funProdStrat = defn.params.foldRight[ProdStrat](res.asProdStrat): (ps, acc) =>
       assert(ps.restParam.isEmpty) // TODO: the `restParam`
       val psTys = ps.params.map:
-        case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
+        case Param(_, sym, _, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
       ProdFun(psTys, acc)
     val bodyStrat = processBlock(defn.body)(using defn.sym :: processingDefs, cc)
     cc.constrain(bodyStrat, res.asConsStrat)
@@ -452,19 +456,19 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
         case FunDefn(_, sym, params, body) =>
           if processingDefs.nonEmpty then
             val paramSyms = params.head.params.map:
-              case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
+              case Param(_, sym, _, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
             val res = freshVar(s"${sym.nme}_res", cc.forFun)
             val funProdStrat = params.foldRight[ProdStrat](res.asProdStrat): (ps, acc) =>
               assert(ps.restParam.isEmpty) // TODO: the `restParam`
               val psTys = ps.params.map:
-                case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
+                case Param(_, sym, _, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
               ProdFun(psTys, acc)
             val bodyStrat = processBlock(body)
             cc.constrain(bodyStrat, res.asConsStrat)
             cc.constrain(funProdStrat, preAnalyzer.getProdVarForSym(sym).asConsStrat)
           else
             () // skip toplevel fundefs are they are processed when needed
-        case ValDefn(_, _, sym, rhs) =>
+        case ValDefn(_, sym, rhs) =>
           val valStrat = preAnalyzer.getProdVarForSym(sym)
           val stratRhs = processResult(rhs)
           cc.constrain(stratRhs, valStrat.asConsStrat)
@@ -568,10 +572,28 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
           appRes.asProdStrat
         case Value.This(sym) => throw NotDeforestableException("No support for `this` as a callee yet")
         case Value.Lit(lit) => lastWords(s"try to call literal $lit")
-        case Value.Arr(elems) => lastWords(s"try to call array $elems")
+        case Value.Arr(_, elems) => lastWords(s"try to call array $elems")
     r match
-    case c@Call(f, args) => handleCallLike(f, args.map {case Arg(false, value) => value}, c)
-    case i@Instantiate(cls, args) => handleCallLike(cls, args, i)
+    case sel@DeforestTupSelect(scrut, idx) =>
+      val pStrat = processResult(scrut)
+      pStrat match
+        case ProdVar(pStratVar) =>
+          val inMatchingArm = preAnalyzer.selsToMatchingArmsContainingIt(sel.uid).flatMap:
+            case (scrutUid, S(inArm)) =>
+              preAnalyzer.matchScrutToMatchBlock(scrutUid).scrut match
+                case Value.Ref(l) =>
+                  S(preAnalyzer.getProdVarForSym(l) -> inArm)
+                case _ => N
+            case _ => N
+          val tpeVar = freshVar("sel_res", generatedForDef)
+          val selStrat = new FieldSel(sel.uid, instantiationId, Tree.Ident(idx.toString()), tpeVar.asConsStrat)
+          inMatchingArm.foreach: (p, c) =>
+            selStrat.updateFilter(p, c :: Nil)
+          cc.constrain(pStrat, selStrat)
+          tpeVar.asProdStrat
+        case _ => die
+    case c@Call(f, args) => handleCallLike(f, args.map {case Arg(N, value) => value}, c)
+    case i@Instantiate(false, cls, args) => handleCallLike(cls, args.map {case Arg(N, value) => value}, i)
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
           new Ctor(sel.uid, instantiationId, s.asObj.get, Nil)
@@ -626,14 +648,14 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     case Value.Lit(lit) => NoProd
     case Value.Lam(ParamList(_, params, N), body) => // TODO: the `restParam`
       val paramSyms = params.map:
-        case Param(sym = sym, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
+        case Param(_, sym, _, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
       val bodyStrat = processBlock(body)
       val res = freshVar(s"lam_res", generatedForDef)
       cc.constrain(bodyStrat, res.asConsStrat)
       ProdFun(paramSyms, res.asProdStrat)
-    case Value.Arr(elems) =>
+    case Value.Arr(false, elems) =>
       val args = elems.zipWithIndex.map:
-        case (Arg(false, value), n) =>
+        case (Arg(N, value), n) =>
           TermSymbol(syntax.ImmutVal, N, Tree.Ident(n.toString())) ->
           processResult(value)
         case _ => throw NotDeforestableException("no support for array with spread")
@@ -769,11 +791,14 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
           val matScrutSym = preAnalyzer.getResult(matScrutExprId).asInstanceOf[Value.Ref].l
           sels.forall: s =>
             val selExprId = s.exprId
+            given Elaborator.State = collector.preAnalyzer.elabState
+            def chk(l: Symbol) =
+              preAnalyzer.selsToMatchingArmsContainingIt(selExprId).exists(_._1 === matScrutExprId) &&
+              (l is matScrutSym) &&
+              s.instantiationId.get === matExprInstantiationId
             preAnalyzer.getResult(selExprId) match
-              case Select(Value.Ref(l), _) => 
-                preAnalyzer.selsToMatchingArmsContainingIt(selExprId).exists(_._1 == matScrutExprId) &&
-                (l is matScrutSym) &&
-                s.instantiationId.get == matExprInstantiationId
+              case Select(Value.Ref(l), _) => chk(l)
+              case DeforestTupSelect(Value.Ref(l), _) => chk(l)
               case _ => false
     do removeCtor(rm)
     for
@@ -848,14 +873,14 @@ class GetCtorsTraverser(b: Block) extends BlockTraverser:
     case Call(f, args) =>
       if f.asClsSymbol.isDefined then ctors += r.uid
       args.foreach:
-        case Arg(false, v) => applyResult(v)
-    case Instantiate(cls, args) =>
+        case Arg(N, v) => applyResult(v)
+    case Instantiate(false, cls, args) =>
       if cls.asClsSymbol.isDefined then ctors += r.uid
-      args.foreach(applyResult)
-    case Value.Arr(elems) =>
+      args.foreach(applyArg)
+    case Value.Arr(false, elems) =>
       ctors += r.uid
       elems.foreach:
-        case Arg(false, v) => applyResult(v)
+        case Arg(N, v) => applyResult(v)
     case p: Path => if p.asObjSymbol.isDefined then ctors += r.uid
   applyBlock(b)
 
@@ -881,7 +906,7 @@ extension (b: Block)
       if defn.isOwned then rest else
         defn match
           case fdef: FunDefn => rest ++ fdef.deforestDefinedVars
-          case ValDefn(owner, k, sym, rhs) => rest + defn.sym
+          case _: ValDefn => rest + defn.sym
           case _ => ???
     // Note that the handler's LHS and body are not part of the current block, so we do not consider them here.
     case HandleBlock(lhs, res, par, args, cls, hdr, bod, rst) => rst.deforestDefinedVars + res
@@ -902,7 +927,20 @@ extension (p: Path)
 extension (r: Result)
   def getCtorSymFromCtorLikeExpr(using pre: DeforestPreAnalyzer) = r match
     case Call(f, _) => f.asClsSymbol
-    case Instantiate(cls, _) => cls.asClsSymbol
-    case Value.Arr(elems) => S(pre.arrBlkMemSym(elems.length))
+    case Instantiate(_, cls, _) => cls.asClsSymbol
+    case Value.Arr(_, elems) => S(pre.arrBlkMemSym(elems.length))
     case p: Path => p.asObjSymbol
 
+object DeforestTupSelect:
+  def unapply(v: Result)(using elabState: Elaborator.State): Opt[Value.Ref -> Int] = v match
+    case Call(
+      Select(Select(Value.Ref(elabState.runtimeSymbol), Tree.Ident("Tuple")), Tree.Ident("get")),
+      Arg(N, scrut: Value.Ref) :: Arg(N, Value.Lit(Tree.IntLit(x))) :: Nil) => S(scrut -> x.toInt)
+    case _ => N
+  
+  def getDeforestSelNameFromResult(r: Result)(using elabState: Elaborator.State): Tree.Ident = r match
+    case Select(_, name) => name
+    case _ => unapply(r) match
+      case N => die
+      case Some(_, idx) => Tree.Ident(idx.toString())
+    

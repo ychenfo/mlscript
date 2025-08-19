@@ -58,7 +58,7 @@ f1(one) + f2(one) + f2(two)
 //│ two = A(2)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:A),List(Arg(false,Ref(x))))@2@inst_0_tsni --> Ref(p)@inst_1_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@2@inst_0_tsni --> Ref(p)@inst_1_tsni@A
 //│ -------------- executing -------------
 //│ = 9
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

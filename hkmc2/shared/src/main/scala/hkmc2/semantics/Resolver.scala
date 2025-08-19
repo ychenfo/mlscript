@@ -5,10 +5,11 @@ import mlscript.utils.*, shorthands.*
 import utils.TraceLogger
 
 import syntax.Tree
+import syntax.Tree.{DummyTup, DummyApp}
 import syntax.{Fun, Ins, Mod, ImmutVal, MutVal}
 import syntax.Keyword.{`if`}
-import semantics.Term
-import semantics.Elaborator.State
+import Elaborator.State
+import Resolvable.*
 import Resolver.ICtx.Type
 
 import Message.MessageContext
@@ -101,7 +102,7 @@ object Resolver:
     
     def describeType(tpe: Type): Str = tpe match
       case Type.Sym(sym: VarSymbol) =>
-        s"${tEnv.get(sym).getOrElse(Type.Unspecified).show} (${tpe.show})"
+        s"${tEnv.get(sym).getOrElse(Type.Unspecified).show} (type parameter ${tpe.show})"
       case _ => 
         s"${tpe.show}"
     
@@ -140,40 +141,6 @@ object Resolver:
     val empty = ICtx(N, Map.empty, Map.empty)
     
   def ictx(using ICtx) = summon[ICtx]
-  
-  case class CallableDefinition(
-    sym: BlockMemberSymbol,
-    params: Ls[ParamList],
-    tparams: Opt[Ls[Param]],
-    sign: Opt[Term],
-    flags: TermDefFlags,
-    modulefulness: Modulefulness,
-    defn: TermDefinition | ClassLikeDef
-  )
-  
-  extension (resolvable: Resolvable)
-    def callableDefn: Opt[CallableDefinition] = resolvable.defn.flatMap:
-      case td: TermDefinition => S:
-        CallableDefinition(
-          td.sym,
-          td.params,
-          td.tparams,
-          td.sign,
-          td.flags,
-          td.modulefulness,
-          td,
-        )
-      case td: ClassLikeDef => S:
-        CallableDefinition(
-          td.bsym, 
-          td.paramsOpt.toList ::: td.auxParams, 
-          S(td.tparams.map(tp => Param(FldFlags.empty, tp.sym, N, Modulefulness.none))), 
-          N, // TODO: handle class-like definitions with signatures
-          TermDefFlags.empty, // TODO: handle class-like definitions with flags
-          Modulefulness.none, // TODO: handle modulefulness for class-like definitions
-          td,
-        )
-      case defn => N
 
 /**
   * Resolver for the module system.
@@ -325,7 +292,7 @@ class Resolver(tl: TraceLogger)
       t match
         case blk: Term.Blk =>
           traverseBlock(blk)
-        case Term.Rcd(stats) =>
+        case Term.Rcd(mut, stats) =>
           traverseStmts(stats)
         
         case t: Term.IfLike =>
@@ -343,13 +310,13 @@ class Resolver(tl: TraceLogger)
             case Split.End =>
           split(t.desugared)
         
-        case Term.New(cls, argss, rft) =>
+        case Term.New(cls, args, rft) =>
           traverse(cls, expect = Any)
-          argss.foreach(_.foreach(traverse(_, expect = NonModule(N))))
+          args.foreach(traverse(_, expect = NonModule(N)))
           rft.foreach((sym, bdy) => traverseBlock(bdy.blk))
         
         case t: Resolvable =>
-          resolve(t)
+          resolve(t, inTyPrefix = false, inCtxPrefix = false)
         
         case _ => 
           t.subTerms.foreach(traverse(_, expect = NonModule(N)))
@@ -357,7 +324,7 @@ class Resolver(tl: TraceLogger)
   def resolveDefn(defn: Definition)(using ICtx): ICtx =
   trace(s"Resolving definition: $defn"):
     def traverseTermDef(tdf: TermDefinition) =
-      val TermDefinition(_owner, _k, _sym, 
+      val TermDefinition(_k, _sym, _tsym, 
         pss, tps, sign, body, 
         _resSym, TermDefFlags(isMethod), modulefulness, annotations
       ) = tdf
@@ -402,7 +369,7 @@ class Resolver(tl: TraceLogger)
        * the ICtx so that they can later be referred (be resolved to) in
        * the body of the class-like definition.
        */
-      def withCtxParams(using ICtx): ICtx = (cld.paramsOpt.toList ::: cld.auxParams)
+      def withCtxParams(using ICtx): ICtx = (cld.paramsOpt.toList.iterator ++ cld.auxParams)
         .filter(_.flags.ctx)
         .foldLeft(ictx): (ictx, ps) => 
           ps.params.foldLeft(ictx): (ictx, p) => 
@@ -425,7 +392,7 @@ class Resolver(tl: TraceLogger)
     defn match
     
     // Case: instance definition. Add the instance to the context.
-    case defn @ TermDefinition(_, Ins, sym, pss, tps, sign, body, _, TermDefFlags(isMethod), modulefulness, annotations) =>
+    case defn @ TermDefinition(k = Ins, sym = sym, flags = TermDefFlags(isMethod), sign = sign) =>
       log(s"Resolving instance definition ${defn.showDbg}")
       traverseTermDef(defn)
       sign match
@@ -437,7 +404,7 @@ class Resolver(tl: TraceLogger)
           case S(typ) => ictx + (typ, sym)
     
     // Case: Fun/Val definition. 
-    case defn @ TermDefinition(_, Fun | ImmutVal | MutVal, _, pss, tps, sign, body, _, TermDefFlags(isMethod), modulefulness, annotations) =>
+    case defn @ TermDefinition(k = Fun | ImmutVal | MutVal) =>
       log(s"Resolving ${defn.k.desc} definition $defn")
       traverseTermDef(defn)
       ictx
@@ -447,6 +414,13 @@ class Resolver(tl: TraceLogger)
     // Traverse through other subterms with original context.
     case defn: ClassLikeDef =>
       log(s"Resolving ${defn.kind.desc} definition $defn")
+      
+      // For pattern definitions, we need to traverse through the pattern body.
+      defn match
+        case defn: PatternDef =>
+          defn.pattern.subTerms.foreach(traverse(_, expect = NonModule(N)))
+        case _: ClassLikeDef => ()
+      
       traverseClassLikeDef(defn)
       ictx
     
@@ -467,18 +441,28 @@ class Resolver(tl: TraceLogger)
     *    the semantic of the term, so it has to done before the symbol
     *    resolution.
     *
+    * @param inCtxPrefix if true, the currently resolving term is the
+    * prefix of an App where the implicit arguments are explicitly
+    * specified, e.g., `f(using 42)`. The implicit arguments should be
+    * resolved on the the App `f(using 42)`, but not on the base of the
+    * App `f`.
     * @param inTyPrefix if true, the currently resolving term is the
-    * prefix of an TyApp which the implicit arguments shouldn't be
-    * resolved on it, but on the TyApp instead.
+    * prefix of an TyApp, e.g., `f[Int]`. The implicit arguments should
+    * be resolved on the the TyApp `f[Int]`, but not on the base of the
+    * TyApp `f`.
     */
-  def resolve(t: Resolvable, inTyPrefix: Bool = false)(using ICtx): (Opt[CallableDefinition], ICtx) =
-  trace[(Opt[CallableDefinition], ICtx)](s"Resolving resolvable term: ${t}, (inPrefix = ${inTyPrefix})", _ => s"~> ${t}"):
+  def resolve(t: Resolvable, inCtxPrefix: Bool, inTyPrefix: Bool)(using ICtx): (Opt[CallableDefinition], ICtx) =
+  trace[(Opt[CallableDefinition], ICtx)](s"Resolving resolvable term: ${t}, (inPrefix = ${inTyPrefix})", _ => s"~> ${t.instantiate}"):
     // Resolve the sub-resolvable-terms of the term. 
     val (defn, newICtx1) = t match
       // Note: the arguments of the App are traversed later because the
       // definition is required.
-      case Term.App(lhs: Resolvable, _) =>
-        val result = resolve(lhs)
+      case Term.App(lhs: Resolvable, args) =>
+        val result = args match
+          case t @ Term.CtxTup(_) => 
+            resolve(lhs, inCtxPrefix = true, inTyPrefix = inTyPrefix)
+          case _ => 
+            resolve(lhs, inCtxPrefix = inCtxPrefix, inTyPrefix = inTyPrefix)
         resolveSymbol(t)
         result
       case Term.App(lhs, _) =>
@@ -486,7 +470,7 @@ class Resolver(tl: TraceLogger)
         (t.callableDefn, ictx)
       
       case Term.TyApp(lhs: Resolvable, targs) =>
-        resolve(lhs, inTyPrefix = true)
+        resolve(lhs, inCtxPrefix = false, inTyPrefix = true)
         targs.foreach(traverse(_, expect = Any))
         resolveSymbol(t)
         (t.callableDefn, ictx)
@@ -496,7 +480,7 @@ class Resolver(tl: TraceLogger)
         (t.callableDefn, ictx)
       
       case AnySel(pre: Resolvable, id) =>
-        resolve(pre)
+        resolve(pre, inCtxPrefix = false, inTyPrefix = false)
         resolveSymbol(t)
         (t.callableDefn, ictx)
       case AnySel(pre, id) =>
@@ -509,28 +493,8 @@ class Resolver(tl: TraceLogger)
       case Term.Ref(_) =>
         resolveSymbol(t)
         (N, ictx)
-          
-      case use @ Term.Summon(ty) =>
-        traverse(ty, expect = NonModule(N))
-        resolveType(ty) match
-          case S(tpe: Type.Specified) =>
-            ictx.get(tpe) match
-              case R(i) =>
-                log(s"Resolved type ${tpe} with instance ${i}")
-                use.sym = S(i.sym)
-              case L(msgs) =>
-                use.sym = S(ErrorSymbol("Missing Instance", use.tree))
-                raise(ErrorReport(
-                  msg"Cannot query instance for use-expression of type ${ictx.describeType(tpe)}" -> t.toLoc ::
-                  msgs
-                ))
-          case N =>
-            use.sym = S(ErrorSymbol("Missing Type", use.tree))
-            // There is an error during resolving the type signature.
-            // The error should have been reported.
-        (t.callableDefn, ictx)
     
-    log(s"Resolving resolvable with defn = ${defn}")
+    log(s"Resolving resolvable (sym = ${t.resolvedSymbol}): ${defn}")
     
     // Fill the context with possibly the type arguments information.
     val newICtx2 = newICtx1.givenIn:
@@ -567,7 +531,7 @@ class Resolver(tl: TraceLogger)
       //
       // For example: In `fun f(a)(b) = 42`, f's definition should
       // indicate that it accepts two argument lists; f(42)'s definition
-      // should indicate that it accepts one argument list; f(42, 43)'s
+      // should indicate that it accepts one argument list; f(42)(43)'s
       // definition should indicate that it accepts zero argument lists.
       //
       // Currently, only parameters are processed for these new term
@@ -575,116 +539,155 @@ class Resolver(tl: TraceLogger)
       // as-is. In the future we may take them into consideration as
       // well.
       val newDefn: Opt[CallableDefinition] = t match
-      case Term.App(lhs, as) => defn match
-        case S(defn @ CallableDefinition(params = ps :: pss)) =>
-          val (argCountUB, argCountLB) = as match
-          // Tup: regular arguments
-          case tup: Term.Tup => (
-            !tup.fields.exists(_.isInstanceOf[Spd]),
-            tup.fields.map:
-              case Fld(asc = S(_)) => 0
-              case _: Fld => 1
-              case _: Spd => 0
-            .sum +
-            tup.fields.exists:
-              case Fld(asc = S(_)) => true
-              case _ => false
-            .into(if _ then 1 else 0)
-          )
-          // Other: spread arguments
-          case _ => (false, 0)
-          
-          (ps.paramCountUB, argCountUB) match
-            case (true, true) => if ps.paramCountLB != argCountLB then
-              raise(ErrorReport(msg"Expected ${ps.paramCountLB.toString()} arguments, " +
-                msg"got ${argCountLB.toString()}" -> as.toLoc :: Nil))
-            case (true, false) => if ps.paramCountLB < argCountLB then
-              raise(ErrorReport(msg"Expected ${ps.paramCountLB.toString()} arguments, " +
-                msg"got at least ${argCountLB.toString()}" -> as.toLoc :: Nil))
-            case (false, true) => if ps.paramCountLB > argCountLB then
-              raise(ErrorReport(msg"Expected at least ${ps.paramCountLB.toString()} arguments, " +
-                msg"got ${argCountLB.toString()}" -> as.toLoc :: Nil))
-            case (false, false) => ()
-          
-          /**
-           * Zip (pair) a list of parameter and a list of arguments.
-           *
-           * If there are some spread parameters, we are not able to
-           * pair all the parameters and arguments statically. We will
-           * try to pair as many as possible.
-           */
-          @tailrec
-          def zip(ps: Ls[Param], as: Ls[Elem], recordArgs: Ls[Fld], beforeSpread: Bool): Ls[Fld] = (ps, as) match
-            // The spread argument takes all the remaining arguments.
-            case (ps, (a: Spd) :: as) =>
-              traverse(a.term, expect = NonModule(N))
-              zip(ps, as, recordArgs, false)
-            case (ps, a :: as) if !beforeSpread =>
-              a.subTerms.foreach(traverse(_, expect = NonModule(N)))
-              zip(ps, as, recordArgs, false)
-            
-            // Pair the parameter and the argument.
-            case (p :: ps, (a @ Fld(asc = N)) :: as) =>
-              traverse(a.term, 
-                // note: we accept regular arguments for module parameters
-                expect = if p.modulefulness.isModuleful
-                  then Any
-                  else NonModule(S(msg"Module argument passed to a non-module parameter."))
+        case Term.App(lhs, as) => defn match
+          case S(defn @ CallableDefinition(params = ps :: pss)) =>
+            val (argCountUB, argCountLB) = as match
+            // Tup: regular arguments
+            case tup: (Term.Tup | Term.CtxTup) => 
+              val fields = tup match
+                case Term.Tup(fs) => fs
+                case Term.CtxTup(fs) => fs
+              (
+                !fields.exists(_.isInstanceOf[Spd]),
+                (
+                  fields.count:
+                    case Fld(asc = S(_)) => false
+                    case _: Fld => true
+                    case _: Spd => false
+                ) + (
+                  fields.collectFirst:
+                    case Fld(asc = S(_)) => 1
+                  .getOrElse(0)
+                )
               )
-              zip(ps, as, recordArgs, true)
+            // Other: spread arguments
+            case _ => (false, 0)
             
-            // Record Arguments. They are pushed to the last parameter.
-            case (_, (a @ Fld(asc = S(_))) :: as) =>
-              zip(ps, as, a :: recordArgs, true)
+            (ps.paramCountUB, argCountUB) match
+              case (true, true) => if ps.paramCountLB != argCountLB then
+                raise(ErrorReport(msg"Expected ${ps.paramCountLB.toString()} arguments, " +
+                  msg"got ${argCountLB.toString()}" -> as.toLoc :: Nil))
+              case (true, false) => if ps.paramCountLB < argCountLB then
+                raise(ErrorReport(msg"Expected ${ps.paramCountLB.toString()} arguments, " +
+                  msg"got at least ${argCountLB.toString()}" -> as.toLoc :: Nil))
+              case (false, true) => if ps.paramCountLB > argCountLB then
+                raise(ErrorReport(msg"Expected at least ${ps.paramCountLB.toString()} arguments, " +
+                  msg"got ${argCountLB.toString()}" -> as.toLoc :: Nil))
+              case (false, false) => ()
             
-            // If there are more parameters, there must be a spread
-            // argument, or some record arguments before.
-            case (p :: ps, Nil) =>
-              recordArgs.reverse
+            /**
+             * Zip (pair) a list of parameter and a list of arguments.
+             *
+             * If there are some spread parameters, we are not able to
+             * pair all the parameters and arguments statically. We will
+             * try to pair as many as possible.
+             */
+            @tailrec
+            def zip(ps: Ls[Param], as: Ls[Elem], recordArgs: Ls[Fld], beforeSpread: Bool): Ls[Fld] = (ps, as) match
+              // The spread argument takes all the remaining arguments.
+              case (ps, (a: Spd) :: as) =>
+                traverse(a.term, expect = NonModule(N))
+                zip(ps, as, recordArgs, false)
+              case (ps, a :: as) if !beforeSpread =>
+                a.subTerms.foreach(traverse(_, expect = NonModule(N)))
+                zip(ps, as, recordArgs, false)
               
-            // If there are more arguments, all of them go to `restParam`.
-            case (Nil, a :: as) =>
-              a.subTerms.foreach(traverse(_, expect = NonModule(N)))
-              zip(Nil, as, recordArgs, beforeSpread)
+              // Pair the parameter and the argument.
+              case (p :: ps, (a @ Fld(asc = N)) :: as) =>
+                traverse(a.term, 
+                  // note: we accept regular arguments for module parameters
+                  expect = if p.modulefulness.isModuleful
+                    then Any
+                    else NonModule(S(msg"Module argument passed to a non-module parameter."))
+                )
+                zip(ps, as, recordArgs, true)
+              
+              // Record Arguments. They are pushed to the last parameter.
+              case (_, (a @ Fld(asc = S(_))) :: as) =>
+                zip(ps, as, a :: recordArgs, true)
+              
+              // If there are more parameters, there must be a spread
+              // argument, or some record arguments before.
+              case (p :: ps, Nil) =>
+                recordArgs.reverse
+                
+              // If there are more arguments, all of them go to `restParam`.
+              case (Nil, a :: as) =>
+                a.subTerms.foreach(traverse(_, expect = NonModule(N)))
+                zip(Nil, as, recordArgs, beforeSpread)
+              
+              case (Nil, Nil) => 
+                recordArgs.reverse
+            end zip
             
-            case (Nil, Nil) => 
-              recordArgs.reverse
-          end zip
-          
-          val args = as match
-            case Term.Tup(args) => args
-            case spd => Spd(true, spd) :: Nil
-          
-          // The lhs of the App is already traversed by the recursive
-          // `traverse` or `resolve` at the beginning.
-          val recordArgs = zip(ps.params, args, Nil, true)
-          recordArgs.foreach:
-            _.subTerms.foreach(traverse(_, expect = NonModule(N)))
-          S(defn.copy(params = pss))
-        case _ =>
-          traverse(as, expect = NonModule(N))
-          N
-      case _ => defn
+            // Application arguments that are not tuples represent spreads, as in `f(...arg)`
+            val args = as match
+              case Term.Tup(args) => args
+              case Term.CtxTup(args) => args
+              case spd => Spd(true, spd) :: Nil
+            
+            // The lhs of the App is already traversed by the recursive
+            // `traverse` or `resolve` at the beginning.
+            val recordArgs = zip(ps.params, args, Nil, true)
+            recordArgs.foreach:
+              _.subTerms.foreach(traverse(_, expect = NonModule(N)))
+            S(defn.copy(params = pss))
+          case _ =>
+            traverse(as, expect = NonModule(N))
+            N
+        case _ => defn
       
       // Resolve the implicit arguments.
       newDefn match
-      case S(defn) if !inTyPrefix =>
-        def resolveParamList(pss: Ls[ParamList], ass: Ls[Term.Tup]): (Ls[ParamList], Ls[Term.Tup]) = pss match
-          case ParamList(flags = ParamListFlags(ctx = true), params = ps) :: pss =>
-            val as = ps.map(resolveArg(_)(t))
-            resolveParamList(pss, Term.Tup(as)(Tree.Tup(Nil)) :: ass)
-          case _ => (pss, ass.reverse)
+      case S(defn) if !inCtxPrefix && !inTyPrefix =>
+        /**
+         * Resolve all possible implicit arguments and perform eta-expansion.
+         * 
+         * @return (1) A lambda accepting a term, applying the implicit
+         * arguments and performing eta-expansion on the term, and
+         * return the result. (2) The residual parameter lists that are not
+         * consumed by this resolution.
+         */
+        def expand(pss: Ls[ParamList], lam: Term => Term, bod: Term => Term): (Term => Term, Ls[ParamList]) =
+          pss match
+            // The current parameter list is not a using clause, and
+            // there are more using clauses in later parameter lists,
+            // so perform eta-expansion.
+            case (ps @ ParamList(
+              flags = ParamListFlags(ctx = false)
+            )) :: pss if pss.exists(_.flags.ctx) =>
+              val as = ps.params.map(p => Fld(p.flags, p.sym.ref().resolve, N))
+              val newLam = (t: Term) => 
+                lam(Term.Lam(ps, t))
+              val newBod = (t: Term) =>
+                Term.App(bod(t), Term.Tup(as)(DummyTup))(DummyApp, N, FlowSymbol("implicit app")).resolve
+              expand(pss, newLam, newBod)
+            // The current parameter list is a using clause, so resolve
+            // implicit arguments from the context.
+            case (ps @ ParamList(
+              flags = ParamListFlags(ctx = true)
+            )) :: pss =>
+              val as = ps.params.map(resolveArg(_)(t))
+              val newBod = (t: Term) =>
+                Term.App(bod(t), Term.Tup(as)(DummyTup))(DummyApp, N, FlowSymbol("implicit app")).resolve
+              expand(pss, lam, newBod)
+            case _ =>
+              ((t: Term) => lam(bod(t)), pss)
         
-        val (pss, ass) = resolveParamList(defn.params, Nil)
-        t.withIArgs(ass)
+        val (expansion, pss) = expand(defn.params, identity, identity)
+        t.expand(if defn.params.length != pss.length then S(expansion) else N)
         
-        // new implicit application may change the semantics
-        if ass.nonEmpty then
-          resolveSymbol(t)
-          
+        // resolution may change the semantics
+        if t.hasExpansion then t.instantiate match
+          case r: Resolvable => resolveSymbol(r)
+          case _ => ()
+        
         (S(defn.copy(params = pss)), ictx)
+      case S(defn) =>
+        t.resolve
+        (S(defn), ictx)
       case _ =>
-        t.withIArgs(Nil)
+        t.resolve
         (N, ictx)
   
   /**
@@ -708,34 +711,38 @@ class Resolver(tl: TraceLogger)
     
     t match
     case t @ AnySel(lhs: Resolvable, id) =>
-      log(s"Resolving symbol for ${t}, defn = ${lhs.defn}")
       lhs.typeDefn match
         case S(mdef @ ModuleDef(kind = Mod)) => mdef.body.members.get(id.name) match
           case S(sym) =>
+            log(s"Resolving symbol for ${t}, defn = ${lhs.defn}")
             t match
               case t: Term.Sel => t.sym = S(sym)
               case t: Term.SynthSel => t.sym = S(sym)
             log(s"Resolved symbol for ${t}: ${sym}")
-          case N => raise: 
-            ErrorReport(
-              msg"${mdef.kind.desc.capitalize} '${mdef.sym.nme}' " +
-              msg"does not contain member '${id.name}'" -> t.toLoc :: Nil)
+          case N => 
+            t match
+              case t: Term.Sel => t.sym = S(ErrorSymbol(id.name, Tree.Dummy))
+              case t: Term.SynthSel => t.sym = S(ErrorSymbol(id.name, Tree.Dummy))
+            raise: 
+              ErrorReport(
+                msg"${mdef.kind.desc.capitalize} '${mdef.sym.nme}' " +
+                msg"does not contain member '${id.name}'" -> t.toLoc :: Nil)
         case _ =>
     case _ =>
     
     t match
-    case t @ Apps(base: Resolvable, pss) =>
+    case t @ Apps(base: Resolvable, ass) =>
       base.termDefn match
-        case S(lhsDefn) if lhsDefn.params.length == pss.length + t.iargsLs.map(_.length).getOrElse(0) =>
-          log(s"Resolving symbol for ${t}: defn = ${lhsDefn}")
+        case S(lhsDefn) if lhsDefn.params.length == ass.length =>
           val sym = lhsDefn.modulefulness.msym
+          log(s"Resolving symbol for ${t}: defn = ${lhsDefn}")
           t match
             case t: Term.Sel => sym.map(sym => t.sym = S(sym))
             case t: Term.SynthSel => sym.map(sym => t.sym = S(sym))
             case t: Term.App => sym.map(sym => t.sym = S(sym))
             case t: Term.TyApp => sym.map(sym => t.sym = S(sym))
             case t: Term.Ref => sym.map(sym => t.resSym = S(sym))
-          log(s"Resolved symbol for ${t}: ${lhsDefn.sym}")
+          log(s"Resolved symbol for ${t}: ${sym}")
         case _ =>
     case _ =>
     

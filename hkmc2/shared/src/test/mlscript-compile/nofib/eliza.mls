@@ -22,7 +22,7 @@ fun cycle(xs) = append_lz(xs, lazy of () => cycle(xs))
 
 fun isSpace(c) = c === " "
 
-fun words(s) = if dropWhile(eliza.isSpace, s) is
+fun words(s) = if leaveWhile(eliza.isSpace, s) is
   Nil then Nil
   h2h :: t2t and
     break_(eliza.isSpace, h2h :: t2t) is [w, s_] then w :: eliza.words(s_)
@@ -41,7 +41,7 @@ fun null_lz(ls) = if force(ls) is
 
 fun trim(ls) =
   fun cons(x, xs) = if inList(x, nofibStringToList(" .!?,")) and null_(xs) then Nil else x :: xs
-  foldr(cons, Nil, dropWhile(x => inList(x, nofibStringToList(" .!?,")), ls))
+  foldr(cons, Nil, leaveWhile(x => inList(x, nofibStringToList(" .!?,")), ls))
 
 fun repeated(kt_rp) = if kt_rp is [kt, r :: rp] then [r, [kt, rp]]
 
@@ -301,7 +301,7 @@ fun conjug(d, w) =
 
 fun replies(key, l) =
   map_lz of
-    x => conjug(l, drop(listLen(key), x))
+    x => conjug(l, leave(listLen(key), x))
     filter_lz of
       ls => prefix(key, lz_map(ucase, ls))
       tails(l)
@@ -344,7 +344,7 @@ fun testEliza_nofib(n) =
       initial
       Nil
       filter of
-        x => Predef.not(null_(x))
+        x => not(null_(x))
         map(x => eliza.words(trim(x)), take(intMod(i, 20), input))
     enumFromTo(1, n)
 

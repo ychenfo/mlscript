@@ -51,7 +51,7 @@ fun union(xs, ys) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     h :: t and
-      Predef.not(inList(h, xs)) then h :: lscomp(t)
+      not(inList(h, xs)) then h :: lscomp(t)
       else lscomp(t)
   append(xs, lscomp(ys))
 

@@ -84,7 +84,7 @@ fun check_perim(x1y1, x2y2) =
           equalp(xdyd, left) then xc <= x1
           else yc >= y1
         finished then true
-        Predef.not(point_colour(xcyc) == col1) then false
+        not(point_colour(xcyc) == col1) then false
         else check_line([xc + xd, yc + yd], [xd, yd])
 
     if
@@ -102,7 +102,7 @@ fun build_tree(x1y1, x2y2) =
   if x1y1 is [x1, y1] and x2y2 is [x2, y2] then
     let rec_col = check_perim(x1y1, x2y2)
     if
-      Predef.not(rec_col == -1) then Leaf(rec_col)
+      not(rec_col == -1) then Leaf(rec_col)
       let split   = if (x2-x1) >= (y2-y1) then "NS" else "EW"
       let split_x = intDiv((x2+x1), 2)
       let split_y = intDiv((y2+y1), 2)

@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -376,7 +378,7 @@ lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -447,7 +449,7 @@ lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_0_59_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -473,11 +475,11 @@ lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_0_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_0_3_4_tsni = function dotMult_inst_0_3_4_tsni(c, ps) {
@@ -517,7 +519,7 @@ lambda$_inst_0_3_4_tsni = function lambda$_inst_0_3_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_0_3_5_tsni = function dotMult_inst_0_3_5_tsni(c, ps) {
@@ -557,7 +559,7 @@ lambda$_inst_0_3_5_tsni = function lambda$_inst_0_3_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_0_3_6_tsni = function dotMult_inst_0_3_6_tsni(c, ps) {
@@ -597,7 +599,7 @@ lambda$_inst_0_3_6_tsni = function lambda$_inst_0_3_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qs$_inst_7_tsni = function qs$_inst_7_tsni(fs_) {
@@ -651,7 +653,7 @@ lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -722,7 +724,7 @@ lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_7_59_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -748,11 +750,11 @@ lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_7_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_7_3_4_tsni = function dotMult_inst_7_3_4_tsni(c, ps) {
@@ -792,7 +794,7 @@ lambda$_inst_7_3_4_tsni = function lambda$_inst_7_3_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_7_3_5_tsni = function dotMult_inst_7_3_5_tsni(c, ps) {
@@ -832,7 +834,7 @@ lambda$_inst_7_3_5_tsni = function lambda$_inst_7_3_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_7_3_6_tsni = function dotMult_inst_7_3_6_tsni(c, ps) {
@@ -872,7 +874,7 @@ lambda$_inst_7_3_6_tsni = function lambda$_inst_7_3_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_8_tsni = (undefined, function (fs_) {
@@ -926,7 +928,7 @@ lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -997,7 +999,7 @@ lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_8_59_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -1023,11 +1025,11 @@ lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_8_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_8_3_4_tsni = function dotMult_inst_8_3_4_tsni(c, ps) {
@@ -1067,7 +1069,7 @@ lambda$_inst_8_3_4_tsni = function lambda$_inst_8_3_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_8_3_5_tsni = function dotMult_inst_8_3_5_tsni(c, ps) {
@@ -1107,7 +1109,7 @@ lambda$_inst_8_3_5_tsni = function lambda$_inst_8_3_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_8_3_6_tsni = function dotMult_inst_8_3_6_tsni(c, ps) {
@@ -1147,7 +1149,7 @@ lambda$_inst_8_3_6_tsni = function lambda$_inst_8_3_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qs$_inst_9_10_tsni = function qs$_inst_9_10_tsni(fs_) {
@@ -1188,7 +1190,7 @@ lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -1259,7 +1261,7 @@ lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_9_10_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -1285,11 +1287,11 @@ lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_9_10_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_9_10_3_6_tsni = function dotMult_inst_9_10_3_6_tsni(c, ps) {
@@ -1329,7 +1331,7 @@ lambda$_inst_9_10_3_6_tsni = function lambda$_inst_9_10_3_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_9_10_3_5_tsni = function dotMult_inst_9_10_3_5_tsni(c, ps) {
@@ -1369,7 +1371,7 @@ lambda$_inst_9_10_3_5_tsni = function lambda$_inst_9_10_3_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_9_10_3_4_tsni = function dotMult_inst_9_10_3_4_tsni(c, ps) {
@@ -1409,7 +1411,7 @@ lambda$_inst_9_10_3_4_tsni = function lambda$_inst_9_10_3_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_9_10_1_tsni = (undefined, function (fs_) {
@@ -1478,7 +1480,7 @@ lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -1549,7 +1551,7 @@ lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_11_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -1575,11 +1577,11 @@ lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_11_12_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_11_12_3_6_tsni = function dotMult_inst_11_12_3_6_tsni(c, ps) {
@@ -1619,7 +1621,7 @@ lambda$_inst_11_12_3_6_tsni = function lambda$_inst_11_12_3_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_11_12_3_5_tsni = function dotMult_inst_11_12_3_5_tsni(c, ps) {
@@ -1659,7 +1661,7 @@ lambda$_inst_11_12_3_5_tsni = function lambda$_inst_11_12_3_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_11_12_3_4_tsni = function dotMult_inst_11_12_3_4_tsni(c, ps) {
@@ -1699,7 +1701,7 @@ lambda$_inst_11_12_3_4_tsni = function lambda$_inst_11_12_3_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_11_12_1_tsni = (undefined, function (fs_) {
@@ -1744,10 +1746,10 @@ lambda$_inst_13_tsni = function lambda$_inst_13_tsni(fss) {
           tmp = sqrtPs_inst_13_tsni(fs_1);
           return power1.Pc(0, tmp)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else if (param0 === 1) {
       fs_ = param1;
@@ -1755,10 +1757,10 @@ lambda$_inst_13_tsni = function lambda$_inst_13_tsni(fss) {
       tmp2 = NofibPrelude.force(tmp1);
       return NofibPrelude.force(tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qs$_inst_13_12_tsni = function qs$_inst_13_12_tsni(fs_) {
@@ -1799,7 +1801,7 @@ lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -1870,7 +1872,7 @@ lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_13_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -1896,11 +1898,11 @@ lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_13_12_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_13_12_3_6_tsni = function dotMult_inst_13_12_3_6_tsni(c, ps) {
@@ -1940,7 +1942,7 @@ lambda$_inst_13_12_3_6_tsni = function lambda$_inst_13_12_3_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_13_12_3_5_tsni = function dotMult_inst_13_12_3_5_tsni(c, ps) {
@@ -1980,7 +1982,7 @@ lambda$_inst_13_12_3_5_tsni = function lambda$_inst_13_12_3_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_13_12_3_4_tsni = function dotMult_inst_13_12_3_4_tsni(c, ps) {
@@ -2020,7 +2022,7 @@ lambda$_inst_13_12_3_4_tsni = function lambda$_inst_13_12_3_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_13_12_1_tsni = (undefined, function (fs_) {
@@ -2067,7 +2069,7 @@ lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -2126,7 +2128,7 @@ lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
           tmp13 = divPs_inst_14_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -2148,11 +2150,11 @@ lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
         tmp19 = divPs_inst_14_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_14_15_4_tsni = function dotMult_inst_14_15_4_tsni(c, ps) {
@@ -2192,7 +2194,7 @@ lambda$_inst_14_15_4_tsni = function lambda$_inst_14_15_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_14_15_5_tsni = function dotMult_inst_14_15_5_tsni(c, ps) {
@@ -2232,7 +2234,7 @@ lambda$_inst_14_15_5_tsni = function lambda$_inst_14_15_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_14_15_6_tsni = function dotMult_inst_14_15_6_tsni(c, ps) {
@@ -2272,7 +2274,7 @@ lambda$_inst_14_15_6_tsni = function lambda$_inst_14_15_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rs$_inst_16_tsni = function rs$_inst_16_tsni(fs_) {
@@ -2304,7 +2306,7 @@ lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -2363,7 +2365,7 @@ lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
           tmp13 = divPs_inst_16_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -2385,11 +2387,11 @@ lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
         tmp19 = divPs_inst_16_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_16_15_4_tsni = function dotMult_inst_16_15_4_tsni(c, ps) {
@@ -2429,7 +2431,7 @@ lambda$_inst_16_15_4_tsni = function lambda$_inst_16_15_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_16_15_5_tsni = function dotMult_inst_16_15_5_tsni(c, ps) {
@@ -2469,7 +2471,7 @@ lambda$_inst_16_15_5_tsni = function lambda$_inst_16_15_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_16_15_6_tsni = function dotMult_inst_16_15_6_tsni(c, ps) {
@@ -2509,7 +2511,7 @@ lambda$_inst_16_15_6_tsni = function lambda$_inst_16_15_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_17_tsni = (undefined, function (fs_) {
@@ -2541,7 +2543,7 @@ lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -2600,7 +2602,7 @@ lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
           tmp13 = divPs_inst_17_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -2622,11 +2624,11 @@ lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
         tmp19 = divPs_inst_17_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_17_15_4_tsni = function dotMult_inst_17_15_4_tsni(c, ps) {
@@ -2666,7 +2668,7 @@ lambda$_inst_17_15_4_tsni = function lambda$_inst_17_15_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_17_15_5_tsni = function dotMult_inst_17_15_5_tsni(c, ps) {
@@ -2706,7 +2708,7 @@ lambda$_inst_17_15_5_tsni = function lambda$_inst_17_15_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_17_15_6_tsni = function dotMult_inst_17_15_6_tsni(c, ps) {
@@ -2746,7 +2748,7 @@ lambda$_inst_17_15_6_tsni = function lambda$_inst_17_15_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rs$_inst_18_19_tsni = function rs$_inst_18_19_tsni(fs_) {
@@ -2783,7 +2785,7 @@ lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -2842,7 +2844,7 @@ lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
           tmp13 = divPs_inst_18_19_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -2864,11 +2866,11 @@ lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
         tmp19 = divPs_inst_18_19_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_18_19_15_6_tsni = function dotMult_inst_18_19_15_6_tsni(c, ps) {
@@ -2908,7 +2910,7 @@ lambda$_inst_18_19_15_6_tsni = function lambda$_inst_18_19_15_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_18_19_15_5_tsni = function dotMult_inst_18_19_15_5_tsni(c, ps) {
@@ -2948,7 +2950,7 @@ lambda$_inst_18_19_15_5_tsni = function lambda$_inst_18_19_15_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_18_19_15_4_tsni = function dotMult_inst_18_19_15_4_tsni(c, ps) {
@@ -2988,7 +2990,7 @@ lambda$_inst_18_19_15_4_tsni = function lambda$_inst_18_19_15_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rs$_inst_20_21_tsni = function rs$_inst_20_21_tsni(fs_) {
@@ -3025,7 +3027,7 @@ lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -3084,7 +3086,7 @@ lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
           tmp13 = divPs_inst_20_21_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -3106,11 +3108,11 @@ lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
         tmp19 = divPs_inst_20_21_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_20_21_15_6_tsni = function dotMult_inst_20_21_15_6_tsni(c, ps) {
@@ -3150,7 +3152,7 @@ lambda$_inst_20_21_15_6_tsni = function lambda$_inst_20_21_15_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_20_21_15_5_tsni = function dotMult_inst_20_21_15_5_tsni(c, ps) {
@@ -3190,7 +3192,7 @@ lambda$_inst_20_21_15_5_tsni = function lambda$_inst_20_21_15_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_20_21_15_4_tsni = function dotMult_inst_20_21_15_4_tsni(c, ps) {
@@ -3230,7 +3232,7 @@ lambda$_inst_20_21_15_4_tsni = function lambda$_inst_20_21_15_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$_inst_22_23_tsni = function lambda$_inst_22_23_tsni(fss) {
@@ -3260,14 +3262,14 @@ lambda$_inst_22_23_tsni = function lambda$_inst_22_23_tsni(fss) {
           tmp3 = NofibPrelude.lazy(lambda$this);
           return power1.Pc(tmp2, tmp3)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rs$_inst_22_23_21_tsni = function rs$_inst_22_23_21_tsni(fs_) {
@@ -3304,7 +3306,7 @@ lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss)
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -3363,7 +3365,7 @@ lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss)
           tmp13 = divPs_inst_22_23_21_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -3385,11 +3387,11 @@ lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss)
         tmp19 = divPs_inst_22_23_21_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_22_23_21_15_4_tsni = function dotMult_inst_22_23_21_15_4_tsni(c, ps) {
@@ -3429,7 +3431,7 @@ lambda$_inst_22_23_21_15_4_tsni = function lambda$_inst_22_23_21_15_4_tsni(c, ps
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_22_23_21_15_5_tsni = function dotMult_inst_22_23_21_15_5_tsni(c, ps) {
@@ -3469,7 +3471,7 @@ lambda$_inst_22_23_21_15_5_tsni = function lambda$_inst_22_23_21_15_5_tsni(c, ps
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_22_23_21_15_6_tsni = function dotMult_inst_22_23_21_15_6_tsni(c, ps) {
@@ -3509,7 +3511,7 @@ lambda$_inst_22_23_21_15_6_tsni = function lambda$_inst_22_23_21_15_6_tsni(c, ps
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 divPs_inst_24_tsni = function divPs_inst_24_tsni(fss, gss) {
@@ -3559,7 +3561,7 @@ lambda$_inst_24_6_tsni = function lambda$_inst_24_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_24_5_tsni = function dotMult_inst_24_5_tsni(c, ps) {
@@ -3599,7 +3601,7 @@ lambda$_inst_24_5_tsni = function lambda$_inst_24_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_24_4_tsni = function dotMult_inst_24_4_tsni(c, ps) {
@@ -3639,7 +3641,7 @@ lambda$_inst_24_4_tsni = function lambda$_inst_24_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 divPs_inst_25_tsni = function divPs_inst_25_tsni(fss, gss) {
@@ -3653,7 +3655,7 @@ lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -3712,7 +3714,7 @@ lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
           tmp13 = divPs_inst_25_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -3734,11 +3736,11 @@ lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
         tmp19 = divPs_inst_25_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_25_6_tsni = function dotMult_inst_25_6_tsni(c, ps) {
@@ -3778,7 +3780,7 @@ lambda$_inst_25_6_tsni = function lambda$_inst_25_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_25_5_tsni = function dotMult_inst_25_5_tsni(c, ps) {
@@ -3818,7 +3820,7 @@ lambda$_inst_25_5_tsni = function lambda$_inst_25_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_25_4_tsni = function dotMult_inst_25_4_tsni(c, ps) {
@@ -3858,7 +3860,7 @@ lambda$_inst_25_4_tsni = function lambda$_inst_25_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_26_tsni = (undefined, function (fss, gss) {
@@ -3872,7 +3874,7 @@ lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -3931,7 +3933,7 @@ lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
           tmp13 = power1.divPs(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -3953,11 +3955,11 @@ lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
         tmp19 = power1.divPs(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_26_6_tsni = function dotMult_inst_26_6_tsni(c, ps) {
@@ -3997,7 +3999,7 @@ lambda$_inst_26_6_tsni = function lambda$_inst_26_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_26_5_tsni = function dotMult_inst_26_5_tsni(c, ps) {
@@ -4037,7 +4039,7 @@ lambda$_inst_26_5_tsni = function lambda$_inst_26_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_26_4_tsni = function dotMult_inst_26_4_tsni(c, ps) {
@@ -4077,7 +4079,7 @@ lambda$_inst_26_4_tsni = function lambda$_inst_26_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_27_28_tsni = (undefined, function (fss) {
@@ -4112,14 +4114,14 @@ lambda$_inst_27_28_23_tsni = function lambda$_inst_27_28_23_tsni(fss) {
           tmp3 = NofibPrelude.lazy(lambda$this);
           return power1.Pc(tmp2, tmp3)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rs$_inst_27_28_23_21_tsni = function rs$_inst_27_28_23_21_tsni(fs_) {
@@ -4156,7 +4158,7 @@ lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -4215,7 +4217,7 @@ lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss
           tmp13 = divPs_inst_27_28_23_21_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -4237,11 +4239,11 @@ lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss
         tmp19 = divPs_inst_27_28_23_21_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_27_28_23_21_15_6_tsni = function dotMult_inst_27_28_23_21_15_6_tsni(c, ps) {
@@ -4281,7 +4283,7 @@ lambda$_inst_27_28_23_21_15_6_tsni = function lambda$_inst_27_28_23_21_15_6_tsni
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_27_28_23_21_15_5_tsni = function dotMult_inst_27_28_23_21_15_5_tsni(c, ps) {
@@ -4321,7 +4323,7 @@ lambda$_inst_27_28_23_21_15_5_tsni = function lambda$_inst_27_28_23_21_15_5_tsni
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_27_28_23_21_15_4_tsni = function dotMult_inst_27_28_23_21_15_4_tsni(c, ps) {
@@ -4361,7 +4363,7 @@ lambda$_inst_27_28_23_21_15_4_tsni = function lambda$_inst_27_28_23_21_15_4_tsni
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_29_tsni = (undefined, function (fss) {
@@ -4388,10 +4390,10 @@ lambda$_inst_29_tsni = function lambda$_inst_29_tsni(fss) {
           tmp = power1.sqrtPs(fs_1);
           return power1.Pc(0, tmp)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else if (param0 === 1) {
       fs_ = param1;
@@ -4399,10 +4401,10 @@ lambda$_inst_29_tsni = function lambda$_inst_29_tsni(fss) {
       tmp2 = NofibPrelude.force(tmp1);
       return NofibPrelude.force(tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qs$_inst_29_12_tsni = function qs$_inst_29_12_tsni(fs_) {
@@ -4443,7 +4445,7 @@ lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -4514,7 +4516,7 @@ lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_29_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -4540,11 +4542,11 @@ lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_29_12_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_29_12_3_6_tsni = function dotMult_inst_29_12_3_6_tsni(c, ps) {
@@ -4584,7 +4586,7 @@ lambda$_inst_29_12_3_6_tsni = function lambda$_inst_29_12_3_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_29_12_3_5_tsni = function dotMult_inst_29_12_3_5_tsni(c, ps) {
@@ -4624,7 +4626,7 @@ lambda$_inst_29_12_3_5_tsni = function lambda$_inst_29_12_3_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_29_12_3_4_tsni = function dotMult_inst_29_12_3_4_tsni(c, ps) {
@@ -4664,7 +4666,7 @@ lambda$_inst_29_12_3_4_tsni = function lambda$_inst_29_12_3_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_29_12_1_tsni = (undefined, function (fs_) {
@@ -4738,7 +4740,7 @@ lambda$_inst_30_31_32_33_34_tsni = function lambda$_inst_30_31_32_33_34_tsni(fss
       return match_scrut_arm_Pc_inst_30_35_36_37_38_tsni(n1, _deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 integral_inst_30_35_tsni = function integral_inst_30_35_tsni(fs_) {
@@ -4826,7 +4828,7 @@ lambda$_inst_39_40_32_33_34_tsni = function lambda$_inst_39_40_32_33_34_tsni(fss
       return match_scrut_arm_Pc_inst_39_62_61_tsni(_deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 sinx_inst_41_42_tsni = function sinx_inst_41_42_tsni() {
@@ -4887,7 +4889,7 @@ lambda$_inst_41_42_40_32_33_34_tsni = function lambda$_inst_41_42_40_32_33_34_ts
       return match_scrut_arm_Pc_inst_41_42_62_61_tsni(_deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 cosx_inst_41_43_tsni = function cosx_inst_41_43_tsni() {
@@ -4984,7 +4986,7 @@ lambda$_inst_41_43_31_32_33_34_tsni = function lambda$_inst_41_43_31_32_33_34_ts
       return match_scrut_arm_Pc_inst_41_43_35_36_37_38_tsni(n1, _deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 sqrtPs_inst_41_44_tsni = function sqrtPs_inst_41_44_tsni(fss) {
@@ -5016,10 +5018,10 @@ lambda$_inst_41_44_tsni = function lambda$_inst_41_44_tsni(fss) {
           tmp = sqrtPs_inst_41_44_tsni(fs_1);
           return power1.Pc(0, tmp)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else if (param0 === 1) {
       fs_ = param1;
@@ -5027,10 +5029,10 @@ lambda$_inst_41_44_tsni = function lambda$_inst_41_44_tsni(fss) {
       tmp2 = NofibPrelude.force(tmp1);
       return NofibPrelude.force(tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qs$_inst_41_44_12_tsni = function qs$_inst_41_44_12_tsni(fs_) {
@@ -5089,7 +5091,7 @@ lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -5160,7 +5162,7 @@ lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_41_44_12_59_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -5186,11 +5188,11 @@ lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_41_44_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_44_12_3_4_tsni = function dotMult_inst_41_44_12_3_4_tsni(c, ps) {
@@ -5230,7 +5232,7 @@ lambda$_inst_41_44_12_3_4_tsni = function lambda$_inst_41_44_12_3_4_tsni(c, ps) 
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_44_12_3_5_tsni = function dotMult_inst_41_44_12_3_5_tsni(c, ps) {
@@ -5270,7 +5272,7 @@ lambda$_inst_41_44_12_3_5_tsni = function lambda$_inst_41_44_12_3_5_tsni(c, ps) 
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_44_12_3_6_tsni = function dotMult_inst_41_44_12_3_6_tsni(c, ps) {
@@ -5310,7 +5312,7 @@ lambda$_inst_41_44_12_3_6_tsni = function lambda$_inst_41_44_12_3_6_tsni(c, ps) 
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 sinx_inst_41_45_tsni = function sinx_inst_41_45_tsni() {
@@ -5371,7 +5373,7 @@ lambda$_inst_41_45_40_32_33_34_tsni = function lambda$_inst_41_45_40_32_33_34_ts
       return match_scrut_arm_Pc_inst_41_45_62_61_tsni(_deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 cosx_inst_41_46_tsni = function cosx_inst_41_46_tsni() {
@@ -5468,7 +5470,7 @@ lambda$_inst_41_46_31_32_33_34_tsni = function lambda$_inst_41_46_31_32_33_34_ts
       return match_scrut_arm_Pc_inst_41_46_35_36_37_38_tsni(n1, _deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 divPs_inst_41_47_tsni = function divPs_inst_41_47_tsni(fss, gss) {
@@ -5487,7 +5489,7 @@ lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -5546,7 +5548,7 @@ lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
           tmp13 = divPs_inst_41_47_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -5568,11 +5570,11 @@ lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
         tmp19 = divPs_inst_41_47_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_47_4_tsni = function dotMult_inst_41_47_4_tsni(c, ps) {
@@ -5612,7 +5614,7 @@ lambda$_inst_41_47_4_tsni = function lambda$_inst_41_47_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_47_5_tsni = function dotMult_inst_41_47_5_tsni(c, ps) {
@@ -5652,7 +5654,7 @@ lambda$_inst_41_47_5_tsni = function lambda$_inst_41_47_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_47_6_tsni = function dotMult_inst_41_47_6_tsni(c, ps) {
@@ -5692,7 +5694,7 @@ lambda$_inst_41_47_6_tsni = function lambda$_inst_41_47_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 divPs_inst_41_48_tsni = function divPs_inst_41_48_tsni(fss, gss) {
@@ -5711,7 +5713,7 @@ lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -5782,7 +5784,7 @@ lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_41_50_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -5808,11 +5810,11 @@ lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_41_50_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_48_4_tsni = function dotMult_inst_41_48_4_tsni(c, ps) {
@@ -5852,7 +5854,7 @@ lambda$_inst_41_48_4_tsni = function lambda$_inst_41_48_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_48_5_tsni = function dotMult_inst_41_48_5_tsni(c, ps) {
@@ -5892,7 +5894,7 @@ lambda$_inst_41_48_5_tsni = function lambda$_inst_41_48_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_48_6_tsni = function dotMult_inst_41_48_6_tsni(c, ps) {
@@ -5932,7 +5934,7 @@ lambda$_inst_41_48_6_tsni = function lambda$_inst_41_48_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 revert_inst_41_49_tsni = function revert_inst_41_49_tsni(fss) {
@@ -5984,7 +5986,7 @@ lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_ts
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -6043,7 +6045,7 @@ lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_ts
           tmp13 = divPs_inst_41_49_28_23_21_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -6065,11 +6067,11 @@ lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_ts
         tmp19 = divPs_inst_41_49_28_23_21_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_49_28_23_21_15_4_tsni = function dotMult_inst_41_49_28_23_21_15_4_tsni(c, ps) {
@@ -6109,7 +6111,7 @@ lambda$_inst_41_49_28_23_21_15_4_tsni = function lambda$_inst_41_49_28_23_21_15_
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_49_28_23_21_15_5_tsni = function dotMult_inst_41_49_28_23_21_15_5_tsni(c, ps) {
@@ -6149,7 +6151,7 @@ lambda$_inst_41_49_28_23_21_15_5_tsni = function lambda$_inst_41_49_28_23_21_15_
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_41_49_28_23_21_15_6_tsni = function dotMult_inst_41_49_28_23_21_15_6_tsni(c, ps) {
@@ -6189,7 +6191,7 @@ lambda$_inst_41_49_28_23_21_15_6_tsni = function lambda$_inst_41_49_28_23_21_15_
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 integral_inst_41_50_tsni = function integral_inst_41_50_tsni(fs_) {
@@ -6232,10 +6234,10 @@ lambda$_inst_41_50_36_37_tsni = function lambda$_inst_41_50_36_37_tsni(fs_) {
           tmp4 = NofibPrelude.lazy(lambda$this);
           return power1.Pc(tmp3, tmp4)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -6320,7 +6322,7 @@ lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -6379,7 +6381,7 @@ lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21
           tmp13 = divPs_inst_51_52_49_28_23_21_15_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -6401,11 +6403,11 @@ lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21
         tmp19 = divPs_inst_51_52_49_28_23_21_15_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_49_28_23_21_15_6_tsni = function dotMult_inst_51_52_49_28_23_21_15_6_tsni(c, ps) {
@@ -6445,7 +6447,7 @@ lambda$_inst_51_52_49_28_23_21_15_6_tsni = function lambda$_inst_51_52_49_28_23_
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_49_28_23_21_15_5_tsni = function dotMult_inst_51_52_49_28_23_21_15_5_tsni(c, ps) {
@@ -6485,7 +6487,7 @@ lambda$_inst_51_52_49_28_23_21_15_5_tsni = function lambda$_inst_51_52_49_28_23_
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_49_28_23_21_15_4_tsni = function dotMult_inst_51_52_49_28_23_21_15_4_tsni(c, ps) {
@@ -6525,7 +6527,7 @@ lambda$_inst_51_52_49_28_23_21_15_4_tsni = function lambda$_inst_51_52_49_28_23_
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 integral_inst_51_52_50_tsni = function integral_inst_51_52_50_tsni(fs_) {
@@ -6568,10 +6570,10 @@ lambda$_inst_51_52_50_36_37_tsni = function lambda$_inst_51_52_50_36_37_tsni(fs_
           tmp4 = NofibPrelude.lazy(lambda$this);
           return power1.Pc(tmp3, tmp4)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -6592,7 +6594,7 @@ lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -6663,7 +6665,7 @@ lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
             return match_scrut_arm_Pc_inst_51_52_50_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -6689,11 +6691,11 @@ lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
           return match_scrut_arm_Pc_inst_51_52_50_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_48_6_tsni = function dotMult_inst_51_52_48_6_tsni(c, ps) {
@@ -6733,7 +6735,7 @@ lambda$_inst_51_52_48_6_tsni = function lambda$_inst_51_52_48_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_48_5_tsni = function dotMult_inst_51_52_48_5_tsni(c, ps) {
@@ -6773,7 +6775,7 @@ lambda$_inst_51_52_48_5_tsni = function lambda$_inst_51_52_48_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_48_4_tsni = function dotMult_inst_51_52_48_4_tsni(c, ps) {
@@ -6813,7 +6815,7 @@ lambda$_inst_51_52_48_4_tsni = function lambda$_inst_51_52_48_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 divPs_inst_51_52_47_tsni = function divPs_inst_51_52_47_tsni(fss, gss) {
@@ -6832,7 +6834,7 @@ lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -6891,7 +6893,7 @@ lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
           tmp13 = divPs_inst_51_52_47_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -6913,11 +6915,11 @@ lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
         tmp19 = divPs_inst_51_52_47_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_47_6_tsni = function dotMult_inst_51_52_47_6_tsni(c, ps) {
@@ -6957,7 +6959,7 @@ lambda$_inst_51_52_47_6_tsni = function lambda$_inst_51_52_47_6_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_47_5_tsni = function dotMult_inst_51_52_47_5_tsni(c, ps) {
@@ -6997,7 +6999,7 @@ lambda$_inst_51_52_47_5_tsni = function lambda$_inst_51_52_47_5_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_47_4_tsni = function dotMult_inst_51_52_47_4_tsni(c, ps) {
@@ -7037,7 +7039,7 @@ lambda$_inst_51_52_47_4_tsni = function lambda$_inst_51_52_47_4_tsni(c, ps) {
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 cosx_inst_51_52_46_tsni = function cosx_inst_51_52_46_tsni() {
@@ -7100,7 +7102,7 @@ lambda$_inst_51_52_46_31_32_33_34_tsni = function lambda$_inst_51_52_46_31_32_33
       return match_scrut_arm_Pc_inst_51_52_46_35_36_37_38_tsni(n1, _deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 integral_inst_51_52_46_35_tsni = function integral_inst_51_52_46_35_tsni(fs_) {
@@ -7195,7 +7197,7 @@ lambda$_inst_51_52_45_40_32_33_34_tsni = function lambda$_inst_51_52_45_40_32_33
       return match_scrut_arm_Pc_inst_51_52_45_62_61_tsni(_deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 sqrtPs_inst_51_52_44_tsni = function sqrtPs_inst_51_52_44_tsni(fss) {
@@ -7227,10 +7229,10 @@ lambda$_inst_51_52_44_tsni = function lambda$_inst_51_52_44_tsni(fss) {
           tmp = sqrtPs_inst_51_52_44_tsni(fs_1);
           return power1.Pc(0, tmp)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else if (param0 === 1) {
       fs_ = param1;
@@ -7238,10 +7240,10 @@ lambda$_inst_51_52_44_tsni = function lambda$_inst_51_52_44_tsni(fss) {
       tmp2 = NofibPrelude.force(tmp1);
       return NofibPrelude.force(tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qs$_inst_51_52_44_12_tsni = function qs$_inst_51_52_44_12_tsni(fs_) {
@@ -7282,7 +7284,7 @@ lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, 
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -7353,7 +7355,7 @@ lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, 
             return match_scrut_arm_Pc_inst_51_52_44_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -7379,11 +7381,11 @@ lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, 
           return match_scrut_arm_Pc_inst_51_52_44_12_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_44_12_3_6_tsni = function dotMult_inst_51_52_44_12_3_6_tsni(c, ps) {
@@ -7423,7 +7425,7 @@ lambda$_inst_51_52_44_12_3_6_tsni = function lambda$_inst_51_52_44_12_3_6_tsni(c
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_44_12_3_5_tsni = function dotMult_inst_51_52_44_12_3_5_tsni(c, ps) {
@@ -7463,7 +7465,7 @@ lambda$_inst_51_52_44_12_3_5_tsni = function lambda$_inst_51_52_44_12_3_5_tsni(c
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 dotMult_inst_51_52_44_12_3_4_tsni = function dotMult_inst_51_52_44_12_3_4_tsni(c, ps) {
@@ -7503,7 +7505,7 @@ lambda$_inst_51_52_44_12_3_4_tsni = function lambda$_inst_51_52_44_12_3_4_tsni(c
       return power1.Pc(tmp2, tmp3)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_51_52_44_12_1_tsni = (undefined, function (fs_) {
@@ -7584,7 +7586,7 @@ lambda$_inst_51_52_43_31_32_33_34_tsni = function lambda$_inst_51_52_43_31_32_33
       return match_scrut_arm_Pc_inst_51_52_43_35_36_37_38_tsni(n1, _deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 integral_inst_51_52_43_35_tsni = function integral_inst_51_52_43_35_tsni(fs_) {
@@ -7679,7 +7681,7 @@ lambda$_inst_51_52_42_40_32_33_34_tsni = function lambda$_inst_51_52_42_40_32_33
       return match_scrut_arm_Pc_inst_51_52_42_62_61_tsni(_deforest_Pc_f, _deforest_Pc_s)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 deriv_inst_0_53_tsni = function deriv_inst_0_53_tsni(fss) {
@@ -9529,10 +9531,10 @@ lambda$28 = function lambda$(fss) {
           tmp = sqrtPs_inst_11_tsni(fs_1);
           return power1.Pc(0, tmp)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else if (param0 === 1) {
       fs_ = param1;
@@ -9540,10 +9542,10 @@ lambda$28 = function lambda$(fss) {
       tmp2 = NofibPrelude.force(tmp1);
       return NofibPrelude.force(tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda42 = (undefined, function (fss) {
@@ -9566,7 +9568,7 @@ lambda$27 = function lambda$(fss, n) {
     tmp2 = int11(fs_, tmp1);
     return power1.Pc(tmp, tmp2)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda40 = (undefined, function (fss, n) {
@@ -9605,7 +9607,7 @@ lambda$25 = function lambda$(fss, n) {
     tmp2 = int1(fs_, tmp1);
     return power1.Pc(tmp, tmp2)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda38 = (undefined, function (fss, n) {
@@ -9643,7 +9645,7 @@ lambda$23 = function lambda$(gss, n) {
     tmp2 = deriv1(fs_, tmp1);
     return power1.Pc(tmp, tmp2)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda37 = (undefined, function (gss, n) {
@@ -9668,7 +9670,7 @@ lambda$22 = function lambda$(fss) {
     tmp = deriv1(fs_, 1);
     return NofibPrelude.force(tmp)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda36 = (undefined, function (fss) {
@@ -9740,14 +9742,14 @@ lambda$19 = function lambda$(fss) {
           tmp3 = NofibPrelude.lazy(lambda$this);
           return power1.Pc(tmp2, tmp3)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda32 = (undefined, function (fss) {
@@ -9834,7 +9836,7 @@ lambda$15 = function lambda$(fss, gss) {
       return NofibPrelude.force(tmp12)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda25 = (undefined, function (fss, gss) {
@@ -9920,7 +9922,7 @@ lambda$11 = function lambda$(fss, gss) {
       return NofibPrelude.force(tmp11)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda18 = (undefined, function (fss, gss) {
@@ -9961,7 +9963,7 @@ lambda$7 = function lambda$(fss, gss) {
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
     if (scrut3 instanceof power1.Pz.class) {
-      throw globalThis.Error("power series 0/0");
+      throw globalThis.Error("power series 0/0")
     } else if (scrut3 instanceof power1.Pc.class) {
       param03 = scrut3.f;
       param13 = scrut3.s;
@@ -10020,7 +10022,7 @@ lambda$7 = function lambda$(fss, gss) {
           tmp13 = divPs_inst_24_tsni(tmp11, tmp12);
           return power1.Pc(q, tmp13)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     } else {
@@ -10042,11 +10044,11 @@ lambda$7 = function lambda$(fss, gss) {
         tmp19 = divPs_inst_24_tsni(tmp17, tmp18);
         return power1.Pc(q, tmp19)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda13 = (undefined, function (fss, gss) {
@@ -10083,10 +10085,10 @@ lambda$6 = function lambda$(fss, gss) {
       tmp8 = power1.addPs(tmp4, tmp7);
       return power1.Pc(tmp1, tmp8)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda12 = (undefined, function (fss, gss) {
@@ -10122,10 +10124,10 @@ lambda$5 = function lambda$(fss, gss) {
       tmp7 = power1.addPs(tmp3, tmp6);
       return power1.Pc(tmp, tmp7)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda11 = (undefined, function (fss, gss) {
@@ -10155,10 +10157,10 @@ lambda$4 = function lambda$(fss, gs) {
       tmp1 = power1.addPs(fs_, gs1);
       return power1.Pc(tmp, tmp1)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda10 = (undefined, function (fss, gs) {
@@ -10180,7 +10182,7 @@ lambda$3 = function lambda$(ps) {
     tmp1 = power1.negatePs(fs_);
     return power1.Pc(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda9 = (undefined, function (ps) {
@@ -10203,7 +10205,7 @@ lambda$2 = function lambda$(c, ps) {
     tmp2 = power1.dotMult(c, fs_);
     return power1.Pc(tmp1, tmp2)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda8 = (undefined, function (c, ps) {
@@ -10225,7 +10227,7 @@ lambda$1 = function lambda$(c, ps) {
     tmp1 = power1.dotMult(c, fs_);
     return power1.Pc(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda7 = (undefined, function (c, ps) {
@@ -10272,27 +10274,35 @@ lambda = (undefined, function () {
     power1 = power;
     this.Pss = class Pss {
       constructor() {}
-      toString() { return "Pss"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Pss"]; 
     };
     this.Pc = function Pc(f1, s1) {
-      return new Pc.class(f1, s1);
+      return globalThis.Object.freeze(new Pc.class(f1, s1));
     };
-    this.Pc.class = class Pc extends power.Pss {
-      constructor(f, s) {
-        super();
-        this.f = f;
-        this.s = s;
+    Object.defineProperty(this.Pc, "class", {
+      enumerable: true,
+      value: class Pc extends power.Pss {
+        constructor(f, s) {
+          super();
+          this.f = f;
+          this.s = s;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Pc", ["f", "s"]]; 
       }
-      toString() { return "Pc(" + runtime.render(this.f) + ", " + runtime.render(this.s) + ")"; }
-    };
+    });
     const Pz$class = class Pz extends power.Pss {
       constructor() {
         super();
+        Object.defineProperty(this, "class", {
+          value: Pz
+        })
       }
-      toString() { return "Pz"; }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["object", "Pz"]; 
     };
-    this.Pz = new Pz$class;
-    this.Pz.class = Pz$class;
+    this.Pz = globalThis.Object.freeze(new Pz$class);
   }
   static list() {
     return NofibPrelude.lazy(lambda)
@@ -10328,7 +10338,7 @@ lambda = (undefined, function () {
         tmp1 = power.extract(tmp, ps1);
         return NofibPrelude.Cons(x, tmp1)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   } 
@@ -10478,6 +10488,7 @@ lambda = (undefined, function () {
     tmp = testPower_nofib_inst_51_52_tsni(14);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return "power"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "power"]; 
 });
 let power = power1; export default power;

@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -78,24 +80,24 @@ match_head__arm_Deforest_Arr_2_inst_0_1_2_3_tsni = (undefined, function (scores,
   first0 = _deforest_Deforest_Arr_2_0_inst_0_1_2_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_0_1_2_3_tsni;
   award1 = first0;
-  if (globalThis.Array.isArray(first1) && first1.length === 2) {
-    first01 = first1[0];
-    first11 = first1[1];
+  if (runtime.Tuple.isArrayLike(first1) && first1.length === 2) {
+    first01 = runtime.Tuple.get(first1, 0);
+    first11 = runtime.Tuple.get(first1, 1);
     sum_ = first01;
     perm = first11;
-    arr = [
+    arr = globalThis.Object.freeze([
       sum_,
       perm
-    ];
-    arr1 = [
+    ]);
+    arr1 = globalThis.Object.freeze([
       award1,
       arr
-    ];
+    ]);
     tmp = awards.listDiff(scores, perm);
     tmp1 = findawards_inst_0_1_2_3_tsni(tmp);
     return NofibPrelude.Cons(arr1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 match_xs_arm_Cons_inst_17_3_4_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_17_3_4_7_12_tsni, _deforest_Cons_tail_inst_17_3_4_7_12_tsni) {
@@ -173,24 +175,24 @@ match_head__arm_Deforest_Arr_2_inst_17_3_tsni = (undefined, function (scores, _d
   first0 = _deforest_Deforest_Arr_2_0_inst_17_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_17_3_tsni;
   award1 = first0;
-  if (globalThis.Array.isArray(first1) && first1.length === 2) {
-    first01 = first1[0];
-    first11 = first1[1];
+  if (runtime.Tuple.isArrayLike(first1) && first1.length === 2) {
+    first01 = runtime.Tuple.get(first1, 0);
+    first11 = runtime.Tuple.get(first1, 1);
     sum_ = first01;
     perm = first11;
-    arr = [
+    arr = globalThis.Object.freeze([
       sum_,
       perm
-    ];
-    arr1 = [
+    ]);
+    arr1 = globalThis.Object.freeze([
       award1,
       arr
-    ];
+    ]);
     tmp = awards.listDiff(scores, perm);
     tmp1 = findawards_inst_17_3_tsni(tmp);
     return NofibPrelude.Cons(arr1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 match_xs_arm_Cons_inst_18_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_18_12_tsni, _deforest_Cons_tail_inst_18_12_tsni) {
@@ -338,24 +340,24 @@ match_head__arm_Deforest_Arr_2_inst_23_tsni = (undefined, function (scores, _def
   first0 = _deforest_Deforest_Arr_2_0_inst_23_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_23_tsni;
   award1 = first0;
-  if (globalThis.Array.isArray(first1) && first1.length === 2) {
-    first01 = first1[0];
-    first11 = first1[1];
+  if (runtime.Tuple.isArrayLike(first1) && first1.length === 2) {
+    first01 = runtime.Tuple.get(first1, 0);
+    first11 = runtime.Tuple.get(first1, 1);
     sum_ = first01;
     perm = first11;
-    arr = [
+    arr = globalThis.Object.freeze([
       sum_,
       perm
-    ];
-    arr1 = [
+    ]);
+    arr1 = globalThis.Object.freeze([
       award1,
       arr
-    ];
+    ]);
     tmp = awards.listDiff(scores, perm);
     tmp1 = awards.findawards(tmp);
     return NofibPrelude.Cons(arr1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 match_xs_arm_Cons_inst_24_2_3_4_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_24_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_24_2_3_4_11_12_tsni) {
@@ -433,24 +435,24 @@ match_head__arm_Deforest_Arr_2_inst_24_2_3_tsni = (undefined, function (scores, 
   first0 = _deforest_Deforest_Arr_2_0_inst_24_2_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_24_2_3_tsni;
   award1 = first0;
-  if (globalThis.Array.isArray(first1) && first1.length === 2) {
-    first01 = first1[0];
-    first11 = first1[1];
+  if (runtime.Tuple.isArrayLike(first1) && first1.length === 2) {
+    first01 = runtime.Tuple.get(first1, 0);
+    first11 = runtime.Tuple.get(first1, 1);
     sum_ = first01;
     perm = first11;
-    arr = [
+    arr = globalThis.Object.freeze([
       sum_,
       perm
-    ];
-    arr1 = [
+    ]);
+    arr1 = globalThis.Object.freeze([
       award1,
       arr
-    ];
+    ]);
     tmp = awards.listDiff(scores, perm);
     tmp1 = findawards_inst_24_2_3_tsni(tmp);
     return NofibPrelude.Cons(arr1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 match_xs_arm_Cons_inst_25_26_1_2_3_4_11_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_25_26_1_2_3_4_11_12_tsni, _deforest_Cons_tail_inst_25_26_1_2_3_4_11_12_tsni) {
@@ -528,24 +530,24 @@ match_head__arm_Deforest_Arr_2_inst_25_26_1_2_3_tsni = (undefined, function (sco
   first0 = _deforest_Deforest_Arr_2_0_inst_25_26_1_2_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_25_26_1_2_3_tsni;
   award1 = first0;
-  if (globalThis.Array.isArray(first1) && first1.length === 2) {
-    first01 = first1[0];
-    first11 = first1[1];
+  if (runtime.Tuple.isArrayLike(first1) && first1.length === 2) {
+    first01 = runtime.Tuple.get(first1, 0);
+    first11 = runtime.Tuple.get(first1, 1);
     sum_ = first01;
     perm = first11;
-    arr = [
+    arr = globalThis.Object.freeze([
       sum_,
       perm
-    ];
-    arr1 = [
+    ]);
+    arr1 = globalThis.Object.freeze([
       award1,
       arr
-    ];
+    ]);
     tmp = awards.listDiff(scores, perm);
     tmp1 = findawards_inst_25_26_1_2_3_tsni(tmp);
     return NofibPrelude.Cons(arr1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 match_xs_arm_Cons_inst_28_29_26_1_2_3_4_7_12_tsni = (undefined, function (f, _deforest_Cons_head_inst_28_29_26_1_2_3_4_7_12_tsni, _deforest_Cons_tail_inst_28_29_26_1_2_3_4_7_12_tsni) {
@@ -623,24 +625,24 @@ match_head__arm_Deforest_Arr_2_inst_28_29_26_1_2_3_tsni = (undefined, function (
   first0 = _deforest_Deforest_Arr_2_0_inst_28_29_26_1_2_3_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_28_29_26_1_2_3_tsni;
   award1 = first0;
-  if (globalThis.Array.isArray(first1) && first1.length === 2) {
-    first01 = first1[0];
-    first11 = first1[1];
+  if (runtime.Tuple.isArrayLike(first1) && first1.length === 2) {
+    first01 = runtime.Tuple.get(first1, 0);
+    first11 = runtime.Tuple.get(first1, 1);
     sum_ = first01;
     perm = first11;
-    arr = [
+    arr = globalThis.Object.freeze([
       sum_,
       perm
-    ];
-    arr1 = [
+    ]);
+    arr1 = globalThis.Object.freeze([
       award1,
       arr
-    ];
+    ]);
     tmp = awards.listDiff(scores, perm);
     tmp1 = findawards_inst_28_29_26_1_2_3_tsni(tmp);
     return NofibPrelude.Cons(arr1, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 findallawards_inst_0_1_tsni = function findallawards_inst_0_1_tsni(competitors) {
@@ -650,19 +652,19 @@ findallawards_inst_0_1_tsni = function findallawards_inst_0_1_tsni(competitors) 
 };
 lambda_inst_0_1_2_tsni = (undefined, function (caseScrut) {
   let first1, first0, name, scores, tmp, arr;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     name = first0;
     scores = first1;
     tmp = findawards_inst_0_1_2_3_tsni(scores);
-    arr = [
+    arr = globalThis.Object.freeze([
       name,
       tmp
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 findawards_inst_0_1_2_3_tsni = function findawards_inst_0_1_2_3_tsni(scores) {
@@ -741,7 +743,7 @@ perms_inst_0_1_2_3_4_5_tsni = function perms_inst_0_1_2_3_4_5_tsni(m, nns) {
         tmp3 = perms_inst_0_1_2_3_4_5_tsni(m, ns);
         return append_inst_0_1_2_3_4_5_30_tsni(tmp2, tmp3)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -771,7 +773,7 @@ map_inst_0_1_2_3_4_5_6_tsni = function map_inst_0_1_2_3_4_5_6_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_0_1_2_3_4_7_tsni = function award$_inst_0_1_2_3_4_7_tsni(sumscores, name_threshold) {
@@ -804,7 +806,7 @@ qsort_inst_0_1_2_3_4_7_8_9_tsni = function qsort_inst_0_1_2_3_4_7_8_9_tsni(le, l
       return qpart_inst_0_1_2_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_0_1_2_3_4_7_8_9_tsni = function qpart_inst_0_1_2_3_4_7_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -831,7 +833,7 @@ qpart_inst_0_1_2_3_4_7_8_9_tsni = function qpart_inst_0_1_2_3_4_7_8_9_tsni(le, x
       return qpart_inst_0_1_2_3_4_7_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_0_1_2_3_4_7_8_9_tsni = function rqsort_inst_0_1_2_3_4_7_8_9_tsni(le, ls, r) {
@@ -854,7 +856,7 @@ rqsort_inst_0_1_2_3_4_7_8_9_tsni = function rqsort_inst_0_1_2_3_4_7_8_9_tsni(le,
       return rqpart_inst_0_1_2_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_0_1_2_3_4_7_8_9_tsni = function rqpart_inst_0_1_2_3_4_7_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -881,7 +883,7 @@ rqpart_inst_0_1_2_3_4_7_8_9_tsni = function rqpart_inst_0_1_2_3_4_7_8_9_tsni(le,
       return rqpart_inst_0_1_2_3_4_7_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_0_1_2_3_4_10_tsni = function award$_inst_0_1_2_3_4_10_tsni(sumscores, name_threshold) {
@@ -914,7 +916,7 @@ qsort_inst_0_1_2_3_4_10_8_9_tsni = function qsort_inst_0_1_2_3_4_10_8_9_tsni(le,
       return qpart_inst_0_1_2_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_0_1_2_3_4_10_8_9_tsni = function qpart_inst_0_1_2_3_4_10_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -941,7 +943,7 @@ qpart_inst_0_1_2_3_4_10_8_9_tsni = function qpart_inst_0_1_2_3_4_10_8_9_tsni(le,
       return qpart_inst_0_1_2_3_4_10_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_0_1_2_3_4_10_8_9_tsni = function rqsort_inst_0_1_2_3_4_10_8_9_tsni(le, ls, r) {
@@ -964,7 +966,7 @@ rqsort_inst_0_1_2_3_4_10_8_9_tsni = function rqsort_inst_0_1_2_3_4_10_8_9_tsni(l
       return rqpart_inst_0_1_2_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_0_1_2_3_4_10_8_9_tsni = function rqpart_inst_0_1_2_3_4_10_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -991,7 +993,7 @@ rqpart_inst_0_1_2_3_4_10_8_9_tsni = function rqpart_inst_0_1_2_3_4_10_8_9_tsni(l
       return rqpart_inst_0_1_2_3_4_10_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_0_1_2_3_4_11_tsni = function award$_inst_0_1_2_3_4_11_tsni(sumscores, name_threshold) {
@@ -1024,7 +1026,7 @@ qsort_inst_0_1_2_3_4_11_8_9_tsni = function qsort_inst_0_1_2_3_4_11_8_9_tsni(le,
       return qpart_inst_0_1_2_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_0_1_2_3_4_11_8_9_tsni = function qpart_inst_0_1_2_3_4_11_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -1051,7 +1053,7 @@ qpart_inst_0_1_2_3_4_11_8_9_tsni = function qpart_inst_0_1_2_3_4_11_8_9_tsni(le,
       return qpart_inst_0_1_2_3_4_11_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_0_1_2_3_4_11_8_9_tsni = function rqsort_inst_0_1_2_3_4_11_8_9_tsni(le, ls, r) {
@@ -1074,7 +1076,7 @@ rqsort_inst_0_1_2_3_4_11_8_9_tsni = function rqsort_inst_0_1_2_3_4_11_8_9_tsni(l
       return rqpart_inst_0_1_2_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_0_1_2_3_4_11_8_9_tsni = function rqpart_inst_0_1_2_3_4_11_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -1101,7 +1103,7 @@ rqpart_inst_0_1_2_3_4_11_8_9_tsni = function rqpart_inst_0_1_2_3_4_11_8_9_tsni(l
       return rqpart_inst_0_1_2_3_4_11_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_0_1_2_3_4_10_12_tsni = function map_inst_0_1_2_3_4_10_12_tsni(f, xs) {
@@ -1237,7 +1239,7 @@ perms_inst_17_3_4_5_tsni = function perms_inst_17_3_4_5_tsni(m, nns) {
         tmp3 = perms_inst_17_3_4_5_tsni(m, ns);
         return append_inst_17_3_4_5_30_tsni(tmp2, tmp3)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -1267,7 +1269,7 @@ map_inst_17_3_4_5_6_tsni = function map_inst_17_3_4_5_6_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_17_3_4_7_tsni = function award$_inst_17_3_4_7_tsni(sumscores, name_threshold) {
@@ -1300,7 +1302,7 @@ qsort_inst_17_3_4_7_8_9_tsni = function qsort_inst_17_3_4_7_8_9_tsni(le, ls, r) 
       return qpart_inst_17_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_17_3_4_7_8_9_tsni = function qpart_inst_17_3_4_7_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -1327,7 +1329,7 @@ qpart_inst_17_3_4_7_8_9_tsni = function qpart_inst_17_3_4_7_8_9_tsni(le, x, ys, 
       return qpart_inst_17_3_4_7_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_17_3_4_7_8_9_tsni = function rqsort_inst_17_3_4_7_8_9_tsni(le, ls, r) {
@@ -1350,7 +1352,7 @@ rqsort_inst_17_3_4_7_8_9_tsni = function rqsort_inst_17_3_4_7_8_9_tsni(le, ls, r
       return rqpart_inst_17_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_17_3_4_7_8_9_tsni = function rqpart_inst_17_3_4_7_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -1377,7 +1379,7 @@ rqpart_inst_17_3_4_7_8_9_tsni = function rqpart_inst_17_3_4_7_8_9_tsni(le, x, ys
       return rqpart_inst_17_3_4_7_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_17_3_4_10_tsni = function award$_inst_17_3_4_10_tsni(sumscores, name_threshold) {
@@ -1410,7 +1412,7 @@ qsort_inst_17_3_4_10_8_9_tsni = function qsort_inst_17_3_4_10_8_9_tsni(le, ls, r
       return qpart_inst_17_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_17_3_4_10_8_9_tsni = function qpart_inst_17_3_4_10_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -1437,7 +1439,7 @@ qpart_inst_17_3_4_10_8_9_tsni = function qpart_inst_17_3_4_10_8_9_tsni(le, x, ys
       return qpart_inst_17_3_4_10_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_17_3_4_10_8_9_tsni = function rqsort_inst_17_3_4_10_8_9_tsni(le, ls, r) {
@@ -1460,7 +1462,7 @@ rqsort_inst_17_3_4_10_8_9_tsni = function rqsort_inst_17_3_4_10_8_9_tsni(le, ls,
       return rqpart_inst_17_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_17_3_4_10_8_9_tsni = function rqpart_inst_17_3_4_10_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -1487,7 +1489,7 @@ rqpart_inst_17_3_4_10_8_9_tsni = function rqpart_inst_17_3_4_10_8_9_tsni(le, x, 
       return rqpart_inst_17_3_4_10_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_17_3_4_11_tsni = function award$_inst_17_3_4_11_tsni(sumscores, name_threshold) {
@@ -1520,7 +1522,7 @@ qsort_inst_17_3_4_11_8_9_tsni = function qsort_inst_17_3_4_11_8_9_tsni(le, ls, r
       return qpart_inst_17_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_17_3_4_11_8_9_tsni = function qpart_inst_17_3_4_11_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -1547,7 +1549,7 @@ qpart_inst_17_3_4_11_8_9_tsni = function qpart_inst_17_3_4_11_8_9_tsni(le, x, ys
       return qpart_inst_17_3_4_11_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_17_3_4_11_8_9_tsni = function rqsort_inst_17_3_4_11_8_9_tsni(le, ls, r) {
@@ -1570,7 +1572,7 @@ rqsort_inst_17_3_4_11_8_9_tsni = function rqsort_inst_17_3_4_11_8_9_tsni(le, ls,
       return rqpart_inst_17_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_17_3_4_11_8_9_tsni = function rqpart_inst_17_3_4_11_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -1597,7 +1599,7 @@ rqpart_inst_17_3_4_11_8_9_tsni = function rqpart_inst_17_3_4_11_8_9_tsni(le, x, 
       return rqpart_inst_17_3_4_11_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_17_3_4_10_12_tsni = function map_inst_17_3_4_10_12_tsni(f, xs) {
@@ -1682,7 +1684,7 @@ qsort_inst_18_8_9_tsni = function qsort_inst_18_8_9_tsni(le, ls, r) {
       return qpart_inst_18_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_18_8_9_tsni = function qpart_inst_18_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -1709,7 +1711,7 @@ qpart_inst_18_8_9_tsni = function qpart_inst_18_8_9_tsni(le, x, ys, rlt, rge, r)
       return qpart_inst_18_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_18_8_9_tsni = function rqsort_inst_18_8_9_tsni(le, ls, r) {
@@ -1732,7 +1734,7 @@ rqsort_inst_18_8_9_tsni = function rqsort_inst_18_8_9_tsni(le, ls, r) {
       return rqpart_inst_18_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_18_8_9_tsni = function rqpart_inst_18_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -1759,14 +1761,14 @@ rqpart_inst_18_8_9_tsni = function rqpart_inst_18_8_9_tsni(le, x, yss, rle, rgt,
       return rqpart_inst_18_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_19_20_tsni = function award$_inst_19_20_tsni(sumscores, name_threshold) {
   let first1, first0, name, threshold, tmp, tmp1, lambda$this;
-  if (globalThis.Array.isArray(name_threshold) && name_threshold.length === 2) {
-    first0 = name_threshold[0];
-    first1 = name_threshold[1];
+  if (runtime.Tuple.isArrayLike(name_threshold) && name_threshold.length === 2) {
+    first0 = runtime.Tuple.get(name_threshold, 0);
+    first1 = runtime.Tuple.get(name_threshold, 1);
     name = first0;
     threshold = first1;
     tmp = atleast$(sumscores, threshold);
@@ -1774,7 +1776,7 @@ award$_inst_19_20_tsni = function award$_inst_19_20_tsni(sumscores, name_thresho
     lambda$this = runtime.safeCall(lambda10(name));
     return map_inst_19_20_12_tsni(lambda$this, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 sort_inst_19_20_8_tsni = function sort_inst_19_20_8_tsni(l) {
@@ -1802,7 +1804,7 @@ qsort_inst_19_20_8_9_tsni = function qsort_inst_19_20_8_9_tsni(le, ls, r) {
       return qpart_inst_19_20_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_19_20_8_9_tsni = function qpart_inst_19_20_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -1829,7 +1831,7 @@ qpart_inst_19_20_8_9_tsni = function qpart_inst_19_20_8_9_tsni(le, x, ys, rlt, r
       return qpart_inst_19_20_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_19_20_8_9_tsni = function rqsort_inst_19_20_8_9_tsni(le, ls, r) {
@@ -1852,7 +1854,7 @@ rqsort_inst_19_20_8_9_tsni = function rqsort_inst_19_20_8_9_tsni(le, ls, r) {
       return rqpart_inst_19_20_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_19_20_8_9_tsni = function rqpart_inst_19_20_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -1879,7 +1881,7 @@ rqpart_inst_19_20_8_9_tsni = function rqpart_inst_19_20_8_9_tsni(le, x, yss, rle
       return rqpart_inst_19_20_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_21_6_tsni = function map_inst_21_6_tsni(f, xs) {
@@ -1907,7 +1909,7 @@ map_inst_21_6_tsni = function map_inst_21_6_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 perms_inst_22_5_tsni = function perms_inst_22_5_tsni(m, nns) {
@@ -1931,7 +1933,7 @@ perms_inst_22_5_tsni = function perms_inst_22_5_tsni(m, nns) {
         tmp3 = perms_inst_22_5_tsni(m, ns);
         return append_inst_22_5_30_tsni(tmp2, tmp3)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -1961,7 +1963,7 @@ map_inst_22_5_6_tsni = function map_inst_22_5_6_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_22_7_tsni = function award$_inst_22_7_tsni(sumscores, name_threshold) {
@@ -1994,7 +1996,7 @@ qsort_inst_22_7_8_9_tsni = function qsort_inst_22_7_8_9_tsni(le, ls, r) {
       return qpart_inst_22_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_22_7_8_9_tsni = function qpart_inst_22_7_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -2021,7 +2023,7 @@ qpart_inst_22_7_8_9_tsni = function qpart_inst_22_7_8_9_tsni(le, x, ys, rlt, rge
       return qpart_inst_22_7_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_22_7_8_9_tsni = function rqsort_inst_22_7_8_9_tsni(le, ls, r) {
@@ -2044,7 +2046,7 @@ rqsort_inst_22_7_8_9_tsni = function rqsort_inst_22_7_8_9_tsni(le, ls, r) {
       return rqpart_inst_22_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_22_7_8_9_tsni = function rqpart_inst_22_7_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -2071,7 +2073,7 @@ rqpart_inst_22_7_8_9_tsni = function rqpart_inst_22_7_8_9_tsni(le, x, yss, rle, 
       return rqpart_inst_22_7_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_22_10_tsni = function award$_inst_22_10_tsni(sumscores, name_threshold) {
@@ -2104,7 +2106,7 @@ qsort_inst_22_10_8_9_tsni = function qsort_inst_22_10_8_9_tsni(le, ls, r) {
       return qpart_inst_22_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_22_10_8_9_tsni = function qpart_inst_22_10_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -2131,7 +2133,7 @@ qpart_inst_22_10_8_9_tsni = function qpart_inst_22_10_8_9_tsni(le, x, ys, rlt, r
       return qpart_inst_22_10_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_22_10_8_9_tsni = function rqsort_inst_22_10_8_9_tsni(le, ls, r) {
@@ -2154,7 +2156,7 @@ rqsort_inst_22_10_8_9_tsni = function rqsort_inst_22_10_8_9_tsni(le, ls, r) {
       return rqpart_inst_22_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_22_10_8_9_tsni = function rqpart_inst_22_10_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -2181,7 +2183,7 @@ rqpart_inst_22_10_8_9_tsni = function rqpart_inst_22_10_8_9_tsni(le, x, yss, rle
       return rqpart_inst_22_10_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_22_11_tsni = function award$_inst_22_11_tsni(sumscores, name_threshold) {
@@ -2212,7 +2214,7 @@ qsort_inst_22_11_8_9_tsni = function qsort_inst_22_11_8_9_tsni(le, ls, r) {
       return qpart_inst_22_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_22_11_8_9_tsni = function qpart_inst_22_11_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -2239,7 +2241,7 @@ qpart_inst_22_11_8_9_tsni = function qpart_inst_22_11_8_9_tsni(le, x, ys, rlt, r
       return qpart_inst_22_11_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_22_11_8_9_tsni = function rqsort_inst_22_11_8_9_tsni(le, ls, r) {
@@ -2262,7 +2264,7 @@ rqsort_inst_22_11_8_9_tsni = function rqsort_inst_22_11_8_9_tsni(le, ls, r) {
       return rqpart_inst_22_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_22_11_8_9_tsni = function rqpart_inst_22_11_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -2289,7 +2291,7 @@ rqpart_inst_22_11_8_9_tsni = function rqpart_inst_22_11_8_9_tsni(le, x, yss, rle
       return rqpart_inst_22_11_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_22_10_12_tsni = function map_inst_22_10_12_tsni(f, xs) {
@@ -2378,7 +2380,7 @@ qsort_inst_23_4_11_8_9_tsni = function qsort_inst_23_4_11_8_9_tsni(le, ls, r) {
       return qpart_inst_23_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_23_4_11_8_9_tsni = function qpart_inst_23_4_11_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -2405,7 +2407,7 @@ qpart_inst_23_4_11_8_9_tsni = function qpart_inst_23_4_11_8_9_tsni(le, x, ys, rl
       return qpart_inst_23_4_11_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_23_4_11_8_9_tsni = function rqsort_inst_23_4_11_8_9_tsni(le, ls, r) {
@@ -2428,7 +2430,7 @@ rqsort_inst_23_4_11_8_9_tsni = function rqsort_inst_23_4_11_8_9_tsni(le, ls, r) 
       return rqpart_inst_23_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_23_4_11_8_9_tsni = function rqpart_inst_23_4_11_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -2455,7 +2457,7 @@ rqpart_inst_23_4_11_8_9_tsni = function rqpart_inst_23_4_11_8_9_tsni(le, x, yss,
       return rqpart_inst_23_4_11_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_23_4_10_tsni = function award$_inst_23_4_10_tsni(sumscores, name_threshold) {
@@ -2488,7 +2490,7 @@ qsort_inst_23_4_10_8_9_tsni = function qsort_inst_23_4_10_8_9_tsni(le, ls, r) {
       return qpart_inst_23_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_23_4_10_8_9_tsni = function qpart_inst_23_4_10_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -2515,7 +2517,7 @@ qpart_inst_23_4_10_8_9_tsni = function qpart_inst_23_4_10_8_9_tsni(le, x, ys, rl
       return qpart_inst_23_4_10_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_23_4_10_8_9_tsni = function rqsort_inst_23_4_10_8_9_tsni(le, ls, r) {
@@ -2538,7 +2540,7 @@ rqsort_inst_23_4_10_8_9_tsni = function rqsort_inst_23_4_10_8_9_tsni(le, ls, r) 
       return rqpart_inst_23_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_23_4_10_8_9_tsni = function rqpart_inst_23_4_10_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -2565,7 +2567,7 @@ rqpart_inst_23_4_10_8_9_tsni = function rqpart_inst_23_4_10_8_9_tsni(le, x, yss,
       return rqpart_inst_23_4_10_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_23_4_10_12_tsni = function map_inst_23_4_10_12_tsni(f, xs) {
@@ -2601,7 +2603,7 @@ qsort_inst_23_4_7_8_9_tsni = function qsort_inst_23_4_7_8_9_tsni(le, ls, r) {
       return qpart_inst_23_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_23_4_7_8_9_tsni = function qpart_inst_23_4_7_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -2628,7 +2630,7 @@ qpart_inst_23_4_7_8_9_tsni = function qpart_inst_23_4_7_8_9_tsni(le, x, ys, rlt,
       return qpart_inst_23_4_7_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_23_4_7_8_9_tsni = function rqsort_inst_23_4_7_8_9_tsni(le, ls, r) {
@@ -2651,7 +2653,7 @@ rqsort_inst_23_4_7_8_9_tsni = function rqsort_inst_23_4_7_8_9_tsni(le, ls, r) {
       return rqpart_inst_23_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_23_4_7_8_9_tsni = function rqpart_inst_23_4_7_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -2678,7 +2680,7 @@ rqpart_inst_23_4_7_8_9_tsni = function rqpart_inst_23_4_7_8_9_tsni(le, x, yss, r
       return rqpart_inst_23_4_7_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_23_4_7_12_tsni = function map_inst_23_4_7_12_tsni(f, xs) {
@@ -2705,7 +2707,7 @@ perms_inst_23_4_5_tsni = function perms_inst_23_4_5_tsni(m, nns) {
         tmp3 = perms_inst_23_4_5_tsni(m, ns);
         return append_inst_23_4_5_30_tsni(tmp2, tmp3)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -2735,7 +2737,7 @@ map_inst_23_4_5_6_tsni = function map_inst_23_4_5_6_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_23_4_11_12_tsni = function map_inst_23_4_11_12_tsni(f, xs) {
@@ -2791,19 +2793,19 @@ lambda$_inst_23_4_11_14_15_tsni = function lambda$_inst_23_4_11_14_15_tsni(name,
 };
 lambda_inst_24_2_tsni = (undefined, function (caseScrut) {
   let first1, first0, name, scores, tmp, arr;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     name = first0;
     scores = first1;
     tmp = findawards_inst_24_2_3_tsni(scores);
-    arr = [
+    arr = globalThis.Object.freeze([
       name,
       tmp
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 findawards_inst_24_2_3_tsni = function findawards_inst_24_2_3_tsni(scores) {
@@ -2891,7 +2893,7 @@ qsort_inst_24_2_3_4_11_8_9_tsni = function qsort_inst_24_2_3_4_11_8_9_tsni(le, l
       return qpart_inst_24_2_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_24_2_3_4_11_8_9_tsni = function qpart_inst_24_2_3_4_11_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -2918,7 +2920,7 @@ qpart_inst_24_2_3_4_11_8_9_tsni = function qpart_inst_24_2_3_4_11_8_9_tsni(le, x
       return qpart_inst_24_2_3_4_11_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_24_2_3_4_11_8_9_tsni = function rqsort_inst_24_2_3_4_11_8_9_tsni(le, ls, r) {
@@ -2941,7 +2943,7 @@ rqsort_inst_24_2_3_4_11_8_9_tsni = function rqsort_inst_24_2_3_4_11_8_9_tsni(le,
       return rqpart_inst_24_2_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_24_2_3_4_11_8_9_tsni = function rqpart_inst_24_2_3_4_11_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -2968,7 +2970,7 @@ rqpart_inst_24_2_3_4_11_8_9_tsni = function rqpart_inst_24_2_3_4_11_8_9_tsni(le,
       return rqpart_inst_24_2_3_4_11_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_24_2_3_4_10_tsni = function award$_inst_24_2_3_4_10_tsni(sumscores, name_threshold) {
@@ -3001,7 +3003,7 @@ qsort_inst_24_2_3_4_10_8_9_tsni = function qsort_inst_24_2_3_4_10_8_9_tsni(le, l
       return qpart_inst_24_2_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_24_2_3_4_10_8_9_tsni = function qpart_inst_24_2_3_4_10_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -3028,7 +3030,7 @@ qpart_inst_24_2_3_4_10_8_9_tsni = function qpart_inst_24_2_3_4_10_8_9_tsni(le, x
       return qpart_inst_24_2_3_4_10_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_24_2_3_4_10_8_9_tsni = function rqsort_inst_24_2_3_4_10_8_9_tsni(le, ls, r) {
@@ -3051,7 +3053,7 @@ rqsort_inst_24_2_3_4_10_8_9_tsni = function rqsort_inst_24_2_3_4_10_8_9_tsni(le,
       return rqpart_inst_24_2_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_24_2_3_4_10_8_9_tsni = function rqpart_inst_24_2_3_4_10_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -3078,7 +3080,7 @@ rqpart_inst_24_2_3_4_10_8_9_tsni = function rqpart_inst_24_2_3_4_10_8_9_tsni(le,
       return rqpart_inst_24_2_3_4_10_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_24_2_3_4_10_12_tsni = function map_inst_24_2_3_4_10_12_tsni(f, xs) {
@@ -3114,7 +3116,7 @@ qsort_inst_24_2_3_4_7_8_9_tsni = function qsort_inst_24_2_3_4_7_8_9_tsni(le, ls,
       return qpart_inst_24_2_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_24_2_3_4_7_8_9_tsni = function qpart_inst_24_2_3_4_7_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -3141,7 +3143,7 @@ qpart_inst_24_2_3_4_7_8_9_tsni = function qpart_inst_24_2_3_4_7_8_9_tsni(le, x, 
       return qpart_inst_24_2_3_4_7_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_24_2_3_4_7_8_9_tsni = function rqsort_inst_24_2_3_4_7_8_9_tsni(le, ls, r) {
@@ -3164,7 +3166,7 @@ rqsort_inst_24_2_3_4_7_8_9_tsni = function rqsort_inst_24_2_3_4_7_8_9_tsni(le, l
       return rqpart_inst_24_2_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_24_2_3_4_7_8_9_tsni = function rqpart_inst_24_2_3_4_7_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -3191,7 +3193,7 @@ rqpart_inst_24_2_3_4_7_8_9_tsni = function rqpart_inst_24_2_3_4_7_8_9_tsni(le, x
       return rqpart_inst_24_2_3_4_7_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_24_2_3_4_7_12_tsni = function map_inst_24_2_3_4_7_12_tsni(f, xs) {
@@ -3218,7 +3220,7 @@ perms_inst_24_2_3_4_5_tsni = function perms_inst_24_2_3_4_5_tsni(m, nns) {
         tmp3 = perms_inst_24_2_3_4_5_tsni(m, ns);
         return append_inst_24_2_3_4_5_30_tsni(tmp2, tmp3)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -3248,7 +3250,7 @@ map_inst_24_2_3_4_5_6_tsni = function map_inst_24_2_3_4_5_6_tsni(f, xs) {
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_24_2_3_4_11_12_tsni = function map_inst_24_2_3_4_11_12_tsni(f, xs) {
@@ -3316,19 +3318,19 @@ findallawards_inst_25_26_1_tsni = function findallawards_inst_25_26_1_tsni(compe
 };
 lambda_inst_25_26_1_2_tsni = (undefined, function (caseScrut) {
   let first1, first0, name, scores, tmp, arr;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     name = first0;
     scores = first1;
     tmp = findawards_inst_25_26_1_2_3_tsni(scores);
-    arr = [
+    arr = globalThis.Object.freeze([
       name,
       tmp
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 findawards_inst_25_26_1_2_3_tsni = function findawards_inst_25_26_1_2_3_tsni(scores) {
@@ -3416,7 +3418,7 @@ qsort_inst_25_26_1_2_3_4_11_8_9_tsni = function qsort_inst_25_26_1_2_3_4_11_8_9_
       return qpart_inst_25_26_1_2_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_25_26_1_2_3_4_11_8_9_tsni = function qpart_inst_25_26_1_2_3_4_11_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -3443,7 +3445,7 @@ qpart_inst_25_26_1_2_3_4_11_8_9_tsni = function qpart_inst_25_26_1_2_3_4_11_8_9_
       return qpart_inst_25_26_1_2_3_4_11_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_25_26_1_2_3_4_11_8_9_tsni = function rqsort_inst_25_26_1_2_3_4_11_8_9_tsni(le, ls, r) {
@@ -3466,7 +3468,7 @@ rqsort_inst_25_26_1_2_3_4_11_8_9_tsni = function rqsort_inst_25_26_1_2_3_4_11_8_
       return rqpart_inst_25_26_1_2_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_25_26_1_2_3_4_11_8_9_tsni = function rqpart_inst_25_26_1_2_3_4_11_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -3493,7 +3495,7 @@ rqpart_inst_25_26_1_2_3_4_11_8_9_tsni = function rqpart_inst_25_26_1_2_3_4_11_8_
       return rqpart_inst_25_26_1_2_3_4_11_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_25_26_1_2_3_4_10_tsni = function award$_inst_25_26_1_2_3_4_10_tsni(sumscores, name_threshold) {
@@ -3526,7 +3528,7 @@ qsort_inst_25_26_1_2_3_4_10_8_9_tsni = function qsort_inst_25_26_1_2_3_4_10_8_9_
       return qpart_inst_25_26_1_2_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_25_26_1_2_3_4_10_8_9_tsni = function qpart_inst_25_26_1_2_3_4_10_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -3553,7 +3555,7 @@ qpart_inst_25_26_1_2_3_4_10_8_9_tsni = function qpart_inst_25_26_1_2_3_4_10_8_9_
       return qpart_inst_25_26_1_2_3_4_10_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_25_26_1_2_3_4_10_8_9_tsni = function rqsort_inst_25_26_1_2_3_4_10_8_9_tsni(le, ls, r) {
@@ -3576,7 +3578,7 @@ rqsort_inst_25_26_1_2_3_4_10_8_9_tsni = function rqsort_inst_25_26_1_2_3_4_10_8_
       return rqpart_inst_25_26_1_2_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_25_26_1_2_3_4_10_8_9_tsni = function rqpart_inst_25_26_1_2_3_4_10_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -3603,7 +3605,7 @@ rqpart_inst_25_26_1_2_3_4_10_8_9_tsni = function rqpart_inst_25_26_1_2_3_4_10_8_
       return rqpart_inst_25_26_1_2_3_4_10_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_25_26_1_2_3_4_10_12_tsni = function map_inst_25_26_1_2_3_4_10_12_tsni(f, xs) {
@@ -3639,7 +3641,7 @@ qsort_inst_25_26_1_2_3_4_7_8_9_tsni = function qsort_inst_25_26_1_2_3_4_7_8_9_ts
       return qpart_inst_25_26_1_2_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_25_26_1_2_3_4_7_8_9_tsni = function qpart_inst_25_26_1_2_3_4_7_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -3666,7 +3668,7 @@ qpart_inst_25_26_1_2_3_4_7_8_9_tsni = function qpart_inst_25_26_1_2_3_4_7_8_9_ts
       return qpart_inst_25_26_1_2_3_4_7_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_25_26_1_2_3_4_7_8_9_tsni = function rqsort_inst_25_26_1_2_3_4_7_8_9_tsni(le, ls, r) {
@@ -3689,7 +3691,7 @@ rqsort_inst_25_26_1_2_3_4_7_8_9_tsni = function rqsort_inst_25_26_1_2_3_4_7_8_9_
       return rqpart_inst_25_26_1_2_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_25_26_1_2_3_4_7_8_9_tsni = function rqpart_inst_25_26_1_2_3_4_7_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -3716,7 +3718,7 @@ rqpart_inst_25_26_1_2_3_4_7_8_9_tsni = function rqpart_inst_25_26_1_2_3_4_7_8_9_
       return rqpart_inst_25_26_1_2_3_4_7_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_25_26_1_2_3_4_7_12_tsni = function map_inst_25_26_1_2_3_4_7_12_tsni(f, xs) {
@@ -3743,7 +3745,7 @@ perms_inst_25_26_1_2_3_4_5_tsni = function perms_inst_25_26_1_2_3_4_5_tsni(m, nn
         tmp3 = perms_inst_25_26_1_2_3_4_5_tsni(m, ns);
         return append_inst_25_26_1_2_3_4_5_30_tsni(tmp2, tmp3)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -3773,7 +3775,7 @@ map_inst_25_26_1_2_3_4_5_6_tsni = function map_inst_25_26_1_2_3_4_5_6_tsni(f, xs
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_25_26_1_2_3_4_11_12_tsni = function map_inst_25_26_1_2_3_4_11_12_tsni(f, xs) {
@@ -3895,19 +3897,19 @@ findallawards_inst_28_29_26_1_tsni = function findallawards_inst_28_29_26_1_tsni
 };
 lambda_inst_28_29_26_1_2_tsni = (undefined, function (caseScrut) {
   let first1, first0, name, scores, tmp, arr;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     name = first0;
     scores = first1;
     tmp = findawards_inst_28_29_26_1_2_3_tsni(scores);
-    arr = [
+    arr = globalThis.Object.freeze([
       name,
       tmp
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 findawards_inst_28_29_26_1_2_3_tsni = function findawards_inst_28_29_26_1_2_3_tsni(scores) {
@@ -3986,7 +3988,7 @@ perms_inst_28_29_26_1_2_3_4_5_tsni = function perms_inst_28_29_26_1_2_3_4_5_tsni
         tmp3 = perms_inst_28_29_26_1_2_3_4_5_tsni(m, ns);
         return append_inst_28_29_26_1_2_3_4_5_30_tsni(tmp2, tmp3)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }
   }
@@ -4016,7 +4018,7 @@ map_inst_28_29_26_1_2_3_4_5_6_tsni = function map_inst_28_29_26_1_2_3_4_5_6_tsni
       return ys
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_28_29_26_1_2_3_4_7_tsni = function award$_inst_28_29_26_1_2_3_4_7_tsni(sumscores, name_threshold) {
@@ -4049,7 +4051,7 @@ qsort_inst_28_29_26_1_2_3_4_7_8_9_tsni = function qsort_inst_28_29_26_1_2_3_4_7_
       return qpart_inst_28_29_26_1_2_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_28_29_26_1_2_3_4_7_8_9_tsni = function qpart_inst_28_29_26_1_2_3_4_7_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -4076,7 +4078,7 @@ qpart_inst_28_29_26_1_2_3_4_7_8_9_tsni = function qpart_inst_28_29_26_1_2_3_4_7_
       return qpart_inst_28_29_26_1_2_3_4_7_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_28_29_26_1_2_3_4_7_8_9_tsni = function rqsort_inst_28_29_26_1_2_3_4_7_8_9_tsni(le, ls, r) {
@@ -4099,7 +4101,7 @@ rqsort_inst_28_29_26_1_2_3_4_7_8_9_tsni = function rqsort_inst_28_29_26_1_2_3_4_
       return rqpart_inst_28_29_26_1_2_3_4_7_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_28_29_26_1_2_3_4_7_8_9_tsni = function rqpart_inst_28_29_26_1_2_3_4_7_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -4126,7 +4128,7 @@ rqpart_inst_28_29_26_1_2_3_4_7_8_9_tsni = function rqpart_inst_28_29_26_1_2_3_4_
       return rqpart_inst_28_29_26_1_2_3_4_7_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_28_29_26_1_2_3_4_10_tsni = function award$_inst_28_29_26_1_2_3_4_10_tsni(sumscores, name_threshold) {
@@ -4159,7 +4161,7 @@ qsort_inst_28_29_26_1_2_3_4_10_8_9_tsni = function qsort_inst_28_29_26_1_2_3_4_1
       return qpart_inst_28_29_26_1_2_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_28_29_26_1_2_3_4_10_8_9_tsni = function qpart_inst_28_29_26_1_2_3_4_10_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -4186,7 +4188,7 @@ qpart_inst_28_29_26_1_2_3_4_10_8_9_tsni = function qpart_inst_28_29_26_1_2_3_4_1
       return qpart_inst_28_29_26_1_2_3_4_10_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_28_29_26_1_2_3_4_10_8_9_tsni = function rqsort_inst_28_29_26_1_2_3_4_10_8_9_tsni(le, ls, r) {
@@ -4209,7 +4211,7 @@ rqsort_inst_28_29_26_1_2_3_4_10_8_9_tsni = function rqsort_inst_28_29_26_1_2_3_4
       return rqpart_inst_28_29_26_1_2_3_4_10_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_28_29_26_1_2_3_4_10_8_9_tsni = function rqpart_inst_28_29_26_1_2_3_4_10_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -4236,7 +4238,7 @@ rqpart_inst_28_29_26_1_2_3_4_10_8_9_tsni = function rqpart_inst_28_29_26_1_2_3_4
       return rqpart_inst_28_29_26_1_2_3_4_10_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award$_inst_28_29_26_1_2_3_4_11_tsni = function award$_inst_28_29_26_1_2_3_4_11_tsni(sumscores, name_threshold) {
@@ -4269,7 +4271,7 @@ qsort_inst_28_29_26_1_2_3_4_11_8_9_tsni = function qsort_inst_28_29_26_1_2_3_4_1
       return qpart_inst_28_29_26_1_2_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 qpart_inst_28_29_26_1_2_3_4_11_8_9_tsni = function qpart_inst_28_29_26_1_2_3_4_11_8_9_tsni(le, x, ys, rlt, rge, r) {
@@ -4296,7 +4298,7 @@ qpart_inst_28_29_26_1_2_3_4_11_8_9_tsni = function qpart_inst_28_29_26_1_2_3_4_1
       return qpart_inst_28_29_26_1_2_3_4_11_8_9_tsni(le, x, ys1, tmp3, rge, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqsort_inst_28_29_26_1_2_3_4_11_8_9_tsni = function rqsort_inst_28_29_26_1_2_3_4_11_8_9_tsni(le, ls, r) {
@@ -4319,7 +4321,7 @@ rqsort_inst_28_29_26_1_2_3_4_11_8_9_tsni = function rqsort_inst_28_29_26_1_2_3_4
       return rqpart_inst_28_29_26_1_2_3_4_11_8_9_tsni(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 rqpart_inst_28_29_26_1_2_3_4_11_8_9_tsni = function rqpart_inst_28_29_26_1_2_3_4_11_8_9_tsni(le, x, yss, rle, rgt, r) {
@@ -4346,7 +4348,7 @@ rqpart_inst_28_29_26_1_2_3_4_11_8_9_tsni = function rqpart_inst_28_29_26_1_2_3_4
       return rqpart_inst_28_29_26_1_2_3_4_11_8_9_tsni(le, x, ys, rle, tmp3, r)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_28_29_26_1_2_3_4_10_12_tsni = function map_inst_28_29_26_1_2_3_4_10_12_tsni(f, xs) {
@@ -4460,31 +4462,31 @@ lambda13 = (undefined, function (x) {
 });
 lambda12 = (undefined, function (caseScrut) {
   let first1, first0, name, scores, tmp, arr;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     name = first0;
     scores = first1;
     tmp = findawards_inst_17_3_tsni(scores);
-    arr = [
+    arr = globalThis.Object.freeze([
       name,
       tmp
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 lambda$2 = function lambda$(threshold, caseScrut) {
   let first1, first0, sum_, p;
-  if (globalThis.Array.isArray(caseScrut) && caseScrut.length === 2) {
-    first0 = caseScrut[0];
-    first1 = caseScrut[1];
+  if (runtime.Tuple.isArrayLike(caseScrut) && caseScrut.length === 2) {
+    first0 = runtime.Tuple.get(caseScrut, 0);
+    first1 = runtime.Tuple.get(caseScrut, 1);
     sum_ = first0;
     p = first1;
     return sum_ >= threshold
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda9 = (undefined, function (threshold) {
@@ -4504,10 +4506,10 @@ atleast = function atleast(sumscores) {
 };
 lambda$1 = function lambda$(name, ps) {
   let arr;
-  arr = [
+  arr = globalThis.Object.freeze([
     name,
     ps
-  ];
+  ]);
   return arr
 };
 lambda10 = (undefined, function (name) {
@@ -4517,9 +4519,9 @@ lambda10 = (undefined, function (name) {
 });
 award$ = function award$(sumscores, name_threshold) {
   let first1, first0, name, threshold, tmp, tmp1, lambda$this;
-  if (globalThis.Array.isArray(name_threshold) && name_threshold.length === 2) {
-    first0 = name_threshold[0];
-    first1 = name_threshold[1];
+  if (runtime.Tuple.isArrayLike(name_threshold) && name_threshold.length === 2) {
+    first0 = runtime.Tuple.get(name_threshold, 0);
+    first1 = runtime.Tuple.get(name_threshold, 1);
     name = first0;
     threshold = first1;
     tmp = atleast$(sumscores, threshold);
@@ -4527,7 +4529,7 @@ award$ = function award$(sumscores, name_threshold) {
     lambda$this = runtime.safeCall(lambda10(name));
     return map_inst_18_12_tsni(lambda$this, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 award = function award(sumscores) {
@@ -4538,10 +4540,10 @@ award = function award(sumscores) {
 lambda11 = (undefined, function (p) {
   let tmp, arr;
   tmp = NofibPrelude.sum(p);
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     p
-  ];
+  ]);
   return arr
 });
 lambda7 = (undefined, function (x) {
@@ -4602,7 +4604,7 @@ lambda = (undefined, function (x, y) {
         return awards.qpart(le, x, xs1, NofibPrelude.Nil, NofibPrelude.Nil, r)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static qpart(le1, x, ys, rlt, rge, r1) {
@@ -4625,7 +4627,7 @@ lambda = (undefined, function (x, y) {
         return awards.qpart(le1, x, ys1, tmp3, rge, r1)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static rqsort(le2, ls2, r2) {
@@ -4644,7 +4646,7 @@ lambda = (undefined, function (x, y) {
         return awards.rqpart(le2, x1, xs1, NofibPrelude.Nil, NofibPrelude.Nil, r2)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static rqpart(le3, x1, yss, rle, rgt, r3) {
@@ -4667,7 +4669,7 @@ lambda = (undefined, function (x, y) {
         return awards.rqpart(le3, x1, ys1, rle, tmp3, r3)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static sort(l) {
@@ -4694,7 +4696,7 @@ lambda = (undefined, function (x, y) {
           tmp3 = awards.perms(m, ns);
           return append_inst_21_30_tsni(tmp2, tmp3)
         } else {
-          throw new globalThis.Error("match error");
+          throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       }
     }
@@ -4762,25 +4764,25 @@ lambda = (undefined, function (x, y) {
   static competitors(i) {
     let tmp, arr, tmp1, arr1, tmp2, arr2, tmp3, arr3;
     tmp = NofibPrelude.list(35, 27, 40, i, 34, 21);
-    arr = [
+    arr = globalThis.Object.freeze([
       "Simon",
       tmp
-    ];
+    ]);
     tmp1 = NofibPrelude.list(23, 19, 45, i, 17, 10, 5, 8, 14);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       "Hans",
       tmp1
-    ];
+    ]);
     tmp2 = NofibPrelude.list(1, 18, i, 20, 21, 19, 34, 8, 16, 21);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       "Phil",
       tmp2
-    ];
+    ]);
     tmp3 = NofibPrelude.list(9, 23, 17, 54, i, 41, 9, 18, 14);
-    arr3 = [
+    arr3 = globalThis.Object.freeze([
       "Kevin",
       tmp3
-    ];
+    ]);
     return NofibPrelude.list(arr, arr1, arr2, arr3)
   } 
   static testAwards_nofib(n) {
@@ -4792,6 +4794,7 @@ lambda = (undefined, function (x, y) {
   static main() {
     return testAwards_nofib_inst_28_29_tsni(100)
   }
-  static toString() { return "awards"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "awards"]; 
 });
 let awards = awards1; export default awards;

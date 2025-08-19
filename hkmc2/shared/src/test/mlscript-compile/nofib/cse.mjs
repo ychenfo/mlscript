@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -50,7 +52,7 @@ match_ls_arm_Cons_inst_26_tsni = (undefined, function (f, q, _deforest_Cons_head
     tmp1 = NofibPrelude.Cons(q1, t);
     return NofibPrelude.Cons(tmp, tmp1)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
 match_ls_arm_Cons_inst_27_tsni = (undefined, function (f, q, _deforest_Cons_head_inst_27_tsni, _deforest_Cons_tail_inst_27_tsni) {
@@ -136,26 +138,26 @@ ltGraph_inst_0_1_2_tsni = function ltGraph_inst_0_1_2_tsni(t) {
   if (t instanceof cse.Node.class) {
     param0 = t.a;
     param1 = t.b;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       n = first0;
       x = first1;
       xs = param1;
       tmp = NofibPrelude.map(labelOf, xs);
-      arr = [
+      arr = globalThis.Object.freeze([
         n,
         x,
         tmp
-      ];
+      ]);
       tmp1 = map_inst_0_1_2_3_tsni(ltGraph_inst_0_1_2_tsni, xs);
       tmp2 = concat_inst_0_1_2_21_tsni(tmp1);
       return NofibPrelude.Cons(arr, tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_0_1_2_3_tsni = function map_inst_0_1_2_3_tsni(f, xs) {
@@ -183,7 +185,7 @@ map_inst_0_1_2_3_tsni = function map_inst_0_1_2_3_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 take_inst_0_4_tsni = function take_inst_0_4_tsni(n, ls) {
@@ -271,7 +273,7 @@ map_inst_11_3_tsni = function map_inst_11_3_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_12_13_tsni = (undefined, function (n) {
@@ -333,26 +335,26 @@ ltGraph_inst_15_2_tsni = function ltGraph_inst_15_2_tsni(t) {
   if (t instanceof cse.Node.class) {
     param0 = t.a;
     param1 = t.b;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       n = first0;
       x = first1;
       xs = param1;
       tmp = NofibPrelude.map(labelOf, xs);
-      arr = [
+      arr = globalThis.Object.freeze([
         n,
         x,
         tmp
-      ];
+      ]);
       tmp1 = map_inst_15_2_3_tsni(ltGraph_inst_15_2_tsni, xs);
       tmp2 = concat_inst_15_2_21_tsni(tmp1);
       return NofibPrelude.Cons(arr, tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_15_2_3_tsni = function map_inst_15_2_3_tsni(f, xs) {
@@ -380,7 +382,7 @@ map_inst_15_2_3_tsni = function map_inst_15_2_3_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_16_17_tsni = (undefined, function (i) {
@@ -434,26 +436,26 @@ ltGraph_inst_16_17_1_2_tsni = function ltGraph_inst_16_17_1_2_tsni(t) {
   if (t instanceof cse.Node.class) {
     param0 = t.a;
     param1 = t.b;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       n = first0;
       x = first1;
       xs = param1;
       tmp = NofibPrelude.map(labelOf, xs);
-      arr = [
+      arr = globalThis.Object.freeze([
         n,
         x,
         tmp
-      ];
+      ]);
       tmp1 = map_inst_16_17_1_2_3_tsni(ltGraph_inst_16_17_1_2_tsni, xs);
       tmp2 = concat_inst_16_17_1_2_21_tsni(tmp1);
       return NofibPrelude.Cons(arr, tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_16_17_1_2_3_tsni = function map_inst_16_17_1_2_3_tsni(f, xs) {
@@ -481,7 +483,7 @@ map_inst_16_17_1_2_3_tsni = function map_inst_16_17_1_2_3_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 take_inst_16_17_4_tsni = function take_inst_16_17_4_tsni(n, ls) {
@@ -592,26 +594,26 @@ ltGraph_inst_19_20_17_1_2_tsni = function ltGraph_inst_19_20_17_1_2_tsni(t) {
   if (t instanceof cse.Node.class) {
     param0 = t.a;
     param1 = t.b;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       n = first0;
       x = first1;
       xs = param1;
       tmp = NofibPrelude.map(labelOf, xs);
-      arr = [
+      arr = globalThis.Object.freeze([
         n,
         x,
         tmp
-      ];
+      ]);
       tmp1 = map_inst_19_20_17_1_2_3_tsni(ltGraph_inst_19_20_17_1_2_tsni, xs);
       tmp2 = concat_inst_19_20_17_1_2_21_tsni(tmp1);
       return NofibPrelude.Cons(arr, tmp2)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_19_20_17_1_2_3_tsni = function map_inst_19_20_17_1_2_3_tsni(f, xs) {
@@ -639,7 +641,7 @@ map_inst_19_20_17_1_2_3_tsni = function map_inst_19_20_17_1_2_3_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 take_inst_19_20_17_4_tsni = function take_inst_19_20_17_4_tsni(n, ls) {
@@ -780,10 +782,10 @@ lscomp$ = function lscomp$(s, rcs, ls) {
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
-    if (globalThis.Array.isArray(param0) && param0.length === 3) {
-      first0 = param0[0];
-      first1 = param0[1];
-      first2 = param0[2];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 3) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
+      first2 = runtime.Tuple.get(param0, 2);
       m = first0;
       s_ = first1;
       cs_ = first2;
@@ -801,10 +803,10 @@ lscomp$ = function lscomp$(s, rcs, ls) {
         return lscomp$(s, rcs, t)
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp = function lscomp(s, rcs) {
@@ -824,16 +826,16 @@ lambda18 = (undefined, function (n, r, ms) {
 });
 sim = function sim(n_s_cs, r_lg) {
   let first2, first1, first0, n, s, cs, first11, first01, r, lg, rcs, ms, scrut, tmp, tmp1, arr, tmp2, arr1, arr2, lambda$this;
-  if (globalThis.Array.isArray(n_s_cs) && n_s_cs.length === 3) {
-    first0 = n_s_cs[0];
-    first1 = n_s_cs[1];
-    first2 = n_s_cs[2];
+  if (runtime.Tuple.isArrayLike(n_s_cs) && n_s_cs.length === 3) {
+    first0 = runtime.Tuple.get(n_s_cs, 0);
+    first1 = runtime.Tuple.get(n_s_cs, 1);
+    first2 = runtime.Tuple.get(n_s_cs, 2);
     n = first0;
     s = first1;
     cs = first2;
-    if (globalThis.Array.isArray(r_lg) && r_lg.length === 2) {
-      first01 = r_lg[0];
-      first11 = r_lg[1];
+    if (runtime.Tuple.isArrayLike(r_lg) && r_lg.length === 2) {
+      first01 = runtime.Tuple.get(r_lg, 0);
+      first11 = runtime.Tuple.get(r_lg, 1);
       r = first01;
       lg = first11;
       tmp = NofibPrelude.map(r, cs);
@@ -842,30 +844,30 @@ sim = function sim(n_s_cs, r_lg) {
       ms = tmp1;
       scrut = NofibPrelude.null_(ms);
       if (scrut === true) {
-        arr = [
+        arr = globalThis.Object.freeze([
           n,
           s,
           rcs
-        ];
+        ]);
         tmp2 = NofibPrelude.Cons(arr, lg);
-        arr1 = [
+        arr1 = globalThis.Object.freeze([
           r,
           tmp2
-        ];
+        ]);
         return arr1
       } else {
         lambda$this = runtime.safeCall(lambda18(n, r, ms));
-        arr2 = [
+        arr2 = globalThis.Object.freeze([
           lambda$this,
           lg
-        ];
+        ]);
         return arr2
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda19 = (undefined, function (x) {
@@ -895,26 +897,26 @@ labelOf = function labelOf(t) {
   if (t instanceof cse1.Node.class) {
     param0 = t.a;
     param1 = t.b;
-    if (globalThis.Array.isArray(param0) && param0.length === 2) {
-      first0 = param0[0];
-      first1 = param0[1];
+    if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+      first0 = runtime.Tuple.get(param0, 0);
+      first1 = runtime.Tuple.get(param0, 1);
       n = first0;
       x = first1;
       xs = param1;
       return n
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$15 = function lambda$(x, n, ts) {
   let arr, tmp;
-  arr = [
+  arr = globalThis.Object.freeze([
     n,
     x
-  ];
+  ]);
   tmp = cse1.Node(arr, ts);
   return cse1.retURN(tmp)
 };
@@ -944,15 +946,15 @@ label = function label(t) {
     lambda$this = runtime.safeCall(lambda14(x, xs));
     return cse1.bind(cse1.incr, lambda$this)
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$13 = function lambda$(s_, s) {
   let arr;
-  arr = [
+  arr = globalThis.Object.freeze([
     s_,
     s
-  ];
+  ]);
   return arr
 };
 lambda13 = (undefined, function (s_) {
@@ -963,10 +965,10 @@ lambda13 = (undefined, function (s_) {
 lambda$12 = function lambda$(f, s) {
   let tmp, arr;
   tmp = runtime.safeCall(f(s));
-  arr = [
+  arr = globalThis.Object.freeze([
     tmp,
     s
-  ];
+  ]);
   return arr
 };
 lambda12 = (undefined, function (f) {
@@ -977,10 +979,10 @@ lambda12 = (undefined, function (f) {
 lambda$11 = function lambda$(f, s) {
   let tmp, arr;
   tmp = runtime.safeCall(f(s));
-  arr = [
+  arr = globalThis.Object.freeze([
     s,
     tmp
-  ];
+  ]);
   return arr
 };
 lambda11 = (undefined, function (f) {
@@ -1061,19 +1063,19 @@ lambda4 = (undefined, function (f, as_) {
 lambda$3 = function lambda$(f, m, s) {
   let scrut, first1, first0, s_, a, tmp, arr;
   scrut = runtime.safeCall(m(s));
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     s_ = first0;
     a = first1;
     tmp = runtime.safeCall(f(a));
-    arr = [
+    arr = globalThis.Object.freeze([
       s_,
       tmp
-    ];
+    ]);
     return arr
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda3 = (undefined, function (f, m) {
@@ -1084,14 +1086,14 @@ lambda3 = (undefined, function (f, m) {
 lambda$2 = function lambda$(m, s) {
   let scrut, first1, first0, s_, ma;
   scrut = runtime.safeCall(m(s));
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     s_ = first0;
     ma = first1;
     return runtime.safeCall(ma(s_))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda2 = (undefined, function (m) {
@@ -1102,15 +1104,15 @@ lambda2 = (undefined, function (m) {
 lambda$1 = function lambda$(m, f, s) {
   let scrut, first1, first0, s_, a, tmp;
   scrut = runtime.safeCall(m(s));
-  if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-    first0 = scrut[0];
-    first1 = scrut[1];
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    first0 = runtime.Tuple.get(scrut, 0);
+    first1 = runtime.Tuple.get(scrut, 1);
     s_ = first0;
     a = first1;
     tmp = runtime.safeCall(f(a));
     return runtime.safeCall(tmp(s_))
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda1 = (undefined, function (m, f) {
@@ -1120,10 +1122,10 @@ lambda1 = (undefined, function (m, f) {
 });
 lambda$ = function lambda$(a, s) {
   let arr;
-  arr = [
+  arr = globalThis.Object.freeze([
     s,
     a
-  ];
+  ]);
   return arr
 };
 lambda = (undefined, function (a) {
@@ -1141,15 +1143,19 @@ lambda = (undefined, function (a) {
     tmp = cse.update(lambda21);
     this.incr = tmp;
     this.Node = function Node(a1, b1) {
-      return new Node.class(a1, b1);
+      return globalThis.Object.freeze(new Node.class(a1, b1));
     };
-    this.Node.class = class Node {
-      constructor(a, b) {
-        this.a = a;
-        this.b = b;
+    Object.defineProperty(this.Node, "class", {
+      enumerable: true,
+      value: class Node {
+        constructor(a, b) {
+          this.a = a;
+          this.b = b;
+        }
+        toString() { return runtime.render(this); }
+        static [definitionMetadata] = ["class", "Node", ["a", "b"]]; 
       }
-      toString() { return "Node(" + runtime.render(this.a) + ", " + runtime.render(this.b) + ")"; }
-    };
+    });
     tmp1 = cse.Node("0", NofibPrelude.Nil);
     this.zerO = tmp1;
     tmp2 = cse.Node("a", NofibPrelude.Nil);
@@ -1248,7 +1254,7 @@ lambda = (undefined, function (a) {
       lambda$this = runtime.safeCall(lambda4(f2, as_));
       return cse.bind(tmp, lambda$this)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static mmapr(f3, xs) {
@@ -1264,7 +1270,7 @@ lambda = (undefined, function (a) {
       lambda$this = runtime.safeCall(lambda6(f3, x));
       return cse.bind(tmp, lambda$this)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static mfoldl(f4, a1, xs1) {
@@ -1280,7 +1286,7 @@ lambda = (undefined, function (a) {
       lambda$this = runtime.safeCall(lambda8(f4, xs2));
       return cse.bind(tmp, lambda$this)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static mfoldr(f5, a2, xs2) {
@@ -1296,7 +1302,7 @@ lambda = (undefined, function (a) {
       lambda$this = runtime.safeCall(lambda9(f5, x));
       return cse.bind(tmp, lambda$this)
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static mif(c, t, f6) {
@@ -1307,22 +1313,22 @@ lambda = (undefined, function (a) {
   static startingWith(m3, v) {
     let scrut, first1, first0, final1, answer;
     scrut = runtime.safeCall(m3(v));
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
+    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+      first0 = runtime.Tuple.get(scrut, 0);
+      first1 = runtime.Tuple.get(scrut, 1);
       final1 = first0;
       answer = first1;
       return answer
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static fetch(s) {
     let arr;
-    arr = [
+    arr = globalThis.Object.freeze([
       s,
       s
-    ];
+    ]);
     return arr
   } 
   static fetchWith(f7) {
@@ -1344,26 +1350,26 @@ lambda = (undefined, function (a) {
     if (t2 instanceof cse.Node.class) {
       param0 = t2.a;
       param1 = t2.b;
-      if (globalThis.Array.isArray(param0) && param0.length === 2) {
-        first0 = param0[0];
-        first1 = param0[1];
+      if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
+        first0 = runtime.Tuple.get(param0, 0);
+        first1 = runtime.Tuple.get(param0, 1);
         n = first0;
         x = first1;
         xs3 = param1;
         tmp = NofibPrelude.map(labelOf, xs3);
-        arr = [
+        arr = globalThis.Object.freeze([
           n,
           x,
           tmp
-        ];
+        ]);
         tmp1 = map_inst_11_3_tsni(cse.ltGraph, xs3);
         tmp2 = concat_inst_11_21_tsni(tmp1);
         return NofibPrelude.Cons(arr, tmp2)
       } else {
-        throw new globalThis.Error("match error");
+        throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     } else {
-      throw new globalThis.Error("match error");
+      throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static visited(n) {
@@ -1382,20 +1388,20 @@ lambda = (undefined, function (a) {
   } 
   static findCommon(ls) {
     let scrut, first1, first0, a3, b, arr, tmp;
-    arr = [
+    arr = globalThis.Object.freeze([
       lambda19,
       NofibPrelude.Nil
-    ];
+    ]);
     scrut = NofibPrelude.foldr(sim, arr, ls);
-    if (globalThis.Array.isArray(scrut) && scrut.length === 2) {
-      first0 = scrut[0];
-      first1 = scrut[1];
+    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+      first0 = runtime.Tuple.get(scrut, 0);
+      first1 = runtime.Tuple.get(scrut, 1);
       a3 = first0;
       b = first1;
       return b
     } else {
       tmp = runtime.safeCall(ls.toString());
-      throw globalThis.Error(tmp);
+      throw globalThis.Error(tmp)
     }
   } 
   static cse(t3) {
@@ -1430,6 +1436,7 @@ lambda = (undefined, function (a) {
     tmp = testCse_nofib_inst_19_20_tsni(6);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return "cse"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "cse"]; 
 });
 let cse = cse1; export default cse;

@@ -1,3 +1,5 @@
+const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
+const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
@@ -153,7 +155,7 @@ map_inst_1_2_tsni = function map_inst_1_2_tsni(f, xs) {
       return NofibPrelude.Nil
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_1_3_tsni = (undefined, function (x) {
@@ -183,7 +185,7 @@ append_inst_1_3_4_tsni = function append_inst_1_3_4_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_1_22_19_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda_inst_5_6_tsni = (undefined, function (xs, ys) {
@@ -214,9 +216,9 @@ lscomp$_inst_7_8_tsni = function lscomp$_inst_7_8_tsni(c, ls) {
     param1 = ls.tail;
     h = param0;
     t = param1;
-    if (globalThis.Array.isArray(h) && h.length === 2) {
-      first0 = h[0];
-      first1 = h[1];
+    if (runtime.Tuple.isArrayLike(h) && h.length === 2) {
+      first0 = runtime.Tuple.get(h, 0);
+      first1 = runtime.Tuple.get(h, 1);
       c_ = first0;
       letter = first1;
       scrut = c_ === c;
@@ -244,7 +246,7 @@ lscomp$_inst_7_8_tsni = function lscomp$_inst_7_8_tsni(c, ls) {
       return lscomp$_inst_7_8_tsni(c, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_7_9_tsni = function append_inst_7_9_tsni(xs, ys) {
@@ -315,9 +317,9 @@ lscomp$_inst_10_11_8_tsni = function lscomp$_inst_10_11_8_tsni(c, ls) {
     param1 = ls.tail;
     h = param0;
     t = param1;
-    if (globalThis.Array.isArray(h) && h.length === 2) {
-      first0 = h[0];
-      first1 = h[1];
+    if (runtime.Tuple.isArrayLike(h) && h.length === 2) {
+      first0 = runtime.Tuple.get(h, 0);
+      first1 = runtime.Tuple.get(h, 1);
       c_ = first0;
       letter = first1;
       scrut = c_ === c;
@@ -345,7 +347,7 @@ lscomp$_inst_10_11_8_tsni = function lscomp$_inst_10_11_8_tsni(c, ls) {
       return lscomp$_inst_10_11_8_tsni(c, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 join_inst_10_12_tsni = function join_inst_10_12_tsni(ls) {
@@ -405,7 +407,7 @@ append_inst_10_13_3_4_tsni = function append_inst_10_13_3_4_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_10_13_22_19_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_10_14_tsni = function map_inst_10_14_tsni(f, xs) {
@@ -446,7 +448,7 @@ map_inst_10_14_tsni = function map_inst_10_14_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 replicate_inst_15_16_tsni = function replicate_inst_15_16_tsni(n, x) {
@@ -517,7 +519,7 @@ append_inst_15_17_13_3_4_tsni = function append_inst_15_17_13_3_4_tsni(xs, ys) {
       return match_xs_arm_Cons_inst_15_17_13_22_19_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_15_17_14_tsni = function map_inst_15_17_14_tsni(f, xs) {
@@ -558,7 +560,7 @@ map_inst_15_17_14_tsni = function map_inst_15_17_14_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 join_inst_15_17_12_tsni = function join_inst_15_17_12_tsni(ls) {
@@ -645,9 +647,9 @@ lscomp$_inst_15_17_11_8_tsni = function lscomp$_inst_15_17_11_8_tsni(c, ls) {
     param1 = ls.tail;
     h = param0;
     t = param1;
-    if (globalThis.Array.isArray(h) && h.length === 2) {
-      first0 = h[0];
-      first1 = h[1];
+    if (runtime.Tuple.isArrayLike(h) && h.length === 2) {
+      first0 = runtime.Tuple.get(h, 0);
+      first1 = runtime.Tuple.get(h, 1);
       c_ = first0;
       letter = first1;
       scrut = c_ === c;
@@ -675,7 +677,7 @@ lscomp$_inst_15_17_11_8_tsni = function lscomp$_inst_15_17_11_8_tsni(c, ls) {
       return lscomp$_inst_15_17_11_8_tsni(c, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 append_inst_15_17_11_9_tsni = function append_inst_15_17_11_9_tsni(xs, ys) {
@@ -707,7 +709,7 @@ append_inst_15_18_19_tsni = function append_inst_15_18_19_tsni(xs, ys) {
       return NofibPrelude.Cons(tmp1, tmp2)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 testBanner_nofib_inst_20_21_tsni = function testBanner_nofib_inst_20_21_tsni(n) {
@@ -795,9 +797,9 @@ lscomp$_inst_20_21_17_11_8_tsni = function lscomp$_inst_20_21_17_11_8_tsni(c, ls
     param1 = ls.tail;
     h = param0;
     t = param1;
-    if (globalThis.Array.isArray(h) && h.length === 2) {
-      first0 = h[0];
-      first1 = h[1];
+    if (runtime.Tuple.isArrayLike(h) && h.length === 2) {
+      first0 = runtime.Tuple.get(h, 0);
+      first1 = runtime.Tuple.get(h, 1);
       c_ = first0;
       letter = first1;
       scrut = c_ === c;
@@ -825,7 +827,7 @@ lscomp$_inst_20_21_17_11_8_tsni = function lscomp$_inst_20_21_17_11_8_tsni(c, ls
       return lscomp$_inst_20_21_17_11_8_tsni(c, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 join_inst_20_21_17_12_tsni = function join_inst_20_21_17_12_tsni(ls) {
@@ -885,7 +887,7 @@ append_inst_20_21_17_13_3_4_tsni = function append_inst_20_21_17_13_3_4_tsni(xs,
       return match_xs_arm_Cons_inst_20_21_17_13_22_19_tsni(ys1, _deforest_Cons_head, _deforest_Cons_tail)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 map_inst_20_21_17_14_tsni = function map_inst_20_21_17_14_tsni(f, xs) {
@@ -928,7 +930,7 @@ map_inst_20_21_17_14_tsni = function map_inst_20_21_17_14_tsni(f, xs) {
       }
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 concat_inst_20_21_18_tsni = function concat_inst_20_21_18_tsni(ls) {
@@ -957,7 +959,7 @@ append_inst_20_21_18_19_tsni = function append_inst_20_21_18_19_tsni(xs, ys) {
       return NofibPrelude.Cons(tmp1, tmp2)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 replicate_inst_20_21_16_tsni = function replicate_inst_20_21_16_tsni(n, x) {
@@ -1054,9 +1056,9 @@ lscomp$ = function lscomp$(c, ls) {
     param1 = ls.tail;
     h = param0;
     t = param1;
-    if (globalThis.Array.isArray(h) && h.length === 2) {
-      first0 = h[0];
-      first1 = h[1];
+    if (runtime.Tuple.isArrayLike(h) && h.length === 2) {
+      first0 = runtime.Tuple.get(h, 0);
+      first1 = runtime.Tuple.get(h, 1);
       c_ = first0;
       letter = first1;
       scrut = c_ === c;
@@ -1070,7 +1072,7 @@ lscomp$ = function lscomp$(c, ls) {
       return lscomp$(c, t)
     }
   } else {
-    throw new globalThis.Error("match error");
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lscomp = function lscomp(c) {
@@ -1423,10 +1425,10 @@ lambda = (undefined, function (x) {
     tmp313 = NofibPrelude.Cons(tmp308, tmp312);
     tmp314 = NofibPrelude.Cons(tmp307, tmp313);
     tmp315 = NofibPrelude.Cons(tmp306, tmp314);
-    arr = [
+    arr = globalThis.Object.freeze([
       ".",
       tmp315
-    ];
+    ]);
     tmp316 = NofibPrelude.nofibStringToList(" ??? ");
     tmp317 = NofibPrelude.nofibStringToList("?   ?");
     tmp318 = NofibPrelude.nofibStringToList("   ? ");
@@ -1437,10 +1439,10 @@ lambda = (undefined, function (x) {
     tmp323 = NofibPrelude.Cons(tmp318, tmp322);
     tmp324 = NofibPrelude.Cons(tmp317, tmp323);
     tmp325 = NofibPrelude.Cons(tmp316, tmp324);
-    arr1 = [
+    arr1 = globalThis.Object.freeze([
       "?",
       tmp325
-    ];
+    ]);
     tmp326 = NofibPrelude.nofibStringToList("  !  ");
     tmp327 = NofibPrelude.nofibStringToList("  !  ");
     tmp328 = NofibPrelude.nofibStringToList("  !  ");
@@ -1451,10 +1453,10 @@ lambda = (undefined, function (x) {
     tmp333 = NofibPrelude.Cons(tmp328, tmp332);
     tmp334 = NofibPrelude.Cons(tmp327, tmp333);
     tmp335 = NofibPrelude.Cons(tmp326, tmp334);
-    arr2 = [
+    arr2 = globalThis.Object.freeze([
       "!",
       tmp335
-    ];
+    ]);
     tmp336 = NofibPrelude.nofibStringToList("     ");
     tmp337 = NofibPrelude.nofibStringToList("     ");
     tmp338 = NofibPrelude.nofibStringToList("-----");
@@ -1465,10 +1467,10 @@ lambda = (undefined, function (x) {
     tmp343 = NofibPrelude.Cons(tmp338, tmp342);
     tmp344 = NofibPrelude.Cons(tmp337, tmp343);
     tmp345 = NofibPrelude.Cons(tmp336, tmp344);
-    arr3 = [
+    arr3 = globalThis.Object.freeze([
       "-",
       tmp345
-    ];
+    ]);
     tmp346 = NofibPrelude.nofibStringToList("  +  ");
     tmp347 = NofibPrelude.nofibStringToList("  +  ");
     tmp348 = NofibPrelude.nofibStringToList("+++++");
@@ -1479,10 +1481,10 @@ lambda = (undefined, function (x) {
     tmp353 = NofibPrelude.Cons(tmp348, tmp352);
     tmp354 = NofibPrelude.Cons(tmp347, tmp353);
     tmp355 = NofibPrelude.Cons(tmp346, tmp354);
-    arr4 = [
+    arr4 = globalThis.Object.freeze([
       "+",
       tmp355
-    ];
+    ]);
     tmp356 = NofibPrelude.nofibStringToList("     ");
     tmp357 = NofibPrelude.nofibStringToList("  :: ");
     tmp358 = NofibPrelude.nofibStringToList("     ");
@@ -1493,10 +1495,10 @@ lambda = (undefined, function (x) {
     tmp363 = NofibPrelude.Cons(tmp358, tmp362);
     tmp364 = NofibPrelude.Cons(tmp357, tmp363);
     tmp365 = NofibPrelude.Cons(tmp356, tmp364);
-    arr5 = [
+    arr5 = globalThis.Object.freeze([
       ":",
       tmp365
-    ];
+    ]);
     tmp366 = NofibPrelude.nofibStringToList("     ");
     tmp367 = NofibPrelude.nofibStringToList("  ;; ");
     tmp368 = NofibPrelude.nofibStringToList("     ");
@@ -1507,10 +1509,10 @@ lambda = (undefined, function (x) {
     tmp373 = NofibPrelude.Cons(tmp368, tmp372);
     tmp374 = NofibPrelude.Cons(tmp367, tmp373);
     tmp375 = NofibPrelude.Cons(tmp366, tmp374);
-    arr6 = [
+    arr6 = globalThis.Object.freeze([
       ";",
       tmp375
-    ];
+    ]);
     tmp376 = NofibPrelude.Cons(arr6, NofibPrelude.Nil);
     tmp377 = NofibPrelude.Cons(arr5, tmp376);
     tmp378 = NofibPrelude.Cons(arr4, tmp377);
@@ -1767,6 +1769,7 @@ lambda = (undefined, function (x) {
     tmp = testBanner_nofib_inst_20_21_tsni(1);
     return nofibListToString_inst_20_26_tsni(tmp)
   }
-  static toString() { return "banner"; }
+  static toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["module", "banner"]; 
 });
 let banner = banner1; export default banner;
