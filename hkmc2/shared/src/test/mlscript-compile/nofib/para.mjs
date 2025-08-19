@@ -4,7 +4,7 @@ import runtime from "./../Runtime.mjs";
 import Term from "./../Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../Predef.mjs";
-let go, plus, linc, plus1, start, breakk, unknownEq, bf, old_width_hd, width_hd, myAdd, single, cost, leave_nofit, trim, new_, para1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, lambda25, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, myAdd$, lambda$13, bf$, lambda$14, leave_nofit$, trim$, new_$, old_width_hd$, cost$, width_hd$, init__inst_0_1_tsni, splitAt_inst_0_1_2_tsni, trim$_inst_3_4_tsni, init__inst_3_4_1_tsni, splitAt_inst_3_4_1_2_tsni, init__inst_5_6_tsni, splitAt_inst_5_6_2_tsni, leave_nofit$_inst_7_8_tsni, init__inst_7_8_6_tsni, splitAt_inst_7_8_6_2_tsni, tail__inst_9_10_tsni, splitAt_inst_9_10_11_tsni, myAdd$_inst_12_13_tsni, tail__inst_12_13_10_tsni, splitAt_inst_12_13_10_11_tsni, lambda$_inst_16_17_tsni, map_inst_18_19_tsni, leaveWhile_inst_20_21_tsni, break__inst_22_23_tsni, map_inst_24_25_tsni, lambda_inst_26_27_tsni, map_inst_26_27_19_tsni, formats_inst_28_29_tsni, lambda_inst_28_29_27_tsni, map_inst_28_29_27_19_tsni, splitAt_inst_30_31_tsni, splitAt_inst_32_11_tsni, splitAt_inst_33_2_tsni, lambda_inst_34_35_tsni, lambda$_inst_34_35_17_tsni, unformat_inst_36_37_tsni, lambda_inst_36_37_35_tsni, lambda$_inst_36_37_35_17_tsni, lambda_inst_38_39_tsni, lines_inst_40_41_tsni, break__inst_40_41_23_tsni, words_inst_40_42_tsni, leaveWhile_inst_40_42_21_tsni, paras_inst_40_43_tsni, lambda_inst_40_43_39_tsni, unparas_inst_44_45_tsni, unformat_inst_44_45_37_tsni, lambda_inst_44_45_37_35_tsni, lambda$_inst_44_45_37_35_17_tsni, unlines_inst_44_46_tsni, map_inst_44_46_25_tsni, map_inst_44_47_tsni, unwords_inst_44_48_tsni, append_inst_44_48_49_tsni, go_inst_44_48_50_tsni, append_inst_44_48_50_51_tsni, parse_inst_52_53_tsni, paras_inst_52_53_43_tsni, lambda_inst_52_53_43_39_tsni, words_inst_52_53_42_tsni, leaveWhile_inst_52_53_42_21_tsni, lines_inst_52_53_41_tsni, break__inst_52_53_41_23_tsni, filter_inst_52_53_43_54_tsni, unparse_inst_52_55_tsni, unlines_inst_52_55_46_tsni, map_inst_52_55_46_25_tsni, map_inst_52_55_47_tsni, unwords_inst_52_55_48_tsni, append_inst_52_55_48_49_tsni, go_inst_52_55_48_50_tsni, append_inst_52_55_48_50_51_tsni, unparas_inst_52_55_45_tsni, unformat_inst_52_55_45_37_tsni, lambda_inst_52_55_45_37_35_tsni, lambda$_inst_52_55_45_37_35_17_tsni, myAdd$_inst_56_57_tsni, tail__inst_56_57_10_tsni, splitAt_inst_56_57_10_11_tsni, leave_nofit$_inst_56_58_tsni, init__inst_56_58_6_tsni, splitAt_inst_56_58_6_2_tsni, trim$_inst_56_59_tsni, init__inst_56_59_1_tsni, splitAt_inst_56_59_1_2_tsni, stepr_inst_60_61_tsni, trim$_inst_60_61_59_tsni, init__inst_60_61_59_1_tsni, splitAt_inst_60_61_59_1_2_tsni, leave_nofit$_inst_60_61_58_tsni, init__inst_60_61_58_6_tsni, splitAt_inst_60_61_58_6_2_tsni, myAdd$_inst_60_61_57_tsni, tail__inst_60_61_57_10_tsni, splitAt_inst_60_61_57_10_11_tsni, tile_inst_60_62_tsni, splitAt_inst_60_62_31_tsni, parse_inst_63_64_tsni, paras_inst_63_64_43_tsni, lambda_inst_63_64_43_39_tsni, words_inst_63_64_42_tsni, leaveWhile_inst_63_64_42_21_tsni, lines_inst_63_64_41_tsni, break__inst_63_64_41_23_tsni, filter_inst_63_64_43_54_tsni, par3_inst_63_65_tsni, tile_inst_63_65_62_tsni, splitAt_inst_63_65_62_31_tsni, stepr_inst_63_65_61_tsni, myAdd$_inst_63_65_61_57_tsni, tail__inst_63_65_61_57_10_tsni, splitAt_inst_63_65_61_57_10_11_tsni, leave_nofit$_inst_63_65_61_58_tsni, init__inst_63_65_61_58_6_tsni, splitAt_inst_63_65_61_58_6_2_tsni, trim$_inst_63_65_61_59_tsni, init__inst_63_65_61_59_1_tsni, splitAt_inst_63_65_61_59_1_2_tsni, concat_inst_63_66_tsni, append_inst_63_66_67_tsni, unparse_inst_63_68_tsni, unlines_inst_63_68_46_tsni, map_inst_63_68_46_25_tsni, map_inst_63_68_47_tsni, unwords_inst_63_68_48_tsni, append_inst_63_68_48_49_tsni, go_inst_63_68_48_50_tsni, append_inst_63_68_48_50_51_tsni, unparas_inst_63_68_45_tsni, unformat_inst_63_68_45_37_tsni, lambda_inst_63_68_45_37_35_tsni, lambda$_inst_63_68_45_37_35_17_tsni, fmt_inst_69_70_tsni, unparse_inst_69_70_68_tsni, unparas_inst_69_70_68_45_tsni, unformat_inst_69_70_68_45_37_tsni, lambda_inst_69_70_68_45_37_35_tsni, lambda$_inst_69_70_68_45_37_35_17_tsni, unlines_inst_69_70_68_46_tsni, map_inst_69_70_68_46_25_tsni, map_inst_69_70_68_47_tsni, unwords_inst_69_70_68_48_tsni, append_inst_69_70_68_48_49_tsni, go_inst_69_70_68_48_50_tsni, append_inst_69_70_68_48_50_51_tsni, par3_inst_69_70_65_tsni, stepr_inst_69_70_65_61_tsni, trim$_inst_69_70_65_61_59_tsni, init__inst_69_70_65_61_59_1_tsni, splitAt_inst_69_70_65_61_59_1_2_tsni, leave_nofit$_inst_69_70_65_61_58_tsni, init__inst_69_70_65_61_58_6_tsni, splitAt_inst_69_70_65_61_58_6_2_tsni, myAdd$_inst_69_70_65_61_57_tsni, tail__inst_69_70_65_61_57_10_tsni, splitAt_inst_69_70_65_61_57_10_11_tsni, tile_inst_69_70_65_62_tsni, splitAt_inst_69_70_65_62_31_tsni, concat_inst_69_70_66_tsni, append_inst_69_70_66_67_tsni, parse_inst_69_70_64_tsni, lines_inst_69_70_64_41_tsni, break__inst_69_70_64_41_23_tsni, words_inst_69_70_64_42_tsni, leaveWhile_inst_69_70_64_42_21_tsni, paras_inst_69_70_64_43_tsni, lambda_inst_69_70_64_43_39_tsni, filter_inst_69_70_64_43_54_tsni, testPara_nofib_inst_71_72_tsni, fmt_inst_71_72_70_tsni, parse_inst_71_72_70_64_tsni, paras_inst_71_72_70_64_43_tsni, lambda_inst_71_72_70_64_43_39_tsni, words_inst_71_72_70_64_42_tsni, leaveWhile_inst_71_72_70_64_42_21_tsni, lines_inst_71_72_70_64_41_tsni, break__inst_71_72_70_64_41_23_tsni, filter_inst_71_72_70_64_43_54_tsni, par3_inst_71_72_70_65_tsni, tile_inst_71_72_70_65_62_tsni, splitAt_inst_71_72_70_65_62_31_tsni, stepr_inst_71_72_70_65_61_tsni, myAdd$_inst_71_72_70_65_61_57_tsni, tail__inst_71_72_70_65_61_57_10_tsni, splitAt_inst_71_72_70_65_61_57_10_11_tsni, leave_nofit$_inst_71_72_70_65_61_58_tsni, init__inst_71_72_70_65_61_58_6_tsni, splitAt_inst_71_72_70_65_61_58_6_2_tsni, trim$_inst_71_72_70_65_61_59_tsni, init__inst_71_72_70_65_61_59_1_tsni, splitAt_inst_71_72_70_65_61_59_1_2_tsni, concat_inst_71_72_70_66_tsni, append_inst_71_72_70_66_67_tsni, unparse_inst_71_72_70_68_tsni, unlines_inst_71_72_70_68_46_tsni, map_inst_71_72_70_68_46_25_tsni, map_inst_71_72_70_68_47_tsni, unwords_inst_71_72_70_68_48_tsni, append_inst_71_72_70_68_48_49_tsni, go_inst_71_72_70_68_48_50_tsni, append_inst_71_72_70_68_48_50_51_tsni, unparas_inst_71_72_70_68_45_tsni, unformat_inst_71_72_70_68_45_37_tsni, lambda_inst_71_72_70_68_45_37_35_tsni, lambda$_inst_71_72_70_68_45_37_35_17_tsni, concat_inst_71_72_70_68_46_73_tsni, append_inst_71_72_70_68_46_73_67_tsni, listNeq_inst_14_74_tsni, append_inst_15_75_tsni, append_inst_16_17_75_tsni, append_inst_18_76_tsni, concat_inst_77_tsni, concat_inst_24_73_tsni, append_inst_26_27_76_tsni, append_inst_28_29_27_76_tsni, append_inst_34_35_17_75_tsni, append_inst_36_37_35_17_75_tsni, listNeq_inst_38_39_74_tsni, map_inst_40_78_tsni, listNeq_inst_40_43_39_74_tsni, append_inst_44_45_37_35_17_75_tsni, concat_inst_44_46_73_tsni, lambda_inst_44_46_79_tsni, append_inst_44_46_79_80_tsni, listNeq_inst_52_53_43_39_74_tsni, map_inst_52_53_78_tsni, map_inst_52_81_tsni, concat_inst_52_55_46_73_tsni, lambda_inst_52_55_46_79_tsni, append_inst_52_55_46_79_80_tsni, append_inst_52_55_45_37_35_17_75_tsni, listNeq_inst_63_64_43_39_74_tsni, map_inst_63_64_78_tsni, map_inst_63_82_tsni, concat_inst_63_68_46_73_tsni, lambda_inst_63_68_46_79_tsni, append_inst_63_68_46_79_80_tsni, append_inst_63_68_45_37_35_17_75_tsni, append_inst_69_70_68_45_37_35_17_75_tsni, concat_inst_69_70_68_46_73_tsni, lambda_inst_69_70_68_46_79_tsni, append_inst_69_70_68_46_79_80_tsni, map_inst_69_70_82_tsni, map_inst_69_70_64_78_tsni, listNeq_inst_69_70_64_43_39_74_tsni, listNeq_inst_71_72_70_64_43_39_74_tsni, map_inst_71_72_70_64_78_tsni, map_inst_71_72_70_82_tsni, lambda_inst_71_72_70_68_46_79_tsni, append_inst_71_72_70_68_46_79_80_tsni, append_inst_71_72_70_68_45_37_35_17_75_tsni, nofibListToString_inst_71_83_tsni, match_s__rest_inst_22_tsni, match_s__rest_inst_40_41_tsni, match_s__rest_inst_52_53_41_tsni, match_s__rest_inst_63_64_41_tsni, match_s__rest_inst_69_70_64_41_tsni, match_s__rest_inst_71_72_70_64_41_tsni, match_ls_arm_Cons_inst_77_tsni, match_xs_arm_Nil_inst_44_46_79_80_tsni, match_xs_arm_Cons_inst_44_46_79_80_tsni, match_xs_arm_Nil_inst_52_55_46_79_80_tsni, match_xs_arm_Cons_inst_52_55_46_79_80_tsni, match_xs_arm_Nil_inst_63_68_46_79_80_tsni, match_xs_arm_Cons_inst_63_68_46_79_80_tsni, match_xs_arm_Nil_inst_69_70_68_46_79_80_tsni, match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni, match_xs_arm_Nil_inst_71_72_70_68_46_79_80_tsni, match_xs_arm_Cons_inst_71_72_70_68_46_79_80_tsni, match_ls_arm_Nil_inst_71_83_tsni;
+let go, plus, linc, plus1, start, breakk, unknownEq, bf, old_width_hd, width_hd, myAdd, single, cost, leave_nofit, trim, new_, para1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, lambda25, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, myAdd$, lambda$13, bf$, lambda$14, leave_nofit$, trim$, new_$, old_width_hd$, cost$, width_hd$, init__inst_0_1_tsni, splitAt_inst_0_1_2_tsni, trim$_inst_3_4_tsni, init__inst_3_4_1_tsni, splitAt_inst_3_4_1_2_tsni, init__inst_5_6_tsni, splitAt_inst_5_6_2_tsni, leave_nofit$_inst_7_8_tsni, init__inst_7_8_6_tsni, splitAt_inst_7_8_6_2_tsni, tail__inst_9_10_tsni, splitAt_inst_9_10_11_tsni, myAdd$_inst_12_13_tsni, tail__inst_12_13_10_tsni, splitAt_inst_12_13_10_11_tsni, lambda$_inst_16_17_tsni, map_inst_18_19_tsni, leaveWhile_inst_20_21_tsni, break__inst_22_23_tsni, map_inst_24_25_tsni, lambda_inst_26_27_tsni, map_inst_26_27_19_tsni, formats_inst_28_29_tsni, lambda_inst_28_29_27_tsni, map_inst_28_29_27_19_tsni, splitAt_inst_30_31_tsni, splitAt_inst_32_11_tsni, splitAt_inst_33_2_tsni, lambda_inst_34_35_tsni, lambda$_inst_34_35_17_tsni, unformat_inst_36_37_tsni, lambda_inst_36_37_35_tsni, lambda$_inst_36_37_35_17_tsni, lambda_inst_38_39_tsni, lines_inst_40_41_tsni, break__inst_40_41_23_tsni, words_inst_40_42_tsni, leaveWhile_inst_40_42_21_tsni, paras_inst_40_43_tsni, lambda_inst_40_43_39_tsni, unparas_inst_44_45_tsni, unformat_inst_44_45_37_tsni, lambda_inst_44_45_37_35_tsni, lambda$_inst_44_45_37_35_17_tsni, unlines_inst_44_46_tsni, map_inst_44_46_25_tsni, map_inst_44_47_tsni, unwords_inst_44_48_tsni, append_inst_44_48_49_tsni, go_inst_44_48_50_tsni, append_inst_44_48_50_51_tsni, parse_inst_52_53_tsni, paras_inst_52_53_43_tsni, lambda_inst_52_53_43_39_tsni, words_inst_52_53_42_tsni, leaveWhile_inst_52_53_42_21_tsni, lines_inst_52_53_41_tsni, break__inst_52_53_41_23_tsni, filter_inst_52_53_43_54_tsni, unparse_inst_52_55_tsni, unlines_inst_52_55_46_tsni, map_inst_52_55_46_25_tsni, map_inst_52_55_47_tsni, unwords_inst_52_55_48_tsni, append_inst_52_55_48_49_tsni, go_inst_52_55_48_50_tsni, append_inst_52_55_48_50_51_tsni, unparas_inst_52_55_45_tsni, unformat_inst_52_55_45_37_tsni, lambda_inst_52_55_45_37_35_tsni, lambda$_inst_52_55_45_37_35_17_tsni, myAdd$_inst_56_57_tsni, tail__inst_56_57_10_tsni, splitAt_inst_56_57_10_11_tsni, leave_nofit$_inst_56_58_tsni, init__inst_56_58_6_tsni, splitAt_inst_56_58_6_2_tsni, trim$_inst_56_59_tsni, init__inst_56_59_1_tsni, splitAt_inst_56_59_1_2_tsni, stepr_inst_60_61_tsni, trim$_inst_60_61_59_tsni, init__inst_60_61_59_1_tsni, splitAt_inst_60_61_59_1_2_tsni, leave_nofit$_inst_60_61_58_tsni, init__inst_60_61_58_6_tsni, splitAt_inst_60_61_58_6_2_tsni, myAdd$_inst_60_61_57_tsni, tail__inst_60_61_57_10_tsni, splitAt_inst_60_61_57_10_11_tsni, tile_inst_60_62_tsni, splitAt_inst_60_62_31_tsni, parse_inst_63_64_tsni, paras_inst_63_64_43_tsni, lambda_inst_63_64_43_39_tsni, words_inst_63_64_42_tsni, leaveWhile_inst_63_64_42_21_tsni, lines_inst_63_64_41_tsni, break__inst_63_64_41_23_tsni, filter_inst_63_64_43_54_tsni, par3_inst_63_65_tsni, tile_inst_63_65_62_tsni, splitAt_inst_63_65_62_31_tsni, stepr_inst_63_65_61_tsni, myAdd$_inst_63_65_61_57_tsni, tail__inst_63_65_61_57_10_tsni, splitAt_inst_63_65_61_57_10_11_tsni, leave_nofit$_inst_63_65_61_58_tsni, init__inst_63_65_61_58_6_tsni, splitAt_inst_63_65_61_58_6_2_tsni, trim$_inst_63_65_61_59_tsni, init__inst_63_65_61_59_1_tsni, splitAt_inst_63_65_61_59_1_2_tsni, concat_inst_63_66_tsni, append_inst_63_66_67_tsni, unparse_inst_63_68_tsni, unlines_inst_63_68_46_tsni, map_inst_63_68_46_25_tsni, map_inst_63_68_47_tsni, unwords_inst_63_68_48_tsni, append_inst_63_68_48_49_tsni, go_inst_63_68_48_50_tsni, append_inst_63_68_48_50_51_tsni, unparas_inst_63_68_45_tsni, unformat_inst_63_68_45_37_tsni, lambda_inst_63_68_45_37_35_tsni, lambda$_inst_63_68_45_37_35_17_tsni, fmt_inst_69_70_tsni, unparse_inst_69_70_68_tsni, unparas_inst_69_70_68_45_tsni, unformat_inst_69_70_68_45_37_tsni, lambda_inst_69_70_68_45_37_35_tsni, lambda$_inst_69_70_68_45_37_35_17_tsni, unlines_inst_69_70_68_46_tsni, map_inst_69_70_68_46_25_tsni, map_inst_69_70_68_47_tsni, unwords_inst_69_70_68_48_tsni, append_inst_69_70_68_48_49_tsni, go_inst_69_70_68_48_50_tsni, append_inst_69_70_68_48_50_51_tsni, par3_inst_69_70_65_tsni, stepr_inst_69_70_65_61_tsni, trim$_inst_69_70_65_61_59_tsni, init__inst_69_70_65_61_59_1_tsni, splitAt_inst_69_70_65_61_59_1_2_tsni, leave_nofit$_inst_69_70_65_61_58_tsni, init__inst_69_70_65_61_58_6_tsni, splitAt_inst_69_70_65_61_58_6_2_tsni, myAdd$_inst_69_70_65_61_57_tsni, tail__inst_69_70_65_61_57_10_tsni, splitAt_inst_69_70_65_61_57_10_11_tsni, tile_inst_69_70_65_62_tsni, splitAt_inst_69_70_65_62_31_tsni, concat_inst_69_70_66_tsni, append_inst_69_70_66_67_tsni, parse_inst_69_70_64_tsni, lines_inst_69_70_64_41_tsni, break__inst_69_70_64_41_23_tsni, words_inst_69_70_64_42_tsni, leaveWhile_inst_69_70_64_42_21_tsni, paras_inst_69_70_64_43_tsni, lambda_inst_69_70_64_43_39_tsni, filter_inst_69_70_64_43_54_tsni, testPara_nofib_inst_71_72_tsni, fmt_inst_71_72_70_tsni, parse_inst_71_72_70_64_tsni, paras_inst_71_72_70_64_43_tsni, lambda_inst_71_72_70_64_43_39_tsni, words_inst_71_72_70_64_42_tsni, leaveWhile_inst_71_72_70_64_42_21_tsni, lines_inst_71_72_70_64_41_tsni, break__inst_71_72_70_64_41_23_tsni, filter_inst_71_72_70_64_43_54_tsni, par3_inst_71_72_70_65_tsni, tile_inst_71_72_70_65_62_tsni, splitAt_inst_71_72_70_65_62_31_tsni, stepr_inst_71_72_70_65_61_tsni, myAdd$_inst_71_72_70_65_61_57_tsni, tail__inst_71_72_70_65_61_57_10_tsni, splitAt_inst_71_72_70_65_61_57_10_11_tsni, leave_nofit$_inst_71_72_70_65_61_58_tsni, init__inst_71_72_70_65_61_58_6_tsni, splitAt_inst_71_72_70_65_61_58_6_2_tsni, trim$_inst_71_72_70_65_61_59_tsni, init__inst_71_72_70_65_61_59_1_tsni, splitAt_inst_71_72_70_65_61_59_1_2_tsni, concat_inst_71_72_70_66_tsni, append_inst_71_72_70_66_67_tsni, unparse_inst_71_72_70_68_tsni, unlines_inst_71_72_70_68_46_tsni, map_inst_71_72_70_68_46_25_tsni, map_inst_71_72_70_68_47_tsni, unwords_inst_71_72_70_68_48_tsni, append_inst_71_72_70_68_48_49_tsni, go_inst_71_72_70_68_48_50_tsni, append_inst_71_72_70_68_48_50_51_tsni, unparas_inst_71_72_70_68_45_tsni, unformat_inst_71_72_70_68_45_37_tsni, lambda_inst_71_72_70_68_45_37_35_tsni, lambda$_inst_71_72_70_68_45_37_35_17_tsni, concat_inst_71_72_70_68_46_73_tsni, append_inst_71_72_70_68_46_73_67_tsni, listNeq_inst_14_74_tsni, append_inst_15_75_tsni, append_inst_16_17_75_tsni, append_inst_18_76_tsni, concat_inst_77_tsni, concat_inst_24_73_tsni, append_inst_26_27_76_tsni, append_inst_28_29_27_76_tsni, append_inst_34_35_17_75_tsni, append_inst_36_37_35_17_75_tsni, listNeq_inst_38_39_74_tsni, map_inst_40_78_tsni, listNeq_inst_40_43_39_74_tsni, append_inst_44_45_37_35_17_75_tsni, concat_inst_44_46_73_tsni, lambda_inst_44_46_79_tsni, append_inst_44_46_79_80_tsni, listNeq_inst_52_53_43_39_74_tsni, map_inst_52_53_78_tsni, map_inst_52_81_tsni, concat_inst_52_55_46_73_tsni, lambda_inst_52_55_46_79_tsni, append_inst_52_55_46_79_80_tsni, append_inst_52_55_45_37_35_17_75_tsni, listNeq_inst_63_64_43_39_74_tsni, map_inst_63_64_78_tsni, map_inst_63_82_tsni, concat_inst_63_68_46_73_tsni, lambda_inst_63_68_46_79_tsni, append_inst_63_68_46_79_80_tsni, append_inst_63_68_45_37_35_17_75_tsni, append_inst_69_70_68_45_37_35_17_75_tsni, concat_inst_69_70_68_46_73_tsni, lambda_inst_69_70_68_46_79_tsni, append_inst_69_70_68_46_79_80_tsni, map_inst_69_70_82_tsni, map_inst_69_70_64_78_tsni, listNeq_inst_69_70_64_43_39_74_tsni, listNeq_inst_71_72_70_64_43_39_74_tsni, map_inst_71_72_70_64_78_tsni, map_inst_71_72_70_82_tsni, lambda_inst_71_72_70_68_46_79_tsni, append_inst_71_72_70_68_46_79_80_tsni, append_inst_71_72_70_68_45_37_35_17_75_tsni, nofibListToString_inst_71_83_tsni, match_s__rest_inst_22_tsni, match_s__rest_inst_40_41_tsni, match_s__rest_inst_52_53_41_tsni, match_s__rest_inst_63_64_41_tsni, match_s__rest_inst_69_70_64_41_tsni, match_s__rest_inst_71_72_70_64_41_tsni, match_ls_arm_Cons_inst_77_tsni, match_xs_arm_Nil_inst_44_46_79_80_tsni, match_xs_arm_Cons_inst_44_46_79_80_tsni, match_xs_arm_Nil_inst_52_55_46_79_80_tsni, match_xs_arm_Cons_inst_52_55_46_79_80_tsni, match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni, match_a_b_arm_Deforest_Arr_2_inst_63_65_62_tsni, match_xs_arm_Nil_inst_63_68_46_79_80_tsni, match_xs_arm_Cons_inst_63_68_46_79_80_tsni, match_xs_arm_Nil_inst_69_70_68_46_79_80_tsni, match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni, match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni, match_a_b_arm_Deforest_Arr_2_inst_71_72_70_65_62_tsni, match_xs_arm_Nil_inst_71_72_70_68_46_79_80_tsni, match_xs_arm_Cons_inst_71_72_70_68_46_79_80_tsni, match_ls_arm_Nil_inst_71_83_tsni;
 match_s__rest_inst_22_tsni = function match_s__rest_inst_22_tsni(l, tmp) {
   return NofibPrelude.Cons(l, tmp)
 };
@@ -116,6 +116,48 @@ match_xs_arm_Cons_inst_52_55_46_79_80_tsni = (undefined, function (ys, _deforest
   tmp = append_inst_52_55_46_79_80_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
 });
+match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni = (undefined, function (ws, _deforest_Deforest_Arr_2_0_inst_60_62_tsni, _deforest_Deforest_Arr_2_1_inst_60_62_tsni) {
+  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+  first0 = _deforest_Deforest_Arr_2_0_inst_60_62_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_60_62_tsni;
+  if (first0 instanceof NofibPrelude.Nil.class) {
+    n1 = first1;
+    return NofibPrelude.Nil
+  } else if (first0 instanceof NofibPrelude.Cons.class) {
+    param0 = first0.head;
+    param1 = first0.tail;
+    m = param0;
+    ms = param1;
+    n = first1;
+    tmp = n - m;
+    l = tmp;
+    scrut = splitAt_inst_60_62_31_tsni(l, ws);
+    return runtime.safeCall(scrut(m, ms, l))
+  } else {
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
+  }
+});
+match_a_b_arm_Deforest_Arr_2_inst_63_65_62_tsni = (undefined, function (ws, _deforest_Deforest_Arr_2_0_inst_63_65_62_tsni, _deforest_Deforest_Arr_2_1_inst_63_65_62_tsni) {
+  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+  first0 = _deforest_Deforest_Arr_2_0_inst_63_65_62_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_63_65_62_tsni;
+  if (first0 instanceof NofibPrelude.Nil.class) {
+    n1 = first1;
+    return NofibPrelude.Nil
+  } else if (first0 instanceof NofibPrelude.Cons.class) {
+    param0 = first0.head;
+    param1 = first0.tail;
+    m = param0;
+    ms = param1;
+    n = first1;
+    tmp = n - m;
+    l = tmp;
+    scrut = splitAt_inst_63_65_62_31_tsni(l, ws);
+    return runtime.safeCall(scrut(m, ms, l))
+  } else {
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
+  }
+});
 match_xs_arm_Nil_inst_63_68_46_79_80_tsni = (undefined, function (ys) {
   return ys
 });
@@ -139,6 +181,48 @@ match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni = (undefined, function (ys, _defor
   xs = param1;
   tmp = append_inst_69_70_68_46_79_80_tsni(xs, ys);
   return NofibPrelude.Cons(x, tmp)
+});
+match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni = (undefined, function (ws, _deforest_Deforest_Arr_2_0_inst_69_70_65_62_tsni, _deforest_Deforest_Arr_2_1_inst_69_70_65_62_tsni) {
+  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+  first0 = _deforest_Deforest_Arr_2_0_inst_69_70_65_62_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_69_70_65_62_tsni;
+  if (first0 instanceof NofibPrelude.Nil.class) {
+    n1 = first1;
+    return NofibPrelude.Nil
+  } else if (first0 instanceof NofibPrelude.Cons.class) {
+    param0 = first0.head;
+    param1 = first0.tail;
+    m = param0;
+    ms = param1;
+    n = first1;
+    tmp = n - m;
+    l = tmp;
+    scrut = splitAt_inst_69_70_65_62_31_tsni(l, ws);
+    return runtime.safeCall(scrut(m, ms, l))
+  } else {
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
+  }
+});
+match_a_b_arm_Deforest_Arr_2_inst_71_72_70_65_62_tsni = (undefined, function (ws, _deforest_Deforest_Arr_2_0_inst_71_72_70_65_62_tsni, _deforest_Deforest_Arr_2_1_inst_71_72_70_65_62_tsni) {
+  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+  first0 = _deforest_Deforest_Arr_2_0_inst_71_72_70_65_62_tsni;
+  first1 = _deforest_Deforest_Arr_2_1_inst_71_72_70_65_62_tsni;
+  if (first0 instanceof NofibPrelude.Nil.class) {
+    n1 = first1;
+    return NofibPrelude.Nil
+  } else if (first0 instanceof NofibPrelude.Cons.class) {
+    param0 = first0.head;
+    param1 = first0.tail;
+    m = param0;
+    ms = param1;
+    n = first1;
+    tmp = n - m;
+    l = tmp;
+    scrut = splitAt_inst_71_72_70_65_62_31_tsni(l, ws);
+    return runtime.safeCall(scrut(m, ms, l))
+  } else {
+    throw globalThis.Object.freeze(new globalThis.Error("match error"))
+  }
 });
 match_xs_arm_Nil_inst_71_72_70_68_46_79_80_tsni = (undefined, function (ys) {
   return ys
@@ -2023,29 +2107,7 @@ splitAt_inst_60_61_57_10_11_tsni = function splitAt_inst_60_61_57_10_11_tsni(n, 
   return arr
 };
 tile_inst_60_62_tsni = function tile_inst_60_62_tsni(ws, a_b) {
-  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
-    first0 = runtime.Tuple.get(a_b, 0);
-    first1 = runtime.Tuple.get(a_b, 1);
-    if (first0 instanceof NofibPrelude.Nil.class) {
-      n1 = first1;
-      return NofibPrelude.Nil
-    } else if (first0 instanceof NofibPrelude.Cons.class) {
-      param0 = first0.head;
-      param1 = first0.tail;
-      m = param0;
-      ms = param1;
-      n = first1;
-      tmp = n - m;
-      l = tmp;
-      scrut = splitAt_inst_60_62_31_tsni(l, ws);
-      return runtime.safeCall(scrut(m, ms, l))
-    } else {
-      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-    }
-  } else {
-    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-  }
+  return runtime.safeCall(a_b(ws))
 };
 splitAt_inst_60_62_31_tsni = function splitAt_inst_60_62_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
@@ -2054,17 +2116,18 @@ splitAt_inst_60_62_31_tsni = function splitAt_inst_60_62_31_tsni(n, ls) {
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4;
+    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
     tmp3 = NofibPrelude.leave(l, tmp2);
-    arr1 = globalThis.Object.freeze([
-      tmp3,
-      m
-    ]);
+    _deforest_Deforest_Arr_2_01 = tmp3;
+    _deforest_Deforest_Arr_2_11 = m;
+    arr1 = (ws) => {
+      return match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni(ws, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+    };
     tmp4 = tile_inst_60_62_tsni(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -2241,7 +2304,7 @@ filter_inst_63_64_43_54_tsni = function filter_inst_63_64_43_54_tsni(f, ls) {
   }
 };
 par3_inst_63_65_tsni = function par3_inst_63_65_tsni(ws) {
-  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr;
+  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
   tmp1 = para.scan1(stepr_inst_63_65_61_tsni, para.startr, tmp);
   zs = tmp1;
@@ -2249,36 +2312,15 @@ par3_inst_63_65_tsni = function par3_inst_63_65_tsni(ws) {
   tmp3 = NofibPrelude.map(tmp2, zs);
   tmp4 = NofibPrelude.head(zs);
   tmp5 = para.thd3(tmp4);
-  arr = globalThis.Object.freeze([
-    tmp3,
-    tmp5
-  ]);
+  _deforest_Deforest_Arr_2_0 = tmp3;
+  _deforest_Deforest_Arr_2_1 = tmp5;
+  arr = (ws1) => {
+    return match_a_b_arm_Deforest_Arr_2_inst_63_65_62_tsni(ws1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+  };
   return tile_inst_63_65_62_tsni(ws, arr)
 };
 tile_inst_63_65_62_tsni = function tile_inst_63_65_62_tsni(ws, a_b) {
-  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
-    first0 = runtime.Tuple.get(a_b, 0);
-    first1 = runtime.Tuple.get(a_b, 1);
-    if (first0 instanceof NofibPrelude.Nil.class) {
-      n1 = first1;
-      return NofibPrelude.Nil
-    } else if (first0 instanceof NofibPrelude.Cons.class) {
-      param0 = first0.head;
-      param1 = first0.tail;
-      m = param0;
-      ms = param1;
-      n = first1;
-      tmp = n - m;
-      l = tmp;
-      scrut = splitAt_inst_63_65_62_31_tsni(l, ws);
-      return runtime.safeCall(scrut(m, ms, l))
-    } else {
-      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-    }
-  } else {
-    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-  }
+  return runtime.safeCall(a_b(ws))
 };
 splitAt_inst_63_65_62_31_tsni = function splitAt_inst_63_65_62_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
@@ -2287,17 +2329,18 @@ splitAt_inst_63_65_62_31_tsni = function splitAt_inst_63_65_62_31_tsni(n, ls) {
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4;
+    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
     tmp3 = NofibPrelude.leave(l, tmp2);
-    arr1 = globalThis.Object.freeze([
-      tmp3,
-      m
-    ]);
+    _deforest_Deforest_Arr_2_01 = tmp3;
+    _deforest_Deforest_Arr_2_11 = m;
+    arr1 = (ws) => {
+      return match_a_b_arm_Deforest_Arr_2_inst_63_65_62_tsni(ws, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+    };
     tmp4 = tile_inst_63_65_62_tsni(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -2922,7 +2965,7 @@ append_inst_69_70_68_48_50_51_tsni = function append_inst_69_70_68_48_50_51_tsni
   }
 };
 par3_inst_69_70_65_tsni = function par3_inst_69_70_65_tsni(ws) {
-  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr;
+  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
   tmp1 = para.scan1(stepr_inst_69_70_65_61_tsni, para.startr, tmp);
   zs = tmp1;
@@ -2930,10 +2973,11 @@ par3_inst_69_70_65_tsni = function par3_inst_69_70_65_tsni(ws) {
   tmp3 = NofibPrelude.map(tmp2, zs);
   tmp4 = NofibPrelude.head(zs);
   tmp5 = para.thd3(tmp4);
-  arr = globalThis.Object.freeze([
-    tmp3,
-    tmp5
-  ]);
+  _deforest_Deforest_Arr_2_0 = tmp3;
+  _deforest_Deforest_Arr_2_1 = tmp5;
+  arr = (ws1) => {
+    return match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni(ws1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+  };
   return tile_inst_69_70_65_62_tsni(ws, arr)
 };
 stepr_inst_69_70_65_61_tsni = function stepr_inst_69_70_65_61_tsni(w, ps_tw_tl) {
@@ -3193,29 +3237,7 @@ splitAt_inst_69_70_65_61_57_10_11_tsni = function splitAt_inst_69_70_65_61_57_10
   return arr
 };
 tile_inst_69_70_65_62_tsni = function tile_inst_69_70_65_62_tsni(ws, a_b) {
-  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
-    first0 = runtime.Tuple.get(a_b, 0);
-    first1 = runtime.Tuple.get(a_b, 1);
-    if (first0 instanceof NofibPrelude.Nil.class) {
-      n1 = first1;
-      return NofibPrelude.Nil
-    } else if (first0 instanceof NofibPrelude.Cons.class) {
-      param0 = first0.head;
-      param1 = first0.tail;
-      m = param0;
-      ms = param1;
-      n = first1;
-      tmp = n - m;
-      l = tmp;
-      scrut = splitAt_inst_69_70_65_62_31_tsni(l, ws);
-      return runtime.safeCall(scrut(m, ms, l))
-    } else {
-      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-    }
-  } else {
-    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-  }
+  return runtime.safeCall(a_b(ws))
 };
 splitAt_inst_69_70_65_62_31_tsni = function splitAt_inst_69_70_65_62_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
@@ -3224,17 +3246,18 @@ splitAt_inst_69_70_65_62_31_tsni = function splitAt_inst_69_70_65_62_31_tsni(n, 
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4;
+    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
     tmp3 = NofibPrelude.leave(l, tmp2);
-    arr1 = globalThis.Object.freeze([
-      tmp3,
-      m
-    ]);
+    _deforest_Deforest_Arr_2_01 = tmp3;
+    _deforest_Deforest_Arr_2_11 = m;
+    arr1 = (ws) => {
+      return match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni(ws, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+    };
     tmp4 = tile_inst_69_70_65_62_tsni(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -3628,7 +3651,7 @@ filter_inst_71_72_70_64_43_54_tsni = function filter_inst_71_72_70_64_43_54_tsni
   }
 };
 par3_inst_71_72_70_65_tsni = function par3_inst_71_72_70_65_tsni(ws) {
-  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr;
+  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
   tmp1 = para.scan1(stepr_inst_71_72_70_65_61_tsni, para.startr, tmp);
   zs = tmp1;
@@ -3636,36 +3659,15 @@ par3_inst_71_72_70_65_tsni = function par3_inst_71_72_70_65_tsni(ws) {
   tmp3 = NofibPrelude.map(tmp2, zs);
   tmp4 = NofibPrelude.head(zs);
   tmp5 = para.thd3(tmp4);
-  arr = globalThis.Object.freeze([
-    tmp3,
-    tmp5
-  ]);
+  _deforest_Deforest_Arr_2_0 = tmp3;
+  _deforest_Deforest_Arr_2_1 = tmp5;
+  arr = (ws1) => {
+    return match_a_b_arm_Deforest_Arr_2_inst_71_72_70_65_62_tsni(ws1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+  };
   return tile_inst_71_72_70_65_62_tsni(ws, arr)
 };
 tile_inst_71_72_70_65_62_tsni = function tile_inst_71_72_70_65_62_tsni(ws, a_b) {
-  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
-  if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
-    first0 = runtime.Tuple.get(a_b, 0);
-    first1 = runtime.Tuple.get(a_b, 1);
-    if (first0 instanceof NofibPrelude.Nil.class) {
-      n1 = first1;
-      return NofibPrelude.Nil
-    } else if (first0 instanceof NofibPrelude.Cons.class) {
-      param0 = first0.head;
-      param1 = first0.tail;
-      m = param0;
-      ms = param1;
-      n = first1;
-      tmp = n - m;
-      l = tmp;
-      scrut = splitAt_inst_71_72_70_65_62_31_tsni(l, ws);
-      return runtime.safeCall(scrut(m, ms, l))
-    } else {
-      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-    }
-  } else {
-    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-  }
+  return runtime.safeCall(a_b(ws))
 };
 splitAt_inst_71_72_70_65_62_31_tsni = function splitAt_inst_71_72_70_65_62_31_tsni(n, ls) {
   let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
@@ -3674,17 +3676,18 @@ splitAt_inst_71_72_70_65_62_31_tsni = function splitAt_inst_71_72_70_65_62_31_ts
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
   arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4;
+    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
     tmp3 = NofibPrelude.leave(l, tmp2);
-    arr1 = globalThis.Object.freeze([
-      tmp3,
-      m
-    ]);
+    _deforest_Deforest_Arr_2_01 = tmp3;
+    _deforest_Deforest_Arr_2_11 = m;
+    arr1 = (ws) => {
+      return match_a_b_arm_Deforest_Arr_2_inst_71_72_70_65_62_tsni(ws, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+    };
     tmp4 = tile_inst_71_72_70_65_62_tsni(ws2, arr1);
     return NofibPrelude.Cons(ws1, tmp4)
   };
@@ -5411,7 +5414,7 @@ go = function go(vs) {
     }
   } 
   static par3(ws2) {
-    let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr;
+    let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
     tmp = NofibPrelude.map(NofibPrelude.listLen, ws2);
     tmp1 = para.scan1(stepr_inst_60_61_tsni, para.startr, tmp);
     zs = tmp1;
@@ -5419,10 +5422,11 @@ go = function go(vs) {
     tmp3 = NofibPrelude.map(tmp2, zs);
     tmp4 = NofibPrelude.head(zs);
     tmp5 = para.thd3(tmp4);
-    arr = globalThis.Object.freeze([
-      tmp3,
-      tmp5
-    ]);
+    _deforest_Deforest_Arr_2_0 = tmp3;
+    _deforest_Deforest_Arr_2_1 = tmp5;
+    arr = (ws3) => {
+      return match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni(ws3, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+    };
     return tile_inst_60_62_tsni(ws2, arr)
   } 
   static fmt(x2) {

@@ -92,32 +92,38 @@ test()
 //│ = Cons(Pair(5, 1), Cons(Pair(5, 2), Cons(Pair(5, 5), Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@5@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(3)))))@6@inst_0_tsni --> Ref(a2)@inst_0_tsni@Pair
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@7@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(2))), Arg(None,Lit(IntLit(3)))))@8@inst_0_tsni --> Ref(a2)@inst_0_tsni@Pair
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@9@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Ref(a)), Arg(None,Ref(b))))@10@inst_0_tsni --> Ref(a2)@inst_0_tsni@Pair
-//│ Ref(member:Nil)@11@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Nil
-//│ Ref(member:Nil)@12@inst_0_1_tsni --> Ref(xs)@inst_0_4_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(h)), Arg(None,Ref($tmp))))@13@inst_0_1_2_tsni --> Ref(xs)@inst_0_4_2_tsni@Cons
-//│ Ref(member:Nil)@14@inst_0_tsni --> Ref(xs)@inst_0_4_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@15@inst_0_tsni --> Ref(ls)@inst_0_4_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(5))), Arg(None,Lit(IntLit(10)))))@16@inst_0_tsni --> Ref(a1)@inst_0_tsni@Pair
-//│ Ref(member:Nil)@17@inst_0_tsni --> Ref(ls)@inst_0_4_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@5@inst_3_tsni --> Ref(ls)@inst_3_1_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(3)))))@6@inst_3_tsni --> Ref(a2)@inst_3_tsni@Pair
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@7@inst_3_tsni --> Ref(ls)@inst_3_1_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(2))), Arg(None,Lit(IntLit(3)))))@8@inst_3_tsni --> Ref(a2)@inst_3_tsni@Pair
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@9@inst_3_tsni --> Ref(ls)@inst_3_1_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Ref(a)), Arg(None,Ref(b))))@10@inst_3_tsni --> Ref(a2)@inst_3_tsni@Pair
-//│ Ref(member:Nil)@11@inst_3_tsni --> Ref(ls)@inst_3_1_tsni@Nil
-//│ Ref(member:Nil)@12@inst_3_1_tsni --> Ref(xs)@inst_3_4_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(h)), Arg(None,Ref($tmp))))@13@inst_3_1_2_tsni --> Ref(xs)@inst_3_4_2_tsni@Cons
-//│ Ref(member:Nil)@14@inst_3_tsni --> Ref(xs)@inst_3_4_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@15@inst_3_tsni --> Ref(ls)@inst_3_4_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(5))), Arg(None,Lit(IntLit(10)))))@16@inst_3_tsni --> Ref(a1)@inst_3_tsni@Pair
-//│ Ref(member:Nil)@17@inst_3_tsni --> Ref(ls)@inst_3_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@5@inst_0_tsni --> Ref(xs)@inst_0_1_2_tsni@Cons
+//│ Ref(member:Nil)@6@inst_0_tsni --> Ref(xs)@inst_0_1_2_tsni@Nil
+//│ Ref(member:Nil)@7@inst_0_tsni --> Ref(xs)@inst_0_1_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@8@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(3)))))@9@inst_0_tsni --> Ref(a2)@inst_0_tsni@Pair
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(2))), Arg(None,Lit(IntLit(3)))))@11@inst_0_tsni --> Ref(a2)@inst_0_tsni@Pair
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@12@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(None,Ref(a)), Arg(None,Ref(b))))@13@inst_0_tsni --> Ref(a2)@inst_0_tsni@Pair
+//│ Ref(member:Nil)@14@inst_0_tsni --> Ref(ls)@inst_0_1_tsni@Nil
+//│ Ref(member:Nil)@15@inst_0_1_tsni --> Ref(xs)@inst_0_4_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(h)), Arg(None,Ref($tmp))))@16@inst_0_1_2_tsni --> Ref(xs)@inst_0_4_2_tsni@Cons
+//│ Ref(member:Nil)@17@inst_0_tsni --> Ref(xs)@inst_0_4_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@18@inst_0_tsni --> Ref(ls)@inst_0_4_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(5))), Arg(None,Lit(IntLit(10)))))@19@inst_0_tsni --> Ref(a1)@inst_0_tsni@Pair
+//│ Ref(member:Nil)@20@inst_0_tsni --> Ref(ls)@inst_0_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@5@inst_3_tsni --> Ref(xs)@inst_3_1_2_tsni@Cons
+//│ Ref(member:Nil)@6@inst_3_tsni --> Ref(xs)@inst_3_1_2_tsni@Nil
+//│ Ref(member:Nil)@7@inst_3_tsni --> Ref(xs)@inst_3_1_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@8@inst_3_tsni --> Ref(ls)@inst_3_1_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(3)))))@9@inst_3_tsni --> Ref(a2)@inst_3_tsni@Pair
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_3_tsni --> Ref(ls)@inst_3_1_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(2))), Arg(None,Lit(IntLit(3)))))@11@inst_3_tsni --> Ref(a2)@inst_3_tsni@Pair
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@12@inst_3_tsni --> Ref(ls)@inst_3_1_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(None,Ref(a)), Arg(None,Ref(b))))@13@inst_3_tsni --> Ref(a2)@inst_3_tsni@Pair
+//│ Ref(member:Nil)@14@inst_3_tsni --> Ref(ls)@inst_3_1_tsni@Nil
+//│ Ref(member:Nil)@15@inst_3_1_tsni --> Ref(xs)@inst_3_4_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(h)), Arg(None,Ref($tmp))))@16@inst_3_1_2_tsni --> Ref(xs)@inst_3_4_2_tsni@Cons
+//│ Ref(member:Nil)@17@inst_3_tsni --> Ref(xs)@inst_3_4_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref(member:Nil))))@18@inst_3_tsni --> Ref(ls)@inst_3_4_tsni@Cons
+//│ Call(Ref(member:Pair),List(Arg(None,Lit(IntLit(5))), Arg(None,Lit(IntLit(10)))))@19@inst_3_tsni --> Ref(a1)@inst_3_tsni@Pair
+//│ Ref(member:Nil)@20@inst_3_tsni --> Ref(ls)@inst_3_4_tsni@Nil
 //│ -------------- executing -------------
 //│ = Cons(Pair(5, 1), Cons(Pair(5, 2), Cons(Pair(5, 5), Nil)))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

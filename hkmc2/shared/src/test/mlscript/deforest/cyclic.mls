@@ -1,0 +1,144 @@
+:js
+
+data class A(x)
+data class B(x)
+data object C
+data object D
+data class (::) Cons(h, t)
+object Nil
+object None
+data class Some(x)
+
+
+
+
+
+
+:deforest
+fun test() =
+  fun f(a) = if a is
+    C then C
+    else D
+  (x => 0)(f(f(C)))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:C)@1@inst_0_tsni --> Ref(a)@inst_0_tsni@C
+//│ Ref(member:C)@2@inst_0_tsni --> Ref(a)@inst_0_tsni@C
+//│ Ref(member:D)@3@inst_0_tsni --> Ref(a)@inst_0_tsni@dflt
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+:deforest
+fun maxOpt(ls) = if ls is
+  Nil then None
+  h :: t then
+    if maxOpt(t) is
+      None then Some(h)
+      Some(m) then if m > h then Some(m) else Some(h)
+(x => 2) of maxOpt(1 :: 2 :: Nil)
+//│ = 2
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:None)@1@inst_0_tsni --> Ref($scrut)@inst_0_tsni@None
+//│ Call(Ref(member:Some),List(Arg(None,Ref(m))))@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@Some
+//│ Call(Ref(member:Some),List(Arg(None,Ref(h))))@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@Some
+//│ Call(Ref(member:Some),List(Arg(None,Ref(h))))@4@inst_0_tsni --> Ref($scrut)@inst_0_tsni@Some
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref($tmp))))@5@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(2))), Arg(None,Ref(member:Nil))))@6@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@7@inst__tsni --> Ref(ls)@inst_0_tsni@Nil
+//│ -------------- executing -------------
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+:deforest
+:sjs
+fun modSome(x, m) = if x is
+  Some(n) and
+    n >= m then modSome(Some(n - m), m)
+    else Some(n)
+  None then None
+modSome(Some(17), 3)
+//│ JS (unsanitized):
+//│ let modSome, tmp6;
+//│ modSome = function modSome(x, m) {
+//│   let param0, n, scrut, tmp7, tmp8;
+//│   if (x instanceof Some1.class) {
+//│     param0 = x.x;
+//│     n = param0;
+//│     scrut = n >= m;
+//│     if (scrut === true) {
+//│       tmp7 = n - m;
+//│       tmp8 = Some1(tmp7);
+//│       return modSome(tmp8, m)
+//│     } else {
+//│       return Some1(n)
+//│     }
+//│   } else if (x instanceof None1.class) {
+//│     return None1
+//│   } else {
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│   }
+//│ };
+//│ tmp6 = Some1(17);
+//│ modSome(tmp6, 3)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
+//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
+//│ 
+//│ let modSome, tmp6, modSome_inst_0_tsni, _deforest_Some_x, match_x_arm_Some_inst_0_tsni;
+//│ match_x_arm_Some_inst_0_tsni = (undefined, function (m, _deforest_Some_x_inst_0_tsni) {
+//│   let param0, n, scrut, tmp7, tmp8, _deforest_Some_x1;
+//│   param0 = _deforest_Some_x_inst_0_tsni;
+//│   n = param0;
+//│   scrut = n >= m;
+//│   if (scrut === true) {
+//│     tmp7 = n - m;
+//│     _deforest_Some_x1 = tmp7;
+//│     tmp8 = (m1) => {
+//│       return match_x_arm_Some_inst_0_tsni(m1, _deforest_Some_x1)
+//│     };
+//│     return modSome_inst_0_tsni(tmp8, m)
+//│   } else {
+//│     return Some1(n)
+//│   }
+//│ });
+//│ modSome_inst_0_tsni = function modSome_inst_0_tsni(x, m) {
+//│   return runtime.safeCall(x(m))
+//│ };
+//│ modSome = function modSome(x, m) {
+//│   let param0, n, scrut, tmp7, tmp8;
+//│   if (x instanceof Some1.class) {
+//│     param0 = x.x;
+//│     n = param0;
+//│     scrut = n >= m;
+//│     if (scrut === true) {
+//│       tmp7 = n - m;
+//│       tmp8 = Some1(tmp7);
+//│       return modSome(tmp8, m)
+//│     } else {
+//│       return Some1(n)
+//│     }
+//│   } else if (x instanceof None1.class) {
+//│     return None1
+//│   } else {
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│   }
+//│ };
+//│ _deforest_Some_x = 17;
+//│ tmp6 = (m) => {
+//│   return match_x_arm_Some_inst_0_tsni(m, _deforest_Some_x)
+//│ };
+//│ modSome_inst_0_tsni(tmp6, 3)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = Some(2)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Some),List(Arg(None,Ref($tmp))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@Some
+//│ Call(Ref(member:Some),List(Arg(None,Lit(IntLit(17)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@Some
+//│ -------------- executing -------------
+//│ = Some(2)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

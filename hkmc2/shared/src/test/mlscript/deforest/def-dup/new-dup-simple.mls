@@ -132,7 +132,8 @@ f(Nil)
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ 
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(2)))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@A
+//│ Ref(member:Nil)@2@inst__tsni --> Ref(x)@inst_0_tsni@dflt
 //│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -226,7 +227,8 @@ f(A(4))
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ 
+//│ Call(Ref(member:A),List(Arg(None,Ref($tmp))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(4)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@A
 //│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

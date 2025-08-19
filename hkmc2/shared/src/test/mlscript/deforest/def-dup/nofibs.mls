@@ -163,7 +163,19 @@ boyer.main()
 
 import "../../../mlscript-compile/nofib/boyer2.mls"
 boyer2.main()
-//│ = "The term is a tautology"
+//│ FAILURE: Unexpected runtime error
+//│ FAILURE LOCATION: mkQuery (JSBackendDiffMaker.scala:176)
+//│ ═══[RUNTIME ERROR] ReferenceError: Cannot access 'boyer2' before initialization
+//│     at addlemma_inst_0_1_tsni (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/boyer2.mjs:10051:24)
+//│     at file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/boyer2.mjs:131:12
+//│     at addlemmalst_inst_0_tsni (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/boyer2.mjs:10047:27)
+//│     at <static_initializer> (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/boyer2.mjs:14858:14)
+//│     at file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/boyer2.mjs:16774:11
+//│     at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+//│     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+//│     at async importModuleDynamicallyWrapper (node:internal/vm/module:436:15)
+//│     at async REPL34:1:67
+//│     at async node:repl:640:29
 
 
 
@@ -212,7 +224,17 @@ print(calendar.main())
 
 import "../../../mlscript-compile/nofib/cichelli.mls"
 cichelli.main()
-//│ = "YesIts(113994, [[\"w\", 16],[\"r\", 17],[\"o\", 11],[\"m\", 17],[\"l\", 11],[\"x\", 2],[\"n\", 11],[\"i\", 4],[\"f\", 10],[\"h\", 3],[\"g\", 0],[\"t\", 5],[\"d\", 0],[\"a\", 0],[\"s\", 2],[\"c\", 0],[\"e\", 1]])"
+//│ FAILURE: Unexpected runtime error
+//│ FAILURE LOCATION: mkQuery (JSBackendDiffMaker.scala:176)
+//│ ═══[RUNTIME ERROR] ReferenceError: Cannot access 'cichelli' before initialization
+//│     at histo_inst_56_tsni (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:7292:32)
+//│     at <static_initializer> (file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:7848:13)
+//│     at file:///Users/crescentonc/code/mlscript/hkmc2/shared/src/test/mlscript-compile/nofib/cichelli.mjs:8309:11
+//│     at ModuleJob.run (node:internal/modules/esm/module_job:274:25)
+//│     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:644:26)
+//│     at async importModuleDynamicallyWrapper (node:internal/vm/module:436:15)
+//│     at async REPL40:1:73
+//│     at async node:repl:640:29
 
 
 import "../../../mlscript-compile/nofib/circsim.mls"

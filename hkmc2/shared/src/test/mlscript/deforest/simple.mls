@@ -235,7 +235,8 @@ f(Some(2))
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ 
+//│ Call(Ref(member:Some),List(Arg(None,Ref($tmp))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@Some
+//│ Call(Ref(member:Some),List(Arg(None,Lit(IntLit(2)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@Some
 //│ -------------- executing -------------
 //│ = 0
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -563,8 +564,8 @@ f(id(A)) + f(A)
 //│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
 //│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
 //│ 
-//│ let f10, tmp113, tmp114, tmp115, f_inst_0_tsni6;
-//│ f_inst_0_tsni6 = function f_inst_0_tsni(x1) {
+//│ let f10, tmp113, tmp114, tmp115, f_inst_0_tsni7;
+//│ f_inst_0_tsni7 = function f_inst_0_tsni(x1) {
 //│   return runtime.safeCall(x1())
 //│ };
 //│ f10 = function f(x1) {
@@ -576,7 +577,7 @@ f(id(A)) + f(A)
 //│ };
 //│ tmp113 = Predef.id(A1);
 //│ tmp114 = f10(tmp113);
-//│ tmp115 = f_inst_0_tsni6(() => { return 1 });
+//│ tmp115 = f_inst_0_tsni7(() => { return 1 });
 //│ tmp114 + tmp115
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2

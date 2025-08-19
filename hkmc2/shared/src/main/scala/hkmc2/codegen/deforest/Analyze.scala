@@ -751,7 +751,7 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
     given mutable.Set[ProdStrat -> ConsStrat] = mutable.Set.empty
     constraints.foreach(handle)
   
-  val resolveClashes =
+  val resolveClashes -> cyclicOnes =
     val ctorToDtor = ctorDests.store
     val dtorToCtor = dtorSources.store
     
@@ -860,10 +860,9 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
       dtor <- mats
       rm <- findCycle(ctor, dtor)
     do removeCtor(rm)
-    toRmCtor.foreach(rm => ctorToDtor.remove(rm))
-    toRmDtor.foreach(rm => dtorToCtor.remove(rm))
+    val cyclic = toRmCtor -> toRmDtor
     
-    ctorToDtor -> dtorToCtor
+    ctorToDtor -> dtorToCtor -> cyclic
 
 
 

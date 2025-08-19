@@ -131,9 +131,6 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
       ctorIdToFinalDest.updateWith(ctorExprId): 
         case N => S(ctorFinalDest)
         case S(x) => die
-          // assert(x == ctorFinalDest)
-          // S(x)
-          // S(x) // FIXME:
   
   val rewritingMatchIds -> rewritingSelIds = finalDestToCtorIds.keySet.partitionMap:
     case FinalDest.Match(matchId, _) => L(matchId)
@@ -188,7 +185,10 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
       val numOfCtors = finalDestToCtorIds(matchArmDest).size
       if numOfCtors < 1 then
         die
-      else if numOfCtors == 1 then
+      else if numOfCtors == 1 && !locally:
+        sol.cyclicOnes._1.exists: ctor =>
+          ctor.exprId === c._1 && ctor.instantiationId.get === c._2
+      then
         val selsToTmpSyms = matDestToTempSymbolMap(matchArmDest)
         fusingMatchIdToTmpSymbolsToReplacedInAllBranches.updateWith(matchId):
           case N => S(selsToTmpSyms.toMap)
@@ -375,6 +375,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             false)
   
   object matchArmsOfFusingMatches:
+    private var transforming = mutable.Map.empty[FinalDest.Match, BlockMemberSymbol]
     val store = mutable.Map.empty[FinalDest.Match, Either[FunDefn, Block]]
     def prependAllFunDefs =
       rewritePrepare.finalDestToCtorIds.keys.foldRight(identity: Block => Block):
@@ -397,62 +398,75 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
       val dest = rewritePrepare.ctorIdToFinalDest(ctorId).asInstanceOf[FinalDest.Match]
       val freeVarsInTheMatch =
         rewritePrepare.freeVarsOfOriginalMatchesConsideringDeforestation(dest.matchId)
-      val exist = store.get(dest)
-      val armFunOrBlk = exist match
-        case Some(R(a)) => lastWords(s"$a in ${dest.matchId._2.toReadableCallPath(preAnalyzer)}")
-        case Some(f@L(_)) => f
-        case None =>
-          val transformedRest = matchRestOfFusingMatches.getOrElseUpdate(dest.matchId)
-          val originalMatchArmBody =
-            val matchExpr = preAnalyzer.matchScrutToMatchBlock(dest.matchId._1)
-            dest.arm.fold(matchExpr.dflt.get): armCls =>
-              armCls.asCls.flatMap(c => c.getArrClsSymSize(preAnalyzer)) match
-                case N =>
-                  matchExpr.arms.find(a => a._1.asInstanceOf[Case.Cls].cls is armCls).get._2
-                case S(n) => matchExpr.arms.find(a => a._1.asInstanceOf[Case.Tup].len == n).get._2
-          // this rewrittenBody here already has its selection replaced with
-          // the pre-computed var symbols (if the arm is used multiple times)
-          // or the temp symbols (if the arm is used only once)
-          val rewrittenBody = Begin(Transform(dest.matchId._2)(originalMatchArmBody), transformedRest).flattened
-          val res = rewritePrepare.finalDestToMatchArmFunSymbols.get(dest) match
-            case N => R(rewrittenBody)
-            case Some(funSym) =>
-              val freeVarSymForFunDef = freeVarsInTheMatch.map: x =>
-                VarSymbol(Tree.Ident(x.nme))
-              val funBody = rewrittenBody.replaceSymbols(freeVarsInTheMatch.zip(freeVarSymForFunDef).toMap).mapTail:
-                case Return(res, implct) => Return(res, false)
-                case t => t
-              val varSymbolsThatReplacedSelections =
-                // the order is the same as class ctor param
-                preAnalyzer.getCtorSymFromCtorLikeExprId(ctorId._1).get.asCls.fold(Nil): c =>
-                  c.getClsParamNames(preAnalyzer).map: p =>
-                    rewritePrepare
-                      .finalDestToVarSymbolsToReplaceSelInArms(dest)._2
-                      .getOrElse(Tree.Ident(p), VarSymbol(Tree.Ident(s"_unused_${p}")))
-              L(FunDefn(
-                N,
-                funSym,
-                (freeVarSymForFunDef ::: varSymbolsThatReplacedSelections).asParamList :: Nil,
-                funBody))
-          store.updateWith(dest):
-            case None => S(res)
-            case Some(x) => lastWords(s"already exist? $x")
-          res
       val symsForArmFreeVarsInLam = freeVarsInTheMatch.map: x =>
         VarSymbol(Tree.Ident(x.nme))
-      armFunOrBlk match
-        case L(fdefn) => Value.Lam(
+      transforming.get(dest) match
+      case Some(sym) =>
+        Value.Lam(
           symsForArmFreeVarsInLam.asParamList,
           Return(
             Call(
-              callNewFun(fdefn.sym),
+              callNewFun(sym),
               symsForArmFreeVarsInLam.asArgsList ::: dest.tmpSymbolForASpecificCtorId.asArgsList)(true, false),
             false))
-        case R(b) => Value.Lam(
-          symsForArmFreeVarsInLam.asParamList,
-          b.replaceSymbols(freeVarsInTheMatch.zip(symsForArmFreeVarsInLam).toMap).mapTail:
-            case Return(res, implct) => Return(res, false)
-            case t => t)
+      case None =>
+        val armFunOrBlk = store.get(dest) match
+          case Some(R(a)) => lastWords(s"$a in ${dest.matchId._2.toReadableCallPath(preAnalyzer)}")
+          case Some(f@L(_)) => f
+          case None =>
+            val maybeFunSym = rewritePrepare.finalDestToMatchArmFunSymbols.get(dest)
+            maybeFunSym match
+              case Some(sym) => transforming.addOne(dest -> sym)
+              case None => ()
+            val transformedRest = matchRestOfFusingMatches.getOrElseUpdate(dest.matchId)
+            val originalMatchArmBody =
+              val matchExpr = preAnalyzer.matchScrutToMatchBlock(dest.matchId._1)
+              dest.arm.fold(matchExpr.dflt.get): armCls =>
+                armCls.asCls.flatMap(c => c.getArrClsSymSize(preAnalyzer)) match
+                  case N =>
+                    matchExpr.arms.find(a => a._1.asInstanceOf[Case.Cls].cls is armCls).get._2
+                  case S(n) => matchExpr.arms.find(a => a._1.asInstanceOf[Case.Tup].len == n).get._2
+            // this rewrittenBody here already has its selection replaced with
+            // the pre-computed var symbols (if the arm is used multiple times)
+            // or the temp symbols (if the arm is used only once)
+            val rewrittenBody = Begin(Transform(dest.matchId._2)(originalMatchArmBody), transformedRest).flattened
+            val res = maybeFunSym match
+              case N => R(rewrittenBody)
+              case Some(funSym) =>
+                val freeVarSymForFunDef = freeVarsInTheMatch.map: x =>
+                  VarSymbol(Tree.Ident(x.nme))
+                val funBody = rewrittenBody.replaceSymbols(freeVarsInTheMatch.zip(freeVarSymForFunDef).toMap).mapTail:
+                  case Return(res, implct) => Return(res, false)
+                  case t => t
+                val varSymbolsThatReplacedSelections =
+                  // the order is the same as class ctor param
+                  preAnalyzer.getCtorSymFromCtorLikeExprId(ctorId._1).get.asCls.fold(Nil): c =>
+                    c.getClsParamNames(preAnalyzer).map: p =>
+                      rewritePrepare
+                        .finalDestToVarSymbolsToReplaceSelInArms(dest)._2
+                        .getOrElse(Tree.Ident(p), VarSymbol(Tree.Ident(s"_unused_${p}")))
+                L(FunDefn(
+                  N,
+                  funSym,
+                  (freeVarSymForFunDef ::: varSymbolsThatReplacedSelections).asParamList :: Nil,
+                  funBody))
+            store.updateWith(dest):
+              case None => S(res)
+              case Some(x) => lastWords(s"already exist? $x")
+            res
+        armFunOrBlk match
+          case L(fdefn) => Value.Lam(
+            symsForArmFreeVarsInLam.asParamList,
+            Return(
+              Call(
+                callNewFun(fdefn.sym),
+                symsForArmFreeVarsInLam.asArgsList ::: dest.tmpSymbolForASpecificCtorId.asArgsList)(true, false),
+              false))
+          case R(b) => Value.Lam(
+            symsForArmFreeVarsInLam.asParamList,
+            b.replaceSymbols(freeVarsInTheMatch.zip(symsForArmFreeVarsInLam).toMap).mapTail:
+              case Return(res, implct) => Return(res, false)
+              case t => t)
   
   
   private def callNewFun(sym: BlockMemberSymbol): Path =
