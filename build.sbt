@@ -23,6 +23,15 @@ lazy val root = project.in(file("."))
   .settings(
     publish := {},
     publishLocal := {},
+    commands += Command.args("flaky", "number of times to re-run") { (state, args) =>
+      val count = args.head.toInt
+      val command = args(1)
+      if (count == 0) {
+        state
+      } else {
+        s"$command" :: s"""flaky ${count - 1} "$command"""" :: state
+      }
+    }
   )
 
 lazy val hkmc2 = crossProject(JSPlatform, JVMPlatform).in(file("hkmc2"))
@@ -45,6 +54,8 @@ lazy val hkmc2 = crossProject(JSPlatform, JVMPlatform).in(file("hkmc2"))
     
     libraryDependencies += "org.scalactic" %%% "scalactic" % "3.2.18",
     libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.18" % "test",
+    libraryDependencies += "tools.profiler" % "async-profiler" % "4.1",
+
     
     watchSources += WatchSource(
       baseDirectory.value.getParentFile()/"shared"/"src"/"test"/"mlscript", "*.mls", NothingFilter),
