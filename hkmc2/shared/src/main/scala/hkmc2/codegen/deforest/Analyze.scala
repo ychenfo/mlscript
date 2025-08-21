@@ -41,9 +41,9 @@ case object NoProd extends ProdStrat
 //     case Some(instId) => 
 //       if !UNIQE.add(c.exprId -> instId) then lastWords(s"${c.ctor}@${instId.toReadableCallPath(pre)} again")
 
-class Ctor(
+case class Ctor(
   val exprId: ResultId,
-  val instantiationId: Opt[InstantiationId],
+  val instantiationId: Opt[InstantiationId])(
   val ctor: ClassLikeSymbol,
   val args: Ls[TermSymbol -> ProdStrat])(using pre: DeforestPreAnalyzer) extends ProdStrat
     // register(this)
@@ -72,6 +72,7 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
       case Value.Ref(l) => l.asBlkMember.get
       case s: Select => s.symbol.flatMap(_.asBlkMember).get
       case _ => die
+    assert(instantiatingFunSym.isFunctionSymbol)
     val instantiatingRecursiveGroup = d.funSymToProdStratScheme.recursiveGroups(instantiatingFunSym)
     val stratVarMap = mutable.Map.empty[StratVarState, StratVarState]
     def updateInstantiationId(instId: Opt[InstantiationId]) =
@@ -88,7 +89,7 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
       case NoProd => NoProd
       case c: Ctor => new Ctor(
         c.exprId,
-        updateInstantiationId(c.instantiationId),
+        updateInstantiationId(c.instantiationId))(
         c.ctor,
         c.args.map((a, b) => a -> duplicateProdStrat(b))
       )
@@ -545,13 +546,13 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
               appRes.asProdStrat
             case Some(Some(s)) =>
               val clsFields = s.tree.clsParams
-              new Ctor(c.uid, instantiationId, s, clsFields.zip(argsTpe))
+              new Ctor(c.uid, instantiationId)(s, clsFields.zip(argsTpe))
         case Value.Ref(funSym) =>
           val argsTpe = args.map(processResult)
           funSym.asCls match
             case Some(s) =>
               val clsFields = s.tree.clsParams
-              new Ctor(c.uid, instantiationId, s, clsFields.zip(argsTpe))
+              new Ctor(c.uid, instantiationId)(s, clsFields.zip(argsTpe))
             case _ => // then it is a function
               val appRes = freshVar("call_" + funSym.nme + "_res", generatedForDef)
               funSym.asBlkMember match
@@ -596,7 +597,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     case i@Instantiate(false, cls, args) => handleCallLike(cls, args.map {case Arg(N, value) => value}, i)
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
-          new Ctor(sel.uid, instantiationId, s.asObj.get, Nil)
+          new Ctor(sel.uid, instantiationId)(s.asObj.get, Nil)
       case Some(s) if s.isFunction &&
         preAnalyzer.topLevelDefinedFunSyms.contains(s.asBlkMember.get) =>
         funSymToProdStratScheme.getOrUpdate(s.asBlkMember.get) match
@@ -642,7 +643,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
               instantiated
         else
           preAnalyzer.getProdVarForSym(l)
-      case Some(m) => new Ctor(v.uid, instantiationId, m, Nil)
+      case Some(m) => new Ctor(v.uid, instantiationId)(m, Nil)
     
     case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
     case Value.Lit(lit) => NoProd
@@ -659,7 +660,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
           TermSymbol(syntax.ImmutVal, N, Tree.Ident(n.toString())) ->
           processResult(value)
         case _ => throw NotDeforestableException("no support for array with spread")
-      new Ctor(r.uid, instantiationId, preAnalyzer.arrBlkMemSym(elems.length), args)
+      new Ctor(r.uid, instantiationId)(preAnalyzer.arrBlkMemSym(elems.length), args)
 
 
 class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
@@ -751,28 +752,44 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
     given mutable.Set[ProdStrat -> ConsStrat] = mutable.Set.empty
     constraints.foreach(handle)
   
+  
+  def removeCtor(rm: (Ctor | CtorId))(using
+    ctorToDtor: mutable.LinkedHashMap[Ctor, Ls[Dtor | FieldSel] -> Bool],
+    dtorToCtor: mutable.LinkedHashMap[Dtor | FieldSel, Ls[Ctor] -> Bool],
+    toRmCtor: mutable.Set[Ctor],
+    toRmDtor: mutable.Set[Dtor | FieldSel]
+  ): Unit = rm match
+    case rm: Ctor =>
+      if toRmCtor.add(rm) then
+      for
+        (dtors, _) <- ctorToDtor.get(rm)
+        dtor <- dtors
+      do removeDtor(dtor)
+    case rm: CtorId =>
+      for
+        rm <- ctorToDtor.keySet.filter: x =>
+          x.exprId === rm._1 && x.instantiationId.fold(false)(_ === rm._2)
+      do removeCtor(rm)
+  
+  
+  def removeDtor(rm: Dtor | FieldSel)(using
+    ctorToDtor: mutable.LinkedHashMap[Ctor, Ls[Dtor | FieldSel] -> Bool],
+    dtorToCtor: mutable.LinkedHashMap[Dtor | FieldSel, Ls[Ctor] -> Bool],
+    toRmCtor: mutable.Set[Ctor],
+    toRmDtor: mutable.Set[Dtor | FieldSel]
+  ) =
+    if toRmDtor.add(rm) then
+    for (ctors, _) <- dtorToCtor.get(rm)
+        x <- ctors do removeCtor(x)
+  
+  
   val resolveClashes -> cyclicOnes =
-    val ctorToDtor = ctorDests.store
-    val dtorToCtor = dtorSources.store
+    given ctorToDtor: mutable.LinkedHashMap[Ctor, Ls[Dtor | FieldSel] -> Bool] = ctorDests.store
+    given dtorToCtor: mutable.LinkedHashMap[Dtor | FieldSel, Ls[Ctor] -> Bool] = dtorSources.store
+
+    given toRmCtor: mutable.Set[Ctor] = mutable.Set.empty[Ctor]
+    given toRmDtor: mutable.Set[Dtor | FieldSel] = mutable.Set.empty[Dtor | FieldSel]
     
-    val toRmCtor = mutable.Set.empty[Ctor]
-    val toRmDtor = mutable.Set.empty[Dtor | FieldSel]
-    def removeCtor(rm: (Ctor | CtorId)): Unit = rm match
-      case rm: Ctor =>
-        if toRmCtor.add(rm) then
-        for
-          (dtors, _) <- ctorToDtor.get(rm)
-          dtor <- dtors
-        do removeDtor(dtor)
-      case rm: CtorId =>
-        for
-          rm <- ctorToDtor.keySet.filter: x =>
-            x.exprId === rm._1 && x.instantiationId.fold(false)(_ === rm._2)
-        do removeCtor(rm)
-    def removeDtor(rm: Dtor | FieldSel) =
-      if toRmDtor.add(rm) then
-      for (ctors, _) <- dtorToCtor.get(rm)
-          x <- ctors do removeCtor(x)
     
     // remove clashes
     for
@@ -831,13 +848,12 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
         val newCtorsAndNewMatches = for
           (c, m) <- ctorAndMatchesScrutExprIds
           c <- getCtorInArm(c, m)
-          (_, ds -> noCons) <- ctorToDtor.filter: x =>
-            (x._1.exprId === c._1) && (x._1.instantiationId.fold(false)(_ === c._2))
+          (ds -> noCons) <- ctorToDtor
+            .get:
+              new Ctor(c._1, S(c._2))(preAnalyzer.arrBlkMemSym(0), Nil)(using preAnalyzer)
+            .toSeq
           _ = assert(!noCons)
-          (mats, _) = ds.partitionMap:
-            case d: Dtor => L(d)
-            case s: FieldSel => R(s)
-          m <- mats.headOption
+          case (m: Dtor) <- ds
         yield c -> (m.scrutExprId -> m.instantiationId.get)
         val cycled = newCtorsAndNewMatches.filter: c =>
           !cache.add(c._1)
