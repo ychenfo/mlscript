@@ -10147,8 +10147,8 @@ lambda = (undefined, function (f) {
 (class constraints {
   static {
     constraints1 = constraints;
-    this.Assign = function Assign(varr1, value1) {
-      return globalThis.Object.freeze(new Assign.class(varr1, value1));
+    this.Assign = function Assign(varr, value) {
+      return globalThis.Object.freeze(new Assign.class(varr, value));
     };
     Object.defineProperty(this.Assign, "class", {
       enumerable: true,
@@ -10161,8 +10161,8 @@ lambda = (undefined, function (f) {
         static [definitionMetadata] = ["class", "Assign", ["varr", "value"]]; 
       }
     });
-    this.CSP = function CSP(vars1, vals1, rel1) {
-      return globalThis.Object.freeze(new CSP.class(vars1, vals1, rel1));
+    this.CSP = function CSP(vars, vals, rel) {
+      return globalThis.Object.freeze(new CSP.class(vars, vals, rel));
     };
     Object.defineProperty(this.CSP, "class", {
       enumerable: true,
@@ -10176,8 +10176,8 @@ lambda = (undefined, function (f) {
         static [definitionMetadata] = ["class", "CSP", ["vars", "vals", "rel"]]; 
       }
     });
-    this.Node = function Node(lab1, children1) {
-      return globalThis.Object.freeze(new Node.class(lab1, children1));
+    this.Node = function Node(lab, children) {
+      return globalThis.Object.freeze(new Node.class(lab, children));
     };
     Object.defineProperty(this.Node, "class", {
       enumerable: true,
@@ -10195,8 +10195,8 @@ lambda = (undefined, function (f) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "ConflictSet"]; 
     };
-    this.Known = function Known(vs1) {
-      return globalThis.Object.freeze(new Known.class(vs1));
+    this.Known = function Known(vs) {
+      return globalThis.Object.freeze(new Known.class(vs));
     };
     Object.defineProperty(this.Known, "class", {
       enumerable: true,
@@ -10240,66 +10240,66 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static qpart(le1, x, ls1, rlt, rge, r1) {
+  static qpart(le, x, ls, rlt, rge, r) {
     let param0, param1, y, ys, scrut, tmp, tmp1, tmp2, tmp3;
-    if (ls1 instanceof NofibPrelude.Nil.class) {
-      tmp = constraints.rqsort(le1, rge, r1);
+    if (ls instanceof NofibPrelude.Nil.class) {
+      tmp = constraints.rqsort(le, rge, r);
       tmp1 = NofibPrelude.Cons(x, tmp);
-      return constraints.rqsort(le1, rlt, tmp1)
-    } else if (ls1 instanceof NofibPrelude.Cons.class) {
-      param0 = ls1.head;
-      param1 = ls1.tail;
+      return constraints.rqsort(le, rlt, tmp1)
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
       y = param0;
       ys = param1;
-      scrut = runtime.safeCall(le1(x, y));
+      scrut = runtime.safeCall(le(x, y));
       if (scrut === true) {
         tmp2 = NofibPrelude.Cons(y, rge);
-        return constraints.qpart(le1, x, ys, rlt, tmp2, r1)
+        return constraints.qpart(le, x, ys, rlt, tmp2, r)
       } else {
         tmp3 = NofibPrelude.Cons(y, rlt);
-        return constraints.qpart(le1, x, ys, tmp3, rge, r1)
+        return constraints.qpart(le, x, ys, tmp3, rge, r)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static rqsort(le2, ls2, r2) {
-    let param0, param1, x1, xs, x2;
-    if (ls2 instanceof NofibPrelude.Nil.class) {
-      return r2
-    } else if (ls2 instanceof NofibPrelude.Cons.class) {
-      param0 = ls2.head;
-      param1 = ls2.tail;
-      x2 = param0;
+  static rqsort(le, ls, r) {
+    let param0, param1, x, xs, x1;
+    if (ls instanceof NofibPrelude.Nil.class) {
+      return r
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
+      x1 = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
-        return NofibPrelude.Cons(x2, r2)
+        return NofibPrelude.Cons(x1, r)
       } else {
-        x1 = param0;
+        x = param0;
         xs = param1;
-        return constraints.rqpart(le2, x1, xs, NofibPrelude.Nil, NofibPrelude.Nil, r2)
+        return constraints.rqpart(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static rqpart(le3, x1, ls3, rle, rgt, r3) {
+  static rqpart(le, x, ls, rle, rgt, r) {
     let param0, param1, y, ys, scrut, tmp, tmp1, tmp2, tmp3;
-    if (ls3 instanceof NofibPrelude.Nil.class) {
-      tmp = constraints.qsort(le3, rgt, r3);
-      tmp1 = NofibPrelude.Cons(x1, tmp);
-      return constraints.rqsort(le3, rle, tmp1)
-    } else if (ls3 instanceof NofibPrelude.Cons.class) {
-      param0 = ls3.head;
-      param1 = ls3.tail;
+    if (ls instanceof NofibPrelude.Nil.class) {
+      tmp = constraints.qsort(le, rgt, r);
+      tmp1 = NofibPrelude.Cons(x, tmp);
+      return constraints.rqsort(le, rle, tmp1)
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
       y = param0;
       ys = param1;
-      scrut = runtime.safeCall(le3(y, x1));
+      scrut = runtime.safeCall(le(y, x));
       if (scrut === true) {
         tmp2 = NofibPrelude.Cons(y, rle);
-        return constraints.rqpart(le3, x1, ys, tmp2, rgt, r3)
+        return constraints.rqpart(le, x, ys, tmp2, rgt, r)
       } else {
         tmp3 = NofibPrelude.Cons(y, rgt);
-        return constraints.rqpart(le3, x1, ys, rle, tmp3, r3)
+        return constraints.rqpart(le, x, ys, rle, tmp3, r)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -10316,24 +10316,24 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static value(a1) {
+  static value(a) {
     let param0, param1, v;
-    if (a1 instanceof constraints.Assign.class) {
-      param0 = a1.varr;
-      param1 = a1.value;
+    if (a instanceof constraints.Assign.class) {
+      param0 = a.varr;
+      param1 = a.value;
       v = param1;
       return v
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static maxLevel(ls4) {
+  static maxLevel(ls) {
     let param0, param1, param01, param11, v, t;
-    if (ls4 instanceof NofibPrelude.Nil.class) {
+    if (ls instanceof NofibPrelude.Nil.class) {
       return 0
-    } else if (ls4 instanceof NofibPrelude.Cons.class) {
-      param0 = ls4.head;
-      param1 = ls4.tail;
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
       if (param0 instanceof constraints.Assign.class) {
         param01 = param0.varr;
         param11 = param0.value;
@@ -10399,22 +10399,22 @@ lambda = (undefined, function (f) {
   static queens(n) {
     return runtime.safeCall(constraints.CSP(n, n, constraints.safe))
   } 
-  static label(n1) {
+  static label(n) {
     let param0, param1, l;
-    if (n1 instanceof constraints.Node.class) {
-      param0 = n1.lab;
-      param1 = n1.children;
+    if (n instanceof constraints.Node.class) {
+      param0 = n.lab;
+      param1 = n.children;
       l = param0;
       return l
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static mapTree(f, n2) {
+  static mapTree(f, n) {
     let param0, param1, l, c, tmp, tmp1, lambda$this;
-    if (n2 instanceof constraints.Node.class) {
-      param0 = n2.lab;
-      param1 = n2.children;
+    if (n instanceof constraints.Node.class) {
+      param0 = n.lab;
+      param1 = n.children;
       l = param0;
       c = param1;
       tmp = runtime.safeCall(f(l));
@@ -10425,16 +10425,16 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static foldTree(f9, n3) {
+  static foldTree(f, n) {
     let param0, param1, l, c, tmp, lambda$this;
-    if (n3 instanceof constraints.Node.class) {
-      param0 = n3.lab;
-      param1 = n3.children;
+    if (n instanceof constraints.Node.class) {
+      param0 = n.lab;
+      param1 = n.children;
       l = param0;
       c = param1;
-      lambda$this = runtime.safeCall(lambda1(f9));
+      lambda$this = runtime.safeCall(lambda1(f));
       tmp = NofibPrelude.map(lambda$this, c);
-      return runtime.safeCall(f9(l, tmp))
+      return runtime.safeCall(f(l, tmp))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -10444,16 +10444,16 @@ lambda = (undefined, function (f) {
     f1$this = runtime.safeCall(f1_inst_51_66_tsni(p));
     return foldTree_inst_51_10_tsni(f1$this, t)
   } 
-  static prune(p1, t1) {
+  static prune(p, t) {
     let lambda$this;
-    lambda$this = runtime.safeCall(lambda3(p1));
-    return filterTree_inst_52_9_tsni(lambda$this, t1)
+    lambda$this = runtime.safeCall(lambda3(p));
+    return filterTree_inst_52_9_tsni(lambda$this, t)
   } 
-  static leaves(t2) {
+  static leaves(t) {
     let param0, param1, cs, leaf, tmp;
-    if (t2 instanceof constraints.Node.class) {
-      param0 = t2.lab;
-      param1 = t2.children;
+    if (t instanceof constraints.Node.class) {
+      param0 = t.lab;
+      param1 = t.children;
       leaf = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
         return NofibPrelude.Cons(leaf, NofibPrelude.Nil)
@@ -10466,19 +10466,19 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static initTree(f10, x2) {
+  static initTree(f, x) {
     let tmp, tmp1, lambda$this;
-    tmp = runtime.safeCall(f10(x2));
-    lambda$this = runtime.safeCall(lambda4(f10));
+    tmp = runtime.safeCall(f(x));
+    lambda$this = runtime.safeCall(lambda4(f));
     tmp1 = NofibPrelude.map(lambda$this, tmp);
-    return constraints.Node(x2, tmp1)
+    return constraints.Node(x, tmp1)
   } 
-  static mkTree(csp1) {
+  static mkTree(csp) {
     let param0, param1, param2, vars, vals, rel, next$this;
-    if (csp1 instanceof constraints.CSP.class) {
-      param0 = csp1.vars;
-      param1 = csp1.vals;
-      param2 = csp1.rel;
+    if (csp instanceof constraints.CSP.class) {
+      param0 = csp.vars;
+      param1 = csp.vals;
+      param2 = csp.rel;
       vars = param0;
       vals = param1;
       rel = param2;
@@ -10488,12 +10488,12 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static earliestInconsistency(csp2, aas) {
-    let param0, param1, param2, vars, vals, rel, param01, param11, a2, as_, scrut, tmp, lambda$this;
-    if (csp2 instanceof constraints.CSP.class) {
-      param0 = csp2.vars;
-      param1 = csp2.vals;
-      param2 = csp2.rel;
+  static earliestInconsistency(csp, aas) {
+    let param0, param1, param2, vars, vals, rel, param01, param11, a, as_, scrut, tmp, lambda$this;
+    if (csp instanceof constraints.CSP.class) {
+      param0 = csp.vars;
+      param1 = csp.vals;
+      param2 = csp.rel;
       vars = param0;
       vals = param1;
       rel = param2;
@@ -10502,12 +10502,12 @@ lambda = (undefined, function (f) {
       } else if (aas instanceof NofibPrelude.Cons.class) {
         param01 = aas.head;
         param11 = aas.tail;
-        a2 = param01;
+        a = param01;
         as_ = param11;
         tmp = NofibPrelude.reverse(as_);
-        lambda$this = runtime.safeCall(lambda5(rel, a2));
+        lambda$this = runtime.safeCall(lambda5(rel, a));
         scrut = filter_inst_55_42_tsni(lambda$this, tmp);
-        return runtime.safeCall(scrut(a2))
+        return runtime.safeCall(scrut(a))
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -10515,29 +10515,29 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static labelInconsistencies(csp3, t3) {
+  static labelInconsistencies(csp, t) {
     let f2$this;
-    f2$this = runtime.safeCall(f2_inst_56_57_tsni(csp3));
-    return constraints.mapTree(f2$this, t3)
+    f2$this = runtime.safeCall(f2_inst_56_57_tsni(csp));
+    return constraints.mapTree(f2$this, t)
   } 
-  static btsolver0(csp4) {
+  static btsolver0(csp) {
     let tmp, tmp1, tmp2, tmp3, tmp4, lambda$this;
-    tmp = mkTree_inst_58_59_tsni(csp4);
-    tmp1 = labelInconsistencies_inst_58_60_tsni(csp4, tmp);
+    tmp = mkTree_inst_58_59_tsni(csp);
+    tmp1 = labelInconsistencies_inst_58_60_tsni(csp, tmp);
     tmp2 = prune_inst_58_63_tsni(lambda6, tmp1);
     tmp3 = mapTree_inst_58_70_tsni(NofibPrelude.fst, tmp2);
     tmp4 = leaves_inst_58_69_tsni(tmp3);
-    lambda$this = runtime.safeCall(lambda7(csp4));
+    lambda$this = runtime.safeCall(lambda7(csp));
     return NofibPrelude.filter(lambda$this, tmp4)
   } 
   static knownConflict(c) {
-    let param0, param01, param1, a2, as_;
+    let param0, param01, param1, a, as_;
     if (c instanceof constraints.Known.class) {
       param0 = c.vs;
       if (param0 instanceof NofibPrelude.Cons.class) {
         param01 = param0.head;
         param1 = param0.tail;
-        a2 = param01;
+        a = param01;
         as_ = param1;
         return true
       } else {
@@ -10547,10 +10547,10 @@ lambda = (undefined, function (f) {
       return false
     }
   } 
-  static knownSolution(c1) {
+  static knownSolution(c) {
     let param0;
-    if (c1 instanceof constraints.Known.class) {
-      param0 = c1.vs;
+    if (c instanceof constraints.Known.class) {
+      param0 = c.vs;
       if (param0 instanceof NofibPrelude.Nil.class) {
         return true
       } else {
@@ -10560,35 +10560,35 @@ lambda = (undefined, function (f) {
       return false
     }
   } 
-  static checkComplete(csp5, s1) {
+  static checkComplete(csp, s) {
     let scrut;
-    scrut = constraints.complete(csp5, s1);
+    scrut = constraints.complete(csp, s);
     if (scrut === true) {
       return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
     } else {
       return constraints.Unknown
     }
   } 
-  static search(labeler, csp6) {
+  static search(labeler, csp) {
     let tmp, tmp1, tmp2, tmp3, tmp4;
-    tmp = mkTree_inst_71_3_tsni(csp6);
-    tmp1 = runtime.safeCall(labeler(csp6, tmp));
+    tmp = mkTree_inst_71_3_tsni(csp);
+    tmp1 = runtime.safeCall(labeler(csp, tmp));
     tmp2 = prune_inst_71_8_tsni(lambda8, tmp1);
     tmp3 = leaves_inst_71_12_tsni(tmp2);
     tmp4 = filter_inst_71_14_tsni(lambda9, tmp3);
     return map_inst_71_115_tsni(NofibPrelude.fst, tmp4)
   } 
-  static bt(csp7, t4) {
+  static bt(csp, t) {
     let f3$this;
-    f3$this = runtime.safeCall(f3_inst_72_73_tsni(csp7));
-    return constraints.mapTree(f3$this, t4)
+    f3$this = runtime.safeCall(f3_inst_72_73_tsni(csp));
+    return constraints.mapTree(f3$this, t)
   } 
-  static emptyTable(csp8) {
+  static emptyTable(csp) {
     let param0, param1, param2, vars, vals, rel, tmp, tmp1;
-    if (csp8 instanceof constraints.CSP.class) {
-      param0 = csp8.vars;
-      param1 = csp8.vals;
-      param2 = csp8.rel;
+    if (csp instanceof constraints.CSP.class) {
+      param0 = csp.vars;
+      param1 = csp.vals;
+      param2 = csp.rel;
       vars = param0;
       vals = param1;
       rel = param2;
@@ -10599,23 +10599,23 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static fillTable(s2, csp9, tbl) {
+  static fillTable(s, csp, tbl) {
     let param0, param1, param01, param11, var_, val_, as_, param02, param12, param2, vars, vals, rel, tmp, tmp1, tmp2, lambda$this;
-    if (s2 instanceof NofibPrelude.Nil.class) {
+    if (s instanceof NofibPrelude.Nil.class) {
       return tbl
-    } else if (s2 instanceof NofibPrelude.Cons.class) {
-      param0 = s2.head;
-      param1 = s2.tail;
+    } else if (s instanceof NofibPrelude.Cons.class) {
+      param0 = s.head;
+      param1 = s.tail;
       if (param0 instanceof constraints.Assign.class) {
         param01 = param0.varr;
         param11 = param0.value;
         var_ = param01;
         val_ = param11;
         as_ = param1;
-        if (csp9 instanceof constraints.CSP.class) {
-          param02 = csp9.vars;
-          param12 = csp9.vals;
-          param2 = csp9.rel;
+        if (csp instanceof constraints.CSP.class) {
+          param02 = csp.vars;
+          param12 = csp.vals;
+          param2 = csp.rel;
           vars = param02;
           vals = param12;
           rel = param2;
@@ -10634,52 +10634,52 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static lookupCache(csp10, t5) {
+  static lookupCache(csp, t) {
     let lambda$this;
-    lambda$this = runtime.safeCall(lambda_inst_78_79_tsni(csp10));
-    return constraints.mapTree(lambda$this, t5)
+    lambda$this = runtime.safeCall(lambda_inst_78_79_tsni(csp));
+    return constraints.mapTree(lambda$this, t)
   } 
-  static cacheChecks(csp11, tbl1, n4) {
-    let param0, param1, s3, cs, arr, tmp, tmp1;
-    if (n4 instanceof constraints.Node.class) {
-      param0 = n4.lab;
-      param1 = n4.children;
-      s3 = param0;
+  static cacheChecks(csp, tbl, n) {
+    let param0, param1, s, cs, arr, tmp, tmp1;
+    if (n instanceof constraints.Node.class) {
+      param0 = n.lab;
+      param1 = n.children;
+      s = param0;
       cs = param1;
       arr = globalThis.Object.freeze([
-        s3,
-        tbl1
+        s,
+        tbl
       ]);
-      tmp = runtime.safeCall(lambda_inst_80_tsni(csp11, tbl1, s3));
+      tmp = runtime.safeCall(lambda_inst_80_tsni(csp, tbl, s));
       tmp1 = NofibPrelude.map(tmp, cs);
       return constraints.Node(arr, tmp1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static bm(csp12, t6) {
+  static bm(csp, t) {
     let tmp, tmp1, tmp2;
-    tmp = emptyTable_inst_81_82_tsni(csp12);
-    tmp1 = cacheChecks_inst_81_83_tsni(csp12, tmp, t6);
-    tmp2 = lookupCache_inst_81_84_tsni(csp12, tmp1);
+    tmp = emptyTable_inst_81_82_tsni(csp);
+    tmp1 = cacheChecks_inst_81_83_tsni(csp, tmp, t);
+    tmp2 = lookupCache_inst_81_84_tsni(csp, tmp1);
     return mapTree_inst_81_128_tsni(fst_inst_81_129_tsni, tmp2)
   } 
-  static combine(ls5, acc) {
-    let param0, param1, first1, first0, s3, param01, cs, css, scrut, tmp, tmp1;
-    if (ls5 instanceof NofibPrelude.Nil.class) {
+  static combine(ls, acc) {
+    let param0, param1, first1, first0, s, param01, cs, css, scrut, tmp, tmp1;
+    if (ls instanceof NofibPrelude.Nil.class) {
       return acc
-    } else if (ls5 instanceof NofibPrelude.Cons.class) {
-      param0 = ls5.head;
-      param1 = ls5.tail;
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
-        s3 = first0;
+        s = first0;
         if (first1 instanceof constraints.Known.class) {
           param01 = first1.vs;
           cs = param01;
           css = param1;
-          tmp = constraints.maxLevel(s3);
+          tmp = constraints.maxLevel(s);
           scrut = NofibPrelude.notElem(tmp, cs);
           if (scrut === true) {
             return cs
@@ -10697,29 +10697,29 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static bj_(csp13, t7) {
-    return constraints.foldTree(f7_inst_87_88_tsni, t7)
+  static bj_(csp, t) {
+    return constraints.foldTree(f7_inst_87_88_tsni, t)
   } 
-  static bj(csp14, t8) {
-    return constraints.foldTree(f6_inst_89_90_tsni, t8)
+  static bj(csp, t) {
+    return constraints.foldTree(f6_inst_89_90_tsni, t)
   } 
-  static bjbt(csp15, t9) {
+  static bjbt(csp, t) {
     let tmp;
-    tmp = bt_inst_91_92_tsni(csp15, t9);
-    return bj_inst_91_93_tsni(csp15, tmp)
+    tmp = bt_inst_91_92_tsni(csp, t);
+    return bj_inst_91_93_tsni(csp, tmp)
   } 
-  static bjbt_(csp16, t10) {
+  static bjbt_(csp, t) {
     let tmp;
-    tmp = bt_inst_97_98_tsni(csp16, t10);
-    return bj__inst_97_99_tsni(csp16, tmp)
+    tmp = bt_inst_97_98_tsni(csp, t);
+    return bj__inst_97_99_tsni(csp, tmp)
   } 
-  static collect(ls6) {
+  static collect(ls) {
     let param0, param1, param01, cs, css, tmp;
-    if (ls6 instanceof NofibPrelude.Nil.class) {
+    if (ls instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (ls6 instanceof NofibPrelude.Cons.class) {
-      param0 = ls6.head;
-      param1 = ls6.tail;
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
       if (param0 instanceof constraints.Known.class) {
         param01 = param0.vs;
         cs = param01;
@@ -10733,63 +10733,63 @@ lambda = (undefined, function (f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static domainWipeout(csp17, t11) {
+  static domainWipeout(csp, t) {
     let param0, param1, param2, vars, vals, rel;
-    if (csp17 instanceof constraints.CSP.class) {
-      param0 = csp17.vars;
-      param1 = csp17.vals;
-      param2 = csp17.rel;
+    if (csp instanceof constraints.CSP.class) {
+      param0 = csp.vars;
+      param1 = csp.vals;
+      param2 = csp.rel;
       vars = param0;
       vals = param1;
       rel = param2;
-      return constraints.mapTree(f8, t11)
+      return constraints.mapTree(f8, t)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static fc(csp18, t12) {
+  static fc(csp, t) {
     let tmp, tmp1, tmp2;
-    tmp = emptyTable_inst_100_101_tsni(csp18);
-    tmp1 = cacheChecks_inst_100_102_tsni(csp18, tmp, t12);
-    tmp2 = lookupCache_inst_100_103_tsni(csp18, tmp1);
-    return domainWipeout_inst_100_132_tsni(csp18, tmp2)
+    tmp = emptyTable_inst_100_101_tsni(csp);
+    tmp1 = cacheChecks_inst_100_102_tsni(csp, tmp, t);
+    tmp2 = lookupCache_inst_100_103_tsni(csp, tmp1);
+    return domainWipeout_inst_100_132_tsni(csp, tmp2)
   } 
-  static try_(n5, algorithm) {
+  static try_(n, algorithm) {
     let tmp, tmp1;
-    tmp = constraints.queens(n5);
+    tmp = constraints.queens(n);
     tmp1 = search_inst_104_2_tsni(algorithm, tmp);
     return NofibPrelude.listLen(tmp1)
   } 
-  static testConstraints_nofib(n6) {
+  static testConstraints_nofib(n) {
     let tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
     _deforest_Cons_head4 = fc_inst_105_106_tsni;
-    _deforest_Cons_tail4 = (f11) => {
+    _deforest_Cons_tail4 = (f) => {
       return NofibPrelude.Nil
     };
-    tmp = (f11) => {
-      return match_xs_arm_Cons_inst_105_135_tsni(f11, _deforest_Cons_head4, _deforest_Cons_tail4)
+    tmp = (f) => {
+      return match_xs_arm_Cons_inst_105_135_tsni(f, _deforest_Cons_head4, _deforest_Cons_tail4)
     };
     _deforest_Cons_head3 = bjbt__inst_105_107_tsni;
     _deforest_Cons_tail3 = tmp;
-    tmp1 = (f11) => {
-      return match_xs_arm_Cons_inst_105_135_tsni(f11, _deforest_Cons_head3, _deforest_Cons_tail3)
+    tmp1 = (f) => {
+      return match_xs_arm_Cons_inst_105_135_tsni(f, _deforest_Cons_head3, _deforest_Cons_tail3)
     };
     _deforest_Cons_head2 = bjbt_inst_105_108_tsni;
     _deforest_Cons_tail2 = tmp1;
-    tmp2 = (f11) => {
-      return match_xs_arm_Cons_inst_105_135_tsni(f11, _deforest_Cons_head2, _deforest_Cons_tail2)
+    tmp2 = (f) => {
+      return match_xs_arm_Cons_inst_105_135_tsni(f, _deforest_Cons_head2, _deforest_Cons_tail2)
     };
     _deforest_Cons_head1 = bm_inst_105_109_tsni;
     _deforest_Cons_tail1 = tmp2;
-    tmp3 = (f11) => {
-      return match_xs_arm_Cons_inst_105_135_tsni(f11, _deforest_Cons_head1, _deforest_Cons_tail1)
+    tmp3 = (f) => {
+      return match_xs_arm_Cons_inst_105_135_tsni(f, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = bt_inst_105_110_tsni;
     _deforest_Cons_tail = tmp3;
-    tmp4 = (f11) => {
-      return match_xs_arm_Cons_inst_105_135_tsni(f11, _deforest_Cons_head, _deforest_Cons_tail)
+    tmp4 = (f) => {
+      return match_xs_arm_Cons_inst_105_135_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
     };
-    lambda$this = runtime.safeCall(lambda_inst_105_111_tsni(n6));
+    lambda$this = runtime.safeCall(lambda_inst_105_111_tsni(n));
     return map_inst_105_135_tsni(lambda$this, tmp4)
   } 
   static main() {

@@ -27485,8 +27485,8 @@ lambda = (undefined, function (x) {
       static [definitionMetadata] = ["object", "Unit"]; 
     };
     this.Unit = globalThis.Object.freeze(new Unit$class);
-    this.StateT = function StateT(run1) {
-      return globalThis.Object.freeze(new StateT.class(run1));
+    this.StateT = function StateT(run) {
+      return globalThis.Object.freeze(new StateT.class(run));
     };
     Object.defineProperty(this.StateT, "class", {
       enumerable: true,
@@ -27508,8 +27508,8 @@ lambda = (undefined, function (x) {
     });
     tmp = runtime.safeCall(cryptarithm2.StateT(lambda30));
     this.get = tmp;
-    this.Digits = function Digits(i1, c1) {
-      return globalThis.Object.freeze(new Digits.class(i1, c1));
+    this.Digits = function Digits(i, c) {
+      return globalThis.Object.freeze(new Digits.class(i, c));
     };
     Object.defineProperty(this.Digits, "class", {
       enumerable: true,
@@ -27557,8 +27557,8 @@ lambda = (undefined, function (x) {
   static delete_(xs, e) {
     return NofibPrelude.deleteBy(lambda1, e, xs)
   } 
-  static listDiff(a, ls1) {
-    return NofibPrelude.foldl(cryptarithm2.delete_, a, ls1)
+  static listDiff(a, ls) {
+    return NofibPrelude.foldl(cryptarithm2.delete_, a, ls)
   } 
   static runStateT(m, s) {
     let param0, run;
@@ -27570,31 +27570,31 @@ lambda = (undefined, function (x) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static bind(m1, f) {
+  static bind(m, f) {
     let tmp;
-    tmp = runtime.safeCall(lambda_inst_93_7_tsni(m1, f));
+    tmp = runtime.safeCall(lambda_inst_93_7_tsni(m, f));
     return runtime.safeCall(cryptarithm2.StateT(tmp))
   } 
-  static return_(a1) {
+  static return_(a) {
     let lambda$this;
-    lambda$this = runtime.safeCall(lambda4(a1));
+    lambda$this = runtime.safeCall(lambda4(a));
     return runtime.safeCall(cryptarithm2.StateT(lambda$this))
   } 
-  static mapM(f1, ls2) {
+  static mapM(f, ls) {
     let tmp, lambda$this;
     tmp = cryptarithm2.return_(NofibPrelude.Nil);
-    lambda$this = runtime.safeCall(lambda_inst_94_43_tsni(f1));
-    return NofibPrelude.foldr(lambda$this, tmp, ls2)
+    lambda$this = runtime.safeCall(lambda_inst_94_43_tsni(f));
+    return NofibPrelude.foldr(lambda$this, tmp, ls)
   } 
-  static lift(ls3) {
+  static lift(ls) {
     let lambda$this;
-    lambda$this = runtime.safeCall(lambda_inst_95_18_tsni(ls3));
+    lambda$this = runtime.safeCall(lambda_inst_95_18_tsni(ls));
     return runtime.safeCall(cryptarithm2.StateT(lambda$this))
   } 
-  static execStateT(m2, s1) {
+  static execStateT(m, s) {
     let tmp, tmp1, tmp2;
     tmp = lambda_inst_96_98_tsni;
-    tmp1 = cryptarithm2.runStateT(m2, s1);
+    tmp1 = cryptarithm2.runStateT(m, s);
     tmp2 = map_inst_96_97_tsni(tmp, tmp1);
     return concat_inst_96_105_tsni(tmp2)
   } 
@@ -27605,31 +27605,31 @@ lambda = (undefined, function (x) {
       return runtime.safeCall(cryptarithm2.StateT(lambda12))
     }
   } 
-  static put(s2) {
+  static put(s) {
     let lambda$this;
-    lambda$this = runtime.safeCall(lambda13(s2));
+    lambda$this = runtime.safeCall(lambda13(s));
     return runtime.safeCall(cryptarithm2.StateT(lambda$this))
   } 
   static digits(d) {
-    let param0, param1, a2, b1;
+    let param0, param1, a, b;
     if (d instanceof cryptarithm2.Digits.class) {
       param0 = d.i;
       param1 = d.c;
-      a2 = param0;
-      b1 = param1;
-      return a2
+      a = param0;
+      b = param1;
+      return a
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static digitEnv(d1) {
-    let param0, param1, a2, b1;
-    if (d1 instanceof cryptarithm2.Digits.class) {
-      param0 = d1.i;
-      param1 = d1.c;
-      a2 = param0;
-      b1 = param1;
-      return b1
+  static digitEnv(d) {
+    let param0, param1, a, b;
+    if (d instanceof cryptarithm2.Digits.class) {
+      param0 = d.i;
+      param1 = d.c;
+      a = param0;
+      b = param1;
+      return b
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -27639,21 +27639,21 @@ lambda = (undefined, function (x) {
     tmp = runtime.safeCall(lambda_inst_99_13_tsni(c));
     return bind_inst_99_39_tsni(cryptarithm2.get, tmp)
   } 
-  static select(c1) {
+  static select(c) {
     let tmp;
-    tmp = runtime.safeCall(lambda_inst_100_10_tsni(c1));
+    tmp = runtime.safeCall(lambda_inst_100_10_tsni(c));
     return bind_inst_100_6_tsni(cryptarithm2.get, tmp)
   } 
-  static rest(ls4) {
-    let param0, param1, x, xs1;
-    if (ls4 instanceof NofibPrelude.Nil.class) {
+  static rest(ls) {
+    let param0, param1, x, xs;
+    if (ls instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (ls4 instanceof NofibPrelude.Cons.class) {
-      param0 = ls4.head;
-      param1 = ls4.tail;
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
       x = param0;
-      xs1 = param1;
-      return xs1
+      xs = param1;
+      return xs
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }

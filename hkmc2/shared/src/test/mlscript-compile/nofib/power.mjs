@@ -10277,8 +10277,8 @@ lambda = (undefined, function () {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Pss"]; 
     };
-    this.Pc = function Pc(f1, s1) {
-      return globalThis.Object.freeze(new Pc.class(f1, s1));
+    this.Pc = function Pc(f, s) {
+      return globalThis.Object.freeze(new Pc.class(f, s));
     };
     Object.defineProperty(this.Pc, "class", {
       enumerable: true,
@@ -10342,19 +10342,19 @@ lambda = (undefined, function () {
       }
     }
   } 
-  static dotMult(c1, ps1) {
+  static dotMult(c, ps) {
     let tmp;
-    tmp = runtime.safeCall(lambda7(c1, ps1));
+    tmp = runtime.safeCall(lambda7(c, ps));
     return NofibPrelude.lazy(tmp)
   } 
-  static dotMultSndLz(c2, ps2) {
+  static dotMultSndLz(c, ps) {
     let tmp;
-    tmp = runtime.safeCall(lambda8(c2, ps2));
+    tmp = runtime.safeCall(lambda8(c, ps));
     return NofibPrelude.lazy(tmp)
   } 
-  static negatePs(ps3) {
+  static negatePs(ps) {
     let tmp;
-    tmp = runtime.safeCall(lambda9(ps3));
+    tmp = runtime.safeCall(lambda9(ps));
     return NofibPrelude.lazy(tmp)
   } 
   static addPs(fss, gs) {
@@ -10367,50 +10367,50 @@ lambda = (undefined, function () {
     tmp = power.negatePs(b);
     return power.addPs(a, tmp)
   } 
-  static multPs(fss1, gss) {
+  static multPs(fss, gss) {
     let tmp;
-    tmp = runtime.safeCall(lambda11(fss1, gss));
+    tmp = runtime.safeCall(lambda11(fss, gss));
     return NofibPrelude.lazy(tmp)
   } 
-  static multPsFstLz(fss2, gss1) {
+  static multPsFstLz(fss, gss) {
     let tmp;
-    tmp = runtime.safeCall(lambda12(fss2, gss1));
+    tmp = runtime.safeCall(lambda12(fss, gss));
     return NofibPrelude.lazy(tmp)
   } 
-  static powerPs(a1, n1) {
+  static powerPs(a, n) {
     let scrut, tmp, tmp1;
-    scrut = n1 <= 0;
+    scrut = n <= 0;
     if (scrut === true) {
       return power.fromIntegerPs(1)
     } else {
-      tmp = n1 - 1;
-      tmp1 = power.powerPs(a1, tmp);
-      return power.multPs(a1, tmp1)
+      tmp = n - 1;
+      tmp1 = power.powerPs(a, tmp);
+      return power.multPs(a, tmp1)
     }
   } 
-  static divPs(fss3, gss2) {
+  static divPs(fss, gss) {
     let tmp;
-    tmp = runtime.safeCall(lambda_inst_26_tsni(fss3, gss2));
+    tmp = runtime.safeCall(lambda_inst_26_tsni(fss, gss));
     return NofibPrelude.lazy(tmp)
   } 
-  static compose_(fss4, gss3) {
+  static compose_(fss, gss) {
     let tmp;
-    tmp = runtime.safeCall(lambda18(fss4, gss3));
+    tmp = runtime.safeCall(lambda18(fss, gss));
     return NofibPrelude.lazy(tmp)
   } 
-  static composeSndLz_(fss5, gss4) {
+  static composeSndLz_(fss, gss) {
     let tmp;
-    tmp = runtime.safeCall(lambda25(fss5, gss4));
+    tmp = runtime.safeCall(lambda25(fss, gss));
     return NofibPrelude.lazy(tmp)
   } 
-  static revert(fss6) {
+  static revert(fss) {
     let tmp;
-    tmp = runtime.safeCall(lambda_inst_27_28_tsni(fss6));
+    tmp = runtime.safeCall(lambda_inst_27_28_tsni(fss));
     return NofibPrelude.lazy(tmp)
   } 
-  static deriv(fss7) {
+  static deriv(fss) {
     let tmp;
-    tmp = runtime.safeCall(lambda36(fss7));
+    tmp = runtime.safeCall(lambda36(fss));
     return NofibPrelude.lazy(tmp)
   } 
   static integral(fs_) {
@@ -10418,14 +10418,14 @@ lambda = (undefined, function () {
     lambda$this = runtime.safeCall(lambda39(fs_));
     return NofibPrelude.lazy(lambda$this)
   } 
-  static integralLz(fs_1) {
+  static integralLz(fs_) {
     let tmp;
-    tmp = runtime.safeCall(lambda41(fs_1));
+    tmp = runtime.safeCall(lambda41(fs_));
     return NofibPrelude.lazy(tmp)
   } 
-  static sqrtPs(fss8) {
+  static sqrtPs(fss) {
     let tmp;
-    tmp = runtime.safeCall(lambda_inst_29_tsni(fss8));
+    tmp = runtime.safeCall(lambda_inst_29_tsni(fss));
     return NofibPrelude.lazy(tmp)
   } 
   static ts() {

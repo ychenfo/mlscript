@@ -5245,14 +5245,14 @@ lambda = (undefined, function (f, ls) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static cycle(xs1) {
+  static cycle(xs) {
     let tmp, lambda$this;
-    lambda$this = runtime.safeCall(lambda2(xs1));
+    lambda$this = runtime.safeCall(lambda2(xs));
     tmp = NofibPrelude.lazy(lambda$this);
-    return eliza.append_lz(xs1, tmp)
+    return eliza.append_lz(xs, tmp)
   } 
-  static isSpace(c1) {
-    return c1 === " "
+  static isSpace(c) {
+    return c === " "
   } 
   static words(s) {
     let scrut;
@@ -5274,9 +5274,9 @@ lambda = (undefined, function (f, ls) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static null_lz(ls1) {
+  static null_lz(ls) {
     let scrut, param0, param1, h, t;
-    scrut = NofibPrelude.force(ls1);
+    scrut = NofibPrelude.force(ls);
     if (scrut instanceof NofibPrelude.LzNil.class) {
       return true
     } else if (scrut instanceof NofibPrelude.LzCons.class) {
@@ -5289,9 +5289,9 @@ lambda = (undefined, function (f, ls) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static trim(ls2) {
+  static trim(ls) {
     let tmp;
-    tmp = NofibPrelude.leaveWhile(lambda3, ls2);
+    tmp = NofibPrelude.leaveWhile(lambda3, ls);
     return NofibPrelude.foldr(cons, NofibPrelude.Nil, tmp)
   } 
   static repeated(kt_rp) {
@@ -5321,11 +5321,11 @@ lambda = (undefined, function (f, ls) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static newKeyTab(kt_, kt_rp1) {
+  static newKeyTab(kt_, kt_rp) {
     let first1, first0, kt, rp, arr;
-    if (runtime.Tuple.isArrayLike(kt_rp1) && kt_rp1.length === 2) {
-      first0 = runtime.Tuple.get(kt_rp1, 0);
-      first1 = runtime.Tuple.get(kt_rp1, 1);
+    if (runtime.Tuple.isArrayLike(kt_rp) && kt_rp.length === 2) {
+      first0 = runtime.Tuple.get(kt_rp, 0);
+      first1 = runtime.Tuple.get(kt_rp, 1);
       kt = first0;
       rp = first1;
       arr = globalThis.Object.freeze([
@@ -5337,11 +5337,11 @@ lambda = (undefined, function (f, ls) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static keyTabOf(kt_rp2) {
+  static keyTabOf(kt_rp) {
     let first1, first0, kt, rp;
-    if (runtime.Tuple.isArrayLike(kt_rp2) && kt_rp2.length === 2) {
-      first0 = runtime.Tuple.get(kt_rp2, 0);
-      first1 = runtime.Tuple.get(kt_rp2, 1);
+    if (runtime.Tuple.isArrayLike(kt_rp) && kt_rp.length === 2) {
+      first0 = runtime.Tuple.get(kt_rp, 0);
+      first1 = runtime.Tuple.get(kt_rp, 1);
       kt = first0;
       rp = first1;
       return kt
@@ -5376,14 +5376,14 @@ lambda = (undefined, function (f, ls) {
     }
   } 
   static prefix(xxs, yys) {
-    let param0, param1, x, xs2, scrut, param01, param11, y, ys1, tmp, lambda$this;
+    let param0, param1, x, xs, scrut, param01, param11, y, ys, tmp, lambda$this;
     if (xxs instanceof NofibPrelude.Nil.class) {
       return true
     } else if (xxs instanceof NofibPrelude.Cons.class) {
       param0 = xxs.head;
       param1 = xxs.tail;
       x = param0;
-      xs2 = param1;
+      xs = param1;
       scrut = NofibPrelude.force(yys);
       if (scrut instanceof NofibPrelude.LzNil.class) {
         return false
@@ -5391,9 +5391,9 @@ lambda = (undefined, function (f, ls) {
         param01 = scrut.head;
         param11 = scrut.tail;
         y = param01;
-        ys1 = param11;
+        ys = param11;
         tmp = NofibPrelude.listEq(x, y);
-        lambda$this = runtime.safeCall(lambda4(xs2, ys1));
+        lambda$this = runtime.safeCall(lambda4(xs, ys));
         return runtime.short_and(tmp, lambda$this)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -5402,13 +5402,13 @@ lambda = (undefined, function (f, ls) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static tails(xs2) {
+  static tails(xs) {
     let tmp;
-    tmp = runtime.safeCall(lambda5(xs2));
+    tmp = runtime.safeCall(lambda5(xs));
     return NofibPrelude.lazy(tmp)
   } 
-  static ucase(ls3) {
-    return NofibPrelude.map(eliza.toUpper, ls3)
+  static ucase(ls) {
+    return NofibPrelude.map(eliza.toUpper, ls)
   } 
   static conjug(d, w) {
     let tmp, tmp1, tmp2;
@@ -5425,10 +5425,10 @@ lambda = (undefined, function (f, ls) {
     tmp2 = NofibPrelude.filter_lz(lambda$this, tmp1);
     return NofibPrelude.map_lz(tmp, tmp2)
   } 
-  static answer(st, l1) {
+  static answer(st, l) {
     let scrut, first1, first0, response, kt, tmp, tmp1, arr;
     tmp = eliza.keyTabOf(st);
-    scrut = ans_inst_39_9_tsni(tmp, l1);
+    scrut = ans_inst_39_9_tsni(tmp, l);
     if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
       first0 = runtime.Tuple.get(scrut, 0);
       first1 = runtime.Tuple.get(scrut, 1);
@@ -5444,23 +5444,23 @@ lambda = (undefined, function (f, ls) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static session(rs, prev, ls4) {
-    let param0, param1, l2, ls5, scrut, scrut1, tmp;
-    if (ls4 instanceof NofibPrelude.Nil.class) {
+  static session(rs, prev, ls) {
+    let param0, param1, l, ls1, scrut, scrut1, tmp;
+    if (ls instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (ls4 instanceof NofibPrelude.Cons.class) {
-      param0 = ls4.head;
-      param1 = ls4.tail;
-      l2 = param0;
-      ls5 = param1;
-      scrut = NofibPrelude.listEqBy(NofibPrelude.listEq, prev, l2);
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
+      l = param0;
+      ls1 = param1;
+      scrut = NofibPrelude.listEqBy(NofibPrelude.listEq, prev, l);
       if (scrut === true) {
         tmp = repeated_inst_40_23_tsni(rs);
       } else {
-        tmp = answer_inst_40_8_tsni(rs, l2);
+        tmp = answer_inst_40_8_tsni(rs, l);
       }
       scrut1 = tmp;
-      return runtime.safeCall(scrut1(l2, ls5))
+      return runtime.safeCall(scrut1(l, ls1))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }

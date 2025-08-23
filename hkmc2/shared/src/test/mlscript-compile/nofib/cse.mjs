@@ -1142,8 +1142,8 @@ lambda = (undefined, function (a) {
     });
     tmp = cse.update(lambda21);
     this.incr = tmp;
-    this.Node = function Node(a1, b1) {
-      return globalThis.Object.freeze(new Node.class(a1, b1));
+    this.Node = function Node(a, b) {
+      return globalThis.Object.freeze(new Node.class(a, b));
     };
     Object.defineProperty(this.Node, "class", {
       enumerable: true,
@@ -1235,29 +1235,29 @@ lambda = (undefined, function (a) {
   static bind(m, f) {
     return runtime.safeCall(lambda1(m, f))
   } 
-  static join(m1) {
-    return runtime.safeCall(lambda2(m1))
+  static join(m) {
+    return runtime.safeCall(lambda2(m))
   } 
-  static mmap(f1, m2) {
-    return runtime.safeCall(lambda3(f1, m2))
+  static mmap(f, m) {
+    return runtime.safeCall(lambda3(f, m))
   } 
-  static mmapl(f2, aas) {
-    let param0, param1, a1, as_, tmp, lambda$this;
+  static mmapl(f, aas) {
+    let param0, param1, a, as_, tmp, lambda$this;
     if (aas instanceof NofibPrelude.Nil.class) {
       return cse.retURN(NofibPrelude.Nil)
     } else if (aas instanceof NofibPrelude.Cons.class) {
       param0 = aas.head;
       param1 = aas.tail;
-      a1 = param0;
+      a = param0;
       as_ = param1;
-      tmp = runtime.safeCall(f2(a1));
-      lambda$this = runtime.safeCall(lambda4(f2, as_));
+      tmp = runtime.safeCall(f(a));
+      lambda$this = runtime.safeCall(lambda4(f, as_));
       return cse.bind(tmp, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static mmapr(f3, xs) {
+  static mmapr(f, xs) {
     let param0, param1, x, xs1, tmp, lambda$this;
     if (xs instanceof NofibPrelude.Nil.class) {
       return cse.retURN(NofibPrelude.Nil)
@@ -1266,53 +1266,53 @@ lambda = (undefined, function (a) {
       param1 = xs.tail;
       x = param0;
       xs1 = param1;
-      tmp = cse.mmapr(f3, xs1);
-      lambda$this = runtime.safeCall(lambda6(f3, x));
+      tmp = cse.mmapr(f, xs1);
+      lambda$this = runtime.safeCall(lambda6(f, x));
       return cse.bind(tmp, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static mfoldl(f4, a1, xs1) {
-    let param0, param1, x, xs2, tmp, lambda$this;
-    if (xs1 instanceof NofibPrelude.Nil.class) {
-      return cse.retURN(a1)
-    } else if (xs1 instanceof NofibPrelude.Cons.class) {
-      param0 = xs1.head;
-      param1 = xs1.tail;
+  static mfoldl(f, a, xs) {
+    let param0, param1, x, xs1, tmp, lambda$this;
+    if (xs instanceof NofibPrelude.Nil.class) {
+      return cse.retURN(a)
+    } else if (xs instanceof NofibPrelude.Cons.class) {
+      param0 = xs.head;
+      param1 = xs.tail;
       x = param0;
-      xs2 = param1;
-      tmp = runtime.safeCall(f4(a1, x));
-      lambda$this = runtime.safeCall(lambda8(f4, xs2));
+      xs1 = param1;
+      tmp = runtime.safeCall(f(a, x));
+      lambda$this = runtime.safeCall(lambda8(f, xs1));
       return cse.bind(tmp, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static mfoldr(f5, a2, xs2) {
-    let param0, param1, x, xs3, tmp, lambda$this;
-    if (xs2 instanceof NofibPrelude.Nil.class) {
-      return cse.retURN(a2)
-    } else if (xs2 instanceof NofibPrelude.Cons.class) {
-      param0 = xs2.head;
-      param1 = xs2.tail;
+  static mfoldr(f, a, xs) {
+    let param0, param1, x, xs1, tmp, lambda$this;
+    if (xs instanceof NofibPrelude.Nil.class) {
+      return cse.retURN(a)
+    } else if (xs instanceof NofibPrelude.Cons.class) {
+      param0 = xs.head;
+      param1 = xs.tail;
       x = param0;
-      xs3 = param1;
-      tmp = cse.mfoldr(f5, a2, xs3);
-      lambda$this = runtime.safeCall(lambda9(f5, x));
+      xs1 = param1;
+      tmp = cse.mfoldr(f, a, xs1);
+      lambda$this = runtime.safeCall(lambda9(f, x));
       return cse.bind(tmp, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static mif(c, t, f6) {
+  static mif(c, t, f) {
     let lambda$this;
-    lambda$this = runtime.safeCall(lambda10(t, f6));
+    lambda$this = runtime.safeCall(lambda10(t, f));
     return cse.bind(c, lambda$this)
   } 
-  static startingWith(m3, v) {
+  static startingWith(m, v) {
     let scrut, first1, first0, final1, answer;
-    scrut = runtime.safeCall(m3(v));
+    scrut = runtime.safeCall(m(v));
     if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
       first0 = runtime.Tuple.get(scrut, 0);
       first1 = runtime.Tuple.get(scrut, 1);
@@ -1331,38 +1331,38 @@ lambda = (undefined, function (a) {
     ]);
     return arr
   } 
-  static fetchWith(f7) {
-    return runtime.safeCall(lambda11(f7))
+  static fetchWith(f) {
+    return runtime.safeCall(lambda11(f))
   } 
-  static update(f8) {
-    return runtime.safeCall(lambda12(f8))
+  static update(f) {
+    return runtime.safeCall(lambda12(f))
   } 
   static set_(s_) {
     return runtime.safeCall(lambda13(s_))
   } 
-  static labelTree(t1) {
+  static labelTree(t) {
     let tmp;
-    tmp = label(t1);
+    tmp = label(t);
     return cse.startingWith(tmp, 0)
   } 
-  static ltGraph(t2) {
-    let param0, param1, first1, first0, n, x, xs3, tmp, arr, tmp1, tmp2;
-    if (t2 instanceof cse.Node.class) {
-      param0 = t2.a;
-      param1 = t2.b;
+  static ltGraph(t) {
+    let param0, param1, first1, first0, n, x, xs, tmp, arr, tmp1, tmp2;
+    if (t instanceof cse.Node.class) {
+      param0 = t.a;
+      param1 = t.b;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
         n = first0;
         x = first1;
-        xs3 = param1;
-        tmp = NofibPrelude.map(labelOf, xs3);
+        xs = param1;
+        tmp = NofibPrelude.map(labelOf, xs);
         arr = globalThis.Object.freeze([
           n,
           x,
           tmp
         ]);
-        tmp1 = map_inst_11_3_tsni(cse.ltGraph, xs3);
+        tmp1 = map_inst_11_3_tsni(cse.ltGraph, xs);
         tmp2 = concat_inst_11_21_tsni(tmp1);
         return NofibPrelude.Cons(arr, tmp2)
       } else {
@@ -1377,17 +1377,17 @@ lambda = (undefined, function (a) {
     tmp = runtime.safeCall(lambda_inst_12_13_tsni(n));
     return bind_inst_12_28_tsni(fetch_inst_12_14_tsni, tmp)
   } 
-  static newlyDefined(x, fx, f9, y) {
+  static newlyDefined(x, fx, f, y) {
     let scrut;
     scrut = x === y;
     if (scrut === true) {
       return fx
     } else {
-      return runtime.safeCall(f9(y))
+      return runtime.safeCall(f(y))
     }
   } 
   static findCommon(ls) {
-    let scrut, first1, first0, a3, b, arr, tmp;
+    let scrut, first1, first0, a, b, arr, tmp;
     arr = globalThis.Object.freeze([
       lambda19,
       NofibPrelude.Nil
@@ -1396,7 +1396,7 @@ lambda = (undefined, function (a) {
     if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
       first0 = runtime.Tuple.get(scrut, 0);
       first1 = runtime.Tuple.get(scrut, 1);
-      a3 = first0;
+      a = first0;
       b = first1;
       return b
     } else {
@@ -1404,31 +1404,31 @@ lambda = (undefined, function (a) {
       throw globalThis.Error(tmp)
     }
   } 
-  static cse(t3) {
+  static cse(t) {
     let tmp, tmp1;
-    tmp = cse.labelTree(t3);
+    tmp = cse.labelTree(t);
     tmp1 = ltGraph_inst_15_2_tsni(tmp);
     return cse.findCommon(tmp1)
   } 
-  static plus_(x1, y1) {
+  static plus_(x, y) {
     let tmp, tmp1;
-    tmp = NofibPrelude.Cons(y1, NofibPrelude.Nil);
-    tmp1 = NofibPrelude.Cons(x1, tmp);
+    tmp = NofibPrelude.Cons(y, NofibPrelude.Nil);
+    tmp1 = NofibPrelude.Cons(x, tmp);
     return cse.Node("+", tmp1)
   } 
-  static mult_(x2, y2) {
+  static mult_(x, y) {
     let tmp, tmp1;
-    tmp = NofibPrelude.Cons(y2, NofibPrelude.Nil);
-    tmp1 = NofibPrelude.Cons(x2, tmp);
+    tmp = NofibPrelude.Cons(y, NofibPrelude.Nil);
+    tmp1 = NofibPrelude.Cons(x, tmp);
     return cse.Node("*", tmp1)
   } 
-  static prod(xs3) {
-    return cse.Node("X", xs3)
+  static prod(xs) {
+    return cse.Node("X", xs)
   } 
-  static testCse_nofib(n1) {
+  static testCse_nofib(n) {
     let tmp, tmp1;
     tmp = lambda_inst_16_17_tsni;
-    tmp1 = enumFromTo_inst_16_18_tsni(1, n1);
+    tmp1 = enumFromTo_inst_16_18_tsni(1, n);
     return map_inst_16_29_tsni(tmp, tmp1)
   } 
   static main() {

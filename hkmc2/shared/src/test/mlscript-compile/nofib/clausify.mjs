@@ -1195,8 +1195,8 @@ lambda = (undefined, function (dq) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Formula"]; 
     };
-    this.Sym = function Sym(a1) {
-      return globalThis.Object.freeze(new Sym.class(a1));
+    this.Sym = function Sym(a) {
+      return globalThis.Object.freeze(new Sym.class(a));
     };
     Object.defineProperty(this.Sym, "class", {
       enumerable: true,
@@ -1209,8 +1209,8 @@ lambda = (undefined, function (dq) {
         static [definitionMetadata] = ["class", "Sym", ["a"]]; 
       }
     });
-    this.Not = function Not(a1) {
-      return globalThis.Object.freeze(new Not.class(a1));
+    this.Not = function Not(a) {
+      return globalThis.Object.freeze(new Not.class(a));
     };
     Object.defineProperty(this.Not, "class", {
       enumerable: true,
@@ -1223,8 +1223,8 @@ lambda = (undefined, function (dq) {
         static [definitionMetadata] = ["class", "Not", ["a"]]; 
       }
     });
-    this.Dis = function Dis(a1, b1) {
-      return globalThis.Object.freeze(new Dis.class(a1, b1));
+    this.Dis = function Dis(a, b) {
+      return globalThis.Object.freeze(new Dis.class(a, b));
     };
     Object.defineProperty(this.Dis, "class", {
       enumerable: true,
@@ -1238,8 +1238,8 @@ lambda = (undefined, function (dq) {
         static [definitionMetadata] = ["class", "Dis", ["a", "b"]]; 
       }
     });
-    this.Con = function Con(a1, b1) {
-      return globalThis.Object.freeze(new Con.class(a1, b1));
+    this.Con = function Con(a, b) {
+      return globalThis.Object.freeze(new Con.class(a, b));
     };
     Object.defineProperty(this.Con, "class", {
       enumerable: true,
@@ -1253,8 +1253,8 @@ lambda = (undefined, function (dq) {
         static [definitionMetadata] = ["class", "Con", ["a", "b"]]; 
       }
     });
-    this.Imp = function Imp(a1, b1) {
-      return globalThis.Object.freeze(new Imp.class(a1, b1));
+    this.Imp = function Imp(a, b) {
+      return globalThis.Object.freeze(new Imp.class(a, b));
     };
     Object.defineProperty(this.Imp, "class", {
       enumerable: true,
@@ -1268,8 +1268,8 @@ lambda = (undefined, function (dq) {
         static [definitionMetadata] = ["class", "Imp", ["a", "b"]]; 
       }
     });
-    this.Eqv = function Eqv(a1, b1) {
-      return globalThis.Object.freeze(new Eqv.class(a1, b1));
+    this.Eqv = function Eqv(a, b) {
+      return globalThis.Object.freeze(new Eqv.class(a, b));
     };
     Object.defineProperty(this.Eqv, "class", {
       enumerable: true,
@@ -1288,8 +1288,8 @@ lambda = (undefined, function (dq) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "StackFrame"]; 
     };
-    this.Ast = function Ast(f1) {
-      return globalThis.Object.freeze(new Ast.class(f1));
+    this.Ast = function Ast(f) {
+      return globalThis.Object.freeze(new Ast.class(f));
     };
     Object.defineProperty(this.Ast, "class", {
       enumerable: true,
@@ -1302,8 +1302,8 @@ lambda = (undefined, function (dq) {
         static [definitionMetadata] = ["class", "Ast", ["f"]]; 
       }
     });
-    this.Lex = function Lex(s1) {
-      return globalThis.Object.freeze(new Lex.class(s1));
+    this.Lex = function Lex(s) {
+      return globalThis.Object.freeze(new Lex.class(s));
     };
     Object.defineProperty(this.Lex, "class", {
       enumerable: true,
@@ -1320,14 +1320,14 @@ lambda = (undefined, function (dq) {
   static charLt(a, b) {
     return a < b
   } 
-  static charLeq(a1, b1) {
-    return a1 <= b1
+  static charLeq(a, b) {
+    return a <= b
   } 
-  static charGt(a2, b2) {
-    return a2 > b2
+  static charGt(a, b) {
+    return a > b
   } 
-  static charGeq(a3, b3) {
-    return a3 >= b3
+  static charGeq(a, b) {
+    return a >= b
   } 
   static insert(x, ys) {
     let param0, param1, y, ys1, scrut, scrut1, tmp, tmp1;
@@ -1355,27 +1355,27 @@ lambda = (undefined, function (dq) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static clauseHelper(p, x1) {
-    let param0, param01, s, first1, first0, c, a4, s1, c1, a5, param1, p1, q, tmp, tmp1, arr, tmp2, arr1;
+  static clauseHelper(p, x) {
+    let param0, param01, s, first1, first0, c, a, s1, c1, a1, param1, p1, q, tmp, tmp1, arr, tmp2, arr1;
     if (p instanceof clausify.Dis.class) {
       param0 = p.a;
       param1 = p.b;
       p1 = param0;
       q = param1;
-      tmp = clausify.clauseHelper(q, x1);
+      tmp = clausify.clauseHelper(q, x);
       return clausify.clauseHelper(p1, tmp)
     } else if (p instanceof clausify.Sym.class) {
       param0 = p.a;
       s1 = param0;
-      if (runtime.Tuple.isArrayLike(x1) && x1.length === 2) {
-        first0 = runtime.Tuple.get(x1, 0);
-        first1 = runtime.Tuple.get(x1, 1);
+      if (runtime.Tuple.isArrayLike(x) && x.length === 2) {
+        first0 = runtime.Tuple.get(x, 0);
+        first1 = runtime.Tuple.get(x, 1);
         c1 = first0;
-        a5 = first1;
+        a1 = first1;
         tmp1 = clausify.insert(s1, c1);
         arr = globalThis.Object.freeze([
           tmp1,
-          a5
+          a1
         ]);
         return arr
       } else {
@@ -1386,12 +1386,12 @@ lambda = (undefined, function (dq) {
       if (param0 instanceof clausify.Sym.class) {
         param01 = param0.a;
         s = param01;
-        if (runtime.Tuple.isArrayLike(x1) && x1.length === 2) {
-          first0 = runtime.Tuple.get(x1, 0);
-          first1 = runtime.Tuple.get(x1, 1);
+        if (runtime.Tuple.isArrayLike(x) && x.length === 2) {
+          first0 = runtime.Tuple.get(x, 0);
+          first1 = runtime.Tuple.get(x, 1);
           c = first0;
-          a4 = first1;
-          tmp2 = clausify.insert(s, a4);
+          a = first1;
+          tmp2 = clausify.insert(s, a);
           arr1 = globalThis.Object.freeze([
             c,
             tmp2
@@ -1407,56 +1407,56 @@ lambda = (undefined, function (dq) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static clause(p1) {
+  static clause(p) {
     let arr;
     arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       NofibPrelude.Nil
     ]);
-    return clausify.clauseHelper(p1, arr)
+    return clausify.clauseHelper(p, arr)
   } 
-  static conjunct(p2) {
+  static conjunct(p) {
     let param0, param1;
-    if (p2 instanceof clausify.Con.class) {
-      param0 = p2.a;
-      param1 = p2.b;
+    if (p instanceof clausify.Con.class) {
+      param0 = p.a;
+      param1 = p.b;
       return true
     } else {
       return false
     }
   } 
-  static disin(p3) {
-    let param0, param1, p4, q, p5, q1, dp, dq, scrut, param01, param11, p6, q2, r, p7, param02, param12, q3, r1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, lambda$this;
-    if (p3 instanceof clausify.Dis.class) {
-      param0 = p3.a;
-      param1 = p3.b;
-      p7 = param0;
+  static disin(p) {
+    let param0, param1, p1, q, p2, q1, dp, dq, scrut, param01, param11, p3, q2, r, p4, param02, param12, q3, r1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, lambda$this;
+    if (p instanceof clausify.Dis.class) {
+      param0 = p.a;
+      param1 = p.b;
+      p4 = param0;
       if (param1 instanceof clausify.Con.class) {
         param02 = param1.a;
         param12 = param1.b;
         q3 = param02;
         r1 = param12;
-        tmp = clausify.Dis(p7, q3);
+        tmp = clausify.Dis(p4, q3);
         tmp1 = clausify.disin(tmp);
-        tmp2 = clausify.Dis(p7, r1);
+        tmp2 = clausify.Dis(p4, r1);
         tmp3 = clausify.disin(tmp2);
         return clausify.Con(tmp1, tmp3)
       } else {
         if (param0 instanceof clausify.Con.class) {
           param01 = param0.a;
           param11 = param0.b;
-          p6 = param01;
+          p3 = param01;
           q2 = param11;
           r = param1;
-          tmp4 = clausify.Dis(p6, r);
+          tmp4 = clausify.Dis(p3, r);
           tmp5 = clausify.disin(tmp4);
           tmp6 = clausify.Dis(q2, r);
           tmp7 = clausify.disin(tmp6);
           return clausify.Con(tmp5, tmp7)
         } else {
-          p5 = param0;
+          p2 = param0;
           q1 = param1;
-          tmp8 = clausify.disin(p5);
+          tmp8 = clausify.disin(p2);
           dp = tmp8;
           tmp9 = clausify.disin(q1);
           dq = tmp9;
@@ -1471,57 +1471,57 @@ lambda = (undefined, function (dq) {
           }
         }
       }
-    } else if (p3 instanceof clausify.Con.class) {
-      param0 = p3.a;
-      param1 = p3.b;
-      p4 = param0;
+    } else if (p instanceof clausify.Con.class) {
+      param0 = p.a;
+      param1 = p.b;
+      p1 = param0;
       q = param1;
-      tmp12 = clausify.disin(p4);
+      tmp12 = clausify.disin(p1);
       tmp13 = clausify.disin(q);
       return clausify.Con(tmp12, tmp13)
     } else {
-      return p3
+      return p
     }
   } 
-  static elim(p4) {
-    let param0, param1, f, f_, p5, q, p6, q1, p7, q2, p8, s, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11;
-    if (p4 instanceof clausify.Sym.class) {
-      param0 = p4.a;
+  static elim(p) {
+    let param0, param1, f, f_, p1, q, p2, q1, p3, q2, p4, s, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11;
+    if (p instanceof clausify.Sym.class) {
+      param0 = p.a;
       s = param0;
       return runtime.safeCall(clausify.Sym(s))
-    } else if (p4 instanceof clausify.Not.class) {
-      param0 = p4.a;
-      p8 = param0;
-      tmp = clausify.elim(p8);
+    } else if (p instanceof clausify.Not.class) {
+      param0 = p.a;
+      p4 = param0;
+      tmp = clausify.elim(p4);
       return runtime.safeCall(clausify.Not(tmp))
-    } else if (p4 instanceof clausify.Dis.class) {
-      param0 = p4.a;
-      param1 = p4.b;
-      p7 = param0;
+    } else if (p instanceof clausify.Dis.class) {
+      param0 = p.a;
+      param1 = p.b;
+      p3 = param0;
       q2 = param1;
-      tmp1 = clausify.elim(p7);
+      tmp1 = clausify.elim(p3);
       tmp2 = clausify.elim(q2);
       return clausify.Dis(tmp1, tmp2)
-    } else if (p4 instanceof clausify.Con.class) {
-      param0 = p4.a;
-      param1 = p4.b;
-      p6 = param0;
+    } else if (p instanceof clausify.Con.class) {
+      param0 = p.a;
+      param1 = p.b;
+      p2 = param0;
       q1 = param1;
-      tmp3 = clausify.elim(p6);
+      tmp3 = clausify.elim(p2);
       tmp4 = clausify.elim(q1);
       return clausify.Con(tmp3, tmp4)
-    } else if (p4 instanceof clausify.Imp.class) {
-      param0 = p4.a;
-      param1 = p4.b;
-      p5 = param0;
+    } else if (p instanceof clausify.Imp.class) {
+      param0 = p.a;
+      param1 = p.b;
+      p1 = param0;
       q = param1;
-      tmp5 = clausify.elim(p5);
+      tmp5 = clausify.elim(p1);
       tmp6 = runtime.safeCall(clausify.Not(tmp5));
       tmp7 = clausify.elim(q);
       return clausify.Dis(tmp6, tmp7)
-    } else if (p4 instanceof clausify.Eqv.class) {
-      param0 = p4.a;
-      param1 = p4.b;
+    } else if (p instanceof clausify.Eqv.class) {
+      param0 = p.a;
+      param1 = p.b;
       f = param0;
       f_ = param1;
       tmp8 = clausify.Imp(f, f_);
@@ -1533,35 +1533,35 @@ lambda = (undefined, function (dq) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static interleave(xs, ys1) {
-    let param0, param1, x2, xs1, tmp;
+  static interleave(xs, ys) {
+    let param0, param1, x, xs1, tmp;
     if (xs instanceof NofibPrelude.Cons.class) {
       param0 = xs.head;
       param1 = xs.tail;
-      x2 = param0;
+      x = param0;
       xs1 = param1;
-      tmp = clausify.interleave(ys1, xs1);
-      return NofibPrelude.Cons(x2, tmp)
+      tmp = clausify.interleave(ys, xs1);
+      return NofibPrelude.Cons(x, tmp)
     } else if (xs instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static negin(p5) {
-    let param0, param1, p6, q, p7, q1, param01, param11, p8, q2, p9, q3, p10, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11;
-    if (p5 instanceof clausify.Not.class) {
-      param0 = p5.a;
+  static negin(p) {
+    let param0, param1, p1, q, p2, q1, param01, param11, p3, q2, p4, q3, p5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11;
+    if (p instanceof clausify.Not.class) {
+      param0 = p.a;
       if (param0 instanceof clausify.Not.class) {
         param01 = param0.a;
-        p10 = param01;
-        return clausify.negin(p10)
+        p5 = param01;
+        return clausify.negin(p5)
       } else if (param0 instanceof clausify.Con.class) {
         param01 = param0.a;
         param11 = param0.b;
-        p9 = param01;
+        p4 = param01;
         q3 = param11;
-        tmp = runtime.safeCall(clausify.Not(p9));
+        tmp = runtime.safeCall(clausify.Not(p4));
         tmp1 = clausify.negin(tmp);
         tmp2 = runtime.safeCall(clausify.Not(q3));
         tmp3 = clausify.negin(tmp2);
@@ -1569,34 +1569,34 @@ lambda = (undefined, function (dq) {
       } else if (param0 instanceof clausify.Dis.class) {
         param01 = param0.a;
         param11 = param0.b;
-        p8 = param01;
+        p3 = param01;
         q2 = param11;
-        tmp4 = runtime.safeCall(clausify.Not(p8));
+        tmp4 = runtime.safeCall(clausify.Not(p3));
         tmp5 = clausify.negin(tmp4);
         tmp6 = runtime.safeCall(clausify.Not(q2));
         tmp7 = clausify.negin(tmp6);
         return clausify.Con(tmp5, tmp7)
       } else {
-        return p5
+        return p
       }
-    } else if (p5 instanceof clausify.Dis.class) {
-      param0 = p5.a;
-      param1 = p5.b;
-      p7 = param0;
+    } else if (p instanceof clausify.Dis.class) {
+      param0 = p.a;
+      param1 = p.b;
+      p2 = param0;
       q1 = param1;
-      tmp8 = clausify.negin(p7);
+      tmp8 = clausify.negin(p2);
       tmp9 = clausify.negin(q1);
       return clausify.Dis(tmp8, tmp9)
-    } else if (p5 instanceof clausify.Con.class) {
-      param0 = p5.a;
-      param1 = p5.b;
-      p6 = param0;
+    } else if (p instanceof clausify.Con.class) {
+      param0 = p.a;
+      param1 = p.b;
+      p1 = param0;
       q = param1;
-      tmp10 = clausify.negin(p6);
+      tmp10 = clausify.negin(p1);
       tmp11 = clausify.negin(q);
       return clausify.Con(tmp10, tmp11)
     } else {
-      return p5
+      return p
     }
   } 
   static opri(c) {
@@ -1634,22 +1634,22 @@ lambda = (undefined, function (dq) {
     }
   } 
   static red(s) {
-    let param0, param1, param01, p6, param02, param11, param03, s1, p7, param04, param12, param05, q, s2, p8, q1, s3, p9, q2, s4, p10, q3, s5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
+    let param0, param1, param01, p, param02, param11, param03, s1, p1, param04, param12, param05, q, s2, p2, q1, s3, p3, q2, s4, p4, q3, s5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
     if (s instanceof NofibPrelude.Cons.class) {
       param0 = s.head;
       param1 = s.tail;
       if (param0 instanceof clausify.Ast.class) {
         param01 = param0.f;
-        p10 = param01;
+        p4 = param01;
         if (param1 instanceof NofibPrelude.Cons.class) {
           param02 = param1.head;
           param11 = param1.tail;
           if (param02 instanceof clausify.Lex.class) {
             param03 = param02.s;
-            p9 = param01;
-            p8 = param01;
-            p7 = param01;
-            p6 = param01;
+            p3 = param01;
+            p2 = param01;
+            p1 = param01;
+            p = param01;
             if (param03 === "=") {
               if (param11 instanceof NofibPrelude.Cons.class) {
                 param04 = param11.head;
@@ -1658,21 +1658,21 @@ lambda = (undefined, function (dq) {
                   param05 = param04.f;
                   q3 = param05;
                   s5 = param12;
-                  tmp = clausify.Eqv(q3, p10);
+                  tmp = clausify.Eqv(q3, p4);
                   tmp1 = runtime.safeCall(clausify.Ast(tmp));
                   return NofibPrelude.Cons(tmp1, s5)
                 } else {
-                  p9 = param01;
-                  p8 = param01;
-                  p7 = param01;
-                  p6 = param01;
+                  p3 = param01;
+                  p2 = param01;
+                  p1 = param01;
+                  p = param01;
                   throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
-                p9 = param01;
-                p8 = param01;
-                p7 = param01;
-                p6 = param01;
+                p3 = param01;
+                p2 = param01;
+                p1 = param01;
+                p = param01;
                 throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else if (param03 === ">") {
@@ -1683,19 +1683,19 @@ lambda = (undefined, function (dq) {
                   param05 = param04.f;
                   q2 = param05;
                   s4 = param12;
-                  tmp2 = clausify.Imp(q2, p9);
+                  tmp2 = clausify.Imp(q2, p3);
                   tmp3 = runtime.safeCall(clausify.Ast(tmp2));
                   return NofibPrelude.Cons(tmp3, s4)
                 } else {
-                  p8 = param01;
-                  p7 = param01;
-                  p6 = param01;
+                  p2 = param01;
+                  p1 = param01;
+                  p = param01;
                   throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
-                p8 = param01;
-                p7 = param01;
-                p6 = param01;
+                p2 = param01;
+                p1 = param01;
+                p = param01;
                 throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else if (param03 === "|") {
@@ -1706,17 +1706,17 @@ lambda = (undefined, function (dq) {
                   param05 = param04.f;
                   q1 = param05;
                   s3 = param12;
-                  tmp4 = clausify.Dis(q1, p8);
+                  tmp4 = clausify.Dis(q1, p2);
                   tmp5 = runtime.safeCall(clausify.Ast(tmp4));
                   return NofibPrelude.Cons(tmp5, s3)
                 } else {
-                  p7 = param01;
-                  p6 = param01;
+                  p1 = param01;
+                  p = param01;
                   throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
-                p7 = param01;
-                p6 = param01;
+                p1 = param01;
+                p = param01;
                 throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else if (param03 === "&") {
@@ -1727,37 +1727,37 @@ lambda = (undefined, function (dq) {
                   param05 = param04.f;
                   q = param05;
                   s2 = param12;
-                  tmp6 = clausify.Con(q, p7);
+                  tmp6 = clausify.Con(q, p1);
                   tmp7 = runtime.safeCall(clausify.Ast(tmp6));
                   return NofibPrelude.Cons(tmp7, s2)
                 } else {
-                  p6 = param01;
+                  p = param01;
                   throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
               } else {
-                p6 = param01;
+                p = param01;
                 throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
             } else if (param03 === "~") {
               s1 = param11;
-              tmp8 = runtime.safeCall(clausify.Not(p6));
+              tmp8 = runtime.safeCall(clausify.Not(p));
               tmp9 = runtime.safeCall(clausify.Ast(tmp8));
               return NofibPrelude.Cons(tmp9, s1)
             } else {
               throw globalThis.Object.freeze(new globalThis.Error("match error"))
             }
           } else {
-            p9 = param01;
-            p8 = param01;
-            p7 = param01;
-            p6 = param01;
+            p3 = param01;
+            p2 = param01;
+            p1 = param01;
+            p = param01;
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
         } else {
-          p9 = param01;
-          p8 = param01;
-          p7 = param01;
-          p6 = param01;
+          p3 = param01;
+          p2 = param01;
+          p1 = param01;
+          p = param01;
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
@@ -1767,22 +1767,22 @@ lambda = (undefined, function (dq) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static spri(s1) {
-    let param0, param1, param01, x2, param02, param11, param03, c1, s2;
-    if (s1 instanceof NofibPrelude.Cons.class) {
-      param0 = s1.head;
-      param1 = s1.tail;
+  static spri(s) {
+    let param0, param1, param01, x, param02, param11, param03, c, s1;
+    if (s instanceof NofibPrelude.Cons.class) {
+      param0 = s.head;
+      param1 = s.tail;
       if (param0 instanceof clausify.Ast.class) {
         param01 = param0.f;
-        x2 = param01;
+        x = param01;
         if (param1 instanceof NofibPrelude.Cons.class) {
           param02 = param1.head;
           param11 = param1.tail;
           if (param02 instanceof clausify.Lex.class) {
             param03 = param02.s;
-            c1 = param03;
-            s2 = param11;
-            return clausify.opri(c1)
+            c = param03;
+            s1 = param11;
+            return clausify.opri(c)
           } else {
             return 0
           }
@@ -1796,34 +1796,34 @@ lambda = (undefined, function (dq) {
       return 0
     }
   } 
-  static redstar(s2) {
-    return NofibPrelude.while_(lambda1, clausify.red, s2)
+  static redstar(s) {
+    return NofibPrelude.while_(lambda1, clausify.red, s)
   } 
   static spaces(n) {
     return NofibPrelude.replicate(n, " ")
   } 
-  static parseHelper(t, s3) {
-    let param0, param1, c1, t1, scrut, scrut1, t2, scrut2, param01, param11, x2, param02, param12, param03, ss, t3, t4, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
+  static parseHelper(t, s) {
+    let param0, param1, c, t1, scrut, scrut1, t2, scrut2, param01, param11, x, param02, param12, param03, ss, t3, t4, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
     if (t instanceof NofibPrelude.Nil.class) {
-      return clausify.redstar(s3)
+      return clausify.redstar(s)
     } else if (t instanceof NofibPrelude.Cons.class) {
       param0 = t.head;
       param1 = t.tail;
       if (param0 === " ") {
         t4 = param1;
-        return clausify.parseHelper(t4, s3)
+        return clausify.parseHelper(t4, s)
       } else if (param0 === "(") {
         t3 = param1;
         tmp = runtime.safeCall(clausify.Lex("("));
-        tmp1 = NofibPrelude.Cons(tmp, s3);
+        tmp1 = NofibPrelude.Cons(tmp, s);
         return clausify.parseHelper(t3, tmp1)
       } else if (param0 === ")") {
         t2 = param1;
-        scrut2 = clausify.redstar(s3);
+        scrut2 = clausify.redstar(s);
         if (scrut2 instanceof NofibPrelude.Cons.class) {
           param01 = scrut2.head;
           param11 = scrut2.tail;
-          x2 = param01;
+          x = param01;
           if (param11 instanceof NofibPrelude.Cons.class) {
             param02 = param11.head;
             param12 = param11.tail;
@@ -1831,134 +1831,134 @@ lambda = (undefined, function (dq) {
               param03 = param02.s;
               if (param03 === "(") {
                 ss = param12;
-                tmp2 = NofibPrelude.Cons(x2, ss);
+                tmp2 = NofibPrelude.Cons(x, ss);
                 return clausify.parseHelper(t2, tmp2)
               } else {
-                c1 = param0;
+                c = param0;
                 t1 = param1;
-                tmp3 = clausify.charLeq("a", c1);
-                lambda$this = runtime.safeCall(lambda2(c1));
+                tmp3 = clausify.charLeq("a", c);
+                lambda$this = runtime.safeCall(lambda2(c));
                 scrut1 = runtime.short_and(tmp3, lambda$this);
                 if (scrut1 === true) {
-                  tmp4 = runtime.safeCall(clausify.Sym(c1));
+                  tmp4 = runtime.safeCall(clausify.Sym(c));
                   tmp5 = runtime.safeCall(clausify.Ast(tmp4));
-                  tmp6 = NofibPrelude.Cons(tmp5, s3);
+                  tmp6 = NofibPrelude.Cons(tmp5, s);
                   return clausify.parseHelper(t1, tmp6)
                 } else {
-                  tmp7 = clausify.spri(s3);
-                  tmp8 = clausify.opri(c1);
+                  tmp7 = clausify.spri(s);
+                  tmp8 = clausify.opri(c);
                   scrut = tmp7 > tmp8;
                   if (scrut === true) {
-                    tmp9 = NofibPrelude.Cons(c1, t1);
-                    tmp10 = clausify.red(s3);
+                    tmp9 = NofibPrelude.Cons(c, t1);
+                    tmp10 = clausify.red(s);
                     return clausify.parseHelper(tmp9, tmp10)
                   } else {
-                    tmp11 = runtime.safeCall(clausify.Lex(c1));
-                    tmp12 = NofibPrelude.Cons(tmp11, s3);
+                    tmp11 = runtime.safeCall(clausify.Lex(c));
+                    tmp12 = NofibPrelude.Cons(tmp11, s);
                     return clausify.parseHelper(t1, tmp12)
                   }
                 }
               }
             } else {
-              c1 = param0;
+              c = param0;
               t1 = param1;
-              tmp13 = clausify.charLeq("a", c1);
-              lambda$this1 = runtime.safeCall(lambda3(c1));
+              tmp13 = clausify.charLeq("a", c);
+              lambda$this1 = runtime.safeCall(lambda3(c));
               scrut1 = runtime.short_and(tmp13, lambda$this1);
               if (scrut1 === true) {
-                tmp14 = runtime.safeCall(clausify.Sym(c1));
+                tmp14 = runtime.safeCall(clausify.Sym(c));
                 tmp15 = runtime.safeCall(clausify.Ast(tmp14));
-                tmp16 = NofibPrelude.Cons(tmp15, s3);
+                tmp16 = NofibPrelude.Cons(tmp15, s);
                 return clausify.parseHelper(t1, tmp16)
               } else {
-                tmp17 = clausify.spri(s3);
-                tmp18 = clausify.opri(c1);
+                tmp17 = clausify.spri(s);
+                tmp18 = clausify.opri(c);
                 scrut = tmp17 > tmp18;
                 if (scrut === true) {
-                  tmp19 = NofibPrelude.Cons(c1, t1);
-                  tmp20 = clausify.red(s3);
+                  tmp19 = NofibPrelude.Cons(c, t1);
+                  tmp20 = clausify.red(s);
                   return clausify.parseHelper(tmp19, tmp20)
                 } else {
-                  tmp21 = runtime.safeCall(clausify.Lex(c1));
-                  tmp22 = NofibPrelude.Cons(tmp21, s3);
+                  tmp21 = runtime.safeCall(clausify.Lex(c));
+                  tmp22 = NofibPrelude.Cons(tmp21, s);
                   return clausify.parseHelper(t1, tmp22)
                 }
               }
             }
           } else {
-            c1 = param0;
+            c = param0;
             t1 = param1;
-            tmp23 = clausify.charLeq("a", c1);
-            lambda$this2 = runtime.safeCall(lambda4(c1));
+            tmp23 = clausify.charLeq("a", c);
+            lambda$this2 = runtime.safeCall(lambda4(c));
             scrut1 = runtime.short_and(tmp23, lambda$this2);
             if (scrut1 === true) {
-              tmp24 = runtime.safeCall(clausify.Sym(c1));
+              tmp24 = runtime.safeCall(clausify.Sym(c));
               tmp25 = runtime.safeCall(clausify.Ast(tmp24));
-              tmp26 = NofibPrelude.Cons(tmp25, s3);
+              tmp26 = NofibPrelude.Cons(tmp25, s);
               return clausify.parseHelper(t1, tmp26)
             } else {
-              tmp27 = clausify.spri(s3);
-              tmp28 = clausify.opri(c1);
+              tmp27 = clausify.spri(s);
+              tmp28 = clausify.opri(c);
               scrut = tmp27 > tmp28;
               if (scrut === true) {
-                tmp29 = NofibPrelude.Cons(c1, t1);
-                tmp30 = clausify.red(s3);
+                tmp29 = NofibPrelude.Cons(c, t1);
+                tmp30 = clausify.red(s);
                 return clausify.parseHelper(tmp29, tmp30)
               } else {
-                tmp31 = runtime.safeCall(clausify.Lex(c1));
-                tmp32 = NofibPrelude.Cons(tmp31, s3);
+                tmp31 = runtime.safeCall(clausify.Lex(c));
+                tmp32 = NofibPrelude.Cons(tmp31, s);
                 return clausify.parseHelper(t1, tmp32)
               }
             }
           }
         } else {
-          c1 = param0;
+          c = param0;
           t1 = param1;
-          tmp33 = clausify.charLeq("a", c1);
-          lambda$this3 = runtime.safeCall(lambda5(c1));
+          tmp33 = clausify.charLeq("a", c);
+          lambda$this3 = runtime.safeCall(lambda5(c));
           scrut1 = runtime.short_and(tmp33, lambda$this3);
           if (scrut1 === true) {
-            tmp34 = runtime.safeCall(clausify.Sym(c1));
+            tmp34 = runtime.safeCall(clausify.Sym(c));
             tmp35 = runtime.safeCall(clausify.Ast(tmp34));
-            tmp36 = NofibPrelude.Cons(tmp35, s3);
+            tmp36 = NofibPrelude.Cons(tmp35, s);
             return clausify.parseHelper(t1, tmp36)
           } else {
-            tmp37 = clausify.spri(s3);
-            tmp38 = clausify.opri(c1);
+            tmp37 = clausify.spri(s);
+            tmp38 = clausify.opri(c);
             scrut = tmp37 > tmp38;
             if (scrut === true) {
-              tmp39 = NofibPrelude.Cons(c1, t1);
-              tmp40 = clausify.red(s3);
+              tmp39 = NofibPrelude.Cons(c, t1);
+              tmp40 = clausify.red(s);
               return clausify.parseHelper(tmp39, tmp40)
             } else {
-              tmp41 = runtime.safeCall(clausify.Lex(c1));
-              tmp42 = NofibPrelude.Cons(tmp41, s3);
+              tmp41 = runtime.safeCall(clausify.Lex(c));
+              tmp42 = NofibPrelude.Cons(tmp41, s);
               return clausify.parseHelper(t1, tmp42)
             }
           }
         }
       } else {
-        c1 = param0;
+        c = param0;
         t1 = param1;
-        tmp43 = clausify.charLeq("a", c1);
-        lambda$this4 = runtime.safeCall(lambda6(c1));
+        tmp43 = clausify.charLeq("a", c);
+        lambda$this4 = runtime.safeCall(lambda6(c));
         scrut1 = runtime.short_and(tmp43, lambda$this4);
         if (scrut1 === true) {
-          tmp44 = runtime.safeCall(clausify.Sym(c1));
+          tmp44 = runtime.safeCall(clausify.Sym(c));
           tmp45 = runtime.safeCall(clausify.Ast(tmp44));
-          tmp46 = NofibPrelude.Cons(tmp45, s3);
+          tmp46 = NofibPrelude.Cons(tmp45, s);
           return clausify.parseHelper(t1, tmp46)
         } else {
-          tmp47 = clausify.spri(s3);
-          tmp48 = clausify.opri(c1);
+          tmp47 = clausify.spri(s);
+          tmp48 = clausify.opri(c);
           scrut = tmp47 > tmp48;
           if (scrut === true) {
-            tmp49 = NofibPrelude.Cons(c1, t1);
-            tmp50 = clausify.red(s3);
+            tmp49 = NofibPrelude.Cons(c, t1);
+            tmp50 = clausify.red(s);
             return clausify.parseHelper(tmp49, tmp50)
           } else {
-            tmp51 = runtime.safeCall(clausify.Lex(c1));
-            tmp52 = NofibPrelude.Cons(tmp51, s3);
+            tmp51 = runtime.safeCall(clausify.Lex(c));
+            tmp52 = NofibPrelude.Cons(tmp51, s);
             return clausify.parseHelper(t1, tmp52)
           }
         }
@@ -1967,9 +1967,9 @@ lambda = (undefined, function (dq) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static parse(t1) {
+  static parse(t) {
     let scrut, param0, param1, param01, f;
-    scrut = clausify.parseHelper(t1, NofibPrelude.Nil);
+    scrut = clausify.parseHelper(t, NofibPrelude.Nil);
     if (scrut instanceof NofibPrelude.Cons.class) {
       param0 = scrut.head;
       param1 = scrut.tail;
@@ -1988,48 +1988,48 @@ lambda = (undefined, function (dq) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static splitHelper(p6, a4) {
-    let param0, param1, p7, q, tmp;
-    if (p6 instanceof clausify.Con.class) {
-      param0 = p6.a;
-      param1 = p6.b;
-      p7 = param0;
+  static splitHelper(p, a) {
+    let param0, param1, p1, q, tmp;
+    if (p instanceof clausify.Con.class) {
+      param0 = p.a;
+      param1 = p.b;
+      p1 = param0;
       q = param1;
-      tmp = clausify.splitHelper(q, a4);
-      return clausify.splitHelper(p7, tmp)
+      tmp = clausify.splitHelper(q, a);
+      return clausify.splitHelper(p1, tmp)
     } else {
-      return NofibPrelude.Cons(p6, a4)
+      return NofibPrelude.Cons(p, a)
     }
   } 
-  static split(p7) {
-    return clausify.splitHelper(p7, NofibPrelude.Nil)
+  static split(p) {
+    return clausify.splitHelper(p, NofibPrelude.Nil)
   } 
   static tautclause(c_a) {
-    let first1, first0, c1, a5, tmp;
+    let first1, first0, c, a, tmp;
     if (runtime.Tuple.isArrayLike(c_a) && c_a.length === 2) {
       first0 = runtime.Tuple.get(c_a, 0);
       first1 = runtime.Tuple.get(c_a, 1);
-      c1 = first0;
-      a5 = first1;
-      tmp = lscomp$_inst_0_1_tsni(a5, c1);
+      c = first0;
+      a = first1;
+      tmp = lscomp$_inst_0_1_tsni(a, c);
       return listNeq_inst_0_24_tsni(tmp, NofibPrelude.Nil)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static uniclHelper(p8, x2) {
+  static uniclHelper(p, x) {
     let cp, scrut, tmp;
-    tmp = clausify.clause(p8);
+    tmp = clausify.clause(p);
     cp = tmp;
     scrut = tautclause_inst_2_3_tsni(cp);
     if (scrut === true) {
-      return x2
+      return x
     } else {
-      return clausify.insert(cp, x2)
+      return clausify.insert(cp, x)
     }
   } 
-  static unicl(a5) {
-    return NofibPrelude.foldr(uniclHelper_inst_4_5_tsni, NofibPrelude.Nil, a5)
+  static unicl(a) {
+    return NofibPrelude.foldr(uniclHelper_inst_4_5_tsni, NofibPrelude.Nil, a)
   } 
   static disp(l_r) {
     let first1, first0, l, r, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
@@ -2053,9 +2053,9 @@ lambda = (undefined, function (dq) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static clauses(t2) {
+  static clauses(t) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
-    tmp = clausify.parse(t2);
+    tmp = clausify.parse(t);
     tmp1 = clausify.elim(tmp);
     tmp2 = clausify.negin(tmp1);
     tmp3 = clausify.disin(tmp2);
@@ -2064,12 +2064,12 @@ lambda = (undefined, function (dq) {
     tmp6 = map_inst_9_14_tsni(disp_inst_9_13_tsni, tmp5);
     return concat_inst_9_19_tsni(tmp6)
   } 
-  static testClausify_nofib(n1) {
-    let xs1, tmp, tmp1, tmp2;
+  static testClausify_nofib(n) {
+    let xs, tmp, tmp1, tmp2;
     tmp = NofibPrelude.nofibStringToList("a = a = a");
-    tmp1 = replicate_inst_15_17_tsni(n1, tmp);
-    xs1 = tmp1;
-    tmp2 = map_inst_15_18_tsni(clauses_inst_15_16_tsni, xs1);
+    tmp1 = replicate_inst_15_17_tsni(n, tmp);
+    xs = tmp1;
+    tmp2 = map_inst_15_18_tsni(clauses_inst_15_16_tsni, xs);
     return concat_inst_15_23_tsni(tmp2)
   } 
   static main() {

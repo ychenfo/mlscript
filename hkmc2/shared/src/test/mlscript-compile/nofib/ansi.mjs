@@ -1514,23 +1514,23 @@ lambda = (undefined, function (prog) {
     return NofibPrelude.Cons("E", tmp8)
   } 
   static at(x_y, s) {
-    let first1, first0, x1, y1, tmp;
+    let first1, first0, x, y, tmp;
     if (runtime.Tuple.isArrayLike(x_y) && x_y.length === 2) {
       first0 = runtime.Tuple.get(x_y, 0);
       first1 = runtime.Tuple.get(x_y, 1);
-      x1 = first0;
-      y1 = first1;
-      tmp = ansi.goto(x1, y1);
+      x = first0;
+      y = first1;
+      tmp = ansi.goto(x, y);
       return NofibPrelude.append(tmp, s)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static highlight(s1) {
+  static highlight(s) {
     let tmp, tmp1, tmp2;
     tmp = NofibPrelude.nofibStringToList("ESC[7m");
     tmp1 = NofibPrelude.nofibStringToList("ESC[0m");
-    tmp2 = NofibPrelude.append(s1, tmp1);
+    tmp2 = NofibPrelude.append(s, tmp1);
     return NofibPrelude.append(tmp, tmp2)
   } 
   static end(xs) {
@@ -1550,130 +1550,130 @@ lambda = (undefined, function (prog) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static peekChar(eof1, consume1, cs1) {
-    let param0, param1, c, cs2, tmp;
-    if (cs1 instanceof NofibPrelude.Nil.class) {
-      return runtime.safeCall(eof1(NofibPrelude.Nil))
-    } else if (cs1 instanceof NofibPrelude.Cons.class) {
-      param0 = cs1.head;
-      param1 = cs1.tail;
+  static peekChar(eof, consume, cs) {
+    let param0, param1, c, cs1, tmp;
+    if (cs instanceof NofibPrelude.Nil.class) {
+      return runtime.safeCall(eof(NofibPrelude.Nil))
+    } else if (cs instanceof NofibPrelude.Cons.class) {
+      param0 = cs.head;
+      param1 = cs.tail;
       c = param0;
-      cs2 = param1;
-      tmp = NofibPrelude.Cons(c, cs2);
-      return runtime.safeCall(consume1(c, tmp))
+      cs1 = param1;
+      tmp = NofibPrelude.Cons(c, cs1);
+      return runtime.safeCall(consume(c, tmp))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static pressAnyKey(prog, x1) {
+  static pressAnyKey(prog, x) {
     let lambda$this;
     lambda$this = runtime.safeCall(lambda(prog));
-    return ansi.readChar(prog, lambda$this, x1)
+    return ansi.readChar(prog, lambda$this, x)
   } 
-  static unreadChar(c, prog1, cs2) {
+  static unreadChar(c, prog, cs) {
     let tmp;
-    tmp = NofibPrelude.Cons(c, cs2);
-    return runtime.safeCall(prog1(tmp))
+    tmp = NofibPrelude.Cons(c, cs);
+    return runtime.safeCall(prog(tmp))
   } 
-  static writeChar(c1, prog2, cs3) {
+  static writeChar(c, prog, cs) {
     let tmp;
-    tmp = runtime.safeCall(prog2(cs3));
-    return NofibPrelude.Cons(c1, tmp)
+    tmp = runtime.safeCall(prog(cs));
+    return NofibPrelude.Cons(c, tmp)
   } 
-  static writeString(s2, prog3, cs4) {
+  static writeString(s, prog, cs) {
     let tmp;
-    tmp = runtime.safeCall(prog3(cs4));
-    return NofibPrelude.append(s2, tmp)
+    tmp = runtime.safeCall(prog(cs));
+    return NofibPrelude.append(s, tmp)
   } 
   static writes(ss, a, b) {
     let tmp;
     tmp = concat_inst_10_11_tsni(ss);
     return writeString_inst_10_28_tsni(tmp, a, b)
   } 
-  static ringBell(prog4, cs5) {
-    return ansi.writeChar("B", prog4, cs5)
+  static ringBell(prog, cs) {
+    return ansi.writeChar("B", prog, cs)
   } 
-  static clearScreen(a1, b1) {
-    return ansi.writeString(ansi.cls, a1, b1)
+  static clearScreen(a, b) {
+    return ansi.writeString(ansi.cls, a, b)
   } 
-  static writeAt(x_y1, s3, a2) {
-    let first1, first0, x2, y1;
-    if (runtime.Tuple.isArrayLike(x_y1) && x_y1.length === 2) {
-      first0 = runtime.Tuple.get(x_y1, 0);
-      first1 = runtime.Tuple.get(x_y1, 1);
-      x2 = first0;
-      y1 = first1;
-      return runtime.safeCall(lambda1(s3, a2, x2, y1))
+  static writeAt(x_y, s, a) {
+    let first1, first0, x, y;
+    if (runtime.Tuple.isArrayLike(x_y) && x_y.length === 2) {
+      first0 = runtime.Tuple.get(x_y, 0);
+      first1 = runtime.Tuple.get(x_y, 1);
+      x = first0;
+      y = first1;
+      return runtime.safeCall(lambda1(s, a, x, y))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static moveTo(x_y2, a3) {
-    let first1, first0, x2, y1;
-    if (runtime.Tuple.isArrayLike(x_y2) && x_y2.length === 2) {
-      first0 = runtime.Tuple.get(x_y2, 0);
-      first1 = runtime.Tuple.get(x_y2, 1);
-      x2 = first0;
-      y1 = first1;
-      return runtime.safeCall(lambda2(a3, x2, y1))
+  static moveTo(x_y, a) {
+    let first1, first0, x, y;
+    if (runtime.Tuple.isArrayLike(x_y) && x_y.length === 2) {
+      first0 = runtime.Tuple.get(x_y, 0);
+      first1 = runtime.Tuple.get(x_y, 1);
+      x = first0;
+      y = first1;
+      return runtime.safeCall(lambda2(a, x, y))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static returnn(s4, consume2) {
+  static returnn(s, consume) {
     let tmp;
-    tmp = NofibPrelude.reverse(s4);
-    return runtime.safeCall(consume2(tmp))
+    tmp = NofibPrelude.reverse(s);
+    return runtime.safeCall(consume(tmp))
   } 
-  static deletee(n, s5, l, consume3, d) {
+  static deletee(n, s, l, consume, d) {
     let scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
     scrut = n > 0;
     if (scrut === true) {
       tmp = NofibPrelude.nofibStringToList("BS_BS");
       tmp1 = n - 1;
-      tmp2 = NofibPrelude.tail(s5);
-      tmp3 = ansi.loop(tmp1, tmp2, l, consume3);
+      tmp2 = NofibPrelude.tail(s);
+      tmp3 = ansi.loop(tmp1, tmp2, l, consume);
       return ansi.writeString(tmp, tmp3, d)
     } else {
       tmp4 = NofibPrelude.nofibStringToList("");
-      tmp5 = ansi.loop(0, tmp4, l, consume3);
+      tmp5 = ansi.loop(0, tmp4, l, consume);
       return ansi.ringBell(tmp5, d)
     }
   } 
-  static loop(n1, s6, l1, consume4) {
-    return runtime.safeCall(lambda3(n1, s6, l1, consume4))
+  static loop(n, s, l, consume) {
+    return runtime.safeCall(lambda3(n, s, l, consume))
   } 
-  static readAt(x_y3, l2, consume5) {
+  static readAt(x_y, l, consume) {
     let tmp, tmp1, tmp2;
-    tmp = replicate_inst_13_9_tsni(l2, "_");
-    tmp1 = ansi.loop(0, "", l2, consume5);
-    tmp2 = ansi.moveTo(x_y3, tmp1);
-    return writeAt_inst_13_5_tsni(x_y3, tmp, tmp2)
+    tmp = replicate_inst_13_9_tsni(l, "_");
+    tmp1 = ansi.loop(0, "", l, consume);
+    tmp2 = ansi.moveTo(x_y, tmp1);
+    return writeAt_inst_13_5_tsni(x_y, tmp, tmp2)
   } 
-  static promptReadAt(x_y4, l3, prompt, consume6) {
-    let first1, first0, x2, y1, arr, tmp, tmp1, arr1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-    if (runtime.Tuple.isArrayLike(x_y4) && x_y4.length === 2) {
-      first0 = runtime.Tuple.get(x_y4, 0);
-      first1 = runtime.Tuple.get(x_y4, 1);
-      x2 = first0;
-      y1 = first1;
-      _deforest_Deforest_Arr_2_0 = x2;
-      _deforest_Deforest_Arr_2_1 = y1;
-      arr = (s7, a4) => {
-        let first11, first01, x3, y2;
+  static promptReadAt(x_y, l, prompt, consume) {
+    let first1, first0, x, y, arr, tmp, tmp1, arr1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+    if (runtime.Tuple.isArrayLike(x_y) && x_y.length === 2) {
+      first0 = runtime.Tuple.get(x_y, 0);
+      first1 = runtime.Tuple.get(x_y, 1);
+      x = first0;
+      y = first1;
+      _deforest_Deforest_Arr_2_0 = x;
+      _deforest_Deforest_Arr_2_1 = y;
+      arr = (s, a) => {
+        let first11, first01, x1, y1;
         first01 = _deforest_Deforest_Arr_2_0;
         first11 = _deforest_Deforest_Arr_2_1;
-        x3 = first01;
-        y2 = first11;
-        return runtime.safeCall(lambda1(s7, a4, x3, y2))
+        x1 = first01;
+        y1 = first11;
+        return runtime.safeCall(lambda1(s, a, x1, y1))
       };
       tmp = NofibPrelude.listLen(prompt);
-      tmp1 = x2 + tmp;
+      tmp1 = x + tmp;
       arr1 = globalThis.Object.freeze([
         tmp1,
-        y1
+        y
       ]);
-      tmp2 = readAt_inst_14_4_tsni(arr1, l3, consume6);
+      tmp2 = readAt_inst_14_4_tsni(arr1, l, consume);
       return writeAt_inst_14_27_tsni(arr, prompt, tmp2)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -1683,80 +1683,80 @@ lambda = (undefined, function (prog) {
     let arr, tmp, tmp1, tmp2, arr1, tmp3, tmp4, arr2, tmp5, tmp6, arr3, tmp7, tmp8, arr4, tmp9, tmp10, arr5, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6;
     _deforest_Deforest_Arr_2_0 = 17;
     _deforest_Deforest_Arr_2_1 = 5;
-    arr = (s7) => {
-      let first1, first0, x2, y1, tmp21;
+    arr = (s) => {
+      let first1, first0, x, y, tmp21;
       first0 = _deforest_Deforest_Arr_2_0;
       first1 = _deforest_Deforest_Arr_2_1;
-      x2 = first0;
-      y1 = first1;
-      tmp21 = ansi.goto(x2, y1);
-      return NofibPrelude.append(tmp21, s7)
+      x = first0;
+      y = first1;
+      tmp21 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp21, s)
     };
     tmp = NofibPrelude.nofibStringToList("Demonstration program");
     tmp1 = ansi.highlight(tmp);
     tmp2 = at_inst_15_29_tsni(arr, tmp1);
     _deforest_Deforest_Arr_2_01 = 48;
     _deforest_Deforest_Arr_2_11 = 5;
-    arr1 = (s7) => {
-      let first1, first0, x2, y1, tmp21;
+    arr1 = (s) => {
+      let first1, first0, x, y, tmp21;
       first0 = _deforest_Deforest_Arr_2_01;
       first1 = _deforest_Deforest_Arr_2_11;
-      x2 = first0;
-      y1 = first1;
-      tmp21 = ansi.goto(x2, y1);
-      return NofibPrelude.append(tmp21, s7)
+      x = first0;
+      y = first1;
+      tmp21 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp21, s)
     };
     tmp3 = NofibPrelude.nofibStringToList("Version 1.0");
     tmp4 = at_inst_15_30_tsni(arr1, tmp3);
     _deforest_Deforest_Arr_2_02 = 17;
     _deforest_Deforest_Arr_2_12 = 7;
-    arr2 = (s7) => {
-      let first1, first0, x2, y1, tmp21;
+    arr2 = (s) => {
+      let first1, first0, x, y, tmp21;
       first0 = _deforest_Deforest_Arr_2_02;
       first1 = _deforest_Deforest_Arr_2_12;
-      x2 = first0;
-      y1 = first1;
-      tmp21 = ansi.goto(x2, y1);
-      return NofibPrelude.append(tmp21, s7)
+      x = first0;
+      y = first1;
+      tmp21 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp21, s)
     };
     tmp5 = NofibPrelude.nofibStringToList("This program illustrates a simple approach");
     tmp6 = at_inst_15_31_tsni(arr2, tmp5);
     _deforest_Deforest_Arr_2_03 = 17;
     _deforest_Deforest_Arr_2_13 = 8;
-    arr3 = (s7) => {
-      let first1, first0, x2, y1, tmp21;
+    arr3 = (s) => {
+      let first1, first0, x, y, tmp21;
       first0 = _deforest_Deforest_Arr_2_03;
       first1 = _deforest_Deforest_Arr_2_13;
-      x2 = first0;
-      y1 = first1;
-      tmp21 = ansi.goto(x2, y1);
-      return NofibPrelude.append(tmp21, s7)
+      x = first0;
+      y = first1;
+      tmp21 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp21, s)
     };
     tmp7 = NofibPrelude.nofibStringToList("to screen-based interactive programs using");
     tmp8 = at_inst_15_32_tsni(arr3, tmp7);
     _deforest_Deforest_Arr_2_04 = 17;
     _deforest_Deforest_Arr_2_14 = 9;
-    arr4 = (s7) => {
-      let first1, first0, x2, y1, tmp21;
+    arr4 = (s) => {
+      let first1, first0, x, y, tmp21;
       first0 = _deforest_Deforest_Arr_2_04;
       first1 = _deforest_Deforest_Arr_2_14;
-      x2 = first0;
-      y1 = first1;
-      tmp21 = ansi.goto(x2, y1);
-      return NofibPrelude.append(tmp21, s7)
+      x = first0;
+      y = first1;
+      tmp21 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp21, s)
     };
     tmp9 = NofibPrelude.nofibStringToList("the Hugs functional programming system.");
     tmp10 = at_inst_15_33_tsni(arr4, tmp9);
     _deforest_Deforest_Arr_2_05 = 17;
     _deforest_Deforest_Arr_2_15 = 11;
-    arr5 = (s7) => {
-      let first1, first0, x2, y1, tmp21;
+    arr5 = (s) => {
+      let first1, first0, x, y, tmp21;
       first0 = _deforest_Deforest_Arr_2_05;
       first1 = _deforest_Deforest_Arr_2_15;
-      x2 = first0;
-      y1 = first1;
-      tmp21 = ansi.goto(x2, y1);
-      return NofibPrelude.append(tmp21, s7)
+      x = first0;
+      y = first1;
+      tmp21 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp21, s)
     };
     tmp11 = NofibPrelude.nofibStringToList("Please press any key to continue ...");
     tmp12 = at_inst_15_34_tsni(arr5, tmp11);
@@ -1802,9 +1802,9 @@ lambda = (undefined, function (prog) {
     tmp20 = lambda_inst_15_16_tsni;
     return writes_inst_15_17_tsni(tmp19, tmp20, input)
   } 
-  static testAnsi_nofib(n2) {
+  static testAnsi_nofib(n) {
     let tmp, tmp1, tmp2;
-    tmp = replicate_inst_18_20_tsni(n2, program_inst_18_19_tsni);
+    tmp = replicate_inst_18_20_tsni(n, program_inst_18_19_tsni);
     tmp1 = foldr_inst_18_35_tsni(NofibPrelude.compose, lambda9, tmp);
     tmp2 = NofibPrelude.nofibStringToList("testtesttest");
     return runtime.safeCall(tmp1(tmp2))

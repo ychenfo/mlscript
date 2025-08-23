@@ -45059,8 +45059,8 @@ lambda1 = (undefined, function (z) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Light"]; 
     };
-    this.Directional = function Directional(x1, y1) {
-      return globalThis.Object.freeze(new Directional.class(x1, y1));
+    this.Directional = function Directional(x, y) {
+      return globalThis.Object.freeze(new Directional.class(x, y));
     };
     Object.defineProperty(this.Directional, "class", {
       enumerable: true,
@@ -45074,8 +45074,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Directional", ["x", "y"]]; 
       }
     });
-    this.Point = function Point(x1, y1) {
-      return globalThis.Object.freeze(new Point.class(x1, y1));
+    this.Point = function Point(x, y) {
+      return globalThis.Object.freeze(new Point.class(x, y));
     };
     Object.defineProperty(this.Point, "class", {
       enumerable: true,
@@ -45094,8 +45094,8 @@ lambda1 = (undefined, function (z) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Surfspec"]; 
     };
-    this.Ambient = function Ambient(v1) {
-      return globalThis.Object.freeze(new Ambient.class(v1));
+    this.Ambient = function Ambient(v) {
+      return globalThis.Object.freeze(new Ambient.class(v));
     };
     Object.defineProperty(this.Ambient, "class", {
       enumerable: true,
@@ -45108,8 +45108,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Ambient", ["v"]]; 
       }
     });
-    this.Diffuse = function Diffuse(v1) {
-      return globalThis.Object.freeze(new Diffuse.class(v1));
+    this.Diffuse = function Diffuse(v) {
+      return globalThis.Object.freeze(new Diffuse.class(v));
     };
     Object.defineProperty(this.Diffuse, "class", {
       enumerable: true,
@@ -45122,8 +45122,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Diffuse", ["v"]]; 
       }
     });
-    this.Specular = function Specular(v1) {
-      return globalThis.Object.freeze(new Specular.class(v1));
+    this.Specular = function Specular(v) {
+      return globalThis.Object.freeze(new Specular.class(v));
     };
     Object.defineProperty(this.Specular, "class", {
       enumerable: true,
@@ -45136,8 +45136,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Specular", ["v"]]; 
       }
     });
-    this.Specpow = function Specpow(v1) {
-      return globalThis.Object.freeze(new Specpow.class(v1));
+    this.Specpow = function Specpow(v) {
+      return globalThis.Object.freeze(new Specpow.class(v));
     };
     Object.defineProperty(this.Specpow, "class", {
       enumerable: true,
@@ -45150,8 +45150,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Specpow", ["v"]]; 
       }
     });
-    this.Reflect = function Reflect(v1) {
-      return globalThis.Object.freeze(new Reflect.class(v1));
+    this.Reflect = function Reflect(v) {
+      return globalThis.Object.freeze(new Reflect.class(v));
     };
     Object.defineProperty(this.Reflect, "class", {
       enumerable: true,
@@ -45164,8 +45164,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Reflect", ["v"]]; 
       }
     });
-    this.Transmit = function Transmit(v1) {
-      return globalThis.Object.freeze(new Transmit.class(v1));
+    this.Transmit = function Transmit(v) {
+      return globalThis.Object.freeze(new Transmit.class(v));
     };
     Object.defineProperty(this.Transmit, "class", {
       enumerable: true,
@@ -45178,8 +45178,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Transmit", ["v"]]; 
       }
     });
-    this.Refract = function Refract(v1) {
-      return globalThis.Object.freeze(new Refract.class(v1));
+    this.Refract = function Refract(v) {
+      return globalThis.Object.freeze(new Refract.class(v));
     };
     Object.defineProperty(this.Refract, "class", {
       enumerable: true,
@@ -45192,8 +45192,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Refract", ["v"]]; 
       }
     });
-    this.Body = function Body(v1) {
-      return globalThis.Object.freeze(new Body.class(v1));
+    this.Body = function Body(v) {
+      return globalThis.Object.freeze(new Body.class(v));
     };
     Object.defineProperty(this.Body, "class", {
       enumerable: true,
@@ -45206,8 +45206,8 @@ lambda1 = (undefined, function (z) {
         static [definitionMetadata] = ["class", "Body", ["v"]]; 
       }
     });
-    this.Sphere = function Sphere(pos1, radius1, surface1) {
-      return globalThis.Object.freeze(new Sphere.class(pos1, radius1, surface1));
+    this.Sphere = function Sphere(pos, radius, surface) {
+      return globalThis.Object.freeze(new Sphere.class(pos, radius, surface));
     };
     Object.defineProperty(this.Sphere, "class", {
       enumerable: true,
@@ -45423,19 +45423,19 @@ lambda1 = (undefined, function (z) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static vecsub(a11, a21) {
+  static vecsub(a1, a2) {
     let first2, first1, first0, x1, y1, z1, first21, first11, first01, x2, y2, z2, tmp, tmp1, tmp2, arr;
-    if (runtime.Tuple.isArrayLike(a11) && a11.length === 3) {
-      first0 = runtime.Tuple.get(a11, 0);
-      first1 = runtime.Tuple.get(a11, 1);
-      first2 = runtime.Tuple.get(a11, 2);
+    if (runtime.Tuple.isArrayLike(a1) && a1.length === 3) {
+      first0 = runtime.Tuple.get(a1, 0);
+      first1 = runtime.Tuple.get(a1, 1);
+      first2 = runtime.Tuple.get(a1, 2);
       x1 = first0;
       y1 = first1;
       z1 = first2;
-      if (runtime.Tuple.isArrayLike(a21) && a21.length === 3) {
-        first01 = runtime.Tuple.get(a21, 0);
-        first11 = runtime.Tuple.get(a21, 1);
-        first21 = runtime.Tuple.get(a21, 2);
+      if (runtime.Tuple.isArrayLike(a2) && a2.length === 3) {
+        first01 = runtime.Tuple.get(a2, 0);
+        first11 = runtime.Tuple.get(a2, 1);
+        first21 = runtime.Tuple.get(a2, 2);
         x2 = first01;
         y2 = first11;
         z2 = first21;
@@ -45455,19 +45455,19 @@ lambda1 = (undefined, function (z) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static vecmult(a12, a22) {
+  static vecmult(a1, a2) {
     let first2, first1, first0, x1, y1, z1, first21, first11, first01, x2, y2, z2, tmp, tmp1, tmp2, arr;
-    if (runtime.Tuple.isArrayLike(a12) && a12.length === 3) {
-      first0 = runtime.Tuple.get(a12, 0);
-      first1 = runtime.Tuple.get(a12, 1);
-      first2 = runtime.Tuple.get(a12, 2);
+    if (runtime.Tuple.isArrayLike(a1) && a1.length === 3) {
+      first0 = runtime.Tuple.get(a1, 0);
+      first1 = runtime.Tuple.get(a1, 1);
+      first2 = runtime.Tuple.get(a1, 2);
       x1 = first0;
       y1 = first1;
       z1 = first2;
-      if (runtime.Tuple.isArrayLike(a22) && a22.length === 3) {
-        first01 = runtime.Tuple.get(a22, 0);
-        first11 = runtime.Tuple.get(a22, 1);
-        first21 = runtime.Tuple.get(a22, 2);
+      if (runtime.Tuple.isArrayLike(a2) && a2.length === 3) {
+        first01 = runtime.Tuple.get(a2, 0);
+        first11 = runtime.Tuple.get(a2, 1);
+        first21 = runtime.Tuple.get(a2, 2);
         x2 = first01;
         y2 = first11;
         z2 = first21;
@@ -45529,12 +45529,12 @@ lambda1 = (undefined, function (z) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static vecscale(xyz1, a) {
+  static vecscale(xyz, a) {
     let first2, first1, first0, x, y, z, tmp, tmp1, tmp2, arr;
-    if (runtime.Tuple.isArrayLike(xyz1) && xyz1.length === 3) {
-      first0 = runtime.Tuple.get(xyz1, 0);
-      first1 = runtime.Tuple.get(xyz1, 1);
-      first2 = runtime.Tuple.get(xyz1, 2);
+    if (runtime.Tuple.isArrayLike(xyz) && xyz.length === 3) {
+      first0 = runtime.Tuple.get(xyz, 0);
+      first1 = runtime.Tuple.get(xyz, 1);
+      first2 = runtime.Tuple.get(xyz, 2);
       x = first0;
       y = first1;
       z = first2;
@@ -45579,30 +45579,30 @@ lambda1 = (undefined, function (z) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static veccross(x11, x21) {
-    let first2, first1, first0, x12, y1, z1, first21, first11, first01, x22, y2, z2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr;
-    if (runtime.Tuple.isArrayLike(x11) && x11.length === 3) {
-      first0 = runtime.Tuple.get(x11, 0);
-      first1 = runtime.Tuple.get(x11, 1);
-      first2 = runtime.Tuple.get(x11, 2);
-      x12 = first0;
+  static veccross(x1, x2) {
+    let first2, first1, first0, x11, y1, z1, first21, first11, first01, x21, y2, z2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr;
+    if (runtime.Tuple.isArrayLike(x1) && x1.length === 3) {
+      first0 = runtime.Tuple.get(x1, 0);
+      first1 = runtime.Tuple.get(x1, 1);
+      first2 = runtime.Tuple.get(x1, 2);
+      x11 = first0;
       y1 = first1;
       z1 = first2;
-      if (runtime.Tuple.isArrayLike(x21) && x21.length === 3) {
-        first01 = runtime.Tuple.get(x21, 0);
-        first11 = runtime.Tuple.get(x21, 1);
-        first21 = runtime.Tuple.get(x21, 2);
-        x22 = first01;
+      if (runtime.Tuple.isArrayLike(x2) && x2.length === 3) {
+        first01 = runtime.Tuple.get(x2, 0);
+        first11 = runtime.Tuple.get(x2, 1);
+        first21 = runtime.Tuple.get(x2, 2);
+        x21 = first01;
         y2 = first11;
         z2 = first21;
         tmp = y1 * z2;
         tmp1 = y2 * z1;
         tmp2 = tmp - tmp1;
-        tmp3 = z1 * x22;
-        tmp4 = z2 * x12;
+        tmp3 = z1 * x21;
+        tmp4 = z2 * x11;
         tmp5 = tmp3 - tmp4;
-        tmp6 = x12 * y2;
-        tmp7 = x22 * y1;
+        tmp6 = x11 * y2;
+        tmp7 = x21 * y1;
         tmp8 = tmp6 - tmp7;
         arr = globalThis.Object.freeze([
           tmp2,
@@ -45618,15 +45618,15 @@ lambda1 = (undefined, function (z) {
     }
   } 
   static is_zerovector(x) {
-    let first2, first1, first0, x3, y, z, tmp, tmp1, lambda$this, lambda$this1;
+    let first2, first1, first0, x1, y, z, tmp, tmp1, lambda$this, lambda$this1;
     if (runtime.Tuple.isArrayLike(x) && x.length === 3) {
       first0 = runtime.Tuple.get(x, 0);
       first1 = runtime.Tuple.get(x, 1);
       first2 = runtime.Tuple.get(x, 2);
-      x3 = first0;
+      x1 = first0;
       y = first1;
       z = first2;
-      tmp = x3 < sphere.epsilon;
+      tmp = x1 < sphere.epsilon;
       lambda$this = runtime.safeCall(lambda(y));
       tmp1 = runtime.short_and(tmp, lambda$this);
       lambda$this1 = runtime.safeCall(lambda1(z));
@@ -45660,17 +45660,17 @@ lambda1 = (undefined, function (z) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static lightcolour(x3) {
+  static lightcolour(x) {
     let param0, param1, pos, col, dir, col1;
-    if (x3 instanceof sphere.Directional.class) {
-      param0 = x3.x;
-      param1 = x3.y;
+    if (x instanceof sphere.Directional.class) {
+      param0 = x.x;
+      param1 = x.y;
       dir = param0;
       col1 = param1;
       return col1
-    } else if (x3 instanceof sphere.Point.class) {
-      param0 = x3.x;
-      param1 = x3.y;
+    } else if (x instanceof sphere.Point.class) {
+      param0 = x.x;
+      param1 = x.y;
       pos = param0;
       col = param1;
       return col
@@ -45694,9 +45694,9 @@ lambda1 = (undefined, function (z) {
     tmp2 = append_inst_90_5_tsni(tmp, tmp1);
     return head_inst_90_130_tsni(tmp2)
   } 
-  static diffusesurf(ss1) {
+  static diffusesurf(ss) {
     let tmp, arr, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-    tmp = lscomp_inst_91_31_tsni(ss1);
+    tmp = lscomp_inst_91_31_tsni(ss);
     arr = globalThis.Object.freeze([
       0.0,
       0.0,
@@ -45710,9 +45710,9 @@ lambda1 = (undefined, function (z) {
     tmp2 = append_inst_91_32_tsni(tmp, tmp1);
     return head_inst_91_136_tsni(tmp2)
   } 
-  static specularsurf(ss2) {
+  static specularsurf(ss) {
     let tmp, arr, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-    tmp = lscomp_inst_92_18_tsni(ss2);
+    tmp = lscomp_inst_92_18_tsni(ss);
     arr = globalThis.Object.freeze([
       0.0,
       0.0,
@@ -45726,9 +45726,9 @@ lambda1 = (undefined, function (z) {
     tmp2 = append_inst_92_19_tsni(tmp, tmp1);
     return head_inst_92_133_tsni(tmp2)
   } 
-  static specpowsurf(ss3) {
+  static specpowsurf(ss) {
     let tmp, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-    tmp = lscomp_inst_93_28_tsni(ss3);
+    tmp = lscomp_inst_93_28_tsni(ss);
     _deforest_Cons_head = 8.0;
     _deforest_Cons_tail = NofibPrelude.Nil;
     tmp1 = () => {
@@ -45737,9 +45737,9 @@ lambda1 = (undefined, function (z) {
     tmp2 = append_inst_93_29_tsni(tmp, tmp1);
     return head_inst_93_135_tsni(tmp2)
   } 
-  static reflectsurf(ss4) {
+  static reflectsurf(ss) {
     let tmp, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-    tmp = lscomp_inst_94_63_tsni(ss4);
+    tmp = lscomp_inst_94_63_tsni(ss);
     _deforest_Cons_head = 0.0;
     _deforest_Cons_tail = NofibPrelude.Nil;
     tmp1 = () => {
@@ -45748,9 +45748,9 @@ lambda1 = (undefined, function (z) {
     tmp2 = append_inst_94_62_tsni(tmp, tmp1);
     return head_inst_94_149_tsni(tmp2)
   } 
-  static transmitsurf(ss5) {
+  static transmitsurf(ss) {
     let tmp, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-    tmp = lscomp_inst_95_48_tsni(ss5);
+    tmp = lscomp_inst_95_48_tsni(ss);
     _deforest_Cons_head = 0.0;
     _deforest_Cons_tail = NofibPrelude.Nil;
     tmp1 = () => {
@@ -45759,9 +45759,9 @@ lambda1 = (undefined, function (z) {
     tmp2 = append_inst_95_47_tsni(tmp, tmp1);
     return head_inst_95_142_tsni(tmp2)
   } 
-  static refractsurf(ss6) {
+  static refractsurf(ss) {
     let tmp, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-    tmp = lscomp_inst_96_53_tsni(ss6);
+    tmp = lscomp_inst_96_53_tsni(ss);
     _deforest_Cons_head = 1.0;
     _deforest_Cons_tail = NofibPrelude.Nil;
     tmp1 = () => {
@@ -45770,9 +45770,9 @@ lambda1 = (undefined, function (z) {
     tmp2 = append_inst_96_52_tsni(tmp, tmp1);
     return head_inst_96_145_tsni(tmp2)
   } 
-  static bodysurf(ss7) {
+  static bodysurf(ss) {
     let tmp, arr, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-    tmp = lscomp_inst_97_25_tsni(ss7);
+    tmp = lscomp_inst_97_25_tsni(ss);
     arr = globalThis.Object.freeze([
       1.0,
       1.0,
@@ -45815,9 +45815,9 @@ lambda1 = (undefined, function (z) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static dtor(x4) {
+  static dtor(x) {
     let tmp;
-    tmp = x4 * sphere.pi;
+    tmp = x * sphere.pi;
     return tmp / 180.0
   } 
   static camparams(lookfrom, lookat, vup, fov, winsize) {
@@ -45827,15 +45827,15 @@ lambda1 = (undefined, function (z) {
     scrut = vecnorm_inst_99_100_tsni(initfirstray);
     return runtime.safeCall(scrut(vup, fov, winsize, initfirstray))
   } 
-  static sphereintersect(pos1, dir, sp1) {
+  static sphereintersect(pos, dir, sp) {
     let param0, param1, param2, spos, rad, m, bm, m2, disc, slo, shi, scrut, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, arr, arr1, arr2, arr3;
-    if (sp1 instanceof sphere.Sphere.class) {
-      param0 = sp1.pos;
-      param1 = sp1.radius;
-      param2 = sp1.surface;
+    if (sp instanceof sphere.Sphere.class) {
+      param0 = sp.pos;
+      param1 = sp.radius;
+      param2 = sp.surface;
       spos = param0;
       rad = param1;
-      tmp = sphere.vecsub(pos1, spos);
+      tmp = sphere.vecsub(pos, spos);
       m = tmp;
       tmp1 = sphere.vecdot(m, dir);
       bm = tmp1;
@@ -45890,9 +45890,9 @@ lambda1 = (undefined, function (z) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static trace(spheres, pos2, dir1) {
-    let dists, scrut, first1, first0, mindist, sp2, scrut1, tmp, tmp1, arr, tmp2, tmp3, arr1;
-    tmp = sphmap$_inst_108_36_tsni(pos2, dir1, spheres);
+  static trace(spheres, pos, dir) {
+    let dists, scrut, first1, first0, mindist, sp, scrut1, tmp, tmp1, arr, tmp2, tmp3, arr1;
+    tmp = sphmap$_inst_108_36_tsni(pos, dir, spheres);
     dists = tmp;
     scrut1 = NofibPrelude.null_(dists);
     if (scrut1 === true) {
@@ -45911,11 +45911,11 @@ lambda1 = (undefined, function (z) {
         first0 = runtime.Tuple.get(scrut, 0);
         first1 = runtime.Tuple.get(scrut, 1);
         mindist = first0;
-        sp2 = first1;
+        sp = first1;
         arr1 = globalThis.Object.freeze([
           true,
           mindist,
-          sp2
+          sp
         ]);
         return arr1
       } else {
@@ -45954,13 +45954,13 @@ lambda1 = (undefined, function (z) {
     return runtime.safeCall(matchIdent_17(olddir))
   } 
   static lightdirection(l, pt) {
-    let param0, param1, pos3, col, dir2, col1, tmp, tmp1, arr, tmp2;
+    let param0, param1, pos, col, dir, col1, tmp, tmp1, arr, tmp2;
     if (l instanceof sphere.Directional.class) {
       param0 = l.x;
       param1 = l.y;
-      dir2 = param0;
+      dir = param0;
       col1 = param1;
-      tmp = vecnorm_inst_110_40_tsni(dir2);
+      tmp = vecnorm_inst_110_40_tsni(dir);
       tmp1 = fst_inst_110_138_tsni(tmp);
       arr = globalThis.Object.freeze([
         tmp1,
@@ -45970,71 +45970,71 @@ lambda1 = (undefined, function (z) {
     } else if (l instanceof sphere.Point.class) {
       param0 = l.x;
       param1 = l.y;
-      pos3 = param0;
+      pos = param0;
       col = param1;
-      tmp2 = vecsub_inst_110_41_tsni(pos3, pt);
+      tmp2 = vecsub_inst_110_41_tsni(pos, pt);
       return vecnorm_inst_110_42_tsni(tmp2)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static shadowed(pos3, dir2, lcolour) {
+  static shadowed(pos, dir, lcolour) {
     let scrut, tmp, tmp1;
-    tmp = vecscale_inst_111_34_tsni(dir2, sphere.epsilon);
-    tmp1 = vecadd_inst_111_38_tsni(pos3, tmp);
-    scrut = trace_inst_111_35_tsni(sphere.testspheres, tmp1, dir2);
+    tmp = vecscale_inst_111_34_tsni(dir, sphere.epsilon);
+    tmp1 = vecadd_inst_111_38_tsni(pos, tmp);
+    scrut = trace_inst_111_35_tsni(sphere.testspheres, tmp1, dir);
     return runtime.safeCall(scrut(lcolour))
   } 
-  static lightray(l1, pos4, norm, refl, surf) {
+  static lightray(l, pos, norm, refl, surf) {
     let scrut;
-    scrut = lightdirection_inst_112_39_tsni(l1, pos4);
-    return runtime.safeCall(scrut(l1, pos4, norm, refl, surf))
+    scrut = lightdirection_inst_112_39_tsni(l, pos);
+    return runtime.safeCall(scrut(l, pos, norm, refl, surf))
   } 
-  static shade(lights, sp2, lookpos, dir3, dist, contrib) {
-    let hitpos, ambientlight, surf1, amb, norm1, refl1, diff, transmitted, simple, trintensity, matchIdent_1, scrut, tmp, tmp1, arr, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, arr1, tmp17, tmp18, lambda$this, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-    tmp = vecscale_inst_113_3_tsni(dir3, dist);
+  static shade(lights, sp, lookpos, dir, dist, contrib) {
+    let hitpos, ambientlight, surf, amb, norm, refl, diff, transmitted, simple, trintensity, matchIdent_1, scrut, tmp, tmp1, arr, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, arr1, tmp17, tmp18, lambda$this, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+    tmp = vecscale_inst_113_3_tsni(dir, dist);
     tmp1 = vecadd_inst_113_129_tsni(lookpos, tmp);
     hitpos = tmp1;
     _deforest_Deforest_Arr_3_0 = 1.0;
     _deforest_Deforest_Arr_3_1 = 1.0;
     _deforest_Deforest_Arr_3_2 = 1.0;
-    arr = (a23) => {
-      let first2, first1, first0, x12, y1, z1, first21, first11, first01, x22, y2, z2, tmp19, tmp20, tmp21, arr2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
+    arr = (a2) => {
+      let first2, first1, first0, x1, y1, z1, first21, first11, first01, x2, y2, z2, tmp19, tmp20, tmp21, arr2, _deforest_Deforest_Arr_3_01, _deforest_Deforest_Arr_3_11, _deforest_Deforest_Arr_3_21;
       first0 = _deforest_Deforest_Arr_3_0;
       first1 = _deforest_Deforest_Arr_3_1;
       first2 = _deforest_Deforest_Arr_3_2;
-      x12 = first0;
+      x1 = first0;
       y1 = first1;
       z1 = first2;
-      if (runtime.Tuple.isArrayLike(a23) && a23.length === 3) {
-        first01 = runtime.Tuple.get(a23, 0);
-        first11 = runtime.Tuple.get(a23, 1);
-        first21 = runtime.Tuple.get(a23, 2);
-        x22 = first01;
+      if (runtime.Tuple.isArrayLike(a2) && a2.length === 3) {
+        first01 = runtime.Tuple.get(a2, 0);
+        first11 = runtime.Tuple.get(a2, 1);
+        first21 = runtime.Tuple.get(a2, 2);
+        x2 = first01;
         y2 = first11;
         z2 = first21;
-        tmp19 = x12 * x22;
+        tmp19 = x1 * x2;
         tmp20 = y1 * y2;
         tmp21 = z1 * z2;
         _deforest_Deforest_Arr_3_01 = tmp19;
         _deforest_Deforest_Arr_3_11 = tmp20;
         _deforest_Deforest_Arr_3_21 = tmp21;
-        arr2 = (a24) => {
-          let first22, first12, first02, x13, y11, z11, first23, first13, first03, x23, y21, z21, tmp22, tmp23, tmp24, arr3;
+        arr2 = (a21) => {
+          let first22, first12, first02, x11, y11, z11, first23, first13, first03, x21, y21, z21, tmp22, tmp23, tmp24, arr3;
           first02 = _deforest_Deforest_Arr_3_01;
           first12 = _deforest_Deforest_Arr_3_11;
           first22 = _deforest_Deforest_Arr_3_21;
-          x13 = first02;
+          x11 = first02;
           y11 = first12;
           z11 = first22;
-          if (runtime.Tuple.isArrayLike(a24) && a24.length === 3) {
-            first03 = runtime.Tuple.get(a24, 0);
-            first13 = runtime.Tuple.get(a24, 1);
-            first23 = runtime.Tuple.get(a24, 2);
-            x23 = first03;
+          if (runtime.Tuple.isArrayLike(a21) && a21.length === 3) {
+            first03 = runtime.Tuple.get(a21, 0);
+            first13 = runtime.Tuple.get(a21, 1);
+            first23 = runtime.Tuple.get(a21, 2);
+            x21 = first03;
             y21 = first13;
             z21 = first23;
-            tmp22 = x13 + x23;
+            tmp22 = x11 + x21;
             tmp23 = y11 + y21;
             tmp24 = z11 + z21;
             arr3 = globalThis.Object.freeze([
@@ -46053,90 +46053,90 @@ lambda1 = (undefined, function (z) {
       }
     };
     ambientlight = arr;
-    tmp2 = sphere.spheresurf(sp2);
-    surf1 = tmp2;
-    tmp3 = ambientsurf_inst_113_4_tsni(surf1);
+    tmp2 = sphere.spheresurf(sp);
+    surf = tmp2;
+    tmp3 = ambientsurf_inst_113_4_tsni(surf);
     tmp4 = vecmult_inst_113_49_tsni(ambientlight, tmp3);
     amb = tmp4;
-    tmp5 = spherenormal_inst_113_7_tsni(hitpos, sp2);
-    norm1 = tmp5;
+    tmp5 = spherenormal_inst_113_7_tsni(hitpos, sp);
+    norm = tmp5;
     tmp6 = - 2.0;
-    tmp7 = sphere.vecdot(dir3, norm1);
+    tmp7 = sphere.vecdot(dir, norm);
     tmp8 = tmp6 * tmp7;
-    tmp9 = vecscale_inst_113_9_tsni(norm1, tmp8);
-    tmp10 = vecadd_inst_113_132_tsni(dir3, tmp9);
-    refl1 = tmp10;
-    lambda$this = runtime.safeCall(lambda_inst_113_10_tsni(hitpos, surf1, norm1, refl1));
+    tmp9 = vecscale_inst_113_9_tsni(norm, tmp8);
+    tmp10 = vecadd_inst_113_132_tsni(dir, tmp9);
+    refl = tmp10;
+    lambda$this = runtime.safeCall(lambda_inst_113_10_tsni(hitpos, surf, norm, refl));
     tmp11 = map_inst_113_43_tsni(lambda$this, lights);
     tmp12 = vecsum_inst_113_139_tsni(tmp11);
     diff = tmp12;
-    tmp13 = transmitsurf_inst_113_46_tsni(surf1);
+    tmp13 = transmitsurf_inst_113_46_tsni(surf);
     transmitted = tmp13;
     tmp14 = vecadd_inst_113_143_tsni(amb, diff);
     simple = tmp14;
-    tmp15 = bodysurf_inst_113_50_tsni(surf1);
+    tmp15 = bodysurf_inst_113_50_tsni(surf);
     tmp16 = sphere.vecscale(tmp15, transmitted);
     trintensity = tmp16;
     scrut = transmitted < sphere.epsilon;
     if (scrut === true) {
       _deforest_Deforest_Arr_2_0 = false;
       _deforest_Deforest_Arr_2_1 = simple;
-      arr1 = (lights1, contrib1, hitpos1, surf2, refl2, trintensity1) => {
-        return match_matchIdent_1_arm_Deforest_Arr_2_inst_113_tsni(lights1, contrib1, hitpos1, surf2, refl2, trintensity1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+      arr1 = (lights1, contrib1, hitpos1, surf1, refl1, trintensity1) => {
+        return match_matchIdent_1_arm_Deforest_Arr_2_inst_113_tsni(lights1, contrib1, hitpos1, surf1, refl1, trintensity1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
       };
       tmp17 = arr1;
     } else {
-      tmp18 = refractsurf_inst_113_51_tsni(surf1);
-      tmp17 = transmitray_inst_113_tsni(lights, simple, hitpos, dir3, tmp18, trintensity, contrib, norm1);
+      tmp18 = refractsurf_inst_113_51_tsni(surf);
+      tmp17 = transmitray_inst_113_tsni(lights, simple, hitpos, dir, tmp18, trintensity, contrib, norm);
     }
     matchIdent_1 = tmp17;
-    return runtime.safeCall(matchIdent_1(lights, contrib, hitpos, surf1, refl1, trintensity))
+    return runtime.safeCall(matchIdent_1(lights, contrib, hitpos, surf, refl, trintensity))
   } 
-  static transmitray(lights1, colour, pos5, dir4, index, intens, contrib1, norm1) {
+  static transmitray(lights, colour, pos, dir, index, intens, contrib, norm) {
     let newcontrib, scrut, tmp;
-    tmp = sphere.vecmult(intens, contrib1);
+    tmp = sphere.vecmult(intens, contrib);
     newcontrib = tmp;
-    scrut = refractray_inst_114_54_tsni(index, dir4, norm1);
-    return runtime.safeCall(scrut(lights1, colour, pos5, intens, newcontrib))
+    scrut = refractray_inst_114_54_tsni(index, dir, norm);
+    return runtime.safeCall(scrut(lights, colour, pos, intens, newcontrib))
   } 
-  static reflectray(pos6, newdir, lights2, intens1, contrib2, colour1) {
+  static reflectray(pos, newdir, lights, intens, contrib, colour) {
     let newcontrib, nearpos, scrut, tmp, tmp1, tmp2;
-    tmp = sphere.vecmult(intens1, contrib2);
+    tmp = sphere.vecmult(intens, contrib);
     newcontrib = tmp;
     tmp1 = vecscale_inst_115_64_tsni(newdir, sphere.epsilon);
-    tmp2 = vecadd_inst_115_150_tsni(pos6, tmp1);
+    tmp2 = vecadd_inst_115_150_tsni(pos, tmp1);
     nearpos = tmp2;
     scrut = trace_inst_115_65_tsni(sphere.testspheres, nearpos, newdir);
-    return runtime.safeCall(scrut(newdir, lights2, intens1, colour1, newcontrib, nearpos))
+    return runtime.safeCall(scrut(newdir, lights, intens, colour, newcontrib, nearpos))
   } 
-  static tracepixel(spheres1, lights3, x5, y, firstray, scrnx, scrny) {
-    let pos7, scrut, tmp, tmp1, tmp2, tmp3;
-    pos7 = sphere.lookfrom;
-    tmp = vecscale_inst_116_72_tsni(scrnx, x5);
+  static tracepixel(spheres, lights, x, y, firstray, scrnx, scrny) {
+    let pos, scrut, tmp, tmp1, tmp2, tmp3;
+    pos = sphere.lookfrom;
+    tmp = vecscale_inst_116_72_tsni(scrnx, x);
     tmp1 = vecadd_inst_116_71_tsni(firstray, tmp);
     tmp2 = vecscale_inst_116_70_tsni(scrny, y);
     tmp3 = vecadd_inst_116_69_tsni(tmp1, tmp2);
     scrut = vecnorm_inst_116_68_tsni(tmp3);
-    return runtime.safeCall(scrut(spheres1, lights3, pos7))
+    return runtime.safeCall(scrut(spheres, lights, pos))
   } 
-  static z_of_int(x6) {
-    return runtime.safeCall(globalThis.BigInt(x6))
+  static z_of_int(x) {
+    return runtime.safeCall(globalThis.BigInt(x))
   } 
-  static hash(param1) {
+  static hash(param) {
     let tmp, tmp1;
     tmp = lambda3;
     tmp1 = sphere.z_of_int(0);
-    return NofibPrelude.foldr(tmp, tmp1, param1)
+    return NofibPrelude.foldr(tmp, tmp1, param)
   } 
-  static ray(winsize1) {
-    let lights4, scrut;
-    lights4 = sphere.testlights;
-    scrut = camparams_inst_117_118_tsni(sphere.lookfrom, sphere.lookat, sphere.vup, sphere.fov, winsize1);
-    return runtime.safeCall(scrut(winsize1, lights4))
+  static ray(winsize) {
+    let lights, scrut;
+    lights = sphere.testlights;
+    scrut = camparams_inst_117_118_tsni(sphere.lookfrom, sphere.lookat, sphere.vup, sphere.fov, winsize);
+    return runtime.safeCall(scrut(winsize, lights))
   } 
-  static run(winsize2) {
+  static run(winsize) {
     let tmp, tmp1;
-    tmp = ray_inst_122_123_tsni(winsize2);
+    tmp = ray_inst_122_123_tsni(winsize);
     tmp1 = map_inst_122_124_tsni(snd_inst_122_154_tsni, tmp);
     return hash_inst_122_155_tsni(tmp1)
   } 

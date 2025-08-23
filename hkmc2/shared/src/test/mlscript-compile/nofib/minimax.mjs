@@ -9526,8 +9526,8 @@ lambda = (undefined, function (bs) {
       static [definitionMetadata] = ["object", "OWin"]; 
     };
     this.OWin = globalThis.Object.freeze(new OWin$class);
-    this.Score = function Score(i1) {
-      return globalThis.Object.freeze(new Score.class(i1));
+    this.Score = function Score(i) {
+      return globalThis.Object.freeze(new Score.class(i));
     };
     Object.defineProperty(this.Score, "class", {
       enumerable: true,
@@ -9540,8 +9540,8 @@ lambda = (undefined, function (bs) {
         static [definitionMetadata] = ["class", "Score", ["i"]]; 
       }
     });
-    this.Branch = function Branch(a1, cs1) {
-      return globalThis.Object.freeze(new Branch.class(a1, cs1));
+    this.Branch = function Branch(a, cs) {
+      return globalThis.Object.freeze(new Branch.class(a, cs));
     };
     Object.defineProperty(this.Branch, "class", {
       enumerable: true,
@@ -9771,23 +9771,23 @@ lambda = (undefined, function (bs) {
     }
   } 
   static showRow(ps) {
-    let param0, param1, p11, param01, param11, p21, param02, param12, p3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+    let param0, param1, p1, param01, param11, p2, param02, param12, p3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
     if (ps instanceof NofibPrelude.Cons.class) {
       param0 = ps.head;
       param1 = ps.tail;
-      p11 = param0;
+      p1 = param0;
       if (param1 instanceof NofibPrelude.Cons.class) {
         param01 = param1.head;
         param11 = param1.tail;
-        p21 = param01;
+        p2 = param01;
         if (param11 instanceof NofibPrelude.Cons.class) {
           param02 = param11.head;
           param12 = param11.tail;
           p3 = param02;
           if (param12 instanceof NofibPrelude.Nil.class) {
-            tmp = minimax.showPiece(p11);
+            tmp = minimax.showPiece(p1);
             tmp1 = NofibPrelude.nofibStringToList("|");
-            tmp2 = minimax.showPiece(p21);
+            tmp2 = minimax.showPiece(p2);
             tmp3 = NofibPrelude.nofibStringToList("|");
             tmp4 = minimax.showPiece(p3);
             tmp5 = NofibPrelude.append(tmp3, tmp4);
@@ -9846,38 +9846,38 @@ lambda = (undefined, function (bs) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static insert(p3, ps1, i) {
-    let param0, param1, p11, param01, param11, p21, param02, param12, p31, scrut, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-    if (ps1 instanceof NofibPrelude.Cons.class) {
-      param0 = ps1.head;
-      param1 = ps1.tail;
-      p11 = param0;
+  static insert(p, ps, i) {
+    let param0, param1, p1, param01, param11, p2, param02, param12, p3, scrut, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+    if (ps instanceof NofibPrelude.Cons.class) {
+      param0 = ps.head;
+      param1 = ps.tail;
+      p1 = param0;
       if (param1 instanceof NofibPrelude.Cons.class) {
         param01 = param1.head;
         param11 = param1.tail;
-        p21 = param01;
+        p2 = param01;
         if (param11 instanceof NofibPrelude.Cons.class) {
           param02 = param11.head;
           param12 = param11.tail;
-          p31 = param02;
+          p3 = param02;
           if (param12 instanceof NofibPrelude.Nil.class) {
             scrut2 = i === 1;
             if (scrut2 === true) {
-              tmp = NofibPrelude.Cons(p31, NofibPrelude.Nil);
-              tmp1 = NofibPrelude.Cons(p21, tmp);
-              return NofibPrelude.Cons(p3, tmp1)
+              tmp = NofibPrelude.Cons(p3, NofibPrelude.Nil);
+              tmp1 = NofibPrelude.Cons(p2, tmp);
+              return NofibPrelude.Cons(p, tmp1)
             } else {
               scrut1 = i === 2;
               if (scrut1 === true) {
-                tmp2 = NofibPrelude.Cons(p31, NofibPrelude.Nil);
-                tmp3 = NofibPrelude.Cons(p3, tmp2);
-                return NofibPrelude.Cons(p11, tmp3)
+                tmp2 = NofibPrelude.Cons(p3, NofibPrelude.Nil);
+                tmp3 = NofibPrelude.Cons(p, tmp2);
+                return NofibPrelude.Cons(p1, tmp3)
               } else {
                 scrut = i === 3;
                 if (scrut === true) {
-                  tmp4 = NofibPrelude.Cons(p3, NofibPrelude.Nil);
-                  tmp5 = NofibPrelude.Cons(p21, tmp4);
-                  return NofibPrelude.Cons(p11, tmp5)
+                  tmp4 = NofibPrelude.Cons(p, NofibPrelude.Nil);
+                  tmp5 = NofibPrelude.Cons(p2, tmp4);
+                  return NofibPrelude.Cons(p1, tmp5)
                 } else {
                   throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
@@ -9896,9 +9896,9 @@ lambda = (undefined, function (bs) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static empty_(x1, r) {
+  static empty_(x, r) {
     let scrut, param0, param1, param01, param11, param02, param12, scrut1, scrut2;
-    scrut2 = x1 === 1;
+    scrut2 = x === 1;
     if (scrut2 === true) {
       if (r instanceof NofibPrelude.Cons.class) {
         param0 = r.head;
@@ -9913,10 +9913,10 @@ lambda = (undefined, function (bs) {
               if (param12 instanceof NofibPrelude.Nil.class) {
                 return true
               } else {
-                scrut1 = x1 === 2;
+                scrut1 = x === 2;
                 if (scrut1 === true) {
                   if (param01 instanceof minimax.Empty.class) {
-                    scrut = x1 === 3;
+                    scrut = x === 3;
                     if (scrut === true) {
                       if (param02 instanceof minimax.Empty.class) {
                         return false
@@ -9927,7 +9927,7 @@ lambda = (undefined, function (bs) {
                       return false
                     }
                   } else {
-                    scrut = x1 === 3;
+                    scrut = x === 3;
                     if (scrut === true) {
                       if (param02 instanceof minimax.Empty.class) {
                         return false
@@ -9939,7 +9939,7 @@ lambda = (undefined, function (bs) {
                     }
                   }
                 } else {
-                  scrut = x1 === 3;
+                  scrut = x === 3;
                   if (scrut === true) {
                     if (param02 instanceof minimax.Empty.class) {
                       return false
@@ -9952,17 +9952,17 @@ lambda = (undefined, function (bs) {
                 }
               }
             } else {
-              scrut1 = x1 === 2;
+              scrut1 = x === 2;
               if (scrut1 === true) {
                 if (param01 instanceof minimax.Empty.class) {
-                  scrut = x1 === 3;
+                  scrut = x === 3;
                   if (scrut === true) {
                     return false
                   } else {
                     return false
                   }
                 } else {
-                  scrut = x1 === 3;
+                  scrut = x === 3;
                   if (scrut === true) {
                     return false
                   } else {
@@ -9970,7 +9970,7 @@ lambda = (undefined, function (bs) {
                   }
                 }
               } else {
-                scrut = x1 === 3;
+                scrut = x === 3;
                 if (scrut === true) {
                   return false
                 } else {
@@ -9979,16 +9979,16 @@ lambda = (undefined, function (bs) {
               }
             }
           } else {
-            scrut1 = x1 === 2;
+            scrut1 = x === 2;
             if (scrut1 === true) {
-              scrut = x1 === 3;
+              scrut = x === 3;
               if (scrut === true) {
                 return false
               } else {
                 return false
               }
             } else {
-              scrut = x1 === 3;
+              scrut = x === 3;
               if (scrut === true) {
                 return false
               } else {
@@ -9997,7 +9997,7 @@ lambda = (undefined, function (bs) {
             }
           }
         } else {
-          scrut1 = x1 === 2;
+          scrut1 = x === 2;
           if (scrut1 === true) {
             if (param1 instanceof NofibPrelude.Cons.class) {
               param01 = param1.head;
@@ -10009,7 +10009,7 @@ lambda = (undefined, function (bs) {
                   if (param12 instanceof NofibPrelude.Nil.class) {
                     return true
                   } else {
-                    scrut = x1 === 3;
+                    scrut = x === 3;
                     if (scrut === true) {
                       if (param02 instanceof minimax.Empty.class) {
                         return false
@@ -10021,7 +10021,7 @@ lambda = (undefined, function (bs) {
                     }
                   }
                 } else {
-                  scrut = x1 === 3;
+                  scrut = x === 3;
                   if (scrut === true) {
                     return false
                   } else {
@@ -10029,7 +10029,7 @@ lambda = (undefined, function (bs) {
                   }
                 }
               } else {
-                scrut = x1 === 3;
+                scrut = x === 3;
                 if (scrut === true) {
                   if (param11 instanceof NofibPrelude.Cons.class) {
                     param02 = param11.head;
@@ -10051,7 +10051,7 @@ lambda = (undefined, function (bs) {
                 }
               }
             } else {
-              scrut = x1 === 3;
+              scrut = x === 3;
               if (scrut === true) {
                 return false
               } else {
@@ -10059,7 +10059,7 @@ lambda = (undefined, function (bs) {
               }
             }
           } else {
-            scrut = x1 === 3;
+            scrut = x === 3;
             if (scrut === true) {
               if (param1 instanceof NofibPrelude.Cons.class) {
                 param01 = param1.head;
@@ -10088,16 +10088,16 @@ lambda = (undefined, function (bs) {
           }
         }
       } else {
-        scrut1 = x1 === 2;
+        scrut1 = x === 2;
         if (scrut1 === true) {
-          scrut = x1 === 3;
+          scrut = x === 3;
           if (scrut === true) {
             return false
           } else {
             return false
           }
         } else {
-          scrut = x1 === 3;
+          scrut = x === 3;
           if (scrut === true) {
             return false
           } else {
@@ -10106,7 +10106,7 @@ lambda = (undefined, function (bs) {
         }
       }
     } else {
-      scrut1 = x1 === 2;
+      scrut1 = x === 2;
       if (scrut1 === true) {
         if (r instanceof NofibPrelude.Cons.class) {
           param0 = r.head;
@@ -10121,7 +10121,7 @@ lambda = (undefined, function (bs) {
                 if (param12 instanceof NofibPrelude.Nil.class) {
                   return true
                 } else {
-                  scrut = x1 === 3;
+                  scrut = x === 3;
                   if (scrut === true) {
                     if (param02 instanceof minimax.Empty.class) {
                       return false
@@ -10133,7 +10133,7 @@ lambda = (undefined, function (bs) {
                   }
                 }
               } else {
-                scrut = x1 === 3;
+                scrut = x === 3;
                 if (scrut === true) {
                   return false
                 } else {
@@ -10141,7 +10141,7 @@ lambda = (undefined, function (bs) {
                 }
               }
             } else {
-              scrut = x1 === 3;
+              scrut = x === 3;
               if (scrut === true) {
                 if (param11 instanceof NofibPrelude.Cons.class) {
                   param02 = param11.head;
@@ -10163,7 +10163,7 @@ lambda = (undefined, function (bs) {
               }
             }
           } else {
-            scrut = x1 === 3;
+            scrut = x === 3;
             if (scrut === true) {
               return false
             } else {
@@ -10171,7 +10171,7 @@ lambda = (undefined, function (bs) {
             }
           }
         } else {
-          scrut = x1 === 3;
+          scrut = x === 3;
           if (scrut === true) {
             return false
           } else {
@@ -10179,7 +10179,7 @@ lambda = (undefined, function (bs) {
           }
         }
       } else {
-        scrut = x1 === 3;
+        scrut = x === 3;
         if (scrut === true) {
           if (r instanceof NofibPrelude.Cons.class) {
             param0 = r.head;
@@ -10215,7 +10215,7 @@ lambda = (undefined, function (bs) {
     }
   } 
   static empty(pos, board1) {
-    let param0, param1, r1, param01, param11, r2, param02, param12, r3, first1, first0, x2, x3, x4;
+    let param0, param1, r1, param01, param11, r2, param02, param12, r3, first1, first0, x, x1, x2;
     if (board1 instanceof NofibPrelude.Cons.class) {
       param0 = board1.head;
       param1 = board1.tail;
@@ -10233,14 +10233,14 @@ lambda = (undefined, function (bs) {
               first0 = runtime.Tuple.get(pos, 0);
               first1 = runtime.Tuple.get(pos, 1);
               if (first0 === 1) {
-                x4 = first1;
-                return minimax.empty_(x4, r1)
-              } else if (first0 === 2) {
-                x3 = first1;
-                return minimax.empty_(x3, r2)
-              } else if (first0 === 3) {
                 x2 = first1;
-                return minimax.empty_(x2, r3)
+                return minimax.empty_(x2, r1)
+              } else if (first0 === 2) {
+                x1 = first1;
+                return minimax.empty_(x1, r2)
+              } else if (first0 === 3) {
+                x = first1;
+                return minimax.empty_(x, r3)
               } else {
                 throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
@@ -10260,16 +10260,16 @@ lambda = (undefined, function (bs) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static placePiece(p4, board2, pos1) {
-    let param0, param1, r1, param01, param11, r2, param02, param12, r3, first1, first0, x2, x3, x4, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
-    tmp = minimax.empty(pos1, board2);
+  static placePiece(p, board1, pos) {
+    let param0, param1, r1, param01, param11, r2, param02, param12, r3, first1, first0, x, x1, x2, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
+    tmp = minimax.empty(pos, board1);
     scrut = ! tmp;
     if (scrut === true) {
       return NofibPrelude.Nil
     } else {
-      if (board2 instanceof NofibPrelude.Cons.class) {
-        param0 = board2.head;
-        param1 = board2.tail;
+      if (board1 instanceof NofibPrelude.Cons.class) {
+        param0 = board1.head;
+        param1 = board1.tail;
         r1 = param0;
         if (param1 instanceof NofibPrelude.Cons.class) {
           param01 = param1.head;
@@ -10280,26 +10280,26 @@ lambda = (undefined, function (bs) {
             param12 = param11.tail;
             r3 = param02;
             if (param12 instanceof NofibPrelude.Nil.class) {
-              if (runtime.Tuple.isArrayLike(pos1) && pos1.length === 2) {
-                first0 = runtime.Tuple.get(pos1, 0);
-                first1 = runtime.Tuple.get(pos1, 1);
+              if (runtime.Tuple.isArrayLike(pos) && pos.length === 2) {
+                first0 = runtime.Tuple.get(pos, 0);
+                first1 = runtime.Tuple.get(pos, 1);
                 if (first0 === 1) {
-                  x4 = first1;
-                  tmp1 = minimax.insert(p4, r1, x4);
+                  x2 = first1;
+                  tmp1 = minimax.insert(p, r1, x2);
                   tmp2 = NofibPrelude.Cons(r3, NofibPrelude.Nil);
                   tmp3 = NofibPrelude.Cons(r2, tmp2);
                   tmp4 = NofibPrelude.Cons(tmp1, tmp3);
                   return NofibPrelude.Cons(tmp4, NofibPrelude.Nil)
                 } else if (first0 === 2) {
-                  x3 = first1;
-                  tmp5 = minimax.insert(p4, r2, x3);
+                  x1 = first1;
+                  tmp5 = minimax.insert(p, r2, x1);
                   tmp6 = NofibPrelude.Cons(r3, NofibPrelude.Nil);
                   tmp7 = NofibPrelude.Cons(tmp5, tmp6);
                   tmp8 = NofibPrelude.Cons(r1, tmp7);
                   return NofibPrelude.Cons(tmp8, NofibPrelude.Nil)
                 } else if (first0 === 3) {
-                  x2 = first1;
-                  tmp9 = minimax.insert(p4, r3, x2);
+                  x = first1;
+                  tmp9 = minimax.insert(p, r3, x);
                   tmp10 = NofibPrelude.Cons(tmp9, NofibPrelude.Nil);
                   tmp11 = NofibPrelude.Cons(r2, tmp10);
                   tmp12 = NofibPrelude.Cons(r1, tmp11);
@@ -10330,7 +10330,7 @@ lambda = (undefined, function (bs) {
     tmp1 = map_inst_42_44_tsni(lambda1, tmp);
     return andd_inst_42_70_tsni(tmp1)
   } 
-  static newPositions(piece, board3) {
+  static newPositions(piece, board1) {
     let tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2;
     _deforest_Cons_head2 = 3;
     _deforest_Cons_tail2 = () => {
@@ -10352,38 +10352,38 @@ lambda = (undefined, function (bs) {
       return match_ls_arm_Cons_inst_45_21_tsni1(_deforest_Cons_head, _deforest_Cons_tail)
     };
     tmp3 = lscomp1_inst_45_21_tsni(tmp2);
-    lambda$this = runtime.safeCall(lambda_inst_45_18_tsni(piece, board3));
+    lambda$this = runtime.safeCall(lambda_inst_45_18_tsni(piece, board1));
     tmp4 = map_inst_45_17_tsni(lambda$this, tmp3);
     return concat_inst_45_25_tsni(tmp4)
   } 
-  static eval(x2) {
+  static eval(x) {
     let scrut, scrut1, tmp;
-    scrut1 = x2 === 3;
+    scrut1 = x === 3;
     if (scrut1 === true) {
       return minimax.XWin
     } else {
       tmp = - 3;
-      scrut = x2 === tmp;
+      scrut = x === tmp;
       if (scrut === true) {
         return minimax.OWin
       } else {
-        return runtime.safeCall(minimax.Score(x2))
+        return runtime.safeCall(minimax.Score(x))
       }
     }
   } 
-  static interpret(x3, l) {
-    let param0, param1, param01, y1, ls1, tmp;
+  static interpret(x, l) {
+    let param0, param1, param01, y, ls, tmp;
     if (l instanceof NofibPrelude.Nil.class) {
-      return runtime.safeCall(minimax.Score(x3))
+      return runtime.safeCall(minimax.Score(x))
     } else if (l instanceof NofibPrelude.Cons.class) {
       param0 = l.head;
       param1 = l.tail;
       if (param0 instanceof minimax.Score.class) {
         param01 = param0.i;
-        y1 = param01;
-        ls1 = param1;
-        tmp = x3 + y1;
-        return minimax.interpret(tmp, ls1)
+        y = param01;
+        ls = param1;
+        tmp = x + y;
+        return minimax.interpret(tmp, ls)
       } else if (param0 instanceof minimax.XWin.class) {
         return minimax.XWin
       } else if (param0 instanceof minimax.OWin.class) {
@@ -10395,32 +10395,32 @@ lambda = (undefined, function (bs) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static scorePiece(p5, score) {
-    if (p5 instanceof minimax.X.class) {
+  static scorePiece(p, score) {
+    if (p instanceof minimax.X.class) {
       return score
-    } else if (p5 instanceof minimax.Empty.class) {
+    } else if (p instanceof minimax.Empty.class) {
       return 0
-    } else if (p5 instanceof minimax.O.class) {
+    } else if (p instanceof minimax.O.class) {
       return - score
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static map2(f, xs, ys) {
-    let param0, param1, x4, xs1, param01, param11, y1, ys1, tmp, tmp1;
+    let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1;
     if (xs instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (xs instanceof NofibPrelude.Cons.class) {
       param0 = xs.head;
       param1 = xs.tail;
-      x4 = param0;
+      x = param0;
       xs1 = param1;
       if (ys instanceof NofibPrelude.Cons.class) {
         param01 = ys.head;
         param11 = ys.tail;
-        y1 = param01;
+        y = param01;
         ys1 = param11;
-        tmp = runtime.safeCall(f(x4, y1));
+        tmp = runtime.safeCall(f(x, y));
         tmp1 = minimax.map2(f, xs1, ys1);
         return NofibPrelude.Cons(tmp, tmp1)
       } else if (ys instanceof NofibPrelude.Nil.class) {
@@ -10432,87 +10432,87 @@ lambda = (undefined, function (bs) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static score(board4, win) {
+  static score(board1, win) {
     let tmp, tmp1, tmp2;
-    tmp = map2_inst_46_10_tsni(lambda3, board4, win);
+    tmp = map2_inst_46_10_tsni(lambda3, board1, win);
     tmp1 = map_inst_46_68_tsni(NofibPrelude.sum, tmp);
     tmp2 = NofibPrelude.sum(tmp1);
     return minimax.eval(tmp2)
   } 
-  static static(board5) {
+  static static(board1) {
     let tmp, lambda$this;
-    lambda$this = runtime.safeCall(lambda_inst_47_7_tsni(board5));
+    lambda$this = runtime.safeCall(lambda_inst_47_7_tsni(board1));
     tmp = map_inst_47_11_tsni(lambda$this, minimax.wins);
     return interpret_inst_47_54_tsni(0, tmp)
   } 
-  static repTree(f1, g, a) {
+  static repTree(f, g, a) {
     let tmp, tmp1, lambda$this;
-    tmp = runtime.safeCall(f1(a));
-    lambda$this = runtime.safeCall(lambda5(f1, g));
+    tmp = runtime.safeCall(f(a));
+    lambda$this = runtime.safeCall(lambda5(f, g));
     tmp1 = NofibPrelude.map(lambda$this, tmp);
     return minimax.Branch(a, tmp1)
   } 
-  static mapTree(f2, t) {
-    let param0, param1, a1, l1, tmp, tmp1, lambda$this;
+  static mapTree(f, t) {
+    let param0, param1, a, l, tmp, tmp1, lambda$this;
     if (t instanceof minimax.Branch.class) {
       param0 = t.a;
       param1 = t.cs;
-      a1 = param0;
-      l1 = param1;
-      tmp = runtime.safeCall(f2(a1));
-      lambda$this = runtime.safeCall(lambda6(f2));
-      tmp1 = NofibPrelude.map(lambda$this, l1);
+      a = param0;
+      l = param1;
+      tmp = runtime.safeCall(f(a));
+      lambda$this = runtime.safeCall(lambda6(f));
+      tmp1 = NofibPrelude.map(lambda$this, l);
       return minimax.Branch(tmp, tmp1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static prune(n, t1) {
-    let param0, param1, a1, l1, scrut, scrut1, tmp, lambda$this;
-    if (t1 instanceof minimax.Branch.class) {
-      param0 = t1.a;
-      param1 = t1.cs;
-      a1 = param0;
-      l1 = param1;
+  static prune(n, t) {
+    let param0, param1, a, l, scrut, scrut1, tmp, lambda$this;
+    if (t instanceof minimax.Branch.class) {
+      param0 = t.a;
+      param1 = t.cs;
+      a = param0;
+      l = param1;
       scrut1 = n === 0;
       if (scrut1 === true) {
-        return minimax.Branch(a1, NofibPrelude.Nil)
+        return minimax.Branch(a, NofibPrelude.Nil)
       } else {
         scrut = n < 0;
         if (scrut === true) {
           throw globalThis.Error("Tree.prune: < 0")
         } else {
           lambda$this = runtime.safeCall(lambda7(n));
-          tmp = NofibPrelude.map(lambda$this, l1);
-          return minimax.Branch(a1, tmp)
+          tmp = NofibPrelude.map(lambda$this, l);
+          return minimax.Branch(a, tmp)
         }
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static opposite(p6) {
-    if (p6 instanceof minimax.X.class) {
+  static opposite(p) {
+    if (p instanceof minimax.X.class) {
       return minimax.O
-    } else if (p6 instanceof minimax.O.class) {
+    } else if (p instanceof minimax.O.class) {
       return minimax.X
     } else {
       throw globalThis.Error("opposite")
     }
   } 
-  static best(f3, bs, ss) {
-    let param0, param1, b1, bs1, param01, param11, s, ss1;
+  static best(f, bs, ss) {
+    let param0, param1, b, bs1, param01, param11, s, ss1;
     if (bs instanceof NofibPrelude.Cons.class) {
       param0 = bs.head;
       param1 = bs.tail;
-      b1 = param0;
+      b = param0;
       bs1 = param1;
       if (ss instanceof NofibPrelude.Cons.class) {
         param01 = ss.head;
         param11 = ss.tail;
         s = param01;
         ss1 = param11;
-        return best_$(f3, b1, s, bs1, ss1)
+        return best_$(f, b, s, bs1, ss1)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -10521,15 +10521,15 @@ lambda = (undefined, function (bs) {
     }
   } 
   static showMove(m) {
-    let first1, first0, b1, e1, tmp, tmp1, tmp2, tmp3;
+    let first1, first0, b, e, tmp, tmp1, tmp2, tmp3;
     if (runtime.Tuple.isArrayLike(m) && m.length === 2) {
       first0 = runtime.Tuple.get(m, 0);
       first1 = runtime.Tuple.get(m, 1);
-      b1 = first0;
-      e1 = first1;
-      tmp = minimax.showEvaluation(e1);
+      b = first0;
+      e = first1;
+      tmp = minimax.showEvaluation(e);
       tmp1 = NofibPrelude.nofibStringToList("\n");
-      tmp2 = minimax.showBoard(b1);
+      tmp2 = minimax.showBoard(b);
       tmp3 = NofibPrelude.append(tmp1, tmp2);
       return NofibPrelude.append(tmp, tmp3)
     } else {
@@ -10537,7 +10537,7 @@ lambda = (undefined, function (bs) {
     }
   } 
   static max_(e1, e2) {
-    let param0, x4, param01, y1, scrut;
+    let param0, x, param01, y, scrut;
     if (e1 instanceof minimax.XWin.class) {
       return minimax.XWin
     } else {
@@ -10550,15 +10550,15 @@ lambda = (undefined, function (bs) {
           return e2
         } else if (e1 instanceof minimax.Score.class) {
           param0 = e1.i;
-          x4 = param0;
+          x = param0;
           if (e2 instanceof minimax.Score.class) {
             param01 = e2.i;
-            y1 = param01;
-            scrut = x4 > y1;
+            y = param01;
+            scrut = x > y;
             if (scrut === true) {
-              return runtime.safeCall(minimax.Score(x4))
+              return runtime.safeCall(minimax.Score(x))
             } else {
-              return runtime.safeCall(minimax.Score(y1))
+              return runtime.safeCall(minimax.Score(y))
             }
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -10569,29 +10569,29 @@ lambda = (undefined, function (bs) {
       }
     }
   } 
-  static min_(e11, e21) {
-    let param0, x4, param01, y1, scrut;
-    if (e11 instanceof minimax.OWin.class) {
+  static min_(e1, e2) {
+    let param0, x, param01, y, scrut;
+    if (e1 instanceof minimax.OWin.class) {
       return minimax.OWin
     } else {
-      if (e21 instanceof minimax.OWin.class) {
+      if (e2 instanceof minimax.OWin.class) {
         return minimax.OWin
-      } else if (e21 instanceof minimax.XWin.class) {
-        return e11
+      } else if (e2 instanceof minimax.XWin.class) {
+        return e1
       } else {
-        if (e11 instanceof minimax.XWin.class) {
-          return e21
-        } else if (e11 instanceof minimax.Score.class) {
-          param0 = e11.i;
-          x4 = param0;
-          if (e21 instanceof minimax.Score.class) {
-            param01 = e21.i;
-            y1 = param01;
-            scrut = x4 < y1;
+        if (e1 instanceof minimax.XWin.class) {
+          return e2
+        } else if (e1 instanceof minimax.Score.class) {
+          param0 = e1.i;
+          x = param0;
+          if (e2 instanceof minimax.Score.class) {
+            param01 = e2.i;
+            y = param01;
+            scrut = x < y;
             if (scrut === true) {
-              return runtime.safeCall(minimax.Score(x4))
+              return runtime.safeCall(minimax.Score(x))
             } else {
-              return runtime.safeCall(minimax.Score(y1))
+              return runtime.safeCall(minimax.Score(y))
             }
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -10602,87 +10602,87 @@ lambda = (undefined, function (bs) {
       }
     }
   } 
-  static mise(f4, g1, t2) {
-    let param0, param1, l1, a1, tmp, tmp1, lambda$this;
-    if (t2 instanceof minimax.Branch.class) {
-      param0 = t2.a;
-      param1 = t2.cs;
-      a1 = param0;
+  static mise(f, g, t) {
+    let param0, param1, l, a, tmp, tmp1, lambda$this;
+    if (t instanceof minimax.Branch.class) {
+      param0 = t.a;
+      param1 = t.cs;
+      a = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
-        return a1
+        return a
       } else {
-        l1 = param1;
-        tmp = runtime.safeCall(g1(minimax.OWin, minimax.XWin));
-        lambda$this = runtime.safeCall(lambda_inst_48_tsni(f4, g1));
-        tmp1 = map_inst_48_3_tsni(lambda$this, l1);
-        return foldr_inst_48_67_tsni(f4, tmp, tmp1)
+        l = param1;
+        tmp = runtime.safeCall(g(minimax.OWin, minimax.XWin));
+        lambda$this = runtime.safeCall(lambda_inst_48_tsni(f, g));
+        tmp1 = map_inst_48_3_tsni(lambda$this, l);
+        return foldr_inst_48_67_tsni(f, tmp, tmp1)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static searchTree(p7, board6) {
+  static searchTree(p, board1) {
     let tmp, lambda$this, lambda$this1;
-    lambda$this = runtime.safeCall(lambda_inst_49_14_tsni(p7));
-    lambda$this1 = runtime.safeCall(lambda_inst_49_22_tsni(p7));
-    tmp = repTree_inst_49_27_tsni(lambda$this, lambda$this1, board6);
+    lambda$this = runtime.safeCall(lambda_inst_49_14_tsni(p));
+    lambda$this1 = runtime.safeCall(lambda_inst_49_22_tsni(p));
+    tmp = repTree_inst_49_27_tsni(lambda$this, lambda$this1, board1);
     return prune_inst_49_29_tsni(5, tmp)
   } 
-  static cropTree(t3) {
-    let param0, param1, x4, l1, param01, x5, l2, a1, tmp, tmp1;
-    if (t3 instanceof minimax.Branch.class) {
-      param0 = t3.a;
-      param1 = t3.cs;
-      a1 = param0;
+  static cropTree(t) {
+    let param0, param1, x, l, param01, x1, l1, a, tmp, tmp1;
+    if (t instanceof minimax.Branch.class) {
+      param0 = t.a;
+      param1 = t.cs;
+      a = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
-        return minimax.Branch(a1, NofibPrelude.Nil)
+        return minimax.Branch(a, NofibPrelude.Nil)
       } else {
         if (param0 instanceof minimax.Score.class) {
           param01 = param0.i;
-          x5 = param01;
-          l2 = param1;
-          tmp = runtime.safeCall(minimax.Score(x5));
-          tmp1 = NofibPrelude.map(minimax.cropTree, l2);
+          x1 = param01;
+          l1 = param1;
+          tmp = runtime.safeCall(minimax.Score(x1));
+          tmp1 = NofibPrelude.map(minimax.cropTree, l1);
           return minimax.Branch(tmp, tmp1)
         } else {
-          x4 = param0;
-          l1 = param1;
-          return minimax.Branch(x4, NofibPrelude.Nil)
+          x = param0;
+          l = param1;
+          return minimax.Branch(x, NofibPrelude.Nil)
         }
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static bestMove(p8, f5, g2, b1) {
+  static bestMove(p, f, g, b) {
     let tmp, tmp1, tmp2;
-    tmp = searchTree_inst_50_13_tsni(p8, b1);
+    tmp = searchTree_inst_50_13_tsni(p, b);
     tmp1 = mapTree_inst_50_5_tsni(static_inst_50_6_tsni, tmp);
     tmp2 = cropTree_inst_50_4_tsni(tmp1);
-    return mise_inst_50_2_tsni(f5, g2, tmp2)
+    return mise_inst_50_2_tsni(f, g, tmp2)
   } 
-  static alternate(player, f6, g3, board7) {
+  static alternate(player, f, g, board1) {
     let opposition, possibles, scores, boardd_eval, scrut, scrut1, scrut2, tmp, tmp1, lambda$this;
-    scrut2 = fullBoard_inst_51_52_tsni(board7);
+    scrut2 = fullBoard_inst_51_52_tsni(board1);
     if (scrut2 === true) {
       return NofibPrelude.Nil
     } else {
-      tmp = static_inst_51_53_tsni(board7);
+      tmp = static_inst_51_53_tsni(board1);
       scrut1 = evaluationEq_inst_51_71_tsni(tmp, minimax.XWin);
       if (scrut1 === true) {
         return NofibPrelude.Nil
       } else {
-        tmp1 = static_inst_51_55_tsni(board7);
+        tmp1 = static_inst_51_55_tsni(board1);
         scrut = evaluationEq_inst_51_72_tsni(tmp1, minimax.OWin);
         if (scrut === true) {
           return NofibPrelude.Nil
         } else {
           opposition = minimax.opposite(player);
-          possibles = newPositions_inst_51_56_tsni(player, board7);
-          lambda$this = runtime.safeCall(lambda_inst_51_57_tsni(f6, g3, opposition));
+          possibles = newPositions_inst_51_56_tsni(player, board1);
+          lambda$this = runtime.safeCall(lambda_inst_51_57_tsni(f, g, opposition));
           scores = NofibPrelude.map(lambda$this, possibles);
-          boardd_eval = best_inst_51_58_tsni(f6, possibles, scores);
-          return runtime.safeCall(boardd_eval(f6, g3, opposition))
+          boardd_eval = best_inst_51_58_tsni(f, possibles, scores);
+          return runtime.safeCall(boardd_eval(f, g, opposition))
         }
       }
     }

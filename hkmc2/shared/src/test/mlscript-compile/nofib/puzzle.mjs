@@ -4343,8 +4343,8 @@ lambda2 = (undefined, function (d, h) {
       static [definitionMetadata] = ["object", "RightBank"]; 
     };
     this.RightBank = globalThis.Object.freeze(new RightBank$class);
-    this.State = function State(b1, e1, l1, a1) {
-      return globalThis.Object.freeze(new State.class(b1, e1, l1, a1));
+    this.State = function State(b, e, l, a) {
+      return globalThis.Object.freeze(new State.class(b, e, l, a));
     };
     Object.defineProperty(this.State, "class", {
       enumerable: true,
@@ -4404,39 +4404,39 @@ lambda2 = (undefined, function (d, h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static isEnd(i1) {
-    if (i1 instanceof puzzle.Bono.class) {
+  static isEnd(i) {
+    if (i instanceof puzzle.Bono.class) {
       return false
-    } else if (i1 instanceof puzzle.Edge.class) {
+    } else if (i instanceof puzzle.Edge.class) {
       return false
-    } else if (i1 instanceof puzzle.Larry.class) {
+    } else if (i instanceof puzzle.Larry.class) {
       return false
-    } else if (i1 instanceof puzzle.Adam.class) {
+    } else if (i instanceof puzzle.Adam.class) {
       return true
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static itemFromTo(a1, b1) {
+  static itemFromTo(a, b) {
     let scrut, tmp, tmp1;
-    scrut = puzzle.itemEq(a1, b1);
+    scrut = puzzle.itemEq(a, b);
     if (scrut === true) {
-      return NofibPrelude.Cons(a1, NofibPrelude.Nil)
+      return NofibPrelude.Cons(a, NofibPrelude.Nil)
     } else {
-      tmp = puzzle.succItem(a1);
-      tmp1 = puzzle.itemFromTo(tmp, b1);
-      return NofibPrelude.Cons(a1, tmp1)
+      tmp = puzzle.succItem(a);
+      tmp1 = puzzle.itemFromTo(tmp, b);
+      return NofibPrelude.Cons(a, tmp1)
     }
   } 
-  static bankEq(a2, b2) {
-    if (a2 instanceof puzzle.LeftBank.class) {
-      if (b2 instanceof puzzle.LeftBank.class) {
+  static bankEq(a, b) {
+    if (a instanceof puzzle.LeftBank.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         return true
       } else {
         return false
       }
-    } else if (a2 instanceof puzzle.RightBank.class) {
-      if (b2 instanceof puzzle.RightBank.class) {
+    } else if (a instanceof puzzle.RightBank.class) {
+      if (b instanceof puzzle.RightBank.class) {
         return true
       } else {
         return false
@@ -4446,14 +4446,14 @@ lambda2 = (undefined, function (d, h) {
     }
   } 
   static stateEq(s1, s2) {
-    let param0, param1, param2, param3, a3, b3, c, d, param01, param11, param21, param31, e, f, g, h, tmp, tmp1, tmp2, lambda$this, lambda$this1, lambda$this2;
+    let param0, param1, param2, param3, a, b, c, d, param01, param11, param21, param31, e, f, g, h, tmp, tmp1, tmp2, lambda$this, lambda$this1, lambda$this2;
     if (s1 instanceof puzzle.State.class) {
       param0 = s1.b;
       param1 = s1.e;
       param2 = s1.l;
       param3 = s1.a;
-      a3 = param0;
-      b3 = param1;
+      a = param0;
+      b = param1;
       c = param2;
       d = param3;
       if (s2 instanceof puzzle.State.class) {
@@ -4465,8 +4465,8 @@ lambda2 = (undefined, function (d, h) {
         f = param11;
         g = param21;
         h = param31;
-        tmp = puzzle.bankEq(a3, e);
-        lambda$this = runtime.safeCall(lambda(b3, f));
+        tmp = puzzle.bankEq(a, e);
+        lambda$this = runtime.safeCall(lambda(b, f));
         tmp1 = runtime.short_and(tmp, lambda$this);
         lambda$this1 = runtime.safeCall(lambda1(c, g));
         tmp2 = runtime.short_and(tmp1, lambda$this1);
@@ -4480,46 +4480,46 @@ lambda2 = (undefined, function (d, h) {
     }
   } 
   static bonoPos(s) {
-    let param0, param1, param2, param3, a3, b3, c, d;
+    let param0, param1, param2, param3, a, b, c, d;
     if (s instanceof puzzle.State.class) {
       param0 = s.b;
       param1 = s.e;
       param2 = s.l;
       param3 = s.a;
-      a3 = param0;
-      b3 = param1;
+      a = param0;
+      b = param1;
       c = param2;
       d = param3;
-      return a3
+      return a
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static edgePos(s3) {
-    let param0, param1, param2, param3, a3, b3, c, d;
-    if (s3 instanceof puzzle.State.class) {
-      param0 = s3.b;
-      param1 = s3.e;
-      param2 = s3.l;
-      param3 = s3.a;
-      a3 = param0;
-      b3 = param1;
+  static edgePos(s) {
+    let param0, param1, param2, param3, a, b, c, d;
+    if (s instanceof puzzle.State.class) {
+      param0 = s.b;
+      param1 = s.e;
+      param2 = s.l;
+      param3 = s.a;
+      a = param0;
+      b = param1;
       c = param2;
       d = param3;
-      return b3
+      return b
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static larryPos(s4) {
-    let param0, param1, param2, param3, a3, b3, c, d;
-    if (s4 instanceof puzzle.State.class) {
-      param0 = s4.b;
-      param1 = s4.e;
-      param2 = s4.l;
-      param3 = s4.a;
-      a3 = param0;
-      b3 = param1;
+  static larryPos(s) {
+    let param0, param1, param2, param3, a, b, c, d;
+    if (s instanceof puzzle.State.class) {
+      param0 = s.b;
+      param1 = s.e;
+      param2 = s.l;
+      param3 = s.a;
+      a = param0;
+      b = param1;
       c = param2;
       d = param3;
       return c
@@ -4527,15 +4527,15 @@ lambda2 = (undefined, function (d, h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static adamPos(s5) {
-    let param0, param1, param2, param3, a3, b3, c, d;
-    if (s5 instanceof puzzle.State.class) {
-      param0 = s5.b;
-      param1 = s5.e;
-      param2 = s5.l;
-      param3 = s5.a;
-      a3 = param0;
-      b3 = param1;
+  static adamPos(s) {
+    let param0, param1, param2, param3, a, b, c, d;
+    if (s instanceof puzzle.State.class) {
+      param0 = s.b;
+      param1 = s.e;
+      param2 = s.l;
+      param3 = s.a;
+      a = param0;
+      b = param1;
       c = param2;
       d = param3;
       return d
@@ -4543,38 +4543,38 @@ lambda2 = (undefined, function (d, h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static position(i2, s6) {
-    if (i2 instanceof puzzle.Bono.class) {
-      return puzzle.bonoPos(s6)
-    } else if (i2 instanceof puzzle.Edge.class) {
-      return puzzle.edgePos(s6)
-    } else if (i2 instanceof puzzle.Larry.class) {
-      return puzzle.larryPos(s6)
-    } else if (i2 instanceof puzzle.Adam.class) {
-      return puzzle.adamPos(s6)
+  static position(i, s) {
+    if (i instanceof puzzle.Bono.class) {
+      return puzzle.bonoPos(s)
+    } else if (i instanceof puzzle.Edge.class) {
+      return puzzle.edgePos(s)
+    } else if (i instanceof puzzle.Larry.class) {
+      return puzzle.larryPos(s)
+    } else if (i instanceof puzzle.Adam.class) {
+      return puzzle.adamPos(s)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static updateState(s7, i3, pos) {
-    let param0, param1, param2, param3, a3, b3, c, d;
-    if (s7 instanceof puzzle.State.class) {
-      param0 = s7.b;
-      param1 = s7.e;
-      param2 = s7.l;
-      param3 = s7.a;
-      a3 = param0;
-      b3 = param1;
+  static updateState(s, i, pos) {
+    let param0, param1, param2, param3, a, b, c, d;
+    if (s instanceof puzzle.State.class) {
+      param0 = s.b;
+      param1 = s.e;
+      param2 = s.l;
+      param3 = s.a;
+      a = param0;
+      b = param1;
       c = param2;
       d = param3;
-      if (i3 instanceof puzzle.Bono.class) {
-        return runtime.safeCall(puzzle.State(pos, b3, c, d))
-      } else if (i3 instanceof puzzle.Edge.class) {
-        return runtime.safeCall(puzzle.State(a3, pos, c, d))
-      } else if (i3 instanceof puzzle.Larry.class) {
-        return runtime.safeCall(puzzle.State(a3, b3, pos, d))
-      } else if (i3 instanceof puzzle.Adam.class) {
-        return runtime.safeCall(puzzle.State(a3, b3, c, pos))
+      if (i instanceof puzzle.Bono.class) {
+        return runtime.safeCall(puzzle.State(pos, b, c, d))
+      } else if (i instanceof puzzle.Edge.class) {
+        return runtime.safeCall(puzzle.State(a, pos, c, d))
+      } else if (i instanceof puzzle.Larry.class) {
+        return runtime.safeCall(puzzle.State(a, b, pos, d))
+      } else if (i instanceof puzzle.Adam.class) {
+        return runtime.safeCall(puzzle.State(a, b, c, pos))
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -4582,10 +4582,10 @@ lambda2 = (undefined, function (d, h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static opposite(b3) {
-    if (b3 instanceof puzzle.LeftBank.class) {
+  static opposite(b) {
+    if (b instanceof puzzle.LeftBank.class) {
       return puzzle.RightBank
-    } else if (b3 instanceof puzzle.RightBank.class) {
+    } else if (b instanceof puzzle.RightBank.class) {
       return puzzle.LeftBank
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -4596,43 +4596,43 @@ lambda2 = (undefined, function (d, h) {
     tmp = runtime.safeCall(lambda3(state));
     return NofibPrelude.all(tmp, states)
   } 
-  static writeItem(i4, b4, rest) {
+  static writeItem(i, b, rest) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
-    if (i4 instanceof puzzle.Bono.class) {
-      if (b4 instanceof puzzle.LeftBank.class) {
+    if (i instanceof puzzle.Bono.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         tmp = NofibPrelude.nofibStringToList("    Bono |                    |\n");
         return NofibPrelude.append(tmp, rest)
-      } else if (b4 instanceof puzzle.RightBank.class) {
+      } else if (b instanceof puzzle.RightBank.class) {
         tmp1 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
         return NofibPrelude.append(tmp1, rest)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
-    } else if (i4 instanceof puzzle.Edge.class) {
-      if (b4 instanceof puzzle.LeftBank.class) {
+    } else if (i instanceof puzzle.Edge.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         tmp2 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
         return NofibPrelude.append(tmp2, rest)
-      } else if (b4 instanceof puzzle.RightBank.class) {
+      } else if (b instanceof puzzle.RightBank.class) {
         tmp3 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
         return NofibPrelude.append(tmp3, rest)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
-    } else if (i4 instanceof puzzle.Larry.class) {
-      if (b4 instanceof puzzle.LeftBank.class) {
+    } else if (i instanceof puzzle.Larry.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         tmp4 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
         return NofibPrelude.append(tmp4, rest)
-      } else if (b4 instanceof puzzle.RightBank.class) {
+      } else if (b instanceof puzzle.RightBank.class) {
         tmp5 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
         return NofibPrelude.append(tmp5, rest)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
-    } else if (i4 instanceof puzzle.Adam.class) {
-      if (b4 instanceof puzzle.LeftBank.class) {
+    } else if (i instanceof puzzle.Adam.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         tmp6 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
         return NofibPrelude.append(tmp6, rest)
-      } else if (b4 instanceof puzzle.RightBank.class) {
+      } else if (b instanceof puzzle.RightBank.class) {
         tmp7 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
         return NofibPrelude.append(tmp7, rest)
       } else {
@@ -4642,59 +4642,59 @@ lambda2 = (undefined, function (d, h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static writeState(state1, s8) {
+  static writeState(state, s) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
     tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
-    tmp1 = puzzle.bonoPos(state1);
-    tmp2 = puzzle.edgePos(state1);
-    tmp3 = puzzle.larryPos(state1);
-    tmp4 = puzzle.adamPos(state1);
+    tmp1 = puzzle.bonoPos(state);
+    tmp2 = puzzle.edgePos(state);
+    tmp3 = puzzle.larryPos(state);
+    tmp4 = puzzle.adamPos(state);
     tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
-    tmp6 = NofibPrelude.append(tmp5, s8);
-    tmp7 = writeItem_inst_23_43_tsni((b5, rest1) => {
+    tmp6 = NofibPrelude.append(tmp5, s);
+    tmp7 = writeItem_inst_23_43_tsni((b, rest) => {
       let tmp11, tmp12;
-      if (b5 instanceof puzzle.LeftBank.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
-        return NofibPrelude.append(tmp11, rest1)
-      } else if (b5 instanceof puzzle.RightBank.class) {
+        return NofibPrelude.append(tmp11, rest)
+      } else if (b instanceof puzzle.RightBank.class) {
         tmp12 = NofibPrelude.nofibStringToList("         |                    | Adam\n");
-        return NofibPrelude.append(tmp12, rest1)
+        return NofibPrelude.append(tmp12, rest)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }, tmp4, tmp6);
-    tmp8 = writeItem_inst_23_42_tsni((b5, rest1) => {
+    tmp8 = writeItem_inst_23_42_tsni((b, rest) => {
       let tmp11, tmp12;
-      if (b5 instanceof puzzle.LeftBank.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
-        return NofibPrelude.append(tmp11, rest1)
-      } else if (b5 instanceof puzzle.RightBank.class) {
+        return NofibPrelude.append(tmp11, rest)
+      } else if (b instanceof puzzle.RightBank.class) {
         tmp12 = NofibPrelude.nofibStringToList("         |                    | Larry\n");
-        return NofibPrelude.append(tmp12, rest1)
+        return NofibPrelude.append(tmp12, rest)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }, tmp3, tmp7);
-    tmp9 = writeItem_inst_23_41_tsni((b5, rest1) => {
+    tmp9 = writeItem_inst_23_41_tsni((b, rest) => {
       let tmp11, tmp12;
-      if (b5 instanceof puzzle.LeftBank.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
-        return NofibPrelude.append(tmp11, rest1)
-      } else if (b5 instanceof puzzle.RightBank.class) {
+        return NofibPrelude.append(tmp11, rest)
+      } else if (b instanceof puzzle.RightBank.class) {
         tmp12 = NofibPrelude.nofibStringToList("         |                    | The Edge\n");
-        return NofibPrelude.append(tmp12, rest1)
+        return NofibPrelude.append(tmp12, rest)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     }, tmp2, tmp8);
-    tmp10 = writeItem_inst_23_39_tsni((b5, rest1) => {
+    tmp10 = writeItem_inst_23_39_tsni((b, rest) => {
       let tmp11, tmp12;
-      if (b5 instanceof puzzle.LeftBank.class) {
+      if (b instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
-        return NofibPrelude.append(tmp11, rest1)
-      } else if (b5 instanceof puzzle.RightBank.class) {
+        return NofibPrelude.append(tmp11, rest)
+      } else if (b instanceof puzzle.RightBank.class) {
         tmp12 = NofibPrelude.nofibStringToList("         |                    | Bono\n");
-        return NofibPrelude.append(tmp12, rest1)
+        return NofibPrelude.append(tmp12, rest)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -4718,20 +4718,20 @@ lambda2 = (undefined, function (d, h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static writeHistory(history1, x) {
+  static writeHistory(history, x) {
     let tmp, lambda$this;
-    if (history1 instanceof NofibPrelude.Nil.class) {
+    if (history instanceof NofibPrelude.Nil.class) {
       return x
     } else {
-      lambda$this = runtime.safeCall(lambda_inst_24_25_tsni(history1));
-      tmp = NofibPrelude.foldr(lambda$this, lambda5, history1);
+      lambda$this = runtime.safeCall(lambda_inst_24_25_tsni(history));
+      tmp = NofibPrelude.foldr(lambda$this, lambda5, history);
       return runtime.safeCall(tmp(x))
     }
   } 
-  static writeSolutions(solutions, count, s9) {
+  static writeSolutions(solutions, count, s) {
     let param0, param1, item, next, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
     if (solutions instanceof NofibPrelude.Nil.class) {
-      return s9
+      return s
     } else if (solutions instanceof NofibPrelude.Cons.class) {
       param0 = solutions.head;
       param1 = solutions.tail;
@@ -4741,7 +4741,7 @@ lambda2 = (undefined, function (d, h) {
       tmp1 = NofibPrelude.stringOfInt(count);
       tmp2 = NofibPrelude.nofibStringToList(tmp1);
       tmp3 = count + 1;
-      tmp4 = puzzle.writeSolutions(next, tmp3, s9);
+      tmp4 = puzzle.writeSolutions(next, tmp3, s);
       tmp5 = writeHistory_inst_26_27_tsni(item, tmp4);
       tmp6 = NofibPrelude.Cons("\n", tmp5);
       tmp7 = NofibPrelude.append(tmp2, tmp6);
@@ -4750,37 +4750,37 @@ lambda2 = (undefined, function (d, h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static minSolutions(history2) {
-    let param0, param1, history3, next, tmp, tmp1, tmp2;
-    if (history2 instanceof NofibPrelude.Nil.class) {
+  static minSolutions(history) {
+    let param0, param1, history1, next, tmp, tmp1, tmp2;
+    if (history instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (history2 instanceof NofibPrelude.Cons.class) {
-      param0 = history2.head;
-      param1 = history2.tail;
-      history3 = param0;
+    } else if (history instanceof NofibPrelude.Cons.class) {
+      param0 = history.head;
+      param1 = history.tail;
+      history1 = param0;
       next = param1;
-      tmp = puzzle.totalTime(history3);
-      tmp1 = NofibPrelude.Cons(history3, NofibPrelude.Nil);
+      tmp = puzzle.totalTime(history1);
+      tmp1 = NofibPrelude.Cons(history1, NofibPrelude.Nil);
       tmp2 = minAcc(tmp, tmp1, next);
       return NofibPrelude.reverse(tmp2)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static u2times(i5) {
-    if (i5 instanceof puzzle.Bono.class) {
+  static u2times(i) {
+    if (i instanceof puzzle.Bono.class) {
       return 10
-    } else if (i5 instanceof puzzle.Edge.class) {
+    } else if (i instanceof puzzle.Edge.class) {
       return 5
-    } else if (i5 instanceof puzzle.Larry.class) {
+    } else if (i instanceof puzzle.Larry.class) {
       return 2
-    } else if (i5 instanceof puzzle.Adam.class) {
+    } else if (i instanceof puzzle.Adam.class) {
       return 1
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static transfer(source, dest, location, countdown, history3) {
+  static transfer(source, dest, location, countdown, history) {
     let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
     scrut = puzzle.stateEq(source, dest);
     if (scrut === true) {
@@ -4788,31 +4788,31 @@ lambda2 = (undefined, function (d, h) {
         countdown,
         dest
       ]);
-      tmp = NofibPrelude.Cons(arr, history3);
+      tmp = NofibPrelude.Cons(arr, history);
       return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
     } else {
       arr1 = globalThis.Object.freeze([
         countdown,
         dest
       ]);
-      tmp1 = NofibPrelude.Cons(arr1, history3);
+      tmp1 = NofibPrelude.Cons(arr1, history);
       newHistory = tmp1;
       tmp2 = puzzle.opposite(location);
       newLocation = tmp2;
       tmp3 = itemFromTo_inst_28_9_tsni(puzzle.Bono, puzzle.Adam);
-      tmp4 = lscomp1$_inst_28_tsni(source, dest, location, countdown, history3, newHistory, newLocation, tmp3);
+      tmp4 = lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
       tmp5 = concat_inst_28_4_tsni(tmp4);
       moveOne = tmp5;
       tmp6 = itemFromTo_inst_28_3_tsni(puzzle.Bono, puzzle.Larry);
-      tmp7 = lscomp2$_inst_28_tsni(source, dest, location, countdown, history3, newHistory, newLocation, tmp6);
+      tmp7 = lscomp2$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
       tmp8 = concat_inst_28_53_tsni(tmp7);
       moveTwo = tmp8;
       return append_inst_28_54_tsni(moveOne, moveTwo)
     }
   } 
-  static testPuzzle_nofib(x1) {
-    let time, scrut, solutions1, mins, tmp, tmp1, tmp2, tmp3;
-    tmp = NofibPrelude.listLen(x1);
+  static testPuzzle_nofib(x) {
+    let time, scrut, solutions, mins, tmp, tmp1, tmp2, tmp3;
+    tmp = NofibPrelude.listLen(x);
     scrut = tmp === 1;
     if (scrut === true) {
       tmp1 = 0;
@@ -4821,8 +4821,8 @@ lambda2 = (undefined, function (d, h) {
     }
     time = tmp1;
     tmp2 = transfer_inst_29_30_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
-    solutions1 = tmp2;
-    tmp3 = puzzle.minSolutions(solutions1);
+    solutions = tmp2;
+    tmp3 = puzzle.minSolutions(solutions);
     mins = tmp3;
     return writeSolutions_inst_29_31_tsni(mins, 1, NofibPrelude.Nil)
   } 

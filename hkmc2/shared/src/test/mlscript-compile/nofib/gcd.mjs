@@ -1019,8 +1019,8 @@ lambda1 = (undefined, function (caseScrut) {
       _deforest_Deforest_Arr_3_0 = 1;
       _deforest_Deforest_Arr_3_1 = 0;
       _deforest_Deforest_Arr_3_2 = x;
-      arr1 = (v1v2v31) => {
-        return match_u1u2u3_arm_Deforest_Arr_3_inst_5_2_tsni(v1v2v31, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
+      arr1 = (v1v2v3) => {
+        return match_u1u2u3_arm_Deforest_Arr_3_inst_5_2_tsni(v1v2v3, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2)
       };
       _deforest_Deforest_Arr_3_01 = 0;
       _deforest_Deforest_Arr_3_11 = 1;
@@ -1032,25 +1032,25 @@ lambda1 = (undefined, function (caseScrut) {
     }
   } 
   static max_(ls) {
-    let param0, param1, x1, param01, param11, y1, xs, scrut, x2, tmp, tmp1;
+    let param0, param1, x, param01, param11, y, xs, scrut, x1, tmp, tmp1;
     if (ls instanceof NofibPrelude.Cons.class) {
       param0 = ls.head;
       param1 = ls.tail;
-      x2 = param0;
       x1 = param0;
+      x = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
-        return x2
+        return x1
       } else if (param1 instanceof NofibPrelude.Cons.class) {
         param01 = param1.head;
         param11 = param1.tail;
-        y1 = param01;
+        y = param01;
         xs = param11;
-        scrut = x1 < y1;
+        scrut = x < y;
         if (scrut === true) {
-          tmp = NofibPrelude.Cons(y1, xs);
+          tmp = NofibPrelude.Cons(y, xs);
           return gcd.max_(tmp)
         } else {
-          tmp1 = NofibPrelude.Cons(x1, xs);
+          tmp1 = NofibPrelude.Cons(x, xs);
           return gcd.max_(tmp1)
         }
       } else {
@@ -1077,8 +1077,8 @@ lambda1 = (undefined, function (caseScrut) {
     rs = tmp8;
     return gcd.max_(rs)
   } 
-  static testGcd_nofib(x1) {
-    return test_inst_12_13_tsni(x1)
+  static testGcd_nofib(x) {
+    return test_inst_12_13_tsni(x)
   } 
   static main() {
     return testGcd_nofib_inst_14_15_tsni(40)

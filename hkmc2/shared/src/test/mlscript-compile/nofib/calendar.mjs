@@ -7393,16 +7393,16 @@ lambda = (undefined, function (x) {
   static height(p) {
     return NofibPrelude.listLen(p)
   } 
-  static width(p1) {
+  static width(p) {
     let tmp;
-    tmp = NofibPrelude.head(p1);
+    tmp = NofibPrelude.head(p);
     return NofibPrelude.listLen(tmp)
   } 
-  static stack(ls1) {
-    return NofibPrelude.foldr1(lambda1, ls1)
+  static stack(ls) {
+    return NofibPrelude.foldr1(lambda1, ls)
   } 
-  static spread(ls2) {
-    return NofibPrelude.foldr1(lambda2, ls2)
+  static spread(ls) {
+    return NofibPrelude.foldr1(lambda2, ls)
   } 
   static emptyPic(hw) {
     let first1, first0, h, w, tmp;
@@ -7428,30 +7428,30 @@ lambda = (undefined, function (x) {
       return NofibPrelude.Cons(tmp, tmp2)
     }
   } 
-  static block(n1, t) {
+  static block(n, t) {
     let tmp, tmp1;
-    tmp = groop_inst_62_20_tsni(n1, t);
+    tmp = groop_inst_62_20_tsni(n, t);
     tmp1 = map_inst_62_83_tsni(calendar.spread, tmp);
     return calendar.stack(tmp1)
   } 
-  static blockT(n2, t1) {
+  static blockT(n, t) {
     let tmp, tmp1;
-    tmp = groop_inst_63_64_tsni(n2, t1);
+    tmp = groop_inst_63_64_tsni(n, t);
     tmp1 = map_inst_63_94_tsni(calendar.stack, tmp);
     return calendar.stack(tmp1)
   } 
-  static lframe(mn, p2) {
-    let first1, first0, m, n3, h, w, tmp, tmp1, tmp2, arr, tmp3, tmp4, tmp5, arr1, tmp6, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  static lframe(mn, p) {
+    let first1, first0, m, n, h, w, tmp, tmp1, tmp2, arr, tmp3, tmp4, tmp5, arr1, tmp6, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     if (runtime.Tuple.isArrayLike(mn) && mn.length === 2) {
       first0 = runtime.Tuple.get(mn, 0);
       first1 = runtime.Tuple.get(mn, 1);
       m = first0;
-      n3 = first1;
-      tmp = calendar.height(p2);
+      n = first1;
+      tmp = calendar.height(p);
       h = tmp;
-      tmp1 = calendar.width(p2);
+      tmp1 = calendar.width(p);
       w = tmp1;
-      tmp2 = n3 - w;
+      tmp2 = n - w;
       _deforest_Deforest_Arr_2_0 = h;
       _deforest_Deforest_Arr_2_1 = tmp2;
       arr = () => {
@@ -7464,10 +7464,10 @@ lambda = (undefined, function (x) {
         return replicate_inst_65_66_40_tsni(h1, tmp7)
       };
       tmp3 = emptyPic_inst_65_66_tsni(arr);
-      tmp4 = zipWith_inst_65_67_tsni(NofibPrelude.append, p2, tmp3);
+      tmp4 = zipWith_inst_65_67_tsni(NofibPrelude.append, p, tmp3);
       tmp5 = m - h;
       _deforest_Deforest_Arr_2_01 = tmp5;
-      _deforest_Deforest_Arr_2_11 = n3;
+      _deforest_Deforest_Arr_2_11 = n;
       arr1 = () => {
         let first11, first01, h1, w1, tmp7;
         first01 = _deforest_Deforest_Arr_2_01;
@@ -7495,9 +7495,9 @@ lambda = (undefined, function (x) {
       return tmp2 == 0
     }
   } 
-  static monthLengths(year1) {
+  static monthLengths(year) {
     let feb, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11;
-    scrut = calendar.leap(year1);
+    scrut = calendar.leap(year);
     if (scrut === true) {
       tmp = 29;
     } else {
@@ -7517,42 +7517,42 @@ lambda = (undefined, function (x) {
     tmp11 = NofibPrelude.Cons(feb, tmp10);
     return NofibPrelude.Cons(31, tmp11)
   } 
-  static jan1st(year2) {
+  static jan1st(year) {
     let last, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
-    tmp = year2 - 1;
+    tmp = year - 1;
     last = tmp;
     tmp1 = NofibPrelude.intDiv(last, 4);
-    tmp2 = year2 + tmp1;
+    tmp2 = year + tmp1;
     tmp3 = NofibPrelude.intDiv(last, 100);
     tmp4 = tmp2 - tmp3;
     tmp5 = NofibPrelude.intDiv(last, 400);
     tmp6 = tmp4 + tmp5;
     return NofibPrelude.intMod(tmp6, 7)
   } 
-  static firstDays(year3) {
+  static firstDays(year) {
     let tmp, tmp1, tmp2, tmp3;
-    tmp = calendar.jan1st(year3);
-    tmp1 = monthLengths_inst_68_10_tsni(year3);
+    tmp = calendar.jan1st(year);
+    tmp1 = monthLengths_inst_68_10_tsni(year);
     tmp2 = scanl_inst_68_11_tsni(lambda4, tmp, tmp1);
     tmp3 = map_inst_68_12_tsni(lambda5, tmp2);
     return take_inst_68_13_tsni(12, tmp3)
   } 
-  static space(n3) {
-    return NofibPrelude.replicate(n3, " ")
+  static space(n) {
+    return NofibPrelude.replicate(n, " ")
   } 
-  static ljustify(n4, s) {
+  static ljustify(n, s) {
     let tmp, tmp1, tmp2;
     tmp = NofibPrelude.listLen(s);
-    tmp1 = n4 - tmp;
+    tmp1 = n - tmp;
     tmp2 = calendar.space(tmp1);
     return NofibPrelude.append(s, tmp2)
   } 
-  static rjustify(n5, s1) {
+  static rjustify(n, s) {
     let tmp, tmp1, tmp2;
-    tmp = NofibPrelude.listLen(s1);
-    tmp1 = n5 - tmp;
+    tmp = NofibPrelude.listLen(s);
+    tmp1 = n - tmp;
     tmp2 = space_inst_69_26_tsni(tmp1);
-    return append_inst_69_84_tsni(tmp2, s1)
+    return append_inst_69_84_tsni(tmp2, s)
   } 
   static date(ml, d) {
     let scrut, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this;
@@ -7569,28 +7569,28 @@ lambda = (undefined, function (x) {
       return NofibPrelude.Cons(tmp4, NofibPrelude.Nil)
     }
   } 
-  static dates(fd, ml1) {
+  static dates(fd, ml) {
     let tmp, tmp1, tmp2, lambda$this;
     tmp = 1 - fd;
     tmp1 = 42 - fd;
     tmp2 = enumFromTo_inst_71_28_tsni(tmp, tmp1);
-    lambda$this = runtime.safeCall(lambda_inst_71_22_tsni(ml1));
+    lambda$this = runtime.safeCall(lambda_inst_71_22_tsni(ml));
     return map_inst_71_85_tsni(lambda$this, tmp2)
   } 
-  static cjustify(n6, s2) {
+  static cjustify(n, s) {
     let m, halfm, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
-    tmp = NofibPrelude.listLen(s2);
-    tmp1 = n6 - tmp;
+    tmp = NofibPrelude.listLen(s);
+    tmp1 = n - tmp;
     m = tmp1;
     tmp2 = NofibPrelude.intDiv(m, 2);
     halfm = tmp2;
     tmp3 = space_inst_72_31_tsni(halfm);
     tmp4 = m - halfm;
     tmp5 = calendar.space(tmp4);
-    tmp6 = NofibPrelude.append(s2, tmp5);
+    tmp6 = NofibPrelude.append(s, tmp5);
     return append_inst_72_86_tsni(tmp3, tmp6)
   } 
-  static cal(year4) {
+  static cal(year) {
     let side, end, daynames, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Cons_head, _deforest_Cons_tail;
     _deforest_Deforest_Arr_2_0 = 8;
     _deforest_Deforest_Arr_2_1 = 2;
@@ -7624,23 +7624,23 @@ lambda = (undefined, function (x) {
       return ys
     };
     tmp3 = (ys) => {
-      let param0, param1, x, xs1, tmp7;
+      let param0, param1, x, xs, tmp7;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       x = param0;
-      xs1 = param1;
-      tmp7 = append_inst_73_6_14_15_16_17_91_tsni(xs1, ys);
+      xs = param1;
+      tmp7 = append_inst_73_6_14_15_16_17_91_tsni(xs, ys);
       return NofibPrelude.Cons(x, tmp7)
     };
     daynames = tmp3;
-    tmp4 = banner_inst_73_37_tsni(year4);
-    tmp5 = body$_inst_73_6_tsni(side, end, daynames, year4);
+    tmp4 = banner_inst_73_37_tsni(year);
+    tmp5 = body$_inst_73_6_tsni(side, end, daynames, year);
     tmp6 = append_inst_73_90_tsni(tmp4, tmp5);
     return unlines_inst_73_2_tsni(tmp6)
   } 
-  static testCalendar_nofib(n7) {
+  static testCalendar_nofib(n) {
     let tmp, tmp1;
-    tmp = 1993 + n7;
+    tmp = 1993 + n;
     tmp1 = enumFromTo_inst_74_76_tsni(1993, tmp);
     return map_inst_74_79_tsni(lambda_inst_74_75_tsni, tmp1)
   } 

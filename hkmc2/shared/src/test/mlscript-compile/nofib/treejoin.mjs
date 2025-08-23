@@ -1162,8 +1162,8 @@ lambda = (undefined, function (c) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Tree"]; 
     };
-    this.Node = function Node(k1, l1, r1) {
-      return globalThis.Object.freeze(new Node.class(k1, l1, r1));
+    this.Node = function Node(k, l, r) {
+      return globalThis.Object.freeze(new Node.class(k, l, r));
     };
     Object.defineProperty(this.Node, "class", {
       enumerable: true,
@@ -1178,8 +1178,8 @@ lambda = (undefined, function (c) {
         static [definitionMetadata] = ["class", "Node", ["k", "l", "r"]]; 
       }
     });
-    this.Leaf = function Leaf(k1, e1) {
-      return globalThis.Object.freeze(new Leaf.class(k1, e1));
+    this.Leaf = function Leaf(k, e) {
+      return globalThis.Object.freeze(new Leaf.class(k, e));
     };
     Object.defineProperty(this.Leaf, "class", {
       enumerable: true,
@@ -1211,9 +1211,9 @@ lambda = (undefined, function (c) {
     lambda$this = runtime.safeCall(lambda(c));
     return runtime.short_or(tmp, lambda$this)
   } 
-  static isDigit(c1) {
+  static isDigit(c) {
     let n, tmp, tmp1, lambda$this;
-    tmp = runtime.safeCall(c1.codePointAt(0));
+    tmp = runtime.safeCall(c.codePointAt(0));
     n = tmp;
     tmp1 = n >= 48;
     lambda$this = runtime.safeCall(lambda1(n));
@@ -1262,33 +1262,33 @@ lambda = (undefined, function (c) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static lookupT(k1, t1) {
-    let param0, param1, k_, e1, scrut, param2, k_1, l, r, scrut1;
-    if (t1 instanceof treejoin.Node.class) {
-      param0 = t1.k;
-      param1 = t1.l;
-      param2 = t1.r;
+  static lookupT(k, t) {
+    let param0, param1, k_, e, scrut, param2, k_1, l, r, scrut1;
+    if (t instanceof treejoin.Node.class) {
+      param0 = t.k;
+      param1 = t.l;
+      param2 = t.r;
       k_1 = param0;
       l = param1;
       r = param2;
-      scrut1 = k1 <= k_1;
+      scrut1 = k <= k_1;
       if (scrut1 === true) {
-        return treejoin.lookupT(k1, l)
+        return treejoin.lookupT(k, l)
       } else {
-        return treejoin.lookupT(k1, r)
+        return treejoin.lookupT(k, r)
       }
-    } else if (t1 instanceof treejoin.Leaf.class) {
-      param0 = t1.k;
-      param1 = t1.e;
+    } else if (t instanceof treejoin.Leaf.class) {
+      param0 = t.k;
+      param1 = t.e;
       k_ = param0;
-      e1 = param1;
-      scrut = k1 === k_;
+      e = param1;
+      scrut = k === k_;
       if (scrut === true) {
-        return runtime.safeCall(NofibPrelude.Some(e1))
+        return runtime.safeCall(NofibPrelude.Some(e))
       } else {
         return NofibPrelude.None
       }
-    } else if (t1 instanceof treejoin.Empty.class) {
+    } else if (t instanceof treejoin.Empty.class) {
       return NofibPrelude.None
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -1297,35 +1297,35 @@ lambda = (undefined, function (c) {
   static readInt(s) {
     return readInt_(0, s)
   } 
-  static join(t11, t2, j) {
-    let param0, param1, param2, k2, l, r, k3, first2, first1, first0, a, b, c2, scrut, tmp;
-    if (t11 instanceof treejoin.Empty.class) {
+  static join(t1, t2, j) {
+    let param0, param1, param2, k, l, r, k1, first2, first1, first0, a, b, c, scrut, tmp;
+    if (t1 instanceof treejoin.Empty.class) {
       return j
     } else {
       if (t2 instanceof treejoin.Empty.class) {
         return j
       } else {
-        if (t11 instanceof treejoin.Leaf.class) {
-          param0 = t11.k;
-          param1 = t11.e;
-          k3 = param0;
+        if (t1 instanceof treejoin.Leaf.class) {
+          param0 = t1.k;
+          param1 = t1.e;
+          k1 = param0;
           if (runtime.Tuple.isArrayLike(param1) && param1.length === 3) {
             first0 = runtime.Tuple.get(param1, 0);
             first1 = runtime.Tuple.get(param1, 1);
             first2 = runtime.Tuple.get(param1, 2);
             a = first0;
             b = first1;
-            c2 = first2;
-            scrut = lookupT_inst_0_1_tsni(c2, t2);
-            return runtime.safeCall(scrut(j, a, b, c2))
+            c = first2;
+            scrut = lookupT_inst_0_1_tsni(c, t2);
+            return runtime.safeCall(scrut(j, a, b, c))
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
-        } else if (t11 instanceof treejoin.Node.class) {
-          param0 = t11.k;
-          param1 = t11.l;
-          param2 = t11.r;
-          k2 = param0;
+        } else if (t1 instanceof treejoin.Node.class) {
+          param0 = t1.k;
+          param1 = t1.l;
+          param2 = t1.r;
+          k = param0;
           l = param1;
           r = param2;
           tmp = treejoin.join(r, t2, j);
@@ -1336,27 +1336,27 @@ lambda = (undefined, function (c) {
       }
     }
   } 
-  static readTree(fk, s1, t3) {
+  static readTree(fk, s, t) {
     let scrut;
-    if (s1 instanceof NofibPrelude.Nil.class) {
-      return t3
+    if (s instanceof NofibPrelude.Nil.class) {
+      return t
     } else {
-      scrut = readInt_inst_2_3_tsni(s1);
-      return runtime.safeCall(scrut(fk, t3))
+      scrut = readInt_inst_2_3_tsni(s);
+      return runtime.safeCall(scrut(fk, t))
     }
   } 
   static testTreejoin_nofib(n) {
-    let c11, c2, a, b, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
+    let c1, c2, a, b, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
     tmp = runtime.safeCall(globalThis.fs.readFileSync("hkmc2/shared/src/test/mlscript/nofib/input/1500.1"));
     tmp1 = runtime.safeCall(tmp.toString());
     tmp2 = NofibPrelude.nofibStringToList(tmp1);
-    c11 = tmp2;
+    c1 = tmp2;
     tmp3 = runtime.safeCall(globalThis.fs.readFileSync("hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
     tmp4 = runtime.safeCall(tmp3.toString());
     tmp5 = NofibPrelude.nofibStringToList(tmp4);
     c2 = tmp5;
     tmp6 = lambda2;
-    tmp7 = readTree_inst_7_8_tsni(tmp6, c11, treejoin.Empty);
+    tmp7 = readTree_inst_7_8_tsni(tmp6, c1, treejoin.Empty);
     a = tmp7;
     tmp8 = lambda3;
     tmp9 = readTree_inst_7_9_tsni(tmp8, c2, treejoin.Empty);

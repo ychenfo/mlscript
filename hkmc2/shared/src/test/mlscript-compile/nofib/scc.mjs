@@ -1426,15 +1426,15 @@ lambda1 = (undefined, function (es) {
     let arr, arr1, tmp, tmp1, tmp2, lambda$this, lambda$this1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     _deforest_Deforest_Arr_2_01 = NofibPrelude.Nil;
     _deforest_Deforest_Arr_2_11 = NofibPrelude.Nil;
-    arr = (r1, xs1) => {
-      return match_vsns_arm_Deforest_Arr_2_inst_7_10_tsni(r1, xs1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+    arr = (r, xs) => {
+      return match_vsns_arm_Deforest_Arr_2_inst_7_10_tsni(r, xs, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
     };
     _deforest_Deforest_Arr_2_0 = (x) => {
       return match_ls_arm_Nil_inst_7_8_19_tsni(x)
     };
     _deforest_Deforest_Arr_2_1 = NofibPrelude.Nil;
-    arr1 = (r1, xs1) => {
-      return match_vsns_arm_Deforest_Arr_2_inst_7_8_tsni(r1, xs1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+    arr1 = (r, xs) => {
+      return match_vsns_arm_Deforest_Arr_2_inst_7_8_tsni(r, xs, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
     lambda$this = runtime.safeCall(lambda(es));
     tmp = dfs_inst_7_8_tsni(lambda$this, arr1, vs);
@@ -1453,41 +1453,41 @@ lambda1 = (undefined, function (es) {
     g = 6;
     h = 7;
     _deforest_Cons_head6 = h;
-    _deforest_Cons_tail6 = (r1, vs1, ns) => {
-      return match_xs_arm_Nil_inst_12_13_8_tsni(r1, vs1, ns)
+    _deforest_Cons_tail6 = (r, vs, ns) => {
+      return match_xs_arm_Nil_inst_12_13_8_tsni(r, vs, ns)
     };
-    tmp = (r1, vs1, ns) => {
-      return match_xs_arm_Cons_inst_12_13_8_tsni(r1, vs1, ns, _deforest_Cons_head6, _deforest_Cons_tail6)
+    tmp = (r, vs, ns) => {
+      return match_xs_arm_Cons_inst_12_13_8_tsni(r, vs, ns, _deforest_Cons_head6, _deforest_Cons_tail6)
     };
     _deforest_Cons_head5 = g;
     _deforest_Cons_tail5 = tmp;
-    tmp1 = (r1, vs1, ns) => {
-      return match_xs_arm_Cons_inst_12_13_8_tsni(r1, vs1, ns, _deforest_Cons_head5, _deforest_Cons_tail5)
+    tmp1 = (r, vs, ns) => {
+      return match_xs_arm_Cons_inst_12_13_8_tsni(r, vs, ns, _deforest_Cons_head5, _deforest_Cons_tail5)
     };
     _deforest_Cons_head4 = f;
     _deforest_Cons_tail4 = tmp1;
-    tmp2 = (r1, vs1, ns) => {
-      return match_xs_arm_Cons_inst_12_13_8_tsni(r1, vs1, ns, _deforest_Cons_head4, _deforest_Cons_tail4)
+    tmp2 = (r, vs, ns) => {
+      return match_xs_arm_Cons_inst_12_13_8_tsni(r, vs, ns, _deforest_Cons_head4, _deforest_Cons_tail4)
     };
     _deforest_Cons_head3 = d1;
     _deforest_Cons_tail3 = tmp2;
-    tmp3 = (r1, vs1, ns) => {
-      return match_xs_arm_Cons_inst_12_13_8_tsni(r1, vs1, ns, _deforest_Cons_head3, _deforest_Cons_tail3)
+    tmp3 = (r, vs, ns) => {
+      return match_xs_arm_Cons_inst_12_13_8_tsni(r, vs, ns, _deforest_Cons_head3, _deforest_Cons_tail3)
     };
     _deforest_Cons_head2 = c;
     _deforest_Cons_tail2 = tmp3;
-    tmp4 = (r1, vs1, ns) => {
-      return match_xs_arm_Cons_inst_12_13_8_tsni(r1, vs1, ns, _deforest_Cons_head2, _deforest_Cons_tail2)
+    tmp4 = (r, vs, ns) => {
+      return match_xs_arm_Cons_inst_12_13_8_tsni(r, vs, ns, _deforest_Cons_head2, _deforest_Cons_tail2)
     };
     _deforest_Cons_head1 = b;
     _deforest_Cons_tail1 = tmp4;
-    tmp5 = (r1, vs1, ns) => {
-      return match_xs_arm_Cons_inst_12_13_8_tsni(r1, vs1, ns, _deforest_Cons_head1, _deforest_Cons_tail1)
+    tmp5 = (r, vs, ns) => {
+      return match_xs_arm_Cons_inst_12_13_8_tsni(r, vs, ns, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp5;
-    tmp6 = (r1, vs1, ns) => {
-      return match_xs_arm_Cons_inst_12_13_8_tsni(r1, vs1, ns, _deforest_Cons_head, _deforest_Cons_tail)
+    tmp6 = (r, vs, ns) => {
+      return match_xs_arm_Cons_inst_12_13_8_tsni(r, vs, ns, _deforest_Cons_head, _deforest_Cons_tail)
     };
     vertices = tmp6;
     arr = globalThis.Object.freeze([

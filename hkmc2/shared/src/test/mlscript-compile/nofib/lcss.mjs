@@ -970,16 +970,16 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static algb1(xss, yss1) {
-    let param0, param1, x1, xs, tmp;
+  static algb1(xss, yss) {
+    let param0, param1, x, xs, tmp;
     if (xss instanceof NofibPrelude.Nil.class) {
-      return NofibPrelude.map(NofibPrelude.snd, yss1)
+      return NofibPrelude.map(NofibPrelude.snd, yss)
     } else if (xss instanceof NofibPrelude.Cons.class) {
       param0 = xss.head;
       param1 = xss.tail;
-      x1 = param0;
+      x = param0;
       xs = param1;
-      tmp = lcss.algb2(x1, 0, 0, yss1);
+      tmp = lcss.algb2(x, 0, 0, yss);
       return lcss.algb1(xs, tmp)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -992,7 +992,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
     return NofibPrelude.Cons(0, tmp1)
   } 
   static findk(k, km, m, ls) {
-    let param0, param1, first1, first0, x1, y, xys, scrut, tmp, tmp1, tmp2, tmp3;
+    let param0, param1, first1, first0, x, y, xys, scrut, tmp, tmp1, tmp2, tmp3;
     if (ls instanceof NofibPrelude.Nil.class) {
       return km
     } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -1001,14 +1001,14 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
-        x1 = first0;
+        x = first0;
         y = first1;
         xys = param1;
-        tmp = x1 + y;
+        tmp = x + y;
         scrut = tmp >= m;
         if (scrut === true) {
           tmp1 = k + 1;
-          tmp2 = x1 + y;
+          tmp2 = x + y;
           return lcss.findk(tmp1, k, tmp2, xys)
         } else {
           tmp3 = k + 1;
@@ -1021,81 +1021,81 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static algc(m1, n, xs1, ys1) {
-    let m2, xs11, xs2, l1, l2, k1, param0, param1, x1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33;
-    if (ys1 instanceof NofibPrelude.Nil.class) {
+  static algc(m, n, xs, ys) {
+    let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33;
+    if (ys instanceof NofibPrelude.Nil.class) {
       return lambda
     } else {
-      if (xs1 instanceof NofibPrelude.Cons.class) {
-        param0 = xs1.head;
-        param1 = xs1.tail;
-        x1 = param0;
+      if (xs instanceof NofibPrelude.Cons.class) {
+        param0 = xs.head;
+        param1 = xs.tail;
+        x = param0;
         if (param1 instanceof NofibPrelude.Nil.class) {
-          scrut = NofibPrelude.inList(x1, ys1);
+          scrut = NofibPrelude.inList(x, ys);
           if (scrut === true) {
-            return runtime.safeCall(lambda1(x1))
+            return runtime.safeCall(lambda1(x))
           } else {
             return lambda2
           }
         } else {
-          tmp = NofibPrelude.intDiv(m1, 2);
+          tmp = NofibPrelude.intDiv(m, 2);
           m2 = tmp;
-          tmp1 = NofibPrelude.take(m2, xs1);
-          xs11 = tmp1;
-          tmp2 = NofibPrelude.leave(m2, xs1);
+          tmp1 = NofibPrelude.take(m2, xs);
+          xs1 = tmp1;
+          tmp2 = NofibPrelude.leave(m2, xs);
           xs2 = tmp2;
-          tmp3 = lcss.algb(xs11, ys1);
+          tmp3 = lcss.algb(xs1, ys);
           l1 = tmp3;
           tmp4 = NofibPrelude.reverse(xs2);
-          tmp5 = NofibPrelude.reverse(ys1);
+          tmp5 = NofibPrelude.reverse(ys);
           tmp6 = lcss.algb(tmp4, tmp5);
           tmp7 = NofibPrelude.reverse(tmp6);
           l2 = tmp7;
           tmp8 = - 1;
           tmp9 = zip_inst_0_1_tsni(l1, l2);
           tmp10 = findk_inst_0_11_tsni(0, 0, tmp8, tmp9);
-          k1 = tmp10;
-          tmp11 = NofibPrelude.take(k1, ys1);
-          tmp12 = lcss.algc(m2, k1, xs11, tmp11);
-          tmp13 = m1 - m2;
-          tmp14 = n - k1;
-          tmp15 = NofibPrelude.leave(k1, ys1);
+          k = tmp10;
+          tmp11 = NofibPrelude.take(k, ys);
+          tmp12 = lcss.algc(m2, k, xs1, tmp11);
+          tmp13 = m - m2;
+          tmp14 = n - k;
+          tmp15 = NofibPrelude.leave(k, ys);
           tmp16 = lcss.algc(tmp13, tmp14, xs2, tmp15);
           return NofibPrelude.compose(tmp12, tmp16)
         }
       } else {
-        tmp17 = NofibPrelude.intDiv(m1, 2);
+        tmp17 = NofibPrelude.intDiv(m, 2);
         m2 = tmp17;
-        tmp18 = NofibPrelude.take(m2, xs1);
-        xs11 = tmp18;
-        tmp19 = NofibPrelude.leave(m2, xs1);
+        tmp18 = NofibPrelude.take(m2, xs);
+        xs1 = tmp18;
+        tmp19 = NofibPrelude.leave(m2, xs);
         xs2 = tmp19;
-        tmp20 = lcss.algb(xs11, ys1);
+        tmp20 = lcss.algb(xs1, ys);
         l1 = tmp20;
         tmp21 = NofibPrelude.reverse(xs2);
-        tmp22 = NofibPrelude.reverse(ys1);
+        tmp22 = NofibPrelude.reverse(ys);
         tmp23 = lcss.algb(tmp21, tmp22);
         tmp24 = NofibPrelude.reverse(tmp23);
         l2 = tmp24;
         tmp25 = - 1;
         tmp26 = zip_inst_0_2_tsni(l1, l2);
         tmp27 = findk_inst_0_12_tsni(0, 0, tmp25, tmp26);
-        k1 = tmp27;
-        tmp28 = NofibPrelude.take(k1, ys1);
-        tmp29 = lcss.algc(m2, k1, xs11, tmp28);
-        tmp30 = m1 - m2;
-        tmp31 = n - k1;
-        tmp32 = NofibPrelude.leave(k1, ys1);
+        k = tmp27;
+        tmp28 = NofibPrelude.take(k, ys);
+        tmp29 = lcss.algc(m2, k, xs1, tmp28);
+        tmp30 = m - m2;
+        tmp31 = n - k;
+        tmp32 = NofibPrelude.leave(k, ys);
         tmp33 = lcss.algc(tmp30, tmp31, xs2, tmp32);
         return NofibPrelude.compose(tmp29, tmp33)
       }
     }
   } 
-  static lcss(xs2, ys2) {
+  static lcss(xs, ys) {
     let tmp, tmp1, tmp2;
-    tmp = NofibPrelude.listLen(xs2);
-    tmp1 = NofibPrelude.listLen(ys2);
-    tmp2 = algc_inst_3_4_tsni(tmp, tmp1, xs2, ys2);
+    tmp = NofibPrelude.listLen(xs);
+    tmp1 = NofibPrelude.listLen(ys);
+    tmp2 = algc_inst_3_4_tsni(tmp, tmp1, xs, ys);
     return runtime.safeCall(tmp2(NofibPrelude.Nil))
   } 
   static lcssMain(a, b, c, d, e, f) {
@@ -1104,7 +1104,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
     tmp1 = NofibPrelude.enumFromThenTo(d, e, f);
     return lcss_inst_5_6_tsni(tmp, tmp1)
   } 
-  static testLCSS_nofib(d1) {
+  static testLCSS_nofib(d) {
     return lcssMain_inst_7_8_tsni(1, 2, 60, 30, 31, 90)
   } 
   static main() {

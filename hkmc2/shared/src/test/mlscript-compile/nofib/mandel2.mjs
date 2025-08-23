@@ -614,8 +614,8 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "MandTree"]; 
     };
-    this.NS = function NS(l1, r1) {
-      return globalThis.Object.freeze(new NS.class(l1, r1));
+    this.NS = function NS(l, r) {
+      return globalThis.Object.freeze(new NS.class(l, r));
     };
     Object.defineProperty(this.NS, "class", {
       enumerable: true,
@@ -629,8 +629,8 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
         static [definitionMetadata] = ["class", "NS", ["l", "r"]]; 
       }
     });
-    this.EW = function EW(l1, r1) {
-      return globalThis.Object.freeze(new EW.class(l1, r1));
+    this.EW = function EW(l, r) {
+      return globalThis.Object.freeze(new EW.class(l, r));
     };
     Object.defineProperty(this.EW, "class", {
       enumerable: true,
@@ -644,8 +644,8 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
         static [definitionMetadata] = ["class", "EW", ["l", "r"]]; 
       }
     });
-    this.Leaf = function Leaf(colour1) {
-      return globalThis.Object.freeze(new Leaf.class(colour1));
+    this.Leaf = function Leaf(colour) {
+      return globalThis.Object.freeze(new Leaf.class(colour));
     };
     Object.defineProperty(this.Leaf, "class", {
       enumerable: true,
@@ -738,23 +738,23 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
     tmp = y * mandel2.delta_q;
     return mandel2.qmn + tmp
   } 
-  static radius(x1, y1) {
+  static radius(x, y) {
     let tmp, tmp1;
-    tmp = x1 * x1;
-    tmp1 = y1 * y1;
+    tmp = x * x;
+    tmp1 = y * y;
     return tmp + tmp1
   } 
-  static new_x(x2, y2, p) {
+  static new_x(x, y, p) {
     let tmp, tmp1, tmp2;
-    tmp = x2 * x2;
-    tmp1 = y2 * y2;
+    tmp = x * x;
+    tmp1 = y * y;
     tmp2 = tmp - tmp1;
     return tmp2 + p
   } 
-  static new_y(x3, y3, q) {
+  static new_y(x, y, q) {
     let tmp, tmp1;
-    tmp = 2.0 * x3;
-    tmp1 = tmp * y3;
+    tmp = 2.0 * x;
+    tmp1 = tmp * y;
     return tmp1 + q
   } 
   static finite(t) {
@@ -799,11 +799,11 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static check_radius(p3, q1, k, x4, y4) {
+  static check_radius(p, q, k, x, y) {
     let xn, yn, r, kp, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
-    tmp = mandel2.new_x(x4, y4, p3);
+    tmp = mandel2.new_x(x, y, p);
     xn = tmp;
-    tmp1 = mandel2.new_y(x4, y4, q1);
+    tmp1 = mandel2.new_y(x, y, q);
     yn = tmp1;
     tmp2 = mandel2.radius(xn, yn);
     r = tmp2;
@@ -817,66 +817,66 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
       if (scrut === true) {
         return kp
       } else {
-        return mandel2.check_radius(p3, q1, kp, xn, yn)
+        return mandel2.check_radius(p, q, kp, xn, yn)
       }
     }
   } 
   static point_colour(xy) {
-    let first1, first0, x5, y5, tmp, tmp1;
+    let first1, first0, x, y, tmp, tmp1;
     if (runtime.Tuple.isArrayLike(xy) && xy.length === 2) {
       first0 = runtime.Tuple.get(xy, 0);
       first1 = runtime.Tuple.get(xy, 1);
-      x5 = first0;
-      y5 = first1;
-      tmp = mandel2.np(x5);
-      tmp1 = mandel2.nq(y5);
+      x = first0;
+      y = first1;
+      tmp = mandel2.np(x);
+      tmp1 = mandel2.nq(y);
       return mandel2.check_radius(tmp, tmp1, 0, 0.0, 0.0)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static check_perim(x1y1, x2y2) {
-    let col1, first1, first0, x11, y11, first11, first01, x21, y21, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+    let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     tmp = mandel2.point_colour(x1y1);
     col1 = tmp;
     if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
       first0 = runtime.Tuple.get(x1y1, 0);
       first1 = runtime.Tuple.get(x1y1, 1);
-      x11 = first0;
-      y11 = first1;
+      x1 = first0;
+      y1 = first1;
       if (runtime.Tuple.isArrayLike(x2y2) && x2y2.length === 2) {
         first01 = runtime.Tuple.get(x2y2, 0);
         first11 = runtime.Tuple.get(x2y2, 1);
-        x21 = first01;
-        y21 = first11;
+        x2 = first01;
+        y2 = first11;
         scrut7 = mandel2.equalp(x1y1, x2y2);
         if (scrut7 === true) {
           return col1
         } else {
-          _deforest_Deforest_Arr_2_0 = x21;
-          _deforest_Deforest_Arr_2_1 = y11;
+          _deforest_Deforest_Arr_2_0 = x2;
+          _deforest_Deforest_Arr_2_1 = y1;
           arr = () => {
-            let first12, first02, x5, y5, tmp6, tmp7;
+            let first12, first02, x, y, tmp6, tmp7;
             first02 = _deforest_Deforest_Arr_2_0;
             first12 = _deforest_Deforest_Arr_2_1;
-            x5 = first02;
-            y5 = first12;
-            tmp6 = mandel2.np(x5);
-            tmp7 = mandel2.nq(y5);
+            x = first02;
+            y = first12;
+            tmp6 = mandel2.np(x);
+            tmp7 = mandel2.nq(y);
             return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
           };
           col2 = point_colour_inst_0_7_tsni(arr);
           col3 = mandel2.point_colour(x2y2);
-          _deforest_Deforest_Arr_2_01 = x11;
-          _deforest_Deforest_Arr_2_11 = y21;
+          _deforest_Deforest_Arr_2_01 = x1;
+          _deforest_Deforest_Arr_2_11 = y2;
           arr1 = () => {
-            let first12, first02, x5, y5, tmp6, tmp7;
+            let first12, first02, x, y, tmp6, tmp7;
             first02 = _deforest_Deforest_Arr_2_01;
             first12 = _deforest_Deforest_Arr_2_11;
-            x5 = first02;
-            y5 = first12;
-            tmp6 = mandel2.np(x5);
-            tmp7 = mandel2.nq(y5);
+            x = first02;
+            y = first12;
+            tmp6 = mandel2.np(x);
+            tmp7 = mandel2.nq(y);
             return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
           };
           col4 = point_colour_inst_0_8_tsni(arr1);
@@ -900,33 +900,33 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
           if (corners_diff === true) {
             return - 1
           } else {
-            tmp2 = x11 + 1;
+            tmp2 = x1 + 1;
             arr2 = globalThis.Object.freeze([
               tmp2,
-              y11
+              y1
             ]);
-            scrut3 = check_line$(col1, x11, y11, x21, y21, arr2, mandel2.right);
+            scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
             if (scrut3 === true) {
-              tmp3 = y11 + 1;
+              tmp3 = y1 + 1;
               arr3 = globalThis.Object.freeze([
-                x21,
+                x2,
                 tmp3
               ]);
-              scrut4 = check_line$(col1, x11, y11, x21, y21, arr3, mandel2.down);
+              scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
               if (scrut4 === true) {
-                tmp4 = x21 - 1;
+                tmp4 = x2 - 1;
                 arr4 = globalThis.Object.freeze([
                   tmp4,
-                  y21
+                  y2
                 ]);
-                scrut5 = check_line$(col1, x11, y11, x21, y21, arr4, mandel2.left);
+                scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
                 if (scrut5 === true) {
-                  tmp5 = y21 - 1;
+                  tmp5 = y2 - 1;
                   arr5 = globalThis.Object.freeze([
-                    x11,
+                    x1,
                     tmp5
                   ]);
-                  scrut6 = check_line$(col1, x11, y11, x21, y21, arr5, mandel2.up);
+                  scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
                   if (scrut6 === true) {
                     return col1
                   } else {
@@ -950,19 +950,19 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static build_tree(x1y11, x2y21) {
-    let first1, first0, x11, y11, first11, first01, x21, y21, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
-    if (runtime.Tuple.isArrayLike(x1y11) && x1y11.length === 2) {
-      first0 = runtime.Tuple.get(x1y11, 0);
-      first1 = runtime.Tuple.get(x1y11, 1);
-      x11 = first0;
-      y11 = first1;
-      if (runtime.Tuple.isArrayLike(x2y21) && x2y21.length === 2) {
-        first01 = runtime.Tuple.get(x2y21, 0);
-        first11 = runtime.Tuple.get(x2y21, 1);
-        x21 = first01;
-        y21 = first11;
-        tmp = check_perim_inst_1_2_tsni(x1y11, x2y21);
+  static build_tree(x1y1, x2y2) {
+    let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
+    if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
+      first0 = runtime.Tuple.get(x1y1, 0);
+      first1 = runtime.Tuple.get(x1y1, 1);
+      x1 = first0;
+      y1 = first1;
+      if (runtime.Tuple.isArrayLike(x2y2) && x2y2.length === 2) {
+        first01 = runtime.Tuple.get(x2y2, 0);
+        first11 = runtime.Tuple.get(x2y2, 1);
+        x2 = first01;
+        y2 = first11;
+        tmp = check_perim_inst_1_2_tsni(x1y1, x2y2);
         rec_col = tmp;
         tmp1 = - 1;
         tmp2 = rec_col == tmp1;
@@ -970,8 +970,8 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
         if (scrut2 === true) {
           return runtime.safeCall(mandel2.Leaf(rec_col))
         } else {
-          tmp3 = x21 - x11;
-          tmp4 = y21 - y11;
+          tmp3 = x2 - x1;
+          tmp4 = y2 - y1;
           scrut = tmp3 >= tmp4;
           if (scrut === true) {
             tmp5 = "NS";
@@ -979,36 +979,36 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
             tmp5 = "EW";
           }
           split = tmp5;
-          tmp6 = x21 + x11;
+          tmp6 = x2 + x1;
           split_x = NofibPrelude.intDiv(tmp6, 2);
-          tmp7 = y21 + y11;
+          tmp7 = y2 + y1;
           split_y = NofibPrelude.intDiv(tmp7, 2);
-          nsp1 = x1y11;
+          nsp1 = x1y1;
           arr = globalThis.Object.freeze([
             split_x,
-            y21
+            y2
           ]);
           nsp2 = arr;
           tmp8 = split_x + 1;
           arr1 = globalThis.Object.freeze([
             tmp8,
-            y11
+            y1
           ]);
           nsp3 = arr1;
-          nsp4 = x2y21;
-          ewp1 = x1y11;
+          nsp4 = x2y2;
+          ewp1 = x1y1;
           arr2 = globalThis.Object.freeze([
-            x21,
+            x2,
             split_y
           ]);
           ewp2 = arr2;
           tmp9 = split_y + 1;
           arr3 = globalThis.Object.freeze([
-            x11,
+            x1,
             tmp9
           ]);
           ewp3 = arr3;
-          ewp4 = x2y21;
+          ewp4 = x2y2;
           scrut1 = split == "NS";
           if (scrut1 === true) {
             tmp10 = mandel2.build_tree(nsp1, nsp2);

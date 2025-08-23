@@ -694,8 +694,8 @@ lambda = (undefined, function (k, ss) {
 (class atom {
   static {
     atom1 = atom;
-    this.State = function State(position1, velocity1) {
-      return globalThis.Object.freeze(new State.class(position1, velocity1));
+    this.State = function State(position, velocity) {
+      return globalThis.Object.freeze(new State.class(position, velocity));
     };
     Object.defineProperty(this.State, "class", {
       enumerable: true,
@@ -739,20 +739,20 @@ lambda = (undefined, function (k, ss) {
       }
     }
   } 
-  static dotMult(fs1, gs1) {
-    let param0, param1, f, fs2, param01, param11, g, gs2, tmp, tmp1;
-    if (fs1 instanceof NofibPrelude.Cons.class) {
-      param0 = fs1.head;
-      param1 = fs1.tail;
+  static dotMult(fs, gs) {
+    let param0, param1, f, fs1, param01, param11, g, gs1, tmp, tmp1;
+    if (fs instanceof NofibPrelude.Cons.class) {
+      param0 = fs.head;
+      param1 = fs.tail;
       f = param0;
-      fs2 = param1;
-      if (gs1 instanceof NofibPrelude.Cons.class) {
-        param01 = gs1.head;
-        param11 = gs1.tail;
+      fs1 = param1;
+      if (gs instanceof NofibPrelude.Cons.class) {
+        param01 = gs.head;
+        param11 = gs.tail;
         g = param01;
-        gs2 = param11;
+        gs1 = param11;
         tmp = f * g;
-        tmp1 = atom.dotMult(fs2, gs2);
+        tmp1 = atom.dotMult(fs1, gs1);
         return NofibPrelude.Cons(tmp, tmp1)
       } else {
         return NofibPrelude.Nil
@@ -761,17 +761,17 @@ lambda = (undefined, function (k, ss) {
       return NofibPrelude.Nil
     }
   } 
-  static scalarMut(c, fs2) {
-    let param0, param1, f, fs3, tmp, tmp1;
-    if (fs2 instanceof NofibPrelude.Nil.class) {
+  static scalarMut(c, fs) {
+    let param0, param1, f, fs1, tmp, tmp1;
+    if (fs instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (fs2 instanceof NofibPrelude.Cons.class) {
-      param0 = fs2.head;
-      param1 = fs2.tail;
+    } else if (fs instanceof NofibPrelude.Cons.class) {
+      param0 = fs.head;
+      param1 = fs.tail;
       f = param0;
-      fs3 = param1;
+      fs1 = param1;
       tmp = c * f;
-      tmp1 = atom.scalarMut(c, fs3);
+      tmp1 = atom.scalarMut(c, fs1);
       return NofibPrelude.Cons(tmp, tmp1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -811,42 +811,42 @@ lambda = (undefined, function (k, ss) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static runExperiment(law, dt1, param, init) {
+  static runExperiment(law, dt, param, init) {
     let tmp;
-    tmp = runtime.safeCall(lambda1(law, dt1, param, init));
+    tmp = runtime.safeCall(lambda1(law, dt, param, init));
     return NofibPrelude.lazy(tmp)
   } 
   static testAtom_nofib(n) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, _deforest_Cons_head, _deforest_Cons_tail;
     _deforest_Cons_head = 1.0;
-    _deforest_Cons_tail = (c1) => {
-      return (gs2) => {
+    _deforest_Cons_tail = (c) => {
+      return (gs) => {
         return NofibPrelude.Nil
       }
     };
-    tmp = (c1) => {
-      let param0, param1, f, fs3, tmp7, tmp8, _deforest_Cons_head1, _deforest_Cons_tail1;
+    tmp = (c) => {
+      let param0, param1, f, fs, tmp7, tmp8, _deforest_Cons_head1, _deforest_Cons_tail1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       f = param0;
-      fs3 = param1;
-      tmp7 = c1 * f;
-      tmp8 = scalarMut_inst_8_9_4_tsni(c1, fs3);
+      fs = param1;
+      tmp7 = c * f;
+      tmp8 = scalarMut_inst_8_9_4_tsni(c, fs);
       _deforest_Cons_head1 = tmp7;
       _deforest_Cons_tail1 = tmp8;
-      return (gs2) => {
-        let param01, param11, f1, fs4, param02, param12, g, gs3, tmp9, tmp10;
+      return (gs) => {
+        let param01, param11, f1, fs1, param02, param12, g, gs1, tmp9, tmp10;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         f1 = param01;
-        fs4 = param11;
-        if (gs2 instanceof NofibPrelude.Cons.class) {
-          param02 = gs2.head;
-          param12 = gs2.tail;
+        fs1 = param11;
+        if (gs instanceof NofibPrelude.Cons.class) {
+          param02 = gs.head;
+          param12 = gs.tail;
           g = param02;
-          gs3 = param12;
+          gs1 = param12;
           tmp9 = f1 * g;
-          tmp10 = dotMult_inst_8_9_15_tsni(fs4, gs3);
+          tmp10 = dotMult_inst_8_9_15_tsni(fs1, gs1);
           return NofibPrelude.Cons(tmp9, tmp10)
         } else {
           return NofibPrelude.Nil

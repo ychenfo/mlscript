@@ -73414,8 +73414,8 @@ lambda = (undefined, function (subst) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Term"]; 
     };
-    this.Var = function Var(i1) {
-      return globalThis.Object.freeze(new Var.class(i1));
+    this.Var = function Var(i) {
+      return globalThis.Object.freeze(new Var.class(i));
     };
     Object.defineProperty(this.Var, "class", {
       enumerable: true,
@@ -73428,8 +73428,8 @@ lambda = (undefined, function (subst) {
         static [definitionMetadata] = ["class", "Var", ["i"]]; 
       }
     });
-    this.Fun = function Fun(i1, t1, l1) {
-      return globalThis.Object.freeze(new Fun.class(i1, t1, l1));
+    this.Fun = function Fun(i, t, l) {
+      return globalThis.Object.freeze(new Fun.class(i, t, l));
     };
     Object.defineProperty(this.Fun, "class", {
       enumerable: true,
@@ -73622,13 +73622,13 @@ lambda = (undefined, function (subst) {
       }
     }
   } 
-  static one_way_unify1_lst(tts1, tts2, subst1) {
-    let param0, param1, t11, ts1, param01, param11, t21, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
+  static one_way_unify1_lst(tts1, tts2, subst) {
+    let param0, param1, t1, ts1, param01, param11, t2, ts2, scrut, first1, first0, hd_ok, subst_, scrut1, first11, first01, tl_ok, subst__, arr, arr1, tmp, arr2, arr3, arr4, arr5, arr6;
     if (tts1 instanceof NofibPrelude.Nil.class) {
       if (tts2 instanceof NofibPrelude.Nil.class) {
         arr = globalThis.Object.freeze([
           true,
-          subst1
+          subst
         ]);
         return arr
       } else {
@@ -73641,14 +73641,14 @@ lambda = (undefined, function (subst) {
     } else if (tts1 instanceof NofibPrelude.Cons.class) {
       param0 = tts1.head;
       param1 = tts1.tail;
-      t11 = param0;
+      t1 = param0;
       ts1 = param1;
       if (tts2 instanceof NofibPrelude.Cons.class) {
         param01 = tts2.head;
         param11 = tts2.tail;
-        t21 = param01;
+        t2 = param01;
         ts2 = param11;
-        scrut = one_way_unify1_inst_5_tsni(t11, t21, subst1);
+        scrut = one_way_unify1_inst_5_tsni(t1, t2, subst);
         if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
           first0 = runtime.Tuple.get(scrut, 0);
           first1 = runtime.Tuple.get(scrut, 1);
@@ -73703,34 +73703,34 @@ lambda = (undefined, function (subst) {
       return arr6
     }
   } 
-  static one_way_unify(term11, term21) {
-    return one_way_unify1_inst_6_7_tsni(term11, term21, NofibPrelude.Nil)
+  static one_way_unify(term1, term2) {
+    return one_way_unify1_inst_6_7_tsni(term1, term2, NofibPrelude.Nil)
   } 
-  static apply_subst(subst2, t) {
-    let param0, param1, param2, f1, args, ls1, vid1, scrut, tmp, lambda$this;
+  static apply_subst(subst, t) {
+    let param0, param1, param2, f1, args, ls, vid, scrut, tmp, lambda$this;
     if (t instanceof boyer.Var.class) {
       param0 = t.i;
-      vid1 = param0;
-      scrut = find_inst_8_1_tsni(vid1, subst2);
-      return runtime.safeCall(scrut(vid1))
+      vid = param0;
+      scrut = find_inst_8_1_tsni(vid, subst);
+      return runtime.safeCall(scrut(vid))
     } else if (t instanceof boyer.Fun.class) {
       param0 = t.i;
       param1 = t.t;
       param2 = t.l;
       f1 = param0;
       args = param1;
-      ls1 = param2;
-      lambda$this = runtime.safeCall(lambda_inst_8_tsni(subst2));
+      ls = param2;
+      lambda$this = runtime.safeCall(lambda_inst_8_tsni(subst));
       tmp = NofibPrelude.map(lambda$this, args);
-      return runtime.safeCall(boyer.Fun(f1, tmp, ls1))
+      return runtime.safeCall(boyer.Fun(f1, tmp, ls))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static rewrite_with_lemmas_helper(term3, lss) {
-    let param0, param1, first1, first0, lhs, rhs, ls1, scrut, first11, first01, unified, subst3, tmp;
+  static rewrite_with_lemmas_helper(term, lss) {
+    let param0, param1, first1, first0, lhs, rhs, ls, scrut, first11, first01, unified, subst, tmp;
     if (lss instanceof NofibPrelude.Nil.class) {
-      return term3
+      return term
     } else if (lss instanceof NofibPrelude.Cons.class) {
       param0 = lss.head;
       param1 = lss.tail;
@@ -73739,18 +73739,18 @@ lambda = (undefined, function (subst) {
         first1 = runtime.Tuple.get(param0, 1);
         lhs = first0;
         rhs = first1;
-        ls1 = param1;
-        scrut = one_way_unify_inst_9_10_tsni(term3, lhs);
+        ls = param1;
+        scrut = one_way_unify_inst_9_10_tsni(term, lhs);
         if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
           first01 = runtime.Tuple.get(scrut, 0);
           first11 = runtime.Tuple.get(scrut, 1);
           unified = first01;
-          subst3 = first11;
+          subst = first11;
           if (unified === true) {
-            tmp = apply_subst_inst_9_11_tsni(subst3, rhs);
+            tmp = apply_subst_inst_9_11_tsni(subst, rhs);
             return rewrite_inst_9_tsni(tmp)
           } else {
-            return boyer.rewrite_with_lemmas_helper(term3, ls1)
+            return boyer.rewrite_with_lemmas_helper(term, ls)
           }
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -73762,21 +73762,21 @@ lambda = (undefined, function (subst) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static rewrite_with_lemmas(term4, lss1) {
+  static rewrite_with_lemmas(term, lss) {
     let tmp;
-    tmp = NofibPrelude.force(lss1);
-    return rewrite_with_lemmas_helper_inst_12_tsni(term4, tmp)
+    tmp = NofibPrelude.force(lss);
+    return rewrite_with_lemmas_helper_inst_12_tsni(term, tmp)
   } 
-  static rewrite(t3) {
+  static rewrite(t) {
     let param0, param1, param2, f1, args, lemmas, v, tmp, tmp1;
-    if (t3 instanceof boyer.Var.class) {
-      param0 = t3.i;
+    if (t instanceof boyer.Var.class) {
+      param0 = t.i;
       v = param0;
       return runtime.safeCall(boyer.Var(v))
-    } else if (t3 instanceof boyer.Fun.class) {
-      param0 = t3.i;
-      param1 = t3.t;
-      param2 = t3.l;
+    } else if (t instanceof boyer.Fun.class) {
+      param0 = t.i;
+      param1 = t.t;
+      param2 = t.l;
       f1 = param0;
       args = param1;
       lemmas = param2;
@@ -73802,35 +73802,35 @@ lambda = (undefined, function (subst) {
       return boyer.termInList(x, l)
     }
   } 
-  static falsep(x1, l1) {
+  static falsep(x, l) {
     let param0, param1, param2;
-    if (x1 instanceof boyer.Fun.class) {
-      param0 = x1.i;
-      param1 = x1.t;
-      param2 = x1.l;
+    if (x instanceof boyer.Fun.class) {
+      param0 = x.i;
+      param1 = x.t;
+      param2 = x.l;
       if (param0 instanceof boyer.FALSE.class) {
         return true
       } else {
-        return boyer.termInList(x1, l1)
+        return boyer.termInList(x, l)
       }
     } else {
-      return boyer.termInList(x1, l1)
+      return boyer.termInList(x, l)
     }
   } 
-  static tautologyp(x2, true_lst, false_lst) {
-    let param0, param1, param2, param01, param11, cond, param02, param12, t4, param03, param13, e, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1;
-    scrut5 = boyer.truep(x2, true_lst);
+  static tautologyp(x, true_lst, false_lst) {
+    let param0, param1, param2, param01, param11, cond, param02, param12, t, param03, param13, e, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1;
+    scrut5 = boyer.truep(x, true_lst);
     if (scrut5 === true) {
       return true
     } else {
-      scrut4 = boyer.falsep(x2, false_lst);
+      scrut4 = boyer.falsep(x, false_lst);
       if (scrut4 === true) {
         return false
       } else {
-        if (x2 instanceof boyer.Fun.class) {
-          param0 = x2.i;
-          param1 = x2.t;
-          param2 = x2.l;
+        if (x instanceof boyer.Fun.class) {
+          param0 = x.i;
+          param1 = x.t;
+          param2 = x.l;
           if (param0 instanceof boyer.IF.class) {
             if (param1 instanceof NofibPrelude.Cons.class) {
               param01 = param1.head;
@@ -73839,7 +73839,7 @@ lambda = (undefined, function (subst) {
               if (param11 instanceof NofibPrelude.Cons.class) {
                 param02 = param11.head;
                 param12 = param11.tail;
-                t4 = param02;
+                t = param02;
                 if (param12 instanceof NofibPrelude.Cons.class) {
                   param03 = param12.head;
                   param13 = param12.tail;
@@ -73847,14 +73847,14 @@ lambda = (undefined, function (subst) {
                   if (param13 instanceof NofibPrelude.Nil.class) {
                     scrut3 = boyer.truep(cond, true_lst);
                     if (scrut3 === true) {
-                      return boyer.tautologyp(t4, true_lst, false_lst)
+                      return boyer.tautologyp(t, true_lst, false_lst)
                     } else {
                       scrut2 = boyer.falsep(cond, false_lst);
                       if (scrut2 === true) {
                         return boyer.tautologyp(e, true_lst, false_lst)
                       } else {
                         tmp = NofibPrelude.Cons(cond, true_lst);
-                        scrut = boyer.tautologyp(t4, tmp, false_lst);
+                        scrut = boyer.tautologyp(t, tmp, false_lst);
                         if (scrut === true) {
                           tmp1 = NofibPrelude.Cons(cond, false_lst);
                           scrut1 = boyer.tautologyp(e, true_lst, tmp1);
@@ -73889,13 +73889,13 @@ lambda = (undefined, function (subst) {
       }
     }
   } 
-  static tautp(x3) {
+  static tautp(x) {
     let tmp;
-    tmp = rewrite_inst_14_15_tsni(x3);
+    tmp = rewrite_inst_14_15_tsni(x);
     return boyer.tautologyp(tmp, NofibPrelude.Nil, NofibPrelude.Nil)
   } 
   static test0(xxxx) {
-    let a, b, c, d, u, w, x4, y, z, boyerFalse, nil, boyerTrue, zero, subst0, theorem, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, arr, tmp21, tmp22, tmp23, tmp24, arr1, tmp25, tmp26, tmp27, tmp28, arr2, tmp29, tmp30, tmp31, arr3, tmp32, tmp33, tmp34, tmp35, arr4, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
+    let a, b, c, d, u, w, x, y, z, boyerFalse, nil, boyerTrue, zero, subst0, theorem, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, arr, tmp21, tmp22, tmp23, tmp24, arr1, tmp25, tmp26, tmp27, tmp28, arr2, tmp29, tmp30, tmp31, arr3, tmp32, tmp33, tmp34, tmp35, arr4, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
     tmp = runtime.safeCall(boyer.Var(boyer.A));
     a = tmp;
     tmp1 = runtime.safeCall(boyer.Var(boyer.B));
@@ -73909,7 +73909,7 @@ lambda = (undefined, function (subst) {
     tmp5 = runtime.safeCall(boyer.Var(boyer.W));
     w = tmp5;
     tmp6 = runtime.safeCall(boyer.Var(boyer.X));
-    x4 = tmp6;
+    x = tmp6;
     tmp7 = runtime.safeCall(boyer.Var(boyer.Y));
     y = tmp7;
     tmp8 = runtime.safeCall(boyer.Var(boyer.Z));
@@ -73926,93 +73926,93 @@ lambda = (undefined, function (subst) {
     tmp15 = NofibPrelude.lazy(lambda41);
     tmp16 = runtime.safeCall(boyer.Fun(boyer.ZERO, NofibPrelude.Nil, tmp15));
     zero = tmp16;
-    tmp17 = plus$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, a, b);
-    tmp18 = plus$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, c, zero);
-    tmp19 = plus$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, tmp17, tmp18);
+    tmp17 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, a, b);
+    tmp18 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, c, zero);
+    tmp19 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp17, tmp18);
     tmp20 = f(tmp19);
     _deforest_Deforest_Arr_2_04 = boyer.X;
     _deforest_Deforest_Arr_2_14 = tmp20;
-    arr = (vid1, param1) => {
-      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid1, param1, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14)
+    arr = (vid, param1) => {
+      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid, param1, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14)
     };
-    tmp21 = times$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, a, b);
-    tmp22 = plus$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, c, d);
-    tmp23 = times$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, tmp21, tmp22);
+    tmp21 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, a, b);
+    tmp22 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, c, d);
+    tmp23 = times$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp21, tmp22);
     tmp24 = f(tmp23);
     _deforest_Deforest_Arr_2_03 = boyer.Y;
     _deforest_Deforest_Arr_2_13 = tmp24;
-    arr1 = (vid1, param1) => {
-      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid1, param1, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13)
+    arr1 = (vid, param1) => {
+      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid, param1, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13)
     };
-    tmp25 = append_$(x4, y, z, a, b);
-    tmp26 = append_$(x4, y, z, tmp25, nil);
-    tmp27 = reverse_$(x4, y, z, tmp26);
+    tmp25 = append_$(x, y, z, a, b);
+    tmp26 = append_$(x, y, z, tmp25, nil);
+    tmp27 = reverse_$(x, y, z, tmp26);
     tmp28 = f(tmp27);
     _deforest_Deforest_Arr_2_02 = boyer.Z;
     _deforest_Deforest_Arr_2_12 = tmp28;
-    arr2 = (vid1, param1) => {
-      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid1, param1, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
+    arr2 = (vid, param1) => {
+      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid, param1, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
     };
-    tmp29 = plus$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, a, b);
-    tmp30 = difference$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, x4, y);
-    tmp31 = equal$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, tmp29, tmp30);
+    tmp29 = plus$(u, w, x, y, z, boyerFalse, boyerTrue, zero, a, b);
+    tmp30 = difference$(u, w, x, y, z, boyerFalse, boyerTrue, zero, x, y);
+    tmp31 = equal$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp29, tmp30);
     _deforest_Deforest_Arr_2_01 = boyer.U;
     _deforest_Deforest_Arr_2_11 = tmp31;
-    arr3 = (vid1, param1) => {
-      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid1, param1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
+    arr3 = (vid, param1) => {
+      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid, param1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
     };
-    tmp32 = remainder$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, a, b);
-    tmp33 = length_$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, b);
-    tmp34 = member$(u, w, x4, y, z, boyerFalse, boyerTrue, a, tmp33);
-    tmp35 = lessp$(u, w, x4, y, z, boyerFalse, boyerTrue, zero, tmp32, tmp34);
+    tmp32 = remainder$(u, w, x, y, z, boyerFalse, boyerTrue, zero, a, b);
+    tmp33 = length_$(u, w, x, y, z, boyerFalse, boyerTrue, zero, b);
+    tmp34 = member$(u, w, x, y, z, boyerFalse, boyerTrue, a, tmp33);
+    tmp35 = lessp$(u, w, x, y, z, boyerFalse, boyerTrue, zero, tmp32, tmp34);
     _deforest_Deforest_Arr_2_0 = boyer.W;
     _deforest_Deforest_Arr_2_1 = tmp35;
-    arr4 = (vid1, param1) => {
-      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid1, param1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
+    arr4 = (vid, param1) => {
+      return match_param0_arm_Deforest_Arr_2_inst_16_17_1_tsni(vid, param1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
     _deforest_Cons_head4 = arr4;
-    _deforest_Cons_tail4 = (vid1) => {
+    _deforest_Cons_tail4 = (vid) => {
       let arr5, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
       _deforest_Deforest_Arr_2_05 = false;
       _deforest_Deforest_Arr_2_15 = boyer.ERROR;
-      arr5 = (vid2) => {
-        return match_scrut_arm_Deforest_Arr_2_inst_16_17_tsni(vid2, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
+      arr5 = (vid1) => {
+        return match_scrut_arm_Deforest_Arr_2_inst_16_17_tsni(vid1, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15)
       };
       return arr5
     };
-    tmp36 = (vid1) => {
-      return match_ls_arm_Cons_inst_16_17_1_tsni(vid1, _deforest_Cons_head4, _deforest_Cons_tail4)
+    tmp36 = (vid) => {
+      return match_ls_arm_Cons_inst_16_17_1_tsni(vid, _deforest_Cons_head4, _deforest_Cons_tail4)
     };
     _deforest_Cons_head3 = arr3;
     _deforest_Cons_tail3 = tmp36;
-    tmp37 = (vid1) => {
-      return match_ls_arm_Cons_inst_16_17_1_tsni(vid1, _deforest_Cons_head3, _deforest_Cons_tail3)
+    tmp37 = (vid) => {
+      return match_ls_arm_Cons_inst_16_17_1_tsni(vid, _deforest_Cons_head3, _deforest_Cons_tail3)
     };
     _deforest_Cons_head2 = arr2;
     _deforest_Cons_tail2 = tmp37;
-    tmp38 = (vid1) => {
-      return match_ls_arm_Cons_inst_16_17_1_tsni(vid1, _deforest_Cons_head2, _deforest_Cons_tail2)
+    tmp38 = (vid) => {
+      return match_ls_arm_Cons_inst_16_17_1_tsni(vid, _deforest_Cons_head2, _deforest_Cons_tail2)
     };
     _deforest_Cons_head1 = arr1;
     _deforest_Cons_tail1 = tmp38;
-    tmp39 = (vid1) => {
-      return match_ls_arm_Cons_inst_16_17_1_tsni(vid1, _deforest_Cons_head1, _deforest_Cons_tail1)
+    tmp39 = (vid) => {
+      return match_ls_arm_Cons_inst_16_17_1_tsni(vid, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = arr;
     _deforest_Cons_tail = tmp39;
-    tmp40 = (vid1) => {
-      return match_ls_arm_Cons_inst_16_17_1_tsni(vid1, _deforest_Cons_head, _deforest_Cons_tail)
+    tmp40 = (vid) => {
+      return match_ls_arm_Cons_inst_16_17_1_tsni(vid, _deforest_Cons_head, _deforest_Cons_tail)
     };
     subst0 = tmp40;
-    tmp41 = implies$(u, w, x4, y, z, boyerFalse, boyerTrue, xxxx, y);
-    tmp42 = implies$(u, w, x4, y, z, boyerFalse, boyerTrue, y, z);
-    tmp43 = implies$(u, w, x4, y, z, boyerFalse, boyerTrue, z, u);
-    tmp44 = implies$(u, w, x4, y, z, boyerFalse, boyerTrue, u, w);
-    tmp45 = and_$(u, w, x4, y, z, boyerFalse, boyerTrue, tmp43, tmp44);
-    tmp46 = and_$(u, w, x4, y, z, boyerFalse, boyerTrue, tmp42, tmp45);
-    tmp47 = and_$(u, w, x4, y, z, boyerFalse, boyerTrue, tmp41, tmp46);
-    tmp48 = implies$(u, w, x4, y, z, boyerFalse, boyerTrue, x4, w);
-    tmp49 = implies$(u, w, x4, y, z, boyerFalse, boyerTrue, tmp47, tmp48);
+    tmp41 = implies$(u, w, x, y, z, boyerFalse, boyerTrue, xxxx, y);
+    tmp42 = implies$(u, w, x, y, z, boyerFalse, boyerTrue, y, z);
+    tmp43 = implies$(u, w, x, y, z, boyerFalse, boyerTrue, z, u);
+    tmp44 = implies$(u, w, x, y, z, boyerFalse, boyerTrue, u, w);
+    tmp45 = and_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp43, tmp44);
+    tmp46 = and_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp42, tmp45);
+    tmp47 = and_$(u, w, x, y, z, boyerFalse, boyerTrue, tmp41, tmp46);
+    tmp48 = implies$(u, w, x, y, z, boyerFalse, boyerTrue, x, w);
+    tmp49 = implies$(u, w, x, y, z, boyerFalse, boyerTrue, tmp47, tmp48);
     theorem = tmp49;
     tmp50 = apply_subst_inst_16_17_tsni(subst0, theorem);
     return tautp_inst_16_18_tsni(tmp50)

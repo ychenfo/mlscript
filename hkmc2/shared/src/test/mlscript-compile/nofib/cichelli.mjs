@@ -7809,8 +7809,8 @@ lambda = (undefined, function (a, b) {
     tmp42 = NofibPrelude.Cons(tmp1, tmp41);
     tmp43 = NofibPrelude.Cons(tmp, tmp42);
     this.keys = tmp43;
-    this.K = function K(s1, c11, c21, i1) {
-      return globalThis.Object.freeze(new K.class(s1, c11, c21, i1));
+    this.K = function K(s, c1, c2, i) {
+      return globalThis.Object.freeze(new K.class(s, c1, c2, i));
     };
     Object.defineProperty(this.K, "class", {
       enumerable: true,
@@ -7825,8 +7825,8 @@ lambda = (undefined, function (a, b) {
         static [definitionMetadata] = ["class", "K", ["s", "c1", "c2", "i"]]; 
       }
     });
-    this.H = function H(f1, s1, ls1) {
-      return globalThis.Object.freeze(new H.class(f1, s1, ls1));
+    this.H = function H(f, s, ls) {
+      return globalThis.Object.freeze(new H.class(f, s, ls));
     };
     Object.defineProperty(this.H, "class", {
       enumerable: true,
@@ -7854,8 +7854,8 @@ lambda = (undefined, function (a, b) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Status"]; 
     };
-    this.NotEver = function NotEver(i1) {
-      return globalThis.Object.freeze(new NotEver.class(i1));
+    this.NotEver = function NotEver(i) {
+      return globalThis.Object.freeze(new NotEver.class(i));
     };
     Object.defineProperty(this.NotEver, "class", {
       enumerable: true,
@@ -7868,8 +7868,8 @@ lambda = (undefined, function (a, b) {
         static [definitionMetadata] = ["class", "NotEver", ["i"]]; 
       }
     });
-    this.YesIts = function YesIts(i1, t1) {
-      return globalThis.Object.freeze(new YesIts.class(i1, t1));
+    this.YesIts = function YesIts(i, t) {
+      return globalThis.Object.freeze(new YesIts.class(i, t));
     };
     Object.defineProperty(this.YesIts, "class", {
       enumerable: true,
@@ -7902,16 +7902,16 @@ lambda = (undefined, function (a, b) {
     }
   } 
   static ends(k) {
-    let param0, param1, param2, param3, a1, z, tmp;
+    let param0, param1, param2, param3, a, z, tmp;
     if (k instanceof cichelli.K.class) {
       param0 = k.s;
       param1 = k.c1;
       param2 = k.c2;
       param3 = k.i;
-      a1 = param1;
+      a = param1;
       z = param2;
       tmp = NofibPrelude.Cons(z, NofibPrelude.Nil);
-      return NofibPrelude.Cons(a1, tmp)
+      return NofibPrelude.Cons(a, tmp)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -7940,22 +7940,22 @@ lambda = (undefined, function (a, b) {
       throw globalThis.Error("assoc: not found")
     }
   } 
-  static assocm(x1, yz1) {
+  static assocm(x, yz) {
     let param0, param1, first1, first0, y, z, yzs, scrut;
-    if (yz1 instanceof NofibPrelude.Cons.class) {
-      param0 = yz1.head;
-      param1 = yz1.tail;
+    if (yz instanceof NofibPrelude.Cons.class) {
+      param0 = yz.head;
+      param1 = yz.tail;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
         y = first0;
         z = first1;
         yzs = param1;
-        scrut = x1 === y;
+        scrut = x === y;
         if (scrut === true) {
           return runtime.safeCall(NofibPrelude.Some(z))
         } else {
-          return cichelli.assocm(x1, yzs)
+          return cichelli.assocm(x, yzs)
         }
       } else {
         return NofibPrelude.None
@@ -7964,7 +7964,7 @@ lambda = (undefined, function (a, b) {
       return NofibPrelude.None
     }
   } 
-  static histins(x2, yns) {
+  static histins(x, yns) {
     let param0, param1, first1, first0, y, n, yns1, scrut, tmp, arr, arr1, tmp1, arr2, arr3;
     if (yns instanceof NofibPrelude.Cons.class) {
       param0 = yns.head;
@@ -7975,7 +7975,7 @@ lambda = (undefined, function (a, b) {
         y = first0;
         n = first1;
         yns1 = param1;
-        scrut = x2 === y;
+        scrut = x === y;
         if (scrut === true) {
           tmp = n + 1;
           arr = globalThis.Object.freeze([
@@ -7988,77 +7988,77 @@ lambda = (undefined, function (a, b) {
             y,
             n
           ]);
-          tmp1 = cichelli.histins(x2, yns1);
+          tmp1 = cichelli.histins(x, yns1);
           return NofibPrelude.Cons(arr1, tmp1)
         }
       } else {
         arr2 = globalThis.Object.freeze([
-          x2,
+          x,
           1
         ]);
         return NofibPrelude.Cons(arr2, NofibPrelude.Nil)
       }
     } else {
       arr3 = globalThis.Object.freeze([
-        x2,
+        x,
         1
       ]);
       return NofibPrelude.Cons(arr3, NofibPrelude.Nil)
     }
   } 
-  static histo(ls1) {
-    return NofibPrelude.foldr(cichelli1.histins, NofibPrelude.Nil, ls1)
+  static histo(ls) {
+    return NofibPrelude.foldr(cichelli1.histins, NofibPrelude.Nil, ls)
   } 
   static subset(xs, ys) {
     let lambda$this;
     lambda$this = runtime.safeCall(lambda1(ys));
     return NofibPrelude.all(lambda$this, xs)
   } 
-  static union(xs1, ys1) {
+  static union(xs, ys) {
     let tmp;
-    tmp = lscomp$(xs1, ys1);
-    return NofibPrelude.append(xs1, tmp)
+    tmp = lscomp$(xs, ys);
+    return NofibPrelude.append(xs, tmp)
   } 
   static attribkeys(ks) {
     let tmp;
     tmp = lambda2;
     return NofibPrelude.map(tmp, ks)
   } 
-  static minm(x3, y) {
-    let param0, x4;
-    if (x3 instanceof NofibPrelude.None.class) {
+  static minm(x, y) {
+    let param0, x1;
+    if (x instanceof NofibPrelude.None.class) {
       return y
-    } else if (x3 instanceof NofibPrelude.Some.class) {
-      param0 = x3.x;
-      x4 = param0;
-      return NofibPrelude.min(x4, y)
+    } else if (x instanceof NofibPrelude.Some.class) {
+      param0 = x.x;
+      x1 = param0;
+      return NofibPrelude.min(x1, y)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static maxm(x4, y1) {
-    let param0, x5;
-    if (x4 instanceof NofibPrelude.None.class) {
-      return y1
-    } else if (x4 instanceof NofibPrelude.Some.class) {
-      param0 = x4.x;
-      x5 = param0;
-      return NofibPrelude.max(x5, y1)
+  static maxm(x, y) {
+    let param0, x1;
+    if (x instanceof NofibPrelude.None.class) {
+      return y
+    } else if (x instanceof NofibPrelude.Some.class) {
+      param0 = x.x;
+      x1 = param0;
+      return NofibPrelude.max(x1, y)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static hash(cvs, k1) {
-    let param0, param1, param2, param3, a1, z, n, tmp, tmp1, tmp2;
-    if (k1 instanceof cichelli.K.class) {
-      param0 = k1.s;
-      param1 = k1.c1;
-      param2 = k1.c2;
-      param3 = k1.i;
-      a1 = param1;
+  static hash(cvs, k) {
+    let param0, param1, param2, param3, a, z, n, tmp, tmp1, tmp2;
+    if (k instanceof cichelli.K.class) {
+      param0 = k.s;
+      param1 = k.c1;
+      param2 = k.c2;
+      param3 = k.i;
+      a = param1;
       z = param2;
       n = param3;
-      tmp = cichelli.assoc(a1, cvs);
+      tmp = cichelli.assoc(a, cvs);
       tmp1 = n + tmp;
       tmp2 = cichelli.assoc(z, cvs);
       return tmp1 + tmp2
@@ -8066,23 +8066,23 @@ lambda = (undefined, function (a, b) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static select(p, x5, ts_fs) {
+  static select(p, x, ts_fs) {
     let first1, first0, ts, fs, scrut, tmp, arr, tmp1, arr1;
     if (runtime.Tuple.isArrayLike(ts_fs) && ts_fs.length === 2) {
       first0 = runtime.Tuple.get(ts_fs, 0);
       first1 = runtime.Tuple.get(ts_fs, 1);
       ts = first0;
       fs = first1;
-      scrut = runtime.safeCall(p(x5));
+      scrut = runtime.safeCall(p(x));
       if (scrut === true) {
-        tmp = NofibPrelude.Cons(x5, ts);
+        tmp = NofibPrelude.Cons(x, ts);
         arr = globalThis.Object.freeze([
           tmp,
           fs
         ]);
         return arr
       } else {
-        tmp1 = NofibPrelude.Cons(x5, fs);
+        tmp1 = NofibPrelude.Cons(x, fs);
         arr1 = globalThis.Object.freeze([
           ts,
           tmp1
@@ -8093,32 +8093,32 @@ lambda = (undefined, function (a, b) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static partition_(p1, ls2) {
+  static partition_(p, ls) {
     let arr, lambda$this;
     arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       NofibPrelude.Nil
     ]);
-    lambda$this = runtime.safeCall(lambda3(p1));
-    return NofibPrelude.foldr(lambda$this, arr, ls2)
+    lambda$this = runtime.safeCall(lambda3(p));
+    return NofibPrelude.foldr(lambda$this, arr, ls)
   } 
-  static freqsorted(x6) {
-    return x6
+  static freqsorted(x) {
+    return x
   } 
-  static blocked_(ds, ls3) {
-    let param0, param1, k2, ks1, ds_, scrut, first1, first0, det, rest, tmp, tmp1, tmp2, tmp3, lambda$this;
-    if (ls3 instanceof NofibPrelude.Nil.class) {
+  static blocked_(ds, ls) {
+    let param0, param1, k, ks, ds_, scrut, first1, first0, det, rest, tmp, tmp1, tmp2, tmp3, lambda$this;
+    if (ls instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (ls3 instanceof NofibPrelude.Cons.class) {
-      param0 = ls3.head;
-      param1 = ls3.tail;
-      k2 = param0;
-      ks1 = param1;
-      tmp = ends_inst_30_31_tsni(k2);
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
+      k = param0;
+      ks = param1;
+      tmp = ends_inst_30_31_tsni(k);
       tmp1 = union_inst_30_58_tsni(ds, tmp);
       ds_ = tmp1;
       lambda$this = runtime.safeCall(lambda_inst_30_32_tsni(ds_));
-      scrut = partition__inst_30_33_tsni(lambda$this, ks1);
+      scrut = partition__inst_30_33_tsni(lambda$this, ks);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
         first0 = runtime.Tuple.get(scrut, 0);
         first1 = runtime.Tuple.get(scrut, 1);
@@ -8126,7 +8126,7 @@ lambda = (undefined, function (a, b) {
         rest = first1;
         tmp2 = cichelli.blocked_(ds_, rest);
         tmp3 = append_inst_30_47_tsni(det, tmp2);
-        return NofibPrelude.Cons(k2, tmp3)
+        return NofibPrelude.Cons(k, tmp3)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -8134,8 +8134,8 @@ lambda = (undefined, function (a, b) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static blocked(ls4) {
-    return blocked__inst_37_38_tsni(NofibPrelude.Nil, ls4)
+  static blocked(ls) {
+    return blocked__inst_37_38_tsni(NofibPrelude.Nil, ls)
   } 
   static hinsert(h, hh) {
     let param0, param1, param2, lo, hi, hs, lo_, hi_, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
@@ -8166,27 +8166,27 @@ lambda = (undefined, function (a, b) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static first(k2, ls5) {
-    let scrut, param0, param1, a1, l, param01, leaves, param11, leaves1, y2, tmp, tmp1;
-    scrut = NofibPrelude.force(ls5);
+  static first(k, ls) {
+    let scrut, param0, param1, a, l, param01, leaves, param11, leaves1, y, tmp, tmp1;
+    scrut = NofibPrelude.force(ls);
     if (scrut instanceof NofibPrelude.LzNil.class) {
-      return runtime.safeCall(cichelli.NotEver(k2))
+      return runtime.safeCall(cichelli.NotEver(k))
     } else if (scrut instanceof NofibPrelude.LzCons.class) {
       param0 = scrut.head;
       param1 = scrut.tail;
-      a1 = param0;
+      a = param0;
       l = param1;
-      if (a1 instanceof cichelli.YesIts.class) {
-        param01 = a1.i;
-        param11 = a1.t;
+      if (a instanceof cichelli.YesIts.class) {
+        param01 = a.i;
+        param11 = a.t;
         leaves1 = param01;
-        y2 = param11;
-        tmp = k2 + leaves1;
-        return cichelli.YesIts(tmp, y2)
-      } else if (a1 instanceof cichelli.NotEver.class) {
-        param01 = a1.i;
+        y = param11;
+        tmp = k + leaves1;
+        return cichelli.YesIts(tmp, y)
+      } else if (a instanceof cichelli.NotEver.class) {
+        param01 = a.i;
         leaves = param01;
-        tmp1 = k2 + leaves;
+        tmp1 = k + leaves;
         return cichelli.first(tmp1, l)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -8200,35 +8200,35 @@ lambda = (undefined, function (a, b) {
     tmp = NofibPrelude.map_lz(f, possibles);
     return cichelli.first(0, tmp)
   } 
-  static findhash_(keyHashSet, charAssocs, ks1) {
-    let param0, param1, param01, param11, param2, param3, s, a1, z, n, ks2, scrut, tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-    if (ks1 instanceof NofibPrelude.Nil.class) {
+  static findhash_(keyHashSet, charAssocs, ks) {
+    let param0, param1, param01, param11, param2, param3, s, a, z, n, ks1, scrut, tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+    if (ks instanceof NofibPrelude.Nil.class) {
       return cichelli.YesIts(1, charAssocs)
-    } else if (ks1 instanceof NofibPrelude.Cons.class) {
-      param0 = ks1.head;
-      param1 = ks1.tail;
+    } else if (ks instanceof NofibPrelude.Cons.class) {
+      param0 = ks.head;
+      param1 = ks.tail;
       if (param0 instanceof cichelli.K.class) {
         param01 = param0.s;
         param11 = param0.c1;
         param2 = param0.c2;
         param3 = param0.i;
         s = param01;
-        a1 = param11;
+        a = param11;
         z = param2;
         n = param3;
-        ks2 = param1;
-        tmp = assocm_inst_39_1_tsni(a1, charAssocs);
+        ks1 = param1;
+        tmp = assocm_inst_39_1_tsni(a, charAssocs);
         tmp1 = cichelli.assocm(z, charAssocs);
         _deforest_Deforest_Arr_2_0 = tmp;
         _deforest_Deforest_Arr_2_1 = tmp1;
-        arr = (keyHashSet1, charAssocs1, s1, a2, z1, n1, ks3) => {
+        arr = (keyHashSet1, charAssocs1, s1, a1, z1, n1, ks2) => {
           let first1, first0;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
-          return runtime.safeCall(first0(keyHashSet1, charAssocs1, s1, a2, z1, n1, ks3, first1))
+          return runtime.safeCall(first0(keyHashSet1, charAssocs1, s1, a1, z1, n1, ks2, first1))
         };
         scrut = arr;
-        return runtime.safeCall(scrut(keyHashSet, charAssocs, s, a1, z, n, ks2))
+        return runtime.safeCall(scrut(keyHashSet, charAssocs, s, a, z, n, ks1))
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -8238,44 +8238,44 @@ lambda = (undefined, function (a, b) {
   } 
   static findhash(keys) {
     let tmp, _deforest_H_f, _deforest_H_s, _deforest_H_ls;
-    _deforest_H_f = (y2) => {
-      return match_x_arm_None_inst_40_41_2_62_tsni(y2)
+    _deforest_H_f = (y) => {
+      return match_x_arm_None_inst_40_41_2_62_tsni(y)
     };
-    _deforest_H_s = (y2) => {
-      return match_x_arm_None_inst_40_41_2_61_tsni(y2)
+    _deforest_H_s = (y) => {
+      return match_x_arm_None_inst_40_41_2_61_tsni(y)
     };
-    _deforest_H_ls = (x7) => {
-      return match_ls_arm_Nil_inst_40_41_2_60_tsni(x7)
+    _deforest_H_ls = (x) => {
+      return match_ls_arm_Nil_inst_40_41_2_60_tsni(x)
     };
-    tmp = (h1) => {
-      return match_hh_arm_H_inst_40_41_2_tsni(h1, _deforest_H_f, _deforest_H_s, _deforest_H_ls)
+    tmp = (h) => {
+      return match_hh_arm_H_inst_40_41_2_tsni(h, _deforest_H_f, _deforest_H_s, _deforest_H_ls)
     };
     return findhash__inst_40_41_tsni(tmp, NofibPrelude.Nil, keys)
   } 
   static freq(c) {
     return cichelli.assoc(c, cichelli.freqtab)
   } 
-  static morefreq(k11, k21) {
-    let param0, param1, param2, param3, a1, x7, param01, param11, param21, param31, b1, y2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-    if (k11 instanceof cichelli.K.class) {
-      param0 = k11.s;
-      param1 = k11.c1;
-      param2 = k11.c2;
-      param3 = k11.i;
-      a1 = param1;
-      x7 = param2;
-      if (k21 instanceof cichelli.K.class) {
-        param01 = k21.s;
-        param11 = k21.c1;
-        param21 = k21.c2;
-        param31 = k21.i;
-        b1 = param11;
-        y2 = param21;
-        tmp = cichelli.freq(a1);
-        tmp1 = cichelli.freq(x7);
+  static morefreq(k1, k2) {
+    let param0, param1, param2, param3, a, x, param01, param11, param21, param31, b, y, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+    if (k1 instanceof cichelli.K.class) {
+      param0 = k1.s;
+      param1 = k1.c1;
+      param2 = k1.c2;
+      param3 = k1.i;
+      a = param1;
+      x = param2;
+      if (k2 instanceof cichelli.K.class) {
+        param01 = k2.s;
+        param11 = k2.c1;
+        param21 = k2.c2;
+        param31 = k2.i;
+        b = param11;
+        y = param21;
+        tmp = cichelli.freq(a);
+        tmp1 = cichelli.freq(x);
         tmp2 = tmp + tmp1;
-        tmp3 = cichelli.freq(b1);
-        tmp4 = cichelli.freq(y2);
+        tmp3 = cichelli.freq(b);
+        tmp4 = cichelli.freq(y);
         tmp5 = tmp3 + tmp4;
         return tmp2 > tmp5
       } else {
@@ -8297,8 +8297,8 @@ lambda = (undefined, function (a, b) {
     hashkeys = tmp5;
     return findhash_inst_42_46_tsni(hashkeys)
   } 
-  static prog(n1) {
-    return cichelli__inst_48_49_tsni(n1)
+  static prog(n) {
+    return cichelli__inst_48_49_tsni(n)
   } 
   static main() {
     let tmp;

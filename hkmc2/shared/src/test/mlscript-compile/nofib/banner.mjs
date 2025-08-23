@@ -1638,10 +1638,10 @@ lambda = (undefined, function (x) {
     tmp = map_inst_1_2_tsni(lambda_inst_1_3_tsni, ls);
     return concat_inst_1_22_tsni(tmp)
   } 
-  static join(ls1) {
+  static join(ls) {
     let tmp;
     tmp = lambda_inst_5_6_tsni;
-    return NofibPrelude.foldr1(tmp, ls1)
+    return NofibPrelude.foldr1(tmp, ls)
   } 
   static isUpper(c) {
     let n, scrut, scrut1, tmp;
@@ -1659,9 +1659,9 @@ lambda = (undefined, function (x) {
       return false
     }
   } 
-  static isLower(c1) {
+  static isLower(c) {
     let n, scrut, scrut1, tmp;
-    tmp = NofibPrelude.int_of_char(c1);
+    tmp = NofibPrelude.int_of_char(c);
     n = tmp;
     scrut = n >= 97;
     if (scrut === true) {
@@ -1675,9 +1675,9 @@ lambda = (undefined, function (x) {
       return false
     }
   } 
-  static isDigit(c2) {
+  static isDigit(c) {
     let n, scrut, scrut1, tmp;
-    tmp = NofibPrelude.int_of_char(c2);
+    tmp = NofibPrelude.int_of_char(c);
     n = tmp;
     scrut = n >= 48;
     if (scrut === true) {
@@ -1691,48 +1691,48 @@ lambda = (undefined, function (x) {
       return false
     }
   } 
-  static isSpace(c3) {
+  static isSpace(c) {
     let n, tmp;
-    tmp = NofibPrelude.int_of_char(c3);
+    tmp = NofibPrelude.int_of_char(c);
     n = tmp;
     return n == 32
   } 
-  static picChar(c4) {
+  static picChar(c) {
     let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, _deforest_Cons_head, _deforest_Cons_tail;
-    scrut5 = banner.isUpper(c4);
+    scrut5 = banner.isUpper(c);
     if (scrut5 === true) {
-      tmp = NofibPrelude.int_of_char(c4);
+      tmp = NofibPrelude.int_of_char(c);
       tmp1 = NofibPrelude.int_of_char("A");
       tmp2 = tmp - tmp1;
       return NofibPrelude.atIndex(tmp2, banner.alphas)
     } else {
-      scrut4 = banner.isLower(c4);
+      scrut4 = banner.isLower(c);
       if (scrut4 === true) {
-        tmp3 = NofibPrelude.int_of_char(c4);
+        tmp3 = NofibPrelude.int_of_char(c);
         tmp4 = NofibPrelude.int_of_char("a");
         tmp5 = tmp3 - tmp4;
         return NofibPrelude.atIndex(tmp5, banner.alphas)
       } else {
-        scrut3 = banner.isSpace(c4);
+        scrut3 = banner.isSpace(c);
         if (scrut3 === true) {
           return banner.blank
         } else {
-          scrut2 = banner.isDigit(c4);
+          scrut2 = banner.isDigit(c);
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.int_of_char(c4);
+            tmp6 = NofibPrelude.int_of_char(c);
             tmp7 = NofibPrelude.int_of_char("0");
             tmp8 = tmp6 - tmp7;
             return NofibPrelude.atIndex(tmp8, banner.digits)
           } else {
-            scrut1 = c4 === "/";
+            scrut1 = c === "/";
             if (scrut1 === true) {
               return banner.slant
             } else {
-              scrut = c4 === "=";
+              scrut = c === "=";
               if (scrut === true) {
                 return NofibPrelude.reverse(banner.slant)
               } else {
-                tmp9 = lscomp$_inst_7_8_tsni(c4, banner.punct);
+                tmp9 = lscomp$_inst_7_8_tsni(c, banner.punct);
                 tmp10 = NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil);
                 _deforest_Cons_head = NofibPrelude.Nil;
                 _deforest_Cons_tail = tmp10;

@@ -27579,8 +27579,8 @@ down1 = function down1(f) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "BinTree"]; 
     };
-    this.Cell = function Cell(value1) {
-      return globalThis.Object.freeze(new Cell.class(value1));
+    this.Cell = function Cell(value) {
+      return globalThis.Object.freeze(new Cell.class(value));
     };
     Object.defineProperty(this.Cell, "class", {
       enumerable: true,
@@ -27593,8 +27593,8 @@ down1 = function down1(f) {
         static [definitionMetadata] = ["class", "Cell", ["value"]]; 
       }
     });
-    this.Node = function Node(value1, left1, right1) {
-      return globalThis.Object.freeze(new Node.class(value1, left1, right1));
+    this.Node = function Node(value, left, right) {
+      return globalThis.Object.freeze(new Node.class(value, left, right));
     };
     Object.defineProperty(this.Node, "class", {
       enumerable: true,
@@ -27712,8 +27712,8 @@ down1 = function down1(f) {
       static [definitionMetadata] = ["object", "Unit"]; 
     };
     this.Unit = globalThis.Object.freeze(new Unit$class);
-    this.PS = function PS(pid1, compType1, pathDepth1, inports1, outports1) {
-      return globalThis.Object.freeze(new PS.class(pid1, compType1, pathDepth1, inports1, outports1));
+    this.PS = function PS(pid, compType, pathDepth, inports, outports) {
+      return globalThis.Object.freeze(new PS.class(pid, compType, pathDepth, inports, outports));
     };
     Object.defineProperty(this.PS, "class", {
       enumerable: true,
@@ -27777,32 +27777,32 @@ down1 = function down1(f) {
   static pid(p) {
     return p.pid
   } 
-  static compType(p1) {
-    return p1.compType
+  static compType(p) {
+    return p.compType
   } 
-  static pathDepth(p2) {
-    return p2.pathDepth
+  static pathDepth(p) {
+    return p.pathDepth
   } 
-  static inports(p3) {
-    return p3.inports
+  static inports(p) {
+    return p.inports
   } 
-  static outports(p4) {
-    return p4.outports
+  static outports(p) {
+    return p.outports
   } 
-  static updateOutports(p5, noutports) {
+  static updateOutports(p, noutports) {
     let tmp, tmp1, tmp2, tmp3;
-    tmp = circsim.pid(p5);
-    tmp1 = circsim.compType(p5);
-    tmp2 = circsim.pathDepth(p5);
-    tmp3 = circsim.inports(p5);
+    tmp = circsim.pid(p);
+    tmp1 = circsim.compType(p);
+    tmp2 = circsim.pathDepth(p);
+    tmp3 = circsim.inports(p);
     return runtime.safeCall(circsim.PS(tmp, tmp1, tmp2, tmp3, noutports))
   } 
-  static updateInports(p6, ninports) {
+  static updateInports(p, ninports) {
     let tmp, tmp1, tmp2, tmp3;
-    tmp = circsim.pid(p6);
-    tmp1 = circsim.compType(p6);
-    tmp2 = circsim.pathDepth(p6);
-    tmp3 = circsim.outports(p6);
+    tmp = circsim.pid(p);
+    tmp1 = circsim.compType(p);
+    tmp2 = circsim.pathDepth(p);
+    tmp3 = circsim.outports(p);
     return runtime.safeCall(circsim.PS(tmp, tmp1, tmp2, ninports, tmp3))
   } 
   static put(xs) {
@@ -27865,10 +27865,10 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static upsweep(f, t1) {
+  static upsweep(f, t) {
     let param0, param1, param2, x, l, r, scrut, first1, first0, lv, l_, scrut1, first11, first01, rv, r_, a, tmp, arr, tmp1, arr1, tmp2, arr2;
-    if (t1 instanceof circsim.Cell.class) {
-      param0 = t1.value;
+    if (t instanceof circsim.Cell.class) {
+      param0 = t.value;
       a = param0;
       tmp = runtime.safeCall(circsim.Cell(a));
       arr = globalThis.Object.freeze([
@@ -27876,10 +27876,10 @@ down1 = function down1(f) {
         tmp
       ]);
       return arr
-    } else if (t1 instanceof circsim.Node.class) {
-      param0 = t1.value;
-      param1 = t1.left;
-      param2 = t1.right;
+    } else if (t instanceof circsim.Node.class) {
+      param0 = t.value;
+      param1 = t.left;
+      param2 = t.right;
       x = param0;
       l = param1;
       r = param2;
@@ -27916,16 +27916,16 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static downsweep(g, d, t2) {
+  static downsweep(g, d, t) {
     let param0, param1, param2, first1, first0, lv, rv, l, r, scrut, first11, first01, dl, dr, x, tmp, tmp1;
-    if (t2 instanceof circsim.Cell.class) {
-      param0 = t2.value;
+    if (t instanceof circsim.Cell.class) {
+      param0 = t.value;
       x = param0;
       return runtime.safeCall(circsim.Cell(d))
-    } else if (t2 instanceof circsim.Node.class) {
-      param0 = t2.value;
-      param1 = t2.left;
-      param2 = t2.right;
+    } else if (t instanceof circsim.Node.class) {
+      param0 = t.value;
+      param1 = t.left;
+      param2 = t.right;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
@@ -27952,9 +27952,9 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static sweep_ud(up1, down, u, t3) {
+  static sweep_ud(up1, down, u, t) {
     let scrut, first1, first0, ans, t_, tmp, arr;
-    scrut = upsweep_inst_75_12_tsni(up1, t3);
+    scrut = upsweep_inst_75_12_tsni(up1, t);
     if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
       first0 = runtime.Tuple.get(scrut, 0);
       first1 = runtime.Tuple.get(scrut, 1);
@@ -27970,33 +27970,33 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static scanL(f1, u1, xs1) {
+  static scanL(f, u, xs) {
     let scrut, tmp, down1$this;
-    tmp = put_inst_76_80_tsni(xs1);
-    down1$this = runtime.safeCall(down1_inst_76_78_tsni(f1));
-    scrut = sweep_ud_inst_76_77_tsni(f1, down1$this, u1, tmp);
+    tmp = put_inst_76_80_tsni(xs);
+    down1$this = runtime.safeCall(down1_inst_76_78_tsni(f));
+    scrut = sweep_ud_inst_76_77_tsni(f, down1$this, u, tmp);
     return runtime.safeCall(scrut())
   } 
-  static scanR(f2, u2, xs2) {
+  static scanR(f, u, xs) {
     let scrut, tmp, down2$this;
-    tmp = put_inst_81_85_tsni(xs2);
-    down2$this = runtime.safeCall(down2_inst_81_83_tsni(f2));
-    scrut = sweep_ud_inst_81_82_tsni(f2, down2$this, u2, tmp);
+    tmp = put_inst_81_85_tsni(xs);
+    down2$this = runtime.safeCall(down2_inst_81_83_tsni(f));
+    scrut = sweep_ud_inst_81_82_tsni(f, down2$this, u, tmp);
     return runtime.safeCall(scrut())
   } 
-  static scanlr(f3, g1, lu, ru, xs3) {
+  static scanlr(f, g, lu, ru, xs) {
     let xs_, scrut, tmp, arr, tmp1, lambda$this, lambda$this1;
-    tmp = NofibPrelude.map(lambda, xs3);
+    tmp = NofibPrelude.map(lambda, xs);
     xs_ = tmp;
     arr = globalThis.Object.freeze([
       lu,
       ru
     ]);
     tmp1 = put_inst_86_17_tsni(xs_);
-    lambda$this = runtime.safeCall(lambda1(f3, g1));
-    lambda$this1 = runtime.safeCall(lambda_inst_86_14_tsni(f3, g1));
+    lambda$this = runtime.safeCall(lambda1(f, g));
+    lambda$this1 = runtime.safeCall(lambda_inst_86_14_tsni(f, g));
     scrut = sweep_ud_inst_86_11_tsni(lambda$this, lambda$this1, arr, tmp1);
-    return runtime.safeCall(scrut(f3, g1, lu, ru))
+    return runtime.safeCall(scrut(f, g, lu, ru))
   } 
   static nearest_power_of_two(x) {
     let lambda$this;
@@ -28004,7 +28004,7 @@ down1 = function down1(f) {
     return NofibPrelude.until(lambda$this, lambda4, 1)
   } 
   static pad_circuit(size_ins_outs_states) {
-    let first3, first2, first1, first0, size, ins, outs, states, p21, states_, tmp, tmp1, tmp2, tmp3, arr;
+    let first3, first2, first1, first0, size, ins, outs, states, p2, states_, tmp, tmp1, tmp2, tmp3, arr;
     if (runtime.Tuple.isArrayLike(size_ins_outs_states) && size_ins_outs_states.length === 4) {
       first0 = runtime.Tuple.get(size_ins_outs_states, 0);
       first1 = runtime.Tuple.get(size_ins_outs_states, 1);
@@ -28015,13 +28015,13 @@ down1 = function down1(f) {
       outs = first2;
       states = first3;
       tmp = circsim.nearest_power_of_two(size);
-      p21 = tmp;
-      tmp1 = NofibPrelude.replicate_lz(p21, circsim.emptyState);
+      p2 = tmp;
+      tmp1 = NofibPrelude.replicate_lz(p2, circsim.emptyState);
       tmp2 = NofibPrelude.append_nl_lz(states, tmp1);
       states_ = tmp2;
-      tmp3 = NofibPrelude.take_lz(p21, states_);
+      tmp3 = NofibPrelude.take_lz(p2, states_);
       arr = globalThis.Object.freeze([
-        p21,
+        p2,
         ins,
         outs,
         tmp3
@@ -28031,18 +28031,18 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static inv(x1) {
+  static inv(x) {
     let scrut;
-    scrut = x1 === circsim.T;
+    scrut = x === circsim.T;
     if (scrut === true) {
       return circsim.F
     } else {
       return circsim.T
     }
   } 
-  static and2(x2, y) {
+  static and2(x, y) {
     let scrut, tmp, lambda$this;
-    tmp = x2 === circsim.T;
+    tmp = x === circsim.T;
     lambda$this = runtime.safeCall(lambda5(y));
     scrut = runtime.short_and(tmp, lambda$this);
     if (scrut === true) {
@@ -28051,10 +28051,10 @@ down1 = function down1(f) {
       return circsim.F
     }
   } 
-  static or2(x3, y1) {
+  static or2(x, y) {
     let scrut, tmp, lambda$this;
-    tmp = x3 === circsim.T;
-    lambda$this = runtime.safeCall(lambda6(y1));
+    tmp = x === circsim.T;
+    lambda$this = runtime.safeCall(lambda6(y));
     scrut = runtime.short_or(tmp, lambda$this);
     if (scrut === true) {
       return circsim.T
@@ -28062,9 +28062,9 @@ down1 = function down1(f) {
       return circsim.F
     }
   } 
-  static xor(x4, y2) {
+  static xor(x, y) {
     let scrut;
-    scrut = x4 === y2;
+    scrut = x === y;
     if (scrut === true) {
       return circsim.T
     } else {
@@ -28158,17 +28158,17 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static send_left(a1, b1) {
+  static send_left(a, b) {
     let first7, first6, first5, first4, first3, first2, first1, first0, ia, sa, ma, qla, dla, qra, dra, ea, first71, first61, first51, first41, first31, first21, first11, first01, ib, sb, mb, qlb, dlb, qrb, drb, eb, scrut, tmp, tmp1, arr, tmp2, arr1, lambda$this;
-    if (runtime.Tuple.isArrayLike(a1) && a1.length === 8) {
-      first0 = runtime.Tuple.get(a1, 0);
-      first1 = runtime.Tuple.get(a1, 1);
-      first2 = runtime.Tuple.get(a1, 2);
-      first3 = runtime.Tuple.get(a1, 3);
-      first4 = runtime.Tuple.get(a1, 4);
-      first5 = runtime.Tuple.get(a1, 5);
-      first6 = runtime.Tuple.get(a1, 6);
-      first7 = runtime.Tuple.get(a1, 7);
+    if (runtime.Tuple.isArrayLike(a) && a.length === 8) {
+      first0 = runtime.Tuple.get(a, 0);
+      first1 = runtime.Tuple.get(a, 1);
+      first2 = runtime.Tuple.get(a, 2);
+      first3 = runtime.Tuple.get(a, 3);
+      first4 = runtime.Tuple.get(a, 4);
+      first5 = runtime.Tuple.get(a, 5);
+      first6 = runtime.Tuple.get(a, 6);
+      first7 = runtime.Tuple.get(a, 7);
       ia = first0;
       sa = first1;
       ma = first2;
@@ -28177,15 +28177,15 @@ down1 = function down1(f) {
       qra = first5;
       dra = first6;
       ea = first7;
-      if (runtime.Tuple.isArrayLike(b1) && b1.length === 8) {
-        first01 = runtime.Tuple.get(b1, 0);
-        first11 = runtime.Tuple.get(b1, 1);
-        first21 = runtime.Tuple.get(b1, 2);
-        first31 = runtime.Tuple.get(b1, 3);
-        first41 = runtime.Tuple.get(b1, 4);
-        first51 = runtime.Tuple.get(b1, 5);
-        first61 = runtime.Tuple.get(b1, 6);
-        first71 = runtime.Tuple.get(b1, 7);
+      if (runtime.Tuple.isArrayLike(b) && b.length === 8) {
+        first01 = runtime.Tuple.get(b, 0);
+        first11 = runtime.Tuple.get(b, 1);
+        first21 = runtime.Tuple.get(b, 2);
+        first31 = runtime.Tuple.get(b, 3);
+        first41 = runtime.Tuple.get(b, 4);
+        first51 = runtime.Tuple.get(b, 5);
+        first61 = runtime.Tuple.get(b, 6);
+        first71 = runtime.Tuple.get(b, 7);
         ib = first01;
         sb = first11;
         mb = first21;
@@ -28231,8 +28231,8 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static send(xs4) {
-    return scanlr_inst_87_10_tsni(circsim.send_right, circsim.send_left, circsim.emptyPacket, circsim.emptyPacket, xs4)
+  static send(xs) {
+    return scanlr_inst_87_10_tsni(circsim.send_right, circsim.send_left, circsim.emptyPacket, circsim.emptyPacket, xs)
   } 
   static update_outports(state, value) {
     let tmp, tmp1;
@@ -28274,36 +28274,36 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static store_inputs(label_inputs, state1) {
+  static store_inputs(label_inputs, state) {
     let param0, param1, param2, param3, param4, pid_, tmp;
-    if (state1 instanceof circsim.PS.class) {
-      param0 = state1.pid;
-      param1 = state1.compType;
-      param2 = state1.pathDepth;
-      param3 = state1.inports;
-      param4 = state1.outports;
+    if (state instanceof circsim.PS.class) {
+      param0 = state.pid;
+      param1 = state.compType;
+      param2 = state.pathDepth;
+      param3 = state.inports;
+      param4 = state.outports;
       pid_ = param0;
       if (param1 instanceof circsim.Inp.class) {
-        tmp = lscomp$_inst_90_45_tsni(state1, pid_, label_inputs);
+        tmp = lscomp$_inst_90_45_tsni(state, pid_, label_inputs);
         return head_inst_90_138_tsni(tmp)
       } else {
-        return state1
+        return state
       }
     } else {
-      return state1
+      return state
     }
   } 
   static apply_component(comp, signals) {
-    let param0, param1, x5, param01, param11, y3, x6, y4, x7, y5, x8, x9, x10, tmp, tmp1, tmp2, tmp3;
+    let param0, param1, x, param01, param11, y, x1, y1, x2, y2, x3, x4, x5, tmp, tmp1, tmp2, tmp3;
     if (comp instanceof circsim.Inp.class) {
       return NofibPrelude.None
     } else if (comp instanceof circsim.Outp.class) {
       if (signals instanceof NofibPrelude.Cons.class) {
         param0 = signals.head;
         param1 = signals.tail;
-        x10 = param0;
+        x5 = param0;
         if (param1 instanceof NofibPrelude.Nil.class) {
-          return runtime.safeCall(NofibPrelude.Some(x10))
+          return runtime.safeCall(NofibPrelude.Some(x5))
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -28314,9 +28314,9 @@ down1 = function down1(f) {
       if (signals instanceof NofibPrelude.Cons.class) {
         param0 = signals.head;
         param1 = signals.tail;
-        x9 = param0;
+        x4 = param0;
         if (param1 instanceof NofibPrelude.Nil.class) {
-          return runtime.safeCall(NofibPrelude.Some(x9))
+          return runtime.safeCall(NofibPrelude.Some(x4))
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -28327,9 +28327,9 @@ down1 = function down1(f) {
       if (signals instanceof NofibPrelude.Cons.class) {
         param0 = signals.head;
         param1 = signals.tail;
-        x8 = param0;
+        x3 = param0;
         if (param1 instanceof NofibPrelude.Nil.class) {
-          tmp = circsim.inv(x8);
+          tmp = circsim.inv(x3);
           return runtime.safeCall(NofibPrelude.Some(tmp))
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -28341,13 +28341,13 @@ down1 = function down1(f) {
       if (signals instanceof NofibPrelude.Cons.class) {
         param0 = signals.head;
         param1 = signals.tail;
-        x7 = param0;
+        x2 = param0;
         if (param1 instanceof NofibPrelude.Cons.class) {
           param01 = param1.head;
           param11 = param1.tail;
-          y5 = param01;
+          y2 = param01;
           if (param11 instanceof NofibPrelude.Nil.class) {
-            tmp1 = circsim.and2(x7, y5);
+            tmp1 = circsim.and2(x2, y2);
             return runtime.safeCall(NofibPrelude.Some(tmp1))
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -28362,13 +28362,13 @@ down1 = function down1(f) {
       if (signals instanceof NofibPrelude.Cons.class) {
         param0 = signals.head;
         param1 = signals.tail;
-        x6 = param0;
+        x1 = param0;
         if (param1 instanceof NofibPrelude.Cons.class) {
           param01 = param1.head;
           param11 = param1.tail;
-          y4 = param01;
+          y1 = param01;
           if (param11 instanceof NofibPrelude.Nil.class) {
-            tmp2 = circsim.or2(x6, y4);
+            tmp2 = circsim.or2(x1, y1);
             return runtime.safeCall(NofibPrelude.Some(tmp2))
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -28383,13 +28383,13 @@ down1 = function down1(f) {
       if (signals instanceof NofibPrelude.Cons.class) {
         param0 = signals.head;
         param1 = signals.tail;
-        x5 = param0;
+        x = param0;
         if (param1 instanceof NofibPrelude.Cons.class) {
           param01 = param1.head;
           param11 = param1.tail;
-          y3 = param01;
+          y = param01;
           if (param11 instanceof NofibPrelude.Nil.class) {
-            tmp3 = circsim.xor(x5, y3);
+            tmp3 = circsim.xor(x, y);
             return runtime.safeCall(NofibPrelude.Some(tmp3))
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -28406,38 +28406,38 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static init_dffs(state2) {
+  static init_dffs(state) {
     let scrut, tmp;
-    tmp = circsim.compType(state2);
+    tmp = circsim.compType(state);
     scrut = tmp === circsim.Dff;
     if (scrut === true) {
-      return circsim.update_outports(state2, circsim.F)
+      return circsim.update_outports(state, circsim.F)
     } else {
-      return state2
+      return state
     }
   } 
   static restore_requests(old_states, new_states) {
     return NofibPrelude.zipWith(restore, old_states, new_states)
   } 
-  static update_requests(b2, state3) {
+  static update_requests(b, state) {
     let tmp, tmp1;
-    tmp = circsim.outports(state3);
-    tmp1 = lscomp$3(b2, tmp);
-    return circsim.updateOutports(state3, tmp1)
+    tmp = circsim.outports(state);
+    tmp1 = lscomp$3(b, tmp);
+    return circsim.updateOutports(state, tmp1)
   } 
-  static check_depth(d1, state4) {
+  static check_depth(d, state) {
     let scrut, tmp;
-    tmp = circsim.pathDepth(state4);
-    scrut = tmp == d1;
+    tmp = circsim.pathDepth(state);
+    scrut = tmp == d;
     if (scrut === true) {
-      return state4
+      return state
     } else {
-      return circsim.update_requests(false, state4)
+      return circsim.update_requests(false, state)
     }
   } 
-  static acknowledge(d2, states) {
+  static acknowledge(d, states) {
     let states1, tmp, tmp1, tmp2, lambda$this;
-    lambda$this = runtime.safeCall(lambda10(d2));
+    lambda$this = runtime.safeCall(lambda10(d));
     tmp = map_inst_91_38_tsni(lambda$this, states);
     states1 = tmp;
     tmp1 = map_inst_91_39_tsni(lambda_inst_91_35_tsni, states1);
@@ -28449,19 +28449,19 @@ down1 = function down1(f) {
     lambda$this = runtime.safeCall(lambda13(pss));
     return NofibPrelude.map(lambda$this, pss)
   } 
-  static make_packet(state5) {
+  static make_packet(state) {
     let tmp;
-    tmp = circsim.outports(state5);
-    return lscomp$4(state5, tmp)
+    tmp = circsim.outports(state);
+    return lscomp$4(state, tmp)
   } 
   static compare_and_update(ipm_, pid_port_m) {
-    let first2, first1, first0, i, p7, m_, first21, first11, first01, pid_, port, m, scrut, arr, arr1, arr2, arr3, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+    let first2, first1, first0, i, p, m_, first21, first11, first01, pid_, port, m, scrut, arr, arr1, arr2, arr3, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     if (runtime.Tuple.isArrayLike(ipm_) && ipm_.length === 3) {
       first0 = runtime.Tuple.get(ipm_, 0);
       first1 = runtime.Tuple.get(ipm_, 1);
       first2 = runtime.Tuple.get(ipm_, 2);
       i = first0;
-      p7 = first1;
+      p = first1;
       m_ = first2;
       if (runtime.Tuple.isArrayLike(pid_port_m) && pid_port_m.length === 3) {
         first01 = runtime.Tuple.get(pid_port_m, 0);
@@ -28471,26 +28471,26 @@ down1 = function down1(f) {
         port = first11;
         m = first21;
         _deforest_Deforest_Arr_2_0 = i;
-        _deforest_Deforest_Arr_2_1 = p7;
-        arr = (t21) => {
-          let first12, first02, a2, b3;
+        _deforest_Deforest_Arr_2_1 = p;
+        arr = (t2) => {
+          let first12, first02, a, b;
           first02 = _deforest_Deforest_Arr_2_0;
           first12 = _deforest_Deforest_Arr_2_1;
-          a2 = first02;
-          b3 = first12;
-          return runtime.safeCall(t21(a2, b3))
+          a = first02;
+          b = first12;
+          return runtime.safeCall(t2(a, b))
         };
         _deforest_Deforest_Arr_2_01 = pid_;
         _deforest_Deforest_Arr_2_11 = port;
-        arr1 = (a2, b3) => {
-          let first12, first02, c, d3, scrut1, scrut2;
+        arr1 = (a, b) => {
+          let first12, first02, c, d, scrut1, scrut2;
           first02 = _deforest_Deforest_Arr_2_01;
           first12 = _deforest_Deforest_Arr_2_11;
           c = first02;
-          d3 = first12;
-          scrut1 = a2 == c;
+          d = first12;
+          scrut1 = a == c;
           if (scrut1 === true) {
-            scrut2 = b3 == d3;
+            scrut2 = b == d;
             if (scrut2 === true) {
               return true
             } else {
@@ -28523,50 +28523,50 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static up_i(ipm_1, ins) {
-    let first7, first6, first5, first4, first3, first2, first1, first0, i, p7, m_, lambda$this;
-    if (runtime.Tuple.isArrayLike(ipm_1) && ipm_1.length === 8) {
-      first0 = runtime.Tuple.get(ipm_1, 0);
-      first1 = runtime.Tuple.get(ipm_1, 1);
-      first2 = runtime.Tuple.get(ipm_1, 2);
-      first3 = runtime.Tuple.get(ipm_1, 3);
-      first4 = runtime.Tuple.get(ipm_1, 4);
-      first5 = runtime.Tuple.get(ipm_1, 5);
-      first6 = runtime.Tuple.get(ipm_1, 6);
-      first7 = runtime.Tuple.get(ipm_1, 7);
+  static up_i(ipm_, ins) {
+    let first7, first6, first5, first4, first3, first2, first1, first0, i, p, m_, lambda$this;
+    if (runtime.Tuple.isArrayLike(ipm_) && ipm_.length === 8) {
+      first0 = runtime.Tuple.get(ipm_, 0);
+      first1 = runtime.Tuple.get(ipm_, 1);
+      first2 = runtime.Tuple.get(ipm_, 2);
+      first3 = runtime.Tuple.get(ipm_, 3);
+      first4 = runtime.Tuple.get(ipm_, 4);
+      first5 = runtime.Tuple.get(ipm_, 5);
+      first6 = runtime.Tuple.get(ipm_, 6);
+      first7 = runtime.Tuple.get(ipm_, 7);
       i = first0;
-      p7 = first1;
+      p = first1;
       m_ = first2;
-      lambda$this = runtime.safeCall(lambda_inst_93_27_tsni(i, p7, m_));
+      lambda$this = runtime.safeCall(lambda_inst_93_27_tsni(i, p, m_));
       return NofibPrelude.map(lambda$this, ins)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static update_i(l_r, ins1) {
+  static update_i(l_r, ins) {
     let first1, first0, l, r, tmp;
     if (runtime.Tuple.isArrayLike(l_r) && l_r.length === 2) {
       first0 = runtime.Tuple.get(l_r, 0);
       first1 = runtime.Tuple.get(l_r, 1);
       l = first0;
       r = first1;
-      tmp = up_i_inst_94_30_tsni(r, ins1);
+      tmp = up_i_inst_94_30_tsni(r, ins);
       return up_i_inst_94_26_tsni(l, tmp)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static check_left(a2, b3) {
-    let first7, first6, first5, first4, first3, first2, first1, first0, pid_, port, pm, pql, pdl, pqr, pdr, e, first51, first41, first31, first21, first11, first01, p7, m, ql, dl, qr, dr, scrut, arr, arr1, lambda$this;
-    if (runtime.Tuple.isArrayLike(a2) && a2.length === 8) {
-      first0 = runtime.Tuple.get(a2, 0);
-      first1 = runtime.Tuple.get(a2, 1);
-      first2 = runtime.Tuple.get(a2, 2);
-      first3 = runtime.Tuple.get(a2, 3);
-      first4 = runtime.Tuple.get(a2, 4);
-      first5 = runtime.Tuple.get(a2, 5);
-      first6 = runtime.Tuple.get(a2, 6);
-      first7 = runtime.Tuple.get(a2, 7);
+  static check_left(a, b) {
+    let first7, first6, first5, first4, first3, first2, first1, first0, pid_, port, pm, pql, pdl, pqr, pdr, e, first51, first41, first31, first21, first11, first01, p, m, ql, dl, qr, dr, scrut, arr, arr1, lambda$this;
+    if (runtime.Tuple.isArrayLike(a) && a.length === 8) {
+      first0 = runtime.Tuple.get(a, 0);
+      first1 = runtime.Tuple.get(a, 1);
+      first2 = runtime.Tuple.get(a, 2);
+      first3 = runtime.Tuple.get(a, 3);
+      first4 = runtime.Tuple.get(a, 4);
+      first5 = runtime.Tuple.get(a, 5);
+      first6 = runtime.Tuple.get(a, 6);
+      first7 = runtime.Tuple.get(a, 7);
       pid_ = first0;
       port = first1;
       pm = first2;
@@ -28575,14 +28575,14 @@ down1 = function down1(f) {
       pqr = first5;
       pdr = first6;
       e = first7;
-      if (runtime.Tuple.isArrayLike(b3) && b3.length === 6) {
-        first01 = runtime.Tuple.get(b3, 0);
-        first11 = runtime.Tuple.get(b3, 1);
-        first21 = runtime.Tuple.get(b3, 2);
-        first31 = runtime.Tuple.get(b3, 3);
-        first41 = runtime.Tuple.get(b3, 4);
-        first51 = runtime.Tuple.get(b3, 5);
-        p7 = first01;
+      if (runtime.Tuple.isArrayLike(b) && b.length === 6) {
+        first01 = runtime.Tuple.get(b, 0);
+        first11 = runtime.Tuple.get(b, 1);
+        first21 = runtime.Tuple.get(b, 2);
+        first31 = runtime.Tuple.get(b, 3);
+        first41 = runtime.Tuple.get(b, 4);
+        first51 = runtime.Tuple.get(b, 5);
+        p = first01;
         m = first11;
         ql = first21;
         dl = first31;
@@ -28592,7 +28592,7 @@ down1 = function down1(f) {
         scrut = runtime.short_and(pqr, lambda$this);
         if (scrut === true) {
           arr = globalThis.Object.freeze([
-            p7,
+            p,
             m,
             ql,
             dl,
@@ -28602,7 +28602,7 @@ down1 = function down1(f) {
           return arr
         } else {
           arr1 = globalThis.Object.freeze([
-            p7,
+            p,
             m,
             ql,
             dl,
@@ -28618,17 +28618,17 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static check_right(a3, b4) {
-    let first7, first6, first5, first4, first3, first2, first1, first0, pid_, port, pm, pql, pdl, pqr, pdr, e, first51, first41, first31, first21, first11, first01, p7, m, ql, dl, qr, dr, scrut, arr, arr1, lambda$this;
-    if (runtime.Tuple.isArrayLike(a3) && a3.length === 8) {
-      first0 = runtime.Tuple.get(a3, 0);
-      first1 = runtime.Tuple.get(a3, 1);
-      first2 = runtime.Tuple.get(a3, 2);
-      first3 = runtime.Tuple.get(a3, 3);
-      first4 = runtime.Tuple.get(a3, 4);
-      first5 = runtime.Tuple.get(a3, 5);
-      first6 = runtime.Tuple.get(a3, 6);
-      first7 = runtime.Tuple.get(a3, 7);
+  static check_right(a, b) {
+    let first7, first6, first5, first4, first3, first2, first1, first0, pid_, port, pm, pql, pdl, pqr, pdr, e, first51, first41, first31, first21, first11, first01, p, m, ql, dl, qr, dr, scrut, arr, arr1, lambda$this;
+    if (runtime.Tuple.isArrayLike(a) && a.length === 8) {
+      first0 = runtime.Tuple.get(a, 0);
+      first1 = runtime.Tuple.get(a, 1);
+      first2 = runtime.Tuple.get(a, 2);
+      first3 = runtime.Tuple.get(a, 3);
+      first4 = runtime.Tuple.get(a, 4);
+      first5 = runtime.Tuple.get(a, 5);
+      first6 = runtime.Tuple.get(a, 6);
+      first7 = runtime.Tuple.get(a, 7);
       pid_ = first0;
       port = first1;
       pm = first2;
@@ -28637,14 +28637,14 @@ down1 = function down1(f) {
       pqr = first5;
       pdr = first6;
       e = first7;
-      if (runtime.Tuple.isArrayLike(b4) && b4.length === 6) {
-        first01 = runtime.Tuple.get(b4, 0);
-        first11 = runtime.Tuple.get(b4, 1);
-        first21 = runtime.Tuple.get(b4, 2);
-        first31 = runtime.Tuple.get(b4, 3);
-        first41 = runtime.Tuple.get(b4, 4);
-        first51 = runtime.Tuple.get(b4, 5);
-        p7 = first01;
+      if (runtime.Tuple.isArrayLike(b) && b.length === 6) {
+        first01 = runtime.Tuple.get(b, 0);
+        first11 = runtime.Tuple.get(b, 1);
+        first21 = runtime.Tuple.get(b, 2);
+        first31 = runtime.Tuple.get(b, 3);
+        first41 = runtime.Tuple.get(b, 4);
+        first51 = runtime.Tuple.get(b, 5);
+        p = first01;
         m = first11;
         ql = first21;
         dl = first31;
@@ -28654,7 +28654,7 @@ down1 = function down1(f) {
         scrut = runtime.short_and(pql, lambda$this);
         if (scrut === true) {
           arr = globalThis.Object.freeze([
-            p7,
+            p,
             m,
             ql,
             dl,
@@ -28664,7 +28664,7 @@ down1 = function down1(f) {
           return arr
         } else {
           arr1 = globalThis.Object.freeze([
-            p7,
+            p,
             m,
             false,
             dl,
@@ -28693,42 +28693,42 @@ down1 = function down1(f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static update_io(d3, lrps, state6) {
+  static update_io(d, lrps, state) {
     let tmp;
-    tmp = update_is$_inst_96_24_tsni(lrps, state6);
-    return update_os$_inst_96_21_tsni(d3, lrps, tmp)
+    tmp = update_is$_inst_96_24_tsni(lrps, state);
+    return update_os$_inst_96_21_tsni(d, lrps, tmp)
   } 
-  static do_send(d4, states1) {
-    let states11, send_results, pss_, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, lambda$this, lambda$this1;
-    lambda$this = runtime.safeCall(lambda17(d4));
-    tmp = map_inst_97_7_tsni(lambda$this, states1);
-    states11 = tmp;
-    tmp1 = map_inst_97_130_tsni(circsim.make_packet, states11);
+  static do_send(d, states) {
+    let states1, send_results, pss_, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, lambda$this, lambda$this1;
+    lambda$this = runtime.safeCall(lambda17(d));
+    tmp = map_inst_97_7_tsni(lambda$this, states);
+    states1 = tmp;
+    tmp1 = map_inst_97_130_tsni(circsim.make_packet, states1);
     tmp2 = circsim.pad_packets(tmp1);
     tmp3 = NofibPrelude.transpose(tmp2);
     tmp4 = NofibPrelude.map(lambda_inst_97_8_tsni, tmp3);
     send_results = tmp4;
     tmp5 = NofibPrelude.transpose(send_results);
     pss_ = tmp5;
-    lambda$this1 = runtime.safeCall(lambda_inst_97_18_tsni(d4));
-    return NofibPrelude.zipWith(lambda$this1, pss_, states1)
+    lambda$this1 = runtime.safeCall(lambda_inst_97_18_tsni(d));
+    return NofibPrelude.zipWith(lambda$this1, pss_, states)
   } 
-  static do_sends(d5, states2) {
+  static do_sends(d, states) {
     let lambda$this, lambda$this1;
-    lambda$this = runtime.safeCall(lambda_inst_98_32_tsni(d5));
-    lambda$this1 = runtime.safeCall(lambda_inst_98_4_tsni(d5));
-    return NofibPrelude.until(lambda$this, lambda$this1, states2)
+    lambda$this = runtime.safeCall(lambda_inst_98_32_tsni(d));
+    lambda$this1 = runtime.safeCall(lambda_inst_98_4_tsni(d));
+    return NofibPrelude.until(lambda$this, lambda$this1, states)
   } 
-  static simulate_component(d6, state7) {
+  static simulate_component(d, state) {
     let out_signals, new_value, scrut, scrut1, param0, v, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-    tmp = circsim.inports(state7);
+    tmp = circsim.inports(state);
     tmp1 = lscomp5(tmp);
     out_signals = tmp1;
-    tmp2 = circsim.compType(state7);
+    tmp2 = circsim.compType(state);
     tmp3 = circsim.apply_component(tmp2, out_signals);
     new_value = tmp3;
-    tmp4 = circsim.pathDepth(state7);
-    scrut = d6 == tmp4;
+    tmp4 = circsim.pathDepth(state);
+    scrut = d == tmp4;
     if (scrut === true) {
       tmp5 = new_value === NofibPrelude.None;
       scrut1 = ! tmp5;
@@ -28736,70 +28736,70 @@ down1 = function down1(f) {
         if (new_value instanceof NofibPrelude.Some.class) {
           param0 = new_value.x;
           v = param0;
-          return circsim.update_outports(state7, v)
+          return circsim.update_outports(state, v)
         } else {
-          return state7
+          return state
         }
       } else {
-        return state7
+        return state
       }
     } else {
-      return state7
+      return state
     }
   } 
-  static simulate_components(depth, states3) {
+  static simulate_components(depth, states) {
     let lambda$this;
     lambda$this = runtime.safeCall(lambda22(depth));
-    return NofibPrelude.map(lambda$this, states3)
+    return NofibPrelude.map(lambda$this, states)
   } 
-  static do_cycle(cpd, tp41, inputs) {
-    let first3, first2, first1, first0, size, ins2, outs, states4, states11, states21, states31, states41, tmp, tmp1, tmp2, tmp3, tmp4, arr, lambda$this;
-    if (runtime.Tuple.isArrayLike(tp41) && tp41.length === 4) {
-      first0 = runtime.Tuple.get(tp41, 0);
-      first1 = runtime.Tuple.get(tp41, 1);
-      first2 = runtime.Tuple.get(tp41, 2);
-      first3 = runtime.Tuple.get(tp41, 3);
+  static do_cycle(cpd, tp4, inputs) {
+    let first3, first2, first1, first0, size, ins, outs, states, states1, states2, states3, states4, tmp, tmp1, tmp2, tmp3, tmp4, arr, lambda$this;
+    if (runtime.Tuple.isArrayLike(tp4) && tp4.length === 4) {
+      first0 = runtime.Tuple.get(tp4, 0);
+      first1 = runtime.Tuple.get(tp4, 1);
+      first2 = runtime.Tuple.get(tp4, 2);
+      first3 = runtime.Tuple.get(tp4, 3);
       size = first0;
-      ins2 = first1;
+      ins = first1;
       outs = first2;
-      states4 = first3;
-      lambda$this = runtime.safeCall(lambda_inst_99_42_tsni(inputs, ins2));
-      tmp = NofibPrelude.map(lambda$this, states4);
-      states11 = tmp;
-      tmp1 = do_sends_inst_99_41_tsni(0, states11);
-      states21 = tmp1;
+      states = first3;
+      lambda$this = runtime.safeCall(lambda_inst_99_42_tsni(inputs, ins));
+      tmp = NofibPrelude.map(lambda$this, states);
+      states1 = tmp;
+      tmp1 = do_sends_inst_99_41_tsni(0, states1);
+      states2 = tmp1;
       tmp2 = enumFromTo_inst_99_40_tsni(1, cpd);
-      tmp3 = foldl_inst_99_137_tsni(sim_then_send_inst_99_2_tsni, states21, tmp2);
-      states31 = tmp3;
-      tmp4 = circsim.restore_requests(states4, states31);
-      states41 = tmp4;
+      tmp3 = foldl_inst_99_137_tsni(sim_then_send_inst_99_2_tsni, states2, tmp2);
+      states3 = tmp3;
+      tmp4 = circsim.restore_requests(states, states3);
+      states4 = tmp4;
       arr = globalThis.Object.freeze([
         size,
-        ins2,
+        ins,
         outs,
-        states41
+        states4
       ]);
       return arr
     } else {
-      throw globalThis.Error(tp41)
+      throw globalThis.Error(tp4)
     }
   } 
-  static simulate(inputs_list, b5) {
-    let first3, first2, first1, first0, size, ins2, outs, states4, tmp, tmp1, arr, tmp2;
-    if (runtime.Tuple.isArrayLike(b5) && b5.length === 4) {
-      first0 = runtime.Tuple.get(b5, 0);
-      first1 = runtime.Tuple.get(b5, 1);
-      first2 = runtime.Tuple.get(b5, 2);
-      first3 = runtime.Tuple.get(b5, 3);
+  static simulate(inputs_list, b) {
+    let first3, first2, first1, first0, size, ins, outs, states, tmp, tmp1, arr, tmp2;
+    if (runtime.Tuple.isArrayLike(b) && b.length === 4) {
+      first0 = runtime.Tuple.get(b, 0);
+      first1 = runtime.Tuple.get(b, 1);
+      first2 = runtime.Tuple.get(b, 2);
+      first3 = runtime.Tuple.get(b, 3);
       size = first0;
-      ins2 = first1;
+      ins = first1;
       outs = first2;
-      states4 = first3;
-      tmp = runtime.safeCall(lambda_inst_100_101_tsni(size, ins2, outs, states4));
-      tmp1 = NofibPrelude.map(circsim.init_dffs, states4);
+      states = first3;
+      tmp = runtime.safeCall(lambda_inst_100_101_tsni(size, ins, outs, states));
+      tmp1 = NofibPrelude.map(circsim.init_dffs, states);
       arr = globalThis.Object.freeze([
         size,
-        ins2,
+        ins,
         outs,
         tmp1
       ]);
@@ -28947,7 +28947,7 @@ down1 = function down1(f) {
     return NofibPrelude.Cons(tmp1, tmp39)
   } 
   static regs(bits) {
-    let is_, os, sto1, states4, arr, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, arr1, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, arr2;
+    let is_, os, sto, states, arr, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, arr1, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, arr2;
     arr = globalThis.Object.freeze([
       "sto",
       0
@@ -28978,43 +28978,43 @@ down1 = function down1(f) {
     ]);
     tmp14 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
     tmp15 = runtime.safeCall(circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14));
-    sto1 = tmp15;
+    sto = tmp15;
     tmp16 = bits - 1;
     tmp17 = enumFromTo_inst_102_107_tsni(0, tmp16);
     tmp18 = map_inst_102_108_tsni(lambda27, tmp17);
     tmp19 = map_inst_102_109_tsni(lambda_inst_102_110_tsni, tmp18);
     tmp20 = concat_inst_102_142_tsni(tmp19);
-    tmp21 = NofibPrelude.Cons(sto1, tmp20);
-    states4 = tmp21;
+    tmp21 = NofibPrelude.Cons(sto, tmp20);
+    states = tmp21;
     tmp22 = 7 * bits;
     tmp23 = 1 + tmp22;
     arr2 = globalThis.Object.freeze([
       tmp23,
       is_,
       os,
-      states4
+      states
     ]);
     return arr2
   } 
-  static circuit_simulate(inputs_list1, circuit) {
+  static circuit_simulate(inputs_list, circuit) {
     let tmp;
-    tmp = simulate_inst_112_113_tsni(inputs_list1, circuit);
+    tmp = simulate_inst_112_113_tsni(inputs_list, circuit);
     return NofibPrelude.map(collect_outputs_inst_112_114_tsni, tmp)
   } 
   static run(num_bits, num_cycles) {
-    let example, inputs1, cycles, tmp, tmp1, tmp2, tmp3, tmp4;
+    let example, inputs, cycles, tmp, tmp1, tmp2, tmp3, tmp4;
     tmp = regs_inst_115_116_tsni(num_bits);
     tmp1 = pad_circuit_inst_115_120_tsni(tmp);
     example = tmp1;
     tmp2 = num_bits + 1;
     tmp3 = replicate_inst_115_119_tsni(tmp2, circsim.T);
-    inputs1 = tmp3;
-    tmp4 = replicate_inst_115_118_tsni(num_cycles, inputs1);
+    inputs = tmp3;
+    tmp4 = replicate_inst_115_118_tsni(num_cycles, inputs);
     cycles = tmp4;
     return circuit_simulate_inst_115_117_tsni(cycles, example)
   } 
-  static testCircsim_nofib(n1) {
-    return run_inst_125_126_tsni(8, n1)
+  static testCircsim_nofib(n) {
+    return run_inst_125_126_tsni(8, n)
   } 
   static main() {
     let tmp;

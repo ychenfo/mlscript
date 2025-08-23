@@ -881,23 +881,23 @@ f = function f(m) {
   static infRand(m, s) {
     return f$(m, s)
   } 
-  static simulate(n, m1, proc1) {
+  static simulate(n, m, proc1) {
     let tmp, tmp1, tmp2, tmp3;
     tmp = enumFromTo_inst_11_3_tsni(1, n);
-    tmp1 = lscomp$_inst_11_4_tsni(m1, proc1, tmp);
+    tmp1 = lscomp$_inst_11_4_tsni(m, proc1, tmp);
     tmp2 = filter_inst_11_18_tsni(lambda1, tmp1);
     tmp3 = NofibPrelude.listLen(tmp2);
     return tmp3 / n
   } 
-  static sim(n1, k) {
+  static sim(n, k) {
     let proc$this;
     proc$this = runtime.safeCall(proc_inst_12_5_tsni(k));
-    return simulate_inst_12_2_tsni(n1, 100, proc$this)
+    return simulate_inst_12_2_tsni(n, 100, proc$this)
   } 
-  static testSecretary_nofib(n2) {
+  static testSecretary_nofib(n) {
     let tmp;
     tmp = enumFromTo_inst_13_15_tsni(35, 39);
-    return listcomp$_inst_13_14_tsni(n2, tmp)
+    return listcomp$_inst_13_14_tsni(n, tmp)
   } 
   static main() {
     let tmp;

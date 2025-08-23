@@ -4588,85 +4588,85 @@ lambda = (undefined, function (x, y) {
   static listDiff(a, ls) {
     return NofibPrelude.foldl(awards.delete_, a, ls)
   } 
-  static qsort(le, ls1, r) {
-    let param0, param1, x, xs1, x1;
-    if (ls1 instanceof NofibPrelude.Nil.class) {
+  static qsort(le, ls, r) {
+    let param0, param1, x, xs, x1;
+    if (ls instanceof NofibPrelude.Nil.class) {
       return r
-    } else if (ls1 instanceof NofibPrelude.Cons.class) {
-      param0 = ls1.head;
-      param1 = ls1.tail;
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
       x1 = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
         return NofibPrelude.Cons(x1, r)
       } else {
         x = param0;
-        xs1 = param1;
-        return awards.qpart(le, x, xs1, NofibPrelude.Nil, NofibPrelude.Nil, r)
+        xs = param1;
+        return awards.qpart(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static qpart(le1, x, ys, rlt, rge, r1) {
+  static qpart(le, x, ys, rlt, rge, r) {
     let param0, param1, y, ys1, scrut, tmp, tmp1, tmp2, tmp3;
     if (ys instanceof NofibPrelude.Nil.class) {
-      tmp = awards.rqsort(le1, rge, r1);
+      tmp = awards.rqsort(le, rge, r);
       tmp1 = NofibPrelude.Cons(x, tmp);
-      return awards.rqsort(le1, rlt, tmp1)
+      return awards.rqsort(le, rlt, tmp1)
     } else if (ys instanceof NofibPrelude.Cons.class) {
       param0 = ys.head;
       param1 = ys.tail;
       y = param0;
       ys1 = param1;
-      scrut = runtime.safeCall(le1(x, y));
+      scrut = runtime.safeCall(le(x, y));
       if (scrut === true) {
         tmp2 = NofibPrelude.Cons(y, rge);
-        return awards.qpart(le1, x, ys1, rlt, tmp2, r1)
+        return awards.qpart(le, x, ys1, rlt, tmp2, r)
       } else {
         tmp3 = NofibPrelude.Cons(y, rlt);
-        return awards.qpart(le1, x, ys1, tmp3, rge, r1)
+        return awards.qpart(le, x, ys1, tmp3, rge, r)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static rqsort(le2, ls2, r2) {
-    let param0, param1, x1, xs1, x2;
-    if (ls2 instanceof NofibPrelude.Nil.class) {
-      return r2
-    } else if (ls2 instanceof NofibPrelude.Cons.class) {
-      param0 = ls2.head;
-      param1 = ls2.tail;
-      x2 = param0;
+  static rqsort(le, ls, r) {
+    let param0, param1, x, xs, x1;
+    if (ls instanceof NofibPrelude.Nil.class) {
+      return r
+    } else if (ls instanceof NofibPrelude.Cons.class) {
+      param0 = ls.head;
+      param1 = ls.tail;
+      x1 = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
-        return NofibPrelude.Cons(x2, r2)
+        return NofibPrelude.Cons(x1, r)
       } else {
-        x1 = param0;
-        xs1 = param1;
-        return awards.rqpart(le2, x1, xs1, NofibPrelude.Nil, NofibPrelude.Nil, r2)
+        x = param0;
+        xs = param1;
+        return awards.rqpart(le, x, xs, NofibPrelude.Nil, NofibPrelude.Nil, r)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static rqpart(le3, x1, yss, rle, rgt, r3) {
-    let param0, param1, y, ys1, scrut, tmp, tmp1, tmp2, tmp3;
+  static rqpart(le, x, yss, rle, rgt, r) {
+    let param0, param1, y, ys, scrut, tmp, tmp1, tmp2, tmp3;
     if (yss instanceof NofibPrelude.Nil.class) {
-      tmp = awards.qsort(le3, rgt, r3);
-      tmp1 = NofibPrelude.Cons(x1, tmp);
-      return awards.qsort(le3, rle, tmp1)
+      tmp = awards.qsort(le, rgt, r);
+      tmp1 = NofibPrelude.Cons(x, tmp);
+      return awards.qsort(le, rle, tmp1)
     } else if (yss instanceof NofibPrelude.Cons.class) {
       param0 = yss.head;
       param1 = yss.tail;
       y = param0;
-      ys1 = param1;
-      scrut = runtime.safeCall(le3(y, x1));
+      ys = param1;
+      scrut = runtime.safeCall(le(y, x));
       if (scrut === true) {
         tmp2 = NofibPrelude.Cons(y, rle);
-        return awards.rqpart(le3, x1, ys1, tmp2, rgt, r3)
+        return awards.rqpart(le, x, ys, tmp2, rgt, r)
       } else {
         tmp3 = NofibPrelude.Cons(y, rgt);
-        return awards.rqpart(le3, x1, ys1, rle, tmp3, r3)
+        return awards.rqpart(le, x, ys, rle, tmp3, r)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -4751,10 +4751,10 @@ lambda = (undefined, function (x, y) {
     tmp5 = append_inst_22_13_tsni(tmp3, tmp4);
     return append_inst_22_16_tsni(tmp2, tmp5)
   } 
-  static findawards(scores1) {
+  static findawards(scores) {
     let scrut;
-    scrut = awards_inst_23_4_tsni(scores1);
-    return runtime.safeCall(scrut(scores1))
+    scrut = awards_inst_23_4_tsni(scores);
+    return runtime.safeCall(scrut(scores))
   } 
   static findallawards(competitors) {
     let tmp;

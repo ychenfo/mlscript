@@ -13022,8 +13022,8 @@ lambda = (undefined, function (x) {
       static [definitionMetadata] = ["object", "Tip"]; 
     };
     this.Tip = globalThis.Object.freeze(new Tip$class);
-    this.Branch = function Branch(a1, l1, r1) {
-      return globalThis.Object.freeze(new Branch.class(a1, l1, r1));
+    this.Branch = function Branch(a, l, r) {
+      return globalThis.Object.freeze(new Branch.class(a, l, r));
     };
     Object.defineProperty(this.Branch, "class", {
       enumerable: true,
@@ -13054,8 +13054,8 @@ lambda = (undefined, function (x) {
       static [definitionMetadata] = ["object", "Tip2"]; 
     };
     this.Tip2 = globalThis.Object.freeze(new Tip2$class);
-    this.Twig2 = function Twig2(a1) {
-      return globalThis.Object.freeze(new Twig2.class(a1));
+    this.Twig2 = function Twig2(a) {
+      return globalThis.Object.freeze(new Twig2.class(a));
     };
     Object.defineProperty(this.Twig2, "class", {
       enumerable: true,
@@ -13068,8 +13068,8 @@ lambda = (undefined, function (x) {
         static [definitionMetadata] = ["class", "Twig2", ["a"]]; 
       }
     });
-    this.Branch2 = function Branch2(a1, l1, r1) {
-      return globalThis.Object.freeze(new Branch2.class(a1, l1, r1));
+    this.Branch2 = function Branch2(a, l, r) {
+      return globalThis.Object.freeze(new Branch2.class(a, l, r));
     };
     Object.defineProperty(this.Branch2, "class", {
       enumerable: true,
@@ -13139,33 +13139,33 @@ lambda = (undefined, function (x) {
     scrut = compareList_inst_70_6_tsni(a, b);
     return runtime.safeCall(scrut())
   } 
-  static leList(a1, b1) {
+  static leList(a, b) {
     let tmp;
-    tmp = gtList_inst_71_5_tsni(a1, b1);
+    tmp = gtList_inst_71_5_tsni(a, b);
     return ! tmp
   } 
-  static ltList(a2, b2) {
+  static ltList(a, b) {
     let scrut;
-    scrut = compareList_inst_72_19_tsni(a2, b2);
+    scrut = compareList_inst_72_19_tsni(a, b);
     return runtime.safeCall(scrut())
   } 
-  static geList(a3, b3) {
+  static geList(a, b) {
     let tmp;
-    tmp = ltList_inst_73_18_tsni(a3, b3);
+    tmp = ltList_inst_73_18_tsni(a, b);
     return ! tmp
   } 
-  static eqList(a4, b4) {
+  static eqList(a, b) {
     let scrut;
-    scrut = compareList_inst_74_30_tsni(a4, b4);
+    scrut = compareList_inst_74_30_tsni(a, b);
     return runtime.safeCall(scrut())
   } 
-  static prependToAll(sep, xs1) {
+  static prependToAll(sep, xs) {
     let param0, param1, x, xs_, tmp, tmp1;
-    if (xs1 instanceof NofibPrelude.Nil.class) {
+    if (xs instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (xs1 instanceof NofibPrelude.Cons.class) {
-      param0 = xs1.head;
-      param1 = xs1.tail;
+    } else if (xs instanceof NofibPrelude.Cons.class) {
+      param0 = xs.head;
+      param1 = xs.tail;
       x = param0;
       xs_ = param1;
       tmp = sorting.prependToAll(sep, xs_);
@@ -13175,16 +13175,16 @@ lambda = (undefined, function (x) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static intersperse(sep1, xs2) {
+  static intersperse(sep, xs) {
     let param0, param1, x, xs_, tmp;
-    if (xs2 instanceof NofibPrelude.Nil.class) {
+    if (xs instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (xs2 instanceof NofibPrelude.Cons.class) {
-      param0 = xs2.head;
-      param1 = xs2.tail;
+    } else if (xs instanceof NofibPrelude.Cons.class) {
+      param0 = xs.head;
+      param1 = xs.tail;
       x = param0;
       xs_ = param1;
-      tmp = sorting.prependToAll(sep1, xs_);
+      tmp = sorting.prependToAll(sep, xs_);
       return NofibPrelude.Cons(x, tmp)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -13217,8 +13217,8 @@ lambda = (undefined, function (x) {
     tmp = NofibPrelude.intMod(x, 2);
     return tmp === 0
   } 
-  static z_of_int(x1) {
-    return runtime.safeCall(globalThis.BigInt(x1))
+  static z_of_int(x) {
+    return runtime.safeCall(globalThis.BigInt(x))
   } 
   static hash(str) {
     let tmp, tmp1;
@@ -13226,42 +13226,42 @@ lambda = (undefined, function (x) {
     tmp1 = sorting.z_of_int(0);
     return NofibPrelude.foldl(tmp, tmp1, str)
   } 
-  static quickSort(xs3) {
-    let param0, param1, x2, xs_, tmp, tmp1, tmp2, tmp3, tmp4;
-    if (xs3 instanceof NofibPrelude.Nil.class) {
+  static quickSort(xs) {
+    let param0, param1, x, xs_, tmp, tmp1, tmp2, tmp3, tmp4;
+    if (xs instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (xs3 instanceof NofibPrelude.Cons.class) {
-      param0 = xs3.head;
-      param1 = xs3.tail;
-      x2 = param0;
+    } else if (xs instanceof NofibPrelude.Cons.class) {
+      param0 = xs.head;
+      param1 = xs.tail;
+      x = param0;
       xs_ = param1;
-      tmp = lscomp1$_inst_81_23_tsni(x2, xs_);
+      tmp = lscomp1$_inst_81_23_tsni(x, xs_);
       tmp1 = sorting.quickSort(tmp);
-      tmp2 = lscomp2$_inst_81_21_tsni(x2, xs_);
+      tmp2 = lscomp2$_inst_81_21_tsni(x, xs_);
       tmp3 = sorting.quickSort(tmp2);
-      tmp4 = NofibPrelude.Cons(x2, tmp3);
+      tmp4 = NofibPrelude.Cons(x, tmp3);
       return NofibPrelude.append(tmp1, tmp4)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static select(p, x2, ts_fs) {
+  static select(p, x, ts_fs) {
     let first1, first0, ts, fs, scrut, tmp, arr, tmp1, arr1;
     if (runtime.Tuple.isArrayLike(ts_fs) && ts_fs.length === 2) {
       first0 = runtime.Tuple.get(ts_fs, 0);
       first1 = runtime.Tuple.get(ts_fs, 1);
       ts = first0;
       fs = first1;
-      scrut = runtime.safeCall(p(x2));
+      scrut = runtime.safeCall(p(x));
       if (scrut === true) {
-        tmp = NofibPrelude.Cons(x2, ts);
+        tmp = NofibPrelude.Cons(x, ts);
         arr = globalThis.Object.freeze([
           tmp,
           fs
         ]);
         return arr
       } else {
-        tmp1 = NofibPrelude.Cons(x2, fs);
+        tmp1 = NofibPrelude.Cons(x, fs);
         arr1 = globalThis.Object.freeze([
           ts,
           tmp1
@@ -13272,25 +13272,25 @@ lambda = (undefined, function (x) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static partition(p1, xs4) {
+  static partition(p, xs) {
     let arr, lambda$this;
     arr = globalThis.Object.freeze([
       NofibPrelude.Nil,
       NofibPrelude.Nil
     ]);
-    lambda$this = runtime.safeCall(lambda3(p1));
-    return NofibPrelude.foldr(lambda$this, arr, xs4)
+    lambda$this = runtime.safeCall(lambda3(p));
+    return NofibPrelude.foldr(lambda$this, arr, xs)
   } 
-  static quickSort2(xs5) {
-    let param0, param1, x3, xs_, scrut, first1, first0, lo, hi, tmp, tmp1, tmp2, lambda$this;
-    if (xs5 instanceof NofibPrelude.Nil.class) {
+  static quickSort2(xs) {
+    let param0, param1, x, xs_, scrut, first1, first0, lo, hi, tmp, tmp1, tmp2, lambda$this;
+    if (xs instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (xs5 instanceof NofibPrelude.Cons.class) {
-      param0 = xs5.head;
-      param1 = xs5.tail;
-      x3 = param0;
+    } else if (xs instanceof NofibPrelude.Cons.class) {
+      param0 = xs.head;
+      param1 = xs.tail;
+      x = param0;
       xs_ = param1;
-      lambda$this = runtime.safeCall(lambda_inst_82_15_tsni(x3));
+      lambda$this = runtime.safeCall(lambda_inst_82_15_tsni(x));
       scrut = sorting.partition(lambda$this, xs_);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
         first0 = runtime.Tuple.get(scrut, 0);
@@ -13299,7 +13299,7 @@ lambda = (undefined, function (x) {
         hi = first1;
         tmp = sorting.quickSort2(lo);
         tmp1 = sorting.quickSort2(hi);
-        tmp2 = NofibPrelude.Cons(x3, tmp1);
+        tmp2 = NofibPrelude.Cons(x, tmp1);
         return NofibPrelude.append(tmp, tmp2)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -13309,35 +13309,35 @@ lambda = (undefined, function (x) {
     }
   } 
   static quickerSort(xss) {
-    let param0, param1, x3, xs6, x4;
+    let param0, param1, x, xs, x1;
     if (xss instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (xss instanceof NofibPrelude.Cons.class) {
       param0 = xss.head;
       param1 = xss.tail;
-      x4 = param0;
+      x1 = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
-        return NofibPrelude.Cons(x4, NofibPrelude.Nil)
+        return NofibPrelude.Cons(x1, NofibPrelude.Nil)
       } else {
-        x3 = param0;
-        xs6 = param1;
-        return split_inst_83_tsni(x3, NofibPrelude.Nil, NofibPrelude.Nil, xs6)
+        x = param0;
+        xs = param1;
+        return split_inst_83_tsni(x, NofibPrelude.Nil, NofibPrelude.Nil, xs)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static insertSort(xss1) {
-    let param0, param1, x3, xs6, tmp;
-    if (xss1 instanceof NofibPrelude.Nil.class) {
+  static insertSort(xss) {
+    let param0, param1, x, xs, tmp;
+    if (xss instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
-    } else if (xss1 instanceof NofibPrelude.Cons.class) {
-      param0 = xss1.head;
-      param1 = xss1.tail;
-      x3 = param0;
-      xs6 = param1;
-      tmp = NofibPrelude.Cons(x3, NofibPrelude.Nil);
-      return trins_inst_84_36_tsni(NofibPrelude.Nil, tmp, xs6)
+    } else if (xss instanceof NofibPrelude.Cons.class) {
+      param0 = xss.head;
+      param1 = xss.tail;
+      x = param0;
+      xs = param1;
+      tmp = NofibPrelude.Cons(x, NofibPrelude.Nil);
+      return trins_inst_84_36_tsni(NofibPrelude.Nil, tmp, xs)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13347,19 +13347,19 @@ lambda = (undefined, function (x) {
     tmp = mkTree_inst_85_9_tsni(param);
     return readTree(tmp)
   } 
-  static treeSort2(param1) {
+  static treeSort2(param) {
     let tmp;
-    tmp = mkTree_inst_86_2_tsni(param1);
+    tmp = mkTree_inst_86_2_tsni(param);
     return readTree1(tmp)
   } 
-  static heapSort(xs6) {
+  static heapSort(xs) {
     let tmp;
-    tmp = heap_inst_87_42_tsni(0, xs6);
+    tmp = heap_inst_87_42_tsni(0, xs);
     return clear_inst_87_39_tsni(tmp)
   } 
-  static mergeSort(param2) {
+  static mergeSort(param) {
     let tmp;
-    tmp = runsplit_inst_88_31_tsni(NofibPrelude.Nil, param2);
+    tmp = runsplit_inst_88_31_tsni(NofibPrelude.Nil, param);
     return merge_lists_inst_88_26_tsni(tmp)
   } 
   static mangle(inpt) {

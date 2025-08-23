@@ -709,31 +709,31 @@ lambda = (undefined, function (acc, c) {
   static z_of_int(x) {
     return runtime.safeCall(globalThis.BigInt(x))
   } 
-  static string_of_z(x1) {
+  static string_of_z(x) {
     let tmp;
-    tmp = x1 + "";
+    tmp = x + "";
     return NofibPrelude.nofibStringToList(tmp)
   } 
-  static z_add(x2, y) {
-    return x2 + y
+  static z_add(x, y) {
+    return x + y
   } 
-  static z_mul(x3, y1) {
-    return x3 * y1
+  static z_mul(x, y) {
+    return x * y
   } 
-  static z_sub(x4, y2) {
-    return x4 - y2
+  static z_sub(x, y) {
+    return x - y
   } 
-  static z_div(x5, y3) {
-    return x5 / y3
+  static z_div(x, y) {
+    return x / y
   } 
-  static z_mod(x6, y4) {
-    return x6 % y4
+  static z_mod(x, y) {
+    return x % y
   } 
-  static z_equal(x7, y5) {
-    return x7 === y5
+  static z_equal(x, y) {
+    return x === y
   } 
-  static z_sqr(x8) {
-    return x8 * x8
+  static z_sqr(x) {
+    return x * x
   } 
   static int_if_char(c) {
     return runtime.safeCall(c.codePointAt(0))
@@ -761,9 +761,9 @@ lambda = (undefined, function (acc, c) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static unlines(ls1) {
+  static unlines(ls) {
     let tmp;
-    tmp = map_inst_0_1_tsni(lambda_inst_0_2_tsni, ls1);
+    tmp = map_inst_0_1_tsni(lambda_inst_0_2_tsni, ls);
     return concat_inst_0_11_tsni(tmp)
   } 
   static even(a) {
@@ -771,10 +771,10 @@ lambda = (undefined, function (acc, c) {
     tmp = rsa.z_mod(a, rsa.const2);
     return tmp === rsa.const0
   } 
-  static code(ls2) {
+  static code(ls) {
     let tmp;
     tmp = lambda2;
-    return NofibPrelude.foldl(tmp, rsa.const0, ls2)
+    return NofibPrelude.foldl(tmp, rsa.const0, ls)
   } 
   static collect(n, xs) {
     let scrut, tmp, tmp1, tmp2;
@@ -792,37 +792,37 @@ lambda = (undefined, function (acc, c) {
       }
     }
   } 
-  static size(n1) {
+  static size(n) {
     let tmp, tmp1, tmp2;
-    tmp = rsa.string_of_z(n1);
+    tmp = rsa.string_of_z(n);
     tmp1 = NofibPrelude.listLen(tmp);
     tmp2 = tmp1 * 47;
     return NofibPrelude.intDiv(tmp2, 100)
   } 
-  static encrypt(n2, e, s) {
+  static encrypt(n, e, s) {
     let tmp, tmp1, tmp2, tmp3;
-    tmp = runtime.safeCall(lambda_inst_4_15_tsni(n2, e));
-    tmp1 = rsa.size(n2);
+    tmp = runtime.safeCall(lambda_inst_4_15_tsni(n, e));
+    tmp1 = rsa.size(n);
     tmp2 = collect_inst_4_5_tsni(tmp1, s);
     tmp3 = map_inst_4_8_tsni(tmp, tmp2);
     return unlines_inst_4_7_tsni(tmp3)
   } 
-  static power(n3, m, x9) {
+  static power(n, m, x) {
     let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-    scrut1 = rsa.z_equal(n3, rsa.const0);
+    scrut1 = rsa.z_equal(n, rsa.const0);
     if (scrut1 === true) {
       return rsa.const1
     } else {
-      scrut = rsa.even(n3);
+      scrut = rsa.even(n);
       if (scrut === true) {
-        tmp = rsa.z_div(n3, rsa.const2);
-        tmp1 = rsa.power(tmp, m, x9);
+        tmp = rsa.z_div(n, rsa.const2);
+        tmp1 = rsa.power(tmp, m, x);
         tmp2 = rsa.z_sqr(tmp1);
         return rsa.z_mod(tmp2, m)
       } else {
-        tmp3 = rsa.z_sub(n3, rsa.const1);
-        tmp4 = rsa.power(tmp3, m, x9);
-        tmp5 = rsa.z_mul(x9, tmp4);
+        tmp3 = rsa.z_sub(n, rsa.const1);
+        tmp4 = rsa.power(tmp3, m, x);
+        tmp5 = rsa.z_mul(x, tmp4);
         return rsa.z_mod(tmp5, m)
       }
     }

@@ -4520,38 +4520,38 @@ lscomp1 = function lscomp1(op, bstart, bstep, blim) {
     tmp1 = enumFromThenTo_inst_8_10_tsni(astart, tmp, alim);
     return lscomp1$_inst_8_9_tsni(op, bstart, bstep, blim, tmp1)
   } 
-  static intbench(op1, astart1, astep1, alim1, bstart1, bstep1, blim1) {
+  static intbench(op, astart, astep, alim, bstart, bstep, blim) {
     let tmp, tmp1;
-    tmp = astart1 + astep1;
-    tmp1 = enumFromThenTo_inst_11_13_tsni(astart1, tmp, alim1);
-    return lscomp1$_inst_11_12_tsni(op1, bstart1, bstep1, blim1, tmp1)
+    tmp = astart + astep;
+    tmp1 = enumFromThenTo_inst_11_13_tsni(astart, tmp, alim);
+    return lscomp1$_inst_11_12_tsni(op, bstart, bstep, blim, tmp1)
   } 
-  static runbench(jop, iop, opstr, astart2, astep2, alim2, bstart2, bstep2, blim2) {
+  static runbench(jop, iop, opstr, astart, astep, alim, bstart, bstep, blim) {
     let tmp, tmp1;
-    tmp = intbench_inst_14_15_tsni(iop, astart2, astep2, alim2, astart2, astep2, alim2);
-    tmp1 = integerbench_inst_14_16_tsni(jop, astart2, astep2, alim2, astart2, astep2, alim2);
+    tmp = intbench_inst_14_15_tsni(iop, astart, astep, alim, astart, astep, alim);
+    tmp1 = integerbench_inst_14_16_tsni(jop, astart, astep, alim, astart, astep, alim);
     return (tmp , tmp1)
   } 
-  static runalltests(astart3, astep3, alim3, bstart3, bstep3, blim3) {
+  static runalltests(astart, astep, alim, bstart, bstep, blim) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17;
-    tmp = runbench_inst_17_18_tsni(lambda, lambda1, "(+)", astart3, astep3, alim3, astart3, astep3, alim3);
-    tmp1 = runbench_inst_17_19_tsni(lambda2, lambda3, "(-)", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp = runbench_inst_17_18_tsni(lambda, lambda1, "(+)", astart, astep, alim, astart, astep, alim);
+    tmp1 = runbench_inst_17_19_tsni(lambda2, lambda3, "(-)", astart, astep, alim, astart, astep, alim);
     tmp2 = (tmp , tmp1);
-    tmp3 = runbench_inst_17_20_tsni(lambda4, lambda5, "(*)", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp3 = runbench_inst_17_20_tsni(lambda4, lambda5, "(*)", astart, astep, alim, astart, astep, alim);
     tmp4 = (tmp2 , tmp3);
-    tmp5 = runbench_inst_17_21_tsni(lambda6, lambda7, "div", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp5 = runbench_inst_17_21_tsni(lambda6, lambda7, "div", astart, astep, alim, astart, astep, alim);
     tmp6 = (tmp4 , tmp5);
-    tmp7 = runbench_inst_17_22_tsni(lambda8, lambda9, "mod", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp7 = runbench_inst_17_22_tsni(lambda8, lambda9, "mod", astart, astep, alim, astart, astep, alim);
     tmp8 = (tmp6 , tmp7);
-    tmp9 = runbench_inst_17_23_tsni(lambda10, lambda11, "(==)", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp9 = runbench_inst_17_23_tsni(lambda10, lambda11, "(==)", astart, astep, alim, astart, astep, alim);
     tmp10 = (tmp8 , tmp9);
-    tmp11 = runbench_inst_17_24_tsni(lambda12, lambda13, "(<)", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp11 = runbench_inst_17_24_tsni(lambda12, lambda13, "(<)", astart, astep, alim, astart, astep, alim);
     tmp12 = (tmp10 , tmp11);
-    tmp13 = runbench_inst_17_25_tsni(lambda14, lambda15, "(<=)", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp13 = runbench_inst_17_25_tsni(lambda14, lambda15, "(<=)", astart, astep, alim, astart, astep, alim);
     tmp14 = (tmp12 , tmp13);
-    tmp15 = runbench_inst_17_26_tsni(lambda16, lambda17, "(>)", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp15 = runbench_inst_17_26_tsni(lambda16, lambda17, "(>)", astart, astep, alim, astart, astep, alim);
     tmp16 = (tmp14 , tmp15);
-    tmp17 = runbench_inst_17_27_tsni(lambda18, lambda19, "(>=)", astart3, astep3, alim3, astart3, astep3, alim3);
+    tmp17 = runbench_inst_17_27_tsni(lambda18, lambda19, "(>=)", astart, astep, alim, astart, astep, alim);
     return (tmp16 , tmp17)
   } 
   static testInteger_nofib(n) {

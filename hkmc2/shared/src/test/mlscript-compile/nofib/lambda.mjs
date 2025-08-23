@@ -16235,8 +16235,8 @@ lambda2 = (undefined, function (m, f) {
   static {
     lambda1 = lambda;
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, lambda27;
-    this.MyState = function MyState(r1) {
-      return globalThis.Object.freeze(new MyState.class(r1));
+    this.MyState = function MyState(r) {
+      return globalThis.Object.freeze(new MyState.class(r));
     };
     Object.defineProperty(this.MyState, "class", {
       enumerable: true,
@@ -16274,8 +16274,8 @@ lambda2 = (undefined, function (m, f) {
       static [definitionMetadata] = ["object", "Incr"]; 
     };
     this.Incr = globalThis.Object.freeze(new Incr$class);
-    this.Var = function Var(s1) {
-      return globalThis.Object.freeze(new Var.class(s1));
+    this.Var = function Var(s) {
+      return globalThis.Object.freeze(new Var.class(s));
     };
     Object.defineProperty(this.Var, "class", {
       enumerable: true,
@@ -16288,8 +16288,8 @@ lambda2 = (undefined, function (m, f) {
         static [definitionMetadata] = ["class", "Var", ["s"]]; 
       }
     });
-    this.Con = function Con(i1) {
-      return globalThis.Object.freeze(new Con.class(i1));
+    this.Con = function Con(i) {
+      return globalThis.Object.freeze(new Con.class(i));
     };
     Object.defineProperty(this.Con, "class", {
       enumerable: true,
@@ -16302,8 +16302,8 @@ lambda2 = (undefined, function (m, f) {
         static [definitionMetadata] = ["class", "Con", ["i"]]; 
       }
     });
-    this.Add = function Add(a1, b1) {
-      return globalThis.Object.freeze(new Add.class(a1, b1));
+    this.Add = function Add(a, b) {
+      return globalThis.Object.freeze(new Add.class(a, b));
     };
     Object.defineProperty(this.Add, "class", {
       enumerable: true,
@@ -16317,8 +16317,8 @@ lambda2 = (undefined, function (m, f) {
         static [definitionMetadata] = ["class", "Add", ["a", "b"]]; 
       }
     });
-    this.Lam = function Lam(s1, t1) {
-      return globalThis.Object.freeze(new Lam.class(s1, t1));
+    this.Lam = function Lam(s, t) {
+      return globalThis.Object.freeze(new Lam.class(s, t));
     };
     Object.defineProperty(this.Lam, "class", {
       enumerable: true,
@@ -16332,8 +16332,8 @@ lambda2 = (undefined, function (m, f) {
         static [definitionMetadata] = ["class", "Lam", ["s", "t"]]; 
       }
     });
-    this.App = function App(a1, b1) {
-      return globalThis.Object.freeze(new App.class(a1, b1));
+    this.App = function App(a, b) {
+      return globalThis.Object.freeze(new App.class(a, b));
     };
     Object.defineProperty(this.App, "class", {
       enumerable: true,
@@ -16347,8 +16347,8 @@ lambda2 = (undefined, function (m, f) {
         static [definitionMetadata] = ["class", "App", ["a", "b"]]; 
       }
     });
-    this.IfZero = function IfZero(a1, b1, c1) {
-      return globalThis.Object.freeze(new IfZero.class(a1, b1, c1));
+    this.IfZero = function IfZero(a, b, c) {
+      return globalThis.Object.freeze(new IfZero.class(a, b, c));
     };
     Object.defineProperty(this.IfZero, "class", {
       enumerable: true,
@@ -16363,8 +16363,8 @@ lambda2 = (undefined, function (m, f) {
         static [definitionMetadata] = ["class", "IfZero", ["a", "b", "c"]]; 
       }
     });
-    this.Thunk = function Thunk(t1, e1) {
-      return globalThis.Object.freeze(new Thunk.class(t1, e1));
+    this.Thunk = function Thunk(t, e) {
+      return globalThis.Object.freeze(new Thunk.class(t, e));
     };
     Object.defineProperty(this.Thunk, "class", {
       enumerable: true,
@@ -16465,9 +16465,9 @@ lambda2 = (undefined, function (m, f) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static myBind(m1, f) {
+  static myBind(m, f) {
     let tmp;
-    tmp = runtime.safeCall(lambda2(m1, f));
+    tmp = runtime.safeCall(lambda2(m, f));
     return runtime.safeCall(lambda.MyState(tmp))
   } 
   static myReturn(a) {
@@ -16475,34 +16475,34 @@ lambda2 = (undefined, function (m, f) {
     lambda$this = runtime.safeCall(lambda3(a));
     return runtime.safeCall(lambda.MyState(lambda$this))
   } 
-  static myEvalState(m2, s1) {
-    let scrut, first1, first0, s_, a1;
-    scrut = lambda.myRunState(m2, s1);
+  static myEvalState(m, s) {
+    let scrut, first1, first0, s_, a;
+    scrut = lambda.myRunState(m, s);
     if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
       first0 = runtime.Tuple.get(scrut, 0);
       first1 = runtime.Tuple.get(scrut, 1);
       s_ = first0;
-      a1 = first1;
-      return a1
+      a = first1;
+      return a
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static eqEnv(a1, b) {
-    let param0, param1, first1, first0, s11, t1, b1, param01, param11, first11, first01, s2, t2, d, scrut, scrut1;
-    if (a1 instanceof NofibPrelude.Nil.class) {
+  static eqEnv(a, b) {
+    let param0, param1, first1, first0, s1, t1, b1, param01, param11, first11, first01, s2, t2, d, scrut, scrut1;
+    if (a instanceof NofibPrelude.Nil.class) {
       if (b instanceof NofibPrelude.Nil.class) {
         return true
       } else {
         return false
       }
-    } else if (a1 instanceof NofibPrelude.Cons.class) {
-      param0 = a1.head;
-      param1 = a1.tail;
+    } else if (a instanceof NofibPrelude.Cons.class) {
+      param0 = a.head;
+      param1 = a.tail;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
-        s11 = first0;
+        s1 = first0;
         t1 = first1;
         b1 = param1;
         if (b1 instanceof NofibPrelude.Cons.class) {
@@ -16514,7 +16514,7 @@ lambda2 = (undefined, function (m, f) {
             s2 = first01;
             t2 = first11;
             d = param11;
-            scrut = NofibPrelude.listEq(s11, s2);
+            scrut = NofibPrelude.listEq(s1, s2);
             if (scrut === true) {
               scrut1 = lambda.eqTerm(t1, t2);
               if (scrut1 === true) {
@@ -16538,116 +16538,116 @@ lambda2 = (undefined, function (m, f) {
       return false
     }
   } 
-  static eqTerm(a2, b1) {
-    let param0, param1, a3, b2, param01, param11, c, d, param2, a4, b3, c1, param02, param12, param21, d1, e, f1, a5, b4, param03, param13, c2, d2, a6, b5, param04, param14, c3, d3, a7, b6, param05, param15, c4, d4, a8, param06, b7, a9, b8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4, lambda$this5;
-    if (a2 instanceof lambda.Var.class) {
-      param0 = a2.s;
-      a9 = param0;
-      if (b1 instanceof lambda.Var.class) {
-        param06 = b1.s;
-        b8 = param06;
-        return NofibPrelude.listEq(a9, b8)
-      } else {
-        return false
-      }
-    } else if (a2 instanceof lambda.Con.class) {
-      param0 = a2.i;
-      a8 = param0;
-      if (b1 instanceof lambda.Con.class) {
-        param06 = b1.i;
+  static eqTerm(a, b) {
+    let param0, param1, a1, b1, param01, param11, c, d, param2, a2, b2, c1, param02, param12, param21, d1, e, f, a3, b3, param03, param13, c2, d2, a4, b4, param04, param14, c3, d3, a5, b5, param05, param15, c4, d4, a6, param06, b6, a7, b7, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4, lambda$this5;
+    if (a instanceof lambda.Var.class) {
+      param0 = a.s;
+      a7 = param0;
+      if (b instanceof lambda.Var.class) {
+        param06 = b.s;
         b7 = param06;
-        return a8 === b7
+        return NofibPrelude.listEq(a7, b7)
       } else {
         return false
       }
-    } else if (a2 instanceof lambda.Incr.class) {
-      if (b1 instanceof lambda.Incr.class) {
+    } else if (a instanceof lambda.Con.class) {
+      param0 = a.i;
+      a6 = param0;
+      if (b instanceof lambda.Con.class) {
+        param06 = b.i;
+        b6 = param06;
+        return a6 === b6
+      } else {
+        return false
+      }
+    } else if (a instanceof lambda.Incr.class) {
+      if (b instanceof lambda.Incr.class) {
         return true
       } else {
         return false
       }
-    } else if (a2 instanceof lambda.Add.class) {
-      param0 = a2.a;
-      param1 = a2.b;
-      a7 = param0;
-      b6 = param1;
-      if (b6 instanceof lambda.Add.class) {
-        param05 = b6.a;
-        param15 = b6.b;
+    } else if (a instanceof lambda.Add.class) {
+      param0 = a.a;
+      param1 = a.b;
+      a5 = param0;
+      b5 = param1;
+      if (b5 instanceof lambda.Add.class) {
+        param05 = b5.a;
+        param15 = b5.b;
         c4 = param05;
         d4 = param15;
-        tmp = lambda.eqTerm(a7, c4);
-        lambda$this = runtime.safeCall(lambda4(b6, d4));
+        tmp = lambda.eqTerm(a5, c4);
+        lambda$this = runtime.safeCall(lambda4(b5, d4));
         return runtime.short_and(tmp, lambda$this)
       } else {
         return false
       }
-    } else if (a2 instanceof lambda.Lam.class) {
-      param0 = a2.s;
-      param1 = a2.t;
-      a6 = param0;
-      b5 = param1;
-      if (b5 instanceof lambda.Lam.class) {
-        param04 = b5.s;
-        param14 = b5.t;
+    } else if (a instanceof lambda.Lam.class) {
+      param0 = a.s;
+      param1 = a.t;
+      a4 = param0;
+      b4 = param1;
+      if (b4 instanceof lambda.Lam.class) {
+        param04 = b4.s;
+        param14 = b4.t;
         c3 = param04;
         d3 = param14;
-        tmp1 = NofibPrelude.listEq(a6, c3);
-        lambda$this1 = runtime.safeCall(lambda5(b5, d3));
+        tmp1 = NofibPrelude.listEq(a4, c3);
+        lambda$this1 = runtime.safeCall(lambda5(b4, d3));
         return runtime.short_and(tmp1, lambda$this1)
       } else {
         return false
       }
-    } else if (a2 instanceof lambda.App.class) {
-      param0 = a2.a;
-      param1 = a2.b;
-      a5 = param0;
-      b4 = param1;
-      if (b4 instanceof lambda.App.class) {
-        param03 = b4.a;
-        param13 = b4.b;
+    } else if (a instanceof lambda.App.class) {
+      param0 = a.a;
+      param1 = a.b;
+      a3 = param0;
+      b3 = param1;
+      if (b3 instanceof lambda.App.class) {
+        param03 = b3.a;
+        param13 = b3.b;
         c2 = param03;
         d2 = param13;
-        tmp2 = lambda.eqTerm(a5, c2);
-        lambda$this2 = runtime.safeCall(lambda6(b4, d2));
+        tmp2 = lambda.eqTerm(a3, c2);
+        lambda$this2 = runtime.safeCall(lambda6(b3, d2));
         return runtime.short_and(tmp2, lambda$this2)
       } else {
         return false
       }
-    } else if (a2 instanceof lambda.IfZero.class) {
-      param0 = a2.a;
-      param1 = a2.b;
-      param2 = a2.c;
-      a4 = param0;
-      b3 = param1;
+    } else if (a instanceof lambda.IfZero.class) {
+      param0 = a.a;
+      param1 = a.b;
+      param2 = a.c;
+      a2 = param0;
+      b2 = param1;
       c1 = param2;
-      if (b3 instanceof lambda.IfZero.class) {
-        param02 = b3.a;
-        param12 = b3.b;
-        param21 = b3.c;
+      if (b2 instanceof lambda.IfZero.class) {
+        param02 = b2.a;
+        param12 = b2.b;
+        param21 = b2.c;
         d1 = param02;
         e = param12;
-        f1 = param21;
-        tmp3 = lambda.eqTerm(a4, d1);
-        lambda$this3 = runtime.safeCall(lambda7(b3, e));
+        f = param21;
+        tmp3 = lambda.eqTerm(a2, d1);
+        lambda$this3 = runtime.safeCall(lambda7(b2, e));
         tmp4 = runtime.short_and(tmp3, lambda$this3);
-        lambda$this4 = runtime.safeCall(lambda8(c1, f1));
+        lambda$this4 = runtime.safeCall(lambda8(c1, f));
         return runtime.short_and(tmp4, lambda$this4)
       } else {
         return false
       }
-    } else if (a2 instanceof lambda.Thunk.class) {
-      param0 = a2.t;
-      param1 = a2.e;
-      a3 = param0;
-      b2 = param1;
-      if (b2 instanceof lambda.Thunk.class) {
-        param01 = b2.t;
-        param11 = b2.e;
+    } else if (a instanceof lambda.Thunk.class) {
+      param0 = a.t;
+      param1 = a.e;
+      a1 = param0;
+      b1 = param1;
+      if (b1 instanceof lambda.Thunk.class) {
+        param01 = b1.t;
+        param11 = b1.e;
         c = param01;
         d = param11;
-        tmp5 = lambda.eqTerm(a3, c);
-        lambda$this5 = runtime.safeCall(lambda9(b2, d));
+        tmp5 = lambda.eqTerm(a1, c);
+        lambda$this5 = runtime.safeCall(lambda9(b1, d));
         return runtime.short_and(tmp5, lambda$this5)
       } else {
         return false
@@ -16656,12 +16656,12 @@ lambda2 = (undefined, function (m, f) {
       return false
     }
   } 
-  static myMaybe(d, f1, x) {
+  static myMaybe(d, f, x) {
     let param0, x1;
     if (x instanceof NofibPrelude.Some.class) {
       param0 = x.x;
       x1 = param0;
-      return runtime.safeCall(f1(x1))
+      return runtime.safeCall(f(x1))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -16671,38 +16671,38 @@ lambda2 = (undefined, function (m, f) {
     lambda$this = runtime.safeCall(lambda_inst_48_5_tsni(v));
     return myBind_inst_48_10_tsni(lambda.myGet, lambda$this)
   } 
-  static withEnv(tmp, m3) {
+  static withEnv(tmp, m) {
     let tmp1;
-    tmp1 = lambda.myEvalState(m3, tmp);
+    tmp1 = lambda.myEvalState(m, tmp);
     return lambda.myReturn(tmp1)
   } 
-  static pushVar(v1, t1, m4) {
-    let tmp1;
-    tmp1 = runtime.safeCall(lambda_inst_49_24_tsni(v1, t1, m4));
-    return myBind_inst_49_28_tsni(lambda.myGet, tmp1)
+  static pushVar(v, t, m) {
+    let tmp;
+    tmp = runtime.safeCall(lambda_inst_49_24_tsni(v, t, m));
+    return myBind_inst_49_28_tsni(lambda.myGet, tmp)
   } 
-  static traverseTerm(t2) {
-    return eval_inst_50_tsni(t2)
+  static traverseTerm(t) {
+    return eval_inst_50_tsni(t)
   } 
-  static traverseCon(t3) {
-    let tmp1, tmp2;
-    tmp1 = traverseTerm_inst_51_tsni(t3);
-    tmp2 = lambda_inst_51_14_tsni;
-    return myBind_inst_51_81_tsni(tmp1, tmp2)
+  static traverseCon(t) {
+    let tmp, tmp1;
+    tmp = traverseTerm_inst_51_tsni(t);
+    tmp1 = lambda_inst_51_14_tsni;
+    return myBind_inst_51_81_tsni(tmp, tmp1)
   } 
-  static apply(t4, a3) {
-    let param0, param1, param01, param11, x1, b2, e, tmp1;
-    if (t4 instanceof lambda.Thunk.class) {
-      param0 = t4.t;
-      param1 = t4.e;
+  static apply(t, a) {
+    let param0, param1, param01, param11, x, b, e, tmp;
+    if (t instanceof lambda.Thunk.class) {
+      param0 = t.t;
+      param1 = t.e;
       if (param0 instanceof lambda.Lam.class) {
         param01 = param0.s;
         param11 = param0.t;
-        x1 = param01;
-        b2 = param11;
+        x = param01;
+        b = param11;
         e = param1;
-        tmp1 = runtime.safeCall(lambda_inst_52_tsni2(a3, x1, b2, e));
-        return myBind_inst_52_30_tsni(lambda.myGet, tmp1)
+        tmp = runtime.safeCall(lambda_inst_52_tsni2(a, x, b, e));
+        return myBind_inst_52_30_tsni(lambda.myGet, tmp)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -16711,147 +16711,147 @@ lambda2 = (undefined, function (m, f) {
     }
   } 
   static eval(ter) {
-    let param0, i, param1, param2, c, a4, b2, u, v2, x1, b3, t5, e, u1, v3, x2, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$this, lambda$this1, lambda$this2;
+    let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
     if (ter instanceof lambda.Var.class) {
       param0 = ter.s;
-      x2 = param0;
-      lambda$this = runtime.safeCall(lambda_inst_53_tsni4(x2));
+      x1 = param0;
+      lambda$this = runtime.safeCall(lambda_inst_53_tsni4(x1));
       return myBind_inst_53_80_tsni(lambda.myGet, lambda$this)
     } else if (ter instanceof lambda.Add.class) {
       param0 = ter.a;
       param1 = ter.b;
       u1 = param0;
-      v3 = param1;
-      tmp1 = traverseCon_inst_53_tsni(u1);
-      lambda$this1 = runtime.safeCall(lambda_inst_53_tsni3(v3));
-      return myBind_inst_53_82_tsni(tmp1, lambda$this1)
+      v1 = param1;
+      tmp = traverseCon_inst_53_tsni(u1);
+      lambda$this1 = runtime.safeCall(lambda_inst_53_tsni3(v1));
+      return myBind_inst_53_82_tsni(tmp, lambda$this1)
     } else if (ter instanceof lambda.Thunk.class) {
       param0 = ter.t;
       param1 = ter.e;
-      t5 = param0;
+      t = param0;
       e = param1;
-      tmp2 = traverseTerm_inst_53_tsni(t5);
-      return lambda.withEnv(e, tmp2)
+      tmp1 = traverseTerm_inst_53_tsni(t);
+      return lambda.withEnv(e, tmp1)
     } else if (ter instanceof lambda.Lam.class) {
       param0 = ter.s;
       param1 = ter.t;
-      x1 = param0;
-      b3 = param1;
-      tmp3 = runtime.safeCall(lambda_inst_53_20_tsni(x1, b3));
-      return myBind_inst_53_83_tsni(lambda.myGet, tmp3)
+      x = param0;
+      b1 = param1;
+      tmp2 = runtime.safeCall(lambda_inst_53_20_tsni(x, b1));
+      return myBind_inst_53_83_tsni(lambda.myGet, tmp2)
     } else if (ter instanceof lambda.App.class) {
       param0 = ter.a;
       param1 = ter.b;
       u = param0;
-      v2 = param1;
-      tmp4 = traverseTerm_inst_53_tsni(u);
-      lambda$this2 = runtime.safeCall(lambda_inst_53_tsni1(v2));
-      return myBind_inst_53_86_tsni(tmp4, lambda$this2)
+      v = param1;
+      tmp3 = traverseTerm_inst_53_tsni(u);
+      lambda$this2 = runtime.safeCall(lambda_inst_53_tsni1(v));
+      return myBind_inst_53_86_tsni(tmp3, lambda$this2)
     } else if (ter instanceof lambda.IfZero.class) {
       param0 = ter.a;
       param1 = ter.b;
       param2 = ter.c;
       c = param0;
-      a4 = param1;
-      b2 = param2;
-      tmp5 = traverseTerm_inst_53_tsni(c);
-      tmp6 = runtime.safeCall(lambda_inst_53_tsni(a4, b2));
-      return lambda.myBind(tmp5, tmp6)
+      a = param1;
+      b = param2;
+      tmp4 = traverseTerm_inst_53_tsni(c);
+      tmp5 = runtime.safeCall(lambda_inst_53_tsni(a, b));
+      return lambda.myBind(tmp4, tmp5)
     } else if (ter instanceof lambda.Con.class) {
       param0 = ter.i;
       i = param0;
-      tmp7 = runtime.safeCall(lambda.Con(i));
-      return lambda.myReturn(tmp7)
+      tmp6 = runtime.safeCall(lambda.Con(i));
+      return lambda.myReturn(tmp6)
     } else if (ter instanceof lambda.Incr.class) {
       return myBind_inst_53_87_tsni(lambda.incr, lambda_inst_53_31_tsni)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static simpleEval(env, ter1) {
-    let param0, param1, t5, e, param2, c, a4, b2, val_, scrut, u, v2, u_, x1, b3, u1, v3, u_1, v_, e1, v4, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-    if (ter1 instanceof lambda.Var.class) {
-      param0 = ter1.s;
-      v4 = param0;
-      tmp1 = lookup_inst_54_55_tsni(v4, env);
-      tmp2 = myMaybe_inst_54_88_tsni(lambda24, lambda25, tmp1);
-      return lambda.simpleEval(env, tmp2)
-    } else if (ter1 instanceof lambda.Con.class) {
-      param0 = ter1.i;
+  static simpleEval(env, ter) {
+    let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    if (ter instanceof lambda.Var.class) {
+      param0 = ter.s;
+      v2 = param0;
+      tmp = lookup_inst_54_55_tsni(v2, env);
+      tmp1 = myMaybe_inst_54_88_tsni(lambda24, lambda25, tmp);
+      return lambda.simpleEval(env, tmp1)
+    } else if (ter instanceof lambda.Con.class) {
+      param0 = ter.i;
       e1 = param0;
       return runtime.safeCall(lambda.Con(e1))
-    } else if (ter1 instanceof lambda.Incr.class) {
+    } else if (ter instanceof lambda.Incr.class) {
       return runtime.safeCall(lambda.Con(0))
-    } else if (ter1 instanceof lambda.Add.class) {
-      param0 = ter1.a;
-      param1 = ter1.b;
+    } else if (ter instanceof lambda.Add.class) {
+      param0 = ter.a;
+      param1 = ter.b;
       u1 = param0;
-      v3 = param1;
-      tmp3 = simpleEvalCon_inst_54_tsni(env, u1);
-      u_1 = tmp3;
-      tmp4 = simpleEvalCon_inst_54_tsni(env, v3);
-      v_ = tmp4;
-      tmp5 = u_1 + v_;
-      return runtime.safeCall(lambda.Con(tmp5))
-    } else if (ter1 instanceof lambda.Lam.class) {
-      param0 = ter1.s;
-      param1 = ter1.t;
-      x1 = param0;
-      b3 = param1;
-      tmp6 = lambda.Lam(x1, b3);
-      return lambda.Thunk(tmp6, env)
-    } else if (ter1 instanceof lambda.App.class) {
-      param0 = ter1.a;
-      param1 = ter1.b;
+      v1 = param1;
+      tmp2 = simpleEvalCon_inst_54_tsni(env, u1);
+      u_1 = tmp2;
+      tmp3 = simpleEvalCon_inst_54_tsni(env, v1);
+      v_ = tmp3;
+      tmp4 = u_1 + v_;
+      return runtime.safeCall(lambda.Con(tmp4))
+    } else if (ter instanceof lambda.Lam.class) {
+      param0 = ter.s;
+      param1 = ter.t;
+      x = param0;
+      b1 = param1;
+      tmp5 = lambda.Lam(x, b1);
+      return lambda.Thunk(tmp5, env)
+    } else if (ter instanceof lambda.App.class) {
+      param0 = ter.a;
+      param1 = ter.b;
       u = param0;
-      v2 = param1;
-      tmp7 = lambda.simpleEval(env, u);
-      u_ = tmp7;
-      return simpleApply_inst_54_tsni(env, u_, v2)
-    } else if (ter1 instanceof lambda.IfZero.class) {
-      param0 = ter1.a;
-      param1 = ter1.b;
-      param2 = ter1.c;
+      v = param1;
+      tmp6 = lambda.simpleEval(env, u);
+      u_ = tmp6;
+      return simpleApply_inst_54_tsni(env, u_, v)
+    } else if (ter instanceof lambda.IfZero.class) {
+      param0 = ter.a;
+      param1 = ter.b;
+      param2 = ter.c;
       c = param0;
-      a4 = param1;
-      b2 = param2;
-      tmp8 = lambda.simpleEval(env, c);
-      val_ = tmp8;
-      tmp9 = runtime.safeCall(lambda.Con(0));
-      scrut = lambda.eqTerm(val_, tmp9);
+      a = param1;
+      b = param2;
+      tmp7 = lambda.simpleEval(env, c);
+      val_ = tmp7;
+      tmp8 = runtime.safeCall(lambda.Con(0));
+      scrut = lambda.eqTerm(val_, tmp8);
       if (scrut === true) {
-        return lambda.simpleEval(env, a4)
+        return lambda.simpleEval(env, a)
       } else {
-        return lambda.simpleEval(env, b2)
+        return lambda.simpleEval(env, b)
       }
-    } else if (ter1 instanceof lambda.Thunk.class) {
-      param0 = ter1.t;
-      param1 = ter1.e;
-      t5 = param0;
+    } else if (ter instanceof lambda.Thunk.class) {
+      param0 = ter.t;
+      param1 = ter.e;
+      t = param0;
       e = param1;
-      return lambda.simpleEval(e, t5)
+      return lambda.simpleEval(e, t)
     } else {
-      throw globalThis.Error(ter1)
+      throw globalThis.Error(ter)
     }
   } 
-  static simpleApply(env1, t5, a4) {
-    let param0, param1, param01, param11, x1, b2, e, tmp1, arr, tmp2;
-    if (t5 instanceof lambda.Thunk.class) {
-      param0 = t5.t;
-      param1 = t5.e;
+  static simpleApply(env, t, a) {
+    let param0, param1, param01, param11, x, b, e, tmp, arr, tmp1;
+    if (t instanceof lambda.Thunk.class) {
+      param0 = t.t;
+      param1 = t.e;
       if (param0 instanceof lambda.Lam.class) {
         param01 = param0.s;
         param11 = param0.t;
-        x1 = param01;
-        b2 = param11;
+        x = param01;
+        b = param11;
         e = param1;
-        tmp1 = lambda.Thunk(a4, env1);
+        tmp = lambda.Thunk(a, env);
         arr = globalThis.Object.freeze([
-          x1,
-          tmp1
+          x,
+          tmp
         ]);
-        tmp2 = NofibPrelude.Cons(arr, e);
-        return simpleEval_inst_56_tsni(tmp2, b2)
+        tmp1 = NofibPrelude.Cons(arr, e);
+        return simpleEval_inst_56_tsni(tmp1, b)
       } else {
         throw globalThis.Error("bad application")
       }
@@ -16859,10 +16859,10 @@ lambda2 = (undefined, function (m, f) {
       throw globalThis.Error("bad application")
     }
   } 
-  static simpleEvalCon(env2, e) {
-    let e_, param0, c, tmp1;
-    tmp1 = simpleEval_inst_57_tsni(env2, e);
-    e_ = tmp1;
+  static simpleEvalCon(env, e) {
+    let e_, param0, c, tmp;
+    tmp = simpleEval_inst_57_tsni(env, e);
+    e_ = tmp;
     if (e_ instanceof lambda.Con.class) {
       param0 = e_.i;
       c = param0;
@@ -16871,183 +16871,183 @@ lambda2 = (undefined, function (m, f) {
       throw globalThis.Error("Not a Con")
     }
   } 
-  static bracket(ot, ths, t6) {
-    let scrut, tmp1, tmp2;
+  static bracket(ot, ths, t) {
+    let scrut, tmp, tmp1;
     scrut = ths <= ot;
     if (scrut === true) {
-      tmp1 = NofibPrelude.nofibStringToList(")");
-      tmp2 = NofibPrelude.append(t6, tmp1);
-      return NofibPrelude.Cons("(", tmp2)
+      tmp = NofibPrelude.nofibStringToList(")");
+      tmp1 = NofibPrelude.append(t, tmp);
+      return NofibPrelude.Cons("(", tmp1)
     } else {
-      return t6
+      return t
     }
   } 
-  static ppn(n, ter2) {
-    let param0, param1, t7, e1, param2, c, a5, b2, a6, b3, a7, b4, v2, t8, i, v3, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33;
-    if (ter2 instanceof lambda.Var.class) {
-      param0 = ter2.s;
-      v3 = param0;
-      return v3
-    } else if (ter2 instanceof lambda.Con.class) {
-      param0 = ter2.i;
+  static ppn(n, ter) {
+    let param0, param1, t, e, param2, c, a, b, a1, b1, a2, b2, v, t1, i, v1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32;
+    if (ter instanceof lambda.Var.class) {
+      param0 = ter.s;
+      v1 = param0;
+      return v1
+    } else if (ter instanceof lambda.Con.class) {
+      param0 = ter.i;
       i = param0;
-      tmp1 = NofibPrelude.stringOfInt(i);
-      return NofibPrelude.nofibStringToList(tmp1)
-    } else if (ter2 instanceof lambda.Incr.class) {
+      tmp = NofibPrelude.stringOfInt(i);
+      return NofibPrelude.nofibStringToList(tmp)
+    } else if (ter instanceof lambda.Incr.class) {
       return NofibPrelude.nofibStringToList("INCR")
-    } else if (ter2 instanceof lambda.Lam.class) {
-      param0 = ter2.s;
-      param1 = ter2.t;
-      v2 = param0;
-      t8 = param1;
-      tmp2 = NofibPrelude.nofibStringToList(". ");
-      tmp3 = 0 - 1;
-      tmp4 = lambda.ppn(tmp3, t8);
-      tmp5 = NofibPrelude.append(tmp2, tmp4);
-      tmp6 = NofibPrelude.append(v2, tmp5);
-      tmp7 = NofibPrelude.Cons("@", tmp6);
-      return lambda.bracket(n, 0, tmp7)
-    } else if (ter2 instanceof lambda.Add.class) {
-      param0 = ter2.a;
-      param1 = ter2.b;
-      a7 = param0;
-      b4 = param1;
-      tmp8 = lambda.ppn(1, a7);
-      tmp9 = NofibPrelude.nofibStringToList(" + ");
-      tmp10 = lambda.ppn(1, b4);
-      tmp11 = NofibPrelude.append(tmp9, tmp10);
-      tmp12 = NofibPrelude.append(tmp8, tmp11);
-      return lambda.bracket(n, 1, tmp12)
-    } else if (ter2 instanceof lambda.App.class) {
-      param0 = ter2.a;
-      param1 = ter2.b;
-      a6 = param0;
-      b3 = param1;
-      tmp13 = lambda.ppn(2, a6);
-      tmp14 = NofibPrelude.nofibStringToList(" ");
-      tmp15 = lambda.ppn(2, b3);
-      tmp16 = NofibPrelude.append(tmp14, tmp15);
-      tmp17 = NofibPrelude.append(tmp13, tmp16);
-      return lambda.bracket(n, 2, tmp17)
-    } else if (ter2 instanceof lambda.IfZero.class) {
-      param0 = ter2.a;
-      param1 = ter2.b;
-      param2 = ter2.c;
+    } else if (ter instanceof lambda.Lam.class) {
+      param0 = ter.s;
+      param1 = ter.t;
+      v = param0;
+      t1 = param1;
+      tmp1 = NofibPrelude.nofibStringToList(". ");
+      tmp2 = 0 - 1;
+      tmp3 = lambda.ppn(tmp2, t1);
+      tmp4 = NofibPrelude.append(tmp1, tmp3);
+      tmp5 = NofibPrelude.append(v, tmp4);
+      tmp6 = NofibPrelude.Cons("@", tmp5);
+      return lambda.bracket(n, 0, tmp6)
+    } else if (ter instanceof lambda.Add.class) {
+      param0 = ter.a;
+      param1 = ter.b;
+      a2 = param0;
+      b2 = param1;
+      tmp7 = lambda.ppn(1, a2);
+      tmp8 = NofibPrelude.nofibStringToList(" + ");
+      tmp9 = lambda.ppn(1, b2);
+      tmp10 = NofibPrelude.append(tmp8, tmp9);
+      tmp11 = NofibPrelude.append(tmp7, tmp10);
+      return lambda.bracket(n, 1, tmp11)
+    } else if (ter instanceof lambda.App.class) {
+      param0 = ter.a;
+      param1 = ter.b;
+      a1 = param0;
+      b1 = param1;
+      tmp12 = lambda.ppn(2, a1);
+      tmp13 = NofibPrelude.nofibStringToList(" ");
+      tmp14 = lambda.ppn(2, b1);
+      tmp15 = NofibPrelude.append(tmp13, tmp14);
+      tmp16 = NofibPrelude.append(tmp12, tmp15);
+      return lambda.bracket(n, 2, tmp16)
+    } else if (ter instanceof lambda.IfZero.class) {
+      param0 = ter.a;
+      param1 = ter.b;
+      param2 = ter.c;
       c = param0;
-      a5 = param1;
-      b2 = param2;
-      tmp18 = NofibPrelude.nofibStringToList("IF ");
-      tmp19 = lambda.ppn(0, c);
-      tmp20 = NofibPrelude.nofibStringToList(" THEN ");
-      tmp21 = lambda.ppn(0, a5);
-      tmp22 = NofibPrelude.nofibStringToList(" ELSE ");
-      tmp23 = lambda.ppn(0, b2);
-      tmp24 = NofibPrelude.append(tmp22, tmp23);
-      tmp25 = NofibPrelude.append(tmp21, tmp24);
-      tmp26 = NofibPrelude.append(tmp20, tmp25);
-      tmp27 = NofibPrelude.append(tmp19, tmp26);
-      tmp28 = NofibPrelude.append(tmp18, tmp27);
-      return lambda.bracket(n, 0, tmp28)
-    } else if (ter2 instanceof lambda.Thunk.class) {
-      param0 = ter2.t;
-      param1 = ter2.e;
-      t7 = param0;
-      e1 = param1;
-      tmp29 = lambda.ppn(3, t7);
-      tmp30 = NofibPrelude.nofibStringToList("::");
-      tmp31 = ppenv_inst_58_tsni(e1);
-      tmp32 = NofibPrelude.append(tmp30, tmp31);
-      tmp33 = NofibPrelude.append(tmp29, tmp32);
-      return lambda.bracket(n, 0, tmp33)
+      a = param1;
+      b = param2;
+      tmp17 = NofibPrelude.nofibStringToList("IF ");
+      tmp18 = lambda.ppn(0, c);
+      tmp19 = NofibPrelude.nofibStringToList(" THEN ");
+      tmp20 = lambda.ppn(0, a);
+      tmp21 = NofibPrelude.nofibStringToList(" ELSE ");
+      tmp22 = lambda.ppn(0, b);
+      tmp23 = NofibPrelude.append(tmp21, tmp22);
+      tmp24 = NofibPrelude.append(tmp20, tmp23);
+      tmp25 = NofibPrelude.append(tmp19, tmp24);
+      tmp26 = NofibPrelude.append(tmp18, tmp25);
+      tmp27 = NofibPrelude.append(tmp17, tmp26);
+      return lambda.bracket(n, 0, tmp27)
+    } else if (ter instanceof lambda.Thunk.class) {
+      param0 = ter.t;
+      param1 = ter.e;
+      t = param0;
+      e = param1;
+      tmp28 = lambda.ppn(3, t);
+      tmp29 = NofibPrelude.nofibStringToList("::");
+      tmp30 = ppenv_inst_58_tsni(e);
+      tmp31 = NofibPrelude.append(tmp29, tmp30);
+      tmp32 = NofibPrelude.append(tmp28, tmp31);
+      return lambda.bracket(n, 0, tmp32)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static pp(t7) {
-    return ppn_inst_59_tsni(0, t7)
+  static pp(t) {
+    return ppn_inst_59_tsni(0, t)
   } 
-  static ppenv(env3) {
-    let tmp1, tmp2, tmp3, tmp4, tmp5;
-    tmp1 = NofibPrelude.nofibStringToList("[");
-    tmp2 = lambda_inst_60_tsni;
-    tmp3 = flatMap_inst_60_1_tsni(tmp2, env3);
-    tmp4 = NofibPrelude.nofibStringToList("]");
-    tmp5 = append_inst_60_74_tsni(tmp3, tmp4);
-    return NofibPrelude.append(tmp1, tmp5)
+  static ppenv(env) {
+    let tmp, tmp1, tmp2, tmp3, tmp4;
+    tmp = NofibPrelude.nofibStringToList("[");
+    tmp1 = lambda_inst_60_tsni;
+    tmp2 = flatMap_inst_60_1_tsni(tmp1, env);
+    tmp3 = NofibPrelude.nofibStringToList("]");
+    tmp4 = append_inst_60_74_tsni(tmp2, tmp3);
+    return NofibPrelude.append(tmp, tmp4)
   } 
-  static showTerm(t8) {
-    let param0, a5, tmp1, tmp2, tmp3;
-    if (t8 instanceof lambda.Con.class) {
-      param0 = t8.i;
-      a5 = param0;
-      tmp1 = NofibPrelude.nofibStringToList("Con ");
-      tmp2 = NofibPrelude.stringOfInt(a5);
-      tmp3 = NofibPrelude.nofibStringToList(tmp2);
-      return NofibPrelude.append(tmp1, tmp3)
+  static showTerm(t) {
+    let param0, a, tmp, tmp1, tmp2;
+    if (t instanceof lambda.Con.class) {
+      param0 = t.i;
+      a = param0;
+      tmp = NofibPrelude.nofibStringToList("Con ");
+      tmp1 = NofibPrelude.stringOfInt(a);
+      tmp2 = NofibPrelude.nofibStringToList(tmp1);
+      return NofibPrelude.append(tmp, tmp2)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static ev(t9) {
-    let envt2, first1, first0, env4, t21, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
-    tmp1 = traverseTerm_inst_61_62_tsni(t9);
-    tmp2 = lambda.myRunState(tmp1, NofibPrelude.Nil);
-    envt2 = tmp2;
+  static ev(t) {
+    let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+    tmp = traverseTerm_inst_61_62_tsni(t);
+    tmp1 = lambda.myRunState(tmp, NofibPrelude.Nil);
+    envt2 = tmp1;
     if (runtime.Tuple.isArrayLike(envt2) && envt2.length === 2) {
       first0 = runtime.Tuple.get(envt2, 0);
       first1 = runtime.Tuple.get(envt2, 1);
-      env4 = first0;
-      t21 = first1;
-      tmp3 = pp_inst_61_63_tsni(t21);
-      tmp4 = NofibPrelude.nofibStringToList("  ");
-      tmp5 = ppenv_inst_61_64_tsni(env4);
-      tmp6 = NofibPrelude.append(tmp4, tmp5);
-      return NofibPrelude.append(tmp3, tmp6)
+      env = first0;
+      t2 = first1;
+      tmp2 = pp_inst_61_63_tsni(t2);
+      tmp3 = NofibPrelude.nofibStringToList("  ");
+      tmp4 = ppenv_inst_61_64_tsni(env);
+      tmp5 = NofibPrelude.append(tmp3, tmp4);
+      return NofibPrelude.append(tmp2, tmp5)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static mainSimple(args) {
-    let scrut, tmp1, tmp2, tmp3, tmp4;
+    let scrut, tmp, tmp1, tmp2, tmp3;
     scrut = NofibPrelude.null_(args);
     if (scrut === true) {
       throw globalThis.Error("Args: number-to-sum-up-to")
     } else {
-      tmp1 = NofibPrelude.head(args);
-      tmp2 = runtime.safeCall(lambda.Con(tmp1));
-      tmp3 = lambda.App(lambda.sum0, tmp2);
-      tmp4 = simpleEval_inst_65_66_tsni(NofibPrelude.Nil, tmp3);
-      return lambda.showTerm(tmp4)
+      tmp = NofibPrelude.head(args);
+      tmp1 = runtime.safeCall(lambda.Con(tmp));
+      tmp2 = lambda.App(lambda.sum0, tmp1);
+      tmp3 = simpleEval_inst_65_66_tsni(NofibPrelude.Nil, tmp2);
+      return lambda.showTerm(tmp3)
     }
   } 
-  static mainMonad(args1) {
-    let scrut, tmp1, tmp2, tmp3;
-    scrut = NofibPrelude.null_(args1);
+  static mainMonad(args) {
+    let scrut, tmp, tmp1, tmp2;
+    scrut = NofibPrelude.null_(args);
     if (scrut === true) {
       throw globalThis.Error("Args: number-to-sum-up-to")
     } else {
-      tmp1 = NofibPrelude.head(args1);
-      tmp2 = runtime.safeCall(lambda.Con(tmp1));
-      tmp3 = lambda.App(lambda.sum0, tmp2);
-      return ev_inst_67_68_tsni(tmp3)
+      tmp = NofibPrelude.head(args);
+      tmp1 = runtime.safeCall(lambda.Con(tmp));
+      tmp2 = lambda.App(lambda.sum0, tmp1);
+      return ev_inst_67_68_tsni(tmp2)
     }
   } 
-  static testLambda_nofib(n1) {
-    let tmp1, tmp2, tmp3, tmp4, arr;
-    tmp1 = NofibPrelude.Cons(n1, NofibPrelude.Nil);
-    tmp2 = mainSimple_inst_69_70_tsni(tmp1);
-    tmp3 = NofibPrelude.Cons(n1, NofibPrelude.Nil);
-    tmp4 = mainMonad_inst_69_71_tsni(tmp3);
+  static testLambda_nofib(n) {
+    let tmp, tmp1, tmp2, tmp3, arr;
+    tmp = NofibPrelude.Cons(n, NofibPrelude.Nil);
+    tmp1 = mainSimple_inst_69_70_tsni(tmp);
+    tmp2 = NofibPrelude.Cons(n, NofibPrelude.Nil);
+    tmp3 = mainMonad_inst_69_71_tsni(tmp2);
     arr = globalThis.Object.freeze([
-      tmp2,
-      tmp4
+      tmp1,
+      tmp3
     ]);
     return arr
   } 
   static main() {
-    let tmp1;
-    tmp1 = testLambda_nofib_inst_72_73_tsni(80);
-    return runtime.safeCall(tmp1.toString())
+    let tmp;
+    tmp = testLambda_nofib_inst_72_73_tsni(80);
+    return runtime.safeCall(tmp.toString())
   }
   static toString() { return runtime.render(this); }
   static [definitionMetadata] = ["module", "lambda"]; 

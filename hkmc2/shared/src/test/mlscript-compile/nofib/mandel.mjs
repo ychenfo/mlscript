@@ -1601,8 +1601,8 @@ infiniteMandel = function infiniteMandel(c) {
 (class mandel {
   static {
     mandel1 = mandel;
-    this.Pixmap = function Pixmap(a1, b1, c1, d1) {
-      return globalThis.Object.freeze(new Pixmap.class(a1, b1, c1, d1));
+    this.Pixmap = function Pixmap(a, b, c, d) {
+      return globalThis.Object.freeze(new Pixmap.class(a, b, c, d));
     };
     Object.defineProperty(this.Pixmap, "class", {
       enumerable: true,
@@ -1617,8 +1617,8 @@ infiniteMandel = function infiniteMandel(c) {
         static [definitionMetadata] = ["class", "Pixmap", ["a", "b", "c", "d"]]; 
       }
     });
-    this.Complex = function Complex(r1, i1) {
-      return globalThis.Object.freeze(new Complex.class(r1, i1));
+    this.Complex = function Complex(r, i) {
+      return globalThis.Object.freeze(new Complex.class(r, i));
     };
     Object.defineProperty(this.Complex, "class", {
       enumerable: true,
@@ -1651,7 +1651,7 @@ infiniteMandel = function infiniteMandel(c) {
     }
   } 
   static comp_times(x, y) {
-    let param0, param1, a, b, param01, param11, c1, d, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+    let param0, param1, a, b, param01, param11, c, d, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
     if (x instanceof mandel.Complex.class) {
       param0 = x.r;
       param1 = x.i;
@@ -1660,13 +1660,13 @@ infiniteMandel = function infiniteMandel(c) {
       if (y instanceof mandel.Complex.class) {
         param01 = y.r;
         param11 = y.i;
-        c1 = param01;
+        c = param01;
         d = param11;
-        tmp = a * c1;
+        tmp = a * c;
         tmp1 = b * d;
         tmp2 = tmp - tmp1;
         tmp3 = a * d;
-        tmp4 = b * c1;
+        tmp4 = b * c;
         tmp5 = tmp3 + tmp4;
         return mandel.Complex(tmp2, tmp5)
       } else {
@@ -1676,19 +1676,19 @@ infiniteMandel = function infiniteMandel(c) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static comp_plus(x1, y1) {
-    let param0, param1, a, b, param01, param11, c1, d, tmp, tmp1;
-    if (x1 instanceof mandel.Complex.class) {
-      param0 = x1.r;
-      param1 = x1.i;
+  static comp_plus(x, y) {
+    let param0, param1, a, b, param01, param11, c, d, tmp, tmp1;
+    if (x instanceof mandel.Complex.class) {
+      param0 = x.r;
+      param1 = x.i;
       a = param0;
       b = param1;
-      if (y1 instanceof mandel.Complex.class) {
-        param01 = y1.r;
-        param11 = y1.i;
-        c1 = param01;
+      if (y instanceof mandel.Complex.class) {
+        param01 = y.r;
+        param11 = y.i;
+        c = param01;
         d = param11;
-        tmp = a + c1;
+        tmp = a + c;
         tmp1 = b + d;
         return mandel.Complex(tmp, tmp1)
       } else {
@@ -1698,31 +1698,31 @@ infiniteMandel = function infiniteMandel(c) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static mandel(c1) {
-    return infiniteMandel$_inst_20_7_tsni(c1)
+  static mandel(c) {
+    return infiniteMandel$_inst_20_7_tsni(c)
   } 
   static diverge(cmplx, radius) {
     let tmp;
     tmp = mandel.comp_magnitude(cmplx);
     return tmp > radius
   } 
-  static whenDiverge(limit, radius1, c2) {
+  static whenDiverge(limit, radius, c) {
     let tmp, tmp1;
-    tmp = mandel_inst_21_6_tsni(c2);
+    tmp = mandel_inst_21_6_tsni(c);
     tmp1 = NofibPrelude.take_lz_lz(limit, tmp);
-    return walkIt$(radius1, tmp1)
+    return walkIt$(radius, tmp1)
   } 
-  static parallelMandel(mat, limit1, radius2) {
+  static parallelMandel(mat, limit, radius) {
     let lambda$this;
-    lambda$this = runtime.safeCall(lambda_inst_22_23_tsni(limit1, radius2));
+    lambda$this = runtime.safeCall(lambda_inst_22_23_tsni(limit, radius));
     return NofibPrelude.map(lambda$this, mat)
   } 
-  static mandelset(x2, y2, x_, y_, screenX, screenY, lIMIT) {
+  static mandelset(x, y, x_, y_, screenX, screenY, lIMIT) {
     let result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, prettyRGB$this;
     tmp = enumFromTo_inst_24_26_tsni(1, screenY);
-    tmp1 = lscomp1$_inst_24_25_tsni(x2, y2, x_, y_, screenX, screenY, tmp);
-    tmp2 = x_ - x2;
-    tmp3 = y_ - y2;
+    tmp1 = lscomp1$_inst_24_25_tsni(x, y, x_, y_, screenX, screenY, tmp);
+    tmp2 = x_ - x;
+    tmp3 = y_ - y;
     tmp4 = NofibPrelude.max(tmp2, tmp3);
     tmp5 = tmp4 / 2;
     tmp6 = parallelMandel_inst_24_27_tsni(tmp1, lIMIT, tmp5);
@@ -1732,17 +1732,17 @@ infiniteMandel = function infiniteMandel(c) {
     return mandel.createPixmap(screenX, screenY, lIMIT, tmp7)
   } 
   static testMandel_nofib(dummy) {
-    let minx, miny, maxx, maxy, screenX1, screenY1, limit2, tmp, tmp1;
+    let minx, miny, maxx, maxy, screenX, screenY, limit, tmp, tmp1;
     tmp = - 2.0;
     minx = tmp;
     tmp1 = - 2.0;
     miny = tmp1;
     maxx = 2.0;
     maxy = 2.0;
-    screenX1 = 25;
-    screenY1 = 25;
-    limit2 = 75;
-    return mandelset_inst_29_30_tsni(minx, miny, maxx, maxy, screenX1, screenY1, limit2)
+    screenX = 25;
+    screenY = 25;
+    limit = 75;
+    return mandelset_inst_29_30_tsni(minx, miny, maxx, maxy, screenX, screenY, limit)
   } 
   static main() {
     let tmp;

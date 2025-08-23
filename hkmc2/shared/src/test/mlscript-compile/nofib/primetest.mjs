@@ -4046,16 +4046,16 @@ f = function f(l, a) {
     tmp = NofibPrelude.intMod(x, 2);
     return tmp == 0
   } 
-  static int_val_of_char(x1) {
+  static int_val_of_char(x) {
     let tmp;
-    tmp = NofibPrelude.int_of_char(x1);
+    tmp = NofibPrelude.int_of_char(x);
     return tmp - 48
   } 
   static int_val_of_string(s) {
     return f(s, 0)
   } 
   static break_(p, ls) {
-    let param0, param1, x2, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2;
+    let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2;
     if (ls instanceof NofibPrelude.Nil.class) {
       arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
@@ -4065,11 +4065,11 @@ f = function f(l, a) {
     } else if (ls instanceof NofibPrelude.Cons.class) {
       param0 = ls.head;
       param1 = ls.tail;
-      x2 = param0;
+      x = param0;
       xs = param1;
-      scrut1 = runtime.safeCall(p(x2));
+      scrut1 = runtime.safeCall(p(x));
       if (scrut1 === true) {
-        tmp = NofibPrelude.Cons(x2, xs);
+        tmp = NofibPrelude.Cons(x, xs);
         arr1 = globalThis.Object.freeze([
           NofibPrelude.Nil,
           tmp
@@ -4082,7 +4082,7 @@ f = function f(l, a) {
           first1 = runtime.Tuple.get(scrut, 1);
           ys = first0;
           zs = first1;
-          tmp1 = NofibPrelude.Cons(x2, ys);
+          tmp1 = NofibPrelude.Cons(x, ys);
           arr2 = globalThis.Object.freeze([
             tmp1,
             zs
@@ -4096,9 +4096,9 @@ f = function f(l, a) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static lines(s1) {
+  static lines(s) {
     let scrut, first1, first0, l, s_;
-    scrut = break__inst_23_24_tsni(lambda, s1);
+    scrut = break__inst_23_24_tsni(lambda, s);
     if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
       first0 = runtime.Tuple.get(scrut, 0);
       first1 = runtime.Tuple.get(scrut, 1);
@@ -4109,36 +4109,36 @@ f = function f(l, a) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static makeNumber(b, ls1) {
+  static makeNumber(b, ls) {
     let lambda$this;
     lambda$this = runtime.safeCall(lambda1(b));
-    return NofibPrelude.foldl(lambda$this, 0, ls1)
+    return NofibPrelude.foldl(lambda$this, 0, ls)
   } 
-  static chop(b1, n) {
-    return chop_$_inst_25_10_tsni(b1, NofibPrelude.Nil, n)
+  static chop(b, n) {
+    return chop_$_inst_25_10_tsni(b, NofibPrelude.Nil, n)
   } 
-  static powerMod(a, b2, m) {
+  static powerMod(a, b, m) {
     let a_, scrut, tmp;
-    scrut = b2 == 0;
+    scrut = b == 0;
     if (scrut === true) {
       return 1
     } else {
       a_ = NofibPrelude.intMod(a, m);
-      tmp = b2 - 1;
+      tmp = b - 1;
       return f$(m, a_, tmp, a_)
     }
   } 
-  static log2(x2) {
+  static log2(x) {
     let tmp;
-    tmp = chop_inst_26_27_tsni(2, x2);
+    tmp = chop_inst_26_27_tsni(2, x);
     return NofibPrelude.listLen(tmp)
   } 
-  static rands(s11, s2) {
+  static rands(s1, s2) {
     let k, s1_, s1__, scrut, k_, s2_, s2__, scrut1, z, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, lambda$this, lambda$this1;
-    tmp = NofibPrelude.intDiv(s11, 53668);
+    tmp = NofibPrelude.intDiv(s1, 53668);
     k = tmp;
     tmp1 = k * 53668;
-    tmp2 = s11 - tmp1;
+    tmp2 = s1 - tmp1;
     tmp3 = 40014 * tmp2;
     tmp4 = k * 12211;
     tmp5 = tmp3 - tmp4;
@@ -4176,17 +4176,17 @@ f = function f(l, a) {
       return NofibPrelude.lazy(lambda$this1)
     }
   } 
-  static randomInts(s12, s21) {
+  static randomInts(s1, s2) {
     let scrut, scrut1, scrut2, scrut3;
-    scrut = 1 <= s12;
+    scrut = 1 <= s1;
     if (scrut === true) {
-      scrut1 = s12 <= 2147483562;
+      scrut1 = s1 <= 2147483562;
       if (scrut1 === true) {
-        scrut2 = 1 <= s21;
+        scrut2 = 1 <= s2;
         if (scrut2 === true) {
-          scrut3 = s21 <= 2147483398;
+          scrut3 = s2 <= 2147483398;
           if (scrut3 === true) {
-            return primetest.rands(s12, s21)
+            return primetest.rands(s1, s2)
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
@@ -4200,41 +4200,41 @@ f = function f(l, a) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static findKQ(n1) {
+  static findKQ(n) {
     let tmp;
-    tmp = n1 - 1;
+    tmp = n - 1;
     return f_inst_28_13_tsni(0, tmp)
   } 
   static uniform(nns, rrs) {
-    let param0, param1, n2, ns, param01, param11, r, rs, t, scrut, n3, r1, rs1, tmp, tmp1, tmp2, tmp3;
+    let param0, param1, n, ns, param01, param11, r, rs, t, scrut, n1, r1, rs1, tmp, tmp1, tmp2, tmp3;
     if (nns instanceof NofibPrelude.Cons.class) {
       param0 = nns.head;
       param1 = nns.tail;
-      n3 = param0;
+      n1 = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
         if (rrs instanceof NofibPrelude.Cons.class) {
           param01 = rrs.head;
           param11 = rrs.tail;
           r1 = param01;
           rs1 = param11;
-          tmp = NofibPrelude.intMod(r1, n3);
+          tmp = NofibPrelude.intMod(r1, n1);
           return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
         } else {
-          n2 = param0;
+          n = param0;
           ns = param1;
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
       } else {
-        n2 = param0;
+        n = param0;
         ns = param1;
         if (rrs instanceof NofibPrelude.Cons.class) {
           param01 = rrs.head;
           param11 = rrs.tail;
           r = param01;
           rs = param11;
-          tmp1 = n2 + 1;
+          tmp1 = n + 1;
           t = NofibPrelude.intMod(r, tmp1);
-          scrut = t == n2;
+          scrut = t == n;
           if (scrut === true) {
             tmp2 = primetest.uniform(ns, rs);
             return NofibPrelude.Cons(t, tmp2)
@@ -4250,23 +4250,23 @@ f = function f(l, a) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static random(n2, rs) {
+  static random(n, rs) {
     let ns, scrut, tmp, tmp1;
-    tmp = chop_inst_29_9_tsni(65536, n2);
+    tmp = chop_inst_29_9_tsni(65536, n);
     ns = tmp;
     tmp1 = NofibPrelude.listLen(ns);
     scrut = splitAt_lz_inst_29_8_tsni(tmp1, rs);
     return runtime.safeCall(scrut(ns))
   } 
-  static singleTestX(n3, kq, x3) {
+  static singleTestX(n, kq, x) {
     let first1, first0, k, q, scrut, param0, param1, t, ts, tmp, tmp1, tmp2, tmp3, square$this, lambda$this, lambda$this1;
     if (runtime.Tuple.isArrayLike(kq) && kq.length === 2) {
       first0 = runtime.Tuple.get(kq, 0);
       first1 = runtime.Tuple.get(kq, 1);
       k = first0;
       q = first1;
-      tmp = primetest.powerMod(x3, q, n3);
-      square$this = runtime.safeCall(square(n3));
+      tmp = primetest.powerMod(x, q, n);
+      square$this = runtime.safeCall(square(n));
       tmp1 = NofibPrelude.iterate(square$this, tmp);
       scrut = NofibPrelude.take_lz(k, tmp1);
       if (scrut instanceof NofibPrelude.Cons.class) {
@@ -4275,9 +4275,9 @@ f = function f(l, a) {
         t = param0;
         ts = param1;
         tmp2 = t == 1;
-        lambda$this = runtime.safeCall(lambda5(n3, t));
+        lambda$this = runtime.safeCall(lambda5(n, t));
         tmp3 = runtime.short_or(tmp2, lambda$this);
-        lambda$this1 = runtime.safeCall(lambda6(n3, ts));
+        lambda$this1 = runtime.safeCall(lambda6(n, ts));
         return runtime.short_or(tmp3, lambda$this1)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -4286,45 +4286,45 @@ f = function f(l, a) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static singleTest(n4, kq1, rs1) {
+  static singleTest(n, kq, rs) {
     let scrut, tmp;
-    tmp = n4 - 2;
-    scrut = random_inst_30_5_tsni(tmp, rs1);
-    return runtime.safeCall(scrut(n4, kq1))
+    tmp = n - 2;
+    scrut = random_inst_30_5_tsni(tmp, rs);
+    return runtime.safeCall(scrut(n, kq))
   } 
-  static multiTest(k, rs2, n5) {
+  static multiTest(k, rs, n) {
     let scrut, tmp, tmp1, arr, lambda$this;
-    tmp = n5 <= 1;
-    lambda$this = runtime.safeCall(lambda7(n5));
+    tmp = n <= 1;
+    lambda$this = runtime.safeCall(lambda7(n));
     scrut = runtime.short_or(tmp, lambda$this);
     if (scrut === true) {
-      tmp1 = n5 == 2;
+      tmp1 = n == 2;
       arr = globalThis.Object.freeze([
         tmp1,
-        rs2
+        rs
       ]);
       return arr
     } else {
-      return mTest$_inst_31_3_tsni(n5, k, rs2)
+      return mTest$_inst_31_3_tsni(n, k, rs)
     }
   } 
-  static doLine(cs, cont, rs3) {
-    let n6, scrut, tmp;
+  static doLine(cs, cont, rs) {
+    let n, scrut, tmp;
     tmp = primetest.int_val_of_string(cs);
-    n6 = tmp;
-    scrut = multiTest_inst_32_2_tsni(100, rs3, n6);
+    n = tmp;
+    scrut = multiTest_inst_32_2_tsni(100, rs, n);
     return runtime.safeCall(scrut(cont))
   } 
   static doInput(state, lls) {
-    let param0, param1, l, ls2, lambda$this;
+    let param0, param1, l, ls, lambda$this;
     if (lls instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (lls instanceof NofibPrelude.Cons.class) {
       param0 = lls.head;
       param1 = lls.tail;
       l = param0;
-      ls2 = param1;
-      lambda$this = runtime.safeCall(lambda_inst_33_tsni(ls2));
+      ls = param1;
+      lambda$this = runtime.safeCall(lambda_inst_33_tsni(ls));
       return doLine_inst_33_1_tsni(l, lambda$this, state)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))

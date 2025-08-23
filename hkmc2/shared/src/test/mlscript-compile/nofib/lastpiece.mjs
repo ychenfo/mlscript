@@ -8121,8 +8121,8 @@ lambda1 = (undefined, function (col) {
       static [definitionMetadata] = ["object", "Tip"]; 
     };
     this.Tip = globalThis.Object.freeze(new Tip$class);
-    this.Bin = function Bin(i1, k1, v1, l1, r1) {
-      return globalThis.Object.freeze(new Bin.class(i1, k1, v1, l1, r1));
+    this.Bin = function Bin(i, k, v, l, r) {
+      return globalThis.Object.freeze(new Bin.class(i, k, v, l, r));
     };
     Object.defineProperty(this.Bin, "class", {
       enumerable: true,
@@ -8139,8 +8139,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "Bin", ["i", "k", "v", "l", "r"]]; 
       }
     });
-    this.P = function P(i1, a1, b1) {
-      return globalThis.Object.freeze(new P.class(i1, a1, b1));
+    this.P = function P(i, a, b) {
+      return globalThis.Object.freeze(new P.class(i, a, b));
     };
     Object.defineProperty(this.P, "class", {
       enumerable: true,
@@ -8186,8 +8186,8 @@ lambda1 = (undefined, function (col) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Solution"]; 
     };
-    this.Soln = function Soln(b1) {
-      return globalThis.Object.freeze(new Soln.class(b1));
+    this.Soln = function Soln(b) {
+      return globalThis.Object.freeze(new Soln.class(b));
     };
     Object.defineProperty(this.Soln, "class", {
       enumerable: true,
@@ -8200,8 +8200,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "Soln", ["b"]]; 
       }
     });
-    this.Choose = function Choose(s1) {
-      return globalThis.Object.freeze(new Choose.class(s1));
+    this.Choose = function Choose(s) {
+      return globalThis.Object.freeze(new Choose.class(s));
     };
     Object.defineProperty(this.Choose, "class", {
       enumerable: true,
@@ -8214,8 +8214,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "Choose", ["s"]]; 
       }
     });
-    this.Fail = function Fail(b1, s1) {
-      return globalThis.Object.freeze(new Fail.class(b1, s1));
+    this.Fail = function Fail(b, s) {
+      return globalThis.Object.freeze(new Fail.class(b, s));
     };
     Object.defineProperty(this.Fail, "class", {
       enumerable: true,
@@ -9252,8 +9252,8 @@ lambda1 = (undefined, function (col) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "TextDetails"]; 
     };
-    this.Chr = function Chr(c1) {
-      return globalThis.Object.freeze(new Chr.class(c1));
+    this.Chr = function Chr(c) {
+      return globalThis.Object.freeze(new Chr.class(c));
     };
     Object.defineProperty(this.Chr, "class", {
       enumerable: true,
@@ -9266,8 +9266,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "Chr", ["c"]]; 
       }
     });
-    this.Str = function Str(s1) {
-      return globalThis.Object.freeze(new Str.class(s1));
+    this.Str = function Str(s) {
+      return globalThis.Object.freeze(new Str.class(s));
     };
     Object.defineProperty(this.Str, "class", {
       enumerable: true,
@@ -9280,8 +9280,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "Str", ["s"]]; 
       }
     });
-    this.PStr = function PStr(s1) {
-      return globalThis.Object.freeze(new PStr.class(s1));
+    this.PStr = function PStr(s) {
+      return globalThis.Object.freeze(new PStr.class(s));
     };
     Object.defineProperty(this.PStr, "class", {
       enumerable: true,
@@ -9321,8 +9321,8 @@ lambda1 = (undefined, function (col) {
       static [definitionMetadata] = ["object", "AnnotEnd"]; 
     };
     this.AnnotEnd = globalThis.Object.freeze(new AnnotEnd$class);
-    this.NoAnnot = function NoAnnot(t1, i1) {
-      return globalThis.Object.freeze(new NoAnnot.class(t1, i1));
+    this.NoAnnot = function NoAnnot(t, i) {
+      return globalThis.Object.freeze(new NoAnnot.class(t, i));
     };
     Object.defineProperty(this.NoAnnot, "class", {
       enumerable: true,
@@ -9390,8 +9390,8 @@ lambda1 = (undefined, function (col) {
       static [definitionMetadata] = ["object", "NoDoc"]; 
     };
     this.NoDoc = globalThis.Object.freeze(new NoDoc$class);
-    this.NilAbove = function NilAbove(d1) {
-      return globalThis.Object.freeze(new NilAbove.class(d1));
+    this.NilAbove = function NilAbove(d) {
+      return globalThis.Object.freeze(new NilAbove.class(d));
     };
     Object.defineProperty(this.NilAbove, "class", {
       enumerable: true,
@@ -9404,8 +9404,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "NilAbove", ["d"]]; 
       }
     });
-    this.TextBeside = function TextBeside(a1, d1) {
-      return globalThis.Object.freeze(new TextBeside.class(a1, d1));
+    this.TextBeside = function TextBeside(a, d) {
+      return globalThis.Object.freeze(new TextBeside.class(a, d));
     };
     Object.defineProperty(this.TextBeside, "class", {
       enumerable: true,
@@ -9419,8 +9419,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "TextBeside", ["a", "d"]]; 
       }
     });
-    this.Nest = function Nest(i1, d1) {
-      return globalThis.Object.freeze(new Nest.class(i1, d1));
+    this.Nest = function Nest(i, d) {
+      return globalThis.Object.freeze(new Nest.class(i, d));
     };
     Object.defineProperty(this.Nest, "class", {
       enumerable: true,
@@ -9434,8 +9434,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "Nest", ["i", "d"]]; 
       }
     });
-    this.Union = function Union(d11, d21) {
-      return globalThis.Object.freeze(new Union.class(d11, d21));
+    this.Union = function Union(d1, d2) {
+      return globalThis.Object.freeze(new Union.class(d1, d2));
     };
     Object.defineProperty(this.Union, "class", {
       enumerable: true,
@@ -9449,8 +9449,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "Union", ["d1", "d2"]]; 
       }
     });
-    this.Beside = function Beside(d11, b1, d21) {
-      return globalThis.Object.freeze(new Beside.class(d11, b1, d21));
+    this.Beside = function Beside(d1, b, d2) {
+      return globalThis.Object.freeze(new Beside.class(d1, b, d2));
     };
     Object.defineProperty(this.Beside, "class", {
       enumerable: true,
@@ -9465,8 +9465,8 @@ lambda1 = (undefined, function (col) {
         static [definitionMetadata] = ["class", "Beside", ["d1", "b", "d2"]]; 
       }
     });
-    this.Above = function Above(d11, b1, d21) {
-      return globalThis.Object.freeze(new Above.class(d11, b1, d21));
+    this.Above = function Above(d1, b, d2) {
+      return globalThis.Object.freeze(new Above.class(d1, b, d2));
     };
     Object.defineProperty(this.Above, "class", {
       enumerable: true,
@@ -9560,7 +9560,7 @@ lambda1 = (undefined, function (col) {
     }
   } 
   static mapLookup(k, m) {
-    let param0, param1, param2, param3, param4, kx, x1, l, r, scrut;
+    let param0, param1, param2, param3, param4, kx, x, l, r, scrut;
     if (m instanceof lastpiece.Tip.class) {
       return NofibPrelude.None
     } else if (m instanceof lastpiece.Bin.class) {
@@ -9570,11 +9570,11 @@ lambda1 = (undefined, function (col) {
       param3 = m.l;
       param4 = m.r;
       kx = param1;
-      x1 = param2;
+      x = param2;
       l = param3;
       r = param4;
       scrut = compareIntInt_inst_32_3_tsni(k, kx);
-      return runtime.safeCall(scrut(k, x1, l, r))
+      return runtime.safeCall(scrut(k, x, l, r))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9595,58 +9595,58 @@ lambda1 = (undefined, function (col) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static bin(k1, x1, l, r) {
+  static bin(k, x, l, r) {
     let tmp, tmp1, tmp2, tmp3;
     tmp = lastpiece.size(l);
     tmp1 = lastpiece.size(r);
     tmp2 = tmp + tmp1;
     tmp3 = tmp2 + 1;
-    return runtime.safeCall(lastpiece.Bin(tmp3, k1, x1, l, r))
+    return runtime.safeCall(lastpiece.Bin(tmp3, k, x, l, r))
   } 
-  static singleL(k11, x11, t1, r1) {
+  static singleL(k1, x1, t1, r) {
     let param0, param1, param2, param3, param4, k2, x2, t2, t3, tmp;
-    if (r1 instanceof lastpiece.Bin.class) {
-      param0 = r1.i;
-      param1 = r1.k;
-      param2 = r1.v;
-      param3 = r1.l;
-      param4 = r1.r;
+    if (r instanceof lastpiece.Bin.class) {
+      param0 = r.i;
+      param1 = r.k;
+      param2 = r.v;
+      param3 = r.l;
+      param4 = r.r;
       k2 = param1;
       x2 = param2;
       t2 = param3;
       t3 = param4;
-      tmp = lastpiece.bin(k11, x11, t1, t2);
+      tmp = lastpiece.bin(k1, x1, t1, t2);
       return lastpiece.bin(k2, x2, tmp, t3)
     } else {
       throw globalThis.Error("singleL Tip")
     }
   } 
-  static singleR(k12, x12, l1, t3) {
-    let param0, param1, param2, param3, param4, k2, x2, t11, t2, tmp;
-    if (l1 instanceof lastpiece.Bin.class) {
-      param0 = l1.i;
-      param1 = l1.k;
-      param2 = l1.v;
-      param3 = l1.l;
-      param4 = l1.r;
+  static singleR(k1, x1, l, t3) {
+    let param0, param1, param2, param3, param4, k2, x2, t1, t2, tmp;
+    if (l instanceof lastpiece.Bin.class) {
+      param0 = l.i;
+      param1 = l.k;
+      param2 = l.v;
+      param3 = l.l;
+      param4 = l.r;
       k2 = param1;
       x2 = param2;
-      t11 = param3;
+      t1 = param3;
       t2 = param4;
-      tmp = lastpiece.bin(k12, x12, t2, t3);
-      return lastpiece.bin(k2, x2, t11, tmp)
+      tmp = lastpiece.bin(k1, x1, t2, t3);
+      return lastpiece.bin(k2, x2, t1, tmp)
     } else {
       throw globalThis.Error("singleR Tip")
     }
   } 
-  static doubleL(k13, x13, t11, r2) {
-    let param0, param1, param2, param3, param4, k2, x2, param01, param11, param21, param31, param41, k3, x3, t2, t31, t4, tmp, tmp1;
-    if (r2 instanceof lastpiece.Bin.class) {
-      param0 = r2.i;
-      param1 = r2.k;
-      param2 = r2.v;
-      param3 = r2.l;
-      param4 = r2.r;
+  static doubleL(k1, x1, t1, r) {
+    let param0, param1, param2, param3, param4, k2, x2, param01, param11, param21, param31, param41, k3, x3, t2, t3, t4, tmp, tmp1;
+    if (r instanceof lastpiece.Bin.class) {
+      param0 = r.i;
+      param1 = r.k;
+      param2 = r.v;
+      param3 = r.l;
+      param4 = r.r;
       k2 = param1;
       x2 = param2;
       if (param3 instanceof lastpiece.Bin.class) {
@@ -9658,10 +9658,10 @@ lambda1 = (undefined, function (col) {
         k3 = param11;
         x3 = param21;
         t2 = param31;
-        t31 = param41;
+        t3 = param41;
         t4 = param4;
-        tmp = lastpiece.bin(k13, x13, t11, t2);
-        tmp1 = lastpiece.bin(k2, x2, t31, t4);
+        tmp = lastpiece.bin(k1, x1, t1, t2);
+        tmp1 = lastpiece.bin(k2, x2, t3, t4);
         return lastpiece.bin(k3, x3, tmp, tmp1)
       } else {
         throw globalThis.Error("doubleL Tip")
@@ -9670,17 +9670,17 @@ lambda1 = (undefined, function (col) {
       throw globalThis.Error("doubleL Tip")
     }
   } 
-  static doubleR(k14, x14, l2, t4) {
-    let param0, param1, param2, param3, param4, k2, x2, t12, param01, param11, param21, param31, param41, k3, x3, t2, t31, tmp, tmp1;
-    if (l2 instanceof lastpiece.Bin.class) {
-      param0 = l2.i;
-      param1 = l2.k;
-      param2 = l2.v;
-      param3 = l2.l;
-      param4 = l2.r;
+  static doubleR(k1, x1, l, t4) {
+    let param0, param1, param2, param3, param4, k2, x2, t1, param01, param11, param21, param31, param41, k3, x3, t2, t3, tmp, tmp1;
+    if (l instanceof lastpiece.Bin.class) {
+      param0 = l.i;
+      param1 = l.k;
+      param2 = l.v;
+      param3 = l.l;
+      param4 = l.r;
       k2 = param1;
       x2 = param2;
-      t12 = param3;
+      t1 = param3;
       if (param4 instanceof lastpiece.Bin.class) {
         param01 = param4.i;
         param11 = param4.k;
@@ -9690,9 +9690,9 @@ lambda1 = (undefined, function (col) {
         k3 = param11;
         x3 = param21;
         t2 = param31;
-        t31 = param41;
-        tmp = lastpiece.bin(k2, x2, t12, t2);
-        tmp1 = lastpiece.bin(k14, x14, t31, t4);
+        t3 = param41;
+        tmp = lastpiece.bin(k2, x2, t1, t2);
+        tmp1 = lastpiece.bin(k1, x1, t3, t4);
         return lastpiece.bin(k3, x3, tmp, tmp1)
       } else {
         throw globalThis.Error("doubleR Tip")
@@ -9701,14 +9701,14 @@ lambda1 = (undefined, function (col) {
       throw globalThis.Error("doubleR Tip")
     }
   } 
-  static rotateL(k2, x2, l3, r3) {
+  static rotateL(k, x, l, r) {
     let param0, param1, param2, param3, param4, ly, ry, scrut, tmp, tmp1, tmp2;
-    if (r3 instanceof lastpiece.Bin.class) {
-      param0 = r3.i;
-      param1 = r3.k;
-      param2 = r3.v;
-      param3 = r3.l;
-      param4 = r3.r;
+    if (r instanceof lastpiece.Bin.class) {
+      param0 = r.i;
+      param1 = r.k;
+      param2 = r.v;
+      param3 = r.l;
+      param4 = r.r;
       ly = param3;
       ry = param4;
       tmp = lastpiece.size(ly);
@@ -9716,22 +9716,22 @@ lambda1 = (undefined, function (col) {
       tmp2 = 2 * tmp1;
       scrut = tmp < tmp2;
       if (scrut === true) {
-        return lastpiece.singleL(k2, x2, l3, r3)
+        return lastpiece.singleL(k, x, l, r)
       } else {
-        return lastpiece.doubleL(k2, x2, l3, r3)
+        return lastpiece.doubleL(k, x, l, r)
       }
     } else {
       throw globalThis.Error("rotateL Tip")
     }
   } 
-  static rotateR(k3, x3, l4, r4) {
+  static rotateR(k, x, l, r) {
     let param0, param1, param2, param3, param4, ly, ry, scrut, tmp, tmp1, tmp2;
-    if (l4 instanceof lastpiece.Bin.class) {
-      param0 = l4.i;
-      param1 = l4.k;
-      param2 = l4.v;
-      param3 = l4.l;
-      param4 = l4.r;
+    if (l instanceof lastpiece.Bin.class) {
+      param0 = l.i;
+      param1 = l.k;
+      param2 = l.v;
+      param3 = l.l;
+      param4 = l.r;
       ly = param3;
       ry = param4;
       tmp = lastpiece.size(ry);
@@ -9739,19 +9739,19 @@ lambda1 = (undefined, function (col) {
       tmp2 = 2 * tmp1;
       scrut = tmp < tmp2;
       if (scrut === true) {
-        return lastpiece.singleR(k3, x3, l4, r4)
+        return lastpiece.singleR(k, x, l, r)
       } else {
-        return lastpiece.doubleR(k3, x3, l4, r4)
+        return lastpiece.doubleR(k, x, l, r)
       }
     } else {
       throw globalThis.Error("rotateR Tip")
     }
   } 
-  static balance(k4, x4, l5, r5) {
+  static balance(k, x, l, r) {
     let sizeL, sizeR, sizeX, scrut, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
-    tmp = lastpiece.size(l5);
+    tmp = lastpiece.size(l);
     sizeL = tmp;
-    tmp1 = lastpiece.size(r5);
+    tmp1 = lastpiece.size(r);
     sizeR = tmp1;
     tmp2 = sizeL + sizeR;
     tmp3 = tmp2 + 1;
@@ -9759,40 +9759,40 @@ lambda1 = (undefined, function (col) {
     tmp4 = sizeL + sizeR;
     scrut2 = tmp4 <= 1;
     if (scrut2 === true) {
-      return runtime.safeCall(lastpiece.Bin(sizeX, k4, x4, l5, r5))
+      return runtime.safeCall(lastpiece.Bin(sizeX, k, x, l, r))
     } else {
       tmp5 = 4 * sizeL;
       scrut1 = sizeR >= tmp5;
       if (scrut1 === true) {
-        return lastpiece.rotateL(k4, x4, l5, r5)
+        return lastpiece.rotateL(k, x, l, r)
       } else {
         tmp6 = 4 * sizeR;
         scrut = sizeL >= tmp6;
         if (scrut === true) {
-          return lastpiece.rotateR(k4, x4, l5, r5)
+          return lastpiece.rotateR(k, x, l, r)
         } else {
-          return runtime.safeCall(lastpiece.Bin(sizeX, k4, x4, l5, r5))
+          return runtime.safeCall(lastpiece.Bin(sizeX, k, x, l, r))
         }
       }
     }
   } 
-  static insert(kx, x5, m1) {
-    let param0, param1, param2, param3, param4, sz, ky, y, l6, r6, scrut;
-    if (m1 instanceof lastpiece.Tip.class) {
-      return runtime.safeCall(lastpiece.Bin(1, kx, x5, lastpiece.Tip, lastpiece.Tip))
-    } else if (m1 instanceof lastpiece.Bin.class) {
-      param0 = m1.i;
-      param1 = m1.k;
-      param2 = m1.v;
-      param3 = m1.l;
-      param4 = m1.r;
+  static insert(kx, x, m) {
+    let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
+    if (m instanceof lastpiece.Tip.class) {
+      return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    } else if (m instanceof lastpiece.Bin.class) {
+      param0 = m.i;
+      param1 = m.k;
+      param2 = m.v;
+      param3 = m.l;
+      param4 = m.r;
       sz = param0;
       ky = param1;
       y = param2;
-      l6 = param3;
-      r6 = param4;
+      l = param3;
+      r = param4;
       scrut = compareIntInt_inst_33_28_tsni(kx, ky);
-      return runtime.safeCall(scrut(kx, x5, sz, ky, y, l6, r6))
+      return runtime.safeCall(scrut(kx, x, sz, ky, y, l, r))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9843,11 +9843,11 @@ lambda1 = (undefined, function (col) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static next(row_col1) {
+  static next(row_col) {
     let first1, first0, row1, col, tmp, arr;
-    if (runtime.Tuple.isArrayLike(row_col1) && row_col1.length === 2) {
-      first0 = runtime.Tuple.get(row_col1, 0);
-      first1 = runtime.Tuple.get(row_col1, 1);
+    if (runtime.Tuple.isArrayLike(row_col) && row_col.length === 2) {
+      first0 = runtime.Tuple.get(row_col, 0);
+      first1 = runtime.Tuple.get(row_col, 1);
       row1 = first0;
       col = first1;
       tmp = col + 1;
@@ -9863,14 +9863,14 @@ lambda1 = (undefined, function (col) {
   static check(bd, sq1) {
     return mapLookup_inst_34_2_tsni(sq1, bd)
   } 
-  static extend(bd1, sq2, id) {
-    return insert_inst_35_27_tsni(sq2, id, bd1)
+  static extend(bd, sq1, id) {
+    return insert_inst_35_27_tsni(sq1, id, bd)
   } 
-  static extend_maybe(bd2, sq3, id1) {
+  static extend_maybe(bd, sq1, id) {
     let first1, first0, row1, col, scrut, scrut1, tmp, tmp1, lambda$this, lambda$this1;
-    if (runtime.Tuple.isArrayLike(sq3) && sq3.length === 2) {
-      first0 = runtime.Tuple.get(sq3, 0);
-      first1 = runtime.Tuple.get(sq3, 1);
+    if (runtime.Tuple.isArrayLike(sq1) && sq1.length === 2) {
+      first0 = runtime.Tuple.get(sq1, 0);
+      first1 = runtime.Tuple.get(sq1, 1);
       row1 = first0;
       col = first1;
       tmp = row1 > lastpiece.maxRow;
@@ -9881,8 +9881,8 @@ lambda1 = (undefined, function (col) {
       if (scrut1 === true) {
         return NofibPrelude.None
       } else {
-        scrut = check_inst_36_25_tsni(bd2, sq3);
-        return runtime.safeCall(scrut(bd2, sq3, id1))
+        scrut = check_inst_36_25_tsni(bd, sq1);
+        return runtime.safeCall(scrut(bd, sq1, id))
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -9891,47 +9891,47 @@ lambda1 = (undefined, function (col) {
   static pickOne(xs) {
     return go(lambda3, xs)
   } 
-  static fit(bd3, sq4, id2, os) {
+  static fit(bd, sq1, id, os) {
     let param0, param1, o, os1, scrut, tmp, tmp1;
     if (os instanceof NofibPrelude.Nil.class) {
-      tmp = extend_inst_37_29_tsni(bd3, sq4, id2);
+      tmp = extend_inst_37_29_tsni(bd, sq1, id);
       return runtime.safeCall(NofibPrelude.Some(tmp))
     } else if (os instanceof NofibPrelude.Cons.class) {
       param0 = os.head;
       param1 = os.tail;
       o = param0;
       os1 = param1;
-      tmp1 = lastpiece.addIntInt(sq4, o);
-      scrut = extend_maybe_inst_37_24_tsni(bd3, tmp1, id2);
-      return runtime.safeCall(scrut(sq4, id2, os1))
+      tmp1 = lastpiece.addIntInt(sq1, o);
+      scrut = extend_maybe_inst_37_24_tsni(bd, tmp1, id);
+      return runtime.safeCall(scrut(sq1, id, os1))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static tryy(sq5, se, bd4, id_is_ps) {
-    let first2, first1, first0, id3, os1, ps, scrut;
+  static tryy(sq1, se, bd, id_is_ps) {
+    let first2, first1, first0, id, os, ps, scrut;
     if (runtime.Tuple.isArrayLike(id_is_ps) && id_is_ps.length === 3) {
       first0 = runtime.Tuple.get(id_is_ps, 0);
       first1 = runtime.Tuple.get(id_is_ps, 1);
       first2 = runtime.Tuple.get(id_is_ps, 2);
-      id3 = first0;
-      os1 = first1;
+      id = first0;
+      os = first1;
       ps = first2;
-      scrut = fit_inst_38_23_tsni(bd4, sq5, id3, os1);
-      return runtime.safeCall(scrut(sq5, se, ps))
+      scrut = fit_inst_38_23_tsni(bd, sq1, id, os);
+      return runtime.safeCall(scrut(sq1, se, ps))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static search(row_col2, sey, bd5, ps) {
+  static search(row_col, sey, bd, ps) {
     let first1, first0, row1, col, scrut, scrut1, tmp, tmp1, arr, tmp2;
-    if (runtime.Tuple.isArrayLike(row_col2) && row_col2.length === 2) {
-      first0 = runtime.Tuple.get(row_col2, 0);
-      first1 = runtime.Tuple.get(row_col2, 1);
+    if (runtime.Tuple.isArrayLike(row_col) && row_col.length === 2) {
+      first0 = runtime.Tuple.get(row_col, 0);
+      first1 = runtime.Tuple.get(row_col, 1);
       row1 = first0;
       col = first1;
       if (ps instanceof NofibPrelude.Nil.class) {
-        return runtime.safeCall(lastpiece.Soln(bd5))
+        return runtime.safeCall(lastpiece.Soln(bd))
       } else {
         tmp = lastpiece.maxCol + 1;
         scrut1 = col === tmp;
@@ -9942,58 +9942,58 @@ lambda1 = (undefined, function (col) {
             1
           ]);
           tmp2 = lastpiece.flip(sey);
-          return lastpiece.search(arr, tmp2, bd5, ps)
+          return lastpiece.search(arr, tmp2, bd, ps)
         } else {
-          scrut = check_inst_39_20_tsni(bd5, row_col2);
-          return runtime.safeCall(scrut(row_col2, sey, bd5, ps))
+          scrut = check_inst_39_20_tsni(bd, row_col);
+          return runtime.safeCall(scrut(row_col, sey, bd, ps))
         }
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static annotSize(p1) {
-    let param0, param1, l6;
-    if (p1 instanceof lastpiece.NoAnnot.class) {
-      param0 = p1.t;
-      param1 = p1.i;
-      l6 = param1;
-      return l6
+  static annotSize(p) {
+    let param0, param1, l;
+    if (p instanceof lastpiece.NoAnnot.class) {
+      param0 = p.t;
+      param1 = p.i;
+      l = param1;
+      return l
     } else {
       return 0
     }
   } 
-  static display(s1) {
-    let param0, param1, bd6, first1, first0, row1, col, ss, bd7, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
-    if (s1 instanceof lastpiece.Soln.class) {
-      param0 = s1.b;
-      bd7 = param0;
+  static display(s) {
+    let param0, param1, bd, first1, first0, row1, col, ss, bd1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1;
+    if (s instanceof lastpiece.Soln.class) {
+      param0 = s.b;
+      bd1 = param0;
       tmp = NofibPrelude.nofibStringToList("Success!");
       tmp1 = lastpiece.text(tmp);
-      tmp2 = displayBoard_inst_40_41_tsni(bd7);
+      tmp2 = displayBoard_inst_40_41_tsni(bd1);
       tmp3 = lastpiece.nest(2, tmp2);
       _deforest_Cons_head1 = tmp3;
-      _deforest_Cons_tail1 = (f1, z) => {
+      _deforest_Cons_tail1 = (f, z) => {
         return z
       };
-      tmp4 = (f1, z) => {
-        return match_xs_arm_Cons_inst_40_48_66_tsni(f1, z, _deforest_Cons_head1, _deforest_Cons_tail1)
+      tmp4 = (f, z) => {
+        return match_xs_arm_Cons_inst_40_48_66_tsni(f, z, _deforest_Cons_head1, _deforest_Cons_tail1)
       };
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = tmp4;
-      tmp5 = (f1, z) => {
-        return match_xs_arm_Cons_inst_40_48_66_tsni(f1, z, _deforest_Cons_head, _deforest_Cons_tail)
+      tmp5 = (f, z) => {
+        return match_xs_arm_Cons_inst_40_48_66_tsni(f, z, _deforest_Cons_head, _deforest_Cons_tail)
       };
       return vcat_inst_40_48_tsni(tmp5)
-    } else if (s1 instanceof lastpiece.Choose.class) {
-      param0 = s1.s;
+    } else if (s instanceof lastpiece.Choose.class) {
+      param0 = s.s;
       ss = param0;
       tmp6 = map_inst_40_50_tsni(lastpiece.display, ss);
       return vcat_inst_40_49_tsni(tmp6)
-    } else if (s1 instanceof lastpiece.Fail.class) {
-      param0 = s1.b;
-      param1 = s1.s;
-      bd6 = param0;
+    } else if (s instanceof lastpiece.Fail.class) {
+      param0 = s.b;
+      param1 = s.s;
+      bd = param0;
       if (runtime.Tuple.isArrayLike(param1) && param1.length === 2) {
         first0 = runtime.Tuple.get(param1, 0);
         first1 = runtime.Tuple.get(param1, 1);
@@ -10007,18 +10007,18 @@ lambda1 = (undefined, function (col) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static displayBoard(bd6) {
+  static displayBoard(bd) {
     let tmp, tmp1, tmp2, tmp3, row$this;
     tmp = enumFromTo_inst_51_47_tsni(1, lastpiece.maxCol);
-    row$this = runtime.safeCall(row_inst_51_46_tsni(bd6));
+    row$this = runtime.safeCall(row_inst_51_46_tsni(bd));
     tmp1 = map_inst_51_45_tsni(row$this, tmp);
     tmp2 = vcat_inst_51_42_tsni(tmp1);
     tmp3 = lastpiece.text(NofibPrelude.Nil);
     return lastpiece.above_(tmp2, false, tmp3)
   } 
-  static eliminateEmpty(cons, p2, g, q) {
+  static eliminateEmpty(cons, p, g, q) {
     let first1, first0, q1, tmp, arr;
-    if (p2 instanceof lastpiece.Empty.class) {
+    if (p instanceof lastpiece.Empty.class) {
       return q
     } else {
       if (runtime.Tuple.isArrayLike(q) && q.length === 2) {
@@ -10026,9 +10026,9 @@ lambda1 = (undefined, function (col) {
         first1 = runtime.Tuple.get(q, 1);
         if (first0 instanceof lastpiece.NotEmpty.class) {
           q1 = first1;
-          tmp = runtime.safeCall(cons(p2, g, q1));
+          tmp = runtime.safeCall(cons(p, g, q1));
         } else if (first0 instanceof lastpiece.IsEmpty.class) {
-          tmp = p2;
+          tmp = p;
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -10043,18 +10043,18 @@ lambda1 = (undefined, function (col) {
     }
   } 
   static reduceVert(doc) {
-    let param0, param1, param2, p3, g1, q1, tmp, tmp1, tmp2, arr;
+    let param0, param1, param2, p, g, q, tmp, tmp1, tmp2, arr;
     if (doc instanceof lastpiece.Above.class) {
       param0 = doc.d1;
       param1 = doc.b;
       param2 = doc.d2;
-      p3 = param0;
-      g1 = param1;
-      q1 = param2;
-      tmp = lastpiece.reduceVert(p3);
+      p = param0;
+      g = param1;
+      q = param2;
+      tmp = lastpiece.reduceVert(p);
       tmp1 = NofibPrelude.snd(tmp);
-      tmp2 = lastpiece.reduceVert(q1);
-      return lastpiece.eliminateEmpty(lambda6, tmp1, g1, tmp2)
+      tmp2 = lastpiece.reduceVert(q);
+      return lastpiece.eliminateEmpty(lambda6, tmp1, g, tmp2)
     } else {
       arr = globalThis.Object.freeze([
         lastpiece.NotEmpty,
@@ -10063,17 +10063,17 @@ lambda1 = (undefined, function (col) {
       return arr
     }
   } 
-  static vcat(ls1) {
+  static vcat(ls) {
     let tmp, tmp1;
-    tmp = NofibPrelude.foldr(lambda7, lastpiece.Empty, ls1);
+    tmp = NofibPrelude.foldr(lambda7, lastpiece.Empty, ls);
     tmp1 = reduceVert_inst_52_43_tsni(tmp);
     return NofibPrelude.snd(tmp1)
   } 
-  static text(s2) {
+  static text(s) {
     let sl, tmp, tmp1, tmp2;
-    tmp = NofibPrelude.listLen(s2);
+    tmp = NofibPrelude.listLen(s);
     sl = tmp;
-    tmp1 = runtime.safeCall(lastpiece.Str(s2));
+    tmp1 = runtime.safeCall(lastpiece.Str(s));
     tmp2 = lastpiece.NoAnnot(tmp1, sl);
     return lastpiece.TextBeside(tmp2, lastpiece.Empty)
   } 
@@ -10083,152 +10083,152 @@ lambda1 = (undefined, function (col) {
     tmp1 = lastpiece.NoAnnot(tmp, 1);
     return lastpiece.TextBeside(tmp1, lastpiece.Empty)
   } 
-  static reduceHoriz(doc1) {
-    let param0, param1, param2, p3, g1, q1, tmp, tmp1, tmp2, arr;
-    if (doc1 instanceof lastpiece.Beside.class) {
-      param0 = doc1.d1;
-      param1 = doc1.b;
-      param2 = doc1.d2;
-      p3 = param0;
-      g1 = param1;
-      q1 = param2;
-      tmp = lastpiece.reduceHoriz(p3);
+  static reduceHoriz(doc) {
+    let param0, param1, param2, p, g, q, tmp, tmp1, tmp2, arr;
+    if (doc instanceof lastpiece.Beside.class) {
+      param0 = doc.d1;
+      param1 = doc.b;
+      param2 = doc.d2;
+      p = param0;
+      g = param1;
+      q = param2;
+      tmp = lastpiece.reduceHoriz(p);
       tmp1 = NofibPrelude.snd(tmp);
-      tmp2 = lastpiece.reduceHoriz(q1);
-      return lastpiece.eliminateEmpty(lambda8, tmp1, g1, tmp2)
+      tmp2 = lastpiece.reduceHoriz(q);
+      return lastpiece.eliminateEmpty(lambda8, tmp1, g, tmp2)
     } else {
       arr = globalThis.Object.freeze([
         lastpiece.NotEmpty,
-        doc1
+        doc
       ]);
       return arr
     }
   } 
-  static hcat(ls2) {
+  static hcat(ls) {
     let tmp, tmp1;
-    tmp = NofibPrelude.foldr(lambda9, lastpiece.Empty, ls2);
+    tmp = NofibPrelude.foldr(lambda9, lastpiece.Empty, ls);
     tmp1 = reduceHoriz_inst_53_14_tsni(tmp);
     return NofibPrelude.snd(tmp1)
   } 
-  static above_(p3, g1, q1) {
-    if (q1 instanceof lastpiece.Empty.class) {
-      return p3
+  static above_(p, g, q) {
+    if (q instanceof lastpiece.Empty.class) {
+      return p
     } else {
-      if (g1 instanceof lastpiece.Empty.class) {
-        return q1
+      if (g instanceof lastpiece.Empty.class) {
+        return q
       } else {
-        return runtime.safeCall(lastpiece.Above(p3, g1, q1))
+        return runtime.safeCall(lastpiece.Above(p, g, q))
       }
     }
   } 
-  static nest(k5, p4) {
+  static nest(k, p) {
     let tmp;
-    tmp = lastpiece.reduceDoc(p4);
-    return lastpiece.mkNest(k5, tmp)
+    tmp = lastpiece.reduceDoc(p);
+    return lastpiece.mkNest(k, tmp)
   } 
-  static mkNest(k6, p5) {
-    let scrut, param0, param1, k15, p11, tmp;
-    if (p5 instanceof lastpiece.Nest.class) {
-      param0 = p5.i;
-      param1 = p5.d;
-      k15 = param0;
-      p11 = param1;
-      tmp = k6 + k15;
-      return lastpiece.mkNest(tmp, p11)
-    } else if (p5 instanceof lastpiece.NoDoc.class) {
+  static mkNest(k, p) {
+    let scrut, param0, param1, k1, p1, tmp;
+    if (p instanceof lastpiece.Nest.class) {
+      param0 = p.i;
+      param1 = p.d;
+      k1 = param0;
+      p1 = param1;
+      tmp = k + k1;
+      return lastpiece.mkNest(tmp, p1)
+    } else if (p instanceof lastpiece.NoDoc.class) {
       return lastpiece.NoDoc
-    } else if (p5 instanceof lastpiece.Empty.class) {
+    } else if (p instanceof lastpiece.Empty.class) {
       return lastpiece.Empty
     } else {
-      scrut = k6 === 0;
+      scrut = k === 0;
       if (scrut === true) {
-        return p5
+        return p
       } else {
-        return lastpiece.Nest(k6, p5)
+        return lastpiece.Nest(k, p)
       }
     }
   } 
-  static reduceDoc(p6) {
-    let param0, param1, param2, p11, g2, q2, p12, g3, q3, tmp, tmp1;
-    if (p6 instanceof lastpiece.Beside.class) {
-      param0 = p6.d1;
-      param1 = p6.b;
-      param2 = p6.d2;
-      p12 = param0;
-      g3 = param1;
-      q3 = param2;
-      tmp = lastpiece.reduceDoc(q3);
-      return lastpiece.beside(p12, g3, tmp)
-    } else if (p6 instanceof lastpiece.Above.class) {
-      param0 = p6.d1;
-      param1 = p6.b;
-      param2 = p6.d2;
+  static reduceDoc(p) {
+    let param0, param1, param2, p1, g, q, p11, g1, q1, tmp, tmp1;
+    if (p instanceof lastpiece.Beside.class) {
+      param0 = p.d1;
+      param1 = p.b;
+      param2 = p.d2;
       p11 = param0;
-      g2 = param1;
-      q2 = param2;
-      tmp1 = lastpiece.reduceDoc(q2);
-      return lastpiece.above(p11, g2, tmp1)
+      g1 = param1;
+      q1 = param2;
+      tmp = lastpiece.reduceDoc(q1);
+      return lastpiece.beside(p11, g1, tmp)
+    } else if (p instanceof lastpiece.Above.class) {
+      param0 = p.d1;
+      param1 = p.b;
+      param2 = p.d2;
+      p1 = param0;
+      g = param1;
+      q = param2;
+      tmp1 = lastpiece.reduceDoc(q);
+      return lastpiece.above(p1, g, tmp1)
     } else {
-      return p6
+      return p
     }
   } 
-  static beside(p7, g2, q2) {
-    let param0, param1, t, p11, rest, p12, param2, p13, g11, q11, scrut, k7, p14, p15, p21, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
-    if (p7 instanceof lastpiece.NoDoc.class) {
+  static beside(p, g, q) {
+    let param0, param1, t, p1, rest, p11, param2, p12, g1, q1, scrut, k, p13, p14, p2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    if (p instanceof lastpiece.NoDoc.class) {
       return lastpiece.NoDoc
-    } else if (p7 instanceof lastpiece.Union.class) {
-      param0 = p7.d1;
-      param1 = p7.d2;
-      p15 = param0;
-      p21 = param1;
-      tmp = lastpiece.beside(p15, g2, q2);
-      tmp1 = lastpiece.beside(p21, g2, q2);
+    } else if (p instanceof lastpiece.Union.class) {
+      param0 = p.d1;
+      param1 = p.d2;
+      p14 = param0;
+      p2 = param1;
+      tmp = lastpiece.beside(p14, g, q);
+      tmp1 = lastpiece.beside(p2, g, q);
       return lastpiece.Union(tmp, tmp1)
-    } else if (p7 instanceof lastpiece.Empty.class) {
-      return q2
-    } else if (p7 instanceof lastpiece.Nest.class) {
-      param0 = p7.i;
-      param1 = p7.d;
-      k7 = param0;
-      p14 = param1;
-      tmp2 = lastpiece.beside(p14, g2, q2);
-      return lastpiece.Nest(k7, tmp2)
-    } else if (p7 instanceof lastpiece.Beside.class) {
-      param0 = p7.d1;
-      param1 = p7.b;
-      param2 = p7.d2;
-      p13 = param0;
-      g11 = param1;
-      q11 = param2;
-      scrut = g11 === g2;
-      if (scrut === true) {
-        tmp3 = lastpiece.beside(q11, g2, q2);
-        return lastpiece.beside(p13, g11, tmp3)
-      } else {
-        tmp4 = runtime.safeCall(lastpiece.Beside(p13, g11, q11));
-        tmp5 = lastpiece.reduceDoc(tmp4);
-        return lastpiece.beside(tmp5, g2, q2)
-      }
-    } else if (p7 instanceof lastpiece.Above.class) {
-      param0 = p7.d1;
-      param1 = p7.b;
-      param2 = p7.d2;
-      tmp6 = lastpiece.reduceDoc(p7);
-      return lastpiece.beside(tmp6, g2, q2)
-    } else if (p7 instanceof lastpiece.NilAbove.class) {
-      param0 = p7.d;
+    } else if (p instanceof lastpiece.Empty.class) {
+      return q
+    } else if (p instanceof lastpiece.Nest.class) {
+      param0 = p.i;
+      param1 = p.d;
+      k = param0;
+      p13 = param1;
+      tmp2 = lastpiece.beside(p13, g, q);
+      return lastpiece.Nest(k, tmp2)
+    } else if (p instanceof lastpiece.Beside.class) {
+      param0 = p.d1;
+      param1 = p.b;
+      param2 = p.d2;
       p12 = param0;
-      tmp7 = lastpiece.beside(p12, g2, q2);
-      return runtime.safeCall(lastpiece.NilAbove(tmp7))
-    } else if (p7 instanceof lastpiece.TextBeside.class) {
-      param0 = p7.a;
-      param1 = p7.d;
-      t = param0;
-      p11 = param1;
-      if (p11 instanceof lastpiece.Empty.class) {
-        tmp8 = lastpiece.nilBeside(g2, q2);
+      g1 = param1;
+      q1 = param2;
+      scrut = g1 === g;
+      if (scrut === true) {
+        tmp3 = lastpiece.beside(q1, g, q);
+        return lastpiece.beside(p12, g1, tmp3)
       } else {
-        tmp8 = lastpiece.beside(p11, g2, q2);
+        tmp4 = runtime.safeCall(lastpiece.Beside(p12, g1, q1));
+        tmp5 = lastpiece.reduceDoc(tmp4);
+        return lastpiece.beside(tmp5, g, q)
+      }
+    } else if (p instanceof lastpiece.Above.class) {
+      param0 = p.d1;
+      param1 = p.b;
+      param2 = p.d2;
+      tmp6 = lastpiece.reduceDoc(p);
+      return lastpiece.beside(tmp6, g, q)
+    } else if (p instanceof lastpiece.NilAbove.class) {
+      param0 = p.d;
+      p11 = param0;
+      tmp7 = lastpiece.beside(p11, g, q);
+      return runtime.safeCall(lastpiece.NilAbove(tmp7))
+    } else if (p instanceof lastpiece.TextBeside.class) {
+      param0 = p.a;
+      param1 = p.d;
+      t = param0;
+      p1 = param1;
+      if (p1 instanceof lastpiece.Empty.class) {
+        tmp8 = lastpiece.nilBeside(g, q);
+      } else {
+        tmp8 = lastpiece.beside(p1, g, q);
       }
       rest = tmp8;
       return lastpiece.TextBeside(t, rest)
@@ -10236,128 +10236,128 @@ lambda1 = (undefined, function (col) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static above(p8, g3, q3) {
-    let param0, param1, param2, p11, g11, q11, tmp, tmp1, tmp2, tmp3;
-    if (p8 instanceof lastpiece.Above.class) {
-      param0 = p8.d1;
-      param1 = p8.b;
-      param2 = p8.d2;
-      p11 = param0;
-      g11 = param1;
-      q11 = param2;
-      tmp = lastpiece.above(q11, g3, q3);
-      return lastpiece.above(p11, g11, tmp)
-    } else if (p8 instanceof lastpiece.Beside.class) {
-      param0 = p8.d1;
-      param1 = p8.b;
-      param2 = p8.d2;
-      tmp1 = lastpiece.reduceDoc(p8);
-      tmp2 = lastpiece.reduceDoc(q3);
-      return lastpiece.aboveNest(tmp1, g3, 0, tmp2)
+  static above(p, g, q) {
+    let param0, param1, param2, p1, g1, q1, tmp, tmp1, tmp2, tmp3;
+    if (p instanceof lastpiece.Above.class) {
+      param0 = p.d1;
+      param1 = p.b;
+      param2 = p.d2;
+      p1 = param0;
+      g1 = param1;
+      q1 = param2;
+      tmp = lastpiece.above(q1, g, q);
+      return lastpiece.above(p1, g1, tmp)
+    } else if (p instanceof lastpiece.Beside.class) {
+      param0 = p.d1;
+      param1 = p.b;
+      param2 = p.d2;
+      tmp1 = lastpiece.reduceDoc(p);
+      tmp2 = lastpiece.reduceDoc(q);
+      return lastpiece.aboveNest(tmp1, g, 0, tmp2)
     } else {
-      tmp3 = lastpiece.reduceDoc(q3);
-      return lastpiece.aboveNest(p8, g3, 0, tmp3)
+      tmp3 = lastpiece.reduceDoc(q);
+      return lastpiece.aboveNest(p, g, 0, tmp3)
     }
   } 
-  static nilBeside(g4, p9) {
-    let param0, param1, p11;
-    if (p9 instanceof lastpiece.Empty.class) {
+  static nilBeside(g, p) {
+    let param0, param1, p1;
+    if (p instanceof lastpiece.Empty.class) {
       return lastpiece.Empty
-    } else if (p9 instanceof lastpiece.Nest.class) {
-      param0 = p9.i;
-      param1 = p9.d;
-      p11 = param1;
-      return lastpiece.nilBeside(g4, p11)
+    } else if (p instanceof lastpiece.Nest.class) {
+      param0 = p.i;
+      param1 = p.d;
+      p1 = param1;
+      return lastpiece.nilBeside(g, p1)
     } else {
-      if (g4 === true) {
-        return lastpiece.TextBeside(lastpiece.spaceText, p9)
+      if (g === true) {
+        return lastpiece.TextBeside(lastpiece.spaceText, p)
       } else {
-        return p9
+        return p
       }
     }
   } 
-  static aboveNest(p10, g5, k7, q4) {
-    let param0, param1, param2, s3, p11, k15, rest, p12, k16, p13, p14, p21, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
-    if (p10 instanceof lastpiece.NoDoc.class) {
+  static aboveNest(p, g, k, q) {
+    let param0, param1, param2, s, p1, k1, rest, p11, k11, p12, p13, p2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+    if (p instanceof lastpiece.NoDoc.class) {
       return lastpiece.NoDoc
-    } else if (p10 instanceof lastpiece.Union.class) {
-      param0 = p10.d1;
-      param1 = p10.d2;
-      p14 = param0;
-      p21 = param1;
-      tmp = lastpiece.aboveNest(p14, g5, k7, q4);
-      tmp1 = lastpiece.aboveNest(p21, g5, k7, q4);
+    } else if (p instanceof lastpiece.Union.class) {
+      param0 = p.d1;
+      param1 = p.d2;
+      p13 = param0;
+      p2 = param1;
+      tmp = lastpiece.aboveNest(p13, g, k, q);
+      tmp1 = lastpiece.aboveNest(p2, g, k, q);
       return lastpiece.Union(tmp, tmp1)
-    } else if (p10 instanceof lastpiece.Empty.class) {
-      return lastpiece.mkNest(k7, q4)
-    } else if (p10 instanceof lastpiece.Nest.class) {
-      param0 = p10.i;
-      param1 = p10.d;
-      k16 = param0;
-      p13 = param1;
-      tmp2 = k7 - k16;
-      tmp3 = lastpiece.aboveNest(p13, g5, tmp2, q4);
-      return lastpiece.Nest(k16, tmp3)
-    } else if (p10 instanceof lastpiece.NilAbove.class) {
-      param0 = p10.d;
-      p12 = param0;
-      tmp4 = lastpiece.aboveNest(p12, g5, k7, q4);
+    } else if (p instanceof lastpiece.Empty.class) {
+      return lastpiece.mkNest(k, q)
+    } else if (p instanceof lastpiece.Nest.class) {
+      param0 = p.i;
+      param1 = p.d;
+      k11 = param0;
+      p12 = param1;
+      tmp2 = k - k11;
+      tmp3 = lastpiece.aboveNest(p12, g, tmp2, q);
+      return lastpiece.Nest(k11, tmp3)
+    } else if (p instanceof lastpiece.NilAbove.class) {
+      param0 = p.d;
+      p11 = param0;
+      tmp4 = lastpiece.aboveNest(p11, g, k, q);
       return runtime.safeCall(lastpiece.NilAbove(tmp4))
-    } else if (p10 instanceof lastpiece.TextBeside.class) {
-      param0 = p10.a;
-      param1 = p10.d;
-      s3 = param0;
-      p11 = param1;
-      tmp5 = lastpiece.annotSize(s3);
-      tmp6 = k7 - tmp5;
-      k15 = tmp6;
-      if (p11 instanceof lastpiece.Empty.class) {
-        tmp7 = lastpiece.nilAboveNest(g5, k15, q4);
+    } else if (p instanceof lastpiece.TextBeside.class) {
+      param0 = p.a;
+      param1 = p.d;
+      s = param0;
+      p1 = param1;
+      tmp5 = lastpiece.annotSize(s);
+      tmp6 = k - tmp5;
+      k1 = tmp6;
+      if (p1 instanceof lastpiece.Empty.class) {
+        tmp7 = lastpiece.nilAboveNest(g, k1, q);
       } else {
-        tmp7 = lastpiece.aboveNest(p11, g5, k15, q4);
+        tmp7 = lastpiece.aboveNest(p1, g, k1, q);
       }
       rest = tmp7;
-      return lastpiece.TextBeside(s3, rest)
-    } else if (p10 instanceof lastpiece.Above.class) {
-      param0 = p10.d1;
-      param1 = p10.b;
-      param2 = p10.d2;
+      return lastpiece.TextBeside(s, rest)
+    } else if (p instanceof lastpiece.Above.class) {
+      param0 = p.d1;
+      param1 = p.b;
+      param2 = p.d2;
       throw globalThis.Error("aboveNest Above")
-    } else if (p10 instanceof lastpiece.Beside.class) {
-      param0 = p10.d1;
-      param1 = p10.b;
-      param2 = p10.d2;
+    } else if (p instanceof lastpiece.Beside.class) {
+      param0 = p.d1;
+      param1 = p.b;
+      param2 = p.d2;
       throw globalThis.Error("aboveNest Beside")
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static nilAboveNest(g6, k8, q5) {
-    let scrut, scrut1, param0, param1, k15, q11, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-    if (q5 instanceof lastpiece.Empty.class) {
+  static nilAboveNest(g, k, q) {
+    let scrut, scrut1, param0, param1, k1, q1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+    if (q instanceof lastpiece.Empty.class) {
       return lastpiece.Empty
-    } else if (q5 instanceof lastpiece.Nest.class) {
-      param0 = q5.i;
-      param1 = q5.d;
-      k15 = param0;
-      q11 = param1;
-      tmp = k8 + k15;
-      return lastpiece.nilAboveNest(g6, tmp, q11)
+    } else if (q instanceof lastpiece.Nest.class) {
+      param0 = q.i;
+      param1 = q.d;
+      k1 = param0;
+      q1 = param1;
+      tmp = k + k1;
+      return lastpiece.nilAboveNest(g, tmp, q1)
     } else {
-      scrut = ! g6;
+      scrut = ! g;
       if (scrut === true) {
-        scrut1 = k8 > 0;
+        scrut1 = k > 0;
         if (scrut1 === true) {
-          tmp1 = lastpiece.indent(k8);
+          tmp1 = lastpiece.indent(k);
           tmp2 = runtime.safeCall(lastpiece.Str(tmp1));
-          tmp3 = lastpiece.NoAnnot(tmp2, k8);
-          return lastpiece.TextBeside(tmp3, q5)
+          tmp3 = lastpiece.NoAnnot(tmp2, k);
+          return lastpiece.TextBeside(tmp3, q)
         } else {
-          tmp4 = lastpiece.mkNest(k8, q5);
+          tmp4 = lastpiece.mkNest(k, q);
           return runtime.safeCall(lastpiece.NilAbove(tmp4))
         }
       } else {
-        tmp5 = lastpiece.mkNest(k8, q5);
+        tmp5 = lastpiece.mkNest(k, q);
         return runtime.safeCall(lastpiece.NilAbove(tmp5))
       }
     }
@@ -10368,92 +10368,92 @@ lambda1 = (undefined, function (col) {
     done = tmp;
     return lastpiece.fullRender(lastpiece.ZigZagMode, 200, 1.5, put, done, d)
   } 
-  static fullRender(m2, l6, r6, txt, a, b) {
+  static fullRender(m, l, r, txt, a, b) {
     let annTxt$this;
     annTxt$this = runtime.safeCall(annTxt(txt));
-    return lastpiece.fullRenderAnn(m2, l6, r6, annTxt$this, a, b)
+    return lastpiece.fullRenderAnn(m, l, r, annTxt$this, a, b)
   } 
-  static ceiling(x6) {
-    return runtime.safeCall(globalThis.Math.ceil(x6))
+  static ceiling(x) {
+    return runtime.safeCall(globalThis.Math.ceil(x))
   } 
-  static fullRenderAnn(m3, lineLen, ribbons, txt1, rest, doc2) {
-    let ribbonLen, bestLineLen, doc11, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
-    if (m3 instanceof lastpiece.OneLineMode.class) {
-      tmp = lastpiece.reduceDoc(doc2);
-      return lastpiece.easyDisplay(lastpiece.spaceText, lambda10, txt1, rest, tmp)
-    } else if (m3 instanceof lastpiece.LeftMode.class) {
-      tmp1 = lastpiece.reduceDoc(doc2);
-      return lastpiece.easyDisplay(lastpiece.nlText, lastpiece.first, txt1, rest, tmp1)
+  static fullRenderAnn(m, lineLen, ribbons, txt, rest, doc) {
+    let ribbonLen, bestLineLen, doc1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
+    if (m instanceof lastpiece.OneLineMode.class) {
+      tmp = lastpiece.reduceDoc(doc);
+      return lastpiece.easyDisplay(lastpiece.spaceText, lambda10, txt, rest, tmp)
+    } else if (m instanceof lastpiece.LeftMode.class) {
+      tmp1 = lastpiece.reduceDoc(doc);
+      return lastpiece.easyDisplay(lastpiece.nlText, lastpiece.first, txt, rest, tmp1)
     } else {
       tmp2 = lineLen / ribbons;
       tmp3 = lastpiece.ceiling(tmp2);
       ribbonLen = tmp3;
-      if (m3 instanceof lastpiece.ZigZagMode.class) {
+      if (m instanceof lastpiece.ZigZagMode.class) {
         tmp4 = 2147483647;
       } else {
         tmp4 = lineLen;
       }
       bestLineLen = tmp4;
-      tmp5 = lastpiece.reduceDoc(doc2);
+      tmp5 = lastpiece.reduceDoc(doc);
       tmp6 = lastpiece.best(bestLineLen, ribbonLen, tmp5);
-      doc11 = tmp6;
-      return lastpiece.displayDoc(m3, lineLen, ribbonLen, txt1, rest, doc11)
+      doc1 = tmp6;
+      return lastpiece.displayDoc(m, lineLen, ribbonLen, txt, rest, doc1)
     }
   } 
-  static easyDisplay(nlSpaceText, choose, txt2, end, x7) {
-    return lay$(nlSpaceText, choose, txt2, end, x7)
+  static easyDisplay(nlSpaceText, choose, txt, end, x) {
+    return lay$(nlSpaceText, choose, txt, end, x)
   } 
-  static displayDoc(m4, pageWidth, ribbonWidth, txt3, end1, doc3) {
+  static displayDoc(m, pageWidth, ribbonWidth, txt, end, doc) {
     let gapWidth, shift, tmp, tmp1;
     tmp = pageWidth - ribbonWidth;
     gapWidth = tmp;
     tmp1 = NofibPrelude.intDiv(gapWidth, 2);
     shift = tmp1;
-    return lay$1(m4, txt3, end1, gapWidth, shift, 0, doc3)
+    return lay$1(m, txt, end, gapWidth, shift, 0, doc)
   } 
-  static best(w0, r7, doc4) {
-    return get(r7, w0, doc4)
+  static best(w0, r, doc) {
+    return get(r, w0, doc)
   } 
-  static nonEmptySet(doc5) {
-    let param0, param1, param2, p11, p12;
-    if (doc5 instanceof lastpiece.NoDoc.class) {
+  static nonEmptySet(doc) {
+    let param0, param1, param2, p, p1;
+    if (doc instanceof lastpiece.NoDoc.class) {
       return false
-    } else if (doc5 instanceof lastpiece.Union.class) {
-      param0 = doc5.d1;
-      param1 = doc5.d2;
+    } else if (doc instanceof lastpiece.Union.class) {
+      param0 = doc.d1;
+      param1 = doc.d2;
       return true
-    } else if (doc5 instanceof lastpiece.Empty.class) {
+    } else if (doc instanceof lastpiece.Empty.class) {
       return true
-    } else if (doc5 instanceof lastpiece.NilAbove.class) {
-      param0 = doc5.d;
+    } else if (doc instanceof lastpiece.NilAbove.class) {
+      param0 = doc.d;
       return true
-    } else if (doc5 instanceof lastpiece.TextBeside.class) {
-      param0 = doc5.a;
-      param1 = doc5.d;
-      p12 = param1;
-      return lastpiece.nonEmptySet(p12)
-    } else if (doc5 instanceof lastpiece.Nest.class) {
-      param0 = doc5.i;
-      param1 = doc5.d;
-      p11 = param1;
-      return lastpiece.nonEmptySet(p11)
-    } else if (doc5 instanceof lastpiece.Above.class) {
-      param0 = doc5.d1;
-      param1 = doc5.b;
-      param2 = doc5.d2;
+    } else if (doc instanceof lastpiece.TextBeside.class) {
+      param0 = doc.a;
+      param1 = doc.d;
+      p1 = param1;
+      return lastpiece.nonEmptySet(p1)
+    } else if (doc instanceof lastpiece.Nest.class) {
+      param0 = doc.i;
+      param1 = doc.d;
+      p = param1;
+      return lastpiece.nonEmptySet(p)
+    } else if (doc instanceof lastpiece.Above.class) {
+      param0 = doc.d1;
+      param1 = doc.b;
+      param2 = doc.d2;
       throw globalThis.Error("nonEmptySet Above")
-    } else if (doc5 instanceof lastpiece.Beside.class) {
-      param0 = doc5.d1;
-      param1 = doc5.b;
-      param2 = doc5.d2;
+    } else if (doc instanceof lastpiece.Beside.class) {
+      param0 = doc.d1;
+      param1 = doc.b;
+      param2 = doc.d2;
       throw globalThis.Error("nonEmptySet Beside")
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static fits(n1, param) {
-    let param0, param1, param2, s3, p11, scrut, tmp, tmp1;
-    scrut = n1 < 0;
+  static fits(n, param) {
+    let param0, param1, param2, s, p, scrut, tmp, tmp1;
+    scrut = n < 0;
     if (scrut === true) {
       return false
     } else {
@@ -10467,11 +10467,11 @@ lambda1 = (undefined, function (col) {
       } else if (param instanceof lastpiece.TextBeside.class) {
         param0 = param.a;
         param1 = param.d;
-        s3 = param0;
-        p11 = param1;
-        tmp = lastpiece.annotSize(s3);
-        tmp1 = n1 - tmp;
-        return lastpiece.fits(tmp1, p11)
+        s = param0;
+        p = param1;
+        tmp = lastpiece.annotSize(s);
+        tmp1 = n - tmp;
+        return lastpiece.fits(tmp1, p)
       } else if (param instanceof lastpiece.Above.class) {
         param0 = param.d1;
         param1 = param.b;
@@ -10495,28 +10495,28 @@ lambda1 = (undefined, function (col) {
       }
     }
   } 
-  static first(p11, q6) {
+  static first(p, q) {
     let scrut;
-    scrut = lastpiece.nonEmptySet(p11);
+    scrut = lastpiece.nonEmptySet(p);
     if (scrut === true) {
-      return p11
+      return p
     } else {
-      return q6
+      return q
     }
   } 
-  static nicest1(w, r8, sl, p12, q7) {
+  static nicest1(w, r, sl, p, q) {
     let scrut, tmp, tmp1;
-    tmp = NofibPrelude.min(w, r8);
+    tmp = NofibPrelude.min(w, r);
     tmp1 = tmp - sl;
-    scrut = lastpiece.fits(tmp1, p12);
+    scrut = lastpiece.fits(tmp1, p);
     if (scrut === true) {
-      return p12
+      return p
     } else {
-      return q7
+      return q
     }
   } 
-  static nicest(w1, r9, p13, q8) {
-    return lastpiece.nicest1(w1, r9, 0, p13, q8)
+  static nicest(w, r, p, q) {
+    return lastpiece.nicest1(w, r, 0, p, q)
   } 
   static testLastPiece_nofib() {
     let initialBoard, solutions, arr, arr1, arr2, tmp, tmp1, tmp2, tmp3, arr3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
@@ -10535,24 +10535,24 @@ lambda1 = (undefined, function (col) {
       return match_orow_ocol_arm_Deforest_Arr_2_inst_54_55_67_tsni(row1, col, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
     };
     _deforest_Cons_head1 = arr2;
-    _deforest_Cons_tail1 = (bd7, sq6, id3) => {
+    _deforest_Cons_tail1 = (bd, sq1, id) => {
       let tmp6, _deforest_Some_x;
-      tmp6 = extend_inst_54_55_29_tsni(bd7, sq6, id3);
+      tmp6 = extend_inst_54_55_29_tsni(bd, sq1, id);
       _deforest_Some_x = tmp6;
       return () => {
-        let param0, x8;
+        let param0, x;
         param0 = _deforest_Some_x;
-        x8 = param0;
-        return x8
+        x = param0;
+        return x
       }
     };
-    tmp = (bd7, sq6, id3) => {
-      return match_os_arm_Cons_inst_54_55_tsni(bd7, sq6, id3, _deforest_Cons_head1, _deforest_Cons_tail1)
+    tmp = (bd, sq1, id) => {
+      return match_os_arm_Cons_inst_54_55_tsni(bd, sq1, id, _deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = arr1;
     _deforest_Cons_tail = tmp;
-    tmp1 = (bd7, sq6, id3) => {
-      return match_os_arm_Cons_inst_54_55_tsni(bd7, sq6, id3, _deforest_Cons_head, _deforest_Cons_tail)
+    tmp1 = (bd, sq1, id) => {
+      return match_os_arm_Cons_inst_54_55_tsni(bd, sq1, id, _deforest_Cons_head, _deforest_Cons_tail)
     };
     tmp2 = fit_inst_54_55_tsni(lastpiece.emptyBoard, arr, "a", tmp1);
     tmp3 = fromSome_inst_54_68_tsni(tmp2);

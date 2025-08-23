@@ -14151,8 +14151,8 @@ lambda1 = (undefined, function (h) {
       static [definitionMetadata] = ["object", "Nill"]; 
     };
     this.Nill = globalThis.Object.freeze(new Nill$class);
-    this.Atom = function Atom(a1) {
-      return globalThis.Object.freeze(new Atom.class(a1));
+    this.Atom = function Atom(a) {
+      return globalThis.Object.freeze(new Atom.class(a));
     };
     Object.defineProperty(this.Atom, "class", {
       enumerable: true,
@@ -14165,8 +14165,8 @@ lambda1 = (undefined, function (h) {
         static [definitionMetadata] = ["class", "Atom", ["a"]]; 
       }
     });
-    this.Conss = function Conss(a1) {
-      return globalThis.Object.freeze(new Conss.class(a1));
+    this.Conss = function Conss(a) {
+      return globalThis.Object.freeze(new Conss.class(a));
     };
     Object.defineProperty(this.Conss, "class", {
       enumerable: true,
@@ -14195,8 +14195,8 @@ lambda1 = (undefined, function (h) {
       static [definitionMetadata] = ["object", "Empty"]; 
     };
     this.Empty = globalThis.Object.freeze(new Empty$class);
-    this.Node = function Node(x1) {
-      return globalThis.Object.freeze(new Node.class(x1));
+    this.Node = function Node(x) {
+      return globalThis.Object.freeze(new Node.class(x));
     };
     Object.defineProperty(this.Node, "class", {
       enumerable: true,
@@ -14910,7 +14910,7 @@ lambda1 = (undefined, function (h) {
     }
   } 
   static lispmember(e_x) {
-    let first1, first0, e, param0, first11, first01, x1, xs, scrut, arr;
+    let first1, first0, e, param0, first11, first01, x, xs, scrut, arr;
     if (runtime.Tuple.isArrayLike(e_x) && e_x.length === 2) {
       first0 = runtime.Tuple.get(e_x, 0);
       first1 = runtime.Tuple.get(e_x, 1);
@@ -14920,9 +14920,9 @@ lambda1 = (undefined, function (h) {
         if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
           first01 = runtime.Tuple.get(param0, 0);
           first11 = runtime.Tuple.get(param0, 1);
-          x1 = first01;
+          x = first01;
           xs = first11;
-          scrut = boyer2.lispListEq(e, x1);
+          scrut = boyer2.lispListEq(e, x);
           if (scrut === true) {
             return true
           } else {
@@ -15037,11 +15037,11 @@ lambda1 = (undefined, function (h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static falsep(term_l1) {
+  static falsep(term_l) {
     let first1, first0, term, l, param0, first11, first01, param01, param02, param1, arr, arr1, arr2, arr3, arr4, arr5, arr6, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Deforest_Arr_2_06, _deforest_Deforest_Arr_2_16;
-    if (runtime.Tuple.isArrayLike(term_l1) && term_l1.length === 2) {
-      first0 = runtime.Tuple.get(term_l1, 0);
-      first1 = runtime.Tuple.get(term_l1, 1);
+    if (runtime.Tuple.isArrayLike(term_l) && term_l.length === 2) {
+      first0 = runtime.Tuple.get(term_l, 0);
+      first1 = runtime.Tuple.get(term_l, 1);
       if (first0 instanceof boyer2.Nill.class) {
         return false
       } else if (first0 instanceof boyer2.Conss.class) {
@@ -15132,29 +15132,29 @@ lambda1 = (undefined, function (h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static tv(x1) {
+  static tv(x) {
     let param0, a;
-    if (x1 instanceof boyer2.Atom.class) {
-      param0 = x1.a;
+    if (x instanceof boyer2.Atom.class) {
+      param0 = x.a;
       a = param0;
       return a
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static atom(x2) {
+  static atom(x) {
     let param0;
-    if (x2 instanceof boyer2.Atom.class) {
-      param0 = x2.a;
+    if (x instanceof boyer2.Atom.class) {
+      param0 = x.a;
       return true
     } else {
       return false
     }
   } 
-  static car(x3) {
+  static car(x) {
     let param0, first1, first0, a;
-    if (x3 instanceof boyer2.Conss.class) {
-      param0 = x3.a;
+    if (x instanceof boyer2.Conss.class) {
+      param0 = x.a;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
@@ -15167,10 +15167,10 @@ lambda1 = (undefined, function (h) {
       return boyer2.Nill
     }
   } 
-  static cdr(x4) {
+  static cdr(x) {
     let param0, first1, first0, b;
-    if (x4 instanceof boyer2.Conss.class) {
-      param0 = x4.a;
+    if (x instanceof boyer2.Conss.class) {
+      param0 = x.a;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
@@ -15183,26 +15183,26 @@ lambda1 = (undefined, function (h) {
       return boyer2.Nill
     }
   } 
-  static cadr(x5) {
+  static cadr(x) {
     let tmp;
-    tmp = boyer2.cdr(x5);
+    tmp = boyer2.cdr(x);
     return boyer2.car(tmp)
   } 
-  static caddr(x6) {
+  static caddr(x) {
     let tmp, tmp1;
-    tmp = boyer2.cdr(x6);
+    tmp = boyer2.cdr(x);
     tmp1 = boyer2.cdr(tmp);
     return boyer2.car(tmp1)
   } 
-  static cadddr(x7) {
+  static cadddr(x) {
     let tmp, tmp1, tmp2;
-    tmp = boyer2.cdr(x7);
+    tmp = boyer2.cdr(x);
     tmp1 = boyer2.cdr(tmp);
     tmp2 = boyer2.cdr(tmp1);
     return boyer2.car(tmp2)
   } 
   static tautologyp(f_truelst_falselst) {
-    let first2, first1, first0, f, truelst, falselst, param0, first11, first01, x8, y1, param01, param02, param1, param03, param11, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, x9, tmp, arr, arr1, tmp1, arr2, arr3, tmp2, arr4, tmp3, arr5, tmp4, arr6, tmp5, arr7, tmp6, arr8, tmp7, tmp8, arr9, tmp9, arr10, tmp10, tmp11, arr11, tmp12, arr12, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
+    let first2, first1, first0, f, truelst, falselst, param0, first11, first01, x, y, param01, param02, param1, param03, param11, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, x1, tmp, arr, arr1, tmp1, arr2, arr3, tmp2, arr4, tmp3, arr5, tmp4, arr6, tmp5, arr7, tmp6, arr8, tmp7, tmp8, arr9, tmp9, arr10, tmp10, tmp11, arr11, tmp12, arr12, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
     if (runtime.Tuple.isArrayLike(f_truelst_falselst) && f_truelst_falselst.length === 3) {
       first0 = runtime.Tuple.get(f_truelst_falselst, 0);
       first1 = runtime.Tuple.get(f_truelst_falselst, 1);
@@ -15214,8 +15214,8 @@ lambda1 = (undefined, function (h) {
         return false
       } else if (f instanceof boyer2.Atom.class) {
         param0 = f.a;
-        x9 = param0;
-        tmp = runtime.safeCall(boyer2.Atom(x9));
+        x1 = param0;
+        tmp = runtime.safeCall(boyer2.Atom(x1));
         _deforest_Deforest_Arr_2_0 = tmp;
         _deforest_Deforest_Arr_2_1 = truelst;
         arr = () => {
@@ -15315,11 +15315,11 @@ lambda1 = (undefined, function (h) {
         if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
           first01 = runtime.Tuple.get(param0, 0);
           first11 = runtime.Tuple.get(param0, 1);
-          x8 = first01;
-          y1 = first11;
+          x = first01;
+          y = first11;
           arr1 = globalThis.Object.freeze([
-            x8,
-            y1
+            x,
+            y
           ]);
           tmp1 = runtime.safeCall(boyer2.Conss(arr1));
           _deforest_Deforest_Arr_2_01 = tmp1;
@@ -15420,8 +15420,8 @@ lambda1 = (undefined, function (h) {
             return true
           } else {
             arr3 = globalThis.Object.freeze([
-              x8,
-              y1
+              x,
+              y
             ]);
             tmp2 = runtime.safeCall(boyer2.Conss(arr3));
             _deforest_Deforest_Arr_2_02 = tmp2;
@@ -15521,8 +15521,8 @@ lambda1 = (undefined, function (h) {
             if (scrut4 === true) {
               return false
             } else {
-              if (x8 instanceof boyer2.Atom.class) {
-                param01 = x8.a;
+              if (x instanceof boyer2.Atom.class) {
+                param01 = x.a;
                 if (param01 instanceof NofibPrelude.Cons.class) {
                   param02 = param01.head;
                   param1 = param01.tail;
@@ -15532,7 +15532,7 @@ lambda1 = (undefined, function (h) {
                       param11 = param1.tail;
                       if (param03 === "f") {
                         if (param11 instanceof NofibPrelude.Nil.class) {
-                          tmp3 = boyer2.car(y1);
+                          tmp3 = boyer2.car(y);
                           _deforest_Deforest_Arr_2_03 = tmp3;
                           _deforest_Deforest_Arr_2_13 = truelst;
                           arr5 = () => {
@@ -15628,7 +15628,7 @@ lambda1 = (undefined, function (h) {
                           };
                           scrut3 = truep_inst_23_27_tsni(arr5);
                           if (scrut3 === true) {
-                            tmp4 = boyer2.cadr(y1);
+                            tmp4 = boyer2.cadr(y);
                             arr6 = globalThis.Object.freeze([
                               tmp4,
                               truelst,
@@ -15636,7 +15636,7 @@ lambda1 = (undefined, function (h) {
                             ]);
                             return boyer2.tautologyp(arr6)
                           } else {
-                            tmp5 = boyer2.car(y1);
+                            tmp5 = boyer2.car(y);
                             _deforest_Deforest_Arr_2_04 = tmp5;
                             _deforest_Deforest_Arr_2_14 = falselst;
                             arr7 = () => {
@@ -15732,7 +15732,7 @@ lambda1 = (undefined, function (h) {
                             };
                             scrut2 = falsep_inst_23_28_tsni(arr7);
                             if (scrut2 === true) {
-                              tmp6 = boyer2.caddr(y1);
+                              tmp6 = boyer2.caddr(y);
                               arr8 = globalThis.Object.freeze([
                                 tmp6,
                                 truelst,
@@ -15740,8 +15740,8 @@ lambda1 = (undefined, function (h) {
                               ]);
                               return boyer2.tautologyp(arr8)
                             } else {
-                              tmp7 = boyer2.cadr(y1);
-                              tmp8 = boyer2.car(y1);
+                              tmp7 = boyer2.cadr(y);
+                              tmp8 = boyer2.car(y);
                               arr9 = globalThis.Object.freeze([
                                 tmp8,
                                 truelst
@@ -15754,8 +15754,8 @@ lambda1 = (undefined, function (h) {
                               ]);
                               scrut = boyer2.tautologyp(arr10);
                               if (scrut === true) {
-                                tmp10 = boyer2.caddr(y1);
-                                tmp11 = boyer2.car(y1);
+                                tmp10 = boyer2.caddr(y);
+                                tmp11 = boyer2.car(y);
                                 arr11 = globalThis.Object.freeze([
                                   tmp11,
                                   falselst
@@ -16003,7 +16003,7 @@ lambda1 = (undefined, function (h) {
     }
   } 
   static mkLispList(ls) {
-    let param0, param1, param01, param11, t1, scrut, first1, first0, r, l;
+    let param0, param1, param01, param11, t, scrut, first1, first0, r, l;
     if (ls instanceof NofibPrelude.Cons.class) {
       param0 = ls.head;
       param1 = ls.tail;
@@ -16012,8 +16012,8 @@ lambda1 = (undefined, function (h) {
         param11 = param0.tail;
         if (param01 === "(") {
           if (param11 instanceof NofibPrelude.Nil.class) {
-            t1 = param1;
-            scrut = boyer2.sublist(t1);
+            t = param1;
+            scrut = boyer2.sublist(t);
             if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
               first0 = runtime.Tuple.get(scrut, 0);
               first1 = runtime.Tuple.get(scrut, 1);
@@ -16041,7 +16041,7 @@ lambda1 = (undefined, function (h) {
     }
   } 
   static restOfToken(s) {
-    let param0, param1, h, t1, scrut, first1, first0, a, b, scrut1, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, lambda$this, lambda$this1;
+    let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, arr, tmp, tmp1, tmp2, arr1, tmp3, arr2, lambda$this, lambda$this1;
     if (s instanceof NofibPrelude.Nil.class) {
       arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
@@ -16052,21 +16052,21 @@ lambda1 = (undefined, function (h) {
       param0 = s.head;
       param1 = s.tail;
       h = param0;
-      t1 = param1;
+      t = param1;
       tmp = h === "(";
       lambda$this = runtime.safeCall(lambda(h));
       tmp1 = runtime.short_or(tmp, lambda$this);
       lambda$this1 = runtime.safeCall(lambda1(h));
       scrut1 = runtime.short_or(tmp1, lambda$this1);
       if (scrut1 === true) {
-        tmp2 = NofibPrelude.Cons(h, t1);
+        tmp2 = NofibPrelude.Cons(h, t);
         arr1 = globalThis.Object.freeze([
           NofibPrelude.Nil,
           tmp2
         ]);
         return arr1
       } else {
-        scrut = boyer2.restOfToken(t1);
+        scrut = boyer2.restOfToken(t);
         if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
           first0 = runtime.Tuple.get(scrut, 0);
           first1 = runtime.Tuple.get(scrut, 1);
@@ -16086,22 +16086,22 @@ lambda1 = (undefined, function (h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static getToken(s1) {
-    let param0, param1, h, t1, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, arr1, tmp2, arr2, lambda$this;
-    if (s1 instanceof NofibPrelude.Nil.class) {
+  static getToken(s) {
+    let param0, param1, h, t, scrut, first1, first0, a, b, scrut1, scrut2, arr, tmp, tmp1, arr1, tmp2, arr2, lambda$this;
+    if (s instanceof NofibPrelude.Nil.class) {
       arr = globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
       ]);
       return arr
-    } else if (s1 instanceof NofibPrelude.Cons.class) {
-      param0 = s1.head;
-      param1 = s1.tail;
+    } else if (s instanceof NofibPrelude.Cons.class) {
+      param0 = s.head;
+      param1 = s.tail;
       h = param0;
-      t1 = param1;
+      t = param1;
       scrut2 = h === " ";
       if (scrut2 === true) {
-        return boyer2.getToken(t1)
+        return boyer2.getToken(t)
       } else {
         tmp = h === "(";
         lambda$this = runtime.safeCall(lambda2(h));
@@ -16110,11 +16110,11 @@ lambda1 = (undefined, function (h) {
           tmp1 = NofibPrelude.Cons(h, NofibPrelude.Nil);
           arr1 = globalThis.Object.freeze([
             tmp1,
-            t1
+            t
           ]);
           return arr1
         } else {
-          scrut = boyer21.restOfToken(t1);
+          scrut = boyer21.restOfToken(t);
           if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
             first0 = runtime.Tuple.get(scrut, 0);
             first1 = runtime.Tuple.get(scrut, 1);
@@ -16135,17 +16135,17 @@ lambda1 = (undefined, function (h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static strToToken(s2) {
+  static strToToken(s) {
     let scrut;
-    if (s2 instanceof NofibPrelude.Nil.class) {
+    if (s instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else {
-      scrut = getToken_inst_29_5_tsni(s2);
+      scrut = getToken_inst_29_5_tsni(s);
       return runtime.safeCall(scrut())
     }
   } 
   static assoc(term_x_y) {
-    let first1, first0, term, param0, first11, first01, x8, y1, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
+    let first1, first0, term, param0, first11, first01, x, y, param01, first12, first02, param02, key, rest, scrut, tmp, arr;
     if (runtime.Tuple.isArrayLike(term_x_y) && term_x_y.length === 2) {
       first0 = runtime.Tuple.get(term_x_y, 0);
       first1 = runtime.Tuple.get(term_x_y, 1);
@@ -16155,10 +16155,10 @@ lambda1 = (undefined, function (h) {
         if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
           first01 = runtime.Tuple.get(param0, 0);
           first11 = runtime.Tuple.get(param0, 1);
-          x8 = first01;
-          y1 = first11;
-          if (x8 instanceof boyer2.Conss.class) {
-            param01 = x8.a;
+          x = first01;
+          y = first11;
+          if (x instanceof boyer2.Conss.class) {
+            param01 = x.a;
             if (runtime.Tuple.isArrayLike(param01) && param01.length === 2) {
               first02 = runtime.Tuple.get(param01, 0);
               first12 = runtime.Tuple.get(param01, 1);
@@ -16169,11 +16169,11 @@ lambda1 = (undefined, function (h) {
                 tmp = runtime.safeCall(boyer2.Atom(key));
                 scrut = boyer2.lispListEq(term, tmp);
                 if (scrut === true) {
-                  return x8
+                  return x
                 } else {
                   arr = globalThis.Object.freeze([
                     term,
-                    y1
+                    y
                   ]);
                   return boyer2.assoc(arr)
                 }
@@ -16296,12 +16296,12 @@ lambda1 = (undefined, function (h) {
     }
   } 
   static getLUT(t_lut) {
-    let first1, first0, t1, param0, first2, first11, first01, left, first12, first02, k, kl, right, scrut, scrut1, t2, arr, arr1;
+    let first1, first0, t, param0, first2, first11, first01, left, first12, first02, k, kl, right, scrut, scrut1, t1, arr, arr1;
     if (runtime.Tuple.isArrayLike(t_lut) && t_lut.length === 2) {
       first0 = runtime.Tuple.get(t_lut, 0);
       first1 = runtime.Tuple.get(t_lut, 1);
-      t2 = first0;
       t1 = first0;
+      t = first0;
       if (first1 instanceof boyer2.Empty.class) {
         return NofibPrelude.Nil
       } else if (first1 instanceof boyer2.Node.class) {
@@ -16317,20 +16317,20 @@ lambda1 = (undefined, function (h) {
             k = first02;
             kl = first12;
             right = first2;
-            scrut1 = NofibPrelude.listEq(t1, k);
+            scrut1 = NofibPrelude.listEq(t, k);
             if (scrut1 === true) {
               return kl
             } else {
-              scrut = NofibPrelude.ltList(t1, k, lambda5, lambda6);
+              scrut = NofibPrelude.ltList(t, k, lambda5, lambda6);
               if (scrut === true) {
                 arr = globalThis.Object.freeze([
-                  t1,
+                  t,
                   left
                 ]);
                 return boyer2.getLUT(arr)
               } else {
                 arr1 = globalThis.Object.freeze([
-                  t1,
+                  t,
                   right
                 ]);
                 return boyer2.getLUT(arr1)
@@ -16350,40 +16350,40 @@ lambda1 = (undefined, function (h) {
     }
   } 
   static makelemmas(rules) {
-    let param0, param1, h, t1, tmp, tmp1, tmp2;
+    let param0, param1, h, t, tmp, tmp1, tmp2;
     if (rules instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (rules instanceof NofibPrelude.Cons.class) {
       param0 = rules.head;
       param1 = rules.tail;
       h = param0;
-      t1 = param1;
+      t = param1;
       tmp = strToToken_inst_30_4_tsni(h);
       tmp1 = boyer21.mkLispList(tmp);
-      tmp2 = boyer2.makelemmas(t1);
+      tmp2 = boyer2.makelemmas(t);
       return NofibPrelude.Cons(tmp1, tmp2)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static addlemma(lspls, term) {
-    let param0, first1, first0, x8, y1, z, scrut, scrut1, x9, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2;
+    let param0, first1, first0, x, y, z, scrut, scrut1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2;
     if (lspls instanceof boyer21.Nill.class) {
       return term
     } else if (lspls instanceof boyer21.Atom.class) {
       param0 = lspls.a;
-      x9 = param0;
+      x1 = param0;
       throw globalThis.Object.freeze(new globalThis.Error("error"))
     } else if (lspls instanceof boyer21.Conss.class) {
       param0 = lspls.a;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
-        x8 = first0;
-        y1 = first1;
-        tmp = boyer21.car(y1);
+        x = first0;
+        y = first1;
+        tmp = boyer21.car(y);
         z = tmp;
-        tmp1 = boyer21.tv(x8);
+        tmp1 = boyer21.tv(x);
         tmp2 = NofibPrelude.nofibStringToList("equal");
         scrut = NofibPrelude.listEq(tmp1, tmp2);
         if (scrut === true) {
@@ -16393,8 +16393,8 @@ lambda1 = (undefined, function (h) {
             tmp4 = boyer21.car(z);
             tmp5 = boyer21.tv(tmp4);
             arr = globalThis.Object.freeze([
-              x8,
-              y1
+              x,
+              y
             ]);
             tmp6 = runtime.safeCall(boyer21.Conss(arr));
             _deforest_Deforest_Arr_3_0 = tmp5;
@@ -16417,38 +16417,38 @@ lambda1 = (undefined, function (h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static addlemmalst(lspls1, term1) {
-    let param0, param1, h, t1, tmp;
-    if (lspls1 instanceof NofibPrelude.Nil.class) {
-      return term1
-    } else if (lspls1 instanceof NofibPrelude.Cons.class) {
-      param0 = lspls1.head;
-      param1 = lspls1.tail;
+  static addlemmalst(lspls, term) {
+    let param0, param1, h, t, tmp;
+    if (lspls instanceof NofibPrelude.Nil.class) {
+      return term
+    } else if (lspls instanceof NofibPrelude.Cons.class) {
+      param0 = lspls.head;
+      param1 = lspls.tail;
       h = param0;
-      t1 = param1;
-      tmp = addlemma_inst_32_1_tsni(h, term1);
-      return boyer2.addlemmalst(t1, tmp)
+      t = param1;
+      tmp = addlemma_inst_32_1_tsni(h, term);
+      return boyer2.addlemmalst(t, tmp)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static applysubstlst(alist, y1) {
-    let param0, first1, first0, x8, y2, x9, tmp, tmp1, arr;
-    if (y1 instanceof boyer2.Nill.class) {
+  static applysubstlst(alist, y) {
+    let param0, first1, first0, x, y1, x1, tmp, tmp1, arr;
+    if (y instanceof boyer2.Nill.class) {
       return boyer2.Nill
-    } else if (y1 instanceof boyer2.Atom.class) {
-      param0 = y1.a;
-      x9 = param0;
+    } else if (y instanceof boyer2.Atom.class) {
+      param0 = y.a;
+      x1 = param0;
       throw globalThis.Object.freeze(new globalThis.Error("error"))
-    } else if (y1 instanceof boyer2.Conss.class) {
-      param0 = y1.a;
+    } else if (y instanceof boyer2.Conss.class) {
+      param0 = y.a;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
-        x8 = first0;
-        y2 = first1;
-        tmp = applysubst_inst_33_tsni(alist, x8);
-        tmp1 = boyer2.applysubstlst(alist, y2);
+        x = first0;
+        y1 = first1;
+        tmp = applysubst_inst_33_tsni(alist, x);
+        tmp1 = boyer2.applysubstlst(alist, y1);
         arr = globalThis.Object.freeze([
           tmp,
           tmp1
@@ -16461,16 +16461,16 @@ lambda1 = (undefined, function (h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static applysubst(alist1, x8) {
-    let param0, first1, first0, x9, y2, x10, scrut, param01, first11, first01, y3, tmp, arr, tmp1, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-    if (x8 instanceof boyer2.Nill.class) {
+  static applysubst(alist, x) {
+    let param0, first1, first0, x1, y, x2, scrut, param01, first11, first01, y1, tmp, arr, tmp1, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+    if (x instanceof boyer2.Nill.class) {
       return boyer2.Nill
-    } else if (x8 instanceof boyer2.Atom.class) {
-      param0 = x8.a;
-      x10 = param0;
-      tmp = runtime.safeCall(boyer2.Atom(x10));
+    } else if (x instanceof boyer2.Atom.class) {
+      param0 = x.a;
+      x2 = param0;
+      tmp = runtime.safeCall(boyer2.Atom(x2));
       _deforest_Deforest_Arr_2_0 = tmp;
-      _deforest_Deforest_Arr_2_1 = alist1;
+      _deforest_Deforest_Arr_2_1 = alist;
       arr = () => {
         return match_term_x_y_arm_Deforest_Arr_2_inst_35_34_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
       };
@@ -16480,24 +16480,24 @@ lambda1 = (undefined, function (h) {
         if (runtime.Tuple.isArrayLike(param01) && param01.length === 2) {
           first01 = runtime.Tuple.get(param01, 0);
           first11 = runtime.Tuple.get(param01, 1);
-          y3 = first11;
-          return y3
+          y1 = first11;
+          return y1
         } else {
-          return runtime.safeCall(boyer2.Atom(x10))
+          return runtime.safeCall(boyer2.Atom(x2))
         }
       } else {
-        return runtime.safeCall(boyer2.Atom(x10))
+        return runtime.safeCall(boyer2.Atom(x2))
       }
-    } else if (x8 instanceof boyer2.Conss.class) {
-      param0 = x8.a;
+    } else if (x instanceof boyer2.Conss.class) {
+      param0 = x.a;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
-        x9 = first0;
-        y2 = first1;
-        tmp1 = applysubstlst_inst_35_tsni(alist1, y2);
+        x1 = first0;
+        y = first1;
+        tmp1 = applysubstlst_inst_35_tsni(alist, y);
         arr1 = globalThis.Object.freeze([
-          x9,
+          x1,
           tmp1
         ]);
         return runtime.safeCall(boyer2.Conss(arr1))
@@ -16541,12 +16541,12 @@ lambda1 = (undefined, function (h) {
       }
     }
   } 
-  static onewayunify1(t1, t2, u1) {
-    let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y2, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  static onewayunify1(t1, t2, u) {
+    let scrut, scrut1, scrut2, scrut3, param0, first1, first0, y, arr, tmp, arr1, arr2, tmp1, arr3, tmp2, arr4, arr5, tmp3, arr6, tmp4, arr7, arr8, tmp5, tmp6, tmp7, tmp8, arr9, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
     scrut2 = boyer2.atom(t2);
     if (scrut2 === true) {
       _deforest_Deforest_Arr_2_0 = t2;
-      _deforest_Deforest_Arr_2_1 = u1;
+      _deforest_Deforest_Arr_2_1 = u;
       arr = () => {
         return match_term_x_y_arm_Deforest_Arr_2_inst_38_37_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
       };
@@ -16556,11 +16556,11 @@ lambda1 = (undefined, function (h) {
         if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
           first0 = runtime.Tuple.get(param0, 0);
           first1 = runtime.Tuple.get(param0, 1);
-          y2 = first1;
-          tmp = boyer2.lispListEq(t1, y2);
+          y = first1;
+          tmp = boyer2.lispListEq(t1, y);
           arr1 = globalThis.Object.freeze([
             tmp,
-            u1
+            u
           ]);
           return arr1
         } else {
@@ -16571,7 +16571,7 @@ lambda1 = (undefined, function (h) {
           tmp1 = runtime.safeCall(boyer2.Conss(arr2));
           arr3 = globalThis.Object.freeze([
             tmp1,
-            u1
+            u
           ]);
           tmp2 = runtime.safeCall(boyer2.Conss(arr3));
           arr4 = globalThis.Object.freeze([
@@ -16588,7 +16588,7 @@ lambda1 = (undefined, function (h) {
         tmp3 = runtime.safeCall(boyer2.Conss(arr5));
         arr6 = globalThis.Object.freeze([
           tmp3,
-          u1
+          u
         ]);
         tmp4 = runtime.safeCall(boyer2.Conss(arr6));
         arr7 = globalThis.Object.freeze([
@@ -16602,7 +16602,7 @@ lambda1 = (undefined, function (h) {
       if (scrut1 === true) {
         arr8 = globalThis.Object.freeze([
           false,
-          u1
+          u
         ]);
         return arr8
       } else {
@@ -16612,42 +16612,42 @@ lambda1 = (undefined, function (h) {
         if (scrut === true) {
           tmp7 = boyer2.cdr(t1);
           tmp8 = boyer2.cdr(t2);
-          return onewayunify1lst_inst_38_tsni(tmp7, tmp8, u1)
+          return onewayunify1lst_inst_38_tsni(tmp7, tmp8, u)
         } else {
           arr9 = globalThis.Object.freeze([
             false,
-            u1
+            u
           ]);
           return arr9
         }
       }
     }
   } 
-  static onewayunify(t11, t21) {
-    return onewayunify1_inst_39_40_tsni(t11, t21, boyer2.Nill)
+  static onewayunify(t1, t2) {
+    return onewayunify1_inst_39_40_tsni(t1, t2, boyer2.Nill)
   } 
-  static rewritewithlemmas(t3, l, term2) {
-    let param0, param1, lh, lt, scrut, first1, first0, b, u2, tmp, tmp1, tmp2;
+  static rewritewithlemmas(t, l, term) {
+    let param0, param1, lh, lt, scrut, first1, first0, b, u, tmp, tmp1, tmp2;
     if (l instanceof NofibPrelude.Nil.class) {
-      return t3
+      return t
     } else if (l instanceof NofibPrelude.Cons.class) {
       param0 = l.head;
       param1 = l.tail;
       lh = param0;
       lt = param1;
       tmp = boyer2.cadr(lh);
-      scrut = onewayunify_inst_41_43_tsni(t3, tmp);
+      scrut = onewayunify_inst_41_43_tsni(t, tmp);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
         first0 = runtime.Tuple.get(scrut, 0);
         first1 = runtime.Tuple.get(scrut, 1);
         b = first0;
-        u2 = first1;
+        u = first1;
         if (b === true) {
           tmp1 = boyer2.caddr(lh);
-          tmp2 = applysubst_inst_41_44_tsni(u2, tmp1);
-          return rewrite_inst_41_tsni(tmp2, term2)
+          tmp2 = applysubst_inst_41_44_tsni(u, tmp1);
+          return rewrite_inst_41_tsni(tmp2, term)
         } else {
-          return boyer2.rewritewithlemmas(t3, lt, term2)
+          return boyer2.rewritewithlemmas(t, lt, term)
         }
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -16656,22 +16656,22 @@ lambda1 = (undefined, function (h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static rewriteargs(x9, term3) {
-    let param0, first1, first0, x10, y2, tmp, tmp1, arr;
-    if (x9 instanceof boyer2.Nill.class) {
+  static rewriteargs(x, term) {
+    let param0, first1, first0, x1, y, tmp, tmp1, arr;
+    if (x instanceof boyer2.Nill.class) {
       return boyer2.Nill
-    } else if (x9 instanceof boyer2.Atom.class) {
-      param0 = x9.a;
+    } else if (x instanceof boyer2.Atom.class) {
+      param0 = x.a;
       throw globalThis.Object.freeze(new globalThis.Error("error"))
-    } else if (x9 instanceof boyer2.Conss.class) {
-      param0 = x9.a;
+    } else if (x instanceof boyer2.Conss.class) {
+      param0 = x.a;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
-        x10 = first0;
-        y2 = first1;
-        tmp = rewrite_inst_45_tsni(x10, term3);
-        tmp1 = boyer2.rewriteargs(y2, term3);
+        x1 = first0;
+        y = first1;
+        tmp = rewrite_inst_45_tsni(x1, term);
+        tmp1 = boyer2.rewriteargs(y, term);
         arr = globalThis.Object.freeze([
           tmp,
           tmp1
@@ -16684,35 +16684,35 @@ lambda1 = (undefined, function (h) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
-  static rewrite(x10, term4) {
-    let param0, first1, first0, l11, l21, x11, tmp, arr, tmp1, tmp2, arr1, tmp3, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
-    if (x10 instanceof boyer2.Nill.class) {
+  static rewrite(x, term) {
+    let param0, first1, first0, l1, l2, x1, tmp, arr, tmp1, tmp2, arr1, tmp3, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+    if (x instanceof boyer2.Nill.class) {
       return boyer2.Nill
-    } else if (x10 instanceof boyer2.Atom.class) {
-      param0 = x10.a;
-      x11 = param0;
-      return runtime.safeCall(boyer2.Atom(x11))
-    } else if (x10 instanceof boyer2.Conss.class) {
-      param0 = x10.a;
+    } else if (x instanceof boyer2.Atom.class) {
+      param0 = x.a;
+      x1 = param0;
+      return runtime.safeCall(boyer2.Atom(x1))
+    } else if (x instanceof boyer2.Conss.class) {
+      param0 = x.a;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
         first0 = runtime.Tuple.get(param0, 0);
         first1 = runtime.Tuple.get(param0, 1);
-        l11 = first0;
-        l21 = first1;
-        tmp = rewriteargs_inst_46_tsni(l21, term4);
+        l1 = first0;
+        l2 = first1;
+        tmp = rewriteargs_inst_46_tsni(l2, term);
         arr = globalThis.Object.freeze([
-          l11,
+          l1,
           tmp
         ]);
         tmp1 = runtime.safeCall(boyer2.Conss(arr));
-        tmp2 = boyer2.tv(l11);
+        tmp2 = boyer2.tv(l1);
         _deforest_Deforest_Arr_2_0 = tmp2;
-        _deforest_Deforest_Arr_2_1 = term4;
+        _deforest_Deforest_Arr_2_1 = term;
         arr1 = () => {
           return match_t_lut_arm_Deforest_Arr_2_inst_46_42_tsni(_deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
         };
         tmp3 = getLUT_inst_46_42_tsni(arr1);
-        return rewritewithlemmas_inst_46_tsni(tmp1, tmp3, term4)
+        return rewritewithlemmas_inst_46_tsni(tmp1, tmp3, term)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -16741,9 +16741,9 @@ lambda1 = (undefined, function (h) {
       return "The term is not a tautology"
     }
   } 
-  static tautp(term5) {
+  static tautp(term) {
     let tmp, arr, _deforest_Deforest_Arr_3_0, _deforest_Deforest_Arr_3_1, _deforest_Deforest_Arr_3_2;
-    tmp = rewrite_inst_49_50_tsni(term5, boyer2.lemmas);
+    tmp = rewrite_inst_49_50_tsni(term, boyer2.lemmas);
     _deforest_Deforest_Arr_3_0 = tmp;
     _deforest_Deforest_Arr_3_1 = boyer2.Nill;
     _deforest_Deforest_Arr_3_2 = boyer2.Nill;
@@ -16752,14 +16752,14 @@ lambda1 = (undefined, function (h) {
     };
     return tautologyp_inst_49_51_tsni(arr)
   } 
-  static teststatement(i1) {
+  static teststatement(i) {
     let tmp;
-    tmp = subterm_inst_52_53_tsni(i1);
+    tmp = subterm_inst_52_53_tsni(i);
     return applysubst_inst_52_54_tsni(tmp, boyer2.statement)
   } 
-  static testresult(i2) {
+  static testresult(i) {
     let tmp;
-    tmp = teststatement_inst_55_56_tsni(i2);
+    tmp = teststatement_inst_55_56_tsni(i);
     return tautp_inst_55_57_tsni(tmp)
   } 
   static testBoyer2_nofib(n) {
