@@ -57,6 +57,8 @@ class FieldSel(
   val instantiationId: Opt[InstantiationId],
   val field: Tree.Ident,
   val consVar: ConsVar) extends ConsStrat:
+    // this filter means that this selection occurs in match branches where the
+    // keys (of type ProdVar) are known to be of the type of the ClassLikeSymbols
     val filter = mutable.Map.empty[ProdVar, Ls[ClassLikeSymbol]].withDefaultValue(Nil)
     def updateFilter(p: ProdVar, c: Ls[ClassLikeSymbol]) =
       filter += p -> (c ::: filter(p))
@@ -167,7 +169,7 @@ class DeforestPreAnalyzer(
   
   private var moduleFuns: Opt[Set[BlockMemberSymbol]] = N
   // should only consider imported functions, top level functions and functions inside modules
-  private var shouldConsiderFunDefn = true
+  // private var shouldConsiderFunDefn = true
   // imported functions referring to privately defined `val` or `let`s are not handleable
   private var importedFunctionHandleable = true
   // indicate if a block contains features that current implementation cannot handle (other than side effects)
@@ -184,7 +186,8 @@ class DeforestPreAnalyzer(
     // if shouldConsiderFunDefn && handleable && (imported && importedFunctionHandleable) || !imported then
     if handleable then
       topLevelFunSymToFun += fun.sym -> fun
-    if !imported && shouldConsiderFunDefn && handleable then
+    // if !imported && shouldConsiderFunDefn && handleable then
+    if !imported && handleable then
       topLevelLikeComputations ::= fun
       val dummyRef = Value.Ref(fun.sym)
       resultIdToResult += dummyRef.uid -> dummyRef
@@ -344,12 +347,6 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                 cc.hit(h)
               preAnalyzer.getProdVarForSym(sym)
             case Nil => 
-              // if processedFunToCollector.contains(s) then
-              // // if cc.trackedFunctionSymbolsInOneRecGroup.contains(s) then
-              //   processingDefs.headOption.foreach: h =>
-              //     cc.hit(h)
-              //   preAnalyzer.getProdVarForSym(s)
-              // else
               processedFunToCollector.get(s) match
               case Some(otherCC) =>
                 cc.hit(otherCC.trackedFunctionSymbolsInOneRecGroup)

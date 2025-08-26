@@ -308,13 +308,6 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             k
           case _ =>
             lastWords(s"not here ${preAnalyzer.getResult(matchId._1)}@${matchId._1}@${matchId._2.toReadableCallPath(preAnalyzer)}@${matchId._2}")
-    // def getAllFunDefs =
-    //   for
-    //     (matchId, _) <- rewritePrepare.fusingMatchIdToMatchRestFunSymbols
-    //     if store(matchId).isLeft
-    //   yield
-    //     val L(fdefn, _) = store(matchId): @unchecked
-    //     fdefn
     
     // returns the block of match rest, or a `Return` block that calls the function extracted
     // from the match rest
