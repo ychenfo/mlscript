@@ -142,6 +142,7 @@ class DeforestPreAnalyzer(
   val selsToMatchingArmsContainingIt = mutable.Map.empty[ResultId, Ls[ResultId -> Opt[ClassLikeSymbol]]]
   val symToStratVar = mutable.Map.empty[Symbol, ProdVar]
   val usedFunSyms = mutable.Set.empty[BlockMemberSymbol]
+  val ownedValDefSyms = mutable.Set.empty[BlockMemberSymbol]
   lazy val topLevelDefinedFunSyms = topLevelFunSymToFun.keySet
   val nonTopLevelDefinedFunSyms = mutable.Set.empty[BlockMemberSymbol]
   def getProdVarForSym(s: Symbol) = s match
@@ -296,6 +297,11 @@ class DeforestPreAnalyzer(
     case _: ClsLikeDefn => () // no need to traverse class defn body at all
     case _ => super.applyDefn(defn)
   
+  override def applyValDefn(defn: ValDefn): Unit =
+    if defn.isOwned then
+      ownedValDefSyms.add(defn.sym)
+    super.applyValDefn(defn)
+  
   override def applyArg(arg: Arg): Unit =
     if arg.spread.isDefined then handleable = false
     super.applyArg(arg)
@@ -396,6 +402,11 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
       .diff(preAnalyzer.nonTopLevelDefinedFunSyms)
       .foreach: usedButNotDefined =>
         cc.constrain(NoProd, preAnalyzer.getProdVarForSym(usedButNotDefined).asConsStrat)
+    
+    preAnalyzer.ownedValDefSyms.foreach: s =>
+      cc.constrain(NoProd, preAnalyzer.getProdVarForSym(s).asConsStrat)
+      cc.constrain(preAnalyzer.getProdVarForSym(s), NoCons)
+    
     cc.constraints
   
   def processFunDefn(defn: FunDefn, processingDefs: Ls[BlockMemberSymbol]): ConstraintsAndCacheHitCollector =
