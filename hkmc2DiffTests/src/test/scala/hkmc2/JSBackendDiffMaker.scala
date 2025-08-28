@@ -24,7 +24,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
   val showJS = NullaryCommand("sjs")
   val showRepl = NullaryCommand("showRepl")
   val traceJS = NullaryCommand("traceJS")
-  val deforestFlag = NullaryCommand("deforest")
+  val deforestFlag = deforestation //NullaryCommand("deforest")
   val deforestInfo = NullaryCommand("deforestInfo")
   val expect = Command("expect"): ln =>
     ln.trim

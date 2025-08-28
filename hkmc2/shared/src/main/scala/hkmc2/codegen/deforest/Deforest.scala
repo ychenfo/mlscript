@@ -22,32 +22,25 @@ case class ImportedInfo(
 object ImportedInfo:
   val empty = ImportedInfo(Nil, Nil, Nil, Nil, Nil, Nil)
 
-class GetInfoOfImportedFile(publicModName: String) extends BlockTraverser:
+class GetInfoOfImportedFile(cfg: Config.Deforestation) extends BlockTraverser:
   var funAndDefs: Ls[BlockMemberSymbol -> FunDefn] = Nil
   var innerToOutter: Opt[InnerSymbol -> BlockMemberSymbol] = N
   var lazySymbols: Ls[Symbol] = Nil
   var forceSymbols: Ls[Symbol] = Nil
   var privateFunSyms = Set.empty[BlockMemberSymbol]
-  // private var shouldCollectFunDefn = false
   override def applyDefn(defn: Defn): Unit = defn match
-    case clsLike: ClsLikeDefn if (clsLike.k is syntax.Mod) && clsLike.sym.nme === publicModName =>
+    case clsLike: ClsLikeDefn if (clsLike.k is syntax.Mod) && cfg.importedPublicModNames(clsLike.sym.nme) =>
       innerToOutter = S(clsLike.isym -> clsLike.sym)
       funAndDefs :::= clsLike.methods.map(f => f.sym -> f)
-      // shouldCollectFunDefn = true
       super.applyDefn(defn)
-      // shouldCollectFunDefn = false
-    case lzClass: ClsLikeDefn if (lzClass.k is syntax.Cls) && lzClass.sym.nme === "Lazy" =>
-      lazySymbols ::= lzClass.isym // the symbol attached to select is the inner symbol
     case _ => super.applyDefn(defn)
   
   override def applyFunDefn(fun: FunDefn): Unit =
     privateFunSyms += fun.sym
-    if fun.sym.nme === "lazy" then
+    if cfg.seeThroughLazySymbolsNames.contains(fun.sym.nme) then
       lazySymbols ::= fun.sym
-    if fun.sym.nme === "force" then
+    if cfg.seeThroughForceSymbolsNames.contains(fun.sym.nme) then
       forceSymbols ::= fun.sym
-    // else if shouldCollectFunDefn then
-    //   funAndDefs ::= fun.sym -> fun
   
   def apply(b: Block): Unit =
     applyBlock(b)
@@ -58,13 +51,15 @@ object Deforest:
     val importedFileNameToLoweredBlock = mutable.Map.empty[os.Path, Program]
     val topLevelFunInPrevDiffBlocks = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   
-  def deforestImport2(path: Str, wd: os.Path)(using
+  def deforestImport(path: Str, wd: os.Path)(using
     cfg: Config,
     raise: Raise,
     st: State,
     elabSt: Elaborator.State,
   ): ImportedInfo =
-    given TraceLogger = new TraceLogger{override def doTrace: Bool = false}
+    given TraceLogger = new TraceLogger:
+      override def doTrace: Bool = false
+    
     val file =
       if path.startsWith("/")
       then os.Path(path)
@@ -75,12 +70,12 @@ object Deforest:
       val resolver = Resolver(tl)
       resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty)
       val low = codegen.Lowering()(using
-      cfg.copy(liftDefns = S(LiftDefns())), tl, raise, elabSt, newCtx)
+        cfg.copy(liftDefns = S(LiftDefns())), tl, raise, elabSt, newCtx)
       low.program(semBlk)
-    val traverser = new GetInfoOfImportedFile(file.baseName)
+    val traverser = new GetInfoOfImportedFile(cfg.deforest.get)
     traverser(prog.main)
     ImportedInfo(
-      Nil,
+      prog.imports,
       traverser.innerToOutter.toList,
       traverser.funAndDefs,
       traverser.lazySymbols,
@@ -95,27 +90,13 @@ object Deforest:
     st: State,
     elabSt: Elaborator.State,
     preludeFile: os.Path
-  ): Either[Program -> String -> String, String] =
-    // val innerToOutterSym -> importedFunAndDefns = p.imports
-    //   .find: (outterSym, path) =>
-    //     path.contains("NofibPrelude.mjs") // TODO: use config instead of hard code
-    //   .fold(N -> Nil): (outterSym, path)  =>
-    //     deforestImport(path.replace(".mjs", ".mls"), wd) match
-    //       case inner -> outter -> funDefs =>
-    //         // println(s"$outter: ${outter.uid}")
-    //         // println(s"$outterSym: ${outterSym.uid}")
-    //         // assert(outter is outterSym)
-    //         S(inner -> outter) -> funDefs
-    // val specialImports = p.imports
-    //   .filter: (_, path) =>
-    //     path.contains("NofibPrelude")
-    
+  ): Either[Program -> String -> String, String] =    
     val importedInfo =
         val trulyImported = p.imports
           .find: (outterSym, path) =>
-            path.contains("NofibPrelude.mjs")
+            cfg.deforest.get.importedPublicModNames.exists(path.contains)
           .fold(ImportedInfo.empty): (outterSym, path) =>
-            deforestImport2(path.replace(".mjs", ".mls"), wd)
+            deforestImport(path.replace(".mjs", ".mls"), wd)
         trulyImported.copy(funAndDefs = trulyImported.funAndDefs ++ st.topLevelFunInPrevDiffBlocks)
     try
       // val newMain = st.topLevelFunInPrevDiffBlocks.foldRight(p.main):

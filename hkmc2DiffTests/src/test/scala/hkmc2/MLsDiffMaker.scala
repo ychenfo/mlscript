@@ -63,6 +63,7 @@ abstract class MLsDiffMaker extends DiffMaker:
   val stackSafe = Command("stackSafe")(_.trim)
   val liftDefns = NullaryCommand("lift")
   val importQQ = NullaryCommand("qq")
+  val deforestation = NullaryCommand("deforest")
   
   def mkConfig: Config =
     import Config.*
@@ -87,7 +88,12 @@ abstract class MLsDiffMaker extends DiffMaker:
                 S(StackSafety(stackLimit = value))
         ,
       )),
-      liftDefns = Opt.when(liftDefns.isSet)(LiftDefns())
+      liftDefns = Opt.when(liftDefns.isSet)(LiftDefns()),
+      deforest = Opt.when(deforestation.isSet):
+        Config.Deforestation(
+          importedPublicModNames = Set("NofibPrelude"),
+          seeThroughForceSymbolsNames = Set("force"),
+          seeThroughLazySymbolsNames = Set("lazy"))
     )
   
   

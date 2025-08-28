@@ -95,7 +95,15 @@ class Watcher(dirs: Ls[File]):
       val isModuleFile = path.segments.contains("mlscript-compile")
       if isModuleFile
       then
-        given Config = Config.default
+        given Config =
+          if path.segments.contains("nofib") then
+            Config.default.copy(deforest = S(Config.Deforestation(
+              importedPublicModNames = Set("NofibPrelude"),
+              seeThroughLazySymbolsNames = Set("lazy"),
+              seeThroughForceSymbolsNames = Set("force")
+            )))
+          else
+            Config.default
         MLsCompiler(preludePath, outputConsumer => outputConsumer(System.out.println)).compileModule(path)
       else
         val dm = new MainDiffMaker(rootPath.toString, path, preludePath, predefPath, relativeName):

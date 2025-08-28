@@ -1819,12 +1819,12 @@ lambda = (undefined, function (f1, g) {
   static filter_lz(p, ls) {
     let tmp;
     tmp = runtime.safeCall(lambda7(p, ls));
-    return runtime.safeCall(NofibPrelude.Lazy(tmp))
+    return NofibPrelude.lazy(tmp)
   } 
   static nubBy_lz(eq, ls) {
     let tmp;
     tmp = runtime.safeCall(lambda8(eq, ls));
-    return runtime.safeCall(NofibPrelude.Lazy(tmp))
+    return NofibPrelude.lazy(tmp)
   } 
   static nub_lz(ls) {
     return NofibPrelude.nubBy_lz(lambda10, ls)

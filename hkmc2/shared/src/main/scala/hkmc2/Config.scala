@@ -12,6 +12,7 @@ case class Config(
   sanityChecks: Opt[SanityChecks],
   effectHandlers: Opt[EffectHandlers],
   liftDefns: Opt[LiftDefns],
+  deforest: Opt[Deforestation]
 ):
   
   def stackSafety: Opt[StackSafety] = effectHandlers.flatMap(_.stackSafety)
@@ -26,6 +27,7 @@ object Config:
     // sanityChecks = S(SanityChecks(light = true)),
     effectHandlers = N,
     liftDefns = N,
+    deforest = N
   )
   
   case class SanityChecks(light: Bool)
@@ -39,6 +41,12 @@ object Config:
     )
 
   case class LiftDefns() // there may be other settings in the future, having it as a case class now
+  
+  case class Deforestation(
+    val importedPublicModNames: Set[String],
+    val seeThroughLazySymbolsNames: Set[String],
+    val seeThroughForceSymbolsNames: Set[String]
+  )
   
 end Config
 
