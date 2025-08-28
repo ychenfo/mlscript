@@ -55,7 +55,8 @@ class GetInfoOfImportedFile(publicModName: String) extends BlockTraverser:
 
 object Deforest:
   class State:
-    val importedFileNameToLoweredBlock = collection.mutable.Map.empty[os.Path, Program]
+    val importedFileNameToLoweredBlock = mutable.Map.empty[os.Path, Program]
+    val topLevelFunInPrevDiffBlocks = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   
   def deforestImport2(path: Str, wd: os.Path)(using
     cfg: Config,
@@ -109,12 +110,16 @@ object Deforest:
     //   .filter: (_, path) =>
     //     path.contains("NofibPrelude")
     
-    val importedInfo = p.imports
-      .find: (outterSym, path) =>
-        path.contains("NofibPrelude.mjs")
-      .fold(ImportedInfo.empty): (outterSym, path) =>
-        deforestImport2(path.replace(".mjs", ".mls"), wd)
+    val importedInfo =
+        val trulyImported = p.imports
+          .find: (outterSym, path) =>
+            path.contains("NofibPrelude.mjs")
+          .fold(ImportedInfo.empty): (outterSym, path) =>
+            deforestImport2(path.replace(".mjs", ".mls"), wd)
+        trulyImported.copy(funAndDefs = trulyImported.funAndDefs ++ st.topLevelFunInPrevDiffBlocks)
     try
+      // val newMain = st.topLevelFunInPrevDiffBlocks.foldRight(p.main):
+      //   case ((fSym, fDef), acc) => Define(fDef, acc)
       val pre = new DeforestPreAnalyzer(p.main, importedInfo)
       val col = new DeforestConstraintsCollector(pre)
       // col.funSymToProdStratScheme.recursiveGroups.foreach: g =>

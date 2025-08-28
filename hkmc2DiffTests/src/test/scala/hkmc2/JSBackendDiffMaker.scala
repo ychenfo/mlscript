@@ -255,6 +255,11 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         val deforestLow = ltl.givenIn:
           codegen.Lowering()
         val le = deforestLow.program(blk)
+        
+        val collector = CollectTopLevelDefs(le.main.definedVars.filter(_.isFunction).map(_.asInstanceOf[BlockMemberSymbol]))
+        deforestState.topLevelFunInPrevDiffBlocks.addAll(collector.apply(le.main))
+        
+        
         preludeFile.givenIn:
           Deforest(le, wd) match
             case R(msg) => output(s"Not deforestable: $msg")
@@ -286,3 +291,14 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
           
           output("<<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<")
 
+
+
+class CollectTopLevelDefs(toCollect: Set[BlockMemberSymbol]) extends BlockTraverser:
+  val res = mutable.Map.empty[BlockMemberSymbol, FunDefn]
+  override def applyFunDefn(fun: FunDefn): Unit =
+    if toCollect.contains(fun.sym) then
+      res += fun.sym -> fun
+  def apply(b: Block): Map[BlockMemberSymbol, FunDefn] =
+    applyBlock(b)
+    res.toMap
+      

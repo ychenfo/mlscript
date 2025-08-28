@@ -229,7 +229,14 @@ main()
 //│ )
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ 
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref($tmp))))@3@inst_0_1_2_tsni --> Ref(ls)@inst_0_1_2_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(2))), Arg(None,Ref($tmp))))@4@inst_0_1_2_tsni --> Ref(ls)@inst_0_1_2_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(3))), Arg(None,Ref(member:Nil))))@5@inst_0_1_2_tsni --> Ref(ls)@inst_0_1_2_tsni@Cons
+//│ Ref(member:Nil)@6@inst_0_1_2_tsni --> Ref(ls)@inst_0_1_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref($tmp))))@7@inst_0_1_tsni --> Ref(ls)@inst_0_1_2_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(2))), Arg(None,Ref($tmp))))@8@inst_0_1_tsni --> Ref(ls)@inst_0_1_2_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(3))), Arg(None,Ref(member:Nil))))@9@inst_0_1_tsni --> Ref(ls)@inst_0_1_2_tsni@Cons
+//│ Ref(member:Nil)@10@inst_0_1_tsni --> Ref(ls)@inst_0_1_2_tsni@Nil
 //│ -------------- executing -------------
 //│ = Cons(
 //│   [1, 1],
