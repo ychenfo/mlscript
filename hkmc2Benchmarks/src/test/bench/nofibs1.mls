@@ -1,0 +1,153 @@
+:js
+
+import "./mlscript-compile/Benchmark.mls"
+open Benchmark
+
+
+:silent
+let suite = mkSuite()
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/ansi.mls"
+suite.add("ansi-deforest", () => ansi.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/ansi.mls"
+suite.add("ansi", () => ansi.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/atom.mls"
+suite.add("atom-deforest", () => atom.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/atom.mls"
+suite.add("atom", () => atom.main())
+
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/awards.mls"
+suite.add("awards-deforest", () => awards.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/awards.mls"
+suite.add("awards", () => awards.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/banner.mls"
+suite.add("banner-deforest", () => banner.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/banner.mls"
+suite.add("banner", () => banner.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/lcss.mls"
+suite.add("lcss-deforest", () => lcss.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/lcss.mls"
+suite.add("lcss", () => lcss.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/boyer.mls"
+suite.add("boyer-deforest", () => boyer.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/boyer.mls"
+suite.add("boyer", () => boyer.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/boyer2.mls"
+suite.add("boyer2-deforest", () => boyer2.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/boyer2.mls"
+suite.add("boyer2", () => boyer2.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/calendar.mls"
+suite.add("calendar-deforest", () => calendar.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/calendar.mls"
+suite.add("calendar", () => calendar.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/cichelli.mls"
+suite.add("cichelli-deforest", () => cichelli.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/cichelli.mls"
+suite.add("cichelli", () => cichelli.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/circsim.mls"
+suite.add("circsim-deforest", () => circsim.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/circsim.mls"
+suite.add("circsim", () => circsim.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/clausify.mls"
+suite.add("clausify-deforest", () => clausify.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/clausify.mls"
+suite.add("clausify", () => clausify.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/constraints.mls"
+suite.add("constraints-deforest", () => constraints.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/constraints.mls"
+suite.add("constraints", () => constraints.main())
+
+
+runSuite(suite)
+writeResults(suite, "nofibs1.json")

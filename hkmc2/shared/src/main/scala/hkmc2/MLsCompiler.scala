@@ -98,7 +98,7 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
       val le = low.program(blk)
       
       val lowered =
-        if !file.toString.contains("nofib") then // TODO:
+        if cfg.deforest.isEmpty then
           le
         else
           val deforestLow = ltl.givenIn:

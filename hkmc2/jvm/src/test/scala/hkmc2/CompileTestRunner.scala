@@ -49,7 +49,7 @@ class CompileTestRunner
         val preludePath = mainTestDir/"mlscript"/"decls"/"Prelude.mls"
         
         given Config =
-          if file.segments.contains("nofib") then
+          if file.segments.contains("nofib-deforest") then
             Config.default.copy(deforest = S(Config.Deforestation(
               importedPublicModNames = Set("NofibPrelude"),
               seeThroughLazySymbolsNames = Set("lazy"),

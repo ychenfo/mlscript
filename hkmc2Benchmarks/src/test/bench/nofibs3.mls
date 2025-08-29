@@ -1,0 +1,86 @@
+:js
+
+import "./mlscript-compile/Benchmark.mls"
+open Benchmark
+
+
+:silent
+let suite = mkSuite()
+
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/rsa.mls"
+suite.add("rsa-deforest", () => rsa.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/rsa.mls"
+suite.add("rsa", () => rsa.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/scc.mls"
+suite.add("scc-deforest", () => scc.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/scc.mls"
+suite.add("scc", () => scc.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/secretary.mls"
+suite.add("secretary-deforest", () => secretary.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/secretary.mls"
+suite.add("secretary", () => secretary.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/sorting.mls"
+suite.add("sorting-deforest", () => sorting.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/sorting.mls"
+suite.add("sorting", () => sorting.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/sphere.mls"
+suite.add("sphere-deforest", () => sphere.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/sphere.mls"
+suite.add("sphere", () => sphere.main())
+
+
+// =======================
+
+
+// need more stack
+// :silent
+// import "../../test/bench/mlscript-compile/nofib-deforest/treejoin.mls"
+// suite.add("treejoin-deforest", () => treejoin.main())
+
+// :silent
+// import "../../test/bench/mlscript-compile/nofib/treejoin.mls"
+// suite.add("treejoin", () => treejoin.main())
+
+
+
+
+
+runSuite(suite)
+writeResults(suite, "nofibs3.json")

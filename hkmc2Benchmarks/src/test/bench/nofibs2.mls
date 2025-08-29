@@ -1,0 +1,240 @@
+:js
+
+import "./mlscript-compile/Benchmark.mls"
+open Benchmark
+
+
+:silent
+let suite = mkSuite()
+
+
+
+
+// need more stack
+// :silent
+// import "../../test/bench/mlscript-compile/nofib-deforest/cryptarithm1.mls"
+// suite.add("cryptarithm1-deforest", () => cryptarithm1.main())
+
+// :silent
+// import "../../test/bench/mlscript-compile/nofib/cryptarithm1.mls"
+// suite.add("cryptarithm1", () => cryptarithm1.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/cryptarithm2.mls"
+suite.add("cryptarithm2-deforest", () => cryptarithm2.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/cryptarithm2.mls"
+suite.add("cryptarithm2", () => cryptarithm2.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/cse.mls"
+suite.add("cse-deforest", () => cse.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/cse.mls"
+suite.add("cse", () => cse.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/eliza.mls"
+suite.add("eliza-deforest", () => eliza.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/eliza.mls"
+suite.add("eliza", () => eliza.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/gcd.mls"
+suite.add("gcd-deforest", () => gcd.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/gcd.mls"
+suite.add("gcd", () => gcd.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/integer.mls"
+suite.add("integer-deforest", () => integer.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/integer.mls"
+suite.add("integer", () => integer.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/knights.mls"
+suite.add("knights-deforest", () => knights.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/knights.mls"
+suite.add("knights", () => knights.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/lambda.mls"
+suite.add("lambda-deforest", () => lambda.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/lambda.mls"
+suite.add("lambda", () => lambda.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/lastpiece.mls"
+suite.add("lastpiece-deforest", () => lastpiece.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/lastpiece.mls"
+suite.add("lastpiece", () => lastpiece.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/life.mls"
+suite.add("life-deforest", () => life.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/life.mls"
+suite.add("life", () => life.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/mandel.mls"
+suite.add("mandel-deforest", () => mandel.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/mandel.mls"
+suite.add("mandel", () => mandel.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/mandel2.mls"
+suite.add("mandel2-deforest", () => mandel2.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/mandel2.mls"
+suite.add("mandel2", () => mandel2.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/mate.mls"
+suite.add("mate-deforest", () => mate.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/mate.mls"
+suite.add("mate", () => mate.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/minimax.mls"
+suite.add("minimax-deforest", () => minimax.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/minimax.mls"
+suite.add("minimax", () => minimax.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/para.mls"
+suite.add("para-deforest", () => para.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/para.mls"
+suite.add("para", () => para.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/power.mls"
+suite.add("power-deforest", () => power.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/power.mls"
+suite.add("power", () => power.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/pretty.mls"
+suite.add("pretty-deforest", () => pretty.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/pretty.mls"
+suite.add("pretty", () => pretty.main())
+
+
+// =======================
+
+
+:silent
+import "../../test/bench/mlscript-compile/nofib-deforest/primetest.mls"
+suite.add("primetest-deforest", () => primetest.main())
+
+:silent
+import "../../test/bench/mlscript-compile/nofib/primetest.mls"
+suite.add("primetest", () => primetest.main())
+
+
+// =======================
+
+// need more stack
+// :silent
+// import "../../test/bench/mlscript-compile/nofib-deforest/puzzle.mls"
+// suite.add("puzzle-deforest", () => puzzle.main())
+
+// :silent
+// import "../../test/bench/mlscript-compile/nofib/puzzle.mls"
+// suite.add("puzzle", () => puzzle.main())
+
+
+runSuite(suite)
+writeResults(suite, "nofibs2.json")
