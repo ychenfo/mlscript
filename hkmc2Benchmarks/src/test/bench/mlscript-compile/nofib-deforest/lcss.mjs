@@ -933,9 +933,12 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-(class lcss {
+globalThis.Object.freeze(class lcss {
   static {
-    lcss1 = lcss;
+    lcss1 = this
+  }
+  constructor() {
+    runtime.Unit;
   }
   static algb2(x, k0j1, k1j1, yss) {
     let param0, param1, first1, first0, y, k0j, ys, kjcurr, scrut, tmp, arr, tmp1;
@@ -1112,7 +1115,7 @@ listcomp_fun = function listcomp_fun(listcomp_fun_para) {
     tmp = testLCSS_nofib_inst_9_10_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "lcss"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "lcss"]; 
 });
 let lcss = lcss1; export default lcss;

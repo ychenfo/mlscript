@@ -1493,9 +1493,14 @@ lambda = (undefined, function (prog) {
     return lambda$(prog, c, x)
   }
 });
-(class ansi {
+globalThis.Object.freeze(class ansi {
   static {
-    ansi1 = ansi;
+    ansi1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp;
     tmp = NofibPrelude.nofibStringToList("L");
     this.cls = tmp;
@@ -1814,7 +1819,7 @@ lambda = (undefined, function (prog) {
     tmp = testAnsi_nofib_inst_21_22_tsni(1);
     return NofibPrelude.nofibListToString(tmp)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "ansi"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "ansi"]; 
 });
 let ansi = ansi1; export default ansi;

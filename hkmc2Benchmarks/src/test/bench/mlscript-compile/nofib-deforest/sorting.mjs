@@ -962,17 +962,17 @@ mkTree_inst_0_1_2_tsni = function mkTree_inst_0_1_2_tsni(innerparam) {
 to_tree_inst_0_1_2_3_tsni = function to_tree_inst_0_1_2_3_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, y1, scrut1, tmp, tmp1, tmp2, tmp3;
   if (t instanceof sorting1.Tip2.class) {
-    return runtime.safeCall(sorting1.Twig2(x))
+    return sorting1.Twig2(x)
   } else if (t instanceof sorting1.Twig2.class) {
     param0 = t.a;
     y1 = param0;
     scrut1 = leList_inst_0_1_2_3_7_tsni(x, y1);
     if (scrut1 === true) {
-      tmp = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, tmp, sorting1.Tip2))
+      tmp = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, tmp, sorting1.Tip2)
     } else {
-      tmp1 = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, sorting1.Tip2, tmp1))
+      tmp1 = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, sorting1.Tip2, tmp1)
     }
   } else if (t instanceof sorting1.Branch2.class) {
     param0 = t.a;
@@ -984,10 +984,10 @@ to_tree_inst_0_1_2_3_tsni = function to_tree_inst_0_1_2_3_tsni(x, t) {
     scrut = leList_inst_0_1_2_3_4_tsni(x, y);
     if (scrut === true) {
       tmp2 = to_tree_inst_0_1_2_3_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch2(y, tmp2, r))
+      return sorting1.Branch2(y, tmp2, r)
     } else {
       tmp3 = to_tree_inst_0_1_2_3_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch2(y, l, tmp3))
+      return sorting1.Branch2(y, l, tmp3)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -1136,7 +1136,7 @@ mkTree_inst_0_8_9_tsni = function mkTree_inst_0_8_9_tsni(innerparam) {
 to_tree_inst_0_8_9_10_tsni = function to_tree_inst_0_8_9_10_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, tmp, tmp1;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -1147,10 +1147,10 @@ to_tree_inst_0_8_9_10_tsni = function to_tree_inst_0_8_9_10_tsni(x, t) {
     scrut = leList_inst_0_8_9_10_11_tsni(x, y);
     if (scrut === true) {
       tmp = to_tree_inst_0_8_9_10_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch(y, tmp, r))
+      return sorting1.Branch(y, tmp, r)
     } else {
       tmp1 = to_tree_inst_0_8_9_10_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch(y, l, tmp1))
+      return sorting1.Branch(y, l, tmp1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -2252,12 +2252,12 @@ mix_inst_0_38_39_40_tsni = function mix_inst_0_38_39_40_tsni(l, r) {
           scrut = leList_inst_0_38_39_40_41_tsni(x, y);
           if (scrut === true) {
             tmp = mix_inst_0_38_39_40_tsni(l1, r1);
-            tmp1 = runtime.safeCall(sorting1.Branch(y, l2, r2));
-            return runtime.safeCall(sorting1.Branch(x, tmp, tmp1))
+            tmp1 = sorting1.Branch(y, l2, r2);
+            return sorting1.Branch(x, tmp, tmp1)
           } else {
-            tmp2 = runtime.safeCall(sorting1.Branch(x, l1, r1));
+            tmp2 = sorting1.Branch(x, l1, r1);
             tmp3 = mix_inst_0_38_39_40_tsni(l2, r2);
-            return runtime.safeCall(sorting1.Branch(y, tmp2, tmp3))
+            return sorting1.Branch(y, tmp2, tmp3)
           }
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -2353,7 +2353,7 @@ heap_inst_0_38_42_tsni = function heap_inst_0_38_42_tsni(k, xs) {
 to_heap_inst_0_38_42_43_tsni = function to_heap_inst_0_38_42_43_tsni(k, x, t) {
   let param0, param1, param2, y, l, r, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -2367,23 +2367,23 @@ to_heap_inst_0_38_42_43_tsni = function to_heap_inst_0_38_42_43_tsni(k, x, t) {
       if (scrut3 === true) {
         tmp = NofibPrelude.intDiv(k, 2);
         tmp1 = to_heap_inst_0_38_42_43_tsni(tmp, y, l);
-        return runtime.safeCall(sorting1.Branch(x, tmp1, r))
+        return sorting1.Branch(x, tmp1, r)
       } else {
         scrut1 = leList_inst_0_38_42_43_45_tsni(x, y);
         if (scrut1 === true) {
           tmp2 = NofibPrelude.intDiv(k, 2);
           tmp3 = to_heap_inst_0_38_42_43_tsni(tmp2, y, r);
-          return runtime.safeCall(sorting1.Branch(x, l, tmp3))
+          return sorting1.Branch(x, l, tmp3)
         } else {
           scrut = sorting1.odd(k);
           if (scrut === true) {
             tmp4 = NofibPrelude.intDiv(k, 2);
             tmp5 = to_heap_inst_0_38_42_43_tsni(tmp4, x, l);
-            return runtime.safeCall(sorting1.Branch(y, tmp5, r))
+            return sorting1.Branch(y, tmp5, r)
           } else {
             tmp6 = NofibPrelude.intDiv(k, 2);
             tmp7 = to_heap_inst_0_38_42_43_tsni(tmp6, x, r);
-            return runtime.safeCall(sorting1.Branch(y, l, tmp7))
+            return sorting1.Branch(y, l, tmp7)
           }
         }
       }
@@ -2392,17 +2392,17 @@ to_heap_inst_0_38_42_43_tsni = function to_heap_inst_0_38_42_43_tsni(k, x, t) {
       if (scrut1 === true) {
         tmp8 = NofibPrelude.intDiv(k, 2);
         tmp9 = to_heap_inst_0_38_42_43_tsni(tmp8, y, r);
-        return runtime.safeCall(sorting1.Branch(x, l, tmp9))
+        return sorting1.Branch(x, l, tmp9)
       } else {
         scrut = sorting1.odd(k);
         if (scrut === true) {
           tmp10 = NofibPrelude.intDiv(k, 2);
           tmp11 = to_heap_inst_0_38_42_43_tsni(tmp10, x, l);
-          return runtime.safeCall(sorting1.Branch(y, tmp11, r))
+          return sorting1.Branch(y, tmp11, r)
         } else {
           tmp12 = NofibPrelude.intDiv(k, 2);
           tmp13 = to_heap_inst_0_38_42_43_tsni(tmp12, x, r);
-          return runtime.safeCall(sorting1.Branch(y, l, tmp13))
+          return sorting1.Branch(y, l, tmp13)
         }
       }
     }
@@ -3098,7 +3098,7 @@ compareList_inst_51_28_19_tsni = function compareList_inst_51_28_19_tsni(xs, ys)
 to_heap_inst_52_43_tsni = function to_heap_inst_52_43_tsni(k, x, t) {
   let param0, param1, param2, y, l, r, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -3112,23 +3112,23 @@ to_heap_inst_52_43_tsni = function to_heap_inst_52_43_tsni(k, x, t) {
       if (scrut3 === true) {
         tmp = NofibPrelude.intDiv(k, 2);
         tmp1 = to_heap_inst_52_43_tsni(tmp, y, l);
-        return runtime.safeCall(sorting1.Branch(x, tmp1, r))
+        return sorting1.Branch(x, tmp1, r)
       } else {
         scrut1 = leList_inst_52_43_45_tsni(x, y);
         if (scrut1 === true) {
           tmp2 = NofibPrelude.intDiv(k, 2);
           tmp3 = to_heap_inst_52_43_tsni(tmp2, y, r);
-          return runtime.safeCall(sorting1.Branch(x, l, tmp3))
+          return sorting1.Branch(x, l, tmp3)
         } else {
           scrut = sorting1.odd(k);
           if (scrut === true) {
             tmp4 = NofibPrelude.intDiv(k, 2);
             tmp5 = to_heap_inst_52_43_tsni(tmp4, x, l);
-            return runtime.safeCall(sorting1.Branch(y, tmp5, r))
+            return sorting1.Branch(y, tmp5, r)
           } else {
             tmp6 = NofibPrelude.intDiv(k, 2);
             tmp7 = to_heap_inst_52_43_tsni(tmp6, x, r);
-            return runtime.safeCall(sorting1.Branch(y, l, tmp7))
+            return sorting1.Branch(y, l, tmp7)
           }
         }
       }
@@ -3137,17 +3137,17 @@ to_heap_inst_52_43_tsni = function to_heap_inst_52_43_tsni(k, x, t) {
       if (scrut1 === true) {
         tmp8 = NofibPrelude.intDiv(k, 2);
         tmp9 = to_heap_inst_52_43_tsni(tmp8, y, r);
-        return runtime.safeCall(sorting1.Branch(x, l, tmp9))
+        return sorting1.Branch(x, l, tmp9)
       } else {
         scrut = sorting1.odd(k);
         if (scrut === true) {
           tmp10 = NofibPrelude.intDiv(k, 2);
           tmp11 = to_heap_inst_52_43_tsni(tmp10, x, l);
-          return runtime.safeCall(sorting1.Branch(y, tmp11, r))
+          return sorting1.Branch(y, tmp11, r)
         } else {
           tmp12 = NofibPrelude.intDiv(k, 2);
           tmp13 = to_heap_inst_52_43_tsni(tmp12, x, r);
-          return runtime.safeCall(sorting1.Branch(y, l, tmp13))
+          return sorting1.Branch(y, l, tmp13)
         }
       }
     }
@@ -3576,12 +3576,12 @@ mix_inst_54_40_tsni = function mix_inst_54_40_tsni(l, r) {
           scrut = leList_inst_54_40_41_tsni(x, y);
           if (scrut === true) {
             tmp = mix_inst_54_40_tsni(l1, r1);
-            tmp1 = runtime.safeCall(sorting1.Branch(y, l2, r2));
-            return runtime.safeCall(sorting1.Branch(x, tmp, tmp1))
+            tmp1 = sorting1.Branch(y, l2, r2);
+            return sorting1.Branch(x, tmp, tmp1)
           } else {
-            tmp2 = runtime.safeCall(sorting1.Branch(x, l1, r1));
+            tmp2 = sorting1.Branch(x, l1, r1);
             tmp3 = mix_inst_54_40_tsni(l2, r2);
-            return runtime.safeCall(sorting1.Branch(y, tmp2, tmp3))
+            return sorting1.Branch(y, tmp2, tmp3)
           }
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -3859,17 +3859,17 @@ compareList_inst_56_4_5_6_tsni = function compareList_inst_56_4_5_6_tsni(xs, ys)
 to_tree_inst_57_3_tsni = function to_tree_inst_57_3_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, y1, scrut1, tmp, tmp1, tmp2, tmp3;
   if (t instanceof sorting1.Tip2.class) {
-    return runtime.safeCall(sorting1.Twig2(x))
+    return sorting1.Twig2(x)
   } else if (t instanceof sorting1.Twig2.class) {
     param0 = t.a;
     y1 = param0;
     scrut1 = leList_inst_57_3_7_tsni(x, y1);
     if (scrut1 === true) {
-      tmp = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, tmp, sorting1.Tip2))
+      tmp = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, tmp, sorting1.Tip2)
     } else {
-      tmp1 = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, sorting1.Tip2, tmp1))
+      tmp1 = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, sorting1.Tip2, tmp1)
     }
   } else if (t instanceof sorting1.Branch2.class) {
     param0 = t.a;
@@ -3881,10 +3881,10 @@ to_tree_inst_57_3_tsni = function to_tree_inst_57_3_tsni(x, t) {
     scrut = leList_inst_57_3_4_tsni(x, y);
     if (scrut === true) {
       tmp2 = to_tree_inst_57_3_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch2(y, tmp2, r))
+      return sorting1.Branch2(y, tmp2, r)
     } else {
       tmp3 = to_tree_inst_57_3_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch2(y, l, tmp3))
+      return sorting1.Branch2(y, l, tmp3)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -4091,7 +4091,7 @@ compareList_inst_58_11_5_6_tsni = function compareList_inst_58_11_5_6_tsni(xs, y
 to_tree_inst_59_10_tsni = function to_tree_inst_59_10_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, tmp, tmp1;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -4102,10 +4102,10 @@ to_tree_inst_59_10_tsni = function to_tree_inst_59_10_tsni(x, t) {
     scrut = leList_inst_59_10_11_tsni(x, y);
     if (scrut === true) {
       tmp = to_tree_inst_59_10_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch(y, tmp, r))
+      return sorting1.Branch(y, tmp, r)
     } else {
       tmp1 = to_tree_inst_59_10_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch(y, l, tmp1))
+      return sorting1.Branch(y, l, tmp1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -5609,7 +5609,7 @@ mkTree_inst_85_9_tsni = function mkTree_inst_85_9_tsni(innerparam) {
 to_tree_inst_85_9_10_tsni = function to_tree_inst_85_9_10_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, tmp, tmp1;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -5620,10 +5620,10 @@ to_tree_inst_85_9_10_tsni = function to_tree_inst_85_9_10_tsni(x, t) {
     scrut = leList_inst_85_9_10_11_tsni(x, y);
     if (scrut === true) {
       tmp = to_tree_inst_85_9_10_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch(y, tmp, r))
+      return sorting1.Branch(y, tmp, r)
     } else {
       tmp1 = to_tree_inst_85_9_10_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch(y, l, tmp1))
+      return sorting1.Branch(y, l, tmp1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -5701,17 +5701,17 @@ mkTree_inst_86_2_tsni = function mkTree_inst_86_2_tsni(innerparam) {
 to_tree_inst_86_2_3_tsni = function to_tree_inst_86_2_3_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, y1, scrut1, tmp, tmp1, tmp2, tmp3;
   if (t instanceof sorting1.Tip2.class) {
-    return runtime.safeCall(sorting1.Twig2(x))
+    return sorting1.Twig2(x)
   } else if (t instanceof sorting1.Twig2.class) {
     param0 = t.a;
     y1 = param0;
     scrut1 = leList_inst_86_2_3_7_tsni(x, y1);
     if (scrut1 === true) {
-      tmp = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, tmp, sorting1.Tip2))
+      tmp = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, tmp, sorting1.Tip2)
     } else {
-      tmp1 = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, sorting1.Tip2, tmp1))
+      tmp1 = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, sorting1.Tip2, tmp1)
     }
   } else if (t instanceof sorting1.Branch2.class) {
     param0 = t.a;
@@ -5723,10 +5723,10 @@ to_tree_inst_86_2_3_tsni = function to_tree_inst_86_2_3_tsni(x, t) {
     scrut = leList_inst_86_2_3_4_tsni(x, y);
     if (scrut === true) {
       tmp2 = to_tree_inst_86_2_3_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch2(y, tmp2, r))
+      return sorting1.Branch2(y, tmp2, r)
     } else {
       tmp3 = to_tree_inst_86_2_3_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch2(y, l, tmp3))
+      return sorting1.Branch2(y, l, tmp3)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -5883,7 +5883,7 @@ heap_inst_87_42_tsni = function heap_inst_87_42_tsni(k, xs) {
 to_heap_inst_87_42_43_tsni = function to_heap_inst_87_42_43_tsni(k, x, t) {
   let param0, param1, param2, y, l, r, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -5897,23 +5897,23 @@ to_heap_inst_87_42_43_tsni = function to_heap_inst_87_42_43_tsni(k, x, t) {
       if (scrut3 === true) {
         tmp = NofibPrelude.intDiv(k, 2);
         tmp1 = to_heap_inst_87_42_43_tsni(tmp, y, l);
-        return runtime.safeCall(sorting1.Branch(x, tmp1, r))
+        return sorting1.Branch(x, tmp1, r)
       } else {
         scrut1 = leList_inst_87_42_43_45_tsni(x, y);
         if (scrut1 === true) {
           tmp2 = NofibPrelude.intDiv(k, 2);
           tmp3 = to_heap_inst_87_42_43_tsni(tmp2, y, r);
-          return runtime.safeCall(sorting1.Branch(x, l, tmp3))
+          return sorting1.Branch(x, l, tmp3)
         } else {
           scrut = sorting1.odd(k);
           if (scrut === true) {
             tmp4 = NofibPrelude.intDiv(k, 2);
             tmp5 = to_heap_inst_87_42_43_tsni(tmp4, x, l);
-            return runtime.safeCall(sorting1.Branch(y, tmp5, r))
+            return sorting1.Branch(y, tmp5, r)
           } else {
             tmp6 = NofibPrelude.intDiv(k, 2);
             tmp7 = to_heap_inst_87_42_43_tsni(tmp6, x, r);
-            return runtime.safeCall(sorting1.Branch(y, l, tmp7))
+            return sorting1.Branch(y, l, tmp7)
           }
         }
       }
@@ -5922,17 +5922,17 @@ to_heap_inst_87_42_43_tsni = function to_heap_inst_87_42_43_tsni(k, x, t) {
       if (scrut1 === true) {
         tmp8 = NofibPrelude.intDiv(k, 2);
         tmp9 = to_heap_inst_87_42_43_tsni(tmp8, y, r);
-        return runtime.safeCall(sorting1.Branch(x, l, tmp9))
+        return sorting1.Branch(x, l, tmp9)
       } else {
         scrut = sorting1.odd(k);
         if (scrut === true) {
           tmp10 = NofibPrelude.intDiv(k, 2);
           tmp11 = to_heap_inst_87_42_43_tsni(tmp10, x, l);
-          return runtime.safeCall(sorting1.Branch(y, tmp11, r))
+          return sorting1.Branch(y, tmp11, r)
         } else {
           tmp12 = NofibPrelude.intDiv(k, 2);
           tmp13 = to_heap_inst_87_42_43_tsni(tmp12, x, r);
-          return runtime.safeCall(sorting1.Branch(y, l, tmp13))
+          return sorting1.Branch(y, l, tmp13)
         }
       }
     }
@@ -6181,12 +6181,12 @@ mix_inst_87_39_40_tsni = function mix_inst_87_39_40_tsni(l, r) {
           scrut = leList_inst_87_39_40_41_tsni(x, y);
           if (scrut === true) {
             tmp = mix_inst_87_39_40_tsni(l1, r1);
-            tmp1 = runtime.safeCall(sorting1.Branch(y, l2, r2));
-            return runtime.safeCall(sorting1.Branch(x, tmp, tmp1))
+            tmp1 = sorting1.Branch(y, l2, r2);
+            return sorting1.Branch(x, tmp, tmp1)
           } else {
-            tmp2 = runtime.safeCall(sorting1.Branch(x, l1, r1));
+            tmp2 = sorting1.Branch(x, l1, r1);
             tmp3 = mix_inst_87_39_40_tsni(l2, r2);
-            return runtime.safeCall(sorting1.Branch(y, tmp2, tmp3))
+            return sorting1.Branch(y, tmp2, tmp3)
           }
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -6874,7 +6874,7 @@ heap_inst_89_91_38_42_tsni = function heap_inst_89_91_38_42_tsni(k, xs) {
 to_heap_inst_89_91_38_42_43_tsni = function to_heap_inst_89_91_38_42_43_tsni(k, x, t) {
   let param0, param1, param2, y, l, r, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -6888,23 +6888,23 @@ to_heap_inst_89_91_38_42_43_tsni = function to_heap_inst_89_91_38_42_43_tsni(k, 
       if (scrut3 === true) {
         tmp = NofibPrelude.intDiv(k, 2);
         tmp1 = to_heap_inst_89_91_38_42_43_tsni(tmp, y, l);
-        return runtime.safeCall(sorting1.Branch(x, tmp1, r))
+        return sorting1.Branch(x, tmp1, r)
       } else {
         scrut1 = leList_inst_89_91_38_42_43_45_tsni(x, y);
         if (scrut1 === true) {
           tmp2 = NofibPrelude.intDiv(k, 2);
           tmp3 = to_heap_inst_89_91_38_42_43_tsni(tmp2, y, r);
-          return runtime.safeCall(sorting1.Branch(x, l, tmp3))
+          return sorting1.Branch(x, l, tmp3)
         } else {
           scrut = sorting1.odd(k);
           if (scrut === true) {
             tmp4 = NofibPrelude.intDiv(k, 2);
             tmp5 = to_heap_inst_89_91_38_42_43_tsni(tmp4, x, l);
-            return runtime.safeCall(sorting1.Branch(y, tmp5, r))
+            return sorting1.Branch(y, tmp5, r)
           } else {
             tmp6 = NofibPrelude.intDiv(k, 2);
             tmp7 = to_heap_inst_89_91_38_42_43_tsni(tmp6, x, r);
-            return runtime.safeCall(sorting1.Branch(y, l, tmp7))
+            return sorting1.Branch(y, l, tmp7)
           }
         }
       }
@@ -6913,17 +6913,17 @@ to_heap_inst_89_91_38_42_43_tsni = function to_heap_inst_89_91_38_42_43_tsni(k, 
       if (scrut1 === true) {
         tmp8 = NofibPrelude.intDiv(k, 2);
         tmp9 = to_heap_inst_89_91_38_42_43_tsni(tmp8, y, r);
-        return runtime.safeCall(sorting1.Branch(x, l, tmp9))
+        return sorting1.Branch(x, l, tmp9)
       } else {
         scrut = sorting1.odd(k);
         if (scrut === true) {
           tmp10 = NofibPrelude.intDiv(k, 2);
           tmp11 = to_heap_inst_89_91_38_42_43_tsni(tmp10, x, l);
-          return runtime.safeCall(sorting1.Branch(y, tmp11, r))
+          return sorting1.Branch(y, tmp11, r)
         } else {
           tmp12 = NofibPrelude.intDiv(k, 2);
           tmp13 = to_heap_inst_89_91_38_42_43_tsni(tmp12, x, r);
-          return runtime.safeCall(sorting1.Branch(y, l, tmp13))
+          return sorting1.Branch(y, l, tmp13)
         }
       }
     }
@@ -7172,12 +7172,12 @@ mix_inst_89_91_38_39_40_tsni = function mix_inst_89_91_38_39_40_tsni(l, r) {
           scrut = leList_inst_89_91_38_39_40_41_tsni(x, y);
           if (scrut === true) {
             tmp = mix_inst_89_91_38_39_40_tsni(l1, r1);
-            tmp1 = runtime.safeCall(sorting1.Branch(y, l2, r2));
-            return runtime.safeCall(sorting1.Branch(x, tmp, tmp1))
+            tmp1 = sorting1.Branch(y, l2, r2);
+            return sorting1.Branch(x, tmp, tmp1)
           } else {
-            tmp2 = runtime.safeCall(sorting1.Branch(x, l1, r1));
+            tmp2 = sorting1.Branch(x, l1, r1);
             tmp3 = mix_inst_89_91_38_39_40_tsni(l2, r2);
-            return runtime.safeCall(sorting1.Branch(y, tmp2, tmp3))
+            return sorting1.Branch(y, tmp2, tmp3)
           }
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -8247,7 +8247,7 @@ mkTree_inst_89_91_8_9_tsni = function mkTree_inst_89_91_8_9_tsni(innerparam) {
 to_tree_inst_89_91_8_9_10_tsni = function to_tree_inst_89_91_8_9_10_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, tmp, tmp1;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -8258,10 +8258,10 @@ to_tree_inst_89_91_8_9_10_tsni = function to_tree_inst_89_91_8_9_10_tsni(x, t) {
     scrut = leList_inst_89_91_8_9_10_11_tsni(x, y);
     if (scrut === true) {
       tmp = to_tree_inst_89_91_8_9_10_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch(y, tmp, r))
+      return sorting1.Branch(y, tmp, r)
     } else {
       tmp1 = to_tree_inst_89_91_8_9_10_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch(y, l, tmp1))
+      return sorting1.Branch(y, l, tmp1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -8344,17 +8344,17 @@ mkTree_inst_89_91_1_2_tsni = function mkTree_inst_89_91_1_2_tsni(innerparam) {
 to_tree_inst_89_91_1_2_3_tsni = function to_tree_inst_89_91_1_2_3_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, y1, scrut1, tmp, tmp1, tmp2, tmp3;
   if (t instanceof sorting1.Tip2.class) {
-    return runtime.safeCall(sorting1.Twig2(x))
+    return sorting1.Twig2(x)
   } else if (t instanceof sorting1.Twig2.class) {
     param0 = t.a;
     y1 = param0;
     scrut1 = leList_inst_89_91_1_2_3_7_tsni(x, y1);
     if (scrut1 === true) {
-      tmp = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, tmp, sorting1.Tip2))
+      tmp = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, tmp, sorting1.Tip2)
     } else {
-      tmp1 = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, sorting1.Tip2, tmp1))
+      tmp1 = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, sorting1.Tip2, tmp1)
     }
   } else if (t instanceof sorting1.Branch2.class) {
     param0 = t.a;
@@ -8366,10 +8366,10 @@ to_tree_inst_89_91_1_2_3_tsni = function to_tree_inst_89_91_1_2_3_tsni(x, t) {
     scrut = leList_inst_89_91_1_2_3_4_tsni(x, y);
     if (scrut === true) {
       tmp2 = to_tree_inst_89_91_1_2_3_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch2(y, tmp2, r))
+      return sorting1.Branch2(y, tmp2, r)
     } else {
       tmp3 = to_tree_inst_89_91_1_2_3_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch2(y, l, tmp3))
+      return sorting1.Branch2(y, l, tmp3)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -8712,17 +8712,17 @@ mkTree_inst_93_94_91_1_2_tsni = function mkTree_inst_93_94_91_1_2_tsni(innerpara
 to_tree_inst_93_94_91_1_2_3_tsni = function to_tree_inst_93_94_91_1_2_3_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, y1, scrut1, tmp, tmp1, tmp2, tmp3;
   if (t instanceof sorting1.Tip2.class) {
-    return runtime.safeCall(sorting1.Twig2(x))
+    return sorting1.Twig2(x)
   } else if (t instanceof sorting1.Twig2.class) {
     param0 = t.a;
     y1 = param0;
     scrut1 = leList_inst_93_94_91_1_2_3_7_tsni(x, y1);
     if (scrut1 === true) {
-      tmp = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, tmp, sorting1.Tip2))
+      tmp = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, tmp, sorting1.Tip2)
     } else {
-      tmp1 = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, sorting1.Tip2, tmp1))
+      tmp1 = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, sorting1.Tip2, tmp1)
     }
   } else if (t instanceof sorting1.Branch2.class) {
     param0 = t.a;
@@ -8734,10 +8734,10 @@ to_tree_inst_93_94_91_1_2_3_tsni = function to_tree_inst_93_94_91_1_2_3_tsni(x, 
     scrut = leList_inst_93_94_91_1_2_3_4_tsni(x, y);
     if (scrut === true) {
       tmp2 = to_tree_inst_93_94_91_1_2_3_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch2(y, tmp2, r))
+      return sorting1.Branch2(y, tmp2, r)
     } else {
       tmp3 = to_tree_inst_93_94_91_1_2_3_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch2(y, l, tmp3))
+      return sorting1.Branch2(y, l, tmp3)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -8886,7 +8886,7 @@ mkTree_inst_93_94_91_8_9_tsni = function mkTree_inst_93_94_91_8_9_tsni(innerpara
 to_tree_inst_93_94_91_8_9_10_tsni = function to_tree_inst_93_94_91_8_9_10_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, tmp, tmp1;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -8897,10 +8897,10 @@ to_tree_inst_93_94_91_8_9_10_tsni = function to_tree_inst_93_94_91_8_9_10_tsni(x
     scrut = leList_inst_93_94_91_8_9_10_11_tsni(x, y);
     if (scrut === true) {
       tmp = to_tree_inst_93_94_91_8_9_10_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch(y, tmp, r))
+      return sorting1.Branch(y, tmp, r)
     } else {
       tmp1 = to_tree_inst_93_94_91_8_9_10_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch(y, l, tmp1))
+      return sorting1.Branch(y, l, tmp1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -10002,12 +10002,12 @@ mix_inst_93_94_91_38_39_40_tsni = function mix_inst_93_94_91_38_39_40_tsni(l, r)
           scrut = leList_inst_93_94_91_38_39_40_41_tsni(x, y);
           if (scrut === true) {
             tmp = mix_inst_93_94_91_38_39_40_tsni(l1, r1);
-            tmp1 = runtime.safeCall(sorting1.Branch(y, l2, r2));
-            return runtime.safeCall(sorting1.Branch(x, tmp, tmp1))
+            tmp1 = sorting1.Branch(y, l2, r2);
+            return sorting1.Branch(x, tmp, tmp1)
           } else {
-            tmp2 = runtime.safeCall(sorting1.Branch(x, l1, r1));
+            tmp2 = sorting1.Branch(x, l1, r1);
             tmp3 = mix_inst_93_94_91_38_39_40_tsni(l2, r2);
-            return runtime.safeCall(sorting1.Branch(y, tmp2, tmp3))
+            return sorting1.Branch(y, tmp2, tmp3)
           }
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -10103,7 +10103,7 @@ heap_inst_93_94_91_38_42_tsni = function heap_inst_93_94_91_38_42_tsni(k, xs) {
 to_heap_inst_93_94_91_38_42_43_tsni = function to_heap_inst_93_94_91_38_42_43_tsni(k, x, t) {
   let param0, param1, param2, y, l, r, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -10117,23 +10117,23 @@ to_heap_inst_93_94_91_38_42_43_tsni = function to_heap_inst_93_94_91_38_42_43_ts
       if (scrut3 === true) {
         tmp = NofibPrelude.intDiv(k, 2);
         tmp1 = to_heap_inst_93_94_91_38_42_43_tsni(tmp, y, l);
-        return runtime.safeCall(sorting1.Branch(x, tmp1, r))
+        return sorting1.Branch(x, tmp1, r)
       } else {
         scrut1 = leList_inst_93_94_91_38_42_43_45_tsni(x, y);
         if (scrut1 === true) {
           tmp2 = NofibPrelude.intDiv(k, 2);
           tmp3 = to_heap_inst_93_94_91_38_42_43_tsni(tmp2, y, r);
-          return runtime.safeCall(sorting1.Branch(x, l, tmp3))
+          return sorting1.Branch(x, l, tmp3)
         } else {
           scrut = sorting1.odd(k);
           if (scrut === true) {
             tmp4 = NofibPrelude.intDiv(k, 2);
             tmp5 = to_heap_inst_93_94_91_38_42_43_tsni(tmp4, x, l);
-            return runtime.safeCall(sorting1.Branch(y, tmp5, r))
+            return sorting1.Branch(y, tmp5, r)
           } else {
             tmp6 = NofibPrelude.intDiv(k, 2);
             tmp7 = to_heap_inst_93_94_91_38_42_43_tsni(tmp6, x, r);
-            return runtime.safeCall(sorting1.Branch(y, l, tmp7))
+            return sorting1.Branch(y, l, tmp7)
           }
         }
       }
@@ -10142,17 +10142,17 @@ to_heap_inst_93_94_91_38_42_43_tsni = function to_heap_inst_93_94_91_38_42_43_ts
       if (scrut1 === true) {
         tmp8 = NofibPrelude.intDiv(k, 2);
         tmp9 = to_heap_inst_93_94_91_38_42_43_tsni(tmp8, y, r);
-        return runtime.safeCall(sorting1.Branch(x, l, tmp9))
+        return sorting1.Branch(x, l, tmp9)
       } else {
         scrut = sorting1.odd(k);
         if (scrut === true) {
           tmp10 = NofibPrelude.intDiv(k, 2);
           tmp11 = to_heap_inst_93_94_91_38_42_43_tsni(tmp10, x, l);
-          return runtime.safeCall(sorting1.Branch(y, tmp11, r))
+          return sorting1.Branch(y, tmp11, r)
         } else {
           tmp12 = NofibPrelude.intDiv(k, 2);
           tmp13 = to_heap_inst_93_94_91_38_42_43_tsni(tmp12, x, r);
-          return runtime.safeCall(sorting1.Branch(y, l, tmp13))
+          return sorting1.Branch(y, l, tmp13)
         }
       }
     }
@@ -10619,7 +10619,7 @@ heap_inst_97_98_94_91_38_42_tsni = function heap_inst_97_98_94_91_38_42_tsni(k, 
 to_heap_inst_97_98_94_91_38_42_43_tsni = function to_heap_inst_97_98_94_91_38_42_43_tsni(k, x, t) {
   let param0, param1, param2, y, l, r, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -10633,23 +10633,23 @@ to_heap_inst_97_98_94_91_38_42_43_tsni = function to_heap_inst_97_98_94_91_38_42
       if (scrut3 === true) {
         tmp = NofibPrelude.intDiv(k, 2);
         tmp1 = to_heap_inst_97_98_94_91_38_42_43_tsni(tmp, y, l);
-        return runtime.safeCall(sorting1.Branch(x, tmp1, r))
+        return sorting1.Branch(x, tmp1, r)
       } else {
         scrut1 = leList_inst_97_98_94_91_38_42_43_45_tsni(x, y);
         if (scrut1 === true) {
           tmp2 = NofibPrelude.intDiv(k, 2);
           tmp3 = to_heap_inst_97_98_94_91_38_42_43_tsni(tmp2, y, r);
-          return runtime.safeCall(sorting1.Branch(x, l, tmp3))
+          return sorting1.Branch(x, l, tmp3)
         } else {
           scrut = sorting1.odd(k);
           if (scrut === true) {
             tmp4 = NofibPrelude.intDiv(k, 2);
             tmp5 = to_heap_inst_97_98_94_91_38_42_43_tsni(tmp4, x, l);
-            return runtime.safeCall(sorting1.Branch(y, tmp5, r))
+            return sorting1.Branch(y, tmp5, r)
           } else {
             tmp6 = NofibPrelude.intDiv(k, 2);
             tmp7 = to_heap_inst_97_98_94_91_38_42_43_tsni(tmp6, x, r);
-            return runtime.safeCall(sorting1.Branch(y, l, tmp7))
+            return sorting1.Branch(y, l, tmp7)
           }
         }
       }
@@ -10658,17 +10658,17 @@ to_heap_inst_97_98_94_91_38_42_43_tsni = function to_heap_inst_97_98_94_91_38_42
       if (scrut1 === true) {
         tmp8 = NofibPrelude.intDiv(k, 2);
         tmp9 = to_heap_inst_97_98_94_91_38_42_43_tsni(tmp8, y, r);
-        return runtime.safeCall(sorting1.Branch(x, l, tmp9))
+        return sorting1.Branch(x, l, tmp9)
       } else {
         scrut = sorting1.odd(k);
         if (scrut === true) {
           tmp10 = NofibPrelude.intDiv(k, 2);
           tmp11 = to_heap_inst_97_98_94_91_38_42_43_tsni(tmp10, x, l);
-          return runtime.safeCall(sorting1.Branch(y, tmp11, r))
+          return sorting1.Branch(y, tmp11, r)
         } else {
           tmp12 = NofibPrelude.intDiv(k, 2);
           tmp13 = to_heap_inst_97_98_94_91_38_42_43_tsni(tmp12, x, r);
-          return runtime.safeCall(sorting1.Branch(y, l, tmp13))
+          return sorting1.Branch(y, l, tmp13)
         }
       }
     }
@@ -10917,12 +10917,12 @@ mix_inst_97_98_94_91_38_39_40_tsni = function mix_inst_97_98_94_91_38_39_40_tsni
           scrut = leList_inst_97_98_94_91_38_39_40_41_tsni(x, y);
           if (scrut === true) {
             tmp = mix_inst_97_98_94_91_38_39_40_tsni(l1, r1);
-            tmp1 = runtime.safeCall(sorting1.Branch(y, l2, r2));
-            return runtime.safeCall(sorting1.Branch(x, tmp, tmp1))
+            tmp1 = sorting1.Branch(y, l2, r2);
+            return sorting1.Branch(x, tmp, tmp1)
           } else {
-            tmp2 = runtime.safeCall(sorting1.Branch(x, l1, r1));
+            tmp2 = sorting1.Branch(x, l1, r1);
             tmp3 = mix_inst_97_98_94_91_38_39_40_tsni(l2, r2);
-            return runtime.safeCall(sorting1.Branch(y, tmp2, tmp3))
+            return sorting1.Branch(y, tmp2, tmp3)
           }
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -11992,7 +11992,7 @@ mkTree_inst_97_98_94_91_8_9_tsni = function mkTree_inst_97_98_94_91_8_9_tsni(inn
 to_tree_inst_97_98_94_91_8_9_10_tsni = function to_tree_inst_97_98_94_91_8_9_10_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, tmp, tmp1;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -12003,10 +12003,10 @@ to_tree_inst_97_98_94_91_8_9_10_tsni = function to_tree_inst_97_98_94_91_8_9_10_
     scrut = leList_inst_97_98_94_91_8_9_10_11_tsni(x, y);
     if (scrut === true) {
       tmp = to_tree_inst_97_98_94_91_8_9_10_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch(y, tmp, r))
+      return sorting1.Branch(y, tmp, r)
     } else {
       tmp1 = to_tree_inst_97_98_94_91_8_9_10_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch(y, l, tmp1))
+      return sorting1.Branch(y, l, tmp1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -12089,17 +12089,17 @@ mkTree_inst_97_98_94_91_1_2_tsni = function mkTree_inst_97_98_94_91_1_2_tsni(inn
 to_tree_inst_97_98_94_91_1_2_3_tsni = function to_tree_inst_97_98_94_91_1_2_3_tsni(x, t) {
   let param0, param1, param2, y, l, r, scrut, y1, scrut1, tmp, tmp1, tmp2, tmp3;
   if (t instanceof sorting1.Tip2.class) {
-    return runtime.safeCall(sorting1.Twig2(x))
+    return sorting1.Twig2(x)
   } else if (t instanceof sorting1.Twig2.class) {
     param0 = t.a;
     y1 = param0;
     scrut1 = leList_inst_97_98_94_91_1_2_3_7_tsni(x, y1);
     if (scrut1 === true) {
-      tmp = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, tmp, sorting1.Tip2))
+      tmp = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, tmp, sorting1.Tip2)
     } else {
-      tmp1 = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, sorting1.Tip2, tmp1))
+      tmp1 = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, sorting1.Tip2, tmp1)
     }
   } else if (t instanceof sorting1.Branch2.class) {
     param0 = t.a;
@@ -12111,10 +12111,10 @@ to_tree_inst_97_98_94_91_1_2_3_tsni = function to_tree_inst_97_98_94_91_1_2_3_ts
     scrut = leList_inst_97_98_94_91_1_2_3_4_tsni(x, y);
     if (scrut === true) {
       tmp2 = to_tree_inst_97_98_94_91_1_2_3_tsni(x, l);
-      return runtime.safeCall(sorting1.Branch2(y, tmp2, r))
+      return sorting1.Branch2(y, tmp2, r)
     } else {
       tmp3 = to_tree_inst_97_98_94_91_1_2_3_tsni(x, r);
-      return runtime.safeCall(sorting1.Branch2(y, l, tmp3))
+      return sorting1.Branch2(y, l, tmp3)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -12590,7 +12590,7 @@ heap = function heap(k, xs) {
 to_heap = function to_heap(k, x, t) {
   let param0, param1, param2, y, l, r, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -12604,23 +12604,23 @@ to_heap = function to_heap(k, x, t) {
       if (scrut3 === true) {
         tmp = NofibPrelude.intDiv(k, 2);
         tmp1 = to_heap(tmp, y, l);
-        return runtime.safeCall(sorting1.Branch(x, tmp1, r))
+        return sorting1.Branch(x, tmp1, r)
       } else {
         scrut1 = leList_inst_53_45_tsni(x, y);
         if (scrut1 === true) {
           tmp2 = NofibPrelude.intDiv(k, 2);
           tmp3 = to_heap(tmp2, y, r);
-          return runtime.safeCall(sorting1.Branch(x, l, tmp3))
+          return sorting1.Branch(x, l, tmp3)
         } else {
           scrut = sorting1.odd(k);
           if (scrut === true) {
             tmp4 = NofibPrelude.intDiv(k, 2);
             tmp5 = to_heap(tmp4, x, l);
-            return runtime.safeCall(sorting1.Branch(y, tmp5, r))
+            return sorting1.Branch(y, tmp5, r)
           } else {
             tmp6 = NofibPrelude.intDiv(k, 2);
             tmp7 = to_heap(tmp6, x, r);
-            return runtime.safeCall(sorting1.Branch(y, l, tmp7))
+            return sorting1.Branch(y, l, tmp7)
           }
         }
       }
@@ -12629,17 +12629,17 @@ to_heap = function to_heap(k, x, t) {
       if (scrut1 === true) {
         tmp8 = NofibPrelude.intDiv(k, 2);
         tmp9 = to_heap(tmp8, y, r);
-        return runtime.safeCall(sorting1.Branch(x, l, tmp9))
+        return sorting1.Branch(x, l, tmp9)
       } else {
         scrut = sorting1.odd(k);
         if (scrut === true) {
           tmp10 = NofibPrelude.intDiv(k, 2);
           tmp11 = to_heap(tmp10, x, l);
-          return runtime.safeCall(sorting1.Branch(y, tmp11, r))
+          return sorting1.Branch(y, tmp11, r)
         } else {
           tmp12 = NofibPrelude.intDiv(k, 2);
           tmp13 = to_heap(tmp12, x, r);
-          return runtime.safeCall(sorting1.Branch(y, l, tmp13))
+          return sorting1.Branch(y, l, tmp13)
         }
       }
     }
@@ -12690,12 +12690,12 @@ mix = function mix(l, r) {
           scrut = leList_inst_55_41_tsni(x, y);
           if (scrut === true) {
             tmp = mix(l1, r1);
-            tmp1 = runtime.safeCall(sorting1.Branch(y, l2, r2));
-            return runtime.safeCall(sorting1.Branch(x, tmp, tmp1))
+            tmp1 = sorting1.Branch(y, l2, r2);
+            return sorting1.Branch(x, tmp, tmp1)
           } else {
-            tmp2 = runtime.safeCall(sorting1.Branch(x, l1, r1));
+            tmp2 = sorting1.Branch(x, l1, r1);
             tmp3 = mix(l2, r2);
-            return runtime.safeCall(sorting1.Branch(y, tmp2, tmp3))
+            return sorting1.Branch(y, tmp2, tmp3)
           }
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -12709,17 +12709,17 @@ mix = function mix(l, r) {
 to_tree1 = function to_tree(x, t) {
   let param0, param1, param2, y, l, r, scrut, y1, scrut1, tmp, tmp1, tmp2, tmp3;
   if (t instanceof sorting1.Tip2.class) {
-    return runtime.safeCall(sorting1.Twig2(x))
+    return sorting1.Twig2(x)
   } else if (t instanceof sorting1.Twig2.class) {
     param0 = t.a;
     y1 = param0;
     scrut1 = leList_inst_56_7_tsni(x, y1);
     if (scrut1 === true) {
-      tmp = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, tmp, sorting1.Tip2))
+      tmp = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, tmp, sorting1.Tip2)
     } else {
-      tmp1 = runtime.safeCall(sorting1.Twig2(x));
-      return runtime.safeCall(sorting1.Branch2(y1, sorting1.Tip2, tmp1))
+      tmp1 = sorting1.Twig2(x);
+      return sorting1.Branch2(y1, sorting1.Tip2, tmp1)
     }
   } else if (t instanceof sorting1.Branch2.class) {
     param0 = t.a;
@@ -12731,10 +12731,10 @@ to_tree1 = function to_tree(x, t) {
     scrut = leList_inst_56_4_tsni(x, y);
     if (scrut === true) {
       tmp2 = to_tree1(x, l);
-      return runtime.safeCall(sorting1.Branch2(y, tmp2, r))
+      return sorting1.Branch2(y, tmp2, r)
     } else {
       tmp3 = to_tree1(x, r);
-      return runtime.safeCall(sorting1.Branch2(y, l, tmp3))
+      return sorting1.Branch2(y, l, tmp3)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -12769,7 +12769,7 @@ readTree1 = function readTree(t) {
 to_tree = function to_tree(x, t) {
   let param0, param1, param2, y, l, r, scrut, tmp, tmp1;
   if (t instanceof sorting1.Tip.class) {
-    return runtime.safeCall(sorting1.Branch(x, sorting1.Tip, sorting1.Tip))
+    return sorting1.Branch(x, sorting1.Tip, sorting1.Tip)
   } else if (t instanceof sorting1.Branch.class) {
     param0 = t.a;
     param1 = t.l;
@@ -12780,10 +12780,10 @@ to_tree = function to_tree(x, t) {
     scrut = leList_inst_58_11_tsni(x, y);
     if (scrut === true) {
       tmp = to_tree(x, l);
-      return runtime.safeCall(sorting1.Branch(y, tmp, r))
+      return sorting1.Branch(y, tmp, r)
     } else {
       tmp1 = to_tree(x, r);
-      return runtime.safeCall(sorting1.Branch(y, l, tmp1))
+      return sorting1.Branch(y, l, tmp1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -12973,10 +12973,18 @@ lambda1 = (undefined, function (l) {
 lambda = (undefined, function (x) {
   return x === "\n"
 });
-(class sorting {
+globalThis.Object.freeze(class sorting {
   static {
-    sorting1 = sorting;
-    const EQ$class = class EQ {
+    sorting1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
+    globalThis.Object.freeze(class EQ {
+      static {
+        sorting.EQ = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: EQ
@@ -12984,9 +12992,11 @@ lambda = (undefined, function (x) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "EQ"]; 
-    };
-    this.EQ = globalThis.Object.freeze(new EQ$class);
-    const GT$class = class GT {
+    });
+    globalThis.Object.freeze(class GT {
+      static {
+        sorting.GT = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: GT
@@ -12994,9 +13004,11 @@ lambda = (undefined, function (x) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "GT"]; 
-    };
-    this.GT = globalThis.Object.freeze(new GT$class);
-    const LT$class = class LT {
+    });
+    globalThis.Object.freeze(class LT {
+      static {
+        sorting.LT = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: LT
@@ -13004,14 +13016,19 @@ lambda = (undefined, function (x) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "LT"]; 
-    };
-    this.LT = globalThis.Object.freeze(new LT$class);
-    this.Tree = class Tree {
+    });
+    globalThis.Object.freeze(class Tree {
+      static {
+        sorting.Tree = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Tree"]; 
-    };
-    const Tip$class = class Tip extends sorting.Tree {
+    });
+    globalThis.Object.freeze(class Tip extends sorting.Tree {
+      static {
+        sorting.Tip = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -13020,30 +13037,35 @@ lambda = (undefined, function (x) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Tip"]; 
-    };
-    this.Tip = globalThis.Object.freeze(new Tip$class);
+    });
     this.Branch = function Branch(a, l, r) {
       return globalThis.Object.freeze(new Branch.class(a, l, r));
     };
-    Object.defineProperty(this.Branch, "class", {
-      enumerable: true,
-      value: class Branch extends sorting.Tree {
-        constructor(a, l, r) {
-          super();
-          this.a = a;
-          this.l = l;
-          this.r = r;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Branch", ["a", "l", "r"]]; 
+    globalThis.Object.freeze(class Branch extends sorting.Tree {
+      static {
+        sorting.Branch.class = this
       }
+      constructor(a, l, r) {
+        super();
+        this.a = a;
+        this.l = l;
+        this.r = r;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Branch", ["a", "l", "r"]]; 
     });
-    this.Tree2 = class Tree2 {
+    globalThis.Object.freeze(class Tree2 {
+      static {
+        sorting.Tree2 = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Tree2"]; 
-    };
-    const Tip2$class = class Tip2 extends sorting.Tree2 {
+    });
+    globalThis.Object.freeze(class Tip2 extends sorting.Tree2 {
+      static {
+        sorting.Tip2 = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -13052,37 +13074,36 @@ lambda = (undefined, function (x) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Tip2"]; 
-    };
-    this.Tip2 = globalThis.Object.freeze(new Tip2$class);
+    });
     this.Twig2 = function Twig2(a) {
       return globalThis.Object.freeze(new Twig2.class(a));
     };
-    Object.defineProperty(this.Twig2, "class", {
-      enumerable: true,
-      value: class Twig2 extends sorting.Tree2 {
-        constructor(a) {
-          super();
-          this.a = a;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Twig2", ["a"]]; 
+    globalThis.Object.freeze(class Twig2 extends sorting.Tree2 {
+      static {
+        sorting.Twig2.class = this
       }
+      constructor(a) {
+        super();
+        this.a = a;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Twig2", ["a"]]; 
     });
     this.Branch2 = function Branch2(a, l, r) {
       return globalThis.Object.freeze(new Branch2.class(a, l, r));
     };
-    Object.defineProperty(this.Branch2, "class", {
-      enumerable: true,
-      value: class Branch2 extends sorting.Tree2 {
-        constructor(a, l, r) {
-          super();
-          this.a = a;
-          this.l = l;
-          this.r = r;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Branch2", ["a", "l", "r"]]; 
+    globalThis.Object.freeze(class Branch2 extends sorting.Tree2 {
+      static {
+        sorting.Branch2.class = this
       }
+      constructor(a, l, r) {
+        super();
+        this.a = a;
+        this.l = l;
+        this.r = r;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Branch2", ["a", "l", "r"]]; 
     });
   }
   static int_of_char(c) {
@@ -13380,7 +13401,7 @@ lambda = (undefined, function (x) {
   static main() {
     return testSorting_nofib_inst_97_98_tsni(0)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "sorting"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "sorting"]; 
 });
 let sorting = sorting1; export default sorting;

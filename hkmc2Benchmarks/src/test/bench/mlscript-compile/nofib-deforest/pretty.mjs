@@ -85,12 +85,12 @@ ppStr_inst_0_1_2_tsni = function ppStr_inst_0_1_2_tsni(s, width, is_vert) {
             tmp12 = ll1 + 1;
             tmp13 = tmp12 + ll2;
             tmp14 = pretty.andL(sl1, sl2);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp11, tmp13, false, tmp14))
+            return pretty.MkPrettyRep(tmp11, tmp13, false, tmp14)
           } else {
             tmp15 = pretty.cIndent(n, seq2_);
             tmp16 = pretty.cAppend(pretty.cNL, tmp15);
             tmp17 = pretty.cAppend(seq1, tmp16);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp17, ll2_, false, false))
+            return pretty.MkPrettyRep(tmp17, ll2_, false, false)
           }
         }
       } else {
@@ -168,12 +168,12 @@ ppStr_inst_3_4_1_2_tsni = function ppStr_inst_3_4_1_2_tsni(s, width, is_vert) {
             tmp12 = ll1 + 1;
             tmp13 = tmp12 + ll2;
             tmp14 = pretty.andL(sl1, sl2);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp11, tmp13, false, tmp14))
+            return pretty.MkPrettyRep(tmp11, tmp13, false, tmp14)
           } else {
             tmp15 = pretty.cIndent(n, seq2_);
             tmp16 = pretty.cAppend(pretty.cNL, tmp15);
             tmp17 = pretty.cAppend(seq1, tmp16);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp17, ll2_, false, false))
+            return pretty.MkPrettyRep(tmp17, ll2_, false, false)
           }
         }
       } else {
@@ -256,12 +256,12 @@ ppStr_inst_5_6_4_1_2_tsni = function ppStr_inst_5_6_4_1_2_tsni(s, width, is_vert
             tmp12 = ll1 + 1;
             tmp13 = tmp12 + ll2;
             tmp14 = pretty.andL(sl1, sl2);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp11, tmp13, false, tmp14))
+            return pretty.MkPrettyRep(tmp11, tmp13, false, tmp14)
           } else {
             tmp15 = pretty.cIndent(n, seq2_);
             tmp16 = pretty.cAppend(pretty.cNL, tmp15);
             tmp17 = pretty.cAppend(seq1, tmp16);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp17, ll2_, false, false))
+            return pretty.MkPrettyRep(tmp17, ll2_, false, false)
           }
         }
       } else {
@@ -356,12 +356,12 @@ ppStr_inst_7_8_6_4_1_2_tsni = function ppStr_inst_7_8_6_4_1_2_tsni(s, width, is_
             tmp12 = ll1 + 1;
             tmp13 = tmp12 + ll2;
             tmp14 = pretty.andL(sl1, sl2);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp11, tmp13, false, tmp14))
+            return pretty.MkPrettyRep(tmp11, tmp13, false, tmp14)
           } else {
             tmp15 = pretty.cIndent(n, seq2_);
             tmp16 = pretty.cAppend(pretty.cNL, tmp15);
             tmp17 = pretty.cAppend(seq1, tmp16);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp17, ll2_, false, false))
+            return pretty.MkPrettyRep(tmp17, ll2_, false, false)
           }
         }
       } else {
@@ -675,12 +675,12 @@ ppStr_inst_15_16_8_6_4_1_2_tsni = function ppStr_inst_15_16_8_6_4_1_2_tsni(s, wi
             tmp12 = ll1 + 1;
             tmp13 = tmp12 + ll2;
             tmp14 = pretty.andL(sl1, sl2);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp11, tmp13, false, tmp14))
+            return pretty.MkPrettyRep(tmp11, tmp13, false, tmp14)
           } else {
             tmp15 = pretty.cIndent(n, seq2_);
             tmp16 = pretty.cAppend(pretty.cNL, tmp15);
             tmp17 = pretty.cAppend(seq1, tmp16);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp17, ll2_, false, false))
+            return pretty.MkPrettyRep(tmp17, ll2_, false, false)
           }
         }
       } else {
@@ -1177,12 +1177,12 @@ ppStr_inst_22_23_16_8_6_4_1_2_tsni = function ppStr_inst_22_23_16_8_6_4_1_2_tsni
             tmp12 = ll1 + 1;
             tmp13 = tmp12 + ll2;
             tmp14 = pretty.andL(sl1, sl2);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp11, tmp13, false, tmp14))
+            return pretty.MkPrettyRep(tmp11, tmp13, false, tmp14)
           } else {
             tmp15 = pretty.cIndent(n, seq2_);
             tmp16 = pretty.cAppend(pretty.cNL, tmp15);
             tmp17 = pretty.cAppend(seq1, tmp16);
-            return runtime.safeCall(pretty.MkPrettyRep(tmp17, ll2_, false, false))
+            return pretty.MkPrettyRep(tmp17, ll2_, false, false)
           }
         }
       } else {
@@ -1315,73 +1315,84 @@ lambda1 = (undefined, function (a, b) {
 lambda = (undefined, function (a, b) {
   return runtime.safeCall(lambda1(a, b))
 });
-(class pretty {
+globalThis.Object.freeze(class pretty {
   static {
-    pretty1 = pretty;
-    this.CSeq = class CSeq {
+    pretty1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
+    globalThis.Object.freeze(class CSeq {
+      static {
+        pretty.CSeq = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "CSeq"]; 
-    };
+    });
     this.CAppend = function CAppend(a, b) {
       return globalThis.Object.freeze(new CAppend.class(a, b));
     };
-    Object.defineProperty(this.CAppend, "class", {
-      enumerable: true,
-      value: class CAppend extends pretty.CSeq {
-        constructor(a, b) {
-          super();
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "CAppend", ["a", "b"]]; 
+    globalThis.Object.freeze(class CAppend extends pretty.CSeq {
+      static {
+        pretty.CAppend.class = this
       }
+      constructor(a, b) {
+        super();
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "CAppend", ["a", "b"]]; 
     });
     this.CIndent = function CIndent(a, b) {
       return globalThis.Object.freeze(new CIndent.class(a, b));
     };
-    Object.defineProperty(this.CIndent, "class", {
-      enumerable: true,
-      value: class CIndent extends pretty.CSeq {
-        constructor(a, b) {
-          super();
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "CIndent", ["a", "b"]]; 
+    globalThis.Object.freeze(class CIndent extends pretty.CSeq {
+      static {
+        pretty.CIndent.class = this
       }
+      constructor(a, b) {
+        super();
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "CIndent", ["a", "b"]]; 
     });
     this.CStr = function CStr(a) {
       return globalThis.Object.freeze(new CStr.class(a));
     };
-    Object.defineProperty(this.CStr, "class", {
-      enumerable: true,
-      value: class CStr extends pretty.CSeq {
-        constructor(a) {
-          super();
-          this.a = a;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "CStr", ["a"]]; 
+    globalThis.Object.freeze(class CStr extends pretty.CSeq {
+      static {
+        pretty.CStr.class = this
       }
+      constructor(a) {
+        super();
+        this.a = a;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "CStr", ["a"]]; 
     });
     this.CCh = function CCh(a) {
       return globalThis.Object.freeze(new CCh.class(a));
     };
-    Object.defineProperty(this.CCh, "class", {
-      enumerable: true,
-      value: class CCh extends pretty.CSeq {
-        constructor(a) {
-          super();
-          this.a = a;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "CCh", ["a"]]; 
+    globalThis.Object.freeze(class CCh extends pretty.CSeq {
+      static {
+        pretty.CCh.class = this
       }
+      constructor(a) {
+        super();
+        this.a = a;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "CCh", ["a"]]; 
     });
-    const CNil$class = class CNil extends pretty.CSeq {
+    globalThis.Object.freeze(class CNil extends pretty.CSeq {
+      static {
+        pretty.CNil = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -1390,9 +1401,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "CNil"]; 
-    };
-    this.CNil = globalThis.Object.freeze(new CNil$class);
-    const CNewline$class = class CNewline extends pretty.CSeq {
+    });
+    globalThis.Object.freeze(class CNewline extends pretty.CSeq {
+      static {
+        pretty.CNewline = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -1401,14 +1414,19 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "CNewline"]; 
-    };
-    this.CNewline = globalThis.Object.freeze(new CNewline$class);
-    this.PprStyle = class PprStyle {
+    });
+    globalThis.Object.freeze(class PprStyle {
+      static {
+        pretty.PprStyle = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "PprStyle"]; 
-    };
-    const PprForUser$class = class PprForUser extends pretty.PprStyle {
+    });
+    globalThis.Object.freeze(class PprForUser extends pretty.PprStyle {
+      static {
+        pretty.PprForUser = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -1417,9 +1435,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "PprForUser"]; 
-    };
-    this.PprForUser = globalThis.Object.freeze(new PprForUser$class);
-    const PprDebug$class = class PprDebug extends pretty.PprStyle {
+    });
+    globalThis.Object.freeze(class PprDebug extends pretty.PprStyle {
+      static {
+        pretty.PprDebug = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -1428,9 +1448,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "PprDebug"]; 
-    };
-    this.PprDebug = globalThis.Object.freeze(new PprDebug$class);
-    const PprShowAll$class = class PprShowAll extends pretty.PprStyle {
+    });
+    globalThis.Object.freeze(class PprShowAll extends pretty.PprStyle {
+      static {
+        pretty.PprShowAll = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -1439,9 +1461,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "PprShowAll"]; 
-    };
-    this.PprShowAll = globalThis.Object.freeze(new PprShowAll$class);
-    const PprInterface$class = class PprInterface extends pretty.PprStyle {
+    });
+    globalThis.Object.freeze(class PprInterface extends pretty.PprStyle {
+      static {
+        pretty.PprInterface = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -1450,25 +1474,24 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "PprInterface"]; 
-    };
-    this.PprInterface = globalThis.Object.freeze(new PprInterface$class);
+    });
     this.cNil = pretty.CNil;
     this.cNL = pretty.CNewline;
     this.MkPrettyRep = function MkPrettyRep(cseq, n, b1, b2) {
       return globalThis.Object.freeze(new MkPrettyRep.class(cseq, n, b1, b2));
     };
-    Object.defineProperty(this.MkPrettyRep, "class", {
-      enumerable: true,
-      value: class MkPrettyRep {
-        constructor(cseq, n, b1, b2) {
-          this.cseq = cseq;
-          this.n = n;
-          this.b1 = b1;
-          this.b2 = b2;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "MkPrettyRep", ["cseq", "n", "b1", "b2"]]; 
+    globalThis.Object.freeze(class MkPrettyRep {
+      static {
+        pretty.MkPrettyRep.class = this
       }
+      constructor(cseq, n, b1, b2) {
+        this.cseq = cseq;
+        this.n = n;
+        this.b1 = b1;
+        this.b2 = b2;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "MkPrettyRep", ["cseq", "n", "b1", "b2"]]; 
     });
   }
   static cAppend(cs1, cs2) {
@@ -1478,10 +1501,10 @@ lambda = (undefined, function (a, b) {
     return pretty.CIndent(n, cs)
   } 
   static cStr(s) {
-    return runtime.safeCall(pretty.CStr(s))
+    return pretty.CStr(s)
   } 
   static cCh(c) {
-    return runtime.safeCall(pretty.CCh(c))
+    return pretty.CCh(c)
   } 
   static mkIndent(n, s) {
     let scrut, scrut1, tmp, tmp1, tmp2, tmp3;
@@ -1615,7 +1638,7 @@ lambda = (undefined, function (a, b) {
   static ppNil(width, is_vert) {
     let tmp;
     tmp = width >= 0;
-    return runtime.safeCall(pretty.MkPrettyRep(pretty.cNil, 0, true, tmp))
+    return pretty.MkPrettyRep(pretty.cNil, 0, true, tmp)
   } 
   static ppStr(s, width, is_vert) {
     let ls, tmp, tmp1, tmp2;
@@ -1623,13 +1646,13 @@ lambda = (undefined, function (a, b) {
     ls = tmp;
     tmp1 = pretty.cStr(s);
     tmp2 = width >= ls;
-    return runtime.safeCall(pretty.MkPrettyRep(tmp1, ls, false, tmp2))
+    return pretty.MkPrettyRep(tmp1, ls, false, tmp2)
   } 
   static ppChar(c, width, is_vert) {
     let tmp, tmp1;
     tmp = pretty.cCh(c);
     tmp1 = width >= 1;
-    return runtime.safeCall(pretty.MkPrettyRep(tmp, 1, false, tmp1))
+    return pretty.MkPrettyRep(tmp, 1, false, tmp1)
   } 
   static ppInt(n, width, is_vert) {
     let tmp, tmp1;
@@ -1707,7 +1730,7 @@ lambda = (undefined, function (a, b) {
         tmp5 = width >= 0;
         tmp6 = pretty.andL(sl1, sl2);
         tmp7 = pretty.andL(tmp5, tmp6);
-        return runtime.safeCall(pretty.MkPrettyRep(tmp2, tmp3, tmp4, tmp7))
+        return pretty.MkPrettyRep(tmp2, tmp3, tmp4, tmp7)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -1772,7 +1795,7 @@ lambda = (undefined, function (a, b) {
         tmp9 = width >= wi;
         tmp10 = pretty.andL(sl1, sl2);
         tmp11 = pretty.andL(tmp9, tmp10);
-        return runtime.safeCall(pretty.MkPrettyRep(tmp6, tmp7, tmp8, tmp11))
+        return pretty.MkPrettyRep(tmp6, tmp7, tmp8, tmp11)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -1819,7 +1842,7 @@ lambda = (undefined, function (a, b) {
         tmp1 = pretty.cAppend(nl, seq2);
         tmp2 = pretty.cAppend(seq1, tmp1);
         tmp3 = pretty.andL(emp1, emp2);
-        return runtime.safeCall(pretty.MkPrettyRep(tmp2, ll2, tmp3, false))
+        return pretty.MkPrettyRep(tmp2, ll2, tmp3, false)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -1852,7 +1875,7 @@ lambda = (undefined, function (a, b) {
         sl = param3;
         tmp1 = pretty.cIndent(n, seq);
         tmp2 = ll + n;
-        return runtime.safeCall(pretty.MkPrettyRep(tmp1, tmp2, emp, sl))
+        return pretty.MkPrettyRep(tmp1, tmp2, emp, sl)
       } else {
         return runtime.safeCall(p(width, false))
       }
@@ -1909,12 +1932,12 @@ lambda = (undefined, function (a, b) {
               tmp9 = ll1 + 1;
               tmp10 = tmp9 + ll2;
               tmp11 = pretty.andL(sl1, sl2);
-              return runtime.safeCall(pretty.MkPrettyRep(tmp8, tmp10, false, tmp11))
+              return pretty.MkPrettyRep(tmp8, tmp10, false, tmp11)
             } else {
               tmp12 = pretty.cIndent(n, seq2_);
               tmp13 = pretty.cAppend(pretty.cNL, tmp12);
               tmp14 = pretty.cAppend(seq1, tmp13);
-              return runtime.safeCall(pretty.MkPrettyRep(tmp14, ll2_, false, false))
+              return pretty.MkPrettyRep(tmp14, ll2_, false, false)
             }
           }
         } else {
@@ -1941,7 +1964,7 @@ lambda = (undefined, function (a, b) {
     tmp = testPretty_nofib_inst_22_23_tsni();
     return NofibPrelude.nofibListToString(tmp)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "pretty"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "pretty"]; 
 });
 let pretty = pretty1; export default pretty;

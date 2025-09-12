@@ -4575,9 +4575,12 @@ lambda1 = (undefined, function (a, b) {
 lambda = (undefined, function (x, y) {
   return x == y
 });
-(class awards {
+globalThis.Object.freeze(class awards {
   static {
-    awards1 = awards;
+    awards1 = this
+  }
+  constructor() {
+    runtime.Unit;
   }
   static delete_(xs, e) {
     return NofibPrelude.deleteBy(lambda, e, xs)
@@ -4791,7 +4794,7 @@ lambda = (undefined, function (x, y) {
   static main() {
     return testAwards_nofib_inst_28_29_tsni(100)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "awards"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "awards"]; 
 });
 let awards = awards1; export default awards;

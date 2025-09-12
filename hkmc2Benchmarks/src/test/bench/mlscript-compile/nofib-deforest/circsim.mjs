@@ -11290,7 +11290,7 @@ upsweep_inst_75_12_tsni = function upsweep_inst_75_12_tsni(f, t) {
       let param01, x1;
       param01 = _deforest_Cell_value;
       x1 = param01;
-      return runtime.safeCall(circsim.Cell(d))
+      return circsim.Cell(d)
     };
     arr = globalThis.Object.freeze([
       a,
@@ -11344,7 +11344,7 @@ upsweep_inst_75_12_tsni = function upsweep_inst_75_12_tsni(f, t) {
               dr = first13;
               tmp3 = downsweep_inst_75_13_tsni(g, dl, l1);
               tmp4 = downsweep_inst_75_13_tsni(g, dr, r1);
-              return runtime.safeCall(circsim.Node(circsim.Unit, tmp3, tmp4))
+              return circsim.Node(circsim.Unit, tmp3, tmp4)
             } else {
               throw globalThis.Object.freeze(new globalThis.Error("match error"))
             }
@@ -17252,7 +17252,7 @@ reg_inst_102_110_111_tsni = function reg_inst_102_110_111_tsni(sto, n) {
     4
   ]);
   tmp = NofibPrelude.Cons(arr, NofibPrelude.Nil);
-  tmp1 = runtime.safeCall(circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp));
+  tmp1 = circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp);
   tmp2 = n + 1;
   tmp3 = n + 5;
   arr1 = globalThis.Object.freeze([
@@ -17270,7 +17270,7 @@ reg_inst_102_110_111_tsni = function reg_inst_102_110_111_tsni(sto, n) {
     5
   ]);
   tmp5 = NofibPrelude.Cons(arr2, NofibPrelude.Nil);
-  tmp6 = runtime.safeCall(circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5));
+  tmp6 = circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5);
   tmp7 = n + 2;
   arr3 = globalThis.Object.freeze([
     sto,
@@ -17287,7 +17287,7 @@ reg_inst_102_110_111_tsni = function reg_inst_102_110_111_tsni(sto, n) {
     1
   ]);
   tmp9 = NofibPrelude.Cons(arr4, NofibPrelude.Nil);
-  tmp10 = runtime.safeCall(circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9));
+  tmp10 = circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9);
   tmp11 = n + 3;
   tmp12 = n + 1;
   arr5 = globalThis.Object.freeze([
@@ -17312,7 +17312,7 @@ reg_inst_102_110_111_tsni = function reg_inst_102_110_111_tsni(sto, n) {
     2
   ]);
   tmp16 = NofibPrelude.Cons(arr7, NofibPrelude.Nil);
-  tmp17 = runtime.safeCall(circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16));
+  tmp17 = circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16);
   tmp18 = n + 4;
   arr8 = globalThis.Object.freeze([
     sto,
@@ -17335,7 +17335,7 @@ reg_inst_102_110_111_tsni = function reg_inst_102_110_111_tsni(sto, n) {
     1
   ]);
   tmp21 = NofibPrelude.Cons(arr10, NofibPrelude.Nil);
-  tmp22 = runtime.safeCall(circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21));
+  tmp22 = circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21);
   tmp23 = n + 5;
   tmp24 = n + 3;
   arr11 = globalThis.Object.freeze([
@@ -17360,7 +17360,7 @@ reg_inst_102_110_111_tsni = function reg_inst_102_110_111_tsni(sto, n) {
     0
   ]);
   tmp28 = NofibPrelude.Cons(arr13, NofibPrelude.Nil);
-  tmp29 = runtime.safeCall(circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28));
+  tmp29 = circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28);
   tmp30 = n + 6;
   tmp31 = n + 1;
   arr14 = globalThis.Object.freeze([
@@ -17369,7 +17369,7 @@ reg_inst_102_110_111_tsni = function reg_inst_102_110_111_tsni(sto, n) {
     circsim.F
   ]);
   tmp32 = NofibPrelude.Cons(arr14, NofibPrelude.Nil);
-  tmp33 = runtime.safeCall(circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil));
+  tmp33 = circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil);
   _deforest_Cons_head6 = tmp33;
   _deforest_Cons_tail6 = (ys) => {
     return ys
@@ -19088,7 +19088,7 @@ regs_inst_115_116_tsni = function regs_inst_115_116_tsni(bits) {
     tmp13
   ]);
   tmp14 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
-  tmp15 = runtime.safeCall(circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14));
+  tmp15 = circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14);
   sto = tmp15;
   tmp16 = bits - 1;
   tmp17 = enumFromTo_inst_115_116_107_tsni(0, tmp16);
@@ -19165,7 +19165,7 @@ reg_inst_115_116_110_111_tsni = function reg_inst_115_116_110_111_tsni(sto, n) {
     4
   ]);
   tmp = NofibPrelude.Cons(arr, NofibPrelude.Nil);
-  tmp1 = runtime.safeCall(circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp));
+  tmp1 = circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp);
   tmp2 = n + 1;
   tmp3 = n + 5;
   arr1 = globalThis.Object.freeze([
@@ -19183,7 +19183,7 @@ reg_inst_115_116_110_111_tsni = function reg_inst_115_116_110_111_tsni(sto, n) {
     5
   ]);
   tmp5 = NofibPrelude.Cons(arr2, NofibPrelude.Nil);
-  tmp6 = runtime.safeCall(circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5));
+  tmp6 = circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5);
   tmp7 = n + 2;
   arr3 = globalThis.Object.freeze([
     sto,
@@ -19200,7 +19200,7 @@ reg_inst_115_116_110_111_tsni = function reg_inst_115_116_110_111_tsni(sto, n) {
     1
   ]);
   tmp9 = NofibPrelude.Cons(arr4, NofibPrelude.Nil);
-  tmp10 = runtime.safeCall(circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9));
+  tmp10 = circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9);
   tmp11 = n + 3;
   tmp12 = n + 1;
   arr5 = globalThis.Object.freeze([
@@ -19225,7 +19225,7 @@ reg_inst_115_116_110_111_tsni = function reg_inst_115_116_110_111_tsni(sto, n) {
     2
   ]);
   tmp16 = NofibPrelude.Cons(arr7, NofibPrelude.Nil);
-  tmp17 = runtime.safeCall(circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16));
+  tmp17 = circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16);
   tmp18 = n + 4;
   arr8 = globalThis.Object.freeze([
     sto,
@@ -19248,7 +19248,7 @@ reg_inst_115_116_110_111_tsni = function reg_inst_115_116_110_111_tsni(sto, n) {
     1
   ]);
   tmp21 = NofibPrelude.Cons(arr10, NofibPrelude.Nil);
-  tmp22 = runtime.safeCall(circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21));
+  tmp22 = circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21);
   tmp23 = n + 5;
   tmp24 = n + 3;
   arr11 = globalThis.Object.freeze([
@@ -19273,7 +19273,7 @@ reg_inst_115_116_110_111_tsni = function reg_inst_115_116_110_111_tsni(sto, n) {
     0
   ]);
   tmp28 = NofibPrelude.Cons(arr13, NofibPrelude.Nil);
-  tmp29 = runtime.safeCall(circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28));
+  tmp29 = circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28);
   tmp30 = n + 6;
   tmp31 = n + 1;
   arr14 = globalThis.Object.freeze([
@@ -19282,7 +19282,7 @@ reg_inst_115_116_110_111_tsni = function reg_inst_115_116_110_111_tsni(sto, n) {
     circsim.F
   ]);
   tmp32 = NofibPrelude.Cons(arr14, NofibPrelude.Nil);
-  tmp33 = runtime.safeCall(circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil));
+  tmp33 = circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil);
   _deforest_Cons_head6 = tmp33;
   _deforest_Cons_tail6 = (ys) => {
     return ys
@@ -22820,7 +22820,7 @@ regs_inst_125_126_116_tsni = function regs_inst_125_126_116_tsni(bits) {
     tmp13
   ]);
   tmp14 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
-  tmp15 = runtime.safeCall(circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14));
+  tmp15 = circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14);
   sto = tmp15;
   tmp16 = bits - 1;
   tmp17 = enumFromTo_inst_125_126_116_107_tsni(0, tmp16);
@@ -23047,7 +23047,7 @@ reg_inst_125_126_116_110_111_tsni = function reg_inst_125_126_116_110_111_tsni(s
     4
   ]);
   tmp = NofibPrelude.Cons(arr, NofibPrelude.Nil);
-  tmp1 = runtime.safeCall(circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp));
+  tmp1 = circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp);
   tmp2 = n + 1;
   tmp3 = n + 5;
   arr1 = globalThis.Object.freeze([
@@ -23065,7 +23065,7 @@ reg_inst_125_126_116_110_111_tsni = function reg_inst_125_126_116_110_111_tsni(s
     5
   ]);
   tmp5 = NofibPrelude.Cons(arr2, NofibPrelude.Nil);
-  tmp6 = runtime.safeCall(circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5));
+  tmp6 = circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5);
   tmp7 = n + 2;
   arr3 = globalThis.Object.freeze([
     sto,
@@ -23082,7 +23082,7 @@ reg_inst_125_126_116_110_111_tsni = function reg_inst_125_126_116_110_111_tsni(s
     1
   ]);
   tmp9 = NofibPrelude.Cons(arr4, NofibPrelude.Nil);
-  tmp10 = runtime.safeCall(circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9));
+  tmp10 = circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9);
   tmp11 = n + 3;
   tmp12 = n + 1;
   arr5 = globalThis.Object.freeze([
@@ -23107,7 +23107,7 @@ reg_inst_125_126_116_110_111_tsni = function reg_inst_125_126_116_110_111_tsni(s
     2
   ]);
   tmp16 = NofibPrelude.Cons(arr7, NofibPrelude.Nil);
-  tmp17 = runtime.safeCall(circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16));
+  tmp17 = circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16);
   tmp18 = n + 4;
   arr8 = globalThis.Object.freeze([
     sto,
@@ -23130,7 +23130,7 @@ reg_inst_125_126_116_110_111_tsni = function reg_inst_125_126_116_110_111_tsni(s
     1
   ]);
   tmp21 = NofibPrelude.Cons(arr10, NofibPrelude.Nil);
-  tmp22 = runtime.safeCall(circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21));
+  tmp22 = circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21);
   tmp23 = n + 5;
   tmp24 = n + 3;
   arr11 = globalThis.Object.freeze([
@@ -23155,7 +23155,7 @@ reg_inst_125_126_116_110_111_tsni = function reg_inst_125_126_116_110_111_tsni(s
     0
   ]);
   tmp28 = NofibPrelude.Cons(arr13, NofibPrelude.Nil);
-  tmp29 = runtime.safeCall(circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28));
+  tmp29 = circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28);
   tmp30 = n + 6;
   tmp31 = n + 1;
   arr14 = globalThis.Object.freeze([
@@ -23164,7 +23164,7 @@ reg_inst_125_126_116_110_111_tsni = function reg_inst_125_126_116_110_111_tsni(s
     circsim.F
   ]);
   tmp32 = NofibPrelude.Cons(arr14, NofibPrelude.Nil);
-  tmp33 = runtime.safeCall(circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil));
+  tmp33 = circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil);
   _deforest_Cons_head6 = tmp33;
   _deforest_Cons_tail6 = (ys) => {
     return ys
@@ -23313,7 +23313,7 @@ regs_inst_127_128_126_116_tsni = function regs_inst_127_128_126_116_tsni(bits) {
     tmp13
   ]);
   tmp14 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
-  tmp15 = runtime.safeCall(circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14));
+  tmp15 = circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14);
   sto = tmp15;
   tmp16 = bits - 1;
   tmp17 = enumFromTo_inst_127_128_126_116_107_tsni(0, tmp16);
@@ -23390,7 +23390,7 @@ reg_inst_127_128_126_116_110_111_tsni = function reg_inst_127_128_126_116_110_11
     4
   ]);
   tmp = NofibPrelude.Cons(arr, NofibPrelude.Nil);
-  tmp1 = runtime.safeCall(circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp));
+  tmp1 = circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp);
   tmp2 = n + 1;
   tmp3 = n + 5;
   arr1 = globalThis.Object.freeze([
@@ -23408,7 +23408,7 @@ reg_inst_127_128_126_116_110_111_tsni = function reg_inst_127_128_126_116_110_11
     5
   ]);
   tmp5 = NofibPrelude.Cons(arr2, NofibPrelude.Nil);
-  tmp6 = runtime.safeCall(circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5));
+  tmp6 = circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5);
   tmp7 = n + 2;
   arr3 = globalThis.Object.freeze([
     sto,
@@ -23425,7 +23425,7 @@ reg_inst_127_128_126_116_110_111_tsni = function reg_inst_127_128_126_116_110_11
     1
   ]);
   tmp9 = NofibPrelude.Cons(arr4, NofibPrelude.Nil);
-  tmp10 = runtime.safeCall(circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9));
+  tmp10 = circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9);
   tmp11 = n + 3;
   tmp12 = n + 1;
   arr5 = globalThis.Object.freeze([
@@ -23450,7 +23450,7 @@ reg_inst_127_128_126_116_110_111_tsni = function reg_inst_127_128_126_116_110_11
     2
   ]);
   tmp16 = NofibPrelude.Cons(arr7, NofibPrelude.Nil);
-  tmp17 = runtime.safeCall(circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16));
+  tmp17 = circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16);
   tmp18 = n + 4;
   arr8 = globalThis.Object.freeze([
     sto,
@@ -23473,7 +23473,7 @@ reg_inst_127_128_126_116_110_111_tsni = function reg_inst_127_128_126_116_110_11
     1
   ]);
   tmp21 = NofibPrelude.Cons(arr10, NofibPrelude.Nil);
-  tmp22 = runtime.safeCall(circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21));
+  tmp22 = circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21);
   tmp23 = n + 5;
   tmp24 = n + 3;
   arr11 = globalThis.Object.freeze([
@@ -23498,7 +23498,7 @@ reg_inst_127_128_126_116_110_111_tsni = function reg_inst_127_128_126_116_110_11
     0
   ]);
   tmp28 = NofibPrelude.Cons(arr13, NofibPrelude.Nil);
-  tmp29 = runtime.safeCall(circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28));
+  tmp29 = circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28);
   tmp30 = n + 6;
   tmp31 = n + 1;
   arr14 = globalThis.Object.freeze([
@@ -23507,7 +23507,7 @@ reg_inst_127_128_126_116_110_111_tsni = function reg_inst_127_128_126_116_110_11
     circsim.F
   ]);
   tmp32 = NofibPrelude.Cons(arr14, NofibPrelude.Nil);
-  tmp33 = runtime.safeCall(circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil));
+  tmp33 = circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil);
   _deforest_Cons_head6 = tmp33;
   _deforest_Cons_tail6 = (ys) => {
     return ys
@@ -27570,51 +27570,65 @@ down1 = function down1(f) {
     return down1$(f, l, r, x)
   }
 };
-(class circsim {
+globalThis.Object.freeze(class circsim {
   static {
-    circsim1 = circsim;
+    circsim1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, arr;
-    this.BinTree = class BinTree {
+    globalThis.Object.freeze(class BinTree {
+      static {
+        circsim.BinTree = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "BinTree"]; 
-    };
+    });
     this.Cell = function Cell(value) {
       return globalThis.Object.freeze(new Cell.class(value));
     };
-    Object.defineProperty(this.Cell, "class", {
-      enumerable: true,
-      value: class Cell extends circsim.BinTree {
-        constructor(value) {
-          super();
-          this.value = value;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Cell", ["value"]]; 
+    globalThis.Object.freeze(class Cell extends circsim.BinTree {
+      static {
+        circsim.Cell.class = this
       }
+      constructor(value) {
+        super();
+        this.value = value;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Cell", ["value"]]; 
     });
     this.Node = function Node(value, left, right) {
       return globalThis.Object.freeze(new Node.class(value, left, right));
     };
-    Object.defineProperty(this.Node, "class", {
-      enumerable: true,
-      value: class Node extends circsim.BinTree {
-        constructor(value, left, right) {
-          super();
-          this.value = value;
-          this.left = left;
-          this.right = right;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Node", ["value", "left", "right"]]; 
+    globalThis.Object.freeze(class Node extends circsim.BinTree {
+      static {
+        circsim.Node.class = this
       }
+      constructor(value, left, right) {
+        super();
+        this.value = value;
+        this.left = left;
+        this.right = right;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Node", ["value", "left", "right"]]; 
     });
-    this.Componenet = class Componenet {
+    globalThis.Object.freeze(class Componenet {
+      static {
+        circsim.Componenet = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Componenet"]; 
-    };
-    const None_$class = class None_ extends circsim.Componenet {
+    });
+    globalThis.Object.freeze(class None_ extends circsim.Componenet {
+      static {
+        circsim.None_ = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27623,9 +27637,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "None_"]; 
-    };
-    this.None_ = globalThis.Object.freeze(new None_$class);
-    const Inp$class = class Inp extends circsim.Componenet {
+    });
+    globalThis.Object.freeze(class Inp extends circsim.Componenet {
+      static {
+        circsim.Inp = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27634,9 +27650,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Inp"]; 
-    };
-    this.Inp = globalThis.Object.freeze(new Inp$class);
-    const Outp$class = class Outp extends circsim.Componenet {
+    });
+    globalThis.Object.freeze(class Outp extends circsim.Componenet {
+      static {
+        circsim.Outp = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27645,9 +27663,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Outp"]; 
-    };
-    this.Outp = globalThis.Object.freeze(new Outp$class);
-    const Dff$class = class Dff extends circsim.Componenet {
+    });
+    globalThis.Object.freeze(class Dff extends circsim.Componenet {
+      static {
+        circsim.Dff = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27656,9 +27676,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Dff"]; 
-    };
-    this.Dff = globalThis.Object.freeze(new Dff$class);
-    const Inv$class = class Inv extends circsim.Componenet {
+    });
+    globalThis.Object.freeze(class Inv extends circsim.Componenet {
+      static {
+        circsim.Inv = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27667,9 +27689,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Inv"]; 
-    };
-    this.Inv = globalThis.Object.freeze(new Inv$class);
-    const And2$class = class And2 extends circsim.Componenet {
+    });
+    globalThis.Object.freeze(class And2 extends circsim.Componenet {
+      static {
+        circsim.And2 = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27678,9 +27702,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "And2"]; 
-    };
-    this.And2 = globalThis.Object.freeze(new And2$class);
-    const Or2$class = class Or2 extends circsim.Componenet {
+    });
+    globalThis.Object.freeze(class Or2 extends circsim.Componenet {
+      static {
+        circsim.Or2 = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27689,9 +27715,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Or2"]; 
-    };
-    this.Or2 = globalThis.Object.freeze(new Or2$class);
-    const Xor$class = class Xor extends circsim.Componenet {
+    });
+    globalThis.Object.freeze(class Xor extends circsim.Componenet {
+      static {
+        circsim.Xor = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27700,9 +27728,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Xor"]; 
-    };
-    this.Xor = globalThis.Object.freeze(new Xor$class);
-    const Unit$class = class Unit {
+    });
+    globalThis.Object.freeze(class Unit {
+      static {
+        circsim.Unit = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: Unit
@@ -27710,31 +27740,36 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Unit"]; 
-    };
-    this.Unit = globalThis.Object.freeze(new Unit$class);
+    });
     this.PS = function PS(pid, compType, pathDepth, inports, outports) {
       return globalThis.Object.freeze(new PS.class(pid, compType, pathDepth, inports, outports));
     };
-    Object.defineProperty(this.PS, "class", {
-      enumerable: true,
-      value: class PS {
-        constructor(pid, compType, pathDepth, inports, outports) {
-          this.pid = pid;
-          this.compType = compType;
-          this.pathDepth = pathDepth;
-          this.inports = inports;
-          this.outports = outports;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "PS", ["pid", "compType", "pathDepth", "inports", "outports"]]; 
+    globalThis.Object.freeze(class PS {
+      static {
+        circsim.PS.class = this
       }
+      constructor(pid, compType, pathDepth, inports, outports) {
+        this.pid = pid;
+        this.compType = compType;
+        this.pathDepth = pathDepth;
+        this.inports = inports;
+        this.outports = outports;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "PS", ["pid", "compType", "pathDepth", "inports", "outports"]]; 
     });
-    this.Boolean = class Boolean {
+    globalThis.Object.freeze(class Boolean {
+      static {
+        circsim.Boolean = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Boolean"]; 
-    };
-    const F$class = class F extends circsim.Boolean {
+    });
+    globalThis.Object.freeze(class F extends circsim.Boolean {
+      static {
+        circsim.F = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27743,9 +27778,11 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "F"]; 
-    };
-    this.F = globalThis.Object.freeze(new F$class);
-    const T$class = class T extends circsim.Boolean {
+    });
+    globalThis.Object.freeze(class T extends circsim.Boolean {
+      static {
+        circsim.T = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -27754,11 +27791,10 @@ down1 = function down1(f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "T"]; 
-    };
-    this.T = globalThis.Object.freeze(new T$class);
+    });
     tmp = - 1;
     tmp1 = - 1;
-    tmp2 = runtime.safeCall(circsim.PS(tmp, circsim.None_, tmp1, NofibPrelude.Nil, NofibPrelude.Nil));
+    tmp2 = circsim.PS(tmp, circsim.None_, tmp1, NofibPrelude.Nil, NofibPrelude.Nil);
     this.emptyState = tmp2;
     tmp3 = - 1;
     tmp4 = - 1;
@@ -27795,7 +27831,7 @@ down1 = function down1(f) {
     tmp1 = circsim.compType(p);
     tmp2 = circsim.pathDepth(p);
     tmp3 = circsim.inports(p);
-    return runtime.safeCall(circsim.PS(tmp, tmp1, tmp2, tmp3, noutports))
+    return circsim.PS(tmp, tmp1, tmp2, tmp3, noutports)
   } 
   static updateInports(p, ninports) {
     let tmp, tmp1, tmp2, tmp3;
@@ -27803,7 +27839,7 @@ down1 = function down1(f) {
     tmp1 = circsim.compType(p);
     tmp2 = circsim.pathDepth(p);
     tmp3 = circsim.outports(p);
-    return runtime.safeCall(circsim.PS(tmp, tmp1, tmp2, ninports, tmp3))
+    return circsim.PS(tmp, tmp1, tmp2, ninports, tmp3)
   } 
   static put(xs) {
     let scrut, first1, first0, fstHalf, sndHalf, param0, param1, x, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
@@ -27812,7 +27848,7 @@ down1 = function down1(f) {
       param1 = xs.tail;
       x = param0;
       if (param1 instanceof NofibPrelude.Nil.class) {
-        return runtime.safeCall(circsim.Cell(x))
+        return circsim.Cell(x)
       } else {
         tmp = NofibPrelude.listLen(xs);
         tmp1 = NofibPrelude.intDiv(tmp, 2);
@@ -27824,7 +27860,7 @@ down1 = function down1(f) {
           sndHalf = first1;
           tmp2 = circsim.put(fstHalf);
           tmp3 = circsim.put(sndHalf);
-          return runtime.safeCall(circsim.Node(circsim.Unit, tmp2, tmp3))
+          return circsim.Node(circsim.Unit, tmp2, tmp3)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -27840,7 +27876,7 @@ down1 = function down1(f) {
         sndHalf = first1;
         tmp6 = circsim.put(fstHalf);
         tmp7 = circsim.put(sndHalf);
-        return runtime.safeCall(circsim.Node(circsim.Unit, tmp6, tmp7))
+        return circsim.Node(circsim.Unit, tmp6, tmp7)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -27870,7 +27906,7 @@ down1 = function down1(f) {
     if (t instanceof circsim.Cell.class) {
       param0 = t.value;
       a = param0;
-      tmp = runtime.safeCall(circsim.Cell(a));
+      tmp = circsim.Cell(a);
       arr = globalThis.Object.freeze([
         a,
         tmp
@@ -27900,7 +27936,7 @@ down1 = function down1(f) {
             lv,
             rv
           ]);
-          tmp2 = runtime.safeCall(circsim.Node(arr1, l_, r_));
+          tmp2 = circsim.Node(arr1, l_, r_);
           arr2 = globalThis.Object.freeze([
             tmp1,
             tmp2
@@ -27921,7 +27957,7 @@ down1 = function down1(f) {
     if (t instanceof circsim.Cell.class) {
       param0 = t.value;
       x = param0;
-      return runtime.safeCall(circsim.Cell(d))
+      return circsim.Cell(d)
     } else if (t instanceof circsim.Node.class) {
       param0 = t.value;
       param1 = t.left;
@@ -27941,7 +27977,7 @@ down1 = function down1(f) {
           dr = first11;
           tmp = circsim.downsweep(g, dl, l);
           tmp1 = circsim.downsweep(g, dr, r);
-          return runtime.safeCall(circsim.Node(circsim.Unit, tmp, tmp1))
+          return circsim.Node(circsim.Unit, tmp, tmp1)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -28303,7 +28339,7 @@ down1 = function down1(f) {
         param1 = signals.tail;
         x5 = param0;
         if (param1 instanceof NofibPrelude.Nil.class) {
-          return runtime.safeCall(NofibPrelude.Some(x5))
+          return NofibPrelude.Some(x5)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -28316,7 +28352,7 @@ down1 = function down1(f) {
         param1 = signals.tail;
         x4 = param0;
         if (param1 instanceof NofibPrelude.Nil.class) {
-          return runtime.safeCall(NofibPrelude.Some(x4))
+          return NofibPrelude.Some(x4)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -28330,7 +28366,7 @@ down1 = function down1(f) {
         x3 = param0;
         if (param1 instanceof NofibPrelude.Nil.class) {
           tmp = circsim.inv(x3);
-          return runtime.safeCall(NofibPrelude.Some(tmp))
+          return NofibPrelude.Some(tmp)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -28348,7 +28384,7 @@ down1 = function down1(f) {
           y2 = param01;
           if (param11 instanceof NofibPrelude.Nil.class) {
             tmp1 = circsim.and2(x2, y2);
-            return runtime.safeCall(NofibPrelude.Some(tmp1))
+            return NofibPrelude.Some(tmp1)
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
@@ -28369,7 +28405,7 @@ down1 = function down1(f) {
           y1 = param01;
           if (param11 instanceof NofibPrelude.Nil.class) {
             tmp2 = circsim.or2(x1, y1);
-            return runtime.safeCall(NofibPrelude.Some(tmp2))
+            return NofibPrelude.Some(tmp2)
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
@@ -28390,7 +28426,7 @@ down1 = function down1(f) {
           y = param01;
           if (param11 instanceof NofibPrelude.Nil.class) {
             tmp3 = circsim.xor(x, y);
-            return runtime.safeCall(NofibPrelude.Some(tmp3))
+            return NofibPrelude.Some(tmp3)
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
@@ -28820,7 +28856,7 @@ down1 = function down1(f) {
       4
     ]);
     tmp = NofibPrelude.Cons(arr, NofibPrelude.Nil);
-    tmp1 = runtime.safeCall(circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp));
+    tmp1 = circsim.PS(n, circsim.Inp, 0, NofibPrelude.Nil, tmp);
     tmp2 = n + 1;
     tmp3 = n + 5;
     arr1 = globalThis.Object.freeze([
@@ -28838,7 +28874,7 @@ down1 = function down1(f) {
       5
     ]);
     tmp5 = NofibPrelude.Cons(arr2, NofibPrelude.Nil);
-    tmp6 = runtime.safeCall(circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5));
+    tmp6 = circsim.PS(tmp2, circsim.Dff, 1, tmp4, tmp5);
     tmp7 = n + 2;
     arr3 = globalThis.Object.freeze([
       sto,
@@ -28855,7 +28891,7 @@ down1 = function down1(f) {
       1
     ]);
     tmp9 = NofibPrelude.Cons(arr4, NofibPrelude.Nil);
-    tmp10 = runtime.safeCall(circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9));
+    tmp10 = circsim.PS(tmp7, circsim.Inv, 1, tmp8, tmp9);
     tmp11 = n + 3;
     tmp12 = n + 1;
     arr5 = globalThis.Object.freeze([
@@ -28880,7 +28916,7 @@ down1 = function down1(f) {
       2
     ]);
     tmp16 = NofibPrelude.Cons(arr7, NofibPrelude.Nil);
-    tmp17 = runtime.safeCall(circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16));
+    tmp17 = circsim.PS(tmp11, circsim.And2, 2, tmp15, tmp16);
     tmp18 = n + 4;
     arr8 = globalThis.Object.freeze([
       sto,
@@ -28903,7 +28939,7 @@ down1 = function down1(f) {
       1
     ]);
     tmp21 = NofibPrelude.Cons(arr10, NofibPrelude.Nil);
-    tmp22 = runtime.safeCall(circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21));
+    tmp22 = circsim.PS(tmp18, circsim.And2, 1, tmp20, tmp21);
     tmp23 = n + 5;
     tmp24 = n + 3;
     arr11 = globalThis.Object.freeze([
@@ -28928,7 +28964,7 @@ down1 = function down1(f) {
       0
     ]);
     tmp28 = NofibPrelude.Cons(arr13, NofibPrelude.Nil);
-    tmp29 = runtime.safeCall(circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28));
+    tmp29 = circsim.PS(tmp23, circsim.Or2, 3, tmp27, tmp28);
     tmp30 = n + 6;
     tmp31 = n + 1;
     arr14 = globalThis.Object.freeze([
@@ -28937,7 +28973,7 @@ down1 = function down1(f) {
       circsim.F
     ]);
     tmp32 = NofibPrelude.Cons(arr14, NofibPrelude.Nil);
-    tmp33 = runtime.safeCall(circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil));
+    tmp33 = circsim.PS(tmp30, circsim.Outp, 4, tmp32, NofibPrelude.Nil);
     tmp34 = NofibPrelude.Cons(tmp33, NofibPrelude.Nil);
     tmp35 = NofibPrelude.Cons(tmp29, tmp34);
     tmp36 = NofibPrelude.Cons(tmp22, tmp35);
@@ -28977,7 +29013,7 @@ down1 = function down1(f) {
       tmp13
     ]);
     tmp14 = NofibPrelude.Cons(arr1, NofibPrelude.Nil);
-    tmp15 = runtime.safeCall(circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14));
+    tmp15 = circsim.PS(0, circsim.Inp, 0, NofibPrelude.Nil, tmp14);
     sto = tmp15;
     tmp16 = bits - 1;
     tmp17 = enumFromTo_inst_102_107_tsni(0, tmp16);
@@ -29021,7 +29057,7 @@ down1 = function down1(f) {
     tmp = testCircsim_nofib_inst_127_128_tsni(40);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "circsim"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "circsim"]; 
 });
 let circsim = circsim1; export default circsim;

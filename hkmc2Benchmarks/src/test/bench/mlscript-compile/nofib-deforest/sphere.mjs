@@ -44855,179 +44855,190 @@ lambda1 = (undefined, function (z) {
     return lambda$(z)
   }
 });
-(class sphere {
+globalThis.Object.freeze(class sphere {
   static {
-    sphere1 = sphere;
+    sphere1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let arr, arr1, arr2, tmp, arr3, tmp1, arr4, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, arr5, tmp10, arr6, tmp11, arr7, tmp12, arr8, tmp13, tmp14, arr9, tmp15, tmp16, arr10, tmp17, tmp18, tmp19, arr11, tmp20, tmp21, arr12, tmp22, tmp23, tmp24, arr13, tmp25, tmp26, arr14, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, arr15, arr16, tmp38, tmp39, arr17, arr18, tmp40, tmp41, arr19, arr20, tmp42, tmp43, tmp44, tmp45, arr21, arr22;
     this.pi = globalThis.Math.PI;
     this.epsilon = 0.000001;
     this.infinity = 100000000.0;
-    this.Light = class Light {
+    globalThis.Object.freeze(class Light {
+      static {
+        sphere.Light = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Light"]; 
-    };
+    });
     this.Directional = function Directional(x, y) {
       return globalThis.Object.freeze(new Directional.class(x, y));
     };
-    Object.defineProperty(this.Directional, "class", {
-      enumerable: true,
-      value: class Directional extends sphere.Light {
-        constructor(x, y) {
-          super();
-          this.x = x;
-          this.y = y;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Directional", ["x", "y"]]; 
+    globalThis.Object.freeze(class Directional extends sphere.Light {
+      static {
+        sphere.Directional.class = this
       }
+      constructor(x, y) {
+        super();
+        this.x = x;
+        this.y = y;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Directional", ["x", "y"]]; 
     });
     this.Point = function Point(x, y) {
       return globalThis.Object.freeze(new Point.class(x, y));
     };
-    Object.defineProperty(this.Point, "class", {
-      enumerable: true,
-      value: class Point extends sphere.Light {
-        constructor(x, y) {
-          super();
-          this.x = x;
-          this.y = y;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Point", ["x", "y"]]; 
+    globalThis.Object.freeze(class Point extends sphere.Light {
+      static {
+        sphere.Point.class = this
       }
+      constructor(x, y) {
+        super();
+        this.x = x;
+        this.y = y;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Point", ["x", "y"]]; 
     });
-    this.Surfspec = class Surfspec {
+    globalThis.Object.freeze(class Surfspec {
+      static {
+        sphere.Surfspec = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Surfspec"]; 
-    };
+    });
     this.Ambient = function Ambient(v) {
       return globalThis.Object.freeze(new Ambient.class(v));
     };
-    Object.defineProperty(this.Ambient, "class", {
-      enumerable: true,
-      value: class Ambient extends sphere.Surfspec {
-        constructor(v) {
-          super();
-          this.v = v;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Ambient", ["v"]]; 
+    globalThis.Object.freeze(class Ambient extends sphere.Surfspec {
+      static {
+        sphere.Ambient.class = this
       }
+      constructor(v) {
+        super();
+        this.v = v;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Ambient", ["v"]]; 
     });
     this.Diffuse = function Diffuse(v) {
       return globalThis.Object.freeze(new Diffuse.class(v));
     };
-    Object.defineProperty(this.Diffuse, "class", {
-      enumerable: true,
-      value: class Diffuse extends sphere.Surfspec {
-        constructor(v) {
-          super();
-          this.v = v;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Diffuse", ["v"]]; 
+    globalThis.Object.freeze(class Diffuse extends sphere.Surfspec {
+      static {
+        sphere.Diffuse.class = this
       }
+      constructor(v) {
+        super();
+        this.v = v;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Diffuse", ["v"]]; 
     });
     this.Specular = function Specular(v) {
       return globalThis.Object.freeze(new Specular.class(v));
     };
-    Object.defineProperty(this.Specular, "class", {
-      enumerable: true,
-      value: class Specular extends sphere.Surfspec {
-        constructor(v) {
-          super();
-          this.v = v;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Specular", ["v"]]; 
+    globalThis.Object.freeze(class Specular extends sphere.Surfspec {
+      static {
+        sphere.Specular.class = this
       }
+      constructor(v) {
+        super();
+        this.v = v;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Specular", ["v"]]; 
     });
     this.Specpow = function Specpow(v) {
       return globalThis.Object.freeze(new Specpow.class(v));
     };
-    Object.defineProperty(this.Specpow, "class", {
-      enumerable: true,
-      value: class Specpow extends sphere.Surfspec {
-        constructor(v) {
-          super();
-          this.v = v;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Specpow", ["v"]]; 
+    globalThis.Object.freeze(class Specpow extends sphere.Surfspec {
+      static {
+        sphere.Specpow.class = this
       }
+      constructor(v) {
+        super();
+        this.v = v;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Specpow", ["v"]]; 
     });
     this.Reflect = function Reflect(v) {
       return globalThis.Object.freeze(new Reflect.class(v));
     };
-    Object.defineProperty(this.Reflect, "class", {
-      enumerable: true,
-      value: class Reflect extends sphere.Surfspec {
-        constructor(v) {
-          super();
-          this.v = v;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Reflect", ["v"]]; 
+    globalThis.Object.freeze(class Reflect extends sphere.Surfspec {
+      static {
+        sphere.Reflect.class = this
       }
+      constructor(v) {
+        super();
+        this.v = v;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Reflect", ["v"]]; 
     });
     this.Transmit = function Transmit(v) {
       return globalThis.Object.freeze(new Transmit.class(v));
     };
-    Object.defineProperty(this.Transmit, "class", {
-      enumerable: true,
-      value: class Transmit extends sphere.Surfspec {
-        constructor(v) {
-          super();
-          this.v = v;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Transmit", ["v"]]; 
+    globalThis.Object.freeze(class Transmit extends sphere.Surfspec {
+      static {
+        sphere.Transmit.class = this
       }
+      constructor(v) {
+        super();
+        this.v = v;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Transmit", ["v"]]; 
     });
     this.Refract = function Refract(v) {
       return globalThis.Object.freeze(new Refract.class(v));
     };
-    Object.defineProperty(this.Refract, "class", {
-      enumerable: true,
-      value: class Refract extends sphere.Surfspec {
-        constructor(v) {
-          super();
-          this.v = v;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Refract", ["v"]]; 
+    globalThis.Object.freeze(class Refract extends sphere.Surfspec {
+      static {
+        sphere.Refract.class = this
       }
+      constructor(v) {
+        super();
+        this.v = v;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Refract", ["v"]]; 
     });
     this.Body = function Body(v) {
       return globalThis.Object.freeze(new Body.class(v));
     };
-    Object.defineProperty(this.Body, "class", {
-      enumerable: true,
-      value: class Body extends sphere.Surfspec {
-        constructor(v) {
-          super();
-          this.v = v;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Body", ["v"]]; 
+    globalThis.Object.freeze(class Body extends sphere.Surfspec {
+      static {
+        sphere.Body.class = this
       }
+      constructor(v) {
+        super();
+        this.v = v;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Body", ["v"]]; 
     });
     this.Sphere = function Sphere(pos, radius, surface) {
       return globalThis.Object.freeze(new Sphere.class(pos, radius, surface));
     };
-    Object.defineProperty(this.Sphere, "class", {
-      enumerable: true,
-      value: class Sphere {
-        constructor(pos, radius, surface) {
-          this.pos = pos;
-          this.radius = radius;
-          this.surface = surface;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Sphere", ["pos", "radius", "surface"]]; 
+    globalThis.Object.freeze(class Sphere {
+      static {
+        sphere.Sphere.class = this
       }
+      constructor(pos, radius, surface) {
+        this.pos = pos;
+        this.radius = radius;
+        this.surface = surface;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Sphere", ["pos", "radius", "surface"]]; 
     });
     arr = globalThis.Object.freeze([
       0.0,
@@ -45047,21 +45058,21 @@ lambda1 = (undefined, function (z) {
       0.0325,
       0.025
     ]);
-    tmp = runtime.safeCall(sphere.Ambient(arr2));
+    tmp = sphere.Ambient(arr2);
     arr3 = globalThis.Object.freeze([
       0.5,
       0.45,
       0.35
     ]);
-    tmp1 = runtime.safeCall(sphere.Diffuse(arr3));
+    tmp1 = sphere.Diffuse(arr3);
     arr4 = globalThis.Object.freeze([
       0.8,
       0.8,
       0.8
     ]);
-    tmp2 = runtime.safeCall(sphere.Specular(arr4));
-    tmp3 = runtime.safeCall(sphere.Specpow(3.0));
-    tmp4 = runtime.safeCall(sphere.Reflect(0.5));
+    tmp2 = sphere.Specular(arr4);
+    tmp3 = sphere.Specpow(3.0);
+    tmp4 = sphere.Reflect(0.5);
     tmp5 = NofibPrelude.Cons(tmp4, NofibPrelude.Nil);
     tmp6 = NofibPrelude.Cons(tmp3, tmp5);
     tmp7 = NofibPrelude.Cons(tmp2, tmp6);
@@ -45073,39 +45084,39 @@ lambda1 = (undefined, function (z) {
       0.0,
       0.0
     ]);
-    tmp10 = runtime.safeCall(sphere.Sphere(arr5, 0.5, sphere.s2));
+    tmp10 = sphere.Sphere(arr5, 0.5, sphere.s2);
     arr6 = globalThis.Object.freeze([
       0.272166,
       0.272166,
       0.544331
     ]);
-    tmp11 = runtime.safeCall(sphere.Sphere(arr6, 0.166667, sphere.s2));
+    tmp11 = sphere.Sphere(arr6, 0.166667, sphere.s2);
     arr7 = globalThis.Object.freeze([
       0.643951,
       0.172546,
       0.0
     ]);
-    tmp12 = runtime.safeCall(sphere.Sphere(arr7, 0.166667, sphere.s2));
+    tmp12 = sphere.Sphere(arr7, 0.166667, sphere.s2);
     arr8 = globalThis.Object.freeze([
       0.172546,
       0.643951,
       0.0
     ]);
-    tmp13 = runtime.safeCall(sphere.Sphere(arr8, 0.166667, sphere.s2));
+    tmp13 = sphere.Sphere(arr8, 0.166667, sphere.s2);
     tmp14 = - 0.371785;
     arr9 = globalThis.Object.freeze([
       tmp14,
       0.0996195,
       0.544331
     ]);
-    tmp15 = runtime.safeCall(sphere.Sphere(arr9, 0.166667, sphere.s2));
+    tmp15 = sphere.Sphere(arr9, 0.166667, sphere.s2);
     tmp16 = - 0.471405;
     arr10 = globalThis.Object.freeze([
       tmp16,
       0.471405,
       0.0
     ]);
-    tmp17 = runtime.safeCall(sphere.Sphere(arr10, 0.166667, sphere.s2));
+    tmp17 = sphere.Sphere(arr10, 0.166667, sphere.s2);
     tmp18 = - 0.643951;
     tmp19 = - 0.172546;
     arr11 = globalThis.Object.freeze([
@@ -45113,14 +45124,14 @@ lambda1 = (undefined, function (z) {
       tmp19,
       0.0
     ]);
-    tmp20 = runtime.safeCall(sphere.Sphere(arr11, 0.166667, sphere.s2));
+    tmp20 = sphere.Sphere(arr11, 0.166667, sphere.s2);
     tmp21 = - 0.371785;
     arr12 = globalThis.Object.freeze([
       0.0996195,
       tmp21,
       0.544331
     ]);
-    tmp22 = runtime.safeCall(sphere.Sphere(arr12, 0.166667, sphere.s2));
+    tmp22 = sphere.Sphere(arr12, 0.166667, sphere.s2);
     tmp23 = - 0.172546;
     tmp24 = - 0.643951;
     arr13 = globalThis.Object.freeze([
@@ -45128,14 +45139,14 @@ lambda1 = (undefined, function (z) {
       tmp24,
       0.0
     ]);
-    tmp25 = runtime.safeCall(sphere.Sphere(arr13, 0.166667, sphere.s2));
+    tmp25 = sphere.Sphere(arr13, 0.166667, sphere.s2);
     tmp26 = - 0.471405;
     arr14 = globalThis.Object.freeze([
       0.471405,
       tmp26,
       0.0
     ]);
-    tmp27 = runtime.safeCall(sphere.Sphere(arr14, 0.166667, sphere.s2));
+    tmp27 = sphere.Sphere(arr14, 0.166667, sphere.s2);
     tmp28 = NofibPrelude.Cons(tmp27, NofibPrelude.Nil);
     tmp29 = NofibPrelude.Cons(tmp25, tmp28);
     tmp30 = NofibPrelude.Cons(tmp22, tmp29);
@@ -45954,7 +45965,7 @@ lambda1 = (undefined, function (z) {
   static main() {
     return testSphere_nofib_inst_127_128_tsni(30)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "sphere"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "sphere"]; 
 });
 let sphere = sphere1; export default sphere;

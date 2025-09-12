@@ -162,7 +162,7 @@ match_first1_arm_Known_inst_91_93_90_tsni = (undefined, function (chs, a, a1, _d
   let param0, cs, tmp, arr;
   param0 = _deforest_Known_vs_inst_91_93_90_tsni;
   cs = param0;
-  tmp = runtime.safeCall(constraints1.Known(cs));
+  tmp = constraints1.Known(cs);
   arr = globalThis.Object.freeze([
     a1,
     tmp
@@ -173,7 +173,7 @@ match_first1_arm_Unknown_inst_91_93_90_tsni = (undefined, function (chs, a, a1) 
   let tmp, tmp1, tmp2, arr;
   tmp = map_inst_91_93_90_18_tsni(constraints1.label, chs);
   tmp1 = combine_inst_91_93_90_116_tsni(tmp, NofibPrelude.Nil);
-  tmp2 = runtime.safeCall(constraints1.Known(tmp1));
+  tmp2 = constraints1.Known(tmp1);
   arr = globalThis.Object.freeze([
     a,
     tmp2
@@ -197,7 +197,7 @@ match_first1_arm_Known_inst_97_99_88_tsni = (undefined, function (chs, a, a1, _d
   let param0, cs, tmp, arr;
   param0 = _deforest_Known_vs_inst_97_99_88_tsni;
   cs = param0;
-  tmp = runtime.safeCall(constraints1.Known(cs));
+  tmp = constraints1.Known(cs);
   arr = globalThis.Object.freeze([
     a1,
     tmp
@@ -208,7 +208,7 @@ match_first1_arm_Unknown_inst_97_99_88_tsni = (undefined, function (chs, a, a1) 
   let cs_, scrut, tmp, tmp1, arr, arr1;
   tmp = map_inst_97_99_88_20_tsni(constraints1.label, chs);
   tmp1 = combine_inst_97_99_88_117_tsni(tmp, NofibPrelude.Nil);
-  cs_ = runtime.safeCall(constraints1.Known(tmp1));
+  cs_ = constraints1.Known(tmp1);
   scrut = constraints1.knownConflict(cs_);
   if (scrut === true) {
     arr = globalThis.Object.freeze([
@@ -245,7 +245,7 @@ match_first0_arm_Deforest_Arr_2_inst_100_132_134_tsni = (undefined, function (fi
   } else {
     tmp2 = NofibPrelude.head(wipedDomains);
     tmp3 = constraints1.collect(tmp2);
-    tmp1 = runtime.safeCall(constraints1.Known(tmp3));
+    tmp1 = constraints1.Known(tmp3);
   }
   cs_ = tmp1;
   arr = globalThis.Object.freeze([
@@ -278,7 +278,7 @@ match_first0_arm_Deforest_Arr_2_inst_105_106_132_134_tsni = (undefined, function
   } else {
     tmp2 = NofibPrelude.head(wipedDomains);
     tmp3 = constraints1.collect(tmp2);
-    tmp1 = runtime.safeCall(constraints1.Known(tmp3));
+    tmp1 = constraints1.Known(tmp3);
   }
   cs_ = tmp1;
   arr = globalThis.Object.freeze([
@@ -304,7 +304,7 @@ match_first1_arm_Known_inst_105_107_99_88_tsni = (undefined, function (chs, a, a
   let param0, cs, tmp, arr;
   param0 = _deforest_Known_vs_inst_105_107_99_88_tsni;
   cs = param0;
-  tmp = runtime.safeCall(constraints1.Known(cs));
+  tmp = constraints1.Known(cs);
   arr = globalThis.Object.freeze([
     a1,
     tmp
@@ -315,7 +315,7 @@ match_first1_arm_Unknown_inst_105_107_99_88_tsni = (undefined, function (chs, a,
   let cs_, scrut, tmp, tmp1, arr, arr1;
   tmp = map_inst_105_107_99_88_20_tsni(constraints1.label, chs);
   tmp1 = combine_inst_105_107_99_88_117_tsni(tmp, NofibPrelude.Nil);
-  cs_ = runtime.safeCall(constraints1.Known(tmp1));
+  cs_ = constraints1.Known(tmp1);
   scrut = constraints1.knownConflict(cs_);
   if (scrut === true) {
     arr = globalThis.Object.freeze([
@@ -348,7 +348,7 @@ match_first1_arm_Known_inst_105_108_93_90_tsni = (undefined, function (chs, a, a
   let param0, cs, tmp, arr;
   param0 = _deforest_Known_vs_inst_105_108_93_90_tsni;
   cs = param0;
-  tmp = runtime.safeCall(constraints1.Known(cs));
+  tmp = constraints1.Known(cs);
   arr = globalThis.Object.freeze([
     a1,
     tmp
@@ -359,7 +359,7 @@ match_first1_arm_Unknown_inst_105_108_93_90_tsni = (undefined, function (chs, a,
   let tmp, tmp1, tmp2, arr;
   tmp = map_inst_105_108_93_90_18_tsni(constraints1.label, chs);
   tmp1 = combine_inst_105_108_93_90_116_tsni(tmp, NofibPrelude.Nil);
-  tmp2 = runtime.safeCall(constraints1.Known(tmp1));
+  tmp2 = constraints1.Known(tmp1);
   arr = globalThis.Object.freeze([
     a,
     tmp2
@@ -435,7 +435,7 @@ match_first1_arm_Known_inst_112_113_108_93_90_tsni = (undefined, function (chs, 
   let param0, cs, tmp, arr;
   param0 = _deforest_Known_vs_inst_112_113_108_93_90_tsni;
   cs = param0;
-  tmp = runtime.safeCall(constraints1.Known(cs));
+  tmp = constraints1.Known(cs);
   arr = globalThis.Object.freeze([
     a1,
     tmp
@@ -446,7 +446,7 @@ match_first1_arm_Unknown_inst_112_113_108_93_90_tsni = (undefined, function (chs
   let tmp, tmp1, tmp2, arr;
   tmp = map_inst_112_113_108_93_90_18_tsni(constraints1.label, chs);
   tmp1 = combine_inst_112_113_108_93_90_116_tsni(tmp, NofibPrelude.Nil);
-  tmp2 = runtime.safeCall(constraints1.Known(tmp1));
+  tmp2 = constraints1.Known(tmp1);
   arr = globalThis.Object.freeze([
     a,
     tmp2
@@ -470,7 +470,7 @@ match_first1_arm_Known_inst_112_113_107_99_88_tsni = (undefined, function (chs, 
   let param0, cs, tmp, arr;
   param0 = _deforest_Known_vs_inst_112_113_107_99_88_tsni;
   cs = param0;
-  tmp = runtime.safeCall(constraints1.Known(cs));
+  tmp = constraints1.Known(cs);
   arr = globalThis.Object.freeze([
     a1,
     tmp
@@ -481,7 +481,7 @@ match_first1_arm_Unknown_inst_112_113_107_99_88_tsni = (undefined, function (chs
   let cs_, scrut, tmp, tmp1, arr, arr1;
   tmp = map_inst_112_113_107_99_88_20_tsni(constraints1.label, chs);
   tmp1 = combine_inst_112_113_107_99_88_117_tsni(tmp, NofibPrelude.Nil);
-  cs_ = runtime.safeCall(constraints1.Known(tmp1));
+  cs_ = constraints1.Known(tmp1);
   scrut = constraints1.knownConflict(cs_);
   if (scrut === true) {
     arr = globalThis.Object.freeze([
@@ -518,7 +518,7 @@ match_first0_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni = (undefined, func
   } else {
     tmp2 = NofibPrelude.head(wipedDomains);
     tmp3 = constraints1.collect(tmp2);
-    tmp1 = runtime.safeCall(constraints1.Known(tmp3));
+    tmp1 = constraints1.Known(tmp3);
   }
   cs_ = tmp1;
   arr = globalThis.Object.freeze([
@@ -1182,7 +1182,7 @@ enumFromTo_inst_21_22_23_24_tsni = function enumFromTo_inst_21_22_23_24_tsni(a, 
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -1346,7 +1346,7 @@ enumFromTo_inst_27_22_23_24_tsni = function enumFromTo_inst_27_22_23_24_tsni(a, 
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -1752,7 +1752,7 @@ filter_inst_40_41_42_tsni = function filter_inst_40_41_42_tsni(f, ls) {
           b1 = first1;
           tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
           tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = runtime.safeCall(constraints1.Known(tmp4));
+          tmp5 = constraints1.Known(tmp4);
           return match_scrut_rest_inst_40_tsni(s, tmp5)
         };
         _deforest_Some_x = arr;
@@ -1838,7 +1838,7 @@ filter_inst_43_44_41_42_tsni = function filter_inst_43_44_41_42_tsni(f, ls) {
           b1 = first1;
           tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
           tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = runtime.safeCall(constraints1.Known(tmp4));
+          tmp5 = constraints1.Known(tmp4);
           return match_scrut_rest_inst_43_44_tsni(s, tmp5)
         };
         _deforest_Some_x = arr;
@@ -1909,7 +1909,7 @@ filter_inst_45_46_42_tsni = function filter_inst_45_46_42_tsni(f, ls) {
           tmp1,
           tmp2
         ]);
-        return runtime.safeCall(NofibPrelude.Some(arr))
+        return NofibPrelude.Some(arr)
       }
     } else {
       return filter_inst_45_46_42_tsni(f, t)
@@ -1981,7 +1981,7 @@ filter_inst_47_48_46_42_tsni = function filter_inst_47_48_46_42_tsni(f, ls) {
           tmp1,
           tmp2
         ]);
-        return runtime.safeCall(NofibPrelude.Some(arr))
+        return NofibPrelude.Some(arr)
       }
     } else {
       return filter_inst_47_48_46_42_tsni(f, t)
@@ -2286,7 +2286,7 @@ filter_inst_55_42_tsni = function filter_inst_55_42_tsni(f, ls) {
           tmp1,
           tmp2
         ]);
-        return runtime.safeCall(NofibPrelude.Some(arr))
+        return NofibPrelude.Some(arr)
       }
     } else {
       return filter_inst_55_42_tsni(f, t)
@@ -2363,7 +2363,7 @@ filter_inst_56_57_48_46_42_tsni = function filter_inst_56_57_48_46_42_tsni(f, ls
           tmp1,
           tmp2
         ]);
-        return runtime.safeCall(NofibPrelude.Some(arr))
+        return NofibPrelude.Some(arr)
       }
     } else {
       return filter_inst_56_57_48_46_42_tsni(f, t)
@@ -2568,7 +2568,7 @@ filter_inst_58_60_57_48_46_42_tsni = function filter_inst_58_60_57_48_46_42_tsni
           tmp1,
           tmp2
         ]);
-        return runtime.safeCall(NofibPrelude.Some(arr))
+        return NofibPrelude.Some(arr)
       }
     } else {
       return filter_inst_58_60_57_48_46_42_tsni(f, t)
@@ -3031,7 +3031,7 @@ filter_inst_72_73_44_41_42_tsni = function filter_inst_72_73_44_41_42_tsni(f, ls
           b1 = first1;
           tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
           tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = runtime.safeCall(constraints1.Known(tmp4));
+          tmp5 = constraints1.Known(tmp4);
           return match_scrut_rest_inst_72_73_44_tsni(s, tmp5)
         };
         _deforest_Some_x = arr;
@@ -3133,7 +3133,7 @@ enumFromTo_inst_77_23_24_tsni = function enumFromTo_inst_77_23_24_tsni(a, b) {
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -3359,7 +3359,7 @@ enumFromTo_inst_80_22_23_24_tsni = function enumFromTo_inst_80_22_23_24_tsni(a, 
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -3681,7 +3681,7 @@ enumFromTo_inst_81_83_22_23_24_tsni = function enumFromTo_inst_81_83_22_23_24_ts
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -3833,7 +3833,7 @@ f7_inst_87_88_tsni = function f7_inst_87_88_tsni(tp2, chs) {
     if (first1 instanceof constraints1.Known.class) {
       param0 = first1.vs;
       cs = param0;
-      tmp = runtime.safeCall(constraints1.Known(cs));
+      tmp = constraints1.Known(cs);
       arr = globalThis.Object.freeze([
         a1,
         tmp
@@ -3842,7 +3842,7 @@ f7_inst_87_88_tsni = function f7_inst_87_88_tsni(tp2, chs) {
     } else if (first1 instanceof constraints1.Unknown.class) {
       tmp1 = map_inst_87_88_20_tsni(constraints1.label, chs);
       tmp2 = combine_inst_87_88_117_tsni(tmp1, NofibPrelude.Nil);
-      cs_ = runtime.safeCall(constraints1.Known(tmp2));
+      cs_ = constraints1.Known(tmp2);
       scrut = constraints1.knownConflict(cs_);
       if (scrut === true) {
         arr1 = globalThis.Object.freeze([
@@ -3920,7 +3920,7 @@ f6_inst_89_90_tsni = function f6_inst_89_90_tsni(tp2, chs) {
     if (first1 instanceof constraints1.Known.class) {
       param0 = first1.vs;
       cs = param0;
-      tmp = runtime.safeCall(constraints1.Known(cs));
+      tmp = constraints1.Known(cs);
       arr = globalThis.Object.freeze([
         a1,
         tmp
@@ -3929,7 +3929,7 @@ f6_inst_89_90_tsni = function f6_inst_89_90_tsni(tp2, chs) {
     } else if (first1 instanceof constraints1.Unknown.class) {
       tmp1 = map_inst_89_90_18_tsni(constraints1.label, chs);
       tmp2 = combine_inst_89_90_116_tsni(tmp1, NofibPrelude.Nil);
-      tmp3 = runtime.safeCall(constraints1.Known(tmp2));
+      tmp3 = constraints1.Known(tmp2);
       arr1 = globalThis.Object.freeze([
         a,
         tmp3
@@ -4723,7 +4723,7 @@ enumFromTo_inst_100_102_22_23_24_tsni = function enumFromTo_inst_100_102_22_23_2
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -5316,7 +5316,7 @@ enumFromTo_inst_105_106_102_22_23_24_tsni = function enumFromTo_inst_105_106_102
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -6208,7 +6208,7 @@ enumFromTo_inst_105_109_83_22_23_24_tsni = function enumFromTo_inst_105_109_83_2
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -6466,7 +6466,7 @@ filter_inst_105_110_73_44_41_42_tsni = function filter_inst_105_110_73_44_41_42_
           b1 = first1;
           tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
           tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = runtime.safeCall(constraints1.Known(tmp4));
+          tmp5 = constraints1.Known(tmp4);
           return match_scrut_rest_inst_105_110_73_44_tsni(s, tmp5)
         };
         _deforest_Some_x = arr;
@@ -7078,7 +7078,7 @@ filter_inst_112_113_110_73_44_41_42_tsni = function filter_inst_112_113_110_73_4
           b1 = first1;
           tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
           tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = runtime.safeCall(constraints1.Known(tmp4));
+          tmp5 = constraints1.Known(tmp4);
           return match_scrut_rest_inst_112_113_110_73_44_tsni(s, tmp5)
         };
         _deforest_Some_x = arr;
@@ -7353,7 +7353,7 @@ enumFromTo_inst_112_113_109_83_22_23_24_tsni = function enumFromTo_inst_112_113_
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -8247,7 +8247,7 @@ enumFromTo_inst_112_113_106_102_22_23_24_tsni = function enumFromTo_inst_112_113
           if (scrut2 === true) {
             tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
             tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return runtime.safeCall(constraints1.Known(tmp7))
+            return constraints1.Known(tmp7)
           } else {
             return cs
           }
@@ -8559,7 +8559,7 @@ checkComplete_inst_28_124_tsni = function checkComplete_inst_28_124_tsni(csp, s)
   let scrut;
   scrut = complete_inst_28_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -8584,7 +8584,7 @@ checkComplete_inst_29_30_124_tsni = function checkComplete_inst_29_30_124_tsni(c
   let scrut;
   scrut = complete_inst_29_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -8609,7 +8609,7 @@ checkComplete_inst_31_32_30_124_tsni = function checkComplete_inst_31_32_30_124_
   let scrut;
   scrut = complete_inst_31_32_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -8790,7 +8790,7 @@ checkComplete_inst_78_79_32_30_124_tsni = function checkComplete_inst_78_79_32_3
   let scrut;
   scrut = complete_inst_78_79_32_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -8902,7 +8902,7 @@ checkComplete_inst_81_84_79_32_30_124_tsni = function checkComplete_inst_81_84_7
   let scrut;
   scrut = complete_inst_81_84_79_32_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -9029,7 +9029,7 @@ checkComplete_inst_100_103_79_32_30_124_tsni = function checkComplete_inst_100_1
   let scrut;
   scrut = complete_inst_100_103_79_32_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -9123,7 +9123,7 @@ checkComplete_inst_105_106_103_79_32_30_124_tsni = function checkComplete_inst_1
   let scrut;
   scrut = complete_inst_105_106_103_79_32_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -9258,7 +9258,7 @@ checkComplete_inst_105_109_84_79_32_30_124_tsni = function checkComplete_inst_10
   let scrut;
   scrut = complete_inst_105_109_84_79_32_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -9472,7 +9472,7 @@ checkComplete_inst_112_113_109_84_79_32_30_124_tsni = function checkComplete_ins
   let scrut;
   scrut = complete_inst_112_113_109_84_79_32_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -9593,7 +9593,7 @@ checkComplete_inst_112_113_106_103_79_32_30_124_tsni = function checkComplete_in
   let scrut;
   scrut = complete_inst_112_113_106_103_79_32_30_124_125_tsni(csp, s);
   if (scrut === true) {
-    return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+    return constraints.Known(NofibPrelude.Nil)
   } else {
     return constraints.Unknown
   }
@@ -9692,7 +9692,7 @@ f8 = function f8(tp2) {
       } else {
         tmp2 = NofibPrelude.head(wipedDomains);
         tmp3 = constraints1.collect(tmp2);
-        tmp1 = runtime.safeCall(constraints1.Known(tmp3));
+        tmp1 = constraints1.Known(tmp3);
       }
       cs_ = tmp1;
       arr = globalThis.Object.freeze([
@@ -9717,7 +9717,7 @@ f6 = function f6(tp2, chs) {
     if (first1 instanceof constraints1.Known.class) {
       param0 = first1.vs;
       cs = param0;
-      tmp = runtime.safeCall(constraints1.Known(cs));
+      tmp = constraints1.Known(cs);
       arr = globalThis.Object.freeze([
         a1,
         tmp
@@ -9726,7 +9726,7 @@ f6 = function f6(tp2, chs) {
     } else if (first1 instanceof constraints1.Unknown.class) {
       tmp1 = map_inst_17_18_tsni(constraints1.label, chs);
       tmp2 = combine_inst_17_116_tsni(tmp1, NofibPrelude.Nil);
-      tmp3 = runtime.safeCall(constraints1.Known(tmp2));
+      tmp3 = constraints1.Known(tmp2);
       arr1 = globalThis.Object.freeze([
         a,
         tmp3
@@ -9749,7 +9749,7 @@ f7 = function f7(tp2, chs) {
     if (first1 instanceof constraints1.Known.class) {
       param0 = first1.vs;
       cs = param0;
-      tmp = runtime.safeCall(constraints1.Known(cs));
+      tmp = constraints1.Known(cs);
       arr = globalThis.Object.freeze([
         a1,
         tmp
@@ -9758,7 +9758,7 @@ f7 = function f7(tp2, chs) {
     } else if (first1 instanceof constraints1.Unknown.class) {
       tmp1 = map_inst_19_20_tsni(constraints1.label, chs);
       tmp2 = combine_inst_19_117_tsni(tmp1, NofibPrelude.Nil);
-      cs_ = runtime.safeCall(constraints1.Known(tmp2));
+      cs_ = constraints1.Known(tmp2);
       scrut = constraints1.knownConflict(cs_);
       if (scrut === true) {
         arr1 = globalThis.Object.freeze([
@@ -9882,7 +9882,7 @@ f4$ = function f4$(var_, val_, rel, cs, varval) {
       if (scrut1 === true) {
         tmp3 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
         tmp4 = NofibPrelude.Cons(var_, tmp3);
-        return runtime.safeCall(constraints1.Known(tmp4))
+        return constraints1.Known(tmp4)
       } else {
         return cs
       }
@@ -10144,72 +10144,83 @@ lambda = (undefined, function (f) {
     return lambda$(f, x)
   }
 });
-(class constraints {
+globalThis.Object.freeze(class constraints {
   static {
-    constraints1 = constraints;
+    constraints1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     this.Assign = function Assign(varr, value) {
       return globalThis.Object.freeze(new Assign.class(varr, value));
     };
-    Object.defineProperty(this.Assign, "class", {
-      enumerable: true,
-      value: class Assign {
-        constructor(varr, value) {
-          this.varr = varr;
-          this.value = value;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Assign", ["varr", "value"]]; 
+    globalThis.Object.freeze(class Assign {
+      static {
+        constraints.Assign.class = this
       }
+      constructor(varr, value) {
+        this.varr = varr;
+        this.value = value;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Assign", ["varr", "value"]]; 
     });
     this.CSP = function CSP(vars, vals, rel) {
       return globalThis.Object.freeze(new CSP.class(vars, vals, rel));
     };
-    Object.defineProperty(this.CSP, "class", {
-      enumerable: true,
-      value: class CSP {
-        constructor(vars, vals, rel) {
-          this.vars = vars;
-          this.vals = vals;
-          this.rel = rel;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "CSP", ["vars", "vals", "rel"]]; 
+    globalThis.Object.freeze(class CSP {
+      static {
+        constraints.CSP.class = this
       }
+      constructor(vars, vals, rel) {
+        this.vars = vars;
+        this.vals = vals;
+        this.rel = rel;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "CSP", ["vars", "vals", "rel"]]; 
     });
     this.Node = function Node(lab, children) {
       return globalThis.Object.freeze(new Node.class(lab, children));
     };
-    Object.defineProperty(this.Node, "class", {
-      enumerable: true,
-      value: class Node {
-        constructor(lab, children) {
-          this.lab = lab;
-          this.children = children;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Node", ["lab", "children"]]; 
+    globalThis.Object.freeze(class Node {
+      static {
+        constraints.Node.class = this
       }
+      constructor(lab, children) {
+        this.lab = lab;
+        this.children = children;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Node", ["lab", "children"]]; 
     });
-    this.ConflictSet = class ConflictSet {
+    globalThis.Object.freeze(class ConflictSet {
+      static {
+        constraints.ConflictSet = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "ConflictSet"]; 
-    };
+    });
     this.Known = function Known(vs) {
       return globalThis.Object.freeze(new Known.class(vs));
     };
-    Object.defineProperty(this.Known, "class", {
-      enumerable: true,
-      value: class Known extends constraints.ConflictSet {
-        constructor(vs) {
-          super();
-          this.vs = vs;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Known", ["vs"]]; 
+    globalThis.Object.freeze(class Known extends constraints.ConflictSet {
+      static {
+        constraints.Known.class = this
       }
+      constructor(vs) {
+        super();
+        this.vs = vs;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Known", ["vs"]]; 
     });
-    const Unknown$class = class Unknown extends constraints.ConflictSet {
+    globalThis.Object.freeze(class Unknown extends constraints.ConflictSet {
+      static {
+        constraints.Unknown = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -10218,8 +10229,7 @@ lambda = (undefined, function (f) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Unknown"]; 
-    };
-    this.Unknown = globalThis.Object.freeze(new Unknown$class);
+    });
   }
   static qsort(le, ls, r) {
     let param0, param1, x, xs, x1;
@@ -10397,7 +10407,7 @@ lambda = (undefined, function (f) {
     }
   } 
   static queens(n) {
-    return runtime.safeCall(constraints.CSP(n, n, constraints.safe))
+    return constraints.CSP(n, n, constraints.safe)
   } 
   static label(n) {
     let param0, param1, l;
@@ -10564,7 +10574,7 @@ lambda = (undefined, function (f) {
     let scrut;
     scrut = constraints.complete(csp, s);
     if (scrut === true) {
-      return runtime.safeCall(constraints.Known(NofibPrelude.Nil))
+      return constraints.Known(NofibPrelude.Nil)
     } else {
       return constraints.Unknown
     }
@@ -10797,7 +10807,7 @@ lambda = (undefined, function (f) {
     tmp = testConstraints_nofib_inst_112_113_tsni(6);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "constraints"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "constraints"]; 
 });
 let constraints = constraints1; export default constraints;

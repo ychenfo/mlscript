@@ -25,7 +25,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_0_1_2_tsni = (undefined, function (_defore
       arr,
       boyer21.Empty
     ]);
-    return runtime.safeCall(boyer21.Node(arr1))
+    return boyer21.Node(arr1)
   } else if (first2 instanceof boyer21.Node.class) {
     param0 = first2.x;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 3) {
@@ -51,7 +51,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_0_1_2_tsni = (undefined, function (_defore
             arr2,
             right
           ]);
-          return runtime.safeCall(boyer21.Node(arr3))
+          return boyer21.Node(arr3)
         } else {
           scrut = NofibPrelude.ltList(k, k1, lambda3, lambda4);
           if (scrut === true) {
@@ -71,7 +71,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_0_1_2_tsni = (undefined, function (_defore
               arr5,
               right
             ]);
-            return runtime.safeCall(boyer21.Node(arr6))
+            return boyer21.Node(arr6)
           } else {
             arr7 = globalThis.Object.freeze([
               k1,
@@ -89,7 +89,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_0_1_2_tsni = (undefined, function (_defore
               arr7,
               tmp3
             ]);
-            return runtime.safeCall(boyer21.Node(arr9))
+            return boyer21.Node(arr9)
           }
         }
       } else {
@@ -1628,7 +1628,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_31_2_tsni = (undefined, function (_defores
       arr,
       boyer21.Empty
     ]);
-    return runtime.safeCall(boyer21.Node(arr1))
+    return boyer21.Node(arr1)
   } else if (first2 instanceof boyer21.Node.class) {
     param0 = first2.x;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 3) {
@@ -1654,7 +1654,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_31_2_tsni = (undefined, function (_defores
             arr2,
             right
           ]);
-          return runtime.safeCall(boyer21.Node(arr3))
+          return boyer21.Node(arr3)
         } else {
           scrut = NofibPrelude.ltList(k, k1, lambda3, lambda4);
           if (scrut === true) {
@@ -1674,7 +1674,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_31_2_tsni = (undefined, function (_defores
               arr5,
               right
             ]);
-            return runtime.safeCall(boyer21.Node(arr6))
+            return boyer21.Node(arr6)
           } else {
             arr7 = globalThis.Object.freeze([
               k1,
@@ -1692,7 +1692,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_31_2_tsni = (undefined, function (_defores
               arr7,
               tmp3
             ]);
-            return runtime.safeCall(boyer21.Node(arr9))
+            return boyer21.Node(arr9)
           }
         }
       } else {
@@ -1725,7 +1725,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_32_1_2_tsni = (undefined, function (_defor
       arr,
       boyer21.Empty
     ]);
-    return runtime.safeCall(boyer21.Node(arr1))
+    return boyer21.Node(arr1)
   } else if (first2 instanceof boyer21.Node.class) {
     param0 = first2.x;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 3) {
@@ -1751,7 +1751,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_32_1_2_tsni = (undefined, function (_defor
             arr2,
             right
           ]);
-          return runtime.safeCall(boyer21.Node(arr3))
+          return boyer21.Node(arr3)
         } else {
           scrut = NofibPrelude.ltList(k, k1, lambda3, lambda4);
           if (scrut === true) {
@@ -1771,7 +1771,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_32_1_2_tsni = (undefined, function (_defor
               arr5,
               right
             ]);
-            return runtime.safeCall(boyer21.Node(arr6))
+            return boyer21.Node(arr6)
           } else {
             arr7 = globalThis.Object.freeze([
               k1,
@@ -1789,7 +1789,7 @@ match_k_l_lut_arm_Deforest_Arr_3_inst_32_1_2_tsni = (undefined, function (_defor
               arr7,
               tmp3
             ]);
-            return runtime.safeCall(boyer21.Node(arr9))
+            return boyer21.Node(arr9)
           }
         }
       } else {
@@ -1823,7 +1823,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_33_34_tsni = (undefined, function (_defor
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -1872,7 +1872,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_35_34_tsni = (undefined, function (_defor
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -1921,7 +1921,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_36_37_tsni = (undefined, function (_defor
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -1970,7 +1970,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_38_37_tsni = (undefined, function (_defor
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2019,7 +2019,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_39_40_37_tsni = (undefined, function (_de
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2120,7 +2120,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_41_43_40_37_tsni = (undefined, function (
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2169,7 +2169,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_41_44_34_tsni = (undefined, function (_de
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2270,7 +2270,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_45_43_40_37_tsni = (undefined, function (
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2319,7 +2319,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_45_44_34_tsni = (undefined, function (_de
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2420,7 +2420,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_46_43_40_37_tsni = (undefined, function (
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2469,7 +2469,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_46_44_34_tsni = (undefined, function (_de
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2527,7 +2527,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_49_50_44_34_tsni = (undefined, function (
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -2576,7 +2576,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_49_50_43_40_37_tsni = (undefined, functio
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -4174,7 +4174,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_49_51_tsni = (undefined, functi
   } else if (f instanceof boyer2.Atom.class) {
     param0 = f.a;
     x1 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x1));
+    tmp = boyer2.Atom(x1);
     _deforest_Deforest_Arr_2_04 = tmp;
     _deforest_Deforest_Arr_2_14 = truelst;
     arr = () => {
@@ -4192,7 +4192,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_49_51_tsni = (undefined, functi
         x,
         y
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr1));
+      tmp1 = boyer2.Conss(arr1);
       _deforest_Deforest_Arr_2_03 = tmp1;
       _deforest_Deforest_Arr_2_13 = truelst;
       arr2 = () => {
@@ -4206,7 +4206,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_49_51_tsni = (undefined, functi
           x,
           y
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         _deforest_Deforest_Arr_2_02 = tmp2;
         _deforest_Deforest_Arr_2_12 = falselst;
         arr4 = () => {
@@ -4267,7 +4267,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_49_51_tsni = (undefined, functi
                             tmp8,
                             truelst
                           ]);
-                          tmp9 = runtime.safeCall(boyer2.Conss(arr9));
+                          tmp9 = boyer2.Conss(arr9);
                           _deforest_Deforest_Arr_3_02 = tmp7;
                           _deforest_Deforest_Arr_3_12 = tmp9;
                           _deforest_Deforest_Arr_3_22 = falselst;
@@ -4282,7 +4282,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_49_51_tsni = (undefined, functi
                               tmp11,
                               falselst
                             ]);
-                            tmp12 = runtime.safeCall(boyer2.Conss(arr11));
+                            tmp12 = boyer2.Conss(arr11);
                             _deforest_Deforest_Arr_3_03 = tmp10;
                             _deforest_Deforest_Arr_3_13 = truelst;
                             _deforest_Deforest_Arr_3_23 = tmp12;
@@ -4357,7 +4357,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_52_54_34_tsni = (undefined, function (_de
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -4406,7 +4406,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_55_56_54_34_tsni = (undefined, function (
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -5961,7 +5961,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_55_57_51_tsni = (undefined, fun
   } else if (f instanceof boyer2.Atom.class) {
     param0 = f.a;
     x1 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x1));
+    tmp = boyer2.Atom(x1);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = truelst;
     arr = () => {
@@ -5979,7 +5979,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_55_57_51_tsni = (undefined, fun
         x,
         y
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr1));
+      tmp1 = boyer2.Conss(arr1);
       _deforest_Deforest_Arr_2_01 = tmp1;
       _deforest_Deforest_Arr_2_11 = truelst;
       arr2 = () => {
@@ -5993,7 +5993,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_55_57_51_tsni = (undefined, fun
           x,
           y
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         _deforest_Deforest_Arr_2_02 = tmp2;
         _deforest_Deforest_Arr_2_12 = falselst;
         arr4 = () => {
@@ -6054,7 +6054,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_55_57_51_tsni = (undefined, fun
                             tmp8,
                             truelst
                           ]);
-                          tmp9 = runtime.safeCall(boyer2.Conss(arr9));
+                          tmp9 = boyer2.Conss(arr9);
                           _deforest_Deforest_Arr_3_01 = tmp7;
                           _deforest_Deforest_Arr_3_11 = tmp9;
                           _deforest_Deforest_Arr_3_21 = falselst;
@@ -6069,7 +6069,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_55_57_51_tsni = (undefined, fun
                               tmp11,
                               falselst
                             ]);
-                            tmp12 = runtime.safeCall(boyer2.Conss(arr11));
+                            tmp12 = boyer2.Conss(arr11);
                             _deforest_Deforest_Arr_3_0 = tmp10;
                             _deforest_Deforest_Arr_3_1 = truelst;
                             _deforest_Deforest_Arr_3_2 = tmp12;
@@ -6187,7 +6187,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_55_57_50_43_40_37_tsni = (undefined, func
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -6236,7 +6236,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_55_57_50_44_34_tsni = (undefined, functio
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -6285,7 +6285,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_58_59_57_50_44_34_tsni = (undefined, func
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -6334,7 +6334,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_58_59_57_50_43_40_37_tsni = (undefined, f
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -7932,7 +7932,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_58_59_57_51_tsni = (undefined, 
   } else if (f instanceof boyer2.Atom.class) {
     param0 = f.a;
     x1 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x1));
+    tmp = boyer2.Atom(x1);
     _deforest_Deforest_Arr_2_04 = tmp;
     _deforest_Deforest_Arr_2_14 = truelst;
     arr = () => {
@@ -7950,7 +7950,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_58_59_57_51_tsni = (undefined, 
         x,
         y
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr1));
+      tmp1 = boyer2.Conss(arr1);
       _deforest_Deforest_Arr_2_03 = tmp1;
       _deforest_Deforest_Arr_2_13 = truelst;
       arr2 = () => {
@@ -7964,7 +7964,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_58_59_57_51_tsni = (undefined, 
           x,
           y
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         _deforest_Deforest_Arr_2_02 = tmp2;
         _deforest_Deforest_Arr_2_12 = falselst;
         arr4 = () => {
@@ -8025,7 +8025,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_58_59_57_51_tsni = (undefined, 
                             tmp8,
                             truelst
                           ]);
-                          tmp9 = runtime.safeCall(boyer2.Conss(arr9));
+                          tmp9 = boyer2.Conss(arr9);
                           _deforest_Deforest_Arr_3_02 = tmp7;
                           _deforest_Deforest_Arr_3_12 = tmp9;
                           _deforest_Deforest_Arr_3_22 = falselst;
@@ -8040,7 +8040,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_58_59_57_51_tsni = (undefined, 
                               tmp11,
                               falselst
                             ]);
-                            tmp12 = runtime.safeCall(boyer2.Conss(arr11));
+                            tmp12 = boyer2.Conss(arr11);
                             _deforest_Deforest_Arr_3_03 = tmp10;
                             _deforest_Deforest_Arr_3_13 = truelst;
                             _deforest_Deforest_Arr_3_23 = tmp12;
@@ -8115,7 +8115,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_58_59_56_54_34_tsni = (undefined, functio
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -8164,7 +8164,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_60_61_59_56_54_34_tsni = (undefined, func
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -9719,7 +9719,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_60_61_59_57_51_tsni = (undefine
   } else if (f instanceof boyer2.Atom.class) {
     param0 = f.a;
     x1 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x1));
+    tmp = boyer2.Atom(x1);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = truelst;
     arr = () => {
@@ -9737,7 +9737,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_60_61_59_57_51_tsni = (undefine
         x,
         y
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr1));
+      tmp1 = boyer2.Conss(arr1);
       _deforest_Deforest_Arr_2_01 = tmp1;
       _deforest_Deforest_Arr_2_11 = truelst;
       arr2 = () => {
@@ -9751,7 +9751,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_60_61_59_57_51_tsni = (undefine
           x,
           y
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         _deforest_Deforest_Arr_2_02 = tmp2;
         _deforest_Deforest_Arr_2_12 = falselst;
         arr4 = () => {
@@ -9812,7 +9812,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_60_61_59_57_51_tsni = (undefine
                             tmp8,
                             truelst
                           ]);
-                          tmp9 = runtime.safeCall(boyer2.Conss(arr9));
+                          tmp9 = boyer2.Conss(arr9);
                           _deforest_Deforest_Arr_3_01 = tmp7;
                           _deforest_Deforest_Arr_3_11 = tmp9;
                           _deforest_Deforest_Arr_3_21 = falselst;
@@ -9827,7 +9827,7 @@ match_f_truelst_falselst_arm_Deforest_Arr_3_inst_60_61_59_57_51_tsni = (undefine
                               tmp11,
                               falselst
                             ]);
-                            tmp12 = runtime.safeCall(boyer2.Conss(arr11));
+                            tmp12 = boyer2.Conss(arr11);
                             _deforest_Deforest_Arr_3_0 = tmp10;
                             _deforest_Deforest_Arr_3_1 = truelst;
                             _deforest_Deforest_Arr_3_2 = tmp12;
@@ -9945,7 +9945,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_60_61_59_57_50_43_40_37_tsni = (undefined
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -9994,7 +9994,7 @@ match_term_x_y_arm_Deforest_Arr_2_inst_60_61_59_57_50_44_34_tsni = (undefined, f
             param02 = first02.a;
             key = param02;
             rest = first12;
-            tmp = runtime.safeCall(boyer2.Atom(key));
+            tmp = boyer2.Atom(key);
             scrut = boyer2.lispListEq(term, tmp);
             if (scrut === true) {
               return x
@@ -10055,7 +10055,7 @@ addlemma_inst_0_1_tsni = function addlemma_inst_0_1_tsni(lspls, term) {
             x,
             y
           ]);
-          tmp6 = runtime.safeCall(boyer21.Conss(arr));
+          tmp6 = boyer21.Conss(arr);
           _deforest_Deforest_Arr_3_0 = tmp5;
           _deforest_Deforest_Arr_3_1 = tmp6;
           _deforest_Deforest_Arr_3_2 = term;
@@ -10538,7 +10538,7 @@ addlemma_inst_32_1_tsni = function addlemma_inst_32_1_tsni(lspls, term) {
             x,
             y
           ]);
-          tmp6 = runtime.safeCall(boyer21.Conss(arr));
+          tmp6 = boyer21.Conss(arr);
           _deforest_Deforest_Arr_3_0 = tmp5;
           _deforest_Deforest_Arr_3_1 = tmp6;
           _deforest_Deforest_Arr_3_2 = term;
@@ -10569,7 +10569,7 @@ applysubst_inst_33_tsni = function applysubst_inst_33_tsni(alist, x) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -10584,10 +10584,10 @@ applysubst_inst_33_tsni = function applysubst_inst_33_tsni(alist, x) {
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -10601,7 +10601,7 @@ applysubst_inst_33_tsni = function applysubst_inst_33_tsni(alist, x) {
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -10633,7 +10633,7 @@ applysubstlst_inst_35_tsni = function applysubstlst_inst_35_tsni(alist, y) {
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -10671,12 +10671,12 @@ onewayunify1_inst_36_tsni = function onewayunify1_inst_36_tsni(t1, t2, u) {
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -10688,12 +10688,12 @@ onewayunify1_inst_36_tsni = function onewayunify1_inst_36_tsni(t1, t2, u) {
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -10792,12 +10792,12 @@ onewayunify1_inst_39_40_tsni = function onewayunify1_inst_39_40_tsni(t1, t2, u) 
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -10809,12 +10809,12 @@ onewayunify1_inst_39_40_tsni = function onewayunify1_inst_39_40_tsni(t1, t2, u) 
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -10890,7 +10890,7 @@ rewrite_inst_41_tsni = function rewrite_inst_41_tsni(x, term) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
+    return boyer2.Atom(x1)
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
@@ -10903,7 +10903,7 @@ rewrite_inst_41_tsni = function rewrite_inst_41_tsni(x, term) {
         l1,
         tmp
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
+      tmp1 = boyer2.Conss(arr);
       tmp2 = boyer2.tv(l1);
       _deforest_Deforest_Arr_2_0 = tmp2;
       _deforest_Deforest_Arr_2_1 = term;
@@ -10939,7 +10939,7 @@ rewriteargs_inst_41_tsni = function rewriteargs_inst_41_tsni(x, term) {
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -10980,12 +10980,12 @@ onewayunify1_inst_41_43_40_tsni = function onewayunify1_inst_41_43_40_tsni(t1, t
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -10997,12 +10997,12 @@ onewayunify1_inst_41_43_40_tsni = function onewayunify1_inst_41_43_40_tsni(t1, t
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -11078,7 +11078,7 @@ applysubst_inst_41_44_tsni = function applysubst_inst_41_44_tsni(alist, x) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -11093,10 +11093,10 @@ applysubst_inst_41_44_tsni = function applysubst_inst_41_44_tsni(alist, x) {
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -11110,7 +11110,7 @@ applysubst_inst_41_44_tsni = function applysubst_inst_41_44_tsni(alist, x) {
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11139,7 +11139,7 @@ applysubstlst_inst_41_44_tsni = function applysubstlst_inst_41_44_tsni(alist, y)
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11157,7 +11157,7 @@ rewrite_inst_45_tsni = function rewrite_inst_45_tsni(x, term) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
+    return boyer2.Atom(x1)
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
@@ -11170,7 +11170,7 @@ rewrite_inst_45_tsni = function rewrite_inst_45_tsni(x, term) {
         l1,
         tmp
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
+      tmp1 = boyer2.Conss(arr);
       tmp2 = boyer2.tv(l1);
       _deforest_Deforest_Arr_2_0 = tmp2;
       _deforest_Deforest_Arr_2_1 = term;
@@ -11249,12 +11249,12 @@ onewayunify1_inst_45_43_40_tsni = function onewayunify1_inst_45_43_40_tsni(t1, t
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -11266,12 +11266,12 @@ onewayunify1_inst_45_43_40_tsni = function onewayunify1_inst_45_43_40_tsni(t1, t
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -11347,7 +11347,7 @@ applysubst_inst_45_44_tsni = function applysubst_inst_45_44_tsni(alist, x) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -11362,10 +11362,10 @@ applysubst_inst_45_44_tsni = function applysubst_inst_45_44_tsni(alist, x) {
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -11379,7 +11379,7 @@ applysubst_inst_45_44_tsni = function applysubst_inst_45_44_tsni(alist, x) {
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11408,7 +11408,7 @@ applysubstlst_inst_45_44_tsni = function applysubstlst_inst_45_44_tsni(alist, y)
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11469,7 +11469,7 @@ rewriteargs_inst_46_tsni = function rewriteargs_inst_46_tsni(x, term) {
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11510,12 +11510,12 @@ onewayunify1_inst_46_43_40_tsni = function onewayunify1_inst_46_43_40_tsni(t1, t
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -11527,12 +11527,12 @@ onewayunify1_inst_46_43_40_tsni = function onewayunify1_inst_46_43_40_tsni(t1, t
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -11608,7 +11608,7 @@ applysubst_inst_46_44_tsni = function applysubst_inst_46_44_tsni(alist, x) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -11623,10 +11623,10 @@ applysubst_inst_46_44_tsni = function applysubst_inst_46_44_tsni(alist, x) {
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -11640,7 +11640,7 @@ applysubst_inst_46_44_tsni = function applysubst_inst_46_44_tsni(alist, x) {
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11669,7 +11669,7 @@ applysubstlst_inst_46_44_tsni = function applysubstlst_inst_46_44_tsni(alist, y)
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11748,7 +11748,7 @@ rewrite_inst_49_50_tsni = function rewrite_inst_49_50_tsni(x, term) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
+    return boyer2.Atom(x1)
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
@@ -11761,7 +11761,7 @@ rewrite_inst_49_50_tsni = function rewrite_inst_49_50_tsni(x, term) {
         l1,
         tmp
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
+      tmp1 = boyer2.Conss(arr);
       tmp2 = boyer2.tv(l1);
       _deforest_Deforest_Arr_2_0 = tmp2;
       _deforest_Deforest_Arr_2_1 = term;
@@ -11827,7 +11827,7 @@ rewriteargs_inst_49_50_tsni = function rewriteargs_inst_49_50_tsni(x, term) {
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11842,7 +11842,7 @@ applysubst_inst_49_50_44_tsni = function applysubst_inst_49_50_44_tsni(alist, x)
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -11857,10 +11857,10 @@ applysubst_inst_49_50_44_tsni = function applysubst_inst_49_50_44_tsni(alist, x)
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -11874,7 +11874,7 @@ applysubst_inst_49_50_44_tsni = function applysubst_inst_49_50_44_tsni(alist, x)
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11903,7 +11903,7 @@ applysubstlst_inst_49_50_44_tsni = function applysubstlst_inst_49_50_44_tsni(ali
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -11944,12 +11944,12 @@ onewayunify1_inst_49_50_43_40_tsni = function onewayunify1_inst_49_50_43_40_tsni
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -11961,12 +11961,12 @@ onewayunify1_inst_49_50_43_40_tsni = function onewayunify1_inst_49_50_43_40_tsni
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -12243,7 +12243,7 @@ applysubst_inst_52_54_tsni = function applysubst_inst_52_54_tsni(alist, x) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -12258,10 +12258,10 @@ applysubst_inst_52_54_tsni = function applysubst_inst_52_54_tsni(alist, x) {
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -12275,7 +12275,7 @@ applysubst_inst_52_54_tsni = function applysubst_inst_52_54_tsni(alist, x) {
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -12304,7 +12304,7 @@ applysubstlst_inst_52_54_tsni = function applysubstlst_inst_52_54_tsni(alist, y)
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -12327,7 +12327,7 @@ applysubst_inst_55_56_54_tsni = function applysubst_inst_55_56_54_tsni(alist, x)
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -12342,10 +12342,10 @@ applysubst_inst_55_56_54_tsni = function applysubst_inst_55_56_54_tsni(alist, x)
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -12359,7 +12359,7 @@ applysubst_inst_55_56_54_tsni = function applysubst_inst_55_56_54_tsni(alist, x)
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -12388,7 +12388,7 @@ applysubstlst_inst_55_56_54_tsni = function applysubstlst_inst_55_56_54_tsni(ali
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -12615,7 +12615,7 @@ rewrite_inst_55_57_50_tsni = function rewrite_inst_55_57_50_tsni(x, term) {
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
+    return boyer2.Atom(x1)
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
@@ -12628,7 +12628,7 @@ rewrite_inst_55_57_50_tsni = function rewrite_inst_55_57_50_tsni(x, term) {
         l1,
         tmp
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
+      tmp1 = boyer2.Conss(arr);
       tmp2 = boyer2.tv(l1);
       _deforest_Deforest_Arr_2_0 = tmp2;
       _deforest_Deforest_Arr_2_1 = term;
@@ -12694,7 +12694,7 @@ rewriteargs_inst_55_57_50_tsni = function rewriteargs_inst_55_57_50_tsni(x, term
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -12735,12 +12735,12 @@ onewayunify1_inst_55_57_50_43_40_tsni = function onewayunify1_inst_55_57_50_43_4
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -12752,12 +12752,12 @@ onewayunify1_inst_55_57_50_43_40_tsni = function onewayunify1_inst_55_57_50_43_4
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -12833,7 +12833,7 @@ applysubst_inst_55_57_50_44_tsni = function applysubst_inst_55_57_50_44_tsni(ali
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -12848,10 +12848,10 @@ applysubst_inst_55_57_50_44_tsni = function applysubst_inst_55_57_50_44_tsni(ali
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -12865,7 +12865,7 @@ applysubst_inst_55_57_50_44_tsni = function applysubst_inst_55_57_50_44_tsni(ali
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -12894,7 +12894,7 @@ applysubstlst_inst_55_57_50_44_tsni = function applysubstlst_inst_55_57_50_44_ts
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -12928,7 +12928,7 @@ rewrite_inst_58_59_57_50_tsni = function rewrite_inst_58_59_57_50_tsni(x, term) 
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
+    return boyer2.Atom(x1)
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
@@ -12941,7 +12941,7 @@ rewrite_inst_58_59_57_50_tsni = function rewrite_inst_58_59_57_50_tsni(x, term) 
         l1,
         tmp
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
+      tmp1 = boyer2.Conss(arr);
       tmp2 = boyer2.tv(l1);
       _deforest_Deforest_Arr_2_0 = tmp2;
       _deforest_Deforest_Arr_2_1 = term;
@@ -13007,7 +13007,7 @@ rewriteargs_inst_58_59_57_50_tsni = function rewriteargs_inst_58_59_57_50_tsni(x
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13022,7 +13022,7 @@ applysubst_inst_58_59_57_50_44_tsni = function applysubst_inst_58_59_57_50_44_ts
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -13037,10 +13037,10 @@ applysubst_inst_58_59_57_50_44_tsni = function applysubst_inst_58_59_57_50_44_ts
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -13054,7 +13054,7 @@ applysubst_inst_58_59_57_50_44_tsni = function applysubst_inst_58_59_57_50_44_ts
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13083,7 +13083,7 @@ applysubstlst_inst_58_59_57_50_44_tsni = function applysubstlst_inst_58_59_57_50
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13124,12 +13124,12 @@ onewayunify1_inst_58_59_57_50_43_40_tsni = function onewayunify1_inst_58_59_57_5
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -13141,12 +13141,12 @@ onewayunify1_inst_58_59_57_50_43_40_tsni = function onewayunify1_inst_58_59_57_5
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -13428,7 +13428,7 @@ applysubst_inst_58_59_56_54_tsni = function applysubst_inst_58_59_56_54_tsni(ali
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -13443,10 +13443,10 @@ applysubst_inst_58_59_56_54_tsni = function applysubst_inst_58_59_56_54_tsni(ali
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -13460,7 +13460,7 @@ applysubst_inst_58_59_56_54_tsni = function applysubst_inst_58_59_56_54_tsni(ali
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13489,7 +13489,7 @@ applysubstlst_inst_58_59_56_54_tsni = function applysubstlst_inst_58_59_56_54_ts
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13522,7 +13522,7 @@ applysubst_inst_60_61_59_56_54_tsni = function applysubst_inst_60_61_59_56_54_ts
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -13537,10 +13537,10 @@ applysubst_inst_60_61_59_56_54_tsni = function applysubst_inst_60_61_59_56_54_ts
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -13554,7 +13554,7 @@ applysubst_inst_60_61_59_56_54_tsni = function applysubst_inst_60_61_59_56_54_ts
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13583,7 +13583,7 @@ applysubstlst_inst_60_61_59_56_54_tsni = function applysubstlst_inst_60_61_59_56
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13810,7 +13810,7 @@ rewrite_inst_60_61_59_57_50_tsni = function rewrite_inst_60_61_59_57_50_tsni(x, 
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x1 = param0;
-    return runtime.safeCall(boyer2.Atom(x1))
+    return boyer2.Atom(x1)
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
     if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
@@ -13823,7 +13823,7 @@ rewrite_inst_60_61_59_57_50_tsni = function rewrite_inst_60_61_59_57_50_tsni(x, 
         l1,
         tmp
       ]);
-      tmp1 = runtime.safeCall(boyer2.Conss(arr));
+      tmp1 = boyer2.Conss(arr);
       tmp2 = boyer2.tv(l1);
       _deforest_Deforest_Arr_2_0 = tmp2;
       _deforest_Deforest_Arr_2_1 = term;
@@ -13889,7 +13889,7 @@ rewriteargs_inst_60_61_59_57_50_tsni = function rewriteargs_inst_60_61_59_57_50_
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -13930,12 +13930,12 @@ onewayunify1_inst_60_61_59_57_50_43_40_tsni = function onewayunify1_inst_60_61_5
           t2,
           t1
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+        tmp1 = boyer2.Conss(arr2);
         arr3 = globalThis.Object.freeze([
           tmp1,
           u
         ]);
-        tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+        tmp2 = boyer2.Conss(arr3);
         arr4 = globalThis.Object.freeze([
           true,
           tmp2
@@ -13947,12 +13947,12 @@ onewayunify1_inst_60_61_59_57_50_43_40_tsni = function onewayunify1_inst_60_61_5
         t2,
         t1
       ]);
-      tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+      tmp3 = boyer2.Conss(arr5);
       arr6 = globalThis.Object.freeze([
         tmp3,
         u
       ]);
-      tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+      tmp4 = boyer2.Conss(arr6);
       arr7 = globalThis.Object.freeze([
         true,
         tmp4
@@ -14028,7 +14028,7 @@ applysubst_inst_60_61_59_57_50_44_tsni = function applysubst_inst_60_61_59_57_50
   } else if (x instanceof boyer2.Atom.class) {
     param0 = x.a;
     x2 = param0;
-    tmp = runtime.safeCall(boyer2.Atom(x2));
+    tmp = boyer2.Atom(x2);
     _deforest_Deforest_Arr_2_0 = tmp;
     _deforest_Deforest_Arr_2_1 = alist;
     arr = () => {
@@ -14043,10 +14043,10 @@ applysubst_inst_60_61_59_57_50_44_tsni = function applysubst_inst_60_61_59_57_50
         y1 = first11;
         return y1
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else {
-      return runtime.safeCall(boyer2.Atom(x2))
+      return boyer2.Atom(x2)
     }
   } else if (x instanceof boyer2.Conss.class) {
     param0 = x.a;
@@ -14060,7 +14060,7 @@ applysubst_inst_60_61_59_57_50_44_tsni = function applysubst_inst_60_61_59_57_50
         x1,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr1))
+      return boyer2.Conss(arr1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -14089,7 +14089,7 @@ applysubstlst_inst_60_61_59_57_50_44_tsni = function applysubstlst_inst_60_61_59
         tmp,
         tmp1
       ]);
-      return runtime.safeCall(boyer2.Conss(arr))
+      return boyer2.Conss(arr)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -14136,16 +14136,27 @@ lambda1 = (undefined, function (h) {
     return lambda$(h)
   }
 });
-(class boyer2 {
+globalThis.Object.freeze(class boyer2 {
   static {
-    boyer21 = boyer2;
+    boyer21 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89, tmp90, tmp91, tmp92, tmp93, tmp94, tmp95, tmp96, tmp97, tmp98, tmp99, tmp100, tmp101, tmp102, tmp103, tmp104, tmp105, tmp106, tmp107, tmp108, tmp109, tmp110, tmp111, tmp112, tmp113, tmp114, tmp115, tmp116, tmp117, tmp118, tmp119, tmp120, tmp121, tmp122, tmp123, tmp124, tmp125, tmp126, tmp127, tmp128, tmp129, tmp130, tmp131, tmp132, tmp133, tmp134, tmp135, tmp136, tmp137, tmp138, tmp139, tmp140, tmp141, tmp142, tmp143, tmp144, tmp145, tmp146, tmp147, tmp148, tmp149, tmp150, tmp151, tmp152, tmp153, tmp154, tmp155, tmp156, tmp157, tmp158, tmp159, tmp160, tmp161, tmp162, tmp163, tmp164, tmp165, tmp166, tmp167, tmp168, tmp169, tmp170, tmp171, tmp172, tmp173, tmp174, tmp175, tmp176, tmp177, tmp178, tmp179, tmp180, tmp181, tmp182, tmp183, tmp184, tmp185, tmp186, tmp187, tmp188, tmp189, tmp190, tmp191, tmp192, tmp193, tmp194, tmp195, tmp196, tmp197, tmp198, tmp199, tmp200, tmp201, tmp202, tmp203, tmp204, tmp205, tmp206, tmp207, tmp208, tmp209, tmp210, tmp211, tmp212, tmp213, tmp214, tmp215, tmp216;
-    this.Lisplist = class Lisplist {
+    globalThis.Object.freeze(class Lisplist {
+      static {
+        boyer2.Lisplist = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Lisplist"]; 
-    };
-    const Nill$class = class Nill extends boyer2.Lisplist {
+    });
+    globalThis.Object.freeze(class Nill extends boyer2.Lisplist {
+      static {
+        boyer2.Nill = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -14154,42 +14165,47 @@ lambda1 = (undefined, function (h) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Nill"]; 
-    };
-    this.Nill = globalThis.Object.freeze(new Nill$class);
+    });
     this.Atom = function Atom(a) {
       return globalThis.Object.freeze(new Atom.class(a));
     };
-    Object.defineProperty(this.Atom, "class", {
-      enumerable: true,
-      value: class Atom extends boyer2.Lisplist {
-        constructor(a) {
-          super();
-          this.a = a;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Atom", ["a"]]; 
+    globalThis.Object.freeze(class Atom extends boyer2.Lisplist {
+      static {
+        boyer2.Atom.class = this
       }
+      constructor(a) {
+        super();
+        this.a = a;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Atom", ["a"]]; 
     });
     this.Conss = function Conss(a) {
       return globalThis.Object.freeze(new Conss.class(a));
     };
-    Object.defineProperty(this.Conss, "class", {
-      enumerable: true,
-      value: class Conss extends boyer2.Lisplist {
-        constructor(a) {
-          super();
-          this.a = a;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Conss", ["a"]]; 
+    globalThis.Object.freeze(class Conss extends boyer2.Lisplist {
+      static {
+        boyer2.Conss.class = this
       }
+      constructor(a) {
+        super();
+        this.a = a;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Conss", ["a"]]; 
     });
-    this.LUT = class LUT {
+    globalThis.Object.freeze(class LUT {
+      static {
+        boyer2.LUT = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "LUT"]; 
-    };
-    const Empty$class = class Empty extends boyer2.LUT {
+    });
+    globalThis.Object.freeze(class Empty extends boyer2.LUT {
+      static {
+        boyer2.Empty = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -14198,21 +14214,20 @@ lambda1 = (undefined, function (h) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Empty"]; 
-    };
-    this.Empty = globalThis.Object.freeze(new Empty$class);
+    });
     this.Node = function Node(x) {
       return globalThis.Object.freeze(new Node.class(x));
     };
-    Object.defineProperty(this.Node, "class", {
-      enumerable: true,
-      value: class Node extends boyer2.LUT {
-        constructor(x) {
-          super();
-          this.x = x;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Node", ["x"]]; 
+    globalThis.Object.freeze(class Node extends boyer2.LUT {
+      static {
+        boyer2.Node.class = this
       }
+      constructor(x) {
+        super();
+        this.x = x;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Node", ["x"]]; 
     });
     tmp = NofibPrelude.nofibStringToList("( implies ( and ( implies x y )( and ( implies y z )( and ( implies z u )( implies u w ) ) ) )( implies x w ) )");
     tmp1 = strToToken_inst_6_tsni(tmp);
@@ -14792,7 +14807,7 @@ lambda1 = (undefined, function (h) {
       } else if (f instanceof boyer2.Atom.class) {
         param0 = f.a;
         x1 = param0;
-        tmp = runtime.safeCall(boyer2.Atom(x1));
+        tmp = boyer2.Atom(x1);
         _deforest_Deforest_Arr_2_0 = tmp;
         _deforest_Deforest_Arr_2_1 = truelst;
         arr = () => {
@@ -14898,7 +14913,7 @@ lambda1 = (undefined, function (h) {
             x,
             y
           ]);
-          tmp1 = runtime.safeCall(boyer2.Conss(arr1));
+          tmp1 = boyer2.Conss(arr1);
           _deforest_Deforest_Arr_2_01 = tmp1;
           _deforest_Deforest_Arr_2_11 = truelst;
           arr2 = () => {
@@ -15000,7 +15015,7 @@ lambda1 = (undefined, function (h) {
               x,
               y
             ]);
-            tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+            tmp2 = boyer2.Conss(arr3);
             _deforest_Deforest_Arr_2_02 = tmp2;
             _deforest_Deforest_Arr_2_12 = falselst;
             arr4 = () => {
@@ -15323,7 +15338,7 @@ lambda1 = (undefined, function (h) {
                                 tmp8,
                                 truelst
                               ]);
-                              tmp9 = runtime.safeCall(boyer2.Conss(arr9));
+                              tmp9 = boyer2.Conss(arr9);
                               arr10 = globalThis.Object.freeze([
                                 tmp7,
                                 tmp9,
@@ -15337,7 +15352,7 @@ lambda1 = (undefined, function (h) {
                                   tmp11,
                                   falselst
                                 ]);
-                                tmp12 = runtime.safeCall(boyer2.Conss(arr11));
+                                tmp12 = boyer2.Conss(arr11);
                                 arr12 = globalThis.Object.freeze([
                                   tmp10,
                                   truelst,
@@ -15417,7 +15432,7 @@ lambda1 = (undefined, function (h) {
                   l1,
                   l2
                 ]);
-                tmp = runtime.safeCall(boyer2.Conss(arr1));
+                tmp = boyer2.Conss(arr1);
                 arr2 = globalThis.Object.freeze([
                   r2,
                   tmp
@@ -15432,12 +15447,12 @@ lambda1 = (undefined, function (h) {
                   first1 = runtime.Tuple.get(scrut, 1);
                   r = first0;
                   l = first1;
-                  tmp1 = runtime.safeCall(boyer2.Atom(h));
+                  tmp1 = boyer2.Atom(h);
                   arr3 = globalThis.Object.freeze([
                     tmp1,
                     l
                   ]);
-                  tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+                  tmp2 = boyer2.Conss(arr3);
                   arr4 = globalThis.Object.freeze([
                     r,
                     tmp2
@@ -15456,12 +15471,12 @@ lambda1 = (undefined, function (h) {
                 first1 = runtime.Tuple.get(scrut, 1);
                 r = first0;
                 l = first1;
-                tmp3 = runtime.safeCall(boyer2.Atom(h));
+                tmp3 = boyer2.Atom(h);
                 arr5 = globalThis.Object.freeze([
                   tmp3,
                   l
                 ]);
-                tmp4 = runtime.safeCall(boyer2.Conss(arr5));
+                tmp4 = boyer2.Conss(arr5);
                 arr6 = globalThis.Object.freeze([
                   r,
                   tmp4
@@ -15480,12 +15495,12 @@ lambda1 = (undefined, function (h) {
               first1 = runtime.Tuple.get(scrut, 1);
               r = first0;
               l = first1;
-              tmp5 = runtime.safeCall(boyer2.Atom(h));
+              tmp5 = boyer2.Atom(h);
               arr7 = globalThis.Object.freeze([
                 tmp5,
                 l
               ]);
-              tmp6 = runtime.safeCall(boyer2.Conss(arr7));
+              tmp6 = boyer2.Conss(arr7);
               arr8 = globalThis.Object.freeze([
                 r,
                 tmp6
@@ -15512,12 +15527,12 @@ lambda1 = (undefined, function (h) {
               first1 = runtime.Tuple.get(scrut, 1);
               r = first0;
               l = first1;
-              tmp7 = runtime.safeCall(boyer2.Atom(h));
+              tmp7 = boyer2.Atom(h);
               arr10 = globalThis.Object.freeze([
                 tmp7,
                 l
               ]);
-              tmp8 = runtime.safeCall(boyer2.Conss(arr10));
+              tmp8 = boyer2.Conss(arr10);
               arr11 = globalThis.Object.freeze([
                 r,
                 tmp8
@@ -15536,12 +15551,12 @@ lambda1 = (undefined, function (h) {
             first1 = runtime.Tuple.get(scrut, 1);
             r = first0;
             l = first1;
-            tmp9 = runtime.safeCall(boyer2.Atom(h));
+            tmp9 = boyer2.Atom(h);
             arr12 = globalThis.Object.freeze([
               tmp9,
               l
             ]);
-            tmp10 = runtime.safeCall(boyer2.Conss(arr12));
+            tmp10 = boyer2.Conss(arr12);
             arr13 = globalThis.Object.freeze([
               r,
               tmp10
@@ -15560,12 +15575,12 @@ lambda1 = (undefined, function (h) {
           first1 = runtime.Tuple.get(scrut, 1);
           r = first0;
           l = first1;
-          tmp11 = runtime.safeCall(boyer2.Atom(h));
+          tmp11 = boyer2.Atom(h);
           arr14 = globalThis.Object.freeze([
             tmp11,
             l
           ]);
-          tmp12 = runtime.safeCall(boyer2.Conss(arr14));
+          tmp12 = boyer2.Conss(arr14);
           arr15 = globalThis.Object.freeze([
             r,
             tmp12
@@ -15743,7 +15758,7 @@ lambda1 = (undefined, function (h) {
                 param02 = first02.a;
                 key = param02;
                 rest = first12;
-                tmp = runtime.safeCall(boyer2.Atom(key));
+                tmp = boyer2.Atom(key);
                 scrut = boyer2.lispListEq(term, tmp);
                 if (scrut === true) {
                   return x
@@ -15794,7 +15809,7 @@ lambda1 = (undefined, function (h) {
           arr,
           boyer21.Empty
         ]);
-        return runtime.safeCall(boyer21.Node(arr1))
+        return boyer21.Node(arr1)
       } else if (first2 instanceof boyer21.Node.class) {
         param0 = first2.x;
         if (runtime.Tuple.isArrayLike(param0) && param0.length === 3) {
@@ -15820,7 +15835,7 @@ lambda1 = (undefined, function (h) {
                 arr2,
                 right
               ]);
-              return runtime.safeCall(boyer21.Node(arr3))
+              return boyer21.Node(arr3)
             } else {
               scrut = NofibPrelude.ltList(k, k1, lambda3, lambda4);
               if (scrut === true) {
@@ -15839,7 +15854,7 @@ lambda1 = (undefined, function (h) {
                   arr5,
                   right
                 ]);
-                return runtime.safeCall(boyer21.Node(arr6))
+                return boyer21.Node(arr6)
               } else {
                 arr7 = globalThis.Object.freeze([
                   k1,
@@ -15856,7 +15871,7 @@ lambda1 = (undefined, function (h) {
                   arr7,
                   tmp3
                 ]);
-                return runtime.safeCall(boyer21.Node(arr9))
+                return boyer21.Node(arr9)
               }
             }
           } else {
@@ -15973,7 +15988,7 @@ lambda1 = (undefined, function (h) {
               x,
               y
             ]);
-            tmp6 = runtime.safeCall(boyer21.Conss(arr));
+            tmp6 = boyer21.Conss(arr);
             _deforest_Deforest_Arr_3_0 = tmp5;
             _deforest_Deforest_Arr_3_1 = tmp6;
             _deforest_Deforest_Arr_3_2 = term;
@@ -16030,7 +16045,7 @@ lambda1 = (undefined, function (h) {
           tmp,
           tmp1
         ]);
-        return runtime.safeCall(boyer2.Conss(arr))
+        return boyer2.Conss(arr)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -16045,7 +16060,7 @@ lambda1 = (undefined, function (h) {
     } else if (x instanceof boyer2.Atom.class) {
       param0 = x.a;
       x2 = param0;
-      tmp = runtime.safeCall(boyer2.Atom(x2));
+      tmp = boyer2.Atom(x2);
       _deforest_Deforest_Arr_2_0 = tmp;
       _deforest_Deforest_Arr_2_1 = alist;
       arr = () => {
@@ -16060,10 +16075,10 @@ lambda1 = (undefined, function (h) {
           y1 = first11;
           return y1
         } else {
-          return runtime.safeCall(boyer2.Atom(x2))
+          return boyer2.Atom(x2)
         }
       } else {
-        return runtime.safeCall(boyer2.Atom(x2))
+        return boyer2.Atom(x2)
       }
     } else if (x instanceof boyer2.Conss.class) {
       param0 = x.a;
@@ -16077,7 +16092,7 @@ lambda1 = (undefined, function (h) {
           x1,
           tmp1
         ]);
-        return runtime.safeCall(boyer2.Conss(arr1))
+        return boyer2.Conss(arr1)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -16145,12 +16160,12 @@ lambda1 = (undefined, function (h) {
             t2,
             t1
           ]);
-          tmp1 = runtime.safeCall(boyer2.Conss(arr2));
+          tmp1 = boyer2.Conss(arr2);
           arr3 = globalThis.Object.freeze([
             tmp1,
             u
           ]);
-          tmp2 = runtime.safeCall(boyer2.Conss(arr3));
+          tmp2 = boyer2.Conss(arr3);
           arr4 = globalThis.Object.freeze([
             true,
             tmp2
@@ -16162,12 +16177,12 @@ lambda1 = (undefined, function (h) {
           t2,
           t1
         ]);
-        tmp3 = runtime.safeCall(boyer2.Conss(arr5));
+        tmp3 = boyer2.Conss(arr5);
         arr6 = globalThis.Object.freeze([
           tmp3,
           u
         ]);
-        tmp4 = runtime.safeCall(boyer2.Conss(arr6));
+        tmp4 = boyer2.Conss(arr6);
         arr7 = globalThis.Object.freeze([
           true,
           tmp4
@@ -16253,7 +16268,7 @@ lambda1 = (undefined, function (h) {
           tmp,
           tmp1
         ]);
-        return runtime.safeCall(boyer2.Conss(arr))
+        return boyer2.Conss(arr)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -16268,7 +16283,7 @@ lambda1 = (undefined, function (h) {
     } else if (x instanceof boyer2.Atom.class) {
       param0 = x.a;
       x1 = param0;
-      return runtime.safeCall(boyer2.Atom(x1))
+      return boyer2.Atom(x1)
     } else if (x instanceof boyer2.Conss.class) {
       param0 = x.a;
       if (runtime.Tuple.isArrayLike(param0) && param0.length === 2) {
@@ -16281,7 +16296,7 @@ lambda1 = (undefined, function (h) {
           l1,
           tmp
         ]);
-        tmp1 = runtime.safeCall(boyer2.Conss(arr));
+        tmp1 = boyer2.Conss(arr);
         tmp2 = boyer2.tv(l1);
         _deforest_Deforest_Arr_2_0 = tmp2;
         _deforest_Deforest_Arr_2_1 = term;
@@ -16347,7 +16362,7 @@ lambda1 = (undefined, function (h) {
   static main() {
     return testBoyer2_nofib_inst_60_61_tsni(3)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "boyer2"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "boyer2"]; 
 });
 let boyer2 = boyer21; export default boyer2;

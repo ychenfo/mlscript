@@ -16,13 +16,13 @@ match_s_arm_State_inst_0_52_tsni = (undefined, function (i, pos, _deforest_State
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -91,13 +91,13 @@ match_s_arm_State_inst_6_7_52_tsni = (undefined, function (i, pos, _deforest_Sta
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -202,13 +202,13 @@ match_s_arm_State_inst_8_52_tsni = (undefined, function (i, pos, _deforest_State
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -224,13 +224,13 @@ match_s_arm_State_inst_10_11_52_tsni = (undefined, function (i, pos, _deforest_S
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -318,13 +318,13 @@ match_s_arm_State_inst_12_52_tsni = (undefined, function (i, pos, _deforest_Stat
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -373,13 +373,13 @@ match_s_arm_State_inst_13_14_52_tsni = (undefined, function (i, pos, _deforest_S
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -500,13 +500,13 @@ match_s_arm_State_inst_28_52_tsni = (undefined, function (i, pos, _deforest_Stat
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -575,13 +575,13 @@ match_s_arm_State_inst_29_30_52_tsni = (undefined, function (i, pos, _deforest_S
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -722,13 +722,13 @@ match_s_arm_State_inst_32_33_30_52_tsni = (undefined, function (i, pos, _defores
   c = param2;
   d = param3;
   if (i instanceof puzzle.Bono.class) {
-    return runtime.safeCall(puzzle.State(pos, b, c, d))
+    return puzzle.State(pos, b, c, d)
   } else if (i instanceof puzzle.Edge.class) {
-    return runtime.safeCall(puzzle.State(a, pos, c, d))
+    return puzzle.State(a, pos, c, d)
   } else if (i instanceof puzzle.Larry.class) {
-    return runtime.safeCall(puzzle.State(a, b, pos, d))
+    return puzzle.State(a, b, pos, d)
   } else if (i instanceof puzzle.Adam.class) {
-    return runtime.safeCall(puzzle.State(a, b, c, pos))
+    return puzzle.State(a, b, c, pos)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -4263,16 +4263,27 @@ lambda2 = (undefined, function (d, h) {
     return lambda$(d, h)
   }
 });
-(class puzzle {
+globalThis.Object.freeze(class puzzle {
   static {
-    puzzle1 = puzzle;
+    puzzle1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1;
-    this.ItemType = class ItemType {
+    globalThis.Object.freeze(class ItemType {
+      static {
+        puzzle.ItemType = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "ItemType"]; 
-    };
-    const Bono$class = class Bono extends puzzle.ItemType {
+    });
+    globalThis.Object.freeze(class Bono extends puzzle.ItemType {
+      static {
+        puzzle.Bono = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -4281,9 +4292,11 @@ lambda2 = (undefined, function (d, h) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Bono"]; 
-    };
-    this.Bono = globalThis.Object.freeze(new Bono$class);
-    const Edge$class = class Edge extends puzzle.ItemType {
+    });
+    globalThis.Object.freeze(class Edge extends puzzle.ItemType {
+      static {
+        puzzle.Edge = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -4292,9 +4305,11 @@ lambda2 = (undefined, function (d, h) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Edge"]; 
-    };
-    this.Edge = globalThis.Object.freeze(new Edge$class);
-    const Larry$class = class Larry extends puzzle.ItemType {
+    });
+    globalThis.Object.freeze(class Larry extends puzzle.ItemType {
+      static {
+        puzzle.Larry = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -4303,9 +4318,11 @@ lambda2 = (undefined, function (d, h) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Larry"]; 
-    };
-    this.Larry = globalThis.Object.freeze(new Larry$class);
-    const Adam$class = class Adam extends puzzle.ItemType {
+    });
+    globalThis.Object.freeze(class Adam extends puzzle.ItemType {
+      static {
+        puzzle.Adam = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -4314,14 +4331,19 @@ lambda2 = (undefined, function (d, h) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Adam"]; 
-    };
-    this.Adam = globalThis.Object.freeze(new Adam$class);
-    this.BankType = class BankType {
+    });
+    globalThis.Object.freeze(class BankType {
+      static {
+        puzzle.BankType = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "BankType"]; 
-    };
-    const LeftBank$class = class LeftBank extends puzzle.BankType {
+    });
+    globalThis.Object.freeze(class LeftBank extends puzzle.BankType {
+      static {
+        puzzle.LeftBank = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -4330,9 +4352,11 @@ lambda2 = (undefined, function (d, h) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "LeftBank"]; 
-    };
-    this.LeftBank = globalThis.Object.freeze(new LeftBank$class);
-    const RightBank$class = class RightBank extends puzzle.BankType {
+    });
+    globalThis.Object.freeze(class RightBank extends puzzle.BankType {
+      static {
+        puzzle.RightBank = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -4341,27 +4365,26 @@ lambda2 = (undefined, function (d, h) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "RightBank"]; 
-    };
-    this.RightBank = globalThis.Object.freeze(new RightBank$class);
+    });
     this.State = function State(b, e, l, a) {
       return globalThis.Object.freeze(new State.class(b, e, l, a));
     };
-    Object.defineProperty(this.State, "class", {
-      enumerable: true,
-      value: class State {
-        constructor(b, e, l, a) {
-          this.b = b;
-          this.e = e;
-          this.l = l;
-          this.a = a;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "State", ["b", "e", "l", "a"]]; 
+    globalThis.Object.freeze(class State {
+      static {
+        puzzle.State.class = this
       }
+      constructor(b, e, l, a) {
+        this.b = b;
+        this.e = e;
+        this.l = l;
+        this.a = a;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "State", ["b", "e", "l", "a"]]; 
     });
-    tmp = runtime.safeCall(puzzle.State(puzzle.LeftBank, puzzle.LeftBank, puzzle.LeftBank, puzzle.LeftBank));
+    tmp = puzzle.State(puzzle.LeftBank, puzzle.LeftBank, puzzle.LeftBank, puzzle.LeftBank);
     this.initialState = tmp;
-    tmp1 = runtime.safeCall(puzzle.State(puzzle.RightBank, puzzle.RightBank, puzzle.RightBank, puzzle.RightBank));
+    tmp1 = puzzle.State(puzzle.RightBank, puzzle.RightBank, puzzle.RightBank, puzzle.RightBank);
     this.finalState = tmp1;
   }
   static itemEq(a, b) {
@@ -4568,13 +4591,13 @@ lambda2 = (undefined, function (d, h) {
       c = param2;
       d = param3;
       if (i instanceof puzzle.Bono.class) {
-        return runtime.safeCall(puzzle.State(pos, b, c, d))
+        return puzzle.State(pos, b, c, d)
       } else if (i instanceof puzzle.Edge.class) {
-        return runtime.safeCall(puzzle.State(a, pos, c, d))
+        return puzzle.State(a, pos, c, d)
       } else if (i instanceof puzzle.Larry.class) {
-        return runtime.safeCall(puzzle.State(a, b, pos, d))
+        return puzzle.State(a, b, pos, d)
       } else if (i instanceof puzzle.Adam.class) {
-        return runtime.safeCall(puzzle.State(a, b, c, pos))
+        return puzzle.State(a, b, c, pos)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -4832,7 +4855,7 @@ lambda2 = (undefined, function (d, h) {
     tmp1 = testPuzzle_nofib_inst_32_33_tsni(tmp);
     return nofibListToString_inst_32_55_tsni(tmp1)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "puzzle"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "puzzle"]; 
 });
 let puzzle = puzzle1; export default puzzle;

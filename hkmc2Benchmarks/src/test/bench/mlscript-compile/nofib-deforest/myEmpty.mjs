@@ -5,10 +5,18 @@ import Term from "./../../../../../../hkmc2/shared/src/test/mlscript-compile/Ter
 import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mjs";
 let myEmpty1;
-(class myEmpty {
+globalThis.Object.freeze(class myEmpty {
   static {
-    myEmpty1 = myEmpty;
-    const X$class = class X {
+    myEmpty1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
+    globalThis.Object.freeze(class X {
+      static {
+        myEmpty.X = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: X
@@ -16,10 +24,9 @@ let myEmpty1;
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "X"]; 
-    };
-    this.X = globalThis.Object.freeze(new X$class);
+    });
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "myEmpty"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "myEmpty"]; 
 });
 let myEmpty = myEmpty1; export default myEmpty;

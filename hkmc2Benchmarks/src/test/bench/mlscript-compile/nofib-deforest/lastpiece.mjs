@@ -1398,7 +1398,7 @@ search_inst_19_tsni = function search_inst_19_tsni(row_col, sey, bd, ps) {
     row1 = first0;
     col = first1;
     if (ps instanceof NofibPrelude.Nil.class) {
-      return runtime.safeCall(lastpiece.Soln(bd))
+      return lastpiece.Soln(bd)
     } else {
       tmp = lastpiece.maxCol + 1;
       scrut1 = col === tmp;
@@ -1456,7 +1456,7 @@ mapLookup_inst_19_20_2_tsni = function mapLookup_inst_19_20_2_tsni(k, m) {
         return lastpiece.Fail(bd, row_col)
       } else {
         ss = scrut1;
-        return runtime.safeCall(lastpiece.Choose(ss))
+        return lastpiece.Choose(ss)
       }
     }
   } else if (m instanceof lastpiece.Bin.class) {
@@ -1601,7 +1601,7 @@ fit_inst_19_23_tsni = function fit_inst_19_23_tsni(bd, sq1, id, os) {
       tmp2 = lastpiece.next(sq2);
       tmp3 = lastpiece.flip(se);
       tmp4 = search_inst_19_tsni(tmp2, tmp3, bd1, ps);
-      return runtime.safeCall(NofibPrelude.Some(tmp4))
+      return NofibPrelude.Some(tmp4)
     }
   } else if (os instanceof NofibPrelude.Cons.class) {
     param0 = os.head;
@@ -1736,7 +1736,7 @@ extend_inst_19_23_24_26_tsni = function extend_inst_19_23_24_26_tsni(bd, sq1, id
 insert_inst_19_23_24_26_27_tsni = function insert_inst_19_23_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -1791,7 +1791,7 @@ compareIntInt_inst_19_23_24_26_27_28_tsni = function compareIntInt_inst_19_23_24
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -1810,7 +1810,7 @@ extend_inst_19_23_29_tsni = function extend_inst_19_23_29_tsni(bd, sq1, id) {
 insert_inst_19_23_29_27_tsni = function insert_inst_19_23_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -1865,7 +1865,7 @@ compareIntInt_inst_19_23_29_27_28_tsni = function compareIntInt_inst_19_23_29_27
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -1928,7 +1928,7 @@ search_inst_31_tsni = function search_inst_31_tsni(row_col, sey, bd, ps) {
     row1 = first0;
     col = first1;
     if (ps instanceof NofibPrelude.Nil.class) {
-      return runtime.safeCall(lastpiece.Soln(bd))
+      return lastpiece.Soln(bd)
     } else {
       tmp = lastpiece.maxCol + 1;
       scrut1 = col === tmp;
@@ -1984,7 +1984,7 @@ mapLookup_inst_31_20_2_tsni = function mapLookup_inst_31_20_2_tsni(k, m) {
         return lastpiece.Fail(bd, row_col)
       } else {
         ss = scrut1;
-        return runtime.safeCall(lastpiece.Choose(ss))
+        return lastpiece.Choose(ss)
       }
     }
   } else if (m instanceof lastpiece.Bin.class) {
@@ -2129,7 +2129,7 @@ fit_inst_31_23_tsni = function fit_inst_31_23_tsni(bd, sq1, id, os) {
       tmp2 = lastpiece.next(sq2);
       tmp3 = lastpiece.flip(se);
       tmp4 = search_inst_31_tsni(tmp2, tmp3, bd1, ps);
-      return runtime.safeCall(NofibPrelude.Some(tmp4))
+      return NofibPrelude.Some(tmp4)
     }
   } else if (os instanceof NofibPrelude.Cons.class) {
     param0 = os.head;
@@ -2264,7 +2264,7 @@ extend_inst_31_23_24_26_tsni = function extend_inst_31_23_24_26_tsni(bd, sq1, id
 insert_inst_31_23_24_26_27_tsni = function insert_inst_31_23_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -2319,7 +2319,7 @@ compareIntInt_inst_31_23_24_26_27_28_tsni = function compareIntInt_inst_31_23_24
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -2338,7 +2338,7 @@ extend_inst_31_23_29_tsni = function extend_inst_31_23_29_tsni(bd, sq1, id) {
 insert_inst_31_23_29_27_tsni = function insert_inst_31_23_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -2393,7 +2393,7 @@ compareIntInt_inst_31_23_29_27_28_tsni = function compareIntInt_inst_31_23_29_27
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -2485,7 +2485,7 @@ compareIntInt_inst_32_3_tsni = function compareIntInt_inst_32_3_tsni(ab, cd) {
               }
             } else {
               return (k, x, l, r) => {
-                return runtime.safeCall(NofibPrelude.Some(x))
+                return NofibPrelude.Some(x)
               }
             }
           }
@@ -2535,7 +2535,7 @@ compareIntInt_inst_33_28_tsni = function compareIntInt_inst_33_28_tsni(ab, cd) {
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -2605,7 +2605,7 @@ compareIntInt_inst_34_2_3_tsni = function compareIntInt_inst_34_2_3_tsni(ab, cd)
               }
             } else {
               return (k, x, l, r) => {
-                return runtime.safeCall(NofibPrelude.Some(x))
+                return NofibPrelude.Some(x)
               }
             }
           }
@@ -2621,7 +2621,7 @@ compareIntInt_inst_34_2_3_tsni = function compareIntInt_inst_34_2_3_tsni(ab, cd)
 insert_inst_35_27_tsni = function insert_inst_35_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -2676,7 +2676,7 @@ compareIntInt_inst_35_27_28_tsni = function compareIntInt_inst_35_27_28_tsni(ab,
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -2698,7 +2698,7 @@ mapLookup_inst_36_25_2_tsni = function mapLookup_inst_36_25_2_tsni(k, m) {
     return (bd, sq1, id) => {
       let tmp;
       tmp = extend_inst_36_26_tsni(bd, sq1, id);
-      return runtime.safeCall(NofibPrelude.Some(tmp))
+      return NofibPrelude.Some(tmp)
     }
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
@@ -2778,7 +2778,7 @@ extend_inst_36_26_tsni = function extend_inst_36_26_tsni(bd, sq1, id) {
 insert_inst_36_26_27_tsni = function insert_inst_36_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -2833,7 +2833,7 @@ compareIntInt_inst_36_26_27_28_tsni = function compareIntInt_inst_36_26_27_28_ts
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -2852,7 +2852,7 @@ extend_inst_37_29_tsni = function extend_inst_37_29_tsni(bd, sq1, id) {
 insert_inst_37_29_27_tsni = function insert_inst_37_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -2907,7 +2907,7 @@ compareIntInt_inst_37_29_27_28_tsni = function compareIntInt_inst_37_29_27_28_ts
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -2950,7 +2950,7 @@ extend_inst_37_24_26_tsni = function extend_inst_37_24_26_tsni(bd, sq1, id) {
 insert_inst_37_24_26_27_tsni = function insert_inst_37_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -3005,7 +3005,7 @@ compareIntInt_inst_37_24_26_27_28_tsni = function compareIntInt_inst_37_24_26_27
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -3117,7 +3117,7 @@ search_inst_38_tsni = function search_inst_38_tsni(row_col, sey, bd, ps) {
     row1 = first0;
     col = first1;
     if (ps instanceof NofibPrelude.Nil.class) {
-      return runtime.safeCall(lastpiece.Soln(bd))
+      return lastpiece.Soln(bd)
     } else {
       tmp = lastpiece.maxCol + 1;
       scrut1 = col === tmp;
@@ -3163,7 +3163,7 @@ mapLookup_inst_38_20_2_tsni = function mapLookup_inst_38_20_2_tsni(k, m) {
         return lastpiece.Fail(bd, row_col)
       } else {
         ss = scrut1;
-        return runtime.safeCall(lastpiece.Choose(ss))
+        return lastpiece.Choose(ss)
       }
     }
   } else if (m instanceof lastpiece.Bin.class) {
@@ -3308,7 +3308,7 @@ fit_inst_38_23_tsni = function fit_inst_38_23_tsni(bd, sq1, id, os) {
       tmp2 = lastpiece.next(sq2);
       tmp3 = lastpiece.flip(se);
       tmp4 = search_inst_38_tsni(tmp2, tmp3, bd1, ps);
-      return runtime.safeCall(NofibPrelude.Some(tmp4))
+      return NofibPrelude.Some(tmp4)
     }
   } else if (os instanceof NofibPrelude.Cons.class) {
     param0 = os.head;
@@ -3443,7 +3443,7 @@ extend_inst_38_23_24_26_tsni = function extend_inst_38_23_24_26_tsni(bd, sq1, id
 insert_inst_38_23_24_26_27_tsni = function insert_inst_38_23_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -3498,7 +3498,7 @@ compareIntInt_inst_38_23_24_26_27_28_tsni = function compareIntInt_inst_38_23_24
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -3517,7 +3517,7 @@ extend_inst_38_23_29_tsni = function extend_inst_38_23_29_tsni(bd, sq1, id) {
 insert_inst_38_23_29_27_tsni = function insert_inst_38_23_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -3572,7 +3572,7 @@ compareIntInt_inst_38_23_29_27_28_tsni = function compareIntInt_inst_38_23_29_27
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -3655,7 +3655,7 @@ mapLookup_inst_39_20_2_tsni = function mapLookup_inst_39_20_2_tsni(k, m) {
         return lastpiece.Fail(bd, row_col)
       } else {
         ss = scrut1;
-        return runtime.safeCall(lastpiece.Choose(ss))
+        return lastpiece.Choose(ss)
       }
     }
   } else if (m instanceof lastpiece.Bin.class) {
@@ -3942,7 +3942,7 @@ extend_inst_39_23_24_26_tsni = function extend_inst_39_23_24_26_tsni(bd, sq1, id
 insert_inst_39_23_24_26_27_tsni = function insert_inst_39_23_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -3997,7 +3997,7 @@ compareIntInt_inst_39_23_24_26_27_28_tsni = function compareIntInt_inst_39_23_24
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -4016,7 +4016,7 @@ extend_inst_39_23_29_tsni = function extend_inst_39_23_29_tsni(bd, sq1, id) {
 insert_inst_39_23_29_27_tsni = function insert_inst_39_23_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -4071,7 +4071,7 @@ compareIntInt_inst_39_23_29_27_28_tsni = function compareIntInt_inst_39_23_29_27
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -4991,7 +4991,7 @@ extend_inst_54_55_24_26_tsni = function extend_inst_54_55_24_26_tsni(bd, sq1, id
 insert_inst_54_55_24_26_27_tsni = function insert_inst_54_55_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -5046,7 +5046,7 @@ compareIntInt_inst_54_55_24_26_27_28_tsni = function compareIntInt_inst_54_55_24
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -5065,7 +5065,7 @@ extend_inst_54_55_29_tsni = function extend_inst_54_55_29_tsni(bd, sq1, id) {
 insert_inst_54_55_29_27_tsni = function insert_inst_54_55_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -5120,7 +5120,7 @@ compareIntInt_inst_54_55_29_27_28_tsni = function compareIntInt_inst_54_55_29_27
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -5234,7 +5234,7 @@ extend_inst_54_56_23_29_tsni = function extend_inst_54_56_23_29_tsni(bd, sq1, id
 insert_inst_54_56_23_29_27_tsni = function insert_inst_54_56_23_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -5289,7 +5289,7 @@ compareIntInt_inst_54_56_23_29_27_28_tsni = function compareIntInt_inst_54_56_23
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -5332,7 +5332,7 @@ extend_inst_54_56_23_24_26_tsni = function extend_inst_54_56_23_24_26_tsni(bd, s
 insert_inst_54_56_23_24_26_27_tsni = function insert_inst_54_56_23_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -5387,7 +5387,7 @@ compareIntInt_inst_54_56_23_24_26_27_28_tsni = function compareIntInt_inst_54_56
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -6939,7 +6939,7 @@ extend_inst_58_59_56_23_24_26_tsni = function extend_inst_58_59_56_23_24_26_tsni
 insert_inst_58_59_56_23_24_26_27_tsni = function insert_inst_58_59_56_23_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -6994,7 +6994,7 @@ compareIntInt_inst_58_59_56_23_24_26_27_28_tsni = function compareIntInt_inst_58
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -7013,7 +7013,7 @@ extend_inst_58_59_56_23_29_tsni = function extend_inst_58_59_56_23_29_tsni(bd, s
 insert_inst_58_59_56_23_29_27_tsni = function insert_inst_58_59_56_23_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -7068,7 +7068,7 @@ compareIntInt_inst_58_59_56_23_29_27_28_tsni = function compareIntInt_inst_58_59
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -7132,7 +7132,7 @@ extend_inst_58_59_55_29_tsni = function extend_inst_58_59_55_29_tsni(bd, sq1, id
 insert_inst_58_59_55_29_27_tsni = function insert_inst_58_59_55_29_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -7187,7 +7187,7 @@ compareIntInt_inst_58_59_55_29_27_28_tsni = function compareIntInt_inst_58_59_55
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -7230,7 +7230,7 @@ extend_inst_58_59_55_24_26_tsni = function extend_inst_58_59_55_24_26_tsni(bd, s
 insert_inst_58_59_55_24_26_27_tsni = function insert_inst_58_59_55_24_26_27_tsni(kx, x, m) {
   let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
   if (m instanceof lastpiece.Tip.class) {
-    return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+    return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
   } else if (m instanceof lastpiece.Bin.class) {
     param0 = m.i;
     param1 = m.k;
@@ -7285,7 +7285,7 @@ compareIntInt_inst_58_59_55_24_26_27_28_tsni = function compareIntInt_inst_58_59
               }
             } else {
               return (kx, x, sz, ky, y, l, r) => {
-                return runtime.safeCall(lastpiece.Bin(sz, kx, x, l, r))
+                return lastpiece.Bin(sz, kx, x, l, r)
               }
             }
           }
@@ -7570,7 +7570,7 @@ get = function get(r, w, docc) {
     param0 = docc.d;
     p3 = param0;
     tmp = get(r, w, p3);
-    return runtime.safeCall(lastpiece1.NilAbove(tmp))
+    return lastpiece1.NilAbove(tmp)
   } else if (docc instanceof lastpiece1.TextBeside.class) {
     param0 = docc.a;
     param1 = docc.d;
@@ -7620,7 +7620,7 @@ get1 = function get1(r, w, sl, p) {
     p4 = param0;
     tmp = w - sl;
     tmp1 = get(r, tmp, p4);
-    return runtime.safeCall(lastpiece1.NilAbove(tmp1))
+    return lastpiece1.NilAbove(tmp1)
   } else if (p instanceof lastpiece1.TextBeside.class) {
     param0 = p.a;
     param1 = p.d;
@@ -7695,7 +7695,7 @@ lay1$ = function lay1$(m, txt, end, gapWidth, shift, k, s, p) {
   tmp1 = k + tmp;
   r = tmp1;
   tmp2 = lastpiece1.indent(k);
-  tmp3 = runtime.safeCall(lastpiece1.Str(tmp2));
+  tmp3 = lastpiece1.Str(tmp2);
   tmp4 = lastpiece1.NoAnnot(tmp3, k);
   tmp5 = lay2$(m, txt, end, gapWidth, shift, r, p);
   tmp6 = runtime.safeCall(txt(s, tmp5));
@@ -7731,7 +7731,7 @@ lay$1 = function lay$(m, txt, end, gapWidth, shift, k, docc) {
       scrut1 = k >= gapWidth;
       if (scrut1 === true) {
         tmp2 = NofibPrelude.replicate(shift, "/");
-        tmp3 = runtime.safeCall(lastpiece1.Str(tmp2));
+        tmp3 = lastpiece1.Str(tmp2);
         tmp4 = lastpiece1.NoAnnot(tmp3, shift);
         tmp5 = k - shift;
         tmp6 = lay1$(m, txt, end, gapWidth, shift, tmp5, s, p);
@@ -7742,7 +7742,7 @@ lay$1 = function lay$(m, txt, end, gapWidth, shift, k, docc) {
         scrut = k < 0;
         if (scrut === true) {
           tmp9 = NofibPrelude.replicate(shift, "|");
-          tmp10 = runtime.safeCall(lastpiece1.Str(tmp9));
+          tmp10 = lastpiece1.Str(tmp9);
           tmp11 = lastpiece1.NoAnnot(tmp10, shift);
           tmp12 = k + shift;
           tmp13 = lay1$(m, txt, end, gapWidth, shift, tmp12, s, p);
@@ -7852,16 +7852,16 @@ put = function put(k, next) {
   }
 };
 lambda9 = (undefined, function (p, q) {
-  return runtime.safeCall(lastpiece1.Beside(p, false, q))
+  return lastpiece1.Beside(p, false, q)
 });
 lambda8 = (undefined, function (a, b, c) {
-  return runtime.safeCall(lastpiece1.Beside(a, b, c))
+  return lastpiece1.Beside(a, b, c)
 });
 lambda7 = (undefined, function (p, q) {
-  return runtime.safeCall(lastpiece1.Above(p, false, q))
+  return lastpiece1.Above(p, false, q)
 });
 lambda6 = (undefined, function (a, b, c) {
-  return runtime.safeCall(lastpiece1.Above(a, b, c))
+  return lastpiece1.Above(a, b, c)
 });
 sq$ = function sq$(bd, n, col) {
   let scrut, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
@@ -8071,11 +8071,19 @@ lambda1 = (undefined, function (col) {
     return lambda$(col)
   }
 });
-(class lastpiece {
+globalThis.Object.freeze(class lastpiece {
   static {
-    lastpiece1 = lastpiece;
+    lastpiece1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let arr, arr1, arr2, arr3, tmp, tmp1, tmp2, tmp3, arr4, tmp4, arr5, tmp5, arr6, tmp6, arr7, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, arr8, arr9, arr10, arr11, tmp14, tmp15, tmp16, tmp17, tmp18, arr12, arr13, arr14, arr15, tmp19, tmp20, tmp21, tmp22, arr16, arr17, arr18, tmp23, arr19, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, arr20, arr21, arr22, arr23, tmp31, tmp32, tmp33, tmp34, arr24, arr25, arr26, tmp35, arr27, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, arr28, arr29, arr30, arr31, tmp43, tmp44, tmp45, tmp46, arr32, arr33, arr34, arr35, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, arr36, arr37, arr38, tmp54, arr39, tmp55, tmp56, tmp57, tmp58, tmp59, arr40, arr41, arr42, arr43, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, arr44, arr45, arr46, arr47, tmp66, tmp67, tmp68, tmp69, arr48, arr49, arr50, tmp70, arr51, tmp71, tmp72, tmp73, tmp74, tmp75, arr52, tmp76, arr53, arr54, arr55, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, arr56, arr57, arr58, arr59, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89, arr60, arr61, arr62, arr63, tmp90, tmp91, tmp92, tmp93, arr64, arr65, arr66, tmp94, arr67, tmp95, tmp96, tmp97, tmp98, arr68, arr69, arr70, arr71, tmp99, tmp100, tmp101, tmp102, tmp103, tmp104, tmp105, arr72, arr73, tmp106, arr74, tmp107, arr75, tmp108, tmp109, tmp110, tmp111, tmp112, tmp113, arr76, arr77, arr78, arr79, tmp114, tmp115, tmp116, tmp117, arr80, tmp118, arr81, tmp119, arr82, tmp120, arr83, tmp121, tmp122, tmp123, tmp124, arr84, arr85, arr86, arr87, tmp125, tmp126, tmp127, tmp128, tmp129, tmp130, tmp131, arr88, arr89, tmp132, arr90, tmp133, arr91, tmp134, tmp135, tmp136, tmp137, tmp138, tmp139, arr92, arr93, arr94, arr95, tmp140, tmp141, tmp142, tmp143, arr96, tmp144, arr97, tmp145, arr98, tmp146, arr99, tmp147, tmp148, tmp149, tmp150, arr100, arr101, arr102, arr103, tmp151, tmp152, tmp153, tmp154, arr104, arr105, tmp155, arr106, tmp156, arr107, tmp157, tmp158, tmp159, tmp160, tmp161, tmp162, tmp163, tmp164, tmp165, arr108, arr109, arr110, arr111, tmp166, tmp167, tmp168, tmp169, arr112, tmp170, arr113, tmp171, arr114, tmp172, arr115, tmp173, tmp174, tmp175, tmp176, arr116, arr117, arr118, arr119, tmp177, tmp178, tmp179, tmp180, tmp181, tmp182, tmp183, arr120, arr121, arr122, arr123, tmp184, tmp185, tmp186, tmp187, tmp188, tmp189, arr124, arr125, arr126, tmp190, tmp191, tmp192, arr127, tmp193, arr128, tmp194, arr129, tmp195, tmp196, tmp197, tmp198, tmp199, arr130, arr131, arr132, tmp200, tmp201, tmp202, arr133, tmp203, arr134, tmp204, arr135, tmp205, tmp206, tmp207, tmp208, tmp209, tmp210, arr136, arr137, arr138, tmp211, tmp212, tmp213, arr139, tmp214, arr140, tmp215, arr141, tmp216, tmp217, tmp218, tmp219, tmp220, arr142, arr143, arr144, tmp221, tmp222, tmp223, tmp224, tmp225, arr145, arr146, arr147, tmp226, tmp227, tmp228, arr148, tmp229, arr149, arr150, tmp230, tmp231, tmp232, tmp233, arr151, arr152, arr153, tmp234, tmp235, tmp236, arr154, arr155, arr156, tmp237, tmp238, tmp239, tmp240, tmp241, tmp242, tmp243, tmp244, arr157, arr158, arr159, tmp245, tmp246, tmp247, arr160, arr161, tmp248, arr162, tmp249, tmp250, tmp251, arr163, arr164, arr165, tmp252, tmp253, tmp254, tmp255, tmp256, tmp257, arr166, arr167, arr168, tmp258, tmp259, tmp260, tmp261, tmp262, tmp263, tmp264, tmp265, tmp266, tmp267, tmp268, tmp269, tmp270, tmp271, tmp272, tmp273, tmp274, tmp275, tmp276, tmp277, tmp278, tmp279;
-    const GT$class = class GT {
+    globalThis.Object.freeze(class GT {
+      static {
+        lastpiece.GT = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: GT
@@ -8083,9 +8091,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "GT"]; 
-    };
-    this.GT = globalThis.Object.freeze(new GT$class);
-    const LT$class = class LT {
+    });
+    globalThis.Object.freeze(class LT {
+      static {
+        lastpiece.LT = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: LT
@@ -8093,9 +8103,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "LT"]; 
-    };
-    this.LT = globalThis.Object.freeze(new LT$class);
-    const EQ$class = class EQ {
+    });
+    globalThis.Object.freeze(class EQ {
+      static {
+        lastpiece.EQ = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: EQ
@@ -8103,14 +8115,19 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "EQ"]; 
-    };
-    this.EQ = globalThis.Object.freeze(new EQ$class);
-    this.Map = class Map {
+    });
+    globalThis.Object.freeze(class Map {
+      static {
+        lastpiece.Map = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Map"]; 
-    };
-    const Tip$class = class Tip extends lastpiece.Map {
+    });
+    globalThis.Object.freeze(class Tip extends lastpiece.Map {
+      static {
+        lastpiece.Tip = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8119,47 +8136,52 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Tip"]; 
-    };
-    this.Tip = globalThis.Object.freeze(new Tip$class);
+    });
     this.Bin = function Bin(i, k, v, l, r) {
       return globalThis.Object.freeze(new Bin.class(i, k, v, l, r));
     };
-    Object.defineProperty(this.Bin, "class", {
-      enumerable: true,
-      value: class Bin extends lastpiece.Map {
-        constructor(i, k, v, l, r) {
-          super();
-          this.i = i;
-          this.k = k;
-          this.v = v;
-          this.l = l;
-          this.r = r;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Bin", ["i", "k", "v", "l", "r"]]; 
+    globalThis.Object.freeze(class Bin extends lastpiece.Map {
+      static {
+        lastpiece.Bin.class = this
       }
+      constructor(i, k, v, l, r) {
+        super();
+        this.i = i;
+        this.k = k;
+        this.v = v;
+        this.l = l;
+        this.r = r;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Bin", ["i", "k", "v", "l", "r"]]; 
     });
     this.P = function P(i, a, b) {
       return globalThis.Object.freeze(new P.class(i, a, b));
     };
-    Object.defineProperty(this.P, "class", {
-      enumerable: true,
-      value: class P {
-        constructor(i, a, b) {
-          this.i = i;
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "P", ["i", "a", "b"]]; 
+    globalThis.Object.freeze(class P {
+      static {
+        lastpiece.P.class = this
       }
+      constructor(i, a, b) {
+        this.i = i;
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "P", ["i", "a", "b"]]; 
     });
-    this.S = class S {
+    globalThis.Object.freeze(class S {
+      static {
+        lastpiece.S = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "S"]; 
-    };
-    const Male$class = class Male extends lastpiece.S {
+    });
+    globalThis.Object.freeze(class Male extends lastpiece.S {
+      static {
+        lastpiece.Male = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8168,9 +8190,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Male"]; 
-    };
-    this.Male = globalThis.Object.freeze(new Male$class);
-    const Female$class = class Female extends lastpiece.S {
+    });
+    globalThis.Object.freeze(class Female extends lastpiece.S {
+      static {
+        lastpiece.Female = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8179,55 +8203,57 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Female"]; 
-    };
-    this.Female = globalThis.Object.freeze(new Female$class);
-    this.Solution = class Solution {
+    });
+    globalThis.Object.freeze(class Solution {
+      static {
+        lastpiece.Solution = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Solution"]; 
-    };
+    });
     this.Soln = function Soln(b) {
       return globalThis.Object.freeze(new Soln.class(b));
     };
-    Object.defineProperty(this.Soln, "class", {
-      enumerable: true,
-      value: class Soln extends lastpiece.Solution {
-        constructor(b) {
-          super();
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Soln", ["b"]]; 
+    globalThis.Object.freeze(class Soln extends lastpiece.Solution {
+      static {
+        lastpiece.Soln.class = this
       }
+      constructor(b) {
+        super();
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Soln", ["b"]]; 
     });
     this.Choose = function Choose(s) {
       return globalThis.Object.freeze(new Choose.class(s));
     };
-    Object.defineProperty(this.Choose, "class", {
-      enumerable: true,
-      value: class Choose extends lastpiece.Solution {
-        constructor(s) {
-          super();
-          this.s = s;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Choose", ["s"]]; 
+    globalThis.Object.freeze(class Choose extends lastpiece.Solution {
+      static {
+        lastpiece.Choose.class = this
       }
+      constructor(s) {
+        super();
+        this.s = s;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Choose", ["s"]]; 
     });
     this.Fail = function Fail(b, s) {
       return globalThis.Object.freeze(new Fail.class(b, s));
     };
-    Object.defineProperty(this.Fail, "class", {
-      enumerable: true,
-      value: class Fail extends lastpiece.Solution {
-        constructor(b, s) {
-          super();
-          this.b = b;
-          this.s = s;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Fail", ["b", "s"]]; 
+    globalThis.Object.freeze(class Fail extends lastpiece.Solution {
+      static {
+        lastpiece.Fail.class = this
       }
+      constructor(b, s) {
+        super();
+        this.b = b;
+        this.s = s;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Fail", ["b", "s"]]; 
     });
     this.maxRow = 8;
     this.maxCol = 8;
@@ -8277,7 +8303,7 @@ lambda1 = (undefined, function (col) {
     tmp10 = NofibPrelude.Cons(arr4, tmp9);
     tmp11 = NofibPrelude.Cons(tmp10, NofibPrelude.Nil);
     tmp12 = NofibPrelude.Cons(tmp3, tmp11);
-    tmp13 = runtime.safeCall(lastpiece.P("n", tmp12, NofibPrelude.Nil));
+    tmp13 = lastpiece.P("n", tmp12, NofibPrelude.Nil);
     this.nPiece = tmp13;
     arr8 = globalThis.Object.freeze([
       0,
@@ -8343,7 +8369,7 @@ lambda1 = (undefined, function (col) {
     tmp27 = NofibPrelude.Cons(arr16, tmp26);
     tmp28 = NofibPrelude.Cons(tmp27, NofibPrelude.Nil);
     tmp29 = NofibPrelude.Cons(tmp22, tmp28);
-    tmp30 = runtime.safeCall(lastpiece.P("m", tmp18, tmp29));
+    tmp30 = lastpiece.P("m", tmp18, tmp29);
     this.mPiece = tmp30;
     arr20 = globalThis.Object.freeze([
       0,
@@ -8431,7 +8457,7 @@ lambda1 = (undefined, function (col) {
     tmp50 = NofibPrelude.Cons(arr32, tmp49);
     tmp51 = NofibPrelude.Cons(tmp50, NofibPrelude.Nil);
     tmp52 = NofibPrelude.Cons(tmp46, tmp51);
-    tmp53 = runtime.safeCall(lastpiece.P("l", tmp41, tmp52));
+    tmp53 = lastpiece.P("l", tmp41, tmp52);
     this.lPiece = tmp53;
     arr36 = globalThis.Object.freeze([
       0,
@@ -8476,7 +8502,7 @@ lambda1 = (undefined, function (col) {
     tmp62 = NofibPrelude.Cons(arr41, tmp61);
     tmp63 = NofibPrelude.Cons(arr40, tmp62);
     tmp64 = NofibPrelude.Cons(tmp63, NofibPrelude.Nil);
-    tmp65 = runtime.safeCall(lastpiece.P("k", tmp59, tmp64));
+    tmp65 = lastpiece.P("k", tmp59, tmp64);
     this.kPiece = tmp65;
     arr44 = globalThis.Object.freeze([
       0,
@@ -8565,7 +8591,7 @@ lambda1 = (undefined, function (col) {
     tmp86 = NofibPrelude.Cons(arr57, tmp85);
     tmp87 = NofibPrelude.Cons(arr56, tmp86);
     tmp88 = NofibPrelude.Cons(tmp87, NofibPrelude.Nil);
-    tmp89 = runtime.safeCall(lastpiece.P("j", tmp83, tmp88));
+    tmp89 = lastpiece.P("j", tmp83, tmp88);
     this.jPiece = tmp89;
     arr60 = globalThis.Object.freeze([
       1,
@@ -8654,7 +8680,7 @@ lambda1 = (undefined, function (col) {
     tmp110 = NofibPrelude.Cons(arr73, tmp109);
     tmp111 = NofibPrelude.Cons(arr72, tmp110);
     tmp112 = NofibPrelude.Cons(tmp111, NofibPrelude.Nil);
-    tmp113 = runtime.safeCall(lastpiece.P("i", tmp105, tmp112));
+    tmp113 = lastpiece.P("i", tmp105, tmp112);
     this.iPiece = tmp113;
     arr76 = globalThis.Object.freeze([
       0,
@@ -8745,7 +8771,7 @@ lambda1 = (undefined, function (col) {
     tmp136 = NofibPrelude.Cons(arr89, tmp135);
     tmp137 = NofibPrelude.Cons(arr88, tmp136);
     tmp138 = NofibPrelude.Cons(tmp137, NofibPrelude.Nil);
-    tmp139 = runtime.safeCall(lastpiece.P("h", tmp131, tmp138));
+    tmp139 = lastpiece.P("h", tmp131, tmp138);
     this.hPiece = tmp139;
     arr92 = globalThis.Object.freeze([
       0,
@@ -8836,7 +8862,7 @@ lambda1 = (undefined, function (col) {
     tmp162 = NofibPrelude.Cons(tmp154, tmp161);
     tmp163 = NofibPrelude.Cons(tmp150, tmp162);
     tmp164 = NofibPrelude.Cons(tmp143, tmp163);
-    tmp165 = runtime.safeCall(lastpiece.P("g", NofibPrelude.Nil, tmp164));
+    tmp165 = lastpiece.P("g", NofibPrelude.Nil, tmp164);
     this.gPiece = tmp165;
     arr108 = globalThis.Object.freeze([
       0,
@@ -8925,7 +8951,7 @@ lambda1 = (undefined, function (col) {
     tmp186 = NofibPrelude.Cons(arr121, tmp185);
     tmp187 = NofibPrelude.Cons(arr120, tmp186);
     tmp188 = NofibPrelude.Cons(tmp187, NofibPrelude.Nil);
-    tmp189 = runtime.safeCall(lastpiece.P("f", tmp183, tmp188));
+    tmp189 = lastpiece.P("f", tmp183, tmp188);
     this.fPiece = tmp189;
     arr124 = globalThis.Object.freeze([
       0,
@@ -8995,7 +9021,7 @@ lambda1 = (undefined, function (col) {
     tmp207 = NofibPrelude.Cons(arr133, tmp206);
     tmp208 = NofibPrelude.Cons(tmp207, NofibPrelude.Nil);
     tmp209 = NofibPrelude.Cons(tmp202, tmp208);
-    tmp210 = runtime.safeCall(lastpiece.P("e", tmp199, tmp209));
+    tmp210 = lastpiece.P("e", tmp199, tmp209);
     this.ePiece = tmp210;
     arr136 = globalThis.Object.freeze([
       0,
@@ -9047,7 +9073,7 @@ lambda1 = (undefined, function (col) {
     tmp222 = NofibPrelude.Cons(arr143, tmp221);
     tmp223 = NofibPrelude.Cons(arr142, tmp222);
     tmp224 = NofibPrelude.Cons(tmp223, NofibPrelude.Nil);
-    tmp225 = runtime.safeCall(lastpiece.P("d", tmp220, tmp224));
+    tmp225 = lastpiece.P("d", tmp220, tmp224);
     this.dPiece = tmp225;
     arr145 = globalThis.Object.freeze([
       0,
@@ -9115,7 +9141,7 @@ lambda1 = (undefined, function (col) {
     tmp241 = NofibPrelude.Cons(tmp236, tmp240);
     tmp242 = NofibPrelude.Cons(tmp232, tmp241);
     tmp243 = NofibPrelude.Cons(tmp228, tmp242);
-    tmp244 = runtime.safeCall(lastpiece.P("c", NofibPrelude.Nil, tmp243));
+    tmp244 = lastpiece.P("c", NofibPrelude.Nil, tmp243);
     this.cPiece = tmp244;
     arr157 = globalThis.Object.freeze([
       0,
@@ -9182,7 +9208,7 @@ lambda1 = (undefined, function (col) {
     tmp259 = NofibPrelude.Cons(arr167, tmp258);
     tmp260 = NofibPrelude.Cons(arr166, tmp259);
     tmp261 = NofibPrelude.Cons(tmp260, NofibPrelude.Nil);
-    tmp262 = runtime.safeCall(lastpiece.P("b", tmp257, tmp261));
+    tmp262 = lastpiece.P("b", tmp257, tmp261);
     this.bPiece = tmp262;
     tmp263 = NofibPrelude.Cons(lastpiece.nPiece, NofibPrelude.Nil);
     tmp264 = NofibPrelude.Cons(lastpiece.mPiece, tmp263);
@@ -9198,12 +9224,18 @@ lambda1 = (undefined, function (col) {
     tmp274 = NofibPrelude.Cons(lastpiece.cPiece, tmp273);
     tmp275 = NofibPrelude.Cons(lastpiece.bPiece, tmp274);
     this.initialPieces = tmp275;
-    this.Mode = class Mode {
+    globalThis.Object.freeze(class Mode {
+      static {
+        lastpiece.Mode = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Mode"]; 
-    };
-    const PageMode$class = class PageMode extends lastpiece.Mode {
+    });
+    globalThis.Object.freeze(class PageMode extends lastpiece.Mode {
+      static {
+        lastpiece.PageMode = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9212,9 +9244,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "PageMode"]; 
-    };
-    this.PageMode = globalThis.Object.freeze(new PageMode$class);
-    const ZigZagMode$class = class ZigZagMode extends lastpiece.Mode {
+    });
+    globalThis.Object.freeze(class ZigZagMode extends lastpiece.Mode {
+      static {
+        lastpiece.ZigZagMode = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9223,9 +9257,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "ZigZagMode"]; 
-    };
-    this.ZigZagMode = globalThis.Object.freeze(new ZigZagMode$class);
-    const LeftMode$class = class LeftMode extends lastpiece.Mode {
+    });
+    globalThis.Object.freeze(class LeftMode extends lastpiece.Mode {
+      static {
+        lastpiece.LeftMode = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9234,9 +9270,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "LeftMode"]; 
-    };
-    this.LeftMode = globalThis.Object.freeze(new LeftMode$class);
-    const OneLineMode$class = class OneLineMode extends lastpiece.Mode {
+    });
+    globalThis.Object.freeze(class OneLineMode extends lastpiece.Mode {
+      static {
+        lastpiece.OneLineMode = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9245,61 +9283,69 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "OneLineMode"]; 
-    };
-    this.OneLineMode = globalThis.Object.freeze(new OneLineMode$class);
-    this.TextDetails = class TextDetails {
+    });
+    globalThis.Object.freeze(class TextDetails {
+      static {
+        lastpiece.TextDetails = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "TextDetails"]; 
-    };
+    });
     this.Chr = function Chr(c) {
       return globalThis.Object.freeze(new Chr.class(c));
     };
-    Object.defineProperty(this.Chr, "class", {
-      enumerable: true,
-      value: class Chr extends lastpiece.TextDetails {
-        constructor(c) {
-          super();
-          this.c = c;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Chr", ["c"]]; 
+    globalThis.Object.freeze(class Chr extends lastpiece.TextDetails {
+      static {
+        lastpiece.Chr.class = this
       }
+      constructor(c) {
+        super();
+        this.c = c;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Chr", ["c"]]; 
     });
     this.Str = function Str(s) {
       return globalThis.Object.freeze(new Str.class(s));
     };
-    Object.defineProperty(this.Str, "class", {
-      enumerable: true,
-      value: class Str extends lastpiece.TextDetails {
-        constructor(s) {
-          super();
-          this.s = s;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Str", ["s"]]; 
+    globalThis.Object.freeze(class Str extends lastpiece.TextDetails {
+      static {
+        lastpiece.Str.class = this
       }
+      constructor(s) {
+        super();
+        this.s = s;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Str", ["s"]]; 
     });
     this.PStr = function PStr(s) {
       return globalThis.Object.freeze(new PStr.class(s));
     };
-    Object.defineProperty(this.PStr, "class", {
-      enumerable: true,
-      value: class PStr extends lastpiece.TextDetails {
-        constructor(s) {
-          super();
-          this.s = s;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "PStr", ["s"]]; 
+    globalThis.Object.freeze(class PStr extends lastpiece.TextDetails {
+      static {
+        lastpiece.PStr.class = this
       }
+      constructor(s) {
+        super();
+        this.s = s;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "PStr", ["s"]]; 
     });
-    this.AnnotDetails = class AnnotDetails {
+    globalThis.Object.freeze(class AnnotDetails {
+      static {
+        lastpiece.AnnotDetails = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "AnnotDetails"]; 
-    };
-    const AnnotStart$class = class AnnotStart extends lastpiece.AnnotDetails {
+    });
+    globalThis.Object.freeze(class AnnotStart extends lastpiece.AnnotDetails {
+      static {
+        lastpiece.AnnotStart = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9308,9 +9354,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "AnnotStart"]; 
-    };
-    this.AnnotStart = globalThis.Object.freeze(new AnnotStart$class);
-    const AnnotEnd$class = class AnnotEnd extends lastpiece.AnnotDetails {
+    });
+    globalThis.Object.freeze(class AnnotEnd extends lastpiece.AnnotDetails {
+      static {
+        lastpiece.AnnotEnd = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9319,29 +9367,34 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "AnnotEnd"]; 
-    };
-    this.AnnotEnd = globalThis.Object.freeze(new AnnotEnd$class);
+    });
     this.NoAnnot = function NoAnnot(t, i) {
       return globalThis.Object.freeze(new NoAnnot.class(t, i));
     };
-    Object.defineProperty(this.NoAnnot, "class", {
-      enumerable: true,
-      value: class NoAnnot extends lastpiece.AnnotDetails {
-        constructor(t, i) {
-          super();
-          this.t = t;
-          this.i = i;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "NoAnnot", ["t", "i"]]; 
+    globalThis.Object.freeze(class NoAnnot extends lastpiece.AnnotDetails {
+      static {
+        lastpiece.NoAnnot.class = this
       }
+      constructor(t, i) {
+        super();
+        this.t = t;
+        this.i = i;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "NoAnnot", ["t", "i"]]; 
     });
-    this.IsEmptyy = class IsEmptyy {
+    globalThis.Object.freeze(class IsEmptyy {
+      static {
+        lastpiece.IsEmptyy = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "IsEmptyy"]; 
-    };
-    const IsEmpty$class = class IsEmpty extends lastpiece.IsEmptyy {
+    });
+    globalThis.Object.freeze(class IsEmpty extends lastpiece.IsEmptyy {
+      static {
+        lastpiece.IsEmpty = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9350,9 +9403,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "IsEmpty"]; 
-    };
-    this.IsEmpty = globalThis.Object.freeze(new IsEmpty$class);
-    const NotEmpty$class = class NotEmpty extends lastpiece.IsEmptyy {
+    });
+    globalThis.Object.freeze(class NotEmpty extends lastpiece.IsEmptyy {
+      static {
+        lastpiece.NotEmpty = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9361,14 +9416,19 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "NotEmpty"]; 
-    };
-    this.NotEmpty = globalThis.Object.freeze(new NotEmpty$class);
-    this.Doc = class Doc {
+    });
+    globalThis.Object.freeze(class Doc {
+      static {
+        lastpiece.Doc = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Doc"]; 
-    };
-    const Empty$class = class Empty extends lastpiece.Doc {
+    });
+    globalThis.Object.freeze(class Empty extends lastpiece.Doc {
+      static {
+        lastpiece.Empty = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9377,9 +9437,11 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Empty"]; 
-    };
-    this.Empty = globalThis.Object.freeze(new Empty$class);
-    const NoDoc$class = class NoDoc extends lastpiece.Doc {
+    });
+    globalThis.Object.freeze(class NoDoc extends lastpiece.Doc {
+      static {
+        lastpiece.NoDoc = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9388,103 +9450,102 @@ lambda1 = (undefined, function (col) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "NoDoc"]; 
-    };
-    this.NoDoc = globalThis.Object.freeze(new NoDoc$class);
+    });
     this.NilAbove = function NilAbove(d) {
       return globalThis.Object.freeze(new NilAbove.class(d));
     };
-    Object.defineProperty(this.NilAbove, "class", {
-      enumerable: true,
-      value: class NilAbove extends lastpiece.Doc {
-        constructor(d) {
-          super();
-          this.d = d;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "NilAbove", ["d"]]; 
+    globalThis.Object.freeze(class NilAbove extends lastpiece.Doc {
+      static {
+        lastpiece.NilAbove.class = this
       }
+      constructor(d) {
+        super();
+        this.d = d;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "NilAbove", ["d"]]; 
     });
     this.TextBeside = function TextBeside(a, d) {
       return globalThis.Object.freeze(new TextBeside.class(a, d));
     };
-    Object.defineProperty(this.TextBeside, "class", {
-      enumerable: true,
-      value: class TextBeside extends lastpiece.Doc {
-        constructor(a, d) {
-          super();
-          this.a = a;
-          this.d = d;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "TextBeside", ["a", "d"]]; 
+    globalThis.Object.freeze(class TextBeside extends lastpiece.Doc {
+      static {
+        lastpiece.TextBeside.class = this
       }
+      constructor(a, d) {
+        super();
+        this.a = a;
+        this.d = d;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "TextBeside", ["a", "d"]]; 
     });
     this.Nest = function Nest(i, d) {
       return globalThis.Object.freeze(new Nest.class(i, d));
     };
-    Object.defineProperty(this.Nest, "class", {
-      enumerable: true,
-      value: class Nest extends lastpiece.Doc {
-        constructor(i, d) {
-          super();
-          this.i = i;
-          this.d = d;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Nest", ["i", "d"]]; 
+    globalThis.Object.freeze(class Nest extends lastpiece.Doc {
+      static {
+        lastpiece.Nest.class = this
       }
+      constructor(i, d) {
+        super();
+        this.i = i;
+        this.d = d;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Nest", ["i", "d"]]; 
     });
     this.Union = function Union(d1, d2) {
       return globalThis.Object.freeze(new Union.class(d1, d2));
     };
-    Object.defineProperty(this.Union, "class", {
-      enumerable: true,
-      value: class Union extends lastpiece.Doc {
-        constructor(d1, d2) {
-          super();
-          this.d1 = d1;
-          this.d2 = d2;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Union", ["d1", "d2"]]; 
+    globalThis.Object.freeze(class Union extends lastpiece.Doc {
+      static {
+        lastpiece.Union.class = this
       }
+      constructor(d1, d2) {
+        super();
+        this.d1 = d1;
+        this.d2 = d2;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Union", ["d1", "d2"]]; 
     });
     this.Beside = function Beside(d1, b, d2) {
       return globalThis.Object.freeze(new Beside.class(d1, b, d2));
     };
-    Object.defineProperty(this.Beside, "class", {
-      enumerable: true,
-      value: class Beside extends lastpiece.Doc {
-        constructor(d1, b, d2) {
-          super();
-          this.d1 = d1;
-          this.b = b;
-          this.d2 = d2;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Beside", ["d1", "b", "d2"]]; 
+    globalThis.Object.freeze(class Beside extends lastpiece.Doc {
+      static {
+        lastpiece.Beside.class = this
       }
+      constructor(d1, b, d2) {
+        super();
+        this.d1 = d1;
+        this.b = b;
+        this.d2 = d2;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Beside", ["d1", "b", "d2"]]; 
     });
     this.Above = function Above(d1, b, d2) {
       return globalThis.Object.freeze(new Above.class(d1, b, d2));
     };
-    Object.defineProperty(this.Above, "class", {
-      enumerable: true,
-      value: class Above extends lastpiece.Doc {
-        constructor(d1, b, d2) {
-          super();
-          this.d1 = d1;
-          this.b = b;
-          this.d2 = d2;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Above", ["d1", "b", "d2"]]; 
+    globalThis.Object.freeze(class Above extends lastpiece.Doc {
+      static {
+        lastpiece.Above.class = this
       }
+      constructor(d1, b, d2) {
+        super();
+        this.d1 = d1;
+        this.b = b;
+        this.d2 = d2;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Above", ["d1", "b", "d2"]]; 
     });
-    tmp276 = runtime.safeCall(lastpiece.Chr(" "));
+    tmp276 = lastpiece.Chr(" ");
     tmp277 = lastpiece.NoAnnot(tmp276, 1);
     this.spaceText = tmp277;
-    tmp278 = runtime.safeCall(lastpiece.Chr("\n"));
+    tmp278 = lastpiece.Chr("\n");
     tmp279 = lastpiece.NoAnnot(tmp278, 1);
     this.nlText = tmp279;
   }
@@ -9601,7 +9662,7 @@ lambda1 = (undefined, function (col) {
     tmp1 = lastpiece.size(r);
     tmp2 = tmp + tmp1;
     tmp3 = tmp2 + 1;
-    return runtime.safeCall(lastpiece.Bin(tmp3, k, x, l, r))
+    return lastpiece.Bin(tmp3, k, x, l, r)
   } 
   static singleL(k1, x1, t1, r) {
     let param0, param1, param2, param3, param4, k2, x2, t2, t3, tmp;
@@ -9759,7 +9820,7 @@ lambda1 = (undefined, function (col) {
     tmp4 = sizeL + sizeR;
     scrut2 = tmp4 <= 1;
     if (scrut2 === true) {
-      return runtime.safeCall(lastpiece.Bin(sizeX, k, x, l, r))
+      return lastpiece.Bin(sizeX, k, x, l, r)
     } else {
       tmp5 = 4 * sizeL;
       scrut1 = sizeR >= tmp5;
@@ -9771,7 +9832,7 @@ lambda1 = (undefined, function (col) {
         if (scrut === true) {
           return lastpiece.rotateR(k, x, l, r)
         } else {
-          return runtime.safeCall(lastpiece.Bin(sizeX, k, x, l, r))
+          return lastpiece.Bin(sizeX, k, x, l, r)
         }
       }
     }
@@ -9779,7 +9840,7 @@ lambda1 = (undefined, function (col) {
   static insert(kx, x, m) {
     let param0, param1, param2, param3, param4, sz, ky, y, l, r, scrut;
     if (m instanceof lastpiece.Tip.class) {
-      return runtime.safeCall(lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip))
+      return lastpiece.Bin(1, kx, x, lastpiece.Tip, lastpiece.Tip)
     } else if (m instanceof lastpiece.Bin.class) {
       param0 = m.i;
       param1 = m.k;
@@ -9895,7 +9956,7 @@ lambda1 = (undefined, function (col) {
     let param0, param1, o, os1, scrut, tmp, tmp1;
     if (os instanceof NofibPrelude.Nil.class) {
       tmp = extend_inst_37_29_tsni(bd, sq1, id);
-      return runtime.safeCall(NofibPrelude.Some(tmp))
+      return NofibPrelude.Some(tmp)
     } else if (os instanceof NofibPrelude.Cons.class) {
       param0 = os.head;
       param1 = os.tail;
@@ -9931,7 +9992,7 @@ lambda1 = (undefined, function (col) {
       row1 = first0;
       col = first1;
       if (ps instanceof NofibPrelude.Nil.class) {
-        return runtime.safeCall(lastpiece.Soln(bd))
+        return lastpiece.Soln(bd)
       } else {
         tmp = lastpiece.maxCol + 1;
         scrut1 = col === tmp;
@@ -10073,13 +10134,13 @@ lambda1 = (undefined, function (col) {
     let sl, tmp, tmp1, tmp2;
     tmp = NofibPrelude.listLen(s);
     sl = tmp;
-    tmp1 = runtime.safeCall(lastpiece.Str(s));
+    tmp1 = lastpiece.Str(s);
     tmp2 = lastpiece.NoAnnot(tmp1, sl);
     return lastpiece.TextBeside(tmp2, lastpiece.Empty)
   } 
   static char(c) {
     let tmp, tmp1;
-    tmp = runtime.safeCall(lastpiece.Chr(c));
+    tmp = lastpiece.Chr(c);
     tmp1 = lastpiece.NoAnnot(tmp, 1);
     return lastpiece.TextBeside(tmp1, lastpiece.Empty)
   } 
@@ -10117,7 +10178,7 @@ lambda1 = (undefined, function (col) {
       if (g instanceof lastpiece.Empty.class) {
         return q
       } else {
-        return runtime.safeCall(lastpiece.Above(p, g, q))
+        return lastpiece.Above(p, g, q)
       }
     }
   } 
@@ -10205,7 +10266,7 @@ lambda1 = (undefined, function (col) {
         tmp3 = lastpiece.beside(q1, g, q);
         return lastpiece.beside(p12, g1, tmp3)
       } else {
-        tmp4 = runtime.safeCall(lastpiece.Beside(p12, g1, q1));
+        tmp4 = lastpiece.Beside(p12, g1, q1);
         tmp5 = lastpiece.reduceDoc(tmp4);
         return lastpiece.beside(tmp5, g, q)
       }
@@ -10219,7 +10280,7 @@ lambda1 = (undefined, function (col) {
       param0 = p.d;
       p11 = param0;
       tmp7 = lastpiece.beside(p11, g, q);
-      return runtime.safeCall(lastpiece.NilAbove(tmp7))
+      return lastpiece.NilAbove(tmp7)
     } else if (p instanceof lastpiece.TextBeside.class) {
       param0 = p.a;
       param1 = p.d;
@@ -10302,7 +10363,7 @@ lambda1 = (undefined, function (col) {
       param0 = p.d;
       p11 = param0;
       tmp4 = lastpiece.aboveNest(p11, g, k, q);
-      return runtime.safeCall(lastpiece.NilAbove(tmp4))
+      return lastpiece.NilAbove(tmp4)
     } else if (p instanceof lastpiece.TextBeside.class) {
       param0 = p.a;
       param1 = p.d;
@@ -10349,16 +10410,16 @@ lambda1 = (undefined, function (col) {
         scrut1 = k > 0;
         if (scrut1 === true) {
           tmp1 = lastpiece.indent(k);
-          tmp2 = runtime.safeCall(lastpiece.Str(tmp1));
+          tmp2 = lastpiece.Str(tmp1);
           tmp3 = lastpiece.NoAnnot(tmp2, k);
           return lastpiece.TextBeside(tmp3, q)
         } else {
           tmp4 = lastpiece.mkNest(k, q);
-          return runtime.safeCall(lastpiece.NilAbove(tmp4))
+          return lastpiece.NilAbove(tmp4)
         }
       } else {
         tmp5 = lastpiece.mkNest(k, q);
-        return runtime.safeCall(lastpiece.NilAbove(tmp5))
+        return lastpiece.NilAbove(tmp5)
       }
     }
   } 
@@ -10571,7 +10632,7 @@ lambda1 = (undefined, function (col) {
     tmp = testLastPiece_nofib_inst_58_59_tsni();
     return nofibListToString_inst_58_69_tsni(tmp)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "lastpiece"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "lastpiece"]; 
 });
 let lastpiece = lastpiece1; export default lastpiece;

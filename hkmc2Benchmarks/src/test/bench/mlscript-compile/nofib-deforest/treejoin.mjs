@@ -1154,46 +1154,57 @@ lambda = (undefined, function (c) {
     return lambda$(c)
   }
 });
-(class treejoin {
+globalThis.Object.freeze(class treejoin {
   static {
-    treejoin1 = treejoin;
-    this.Tree = class Tree {
+    treejoin1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
+    globalThis.Object.freeze(class Tree {
+      static {
+        treejoin.Tree = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Tree"]; 
-    };
+    });
     this.Node = function Node(k, l, r) {
       return globalThis.Object.freeze(new Node.class(k, l, r));
     };
-    Object.defineProperty(this.Node, "class", {
-      enumerable: true,
-      value: class Node extends treejoin.Tree {
-        constructor(k, l, r) {
-          super();
-          this.k = k;
-          this.l = l;
-          this.r = r;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Node", ["k", "l", "r"]]; 
+    globalThis.Object.freeze(class Node extends treejoin.Tree {
+      static {
+        treejoin.Node.class = this
       }
+      constructor(k, l, r) {
+        super();
+        this.k = k;
+        this.l = l;
+        this.r = r;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Node", ["k", "l", "r"]]; 
     });
     this.Leaf = function Leaf(k, e) {
       return globalThis.Object.freeze(new Leaf.class(k, e));
     };
-    Object.defineProperty(this.Leaf, "class", {
-      enumerable: true,
-      value: class Leaf extends treejoin.Tree {
-        constructor(k, e) {
-          super();
-          this.k = k;
-          this.e = e;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Leaf", ["k", "e"]]; 
+    globalThis.Object.freeze(class Leaf extends treejoin.Tree {
+      static {
+        treejoin.Leaf.class = this
       }
+      constructor(k, e) {
+        super();
+        this.k = k;
+        this.e = e;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Leaf", ["k", "e"]]; 
     });
-    const Empty$class = class Empty extends treejoin.Tree {
+    globalThis.Object.freeze(class Empty extends treejoin.Tree {
+      static {
+        treejoin.Empty = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -1202,8 +1213,7 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Empty"]; 
-    };
-    this.Empty = globalThis.Object.freeze(new Empty$class);
+    });
   }
   static isSpace(c) {
     let tmp, lambda$this;
@@ -1231,10 +1241,10 @@ lambda = (undefined, function (c) {
       scrut2 = k <= k_1;
       if (scrut2 === true) {
         tmp = treejoin.insertT(k, e, l);
-        return runtime.safeCall(treejoin.Node(k_1, tmp, r))
+        return treejoin.Node(k_1, tmp, r)
       } else {
         tmp1 = treejoin.insertT(k, e, r);
-        return runtime.safeCall(treejoin.Node(k_1, l, tmp1))
+        return treejoin.Node(k_1, l, tmp1)
       }
     } else if (t instanceof treejoin.Leaf.class) {
       param0 = t.k;
@@ -1246,12 +1256,12 @@ lambda = (undefined, function (c) {
       scrut1 = k < k_;
       if (scrut1 === true) {
         tmp3 = treejoin.Leaf(k_, k__);
-        return runtime.safeCall(treejoin.Node(k, l_, tmp3))
+        return treejoin.Node(k, l_, tmp3)
       } else {
         scrut = k > k_;
         if (scrut === true) {
           tmp4 = treejoin.Leaf(k_, k__);
-          return runtime.safeCall(treejoin.Node(k_, tmp4, l_))
+          return treejoin.Node(k_, tmp4, l_)
         } else {
           throw globalThis.Error("already exist")
         }
@@ -1284,7 +1294,7 @@ lambda = (undefined, function (c) {
       e = param1;
       scrut = k === k_;
       if (scrut === true) {
-        return runtime.safeCall(NofibPrelude.Some(e))
+        return NofibPrelude.Some(e)
       } else {
         return NofibPrelude.None
       }
@@ -1368,7 +1378,7 @@ lambda = (undefined, function (c) {
     tmp = testTreejoin_nofib_inst_11_12_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "treejoin"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "treejoin"]; 
 });
 let treejoin = treejoin1; export default treejoin;

@@ -691,22 +691,27 @@ lambda = (undefined, function (k, ss) {
     return lambda$_inst_5_tsni(k, ss)
   }
 });
-(class atom {
+globalThis.Object.freeze(class atom {
   static {
-    atom1 = atom;
+    atom1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     this.State = function State(position, velocity) {
       return globalThis.Object.freeze(new State.class(position, velocity));
     };
-    Object.defineProperty(this.State, "class", {
-      enumerable: true,
-      value: class State {
-        constructor(position, velocity) {
-          this.position = position;
-          this.velocity = velocity;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "State", ["position", "velocity"]]; 
+    globalThis.Object.freeze(class State {
+      static {
+        atom.State.class = this
       }
+      constructor(position, velocity) {
+        this.position = position;
+        this.velocity = velocity;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "State", ["position", "velocity"]]; 
     });
   }
   static dotPlus(fs, gs) {
@@ -864,7 +869,7 @@ lambda = (undefined, function (k, ss) {
   static main() {
     return testAtom_nofib_inst_12_13_tsni(20)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "atom"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "atom"]; 
 });
 let atom = atom1; export default atom;

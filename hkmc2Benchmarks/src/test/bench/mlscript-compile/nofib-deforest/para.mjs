@@ -4775,9 +4775,14 @@ go = function go(vs) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-(class para {
+globalThis.Object.freeze(class para {
   static {
-    para1 = para;
+    para1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let arr, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Cons_head9, _deforest_Cons_tail9;
     this.maxw = 70;
     this.optw = 63;
@@ -5450,7 +5455,7 @@ go = function go(vs) {
     tmp = testPara_nofib_inst_71_72_tsni();
     return nofibListToString_inst_71_83_tsni(tmp)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "para"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "para"]; 
 });
 let para = para1; export default para;

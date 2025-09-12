@@ -966,9 +966,12 @@ lambda1 = (undefined, function (caseScrut) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
-(class gcd {
+globalThis.Object.freeze(class gcd {
   static {
-    gcd1 = gcd;
+    gcd1 = this
+  }
+  constructor() {
+    runtime.Unit;
   }
   static g(u1u2u3, v1v2v3) {
     let first2, first1, first0, u1, u2, u3, first21, first11, first01, v1, v2, v3, scrut, scrut1, arr;
@@ -1083,7 +1086,7 @@ lambda1 = (undefined, function (caseScrut) {
   static main() {
     return testGcd_nofib_inst_14_15_tsni(40)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "gcd"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "gcd"]; 
 });
 let gcd = gcd1; export default gcd;

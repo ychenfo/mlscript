@@ -36,7 +36,7 @@ match_t_arm_Branch_inst_0_1_4_tsni = (undefined, function (_deforest_Branch_a_in
       param01 = param0.i;
       x1 = param01;
       l1 = param1;
-      tmp = runtime.safeCall(minimax.Score(x1));
+      tmp = minimax.Score(x1);
       tmp1 = NofibPrelude.map(cropTree_inst_0_1_4_tsni, l1);
       _deforest_Branch_a = tmp;
       _deforest_Branch_cs = tmp1;
@@ -528,7 +528,7 @@ match_t_arm_Branch_inst_31_32_1_4_tsni = (undefined, function (_deforest_Branch_
       param01 = param0.i;
       x1 = param01;
       l1 = param1;
-      tmp = runtime.safeCall(minimax.Score(x1));
+      tmp = minimax.Score(x1);
       tmp1 = NofibPrelude.map(cropTree_inst_31_32_1_4_tsni, l1);
       _deforest_Branch_a = tmp;
       _deforest_Branch_cs = tmp1;
@@ -1421,7 +1421,7 @@ match_t_arm_Branch_inst_50_4_tsni = (undefined, function (_deforest_Branch_a_ins
       param01 = param0.i;
       x1 = param01;
       l1 = param1;
-      tmp = runtime.safeCall(minimax.Score(x1));
+      tmp = minimax.Score(x1);
       tmp1 = NofibPrelude.map(cropTree_inst_50_4_tsni, l1);
       _deforest_Branch_a = tmp;
       _deforest_Branch_cs = tmp1;
@@ -1570,7 +1570,7 @@ match_t_arm_Branch_inst_51_57_32_1_4_tsni = (undefined, function (_deforest_Bran
       param01 = param0.i;
       x1 = param01;
       l1 = param1;
-      tmp = runtime.safeCall(minimax.Score(x1));
+      tmp = minimax.Score(x1);
       tmp1 = NofibPrelude.map(cropTree_inst_51_57_32_1_4_tsni, l1);
       _deforest_Branch_a = tmp;
       _deforest_Branch_cs = tmp1;
@@ -2062,7 +2062,7 @@ match_t_arm_Branch_inst_60_61_57_32_1_4_tsni = (undefined, function (_deforest_B
       param01 = param0.i;
       x1 = param01;
       l1 = param1;
-      tmp = runtime.safeCall(minimax.Score(x1));
+      tmp = minimax.Score(x1);
       tmp1 = NofibPrelude.map(cropTree_inst_60_61_57_32_1_4_tsni, l1);
       _deforest_Branch_a = tmp;
       _deforest_Branch_cs = tmp1;
@@ -2301,7 +2301,7 @@ match_t_arm_Branch_inst_63_64_61_57_32_1_4_tsni = (undefined, function (_defores
       param01 = param0.i;
       x1 = param01;
       l1 = param1;
-      tmp = runtime.safeCall(minimax.Score(x1));
+      tmp = minimax.Score(x1);
       tmp1 = NofibPrelude.map(cropTree_inst_63_64_61_57_32_1_4_tsni, l1);
       _deforest_Branch_a = tmp;
       _deforest_Branch_cs = tmp1;
@@ -2705,7 +2705,7 @@ map_inst_0_1_6_11_tsni = function map_inst_0_1_6_11_tsni(f, xs) {
     }
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return (x1) => {
-      return runtime.safeCall(minimax.Score(x1))
+      return minimax.Score(x1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -3469,7 +3469,7 @@ map_inst_31_32_1_6_11_tsni = function map_inst_31_32_1_6_11_tsni(f, xs) {
     }
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return (x1) => {
-      return runtime.safeCall(minimax.Score(x1))
+      return minimax.Score(x1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -4622,7 +4622,7 @@ map_inst_47_11_tsni = function map_inst_47_11_tsni(f, xs) {
     }
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return (x1) => {
-      return runtime.safeCall(minimax.Score(x1))
+      return minimax.Score(x1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -5379,7 +5379,7 @@ map_inst_50_6_11_tsni = function map_inst_50_6_11_tsni(f, xs) {
     }
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return (x1) => {
-      return runtime.safeCall(minimax.Score(x1))
+      return minimax.Score(x1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -6171,7 +6171,7 @@ map_inst_51_57_32_1_6_11_tsni = function map_inst_51_57_32_1_6_11_tsni(f, xs) {
     }
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return (x1) => {
-      return runtime.safeCall(minimax.Score(x1))
+      return minimax.Score(x1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -7137,7 +7137,7 @@ map_inst_60_61_57_32_1_6_11_tsni = function map_inst_60_61_57_32_1_6_11_tsni(f, 
     }
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return (x1) => {
-      return runtime.safeCall(minimax.Score(x1))
+      return minimax.Score(x1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -8475,7 +8475,7 @@ map_inst_63_64_61_57_32_1_6_11_tsni = function map_inst_63_64_61_57_32_1_6_11_ts
     }
   } else if (xs instanceof NofibPrelude.Nil.class) {
     return (x1) => {
-      return runtime.safeCall(minimax.Score(x1))
+      return minimax.Score(x1)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -9457,16 +9457,27 @@ lambda = (undefined, function (bs) {
     return lambda$(bs)
   }
 });
-(class minimax {
+globalThis.Object.freeze(class minimax {
   static {
-    minimax1 = minimax;
+    minimax1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89, tmp90, tmp91, tmp92, tmp93, tmp94, tmp95, tmp96, tmp97, tmp98, tmp99, tmp100, tmp101, tmp102, tmp103, tmp104, tmp105;
-    this.Piece = class Piece {
+    globalThis.Object.freeze(class Piece {
+      static {
+        minimax.Piece = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Piece"]; 
-    };
-    const X$class = class X extends minimax.Piece {
+    });
+    globalThis.Object.freeze(class X extends minimax.Piece {
+      static {
+        minimax.X = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9475,9 +9486,11 @@ lambda = (undefined, function (bs) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "X"]; 
-    };
-    this.X = globalThis.Object.freeze(new X$class);
-    const O$class = class O extends minimax.Piece {
+    });
+    globalThis.Object.freeze(class O extends minimax.Piece {
+      static {
+        minimax.O = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9486,9 +9499,11 @@ lambda = (undefined, function (bs) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "O"]; 
-    };
-    this.O = globalThis.Object.freeze(new O$class);
-    const Empty$class = class Empty extends minimax.Piece {
+    });
+    globalThis.Object.freeze(class Empty extends minimax.Piece {
+      static {
+        minimax.Empty = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9497,14 +9512,19 @@ lambda = (undefined, function (bs) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Empty"]; 
-    };
-    this.Empty = globalThis.Object.freeze(new Empty$class);
-    this.Evaluation = class Evaluation {
+    });
+    globalThis.Object.freeze(class Evaluation {
+      static {
+        minimax.Evaluation = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Evaluation"]; 
-    };
-    const XWin$class = class XWin extends minimax.Evaluation {
+    });
+    globalThis.Object.freeze(class XWin extends minimax.Evaluation {
+      static {
+        minimax.XWin = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9513,9 +9533,11 @@ lambda = (undefined, function (bs) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "XWin"]; 
-    };
-    this.XWin = globalThis.Object.freeze(new XWin$class);
-    const OWin$class = class OWin extends minimax.Evaluation {
+    });
+    globalThis.Object.freeze(class OWin extends minimax.Evaluation {
+      static {
+        minimax.OWin = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -9524,35 +9546,34 @@ lambda = (undefined, function (bs) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "OWin"]; 
-    };
-    this.OWin = globalThis.Object.freeze(new OWin$class);
+    });
     this.Score = function Score(i) {
       return globalThis.Object.freeze(new Score.class(i));
     };
-    Object.defineProperty(this.Score, "class", {
-      enumerable: true,
-      value: class Score extends minimax.Evaluation {
-        constructor(i) {
-          super();
-          this.i = i;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Score", ["i"]]; 
+    globalThis.Object.freeze(class Score extends minimax.Evaluation {
+      static {
+        minimax.Score.class = this
       }
+      constructor(i) {
+        super();
+        this.i = i;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Score", ["i"]]; 
     });
     this.Branch = function Branch(a, cs) {
       return globalThis.Object.freeze(new Branch.class(a, cs));
     };
-    Object.defineProperty(this.Branch, "class", {
-      enumerable: true,
-      value: class Branch {
-        constructor(a, cs) {
-          this.a = a;
-          this.cs = cs;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Branch", ["a", "cs"]]; 
+    globalThis.Object.freeze(class Branch {
+      static {
+        minimax.Branch.class = this
       }
+      constructor(a, cs) {
+        this.a = a;
+        this.cs = cs;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Branch", ["a", "cs"]]; 
     });
     tmp = NofibPrelude.Cons(1, NofibPrelude.Nil);
     tmp1 = NofibPrelude.Cons(1, tmp);
@@ -10367,14 +10388,14 @@ lambda = (undefined, function (bs) {
       if (scrut === true) {
         return minimax.OWin
       } else {
-        return runtime.safeCall(minimax.Score(x))
+        return minimax.Score(x)
       }
     }
   } 
   static interpret(x, l) {
     let param0, param1, param01, y, ls, tmp;
     if (l instanceof NofibPrelude.Nil.class) {
-      return runtime.safeCall(minimax.Score(x))
+      return minimax.Score(x)
     } else if (l instanceof NofibPrelude.Cons.class) {
       param0 = l.head;
       param1 = l.tail;
@@ -10556,9 +10577,9 @@ lambda = (undefined, function (bs) {
             y = param01;
             scrut = x > y;
             if (scrut === true) {
-              return runtime.safeCall(minimax.Score(x))
+              return minimax.Score(x)
             } else {
-              return runtime.safeCall(minimax.Score(y))
+              return minimax.Score(y)
             }
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -10589,9 +10610,9 @@ lambda = (undefined, function (bs) {
             y = param01;
             scrut = x < y;
             if (scrut === true) {
-              return runtime.safeCall(minimax.Score(x))
+              return minimax.Score(x)
             } else {
-              return runtime.safeCall(minimax.Score(y))
+              return minimax.Score(y)
             }
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -10641,7 +10662,7 @@ lambda = (undefined, function (bs) {
           param01 = param0.i;
           x1 = param01;
           l1 = param1;
-          tmp = runtime.safeCall(minimax.Score(x1));
+          tmp = minimax.Score(x1);
           tmp1 = NofibPrelude.map(minimax.cropTree, l1);
           return minimax.Branch(tmp, tmp1)
         } else {
@@ -10715,7 +10736,7 @@ lambda = (undefined, function (bs) {
     tmp = prog_inst_63_64_tsni("180000");
     return nofibListToString_inst_63_74_tsni(tmp)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "minimax"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "minimax"]; 
 });
 let minimax = minimax1; export default minimax;

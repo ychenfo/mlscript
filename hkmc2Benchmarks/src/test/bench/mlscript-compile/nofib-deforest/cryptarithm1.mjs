@@ -308,9 +308,12 @@ lscomp = function lscomp(k) {
     return lscomp$(k, p1)
   }
 };
-(class cryptarithm1 {
+globalThis.Object.freeze(class cryptarithm1 {
   static {
-    cryptarithm11 = cryptarithm1;
+    cryptarithm11 = this
+  }
+  constructor() {
+    runtime.Unit;
   }
   static expand(a, b, c, d, e, f) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
@@ -451,7 +454,7 @@ lscomp = function lscomp(k) {
   static main() {
     return testCryptarithm_nofib_inst_6_7_tsni(1)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "cryptarithm1"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "cryptarithm1"]; 
 });
 let cryptarithm1 = cryptarithm11; export default cryptarithm1;

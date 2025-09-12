@@ -6186,9 +6186,14 @@ go = function go(h, t) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-(class life {
+globalThis.Object.freeze(class life {
   static {
-    life1 = life;
+    life1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Cons_head9, _deforest_Cons_tail9, _deforest_Cons_head10, _deforest_Cons_tail10, _deforest_Cons_head11, _deforest_Cons_tail11, _deforest_Cons_head12, _deforest_Cons_tail12, _deforest_Cons_head13, _deforest_Cons_tail13, _deforest_Cons_head14, _deforest_Cons_tail14, _deforest_Cons_head15, _deforest_Cons_tail15, _deforest_Cons_head16, _deforest_Cons_tail16, _deforest_Cons_head17, _deforest_Cons_tail17, _deforest_Cons_head18, _deforest_Cons_tail18, _deforest_Cons_head19, _deforest_Cons_tail19, _deforest_Cons_head20, _deforest_Cons_tail20, _deforest_Cons_head21, _deforest_Cons_tail21, _deforest_Cons_head22, _deforest_Cons_tail22, _deforest_Cons_head23, _deforest_Cons_tail23, _deforest_Cons_head24, _deforest_Cons_tail24, _deforest_Cons_head25, _deforest_Cons_tail25, _deforest_Cons_head26, _deforest_Cons_tail26;
     lambda11 = (undefined, function () {
       return NofibPrelude.LzNil
@@ -6692,7 +6697,7 @@ go = function go(h, t) {
   static main() {
     return testLife_nofib_inst_45_46_tsni(15)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "life"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "life"]; 
 });
 let life = life1; export default life;

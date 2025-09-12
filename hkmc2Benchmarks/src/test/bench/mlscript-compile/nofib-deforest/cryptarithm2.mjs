@@ -1836,13 +1836,13 @@ solve_inst_4_tsni = function solve_inst_4_tsni(tops, bots, carry) {
       if (scrut === true) {
         return cryptarithm2.return_(cryptarithm2.Unit)
       } else {
-        return runtime.safeCall(cryptarithm2.StateT(lambda23))
+        return cryptarithm2.StateT(lambda23)
       }
     } else {
-      return runtime.safeCall(cryptarithm2.StateT(lambda24))
+      return cryptarithm2.StateT(lambda24)
     }
   } else {
-    return runtime.safeCall(cryptarithm2.StateT(lambda25))
+    return cryptarithm2.StateT(lambda25)
   }
 };
 lambda_inst_4_tsni = (undefined, function (tops, bot, botss) {
@@ -2475,7 +2475,7 @@ lambda$_inst_4_42_43_44_tsni = function lambda$_inst_4_42_43_44_tsni(f, a, r) {
 bind_inst_4_42_43_44_45_tsni = function bind_inst_4_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_4_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_4_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -3462,7 +3462,7 @@ append_inst_4_57_7_8_38_37_tsni = function append_inst_4_57_7_8_38_37_tsni(xs, y
 bind_inst_4_62_tsni = function bind_inst_4_62_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_4_62_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_4_62_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -3546,13 +3546,13 @@ solve_inst_64_tsni = function solve_inst_64_tsni(tops, bots, carry) {
       if (scrut === true) {
         return cryptarithm2.return_(cryptarithm2.Unit)
       } else {
-        return runtime.safeCall(cryptarithm2.StateT(lambda23))
+        return cryptarithm2.StateT(lambda23)
       }
     } else {
-      return runtime.safeCall(cryptarithm2.StateT(lambda24))
+      return cryptarithm2.StateT(lambda24)
     }
   } else {
-    return runtime.safeCall(cryptarithm2.StateT(lambda25))
+    return cryptarithm2.StateT(lambda25)
   }
 };
 lambda_inst_64_tsni = (undefined, function (tops, bot, botss) {
@@ -4186,7 +4186,7 @@ lambda$_inst_64_42_43_44_tsni = function lambda$_inst_64_42_43_44_tsni(f, a, r) 
 bind_inst_64_42_43_44_45_tsni = function bind_inst_64_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_64_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_64_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -5173,7 +5173,7 @@ append_inst_64_57_7_8_38_37_tsni = function append_inst_64_57_7_8_38_37_tsni(xs,
 bind_inst_64_62_tsni = function bind_inst_64_62_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_64_62_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_64_62_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -5903,7 +5903,7 @@ lambda$_inst_65_42_43_44_tsni = function lambda$_inst_65_42_43_44_tsni(f, a, r) 
 bind_inst_65_42_43_44_45_tsni = function bind_inst_65_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_65_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_65_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -6738,7 +6738,7 @@ append_inst_65_56_10_11_12_39_7_8_38_37_tsni = function append_inst_65_56_10_11_
 bind_inst_65_57_tsni = function bind_inst_65_57_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_65_57_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_65_57_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -7657,7 +7657,7 @@ lambda$_inst_70_42_43_44_tsni = function lambda$_inst_70_42_43_44_tsni(f, a, r) 
 bind_inst_70_42_43_44_45_tsni = function bind_inst_70_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_70_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_70_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -8492,7 +8492,7 @@ append_inst_70_56_10_11_12_39_7_8_38_37_tsni = function append_inst_70_56_10_11_
 bind_inst_70_57_tsni = function bind_inst_70_57_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_70_57_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_70_57_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -9410,7 +9410,7 @@ lambda$_inst_71_42_43_44_tsni = function lambda$_inst_71_42_43_44_tsni(f, a, r) 
 bind_inst_71_42_43_44_45_tsni = function bind_inst_71_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_71_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_71_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -10326,7 +10326,7 @@ lambda_inst_71_58_60_tsni = (undefined, function (s) {
 bind_inst_71_61_tsni = function bind_inst_71_61_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_71_61_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_71_61_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11152,7 +11152,7 @@ lambda$_inst_72_42_43_44_tsni = function lambda$_inst_72_42_43_44_tsni(f, a, r) 
 bind_inst_72_42_43_44_45_tsni = function bind_inst_72_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_72_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_72_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12068,7 +12068,7 @@ lambda_inst_72_58_60_tsni = (undefined, function (s) {
 bind_inst_72_61_tsni = function bind_inst_72_61_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_72_61_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_72_61_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12260,7 +12260,7 @@ permute_inst_73_12_tsni = function permute_inst_73_12_tsni(c) {
 bind_inst_73_12_39_tsni = function bind_inst_73_12_39_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_73_12_39_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_73_12_39_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13072,7 +13072,7 @@ append_inst_74_11_12_13_14_24_25_26_7_8_38_37_tsni = function append_inst_74_11_
 bind_inst_74_11_12_39_tsni = function bind_inst_74_11_12_39_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_74_11_12_39_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_74_11_12_39_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13179,7 +13179,7 @@ lambda$_inst_76_16_tsni = function lambda$_inst_76_16_tsni(xs, x) {
 bind_inst_77_26_tsni = function bind_inst_77_26_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_77_26_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_77_26_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13320,7 +13320,7 @@ lambda$_inst_78_25_tsni = function lambda$_inst_78_25_tsni(c, st, iis) {
 bind_inst_78_25_26_tsni = function bind_inst_78_25_26_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_78_25_26_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_78_25_26_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13750,7 +13750,7 @@ lambda$_inst_79_24_25_30_31_32_33_34_tsni = function lambda$_inst_79_24_25_30_31
 bind_inst_79_35_tsni = function bind_inst_79_35_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_79_35_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_79_35_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13792,7 +13792,7 @@ lambda$_inst_80_14_tsni = function lambda$_inst_80_14_tsni(c, st) {
 bind_inst_80_14_35_tsni = function bind_inst_80_14_35_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_80_14_35_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_80_14_35_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14246,7 +14246,7 @@ lambda$_inst_82_19_21_22_tsni = function lambda$_inst_82_19_21_22_tsni(s, x) {
 bind_inst_83_48_tsni = function bind_inst_83_48_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_83_48_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_83_48_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14342,7 +14342,7 @@ lambda$_inst_84_47_tsni = function lambda$_inst_84_47_tsni(r, x) {
 bind_inst_84_47_48_tsni = function bind_inst_84_47_48_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_84_47_48_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_84_47_48_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14551,7 +14551,7 @@ lambda$_inst_85_46_47_49_50_51_33_34_tsni = function lambda$_inst_85_46_47_49_50
 bind_inst_85_45_tsni = function bind_inst_85_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_85_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_85_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14608,7 +14608,7 @@ lambda$_inst_86_44_tsni = function lambda$_inst_86_44_tsni(f, a, r) {
 bind_inst_86_44_45_tsni = function bind_inst_86_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_86_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_86_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15067,7 +15067,7 @@ lambda$_inst_94_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_94_43_44
 bind_inst_94_43_44_45_tsni = function bind_inst_94_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_94_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_94_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15609,7 +15609,7 @@ append_inst_99_13_14_24_25_26_7_8_38_37_tsni = function append_inst_99_13_14_24_
 bind_inst_99_39_tsni = function bind_inst_99_39_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_99_39_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_99_39_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -16146,7 +16146,7 @@ append_inst_100_10_11_12_13_14_35_7_8_38_37_tsni = function append_inst_100_10_1
 bind_inst_100_6_tsni = function bind_inst_100_6_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_100_6_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_100_6_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -16857,7 +16857,7 @@ lambda$_inst_101_42_43_44_tsni = function lambda$_inst_101_42_43_44_tsni(f, a, r
 bind_inst_101_42_43_44_45_tsni = function bind_inst_101_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_101_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_101_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -17844,7 +17844,7 @@ append_inst_101_57_7_8_38_37_tsni = function append_inst_101_57_7_8_38_37_tsni(x
 bind_inst_101_62_tsni = function bind_inst_101_62_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_101_62_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_101_62_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -17928,13 +17928,13 @@ solve_inst_102_103_tsni = function solve_inst_102_103_tsni(tops, bots, carry) {
       if (scrut === true) {
         return return__inst_102_103_67_tsni(cryptarithm2.Unit)
       } else {
-        return runtime.safeCall(cryptarithm2.StateT(lambda23))
+        return cryptarithm2.StateT(lambda23)
       }
     } else {
-      return runtime.safeCall(cryptarithm2.StateT(lambda24))
+      return cryptarithm2.StateT(lambda24)
     }
   } else {
-    return runtime.safeCall(cryptarithm2.StateT(lambda25))
+    return cryptarithm2.StateT(lambda25)
   }
 };
 lambda_inst_102_103_tsni = (undefined, function (tops, bot, botss) {
@@ -17975,7 +17975,7 @@ lambda$_inst_102_103_tsni2 = function lambda$_inst_102_103_tsni(tops, botss, top
 bind_inst_102_103_62_tsni = function bind_inst_102_103_62_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_102_103_62_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_102_103_62_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -18979,7 +18979,7 @@ lambda$_inst_102_103_42_43_44_46_47_49_50_51_33_34_tsni = function lambda$_inst_
 bind_inst_102_103_42_43_44_45_tsni = function bind_inst_102_103_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_102_103_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_102_103_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -19660,7 +19660,7 @@ lambda_inst_102_104_98_tsni = (undefined, function (caseScrut) {
 return__inst_102_103_67_tsni = function return__inst_102_103_67_tsni(a) {
   let lambda$this;
   lambda$this = runtime.safeCall(lambda_inst_102_103_67_33_tsni(a));
-  return runtime.safeCall(cryptarithm2.StateT(lambda$this))
+  return cryptarithm2.StateT(lambda$this)
 };
 lambda_inst_102_103_67_33_tsni = (undefined, function (a) {
   return (s) => {
@@ -20121,13 +20121,13 @@ solve_inst_110_111_103_tsni = function solve_inst_110_111_103_tsni(tops, bots, c
       if (scrut === true) {
         return return__inst_110_111_103_67_tsni(cryptarithm2.Unit)
       } else {
-        return runtime.safeCall(cryptarithm2.StateT(lambda23))
+        return cryptarithm2.StateT(lambda23)
       }
     } else {
-      return runtime.safeCall(cryptarithm2.StateT(lambda24))
+      return cryptarithm2.StateT(lambda24)
     }
   } else {
-    return runtime.safeCall(cryptarithm2.StateT(lambda25))
+    return cryptarithm2.StateT(lambda25)
   }
 };
 lambda_inst_110_111_103_tsni = (undefined, function (tops, bot, botss) {
@@ -20766,7 +20766,7 @@ lambda$_inst_110_111_103_42_43_44_tsni = function lambda$_inst_110_111_103_42_43
 bind_inst_110_111_103_42_43_44_45_tsni = function bind_inst_110_111_103_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_110_111_103_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_110_111_103_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -21753,7 +21753,7 @@ append_inst_110_111_103_57_7_8_38_37_tsni = function append_inst_110_111_103_57_
 bind_inst_110_111_103_62_tsni = function bind_inst_110_111_103_62_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_110_111_103_62_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_110_111_103_62_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -21813,7 +21813,7 @@ append_inst_110_111_103_61_7_8_38_37_tsni = function append_inst_110_111_103_61_
 return__inst_110_111_103_67_tsni = function return__inst_110_111_103_67_tsni(a) {
   let lambda$this;
   lambda$this = runtime.safeCall(lambda_inst_110_111_103_67_33_tsni(a));
-  return runtime.safeCall(cryptarithm2.StateT(lambda$this))
+  return cryptarithm2.StateT(lambda$this)
 };
 lambda_inst_110_111_103_67_33_tsni = (undefined, function (a) {
   return (s) => {
@@ -21919,13 +21919,13 @@ solve_inst_112_113_111_103_tsni = function solve_inst_112_113_111_103_tsni(tops,
       if (scrut === true) {
         return return__inst_112_113_111_103_67_tsni(cryptarithm2.Unit)
       } else {
-        return runtime.safeCall(cryptarithm2.StateT(lambda23))
+        return cryptarithm2.StateT(lambda23)
       }
     } else {
-      return runtime.safeCall(cryptarithm2.StateT(lambda24))
+      return cryptarithm2.StateT(lambda24)
     }
   } else {
-    return runtime.safeCall(cryptarithm2.StateT(lambda25))
+    return cryptarithm2.StateT(lambda25)
   }
 };
 lambda_inst_112_113_111_103_tsni = (undefined, function (tops, bot, botss) {
@@ -21966,7 +21966,7 @@ lambda$_inst_112_113_111_103_tsni2 = function lambda$_inst_112_113_111_103_tsni(
 bind_inst_112_113_111_103_62_tsni = function bind_inst_112_113_111_103_62_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_112_113_111_103_62_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_112_113_111_103_62_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -22970,7 +22970,7 @@ lambda$_inst_112_113_111_103_42_43_44_46_47_49_50_51_33_34_tsni = function lambd
 bind_inst_112_113_111_103_42_43_44_45_tsni = function bind_inst_112_113_111_103_42_43_44_45_tsni(m, f) {
   let tmp;
   tmp = runtime.safeCall(lambda_inst_112_113_111_103_42_43_44_45_7_tsni(m, f));
-  return runtime.safeCall(cryptarithm2.StateT(tmp))
+  return cryptarithm2.StateT(tmp)
 };
 lambda_inst_112_113_111_103_42_43_44_45_7_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -23651,7 +23651,7 @@ lambda_inst_112_113_111_104_98_tsni = (undefined, function (caseScrut) {
 return__inst_112_113_111_103_67_tsni = function return__inst_112_113_111_103_67_tsni(a) {
   let lambda$this;
   lambda$this = runtime.safeCall(lambda_inst_112_113_111_103_67_33_tsni(a));
-  return runtime.safeCall(cryptarithm2.StateT(lambda$this))
+  return cryptarithm2.StateT(lambda$this)
 };
 lambda_inst_112_113_111_103_67_33_tsni = (undefined, function (a) {
   return (s) => {
@@ -27471,11 +27471,19 @@ lambda = (undefined, function (x) {
   tmp = NofibPrelude.Cons("\n", NofibPrelude.Nil);
   return NofibPrelude.append(x, tmp)
 });
-(class cryptarithm2 {
+globalThis.Object.freeze(class cryptarithm2 {
   static {
-    cryptarithm21 = cryptarithm2;
+    cryptarithm21 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, lambda30;
-    const Unit$class = class Unit {
+    globalThis.Object.freeze(class Unit {
+      static {
+        cryptarithm2.Unit = globalThis.Object.freeze(new this)
+      }
       constructor() {
         Object.defineProperty(this, "class", {
           value: Unit
@@ -27483,20 +27491,19 @@ lambda = (undefined, function (x) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Unit"]; 
-    };
-    this.Unit = globalThis.Object.freeze(new Unit$class);
+    });
     this.StateT = function StateT(run) {
       return globalThis.Object.freeze(new StateT.class(run));
     };
-    Object.defineProperty(this.StateT, "class", {
-      enumerable: true,
-      value: class StateT {
-        constructor(run) {
-          this.run = run;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "StateT", ["run"]]; 
+    globalThis.Object.freeze(class StateT {
+      static {
+        cryptarithm2.StateT.class = this
       }
+      constructor(run) {
+        this.run = run;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "StateT", ["run"]]; 
     });
     lambda30 = (undefined, function (s) {
       let arr;
@@ -27506,21 +27513,21 @@ lambda = (undefined, function (x) {
       ]);
       return NofibPrelude.Cons(arr, NofibPrelude.Nil)
     });
-    tmp = runtime.safeCall(cryptarithm2.StateT(lambda30));
+    tmp = cryptarithm2.StateT(lambda30);
     this.get = tmp;
     this.Digits = function Digits(i, c) {
       return globalThis.Object.freeze(new Digits.class(i, c));
     };
-    Object.defineProperty(this.Digits, "class", {
-      enumerable: true,
-      value: class Digits {
-        constructor(i, c) {
-          this.i = i;
-          this.c = c;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Digits", ["i", "c"]]; 
+    globalThis.Object.freeze(class Digits {
+      static {
+        cryptarithm2.Digits.class = this
       }
+      constructor(i, c) {
+        this.i = i;
+        this.c = c;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Digits", ["i", "c"]]; 
     });
   }
   static unlines(ls) {
@@ -27543,7 +27550,7 @@ lambda = (undefined, function (x) {
         t1 = param1;
         scrut = k === x;
         if (scrut === true) {
-          return runtime.safeCall(NofibPrelude.Some(v))
+          return NofibPrelude.Some(v)
         } else {
           return cryptarithm2.lookup(k, t1)
         }
@@ -27573,12 +27580,12 @@ lambda = (undefined, function (x) {
   static bind(m, f) {
     let tmp;
     tmp = runtime.safeCall(lambda_inst_93_7_tsni(m, f));
-    return runtime.safeCall(cryptarithm2.StateT(tmp))
+    return cryptarithm2.StateT(tmp)
   } 
   static return_(a) {
     let lambda$this;
     lambda$this = runtime.safeCall(lambda4(a));
-    return runtime.safeCall(cryptarithm2.StateT(lambda$this))
+    return cryptarithm2.StateT(lambda$this)
   } 
   static mapM(f, ls) {
     let tmp, lambda$this;
@@ -27589,7 +27596,7 @@ lambda = (undefined, function (x) {
   static lift(ls) {
     let lambda$this;
     lambda$this = runtime.safeCall(lambda_inst_95_18_tsni(ls));
-    return runtime.safeCall(cryptarithm2.StateT(lambda$this))
+    return cryptarithm2.StateT(lambda$this)
   } 
   static execStateT(m, s) {
     let tmp, tmp1, tmp2;
@@ -27600,15 +27607,15 @@ lambda = (undefined, function (x) {
   } 
   static guard(b) {
     if (b === true) {
-      return runtime.safeCall(cryptarithm2.StateT(lambda11))
+      return cryptarithm2.StateT(lambda11)
     } else {
-      return runtime.safeCall(cryptarithm2.StateT(lambda12))
+      return cryptarithm2.StateT(lambda12)
     }
   } 
   static put(s) {
     let lambda$this;
     lambda$this = runtime.safeCall(lambda13(s));
-    return runtime.safeCall(cryptarithm2.StateT(lambda$this))
+    return cryptarithm2.StateT(lambda$this)
   } 
   static digits(d) {
     let param0, param1, a, b;
@@ -27685,13 +27692,13 @@ lambda = (undefined, function (x) {
         if (scrut === true) {
           return cryptarithm2.return_(cryptarithm2.Unit)
         } else {
-          return runtime.safeCall(cryptarithm2.StateT(lambda23))
+          return cryptarithm2.StateT(lambda23)
         }
       } else {
-        return runtime.safeCall(cryptarithm2.StateT(lambda24))
+        return cryptarithm2.StateT(lambda24)
       }
     } else {
-      return runtime.safeCall(cryptarithm2.StateT(lambda25))
+      return cryptarithm2.StateT(lambda25)
     }
   } 
   static puzzle(top, bot) {
@@ -27736,7 +27743,7 @@ lambda = (undefined, function (x) {
     tmp = testCryptarithm2_nofib_inst_112_113_tsni(1);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "cryptarithm2"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "cryptarithm2"]; 
 });
 let cryptarithm2 = cryptarithm21; export default cryptarithm2;

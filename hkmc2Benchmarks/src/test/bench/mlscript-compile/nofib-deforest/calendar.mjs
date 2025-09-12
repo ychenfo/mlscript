@@ -7355,9 +7355,14 @@ lambda = (undefined, function (x) {
   tmp = NofibPrelude.Cons("\n", NofibPrelude.Nil);
   return NofibPrelude.append(x, tmp)
 });
-(class calendar {
+globalThis.Object.freeze(class calendar {
   static {
-    calendar1 = calendar;
+    calendar1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23;
     tmp = NofibPrelude.nofibStringToList("January");
     tmp1 = NofibPrelude.nofibStringToList("February");
@@ -7650,7 +7655,7 @@ lambda = (undefined, function (x) {
     tmp1 = concat_inst_77_82_tsni(tmp);
     return nofibListToString_inst_77_97_tsni(tmp1)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "calendar"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "calendar"]; 
 });
 let calendar = calendar1; export default calendar;

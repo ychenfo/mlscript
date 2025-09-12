@@ -4037,9 +4037,12 @@ f = function f(l, a) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-(class primetest {
+globalThis.Object.freeze(class primetest {
   static {
-    primetest1 = primetest;
+    primetest1 = this
+  }
+  constructor() {
+    runtime.Unit;
   }
   static even(x) {
     let tmp;
@@ -4347,7 +4350,7 @@ f = function f(l, a) {
     tmp = testPrimetest_nofib_inst_39_40_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "primetest"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "primetest"]; 
 });
 let primetest = primetest1; export default primetest;

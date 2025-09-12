@@ -687,9 +687,14 @@ lambda = (undefined, function (acc, c) {
   tmp2 = rsa1.z_mul(acc, rsa1.const31);
   return rsa1.z_add(tmp1, tmp2)
 });
-(class rsa {
+globalThis.Object.freeze(class rsa {
   static {
-    rsa1 = rsa;
+    rsa1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
     tmp = rsa.z_of_int(0);
     this.const0 = tmp;
@@ -837,7 +842,7 @@ lambda = (undefined, function (acc, c) {
   static main() {
     return testRsa_nofib_inst_13_14_tsni(0)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "rsa"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "rsa"]; 
 });
 let rsa = rsa1; export default rsa;

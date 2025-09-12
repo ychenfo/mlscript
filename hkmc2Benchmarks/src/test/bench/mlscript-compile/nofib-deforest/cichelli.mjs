@@ -561,7 +561,7 @@ match_x_arm_Some_inst_40_41_2_62_tsni = (undefined, function (y, _deforest_Some_
   return NofibPrelude.min(x, y)
 });
 match_scrut_arm_None_inst_40_41_tsni = (undefined, function (newCharAssocs, ks) {
-  return runtime.safeCall(cichelli1.NotEver(1))
+  return cichelli1.NotEver(1)
 });
 match_xs_arm_Nil_inst_40_41_53_tsni = (undefined, function (ys) {
   return ys
@@ -674,7 +674,7 @@ match_first0_arm_None_inst_42_46_41_tsni = (undefined, function (keyHashSet, cha
   }
 });
 match_scrut_arm_None_inst_42_46_41_tsni = (undefined, function (newCharAssocs, ks) {
-  return runtime.safeCall(cichelli1.NotEver(1))
+  return cichelli1.NotEver(1)
 });
 match_scrut_arm_Some_inst_42_46_41_tsni = (undefined, function (newCharAssocs, ks, _deforest_Some_x_inst_42_46_41_tsni) {
   let param0, newKeyHashSet;
@@ -880,7 +880,7 @@ match_x_arm_Some_inst_48_49_46_41_2_62_tsni = (undefined, function (y, _deforest
   return NofibPrelude.min(x, y)
 });
 match_scrut_arm_None_inst_48_49_46_41_tsni = (undefined, function (newCharAssocs, ks) {
-  return runtime.safeCall(cichelli1.NotEver(1))
+  return cichelli1.NotEver(1)
 });
 match_xs_arm_Nil_inst_48_49_46_41_53_tsni = (undefined, function (ys) {
   return ys
@@ -1064,7 +1064,7 @@ match_first0_arm_None_inst_50_51_49_46_41_tsni = (undefined, function (keyHashSe
   }
 });
 match_scrut_arm_None_inst_50_51_49_46_41_tsni = (undefined, function (newCharAssocs, ks) {
-  return runtime.safeCall(cichelli1.NotEver(1))
+  return cichelli1.NotEver(1)
 });
 match_scrut_arm_Some_inst_50_51_49_46_41_tsni = (undefined, function (newCharAssocs, ks, _deforest_Some_x_inst_50_51_49_46_41_tsni) {
   let param0, newKeyHashSet;
@@ -1361,13 +1361,13 @@ hinsert_inst_0_2_tsni = function hinsert_inst_0_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -1731,13 +1731,13 @@ hinsert_inst_6_7_2_tsni = function hinsert_inst_6_7_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -2004,13 +2004,13 @@ hinsert_inst_8_2_tsni = function hinsert_inst_8_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -2343,13 +2343,13 @@ hinsert_inst_9_2_tsni = function hinsert_inst_9_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -2865,13 +2865,13 @@ hinsert_inst_13_2_tsni = function hinsert_inst_13_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -3204,13 +3204,13 @@ hinsert_inst_14_2_tsni = function hinsert_inst_14_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -3533,13 +3533,13 @@ hinsert_inst_15_2_tsni = function hinsert_inst_15_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -3872,13 +3872,13 @@ hinsert_inst_16_2_tsni = function hinsert_inst_16_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -4201,13 +4201,13 @@ hinsert_inst_17_2_tsni = function hinsert_inst_17_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -4540,13 +4540,13 @@ hinsert_inst_18_2_tsni = function hinsert_inst_18_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -5255,13 +5255,13 @@ hinsert_inst_39_2_tsni = function hinsert_inst_39_2_tsni(h, hh) {
     scrut = runtime.short_or(tmp2, lambda$this);
     if (scrut === true) {
       return (newCharAssocs, ks) => {
-        return runtime.safeCall(cichelli1.NotEver(1))
+        return cichelli1.NotEver(1)
       }
     } else {
-      tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-      tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+      tmp3 = NofibPrelude.Some(lo_);
+      tmp4 = NofibPrelude.Some(hi_);
       tmp5 = NofibPrelude.Cons(h, hs);
-      tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
+      tmp6 = cichelli.H(tmp3, tmp4, tmp5);
       _deforest_Some_x = tmp6;
       return (newCharAssocs, ks) => {
         let param01, newKeyHashSet;
@@ -7694,7 +7694,7 @@ lambda2 = (undefined, function (k) {
   tmp = NofibPrelude.head(k);
   tmp1 = cichelli1.last(k);
   tmp2 = NofibPrelude.listLen(k);
-  return runtime.safeCall(cichelli1.K(k, tmp, tmp1, tmp2))
+  return cichelli1.K(k, tmp, tmp1, tmp2)
 });
 lscomp$ = function lscomp$(xs, ls) {
   let param0, param1, h, t, scrut, tmp, tmp1;
@@ -7760,9 +7760,14 @@ lambda = (undefined, function (a, b) {
     return lambda$(a, b)
   }
 });
-(class cichelli {
+globalThis.Object.freeze(class cichelli {
   static {
-    cichelli1 = cichelli;
+    cichelli1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49;
     tmp = NofibPrelude.nofibStringToList("case");
     tmp1 = NofibPrelude.nofibStringToList("class");
@@ -7812,33 +7817,33 @@ lambda = (undefined, function (a, b) {
     this.K = function K(s, c1, c2, i) {
       return globalThis.Object.freeze(new K.class(s, c1, c2, i));
     };
-    Object.defineProperty(this.K, "class", {
-      enumerable: true,
-      value: class K {
-        constructor(s, c1, c2, i) {
-          this.s = s;
-          this.c1 = c1;
-          this.c2 = c2;
-          this.i = i;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "K", ["s", "c1", "c2", "i"]]; 
+    globalThis.Object.freeze(class K {
+      static {
+        cichelli.K.class = this
       }
+      constructor(s, c1, c2, i) {
+        this.s = s;
+        this.c1 = c1;
+        this.c2 = c2;
+        this.i = i;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "K", ["s", "c1", "c2", "i"]]; 
     });
     this.H = function H(f, s, ls) {
       return globalThis.Object.freeze(new H.class(f, s, ls));
     };
-    Object.defineProperty(this.H, "class", {
-      enumerable: true,
-      value: class H {
-        constructor(f, s, ls) {
-          this.f = f;
-          this.s = s;
-          this.ls = ls;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "H", ["f", "s", "ls"]]; 
+    globalThis.Object.freeze(class H {
+      static {
+        cichelli.H.class = this
       }
+      constructor(f, s, ls) {
+        this.f = f;
+        this.s = s;
+        this.ls = ls;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "H", ["f", "s", "ls"]]; 
     });
     tmp44 = NofibPrelude.listLen(cichelli.keys);
     this.numberofkeys = tmp44;
@@ -7849,39 +7854,42 @@ lambda = (undefined, function (a, b) {
     this.freqtab = tmp48;
     tmp49 = NofibPrelude.listLen(cichelli.freqtab);
     this.maxval = tmp49;
-    this.Status = class Status {
+    globalThis.Object.freeze(class Status {
+      static {
+        cichelli.Status = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Status"]; 
-    };
+    });
     this.NotEver = function NotEver(i) {
       return globalThis.Object.freeze(new NotEver.class(i));
     };
-    Object.defineProperty(this.NotEver, "class", {
-      enumerable: true,
-      value: class NotEver extends cichelli.Status {
-        constructor(i) {
-          super();
-          this.i = i;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "NotEver", ["i"]]; 
+    globalThis.Object.freeze(class NotEver extends cichelli.Status {
+      static {
+        cichelli.NotEver.class = this
       }
+      constructor(i) {
+        super();
+        this.i = i;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "NotEver", ["i"]]; 
     });
     this.YesIts = function YesIts(i, t) {
       return globalThis.Object.freeze(new YesIts.class(i, t));
     };
-    Object.defineProperty(this.YesIts, "class", {
-      enumerable: true,
-      value: class YesIts extends cichelli.Status {
-        constructor(i, t) {
-          super();
-          this.i = i;
-          this.t = t;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "YesIts", ["i", "t"]]; 
+    globalThis.Object.freeze(class YesIts extends cichelli.Status {
+      static {
+        cichelli.YesIts.class = this
       }
+      constructor(i, t) {
+        super();
+        this.i = i;
+        this.t = t;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "YesIts", ["i", "t"]]; 
     });
   }
   static enumFromTo_lz(a, b) {
@@ -7953,7 +7961,7 @@ lambda = (undefined, function (a, b) {
         yzs = param1;
         scrut = x === y;
         if (scrut === true) {
-          return runtime.safeCall(NofibPrelude.Some(z))
+          return NofibPrelude.Some(z)
         } else {
           return cichelli.assocm(x, yzs)
         }
@@ -8156,11 +8164,11 @@ lambda = (undefined, function (a, b) {
       if (scrut === true) {
         return NofibPrelude.None
       } else {
-        tmp3 = runtime.safeCall(NofibPrelude.Some(lo_));
-        tmp4 = runtime.safeCall(NofibPrelude.Some(hi_));
+        tmp3 = NofibPrelude.Some(lo_);
+        tmp4 = NofibPrelude.Some(hi_);
         tmp5 = NofibPrelude.Cons(h, hs);
-        tmp6 = runtime.safeCall(cichelli.H(tmp3, tmp4, tmp5));
-        return runtime.safeCall(NofibPrelude.Some(tmp6))
+        tmp6 = cichelli.H(tmp3, tmp4, tmp5);
+        return NofibPrelude.Some(tmp6)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -8170,7 +8178,7 @@ lambda = (undefined, function (a, b) {
     let scrut, param0, param1, a, l, param01, leaves, param11, leaves1, y, tmp, tmp1;
     scrut = NofibPrelude.force(ls);
     if (scrut instanceof NofibPrelude.LzNil.class) {
-      return runtime.safeCall(cichelli.NotEver(k))
+      return cichelli.NotEver(k)
     } else if (scrut instanceof NofibPrelude.LzCons.class) {
       param0 = scrut.head;
       param1 = scrut.tail;
@@ -8305,7 +8313,7 @@ lambda = (undefined, function (a, b) {
     tmp = prog_inst_50_51_tsni(6);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "cichelli"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "cichelli"]; 
 });
 let cichelli = cichelli1; export default cichelli;

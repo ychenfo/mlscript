@@ -288,10 +288,10 @@ class DeforestPreAnalyzer(
     case _ => super.applyBlock(b)
   
   override def applyDefn(defn: Defn): Unit = defn match
-    case clsLike: ClsLikeDefn if clsLike.k is syntax.Mod =>
-      topLevelLikeComputations ::= clsLike.preCtor
-      topLevelLikeComputations ::= clsLike.ctor
-      moduleFuns = S(clsLike.methods.map(_.sym).toSet)
+    case clsLike: ClsLikeDefn if clsLike.companion.isDefined =>
+      val comp = clsLike.companion.get
+      topLevelLikeComputations ::= comp.ctor
+      moduleFuns = S(comp.methods.map(_.sym).toSet)
       super.applyDefn(defn)
       moduleFuns = N
     case _: ClsLikeDefn => () // no need to traverse class defn body at all

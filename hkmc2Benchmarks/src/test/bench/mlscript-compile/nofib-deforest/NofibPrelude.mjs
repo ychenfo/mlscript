@@ -710,29 +710,40 @@ lambda = (undefined, function (f1, g) {
     return lambda$(f1, g, x)
   }
 });
-(class NofibPrelude {
+globalThis.Object.freeze(class NofibPrelude {
   static {
-    NofibPrelude1 = NofibPrelude;
-    this.Option = class Option {
+    NofibPrelude1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
+    globalThis.Object.freeze(class Option {
+      static {
+        NofibPrelude.Option = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Option"]; 
-    };
+    });
     this.Some = function Some(x) {
       return globalThis.Object.freeze(new Some.class(x));
     };
-    Object.defineProperty(this.Some, "class", {
-      enumerable: true,
-      value: class Some extends NofibPrelude.Option {
-        constructor(x) {
-          super();
-          this.x = x;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Some", ["x"]]; 
+    globalThis.Object.freeze(class Some extends NofibPrelude.Option {
+      static {
+        NofibPrelude.Some.class = this
       }
+      constructor(x) {
+        super();
+        this.x = x;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Some", ["x"]]; 
     });
-    const None$class = class None extends NofibPrelude.Option {
+    globalThis.Object.freeze(class None extends NofibPrelude.Option {
+      static {
+        NofibPrelude.None = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -741,68 +752,73 @@ lambda = (undefined, function (f1, g) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "None"]; 
-    };
-    this.None = globalThis.Object.freeze(new None$class);
+    });
     this.Lazy = function Lazy(init) {
       return globalThis.Object.freeze(new Lazy.class(init));
     };
-    Object.defineProperty(this.Lazy, "class", {
-      enumerable: true,
-      value: class Lazy {
-        #cached;
-        get cached() { return this.#cached; }
-        set cached(value) { this.#cached = value; }
-        constructor(init) {
-          this.init = init;
-          this.cached = NofibPrelude.None;
-        }
-        get() {
-          let scrut, v, param0, v1, tmp, tmp1;
-          scrut = this.cached;
-          if (scrut instanceof NofibPrelude.Some.class) {
-            param0 = scrut.x;
-            v1 = param0;
-            return v1
-          } else {
-            tmp = runtime.safeCall(this.init());
-            v = tmp;
-            tmp1 = runtime.safeCall(NofibPrelude.Some(v));
-            this.cached = tmp1;
-            return v
-          }
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Lazy", ["init"]]; 
+    globalThis.Object.freeze(class Lazy {
+      static {
+        NofibPrelude.Lazy.class = this
       }
+      constructor(init) {
+        this.init = init;
+        this.cached = NofibPrelude.None;
+      }
+      #cached;
+      get cached() { return this.#cached; }
+      set cached(value) { this.#cached = value; }
+      get() {
+        let scrut, v, param0, v1, tmp, tmp1;
+        scrut = this.cached;
+        if (scrut instanceof NofibPrelude.Some.class) {
+          param0 = scrut.x;
+          v1 = param0;
+          return v1
+        } else {
+          tmp = runtime.safeCall(this.init());
+          v = tmp;
+          tmp1 = NofibPrelude.Some(v);
+          this.cached = tmp1;
+          return v
+        }
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Lazy", ["init"]]; 
     });
-    this.List = class List {
+    globalThis.Object.freeze(class List {
+      static {
+        NofibPrelude.List = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "List"]; 
-    };
+    });
     this.Cons = function Cons(head, tail) {
       return globalThis.Object.freeze(new Cons.class(head, tail));
     };
-    Object.defineProperty(this.Cons, "class", {
-      enumerable: true,
-      value: class Cons extends NofibPrelude.List {
-        constructor(head, tail) {
-          super();
-          this.head = head;
-          this.tail = tail;
-        }
-        toString() {
-          let tmp, tmp1, tmp2;
-          tmp = NofibPrelude.Cons(this.head, this.tail);
-          tmp1 = NofibPrelude._internal_cons_to_str(tmp);
-          tmp2 = "[" + tmp1;
-          return tmp2 + "]"
-        }
-        [prettyPrint]() { return this.toString(); }
-        static [definitionMetadata] = ["class", "Cons", ["head", "tail"]]; 
+    globalThis.Object.freeze(class Cons extends NofibPrelude.List {
+      static {
+        NofibPrelude.Cons.class = this
       }
+      constructor(head, tail) {
+        super();
+        this.head = head;
+        this.tail = tail;
+      }
+      toString() {
+        let tmp, tmp1, tmp2;
+        tmp = NofibPrelude.Cons(this.head, this.tail);
+        tmp1 = NofibPrelude._internal_cons_to_str(tmp);
+        tmp2 = "[" + tmp1;
+        return tmp2 + "]"
+      }
+      [prettyPrint]() { return this.toString(); }
+      static [definitionMetadata] = ["class", "Cons", ["head", "tail"]]; 
     });
-    const Nil$class = class Nil extends NofibPrelude.List {
+    globalThis.Object.freeze(class Nil extends NofibPrelude.List {
+      static {
+        NofibPrelude.Nil = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -814,29 +830,34 @@ lambda = (undefined, function (f1, g) {
       }
       [prettyPrint]() { return this.toString(); }
       static [definitionMetadata] = ["object", "Nil"]; 
-    };
-    this.Nil = globalThis.Object.freeze(new Nil$class);
-    this.LzList = class LzList {
+    });
+    globalThis.Object.freeze(class LzList {
+      static {
+        NofibPrelude.LzList = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "LzList"]; 
-    };
+    });
     this.LzCons = function LzCons(head, tail) {
       return globalThis.Object.freeze(new LzCons.class(head, tail));
     };
-    Object.defineProperty(this.LzCons, "class", {
-      enumerable: true,
-      value: class LzCons extends NofibPrelude.LzList {
-        constructor(head, tail) {
-          super();
-          this.head = head;
-          this.tail = tail;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "LzCons", ["head", "tail"]]; 
+    globalThis.Object.freeze(class LzCons extends NofibPrelude.LzList {
+      static {
+        NofibPrelude.LzCons.class = this
       }
+      constructor(head, tail) {
+        super();
+        this.head = head;
+        this.tail = tail;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "LzCons", ["head", "tail"]]; 
     });
-    const LzNil$class = class LzNil extends NofibPrelude.LzList {
+    globalThis.Object.freeze(class LzNil extends NofibPrelude.LzList {
+      static {
+        NofibPrelude.LzNil = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -845,8 +866,7 @@ lambda = (undefined, function (f1, g) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "LzNil"]; 
-    };
-    this.LzNil = globalThis.Object.freeze(new LzNil$class);
+    });
   }
   static fromSome(s) {
     let param0, x;
@@ -859,7 +879,7 @@ lambda = (undefined, function (f1, g) {
     }
   } 
   static lazy(x) {
-    return runtime.safeCall(NofibPrelude.Lazy(x))
+    return NofibPrelude.Lazy(x)
   } 
   static force(x) {
     if (x instanceof NofibPrelude.Lazy.class) {
@@ -2082,7 +2102,7 @@ lambda = (undefined, function (f1, g) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "NofibPrelude"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "NofibPrelude"]; 
 });
 let NofibPrelude = NofibPrelude1; export default NofibPrelude;

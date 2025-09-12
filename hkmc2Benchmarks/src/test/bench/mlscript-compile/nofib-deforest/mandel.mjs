@@ -1598,42 +1598,47 @@ infiniteMandel = function infiniteMandel(c) {
     return infiniteMandel$_inst_18_19_tsni(c)
   }
 };
-(class mandel {
+globalThis.Object.freeze(class mandel {
   static {
-    mandel1 = mandel;
+    mandel1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     this.Pixmap = function Pixmap(a, b, c, d) {
       return globalThis.Object.freeze(new Pixmap.class(a, b, c, d));
     };
-    Object.defineProperty(this.Pixmap, "class", {
-      enumerable: true,
-      value: class Pixmap {
-        constructor(a, b, c, d) {
-          this.a = a;
-          this.b = b;
-          this.c = c;
-          this.d = d;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Pixmap", ["a", "b", "c", "d"]]; 
+    globalThis.Object.freeze(class Pixmap {
+      static {
+        mandel.Pixmap.class = this
       }
+      constructor(a, b, c, d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Pixmap", ["a", "b", "c", "d"]]; 
     });
     this.Complex = function Complex(r, i) {
       return globalThis.Object.freeze(new Complex.class(r, i));
     };
-    Object.defineProperty(this.Complex, "class", {
-      enumerable: true,
-      value: class Complex {
-        constructor(r, i) {
-          this.r = r;
-          this.i = i;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Complex", ["r", "i"]]; 
+    globalThis.Object.freeze(class Complex {
+      static {
+        mandel.Complex.class = this
       }
+      constructor(r, i) {
+        this.r = r;
+        this.i = i;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Complex", ["r", "i"]]; 
     });
   }
   static createPixmap(width, height, max, colours) {
-    return runtime.safeCall(mandel.Pixmap(width, height, max, colours))
+    return mandel.Pixmap(width, height, max, colours)
   } 
   static comp_magnitude(c) {
     let param0, param1, a, b, tmp, tmp1, tmp2;
@@ -1749,7 +1754,7 @@ infiniteMandel = function infiniteMandel(c) {
     tmp = testMandel_nofib_inst_31_32_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "mandel"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "mandel"]; 
 });
 let mandel = mandel1; export default mandel;

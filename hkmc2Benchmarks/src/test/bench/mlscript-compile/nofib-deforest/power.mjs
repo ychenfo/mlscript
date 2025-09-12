@@ -10269,30 +10269,41 @@ lambda = (undefined, function () {
   tmp = power1.list();
   return power1.Pc(1, tmp)
 });
-(class power {
+globalThis.Object.freeze(class power {
   static {
-    power1 = power;
-    this.Pss = class Pss {
+    power1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
+    globalThis.Object.freeze(class Pss {
+      static {
+        power.Pss = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Pss"]; 
-    };
+    });
     this.Pc = function Pc(f, s) {
       return globalThis.Object.freeze(new Pc.class(f, s));
     };
-    Object.defineProperty(this.Pc, "class", {
-      enumerable: true,
-      value: class Pc extends power.Pss {
-        constructor(f, s) {
-          super();
-          this.f = f;
-          this.s = s;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Pc", ["f", "s"]]; 
+    globalThis.Object.freeze(class Pc extends power.Pss {
+      static {
+        power.Pc.class = this
       }
+      constructor(f, s) {
+        super();
+        this.f = f;
+        this.s = s;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Pc", ["f", "s"]]; 
     });
-    const Pz$class = class Pz extends power.Pss {
+    globalThis.Object.freeze(class Pz extends power.Pss {
+      static {
+        power.Pz = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -10301,8 +10312,7 @@ lambda = (undefined, function () {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Pz"]; 
-    };
-    this.Pz = globalThis.Object.freeze(new Pz$class);
+    });
   }
   static list() {
     return NofibPrelude.lazy(lambda)
@@ -10488,7 +10498,7 @@ lambda = (undefined, function () {
     tmp = testPower_nofib_inst_51_52_tsni(14);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "power"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "power"]; 
 });
 let power = power1; export default power;

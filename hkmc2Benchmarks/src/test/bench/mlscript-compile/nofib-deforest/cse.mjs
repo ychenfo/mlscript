@@ -1133,9 +1133,14 @@ lambda = (undefined, function (a) {
     return lambda$(a, s)
   }
 });
-(class cse {
+globalThis.Object.freeze(class cse {
   static {
-    cse1 = cse;
+    cse1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, lambda21, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
     lambda21 = (undefined, function (x) {
       return x + 1
@@ -1145,16 +1150,16 @@ lambda = (undefined, function (a) {
     this.Node = function Node(a, b) {
       return globalThis.Object.freeze(new Node.class(a, b));
     };
-    Object.defineProperty(this.Node, "class", {
-      enumerable: true,
-      value: class Node {
-        constructor(a, b) {
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Node", ["a", "b"]]; 
+    globalThis.Object.freeze(class Node {
+      static {
+        cse.Node.class = this
       }
+      constructor(a, b) {
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Node", ["a", "b"]]; 
     });
     tmp1 = cse.Node("0", NofibPrelude.Nil);
     this.zerO = tmp1;
@@ -1436,7 +1441,7 @@ lambda = (undefined, function (a) {
     tmp = testCse_nofib_inst_19_20_tsni(6);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "cse"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "cse"]; 
 });
 let cse = cse1; export default cse;

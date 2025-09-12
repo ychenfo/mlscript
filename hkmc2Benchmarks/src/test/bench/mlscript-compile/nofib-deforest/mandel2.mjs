@@ -138,7 +138,7 @@ build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
       tmp2 = rec_col == tmp1;
       scrut2 = ! tmp2;
       if (scrut2 === true) {
-        return runtime.safeCall(mandel2.Leaf(rec_col))
+        return mandel2.Leaf(rec_col)
       } else {
         tmp3 = x2 - x1;
         tmp4 = y2 - y1;
@@ -344,7 +344,7 @@ build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
       tmp2 = rec_col == tmp1;
       scrut2 = ! tmp2;
       if (scrut2 === true) {
-        return runtime.safeCall(mandel2.Leaf(rec_col))
+        return mandel2.Leaf(rec_col)
       } else {
         tmp3 = x2 - x1;
         tmp4 = y2 - y1;
@@ -605,58 +605,66 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
     return check_line$(col1, x1, y1, x2, y2, xcyc, xdyd)
   }
 };
-(class mandel2 {
+globalThis.Object.freeze(class mandel2 {
   static {
-    mandel21 = mandel2;
+    mandel21 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr, arr1, tmp9, arr2, arr3;
-    this.MandTree = class MandTree {
+    globalThis.Object.freeze(class MandTree {
+      static {
+        mandel2.MandTree = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "MandTree"]; 
-    };
+    });
     this.NS = function NS(l, r) {
       return globalThis.Object.freeze(new NS.class(l, r));
     };
-    Object.defineProperty(this.NS, "class", {
-      enumerable: true,
-      value: class NS extends mandel2.MandTree {
-        constructor(l, r) {
-          super();
-          this.l = l;
-          this.r = r;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "NS", ["l", "r"]]; 
+    globalThis.Object.freeze(class NS extends mandel2.MandTree {
+      static {
+        mandel2.NS.class = this
       }
+      constructor(l, r) {
+        super();
+        this.l = l;
+        this.r = r;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "NS", ["l", "r"]]; 
     });
     this.EW = function EW(l, r) {
       return globalThis.Object.freeze(new EW.class(l, r));
     };
-    Object.defineProperty(this.EW, "class", {
-      enumerable: true,
-      value: class EW extends mandel2.MandTree {
-        constructor(l, r) {
-          super();
-          this.l = l;
-          this.r = r;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "EW", ["l", "r"]]; 
+    globalThis.Object.freeze(class EW extends mandel2.MandTree {
+      static {
+        mandel2.EW.class = this
       }
+      constructor(l, r) {
+        super();
+        this.l = l;
+        this.r = r;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "EW", ["l", "r"]]; 
     });
     this.Leaf = function Leaf(colour) {
       return globalThis.Object.freeze(new Leaf.class(colour));
     };
-    Object.defineProperty(this.Leaf, "class", {
-      enumerable: true,
-      value: class Leaf extends mandel2.MandTree {
-        constructor(colour) {
-          super();
-          this.colour = colour;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Leaf", ["colour"]]; 
+    globalThis.Object.freeze(class Leaf extends mandel2.MandTree {
+      static {
+        mandel2.Leaf.class = this
       }
+      constructor(colour) {
+        super();
+        this.colour = colour;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Leaf", ["colour"]]; 
     });
     this.size = 200;
     tmp = - 2.25;
@@ -968,7 +976,7 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
         tmp2 = rec_col == tmp1;
         scrut2 = ! tmp2;
         if (scrut2 === true) {
-          return runtime.safeCall(mandel2.Leaf(rec_col))
+          return mandel2.Leaf(rec_col)
         } else {
           tmp3 = x2 - x1;
           tmp4 = y2 - y1;
@@ -1044,7 +1052,7 @@ check_line = function check_line(col1, x1, y1, x2, y2) {
   static main() {
     return testMandel2_nofib_inst_5_6_tsni(0)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "mandel2"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "mandel2"]; 
 });
 let mandel2 = mandel21; export default mandel2;

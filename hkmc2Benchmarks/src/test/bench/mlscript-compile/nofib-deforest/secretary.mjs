@@ -874,9 +874,12 @@ f = function f(m) {
     return f$(m, x)
   }
 };
-(class secretary {
+globalThis.Object.freeze(class secretary {
   static {
-    secretary1 = secretary;
+    secretary1 = this
+  }
+  constructor() {
+    runtime.Unit;
   }
   static infRand(m, s) {
     return f$(m, s)
@@ -904,7 +907,7 @@ f = function f(m) {
     tmp = testSecretary_nofib_inst_16_17_tsni(50);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "secretary"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "secretary"]; 
 });
 let secretary = secretary1; export default secretary;

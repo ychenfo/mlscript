@@ -1187,134 +1187,145 @@ lambda = (undefined, function (dq) {
     return lambda$(dq)
   }
 });
-(class clausify {
+globalThis.Object.freeze(class clausify {
   static {
-    clausify1 = clausify;
-    this.Formula = class Formula {
+    clausify1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
+    globalThis.Object.freeze(class Formula {
+      static {
+        clausify.Formula = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Formula"]; 
-    };
+    });
     this.Sym = function Sym(a) {
       return globalThis.Object.freeze(new Sym.class(a));
     };
-    Object.defineProperty(this.Sym, "class", {
-      enumerable: true,
-      value: class Sym extends clausify.Formula {
-        constructor(a) {
-          super();
-          this.a = a;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Sym", ["a"]]; 
+    globalThis.Object.freeze(class Sym extends clausify.Formula {
+      static {
+        clausify.Sym.class = this
       }
+      constructor(a) {
+        super();
+        this.a = a;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Sym", ["a"]]; 
     });
     this.Not = function Not(a) {
       return globalThis.Object.freeze(new Not.class(a));
     };
-    Object.defineProperty(this.Not, "class", {
-      enumerable: true,
-      value: class Not extends clausify.Formula {
-        constructor(a) {
-          super();
-          this.a = a;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Not", ["a"]]; 
+    globalThis.Object.freeze(class Not extends clausify.Formula {
+      static {
+        clausify.Not.class = this
       }
+      constructor(a) {
+        super();
+        this.a = a;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Not", ["a"]]; 
     });
     this.Dis = function Dis(a, b) {
       return globalThis.Object.freeze(new Dis.class(a, b));
     };
-    Object.defineProperty(this.Dis, "class", {
-      enumerable: true,
-      value: class Dis extends clausify.Formula {
-        constructor(a, b) {
-          super();
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Dis", ["a", "b"]]; 
+    globalThis.Object.freeze(class Dis extends clausify.Formula {
+      static {
+        clausify.Dis.class = this
       }
+      constructor(a, b) {
+        super();
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Dis", ["a", "b"]]; 
     });
     this.Con = function Con(a, b) {
       return globalThis.Object.freeze(new Con.class(a, b));
     };
-    Object.defineProperty(this.Con, "class", {
-      enumerable: true,
-      value: class Con extends clausify.Formula {
-        constructor(a, b) {
-          super();
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Con", ["a", "b"]]; 
+    globalThis.Object.freeze(class Con extends clausify.Formula {
+      static {
+        clausify.Con.class = this
       }
+      constructor(a, b) {
+        super();
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Con", ["a", "b"]]; 
     });
     this.Imp = function Imp(a, b) {
       return globalThis.Object.freeze(new Imp.class(a, b));
     };
-    Object.defineProperty(this.Imp, "class", {
-      enumerable: true,
-      value: class Imp extends clausify.Formula {
-        constructor(a, b) {
-          super();
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Imp", ["a", "b"]]; 
+    globalThis.Object.freeze(class Imp extends clausify.Formula {
+      static {
+        clausify.Imp.class = this
       }
+      constructor(a, b) {
+        super();
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Imp", ["a", "b"]]; 
     });
     this.Eqv = function Eqv(a, b) {
       return globalThis.Object.freeze(new Eqv.class(a, b));
     };
-    Object.defineProperty(this.Eqv, "class", {
-      enumerable: true,
-      value: class Eqv extends clausify.Formula {
-        constructor(a, b) {
-          super();
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Eqv", ["a", "b"]]; 
+    globalThis.Object.freeze(class Eqv extends clausify.Formula {
+      static {
+        clausify.Eqv.class = this
       }
+      constructor(a, b) {
+        super();
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Eqv", ["a", "b"]]; 
     });
-    this.StackFrame = class StackFrame {
+    globalThis.Object.freeze(class StackFrame {
+      static {
+        clausify.StackFrame = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "StackFrame"]; 
-    };
+    });
     this.Ast = function Ast(f) {
       return globalThis.Object.freeze(new Ast.class(f));
     };
-    Object.defineProperty(this.Ast, "class", {
-      enumerable: true,
-      value: class Ast extends clausify.StackFrame {
-        constructor(f) {
-          super();
-          this.f = f;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Ast", ["f"]]; 
+    globalThis.Object.freeze(class Ast extends clausify.StackFrame {
+      static {
+        clausify.Ast.class = this
       }
+      constructor(f) {
+        super();
+        this.f = f;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Ast", ["f"]]; 
     });
     this.Lex = function Lex(s) {
       return globalThis.Object.freeze(new Lex.class(s));
     };
-    Object.defineProperty(this.Lex, "class", {
-      enumerable: true,
-      value: class Lex extends clausify.StackFrame {
-        constructor(s) {
-          super();
-          this.s = s;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Lex", ["s"]]; 
+    globalThis.Object.freeze(class Lex extends clausify.StackFrame {
+      static {
+        clausify.Lex.class = this
       }
+      constructor(s) {
+        super();
+        this.s = s;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Lex", ["s"]]; 
     });
   }
   static charLt(a, b) {
@@ -1488,12 +1499,12 @@ lambda = (undefined, function (dq) {
     if (p instanceof clausify.Sym.class) {
       param0 = p.a;
       s = param0;
-      return runtime.safeCall(clausify.Sym(s))
+      return clausify.Sym(s)
     } else if (p instanceof clausify.Not.class) {
       param0 = p.a;
       p4 = param0;
       tmp = clausify.elim(p4);
-      return runtime.safeCall(clausify.Not(tmp))
+      return clausify.Not(tmp)
     } else if (p instanceof clausify.Dis.class) {
       param0 = p.a;
       param1 = p.b;
@@ -1516,7 +1527,7 @@ lambda = (undefined, function (dq) {
       p1 = param0;
       q = param1;
       tmp5 = clausify.elim(p1);
-      tmp6 = runtime.safeCall(clausify.Not(tmp5));
+      tmp6 = clausify.Not(tmp5);
       tmp7 = clausify.elim(q);
       return clausify.Dis(tmp6, tmp7)
     } else if (p instanceof clausify.Eqv.class) {
@@ -1561,9 +1572,9 @@ lambda = (undefined, function (dq) {
         param11 = param0.b;
         p4 = param01;
         q3 = param11;
-        tmp = runtime.safeCall(clausify.Not(p4));
+        tmp = clausify.Not(p4);
         tmp1 = clausify.negin(tmp);
-        tmp2 = runtime.safeCall(clausify.Not(q3));
+        tmp2 = clausify.Not(q3);
         tmp3 = clausify.negin(tmp2);
         return clausify.Dis(tmp1, tmp3)
       } else if (param0 instanceof clausify.Dis.class) {
@@ -1571,9 +1582,9 @@ lambda = (undefined, function (dq) {
         param11 = param0.b;
         p3 = param01;
         q2 = param11;
-        tmp4 = runtime.safeCall(clausify.Not(p3));
+        tmp4 = clausify.Not(p3);
         tmp5 = clausify.negin(tmp4);
-        tmp6 = runtime.safeCall(clausify.Not(q2));
+        tmp6 = clausify.Not(q2);
         tmp7 = clausify.negin(tmp6);
         return clausify.Con(tmp5, tmp7)
       } else {
@@ -1659,7 +1670,7 @@ lambda = (undefined, function (dq) {
                   q3 = param05;
                   s5 = param12;
                   tmp = clausify.Eqv(q3, p4);
-                  tmp1 = runtime.safeCall(clausify.Ast(tmp));
+                  tmp1 = clausify.Ast(tmp);
                   return NofibPrelude.Cons(tmp1, s5)
                 } else {
                   p3 = param01;
@@ -1684,7 +1695,7 @@ lambda = (undefined, function (dq) {
                   q2 = param05;
                   s4 = param12;
                   tmp2 = clausify.Imp(q2, p3);
-                  tmp3 = runtime.safeCall(clausify.Ast(tmp2));
+                  tmp3 = clausify.Ast(tmp2);
                   return NofibPrelude.Cons(tmp3, s4)
                 } else {
                   p2 = param01;
@@ -1707,7 +1718,7 @@ lambda = (undefined, function (dq) {
                   q1 = param05;
                   s3 = param12;
                   tmp4 = clausify.Dis(q1, p2);
-                  tmp5 = runtime.safeCall(clausify.Ast(tmp4));
+                  tmp5 = clausify.Ast(tmp4);
                   return NofibPrelude.Cons(tmp5, s3)
                 } else {
                   p1 = param01;
@@ -1728,7 +1739,7 @@ lambda = (undefined, function (dq) {
                   q = param05;
                   s2 = param12;
                   tmp6 = clausify.Con(q, p1);
-                  tmp7 = runtime.safeCall(clausify.Ast(tmp6));
+                  tmp7 = clausify.Ast(tmp6);
                   return NofibPrelude.Cons(tmp7, s2)
                 } else {
                   p = param01;
@@ -1740,8 +1751,8 @@ lambda = (undefined, function (dq) {
               }
             } else if (param03 === "~") {
               s1 = param11;
-              tmp8 = runtime.safeCall(clausify.Not(p));
-              tmp9 = runtime.safeCall(clausify.Ast(tmp8));
+              tmp8 = clausify.Not(p);
+              tmp9 = clausify.Ast(tmp8);
               return NofibPrelude.Cons(tmp9, s1)
             } else {
               throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -1814,7 +1825,7 @@ lambda = (undefined, function (dq) {
         return clausify.parseHelper(t4, s)
       } else if (param0 === "(") {
         t3 = param1;
-        tmp = runtime.safeCall(clausify.Lex("("));
+        tmp = clausify.Lex("(");
         tmp1 = NofibPrelude.Cons(tmp, s);
         return clausify.parseHelper(t3, tmp1)
       } else if (param0 === ")") {
@@ -1840,8 +1851,8 @@ lambda = (undefined, function (dq) {
                 lambda$this = runtime.safeCall(lambda2(c));
                 scrut1 = runtime.short_and(tmp3, lambda$this);
                 if (scrut1 === true) {
-                  tmp4 = runtime.safeCall(clausify.Sym(c));
-                  tmp5 = runtime.safeCall(clausify.Ast(tmp4));
+                  tmp4 = clausify.Sym(c);
+                  tmp5 = clausify.Ast(tmp4);
                   tmp6 = NofibPrelude.Cons(tmp5, s);
                   return clausify.parseHelper(t1, tmp6)
                 } else {
@@ -1853,7 +1864,7 @@ lambda = (undefined, function (dq) {
                     tmp10 = clausify.red(s);
                     return clausify.parseHelper(tmp9, tmp10)
                   } else {
-                    tmp11 = runtime.safeCall(clausify.Lex(c));
+                    tmp11 = clausify.Lex(c);
                     tmp12 = NofibPrelude.Cons(tmp11, s);
                     return clausify.parseHelper(t1, tmp12)
                   }
@@ -1866,8 +1877,8 @@ lambda = (undefined, function (dq) {
               lambda$this1 = runtime.safeCall(lambda3(c));
               scrut1 = runtime.short_and(tmp13, lambda$this1);
               if (scrut1 === true) {
-                tmp14 = runtime.safeCall(clausify.Sym(c));
-                tmp15 = runtime.safeCall(clausify.Ast(tmp14));
+                tmp14 = clausify.Sym(c);
+                tmp15 = clausify.Ast(tmp14);
                 tmp16 = NofibPrelude.Cons(tmp15, s);
                 return clausify.parseHelper(t1, tmp16)
               } else {
@@ -1879,7 +1890,7 @@ lambda = (undefined, function (dq) {
                   tmp20 = clausify.red(s);
                   return clausify.parseHelper(tmp19, tmp20)
                 } else {
-                  tmp21 = runtime.safeCall(clausify.Lex(c));
+                  tmp21 = clausify.Lex(c);
                   tmp22 = NofibPrelude.Cons(tmp21, s);
                   return clausify.parseHelper(t1, tmp22)
                 }
@@ -1892,8 +1903,8 @@ lambda = (undefined, function (dq) {
             lambda$this2 = runtime.safeCall(lambda4(c));
             scrut1 = runtime.short_and(tmp23, lambda$this2);
             if (scrut1 === true) {
-              tmp24 = runtime.safeCall(clausify.Sym(c));
-              tmp25 = runtime.safeCall(clausify.Ast(tmp24));
+              tmp24 = clausify.Sym(c);
+              tmp25 = clausify.Ast(tmp24);
               tmp26 = NofibPrelude.Cons(tmp25, s);
               return clausify.parseHelper(t1, tmp26)
             } else {
@@ -1905,7 +1916,7 @@ lambda = (undefined, function (dq) {
                 tmp30 = clausify.red(s);
                 return clausify.parseHelper(tmp29, tmp30)
               } else {
-                tmp31 = runtime.safeCall(clausify.Lex(c));
+                tmp31 = clausify.Lex(c);
                 tmp32 = NofibPrelude.Cons(tmp31, s);
                 return clausify.parseHelper(t1, tmp32)
               }
@@ -1918,8 +1929,8 @@ lambda = (undefined, function (dq) {
           lambda$this3 = runtime.safeCall(lambda5(c));
           scrut1 = runtime.short_and(tmp33, lambda$this3);
           if (scrut1 === true) {
-            tmp34 = runtime.safeCall(clausify.Sym(c));
-            tmp35 = runtime.safeCall(clausify.Ast(tmp34));
+            tmp34 = clausify.Sym(c);
+            tmp35 = clausify.Ast(tmp34);
             tmp36 = NofibPrelude.Cons(tmp35, s);
             return clausify.parseHelper(t1, tmp36)
           } else {
@@ -1931,7 +1942,7 @@ lambda = (undefined, function (dq) {
               tmp40 = clausify.red(s);
               return clausify.parseHelper(tmp39, tmp40)
             } else {
-              tmp41 = runtime.safeCall(clausify.Lex(c));
+              tmp41 = clausify.Lex(c);
               tmp42 = NofibPrelude.Cons(tmp41, s);
               return clausify.parseHelper(t1, tmp42)
             }
@@ -1944,8 +1955,8 @@ lambda = (undefined, function (dq) {
         lambda$this4 = runtime.safeCall(lambda6(c));
         scrut1 = runtime.short_and(tmp43, lambda$this4);
         if (scrut1 === true) {
-          tmp44 = runtime.safeCall(clausify.Sym(c));
-          tmp45 = runtime.safeCall(clausify.Ast(tmp44));
+          tmp44 = clausify.Sym(c);
+          tmp45 = clausify.Ast(tmp44);
           tmp46 = NofibPrelude.Cons(tmp45, s);
           return clausify.parseHelper(t1, tmp46)
         } else {
@@ -1957,7 +1968,7 @@ lambda = (undefined, function (dq) {
             tmp50 = clausify.red(s);
             return clausify.parseHelper(tmp49, tmp50)
           } else {
-            tmp51 = runtime.safeCall(clausify.Lex(c));
+            tmp51 = clausify.Lex(c);
             tmp52 = NofibPrelude.Cons(tmp51, s);
             return clausify.parseHelper(t1, tmp52)
           }
@@ -2077,7 +2088,7 @@ lambda = (undefined, function (dq) {
     tmp = testClausify_nofib_inst_21_22_tsni(10);
     return nofibListToString_inst_21_28_tsni(tmp)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "clausify"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "clausify"]; 
 });
 let clausify = clausify1; export default clausify;

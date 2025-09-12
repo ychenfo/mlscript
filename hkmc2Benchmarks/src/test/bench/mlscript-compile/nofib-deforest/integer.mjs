@@ -4510,9 +4510,12 @@ lscomp1 = function lscomp1(op, bstart, bstep, blim) {
     return lscomp1$_inst_6_7_tsni(op, bstart, bstep, blim, ls)
   }
 };
-(class integer {
+globalThis.Object.freeze(class integer {
   static {
-    integer1 = integer;
+    integer1 = this
+  }
+  constructor() {
+    runtime.Unit;
   }
   static integerbench(op, astart, astep, alim, bstart, bstep, blim) {
     let tmp, tmp1;
@@ -4566,7 +4569,7 @@ lscomp1 = function lscomp1(op, bstart, bstep, blim) {
     tmp = testInteger_nofib_inst_30_31_tsni(700000001);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "integer"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "integer"]; 
 });
 let integer = integer1; export default integer;

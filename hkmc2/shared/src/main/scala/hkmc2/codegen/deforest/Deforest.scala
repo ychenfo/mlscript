@@ -29,9 +29,10 @@ class GetInfoOfImportedFile(cfg: Config.Deforestation) extends BlockTraverser:
   var forceSymbols: Ls[Symbol] = Nil
   var privateFunSyms = Set.empty[BlockMemberSymbol]
   override def applyDefn(defn: Defn): Unit = defn match
-    case clsLike: ClsLikeDefn if (clsLike.k is syntax.Mod) && cfg.importedPublicModNames(clsLike.sym.nme) =>
-      innerToOutter = S(clsLike.isym -> clsLike.sym)
-      funAndDefs :::= clsLike.methods.map(f => f.sym -> f)
+    case clsLike: ClsLikeDefn if clsLike.companion.isDefined =>
+      val comp = clsLike.companion.get
+      innerToOutter = S(comp.isym -> clsLike.sym)
+      funAndDefs :::= comp.methods.map(f => f.sym -> f)
       super.applyDefn(defn)
     case _ => super.applyDefn(defn)
   
@@ -56,6 +57,7 @@ object Deforest:
     raise: Raise,
     st: State,
     elabSt: Elaborator.State,
+    ctx: Elaborator.Ctx,
   ): ImportedInfo =
     given TraceLogger = new TraceLogger:
       override def doTrace: Bool = false

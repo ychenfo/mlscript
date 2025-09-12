@@ -8559,32 +8559,43 @@ lambda = (undefined, function (c) {
     return lambda$(c)
   }
 });
-(class knights {
+globalThis.Object.freeze(class knights {
   static {
-    knights1 = knights;
+    knights1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     this.createQueue = NofibPrelude.Nil;
     this.Board = function Board(a, b, c, d) {
       return globalThis.Object.freeze(new Board.class(a, b, c, d));
     };
-    Object.defineProperty(this.Board, "class", {
-      enumerable: true,
-      value: class Board {
-        constructor(a, b, c, d) {
-          this.a = a;
-          this.b = b;
-          this.c = c;
-          this.d = d;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Board", ["a", "b", "c", "d"]]; 
+    globalThis.Object.freeze(class Board {
+      static {
+        knights.Board.class = this
       }
+      constructor(a, b, c, d) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.d = d;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Board", ["a", "b", "c", "d"]]; 
     });
-    this.Direction = class Direction {
+    globalThis.Object.freeze(class Direction {
+      static {
+        knights.Direction = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Direction"]; 
-    };
-    const UL$class = class UL extends knights.Direction {
+    });
+    globalThis.Object.freeze(class UL extends knights.Direction {
+      static {
+        knights.UL = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8593,9 +8604,11 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "UL"]; 
-    };
-    this.UL = globalThis.Object.freeze(new UL$class);
-    const UR$class = class UR extends knights.Direction {
+    });
+    globalThis.Object.freeze(class UR extends knights.Direction {
+      static {
+        knights.UR = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8604,9 +8617,11 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "UR"]; 
-    };
-    this.UR = globalThis.Object.freeze(new UR$class);
-    const DL$class = class DL extends knights.Direction {
+    });
+    globalThis.Object.freeze(class DL extends knights.Direction {
+      static {
+        knights.DL = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8615,9 +8630,11 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "DL"]; 
-    };
-    this.DL = globalThis.Object.freeze(new DL$class);
-    const DR$class = class DR extends knights.Direction {
+    });
+    globalThis.Object.freeze(class DR extends knights.Direction {
+      static {
+        knights.DR = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8626,9 +8643,11 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "DR"]; 
-    };
-    this.DR = globalThis.Object.freeze(new DR$class);
-    const LU$class = class LU extends knights.Direction {
+    });
+    globalThis.Object.freeze(class LU extends knights.Direction {
+      static {
+        knights.LU = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8637,9 +8656,11 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "LU"]; 
-    };
-    this.LU = globalThis.Object.freeze(new LU$class);
-    const LD$class = class LD extends knights.Direction {
+    });
+    globalThis.Object.freeze(class LD extends knights.Direction {
+      static {
+        knights.LD = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8648,9 +8669,11 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "LD"]; 
-    };
-    this.LD = globalThis.Object.freeze(new LD$class);
-    const RU$class = class RU extends knights.Direction {
+    });
+    globalThis.Object.freeze(class RU extends knights.Direction {
+      static {
+        knights.RU = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8659,9 +8682,11 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "RU"]; 
-    };
-    this.RU = globalThis.Object.freeze(new RU$class);
-    const RD$class = class RD extends knights.Direction {
+    });
+    globalThis.Object.freeze(class RD extends knights.Direction {
+      static {
+        knights.RD = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -8670,8 +8695,7 @@ lambda = (undefined, function (c) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "RD"]; 
-    };
-    this.RD = globalThis.Object.freeze(new RD$class);
+    });
   }
   static myIsDigit(c) {
     let tmp, tmp1, lambda$this;
@@ -8865,7 +8889,7 @@ lambda = (undefined, function (c) {
     lambda$this = runtime.safeCall(lambda9(t));
     tmp = NofibPrelude.lazy(lambda$this);
     tmp1 = NofibPrelude.Cons(t, NofibPrelude.Nil);
-    return runtime.safeCall(knights.Board(x, 1, tmp, tmp1))
+    return knights.Board(x, 1, tmp, tmp1)
   } 
   static sizeBoard(b) {
     let param0, param1, param2, param3, a;
@@ -8906,7 +8930,7 @@ lambda = (undefined, function (c) {
       ts = param3;
       tmp = n + 1;
       tmp1 = NofibPrelude.Cons(t, ts);
-      return runtime.safeCall(knights.Board(s, tmp, f, tmp1))
+      return knights.Board(s, tmp, f, tmp1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -8927,7 +8951,7 @@ lambda = (undefined, function (c) {
       tmp1 = n - 1;
       lambda$this = runtime.safeCall(lambda10(ts_));
       tmp2 = NofibPrelude.lazy(lambda$this);
-      return runtime.safeCall(knights.Board(s, tmp1, tmp2, ts_))
+      return knights.Board(s, tmp1, tmp2, ts_)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9716,7 +9740,7 @@ lambda = (undefined, function (c) {
     tmp4 = testKnights_nofib_inst_72_73_tsni(tmp3);
     return nofibListToString_inst_72_79_tsni(tmp4)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "knights"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "knights"]; 
 });
 let knights = knights1; export default knights;

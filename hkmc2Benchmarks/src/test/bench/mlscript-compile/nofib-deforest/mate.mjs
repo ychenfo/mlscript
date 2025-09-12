@@ -2201,7 +2201,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_33_34_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_28_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -2238,7 +2238,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_38_39_40_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2263,7 +2263,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_38_39_45_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2288,7 +2288,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_38_39_46_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2313,7 +2313,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_38_39_47_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2338,7 +2338,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_38_48_49_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2363,7 +2363,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_38_48_50_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2388,7 +2388,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_38_48_51_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2413,7 +2413,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_38_48_52_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2451,7 +2451,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_53_47_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2476,7 +2476,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_53_46_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2501,7 +2501,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_53_45_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2526,7 +2526,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_53_40_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2551,7 +2551,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_54_52_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2576,7 +2576,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_54_51_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2601,7 +2601,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_54_50_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2626,7 +2626,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_54_49_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2652,7 +2652,7 @@ match_scrut_arm_Some_inst_28_29_30_31_32_55_56_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_28_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -2714,7 +2714,7 @@ match_h_arm_Some_inst_28_29_30_31_32_57_58_tsni = (undefined, function (ls, c, b
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_28_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_28_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -2893,8 +2893,8 @@ match_m_arm_Move_inst_28_29_30_31_70_71_72_tsni = (undefined, function (c, m, bd
   tmp5 = kingincheck_inst_28_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     arr1 = globalThis.Object.freeze([
       tmp7,
       bd2
@@ -2918,7 +2918,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_33_34_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_28_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -2955,7 +2955,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_38_39_40_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -2980,7 +2980,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_38_39_45_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3005,7 +3005,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_38_39_46_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3030,7 +3030,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_38_39_47_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3055,7 +3055,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_38_48_49_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3080,7 +3080,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_38_48_50_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3105,7 +3105,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_38_48_51_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3130,7 +3130,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_38_48_52_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3168,7 +3168,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_53_47_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3193,7 +3193,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_53_46_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3218,7 +3218,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_53_45_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3243,7 +3243,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_53_40_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3268,7 +3268,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_54_52_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3293,7 +3293,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_54_51_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3318,7 +3318,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_54_50_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3343,7 +3343,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_54_49_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3369,7 +3369,7 @@ match_scrut_arm_Some_inst_28_81_30_31_32_55_56_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_28_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -3431,7 +3431,7 @@ match_h_arm_Some_inst_28_81_30_31_32_57_58_tsni = (undefined, function (ls, c, b
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_28_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_28_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -3610,8 +3610,8 @@ match_m_arm_Move_inst_28_81_30_31_70_71_72_tsni = (undefined, function (c, m, bd
   tmp5 = kingincheck_inst_28_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (rest, c1, n) => {
@@ -3653,7 +3653,7 @@ match_mifb_arm_Deforest_Arr_2_inst_28_tsni = (undefined, function (rest, c, n, _
         s
       ]);
       tmp3 = NofibPrelude.Cons(arr, ms);
-      return runtime.safeCall(NofibPrelude.Some(tmp3))
+      return NofibPrelude.Some(tmp3)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -3670,7 +3670,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_33_34_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_86_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -3707,7 +3707,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_38_39_40_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3732,7 +3732,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_38_39_45_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3757,7 +3757,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_38_39_46_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3782,7 +3782,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_38_39_47_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3807,7 +3807,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_38_48_49_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3832,7 +3832,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_38_48_50_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3857,7 +3857,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_38_48_51_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3882,7 +3882,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_38_48_52_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3920,7 +3920,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_53_47_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3945,7 +3945,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_53_46_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3970,7 +3970,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_53_45_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -3995,7 +3995,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_53_40_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4020,7 +4020,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_54_52_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4045,7 +4045,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_54_51_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4070,7 +4070,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_54_50_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4095,7 +4095,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_54_49_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4121,7 +4121,7 @@ match_scrut_arm_Some_inst_86_29_30_31_32_55_56_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_86_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -4183,7 +4183,7 @@ match_h_arm_Some_inst_86_29_30_31_32_57_58_tsni = (undefined, function (ls, c, b
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_86_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_86_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -4362,8 +4362,8 @@ match_m_arm_Move_inst_86_29_30_31_70_71_72_tsni = (undefined, function (c, m, bd
   tmp5 = kingincheck_inst_86_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     arr1 = globalThis.Object.freeze([
       tmp7,
       bd2
@@ -4387,7 +4387,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_33_34_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_86_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -4424,7 +4424,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_38_39_40_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4449,7 +4449,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_38_39_45_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4474,7 +4474,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_38_39_46_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4499,7 +4499,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_38_39_47_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4524,7 +4524,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_38_48_49_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4549,7 +4549,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_38_48_50_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4574,7 +4574,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_38_48_51_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4599,7 +4599,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_38_48_52_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4637,7 +4637,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_53_47_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4662,7 +4662,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_53_46_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4687,7 +4687,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_53_45_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4712,7 +4712,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_53_40_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4737,7 +4737,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_54_52_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4762,7 +4762,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_54_51_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4787,7 +4787,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_54_50_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4812,7 +4812,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_54_49_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -4838,7 +4838,7 @@ match_scrut_arm_Some_inst_86_81_30_31_32_55_56_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_86_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -4900,7 +4900,7 @@ match_h_arm_Some_inst_86_81_30_31_32_57_58_tsni = (undefined, function (ls, c, b
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_86_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_86_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -5079,8 +5079,8 @@ match_m_arm_Move_inst_86_81_30_31_70_71_72_tsni = (undefined, function (c, m, bd
   tmp5 = kingincheck_inst_86_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (rest, c1, n) => {
@@ -5122,7 +5122,7 @@ match_mifb_arm_Deforest_Arr_2_inst_86_tsni = (undefined, function (rest, c, n, _
         s
       ]);
       tmp3 = NofibPrelude.Cons(arr, ms);
-      return runtime.safeCall(NofibPrelude.Some(tmp3))
+      return NofibPrelude.Some(tmp3)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -5139,7 +5139,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_33_34_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_87_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -5176,7 +5176,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_38_39_40_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5201,7 +5201,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_38_39_45_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5226,7 +5226,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_38_39_46_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5251,7 +5251,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_38_39_47_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5276,7 +5276,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_38_48_49_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5301,7 +5301,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_38_48_50_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5326,7 +5326,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_38_48_51_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5351,7 +5351,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_38_48_52_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5389,7 +5389,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_53_47_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5414,7 +5414,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_53_46_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5439,7 +5439,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_53_45_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5464,7 +5464,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_53_40_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5489,7 +5489,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_54_52_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5514,7 +5514,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_54_51_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5539,7 +5539,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_54_50_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5564,7 +5564,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_54_49_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5590,7 +5590,7 @@ match_scrut_arm_Some_inst_87_29_30_31_32_55_56_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_87_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -5652,7 +5652,7 @@ match_h_arm_Some_inst_87_29_30_31_32_57_58_tsni = (undefined, function (ls, c, b
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_87_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_87_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -5831,8 +5831,8 @@ match_m_arm_Move_inst_87_29_30_31_70_71_72_tsni = (undefined, function (c, m, bd
   tmp5 = kingincheck_inst_87_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (other, c1, n) => {
@@ -5857,7 +5857,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_33_34_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_87_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -5894,7 +5894,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_38_39_40_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5919,7 +5919,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_38_39_45_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5944,7 +5944,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_38_39_46_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5969,7 +5969,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_38_39_47_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -5994,7 +5994,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_38_48_49_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6019,7 +6019,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_38_48_50_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6044,7 +6044,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_38_48_51_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6069,7 +6069,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_38_48_52_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6107,7 +6107,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_53_47_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6132,7 +6132,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_53_46_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6157,7 +6157,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_53_45_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6182,7 +6182,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_53_40_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6207,7 +6207,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_54_52_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6232,7 +6232,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_54_51_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6257,7 +6257,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_54_50_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6282,7 +6282,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_54_49_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6308,7 +6308,7 @@ match_scrut_arm_Some_inst_87_81_30_31_32_55_56_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_87_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -6370,7 +6370,7 @@ match_h_arm_Some_inst_87_81_30_31_32_57_58_tsni = (undefined, function (ls, c, b
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_87_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_87_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -6549,8 +6549,8 @@ match_m_arm_Move_inst_87_81_30_31_70_71_72_tsni = (undefined, function (c, m, bd
   tmp5 = kingincheck_inst_87_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     arr1 = globalThis.Object.freeze([
       tmp7,
       bd2
@@ -6618,7 +6618,7 @@ match_sm_arm_Some_inst_87_tsni = (undefined, function (rest, mif, _deforest_Some
       s
     ]);
     tmp = NofibPrelude.Cons(arr, ms);
-    return runtime.safeCall(NofibPrelude.Some(tmp))
+    return NofibPrelude.Some(tmp)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -6632,7 +6632,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_33_34_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_88_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -6669,7 +6669,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_38_39_40_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6694,7 +6694,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_38_39_45_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6719,7 +6719,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_38_39_46_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6744,7 +6744,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_38_39_47_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6769,7 +6769,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_38_48_49_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6794,7 +6794,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_38_48_50_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6819,7 +6819,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_38_48_51_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6844,7 +6844,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_38_48_52_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6882,7 +6882,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_53_47_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6907,7 +6907,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_53_46_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6932,7 +6932,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_53_45_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6957,7 +6957,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_53_40_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -6982,7 +6982,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_54_52_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7007,7 +7007,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_54_51_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7032,7 +7032,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_54_50_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7057,7 +7057,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_54_49_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7083,7 +7083,7 @@ match_scrut_arm_Some_inst_88_29_30_31_32_55_56_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_88_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -7145,7 +7145,7 @@ match_h_arm_Some_inst_88_29_30_31_32_57_58_tsni = (undefined, function (ls, c, b
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_88_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_88_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -7324,8 +7324,8 @@ match_m_arm_Move_inst_88_29_30_31_70_71_72_tsni = (undefined, function (c, m, bd
   tmp5 = kingincheck_inst_88_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (other, c1, n) => {
@@ -7350,7 +7350,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_33_34_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_88_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -7387,7 +7387,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_38_39_40_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7412,7 +7412,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_38_39_45_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7437,7 +7437,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_38_39_46_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7462,7 +7462,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_38_39_47_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7487,7 +7487,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_38_48_49_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7512,7 +7512,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_38_48_50_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7537,7 +7537,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_38_48_51_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7562,7 +7562,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_38_48_52_41_42_43_tsni = (undefined, fu
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7600,7 +7600,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_53_47_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7625,7 +7625,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_53_46_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7650,7 +7650,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_53_45_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7675,7 +7675,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_53_40_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7700,7 +7700,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_54_52_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7725,7 +7725,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_54_51_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7750,7 +7750,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_54_50_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7775,7 +7775,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_54_49_41_42_43_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -7801,7 +7801,7 @@ match_scrut_arm_Some_inst_88_81_30_31_32_55_56_tsni = (undefined, function (c, b
   if (scrut === true) {
     return sift_inst_88_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -7863,7 +7863,7 @@ match_h_arm_Some_inst_88_81_30_31_32_57_58_tsni = (undefined, function (ls, c, b
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_88_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_88_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -8042,8 +8042,8 @@ match_m_arm_Move_inst_88_81_30_31_70_71_72_tsni = (undefined, function (c, m, bd
   tmp5 = kingincheck_inst_88_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     arr1 = globalThis.Object.freeze([
       tmp7,
       bd2
@@ -8111,7 +8111,7 @@ match_sm_arm_Some_inst_88_tsni = (undefined, function (rest, mif, _deforest_Some
       s
     ]);
     tmp = NofibPrelude.Cons(arr, ms);
-    return runtime.safeCall(NofibPrelude.Some(tmp))
+    return NofibPrelude.Some(tmp)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -8295,7 +8295,7 @@ match_h_arm_Some_inst_98_32_57_58_tsni = (undefined, function (ls, c, bd, sq, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_98_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_98_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -8370,7 +8370,7 @@ match_scrut_arm_Some_inst_98_32_55_56_tsni = (undefined, function (c, bd, ms, sq
   if (scrut === true) {
     return sift_inst_98_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -8407,7 +8407,7 @@ match_scrut_arm_Some_inst_98_32_54_49_41_42_43_tsni = (undefined, function (ms, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8432,7 +8432,7 @@ match_scrut_arm_Some_inst_98_32_54_50_41_42_43_tsni = (undefined, function (ms, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8457,7 +8457,7 @@ match_scrut_arm_Some_inst_98_32_54_51_41_42_43_tsni = (undefined, function (ms, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8482,7 +8482,7 @@ match_scrut_arm_Some_inst_98_32_54_52_41_42_43_tsni = (undefined, function (ms, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8507,7 +8507,7 @@ match_scrut_arm_Some_inst_98_32_53_40_41_42_43_tsni = (undefined, function (ms, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8532,7 +8532,7 @@ match_scrut_arm_Some_inst_98_32_53_45_41_42_43_tsni = (undefined, function (ms, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8557,7 +8557,7 @@ match_scrut_arm_Some_inst_98_32_53_46_41_42_43_tsni = (undefined, function (ms, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8582,7 +8582,7 @@ match_scrut_arm_Some_inst_98_32_53_47_41_42_43_tsni = (undefined, function (ms, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8607,7 +8607,7 @@ match_scrut_arm_Some_inst_98_32_38_48_52_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8632,7 +8632,7 @@ match_scrut_arm_Some_inst_98_32_38_48_51_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8657,7 +8657,7 @@ match_scrut_arm_Some_inst_98_32_38_48_50_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8682,7 +8682,7 @@ match_scrut_arm_Some_inst_98_32_38_48_49_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8707,7 +8707,7 @@ match_scrut_arm_Some_inst_98_32_38_39_47_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8732,7 +8732,7 @@ match_scrut_arm_Some_inst_98_32_38_39_46_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8757,7 +8757,7 @@ match_scrut_arm_Some_inst_98_32_38_39_45_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8782,7 +8782,7 @@ match_scrut_arm_Some_inst_98_32_38_39_40_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8821,7 +8821,7 @@ match_scrut_arm_Some_inst_98_32_33_34_tsni = (undefined, function (c, bd, ms, sq
   if (scrut === true) {
     return sift_inst_98_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -8886,8 +8886,8 @@ match_m_arm_Move_inst_98_70_71_72_tsni = (undefined, function (c, m, bd, k, sq, 
   tmp5 = kingincheck_inst_98_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     arr1 = globalThis.Object.freeze([
       tmp7,
       bd2
@@ -8911,7 +8911,7 @@ match_scrut_arm_Some_inst_99_31_32_33_34_tsni = (undefined, function (c, bd, ms,
   if (scrut === true) {
     return sift_inst_99_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -8948,7 +8948,7 @@ match_scrut_arm_Some_inst_99_31_32_38_39_40_41_42_43_tsni = (undefined, function
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8973,7 +8973,7 @@ match_scrut_arm_Some_inst_99_31_32_38_39_45_41_42_43_tsni = (undefined, function
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -8998,7 +8998,7 @@ match_scrut_arm_Some_inst_99_31_32_38_39_46_41_42_43_tsni = (undefined, function
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9023,7 +9023,7 @@ match_scrut_arm_Some_inst_99_31_32_38_39_47_41_42_43_tsni = (undefined, function
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9048,7 +9048,7 @@ match_scrut_arm_Some_inst_99_31_32_38_48_49_41_42_43_tsni = (undefined, function
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9073,7 +9073,7 @@ match_scrut_arm_Some_inst_99_31_32_38_48_50_41_42_43_tsni = (undefined, function
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9098,7 +9098,7 @@ match_scrut_arm_Some_inst_99_31_32_38_48_51_41_42_43_tsni = (undefined, function
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9123,7 +9123,7 @@ match_scrut_arm_Some_inst_99_31_32_38_48_52_41_42_43_tsni = (undefined, function
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9161,7 +9161,7 @@ match_scrut_arm_Some_inst_99_31_32_53_47_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9186,7 +9186,7 @@ match_scrut_arm_Some_inst_99_31_32_53_46_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9211,7 +9211,7 @@ match_scrut_arm_Some_inst_99_31_32_53_45_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9236,7 +9236,7 @@ match_scrut_arm_Some_inst_99_31_32_53_40_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9261,7 +9261,7 @@ match_scrut_arm_Some_inst_99_31_32_54_52_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9286,7 +9286,7 @@ match_scrut_arm_Some_inst_99_31_32_54_51_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9311,7 +9311,7 @@ match_scrut_arm_Some_inst_99_31_32_54_50_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9336,7 +9336,7 @@ match_scrut_arm_Some_inst_99_31_32_54_49_41_42_43_tsni = (undefined, function (m
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -9362,7 +9362,7 @@ match_scrut_arm_Some_inst_99_31_32_55_56_tsni = (undefined, function (c, bd, ms,
   if (scrut === true) {
     return sift_inst_99_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -9424,7 +9424,7 @@ match_h_arm_Some_inst_99_31_32_57_58_tsni = (undefined, function (ls, c, bd, sq,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_99_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_99_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -9603,8 +9603,8 @@ match_m_arm_Move_inst_99_31_70_71_72_tsni = (undefined, function (c, m, bd, k, s
   tmp5 = kingincheck_inst_99_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     arr1 = globalThis.Object.freeze([
       tmp7,
       bd2
@@ -9725,7 +9725,7 @@ match_h_arm_Some_inst_110_tsni = (undefined, function (ls, c, bd, sq, sqs, _defo
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_110_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_110_tsni(c, bd, sq, sqs, ls);
     return NofibPrelude.Cons(tmp3, tmp4)
@@ -9751,7 +9751,7 @@ match_h_arm_Some_inst_111_112_tsni = (undefined, function (ls, c, bd, sq, sqs, _
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_111_112_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_111_112_tsni(c, bd, sq, sqs, ls);
     return NofibPrelude.Cons(tmp3, tmp4)
@@ -9767,8 +9767,8 @@ match_scrut_arm_Some_inst_113_tsni = (undefined, function (ms, sq_, bd, c, inc, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -9783,8 +9783,8 @@ match_scrut_arm_Some_inst_114_115_tsni = (undefined, function (ms, sq_, bd, c, i
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -9799,8 +9799,8 @@ match_scrut_arm_Some_inst_116_43_tsni = (undefined, function (ms, sq_, bd, c, in
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -9815,8 +9815,8 @@ match_scrut_arm_Some_inst_117_42_43_tsni = (undefined, function (ms, sq_, bd, c,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10206,8 +10206,8 @@ match_scrut_arm_Some_inst_145_tsni = (undefined, function (c, bd, ms, sq, sqs, _
   if (scrut === true) {
     return mate.sift(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp2 = runtime.safeCall(mate.Move(sq, tmp1, NofibPrelude.None));
+    tmp1 = NofibPrelude.Some(p_);
+    tmp2 = mate.Move(sq, tmp1, NofibPrelude.None);
     tmp3 = NofibPrelude.Cons(tmp2, ms);
     return mate.sift(c, bd, tmp3, sqs)
   }
@@ -10220,8 +10220,8 @@ match_scrut_arm_Some_inst_146_41_42_43_tsni = (undefined, function (ms, sq_, bd,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10236,8 +10236,8 @@ match_scrut_arm_Some_inst_147_49_41_42_43_tsni = (undefined, function (ms, sq_, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10252,8 +10252,8 @@ match_scrut_arm_Some_inst_147_50_41_42_43_tsni = (undefined, function (ms, sq_, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10268,8 +10268,8 @@ match_scrut_arm_Some_inst_147_51_41_42_43_tsni = (undefined, function (ms, sq_, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10284,8 +10284,8 @@ match_scrut_arm_Some_inst_147_52_41_42_43_tsni = (undefined, function (ms, sq_, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10300,8 +10300,8 @@ match_scrut_arm_Some_inst_148_40_41_42_43_tsni = (undefined, function (ms, sq_, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10316,8 +10316,8 @@ match_scrut_arm_Some_inst_148_45_41_42_43_tsni = (undefined, function (ms, sq_, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10332,8 +10332,8 @@ match_scrut_arm_Some_inst_148_46_41_42_43_tsni = (undefined, function (ms, sq_, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10348,8 +10348,8 @@ match_scrut_arm_Some_inst_148_47_41_42_43_tsni = (undefined, function (ms, sq_, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10365,8 +10365,8 @@ match_scrut_arm_Some_inst_149_34_tsni = (undefined, function (c, bd, ms, sq, sqs
   if (scrut === true) {
     return sift_inst_149_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp2 = runtime.safeCall(mate.Move(sq, tmp1, NofibPrelude.None));
+    tmp1 = NofibPrelude.Some(p_);
+    tmp2 = mate.Move(sq, tmp1, NofibPrelude.None);
     tmp3 = NofibPrelude.Cons(tmp2, ms);
     return sift_inst_149_34_tsni(c, bd, tmp3, sqs)
   }
@@ -10394,8 +10394,8 @@ match_scrut_arm_Some_inst_150_56_tsni = (undefined, function (c, bd, ms, sq, sqs
   if (scrut === true) {
     return sift_inst_150_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp2 = runtime.safeCall(mate.Move(sq, tmp1, NofibPrelude.None));
+    tmp1 = NofibPrelude.Some(p_);
+    tmp2 = mate.Move(sq, tmp1, NofibPrelude.None);
     tmp3 = NofibPrelude.Cons(tmp2, ms);
     return sift_inst_150_56_tsni(c, bd, tmp3, sqs)
   }
@@ -10491,7 +10491,7 @@ match_h_arm_Some_inst_151_58_tsni = (undefined, function (ls, c, bd, sq, sqs, _d
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_151_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_151_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -10557,8 +10557,8 @@ match_scrut_arm_Some_inst_152_48_52_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     _deforest_Cons_head = tmp3;
     _deforest_Cons_tail = ms;
     tmp4 = (ys) => {
@@ -10577,8 +10577,8 @@ match_scrut_arm_Some_inst_152_48_51_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     _deforest_Cons_head = tmp3;
     _deforest_Cons_tail = ms;
     tmp4 = (ys) => {
@@ -10597,8 +10597,8 @@ match_scrut_arm_Some_inst_152_48_50_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     _deforest_Cons_head = tmp3;
     _deforest_Cons_tail = ms;
     tmp4 = (ys) => {
@@ -10617,8 +10617,8 @@ match_scrut_arm_Some_inst_152_48_49_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     _deforest_Cons_head = tmp3;
     _deforest_Cons_tail = ms;
     tmp4 = (ys) => {
@@ -10637,8 +10637,8 @@ match_scrut_arm_Some_inst_152_39_47_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10653,8 +10653,8 @@ match_scrut_arm_Some_inst_152_39_46_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10669,8 +10669,8 @@ match_scrut_arm_Some_inst_152_39_45_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10685,8 +10685,8 @@ match_scrut_arm_Some_inst_152_39_40_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10735,8 +10735,8 @@ match_scrut_arm_Some_inst_155_33_34_tsni = (undefined, function (c, bd, ms, sq, 
   if (scrut === true) {
     return sift_inst_155_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp2 = runtime.safeCall(mate.Move(sq, tmp1, NofibPrelude.None));
+    tmp1 = NofibPrelude.Some(p_);
+    tmp2 = mate.Move(sq, tmp1, NofibPrelude.None);
     tmp3 = NofibPrelude.Cons(tmp2, ms);
     return sift_inst_155_33_34_tsni(c, bd, tmp3, sqs)
   }
@@ -10763,8 +10763,8 @@ match_scrut_arm_Some_inst_155_38_39_40_41_42_43_tsni = (undefined, function (ms,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10779,8 +10779,8 @@ match_scrut_arm_Some_inst_155_38_39_45_41_42_43_tsni = (undefined, function (ms,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10795,8 +10795,8 @@ match_scrut_arm_Some_inst_155_38_39_46_41_42_43_tsni = (undefined, function (ms,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10811,8 +10811,8 @@ match_scrut_arm_Some_inst_155_38_39_47_41_42_43_tsni = (undefined, function (ms,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10827,8 +10827,8 @@ match_scrut_arm_Some_inst_155_38_48_49_41_42_43_tsni = (undefined, function (ms,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     _deforest_Cons_head = tmp3;
     _deforest_Cons_tail = ms;
     tmp4 = (ys) => {
@@ -10847,8 +10847,8 @@ match_scrut_arm_Some_inst_155_38_48_50_41_42_43_tsni = (undefined, function (ms,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     _deforest_Cons_head = tmp3;
     _deforest_Cons_tail = ms;
     tmp4 = (ys) => {
@@ -10867,8 +10867,8 @@ match_scrut_arm_Some_inst_155_38_48_51_41_42_43_tsni = (undefined, function (ms,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     _deforest_Cons_head = tmp3;
     _deforest_Cons_tail = ms;
     tmp4 = (ys) => {
@@ -10887,8 +10887,8 @@ match_scrut_arm_Some_inst_155_38_48_52_41_42_43_tsni = (undefined, function (ms,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     _deforest_Cons_head = tmp3;
     _deforest_Cons_tail = ms;
     tmp4 = (ys) => {
@@ -10916,8 +10916,8 @@ match_scrut_arm_Some_inst_155_53_47_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10932,8 +10932,8 @@ match_scrut_arm_Some_inst_155_53_46_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10948,8 +10948,8 @@ match_scrut_arm_Some_inst_155_53_45_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10964,8 +10964,8 @@ match_scrut_arm_Some_inst_155_53_40_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10980,8 +10980,8 @@ match_scrut_arm_Some_inst_155_54_52_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -10996,8 +10996,8 @@ match_scrut_arm_Some_inst_155_54_51_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -11012,8 +11012,8 @@ match_scrut_arm_Some_inst_155_54_50_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -11028,8 +11028,8 @@ match_scrut_arm_Some_inst_155_54_49_41_42_43_tsni = (undefined, function (ms, sq
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp3 = runtime.safeCall(mate1.Move(sq_, tmp2, NofibPrelude.None));
+    tmp2 = NofibPrelude.Some(p_);
+    tmp3 = mate1.Move(sq_, tmp2, NofibPrelude.None);
     tmp4 = NofibPrelude.Cons(tmp3, ms);
     return runtime.safeCall(cont(tmp4))
   } else {
@@ -11045,8 +11045,8 @@ match_scrut_arm_Some_inst_155_55_56_tsni = (undefined, function (c, bd, ms, sq, 
   if (scrut === true) {
     return sift_inst_155_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
-    tmp2 = runtime.safeCall(mate.Move(sq, tmp1, NofibPrelude.None));
+    tmp1 = NofibPrelude.Some(p_);
+    tmp2 = mate.Move(sq, tmp1, NofibPrelude.None);
     tmp3 = NofibPrelude.Cons(tmp2, ms);
     return sift_inst_155_55_56_tsni(c, bd, tmp3, sqs)
   }
@@ -11098,7 +11098,7 @@ match_h_arm_Some_inst_155_57_58_tsni = (undefined, function (ls, c, bd, sq, sqs,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_155_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_155_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -11310,7 +11310,7 @@ match_h_arm_Some_inst_156_30_31_32_57_58_tsni = (undefined, function (ls, c, bd,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_156_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_156_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -11385,7 +11385,7 @@ match_scrut_arm_Some_inst_156_30_31_32_55_56_tsni = (undefined, function (c, bd,
   if (scrut === true) {
     return sift_inst_156_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -11422,7 +11422,7 @@ match_scrut_arm_Some_inst_156_30_31_32_54_49_41_42_43_tsni = (undefined, functio
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11447,7 +11447,7 @@ match_scrut_arm_Some_inst_156_30_31_32_54_50_41_42_43_tsni = (undefined, functio
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11472,7 +11472,7 @@ match_scrut_arm_Some_inst_156_30_31_32_54_51_41_42_43_tsni = (undefined, functio
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11497,7 +11497,7 @@ match_scrut_arm_Some_inst_156_30_31_32_54_52_41_42_43_tsni = (undefined, functio
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11522,7 +11522,7 @@ match_scrut_arm_Some_inst_156_30_31_32_53_40_41_42_43_tsni = (undefined, functio
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11547,7 +11547,7 @@ match_scrut_arm_Some_inst_156_30_31_32_53_45_41_42_43_tsni = (undefined, functio
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11572,7 +11572,7 @@ match_scrut_arm_Some_inst_156_30_31_32_53_46_41_42_43_tsni = (undefined, functio
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11597,7 +11597,7 @@ match_scrut_arm_Some_inst_156_30_31_32_53_47_41_42_43_tsni = (undefined, functio
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11622,7 +11622,7 @@ match_scrut_arm_Some_inst_156_30_31_32_38_48_52_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11647,7 +11647,7 @@ match_scrut_arm_Some_inst_156_30_31_32_38_48_51_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11672,7 +11672,7 @@ match_scrut_arm_Some_inst_156_30_31_32_38_48_50_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11697,7 +11697,7 @@ match_scrut_arm_Some_inst_156_30_31_32_38_48_49_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11722,7 +11722,7 @@ match_scrut_arm_Some_inst_156_30_31_32_38_39_47_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11747,7 +11747,7 @@ match_scrut_arm_Some_inst_156_30_31_32_38_39_46_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11772,7 +11772,7 @@ match_scrut_arm_Some_inst_156_30_31_32_38_39_45_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11797,7 +11797,7 @@ match_scrut_arm_Some_inst_156_30_31_32_38_39_40_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -11836,7 +11836,7 @@ match_scrut_arm_Some_inst_156_30_31_32_33_34_tsni = (undefined, function (c, bd,
   if (scrut === true) {
     return sift_inst_156_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -11901,8 +11901,8 @@ match_m_arm_Move_inst_156_30_31_70_71_72_tsni = (undefined, function (c, m, bd, 
   tmp5 = kingincheck_inst_156_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     arr1 = globalThis.Object.freeze([
       tmp7,
       bd2
@@ -12002,7 +12002,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_33_34_tsni = (undefined, function (c, 
   if (scrut === true) {
     return sift_inst_178_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -12039,7 +12039,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_38_39_40_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12064,7 +12064,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_38_39_45_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12089,7 +12089,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_38_39_46_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12114,7 +12114,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_38_39_47_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12139,7 +12139,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_38_48_49_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12164,7 +12164,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_38_48_50_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12189,7 +12189,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_38_48_51_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12214,7 +12214,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_38_48_52_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12252,7 +12252,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_53_47_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12277,7 +12277,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_53_46_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12302,7 +12302,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_53_45_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12327,7 +12327,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_53_40_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12352,7 +12352,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_54_52_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12377,7 +12377,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_54_51_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12402,7 +12402,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_54_50_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12427,7 +12427,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_54_49_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12453,7 +12453,7 @@ match_scrut_arm_Some_inst_178_29_30_31_32_55_56_tsni = (undefined, function (c, 
   if (scrut === true) {
     return sift_inst_178_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -12515,7 +12515,7 @@ match_h_arm_Some_inst_178_29_30_31_32_57_58_tsni = (undefined, function (ls, c, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_178_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_178_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -12694,8 +12694,8 @@ match_m_arm_Move_inst_178_29_30_31_70_71_72_tsni = (undefined, function (c, m, b
   tmp5 = kingincheck_inst_178_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (other, c1, n) => {
@@ -12720,7 +12720,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_33_34_tsni = (undefined, function (c, 
   if (scrut === true) {
     return sift_inst_178_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -12757,7 +12757,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_38_39_40_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12782,7 +12782,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_38_39_45_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12807,7 +12807,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_38_39_46_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12832,7 +12832,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_38_39_47_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12857,7 +12857,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_38_48_49_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12882,7 +12882,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_38_48_50_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12907,7 +12907,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_38_48_51_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12932,7 +12932,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_38_48_52_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12970,7 +12970,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_53_47_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -12995,7 +12995,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_53_46_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13020,7 +13020,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_53_45_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13045,7 +13045,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_53_40_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13070,7 +13070,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_54_52_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13095,7 +13095,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_54_51_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13120,7 +13120,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_54_50_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13145,7 +13145,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_54_49_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13171,7 +13171,7 @@ match_scrut_arm_Some_inst_178_81_30_31_32_55_56_tsni = (undefined, function (c, 
   if (scrut === true) {
     return sift_inst_178_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -13233,7 +13233,7 @@ match_h_arm_Some_inst_178_81_30_31_32_57_58_tsni = (undefined, function (ls, c, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_178_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_178_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -13412,8 +13412,8 @@ match_m_arm_Move_inst_178_81_30_31_70_71_72_tsni = (undefined, function (c, m, b
   tmp5 = kingincheck_inst_178_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (rest, c1, n) => {
@@ -13494,7 +13494,7 @@ match_sm_arm_Some_inst_178_tsni = (undefined, function (rest, mif, _deforest_Som
       s
     ]);
     tmp = NofibPrelude.Cons(arr, ms);
-    return runtime.safeCall(NofibPrelude.Some(tmp))
+    return NofibPrelude.Some(tmp)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -13508,7 +13508,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_33_34_tsni = (undefined, function (c, 
   if (scrut === true) {
     return sift_inst_179_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -13545,7 +13545,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_38_39_40_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13570,7 +13570,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_38_39_45_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13595,7 +13595,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_38_39_46_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13620,7 +13620,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_38_39_47_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13645,7 +13645,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_38_48_49_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13670,7 +13670,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_38_48_50_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13695,7 +13695,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_38_48_51_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13720,7 +13720,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_38_48_52_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13758,7 +13758,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_53_47_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13783,7 +13783,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_53_46_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13808,7 +13808,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_53_45_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13833,7 +13833,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_53_40_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13858,7 +13858,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_54_52_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13883,7 +13883,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_54_51_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13908,7 +13908,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_54_50_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13933,7 +13933,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_54_49_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -13959,7 +13959,7 @@ match_scrut_arm_Some_inst_179_29_30_31_32_55_56_tsni = (undefined, function (c, 
   if (scrut === true) {
     return sift_inst_179_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -14021,7 +14021,7 @@ match_h_arm_Some_inst_179_29_30_31_32_57_58_tsni = (undefined, function (ls, c, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_179_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_179_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -14200,8 +14200,8 @@ match_m_arm_Move_inst_179_29_30_31_70_71_72_tsni = (undefined, function (c, m, b
   tmp5 = kingincheck_inst_179_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (other, c1, n) => {
@@ -14226,7 +14226,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_33_34_tsni = (undefined, function (c, 
   if (scrut === true) {
     return sift_inst_179_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -14263,7 +14263,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_38_39_40_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14288,7 +14288,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_38_39_45_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14313,7 +14313,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_38_39_46_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14338,7 +14338,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_38_39_47_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14363,7 +14363,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_38_48_49_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14388,7 +14388,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_38_48_50_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14413,7 +14413,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_38_48_51_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14438,7 +14438,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_38_48_52_41_42_43_tsni = (undefined, f
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14476,7 +14476,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_53_47_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14501,7 +14501,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_53_46_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14526,7 +14526,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_53_45_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14551,7 +14551,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_53_40_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14576,7 +14576,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_54_52_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14601,7 +14601,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_54_51_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14626,7 +14626,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_54_50_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14651,7 +14651,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_54_49_41_42_43_tsni = (undefined, func
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -14677,7 +14677,7 @@ match_scrut_arm_Some_inst_179_81_30_31_32_55_56_tsni = (undefined, function (c, 
   if (scrut === true) {
     return sift_inst_179_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -14739,7 +14739,7 @@ match_h_arm_Some_inst_179_81_30_31_32_57_58_tsni = (undefined, function (ls, c, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_179_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_179_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -14918,8 +14918,8 @@ match_m_arm_Move_inst_179_81_30_31_70_71_72_tsni = (undefined, function (c, m, b
   tmp5 = kingincheck_inst_179_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (rest, c1, n) => {
@@ -14961,7 +14961,7 @@ match_mifb_arm_Deforest_Arr_2_inst_179_tsni = (undefined, function (rest, c, n, 
         s
       ]);
       tmp3 = NofibPrelude.Cons(arr, ms);
-      return runtime.safeCall(NofibPrelude.Some(tmp3))
+      return NofibPrelude.Some(tmp3)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -14988,14 +14988,14 @@ match_mifb_arm_Deforest_Arr_2_inst_179_tsni1 = (undefined, function (other, c, n
       scrut = kingincheck_inst_179_82_tsni(tmp3, b);
       if (scrut === true) {
         tmp4 = mate1.Solution(mif, NofibPrelude.Nil);
-        return runtime.safeCall(NofibPrelude.Some(tmp4))
+        return NofibPrelude.Some(tmp4)
       } else {
         return NofibPrelude.force(other)
       }
     } else {
       rs = param0;
       tmp5 = mate1.Solution(mif, rs);
-      return runtime.safeCall(NofibPrelude.Some(tmp5))
+      return NofibPrelude.Some(tmp5)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -17784,7 +17784,7 @@ match_h_arm_Some_inst_188_189_81_30_31_32_57_58_tsni = (undefined, function (ls,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_188_189_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_188_189_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -17859,7 +17859,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_55_56_tsni = (undefined, function 
   if (scrut === true) {
     return sift_inst_188_189_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -17896,7 +17896,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_54_49_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -17921,7 +17921,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_54_50_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -17946,7 +17946,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_54_51_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -17971,7 +17971,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_54_52_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -17996,7 +17996,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_53_40_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18021,7 +18021,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_53_45_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18046,7 +18046,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_53_46_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18071,7 +18071,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_53_47_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18096,7 +18096,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_38_48_52_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18121,7 +18121,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_38_48_51_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18146,7 +18146,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_38_48_50_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18171,7 +18171,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_38_48_49_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18196,7 +18196,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_38_39_47_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18221,7 +18221,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_38_39_46_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18246,7 +18246,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_38_39_45_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18271,7 +18271,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_38_39_40_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18310,7 +18310,7 @@ match_scrut_arm_Some_inst_188_189_81_30_31_32_33_34_tsni = (undefined, function 
   if (scrut === true) {
     return sift_inst_188_189_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -18375,8 +18375,8 @@ match_m_arm_Move_inst_188_189_81_30_31_70_71_72_tsni = (undefined, function (c, 
   tmp5 = kingincheck_inst_188_189_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (rest, c1, n) => {
@@ -18426,7 +18426,7 @@ match_mifb_arm_Deforest_Arr_2_inst_188_189_tsni = (undefined, function (rest, c,
         return ic$_inst_188_190_186_183_tsni(mif1, cs, ls)
       };
       tmp3 = NofibPrelude.Cons(arr, ms);
-      return runtime.safeCall(NofibPrelude.Some(tmp3))
+      return NofibPrelude.Some(tmp3)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -18544,7 +18544,7 @@ match_h_arm_Some_inst_188_189_29_30_31_32_57_58_tsni = (undefined, function (ls,
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_188_189_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_188_189_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -18619,7 +18619,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_55_56_tsni = (undefined, function 
   if (scrut === true) {
     return sift_inst_188_189_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -18656,7 +18656,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_54_49_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18681,7 +18681,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_54_50_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18706,7 +18706,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_54_51_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18731,7 +18731,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_54_52_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18756,7 +18756,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_53_40_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18781,7 +18781,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_53_45_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18806,7 +18806,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_53_46_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18831,7 +18831,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_53_47_41_42_43_tsni = (undefined, 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18856,7 +18856,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_38_48_52_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18881,7 +18881,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_38_48_51_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18906,7 +18906,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_38_48_50_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18931,7 +18931,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_38_48_49_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18956,7 +18956,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_38_39_47_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -18981,7 +18981,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_38_39_46_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -19006,7 +19006,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_38_39_45_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -19031,7 +19031,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_38_39_40_41_42_43_tsni = (undefine
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -19070,7 +19070,7 @@ match_scrut_arm_Some_inst_188_189_29_30_31_32_33_34_tsni = (undefined, function 
   if (scrut === true) {
     return sift_inst_188_189_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -19135,8 +19135,8 @@ match_m_arm_Move_inst_188_189_29_30_31_70_71_72_tsni = (undefined, function (c, 
   tmp5 = kingincheck_inst_188_189_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (other, c1, n) => {
@@ -19175,7 +19175,7 @@ match_mifb_arm_Deforest_Arr_2_inst_188_189_tsni1 = (undefined, function (other, 
         tmp4 = () => {
           return match_s_arm_Solution_inst_188_190_186_tsni(_deforest_Solution_a, _deforest_Solution_b)
         };
-        return runtime.safeCall(NofibPrelude.Some(tmp4))
+        return NofibPrelude.Some(tmp4)
       } else {
         return NofibPrelude.force(other)
       }
@@ -19186,7 +19186,7 @@ match_mifb_arm_Deforest_Arr_2_inst_188_189_tsni1 = (undefined, function (other, 
       tmp5 = () => {
         return match_s_arm_Solution_inst_188_190_186_tsni(_deforest_Solution_a1, _deforest_Solution_b1)
       };
-      return runtime.safeCall(NofibPrelude.Some(tmp5))
+      return NofibPrelude.Some(tmp5)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -21073,7 +21073,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_33_34_tsni = (undefined, funct
   if (scrut === true) {
     return sift_inst_191_195_189_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -21110,7 +21110,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_38_39_40_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21135,7 +21135,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_38_39_45_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21160,7 +21160,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_38_39_46_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21185,7 +21185,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_38_39_47_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21210,7 +21210,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_38_48_49_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21235,7 +21235,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_38_48_50_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21260,7 +21260,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_38_48_51_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21285,7 +21285,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_38_48_52_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21323,7 +21323,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_53_47_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21348,7 +21348,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_53_46_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21373,7 +21373,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_53_45_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21398,7 +21398,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_53_40_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21423,7 +21423,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_54_52_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21448,7 +21448,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_54_51_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21473,7 +21473,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_54_50_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21498,7 +21498,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_54_49_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21524,7 +21524,7 @@ match_scrut_arm_Some_inst_191_195_189_29_30_31_32_55_56_tsni = (undefined, funct
   if (scrut === true) {
     return sift_inst_191_195_189_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -21586,7 +21586,7 @@ match_h_arm_Some_inst_191_195_189_29_30_31_32_57_58_tsni = (undefined, function 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_191_195_189_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_191_195_189_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -21765,8 +21765,8 @@ match_m_arm_Move_inst_191_195_189_29_30_31_70_71_72_tsni = (undefined, function 
   tmp5 = kingincheck_inst_191_195_189_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (other, c1, n) => {
@@ -21791,7 +21791,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_33_34_tsni = (undefined, funct
   if (scrut === true) {
     return sift_inst_191_195_189_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -21828,7 +21828,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_38_39_40_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21853,7 +21853,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_38_39_45_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21878,7 +21878,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_38_39_46_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21903,7 +21903,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_38_39_47_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21928,7 +21928,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_38_48_49_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21953,7 +21953,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_38_48_50_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -21978,7 +21978,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_38_48_51_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22003,7 +22003,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_38_48_52_41_42_43_tsni = (unde
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22041,7 +22041,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_53_47_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22066,7 +22066,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_53_46_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22091,7 +22091,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_53_45_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22116,7 +22116,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_53_40_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22141,7 +22141,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_54_52_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22166,7 +22166,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_54_51_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22191,7 +22191,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_54_50_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22216,7 +22216,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_54_49_41_42_43_tsni = (undefin
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22242,7 +22242,7 @@ match_scrut_arm_Some_inst_191_195_189_81_30_31_32_55_56_tsni = (undefined, funct
   if (scrut === true) {
     return sift_inst_191_195_189_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -22304,7 +22304,7 @@ match_h_arm_Some_inst_191_195_189_81_30_31_32_57_58_tsni = (undefined, function 
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_191_195_189_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_191_195_189_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -22483,8 +22483,8 @@ match_m_arm_Move_inst_191_195_189_81_30_31_70_71_72_tsni = (undefined, function 
   tmp5 = kingincheck_inst_191_195_189_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (rest, c1, n) => {
@@ -22534,7 +22534,7 @@ match_mifb_arm_Deforest_Arr_2_inst_191_195_189_tsni = (undefined, function (rest
         return ic$_inst_191_195_190_186_183_tsni(mif1, cs, ls)
       };
       tmp3 = NofibPrelude.Cons(arr, ms);
-      return runtime.safeCall(NofibPrelude.Some(tmp3))
+      return NofibPrelude.Some(tmp3)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -22565,7 +22565,7 @@ match_mifb_arm_Deforest_Arr_2_inst_191_195_189_tsni1 = (undefined, function (oth
         tmp4 = () => {
           return match_s_arm_Solution_inst_191_195_190_186_tsni(_deforest_Solution_a, _deforest_Solution_b)
         };
-        return runtime.safeCall(NofibPrelude.Some(tmp4))
+        return NofibPrelude.Some(tmp4)
       } else {
         return NofibPrelude.force(other)
       }
@@ -22576,7 +22576,7 @@ match_mifb_arm_Deforest_Arr_2_inst_191_195_189_tsni1 = (undefined, function (oth
       tmp5 = () => {
         return match_s_arm_Solution_inst_191_195_190_186_tsni(_deforest_Solution_a1, _deforest_Solution_b1)
       };
-      return runtime.safeCall(NofibPrelude.Some(tmp5))
+      return NofibPrelude.Some(tmp5)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -22701,7 +22701,7 @@ match_h_arm_Some_inst_197_198_195_189_81_30_31_32_57_58_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_197_198_195_189_81_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_197_198_195_189_81_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -22776,7 +22776,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_55_56_tsni = (undefined, f
   if (scrut === true) {
     return sift_inst_197_198_195_189_81_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -22813,7 +22813,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_54_49_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22838,7 +22838,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_54_50_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22863,7 +22863,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_54_51_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22888,7 +22888,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_54_52_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22913,7 +22913,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_53_40_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22938,7 +22938,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_53_45_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22963,7 +22963,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_53_46_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -22988,7 +22988,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_53_47_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23013,7 +23013,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_38_48_52_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23038,7 +23038,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_38_48_51_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23063,7 +23063,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_38_48_50_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23088,7 +23088,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_38_48_49_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23113,7 +23113,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_38_39_47_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23138,7 +23138,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_38_39_46_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23163,7 +23163,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_38_39_45_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23188,7 +23188,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_38_39_40_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23227,7 +23227,7 @@ match_scrut_arm_Some_inst_197_198_195_189_81_30_31_32_33_34_tsni = (undefined, f
   if (scrut === true) {
     return sift_inst_197_198_195_189_81_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -23292,8 +23292,8 @@ match_m_arm_Move_inst_197_198_195_189_81_30_31_70_71_72_tsni = (undefined, funct
   tmp5 = kingincheck_inst_197_198_195_189_81_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (rest, c1, n) => {
@@ -23343,7 +23343,7 @@ match_mifb_arm_Deforest_Arr_2_inst_197_198_195_189_tsni = (undefined, function (
         return ic$_inst_197_198_195_190_186_183_tsni(mif1, cs, ls)
       };
       tmp3 = NofibPrelude.Cons(arr, ms);
-      return runtime.safeCall(NofibPrelude.Some(tmp3))
+      return NofibPrelude.Some(tmp3)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -23461,7 +23461,7 @@ match_h_arm_Some_inst_197_198_195_189_29_30_31_32_57_58_tsni = (undefined, funct
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     tmp3 = promote$_inst_197_198_195_189_29_30_31_32_57_58_59_tsni(c, sq, tmp2);
     tmp4 = lscomp2$_inst_197_198_195_189_29_30_31_32_57_58_tsni(c, bd, sq, sqs, ls);
     _deforest_Cons_head = tmp3;
@@ -23536,7 +23536,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_55_56_tsni = (undefined, f
   if (scrut === true) {
     return sift_inst_197_198_195_189_29_30_31_32_55_56_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -23573,7 +23573,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_54_49_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23598,7 +23598,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_54_50_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23623,7 +23623,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_54_51_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23648,7 +23648,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_54_52_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23673,7 +23673,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_53_40_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23698,7 +23698,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_53_45_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23723,7 +23723,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_53_46_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23748,7 +23748,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_53_47_41_42_43_tsni = (und
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23773,7 +23773,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_38_48_52_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23798,7 +23798,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_38_48_51_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23823,7 +23823,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_38_48_50_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23848,7 +23848,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_38_48_49_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23873,7 +23873,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_38_39_47_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23898,7 +23898,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_38_39_46_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23923,7 +23923,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_38_39_45_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23948,7 +23948,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_38_39_40_41_42_43_tsni = (
   tmp1 = tmp === c;
   scrut = ! tmp1;
   if (scrut === true) {
-    tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp2 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq_;
     _deforest_Move_b = tmp2;
     _deforest_Move_c = NofibPrelude.None;
@@ -23987,7 +23987,7 @@ match_scrut_arm_Some_inst_197_198_195_189_29_30_31_32_33_34_tsni = (undefined, f
   if (scrut === true) {
     return sift_inst_197_198_195_189_29_30_31_32_33_34_tsni(c, bd, ms, sqs)
   } else {
-    tmp1 = runtime.safeCall(NofibPrelude.Some(p_));
+    tmp1 = NofibPrelude.Some(p_);
     _deforest_Move_a = sq;
     _deforest_Move_b = tmp1;
     _deforest_Move_c = NofibPrelude.None;
@@ -24052,8 +24052,8 @@ match_m_arm_Move_inst_197_198_195_189_29_30_31_70_71_72_tsni = (undefined, funct
   tmp5 = kingincheck_inst_197_198_195_189_29_30_31_70_71_72_77_tsni(c, bd2);
   scrut = ! tmp5;
   if (scrut === true) {
-    tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-    tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+    tmp6 = mate.Move(sq_, mcp, mpp);
+    tmp7 = mate.MoveInFull(p, sq, tmp6);
     _deforest_Deforest_Arr_2_0 = tmp7;
     _deforest_Deforest_Arr_2_1 = bd2;
     arr1 = (other, c1, n) => {
@@ -24092,7 +24092,7 @@ match_mifb_arm_Deforest_Arr_2_inst_197_198_195_189_tsni1 = (undefined, function 
         tmp4 = () => {
           return match_s_arm_Solution_inst_197_198_195_190_186_tsni(_deforest_Solution_a, _deforest_Solution_b)
         };
-        return runtime.safeCall(NofibPrelude.Some(tmp4))
+        return NofibPrelude.Some(tmp4)
       } else {
         return NofibPrelude.force(other)
       }
@@ -24103,7 +24103,7 @@ match_mifb_arm_Deforest_Arr_2_inst_197_198_195_189_tsni1 = (undefined, function 
       tmp5 = () => {
         return match_s_arm_Solution_inst_197_198_195_190_186_tsni(_deforest_Solution_a1, _deforest_Solution_b1)
       };
-      return runtime.safeCall(NofibPrelude.Some(tmp5))
+      return NofibPrelude.Some(tmp5)
     }
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -25673,7 +25673,7 @@ showMovesAfter_inst_0_1_2_13_tsni = function showMovesAfter_inst_0_1_2_13_tsni(p
           }
         };
         tmp5 = showMove_inst_0_1_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_0_1_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_0_1_2_13_21_tsni(tmp5, tmp7);
         return append_inst_0_1_2_13_20_tsni(tmp, tmp8)
@@ -26547,7 +26547,7 @@ showMovesAfter_inst_0_1_23_13_tsni = function showMovesAfter_inst_0_1_23_13_tsni
           }
         };
         tmp5 = showMove_inst_0_1_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_0_1_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_0_1_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -27860,7 +27860,7 @@ showMovesAfter_inst_0_25_2_13_tsni = function showMovesAfter_inst_0_25_2_13_tsni
           }
         };
         tmp5 = showMove_inst_0_25_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_0_25_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_0_25_2_13_21_tsni(tmp5, tmp7);
         return append_inst_0_25_2_13_20_tsni(tmp, tmp8)
@@ -28734,7 +28734,7 @@ showMovesAfter_inst_0_25_23_13_tsni = function showMovesAfter_inst_0_25_23_13_ts
           }
         };
         tmp5 = showMove_inst_0_25_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_0_25_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_0_25_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -30111,7 +30111,7 @@ showMovesAfter_inst_26_27_25_23_13_tsni = function showMovesAfter_inst_26_27_25_
           }
         };
         tmp5 = showMove_inst_26_27_25_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_26_27_25_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_26_27_25_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -30939,7 +30939,7 @@ showMovesAfter_inst_26_27_25_2_13_tsni = function showMovesAfter_inst_26_27_25_2
           }
         };
         tmp5 = showMove_inst_26_27_25_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_26_27_25_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_26_27_25_2_13_21_tsni(tmp5, tmp7);
         return append_inst_26_27_25_2_13_20_tsni(tmp, tmp8)
@@ -32298,7 +32298,7 @@ showMovesAfter_inst_26_27_1_23_13_tsni = function showMovesAfter_inst_26_27_1_23
           }
         };
         tmp5 = showMove_inst_26_27_1_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_26_27_1_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_26_27_1_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -33126,7 +33126,7 @@ showMovesAfter_inst_26_27_1_2_13_tsni = function showMovesAfter_inst_26_27_1_2_1
           }
         };
         tmp5 = showMove_inst_26_27_1_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_26_27_1_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_26_27_1_2_13_21_tsni(tmp5, tmp7);
         return append_inst_26_27_1_2_13_20_tsni(tmp, tmp8)
@@ -33929,14 +33929,14 @@ replies_inst_28_tsni = function replies_inst_28_tsni(bd, c, n) {
   if (scrut1 === true) {
     scrut2 = NofibPrelude.null_(mds);
     if (scrut2 === true) {
-      return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+      return NofibPrelude.Some(NofibPrelude.Nil)
     } else {
       return NofibPrelude.None
     }
   } else {
     scrut = n > 0;
     if (scrut === true) {
-      tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+      tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
       solnAnd$this = runtime.safeCall(solnAnd_inst_28_tsni(c, n));
       return mate.foldr_lz(solnAnd$this, tmp1, mds)
     } else {
@@ -36934,7 +36934,7 @@ lambda$_inst_28_29_30_31_32_57_64_79_80_tsni = function lambda$_inst_28_29_30_31
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -36953,7 +36953,7 @@ lambda$_inst_28_29_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_28_29_30
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -39941,7 +39941,7 @@ lambda$_inst_28_81_30_31_32_57_64_79_80_tsni = function lambda$_inst_28_81_30_31
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -39960,7 +39960,7 @@ lambda$_inst_28_81_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_28_81_30
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -40041,14 +40041,14 @@ solnOr$_inst_86_tsni = function solnOr$_inst_86_tsni(c, n, mifb, other) {
         scrut = kingincheck_inst_86_82_tsni(tmp3, b);
         if (scrut === true) {
           tmp4 = mate1.Solution(mif, NofibPrelude.Nil);
-          return runtime.safeCall(NofibPrelude.Some(tmp4))
+          return NofibPrelude.Some(tmp4)
         } else {
           return NofibPrelude.force(other)
         }
       } else {
         rs = param0;
         tmp5 = mate1.Solution(mif, rs);
-        return runtime.safeCall(NofibPrelude.Some(tmp5))
+        return NofibPrelude.Some(tmp5)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -40065,14 +40065,14 @@ replies_inst_86_tsni = function replies_inst_86_tsni(bd, c, n) {
   if (scrut1 === true) {
     scrut2 = NofibPrelude.null_(mds);
     if (scrut2 === true) {
-      return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+      return NofibPrelude.Some(NofibPrelude.Nil)
     } else {
       return NofibPrelude.None
     }
   } else {
     scrut = n > 0;
     if (scrut === true) {
-      tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+      tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
       solnAnd$this = runtime.safeCall(solnAnd_inst_86_tsni(c, n));
       return mate.foldr_lz(solnAnd$this, tmp1, mds)
     } else {
@@ -43070,7 +43070,7 @@ lambda$_inst_86_29_30_31_32_57_64_79_80_tsni = function lambda$_inst_86_29_30_31
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -43089,7 +43089,7 @@ lambda$_inst_86_29_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_86_29_30
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -46077,7 +46077,7 @@ lambda$_inst_86_81_30_31_32_57_64_79_80_tsni = function lambda$_inst_86_81_30_31
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -46096,7 +46096,7 @@ lambda$_inst_86_81_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_86_81_30
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -46175,14 +46175,14 @@ replies_inst_87_tsni = function replies_inst_87_tsni(bd, c, n) {
   if (scrut1 === true) {
     scrut2 = NofibPrelude.null_(mds);
     if (scrut2 === true) {
-      return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+      return NofibPrelude.Some(NofibPrelude.Nil)
     } else {
       return NofibPrelude.None
     }
   } else {
     scrut = n > 0;
     if (scrut === true) {
-      tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+      tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
       solnAnd$this = runtime.safeCall(solnAnd_inst_87_tsni(c, n));
       return mate.foldr_lz(solnAnd$this, tmp1, mds)
     } else {
@@ -49177,7 +49177,7 @@ lambda$_inst_87_29_30_31_32_57_64_79_80_tsni = function lambda$_inst_87_29_30_31
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -49196,7 +49196,7 @@ lambda$_inst_87_29_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_87_29_30
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -52184,7 +52184,7 @@ lambda$_inst_87_81_30_31_32_57_64_79_80_tsni = function lambda$_inst_87_81_30_31
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -52203,7 +52203,7 @@ lambda$_inst_87_81_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_87_81_30
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -52282,14 +52282,14 @@ replies_inst_88_tsni = function replies_inst_88_tsni(bd, c, n) {
   if (scrut1 === true) {
     scrut2 = NofibPrelude.null_(mds);
     if (scrut2 === true) {
-      return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+      return NofibPrelude.Some(NofibPrelude.Nil)
     } else {
       return NofibPrelude.None
     }
   } else {
     scrut = n > 0;
     if (scrut === true) {
-      tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+      tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
       solnAnd$this = runtime.safeCall(solnAnd(c, n));
       return mate.foldr_lz(solnAnd$this, tmp1, mds)
     } else {
@@ -55295,7 +55295,7 @@ lambda$_inst_88_29_30_31_32_57_64_79_80_tsni = function lambda$_inst_88_29_30_31
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -55314,7 +55314,7 @@ lambda$_inst_88_29_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_88_29_30
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -58302,7 +58302,7 @@ lambda$_inst_88_81_30_31_32_57_64_79_80_tsni = function lambda$_inst_88_81_30_31
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -58321,7 +58321,7 @@ lambda$_inst_88_81_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_88_81_30
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -58568,8 +58568,8 @@ tryMove_inst_96_72_tsni = function tryMove_inst_96_72_tsni(c, ksq, m, bd) {
       tmp5 = kingincheck_inst_96_72_77_tsni(c, bd2);
       scrut = ! tmp5;
       if (scrut === true) {
-        tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-        tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+        tmp6 = mate.Move(sq_, mcp, mpp);
+        tmp7 = mate.MoveInFull(p, sq, tmp6);
         arr1 = globalThis.Object.freeze([
           tmp7,
           bd2
@@ -58693,8 +58693,8 @@ tryMove_inst_97_71_72_tsni = function tryMove_inst_97_71_72_tsni(c, ksq, m, bd) 
       tmp5 = kingincheck_inst_97_71_72_77_tsni(c, bd2);
       scrut = ! tmp5;
       if (scrut === true) {
-        tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-        tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+        tmp6 = mate.Move(sq_, mcp, mpp);
+        tmp7 = mate.MoveInFull(p, sq, tmp6);
         arr1 = globalThis.Object.freeze([
           tmp7,
           bd2
@@ -61742,7 +61742,7 @@ lambda$_inst_98_32_57_58_59_79_80_tsni = function lambda$_inst_98_32_57_58_59_79
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -61764,7 +61764,7 @@ lambda$_inst_98_32_57_64_79_80_tsni = function lambda$_inst_98_32_57_64_79_80_ts
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -64741,7 +64741,7 @@ lambda$_inst_99_31_32_57_64_79_80_tsni = function lambda$_inst_99_31_32_57_64_79
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -64760,7 +64760,7 @@ lambda$_inst_99_31_32_57_58_59_79_80_tsni = function lambda$_inst_99_31_32_57_58
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -64958,7 +64958,7 @@ promote$_inst_105_106_tsni = function promote$_inst_105_106_tsni(c, xy, mcp) {
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       return NofibPrelude.Cons(tmp7, NofibPrelude.Nil)
     }
   } else {
@@ -65052,7 +65052,7 @@ promote$_inst_107_59_tsni = function promote$_inst_107_59_tsni(c, xy, mcp) {
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       return NofibPrelude.Cons(tmp7, NofibPrelude.Nil)
     }
   } else {
@@ -65091,7 +65091,7 @@ lscomp2$_inst_108_109_tsni = function lscomp2$_inst_108_109_tsni(c, bd, sq, sqs,
       tmp1 = tmp === c;
       scrut = ! tmp1;
       if (scrut === true) {
-        tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+        tmp2 = NofibPrelude.Some(p_);
         tmp3 = promote$_inst_108_109_59_tsni(c, sq, tmp2);
         tmp4 = lscomp2$_inst_108_109_tsni(c, bd, sq, sqs, ls1);
         return NofibPrelude.Cons(tmp3, tmp4)
@@ -65176,7 +65176,7 @@ promote$_inst_108_109_59_tsni = function promote$_inst_108_109_59_tsni(c, xy, mc
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       return NofibPrelude.Cons(tmp7, NofibPrelude.Nil)
     }
   } else {
@@ -65257,7 +65257,7 @@ promote$_inst_110_59_tsni = function promote$_inst_110_59_tsni(c, xy, mcp) {
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       return NofibPrelude.Cons(tmp7, NofibPrelude.Nil)
     }
   } else {
@@ -65446,7 +65446,7 @@ promote$_inst_111_112_59_tsni = function promote$_inst_111_112_59_tsni(c, xy, mc
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       return NofibPrelude.Cons(tmp7, NofibPrelude.Nil)
     }
   } else {
@@ -65543,7 +65543,7 @@ pieceAt_inst_113_44_tsni = function pieceAt_inst_113_44_tsni(bd, sq) {
     bkss = param1;
     tmp = pieceAtWith$_inst_113_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -65639,7 +65639,7 @@ pieceAt_inst_114_115_44_tsni = function pieceAt_inst_114_115_44_tsni(bd, sq) {
     bkss = param1;
     tmp = pieceAtWith$_inst_114_115_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_114_115_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -65735,7 +65735,7 @@ pieceAt_inst_116_43_44_tsni = function pieceAt_inst_116_43_44_tsni(bd, sq) {
     bkss = param1;
     tmp = pieceAtWith$_inst_116_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_116_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -65834,7 +65834,7 @@ pieceAt_inst_117_42_43_44_tsni = function pieceAt_inst_117_42_43_44_tsni(bd, sq)
     bkss = param1;
     tmp = pieceAtWith$_inst_117_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_117_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -68063,7 +68063,7 @@ showMovesAfter_inst_144_13_tsni = function showMovesAfter_inst_144_13_tsni(p_, m
           }
         };
         tmp5 = showMove_inst_144_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_144_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_144_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -68417,7 +68417,7 @@ pieceAt_inst_145_35_tsni = function pieceAt_inst_145_35_tsni(bd, sq) {
     bkss = param1;
     tmp = pieceAtWith$_inst_145_35_36_tsni(sq, mate.Black, (c, bd1, ms, sq1, sqs) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate.Move(sq1, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate.Move(sq1, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return mate.sift(c, bd1, tmp2, sqs)
     }, bkss);
@@ -68521,7 +68521,7 @@ pieceAt_inst_146_41_42_43_44_tsni = function pieceAt_inst_146_41_42_43_44_tsni(b
     bkss = param1;
     tmp = pieceAtWith$_inst_146_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_146_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -68628,7 +68628,7 @@ pieceAt_inst_147_49_41_42_43_44_tsni = function pieceAt_inst_147_49_41_42_43_44_
     bkss = param1;
     tmp = pieceAtWith$_inst_147_49_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_147_49_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -68735,7 +68735,7 @@ pieceAt_inst_147_50_41_42_43_44_tsni = function pieceAt_inst_147_50_41_42_43_44_
     bkss = param1;
     tmp = pieceAtWith$_inst_147_50_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_147_50_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -68842,7 +68842,7 @@ pieceAt_inst_147_51_41_42_43_44_tsni = function pieceAt_inst_147_51_41_42_43_44_
     bkss = param1;
     tmp = pieceAtWith$_inst_147_51_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_147_51_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -68949,7 +68949,7 @@ pieceAt_inst_147_52_41_42_43_44_tsni = function pieceAt_inst_147_52_41_42_43_44_
     bkss = param1;
     tmp = pieceAtWith$_inst_147_52_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_147_52_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -69056,7 +69056,7 @@ pieceAt_inst_148_40_41_42_43_44_tsni = function pieceAt_inst_148_40_41_42_43_44_
     bkss = param1;
     tmp = pieceAtWith$_inst_148_40_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_148_40_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -69163,7 +69163,7 @@ pieceAt_inst_148_45_41_42_43_44_tsni = function pieceAt_inst_148_45_41_42_43_44_
     bkss = param1;
     tmp = pieceAtWith$_inst_148_45_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_148_45_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -69270,7 +69270,7 @@ pieceAt_inst_148_46_41_42_43_44_tsni = function pieceAt_inst_148_46_41_42_43_44_
     bkss = param1;
     tmp = pieceAtWith$_inst_148_46_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_148_46_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -69377,7 +69377,7 @@ pieceAt_inst_148_47_41_42_43_44_tsni = function pieceAt_inst_148_47_41_42_43_44_
     bkss = param1;
     tmp = pieceAtWith$_inst_148_47_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_148_47_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -69464,7 +69464,7 @@ pieceAt_inst_149_34_35_tsni = function pieceAt_inst_149_34_35_tsni(bd, sq) {
     bkss = param1;
     tmp = pieceAtWith$_inst_149_34_35_36_tsni(sq, mate.Black, (c, bd1, ms, sq1, sqs) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate.Move(sq1, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate.Move(sq1, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return sift_inst_149_34_tsni(c, bd1, tmp2, sqs)
     }, bkss);
@@ -69551,7 +69551,7 @@ pieceAt_inst_150_56_35_tsni = function pieceAt_inst_150_56_35_tsni(bd, sq) {
     bkss = param1;
     tmp = pieceAtWith$_inst_150_56_35_36_tsni(sq, mate.Black, (c, bd1, ms, sq1, sqs) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate.Move(sq1, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate.Move(sq1, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return sift_inst_150_56_tsni(c, bd1, tmp2, sqs)
     }, bkss);
@@ -69803,7 +69803,7 @@ promote$_inst_151_64_tsni = function promote$_inst_151_64_tsni(c, xy, mcp) {
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       _deforest_Cons_head4 = tmp7;
       _deforest_Cons_tail4 = (ys) => {
         return match_xs_arm_Nil_inst_151_62_tsni(ys)
@@ -69825,7 +69825,7 @@ pieceAt_inst_151_63_tsni = function pieceAt_inst_151_63_tsni(bd, sq) {
     bkss = param1;
     tmp = pieceAtWith$_inst_151_63_36_tsni(sq, mate.Black, (c, bd1, p, q, fwd, on2, tmp1) => {
       let tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp2 = runtime.safeCall(mate.Move(on2, NofibPrelude.None, NofibPrelude.None));
+      tmp2 = mate.Move(on2, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp2;
       _deforest_Cons_tail = (ys) => {
         return match_xs_arm_Nil_inst_151_66_tsni(ys)
@@ -69988,7 +69988,7 @@ promote$_inst_151_58_59_tsni = function promote$_inst_151_58_59_tsni(c, xy, mcp)
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       _deforest_Cons_head4 = tmp7;
       _deforest_Cons_tail4 = (ys) => {
         return match_xs_arm_Nil_inst_151_67_68_tsni(ys)
@@ -70134,7 +70134,7 @@ pieceAt_inst_152_48_52_41_42_43_44_tsni = function pieceAt_inst_152_48_52_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_152_48_52_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = ms;
       tmp2 = (ys) => {
@@ -70245,7 +70245,7 @@ pieceAt_inst_152_48_51_41_42_43_44_tsni = function pieceAt_inst_152_48_51_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_152_48_51_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = ms;
       tmp2 = (ys) => {
@@ -70356,7 +70356,7 @@ pieceAt_inst_152_48_50_41_42_43_44_tsni = function pieceAt_inst_152_48_50_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_152_48_50_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = ms;
       tmp2 = (ys) => {
@@ -70467,7 +70467,7 @@ pieceAt_inst_152_48_49_41_42_43_44_tsni = function pieceAt_inst_152_48_49_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_152_48_49_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = ms;
       tmp2 = (ys) => {
@@ -70590,7 +70590,7 @@ pieceAt_inst_152_39_47_41_42_43_44_tsni = function pieceAt_inst_152_39_47_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_152_39_47_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_152_39_47_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -70697,7 +70697,7 @@ pieceAt_inst_152_39_46_41_42_43_44_tsni = function pieceAt_inst_152_39_46_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_152_39_46_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_152_39_46_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -70804,7 +70804,7 @@ pieceAt_inst_152_39_45_41_42_43_44_tsni = function pieceAt_inst_152_39_45_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_152_39_45_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_152_39_45_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -70911,7 +70911,7 @@ pieceAt_inst_152_39_40_41_42_43_44_tsni = function pieceAt_inst_152_39_40_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_152_39_40_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_152_39_40_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -71171,7 +71171,7 @@ pieceAt_inst_155_33_34_35_tsni = function pieceAt_inst_155_33_34_35_tsni(bd, sq)
     bkss = param1;
     tmp = pieceAtWith$_inst_155_33_34_35_36_tsni(sq, mate.Black, (c, bd1, ms, sq1, sqs) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate.Move(sq1, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate.Move(sq1, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return sift_inst_155_33_34_tsni(c, bd1, tmp2, sqs)
     }, bkss);
@@ -71296,7 +71296,7 @@ pieceAt_inst_155_38_39_40_41_42_43_44_tsni = function pieceAt_inst_155_38_39_40_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_38_39_40_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_38_39_40_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -71403,7 +71403,7 @@ pieceAt_inst_155_38_39_45_41_42_43_44_tsni = function pieceAt_inst_155_38_39_45_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_38_39_45_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_38_39_45_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -71510,7 +71510,7 @@ pieceAt_inst_155_38_39_46_41_42_43_44_tsni = function pieceAt_inst_155_38_39_46_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_38_39_46_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_38_39_46_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -71617,7 +71617,7 @@ pieceAt_inst_155_38_39_47_41_42_43_44_tsni = function pieceAt_inst_155_38_39_47_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_38_39_47_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_38_39_47_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -71738,7 +71738,7 @@ pieceAt_inst_155_38_48_49_41_42_43_44_tsni = function pieceAt_inst_155_38_48_49_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_38_48_49_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = ms;
       tmp2 = (ys) => {
@@ -71849,7 +71849,7 @@ pieceAt_inst_155_38_48_50_41_42_43_44_tsni = function pieceAt_inst_155_38_48_50_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_38_48_50_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = ms;
       tmp2 = (ys) => {
@@ -71960,7 +71960,7 @@ pieceAt_inst_155_38_48_51_41_42_43_44_tsni = function pieceAt_inst_155_38_48_51_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_38_48_51_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = ms;
       tmp2 = (ys) => {
@@ -72071,7 +72071,7 @@ pieceAt_inst_155_38_48_52_41_42_43_44_tsni = function pieceAt_inst_155_38_48_52_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_38_48_52_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp1;
       _deforest_Cons_tail = ms;
       tmp2 = (ys) => {
@@ -72194,7 +72194,7 @@ pieceAt_inst_155_53_47_41_42_43_44_tsni = function pieceAt_inst_155_53_47_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_53_47_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_53_47_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -72301,7 +72301,7 @@ pieceAt_inst_155_53_46_41_42_43_44_tsni = function pieceAt_inst_155_53_46_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_53_46_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_53_46_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -72408,7 +72408,7 @@ pieceAt_inst_155_53_45_41_42_43_44_tsni = function pieceAt_inst_155_53_45_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_53_45_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_53_45_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -72515,7 +72515,7 @@ pieceAt_inst_155_53_40_41_42_43_44_tsni = function pieceAt_inst_155_53_40_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_53_40_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_53_40_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -72634,7 +72634,7 @@ pieceAt_inst_155_54_52_41_42_43_44_tsni = function pieceAt_inst_155_54_52_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_54_52_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_54_52_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -72741,7 +72741,7 @@ pieceAt_inst_155_54_51_41_42_43_44_tsni = function pieceAt_inst_155_54_51_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_54_51_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_54_51_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -72848,7 +72848,7 @@ pieceAt_inst_155_54_50_41_42_43_44_tsni = function pieceAt_inst_155_54_50_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_54_50_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_54_50_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -72955,7 +72955,7 @@ pieceAt_inst_155_54_49_41_42_43_44_tsni = function pieceAt_inst_155_54_49_41_42_
     bkss = param1;
     tmp = pieceAtWith$_inst_155_54_49_41_42_43_44_36_tsni(sq, mate.Black, (ms, sq_, bd1, c, inc, cont) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate1.Move(sq_, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return ml$_inst_155_54_49_41_42_43_tsni(bd1, c, inc, cont, sq_, tmp2)
     }, bkss);
@@ -73144,7 +73144,7 @@ pieceAt_inst_155_55_56_35_tsni = function pieceAt_inst_155_55_56_35_tsni(bd, sq)
     bkss = param1;
     tmp = pieceAtWith$_inst_155_55_56_35_36_tsni(sq, mate.Black, (c, bd1, ms, sq1, sqs) => {
       let tmp1, tmp2;
-      tmp1 = runtime.safeCall(mate.Move(sq1, NofibPrelude.None, NofibPrelude.None));
+      tmp1 = mate.Move(sq1, NofibPrelude.None, NofibPrelude.None);
       tmp2 = NofibPrelude.Cons(tmp1, ms);
       return sift_inst_155_55_56_tsni(c, bd1, tmp2, sqs)
     }, bkss);
@@ -73330,7 +73330,7 @@ promote$_inst_155_57_58_59_tsni = function promote$_inst_155_57_58_59_tsni(c, xy
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       _deforest_Cons_head4 = tmp7;
       _deforest_Cons_tail4 = (ys) => {
         return match_xs_arm_Nil_inst_155_57_67_68_tsni(ys)
@@ -73439,7 +73439,7 @@ pieceAt_inst_155_57_63_tsni = function pieceAt_inst_155_57_63_tsni(bd, sq) {
     bkss = param1;
     tmp = pieceAtWith$_inst_155_57_63_36_tsni(sq, mate.Black, (c, bd1, p, q, fwd, on2, tmp1) => {
       let tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
-      tmp2 = runtime.safeCall(mate.Move(on2, NofibPrelude.None, NofibPrelude.None));
+      tmp2 = mate.Move(on2, NofibPrelude.None, NofibPrelude.None);
       _deforest_Cons_head = tmp2;
       _deforest_Cons_tail = (ys) => {
         return match_xs_arm_Nil_inst_155_57_66_tsni(ys)
@@ -73593,7 +73593,7 @@ promote$_inst_155_57_64_tsni = function promote$_inst_155_57_64_tsni(c, xy, mcp)
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       _deforest_Cons_head4 = tmp7;
       _deforest_Cons_tail4 = (ys) => {
         return match_xs_arm_Nil_inst_155_57_62_tsni(ys)
@@ -76684,7 +76684,7 @@ lambda$_inst_156_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_156_30_31_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -76706,7 +76706,7 @@ lambda$_inst_156_30_31_32_57_64_79_80_tsni = function lambda$_inst_156_30_31_32_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -81075,7 +81075,7 @@ lambda$_inst_178_29_30_31_32_57_64_79_80_tsni = function lambda$_inst_178_29_30_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -81094,7 +81094,7 @@ lambda$_inst_178_29_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_178_29_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -84082,7 +84082,7 @@ lambda$_inst_178_81_30_31_32_57_64_79_80_tsni = function lambda$_inst_178_81_30_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -84101,7 +84101,7 @@ lambda$_inst_178_81_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_178_81_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -84166,14 +84166,14 @@ replies_inst_179_tsni = function replies_inst_179_tsni(bd, c, n) {
   if (scrut1 === true) {
     scrut2 = NofibPrelude.null_(mds);
     if (scrut2 === true) {
-      return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+      return NofibPrelude.Some(NofibPrelude.Nil)
     } else {
       return NofibPrelude.None
     }
   } else {
     scrut = n > 0;
     if (scrut === true) {
-      tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+      tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
       solnAnd$this = runtime.safeCall(solnAnd_inst_179_tsni(c, n));
       return mate.foldr_lz(solnAnd$this, tmp1, mds)
     } else {
@@ -87171,7 +87171,7 @@ lambda$_inst_179_29_30_31_32_57_64_79_80_tsni = function lambda$_inst_179_29_30_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -87190,7 +87190,7 @@ lambda$_inst_179_29_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_179_29_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -90178,7 +90178,7 @@ lambda$_inst_179_81_30_31_32_57_64_79_80_tsni = function lambda$_inst_179_81_30_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -90197,7 +90197,7 @@ lambda$_inst_179_81_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_179_81_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -90788,7 +90788,7 @@ showMovesAfter_inst_180_23_13_tsni = function showMovesAfter_inst_180_23_13_tsni
           }
         };
         tmp5 = showMove_inst_180_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_180_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_180_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -91616,7 +91616,7 @@ showMovesAfter_inst_180_2_13_tsni = function showMovesAfter_inst_180_2_13_tsni(p
           }
         };
         tmp5 = showMove_inst_180_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_180_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_180_2_13_21_tsni(tmp5, tmp7);
         return append_inst_180_2_13_20_tsni(tmp, tmp8)
@@ -92914,7 +92914,7 @@ showMovesAfter_inst_181_23_13_tsni = function showMovesAfter_inst_181_23_13_tsni
           }
         };
         tmp5 = showMove_inst_181_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_181_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_181_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -93742,7 +93742,7 @@ showMovesAfter_inst_181_2_13_tsni = function showMovesAfter_inst_181_2_13_tsni(p
           }
         };
         tmp5 = showMove_inst_181_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_181_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_181_2_13_21_tsni(tmp5, tmp7);
         return append_inst_181_2_13_20_tsni(tmp, tmp8)
@@ -95181,7 +95181,7 @@ showMovesAfter_inst_182_183_25_23_13_tsni = function showMovesAfter_inst_182_183
           }
         };
         tmp5 = showMove_inst_182_183_25_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_182_183_25_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_182_183_25_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -96009,7 +96009,7 @@ showMovesAfter_inst_182_183_25_2_13_tsni = function showMovesAfter_inst_182_183_
           }
         };
         tmp5 = showMove_inst_182_183_25_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_182_183_25_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_182_183_25_2_13_21_tsni(tmp5, tmp7);
         return append_inst_182_183_25_2_13_20_tsni(tmp, tmp8)
@@ -97368,7 +97368,7 @@ showMovesAfter_inst_182_183_1_23_13_tsni = function showMovesAfter_inst_182_183_
           }
         };
         tmp5 = showMove_inst_182_183_1_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_182_183_1_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_182_183_1_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -98196,7 +98196,7 @@ showMovesAfter_inst_182_183_1_2_13_tsni = function showMovesAfter_inst_182_183_1
           }
         };
         tmp5 = showMove_inst_182_183_1_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_182_183_1_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_182_183_1_2_13_21_tsni(tmp5, tmp7);
         return append_inst_182_183_1_2_13_20_tsni(tmp, tmp8)
@@ -99634,7 +99634,7 @@ showMovesAfter_inst_184_183_25_23_13_tsni = function showMovesAfter_inst_184_183
           }
         };
         tmp5 = showMove_inst_184_183_25_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_184_183_25_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_184_183_25_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -100462,7 +100462,7 @@ showMovesAfter_inst_184_183_25_2_13_tsni = function showMovesAfter_inst_184_183_
           }
         };
         tmp5 = showMove_inst_184_183_25_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_184_183_25_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_184_183_25_2_13_21_tsni(tmp5, tmp7);
         return append_inst_184_183_25_2_13_20_tsni(tmp, tmp8)
@@ -101821,7 +101821,7 @@ showMovesAfter_inst_184_183_1_23_13_tsni = function showMovesAfter_inst_184_183_
           }
         };
         tmp5 = showMove_inst_184_183_1_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_184_183_1_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_184_183_1_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -102649,7 +102649,7 @@ showMovesAfter_inst_184_183_1_2_13_tsni = function showMovesAfter_inst_184_183_1
           }
         };
         tmp5 = showMove_inst_184_183_1_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_184_183_1_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_184_183_1_2_13_21_tsni(tmp5, tmp7);
         return append_inst_184_183_1_2_13_20_tsni(tmp, tmp8)
@@ -104103,7 +104103,7 @@ showMovesAfter_inst_185_186_183_1_2_13_tsni = function showMovesAfter_inst_185_1
           }
         };
         tmp5 = showMove_inst_185_186_183_1_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_185_186_183_1_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_185_186_183_1_2_13_21_tsni(tmp5, tmp7);
         return append_inst_185_186_183_1_2_13_20_tsni(tmp, tmp8)
@@ -104977,7 +104977,7 @@ showMovesAfter_inst_185_186_183_1_23_13_tsni = function showMovesAfter_inst_185_
           }
         };
         tmp5 = showMove_inst_185_186_183_1_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_185_186_183_1_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_185_186_183_1_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -106290,7 +106290,7 @@ showMovesAfter_inst_185_186_183_25_2_13_tsni = function showMovesAfter_inst_185_
           }
         };
         tmp5 = showMove_inst_185_186_183_25_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_185_186_183_25_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_185_186_183_25_2_13_21_tsni(tmp5, tmp7);
         return append_inst_185_186_183_25_2_13_20_tsni(tmp, tmp8)
@@ -107164,7 +107164,7 @@ showMovesAfter_inst_185_186_183_25_23_13_tsni = function showMovesAfter_inst_185
           }
         };
         tmp5 = showMove_inst_185_186_183_25_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_185_186_183_25_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_185_186_183_25_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -108477,7 +108477,7 @@ showMovesAfter_inst_185_187_2_13_tsni = function showMovesAfter_inst_185_187_2_1
           }
         };
         tmp5 = showMove_inst_185_187_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_185_187_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_185_187_2_13_21_tsni(tmp5, tmp7);
         return append_inst_185_187_2_13_20_tsni(tmp, tmp8)
@@ -109351,7 +109351,7 @@ showMovesAfter_inst_185_187_23_13_tsni = function showMovesAfter_inst_185_187_23
           }
         };
         tmp5 = showMove_inst_185_187_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_185_187_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_185_187_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -110109,14 +110109,14 @@ replies_inst_188_189_tsni = function replies_inst_188_189_tsni(bd, c, n) {
   if (scrut1 === true) {
     scrut2 = NofibPrelude.null_(mds);
     if (scrut2 === true) {
-      return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+      return NofibPrelude.Some(NofibPrelude.Nil)
     } else {
       return NofibPrelude.None
     }
   } else {
     scrut = n > 0;
     if (scrut === true) {
-      tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+      tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
       solnAnd$this = runtime.safeCall(solnAnd_inst_188_189_tsni(c, n));
       return mate.foldr_lz(solnAnd$this, tmp1, mds)
     } else {
@@ -113127,7 +113127,7 @@ lambda$_inst_188_189_81_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_188
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -113149,7 +113149,7 @@ lambda$_inst_188_189_81_30_31_32_57_64_79_80_tsni = function lambda$_inst_188_18
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -116136,7 +116136,7 @@ lambda$_inst_188_189_29_30_31_32_57_58_59_79_80_tsni = function lambda$_inst_188
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -116158,7 +116158,7 @@ lambda$_inst_188_189_29_30_31_32_57_64_79_80_tsni = function lambda$_inst_188_18
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -116783,7 +116783,7 @@ showMovesAfter_inst_188_190_187_23_13_tsni = function showMovesAfter_inst_188_19
           }
         };
         tmp5 = showMove_inst_188_190_187_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_188_190_187_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_188_190_187_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -117611,7 +117611,7 @@ showMovesAfter_inst_188_190_187_2_13_tsni = function showMovesAfter_inst_188_190
           }
         };
         tmp5 = showMove_inst_188_190_187_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_188_190_187_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_188_190_187_2_13_21_tsni(tmp5, tmp7);
         return append_inst_188_190_187_2_13_20_tsni(tmp, tmp8)
@@ -119042,7 +119042,7 @@ showMovesAfter_inst_188_190_186_183_25_23_13_tsni = function showMovesAfter_inst
           }
         };
         tmp5 = showMove_inst_188_190_186_183_25_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_188_190_186_183_25_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_188_190_186_183_25_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -119870,7 +119870,7 @@ showMovesAfter_inst_188_190_186_183_25_2_13_tsni = function showMovesAfter_inst_
           }
         };
         tmp5 = showMove_inst_188_190_186_183_25_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_188_190_186_183_25_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_188_190_186_183_25_2_13_21_tsni(tmp5, tmp7);
         return append_inst_188_190_186_183_25_2_13_20_tsni(tmp, tmp8)
@@ -121229,7 +121229,7 @@ showMovesAfter_inst_188_190_186_183_1_23_13_tsni = function showMovesAfter_inst_
           }
         };
         tmp5 = showMove_inst_188_190_186_183_1_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_188_190_186_183_1_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_188_190_186_183_1_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -122057,7 +122057,7 @@ showMovesAfter_inst_188_190_186_183_1_2_13_tsni = function showMovesAfter_inst_1
           }
         };
         tmp5 = showMove_inst_188_190_186_183_1_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_188_190_186_183_1_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_188_190_186_183_1_2_13_21_tsni(tmp5, tmp7);
         return append_inst_188_190_186_183_1_2_13_20_tsni(tmp, tmp8)
@@ -124283,7 +124283,7 @@ showMovesAfter_inst_191_195_190_186_183_1_2_13_tsni = function showMovesAfter_in
           }
         };
         tmp5 = showMove_inst_191_195_190_186_183_1_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_191_195_190_186_183_1_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_191_195_190_186_183_1_2_13_21_tsni(tmp5, tmp7);
         return append_inst_191_195_190_186_183_1_2_13_20_tsni(tmp, tmp8)
@@ -125157,7 +125157,7 @@ showMovesAfter_inst_191_195_190_186_183_1_23_13_tsni = function showMovesAfter_i
           }
         };
         tmp5 = showMove_inst_191_195_190_186_183_1_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_191_195_190_186_183_1_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_191_195_190_186_183_1_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -126470,7 +126470,7 @@ showMovesAfter_inst_191_195_190_186_183_25_2_13_tsni = function showMovesAfter_i
           }
         };
         tmp5 = showMove_inst_191_195_190_186_183_25_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_191_195_190_186_183_25_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_191_195_190_186_183_25_2_13_21_tsni(tmp5, tmp7);
         return append_inst_191_195_190_186_183_25_2_13_20_tsni(tmp, tmp8)
@@ -127344,7 +127344,7 @@ showMovesAfter_inst_191_195_190_186_183_25_23_13_tsni = function showMovesAfter_
           }
         };
         tmp5 = showMove_inst_191_195_190_186_183_25_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_191_195_190_186_183_25_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_191_195_190_186_183_25_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -128657,7 +128657,7 @@ showMovesAfter_inst_191_195_190_187_2_13_tsni = function showMovesAfter_inst_191
           }
         };
         tmp5 = showMove_inst_191_195_190_187_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_191_195_190_187_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_191_195_190_187_2_13_21_tsni(tmp5, tmp7);
         return append_inst_191_195_190_187_2_13_20_tsni(tmp, tmp8)
@@ -129531,7 +129531,7 @@ showMovesAfter_inst_191_195_190_187_23_13_tsni = function showMovesAfter_inst_19
           }
         };
         tmp5 = showMove_inst_191_195_190_187_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_191_195_190_187_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_191_195_190_187_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -130289,14 +130289,14 @@ replies_inst_191_195_189_tsni = function replies_inst_191_195_189_tsni(bd, c, n)
   if (scrut1 === true) {
     scrut2 = NofibPrelude.null_(mds);
     if (scrut2 === true) {
-      return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+      return NofibPrelude.Some(NofibPrelude.Nil)
     } else {
       return NofibPrelude.None
     }
   } else {
     scrut = n > 0;
     if (scrut === true) {
-      tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+      tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
       solnAnd$this = runtime.safeCall(solnAnd_inst_191_195_189_tsni(c, n));
       return mate.foldr_lz(solnAnd$this, tmp1, mds)
     } else {
@@ -133294,7 +133294,7 @@ lambda$_inst_191_195_189_29_30_31_32_57_64_79_80_tsni = function lambda$_inst_19
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -133313,7 +133313,7 @@ lambda$_inst_191_195_189_29_30_31_32_57_58_59_79_80_tsni = function lambda$_inst
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -136301,7 +136301,7 @@ lambda$_inst_191_195_189_81_30_31_32_57_64_79_80_tsni = function lambda$_inst_19
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -136320,7 +136320,7 @@ lambda$_inst_191_195_189_81_30_31_32_57_58_59_79_80_tsni = function lambda$_inst
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -136420,14 +136420,14 @@ replies_inst_197_198_195_189_tsni = function replies_inst_197_198_195_189_tsni(b
   if (scrut1 === true) {
     scrut2 = NofibPrelude.null_(mds);
     if (scrut2 === true) {
-      return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+      return NofibPrelude.Some(NofibPrelude.Nil)
     } else {
       return NofibPrelude.None
     }
   } else {
     scrut = n > 0;
     if (scrut === true) {
-      tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+      tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
       solnAnd$this = runtime.safeCall(solnAnd_inst_197_198_195_189_tsni(c, n));
       return mate.foldr_lz(solnAnd$this, tmp1, mds)
     } else {
@@ -139438,7 +139438,7 @@ lambda$_inst_197_198_195_189_81_30_31_32_57_58_59_79_80_tsni = function lambda$_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -139460,7 +139460,7 @@ lambda$_inst_197_198_195_189_81_30_31_32_57_64_79_80_tsni = function lambda$_ins
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -142447,7 +142447,7 @@ lambda$_inst_197_198_195_189_29_30_31_32_57_58_59_79_80_tsni = function lambda$_
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -142469,7 +142469,7 @@ lambda$_inst_197_198_195_189_29_30_31_32_57_64_79_80_tsni = function lambda$_ins
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
+  tmp = NofibPrelude.Some(param);
   _deforest_Move_a = arr;
   _deforest_Move_b = mcp;
   _deforest_Move_c = tmp;
@@ -143094,7 +143094,7 @@ showMovesAfter_inst_197_198_195_190_187_23_13_tsni = function showMovesAfter_ins
           }
         };
         tmp5 = showMove_inst_197_198_195_190_187_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_197_198_195_190_187_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_197_198_195_190_187_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -143922,7 +143922,7 @@ showMovesAfter_inst_197_198_195_190_187_2_13_tsni = function showMovesAfter_inst
           }
         };
         tmp5 = showMove_inst_197_198_195_190_187_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_197_198_195_190_187_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_197_198_195_190_187_2_13_21_tsni(tmp5, tmp7);
         return append_inst_197_198_195_190_187_2_13_20_tsni(tmp, tmp8)
@@ -145353,7 +145353,7 @@ showMovesAfter_inst_197_198_195_190_186_183_25_23_13_tsni = function showMovesAf
           }
         };
         tmp5 = showMove_inst_197_198_195_190_186_183_25_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_197_198_195_190_186_183_25_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_197_198_195_190_186_183_25_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -146181,7 +146181,7 @@ showMovesAfter_inst_197_198_195_190_186_183_25_2_13_tsni = function showMovesAft
           }
         };
         tmp5 = showMove_inst_197_198_195_190_186_183_25_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_197_198_195_190_186_183_25_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_197_198_195_190_186_183_25_2_13_21_tsni(tmp5, tmp7);
         return append_inst_197_198_195_190_186_183_25_2_13_20_tsni(tmp, tmp8)
@@ -147540,7 +147540,7 @@ showMovesAfter_inst_197_198_195_190_186_183_1_23_13_tsni = function showMovesAft
           }
         };
         tmp5 = showMove_inst_197_198_195_190_186_183_1_23_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_197_198_195_190_186_183_1_23_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_197_198_195_190_186_183_1_23_13_21_tsni(tmp5, tmp7);
         return NofibPrelude.append(tmp, tmp8)
@@ -148368,7 +148368,7 @@ showMovesAfter_inst_197_198_195_190_186_183_1_2_13_tsni = function showMovesAfte
           }
         };
         tmp5 = showMove_inst_197_198_195_190_186_183_1_2_13_14_tsni(tmp3, tmp4);
-        tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+        tmp6 = mate.MoveInFull(p, sq, d_);
         tmp7 = showMovesAfter_inst_197_198_195_190_186_183_1_2_13_tsni(tmp6, mifs1);
         tmp8 = append_inst_197_198_195_190_186_183_1_2_13_21_tsni(tmp5, tmp7);
         return append_inst_197_198_195_190_186_183_1_2_13_20_tsni(tmp, tmp8)
@@ -152585,14 +152585,14 @@ solnOr$ = function solnOr$(c, n, mifb, other) {
         scrut = kingincheck_inst_28_82_tsni(tmp3, b);
         if (scrut === true) {
           tmp4 = mate1.Solution(mif, NofibPrelude.Nil);
-          return runtime.safeCall(NofibPrelude.Some(tmp4))
+          return NofibPrelude.Some(tmp4)
         } else {
           return NofibPrelude.force(other)
         }
       } else {
         rs = param0;
         tmp5 = mate1.Solution(mif, rs);
-        return runtime.safeCall(NofibPrelude.Some(tmp5))
+        return NofibPrelude.Some(tmp5)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -153147,8 +153147,8 @@ lambda$6 = function lambda$(mcp, x, y, param) {
     x,
     y
   ]);
-  tmp = runtime.safeCall(NofibPrelude.Some(param));
-  return runtime.safeCall(mate1.Move(arr, mcp, tmp))
+  tmp = NofibPrelude.Some(param);
+  return mate1.Move(arr, mcp, tmp)
 };
 lambda23 = (undefined, function (mcp, x, y) {
   return (param) => {
@@ -153226,7 +153226,7 @@ promote$ = function promote$(c, xy, mcp) {
         x,
         y
       ]);
-      tmp7 = runtime.safeCall(mate1.Move(arr4, mcp, NofibPrelude.None));
+      tmp7 = mate1.Move(arr4, mcp, NofibPrelude.None);
       return NofibPrelude.Cons(tmp7, NofibPrelude.Nil)
     }
   } else {
@@ -153254,7 +153254,7 @@ lscomp2$ = function lscomp2$(c, bd, sq, sqs, ls) {
       tmp1 = tmp === c;
       scrut = ! tmp1;
       if (scrut === true) {
-        tmp2 = runtime.safeCall(NofibPrelude.Some(p_));
+        tmp2 = NofibPrelude.Some(p_);
         tmp3 = promote$_inst_107_59_tsni(c, sq, tmp2);
         tmp4 = lscomp2$(c, bd, sq, sqs, ls1);
         return NofibPrelude.Cons(tmp3, tmp4)
@@ -153626,7 +153626,7 @@ pieceAtWith$ = function pieceAtWith$(sq, c, n, ls) {
           c,
           k
         ]);
-        return runtime.safeCall(NofibPrelude.Some(arr))
+        return NofibPrelude.Some(arr)
       } else {
         return pieceAtWith$(sq, c, n, xs)
       }
@@ -153684,16 +153684,27 @@ lambda = (undefined, function (a, b) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 });
-(class mate {
+globalThis.Object.freeze(class mate {
   static {
-    mate1 = mate;
+    mate1 = this
+  }
+  constructor() {
+    runtime.Unit;
+  }
+  static {
     let tmp;
-    this.Kind = class Kind {
+    globalThis.Object.freeze(class Kind {
+      static {
+        mate.Kind = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Kind"]; 
-    };
-    const King$class = class King extends mate.Kind {
+    });
+    globalThis.Object.freeze(class King extends mate.Kind {
+      static {
+        mate.King = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -153702,9 +153713,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "King"]; 
-    };
-    this.King = globalThis.Object.freeze(new King$class);
-    const Queen$class = class Queen extends mate.Kind {
+    });
+    globalThis.Object.freeze(class Queen extends mate.Kind {
+      static {
+        mate.Queen = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -153713,9 +153726,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Queen"]; 
-    };
-    this.Queen = globalThis.Object.freeze(new Queen$class);
-    const Rook$class = class Rook extends mate.Kind {
+    });
+    globalThis.Object.freeze(class Rook extends mate.Kind {
+      static {
+        mate.Rook = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -153724,9 +153739,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Rook"]; 
-    };
-    this.Rook = globalThis.Object.freeze(new Rook$class);
-    const Bishop$class = class Bishop extends mate.Kind {
+    });
+    globalThis.Object.freeze(class Bishop extends mate.Kind {
+      static {
+        mate.Bishop = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -153735,9 +153752,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Bishop"]; 
-    };
-    this.Bishop = globalThis.Object.freeze(new Bishop$class);
-    const Knight$class = class Knight extends mate.Kind {
+    });
+    globalThis.Object.freeze(class Knight extends mate.Kind {
+      static {
+        mate.Knight = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -153746,9 +153765,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Knight"]; 
-    };
-    this.Knight = globalThis.Object.freeze(new Knight$class);
-    const Pawn$class = class Pawn extends mate.Kind {
+    });
+    globalThis.Object.freeze(class Pawn extends mate.Kind {
+      static {
+        mate.Pawn = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -153757,14 +153778,19 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Pawn"]; 
-    };
-    this.Pawn = globalThis.Object.freeze(new Pawn$class);
-    this.Colour = class Colour {
+    });
+    globalThis.Object.freeze(class Colour {
+      static {
+        mate.Colour = this
+      }
       constructor() {}
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "Colour"]; 
-    };
-    const Black$class = class Black extends mate.Colour {
+    });
+    globalThis.Object.freeze(class Black extends mate.Colour {
+      static {
+        mate.Black = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -153773,9 +153799,11 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "Black"]; 
-    };
-    this.Black = globalThis.Object.freeze(new Black$class);
-    const White$class = class White extends mate.Colour {
+    });
+    globalThis.Object.freeze(class White extends mate.Colour {
+      static {
+        mate.White = globalThis.Object.freeze(new this)
+      }
       constructor() {
         super();
         Object.defineProperty(this, "class", {
@@ -153784,81 +153812,80 @@ lambda = (undefined, function (a, b) {
       }
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["object", "White"]; 
-    };
-    this.White = globalThis.Object.freeze(new White$class);
+    });
     this.Board = function Board(a, b) {
       return globalThis.Object.freeze(new Board.class(a, b));
     };
-    Object.defineProperty(this.Board, "class", {
-      enumerable: true,
-      value: class Board {
-        constructor(a, b) {
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Board", ["a", "b"]]; 
+    globalThis.Object.freeze(class Board {
+      static {
+        mate.Board.class = this
       }
+      constructor(a, b) {
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Board", ["a", "b"]]; 
     });
     this.Move = function Move(a, b, c) {
       return globalThis.Object.freeze(new Move.class(a, b, c));
     };
-    Object.defineProperty(this.Move, "class", {
-      enumerable: true,
-      value: class Move {
-        constructor(a, b, c) {
-          this.a = a;
-          this.b = b;
-          this.c = c;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Move", ["a", "b", "c"]]; 
+    globalThis.Object.freeze(class Move {
+      static {
+        mate.Move.class = this
       }
+      constructor(a, b, c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Move", ["a", "b", "c"]]; 
     });
     this.MoveInFull = function MoveInFull(a, b, c) {
       return globalThis.Object.freeze(new MoveInFull.class(a, b, c));
     };
-    Object.defineProperty(this.MoveInFull, "class", {
-      enumerable: true,
-      value: class MoveInFull {
-        constructor(a, b, c) {
-          this.a = a;
-          this.b = b;
-          this.c = c;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "MoveInFull", ["a", "b", "c"]]; 
+    globalThis.Object.freeze(class MoveInFull {
+      static {
+        mate.MoveInFull.class = this
       }
+      constructor(a, b, c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "MoveInFull", ["a", "b", "c"]]; 
     });
     this.Solution = function Solution(a, b) {
       return globalThis.Object.freeze(new Solution.class(a, b));
     };
-    Object.defineProperty(this.Solution, "class", {
-      enumerable: true,
-      value: class Solution {
-        constructor(a, b) {
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Solution", ["a", "b"]]; 
+    globalThis.Object.freeze(class Solution {
+      static {
+        mate.Solution.class = this
       }
+      constructor(a, b) {
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Solution", ["a", "b"]]; 
     });
     tmp = mate.Board(NofibPrelude.Nil, NofibPrelude.Nil);
     this.emptyBoard = tmp;
     this.Soln = function Soln(a, b) {
       return globalThis.Object.freeze(new Soln.class(a, b));
     };
-    Object.defineProperty(this.Soln, "class", {
-      enumerable: true,
-      value: class Soln {
-        constructor(a, b) {
-          this.a = a;
-          this.b = b;
-        }
-        toString() { return runtime.render(this); }
-        static [definitionMetadata] = ["class", "Soln", ["a", "b"]]; 
+    globalThis.Object.freeze(class Soln {
+      static {
+        mate.Soln.class = this
       }
+      constructor(a, b) {
+        this.a = a;
+        this.b = b;
+      }
+      toString() { return runtime.render(this); }
+      static [definitionMetadata] = ["class", "Soln", ["a", "b"]]; 
     });
   }
   static rqpart(le, x, ys, rle, rgt, r) {
@@ -154666,7 +154693,7 @@ lambda = (undefined, function (a, b) {
             }
           };
           tmp5 = showMove_inst_143_14_tsni(tmp3, tmp4);
-          tmp6 = runtime.safeCall(mate.MoveInFull(p, sq, d_));
+          tmp6 = mate.MoveInFull(p, sq, d_);
           tmp7 = mate.showMovesAfter(tmp6, mifs1);
           tmp8 = append_inst_143_21_tsni(tmp5, tmp7);
           return NofibPrelude.append(tmp, tmp8)
@@ -155018,13 +155045,13 @@ lambda = (undefined, function (a, b) {
         tmp5 = kingincheck_inst_154_77_tsni(c, bd2);
         scrut = ! tmp5;
         if (scrut === true) {
-          tmp6 = runtime.safeCall(mate.Move(sq_, mcp, mpp));
-          tmp7 = runtime.safeCall(mate.MoveInFull(p, sq, tmp6));
+          tmp6 = mate.Move(sq_, mcp, mpp);
+          tmp7 = mate.MoveInFull(p, sq, tmp6);
           arr1 = globalThis.Object.freeze([
             tmp7,
             bd2
           ]);
-          return runtime.safeCall(NofibPrelude.Some(arr1))
+          return NofibPrelude.Some(arr1)
         } else {
           return NofibPrelude.None
         }
@@ -155249,14 +155276,14 @@ lambda = (undefined, function (a, b) {
     if (scrut1 === true) {
       scrut2 = NofibPrelude.null_(mds);
       if (scrut2 === true) {
-        return runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil))
+        return NofibPrelude.Some(NofibPrelude.Nil)
       } else {
         return NofibPrelude.None
       }
     } else {
       scrut = n > 0;
       if (scrut === true) {
-        tmp1 = runtime.safeCall(NofibPrelude.Some(NofibPrelude.Nil));
+        tmp1 = NofibPrelude.Some(NofibPrelude.Nil);
         solnAnd$this = runtime.safeCall(solnAnd_inst_178_tsni(c, n));
         return mate.foldr_lz(solnAnd$this, tmp1, mds)
       } else {
@@ -155449,7 +155476,7 @@ lambda = (undefined, function (a, b) {
     tmp = testMate_nofib_inst_197_198_tsni(0);
     return NofibPrelude.nofibListToString(tmp)
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "mate"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "mate"]; 
 });
 let mate = mate1; export default mate;

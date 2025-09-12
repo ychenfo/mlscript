@@ -1362,9 +1362,12 @@ lambda1 = (undefined, function (es) {
     return lambda$_inst_5_6_tsni(es, x)
   }
 });
-(class scc {
+globalThis.Object.freeze(class scc {
   static {
-    scc1 = scc;
+    scc1 = this
+  }
+  constructor() {
+    runtime.Unit;
   }
   static dfs(r, vsns, xs) {
     let first1, first0, vs, ns, param0, param1, x, xs1, scrut, first11, first01, vs$_, ns$_, scrut1, arr, arr1, tmp, arr2, tmp1, tmp2, tmp3, arr3;
@@ -1548,7 +1551,7 @@ lambda1 = (undefined, function (es) {
     tmp = testScc_nofib_inst_17_18_tsni(0);
     return runtime.safeCall(tmp.toString())
   }
-  static toString() { return runtime.render(this); }
-  static [definitionMetadata] = ["module", "scc"]; 
+  toString() { return runtime.render(this); }
+  static [definitionMetadata] = ["class", "scc"]; 
 });
 let scc = scc1; export default scc;
