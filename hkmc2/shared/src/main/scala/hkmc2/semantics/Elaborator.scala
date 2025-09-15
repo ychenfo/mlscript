@@ -256,7 +256,6 @@ object Elaborator:
         .toMap
       baseBuiltins ++ aliasOps.map:
         case (alias, base) => alias -> baseBuiltins(base)
-    val seqSymbol = TermSymbol(ImmutVal, N, Ident(";"))
     val importedFileNameToSemBlk = mutable.Map.empty[os.Path, Blk -> BlockMemberSymbol -> Ctx]
     val andSymbol = builtinOpsMap("&&")
     val orSymbol = builtinOpsMap("||")

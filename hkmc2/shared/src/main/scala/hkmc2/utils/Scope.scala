@@ -47,6 +47,7 @@ case class Scope
     die
   
   def addToBindings(symbol: Local, name: String, shadow: Bool) =
+    // FIXME: deforestation makes this assertion fail
     // if !shadow then assert(lookup(symbol).isEmpty, (symbol, this.showAsTree))
     bindings += symbol -> name
     existingNames += name

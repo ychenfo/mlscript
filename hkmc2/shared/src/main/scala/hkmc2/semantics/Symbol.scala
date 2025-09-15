@@ -28,7 +28,6 @@ abstract class Symbol(using State) extends Located:
     res
   def refsNumber: Int = directRefs.size
   
-  def isModule: Bool = asMod.nonEmpty
   def isFunction: Bool = asBlkMember.exists(b => b.isFunctionSymbol)
   def existsNonModuleful: Bool = this match
     case mod: ModuleOrObjectSymbol => !(mod.tree.k is Mod)
