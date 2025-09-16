@@ -1,0 +1,630 @@
+:js
+
+data class A(x)
+data class B(x)
+data object C
+data object D
+data class (::) Cons(h, t)
+object Nil
+
+
+
+:deforest
+fun to(n, acc) = if n == 0 then acc else to(n - 1, n :: acc)
+fun f1(ls1, acc) = if ls1 is
+  Nil then acc
+  h :: t then f1(t, acc + h)
+fun f2(ls2, acc) = if ls2 is
+  Nil then acc
+  hh :: tt then f2(tt, acc + hh + 1)
+f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
+//│ = 51
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@6@inst__tsni --> Ref(ls1)@inst_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(n)), Arg(None,Ref(acc))))@7@inst_0_tsni --> Ref(ls1)@inst_3_tsni@Cons
+//│ Ref(member:Nil)@8@inst__tsni --> Ref(ls2)@inst_4_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(n)), Arg(None,Ref(acc))))@7@inst_1_tsni --> Ref(ls2)@inst_4_tsni@Cons
+//│ Ref(member:Nil)@9@inst__tsni --> Ref(ls1)@inst_5_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(n)), Arg(None,Ref(acc))))@7@inst_2_tsni --> Ref(ls1)@inst_5_tsni@Cons
+//│ -------------- executing -------------
+//│ = 51
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun id(x) = x
+fun f1(a1) = if a1 is A then 1
+fun f2(a2) = if a2 is A then 2
+f1(id(A(1))) + f2(id(A(2)))
+//│ = 3
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(2)))))@2@inst__tsni --> Ref(a2)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(1)))))@3@inst__tsni --> Ref(a1)@inst_1_tsni@A
+//│ -------------- executing -------------
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun p(x) = A(x)
+fun wrap1(x) = p(x)
+fun wrap(x) = wrap1(x)
+fun f1(a1) = if a1 is A then 1
+fun f2(a2) = if a2 is A then 2
+f1(wrap(1)) + f2(wrap(2))
+//│ = 3
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@6@inst_0_1_2_tsni --> Ref(a2)@inst_4_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@6@inst_3_1_2_tsni --> Ref(a1)@inst_5_tsni@A
+//│ -------------- executing -------------
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun f(x) = if x == 0 then Nil else x :: g(x - 1)
+fun g(y) = if y == 0 then Nil else y :: f(y - 1)
+fun cons(a) = if a is
+  Nil then 0
+  h :: t then h + cons(t)
+fun cons1(a1) = if a1 is
+  Nil then 1
+  h :: t then h + cons1(t)
+cons(f(0)) + cons1(f(1))
+//│ = 2
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@4@inst_0_tsni --> Ref(a1)@inst_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(x)), Arg(None,Ref($tmp))))@5@inst_0_tsni --> Ref(a1)@inst_2_tsni@Cons
+//│ Ref(member:Nil)@6@inst_0_tsni --> Ref(a1)@inst_2_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(y)), Arg(None,Ref($tmp))))@7@inst_0_tsni --> Ref(a1)@inst_2_tsni@Cons
+//│ Ref(member:Nil)@4@inst_1_tsni --> Ref(a)@inst_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(x)), Arg(None,Ref($tmp))))@5@inst_1_tsni --> Ref(a)@inst_3_tsni@Cons
+//│ Ref(member:Nil)@6@inst_1_tsni --> Ref(a)@inst_3_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref(y)), Arg(None,Ref($tmp))))@7@inst_1_tsni --> Ref(a)@inst_3_tsni@Cons
+//│ -------------- executing -------------
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun map(ls, f) = if ls is
+  Nil then Nil
+  h :: t then f(h) :: map(t, f)
+map(map(1 :: 2 :: Nil, x => x + 1), x => x * 2)
+//│ = Cons(4, Cons(6, Nil))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@2@inst_0_tsni --> Ref(ls)@inst_1_tsni@Nil
+//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@3@inst_0_tsni --> Ref(ls)@inst_1_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref($tmp))))@4@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(2))), Arg(None,Ref(member:Nil))))@5@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@6@inst__tsni --> Ref(ls)@inst_0_tsni@Nil
+//│ -------------- executing -------------
+//│ = Cons(4, Cons(6, Nil))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// for selection
+:deforest
+fun map(ls, f) = if ls is
+  Nil then Nil
+  h :: t then f(h) :: map(t, f)
+map(1 :: 2 :: Nil, x => x + 1)
+//│ = Cons(2, Cons(3, Nil))
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref($tmp))))@1@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(2))), Arg(None,Ref(member:Nil))))@2@inst__tsni --> Ref(ls)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@3@inst__tsni --> Ref(ls)@inst_0_tsni@Nil
+//│ -------------- executing -------------
+//│ = Cons(2, Cons(3, Nil))
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// for cyclic strategies removal
+:deforest
+fun f(x) = if x is
+  A(_) then f(A(2))
+  else 0
+f(Nil)
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(2)))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@A
+//│ Ref(member:Nil)@2@inst__tsni --> Ref(x)@inst_0_tsni@dflt
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// for selection filter
+:deforest
+fun c1(x) = if x is
+  h :: t then
+    if t is
+      Nil then 0
+c1(1 :: Nil)
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:Cons),List(Arg(None,Lit(IntLit(1))), Arg(None,Ref(member:Nil))))@1@inst__tsni --> Ref(x)@inst_0_tsni@Cons
+//│ Ref(member:Nil)@2@inst__tsni --> Ref(t)@inst_0_tsni@Nil
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+// for selection filter
+:deforest
+fun f(x) = if x is
+  A then g1(x.x)
+  B then g2(x.x)
+fun g1(y1) = if y1 is
+  A then 0
+fun g2(y2) = if y2 is
+  A then 1
+fun apply(f) =
+  let inner = A(0)
+  f(A(inner))
+apply(f)
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Ref(inner))))@3@inst_0_tsni --> Ref(x)@inst_1_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(0)))))@4@inst_0_tsni --> Ref(y1)@inst_1_2_tsni@A
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+:deforest
+fun inner(y, z) = if y is
+  B then z
+fun dtor(x) = if x is
+  A then inner(B(4), x.x)
+dtor(A(B(0)))
+//│ = B(0)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:B),List(Arg(None,Lit(IntLit(4)))))@3@inst_0_tsni --> Ref(y)@inst_0_2_tsni@B
+//│ Call(Ref(member:B),List(Arg(None,Lit(IntLit(4)))))@3@inst_1_tsni --> Ref(y)@inst_1_2_tsni@B
+//│ Call(Ref(member:A),List(Arg(None,Ref($tmp))))@4@inst__tsni --> Ref(x)@inst_1_tsni@A
+//│ -------------- executing -------------
+//│ = B(0)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun localFuse(x) = if A(x) is
+  A(y) then B(y)
+if localFuse(3) is
+  B(a) then a
+localFuse(4)
+//│ = B(4)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@3@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@3@inst_2_tsni --> Ref($scrut)@inst_2_tsni@A
+//│ Call(Ref(member:B),List(Arg(None,Ref(y))))@4@inst_2_tsni --> Ref($scrut)@inst__tsni@B
+//│ -------------- executing -------------
+//│ = B(4)
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+// cyclic strategy, shouldn't fuse
+:deforest
+fun f(x) =
+  let res = if x is
+    A(x) then x
+  if res > 0 then f(A(res - 1)) else 0
+f(A(4))
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Ref($tmp))))@1@inst_0_tsni --> Ref(x)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(4)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+// shouldn't have any fusion due to strategy clash
+:deforest
+fun g(x) = if x is
+  A(a) then a
+fun f(x) = x.x
+let o = A(1)
+g(o) + f(o) + o.x
+//│ = 3
+//│ o = A(1)
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ 
+//│ -------------- executing -------------
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+:deforest
+fun f(x) = if x is
+  A(x) then x
+f(A(1))
+//│ = 1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(1)))))@1@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ -------------- executing -------------
+//│ = 1
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun f(x) = if x is
+  A(a) then x.x + a
+f(A(1))
+//│ = 2
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(1)))))@1@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ -------------- executing -------------
+//│ = 2
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+:deforest
+fun p(x) = A(x)
+fun wrap1(x) = p(x)
+fun wrap(x) = wrap1(x)
+fun f1(a1) = if a1 is A then 1
+fun f2(a2) = if a2 is A then 2
+f1(wrap(1)) + f2(wrap(2))
+//│ = 3
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@6@inst_0_1_2_tsni --> Ref(a2)@inst_4_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@6@inst_3_1_2_tsni --> Ref(a1)@inst_5_tsni@A
+//│ -------------- executing -------------
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun p1(x) = p2(x)
+fun p2(x) = if x == 0 then A(x) else p1(x - 1)
+fun c(a) = if a is A(x) then x
+c(p1(3))
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Ref(x))))@2@inst_0_tsni --> Ref(a)@inst_1_tsni@A
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+:deforest
+fun f(x) = if x is
+  A(x) then 2
+f(A(2)) + f(A(3))
+//│ = 4
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(3)))))@2@inst__tsni --> Ref(x)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(2)))))@3@inst__tsni --> Ref(x)@inst_1_tsni@A
+//│ -------------- executing -------------
+//│ = 4
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+
+// using `let` to declare local functions helps to avoid the problem
+// caused by reordering nested `fun` functions.
+:deforest
+fun test() =
+  let x = if A(0) is
+    A then 1
+  let f() = x
+  f()
+test()
+//│ = 1
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(0)))))@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(0)))))@2@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
+//│ -------------- executing -------------
+//│ = 1
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:sjs
+:deforest
+if [1, 2] is
+  [a, b] then a + b
+//│ JS (unsanitized):
+//│ let scrut1, first1, first0, a1, b, arr;
+//│ arr = globalThis.Object.freeze([
+//│   1,
+//│   2
+//│ ]);
+//│ scrut1 = arr;
+//│ if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
+//│   first0 = runtime.Tuple.get(scrut1, 0);
+//│   first1 = runtime.Tuple.get(scrut1, 1);
+//│   a1 = first0;
+//│   b = first1;
+//│   a1 + b
+//│ } else { throw globalThis.Object.freeze(new globalThis.Error("match error")) }
+//│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
+//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
+//│ 
+//│ let scrut1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+//│ _deforest_Deforest_Arr_2_0 = 1;
+//│ _deforest_Deforest_Arr_2_1 = 2;
+//│ arr = () => {
+//│   let first1, first0, a1, b;
+//│   first0 = _deforest_Deforest_Arr_2_0;
+//│   first1 = _deforest_Deforest_Arr_2_1;
+//│   a1 = first0;
+//│   b = first1;
+//│   return a1 + b
+//│ };
+//│ scrut1 = arr;
+//│ runtime.safeCall(scrut1())
+//│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
+//│ = 3
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Arr(false,List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(2)))))@0@inst__tsni --> Ref($scrut)@inst__tsni@Deforest_Arr_2
+//│ -------------- executing -------------
+//│ = 3
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun f(x) = if g(false) is
+  A and
+    x < 1 then B(0)
+    else f(x - 1)
+  C then D
+fun g(b) =
+  if b then
+    if f(0) is
+      B then A(0)
+      D then A(1)
+  else
+    C
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(1)))))@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(0)))))@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
+//│ Ref(member:C)@4@inst_0_tsni --> Ref($scrut)@inst_0_tsni@C
+//│ Call(Ref(member:B),List(Arg(None,Lit(IntLit(0)))))@5@inst_1_tsni --> Ref($scrut)@inst_1_tsni@B
+//│ Ref(member:D)@6@inst_1_tsni --> Ref($scrut)@inst_1_tsni@D
+//│ -------------- executing -------------
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+[f(3), g(true)]
+//│ = [D, A(1)]
+
+
+// `y` should not be considered as a free var for the branch
+:deforest
+fun f(ls) = if ls is [] then
+  let y = 4
+  fun h(z) = if z > 0 then h(z - 1) else y
+  h(3)
+f([])
+//│ = 4
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Arr(false,List())@1@inst__tsni --> Ref(ls)@inst_0_tsni@Deforest_Arr_0
+//│ -------------- executing -------------
+//│ = 4
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+:deforest
+fun f(x, b) = if x is
+  Nil then if b then f(Nil, false) else 0
+f(Nil, false)
+//│ = 0
+//│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
+//│ ---------- deforest summary ----------
+//│ Ref(member:Nil)@1@inst_0_tsni --> Ref(x)@inst_0_tsni@Nil
+//│ Ref(member:Nil)@2@inst__tsni --> Ref(x)@inst_0_tsni@Nil
+//│ -------------- executing -------------
+//│ = 0
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+
+
+fun test() =
+  let p = A(1)
+  let a = if p is
+    A(x) then x
+  let b = if p is
+    A(x) then x
+  a + b
+test() + test()
+//│ = 4
+
+
+fun p(d) = A(3)
+fun c1(x) = if x is A then 1
+fun c2(x) = if x is A then 2
+fun test() =
+  c1(p(1)) + c2(p(2))
+test()
+//│ = 3
+
+
+
+fun p(x) = A(x)
+fun f1(a1) = if a1 is A(aa) then aa
+fun f2(a2) = if a2 is A(aa) then aa
+fun f3(a3) = if a3 is A(aa) then aa
+fun f4(a4) = if a4 is A(aa) then aa
+fun f5(a5) = if a5 is A(aa) then aa
+f1(p(1)) + f2(p(2)) + f3(p(3)) + f4(p(4)) + f5(p(5))
+//│ = 15
+
+
+
+// calls to `to` should be able to be duplicated
+fun to(n) =
+  if n > 0 then
+    let m = n - 1
+    n :: to(m)
+  else
+    Nil
+fun f1(ls1) = if ls1 is
+  h :: t then h + f1(t)
+  Nil then 2
+fun f2(ls2) = if ls2 is
+  h :: t then h + f2(t)
+  Nil then 3
+fun f3(ls3) = if ls3 is
+  h :: t then h + f3(t)
+  Nil then 4
+fun f4(ls4) = if ls4 is
+  h :: t then h + f4(t)
+  Nil then 5
+f1(to(4)) + f2(to(5)) + f3(to(6)) + f4(to(7))
+//│ = 88
+
+
+
+fun to(n) =
+  if n > 0 then
+    let m = n - 1
+    n :: to(m)
+  else
+    Nil
+fun f1(ls1) = if ls1 is
+  h :: t then h + f1(t)
+  Nil then 2
+f1(to(4))
+//│ = 12
+
+
+
+fun map(ls, f) = if ls is
+  Nil then Nil
+  h :: t then f(h) :: map(t, f)
+fun succ(x) = x + 1
+fun double(x) = x * 2
+fun test() =
+  map(map(1 :: 2 :: Nil, succ), double)
+test()
+//│ = Cons(4, Cons(6, Nil))
+
+
+
+fun p(x) = A(x)
+fun g1(b) = if b then p(1) else p(2)
+fun wrap(b) = g1(b)
+fun g2(b) = if b then p(3) else p(4)
+fun f1(p) = if p is A(a) then a + 1
+fun f2(p) = if p is A(b) then b + 2
+f1(wrap(true)) + f2(g2(false))
+//│ = 8
+
+
+
+
+fun p(x) = A(x)
+let one = p(1)
+let two = p(2)
+fun f1(p) = if p is A(a) then a + 1
+fun f2(p) = if p is A(b) then b + 2
+fun f3(p) = if p is A(c) then c + 3
+f1(one) + f2(one) + f3(two)
+//│ = 10
+//│ one = A(1)
+//│ two = A(2)
+
+
+
+fun id(x) = x
+fun f1(a) = if a is A(i) then i
+fun f2(a) = if a is A(i) then i + 1
+f1(id(A(1))) + f2(id(A(2)))
+//│ = 4
+
+
+
+
+
+
+
+fun to(n) = if n > 0 then n :: to(n - 1) else Nil
+fun f1(ls) = if ls is
+  h :: t then h
+  Nil then 2
+fun f2(ls) = if ls is
+  h :: t then h + 1
+  Nil then 3
+fun wrap(n) = to(n)
+f1(wrap(4)) + f2(wrap(5))
+//│ = 10
+
+
+
+
+
+
+fun to(n, acc) = if n == 0 then acc else to(n - 1, n :: acc)
+fun f1(ls, acc) = if ls is
+  Nil then acc
+  h :: t then f1(t, acc + h)
+fun f2(ls, acc) = if ls is
+  Nil then acc
+  h :: t then f2(t, acc + h + 1)
+f1(to(4, Nil), 0) + f2(to(5, Nil), 0) + f1(to(6, Nil), 0)
+//│ = 51
+
+
+
+fun map(ls, f) = if ls is
+  Nil then Nil
+  h :: t then f(h) :: map(t, f)
+fun succ(x) = x + 1
+fun double(x) = x * 2
+fun triple(x) = x * 3
+fun test() =
+  map(map(map(1 :: 2 :: Nil, succ), double), triple)
+test()
+// //│ = Cons(12, Cons(18, Nil))
+// //│ duplication chances:
+// //│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:succ)))) <-- dup --> member:map_duplicated@1750
+// //│ 	Call(Ref(member:map),List(Arg(false,Ref($tmp)), Arg(false,Ref(member:double)))) <-- dup --> member:map_duplicated@1750
+// //│ =========
+// //│ No fusion opportunity
+//│ = Cons(12, Cons(18, Nil))
+
+
+
+
+fun p(x) = A(x)
+fun f1(a1) = if a1 is A(a) then a + 1
+fun f2(a2) = if a2 is A(a) then a + 2
+fun wrap(a) = a
+fun test() =
+  f1(wrap(p(2))) + f2(p(1))
+test()
+//│ = 6

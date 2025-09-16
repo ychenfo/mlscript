@@ -67,12 +67,12 @@ object Deforest:
       then os.Path(path)
       else wd / os.RelPath(path)
     assert(file.ext == "mls")
-    val semBlk -> _ -> newCtx = elabSt.importedFileNameToSemBlk(file)
+    val semBlk -> _ = elabSt.importedFileNameToSemBlk(file)
     val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
       val resolver = Resolver(tl)
       resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty)
       val low = codegen.Lowering()(using
-        cfg.copy(liftDefns = S(LiftDefns())), tl, raise, elabSt, newCtx)
+        cfg.copy(liftDefns = S(LiftDefns())), tl, raise, elabSt, ctx)
       low.program(semBlk)
     val traverser = new GetInfoOfImportedFile(cfg.deforest.get)
     traverser(prog.main)

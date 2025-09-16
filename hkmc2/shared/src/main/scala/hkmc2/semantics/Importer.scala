@@ -41,7 +41,7 @@ class Importer:
         Import(sym, file.toString)
         
       case "mls" =>
-        val _ -> sym -> _ =
+        val _ -> sym =
           self.state.importedFileNameToSemBlk.getOrElseUpdate.curried(file):
             tl.trace(s">>> Importing $file"):
               val block = os.read(file)
@@ -61,17 +61,19 @@ class Importer:
               val resBlk = new syntax.Tree.Block(res)
               
               given newCtx: Elaborator.Ctx =
-                if path.contains("NofibPrelude") then // TODO:
+                val shouldFullyElab = config.deforest.fold(false): dConfig =>
+                  dConfig.importedPublicModNames.exists(path.contains)
+                if shouldFullyElab then // TODO:
                   prelude.copy(mode = Mode.Full).nestLocal
                 else
                   prelude.copy(mode = Mode.Light).nestLocal
 
               val elab = Elaborator(tl, file / os.up, prelude)
-              val (semBlk, newnewCtx) = elab.importFrom(resBlk)
+              val (semBlk, _) = elab.importFrom(resBlk)
               
               
               resBlk.definedSymbols.find(_._1 === nme) match
-              case Some(nme -> sym) => semBlk -> sym -> newnewCtx
+              case Some(nme -> sym) => semBlk -> sym
               case None => lastWords(s"File $file does not define a symbol named $nme")
         
         val jsFile = file / os.up / (file.baseName + ".mjs")

@@ -256,7 +256,7 @@ object Elaborator:
         .toMap
       baseBuiltins ++ aliasOps.map:
         case (alias, base) => alias -> baseBuiltins(base)
-    val importedFileNameToSemBlk = mutable.Map.empty[os.Path, Blk -> BlockMemberSymbol -> Ctx]
+    val importedFileNameToSemBlk = mutable.Map.empty[os.Path, Blk -> BlockMemberSymbol]
     val andSymbol = builtinOpsMap("&&")
     val orSymbol = builtinOpsMap("||")
     def init(using State): Ctx = Ctx.empty.copy(env = Map(
