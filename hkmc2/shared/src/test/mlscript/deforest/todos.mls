@@ -322,4 +322,5 @@ fun test() =
 test()
 //│ = Local(2)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ /!!!\ Uncaught error: scala.NotImplementedError: an implementation is missing
+//│ Not deforestable: no support for fun containing a cls like def
+//│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

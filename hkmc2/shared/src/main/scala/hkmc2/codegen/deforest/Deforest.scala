@@ -29,7 +29,8 @@ class GetInfoOfImportedFile(cfg: Config.Deforestation) extends BlockTraverser:
   var forceSymbols: Ls[Symbol] = Nil
   var privateFunSyms = Set.empty[BlockMemberSymbol]
   override def applyDefn(defn: Defn): Unit = defn match
-    case clsLike: ClsLikeDefn if clsLike.companion.isDefined =>
+    case clsLike: ClsLikeDefn
+      if clsLike.companion.isDefined && cfg.importedPublicModNames.contains(clsLike.sym.nme) =>
       val comp = clsLike.companion.get
       innerToOutter = S(comp.isym -> clsLike.sym)
       funAndDefs :::= comp.methods.map(f => f.sym -> f)
@@ -67,8 +68,8 @@ object Deforest:
       then os.Path(path)
       else wd / os.RelPath(path)
     assert(file.ext == "mls")
-    val semBlk -> _ = elabSt.importedFileNameToSemBlk(file)
     val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
+      val semBlk -> _ = elabSt.importedFileNameToSemBlk(file)
       val resolver = Resolver(tl)
       resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty)
       val low = codegen.Lowering()(using
@@ -94,19 +95,15 @@ object Deforest:
     preludeFile: os.Path
   ): Either[Program -> String -> String, String] =    
     val importedInfo =
-        val trulyImported = p.imports
-          .find: (outterSym, path) =>
-            cfg.deforest.get.importedPublicModNames.exists(path.contains)
-          .fold(ImportedInfo.empty): (outterSym, path) =>
-            deforestImport(path.replace(".mjs", ".mls"), wd)
-        trulyImported.copy(funAndDefs = trulyImported.funAndDefs ++ st.topLevelFunInPrevDiffBlocks)
+      val trulyImported = p.imports
+        .find: (outterSym, path) =>
+          cfg.deforest.get.importedPublicModNames.exists(path.contains)
+        .fold(ImportedInfo.empty): (outterSym, path) =>
+          deforestImport(path.replace(".mjs", ".mls"), wd)
+      trulyImported.copy(funAndDefs = trulyImported.funAndDefs ++ st.topLevelFunInPrevDiffBlocks)
     try
-      // val newMain = st.topLevelFunInPrevDiffBlocks.foldRight(p.main):
-      //   case ((fSym, fDef), acc) => Define(fDef, acc)
       val pre = new DeforestPreAnalyzer(p.main, importedInfo)
       val col = new DeforestConstraintsCollector(pre)
-      // col.funSymToProdStratScheme.recursiveGroups.foreach: g =>
-      //   println(g)
       val ana = new DeforestConstrainSolver(col)
       val rwp = new DeforestRewritePrepare(ana)
       val rw = new DeforestRewriter(rwp)
@@ -114,6 +111,7 @@ object Deforest:
         .map: (p, c) =>
           (s"$p --> $c")
         .mkString("\n")
+      
       val summary = rwp.ctorIdToFinalDest
         .map: (ctorid, dest) =>
           pre.getResult(ctorid._1).toString() +
@@ -124,11 +122,7 @@ object Deforest:
           " --> " +
           dest.toString(pre)
         .mkString("\n")
-      // println(detail)
-      // println("++++++++++++++++")
-      // println(summary)
-      // println("++++++++++++++++")
-      // println(rwp.ctorIdToFinalDest)
+
       val deforestRes = rw()
       L:
         Program(p.imports, deforestRes) -> summary -> detail
