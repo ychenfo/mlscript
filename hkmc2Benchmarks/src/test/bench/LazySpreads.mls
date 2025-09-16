@@ -289,14 +289,14 @@ suite.add("EagerBuiltMap2Eager15", () =>
 :ge
 mapEager(..[[1]])
 //│ ╔══[COMPILATION ERROR] Lazy spreads are not supported in call arguments
-//│ ║  l.285: 	mapEager(..[[1]])
+//│ ║  l.290: 	mapEager(..[[1]])
 //│ ╙──       	        ^^^^^^^^^
 //│ ═══[RUNTIME ERROR] Error: Function 'mapEager' expected 1 argument but got 2
 
 :e
 fun what(..args) = args
 //│ ╔══[ERROR] Lazy spread parameters not allowed.
-//│ ║  l.292: 	fun what(..args) = args
+//│ ║  l.297: 	fun what(..args) = args
 //│ ╙──       	         ^^^^^^
 
 fun silly = case

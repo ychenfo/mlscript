@@ -715,11 +715,11 @@ lookupT_inst_7_10_1_tsni = function lookupT_inst_7_10_1_tsni(k, t) {
 };
 testTreejoin_nofib_inst_11_12_tsni = function testTreejoin_nofib_inst_11_12_tsni(n) {
   let c1, c2, a, b, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-  tmp = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/1500.1"));
+  tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.1"));
   tmp1 = runtime.safeCall(tmp.toString());
   tmp2 = NofibPrelude.nofibStringToList(tmp1);
   c1 = tmp2;
-  tmp3 = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
+  tmp3 = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
   tmp4 = runtime.safeCall(tmp3.toString());
   tmp5 = NofibPrelude.nofibStringToList(tmp4);
   c2 = tmp5;
@@ -1357,11 +1357,11 @@ globalThis.Object.freeze(class treejoin {
   } 
   static testTreejoin_nofib(n) {
     let c1, c2, a, b, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-    tmp = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/1500.1"));
+    tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.1"));
     tmp1 = runtime.safeCall(tmp.toString());
     tmp2 = NofibPrelude.nofibStringToList(tmp1);
     c1 = tmp2;
-    tmp3 = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
+    tmp3 = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
     tmp4 = runtime.safeCall(tmp3.toString());
     tmp5 = NofibPrelude.nofibStringToList(tmp4);
     c2 = tmp5;
