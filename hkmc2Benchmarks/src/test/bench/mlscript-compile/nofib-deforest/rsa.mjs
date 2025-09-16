@@ -706,7 +706,7 @@ globalThis.Object.freeze(class rsa {
     this.const2 = tmp3;
     tmp4 = rsa.z_of_int(128);
     this.const128 = tmp4;
-    tmp5 = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/rsa.faststdin"));
+    tmp5 = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/rsa.faststdin"));
     tmp6 = runtime.safeCall(tmp5.toString());
     tmp7 = NofibPrelude.nofibStringToList(tmp6);
     this.intput = tmp7;

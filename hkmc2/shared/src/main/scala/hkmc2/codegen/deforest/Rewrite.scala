@@ -270,30 +270,6 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     matchRestOfFusingMatches.prependAllFunDefs:
       matchArmsOfFusingMatches.prependAllFunDefs:
         withDuplicatedDefs
-    // preAnalyzer.inModuleInfo match
-    // case None =>
-    //   val withDuplicatedDefs = duplicatedDefs.foldRight(Transform(Nil)(preAnalyzer.b)):
-    //     case (newFunDefn, acc) =>
-    //       Define(newFunDefn, acc)
-    //   matchRestOfFusingMatches.prependAllFunDefs:
-    //     matchArmsOfFusingMatches.prependAllFunDefs:
-    //       withDuplicatedDefs
-    // case Some(inMod -> mainBody -> mDef) =>
-    //   val newMainFun = FunDefn(
-    //     S(inMod),
-    //     BlockMemberSymbol("main_deforest", Nil, true),
-    //     PlainParamList(Nil) :: Nil,
-    //     Transform(Nil)(mainBody))
-    //   Define(
-    //     mDef.copy(
-    //       methods = newMainFun ::
-    //         (duplicatedDefs ++
-    //         matchRestOfFusingMatches.getAllFunDefs ++
-    //         matchArmsOfFusingMatches.getAllFunDefs ++
-    //         mDef.methods).toList,
-    //       preCtor = Transform(Nil)(mDef.preCtor),
-    //       ctor = Transform(Nil)(mDef.ctor)),
-    //     End(""))
   
   object matchRestOfFusingMatches:
     // from match scrut expr id to either a function def with a set of args that should be applied
@@ -311,14 +287,8 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     
     // returns the block of match rest, or a `Return` block that calls the function extracted
     // from the match rest
-    private val outsideQueryAvailable = mutable.Set.empty[MatchId]
-    opaque type IsInnerCall = Bool
-    def getOrElseUpdate(matchId: MatchId)(using inner: IsInnerCall = false): Block = store.get(matchId) match
-      case S(R(blk)) =>
-        if inner || blk.isInstanceOf[End] || outsideQueryAvailable.remove(matchId) then
-          blk
-        else
-          lastWords(s"match rest $blk was expected to be used only once, but now it's used more than once")
+    def getOrElseUpdate(matchId: MatchId): Block = store.get(matchId) match
+      case S(R(blk)) => blk
       case S(L(fdef -> args)) =>
         Return(
           Call(callNewFun(fdef.sym), args.map(a => Arg(N, Value.Ref(a))))(true, false),
@@ -339,7 +309,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
             if isEnd then acc else Begin(acc, parentMatchRest)
         val withTheRestOfPossiblyFusingMatch = thePossiblyFusingOne.headOption
           .fold(withAllParentMatchesRests): scrutExprIdOfTheFusingOne =>
-            Begin(withAllParentMatchesRests, getOrElseUpdate(scrutExprIdOfTheFusingOne, instantiationId)(using true))
+            Begin(withAllParentMatchesRests, getOrElseUpdate(scrutExprIdOfTheFusingOne, instantiationId))
           .flattened
         
         // if the rest is empty or only going to be used once,
@@ -348,7 +318,6 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           withTheRestOfPossiblyFusingMatch.isInstanceOf[End] ||
           rewritePrepare.fusingMatchIdToMatchRestFunSymbols.get(matchId).isEmpty
         if noNeedToBuild then
-          if inner then outsideQueryAvailable += matchId
           store.updateWith(matchId):
             case S(_) => die
             case N => S(R(withTheRestOfPossiblyFusingMatch))
@@ -464,9 +433,6 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
   
   private def callNewFun(sym: BlockMemberSymbol): Path =
     Value.Ref(sym)
-    // preAnalyzer.inModuleInfo.fold(Value.Ref(sym)):
-    //   case innerSym -> _ -> _ =>
-    //     Select(Value.Ref(innerSym), Tree.Ident(sym.nme))(S(sym))
   
   private val uselessSymbolSubst = new SymbolSubst
   // rewrite ctor and dtors
@@ -506,7 +472,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
       case _ => super.applyResult(r)
     
     override def applyResult2(r: Result)(k: Result => Block): Block =
-      def handleCallLike(_f: Path, ctorResId: ResultId)(args: Ls[Path]) = // TODO: remove the first parameter?
+      def handleCallLike(ctorResId: ResultId)(args: Ls[Path]) =
         val c = preAnalyzer.getCtorSymFromCtorLikeExprId(ctorResId).get.asCls.get
         rewritePrepare.ctorIdToFinalDest(ctorResId.withInstId) match
           case matchDest@FinalDest.Match(matchId, whichArm) =>
@@ -528,15 +494,15 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
         case DeforestTupSelect(v, idx) if rewritePrepare.selIdsInAllArmsToSymbolsToReplace.get(r.uid.withInstId).isDefined =>
           k(Value.Ref(rewritePrepare.selIdsInAllArmsToSymbolsToReplace(r.uid.withInstId)))
         case call@Call(f, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(call.uid.withInstId) =>
-          handleCallLike(f, call.uid):
+          handleCallLike(call.uid):
             args.map:
               case Arg(N, value) => value
         case ins@Instantiate(false, cls, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(ins.uid.withInstId) =>
-          handleCallLike(cls, ins.uid):
+          handleCallLike(ins.uid):
             args.map:
               case Arg(N, value) => value
         case v@Value.Arr(false, elems) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(v.uid.withInstId) =>
-          handleCallLike(v, v.uid):
+          handleCallLike(v.uid):
             elems.map:
               case Arg(N, value) => value
         case _ => super.applyResult2(r)(k)
@@ -566,9 +532,6 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
                 s
               else
                 Value.Ref(m(blk))
-              // preAnalyzer.inModuleInfo.fold(Value.Ref(m(blk))):
-              //   case mod -> _ -> _ =>
-              //     Select(Value.Ref(mod.asMod.get), Tree.Ident(m(blk).nme))(S(m(blk)))
           case _ => super.applyPath(s)
       case v: Value => applyValue(v)
       case _ => super.applyPath(p)
@@ -598,7 +561,6 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
       if instId.isEmpty then
         preAnalyzer.dummyRefsToTopLevelLikeFuns.get(fun.sym) match
           case Some(ref) =>
-            // val FunDefn(_, _, param, body) = preAnalyzer.getTopLevelFunDefnForSym(oldSym).get
             val param = fun.params
             val body = fun.body
             val oldToNewParam = mutable.Map.empty[VarSymbol, VarSymbol]
@@ -613,18 +575,11 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
                 val newRestParam = restParam.map(makeNewParam)
                 ParamList(flags, newParams, newRestParam)
             val newBody = Transform(ref.uid :: Nil)(body).replaceSymbols(oldToNewParam.toMap)
-            // the owner is `N` because duplicated functions shouldn't be inside any module
             FunDefn(fun.owner, fun.sym, newParam, newBody)
-            // Transform(ref.uid :: Nil).applyFunDefn(fun)
           case None => fun // skip other top level functions
-        
-        // super.applyFunDefn(fun)
-        // fun // skip top level functions // TODO: should not skip, should rewrite their body inplace
-        // Transform()
       else
         super.applyFunDefn(fun)
     def apply(b: Block) =
-      // println(s"transforming ${instId.toReadableCallPath(preAnalyzer)}")
       applyBlock(b)
 
 
@@ -723,7 +678,7 @@ class FreeVarTraverserForMatchConsideringDeforestation(
       
       // free vars in nested-matches reported by freeVarsOfNonTransformedMatches may also contain
       // spurious ones: those that are going to be substitued by the current match,
-      // and those that are in the ctx
+      // and those that are in the ctx, so we remove them now
       result --= selsReplacementByCurrentMatch.values
       result --= ctx
     case _ => super.applyBlock(b)
