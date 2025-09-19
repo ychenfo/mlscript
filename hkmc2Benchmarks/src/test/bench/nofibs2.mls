@@ -1,5 +1,11 @@
 :js
 
+
+// Comment to run the benchmarks
+:exit
+====================================================================================================
+
+
 import "./mlscript-compile/Benchmark.mls"
 open Benchmark
 
