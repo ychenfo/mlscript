@@ -87,7 +87,7 @@ object Lifter:
     case f: FunDefn =>
       (f.body.definedVars ++ f.params.flatMap(_.paramSyms)).collect:
         case s: FlowSymbol if !(s is state.runtimeSymbol) => s // FIXME: doesn't this test always fail?
-    case c: ClsLikeDefn =>      
+    case c: ClsLikeDefn =>
       val companionVars = c.companion.fold(Set.empty)(_.ctor.definedVars)
       (companionVars ++ c.preCtor.definedVars ++ c.ctor.definedVars).collect:
         case s: FlowSymbol if !(s is state.runtimeSymbol) => s

@@ -71,9 +71,14 @@ lazy val hkmc2DiffTests = project.in(file("hkmc2DiffTests"))
     Test/run/fork := true, // so that CTRL+C actually terminates the watcher
   )
 
-lazy val hkmc2AllTests = project.in(file("hkmc2AllTests"))
+lazy val hkmc2MainTests = project.in(file("hkmc2MainTests"))
   .settings(
     Test / test := ((hkmc2DiffTests / Test / test) dependsOn (hkmc2JVM / Test / test)).value
+  )
+
+lazy val hkmc2AllTests = project.in(file("hkmc2AllTests"))
+  .settings(
+    Test / test := ((hkmc2Benchmarks / Test / test) dependsOn hkmc2MainTests / Test / test).value
   )
 
 lazy val core = crossProject(JSPlatform, JVMPlatform).in(file("core"))
