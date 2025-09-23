@@ -1,5 +1,10 @@
 :js
 
+// Comment to run the benchmarks
+:exit
+====================================================================================================
+
+
 import "../../../../hkmc2/shared/src/test/mlscript-compile/LazyArray.mls"
 import "../../../../hkmc2/shared/src/test/mlscript-compile/FingerTreeList.mls"
 import "../../../../hkmc2/shared/src/test/mlscript-compile/LazyFingerTree.mls"
