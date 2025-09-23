@@ -19,4 +19,4 @@ class BenchTestRunner
   with ParallelTestExecution
 :
   override protected def createDiffMaker(file: Path, preludePath: Path, predefPath: Path, relativeName: String): DiffMaker =
-    new BenchDiffMaker((os.pwd/"hkmc2Benchmarks").toString, file, preludePath, predefPath, relativeName)
+    new BenchDiffMaker(os.pwd.toString, file, preludePath, predefPath, relativeName)

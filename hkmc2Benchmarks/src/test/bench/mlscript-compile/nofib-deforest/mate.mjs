@@ -136377,7 +136377,7 @@ append_inst_191_194_137_196_68_tsni = function append_inst_191_194_137_196_68_ts
 };
 testMate_nofib_inst_197_198_tsni = function testMate_nofib_inst_197_198_tsni(dummy) {
   let input, bdcn, tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/heathcote3.prob"));
+  tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/heathcote3.prob"));
   tmp1 = runtime.safeCall(tmp.toString());
   tmp2 = NofibPrelude.nofibStringToList(tmp1);
   input = tmp2;
@@ -155463,7 +155463,7 @@ globalThis.Object.freeze(class mate {
   } 
   static testMate_nofib(dummy) {
     let input, bdcn, tmp, tmp1, tmp2, tmp3;
-    tmp = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/heathcote3.prob"));
+    tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/heathcote3.prob"));
     tmp1 = runtime.safeCall(tmp.toString());
     tmp2 = NofibPrelude.nofibStringToList(tmp1);
     input = tmp2;

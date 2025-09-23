@@ -10444,7 +10444,7 @@ append_inst_93_94_92_95_96_tsni = function append_inst_93_94_92_95_96_tsni(xs, y
 };
 testSorting_nofib_inst_97_98_tsni = function testSorting_nofib_inst_97_98_tsni(d) {
   let f, tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/Main.hs"));
+  tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/Main.hs"));
   tmp1 = runtime.safeCall(tmp.toString());
   tmp2 = NofibPrelude.nofibStringToList(tmp1);
   f = tmp2;
@@ -13391,7 +13391,7 @@ globalThis.Object.freeze(class sorting {
   } 
   static testSorting_nofib(d) {
     let f, tmp, tmp1, tmp2, tmp3;
-    tmp = runtime.safeCall(globalThis.fs.readFileSync("../hkmc2/shared/src/test/mlscript/nofib/input/Main.hs"));
+    tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/Main.hs"));
     tmp1 = runtime.safeCall(tmp.toString());
     tmp2 = NofibPrelude.nofibStringToList(tmp1);
     f = tmp2;
