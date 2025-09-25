@@ -159,7 +159,7 @@ Foo(123)
 //│     this.foo();
 //│   }
 //│   foo() {
-//│     let bar, baz, tmp1;
+//│     let bar, baz, tmp;
 //│     const this$Foo = this;
 //│     bar = function bar() {
 //│       return this$Foo.a
@@ -167,7 +167,7 @@ Foo(123)
 //│     baz = function baz() {
 //│       return this$Foo.a
 //│     };
-//│     tmp1 = bar();
+//│     tmp = bar();
 //│     return baz()
 //│   }
 //│   toString() { return runtime.render(this); }
@@ -194,10 +194,10 @@ Bar(1)
 //│     Bar1.class = this
 //│   }
 //│   constructor(x) {
-//│     let tmp1;
+//│     let tmp;
 //│     this.x = x;
-//│     tmp1 = this.foo();
-//│     runtime.safeCall(tmp1());
+//│     tmp = this.foo();
+//│     runtime.safeCall(tmp());
 //│   }
 //│   foo() {
 //│     return () => {

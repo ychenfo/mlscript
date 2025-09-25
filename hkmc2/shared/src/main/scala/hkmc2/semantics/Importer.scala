@@ -64,9 +64,9 @@ class Importer:
                 val shouldFullyElab = config.deforest.fold(false): dConfig =>
                   dConfig.importedPublicModNames.exists(path.contains)
                 if shouldFullyElab then // TODO:
-                  prelude.copy(mode = Mode.Full).nestLocal
+                  prelude.copy(mode = Mode.Full).nestLocal("prelude")
                 else
-                  prelude.copy(mode = Mode.Light).nestLocal
+                  prelude.copy(mode = Mode.Light).nestLocal("prelude")
 
               val elab = Elaborator(tl, file / os.up, prelude)
               val (semBlk, _) = elab.importFrom(resBlk)
