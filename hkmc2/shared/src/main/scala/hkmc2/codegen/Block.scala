@@ -487,10 +487,6 @@ enum Case:
 
 sealed trait TrivialResult extends Result
 
-object Result:
-  opaque type ResultId = Int
-  private def ResultId(v: Int): ResultId = v
-  
 
 sealed abstract class Result extends AutoLocated:
 // // * Used for debugging locations:
@@ -552,11 +548,14 @@ sealed abstract class Result extends AutoLocated:
     case Value.Lit(lit) => Set.empty
     case DynSelect(qual, fld, arrayIdx) => qual.freeVarsLLIR ++ fld.freeVarsLLIR
   
-  def uid =
-    import Result.*
-    val uidValue = ResultId(System.identityHashCode(this))
-    uidValue
   
+  def uid(using ds: deforest.Deforest.State): Uid[Result] =
+    ds.resultToResultId.getOrElseUpdate(
+      this,
+      locally:
+        val id = ds.ResultUidState.nextUid
+        ds.resultIdToResult.addOne(id -> this)
+        id)
   
   
 // type Local = LocalSymbol

@@ -2,12 +2,12 @@ package hkmc2
 package codegen
 package deforest
 
+import scala.jdk.CollectionConverters.MapHasAsScala
 import semantics.*
 import syntax.Tree
 import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
-import Result.ResultId
 import hkmc2.Config.LiftDefns
 
 
@@ -52,6 +52,9 @@ object Deforest:
   class State:
     val importedFileNameToLoweredBlock = mutable.Map.empty[os.Path, Program]
     val topLevelFunInPrevDiffBlocks = mutable.Map.empty[BlockMemberSymbol, FunDefn]
+    val resultToResultId = new java.util.IdentityHashMap[Result, Uid[Result]].asScala
+    val resultIdToResult = mutable.Map.empty[Uid[Result], Result]
+    object ResultUidState extends Uid.Result.State
   
   def deforestImport(path: Str, wd: os.Path)(using
     cfg: Config,

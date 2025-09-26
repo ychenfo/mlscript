@@ -7,10 +7,10 @@ import syntax.Tree
 import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
-import Result.ResultId
 
 final case class NotDeforestableException(msg: String) extends Exception(msg)
 
+type ResultId = Uid[Result]
 type StratVarId = Uid[StratVarState]
 type InstantiationId = Ls[ResultId]
 
@@ -105,7 +105,7 @@ class ProdStratScheme(s: StratVarState, constraints: Ls[ProdStrat -> ConsStrat])
 class DeforestPreAnalyzer(
   val b: Block,
   val importedInfo: ImportedInfo
-)(using val elabState: Elaborator.State, val tl: TraceLogger) extends BlockTraverser:
+)(using val elabState: Elaborator.State, val tl: TraceLogger, val dState: Deforest.State) extends BlockTraverser:
   given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
   
@@ -296,6 +296,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
   given stratVarUidState: Uid.StratVar.State = preAnalyzer.stratVarUidState
   given elabState: Elaborator.State = preAnalyzer.elabState
   given DeforestPreAnalyzer = preAnalyzer
+  given dState: Deforest.State = preAnalyzer.dState
   import StratVarState.freshVar
   
   
@@ -638,6 +639,8 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
 
 
 class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
+  given dState: Deforest.State = collector.dState
+  
   val preAnalyzer = collector.preAnalyzer
   val constraints = collector.constraints
   val upperBounds = mutable.Map.empty[StratVarId, Ls[ConsStrat]].withDefaultValue(Nil)
@@ -856,7 +859,7 @@ class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
 
 
 
-class GetCtorsTraverser(b: Block) extends BlockTraverser:
+class GetCtorsTraverser(b: Block)(using dState: Deforest.State) extends BlockTraverser:
   var ctors = Set.empty[ResultId]
   override def applyResult(r: Result): Unit = r match
     case Call(f, args) =>

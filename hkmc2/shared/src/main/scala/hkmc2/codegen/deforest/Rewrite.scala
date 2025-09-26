@@ -9,7 +9,6 @@ import syntax.Tree
 import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
-import Result.ResultId
 
 
 type CtorId = ResultId -> InstantiationId
@@ -33,6 +32,7 @@ enum FinalDest:
   
 class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.State):
   drwp =>
+  given dState: Deforest.State = sol.dState
   val preAnalyzer = sol.preAnalyzer
 
   val instIdToMappingFromOldToNewSyms = mutable.Map.empty[InstantiationId, Map[BlockMemberSymbol, BlockMemberSymbol]]
@@ -234,6 +234,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
 
 
 class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elaborator.State):
+  given dState: Deforest.State = rewritePrepare.dState
   val preAnalyzer = rewritePrepare.preAnalyzer
   
   def apply() =
@@ -697,6 +698,7 @@ class FreeVarTraverserForMatchConsideringDeforestation(
   matchId: MatchId,
   drwp: DeforestRewritePrepare
 ) extends FreeVarTraverser(drwp.preAnalyzer.matchScrutToMatchBlock(matchId._1), drwp.alwaysNonFreeVars):
+  given dState: Deforest.State = drwp.dState
   val instantiationId = matchId._2
   val preAnalyzer = drwp.preAnalyzer
   
@@ -777,6 +779,7 @@ class HasExplicitRetTraverser(b: Block) extends BlockTraverserShallow:
   applyBlock(b)
 
 class WillBeNonEndTailBlockTraverser(b: Block, instId: InstantiationId, drwp: DeforestRewritePrepare) extends BlockTraverserShallow:
+  given dState: Deforest.State = drwp.dState
   var result = false
   override def applyBlock(b: Block): Unit = b match
     case Match(scrut, arms, dflt, rest) =>
