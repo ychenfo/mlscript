@@ -117,7 +117,7 @@ match_xs_arm_Cons_inst_52_55_46_79_80_tsni = (undefined, function (ys, _deforest
   return NofibPrelude.Cons(x, tmp)
 });
 match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni = (undefined, function (ws, _deforest_Deforest_Arr_2_0_inst_60_62_tsni, _deforest_Deforest_Arr_2_1_inst_60_62_tsni) {
-  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+  let first1, first0, param0, param1, m, ms, n, l, scrut, n1;
   first0 = _deforest_Deforest_Arr_2_0_inst_60_62_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_60_62_tsni;
   if (first0 instanceof NofibPrelude.Nil.class) {
@@ -129,8 +129,7 @@ match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni = (undefined, function (ws, _defore
     m = param0;
     ms = param1;
     n = first1;
-    tmp = n - m;
-    l = tmp;
+    l = n - m;
     scrut = splitAt_inst_60_62_31_tsni(l, ws);
     return runtime.safeCall(scrut(m, ms, l))
   } else {
@@ -138,7 +137,7 @@ match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni = (undefined, function (ws, _defore
   }
 });
 match_a_b_arm_Deforest_Arr_2_inst_63_65_62_tsni = (undefined, function (ws, _deforest_Deforest_Arr_2_0_inst_63_65_62_tsni, _deforest_Deforest_Arr_2_1_inst_63_65_62_tsni) {
-  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+  let first1, first0, param0, param1, m, ms, n, l, scrut, n1;
   first0 = _deforest_Deforest_Arr_2_0_inst_63_65_62_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_63_65_62_tsni;
   if (first0 instanceof NofibPrelude.Nil.class) {
@@ -150,8 +149,7 @@ match_a_b_arm_Deforest_Arr_2_inst_63_65_62_tsni = (undefined, function (ws, _def
     m = param0;
     ms = param1;
     n = first1;
-    tmp = n - m;
-    l = tmp;
+    l = n - m;
     scrut = splitAt_inst_63_65_62_31_tsni(l, ws);
     return runtime.safeCall(scrut(m, ms, l))
   } else {
@@ -183,7 +181,7 @@ match_xs_arm_Cons_inst_69_70_68_46_79_80_tsni = (undefined, function (ys, _defor
   return NofibPrelude.Cons(x, tmp)
 });
 match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni = (undefined, function (ws, _deforest_Deforest_Arr_2_0_inst_69_70_65_62_tsni, _deforest_Deforest_Arr_2_1_inst_69_70_65_62_tsni) {
-  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+  let first1, first0, param0, param1, m, ms, n, l, scrut, n1;
   first0 = _deforest_Deforest_Arr_2_0_inst_69_70_65_62_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_69_70_65_62_tsni;
   if (first0 instanceof NofibPrelude.Nil.class) {
@@ -195,8 +193,7 @@ match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni = (undefined, function (ws, _
     m = param0;
     ms = param1;
     n = first1;
-    tmp = n - m;
-    l = tmp;
+    l = n - m;
     scrut = splitAt_inst_69_70_65_62_31_tsni(l, ws);
     return runtime.safeCall(scrut(m, ms, l))
   } else {
@@ -204,7 +201,7 @@ match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni = (undefined, function (ws, _
   }
 });
 match_a_b_arm_Deforest_Arr_2_inst_71_72_70_65_62_tsni = (undefined, function (ws, _deforest_Deforest_Arr_2_0_inst_71_72_70_65_62_tsni, _deforest_Deforest_Arr_2_1_inst_71_72_70_65_62_tsni) {
-  let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+  let first1, first0, param0, param1, m, ms, n, l, scrut, n1;
   first0 = _deforest_Deforest_Arr_2_0_inst_71_72_70_65_62_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_71_72_70_65_62_tsni;
   if (first0 instanceof NofibPrelude.Nil.class) {
@@ -216,8 +213,7 @@ match_a_b_arm_Deforest_Arr_2_inst_71_72_70_65_62_tsni = (undefined, function (ws
     m = param0;
     ms = param1;
     n = first1;
-    tmp = n - m;
-    l = tmp;
+    l = n - m;
     scrut = splitAt_inst_71_72_70_65_62_31_tsni(l, ws);
     return runtime.safeCall(scrut(m, ms, l))
   } else {
@@ -240,7 +236,7 @@ match_ls_arm_Nil_inst_71_83_tsni = (undefined, function () {
   return ""
 });
 init__inst_0_1_tsni = function init__inst_0_1_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -248,11 +244,10 @@ init__inst_0_1_tsni = function init__inst_0_1_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -262,11 +257,10 @@ init__inst_0_1_tsni = function init__inst_0_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -274,25 +268,23 @@ init__inst_0_1_tsni = function init__inst_0_1_tsni(a_b) {
   }
 };
 splitAt_inst_0_1_2_tsni = function splitAt_inst_0_1_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 trim$_inst_3_4_tsni = function trim$_inst_3_4_tsni(tot_width, ps_pq) {
   let ps_p, q, p, scrut, scrut1, scrut2, tmp, tmp1;
@@ -319,7 +311,7 @@ trim$_inst_3_4_tsni = function trim$_inst_3_4_tsni(tot_width, ps_pq) {
   }
 };
 init__inst_3_4_1_tsni = function init__inst_3_4_1_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -327,11 +319,10 @@ init__inst_3_4_1_tsni = function init__inst_3_4_1_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -341,11 +332,10 @@ init__inst_3_4_1_tsni = function init__inst_3_4_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -353,28 +343,26 @@ init__inst_3_4_1_tsni = function init__inst_3_4_1_tsni(a_b) {
   }
 };
 splitAt_inst_3_4_1_2_tsni = function splitAt_inst_3_4_1_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 init__inst_5_6_tsni = function init__inst_5_6_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -382,11 +370,10 @@ init__inst_5_6_tsni = function init__inst_5_6_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -396,11 +383,10 @@ init__inst_5_6_tsni = function init__inst_5_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -408,25 +394,23 @@ init__inst_5_6_tsni = function init__inst_5_6_tsni(a_b) {
   }
 };
 splitAt_inst_5_6_2_tsni = function splitAt_inst_5_6_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 leave_nofit$_inst_7_8_tsni = function leave_nofit$_inst_7_8_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
@@ -446,7 +430,7 @@ leave_nofit$_inst_7_8_tsni = function leave_nofit$_inst_7_8_tsni(tot_width, ps_p
   }
 };
 init__inst_7_8_6_tsni = function init__inst_7_8_6_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -454,11 +438,10 @@ init__inst_7_8_6_tsni = function init__inst_7_8_6_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -468,11 +451,10 @@ init__inst_7_8_6_tsni = function init__inst_7_8_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -480,28 +462,26 @@ init__inst_7_8_6_tsni = function init__inst_7_8_6_tsni(a_b) {
   }
 };
 splitAt_inst_7_8_6_2_tsni = function splitAt_inst_7_8_6_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 tail__inst_9_10_tsni = function tail__inst_9_10_tsni(a_b) {
-  let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, x, y, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -509,11 +489,10 @@ tail__inst_9_10_tsni = function tail__inst_9_10_tsni(a_b) {
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -523,11 +502,10 @@ tail__inst_9_10_tsni = function tail__inst_9_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           y
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -535,25 +513,23 @@ tail__inst_9_10_tsni = function tail__inst_9_10_tsni(a_b) {
   }
 };
 splitAt_inst_9_10_11_tsni = function splitAt_inst_9_10_11_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (x, y) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (x, y) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp2,
       y0
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 myAdd$_inst_12_13_tsni = function myAdd$_inst_12_13_tsni(tot_width, p, qr_rs) {
   let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
@@ -577,7 +553,7 @@ myAdd$_inst_12_13_tsni = function myAdd$_inst_12_13_tsni(tot_width, p, qr_rs) {
   }
 };
 tail__inst_12_13_10_tsni = function tail__inst_12_13_10_tsni(a_b) {
-  let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, x, y, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -585,11 +561,10 @@ tail__inst_12_13_10_tsni = function tail__inst_12_13_10_tsni(a_b) {
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -599,11 +574,10 @@ tail__inst_12_13_10_tsni = function tail__inst_12_13_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           y
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -611,25 +585,23 @@ tail__inst_12_13_10_tsni = function tail__inst_12_13_10_tsni(a_b) {
   }
 };
 splitAt_inst_12_13_10_11_tsni = function splitAt_inst_12_13_10_11_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (x, y) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (x, y) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp2,
       y0
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 lambda$_inst_16_17_tsni = function lambda$_inst_16_17_tsni(a, xs, ys) {
   let tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -719,17 +691,17 @@ leaveWhile_inst_20_21_tsni = function leaveWhile_inst_20_21_tsni(f, ls) {
   }
 };
 break__inst_22_23_tsni = function break__inst_22_23_tsni(p, xs) {
-  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda26;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda26 = (l) => {
+      let tmp2;
+      tmp2 = NofibPrelude.Nil;
+      return match_s__rest_inst_22_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = NofibPrelude.Nil;
-        return match_s__rest_inst_22_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda26
+    ])
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -747,11 +719,10 @@ break__inst_22_23_tsni = function break__inst_22_23_tsni(p, xs) {
         tmp2 = para.lines(s__);
         return match_s__rest_inst_22_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_22_23_tsni(p, xs1);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -760,11 +731,10 @@ break__inst_22_23_tsni = function break__inst_22_23_tsni(p, xs) {
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -803,9 +773,9 @@ map_inst_24_25_tsni = function map_inst_24_25_tsni(f, xs) {
 };
 lambda_inst_26_27_tsni = (undefined, function (w, ps) {
   let tmp, tmp1, lambda$this, lambda$this1;
-  lambda$this = runtime.safeCall(lambda10(w));
+  lambda$this = runtime.safeCall(lambda9(w));
   tmp = map_inst_26_27_19_tsni(lambda$this, ps);
-  lambda$this1 = runtime.safeCall(lambda11(w));
+  lambda$this1 = runtime.safeCall(lambda10(w));
   tmp1 = NofibPrelude.map(lambda$this1, ps);
   return append_inst_26_27_76_tsni(tmp, tmp1)
 });
@@ -838,16 +808,13 @@ map_inst_26_27_19_tsni = function map_inst_26_27_19_tsni(f, xs) {
   }
 };
 formats_inst_28_29_tsni = function formats_inst_28_29_tsni(txt) {
-  let tmp, tmp1;
-  tmp = lambda_inst_28_29_27_tsni;
-  tmp1 = lambda12;
-  return para.fold1(tmp, tmp1, txt)
+  return para.fold1(lambda_inst_28_29_27_tsni, lambda12, txt)
 };
 lambda_inst_28_29_27_tsni = (undefined, function (w, ps) {
   let tmp, tmp1, lambda$this, lambda$this1;
-  lambda$this = runtime.safeCall(lambda10(w));
+  lambda$this = runtime.safeCall(lambda9(w));
   tmp = map_inst_28_29_27_19_tsni(lambda$this, ps);
-  lambda$this1 = runtime.safeCall(lambda11(w));
+  lambda$this1 = runtime.safeCall(lambda10(w));
   tmp1 = NofibPrelude.map(lambda$this1, ps);
   return append_inst_28_29_27_76_tsni(tmp, tmp1)
 });
@@ -880,69 +847,64 @@ map_inst_28_29_27_19_tsni = function map_inst_28_29_27_19_tsni(f, xs) {
   }
 };
 splitAt_inst_30_31_tsni = function splitAt_inst_30_31_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4;
+  return (m, ms, l) => {
+    let first1, first0, ws1, ws2, tmp2, tmp3, tmp4, tmp5;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
     ws2 = first1;
     tmp2 = NofibPrelude.Cons(m, ms);
     tmp3 = NofibPrelude.leave(l, tmp2);
-    arr1 = globalThis.Object.freeze([
+    tmp4 = globalThis.Object.freeze([
       tmp3,
       m
     ]);
-    tmp4 = para.tile(ws2, arr1);
-    return NofibPrelude.Cons(ws1, tmp4)
-  };
-  return arr
+    tmp5 = para.tile(ws2, tmp4);
+    return NofibPrelude.Cons(ws1, tmp5)
+  }
 };
 splitAt_inst_32_11_tsni = function splitAt_inst_32_11_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (x, y) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (x, y) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp2,
       y0
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 splitAt_inst_33_2_tsni = function splitAt_inst_33_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 lambda_inst_34_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -968,9 +930,9 @@ lambda$_inst_34_35_17_tsni = function lambda$_inst_34_35_17_tsni(a, xs, ys) {
   return NofibPrelude.append(xs, tmp1)
 };
 unformat_inst_36_37_tsni = function unformat_inst_36_37_tsni(a, l) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_36_37_35_tsni(a));
-  return para.fold1(tmp, lambda18, l)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_36_37_35_tsni(a));
+  return para.fold1(lambda$this, lambda18, l)
 };
 lambda_inst_36_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -996,13 +958,15 @@ lambda$_inst_36_37_35_17_tsni = function lambda$_inst_36_37_35_17_tsni(a, xs, ys
   return NofibPrelude.append(xs, tmp1)
 };
 lambda_inst_38_39_tsni = (undefined, function (x) {
-  return listNeq_inst_38_39_74_tsni((ys) => {
+  let lambda26;
+  lambda26 = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
       return false
     } else {
       return true
     }
-  }, x)
+  };
+  return listNeq_inst_38_39_74_tsni(lambda26, x)
 });
 lines_inst_40_41_tsni = function lines_inst_40_41_tsni(s) {
   let scrut, first1, first0, l, s_;
@@ -1018,19 +982,19 @@ lines_inst_40_41_tsni = function lines_inst_40_41_tsni(s) {
   }
 };
 break__inst_40_41_23_tsni = function break__inst_40_41_23_tsni(p, xs) {
-  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda26;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda26 = (l) => {
+      let tmp2;
+      tmp2 = (f) => {
+        return NofibPrelude.Nil
+      };
+      return match_s__rest_inst_40_41_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = (f) => {
-          return NofibPrelude.Nil
-        };
-        return match_s__rest_inst_40_41_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda26
+    ])
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1048,11 +1012,10 @@ break__inst_40_41_23_tsni = function break__inst_40_41_23_tsni(p, xs) {
         tmp2 = lines_inst_40_41_tsni(s__);
         return match_s__rest_inst_40_41_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_40_41_23_tsni(p, xs1);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -1061,11 +1024,10 @@ break__inst_40_41_23_tsni = function break__inst_40_41_23_tsni(p, xs) {
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -1126,21 +1088,23 @@ paras_inst_40_43_tsni = function paras_inst_40_43_tsni(ls) {
   return NofibPrelude.filter(lambda_inst_40_43_39_tsni, tmp)
 };
 lambda_inst_40_43_39_tsni = (undefined, function (x) {
-  return listNeq_inst_40_43_39_74_tsni((ys) => {
+  let lambda26;
+  lambda26 = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
       return false
     } else {
       return true
     }
-  }, x)
+  };
+  return listNeq_inst_40_43_39_74_tsni(lambda26, x)
 });
 unparas_inst_44_45_tsni = function unparas_inst_44_45_tsni(ls) {
   return unformat_inst_44_45_37_tsni(NofibPrelude.Nil, ls)
 };
 unformat_inst_44_45_37_tsni = function unformat_inst_44_45_37_tsni(a, l) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_44_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda18, l)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_44_45_37_35_tsni(a));
+  return para.fold1(lambda$this, lambda18, l)
 };
 lambda_inst_44_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -1303,13 +1267,15 @@ paras_inst_52_53_43_tsni = function paras_inst_52_53_43_tsni(ls) {
   return filter_inst_52_53_43_54_tsni(lambda_inst_52_53_43_39_tsni, tmp)
 };
 lambda_inst_52_53_43_39_tsni = (undefined, function (x) {
-  return listNeq_inst_52_53_43_39_74_tsni((ys) => {
+  let lambda26;
+  lambda26 = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
       return false
     } else {
       return true
     }
-  }, x)
+  };
+  return listNeq_inst_52_53_43_39_74_tsni(lambda26, x)
 });
 words_inst_52_53_42_tsni = function words_inst_52_53_42_tsni(s) {
   let scrut;
@@ -1371,19 +1337,19 @@ lines_inst_52_53_41_tsni = function lines_inst_52_53_41_tsni(s) {
   }
 };
 break__inst_52_53_41_23_tsni = function break__inst_52_53_41_23_tsni(p, xs) {
-  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda26;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda26 = (l) => {
+      let tmp2;
+      tmp2 = (f) => {
+        return NofibPrelude.Nil
+      };
+      return match_s__rest_inst_52_53_41_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = (f) => {
-          return NofibPrelude.Nil
-        };
-        return match_s__rest_inst_52_53_41_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda26
+    ])
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -1401,11 +1367,10 @@ break__inst_52_53_41_23_tsni = function break__inst_52_53_41_23_tsni(p, xs) {
         tmp2 = lines_inst_52_53_41_tsni(s__);
         return match_s__rest_inst_52_53_41_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_52_53_41_23_tsni(p, xs1);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -1414,11 +1379,10 @@ break__inst_52_53_41_23_tsni = function break__inst_52_53_41_23_tsni(p, xs) {
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -1596,9 +1560,9 @@ unparas_inst_52_55_45_tsni = function unparas_inst_52_55_45_tsni(ls) {
   return unformat_inst_52_55_45_37_tsni(NofibPrelude.Nil, ls)
 };
 unformat_inst_52_55_45_37_tsni = function unformat_inst_52_55_45_37_tsni(a, l) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_52_55_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda18, l)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_52_55_45_37_35_tsni(a));
+  return para.fold1(lambda$this, lambda18, l)
 };
 lambda_inst_52_55_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -1645,7 +1609,7 @@ myAdd$_inst_56_57_tsni = function myAdd$_inst_56_57_tsni(tot_width, p, qr_rs) {
   }
 };
 tail__inst_56_57_10_tsni = function tail__inst_56_57_10_tsni(a_b) {
-  let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, x, y, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -1653,11 +1617,10 @@ tail__inst_56_57_10_tsni = function tail__inst_56_57_10_tsni(a_b) {
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -1667,11 +1630,10 @@ tail__inst_56_57_10_tsni = function tail__inst_56_57_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           y
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -1679,25 +1641,23 @@ tail__inst_56_57_10_tsni = function tail__inst_56_57_10_tsni(a_b) {
   }
 };
 splitAt_inst_56_57_10_11_tsni = function splitAt_inst_56_57_10_11_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (x, y) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (x, y) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp2,
       y0
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 leave_nofit$_inst_56_58_tsni = function leave_nofit$_inst_56_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
@@ -1717,7 +1677,7 @@ leave_nofit$_inst_56_58_tsni = function leave_nofit$_inst_56_58_tsni(tot_width, 
   }
 };
 init__inst_56_58_6_tsni = function init__inst_56_58_6_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -1725,11 +1685,10 @@ init__inst_56_58_6_tsni = function init__inst_56_58_6_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -1739,11 +1698,10 @@ init__inst_56_58_6_tsni = function init__inst_56_58_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -1751,25 +1709,23 @@ init__inst_56_58_6_tsni = function init__inst_56_58_6_tsni(a_b) {
   }
 };
 splitAt_inst_56_58_6_2_tsni = function splitAt_inst_56_58_6_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 trim$_inst_56_59_tsni = function trim$_inst_56_59_tsni(tot_width, ps_pq) {
   let ps_p, q, p, scrut, scrut1, scrut2, tmp, tmp1;
@@ -1796,7 +1752,7 @@ trim$_inst_56_59_tsni = function trim$_inst_56_59_tsni(tot_width, ps_pq) {
   }
 };
 init__inst_56_59_1_tsni = function init__inst_56_59_1_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -1804,11 +1760,10 @@ init__inst_56_59_1_tsni = function init__inst_56_59_1_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -1818,11 +1773,10 @@ init__inst_56_59_1_tsni = function init__inst_56_59_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -1830,28 +1784,26 @@ init__inst_56_59_1_tsni = function init__inst_56_59_1_tsni(a_b) {
   }
 };
 splitAt_inst_56_59_1_2_tsni = function splitAt_inst_56_59_1_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 stepr_inst_60_61_tsni = function stepr_inst_60_61_tsni(w, ps_tw_tl) {
-  let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
+  let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
     first0 = runtime.Tuple.get(ps_tw_tl, 0);
     first1 = runtime.Tuple.get(ps_tw_tl, 1);
@@ -1860,21 +1812,18 @@ stepr_inst_60_61_tsni = function stepr_inst_60_61_tsni(w, ps_tw_tl) {
     tw = first1;
     tl = first2;
     tmp = w + 1;
-    tmp1 = tmp + tw;
-    tot_width = tmp1;
-    tmp2 = 1 + tl;
-    tot_len = tmp2;
-    tmp3 = para.last_(ps);
-    tmp4 = new_$(tw, tl, tmp3);
-    tmp5 = myAdd$_inst_60_61_57_tsni(tot_width, tmp4, ps);
-    tmp6 = leave_nofit$_inst_60_61_58_tsni(tot_width, tmp5);
-    tmp7 = trim$_inst_60_61_59_tsni(tot_width, tmp6);
-    arr = globalThis.Object.freeze([
-      tmp7,
+    tot_width = tmp + tw;
+    tot_len = 1 + tl;
+    tmp1 = para.last_(ps);
+    tmp2 = new_$(tw, tl, tmp1);
+    tmp3 = myAdd$_inst_60_61_57_tsni(tot_width, tmp2, ps);
+    tmp4 = leave_nofit$_inst_60_61_58_tsni(tot_width, tmp3);
+    tmp5 = trim$_inst_60_61_59_tsni(tot_width, tmp4);
+    return globalThis.Object.freeze([
+      tmp5,
       tot_width,
       tot_len
-    ]);
-    return arr
+    ])
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -1904,7 +1853,7 @@ trim$_inst_60_61_59_tsni = function trim$_inst_60_61_59_tsni(tot_width, ps_pq) {
   }
 };
 init__inst_60_61_59_1_tsni = function init__inst_60_61_59_1_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -1912,11 +1861,10 @@ init__inst_60_61_59_1_tsni = function init__inst_60_61_59_1_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -1926,11 +1874,10 @@ init__inst_60_61_59_1_tsni = function init__inst_60_61_59_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -1938,25 +1885,23 @@ init__inst_60_61_59_1_tsni = function init__inst_60_61_59_1_tsni(a_b) {
   }
 };
 splitAt_inst_60_61_59_1_2_tsni = function splitAt_inst_60_61_59_1_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 leave_nofit$_inst_60_61_58_tsni = function leave_nofit$_inst_60_61_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
@@ -1976,7 +1921,7 @@ leave_nofit$_inst_60_61_58_tsni = function leave_nofit$_inst_60_61_58_tsni(tot_w
   }
 };
 init__inst_60_61_58_6_tsni = function init__inst_60_61_58_6_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -1984,11 +1929,10 @@ init__inst_60_61_58_6_tsni = function init__inst_60_61_58_6_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -1998,11 +1942,10 @@ init__inst_60_61_58_6_tsni = function init__inst_60_61_58_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -2010,25 +1953,23 @@ init__inst_60_61_58_6_tsni = function init__inst_60_61_58_6_tsni(a_b) {
   }
 };
 splitAt_inst_60_61_58_6_2_tsni = function splitAt_inst_60_61_58_6_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 myAdd$_inst_60_61_57_tsni = function myAdd$_inst_60_61_57_tsni(tot_width, p, qr_rs) {
   let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
@@ -2052,7 +1993,7 @@ myAdd$_inst_60_61_57_tsni = function myAdd$_inst_60_61_57_tsni(tot_width, p, qr_
   }
 };
 tail__inst_60_61_57_10_tsni = function tail__inst_60_61_57_10_tsni(a_b) {
-  let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, x, y, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -2060,11 +2001,10 @@ tail__inst_60_61_57_10_tsni = function tail__inst_60_61_57_10_tsni(a_b) {
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -2074,11 +2014,10 @@ tail__inst_60_61_57_10_tsni = function tail__inst_60_61_57_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           y
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -2086,37 +2025,35 @@ tail__inst_60_61_57_10_tsni = function tail__inst_60_61_57_10_tsni(a_b) {
   }
 };
 splitAt_inst_60_61_57_10_11_tsni = function splitAt_inst_60_61_57_10_11_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (x, y) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (x, y) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp2,
       y0
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 tile_inst_60_62_tsni = function tile_inst_60_62_tsni(ws, a_b) {
   return runtime.safeCall(a_b(ws))
 };
 splitAt_inst_60_62_31_tsni = function splitAt_inst_60_62_31_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  return (m, ms, l) => {
+    let first1, first0, ws1, ws2, tmp2, tmp3, tmp4, tmp5, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
@@ -2125,13 +2062,12 @@ splitAt_inst_60_62_31_tsni = function splitAt_inst_60_62_31_tsni(n, ls) {
     tmp3 = NofibPrelude.leave(l, tmp2);
     _deforest_Deforest_Arr_2_01 = tmp3;
     _deforest_Deforest_Arr_2_11 = m;
-    arr1 = (ws) => {
+    tmp4 = (ws) => {
       return match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni(ws, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
     };
-    tmp4 = tile_inst_60_62_tsni(ws2, arr1);
-    return NofibPrelude.Cons(ws1, tmp4)
-  };
-  return arr
+    tmp5 = tile_inst_60_62_tsni(ws2, tmp4);
+    return NofibPrelude.Cons(ws1, tmp5)
+  }
 };
 parse_inst_63_64_tsni = function parse_inst_63_64_tsni(ls) {
   let tmp, tmp1;
@@ -2145,13 +2081,15 @@ paras_inst_63_64_43_tsni = function paras_inst_63_64_43_tsni(ls) {
   return filter_inst_63_64_43_54_tsni(lambda_inst_63_64_43_39_tsni, tmp)
 };
 lambda_inst_63_64_43_39_tsni = (undefined, function (x) {
-  return listNeq_inst_63_64_43_39_74_tsni((ys) => {
+  let lambda26;
+  lambda26 = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
       return false
     } else {
       return true
     }
-  }, x)
+  };
+  return listNeq_inst_63_64_43_39_74_tsni(lambda26, x)
 });
 words_inst_63_64_42_tsni = function words_inst_63_64_42_tsni(s) {
   let scrut;
@@ -2213,19 +2151,19 @@ lines_inst_63_64_41_tsni = function lines_inst_63_64_41_tsni(s) {
   }
 };
 break__inst_63_64_41_23_tsni = function break__inst_63_64_41_23_tsni(p, xs) {
-  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda26;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda26 = (l) => {
+      let tmp2;
+      tmp2 = (f) => {
+        return NofibPrelude.Nil
+      };
+      return match_s__rest_inst_63_64_41_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = (f) => {
-          return NofibPrelude.Nil
-        };
-        return match_s__rest_inst_63_64_41_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda26
+    ])
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -2243,11 +2181,10 @@ break__inst_63_64_41_23_tsni = function break__inst_63_64_41_23_tsni(p, xs) {
         tmp2 = lines_inst_63_64_41_tsni(s__);
         return match_s__rest_inst_63_64_41_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_63_64_41_23_tsni(p, xs1);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -2256,11 +2193,10 @@ break__inst_63_64_41_23_tsni = function break__inst_63_64_41_23_tsni(p, xs) {
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -2304,32 +2240,30 @@ filter_inst_63_64_43_54_tsni = function filter_inst_63_64_43_54_tsni(f, ls) {
   }
 };
 par3_inst_63_65_tsni = function par3_inst_63_65_tsni(ws) {
-  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let zs, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
-  tmp1 = para.scan1(stepr_inst_63_65_61_tsni, para.startr, tmp);
-  zs = tmp1;
-  tmp2 = lambda25;
-  tmp3 = NofibPrelude.map(tmp2, zs);
-  tmp4 = NofibPrelude.head(zs);
-  tmp5 = para.thd3(tmp4);
-  _deforest_Deforest_Arr_2_0 = tmp3;
-  _deforest_Deforest_Arr_2_1 = tmp5;
-  arr = (ws1) => {
+  zs = para.scan1(stepr_inst_63_65_61_tsni, para.startr, tmp);
+  tmp1 = NofibPrelude.map(lambda25, zs);
+  tmp2 = NofibPrelude.head(zs);
+  tmp3 = para.thd3(tmp2);
+  _deforest_Deforest_Arr_2_0 = tmp1;
+  _deforest_Deforest_Arr_2_1 = tmp3;
+  tmp4 = (ws1) => {
     return match_a_b_arm_Deforest_Arr_2_inst_63_65_62_tsni(ws1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
   };
-  return tile_inst_63_65_62_tsni(ws, arr)
+  return tile_inst_63_65_62_tsni(ws, tmp4)
 };
 tile_inst_63_65_62_tsni = function tile_inst_63_65_62_tsni(ws, a_b) {
   return runtime.safeCall(a_b(ws))
 };
 splitAt_inst_63_65_62_31_tsni = function splitAt_inst_63_65_62_31_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  return (m, ms, l) => {
+    let first1, first0, ws1, ws2, tmp2, tmp3, tmp4, tmp5, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
@@ -2338,16 +2272,15 @@ splitAt_inst_63_65_62_31_tsni = function splitAt_inst_63_65_62_31_tsni(n, ls) {
     tmp3 = NofibPrelude.leave(l, tmp2);
     _deforest_Deforest_Arr_2_01 = tmp3;
     _deforest_Deforest_Arr_2_11 = m;
-    arr1 = (ws) => {
+    tmp4 = (ws) => {
       return match_a_b_arm_Deforest_Arr_2_inst_63_65_62_tsni(ws, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
     };
-    tmp4 = tile_inst_63_65_62_tsni(ws2, arr1);
-    return NofibPrelude.Cons(ws1, tmp4)
-  };
-  return arr
+    tmp5 = tile_inst_63_65_62_tsni(ws2, tmp4);
+    return NofibPrelude.Cons(ws1, tmp5)
+  }
 };
 stepr_inst_63_65_61_tsni = function stepr_inst_63_65_61_tsni(w, ps_tw_tl) {
-  let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
+  let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
     first0 = runtime.Tuple.get(ps_tw_tl, 0);
     first1 = runtime.Tuple.get(ps_tw_tl, 1);
@@ -2356,21 +2289,18 @@ stepr_inst_63_65_61_tsni = function stepr_inst_63_65_61_tsni(w, ps_tw_tl) {
     tw = first1;
     tl = first2;
     tmp = w + 1;
-    tmp1 = tmp + tw;
-    tot_width = tmp1;
-    tmp2 = 1 + tl;
-    tot_len = tmp2;
-    tmp3 = para.last_(ps);
-    tmp4 = new_$(tw, tl, tmp3);
-    tmp5 = myAdd$_inst_63_65_61_57_tsni(tot_width, tmp4, ps);
-    tmp6 = leave_nofit$_inst_63_65_61_58_tsni(tot_width, tmp5);
-    tmp7 = trim$_inst_63_65_61_59_tsni(tot_width, tmp6);
-    arr = globalThis.Object.freeze([
-      tmp7,
+    tot_width = tmp + tw;
+    tot_len = 1 + tl;
+    tmp1 = para.last_(ps);
+    tmp2 = new_$(tw, tl, tmp1);
+    tmp3 = myAdd$_inst_63_65_61_57_tsni(tot_width, tmp2, ps);
+    tmp4 = leave_nofit$_inst_63_65_61_58_tsni(tot_width, tmp3);
+    tmp5 = trim$_inst_63_65_61_59_tsni(tot_width, tmp4);
+    return globalThis.Object.freeze([
+      tmp5,
       tot_width,
       tot_len
-    ]);
-    return arr
+    ])
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -2397,7 +2327,7 @@ myAdd$_inst_63_65_61_57_tsni = function myAdd$_inst_63_65_61_57_tsni(tot_width, 
   }
 };
 tail__inst_63_65_61_57_10_tsni = function tail__inst_63_65_61_57_10_tsni(a_b) {
-  let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, x, y, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -2405,11 +2335,10 @@ tail__inst_63_65_61_57_10_tsni = function tail__inst_63_65_61_57_10_tsni(a_b) {
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -2419,11 +2348,10 @@ tail__inst_63_65_61_57_10_tsni = function tail__inst_63_65_61_57_10_tsni(a_b) {
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           y
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -2431,25 +2359,23 @@ tail__inst_63_65_61_57_10_tsni = function tail__inst_63_65_61_57_10_tsni(a_b) {
   }
 };
 splitAt_inst_63_65_61_57_10_11_tsni = function splitAt_inst_63_65_61_57_10_11_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (x, y) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (x, y) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp2,
       y0
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 leave_nofit$_inst_63_65_61_58_tsni = function leave_nofit$_inst_63_65_61_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
@@ -2469,7 +2395,7 @@ leave_nofit$_inst_63_65_61_58_tsni = function leave_nofit$_inst_63_65_61_58_tsni
   }
 };
 init__inst_63_65_61_58_6_tsni = function init__inst_63_65_61_58_6_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -2477,11 +2403,10 @@ init__inst_63_65_61_58_6_tsni = function init__inst_63_65_61_58_6_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -2491,11 +2416,10 @@ init__inst_63_65_61_58_6_tsni = function init__inst_63_65_61_58_6_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -2503,25 +2427,23 @@ init__inst_63_65_61_58_6_tsni = function init__inst_63_65_61_58_6_tsni(a_b) {
   }
 };
 splitAt_inst_63_65_61_58_6_2_tsni = function splitAt_inst_63_65_61_58_6_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 trim$_inst_63_65_61_59_tsni = function trim$_inst_63_65_61_59_tsni(tot_width, ps_pq) {
   let ps_p, q, p, scrut, scrut1, scrut2, tmp, tmp1;
@@ -2548,7 +2470,7 @@ trim$_inst_63_65_61_59_tsni = function trim$_inst_63_65_61_59_tsni(tot_width, ps
   }
 };
 init__inst_63_65_61_59_1_tsni = function init__inst_63_65_61_59_1_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -2556,11 +2478,10 @@ init__inst_63_65_61_59_1_tsni = function init__inst_63_65_61_59_1_tsni(a_b) {
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -2570,11 +2491,10 @@ init__inst_63_65_61_59_1_tsni = function init__inst_63_65_61_59_1_tsni(a_b) {
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -2582,25 +2502,23 @@ init__inst_63_65_61_59_1_tsni = function init__inst_63_65_61_59_1_tsni(a_b) {
   }
 };
 splitAt_inst_63_65_61_59_1_2_tsni = function splitAt_inst_63_65_61_59_1_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 concat_inst_63_66_tsni = function concat_inst_63_66_tsni(ls) {
   return runtime.safeCall(ls())
@@ -2767,9 +2685,9 @@ unparas_inst_63_68_45_tsni = function unparas_inst_63_68_45_tsni(ls) {
   return unformat_inst_63_68_45_37_tsni(NofibPrelude.Nil, ls)
 };
 unformat_inst_63_68_45_37_tsni = function unformat_inst_63_68_45_37_tsni(a, l) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_63_68_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda18, l)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_63_68_45_37_35_tsni(a));
+  return para.fold1(lambda$this, lambda18, l)
 };
 lambda_inst_63_68_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -2811,9 +2729,9 @@ unparas_inst_69_70_68_45_tsni = function unparas_inst_69_70_68_45_tsni(ls) {
   return unformat_inst_69_70_68_45_37_tsni(NofibPrelude.Nil, ls)
 };
 unformat_inst_69_70_68_45_37_tsni = function unformat_inst_69_70_68_45_37_tsni(a, l) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_69_70_68_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda18, l)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_69_70_68_45_37_35_tsni(a));
+  return para.fold1(lambda$this, lambda18, l)
 };
 lambda_inst_69_70_68_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -2965,23 +2883,21 @@ append_inst_69_70_68_48_50_51_tsni = function append_inst_69_70_68_48_50_51_tsni
   }
 };
 par3_inst_69_70_65_tsni = function par3_inst_69_70_65_tsni(ws) {
-  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let zs, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
-  tmp1 = para.scan1(stepr_inst_69_70_65_61_tsni, para.startr, tmp);
-  zs = tmp1;
-  tmp2 = lambda25;
-  tmp3 = NofibPrelude.map(tmp2, zs);
-  tmp4 = NofibPrelude.head(zs);
-  tmp5 = para.thd3(tmp4);
-  _deforest_Deforest_Arr_2_0 = tmp3;
-  _deforest_Deforest_Arr_2_1 = tmp5;
-  arr = (ws1) => {
+  zs = para.scan1(stepr_inst_69_70_65_61_tsni, para.startr, tmp);
+  tmp1 = NofibPrelude.map(lambda25, zs);
+  tmp2 = NofibPrelude.head(zs);
+  tmp3 = para.thd3(tmp2);
+  _deforest_Deforest_Arr_2_0 = tmp1;
+  _deforest_Deforest_Arr_2_1 = tmp3;
+  tmp4 = (ws1) => {
     return match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni(ws1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
   };
-  return tile_inst_69_70_65_62_tsni(ws, arr)
+  return tile_inst_69_70_65_62_tsni(ws, tmp4)
 };
 stepr_inst_69_70_65_61_tsni = function stepr_inst_69_70_65_61_tsni(w, ps_tw_tl) {
-  let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
+  let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
     first0 = runtime.Tuple.get(ps_tw_tl, 0);
     first1 = runtime.Tuple.get(ps_tw_tl, 1);
@@ -2990,21 +2906,18 @@ stepr_inst_69_70_65_61_tsni = function stepr_inst_69_70_65_61_tsni(w, ps_tw_tl) 
     tw = first1;
     tl = first2;
     tmp = w + 1;
-    tmp1 = tmp + tw;
-    tot_width = tmp1;
-    tmp2 = 1 + tl;
-    tot_len = tmp2;
-    tmp3 = para.last_(ps);
-    tmp4 = new_$(tw, tl, tmp3);
-    tmp5 = myAdd$_inst_69_70_65_61_57_tsni(tot_width, tmp4, ps);
-    tmp6 = leave_nofit$_inst_69_70_65_61_58_tsni(tot_width, tmp5);
-    tmp7 = trim$_inst_69_70_65_61_59_tsni(tot_width, tmp6);
-    arr = globalThis.Object.freeze([
-      tmp7,
+    tot_width = tmp + tw;
+    tot_len = 1 + tl;
+    tmp1 = para.last_(ps);
+    tmp2 = new_$(tw, tl, tmp1);
+    tmp3 = myAdd$_inst_69_70_65_61_57_tsni(tot_width, tmp2, ps);
+    tmp4 = leave_nofit$_inst_69_70_65_61_58_tsni(tot_width, tmp3);
+    tmp5 = trim$_inst_69_70_65_61_59_tsni(tot_width, tmp4);
+    return globalThis.Object.freeze([
+      tmp5,
       tot_width,
       tot_len
-    ]);
-    return arr
+    ])
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -3034,7 +2947,7 @@ trim$_inst_69_70_65_61_59_tsni = function trim$_inst_69_70_65_61_59_tsni(tot_wid
   }
 };
 init__inst_69_70_65_61_59_1_tsni = function init__inst_69_70_65_61_59_1_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -3042,11 +2955,10 @@ init__inst_69_70_65_61_59_1_tsni = function init__inst_69_70_65_61_59_1_tsni(a_b
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -3056,11 +2968,10 @@ init__inst_69_70_65_61_59_1_tsni = function init__inst_69_70_65_61_59_1_tsni(a_b
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -3068,25 +2979,23 @@ init__inst_69_70_65_61_59_1_tsni = function init__inst_69_70_65_61_59_1_tsni(a_b
   }
 };
 splitAt_inst_69_70_65_61_59_1_2_tsni = function splitAt_inst_69_70_65_61_59_1_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 leave_nofit$_inst_69_70_65_61_58_tsni = function leave_nofit$_inst_69_70_65_61_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
@@ -3106,7 +3015,7 @@ leave_nofit$_inst_69_70_65_61_58_tsni = function leave_nofit$_inst_69_70_65_61_5
   }
 };
 init__inst_69_70_65_61_58_6_tsni = function init__inst_69_70_65_61_58_6_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -3114,11 +3023,10 @@ init__inst_69_70_65_61_58_6_tsni = function init__inst_69_70_65_61_58_6_tsni(a_b
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -3128,11 +3036,10 @@ init__inst_69_70_65_61_58_6_tsni = function init__inst_69_70_65_61_58_6_tsni(a_b
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -3140,25 +3047,23 @@ init__inst_69_70_65_61_58_6_tsni = function init__inst_69_70_65_61_58_6_tsni(a_b
   }
 };
 splitAt_inst_69_70_65_61_58_6_2_tsni = function splitAt_inst_69_70_65_61_58_6_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 myAdd$_inst_69_70_65_61_57_tsni = function myAdd$_inst_69_70_65_61_57_tsni(tot_width, p, qr_rs) {
   let q, r_rs, r, scrut, scrut1, tmp, tmp1, tmp2, lambda$this;
@@ -3182,7 +3087,7 @@ myAdd$_inst_69_70_65_61_57_tsni = function myAdd$_inst_69_70_65_61_57_tsni(tot_w
   }
 };
 tail__inst_69_70_65_61_57_10_tsni = function tail__inst_69_70_65_61_57_10_tsni(a_b) {
-  let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, x, y, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -3190,11 +3095,10 @@ tail__inst_69_70_65_61_57_10_tsni = function tail__inst_69_70_65_61_57_10_tsni(a
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -3204,11 +3108,10 @@ tail__inst_69_70_65_61_57_10_tsni = function tail__inst_69_70_65_61_57_10_tsni(a
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           y
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -3216,37 +3119,35 @@ tail__inst_69_70_65_61_57_10_tsni = function tail__inst_69_70_65_61_57_10_tsni(a
   }
 };
 splitAt_inst_69_70_65_61_57_10_11_tsni = function splitAt_inst_69_70_65_61_57_10_11_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (x, y) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (x, y) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp2,
       y0
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 tile_inst_69_70_65_62_tsni = function tile_inst_69_70_65_62_tsni(ws, a_b) {
   return runtime.safeCall(a_b(ws))
 };
 splitAt_inst_69_70_65_62_31_tsni = function splitAt_inst_69_70_65_62_31_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  return (m, ms, l) => {
+    let first1, first0, ws1, ws2, tmp2, tmp3, tmp4, tmp5, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
@@ -3255,13 +3156,12 @@ splitAt_inst_69_70_65_62_31_tsni = function splitAt_inst_69_70_65_62_31_tsni(n, 
     tmp3 = NofibPrelude.leave(l, tmp2);
     _deforest_Deforest_Arr_2_01 = tmp3;
     _deforest_Deforest_Arr_2_11 = m;
-    arr1 = (ws) => {
+    tmp4 = (ws) => {
       return match_a_b_arm_Deforest_Arr_2_inst_69_70_65_62_tsni(ws, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
     };
-    tmp4 = tile_inst_69_70_65_62_tsni(ws2, arr1);
-    return NofibPrelude.Cons(ws1, tmp4)
-  };
-  return arr
+    tmp5 = tile_inst_69_70_65_62_tsni(ws2, tmp4);
+    return NofibPrelude.Cons(ws1, tmp5)
+  }
 };
 concat_inst_69_70_66_tsni = function concat_inst_69_70_66_tsni(ls) {
   return runtime.safeCall(ls())
@@ -3312,19 +3212,19 @@ lines_inst_69_70_64_41_tsni = function lines_inst_69_70_64_41_tsni(s) {
   }
 };
 break__inst_69_70_64_41_23_tsni = function break__inst_69_70_64_41_23_tsni(p, xs) {
-  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda26;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda26 = (l) => {
+      let tmp2;
+      tmp2 = (f) => {
+        return NofibPrelude.Nil
+      };
+      return match_s__rest_inst_69_70_64_41_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = (f) => {
-          return NofibPrelude.Nil
-        };
-        return match_s__rest_inst_69_70_64_41_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda26
+    ])
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -3342,11 +3242,10 @@ break__inst_69_70_64_41_23_tsni = function break__inst_69_70_64_41_23_tsni(p, xs
         tmp2 = lines_inst_69_70_64_41_tsni(s__);
         return match_s__rest_inst_69_70_64_41_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_69_70_64_41_23_tsni(p, xs1);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -3355,11 +3254,10 @@ break__inst_69_70_64_41_23_tsni = function break__inst_69_70_64_41_23_tsni(p, xs
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -3420,13 +3318,15 @@ paras_inst_69_70_64_43_tsni = function paras_inst_69_70_64_43_tsni(ls) {
   return filter_inst_69_70_64_43_54_tsni(lambda_inst_69_70_64_43_39_tsni, tmp)
 };
 lambda_inst_69_70_64_43_39_tsni = (undefined, function (x) {
-  return listNeq_inst_69_70_64_43_39_74_tsni((ys) => {
+  let lambda26;
+  lambda26 = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
       return false
     } else {
       return true
     }
-  }, x)
+  };
+  return listNeq_inst_69_70_64_43_39_74_tsni(lambda26, x)
 });
 filter_inst_69_70_64_43_54_tsni = function filter_inst_69_70_64_43_54_tsni(f, ls) {
   let param0, param1, h, t, scrut, tmp, _deforest_Cons_head, _deforest_Cons_tail;
@@ -3492,13 +3392,15 @@ paras_inst_71_72_70_64_43_tsni = function paras_inst_71_72_70_64_43_tsni(ls) {
   return filter_inst_71_72_70_64_43_54_tsni(lambda_inst_71_72_70_64_43_39_tsni, tmp)
 };
 lambda_inst_71_72_70_64_43_39_tsni = (undefined, function (x) {
-  return listNeq_inst_71_72_70_64_43_39_74_tsni((ys) => {
+  let lambda26;
+  lambda26 = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
       return false
     } else {
       return true
     }
-  }, x)
+  };
+  return listNeq_inst_71_72_70_64_43_39_74_tsni(lambda26, x)
 });
 words_inst_71_72_70_64_42_tsni = function words_inst_71_72_70_64_42_tsni(s) {
   let scrut;
@@ -3560,19 +3462,19 @@ lines_inst_71_72_70_64_41_tsni = function lines_inst_71_72_70_64_41_tsni(s) {
   }
 };
 break__inst_71_72_70_64_41_23_tsni = function break__inst_71_72_70_64_41_23_tsni(p, xs) {
-  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda26;
   if (xs instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda26 = (l) => {
+      let tmp2;
+      tmp2 = (f) => {
+        return NofibPrelude.Nil
+      };
+      return match_s__rest_inst_71_72_70_64_41_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = (f) => {
-          return NofibPrelude.Nil
-        };
-        return match_s__rest_inst_71_72_70_64_41_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda26
+    ])
   } else if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -3590,11 +3492,10 @@ break__inst_71_72_70_64_41_23_tsni = function break__inst_71_72_70_64_41_23_tsni
         tmp2 = lines_inst_71_72_70_64_41_tsni(s__);
         return match_s__rest_inst_71_72_70_64_41_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_71_72_70_64_41_23_tsni(p, xs1);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -3603,11 +3504,10 @@ break__inst_71_72_70_64_41_23_tsni = function break__inst_71_72_70_64_41_23_tsni
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -3651,32 +3551,30 @@ filter_inst_71_72_70_64_43_54_tsni = function filter_inst_71_72_70_64_43_54_tsni
   }
 };
 par3_inst_71_72_70_65_tsni = function par3_inst_71_72_70_65_tsni(ws) {
-  let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let zs, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
-  tmp1 = para.scan1(stepr_inst_71_72_70_65_61_tsni, para.startr, tmp);
-  zs = tmp1;
-  tmp2 = lambda25;
-  tmp3 = NofibPrelude.map(tmp2, zs);
-  tmp4 = NofibPrelude.head(zs);
-  tmp5 = para.thd3(tmp4);
-  _deforest_Deforest_Arr_2_0 = tmp3;
-  _deforest_Deforest_Arr_2_1 = tmp5;
-  arr = (ws1) => {
+  zs = para.scan1(stepr_inst_71_72_70_65_61_tsni, para.startr, tmp);
+  tmp1 = NofibPrelude.map(lambda25, zs);
+  tmp2 = NofibPrelude.head(zs);
+  tmp3 = para.thd3(tmp2);
+  _deforest_Deforest_Arr_2_0 = tmp1;
+  _deforest_Deforest_Arr_2_1 = tmp3;
+  tmp4 = (ws1) => {
     return match_a_b_arm_Deforest_Arr_2_inst_71_72_70_65_62_tsni(ws1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
   };
-  return tile_inst_71_72_70_65_62_tsni(ws, arr)
+  return tile_inst_71_72_70_65_62_tsni(ws, tmp4)
 };
 tile_inst_71_72_70_65_62_tsni = function tile_inst_71_72_70_65_62_tsni(ws, a_b) {
   return runtime.safeCall(a_b(ws))
 };
 splitAt_inst_71_72_70_65_62_31_tsni = function splitAt_inst_71_72_70_65_62_31_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (m, ms, l) => {
-    let first1, first0, ws1, ws2, tmp2, tmp3, arr1, tmp4, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  return (m, ms, l) => {
+    let first1, first0, ws1, ws2, tmp2, tmp3, tmp4, tmp5, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     ws1 = first0;
@@ -3685,16 +3583,15 @@ splitAt_inst_71_72_70_65_62_31_tsni = function splitAt_inst_71_72_70_65_62_31_ts
     tmp3 = NofibPrelude.leave(l, tmp2);
     _deforest_Deforest_Arr_2_01 = tmp3;
     _deforest_Deforest_Arr_2_11 = m;
-    arr1 = (ws) => {
+    tmp4 = (ws) => {
       return match_a_b_arm_Deforest_Arr_2_inst_71_72_70_65_62_tsni(ws, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
     };
-    tmp4 = tile_inst_71_72_70_65_62_tsni(ws2, arr1);
-    return NofibPrelude.Cons(ws1, tmp4)
-  };
-  return arr
+    tmp5 = tile_inst_71_72_70_65_62_tsni(ws2, tmp4);
+    return NofibPrelude.Cons(ws1, tmp5)
+  }
 };
 stepr_inst_71_72_70_65_61_tsni = function stepr_inst_71_72_70_65_61_tsni(w, ps_tw_tl) {
-  let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
+  let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
     first0 = runtime.Tuple.get(ps_tw_tl, 0);
     first1 = runtime.Tuple.get(ps_tw_tl, 1);
@@ -3703,21 +3600,18 @@ stepr_inst_71_72_70_65_61_tsni = function stepr_inst_71_72_70_65_61_tsni(w, ps_t
     tw = first1;
     tl = first2;
     tmp = w + 1;
-    tmp1 = tmp + tw;
-    tot_width = tmp1;
-    tmp2 = 1 + tl;
-    tot_len = tmp2;
-    tmp3 = para.last_(ps);
-    tmp4 = new_$(tw, tl, tmp3);
-    tmp5 = myAdd$_inst_71_72_70_65_61_57_tsni(tot_width, tmp4, ps);
-    tmp6 = leave_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, tmp5);
-    tmp7 = trim$_inst_71_72_70_65_61_59_tsni(tot_width, tmp6);
-    arr = globalThis.Object.freeze([
-      tmp7,
+    tot_width = tmp + tw;
+    tot_len = 1 + tl;
+    tmp1 = para.last_(ps);
+    tmp2 = new_$(tw, tl, tmp1);
+    tmp3 = myAdd$_inst_71_72_70_65_61_57_tsni(tot_width, tmp2, ps);
+    tmp4 = leave_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, tmp3);
+    tmp5 = trim$_inst_71_72_70_65_61_59_tsni(tot_width, tmp4);
+    return globalThis.Object.freeze([
+      tmp5,
       tot_width,
       tot_len
-    ]);
-    return arr
+    ])
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -3744,7 +3638,7 @@ myAdd$_inst_71_72_70_65_61_57_tsni = function myAdd$_inst_71_72_70_65_61_57_tsni
   }
 };
 tail__inst_71_72_70_65_61_57_10_tsni = function tail__inst_71_72_70_65_61_57_10_tsni(a_b) {
-  let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, x, y, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -3752,11 +3646,10 @@ tail__inst_71_72_70_65_61_57_10_tsni = function tail__inst_71_72_70_65_61_57_10_
     y = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -3766,11 +3659,10 @@ tail__inst_71_72_70_65_61_57_10_tsni = function tail__inst_71_72_70_65_61_57_10_
         return runtime.safeCall(scrut1(x, y))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           y
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -3778,25 +3670,23 @@ tail__inst_71_72_70_65_61_57_10_tsni = function tail__inst_71_72_70_65_61_57_10_
   }
 };
 splitAt_inst_71_72_70_65_61_57_10_11_tsni = function splitAt_inst_71_72_70_65_61_57_10_11_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (x, y) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (x, y) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp2,
       y0
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 leave_nofit$_inst_71_72_70_65_61_58_tsni = function leave_nofit$_inst_71_72_70_65_61_58_tsni(tot_width, ps_p) {
   let scrut, scrut1, tmp, tmp1, tmp2;
@@ -3816,7 +3706,7 @@ leave_nofit$_inst_71_72_70_65_61_58_tsni = function leave_nofit$_inst_71_72_70_6
   }
 };
 init__inst_71_72_70_65_61_58_6_tsni = function init__inst_71_72_70_65_61_58_6_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -3824,11 +3714,10 @@ init__inst_71_72_70_65_61_58_6_tsni = function init__inst_71_72_70_65_61_58_6_ts
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -3838,11 +3727,10 @@ init__inst_71_72_70_65_61_58_6_tsni = function init__inst_71_72_70_65_61_58_6_ts
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -3850,25 +3738,23 @@ init__inst_71_72_70_65_61_58_6_tsni = function init__inst_71_72_70_65_61_58_6_ts
   }
 };
 splitAt_inst_71_72_70_65_61_58_6_2_tsni = function splitAt_inst_71_72_70_65_61_58_6_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 trim$_inst_71_72_70_65_61_59_tsni = function trim$_inst_71_72_70_65_61_59_tsni(tot_width, ps_pq) {
   let ps_p, q, p, scrut, scrut1, scrut2, tmp, tmp1;
@@ -3895,7 +3781,7 @@ trim$_inst_71_72_70_65_61_59_tsni = function trim$_inst_71_72_70_65_61_59_tsni(t
   }
 };
 init__inst_71_72_70_65_61_59_1_tsni = function init__inst_71_72_70_65_61_59_1_tsni(a_b) {
-  let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+  let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
     first0 = runtime.Tuple.get(a_b, 0);
     first1 = runtime.Tuple.get(a_b, 1);
@@ -3903,11 +3789,10 @@ init__inst_71_72_70_65_61_59_1_tsni = function init__inst_71_72_70_65_61_59_1_ts
     x = first1;
     scrut2 = NofibPrelude.null_(x);
     if (scrut2 === true) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else {
       scrut = para.single(x);
       if (scrut === true) {
@@ -3917,11 +3802,10 @@ init__inst_71_72_70_65_61_59_1_tsni = function init__inst_71_72_70_65_61_59_1_ts
         return runtime.safeCall(scrut1(y, x))
       } else {
         tmp2 = NofibPrelude.tail(x);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     }
   } else {
@@ -3929,25 +3813,23 @@ init__inst_71_72_70_65_61_59_1_tsni = function init__inst_71_72_70_65_61_59_1_ts
   }
 };
 splitAt_inst_71_72_70_65_61_59_1_2_tsni = function splitAt_inst_71_72_70_65_61_59_1_2_tsni(n, ls) {
-  let tmp, tmp1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = NofibPrelude.take(n, ls);
   tmp1 = NofibPrelude.leave(n, ls);
   _deforest_Deforest_Arr_2_0 = tmp;
   _deforest_Deforest_Arr_2_1 = tmp1;
-  arr = (y, x) => {
-    let first1, first0, y0, y1, tmp2, arr1;
+  return (y, x) => {
+    let first1, first0, y0, y1, tmp2;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y0 = first0;
     y1 = first1;
     tmp2 = NofibPrelude.reverse(y1);
-    arr1 = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       y0,
       tmp2
-    ]);
-    return arr1
-  };
-  return arr
+    ])
+  }
 };
 concat_inst_71_72_70_66_tsni = function concat_inst_71_72_70_66_tsni(ls) {
   return runtime.safeCall(ls())
@@ -4116,9 +3998,9 @@ unparas_inst_71_72_70_68_45_tsni = function unparas_inst_71_72_70_68_45_tsni(ls)
   return unformat_inst_71_72_70_68_45_37_tsni(NofibPrelude.Nil, ls)
 };
 unformat_inst_71_72_70_68_45_37_tsni = function unformat_inst_71_72_70_68_45_37_tsni(a, l) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_71_72_70_68_45_37_35_tsni(a));
-  return para.fold1(tmp, lambda18, l)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_71_72_70_68_45_37_35_tsni(a));
+  return para.fold1(lambda$this, lambda18, l)
 };
 lambda_inst_71_72_70_68_45_37_35_tsni = (undefined, function (a) {
   return (xs, ys) => {
@@ -4344,17 +4226,16 @@ width_hd = function width_hd(tot_width) {
   }
 };
 cost$ = function cost$(tot_width, p) {
-  let a, scrut, tmp, tmp1, tmp2, tmp3;
+  let a, scrut, tmp, tmp1, tmp2;
   scrut = single(p);
   if (scrut === true) {
     return 0
   } else {
     tmp = para1.cost_tl(p);
     tmp1 = width_hd$(tot_width, p);
-    tmp2 = para1.optw - tmp1;
-    a = tmp2;
-    tmp3 = a * a;
-    return tmp + tmp3
+    a = para1.optw - tmp1;
+    tmp2 = a * a;
+    return tmp + tmp2
   }
 };
 cost = function cost(tot_width) {
@@ -4379,28 +4260,25 @@ old_width_hd = function old_width_hd(tw) {
   }
 };
 new_$ = function new_$(tw, tl, p) {
-  let x, scrut, arr, tmp, tmp1, tmp2, tmp3, tmp4, arr1;
+  let x, scrut, tmp, tmp1, tmp2, tmp3;
   scrut = single(p);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tw,
       0,
       tl
-    ]);
-    return arr
+    ])
   } else {
     tmp = para1.cost_tl(p);
     tmp1 = old_width_hd$(tw, p);
-    tmp2 = para1.optw - tmp1;
-    x = tmp2;
-    tmp3 = x * x;
-    tmp4 = tmp + tmp3;
-    arr1 = globalThis.Object.freeze([
+    x = para1.optw - tmp1;
+    tmp2 = x * x;
+    tmp3 = tmp + tmp2;
+    return globalThis.Object.freeze([
       tw,
-      tmp4,
+      tmp3,
       tl
-    ]);
-    return arr1
+    ])
   }
 };
 new_ = function new_(tw, tl) {
@@ -4470,32 +4348,30 @@ lambda23 = (undefined, function (p) {
   }
 });
 bf$ = function bf$(tot_width, p, q) {
-  let wqh, rqh, scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, lambda$this;
-  tmp = width_hd$(tot_width, q);
-  wqh = tmp;
-  tmp1 = para1.maxw - wqh;
-  tmp2 = tmp1 + 1;
-  rqh = tmp2;
-  tmp3 = single(q);
+  let wqh, rqh, scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda$this;
+  wqh = width_hd$(tot_width, q);
+  tmp = para1.maxw - wqh;
+  rqh = tmp + 1;
+  tmp1 = single(q);
   lambda$this = runtime.safeCall(lambda23(p));
-  scrut1 = runtime.short_and(tmp3, lambda$this);
+  scrut1 = runtime.short_and(tmp1, lambda$this);
   if (scrut1 === true) {
-    tmp4 = width_hd$(tot_width, p);
-    tmp5 = para1.optw - tmp4;
-    return NofibPrelude.min(tmp5, rqh)
+    tmp2 = width_hd$(tot_width, p);
+    tmp3 = para1.optw - tmp2;
+    return NofibPrelude.min(tmp3, rqh)
   } else {
     scrut = single(q);
     if (scrut === true) {
       return rqh
     } else {
-      tmp6 = cost$(tot_width, p);
-      tmp7 = cost$(tot_width, q);
-      tmp8 = tmp6 - tmp7;
-      tmp9 = width_hd$(tot_width, p);
-      tmp10 = wqh - tmp9;
-      tmp11 = 2 * tmp10;
-      tmp12 = para1.ceildiv(tmp8, tmp11);
-      return NofibPrelude.min(tmp12, rqh)
+      tmp4 = cost$(tot_width, p);
+      tmp5 = cost$(tot_width, q);
+      tmp6 = tmp4 - tmp5;
+      tmp7 = width_hd$(tot_width, p);
+      tmp8 = wqh - tmp7;
+      tmp9 = 2 * tmp8;
+      tmp10 = para1.ceildiv(tmp6, tmp9);
+      return NofibPrelude.min(tmp10, rqh)
     }
   }
 };
@@ -4549,13 +4425,15 @@ lambda22 = (undefined, function (par) {
   }
 });
 lambda21 = (undefined, function (x) {
-  return listNeq_inst_14_74_tsni((ys) => {
+  let lambda26;
+  lambda26 = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
       return false
     } else {
       return true
     }
-  }, x)
+  };
+  return listNeq_inst_14_74_tsni(lambda26, x)
 });
 unknownEq = function unknownEq(a, b) {
   return a === b
@@ -4647,10 +4525,9 @@ lambda15 = (undefined, function (x, y) {
   }
 });
 linc = function linc(l) {
-  let a, tmp, tmp1;
+  let a, tmp;
   tmp = para1.width(l);
-  tmp1 = para1.optw - tmp;
-  a = tmp1;
+  a = para1.optw - tmp;
   return a * a
 };
 plus1 = function plus(l, n) {
@@ -4670,7 +4547,7 @@ plus = function plus(w, n) {
 lambda$5 = function lambda$(w, p) {
   return para1.new_(w, p)
 };
-lambda10 = (undefined, function (w) {
+lambda9 = (undefined, function (w) {
   return (p) => {
     return lambda$5(w, p)
   }
@@ -4678,16 +4555,16 @@ lambda10 = (undefined, function (w) {
 lambda$4 = function lambda$(w, p) {
   return para1.glue(w, p)
 };
-lambda11 = (undefined, function (w) {
+lambda10 = (undefined, function (w) {
   return (p) => {
     return lambda$4(w, p)
   }
 });
-lambda9 = (undefined, function (w, ps) {
+lambda11 = (undefined, function (w, ps) {
   let tmp, tmp1, lambda$this, lambda$this1;
-  lambda$this = runtime.safeCall(lambda10(w));
+  lambda$this = runtime.safeCall(lambda9(w));
   tmp = map_inst_18_19_tsni(lambda$this, ps);
-  lambda$this1 = runtime.safeCall(lambda11(w));
+  lambda$this1 = runtime.safeCall(lambda10(w));
   tmp1 = NofibPrelude.map(lambda$this1, ps);
   return append_inst_18_76_tsni(tmp, tmp1)
 });
@@ -4783,78 +4660,78 @@ globalThis.Object.freeze(class para {
     runtime.Unit;
   }
   static {
-    let arr, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Cons_head9, _deforest_Cons_tail9;
+    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7, _deforest_Cons_head8, _deforest_Cons_tail8, _deforest_Cons_head9, _deforest_Cons_tail9;
     this.maxw = 70;
     this.optw = 63;
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       NofibPrelude.Nil,
       NofibPrelude.Nil
     ]);
-    this.nil_ = arr;
-    tmp = NofibPrelude.nofibStringToList("In the constructive programming community it is commonplace to see ");
-    tmp1 = NofibPrelude.nofibStringToList("formal developments of textbook algorithms. In the algorithm design ");
-    tmp2 = NofibPrelude.nofibStringToList("community, on the other hand, it may be well known that the textbook ");
-    tmp3 = NofibPrelude.nofibStringToList("solution to a problem is not the most efficient possible. However, in ");
-    tmp4 = NofibPrelude.nofibStringToList("presenting the more efficient solution, the algorithm designer will ");
-    tmp5 = NofibPrelude.nofibStringToList("usually omit some of the implementation details, this creating an ");
-    tmp6 = NofibPrelude.nofibStringToList("algorithm gap between the abstract algorithm and its concrete ");
-    tmp7 = NofibPrelude.nofibStringToList("implementation. This is in contrast to the formal development, which ");
-    tmp8 = NofibPrelude.nofibStringToList("usually presents the complete concrete implementation of the less ");
-    tmp9 = NofibPrelude.nofibStringToList("efficient solution.\n\n");
-    _deforest_Cons_head9 = tmp9;
+    this.nil_ = tmp;
+    tmp1 = NofibPrelude.nofibStringToList("In the constructive programming community it is commonplace to see ");
+    tmp2 = NofibPrelude.nofibStringToList("formal developments of textbook algorithms. In the algorithm design ");
+    tmp3 = NofibPrelude.nofibStringToList("community, on the other hand, it may be well known that the textbook ");
+    tmp4 = NofibPrelude.nofibStringToList("solution to a problem is not the most efficient possible. However, in ");
+    tmp5 = NofibPrelude.nofibStringToList("presenting the more efficient solution, the algorithm designer will ");
+    tmp6 = NofibPrelude.nofibStringToList("usually omit some of the implementation details, this creating an ");
+    tmp7 = NofibPrelude.nofibStringToList("algorithm gap between the abstract algorithm and its concrete ");
+    tmp8 = NofibPrelude.nofibStringToList("implementation. This is in contrast to the formal development, which ");
+    tmp9 = NofibPrelude.nofibStringToList("usually presents the complete concrete implementation of the less ");
+    tmp10 = NofibPrelude.nofibStringToList("efficient solution.\n\n");
+    _deforest_Cons_head9 = tmp10;
     _deforest_Cons_tail9 = () => {
       return NofibPrelude.Nil
     };
-    tmp10 = () => {
+    tmp11 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head9, _deforest_Cons_tail9)
     };
-    _deforest_Cons_head8 = tmp8;
-    _deforest_Cons_tail8 = tmp10;
-    tmp11 = () => {
+    _deforest_Cons_head8 = tmp9;
+    _deforest_Cons_tail8 = tmp11;
+    tmp12 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head8, _deforest_Cons_tail8)
     };
-    _deforest_Cons_head7 = tmp7;
-    _deforest_Cons_tail7 = tmp11;
-    tmp12 = () => {
+    _deforest_Cons_head7 = tmp8;
+    _deforest_Cons_tail7 = tmp12;
+    tmp13 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head7, _deforest_Cons_tail7)
     };
-    _deforest_Cons_head6 = tmp6;
-    _deforest_Cons_tail6 = tmp12;
-    tmp13 = () => {
+    _deforest_Cons_head6 = tmp7;
+    _deforest_Cons_tail6 = tmp13;
+    tmp14 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head6, _deforest_Cons_tail6)
     };
-    _deforest_Cons_head5 = tmp5;
-    _deforest_Cons_tail5 = tmp13;
-    tmp14 = () => {
+    _deforest_Cons_head5 = tmp6;
+    _deforest_Cons_tail5 = tmp14;
+    tmp15 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head5, _deforest_Cons_tail5)
     };
-    _deforest_Cons_head4 = tmp4;
-    _deforest_Cons_tail4 = tmp14;
-    tmp15 = () => {
+    _deforest_Cons_head4 = tmp5;
+    _deforest_Cons_tail4 = tmp15;
+    tmp16 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head4, _deforest_Cons_tail4)
     };
-    _deforest_Cons_head3 = tmp3;
-    _deforest_Cons_tail3 = tmp15;
-    tmp16 = () => {
+    _deforest_Cons_head3 = tmp4;
+    _deforest_Cons_tail3 = tmp16;
+    tmp17 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head3, _deforest_Cons_tail3)
     };
-    _deforest_Cons_head2 = tmp2;
-    _deforest_Cons_tail2 = tmp16;
-    tmp17 = () => {
+    _deforest_Cons_head2 = tmp3;
+    _deforest_Cons_tail2 = tmp17;
+    tmp18 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head2, _deforest_Cons_tail2)
     };
-    _deforest_Cons_head1 = tmp1;
-    _deforest_Cons_tail1 = tmp17;
-    tmp18 = () => {
+    _deforest_Cons_head1 = tmp2;
+    _deforest_Cons_tail1 = tmp18;
+    tmp19 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head1, _deforest_Cons_tail1)
     };
-    _deforest_Cons_head = tmp;
-    _deforest_Cons_tail = tmp18;
-    tmp19 = () => {
+    _deforest_Cons_head = tmp1;
+    _deforest_Cons_tail = tmp19;
+    tmp20 = () => {
       return match_ls_arm_Cons_inst_77_tsni(_deforest_Cons_head, _deforest_Cons_tail)
     };
-    tmp20 = concat_inst_77_tsni(tmp19);
-    this.test = tmp20;
+    tmp21 = concat_inst_77_tsni(tmp20);
+    this.test = tmp21;
   }
   static unwords(ws) {
     let param0, param1, w, ws1, tmp;
@@ -4872,13 +4749,12 @@ globalThis.Object.freeze(class para {
     }
   } 
   static break_(p, xs) {
-    let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2;
+    let param0, param1, x, xs1, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1;
     if (xs instanceof NofibPrelude.Nil.class) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         NofibPrelude.Nil
-      ]);
-      return arr
+      ])
     } else if (xs instanceof NofibPrelude.Cons.class) {
       param0 = xs.head;
       param1 = xs.tail;
@@ -4887,11 +4763,10 @@ globalThis.Object.freeze(class para {
       scrut1 = runtime.safeCall(p(x));
       if (scrut1 === true) {
         tmp = NofibPrelude.Cons(x, xs1);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           NofibPrelude.Nil,
           tmp
-        ]);
-        return arr1
+        ])
       } else {
         scrut = para.break_(p, xs1);
         if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -4900,11 +4775,10 @@ globalThis.Object.freeze(class para {
           ys = first0;
           zs = first1;
           tmp1 = NofibPrelude.Cons(x, ys);
-          arr2 = globalThis.Object.freeze([
+          return globalThis.Object.freeze([
             tmp1,
             zs
-          ]);
-          return arr2
+          ])
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -4974,10 +4848,10 @@ globalThis.Object.freeze(class para {
     }
   } 
   static scan1(f, g, xs) {
-    let tmp, lambda$this;
-    tmp = runtime.safeCall(lambda3(f));
-    lambda$this = runtime.safeCall(lambda4(g));
-    return para.fold1(tmp, lambda$this, xs)
+    let lambda$this, lambda$this1;
+    lambda$this = runtime.safeCall(lambda3(f));
+    lambda$this1 = runtime.safeCall(lambda4(g));
+    return para.fold1(lambda$this, lambda$this1, xs)
   } 
   static tails(xs) {
     return para.scan1(lambda5, lambda6, xs)
@@ -4998,9 +4872,9 @@ globalThis.Object.freeze(class para {
     }
   } 
   static minWith(f, xs) {
-    let tmp;
-    tmp = runtime.safeCall(lambda7(f));
-    return para.fold1(tmp, lambda8, xs)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda7(f));
+    return para.fold1(lambda$this, lambda8, xs)
   } 
   static new_(w, ls) {
     let tmp;
@@ -5021,10 +4895,7 @@ globalThis.Object.freeze(class para {
     }
   } 
   static formats(txt) {
-    let tmp, tmp1;
-    tmp = lambda_inst_26_27_tsni;
-    tmp1 = lambda12;
-    return para.fold1(tmp, tmp1, txt)
+    return para.fold1(lambda_inst_26_27_tsni, lambda12, txt)
   } 
   static width(ls) {
     return para.fold1(plus, NofibPrelude.listLen, ls)
@@ -5103,7 +4974,7 @@ globalThis.Object.freeze(class para {
     return para.thd3(a_b_c)
   } 
   static tile(ws, a_b) {
-    let first1, first0, param0, param1, m, ms, n, l, scrut, n1, tmp;
+    let first1, first0, param0, param1, m, ms, n, l, scrut, n1;
     if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
       first0 = runtime.Tuple.get(a_b, 0);
       first1 = runtime.Tuple.get(a_b, 1);
@@ -5116,8 +4987,7 @@ globalThis.Object.freeze(class para {
         m = param0;
         ms = param1;
         n = first1;
-        tmp = n - m;
-        l = tmp;
+        l = n - m;
         scrut = splitAt_inst_30_31_tsni(l, ws);
         return runtime.safeCall(scrut(m, ms, l))
       } else {
@@ -5198,7 +5068,7 @@ globalThis.Object.freeze(class para {
     }
   } 
   static cons_(a, a_b) {
-    let first1, first0, x, y, scrut, tmp, tmp1, arr, tmp2, arr1;
+    let first1, first0, x, y, scrut, tmp, tmp1, tmp2;
     if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
       first0 = runtime.Tuple.get(a_b, 0);
       first1 = runtime.Tuple.get(a_b, 1);
@@ -5208,25 +5078,23 @@ globalThis.Object.freeze(class para {
       scrut = ! tmp;
       if (scrut === true) {
         tmp1 = NofibPrelude.Cons(a, x);
-        arr = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           y
-        ]);
-        return arr
+        ])
       } else {
         tmp2 = NofibPrelude.Cons(a, NofibPrelude.Nil);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           x
-        ]);
-        return arr1
+        ])
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static snoc_(a, a_b) {
-    let first1, first0, y, x, scrut, tmp, tmp1, arr, tmp2, arr1;
+    let first1, first0, y, x, scrut, tmp, tmp1, tmp2;
     if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
       first0 = runtime.Tuple.get(a_b, 0);
       first1 = runtime.Tuple.get(a_b, 1);
@@ -5236,25 +5104,23 @@ globalThis.Object.freeze(class para {
       scrut = ! tmp;
       if (scrut === true) {
         tmp1 = NofibPrelude.Cons(a, x);
-        arr = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           y,
           tmp1
-        ]);
-        return arr
+        ])
       } else {
         tmp2 = NofibPrelude.Cons(a, NofibPrelude.Nil);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           x,
           tmp2
-        ]);
-        return arr1
+        ])
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static tail_(a_b) {
-    let first1, first0, x, y, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+    let first1, first0, x, y, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
     if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
       first0 = runtime.Tuple.get(a_b, 0);
       first1 = runtime.Tuple.get(a_b, 1);
@@ -5262,11 +5128,10 @@ globalThis.Object.freeze(class para {
       y = first1;
       scrut2 = NofibPrelude.null_(x);
       if (scrut2 === true) {
-        arr = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           NofibPrelude.Nil,
           NofibPrelude.Nil
-        ]);
-        return arr
+        ])
       } else {
         scrut = para.single(x);
         if (scrut === true) {
@@ -5276,11 +5141,10 @@ globalThis.Object.freeze(class para {
           return runtime.safeCall(scrut1(x, y))
         } else {
           tmp2 = NofibPrelude.tail(x);
-          arr1 = globalThis.Object.freeze([
+          return globalThis.Object.freeze([
             tmp2,
             y
-          ]);
-          return arr1
+          ])
         }
       }
     } else {
@@ -5288,7 +5152,7 @@ globalThis.Object.freeze(class para {
     }
   } 
   static init_(a_b) {
-    let first1, first0, y, x, scrut, scrut1, scrut2, arr, tmp, tmp1, tmp2, arr1;
+    let first1, first0, y, x, scrut, scrut1, scrut2, tmp, tmp1, tmp2;
     if (runtime.Tuple.isArrayLike(a_b) && a_b.length === 2) {
       first0 = runtime.Tuple.get(a_b, 0);
       first1 = runtime.Tuple.get(a_b, 1);
@@ -5296,11 +5160,10 @@ globalThis.Object.freeze(class para {
       x = first1;
       scrut2 = NofibPrelude.null_(x);
       if (scrut2 === true) {
-        arr = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           NofibPrelude.Nil,
           NofibPrelude.Nil
-        ]);
-        return arr
+        ])
       } else {
         scrut = para.single(x);
         if (scrut === true) {
@@ -5310,11 +5173,10 @@ globalThis.Object.freeze(class para {
           return runtime.safeCall(scrut1(y, x))
         } else {
           tmp2 = NofibPrelude.tail(x);
-          arr1 = globalThis.Object.freeze([
+          return globalThis.Object.freeze([
             y,
             tmp2
-          ]);
-          return arr1
+          ])
         }
       }
     } else {
@@ -5322,9 +5184,9 @@ globalThis.Object.freeze(class para {
     }
   } 
   static unformat(a, l) {
-    let tmp;
-    tmp = runtime.safeCall(lambda_inst_34_35_tsni(a));
-    return para.fold1(tmp, lambda18, l)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda_inst_34_35_tsni(a));
+    return para.fold1(lambda$this, lambda18, l)
   } 
   static format(a, x) {
     let lambda$this, lambda$this1;
@@ -5357,21 +5219,20 @@ globalThis.Object.freeze(class para {
     return unlines_inst_44_46_tsni(tmp1)
   } 
   static startr(a) {
-    let scrut, arr, tmp, arr1;
+    let scrut, tmp, tmp1;
     scrut = a <= para.maxw;
     if (scrut === true) {
-      arr = globalThis.Object.freeze([
+      tmp = globalThis.Object.freeze([
         0,
         0,
         0
       ]);
-      tmp = para.cons_(arr, para.nil_);
-      arr1 = globalThis.Object.freeze([
-        tmp,
+      tmp1 = para.cons_(tmp, para.nil_);
+      return globalThis.Object.freeze([
+        tmp1,
         a,
         1
-      ]);
-      return arr1
+      ])
     } else {
       throw globalThis.Error("startr param error")
     }
@@ -5390,7 +5251,7 @@ globalThis.Object.freeze(class para {
     return unparse_inst_52_55_tsni(tmp1)
   } 
   static stepr(w, ps_tw_tl) {
-    let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr;
+    let first2, first1, first0, ps, tw, tl, tot_width, tot_len, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
     if (runtime.Tuple.isArrayLike(ps_tw_tl) && ps_tw_tl.length === 3) {
       first0 = runtime.Tuple.get(ps_tw_tl, 0);
       first1 = runtime.Tuple.get(ps_tw_tl, 1);
@@ -5399,40 +5260,35 @@ globalThis.Object.freeze(class para {
       tw = first1;
       tl = first2;
       tmp = w + 1;
-      tmp1 = tmp + tw;
-      tot_width = tmp1;
-      tmp2 = 1 + tl;
-      tot_len = tmp2;
-      tmp3 = para.last_(ps);
-      tmp4 = new_$(tw, tl, tmp3);
-      tmp5 = myAdd$_inst_56_57_tsni(tot_width, tmp4, ps);
-      tmp6 = leave_nofit$_inst_56_58_tsni(tot_width, tmp5);
-      tmp7 = trim$_inst_56_59_tsni(tot_width, tmp6);
-      arr = globalThis.Object.freeze([
-        tmp7,
+      tot_width = tmp + tw;
+      tot_len = 1 + tl;
+      tmp1 = para.last_(ps);
+      tmp2 = new_$(tw, tl, tmp1);
+      tmp3 = myAdd$_inst_56_57_tsni(tot_width, tmp2, ps);
+      tmp4 = leave_nofit$_inst_56_58_tsni(tot_width, tmp3);
+      tmp5 = trim$_inst_56_59_tsni(tot_width, tmp4);
+      return globalThis.Object.freeze([
+        tmp5,
         tot_width,
         tot_len
-      ]);
-      return arr
+      ])
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static par3(ws) {
-    let zs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+    let zs, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
     tmp = NofibPrelude.map(NofibPrelude.listLen, ws);
-    tmp1 = para.scan1(stepr_inst_60_61_tsni, para.startr, tmp);
-    zs = tmp1;
-    tmp2 = lambda25;
-    tmp3 = NofibPrelude.map(tmp2, zs);
-    tmp4 = NofibPrelude.head(zs);
-    tmp5 = para.thd3(tmp4);
-    _deforest_Deforest_Arr_2_0 = tmp3;
-    _deforest_Deforest_Arr_2_1 = tmp5;
-    arr = (ws1) => {
+    zs = para.scan1(stepr_inst_60_61_tsni, para.startr, tmp);
+    tmp1 = NofibPrelude.map(lambda25, zs);
+    tmp2 = NofibPrelude.head(zs);
+    tmp3 = para.thd3(tmp2);
+    _deforest_Deforest_Arr_2_0 = tmp1;
+    _deforest_Deforest_Arr_2_1 = tmp3;
+    tmp4 = (ws1) => {
       return match_a_b_arm_Deforest_Arr_2_inst_60_62_tsni(ws1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
     };
-    return tile_inst_60_62_tsni(ws, arr)
+    return tile_inst_60_62_tsni(ws, tmp4)
   } 
   static fmt(x) {
     let tmp, tmp1, tmp2;

@@ -27,38 +27,34 @@ match_scrut_arm_Deforest_Arr_2_inst_2_tsni1 = (undefined, function (fk, t, f, _d
   return runtime.safeCall(scrut(fk, t, f, g))
 });
 match_scrut_arm_Deforest_Arr_2_inst_2_tsni2 = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_2_tsni, _deforest_Deforest_Arr_2_1_inst_2_tsni) {
-  let first1, first0, h, s___, e, k, arr, tmp, tmp1;
+  let first1, first0, h, s___, e, k, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_2_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_2_tsni;
   h = first0;
   s___ = first1;
-  arr = globalThis.Object.freeze([
+  e = globalThis.Object.freeze([
     f,
     g,
     h
   ]);
-  e = arr;
-  tmp = runtime.safeCall(fk(e));
-  k = tmp;
-  tmp1 = treejoin.insertT(k, e, t);
-  return treejoin.readTree(fk, s___, tmp1)
+  k = runtime.safeCall(fk(e));
+  tmp = treejoin.insertT(k, e, t);
+  return treejoin.readTree(fk, s___, tmp)
 });
 match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_7_8_tsni, _deforest_Deforest_Arr_2_1_inst_7_8_tsni) {
-  let first1, first0, h, s___, e, k, arr, tmp, tmp1;
+  let first1, first0, h, s___, e, k, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_7_8_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_7_8_tsni;
   h = first0;
   s___ = first1;
-  arr = globalThis.Object.freeze([
+  e = globalThis.Object.freeze([
     f,
     g,
     h
   ]);
-  e = arr;
-  tmp = runtime.safeCall(fk(e));
-  k = tmp;
-  tmp1 = treejoin.insertT(k, e, t);
-  return readTree_inst_7_8_tsni(fk, s___, tmp1)
+  k = runtime.safeCall(fk(e));
+  tmp = treejoin.insertT(k, e, t);
+  return readTree_inst_7_8_tsni(fk, s___, tmp)
 });
 match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni1 = (undefined, function (fk, t, f, _deforest_Deforest_Arr_2_0_inst_7_8_tsni, _deforest_Deforest_Arr_2_1_inst_7_8_tsni) {
   let first1, first0, g, s__, scrut;
@@ -79,21 +75,19 @@ match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni2 = (undefined, function (fk, t, _de
   return runtime.safeCall(scrut(fk, t, f))
 });
 match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_7_9_tsni, _deforest_Deforest_Arr_2_1_inst_7_9_tsni) {
-  let first1, first0, h, s___, e, k, arr, tmp, tmp1;
+  let first1, first0, h, s___, e, k, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_7_9_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_7_9_tsni;
   h = first0;
   s___ = first1;
-  arr = globalThis.Object.freeze([
+  e = globalThis.Object.freeze([
     f,
     g,
     h
   ]);
-  e = arr;
-  tmp = runtime.safeCall(fk(e));
-  k = tmp;
-  tmp1 = treejoin.insertT(k, e, t);
-  return readTree_inst_7_9_tsni(fk, s___, tmp1)
+  k = runtime.safeCall(fk(e));
+  tmp = treejoin.insertT(k, e, t);
+  return readTree_inst_7_9_tsni(fk, s___, tmp)
 });
 match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni1 = (undefined, function (fk, t, f, _deforest_Deforest_Arr_2_0_inst_7_9_tsni, _deforest_Deforest_Arr_2_1_inst_7_9_tsni) {
   let first1, first0, g, s__, scrut;
@@ -138,21 +132,19 @@ match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni1 = (undefined, function (fk, t,
   return runtime.safeCall(scrut(fk, t, f, g))
 });
 match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni2 = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni) {
-  let first1, first0, h, s___, e, k, arr, tmp, tmp1;
+  let first1, first0, h, s___, e, k, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_11_12_9_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_11_12_9_tsni;
   h = first0;
   s___ = first1;
-  arr = globalThis.Object.freeze([
+  e = globalThis.Object.freeze([
     f,
     g,
     h
   ]);
-  e = arr;
-  tmp = runtime.safeCall(fk(e));
-  k = tmp;
-  tmp1 = treejoin.insertT(k, e, t);
-  return readTree_inst_11_12_9_tsni(fk, s___, tmp1)
+  k = runtime.safeCall(fk(e));
+  tmp = treejoin.insertT(k, e, t);
+  return readTree_inst_11_12_9_tsni(fk, s___, tmp)
 });
 match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni = (undefined, function (fk, t, _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni) {
   let first1, first0, f, s_, scrut;
@@ -173,21 +165,19 @@ match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni1 = (undefined, function (fk, t,
   return runtime.safeCall(scrut(fk, t, f, g))
 });
 match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni2 = (undefined, function (fk, t, f, g, _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni, _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni) {
-  let first1, first0, h, s___, e, k, arr, tmp, tmp1;
+  let first1, first0, h, s___, e, k, tmp;
   first0 = _deforest_Deforest_Arr_2_0_inst_11_12_8_tsni;
   first1 = _deforest_Deforest_Arr_2_1_inst_11_12_8_tsni;
   h = first0;
   s___ = first1;
-  arr = globalThis.Object.freeze([
+  e = globalThis.Object.freeze([
     f,
     g,
     h
   ]);
-  e = arr;
-  tmp = runtime.safeCall(fk(e));
-  k = tmp;
-  tmp1 = treejoin.insertT(k, e, t);
-  return readTree_inst_11_12_8_tsni(fk, s___, tmp1)
+  k = runtime.safeCall(fk(e));
+  tmp = treejoin.insertT(k, e, t);
+  return readTree_inst_11_12_8_tsni(fk, s___, tmp)
 });
 lookupT_inst_0_1_tsni = function lookupT_inst_0_1_tsni(k, t) {
   let param0, param1, k_, e, scrut, param2, k_1, l, r, scrut1, _deforest_Some_x;
@@ -213,7 +203,7 @@ lookupT_inst_0_1_tsni = function lookupT_inst_0_1_tsni(k, t) {
     if (scrut === true) {
       _deforest_Some_x = e;
       return (j, a, b, c) => {
-        let param01, first2, first1, first0, d, e1, f, arr;
+        let param01, first2, first1, first0, d, e1, f, tmp;
         param01 = _deforest_Some_x;
         if (runtime.Tuple.isArrayLike(param01) && param01.length === 3) {
           first0 = runtime.Tuple.get(param01, 0);
@@ -222,14 +212,14 @@ lookupT_inst_0_1_tsni = function lookupT_inst_0_1_tsni(k, t) {
           d = first0;
           e1 = first1;
           f = first2;
-          arr = globalThis.Object.freeze([
+          tmp = globalThis.Object.freeze([
             a,
             b,
             c,
             d,
             e1
           ]);
-          return treejoin.insertT(c, arr, j)
+          return treejoin.insertT(c, tmp, j)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -251,7 +241,7 @@ readInt_inst_2_3_tsni = function readInt_inst_2_3_tsni(s) {
   return readInt__inst_2_3_4_tsni(0, s)
 };
 readInt__inst_2_3_4_tsni = function readInt__inst_2_3_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -266,31 +256,27 @@ readInt__inst_2_3_4_tsni = function readInt__inst_2_3_4_tsni(n, cs) {
       return readInt__inst_2_3_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t) => {
+      return (fk, t) => {
         return match_scrut_arm_Deforest_Arr_2_inst_2_tsni(fk, t, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t) => {
+    return (fk, t) => {
       return match_scrut_arm_Deforest_Arr_2_inst_2_tsni(fk, t, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_2_5_tsni = function readInt_inst_2_5_tsni(s) {
   return readInt__inst_2_5_4_tsni(0, s)
 };
 readInt__inst_2_5_4_tsni = function readInt__inst_2_5_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -305,31 +291,27 @@ readInt__inst_2_5_4_tsni = function readInt__inst_2_5_4_tsni(n, cs) {
       return readInt__inst_2_5_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t, f) => {
+      return (fk, t, f) => {
         return match_scrut_arm_Deforest_Arr_2_inst_2_tsni1(fk, t, f, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t, f) => {
+    return (fk, t, f) => {
       return match_scrut_arm_Deforest_Arr_2_inst_2_tsni1(fk, t, f, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_2_6_tsni = function readInt_inst_2_6_tsni(s) {
   return readInt__inst_2_6_4_tsni(0, s)
 };
 readInt__inst_2_6_4_tsni = function readInt__inst_2_6_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -344,24 +326,20 @@ readInt__inst_2_6_4_tsni = function readInt__inst_2_6_4_tsni(n, cs) {
       return readInt__inst_2_6_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t, f, g) => {
+      return (fk, t, f, g) => {
         return match_scrut_arm_Deforest_Arr_2_inst_2_tsni2(fk, t, f, g, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t, f, g) => {
+    return (fk, t, f, g) => {
       return match_scrut_arm_Deforest_Arr_2_inst_2_tsni2(fk, t, f, g, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 readTree_inst_7_8_tsni = function readTree_inst_7_8_tsni(fk, s, t) {
@@ -377,7 +355,7 @@ readInt_inst_7_8_6_tsni = function readInt_inst_7_8_6_tsni(s) {
   return readInt__inst_7_8_6_4_tsni(0, s)
 };
 readInt__inst_7_8_6_4_tsni = function readInt__inst_7_8_6_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -392,31 +370,27 @@ readInt__inst_7_8_6_4_tsni = function readInt__inst_7_8_6_4_tsni(n, cs) {
       return readInt__inst_7_8_6_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_0 = n;
       _deforest_Deforest_Arr_2_1 = s_1;
-      arr = (fk, t, f, g) => {
+      return (fk, t, f, g) => {
         return match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_01 = n;
     _deforest_Deforest_Arr_2_11 = s_;
-    arr1 = (fk, t, f, g) => {
+    return (fk, t, f, g) => {
       return match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_7_8_5_tsni = function readInt_inst_7_8_5_tsni(s) {
   return readInt__inst_7_8_5_4_tsni(0, s)
 };
 readInt__inst_7_8_5_4_tsni = function readInt__inst_7_8_5_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -431,31 +405,27 @@ readInt__inst_7_8_5_4_tsni = function readInt__inst_7_8_5_4_tsni(n, cs) {
       return readInt__inst_7_8_5_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_0 = n;
       _deforest_Deforest_Arr_2_1 = s_1;
-      arr = (fk, t, f) => {
+      return (fk, t, f) => {
         return match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni1(fk, t, f, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_01 = n;
     _deforest_Deforest_Arr_2_11 = s_;
-    arr1 = (fk, t, f) => {
+    return (fk, t, f) => {
       return match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni1(fk, t, f, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_7_8_3_tsni = function readInt_inst_7_8_3_tsni(s) {
   return readInt__inst_7_8_3_4_tsni(0, s)
 };
 readInt__inst_7_8_3_4_tsni = function readInt__inst_7_8_3_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -470,24 +440,20 @@ readInt__inst_7_8_3_4_tsni = function readInt__inst_7_8_3_4_tsni(n, cs) {
       return readInt__inst_7_8_3_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_0 = n;
       _deforest_Deforest_Arr_2_1 = s_1;
-      arr = (fk, t) => {
+      return (fk, t) => {
         return match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni2(fk, t, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_01 = n;
     _deforest_Deforest_Arr_2_11 = s_;
-    arr1 = (fk, t) => {
+    return (fk, t) => {
       return match_scrut_arm_Deforest_Arr_2_inst_7_8_tsni2(fk, t, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-    };
-    return arr1
+    }
   }
 };
 readTree_inst_7_9_tsni = function readTree_inst_7_9_tsni(fk, s, t) {
@@ -503,7 +469,7 @@ readInt_inst_7_9_6_tsni = function readInt_inst_7_9_6_tsni(s) {
   return readInt__inst_7_9_6_4_tsni(0, s)
 };
 readInt__inst_7_9_6_4_tsni = function readInt__inst_7_9_6_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -518,31 +484,27 @@ readInt__inst_7_9_6_4_tsni = function readInt__inst_7_9_6_4_tsni(n, cs) {
       return readInt__inst_7_9_6_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_0 = n;
       _deforest_Deforest_Arr_2_1 = s_1;
-      arr = (fk, t, f, g) => {
+      return (fk, t, f, g) => {
         return match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_01 = n;
     _deforest_Deforest_Arr_2_11 = s_;
-    arr1 = (fk, t, f, g) => {
+    return (fk, t, f, g) => {
       return match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni(fk, t, f, g, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_7_9_5_tsni = function readInt_inst_7_9_5_tsni(s) {
   return readInt__inst_7_9_5_4_tsni(0, s)
 };
 readInt__inst_7_9_5_4_tsni = function readInt__inst_7_9_5_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -557,31 +519,27 @@ readInt__inst_7_9_5_4_tsni = function readInt__inst_7_9_5_4_tsni(n, cs) {
       return readInt__inst_7_9_5_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_0 = n;
       _deforest_Deforest_Arr_2_1 = s_1;
-      arr = (fk, t, f) => {
+      return (fk, t, f) => {
         return match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni1(fk, t, f, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_01 = n;
     _deforest_Deforest_Arr_2_11 = s_;
-    arr1 = (fk, t, f) => {
+    return (fk, t, f) => {
       return match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni1(fk, t, f, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_7_9_3_tsni = function readInt_inst_7_9_3_tsni(s) {
   return readInt__inst_7_9_3_4_tsni(0, s)
 };
 readInt__inst_7_9_3_4_tsni = function readInt__inst_7_9_3_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -596,24 +554,20 @@ readInt__inst_7_9_3_4_tsni = function readInt__inst_7_9_3_4_tsni(n, cs) {
       return readInt__inst_7_9_3_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_0 = n;
       _deforest_Deforest_Arr_2_1 = s_1;
-      arr = (fk, t) => {
+      return (fk, t) => {
         return match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni2(fk, t, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_01 = n;
     _deforest_Deforest_Arr_2_11 = s_;
-    arr1 = (fk, t) => {
+    return (fk, t) => {
       return match_scrut_arm_Deforest_Arr_2_inst_7_9_tsni2(fk, t, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-    };
-    return arr1
+    }
   }
 };
 join_inst_7_10_tsni = function join_inst_7_10_tsni(t1, t2, j) {
@@ -679,7 +633,7 @@ lookupT_inst_7_10_1_tsni = function lookupT_inst_7_10_1_tsni(k, t) {
     if (scrut === true) {
       _deforest_Some_x = e;
       return (j, a, b, c) => {
-        let param01, first2, first1, first0, d, e1, f, arr;
+        let param01, first2, first1, first0, d, e1, f, tmp;
         param01 = _deforest_Some_x;
         if (runtime.Tuple.isArrayLike(param01) && param01.length === 3) {
           first0 = runtime.Tuple.get(param01, 0);
@@ -688,14 +642,14 @@ lookupT_inst_7_10_1_tsni = function lookupT_inst_7_10_1_tsni(k, t) {
           d = first0;
           e1 = first1;
           f = first2;
-          arr = globalThis.Object.freeze([
+          tmp = globalThis.Object.freeze([
             a,
             b,
             c,
             d,
             e1
           ]);
-          return treejoin.insertT(c, arr, j)
+          return treejoin.insertT(c, tmp, j)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -714,21 +668,15 @@ lookupT_inst_7_10_1_tsni = function lookupT_inst_7_10_1_tsni(k, t) {
   }
 };
 testTreejoin_nofib_inst_11_12_tsni = function testTreejoin_nofib_inst_11_12_tsni(n) {
-  let c1, c2, a, b, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
+  let c1, c2, a, b, tmp, tmp1, tmp2, tmp3;
   tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.1"));
   tmp1 = runtime.safeCall(tmp.toString());
-  tmp2 = NofibPrelude.nofibStringToList(tmp1);
-  c1 = tmp2;
-  tmp3 = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
-  tmp4 = runtime.safeCall(tmp3.toString());
-  tmp5 = NofibPrelude.nofibStringToList(tmp4);
-  c2 = tmp5;
-  tmp6 = lambda2;
-  tmp7 = readTree_inst_11_12_8_tsni(tmp6, c1, treejoin.Empty);
-  a = tmp7;
-  tmp8 = lambda3;
-  tmp9 = readTree_inst_11_12_9_tsni(tmp8, c2, treejoin.Empty);
-  b = tmp9;
+  c1 = NofibPrelude.nofibStringToList(tmp1);
+  tmp2 = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
+  tmp3 = runtime.safeCall(tmp2.toString());
+  c2 = NofibPrelude.nofibStringToList(tmp3);
+  a = readTree_inst_11_12_8_tsni(lambda2, c1, treejoin.Empty);
+  b = readTree_inst_11_12_9_tsni(lambda3, c2, treejoin.Empty);
   return join_inst_11_12_10_tsni(a, b, treejoin.Empty)
 };
 join_inst_11_12_10_tsni = function join_inst_11_12_10_tsni(t1, t2, j) {
@@ -794,7 +742,7 @@ lookupT_inst_11_12_10_1_tsni = function lookupT_inst_11_12_10_1_tsni(k, t) {
     if (scrut === true) {
       _deforest_Some_x = e;
       return (j, a, b, c) => {
-        let param01, first2, first1, first0, d, e1, f, arr;
+        let param01, first2, first1, first0, d, e1, f, tmp;
         param01 = _deforest_Some_x;
         if (runtime.Tuple.isArrayLike(param01) && param01.length === 3) {
           first0 = runtime.Tuple.get(param01, 0);
@@ -803,14 +751,14 @@ lookupT_inst_11_12_10_1_tsni = function lookupT_inst_11_12_10_1_tsni(k, t) {
           d = first0;
           e1 = first1;
           f = first2;
-          arr = globalThis.Object.freeze([
+          tmp = globalThis.Object.freeze([
             a,
             b,
             c,
             d,
             e1
           ]);
-          return treejoin.insertT(c, arr, j)
+          return treejoin.insertT(c, tmp, j)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -841,7 +789,7 @@ readInt_inst_11_12_9_3_tsni = function readInt_inst_11_12_9_3_tsni(s) {
   return readInt__inst_11_12_9_3_4_tsni(0, s)
 };
 readInt__inst_11_12_9_3_4_tsni = function readInt__inst_11_12_9_3_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -856,31 +804,27 @@ readInt__inst_11_12_9_3_4_tsni = function readInt__inst_11_12_9_3_4_tsni(n, cs) 
       return readInt__inst_11_12_9_3_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t) => {
+      return (fk, t) => {
         return match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni(fk, t, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t) => {
+    return (fk, t) => {
       return match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni(fk, t, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_11_12_9_5_tsni = function readInt_inst_11_12_9_5_tsni(s) {
   return readInt__inst_11_12_9_5_4_tsni(0, s)
 };
 readInt__inst_11_12_9_5_4_tsni = function readInt__inst_11_12_9_5_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -895,31 +839,27 @@ readInt__inst_11_12_9_5_4_tsni = function readInt__inst_11_12_9_5_4_tsni(n, cs) 
       return readInt__inst_11_12_9_5_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t, f) => {
+      return (fk, t, f) => {
         return match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni1(fk, t, f, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t, f) => {
+    return (fk, t, f) => {
       return match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni1(fk, t, f, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_11_12_9_6_tsni = function readInt_inst_11_12_9_6_tsni(s) {
   return readInt__inst_11_12_9_6_4_tsni(0, s)
 };
 readInt__inst_11_12_9_6_4_tsni = function readInt__inst_11_12_9_6_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -934,24 +874,20 @@ readInt__inst_11_12_9_6_4_tsni = function readInt__inst_11_12_9_6_4_tsni(n, cs) 
       return readInt__inst_11_12_9_6_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t, f, g) => {
+      return (fk, t, f, g) => {
         return match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni2(fk, t, f, g, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t, f, g) => {
+    return (fk, t, f, g) => {
       return match_scrut_arm_Deforest_Arr_2_inst_11_12_9_tsni2(fk, t, f, g, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 readTree_inst_11_12_8_tsni = function readTree_inst_11_12_8_tsni(fk, s, t) {
@@ -967,7 +903,7 @@ readInt_inst_11_12_8_3_tsni = function readInt_inst_11_12_8_3_tsni(s) {
   return readInt__inst_11_12_8_3_4_tsni(0, s)
 };
 readInt__inst_11_12_8_3_4_tsni = function readInt__inst_11_12_8_3_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -982,31 +918,27 @@ readInt__inst_11_12_8_3_4_tsni = function readInt__inst_11_12_8_3_4_tsni(n, cs) 
       return readInt__inst_11_12_8_3_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t) => {
+      return (fk, t) => {
         return match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni(fk, t, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t) => {
+    return (fk, t) => {
       return match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni(fk, t, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_11_12_8_5_tsni = function readInt_inst_11_12_8_5_tsni(s) {
   return readInt__inst_11_12_8_5_4_tsni(0, s)
 };
 readInt__inst_11_12_8_5_4_tsni = function readInt__inst_11_12_8_5_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -1021,31 +953,27 @@ readInt__inst_11_12_8_5_4_tsni = function readInt__inst_11_12_8_5_4_tsni(n, cs) 
       return readInt__inst_11_12_8_5_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t, f) => {
+      return (fk, t, f) => {
         return match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni1(fk, t, f, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t, f) => {
+    return (fk, t, f) => {
       return match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni1(fk, t, f, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 readInt_inst_11_12_8_6_tsni = function readInt_inst_11_12_8_6_tsni(s) {
   return readInt__inst_11_12_8_6_4_tsni(0, s)
 };
 readInt__inst_11_12_8_6_4_tsni = function readInt__inst_11_12_8_6_4_tsni(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -1060,24 +988,20 @@ readInt__inst_11_12_8_6_4_tsni = function readInt__inst_11_12_8_6_4_tsni(n, cs) 
       return readInt__inst_11_12_8_6_4_tsni(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
       _deforest_Deforest_Arr_2_01 = n;
       _deforest_Deforest_Arr_2_11 = s_1;
-      arr = (fk, t, f, g) => {
+      return (fk, t, f, g) => {
         return match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni2(fk, t, f, g, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-      };
-      return arr
+      }
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
     _deforest_Deforest_Arr_2_0 = n;
     _deforest_Deforest_Arr_2_1 = s_;
-    arr1 = (fk, t, f, g) => {
+    return (fk, t, f, g) => {
       return match_scrut_arm_Deforest_Arr_2_inst_11_12_8_tsni2(fk, t, f, g, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-    };
-    return arr1
+    }
   }
 };
 lambda2 = (undefined, function (caseScrut) {
@@ -1105,7 +1029,7 @@ lambda3 = (undefined, function (caseScrut) {
   }
 });
 readInt_ = function readInt_(n, cs) {
-  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, arr, tmp6, arr1;
+  let s_, param0, param1, c, cs_, s_1, scrut, tmp, tmp1, tmp2, tmp3, tmp4;
   if (cs instanceof NofibPrelude.Cons.class) {
     param0 = cs.head;
     param1 = cs.tail;
@@ -1120,22 +1044,18 @@ readInt_ = function readInt_(n, cs) {
       return readInt_(tmp3, cs_)
     } else {
       tmp4 = NofibPrelude.Cons(c, cs);
-      tmp5 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
-      s_1 = tmp5;
-      arr = globalThis.Object.freeze([
+      s_1 = NofibPrelude.leaveWhile(treejoin1.isSpace, tmp4);
+      return globalThis.Object.freeze([
         n,
         s_1
-      ]);
-      return arr
+      ])
     }
   } else {
-    tmp6 = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
-    s_ = tmp6;
-    arr1 = globalThis.Object.freeze([
+    s_ = NofibPrelude.leaveWhile(treejoin1.isSpace, cs);
+    return globalThis.Object.freeze([
       n,
       s_
-    ]);
-    return arr1
+    ])
   }
 };
 lambda$1 = function lambda$(n) {
@@ -1222,15 +1142,14 @@ globalThis.Object.freeze(class treejoin {
     return runtime.short_or(tmp, lambda$this)
   } 
   static isDigit(c) {
-    let n, tmp, tmp1, lambda$this;
-    tmp = runtime.safeCall(c.codePointAt(0));
-    n = tmp;
-    tmp1 = n >= 48;
+    let n, tmp, lambda$this;
+    n = runtime.safeCall(c.codePointAt(0));
+    tmp = n >= 48;
     lambda$this = runtime.safeCall(lambda1(n));
-    return runtime.short_and(tmp1, lambda$this)
+    return runtime.short_and(tmp, lambda$this)
   } 
   static insertT(k, e, t) {
-    let param0, param1, k_, k__, l_, scrut, scrut1, param2, k_1, l, r, scrut2, tmp, tmp1, tmp2, tmp3, tmp4;
+    let param0, param1, k_, k__, l_, scrut, scrut1, param2, k_1, l, r, scrut2, tmp, tmp1, tmp2, tmp3;
     if (t instanceof treejoin.Node.class) {
       param0 = t.k;
       param1 = t.l;
@@ -1251,17 +1170,16 @@ globalThis.Object.freeze(class treejoin {
       param1 = t.e;
       k_ = param0;
       k__ = param1;
-      tmp2 = treejoin.Leaf(k, e);
-      l_ = tmp2;
+      l_ = treejoin.Leaf(k, e);
       scrut1 = k < k_;
       if (scrut1 === true) {
-        tmp3 = treejoin.Leaf(k_, k__);
-        return treejoin.Node(k, l_, tmp3)
+        tmp2 = treejoin.Leaf(k_, k__);
+        return treejoin.Node(k, l_, tmp2)
       } else {
         scrut = k > k_;
         if (scrut === true) {
-          tmp4 = treejoin.Leaf(k_, k__);
-          return treejoin.Node(k_, tmp4, l_)
+          tmp3 = treejoin.Leaf(k_, k__);
+          return treejoin.Node(k_, tmp3, l_)
         } else {
           throw globalThis.Error("already exist")
         }
@@ -1356,21 +1274,15 @@ globalThis.Object.freeze(class treejoin {
     }
   } 
   static testTreejoin_nofib(n) {
-    let c1, c2, a, b, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
+    let c1, c2, a, b, tmp, tmp1, tmp2, tmp3;
     tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.1"));
     tmp1 = runtime.safeCall(tmp.toString());
-    tmp2 = NofibPrelude.nofibStringToList(tmp1);
-    c1 = tmp2;
-    tmp3 = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
-    tmp4 = runtime.safeCall(tmp3.toString());
-    tmp5 = NofibPrelude.nofibStringToList(tmp4);
-    c2 = tmp5;
-    tmp6 = lambda2;
-    tmp7 = readTree_inst_7_8_tsni(tmp6, c1, treejoin.Empty);
-    a = tmp7;
-    tmp8 = lambda3;
-    tmp9 = readTree_inst_7_9_tsni(tmp8, c2, treejoin.Empty);
-    b = tmp9;
+    c1 = NofibPrelude.nofibStringToList(tmp1);
+    tmp2 = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/1500.2"));
+    tmp3 = runtime.safeCall(tmp2.toString());
+    c2 = NofibPrelude.nofibStringToList(tmp3);
+    a = readTree_inst_7_8_tsni(lambda2, c1, treejoin.Empty);
+    b = readTree_inst_7_9_tsni(lambda3, c2, treejoin.Empty);
     return join_inst_7_10_tsni(a, b, treejoin.Empty)
   } 
   static main() {

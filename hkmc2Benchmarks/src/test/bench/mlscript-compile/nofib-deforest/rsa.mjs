@@ -282,12 +282,12 @@ map_inst_4_8_tsni = function map_inst_4_8_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
 encrypt_inst_9_10_tsni = function encrypt_inst_9_10_tsni(n, e, s) {
-  let tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(lambda_inst_9_10_15_tsni(n, e));
-  tmp1 = rsa.size(n);
-  tmp2 = collect_inst_9_10_5_tsni(tmp1, s);
-  tmp3 = map_inst_9_10_8_tsni(tmp, tmp2);
-  return unlines_inst_9_10_7_tsni(tmp3)
+  let tmp, tmp1, tmp2, lambda$this;
+  tmp = rsa.size(n);
+  tmp1 = collect_inst_9_10_5_tsni(tmp, s);
+  lambda$this = runtime.safeCall(lambda_inst_9_10_15_tsni(n, e));
+  tmp2 = map_inst_9_10_8_tsni(lambda$this, tmp1);
+  return unlines_inst_9_10_7_tsni(tmp2)
 };
 unlines_inst_9_10_7_tsni = function unlines_inst_9_10_7_tsni(ls) {
   let tmp;
@@ -431,12 +431,12 @@ testRsa_nofib_inst_13_14_tsni = function testRsa_nofib_inst_13_14_tsni(_) {
   return hash_inst_13_14_19_tsni(tmp2)
 };
 encrypt_inst_13_14_10_tsni = function encrypt_inst_13_14_10_tsni(n, e, s) {
-  let tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(lambda_inst_13_14_10_15_tsni(n, e));
-  tmp1 = rsa.size(n);
-  tmp2 = collect_inst_13_14_10_5_tsni(tmp1, s);
-  tmp3 = map_inst_13_14_10_8_tsni(tmp, tmp2);
-  return unlines_inst_13_14_10_7_tsni(tmp3)
+  let tmp, tmp1, tmp2, lambda$this;
+  tmp = rsa.size(n);
+  tmp1 = collect_inst_13_14_10_5_tsni(tmp, s);
+  lambda$this = runtime.safeCall(lambda_inst_13_14_10_15_tsni(n, e));
+  tmp2 = map_inst_13_14_10_8_tsni(lambda$this, tmp1);
+  return unlines_inst_13_14_10_7_tsni(tmp2)
 };
 collect_inst_13_14_10_5_tsni = function collect_inst_13_14_10_5_tsni(n, xs) {
   let scrut, tmp, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail;
@@ -590,9 +590,7 @@ lambda$_inst_4_15_16_tsni = function lambda$_inst_4_15_16_tsni(n, e, c) {
   return rsa1.string_of_z(tmp1)
 };
 code_inst_4_15_16_17_tsni = function code_inst_4_15_16_17_tsni(ls) {
-  let tmp;
-  tmp = lambda2;
-  return foldl_inst_4_15_16_17_18_tsni(tmp, rsa.const0, ls)
+  return foldl_inst_4_15_16_17_18_tsni(lambda2, rsa.const0, ls)
 };
 foldl_inst_4_15_16_17_18_tsni = function foldl_inst_4_15_16_17_18_tsni(f, a, xs) {
   return runtime.safeCall(xs(f, a))
@@ -615,17 +613,13 @@ lambda$_inst_9_10_15_16_tsni = function lambda$_inst_9_10_15_16_tsni(n, e, c) {
   return rsa1.string_of_z(tmp1)
 };
 code_inst_9_10_15_16_17_tsni = function code_inst_9_10_15_16_17_tsni(ls) {
-  let tmp;
-  tmp = lambda2;
-  return foldl_inst_9_10_15_16_17_18_tsni(tmp, rsa.const0, ls)
+  return foldl_inst_9_10_15_16_17_18_tsni(lambda2, rsa.const0, ls)
 };
 foldl_inst_9_10_15_16_17_18_tsni = function foldl_inst_9_10_15_16_17_18_tsni(f, a, xs) {
   return runtime.safeCall(xs(f, a))
 };
 hash_inst_9_19_tsni = function hash_inst_9_19_tsni(str) {
-  let tmp;
-  tmp = lambda;
-  return foldl_inst_9_19_20_tsni(tmp, rsa.const0, str)
+  return foldl_inst_9_19_20_tsni(lambda, rsa.const0, str)
 };
 foldl_inst_9_19_20_tsni = function foldl_inst_9_19_20_tsni(f, a, xs) {
   return runtime.safeCall(xs(f, a))
@@ -642,17 +636,13 @@ lambda$_inst_13_14_10_15_16_tsni = function lambda$_inst_13_14_10_15_16_tsni(n, 
   return rsa1.string_of_z(tmp1)
 };
 code_inst_13_14_10_15_16_17_tsni = function code_inst_13_14_10_15_16_17_tsni(ls) {
-  let tmp;
-  tmp = lambda2;
-  return foldl_inst_13_14_10_15_16_17_18_tsni(tmp, rsa.const0, ls)
+  return foldl_inst_13_14_10_15_16_17_18_tsni(lambda2, rsa.const0, ls)
 };
 foldl_inst_13_14_10_15_16_17_18_tsni = function foldl_inst_13_14_10_15_16_17_18_tsni(f, a, xs) {
   return runtime.safeCall(xs(f, a))
 };
 hash_inst_13_14_19_tsni = function hash_inst_13_14_19_tsni(str) {
-  let tmp;
-  tmp = lambda;
-  return foldl_inst_13_14_19_20_tsni(tmp, rsa.const0, str)
+  return foldl_inst_13_14_19_20_tsni(lambda, rsa.const0, str)
 };
 foldl_inst_13_14_19_20_tsni = function foldl_inst_13_14_19_20_tsni(f, a, xs) {
   return runtime.safeCall(xs(f, a))
@@ -744,9 +734,7 @@ globalThis.Object.freeze(class rsa {
     return runtime.safeCall(c.codePointAt(0))
   } 
   static hash(str) {
-    let tmp;
-    tmp = lambda;
-    return NofibPrelude.foldl(tmp, rsa.const0, str)
+    return NofibPrelude.foldl(lambda, rsa.const0, str)
   } 
   static and_(ls) {
     let param0, param1, h, t;
@@ -777,9 +765,7 @@ globalThis.Object.freeze(class rsa {
     return tmp === rsa.const0
   } 
   static code(ls) {
-    let tmp;
-    tmp = lambda2;
-    return NofibPrelude.foldl(tmp, rsa.const0, ls)
+    return NofibPrelude.foldl(lambda2, rsa.const0, ls)
   } 
   static collect(n, xs) {
     let scrut, tmp, tmp1, tmp2;
@@ -805,12 +791,12 @@ globalThis.Object.freeze(class rsa {
     return NofibPrelude.intDiv(tmp2, 100)
   } 
   static encrypt(n, e, s) {
-    let tmp, tmp1, tmp2, tmp3;
-    tmp = runtime.safeCall(lambda_inst_4_15_tsni(n, e));
-    tmp1 = rsa.size(n);
-    tmp2 = collect_inst_4_5_tsni(tmp1, s);
-    tmp3 = map_inst_4_8_tsni(tmp, tmp2);
-    return unlines_inst_4_7_tsni(tmp3)
+    let tmp, tmp1, tmp2, lambda$this;
+    tmp = rsa.size(n);
+    tmp1 = collect_inst_4_5_tsni(tmp, s);
+    lambda$this = runtime.safeCall(lambda_inst_4_15_tsni(n, e));
+    tmp2 = map_inst_4_8_tsni(lambda$this, tmp1);
+    return unlines_inst_4_7_tsni(tmp2)
   } 
   static power(n, m, x) {
     let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;

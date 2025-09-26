@@ -356,7 +356,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     
     // return a lambda, which either calls the extracted arm function
     // or contains the computations in matching arms
-    def getOrElseUpdate(ctorId: CtorId): Value.Lam =
+    def getOrElseUpdate(ctorId: CtorId): Lambda =
       val dest = rewritePrepare.ctorIdToFinalDest(ctorId).asInstanceOf[FinalDest.Match]
       val freeVarsInTheMatch =
         rewritePrepare.freeVarsOfOriginalMatchesConsideringDeforestation(dest.matchId)
@@ -364,7 +364,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
         VarSymbol(Tree.Ident(x.nme))
       transforming.get(dest) match
       case Some(sym) =>
-        Value.Lam(
+        Lambda(
           symsForArmFreeVarsInLam.asParamList,
           Return(
             Call(
@@ -417,14 +417,14 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
               case Some(x) => lastWords(s"already exist? $x")
             res
         armFunOrBlk match
-          case L(fdefn) => Value.Lam(
+          case L(fdefn) => Lambda(
             symsForArmFreeVarsInLam.asParamList,
             Return(
               Call(
                 callNewFun(fdefn.sym),
                 symsForArmFreeVarsInLam.asArgsList ::: dest.tmpSymbolForASpecificCtorId.asArgsList)(true, false),
               false))
-          case R(b) => Value.Lam(
+          case R(b) => Lambda(
             symsForArmFreeVarsInLam.asParamList,
             b.replaceSymbols(freeVarsInTheMatch.zip(symsForArmFreeVarsInLam).toMap).mapTail:
               case Return(res, implct) => Return(res, false)
@@ -501,11 +501,54 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
           handleCallLike(ins.uid):
             args.map:
               case Arg(N, value) => value
-        case v@Value.Arr(false, elems) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(v.uid.withInstId) =>
+        case v@Tuple(false, elems) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(v.uid.withInstId) =>
           handleCallLike(v.uid):
             elems.map:
               case Arg(N, value) => value
+        case s@Select(p, nme)
+          if s.symbol.flatMap(_.asObj).isDefined && rewritePrepare.ctorIdToFinalDest.isDefinedAt(s.uid.withInstId) =>
+          k(matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId))
+        case Value.Ref(l)
+          if l.asObj.isDefined && rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId) =>
+          k(matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId))
+        
+        case r @ Call(fun, args) =>
+          val fun2 = applyPath(fun)
+          val args2 -> newBindings = applyArgs(args)
+          newBindings.foldRight(k(if (fun2 is fun) && (args2 is args) then r else Call(fun2, args2)(r.isMlsFun, r.mayRaiseEffects))):
+            case ((sym, res), acc) => Assign(sym, res, acc)
+        case Instantiate(mut, cls, args) =>
+          val cls2 = applyPath(cls)
+          val args2 -> newBindings = applyArgs(args)
+          newBindings.foldRight(k(if (cls2 is cls) && (args2 is args) then r else Instantiate(mut, cls2, args2))):
+            case ((sym, res), acc) => Assign(sym, res, acc)
+        case Tuple(mut, elems) =>
+          val elems2 -> newBindings = applyArgs(elems)
+          newBindings.foldRight(k(if (elems2 is elems) then r else Tuple(mut, elems2))):
+            case ((sym, res), acc) => Assign(sym, res, acc)
+        case Record(mut, fields) => ???
+        
         case _ => super.applyResult2(r)(k)
+    
+    def applyArgs(args: List[Arg]): (List[Arg], List[BlockMemberSymbol -> Result]) =
+      args.foldRight[(List[Arg], List[BlockMemberSymbol -> Result])](Nil -> Nil):
+        case (arg, (newArgs, bindings)) =>
+          arg.value match
+            case s@Select(p, nme)
+              if s.symbol.flatMap(_.asObj).isDefined && rewritePrepare.ctorIdToFinalDest.isDefinedAt(s.uid.withInstId) =>
+              val lambdaSym = BlockMemberSymbol("lambda", Nil, false)
+              val lambdaBody = matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId)
+              (Arg(arg.spread, Value.Ref(lambdaSym)) :: newArgs) -> ((lambdaSym -> lambdaBody) :: bindings)
+            case r@Value.Ref(l)
+              if l.asObj.isDefined && rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId) =>
+              val lambdaSym = BlockMemberSymbol("lambda", Nil, false)
+              val lambdaBody = matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId)
+              (Arg(arg.spread, Value.Ref(lambdaSym)) :: newArgs) -> ((lambdaSym -> lambdaBody) :: bindings)
+            case _ =>
+              val newArg = applyArg(arg)
+              (newArg :: newArgs) -> bindings
+          
+    
     
     override def applyPath(p: Path): Path = p match
       // a selection which is a consumer on its own
@@ -516,7 +559,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
       case s@Select(p, nme) => s.symbol.flatMap(_.asObj) match
         // a fusing object constructor
         case Some(obj) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(s.uid.withInstId) =>
-          matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId)
+          lastWords("unreachable")
         case _ => s.symbol.flatMap(_.asBlkMember) match
           case Some(blk) if blk.isFunction && preAnalyzer.topLevelDefinedFunSyms.contains(blk) =>
             val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
@@ -539,7 +582,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elabora
     override def applyValue(v: Value): Value = v match
       case r@Value.Ref(l) => l.asObj match
         case Some(obj) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId) =>
-          matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId)
+          lastWords("unreachable")
         case None => l.asBlkMember match
           case Some(blk) if blk.isFunction && preAnalyzer.topLevelDefinedFunSyms.contains(blk) =>
             val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
@@ -638,7 +681,7 @@ class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends Block
       case _ => if !ctx.contains(l) then result += l
     case _ => super.applyValue(v)
   
-  override def applyLam(l: Value.Lam): Unit =
+  override def applyLam(l: Lambda): Unit =
     val paramSymbols = l.params.params.map(p => p.sym)
     ctx ++= paramSymbols
     applyBlock(l.body)

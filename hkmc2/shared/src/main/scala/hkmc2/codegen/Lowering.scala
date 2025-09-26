@@ -406,7 +406,7 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
           val isAnd = sym is State.andSymbol
           val isOr = sym is State.orSymbol
           if isAnd || isOr then
-            val lamSym = BlockMemberSymbol("lambda", Nil, false)
+            val lamSym = BlockMemberSymbol("lambda", syntax.Tree.DummyTermDef(syntax.Fun) :: Nil, false)
             val lamDef = FunDefn(N, lamSym, PlainParamList(Nil) :: Nil, returnedTerm(arg2))
             Define(
               lamDef,
@@ -513,7 +513,7 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
       if k.isInstanceOf[TailOp] || bodyBlock.size <= 5
       then k(Lambda(paramLists.head, bodyBlock))
       else
-        val lamSym = new BlockMemberSymbol("lambda", Nil, false)
+        val lamSym = new BlockMemberSymbol("lambda", syntax.Tree.DummyTermDef(syntax.Fun) :: Nil, false)
         val lamDef = FunDefn(N, lamSym, paramLists, bodyBlock)
         Define(
           lamDef,
@@ -997,7 +997,7 @@ class Lowering()(using Config, TL, Raise, State, Ctx):
       case v: Value => k(v)
       case p: Path => k(p)
       case Lambda(params, body) =>
-        val lamSym = BlockMemberSymbol("lambda", Nil, false)
+        val lamSym = BlockMemberSymbol("lambda", syntax.Tree.DummyTermDef(syntax.Fun) :: Nil, false)
         val lamDef = FunDefn(N, lamSym, params :: Nil, body)
         Define(lamDef, k(lamSym |> Value.Ref.apply))
       case r =>

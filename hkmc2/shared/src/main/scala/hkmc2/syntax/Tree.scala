@@ -333,6 +333,8 @@ object Tree:
   val DummyTup: Tup = Tup(Dummy :: Nil)
   def DummyTypeDef(k: TypeDefKind)(using State): TypeDef =
     Tree.TypeDef(k, Tree.Dummy, N)
+  // used in BMSs newly created during lowering to mark them as function symbols
+  // needed by deforestation
   def DummyTermDef(k: TermDefKind)(using State): TermDef =
     Tree.TermDef(k, Tree.Dummy, N)
   object Block:

@@ -13,6 +13,8 @@ object LambdaRewriter:
     
     def rewriteOneBlk(b: Block) = b match
       case Assign(lhs, Lambda(params, body), rest) if !lhs.isInstanceOf[TempSymbol] =>
+        // use dummy TermDef of kind syntax.Fun here so that we know this symbol refers to a function
+        // for deforestation
         val newSym = BlockMemberSymbol(lhs.nme, syntax.Tree.DummyTermDef(syntax.Fun) :: Nil,
           nameIsMeaningful = true // TODO: lhs.nme is not always meaningful
         )

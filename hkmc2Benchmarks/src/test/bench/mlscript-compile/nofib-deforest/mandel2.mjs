@@ -6,9 +6,8 @@ import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mjs";
 let check_line, mandel21, check_line$, check_perim_inst_1_2_tsni, build_tree_inst_3_4_tsni, check_perim_inst_3_4_2_tsni, testMandel2_nofib_inst_5_6_tsni, build_tree_inst_5_6_4_tsni, check_perim_inst_5_6_4_2_tsni, point_colour_inst_0_7_tsni, point_colour_inst_0_8_tsni, point_colour_inst_1_2_8_tsni, point_colour_inst_1_2_7_tsni, point_colour_inst_3_4_2_7_tsni, point_colour_inst_3_4_2_8_tsni, point_colour_inst_5_6_4_2_8_tsni, point_colour_inst_5_6_4_2_7_tsni;
 check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
-  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
-  tmp = mandel2.point_colour(x1y1);
-  col1 = tmp;
+  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  col1 = mandel2.point_colour(x1y1);
   if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
     first0 = runtime.Tuple.get(x1y1, 0);
     first1 = runtime.Tuple.get(x1y1, 1);
@@ -25,78 +24,78 @@ check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
       } else {
         _deforest_Deforest_Arr_2_01 = x2;
         _deforest_Deforest_Arr_2_11 = y1;
-        arr = () => {
-          let first12, first02, x, y, tmp6, tmp7;
+        tmp = () => {
+          let first12, first02, x, y, tmp11, tmp12;
           first02 = _deforest_Deforest_Arr_2_01;
           first12 = _deforest_Deforest_Arr_2_11;
           x = first02;
           y = first12;
-          tmp6 = mandel2.np(x);
-          tmp7 = mandel2.nq(y);
-          return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
+          tmp11 = mandel2.np(x);
+          tmp12 = mandel2.nq(y);
+          return mandel2.check_radius(tmp11, tmp12, 0, 0.0, 0.0)
         };
-        col2 = point_colour_inst_1_2_7_tsni(arr);
+        col2 = point_colour_inst_1_2_7_tsni(tmp);
         col3 = mandel2.point_colour(x2y2);
         _deforest_Deforest_Arr_2_0 = x1;
         _deforest_Deforest_Arr_2_1 = y2;
-        arr1 = () => {
-          let first12, first02, x, y, tmp6, tmp7;
+        tmp1 = () => {
+          let first12, first02, x, y, tmp11, tmp12;
           first02 = _deforest_Deforest_Arr_2_0;
           first12 = _deforest_Deforest_Arr_2_1;
           x = first02;
           y = first12;
-          tmp6 = mandel2.np(x);
-          tmp7 = mandel2.nq(y);
-          return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
+          tmp11 = mandel2.np(x);
+          tmp12 = mandel2.nq(y);
+          return mandel2.check_radius(tmp11, tmp12, 0, 0.0, 0.0)
         };
-        col4 = point_colour_inst_1_2_8_tsni(arr1);
+        col4 = point_colour_inst_1_2_8_tsni(tmp1);
         scrut = col1 == col2;
         if (scrut === true) {
           scrut1 = col1 == col3;
           if (scrut1 === true) {
             scrut2 = col1 == col4;
             if (scrut2 === true) {
-              tmp1 = false;
+              tmp2 = false;
             } else {
-              tmp1 = true;
+              tmp2 = true;
             }
           } else {
-            tmp1 = true;
+            tmp2 = true;
           }
         } else {
-          tmp1 = true;
+          tmp2 = true;
         }
-        corners_diff = tmp1;
+        corners_diff = tmp2;
         if (corners_diff === true) {
           return - 1
         } else {
-          tmp2 = x1 + 1;
-          arr2 = globalThis.Object.freeze([
-            tmp2,
+          tmp3 = x1 + 1;
+          tmp4 = globalThis.Object.freeze([
+            tmp3,
             y1
           ]);
-          scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
+          scrut3 = check_line$(col1, x1, y1, x2, y2, tmp4, mandel2.right);
           if (scrut3 === true) {
-            tmp3 = y1 + 1;
-            arr3 = globalThis.Object.freeze([
+            tmp5 = y1 + 1;
+            tmp6 = globalThis.Object.freeze([
               x2,
-              tmp3
+              tmp5
             ]);
-            scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
+            scrut4 = check_line$(col1, x1, y1, x2, y2, tmp6, mandel2.down);
             if (scrut4 === true) {
-              tmp4 = x2 - 1;
-              arr4 = globalThis.Object.freeze([
-                tmp4,
+              tmp7 = x2 - 1;
+              tmp8 = globalThis.Object.freeze([
+                tmp7,
                 y2
               ]);
-              scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
+              scrut5 = check_line$(col1, x1, y1, x2, y2, tmp8, mandel2.left);
               if (scrut5 === true) {
-                tmp5 = y2 - 1;
-                arr5 = globalThis.Object.freeze([
+                tmp9 = y2 - 1;
+                tmp10 = globalThis.Object.freeze([
                   x1,
-                  tmp5
+                  tmp9
                 ]);
-                scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
+                scrut6 = check_line$(col1, x1, y1, x2, y2, tmp10, mandel2.up);
                 if (scrut6 === true) {
                   return col1
                 } else {
@@ -121,7 +120,7 @@ check_perim_inst_1_2_tsni = function check_perim_inst_1_2_tsni(x1y1, x2y2) {
   }
 };
 build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
-  let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
+  let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
   if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
     first0 = runtime.Tuple.get(x1y1, 0);
     first1 = runtime.Tuple.get(x1y1, 1);
@@ -132,62 +131,57 @@ build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
       first11 = runtime.Tuple.get(x2y2, 1);
       x2 = first01;
       y2 = first11;
-      tmp = check_perim_inst_3_4_2_tsni(x1y1, x2y2);
-      rec_col = tmp;
-      tmp1 = - 1;
-      tmp2 = rec_col == tmp1;
-      scrut2 = ! tmp2;
+      rec_col = check_perim_inst_3_4_2_tsni(x1y1, x2y2);
+      tmp = - 1;
+      tmp1 = rec_col == tmp;
+      scrut2 = ! tmp1;
       if (scrut2 === true) {
         return mandel2.Leaf(rec_col)
       } else {
-        tmp3 = x2 - x1;
-        tmp4 = y2 - y1;
-        scrut = tmp3 >= tmp4;
+        tmp2 = x2 - x1;
+        tmp3 = y2 - y1;
+        scrut = tmp2 >= tmp3;
         if (scrut === true) {
-          tmp5 = "NS";
+          tmp4 = "NS";
         } else {
-          tmp5 = "EW";
+          tmp4 = "EW";
         }
-        split = tmp5;
-        tmp6 = x2 + x1;
-        split_x = NofibPrelude.intDiv(tmp6, 2);
-        tmp7 = y2 + y1;
-        split_y = NofibPrelude.intDiv(tmp7, 2);
+        split = tmp4;
+        tmp5 = x2 + x1;
+        split_x = NofibPrelude.intDiv(tmp5, 2);
+        tmp6 = y2 + y1;
+        split_y = NofibPrelude.intDiv(tmp6, 2);
         nsp1 = x1y1;
-        arr = globalThis.Object.freeze([
+        nsp2 = globalThis.Object.freeze([
           split_x,
           y2
         ]);
-        nsp2 = arr;
-        tmp8 = split_x + 1;
-        arr1 = globalThis.Object.freeze([
-          tmp8,
+        tmp7 = split_x + 1;
+        nsp3 = globalThis.Object.freeze([
+          tmp7,
           y1
         ]);
-        nsp3 = arr1;
         nsp4 = x2y2;
         ewp1 = x1y1;
-        arr2 = globalThis.Object.freeze([
+        ewp2 = globalThis.Object.freeze([
           x2,
           split_y
         ]);
-        ewp2 = arr2;
-        tmp9 = split_y + 1;
-        arr3 = globalThis.Object.freeze([
+        tmp8 = split_y + 1;
+        ewp3 = globalThis.Object.freeze([
           x1,
-          tmp9
+          tmp8
         ]);
-        ewp3 = arr3;
         ewp4 = x2y2;
         scrut1 = split == "NS";
         if (scrut1 === true) {
-          tmp10 = build_tree_inst_3_4_tsni(nsp1, nsp2);
-          tmp11 = build_tree_inst_3_4_tsni(nsp3, nsp4);
-          return mandel2.NS(tmp10, tmp11)
+          tmp9 = build_tree_inst_3_4_tsni(nsp1, nsp2);
+          tmp10 = build_tree_inst_3_4_tsni(nsp3, nsp4);
+          return mandel2.NS(tmp9, tmp10)
         } else {
-          tmp12 = build_tree_inst_3_4_tsni(ewp1, ewp2);
-          tmp13 = build_tree_inst_3_4_tsni(ewp3, ewp4);
-          return mandel2.EW(tmp12, tmp13)
+          tmp11 = build_tree_inst_3_4_tsni(ewp1, ewp2);
+          tmp12 = build_tree_inst_3_4_tsni(ewp3, ewp4);
+          return mandel2.EW(tmp11, tmp12)
         }
       }
     } else {
@@ -198,9 +192,8 @@ build_tree_inst_3_4_tsni = function build_tree_inst_3_4_tsni(x1y1, x2y2) {
   }
 };
 check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
-  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
-  tmp = mandel2.point_colour(x1y1);
-  col1 = tmp;
+  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  col1 = mandel2.point_colour(x1y1);
   if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
     first0 = runtime.Tuple.get(x1y1, 0);
     first1 = runtime.Tuple.get(x1y1, 1);
@@ -217,78 +210,78 @@ check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
       } else {
         _deforest_Deforest_Arr_2_0 = x2;
         _deforest_Deforest_Arr_2_1 = y1;
-        arr = () => {
-          let first12, first02, x, y, tmp6, tmp7;
+        tmp = () => {
+          let first12, first02, x, y, tmp11, tmp12;
           first02 = _deforest_Deforest_Arr_2_0;
           first12 = _deforest_Deforest_Arr_2_1;
           x = first02;
           y = first12;
-          tmp6 = mandel2.np(x);
-          tmp7 = mandel2.nq(y);
-          return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
+          tmp11 = mandel2.np(x);
+          tmp12 = mandel2.nq(y);
+          return mandel2.check_radius(tmp11, tmp12, 0, 0.0, 0.0)
         };
-        col2 = point_colour_inst_3_4_2_7_tsni(arr);
+        col2 = point_colour_inst_3_4_2_7_tsni(tmp);
         col3 = mandel2.point_colour(x2y2);
         _deforest_Deforest_Arr_2_01 = x1;
         _deforest_Deforest_Arr_2_11 = y2;
-        arr1 = () => {
-          let first12, first02, x, y, tmp6, tmp7;
+        tmp1 = () => {
+          let first12, first02, x, y, tmp11, tmp12;
           first02 = _deforest_Deforest_Arr_2_01;
           first12 = _deforest_Deforest_Arr_2_11;
           x = first02;
           y = first12;
-          tmp6 = mandel2.np(x);
-          tmp7 = mandel2.nq(y);
-          return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
+          tmp11 = mandel2.np(x);
+          tmp12 = mandel2.nq(y);
+          return mandel2.check_radius(tmp11, tmp12, 0, 0.0, 0.0)
         };
-        col4 = point_colour_inst_3_4_2_8_tsni(arr1);
+        col4 = point_colour_inst_3_4_2_8_tsni(tmp1);
         scrut = col1 == col2;
         if (scrut === true) {
           scrut1 = col1 == col3;
           if (scrut1 === true) {
             scrut2 = col1 == col4;
             if (scrut2 === true) {
-              tmp1 = false;
+              tmp2 = false;
             } else {
-              tmp1 = true;
+              tmp2 = true;
             }
           } else {
-            tmp1 = true;
+            tmp2 = true;
           }
         } else {
-          tmp1 = true;
+          tmp2 = true;
         }
-        corners_diff = tmp1;
+        corners_diff = tmp2;
         if (corners_diff === true) {
           return - 1
         } else {
-          tmp2 = x1 + 1;
-          arr2 = globalThis.Object.freeze([
-            tmp2,
+          tmp3 = x1 + 1;
+          tmp4 = globalThis.Object.freeze([
+            tmp3,
             y1
           ]);
-          scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
+          scrut3 = check_line$(col1, x1, y1, x2, y2, tmp4, mandel2.right);
           if (scrut3 === true) {
-            tmp3 = y1 + 1;
-            arr3 = globalThis.Object.freeze([
+            tmp5 = y1 + 1;
+            tmp6 = globalThis.Object.freeze([
               x2,
-              tmp3
+              tmp5
             ]);
-            scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
+            scrut4 = check_line$(col1, x1, y1, x2, y2, tmp6, mandel2.down);
             if (scrut4 === true) {
-              tmp4 = x2 - 1;
-              arr4 = globalThis.Object.freeze([
-                tmp4,
+              tmp7 = x2 - 1;
+              tmp8 = globalThis.Object.freeze([
+                tmp7,
                 y2
               ]);
-              scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
+              scrut5 = check_line$(col1, x1, y1, x2, y2, tmp8, mandel2.left);
               if (scrut5 === true) {
-                tmp5 = y2 - 1;
-                arr5 = globalThis.Object.freeze([
+                tmp9 = y2 - 1;
+                tmp10 = globalThis.Object.freeze([
                   x1,
-                  tmp5
+                  tmp9
                 ]);
-                scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
+                scrut6 = check_line$(col1, x1, y1, x2, y2, tmp10, mandel2.up);
                 if (scrut6 === true) {
                   return col1
                 } else {
@@ -313,21 +306,21 @@ check_perim_inst_3_4_2_tsni = function check_perim_inst_3_4_2_tsni(x1y1, x2y2) {
   }
 };
 testMandel2_nofib_inst_5_6_tsni = function testMandel2_nofib_inst_5_6_tsni(n) {
-  let arr, tmp, arr1, tmp1;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1, tmp2, tmp3;
+  tmp = globalThis.Object.freeze([
     0,
     0
   ]);
-  tmp = NofibPrelude.intDiv(mandel2.size, 2);
-  arr1 = globalThis.Object.freeze([
+  tmp1 = NofibPrelude.intDiv(mandel2.size, 2);
+  tmp2 = globalThis.Object.freeze([
     mandel2.size,
-    tmp
+    tmp1
   ]);
-  tmp1 = build_tree_inst_5_6_4_tsni(arr, arr1);
-  return mandel2.finite(tmp1)
+  tmp3 = build_tree_inst_5_6_4_tsni(tmp, tmp2);
+  return mandel2.finite(tmp3)
 };
 build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
-  let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
+  let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
   if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
     first0 = runtime.Tuple.get(x1y1, 0);
     first1 = runtime.Tuple.get(x1y1, 1);
@@ -338,62 +331,57 @@ build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
       first11 = runtime.Tuple.get(x2y2, 1);
       x2 = first01;
       y2 = first11;
-      tmp = check_perim_inst_5_6_4_2_tsni(x1y1, x2y2);
-      rec_col = tmp;
-      tmp1 = - 1;
-      tmp2 = rec_col == tmp1;
-      scrut2 = ! tmp2;
+      rec_col = check_perim_inst_5_6_4_2_tsni(x1y1, x2y2);
+      tmp = - 1;
+      tmp1 = rec_col == tmp;
+      scrut2 = ! tmp1;
       if (scrut2 === true) {
         return mandel2.Leaf(rec_col)
       } else {
-        tmp3 = x2 - x1;
-        tmp4 = y2 - y1;
-        scrut = tmp3 >= tmp4;
+        tmp2 = x2 - x1;
+        tmp3 = y2 - y1;
+        scrut = tmp2 >= tmp3;
         if (scrut === true) {
-          tmp5 = "NS";
+          tmp4 = "NS";
         } else {
-          tmp5 = "EW";
+          tmp4 = "EW";
         }
-        split = tmp5;
-        tmp6 = x2 + x1;
-        split_x = NofibPrelude.intDiv(tmp6, 2);
-        tmp7 = y2 + y1;
-        split_y = NofibPrelude.intDiv(tmp7, 2);
+        split = tmp4;
+        tmp5 = x2 + x1;
+        split_x = NofibPrelude.intDiv(tmp5, 2);
+        tmp6 = y2 + y1;
+        split_y = NofibPrelude.intDiv(tmp6, 2);
         nsp1 = x1y1;
-        arr = globalThis.Object.freeze([
+        nsp2 = globalThis.Object.freeze([
           split_x,
           y2
         ]);
-        nsp2 = arr;
-        tmp8 = split_x + 1;
-        arr1 = globalThis.Object.freeze([
-          tmp8,
+        tmp7 = split_x + 1;
+        nsp3 = globalThis.Object.freeze([
+          tmp7,
           y1
         ]);
-        nsp3 = arr1;
         nsp4 = x2y2;
         ewp1 = x1y1;
-        arr2 = globalThis.Object.freeze([
+        ewp2 = globalThis.Object.freeze([
           x2,
           split_y
         ]);
-        ewp2 = arr2;
-        tmp9 = split_y + 1;
-        arr3 = globalThis.Object.freeze([
+        tmp8 = split_y + 1;
+        ewp3 = globalThis.Object.freeze([
           x1,
-          tmp9
+          tmp8
         ]);
-        ewp3 = arr3;
         ewp4 = x2y2;
         scrut1 = split == "NS";
         if (scrut1 === true) {
-          tmp10 = build_tree_inst_5_6_4_tsni(nsp1, nsp2);
-          tmp11 = build_tree_inst_5_6_4_tsni(nsp3, nsp4);
-          return mandel2.NS(tmp10, tmp11)
+          tmp9 = build_tree_inst_5_6_4_tsni(nsp1, nsp2);
+          tmp10 = build_tree_inst_5_6_4_tsni(nsp3, nsp4);
+          return mandel2.NS(tmp9, tmp10)
         } else {
-          tmp12 = build_tree_inst_5_6_4_tsni(ewp1, ewp2);
-          tmp13 = build_tree_inst_5_6_4_tsni(ewp3, ewp4);
-          return mandel2.EW(tmp12, tmp13)
+          tmp11 = build_tree_inst_5_6_4_tsni(ewp1, ewp2);
+          tmp12 = build_tree_inst_5_6_4_tsni(ewp3, ewp4);
+          return mandel2.EW(tmp11, tmp12)
         }
       }
     } else {
@@ -404,9 +392,8 @@ build_tree_inst_5_6_4_tsni = function build_tree_inst_5_6_4_tsni(x1y1, x2y2) {
   }
 };
 check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y2) {
-  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
-  tmp = mandel2.point_colour(x1y1);
-  col1 = tmp;
+  let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  col1 = mandel2.point_colour(x1y1);
   if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
     first0 = runtime.Tuple.get(x1y1, 0);
     first1 = runtime.Tuple.get(x1y1, 1);
@@ -423,78 +410,78 @@ check_perim_inst_5_6_4_2_tsni = function check_perim_inst_5_6_4_2_tsni(x1y1, x2y
       } else {
         _deforest_Deforest_Arr_2_01 = x2;
         _deforest_Deforest_Arr_2_11 = y1;
-        arr = () => {
-          let first12, first02, x, y, tmp6, tmp7;
+        tmp = () => {
+          let first12, first02, x, y, tmp11, tmp12;
           first02 = _deforest_Deforest_Arr_2_01;
           first12 = _deforest_Deforest_Arr_2_11;
           x = first02;
           y = first12;
-          tmp6 = mandel2.np(x);
-          tmp7 = mandel2.nq(y);
-          return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
+          tmp11 = mandel2.np(x);
+          tmp12 = mandel2.nq(y);
+          return mandel2.check_radius(tmp11, tmp12, 0, 0.0, 0.0)
         };
-        col2 = point_colour_inst_5_6_4_2_7_tsni(arr);
+        col2 = point_colour_inst_5_6_4_2_7_tsni(tmp);
         col3 = mandel2.point_colour(x2y2);
         _deforest_Deforest_Arr_2_0 = x1;
         _deforest_Deforest_Arr_2_1 = y2;
-        arr1 = () => {
-          let first12, first02, x, y, tmp6, tmp7;
+        tmp1 = () => {
+          let first12, first02, x, y, tmp11, tmp12;
           first02 = _deforest_Deforest_Arr_2_0;
           first12 = _deforest_Deforest_Arr_2_1;
           x = first02;
           y = first12;
-          tmp6 = mandel2.np(x);
-          tmp7 = mandel2.nq(y);
-          return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
+          tmp11 = mandel2.np(x);
+          tmp12 = mandel2.nq(y);
+          return mandel2.check_radius(tmp11, tmp12, 0, 0.0, 0.0)
         };
-        col4 = point_colour_inst_5_6_4_2_8_tsni(arr1);
+        col4 = point_colour_inst_5_6_4_2_8_tsni(tmp1);
         scrut = col1 == col2;
         if (scrut === true) {
           scrut1 = col1 == col3;
           if (scrut1 === true) {
             scrut2 = col1 == col4;
             if (scrut2 === true) {
-              tmp1 = false;
+              tmp2 = false;
             } else {
-              tmp1 = true;
+              tmp2 = true;
             }
           } else {
-            tmp1 = true;
+            tmp2 = true;
           }
         } else {
-          tmp1 = true;
+          tmp2 = true;
         }
-        corners_diff = tmp1;
+        corners_diff = tmp2;
         if (corners_diff === true) {
           return - 1
         } else {
-          tmp2 = x1 + 1;
-          arr2 = globalThis.Object.freeze([
-            tmp2,
+          tmp3 = x1 + 1;
+          tmp4 = globalThis.Object.freeze([
+            tmp3,
             y1
           ]);
-          scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
+          scrut3 = check_line$(col1, x1, y1, x2, y2, tmp4, mandel2.right);
           if (scrut3 === true) {
-            tmp3 = y1 + 1;
-            arr3 = globalThis.Object.freeze([
+            tmp5 = y1 + 1;
+            tmp6 = globalThis.Object.freeze([
               x2,
-              tmp3
+              tmp5
             ]);
-            scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
+            scrut4 = check_line$(col1, x1, y1, x2, y2, tmp6, mandel2.down);
             if (scrut4 === true) {
-              tmp4 = x2 - 1;
-              arr4 = globalThis.Object.freeze([
-                tmp4,
+              tmp7 = x2 - 1;
+              tmp8 = globalThis.Object.freeze([
+                tmp7,
                 y2
               ]);
-              scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
+              scrut5 = check_line$(col1, x1, y1, x2, y2, tmp8, mandel2.left);
               if (scrut5 === true) {
-                tmp5 = y2 - 1;
-                arr5 = globalThis.Object.freeze([
+                tmp9 = y2 - 1;
+                tmp10 = globalThis.Object.freeze([
                   x1,
-                  tmp5
+                  tmp9
                 ]);
-                scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
+                scrut6 = check_line$(col1, x1, y1, x2, y2, tmp10, mandel2.up);
                 if (scrut6 === true) {
                   return col1
                 } else {
@@ -543,7 +530,7 @@ point_colour_inst_5_6_4_2_7_tsni = function point_colour_inst_5_6_4_2_7_tsni(xy)
   return runtime.safeCall(xy())
 };
 check_line$ = function check_line$(col1, x1, y1, x2, y2, xcyc, xdyd) {
-  let first1, first0, xc, yc, first11, first01, xd, yd, finished, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, arr, arr1;
+  let first1, first0, xc, yc, first11, first01, xd, yd, finished, scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   if (runtime.Tuple.isArrayLike(xcyc) && xcyc.length === 2) {
     first0 = runtime.Tuple.get(xcyc, 0);
     first1 = runtime.Tuple.get(xcyc, 1);
@@ -582,15 +569,15 @@ check_line$ = function check_line$(col1, x1, y1, x2, y2, xcyc, xdyd) {
         } else {
           tmp3 = xc + xd;
           tmp4 = yc + yd;
-          arr = globalThis.Object.freeze([
+          tmp5 = globalThis.Object.freeze([
             tmp3,
             tmp4
           ]);
-          arr1 = globalThis.Object.freeze([
+          tmp6 = globalThis.Object.freeze([
             xd,
             yd
           ]);
-          return check_line$(col1, x1, y1, x2, y2, arr, arr1)
+          return check_line$(col1, x1, y1, x2, y2, tmp5, tmp6)
         }
       }
     } else {
@@ -613,7 +600,7 @@ globalThis.Object.freeze(class mandel2 {
     runtime.Unit;
   }
   static {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr, arr1, tmp9, arr2, arr3;
+    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
     globalThis.Object.freeze(class MandTree {
       static {
         mandel2.MandTree = this
@@ -684,27 +671,27 @@ globalThis.Object.freeze(class mandel2 {
     tmp7 = tmp5 / tmp6;
     this.delta_q = tmp7;
     tmp8 = - 1;
-    arr = globalThis.Object.freeze([
+    tmp9 = globalThis.Object.freeze([
       0,
       tmp8
     ]);
-    this.up = arr;
-    arr1 = globalThis.Object.freeze([
+    this.up = tmp9;
+    tmp10 = globalThis.Object.freeze([
       0,
       1
     ]);
-    this.down = arr1;
-    tmp9 = - 1;
-    arr2 = globalThis.Object.freeze([
-      tmp9,
+    this.down = tmp10;
+    tmp11 = - 1;
+    tmp12 = globalThis.Object.freeze([
+      tmp11,
       0
     ]);
-    this.left = arr2;
-    arr3 = globalThis.Object.freeze([
+    this.left = tmp12;
+    tmp13 = globalThis.Object.freeze([
       1,
       0
     ]);
-    this.right = arr3;
+    this.right = tmp13;
   }
   static equalp(p1, p2) {
     let first1, first0, x1, x2, first11, first01, y1, y2, scrut, scrut1;
@@ -808,15 +795,11 @@ globalThis.Object.freeze(class mandel2 {
     }
   } 
   static check_radius(p, q, k, x, y) {
-    let xn, yn, r, kp, scrut, scrut1, tmp, tmp1, tmp2, tmp3;
-    tmp = mandel2.new_x(x, y, p);
-    xn = tmp;
-    tmp1 = mandel2.new_y(x, y, q);
-    yn = tmp1;
-    tmp2 = mandel2.radius(xn, yn);
-    r = tmp2;
-    tmp3 = k + 1;
-    kp = tmp3;
+    let xn, yn, r, kp, scrut, scrut1;
+    xn = mandel2.new_x(x, y, p);
+    yn = mandel2.new_y(x, y, q);
+    r = mandel2.radius(xn, yn);
+    kp = k + 1;
     scrut1 = kp == mandel2.num_cols;
     if (scrut1 === true) {
       return 0
@@ -844,9 +827,8 @@ globalThis.Object.freeze(class mandel2 {
     }
   } 
   static check_perim(x1y1, x2y2) {
-    let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, arr, arr1, tmp1, tmp2, arr2, tmp3, arr3, tmp4, arr4, tmp5, arr5, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
-    tmp = mandel2.point_colour(x1y1);
-    col1 = tmp;
+    let col1, first1, first0, x1, y1, first11, first01, x2, y2, col2, col3, col4, corners_diff, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+    col1 = mandel2.point_colour(x1y1);
     if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
       first0 = runtime.Tuple.get(x1y1, 0);
       first1 = runtime.Tuple.get(x1y1, 1);
@@ -863,78 +845,78 @@ globalThis.Object.freeze(class mandel2 {
         } else {
           _deforest_Deforest_Arr_2_0 = x2;
           _deforest_Deforest_Arr_2_1 = y1;
-          arr = () => {
-            let first12, first02, x, y, tmp6, tmp7;
+          tmp = () => {
+            let first12, first02, x, y, tmp11, tmp12;
             first02 = _deforest_Deforest_Arr_2_0;
             first12 = _deforest_Deforest_Arr_2_1;
             x = first02;
             y = first12;
-            tmp6 = mandel2.np(x);
-            tmp7 = mandel2.nq(y);
-            return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
+            tmp11 = mandel2.np(x);
+            tmp12 = mandel2.nq(y);
+            return mandel2.check_radius(tmp11, tmp12, 0, 0.0, 0.0)
           };
-          col2 = point_colour_inst_0_7_tsni(arr);
+          col2 = point_colour_inst_0_7_tsni(tmp);
           col3 = mandel2.point_colour(x2y2);
           _deforest_Deforest_Arr_2_01 = x1;
           _deforest_Deforest_Arr_2_11 = y2;
-          arr1 = () => {
-            let first12, first02, x, y, tmp6, tmp7;
+          tmp1 = () => {
+            let first12, first02, x, y, tmp11, tmp12;
             first02 = _deforest_Deforest_Arr_2_01;
             first12 = _deforest_Deforest_Arr_2_11;
             x = first02;
             y = first12;
-            tmp6 = mandel2.np(x);
-            tmp7 = mandel2.nq(y);
-            return mandel2.check_radius(tmp6, tmp7, 0, 0.0, 0.0)
+            tmp11 = mandel2.np(x);
+            tmp12 = mandel2.nq(y);
+            return mandel2.check_radius(tmp11, tmp12, 0, 0.0, 0.0)
           };
-          col4 = point_colour_inst_0_8_tsni(arr1);
+          col4 = point_colour_inst_0_8_tsni(tmp1);
           scrut = col1 == col2;
           if (scrut === true) {
             scrut1 = col1 == col3;
             if (scrut1 === true) {
               scrut2 = col1 == col4;
               if (scrut2 === true) {
-                tmp1 = false;
+                tmp2 = false;
               } else {
-                tmp1 = true;
+                tmp2 = true;
               }
             } else {
-              tmp1 = true;
+              tmp2 = true;
             }
           } else {
-            tmp1 = true;
+            tmp2 = true;
           }
-          corners_diff = tmp1;
+          corners_diff = tmp2;
           if (corners_diff === true) {
             return - 1
           } else {
-            tmp2 = x1 + 1;
-            arr2 = globalThis.Object.freeze([
-              tmp2,
+            tmp3 = x1 + 1;
+            tmp4 = globalThis.Object.freeze([
+              tmp3,
               y1
             ]);
-            scrut3 = check_line$(col1, x1, y1, x2, y2, arr2, mandel2.right);
+            scrut3 = check_line$(col1, x1, y1, x2, y2, tmp4, mandel2.right);
             if (scrut3 === true) {
-              tmp3 = y1 + 1;
-              arr3 = globalThis.Object.freeze([
+              tmp5 = y1 + 1;
+              tmp6 = globalThis.Object.freeze([
                 x2,
-                tmp3
+                tmp5
               ]);
-              scrut4 = check_line$(col1, x1, y1, x2, y2, arr3, mandel2.down);
+              scrut4 = check_line$(col1, x1, y1, x2, y2, tmp6, mandel2.down);
               if (scrut4 === true) {
-                tmp4 = x2 - 1;
-                arr4 = globalThis.Object.freeze([
-                  tmp4,
+                tmp7 = x2 - 1;
+                tmp8 = globalThis.Object.freeze([
+                  tmp7,
                   y2
                 ]);
-                scrut5 = check_line$(col1, x1, y1, x2, y2, arr4, mandel2.left);
+                scrut5 = check_line$(col1, x1, y1, x2, y2, tmp8, mandel2.left);
                 if (scrut5 === true) {
-                  tmp5 = y2 - 1;
-                  arr5 = globalThis.Object.freeze([
+                  tmp9 = y2 - 1;
+                  tmp10 = globalThis.Object.freeze([
                     x1,
-                    tmp5
+                    tmp9
                   ]);
-                  scrut6 = check_line$(col1, x1, y1, x2, y2, arr5, mandel2.up);
+                  scrut6 = check_line$(col1, x1, y1, x2, y2, tmp10, mandel2.up);
                   if (scrut6 === true) {
                     return col1
                   } else {
@@ -959,7 +941,7 @@ globalThis.Object.freeze(class mandel2 {
     }
   } 
   static build_tree(x1y1, x2y2) {
-    let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, arr, tmp8, arr1, arr2, tmp9, arr3, tmp10, tmp11, tmp12, tmp13;
+    let first1, first0, x1, y1, first11, first01, x2, y2, rec_col, split, scrut, split_x, split_y, nsp1, nsp2, nsp3, nsp4, ewp1, ewp2, ewp3, ewp4, scrut1, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
     if (runtime.Tuple.isArrayLike(x1y1) && x1y1.length === 2) {
       first0 = runtime.Tuple.get(x1y1, 0);
       first1 = runtime.Tuple.get(x1y1, 1);
@@ -970,62 +952,57 @@ globalThis.Object.freeze(class mandel2 {
         first11 = runtime.Tuple.get(x2y2, 1);
         x2 = first01;
         y2 = first11;
-        tmp = check_perim_inst_1_2_tsni(x1y1, x2y2);
-        rec_col = tmp;
-        tmp1 = - 1;
-        tmp2 = rec_col == tmp1;
-        scrut2 = ! tmp2;
+        rec_col = check_perim_inst_1_2_tsni(x1y1, x2y2);
+        tmp = - 1;
+        tmp1 = rec_col == tmp;
+        scrut2 = ! tmp1;
         if (scrut2 === true) {
           return mandel2.Leaf(rec_col)
         } else {
-          tmp3 = x2 - x1;
-          tmp4 = y2 - y1;
-          scrut = tmp3 >= tmp4;
+          tmp2 = x2 - x1;
+          tmp3 = y2 - y1;
+          scrut = tmp2 >= tmp3;
           if (scrut === true) {
-            tmp5 = "NS";
+            tmp4 = "NS";
           } else {
-            tmp5 = "EW";
+            tmp4 = "EW";
           }
-          split = tmp5;
-          tmp6 = x2 + x1;
-          split_x = NofibPrelude.intDiv(tmp6, 2);
-          tmp7 = y2 + y1;
-          split_y = NofibPrelude.intDiv(tmp7, 2);
+          split = tmp4;
+          tmp5 = x2 + x1;
+          split_x = NofibPrelude.intDiv(tmp5, 2);
+          tmp6 = y2 + y1;
+          split_y = NofibPrelude.intDiv(tmp6, 2);
           nsp1 = x1y1;
-          arr = globalThis.Object.freeze([
+          nsp2 = globalThis.Object.freeze([
             split_x,
             y2
           ]);
-          nsp2 = arr;
-          tmp8 = split_x + 1;
-          arr1 = globalThis.Object.freeze([
-            tmp8,
+          tmp7 = split_x + 1;
+          nsp3 = globalThis.Object.freeze([
+            tmp7,
             y1
           ]);
-          nsp3 = arr1;
           nsp4 = x2y2;
           ewp1 = x1y1;
-          arr2 = globalThis.Object.freeze([
+          ewp2 = globalThis.Object.freeze([
             x2,
             split_y
           ]);
-          ewp2 = arr2;
-          tmp9 = split_y + 1;
-          arr3 = globalThis.Object.freeze([
+          tmp8 = split_y + 1;
+          ewp3 = globalThis.Object.freeze([
             x1,
-            tmp9
+            tmp8
           ]);
-          ewp3 = arr3;
           ewp4 = x2y2;
           scrut1 = split == "NS";
           if (scrut1 === true) {
-            tmp10 = mandel2.build_tree(nsp1, nsp2);
-            tmp11 = mandel2.build_tree(nsp3, nsp4);
-            return mandel2.NS(tmp10, tmp11)
+            tmp9 = mandel2.build_tree(nsp1, nsp2);
+            tmp10 = mandel2.build_tree(nsp3, nsp4);
+            return mandel2.NS(tmp9, tmp10)
           } else {
-            tmp12 = mandel2.build_tree(ewp1, ewp2);
-            tmp13 = mandel2.build_tree(ewp3, ewp4);
-            return mandel2.EW(tmp12, tmp13)
+            tmp11 = mandel2.build_tree(ewp1, ewp2);
+            tmp12 = mandel2.build_tree(ewp3, ewp4);
+            return mandel2.EW(tmp11, tmp12)
           }
         }
       } else {
@@ -1036,18 +1013,18 @@ globalThis.Object.freeze(class mandel2 {
     }
   } 
   static testMandel2_nofib(n) {
-    let arr, tmp, arr1, tmp1;
-    arr = globalThis.Object.freeze([
+    let tmp, tmp1, tmp2, tmp3;
+    tmp = globalThis.Object.freeze([
       0,
       0
     ]);
-    tmp = NofibPrelude.intDiv(mandel2.size, 2);
-    arr1 = globalThis.Object.freeze([
+    tmp1 = NofibPrelude.intDiv(mandel2.size, 2);
+    tmp2 = globalThis.Object.freeze([
       mandel2.size,
-      tmp
+      tmp1
     ]);
-    tmp1 = build_tree_inst_3_4_tsni(arr, arr1);
-    return mandel2.finite(tmp1)
+    tmp3 = build_tree_inst_3_4_tsni(tmp, tmp2);
+    return mandel2.finite(tmp3)
   } 
   static main() {
     return testMandel2_nofib_inst_5_6_tsni(0)

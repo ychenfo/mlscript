@@ -84,9 +84,9 @@ mandel_inst_4_5_6_tsni = function mandel_inst_4_5_6_tsni(c) {
   return infiniteMandel$_inst_4_5_6_7_tsni(c)
 };
 infiniteMandel$_inst_4_5_6_7_tsni = function infiniteMandel$_inst_4_5_6_7_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_4_5_6_7_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_4_5_6_7_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_4_5_6_7_tsni = (undefined, function (c) {
   return () => {
@@ -168,9 +168,9 @@ mandel_inst_11_12_5_6_tsni = function mandel_inst_11_12_5_6_tsni(c) {
   return infiniteMandel$_inst_11_12_5_6_7_tsni(c)
 };
 infiniteMandel$_inst_11_12_5_6_7_tsni = function infiniteMandel$_inst_11_12_5_6_7_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_5_6_7_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_5_6_7_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_5_6_7_tsni = (undefined, function (c) {
   return () => {
@@ -335,9 +335,9 @@ comp_times_inst_14_9_10_tsni = function comp_times_inst_14_9_10_tsni(x, y) {
   }
 };
 infiniteMandel$_inst_15_tsni = function infiniteMandel$_inst_15_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_15_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_15_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_15_tsni = (undefined, function (c) {
   return () => {
@@ -400,9 +400,9 @@ comp_times_inst_15_8_9_10_tsni = function comp_times_inst_15_8_9_10_tsni(x, y) {
   }
 };
 infiniteMandel$_inst_16_tsni = function infiniteMandel$_inst_16_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda1(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$_inst_16_tsni = function lambda$_inst_16_tsni(c) {
   let tmp, tmp1, lambda$this;
@@ -534,9 +534,9 @@ comp_times_inst_17_8_9_10_tsni = function comp_times_inst_17_8_9_10_tsni(x, y) {
   }
 };
 infiniteMandel$_inst_18_19_tsni = function infiniteMandel$_inst_18_19_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_tsni = (undefined, function (c) {
   return () => {
@@ -606,9 +606,9 @@ comp_times_inst_18_19_8_9_10_tsni = function comp_times_inst_18_19_8_9_10_tsni(x
   }
 };
 infiniteMandel$_inst_20_7_tsni = function infiniteMandel$_inst_20_7_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_7_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_7_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_7_tsni = (undefined, function (c) {
   return () => {
@@ -681,9 +681,9 @@ mandel_inst_21_6_tsni = function mandel_inst_21_6_tsni(c) {
   return infiniteMandel$_inst_21_6_7_tsni(c)
 };
 infiniteMandel$_inst_21_6_7_tsni = function infiniteMandel$_inst_21_6_7_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_21_6_7_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_21_6_7_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_21_6_7_tsni = (undefined, function (c) {
   return () => {
@@ -770,9 +770,9 @@ mandel_inst_22_23_12_5_6_tsni = function mandel_inst_22_23_12_5_6_tsni(c) {
   return infiniteMandel$_inst_22_23_12_5_6_7_tsni(c)
 };
 infiniteMandel$_inst_22_23_12_5_6_7_tsni = function infiniteMandel$_inst_22_23_12_5_6_7_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_12_5_6_7_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_12_5_6_7_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_12_5_6_7_tsni = (undefined, function (c) {
   return () => {
@@ -942,9 +942,9 @@ mandel_inst_24_27_23_12_5_6_tsni = function mandel_inst_24_27_23_12_5_6_tsni(c) 
   return infiniteMandel$_inst_24_27_23_12_5_6_7_tsni(c)
 };
 infiniteMandel$_inst_24_27_23_12_5_6_7_tsni = function infiniteMandel$_inst_24_27_23_12_5_6_7_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_24_27_23_12_5_6_7_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_24_27_23_12_5_6_7_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_24_27_23_12_5_6_7_tsni = (undefined, function (c) {
   return () => {
@@ -1017,18 +1017,17 @@ map_inst_24_27_28_tsni = function map_inst_24_27_28_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
 mandelset_inst_29_30_tsni = function mandelset_inst_29_30_tsni(x, y, x_, y_, screenX, screenY, lIMIT) {
-  let result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, prettyRGB$this;
+  let result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, prettyRGB$this;
   tmp = enumFromTo_inst_29_30_26_tsni(1, screenY);
   tmp1 = lscomp1$_inst_29_30_25_tsni(x, y, x_, y_, screenX, screenY, tmp);
   tmp2 = x_ - x;
   tmp3 = y_ - y;
   tmp4 = NofibPrelude.max(tmp2, tmp3);
   tmp5 = tmp4 / 2;
-  tmp6 = parallelMandel_inst_29_30_27_tsni(tmp1, lIMIT, tmp5);
-  result = tmp6;
+  result = parallelMandel_inst_29_30_27_tsni(tmp1, lIMIT, tmp5);
   prettyRGB$this = runtime.safeCall(prettyRGB(lIMIT));
-  tmp7 = map_inst_29_30_34_tsni(prettyRGB$this, result);
-  return mandel.createPixmap(screenX, screenY, lIMIT, tmp7)
+  tmp6 = map_inst_29_30_34_tsni(prettyRGB$this, result);
+  return mandel.createPixmap(screenX, screenY, lIMIT, tmp6)
 };
 parallelMandel_inst_29_30_27_tsni = function parallelMandel_inst_29_30_27_tsni(mat, limit, radius) {
   let lambda$this;
@@ -1053,9 +1052,9 @@ mandel_inst_29_30_27_23_12_5_6_tsni = function mandel_inst_29_30_27_23_12_5_6_ts
   return infiniteMandel$_inst_29_30_27_23_12_5_6_7_tsni(c)
 };
 infiniteMandel$_inst_29_30_27_23_12_5_6_7_tsni = function infiniteMandel$_inst_29_30_27_23_12_5_6_7_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_30_27_23_12_5_6_7_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_30_27_23_12_5_6_7_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_30_27_23_12_5_6_7_tsni = (undefined, function (c) {
   return () => {
@@ -1206,11 +1205,9 @@ enumFromTo_inst_29_30_26_tsni = function enumFromTo_inst_29_30_26_tsni(a, b) {
   }
 };
 testMandel_nofib_inst_31_32_tsni = function testMandel_nofib_inst_31_32_tsni(dummy) {
-  let minx, miny, maxx, maxy, screenX, screenY, limit, tmp, tmp1;
-  tmp = - 2.0;
-  minx = tmp;
-  tmp1 = - 2.0;
-  miny = tmp1;
+  let minx, miny, maxx, maxy, screenX, screenY, limit;
+  minx = - 2.0;
+  miny = - 2.0;
   maxx = 2.0;
   maxy = 2.0;
   screenX = 25;
@@ -1219,18 +1216,17 @@ testMandel_nofib_inst_31_32_tsni = function testMandel_nofib_inst_31_32_tsni(dum
   return mandelset_inst_31_32_30_tsni(minx, miny, maxx, maxy, screenX, screenY, limit)
 };
 mandelset_inst_31_32_30_tsni = function mandelset_inst_31_32_30_tsni(x, y, x_, y_, screenX, screenY, lIMIT) {
-  let result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, prettyRGB$this;
+  let result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, prettyRGB$this;
   tmp = enumFromTo_inst_31_32_30_26_tsni(1, screenY);
   tmp1 = lscomp1$_inst_31_32_30_25_tsni(x, y, x_, y_, screenX, screenY, tmp);
   tmp2 = x_ - x;
   tmp3 = y_ - y;
   tmp4 = NofibPrelude.max(tmp2, tmp3);
   tmp5 = tmp4 / 2;
-  tmp6 = parallelMandel_inst_31_32_30_27_tsni(tmp1, lIMIT, tmp5);
-  result = tmp6;
+  result = parallelMandel_inst_31_32_30_27_tsni(tmp1, lIMIT, tmp5);
   prettyRGB$this = runtime.safeCall(prettyRGB(lIMIT));
-  tmp7 = map_inst_31_32_30_34_tsni(prettyRGB$this, result);
-  return mandel.createPixmap(screenX, screenY, lIMIT, tmp7)
+  tmp6 = map_inst_31_32_30_34_tsni(prettyRGB$this, result);
+  return mandel.createPixmap(screenX, screenY, lIMIT, tmp6)
 };
 lscomp1$_inst_31_32_30_25_tsni = function lscomp1$_inst_31_32_30_25_tsni(x, y, x_, y_, screenX, screenY, ls1) {
   return runtime.safeCall(ls1(x, y, x_, y_, screenX, screenY))
@@ -1333,9 +1329,9 @@ mandel_inst_31_32_30_27_23_12_5_6_tsni = function mandel_inst_31_32_30_27_23_12_
   return infiniteMandel$_inst_31_32_30_27_23_12_5_6_7_tsni(c)
 };
 infiniteMandel$_inst_31_32_30_27_23_12_5_6_7_tsni = function infiniteMandel$_inst_31_32_30_27_23_12_5_6_7_tsni(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_31_32_30_27_23_12_5_6_7_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_31_32_30_27_23_12_5_6_7_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_31_32_30_27_23_12_5_6_7_tsni = (undefined, function (c) {
   return () => {
@@ -1459,15 +1455,13 @@ map_inst_31_32_30_34_tsni = function map_inst_31_32_30_34_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
 prettyRGB$ = function prettyRGB$(lIMIT, s) {
-  let t, tmp, arr;
-  tmp = lIMIT - s;
-  t = tmp;
-  arr = globalThis.Object.freeze([
+  let t;
+  t = lIMIT - s;
+  return globalThis.Object.freeze([
     s,
     t,
     t
-  ]);
-  return arr
+  ])
 };
 prettyRGB = function prettyRGB(lIMIT) {
   return (s) => {
@@ -1571,7 +1565,7 @@ lambda$1 = function lambda$(c, z) {
   tmp = comp_times_inst_13_10_tsni(z, z);
   return comp_plus_inst_13_33_tsni(tmp, c)
 };
-lambda1 = (undefined, function (c) {
+lambda = (undefined, function (c) {
   return (z) => {
     return lambda$_inst_14_9_tsni(c, z)
   }
@@ -1583,15 +1577,15 @@ lambda$ = function lambda$(c) {
   tmp1 = NofibPrelude.map_lz(lambda$this, tmp);
   return NofibPrelude.LzCons(c, tmp1)
 };
-lambda = (undefined, function (c) {
+lambda1 = (undefined, function (c) {
   return () => {
     return lambda$_inst_16_tsni(c)
   }
 });
 infiniteMandel$ = function infiniteMandel$(c) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_tsni(c));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_tsni(c));
+  return NofibPrelude.lazy(lambda$this)
 };
 infiniteMandel = function infiniteMandel(c) {
   return () => {
@@ -1723,25 +1717,22 @@ globalThis.Object.freeze(class mandel {
     return NofibPrelude.map(lambda$this, mat)
   } 
   static mandelset(x, y, x_, y_, screenX, screenY, lIMIT) {
-    let result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, prettyRGB$this;
+    let result, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, prettyRGB$this;
     tmp = enumFromTo_inst_24_26_tsni(1, screenY);
     tmp1 = lscomp1$_inst_24_25_tsni(x, y, x_, y_, screenX, screenY, tmp);
     tmp2 = x_ - x;
     tmp3 = y_ - y;
     tmp4 = NofibPrelude.max(tmp2, tmp3);
     tmp5 = tmp4 / 2;
-    tmp6 = parallelMandel_inst_24_27_tsni(tmp1, lIMIT, tmp5);
-    result = tmp6;
+    result = parallelMandel_inst_24_27_tsni(tmp1, lIMIT, tmp5);
     prettyRGB$this = runtime.safeCall(prettyRGB(lIMIT));
-    tmp7 = map_inst_24_34_tsni(prettyRGB$this, result);
-    return mandel.createPixmap(screenX, screenY, lIMIT, tmp7)
+    tmp6 = map_inst_24_34_tsni(prettyRGB$this, result);
+    return mandel.createPixmap(screenX, screenY, lIMIT, tmp6)
   } 
   static testMandel_nofib(dummy) {
-    let minx, miny, maxx, maxy, screenX, screenY, limit, tmp, tmp1;
-    tmp = - 2.0;
-    minx = tmp;
-    tmp1 = - 2.0;
-    miny = tmp1;
+    let minx, miny, maxx, maxy, screenX, screenY, limit;
+    minx = - 2.0;
+    miny = - 2.0;
     maxx = 2.0;
     maxy = 2.0;
     screenX = 25;

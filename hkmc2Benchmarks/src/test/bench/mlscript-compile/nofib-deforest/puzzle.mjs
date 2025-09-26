@@ -28,7 +28,7 @@ match_s_arm_State_inst_0_52_tsni = (undefined, function (i, pos, _deforest_State
   }
 });
 match_ls_arm_Cons_inst_0_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_0_tsni, _deforest_Cons_tail_inst_0_tsni) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_0_tsni;
   param1 = _deforest_Cons_tail_inst_0_tsni;
   j = param0;
@@ -40,25 +40,23 @@ match_ls_arm_Cons_inst_0_tsni = (undefined, function (source, dest, location, co
     scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
       tmp2 = updateState_inst_0_1_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_0_52_tsni(tmp2, j, newLocation);
-      newDest = tmp3;
+      newDest = updateState_inst_0_52_tsni(tmp2, j, newLocation);
       scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle1.u2times(i);
-        tmp5 = countdown + tmp4;
-        newTime = tmp5;
-        tmp6 = transfer_inst_0_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-        _deforest_Cons_head = tmp6;
-        _deforest_Cons_tail = tmp7;
+        tmp3 = puzzle1.u2times(i);
+        newTime = countdown + tmp3;
+        tmp4 = transfer_inst_0_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp5 = lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        _deforest_Cons_head = tmp4;
+        _deforest_Cons_tail = tmp5;
         return () => {
-          let param01, param11, x, xs1, tmp8;
+          let param01, param11, x, xs1, tmp6;
           param01 = _deforest_Cons_head;
           param11 = _deforest_Cons_tail;
           x = param01;
           xs1 = param11;
-          tmp8 = concat_inst_0_53_tsni(xs1);
-          return NofibPrelude.append(x, tmp8)
+          tmp6 = concat_inst_0_53_tsni(xs1);
+          return NofibPrelude.append(x, tmp6)
         }
       } else {
         return lscomp3$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
@@ -103,7 +101,7 @@ match_s_arm_State_inst_6_7_52_tsni = (undefined, function (i, pos, _deforest_Sta
   }
 });
 match_ls_arm_Cons_inst_6_7_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_6_7_tsni, _deforest_Cons_tail_inst_6_7_tsni) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_6_7_tsni;
   param1 = _deforest_Cons_tail_inst_6_7_tsni;
   j = param0;
@@ -115,25 +113,23 @@ match_ls_arm_Cons_inst_6_7_tsni = (undefined, function (source, dest, location, 
     scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
       tmp2 = updateState_inst_6_7_1_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_6_7_52_tsni(tmp2, j, newLocation);
-      newDest = tmp3;
+      newDest = updateState_inst_6_7_52_tsni(tmp2, j, newLocation);
       scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle1.u2times(i);
-        tmp5 = countdown + tmp4;
-        newTime = tmp5;
-        tmp6 = transfer_inst_6_7_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-        _deforest_Cons_head = tmp6;
-        _deforest_Cons_tail = tmp7;
+        tmp3 = puzzle1.u2times(i);
+        newTime = countdown + tmp3;
+        tmp4 = transfer_inst_6_7_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp5 = lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        _deforest_Cons_head = tmp4;
+        _deforest_Cons_tail = tmp5;
         return () => {
-          let param01, param11, x, xs1, tmp8;
+          let param01, param11, x, xs1, tmp6;
           param01 = _deforest_Cons_head;
           param11 = _deforest_Cons_tail;
           x = param01;
           xs1 = param11;
-          tmp8 = concat_inst_6_7_53_tsni(xs1);
-          return NofibPrelude.append(x, tmp8)
+          tmp6 = concat_inst_6_7_53_tsni(xs1);
+          return NofibPrelude.append(x, tmp6)
         }
       } else {
         return lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
@@ -156,7 +152,7 @@ match_ls_arm_Cons_inst_6_7_tsni1 = (undefined, function (source, dest, location,
   return lscomp3$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
 });
 match_ls_arm_Cons_inst_8_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_8_tsni, _deforest_Cons_tail_inst_8_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_8_tsni;
   param1 = _deforest_Cons_tail_inst_8_tsni;
   item = param0;
@@ -164,25 +160,23 @@ match_ls_arm_Cons_inst_8_tsni = (undefined, function (source, dest, location, co
   tmp = puzzle1.position(item, dest);
   scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle1.updateState(dest, item, newLocation);
-    newDest = tmp1;
+    newDest = puzzle1.updateState(dest, item, newLocation);
     scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle1.u2times(item);
-      tmp3 = countdown + tmp2;
-      newTime = tmp3;
-      tmp4 = transfer_inst_8_tsni(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1$_inst_8_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
-      _deforest_Cons_head = tmp4;
-      _deforest_Cons_tail = tmp5;
+      tmp1 = puzzle1.u2times(item);
+      newTime = countdown + tmp1;
+      tmp2 = transfer_inst_8_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp3 = lscomp1$_inst_8_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp2;
+      _deforest_Cons_tail = tmp3;
       return () => {
-        let param01, param11, x, xs1, tmp6;
+        let param01, param11, x, xs1, tmp4;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_8_4_tsni(xs1);
-        return append_inst_8_4_5_tsni(x, tmp6)
+        tmp4 = concat_inst_8_4_tsni(xs1);
+        return append_inst_8_4_5_tsni(x, tmp4)
       }
     } else {
       return lscomp1$_inst_8_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
@@ -236,7 +230,7 @@ match_s_arm_State_inst_10_11_52_tsni = (undefined, function (i, pos, _deforest_S
   }
 });
 match_ls_arm_Cons_inst_10_11_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_10_11_tsni, _deforest_Cons_tail_inst_10_11_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_10_11_tsni;
   param1 = _deforest_Cons_tail_inst_10_11_tsni;
   item = param0;
@@ -244,25 +238,23 @@ match_ls_arm_Cons_inst_10_11_tsni = (undefined, function (source, dest, location
   tmp = puzzle1.position(item, dest);
   scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle1.updateState(dest, item, newLocation);
-    newDest = tmp1;
+    newDest = puzzle1.updateState(dest, item, newLocation);
     scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle1.u2times(item);
-      tmp3 = countdown + tmp2;
-      newTime = tmp3;
-      tmp4 = transfer_inst_10_11_tsni(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
-      _deforest_Cons_head = tmp4;
-      _deforest_Cons_tail = tmp5;
+      tmp1 = puzzle1.u2times(item);
+      newTime = countdown + tmp1;
+      tmp2 = transfer_inst_10_11_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp3 = lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp2;
+      _deforest_Cons_tail = tmp3;
       return () => {
-        let param01, param11, x, xs1, tmp6;
+        let param01, param11, x, xs1, tmp4;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_10_11_4_tsni(xs1);
-        return append_inst_10_11_4_5_tsni(x, tmp6)
+        tmp4 = concat_inst_10_11_4_tsni(xs1);
+        return append_inst_10_11_4_5_tsni(x, tmp4)
       }
     } else {
       return lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
@@ -272,7 +264,7 @@ match_ls_arm_Cons_inst_10_11_tsni = (undefined, function (source, dest, location
   }
 });
 match_ls_arm_Cons_inst_12_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_12_tsni, _deforest_Cons_tail_inst_12_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_12_tsni;
   param1 = _deforest_Cons_tail_inst_12_tsni;
   item = param0;
@@ -280,25 +272,23 @@ match_ls_arm_Cons_inst_12_tsni = (undefined, function (source, dest, location, c
   tmp = puzzle1.position(item, dest);
   scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle1.updateState(dest, item, newLocation);
-    newDest = tmp1;
+    newDest = puzzle1.updateState(dest, item, newLocation);
     scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle1.u2times(item);
-      tmp3 = countdown + tmp2;
-      newTime = tmp3;
-      tmp4 = transfer_inst_12_tsni(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
-      _deforest_Cons_head = tmp4;
-      _deforest_Cons_tail = tmp5;
+      tmp1 = puzzle1.u2times(item);
+      newTime = countdown + tmp1;
+      tmp2 = transfer_inst_12_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp3 = lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp2;
+      _deforest_Cons_tail = tmp3;
       return () => {
-        let param01, param11, x, xs1, tmp6;
+        let param01, param11, x, xs1, tmp4;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_12_4_tsni(xs1);
-        return append_inst_12_4_5_tsni(x, tmp6)
+        tmp4 = concat_inst_12_4_tsni(xs1);
+        return append_inst_12_4_5_tsni(x, tmp4)
       }
     } else {
       return lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
@@ -330,7 +320,7 @@ match_s_arm_State_inst_12_52_tsni = (undefined, function (i, pos, _deforest_Stat
   }
 });
 match_ls_arm_Cons_inst_12_tsni1 = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_12_tsni, _deforest_Cons_tail_inst_12_tsni) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   param0 = _deforest_Cons_head_inst_12_tsni;
   param1 = _deforest_Cons_tail_inst_12_tsni;
   j = param0;
@@ -342,16 +332,14 @@ match_ls_arm_Cons_inst_12_tsni1 = (undefined, function (source, dest, location, 
     scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
       tmp2 = updateState_inst_12_1_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_12_52_tsni(tmp2, j, newLocation);
-      newDest = tmp3;
+      newDest = updateState_inst_12_52_tsni(tmp2, j, newLocation);
       scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle1.u2times(i);
-        tmp5 = countdown + tmp4;
-        newTime = tmp5;
-        tmp6 = transfer_inst_12_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-        return NofibPrelude.Cons(tmp6, tmp7)
+        tmp3 = puzzle1.u2times(i);
+        newTime = countdown + tmp3;
+        tmp4 = transfer_inst_12_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp5 = lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       } else {
         return lscomp3$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
       }
@@ -385,7 +373,7 @@ match_s_arm_State_inst_13_14_52_tsni = (undefined, function (i, pos, _deforest_S
   }
 });
 match_ls_arm_Cons_inst_13_14_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_13_14_tsni, _deforest_Cons_tail_inst_13_14_tsni) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   param0 = _deforest_Cons_head_inst_13_14_tsni;
   param1 = _deforest_Cons_tail_inst_13_14_tsni;
   j = param0;
@@ -397,16 +385,14 @@ match_ls_arm_Cons_inst_13_14_tsni = (undefined, function (source, dest, location
     scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
       tmp2 = updateState_inst_13_14_1_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_13_14_52_tsni(tmp2, j, newLocation);
-      newDest = tmp3;
+      newDest = updateState_inst_13_14_52_tsni(tmp2, j, newLocation);
       scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle1.u2times(i);
-        tmp5 = countdown + tmp4;
-        newTime = tmp5;
-        tmp6 = transfer_inst_13_14_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-        return NofibPrelude.Cons(tmp6, tmp7)
+        tmp3 = puzzle1.u2times(i);
+        newTime = countdown + tmp3;
+        tmp4 = transfer_inst_13_14_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp5 = lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       } else {
         return lscomp3$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
       }
@@ -418,7 +404,7 @@ match_ls_arm_Cons_inst_13_14_tsni = (undefined, function (source, dest, location
   }
 });
 match_ls_arm_Cons_inst_13_14_tsni1 = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_13_14_tsni, _deforest_Cons_tail_inst_13_14_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_13_14_tsni;
   param1 = _deforest_Cons_tail_inst_13_14_tsni;
   item = param0;
@@ -426,25 +412,23 @@ match_ls_arm_Cons_inst_13_14_tsni1 = (undefined, function (source, dest, locatio
   tmp = puzzle1.position(item, dest);
   scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle1.updateState(dest, item, newLocation);
-    newDest = tmp1;
+    newDest = puzzle1.updateState(dest, item, newLocation);
     scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle1.u2times(item);
-      tmp3 = countdown + tmp2;
-      newTime = tmp3;
-      tmp4 = transfer_inst_13_14_tsni(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
-      _deforest_Cons_head = tmp4;
-      _deforest_Cons_tail = tmp5;
+      tmp1 = puzzle1.u2times(item);
+      newTime = countdown + tmp1;
+      tmp2 = transfer_inst_13_14_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp3 = lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp2;
+      _deforest_Cons_tail = tmp3;
       return () => {
-        let param01, param11, x, xs1, tmp6;
+        let param01, param11, x, xs1, tmp4;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_13_14_4_tsni(xs1);
-        return append_inst_13_14_4_5_tsni(x, tmp6)
+        tmp4 = concat_inst_13_14_4_tsni(xs1);
+        return append_inst_13_14_4_5_tsni(x, tmp4)
       }
     } else {
       return lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
@@ -454,7 +438,7 @@ match_ls_arm_Cons_inst_13_14_tsni1 = (undefined, function (source, dest, locatio
   }
 });
 match_ls_arm_Cons_inst_28_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_28_tsni, _deforest_Cons_tail_inst_28_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_28_tsni;
   param1 = _deforest_Cons_tail_inst_28_tsni;
   item = param0;
@@ -462,25 +446,23 @@ match_ls_arm_Cons_inst_28_tsni = (undefined, function (source, dest, location, c
   tmp = puzzle1.position(item, dest);
   scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle1.updateState(dest, item, newLocation);
-    newDest = tmp1;
+    newDest = puzzle1.updateState(dest, item, newLocation);
     scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle1.u2times(item);
-      tmp3 = countdown + tmp2;
-      newTime = tmp3;
-      tmp4 = puzzle1.transfer(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
-      _deforest_Cons_head = tmp4;
-      _deforest_Cons_tail = tmp5;
+      tmp1 = puzzle1.u2times(item);
+      newTime = countdown + tmp1;
+      tmp2 = puzzle1.transfer(source, newDest, newLocation, newTime, newHistory);
+      tmp3 = lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp2;
+      _deforest_Cons_tail = tmp3;
       return () => {
-        let param01, param11, x, xs1, tmp6;
+        let param01, param11, x, xs1, tmp4;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_28_4_tsni(xs1);
-        return append_inst_28_4_5_tsni(x, tmp6)
+        tmp4 = concat_inst_28_4_tsni(xs1);
+        return append_inst_28_4_5_tsni(x, tmp4)
       }
     } else {
       return lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
@@ -512,7 +494,7 @@ match_s_arm_State_inst_28_52_tsni = (undefined, function (i, pos, _deforest_Stat
   }
 });
 match_ls_arm_Cons_inst_28_tsni1 = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_28_tsni, _deforest_Cons_tail_inst_28_tsni) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_28_tsni;
   param1 = _deforest_Cons_tail_inst_28_tsni;
   j = param0;
@@ -524,25 +506,23 @@ match_ls_arm_Cons_inst_28_tsni1 = (undefined, function (source, dest, location, 
     scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
       tmp2 = updateState_inst_28_1_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_28_52_tsni(tmp2, j, newLocation);
-      newDest = tmp3;
+      newDest = updateState_inst_28_52_tsni(tmp2, j, newLocation);
       scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle1.u2times(i);
-        tmp5 = countdown + tmp4;
-        newTime = tmp5;
-        tmp6 = puzzle1.transfer(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-        _deforest_Cons_head = tmp6;
-        _deforest_Cons_tail = tmp7;
+        tmp3 = puzzle1.u2times(i);
+        newTime = countdown + tmp3;
+        tmp4 = puzzle1.transfer(source, newDest, newLocation, newTime, newHistory);
+        tmp5 = lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        _deforest_Cons_head = tmp4;
+        _deforest_Cons_tail = tmp5;
         return () => {
-          let param01, param11, x, xs1, tmp8;
+          let param01, param11, x, xs1, tmp6;
           param01 = _deforest_Cons_head;
           param11 = _deforest_Cons_tail;
           x = param01;
           xs1 = param11;
-          tmp8 = concat_inst_28_53_tsni(xs1);
-          return NofibPrelude.append(x, tmp8)
+          tmp6 = concat_inst_28_53_tsni(xs1);
+          return NofibPrelude.append(x, tmp6)
         }
       } else {
         return lscomp3$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
@@ -587,7 +567,7 @@ match_s_arm_State_inst_29_30_52_tsni = (undefined, function (i, pos, _deforest_S
   }
 });
 match_ls_arm_Cons_inst_29_30_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_29_30_tsni, _deforest_Cons_tail_inst_29_30_tsni) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_29_30_tsni;
   param1 = _deforest_Cons_tail_inst_29_30_tsni;
   j = param0;
@@ -599,25 +579,23 @@ match_ls_arm_Cons_inst_29_30_tsni = (undefined, function (source, dest, location
     scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
       tmp2 = updateState_inst_29_30_1_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_29_30_52_tsni(tmp2, j, newLocation);
-      newDest = tmp3;
+      newDest = updateState_inst_29_30_52_tsni(tmp2, j, newLocation);
       scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle1.u2times(i);
-        tmp5 = countdown + tmp4;
-        newTime = tmp5;
-        tmp6 = transfer_inst_29_30_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-        _deforest_Cons_head = tmp6;
-        _deforest_Cons_tail = tmp7;
+        tmp3 = puzzle1.u2times(i);
+        newTime = countdown + tmp3;
+        tmp4 = transfer_inst_29_30_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp5 = lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        _deforest_Cons_head = tmp4;
+        _deforest_Cons_tail = tmp5;
         return () => {
-          let param01, param11, x, xs1, tmp8;
+          let param01, param11, x, xs1, tmp6;
           param01 = _deforest_Cons_head;
           param11 = _deforest_Cons_tail;
           x = param01;
           xs1 = param11;
-          tmp8 = concat_inst_29_30_53_tsni(xs1);
-          return NofibPrelude.append(x, tmp8)
+          tmp6 = concat_inst_29_30_53_tsni(xs1);
+          return NofibPrelude.append(x, tmp6)
         }
       } else {
         return lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
@@ -640,7 +618,7 @@ match_ls_arm_Cons_inst_29_30_tsni1 = (undefined, function (source, dest, locatio
   return lscomp3$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, tmp1)
 });
 match_ls_arm_Cons_inst_29_30_tsni2 = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_29_30_tsni, _deforest_Cons_tail_inst_29_30_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_29_30_tsni;
   param1 = _deforest_Cons_tail_inst_29_30_tsni;
   item = param0;
@@ -648,25 +626,23 @@ match_ls_arm_Cons_inst_29_30_tsni2 = (undefined, function (source, dest, locatio
   tmp = puzzle1.position(item, dest);
   scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle1.updateState(dest, item, newLocation);
-    newDest = tmp1;
+    newDest = puzzle1.updateState(dest, item, newLocation);
     scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle1.u2times(item);
-      tmp3 = countdown + tmp2;
-      newTime = tmp3;
-      tmp4 = transfer_inst_29_30_tsni(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
-      _deforest_Cons_head = tmp4;
-      _deforest_Cons_tail = tmp5;
+      tmp1 = puzzle1.u2times(item);
+      newTime = countdown + tmp1;
+      tmp2 = transfer_inst_29_30_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp3 = lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp2;
+      _deforest_Cons_tail = tmp3;
       return () => {
-        let param01, param11, x, xs1, tmp6;
+        let param01, param11, x, xs1, tmp4;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_29_30_4_tsni(xs1);
-        return append_inst_29_30_4_5_tsni(x, tmp6)
+        tmp4 = concat_inst_29_30_4_tsni(xs1);
+        return append_inst_29_30_4_5_tsni(x, tmp4)
       }
     } else {
       return lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
@@ -676,7 +652,7 @@ match_ls_arm_Cons_inst_29_30_tsni2 = (undefined, function (source, dest, locatio
   }
 });
 match_ls_arm_Cons_inst_32_33_30_tsni = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, _deforest_Cons_head_inst_32_33_30_tsni, _deforest_Cons_tail_inst_32_33_30_tsni) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_32_33_30_tsni;
   param1 = _deforest_Cons_tail_inst_32_33_30_tsni;
   item = param0;
@@ -684,25 +660,23 @@ match_ls_arm_Cons_inst_32_33_30_tsni = (undefined, function (source, dest, locat
   tmp = puzzle1.position(item, dest);
   scrut = puzzle1.bankEq(tmp, location);
   if (scrut === true) {
-    tmp1 = puzzle1.updateState(dest, item, newLocation);
-    newDest = tmp1;
+    newDest = puzzle1.updateState(dest, item, newLocation);
     scrut1 = puzzle1.notSeen(newDest, history);
     if (scrut1 === true) {
-      tmp2 = puzzle1.u2times(item);
-      tmp3 = countdown + tmp2;
-      newTime = tmp3;
-      tmp4 = transfer_inst_32_33_30_tsni(source, newDest, newLocation, newTime, newHistory);
-      tmp5 = lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
-      _deforest_Cons_head = tmp4;
-      _deforest_Cons_tail = tmp5;
+      tmp1 = puzzle1.u2times(item);
+      newTime = countdown + tmp1;
+      tmp2 = transfer_inst_32_33_30_tsni(source, newDest, newLocation, newTime, newHistory);
+      tmp3 = lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+      _deforest_Cons_head = tmp2;
+      _deforest_Cons_tail = tmp3;
       return () => {
-        let param01, param11, x, xs1, tmp6;
+        let param01, param11, x, xs1, tmp4;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         x = param01;
         xs1 = param11;
-        tmp6 = concat_inst_32_33_30_4_tsni(xs1);
-        return append_inst_32_33_30_4_5_tsni(x, tmp6)
+        tmp4 = concat_inst_32_33_30_4_tsni(xs1);
+        return append_inst_32_33_30_4_5_tsni(x, tmp4)
       }
     } else {
       return lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
@@ -734,7 +708,7 @@ match_s_arm_State_inst_32_33_30_52_tsni = (undefined, function (i, pos, _defores
   }
 });
 match_ls_arm_Cons_inst_32_33_30_tsni1 = (undefined, function (source, dest, location, countdown, history, newHistory, newLocation, i, xs, _deforest_Cons_head_inst_32_33_30_tsni, _deforest_Cons_tail_inst_32_33_30_tsni) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_32_33_30_tsni;
   param1 = _deforest_Cons_tail_inst_32_33_30_tsni;
   j = param0;
@@ -746,25 +720,23 @@ match_ls_arm_Cons_inst_32_33_30_tsni1 = (undefined, function (source, dest, loca
     scrut1 = puzzle1.bankEq(tmp1, location);
     if (scrut1 === true) {
       tmp2 = updateState_inst_32_33_30_1_tsni(dest, i, newLocation);
-      tmp3 = updateState_inst_32_33_30_52_tsni(tmp2, j, newLocation);
-      newDest = tmp3;
+      newDest = updateState_inst_32_33_30_52_tsni(tmp2, j, newLocation);
       scrut2 = puzzle1.notSeen(newDest, history);
       if (scrut2 === true) {
-        tmp4 = puzzle1.u2times(i);
-        tmp5 = countdown + tmp4;
-        newTime = tmp5;
-        tmp6 = transfer_inst_32_33_30_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp7 = lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-        _deforest_Cons_head = tmp6;
-        _deforest_Cons_tail = tmp7;
+        tmp3 = puzzle1.u2times(i);
+        newTime = countdown + tmp3;
+        tmp4 = transfer_inst_32_33_30_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp5 = lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+        _deforest_Cons_head = tmp4;
+        _deforest_Cons_tail = tmp5;
         return () => {
-          let param01, param11, x, xs1, tmp8;
+          let param01, param11, x, xs1, tmp6;
           param01 = _deforest_Cons_head;
           param11 = _deforest_Cons_tail;
           x = param01;
           xs1 = param11;
-          tmp8 = concat_inst_32_33_30_53_tsni(xs1);
-          return NofibPrelude.append(x, tmp8)
+          tmp6 = concat_inst_32_33_30_53_tsni(xs1);
+          return NofibPrelude.append(x, tmp6)
         }
       } else {
         return lscomp3$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
@@ -796,32 +768,28 @@ match_ls_arm_Cons_inst_32_55_tsni = (undefined, function (_deforest_Cons_head_in
   return h + tmp
 });
 transfer_inst_0_tsni = function transfer_inst_0_tsni(source, dest, location, countdown, history) {
-  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp = NofibPrelude.Cons(arr, history);
-    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+    tmp1 = NofibPrelude.Cons(tmp, history);
+    return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp1 = NofibPrelude.Cons(arr1, history);
-    newHistory = tmp1;
-    tmp2 = puzzle.opposite(location);
-    newLocation = tmp2;
+    newHistory = NofibPrelude.Cons(tmp2, history);
+    newLocation = puzzle.opposite(location);
     tmp3 = puzzle.itemFromTo(puzzle.Bono, puzzle.Adam);
     tmp4 = lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-    tmp5 = concat_inst_0_4_tsni(tmp4);
-    moveOne = tmp5;
-    tmp6 = itemFromTo_inst_0_3_tsni(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-    tmp8 = concat_inst_0_53_tsni(tmp7);
-    moveTwo = tmp8;
+    moveOne = concat_inst_0_4_tsni(tmp4);
+    tmp5 = itemFromTo_inst_0_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp6 = lscomp2$_inst_0_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+    moveTwo = concat_inst_0_53_tsni(tmp6);
     return append_inst_0_54_tsni(moveOne, moveTwo)
   }
 };
@@ -967,32 +935,28 @@ append_inst_0_4_5_tsni = function append_inst_0_4_5_tsni(xs, ys) {
   }
 };
 transfer_inst_6_7_tsni = function transfer_inst_6_7_tsni(source, dest, location, countdown, history) {
-  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp = NofibPrelude.Cons(arr, history);
-    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+    tmp1 = NofibPrelude.Cons(tmp, history);
+    return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp1 = NofibPrelude.Cons(arr1, history);
-    newHistory = tmp1;
-    tmp2 = puzzle.opposite(location);
-    newLocation = tmp2;
+    newHistory = NofibPrelude.Cons(tmp2, history);
+    newLocation = puzzle.opposite(location);
     tmp3 = puzzle.itemFromTo(puzzle.Bono, puzzle.Adam);
     tmp4 = lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-    tmp5 = concat_inst_6_7_4_tsni(tmp4);
-    moveOne = tmp5;
-    tmp6 = itemFromTo_inst_6_7_3_tsni(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-    tmp8 = concat_inst_6_7_53_tsni(tmp7);
-    moveTwo = tmp8;
+    moveOne = concat_inst_6_7_4_tsni(tmp4);
+    tmp5 = itemFromTo_inst_6_7_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp6 = lscomp2$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+    moveTwo = concat_inst_6_7_53_tsni(tmp6);
     return append_inst_6_7_54_tsni(moveOne, moveTwo)
   }
 };
@@ -1003,7 +967,7 @@ lscomp3$_inst_6_7_tsni = function lscomp3$_inst_6_7_tsni(source, dest, location,
   return runtime.safeCall(ls(source, dest, location, countdown, history, newHistory, newLocation, i, xs))
 };
 lscomp1$_inst_6_7_tsni = function lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3;
   if (ls instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -1014,16 +978,14 @@ lscomp1$_inst_6_7_tsni = function lscomp1$_inst_6_7_tsni(source, dest, location,
     tmp = puzzle1.position(item, dest);
     scrut = puzzle1.bankEq(tmp, location);
     if (scrut === true) {
-      tmp1 = puzzle1.updateState(dest, item, newLocation);
-      newDest = tmp1;
+      newDest = puzzle1.updateState(dest, item, newLocation);
       scrut1 = puzzle1.notSeen(newDest, history);
       if (scrut1 === true) {
-        tmp2 = puzzle1.u2times(item);
-        tmp3 = countdown + tmp2;
-        newTime = tmp3;
-        tmp4 = transfer_inst_6_7_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp5 = lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
-        return NofibPrelude.Cons(tmp4, tmp5)
+        tmp1 = puzzle1.u2times(item);
+        newTime = countdown + tmp1;
+        tmp2 = transfer_inst_6_7_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp3 = lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs);
+        return NofibPrelude.Cons(tmp2, tmp3)
       } else {
         return lscomp1$_inst_6_7_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
       }
@@ -1170,32 +1132,28 @@ append_inst_6_7_4_5_tsni = function append_inst_6_7_4_5_tsni(xs, ys) {
   }
 };
 transfer_inst_8_tsni = function transfer_inst_8_tsni(source, dest, location, countdown, history) {
-  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp = NofibPrelude.Cons(arr, history);
-    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+    tmp1 = NofibPrelude.Cons(tmp, history);
+    return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp1 = NofibPrelude.Cons(arr1, history);
-    newHistory = tmp1;
-    tmp2 = puzzle.opposite(location);
-    newLocation = tmp2;
+    newHistory = NofibPrelude.Cons(tmp2, history);
+    newLocation = puzzle.opposite(location);
     tmp3 = itemFromTo_inst_8_9_tsni(puzzle.Bono, puzzle.Adam);
     tmp4 = lscomp1$_inst_8_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-    tmp5 = concat_inst_8_4_tsni(tmp4);
-    moveOne = tmp5;
-    tmp6 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2$_inst_8_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-    tmp8 = NofibPrelude.concat(tmp7);
-    moveTwo = tmp8;
+    moveOne = concat_inst_8_4_tsni(tmp4);
+    tmp5 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
+    tmp6 = lscomp2$_inst_8_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+    moveTwo = NofibPrelude.concat(tmp6);
     return append_inst_8_54_tsni(moveOne, moveTwo)
   }
 };
@@ -1321,32 +1279,28 @@ append_inst_8_4_5_tsni = function append_inst_8_4_5_tsni(xs, ys) {
   }
 };
 transfer_inst_10_11_tsni = function transfer_inst_10_11_tsni(source, dest, location, countdown, history) {
-  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp = NofibPrelude.Cons(arr, history);
-    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+    tmp1 = NofibPrelude.Cons(tmp, history);
+    return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp1 = NofibPrelude.Cons(arr1, history);
-    newHistory = tmp1;
-    tmp2 = puzzle.opposite(location);
-    newLocation = tmp2;
+    newHistory = NofibPrelude.Cons(tmp2, history);
+    newLocation = puzzle.opposite(location);
     tmp3 = itemFromTo_inst_10_11_9_tsni(puzzle.Bono, puzzle.Adam);
     tmp4 = lscomp1$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-    tmp5 = concat_inst_10_11_4_tsni(tmp4);
-    moveOne = tmp5;
-    tmp6 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-    tmp8 = NofibPrelude.concat(tmp7);
-    moveTwo = tmp8;
+    moveOne = concat_inst_10_11_4_tsni(tmp4);
+    tmp5 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
+    tmp6 = lscomp2$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+    moveTwo = NofibPrelude.concat(tmp6);
     return append_inst_10_11_54_tsni(moveOne, moveTwo)
   }
 };
@@ -1367,7 +1321,7 @@ lscomp2$_inst_10_11_tsni = function lscomp2$_inst_10_11_tsni(source, dest, locat
   }
 };
 lscomp3$_inst_10_11_tsni = function lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (ls instanceof NofibPrelude.Nil.class) {
     return lscomp2$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -1382,16 +1336,14 @@ lscomp3$_inst_10_11_tsni = function lscomp3$_inst_10_11_tsni(source, dest, locat
       scrut1 = puzzle1.bankEq(tmp1, location);
       if (scrut1 === true) {
         tmp2 = updateState_inst_10_11_1_tsni(dest, i, newLocation);
-        tmp3 = updateState_inst_10_11_52_tsni(tmp2, j, newLocation);
-        newDest = tmp3;
+        newDest = updateState_inst_10_11_52_tsni(tmp2, j, newLocation);
         scrut2 = puzzle1.notSeen(newDest, history);
         if (scrut2 === true) {
-          tmp4 = puzzle1.u2times(i);
-          tmp5 = countdown + tmp4;
-          newTime = tmp5;
-          tmp6 = transfer_inst_10_11_tsni(source, newDest, newLocation, newTime, newHistory);
-          tmp7 = lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-          return NofibPrelude.Cons(tmp6, tmp7)
+          tmp3 = puzzle1.u2times(i);
+          newTime = countdown + tmp3;
+          tmp4 = transfer_inst_10_11_tsni(source, newDest, newLocation, newTime, newHistory);
+          tmp5 = lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+          return NofibPrelude.Cons(tmp4, tmp5)
         } else {
           return lscomp3$_inst_10_11_tsni(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
         }
@@ -1511,32 +1463,28 @@ itemFromTo_inst_10_11_9_tsni = function itemFromTo_inst_10_11_9_tsni(a, b) {
   }
 };
 transfer_inst_12_tsni = function transfer_inst_12_tsni(source, dest, location, countdown, history) {
-  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp = NofibPrelude.Cons(arr, history);
-    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+    tmp1 = NofibPrelude.Cons(tmp, history);
+    return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp1 = NofibPrelude.Cons(arr1, history);
-    newHistory = tmp1;
-    tmp2 = puzzle.opposite(location);
-    newLocation = tmp2;
+    newHistory = NofibPrelude.Cons(tmp2, history);
+    newLocation = puzzle.opposite(location);
     tmp3 = itemFromTo_inst_12_9_tsni(puzzle.Bono, puzzle.Adam);
     tmp4 = lscomp1$_inst_12_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-    tmp5 = concat_inst_12_4_tsni(tmp4);
-    moveOne = tmp5;
-    tmp6 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2$(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-    tmp8 = NofibPrelude.concat(tmp7);
-    moveTwo = tmp8;
+    moveOne = concat_inst_12_4_tsni(tmp4);
+    tmp5 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
+    tmp6 = lscomp2$(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+    moveTwo = NofibPrelude.concat(tmp6);
     return append_inst_12_54_tsni(moveOne, moveTwo)
   }
 };
@@ -1670,32 +1618,28 @@ append_inst_12_4_5_tsni = function append_inst_12_4_5_tsni(xs, ys) {
   }
 };
 transfer_inst_13_14_tsni = function transfer_inst_13_14_tsni(source, dest, location, countdown, history) {
-  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp = NofibPrelude.Cons(arr, history);
-    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+    tmp1 = NofibPrelude.Cons(tmp, history);
+    return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp1 = NofibPrelude.Cons(arr1, history);
-    newHistory = tmp1;
-    tmp2 = puzzle.opposite(location);
-    newLocation = tmp2;
+    newHistory = NofibPrelude.Cons(tmp2, history);
+    newLocation = puzzle.opposite(location);
     tmp3 = itemFromTo_inst_13_14_9_tsni(puzzle.Bono, puzzle.Adam);
     tmp4 = lscomp1$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-    tmp5 = concat_inst_13_14_4_tsni(tmp4);
-    moveOne = tmp5;
-    tmp6 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-    tmp8 = NofibPrelude.concat(tmp7);
-    moveTwo = tmp8;
+    moveOne = concat_inst_13_14_4_tsni(tmp4);
+    tmp5 = puzzle.itemFromTo(puzzle.Bono, puzzle.Larry);
+    tmp6 = lscomp2$_inst_13_14_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+    moveTwo = NofibPrelude.concat(tmp6);
     return append_inst_13_14_54_tsni(moveOne, moveTwo)
   }
 };
@@ -1845,7 +1789,7 @@ itemFromTo_inst_13_14_9_tsni = function itemFromTo_inst_13_14_9_tsni(a, b) {
   }
 };
 writeState_inst_15_16_tsni = function writeState_inst_15_16_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
   tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp1 = puzzle.bonoPos(state);
   tmp2 = puzzle.edgePos(state);
@@ -1853,7 +1797,7 @@ writeState_inst_15_16_tsni = function writeState_inst_15_16_tsni(state, s) {
   tmp4 = puzzle.adamPos(state);
   tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_15_16_43_tsni((b, rest) => {
+  lambda7 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -1864,8 +1808,9 @@ writeState_inst_15_16_tsni = function writeState_inst_15_16_tsni(state, s) {
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_15_16_42_tsni((b, rest) => {
+  };
+  tmp7 = writeItem_inst_15_16_43_tsni(lambda7, tmp4, tmp6);
+  lambda8 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -1876,8 +1821,9 @@ writeState_inst_15_16_tsni = function writeState_inst_15_16_tsni(state, s) {
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_15_16_41_tsni((b, rest) => {
+  };
+  tmp8 = writeItem_inst_15_16_42_tsni(lambda8, tmp3, tmp7);
+  lambda9 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -1888,8 +1834,9 @@ writeState_inst_15_16_tsni = function writeState_inst_15_16_tsni(state, s) {
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_15_16_39_tsni((b, rest) => {
+  };
+  tmp9 = writeItem_inst_15_16_41_tsni(lambda9, tmp2, tmp8);
+  lambda10 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -1900,7 +1847,8 @@ writeState_inst_15_16_tsni = function writeState_inst_15_16_tsni(state, s) {
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp1, tmp9);
+  };
+  tmp10 = writeItem_inst_15_16_39_tsni(lambda10, tmp1, tmp9);
   return NofibPrelude.append(tmp, tmp10)
 };
 lambda$_inst_17_18_tsni = function lambda$_inst_17_18_tsni(history, timestate, acc, s) {
@@ -1925,7 +1873,7 @@ lambda$_inst_17_18_tsni = function lambda$_inst_17_18_tsni(history, timestate, a
   }
 };
 writeState_inst_17_18_16_tsni = function writeState_inst_17_18_16_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
   tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp1 = puzzle.bonoPos(state);
   tmp2 = puzzle.edgePos(state);
@@ -1933,7 +1881,7 @@ writeState_inst_17_18_16_tsni = function writeState_inst_17_18_16_tsni(state, s)
   tmp4 = puzzle.adamPos(state);
   tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_17_18_16_43_tsni((b, rest) => {
+  lambda7 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -1944,8 +1892,9 @@ writeState_inst_17_18_16_tsni = function writeState_inst_17_18_16_tsni(state, s)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_17_18_16_42_tsni((b, rest) => {
+  };
+  tmp7 = writeItem_inst_17_18_16_43_tsni(lambda7, tmp4, tmp6);
+  lambda8 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -1956,8 +1905,9 @@ writeState_inst_17_18_16_tsni = function writeState_inst_17_18_16_tsni(state, s)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_17_18_16_41_tsni((b, rest) => {
+  };
+  tmp8 = writeItem_inst_17_18_16_42_tsni(lambda8, tmp3, tmp7);
+  lambda9 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -1968,8 +1918,9 @@ writeState_inst_17_18_16_tsni = function writeState_inst_17_18_16_tsni(state, s)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_17_18_16_39_tsni((b, rest) => {
+  };
+  tmp9 = writeItem_inst_17_18_16_41_tsni(lambda9, tmp2, tmp8);
+  lambda10 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -1980,7 +1931,8 @@ writeState_inst_17_18_16_tsni = function writeState_inst_17_18_16_tsni(state, s)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp1, tmp9);
+  };
+  tmp10 = writeItem_inst_17_18_16_39_tsni(lambda10, tmp1, tmp9);
   return NofibPrelude.append(tmp, tmp10)
 };
 lambda_inst_19_20_tsni = (undefined, function (history, timestate, acc) {
@@ -2010,7 +1962,7 @@ lambda$_inst_19_20_18_tsni = function lambda$_inst_19_20_18_tsni(history, timest
   }
 };
 writeState_inst_19_20_18_16_tsni = function writeState_inst_19_20_18_16_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
   tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp1 = puzzle.bonoPos(state);
   tmp2 = puzzle.edgePos(state);
@@ -2018,7 +1970,7 @@ writeState_inst_19_20_18_16_tsni = function writeState_inst_19_20_18_16_tsni(sta
   tmp4 = puzzle.adamPos(state);
   tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_19_20_18_16_43_tsni((b, rest) => {
+  lambda7 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -2029,8 +1981,9 @@ writeState_inst_19_20_18_16_tsni = function writeState_inst_19_20_18_16_tsni(sta
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_19_20_18_16_42_tsni((b, rest) => {
+  };
+  tmp7 = writeItem_inst_19_20_18_16_43_tsni(lambda7, tmp4, tmp6);
+  lambda8 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -2041,8 +1994,9 @@ writeState_inst_19_20_18_16_tsni = function writeState_inst_19_20_18_16_tsni(sta
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_19_20_18_16_41_tsni((b, rest) => {
+  };
+  tmp8 = writeItem_inst_19_20_18_16_42_tsni(lambda8, tmp3, tmp7);
+  lambda9 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -2053,8 +2007,9 @@ writeState_inst_19_20_18_16_tsni = function writeState_inst_19_20_18_16_tsni(sta
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_19_20_18_16_39_tsni((b, rest) => {
+  };
+  tmp9 = writeItem_inst_19_20_18_16_41_tsni(lambda9, tmp2, tmp8);
+  lambda10 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -2065,7 +2020,8 @@ writeState_inst_19_20_18_16_tsni = function writeState_inst_19_20_18_16_tsni(sta
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp1, tmp9);
+  };
+  tmp10 = writeItem_inst_19_20_18_16_39_tsni(lambda10, tmp1, tmp9);
   return NofibPrelude.append(tmp, tmp10)
 };
 lambda$_inst_21_22_tsni = function lambda$_inst_21_22_tsni(history, timestate, acc) {
@@ -2098,7 +2054,7 @@ lambda$_inst_21_22_20_18_tsni = function lambda$_inst_21_22_20_18_tsni(history, 
   }
 };
 writeState_inst_21_22_20_18_16_tsni = function writeState_inst_21_22_20_18_16_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
   tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp1 = puzzle.bonoPos(state);
   tmp2 = puzzle.edgePos(state);
@@ -2106,7 +2062,7 @@ writeState_inst_21_22_20_18_16_tsni = function writeState_inst_21_22_20_18_16_ts
   tmp4 = puzzle.adamPos(state);
   tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_21_22_20_18_16_43_tsni((b, rest) => {
+  lambda7 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -2117,8 +2073,9 @@ writeState_inst_21_22_20_18_16_tsni = function writeState_inst_21_22_20_18_16_ts
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_21_22_20_18_16_42_tsni((b, rest) => {
+  };
+  tmp7 = writeItem_inst_21_22_20_18_16_43_tsni(lambda7, tmp4, tmp6);
+  lambda8 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -2129,8 +2086,9 @@ writeState_inst_21_22_20_18_16_tsni = function writeState_inst_21_22_20_18_16_ts
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_21_22_20_18_16_41_tsni((b, rest) => {
+  };
+  tmp8 = writeItem_inst_21_22_20_18_16_42_tsni(lambda8, tmp3, tmp7);
+  lambda9 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -2141,8 +2099,9 @@ writeState_inst_21_22_20_18_16_tsni = function writeState_inst_21_22_20_18_16_ts
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_21_22_20_18_16_39_tsni((b, rest) => {
+  };
+  tmp9 = writeItem_inst_21_22_20_18_16_41_tsni(lambda9, tmp2, tmp8);
+  lambda10 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -2153,7 +2112,8 @@ writeState_inst_21_22_20_18_16_tsni = function writeState_inst_21_22_20_18_16_ts
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp1, tmp9);
+  };
+  tmp10 = writeItem_inst_21_22_20_18_16_39_tsni(lambda10, tmp1, tmp9);
   return NofibPrelude.append(tmp, tmp10)
 };
 lambda_inst_24_25_tsni = (undefined, function (history) {
@@ -2191,7 +2151,7 @@ lambda$_inst_24_25_22_20_18_tsni = function lambda$_inst_24_25_22_20_18_tsni(his
   }
 };
 writeState_inst_24_25_22_20_18_16_tsni = function writeState_inst_24_25_22_20_18_16_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
   tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp1 = puzzle.bonoPos(state);
   tmp2 = puzzle.edgePos(state);
@@ -2199,7 +2159,7 @@ writeState_inst_24_25_22_20_18_16_tsni = function writeState_inst_24_25_22_20_18
   tmp4 = puzzle.adamPos(state);
   tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_24_25_22_20_18_16_43_tsni((b, rest) => {
+  lambda7 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -2210,8 +2170,9 @@ writeState_inst_24_25_22_20_18_16_tsni = function writeState_inst_24_25_22_20_18
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_24_25_22_20_18_16_42_tsni((b, rest) => {
+  };
+  tmp7 = writeItem_inst_24_25_22_20_18_16_43_tsni(lambda7, tmp4, tmp6);
+  lambda8 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -2222,8 +2183,9 @@ writeState_inst_24_25_22_20_18_16_tsni = function writeState_inst_24_25_22_20_18
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_24_25_22_20_18_16_41_tsni((b, rest) => {
+  };
+  tmp8 = writeItem_inst_24_25_22_20_18_16_42_tsni(lambda8, tmp3, tmp7);
+  lambda9 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -2234,8 +2196,9 @@ writeState_inst_24_25_22_20_18_16_tsni = function writeState_inst_24_25_22_20_18
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_24_25_22_20_18_16_39_tsni((b, rest) => {
+  };
+  tmp9 = writeItem_inst_24_25_22_20_18_16_41_tsni(lambda9, tmp2, tmp8);
+  lambda10 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -2246,7 +2209,8 @@ writeState_inst_24_25_22_20_18_16_tsni = function writeState_inst_24_25_22_20_18
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp1, tmp9);
+  };
+  tmp10 = writeItem_inst_24_25_22_20_18_16_39_tsni(lambda10, tmp1, tmp9);
   return NofibPrelude.append(tmp, tmp10)
 };
 writeHistory_inst_26_27_tsni = function writeHistory_inst_26_27_tsni(history, x) {
@@ -2294,7 +2258,7 @@ lambda$_inst_26_27_25_22_20_18_tsni = function lambda$_inst_26_27_25_22_20_18_ts
   }
 };
 writeState_inst_26_27_25_22_20_18_16_tsni = function writeState_inst_26_27_25_22_20_18_16_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
   tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp1 = puzzle.bonoPos(state);
   tmp2 = puzzle.edgePos(state);
@@ -2302,7 +2266,7 @@ writeState_inst_26_27_25_22_20_18_16_tsni = function writeState_inst_26_27_25_22
   tmp4 = puzzle.adamPos(state);
   tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_26_27_25_22_20_18_16_43_tsni((b, rest) => {
+  lambda7 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -2313,8 +2277,9 @@ writeState_inst_26_27_25_22_20_18_16_tsni = function writeState_inst_26_27_25_22
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_26_27_25_22_20_18_16_42_tsni((b, rest) => {
+  };
+  tmp7 = writeItem_inst_26_27_25_22_20_18_16_43_tsni(lambda7, tmp4, tmp6);
+  lambda8 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -2325,8 +2290,9 @@ writeState_inst_26_27_25_22_20_18_16_tsni = function writeState_inst_26_27_25_22
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_26_27_25_22_20_18_16_41_tsni((b, rest) => {
+  };
+  tmp8 = writeItem_inst_26_27_25_22_20_18_16_42_tsni(lambda8, tmp3, tmp7);
+  lambda9 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -2337,8 +2303,9 @@ writeState_inst_26_27_25_22_20_18_16_tsni = function writeState_inst_26_27_25_22
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_26_27_25_22_20_18_16_39_tsni((b, rest) => {
+  };
+  tmp9 = writeItem_inst_26_27_25_22_20_18_16_41_tsni(lambda9, tmp2, tmp8);
+  lambda10 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -2349,7 +2316,8 @@ writeState_inst_26_27_25_22_20_18_16_tsni = function writeState_inst_26_27_25_22
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp1, tmp9);
+  };
+  tmp10 = writeItem_inst_26_27_25_22_20_18_16_39_tsni(lambda10, tmp1, tmp9);
   return NofibPrelude.append(tmp, tmp10)
 };
 lscomp2$_inst_28_tsni = function lscomp2$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, ls) {
@@ -2508,32 +2476,28 @@ append_inst_28_4_5_tsni = function append_inst_28_4_5_tsni(xs, ys) {
   }
 };
 transfer_inst_29_30_tsni = function transfer_inst_29_30_tsni(source, dest, location, countdown, history) {
-  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp = NofibPrelude.Cons(arr, history);
-    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+    tmp1 = NofibPrelude.Cons(tmp, history);
+    return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp1 = NofibPrelude.Cons(arr1, history);
-    newHistory = tmp1;
-    tmp2 = puzzle.opposite(location);
-    newLocation = tmp2;
+    newHistory = NofibPrelude.Cons(tmp2, history);
+    newLocation = puzzle.opposite(location);
     tmp3 = itemFromTo_inst_29_30_9_tsni(puzzle.Bono, puzzle.Adam);
     tmp4 = lscomp1$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-    tmp5 = concat_inst_29_30_4_tsni(tmp4);
-    moveOne = tmp5;
-    tmp6 = itemFromTo_inst_29_30_3_tsni(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-    tmp8 = concat_inst_29_30_53_tsni(tmp7);
-    moveTwo = tmp8;
+    moveOne = concat_inst_29_30_4_tsni(tmp4);
+    tmp5 = itemFromTo_inst_29_30_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp6 = lscomp2$_inst_29_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+    moveTwo = concat_inst_29_30_53_tsni(tmp6);
     return append_inst_29_30_54_tsni(moveOne, moveTwo)
   }
 };
@@ -2759,7 +2723,7 @@ lambda$_inst_29_31_27_25_22_20_18_tsni = function lambda$_inst_29_31_27_25_22_20
   }
 };
 writeState_inst_29_31_27_25_22_20_18_16_tsni = function writeState_inst_29_31_27_25_22_20_18_16_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
   tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp1 = puzzle.bonoPos(state);
   tmp2 = puzzle.edgePos(state);
@@ -2767,7 +2731,7 @@ writeState_inst_29_31_27_25_22_20_18_16_tsni = function writeState_inst_29_31_27
   tmp4 = puzzle.adamPos(state);
   tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp6 = NofibPrelude.append(tmp5, s);
-  tmp7 = writeItem_inst_29_31_27_25_22_20_18_16_43_tsni((b, rest) => {
+  lambda7 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -2778,8 +2742,9 @@ writeState_inst_29_31_27_25_22_20_18_16_tsni = function writeState_inst_29_31_27
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_29_31_27_25_22_20_18_16_42_tsni((b, rest) => {
+  };
+  tmp7 = writeItem_inst_29_31_27_25_22_20_18_16_43_tsni(lambda7, tmp4, tmp6);
+  lambda8 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -2790,8 +2755,9 @@ writeState_inst_29_31_27_25_22_20_18_16_tsni = function writeState_inst_29_31_27
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_29_31_27_25_22_20_18_16_41_tsni((b, rest) => {
+  };
+  tmp8 = writeItem_inst_29_31_27_25_22_20_18_16_42_tsni(lambda8, tmp3, tmp7);
+  lambda9 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -2802,8 +2768,9 @@ writeState_inst_29_31_27_25_22_20_18_16_tsni = function writeState_inst_29_31_27
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_29_31_27_25_22_20_18_16_39_tsni((b, rest) => {
+  };
+  tmp9 = writeItem_inst_29_31_27_25_22_20_18_16_41_tsni(lambda9, tmp2, tmp8);
+  lambda10 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -2814,11 +2781,12 @@ writeState_inst_29_31_27_25_22_20_18_16_tsni = function writeState_inst_29_31_27
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp1, tmp9);
+  };
+  tmp10 = writeItem_inst_29_31_27_25_22_20_18_16_39_tsni(lambda10, tmp1, tmp9);
   return NofibPrelude.append(tmp, tmp10)
 };
 testPuzzle_nofib_inst_32_33_tsni = function testPuzzle_nofib_inst_32_33_tsni(x) {
-  let time, scrut, solutions, mins, tmp, tmp1, tmp2, tmp3;
+  let time, scrut, solutions, mins, tmp, tmp1, lambda7;
   tmp = NofibPrelude.listLen(x);
   scrut = tmp === 1;
   if (scrut === true) {
@@ -2827,13 +2795,12 @@ testPuzzle_nofib_inst_32_33_tsni = function testPuzzle_nofib_inst_32_33_tsni(x) 
     throw globalThis.Error("puzzle expects exactly one argument")
   }
   time = tmp1;
-  tmp2 = transfer_inst_32_33_30_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
-  solutions = tmp2;
-  tmp3 = puzzle.minSolutions(solutions);
-  mins = tmp3;
-  return writeSolutions_inst_32_33_31_tsni(mins, 1, () => {
+  solutions = transfer_inst_32_33_30_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
+  mins = puzzle.minSolutions(solutions);
+  lambda7 = () => {
     return ""
-  })
+  };
+  return writeSolutions_inst_32_33_31_tsni(mins, 1, lambda7)
 };
 writeSolutions_inst_32_33_31_tsni = function writeSolutions_inst_32_33_31_tsni(solutions, count, s) {
   let param0, param1, item, next, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
@@ -2910,7 +2877,7 @@ lambda$_inst_32_33_31_27_25_22_20_18_tsni = function lambda$_inst_32_33_31_27_25
   }
 };
 writeState_inst_32_33_31_27_25_22_20_18_16_tsni = function writeState_inst_32_33_31_27_25_22_20_18_16_tsni(state, s) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
   tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp1 = puzzle.bonoPos(state);
   tmp2 = puzzle.edgePos(state);
@@ -2918,7 +2885,7 @@ writeState_inst_32_33_31_27_25_22_20_18_16_tsni = function writeState_inst_32_33
   tmp4 = puzzle.adamPos(state);
   tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
   tmp6 = append_inst_32_33_31_27_25_22_20_18_16_44_tsni(tmp5, s);
-  tmp7 = writeItem_inst_32_33_31_27_25_22_20_18_16_43_tsni((b, rest) => {
+  lambda7 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -2929,8 +2896,9 @@ writeState_inst_32_33_31_27_25_22_20_18_16_tsni = function writeState_inst_32_33
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp4, tmp6);
-  tmp8 = writeItem_inst_32_33_31_27_25_22_20_18_16_42_tsni((b, rest) => {
+  };
+  tmp7 = writeItem_inst_32_33_31_27_25_22_20_18_16_43_tsni(lambda7, tmp4, tmp6);
+  lambda8 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -2941,8 +2909,9 @@ writeState_inst_32_33_31_27_25_22_20_18_16_tsni = function writeState_inst_32_33
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp3, tmp7);
-  tmp9 = writeItem_inst_32_33_31_27_25_22_20_18_16_41_tsni((b, rest) => {
+  };
+  tmp8 = writeItem_inst_32_33_31_27_25_22_20_18_16_42_tsni(lambda8, tmp3, tmp7);
+  lambda9 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -2953,8 +2922,9 @@ writeState_inst_32_33_31_27_25_22_20_18_16_tsni = function writeState_inst_32_33
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp2, tmp8);
-  tmp10 = writeItem_inst_32_33_31_27_25_22_20_18_16_39_tsni((b, rest) => {
+  };
+  tmp9 = writeItem_inst_32_33_31_27_25_22_20_18_16_41_tsni(lambda9, tmp2, tmp8);
+  lambda10 = (b, rest) => {
     let tmp11, tmp12;
     if (b instanceof puzzle.LeftBank.class) {
       tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -2965,36 +2935,33 @@ writeState_inst_32_33_31_27_25_22_20_18_16_tsni = function writeState_inst_32_33
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
-  }, tmp1, tmp9);
+  };
+  tmp10 = writeItem_inst_32_33_31_27_25_22_20_18_16_39_tsni(lambda10, tmp1, tmp9);
   return append_inst_32_33_31_27_25_22_20_18_16_38_tsni(tmp, tmp10)
 };
 transfer_inst_32_33_30_tsni = function transfer_inst_32_33_30_tsni(source, dest, location, countdown, history) {
-  let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   scrut = puzzle.stateEq(source, dest);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp = NofibPrelude.Cons(arr, history);
-    return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+    tmp1 = NofibPrelude.Cons(tmp, history);
+    return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       countdown,
       dest
     ]);
-    tmp1 = NofibPrelude.Cons(arr1, history);
-    newHistory = tmp1;
-    tmp2 = puzzle.opposite(location);
-    newLocation = tmp2;
+    newHistory = NofibPrelude.Cons(tmp2, history);
+    newLocation = puzzle.opposite(location);
     tmp3 = itemFromTo_inst_32_33_30_9_tsni(puzzle.Bono, puzzle.Adam);
     tmp4 = lscomp1$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-    tmp5 = concat_inst_32_33_30_4_tsni(tmp4);
-    moveOne = tmp5;
-    tmp6 = itemFromTo_inst_32_33_30_3_tsni(puzzle.Bono, puzzle.Larry);
-    tmp7 = lscomp2$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-    tmp8 = concat_inst_32_33_30_53_tsni(tmp7);
-    moveTwo = tmp8;
+    moveOne = concat_inst_32_33_30_4_tsni(tmp4);
+    tmp5 = itemFromTo_inst_32_33_30_3_tsni(puzzle.Bono, puzzle.Larry);
+    tmp6 = lscomp2$_inst_32_33_30_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+    moveTwo = concat_inst_32_33_30_53_tsni(tmp6);
     return append_inst_32_33_30_54_tsni(moveOne, moveTwo)
   }
 };
@@ -4056,7 +4023,7 @@ nofibListToString_inst_32_55_tsni = function nofibListToString_inst_32_55_tsni(l
   return runtime.safeCall(ls())
 };
 lscomp1$ = function lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, ls) {
-  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  let param0, param1, item, xs, scrut, newDest, scrut1, newTime, tmp, tmp1, tmp2, tmp3;
   if (ls instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -4067,16 +4034,14 @@ lscomp1$ = function lscomp1$(source, dest, location, countdown, history, newHist
     tmp = puzzle1.position(item, dest);
     scrut = puzzle1.bankEq(tmp, location);
     if (scrut === true) {
-      tmp1 = puzzle1.updateState(dest, item, newLocation);
-      newDest = tmp1;
+      newDest = puzzle1.updateState(dest, item, newLocation);
       scrut1 = puzzle1.notSeen(newDest, history);
       if (scrut1 === true) {
-        tmp2 = puzzle1.u2times(item);
-        tmp3 = countdown + tmp2;
-        newTime = tmp3;
-        tmp4 = transfer_inst_0_tsni(source, newDest, newLocation, newTime, newHistory);
-        tmp5 = lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, xs);
-        return NofibPrelude.Cons(tmp4, tmp5)
+        tmp1 = puzzle1.u2times(item);
+        newTime = countdown + tmp1;
+        tmp2 = transfer_inst_0_tsni(source, newDest, newLocation, newTime, newHistory);
+        tmp3 = lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, xs);
+        return NofibPrelude.Cons(tmp2, tmp3)
       } else {
         return lscomp1$(source, dest, location, countdown, history, newHistory, newLocation, xs)
       }
@@ -4093,7 +4058,7 @@ lscomp1 = function lscomp1(source, dest, location, countdown, history, newHistor
   }
 };
 lscomp3$ = function lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ls) {
-  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+  let param0, param1, j, ys, scrut, scrut1, newDest, scrut2, newTime, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (ls instanceof NofibPrelude.Nil.class) {
     return lscomp2$_inst_8_tsni(source, dest, location, countdown, history, newHistory, newLocation, xs)
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -4108,16 +4073,14 @@ lscomp3$ = function lscomp3$(source, dest, location, countdown, history, newHist
       scrut1 = puzzle1.bankEq(tmp1, location);
       if (scrut1 === true) {
         tmp2 = updateState_inst_8_1_tsni(dest, i, newLocation);
-        tmp3 = updateState_inst_8_52_tsni(tmp2, j, newLocation);
-        newDest = tmp3;
+        newDest = updateState_inst_8_52_tsni(tmp2, j, newLocation);
         scrut2 = puzzle1.notSeen(newDest, history);
         if (scrut2 === true) {
-          tmp4 = puzzle1.u2times(i);
-          tmp5 = countdown + tmp4;
-          newTime = tmp5;
-          tmp6 = transfer_inst_8_tsni(source, newDest, newLocation, newTime, newHistory);
-          tmp7 = lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
-          return NofibPrelude.Cons(tmp6, tmp7)
+          tmp3 = puzzle1.u2times(i);
+          newTime = countdown + tmp3;
+          tmp4 = transfer_inst_8_tsni(source, newDest, newLocation, newTime, newHistory);
+          tmp5 = lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys);
+          return NofibPrelude.Cons(tmp4, tmp5)
         } else {
           return lscomp3$(source, dest, location, countdown, history, newHistory, newLocation, i, xs, ys)
         }
@@ -4158,7 +4121,7 @@ lscomp2 = function lscomp2(source, dest, location, countdown, history, newHistor
   }
 };
 minAcc = function minAcc(minSoFar, mins, ls) {
-  let param0, param1, history, next, total, scrut, scrut1, tmp, tmp1, tmp2;
+  let param0, param1, history, next, total, scrut, scrut1, tmp, tmp1;
   if (ls instanceof NofibPrelude.Nil.class) {
     return mins
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -4166,19 +4129,18 @@ minAcc = function minAcc(minSoFar, mins, ls) {
     param1 = ls.tail;
     history = param0;
     next = param1;
-    tmp = puzzle1.totalTime(history);
-    total = tmp;
+    total = puzzle1.totalTime(history);
     scrut1 = minSoFar < total;
     if (scrut1 === true) {
       return minAcc(minSoFar, mins, next)
     } else {
       scrut = minSoFar === total;
       if (scrut === true) {
-        tmp1 = NofibPrelude.Cons(history, mins);
-        return minAcc(minSoFar, tmp1, next)
+        tmp = NofibPrelude.Cons(history, mins);
+        return minAcc(minSoFar, tmp, next)
       } else {
-        tmp2 = NofibPrelude.Cons(history, NofibPrelude.Nil);
-        return minAcc(total, tmp2, next)
+        tmp1 = NofibPrelude.Cons(history, NofibPrelude.Nil);
+        return minAcc(total, tmp1, next)
       }
     }
   } else {
@@ -4615,9 +4577,9 @@ globalThis.Object.freeze(class puzzle {
     }
   } 
   static notSeen(state, states) {
-    let tmp;
-    tmp = runtime.safeCall(lambda3(state));
-    return NofibPrelude.all(tmp, states)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda3(state));
+    return NofibPrelude.all(lambda$this, states)
   } 
   static writeItem(i, b, rest) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
@@ -4666,7 +4628,7 @@ globalThis.Object.freeze(class puzzle {
     }
   } 
   static writeState(state, s) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
+    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, lambda7, lambda8, lambda9, lambda10;
     tmp = NofibPrelude.nofibStringToList("----------------------------------------\n");
     tmp1 = puzzle.bonoPos(state);
     tmp2 = puzzle.edgePos(state);
@@ -4674,7 +4636,7 @@ globalThis.Object.freeze(class puzzle {
     tmp4 = puzzle.adamPos(state);
     tmp5 = NofibPrelude.nofibStringToList("----------------------------------------\n");
     tmp6 = NofibPrelude.append(tmp5, s);
-    tmp7 = writeItem_inst_23_43_tsni((b, rest) => {
+    lambda7 = (b, rest) => {
       let tmp11, tmp12;
       if (b instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("    Adam |                    |\n");
@@ -4685,8 +4647,9 @@ globalThis.Object.freeze(class puzzle {
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
-    }, tmp4, tmp6);
-    tmp8 = writeItem_inst_23_42_tsni((b, rest) => {
+    };
+    tmp7 = writeItem_inst_23_43_tsni(lambda7, tmp4, tmp6);
+    lambda8 = (b, rest) => {
       let tmp11, tmp12;
       if (b instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("   Larry |                    |\n");
@@ -4697,8 +4660,9 @@ globalThis.Object.freeze(class puzzle {
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
-    }, tmp3, tmp7);
-    tmp9 = writeItem_inst_23_41_tsni((b, rest) => {
+    };
+    tmp8 = writeItem_inst_23_42_tsni(lambda8, tmp3, tmp7);
+    lambda9 = (b, rest) => {
       let tmp11, tmp12;
       if (b instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("The Edge |                    |\n");
@@ -4709,8 +4673,9 @@ globalThis.Object.freeze(class puzzle {
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
-    }, tmp2, tmp8);
-    tmp10 = writeItem_inst_23_39_tsni((b, rest) => {
+    };
+    tmp9 = writeItem_inst_23_41_tsni(lambda9, tmp2, tmp8);
+    lambda10 = (b, rest) => {
       let tmp11, tmp12;
       if (b instanceof puzzle.LeftBank.class) {
         tmp11 = NofibPrelude.nofibStringToList("    Bono |                    |\n");
@@ -4721,7 +4686,8 @@ globalThis.Object.freeze(class puzzle {
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
-    }, tmp1, tmp9);
+    };
+    tmp10 = writeItem_inst_23_39_tsni(lambda10, tmp1, tmp9);
     return NofibPrelude.append(tmp, tmp10)
   } 
   static totalTime(history) {
@@ -4804,37 +4770,33 @@ globalThis.Object.freeze(class puzzle {
     }
   } 
   static transfer(source, dest, location, countdown, history) {
-    let newHistory, newLocation, moveOne, moveTwo, scrut, arr, tmp, arr1, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    let newHistory, newLocation, moveOne, moveTwo, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
     scrut = puzzle.stateEq(source, dest);
     if (scrut === true) {
-      arr = globalThis.Object.freeze([
+      tmp = globalThis.Object.freeze([
         countdown,
         dest
       ]);
-      tmp = NofibPrelude.Cons(arr, history);
-      return NofibPrelude.Cons(tmp, NofibPrelude.Nil)
+      tmp1 = NofibPrelude.Cons(tmp, history);
+      return NofibPrelude.Cons(tmp1, NofibPrelude.Nil)
     } else {
-      arr1 = globalThis.Object.freeze([
+      tmp2 = globalThis.Object.freeze([
         countdown,
         dest
       ]);
-      tmp1 = NofibPrelude.Cons(arr1, history);
-      newHistory = tmp1;
-      tmp2 = puzzle.opposite(location);
-      newLocation = tmp2;
+      newHistory = NofibPrelude.Cons(tmp2, history);
+      newLocation = puzzle.opposite(location);
       tmp3 = itemFromTo_inst_28_9_tsni(puzzle.Bono, puzzle.Adam);
       tmp4 = lscomp1$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp3);
-      tmp5 = concat_inst_28_4_tsni(tmp4);
-      moveOne = tmp5;
-      tmp6 = itemFromTo_inst_28_3_tsni(puzzle.Bono, puzzle.Larry);
-      tmp7 = lscomp2$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp6);
-      tmp8 = concat_inst_28_53_tsni(tmp7);
-      moveTwo = tmp8;
+      moveOne = concat_inst_28_4_tsni(tmp4);
+      tmp5 = itemFromTo_inst_28_3_tsni(puzzle.Bono, puzzle.Larry);
+      tmp6 = lscomp2$_inst_28_tsni(source, dest, location, countdown, history, newHistory, newLocation, tmp5);
+      moveTwo = concat_inst_28_53_tsni(tmp6);
       return append_inst_28_54_tsni(moveOne, moveTwo)
     }
   } 
   static testPuzzle_nofib(x) {
-    let time, scrut, solutions, mins, tmp, tmp1, tmp2, tmp3;
+    let time, scrut, solutions, mins, tmp, tmp1;
     tmp = NofibPrelude.listLen(x);
     scrut = tmp === 1;
     if (scrut === true) {
@@ -4843,10 +4805,8 @@ globalThis.Object.freeze(class puzzle {
       throw globalThis.Error("puzzle expects exactly one argument")
     }
     time = tmp1;
-    tmp2 = transfer_inst_29_30_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
-    solutions = tmp2;
-    tmp3 = puzzle.minSolutions(solutions);
-    mins = tmp3;
+    solutions = transfer_inst_29_30_tsni(puzzle.initialState, puzzle.finalState, puzzle.RightBank, time, NofibPrelude.Nil);
+    mins = puzzle.minSolutions(solutions);
     return writeSolutions_inst_29_31_tsni(mins, 1, NofibPrelude.Nil)
   } 
   static main() {

@@ -159,13 +159,13 @@ match_ls_arm_Cons_inst_46_47_44_45_tsni = (undefined, function (board, _deforest
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_46_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_46_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -222,13 +222,13 @@ match_ls_arm_Cons_inst_50_51_47_44_45_tsni = (undefined, function (board, _defor
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_50_51_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_50_51_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -271,13 +271,13 @@ match_ls_arm_Cons_inst_53_55_51_47_44_45_tsni = (undefined, function (board, _de
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_53_55_51_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_53_55_51_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -334,13 +334,13 @@ match_ls_arm_Cons_inst_53_56_47_44_45_tsni = (undefined, function (board, _defor
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_53_56_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_53_56_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -369,13 +369,13 @@ match_ls_arm_Cons_inst_61_62_56_47_44_45_tsni = (undefined, function (board, _de
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_61_62_56_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_61_62_56_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -432,13 +432,13 @@ match_ls_arm_Cons_inst_61_62_55_51_47_44_45_tsni = (undefined, function (board, 
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_61_62_55_51_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_61_62_55_51_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -495,13 +495,13 @@ match_ls_arm_Cons_inst_63_65_62_55_51_47_44_45_tsni = (undefined, function (boar
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_63_65_62_55_51_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_63_65_62_55_51_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -558,13 +558,13 @@ match_ls_arm_Cons_inst_63_65_62_56_47_44_45_tsni = (undefined, function (board, 
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_63_65_62_56_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_63_65_62_56_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -617,13 +617,13 @@ match_ls_arm_Cons_inst_70_71_65_62_56_47_44_45_tsni = (undefined, function (boar
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_70_71_65_62_56_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_70_71_65_62_56_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -680,13 +680,13 @@ match_ls_arm_Cons_inst_70_71_65_62_55_51_47_44_45_tsni = (undefined, function (b
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_70_71_65_62_55_51_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_70_71_65_62_55_51_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -743,13 +743,13 @@ match_ls_arm_Cons_inst_72_73_71_65_62_55_51_47_44_45_tsni = (undefined, function
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_72_73_71_65_62_55_51_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_72_73_71_65_62_55_51_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -806,13 +806,13 @@ match_ls_arm_Cons_inst_72_73_71_65_62_56_47_44_45_tsni = (undefined, function (b
       _deforest_Cons_head1 = tmp1;
       _deforest_Cons_tail1 = tmp2;
       return () => {
-        let param02, param12, x2, t1, tmp3;
+        let param02, param12, x2, t1, lambda$this;
         param02 = _deforest_Cons_head1;
         param12 = _deforest_Cons_tail1;
         x2 = param02;
         t1 = param12;
-        tmp3 = runtime.safeCall(lambda_inst_72_73_71_65_62_56_48_tsni(x2, t1));
-        return NofibPrelude.lazy(tmp3)
+        lambda$this = runtime.safeCall(lambda_inst_72_73_71_65_62_56_48_tsni(x2, t1));
+        return NofibPrelude.lazy(lambda$this)
       }
     }
   } else {
@@ -847,7 +847,7 @@ match_ls_arm_Cons_inst_72_79_tsni = (undefined, function (_deforest_Cons_head_in
   return h + tmp
 });
 showChessSet_inst_0_1_tsni = function showChessSet_inst_0_1_tsni(b) {
-  let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp, tmp1;
+  let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp;
   if (b instanceof knights.Board.class) {
     param0 = b.a;
     param1 = b.b;
@@ -858,15 +858,14 @@ showChessSet_inst_0_1_tsni = function showChessSet_inst_0_1_tsni(b) {
     f = param2;
     ts = param3;
     tmp = knights.assignMoveNo(ts, sze, n);
-    tmp1 = knights.quickSortIntInt(tmp);
-    sortedTrail = tmp1;
+    sortedTrail = knights.quickSortIntInt(tmp);
     return printBoard_inst_0_1_2_tsni(sze, 1, sortedTrail)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 printBoard_inst_0_1_2_tsni = function printBoard_inst_0_1_2_tsni(s, n, xs) {
-  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, arr, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, arr1, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, arr2, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, arr3, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, arr4, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, arr5, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, arr6, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, arr7, tmp80, tmp81, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
+  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
   if (xs instanceof NofibPrelude.Nil.class) {
     tmp = s * s;
     scrut8 = n > tmp;
@@ -943,68 +942,68 @@ printBoard_inst_0_1_2_tsni = function printBoard_inst_0_1_2_tsni(s, n, xs) {
                 tmp27 = s * s;
                 tmp28 = spaces_inst_0_1_2_6_tsni(tmp27, 1);
                 tmp29 = n + 1;
-                arr = globalThis.Object.freeze([
+                tmp30 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp30 = NofibPrelude.Cons(arr, xs1);
-                tmp31 = printBoard_inst_0_1_2_tsni(s, tmp29, tmp30);
-                tmp32 = append_inst_0_1_2_23_tsni(tmp28, tmp31);
+                tmp31 = NofibPrelude.Cons(tmp30, xs1);
+                tmp32 = printBoard_inst_0_1_2_tsni(s, tmp29, tmp31);
+                tmp33 = append_inst_0_1_2_23_tsni(tmp28, tmp32);
                 _deforest_Cons_head3 = "*";
-                _deforest_Cons_tail3 = tmp32;
+                _deforest_Cons_tail3 = tmp33;
                 return (ys) => {
                   return match_xs_arm_Cons_inst_0_74_tsni(ys, _deforest_Cons_head3, _deforest_Cons_tail3)
                 }
               } else {
-                tmp33 = NofibPrelude.intMod(n, s);
-                scrut = tmp33 === 0;
+                tmp34 = NofibPrelude.intMod(n, s);
+                scrut = tmp34 === 0;
                 if (scrut === true) {
-                  tmp34 = NofibPrelude.nofibStringToList("*\n");
-                  tmp35 = n + 1;
-                  arr1 = globalThis.Object.freeze([
+                  tmp35 = NofibPrelude.nofibStringToList("*\n");
+                  tmp36 = n + 1;
+                  tmp37 = globalThis.Object.freeze([
                     i,
                     j
                   ]);
-                  tmp36 = NofibPrelude.Cons(arr1, xs1);
-                  tmp37 = printBoard_inst_0_1_2_tsni(s, tmp35, tmp36);
-                  return append_inst_0_1_2_19_tsni(tmp34, tmp37)
+                  tmp38 = NofibPrelude.Cons(tmp37, xs1);
+                  tmp39 = printBoard_inst_0_1_2_tsni(s, tmp36, tmp38);
+                  return append_inst_0_1_2_19_tsni(tmp35, tmp39)
                 } else {
                   throw globalThis.Error("printBoard non-empty list error")
                 }
               }
             }
           } else {
-            tmp38 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp38 != 0;
+            tmp40 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp40 != 0;
             if (scrut1 === true) {
-              tmp39 = s * s;
-              tmp40 = spaces_inst_0_1_2_7_tsni(tmp39, 1);
-              tmp41 = n + 1;
-              arr2 = globalThis.Object.freeze([
+              tmp41 = s * s;
+              tmp42 = spaces_inst_0_1_2_7_tsni(tmp41, 1);
+              tmp43 = n + 1;
+              tmp44 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp42 = NofibPrelude.Cons(arr2, xs1);
-              tmp43 = printBoard_inst_0_1_2_tsni(s, tmp41, tmp42);
-              tmp44 = append_inst_0_1_2_24_tsni(tmp40, tmp43);
+              tmp45 = NofibPrelude.Cons(tmp44, xs1);
+              tmp46 = printBoard_inst_0_1_2_tsni(s, tmp43, tmp45);
+              tmp47 = append_inst_0_1_2_24_tsni(tmp42, tmp46);
               _deforest_Cons_head2 = "*";
-              _deforest_Cons_tail2 = tmp44;
+              _deforest_Cons_tail2 = tmp47;
               return (ys) => {
                 return match_xs_arm_Cons_inst_0_74_tsni(ys, _deforest_Cons_head2, _deforest_Cons_tail2)
               }
             } else {
-              tmp45 = NofibPrelude.intMod(n, s);
-              scrut = tmp45 === 0;
+              tmp48 = NofibPrelude.intMod(n, s);
+              scrut = tmp48 === 0;
               if (scrut === true) {
-                tmp46 = NofibPrelude.nofibStringToList("*\n");
-                tmp47 = n + 1;
-                arr3 = globalThis.Object.freeze([
+                tmp49 = NofibPrelude.nofibStringToList("*\n");
+                tmp50 = n + 1;
+                tmp51 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp48 = NofibPrelude.Cons(arr3, xs1);
-                tmp49 = printBoard_inst_0_1_2_tsni(s, tmp47, tmp48);
-                return append_inst_0_1_2_17_tsni(tmp46, tmp49)
+                tmp52 = NofibPrelude.Cons(tmp51, xs1);
+                tmp53 = printBoard_inst_0_1_2_tsni(s, tmp50, tmp52);
+                return append_inst_0_1_2_17_tsni(tmp49, tmp53)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
@@ -1014,86 +1013,86 @@ printBoard_inst_0_1_2_tsni = function printBoard_inst_0_1_2_tsni(s, n, xs) {
       } else {
         scrut2 = i === n;
         if (scrut2 === true) {
-          tmp50 = NofibPrelude.intMod(n, s);
-          scrut3 = tmp50 != 0;
+          tmp54 = NofibPrelude.intMod(n, s);
+          scrut3 = tmp54 != 0;
           if (scrut3 === true) {
-            tmp51 = NofibPrelude.stringOfInt(j);
-            tmp52 = NofibPrelude.nofibStringToList(tmp51);
-            tmp53 = s * s;
-            tmp54 = spaces_inst_0_1_2_8_tsni(tmp53, j);
-            tmp55 = n + 1;
-            tmp56 = printBoard_inst_0_1_2_tsni(s, tmp55, xs1);
-            tmp57 = append_inst_0_1_2_12_tsni(tmp54, tmp56);
-            return append_inst_0_1_2_13_tsni(tmp52, tmp57)
+            tmp55 = NofibPrelude.stringOfInt(j);
+            tmp56 = NofibPrelude.nofibStringToList(tmp55);
+            tmp57 = s * s;
+            tmp58 = spaces_inst_0_1_2_8_tsni(tmp57, j);
+            tmp59 = n + 1;
+            tmp60 = printBoard_inst_0_1_2_tsni(s, tmp59, xs1);
+            tmp61 = append_inst_0_1_2_12_tsni(tmp58, tmp60);
+            return append_inst_0_1_2_13_tsni(tmp56, tmp61)
           } else {
-            tmp58 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp58 != 0;
+            tmp62 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp62 != 0;
             if (scrut1 === true) {
-              tmp59 = s * s;
-              tmp60 = spaces_inst_0_1_2_9_tsni(tmp59, 1);
-              tmp61 = n + 1;
-              arr4 = globalThis.Object.freeze([
+              tmp63 = s * s;
+              tmp64 = spaces_inst_0_1_2_9_tsni(tmp63, 1);
+              tmp65 = n + 1;
+              tmp66 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp62 = NofibPrelude.Cons(arr4, xs1);
-              tmp63 = printBoard_inst_0_1_2_tsni(s, tmp61, tmp62);
-              tmp64 = append_inst_0_1_2_26_tsni(tmp60, tmp63);
+              tmp67 = NofibPrelude.Cons(tmp66, xs1);
+              tmp68 = printBoard_inst_0_1_2_tsni(s, tmp65, tmp67);
+              tmp69 = append_inst_0_1_2_26_tsni(tmp64, tmp68);
               _deforest_Cons_head = "*";
-              _deforest_Cons_tail = tmp64;
+              _deforest_Cons_tail = tmp69;
               return (ys) => {
                 return match_xs_arm_Cons_inst_0_74_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
               }
             } else {
-              tmp65 = NofibPrelude.intMod(n, s);
-              scrut = tmp65 === 0;
+              tmp70 = NofibPrelude.intMod(n, s);
+              scrut = tmp70 === 0;
               if (scrut === true) {
-                tmp66 = NofibPrelude.nofibStringToList("*\n");
-                tmp67 = n + 1;
-                arr5 = globalThis.Object.freeze([
+                tmp71 = NofibPrelude.nofibStringToList("*\n");
+                tmp72 = n + 1;
+                tmp73 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp68 = NofibPrelude.Cons(arr5, xs1);
-                tmp69 = printBoard_inst_0_1_2_tsni(s, tmp67, tmp68);
-                return append_inst_0_1_2_11_tsni(tmp66, tmp69)
+                tmp74 = NofibPrelude.Cons(tmp73, xs1);
+                tmp75 = printBoard_inst_0_1_2_tsni(s, tmp72, tmp74);
+                return append_inst_0_1_2_11_tsni(tmp71, tmp75)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
             }
           }
         } else {
-          tmp70 = NofibPrelude.intMod(n, s);
-          scrut1 = tmp70 != 0;
+          tmp76 = NofibPrelude.intMod(n, s);
+          scrut1 = tmp76 != 0;
           if (scrut1 === true) {
-            tmp71 = s * s;
-            tmp72 = spaces_inst_0_1_2_10_tsni(tmp71, 1);
-            tmp73 = n + 1;
-            arr6 = globalThis.Object.freeze([
+            tmp77 = s * s;
+            tmp78 = spaces_inst_0_1_2_10_tsni(tmp77, 1);
+            tmp79 = n + 1;
+            tmp80 = globalThis.Object.freeze([
               i,
               j
             ]);
-            tmp74 = NofibPrelude.Cons(arr6, xs1);
-            tmp75 = printBoard_inst_0_1_2_tsni(s, tmp73, tmp74);
-            tmp76 = append_inst_0_1_2_25_tsni(tmp72, tmp75);
+            tmp81 = NofibPrelude.Cons(tmp80, xs1);
+            tmp82 = printBoard_inst_0_1_2_tsni(s, tmp79, tmp81);
+            tmp83 = append_inst_0_1_2_25_tsni(tmp78, tmp82);
             _deforest_Cons_head1 = "*";
-            _deforest_Cons_tail1 = tmp76;
+            _deforest_Cons_tail1 = tmp83;
             return (ys) => {
               return match_xs_arm_Cons_inst_0_74_tsni(ys, _deforest_Cons_head1, _deforest_Cons_tail1)
             }
           } else {
-            tmp77 = NofibPrelude.intMod(n, s);
-            scrut = tmp77 === 0;
+            tmp84 = NofibPrelude.intMod(n, s);
+            scrut = tmp84 === 0;
             if (scrut === true) {
-              tmp78 = NofibPrelude.nofibStringToList("*\n");
-              tmp79 = n + 1;
-              arr7 = globalThis.Object.freeze([
+              tmp85 = NofibPrelude.nofibStringToList("*\n");
+              tmp86 = n + 1;
+              tmp87 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp80 = NofibPrelude.Cons(arr7, xs1);
-              tmp81 = printBoard_inst_0_1_2_tsni(s, tmp79, tmp80);
-              return append_inst_0_1_2_14_tsni(tmp78, tmp81)
+              tmp88 = NofibPrelude.Cons(tmp87, xs1);
+              tmp89 = printBoard_inst_0_1_2_tsni(s, tmp86, tmp88);
+              return append_inst_0_1_2_14_tsni(tmp85, tmp89)
             } else {
               throw globalThis.Error("printBoard non-empty list error")
             }
@@ -1553,13 +1552,13 @@ lambda_inst_27_tsni = (undefined, function (sze, h1, t1, h2, t2) {
   }
 });
 lambda$_inst_27_tsni = function lambda$_inst_27_tsni(sze, h1, t1, h2, t2) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     h1,
     h2
   ]);
-  tmp = lscomp2$_inst_27_tsni(sze, h1, t1, t2);
-  return NofibPrelude.LzCons(arr, tmp)
+  tmp1 = lscomp2$_inst_27_tsni(sze, h1, t1, t2);
+  return NofibPrelude.LzCons(tmp, tmp1)
 };
 enumFromTo_inst_27_28_tsni = function enumFromTo_inst_27_28_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -1570,13 +1569,13 @@ enumFromTo_inst_27_28_tsni = function enumFromTo_inst_27_28_tsni(a, b) {
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (sze, h1, t1) => {
-      let param0, param1, h2, t2, tmp2;
+      let param0, param1, h2, t2, lambda$this;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       h2 = param0;
       t2 = param1;
-      tmp2 = runtime.safeCall(lambda_inst_27_tsni(sze, h1, t1, h2, t2));
-      return NofibPrelude.lazy(tmp2)
+      lambda$this = runtime.safeCall(lambda_inst_27_tsni(sze, h1, t1, h2, t2));
+      return NofibPrelude.lazy(lambda$this)
     }
   } else {
     return (sze, h1, t1) => {
@@ -1608,13 +1607,13 @@ lambda_inst_29_30_tsni = (undefined, function (sze, h1, t1, h2, t2) {
   }
 });
 lambda$_inst_29_30_tsni = function lambda$_inst_29_30_tsni(sze, h1, t1, h2, t2) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     h1,
     h2
   ]);
-  tmp = lscomp2$_inst_29_30_tsni(sze, h1, t1, t2);
-  return NofibPrelude.LzCons(arr, tmp)
+  tmp1 = lscomp2$_inst_29_30_tsni(sze, h1, t1, t2);
+  return NofibPrelude.LzCons(tmp, tmp1)
 };
 enumFromTo_inst_29_30_28_tsni = function enumFromTo_inst_29_30_28_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -1625,13 +1624,13 @@ enumFromTo_inst_29_30_28_tsni = function enumFromTo_inst_29_30_28_tsni(a, b) {
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (sze, h1, t1) => {
-      let param0, param1, h2, t2, tmp2;
+      let param0, param1, h2, t2, lambda$this;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       h2 = param0;
       t2 = param1;
-      tmp2 = runtime.safeCall(lambda_inst_29_30_tsni(sze, h1, t1, h2, t2));
-      return NofibPrelude.lazy(tmp2)
+      lambda$this = runtime.safeCall(lambda_inst_29_30_tsni(sze, h1, t1, h2, t2));
+      return NofibPrelude.lazy(lambda$this)
     }
   } else {
     return (sze, h1, t1) => {
@@ -1646,7 +1645,7 @@ deadEnd_inst_31_32_tsni = function deadEnd_inst_31_32_tsni(board) {
   return tmp1 === 0
 };
 possibleMoves_inst_31_32_33_tsni = function possibleMoves_inst_31_32_33_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -1689,8 +1688,7 @@ possibleMoves_inst_31_32_33_tsni = function possibleMoves_inst_31_32_33_tsni(boa
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_31_32_33_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_31_32_33_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_31_32_33_45_tsni(board, tmp7);
   return res
 };
 lambda$_inst_34_35_tsni = function lambda$_inst_34_35_tsni(board) {
@@ -1706,7 +1704,7 @@ deadEnd_inst_34_35_32_tsni = function deadEnd_inst_34_35_32_tsni(board) {
   return tmp1 === 0
 };
 possibleMoves_inst_34_35_32_33_tsni = function possibleMoves_inst_34_35_32_33_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -1749,12 +1747,11 @@ possibleMoves_inst_34_35_32_33_tsni = function possibleMoves_inst_34_35_32_33_ts
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_34_35_32_33_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_34_35_32_33_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_34_35_32_33_45_tsni(board, tmp7);
   return res
 };
 lscomp_inst_36_tsni = function lscomp_inst_36_tsni(ls) {
-  let param0, param1, x, t, tmp;
+  let param0, param1, x, t, lambda$this;
   if (ls instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.lazy(lambda13)
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -1762,8 +1759,8 @@ lscomp_inst_36_tsni = function lscomp_inst_36_tsni(ls) {
     param1 = ls.tail;
     x = param0;
     t = param1;
-    tmp = runtime.safeCall(lambda_inst_36_tsni(x, t));
-    return NofibPrelude.lazy(tmp)
+    lambda$this = runtime.safeCall(lambda_inst_36_tsni(x, t));
+    return NofibPrelude.lazy(lambda$this)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -1774,7 +1771,7 @@ lambda_inst_36_tsni = (undefined, function (x, t) {
   }
 });
 possibleMoves_inst_36_37_tsni = function possibleMoves_inst_36_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -1817,12 +1814,11 @@ possibleMoves_inst_36_37_tsni = function possibleMoves_inst_36_37_tsni(board) {
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_36_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_36_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_36_37_45_tsni(board, tmp7);
   return res
 };
 lscomp_inst_38_tsni = function lscomp_inst_38_tsni(ls) {
-  let param0, param1, x, t, tmp;
+  let param0, param1, x, t, lambda$this;
   if (ls instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.lazy(lambda13)
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -1830,26 +1826,26 @@ lscomp_inst_38_tsni = function lscomp_inst_38_tsni(ls) {
     param1 = ls.tail;
     x = param0;
     t = param1;
-    tmp = runtime.safeCall(lambda14(x, t));
-    return NofibPrelude.lazy(tmp)
+    lambda$this = runtime.safeCall(lambda14(x, t));
+    return NofibPrelude.lazy(lambda$this)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 lambda$_inst_38_tsni = function lambda$_inst_38_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_38_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp_inst_38_tsni(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp_inst_38_tsni(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 possibleMoves_inst_38_37_tsni = function possibleMoves_inst_38_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -1892,8 +1888,7 @@ possibleMoves_inst_38_37_tsni = function possibleMoves_inst_38_37_tsni(board) {
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_38_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_38_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_38_37_45_tsni(board, tmp7);
   return res
 };
 lambda_inst_39_tsni = (undefined, function (x, t) {
@@ -1902,19 +1897,19 @@ lambda_inst_39_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_39_tsni = function lambda$_inst_39_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_39_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp3(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp3(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 possibleMoves_inst_39_37_tsni = function possibleMoves_inst_39_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -1957,8 +1952,7 @@ possibleMoves_inst_39_37_tsni = function possibleMoves_inst_39_37_tsni(board) {
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_39_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_39_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_39_37_45_tsni(board, tmp7);
   return res
 };
 spaces_inst_40_3_tsni = function spaces_inst_40_3_tsni(s, y) {
@@ -2179,7 +2173,7 @@ replicate_inst_40_10_4_tsni = function replicate_inst_40_10_4_tsni(n, x) {
   }
 };
 possibleMoves_inst_42_33_tsni = function possibleMoves_inst_42_33_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -2222,12 +2216,11 @@ possibleMoves_inst_42_33_tsni = function possibleMoves_inst_42_33_tsni(board) {
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_42_33_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_42_33_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_42_33_45_tsni(board, tmp7);
   return res
 };
 possibleMoves_inst_43_44_tsni = function possibleMoves_inst_43_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -2272,8 +2265,7 @@ possibleMoves_inst_43_44_tsni = function possibleMoves_inst_43_44_tsni(board) {
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_43_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_43_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_43_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_43_44_45_tsni = function lscomp$_inst_43_44_45_tsni(board, ls) {
@@ -2286,7 +2278,7 @@ allDescend_inst_46_47_tsni = function allDescend_inst_46_47_tsni(board) {
   return map_inst_46_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_46_47_44_tsni = function possibleMoves_inst_46_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -2333,8 +2325,7 @@ possibleMoves_inst_46_47_44_tsni = function possibleMoves_inst_46_47_44_tsni(boa
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_46_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_46_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_46_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_46_47_44_45_tsni = function lscomp$_inst_46_47_44_45_tsni(board, ls) {
@@ -2349,19 +2340,19 @@ lambda_inst_46_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_46_48_tsni = function lambda$_inst_46_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_46_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp_inst_46_48_tsni(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp_inst_46_48_tsni(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 possibleMoves_inst_46_48_37_tsni = function possibleMoves_inst_46_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -2404,8 +2395,7 @@ possibleMoves_inst_46_48_37_tsni = function possibleMoves_inst_46_48_37_tsni(boa
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_46_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_46_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_46_48_37_45_tsni(board, tmp7);
   return res
 };
 map_inst_46_47_49_tsni = function map_inst_46_47_49_tsni(f, xs) {
@@ -2425,14 +2415,14 @@ lambda_inst_50_51_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_50_51_48_tsni = function lambda$_inst_50_51_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, tmp3, tmp4, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_50_51_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
   _deforest_Deforest_Arr_2_0 = tmp2;
   _deforest_Deforest_Arr_2_1 = x;
-  arr = (param1) => {
-    let first1, first0, y, x1, t1, scrut, tmp4;
+  tmp3 = (param1) => {
+    let first1, first0, y, x1, t1, scrut, tmp5;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y = first0;
@@ -2440,15 +2430,15 @@ lambda$_inst_50_51_48_tsni = function lambda$_inst_50_51_48_tsni(x, t) {
     t1 = param1;
     scrut = y === 1;
     if (scrut === true) {
-      tmp4 = lscomp_inst_50_78_tsni(t1);
-      return NofibPrelude.Cons(x1, tmp4)
+      tmp5 = lscomp_inst_50_78_tsni(t1);
+      return NofibPrelude.Cons(x1, tmp5)
     } else {
       return lscomp_inst_50_78_tsni(t1)
     }
   };
-  tmp3 = lscomp_inst_50_51_48_tsni(t);
-  _deforest_LzCons_head = arr;
-  _deforest_LzCons_tail = tmp3;
+  tmp4 = lscomp_inst_50_51_48_tsni(t);
+  _deforest_LzCons_head = tmp3;
+  _deforest_LzCons_tail = tmp4;
   return () => {
     let param0, param1;
     param0 = _deforest_LzCons_head;
@@ -2457,7 +2447,7 @@ lambda$_inst_50_51_48_tsni = function lambda$_inst_50_51_48_tsni(x, t) {
   }
 };
 possibleMoves_inst_50_51_48_37_tsni = function possibleMoves_inst_50_51_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -2500,8 +2490,7 @@ possibleMoves_inst_50_51_48_37_tsni = function possibleMoves_inst_50_51_48_37_ts
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_50_51_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_50_51_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_50_51_48_37_45_tsni(board, tmp7);
   return res
 };
 allDescend_inst_50_51_47_tsni = function allDescend_inst_50_51_47_tsni(board) {
@@ -2511,7 +2500,7 @@ allDescend_inst_50_51_47_tsni = function allDescend_inst_50_51_47_tsni(board) {
   return map_inst_50_51_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_50_51_47_44_tsni = function possibleMoves_inst_50_51_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -2558,8 +2547,7 @@ possibleMoves_inst_50_51_47_44_tsni = function possibleMoves_inst_50_51_47_44_ts
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_50_51_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_50_51_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_50_51_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_50_51_47_44_45_tsni = function lscomp$_inst_50_51_47_44_45_tsni(board, ls) {
@@ -2591,7 +2579,7 @@ deadEnd_inst_53_54_35_32_tsni = function deadEnd_inst_53_54_35_32_tsni(board) {
   return tmp1 === 0
 };
 possibleMoves_inst_53_54_35_32_33_tsni = function possibleMoves_inst_53_54_35_32_33_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -2634,8 +2622,7 @@ possibleMoves_inst_53_54_35_32_33_tsni = function possibleMoves_inst_53_54_35_32
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_53_54_35_32_33_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_53_54_35_32_33_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_53_54_35_32_33_45_tsni(board, tmp7);
   return res
 };
 singleDescend_inst_53_55_tsni = function singleDescend_inst_53_55_tsni(board) {
@@ -2655,7 +2642,7 @@ allDescend_inst_53_55_51_47_tsni = function allDescend_inst_53_55_51_47_tsni(boa
   return map_inst_53_55_51_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_53_55_51_47_44_tsni = function possibleMoves_inst_53_55_51_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -2702,8 +2689,7 @@ possibleMoves_inst_53_55_51_47_44_tsni = function possibleMoves_inst_53_55_51_47
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_53_55_51_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_53_55_51_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_53_55_51_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_53_55_51_47_44_45_tsni = function lscomp$_inst_53_55_51_47_44_45_tsni(board, ls) {
@@ -2718,14 +2704,14 @@ lambda_inst_53_55_51_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_53_55_51_48_tsni = function lambda$_inst_53_55_51_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, tmp3, tmp4, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_53_55_51_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
   _deforest_Deforest_Arr_2_0 = tmp2;
   _deforest_Deforest_Arr_2_1 = x;
-  arr = (param1) => {
-    let first1, first0, y, x1, t1, scrut, tmp4;
+  tmp3 = (param1) => {
+    let first1, first0, y, x1, t1, scrut, tmp5;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y = first0;
@@ -2733,15 +2719,15 @@ lambda$_inst_53_55_51_48_tsni = function lambda$_inst_53_55_51_48_tsni(x, t) {
     t1 = param1;
     scrut = y === 1;
     if (scrut === true) {
-      tmp4 = lscomp_inst_53_55_78_tsni(t1);
-      return NofibPrelude.Cons(x1, tmp4)
+      tmp5 = lscomp_inst_53_55_78_tsni(t1);
+      return NofibPrelude.Cons(x1, tmp5)
     } else {
       return lscomp_inst_53_55_78_tsni(t1)
     }
   };
-  tmp3 = lscomp_inst_53_55_51_48_tsni(t);
-  _deforest_LzCons_head = arr;
-  _deforest_LzCons_tail = tmp3;
+  tmp4 = lscomp_inst_53_55_51_48_tsni(t);
+  _deforest_LzCons_head = tmp3;
+  _deforest_LzCons_tail = tmp4;
   return () => {
     let param0, param1;
     param0 = _deforest_LzCons_head;
@@ -2750,7 +2736,7 @@ lambda$_inst_53_55_51_48_tsni = function lambda$_inst_53_55_51_48_tsni(x, t) {
   }
 };
 possibleMoves_inst_53_55_51_48_37_tsni = function possibleMoves_inst_53_55_51_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -2793,8 +2779,7 @@ possibleMoves_inst_53_55_51_48_37_tsni = function possibleMoves_inst_53_55_51_48
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_53_55_51_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_53_55_51_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_53_55_51_48_37_45_tsni(board, tmp7);
   return res
 };
 map_inst_53_55_51_47_49_tsni = function map_inst_53_55_51_47_49_tsni(f, xs) {
@@ -2819,19 +2804,19 @@ lambda_inst_53_56_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_53_56_48_tsni = function lambda$_inst_53_56_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_53_56_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp_inst_53_56_48_tsni(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp_inst_53_56_48_tsni(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 possibleMoves_inst_53_56_48_37_tsni = function possibleMoves_inst_53_56_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -2874,8 +2859,7 @@ possibleMoves_inst_53_56_48_37_tsni = function possibleMoves_inst_53_56_48_37_ts
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_53_56_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_53_56_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_53_56_48_37_45_tsni(board, tmp7);
   return res
 };
 allDescend_inst_53_56_47_tsni = function allDescend_inst_53_56_47_tsni(board) {
@@ -2885,7 +2869,7 @@ allDescend_inst_53_56_47_tsni = function allDescend_inst_53_56_47_tsni(board) {
   return map_inst_53_56_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_53_56_47_44_tsni = function possibleMoves_inst_53_56_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -2932,8 +2916,7 @@ possibleMoves_inst_53_56_47_44_tsni = function possibleMoves_inst_53_56_47_44_ts
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_53_56_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_53_56_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_53_56_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_53_56_47_44_45_tsni = function lscomp$_inst_53_56_47_44_45_tsni(board, ls) {
@@ -2943,7 +2926,7 @@ map_inst_53_56_47_49_tsni = function map_inst_53_56_47_49_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
 printBoard_inst_57_2_tsni = function printBoard_inst_57_2_tsni(s, n, xs) {
-  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, arr, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, arr1, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, arr2, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, arr3, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, arr4, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, arr5, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, arr6, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, arr7, tmp80, tmp81;
+  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89;
   if (xs instanceof NofibPrelude.Nil.class) {
     tmp = s * s;
     scrut8 = n > tmp;
@@ -3014,60 +2997,60 @@ printBoard_inst_57_2_tsni = function printBoard_inst_57_2_tsni(s, n, xs) {
                 tmp27 = s * s;
                 tmp28 = spaces_inst_57_2_6_tsni(tmp27, 1);
                 tmp29 = n + 1;
-                arr = globalThis.Object.freeze([
+                tmp30 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp30 = NofibPrelude.Cons(arr, xs1);
-                tmp31 = printBoard_inst_57_2_tsni(s, tmp29, tmp30);
-                tmp32 = append_inst_57_2_23_tsni(tmp28, tmp31);
-                return NofibPrelude.Cons("*", tmp32)
+                tmp31 = NofibPrelude.Cons(tmp30, xs1);
+                tmp32 = printBoard_inst_57_2_tsni(s, tmp29, tmp31);
+                tmp33 = append_inst_57_2_23_tsni(tmp28, tmp32);
+                return NofibPrelude.Cons("*", tmp33)
               } else {
-                tmp33 = NofibPrelude.intMod(n, s);
-                scrut = tmp33 === 0;
+                tmp34 = NofibPrelude.intMod(n, s);
+                scrut = tmp34 === 0;
                 if (scrut === true) {
-                  tmp34 = NofibPrelude.nofibStringToList("*\n");
-                  tmp35 = n + 1;
-                  arr1 = globalThis.Object.freeze([
+                  tmp35 = NofibPrelude.nofibStringToList("*\n");
+                  tmp36 = n + 1;
+                  tmp37 = globalThis.Object.freeze([
                     i,
                     j
                   ]);
-                  tmp36 = NofibPrelude.Cons(arr1, xs1);
-                  tmp37 = printBoard_inst_57_2_tsni(s, tmp35, tmp36);
-                  return NofibPrelude.append(tmp34, tmp37)
+                  tmp38 = NofibPrelude.Cons(tmp37, xs1);
+                  tmp39 = printBoard_inst_57_2_tsni(s, tmp36, tmp38);
+                  return NofibPrelude.append(tmp35, tmp39)
                 } else {
                   throw globalThis.Error("printBoard non-empty list error")
                 }
               }
             }
           } else {
-            tmp38 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp38 != 0;
+            tmp40 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp40 != 0;
             if (scrut1 === true) {
-              tmp39 = s * s;
-              tmp40 = spaces_inst_57_2_7_tsni(tmp39, 1);
-              tmp41 = n + 1;
-              arr2 = globalThis.Object.freeze([
+              tmp41 = s * s;
+              tmp42 = spaces_inst_57_2_7_tsni(tmp41, 1);
+              tmp43 = n + 1;
+              tmp44 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp42 = NofibPrelude.Cons(arr2, xs1);
-              tmp43 = printBoard_inst_57_2_tsni(s, tmp41, tmp42);
-              tmp44 = append_inst_57_2_24_tsni(tmp40, tmp43);
-              return NofibPrelude.Cons("*", tmp44)
+              tmp45 = NofibPrelude.Cons(tmp44, xs1);
+              tmp46 = printBoard_inst_57_2_tsni(s, tmp43, tmp45);
+              tmp47 = append_inst_57_2_24_tsni(tmp42, tmp46);
+              return NofibPrelude.Cons("*", tmp47)
             } else {
-              tmp45 = NofibPrelude.intMod(n, s);
-              scrut = tmp45 === 0;
+              tmp48 = NofibPrelude.intMod(n, s);
+              scrut = tmp48 === 0;
               if (scrut === true) {
-                tmp46 = NofibPrelude.nofibStringToList("*\n");
-                tmp47 = n + 1;
-                arr3 = globalThis.Object.freeze([
+                tmp49 = NofibPrelude.nofibStringToList("*\n");
+                tmp50 = n + 1;
+                tmp51 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp48 = NofibPrelude.Cons(arr3, xs1);
-                tmp49 = printBoard_inst_57_2_tsni(s, tmp47, tmp48);
-                return NofibPrelude.append(tmp46, tmp49)
+                tmp52 = NofibPrelude.Cons(tmp51, xs1);
+                tmp53 = printBoard_inst_57_2_tsni(s, tmp50, tmp52);
+                return NofibPrelude.append(tmp49, tmp53)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
@@ -3077,78 +3060,78 @@ printBoard_inst_57_2_tsni = function printBoard_inst_57_2_tsni(s, n, xs) {
       } else {
         scrut2 = i === n;
         if (scrut2 === true) {
-          tmp50 = NofibPrelude.intMod(n, s);
-          scrut3 = tmp50 != 0;
+          tmp54 = NofibPrelude.intMod(n, s);
+          scrut3 = tmp54 != 0;
           if (scrut3 === true) {
-            tmp51 = NofibPrelude.stringOfInt(j);
-            tmp52 = NofibPrelude.nofibStringToList(tmp51);
-            tmp53 = s * s;
-            tmp54 = spaces_inst_57_2_8_tsni(tmp53, j);
-            tmp55 = n + 1;
-            tmp56 = printBoard_inst_57_2_tsni(s, tmp55, xs1);
-            tmp57 = append_inst_57_2_12_tsni(tmp54, tmp56);
-            return NofibPrelude.append(tmp52, tmp57)
+            tmp55 = NofibPrelude.stringOfInt(j);
+            tmp56 = NofibPrelude.nofibStringToList(tmp55);
+            tmp57 = s * s;
+            tmp58 = spaces_inst_57_2_8_tsni(tmp57, j);
+            tmp59 = n + 1;
+            tmp60 = printBoard_inst_57_2_tsni(s, tmp59, xs1);
+            tmp61 = append_inst_57_2_12_tsni(tmp58, tmp60);
+            return NofibPrelude.append(tmp56, tmp61)
           } else {
-            tmp58 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp58 != 0;
+            tmp62 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp62 != 0;
             if (scrut1 === true) {
-              tmp59 = s * s;
-              tmp60 = spaces_inst_57_2_9_tsni(tmp59, 1);
-              tmp61 = n + 1;
-              arr4 = globalThis.Object.freeze([
+              tmp63 = s * s;
+              tmp64 = spaces_inst_57_2_9_tsni(tmp63, 1);
+              tmp65 = n + 1;
+              tmp66 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp62 = NofibPrelude.Cons(arr4, xs1);
-              tmp63 = printBoard_inst_57_2_tsni(s, tmp61, tmp62);
-              tmp64 = append_inst_57_2_26_tsni(tmp60, tmp63);
-              return NofibPrelude.Cons("*", tmp64)
+              tmp67 = NofibPrelude.Cons(tmp66, xs1);
+              tmp68 = printBoard_inst_57_2_tsni(s, tmp65, tmp67);
+              tmp69 = append_inst_57_2_26_tsni(tmp64, tmp68);
+              return NofibPrelude.Cons("*", tmp69)
             } else {
-              tmp65 = NofibPrelude.intMod(n, s);
-              scrut = tmp65 === 0;
+              tmp70 = NofibPrelude.intMod(n, s);
+              scrut = tmp70 === 0;
               if (scrut === true) {
-                tmp66 = NofibPrelude.nofibStringToList("*\n");
-                tmp67 = n + 1;
-                arr5 = globalThis.Object.freeze([
+                tmp71 = NofibPrelude.nofibStringToList("*\n");
+                tmp72 = n + 1;
+                tmp73 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp68 = NofibPrelude.Cons(arr5, xs1);
-                tmp69 = printBoard_inst_57_2_tsni(s, tmp67, tmp68);
-                return NofibPrelude.append(tmp66, tmp69)
+                tmp74 = NofibPrelude.Cons(tmp73, xs1);
+                tmp75 = printBoard_inst_57_2_tsni(s, tmp72, tmp74);
+                return NofibPrelude.append(tmp71, tmp75)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
             }
           }
         } else {
-          tmp70 = NofibPrelude.intMod(n, s);
-          scrut1 = tmp70 != 0;
+          tmp76 = NofibPrelude.intMod(n, s);
+          scrut1 = tmp76 != 0;
           if (scrut1 === true) {
-            tmp71 = s * s;
-            tmp72 = spaces_inst_57_2_10_tsni(tmp71, 1);
-            tmp73 = n + 1;
-            arr6 = globalThis.Object.freeze([
+            tmp77 = s * s;
+            tmp78 = spaces_inst_57_2_10_tsni(tmp77, 1);
+            tmp79 = n + 1;
+            tmp80 = globalThis.Object.freeze([
               i,
               j
             ]);
-            tmp74 = NofibPrelude.Cons(arr6, xs1);
-            tmp75 = printBoard_inst_57_2_tsni(s, tmp73, tmp74);
-            tmp76 = append_inst_57_2_25_tsni(tmp72, tmp75);
-            return NofibPrelude.Cons("*", tmp76)
+            tmp81 = NofibPrelude.Cons(tmp80, xs1);
+            tmp82 = printBoard_inst_57_2_tsni(s, tmp79, tmp81);
+            tmp83 = append_inst_57_2_25_tsni(tmp78, tmp82);
+            return NofibPrelude.Cons("*", tmp83)
           } else {
-            tmp77 = NofibPrelude.intMod(n, s);
-            scrut = tmp77 === 0;
+            tmp84 = NofibPrelude.intMod(n, s);
+            scrut = tmp84 === 0;
             if (scrut === true) {
-              tmp78 = NofibPrelude.nofibStringToList("*\n");
-              tmp79 = n + 1;
-              arr7 = globalThis.Object.freeze([
+              tmp85 = NofibPrelude.nofibStringToList("*\n");
+              tmp86 = n + 1;
+              tmp87 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp80 = NofibPrelude.Cons(arr7, xs1);
-              tmp81 = printBoard_inst_57_2_tsni(s, tmp79, tmp80);
-              return NofibPrelude.append(tmp78, tmp81)
+              tmp88 = NofibPrelude.Cons(tmp87, xs1);
+              tmp89 = printBoard_inst_57_2_tsni(s, tmp86, tmp88);
+              return NofibPrelude.append(tmp85, tmp89)
             } else {
               throw globalThis.Error("printBoard non-empty list error")
             }
@@ -3391,13 +3374,13 @@ lambda_inst_58_59_tsni = (undefined, function (sze, h1, t1, h2, t2) {
   }
 });
 lambda$_inst_58_59_tsni = function lambda$_inst_58_59_tsni(sze, h1, t1, h2, t2) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     h1,
     h2
   ]);
-  tmp = lscomp2$_inst_58_59_tsni(sze, h1, t1, t2);
-  return NofibPrelude.LzCons(arr, tmp)
+  tmp1 = lscomp2$_inst_58_59_tsni(sze, h1, t1, t2);
+  return NofibPrelude.LzCons(tmp, tmp1)
 };
 enumFromTo_inst_58_59_28_tsni = function enumFromTo_inst_58_59_28_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -3408,13 +3391,13 @@ enumFromTo_inst_58_59_28_tsni = function enumFromTo_inst_58_59_28_tsni(a, b) {
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (sze, h1, t1) => {
-      let param0, param1, h2, t2, tmp2;
+      let param0, param1, h2, t2, lambda$this;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       h2 = param0;
       t2 = param1;
-      tmp2 = runtime.safeCall(lambda_inst_58_59_tsni(sze, h1, t1, h2, t2));
-      return NofibPrelude.lazy(tmp2)
+      lambda$this = runtime.safeCall(lambda_inst_58_59_tsni(sze, h1, t1, h2, t2));
+      return NofibPrelude.lazy(lambda$this)
     }
   } else {
     return (sze, h1, t1) => {
@@ -3446,22 +3429,20 @@ enumFromTo_inst_58_60_tsni = function enumFromTo_inst_58_60_tsni(a, b) {
   }
 };
 descendents_inst_61_62_tsni = function descendents_inst_61_62_tsni(board) {
-  let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1;
+  let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1;
   tmp = knights.canJumpFirst(board);
   lambda$this = runtime.safeCall(lambda_inst_61_62_54_tsni(board));
   scrut3 = runtime.short_and(tmp, lambda$this);
   if (scrut3 === true) {
     return NofibPrelude.lazy(lambda16)
   } else {
-    tmp1 = singleDescend_inst_61_62_55_tsni(board);
-    singles = tmp1;
-    tmp2 = NofibPrelude.listLen(singles);
-    scrut = tmp2;
+    singles = singleDescend_inst_61_62_55_tsni(board);
+    scrut = NofibPrelude.listLen(singles);
     scrut2 = scrut === 0;
     if (scrut2 === true) {
-      tmp3 = descAndNo_inst_61_62_56_tsni(board);
-      tmp4 = knights.quickSortIntChessSet(tmp3);
-      tmp5 = NofibPrelude.map_lz(NofibPrelude.snd, tmp4);
+      tmp1 = descAndNo_inst_61_62_56_tsni(board);
+      tmp2 = knights.quickSortIntChessSet(tmp1);
+      tmp3 = NofibPrelude.map_lz(NofibPrelude.snd, tmp2);
     } else {
       scrut1 = scrut === 1;
       if (scrut1 === true) {
@@ -3470,20 +3451,20 @@ descendents_inst_61_62_tsni = function descendents_inst_61_62_tsni(board) {
           param1 = singles.tail;
           h = param0;
           if (param1 instanceof NofibPrelude.Nil.class) {
-            lambda$this1 = runtime.safeCall(lambda17(h));
-            tmp6 = NofibPrelude.lazy(lambda$this1);
+            lambda$this1 = runtime.safeCall(lambda18(h));
+            tmp4 = NofibPrelude.lazy(lambda$this1);
           } else {
             throw globalThis.Error("unreachable")
           }
         } else {
           throw globalThis.Error("unreachable")
         }
-        tmp5 = tmp6;
+        tmp3 = tmp4;
       } else {
-        tmp5 = NofibPrelude.lazy(lambda19);
+        tmp3 = NofibPrelude.lazy(lambda19);
       }
     }
-    res = tmp5;
+    res = tmp3;
     return res
   }
 };
@@ -3499,7 +3480,7 @@ allDescend_inst_61_62_56_47_tsni = function allDescend_inst_61_62_56_47_tsni(boa
   return map_inst_61_62_56_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_61_62_56_47_44_tsni = function possibleMoves_inst_61_62_56_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -3546,8 +3527,7 @@ possibleMoves_inst_61_62_56_47_44_tsni = function possibleMoves_inst_61_62_56_47
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_61_62_56_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_61_62_56_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_61_62_56_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_61_62_56_47_44_45_tsni = function lscomp$_inst_61_62_56_47_44_45_tsni(board, ls) {
@@ -3562,19 +3542,19 @@ lambda_inst_61_62_56_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_61_62_56_48_tsni = function lambda$_inst_61_62_56_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_61_62_56_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp_inst_61_62_56_48_tsni(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp_inst_61_62_56_48_tsni(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 possibleMoves_inst_61_62_56_48_37_tsni = function possibleMoves_inst_61_62_56_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -3617,8 +3597,7 @@ possibleMoves_inst_61_62_56_48_37_tsni = function possibleMoves_inst_61_62_56_48
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_61_62_56_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_61_62_56_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_61_62_56_48_37_45_tsni(board, tmp7);
   return res
 };
 map_inst_61_62_56_47_49_tsni = function map_inst_61_62_56_47_49_tsni(f, xs) {
@@ -3643,14 +3622,14 @@ lambda_inst_61_62_55_51_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_61_62_55_51_48_tsni = function lambda$_inst_61_62_55_51_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, tmp3, tmp4, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_61_62_55_51_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
   _deforest_Deforest_Arr_2_0 = tmp2;
   _deforest_Deforest_Arr_2_1 = x;
-  arr = (param1) => {
-    let first1, first0, y, x1, t1, scrut, tmp4;
+  tmp3 = (param1) => {
+    let first1, first0, y, x1, t1, scrut, tmp5;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y = first0;
@@ -3658,15 +3637,15 @@ lambda$_inst_61_62_55_51_48_tsni = function lambda$_inst_61_62_55_51_48_tsni(x, 
     t1 = param1;
     scrut = y === 1;
     if (scrut === true) {
-      tmp4 = lscomp_inst_61_62_55_78_tsni(t1);
-      return NofibPrelude.Cons(x1, tmp4)
+      tmp5 = lscomp_inst_61_62_55_78_tsni(t1);
+      return NofibPrelude.Cons(x1, tmp5)
     } else {
       return lscomp_inst_61_62_55_78_tsni(t1)
     }
   };
-  tmp3 = lscomp_inst_61_62_55_51_48_tsni(t);
-  _deforest_LzCons_head = arr;
-  _deforest_LzCons_tail = tmp3;
+  tmp4 = lscomp_inst_61_62_55_51_48_tsni(t);
+  _deforest_LzCons_head = tmp3;
+  _deforest_LzCons_tail = tmp4;
   return () => {
     let param0, param1;
     param0 = _deforest_LzCons_head;
@@ -3675,7 +3654,7 @@ lambda$_inst_61_62_55_51_48_tsni = function lambda$_inst_61_62_55_51_48_tsni(x, 
   }
 };
 possibleMoves_inst_61_62_55_51_48_37_tsni = function possibleMoves_inst_61_62_55_51_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -3718,8 +3697,7 @@ possibleMoves_inst_61_62_55_51_48_37_tsni = function possibleMoves_inst_61_62_55
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_61_62_55_51_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_61_62_55_51_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_61_62_55_51_48_37_45_tsni(board, tmp7);
   return res
 };
 allDescend_inst_61_62_55_51_47_tsni = function allDescend_inst_61_62_55_51_47_tsni(board) {
@@ -3729,7 +3707,7 @@ allDescend_inst_61_62_55_51_47_tsni = function allDescend_inst_61_62_55_51_47_ts
   return map_inst_61_62_55_51_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_61_62_55_51_47_44_tsni = function possibleMoves_inst_61_62_55_51_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -3776,8 +3754,7 @@ possibleMoves_inst_61_62_55_51_47_44_tsni = function possibleMoves_inst_61_62_55
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_61_62_55_51_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_61_62_55_51_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_61_62_55_51_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_61_62_55_51_47_44_45_tsni = function lscomp$_inst_61_62_55_51_47_44_45_tsni(board, ls) {
@@ -3809,7 +3786,7 @@ deadEnd_inst_61_62_54_35_32_tsni = function deadEnd_inst_61_62_54_35_32_tsni(boa
   return tmp1 === 0
 };
 possibleMoves_inst_61_62_54_35_32_33_tsni = function possibleMoves_inst_61_62_54_35_32_33_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -3852,8 +3829,7 @@ possibleMoves_inst_61_62_54_35_32_33_tsni = function possibleMoves_inst_61_62_54
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_61_62_54_35_32_33_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_61_62_54_35_32_33_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_61_62_54_35_32_33_45_tsni(board, tmp7);
   return res
 };
 root_inst_63_64_tsni = function root_inst_63_64_tsni(sze) {
@@ -3882,13 +3858,13 @@ lambda_inst_63_64_59_tsni = (undefined, function (sze, h1, t1, h2, t2) {
   }
 });
 lambda$_inst_63_64_59_tsni = function lambda$_inst_63_64_59_tsni(sze, h1, t1, h2, t2) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     h1,
     h2
   ]);
-  tmp = lscomp2$_inst_63_64_59_tsni(sze, h1, t1, t2);
-  return NofibPrelude.LzCons(arr, tmp)
+  tmp1 = lscomp2$_inst_63_64_59_tsni(sze, h1, t1, t2);
+  return NofibPrelude.LzCons(tmp, tmp1)
 };
 enumFromTo_inst_63_64_59_28_tsni = function enumFromTo_inst_63_64_59_28_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -3899,13 +3875,13 @@ enumFromTo_inst_63_64_59_28_tsni = function enumFromTo_inst_63_64_59_28_tsni(a, 
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (sze, h1, t1) => {
-      let param0, param1, h2, t2, tmp2;
+      let param0, param1, h2, t2, lambda$this;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       h2 = param0;
       t2 = param1;
-      tmp2 = runtime.safeCall(lambda_inst_63_64_59_tsni(sze, h1, t1, h2, t2));
-      return NofibPrelude.lazy(tmp2)
+      lambda$this = runtime.safeCall(lambda_inst_63_64_59_tsni(sze, h1, t1, h2, t2));
+      return NofibPrelude.lazy(lambda$this)
     }
   } else {
     return (sze, h1, t1) => {
@@ -3952,22 +3928,20 @@ grow_inst_63_65_tsni = function grow_inst_63_65_tsni(x_y) {
   }
 };
 descendents_inst_63_65_62_tsni = function descendents_inst_63_65_62_tsni(board) {
-  let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1;
+  let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1;
   tmp = knights.canJumpFirst(board);
   lambda$this = runtime.safeCall(lambda_inst_63_65_62_54_tsni(board));
   scrut3 = runtime.short_and(tmp, lambda$this);
   if (scrut3 === true) {
     return NofibPrelude.lazy(lambda16)
   } else {
-    tmp1 = singleDescend_inst_63_65_62_55_tsni(board);
-    singles = tmp1;
-    tmp2 = NofibPrelude.listLen(singles);
-    scrut = tmp2;
+    singles = singleDescend_inst_63_65_62_55_tsni(board);
+    scrut = NofibPrelude.listLen(singles);
     scrut2 = scrut === 0;
     if (scrut2 === true) {
-      tmp3 = descAndNo_inst_63_65_62_56_tsni(board);
-      tmp4 = knights.quickSortIntChessSet(tmp3);
-      tmp5 = NofibPrelude.map_lz(NofibPrelude.snd, tmp4);
+      tmp1 = descAndNo_inst_63_65_62_56_tsni(board);
+      tmp2 = knights.quickSortIntChessSet(tmp1);
+      tmp3 = NofibPrelude.map_lz(NofibPrelude.snd, tmp2);
     } else {
       scrut1 = scrut === 1;
       if (scrut1 === true) {
@@ -3976,20 +3950,20 @@ descendents_inst_63_65_62_tsni = function descendents_inst_63_65_62_tsni(board) 
           param1 = singles.tail;
           h = param0;
           if (param1 instanceof NofibPrelude.Nil.class) {
-            lambda$this1 = runtime.safeCall(lambda17(h));
-            tmp6 = NofibPrelude.lazy(lambda$this1);
+            lambda$this1 = runtime.safeCall(lambda18(h));
+            tmp4 = NofibPrelude.lazy(lambda$this1);
           } else {
             throw globalThis.Error("unreachable")
           }
         } else {
           throw globalThis.Error("unreachable")
         }
-        tmp5 = tmp6;
+        tmp3 = tmp4;
       } else {
-        tmp5 = NofibPrelude.lazy(lambda19);
+        tmp3 = NofibPrelude.lazy(lambda19);
       }
     }
-    res = tmp5;
+    res = tmp3;
     return res
   }
 };
@@ -4011,7 +3985,7 @@ deadEnd_inst_63_65_62_54_35_32_tsni = function deadEnd_inst_63_65_62_54_35_32_ts
   return tmp1 === 0
 };
 possibleMoves_inst_63_65_62_54_35_32_33_tsni = function possibleMoves_inst_63_65_62_54_35_32_33_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -4054,8 +4028,7 @@ possibleMoves_inst_63_65_62_54_35_32_33_tsni = function possibleMoves_inst_63_65
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_63_65_62_54_35_32_33_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_63_65_62_54_35_32_33_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_63_65_62_54_35_32_33_45_tsni(board, tmp7);
   return res
 };
 singleDescend_inst_63_65_62_55_tsni = function singleDescend_inst_63_65_62_55_tsni(board) {
@@ -4075,7 +4048,7 @@ allDescend_inst_63_65_62_55_51_47_tsni = function allDescend_inst_63_65_62_55_51
   return map_inst_63_65_62_55_51_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_63_65_62_55_51_47_44_tsni = function possibleMoves_inst_63_65_62_55_51_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -4122,8 +4095,7 @@ possibleMoves_inst_63_65_62_55_51_47_44_tsni = function possibleMoves_inst_63_65
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_63_65_62_55_51_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_63_65_62_55_51_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_63_65_62_55_51_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_63_65_62_55_51_47_44_45_tsni = function lscomp$_inst_63_65_62_55_51_47_44_45_tsni(board, ls) {
@@ -4138,14 +4110,14 @@ lambda_inst_63_65_62_55_51_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_63_65_62_55_51_48_tsni = function lambda$_inst_63_65_62_55_51_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, tmp3, tmp4, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_63_65_62_55_51_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
   _deforest_Deforest_Arr_2_0 = tmp2;
   _deforest_Deforest_Arr_2_1 = x;
-  arr = (param1) => {
-    let first1, first0, y, x1, t1, scrut, tmp4;
+  tmp3 = (param1) => {
+    let first1, first0, y, x1, t1, scrut, tmp5;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y = first0;
@@ -4153,15 +4125,15 @@ lambda$_inst_63_65_62_55_51_48_tsni = function lambda$_inst_63_65_62_55_51_48_ts
     t1 = param1;
     scrut = y === 1;
     if (scrut === true) {
-      tmp4 = lscomp_inst_63_65_62_55_78_tsni(t1);
-      return NofibPrelude.Cons(x1, tmp4)
+      tmp5 = lscomp_inst_63_65_62_55_78_tsni(t1);
+      return NofibPrelude.Cons(x1, tmp5)
     } else {
       return lscomp_inst_63_65_62_55_78_tsni(t1)
     }
   };
-  tmp3 = lscomp_inst_63_65_62_55_51_48_tsni(t);
-  _deforest_LzCons_head = arr;
-  _deforest_LzCons_tail = tmp3;
+  tmp4 = lscomp_inst_63_65_62_55_51_48_tsni(t);
+  _deforest_LzCons_head = tmp3;
+  _deforest_LzCons_tail = tmp4;
   return () => {
     let param0, param1;
     param0 = _deforest_LzCons_head;
@@ -4170,7 +4142,7 @@ lambda$_inst_63_65_62_55_51_48_tsni = function lambda$_inst_63_65_62_55_51_48_ts
   }
 };
 possibleMoves_inst_63_65_62_55_51_48_37_tsni = function possibleMoves_inst_63_65_62_55_51_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -4213,8 +4185,7 @@ possibleMoves_inst_63_65_62_55_51_48_37_tsni = function possibleMoves_inst_63_65
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_63_65_62_55_51_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_63_65_62_55_51_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_63_65_62_55_51_48_37_45_tsni(board, tmp7);
   return res
 };
 map_inst_63_65_62_55_51_47_49_tsni = function map_inst_63_65_62_55_51_47_49_tsni(f, xs) {
@@ -4239,19 +4210,19 @@ lambda_inst_63_65_62_56_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_63_65_62_56_48_tsni = function lambda$_inst_63_65_62_56_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_63_65_62_56_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp_inst_63_65_62_56_48_tsni(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp_inst_63_65_62_56_48_tsni(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 possibleMoves_inst_63_65_62_56_48_37_tsni = function possibleMoves_inst_63_65_62_56_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -4294,8 +4265,7 @@ possibleMoves_inst_63_65_62_56_48_37_tsni = function possibleMoves_inst_63_65_62
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_63_65_62_56_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_63_65_62_56_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_63_65_62_56_48_37_45_tsni(board, tmp7);
   return res
 };
 allDescend_inst_63_65_62_56_47_tsni = function allDescend_inst_63_65_62_56_47_tsni(board) {
@@ -4305,7 +4275,7 @@ allDescend_inst_63_65_62_56_47_tsni = function allDescend_inst_63_65_62_56_47_ts
   return map_inst_63_65_62_56_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_63_65_62_56_47_44_tsni = function possibleMoves_inst_63_65_62_56_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -4352,8 +4322,7 @@ possibleMoves_inst_63_65_62_56_47_44_tsni = function possibleMoves_inst_63_65_62
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_63_65_62_56_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_63_65_62_56_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_63_65_62_56_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_63_65_62_56_47_44_45_tsni = function lscomp$_inst_63_65_62_56_47_44_45_tsni(board, ls) {
@@ -4363,7 +4332,7 @@ map_inst_63_65_62_56_47_49_tsni = function map_inst_63_65_62_56_47_49_tsni(f, xs
   return runtime.safeCall(xs(f))
 };
 depthSearch_inst_63_66_tsni = function depthSearch_inst_63_66_tsni(q, growFn, finFn) {
-  let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this;
   scrut1 = knights.emptyQueue_lz(q);
   if (scrut1 === true) {
     return NofibPrelude.lazy(lambda_inst_63_66_67_tsni)
@@ -4371,14 +4340,14 @@ depthSearch_inst_63_66_tsni = function depthSearch_inst_63_66_tsni(q, growFn, fi
     tmp = knights.inquireFront_lz(q);
     scrut = runtime.safeCall(finFn(tmp));
     if (scrut === true) {
-      tmp1 = runtime.safeCall(lambda_inst_63_66_tsni(q, growFn, finFn));
-      return NofibPrelude.lazy(tmp1)
+      lambda$this = runtime.safeCall(lambda_inst_63_66_tsni(q, growFn, finFn));
+      return NofibPrelude.lazy(lambda$this)
     } else {
-      tmp2 = knights.inquireFront_lz(q);
-      tmp3 = runtime.safeCall(growFn(tmp2));
-      tmp4 = knights.removeFront_lz(q);
-      tmp5 = knights.addAllFront_lz(tmp3, tmp4);
-      return depthSearch_inst_63_66_tsni(tmp5, growFn, finFn)
+      tmp1 = knights.inquireFront_lz(q);
+      tmp2 = runtime.safeCall(growFn(tmp1));
+      tmp3 = knights.removeFront_lz(q);
+      tmp4 = knights.addAllFront_lz(tmp2, tmp3);
+      return depthSearch_inst_63_66_tsni(tmp4, growFn, finFn)
     }
   }
 };
@@ -4441,7 +4410,7 @@ pp_inst_63_68_tsni = function pp_inst_63_68_tsni(xs) {
   return runtime.safeCall(xs())
 };
 showChessSet_inst_63_68_1_tsni = function showChessSet_inst_63_68_1_tsni(b) {
-  let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp, tmp1;
+  let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp;
   if (b instanceof knights.Board.class) {
     param0 = b.a;
     param1 = b.b;
@@ -4452,15 +4421,14 @@ showChessSet_inst_63_68_1_tsni = function showChessSet_inst_63_68_1_tsni(b) {
     f = param2;
     ts = param3;
     tmp = knights.assignMoveNo(ts, sze, n);
-    tmp1 = knights.quickSortIntInt(tmp);
-    sortedTrail = tmp1;
+    sortedTrail = knights.quickSortIntInt(tmp);
     return printBoard_inst_63_68_1_2_tsni(sze, 1, sortedTrail)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 printBoard_inst_63_68_1_2_tsni = function printBoard_inst_63_68_1_2_tsni(s, n, xs) {
-  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, arr, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, arr1, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, arr2, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, arr3, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, arr4, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, arr5, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, arr6, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, arr7, tmp80, tmp81, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
+  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
   if (xs instanceof NofibPrelude.Nil.class) {
     tmp = s * s;
     scrut8 = n > tmp;
@@ -4537,68 +4505,68 @@ printBoard_inst_63_68_1_2_tsni = function printBoard_inst_63_68_1_2_tsni(s, n, x
                 tmp27 = s * s;
                 tmp28 = spaces_inst_63_68_1_2_6_tsni(tmp27, 1);
                 tmp29 = n + 1;
-                arr = globalThis.Object.freeze([
+                tmp30 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp30 = NofibPrelude.Cons(arr, xs1);
-                tmp31 = printBoard_inst_63_68_1_2_tsni(s, tmp29, tmp30);
-                tmp32 = append_inst_63_68_1_2_23_tsni(tmp28, tmp31);
+                tmp31 = NofibPrelude.Cons(tmp30, xs1);
+                tmp32 = printBoard_inst_63_68_1_2_tsni(s, tmp29, tmp31);
+                tmp33 = append_inst_63_68_1_2_23_tsni(tmp28, tmp32);
                 _deforest_Cons_head4 = "*";
-                _deforest_Cons_tail4 = tmp32;
+                _deforest_Cons_tail4 = tmp33;
                 return (ys) => {
                   return match_xs_arm_Cons_inst_63_68_74_tsni(ys, _deforest_Cons_head4, _deforest_Cons_tail4)
                 }
               } else {
-                tmp33 = NofibPrelude.intMod(n, s);
-                scrut = tmp33 === 0;
+                tmp34 = NofibPrelude.intMod(n, s);
+                scrut = tmp34 === 0;
                 if (scrut === true) {
-                  tmp34 = NofibPrelude.nofibStringToList("*\n");
-                  tmp35 = n + 1;
-                  arr1 = globalThis.Object.freeze([
+                  tmp35 = NofibPrelude.nofibStringToList("*\n");
+                  tmp36 = n + 1;
+                  tmp37 = globalThis.Object.freeze([
                     i,
                     j
                   ]);
-                  tmp36 = NofibPrelude.Cons(arr1, xs1);
-                  tmp37 = printBoard_inst_63_68_1_2_tsni(s, tmp35, tmp36);
-                  return append_inst_63_68_1_2_19_tsni(tmp34, tmp37)
+                  tmp38 = NofibPrelude.Cons(tmp37, xs1);
+                  tmp39 = printBoard_inst_63_68_1_2_tsni(s, tmp36, tmp38);
+                  return append_inst_63_68_1_2_19_tsni(tmp35, tmp39)
                 } else {
                   throw globalThis.Error("printBoard non-empty list error")
                 }
               }
             }
           } else {
-            tmp38 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp38 != 0;
+            tmp40 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp40 != 0;
             if (scrut1 === true) {
-              tmp39 = s * s;
-              tmp40 = spaces_inst_63_68_1_2_7_tsni(tmp39, 1);
-              tmp41 = n + 1;
-              arr2 = globalThis.Object.freeze([
+              tmp41 = s * s;
+              tmp42 = spaces_inst_63_68_1_2_7_tsni(tmp41, 1);
+              tmp43 = n + 1;
+              tmp44 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp42 = NofibPrelude.Cons(arr2, xs1);
-              tmp43 = printBoard_inst_63_68_1_2_tsni(s, tmp41, tmp42);
-              tmp44 = append_inst_63_68_1_2_24_tsni(tmp40, tmp43);
+              tmp45 = NofibPrelude.Cons(tmp44, xs1);
+              tmp46 = printBoard_inst_63_68_1_2_tsni(s, tmp43, tmp45);
+              tmp47 = append_inst_63_68_1_2_24_tsni(tmp42, tmp46);
               _deforest_Cons_head3 = "*";
-              _deforest_Cons_tail3 = tmp44;
+              _deforest_Cons_tail3 = tmp47;
               return (ys) => {
                 return match_xs_arm_Cons_inst_63_68_74_tsni(ys, _deforest_Cons_head3, _deforest_Cons_tail3)
               }
             } else {
-              tmp45 = NofibPrelude.intMod(n, s);
-              scrut = tmp45 === 0;
+              tmp48 = NofibPrelude.intMod(n, s);
+              scrut = tmp48 === 0;
               if (scrut === true) {
-                tmp46 = NofibPrelude.nofibStringToList("*\n");
-                tmp47 = n + 1;
-                arr3 = globalThis.Object.freeze([
+                tmp49 = NofibPrelude.nofibStringToList("*\n");
+                tmp50 = n + 1;
+                tmp51 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp48 = NofibPrelude.Cons(arr3, xs1);
-                tmp49 = printBoard_inst_63_68_1_2_tsni(s, tmp47, tmp48);
-                return append_inst_63_68_1_2_17_tsni(tmp46, tmp49)
+                tmp52 = NofibPrelude.Cons(tmp51, xs1);
+                tmp53 = printBoard_inst_63_68_1_2_tsni(s, tmp50, tmp52);
+                return append_inst_63_68_1_2_17_tsni(tmp49, tmp53)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
@@ -4608,86 +4576,86 @@ printBoard_inst_63_68_1_2_tsni = function printBoard_inst_63_68_1_2_tsni(s, n, x
       } else {
         scrut2 = i === n;
         if (scrut2 === true) {
-          tmp50 = NofibPrelude.intMod(n, s);
-          scrut3 = tmp50 != 0;
+          tmp54 = NofibPrelude.intMod(n, s);
+          scrut3 = tmp54 != 0;
           if (scrut3 === true) {
-            tmp51 = NofibPrelude.stringOfInt(j);
-            tmp52 = NofibPrelude.nofibStringToList(tmp51);
-            tmp53 = s * s;
-            tmp54 = spaces_inst_63_68_1_2_8_tsni(tmp53, j);
-            tmp55 = n + 1;
-            tmp56 = printBoard_inst_63_68_1_2_tsni(s, tmp55, xs1);
-            tmp57 = append_inst_63_68_1_2_12_tsni(tmp54, tmp56);
-            return append_inst_63_68_1_2_13_tsni(tmp52, tmp57)
+            tmp55 = NofibPrelude.stringOfInt(j);
+            tmp56 = NofibPrelude.nofibStringToList(tmp55);
+            tmp57 = s * s;
+            tmp58 = spaces_inst_63_68_1_2_8_tsni(tmp57, j);
+            tmp59 = n + 1;
+            tmp60 = printBoard_inst_63_68_1_2_tsni(s, tmp59, xs1);
+            tmp61 = append_inst_63_68_1_2_12_tsni(tmp58, tmp60);
+            return append_inst_63_68_1_2_13_tsni(tmp56, tmp61)
           } else {
-            tmp58 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp58 != 0;
+            tmp62 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp62 != 0;
             if (scrut1 === true) {
-              tmp59 = s * s;
-              tmp60 = spaces_inst_63_68_1_2_9_tsni(tmp59, 1);
-              tmp61 = n + 1;
-              arr4 = globalThis.Object.freeze([
+              tmp63 = s * s;
+              tmp64 = spaces_inst_63_68_1_2_9_tsni(tmp63, 1);
+              tmp65 = n + 1;
+              tmp66 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp62 = NofibPrelude.Cons(arr4, xs1);
-              tmp63 = printBoard_inst_63_68_1_2_tsni(s, tmp61, tmp62);
-              tmp64 = append_inst_63_68_1_2_26_tsni(tmp60, tmp63);
+              tmp67 = NofibPrelude.Cons(tmp66, xs1);
+              tmp68 = printBoard_inst_63_68_1_2_tsni(s, tmp65, tmp67);
+              tmp69 = append_inst_63_68_1_2_26_tsni(tmp64, tmp68);
               _deforest_Cons_head2 = "*";
-              _deforest_Cons_tail2 = tmp64;
+              _deforest_Cons_tail2 = tmp69;
               return (ys) => {
                 return match_xs_arm_Cons_inst_63_68_74_tsni(ys, _deforest_Cons_head2, _deforest_Cons_tail2)
               }
             } else {
-              tmp65 = NofibPrelude.intMod(n, s);
-              scrut = tmp65 === 0;
+              tmp70 = NofibPrelude.intMod(n, s);
+              scrut = tmp70 === 0;
               if (scrut === true) {
-                tmp66 = NofibPrelude.nofibStringToList("*\n");
-                tmp67 = n + 1;
-                arr5 = globalThis.Object.freeze([
+                tmp71 = NofibPrelude.nofibStringToList("*\n");
+                tmp72 = n + 1;
+                tmp73 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp68 = NofibPrelude.Cons(arr5, xs1);
-                tmp69 = printBoard_inst_63_68_1_2_tsni(s, tmp67, tmp68);
-                return append_inst_63_68_1_2_11_tsni(tmp66, tmp69)
+                tmp74 = NofibPrelude.Cons(tmp73, xs1);
+                tmp75 = printBoard_inst_63_68_1_2_tsni(s, tmp72, tmp74);
+                return append_inst_63_68_1_2_11_tsni(tmp71, tmp75)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
             }
           }
         } else {
-          tmp70 = NofibPrelude.intMod(n, s);
-          scrut1 = tmp70 != 0;
+          tmp76 = NofibPrelude.intMod(n, s);
+          scrut1 = tmp76 != 0;
           if (scrut1 === true) {
-            tmp71 = s * s;
-            tmp72 = spaces_inst_63_68_1_2_10_tsni(tmp71, 1);
-            tmp73 = n + 1;
-            arr6 = globalThis.Object.freeze([
+            tmp77 = s * s;
+            tmp78 = spaces_inst_63_68_1_2_10_tsni(tmp77, 1);
+            tmp79 = n + 1;
+            tmp80 = globalThis.Object.freeze([
               i,
               j
             ]);
-            tmp74 = NofibPrelude.Cons(arr6, xs1);
-            tmp75 = printBoard_inst_63_68_1_2_tsni(s, tmp73, tmp74);
-            tmp76 = append_inst_63_68_1_2_25_tsni(tmp72, tmp75);
+            tmp81 = NofibPrelude.Cons(tmp80, xs1);
+            tmp82 = printBoard_inst_63_68_1_2_tsni(s, tmp79, tmp81);
+            tmp83 = append_inst_63_68_1_2_25_tsni(tmp78, tmp82);
             _deforest_Cons_head = "*";
-            _deforest_Cons_tail = tmp76;
+            _deforest_Cons_tail = tmp83;
             return (ys) => {
               return match_xs_arm_Cons_inst_63_68_74_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
             }
           } else {
-            tmp77 = NofibPrelude.intMod(n, s);
-            scrut = tmp77 === 0;
+            tmp84 = NofibPrelude.intMod(n, s);
+            scrut = tmp84 === 0;
             if (scrut === true) {
-              tmp78 = NofibPrelude.nofibStringToList("*\n");
-              tmp79 = n + 1;
-              arr7 = globalThis.Object.freeze([
+              tmp85 = NofibPrelude.nofibStringToList("*\n");
+              tmp86 = n + 1;
+              tmp87 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp80 = NofibPrelude.Cons(arr7, xs1);
-              tmp81 = printBoard_inst_63_68_1_2_tsni(s, tmp79, tmp80);
-              return append_inst_63_68_1_2_14_tsni(tmp78, tmp81)
+              tmp88 = NofibPrelude.Cons(tmp87, xs1);
+              tmp89 = printBoard_inst_63_68_1_2_tsni(s, tmp86, tmp88);
+              return append_inst_63_68_1_2_14_tsni(tmp85, tmp89)
             } else {
               throw globalThis.Error("printBoard non-empty list error")
             }
@@ -5180,7 +5148,7 @@ pp_inst_70_71_68_tsni = function pp_inst_70_71_68_tsni(xs) {
   return runtime.safeCall(xs())
 };
 showChessSet_inst_70_71_68_1_tsni = function showChessSet_inst_70_71_68_1_tsni(b) {
-  let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp, tmp1;
+  let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp;
   if (b instanceof knights.Board.class) {
     param0 = b.a;
     param1 = b.b;
@@ -5191,15 +5159,14 @@ showChessSet_inst_70_71_68_1_tsni = function showChessSet_inst_70_71_68_1_tsni(b
     f = param2;
     ts = param3;
     tmp = knights.assignMoveNo(ts, sze, n);
-    tmp1 = knights.quickSortIntInt(tmp);
-    sortedTrail = tmp1;
+    sortedTrail = knights.quickSortIntInt(tmp);
     return printBoard_inst_70_71_68_1_2_tsni(sze, 1, sortedTrail)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 printBoard_inst_70_71_68_1_2_tsni = function printBoard_inst_70_71_68_1_2_tsni(s, n, xs) {
-  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, arr, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, arr1, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, arr2, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, arr3, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, arr4, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, arr5, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, arr6, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, arr7, tmp80, tmp81, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
+  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
   if (xs instanceof NofibPrelude.Nil.class) {
     tmp = s * s;
     scrut8 = n > tmp;
@@ -5276,68 +5243,68 @@ printBoard_inst_70_71_68_1_2_tsni = function printBoard_inst_70_71_68_1_2_tsni(s
                 tmp27 = s * s;
                 tmp28 = spaces_inst_70_71_68_1_2_6_tsni(tmp27, 1);
                 tmp29 = n + 1;
-                arr = globalThis.Object.freeze([
+                tmp30 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp30 = NofibPrelude.Cons(arr, xs1);
-                tmp31 = printBoard_inst_70_71_68_1_2_tsni(s, tmp29, tmp30);
-                tmp32 = append_inst_70_71_68_1_2_23_tsni(tmp28, tmp31);
+                tmp31 = NofibPrelude.Cons(tmp30, xs1);
+                tmp32 = printBoard_inst_70_71_68_1_2_tsni(s, tmp29, tmp31);
+                tmp33 = append_inst_70_71_68_1_2_23_tsni(tmp28, tmp32);
                 _deforest_Cons_head3 = "*";
-                _deforest_Cons_tail3 = tmp32;
+                _deforest_Cons_tail3 = tmp33;
                 return (ys) => {
                   return match_xs_arm_Cons_inst_70_71_68_74_tsni(ys, _deforest_Cons_head3, _deforest_Cons_tail3)
                 }
               } else {
-                tmp33 = NofibPrelude.intMod(n, s);
-                scrut = tmp33 === 0;
+                tmp34 = NofibPrelude.intMod(n, s);
+                scrut = tmp34 === 0;
                 if (scrut === true) {
-                  tmp34 = NofibPrelude.nofibStringToList("*\n");
-                  tmp35 = n + 1;
-                  arr1 = globalThis.Object.freeze([
+                  tmp35 = NofibPrelude.nofibStringToList("*\n");
+                  tmp36 = n + 1;
+                  tmp37 = globalThis.Object.freeze([
                     i,
                     j
                   ]);
-                  tmp36 = NofibPrelude.Cons(arr1, xs1);
-                  tmp37 = printBoard_inst_70_71_68_1_2_tsni(s, tmp35, tmp36);
-                  return append_inst_70_71_68_1_2_19_tsni(tmp34, tmp37)
+                  tmp38 = NofibPrelude.Cons(tmp37, xs1);
+                  tmp39 = printBoard_inst_70_71_68_1_2_tsni(s, tmp36, tmp38);
+                  return append_inst_70_71_68_1_2_19_tsni(tmp35, tmp39)
                 } else {
                   throw globalThis.Error("printBoard non-empty list error")
                 }
               }
             }
           } else {
-            tmp38 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp38 != 0;
+            tmp40 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp40 != 0;
             if (scrut1 === true) {
-              tmp39 = s * s;
-              tmp40 = spaces_inst_70_71_68_1_2_7_tsni(tmp39, 1);
-              tmp41 = n + 1;
-              arr2 = globalThis.Object.freeze([
+              tmp41 = s * s;
+              tmp42 = spaces_inst_70_71_68_1_2_7_tsni(tmp41, 1);
+              tmp43 = n + 1;
+              tmp44 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp42 = NofibPrelude.Cons(arr2, xs1);
-              tmp43 = printBoard_inst_70_71_68_1_2_tsni(s, tmp41, tmp42);
-              tmp44 = append_inst_70_71_68_1_2_24_tsni(tmp40, tmp43);
+              tmp45 = NofibPrelude.Cons(tmp44, xs1);
+              tmp46 = printBoard_inst_70_71_68_1_2_tsni(s, tmp43, tmp45);
+              tmp47 = append_inst_70_71_68_1_2_24_tsni(tmp42, tmp46);
               _deforest_Cons_head2 = "*";
-              _deforest_Cons_tail2 = tmp44;
+              _deforest_Cons_tail2 = tmp47;
               return (ys) => {
                 return match_xs_arm_Cons_inst_70_71_68_74_tsni(ys, _deforest_Cons_head2, _deforest_Cons_tail2)
               }
             } else {
-              tmp45 = NofibPrelude.intMod(n, s);
-              scrut = tmp45 === 0;
+              tmp48 = NofibPrelude.intMod(n, s);
+              scrut = tmp48 === 0;
               if (scrut === true) {
-                tmp46 = NofibPrelude.nofibStringToList("*\n");
-                tmp47 = n + 1;
-                arr3 = globalThis.Object.freeze([
+                tmp49 = NofibPrelude.nofibStringToList("*\n");
+                tmp50 = n + 1;
+                tmp51 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp48 = NofibPrelude.Cons(arr3, xs1);
-                tmp49 = printBoard_inst_70_71_68_1_2_tsni(s, tmp47, tmp48);
-                return append_inst_70_71_68_1_2_17_tsni(tmp46, tmp49)
+                tmp52 = NofibPrelude.Cons(tmp51, xs1);
+                tmp53 = printBoard_inst_70_71_68_1_2_tsni(s, tmp50, tmp52);
+                return append_inst_70_71_68_1_2_17_tsni(tmp49, tmp53)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
@@ -5347,86 +5314,86 @@ printBoard_inst_70_71_68_1_2_tsni = function printBoard_inst_70_71_68_1_2_tsni(s
       } else {
         scrut2 = i === n;
         if (scrut2 === true) {
-          tmp50 = NofibPrelude.intMod(n, s);
-          scrut3 = tmp50 != 0;
+          tmp54 = NofibPrelude.intMod(n, s);
+          scrut3 = tmp54 != 0;
           if (scrut3 === true) {
-            tmp51 = NofibPrelude.stringOfInt(j);
-            tmp52 = NofibPrelude.nofibStringToList(tmp51);
-            tmp53 = s * s;
-            tmp54 = spaces_inst_70_71_68_1_2_8_tsni(tmp53, j);
-            tmp55 = n + 1;
-            tmp56 = printBoard_inst_70_71_68_1_2_tsni(s, tmp55, xs1);
-            tmp57 = append_inst_70_71_68_1_2_12_tsni(tmp54, tmp56);
-            return append_inst_70_71_68_1_2_13_tsni(tmp52, tmp57)
+            tmp55 = NofibPrelude.stringOfInt(j);
+            tmp56 = NofibPrelude.nofibStringToList(tmp55);
+            tmp57 = s * s;
+            tmp58 = spaces_inst_70_71_68_1_2_8_tsni(tmp57, j);
+            tmp59 = n + 1;
+            tmp60 = printBoard_inst_70_71_68_1_2_tsni(s, tmp59, xs1);
+            tmp61 = append_inst_70_71_68_1_2_12_tsni(tmp58, tmp60);
+            return append_inst_70_71_68_1_2_13_tsni(tmp56, tmp61)
           } else {
-            tmp58 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp58 != 0;
+            tmp62 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp62 != 0;
             if (scrut1 === true) {
-              tmp59 = s * s;
-              tmp60 = spaces_inst_70_71_68_1_2_9_tsni(tmp59, 1);
-              tmp61 = n + 1;
-              arr4 = globalThis.Object.freeze([
+              tmp63 = s * s;
+              tmp64 = spaces_inst_70_71_68_1_2_9_tsni(tmp63, 1);
+              tmp65 = n + 1;
+              tmp66 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp62 = NofibPrelude.Cons(arr4, xs1);
-              tmp63 = printBoard_inst_70_71_68_1_2_tsni(s, tmp61, tmp62);
-              tmp64 = append_inst_70_71_68_1_2_26_tsni(tmp60, tmp63);
+              tmp67 = NofibPrelude.Cons(tmp66, xs1);
+              tmp68 = printBoard_inst_70_71_68_1_2_tsni(s, tmp65, tmp67);
+              tmp69 = append_inst_70_71_68_1_2_26_tsni(tmp64, tmp68);
               _deforest_Cons_head = "*";
-              _deforest_Cons_tail = tmp64;
+              _deforest_Cons_tail = tmp69;
               return (ys) => {
                 return match_xs_arm_Cons_inst_70_71_68_74_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
               }
             } else {
-              tmp65 = NofibPrelude.intMod(n, s);
-              scrut = tmp65 === 0;
+              tmp70 = NofibPrelude.intMod(n, s);
+              scrut = tmp70 === 0;
               if (scrut === true) {
-                tmp66 = NofibPrelude.nofibStringToList("*\n");
-                tmp67 = n + 1;
-                arr5 = globalThis.Object.freeze([
+                tmp71 = NofibPrelude.nofibStringToList("*\n");
+                tmp72 = n + 1;
+                tmp73 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp68 = NofibPrelude.Cons(arr5, xs1);
-                tmp69 = printBoard_inst_70_71_68_1_2_tsni(s, tmp67, tmp68);
-                return append_inst_70_71_68_1_2_11_tsni(tmp66, tmp69)
+                tmp74 = NofibPrelude.Cons(tmp73, xs1);
+                tmp75 = printBoard_inst_70_71_68_1_2_tsni(s, tmp72, tmp74);
+                return append_inst_70_71_68_1_2_11_tsni(tmp71, tmp75)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
             }
           }
         } else {
-          tmp70 = NofibPrelude.intMod(n, s);
-          scrut1 = tmp70 != 0;
+          tmp76 = NofibPrelude.intMod(n, s);
+          scrut1 = tmp76 != 0;
           if (scrut1 === true) {
-            tmp71 = s * s;
-            tmp72 = spaces_inst_70_71_68_1_2_10_tsni(tmp71, 1);
-            tmp73 = n + 1;
-            arr6 = globalThis.Object.freeze([
+            tmp77 = s * s;
+            tmp78 = spaces_inst_70_71_68_1_2_10_tsni(tmp77, 1);
+            tmp79 = n + 1;
+            tmp80 = globalThis.Object.freeze([
               i,
               j
             ]);
-            tmp74 = NofibPrelude.Cons(arr6, xs1);
-            tmp75 = printBoard_inst_70_71_68_1_2_tsni(s, tmp73, tmp74);
-            tmp76 = append_inst_70_71_68_1_2_25_tsni(tmp72, tmp75);
+            tmp81 = NofibPrelude.Cons(tmp80, xs1);
+            tmp82 = printBoard_inst_70_71_68_1_2_tsni(s, tmp79, tmp81);
+            tmp83 = append_inst_70_71_68_1_2_25_tsni(tmp78, tmp82);
             _deforest_Cons_head1 = "*";
-            _deforest_Cons_tail1 = tmp76;
+            _deforest_Cons_tail1 = tmp83;
             return (ys) => {
               return match_xs_arm_Cons_inst_70_71_68_74_tsni(ys, _deforest_Cons_head1, _deforest_Cons_tail1)
             }
           } else {
-            tmp77 = NofibPrelude.intMod(n, s);
-            scrut = tmp77 === 0;
+            tmp84 = NofibPrelude.intMod(n, s);
+            scrut = tmp84 === 0;
             if (scrut === true) {
-              tmp78 = NofibPrelude.nofibStringToList("*\n");
-              tmp79 = n + 1;
-              arr7 = globalThis.Object.freeze([
+              tmp85 = NofibPrelude.nofibStringToList("*\n");
+              tmp86 = n + 1;
+              tmp87 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp80 = NofibPrelude.Cons(arr7, xs1);
-              tmp81 = printBoard_inst_70_71_68_1_2_tsni(s, tmp79, tmp80);
-              return append_inst_70_71_68_1_2_14_tsni(tmp78, tmp81)
+              tmp88 = NofibPrelude.Cons(tmp87, xs1);
+              tmp89 = printBoard_inst_70_71_68_1_2_tsni(s, tmp86, tmp88);
+              return append_inst_70_71_68_1_2_14_tsni(tmp85, tmp89)
             } else {
               throw globalThis.Error("printBoard non-empty list error")
             }
@@ -5890,7 +5857,7 @@ take_lz_inst_70_71_69_tsni = function take_lz_inst_70_71_69_tsni(n, ls) {
   }
 };
 depthSearch_inst_70_71_66_tsni = function depthSearch_inst_70_71_66_tsni(q, growFn, finFn) {
-  let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this;
   scrut1 = knights.emptyQueue_lz(q);
   if (scrut1 === true) {
     return NofibPrelude.lazy(lambda_inst_70_71_66_67_tsni)
@@ -5898,14 +5865,14 @@ depthSearch_inst_70_71_66_tsni = function depthSearch_inst_70_71_66_tsni(q, grow
     tmp = knights.inquireFront_lz(q);
     scrut = runtime.safeCall(finFn(tmp));
     if (scrut === true) {
-      tmp1 = runtime.safeCall(lambda_inst_70_71_66_tsni(q, growFn, finFn));
-      return NofibPrelude.lazy(tmp1)
+      lambda$this = runtime.safeCall(lambda_inst_70_71_66_tsni(q, growFn, finFn));
+      return NofibPrelude.lazy(lambda$this)
     } else {
-      tmp2 = knights.inquireFront_lz(q);
-      tmp3 = runtime.safeCall(growFn(tmp2));
-      tmp4 = knights.removeFront_lz(q);
-      tmp5 = knights.addAllFront_lz(tmp3, tmp4);
-      return depthSearch_inst_70_71_66_tsni(tmp5, growFn, finFn)
+      tmp1 = knights.inquireFront_lz(q);
+      tmp2 = runtime.safeCall(growFn(tmp1));
+      tmp3 = knights.removeFront_lz(q);
+      tmp4 = knights.addAllFront_lz(tmp2, tmp3);
+      return depthSearch_inst_70_71_66_tsni(tmp4, growFn, finFn)
     }
   }
 };
@@ -5980,22 +5947,20 @@ grow_inst_70_71_65_tsni = function grow_inst_70_71_65_tsni(x_y) {
   }
 };
 descendents_inst_70_71_65_62_tsni = function descendents_inst_70_71_65_62_tsni(board) {
-  let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1;
+  let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1;
   tmp = knights.canJumpFirst(board);
   lambda$this = runtime.safeCall(lambda_inst_70_71_65_62_54_tsni(board));
   scrut3 = runtime.short_and(tmp, lambda$this);
   if (scrut3 === true) {
     return NofibPrelude.lazy(lambda16)
   } else {
-    tmp1 = singleDescend_inst_70_71_65_62_55_tsni(board);
-    singles = tmp1;
-    tmp2 = NofibPrelude.listLen(singles);
-    scrut = tmp2;
+    singles = singleDescend_inst_70_71_65_62_55_tsni(board);
+    scrut = NofibPrelude.listLen(singles);
     scrut2 = scrut === 0;
     if (scrut2 === true) {
-      tmp3 = descAndNo_inst_70_71_65_62_56_tsni(board);
-      tmp4 = knights.quickSortIntChessSet(tmp3);
-      tmp5 = NofibPrelude.map_lz(NofibPrelude.snd, tmp4);
+      tmp1 = descAndNo_inst_70_71_65_62_56_tsni(board);
+      tmp2 = knights.quickSortIntChessSet(tmp1);
+      tmp3 = NofibPrelude.map_lz(NofibPrelude.snd, tmp2);
     } else {
       scrut1 = scrut === 1;
       if (scrut1 === true) {
@@ -6004,20 +5969,20 @@ descendents_inst_70_71_65_62_tsni = function descendents_inst_70_71_65_62_tsni(b
           param1 = singles.tail;
           h = param0;
           if (param1 instanceof NofibPrelude.Nil.class) {
-            lambda$this1 = runtime.safeCall(lambda17(h));
-            tmp6 = NofibPrelude.lazy(lambda$this1);
+            lambda$this1 = runtime.safeCall(lambda18(h));
+            tmp4 = NofibPrelude.lazy(lambda$this1);
           } else {
             throw globalThis.Error("unreachable")
           }
         } else {
           throw globalThis.Error("unreachable")
         }
-        tmp5 = tmp6;
+        tmp3 = tmp4;
       } else {
-        tmp5 = NofibPrelude.lazy(lambda19);
+        tmp3 = NofibPrelude.lazy(lambda19);
       }
     }
-    res = tmp5;
+    res = tmp3;
     return res
   }
 };
@@ -6033,7 +5998,7 @@ allDescend_inst_70_71_65_62_56_47_tsni = function allDescend_inst_70_71_65_62_56
   return map_inst_70_71_65_62_56_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_70_71_65_62_56_47_44_tsni = function possibleMoves_inst_70_71_65_62_56_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -6080,8 +6045,7 @@ possibleMoves_inst_70_71_65_62_56_47_44_tsni = function possibleMoves_inst_70_71
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_70_71_65_62_56_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_70_71_65_62_56_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_70_71_65_62_56_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_70_71_65_62_56_47_44_45_tsni = function lscomp$_inst_70_71_65_62_56_47_44_45_tsni(board, ls) {
@@ -6096,19 +6060,19 @@ lambda_inst_70_71_65_62_56_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_70_71_65_62_56_48_tsni = function lambda$_inst_70_71_65_62_56_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_70_71_65_62_56_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp_inst_70_71_65_62_56_48_tsni(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp_inst_70_71_65_62_56_48_tsni(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 possibleMoves_inst_70_71_65_62_56_48_37_tsni = function possibleMoves_inst_70_71_65_62_56_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -6151,8 +6115,7 @@ possibleMoves_inst_70_71_65_62_56_48_37_tsni = function possibleMoves_inst_70_71
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_70_71_65_62_56_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_70_71_65_62_56_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_70_71_65_62_56_48_37_45_tsni(board, tmp7);
   return res
 };
 map_inst_70_71_65_62_56_47_49_tsni = function map_inst_70_71_65_62_56_47_49_tsni(f, xs) {
@@ -6177,14 +6140,14 @@ lambda_inst_70_71_65_62_55_51_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_70_71_65_62_55_51_48_tsni = function lambda$_inst_70_71_65_62_55_51_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, tmp3, tmp4, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_70_71_65_62_55_51_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
   _deforest_Deforest_Arr_2_0 = tmp2;
   _deforest_Deforest_Arr_2_1 = x;
-  arr = (param1) => {
-    let first1, first0, y, x1, t1, scrut, tmp4;
+  tmp3 = (param1) => {
+    let first1, first0, y, x1, t1, scrut, tmp5;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y = first0;
@@ -6192,15 +6155,15 @@ lambda$_inst_70_71_65_62_55_51_48_tsni = function lambda$_inst_70_71_65_62_55_51
     t1 = param1;
     scrut = y === 1;
     if (scrut === true) {
-      tmp4 = lscomp_inst_70_71_65_62_55_78_tsni(t1);
-      return NofibPrelude.Cons(x1, tmp4)
+      tmp5 = lscomp_inst_70_71_65_62_55_78_tsni(t1);
+      return NofibPrelude.Cons(x1, tmp5)
     } else {
       return lscomp_inst_70_71_65_62_55_78_tsni(t1)
     }
   };
-  tmp3 = lscomp_inst_70_71_65_62_55_51_48_tsni(t);
-  _deforest_LzCons_head = arr;
-  _deforest_LzCons_tail = tmp3;
+  tmp4 = lscomp_inst_70_71_65_62_55_51_48_tsni(t);
+  _deforest_LzCons_head = tmp3;
+  _deforest_LzCons_tail = tmp4;
   return () => {
     let param0, param1;
     param0 = _deforest_LzCons_head;
@@ -6209,7 +6172,7 @@ lambda$_inst_70_71_65_62_55_51_48_tsni = function lambda$_inst_70_71_65_62_55_51
   }
 };
 possibleMoves_inst_70_71_65_62_55_51_48_37_tsni = function possibleMoves_inst_70_71_65_62_55_51_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -6252,8 +6215,7 @@ possibleMoves_inst_70_71_65_62_55_51_48_37_tsni = function possibleMoves_inst_70
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_70_71_65_62_55_51_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_70_71_65_62_55_51_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_70_71_65_62_55_51_48_37_45_tsni(board, tmp7);
   return res
 };
 allDescend_inst_70_71_65_62_55_51_47_tsni = function allDescend_inst_70_71_65_62_55_51_47_tsni(board) {
@@ -6263,7 +6225,7 @@ allDescend_inst_70_71_65_62_55_51_47_tsni = function allDescend_inst_70_71_65_62
   return map_inst_70_71_65_62_55_51_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_70_71_65_62_55_51_47_44_tsni = function possibleMoves_inst_70_71_65_62_55_51_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -6310,8 +6272,7 @@ possibleMoves_inst_70_71_65_62_55_51_47_44_tsni = function possibleMoves_inst_70
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_70_71_65_62_55_51_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_70_71_65_62_55_51_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_70_71_65_62_55_51_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_70_71_65_62_55_51_47_44_45_tsni = function lscomp$_inst_70_71_65_62_55_51_47_44_45_tsni(board, ls) {
@@ -6343,7 +6304,7 @@ deadEnd_inst_70_71_65_62_54_35_32_tsni = function deadEnd_inst_70_71_65_62_54_35
   return tmp1 === 0
 };
 possibleMoves_inst_70_71_65_62_54_35_32_33_tsni = function possibleMoves_inst_70_71_65_62_54_35_32_33_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -6386,8 +6347,7 @@ possibleMoves_inst_70_71_65_62_54_35_32_33_tsni = function possibleMoves_inst_70
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_70_71_65_62_54_35_32_33_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_70_71_65_62_54_35_32_33_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_70_71_65_62_54_35_32_33_45_tsni(board, tmp7);
   return res
 };
 root_inst_70_71_64_tsni = function root_inst_70_71_64_tsni(sze) {
@@ -6416,13 +6376,13 @@ lambda_inst_70_71_64_59_tsni = (undefined, function (sze, h1, t1, h2, t2) {
   }
 });
 lambda$_inst_70_71_64_59_tsni = function lambda$_inst_70_71_64_59_tsni(sze, h1, t1, h2, t2) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     h1,
     h2
   ]);
-  tmp = lscomp2$_inst_70_71_64_59_tsni(sze, h1, t1, t2);
-  return NofibPrelude.LzCons(arr, tmp)
+  tmp1 = lscomp2$_inst_70_71_64_59_tsni(sze, h1, t1, t2);
+  return NofibPrelude.LzCons(tmp, tmp1)
 };
 enumFromTo_inst_70_71_64_59_28_tsni = function enumFromTo_inst_70_71_64_59_28_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -6433,13 +6393,13 @@ enumFromTo_inst_70_71_64_59_28_tsni = function enumFromTo_inst_70_71_64_59_28_ts
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (sze, h1, t1) => {
-      let param0, param1, h2, t2, tmp2;
+      let param0, param1, h2, t2, lambda$this;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       h2 = param0;
       t2 = param1;
-      tmp2 = runtime.safeCall(lambda_inst_70_71_64_59_tsni(sze, h1, t1, h2, t2));
-      return NofibPrelude.lazy(tmp2)
+      lambda$this = runtime.safeCall(lambda_inst_70_71_64_59_tsni(sze, h1, t1, h2, t2));
+      return NofibPrelude.lazy(lambda$this)
     }
   } else {
     return (sze, h1, t1) => {
@@ -6532,13 +6492,13 @@ lambda_inst_72_73_71_64_59_tsni = (undefined, function (sze, h1, t1, h2, t2) {
   }
 });
 lambda$_inst_72_73_71_64_59_tsni = function lambda$_inst_72_73_71_64_59_tsni(sze, h1, t1, h2, t2) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     h1,
     h2
   ]);
-  tmp = lscomp2$_inst_72_73_71_64_59_tsni(sze, h1, t1, t2);
-  return NofibPrelude.LzCons(arr, tmp)
+  tmp1 = lscomp2$_inst_72_73_71_64_59_tsni(sze, h1, t1, t2);
+  return NofibPrelude.LzCons(tmp, tmp1)
 };
 enumFromTo_inst_72_73_71_64_59_28_tsni = function enumFromTo_inst_72_73_71_64_59_28_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -6549,13 +6509,13 @@ enumFromTo_inst_72_73_71_64_59_28_tsni = function enumFromTo_inst_72_73_71_64_59
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (sze, h1, t1) => {
-      let param0, param1, h2, t2, tmp2;
+      let param0, param1, h2, t2, lambda$this;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       h2 = param0;
       t2 = param1;
-      tmp2 = runtime.safeCall(lambda_inst_72_73_71_64_59_tsni(sze, h1, t1, h2, t2));
-      return NofibPrelude.lazy(tmp2)
+      lambda$this = runtime.safeCall(lambda_inst_72_73_71_64_59_tsni(sze, h1, t1, h2, t2));
+      return NofibPrelude.lazy(lambda$this)
     }
   } else {
     return (sze, h1, t1) => {
@@ -6602,22 +6562,20 @@ grow_inst_72_73_71_65_tsni = function grow_inst_72_73_71_65_tsni(x_y) {
   }
 };
 descendents_inst_72_73_71_65_62_tsni = function descendents_inst_72_73_71_65_62_tsni(board) {
-  let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1;
+  let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1;
   tmp = knights.canJumpFirst(board);
   lambda$this = runtime.safeCall(lambda_inst_72_73_71_65_62_54_tsni(board));
   scrut3 = runtime.short_and(tmp, lambda$this);
   if (scrut3 === true) {
     return NofibPrelude.lazy(lambda16)
   } else {
-    tmp1 = singleDescend_inst_72_73_71_65_62_55_tsni(board);
-    singles = tmp1;
-    tmp2 = NofibPrelude.listLen(singles);
-    scrut = tmp2;
+    singles = singleDescend_inst_72_73_71_65_62_55_tsni(board);
+    scrut = NofibPrelude.listLen(singles);
     scrut2 = scrut === 0;
     if (scrut2 === true) {
-      tmp3 = descAndNo_inst_72_73_71_65_62_56_tsni(board);
-      tmp4 = knights.quickSortIntChessSet(tmp3);
-      tmp5 = NofibPrelude.map_lz(NofibPrelude.snd, tmp4);
+      tmp1 = descAndNo_inst_72_73_71_65_62_56_tsni(board);
+      tmp2 = knights.quickSortIntChessSet(tmp1);
+      tmp3 = NofibPrelude.map_lz(NofibPrelude.snd, tmp2);
     } else {
       scrut1 = scrut === 1;
       if (scrut1 === true) {
@@ -6626,20 +6584,20 @@ descendents_inst_72_73_71_65_62_tsni = function descendents_inst_72_73_71_65_62_
           param1 = singles.tail;
           h = param0;
           if (param1 instanceof NofibPrelude.Nil.class) {
-            lambda$this1 = runtime.safeCall(lambda17(h));
-            tmp6 = NofibPrelude.lazy(lambda$this1);
+            lambda$this1 = runtime.safeCall(lambda18(h));
+            tmp4 = NofibPrelude.lazy(lambda$this1);
           } else {
             throw globalThis.Error("unreachable")
           }
         } else {
           throw globalThis.Error("unreachable")
         }
-        tmp5 = tmp6;
+        tmp3 = tmp4;
       } else {
-        tmp5 = NofibPrelude.lazy(lambda19);
+        tmp3 = NofibPrelude.lazy(lambda19);
       }
     }
-    res = tmp5;
+    res = tmp3;
     return res
   }
 };
@@ -6661,7 +6619,7 @@ deadEnd_inst_72_73_71_65_62_54_35_32_tsni = function deadEnd_inst_72_73_71_65_62
   return tmp1 === 0
 };
 possibleMoves_inst_72_73_71_65_62_54_35_32_33_tsni = function possibleMoves_inst_72_73_71_65_62_54_35_32_33_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -6704,8 +6662,7 @@ possibleMoves_inst_72_73_71_65_62_54_35_32_33_tsni = function possibleMoves_inst
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_72_73_71_65_62_54_35_32_33_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_72_73_71_65_62_54_35_32_33_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_72_73_71_65_62_54_35_32_33_45_tsni(board, tmp7);
   return res
 };
 singleDescend_inst_72_73_71_65_62_55_tsni = function singleDescend_inst_72_73_71_65_62_55_tsni(board) {
@@ -6725,7 +6682,7 @@ allDescend_inst_72_73_71_65_62_55_51_47_tsni = function allDescend_inst_72_73_71
   return map_inst_72_73_71_65_62_55_51_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_72_73_71_65_62_55_51_47_44_tsni = function possibleMoves_inst_72_73_71_65_62_55_51_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -6772,8 +6729,7 @@ possibleMoves_inst_72_73_71_65_62_55_51_47_44_tsni = function possibleMoves_inst
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_72_73_71_65_62_55_51_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_72_73_71_65_62_55_51_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_72_73_71_65_62_55_51_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_72_73_71_65_62_55_51_47_44_45_tsni = function lscomp$_inst_72_73_71_65_62_55_51_47_44_45_tsni(board, ls) {
@@ -6788,14 +6744,14 @@ lambda_inst_72_73_71_65_62_55_51_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_72_73_71_65_62_55_51_48_tsni = function lambda$_inst_72_73_71_65_62_55_51_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, tmp3, tmp4, _deforest_LzCons_head, _deforest_LzCons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_72_73_71_65_62_55_51_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
   _deforest_Deforest_Arr_2_0 = tmp2;
   _deforest_Deforest_Arr_2_1 = x;
-  arr = (param1) => {
-    let first1, first0, y, x1, t1, scrut, tmp4;
+  tmp3 = (param1) => {
+    let first1, first0, y, x1, t1, scrut, tmp5;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     y = first0;
@@ -6803,15 +6759,15 @@ lambda$_inst_72_73_71_65_62_55_51_48_tsni = function lambda$_inst_72_73_71_65_62
     t1 = param1;
     scrut = y === 1;
     if (scrut === true) {
-      tmp4 = lscomp_inst_72_73_71_65_62_55_78_tsni(t1);
-      return NofibPrelude.Cons(x1, tmp4)
+      tmp5 = lscomp_inst_72_73_71_65_62_55_78_tsni(t1);
+      return NofibPrelude.Cons(x1, tmp5)
     } else {
       return lscomp_inst_72_73_71_65_62_55_78_tsni(t1)
     }
   };
-  tmp3 = lscomp_inst_72_73_71_65_62_55_51_48_tsni(t);
-  _deforest_LzCons_head = arr;
-  _deforest_LzCons_tail = tmp3;
+  tmp4 = lscomp_inst_72_73_71_65_62_55_51_48_tsni(t);
+  _deforest_LzCons_head = tmp3;
+  _deforest_LzCons_tail = tmp4;
   return () => {
     let param0, param1;
     param0 = _deforest_LzCons_head;
@@ -6820,7 +6776,7 @@ lambda$_inst_72_73_71_65_62_55_51_48_tsni = function lambda$_inst_72_73_71_65_62
   }
 };
 possibleMoves_inst_72_73_71_65_62_55_51_48_37_tsni = function possibleMoves_inst_72_73_71_65_62_55_51_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -6863,8 +6819,7 @@ possibleMoves_inst_72_73_71_65_62_55_51_48_37_tsni = function possibleMoves_inst
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_72_73_71_65_62_55_51_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_72_73_71_65_62_55_51_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_72_73_71_65_62_55_51_48_37_45_tsni(board, tmp7);
   return res
 };
 map_inst_72_73_71_65_62_55_51_47_49_tsni = function map_inst_72_73_71_65_62_55_51_47_49_tsni(f, xs) {
@@ -6889,19 +6844,19 @@ lambda_inst_72_73_71_65_62_56_48_tsni = (undefined, function (x, t) {
   }
 });
 lambda$_inst_72_73_71_65_62_56_48_tsni = function lambda$_inst_72_73_71_65_62_56_48_tsni(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_72_73_71_65_62_56_48_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp_inst_72_73_71_65_62_56_48_tsni(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp_inst_72_73_71_65_62_56_48_tsni(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 possibleMoves_inst_72_73_71_65_62_56_48_37_tsni = function possibleMoves_inst_72_73_71_65_62_56_48_37_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return NofibPrelude.Nil
@@ -6944,8 +6899,7 @@ possibleMoves_inst_72_73_71_65_62_56_48_37_tsni = function possibleMoves_inst_72
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_72_73_71_65_62_56_48_37_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_72_73_71_65_62_56_48_37_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_72_73_71_65_62_56_48_37_45_tsni(board, tmp7);
   return res
 };
 allDescend_inst_72_73_71_65_62_56_47_tsni = function allDescend_inst_72_73_71_65_62_56_47_tsni(board) {
@@ -6955,7 +6909,7 @@ allDescend_inst_72_73_71_65_62_56_47_tsni = function allDescend_inst_72_73_71_65
   return map_inst_72_73_71_65_62_56_47_49_tsni(lambda$this, tmp)
 };
 possibleMoves_inst_72_73_71_65_62_56_47_44_tsni = function possibleMoves_inst_72_73_71_65_62_56_47_44_tsni(board) {
-  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+  let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
   _deforest_Cons_head7 = knights.RD;
   _deforest_Cons_tail7 = (board1) => {
     return (f) => {
@@ -7002,8 +6956,7 @@ possibleMoves_inst_72_73_71_65_62_56_47_44_tsni = function possibleMoves_inst_72
   tmp7 = (board1) => {
     return match_ls_arm_Cons_inst_72_73_71_65_62_56_47_44_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp8 = lscomp$_inst_72_73_71_65_62_56_47_44_45_tsni(board, tmp7);
-  res = tmp8;
+  res = lscomp$_inst_72_73_71_65_62_56_47_44_45_tsni(board, tmp7);
   return res
 };
 lscomp$_inst_72_73_71_65_62_56_47_44_45_tsni = function lscomp$_inst_72_73_71_65_62_56_47_44_45_tsni(board, ls) {
@@ -7013,7 +6966,7 @@ map_inst_72_73_71_65_62_56_47_49_tsni = function map_inst_72_73_71_65_62_56_47_4
   return runtime.safeCall(xs(f))
 };
 depthSearch_inst_72_73_71_66_tsni = function depthSearch_inst_72_73_71_66_tsni(q, growFn, finFn) {
-  let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this;
   scrut1 = knights.emptyQueue_lz(q);
   if (scrut1 === true) {
     return NofibPrelude.lazy(lambda_inst_72_73_71_66_67_tsni)
@@ -7021,14 +6974,14 @@ depthSearch_inst_72_73_71_66_tsni = function depthSearch_inst_72_73_71_66_tsni(q
     tmp = knights.inquireFront_lz(q);
     scrut = runtime.safeCall(finFn(tmp));
     if (scrut === true) {
-      tmp1 = runtime.safeCall(lambda_inst_72_73_71_66_tsni(q, growFn, finFn));
-      return NofibPrelude.lazy(tmp1)
+      lambda$this = runtime.safeCall(lambda_inst_72_73_71_66_tsni(q, growFn, finFn));
+      return NofibPrelude.lazy(lambda$this)
     } else {
-      tmp2 = knights.inquireFront_lz(q);
-      tmp3 = runtime.safeCall(growFn(tmp2));
-      tmp4 = knights.removeFront_lz(q);
-      tmp5 = knights.addAllFront_lz(tmp3, tmp4);
-      return depthSearch_inst_72_73_71_66_tsni(tmp5, growFn, finFn)
+      tmp1 = knights.inquireFront_lz(q);
+      tmp2 = runtime.safeCall(growFn(tmp1));
+      tmp3 = knights.removeFront_lz(q);
+      tmp4 = knights.addAllFront_lz(tmp2, tmp3);
+      return depthSearch_inst_72_73_71_66_tsni(tmp4, growFn, finFn)
     }
   }
 };
@@ -7091,7 +7044,7 @@ pp_inst_72_73_71_68_tsni = function pp_inst_72_73_71_68_tsni(xs) {
   return runtime.safeCall(xs())
 };
 showChessSet_inst_72_73_71_68_1_tsni = function showChessSet_inst_72_73_71_68_1_tsni(b) {
-  let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp, tmp1;
+  let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp;
   if (b instanceof knights.Board.class) {
     param0 = b.a;
     param1 = b.b;
@@ -7102,15 +7055,14 @@ showChessSet_inst_72_73_71_68_1_tsni = function showChessSet_inst_72_73_71_68_1_
     f = param2;
     ts = param3;
     tmp = knights.assignMoveNo(ts, sze, n);
-    tmp1 = knights.quickSortIntInt(tmp);
-    sortedTrail = tmp1;
+    sortedTrail = knights.quickSortIntInt(tmp);
     return printBoard_inst_72_73_71_68_1_2_tsni(sze, 1, sortedTrail)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
 printBoard_inst_72_73_71_68_1_2_tsni = function printBoard_inst_72_73_71_68_1_2_tsni(s, n, xs) {
-  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, arr, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, arr1, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, arr2, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, arr3, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, arr4, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, arr5, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, arr6, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, arr7, tmp80, tmp81, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
+  let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4;
   if (xs instanceof NofibPrelude.Nil.class) {
     tmp = s * s;
     scrut8 = n > tmp;
@@ -7187,68 +7139,68 @@ printBoard_inst_72_73_71_68_1_2_tsni = function printBoard_inst_72_73_71_68_1_2_
                 tmp27 = s * s;
                 tmp28 = spaces_inst_72_73_71_68_1_2_6_tsni(tmp27, 1);
                 tmp29 = n + 1;
-                arr = globalThis.Object.freeze([
+                tmp30 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp30 = NofibPrelude.Cons(arr, xs1);
-                tmp31 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp29, tmp30);
-                tmp32 = append_inst_72_73_71_68_1_2_23_tsni(tmp28, tmp31);
+                tmp31 = NofibPrelude.Cons(tmp30, xs1);
+                tmp32 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp29, tmp31);
+                tmp33 = append_inst_72_73_71_68_1_2_23_tsni(tmp28, tmp32);
                 _deforest_Cons_head4 = "*";
-                _deforest_Cons_tail4 = tmp32;
+                _deforest_Cons_tail4 = tmp33;
                 return (ys) => {
                   return match_xs_arm_Cons_inst_72_73_71_68_74_tsni(ys, _deforest_Cons_head4, _deforest_Cons_tail4)
                 }
               } else {
-                tmp33 = NofibPrelude.intMod(n, s);
-                scrut = tmp33 === 0;
+                tmp34 = NofibPrelude.intMod(n, s);
+                scrut = tmp34 === 0;
                 if (scrut === true) {
-                  tmp34 = NofibPrelude.nofibStringToList("*\n");
-                  tmp35 = n + 1;
-                  arr1 = globalThis.Object.freeze([
+                  tmp35 = NofibPrelude.nofibStringToList("*\n");
+                  tmp36 = n + 1;
+                  tmp37 = globalThis.Object.freeze([
                     i,
                     j
                   ]);
-                  tmp36 = NofibPrelude.Cons(arr1, xs1);
-                  tmp37 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp35, tmp36);
-                  return append_inst_72_73_71_68_1_2_19_tsni(tmp34, tmp37)
+                  tmp38 = NofibPrelude.Cons(tmp37, xs1);
+                  tmp39 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp36, tmp38);
+                  return append_inst_72_73_71_68_1_2_19_tsni(tmp35, tmp39)
                 } else {
                   throw globalThis.Error("printBoard non-empty list error")
                 }
               }
             }
           } else {
-            tmp38 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp38 != 0;
+            tmp40 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp40 != 0;
             if (scrut1 === true) {
-              tmp39 = s * s;
-              tmp40 = spaces_inst_72_73_71_68_1_2_7_tsni(tmp39, 1);
-              tmp41 = n + 1;
-              arr2 = globalThis.Object.freeze([
+              tmp41 = s * s;
+              tmp42 = spaces_inst_72_73_71_68_1_2_7_tsni(tmp41, 1);
+              tmp43 = n + 1;
+              tmp44 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp42 = NofibPrelude.Cons(arr2, xs1);
-              tmp43 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp41, tmp42);
-              tmp44 = append_inst_72_73_71_68_1_2_24_tsni(tmp40, tmp43);
+              tmp45 = NofibPrelude.Cons(tmp44, xs1);
+              tmp46 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp43, tmp45);
+              tmp47 = append_inst_72_73_71_68_1_2_24_tsni(tmp42, tmp46);
               _deforest_Cons_head3 = "*";
-              _deforest_Cons_tail3 = tmp44;
+              _deforest_Cons_tail3 = tmp47;
               return (ys) => {
                 return match_xs_arm_Cons_inst_72_73_71_68_74_tsni(ys, _deforest_Cons_head3, _deforest_Cons_tail3)
               }
             } else {
-              tmp45 = NofibPrelude.intMod(n, s);
-              scrut = tmp45 === 0;
+              tmp48 = NofibPrelude.intMod(n, s);
+              scrut = tmp48 === 0;
               if (scrut === true) {
-                tmp46 = NofibPrelude.nofibStringToList("*\n");
-                tmp47 = n + 1;
-                arr3 = globalThis.Object.freeze([
+                tmp49 = NofibPrelude.nofibStringToList("*\n");
+                tmp50 = n + 1;
+                tmp51 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp48 = NofibPrelude.Cons(arr3, xs1);
-                tmp49 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp47, tmp48);
-                return append_inst_72_73_71_68_1_2_17_tsni(tmp46, tmp49)
+                tmp52 = NofibPrelude.Cons(tmp51, xs1);
+                tmp53 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp50, tmp52);
+                return append_inst_72_73_71_68_1_2_17_tsni(tmp49, tmp53)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
@@ -7258,86 +7210,86 @@ printBoard_inst_72_73_71_68_1_2_tsni = function printBoard_inst_72_73_71_68_1_2_
       } else {
         scrut2 = i === n;
         if (scrut2 === true) {
-          tmp50 = NofibPrelude.intMod(n, s);
-          scrut3 = tmp50 != 0;
+          tmp54 = NofibPrelude.intMod(n, s);
+          scrut3 = tmp54 != 0;
           if (scrut3 === true) {
-            tmp51 = NofibPrelude.stringOfInt(j);
-            tmp52 = NofibPrelude.nofibStringToList(tmp51);
-            tmp53 = s * s;
-            tmp54 = spaces_inst_72_73_71_68_1_2_8_tsni(tmp53, j);
-            tmp55 = n + 1;
-            tmp56 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp55, xs1);
-            tmp57 = append_inst_72_73_71_68_1_2_12_tsni(tmp54, tmp56);
-            return append_inst_72_73_71_68_1_2_13_tsni(tmp52, tmp57)
+            tmp55 = NofibPrelude.stringOfInt(j);
+            tmp56 = NofibPrelude.nofibStringToList(tmp55);
+            tmp57 = s * s;
+            tmp58 = spaces_inst_72_73_71_68_1_2_8_tsni(tmp57, j);
+            tmp59 = n + 1;
+            tmp60 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp59, xs1);
+            tmp61 = append_inst_72_73_71_68_1_2_12_tsni(tmp58, tmp60);
+            return append_inst_72_73_71_68_1_2_13_tsni(tmp56, tmp61)
           } else {
-            tmp58 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp58 != 0;
+            tmp62 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp62 != 0;
             if (scrut1 === true) {
-              tmp59 = s * s;
-              tmp60 = spaces_inst_72_73_71_68_1_2_9_tsni(tmp59, 1);
-              tmp61 = n + 1;
-              arr4 = globalThis.Object.freeze([
+              tmp63 = s * s;
+              tmp64 = spaces_inst_72_73_71_68_1_2_9_tsni(tmp63, 1);
+              tmp65 = n + 1;
+              tmp66 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp62 = NofibPrelude.Cons(arr4, xs1);
-              tmp63 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp61, tmp62);
-              tmp64 = append_inst_72_73_71_68_1_2_26_tsni(tmp60, tmp63);
+              tmp67 = NofibPrelude.Cons(tmp66, xs1);
+              tmp68 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp65, tmp67);
+              tmp69 = append_inst_72_73_71_68_1_2_26_tsni(tmp64, tmp68);
               _deforest_Cons_head2 = "*";
-              _deforest_Cons_tail2 = tmp64;
+              _deforest_Cons_tail2 = tmp69;
               return (ys) => {
                 return match_xs_arm_Cons_inst_72_73_71_68_74_tsni(ys, _deforest_Cons_head2, _deforest_Cons_tail2)
               }
             } else {
-              tmp65 = NofibPrelude.intMod(n, s);
-              scrut = tmp65 === 0;
+              tmp70 = NofibPrelude.intMod(n, s);
+              scrut = tmp70 === 0;
               if (scrut === true) {
-                tmp66 = NofibPrelude.nofibStringToList("*\n");
-                tmp67 = n + 1;
-                arr5 = globalThis.Object.freeze([
+                tmp71 = NofibPrelude.nofibStringToList("*\n");
+                tmp72 = n + 1;
+                tmp73 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp68 = NofibPrelude.Cons(arr5, xs1);
-                tmp69 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp67, tmp68);
-                return append_inst_72_73_71_68_1_2_11_tsni(tmp66, tmp69)
+                tmp74 = NofibPrelude.Cons(tmp73, xs1);
+                tmp75 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp72, tmp74);
+                return append_inst_72_73_71_68_1_2_11_tsni(tmp71, tmp75)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
             }
           }
         } else {
-          tmp70 = NofibPrelude.intMod(n, s);
-          scrut1 = tmp70 != 0;
+          tmp76 = NofibPrelude.intMod(n, s);
+          scrut1 = tmp76 != 0;
           if (scrut1 === true) {
-            tmp71 = s * s;
-            tmp72 = spaces_inst_72_73_71_68_1_2_10_tsni(tmp71, 1);
-            tmp73 = n + 1;
-            arr6 = globalThis.Object.freeze([
+            tmp77 = s * s;
+            tmp78 = spaces_inst_72_73_71_68_1_2_10_tsni(tmp77, 1);
+            tmp79 = n + 1;
+            tmp80 = globalThis.Object.freeze([
               i,
               j
             ]);
-            tmp74 = NofibPrelude.Cons(arr6, xs1);
-            tmp75 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp73, tmp74);
-            tmp76 = append_inst_72_73_71_68_1_2_25_tsni(tmp72, tmp75);
+            tmp81 = NofibPrelude.Cons(tmp80, xs1);
+            tmp82 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp79, tmp81);
+            tmp83 = append_inst_72_73_71_68_1_2_25_tsni(tmp78, tmp82);
             _deforest_Cons_head = "*";
-            _deforest_Cons_tail = tmp76;
+            _deforest_Cons_tail = tmp83;
             return (ys) => {
               return match_xs_arm_Cons_inst_72_73_71_68_74_tsni(ys, _deforest_Cons_head, _deforest_Cons_tail)
             }
           } else {
-            tmp77 = NofibPrelude.intMod(n, s);
-            scrut = tmp77 === 0;
+            tmp84 = NofibPrelude.intMod(n, s);
+            scrut = tmp84 === 0;
             if (scrut === true) {
-              tmp78 = NofibPrelude.nofibStringToList("*\n");
-              tmp79 = n + 1;
-              arr7 = globalThis.Object.freeze([
+              tmp85 = NofibPrelude.nofibStringToList("*\n");
+              tmp86 = n + 1;
+              tmp87 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp80 = NofibPrelude.Cons(arr7, xs1);
-              tmp81 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp79, tmp80);
-              return append_inst_72_73_71_68_1_2_14_tsni(tmp78, tmp81)
+              tmp88 = NofibPrelude.Cons(tmp87, xs1);
+              tmp89 = printBoard_inst_72_73_71_68_1_2_tsni(s, tmp86, tmp88);
+              return append_inst_72_73_71_68_1_2_14_tsni(tmp85, tmp89)
             } else {
               throw globalThis.Error("printBoard non-empty list error")
             }
@@ -8022,36 +7974,36 @@ nofibListToString_inst_72_79_tsni = function nofibListToString_inst_72_79_tsni(l
 lambda$17 = function lambda$(b) {
   return b
 };
-lambda27 = (undefined, function (b) {
+lambda26 = (undefined, function (b) {
   return () => {
     return lambda$17(b)
   }
 });
-lambda26 = (undefined, function (a, b) {
+lambda27 = (undefined, function (a, b) {
   let tmp, lambda$this;
   tmp = knights1.myIsDigit(a);
-  lambda$this = runtime.safeCall(lambda27(b));
+  lambda$this = runtime.safeCall(lambda26(b));
   return runtime.short_and(tmp, lambda$this)
 });
 all_digits = function all_digits(s) {
-  return NofibPrelude.foldr(lambda26, true, s)
+  return NofibPrelude.foldr(lambda27, true, s)
 };
 lambda$16 = function lambda$(b) {
   return b
 };
-lambda30 = (undefined, function (b) {
+lambda29 = (undefined, function (b) {
   return () => {
     return lambda$16(b)
   }
 });
-lambda29 = (undefined, function (a, b) {
+lambda30 = (undefined, function (a, b) {
   let tmp, lambda$this;
   tmp = all_digits(a);
-  lambda$this = runtime.safeCall(lambda30(b));
+  lambda$this = runtime.safeCall(lambda29(b));
   return runtime.short_and(tmp, lambda$this)
 });
 lambda$15 = function lambda$(ss) {
-  return NofibPrelude.foldr(lambda29, true, ss)
+  return NofibPrelude.foldr(lambda30, true, ss)
 };
 lambda28 = (undefined, function (ss) {
   return () => {
@@ -8135,13 +8087,13 @@ lambda20 = (undefined, function () {
   return NofibPrelude.LzNil
 });
 lambda$13 = function lambda$(sze, h1, t1, h2, t2) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     h1,
     h2
   ]);
-  tmp = lscomp2$2(sze, h1, t1, t2);
-  return NofibPrelude.LzCons(arr, tmp)
+  tmp1 = lscomp2$2(sze, h1, t1, t2);
+  return NofibPrelude.LzCons(tmp, tmp1)
 };
 lambda21 = (undefined, function (sze, h1, t1, h2, t2) {
   return () => {
@@ -8149,7 +8101,7 @@ lambda21 = (undefined, function (sze, h1, t1, h2, t2) {
   }
 });
 lscomp2$2 = function lscomp2$(sze, h1, t1, ls) {
-  let param0, param1, h2, t2, tmp;
+  let param0, param1, h2, t2, lambda$this;
   if (ls instanceof NofibPrelude.Nil.class) {
     return lscomp1$2(sze, t1)
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -8157,8 +8109,8 @@ lscomp2$2 = function lscomp2$(sze, h1, t1, ls) {
     param1 = ls.tail;
     h2 = param0;
     t2 = param1;
-    tmp = runtime.safeCall(lambda21(sze, h1, t1, h2, t2));
-    return NofibPrelude.lazy(tmp)
+    lambda$this = runtime.safeCall(lambda21(sze, h1, t1, h2, t2));
+    return NofibPrelude.lazy(lambda$this)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -8205,15 +8157,15 @@ lambda15 = (undefined, function (board) {
 lambda16 = (undefined, function () {
   return NofibPrelude.LzNil
 });
-lambda18 = (undefined, function () {
+lambda17 = (undefined, function () {
   return NofibPrelude.LzNil
 });
 lambda$11 = function lambda$(h) {
   let tmp;
-  tmp = NofibPrelude.lazy(lambda18);
+  tmp = NofibPrelude.lazy(lambda17);
   return NofibPrelude.LzCons(h, tmp)
 };
-lambda17 = (undefined, function (h) {
+lambda18 = (undefined, function (h) {
   return () => {
     return lambda$11(h)
   }
@@ -8253,16 +8205,16 @@ lambda13 = (undefined, function () {
   return NofibPrelude.LzNil
 });
 lambda$10 = function lambda$(x, t) {
-  let tmp, tmp1, tmp2, arr, tmp3;
+  let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = knights1.deleteFirst(x);
   tmp1 = possibleMoves_inst_36_37_tsni(tmp);
   tmp2 = NofibPrelude.listLen(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     tmp2,
     x
   ]);
-  tmp3 = lscomp_inst_36_tsni(t);
-  return NofibPrelude.LzCons(arr, tmp3)
+  tmp4 = lscomp_inst_36_tsni(t);
+  return NofibPrelude.LzCons(tmp3, tmp4)
 };
 lambda14 = (undefined, function (x, t) {
   return () => {
@@ -8270,7 +8222,7 @@ lambda14 = (undefined, function (x, t) {
   }
 });
 lscomp3 = function lscomp(ls) {
-  let param0, param1, x, t, tmp;
+  let param0, param1, x, t, lambda$this;
   if (ls instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.lazy(lambda13)
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -8278,8 +8230,8 @@ lscomp3 = function lscomp(ls) {
     param1 = ls.tail;
     x = param0;
     t = param1;
-    tmp = runtime.safeCall(lambda_inst_39_tsni(x, t));
-    return NofibPrelude.lazy(tmp)
+    lambda$this = runtime.safeCall(lambda_inst_39_tsni(x, t));
+    return NofibPrelude.lazy(lambda$this)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -8796,7 +8748,7 @@ globalThis.Object.freeze(class knights {
     }
   } 
   static quickSortIntChessSet(xs) {
-    let scrut, param0, param1, x, xs1, tmp, tmp1, tmp2, tmp3;
+    let scrut, param0, param1, x, xs1, tmp, tmp1, tmp2, lambda$this;
     scrut = NofibPrelude.force(xs);
     if (scrut instanceof NofibPrelude.LzNil.class) {
       return NofibPrelude.lazy(lambda3)
@@ -8807,9 +8759,9 @@ globalThis.Object.freeze(class knights {
       xs1 = param1;
       tmp = lscomp1$1(x, xs1);
       tmp1 = knights.quickSortIntChessSet(tmp);
-      tmp2 = runtime.safeCall(lambda8(x, xs1));
-      tmp3 = NofibPrelude.lazy(tmp2);
-      return NofibPrelude.append_lz_lz(tmp1, tmp3)
+      lambda$this = runtime.safeCall(lambda8(x, xs1));
+      tmp2 = NofibPrelude.lazy(lambda$this);
+      return NofibPrelude.append_lz_lz(tmp1, tmp2)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -8936,7 +8888,7 @@ globalThis.Object.freeze(class knights {
     }
   } 
   static deleteFirst(b) {
-    let param0, param1, param2, param3, s, n, f, ts, ts_, tmp, tmp1, tmp2, lambda$this;
+    let param0, param1, param2, param3, s, n, f, ts, ts_, tmp, tmp1, lambda$this;
     if (b instanceof knights.Board.class) {
       param0 = b.a;
       param1 = b.b;
@@ -8946,12 +8898,11 @@ globalThis.Object.freeze(class knights {
       n = param1;
       f = param2;
       ts = param3;
-      tmp = knights.myInit(ts);
-      ts_ = tmp;
-      tmp1 = n - 1;
+      ts_ = knights.myInit(ts);
+      tmp = n - 1;
       lambda$this = runtime.safeCall(lambda10(ts_));
-      tmp2 = NofibPrelude.lazy(lambda$this);
-      return knights.Board(s, tmp1, tmp2, ts_)
+      tmp1 = NofibPrelude.lazy(lambda$this);
+      return knights.Board(s, tmp, tmp1, ts_)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9051,7 +9002,7 @@ globalThis.Object.freeze(class knights {
     }
   } 
   static assignMoveNo(t, size, z) {
-    let param0, param1, first1, first0, x, y, t1, tmp, tmp1, tmp2, arr, tmp3, tmp4;
+    let param0, param1, first1, first0, x, y, t1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
     if (t instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (t instanceof NofibPrelude.Cons.class) {
@@ -9066,13 +9017,13 @@ globalThis.Object.freeze(class knights {
         tmp = y - 1;
         tmp1 = tmp * size;
         tmp2 = tmp1 + x;
-        arr = globalThis.Object.freeze([
+        tmp3 = globalThis.Object.freeze([
           tmp2,
           z
         ]);
-        tmp3 = z - 1;
-        tmp4 = knights.assignMoveNo(t1, size, tmp3);
-        return NofibPrelude.Cons(arr, tmp4)
+        tmp4 = z - 1;
+        tmp5 = knights.assignMoveNo(t1, size, tmp4);
+        return NofibPrelude.Cons(tmp3, tmp5)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -9089,7 +9040,7 @@ globalThis.Object.freeze(class knights {
     return NofibPrelude.replicate(tmp3, " ")
   } 
   static printBoard(s, n, xs) {
-    let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, arr, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, arr1, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, arr2, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, arr3, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, arr4, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, arr5, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, arr6, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, arr7, tmp80, tmp81;
+    let param0, param1, first1, first0, i, j, xs1, scrut, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6, scrut7, scrut8, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, tmp77, tmp78, tmp79, tmp80, tmp81, tmp82, tmp83, tmp84, tmp85, tmp86, tmp87, tmp88, tmp89;
     if (xs instanceof NofibPrelude.Nil.class) {
       tmp = s * s;
       scrut8 = n > tmp;
@@ -9160,60 +9111,60 @@ globalThis.Object.freeze(class knights {
                   tmp27 = s * s;
                   tmp28 = spaces_inst_40_6_tsni(tmp27, 1);
                   tmp29 = n + 1;
-                  arr = globalThis.Object.freeze([
+                  tmp30 = globalThis.Object.freeze([
                     i,
                     j
                   ]);
-                  tmp30 = NofibPrelude.Cons(arr, xs1);
-                  tmp31 = knights.printBoard(s, tmp29, tmp30);
-                  tmp32 = append_inst_40_23_tsni(tmp28, tmp31);
-                  return NofibPrelude.Cons("*", tmp32)
+                  tmp31 = NofibPrelude.Cons(tmp30, xs1);
+                  tmp32 = knights.printBoard(s, tmp29, tmp31);
+                  tmp33 = append_inst_40_23_tsni(tmp28, tmp32);
+                  return NofibPrelude.Cons("*", tmp33)
                 } else {
-                  tmp33 = NofibPrelude.intMod(n, s);
-                  scrut = tmp33 === 0;
+                  tmp34 = NofibPrelude.intMod(n, s);
+                  scrut = tmp34 === 0;
                   if (scrut === true) {
-                    tmp34 = NofibPrelude.nofibStringToList("*\n");
-                    tmp35 = n + 1;
-                    arr1 = globalThis.Object.freeze([
+                    tmp35 = NofibPrelude.nofibStringToList("*\n");
+                    tmp36 = n + 1;
+                    tmp37 = globalThis.Object.freeze([
                       i,
                       j
                     ]);
-                    tmp36 = NofibPrelude.Cons(arr1, xs1);
-                    tmp37 = knights.printBoard(s, tmp35, tmp36);
-                    return NofibPrelude.append(tmp34, tmp37)
+                    tmp38 = NofibPrelude.Cons(tmp37, xs1);
+                    tmp39 = knights.printBoard(s, tmp36, tmp38);
+                    return NofibPrelude.append(tmp35, tmp39)
                   } else {
                     throw globalThis.Error("printBoard non-empty list error")
                   }
                 }
               }
             } else {
-              tmp38 = NofibPrelude.intMod(n, s);
-              scrut1 = tmp38 != 0;
+              tmp40 = NofibPrelude.intMod(n, s);
+              scrut1 = tmp40 != 0;
               if (scrut1 === true) {
-                tmp39 = s * s;
-                tmp40 = spaces_inst_40_7_tsni(tmp39, 1);
-                tmp41 = n + 1;
-                arr2 = globalThis.Object.freeze([
+                tmp41 = s * s;
+                tmp42 = spaces_inst_40_7_tsni(tmp41, 1);
+                tmp43 = n + 1;
+                tmp44 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp42 = NofibPrelude.Cons(arr2, xs1);
-                tmp43 = knights.printBoard(s, tmp41, tmp42);
-                tmp44 = append_inst_40_24_tsni(tmp40, tmp43);
-                return NofibPrelude.Cons("*", tmp44)
+                tmp45 = NofibPrelude.Cons(tmp44, xs1);
+                tmp46 = knights.printBoard(s, tmp43, tmp45);
+                tmp47 = append_inst_40_24_tsni(tmp42, tmp46);
+                return NofibPrelude.Cons("*", tmp47)
               } else {
-                tmp45 = NofibPrelude.intMod(n, s);
-                scrut = tmp45 === 0;
+                tmp48 = NofibPrelude.intMod(n, s);
+                scrut = tmp48 === 0;
                 if (scrut === true) {
-                  tmp46 = NofibPrelude.nofibStringToList("*\n");
-                  tmp47 = n + 1;
-                  arr3 = globalThis.Object.freeze([
+                  tmp49 = NofibPrelude.nofibStringToList("*\n");
+                  tmp50 = n + 1;
+                  tmp51 = globalThis.Object.freeze([
                     i,
                     j
                   ]);
-                  tmp48 = NofibPrelude.Cons(arr3, xs1);
-                  tmp49 = knights.printBoard(s, tmp47, tmp48);
-                  return NofibPrelude.append(tmp46, tmp49)
+                  tmp52 = NofibPrelude.Cons(tmp51, xs1);
+                  tmp53 = knights.printBoard(s, tmp50, tmp52);
+                  return NofibPrelude.append(tmp49, tmp53)
                 } else {
                   throw globalThis.Error("printBoard non-empty list error")
                 }
@@ -9223,78 +9174,78 @@ globalThis.Object.freeze(class knights {
         } else {
           scrut2 = i === n;
           if (scrut2 === true) {
-            tmp50 = NofibPrelude.intMod(n, s);
-            scrut3 = tmp50 != 0;
+            tmp54 = NofibPrelude.intMod(n, s);
+            scrut3 = tmp54 != 0;
             if (scrut3 === true) {
-              tmp51 = NofibPrelude.stringOfInt(j);
-              tmp52 = NofibPrelude.nofibStringToList(tmp51);
-              tmp53 = s * s;
-              tmp54 = spaces_inst_40_8_tsni(tmp53, j);
-              tmp55 = n + 1;
-              tmp56 = knights.printBoard(s, tmp55, xs1);
-              tmp57 = append_inst_40_12_tsni(tmp54, tmp56);
-              return NofibPrelude.append(tmp52, tmp57)
+              tmp55 = NofibPrelude.stringOfInt(j);
+              tmp56 = NofibPrelude.nofibStringToList(tmp55);
+              tmp57 = s * s;
+              tmp58 = spaces_inst_40_8_tsni(tmp57, j);
+              tmp59 = n + 1;
+              tmp60 = knights.printBoard(s, tmp59, xs1);
+              tmp61 = append_inst_40_12_tsni(tmp58, tmp60);
+              return NofibPrelude.append(tmp56, tmp61)
             } else {
-              tmp58 = NofibPrelude.intMod(n, s);
-              scrut1 = tmp58 != 0;
+              tmp62 = NofibPrelude.intMod(n, s);
+              scrut1 = tmp62 != 0;
               if (scrut1 === true) {
-                tmp59 = s * s;
-                tmp60 = spaces_inst_40_9_tsni(tmp59, 1);
-                tmp61 = n + 1;
-                arr4 = globalThis.Object.freeze([
+                tmp63 = s * s;
+                tmp64 = spaces_inst_40_9_tsni(tmp63, 1);
+                tmp65 = n + 1;
+                tmp66 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp62 = NofibPrelude.Cons(arr4, xs1);
-                tmp63 = knights.printBoard(s, tmp61, tmp62);
-                tmp64 = append_inst_40_26_tsni(tmp60, tmp63);
-                return NofibPrelude.Cons("*", tmp64)
+                tmp67 = NofibPrelude.Cons(tmp66, xs1);
+                tmp68 = knights.printBoard(s, tmp65, tmp67);
+                tmp69 = append_inst_40_26_tsni(tmp64, tmp68);
+                return NofibPrelude.Cons("*", tmp69)
               } else {
-                tmp65 = NofibPrelude.intMod(n, s);
-                scrut = tmp65 === 0;
+                tmp70 = NofibPrelude.intMod(n, s);
+                scrut = tmp70 === 0;
                 if (scrut === true) {
-                  tmp66 = NofibPrelude.nofibStringToList("*\n");
-                  tmp67 = n + 1;
-                  arr5 = globalThis.Object.freeze([
+                  tmp71 = NofibPrelude.nofibStringToList("*\n");
+                  tmp72 = n + 1;
+                  tmp73 = globalThis.Object.freeze([
                     i,
                     j
                   ]);
-                  tmp68 = NofibPrelude.Cons(arr5, xs1);
-                  tmp69 = knights.printBoard(s, tmp67, tmp68);
-                  return NofibPrelude.append(tmp66, tmp69)
+                  tmp74 = NofibPrelude.Cons(tmp73, xs1);
+                  tmp75 = knights.printBoard(s, tmp72, tmp74);
+                  return NofibPrelude.append(tmp71, tmp75)
                 } else {
                   throw globalThis.Error("printBoard non-empty list error")
                 }
               }
             }
           } else {
-            tmp70 = NofibPrelude.intMod(n, s);
-            scrut1 = tmp70 != 0;
+            tmp76 = NofibPrelude.intMod(n, s);
+            scrut1 = tmp76 != 0;
             if (scrut1 === true) {
-              tmp71 = s * s;
-              tmp72 = spaces_inst_40_10_tsni(tmp71, 1);
-              tmp73 = n + 1;
-              arr6 = globalThis.Object.freeze([
+              tmp77 = s * s;
+              tmp78 = spaces_inst_40_10_tsni(tmp77, 1);
+              tmp79 = n + 1;
+              tmp80 = globalThis.Object.freeze([
                 i,
                 j
               ]);
-              tmp74 = NofibPrelude.Cons(arr6, xs1);
-              tmp75 = knights.printBoard(s, tmp73, tmp74);
-              tmp76 = append_inst_40_25_tsni(tmp72, tmp75);
-              return NofibPrelude.Cons("*", tmp76)
+              tmp81 = NofibPrelude.Cons(tmp80, xs1);
+              tmp82 = knights.printBoard(s, tmp79, tmp81);
+              tmp83 = append_inst_40_25_tsni(tmp78, tmp82);
+              return NofibPrelude.Cons("*", tmp83)
             } else {
-              tmp77 = NofibPrelude.intMod(n, s);
-              scrut = tmp77 === 0;
+              tmp84 = NofibPrelude.intMod(n, s);
+              scrut = tmp84 === 0;
               if (scrut === true) {
-                tmp78 = NofibPrelude.nofibStringToList("*\n");
-                tmp79 = n + 1;
-                arr7 = globalThis.Object.freeze([
+                tmp85 = NofibPrelude.nofibStringToList("*\n");
+                tmp86 = n + 1;
+                tmp87 = globalThis.Object.freeze([
                   i,
                   j
                 ]);
-                tmp80 = NofibPrelude.Cons(arr7, xs1);
-                tmp81 = knights.printBoard(s, tmp79, tmp80);
-                return NofibPrelude.append(tmp78, tmp81)
+                tmp88 = NofibPrelude.Cons(tmp87, xs1);
+                tmp89 = knights.printBoard(s, tmp86, tmp88);
+                return NofibPrelude.append(tmp85, tmp89)
               } else {
                 throw globalThis.Error("printBoard non-empty list error")
               }
@@ -9309,7 +9260,7 @@ globalThis.Object.freeze(class knights {
     }
   } 
   static move(d, x_y) {
-    let first1, first0, x, y, tmp, tmp1, arr, tmp2, tmp3, arr1, tmp4, tmp5, arr2, tmp6, tmp7, arr3, tmp8, tmp9, arr4, tmp10, tmp11, arr5, tmp12, tmp13, arr6, tmp14, tmp15, arr7;
+    let first1, first0, x, y, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
     if (runtime.Tuple.isArrayLike(x_y) && x_y.length === 2) {
       first0 = runtime.Tuple.get(x_y, 0);
       first1 = runtime.Tuple.get(x_y, 1);
@@ -9318,67 +9269,59 @@ globalThis.Object.freeze(class knights {
       if (d instanceof knights.UL.class) {
         tmp = x - 1;
         tmp1 = y - 2;
-        arr = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp,
           tmp1
-        ]);
-        return arr
+        ])
       } else if (d instanceof knights.UR.class) {
         tmp2 = x + 1;
         tmp3 = y - 2;
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp2,
           tmp3
-        ]);
-        return arr1
+        ])
       } else if (d instanceof knights.DL.class) {
         tmp4 = x - 1;
         tmp5 = y + 2;
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp4,
           tmp5
-        ]);
-        return arr2
+        ])
       } else if (d instanceof knights.DR.class) {
         tmp6 = x + 1;
         tmp7 = y + 2;
-        arr3 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp6,
           tmp7
-        ]);
-        return arr3
+        ])
       } else if (d instanceof knights.LU.class) {
         tmp8 = x - 2;
         tmp9 = y - 1;
-        arr4 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp8,
           tmp9
-        ]);
-        return arr4
+        ])
       } else if (d instanceof knights.LD.class) {
         tmp10 = x - 2;
         tmp11 = y + 1;
-        arr5 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp10,
           tmp11
-        ]);
-        return arr5
+        ])
       } else if (d instanceof knights.RU.class) {
         tmp12 = x + 2;
         tmp13 = y - 1;
-        arr6 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp12,
           tmp13
-        ]);
-        return arr6
+        ])
       } else if (d instanceof knights.RD.class) {
         tmp14 = x + 2;
         tmp15 = y + 1;
-        arr7 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp14,
           tmp15
-        ]);
-        return arr7
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -9403,14 +9346,13 @@ globalThis.Object.freeze(class knights {
     return knights.addPiece(tmp1, board)
   } 
   static canMoveTo(x_y, board) {
-    let first1, first0, x, y, sze, res, scrut, scrut1, scrut2, scrut3, scrut4, tmp, tmp1;
+    let first1, first0, x, y, sze, res, scrut, scrut1, scrut2, scrut3, scrut4, tmp;
     if (runtime.Tuple.isArrayLike(x_y) && x_y.length === 2) {
       first0 = runtime.Tuple.get(x_y, 0);
       first1 = runtime.Tuple.get(x_y, 1);
       x = first0;
       y = first1;
-      tmp = knights.sizeBoard(board);
-      sze = tmp;
+      sze = knights.sizeBoard(board);
       scrut = x >= 1;
       if (scrut === true) {
         scrut1 = x <= sze;
@@ -9421,23 +9363,23 @@ globalThis.Object.freeze(class knights {
             if (scrut3 === true) {
               scrut4 = knights.isSquareFree(x_y, board);
               if (scrut4 === true) {
-                tmp1 = true;
+                tmp = true;
               } else {
-                tmp1 = false;
+                tmp = false;
               }
             } else {
-              tmp1 = false;
+              tmp = false;
             }
           } else {
-            tmp1 = false;
+            tmp = false;
           }
         } else {
-          tmp1 = false;
+          tmp = false;
         }
       } else {
-        tmp1 = false;
+        tmp = false;
       }
-      res = tmp1;
+      res = tmp;
       return res
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -9456,17 +9398,16 @@ globalThis.Object.freeze(class knights {
     return knights.canMoveTo(tmp, tmp1)
   } 
   static tourFinished(board) {
-    let sze, tmp, tmp1, tmp2, tmp3, lambda$this;
-    tmp = knights.sizeBoard(board);
-    sze = tmp;
-    tmp1 = knights.noPieces(board);
-    tmp2 = sze * sze;
-    tmp3 = tmp1 === tmp2;
+    let sze, tmp, tmp1, tmp2, lambda$this;
+    sze = knights.sizeBoard(board);
+    tmp = knights.noPieces(board);
+    tmp1 = sze * sze;
+    tmp2 = tmp === tmp1;
     lambda$this = runtime.safeCall(lambda11(board));
-    return runtime.short_and(tmp3, lambda$this)
+    return runtime.short_and(tmp2, lambda$this)
   } 
   static possibleMoves(board) {
-    let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
+    let res, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Cons_head7, _deforest_Cons_tail7;
     _deforest_Cons_head7 = knights.RD;
     _deforest_Cons_tail7 = (board1) => {
       return NofibPrelude.Nil
@@ -9509,8 +9450,7 @@ globalThis.Object.freeze(class knights {
     tmp7 = (board1) => {
       return match_ls_arm_Cons_inst_41_45_tsni(board1, _deforest_Cons_head, _deforest_Cons_tail)
     };
-    tmp8 = lscomp$_inst_41_45_tsni(board, tmp7);
-    res = tmp8;
+    res = lscomp$_inst_41_45_tsni(board, tmp7);
     return res
   } 
   static deadEnd(board) {
@@ -9536,22 +9476,20 @@ globalThis.Object.freeze(class knights {
     return lscomp_inst_50_78_tsni(tmp)
   } 
   static descendents(board) {
-    let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1;
+    let singles, scrut, res, scrut1, param0, param1, h, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1;
     tmp = knights.canJumpFirst(board);
     lambda$this = runtime.safeCall(lambda_inst_53_54_tsni(board));
     scrut3 = runtime.short_and(tmp, lambda$this);
     if (scrut3 === true) {
       return NofibPrelude.lazy(lambda16)
     } else {
-      tmp1 = singleDescend_inst_53_55_tsni(board);
-      singles = tmp1;
-      tmp2 = NofibPrelude.listLen(singles);
-      scrut = tmp2;
+      singles = singleDescend_inst_53_55_tsni(board);
+      scrut = NofibPrelude.listLen(singles);
       scrut2 = scrut === 0;
       if (scrut2 === true) {
-        tmp3 = descAndNo_inst_53_56_tsni(board);
-        tmp4 = knights.quickSortIntChessSet(tmp3);
-        tmp5 = NofibPrelude.map_lz(NofibPrelude.snd, tmp4);
+        tmp1 = descAndNo_inst_53_56_tsni(board);
+        tmp2 = knights.quickSortIntChessSet(tmp1);
+        tmp3 = NofibPrelude.map_lz(NofibPrelude.snd, tmp2);
       } else {
         scrut1 = scrut === 1;
         if (scrut1 === true) {
@@ -9560,25 +9498,25 @@ globalThis.Object.freeze(class knights {
             param1 = singles.tail;
             h = param0;
             if (param1 instanceof NofibPrelude.Nil.class) {
-              lambda$this1 = runtime.safeCall(lambda17(h));
-              tmp6 = NofibPrelude.lazy(lambda$this1);
+              lambda$this1 = runtime.safeCall(lambda18(h));
+              tmp4 = NofibPrelude.lazy(lambda$this1);
             } else {
               throw globalThis.Error("unreachable")
             }
           } else {
             throw globalThis.Error("unreachable")
           }
-          tmp5 = tmp6;
+          tmp3 = tmp4;
         } else {
-          tmp5 = NofibPrelude.lazy(lambda19);
+          tmp3 = NofibPrelude.lazy(lambda19);
         }
       }
-      res = tmp5;
+      res = tmp3;
       return res
     }
   } 
   static showChessSet(b) {
-    let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp, tmp1;
+    let param0, param1, param2, param3, sze, n, f, ts, sortedTrail, tmp;
     if (b instanceof knights.Board.class) {
       param0 = b.a;
       param1 = b.b;
@@ -9589,8 +9527,7 @@ globalThis.Object.freeze(class knights {
       f = param2;
       ts = param3;
       tmp = knights.assignMoveNo(ts, sze, n);
-      tmp1 = knights.quickSortIntInt(tmp);
-      sortedTrail = tmp1;
+      sortedTrail = knights.quickSortIntInt(tmp);
       return printBoard_inst_57_2_tsni(sze, 1, sortedTrail)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -9676,7 +9613,7 @@ globalThis.Object.freeze(class knights {
     return NofibPrelude.append_lz_lz(list, q)
   } 
   static depthSearch(q, growFn, finFn) {
-    let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+    let scrut, scrut1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this;
     scrut1 = knights.emptyQueue_lz(q);
     if (scrut1 === true) {
       return NofibPrelude.lazy(lambda23)
@@ -9684,14 +9621,14 @@ globalThis.Object.freeze(class knights {
       tmp = knights.inquireFront_lz(q);
       scrut = runtime.safeCall(finFn(tmp));
       if (scrut === true) {
-        tmp1 = runtime.safeCall(lambda24(q, growFn, finFn));
-        return NofibPrelude.lazy(tmp1)
+        lambda$this = runtime.safeCall(lambda24(q, growFn, finFn));
+        return NofibPrelude.lazy(lambda$this)
       } else {
-        tmp2 = knights.inquireFront_lz(q);
-        tmp3 = runtime.safeCall(growFn(tmp2));
-        tmp4 = knights.removeFront_lz(q);
-        tmp5 = knights.addAllFront_lz(tmp3, tmp4);
-        return knights.depthSearch(tmp5, growFn, finFn)
+        tmp1 = knights.inquireFront_lz(q);
+        tmp2 = runtime.safeCall(growFn(tmp1));
+        tmp3 = knights.removeFront_lz(q);
+        tmp4 = knights.addAllFront_lz(tmp2, tmp3);
+        return knights.depthSearch(tmp4, growFn, finFn)
       }
     }
   } 

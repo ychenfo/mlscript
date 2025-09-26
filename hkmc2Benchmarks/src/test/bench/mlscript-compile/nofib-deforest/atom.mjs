@@ -57,9 +57,9 @@ lscomp_inst_0_1_2_tsni = function lscomp_inst_0_1_2_tsni(ls) {
   }
 };
 testforce_inst_3_tsni = function testforce_inst_3_tsni(k, ss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_3_tsni(k, ss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_3_tsni(k, ss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_3_tsni = (undefined, function (k, ss) {
   return () => {
@@ -104,9 +104,9 @@ scalarMut_inst_3_4_tsni = function scalarMut_inst_3_4_tsni(c, fs) {
   }
 };
 testforce_inst_5_tsni = function testforce_inst_5_tsni(k, ss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda(k, ss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda(k, ss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$_inst_5_tsni = function lambda$_inst_5_tsni(k, ss) {
   let scrut, param0, param1, param01, param11, pos, vel, atoms, tmp, tmp1, tmp2, tmp3;
@@ -265,9 +265,9 @@ lscomp_inst_7_2_tsni = function lscomp_inst_7_2_tsni(ls) {
   }
 };
 testforce_inst_8_9_tsni = function testforce_inst_8_9_tsni(k, ss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_9_tsni(k, ss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_9_tsni(k, ss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_9_tsni = (undefined, function (k, ss) {
   return () => {
@@ -537,9 +537,9 @@ take_lz_inst_12_13_11_tsni = function take_lz_inst_12_13_11_tsni(n, ls) {
   }
 };
 testforce_inst_12_13_9_tsni = function testforce_inst_12_13_9_tsni(k, ss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_12_13_9_tsni(k, ss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_12_13_9_tsni(k, ss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_12_13_9_tsni = (undefined, function (k, ss) {
   return () => {
@@ -626,21 +626,20 @@ lscomp1 = function lscomp(ls) {
 lambda$2 = function lambda$(dt, x, y) {
   return atom1.propagate(dt, x, y)
 };
-lambda2 = (undefined, function (dt) {
+lambda1 = (undefined, function (dt) {
   return (x, y) => {
     return lambda$2(dt, x, y)
   }
 });
 lambda$1 = function lambda$(law, dt, param, init) {
-  let stream, tmp, tmp1, tmp2, lambda$this;
-  tmp = atom1.runExperiment(law, dt, param, init);
-  stream = tmp;
-  tmp1 = runtime.safeCall(law(param, stream));
-  lambda$this = runtime.safeCall(lambda2(dt));
-  tmp2 = NofibPrelude.zipWith_lz_lz(lambda$this, tmp1, stream);
-  return NofibPrelude.LzCons(init, tmp2)
+  let stream, tmp, tmp1, lambda$this;
+  stream = atom1.runExperiment(law, dt, param, init);
+  tmp = runtime.safeCall(law(param, stream));
+  lambda$this = runtime.safeCall(lambda1(dt));
+  tmp1 = NofibPrelude.zipWith_lz_lz(lambda$this, tmp, stream);
+  return NofibPrelude.LzCons(init, tmp1)
 };
-lambda1 = (undefined, function (law, dt, param, init) {
+lambda2 = (undefined, function (law, dt, param, init) {
   return () => {
     return lambda$1(law, dt, param, init)
   }
@@ -783,9 +782,9 @@ globalThis.Object.freeze(class atom {
     }
   } 
   static testforce(k, ss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda_inst_6_tsni(k, ss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda_inst_6_tsni(k, ss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static show(s) {
     let param0, param1, pos, vel, tmp;
@@ -817,9 +816,9 @@ globalThis.Object.freeze(class atom {
     }
   } 
   static runExperiment(law, dt, param, init) {
-    let tmp;
-    tmp = runtime.safeCall(lambda1(law, dt, param, init));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda2(law, dt, param, init));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static testAtom_nofib(n) {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, _deforest_Cons_head, _deforest_Cons_tail;

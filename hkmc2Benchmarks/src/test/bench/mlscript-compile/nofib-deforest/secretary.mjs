@@ -69,18 +69,15 @@ proc_inst_0_1_5_tsni = function proc_inst_0_1_5_tsni(k) {
   }
 };
 proc$_inst_0_1_5_6_tsni = function proc$_inst_0_1_5_6_tsni(k, rs) {
-  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
+  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
   tmp = NofibPrelude.nub_lz(rs);
-  tmp1 = NofibPrelude.take_lz(100, tmp);
-  xs = tmp1;
+  xs = NofibPrelude.take_lz(100, tmp);
   best = 100;
-  tmp2 = NofibPrelude.take(k, xs);
-  tmp3 = NofibPrelude.maximum(tmp2);
-  bestk = tmp3;
-  tmp4 = NofibPrelude.leave(k, xs);
+  tmp1 = NofibPrelude.take(k, xs);
+  bestk = NofibPrelude.maximum(tmp1);
+  tmp2 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
-  afterk = tmp5;
+  afterk = NofibPrelude.leaveWhile(lambda$this, tmp2);
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
@@ -89,7 +86,7 @@ proc$_inst_0_1_5_6_tsni = function proc$_inst_0_1_5_6_tsni(k, rs) {
       return false
     }
   };
-  tmp6 = (ys) => {
+  tmp3 = (ys) => {
     let param0, param1, hx, tx, param01, param11, hy, ty, scrut;
     param0 = _deforest_Cons_head;
     param1 = _deforest_Cons_tail;
@@ -110,8 +107,8 @@ proc$_inst_0_1_5_6_tsni = function proc$_inst_0_1_5_6_tsni(k, rs) {
       return false
     }
   };
-  tmp7 = NofibPrelude.take(1, afterk);
-  return listEq_inst_0_1_5_6_19_tsni(tmp6, tmp7)
+  tmp4 = NofibPrelude.take(1, afterk);
+  return listEq_inst_0_1_5_6_19_tsni(tmp3, tmp4)
 };
 listcomp$_inst_7_8_tsni = function listcomp$_inst_7_8_tsni(n, ls) {
   let param0, param1, h, t, tmp, tmp1;
@@ -140,18 +137,15 @@ proc_inst_7_8_1_5_tsni = function proc_inst_7_8_1_5_tsni(k) {
   }
 };
 proc$_inst_7_8_1_5_6_tsni = function proc$_inst_7_8_1_5_6_tsni(k, rs) {
-  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
+  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
   tmp = NofibPrelude.nub_lz(rs);
-  tmp1 = NofibPrelude.take_lz(100, tmp);
-  xs = tmp1;
+  xs = NofibPrelude.take_lz(100, tmp);
   best = 100;
-  tmp2 = NofibPrelude.take(k, xs);
-  tmp3 = NofibPrelude.maximum(tmp2);
-  bestk = tmp3;
-  tmp4 = NofibPrelude.leave(k, xs);
+  tmp1 = NofibPrelude.take(k, xs);
+  bestk = NofibPrelude.maximum(tmp1);
+  tmp2 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
-  afterk = tmp5;
+  afterk = NofibPrelude.leaveWhile(lambda$this, tmp2);
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
@@ -160,7 +154,7 @@ proc$_inst_7_8_1_5_6_tsni = function proc$_inst_7_8_1_5_6_tsni(k, rs) {
       return false
     }
   };
-  tmp6 = (ys) => {
+  tmp3 = (ys) => {
     let param0, param1, hx, tx, param01, param11, hy, ty, scrut;
     param0 = _deforest_Cons_head;
     param1 = _deforest_Cons_tail;
@@ -181,8 +175,8 @@ proc$_inst_7_8_1_5_6_tsni = function proc$_inst_7_8_1_5_6_tsni(k, rs) {
       return false
     }
   };
-  tmp7 = NofibPrelude.take(1, afterk);
-  return listEq_inst_7_8_1_5_6_19_tsni(tmp6, tmp7)
+  tmp4 = NofibPrelude.take(1, afterk);
+  return listEq_inst_7_8_1_5_6_19_tsni(tmp3, tmp4)
 };
 simulate_inst_7_8_1_2_tsni = function simulate_inst_7_8_1_2_tsni(n, m, proc1) {
   let tmp, tmp1, tmp2, tmp3;
@@ -238,18 +232,15 @@ enumFromTo_inst_7_8_1_2_3_tsni = function enumFromTo_inst_7_8_1_2_3_tsni(a, b) {
   }
 };
 proc$_inst_10_6_tsni = function proc$_inst_10_6_tsni(k, rs) {
-  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
+  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
   tmp = NofibPrelude.nub_lz(rs);
-  tmp1 = NofibPrelude.take_lz(100, tmp);
-  xs = tmp1;
+  xs = NofibPrelude.take_lz(100, tmp);
   best = 100;
-  tmp2 = NofibPrelude.take(k, xs);
-  tmp3 = NofibPrelude.maximum(tmp2);
-  bestk = tmp3;
-  tmp4 = NofibPrelude.leave(k, xs);
+  tmp1 = NofibPrelude.take(k, xs);
+  bestk = NofibPrelude.maximum(tmp1);
+  tmp2 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
-  afterk = tmp5;
+  afterk = NofibPrelude.leaveWhile(lambda$this, tmp2);
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
@@ -258,7 +249,7 @@ proc$_inst_10_6_tsni = function proc$_inst_10_6_tsni(k, rs) {
       return false
     }
   };
-  tmp6 = (ys) => {
+  tmp3 = (ys) => {
     let param0, param1, hx, tx, param01, param11, hy, ty, scrut;
     param0 = _deforest_Cons_head;
     param1 = _deforest_Cons_tail;
@@ -279,8 +270,8 @@ proc$_inst_10_6_tsni = function proc$_inst_10_6_tsni(k, rs) {
       return false
     }
   };
-  tmp7 = NofibPrelude.take(1, afterk);
-  return listEq_inst_10_6_19_tsni(tmp6, tmp7)
+  tmp4 = NofibPrelude.take(1, afterk);
+  return listEq_inst_10_6_19_tsni(tmp3, tmp4)
 };
 enumFromTo_inst_11_3_tsni = function enumFromTo_inst_11_3_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -333,18 +324,15 @@ proc_inst_12_5_tsni = function proc_inst_12_5_tsni(k) {
   }
 };
 proc$_inst_12_5_6_tsni = function proc$_inst_12_5_6_tsni(k, rs) {
-  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
+  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
   tmp = NofibPrelude.nub_lz(rs);
-  tmp1 = NofibPrelude.take_lz(100, tmp);
-  xs = tmp1;
+  xs = NofibPrelude.take_lz(100, tmp);
   best = 100;
-  tmp2 = NofibPrelude.take(k, xs);
-  tmp3 = NofibPrelude.maximum(tmp2);
-  bestk = tmp3;
-  tmp4 = NofibPrelude.leave(k, xs);
+  tmp1 = NofibPrelude.take(k, xs);
+  bestk = NofibPrelude.maximum(tmp1);
+  tmp2 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
-  afterk = tmp5;
+  afterk = NofibPrelude.leaveWhile(lambda$this, tmp2);
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
@@ -353,7 +341,7 @@ proc$_inst_12_5_6_tsni = function proc$_inst_12_5_6_tsni(k, rs) {
       return false
     }
   };
-  tmp6 = (ys) => {
+  tmp3 = (ys) => {
     let param0, param1, hx, tx, param01, param11, hy, ty, scrut;
     param0 = _deforest_Cons_head;
     param1 = _deforest_Cons_tail;
@@ -374,8 +362,8 @@ proc$_inst_12_5_6_tsni = function proc$_inst_12_5_6_tsni(k, rs) {
       return false
     }
   };
-  tmp7 = NofibPrelude.take(1, afterk);
-  return listEq_inst_12_5_6_19_tsni(tmp6, tmp7)
+  tmp4 = NofibPrelude.take(1, afterk);
+  return listEq_inst_12_5_6_19_tsni(tmp3, tmp4)
 };
 simulate_inst_12_2_tsni = function simulate_inst_12_2_tsni(n, m, proc1) {
   let tmp, tmp1, tmp2, tmp3;
@@ -444,18 +432,15 @@ proc_inst_13_14_1_5_tsni = function proc_inst_13_14_1_5_tsni(k) {
   }
 };
 proc$_inst_13_14_1_5_6_tsni = function proc$_inst_13_14_1_5_6_tsni(k, rs) {
-  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
+  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
   tmp = NofibPrelude.nub_lz(rs);
-  tmp1 = NofibPrelude.take_lz(100, tmp);
-  xs = tmp1;
+  xs = NofibPrelude.take_lz(100, tmp);
   best = 100;
-  tmp2 = NofibPrelude.take(k, xs);
-  tmp3 = NofibPrelude.maximum(tmp2);
-  bestk = tmp3;
-  tmp4 = NofibPrelude.leave(k, xs);
+  tmp1 = NofibPrelude.take(k, xs);
+  bestk = NofibPrelude.maximum(tmp1);
+  tmp2 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
-  afterk = tmp5;
+  afterk = NofibPrelude.leaveWhile(lambda$this, tmp2);
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
@@ -464,7 +449,7 @@ proc$_inst_13_14_1_5_6_tsni = function proc$_inst_13_14_1_5_6_tsni(k, rs) {
       return false
     }
   };
-  tmp6 = (ys) => {
+  tmp3 = (ys) => {
     let param0, param1, hx, tx, param01, param11, hy, ty, scrut;
     param0 = _deforest_Cons_head;
     param1 = _deforest_Cons_tail;
@@ -485,8 +470,8 @@ proc$_inst_13_14_1_5_6_tsni = function proc$_inst_13_14_1_5_6_tsni(k, rs) {
       return false
     }
   };
-  tmp7 = NofibPrelude.take(1, afterk);
-  return listEq_inst_13_14_1_5_6_19_tsni(tmp6, tmp7)
+  tmp4 = NofibPrelude.take(1, afterk);
+  return listEq_inst_13_14_1_5_6_19_tsni(tmp3, tmp4)
 };
 simulate_inst_13_14_1_2_tsni = function simulate_inst_13_14_1_2_tsni(n, m, proc1) {
   let tmp, tmp1, tmp2, tmp3;
@@ -637,18 +622,15 @@ proc_inst_16_17_14_1_5_tsni = function proc_inst_16_17_14_1_5_tsni(k) {
   }
 };
 proc$_inst_16_17_14_1_5_6_tsni = function proc$_inst_16_17_14_1_5_6_tsni(k, rs) {
-  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
+  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
   tmp = NofibPrelude.nub_lz(rs);
-  tmp1 = NofibPrelude.take_lz(100, tmp);
-  xs = tmp1;
+  xs = NofibPrelude.take_lz(100, tmp);
   best = 100;
-  tmp2 = NofibPrelude.take(k, xs);
-  tmp3 = NofibPrelude.maximum(tmp2);
-  bestk = tmp3;
-  tmp4 = NofibPrelude.leave(k, xs);
+  tmp1 = NofibPrelude.take(k, xs);
+  bestk = NofibPrelude.maximum(tmp1);
+  tmp2 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
-  afterk = tmp5;
+  afterk = NofibPrelude.leaveWhile(lambda$this, tmp2);
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
@@ -657,7 +639,7 @@ proc$_inst_16_17_14_1_5_6_tsni = function proc$_inst_16_17_14_1_5_6_tsni(k, rs) 
       return false
     }
   };
-  tmp6 = (ys) => {
+  tmp3 = (ys) => {
     let param0, param1, hx, tx, param01, param11, hy, ty, scrut;
     param0 = _deforest_Cons_head;
     param1 = _deforest_Cons_tail;
@@ -678,8 +660,8 @@ proc$_inst_16_17_14_1_5_6_tsni = function proc$_inst_16_17_14_1_5_6_tsni(k, rs) 
       return false
     }
   };
-  tmp7 = NofibPrelude.take(1, afterk);
-  return listEq_inst_16_17_14_1_5_6_19_tsni(tmp6, tmp7)
+  tmp4 = NofibPrelude.take(1, afterk);
+  return listEq_inst_16_17_14_1_5_6_19_tsni(tmp3, tmp4)
 };
 enumFromTo_inst_16_17_15_tsni = function enumFromTo_inst_16_17_15_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -774,18 +756,15 @@ lambda2 = (undefined, function (bestk) {
   }
 });
 proc$ = function proc$(k, rs) {
-  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
+  let xs, best, bestk, afterk, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, _deforest_Cons_head, _deforest_Cons_tail;
   tmp = NofibPrelude.nub_lz(rs);
-  tmp1 = NofibPrelude.take_lz(100, tmp);
-  xs = tmp1;
+  xs = NofibPrelude.take_lz(100, tmp);
   best = 100;
-  tmp2 = NofibPrelude.take(k, xs);
-  tmp3 = NofibPrelude.maximum(tmp2);
-  bestk = tmp3;
-  tmp4 = NofibPrelude.leave(k, xs);
+  tmp1 = NofibPrelude.take(k, xs);
+  bestk = NofibPrelude.maximum(tmp1);
+  tmp2 = NofibPrelude.leave(k, xs);
   lambda$this = runtime.safeCall(lambda2(bestk));
-  tmp5 = NofibPrelude.leaveWhile(lambda$this, tmp4);
-  afterk = tmp5;
+  afterk = NofibPrelude.leaveWhile(lambda$this, tmp2);
   _deforest_Cons_head = best;
   _deforest_Cons_tail = (ys) => {
     if (ys instanceof NofibPrelude.Nil.class) {
@@ -794,7 +773,7 @@ proc$ = function proc$(k, rs) {
       return false
     }
   };
-  tmp6 = (ys) => {
+  tmp3 = (ys) => {
     let param0, param1, hx, tx, param01, param11, hy, ty, scrut;
     param0 = _deforest_Cons_head;
     param1 = _deforest_Cons_tail;
@@ -815,8 +794,8 @@ proc$ = function proc$(k, rs) {
       return false
     }
   };
-  tmp7 = NofibPrelude.take(1, afterk);
-  return listEq_inst_9_19_tsni(tmp6, tmp7)
+  tmp4 = NofibPrelude.take(1, afterk);
+  return listEq_inst_9_19_tsni(tmp3, tmp4)
 };
 proc = function proc(k) {
   return (rs) => {
@@ -865,9 +844,9 @@ lambda = (undefined, function (m, x) {
   }
 });
 f$ = function f$(m, x) {
-  let tmp;
-  tmp = runtime.safeCall(lambda(m, x));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda(m, x));
+  return NofibPrelude.lazy(lambda$this)
 };
 f = function f(m) {
   return (x) => {

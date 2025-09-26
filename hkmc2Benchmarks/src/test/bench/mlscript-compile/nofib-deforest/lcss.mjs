@@ -35,7 +35,7 @@ match_ls_arm_Nil_inst_9_10_8_6_4_12_tsni = (undefined, function (k, km, m) {
   return km
 });
 zip_inst_0_1_tsni = function zip_inst_0_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -48,27 +48,27 @@ zip_inst_0_1_tsni = function zip_inst_0_1_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_0_11_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_0_11_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_0_11_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_0_11_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_0_1_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_0_1_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -87,7 +87,7 @@ zip_inst_0_1_tsni = function zip_inst_0_1_tsni(xs, ys) {
   }
 };
 zip_inst_0_2_tsni = function zip_inst_0_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -100,27 +100,27 @@ zip_inst_0_2_tsni = function zip_inst_0_2_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_0_12_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_0_12_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_0_12_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_0_12_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_0_2_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_0_2_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -139,7 +139,7 @@ zip_inst_0_2_tsni = function zip_inst_0_2_tsni(xs, ys) {
   }
 };
 algc_inst_3_4_tsni = function algc_inst_3_4_tsni(m, n, xs, ys) {
-  let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33;
+  let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
   if (ys instanceof NofibPrelude.Nil.class) {
     return lambda
   } else {
@@ -155,61 +155,49 @@ algc_inst_3_4_tsni = function algc_inst_3_4_tsni(m, n, xs, ys) {
           return lambda2
         }
       } else {
-        tmp = NofibPrelude.intDiv(m, 2);
-        m2 = tmp;
-        tmp1 = NofibPrelude.take(m2, xs);
-        xs1 = tmp1;
-        tmp2 = NofibPrelude.leave(m2, xs);
-        xs2 = tmp2;
-        tmp3 = lcss.algb(xs1, ys);
-        l1 = tmp3;
-        tmp4 = NofibPrelude.reverse(xs2);
-        tmp5 = NofibPrelude.reverse(ys);
-        tmp6 = lcss.algb(tmp4, tmp5);
-        tmp7 = NofibPrelude.reverse(tmp6);
-        l2 = tmp7;
-        tmp8 = - 1;
-        tmp9 = zip_inst_3_4_1_tsni(l1, l2);
-        tmp10 = findk_inst_3_4_11_tsni(0, 0, tmp8, tmp9);
-        k = tmp10;
-        tmp11 = NofibPrelude.take(k, ys);
-        tmp12 = algc_inst_3_4_tsni(m2, k, xs1, tmp11);
-        tmp13 = m - m2;
-        tmp14 = n - k;
-        tmp15 = NofibPrelude.leave(k, ys);
-        tmp16 = algc_inst_3_4_tsni(tmp13, tmp14, xs2, tmp15);
-        return NofibPrelude.compose(tmp12, tmp16)
+        m2 = NofibPrelude.intDiv(m, 2);
+        xs1 = NofibPrelude.take(m2, xs);
+        xs2 = NofibPrelude.leave(m2, xs);
+        l1 = lcss.algb(xs1, ys);
+        tmp = NofibPrelude.reverse(xs2);
+        tmp1 = NofibPrelude.reverse(ys);
+        tmp2 = lcss.algb(tmp, tmp1);
+        l2 = NofibPrelude.reverse(tmp2);
+        tmp3 = - 1;
+        tmp4 = zip_inst_3_4_1_tsni(l1, l2);
+        k = findk_inst_3_4_11_tsni(0, 0, tmp3, tmp4);
+        tmp5 = NofibPrelude.take(k, ys);
+        tmp6 = algc_inst_3_4_tsni(m2, k, xs1, tmp5);
+        tmp7 = m - m2;
+        tmp8 = n - k;
+        tmp9 = NofibPrelude.leave(k, ys);
+        tmp10 = algc_inst_3_4_tsni(tmp7, tmp8, xs2, tmp9);
+        return NofibPrelude.compose(tmp6, tmp10)
       }
     } else {
-      tmp17 = NofibPrelude.intDiv(m, 2);
-      m2 = tmp17;
-      tmp18 = NofibPrelude.take(m2, xs);
-      xs1 = tmp18;
-      tmp19 = NofibPrelude.leave(m2, xs);
-      xs2 = tmp19;
-      tmp20 = lcss.algb(xs1, ys);
-      l1 = tmp20;
-      tmp21 = NofibPrelude.reverse(xs2);
-      tmp22 = NofibPrelude.reverse(ys);
-      tmp23 = lcss.algb(tmp21, tmp22);
-      tmp24 = NofibPrelude.reverse(tmp23);
-      l2 = tmp24;
-      tmp25 = - 1;
-      tmp26 = zip_inst_3_4_2_tsni(l1, l2);
-      tmp27 = findk_inst_3_4_12_tsni(0, 0, tmp25, tmp26);
-      k = tmp27;
-      tmp28 = NofibPrelude.take(k, ys);
-      tmp29 = algc_inst_3_4_tsni(m2, k, xs1, tmp28);
-      tmp30 = m - m2;
-      tmp31 = n - k;
-      tmp32 = NofibPrelude.leave(k, ys);
-      tmp33 = algc_inst_3_4_tsni(tmp30, tmp31, xs2, tmp32);
-      return NofibPrelude.compose(tmp29, tmp33)
+      m2 = NofibPrelude.intDiv(m, 2);
+      xs1 = NofibPrelude.take(m2, xs);
+      xs2 = NofibPrelude.leave(m2, xs);
+      l1 = lcss.algb(xs1, ys);
+      tmp11 = NofibPrelude.reverse(xs2);
+      tmp12 = NofibPrelude.reverse(ys);
+      tmp13 = lcss.algb(tmp11, tmp12);
+      l2 = NofibPrelude.reverse(tmp13);
+      tmp14 = - 1;
+      tmp15 = zip_inst_3_4_2_tsni(l1, l2);
+      k = findk_inst_3_4_12_tsni(0, 0, tmp14, tmp15);
+      tmp16 = NofibPrelude.take(k, ys);
+      tmp17 = algc_inst_3_4_tsni(m2, k, xs1, tmp16);
+      tmp18 = m - m2;
+      tmp19 = n - k;
+      tmp20 = NofibPrelude.leave(k, ys);
+      tmp21 = algc_inst_3_4_tsni(tmp18, tmp19, xs2, tmp20);
+      return NofibPrelude.compose(tmp17, tmp21)
     }
   }
 };
 zip_inst_3_4_2_tsni = function zip_inst_3_4_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -222,27 +210,27 @@ zip_inst_3_4_2_tsni = function zip_inst_3_4_2_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_3_4_12_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_3_4_12_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_3_4_12_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_3_4_12_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_3_4_2_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_3_4_2_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -261,7 +249,7 @@ zip_inst_3_4_2_tsni = function zip_inst_3_4_2_tsni(xs, ys) {
   }
 };
 zip_inst_3_4_1_tsni = function zip_inst_3_4_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -274,27 +262,27 @@ zip_inst_3_4_1_tsni = function zip_inst_3_4_1_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_3_4_11_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_3_4_11_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_3_4_11_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_3_4_11_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_3_4_1_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_3_4_1_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -320,7 +308,7 @@ lcss_inst_5_6_tsni = function lcss_inst_5_6_tsni(xs, ys) {
   return runtime.safeCall(tmp2(NofibPrelude.Nil))
 };
 algc_inst_5_6_4_tsni = function algc_inst_5_6_4_tsni(m, n, xs, ys) {
-  let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33;
+  let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
   if (ys instanceof NofibPrelude.Nil.class) {
     return lambda
   } else {
@@ -336,61 +324,49 @@ algc_inst_5_6_4_tsni = function algc_inst_5_6_4_tsni(m, n, xs, ys) {
           return lambda2
         }
       } else {
-        tmp = NofibPrelude.intDiv(m, 2);
-        m2 = tmp;
-        tmp1 = NofibPrelude.take(m2, xs);
-        xs1 = tmp1;
-        tmp2 = NofibPrelude.leave(m2, xs);
-        xs2 = tmp2;
-        tmp3 = lcss.algb(xs1, ys);
-        l1 = tmp3;
-        tmp4 = NofibPrelude.reverse(xs2);
-        tmp5 = NofibPrelude.reverse(ys);
-        tmp6 = lcss.algb(tmp4, tmp5);
-        tmp7 = NofibPrelude.reverse(tmp6);
-        l2 = tmp7;
-        tmp8 = - 1;
-        tmp9 = zip_inst_5_6_4_1_tsni(l1, l2);
-        tmp10 = findk_inst_5_6_4_11_tsni(0, 0, tmp8, tmp9);
-        k = tmp10;
-        tmp11 = NofibPrelude.take(k, ys);
-        tmp12 = algc_inst_5_6_4_tsni(m2, k, xs1, tmp11);
-        tmp13 = m - m2;
-        tmp14 = n - k;
-        tmp15 = NofibPrelude.leave(k, ys);
-        tmp16 = algc_inst_5_6_4_tsni(tmp13, tmp14, xs2, tmp15);
-        return NofibPrelude.compose(tmp12, tmp16)
+        m2 = NofibPrelude.intDiv(m, 2);
+        xs1 = NofibPrelude.take(m2, xs);
+        xs2 = NofibPrelude.leave(m2, xs);
+        l1 = lcss.algb(xs1, ys);
+        tmp = NofibPrelude.reverse(xs2);
+        tmp1 = NofibPrelude.reverse(ys);
+        tmp2 = lcss.algb(tmp, tmp1);
+        l2 = NofibPrelude.reverse(tmp2);
+        tmp3 = - 1;
+        tmp4 = zip_inst_5_6_4_1_tsni(l1, l2);
+        k = findk_inst_5_6_4_11_tsni(0, 0, tmp3, tmp4);
+        tmp5 = NofibPrelude.take(k, ys);
+        tmp6 = algc_inst_5_6_4_tsni(m2, k, xs1, tmp5);
+        tmp7 = m - m2;
+        tmp8 = n - k;
+        tmp9 = NofibPrelude.leave(k, ys);
+        tmp10 = algc_inst_5_6_4_tsni(tmp7, tmp8, xs2, tmp9);
+        return NofibPrelude.compose(tmp6, tmp10)
       }
     } else {
-      tmp17 = NofibPrelude.intDiv(m, 2);
-      m2 = tmp17;
-      tmp18 = NofibPrelude.take(m2, xs);
-      xs1 = tmp18;
-      tmp19 = NofibPrelude.leave(m2, xs);
-      xs2 = tmp19;
-      tmp20 = lcss.algb(xs1, ys);
-      l1 = tmp20;
-      tmp21 = NofibPrelude.reverse(xs2);
-      tmp22 = NofibPrelude.reverse(ys);
-      tmp23 = lcss.algb(tmp21, tmp22);
-      tmp24 = NofibPrelude.reverse(tmp23);
-      l2 = tmp24;
-      tmp25 = - 1;
-      tmp26 = zip_inst_5_6_4_2_tsni(l1, l2);
-      tmp27 = findk_inst_5_6_4_12_tsni(0, 0, tmp25, tmp26);
-      k = tmp27;
-      tmp28 = NofibPrelude.take(k, ys);
-      tmp29 = algc_inst_5_6_4_tsni(m2, k, xs1, tmp28);
-      tmp30 = m - m2;
-      tmp31 = n - k;
-      tmp32 = NofibPrelude.leave(k, ys);
-      tmp33 = algc_inst_5_6_4_tsni(tmp30, tmp31, xs2, tmp32);
-      return NofibPrelude.compose(tmp29, tmp33)
+      m2 = NofibPrelude.intDiv(m, 2);
+      xs1 = NofibPrelude.take(m2, xs);
+      xs2 = NofibPrelude.leave(m2, xs);
+      l1 = lcss.algb(xs1, ys);
+      tmp11 = NofibPrelude.reverse(xs2);
+      tmp12 = NofibPrelude.reverse(ys);
+      tmp13 = lcss.algb(tmp11, tmp12);
+      l2 = NofibPrelude.reverse(tmp13);
+      tmp14 = - 1;
+      tmp15 = zip_inst_5_6_4_2_tsni(l1, l2);
+      k = findk_inst_5_6_4_12_tsni(0, 0, tmp14, tmp15);
+      tmp16 = NofibPrelude.take(k, ys);
+      tmp17 = algc_inst_5_6_4_tsni(m2, k, xs1, tmp16);
+      tmp18 = m - m2;
+      tmp19 = n - k;
+      tmp20 = NofibPrelude.leave(k, ys);
+      tmp21 = algc_inst_5_6_4_tsni(tmp18, tmp19, xs2, tmp20);
+      return NofibPrelude.compose(tmp17, tmp21)
     }
   }
 };
 zip_inst_5_6_4_1_tsni = function zip_inst_5_6_4_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -403,27 +379,27 @@ zip_inst_5_6_4_1_tsni = function zip_inst_5_6_4_1_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_5_6_4_11_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_5_6_4_11_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_5_6_4_11_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_5_6_4_11_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_5_6_4_1_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_5_6_4_1_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -442,7 +418,7 @@ zip_inst_5_6_4_1_tsni = function zip_inst_5_6_4_1_tsni(xs, ys) {
   }
 };
 zip_inst_5_6_4_2_tsni = function zip_inst_5_6_4_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -455,27 +431,27 @@ zip_inst_5_6_4_2_tsni = function zip_inst_5_6_4_2_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_5_6_4_12_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_5_6_4_12_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_5_6_4_12_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_5_6_4_12_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_5_6_4_2_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_5_6_4_2_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -507,7 +483,7 @@ lcss_inst_7_8_6_tsni = function lcss_inst_7_8_6_tsni(xs, ys) {
   return runtime.safeCall(tmp2(NofibPrelude.Nil))
 };
 algc_inst_7_8_6_4_tsni = function algc_inst_7_8_6_4_tsni(m, n, xs, ys) {
-  let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33;
+  let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
   if (ys instanceof NofibPrelude.Nil.class) {
     return lambda
   } else {
@@ -523,61 +499,49 @@ algc_inst_7_8_6_4_tsni = function algc_inst_7_8_6_4_tsni(m, n, xs, ys) {
           return lambda2
         }
       } else {
-        tmp = NofibPrelude.intDiv(m, 2);
-        m2 = tmp;
-        tmp1 = NofibPrelude.take(m2, xs);
-        xs1 = tmp1;
-        tmp2 = NofibPrelude.leave(m2, xs);
-        xs2 = tmp2;
-        tmp3 = lcss.algb(xs1, ys);
-        l1 = tmp3;
-        tmp4 = NofibPrelude.reverse(xs2);
-        tmp5 = NofibPrelude.reverse(ys);
-        tmp6 = lcss.algb(tmp4, tmp5);
-        tmp7 = NofibPrelude.reverse(tmp6);
-        l2 = tmp7;
-        tmp8 = - 1;
-        tmp9 = zip_inst_7_8_6_4_1_tsni(l1, l2);
-        tmp10 = findk_inst_7_8_6_4_11_tsni(0, 0, tmp8, tmp9);
-        k = tmp10;
-        tmp11 = NofibPrelude.take(k, ys);
-        tmp12 = algc_inst_7_8_6_4_tsni(m2, k, xs1, tmp11);
-        tmp13 = m - m2;
-        tmp14 = n - k;
-        tmp15 = NofibPrelude.leave(k, ys);
-        tmp16 = algc_inst_7_8_6_4_tsni(tmp13, tmp14, xs2, tmp15);
-        return NofibPrelude.compose(tmp12, tmp16)
+        m2 = NofibPrelude.intDiv(m, 2);
+        xs1 = NofibPrelude.take(m2, xs);
+        xs2 = NofibPrelude.leave(m2, xs);
+        l1 = lcss.algb(xs1, ys);
+        tmp = NofibPrelude.reverse(xs2);
+        tmp1 = NofibPrelude.reverse(ys);
+        tmp2 = lcss.algb(tmp, tmp1);
+        l2 = NofibPrelude.reverse(tmp2);
+        tmp3 = - 1;
+        tmp4 = zip_inst_7_8_6_4_1_tsni(l1, l2);
+        k = findk_inst_7_8_6_4_11_tsni(0, 0, tmp3, tmp4);
+        tmp5 = NofibPrelude.take(k, ys);
+        tmp6 = algc_inst_7_8_6_4_tsni(m2, k, xs1, tmp5);
+        tmp7 = m - m2;
+        tmp8 = n - k;
+        tmp9 = NofibPrelude.leave(k, ys);
+        tmp10 = algc_inst_7_8_6_4_tsni(tmp7, tmp8, xs2, tmp9);
+        return NofibPrelude.compose(tmp6, tmp10)
       }
     } else {
-      tmp17 = NofibPrelude.intDiv(m, 2);
-      m2 = tmp17;
-      tmp18 = NofibPrelude.take(m2, xs);
-      xs1 = tmp18;
-      tmp19 = NofibPrelude.leave(m2, xs);
-      xs2 = tmp19;
-      tmp20 = lcss.algb(xs1, ys);
-      l1 = tmp20;
-      tmp21 = NofibPrelude.reverse(xs2);
-      tmp22 = NofibPrelude.reverse(ys);
-      tmp23 = lcss.algb(tmp21, tmp22);
-      tmp24 = NofibPrelude.reverse(tmp23);
-      l2 = tmp24;
-      tmp25 = - 1;
-      tmp26 = zip_inst_7_8_6_4_2_tsni(l1, l2);
-      tmp27 = findk_inst_7_8_6_4_12_tsni(0, 0, tmp25, tmp26);
-      k = tmp27;
-      tmp28 = NofibPrelude.take(k, ys);
-      tmp29 = algc_inst_7_8_6_4_tsni(m2, k, xs1, tmp28);
-      tmp30 = m - m2;
-      tmp31 = n - k;
-      tmp32 = NofibPrelude.leave(k, ys);
-      tmp33 = algc_inst_7_8_6_4_tsni(tmp30, tmp31, xs2, tmp32);
-      return NofibPrelude.compose(tmp29, tmp33)
+      m2 = NofibPrelude.intDiv(m, 2);
+      xs1 = NofibPrelude.take(m2, xs);
+      xs2 = NofibPrelude.leave(m2, xs);
+      l1 = lcss.algb(xs1, ys);
+      tmp11 = NofibPrelude.reverse(xs2);
+      tmp12 = NofibPrelude.reverse(ys);
+      tmp13 = lcss.algb(tmp11, tmp12);
+      l2 = NofibPrelude.reverse(tmp13);
+      tmp14 = - 1;
+      tmp15 = zip_inst_7_8_6_4_2_tsni(l1, l2);
+      k = findk_inst_7_8_6_4_12_tsni(0, 0, tmp14, tmp15);
+      tmp16 = NofibPrelude.take(k, ys);
+      tmp17 = algc_inst_7_8_6_4_tsni(m2, k, xs1, tmp16);
+      tmp18 = m - m2;
+      tmp19 = n - k;
+      tmp20 = NofibPrelude.leave(k, ys);
+      tmp21 = algc_inst_7_8_6_4_tsni(tmp18, tmp19, xs2, tmp20);
+      return NofibPrelude.compose(tmp17, tmp21)
     }
   }
 };
 zip_inst_7_8_6_4_2_tsni = function zip_inst_7_8_6_4_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -590,27 +554,27 @@ zip_inst_7_8_6_4_2_tsni = function zip_inst_7_8_6_4_2_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_7_8_6_4_12_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_7_8_6_4_12_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_7_8_6_4_12_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_7_8_6_4_12_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_7_8_6_4_2_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_7_8_6_4_2_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -629,7 +593,7 @@ zip_inst_7_8_6_4_2_tsni = function zip_inst_7_8_6_4_2_tsni(xs, ys) {
   }
 };
 zip_inst_7_8_6_4_1_tsni = function zip_inst_7_8_6_4_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -642,27 +606,27 @@ zip_inst_7_8_6_4_1_tsni = function zip_inst_7_8_6_4_1_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_7_8_6_4_11_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_7_8_6_4_11_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_7_8_6_4_11_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_7_8_6_4_11_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_7_8_6_4_1_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_7_8_6_4_1_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -697,7 +661,7 @@ lcss_inst_9_10_8_6_tsni = function lcss_inst_9_10_8_6_tsni(xs, ys) {
   return runtime.safeCall(tmp2(NofibPrelude.Nil))
 };
 algc_inst_9_10_8_6_4_tsni = function algc_inst_9_10_8_6_4_tsni(m, n, xs, ys) {
-  let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33;
+  let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
   if (ys instanceof NofibPrelude.Nil.class) {
     return lambda
   } else {
@@ -713,61 +677,49 @@ algc_inst_9_10_8_6_4_tsni = function algc_inst_9_10_8_6_4_tsni(m, n, xs, ys) {
           return lambda2
         }
       } else {
-        tmp = NofibPrelude.intDiv(m, 2);
-        m2 = tmp;
-        tmp1 = NofibPrelude.take(m2, xs);
-        xs1 = tmp1;
-        tmp2 = NofibPrelude.leave(m2, xs);
-        xs2 = tmp2;
-        tmp3 = lcss.algb(xs1, ys);
-        l1 = tmp3;
-        tmp4 = NofibPrelude.reverse(xs2);
-        tmp5 = NofibPrelude.reverse(ys);
-        tmp6 = lcss.algb(tmp4, tmp5);
-        tmp7 = NofibPrelude.reverse(tmp6);
-        l2 = tmp7;
-        tmp8 = - 1;
-        tmp9 = zip_inst_9_10_8_6_4_1_tsni(l1, l2);
-        tmp10 = findk_inst_9_10_8_6_4_11_tsni(0, 0, tmp8, tmp9);
-        k = tmp10;
-        tmp11 = NofibPrelude.take(k, ys);
-        tmp12 = algc_inst_9_10_8_6_4_tsni(m2, k, xs1, tmp11);
-        tmp13 = m - m2;
-        tmp14 = n - k;
-        tmp15 = NofibPrelude.leave(k, ys);
-        tmp16 = algc_inst_9_10_8_6_4_tsni(tmp13, tmp14, xs2, tmp15);
-        return NofibPrelude.compose(tmp12, tmp16)
+        m2 = NofibPrelude.intDiv(m, 2);
+        xs1 = NofibPrelude.take(m2, xs);
+        xs2 = NofibPrelude.leave(m2, xs);
+        l1 = lcss.algb(xs1, ys);
+        tmp = NofibPrelude.reverse(xs2);
+        tmp1 = NofibPrelude.reverse(ys);
+        tmp2 = lcss.algb(tmp, tmp1);
+        l2 = NofibPrelude.reverse(tmp2);
+        tmp3 = - 1;
+        tmp4 = zip_inst_9_10_8_6_4_1_tsni(l1, l2);
+        k = findk_inst_9_10_8_6_4_11_tsni(0, 0, tmp3, tmp4);
+        tmp5 = NofibPrelude.take(k, ys);
+        tmp6 = algc_inst_9_10_8_6_4_tsni(m2, k, xs1, tmp5);
+        tmp7 = m - m2;
+        tmp8 = n - k;
+        tmp9 = NofibPrelude.leave(k, ys);
+        tmp10 = algc_inst_9_10_8_6_4_tsni(tmp7, tmp8, xs2, tmp9);
+        return NofibPrelude.compose(tmp6, tmp10)
       }
     } else {
-      tmp17 = NofibPrelude.intDiv(m, 2);
-      m2 = tmp17;
-      tmp18 = NofibPrelude.take(m2, xs);
-      xs1 = tmp18;
-      tmp19 = NofibPrelude.leave(m2, xs);
-      xs2 = tmp19;
-      tmp20 = lcss.algb(xs1, ys);
-      l1 = tmp20;
-      tmp21 = NofibPrelude.reverse(xs2);
-      tmp22 = NofibPrelude.reverse(ys);
-      tmp23 = lcss.algb(tmp21, tmp22);
-      tmp24 = NofibPrelude.reverse(tmp23);
-      l2 = tmp24;
-      tmp25 = - 1;
-      tmp26 = zip_inst_9_10_8_6_4_2_tsni(l1, l2);
-      tmp27 = findk_inst_9_10_8_6_4_12_tsni(0, 0, tmp25, tmp26);
-      k = tmp27;
-      tmp28 = NofibPrelude.take(k, ys);
-      tmp29 = algc_inst_9_10_8_6_4_tsni(m2, k, xs1, tmp28);
-      tmp30 = m - m2;
-      tmp31 = n - k;
-      tmp32 = NofibPrelude.leave(k, ys);
-      tmp33 = algc_inst_9_10_8_6_4_tsni(tmp30, tmp31, xs2, tmp32);
-      return NofibPrelude.compose(tmp29, tmp33)
+      m2 = NofibPrelude.intDiv(m, 2);
+      xs1 = NofibPrelude.take(m2, xs);
+      xs2 = NofibPrelude.leave(m2, xs);
+      l1 = lcss.algb(xs1, ys);
+      tmp11 = NofibPrelude.reverse(xs2);
+      tmp12 = NofibPrelude.reverse(ys);
+      tmp13 = lcss.algb(tmp11, tmp12);
+      l2 = NofibPrelude.reverse(tmp13);
+      tmp14 = - 1;
+      tmp15 = zip_inst_9_10_8_6_4_2_tsni(l1, l2);
+      k = findk_inst_9_10_8_6_4_12_tsni(0, 0, tmp14, tmp15);
+      tmp16 = NofibPrelude.take(k, ys);
+      tmp17 = algc_inst_9_10_8_6_4_tsni(m2, k, xs1, tmp16);
+      tmp18 = m - m2;
+      tmp19 = n - k;
+      tmp20 = NofibPrelude.leave(k, ys);
+      tmp21 = algc_inst_9_10_8_6_4_tsni(tmp18, tmp19, xs2, tmp20);
+      return NofibPrelude.compose(tmp17, tmp21)
     }
   }
 };
 zip_inst_9_10_8_6_4_1_tsni = function zip_inst_9_10_8_6_4_1_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -780,27 +732,27 @@ zip_inst_9_10_8_6_4_1_tsni = function zip_inst_9_10_8_6_4_1_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_9_10_8_6_4_11_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_9_10_8_6_4_11_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_9_10_8_6_4_11_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_9_10_8_6_4_11_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_9_10_8_6_4_1_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_9_10_8_6_4_1_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -819,7 +771,7 @@ zip_inst_9_10_8_6_4_1_tsni = function zip_inst_9_10_8_6_4_1_tsni(xs, ys) {
   }
 };
 zip_inst_9_10_8_6_4_2_tsni = function zip_inst_9_10_8_6_4_2_tsni(xs, ys) {
-  let param0, param1, x, xs1, param01, param11, y, ys1, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, x, xs1, param01, param11, y, ys1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (xs instanceof NofibPrelude.Cons.class) {
     param0 = xs.head;
     param1 = xs.tail;
@@ -832,27 +784,27 @@ zip_inst_9_10_8_6_4_2_tsni = function zip_inst_9_10_8_6_4_2_tsni(xs, ys) {
       ys1 = param11;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (k, km, m, param12) => {
-        let first1, first0, x1, y1, xys, scrut, tmp1, tmp2, tmp3, tmp4;
+      tmp = (k, km, m, param12) => {
+        let first1, first0, x1, y1, xys, scrut, tmp2, tmp3, tmp4, tmp5;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         x1 = first0;
         y1 = first1;
         xys = param12;
-        tmp1 = x1 + y1;
-        scrut = tmp1 >= m;
+        tmp2 = x1 + y1;
+        scrut = tmp2 >= m;
         if (scrut === true) {
-          tmp2 = k + 1;
-          tmp3 = x1 + y1;
-          return findk_inst_9_10_8_6_4_12_tsni(tmp2, k, tmp3, xys)
+          tmp3 = k + 1;
+          tmp4 = x1 + y1;
+          return findk_inst_9_10_8_6_4_12_tsni(tmp3, k, tmp4, xys)
         } else {
-          tmp4 = k + 1;
-          return findk_inst_9_10_8_6_4_12_tsni(tmp4, km, m, xys)
+          tmp5 = k + 1;
+          return findk_inst_9_10_8_6_4_12_tsni(tmp5, km, m, xys)
         }
       };
-      tmp = zip_inst_9_10_8_6_4_2_tsni(xs1, ys1);
-      _deforest_Cons_head = arr;
-      _deforest_Cons_tail = tmp;
+      tmp1 = zip_inst_9_10_8_6_4_2_tsni(xs1, ys1);
+      _deforest_Cons_head = tmp;
+      _deforest_Cons_tail = tmp1;
       return (k, km, m) => {
         let param02, param12;
         param02 = _deforest_Cons_head;
@@ -915,18 +867,18 @@ lambda2 = (undefined, function (x) {
   return x
 });
 listcomp_fun = function listcomp_fun(listcomp_fun_para) {
-  let param0, param1, listcomp_fun_ls_h, listcomp_fun_ls_t, arr, tmp;
+  let param0, param1, listcomp_fun_ls_h, listcomp_fun_ls_t, tmp, tmp1;
   if (listcomp_fun_para instanceof NofibPrelude.Cons.class) {
     param0 = listcomp_fun_para.head;
     param1 = listcomp_fun_para.tail;
     listcomp_fun_ls_h = param0;
     listcomp_fun_ls_t = param1;
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       listcomp_fun_ls_h,
       0
     ]);
-    tmp = listcomp_fun(listcomp_fun_ls_t);
-    return NofibPrelude.Cons(arr, tmp)
+    tmp1 = listcomp_fun(listcomp_fun_ls_t);
+    return NofibPrelude.Cons(tmp, tmp1)
   } else if (listcomp_fun_para instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else {
@@ -941,7 +893,7 @@ globalThis.Object.freeze(class lcss {
     runtime.Unit;
   }
   static algb2(x, k0j1, k1j1, yss) {
-    let param0, param1, first1, first0, y, k0j, ys, kjcurr, scrut, tmp, arr, tmp1;
+    let param0, param1, first1, first0, y, k0j, ys, kjcurr, scrut, tmp, tmp1, tmp2;
     if (yss instanceof NofibPrelude.Nil.class) {
       return NofibPrelude.Nil
     } else if (yss instanceof NofibPrelude.Cons.class) {
@@ -960,12 +912,12 @@ globalThis.Object.freeze(class lcss {
           tmp = NofibPrelude.max(k1j1, k0j);
         }
         kjcurr = tmp;
-        arr = globalThis.Object.freeze([
+        tmp1 = globalThis.Object.freeze([
           y,
           kjcurr
         ]);
-        tmp1 = lcss.algb2(x, k0j, kjcurr, ys);
-        return NofibPrelude.Cons(arr, tmp1)
+        tmp2 = lcss.algb2(x, k0j, kjcurr, ys);
+        return NofibPrelude.Cons(tmp1, tmp2)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -1025,7 +977,7 @@ globalThis.Object.freeze(class lcss {
     }
   } 
   static algc(m, n, xs, ys) {
-    let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33;
+    let m2, xs1, xs2, l1, l2, k, param0, param1, x, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
     if (ys instanceof NofibPrelude.Nil.class) {
       return lambda
     } else {
@@ -1041,56 +993,44 @@ globalThis.Object.freeze(class lcss {
             return lambda2
           }
         } else {
-          tmp = NofibPrelude.intDiv(m, 2);
-          m2 = tmp;
-          tmp1 = NofibPrelude.take(m2, xs);
-          xs1 = tmp1;
-          tmp2 = NofibPrelude.leave(m2, xs);
-          xs2 = tmp2;
-          tmp3 = lcss.algb(xs1, ys);
-          l1 = tmp3;
-          tmp4 = NofibPrelude.reverse(xs2);
-          tmp5 = NofibPrelude.reverse(ys);
-          tmp6 = lcss.algb(tmp4, tmp5);
-          tmp7 = NofibPrelude.reverse(tmp6);
-          l2 = tmp7;
-          tmp8 = - 1;
-          tmp9 = zip_inst_0_1_tsni(l1, l2);
-          tmp10 = findk_inst_0_11_tsni(0, 0, tmp8, tmp9);
-          k = tmp10;
-          tmp11 = NofibPrelude.take(k, ys);
-          tmp12 = lcss.algc(m2, k, xs1, tmp11);
-          tmp13 = m - m2;
-          tmp14 = n - k;
-          tmp15 = NofibPrelude.leave(k, ys);
-          tmp16 = lcss.algc(tmp13, tmp14, xs2, tmp15);
-          return NofibPrelude.compose(tmp12, tmp16)
+          m2 = NofibPrelude.intDiv(m, 2);
+          xs1 = NofibPrelude.take(m2, xs);
+          xs2 = NofibPrelude.leave(m2, xs);
+          l1 = lcss.algb(xs1, ys);
+          tmp = NofibPrelude.reverse(xs2);
+          tmp1 = NofibPrelude.reverse(ys);
+          tmp2 = lcss.algb(tmp, tmp1);
+          l2 = NofibPrelude.reverse(tmp2);
+          tmp3 = - 1;
+          tmp4 = zip_inst_0_1_tsni(l1, l2);
+          k = findk_inst_0_11_tsni(0, 0, tmp3, tmp4);
+          tmp5 = NofibPrelude.take(k, ys);
+          tmp6 = lcss.algc(m2, k, xs1, tmp5);
+          tmp7 = m - m2;
+          tmp8 = n - k;
+          tmp9 = NofibPrelude.leave(k, ys);
+          tmp10 = lcss.algc(tmp7, tmp8, xs2, tmp9);
+          return NofibPrelude.compose(tmp6, tmp10)
         }
       } else {
-        tmp17 = NofibPrelude.intDiv(m, 2);
-        m2 = tmp17;
-        tmp18 = NofibPrelude.take(m2, xs);
-        xs1 = tmp18;
-        tmp19 = NofibPrelude.leave(m2, xs);
-        xs2 = tmp19;
-        tmp20 = lcss.algb(xs1, ys);
-        l1 = tmp20;
-        tmp21 = NofibPrelude.reverse(xs2);
-        tmp22 = NofibPrelude.reverse(ys);
-        tmp23 = lcss.algb(tmp21, tmp22);
-        tmp24 = NofibPrelude.reverse(tmp23);
-        l2 = tmp24;
-        tmp25 = - 1;
-        tmp26 = zip_inst_0_2_tsni(l1, l2);
-        tmp27 = findk_inst_0_12_tsni(0, 0, tmp25, tmp26);
-        k = tmp27;
-        tmp28 = NofibPrelude.take(k, ys);
-        tmp29 = lcss.algc(m2, k, xs1, tmp28);
-        tmp30 = m - m2;
-        tmp31 = n - k;
-        tmp32 = NofibPrelude.leave(k, ys);
-        tmp33 = lcss.algc(tmp30, tmp31, xs2, tmp32);
-        return NofibPrelude.compose(tmp29, tmp33)
+        m2 = NofibPrelude.intDiv(m, 2);
+        xs1 = NofibPrelude.take(m2, xs);
+        xs2 = NofibPrelude.leave(m2, xs);
+        l1 = lcss.algb(xs1, ys);
+        tmp11 = NofibPrelude.reverse(xs2);
+        tmp12 = NofibPrelude.reverse(ys);
+        tmp13 = lcss.algb(tmp11, tmp12);
+        l2 = NofibPrelude.reverse(tmp13);
+        tmp14 = - 1;
+        tmp15 = zip_inst_0_2_tsni(l1, l2);
+        k = findk_inst_0_12_tsni(0, 0, tmp14, tmp15);
+        tmp16 = NofibPrelude.take(k, ys);
+        tmp17 = lcss.algc(m2, k, xs1, tmp16);
+        tmp18 = m - m2;
+        tmp19 = n - k;
+        tmp20 = NofibPrelude.leave(k, ys);
+        tmp21 = lcss.algc(tmp18, tmp19, xs2, tmp20);
+        return NofibPrelude.compose(tmp17, tmp21)
       }
     }
   } 

@@ -6,98 +6,82 @@ import NofibPrelude from "./NofibPrelude.mjs";
 import Predef from "./../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mjs";
 let f1, lscomp1, next, f2, f3, lscomp2, lscomp11, lscomp21, f4, lscomp12, f5, f7, f6, lscomp13, f8, constraints1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda$, lambda$1, f1$, lambda$2, lambda$3, lambda$4, next$, lscomp1$, lambda$5, f2$, lambda$6, f3$, lscomp1$1, lambda$7, lscomp1$2, lscomp2$, f4$, lambda$8, lambda$9, lambda$10, try__inst_0_1_tsni, search_inst_0_1_2_tsni, mkTree_inst_0_1_2_3_tsni, next_inst_0_1_2_3_4_tsni, next$_inst_0_1_2_3_4_5_tsni, enumFromTo_inst_0_1_2_3_4_5_6_tsni, lscomp1$_inst_0_1_2_3_4_5_7_tsni, prune_inst_0_1_2_8_tsni, filterTree_inst_0_1_2_8_9_tsni, foldTree_inst_0_1_2_8_9_10_tsni, lambda_inst_0_1_2_8_9_10_tsni, lambda$_inst_0_1_2_8_9_10_tsni, map_inst_0_1_2_8_9_10_11_tsni, leaves_inst_0_1_2_12_tsni, map_inst_0_1_2_12_13_tsni, filter_inst_0_1_2_14_tsni, lambda$_inst_15_16_tsni, try__inst_15_16_1_tsni, search_inst_15_16_1_2_tsni, filter_inst_15_16_1_2_14_tsni, leaves_inst_15_16_1_2_12_tsni, map_inst_15_16_1_2_12_13_tsni, prune_inst_15_16_1_2_8_tsni, filterTree_inst_15_16_1_2_8_9_tsni, foldTree_inst_15_16_1_2_8_9_10_tsni, lambda_inst_15_16_1_2_8_9_10_tsni, lambda$_inst_15_16_1_2_8_9_10_tsni, map_inst_15_16_1_2_8_9_10_11_tsni, mkTree_inst_15_16_1_2_3_tsni, next_inst_15_16_1_2_3_4_tsni, next$_inst_15_16_1_2_3_4_5_tsni, enumFromTo_inst_15_16_1_2_3_4_5_6_tsni, lscomp1$_inst_15_16_1_2_3_4_5_7_tsni, map_inst_17_18_tsni, map_inst_19_20_tsni, cacheChecks_inst_21_tsni, lambda_inst_21_tsni, fillTable_inst_21_22_tsni, lscomp1$_inst_21_22_23_tsni, enumFromTo_inst_21_22_23_24_tsni, lscomp2$_inst_21_22_23_25_tsni, enumFromTo_inst_21_22_26_tsni, cacheChecks_inst_27_tsni, lambda$_inst_27_tsni, fillTable_inst_27_22_tsni, lscomp1$_inst_27_22_23_tsni, enumFromTo_inst_27_22_23_24_tsni, lscomp2$_inst_27_22_23_25_tsni, enumFromTo_inst_27_22_26_tsni, f5_inst_29_30_tsni, lambda$_inst_31_32_tsni, f5_inst_31_32_30_tsni, enumFromTo_inst_33_24_tsni, lscomp1$_inst_34_35_tsni, enumFromTo_inst_34_35_24_tsni, enumFromTo_inst_36_37_tsni, lscomp1$_inst_38_39_tsni, enumFromTo_inst_38_39_37_tsni, earliestInconsistency_inst_40_41_tsni, filter_inst_40_41_42_tsni, f3$_inst_43_44_tsni, earliestInconsistency_inst_43_44_41_tsni, filter_inst_43_44_41_42_tsni, earliestInconsistency_inst_45_46_tsni, filter_inst_45_46_42_tsni, f2$_inst_47_48_tsni, earliestInconsistency_inst_47_48_46_tsni, filter_inst_47_48_46_42_tsni, enumFromTo_inst_49_6_tsni, next$_inst_50_5_tsni, enumFromTo_inst_50_5_6_tsni, foldTree_inst_51_10_tsni, lambda_inst_51_10_tsni, lambda$_inst_51_10_tsni, map_inst_51_10_11_tsni, filterTree_inst_52_9_tsni, foldTree_inst_52_9_10_tsni, lambda_inst_52_9_10_tsni, lambda$_inst_52_9_10_tsni, map_inst_52_9_10_11_tsni, map_inst_53_13_tsni, next_inst_54_4_tsni, next$_inst_54_4_5_tsni, enumFromTo_inst_54_4_5_6_tsni, lscomp1$_inst_54_4_5_7_tsni, filter_inst_55_42_tsni, f2_inst_56_57_tsni, f2$_inst_56_57_48_tsni, earliestInconsistency_inst_56_57_48_46_tsni, filter_inst_56_57_48_46_42_tsni, mkTree_inst_58_59_tsni, next_inst_58_59_4_tsni, next$_inst_58_59_4_5_tsni, enumFromTo_inst_58_59_4_5_6_tsni, lscomp1$_inst_58_59_4_5_7_tsni, labelInconsistencies_inst_58_60_tsni, f2_inst_58_60_57_tsni, f2$_inst_58_60_57_48_tsni, earliestInconsistency_inst_58_60_57_48_46_tsni, filter_inst_58_60_57_48_46_42_tsni, initTree_inst_58_59_61_tsni, lambda_inst_58_59_61_tsni, lambda$_inst_58_59_61_tsni, map_inst_58_59_61_62_tsni, prune_inst_58_63_tsni, filterTree_inst_58_63_9_tsni, foldTree_inst_58_63_9_10_tsni, lambda_inst_58_63_9_10_tsni, lambda$_inst_58_63_9_10_tsni, map_inst_58_63_9_10_11_tsni, mapTree_inst_58_60_64_tsni, lambda_inst_58_60_64_tsni, lambda$_inst_58_60_64_tsni, map_inst_58_60_64_65_tsni, f1_inst_58_63_9_66_tsni, f1$_inst_58_63_9_66_67_tsni, filter_inst_58_63_9_66_67_68_tsni, leaves_inst_58_69_tsni, map_inst_58_69_13_tsni, mapTree_inst_58_70_tsni, lambda_inst_58_70_tsni, lambda$_inst_58_70_tsni, mkTree_inst_71_3_tsni, next_inst_71_3_4_tsni, next$_inst_71_3_4_5_tsni, enumFromTo_inst_71_3_4_5_6_tsni, lscomp1$_inst_71_3_4_5_7_tsni, prune_inst_71_8_tsni, filterTree_inst_71_8_9_tsni, foldTree_inst_71_8_9_10_tsni, lambda_inst_71_8_9_10_tsni, lambda$_inst_71_8_9_10_tsni, map_inst_71_8_9_10_11_tsni, leaves_inst_71_12_tsni, map_inst_71_12_13_tsni, filter_inst_71_14_tsni, f3_inst_72_73_tsni, f3$_inst_72_73_44_tsni, earliestInconsistency_inst_72_73_44_41_tsni, filter_inst_72_73_44_41_42_tsni, lscomp1$_inst_74_75_tsni, enumFromTo_inst_74_75_37_tsni, enumFromTo_inst_74_76_tsni, lscomp1$_inst_77_23_tsni, enumFromTo_inst_77_23_24_tsni, enumFromTo_inst_77_26_tsni, lscomp2$_inst_77_23_25_tsni, lambda_inst_78_79_tsni, lambda$_inst_78_79_32_tsni, f5_inst_78_79_32_30_tsni, lambda_inst_80_tsni, lambda$_inst_80_tsni, fillTable_inst_80_22_tsni, lscomp1$_inst_80_22_23_tsni, enumFromTo_inst_80_22_23_24_tsni, lscomp2$_inst_80_22_23_25_tsni, enumFromTo_inst_80_22_26_tsni, emptyTable_inst_81_82_tsni, lscomp1$_inst_81_82_75_tsni, enumFromTo_inst_81_82_75_37_tsni, enumFromTo_inst_81_82_76_tsni, cacheChecks_inst_81_83_tsni, lambda_inst_81_83_tsni, lambda$_inst_81_83_tsni, fillTable_inst_81_83_22_tsni, lscomp1$_inst_81_83_22_23_tsni, enumFromTo_inst_81_83_22_23_24_tsni, enumFromTo_inst_81_83_22_26_tsni, lscomp2$_inst_81_83_22_23_25_tsni, lookupCache_inst_81_84_tsni, lambda_inst_81_84_79_tsni, lambda$_inst_81_84_79_32_tsni, f5_inst_81_84_79_32_30_tsni, map_inst_81_83_85_tsni, mapTree_inst_81_84_86_tsni, lambda_inst_81_84_86_tsni, lambda$_inst_81_84_86_tsni, map_inst_81_84_86_65_tsni, f7_inst_87_88_tsni, map_inst_87_88_20_tsni, f6_inst_89_90_tsni, map_inst_89_90_18_tsni, bt_inst_91_92_tsni, f3_inst_91_92_73_tsni, f3$_inst_91_92_73_44_tsni, earliestInconsistency_inst_91_92_73_44_41_tsni, filter_inst_91_92_73_44_41_42_tsni, bj_inst_91_93_tsni, f6_inst_91_93_90_tsni, map_inst_91_93_90_18_tsni, mapTree_inst_91_92_94_tsni, lambda_inst_91_92_94_tsni, lambda$_inst_91_92_94_tsni, map_inst_91_92_94_65_tsni, checkComplete_inst_91_92_73_44_95_tsni, checkComplete_inst_91_92_73_44_96_tsni, bt_inst_97_98_tsni, f3_inst_97_98_73_tsni, f3$_inst_97_98_73_44_tsni, earliestInconsistency_inst_97_98_73_44_41_tsni, filter_inst_97_98_73_44_41_42_tsni, bj__inst_97_99_tsni, f7_inst_97_99_88_tsni, map_inst_97_99_88_20_tsni, mapTree_inst_97_98_94_tsni, lambda_inst_97_98_94_tsni, lambda$_inst_97_98_94_tsni, map_inst_97_98_94_65_tsni, checkComplete_inst_97_98_73_44_95_tsni, checkComplete_inst_97_98_73_44_96_tsni, emptyTable_inst_100_101_tsni, lscomp1$_inst_100_101_75_tsni, enumFromTo_inst_100_101_75_37_tsni, enumFromTo_inst_100_101_76_tsni, cacheChecks_inst_100_102_tsni, lambda_inst_100_102_tsni, lambda$_inst_100_102_tsni, fillTable_inst_100_102_22_tsni, lscomp1$_inst_100_102_22_23_tsni, enumFromTo_inst_100_102_22_23_24_tsni, enumFromTo_inst_100_102_22_26_tsni, lscomp2$_inst_100_102_22_23_25_tsni, lookupCache_inst_100_103_tsni, lambda_inst_100_103_79_tsni, lambda$_inst_100_103_79_32_tsni, f5_inst_100_103_79_32_30_tsni, map_inst_100_102_85_tsni, mapTree_inst_100_103_86_tsni, lambda_inst_100_103_86_tsni, lambda$_inst_100_103_86_tsni, map_inst_100_103_86_65_tsni, search_inst_104_2_tsni, filter_inst_104_2_14_tsni, leaves_inst_104_2_12_tsni, map_inst_104_2_12_13_tsni, prune_inst_104_2_8_tsni, filterTree_inst_104_2_8_9_tsni, foldTree_inst_104_2_8_9_10_tsni, lambda_inst_104_2_8_9_10_tsni, lambda$_inst_104_2_8_9_10_tsni, map_inst_104_2_8_9_10_11_tsni, mkTree_inst_104_2_3_tsni, next_inst_104_2_3_4_tsni, next$_inst_104_2_3_4_5_tsni, enumFromTo_inst_104_2_3_4_5_6_tsni, lscomp1$_inst_104_2_3_4_5_7_tsni, fc_inst_105_106_tsni, lookupCache_inst_105_106_103_tsni, lambda_inst_105_106_103_79_tsni, lambda$_inst_105_106_103_79_32_tsni, f5_inst_105_106_103_79_32_30_tsni, mapTree_inst_105_106_103_86_tsni, lambda_inst_105_106_103_86_tsni, lambda$_inst_105_106_103_86_tsni, map_inst_105_106_103_86_65_tsni, cacheChecks_inst_105_106_102_tsni, lambda_inst_105_106_102_tsni, lambda$_inst_105_106_102_tsni, fillTable_inst_105_106_102_22_tsni, lscomp1$_inst_105_106_102_22_23_tsni, enumFromTo_inst_105_106_102_22_23_24_tsni, lscomp2$_inst_105_106_102_22_23_25_tsni, enumFromTo_inst_105_106_102_22_26_tsni, map_inst_105_106_102_85_tsni, emptyTable_inst_105_106_101_tsni, lscomp1$_inst_105_106_101_75_tsni, enumFromTo_inst_105_106_101_75_37_tsni, enumFromTo_inst_105_106_101_76_tsni, bjbt__inst_105_107_tsni, bj__inst_105_107_99_tsni, f7_inst_105_107_99_88_tsni, map_inst_105_107_99_88_20_tsni, bt_inst_105_107_98_tsni, f3_inst_105_107_98_73_tsni, f3$_inst_105_107_98_73_44_tsni, earliestInconsistency_inst_105_107_98_73_44_41_tsni, filter_inst_105_107_98_73_44_41_42_tsni, mapTree_inst_105_107_98_94_tsni, lambda_inst_105_107_98_94_tsni, lambda$_inst_105_107_98_94_tsni, checkComplete_inst_105_107_98_73_44_96_tsni, checkComplete_inst_105_107_98_73_44_95_tsni, map_inst_105_107_98_94_65_tsni, bjbt_inst_105_108_tsni, bj_inst_105_108_93_tsni, f6_inst_105_108_93_90_tsni, map_inst_105_108_93_90_18_tsni, bt_inst_105_108_92_tsni, f3_inst_105_108_92_73_tsni, f3$_inst_105_108_92_73_44_tsni, earliestInconsistency_inst_105_108_92_73_44_41_tsni, filter_inst_105_108_92_73_44_41_42_tsni, mapTree_inst_105_108_92_94_tsni, lambda_inst_105_108_92_94_tsni, lambda$_inst_105_108_92_94_tsni, checkComplete_inst_105_108_92_73_44_96_tsni, checkComplete_inst_105_108_92_73_44_95_tsni, map_inst_105_108_92_94_65_tsni, bm_inst_105_109_tsni, lookupCache_inst_105_109_84_tsni, lambda_inst_105_109_84_79_tsni, lambda$_inst_105_109_84_79_32_tsni, f5_inst_105_109_84_79_32_30_tsni, mapTree_inst_105_109_84_86_tsni, lambda_inst_105_109_84_86_tsni, lambda$_inst_105_109_84_86_tsni, map_inst_105_109_84_86_65_tsni, cacheChecks_inst_105_109_83_tsni, lambda_inst_105_109_83_tsni, lambda$_inst_105_109_83_tsni, fillTable_inst_105_109_83_22_tsni, lscomp1$_inst_105_109_83_22_23_tsni, enumFromTo_inst_105_109_83_22_23_24_tsni, lscomp2$_inst_105_109_83_22_23_25_tsni, enumFromTo_inst_105_109_83_22_26_tsni, map_inst_105_109_83_85_tsni, emptyTable_inst_105_109_82_tsni, lscomp1$_inst_105_109_82_75_tsni, enumFromTo_inst_105_109_82_75_37_tsni, enumFromTo_inst_105_109_82_76_tsni, bt_inst_105_110_tsni, f3_inst_105_110_73_tsni, f3$_inst_105_110_73_44_tsni, earliestInconsistency_inst_105_110_73_44_41_tsni, filter_inst_105_110_73_44_41_42_tsni, lambda_inst_105_111_tsni, lambda$_inst_105_111_16_tsni, try__inst_105_111_16_1_tsni, search_inst_105_111_16_1_2_tsni, mkTree_inst_105_111_16_1_2_3_tsni, next_inst_105_111_16_1_2_3_4_tsni, next$_inst_105_111_16_1_2_3_4_5_tsni, enumFromTo_inst_105_111_16_1_2_3_4_5_6_tsni, lscomp1$_inst_105_111_16_1_2_3_4_5_7_tsni, prune_inst_105_111_16_1_2_8_tsni, filterTree_inst_105_111_16_1_2_8_9_tsni, foldTree_inst_105_111_16_1_2_8_9_10_tsni, lambda_inst_105_111_16_1_2_8_9_10_tsni, lambda$_inst_105_111_16_1_2_8_9_10_tsni, map_inst_105_111_16_1_2_8_9_10_11_tsni, leaves_inst_105_111_16_1_2_12_tsni, map_inst_105_111_16_1_2_12_13_tsni, filter_inst_105_111_16_1_2_14_tsni, testConstraints_nofib_inst_112_113_tsni, lambda_inst_112_113_111_tsni, lambda$_inst_112_113_111_16_tsni, try__inst_112_113_111_16_1_tsni, search_inst_112_113_111_16_1_2_tsni, filter_inst_112_113_111_16_1_2_14_tsni, leaves_inst_112_113_111_16_1_2_12_tsni, map_inst_112_113_111_16_1_2_12_13_tsni, prune_inst_112_113_111_16_1_2_8_tsni, filterTree_inst_112_113_111_16_1_2_8_9_tsni, foldTree_inst_112_113_111_16_1_2_8_9_10_tsni, lambda_inst_112_113_111_16_1_2_8_9_10_tsni, lambda$_inst_112_113_111_16_1_2_8_9_10_tsni, map_inst_112_113_111_16_1_2_8_9_10_11_tsni, mkTree_inst_112_113_111_16_1_2_3_tsni, next_inst_112_113_111_16_1_2_3_4_tsni, next$_inst_112_113_111_16_1_2_3_4_5_tsni, enumFromTo_inst_112_113_111_16_1_2_3_4_5_6_tsni, lscomp1$_inst_112_113_111_16_1_2_3_4_5_7_tsni, bt_inst_112_113_110_tsni, f3_inst_112_113_110_73_tsni, f3$_inst_112_113_110_73_44_tsni, earliestInconsistency_inst_112_113_110_73_44_41_tsni, filter_inst_112_113_110_73_44_41_42_tsni, bm_inst_112_113_109_tsni, emptyTable_inst_112_113_109_82_tsni, lscomp1$_inst_112_113_109_82_75_tsni, enumFromTo_inst_112_113_109_82_75_37_tsni, enumFromTo_inst_112_113_109_82_76_tsni, cacheChecks_inst_112_113_109_83_tsni, lambda_inst_112_113_109_83_tsni, lambda$_inst_112_113_109_83_tsni, fillTable_inst_112_113_109_83_22_tsni, lscomp1$_inst_112_113_109_83_22_23_tsni, enumFromTo_inst_112_113_109_83_22_23_24_tsni, enumFromTo_inst_112_113_109_83_22_26_tsni, lscomp2$_inst_112_113_109_83_22_23_25_tsni, lookupCache_inst_112_113_109_84_tsni, lambda_inst_112_113_109_84_79_tsni, lambda$_inst_112_113_109_84_79_32_tsni, f5_inst_112_113_109_84_79_32_30_tsni, map_inst_112_113_109_83_85_tsni, mapTree_inst_112_113_109_84_86_tsni, lambda_inst_112_113_109_84_86_tsni, lambda$_inst_112_113_109_84_86_tsni, map_inst_112_113_109_84_86_65_tsni, bjbt_inst_112_113_108_tsni, bt_inst_112_113_108_92_tsni, f3_inst_112_113_108_92_73_tsni, f3$_inst_112_113_108_92_73_44_tsni, earliestInconsistency_inst_112_113_108_92_73_44_41_tsni, filter_inst_112_113_108_92_73_44_41_42_tsni, bj_inst_112_113_108_93_tsni, f6_inst_112_113_108_93_90_tsni, map_inst_112_113_108_93_90_18_tsni, mapTree_inst_112_113_108_92_94_tsni, lambda_inst_112_113_108_92_94_tsni, lambda$_inst_112_113_108_92_94_tsni, map_inst_112_113_108_92_94_65_tsni, checkComplete_inst_112_113_108_92_73_44_95_tsni, checkComplete_inst_112_113_108_92_73_44_96_tsni, bjbt__inst_112_113_107_tsni, bt_inst_112_113_107_98_tsni, f3_inst_112_113_107_98_73_tsni, f3$_inst_112_113_107_98_73_44_tsni, earliestInconsistency_inst_112_113_107_98_73_44_41_tsni, filter_inst_112_113_107_98_73_44_41_42_tsni, bj__inst_112_113_107_99_tsni, f7_inst_112_113_107_99_88_tsni, map_inst_112_113_107_99_88_20_tsni, mapTree_inst_112_113_107_98_94_tsni, lambda_inst_112_113_107_98_94_tsni, lambda$_inst_112_113_107_98_94_tsni, map_inst_112_113_107_98_94_65_tsni, checkComplete_inst_112_113_107_98_73_44_95_tsni, checkComplete_inst_112_113_107_98_73_44_96_tsni, fc_inst_112_113_106_tsni, emptyTable_inst_112_113_106_101_tsni, lscomp1$_inst_112_113_106_101_75_tsni, enumFromTo_inst_112_113_106_101_75_37_tsni, enumFromTo_inst_112_113_106_101_76_tsni, cacheChecks_inst_112_113_106_102_tsni, lambda_inst_112_113_106_102_tsni, lambda$_inst_112_113_106_102_tsni, fillTable_inst_112_113_106_102_22_tsni, lscomp1$_inst_112_113_106_102_22_23_tsni, enumFromTo_inst_112_113_106_102_22_23_24_tsni, enumFromTo_inst_112_113_106_102_22_26_tsni, lscomp2$_inst_112_113_106_102_22_23_25_tsni, lookupCache_inst_112_113_106_103_tsni, lambda_inst_112_113_106_103_79_tsni, lambda$_inst_112_113_106_103_79_32_tsni, f5_inst_112_113_106_103_79_32_30_tsni, map_inst_112_113_106_102_85_tsni, mapTree_inst_112_113_106_103_86_tsni, lambda_inst_112_113_106_103_86_tsni, lambda$_inst_112_113_106_103_86_tsni, map_inst_112_113_106_103_86_65_tsni, initTree_inst_0_1_2_3_61_tsni, lambda_inst_0_1_2_3_61_tsni, lambda$_inst_0_1_2_3_61_tsni, map_inst_0_1_2_3_61_62_tsni, f1_inst_0_1_2_8_9_66_tsni, f1$_inst_0_1_2_8_9_66_67_tsni, filter_inst_0_1_2_8_9_66_67_68_tsni, concat_inst_0_1_2_12_114_tsni, map_inst_0_1_2_115_tsni, map_inst_15_16_1_2_115_tsni, concat_inst_15_16_1_2_12_114_tsni, f1_inst_15_16_1_2_8_9_66_tsni, f1$_inst_15_16_1_2_8_9_66_67_tsni, filter_inst_15_16_1_2_8_9_66_67_68_tsni, initTree_inst_15_16_1_2_3_61_tsni, lambda_inst_15_16_1_2_3_61_tsni, lambda$_inst_15_16_1_2_3_61_tsni, map_inst_15_16_1_2_3_61_62_tsni, combine_inst_17_116_tsni, combine_inst_19_117_tsni, zipWith_inst_21_22_118_tsni, lambda_inst_21_22_119_tsni, lambda$_inst_21_22_119_120_tsni, zipWith_inst_21_22_119_120_121_tsni, f4_inst_21_22_119_120_122_tsni, f4$_inst_21_22_119_120_122_123_tsni, zipWith_inst_27_22_118_tsni, lambda_inst_27_22_119_tsni, lambda$_inst_27_22_119_120_tsni, zipWith_inst_27_22_119_120_121_tsni, f4_inst_27_22_119_120_122_tsni, f4$_inst_27_22_119_120_122_123_tsni, checkComplete_inst_28_124_tsni, complete_inst_28_124_125_tsni, maxLevel_inst_28_124_125_126_tsni, checkComplete_inst_29_30_124_tsni, complete_inst_29_30_124_125_tsni, maxLevel_inst_29_30_124_125_126_tsni, checkComplete_inst_31_32_30_124_tsni, complete_inst_31_32_30_124_125_tsni, maxLevel_inst_31_32_30_124_125_126_tsni, lscomp2$_inst_33_25_tsni, lscomp2$_inst_34_35_25_tsni, lscomp2_inst_36_127_tsni, lscomp2_inst_38_39_127_tsni, lscomp1$_inst_49_7_tsni, lscomp1$_inst_50_5_7_tsni, f1_inst_51_66_tsni, f1$_inst_51_66_67_tsni, filter_inst_51_66_67_68_tsni, f1_inst_52_9_66_tsni, f1$_inst_52_9_66_67_tsni, filter_inst_52_9_66_67_68_tsni, concat_inst_53_114_tsni, initTree_inst_54_61_tsni, lambda_inst_54_61_tsni, lambda$_inst_54_61_tsni, map_inst_54_61_62_tsni, map_inst_58_70_65_tsni, concat_inst_58_69_114_tsni, initTree_inst_71_3_61_tsni, lambda_inst_71_3_61_tsni, lambda$_inst_71_3_61_tsni, map_inst_71_3_61_62_tsni, f1_inst_71_8_9_66_tsni, f1$_inst_71_8_9_66_67_tsni, filter_inst_71_8_9_66_67_68_tsni, concat_inst_71_12_114_tsni, map_inst_71_115_tsni, lscomp2_inst_74_75_127_tsni, zipWith_inst_77_118_tsni, lambda_inst_77_119_tsni, lambda$_inst_77_119_120_tsni, zipWith_inst_77_119_120_121_tsni, f4_inst_77_119_120_122_tsni, f4$_inst_77_119_120_122_123_tsni, checkComplete_inst_78_79_32_30_124_tsni, complete_inst_78_79_32_30_124_125_tsni, maxLevel_inst_78_79_32_30_124_125_126_tsni, zipWith_inst_80_22_118_tsni, lambda_inst_80_22_119_tsni, lambda$_inst_80_22_119_120_tsni, zipWith_inst_80_22_119_120_121_tsni, f4_inst_80_22_119_120_122_tsni, f4$_inst_80_22_119_120_122_123_tsni, lscomp2_inst_81_82_75_127_tsni, zipWith_inst_81_83_22_118_tsni, lambda_inst_81_83_22_119_tsni, lambda$_inst_81_83_22_119_120_tsni, zipWith_inst_81_83_22_119_120_121_tsni, f4_inst_81_83_22_119_120_122_tsni, f4$_inst_81_83_22_119_120_122_123_tsni, checkComplete_inst_81_84_79_32_30_124_tsni, complete_inst_81_84_79_32_30_124_125_tsni, maxLevel_inst_81_84_79_32_30_124_125_126_tsni, mapTree_inst_81_128_tsni, lambda_inst_81_128_tsni, lambda$_inst_81_128_tsni, fst_inst_81_129_tsni, map_inst_81_128_65_tsni, combine_inst_87_88_117_tsni, combine_inst_89_90_116_tsni, combine_inst_91_93_90_116_tsni, foldTree_inst_91_93_130_tsni, lambda_inst_91_93_130_tsni, lambda$_inst_91_93_130_tsni, map_inst_91_93_130_11_tsni, combine_inst_97_99_88_117_tsni, foldTree_inst_97_99_131_tsni, lambda_inst_97_99_131_tsni, lambda$_inst_97_99_131_tsni, map_inst_97_99_131_11_tsni, lscomp2_inst_100_101_75_127_tsni, zipWith_inst_100_102_22_118_tsni, lambda_inst_100_102_22_119_tsni, lambda$_inst_100_102_22_119_120_tsni, zipWith_inst_100_102_22_119_120_121_tsni, f4_inst_100_102_22_119_120_122_tsni, f4$_inst_100_102_22_119_120_122_123_tsni, checkComplete_inst_100_103_79_32_30_124_tsni, complete_inst_100_103_79_32_30_124_125_tsni, maxLevel_inst_100_103_79_32_30_124_125_126_tsni, domainWipeout_inst_100_132_tsni, mapTree_inst_100_132_133_tsni, lambda_inst_100_132_133_tsni, lambda$_inst_100_132_133_tsni, map_inst_100_132_133_65_tsni, f8_inst_100_132_134_tsni, map_inst_104_2_115_tsni, concat_inst_104_2_12_114_tsni, f1_inst_104_2_8_9_66_tsni, f1$_inst_104_2_8_9_66_67_tsni, filter_inst_104_2_8_9_66_67_68_tsni, initTree_inst_104_2_3_61_tsni, lambda_inst_104_2_3_61_tsni, lambda$_inst_104_2_3_61_tsni, map_inst_104_2_3_61_62_tsni, checkComplete_inst_105_106_103_79_32_30_124_tsni, complete_inst_105_106_103_79_32_30_124_125_tsni, maxLevel_inst_105_106_103_79_32_30_124_125_126_tsni, domainWipeout_inst_105_106_132_tsni, mapTree_inst_105_106_132_133_tsni, lambda_inst_105_106_132_133_tsni, lambda$_inst_105_106_132_133_tsni, f8_inst_105_106_132_134_tsni, map_inst_105_106_132_133_65_tsni, zipWith_inst_105_106_102_22_118_tsni, lambda_inst_105_106_102_22_119_tsni, lambda$_inst_105_106_102_22_119_120_tsni, zipWith_inst_105_106_102_22_119_120_121_tsni, f4_inst_105_106_102_22_119_120_122_tsni, f4$_inst_105_106_102_22_119_120_122_123_tsni, lscomp2_inst_105_106_101_75_127_tsni, combine_inst_105_107_99_88_117_tsni, foldTree_inst_105_107_99_131_tsni, lambda_inst_105_107_99_131_tsni, lambda$_inst_105_107_99_131_tsni, map_inst_105_107_99_131_11_tsni, combine_inst_105_108_93_90_116_tsni, foldTree_inst_105_108_93_130_tsni, lambda_inst_105_108_93_130_tsni, lambda$_inst_105_108_93_130_tsni, map_inst_105_108_93_130_11_tsni, checkComplete_inst_105_109_84_79_32_30_124_tsni, complete_inst_105_109_84_79_32_30_124_125_tsni, maxLevel_inst_105_109_84_79_32_30_124_125_126_tsni, mapTree_inst_105_109_128_tsni, lambda_inst_105_109_128_tsni, lambda$_inst_105_109_128_tsni, map_inst_105_109_128_65_tsni, fst_inst_105_109_129_tsni, zipWith_inst_105_109_83_22_118_tsni, lambda_inst_105_109_83_22_119_tsni, lambda$_inst_105_109_83_22_119_120_tsni, zipWith_inst_105_109_83_22_119_120_121_tsni, f4_inst_105_109_83_22_119_120_122_tsni, f4$_inst_105_109_83_22_119_120_122_123_tsni, lscomp2_inst_105_109_82_75_127_tsni, initTree_inst_105_111_16_1_2_3_61_tsni, lambda_inst_105_111_16_1_2_3_61_tsni, lambda$_inst_105_111_16_1_2_3_61_tsni, map_inst_105_111_16_1_2_3_61_62_tsni, f1_inst_105_111_16_1_2_8_9_66_tsni, f1$_inst_105_111_16_1_2_8_9_66_67_tsni, filter_inst_105_111_16_1_2_8_9_66_67_68_tsni, concat_inst_105_111_16_1_2_12_114_tsni, map_inst_105_111_16_1_2_115_tsni, map_inst_105_135_tsni, map_inst_112_113_111_16_1_2_115_tsni, concat_inst_112_113_111_16_1_2_12_114_tsni, f1_inst_112_113_111_16_1_2_8_9_66_tsni, f1$_inst_112_113_111_16_1_2_8_9_66_67_tsni, filter_inst_112_113_111_16_1_2_8_9_66_67_68_tsni, initTree_inst_112_113_111_16_1_2_3_61_tsni, lambda_inst_112_113_111_16_1_2_3_61_tsni, lambda$_inst_112_113_111_16_1_2_3_61_tsni, map_inst_112_113_111_16_1_2_3_61_62_tsni, map_inst_112_113_135_tsni, lscomp2_inst_112_113_109_82_75_127_tsni, zipWith_inst_112_113_109_83_22_118_tsni, lambda_inst_112_113_109_83_22_119_tsni, lambda$_inst_112_113_109_83_22_119_120_tsni, zipWith_inst_112_113_109_83_22_119_120_121_tsni, f4_inst_112_113_109_83_22_119_120_122_tsni, f4$_inst_112_113_109_83_22_119_120_122_123_tsni, checkComplete_inst_112_113_109_84_79_32_30_124_tsni, complete_inst_112_113_109_84_79_32_30_124_125_tsni, maxLevel_inst_112_113_109_84_79_32_30_124_125_126_tsni, mapTree_inst_112_113_109_128_tsni, lambda_inst_112_113_109_128_tsni, lambda$_inst_112_113_109_128_tsni, fst_inst_112_113_109_129_tsni, map_inst_112_113_109_128_65_tsni, combine_inst_112_113_108_93_90_116_tsni, foldTree_inst_112_113_108_93_130_tsni, lambda_inst_112_113_108_93_130_tsni, lambda$_inst_112_113_108_93_130_tsni, map_inst_112_113_108_93_130_11_tsni, combine_inst_112_113_107_99_88_117_tsni, foldTree_inst_112_113_107_99_131_tsni, lambda_inst_112_113_107_99_131_tsni, lambda$_inst_112_113_107_99_131_tsni, map_inst_112_113_107_99_131_11_tsni, lscomp2_inst_112_113_106_101_75_127_tsni, zipWith_inst_112_113_106_102_22_118_tsni, lambda_inst_112_113_106_102_22_119_tsni, lambda$_inst_112_113_106_102_22_119_120_tsni, zipWith_inst_112_113_106_102_22_119_120_121_tsni, f4_inst_112_113_106_102_22_119_120_122_tsni, f4$_inst_112_113_106_102_22_119_120_122_123_tsni, checkComplete_inst_112_113_106_103_79_32_30_124_tsni, complete_inst_112_113_106_103_79_32_30_124_125_tsni, maxLevel_inst_112_113_106_103_79_32_30_124_125_126_tsni, domainWipeout_inst_112_113_106_132_tsni, mapTree_inst_112_113_106_132_133_tsni, lambda_inst_112_113_106_132_133_tsni, lambda$_inst_112_113_106_132_133_tsni, map_inst_112_113_106_132_133_65_tsni, f8_inst_112_113_106_132_134_tsni, match_scrut_rest_inst_40_tsni, match_scrut_rest_inst_43_44_tsni, match_scrut_rest_inst_72_73_44_tsni, match_scrut_rest_inst_91_92_73_44_tsni, match_scrut_rest_inst_97_98_73_44_tsni, match_scrut_rest_inst_105_107_98_73_44_tsni, match_scrut_rest_inst_105_108_92_73_44_tsni, match_scrut_rest_inst_105_110_73_44_tsni, match_scrut_rest_inst_112_113_110_73_44_tsni, match_scrut_rest_inst_112_113_108_92_73_44_tsni, match_scrut_rest_inst_112_113_107_98_73_44_tsni, match_xs_arm_Nil_inst_0_1_2_3_61_62_tsni, match_xs_arm_Nil_inst_15_16_1_2_3_61_62_tsni, match_scrut_arm_default_inst_40_tsni, match_scrut_arm_default_inst_43_44_tsni, match_xs_arm_Nil_inst_54_61_62_tsni, match_xs_arm_Nil_inst_58_59_61_62_tsni, match_xs_arm_Nil_inst_71_3_61_62_tsni, match_scrut_arm_default_inst_72_73_44_tsni, match_x_arm_Deforest_Arr_2_inst_81_129_tsni, match_scrut_arm_default_inst_91_92_73_44_tsni, match_tp2_arm_Deforest_Arr_2_inst_91_93_90_tsni, match_first1_arm_Known_inst_91_93_90_tsni, match_first1_arm_Unknown_inst_91_93_90_tsni, match_scrut_arm_default_inst_97_98_73_44_tsni, match_tp2_arm_Deforest_Arr_2_inst_97_99_88_tsni, match_first1_arm_Known_inst_97_99_88_tsni, match_first1_arm_Unknown_inst_97_99_88_tsni, match_tp2_arm_Deforest_Arr_2_inst_100_132_134_tsni, match_first0_arm_Deforest_Arr_2_inst_100_132_134_tsni, match_xs_arm_Nil_inst_104_2_3_61_62_tsni, match_tp2_arm_Deforest_Arr_2_inst_105_106_132_134_tsni, match_first0_arm_Deforest_Arr_2_inst_105_106_132_134_tsni, match_scrut_arm_default_inst_105_107_98_73_44_tsni, match_tp2_arm_Deforest_Arr_2_inst_105_107_99_88_tsni, match_first1_arm_Known_inst_105_107_99_88_tsni, match_first1_arm_Unknown_inst_105_107_99_88_tsni, match_scrut_arm_default_inst_105_108_92_73_44_tsni, match_tp2_arm_Deforest_Arr_2_inst_105_108_93_90_tsni, match_first1_arm_Known_inst_105_108_93_90_tsni, match_first1_arm_Unknown_inst_105_108_93_90_tsni, match_x_arm_Deforest_Arr_2_inst_105_109_129_tsni, match_scrut_arm_default_inst_105_110_73_44_tsni, match_xs_arm_Nil_inst_105_111_16_1_2_3_61_62_tsni, match_xs_arm_Cons_inst_105_135_tsni, match_xs_arm_Nil_inst_112_113_111_16_1_2_3_61_62_tsni, match_xs_arm_Cons_inst_112_113_135_tsni, match_scrut_arm_default_inst_112_113_110_73_44_tsni, match_x_arm_Deforest_Arr_2_inst_112_113_109_129_tsni, match_scrut_arm_default_inst_112_113_108_92_73_44_tsni, match_tp2_arm_Deforest_Arr_2_inst_112_113_108_93_90_tsni, match_first1_arm_Known_inst_112_113_108_93_90_tsni, match_first1_arm_Unknown_inst_112_113_108_93_90_tsni, match_scrut_arm_default_inst_112_113_107_98_73_44_tsni, match_tp2_arm_Deforest_Arr_2_inst_112_113_107_99_88_tsni, match_first1_arm_Known_inst_112_113_107_99_88_tsni, match_first1_arm_Unknown_inst_112_113_107_99_88_tsni, match_tp2_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni, match_first0_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni;
 match_scrut_rest_inst_40_tsni = function match_scrut_rest_inst_40_tsni(s, tmp) {
-  let arr;
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 match_scrut_rest_inst_43_44_tsni = function match_scrut_rest_inst_43_44_tsni(s, tmp) {
-  let arr;
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 match_scrut_rest_inst_72_73_44_tsni = function match_scrut_rest_inst_72_73_44_tsni(s, tmp) {
-  let arr;
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 match_scrut_rest_inst_91_92_73_44_tsni = function match_scrut_rest_inst_91_92_73_44_tsni(s, tmp) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = tmp;
-  arr = (chs) => {
+  return (chs) => {
     return match_tp2_arm_Deforest_Arr_2_inst_91_93_90_tsni(chs, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-  };
-  return arr
+  }
 };
 match_scrut_rest_inst_97_98_73_44_tsni = function match_scrut_rest_inst_97_98_73_44_tsni(s, tmp) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = tmp;
-  arr = (chs) => {
+  return (chs) => {
     return match_tp2_arm_Deforest_Arr_2_inst_97_99_88_tsni(chs, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-  };
-  return arr
+  }
 };
 match_scrut_rest_inst_105_107_98_73_44_tsni = function match_scrut_rest_inst_105_107_98_73_44_tsni(s, tmp) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = tmp;
-  arr = (chs) => {
+  return (chs) => {
     return match_tp2_arm_Deforest_Arr_2_inst_105_107_99_88_tsni(chs, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-  };
-  return arr
+  }
 };
 match_scrut_rest_inst_105_108_92_73_44_tsni = function match_scrut_rest_inst_105_108_92_73_44_tsni(s, tmp) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = tmp;
-  arr = (chs) => {
+  return (chs) => {
     return match_tp2_arm_Deforest_Arr_2_inst_105_108_93_90_tsni(chs, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-  };
-  return arr
+  }
 };
 match_scrut_rest_inst_105_110_73_44_tsni = function match_scrut_rest_inst_105_110_73_44_tsni(s, tmp) {
-  let arr;
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 match_scrut_rest_inst_112_113_110_73_44_tsni = function match_scrut_rest_inst_112_113_110_73_44_tsni(s, tmp) {
-  let arr;
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 match_scrut_rest_inst_112_113_108_92_73_44_tsni = function match_scrut_rest_inst_112_113_108_92_73_44_tsni(s, tmp) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = tmp;
-  arr = (chs) => {
+  return (chs) => {
     return match_tp2_arm_Deforest_Arr_2_inst_112_113_108_93_90_tsni(chs, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-  };
-  return arr
+  }
 };
 match_scrut_rest_inst_112_113_107_98_73_44_tsni = function match_scrut_rest_inst_112_113_107_98_73_44_tsni(s, tmp) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = tmp;
-  arr = (chs) => {
+  return (chs) => {
     return match_tp2_arm_Deforest_Arr_2_inst_112_113_107_99_88_tsni(chs, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-  };
-  return arr
+  }
 };
 match_xs_arm_Nil_inst_0_1_2_3_61_62_tsni = (undefined, function (f) {
   return NofibPrelude.Nil
@@ -159,26 +143,26 @@ match_tp2_arm_Deforest_Arr_2_inst_91_93_90_tsni = (undefined, function (chs, _de
   return runtime.safeCall(first1(chs, a, a1))
 });
 match_first1_arm_Known_inst_91_93_90_tsni = (undefined, function (chs, a, a1, _deforest_Known_vs_inst_91_93_90_tsni) {
-  let param0, cs, tmp, arr;
+  let param0, cs, tmp, tmp1;
   param0 = _deforest_Known_vs_inst_91_93_90_tsni;
   cs = param0;
   tmp = constraints1.Known(cs);
-  arr = globalThis.Object.freeze([
+  tmp1 = globalThis.Object.freeze([
     a1,
     tmp
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp1, chs)
 });
 match_first1_arm_Unknown_inst_91_93_90_tsni = (undefined, function (chs, a, a1) {
-  let tmp, tmp1, tmp2, arr;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = map_inst_91_93_90_18_tsni(constraints1.label, chs);
   tmp1 = combine_inst_91_93_90_116_tsni(tmp, NofibPrelude.Nil);
   tmp2 = constraints1.Known(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     a,
     tmp2
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp3, chs)
 });
 match_scrut_arm_default_inst_97_98_73_44_tsni = (undefined, function (s, csp) {
   let tmp;
@@ -194,34 +178,34 @@ match_tp2_arm_Deforest_Arr_2_inst_97_99_88_tsni = (undefined, function (chs, _de
   return runtime.safeCall(first1(chs, a, a1))
 });
 match_first1_arm_Known_inst_97_99_88_tsni = (undefined, function (chs, a, a1, _deforest_Known_vs_inst_97_99_88_tsni) {
-  let param0, cs, tmp, arr;
+  let param0, cs, tmp, tmp1;
   param0 = _deforest_Known_vs_inst_97_99_88_tsni;
   cs = param0;
   tmp = constraints1.Known(cs);
-  arr = globalThis.Object.freeze([
+  tmp1 = globalThis.Object.freeze([
     a1,
     tmp
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp1, chs)
 });
 match_first1_arm_Unknown_inst_97_99_88_tsni = (undefined, function (chs, a, a1) {
-  let cs_, scrut, tmp, tmp1, arr, arr1;
+  let cs_, scrut, tmp, tmp1, tmp2, tmp3;
   tmp = map_inst_97_99_88_20_tsni(constraints1.label, chs);
   tmp1 = combine_inst_97_99_88_117_tsni(tmp, NofibPrelude.Nil);
   cs_ = constraints1.Known(tmp1);
   scrut = constraints1.knownConflict(cs_);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       a,
       cs_
     ]);
-    return constraints1.Node(arr, NofibPrelude.Nil)
+    return constraints1.Node(tmp2, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp3 = globalThis.Object.freeze([
       a,
       cs_
     ]);
-    return constraints1.Node(arr1, chs)
+    return constraints1.Node(tmp3, chs)
   }
 });
 match_tp2_arm_Deforest_Arr_2_inst_100_132_134_tsni = (undefined, function (_deforest_Deforest_Arr_2_0_inst_100_132_134_tsni, _deforest_Deforest_Arr_2_1_inst_100_132_134_tsni) {
@@ -231,28 +215,26 @@ match_tp2_arm_Deforest_Arr_2_inst_100_132_134_tsni = (undefined, function (_defo
   return runtime.safeCall(first0(first1))
 });
 match_first0_arm_Deforest_Arr_2_inst_100_132_134_tsni = (undefined, function (first1, _deforest_Deforest_Arr_2_0_inst_100_132_134_tsni, _deforest_Deforest_Arr_2_1_inst_100_132_134_tsni) {
-  let first11, first0, as_, cs, tbl, wipedDomains, cs_, scrut, tmp, tmp1, tmp2, tmp3, arr;
+  let first11, first0, as_, cs, tbl, wipedDomains, cs_, scrut, tmp, tmp1, tmp2;
   first0 = _deforest_Deforest_Arr_2_0_inst_100_132_134_tsni;
   first11 = _deforest_Deforest_Arr_2_1_inst_100_132_134_tsni;
   as_ = first0;
   cs = first11;
   tbl = first1;
-  tmp = lscomp13(tbl);
-  wipedDomains = tmp;
+  wipedDomains = lscomp13(tbl);
   scrut = NofibPrelude.null_(wipedDomains);
   if (scrut === true) {
-    tmp1 = cs;
+    tmp = cs;
   } else {
-    tmp2 = NofibPrelude.head(wipedDomains);
-    tmp3 = constraints1.collect(tmp2);
-    tmp1 = constraints1.Known(tmp3);
+    tmp1 = NofibPrelude.head(wipedDomains);
+    tmp2 = constraints1.collect(tmp1);
+    tmp = constraints1.Known(tmp2);
   }
-  cs_ = tmp1;
-  arr = globalThis.Object.freeze([
+  cs_ = tmp;
+  return globalThis.Object.freeze([
     as_,
     cs_
-  ]);
-  return arr
+  ])
 });
 match_xs_arm_Nil_inst_104_2_3_61_62_tsni = (undefined, function (f) {
   return NofibPrelude.Nil
@@ -264,28 +246,26 @@ match_tp2_arm_Deforest_Arr_2_inst_105_106_132_134_tsni = (undefined, function (_
   return runtime.safeCall(first0(first1))
 });
 match_first0_arm_Deforest_Arr_2_inst_105_106_132_134_tsni = (undefined, function (first1, _deforest_Deforest_Arr_2_0_inst_105_106_132_134_tsni, _deforest_Deforest_Arr_2_1_inst_105_106_132_134_tsni) {
-  let first11, first0, as_, cs, tbl, wipedDomains, cs_, scrut, tmp, tmp1, tmp2, tmp3, arr;
+  let first11, first0, as_, cs, tbl, wipedDomains, cs_, scrut, tmp, tmp1, tmp2;
   first0 = _deforest_Deforest_Arr_2_0_inst_105_106_132_134_tsni;
   first11 = _deforest_Deforest_Arr_2_1_inst_105_106_132_134_tsni;
   as_ = first0;
   cs = first11;
   tbl = first1;
-  tmp = lscomp13(tbl);
-  wipedDomains = tmp;
+  wipedDomains = lscomp13(tbl);
   scrut = NofibPrelude.null_(wipedDomains);
   if (scrut === true) {
-    tmp1 = cs;
+    tmp = cs;
   } else {
-    tmp2 = NofibPrelude.head(wipedDomains);
-    tmp3 = constraints1.collect(tmp2);
-    tmp1 = constraints1.Known(tmp3);
+    tmp1 = NofibPrelude.head(wipedDomains);
+    tmp2 = constraints1.collect(tmp1);
+    tmp = constraints1.Known(tmp2);
   }
-  cs_ = tmp1;
-  arr = globalThis.Object.freeze([
+  cs_ = tmp;
+  return globalThis.Object.freeze([
     as_,
     cs_
-  ]);
-  return arr
+  ])
 });
 match_scrut_arm_default_inst_105_107_98_73_44_tsni = (undefined, function (s, csp) {
   let tmp;
@@ -301,34 +281,34 @@ match_tp2_arm_Deforest_Arr_2_inst_105_107_99_88_tsni = (undefined, function (chs
   return runtime.safeCall(first1(chs, a, a1))
 });
 match_first1_arm_Known_inst_105_107_99_88_tsni = (undefined, function (chs, a, a1, _deforest_Known_vs_inst_105_107_99_88_tsni) {
-  let param0, cs, tmp, arr;
+  let param0, cs, tmp, tmp1;
   param0 = _deforest_Known_vs_inst_105_107_99_88_tsni;
   cs = param0;
   tmp = constraints1.Known(cs);
-  arr = globalThis.Object.freeze([
+  tmp1 = globalThis.Object.freeze([
     a1,
     tmp
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp1, chs)
 });
 match_first1_arm_Unknown_inst_105_107_99_88_tsni = (undefined, function (chs, a, a1) {
-  let cs_, scrut, tmp, tmp1, arr, arr1;
+  let cs_, scrut, tmp, tmp1, tmp2, tmp3;
   tmp = map_inst_105_107_99_88_20_tsni(constraints1.label, chs);
   tmp1 = combine_inst_105_107_99_88_117_tsni(tmp, NofibPrelude.Nil);
   cs_ = constraints1.Known(tmp1);
   scrut = constraints1.knownConflict(cs_);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       a,
       cs_
     ]);
-    return constraints1.Node(arr, NofibPrelude.Nil)
+    return constraints1.Node(tmp2, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp3 = globalThis.Object.freeze([
       a,
       cs_
     ]);
-    return constraints1.Node(arr1, chs)
+    return constraints1.Node(tmp3, chs)
   }
 });
 match_scrut_arm_default_inst_105_108_92_73_44_tsni = (undefined, function (s, csp) {
@@ -345,26 +325,26 @@ match_tp2_arm_Deforest_Arr_2_inst_105_108_93_90_tsni = (undefined, function (chs
   return runtime.safeCall(first1(chs, a, a1))
 });
 match_first1_arm_Known_inst_105_108_93_90_tsni = (undefined, function (chs, a, a1, _deforest_Known_vs_inst_105_108_93_90_tsni) {
-  let param0, cs, tmp, arr;
+  let param0, cs, tmp, tmp1;
   param0 = _deforest_Known_vs_inst_105_108_93_90_tsni;
   cs = param0;
   tmp = constraints1.Known(cs);
-  arr = globalThis.Object.freeze([
+  tmp1 = globalThis.Object.freeze([
     a1,
     tmp
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp1, chs)
 });
 match_first1_arm_Unknown_inst_105_108_93_90_tsni = (undefined, function (chs, a, a1) {
-  let tmp, tmp1, tmp2, arr;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = map_inst_105_108_93_90_18_tsni(constraints1.label, chs);
   tmp1 = combine_inst_105_108_93_90_116_tsni(tmp, NofibPrelude.Nil);
   tmp2 = constraints1.Known(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     a,
     tmp2
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp3, chs)
 });
 match_x_arm_Deforest_Arr_2_inst_105_109_129_tsni = (undefined, function (_deforest_Deforest_Arr_2_0_inst_105_109_129_tsni, _deforest_Deforest_Arr_2_1_inst_105_109_129_tsni) {
   let first1, first0, f, s;
@@ -432,26 +412,26 @@ match_tp2_arm_Deforest_Arr_2_inst_112_113_108_93_90_tsni = (undefined, function 
   return runtime.safeCall(first1(chs, a, a1))
 });
 match_first1_arm_Known_inst_112_113_108_93_90_tsni = (undefined, function (chs, a, a1, _deforest_Known_vs_inst_112_113_108_93_90_tsni) {
-  let param0, cs, tmp, arr;
+  let param0, cs, tmp, tmp1;
   param0 = _deforest_Known_vs_inst_112_113_108_93_90_tsni;
   cs = param0;
   tmp = constraints1.Known(cs);
-  arr = globalThis.Object.freeze([
+  tmp1 = globalThis.Object.freeze([
     a1,
     tmp
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp1, chs)
 });
 match_first1_arm_Unknown_inst_112_113_108_93_90_tsni = (undefined, function (chs, a, a1) {
-  let tmp, tmp1, tmp2, arr;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = map_inst_112_113_108_93_90_18_tsni(constraints1.label, chs);
   tmp1 = combine_inst_112_113_108_93_90_116_tsni(tmp, NofibPrelude.Nil);
   tmp2 = constraints1.Known(tmp1);
-  arr = globalThis.Object.freeze([
+  tmp3 = globalThis.Object.freeze([
     a,
     tmp2
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp3, chs)
 });
 match_scrut_arm_default_inst_112_113_107_98_73_44_tsni = (undefined, function (s, csp) {
   let tmp;
@@ -467,34 +447,34 @@ match_tp2_arm_Deforest_Arr_2_inst_112_113_107_99_88_tsni = (undefined, function 
   return runtime.safeCall(first1(chs, a, a1))
 });
 match_first1_arm_Known_inst_112_113_107_99_88_tsni = (undefined, function (chs, a, a1, _deforest_Known_vs_inst_112_113_107_99_88_tsni) {
-  let param0, cs, tmp, arr;
+  let param0, cs, tmp, tmp1;
   param0 = _deforest_Known_vs_inst_112_113_107_99_88_tsni;
   cs = param0;
   tmp = constraints1.Known(cs);
-  arr = globalThis.Object.freeze([
+  tmp1 = globalThis.Object.freeze([
     a1,
     tmp
   ]);
-  return constraints1.Node(arr, chs)
+  return constraints1.Node(tmp1, chs)
 });
 match_first1_arm_Unknown_inst_112_113_107_99_88_tsni = (undefined, function (chs, a, a1) {
-  let cs_, scrut, tmp, tmp1, arr, arr1;
+  let cs_, scrut, tmp, tmp1, tmp2, tmp3;
   tmp = map_inst_112_113_107_99_88_20_tsni(constraints1.label, chs);
   tmp1 = combine_inst_112_113_107_99_88_117_tsni(tmp, NofibPrelude.Nil);
   cs_ = constraints1.Known(tmp1);
   scrut = constraints1.knownConflict(cs_);
   if (scrut === true) {
-    arr = globalThis.Object.freeze([
+    tmp2 = globalThis.Object.freeze([
       a,
       cs_
     ]);
-    return constraints1.Node(arr, NofibPrelude.Nil)
+    return constraints1.Node(tmp2, NofibPrelude.Nil)
   } else {
-    arr1 = globalThis.Object.freeze([
+    tmp3 = globalThis.Object.freeze([
       a,
       cs_
     ]);
-    return constraints1.Node(arr1, chs)
+    return constraints1.Node(tmp3, chs)
   }
 });
 match_tp2_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni = (undefined, function (_deforest_Deforest_Arr_2_0_inst_112_113_106_132_134_tsni, _deforest_Deforest_Arr_2_1_inst_112_113_106_132_134_tsni) {
@@ -504,28 +484,26 @@ match_tp2_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni = (undefined, functio
   return runtime.safeCall(first0(first1))
 });
 match_first0_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni = (undefined, function (first1, _deforest_Deforest_Arr_2_0_inst_112_113_106_132_134_tsni, _deforest_Deforest_Arr_2_1_inst_112_113_106_132_134_tsni) {
-  let first11, first0, as_, cs, tbl, wipedDomains, cs_, scrut, tmp, tmp1, tmp2, tmp3, arr;
+  let first11, first0, as_, cs, tbl, wipedDomains, cs_, scrut, tmp, tmp1, tmp2;
   first0 = _deforest_Deforest_Arr_2_0_inst_112_113_106_132_134_tsni;
   first11 = _deforest_Deforest_Arr_2_1_inst_112_113_106_132_134_tsni;
   as_ = first0;
   cs = first11;
   tbl = first1;
-  tmp = lscomp13(tbl);
-  wipedDomains = tmp;
+  wipedDomains = lscomp13(tbl);
   scrut = NofibPrelude.null_(wipedDomains);
   if (scrut === true) {
-    tmp1 = cs;
+    tmp = cs;
   } else {
-    tmp2 = NofibPrelude.head(wipedDomains);
-    tmp3 = constraints1.collect(tmp2);
-    tmp1 = constraints1.Known(tmp3);
+    tmp1 = NofibPrelude.head(wipedDomains);
+    tmp2 = constraints1.collect(tmp1);
+    tmp = constraints1.Known(tmp2);
   }
-  cs_ = tmp1;
-  arr = globalThis.Object.freeze([
+  cs_ = tmp;
+  return globalThis.Object.freeze([
     as_,
     cs_
-  ]);
-  return arr
+  ])
 });
 try__inst_0_1_tsni = function try__inst_0_1_tsni(n, algorithm) {
   let tmp, tmp1;
@@ -537,9 +515,9 @@ search_inst_0_1_2_tsni = function search_inst_0_1_2_tsni(labeler, csp) {
   let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = mkTree_inst_0_1_2_3_tsni(csp);
   tmp1 = runtime.safeCall(labeler(csp, tmp));
-  tmp2 = prune_inst_0_1_2_8_tsni(lambda8, tmp1);
+  tmp2 = prune_inst_0_1_2_8_tsni(lambda9, tmp1);
   tmp3 = leaves_inst_0_1_2_12_tsni(tmp2);
-  tmp4 = filter_inst_0_1_2_14_tsni(lambda9, tmp3);
+  tmp4 = filter_inst_0_1_2_14_tsni(lambda8, tmp3);
   return map_inst_0_1_2_115_tsni(NofibPrelude.fst, tmp4)
 };
 mkTree_inst_0_1_2_3_tsni = function mkTree_inst_0_1_2_3_tsni(csp) {
@@ -774,9 +752,9 @@ search_inst_15_16_1_2_tsni = function search_inst_15_16_1_2_tsni(labeler, csp) {
   let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = mkTree_inst_15_16_1_2_3_tsni(csp);
   tmp1 = runtime.safeCall(labeler(csp, tmp));
-  tmp2 = prune_inst_15_16_1_2_8_tsni(lambda8, tmp1);
+  tmp2 = prune_inst_15_16_1_2_8_tsni(lambda9, tmp1);
   tmp3 = leaves_inst_15_16_1_2_12_tsni(tmp2);
-  tmp4 = filter_inst_15_16_1_2_14_tsni(lambda9, tmp3);
+  tmp4 = filter_inst_15_16_1_2_14_tsni(lambda8, tmp3);
   return map_inst_15_16_1_2_115_tsni(NofibPrelude.fst, tmp4)
 };
 filter_inst_15_16_1_2_14_tsni = function filter_inst_15_16_1_2_14_tsni(f, ls) {
@@ -1091,19 +1069,19 @@ map_inst_19_20_tsni = function map_inst_19_20_tsni(f, xs) {
   }
 };
 cacheChecks_inst_21_tsni = function cacheChecks_inst_21_tsni(csp, tbl, n) {
-  let param0, param1, s, cs, arr, tmp, tmp1;
+  let param0, param1, s, cs, tmp, tmp1, lambda$this;
   if (n instanceof constraints.Node.class) {
     param0 = n.lab;
     param1 = n.children;
     s = param0;
     cs = param1;
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       s,
       tbl
     ]);
-    tmp = runtime.safeCall(lambda_inst_21_tsni(csp, tbl, s));
-    tmp1 = NofibPrelude.map(tmp, cs);
-    return constraints.Node(arr, tmp1)
+    lambda$this = runtime.safeCall(lambda_inst_21_tsni(csp, tbl, s));
+    tmp1 = NofibPrelude.map(lambda$this, cs);
+    return constraints.Node(tmp, tmp1)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -1160,29 +1138,29 @@ enumFromTo_inst_21_22_23_24_tsni = function enumFromTo_inst_21_22_23_24_tsni(a, 
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -1190,18 +1168,18 @@ enumFromTo_inst_21_22_23_24_tsni = function enumFromTo_inst_21_22_23_24_tsni(a, 
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_21_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_21_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_21_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_21_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -1254,19 +1232,19 @@ enumFromTo_inst_21_22_26_tsni = function enumFromTo_inst_21_22_26_tsni(a, b) {
   }
 };
 cacheChecks_inst_27_tsni = function cacheChecks_inst_27_tsni(csp, tbl, n) {
-  let param0, param1, s, cs, arr, tmp, tmp1;
+  let param0, param1, s, cs, tmp, tmp1, lambda$this;
   if (n instanceof constraints.Node.class) {
     param0 = n.lab;
     param1 = n.children;
     s = param0;
     cs = param1;
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       s,
       tbl
     ]);
-    tmp = runtime.safeCall(lambda12(csp, tbl, s));
-    tmp1 = NofibPrelude.map(tmp, cs);
-    return constraints.Node(arr, tmp1)
+    lambda$this = runtime.safeCall(lambda12(csp, tbl, s));
+    tmp1 = NofibPrelude.map(lambda$this, cs);
+    return constraints.Node(tmp, tmp1)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -1324,29 +1302,29 @@ enumFromTo_inst_27_22_23_24_tsni = function enumFromTo_inst_27_22_23_24_tsni(a, 
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -1354,18 +1332,18 @@ enumFromTo_inst_27_22_23_24_tsni = function enumFromTo_inst_27_22_23_24_tsni(a, 
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_27_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_27_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_27_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_27_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -1418,32 +1396,30 @@ enumFromTo_inst_27_22_26_tsni = function enumFromTo_inst_27_22_26_tsni(a, b) {
   }
 };
 f5_inst_29_30_tsni = function f5_inst_29_30_tsni(csp, tp) {
-  let first1, first0, param0, param1, a, as_, tbl, tableEntry, cs, scrut, tbl1, arr, arr1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr2, arr3, _deforest_Cons_head, _deforest_Cons_tail;
+  let first1, first0, param0, param1, a, as_, tbl, tableEntry, cs, scrut, tbl1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
   if (runtime.Tuple.isArrayLike(tp) && tp.length === 2) {
     first0 = runtime.Tuple.get(tp, 0);
     first1 = runtime.Tuple.get(tp, 1);
     if (first0 instanceof NofibPrelude.Nil.class) {
       tbl1 = first1;
-      arr = globalThis.Object.freeze([
+      tmp = globalThis.Object.freeze([
         NofibPrelude.Nil,
         constraints1.Unknown
       ]);
-      arr1 = globalThis.Object.freeze([
-        arr,
+      return globalThis.Object.freeze([
+        tmp,
         tbl1
-      ]);
-      return arr1
+      ])
     } else if (first0 instanceof NofibPrelude.Cons.class) {
       param0 = first0.head;
       param1 = first0.tail;
       a = param0;
       as_ = param1;
       tbl = first1;
-      tmp = constraints1.value(a);
-      tmp1 = tmp - 1;
-      tmp2 = NofibPrelude.head(tbl);
-      tmp3 = NofibPrelude.atIndex(tmp1, tmp2);
-      tableEntry = tmp3;
+      tmp1 = constraints1.value(a);
+      tmp2 = tmp1 - 1;
+      tmp3 = NofibPrelude.head(tbl);
+      tableEntry = NofibPrelude.atIndex(tmp2, tmp3);
       scrut = tableEntry === constraints1.Unknown;
       if (scrut === true) {
         _deforest_Cons_head = a;
@@ -1468,15 +1444,14 @@ f5_inst_29_30_tsni = function f5_inst_29_30_tsni(csp, tp) {
       }
       cs = tmp5;
       tmp6 = NofibPrelude.Cons(a, as_);
-      arr2 = globalThis.Object.freeze([
+      tmp7 = globalThis.Object.freeze([
         tmp6,
         cs
       ]);
-      arr3 = globalThis.Object.freeze([
-        arr2,
+      return globalThis.Object.freeze([
+        tmp7,
         tbl
-      ]);
-      return arr3
+      ])
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -1488,32 +1463,30 @@ lambda$_inst_31_32_tsni = function lambda$_inst_31_32_tsni(csp, x) {
   return f5_inst_31_32_30_tsni(csp, x)
 };
 f5_inst_31_32_30_tsni = function f5_inst_31_32_30_tsni(csp, tp) {
-  let first1, first0, param0, param1, a, as_, tbl, tableEntry, cs, scrut, tbl1, arr, arr1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr2, arr3, _deforest_Cons_head, _deforest_Cons_tail;
+  let first1, first0, param0, param1, a, as_, tbl, tableEntry, cs, scrut, tbl1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
   if (runtime.Tuple.isArrayLike(tp) && tp.length === 2) {
     first0 = runtime.Tuple.get(tp, 0);
     first1 = runtime.Tuple.get(tp, 1);
     if (first0 instanceof NofibPrelude.Nil.class) {
       tbl1 = first1;
-      arr = globalThis.Object.freeze([
+      tmp = globalThis.Object.freeze([
         NofibPrelude.Nil,
         constraints1.Unknown
       ]);
-      arr1 = globalThis.Object.freeze([
-        arr,
+      return globalThis.Object.freeze([
+        tmp,
         tbl1
-      ]);
-      return arr1
+      ])
     } else if (first0 instanceof NofibPrelude.Cons.class) {
       param0 = first0.head;
       param1 = first0.tail;
       a = param0;
       as_ = param1;
       tbl = first1;
-      tmp = constraints1.value(a);
-      tmp1 = tmp - 1;
-      tmp2 = NofibPrelude.head(tbl);
-      tmp3 = NofibPrelude.atIndex(tmp1, tmp2);
-      tableEntry = tmp3;
+      tmp1 = constraints1.value(a);
+      tmp2 = tmp1 - 1;
+      tmp3 = NofibPrelude.head(tbl);
+      tableEntry = NofibPrelude.atIndex(tmp2, tmp3);
       scrut = tableEntry === constraints1.Unknown;
       if (scrut === true) {
         _deforest_Cons_head = a;
@@ -1538,15 +1511,14 @@ f5_inst_31_32_30_tsni = function f5_inst_31_32_30_tsni(csp, tp) {
       }
       cs = tmp5;
       tmp6 = NofibPrelude.Cons(a, as_);
-      arr2 = globalThis.Object.freeze([
+      tmp7 = globalThis.Object.freeze([
         tmp6,
         cs
       ]);
-      arr3 = globalThis.Object.freeze([
-        arr2,
+      return globalThis.Object.freeze([
+        tmp7,
         tbl
-      ]);
-      return arr3
+      ])
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -1563,17 +1535,17 @@ enumFromTo_inst_33_24_tsni = function enumFromTo_inst_33_24_tsni(a, b) {
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2;
+      let param0, param1, valll, t2, tmp2, tmp3;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
-      arr = globalThis.Object.freeze([
+      tmp2 = globalThis.Object.freeze([
         varrr,
         valll
       ]);
-      tmp2 = lscomp2$_inst_33_25_tsni(varrr, t2);
-      return NofibPrelude.Cons(arr, tmp2)
+      tmp3 = lscomp2$_inst_33_25_tsni(varrr, t2);
+      return NofibPrelude.Cons(tmp2, tmp3)
     }
   } else {
     return (varrr) => {
@@ -1607,17 +1579,17 @@ enumFromTo_inst_34_35_24_tsni = function enumFromTo_inst_34_35_24_tsni(a, b) {
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2;
+      let param0, param1, valll, t2, tmp2, tmp3;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
-      arr = globalThis.Object.freeze([
+      tmp2 = globalThis.Object.freeze([
         varrr,
         valll
       ]);
-      tmp2 = lscomp2$_inst_34_35_25_tsni(varrr, t2);
-      return NofibPrelude.Cons(arr, tmp2)
+      tmp3 = lscomp2$_inst_34_35_25_tsni(varrr, t2);
+      return NofibPrelude.Cons(tmp2, tmp3)
     }
   } else {
     return (varrr) => {
@@ -1736,7 +1708,7 @@ filter_inst_40_41_42_tsni = function filter_inst_40_41_42_tsni(f, ls) {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -1744,18 +1716,18 @@ filter_inst_40_41_42_tsni = function filter_inst_40_41_42_tsni(f, ls) {
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = constraints1.Known(tmp4);
-          return match_scrut_rest_inst_40_tsni(s, tmp5)
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          tmp6 = constraints1.Known(tmp5);
+          return match_scrut_rest_inst_40_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -1822,7 +1794,7 @@ filter_inst_43_44_41_42_tsni = function filter_inst_43_44_41_42_tsni(f, ls) {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -1830,18 +1802,18 @@ filter_inst_43_44_41_42_tsni = function filter_inst_43_44_41_42_tsni(f, ls) {
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = constraints1.Known(tmp4);
-          return match_scrut_rest_inst_43_44_tsni(s, tmp5)
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          tmp6 = constraints1.Known(tmp5);
+          return match_scrut_rest_inst_43_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -1899,17 +1871,17 @@ filter_inst_45_46_42_tsni = function filter_inst_45_46_42_tsni(f, ls) {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr;
+        let param01, param11, b, tmp1, tmp2, tmp3;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
         tmp1 = constraints.level(a);
         tmp2 = constraints.level(b);
-        arr = globalThis.Object.freeze([
+        tmp3 = globalThis.Object.freeze([
           tmp1,
           tmp2
         ]);
-        return NofibPrelude.Some(arr)
+        return NofibPrelude.Some(tmp3)
       }
     } else {
       return filter_inst_45_46_42_tsni(f, t)
@@ -1919,13 +1891,12 @@ filter_inst_45_46_42_tsni = function filter_inst_45_46_42_tsni(f, ls) {
   }
 };
 f2$_inst_47_48_tsni = function f2$_inst_47_48_tsni(csp, s) {
-  let tmp, arr;
+  let tmp;
   tmp = earliestInconsistency_inst_47_48_46_tsni(csp, s);
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 earliestInconsistency_inst_47_48_46_tsni = function earliestInconsistency_inst_47_48_46_tsni(csp, aas) {
   let param0, param1, param2, vars, vals, rel, param01, param11, a, as_, scrut, tmp, lambda$this;
@@ -1971,17 +1942,17 @@ filter_inst_47_48_46_42_tsni = function filter_inst_47_48_46_42_tsni(f, ls) {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr;
+        let param01, param11, b, tmp1, tmp2, tmp3;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
         tmp1 = constraints.level(a);
         tmp2 = constraints.level(b);
-        arr = globalThis.Object.freeze([
+        tmp3 = globalThis.Object.freeze([
           tmp1,
           tmp2
         ]);
-        return NofibPrelude.Some(arr)
+        return NofibPrelude.Some(tmp3)
       }
     } else {
       return filter_inst_47_48_46_42_tsni(f, t)
@@ -2276,17 +2247,17 @@ filter_inst_55_42_tsni = function filter_inst_55_42_tsni(f, ls) {
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr;
+        let param01, param11, b, tmp1, tmp2, tmp3;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
         tmp1 = constraints.level(a);
         tmp2 = constraints.level(b);
-        arr = globalThis.Object.freeze([
+        tmp3 = globalThis.Object.freeze([
           tmp1,
           tmp2
         ]);
-        return NofibPrelude.Some(arr)
+        return NofibPrelude.Some(tmp3)
       }
     } else {
       return filter_inst_55_42_tsni(f, t)
@@ -2301,13 +2272,12 @@ f2_inst_56_57_tsni = function f2_inst_56_57_tsni(csp) {
   }
 };
 f2$_inst_56_57_48_tsni = function f2$_inst_56_57_48_tsni(csp, s) {
-  let tmp, arr;
+  let tmp;
   tmp = earliestInconsistency_inst_56_57_48_46_tsni(csp, s);
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 earliestInconsistency_inst_56_57_48_46_tsni = function earliestInconsistency_inst_56_57_48_46_tsni(csp, aas) {
   let param0, param1, param2, vars, vals, rel, param01, param11, a, as_, scrut, tmp, lambda$this;
@@ -2353,17 +2323,17 @@ filter_inst_56_57_48_46_42_tsni = function filter_inst_56_57_48_46_42_tsni(f, ls
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr;
+        let param01, param11, b, tmp1, tmp2, tmp3;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
         tmp1 = constraints.level(a);
         tmp2 = constraints.level(b);
-        arr = globalThis.Object.freeze([
+        tmp3 = globalThis.Object.freeze([
           tmp1,
           tmp2
         ]);
-        return NofibPrelude.Some(arr)
+        return NofibPrelude.Some(tmp3)
       }
     } else {
       return filter_inst_56_57_48_46_42_tsni(f, t)
@@ -2506,13 +2476,12 @@ f2_inst_58_60_57_tsni = function f2_inst_58_60_57_tsni(csp) {
   }
 };
 f2$_inst_58_60_57_48_tsni = function f2$_inst_58_60_57_48_tsni(csp, s) {
-  let tmp, arr;
+  let tmp;
   tmp = earliestInconsistency_inst_58_60_57_48_46_tsni(csp, s);
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 earliestInconsistency_inst_58_60_57_48_46_tsni = function earliestInconsistency_inst_58_60_57_48_46_tsni(csp, aas) {
   let param0, param1, param2, vars, vals, rel, param01, param11, a, as_, scrut, tmp, lambda$this;
@@ -2558,17 +2527,17 @@ filter_inst_58_60_57_48_46_42_tsni = function filter_inst_58_60_57_48_46_42_tsni
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr;
+        let param01, param11, b, tmp1, tmp2, tmp3;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
         tmp1 = constraints.level(a);
         tmp2 = constraints.level(b);
-        arr = globalThis.Object.freeze([
+        tmp3 = globalThis.Object.freeze([
           tmp1,
           tmp2
         ]);
-        return NofibPrelude.Some(arr)
+        return NofibPrelude.Some(tmp3)
       }
     } else {
       return filter_inst_58_60_57_48_46_42_tsni(f, t)
@@ -3015,7 +2984,7 @@ filter_inst_72_73_44_41_42_tsni = function filter_inst_72_73_44_41_42_tsni(f, ls
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -3023,18 +2992,18 @@ filter_inst_72_73_44_41_42_tsni = function filter_inst_72_73_44_41_42_tsni(f, ls
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = constraints1.Known(tmp4);
-          return match_scrut_rest_inst_72_73_44_tsni(s, tmp5)
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          tmp6 = constraints1.Known(tmp5);
+          return match_scrut_rest_inst_72_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -3111,29 +3080,29 @@ enumFromTo_inst_77_23_24_tsni = function enumFromTo_inst_77_23_24_tsni(a, b) {
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -3141,18 +3110,18 @@ enumFromTo_inst_77_23_24_tsni = function enumFromTo_inst_77_23_24_tsni(a, b) {
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_77_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_77_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_77_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_77_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -3213,32 +3182,30 @@ lambda$_inst_78_79_32_tsni = function lambda$_inst_78_79_32_tsni(csp, x) {
   return f5_inst_78_79_32_30_tsni(csp, x)
 };
 f5_inst_78_79_32_30_tsni = function f5_inst_78_79_32_30_tsni(csp, tp) {
-  let first1, first0, param0, param1, a, as_, tbl, tableEntry, cs, scrut, tbl1, arr, arr1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr2, arr3, _deforest_Cons_head, _deforest_Cons_tail;
+  let first1, first0, param0, param1, a, as_, tbl, tableEntry, cs, scrut, tbl1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
   if (runtime.Tuple.isArrayLike(tp) && tp.length === 2) {
     first0 = runtime.Tuple.get(tp, 0);
     first1 = runtime.Tuple.get(tp, 1);
     if (first0 instanceof NofibPrelude.Nil.class) {
       tbl1 = first1;
-      arr = globalThis.Object.freeze([
+      tmp = globalThis.Object.freeze([
         NofibPrelude.Nil,
         constraints1.Unknown
       ]);
-      arr1 = globalThis.Object.freeze([
-        arr,
+      return globalThis.Object.freeze([
+        tmp,
         tbl1
-      ]);
-      return arr1
+      ])
     } else if (first0 instanceof NofibPrelude.Cons.class) {
       param0 = first0.head;
       param1 = first0.tail;
       a = param0;
       as_ = param1;
       tbl = first1;
-      tmp = constraints1.value(a);
-      tmp1 = tmp - 1;
-      tmp2 = NofibPrelude.head(tbl);
-      tmp3 = NofibPrelude.atIndex(tmp1, tmp2);
-      tableEntry = tmp3;
+      tmp1 = constraints1.value(a);
+      tmp2 = tmp1 - 1;
+      tmp3 = NofibPrelude.head(tbl);
+      tableEntry = NofibPrelude.atIndex(tmp2, tmp3);
       scrut = tableEntry === constraints1.Unknown;
       if (scrut === true) {
         _deforest_Cons_head = a;
@@ -3263,15 +3230,14 @@ f5_inst_78_79_32_30_tsni = function f5_inst_78_79_32_30_tsni(csp, tp) {
       }
       cs = tmp5;
       tmp6 = NofibPrelude.Cons(a, as_);
-      arr2 = globalThis.Object.freeze([
+      tmp7 = globalThis.Object.freeze([
         tmp6,
         cs
       ]);
-      arr3 = globalThis.Object.freeze([
-        arr2,
+      return globalThis.Object.freeze([
+        tmp7,
         tbl
-      ]);
-      return arr3
+      ])
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -3337,29 +3303,29 @@ enumFromTo_inst_80_22_23_24_tsni = function enumFromTo_inst_80_22_23_24_tsni(a, 
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -3367,18 +3333,18 @@ enumFromTo_inst_80_22_23_24_tsni = function enumFromTo_inst_80_22_23_24_tsni(a, 
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_80_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_80_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_80_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_80_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -3498,7 +3464,7 @@ enumFromTo_inst_81_82_76_tsni = function enumFromTo_inst_81_82_76_tsni(a, b) {
   }
 };
 cacheChecks_inst_81_83_tsni = function cacheChecks_inst_81_83_tsni(csp, tbl, n) {
-  let param0, param1, s, cs, arr, tmp, tmp1, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, s, cs, tmp, tmp1, lambda$this, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (n instanceof constraints.Node.class) {
     param0 = n.lab;
     param1 = n.children;
@@ -3506,33 +3472,31 @@ cacheChecks_inst_81_83_tsni = function cacheChecks_inst_81_83_tsni(csp, tbl, n) 
     cs = param1;
     _deforest_Deforest_Arr_2_0 = s;
     _deforest_Deforest_Arr_2_1 = tbl;
-    arr = (csp1) => {
-      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, arr1, arr2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr3, arr4, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
+    tmp = (csp1) => {
+      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
       first0 = _deforest_Deforest_Arr_2_0;
       first1 = _deforest_Deforest_Arr_2_1;
       if (first0 instanceof NofibPrelude.Nil.class) {
         tbl2 = first1;
-        arr1 = globalThis.Object.freeze([
+        tmp2 = globalThis.Object.freeze([
           NofibPrelude.Nil,
           constraints1.Unknown
         ]);
-        _deforest_Deforest_Arr_2_02 = arr1;
+        _deforest_Deforest_Arr_2_02 = tmp2;
         _deforest_Deforest_Arr_2_12 = tbl2;
-        arr2 = () => {
+        return () => {
           return match_x_arm_Deforest_Arr_2_inst_81_129_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
-        };
-        return arr2
+        }
       } else if (first0 instanceof NofibPrelude.Cons.class) {
         param01 = first0.head;
         param11 = first0.tail;
         a = param01;
         as_ = param11;
         tbl1 = first1;
-        tmp2 = constraints1.value(a);
-        tmp3 = tmp2 - 1;
-        tmp4 = NofibPrelude.head(tbl1);
-        tmp5 = NofibPrelude.atIndex(tmp3, tmp4);
-        tableEntry = tmp5;
+        tmp3 = constraints1.value(a);
+        tmp4 = tmp3 - 1;
+        tmp5 = NofibPrelude.head(tbl1);
+        tableEntry = NofibPrelude.atIndex(tmp4, tmp5);
         scrut = tableEntry === constraints1.Unknown;
         if (scrut === true) {
           _deforest_Cons_head = a;
@@ -3557,33 +3521,32 @@ cacheChecks_inst_81_83_tsni = function cacheChecks_inst_81_83_tsni(csp, tbl, n) 
         }
         cs1 = tmp7;
         tmp8 = NofibPrelude.Cons(a, as_);
-        arr3 = globalThis.Object.freeze([
+        tmp9 = globalThis.Object.freeze([
           tmp8,
           cs1
         ]);
-        _deforest_Deforest_Arr_2_01 = arr3;
+        _deforest_Deforest_Arr_2_01 = tmp9;
         _deforest_Deforest_Arr_2_11 = tbl1;
-        arr4 = () => {
+        return () => {
           return match_x_arm_Deforest_Arr_2_inst_81_129_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr4
+        }
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     };
-    tmp = runtime.safeCall(lambda_inst_81_83_tsni(csp, tbl, s));
-    tmp1 = map_inst_81_83_85_tsni(tmp, cs);
-    _deforest_Node_lab = arr;
+    lambda$this = runtime.safeCall(lambda_inst_81_83_tsni(csp, tbl, s));
+    tmp1 = map_inst_81_83_85_tsni(lambda$this, cs);
+    _deforest_Node_lab = tmp;
     _deforest_Node_children = tmp1;
     return (f) => {
-      let param01, param11, l, c, tmp2, tmp3, lambda$this, _deforest_Node_lab1, _deforest_Node_children1;
+      let param01, param11, l, c, tmp2, tmp3, lambda$this1, _deforest_Node_lab1, _deforest_Node_children1;
       param01 = _deforest_Node_lab;
       param11 = _deforest_Node_children;
       l = param01;
       c = param11;
       tmp2 = runtime.safeCall(f(l));
-      lambda$this = runtime.safeCall(lambda_inst_81_84_86_tsni(f));
-      tmp3 = map_inst_81_84_86_65_tsni(lambda$this, c);
+      lambda$this1 = runtime.safeCall(lambda_inst_81_84_86_tsni(f));
+      tmp3 = map_inst_81_84_86_65_tsni(lambda$this1, c);
       _deforest_Node_lab1 = tmp2;
       _deforest_Node_children1 = tmp3;
       return (f9) => {
@@ -3592,8 +3555,8 @@ cacheChecks_inst_81_83_tsni = function cacheChecks_inst_81_83_tsni(csp, tbl, n) 
         l = param01;
         c = param11;
         tmp2 = runtime.safeCall(f9(l));
-        lambda$this = runtime.safeCall(lambda_inst_81_128_tsni(f9));
-        tmp3 = map_inst_81_128_65_tsni(lambda$this, c);
+        lambda$this1 = runtime.safeCall(lambda_inst_81_128_tsni(f9));
+        tmp3 = map_inst_81_128_65_tsni(lambda$this1, c);
         return constraints.Node(tmp2, tmp3)
       }
     }
@@ -3659,29 +3622,29 @@ enumFromTo_inst_81_83_22_23_24_tsni = function enumFromTo_inst_81_83_22_23_24_ts
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -3689,18 +3652,18 @@ enumFromTo_inst_81_83_22_23_24_tsni = function enumFromTo_inst_81_83_22_23_24_ts
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_81_83_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_81_83_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_81_83_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_81_83_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -3824,7 +3787,7 @@ map_inst_81_84_86_65_tsni = function map_inst_81_84_86_65_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
 f7_inst_87_88_tsni = function f7_inst_87_88_tsni(tp2, chs) {
-  let first1, first0, a, cs_, scrut, a1, param0, cs, tmp, arr, tmp1, tmp2, arr1, arr2;
+  let first1, first0, a, cs_, scrut, a1, param0, cs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (runtime.Tuple.isArrayLike(tp2) && tp2.length === 2) {
     first0 = runtime.Tuple.get(tp2, 0);
     first1 = runtime.Tuple.get(tp2, 1);
@@ -3834,28 +3797,28 @@ f7_inst_87_88_tsni = function f7_inst_87_88_tsni(tp2, chs) {
       param0 = first1.vs;
       cs = param0;
       tmp = constraints1.Known(cs);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         a1,
         tmp
       ]);
-      return constraints1.Node(arr, chs)
+      return constraints1.Node(tmp1, chs)
     } else if (first1 instanceof constraints1.Unknown.class) {
-      tmp1 = map_inst_87_88_20_tsni(constraints1.label, chs);
-      tmp2 = combine_inst_87_88_117_tsni(tmp1, NofibPrelude.Nil);
-      cs_ = constraints1.Known(tmp2);
+      tmp2 = map_inst_87_88_20_tsni(constraints1.label, chs);
+      tmp3 = combine_inst_87_88_117_tsni(tmp2, NofibPrelude.Nil);
+      cs_ = constraints1.Known(tmp3);
       scrut = constraints1.knownConflict(cs_);
       if (scrut === true) {
-        arr1 = globalThis.Object.freeze([
+        tmp4 = globalThis.Object.freeze([
           a,
           cs_
         ]);
-        return constraints1.Node(arr1, NofibPrelude.Nil)
+        return constraints1.Node(tmp4, NofibPrelude.Nil)
       } else {
-        arr2 = globalThis.Object.freeze([
+        tmp5 = globalThis.Object.freeze([
           a,
           cs_
         ]);
-        return constraints1.Node(arr2, chs)
+        return constraints1.Node(tmp5, chs)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -3911,7 +3874,7 @@ map_inst_87_88_20_tsni = function map_inst_87_88_20_tsni(f, xs) {
   }
 };
 f6_inst_89_90_tsni = function f6_inst_89_90_tsni(tp2, chs) {
-  let first1, first0, a, a1, param0, cs, tmp, arr, tmp1, tmp2, tmp3, arr1;
+  let first1, first0, a, a1, param0, cs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (runtime.Tuple.isArrayLike(tp2) && tp2.length === 2) {
     first0 = runtime.Tuple.get(tp2, 0);
     first1 = runtime.Tuple.get(tp2, 1);
@@ -3921,20 +3884,20 @@ f6_inst_89_90_tsni = function f6_inst_89_90_tsni(tp2, chs) {
       param0 = first1.vs;
       cs = param0;
       tmp = constraints1.Known(cs);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         a1,
         tmp
       ]);
-      return constraints1.Node(arr, chs)
+      return constraints1.Node(tmp1, chs)
     } else if (first1 instanceof constraints1.Unknown.class) {
-      tmp1 = map_inst_89_90_18_tsni(constraints1.label, chs);
-      tmp2 = combine_inst_89_90_116_tsni(tmp1, NofibPrelude.Nil);
-      tmp3 = constraints1.Known(tmp2);
-      arr1 = globalThis.Object.freeze([
+      tmp2 = map_inst_89_90_18_tsni(constraints1.label, chs);
+      tmp3 = combine_inst_89_90_116_tsni(tmp2, NofibPrelude.Nil);
+      tmp4 = constraints1.Known(tmp3);
+      tmp5 = globalThis.Object.freeze([
         a,
-        tmp3
+        tmp4
       ]);
-      return constraints1.Node(arr1, chs)
+      return constraints1.Node(tmp5, chs)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -4051,7 +4014,7 @@ filter_inst_91_92_73_44_41_42_tsni = function filter_inst_91_92_73_44_41_42_tsni
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -4059,21 +4022,21 @@ filter_inst_91_92_73_44_41_42_tsni = function filter_inst_91_92_73_44_41_42_tsni
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5, _deforest_Known_vs;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6, _deforest_Known_vs;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          _deforest_Known_vs = tmp4;
-          tmp5 = (chs, a2, a3) => {
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          _deforest_Known_vs = tmp5;
+          tmp6 = (chs, a2, a3) => {
             return match_first1_arm_Known_inst_91_93_90_tsni(chs, a2, a3, _deforest_Known_vs)
           };
-          return match_scrut_rest_inst_91_92_73_44_tsni(s, tmp5)
+          return match_scrut_rest_inst_91_92_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -4292,7 +4255,7 @@ filter_inst_97_98_73_44_41_42_tsni = function filter_inst_97_98_73_44_41_42_tsni
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -4300,21 +4263,21 @@ filter_inst_97_98_73_44_41_42_tsni = function filter_inst_97_98_73_44_41_42_tsni
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5, _deforest_Known_vs;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6, _deforest_Known_vs;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          _deforest_Known_vs = tmp4;
-          tmp5 = (chs, a2, a3) => {
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          _deforest_Known_vs = tmp5;
+          tmp6 = (chs, a2, a3) => {
             return match_first1_arm_Known_inst_97_99_88_tsni(chs, a2, a3, _deforest_Known_vs)
           };
-          return match_scrut_rest_inst_97_98_73_44_tsni(s, tmp5)
+          return match_scrut_rest_inst_97_98_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -4538,7 +4501,7 @@ enumFromTo_inst_100_101_76_tsni = function enumFromTo_inst_100_101_76_tsni(a, b)
   }
 };
 cacheChecks_inst_100_102_tsni = function cacheChecks_inst_100_102_tsni(csp, tbl, n) {
-  let param0, param1, s, cs, arr, tmp, tmp1, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, s, cs, tmp, tmp1, lambda$this, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (n instanceof constraints.Node.class) {
     param0 = n.lab;
     param1 = n.children;
@@ -4546,34 +4509,32 @@ cacheChecks_inst_100_102_tsni = function cacheChecks_inst_100_102_tsni(csp, tbl,
     cs = param1;
     _deforest_Deforest_Arr_2_0 = s;
     _deforest_Deforest_Arr_2_1 = tbl;
-    arr = (csp1) => {
-      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, arr1, arr2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr3, arr4, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
+    tmp = (csp1) => {
+      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
       first0 = _deforest_Deforest_Arr_2_0;
       first1 = _deforest_Deforest_Arr_2_1;
       if (first0 instanceof NofibPrelude.Nil.class) {
         tbl2 = first1;
         _deforest_Deforest_Arr_2_04 = NofibPrelude.Nil;
         _deforest_Deforest_Arr_2_14 = constraints1.Unknown;
-        arr1 = (first11) => {
+        tmp2 = (first11) => {
           return match_first0_arm_Deforest_Arr_2_inst_100_132_134_tsni(first11, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14)
         };
-        _deforest_Deforest_Arr_2_03 = arr1;
+        _deforest_Deforest_Arr_2_03 = tmp2;
         _deforest_Deforest_Arr_2_13 = tbl2;
-        arr2 = () => {
+        return () => {
           return match_tp2_arm_Deforest_Arr_2_inst_100_132_134_tsni(_deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13)
-        };
-        return arr2
+        }
       } else if (first0 instanceof NofibPrelude.Cons.class) {
         param01 = first0.head;
         param11 = first0.tail;
         a = param01;
         as_ = param11;
         tbl1 = first1;
-        tmp2 = constraints1.value(a);
-        tmp3 = tmp2 - 1;
-        tmp4 = NofibPrelude.head(tbl1);
-        tmp5 = NofibPrelude.atIndex(tmp3, tmp4);
-        tableEntry = tmp5;
+        tmp3 = constraints1.value(a);
+        tmp4 = tmp3 - 1;
+        tmp5 = NofibPrelude.head(tbl1);
+        tableEntry = NofibPrelude.atIndex(tmp4, tmp5);
         scrut = tableEntry === constraints1.Unknown;
         if (scrut === true) {
           _deforest_Cons_head = a;
@@ -4600,32 +4561,31 @@ cacheChecks_inst_100_102_tsni = function cacheChecks_inst_100_102_tsni(csp, tbl,
         tmp8 = NofibPrelude.Cons(a, as_);
         _deforest_Deforest_Arr_2_02 = tmp8;
         _deforest_Deforest_Arr_2_12 = cs1;
-        arr3 = (first11) => {
+        tmp9 = (first11) => {
           return match_first0_arm_Deforest_Arr_2_inst_100_132_134_tsni(first11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
         };
-        _deforest_Deforest_Arr_2_01 = arr3;
+        _deforest_Deforest_Arr_2_01 = tmp9;
         _deforest_Deforest_Arr_2_11 = tbl1;
-        arr4 = () => {
+        return () => {
           return match_tp2_arm_Deforest_Arr_2_inst_100_132_134_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr4
+        }
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     };
-    tmp = runtime.safeCall(lambda_inst_100_102_tsni(csp, tbl, s));
-    tmp1 = map_inst_100_102_85_tsni(tmp, cs);
-    _deforest_Node_lab = arr;
+    lambda$this = runtime.safeCall(lambda_inst_100_102_tsni(csp, tbl, s));
+    tmp1 = map_inst_100_102_85_tsni(lambda$this, cs);
+    _deforest_Node_lab = tmp;
     _deforest_Node_children = tmp1;
     return (f) => {
-      let param01, param11, l, c, tmp2, tmp3, lambda$this, _deforest_Node_lab1, _deforest_Node_children1;
+      let param01, param11, l, c, tmp2, tmp3, lambda$this1, _deforest_Node_lab1, _deforest_Node_children1;
       param01 = _deforest_Node_lab;
       param11 = _deforest_Node_children;
       l = param01;
       c = param11;
       tmp2 = runtime.safeCall(f(l));
-      lambda$this = runtime.safeCall(lambda_inst_100_103_86_tsni(f));
-      tmp3 = map_inst_100_103_86_65_tsni(lambda$this, c);
+      lambda$this1 = runtime.safeCall(lambda_inst_100_103_86_tsni(f));
+      tmp3 = map_inst_100_103_86_65_tsni(lambda$this1, c);
       _deforest_Node_lab1 = tmp2;
       _deforest_Node_children1 = tmp3;
       return (f9) => {
@@ -4634,8 +4594,8 @@ cacheChecks_inst_100_102_tsni = function cacheChecks_inst_100_102_tsni(csp, tbl,
         l = param01;
         c = param11;
         tmp2 = runtime.safeCall(f9(l));
-        lambda$this = runtime.safeCall(lambda_inst_100_132_133_tsni(f9));
-        tmp3 = map_inst_100_132_133_65_tsni(lambda$this, c);
+        lambda$this1 = runtime.safeCall(lambda_inst_100_132_133_tsni(f9));
+        tmp3 = map_inst_100_132_133_65_tsni(lambda$this1, c);
         return constraints.Node(tmp2, tmp3)
       }
     }
@@ -4701,29 +4661,29 @@ enumFromTo_inst_100_102_22_23_24_tsni = function enumFromTo_inst_100_102_22_23_2
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -4731,18 +4691,18 @@ enumFromTo_inst_100_102_22_23_24_tsni = function enumFromTo_inst_100_102_22_23_2
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_100_102_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_100_102_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_100_102_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_100_102_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -4869,9 +4829,9 @@ search_inst_104_2_tsni = function search_inst_104_2_tsni(labeler, csp) {
   let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = mkTree_inst_104_2_3_tsni(csp);
   tmp1 = runtime.safeCall(labeler(csp, tmp));
-  tmp2 = prune_inst_104_2_8_tsni(lambda8, tmp1);
+  tmp2 = prune_inst_104_2_8_tsni(lambda9, tmp1);
   tmp3 = leaves_inst_104_2_12_tsni(tmp2);
-  tmp4 = filter_inst_104_2_14_tsni(lambda9, tmp3);
+  tmp4 = filter_inst_104_2_14_tsni(lambda8, tmp3);
   return map_inst_104_2_115_tsni(NofibPrelude.fst, tmp4)
 };
 filter_inst_104_2_14_tsni = function filter_inst_104_2_14_tsni(f, ls) {
@@ -5131,7 +5091,7 @@ map_inst_105_106_103_86_65_tsni = function map_inst_105_106_103_86_65_tsni(f, xs
   return runtime.safeCall(xs(f))
 };
 cacheChecks_inst_105_106_102_tsni = function cacheChecks_inst_105_106_102_tsni(csp, tbl, n) {
-  let param0, param1, s, cs, arr, tmp, tmp1, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, s, cs, tmp, tmp1, lambda$this, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (n instanceof constraints.Node.class) {
     param0 = n.lab;
     param1 = n.children;
@@ -5139,34 +5099,32 @@ cacheChecks_inst_105_106_102_tsni = function cacheChecks_inst_105_106_102_tsni(c
     cs = param1;
     _deforest_Deforest_Arr_2_0 = s;
     _deforest_Deforest_Arr_2_1 = tbl;
-    arr = (csp1) => {
-      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, arr1, arr2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr3, arr4, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
+    tmp = (csp1) => {
+      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
       first0 = _deforest_Deforest_Arr_2_0;
       first1 = _deforest_Deforest_Arr_2_1;
       if (first0 instanceof NofibPrelude.Nil.class) {
         tbl2 = first1;
         _deforest_Deforest_Arr_2_02 = NofibPrelude.Nil;
         _deforest_Deforest_Arr_2_12 = constraints1.Unknown;
-        arr1 = (first11) => {
+        tmp2 = (first11) => {
           return match_first0_arm_Deforest_Arr_2_inst_105_106_132_134_tsni(first11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
         };
-        _deforest_Deforest_Arr_2_01 = arr1;
+        _deforest_Deforest_Arr_2_01 = tmp2;
         _deforest_Deforest_Arr_2_11 = tbl2;
-        arr2 = () => {
+        return () => {
           return match_tp2_arm_Deforest_Arr_2_inst_105_106_132_134_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr2
+        }
       } else if (first0 instanceof NofibPrelude.Cons.class) {
         param01 = first0.head;
         param11 = first0.tail;
         a = param01;
         as_ = param11;
         tbl1 = first1;
-        tmp2 = constraints1.value(a);
-        tmp3 = tmp2 - 1;
-        tmp4 = NofibPrelude.head(tbl1);
-        tmp5 = NofibPrelude.atIndex(tmp3, tmp4);
-        tableEntry = tmp5;
+        tmp3 = constraints1.value(a);
+        tmp4 = tmp3 - 1;
+        tmp5 = NofibPrelude.head(tbl1);
+        tableEntry = NofibPrelude.atIndex(tmp4, tmp5);
         scrut = tableEntry === constraints1.Unknown;
         if (scrut === true) {
           _deforest_Cons_head = a;
@@ -5193,32 +5151,31 @@ cacheChecks_inst_105_106_102_tsni = function cacheChecks_inst_105_106_102_tsni(c
         tmp8 = NofibPrelude.Cons(a, as_);
         _deforest_Deforest_Arr_2_04 = tmp8;
         _deforest_Deforest_Arr_2_14 = cs1;
-        arr3 = (first11) => {
+        tmp9 = (first11) => {
           return match_first0_arm_Deforest_Arr_2_inst_105_106_132_134_tsni(first11, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14)
         };
-        _deforest_Deforest_Arr_2_03 = arr3;
+        _deforest_Deforest_Arr_2_03 = tmp9;
         _deforest_Deforest_Arr_2_13 = tbl1;
-        arr4 = () => {
+        return () => {
           return match_tp2_arm_Deforest_Arr_2_inst_105_106_132_134_tsni(_deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13)
-        };
-        return arr4
+        }
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     };
-    tmp = runtime.safeCall(lambda_inst_105_106_102_tsni(csp, tbl, s));
-    tmp1 = map_inst_105_106_102_85_tsni(tmp, cs);
-    _deforest_Node_lab = arr;
+    lambda$this = runtime.safeCall(lambda_inst_105_106_102_tsni(csp, tbl, s));
+    tmp1 = map_inst_105_106_102_85_tsni(lambda$this, cs);
+    _deforest_Node_lab = tmp;
     _deforest_Node_children = tmp1;
     return (f) => {
-      let param01, param11, l, c, tmp2, tmp3, lambda$this, _deforest_Node_lab1, _deforest_Node_children1;
+      let param01, param11, l, c, tmp2, tmp3, lambda$this1, _deforest_Node_lab1, _deforest_Node_children1;
       param01 = _deforest_Node_lab;
       param11 = _deforest_Node_children;
       l = param01;
       c = param11;
       tmp2 = runtime.safeCall(f(l));
-      lambda$this = runtime.safeCall(lambda_inst_105_106_103_86_tsni(f));
-      tmp3 = map_inst_105_106_103_86_65_tsni(lambda$this, c);
+      lambda$this1 = runtime.safeCall(lambda_inst_105_106_103_86_tsni(f));
+      tmp3 = map_inst_105_106_103_86_65_tsni(lambda$this1, c);
       _deforest_Node_lab1 = tmp2;
       _deforest_Node_children1 = tmp3;
       return (f9) => {
@@ -5227,8 +5184,8 @@ cacheChecks_inst_105_106_102_tsni = function cacheChecks_inst_105_106_102_tsni(c
         l = param01;
         c = param11;
         tmp2 = runtime.safeCall(f9(l));
-        lambda$this = runtime.safeCall(lambda_inst_105_106_132_133_tsni(f9));
-        tmp3 = map_inst_105_106_132_133_65_tsni(lambda$this, c);
+        lambda$this1 = runtime.safeCall(lambda_inst_105_106_132_133_tsni(f9));
+        tmp3 = map_inst_105_106_132_133_65_tsni(lambda$this1, c);
         return constraints.Node(tmp2, tmp3)
       }
     }
@@ -5294,29 +5251,29 @@ enumFromTo_inst_105_106_102_22_23_24_tsni = function enumFromTo_inst_105_106_102
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -5324,18 +5281,18 @@ enumFromTo_inst_105_106_102_22_23_24_tsni = function enumFromTo_inst_105_106_102
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_105_106_102_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_105_106_102_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_105_106_102_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_105_106_102_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -5615,7 +5572,7 @@ filter_inst_105_107_98_73_44_41_42_tsni = function filter_inst_105_107_98_73_44_
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -5623,21 +5580,21 @@ filter_inst_105_107_98_73_44_41_42_tsni = function filter_inst_105_107_98_73_44_
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5, _deforest_Known_vs;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6, _deforest_Known_vs;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          _deforest_Known_vs = tmp4;
-          tmp5 = (chs, a2, a3) => {
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          _deforest_Known_vs = tmp5;
+          tmp6 = (chs, a2, a3) => {
             return match_first1_arm_Known_inst_105_107_99_88_tsni(chs, a2, a3, _deforest_Known_vs)
           };
-          return match_scrut_rest_inst_105_107_98_73_44_tsni(s, tmp5)
+          return match_scrut_rest_inst_105_107_98_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -5861,7 +5818,7 @@ filter_inst_105_108_92_73_44_41_42_tsni = function filter_inst_105_108_92_73_44_
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -5869,21 +5826,21 @@ filter_inst_105_108_92_73_44_41_42_tsni = function filter_inst_105_108_92_73_44_
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5, _deforest_Known_vs;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6, _deforest_Known_vs;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          _deforest_Known_vs = tmp4;
-          tmp5 = (chs, a2, a3) => {
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          _deforest_Known_vs = tmp5;
+          tmp6 = (chs, a2, a3) => {
             return match_first1_arm_Known_inst_105_108_93_90_tsni(chs, a2, a3, _deforest_Known_vs)
           };
-          return match_scrut_rest_inst_105_108_92_73_44_tsni(s, tmp5)
+          return match_scrut_rest_inst_105_108_92_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -6025,7 +5982,7 @@ map_inst_105_109_84_86_65_tsni = function map_inst_105_109_84_86_65_tsni(f, xs) 
   return runtime.safeCall(xs(f))
 };
 cacheChecks_inst_105_109_83_tsni = function cacheChecks_inst_105_109_83_tsni(csp, tbl, n) {
-  let param0, param1, s, cs, arr, tmp, tmp1, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, s, cs, tmp, tmp1, lambda$this, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (n instanceof constraints.Node.class) {
     param0 = n.lab;
     param1 = n.children;
@@ -6033,33 +5990,31 @@ cacheChecks_inst_105_109_83_tsni = function cacheChecks_inst_105_109_83_tsni(csp
     cs = param1;
     _deforest_Deforest_Arr_2_0 = s;
     _deforest_Deforest_Arr_2_1 = tbl;
-    arr = (csp1) => {
-      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, arr1, arr2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr3, arr4, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
+    tmp = (csp1) => {
+      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
       first0 = _deforest_Deforest_Arr_2_0;
       first1 = _deforest_Deforest_Arr_2_1;
       if (first0 instanceof NofibPrelude.Nil.class) {
         tbl2 = first1;
-        arr1 = globalThis.Object.freeze([
+        tmp2 = globalThis.Object.freeze([
           NofibPrelude.Nil,
           constraints1.Unknown
         ]);
-        _deforest_Deforest_Arr_2_01 = arr1;
+        _deforest_Deforest_Arr_2_01 = tmp2;
         _deforest_Deforest_Arr_2_11 = tbl2;
-        arr2 = () => {
+        return () => {
           return match_x_arm_Deforest_Arr_2_inst_105_109_129_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr2
+        }
       } else if (first0 instanceof NofibPrelude.Cons.class) {
         param01 = first0.head;
         param11 = first0.tail;
         a = param01;
         as_ = param11;
         tbl1 = first1;
-        tmp2 = constraints1.value(a);
-        tmp3 = tmp2 - 1;
-        tmp4 = NofibPrelude.head(tbl1);
-        tmp5 = NofibPrelude.atIndex(tmp3, tmp4);
-        tableEntry = tmp5;
+        tmp3 = constraints1.value(a);
+        tmp4 = tmp3 - 1;
+        tmp5 = NofibPrelude.head(tbl1);
+        tableEntry = NofibPrelude.atIndex(tmp4, tmp5);
         scrut = tableEntry === constraints1.Unknown;
         if (scrut === true) {
           _deforest_Cons_head = a;
@@ -6084,33 +6039,32 @@ cacheChecks_inst_105_109_83_tsni = function cacheChecks_inst_105_109_83_tsni(csp
         }
         cs1 = tmp7;
         tmp8 = NofibPrelude.Cons(a, as_);
-        arr3 = globalThis.Object.freeze([
+        tmp9 = globalThis.Object.freeze([
           tmp8,
           cs1
         ]);
-        _deforest_Deforest_Arr_2_02 = arr3;
+        _deforest_Deforest_Arr_2_02 = tmp9;
         _deforest_Deforest_Arr_2_12 = tbl1;
-        arr4 = () => {
+        return () => {
           return match_x_arm_Deforest_Arr_2_inst_105_109_129_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
-        };
-        return arr4
+        }
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     };
-    tmp = runtime.safeCall(lambda_inst_105_109_83_tsni(csp, tbl, s));
-    tmp1 = map_inst_105_109_83_85_tsni(tmp, cs);
-    _deforest_Node_lab = arr;
+    lambda$this = runtime.safeCall(lambda_inst_105_109_83_tsni(csp, tbl, s));
+    tmp1 = map_inst_105_109_83_85_tsni(lambda$this, cs);
+    _deforest_Node_lab = tmp;
     _deforest_Node_children = tmp1;
     return (f) => {
-      let param01, param11, l, c, tmp2, tmp3, lambda$this, _deforest_Node_lab1, _deforest_Node_children1;
+      let param01, param11, l, c, tmp2, tmp3, lambda$this1, _deforest_Node_lab1, _deforest_Node_children1;
       param01 = _deforest_Node_lab;
       param11 = _deforest_Node_children;
       l = param01;
       c = param11;
       tmp2 = runtime.safeCall(f(l));
-      lambda$this = runtime.safeCall(lambda_inst_105_109_84_86_tsni(f));
-      tmp3 = map_inst_105_109_84_86_65_tsni(lambda$this, c);
+      lambda$this1 = runtime.safeCall(lambda_inst_105_109_84_86_tsni(f));
+      tmp3 = map_inst_105_109_84_86_65_tsni(lambda$this1, c);
       _deforest_Node_lab1 = tmp2;
       _deforest_Node_children1 = tmp3;
       return (f9) => {
@@ -6119,8 +6073,8 @@ cacheChecks_inst_105_109_83_tsni = function cacheChecks_inst_105_109_83_tsni(csp
         l = param01;
         c = param11;
         tmp2 = runtime.safeCall(f9(l));
-        lambda$this = runtime.safeCall(lambda_inst_105_109_128_tsni(f9));
-        tmp3 = map_inst_105_109_128_65_tsni(lambda$this, c);
+        lambda$this1 = runtime.safeCall(lambda_inst_105_109_128_tsni(f9));
+        tmp3 = map_inst_105_109_128_65_tsni(lambda$this1, c);
         return constraints.Node(tmp2, tmp3)
       }
     }
@@ -6186,29 +6140,29 @@ enumFromTo_inst_105_109_83_22_23_24_tsni = function enumFromTo_inst_105_109_83_2
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -6216,18 +6170,18 @@ enumFromTo_inst_105_109_83_22_23_24_tsni = function enumFromTo_inst_105_109_83_2
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_105_109_83_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_105_109_83_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_105_109_83_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_105_109_83_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -6450,7 +6404,7 @@ filter_inst_105_110_73_44_41_42_tsni = function filter_inst_105_110_73_44_41_42_
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -6458,18 +6412,18 @@ filter_inst_105_110_73_44_41_42_tsni = function filter_inst_105_110_73_44_41_42_
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = constraints1.Known(tmp4);
-          return match_scrut_rest_inst_105_110_73_44_tsni(s, tmp5)
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          tmp6 = constraints1.Known(tmp5);
+          return match_scrut_rest_inst_105_110_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -6501,9 +6455,9 @@ search_inst_105_111_16_1_2_tsni = function search_inst_105_111_16_1_2_tsni(label
   let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = mkTree_inst_105_111_16_1_2_3_tsni(csp);
   tmp1 = runtime.safeCall(labeler(csp, tmp));
-  tmp2 = prune_inst_105_111_16_1_2_8_tsni(lambda8, tmp1);
+  tmp2 = prune_inst_105_111_16_1_2_8_tsni(lambda9, tmp1);
   tmp3 = leaves_inst_105_111_16_1_2_12_tsni(tmp2);
-  tmp4 = filter_inst_105_111_16_1_2_14_tsni(lambda9, tmp3);
+  tmp4 = filter_inst_105_111_16_1_2_14_tsni(lambda8, tmp3);
   return map_inst_105_111_16_1_2_115_tsni(NofibPrelude.fst, tmp4)
 };
 mkTree_inst_105_111_16_1_2_3_tsni = function mkTree_inst_105_111_16_1_2_3_tsni(csp) {
@@ -6775,9 +6729,9 @@ search_inst_112_113_111_16_1_2_tsni = function search_inst_112_113_111_16_1_2_ts
   let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = mkTree_inst_112_113_111_16_1_2_3_tsni(csp);
   tmp1 = runtime.safeCall(labeler(csp, tmp));
-  tmp2 = prune_inst_112_113_111_16_1_2_8_tsni(lambda8, tmp1);
+  tmp2 = prune_inst_112_113_111_16_1_2_8_tsni(lambda9, tmp1);
   tmp3 = leaves_inst_112_113_111_16_1_2_12_tsni(tmp2);
-  tmp4 = filter_inst_112_113_111_16_1_2_14_tsni(lambda9, tmp3);
+  tmp4 = filter_inst_112_113_111_16_1_2_14_tsni(lambda8, tmp3);
   return map_inst_112_113_111_16_1_2_115_tsni(NofibPrelude.fst, tmp4)
 };
 filter_inst_112_113_111_16_1_2_14_tsni = function filter_inst_112_113_111_16_1_2_14_tsni(f, ls) {
@@ -7062,7 +7016,7 @@ filter_inst_112_113_110_73_44_41_42_tsni = function filter_inst_112_113_110_73_4
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -7070,18 +7024,18 @@ filter_inst_112_113_110_73_44_41_42_tsni = function filter_inst_112_113_110_73_4
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          tmp5 = constraints1.Known(tmp4);
-          return match_scrut_rest_inst_112_113_110_73_44_tsni(s, tmp5)
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          tmp6 = constraints1.Known(tmp5);
+          return match_scrut_rest_inst_112_113_110_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -7170,7 +7124,7 @@ enumFromTo_inst_112_113_109_82_76_tsni = function enumFromTo_inst_112_113_109_82
   }
 };
 cacheChecks_inst_112_113_109_83_tsni = function cacheChecks_inst_112_113_109_83_tsni(csp, tbl, n) {
-  let param0, param1, s, cs, arr, tmp, tmp1, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, s, cs, tmp, tmp1, lambda$this, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (n instanceof constraints.Node.class) {
     param0 = n.lab;
     param1 = n.children;
@@ -7178,33 +7132,31 @@ cacheChecks_inst_112_113_109_83_tsni = function cacheChecks_inst_112_113_109_83_
     cs = param1;
     _deforest_Deforest_Arr_2_0 = s;
     _deforest_Deforest_Arr_2_1 = tbl;
-    arr = (csp1) => {
-      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, arr1, arr2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr3, arr4, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
+    tmp = (csp1) => {
+      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12;
       first0 = _deforest_Deforest_Arr_2_0;
       first1 = _deforest_Deforest_Arr_2_1;
       if (first0 instanceof NofibPrelude.Nil.class) {
         tbl2 = first1;
-        arr1 = globalThis.Object.freeze([
+        tmp2 = globalThis.Object.freeze([
           NofibPrelude.Nil,
           constraints1.Unknown
         ]);
-        _deforest_Deforest_Arr_2_02 = arr1;
+        _deforest_Deforest_Arr_2_02 = tmp2;
         _deforest_Deforest_Arr_2_12 = tbl2;
-        arr2 = () => {
+        return () => {
           return match_x_arm_Deforest_Arr_2_inst_112_113_109_129_tsni(_deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
-        };
-        return arr2
+        }
       } else if (first0 instanceof NofibPrelude.Cons.class) {
         param01 = first0.head;
         param11 = first0.tail;
         a = param01;
         as_ = param11;
         tbl1 = first1;
-        tmp2 = constraints1.value(a);
-        tmp3 = tmp2 - 1;
-        tmp4 = NofibPrelude.head(tbl1);
-        tmp5 = NofibPrelude.atIndex(tmp3, tmp4);
-        tableEntry = tmp5;
+        tmp3 = constraints1.value(a);
+        tmp4 = tmp3 - 1;
+        tmp5 = NofibPrelude.head(tbl1);
+        tableEntry = NofibPrelude.atIndex(tmp4, tmp5);
         scrut = tableEntry === constraints1.Unknown;
         if (scrut === true) {
           _deforest_Cons_head = a;
@@ -7229,33 +7181,32 @@ cacheChecks_inst_112_113_109_83_tsni = function cacheChecks_inst_112_113_109_83_
         }
         cs1 = tmp7;
         tmp8 = NofibPrelude.Cons(a, as_);
-        arr3 = globalThis.Object.freeze([
+        tmp9 = globalThis.Object.freeze([
           tmp8,
           cs1
         ]);
-        _deforest_Deforest_Arr_2_01 = arr3;
+        _deforest_Deforest_Arr_2_01 = tmp9;
         _deforest_Deforest_Arr_2_11 = tbl1;
-        arr4 = () => {
+        return () => {
           return match_x_arm_Deforest_Arr_2_inst_112_113_109_129_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr4
+        }
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     };
-    tmp = runtime.safeCall(lambda_inst_112_113_109_83_tsni(csp, tbl, s));
-    tmp1 = map_inst_112_113_109_83_85_tsni(tmp, cs);
-    _deforest_Node_lab = arr;
+    lambda$this = runtime.safeCall(lambda_inst_112_113_109_83_tsni(csp, tbl, s));
+    tmp1 = map_inst_112_113_109_83_85_tsni(lambda$this, cs);
+    _deforest_Node_lab = tmp;
     _deforest_Node_children = tmp1;
     return (f) => {
-      let param01, param11, l, c, tmp2, tmp3, lambda$this, _deforest_Node_lab1, _deforest_Node_children1;
+      let param01, param11, l, c, tmp2, tmp3, lambda$this1, _deforest_Node_lab1, _deforest_Node_children1;
       param01 = _deforest_Node_lab;
       param11 = _deforest_Node_children;
       l = param01;
       c = param11;
       tmp2 = runtime.safeCall(f(l));
-      lambda$this = runtime.safeCall(lambda_inst_112_113_109_84_86_tsni(f));
-      tmp3 = map_inst_112_113_109_84_86_65_tsni(lambda$this, c);
+      lambda$this1 = runtime.safeCall(lambda_inst_112_113_109_84_86_tsni(f));
+      tmp3 = map_inst_112_113_109_84_86_65_tsni(lambda$this1, c);
       _deforest_Node_lab1 = tmp2;
       _deforest_Node_children1 = tmp3;
       return (f9) => {
@@ -7264,8 +7215,8 @@ cacheChecks_inst_112_113_109_83_tsni = function cacheChecks_inst_112_113_109_83_
         l = param01;
         c = param11;
         tmp2 = runtime.safeCall(f9(l));
-        lambda$this = runtime.safeCall(lambda_inst_112_113_109_128_tsni(f9));
-        tmp3 = map_inst_112_113_109_128_65_tsni(lambda$this, c);
+        lambda$this1 = runtime.safeCall(lambda_inst_112_113_109_128_tsni(f9));
+        tmp3 = map_inst_112_113_109_128_65_tsni(lambda$this1, c);
         return constraints.Node(tmp2, tmp3)
       }
     }
@@ -7331,29 +7282,29 @@ enumFromTo_inst_112_113_109_83_22_23_24_tsni = function enumFromTo_inst_112_113_
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -7361,18 +7312,18 @@ enumFromTo_inst_112_113_109_83_22_23_24_tsni = function enumFromTo_inst_112_113_
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_112_113_109_83_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_112_113_109_83_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_112_113_109_83_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_112_113_109_83_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -7563,7 +7514,7 @@ filter_inst_112_113_108_92_73_44_41_42_tsni = function filter_inst_112_113_108_9
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -7571,21 +7522,21 @@ filter_inst_112_113_108_92_73_44_41_42_tsni = function filter_inst_112_113_108_9
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5, _deforest_Known_vs;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6, _deforest_Known_vs;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          _deforest_Known_vs = tmp4;
-          tmp5 = (chs, a2, a3) => {
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          _deforest_Known_vs = tmp5;
+          tmp6 = (chs, a2, a3) => {
             return match_first1_arm_Known_inst_112_113_108_93_90_tsni(chs, a2, a3, _deforest_Known_vs)
           };
-          return match_scrut_rest_inst_112_113_108_92_73_44_tsni(s, tmp5)
+          return match_scrut_rest_inst_112_113_108_92_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -7809,7 +7760,7 @@ filter_inst_112_113_107_98_73_44_41_42_tsni = function filter_inst_112_113_107_9
       _deforest_Cons_head = h;
       _deforest_Cons_tail = tmp;
       return (a) => {
-        let param01, param11, b, tmp1, tmp2, arr, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+        let param01, param11, b, tmp1, tmp2, tmp3, _deforest_Some_x, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
         param01 = _deforest_Cons_head;
         param11 = _deforest_Cons_tail;
         b = param01;
@@ -7817,21 +7768,21 @@ filter_inst_112_113_107_98_73_44_41_42_tsni = function filter_inst_112_113_107_9
         tmp2 = constraints.level(b);
         _deforest_Deforest_Arr_2_0 = tmp1;
         _deforest_Deforest_Arr_2_1 = tmp2;
-        arr = (s, csp) => {
-          let first1, first0, a1, b1, tmp3, tmp4, tmp5, _deforest_Known_vs;
+        tmp3 = (s, csp) => {
+          let first1, first0, a1, b1, tmp4, tmp5, tmp6, _deforest_Known_vs;
           first0 = _deforest_Deforest_Arr_2_0;
           first1 = _deforest_Deforest_Arr_2_1;
           a1 = first0;
           b1 = first1;
-          tmp3 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
-          tmp4 = NofibPrelude.Cons(a1, tmp3);
-          _deforest_Known_vs = tmp4;
-          tmp5 = (chs, a2, a3) => {
+          tmp4 = NofibPrelude.Cons(b1, NofibPrelude.Nil);
+          tmp5 = NofibPrelude.Cons(a1, tmp4);
+          _deforest_Known_vs = tmp5;
+          tmp6 = (chs, a2, a3) => {
             return match_first1_arm_Known_inst_112_113_107_99_88_tsni(chs, a2, a3, _deforest_Known_vs)
           };
-          return match_scrut_rest_inst_112_113_107_98_73_44_tsni(s, tmp5)
+          return match_scrut_rest_inst_112_113_107_98_73_44_tsni(s, tmp6)
         };
-        _deforest_Some_x = arr;
+        _deforest_Some_x = tmp3;
         return (s, csp) => {
           let param02;
           param02 = _deforest_Some_x;
@@ -8062,7 +8013,7 @@ enumFromTo_inst_112_113_106_101_76_tsni = function enumFromTo_inst_112_113_106_1
   }
 };
 cacheChecks_inst_112_113_106_102_tsni = function cacheChecks_inst_112_113_106_102_tsni(csp, tbl, n) {
-  let param0, param1, s, cs, arr, tmp, tmp1, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, s, cs, tmp, tmp1, lambda$this, _deforest_Node_lab, _deforest_Node_children, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (n instanceof constraints.Node.class) {
     param0 = n.lab;
     param1 = n.children;
@@ -8070,34 +8021,32 @@ cacheChecks_inst_112_113_106_102_tsni = function cacheChecks_inst_112_113_106_10
     cs = param1;
     _deforest_Deforest_Arr_2_0 = s;
     _deforest_Deforest_Arr_2_1 = tbl;
-    arr = (csp1) => {
-      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, arr1, arr2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, arr3, arr4, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
+    tmp = (csp1) => {
+      let first1, first0, param01, param11, a, as_, tbl1, tableEntry, cs1, scrut, tbl2, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14;
       first0 = _deforest_Deforest_Arr_2_0;
       first1 = _deforest_Deforest_Arr_2_1;
       if (first0 instanceof NofibPrelude.Nil.class) {
         tbl2 = first1;
         _deforest_Deforest_Arr_2_04 = NofibPrelude.Nil;
         _deforest_Deforest_Arr_2_14 = constraints1.Unknown;
-        arr1 = (first11) => {
+        tmp2 = (first11) => {
           return match_first0_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni(first11, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14)
         };
-        _deforest_Deforest_Arr_2_03 = arr1;
+        _deforest_Deforest_Arr_2_03 = tmp2;
         _deforest_Deforest_Arr_2_13 = tbl2;
-        arr2 = () => {
+        return () => {
           return match_tp2_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni(_deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13)
-        };
-        return arr2
+        }
       } else if (first0 instanceof NofibPrelude.Cons.class) {
         param01 = first0.head;
         param11 = first0.tail;
         a = param01;
         as_ = param11;
         tbl1 = first1;
-        tmp2 = constraints1.value(a);
-        tmp3 = tmp2 - 1;
-        tmp4 = NofibPrelude.head(tbl1);
-        tmp5 = NofibPrelude.atIndex(tmp3, tmp4);
-        tableEntry = tmp5;
+        tmp3 = constraints1.value(a);
+        tmp4 = tmp3 - 1;
+        tmp5 = NofibPrelude.head(tbl1);
+        tableEntry = NofibPrelude.atIndex(tmp4, tmp5);
         scrut = tableEntry === constraints1.Unknown;
         if (scrut === true) {
           _deforest_Cons_head = a;
@@ -8124,32 +8073,31 @@ cacheChecks_inst_112_113_106_102_tsni = function cacheChecks_inst_112_113_106_10
         tmp8 = NofibPrelude.Cons(a, as_);
         _deforest_Deforest_Arr_2_02 = tmp8;
         _deforest_Deforest_Arr_2_12 = cs1;
-        arr3 = (first11) => {
+        tmp9 = (first11) => {
           return match_first0_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni(first11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12)
         };
-        _deforest_Deforest_Arr_2_01 = arr3;
+        _deforest_Deforest_Arr_2_01 = tmp9;
         _deforest_Deforest_Arr_2_11 = tbl1;
-        arr4 = () => {
+        return () => {
           return match_tp2_arm_Deforest_Arr_2_inst_112_113_106_132_134_tsni(_deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-        };
-        return arr4
+        }
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
     };
-    tmp = runtime.safeCall(lambda_inst_112_113_106_102_tsni(csp, tbl, s));
-    tmp1 = map_inst_112_113_106_102_85_tsni(tmp, cs);
-    _deforest_Node_lab = arr;
+    lambda$this = runtime.safeCall(lambda_inst_112_113_106_102_tsni(csp, tbl, s));
+    tmp1 = map_inst_112_113_106_102_85_tsni(lambda$this, cs);
+    _deforest_Node_lab = tmp;
     _deforest_Node_children = tmp1;
     return (f) => {
-      let param01, param11, l, c, tmp2, tmp3, lambda$this, _deforest_Node_lab1, _deforest_Node_children1;
+      let param01, param11, l, c, tmp2, tmp3, lambda$this1, _deforest_Node_lab1, _deforest_Node_children1;
       param01 = _deforest_Node_lab;
       param11 = _deforest_Node_children;
       l = param01;
       c = param11;
       tmp2 = runtime.safeCall(f(l));
-      lambda$this = runtime.safeCall(lambda_inst_112_113_106_103_86_tsni(f));
-      tmp3 = map_inst_112_113_106_103_86_65_tsni(lambda$this, c);
+      lambda$this1 = runtime.safeCall(lambda_inst_112_113_106_103_86_tsni(f));
+      tmp3 = map_inst_112_113_106_103_86_65_tsni(lambda$this1, c);
       _deforest_Node_lab1 = tmp2;
       _deforest_Node_children1 = tmp3;
       return (f9) => {
@@ -8158,8 +8106,8 @@ cacheChecks_inst_112_113_106_102_tsni = function cacheChecks_inst_112_113_106_10
         l = param01;
         c = param11;
         tmp2 = runtime.safeCall(f9(l));
-        lambda$this = runtime.safeCall(lambda_inst_112_113_106_132_133_tsni(f9));
-        tmp3 = map_inst_112_113_106_132_133_65_tsni(lambda$this, c);
+        lambda$this1 = runtime.safeCall(lambda_inst_112_113_106_132_133_tsni(f9));
+        tmp3 = map_inst_112_113_106_132_133_65_tsni(lambda$this1, c);
         return constraints.Node(tmp2, tmp3)
       }
     }
@@ -8225,29 +8173,29 @@ enumFromTo_inst_112_113_106_102_22_23_24_tsni = function enumFromTo_inst_112_113
     _deforest_Cons_head = a;
     _deforest_Cons_tail = tmp1;
     return (varrr) => {
-      let param0, param1, valll, t2, arr, tmp2, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+      let param0, param1, valll, t2, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
       param0 = _deforest_Cons_head;
       param1 = _deforest_Cons_tail;
       valll = param0;
       t2 = param1;
       _deforest_Deforest_Arr_2_0 = varrr;
       _deforest_Deforest_Arr_2_1 = valll;
-      arr = (cs, var_, val_, rel) => {
-        let first1, first0, varr, vall, scrut1, scrut2, tmp3, tmp4, tmp5, tmp6, tmp7;
+      tmp2 = (cs, var_, val_, rel) => {
+        let first1, first0, varr, vall, scrut1, scrut2, tmp4, tmp5, tmp6, tmp7, tmp8;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         varr = first0;
         vall = first1;
         scrut1 = cs === constraints1.Unknown;
         if (scrut1 === true) {
-          tmp3 = constraints1.Assign(var_, val_);
-          tmp4 = constraints1.Assign(varr, vall);
-          tmp5 = runtime.safeCall(rel(tmp3, tmp4));
-          scrut2 = ! tmp5;
+          tmp4 = constraints1.Assign(var_, val_);
+          tmp5 = constraints1.Assign(varr, vall);
+          tmp6 = runtime.safeCall(rel(tmp4, tmp5));
+          scrut2 = ! tmp6;
           if (scrut2 === true) {
-            tmp6 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
-            tmp7 = NofibPrelude.Cons(var_, tmp6);
-            return constraints1.Known(tmp7)
+            tmp7 = NofibPrelude.Cons(varr, NofibPrelude.Nil);
+            tmp8 = NofibPrelude.Cons(var_, tmp7);
+            return constraints1.Known(tmp8)
           } else {
             return cs
           }
@@ -8255,18 +8203,18 @@ enumFromTo_inst_112_113_106_102_22_23_24_tsni = function enumFromTo_inst_112_113
           return cs
         }
       };
-      tmp2 = lscomp2$_inst_112_113_106_102_22_23_25_tsni(varrr, t2);
-      _deforest_Cons_head1 = arr;
-      _deforest_Cons_tail1 = tmp2;
+      tmp3 = lscomp2$_inst_112_113_106_102_22_23_25_tsni(varrr, t2);
+      _deforest_Cons_head1 = tmp2;
+      _deforest_Cons_tail1 = tmp3;
       return (f, x, xs) => {
-        let param01, param11, y, ys, tmp3, tmp4;
+        let param01, param11, y, ys, tmp4, tmp5;
         param01 = _deforest_Cons_head1;
         param11 = _deforest_Cons_tail1;
         y = param01;
         ys = param11;
-        tmp3 = runtime.safeCall(f(x, y));
-        tmp4 = zipWith_inst_112_113_106_102_22_119_120_121_tsni(f, xs, ys);
-        return NofibPrelude.Cons(tmp3, tmp4)
+        tmp4 = runtime.safeCall(f(x, y));
+        tmp5 = zipWith_inst_112_113_106_102_22_119_120_121_tsni(f, xs, ys);
+        return NofibPrelude.Cons(tmp4, tmp5)
       }
     }
   } else {
@@ -9674,7 +9622,7 @@ lscomp13 = function lscomp1(ls) {
   }
 };
 f8 = function f8(tp2) {
-  let first1, first0, first11, first01, as_, cs, tbl, wipedDomains, cs_, scrut, tmp, tmp1, tmp2, tmp3, arr;
+  let first1, first0, first11, first01, as_, cs, tbl, wipedDomains, cs_, scrut, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(tp2) && tp2.length === 2) {
     first0 = runtime.Tuple.get(tp2, 0);
     first1 = runtime.Tuple.get(tp2, 1);
@@ -9684,22 +9632,20 @@ f8 = function f8(tp2) {
       as_ = first01;
       cs = first11;
       tbl = first1;
-      tmp = lscomp13(tbl);
-      wipedDomains = tmp;
+      wipedDomains = lscomp13(tbl);
       scrut = NofibPrelude.null_(wipedDomains);
       if (scrut === true) {
-        tmp1 = cs;
+        tmp = cs;
       } else {
-        tmp2 = NofibPrelude.head(wipedDomains);
-        tmp3 = constraints1.collect(tmp2);
-        tmp1 = constraints1.Known(tmp3);
+        tmp1 = NofibPrelude.head(wipedDomains);
+        tmp2 = constraints1.collect(tmp1);
+        tmp = constraints1.Known(tmp2);
       }
-      cs_ = tmp1;
-      arr = globalThis.Object.freeze([
+      cs_ = tmp;
+      return globalThis.Object.freeze([
         as_,
         cs_
-      ]);
-      return arr
+      ])
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9708,7 +9654,7 @@ f8 = function f8(tp2) {
   }
 };
 f6 = function f6(tp2, chs) {
-  let first1, first0, a, a1, param0, cs, tmp, arr, tmp1, tmp2, tmp3, arr1;
+  let first1, first0, a, a1, param0, cs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (runtime.Tuple.isArrayLike(tp2) && tp2.length === 2) {
     first0 = runtime.Tuple.get(tp2, 0);
     first1 = runtime.Tuple.get(tp2, 1);
@@ -9718,20 +9664,20 @@ f6 = function f6(tp2, chs) {
       param0 = first1.vs;
       cs = param0;
       tmp = constraints1.Known(cs);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         a1,
         tmp
       ]);
-      return constraints1.Node(arr, chs)
+      return constraints1.Node(tmp1, chs)
     } else if (first1 instanceof constraints1.Unknown.class) {
-      tmp1 = map_inst_17_18_tsni(constraints1.label, chs);
-      tmp2 = combine_inst_17_116_tsni(tmp1, NofibPrelude.Nil);
-      tmp3 = constraints1.Known(tmp2);
-      arr1 = globalThis.Object.freeze([
+      tmp2 = map_inst_17_18_tsni(constraints1.label, chs);
+      tmp3 = combine_inst_17_116_tsni(tmp2, NofibPrelude.Nil);
+      tmp4 = constraints1.Known(tmp3);
+      tmp5 = globalThis.Object.freeze([
         a,
-        tmp3
+        tmp4
       ]);
-      return constraints1.Node(arr1, chs)
+      return constraints1.Node(tmp5, chs)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9740,7 +9686,7 @@ f6 = function f6(tp2, chs) {
   }
 };
 f7 = function f7(tp2, chs) {
-  let first1, first0, a, cs_, scrut, a1, param0, cs, tmp, arr, tmp1, tmp2, arr1, arr2;
+  let first1, first0, a, cs_, scrut, a1, param0, cs, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
   if (runtime.Tuple.isArrayLike(tp2) && tp2.length === 2) {
     first0 = runtime.Tuple.get(tp2, 0);
     first1 = runtime.Tuple.get(tp2, 1);
@@ -9750,28 +9696,28 @@ f7 = function f7(tp2, chs) {
       param0 = first1.vs;
       cs = param0;
       tmp = constraints1.Known(cs);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         a1,
         tmp
       ]);
-      return constraints1.Node(arr, chs)
+      return constraints1.Node(tmp1, chs)
     } else if (first1 instanceof constraints1.Unknown.class) {
-      tmp1 = map_inst_19_20_tsni(constraints1.label, chs);
-      tmp2 = combine_inst_19_117_tsni(tmp1, NofibPrelude.Nil);
-      cs_ = constraints1.Known(tmp2);
+      tmp2 = map_inst_19_20_tsni(constraints1.label, chs);
+      tmp3 = combine_inst_19_117_tsni(tmp2, NofibPrelude.Nil);
+      cs_ = constraints1.Known(tmp3);
       scrut = constraints1.knownConflict(cs_);
       if (scrut === true) {
-        arr1 = globalThis.Object.freeze([
+        tmp4 = globalThis.Object.freeze([
           a,
           cs_
         ]);
-        return constraints1.Node(arr1, NofibPrelude.Nil)
+        return constraints1.Node(tmp4, NofibPrelude.Nil)
       } else {
-        arr2 = globalThis.Object.freeze([
+        tmp5 = globalThis.Object.freeze([
           a,
           cs_
         ]);
-        return constraints1.Node(arr2, chs)
+        return constraints1.Node(tmp5, chs)
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -9792,32 +9738,30 @@ lambda12 = (undefined, function (csp, tbl, s) {
   }
 });
 f5 = function f5(csp, tp) {
-  let first1, first0, param0, param1, a, as_, tbl, tableEntry, cs, scrut, tbl1, arr, arr1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr2, arr3, _deforest_Cons_head, _deforest_Cons_tail;
+  let first1, first0, param0, param1, a, as_, tbl, tableEntry, cs, scrut, tbl1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Cons_head, _deforest_Cons_tail;
   if (runtime.Tuple.isArrayLike(tp) && tp.length === 2) {
     first0 = runtime.Tuple.get(tp, 0);
     first1 = runtime.Tuple.get(tp, 1);
     if (first0 instanceof NofibPrelude.Nil.class) {
       tbl1 = first1;
-      arr = globalThis.Object.freeze([
+      tmp = globalThis.Object.freeze([
         NofibPrelude.Nil,
         constraints1.Unknown
       ]);
-      arr1 = globalThis.Object.freeze([
-        arr,
+      return globalThis.Object.freeze([
+        tmp,
         tbl1
-      ]);
-      return arr1
+      ])
     } else if (first0 instanceof NofibPrelude.Cons.class) {
       param0 = first0.head;
       param1 = first0.tail;
       a = param0;
       as_ = param1;
       tbl = first1;
-      tmp = constraints1.value(a);
-      tmp1 = tmp - 1;
-      tmp2 = NofibPrelude.head(tbl);
-      tmp3 = NofibPrelude.atIndex(tmp1, tmp2);
-      tableEntry = tmp3;
+      tmp1 = constraints1.value(a);
+      tmp2 = tmp1 - 1;
+      tmp3 = NofibPrelude.head(tbl);
+      tableEntry = NofibPrelude.atIndex(tmp2, tmp3);
       scrut = tableEntry === constraints1.Unknown;
       if (scrut === true) {
         _deforest_Cons_head = a;
@@ -9842,15 +9786,14 @@ f5 = function f5(csp, tp) {
       }
       cs = tmp5;
       tmp6 = NofibPrelude.Cons(a, as_);
-      arr2 = globalThis.Object.freeze([
+      tmp7 = globalThis.Object.freeze([
         tmp6,
         cs
       ]);
-      arr3 = globalThis.Object.freeze([
-        arr2,
+      return globalThis.Object.freeze([
+        tmp7,
         tbl
-      ]);
-      return arr3
+      ])
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9899,7 +9842,7 @@ f4 = function f4(var_, val_, rel) {
   }
 };
 lscomp2$ = function lscomp2$(varrr, ls) {
-  let param0, param1, valll, t2, arr, tmp;
+  let param0, param1, valll, t2, tmp, tmp1;
   if (ls instanceof NofibPrelude.Nil.class) {
     return NofibPrelude.Nil
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -9907,12 +9850,12 @@ lscomp2$ = function lscomp2$(varrr, ls) {
     param1 = ls.tail;
     valll = param0;
     t2 = param1;
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       varrr,
       valll
     ]);
-    tmp = lscomp2$(varrr, t2);
-    return NofibPrelude.Cons(arr, tmp)
+    tmp1 = lscomp2$(varrr, t2);
+    return NofibPrelude.Cons(tmp, tmp1)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -10004,35 +9947,34 @@ f3 = function f3(csp) {
 lambda8 = (undefined, function (x) {
   let tmp;
   tmp = NofibPrelude.snd(x);
-  return constraints1.knownConflict(tmp)
+  return constraints1.knownSolution(tmp)
 });
 lambda9 = (undefined, function (x) {
   let tmp;
   tmp = NofibPrelude.snd(x);
-  return constraints1.knownSolution(tmp)
+  return constraints1.knownConflict(tmp)
 });
-lambda6 = (undefined, function (x) {
+lambda$6 = function lambda$(csp, x) {
+  return constraints1.complete(csp, x)
+};
+lambda6 = (undefined, function (csp) {
+  return (x) => {
+    return lambda$6(csp, x)
+  }
+});
+lambda7 = (undefined, function (x) {
   let tmp, tmp1;
   tmp = NofibPrelude.snd(x);
   tmp1 = tmp === NofibPrelude.None;
   return ! tmp1
 });
-lambda$6 = function lambda$(csp, x) {
-  return constraints1.complete(csp, x)
-};
-lambda7 = (undefined, function (csp) {
-  return (x) => {
-    return lambda$6(csp, x)
-  }
-});
 f2$ = function f2$(csp, s) {
-  let tmp, arr;
+  let tmp;
   tmp = earliestInconsistency_inst_45_46_tsni(csp, s);
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     tmp
-  ]);
-  return arr
+  ])
 };
 f2 = function f2(csp) {
   return (s) => {
@@ -10534,10 +10476,10 @@ globalThis.Object.freeze(class constraints {
     let tmp, tmp1, tmp2, tmp3, tmp4, lambda$this;
     tmp = mkTree_inst_58_59_tsni(csp);
     tmp1 = labelInconsistencies_inst_58_60_tsni(csp, tmp);
-    tmp2 = prune_inst_58_63_tsni(lambda6, tmp1);
+    tmp2 = prune_inst_58_63_tsni(lambda7, tmp1);
     tmp3 = mapTree_inst_58_70_tsni(NofibPrelude.fst, tmp2);
     tmp4 = leaves_inst_58_69_tsni(tmp3);
-    lambda$this = runtime.safeCall(lambda7(csp));
+    lambda$this = runtime.safeCall(lambda6(csp));
     return NofibPrelude.filter(lambda$this, tmp4)
   } 
   static knownConflict(c) {
@@ -10583,9 +10525,9 @@ globalThis.Object.freeze(class constraints {
     let tmp, tmp1, tmp2, tmp3, tmp4;
     tmp = mkTree_inst_71_3_tsni(csp);
     tmp1 = runtime.safeCall(labeler(csp, tmp));
-    tmp2 = prune_inst_71_8_tsni(lambda8, tmp1);
+    tmp2 = prune_inst_71_8_tsni(lambda9, tmp1);
     tmp3 = leaves_inst_71_12_tsni(tmp2);
-    tmp4 = filter_inst_71_14_tsni(lambda9, tmp3);
+    tmp4 = filter_inst_71_14_tsni(lambda8, tmp3);
     return map_inst_71_115_tsni(NofibPrelude.fst, tmp4)
   } 
   static bt(csp, t) {
@@ -10650,19 +10592,19 @@ globalThis.Object.freeze(class constraints {
     return constraints.mapTree(lambda$this, t)
   } 
   static cacheChecks(csp, tbl, n) {
-    let param0, param1, s, cs, arr, tmp, tmp1;
+    let param0, param1, s, cs, tmp, tmp1, lambda$this;
     if (n instanceof constraints.Node.class) {
       param0 = n.lab;
       param1 = n.children;
       s = param0;
       cs = param1;
-      arr = globalThis.Object.freeze([
+      tmp = globalThis.Object.freeze([
         s,
         tbl
       ]);
-      tmp = runtime.safeCall(lambda_inst_80_tsni(csp, tbl, s));
-      tmp1 = NofibPrelude.map(tmp, cs);
-      return constraints.Node(arr, tmp1)
+      lambda$this = runtime.safeCall(lambda_inst_80_tsni(csp, tbl, s));
+      tmp1 = NofibPrelude.map(lambda$this, cs);
+      return constraints.Node(tmp, tmp1)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }

@@ -86,37 +86,36 @@ match_ls_arm_Cons_inst_21_22_19_17_11_tsni = (undefined, function (_deforest_Con
   return append_inst_21_22_19_17_11_12_tsni(x, tmp)
 });
 lambda_inst_1_2_tsni = (undefined, function (name) {
-  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr, arr1, tmp7, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = NofibPrelude.nofibStringToList("Hello ");
   tmp1 = NofibPrelude.nofibStringToList("!");
   tmp2 = NofibPrelude.append(name, tmp1);
-  tmp3 = NofibPrelude.append(tmp, tmp2);
-  reply = tmp3;
-  tmp4 = NofibPrelude.listLen(reply);
-  tmp5 = tmp4 / 2;
-  tmp6 = 40 - tmp5;
-  _deforest_Deforest_Arr_2_01 = tmp6;
+  reply = NofibPrelude.append(tmp, tmp2);
+  tmp3 = NofibPrelude.listLen(reply);
+  tmp4 = tmp3 / 2;
+  tmp5 = 40 - tmp4;
+  _deforest_Deforest_Arr_2_01 = tmp5;
   _deforest_Deforest_Arr_2_11 = 18;
-  arr = (s, a) => {
+  tmp6 = (s, a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_01;
     first1 = _deforest_Deforest_Arr_2_11;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda1(s, a, x, y))
+    return runtime.safeCall(lambda7(s, a, x, y))
   };
   _deforest_Deforest_Arr_2_0 = 1;
   _deforest_Deforest_Arr_2_1 = 23;
-  arr1 = (a) => {
+  tmp7 = (a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda2(a, x, y))
+    return runtime.safeCall(lambda8(a, x, y))
   };
-  tmp7 = moveTo_inst_1_2_23_tsni(arr1, lambda7);
-  return writeAt_inst_1_2_24_tsni(arr, reply, tmp7)
+  tmp8 = moveTo_inst_1_2_23_tsni(tmp7, lambda3);
+  return writeAt_inst_1_2_24_tsni(tmp6, reply, tmp8)
 });
 promptReadAt_inst_1_3_tsni = function promptReadAt_inst_1_3_tsni(x_y, l, prompt, consume) {
   return runtime.safeCall(x_y(l, prompt, consume))
@@ -354,37 +353,36 @@ replicate_inst_14_4_9_tsni = function replicate_inst_14_4_9_tsni(n, x) {
   }
 };
 lambda_inst_15_16_tsni = (undefined, function (x) {
-  let arr, tmp, tmp1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = 17;
   _deforest_Deforest_Arr_2_1 = 15;
-  arr = (l, prompt, consume) => {
-    let first1, first0, x1, y, arr1, tmp3, tmp4, arr2, tmp5, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  tmp = (l, prompt, consume) => {
+    let first1, first0, x1, y, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x1 = first0;
     y = first1;
     _deforest_Deforest_Arr_2_01 = x1;
     _deforest_Deforest_Arr_2_11 = y;
-    arr1 = (s, a) => {
+    tmp3 = (s, a) => {
       let first11, first01, x2, y1;
       first01 = _deforest_Deforest_Arr_2_01;
       first11 = _deforest_Deforest_Arr_2_11;
       x2 = first01;
       y1 = first11;
-      return runtime.safeCall(lambda1(s, a, x2, y1))
+      return runtime.safeCall(lambda7(s, a, x2, y1))
     };
-    tmp3 = NofibPrelude.listLen(prompt);
-    tmp4 = x1 + tmp3;
-    arr2 = globalThis.Object.freeze([
-      tmp4,
+    tmp4 = NofibPrelude.listLen(prompt);
+    tmp5 = x1 + tmp4;
+    tmp6 = globalThis.Object.freeze([
+      tmp5,
       y
     ]);
-    tmp5 = readAt_inst_15_16_3_4_tsni(arr2, l, consume);
-    return writeAt_inst_15_16_3_27_tsni(arr1, prompt, tmp5)
+    tmp7 = readAt_inst_15_16_3_4_tsni(tmp6, l, consume);
+    return writeAt_inst_15_16_3_27_tsni(tmp3, prompt, tmp7)
   };
-  tmp = NofibPrelude.nofibStringToList("Please enter your name: ");
-  tmp1 = lambda_inst_15_16_2_tsni;
-  tmp2 = promptReadAt_inst_15_16_3_tsni(arr, 18, tmp, tmp1);
+  tmp1 = NofibPrelude.nofibStringToList("Please enter your name: ");
+  tmp2 = promptReadAt_inst_15_16_3_tsni(tmp, 18, tmp1, lambda_inst_15_16_2_tsni);
   return ansi1.pressAnyKey(tmp2, x)
 });
 promptReadAt_inst_15_16_3_tsni = function promptReadAt_inst_15_16_3_tsni(x_y, l, prompt, consume) {
@@ -457,37 +455,36 @@ replicate_inst_15_16_3_4_9_tsni = function replicate_inst_15_16_3_4_9_tsni(n, x)
   }
 };
 lambda_inst_15_16_2_tsni = (undefined, function (name) {
-  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr, arr1, tmp7, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = NofibPrelude.nofibStringToList("Hello ");
   tmp1 = NofibPrelude.nofibStringToList("!");
   tmp2 = NofibPrelude.append(name, tmp1);
-  tmp3 = NofibPrelude.append(tmp, tmp2);
-  reply = tmp3;
-  tmp4 = NofibPrelude.listLen(reply);
-  tmp5 = tmp4 / 2;
-  tmp6 = 40 - tmp5;
-  _deforest_Deforest_Arr_2_01 = tmp6;
+  reply = NofibPrelude.append(tmp, tmp2);
+  tmp3 = NofibPrelude.listLen(reply);
+  tmp4 = tmp3 / 2;
+  tmp5 = 40 - tmp4;
+  _deforest_Deforest_Arr_2_01 = tmp5;
   _deforest_Deforest_Arr_2_11 = 18;
-  arr = (s, a) => {
+  tmp6 = (s, a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_01;
     first1 = _deforest_Deforest_Arr_2_11;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda1(s, a, x, y))
+    return runtime.safeCall(lambda7(s, a, x, y))
   };
   _deforest_Deforest_Arr_2_0 = 1;
   _deforest_Deforest_Arr_2_1 = 23;
-  arr1 = (a) => {
+  tmp7 = (a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda2(a, x, y))
+    return runtime.safeCall(lambda8(a, x, y))
   };
-  tmp7 = moveTo_inst_15_16_2_23_tsni(arr1, lambda7);
-  return writeAt_inst_15_16_2_24_tsni(arr, reply, tmp7)
+  tmp8 = moveTo_inst_15_16_2_23_tsni(tmp7, lambda3);
+  return writeAt_inst_15_16_2_24_tsni(tmp6, reply, tmp8)
 });
 writes_inst_15_17_tsni = function writes_inst_15_17_tsni(ss, a, b) {
   let tmp;
@@ -522,127 +519,126 @@ append_inst_15_17_11_12_tsni = function append_inst_15_17_11_12_tsni(xs, ys) {
   }
 };
 program_inst_18_19_tsni = function program_inst_18_19_tsni(input) {
-  let arr, tmp, tmp1, tmp2, arr1, tmp3, tmp4, arr2, tmp5, tmp6, arr3, tmp7, tmp8, arr4, tmp9, tmp10, arr5, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15;
   _deforest_Deforest_Arr_2_05 = 17;
   _deforest_Deforest_Arr_2_15 = 5;
-  arr = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_05;
     first1 = _deforest_Deforest_Arr_2_15;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp = NofibPrelude.nofibStringToList("Demonstration program");
-  tmp1 = ansi.highlight(tmp);
-  tmp2 = at_inst_18_19_29_tsni(arr, tmp1);
+  tmp1 = NofibPrelude.nofibStringToList("Demonstration program");
+  tmp2 = ansi.highlight(tmp1);
+  tmp3 = at_inst_18_19_29_tsni(tmp, tmp2);
   _deforest_Deforest_Arr_2_04 = 48;
   _deforest_Deforest_Arr_2_14 = 5;
-  arr1 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp4 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_04;
     first1 = _deforest_Deforest_Arr_2_14;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp3 = NofibPrelude.nofibStringToList("Version 1.0");
-  tmp4 = at_inst_18_19_30_tsni(arr1, tmp3);
+  tmp5 = NofibPrelude.nofibStringToList("Version 1.0");
+  tmp6 = at_inst_18_19_30_tsni(tmp4, tmp5);
   _deforest_Deforest_Arr_2_03 = 17;
   _deforest_Deforest_Arr_2_13 = 7;
-  arr2 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp7 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_03;
     first1 = _deforest_Deforest_Arr_2_13;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp5 = NofibPrelude.nofibStringToList("This program illustrates a simple approach");
-  tmp6 = at_inst_18_19_31_tsni(arr2, tmp5);
+  tmp8 = NofibPrelude.nofibStringToList("This program illustrates a simple approach");
+  tmp9 = at_inst_18_19_31_tsni(tmp7, tmp8);
   _deforest_Deforest_Arr_2_02 = 17;
   _deforest_Deforest_Arr_2_12 = 8;
-  arr3 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp10 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_02;
     first1 = _deforest_Deforest_Arr_2_12;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp7 = NofibPrelude.nofibStringToList("to screen-based interactive programs using");
-  tmp8 = at_inst_18_19_32_tsni(arr3, tmp7);
+  tmp11 = NofibPrelude.nofibStringToList("to screen-based interactive programs using");
+  tmp12 = at_inst_18_19_32_tsni(tmp10, tmp11);
   _deforest_Deforest_Arr_2_01 = 17;
   _deforest_Deforest_Arr_2_11 = 9;
-  arr4 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp13 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_01;
     first1 = _deforest_Deforest_Arr_2_11;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp9 = NofibPrelude.nofibStringToList("the Hugs functional programming system.");
-  tmp10 = at_inst_18_19_33_tsni(arr4, tmp9);
+  tmp14 = NofibPrelude.nofibStringToList("the Hugs functional programming system.");
+  tmp15 = at_inst_18_19_33_tsni(tmp13, tmp14);
   _deforest_Deforest_Arr_2_0 = 17;
   _deforest_Deforest_Arr_2_1 = 11;
-  arr5 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp16 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp11 = NofibPrelude.nofibStringToList("Please press any key to continue ...");
-  tmp12 = at_inst_18_19_34_tsni(arr5, tmp11);
-  _deforest_Cons_head6 = tmp12;
+  tmp17 = NofibPrelude.nofibStringToList("Please press any key to continue ...");
+  tmp18 = at_inst_18_19_34_tsni(tmp16, tmp17);
+  _deforest_Cons_head6 = tmp18;
   _deforest_Cons_tail6 = () => {
     return (ys) => {
       return ys
     }
   };
-  tmp13 = () => {
+  tmp19 = () => {
     return match_ls_arm_Cons_inst_18_19_17_11_tsni(_deforest_Cons_head6, _deforest_Cons_tail6)
   };
-  _deforest_Cons_head5 = tmp10;
-  _deforest_Cons_tail5 = tmp13;
-  tmp14 = () => {
+  _deforest_Cons_head5 = tmp15;
+  _deforest_Cons_tail5 = tmp19;
+  tmp20 = () => {
     return match_ls_arm_Cons_inst_18_19_17_11_tsni(_deforest_Cons_head5, _deforest_Cons_tail5)
   };
-  _deforest_Cons_head4 = tmp8;
-  _deforest_Cons_tail4 = tmp14;
-  tmp15 = () => {
+  _deforest_Cons_head4 = tmp12;
+  _deforest_Cons_tail4 = tmp20;
+  tmp21 = () => {
     return match_ls_arm_Cons_inst_18_19_17_11_tsni(_deforest_Cons_head4, _deforest_Cons_tail4)
   };
-  _deforest_Cons_head3 = tmp6;
-  _deforest_Cons_tail3 = tmp15;
-  tmp16 = () => {
+  _deforest_Cons_head3 = tmp9;
+  _deforest_Cons_tail3 = tmp21;
+  tmp22 = () => {
     return match_ls_arm_Cons_inst_18_19_17_11_tsni(_deforest_Cons_head3, _deforest_Cons_tail3)
   };
-  _deforest_Cons_head2 = tmp4;
-  _deforest_Cons_tail2 = tmp16;
-  tmp17 = () => {
+  _deforest_Cons_head2 = tmp6;
+  _deforest_Cons_tail2 = tmp22;
+  tmp23 = () => {
     return match_ls_arm_Cons_inst_18_19_17_11_tsni(_deforest_Cons_head2, _deforest_Cons_tail2)
   };
-  _deforest_Cons_head1 = tmp2;
-  _deforest_Cons_tail1 = tmp17;
-  tmp18 = () => {
+  _deforest_Cons_head1 = tmp3;
+  _deforest_Cons_tail1 = tmp23;
+  tmp24 = () => {
     return match_ls_arm_Cons_inst_18_19_17_11_tsni(_deforest_Cons_head1, _deforest_Cons_tail1)
   };
   _deforest_Cons_head = ansi.cls;
-  _deforest_Cons_tail = tmp18;
-  tmp19 = () => {
+  _deforest_Cons_tail = tmp24;
+  tmp25 = () => {
     return match_ls_arm_Cons_inst_18_19_17_11_tsni(_deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp20 = lambda_inst_18_19_16_tsni;
-  return writes_inst_18_19_17_tsni(tmp19, tmp20, input)
+  return writes_inst_18_19_17_tsni(tmp25, lambda_inst_18_19_16_tsni, input)
 };
 writes_inst_18_19_17_tsni = function writes_inst_18_19_17_tsni(ss, a, b) {
   let tmp;
@@ -677,71 +673,69 @@ append_inst_18_19_17_11_12_tsni = function append_inst_18_19_17_11_12_tsni(xs, y
   }
 };
 lambda_inst_18_19_16_tsni = (undefined, function (x) {
-  let arr, tmp, tmp1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = 17;
   _deforest_Deforest_Arr_2_1 = 15;
-  arr = (l, prompt, consume) => {
-    let first1, first0, x1, y, arr1, tmp3, tmp4, arr2, tmp5, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  tmp = (l, prompt, consume) => {
+    let first1, first0, x1, y, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x1 = first0;
     y = first1;
     _deforest_Deforest_Arr_2_01 = x1;
     _deforest_Deforest_Arr_2_11 = y;
-    arr1 = (s, a) => {
+    tmp3 = (s, a) => {
       let first11, first01, x2, y1;
       first01 = _deforest_Deforest_Arr_2_01;
       first11 = _deforest_Deforest_Arr_2_11;
       x2 = first01;
       y1 = first11;
-      return runtime.safeCall(lambda1(s, a, x2, y1))
+      return runtime.safeCall(lambda7(s, a, x2, y1))
     };
-    tmp3 = NofibPrelude.listLen(prompt);
-    tmp4 = x1 + tmp3;
-    arr2 = globalThis.Object.freeze([
-      tmp4,
+    tmp4 = NofibPrelude.listLen(prompt);
+    tmp5 = x1 + tmp4;
+    tmp6 = globalThis.Object.freeze([
+      tmp5,
       y
     ]);
-    tmp5 = readAt_inst_18_19_16_3_4_tsni(arr2, l, consume);
-    return writeAt_inst_18_19_16_3_27_tsni(arr1, prompt, tmp5)
+    tmp7 = readAt_inst_18_19_16_3_4_tsni(tmp6, l, consume);
+    return writeAt_inst_18_19_16_3_27_tsni(tmp3, prompt, tmp7)
   };
-  tmp = NofibPrelude.nofibStringToList("Please enter your name: ");
-  tmp1 = lambda_inst_18_19_16_2_tsni;
-  tmp2 = promptReadAt_inst_18_19_16_3_tsni(arr, 18, tmp, tmp1);
+  tmp1 = NofibPrelude.nofibStringToList("Please enter your name: ");
+  tmp2 = promptReadAt_inst_18_19_16_3_tsni(tmp, 18, tmp1, lambda_inst_18_19_16_2_tsni);
   return ansi1.pressAnyKey(tmp2, x)
 });
 lambda_inst_18_19_16_2_tsni = (undefined, function (name) {
-  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr, arr1, tmp7, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = NofibPrelude.nofibStringToList("Hello ");
   tmp1 = NofibPrelude.nofibStringToList("!");
   tmp2 = NofibPrelude.append(name, tmp1);
-  tmp3 = NofibPrelude.append(tmp, tmp2);
-  reply = tmp3;
-  tmp4 = NofibPrelude.listLen(reply);
-  tmp5 = tmp4 / 2;
-  tmp6 = 40 - tmp5;
-  _deforest_Deforest_Arr_2_01 = tmp6;
+  reply = NofibPrelude.append(tmp, tmp2);
+  tmp3 = NofibPrelude.listLen(reply);
+  tmp4 = tmp3 / 2;
+  tmp5 = 40 - tmp4;
+  _deforest_Deforest_Arr_2_01 = tmp5;
   _deforest_Deforest_Arr_2_11 = 18;
-  arr = (s, a) => {
+  tmp6 = (s, a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_01;
     first1 = _deforest_Deforest_Arr_2_11;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda1(s, a, x, y))
+    return runtime.safeCall(lambda7(s, a, x, y))
   };
   _deforest_Deforest_Arr_2_0 = 1;
   _deforest_Deforest_Arr_2_1 = 23;
-  arr1 = (a) => {
+  tmp7 = (a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda2(a, x, y))
+    return runtime.safeCall(lambda8(a, x, y))
   };
-  tmp7 = moveTo_inst_18_19_16_2_23_tsni(arr1, lambda7);
-  return writeAt_inst_18_19_16_2_24_tsni(arr, reply, tmp7)
+  tmp8 = moveTo_inst_18_19_16_2_23_tsni(tmp7, lambda3);
+  return writeAt_inst_18_19_16_2_24_tsni(tmp6, reply, tmp8)
 });
 promptReadAt_inst_18_19_16_3_tsni = function promptReadAt_inst_18_19_16_3_tsni(x_y, l, prompt, consume) {
   return runtime.safeCall(x_y(l, prompt, consume))
@@ -838,7 +832,7 @@ replicate_inst_18_20_tsni = function replicate_inst_18_20_tsni(n, x) {
 testAnsi_nofib_inst_21_22_tsni = function testAnsi_nofib_inst_21_22_tsni(n) {
   let tmp, tmp1, tmp2;
   tmp = replicate_inst_21_22_20_tsni(n, program_inst_21_22_19_tsni);
-  tmp1 = foldr_inst_21_22_35_tsni(NofibPrelude.compose, lambda9, tmp);
+  tmp1 = foldr_inst_21_22_35_tsni(NofibPrelude.compose, lambda6, tmp);
   tmp2 = NofibPrelude.nofibStringToList("testtesttest");
   return runtime.safeCall(tmp1(tmp2))
 };
@@ -866,160 +860,158 @@ replicate_inst_21_22_20_tsni = function replicate_inst_21_22_20_tsni(n, x) {
   }
 };
 program_inst_21_22_19_tsni = function program_inst_21_22_19_tsni(input) {
-  let arr, tmp, tmp1, tmp2, arr1, tmp3, tmp4, arr2, tmp5, tmp6, arr3, tmp7, tmp8, arr4, tmp9, tmp10, arr5, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6;
   _deforest_Deforest_Arr_2_0 = 17;
   _deforest_Deforest_Arr_2_1 = 5;
-  arr = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp = NofibPrelude.nofibStringToList("Demonstration program");
-  tmp1 = ansi.highlight(tmp);
-  tmp2 = at_inst_21_22_19_29_tsni(arr, tmp1);
+  tmp1 = NofibPrelude.nofibStringToList("Demonstration program");
+  tmp2 = ansi.highlight(tmp1);
+  tmp3 = at_inst_21_22_19_29_tsni(tmp, tmp2);
   _deforest_Deforest_Arr_2_01 = 48;
   _deforest_Deforest_Arr_2_11 = 5;
-  arr1 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp4 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_01;
     first1 = _deforest_Deforest_Arr_2_11;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp3 = NofibPrelude.nofibStringToList("Version 1.0");
-  tmp4 = at_inst_21_22_19_30_tsni(arr1, tmp3);
+  tmp5 = NofibPrelude.nofibStringToList("Version 1.0");
+  tmp6 = at_inst_21_22_19_30_tsni(tmp4, tmp5);
   _deforest_Deforest_Arr_2_02 = 17;
   _deforest_Deforest_Arr_2_12 = 7;
-  arr2 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp7 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_02;
     first1 = _deforest_Deforest_Arr_2_12;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp5 = NofibPrelude.nofibStringToList("This program illustrates a simple approach");
-  tmp6 = at_inst_21_22_19_31_tsni(arr2, tmp5);
+  tmp8 = NofibPrelude.nofibStringToList("This program illustrates a simple approach");
+  tmp9 = at_inst_21_22_19_31_tsni(tmp7, tmp8);
   _deforest_Deforest_Arr_2_03 = 17;
   _deforest_Deforest_Arr_2_13 = 8;
-  arr3 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp10 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_03;
     first1 = _deforest_Deforest_Arr_2_13;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp7 = NofibPrelude.nofibStringToList("to screen-based interactive programs using");
-  tmp8 = at_inst_21_22_19_32_tsni(arr3, tmp7);
+  tmp11 = NofibPrelude.nofibStringToList("to screen-based interactive programs using");
+  tmp12 = at_inst_21_22_19_32_tsni(tmp10, tmp11);
   _deforest_Deforest_Arr_2_04 = 17;
   _deforest_Deforest_Arr_2_14 = 9;
-  arr4 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp13 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_04;
     first1 = _deforest_Deforest_Arr_2_14;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp9 = NofibPrelude.nofibStringToList("the Hugs functional programming system.");
-  tmp10 = at_inst_21_22_19_33_tsni(arr4, tmp9);
+  tmp14 = NofibPrelude.nofibStringToList("the Hugs functional programming system.");
+  tmp15 = at_inst_21_22_19_33_tsni(tmp13, tmp14);
   _deforest_Deforest_Arr_2_05 = 17;
   _deforest_Deforest_Arr_2_15 = 11;
-  arr5 = (s) => {
-    let first1, first0, x, y, tmp21;
+  tmp16 = (s) => {
+    let first1, first0, x, y, tmp26;
     first0 = _deforest_Deforest_Arr_2_05;
     first1 = _deforest_Deforest_Arr_2_15;
     x = first0;
     y = first1;
-    tmp21 = ansi.goto(x, y);
-    return NofibPrelude.append(tmp21, s)
+    tmp26 = ansi.goto(x, y);
+    return NofibPrelude.append(tmp26, s)
   };
-  tmp11 = NofibPrelude.nofibStringToList("Please press any key to continue ...");
-  tmp12 = at_inst_21_22_19_34_tsni(arr5, tmp11);
-  _deforest_Cons_head6 = tmp12;
+  tmp17 = NofibPrelude.nofibStringToList("Please press any key to continue ...");
+  tmp18 = at_inst_21_22_19_34_tsni(tmp16, tmp17);
+  _deforest_Cons_head6 = tmp18;
   _deforest_Cons_tail6 = () => {
     return (ys) => {
       return ys
     }
   };
-  tmp13 = () => {
+  tmp19 = () => {
     return match_ls_arm_Cons_inst_21_22_19_17_11_tsni(_deforest_Cons_head6, _deforest_Cons_tail6)
   };
-  _deforest_Cons_head5 = tmp10;
-  _deforest_Cons_tail5 = tmp13;
-  tmp14 = () => {
+  _deforest_Cons_head5 = tmp15;
+  _deforest_Cons_tail5 = tmp19;
+  tmp20 = () => {
     return match_ls_arm_Cons_inst_21_22_19_17_11_tsni(_deforest_Cons_head5, _deforest_Cons_tail5)
   };
-  _deforest_Cons_head4 = tmp8;
-  _deforest_Cons_tail4 = tmp14;
-  tmp15 = () => {
+  _deforest_Cons_head4 = tmp12;
+  _deforest_Cons_tail4 = tmp20;
+  tmp21 = () => {
     return match_ls_arm_Cons_inst_21_22_19_17_11_tsni(_deforest_Cons_head4, _deforest_Cons_tail4)
   };
-  _deforest_Cons_head3 = tmp6;
-  _deforest_Cons_tail3 = tmp15;
-  tmp16 = () => {
+  _deforest_Cons_head3 = tmp9;
+  _deforest_Cons_tail3 = tmp21;
+  tmp22 = () => {
     return match_ls_arm_Cons_inst_21_22_19_17_11_tsni(_deforest_Cons_head3, _deforest_Cons_tail3)
   };
-  _deforest_Cons_head2 = tmp4;
-  _deforest_Cons_tail2 = tmp16;
-  tmp17 = () => {
+  _deforest_Cons_head2 = tmp6;
+  _deforest_Cons_tail2 = tmp22;
+  tmp23 = () => {
     return match_ls_arm_Cons_inst_21_22_19_17_11_tsni(_deforest_Cons_head2, _deforest_Cons_tail2)
   };
-  _deforest_Cons_head1 = tmp2;
-  _deforest_Cons_tail1 = tmp17;
-  tmp18 = () => {
+  _deforest_Cons_head1 = tmp3;
+  _deforest_Cons_tail1 = tmp23;
+  tmp24 = () => {
     return match_ls_arm_Cons_inst_21_22_19_17_11_tsni(_deforest_Cons_head1, _deforest_Cons_tail1)
   };
   _deforest_Cons_head = ansi.cls;
-  _deforest_Cons_tail = tmp18;
-  tmp19 = () => {
+  _deforest_Cons_tail = tmp24;
+  tmp25 = () => {
     return match_ls_arm_Cons_inst_21_22_19_17_11_tsni(_deforest_Cons_head, _deforest_Cons_tail)
   };
-  tmp20 = lambda_inst_21_22_19_16_tsni;
-  return writes_inst_21_22_19_17_tsni(tmp19, tmp20, input)
+  return writes_inst_21_22_19_17_tsni(tmp25, lambda_inst_21_22_19_16_tsni, input)
 };
 lambda_inst_21_22_19_16_tsni = (undefined, function (x) {
-  let arr, tmp, tmp1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = 17;
   _deforest_Deforest_Arr_2_1 = 15;
-  arr = (l, prompt, consume) => {
-    let first1, first0, x1, y, arr1, tmp3, tmp4, arr2, tmp5, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  tmp = (l, prompt, consume) => {
+    let first1, first0, x1, y, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x1 = first0;
     y = first1;
     _deforest_Deforest_Arr_2_01 = x1;
     _deforest_Deforest_Arr_2_11 = y;
-    arr1 = (s, a) => {
+    tmp3 = (s, a) => {
       let first11, first01, x2, y1;
       first01 = _deforest_Deforest_Arr_2_01;
       first11 = _deforest_Deforest_Arr_2_11;
       x2 = first01;
       y1 = first11;
-      return runtime.safeCall(lambda1(s, a, x2, y1))
+      return runtime.safeCall(lambda7(s, a, x2, y1))
     };
-    tmp3 = NofibPrelude.listLen(prompt);
-    tmp4 = x1 + tmp3;
-    arr2 = globalThis.Object.freeze([
-      tmp4,
+    tmp4 = NofibPrelude.listLen(prompt);
+    tmp5 = x1 + tmp4;
+    tmp6 = globalThis.Object.freeze([
+      tmp5,
       y
     ]);
-    tmp5 = readAt_inst_21_22_19_16_3_4_tsni(arr2, l, consume);
-    return writeAt_inst_21_22_19_16_3_27_tsni(arr1, prompt, tmp5)
+    tmp7 = readAt_inst_21_22_19_16_3_4_tsni(tmp6, l, consume);
+    return writeAt_inst_21_22_19_16_3_27_tsni(tmp3, prompt, tmp7)
   };
-  tmp = NofibPrelude.nofibStringToList("Please enter your name: ");
-  tmp1 = lambda_inst_21_22_19_16_2_tsni;
-  tmp2 = promptReadAt_inst_21_22_19_16_3_tsni(arr, 18, tmp, tmp1);
+  tmp1 = NofibPrelude.nofibStringToList("Please enter your name: ");
+  tmp2 = promptReadAt_inst_21_22_19_16_3_tsni(tmp, 18, tmp1, lambda_inst_21_22_19_16_2_tsni);
   return ansi1.pressAnyKey(tmp2, x)
 });
 promptReadAt_inst_21_22_19_16_3_tsni = function promptReadAt_inst_21_22_19_16_3_tsni(x_y, l, prompt, consume) {
@@ -1092,37 +1084,36 @@ replicate_inst_21_22_19_16_3_4_9_tsni = function replicate_inst_21_22_19_16_3_4_
   }
 };
 lambda_inst_21_22_19_16_2_tsni = (undefined, function (name) {
-  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr, arr1, tmp7, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = NofibPrelude.nofibStringToList("Hello ");
   tmp1 = NofibPrelude.nofibStringToList("!");
   tmp2 = NofibPrelude.append(name, tmp1);
-  tmp3 = NofibPrelude.append(tmp, tmp2);
-  reply = tmp3;
-  tmp4 = NofibPrelude.listLen(reply);
-  tmp5 = tmp4 / 2;
-  tmp6 = 40 - tmp5;
-  _deforest_Deforest_Arr_2_01 = tmp6;
+  reply = NofibPrelude.append(tmp, tmp2);
+  tmp3 = NofibPrelude.listLen(reply);
+  tmp4 = tmp3 / 2;
+  tmp5 = 40 - tmp4;
+  _deforest_Deforest_Arr_2_01 = tmp5;
   _deforest_Deforest_Arr_2_11 = 18;
-  arr = (s, a) => {
+  tmp6 = (s, a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_01;
     first1 = _deforest_Deforest_Arr_2_11;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda1(s, a, x, y))
+    return runtime.safeCall(lambda7(s, a, x, y))
   };
   _deforest_Deforest_Arr_2_0 = 1;
   _deforest_Deforest_Arr_2_1 = 23;
-  arr1 = (a) => {
+  tmp7 = (a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda2(a, x, y))
+    return runtime.safeCall(lambda8(a, x, y))
   };
-  tmp7 = moveTo_inst_21_22_19_16_2_23_tsni(arr1, lambda7);
-  return writeAt_inst_21_22_19_16_2_24_tsni(arr, reply, tmp7)
+  tmp8 = moveTo_inst_21_22_19_16_2_23_tsni(tmp7, lambda3);
+  return writeAt_inst_21_22_19_16_2_24_tsni(tmp6, reply, tmp8)
 });
 writes_inst_21_22_19_17_tsni = function writes_inst_21_22_19_17_tsni(ss, a, b) {
   let tmp;
@@ -1341,82 +1332,80 @@ writeString_inst_21_22_19_17_28_tsni = function writeString_inst_21_22_19_17_28_
 append_inst_21_22_19_17_28_26_tsni = function append_inst_21_22_19_17_28_26_tsni(xs, ys) {
   return runtime.safeCall(xs(ys))
 };
-lambda9 = (undefined, function (x) {
+lambda6 = (undefined, function (x) {
   return x
 });
-lambda8 = (undefined, function (x) {
+lambda2 = (undefined, function (x) {
   return ansi1.pressAnyKey(ansi1.end, x)
 });
-lambda7 = (undefined, function (y) {
+lambda3 = (undefined, function (y) {
   let tmp;
   tmp = NofibPrelude.nofibStringToList("I'm waiting...");
-  return ansi1.writeString(tmp, lambda8, y)
+  return ansi1.writeString(tmp, lambda2, y)
 });
-lambda6 = (undefined, function (name) {
-  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, arr, arr1, tmp7, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+lambda4 = (undefined, function (name) {
+  let reply, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
   tmp = NofibPrelude.nofibStringToList("Hello ");
   tmp1 = NofibPrelude.nofibStringToList("!");
   tmp2 = NofibPrelude.append(name, tmp1);
-  tmp3 = NofibPrelude.append(tmp, tmp2);
-  reply = tmp3;
-  tmp4 = NofibPrelude.listLen(reply);
-  tmp5 = tmp4 / 2;
-  tmp6 = 40 - tmp5;
-  _deforest_Deforest_Arr_2_01 = tmp6;
+  reply = NofibPrelude.append(tmp, tmp2);
+  tmp3 = NofibPrelude.listLen(reply);
+  tmp4 = tmp3 / 2;
+  tmp5 = 40 - tmp4;
+  _deforest_Deforest_Arr_2_01 = tmp5;
   _deforest_Deforest_Arr_2_11 = 18;
-  arr = (s, a) => {
+  tmp6 = (s, a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_01;
     first1 = _deforest_Deforest_Arr_2_11;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda1(s, a, x, y))
+    return runtime.safeCall(lambda7(s, a, x, y))
   };
   _deforest_Deforest_Arr_2_0 = 1;
   _deforest_Deforest_Arr_2_1 = 23;
-  arr1 = (a) => {
+  tmp7 = (a) => {
     let first1, first0, x, y;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x = first0;
     y = first1;
-    return runtime.safeCall(lambda2(a, x, y))
+    return runtime.safeCall(lambda8(a, x, y))
   };
-  tmp7 = moveTo_inst_0_23_tsni(arr1, lambda7);
-  return writeAt_inst_0_24_tsni(arr, reply, tmp7)
+  tmp8 = moveTo_inst_0_23_tsni(tmp7, lambda3);
+  return writeAt_inst_0_24_tsni(tmp6, reply, tmp8)
 });
 lambda5 = (undefined, function (x) {
-  let arr, tmp, tmp1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let tmp, tmp1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = 17;
   _deforest_Deforest_Arr_2_1 = 15;
-  arr = (l, prompt, consume) => {
-    let first1, first0, x1, y, arr1, tmp3, tmp4, arr2, tmp5, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+  tmp = (l, prompt, consume) => {
+    let first1, first0, x1, y, tmp3, tmp4, tmp5, tmp6, tmp7, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     x1 = first0;
     y = first1;
     _deforest_Deforest_Arr_2_01 = x1;
     _deforest_Deforest_Arr_2_11 = y;
-    arr1 = (s, a) => {
+    tmp3 = (s, a) => {
       let first11, first01, x2, y1;
       first01 = _deforest_Deforest_Arr_2_01;
       first11 = _deforest_Deforest_Arr_2_11;
       x2 = first01;
       y1 = first11;
-      return runtime.safeCall(lambda1(s, a, x2, y1))
+      return runtime.safeCall(lambda7(s, a, x2, y1))
     };
-    tmp3 = NofibPrelude.listLen(prompt);
-    tmp4 = x1 + tmp3;
-    arr2 = globalThis.Object.freeze([
-      tmp4,
+    tmp4 = NofibPrelude.listLen(prompt);
+    tmp5 = x1 + tmp4;
+    tmp6 = globalThis.Object.freeze([
+      tmp5,
       y
     ]);
-    tmp5 = readAt_inst_1_3_4_tsni(arr2, l, consume);
-    return writeAt_inst_1_3_27_tsni(arr1, prompt, tmp5)
+    tmp7 = readAt_inst_1_3_4_tsni(tmp6, l, consume);
+    return writeAt_inst_1_3_27_tsni(tmp3, prompt, tmp7)
   };
-  tmp = NofibPrelude.nofibStringToList("Please enter your name: ");
-  tmp1 = lambda_inst_1_2_tsni;
-  tmp2 = promptReadAt_inst_1_3_tsni(arr, 18, tmp, tmp1);
+  tmp1 = NofibPrelude.nofibStringToList("Please enter your name: ");
+  tmp2 = promptReadAt_inst_1_3_tsni(tmp, 18, tmp1, lambda_inst_1_2_tsni);
   return ansi1.pressAnyKey(tmp2, x)
 });
 lambda$4 = function lambda$(n, s, l, consume, c, d) {
@@ -1448,18 +1437,18 @@ lambda$4 = function lambda$(n, s, l, consume, c, d) {
     }
   }
 };
-lambda4 = (undefined, function (n, s, l, consume) {
+lambda1 = (undefined, function (n, s, l, consume) {
   return (c, d) => {
     return lambda$4(n, s, l, consume, c, d)
   }
 });
 lambda$3 = function lambda$(n, s, l, consume, x) {
-  let tmp, tmp1;
+  let tmp, lambda$this;
   tmp = ansi1.returnn(s, consume);
-  tmp1 = runtime.safeCall(lambda4(n, s, l, consume));
-  return ansi1.readChar(tmp, tmp1, x)
+  lambda$this = runtime.safeCall(lambda1(n, s, l, consume));
+  return ansi1.readChar(tmp, lambda$this, x)
 };
-lambda3 = (undefined, function (n, s, l, consume) {
+lambda9 = (undefined, function (n, s, l, consume) {
   return (x) => {
     return lambda$3(n, s, l, consume, x)
   }
@@ -1469,7 +1458,7 @@ lambda$2 = function lambda$(a, x, y, p) {
   tmp = ansi1.goto(x, y);
   return ansi1.writeString(tmp, a, p)
 };
-lambda2 = (undefined, function (a, x, y) {
+lambda8 = (undefined, function (a, x, y) {
   return (p) => {
     return lambda$2(a, x, y, p)
   }
@@ -1480,7 +1469,7 @@ lambda$1 = function lambda$(s, a, x, y, p) {
   tmp1 = NofibPrelude.append(tmp, s);
   return ansi1.writeString(tmp1, a, p)
 };
-lambda1 = (undefined, function (s, a, x, y) {
+lambda7 = (undefined, function (s, a, x, y) {
   return (p) => {
     return lambda$1(s, a, x, y, p)
   }
@@ -1608,7 +1597,7 @@ globalThis.Object.freeze(class ansi {
       first1 = runtime.Tuple.get(x_y, 1);
       x = first0;
       y = first1;
-      return runtime.safeCall(lambda1(s, a, x, y))
+      return runtime.safeCall(lambda7(s, a, x, y))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -1620,7 +1609,7 @@ globalThis.Object.freeze(class ansi {
       first1 = runtime.Tuple.get(x_y, 1);
       x = first0;
       y = first1;
-      return runtime.safeCall(lambda2(a, x, y))
+      return runtime.safeCall(lambda8(a, x, y))
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -1646,7 +1635,7 @@ globalThis.Object.freeze(class ansi {
     }
   } 
   static loop(n, s, l, consume) {
-    return runtime.safeCall(lambda3(n, s, l, consume))
+    return runtime.safeCall(lambda9(n, s, l, consume))
   } 
   static readAt(x_y, l, consume) {
     let tmp, tmp1, tmp2;
@@ -1656,7 +1645,7 @@ globalThis.Object.freeze(class ansi {
     return writeAt_inst_13_5_tsni(x_y, tmp, tmp2)
   } 
   static promptReadAt(x_y, l, prompt, consume) {
-    let first1, first0, x, y, arr, tmp, tmp1, arr1, tmp2, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+    let first1, first0, x, y, tmp, tmp1, tmp2, tmp3, tmp4, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
     if (runtime.Tuple.isArrayLike(x_y) && x_y.length === 2) {
       first0 = runtime.Tuple.get(x_y, 0);
       first1 = runtime.Tuple.get(x_y, 1);
@@ -1664,153 +1653,152 @@ globalThis.Object.freeze(class ansi {
       y = first1;
       _deforest_Deforest_Arr_2_0 = x;
       _deforest_Deforest_Arr_2_1 = y;
-      arr = (s, a) => {
+      tmp = (s, a) => {
         let first11, first01, x1, y1;
         first01 = _deforest_Deforest_Arr_2_0;
         first11 = _deforest_Deforest_Arr_2_1;
         x1 = first01;
         y1 = first11;
-        return runtime.safeCall(lambda1(s, a, x1, y1))
+        return runtime.safeCall(lambda7(s, a, x1, y1))
       };
-      tmp = NofibPrelude.listLen(prompt);
-      tmp1 = x + tmp;
-      arr1 = globalThis.Object.freeze([
-        tmp1,
+      tmp1 = NofibPrelude.listLen(prompt);
+      tmp2 = x + tmp1;
+      tmp3 = globalThis.Object.freeze([
+        tmp2,
         y
       ]);
-      tmp2 = readAt_inst_14_4_tsni(arr1, l, consume);
-      return writeAt_inst_14_27_tsni(arr, prompt, tmp2)
+      tmp4 = readAt_inst_14_4_tsni(tmp3, l, consume);
+      return writeAt_inst_14_27_tsni(tmp, prompt, tmp4)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static program(input) {
-    let arr, tmp, tmp1, tmp2, arr1, tmp3, tmp4, arr2, tmp5, tmp6, arr3, tmp7, tmp8, arr4, tmp9, tmp10, arr5, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6;
+    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11, _deforest_Deforest_Arr_2_02, _deforest_Deforest_Arr_2_12, _deforest_Deforest_Arr_2_03, _deforest_Deforest_Arr_2_13, _deforest_Deforest_Arr_2_04, _deforest_Deforest_Arr_2_14, _deforest_Deforest_Arr_2_05, _deforest_Deforest_Arr_2_15, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Cons_head1, _deforest_Cons_tail1, _deforest_Cons_head2, _deforest_Cons_tail2, _deforest_Cons_head3, _deforest_Cons_tail3, _deforest_Cons_head4, _deforest_Cons_tail4, _deforest_Cons_head5, _deforest_Cons_tail5, _deforest_Cons_head6, _deforest_Cons_tail6;
     _deforest_Deforest_Arr_2_0 = 17;
     _deforest_Deforest_Arr_2_1 = 5;
-    arr = (s) => {
-      let first1, first0, x, y, tmp21;
+    tmp = (s) => {
+      let first1, first0, x, y, tmp26;
       first0 = _deforest_Deforest_Arr_2_0;
       first1 = _deforest_Deforest_Arr_2_1;
       x = first0;
       y = first1;
-      tmp21 = ansi.goto(x, y);
-      return NofibPrelude.append(tmp21, s)
+      tmp26 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp26, s)
     };
-    tmp = NofibPrelude.nofibStringToList("Demonstration program");
-    tmp1 = ansi.highlight(tmp);
-    tmp2 = at_inst_15_29_tsni(arr, tmp1);
+    tmp1 = NofibPrelude.nofibStringToList("Demonstration program");
+    tmp2 = ansi.highlight(tmp1);
+    tmp3 = at_inst_15_29_tsni(tmp, tmp2);
     _deforest_Deforest_Arr_2_01 = 48;
     _deforest_Deforest_Arr_2_11 = 5;
-    arr1 = (s) => {
-      let first1, first0, x, y, tmp21;
+    tmp4 = (s) => {
+      let first1, first0, x, y, tmp26;
       first0 = _deforest_Deforest_Arr_2_01;
       first1 = _deforest_Deforest_Arr_2_11;
       x = first0;
       y = first1;
-      tmp21 = ansi.goto(x, y);
-      return NofibPrelude.append(tmp21, s)
+      tmp26 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp26, s)
     };
-    tmp3 = NofibPrelude.nofibStringToList("Version 1.0");
-    tmp4 = at_inst_15_30_tsni(arr1, tmp3);
+    tmp5 = NofibPrelude.nofibStringToList("Version 1.0");
+    tmp6 = at_inst_15_30_tsni(tmp4, tmp5);
     _deforest_Deforest_Arr_2_02 = 17;
     _deforest_Deforest_Arr_2_12 = 7;
-    arr2 = (s) => {
-      let first1, first0, x, y, tmp21;
+    tmp7 = (s) => {
+      let first1, first0, x, y, tmp26;
       first0 = _deforest_Deforest_Arr_2_02;
       first1 = _deforest_Deforest_Arr_2_12;
       x = first0;
       y = first1;
-      tmp21 = ansi.goto(x, y);
-      return NofibPrelude.append(tmp21, s)
+      tmp26 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp26, s)
     };
-    tmp5 = NofibPrelude.nofibStringToList("This program illustrates a simple approach");
-    tmp6 = at_inst_15_31_tsni(arr2, tmp5);
+    tmp8 = NofibPrelude.nofibStringToList("This program illustrates a simple approach");
+    tmp9 = at_inst_15_31_tsni(tmp7, tmp8);
     _deforest_Deforest_Arr_2_03 = 17;
     _deforest_Deforest_Arr_2_13 = 8;
-    arr3 = (s) => {
-      let first1, first0, x, y, tmp21;
+    tmp10 = (s) => {
+      let first1, first0, x, y, tmp26;
       first0 = _deforest_Deforest_Arr_2_03;
       first1 = _deforest_Deforest_Arr_2_13;
       x = first0;
       y = first1;
-      tmp21 = ansi.goto(x, y);
-      return NofibPrelude.append(tmp21, s)
+      tmp26 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp26, s)
     };
-    tmp7 = NofibPrelude.nofibStringToList("to screen-based interactive programs using");
-    tmp8 = at_inst_15_32_tsni(arr3, tmp7);
+    tmp11 = NofibPrelude.nofibStringToList("to screen-based interactive programs using");
+    tmp12 = at_inst_15_32_tsni(tmp10, tmp11);
     _deforest_Deforest_Arr_2_04 = 17;
     _deforest_Deforest_Arr_2_14 = 9;
-    arr4 = (s) => {
-      let first1, first0, x, y, tmp21;
+    tmp13 = (s) => {
+      let first1, first0, x, y, tmp26;
       first0 = _deforest_Deforest_Arr_2_04;
       first1 = _deforest_Deforest_Arr_2_14;
       x = first0;
       y = first1;
-      tmp21 = ansi.goto(x, y);
-      return NofibPrelude.append(tmp21, s)
+      tmp26 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp26, s)
     };
-    tmp9 = NofibPrelude.nofibStringToList("the Hugs functional programming system.");
-    tmp10 = at_inst_15_33_tsni(arr4, tmp9);
+    tmp14 = NofibPrelude.nofibStringToList("the Hugs functional programming system.");
+    tmp15 = at_inst_15_33_tsni(tmp13, tmp14);
     _deforest_Deforest_Arr_2_05 = 17;
     _deforest_Deforest_Arr_2_15 = 11;
-    arr5 = (s) => {
-      let first1, first0, x, y, tmp21;
+    tmp16 = (s) => {
+      let first1, first0, x, y, tmp26;
       first0 = _deforest_Deforest_Arr_2_05;
       first1 = _deforest_Deforest_Arr_2_15;
       x = first0;
       y = first1;
-      tmp21 = ansi.goto(x, y);
-      return NofibPrelude.append(tmp21, s)
+      tmp26 = ansi.goto(x, y);
+      return NofibPrelude.append(tmp26, s)
     };
-    tmp11 = NofibPrelude.nofibStringToList("Please press any key to continue ...");
-    tmp12 = at_inst_15_34_tsni(arr5, tmp11);
-    _deforest_Cons_head6 = tmp12;
+    tmp17 = NofibPrelude.nofibStringToList("Please press any key to continue ...");
+    tmp18 = at_inst_15_34_tsni(tmp16, tmp17);
+    _deforest_Cons_head6 = tmp18;
     _deforest_Cons_tail6 = () => {
       return (ys) => {
         return ys
       }
     };
-    tmp13 = () => {
+    tmp19 = () => {
       return match_ls_arm_Cons_inst_15_17_11_tsni(_deforest_Cons_head6, _deforest_Cons_tail6)
     };
-    _deforest_Cons_head5 = tmp10;
-    _deforest_Cons_tail5 = tmp13;
-    tmp14 = () => {
+    _deforest_Cons_head5 = tmp15;
+    _deforest_Cons_tail5 = tmp19;
+    tmp20 = () => {
       return match_ls_arm_Cons_inst_15_17_11_tsni(_deforest_Cons_head5, _deforest_Cons_tail5)
     };
-    _deforest_Cons_head4 = tmp8;
-    _deforest_Cons_tail4 = tmp14;
-    tmp15 = () => {
+    _deforest_Cons_head4 = tmp12;
+    _deforest_Cons_tail4 = tmp20;
+    tmp21 = () => {
       return match_ls_arm_Cons_inst_15_17_11_tsni(_deforest_Cons_head4, _deforest_Cons_tail4)
     };
-    _deforest_Cons_head3 = tmp6;
-    _deforest_Cons_tail3 = tmp15;
-    tmp16 = () => {
+    _deforest_Cons_head3 = tmp9;
+    _deforest_Cons_tail3 = tmp21;
+    tmp22 = () => {
       return match_ls_arm_Cons_inst_15_17_11_tsni(_deforest_Cons_head3, _deforest_Cons_tail3)
     };
-    _deforest_Cons_head2 = tmp4;
-    _deforest_Cons_tail2 = tmp16;
-    tmp17 = () => {
+    _deforest_Cons_head2 = tmp6;
+    _deforest_Cons_tail2 = tmp22;
+    tmp23 = () => {
       return match_ls_arm_Cons_inst_15_17_11_tsni(_deforest_Cons_head2, _deforest_Cons_tail2)
     };
-    _deforest_Cons_head1 = tmp2;
-    _deforest_Cons_tail1 = tmp17;
-    tmp18 = () => {
+    _deforest_Cons_head1 = tmp3;
+    _deforest_Cons_tail1 = tmp23;
+    tmp24 = () => {
       return match_ls_arm_Cons_inst_15_17_11_tsni(_deforest_Cons_head1, _deforest_Cons_tail1)
     };
     _deforest_Cons_head = ansi.cls;
-    _deforest_Cons_tail = tmp18;
-    tmp19 = () => {
+    _deforest_Cons_tail = tmp24;
+    tmp25 = () => {
       return match_ls_arm_Cons_inst_15_17_11_tsni(_deforest_Cons_head, _deforest_Cons_tail)
     };
-    tmp20 = lambda_inst_15_16_tsni;
-    return writes_inst_15_17_tsni(tmp19, tmp20, input)
+    return writes_inst_15_17_tsni(tmp25, lambda_inst_15_16_tsni, input)
   } 
   static testAnsi_nofib(n) {
     let tmp, tmp1, tmp2;
     tmp = replicate_inst_18_20_tsni(n, program_inst_18_19_tsni);
-    tmp1 = foldr_inst_18_35_tsni(NofibPrelude.compose, lambda9, tmp);
+    tmp1 = foldr_inst_18_35_tsni(NofibPrelude.compose, lambda6, tmp);
     tmp2 = NofibPrelude.nofibStringToList("testtesttest");
     return runtime.safeCall(tmp1(tmp2))
   } 

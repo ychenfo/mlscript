@@ -335,9 +335,9 @@ match_scrut_arm_Pc_inst_51_52_42_62_61_tsni = (undefined, function (_deforest_Pc
   return power1.Pc(tmp, tmp1)
 });
 qs$_inst_0_tsni = function qs$_inst_0_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_tsni = (undefined, function (fs_) {
   return () => {
@@ -363,9 +363,9 @@ lambda$_inst_0_1_2_tsni = function lambda$_inst_0_1_2_tsni(fs_) {
   }
 };
 divPs_inst_0_3_tsni = function divPs_inst_0_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -373,7 +373,7 @@ lambda_inst_0_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -384,7 +384,7 @@ lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_0_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -417,7 +417,7 @@ lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
           tmp3 = dotMult_inst_0_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_0_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_0_3_tsni(tmp5, tmp6);
           _deforest_Pc_f = q1;
@@ -435,16 +435,15 @@ lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_0_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_0_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_0_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_0_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_0_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_0_3_tsni(tmp10, tmp11);
           _deforest_Pc_f2 = q;
-          _deforest_Pc_s2 = tmp13;
+          _deforest_Pc_s2 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_0_59_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
@@ -461,16 +460,15 @@ lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_0_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_0_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_0_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_0_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_0_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_0_3_tsni(tmp15, tmp16);
         _deforest_Pc_f1 = q;
-        _deforest_Pc_s1 = tmp19;
+        _deforest_Pc_s1 = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_0_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
@@ -483,9 +481,9 @@ lambda$_inst_0_3_tsni = function lambda$_inst_0_3_tsni(fss, gss) {
   }
 };
 dotMult_inst_0_3_4_tsni = function dotMult_inst_0_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -523,9 +521,9 @@ lambda$_inst_0_3_4_tsni = function lambda$_inst_0_3_4_tsni(c, ps) {
   }
 };
 dotMult_inst_0_3_5_tsni = function dotMult_inst_0_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -563,9 +561,9 @@ lambda$_inst_0_3_5_tsni = function lambda$_inst_0_3_5_tsni(c, ps) {
   }
 };
 dotMult_inst_0_3_6_tsni = function dotMult_inst_0_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -603,9 +601,9 @@ lambda$_inst_0_3_6_tsni = function lambda$_inst_0_3_6_tsni(c, ps) {
   }
 };
 qs$_inst_7_tsni = function qs$_inst_7_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda43(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda43(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$_inst_7_tsni = function lambda$_inst_7_tsni(fs_) {
   let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this;
@@ -638,9 +636,9 @@ lambda$_inst_7_1_2_tsni = function lambda$_inst_7_1_2_tsni(fs_) {
   }
 };
 divPs_inst_7_3_tsni = function divPs_inst_7_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -648,7 +646,7 @@ lambda_inst_7_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -659,7 +657,7 @@ lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_7_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -692,7 +690,7 @@ lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
           tmp3 = dotMult_inst_7_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_7_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_7_3_tsni(tmp5, tmp6);
           _deforest_Pc_f = q1;
@@ -710,16 +708,15 @@ lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_7_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_7_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_7_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_7_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_7_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_7_3_tsni(tmp10, tmp11);
           _deforest_Pc_f2 = q;
-          _deforest_Pc_s2 = tmp13;
+          _deforest_Pc_s2 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_7_59_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
@@ -736,16 +733,15 @@ lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_7_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_7_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_7_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_7_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_7_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_7_3_tsni(tmp15, tmp16);
         _deforest_Pc_f1 = q;
-        _deforest_Pc_s1 = tmp19;
+        _deforest_Pc_s1 = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_7_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
@@ -758,9 +754,9 @@ lambda$_inst_7_3_tsni = function lambda$_inst_7_3_tsni(fss, gss) {
   }
 };
 dotMult_inst_7_3_4_tsni = function dotMult_inst_7_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -798,9 +794,9 @@ lambda$_inst_7_3_4_tsni = function lambda$_inst_7_3_4_tsni(c, ps) {
   }
 };
 dotMult_inst_7_3_5_tsni = function dotMult_inst_7_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -838,9 +834,9 @@ lambda$_inst_7_3_5_tsni = function lambda$_inst_7_3_5_tsni(c, ps) {
   }
 };
 dotMult_inst_7_3_6_tsni = function dotMult_inst_7_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -913,9 +909,9 @@ lambda$_inst_8_1_2_tsni = function lambda$_inst_8_1_2_tsni(fs_) {
   }
 };
 divPs_inst_8_3_tsni = function divPs_inst_8_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -923,7 +919,7 @@ lambda_inst_8_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -934,7 +930,7 @@ lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_8_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -967,7 +963,7 @@ lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
           tmp3 = dotMult_inst_8_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_8_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_8_3_tsni(tmp5, tmp6);
           _deforest_Pc_f = q1;
@@ -985,16 +981,15 @@ lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_8_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_8_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_8_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_8_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_8_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_8_3_tsni(tmp10, tmp11);
           _deforest_Pc_f2 = q;
-          _deforest_Pc_s2 = tmp13;
+          _deforest_Pc_s2 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_8_59_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
@@ -1011,16 +1006,15 @@ lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_8_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_8_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_8_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_8_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_8_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_8_3_tsni(tmp15, tmp16);
         _deforest_Pc_f1 = q;
-        _deforest_Pc_s1 = tmp19;
+        _deforest_Pc_s1 = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_8_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
@@ -1033,9 +1027,9 @@ lambda$_inst_8_3_tsni = function lambda$_inst_8_3_tsni(fss, gss) {
   }
 };
 dotMult_inst_8_3_4_tsni = function dotMult_inst_8_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1073,9 +1067,9 @@ lambda$_inst_8_3_4_tsni = function lambda$_inst_8_3_4_tsni(c, ps) {
   }
 };
 dotMult_inst_8_3_5_tsni = function dotMult_inst_8_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1113,9 +1107,9 @@ lambda$_inst_8_3_5_tsni = function lambda$_inst_8_3_5_tsni(c, ps) {
   }
 };
 dotMult_inst_8_3_6_tsni = function dotMult_inst_8_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1153,9 +1147,9 @@ lambda$_inst_8_3_6_tsni = function lambda$_inst_8_3_6_tsni(c, ps) {
   }
 };
 qs$_inst_9_10_tsni = function qs$_inst_9_10_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_tsni = (undefined, function (fs_) {
   return () => {
@@ -1175,9 +1169,9 @@ lambda$_inst_9_10_tsni = function lambda$_inst_9_10_tsni(fs_) {
   return power1.addPs(tmp, tmp6)
 };
 divPs_inst_9_10_3_tsni = function divPs_inst_9_10_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -1185,7 +1179,7 @@ lambda_inst_9_10_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -1196,7 +1190,7 @@ lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_9_10_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -1229,7 +1223,7 @@ lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
           tmp3 = dotMult_inst_9_10_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_9_10_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_9_10_3_tsni(tmp5, tmp6);
           _deforest_Pc_f2 = q1;
@@ -1247,16 +1241,15 @@ lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_9_10_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_9_10_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_9_10_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_9_10_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_9_10_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_9_10_3_tsni(tmp10, tmp11);
           _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp13;
+          _deforest_Pc_s1 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_9_10_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
@@ -1273,16 +1266,15 @@ lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_9_10_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_9_10_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_9_10_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_9_10_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_9_10_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_9_10_3_tsni(tmp15, tmp16);
         _deforest_Pc_f = q;
-        _deforest_Pc_s = tmp19;
+        _deforest_Pc_s = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_9_10_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
@@ -1295,9 +1287,9 @@ lambda$_inst_9_10_3_tsni = function lambda$_inst_9_10_3_tsni(fss, gss) {
   }
 };
 dotMult_inst_9_10_3_6_tsni = function dotMult_inst_9_10_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1335,9 +1327,9 @@ lambda$_inst_9_10_3_6_tsni = function lambda$_inst_9_10_3_6_tsni(c, ps) {
   }
 };
 dotMult_inst_9_10_3_5_tsni = function dotMult_inst_9_10_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1375,9 +1367,9 @@ lambda$_inst_9_10_3_5_tsni = function lambda$_inst_9_10_3_5_tsni(c, ps) {
   }
 };
 dotMult_inst_9_10_3_4_tsni = function dotMult_inst_9_10_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1433,9 +1425,9 @@ lambda$_inst_9_10_1_2_tsni = function lambda$_inst_9_10_1_2_tsni(fs_) {
   }
 };
 sqrtPs_inst_11_tsni = function sqrtPs_inst_11_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_tsni = (undefined, function (fss) {
   return () => {
@@ -1443,9 +1435,9 @@ lambda_inst_11_tsni = (undefined, function (fss) {
   }
 });
 qs$_inst_11_12_tsni = function qs$_inst_11_12_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_tsni = (undefined, function (fs_) {
   return () => {
@@ -1465,9 +1457,9 @@ lambda$_inst_11_12_tsni = function lambda$_inst_11_12_tsni(fs_) {
   return power1.addPs(tmp, tmp6)
 };
 divPs_inst_11_12_3_tsni = function divPs_inst_11_12_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -1475,7 +1467,7 @@ lambda_inst_11_12_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -1486,7 +1478,7 @@ lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_11_12_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -1519,7 +1511,7 @@ lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
           tmp3 = dotMult_inst_11_12_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_11_12_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_11_12_3_tsni(tmp5, tmp6);
           _deforest_Pc_f2 = q1;
@@ -1537,16 +1529,15 @@ lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_11_12_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_11_12_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_11_12_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_11_12_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_11_12_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_11_12_3_tsni(tmp10, tmp11);
           _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp13;
+          _deforest_Pc_s1 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_11_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
@@ -1563,16 +1554,15 @@ lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_11_12_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_11_12_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_11_12_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_11_12_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_11_12_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_11_12_3_tsni(tmp15, tmp16);
         _deforest_Pc_f = q;
-        _deforest_Pc_s = tmp19;
+        _deforest_Pc_s = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_11_12_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
@@ -1585,9 +1575,9 @@ lambda$_inst_11_12_3_tsni = function lambda$_inst_11_12_3_tsni(fss, gss) {
   }
 };
 dotMult_inst_11_12_3_6_tsni = function dotMult_inst_11_12_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1625,9 +1615,9 @@ lambda$_inst_11_12_3_6_tsni = function lambda$_inst_11_12_3_6_tsni(c, ps) {
   }
 };
 dotMult_inst_11_12_3_5_tsni = function dotMult_inst_11_12_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1665,9 +1655,9 @@ lambda$_inst_11_12_3_5_tsni = function lambda$_inst_11_12_3_5_tsni(c, ps) {
   }
 };
 dotMult_inst_11_12_3_4_tsni = function dotMult_inst_11_12_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1723,9 +1713,9 @@ lambda$_inst_11_12_1_2_tsni = function lambda$_inst_11_12_1_2_tsni(fs_) {
   }
 };
 sqrtPs_inst_13_tsni = function sqrtPs_inst_13_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda42(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda44(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$_inst_13_tsni = function lambda$_inst_13_tsni(fss) {
   let scrut, param0, param1, fs_, gss, scrut1, param01, param11, fs_1, tmp, tmp1, tmp2;
@@ -1764,9 +1754,9 @@ lambda$_inst_13_tsni = function lambda$_inst_13_tsni(fss) {
   }
 };
 qs$_inst_13_12_tsni = function qs$_inst_13_12_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_tsni = (undefined, function (fs_) {
   return () => {
@@ -1786,9 +1776,9 @@ lambda$_inst_13_12_tsni = function lambda$_inst_13_12_tsni(fs_) {
   return power1.addPs(tmp, tmp6)
 };
 divPs_inst_13_12_3_tsni = function divPs_inst_13_12_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -1796,7 +1786,7 @@ lambda_inst_13_12_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -1807,7 +1797,7 @@ lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_13_12_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -1840,7 +1830,7 @@ lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
           tmp3 = dotMult_inst_13_12_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_13_12_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_13_12_3_tsni(tmp5, tmp6);
           _deforest_Pc_f2 = q1;
@@ -1858,16 +1848,15 @@ lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_13_12_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_13_12_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_13_12_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_13_12_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_13_12_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_13_12_3_tsni(tmp10, tmp11);
           _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp13;
+          _deforest_Pc_s1 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_13_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
@@ -1884,16 +1873,15 @@ lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_13_12_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_13_12_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_13_12_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_13_12_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_13_12_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_13_12_3_tsni(tmp15, tmp16);
         _deforest_Pc_f = q;
-        _deforest_Pc_s = tmp19;
+        _deforest_Pc_s = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_13_12_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
@@ -1906,9 +1894,9 @@ lambda$_inst_13_12_3_tsni = function lambda$_inst_13_12_3_tsni(fss, gss) {
   }
 };
 dotMult_inst_13_12_3_6_tsni = function dotMult_inst_13_12_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1946,9 +1934,9 @@ lambda$_inst_13_12_3_6_tsni = function lambda$_inst_13_12_3_6_tsni(c, ps) {
   }
 };
 dotMult_inst_13_12_3_5_tsni = function dotMult_inst_13_12_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -1986,9 +1974,9 @@ lambda$_inst_13_12_3_5_tsni = function lambda$_inst_13_12_3_5_tsni(c, ps) {
   }
 };
 dotMult_inst_13_12_3_4_tsni = function dotMult_inst_13_12_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2044,9 +2032,9 @@ lambda$_inst_13_12_1_2_tsni = function lambda$_inst_13_12_1_2_tsni(fs_) {
   }
 };
 rs$_inst_14_tsni = function rs$_inst_14_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_14_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_14_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_14_tsni = (undefined, function (fs_) {
   return () => {
@@ -2054,9 +2042,9 @@ lambda_inst_14_tsni = (undefined, function (fs_) {
   }
 });
 divPs_inst_14_15_tsni = function divPs_inst_14_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_14_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_14_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_14_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -2064,7 +2052,7 @@ lambda_inst_14_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -2075,7 +2063,7 @@ lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_14_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -2104,7 +2092,7 @@ lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
           tmp3 = dotMult_inst_14_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_14_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_14_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -2118,15 +2106,14 @@ lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_14_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_14_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_14_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_14_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_14_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_14_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -2140,15 +2127,14 @@ lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_14_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_14_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_14_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_14_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_14_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_14_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -2158,9 +2144,9 @@ lambda$_inst_14_15_tsni = function lambda$_inst_14_15_tsni(fss, gss) {
   }
 };
 dotMult_inst_14_15_4_tsni = function dotMult_inst_14_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_14_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_14_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_14_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2198,9 +2184,9 @@ lambda$_inst_14_15_4_tsni = function lambda$_inst_14_15_4_tsni(c, ps) {
   }
 };
 dotMult_inst_14_15_5_tsni = function dotMult_inst_14_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_14_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_14_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_14_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2238,9 +2224,9 @@ lambda$_inst_14_15_5_tsni = function lambda$_inst_14_15_5_tsni(c, ps) {
   }
 };
 dotMult_inst_14_15_6_tsni = function dotMult_inst_14_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_14_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_14_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_14_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2278,9 +2264,9 @@ lambda$_inst_14_15_6_tsni = function lambda$_inst_14_15_6_tsni(c, ps) {
   }
 };
 rs$_inst_16_tsni = function rs$_inst_16_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda33(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda32(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$_inst_16_tsni = function lambda$_inst_16_tsni(fs_) {
   let tmp, tmp1, tmp2, tmp3;
@@ -2291,9 +2277,9 @@ lambda$_inst_16_tsni = function lambda$_inst_16_tsni(fs_) {
   return power1.Pc(0, tmp3)
 };
 divPs_inst_16_15_tsni = function divPs_inst_16_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_16_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_16_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_16_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -2301,7 +2287,7 @@ lambda_inst_16_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -2312,7 +2298,7 @@ lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_16_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -2341,7 +2327,7 @@ lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
           tmp3 = dotMult_inst_16_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_16_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_16_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -2355,15 +2341,14 @@ lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_16_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_16_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_16_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_16_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_16_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_16_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -2377,15 +2362,14 @@ lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_16_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_16_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_16_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_16_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_16_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_16_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -2395,9 +2379,9 @@ lambda$_inst_16_15_tsni = function lambda$_inst_16_15_tsni(fss, gss) {
   }
 };
 dotMult_inst_16_15_4_tsni = function dotMult_inst_16_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_16_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_16_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_16_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2435,9 +2419,9 @@ lambda$_inst_16_15_4_tsni = function lambda$_inst_16_15_4_tsni(c, ps) {
   }
 };
 dotMult_inst_16_15_5_tsni = function dotMult_inst_16_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_16_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_16_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_16_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2475,9 +2459,9 @@ lambda$_inst_16_15_5_tsni = function lambda$_inst_16_15_5_tsni(c, ps) {
   }
 };
 dotMult_inst_16_15_6_tsni = function dotMult_inst_16_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_16_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_16_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_16_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2528,9 +2512,9 @@ lambda$_inst_17_tsni = function lambda$_inst_17_tsni(fs_) {
   return power1.Pc(0, tmp3)
 };
 divPs_inst_17_15_tsni = function divPs_inst_17_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_17_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -2538,7 +2522,7 @@ lambda_inst_17_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -2549,7 +2533,7 @@ lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_17_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -2578,7 +2562,7 @@ lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
           tmp3 = dotMult_inst_17_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_17_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_17_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -2592,15 +2576,14 @@ lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_17_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_17_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_17_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_17_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_17_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_17_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -2614,15 +2597,14 @@ lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_17_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_17_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_17_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_17_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_17_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_17_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -2632,9 +2614,9 @@ lambda$_inst_17_15_tsni = function lambda$_inst_17_15_tsni(fss, gss) {
   }
 };
 dotMult_inst_17_15_4_tsni = function dotMult_inst_17_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_17_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2672,9 +2654,9 @@ lambda$_inst_17_15_4_tsni = function lambda$_inst_17_15_4_tsni(c, ps) {
   }
 };
 dotMult_inst_17_15_5_tsni = function dotMult_inst_17_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_17_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2712,9 +2694,9 @@ lambda$_inst_17_15_5_tsni = function lambda$_inst_17_15_5_tsni(c, ps) {
   }
 };
 dotMult_inst_17_15_6_tsni = function dotMult_inst_17_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_17_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2752,9 +2734,9 @@ lambda$_inst_17_15_6_tsni = function lambda$_inst_17_15_6_tsni(c, ps) {
   }
 };
 rs$_inst_18_19_tsni = function rs$_inst_18_19_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_tsni = (undefined, function (fs_) {
   return () => {
@@ -2770,9 +2752,9 @@ lambda$_inst_18_19_tsni = function lambda$_inst_18_19_tsni(fs_) {
   return power1.Pc(0, tmp3)
 };
 divPs_inst_18_19_15_tsni = function divPs_inst_18_19_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -2780,7 +2762,7 @@ lambda_inst_18_19_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -2791,7 +2773,7 @@ lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_18_19_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -2820,7 +2802,7 @@ lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
           tmp3 = dotMult_inst_18_19_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_18_19_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_18_19_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -2834,15 +2816,14 @@ lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_18_19_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_18_19_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_18_19_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_18_19_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_18_19_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_18_19_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -2856,15 +2837,14 @@ lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_18_19_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_18_19_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_18_19_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_18_19_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_18_19_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_18_19_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -2874,9 +2854,9 @@ lambda$_inst_18_19_15_tsni = function lambda$_inst_18_19_15_tsni(fss, gss) {
   }
 };
 dotMult_inst_18_19_15_6_tsni = function dotMult_inst_18_19_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2914,9 +2894,9 @@ lambda$_inst_18_19_15_6_tsni = function lambda$_inst_18_19_15_6_tsni(c, ps) {
   }
 };
 dotMult_inst_18_19_15_5_tsni = function dotMult_inst_18_19_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2954,9 +2934,9 @@ lambda$_inst_18_19_15_5_tsni = function lambda$_inst_18_19_15_5_tsni(c, ps) {
   }
 };
 dotMult_inst_18_19_15_4_tsni = function dotMult_inst_18_19_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -2994,9 +2974,9 @@ lambda$_inst_18_19_15_4_tsni = function lambda$_inst_18_19_15_4_tsni(c, ps) {
   }
 };
 rs$_inst_20_21_tsni = function rs$_inst_20_21_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_21_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_21_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_21_tsni = (undefined, function (fs_) {
   return () => {
@@ -3012,9 +2992,9 @@ lambda$_inst_20_21_tsni = function lambda$_inst_20_21_tsni(fs_) {
   return power1.Pc(0, tmp3)
 };
 divPs_inst_20_21_15_tsni = function divPs_inst_20_21_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_21_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_21_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_21_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -3022,7 +3002,7 @@ lambda_inst_20_21_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -3033,7 +3013,7 @@ lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_20_21_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -3062,7 +3042,7 @@ lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
           tmp3 = dotMult_inst_20_21_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_20_21_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_20_21_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -3076,15 +3056,14 @@ lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_20_21_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_20_21_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_20_21_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_20_21_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_20_21_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_20_21_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -3098,15 +3077,14 @@ lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_20_21_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_20_21_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_20_21_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_20_21_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_20_21_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_20_21_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -3116,9 +3094,9 @@ lambda$_inst_20_21_15_tsni = function lambda$_inst_20_21_15_tsni(fss, gss) {
   }
 };
 dotMult_inst_20_21_15_6_tsni = function dotMult_inst_20_21_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_21_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_21_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_21_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3156,9 +3134,9 @@ lambda$_inst_20_21_15_6_tsni = function lambda$_inst_20_21_15_6_tsni(c, ps) {
   }
 };
 dotMult_inst_20_21_15_5_tsni = function dotMult_inst_20_21_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_21_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_21_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_21_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3196,9 +3174,9 @@ lambda$_inst_20_21_15_5_tsni = function lambda$_inst_20_21_15_5_tsni(c, ps) {
   }
 };
 dotMult_inst_20_21_15_4_tsni = function dotMult_inst_20_21_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_21_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_21_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_21_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3273,9 +3251,9 @@ lambda$_inst_22_23_tsni = function lambda$_inst_22_23_tsni(fss) {
   }
 };
 rs$_inst_22_23_21_tsni = function rs$_inst_22_23_21_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_21_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_21_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_21_tsni = (undefined, function (fs_) {
   return () => {
@@ -3291,9 +3269,9 @@ lambda$_inst_22_23_21_tsni = function lambda$_inst_22_23_21_tsni(fs_) {
   return power1.Pc(0, tmp3)
 };
 divPs_inst_22_23_21_15_tsni = function divPs_inst_22_23_21_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_21_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_21_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_21_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -3301,7 +3279,7 @@ lambda_inst_22_23_21_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -3312,7 +3290,7 @@ lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss)
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_22_23_21_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -3341,7 +3319,7 @@ lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss)
           tmp3 = dotMult_inst_22_23_21_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_22_23_21_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_22_23_21_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -3355,15 +3333,14 @@ lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss)
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_22_23_21_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_22_23_21_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_22_23_21_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_22_23_21_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_22_23_21_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_22_23_21_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -3377,15 +3354,14 @@ lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss)
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_22_23_21_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_22_23_21_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_22_23_21_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_22_23_21_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_22_23_21_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_22_23_21_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -3395,9 +3371,9 @@ lambda$_inst_22_23_21_15_tsni = function lambda$_inst_22_23_21_15_tsni(fss, gss)
   }
 };
 dotMult_inst_22_23_21_15_4_tsni = function dotMult_inst_22_23_21_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_21_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_21_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_21_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3435,9 +3411,9 @@ lambda$_inst_22_23_21_15_4_tsni = function lambda$_inst_22_23_21_15_4_tsni(c, ps
   }
 };
 dotMult_inst_22_23_21_15_5_tsni = function dotMult_inst_22_23_21_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_21_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_21_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_21_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3475,9 +3451,9 @@ lambda$_inst_22_23_21_15_5_tsni = function lambda$_inst_22_23_21_15_5_tsni(c, ps
   }
 };
 dotMult_inst_22_23_21_15_6_tsni = function dotMult_inst_22_23_21_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_21_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_21_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_21_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3515,9 +3491,9 @@ lambda$_inst_22_23_21_15_6_tsni = function lambda$_inst_22_23_21_15_6_tsni(c, ps
   }
 };
 divPs_inst_24_tsni = function divPs_inst_24_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_24_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_24_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_24_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -3525,9 +3501,9 @@ lambda_inst_24_tsni = (undefined, function (fss, gss) {
   }
 });
 dotMult_inst_24_6_tsni = function dotMult_inst_24_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_24_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_24_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_24_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3565,9 +3541,9 @@ lambda$_inst_24_6_tsni = function lambda$_inst_24_6_tsni(c, ps) {
   }
 };
 dotMult_inst_24_5_tsni = function dotMult_inst_24_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_24_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_24_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_24_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3605,9 +3581,9 @@ lambda$_inst_24_5_tsni = function lambda$_inst_24_5_tsni(c, ps) {
   }
 };
 dotMult_inst_24_4_tsni = function dotMult_inst_24_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_24_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_24_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_24_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3645,12 +3621,12 @@ lambda$_inst_24_4_tsni = function lambda$_inst_24_4_tsni(c, ps) {
   }
 };
 divPs_inst_25_tsni = function divPs_inst_25_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda13(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda17(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -3661,7 +3637,7 @@ lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_25_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -3690,7 +3666,7 @@ lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
           tmp3 = dotMult_inst_25_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_25_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_25_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -3704,15 +3680,14 @@ lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_25_5_tsni(q, gs);
-          tmp10 = negatePs_inst_25_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_25_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_25_5_tsni(q, gs);
+          tmp9 = negatePs_inst_25_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_25_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -3726,15 +3701,14 @@ lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_25_4_tsni(q, gs);
-        tmp16 = negatePs_inst_25_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_25_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_25_4_tsni(q, gs);
+        tmp14 = negatePs_inst_25_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_25_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -3744,9 +3718,9 @@ lambda$_inst_25_tsni = function lambda$_inst_25_tsni(fss, gss) {
   }
 };
 dotMult_inst_25_6_tsni = function dotMult_inst_25_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_25_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_25_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_25_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3784,9 +3758,9 @@ lambda$_inst_25_6_tsni = function lambda$_inst_25_6_tsni(c, ps) {
   }
 };
 dotMult_inst_25_5_tsni = function dotMult_inst_25_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_25_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_25_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_25_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3824,9 +3798,9 @@ lambda$_inst_25_5_tsni = function lambda$_inst_25_5_tsni(c, ps) {
   }
 };
 dotMult_inst_25_4_tsni = function dotMult_inst_25_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_25_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_25_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_25_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -3869,7 +3843,7 @@ lambda_inst_26_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -3880,7 +3854,7 @@ lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = power1.divPs(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -3909,7 +3883,7 @@ lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
           tmp3 = dotMult_inst_26_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_26_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = power1.divPs(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -3923,15 +3897,14 @@ lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_26_5_tsni(q, gs);
-          tmp10 = negatePs_inst_26_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = power1.divPs(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_26_5_tsni(q, gs);
+          tmp9 = negatePs_inst_26_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = power1.divPs(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -3945,15 +3918,14 @@ lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_26_4_tsni(q, gs);
-        tmp16 = negatePs_inst_26_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = power1.divPs(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_26_4_tsni(q, gs);
+        tmp14 = negatePs_inst_26_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = power1.divPs(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -3963,9 +3935,9 @@ lambda$_inst_26_tsni = function lambda$_inst_26_tsni(fss, gss) {
   }
 };
 dotMult_inst_26_6_tsni = function dotMult_inst_26_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_26_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_26_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_26_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4003,9 +3975,9 @@ lambda$_inst_26_6_tsni = function lambda$_inst_26_6_tsni(c, ps) {
   }
 };
 dotMult_inst_26_5_tsni = function dotMult_inst_26_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_26_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_26_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_26_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4043,9 +4015,9 @@ lambda$_inst_26_5_tsni = function lambda$_inst_26_5_tsni(c, ps) {
   }
 };
 dotMult_inst_26_4_tsni = function dotMult_inst_26_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_26_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_26_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_26_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4125,9 +4097,9 @@ lambda$_inst_27_28_23_tsni = function lambda$_inst_27_28_23_tsni(fss) {
   }
 };
 rs$_inst_27_28_23_21_tsni = function rs$_inst_27_28_23_21_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_27_28_23_21_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_27_28_23_21_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_27_28_23_21_tsni = (undefined, function (fs_) {
   return () => {
@@ -4143,9 +4115,9 @@ lambda$_inst_27_28_23_21_tsni = function lambda$_inst_27_28_23_21_tsni(fs_) {
   return power1.Pc(0, tmp3)
 };
 divPs_inst_27_28_23_21_15_tsni = function divPs_inst_27_28_23_21_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_27_28_23_21_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_27_28_23_21_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_27_28_23_21_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -4153,7 +4125,7 @@ lambda_inst_27_28_23_21_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -4164,7 +4136,7 @@ lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_27_28_23_21_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -4193,7 +4165,7 @@ lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss
           tmp3 = dotMult_inst_27_28_23_21_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_27_28_23_21_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_27_28_23_21_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -4207,15 +4179,14 @@ lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_27_28_23_21_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_27_28_23_21_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_27_28_23_21_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_27_28_23_21_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_27_28_23_21_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_27_28_23_21_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -4229,15 +4200,14 @@ lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_27_28_23_21_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_27_28_23_21_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_27_28_23_21_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_27_28_23_21_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_27_28_23_21_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_27_28_23_21_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -4247,9 +4217,9 @@ lambda$_inst_27_28_23_21_15_tsni = function lambda$_inst_27_28_23_21_15_tsni(fss
   }
 };
 dotMult_inst_27_28_23_21_15_6_tsni = function dotMult_inst_27_28_23_21_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_27_28_23_21_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_27_28_23_21_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_27_28_23_21_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4287,9 +4257,9 @@ lambda$_inst_27_28_23_21_15_6_tsni = function lambda$_inst_27_28_23_21_15_6_tsni
   }
 };
 dotMult_inst_27_28_23_21_15_5_tsni = function dotMult_inst_27_28_23_21_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_27_28_23_21_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_27_28_23_21_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_27_28_23_21_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4327,9 +4297,9 @@ lambda$_inst_27_28_23_21_15_5_tsni = function lambda$_inst_27_28_23_21_15_5_tsni
   }
 };
 dotMult_inst_27_28_23_21_15_4_tsni = function dotMult_inst_27_28_23_21_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_27_28_23_21_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_27_28_23_21_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_27_28_23_21_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4408,9 +4378,9 @@ lambda$_inst_29_tsni = function lambda$_inst_29_tsni(fss) {
   }
 };
 qs$_inst_29_12_tsni = function qs$_inst_29_12_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_tsni = (undefined, function (fs_) {
   return () => {
@@ -4430,9 +4400,9 @@ lambda$_inst_29_12_tsni = function lambda$_inst_29_12_tsni(fs_) {
   return power1.addPs(tmp, tmp6)
 };
 divPs_inst_29_12_3_tsni = function divPs_inst_29_12_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -4440,7 +4410,7 @@ lambda_inst_29_12_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -4451,7 +4421,7 @@ lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_29_12_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -4484,7 +4454,7 @@ lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
           tmp3 = dotMult_inst_29_12_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_29_12_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_29_12_3_tsni(tmp5, tmp6);
           _deforest_Pc_f2 = q1;
@@ -4502,16 +4472,15 @@ lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_29_12_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_29_12_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_29_12_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_29_12_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_29_12_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_29_12_3_tsni(tmp10, tmp11);
           _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp13;
+          _deforest_Pc_s1 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_29_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
@@ -4528,16 +4497,15 @@ lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_29_12_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_29_12_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_29_12_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_29_12_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_29_12_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_29_12_3_tsni(tmp15, tmp16);
         _deforest_Pc_f = q;
-        _deforest_Pc_s = tmp19;
+        _deforest_Pc_s = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_29_12_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
@@ -4550,9 +4518,9 @@ lambda$_inst_29_12_3_tsni = function lambda$_inst_29_12_3_tsni(fss, gss) {
   }
 };
 dotMult_inst_29_12_3_6_tsni = function dotMult_inst_29_12_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4590,9 +4558,9 @@ lambda$_inst_29_12_3_6_tsni = function lambda$_inst_29_12_3_6_tsni(c, ps) {
   }
 };
 dotMult_inst_29_12_3_5_tsni = function dotMult_inst_29_12_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4630,9 +4598,9 @@ lambda$_inst_29_12_3_5_tsni = function lambda$_inst_29_12_3_5_tsni(c, ps) {
   }
 };
 dotMult_inst_29_12_3_4_tsni = function dotMult_inst_29_12_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -4688,9 +4656,9 @@ lambda$_inst_29_12_1_2_tsni = function lambda$_inst_29_12_1_2_tsni(fs_) {
   }
 };
 integralLz_inst_30_31_tsni = function integralLz_inst_30_31_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_30_31_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_30_31_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_30_31_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -4708,9 +4676,9 @@ lambda$_inst_30_31_32_33_tsni = function lambda$_inst_30_31_32_33_tsni(fs_) {
   }
 };
 int1_inst_30_31_32_33_34_tsni = function int1_inst_30_31_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_30_31_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_30_31_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_30_31_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -4763,9 +4731,9 @@ lambda$_inst_30_35_36_37_tsni = function lambda$_inst_30_35_36_37_tsni(fs_) {
   }
 };
 int1_inst_30_35_36_37_38_tsni = function int1_inst_30_35_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_30_35_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_30_35_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_30_35_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -4778,9 +4746,9 @@ lambda$_inst_30_35_36_37_38_tsni = function lambda$_inst_30_35_36_37_38_tsni(fss
   return runtime.safeCall(scrut(n))
 };
 integralLz_inst_39_40_tsni = function integralLz_inst_39_40_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_40_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_40_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_39_40_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -4798,9 +4766,9 @@ lambda$_inst_39_40_32_33_tsni = function lambda$_inst_39_40_32_33_tsni(fs_) {
   }
 };
 int1_inst_39_40_32_33_34_tsni = function int1_inst_39_40_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_40_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_40_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_39_40_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -4833,15 +4801,15 @@ lambda$_inst_39_40_32_33_34_tsni = function lambda$_inst_39_40_32_33_34_tsni(fss
 };
 sinx_inst_41_42_tsni = function sinx_inst_41_42_tsni() {
   let tmp, tmp1, tmp2;
-  tmp = NofibPrelude.lazy(lambda50);
+  tmp = NofibPrelude.lazy(lambda51);
   tmp1 = integralLz_inst_41_42_40_tsni(sinx_inst_41_42_tsni);
   tmp2 = minusPs_inst_41_42_62_tsni(tmp, tmp1);
   return power.integral(tmp2)
 };
 integralLz_inst_41_42_40_tsni = function integralLz_inst_41_42_40_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_42_40_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_42_40_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_42_40_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -4859,9 +4827,9 @@ lambda$_inst_41_42_40_32_33_tsni = function lambda$_inst_41_42_40_32_33_tsni(fs_
   }
 };
 int1_inst_41_42_40_32_33_34_tsni = function int1_inst_41_42_40_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_42_40_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_42_40_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_42_40_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -4894,7 +4862,7 @@ lambda$_inst_41_42_40_32_33_34_tsni = function lambda$_inst_41_42_40_32_33_34_ts
 };
 cosx_inst_41_43_tsni = function cosx_inst_41_43_tsni() {
   let tmp, tmp1, tmp2;
-  tmp = NofibPrelude.lazy(lambda48);
+  tmp = NofibPrelude.lazy(lambda49);
   tmp1 = integralLz_inst_41_43_31_tsni(cosx_inst_41_43_tsni);
   tmp2 = integral_inst_41_43_35_tsni(tmp1);
   return minusPs_inst_41_43_60_tsni(tmp, tmp2)
@@ -4919,9 +4887,9 @@ lambda$_inst_41_43_35_36_37_tsni = function lambda$_inst_41_43_35_36_37_tsni(fs_
   }
 };
 int1_inst_41_43_35_36_37_38_tsni = function int1_inst_41_43_35_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_43_35_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_43_35_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_43_35_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -4934,9 +4902,9 @@ lambda$_inst_41_43_35_36_37_38_tsni = function lambda$_inst_41_43_35_36_37_38_ts
   return runtime.safeCall(scrut(n))
 };
 integralLz_inst_41_43_31_tsni = function integralLz_inst_41_43_31_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_43_31_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_43_31_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_43_31_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -4954,9 +4922,9 @@ lambda$_inst_41_43_31_32_33_tsni = function lambda$_inst_41_43_31_32_33_tsni(fs_
   }
 };
 int1_inst_41_43_31_32_33_34_tsni = function int1_inst_41_43_31_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_43_31_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_43_31_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_43_31_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -4990,9 +4958,9 @@ lambda$_inst_41_43_31_32_33_34_tsni = function lambda$_inst_41_43_31_32_33_34_ts
   }
 };
 sqrtPs_inst_41_44_tsni = function sqrtPs_inst_41_44_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_tsni = (undefined, function (fss) {
   return () => {
@@ -5036,9 +5004,9 @@ lambda$_inst_41_44_tsni = function lambda$_inst_41_44_tsni(fss) {
   }
 };
 qs$_inst_41_44_12_tsni = function qs$_inst_41_44_12_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_tsni = (undefined, function (fs_) {
   return () => {
@@ -5076,9 +5044,9 @@ lambda$_inst_41_44_12_1_2_tsni = function lambda$_inst_41_44_12_1_2_tsni(fs_) {
   }
 };
 divPs_inst_41_44_12_3_tsni = function divPs_inst_41_44_12_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -5086,7 +5054,7 @@ lambda_inst_41_44_12_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -5097,7 +5065,7 @@ lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_41_44_12_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -5130,7 +5098,7 @@ lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
           tmp3 = dotMult_inst_41_44_12_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_41_44_12_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_41_44_12_3_tsni(tmp5, tmp6);
           _deforest_Pc_f = q1;
@@ -5148,16 +5116,15 @@ lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_41_44_12_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_41_44_12_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_41_44_12_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_41_44_12_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_41_44_12_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_41_44_12_3_tsni(tmp10, tmp11);
           _deforest_Pc_f2 = q;
-          _deforest_Pc_s2 = tmp13;
+          _deforest_Pc_s2 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_41_44_12_59_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
@@ -5174,16 +5141,15 @@ lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_41_44_12_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_41_44_12_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_41_44_12_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_41_44_12_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_41_44_12_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_41_44_12_3_tsni(tmp15, tmp16);
         _deforest_Pc_f1 = q;
-        _deforest_Pc_s1 = tmp19;
+        _deforest_Pc_s1 = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_41_44_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
@@ -5196,9 +5162,9 @@ lambda$_inst_41_44_12_3_tsni = function lambda$_inst_41_44_12_3_tsni(fss, gss) {
   }
 };
 dotMult_inst_41_44_12_3_4_tsni = function dotMult_inst_41_44_12_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5236,9 +5202,9 @@ lambda$_inst_41_44_12_3_4_tsni = function lambda$_inst_41_44_12_3_4_tsni(c, ps) 
   }
 };
 dotMult_inst_41_44_12_3_5_tsni = function dotMult_inst_41_44_12_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5276,9 +5242,9 @@ lambda$_inst_41_44_12_3_5_tsni = function lambda$_inst_41_44_12_3_5_tsni(c, ps) 
   }
 };
 dotMult_inst_41_44_12_3_6_tsni = function dotMult_inst_41_44_12_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5317,15 +5283,15 @@ lambda$_inst_41_44_12_3_6_tsni = function lambda$_inst_41_44_12_3_6_tsni(c, ps) 
 };
 sinx_inst_41_45_tsni = function sinx_inst_41_45_tsni() {
   let tmp, tmp1, tmp2;
-  tmp = NofibPrelude.lazy(lambda50);
+  tmp = NofibPrelude.lazy(lambda51);
   tmp1 = integralLz_inst_41_45_40_tsni(sinx_inst_41_45_tsni);
   tmp2 = minusPs_inst_41_45_62_tsni(tmp, tmp1);
   return power.integral(tmp2)
 };
 integralLz_inst_41_45_40_tsni = function integralLz_inst_41_45_40_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_45_40_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_45_40_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_45_40_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -5343,9 +5309,9 @@ lambda$_inst_41_45_40_32_33_tsni = function lambda$_inst_41_45_40_32_33_tsni(fs_
   }
 };
 int1_inst_41_45_40_32_33_34_tsni = function int1_inst_41_45_40_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_45_40_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_45_40_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_45_40_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -5378,7 +5344,7 @@ lambda$_inst_41_45_40_32_33_34_tsni = function lambda$_inst_41_45_40_32_33_34_ts
 };
 cosx_inst_41_46_tsni = function cosx_inst_41_46_tsni() {
   let tmp, tmp1, tmp2;
-  tmp = NofibPrelude.lazy(lambda48);
+  tmp = NofibPrelude.lazy(lambda49);
   tmp1 = integralLz_inst_41_46_31_tsni(cosx_inst_41_46_tsni);
   tmp2 = integral_inst_41_46_35_tsni(tmp1);
   return minusPs_inst_41_46_60_tsni(tmp, tmp2)
@@ -5403,9 +5369,9 @@ lambda$_inst_41_46_35_36_37_tsni = function lambda$_inst_41_46_35_36_37_tsni(fs_
   }
 };
 int1_inst_41_46_35_36_37_38_tsni = function int1_inst_41_46_35_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_46_35_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_46_35_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_46_35_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -5418,9 +5384,9 @@ lambda$_inst_41_46_35_36_37_38_tsni = function lambda$_inst_41_46_35_36_37_38_ts
   return runtime.safeCall(scrut(n))
 };
 integralLz_inst_41_46_31_tsni = function integralLz_inst_41_46_31_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_46_31_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_46_31_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_46_31_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -5438,9 +5404,9 @@ lambda$_inst_41_46_31_32_33_tsni = function lambda$_inst_41_46_31_32_33_tsni(fs_
   }
 };
 int1_inst_41_46_31_32_33_34_tsni = function int1_inst_41_46_31_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_46_31_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_46_31_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_46_31_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -5474,9 +5440,9 @@ lambda$_inst_41_46_31_32_33_34_tsni = function lambda$_inst_41_46_31_32_33_34_ts
   }
 };
 divPs_inst_41_47_tsni = function divPs_inst_41_47_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_47_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_47_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_47_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -5484,7 +5450,7 @@ lambda_inst_41_47_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -5495,7 +5461,7 @@ lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_41_47_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -5524,7 +5490,7 @@ lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
           tmp3 = dotMult_inst_41_47_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_41_47_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_41_47_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -5538,15 +5504,14 @@ lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_41_47_5_tsni(q, gs);
-          tmp10 = negatePs_inst_41_47_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_41_47_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_41_47_5_tsni(q, gs);
+          tmp9 = negatePs_inst_41_47_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_41_47_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -5560,15 +5525,14 @@ lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_41_47_4_tsni(q, gs);
-        tmp16 = negatePs_inst_41_47_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_41_47_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_41_47_4_tsni(q, gs);
+        tmp14 = negatePs_inst_41_47_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_41_47_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -5578,9 +5542,9 @@ lambda$_inst_41_47_tsni = function lambda$_inst_41_47_tsni(fss, gss) {
   }
 };
 dotMult_inst_41_47_4_tsni = function dotMult_inst_41_47_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_47_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_47_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_47_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5618,9 +5582,9 @@ lambda$_inst_41_47_4_tsni = function lambda$_inst_41_47_4_tsni(c, ps) {
   }
 };
 dotMult_inst_41_47_5_tsni = function dotMult_inst_41_47_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_47_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_47_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_47_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5658,9 +5622,9 @@ lambda$_inst_41_47_5_tsni = function lambda$_inst_41_47_5_tsni(c, ps) {
   }
 };
 dotMult_inst_41_47_6_tsni = function dotMult_inst_41_47_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_47_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_47_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_47_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5698,9 +5662,9 @@ lambda$_inst_41_47_6_tsni = function lambda$_inst_41_47_6_tsni(c, ps) {
   }
 };
 divPs_inst_41_48_tsni = function divPs_inst_41_48_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_48_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_48_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_48_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -5708,7 +5672,7 @@ lambda_inst_41_48_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -5719,7 +5683,7 @@ lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_41_48_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -5752,7 +5716,7 @@ lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
           tmp3 = dotMult_inst_41_48_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_41_48_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_41_48_tsni(tmp5, tmp6);
           _deforest_Pc_f = q1;
@@ -5770,16 +5734,15 @@ lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_41_48_5_tsni(q, gs);
-          tmp10 = negatePs_inst_41_48_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_41_48_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_41_48_5_tsni(q, gs);
+          tmp9 = negatePs_inst_41_48_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_41_48_tsni(tmp10, tmp11);
           _deforest_Pc_f2 = q;
-          _deforest_Pc_s2 = tmp13;
+          _deforest_Pc_s2 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_41_50_36_37_38_tsni(n, _deforest_Pc_f2, _deforest_Pc_s2)
           }
@@ -5796,16 +5759,15 @@ lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_41_48_4_tsni(q, gs);
-        tmp16 = negatePs_inst_41_48_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_41_48_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_41_48_4_tsni(q, gs);
+        tmp14 = negatePs_inst_41_48_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_41_48_tsni(tmp15, tmp16);
         _deforest_Pc_f1 = q;
-        _deforest_Pc_s1 = tmp19;
+        _deforest_Pc_s1 = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_41_50_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
         }
@@ -5818,9 +5780,9 @@ lambda$_inst_41_48_tsni = function lambda$_inst_41_48_tsni(fss, gss) {
   }
 };
 dotMult_inst_41_48_4_tsni = function dotMult_inst_41_48_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_48_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_48_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_48_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5858,9 +5820,9 @@ lambda$_inst_41_48_4_tsni = function lambda$_inst_41_48_4_tsni(c, ps) {
   }
 };
 dotMult_inst_41_48_5_tsni = function dotMult_inst_41_48_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_48_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_48_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_48_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5898,9 +5860,9 @@ lambda$_inst_41_48_5_tsni = function lambda$_inst_41_48_5_tsni(c, ps) {
   }
 };
 dotMult_inst_41_48_6_tsni = function dotMult_inst_41_48_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_48_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_48_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_48_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -5938,9 +5900,9 @@ lambda$_inst_41_48_6_tsni = function lambda$_inst_41_48_6_tsni(c, ps) {
   }
 };
 revert_inst_41_49_tsni = function revert_inst_41_49_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_tsni = (undefined, function (fss) {
   return () => {
@@ -5953,9 +5915,9 @@ lambda$_inst_41_49_28_23_tsni = function lambda$_inst_41_49_28_23_tsni(fss) {
   return runtime.safeCall(scrut())
 };
 rs$_inst_41_49_28_23_21_tsni = function rs$_inst_41_49_28_23_21_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_23_21_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_23_21_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_23_21_tsni = (undefined, function (fs_) {
   return () => {
@@ -5971,9 +5933,9 @@ lambda$_inst_41_49_28_23_21_tsni = function lambda$_inst_41_49_28_23_21_tsni(fs_
   return power1.Pc(0, tmp3)
 };
 divPs_inst_41_49_28_23_21_15_tsni = function divPs_inst_41_49_28_23_21_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_23_21_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_23_21_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_23_21_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -5981,7 +5943,7 @@ lambda_inst_41_49_28_23_21_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -5992,7 +5954,7 @@ lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_ts
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_41_49_28_23_21_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -6021,7 +5983,7 @@ lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_ts
           tmp3 = dotMult_inst_41_49_28_23_21_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_41_49_28_23_21_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_41_49_28_23_21_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -6035,15 +5997,14 @@ lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_ts
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_41_49_28_23_21_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_41_49_28_23_21_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_41_49_28_23_21_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_41_49_28_23_21_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_41_49_28_23_21_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_41_49_28_23_21_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -6057,15 +6018,14 @@ lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_ts
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_41_49_28_23_21_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_41_49_28_23_21_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_41_49_28_23_21_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_41_49_28_23_21_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_41_49_28_23_21_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_41_49_28_23_21_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -6075,9 +6035,9 @@ lambda$_inst_41_49_28_23_21_15_tsni = function lambda$_inst_41_49_28_23_21_15_ts
   }
 };
 dotMult_inst_41_49_28_23_21_15_4_tsni = function dotMult_inst_41_49_28_23_21_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_23_21_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_23_21_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_23_21_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6115,9 +6075,9 @@ lambda$_inst_41_49_28_23_21_15_4_tsni = function lambda$_inst_41_49_28_23_21_15_
   }
 };
 dotMult_inst_41_49_28_23_21_15_5_tsni = function dotMult_inst_41_49_28_23_21_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_23_21_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_23_21_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_23_21_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6155,9 +6115,9 @@ lambda$_inst_41_49_28_23_21_15_5_tsni = function lambda$_inst_41_49_28_23_21_15_
   }
 };
 dotMult_inst_41_49_28_23_21_15_6_tsni = function dotMult_inst_41_49_28_23_21_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_23_21_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_23_21_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_23_21_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6274,9 +6234,9 @@ testPower_nofib_inst_51_52_tsni = function testPower_nofib_inst_51_52_tsni(p) {
   return (tmp24 , tmp26)
 };
 revert_inst_51_52_49_tsni = function revert_inst_51_52_49_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_tsni = (undefined, function (fss) {
   return () => {
@@ -6289,9 +6249,9 @@ lambda$_inst_51_52_49_28_23_tsni = function lambda$_inst_51_52_49_28_23_tsni(fss
   return runtime.safeCall(scrut())
 };
 rs$_inst_51_52_49_28_23_21_tsni = function rs$_inst_51_52_49_28_23_21_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_23_21_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_23_21_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_23_21_tsni = (undefined, function (fs_) {
   return () => {
@@ -6307,9 +6267,9 @@ lambda$_inst_51_52_49_28_23_21_tsni = function lambda$_inst_51_52_49_28_23_21_ts
   return power1.Pc(0, tmp3)
 };
 divPs_inst_51_52_49_28_23_21_15_tsni = function divPs_inst_51_52_49_28_23_21_15_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_23_21_15_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -6317,7 +6277,7 @@ lambda_inst_51_52_49_28_23_21_15_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21_15_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -6328,7 +6288,7 @@ lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_51_52_49_28_23_21_15_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -6357,7 +6317,7 @@ lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21
           tmp3 = dotMult_inst_51_52_49_28_23_21_15_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_51_52_49_28_23_21_15_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_51_52_49_28_23_21_15_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -6371,15 +6331,14 @@ lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_51_52_49_28_23_21_15_5_tsni(q, gs);
-          tmp10 = negatePs_inst_51_52_49_28_23_21_15_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_51_52_49_28_23_21_15_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_51_52_49_28_23_21_15_5_tsni(q, gs);
+          tmp9 = negatePs_inst_51_52_49_28_23_21_15_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_51_52_49_28_23_21_15_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -6393,15 +6352,14 @@ lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_51_52_49_28_23_21_15_4_tsni(q, gs);
-        tmp16 = negatePs_inst_51_52_49_28_23_21_15_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_51_52_49_28_23_21_15_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_51_52_49_28_23_21_15_4_tsni(q, gs);
+        tmp14 = negatePs_inst_51_52_49_28_23_21_15_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_51_52_49_28_23_21_15_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -6411,9 +6369,9 @@ lambda$_inst_51_52_49_28_23_21_15_tsni = function lambda$_inst_51_52_49_28_23_21
   }
 };
 dotMult_inst_51_52_49_28_23_21_15_6_tsni = function dotMult_inst_51_52_49_28_23_21_15_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_23_21_15_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6451,9 +6409,9 @@ lambda$_inst_51_52_49_28_23_21_15_6_tsni = function lambda$_inst_51_52_49_28_23_
   }
 };
 dotMult_inst_51_52_49_28_23_21_15_5_tsni = function dotMult_inst_51_52_49_28_23_21_15_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_23_21_15_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6491,9 +6449,9 @@ lambda$_inst_51_52_49_28_23_21_15_5_tsni = function lambda$_inst_51_52_49_28_23_
   }
 };
 dotMult_inst_51_52_49_28_23_21_15_4_tsni = function dotMult_inst_51_52_49_28_23_21_15_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_23_21_15_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6579,9 +6537,9 @@ lambda$_inst_51_52_50_36_37_tsni = function lambda$_inst_51_52_50_36_37_tsni(fs_
   }
 };
 divPs_inst_51_52_48_tsni = function divPs_inst_51_52_48_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_48_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_48_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_48_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -6589,7 +6547,7 @@ lambda_inst_51_52_48_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -6600,7 +6558,7 @@ lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_51_52_48_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -6633,7 +6591,7 @@ lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
           tmp3 = dotMult_inst_51_52_48_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_51_52_48_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_51_52_48_tsni(tmp5, tmp6);
           _deforest_Pc_f2 = q1;
@@ -6651,16 +6609,15 @@ lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_51_52_48_5_tsni(q, gs);
-          tmp10 = negatePs_inst_51_52_48_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_51_52_48_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_51_52_48_5_tsni(q, gs);
+          tmp9 = negatePs_inst_51_52_48_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_51_52_48_tsni(tmp10, tmp11);
           _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp13;
+          _deforest_Pc_s1 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_51_52_50_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
@@ -6677,16 +6634,15 @@ lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_51_52_48_4_tsni(q, gs);
-        tmp16 = negatePs_inst_51_52_48_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_51_52_48_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_51_52_48_4_tsni(q, gs);
+        tmp14 = negatePs_inst_51_52_48_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_51_52_48_tsni(tmp15, tmp16);
         _deforest_Pc_f = q;
-        _deforest_Pc_s = tmp19;
+        _deforest_Pc_s = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_51_52_50_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
@@ -6699,9 +6655,9 @@ lambda$_inst_51_52_48_tsni = function lambda$_inst_51_52_48_tsni(fss, gss) {
   }
 };
 dotMult_inst_51_52_48_6_tsni = function dotMult_inst_51_52_48_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_48_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_48_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_48_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6739,9 +6695,9 @@ lambda$_inst_51_52_48_6_tsni = function lambda$_inst_51_52_48_6_tsni(c, ps) {
   }
 };
 dotMult_inst_51_52_48_5_tsni = function dotMult_inst_51_52_48_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_48_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_48_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_48_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6779,9 +6735,9 @@ lambda$_inst_51_52_48_5_tsni = function lambda$_inst_51_52_48_5_tsni(c, ps) {
   }
 };
 dotMult_inst_51_52_48_4_tsni = function dotMult_inst_51_52_48_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_48_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_48_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_48_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6819,9 +6775,9 @@ lambda$_inst_51_52_48_4_tsni = function lambda$_inst_51_52_48_4_tsni(c, ps) {
   }
 };
 divPs_inst_51_52_47_tsni = function divPs_inst_51_52_47_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_47_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_47_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_47_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -6829,7 +6785,7 @@ lambda_inst_51_52_47_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -6840,7 +6796,7 @@ lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_51_52_47_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -6869,7 +6825,7 @@ lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
           tmp3 = dotMult_inst_51_52_47_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_51_52_47_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_51_52_47_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -6883,15 +6839,14 @@ lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_51_52_47_5_tsni(q, gs);
-          tmp10 = negatePs_inst_51_52_47_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_51_52_47_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_51_52_47_5_tsni(q, gs);
+          tmp9 = negatePs_inst_51_52_47_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_51_52_47_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -6905,15 +6860,14 @@ lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_51_52_47_4_tsni(q, gs);
-        tmp16 = negatePs_inst_51_52_47_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_51_52_47_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_51_52_47_4_tsni(q, gs);
+        tmp14 = negatePs_inst_51_52_47_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_51_52_47_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -6923,9 +6877,9 @@ lambda$_inst_51_52_47_tsni = function lambda$_inst_51_52_47_tsni(fss, gss) {
   }
 };
 dotMult_inst_51_52_47_6_tsni = function dotMult_inst_51_52_47_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_47_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_47_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_47_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -6963,9 +6917,9 @@ lambda$_inst_51_52_47_6_tsni = function lambda$_inst_51_52_47_6_tsni(c, ps) {
   }
 };
 dotMult_inst_51_52_47_5_tsni = function dotMult_inst_51_52_47_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_47_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_47_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_47_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -7003,9 +6957,9 @@ lambda$_inst_51_52_47_5_tsni = function lambda$_inst_51_52_47_5_tsni(c, ps) {
   }
 };
 dotMult_inst_51_52_47_4_tsni = function dotMult_inst_51_52_47_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_47_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_47_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_47_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -7044,15 +6998,15 @@ lambda$_inst_51_52_47_4_tsni = function lambda$_inst_51_52_47_4_tsni(c, ps) {
 };
 cosx_inst_51_52_46_tsni = function cosx_inst_51_52_46_tsni() {
   let tmp, tmp1, tmp2;
-  tmp = NofibPrelude.lazy(lambda48);
+  tmp = NofibPrelude.lazy(lambda49);
   tmp1 = integralLz_inst_51_52_46_31_tsni(cosx_inst_51_52_46_tsni);
   tmp2 = integral_inst_51_52_46_35_tsni(tmp1);
   return minusPs_inst_51_52_46_60_tsni(tmp, tmp2)
 };
 integralLz_inst_51_52_46_31_tsni = function integralLz_inst_51_52_46_31_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_46_31_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_46_31_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_46_31_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -7070,9 +7024,9 @@ lambda$_inst_51_52_46_31_32_33_tsni = function lambda$_inst_51_52_46_31_32_33_ts
   }
 };
 int1_inst_51_52_46_31_32_33_34_tsni = function int1_inst_51_52_46_31_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_46_31_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_46_31_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_46_31_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7125,9 +7079,9 @@ lambda$_inst_51_52_46_35_36_37_tsni = function lambda$_inst_51_52_46_35_36_37_ts
   }
 };
 int1_inst_51_52_46_35_36_37_38_tsni = function int1_inst_51_52_46_35_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_46_35_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_46_35_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_46_35_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7141,15 +7095,15 @@ lambda$_inst_51_52_46_35_36_37_38_tsni = function lambda$_inst_51_52_46_35_36_37
 };
 sinx_inst_51_52_45_tsni = function sinx_inst_51_52_45_tsni() {
   let tmp, tmp1, tmp2;
-  tmp = NofibPrelude.lazy(lambda50);
+  tmp = NofibPrelude.lazy(lambda51);
   tmp1 = integralLz_inst_51_52_45_40_tsni(sinx_inst_51_52_45_tsni);
   tmp2 = minusPs_inst_51_52_45_62_tsni(tmp, tmp1);
   return power.integral(tmp2)
 };
 integralLz_inst_51_52_45_40_tsni = function integralLz_inst_51_52_45_40_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_45_40_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_45_40_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_45_40_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -7167,9 +7121,9 @@ lambda$_inst_51_52_45_40_32_33_tsni = function lambda$_inst_51_52_45_40_32_33_ts
   }
 };
 int1_inst_51_52_45_40_32_33_34_tsni = function int1_inst_51_52_45_40_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_45_40_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_45_40_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_45_40_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7201,9 +7155,9 @@ lambda$_inst_51_52_45_40_32_33_34_tsni = function lambda$_inst_51_52_45_40_32_33
   }
 };
 sqrtPs_inst_51_52_44_tsni = function sqrtPs_inst_51_52_44_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_tsni = (undefined, function (fss) {
   return () => {
@@ -7247,9 +7201,9 @@ lambda$_inst_51_52_44_tsni = function lambda$_inst_51_52_44_tsni(fss) {
   }
 };
 qs$_inst_51_52_44_12_tsni = function qs$_inst_51_52_44_12_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_tsni = (undefined, function (fs_) {
   return () => {
@@ -7269,9 +7223,9 @@ lambda$_inst_51_52_44_12_tsni = function lambda$_inst_51_52_44_12_tsni(fs_) {
   return power1.addPs(tmp, tmp6)
 };
 divPs_inst_51_52_44_12_3_tsni = function divPs_inst_51_52_44_12_3_tsni(fss, gss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_3_tsni(fss, gss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_3_tsni(fss, gss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_3_tsni = (undefined, function (fss, gss) {
   return () => {
@@ -7279,7 +7233,7 @@ lambda_inst_51_52_44_12_3_tsni = (undefined, function (fss, gss) {
   }
 });
 lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2, _deforest_Pc_f, _deforest_Pc_s, _deforest_Pc_f1, _deforest_Pc_s1, _deforest_Pc_f2, _deforest_Pc_s2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -7290,7 +7244,7 @@ lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, 
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_51_52_44_12_3_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -7323,7 +7277,7 @@ lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, 
           tmp3 = dotMult_inst_51_52_44_12_3_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_51_52_44_12_3_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_51_52_44_12_3_tsni(tmp5, tmp6);
           _deforest_Pc_f2 = q1;
@@ -7341,16 +7295,15 @@ lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, 
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_51_52_44_12_3_5_tsni(q, gs);
-          tmp10 = negatePs_inst_51_52_44_12_3_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_51_52_44_12_3_tsni(tmp11, tmp12);
+          q = f / g;
+          tmp8 = dotMult_inst_51_52_44_12_3_5_tsni(q, gs);
+          tmp9 = negatePs_inst_51_52_44_12_3_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_51_52_44_12_3_tsni(tmp10, tmp11);
           _deforest_Pc_f1 = q;
-          _deforest_Pc_s1 = tmp13;
+          _deforest_Pc_s1 = tmp12;
           return (n) => {
             return match_scrut_arm_Pc_inst_51_52_44_12_59_36_37_38_tsni(n, _deforest_Pc_f1, _deforest_Pc_s1)
           }
@@ -7367,16 +7320,15 @@ lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, 
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_51_52_44_12_3_4_tsni(q, gs);
-        tmp16 = negatePs_inst_51_52_44_12_3_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_51_52_44_12_3_tsni(tmp17, tmp18);
+        q = f / g;
+        tmp13 = dotMult_inst_51_52_44_12_3_4_tsni(q, gs);
+        tmp14 = negatePs_inst_51_52_44_12_3_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_51_52_44_12_3_tsni(tmp15, tmp16);
         _deforest_Pc_f = q;
-        _deforest_Pc_s = tmp19;
+        _deforest_Pc_s = tmp17;
         return (n) => {
           return match_scrut_arm_Pc_inst_51_52_44_12_59_36_37_38_tsni(n, _deforest_Pc_f, _deforest_Pc_s)
         }
@@ -7389,9 +7341,9 @@ lambda$_inst_51_52_44_12_3_tsni = function lambda$_inst_51_52_44_12_3_tsni(fss, 
   }
 };
 dotMult_inst_51_52_44_12_3_6_tsni = function dotMult_inst_51_52_44_12_3_6_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_3_6_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_3_6_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_3_6_tsni = (undefined, function (c, ps) {
   return () => {
@@ -7429,9 +7381,9 @@ lambda$_inst_51_52_44_12_3_6_tsni = function lambda$_inst_51_52_44_12_3_6_tsni(c
   }
 };
 dotMult_inst_51_52_44_12_3_5_tsni = function dotMult_inst_51_52_44_12_3_5_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_3_5_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_3_5_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_3_5_tsni = (undefined, function (c, ps) {
   return () => {
@@ -7469,9 +7421,9 @@ lambda$_inst_51_52_44_12_3_5_tsni = function lambda$_inst_51_52_44_12_3_5_tsni(c
   }
 };
 dotMult_inst_51_52_44_12_3_4_tsni = function dotMult_inst_51_52_44_12_3_4_tsni(c, ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_3_4_tsni(c, ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_3_4_tsni(c, ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_3_4_tsni = (undefined, function (c, ps) {
   return () => {
@@ -7528,15 +7480,15 @@ lambda$_inst_51_52_44_12_1_2_tsni = function lambda$_inst_51_52_44_12_1_2_tsni(f
 };
 cosx_inst_51_52_43_tsni = function cosx_inst_51_52_43_tsni() {
   let tmp, tmp1, tmp2;
-  tmp = NofibPrelude.lazy(lambda48);
+  tmp = NofibPrelude.lazy(lambda49);
   tmp1 = integralLz_inst_51_52_43_31_tsni(cosx_inst_51_52_43_tsni);
   tmp2 = integral_inst_51_52_43_35_tsni(tmp1);
   return minusPs_inst_51_52_43_60_tsni(tmp, tmp2)
 };
 integralLz_inst_51_52_43_31_tsni = function integralLz_inst_51_52_43_31_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_43_31_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_43_31_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_43_31_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -7554,9 +7506,9 @@ lambda$_inst_51_52_43_31_32_33_tsni = function lambda$_inst_51_52_43_31_32_33_ts
   }
 };
 int1_inst_51_52_43_31_32_33_34_tsni = function int1_inst_51_52_43_31_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_43_31_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_43_31_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_43_31_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7609,9 +7561,9 @@ lambda$_inst_51_52_43_35_36_37_tsni = function lambda$_inst_51_52_43_35_36_37_ts
   }
 };
 int1_inst_51_52_43_35_36_37_38_tsni = function int1_inst_51_52_43_35_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_43_35_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_43_35_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_43_35_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7625,15 +7577,15 @@ lambda$_inst_51_52_43_35_36_37_38_tsni = function lambda$_inst_51_52_43_35_36_37
 };
 sinx_inst_51_52_42_tsni = function sinx_inst_51_52_42_tsni() {
   let tmp, tmp1, tmp2;
-  tmp = NofibPrelude.lazy(lambda50);
+  tmp = NofibPrelude.lazy(lambda51);
   tmp1 = integralLz_inst_51_52_42_40_tsni(sinx_inst_51_52_42_tsni);
   tmp2 = minusPs_inst_51_52_42_62_tsni(tmp, tmp1);
   return power.integral(tmp2)
 };
 integralLz_inst_51_52_42_40_tsni = function integralLz_inst_51_52_42_40_tsni(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_42_40_32_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_42_40_32_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_42_40_32_tsni = (undefined, function (fs_) {
   return () => {
@@ -7651,9 +7603,9 @@ lambda$_inst_51_52_42_40_32_33_tsni = function lambda$_inst_51_52_42_40_32_33_ts
   }
 };
 int1_inst_51_52_42_40_32_33_34_tsni = function int1_inst_51_52_42_40_32_33_34_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_42_40_32_33_34_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_42_40_32_33_34_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_42_40_32_33_34_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7685,9 +7637,9 @@ lambda$_inst_51_52_42_40_32_33_34_tsni = function lambda$_inst_51_52_42_40_32_33
   }
 };
 deriv_inst_0_53_tsni = function deriv_inst_0_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -7700,9 +7652,9 @@ lambda$_inst_0_53_54_55_tsni = function lambda$_inst_0_53_54_55_tsni(fss) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_0_3_56_tsni = function negatePs_inst_0_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -7715,9 +7667,9 @@ lambda$_inst_0_3_56_tsni = function lambda$_inst_0_3_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_0_3_57_tsni = function negatePs_inst_0_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -7730,9 +7682,9 @@ lambda$_inst_0_3_57_tsni = function lambda$_inst_0_3_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_0_3_58_tsni = function negatePs_inst_0_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -7760,9 +7712,9 @@ lambda$_inst_0_59_36_37_tsni = function lambda$_inst_0_59_36_37_tsni(fs_) {
   return power1.Pc(0, tmp)
 };
 int1_inst_0_59_36_37_38_tsni = function int1_inst_0_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_0_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_0_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_0_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7775,9 +7727,9 @@ lambda$_inst_0_59_36_37_38_tsni = function lambda$_inst_0_59_36_37_38_tsni(fss, 
   return runtime.safeCall(scrut(n))
 };
 deriv_inst_7_53_tsni = function deriv_inst_7_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -7790,9 +7742,9 @@ lambda$_inst_7_53_54_55_tsni = function lambda$_inst_7_53_54_55_tsni(fss) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_7_3_56_tsni = function negatePs_inst_7_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -7805,9 +7757,9 @@ lambda$_inst_7_3_56_tsni = function lambda$_inst_7_3_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_7_3_57_tsni = function negatePs_inst_7_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -7820,9 +7772,9 @@ lambda$_inst_7_3_57_tsni = function lambda$_inst_7_3_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_7_3_58_tsni = function negatePs_inst_7_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -7850,9 +7802,9 @@ lambda$_inst_7_59_36_37_tsni = function lambda$_inst_7_59_36_37_tsni(fs_) {
   return power1.Pc(0, tmp)
 };
 int1_inst_7_59_36_37_38_tsni = function int1_inst_7_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_7_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_7_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_7_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7865,9 +7817,9 @@ lambda$_inst_7_59_36_37_38_tsni = function lambda$_inst_7_59_36_37_38_tsni(fss, 
   return runtime.safeCall(scrut(n))
 };
 deriv_inst_8_53_tsni = function deriv_inst_8_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -7880,9 +7832,9 @@ lambda$_inst_8_53_54_55_tsni = function lambda$_inst_8_53_54_55_tsni(fss) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_8_3_56_tsni = function negatePs_inst_8_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -7895,9 +7847,9 @@ lambda$_inst_8_3_56_tsni = function lambda$_inst_8_3_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_8_3_57_tsni = function negatePs_inst_8_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -7910,9 +7862,9 @@ lambda$_inst_8_3_57_tsni = function lambda$_inst_8_3_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_8_3_58_tsni = function negatePs_inst_8_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -7940,9 +7892,9 @@ lambda$_inst_8_59_36_37_tsni = function lambda$_inst_8_59_36_37_tsni(fs_) {
   return power1.Pc(0, tmp)
 };
 int1_inst_8_59_36_37_38_tsni = function int1_inst_8_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_8_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -7955,9 +7907,9 @@ lambda$_inst_8_59_36_37_38_tsni = function lambda$_inst_8_59_36_37_38_tsni(fss, 
   return runtime.safeCall(scrut(n))
 };
 negatePs_inst_9_10_3_58_tsni = function negatePs_inst_9_10_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -7970,9 +7922,9 @@ lambda$_inst_9_10_3_58_tsni = function lambda$_inst_9_10_3_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_9_10_3_57_tsni = function negatePs_inst_9_10_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -7985,9 +7937,9 @@ lambda$_inst_9_10_3_57_tsni = function lambda$_inst_9_10_3_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_9_10_3_56_tsni = function negatePs_inst_9_10_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8015,9 +7967,9 @@ lambda$_inst_9_10_59_36_37_tsni = function lambda$_inst_9_10_59_36_37_tsni(fs_) 
   return power1.Pc(0, tmp)
 };
 int1_inst_9_10_59_36_37_38_tsni = function int1_inst_9_10_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -8030,9 +7982,9 @@ lambda$_inst_9_10_59_36_37_38_tsni = function lambda$_inst_9_10_59_36_37_38_tsni
   return runtime.safeCall(scrut(n))
 };
 deriv_inst_9_10_53_tsni = function deriv_inst_9_10_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_9_10_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_9_10_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_9_10_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -8045,9 +7997,9 @@ lambda$_inst_9_10_53_54_55_tsni = function lambda$_inst_9_10_53_54_55_tsni(fss) 
   return runtime.safeCall(scrut())
 };
 negatePs_inst_11_12_3_58_tsni = function negatePs_inst_11_12_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8060,9 +8012,9 @@ lambda$_inst_11_12_3_58_tsni = function lambda$_inst_11_12_3_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_11_12_3_57_tsni = function negatePs_inst_11_12_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8075,9 +8027,9 @@ lambda$_inst_11_12_3_57_tsni = function lambda$_inst_11_12_3_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_11_12_3_56_tsni = function negatePs_inst_11_12_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8105,9 +8057,9 @@ lambda$_inst_11_12_59_36_37_tsni = function lambda$_inst_11_12_59_36_37_tsni(fs_
   return power1.Pc(0, tmp)
 };
 int1_inst_11_12_59_36_37_38_tsni = function int1_inst_11_12_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -8120,9 +8072,9 @@ lambda$_inst_11_12_59_36_37_38_tsni = function lambda$_inst_11_12_59_36_37_38_ts
   return runtime.safeCall(scrut(n))
 };
 deriv_inst_11_12_53_tsni = function deriv_inst_11_12_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_11_12_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_11_12_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_11_12_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -8135,9 +8087,9 @@ lambda$_inst_11_12_53_54_55_tsni = function lambda$_inst_11_12_53_54_55_tsni(fss
   return runtime.safeCall(scrut())
 };
 negatePs_inst_13_12_3_58_tsni = function negatePs_inst_13_12_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8150,9 +8102,9 @@ lambda$_inst_13_12_3_58_tsni = function lambda$_inst_13_12_3_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_13_12_3_57_tsni = function negatePs_inst_13_12_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8165,9 +8117,9 @@ lambda$_inst_13_12_3_57_tsni = function lambda$_inst_13_12_3_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_13_12_3_56_tsni = function negatePs_inst_13_12_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8195,9 +8147,9 @@ lambda$_inst_13_12_59_36_37_tsni = function lambda$_inst_13_12_59_36_37_tsni(fs_
   return power1.Pc(0, tmp)
 };
 int1_inst_13_12_59_36_37_38_tsni = function int1_inst_13_12_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -8210,9 +8162,9 @@ lambda$_inst_13_12_59_36_37_38_tsni = function lambda$_inst_13_12_59_36_37_38_ts
   return runtime.safeCall(scrut(n))
 };
 deriv_inst_13_12_53_tsni = function deriv_inst_13_12_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_13_12_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_13_12_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_13_12_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -8225,9 +8177,9 @@ lambda$_inst_13_12_53_54_55_tsni = function lambda$_inst_13_12_53_54_55_tsni(fss
   return runtime.safeCall(scrut())
 };
 negatePs_inst_14_15_56_tsni = function negatePs_inst_14_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_14_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_14_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_14_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8240,9 +8192,9 @@ lambda$_inst_14_15_56_tsni = function lambda$_inst_14_15_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_14_15_57_tsni = function negatePs_inst_14_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_14_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_14_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_14_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8255,9 +8207,9 @@ lambda$_inst_14_15_57_tsni = function lambda$_inst_14_15_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_14_15_58_tsni = function negatePs_inst_14_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_14_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_14_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_14_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8270,9 +8222,9 @@ lambda$_inst_14_15_58_tsni = function lambda$_inst_14_15_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_16_15_56_tsni = function negatePs_inst_16_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_16_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_16_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_16_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8285,9 +8237,9 @@ lambda$_inst_16_15_56_tsni = function lambda$_inst_16_15_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_16_15_57_tsni = function negatePs_inst_16_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_16_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_16_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_16_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8300,9 +8252,9 @@ lambda$_inst_16_15_57_tsni = function lambda$_inst_16_15_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_16_15_58_tsni = function negatePs_inst_16_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_16_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_16_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_16_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8315,9 +8267,9 @@ lambda$_inst_16_15_58_tsni = function lambda$_inst_16_15_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_17_15_56_tsni = function negatePs_inst_17_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_17_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8330,9 +8282,9 @@ lambda$_inst_17_15_56_tsni = function lambda$_inst_17_15_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_17_15_57_tsni = function negatePs_inst_17_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_17_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8345,9 +8297,9 @@ lambda$_inst_17_15_57_tsni = function lambda$_inst_17_15_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_17_15_58_tsni = function negatePs_inst_17_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_17_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8360,9 +8312,9 @@ lambda$_inst_17_15_58_tsni = function lambda$_inst_17_15_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_18_19_15_58_tsni = function negatePs_inst_18_19_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8375,9 +8327,9 @@ lambda$_inst_18_19_15_58_tsni = function lambda$_inst_18_19_15_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_18_19_15_57_tsni = function negatePs_inst_18_19_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8390,9 +8342,9 @@ lambda$_inst_18_19_15_57_tsni = function lambda$_inst_18_19_15_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_18_19_15_56_tsni = function negatePs_inst_18_19_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_18_19_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_18_19_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_18_19_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8405,9 +8357,9 @@ lambda$_inst_18_19_15_56_tsni = function lambda$_inst_18_19_15_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_20_21_15_58_tsni = function negatePs_inst_20_21_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_21_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_21_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_21_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8420,9 +8372,9 @@ lambda$_inst_20_21_15_58_tsni = function lambda$_inst_20_21_15_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_20_21_15_57_tsni = function negatePs_inst_20_21_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_21_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_21_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_21_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8435,9 +8387,9 @@ lambda$_inst_20_21_15_57_tsni = function lambda$_inst_20_21_15_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_20_21_15_56_tsni = function negatePs_inst_20_21_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_20_21_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_20_21_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_20_21_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8450,9 +8402,9 @@ lambda$_inst_20_21_15_56_tsni = function lambda$_inst_20_21_15_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_22_23_21_15_56_tsni = function negatePs_inst_22_23_21_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_21_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_21_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_21_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8465,9 +8417,9 @@ lambda$_inst_22_23_21_15_56_tsni = function lambda$_inst_22_23_21_15_56_tsni(ps)
   return runtime.safeCall(scrut())
 };
 negatePs_inst_22_23_21_15_57_tsni = function negatePs_inst_22_23_21_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_21_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_21_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_21_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8480,9 +8432,9 @@ lambda$_inst_22_23_21_15_57_tsni = function lambda$_inst_22_23_21_15_57_tsni(ps)
   return runtime.safeCall(scrut())
 };
 negatePs_inst_22_23_21_15_58_tsni = function negatePs_inst_22_23_21_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_22_23_21_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_22_23_21_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_22_23_21_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8495,9 +8447,9 @@ lambda$_inst_22_23_21_15_58_tsni = function lambda$_inst_22_23_21_15_58_tsni(ps)
   return runtime.safeCall(scrut())
 };
 negatePs_inst_24_58_tsni = function negatePs_inst_24_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_24_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_24_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_24_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8510,9 +8462,9 @@ lambda$_inst_24_58_tsni = function lambda$_inst_24_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_24_57_tsni = function negatePs_inst_24_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_24_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_24_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_24_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8525,9 +8477,9 @@ lambda$_inst_24_57_tsni = function lambda$_inst_24_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_24_56_tsni = function negatePs_inst_24_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_24_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_24_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_24_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8540,9 +8492,9 @@ lambda$_inst_24_56_tsni = function lambda$_inst_24_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_25_58_tsni = function negatePs_inst_25_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_25_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_25_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_25_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8555,9 +8507,9 @@ lambda$_inst_25_58_tsni = function lambda$_inst_25_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_25_57_tsni = function negatePs_inst_25_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_25_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_25_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_25_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8570,9 +8522,9 @@ lambda$_inst_25_57_tsni = function lambda$_inst_25_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_25_56_tsni = function negatePs_inst_25_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_25_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_25_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_25_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8585,9 +8537,9 @@ lambda$_inst_25_56_tsni = function lambda$_inst_25_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_26_58_tsni = function negatePs_inst_26_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_26_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_26_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_26_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8600,9 +8552,9 @@ lambda$_inst_26_58_tsni = function lambda$_inst_26_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_26_57_tsni = function negatePs_inst_26_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_26_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_26_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_26_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8615,9 +8567,9 @@ lambda$_inst_26_57_tsni = function lambda$_inst_26_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_26_56_tsni = function negatePs_inst_26_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_26_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_26_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_26_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8630,9 +8582,9 @@ lambda$_inst_26_56_tsni = function lambda$_inst_26_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_27_28_23_21_15_58_tsni = function negatePs_inst_27_28_23_21_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_27_28_23_21_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_27_28_23_21_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_27_28_23_21_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8645,9 +8597,9 @@ lambda$_inst_27_28_23_21_15_58_tsni = function lambda$_inst_27_28_23_21_15_58_ts
   return runtime.safeCall(scrut())
 };
 negatePs_inst_27_28_23_21_15_57_tsni = function negatePs_inst_27_28_23_21_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_27_28_23_21_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_27_28_23_21_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_27_28_23_21_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8660,9 +8612,9 @@ lambda$_inst_27_28_23_21_15_57_tsni = function lambda$_inst_27_28_23_21_15_57_ts
   return runtime.safeCall(scrut())
 };
 negatePs_inst_27_28_23_21_15_56_tsni = function negatePs_inst_27_28_23_21_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_27_28_23_21_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_27_28_23_21_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_27_28_23_21_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8675,9 +8627,9 @@ lambda$_inst_27_28_23_21_15_56_tsni = function lambda$_inst_27_28_23_21_15_56_ts
   return runtime.safeCall(scrut())
 };
 negatePs_inst_29_12_3_58_tsni = function negatePs_inst_29_12_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8690,9 +8642,9 @@ lambda$_inst_29_12_3_58_tsni = function lambda$_inst_29_12_3_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_29_12_3_57_tsni = function negatePs_inst_29_12_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8705,9 +8657,9 @@ lambda$_inst_29_12_3_57_tsni = function lambda$_inst_29_12_3_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_29_12_3_56_tsni = function negatePs_inst_29_12_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8735,9 +8687,9 @@ lambda$_inst_29_12_59_36_37_tsni = function lambda$_inst_29_12_59_36_37_tsni(fs_
   return power1.Pc(0, tmp)
 };
 int1_inst_29_12_59_36_37_38_tsni = function int1_inst_29_12_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -8750,9 +8702,9 @@ lambda$_inst_29_12_59_36_37_38_tsni = function lambda$_inst_29_12_59_36_37_38_ts
   return runtime.safeCall(scrut(n))
 };
 deriv_inst_29_12_53_tsni = function deriv_inst_29_12_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_29_12_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_29_12_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_29_12_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -8770,9 +8722,9 @@ minusPs_inst_30_60_tsni = function minusPs_inst_30_60_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_30_60_61_tsni = function negatePs_inst_30_60_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_30_60_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_30_60_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_30_60_61_tsni = (undefined, function (ps) {
   return () => {
@@ -8790,9 +8742,9 @@ minusPs_inst_39_62_tsni = function minusPs_inst_39_62_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_39_62_61_tsni = function negatePs_inst_39_62_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_62_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_62_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_39_62_61_tsni = (undefined, function (ps) {
   return () => {
@@ -8810,9 +8762,9 @@ minusPs_inst_41_42_62_tsni = function minusPs_inst_41_42_62_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_41_42_62_61_tsni = function negatePs_inst_41_42_62_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_42_62_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_42_62_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_42_62_61_tsni = (undefined, function (ps) {
   return () => {
@@ -8830,9 +8782,9 @@ minusPs_inst_41_43_60_tsni = function minusPs_inst_41_43_60_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_41_43_60_61_tsni = function negatePs_inst_41_43_60_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_43_60_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_43_60_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_43_60_61_tsni = (undefined, function (ps) {
   return () => {
@@ -8845,9 +8797,9 @@ lambda$_inst_41_43_60_61_tsni = function lambda$_inst_41_43_60_61_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 deriv_inst_41_44_12_53_tsni = function deriv_inst_41_44_12_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -8860,9 +8812,9 @@ lambda$_inst_41_44_12_53_54_55_tsni = function lambda$_inst_41_44_12_53_54_55_ts
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_44_12_3_56_tsni = function negatePs_inst_41_44_12_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8875,9 +8827,9 @@ lambda$_inst_41_44_12_3_56_tsni = function lambda$_inst_41_44_12_3_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_44_12_3_57_tsni = function negatePs_inst_41_44_12_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -8890,9 +8842,9 @@ lambda$_inst_41_44_12_3_57_tsni = function lambda$_inst_41_44_12_3_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_44_12_3_58_tsni = function negatePs_inst_41_44_12_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -8920,9 +8872,9 @@ lambda$_inst_41_44_12_59_36_37_tsni = function lambda$_inst_41_44_12_59_36_37_ts
   return power1.Pc(0, tmp)
 };
 int1_inst_41_44_12_59_36_37_38_tsni = function int1_inst_41_44_12_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_44_12_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_44_12_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_44_12_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -8940,9 +8892,9 @@ minusPs_inst_41_45_62_tsni = function minusPs_inst_41_45_62_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_41_45_62_61_tsni = function negatePs_inst_41_45_62_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_45_62_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_45_62_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_45_62_61_tsni = (undefined, function (ps) {
   return () => {
@@ -8960,9 +8912,9 @@ minusPs_inst_41_46_60_tsni = function minusPs_inst_41_46_60_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_41_46_60_61_tsni = function negatePs_inst_41_46_60_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_46_60_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_46_60_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_46_60_61_tsni = (undefined, function (ps) {
   return () => {
@@ -8975,9 +8927,9 @@ lambda$_inst_41_46_60_61_tsni = function lambda$_inst_41_46_60_61_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_47_56_tsni = function negatePs_inst_41_47_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_47_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_47_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_47_56_tsni = (undefined, function (ps) {
   return () => {
@@ -8990,9 +8942,9 @@ lambda$_inst_41_47_56_tsni = function lambda$_inst_41_47_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_47_57_tsni = function negatePs_inst_41_47_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_47_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_47_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_47_57_tsni = (undefined, function (ps) {
   return () => {
@@ -9005,9 +8957,9 @@ lambda$_inst_41_47_57_tsni = function lambda$_inst_41_47_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_47_58_tsni = function negatePs_inst_41_47_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_47_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_47_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_47_58_tsni = (undefined, function (ps) {
   return () => {
@@ -9020,9 +8972,9 @@ lambda$_inst_41_47_58_tsni = function lambda$_inst_41_47_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_48_56_tsni = function negatePs_inst_41_48_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_48_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_48_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_48_56_tsni = (undefined, function (ps) {
   return () => {
@@ -9035,9 +8987,9 @@ lambda$_inst_41_48_56_tsni = function lambda$_inst_41_48_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_48_57_tsni = function negatePs_inst_41_48_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_48_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_48_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_48_57_tsni = (undefined, function (ps) {
   return () => {
@@ -9050,9 +9002,9 @@ lambda$_inst_41_48_57_tsni = function lambda$_inst_41_48_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_48_58_tsni = function negatePs_inst_41_48_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_48_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_48_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_48_58_tsni = (undefined, function (ps) {
   return () => {
@@ -9065,9 +9017,9 @@ lambda$_inst_41_48_58_tsni = function lambda$_inst_41_48_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 int1_inst_41_50_36_37_38_tsni = function int1_inst_41_50_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_50_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_50_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_50_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -9080,9 +9032,9 @@ lambda$_inst_41_50_36_37_38_tsni = function lambda$_inst_41_50_36_37_38_tsni(fss
   return runtime.safeCall(scrut(n))
 };
 negatePs_inst_41_49_28_23_21_15_56_tsni = function negatePs_inst_41_49_28_23_21_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_23_21_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_23_21_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_23_21_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -9095,9 +9047,9 @@ lambda$_inst_41_49_28_23_21_15_56_tsni = function lambda$_inst_41_49_28_23_21_15
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_49_28_23_21_15_57_tsni = function negatePs_inst_41_49_28_23_21_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_23_21_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_23_21_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_23_21_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -9110,9 +9062,9 @@ lambda$_inst_41_49_28_23_21_15_57_tsni = function lambda$_inst_41_49_28_23_21_15
   return runtime.safeCall(scrut())
 };
 negatePs_inst_41_49_28_23_21_15_58_tsni = function negatePs_inst_41_49_28_23_21_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_49_28_23_21_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_49_28_23_21_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_41_49_28_23_21_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -9125,9 +9077,9 @@ lambda$_inst_41_49_28_23_21_15_58_tsni = function lambda$_inst_41_49_28_23_21_15
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_49_28_23_21_15_58_tsni = function negatePs_inst_51_52_49_28_23_21_15_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_23_21_15_58_tsni = (undefined, function (ps) {
   return () => {
@@ -9140,9 +9092,9 @@ lambda$_inst_51_52_49_28_23_21_15_58_tsni = function lambda$_inst_51_52_49_28_23
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_49_28_23_21_15_57_tsni = function negatePs_inst_51_52_49_28_23_21_15_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_23_21_15_57_tsni = (undefined, function (ps) {
   return () => {
@@ -9155,9 +9107,9 @@ lambda$_inst_51_52_49_28_23_21_15_57_tsni = function lambda$_inst_51_52_49_28_23
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_49_28_23_21_15_56_tsni = function negatePs_inst_51_52_49_28_23_21_15_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_49_28_23_21_15_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_49_28_23_21_15_56_tsni = (undefined, function (ps) {
   return () => {
@@ -9170,9 +9122,9 @@ lambda$_inst_51_52_49_28_23_21_15_56_tsni = function lambda$_inst_51_52_49_28_23
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_48_58_tsni = function negatePs_inst_51_52_48_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_48_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_48_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_48_58_tsni = (undefined, function (ps) {
   return () => {
@@ -9185,9 +9137,9 @@ lambda$_inst_51_52_48_58_tsni = function lambda$_inst_51_52_48_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_48_57_tsni = function negatePs_inst_51_52_48_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_48_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_48_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_48_57_tsni = (undefined, function (ps) {
   return () => {
@@ -9200,9 +9152,9 @@ lambda$_inst_51_52_48_57_tsni = function lambda$_inst_51_52_48_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_48_56_tsni = function negatePs_inst_51_52_48_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_48_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_48_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_48_56_tsni = (undefined, function (ps) {
   return () => {
@@ -9215,9 +9167,9 @@ lambda$_inst_51_52_48_56_tsni = function lambda$_inst_51_52_48_56_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 int1_inst_51_52_50_36_37_38_tsni = function int1_inst_51_52_50_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_50_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_50_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_50_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -9230,9 +9182,9 @@ lambda$_inst_51_52_50_36_37_38_tsni = function lambda$_inst_51_52_50_36_37_38_ts
   return runtime.safeCall(scrut(n))
 };
 negatePs_inst_51_52_47_58_tsni = function negatePs_inst_51_52_47_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_47_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_47_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_47_58_tsni = (undefined, function (ps) {
   return () => {
@@ -9245,9 +9197,9 @@ lambda$_inst_51_52_47_58_tsni = function lambda$_inst_51_52_47_58_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_47_57_tsni = function negatePs_inst_51_52_47_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_47_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_47_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_47_57_tsni = (undefined, function (ps) {
   return () => {
@@ -9260,9 +9212,9 @@ lambda$_inst_51_52_47_57_tsni = function lambda$_inst_51_52_47_57_tsni(ps) {
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_47_56_tsni = function negatePs_inst_51_52_47_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_47_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_47_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_47_56_tsni = (undefined, function (ps) {
   return () => {
@@ -9280,9 +9232,9 @@ minusPs_inst_51_52_46_60_tsni = function minusPs_inst_51_52_46_60_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_51_52_46_60_61_tsni = function negatePs_inst_51_52_46_60_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_46_60_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_46_60_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_46_60_61_tsni = (undefined, function (ps) {
   return () => {
@@ -9300,9 +9252,9 @@ minusPs_inst_51_52_45_62_tsni = function minusPs_inst_51_52_45_62_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_51_52_45_62_61_tsni = function negatePs_inst_51_52_45_62_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_45_62_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_45_62_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_45_62_61_tsni = (undefined, function (ps) {
   return () => {
@@ -9315,9 +9267,9 @@ lambda$_inst_51_52_45_62_61_tsni = function lambda$_inst_51_52_45_62_61_tsni(ps)
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_44_12_3_58_tsni = function negatePs_inst_51_52_44_12_3_58_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_3_58_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_3_58_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_3_58_tsni = (undefined, function (ps) {
   return () => {
@@ -9330,9 +9282,9 @@ lambda$_inst_51_52_44_12_3_58_tsni = function lambda$_inst_51_52_44_12_3_58_tsni
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_44_12_3_57_tsni = function negatePs_inst_51_52_44_12_3_57_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_3_57_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_3_57_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_3_57_tsni = (undefined, function (ps) {
   return () => {
@@ -9345,9 +9297,9 @@ lambda$_inst_51_52_44_12_3_57_tsni = function lambda$_inst_51_52_44_12_3_57_tsni
   return runtime.safeCall(scrut())
 };
 negatePs_inst_51_52_44_12_3_56_tsni = function negatePs_inst_51_52_44_12_3_56_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_3_56_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_3_56_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_3_56_tsni = (undefined, function (ps) {
   return () => {
@@ -9375,9 +9327,9 @@ lambda$_inst_51_52_44_12_59_36_37_tsni = function lambda$_inst_51_52_44_12_59_36
   return power1.Pc(0, tmp)
 };
 int1_inst_51_52_44_12_59_36_37_38_tsni = function int1_inst_51_52_44_12_59_36_37_38_tsni(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_59_36_37_38_tsni(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_59_36_37_38_tsni(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_59_36_37_38_tsni = (undefined, function (fss, n) {
   return () => {
@@ -9390,9 +9342,9 @@ lambda$_inst_51_52_44_12_59_36_37_38_tsni = function lambda$_inst_51_52_44_12_59
   return runtime.safeCall(scrut(n))
 };
 deriv_inst_51_52_44_12_53_tsni = function deriv_inst_51_52_44_12_53_tsni(fss) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_44_12_53_54_tsni(fss));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_44_12_53_54_tsni(fss));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_44_12_53_54_tsni = (undefined, function (fss) {
   return () => {
@@ -9410,9 +9362,9 @@ minusPs_inst_51_52_43_60_tsni = function minusPs_inst_51_52_43_60_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_51_52_43_60_61_tsni = function negatePs_inst_51_52_43_60_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_43_60_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_43_60_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_43_60_61_tsni = (undefined, function (ps) {
   return () => {
@@ -9430,9 +9382,9 @@ minusPs_inst_51_52_42_62_tsni = function minusPs_inst_51_52_42_62_tsni(a, b) {
   return power.addPs(a, tmp)
 };
 negatePs_inst_51_52_42_62_61_tsni = function negatePs_inst_51_52_42_62_61_tsni(ps) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_52_42_62_61_tsni(ps));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_52_42_62_61_tsni(ps));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda_inst_51_52_42_62_61_tsni = (undefined, function (ps) {
   return () => {
@@ -9444,29 +9396,29 @@ lambda$_inst_51_52_42_62_61_tsni = function lambda$_inst_51_52_42_62_61_tsni(ps)
   scrut = NofibPrelude.force(ps);
   return runtime.safeCall(scrut())
 };
-lambda51 = (undefined, function () {
-  return power1.Pz
-});
 lambda50 = (undefined, function () {
-  let tmp;
-  tmp = NofibPrelude.lazy(lambda51);
-  return power1.Pc(1, tmp)
-});
-lambda49 = (undefined, function () {
   return power1.Pz
+});
+lambda51 = (undefined, function () {
+  let tmp;
+  tmp = NofibPrelude.lazy(lambda50);
+  return power1.Pc(1, tmp)
 });
 lambda48 = (undefined, function () {
+  return power1.Pz
+});
+lambda49 = (undefined, function () {
   let tmp;
-  tmp = NofibPrelude.lazy(lambda49);
+  tmp = NofibPrelude.lazy(lambda48);
   return power1.Pc(1, tmp)
 });
-lambda47 = (undefined, function () {
+lambda46 = (undefined, function () {
   return power1.tree()
 });
-lambda46 = (undefined, function () {
+lambda47 = (undefined, function () {
   let tmp, tmp1, tmp2;
   tmp = power1.list();
-  tmp1 = NofibPrelude.lazy(lambda47);
+  tmp1 = NofibPrelude.lazy(lambda46);
   tmp2 = power1.composeSndLz_(tmp, tmp1);
   return power1.Pc(0, tmp2)
 });
@@ -9480,7 +9432,7 @@ lambda45 = (undefined, function () {
 lambda$30 = function lambda$(fs_) {
   return power1.Pc(1, fs_)
 };
-lambda44 = (undefined, function (fs_) {
+lambda42 = (undefined, function (fs_) {
   return () => {
     return lambda$30(fs_)
   }
@@ -9503,9 +9455,9 @@ lambda43 = (undefined, function (fs_) {
   }
 });
 qs$ = function qs$(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_8_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_8_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 qs = function qs(fs_) {
   return () => {
@@ -9548,7 +9500,7 @@ lambda$28 = function lambda$(fss) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-lambda42 = (undefined, function (fss) {
+lambda44 = (undefined, function (fss) {
   return () => {
     return lambda$_inst_13_tsni(fss)
   }
@@ -9577,9 +9529,9 @@ lambda40 = (undefined, function (fss, n) {
   }
 });
 int11 = function int1(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda40(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda40(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$26 = function lambda$(fs_) {
   let tmp, tmp1;
@@ -9616,9 +9568,9 @@ lambda38 = (undefined, function (fss, n) {
   }
 });
 int1 = function int1(fss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda38(fss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda38(fss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$24 = function lambda$(fs_) {
   let tmp;
@@ -9648,15 +9600,15 @@ lambda$23 = function lambda$(gss, n) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-lambda37 = (undefined, function (gss, n) {
+lambda36 = (undefined, function (gss, n) {
   return () => {
     return lambda$23(gss, n)
   }
 });
 deriv1 = function deriv1(gss, n) {
-  let tmp;
-  tmp = runtime.safeCall(lambda37(gss, n));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda36(gss, n));
+  return NofibPrelude.lazy(lambda$this)
 };
 lambda$22 = function lambda$(fss) {
   let scrut, param0, param1, fs_, tmp;
@@ -9673,7 +9625,7 @@ lambda$22 = function lambda$(fss) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-lambda36 = (undefined, function (fss) {
+lambda37 = (undefined, function (fss) {
   return () => {
     return lambda$22(fss)
   }
@@ -9686,28 +9638,28 @@ lambda$21 = function lambda$(fs_) {
   tmp3 = divPs_inst_14_15_tsni(tmp, tmp2);
   return power1.Pc(0, tmp3)
 };
-lambda33 = (undefined, function (fs_) {
+lambda32 = (undefined, function (fs_) {
   return () => {
     return lambda$_inst_16_tsni(fs_)
   }
 });
 rs$ = function rs$(fs_) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_17_tsni(fs_));
-  return NofibPrelude.lazy(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_17_tsni(fs_));
+  return NofibPrelude.lazy(lambda$this)
 };
 rs = function rs(fs_) {
   return () => {
     return rs$_inst_18_19_tsni(fs_)
   }
 };
-lambda35 = (undefined, function () {
+lambda33 = (undefined, function () {
   return power1.Pz
 });
 lambda$20 = function lambda$(f1) {
   let tmp, tmp1;
   tmp = 1 / f1;
-  tmp1 = NofibPrelude.lazy(lambda35);
+  tmp1 = NofibPrelude.lazy(lambda33);
   return power1.Pc(tmp, tmp1)
 };
 lambda34 = (undefined, function (f1) {
@@ -9752,28 +9704,28 @@ lambda$19 = function lambda$(fss) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-lambda32 = (undefined, function (fss) {
+lambda35 = (undefined, function (fss) {
   return () => {
     return lambda$_inst_22_23_tsni(fss)
   }
 });
-lambda26 = (undefined, function () {
+lambda25 = (undefined, function () {
   return power1.Pz
 });
 lambda$18 = function lambda$(gs) {
   return power1.Pc(0, gs)
 };
-lambda27 = (undefined, function (gs) {
+lambda26 = (undefined, function (gs) {
   return () => {
     return lambda$18(gs)
   }
 });
-lambda29 = (undefined, function () {
+lambda27 = (undefined, function () {
   return power1.Pz
 });
 lambda$17 = function lambda$(f) {
   let tmp;
-  tmp = NofibPrelude.lazy(lambda29);
+  tmp = NofibPrelude.lazy(lambda27);
   return power1.Pc(f, tmp)
 };
 lambda28 = (undefined, function (f) {
@@ -9781,12 +9733,12 @@ lambda28 = (undefined, function (f) {
     return lambda$17(f)
   }
 });
-lambda31 = (undefined, function () {
+lambda29 = (undefined, function () {
   return power1.Pz
 });
 lambda$16 = function lambda$(f) {
   let tmp;
-  tmp = NofibPrelude.lazy(lambda31);
+  tmp = NofibPrelude.lazy(lambda29);
   return power1.Pc(f, tmp)
 };
 lambda30 = (undefined, function (f) {
@@ -9807,14 +9759,14 @@ lambda$15 = function lambda$(fss, gss) {
     tmp = NofibPrelude.force(gss);
     scrut1 = NofibPrelude.force(tmp);
     if (scrut1 instanceof power1.Pz.class) {
-      tmp1 = NofibPrelude.lazy(lambda26);
+      tmp1 = NofibPrelude.lazy(lambda25);
       return power1.Pc(f, tmp1)
     } else if (scrut1 instanceof power1.Pc.class) {
       param01 = scrut1.f;
       param11 = scrut1.s;
       if (param01 === 0) {
         gs = param11;
-        lambda$this = runtime.safeCall(lambda27(gs));
+        lambda$this = runtime.safeCall(lambda26(gs));
         tmp2 = NofibPrelude.lazy(lambda$this);
         tmp3 = power1.compose_(fs_, tmp2);
         tmp4 = power1.multPs(gs, tmp3);
@@ -9839,28 +9791,28 @@ lambda$15 = function lambda$(fss, gss) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-lambda25 = (undefined, function (fss, gss) {
+lambda31 = (undefined, function (fss, gss) {
   return () => {
     return lambda$15(fss, gss)
   }
 });
-lambda19 = (undefined, function () {
+lambda18 = (undefined, function () {
   return power1.Pz
 });
 lambda$14 = function lambda$(gs) {
   return power1.Pc(0, gs)
 };
-lambda20 = (undefined, function (gs) {
+lambda19 = (undefined, function (gs) {
   return () => {
     return lambda$14(gs)
   }
 });
-lambda22 = (undefined, function () {
+lambda20 = (undefined, function () {
   return power1.Pz
 });
 lambda$13 = function lambda$(f) {
   let tmp;
-  tmp = NofibPrelude.lazy(lambda22);
+  tmp = NofibPrelude.lazy(lambda20);
   return power1.Pc(f, tmp)
 };
 lambda21 = (undefined, function (f) {
@@ -9868,12 +9820,12 @@ lambda21 = (undefined, function (f) {
     return lambda$13(f)
   }
 });
-lambda24 = (undefined, function () {
+lambda22 = (undefined, function () {
   return power1.Pz
 });
 lambda$12 = function lambda$(f) {
   let tmp;
-  tmp = NofibPrelude.lazy(lambda24);
+  tmp = NofibPrelude.lazy(lambda22);
   return power1.Pc(f, tmp)
 };
 lambda23 = (undefined, function (f) {
@@ -9893,14 +9845,14 @@ lambda$11 = function lambda$(fss, gss) {
     fs_ = param1;
     scrut1 = NofibPrelude.force(gss);
     if (scrut1 instanceof power1.Pz.class) {
-      tmp = NofibPrelude.lazy(lambda19);
+      tmp = NofibPrelude.lazy(lambda18);
       return power1.Pc(f, tmp)
     } else if (scrut1 instanceof power1.Pc.class) {
       param01 = scrut1.f;
       param11 = scrut1.s;
       if (param01 === 0) {
         gs = param11;
-        lambda$this = runtime.safeCall(lambda20(gs));
+        lambda$this = runtime.safeCall(lambda19(gs));
         tmp1 = NofibPrelude.lazy(lambda$this);
         tmp2 = power1.compose_(fs_, tmp1);
         tmp3 = power1.multPs(gs, tmp2);
@@ -9925,18 +9877,18 @@ lambda$11 = function lambda$(fss, gss) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-lambda18 = (undefined, function (fss, gss) {
+lambda24 = (undefined, function (fss, gss) {
   return () => {
     return lambda$11(fss, gss)
   }
 });
-lambda14 = (undefined, function () {
+lambda13 = (undefined, function () {
   return power1.Pz
 });
 lambda$10 = function lambda$(g, gs) {
   return power1.Pc(g, gs)
 };
-lambda15 = (undefined, function (g, gs) {
+lambda14 = (undefined, function (g, gs) {
   return () => {
     return lambda$10(g, gs)
   }
@@ -9944,7 +9896,7 @@ lambda15 = (undefined, function (g, gs) {
 lambda$9 = function lambda$(g, gs) {
   return power1.Pc(g, gs)
 };
-lambda16 = (undefined, function (g, gs) {
+lambda15 = (undefined, function (g, gs) {
   return () => {
     return lambda$9(g, gs)
   }
@@ -9952,13 +9904,13 @@ lambda16 = (undefined, function (g, gs) {
 lambda$8 = function lambda$(g, gs) {
   return power1.Pc(g, gs)
 };
-lambda17 = (undefined, function (g, gs) {
+lambda16 = (undefined, function (g, gs) {
   return () => {
     return lambda$8(g, gs)
   }
 });
 lambda$7 = function lambda$(fss, gss) {
-  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, lambda$this, lambda$this1, lambda$this2;
+  let scrut, param0, param1, f, fs_, scrut1, param01, param11, g, gs, q, fs_1, scrut2, param02, param12, g1, gs1, q1, gs2, scrut3, param03, param13, gs3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, lambda$this, lambda$this1, lambda$this2;
   scrut = NofibPrelude.force(fss);
   if (scrut instanceof power1.Pz.class) {
     scrut3 = NofibPrelude.force(gss);
@@ -9969,7 +9921,7 @@ lambda$7 = function lambda$(fss, gss) {
       param13 = scrut3.s;
       if (param03 === 0) {
         gs3 = param13;
-        tmp = NofibPrelude.lazy(lambda14);
+        tmp = NofibPrelude.lazy(lambda13);
         tmp1 = divPs_inst_24_tsni(tmp, gs3);
         return NofibPrelude.force(tmp1)
       } else {
@@ -9998,7 +9950,7 @@ lambda$7 = function lambda$(fss, gss) {
           tmp3 = dotMult_inst_24_6_tsni(q1, gs1);
           tmp4 = negatePs_inst_24_58_tsni(tmp3);
           tmp5 = power1.addPs(fs_1, tmp4);
-          lambda$this = runtime.safeCall(lambda15(g1, gs1));
+          lambda$this = runtime.safeCall(lambda14(g1, gs1));
           tmp6 = NofibPrelude.lazy(lambda$this);
           tmp7 = divPs_inst_24_tsni(tmp5, tmp6);
           return power1.Pc(q1, tmp7)
@@ -10012,15 +9964,14 @@ lambda$7 = function lambda$(fss, gss) {
           param11 = scrut1.s;
           g = param01;
           gs = param11;
-          tmp8 = f / g;
-          q = tmp8;
-          tmp9 = dotMult_inst_24_5_tsni(q, gs);
-          tmp10 = negatePs_inst_24_57_tsni(tmp9);
-          tmp11 = power1.addPs(fs_, tmp10);
-          lambda$this1 = runtime.safeCall(lambda16(g, gs));
-          tmp12 = NofibPrelude.lazy(lambda$this1);
-          tmp13 = divPs_inst_24_tsni(tmp11, tmp12);
-          return power1.Pc(q, tmp13)
+          q = f / g;
+          tmp8 = dotMult_inst_24_5_tsni(q, gs);
+          tmp9 = negatePs_inst_24_57_tsni(tmp8);
+          tmp10 = power1.addPs(fs_, tmp9);
+          lambda$this1 = runtime.safeCall(lambda15(g, gs));
+          tmp11 = NofibPrelude.lazy(lambda$this1);
+          tmp12 = divPs_inst_24_tsni(tmp10, tmp11);
+          return power1.Pc(q, tmp12)
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -10034,15 +9985,14 @@ lambda$7 = function lambda$(fss, gss) {
         param11 = scrut1.s;
         g = param01;
         gs = param11;
-        tmp14 = f / g;
-        q = tmp14;
-        tmp15 = dotMult_inst_24_4_tsni(q, gs);
-        tmp16 = negatePs_inst_24_56_tsni(tmp15);
-        tmp17 = power1.addPs(fs_, tmp16);
-        lambda$this2 = runtime.safeCall(lambda17(g, gs));
-        tmp18 = NofibPrelude.lazy(lambda$this2);
-        tmp19 = divPs_inst_24_tsni(tmp17, tmp18);
-        return power1.Pc(q, tmp19)
+        q = f / g;
+        tmp13 = dotMult_inst_24_4_tsni(q, gs);
+        tmp14 = negatePs_inst_24_56_tsni(tmp13);
+        tmp15 = power1.addPs(fs_, tmp14);
+        lambda$this2 = runtime.safeCall(lambda16(g, gs));
+        tmp16 = NofibPrelude.lazy(lambda$this2);
+        tmp17 = divPs_inst_24_tsni(tmp15, tmp16);
+        return power1.Pc(q, tmp17)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -10051,7 +10001,7 @@ lambda$7 = function lambda$(fss, gss) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
 };
-lambda13 = (undefined, function (fss, gss) {
+lambda17 = (undefined, function (fss, gss) {
   return () => {
     return lambda$_inst_25_tsni(fss, gss)
   }
@@ -10238,28 +10188,28 @@ lambda7 = (undefined, function (c, ps) {
 lambda4 = (undefined, function () {
   return power1.Pz
 });
-lambda6 = (undefined, function () {
+lambda5 = (undefined, function () {
   return power1.Pz
 });
 lambda$ = function lambda$(c) {
   let tmp;
-  tmp = NofibPrelude.lazy(lambda6);
+  tmp = NofibPrelude.lazy(lambda5);
   return power1.Pc(c, tmp)
 };
-lambda5 = (undefined, function (c) {
+lambda6 = (undefined, function (c) {
   return () => {
     return lambda$(c)
   }
 });
-lambda3 = (undefined, function () {
+lambda1 = (undefined, function () {
   return power1.Pz
 });
 lambda2 = (undefined, function () {
   let tmp;
-  tmp = NofibPrelude.lazy(lambda3);
+  tmp = NofibPrelude.lazy(lambda1);
   return power1.Pc(1, tmp)
 });
-lambda1 = (undefined, function () {
+lambda3 = (undefined, function () {
   let tmp;
   tmp = NofibPrelude.lazy(lambda2);
   return power1.Pc(0, tmp)
@@ -10318,7 +10268,7 @@ globalThis.Object.freeze(class power {
     return NofibPrelude.lazy(lambda)
   } 
   static x_() {
-    return NofibPrelude.lazy(lambda1)
+    return NofibPrelude.lazy(lambda3)
   } 
   static fromIntegerPs(c) {
     let scrut, lambda$this;
@@ -10326,7 +10276,7 @@ globalThis.Object.freeze(class power {
     if (scrut === true) {
       return NofibPrelude.lazy(lambda4)
     } else {
-      lambda$this = runtime.safeCall(lambda5(c));
+      lambda$this = runtime.safeCall(lambda6(c));
       return NofibPrelude.lazy(lambda$this)
     }
   } 
@@ -10353,24 +10303,24 @@ globalThis.Object.freeze(class power {
     }
   } 
   static dotMult(c, ps) {
-    let tmp;
-    tmp = runtime.safeCall(lambda7(c, ps));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda7(c, ps));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static dotMultSndLz(c, ps) {
-    let tmp;
-    tmp = runtime.safeCall(lambda8(c, ps));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda8(c, ps));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static negatePs(ps) {
-    let tmp;
-    tmp = runtime.safeCall(lambda9(ps));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda9(ps));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static addPs(fss, gs) {
-    let tmp;
-    tmp = runtime.safeCall(lambda10(fss, gs));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda10(fss, gs));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static minusPs(a, b) {
     let tmp;
@@ -10378,14 +10328,14 @@ globalThis.Object.freeze(class power {
     return power.addPs(a, tmp)
   } 
   static multPs(fss, gss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda11(fss, gss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda11(fss, gss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static multPsFstLz(fss, gss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda12(fss, gss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda12(fss, gss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static powerPs(a, n) {
     let scrut, tmp, tmp1;
@@ -10399,29 +10349,29 @@ globalThis.Object.freeze(class power {
     }
   } 
   static divPs(fss, gss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda_inst_26_tsni(fss, gss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda_inst_26_tsni(fss, gss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static compose_(fss, gss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda18(fss, gss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda24(fss, gss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static composeSndLz_(fss, gss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda25(fss, gss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda31(fss, gss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static revert(fss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda_inst_27_28_tsni(fss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda_inst_27_28_tsni(fss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static deriv(fss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda36(fss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda37(fss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static integral(fs_) {
     let lambda$this;
@@ -10429,35 +10379,31 @@ globalThis.Object.freeze(class power {
     return NofibPrelude.lazy(lambda$this)
   } 
   static integralLz(fs_) {
-    let tmp;
-    tmp = runtime.safeCall(lambda41(fs_));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda41(fs_));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static sqrtPs(fss) {
-    let tmp;
-    tmp = runtime.safeCall(lambda_inst_29_tsni(fss));
-    return NofibPrelude.lazy(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda_inst_29_tsni(fss));
+    return NofibPrelude.lazy(lambda$this)
   } 
   static ts() {
-    let tmp;
-    tmp = lambda45;
-    return NofibPrelude.lazy(tmp)
+    return NofibPrelude.lazy(lambda45)
   } 
   static tree() {
-    let tmp;
-    tmp = lambda46;
-    return NofibPrelude.lazy(tmp)
+    return NofibPrelude.lazy(lambda47)
   } 
   static cosx() {
     let tmp, tmp1, tmp2;
-    tmp = NofibPrelude.lazy(lambda48);
+    tmp = NofibPrelude.lazy(lambda49);
     tmp1 = integralLz_inst_30_31_tsni(power.cosx);
     tmp2 = integral_inst_30_35_tsni(tmp1);
     return minusPs_inst_30_60_tsni(tmp, tmp2)
   } 
   static sinx() {
     let tmp, tmp1, tmp2;
-    tmp = NofibPrelude.lazy(lambda50);
+    tmp = NofibPrelude.lazy(lambda51);
     tmp1 = integralLz_inst_39_40_tsni(power.sinx);
     tmp2 = minusPs_inst_39_62_tsni(tmp, tmp1);
     return power.integral(tmp2)

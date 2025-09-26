@@ -5043,17 +5043,17 @@ compareList_inst_74_30_tsni = function compareList_inst_74_30_tsni(xs, ys) {
   }
 };
 break__inst_75_76_tsni = function break__inst_75_76_tsni(p, ls) {
-  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda8;
   if (ls instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda8 = (l) => {
+      let tmp2;
+      tmp2 = NofibPrelude.Nil;
+      return match_s__rest_inst_75_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = NofibPrelude.Nil;
-        return match_s__rest_inst_75_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda8
+    ])
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
@@ -5071,11 +5071,10 @@ break__inst_75_76_tsni = function break__inst_75_76_tsni(p, ls) {
         tmp2 = sorting.lines(s__);
         return match_s__rest_inst_75_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_75_76_tsni(p, xs);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -5084,11 +5083,10 @@ break__inst_75_76_tsni = function break__inst_75_76_tsni(p, ls) {
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -6730,17 +6728,17 @@ lines_inst_89_90_tsni = function lines_inst_89_90_tsni(s) {
   }
 };
 break__inst_89_90_76_tsni = function break__inst_89_90_76_tsni(p, ls) {
-  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda8;
   if (ls instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda8 = (l) => {
+      let tmp2;
+      tmp2 = NofibPrelude.Nil;
+      return match_s__rest_inst_89_90_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = NofibPrelude.Nil;
-        return match_s__rest_inst_89_90_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda8
+    ])
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
@@ -6758,11 +6756,10 @@ break__inst_89_90_76_tsni = function break__inst_89_90_76_tsni(p, ls) {
         tmp2 = lines_inst_89_90_tsni(s__);
         return match_s__rest_inst_89_90_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_89_90_76_tsni(p, xs);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -6771,11 +6768,10 @@ break__inst_89_90_76_tsni = function break__inst_89_90_76_tsni(p, ls) {
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -10382,17 +10378,17 @@ lines_inst_93_94_90_tsni = function lines_inst_93_94_90_tsni(s) {
   }
 };
 break__inst_93_94_90_76_tsni = function break__inst_93_94_90_76_tsni(p, ls) {
-  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda8;
   if (ls instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda8 = (l) => {
+      let tmp2;
+      tmp2 = NofibPrelude.Nil;
+      return match_s__rest_inst_93_94_90_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = NofibPrelude.Nil;
-        return match_s__rest_inst_93_94_90_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda8
+    ])
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
@@ -10410,11 +10406,10 @@ break__inst_93_94_90_76_tsni = function break__inst_93_94_90_76_tsni(p, ls) {
         tmp2 = lines_inst_93_94_90_tsni(s__);
         return match_s__rest_inst_93_94_90_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_93_94_90_76_tsni(p, xs);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -10423,11 +10418,10 @@ break__inst_93_94_90_76_tsni = function break__inst_93_94_90_76_tsni(p, ls) {
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -10443,13 +10437,12 @@ append_inst_93_94_92_95_96_tsni = function append_inst_93_94_92_95_96_tsni(xs, y
   return runtime.safeCall(xs(ys))
 };
 testSorting_nofib_inst_97_98_tsni = function testSorting_nofib_inst_97_98_tsni(d) {
-  let f, tmp, tmp1, tmp2, tmp3;
+  let f, tmp, tmp1, tmp2;
   tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/Main.hs"));
   tmp1 = runtime.safeCall(tmp.toString());
-  tmp2 = NofibPrelude.nofibStringToList(tmp1);
-  f = tmp2;
-  tmp3 = mangle_inst_97_98_94_tsni(f);
-  return hash_inst_97_98_100_tsni(tmp3)
+  f = NofibPrelude.nofibStringToList(tmp1);
+  tmp2 = mangle_inst_97_98_94_tsni(f);
+  return hash_inst_97_98_100_tsni(tmp2)
 };
 mangle_inst_97_98_94_tsni = function mangle_inst_97_98_94_tsni(inpt) {
   let tmp, tmp1;
@@ -10475,17 +10468,17 @@ lines_inst_97_98_94_90_tsni = function lines_inst_97_98_94_90_tsni(s) {
   }
 };
 break__inst_97_98_94_90_76_tsni = function break__inst_97_98_94_90_76_tsni(p, ls) {
-  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, arr, tmp, arr1, tmp1, arr2, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, x, xs, scrut, first1, first0, ys, zs, scrut1, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail, lambda8;
   if (ls instanceof NofibPrelude.Nil.class) {
-    arr = globalThis.Object.freeze([
+    lambda8 = (l) => {
+      let tmp2;
+      tmp2 = NofibPrelude.Nil;
+      return match_s__rest_inst_97_98_94_90_tsni(l, tmp2)
+    };
+    return globalThis.Object.freeze([
       NofibPrelude.Nil,
-      (l) => {
-        let tmp2;
-        tmp2 = NofibPrelude.Nil;
-        return match_s__rest_inst_97_98_94_90_tsni(l, tmp2)
-      }
-    ]);
-    return arr
+      lambda8
+    ])
   } else if (ls instanceof NofibPrelude.Cons.class) {
     param0 = ls.head;
     param1 = ls.tail;
@@ -10503,11 +10496,10 @@ break__inst_97_98_94_90_76_tsni = function break__inst_97_98_94_90_76_tsni(p, ls
         tmp2 = lines_inst_97_98_94_90_tsni(s__);
         return match_s__rest_inst_97_98_94_90_tsni(l, tmp2)
       };
-      arr1 = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         NofibPrelude.Nil,
         tmp
-      ]);
-      return arr1
+      ])
     } else {
       scrut = break__inst_97_98_94_90_76_tsni(p, xs);
       if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -10516,11 +10508,10 @@ break__inst_97_98_94_90_76_tsni = function break__inst_97_98_94_90_76_tsni(p, ls
         ys = first0;
         zs = first1;
         tmp1 = NofibPrelude.Cons(x, ys);
-        arr2 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           zs
-        ]);
-        return arr2
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -12345,10 +12336,9 @@ foldr_inst_93_94_91_99_tsni = function foldr_inst_93_94_91_99_tsni(f, z, xs) {
   return runtime.safeCall(xs(f, z))
 };
 hash_inst_93_100_tsni = function hash_inst_93_100_tsni(str) {
-  let tmp, tmp1;
-  tmp = lambda2;
-  tmp1 = sorting.z_of_int(0);
-  return foldl_inst_93_100_101_tsni(tmp, tmp1, str)
+  let tmp;
+  tmp = sorting.z_of_int(0);
+  return foldl_inst_93_100_101_tsni(lambda2, tmp, str)
 };
 foldl_inst_93_100_101_tsni = function foldl_inst_93_100_101_tsni(f, a, xs) {
   return runtime.safeCall(xs(f, a))
@@ -12357,10 +12347,9 @@ foldr_inst_97_98_94_91_99_tsni = function foldr_inst_97_98_94_91_99_tsni(f, z, x
   return runtime.safeCall(xs(f, z))
 };
 hash_inst_97_98_100_tsni = function hash_inst_97_98_100_tsni(str) {
-  let tmp, tmp1;
-  tmp = lambda2;
-  tmp1 = sorting.z_of_int(0);
-  return foldl_inst_97_98_100_101_tsni(tmp, tmp1, str)
+  let tmp;
+  tmp = sorting.z_of_int(0);
+  return foldl_inst_97_98_100_101_tsni(lambda2, tmp, str)
 };
 foldl_inst_97_98_100_101_tsni = function foldl_inst_97_98_100_101_tsni(f, a, xs) {
   return runtime.safeCall(xs(f, a))
@@ -13242,10 +13231,9 @@ globalThis.Object.freeze(class sorting {
     return runtime.safeCall(globalThis.BigInt(x))
   } 
   static hash(str) {
-    let tmp, tmp1;
-    tmp = lambda2;
-    tmp1 = sorting.z_of_int(0);
-    return NofibPrelude.foldl(tmp, tmp1, str)
+    let tmp;
+    tmp = sorting.z_of_int(0);
+    return NofibPrelude.foldl(lambda2, tmp, str)
   } 
   static quickSort(xs) {
     let param0, param1, x, xs_, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -13267,7 +13255,7 @@ globalThis.Object.freeze(class sorting {
     }
   } 
   static select(p, x, ts_fs) {
-    let first1, first0, ts, fs, scrut, tmp, arr, tmp1, arr1;
+    let first1, first0, ts, fs, scrut, tmp, tmp1;
     if (runtime.Tuple.isArrayLike(ts_fs) && ts_fs.length === 2) {
       first0 = runtime.Tuple.get(ts_fs, 0);
       first1 = runtime.Tuple.get(ts_fs, 1);
@@ -13276,31 +13264,29 @@ globalThis.Object.freeze(class sorting {
       scrut = runtime.safeCall(p(x));
       if (scrut === true) {
         tmp = NofibPrelude.Cons(x, ts);
-        arr = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp,
           fs
-        ]);
-        return arr
+        ])
       } else {
         tmp1 = NofibPrelude.Cons(x, fs);
-        arr1 = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           ts,
           tmp1
-        ]);
-        return arr1
+        ])
       }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   } 
   static partition(p, xs) {
-    let arr, lambda$this;
-    arr = globalThis.Object.freeze([
+    let tmp, lambda$this;
+    tmp = globalThis.Object.freeze([
       NofibPrelude.Nil,
       NofibPrelude.Nil
     ]);
     lambda$this = runtime.safeCall(lambda3(p));
-    return NofibPrelude.foldr(lambda$this, arr, xs)
+    return NofibPrelude.foldr(lambda$this, tmp, xs)
   } 
   static quickSort2(xs) {
     let param0, param1, x, xs_, scrut, first1, first0, lo, hi, tmp, tmp1, tmp2, lambda$this;
@@ -13390,13 +13376,12 @@ globalThis.Object.freeze(class sorting {
     return unlines_inst_89_92_tsni(tmp1)
   } 
   static testSorting_nofib(d) {
-    let f, tmp, tmp1, tmp2, tmp3;
+    let f, tmp, tmp1, tmp2;
     tmp = runtime.safeCall(globalThis.fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/Main.hs"));
     tmp1 = runtime.safeCall(tmp.toString());
-    tmp2 = NofibPrelude.nofibStringToList(tmp1);
-    f = tmp2;
-    tmp3 = mangle_inst_93_94_tsni(f);
-    return hash_inst_93_100_tsni(tmp3)
+    f = NofibPrelude.nofibStringToList(tmp1);
+    tmp2 = mangle_inst_93_94_tsni(f);
+    return hash_inst_93_100_tsni(tmp2)
   } 
   static main() {
     return testSorting_nofib_inst_97_98_tsni(0)

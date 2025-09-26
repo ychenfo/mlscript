@@ -540,15 +540,15 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
                       val instantiated = t.instantiate(f.uid)(using this, cc)
                       cc.constrain(instantiated, ConsFun(argsTpe, appRes.asConsStrat))
               appRes.asProdStrat
-        case lam@Value.Lam(params, body) =>
-          val argsTpe = args.map(processResult)
-          val funTpe = processResult(lam)
-          val appRes = freshVar("call_lam_res", generatedForDef)
-          cc.constrain(funTpe, ConsFun(argsTpe, appRes.asConsStrat))
-          appRes.asProdStrat
+        // case lam@Value.Lam(params, body) =>
+        //   val argsTpe = args.map(processResult)
+        //   val funTpe = processResult(lam)
+        //   val appRes = freshVar("call_lam_res", generatedForDef)
+        //   cc.constrain(funTpe, ConsFun(argsTpe, appRes.asConsStrat))
+        //   appRes.asProdStrat
         case Value.This(sym) => throw NotDeforestableException("No support for `this` as a callee yet")
         case Value.Lit(lit) => lastWords(s"try to call literal $lit")
-        case Value.Arr(_, elems) => lastWords(s"try to call array $elems")
+        // case Value.Arr(_, elems) => lastWords(s"try to call array $elems")
     r match
     case sel@DeforestTupSelect(scrut, idx) =>
       val pStrat = processResult(scrut)
@@ -621,14 +621,14 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     
     case Value.This(sym) => throw NotDeforestableException("No support for `this` yet")
     case Value.Lit(lit) => NoProd
-    case Value.Lam(ParamList(_, params, N), body) => // TODO: the `restParam`
+    case Lambda(ParamList(_, params, N), body) => // TODO: the `restParam`
       val paramSyms = params.map:
         case Param(_, sym, _, _) => preAnalyzer.getProdVarForSym(sym).asConsStrat
       val bodyStrat = processBlock(body)
       val res = freshVar(s"lam_res", generatedForDef)
       cc.constrain(bodyStrat, res.asConsStrat)
       ProdFun(paramSyms, res.asProdStrat)
-    case Value.Arr(false, elems) =>
+    case Tuple(false, elems) =>
       val args = elems.zipWithIndex.map:
         case (Arg(N, value), n) =>
           TermSymbol(syntax.ImmutVal, N, Tree.Ident(n.toString())) ->
@@ -866,7 +866,7 @@ class GetCtorsTraverser(b: Block) extends BlockTraverser:
     case Instantiate(false, cls, args) =>
       if cls.asClsSymbol.isDefined then ctors += r.uid
       args.foreach(applyArg)
-    case Value.Arr(false, elems) =>
+    case Tuple(false, elems) =>
       ctors += r.uid
       elems.foreach:
         case Arg(N, v) => applyResult(v)
@@ -917,7 +917,7 @@ extension (r: Result)
   def getCtorSymFromCtorLikeExpr(using pre: DeforestPreAnalyzer) = r match
     case Call(f, _) => f.asClsSymbol
     case Instantiate(_, cls, _) => cls.asClsSymbol
-    case Value.Arr(_, elems) => S(pre.arrBlkMemSym(elems.length))
+    case Tuple(_, elems) => S(pre.arrBlkMemSym(elems.length))
     case p: Path => p.asObjSymbol
 
 object DeforestTupSelect:

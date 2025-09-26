@@ -74,18 +74,18 @@ match_xs_arm_Nil_inst_0_1_13_14_15_16_25_26_tsni = (undefined, function (ys) {
   return ys
 });
 match_ls_arm_Cons_inst_0_1_13_14_15_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_0_1_13_14_15_16_21_tsni, _deforest_Cons_tail_inst_0_1_13_14_15_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_0_1_13_14_15_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_0_1_13_14_15_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_0_1_13_14_15_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_0_1_13_14_15_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_0_1_13_14_15_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -159,18 +159,18 @@ match_xs_arm_Nil_inst_0_1_13_22_23_24_25_26_tsni = (undefined, function (ys) {
   return ys
 });
 match_ls_arm_Cons_inst_0_1_13_22_23_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_0_1_13_22_23_24_21_tsni, _deforest_Cons_tail_inst_0_1_13_22_23_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_0_1_13_22_23_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_0_1_13_22_23_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_0_1_13_22_23_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_0_1_13_22_23_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_0_1_13_22_23_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -284,18 +284,18 @@ match_xs_arm_Nil_inst_0_1_5_69_tsni = (undefined, function (f) {
   return NofibPrelude.Nil
 });
 match_ls_arm_Cons_inst_31_32_1_13_22_23_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_31_32_1_13_22_23_24_21_tsni, _deforest_Cons_tail_inst_31_32_1_13_22_23_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_31_32_1_13_22_23_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_31_32_1_13_22_23_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_31_32_1_13_22_23_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_31_32_1_13_22_23_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_31_32_1_13_22_23_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -407,18 +407,18 @@ match_xs_arm_Cons_inst_31_32_1_13_27_28_tsni = (undefined, function (f, _defores
   }
 });
 match_ls_arm_Cons_inst_31_32_1_13_14_15_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_31_32_1_13_14_15_16_21_tsni, _deforest_Cons_tail_inst_31_32_1_13_14_15_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_31_32_1_13_14_15_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_31_32_1_13_14_15_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_31_32_1_13_14_15_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_31_32_1_13_14_15_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_31_32_1_13_14_15_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -574,18 +574,18 @@ match_xs_arm_Nil_inst_33_16_25_26_tsni = (undefined, function (ys) {
   return ys
 });
 match_ls_arm_Cons_inst_33_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_33_16_21_tsni, _deforest_Cons_tail_inst_33_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_33_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_33_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_33_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_33_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_33_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -641,18 +641,18 @@ match_ls_arm_Cons_inst_33_16_21_tsni1 = (undefined, function (_deforest_Cons_hea
   return lscomp2$_inst_33_16_21_tsni(x, xs, tmp2)
 });
 match_ls_arm_Cons_inst_34_15_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_34_15_16_21_tsni, _deforest_Cons_tail_inst_34_15_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_34_15_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_34_15_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_34_15_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_34_15_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_34_15_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -732,18 +732,18 @@ match_xs_arm_Nil_inst_35_24_25_26_tsni = (undefined, function (ys) {
   return ys
 });
 match_ls_arm_Cons_inst_35_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_35_24_21_tsni, _deforest_Cons_tail_inst_35_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_35_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_35_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_35_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_35_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_35_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -799,18 +799,18 @@ match_ls_arm_Cons_inst_35_24_21_tsni1 = (undefined, function (_deforest_Cons_hea
   return lscomp2$_inst_35_24_21_tsni(x, xs, tmp2)
 });
 match_ls_arm_Cons_inst_36_23_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_36_23_24_21_tsni, _deforest_Cons_tail_inst_36_23_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_36_23_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_36_23_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_36_23_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_36_23_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_36_23_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -884,31 +884,31 @@ match_xs_arm_Nil_inst_40_8_9_68_tsni = (undefined, function (f) {
   return NofibPrelude.Nil
 });
 match_ls_arm_Cons_inst_41_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_41_tsni, _deforest_Cons_tail_inst_41_tsni) {
-  let param0, param1, y, ys, arr, tmp;
+  let param0, param1, y, ys, tmp, tmp1;
   param0 = _deforest_Cons_head_inst_41_tsni;
   param1 = _deforest_Cons_tail_inst_41_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_41_tsni(x, xs, ys);
-  return NofibPrelude.Cons(arr, tmp)
+  tmp1 = lscomp2$_inst_41_tsni(x, xs, ys);
+  return NofibPrelude.Cons(tmp, tmp1)
 });
 match_ls_arm_Cons_inst_45_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_45_21_tsni, _deforest_Cons_tail_inst_45_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_45_21_tsni;
   param1 = _deforest_Cons_tail_inst_45_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_45_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_45_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_45_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -998,18 +998,18 @@ match_xs_arm_Nil_inst_49_14_15_16_25_26_tsni = (undefined, function (ys) {
   return ys
 });
 match_ls_arm_Cons_inst_49_14_15_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_49_14_15_16_21_tsni, _deforest_Cons_tail_inst_49_14_15_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_49_14_15_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_49_14_15_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_49_14_15_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_49_14_15_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_49_14_15_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -1083,18 +1083,18 @@ match_xs_arm_Nil_inst_49_22_23_24_25_26_tsni = (undefined, function (ys) {
   return ys
 });
 match_ls_arm_Cons_inst_49_22_23_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_49_22_23_24_21_tsni, _deforest_Cons_tail_inst_49_22_23_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_49_22_23_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_49_22_23_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_49_22_23_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_49_22_23_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_49_22_23_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -1177,18 +1177,18 @@ match_xs_arm_Cons_inst_49_27_28_tsni = (undefined, function (f, _deforest_Cons_h
   }
 });
 match_ls_arm_Cons_inst_50_13_22_23_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_50_13_22_23_24_21_tsni, _deforest_Cons_tail_inst_50_13_22_23_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_50_13_22_23_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_50_13_22_23_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_50_13_22_23_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_50_13_22_23_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_50_13_22_23_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -1300,18 +1300,18 @@ match_xs_arm_Cons_inst_50_13_27_28_tsni = (undefined, function (f, _deforest_Con
   }
 });
 match_ls_arm_Cons_inst_50_13_14_15_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_50_13_14_15_16_21_tsni, _deforest_Cons_tail_inst_50_13_14_15_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_50_13_14_15_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_50_13_14_15_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_50_13_14_15_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_50_13_14_15_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_50_13_14_15_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -1473,18 +1473,18 @@ match_xs_arm_Nil_inst_51_56_25_26_tsni = (undefined, function (ys) {
   return ys
 });
 match_ls_arm_Cons_inst_51_56_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_51_56_21_tsni, _deforest_Cons_tail_inst_51_56_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_51_56_21_tsni;
   param1 = _deforest_Cons_tail_inst_51_56_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_51_56_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_51_56_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_51_56_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -1608,18 +1608,18 @@ match_xs_arm_Nil_inst_51_57_32_1_13_14_15_16_25_26_tsni = (undefined, function (
   return ys
 });
 match_ls_arm_Cons_inst_51_57_32_1_13_14_15_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_51_57_32_1_13_14_15_16_21_tsni, _deforest_Cons_tail_inst_51_57_32_1_13_14_15_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_51_57_32_1_13_14_15_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_51_57_32_1_13_14_15_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_51_57_32_1_13_14_15_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_51_57_32_1_13_14_15_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_51_57_32_1_13_14_15_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -1693,18 +1693,18 @@ match_xs_arm_Nil_inst_51_57_32_1_13_22_23_24_25_26_tsni = (undefined, function (
   return ys
 });
 match_ls_arm_Cons_inst_51_57_32_1_13_22_23_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_51_57_32_1_13_22_23_24_21_tsni, _deforest_Cons_tail_inst_51_57_32_1_13_22_23_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_51_57_32_1_13_22_23_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_51_57_32_1_13_22_23_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_51_57_32_1_13_22_23_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_51_57_32_1_13_22_23_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_51_57_32_1_13_22_23_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -1818,18 +1818,18 @@ match_xs_arm_Nil_inst_51_57_32_1_5_69_tsni = (undefined, function (f) {
   return NofibPrelude.Nil
 });
 match_ls_arm_Cons_inst_60_61_57_32_1_13_22_23_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_60_61_57_32_1_13_22_23_24_21_tsni, _deforest_Cons_tail_inst_60_61_57_32_1_13_22_23_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_60_61_57_32_1_13_22_23_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_60_61_57_32_1_13_22_23_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_60_61_57_32_1_13_22_23_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_60_61_57_32_1_13_22_23_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_60_61_57_32_1_13_22_23_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -1941,18 +1941,18 @@ match_xs_arm_Cons_inst_60_61_57_32_1_13_27_28_tsni = (undefined, function (f, _d
   }
 });
 match_ls_arm_Cons_inst_60_61_57_32_1_13_14_15_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_60_61_57_32_1_13_14_15_16_21_tsni, _deforest_Cons_tail_inst_60_61_57_32_1_13_14_15_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_60_61_57_32_1_13_14_15_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_60_61_57_32_1_13_14_15_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_60_61_57_32_1_13_14_15_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_60_61_57_32_1_13_14_15_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_60_61_57_32_1_13_14_15_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -2096,18 +2096,18 @@ match_t_arm_Branch_inst_60_61_57_32_1_2_tsni = (undefined, function (f, g, _defo
   }
 });
 match_ls_arm_Cons_inst_60_61_56_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_60_61_56_21_tsni, _deforest_Cons_tail_inst_60_61_56_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_60_61_56_21_tsni;
   param1 = _deforest_Cons_tail_inst_60_61_56_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_60_61_56_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_60_61_56_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_60_61_56_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -2204,18 +2204,18 @@ match_xs_arm_Nil_inst_63_64_61_56_25_26_tsni = (undefined, function (ys) {
   return ys
 });
 match_ls_arm_Cons_inst_63_64_61_56_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_63_64_61_56_21_tsni, _deforest_Cons_tail_inst_63_64_61_56_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_63_64_61_56_21_tsni;
   param1 = _deforest_Cons_tail_inst_63_64_61_56_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_63_64_61_56_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_63_64_61_56_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_63_64_61_56_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -2339,18 +2339,18 @@ match_xs_arm_Nil_inst_63_64_61_57_32_1_13_14_15_16_25_26_tsni = (undefined, func
   return ys
 });
 match_ls_arm_Cons_inst_63_64_61_57_32_1_13_14_15_16_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_63_64_61_57_32_1_13_14_15_16_21_tsni, _deforest_Cons_tail_inst_63_64_61_57_32_1_13_14_15_16_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_63_64_61_57_32_1_13_14_15_16_21_tsni;
   param1 = _deforest_Cons_tail_inst_63_64_61_57_32_1_13_14_15_16_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_63_64_61_57_32_1_13_14_15_16_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_63_64_61_57_32_1_13_14_15_16_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_63_64_61_57_32_1_13_14_15_16_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -2424,18 +2424,18 @@ match_xs_arm_Nil_inst_63_64_61_57_32_1_13_22_23_24_25_26_tsni = (undefined, func
   return ys
 });
 match_ls_arm_Cons_inst_63_64_61_57_32_1_13_22_23_24_21_tsni = (undefined, function (x, xs, _deforest_Cons_head_inst_63_64_61_57_32_1_13_22_23_24_21_tsni, _deforest_Cons_tail_inst_63_64_61_57_32_1_13_22_23_24_21_tsni) {
-  let param0, param1, y, ys, arr, tmp, _deforest_Cons_head, _deforest_Cons_tail;
+  let param0, param1, y, ys, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
   param0 = _deforest_Cons_head_inst_63_64_61_57_32_1_13_22_23_24_21_tsni;
   param1 = _deforest_Cons_tail_inst_63_64_61_57_32_1_13_22_23_24_21_tsni;
   y = param0;
   ys = param1;
-  arr = globalThis.Object.freeze([
+  tmp = globalThis.Object.freeze([
     x,
     y
   ]);
-  tmp = lscomp2$_inst_63_64_61_57_32_1_13_22_23_24_21_tsni(x, xs, ys);
-  _deforest_Cons_head = arr;
-  _deforest_Cons_tail = tmp;
+  tmp1 = lscomp2$_inst_63_64_61_57_32_1_13_22_23_24_21_tsni(x, xs, ys);
+  _deforest_Cons_head = tmp;
+  _deforest_Cons_tail = tmp1;
   return (f) => {
     return match_xs_arm_Cons_inst_63_64_61_57_32_1_13_22_23_24_17_tsni(f, _deforest_Cons_head, _deforest_Cons_tail)
   }
@@ -6581,25 +6581,24 @@ best_inst_51_58_tsni = function best_inst_51_58_tsni(f, bs, ss) {
   }
 };
 best_$_inst_51_58_59_tsni = function best_$_inst_51_58_59_tsni(f, b, s, ls1, ls2) {
-  let param0, param1, b_, bs, param01, param11, s_, ss, scrut, arr, tmp, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, b_, bs, param01, param11, s_, ss, scrut, tmp, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (ls1 instanceof NofibPrelude.Nil.class) {
     if (ls2 instanceof NofibPrelude.Nil.class) {
       _deforest_Deforest_Arr_2_0 = b;
       _deforest_Deforest_Arr_2_1 = s;
-      arr = (f1, g, opposition) => {
-        let first1, first0, boardd, eval1, arr1, tmp1;
+      return (f1, g, opposition) => {
+        let first1, first0, boardd, eval1, tmp1, tmp2;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         boardd = first0;
         eval1 = first1;
-        arr1 = globalThis.Object.freeze([
+        tmp1 = globalThis.Object.freeze([
           boardd,
           eval1
         ]);
-        tmp1 = minimax.alternate(opposition, g, f1, boardd);
-        return NofibPrelude.Cons(arr1, tmp1)
-      };
-      return arr
+        tmp2 = minimax.alternate(opposition, g, f1, boardd);
+        return NofibPrelude.Cons(tmp1, tmp2)
+      }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -6680,56 +6679,55 @@ best_inst_60_61_58_tsni = function best_inst_60_61_58_tsni(f, bs, ss) {
   }
 };
 best_$_inst_60_61_58_59_tsni = function best_$_inst_60_61_58_59_tsni(f, b, s, ls1, ls2) {
-  let param0, param1, b_, bs, param01, param11, s_, ss, scrut, arr, tmp, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, b_, bs, param01, param11, s_, ss, scrut, tmp, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (ls1 instanceof NofibPrelude.Nil.class) {
     if (ls2 instanceof NofibPrelude.Nil.class) {
       _deforest_Deforest_Arr_2_0 = b;
       _deforest_Deforest_Arr_2_1 = s;
-      arr = (f1, g, opposition) => {
-        let first1, first0, boardd, eval1, arr1, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+      return (f1, g, opposition) => {
+        let first1, first0, boardd, eval1, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         boardd = first0;
         eval1 = first1;
         _deforest_Deforest_Arr_2_01 = boardd;
         _deforest_Deforest_Arr_2_11 = eval1;
-        arr1 = () => {
-          let first11, first01, b1, e, tmp2, tmp3, tmp4, tmp5;
+        tmp1 = () => {
+          let first11, first01, b1, e, tmp3, tmp4, tmp5, tmp6;
           first01 = _deforest_Deforest_Arr_2_01;
           first11 = _deforest_Deforest_Arr_2_11;
           b1 = first01;
           e = first11;
-          tmp2 = minimax.showEvaluation(e);
-          tmp3 = NofibPrelude.nofibStringToList("\n");
-          tmp4 = minimax.showBoard(b1);
-          tmp5 = NofibPrelude.append(tmp3, tmp4);
-          return NofibPrelude.append(tmp2, tmp5)
+          tmp3 = minimax.showEvaluation(e);
+          tmp4 = NofibPrelude.nofibStringToList("\n");
+          tmp5 = minimax.showBoard(b1);
+          tmp6 = NofibPrelude.append(tmp4, tmp5);
+          return NofibPrelude.append(tmp3, tmp6)
         };
-        tmp1 = alternate_inst_60_61_tsni(opposition, g, f1, boardd);
-        _deforest_Cons_head = arr1;
-        _deforest_Cons_tail = tmp1;
+        tmp2 = alternate_inst_60_61_tsni(opposition, g, f1, boardd);
+        _deforest_Cons_head = tmp1;
+        _deforest_Cons_tail = tmp2;
         return (f2) => {
-          let param02, param12, x, xs, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1;
+          let param02, param12, x, xs, tmp3, tmp4, _deforest_Cons_head1, _deforest_Cons_tail1;
           param02 = _deforest_Cons_head;
           param12 = _deforest_Cons_tail;
           x = param02;
           xs = param12;
-          tmp2 = runtime.safeCall(f2(x));
-          tmp3 = map_inst_60_62_tsni(f2, xs);
-          _deforest_Cons_head1 = tmp2;
-          _deforest_Cons_tail1 = tmp3;
+          tmp3 = runtime.safeCall(f2(x));
+          tmp4 = map_inst_60_62_tsni(f2, xs);
+          _deforest_Cons_head1 = tmp3;
+          _deforest_Cons_tail1 = tmp4;
           return () => {
-            let param03, param13, x1, xs1, tmp4;
+            let param03, param13, x1, xs1, tmp5;
             param03 = _deforest_Cons_head1;
             param13 = _deforest_Cons_tail1;
             x1 = param03;
             xs1 = param13;
-            tmp4 = concat_inst_60_65_tsni(xs1);
-            return NofibPrelude.append(x1, tmp4)
+            tmp5 = concat_inst_60_65_tsni(xs1);
+            return NofibPrelude.append(x1, tmp5)
           }
         }
-      };
-      return arr
+      }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -7784,7 +7782,7 @@ map_inst_60_62_tsni = function map_inst_60_62_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
 prog_inst_63_64_tsni = function prog_inst_63_64_tsni(input) {
-  let testBoard, game, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16;
+  let testBoard, game, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
   tmp = NofibPrelude.Cons(minimax.Empty, NofibPrelude.Nil);
   tmp1 = NofibPrelude.Cons(minimax.O, tmp);
   tmp2 = NofibPrelude.Cons(minimax.Empty, tmp1);
@@ -7796,15 +7794,13 @@ prog_inst_63_64_tsni = function prog_inst_63_64_tsni(input) {
   tmp8 = NofibPrelude.Cons(minimax.Empty, tmp7);
   tmp9 = NofibPrelude.Cons(tmp8, NofibPrelude.Nil);
   tmp10 = NofibPrelude.Cons(tmp5, tmp9);
-  tmp11 = NofibPrelude.Cons(tmp2, tmp10);
-  testBoard = tmp11;
-  tmp12 = board$(testBoard, input);
-  tmp13 = alternate_inst_63_64_61_tsni(minimax.X, minimax.max_, minimax.min_, tmp12);
-  game = tmp13;
-  tmp14 = NofibPrelude.nofibStringToList("OXO\n");
-  tmp15 = map_inst_63_64_62_tsni(showMove_inst_63_64_73_tsni, game);
-  tmp16 = concat_inst_63_64_65_tsni(tmp15);
-  return append_inst_63_64_66_tsni(tmp14, tmp16)
+  testBoard = NofibPrelude.Cons(tmp2, tmp10);
+  tmp11 = board$(testBoard, input);
+  game = alternate_inst_63_64_61_tsni(minimax.X, minimax.max_, minimax.min_, tmp11);
+  tmp12 = NofibPrelude.nofibStringToList("OXO\n");
+  tmp13 = map_inst_63_64_62_tsni(showMove_inst_63_64_73_tsni, game);
+  tmp14 = concat_inst_63_64_65_tsni(tmp13);
+  return append_inst_63_64_66_tsni(tmp12, tmp14)
 };
 map_inst_63_64_62_tsni = function map_inst_63_64_62_tsni(f, xs) {
   return runtime.safeCall(xs(f))
@@ -8885,56 +8881,55 @@ best_inst_63_64_61_58_tsni = function best_inst_63_64_61_58_tsni(f, bs, ss) {
   }
 };
 best_$_inst_63_64_61_58_59_tsni = function best_$_inst_63_64_61_58_59_tsni(f, b, s, ls1, ls2) {
-  let param0, param1, b_, bs, param01, param11, s_, ss, scrut, arr, tmp, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let param0, param1, b_, bs, param01, param11, s_, ss, scrut, tmp, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   if (ls1 instanceof NofibPrelude.Nil.class) {
     if (ls2 instanceof NofibPrelude.Nil.class) {
       _deforest_Deforest_Arr_2_0 = b;
       _deforest_Deforest_Arr_2_1 = s;
-      arr = (f1, g, opposition) => {
-        let first1, first0, boardd, eval1, arr1, tmp1, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+      return (f1, g, opposition) => {
+        let first1, first0, boardd, eval1, tmp1, tmp2, _deforest_Cons_head, _deforest_Cons_tail, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
         first0 = _deforest_Deforest_Arr_2_0;
         first1 = _deforest_Deforest_Arr_2_1;
         boardd = first0;
         eval1 = first1;
         _deforest_Deforest_Arr_2_01 = boardd;
         _deforest_Deforest_Arr_2_11 = eval1;
-        arr1 = () => {
-          let first11, first01, b1, e, tmp2, tmp3, tmp4, tmp5;
+        tmp1 = () => {
+          let first11, first01, b1, e, tmp3, tmp4, tmp5, tmp6;
           first01 = _deforest_Deforest_Arr_2_01;
           first11 = _deforest_Deforest_Arr_2_11;
           b1 = first01;
           e = first11;
-          tmp2 = minimax.showEvaluation(e);
-          tmp3 = NofibPrelude.nofibStringToList("\n");
-          tmp4 = minimax.showBoard(b1);
-          tmp5 = NofibPrelude.append(tmp3, tmp4);
-          return NofibPrelude.append(tmp2, tmp5)
+          tmp3 = minimax.showEvaluation(e);
+          tmp4 = NofibPrelude.nofibStringToList("\n");
+          tmp5 = minimax.showBoard(b1);
+          tmp6 = NofibPrelude.append(tmp4, tmp5);
+          return NofibPrelude.append(tmp3, tmp6)
         };
-        tmp1 = alternate_inst_63_64_61_tsni(opposition, g, f1, boardd);
-        _deforest_Cons_head = arr1;
-        _deforest_Cons_tail = tmp1;
+        tmp2 = alternate_inst_63_64_61_tsni(opposition, g, f1, boardd);
+        _deforest_Cons_head = tmp1;
+        _deforest_Cons_tail = tmp2;
         return (f2) => {
-          let param02, param12, x, xs, tmp2, tmp3, _deforest_Cons_head1, _deforest_Cons_tail1;
+          let param02, param12, x, xs, tmp3, tmp4, _deforest_Cons_head1, _deforest_Cons_tail1;
           param02 = _deforest_Cons_head;
           param12 = _deforest_Cons_tail;
           x = param02;
           xs = param12;
-          tmp2 = runtime.safeCall(f2(x));
-          tmp3 = map_inst_63_64_62_tsni(f2, xs);
-          _deforest_Cons_head1 = tmp2;
-          _deforest_Cons_tail1 = tmp3;
+          tmp3 = runtime.safeCall(f2(x));
+          tmp4 = map_inst_63_64_62_tsni(f2, xs);
+          _deforest_Cons_head1 = tmp3;
+          _deforest_Cons_tail1 = tmp4;
           return () => {
-            let param03, param13, x1, xs1, tmp4;
+            let param03, param13, x1, xs1, tmp5;
             param03 = _deforest_Cons_head1;
             param13 = _deforest_Cons_tail1;
             x1 = param03;
             xs1 = param13;
-            tmp4 = concat_inst_63_64_65_tsni(xs1);
-            return append_inst_63_64_65_26_tsni(x1, tmp4)
+            tmp5 = concat_inst_63_64_65_tsni(xs1);
+            return append_inst_63_64_65_26_tsni(x1, tmp5)
           }
         }
-      };
-      return arr
+      }
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9304,14 +9299,13 @@ lambda8 = (undefined, function (f, g) {
   }
 });
 best_$ = function best_$(f, b, s, ls1, ls2) {
-  let param0, param1, b_, bs, param01, param11, s_, ss, scrut, arr, tmp;
+  let param0, param1, b_, bs, param01, param11, s_, ss, scrut, tmp;
   if (ls1 instanceof NofibPrelude.Nil.class) {
     if (ls2 instanceof NofibPrelude.Nil.class) {
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         b,
         s
-      ]);
-      return arr
+      ])
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9382,7 +9376,7 @@ lambda3 = (undefined, function (x, y) {
   return minimax1.map2(minimax1.scorePiece, x, y)
 });
 lscomp2$ = function lscomp2$(x, xs, ls) {
-  let param0, param1, y, ys, arr, tmp;
+  let param0, param1, y, ys, tmp, tmp1;
   if (ls instanceof NofibPrelude.Nil.class) {
     return lscomp1(xs)
   } else if (ls instanceof NofibPrelude.Cons.class) {
@@ -9390,12 +9384,12 @@ lscomp2$ = function lscomp2$(x, xs, ls) {
     param1 = ls.tail;
     y = param0;
     ys = param1;
-    arr = globalThis.Object.freeze([
+    tmp = globalThis.Object.freeze([
       x,
       y
     ]);
-    tmp = lscomp2$(x, xs, ys);
-    return NofibPrelude.Cons(arr, tmp)
+    tmp1 = lscomp2$(x, xs, ys);
+    return NofibPrelude.Cons(tmp, tmp1)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -10709,7 +10703,7 @@ globalThis.Object.freeze(class minimax {
     }
   } 
   static prog(input) {
-    let testBoard, game, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16;
+    let testBoard, game, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
     tmp = NofibPrelude.Cons(minimax.Empty, NofibPrelude.Nil);
     tmp1 = NofibPrelude.Cons(minimax.O, tmp);
     tmp2 = NofibPrelude.Cons(minimax.Empty, tmp1);
@@ -10721,15 +10715,13 @@ globalThis.Object.freeze(class minimax {
     tmp8 = NofibPrelude.Cons(minimax.Empty, tmp7);
     tmp9 = NofibPrelude.Cons(tmp8, NofibPrelude.Nil);
     tmp10 = NofibPrelude.Cons(tmp5, tmp9);
-    tmp11 = NofibPrelude.Cons(tmp2, tmp10);
-    testBoard = tmp11;
-    tmp12 = board$(testBoard, input);
-    tmp13 = alternate_inst_60_61_tsni(minimax.X, minimax.max_, minimax.min_, tmp12);
-    game = tmp13;
-    tmp14 = NofibPrelude.nofibStringToList("OXO\n");
-    tmp15 = map_inst_60_62_tsni(showMove_inst_60_73_tsni, game);
-    tmp16 = concat_inst_60_65_tsni(tmp15);
-    return NofibPrelude.append(tmp14, tmp16)
+    testBoard = NofibPrelude.Cons(tmp2, tmp10);
+    tmp11 = board$(testBoard, input);
+    game = alternate_inst_60_61_tsni(minimax.X, minimax.max_, minimax.min_, tmp11);
+    tmp12 = NofibPrelude.nofibStringToList("OXO\n");
+    tmp13 = map_inst_60_62_tsni(showMove_inst_60_73_tsni, game);
+    tmp14 = concat_inst_60_65_tsni(tmp13);
+    return NofibPrelude.append(tmp12, tmp14)
   } 
   static main() {
     let tmp;

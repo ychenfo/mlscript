@@ -115,9 +115,8 @@ lscomp$_inst_2_3_1_tsni = function lscomp$_inst_2_3_1_tsni(a, ls) {
   }
 };
 uniclHelper_inst_4_5_tsni = function uniclHelper_inst_4_5_tsni(p, x) {
-  let cp, scrut, tmp;
-  tmp = clausify.clause(p);
-  cp = tmp;
+  let cp, scrut;
+  cp = clausify.clause(p);
   scrut = tautclause_inst_4_5_3_tsni(cp);
   if (scrut === true) {
     return x
@@ -244,9 +243,8 @@ unicl_inst_9_10_tsni = function unicl_inst_9_10_tsni(a) {
   return foldr_inst_9_10_27_tsni(uniclHelper_inst_9_10_5_tsni, NofibPrelude.Nil, a)
 };
 uniclHelper_inst_9_10_5_tsni = function uniclHelper_inst_9_10_5_tsni(p, x) {
-  let cp, scrut, tmp;
-  tmp = clausify.clause(p);
-  cp = tmp;
+  let cp, scrut;
+  cp = clausify.clause(p);
   scrut = tautclause_inst_9_10_5_3_tsni(cp);
   if (scrut === true) {
     return x
@@ -316,9 +314,11 @@ lscomp$_inst_9_10_5_3_1_tsni = function lscomp$_inst_9_10_5_3_1_tsni(a, ls) {
   }
 };
 split_inst_9_11_tsni = function split_inst_9_11_tsni(p) {
-  return splitHelper_inst_9_11_12_tsni(p, (f, z) => {
+  let lambda7;
+  lambda7 = (f, z) => {
     return z
-  })
+  };
+  return splitHelper_inst_9_11_12_tsni(p, lambda7)
 };
 splitHelper_inst_9_11_12_tsni = function splitHelper_inst_9_11_12_tsni(p, a) {
   let param0, param1, p1, q, tmp, _deforest_Cons_head, _deforest_Cons_tail;
@@ -568,9 +568,8 @@ unicl_inst_15_16_10_tsni = function unicl_inst_15_16_10_tsni(a) {
   return foldr_inst_15_16_10_27_tsni(uniclHelper_inst_15_16_10_5_tsni, NofibPrelude.Nil, a)
 };
 uniclHelper_inst_15_16_10_5_tsni = function uniclHelper_inst_15_16_10_5_tsni(p, x) {
-  let cp, scrut, tmp;
-  tmp = clausify.clause(p);
-  cp = tmp;
+  let cp, scrut;
+  cp = clausify.clause(p);
   scrut = tautclause_inst_15_16_10_5_3_tsni(cp);
   if (scrut === true) {
     return x
@@ -640,9 +639,11 @@ lscomp$_inst_15_16_10_5_3_1_tsni = function lscomp$_inst_15_16_10_5_3_1_tsni(a, 
   }
 };
 split_inst_15_16_11_tsni = function split_inst_15_16_11_tsni(p) {
-  return splitHelper_inst_15_16_11_12_tsni(p, (f, z) => {
+  let lambda7;
+  lambda7 = (f, z) => {
     return z
-  })
+  };
+  return splitHelper_inst_15_16_11_12_tsni(p, lambda7)
 };
 splitHelper_inst_15_16_11_12_tsni = function splitHelper_inst_15_16_11_12_tsni(p, a) {
   let param0, param1, p1, q, tmp, _deforest_Cons_head, _deforest_Cons_tail;
@@ -734,12 +735,11 @@ append_inst_15_16_19_20_tsni = function append_inst_15_16_19_20_tsni(xs, ys) {
   }
 };
 testClausify_nofib_inst_21_22_tsni = function testClausify_nofib_inst_21_22_tsni(n) {
-  let xs, tmp, tmp1, tmp2;
+  let xs, tmp, tmp1;
   tmp = NofibPrelude.nofibStringToList("a = a = a");
-  tmp1 = replicate_inst_21_22_17_tsni(n, tmp);
-  xs = tmp1;
-  tmp2 = map_inst_21_22_18_tsni(clauses_inst_21_22_16_tsni, xs);
-  return concat_inst_21_22_23_tsni(tmp2)
+  xs = replicate_inst_21_22_17_tsni(n, tmp);
+  tmp1 = map_inst_21_22_18_tsni(clauses_inst_21_22_16_tsni, xs);
+  return concat_inst_21_22_23_tsni(tmp1)
 };
 map_inst_21_22_18_tsni = function map_inst_21_22_18_tsni(f, xs) {
   return runtime.safeCall(xs(f))
@@ -759,9 +759,8 @@ unicl_inst_21_22_16_10_tsni = function unicl_inst_21_22_16_10_tsni(a) {
   return foldr_inst_21_22_16_10_27_tsni(uniclHelper_inst_21_22_16_10_5_tsni, NofibPrelude.Nil, a)
 };
 uniclHelper_inst_21_22_16_10_5_tsni = function uniclHelper_inst_21_22_16_10_5_tsni(p, x) {
-  let cp, scrut, tmp;
-  tmp = clausify.clause(p);
-  cp = tmp;
+  let cp, scrut;
+  cp = clausify.clause(p);
   scrut = tautclause_inst_21_22_16_10_5_3_tsni(cp);
   if (scrut === true) {
     return x
@@ -831,9 +830,11 @@ lscomp$_inst_21_22_16_10_5_3_1_tsni = function lscomp$_inst_21_22_16_10_5_3_1_ts
   }
 };
 split_inst_21_22_16_11_tsni = function split_inst_21_22_16_11_tsni(p) {
-  return splitHelper_inst_21_22_16_11_12_tsni(p, (f, z) => {
+  let lambda7;
+  lambda7 = (f, z) => {
     return z
-  })
+  };
+  return splitHelper_inst_21_22_16_11_12_tsni(p, lambda7)
 };
 splitHelper_inst_21_22_16_11_12_tsni = function splitHelper_inst_21_22_16_11_12_tsni(p, a) {
   let param0, param1, p1, q, tmp, _deforest_Cons_head, _deforest_Cons_tail;
@@ -1367,7 +1368,7 @@ globalThis.Object.freeze(class clausify {
     }
   } 
   static clauseHelper(p, x) {
-    let param0, param01, s, first1, first0, c, a, s1, c1, a1, param1, p1, q, tmp, tmp1, arr, tmp2, arr1;
+    let param0, param01, s, first1, first0, c, a, s1, c1, a1, param1, p1, q, tmp, tmp1, tmp2;
     if (p instanceof clausify.Dis.class) {
       param0 = p.a;
       param1 = p.b;
@@ -1384,11 +1385,10 @@ globalThis.Object.freeze(class clausify {
         c1 = first0;
         a1 = first1;
         tmp1 = clausify.insert(s1, c1);
-        arr = globalThis.Object.freeze([
+        return globalThis.Object.freeze([
           tmp1,
           a1
-        ]);
-        return arr
+        ])
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -1403,11 +1403,10 @@ globalThis.Object.freeze(class clausify {
           c = first0;
           a = first1;
           tmp2 = clausify.insert(s, a);
-          arr1 = globalThis.Object.freeze([
+          return globalThis.Object.freeze([
             c,
             tmp2
-          ]);
-          return arr1
+          ])
         } else {
           throw globalThis.Object.freeze(new globalThis.Error("match error"))
         }
@@ -1419,12 +1418,12 @@ globalThis.Object.freeze(class clausify {
     }
   } 
   static clause(p) {
-    let arr;
-    arr = globalThis.Object.freeze([
+    let tmp;
+    tmp = globalThis.Object.freeze([
       NofibPrelude.Nil,
       NofibPrelude.Nil
     ]);
-    return clausify.clauseHelper(p, arr)
+    return clausify.clauseHelper(p, tmp)
   } 
   static conjunct(p) {
     let param0, param1;
@@ -1437,7 +1436,7 @@ globalThis.Object.freeze(class clausify {
     }
   } 
   static disin(p) {
-    let param0, param1, p1, q, p2, q1, dp, dq, scrut, param01, param11, p3, q2, r, p4, param02, param12, q3, r1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, lambda$this;
+    let param0, param1, p1, q, p2, q1, dp, dq, scrut, param01, param11, p3, q2, r, p4, param02, param12, q3, r1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, lambda$this;
     if (p instanceof clausify.Dis.class) {
       param0 = p.a;
       param1 = p.b;
@@ -1467,16 +1466,14 @@ globalThis.Object.freeze(class clausify {
         } else {
           p2 = param0;
           q1 = param1;
-          tmp8 = clausify.disin(p2);
-          dp = tmp8;
-          tmp9 = clausify.disin(q1);
-          dq = tmp9;
-          tmp10 = clausify.conjunct(dp);
+          dp = clausify.disin(p2);
+          dq = clausify.disin(q1);
+          tmp8 = clausify.conjunct(dp);
           lambda$this = runtime.safeCall(lambda(dq));
-          scrut = runtime.short_or(tmp10, lambda$this);
+          scrut = runtime.short_or(tmp8, lambda$this);
           if (scrut === true) {
-            tmp11 = clausify.Dis(dp, dq);
-            return clausify.disin(tmp11)
+            tmp9 = clausify.Dis(dp, dq);
+            return clausify.disin(tmp9)
           } else {
             return clausify.Dis(dp, dq)
           }
@@ -1487,9 +1484,9 @@ globalThis.Object.freeze(class clausify {
       param1 = p.b;
       p1 = param0;
       q = param1;
-      tmp12 = clausify.disin(p1);
-      tmp13 = clausify.disin(q);
-      return clausify.Con(tmp12, tmp13)
+      tmp10 = clausify.disin(p1);
+      tmp11 = clausify.disin(q);
+      return clausify.Con(tmp10, tmp11)
     } else {
       return p
     }
@@ -2029,9 +2026,8 @@ globalThis.Object.freeze(class clausify {
     }
   } 
   static uniclHelper(p, x) {
-    let cp, scrut, tmp;
-    tmp = clausify.clause(p);
-    cp = tmp;
+    let cp, scrut;
+    cp = clausify.clause(p);
     scrut = tautclause_inst_2_3_tsni(cp);
     if (scrut === true) {
       return x
@@ -2076,12 +2072,11 @@ globalThis.Object.freeze(class clausify {
     return concat_inst_9_19_tsni(tmp6)
   } 
   static testClausify_nofib(n) {
-    let xs, tmp, tmp1, tmp2;
+    let xs, tmp, tmp1;
     tmp = NofibPrelude.nofibStringToList("a = a = a");
-    tmp1 = replicate_inst_15_17_tsni(n, tmp);
-    xs = tmp1;
-    tmp2 = map_inst_15_18_tsni(clauses_inst_15_16_tsni, xs);
-    return concat_inst_15_23_tsni(tmp2)
+    xs = replicate_inst_15_17_tsni(n, tmp);
+    tmp1 = map_inst_15_18_tsni(clauses_inst_15_16_tsni, xs);
+    return concat_inst_15_23_tsni(tmp1)
   } 
   static main() {
     let tmp;

@@ -90,13 +90,12 @@ ppn_inst_0_tsni = function ppn_inst_0_tsni(n, ter) {
   }
 };
 ppenv_inst_0_tsni = function ppenv_inst_0_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda26;
-  tmp2 = flatMap_inst_0_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_0_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_0_1_tsni(lambda26, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_0_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 flatMap_inst_0_1_tsni = function flatMap_inst_0_1_tsni(f, ls) {
   let param0, param1, h, t, tmp, tmp1;
@@ -144,7 +143,7 @@ traverseTerm_inst_3_tsni = function traverseTerm_inst_3_tsni(t) {
   return eval_inst_3_tsni(t)
 };
 eval_inst_3_tsni = function eval_inst_3_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -170,16 +169,16 @@ eval_inst_3_tsni = function eval_inst_3_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_3_20_tsni(x, b1));
-    return myBind_inst_3_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_3_20_tsni(x, b1));
+    return myBind_inst_3_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_3_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_3_tsni1(v));
-    return myBind_inst_3_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_3_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_3_tsni1(v));
+    return myBind_inst_3_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -187,14 +186,14 @@ eval_inst_3_tsni = function eval_inst_3_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_3_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_3_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_3_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_3_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_3_87_tsni(lambda.incr, lambda_inst_3_31_tsni)
   } else {
@@ -225,7 +224,7 @@ lambda$_inst_3_tsni1 = function lambda$_inst_3_tsni(v, u_) {
   return apply_inst_3_tsni(u_, v)
 };
 apply_inst_3_tsni = function apply_inst_3_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -235,8 +234,8 @@ apply_inst_3_tsni = function apply_inst_3_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_3_tsni2(a, x, b, e));
-      return myBind_inst_3_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_3_tsni2(a, x, b, e));
+      return myBind_inst_3_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -268,10 +267,9 @@ lambda$_inst_3_tsni3 = function lambda$_inst_3_tsni(v, u_) {
   return myBind_inst_3_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_3_tsni = function traverseCon_inst_3_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_3_tsni(t);
-  tmp1 = lambda_inst_3_14_tsni;
-  return myBind_inst_3_81_tsni(tmp, tmp1)
+  return myBind_inst_3_81_tsni(tmp, lambda_inst_3_14_tsni)
 };
 lambda_inst_3_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -281,7 +279,7 @@ lambda_inst_3_tsni4 = (undefined, function (x) {
 lambda$_inst_3_tsni4 = function lambda$_inst_3_tsni(x, e) {
   let tmp;
   tmp = lookupVar_inst_3_4_tsni(x);
-  return myBind_inst_3_13_tsni(tmp, lambda17)
+  return myBind_inst_3_13_tsni(tmp, lambda16)
 };
 lookupVar_inst_3_4_tsni = function lookupVar_inst_3_4_tsni(v) {
   let lambda$this;
@@ -349,9 +347,9 @@ myReturn_inst_3_4_5_6_9_tsni = function myReturn_inst_3_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_3_4_10_tsni = function myBind_inst_3_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_3_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_3_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -365,10 +363,10 @@ lambda_inst_3_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_3_4_5_6_9_11_12_tsni = function lambda$_inst_3_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -376,13 +374,12 @@ lambda$_inst_3_4_5_6_9_11_12_tsni = function lambda$_inst_3_4_5_6_9_11_12_tsni(a
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_3_13_tsni = function myBind_inst_3_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_3_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_3_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -434,9 +431,9 @@ myReturn_inst_3_16_17_18_tsni = function myReturn_inst_3_16_17_18_tsni(a) {
   }
 };
 myBind_inst_3_19_tsni = function myBind_inst_3_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_3_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_3_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -467,9 +464,9 @@ myReturn_inst_3_20_21_22_tsni = function myReturn_inst_3_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_3_23_tsni = function pushVar_inst_3_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_3_23_24_tsni(v, t, m));
-  return myBind_inst_3_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_3_23_24_tsni(v, t, m));
+  return myBind_inst_3_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_3_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -477,13 +474,13 @@ lambda_inst_3_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_3_23_24_25_tsni = function lambda$_inst_3_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_3_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_3_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_3_23_24_25_26_tsni = function withEnv_inst_3_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -502,9 +499,9 @@ myReturn_inst_3_23_24_25_26_27_tsni = function myReturn_inst_3_23_24_25_26_27_ts
   }
 };
 myBind_inst_3_23_28_tsni = function myBind_inst_3_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_3_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_3_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -518,18 +515,17 @@ lambda_inst_3_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_3_23_24_25_26_27_11_12_tsni = function lambda$_inst_3_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_3_29_tsni = function withEnv_inst_3_29_tsni(tmp, m) {
   let tmp1;
@@ -548,9 +544,9 @@ myReturn_inst_3_29_27_tsni = function myReturn_inst_3_29_27_tsni(a) {
   }
 };
 myBind_inst_3_30_tsni = function myBind_inst_3_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_3_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_3_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -578,7 +574,7 @@ traverseTerm_inst_33_tsni = function traverseTerm_inst_33_tsni(t) {
   return eval_inst_33_tsni(t)
 };
 eval_inst_33_tsni = function eval_inst_33_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -604,16 +600,16 @@ eval_inst_33_tsni = function eval_inst_33_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_33_20_tsni(x, b1));
-    return myBind_inst_33_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_33_20_tsni(x, b1));
+    return myBind_inst_33_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_33_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_33_tsni1(v));
-    return myBind_inst_33_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_33_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_33_tsni1(v));
+    return myBind_inst_33_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -621,14 +617,14 @@ eval_inst_33_tsni = function eval_inst_33_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_33_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_33_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_33_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_33_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_33_87_tsni(lambda.incr, lambda_inst_33_31_tsni)
   } else {
@@ -659,7 +655,7 @@ lambda$_inst_33_tsni1 = function lambda$_inst_33_tsni(v, u_) {
   return apply_inst_33_tsni(u_, v)
 };
 apply_inst_33_tsni = function apply_inst_33_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -669,8 +665,8 @@ apply_inst_33_tsni = function apply_inst_33_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_33_tsni2(a, x, b, e));
-      return myBind_inst_33_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_33_tsni2(a, x, b, e));
+      return myBind_inst_33_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -702,10 +698,9 @@ lambda$_inst_33_tsni3 = function lambda$_inst_33_tsni(v, u_) {
   return myBind_inst_33_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_33_tsni = function traverseCon_inst_33_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_33_tsni(t);
-  tmp1 = lambda_inst_33_14_tsni;
-  return myBind_inst_33_81_tsni(tmp, tmp1)
+  return myBind_inst_33_81_tsni(tmp, lambda_inst_33_14_tsni)
 };
 lambda_inst_33_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -781,9 +776,9 @@ myReturn_inst_33_4_5_6_9_tsni = function myReturn_inst_33_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_33_4_10_tsni = function myBind_inst_33_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_33_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_33_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -797,10 +792,10 @@ lambda_inst_33_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_33_4_5_6_9_11_12_tsni = function lambda$_inst_33_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -808,8 +803,7 @@ lambda$_inst_33_4_5_6_9_11_12_tsni = function lambda$_inst_33_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 lambda_inst_33_14_tsni = (undefined, function (_t) {
   let param0, c;
@@ -855,9 +849,9 @@ myReturn_inst_33_16_17_18_tsni = function myReturn_inst_33_16_17_18_tsni(a) {
   }
 };
 myBind_inst_33_19_tsni = function myBind_inst_33_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_33_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_33_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -888,9 +882,9 @@ myReturn_inst_33_20_21_22_tsni = function myReturn_inst_33_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_33_23_tsni = function pushVar_inst_33_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_33_23_24_tsni(v, t, m));
-  return myBind_inst_33_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_33_23_24_tsni(v, t, m));
+  return myBind_inst_33_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_33_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -898,13 +892,13 @@ lambda_inst_33_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_33_23_24_25_tsni = function lambda$_inst_33_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_33_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_33_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_33_23_24_25_26_tsni = function withEnv_inst_33_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -923,9 +917,9 @@ myReturn_inst_33_23_24_25_26_27_tsni = function myReturn_inst_33_23_24_25_26_27_
   }
 };
 myBind_inst_33_23_28_tsni = function myBind_inst_33_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_33_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_33_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -939,18 +933,17 @@ lambda_inst_33_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_33_23_24_25_26_27_11_12_tsni = function lambda$_inst_33_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_33_29_tsni = function withEnv_inst_33_29_tsni(tmp, m) {
   let tmp1;
@@ -969,9 +962,9 @@ myReturn_inst_33_29_27_tsni = function myReturn_inst_33_29_27_tsni(a) {
   }
 };
 myBind_inst_33_30_tsni = function myBind_inst_33_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_33_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_33_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -999,11 +992,11 @@ traverseTerm_inst_34_tsni = function traverseTerm_inst_34_tsni(t) {
   return eval_inst_34_tsni(t)
 };
 eval_inst_34_tsni = function eval_inst_34_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
-    lambda$this = runtime.safeCall(lambda16(x1));
+    lambda$this = runtime.safeCall(lambda17(x1));
     return lambda.myBind(lambda.myGet, lambda$this)
   } else if (ter instanceof lambda.Add.class) {
     param0 = ter.a;
@@ -1025,16 +1018,16 @@ eval_inst_34_tsni = function eval_inst_34_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_34_20_tsni(x, b1));
-    return myBind_inst_34_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_34_20_tsni(x, b1));
+    return myBind_inst_34_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_34_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_34_tsni1(v));
-    return myBind_inst_34_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_34_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_34_tsni1(v));
+    return myBind_inst_34_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -1042,14 +1035,14 @@ eval_inst_34_tsni = function eval_inst_34_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_34_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_34_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_34_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_34_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_34_87_tsni(lambda.incr, lambda_inst_34_31_tsni)
   } else {
@@ -1080,7 +1073,7 @@ lambda$_inst_34_tsni1 = function lambda$_inst_34_tsni(v, u_) {
   return apply_inst_34_tsni(u_, v)
 };
 apply_inst_34_tsni = function apply_inst_34_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -1090,8 +1083,8 @@ apply_inst_34_tsni = function apply_inst_34_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_34_tsni2(a, x, b, e));
-      return myBind_inst_34_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_34_tsni2(a, x, b, e));
+      return myBind_inst_34_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -1123,10 +1116,9 @@ lambda$_inst_34_tsni3 = function lambda$_inst_34_tsni(v, u_) {
   return myBind_inst_34_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_34_tsni = function traverseCon_inst_34_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_34_tsni(t);
-  tmp1 = lambda_inst_34_14_tsni;
-  return myBind_inst_34_81_tsni(tmp, tmp1)
+  return myBind_inst_34_81_tsni(tmp, lambda_inst_34_14_tsni)
 };
 lambda$_inst_34_tsni4 = function lambda$_inst_34_tsni(x, e) {
   let tmp;
@@ -1202,9 +1194,9 @@ myReturn_inst_34_4_5_6_9_tsni = function myReturn_inst_34_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_34_4_10_tsni = function myBind_inst_34_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_34_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_34_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -1218,10 +1210,10 @@ lambda_inst_34_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_34_4_5_6_9_11_12_tsni = function lambda$_inst_34_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -1229,8 +1221,7 @@ lambda$_inst_34_4_5_6_9_11_12_tsni = function lambda$_inst_34_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 lambda_inst_34_14_tsni = (undefined, function (_t) {
   let param0, c;
@@ -1276,9 +1267,9 @@ myReturn_inst_34_16_17_18_tsni = function myReturn_inst_34_16_17_18_tsni(a) {
   }
 };
 myBind_inst_34_19_tsni = function myBind_inst_34_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_34_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_34_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -1309,9 +1300,9 @@ myReturn_inst_34_20_21_22_tsni = function myReturn_inst_34_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_34_23_tsni = function pushVar_inst_34_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_34_23_24_tsni(v, t, m));
-  return myBind_inst_34_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_34_23_24_tsni(v, t, m));
+  return myBind_inst_34_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_34_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -1319,13 +1310,13 @@ lambda_inst_34_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_34_23_24_25_tsni = function lambda$_inst_34_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_34_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_34_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_34_23_24_25_26_tsni = function withEnv_inst_34_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -1344,9 +1335,9 @@ myReturn_inst_34_23_24_25_26_27_tsni = function myReturn_inst_34_23_24_25_26_27_
   }
 };
 myBind_inst_34_23_28_tsni = function myBind_inst_34_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_34_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_34_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -1360,18 +1351,17 @@ lambda_inst_34_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_34_23_24_25_26_27_11_12_tsni = function lambda$_inst_34_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_34_29_tsni = function withEnv_inst_34_29_tsni(tmp, m) {
   let tmp1;
@@ -1390,9 +1380,9 @@ myReturn_inst_34_29_27_tsni = function myReturn_inst_34_29_27_tsni(a) {
   }
 };
 myBind_inst_34_30_tsni = function myBind_inst_34_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_34_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_34_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -1420,7 +1410,7 @@ traverseTerm_inst_35_tsni = function traverseTerm_inst_35_tsni(t) {
   return eval_inst_35_tsni(t)
 };
 eval_inst_35_tsni = function eval_inst_35_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -1446,16 +1436,16 @@ eval_inst_35_tsni = function eval_inst_35_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_35_20_tsni(x, b1));
-    return myBind_inst_35_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_35_20_tsni(x, b1));
+    return myBind_inst_35_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_35_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_35_tsni1(v));
-    return myBind_inst_35_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_35_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_35_tsni1(v));
+    return myBind_inst_35_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -1463,14 +1453,14 @@ eval_inst_35_tsni = function eval_inst_35_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_35_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_35_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_35_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_35_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_35_87_tsni(lambda.incr, lambda_inst_35_31_tsni)
   } else {
@@ -1501,7 +1491,7 @@ lambda$_inst_35_tsni1 = function lambda$_inst_35_tsni(v, u_) {
   return apply_inst_35_tsni(u_, v)
 };
 apply_inst_35_tsni = function apply_inst_35_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -1511,8 +1501,8 @@ apply_inst_35_tsni = function apply_inst_35_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_35_tsni2(a, x, b, e));
-      return myBind_inst_35_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_35_tsni2(a, x, b, e));
+      return myBind_inst_35_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -1538,10 +1528,9 @@ lambda_inst_35_tsni3 = (undefined, function (v) {
   }
 });
 traverseCon_inst_35_tsni = function traverseCon_inst_35_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_35_tsni(t);
-  tmp1 = lambda_inst_35_14_tsni;
-  return myBind_inst_35_81_tsni(tmp, tmp1)
+  return myBind_inst_35_81_tsni(tmp, lambda_inst_35_14_tsni)
 };
 lambda_inst_35_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -1622,9 +1611,9 @@ myReturn_inst_35_4_5_6_9_tsni = function myReturn_inst_35_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_35_4_10_tsni = function myBind_inst_35_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_35_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_35_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -1638,10 +1627,10 @@ lambda_inst_35_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_35_4_5_6_9_11_12_tsni = function lambda$_inst_35_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -1649,13 +1638,12 @@ lambda$_inst_35_4_5_6_9_11_12_tsni = function lambda$_inst_35_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_35_13_tsni = function myBind_inst_35_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_35_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_35_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -1729,9 +1717,9 @@ myReturn_inst_35_20_21_22_tsni = function myReturn_inst_35_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_35_23_tsni = function pushVar_inst_35_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_35_23_24_tsni(v, t, m));
-  return myBind_inst_35_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_35_23_24_tsni(v, t, m));
+  return myBind_inst_35_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_35_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -1739,13 +1727,13 @@ lambda_inst_35_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_35_23_24_25_tsni = function lambda$_inst_35_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_35_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_35_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_35_23_24_25_26_tsni = function withEnv_inst_35_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -1764,9 +1752,9 @@ myReturn_inst_35_23_24_25_26_27_tsni = function myReturn_inst_35_23_24_25_26_27_
   }
 };
 myBind_inst_35_23_28_tsni = function myBind_inst_35_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_35_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_35_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -1780,18 +1768,17 @@ lambda_inst_35_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_35_23_24_25_26_27_11_12_tsni = function lambda$_inst_35_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_35_29_tsni = function withEnv_inst_35_29_tsni(tmp, m) {
   let tmp1;
@@ -1810,9 +1797,9 @@ myReturn_inst_35_29_27_tsni = function myReturn_inst_35_29_27_tsni(a) {
   }
 };
 myBind_inst_35_30_tsni = function myBind_inst_35_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_35_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_35_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -1840,7 +1827,7 @@ traverseTerm_inst_36_tsni = function traverseTerm_inst_36_tsni(t) {
   return eval_inst_36_tsni(t)
 };
 eval_inst_36_tsni = function eval_inst_36_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -1852,7 +1839,7 @@ eval_inst_36_tsni = function eval_inst_36_tsni(ter) {
     u1 = param0;
     v1 = param1;
     tmp = traverseCon_inst_36_tsni(u1);
-    lambda$this1 = runtime.safeCall(lambda18(v1));
+    lambda$this1 = runtime.safeCall(lambda19(v1));
     return lambda.myBind(tmp, lambda$this1)
   } else if (ter instanceof lambda.Thunk.class) {
     param0 = ter.t;
@@ -1866,16 +1853,16 @@ eval_inst_36_tsni = function eval_inst_36_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_36_20_tsni(x, b1));
-    return myBind_inst_36_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_36_20_tsni(x, b1));
+    return myBind_inst_36_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_36_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_36_tsni1(v));
-    return myBind_inst_36_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_36_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_36_tsni1(v));
+    return myBind_inst_36_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -1883,14 +1870,14 @@ eval_inst_36_tsni = function eval_inst_36_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_36_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_36_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_36_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_36_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_36_87_tsni(lambda.incr, lambda_inst_36_31_tsni)
   } else {
@@ -1921,7 +1908,7 @@ lambda$_inst_36_tsni1 = function lambda$_inst_36_tsni(v, u_) {
   return apply_inst_36_tsni(u_, v)
 };
 apply_inst_36_tsni = function apply_inst_36_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -1931,8 +1918,8 @@ apply_inst_36_tsni = function apply_inst_36_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_36_tsni2(a, x, b, e));
-      return myBind_inst_36_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_36_tsni2(a, x, b, e));
+      return myBind_inst_36_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -1959,10 +1946,9 @@ lambda$_inst_36_tsni3 = function lambda$_inst_36_tsni(v, u_) {
   return myBind_inst_36_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_36_tsni = function traverseCon_inst_36_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_36_tsni(t);
-  tmp1 = lambda_inst_36_14_tsni;
-  return myBind_inst_36_81_tsni(tmp, tmp1)
+  return myBind_inst_36_81_tsni(tmp, lambda_inst_36_14_tsni)
 };
 lambda_inst_36_tsni3 = (undefined, function (x) {
   return (e) => {
@@ -2043,9 +2029,9 @@ myReturn_inst_36_4_5_6_9_tsni = function myReturn_inst_36_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_36_4_10_tsni = function myBind_inst_36_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_36_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_36_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2059,10 +2045,10 @@ lambda_inst_36_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_36_4_5_6_9_11_12_tsni = function lambda$_inst_36_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -2070,13 +2056,12 @@ lambda$_inst_36_4_5_6_9_11_12_tsni = function lambda$_inst_36_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_36_13_tsni = function myBind_inst_36_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_36_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_36_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2150,9 +2135,9 @@ myReturn_inst_36_20_21_22_tsni = function myReturn_inst_36_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_36_23_tsni = function pushVar_inst_36_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_36_23_24_tsni(v, t, m));
-  return myBind_inst_36_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_36_23_24_tsni(v, t, m));
+  return myBind_inst_36_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_36_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -2160,13 +2145,13 @@ lambda_inst_36_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_36_23_24_25_tsni = function lambda$_inst_36_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_36_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_36_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_36_23_24_25_26_tsni = function withEnv_inst_36_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -2185,9 +2170,9 @@ myReturn_inst_36_23_24_25_26_27_tsni = function myReturn_inst_36_23_24_25_26_27_
   }
 };
 myBind_inst_36_23_28_tsni = function myBind_inst_36_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_36_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_36_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2201,18 +2186,17 @@ lambda_inst_36_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_36_23_24_25_26_27_11_12_tsni = function lambda$_inst_36_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_36_29_tsni = function withEnv_inst_36_29_tsni(tmp, m) {
   let tmp1;
@@ -2231,9 +2215,9 @@ myReturn_inst_36_29_27_tsni = function myReturn_inst_36_29_27_tsni(a) {
   }
 };
 myBind_inst_36_30_tsni = function myBind_inst_36_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_36_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_36_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2261,7 +2245,7 @@ traverseTerm_inst_37_tsni = function traverseTerm_inst_37_tsni(t) {
   return eval_inst_37_tsni(t)
 };
 eval_inst_37_tsni = function eval_inst_37_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -2287,16 +2271,16 @@ eval_inst_37_tsni = function eval_inst_37_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_37_20_tsni(x, b1));
-    return myBind_inst_37_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_37_20_tsni(x, b1));
+    return myBind_inst_37_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_37_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_37_tsni1(v));
-    return lambda.myBind(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_37_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_37_tsni1(v));
+    return lambda.myBind(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -2304,14 +2288,14 @@ eval_inst_37_tsni = function eval_inst_37_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_37_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_37_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_37_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_37_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_37_87_tsni(lambda.incr, lambda_inst_37_31_tsni)
   } else {
@@ -2339,7 +2323,7 @@ lambda_inst_37_tsni1 = (undefined, function (v) {
   }
 });
 apply_inst_37_tsni = function apply_inst_37_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -2349,8 +2333,8 @@ apply_inst_37_tsni = function apply_inst_37_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_37_tsni2(a, x, b, e));
-      return myBind_inst_37_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_37_tsni2(a, x, b, e));
+      return myBind_inst_37_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -2382,10 +2366,9 @@ lambda$_inst_37_tsni2 = function lambda$_inst_37_tsni(v, u_) {
   return myBind_inst_37_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_37_tsni = function traverseCon_inst_37_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_37_tsni(t);
-  tmp1 = lambda_inst_37_14_tsni;
-  return myBind_inst_37_81_tsni(tmp, tmp1)
+  return myBind_inst_37_81_tsni(tmp, lambda_inst_37_14_tsni)
 };
 lambda_inst_37_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -2466,9 +2449,9 @@ myReturn_inst_37_4_5_6_9_tsni = function myReturn_inst_37_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_37_4_10_tsni = function myBind_inst_37_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_37_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_37_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2482,10 +2465,10 @@ lambda_inst_37_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_37_4_5_6_9_11_12_tsni = function lambda$_inst_37_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -2493,13 +2476,12 @@ lambda$_inst_37_4_5_6_9_11_12_tsni = function lambda$_inst_37_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_37_13_tsni = function myBind_inst_37_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_37_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_37_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2551,9 +2533,9 @@ myReturn_inst_37_16_17_18_tsni = function myReturn_inst_37_16_17_18_tsni(a) {
   }
 };
 myBind_inst_37_19_tsni = function myBind_inst_37_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_37_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_37_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2584,9 +2566,9 @@ myReturn_inst_37_20_21_22_tsni = function myReturn_inst_37_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_37_23_tsni = function pushVar_inst_37_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_37_23_24_tsni(v, t, m));
-  return myBind_inst_37_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_37_23_24_tsni(v, t, m));
+  return myBind_inst_37_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_37_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -2594,13 +2576,13 @@ lambda_inst_37_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_37_23_24_25_tsni = function lambda$_inst_37_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_37_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_37_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_37_23_24_25_26_tsni = function withEnv_inst_37_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -2619,9 +2601,9 @@ myReturn_inst_37_23_24_25_26_27_tsni = function myReturn_inst_37_23_24_25_26_27_
   }
 };
 myBind_inst_37_23_28_tsni = function myBind_inst_37_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_37_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_37_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2635,18 +2617,17 @@ lambda_inst_37_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_37_23_24_25_26_27_11_12_tsni = function lambda$_inst_37_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_37_29_tsni = function withEnv_inst_37_29_tsni(tmp, m) {
   let tmp1;
@@ -2684,7 +2665,7 @@ traverseTerm_inst_38_tsni = function traverseTerm_inst_38_tsni(t) {
   return eval_inst_38_tsni(t)
 };
 eval_inst_38_tsni = function eval_inst_38_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -2710,16 +2691,16 @@ eval_inst_38_tsni = function eval_inst_38_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_38_20_tsni(x, b1));
-    return myBind_inst_38_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_38_20_tsni(x, b1));
+    return myBind_inst_38_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_38_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda21(v));
-    return lambda.myBind(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_38_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda21(v));
+    return lambda.myBind(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -2727,14 +2708,14 @@ eval_inst_38_tsni = function eval_inst_38_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_38_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_38_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_38_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_38_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_38_87_tsni(lambda.incr, lambda_inst_38_31_tsni)
   } else {
@@ -2760,7 +2741,7 @@ lambda$_inst_38_tsni1 = function lambda$_inst_38_tsni(v, u_) {
   return apply_inst_38_tsni(u_, v)
 };
 apply_inst_38_tsni = function apply_inst_38_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -2770,8 +2751,8 @@ apply_inst_38_tsni = function apply_inst_38_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_38_tsni1(a, x, b, e));
-      return myBind_inst_38_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_38_tsni1(a, x, b, e));
+      return myBind_inst_38_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -2803,10 +2784,9 @@ lambda$_inst_38_tsni3 = function lambda$_inst_38_tsni(v, u_) {
   return myBind_inst_38_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_38_tsni = function traverseCon_inst_38_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_38_tsni(t);
-  tmp1 = lambda_inst_38_14_tsni;
-  return myBind_inst_38_81_tsni(tmp, tmp1)
+  return myBind_inst_38_81_tsni(tmp, lambda_inst_38_14_tsni)
 };
 lambda_inst_38_tsni3 = (undefined, function (x) {
   return (e) => {
@@ -2887,9 +2867,9 @@ myReturn_inst_38_4_5_6_9_tsni = function myReturn_inst_38_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_38_4_10_tsni = function myBind_inst_38_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_38_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_38_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2903,10 +2883,10 @@ lambda_inst_38_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_38_4_5_6_9_11_12_tsni = function lambda$_inst_38_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -2914,13 +2894,12 @@ lambda$_inst_38_4_5_6_9_11_12_tsni = function lambda$_inst_38_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_38_13_tsni = function myBind_inst_38_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_38_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_38_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -2972,9 +2951,9 @@ myReturn_inst_38_16_17_18_tsni = function myReturn_inst_38_16_17_18_tsni(a) {
   }
 };
 myBind_inst_38_19_tsni = function myBind_inst_38_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_38_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_38_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3005,9 +2984,9 @@ myReturn_inst_38_20_21_22_tsni = function myReturn_inst_38_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_38_23_tsni = function pushVar_inst_38_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_38_23_24_tsni(v, t, m));
-  return myBind_inst_38_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_38_23_24_tsni(v, t, m));
+  return myBind_inst_38_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_38_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -3015,13 +2994,13 @@ lambda_inst_38_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_38_23_24_25_tsni = function lambda$_inst_38_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_38_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_38_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_38_23_24_25_26_tsni = function withEnv_inst_38_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -3040,9 +3019,9 @@ myReturn_inst_38_23_24_25_26_27_tsni = function myReturn_inst_38_23_24_25_26_27_
   }
 };
 myBind_inst_38_23_28_tsni = function myBind_inst_38_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_38_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_38_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3056,18 +3035,17 @@ lambda_inst_38_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_38_23_24_25_26_27_11_12_tsni = function lambda$_inst_38_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_38_29_tsni = function withEnv_inst_38_29_tsni(tmp, m) {
   let tmp1;
@@ -3105,7 +3083,7 @@ traverseTerm_inst_39_tsni = function traverseTerm_inst_39_tsni(t) {
   return eval_inst_39_tsni(t)
 };
 eval_inst_39_tsni = function eval_inst_39_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -3131,16 +3109,16 @@ eval_inst_39_tsni = function eval_inst_39_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_39_20_tsni(x, b1));
-    return myBind_inst_39_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_39_20_tsni(x, b1));
+    return myBind_inst_39_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_39_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_39_tsni1(v));
-    return myBind_inst_39_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_39_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_39_tsni1(v));
+    return myBind_inst_39_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -3148,14 +3126,14 @@ eval_inst_39_tsni = function eval_inst_39_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_39_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_39_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_39_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_39_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_39_87_tsni(lambda.incr, lambda_inst_39_31_tsni)
   } else {
@@ -3176,7 +3154,7 @@ lambda$_inst_39_tsni = function lambda$_inst_39_tsni(v, u_) {
   return apply_inst_39_tsni(u_, v)
 };
 apply_inst_39_tsni = function apply_inst_39_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -3186,8 +3164,8 @@ apply_inst_39_tsni = function apply_inst_39_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_39_tsni2(a, x, b, e));
-      return myBind_inst_39_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_39_tsni2(a, x, b, e));
+      return myBind_inst_39_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -3219,10 +3197,9 @@ lambda$_inst_39_tsni2 = function lambda$_inst_39_tsni(v, u_) {
   return myBind_inst_39_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_39_tsni = function traverseCon_inst_39_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_39_tsni(t);
-  tmp1 = lambda_inst_39_14_tsni;
-  return myBind_inst_39_81_tsni(tmp, tmp1)
+  return myBind_inst_39_81_tsni(tmp, lambda_inst_39_14_tsni)
 };
 lambda_inst_39_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -3303,9 +3280,9 @@ myReturn_inst_39_4_5_6_9_tsni = function myReturn_inst_39_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_39_4_10_tsni = function myBind_inst_39_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_39_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_39_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3319,10 +3296,10 @@ lambda_inst_39_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_39_4_5_6_9_11_12_tsni = function lambda$_inst_39_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -3330,13 +3307,12 @@ lambda$_inst_39_4_5_6_9_11_12_tsni = function lambda$_inst_39_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_39_13_tsni = function myBind_inst_39_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_39_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_39_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3388,9 +3364,9 @@ myReturn_inst_39_16_17_18_tsni = function myReturn_inst_39_16_17_18_tsni(a) {
   }
 };
 myBind_inst_39_19_tsni = function myBind_inst_39_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_39_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_39_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3421,9 +3397,9 @@ myReturn_inst_39_20_21_22_tsni = function myReturn_inst_39_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_39_23_tsni = function pushVar_inst_39_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_23_24_tsni(v, t, m));
-  return myBind_inst_39_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_23_24_tsni(v, t, m));
+  return myBind_inst_39_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_39_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -3431,13 +3407,13 @@ lambda_inst_39_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_39_23_24_25_tsni = function lambda$_inst_39_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_39_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_39_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_39_23_24_25_26_tsni = function withEnv_inst_39_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -3456,9 +3432,9 @@ myReturn_inst_39_23_24_25_26_27_tsni = function myReturn_inst_39_23_24_25_26_27_
   }
 };
 myBind_inst_39_23_28_tsni = function myBind_inst_39_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_39_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_39_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3472,18 +3448,17 @@ lambda_inst_39_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_39_23_24_25_26_27_11_12_tsni = function lambda$_inst_39_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_39_29_tsni = function withEnv_inst_39_29_tsni(tmp, m) {
   let tmp1;
@@ -3502,9 +3477,9 @@ myReturn_inst_39_29_27_tsni = function myReturn_inst_39_29_27_tsni(a) {
   }
 };
 myBind_inst_39_30_tsni = function myBind_inst_39_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_39_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_39_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3532,7 +3507,7 @@ traverseTerm_inst_40_tsni = function traverseTerm_inst_40_tsni(t) {
   return eval_inst_40_tsni(t)
 };
 eval_inst_40_tsni = function eval_inst_40_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -3558,16 +3533,16 @@ eval_inst_40_tsni = function eval_inst_40_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_40_20_tsni(x, b1));
-    return myBind_inst_40_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_40_20_tsni(x, b1));
+    return myBind_inst_40_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_40_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_40_tsni(v));
-    return myBind_inst_40_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_40_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_40_tsni(v));
+    return myBind_inst_40_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -3575,14 +3550,14 @@ eval_inst_40_tsni = function eval_inst_40_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_40_tsni(c);
-    tmp5 = runtime.safeCall(lambda22(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_40_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda22(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_40_87_tsni(lambda.incr, lambda_inst_40_31_tsni)
   } else {
@@ -3608,7 +3583,7 @@ lambda$_inst_40_tsni1 = function lambda$_inst_40_tsni(v, u_) {
   return apply_inst_40_tsni(u_, v)
 };
 apply_inst_40_tsni = function apply_inst_40_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -3618,8 +3593,8 @@ apply_inst_40_tsni = function apply_inst_40_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_40_tsni1(a, x, b, e));
-      return myBind_inst_40_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_40_tsni1(a, x, b, e));
+      return myBind_inst_40_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -3651,10 +3626,9 @@ lambda$_inst_40_tsni3 = function lambda$_inst_40_tsni(v, u_) {
   return myBind_inst_40_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_40_tsni = function traverseCon_inst_40_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_40_tsni(t);
-  tmp1 = lambda_inst_40_14_tsni;
-  return myBind_inst_40_81_tsni(tmp, tmp1)
+  return myBind_inst_40_81_tsni(tmp, lambda_inst_40_14_tsni)
 };
 lambda_inst_40_tsni3 = (undefined, function (x) {
   return (e) => {
@@ -3735,9 +3709,9 @@ myReturn_inst_40_4_5_6_9_tsni = function myReturn_inst_40_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_40_4_10_tsni = function myBind_inst_40_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_40_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_40_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3751,10 +3725,10 @@ lambda_inst_40_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_40_4_5_6_9_11_12_tsni = function lambda$_inst_40_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -3762,13 +3736,12 @@ lambda$_inst_40_4_5_6_9_11_12_tsni = function lambda$_inst_40_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_40_13_tsni = function myBind_inst_40_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_40_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_40_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3820,9 +3793,9 @@ myReturn_inst_40_16_17_18_tsni = function myReturn_inst_40_16_17_18_tsni(a) {
   }
 };
 myBind_inst_40_19_tsni = function myBind_inst_40_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_40_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_40_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3853,9 +3826,9 @@ myReturn_inst_40_20_21_22_tsni = function myReturn_inst_40_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_40_23_tsni = function pushVar_inst_40_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_40_23_24_tsni(v, t, m));
-  return myBind_inst_40_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_40_23_24_tsni(v, t, m));
+  return myBind_inst_40_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_40_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -3863,13 +3836,13 @@ lambda_inst_40_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_40_23_24_25_tsni = function lambda$_inst_40_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_40_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_40_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_40_23_24_25_26_tsni = function withEnv_inst_40_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -3888,9 +3861,9 @@ myReturn_inst_40_23_24_25_26_27_tsni = function myReturn_inst_40_23_24_25_26_27_
   }
 };
 myBind_inst_40_23_28_tsni = function myBind_inst_40_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_40_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_40_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3904,18 +3877,17 @@ lambda_inst_40_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_40_23_24_25_26_27_11_12_tsni = function lambda$_inst_40_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_40_29_tsni = function withEnv_inst_40_29_tsni(tmp, m) {
   let tmp1;
@@ -3934,9 +3906,9 @@ myReturn_inst_40_29_27_tsni = function myReturn_inst_40_29_27_tsni(a) {
   }
 };
 myBind_inst_40_30_tsni = function myBind_inst_40_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_40_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_40_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -3964,7 +3936,7 @@ traverseTerm_inst_41_tsni = function traverseTerm_inst_41_tsni(t) {
   return eval_inst_41_tsni(t)
 };
 eval_inst_41_tsni = function eval_inst_41_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -3990,16 +3962,16 @@ eval_inst_41_tsni = function eval_inst_41_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_41_20_tsni(x, b1));
-    return myBind_inst_41_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_41_20_tsni(x, b1));
+    return myBind_inst_41_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_41_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_41_tsni1(v));
-    return myBind_inst_41_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_41_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_41_tsni1(v));
+    return myBind_inst_41_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -4007,14 +3979,14 @@ eval_inst_41_tsni = function eval_inst_41_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_41_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_41_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_41_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_41_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_41_87_tsni(lambda.incr, lambda_inst_41_31_tsni)
   } else {
@@ -4045,7 +4017,7 @@ lambda$_inst_41_tsni1 = function lambda$_inst_41_tsni(v, u_) {
   return apply_inst_41_tsni(u_, v)
 };
 apply_inst_41_tsni = function apply_inst_41_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -4055,8 +4027,8 @@ apply_inst_41_tsni = function apply_inst_41_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_41_tsni2(a, x, b, e));
-      return myBind_inst_41_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_41_tsni2(a, x, b, e));
+      return myBind_inst_41_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -4081,10 +4053,9 @@ lambda$_inst_41_tsni2 = function lambda$_inst_41_tsni(v, u_) {
   return myBind_inst_41_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_41_tsni = function traverseCon_inst_41_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_41_tsni(t);
-  tmp1 = lambda_inst_41_14_tsni;
-  return myBind_inst_41_81_tsni(tmp, tmp1)
+  return myBind_inst_41_81_tsni(tmp, lambda_inst_41_14_tsni)
 };
 lambda_inst_41_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -4165,9 +4136,9 @@ myReturn_inst_41_4_5_6_9_tsni = function myReturn_inst_41_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_41_4_10_tsni = function myBind_inst_41_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_41_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_41_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4181,10 +4152,10 @@ lambda_inst_41_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_41_4_5_6_9_11_12_tsni = function lambda$_inst_41_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -4192,13 +4163,12 @@ lambda$_inst_41_4_5_6_9_11_12_tsni = function lambda$_inst_41_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_41_13_tsni = function myBind_inst_41_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_41_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_41_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4250,9 +4220,9 @@ myReturn_inst_41_16_17_18_tsni = function myReturn_inst_41_16_17_18_tsni(a) {
   }
 };
 myBind_inst_41_19_tsni = function myBind_inst_41_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_41_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_41_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4283,9 +4253,9 @@ myReturn_inst_41_20_21_22_tsni = function myReturn_inst_41_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_41_23_tsni = function pushVar_inst_41_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_23_24_tsni(v, t, m));
-  return myBind_inst_41_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_23_24_tsni(v, t, m));
+  return myBind_inst_41_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_41_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -4293,13 +4263,13 @@ lambda_inst_41_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_41_23_24_25_tsni = function lambda$_inst_41_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_41_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_41_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_41_23_24_25_26_tsni = function withEnv_inst_41_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -4318,9 +4288,9 @@ myReturn_inst_41_23_24_25_26_27_tsni = function myReturn_inst_41_23_24_25_26_27_
   }
 };
 myBind_inst_41_23_28_tsni = function myBind_inst_41_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_41_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_41_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4334,23 +4304,22 @@ lambda_inst_41_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_41_23_24_25_26_27_11_12_tsni = function lambda$_inst_41_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 myBind_inst_41_30_tsni = function myBind_inst_41_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda2(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda2(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4378,7 +4347,7 @@ traverseTerm_inst_42_tsni = function traverseTerm_inst_42_tsni(t) {
   return eval_inst_42_tsni(t)
 };
 eval_inst_42_tsni = function eval_inst_42_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -4404,16 +4373,16 @@ eval_inst_42_tsni = function eval_inst_42_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_42_20_tsni(x, b1));
-    return myBind_inst_42_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_42_20_tsni(x, b1));
+    return myBind_inst_42_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_42_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_42_tsni1(v));
-    return myBind_inst_42_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_42_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_42_tsni1(v));
+    return myBind_inst_42_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -4421,14 +4390,14 @@ eval_inst_42_tsni = function eval_inst_42_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_42_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_42_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_42_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_42_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_42_87_tsni(lambda.incr, lambda_inst_42_31_tsni)
   } else {
@@ -4459,7 +4428,7 @@ lambda$_inst_42_tsni1 = function lambda$_inst_42_tsni(v, u_) {
   return apply_inst_42_tsni(u_, v)
 };
 apply_inst_42_tsni = function apply_inst_42_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -4469,8 +4438,8 @@ apply_inst_42_tsni = function apply_inst_42_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda15(a, x, b, e));
-      return myBind_inst_42_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda15(a, x, b, e));
+      return myBind_inst_42_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -4497,10 +4466,9 @@ lambda$_inst_42_tsni3 = function lambda$_inst_42_tsni(v, u_) {
   return myBind_inst_42_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_42_tsni = function traverseCon_inst_42_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_42_tsni(t);
-  tmp1 = lambda_inst_42_14_tsni;
-  return myBind_inst_42_81_tsni(tmp, tmp1)
+  return myBind_inst_42_81_tsni(tmp, lambda_inst_42_14_tsni)
 };
 lambda_inst_42_tsni3 = (undefined, function (x) {
   return (e) => {
@@ -4581,9 +4549,9 @@ myReturn_inst_42_4_5_6_9_tsni = function myReturn_inst_42_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_42_4_10_tsni = function myBind_inst_42_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_42_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_42_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4597,10 +4565,10 @@ lambda_inst_42_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_42_4_5_6_9_11_12_tsni = function lambda$_inst_42_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -4608,13 +4576,12 @@ lambda$_inst_42_4_5_6_9_11_12_tsni = function lambda$_inst_42_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_42_13_tsni = function myBind_inst_42_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_42_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_42_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4666,9 +4633,9 @@ myReturn_inst_42_16_17_18_tsni = function myReturn_inst_42_16_17_18_tsni(a) {
   }
 };
 myBind_inst_42_19_tsni = function myBind_inst_42_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_42_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_42_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4699,9 +4666,9 @@ myReturn_inst_42_20_21_22_tsni = function myReturn_inst_42_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_42_23_tsni = function pushVar_inst_42_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_42_23_24_tsni(v, t, m));
-  return myBind_inst_42_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_42_23_24_tsni(v, t, m));
+  return myBind_inst_42_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_42_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -4709,13 +4676,13 @@ lambda_inst_42_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_42_23_24_25_tsni = function lambda$_inst_42_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_42_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_42_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_42_23_24_25_26_tsni = function withEnv_inst_42_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -4734,9 +4701,9 @@ myReturn_inst_42_23_24_25_26_27_tsni = function myReturn_inst_42_23_24_25_26_27_
   }
 };
 myBind_inst_42_23_28_tsni = function myBind_inst_42_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_42_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_42_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -4750,23 +4717,22 @@ lambda_inst_42_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_42_23_24_25_26_27_11_12_tsni = function lambda$_inst_42_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 myBind_inst_42_30_tsni = function myBind_inst_42_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda2(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda2(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5012,13 +4978,13 @@ lambda_inst_49_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_49_24_25_tsni = function lambda$_inst_49_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_49_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_49_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_49_24_25_26_tsni = function withEnv_inst_49_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -5037,7 +5003,7 @@ myReturn_inst_49_24_25_26_27_tsni = function myReturn_inst_49_24_25_26_27_tsni(a
   }
 };
 eval_inst_50_tsni = function eval_inst_50_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -5063,16 +5029,16 @@ eval_inst_50_tsni = function eval_inst_50_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_50_20_tsni(x, b1));
-    return myBind_inst_50_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_50_20_tsni(x, b1));
+    return myBind_inst_50_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = lambda.traverseTerm(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_50_tsni1(v));
-    return myBind_inst_50_86_tsni(tmp3, lambda$this2)
+    tmp2 = lambda.traverseTerm(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_50_tsni1(v));
+    return myBind_inst_50_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -5080,14 +5046,14 @@ eval_inst_50_tsni = function eval_inst_50_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = lambda.traverseTerm(c);
-    tmp5 = runtime.safeCall(lambda_inst_50_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = lambda.traverseTerm(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_50_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_50_87_tsni(lambda.incr, lambda_inst_50_31_tsni)
   } else {
@@ -5118,7 +5084,7 @@ lambda$_inst_50_tsni1 = function lambda$_inst_50_tsni(v, u_) {
   return apply_inst_50_tsni(u_, v)
 };
 apply_inst_50_tsni = function apply_inst_50_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -5128,8 +5094,8 @@ apply_inst_50_tsni = function apply_inst_50_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_50_tsni2(a, x, b, e));
-      return myBind_inst_50_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_50_tsni2(a, x, b, e));
+      return myBind_inst_50_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -5161,10 +5127,9 @@ lambda$_inst_50_tsni3 = function lambda$_inst_50_tsni(v, u_) {
   return myBind_inst_50_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_50_tsni = function traverseCon_inst_50_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = lambda.traverseTerm(t);
-  tmp1 = lambda_inst_50_14_tsni;
-  return myBind_inst_50_81_tsni(tmp, tmp1)
+  return myBind_inst_50_81_tsni(tmp, lambda_inst_50_14_tsni)
 };
 lambda_inst_50_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -5245,9 +5210,9 @@ myReturn_inst_50_4_5_6_9_tsni = function myReturn_inst_50_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_50_4_10_tsni = function myBind_inst_50_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_50_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_50_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5261,10 +5226,10 @@ lambda_inst_50_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_50_4_5_6_9_11_12_tsni = function lambda$_inst_50_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -5272,13 +5237,12 @@ lambda$_inst_50_4_5_6_9_11_12_tsni = function lambda$_inst_50_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_50_13_tsni = function myBind_inst_50_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_50_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_50_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5330,9 +5294,9 @@ myReturn_inst_50_16_17_18_tsni = function myReturn_inst_50_16_17_18_tsni(a) {
   }
 };
 myBind_inst_50_19_tsni = function myBind_inst_50_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_50_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_50_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5363,9 +5327,9 @@ myReturn_inst_50_20_21_22_tsni = function myReturn_inst_50_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_50_23_tsni = function pushVar_inst_50_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_50_23_24_tsni(v, t, m));
-  return myBind_inst_50_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_50_23_24_tsni(v, t, m));
+  return myBind_inst_50_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_50_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -5373,13 +5337,13 @@ lambda_inst_50_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_50_23_24_25_tsni = function lambda$_inst_50_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_50_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_50_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_50_23_24_25_26_tsni = function withEnv_inst_50_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -5398,9 +5362,9 @@ myReturn_inst_50_23_24_25_26_27_tsni = function myReturn_inst_50_23_24_25_26_27_
   }
 };
 myBind_inst_50_23_28_tsni = function myBind_inst_50_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_50_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_50_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5414,18 +5378,17 @@ lambda_inst_50_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_50_23_24_25_26_27_11_12_tsni = function lambda$_inst_50_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_50_29_tsni = function withEnv_inst_50_29_tsni(tmp, m) {
   let tmp1;
@@ -5444,9 +5407,9 @@ myReturn_inst_50_29_27_tsni = function myReturn_inst_50_29_27_tsni(a) {
   }
 };
 myBind_inst_50_30_tsni = function myBind_inst_50_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_50_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_50_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5474,7 +5437,7 @@ traverseTerm_inst_51_tsni = function traverseTerm_inst_51_tsni(t) {
   return eval_inst_51_tsni(t)
 };
 eval_inst_51_tsni = function eval_inst_51_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -5500,16 +5463,16 @@ eval_inst_51_tsni = function eval_inst_51_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_51_20_tsni(x, b1));
-    return myBind_inst_51_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_51_20_tsni(x, b1));
+    return myBind_inst_51_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_51_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_51_tsni1(v));
-    return myBind_inst_51_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_51_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_51_tsni1(v));
+    return myBind_inst_51_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -5517,14 +5480,14 @@ eval_inst_51_tsni = function eval_inst_51_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_51_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_51_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_51_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_51_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_51_87_tsni(lambda.incr, lambda_inst_51_31_tsni)
   } else {
@@ -5555,7 +5518,7 @@ lambda$_inst_51_tsni1 = function lambda$_inst_51_tsni(v, u_) {
   return apply_inst_51_tsni(u_, v)
 };
 apply_inst_51_tsni = function apply_inst_51_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -5565,8 +5528,8 @@ apply_inst_51_tsni = function apply_inst_51_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_51_tsni2(a, x, b, e));
-      return myBind_inst_51_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_51_tsni2(a, x, b, e));
+      return myBind_inst_51_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -5676,9 +5639,9 @@ myReturn_inst_51_4_5_6_9_tsni = function myReturn_inst_51_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_51_4_10_tsni = function myBind_inst_51_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_51_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_51_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5692,10 +5655,10 @@ lambda_inst_51_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_51_4_5_6_9_11_12_tsni = function lambda$_inst_51_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -5703,13 +5666,12 @@ lambda$_inst_51_4_5_6_9_11_12_tsni = function lambda$_inst_51_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_51_13_tsni = function myBind_inst_51_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_51_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_51_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5761,9 +5723,9 @@ myReturn_inst_51_16_17_18_tsni = function myReturn_inst_51_16_17_18_tsni(a) {
   }
 };
 myBind_inst_51_19_tsni = function myBind_inst_51_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_51_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_51_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5794,9 +5756,9 @@ myReturn_inst_51_20_21_22_tsni = function myReturn_inst_51_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_51_23_tsni = function pushVar_inst_51_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_23_24_tsni(v, t, m));
-  return myBind_inst_51_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_23_24_tsni(v, t, m));
+  return myBind_inst_51_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_51_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -5804,13 +5766,13 @@ lambda_inst_51_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_51_23_24_25_tsni = function lambda$_inst_51_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_51_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_51_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_51_23_24_25_26_tsni = function withEnv_inst_51_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -5829,9 +5791,9 @@ myReturn_inst_51_23_24_25_26_27_tsni = function myReturn_inst_51_23_24_25_26_27_
   }
 };
 myBind_inst_51_23_28_tsni = function myBind_inst_51_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_51_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_51_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5845,18 +5807,17 @@ lambda_inst_51_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_51_23_24_25_26_27_11_12_tsni = function lambda$_inst_51_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_51_29_tsni = function withEnv_inst_51_29_tsni(tmp, m) {
   let tmp1;
@@ -5875,9 +5836,9 @@ myReturn_inst_51_29_27_tsni = function myReturn_inst_51_29_27_tsni(a) {
   }
 };
 myBind_inst_51_30_tsni = function myBind_inst_51_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_51_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_51_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -5905,7 +5866,7 @@ traverseTerm_inst_52_tsni = function traverseTerm_inst_52_tsni(t) {
   return eval_inst_52_tsni(t)
 };
 eval_inst_52_tsni = function eval_inst_52_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -5931,16 +5892,16 @@ eval_inst_52_tsni = function eval_inst_52_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_52_20_tsni(x, b1));
-    return myBind_inst_52_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_52_20_tsni(x, b1));
+    return myBind_inst_52_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_52_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_52_tsni1(v));
-    return lambda.myBind(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_52_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_52_tsni1(v));
+    return lambda.myBind(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -5948,14 +5909,14 @@ eval_inst_52_tsni = function eval_inst_52_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_52_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_52_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_52_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_52_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_52_87_tsni(lambda.incr, lambda_inst_52_31_tsni)
   } else {
@@ -6009,10 +5970,9 @@ lambda$_inst_52_tsni3 = function lambda$_inst_52_tsni(v, u_) {
   return myBind_inst_52_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_52_tsni = function traverseCon_inst_52_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_52_tsni(t);
-  tmp1 = lambda_inst_52_14_tsni;
-  return myBind_inst_52_81_tsni(tmp, tmp1)
+  return myBind_inst_52_81_tsni(tmp, lambda_inst_52_14_tsni)
 };
 lambda_inst_52_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -6093,9 +6053,9 @@ myReturn_inst_52_4_5_6_9_tsni = function myReturn_inst_52_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_52_4_10_tsni = function myBind_inst_52_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_52_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_52_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6109,10 +6069,10 @@ lambda_inst_52_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_52_4_5_6_9_11_12_tsni = function lambda$_inst_52_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -6120,13 +6080,12 @@ lambda$_inst_52_4_5_6_9_11_12_tsni = function lambda$_inst_52_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_52_13_tsni = function myBind_inst_52_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_52_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_52_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6178,9 +6137,9 @@ myReturn_inst_52_16_17_18_tsni = function myReturn_inst_52_16_17_18_tsni(a) {
   }
 };
 myBind_inst_52_19_tsni = function myBind_inst_52_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_52_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_52_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6211,9 +6170,9 @@ myReturn_inst_52_20_21_22_tsni = function myReturn_inst_52_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_52_23_tsni = function pushVar_inst_52_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_52_23_24_tsni(v, t, m));
-  return myBind_inst_52_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_52_23_24_tsni(v, t, m));
+  return myBind_inst_52_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_52_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -6221,13 +6180,13 @@ lambda_inst_52_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_52_23_24_25_tsni = function lambda$_inst_52_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_52_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_52_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_52_23_24_25_26_tsni = function withEnv_inst_52_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -6246,9 +6205,9 @@ myReturn_inst_52_23_24_25_26_27_tsni = function myReturn_inst_52_23_24_25_26_27_
   }
 };
 myBind_inst_52_23_28_tsni = function myBind_inst_52_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_52_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_52_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6262,18 +6221,17 @@ lambda_inst_52_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_52_23_24_25_26_27_11_12_tsni = function lambda$_inst_52_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_52_29_tsni = function withEnv_inst_52_29_tsni(tmp, m) {
   let tmp1;
@@ -6334,7 +6292,7 @@ lambda$_inst_53_tsni1 = function lambda$_inst_53_tsni(v, u_) {
   return apply_inst_53_tsni(u_, v)
 };
 apply_inst_53_tsni = function apply_inst_53_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -6344,8 +6302,8 @@ apply_inst_53_tsni = function apply_inst_53_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_53_tsni2(a, x, b, e));
-      return myBind_inst_53_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_53_tsni2(a, x, b, e));
+      return myBind_inst_53_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -6377,10 +6335,9 @@ lambda$_inst_53_tsni3 = function lambda$_inst_53_tsni(v, u_) {
   return myBind_inst_53_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_53_tsni = function traverseCon_inst_53_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_53_tsni(t);
-  tmp1 = lambda_inst_53_14_tsni;
-  return myBind_inst_53_81_tsni(tmp, tmp1)
+  return myBind_inst_53_81_tsni(tmp, lambda_inst_53_14_tsni)
 };
 lambda_inst_53_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -6461,9 +6418,9 @@ myReturn_inst_53_4_5_6_9_tsni = function myReturn_inst_53_4_5_6_9_tsni(a) {
   }
 };
 myBind_inst_53_4_10_tsni = function myBind_inst_53_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_53_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_53_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6477,10 +6434,10 @@ lambda_inst_53_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_53_4_5_6_9_11_12_tsni = function lambda$_inst_53_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -6488,13 +6445,12 @@ lambda$_inst_53_4_5_6_9_11_12_tsni = function lambda$_inst_53_4_5_6_9_11_12_tsni
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_53_13_tsni = function myBind_inst_53_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_53_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_53_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6546,9 +6502,9 @@ myReturn_inst_53_16_17_18_tsni = function myReturn_inst_53_16_17_18_tsni(a) {
   }
 };
 myBind_inst_53_19_tsni = function myBind_inst_53_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_53_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_53_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6579,9 +6535,9 @@ myReturn_inst_53_20_21_22_tsni = function myReturn_inst_53_20_21_22_tsni(a) {
   }
 };
 pushVar_inst_53_23_tsni = function pushVar_inst_53_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_53_23_24_tsni(v, t, m));
-  return myBind_inst_53_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_53_23_24_tsni(v, t, m));
+  return myBind_inst_53_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_53_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -6589,13 +6545,13 @@ lambda_inst_53_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_53_23_24_25_tsni = function lambda$_inst_53_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_53_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_53_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_53_23_24_25_26_tsni = function withEnv_inst_53_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -6614,9 +6570,9 @@ myReturn_inst_53_23_24_25_26_27_tsni = function myReturn_inst_53_23_24_25_26_27_
   }
 };
 myBind_inst_53_23_28_tsni = function myBind_inst_53_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_53_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_53_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6630,18 +6586,17 @@ lambda_inst_53_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_53_23_24_25_26_27_11_12_tsni = function lambda$_inst_53_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_53_29_tsni = function withEnv_inst_53_29_tsni(tmp, m) {
   let tmp1;
@@ -6660,9 +6615,9 @@ myReturn_inst_53_29_27_tsni = function myReturn_inst_53_29_27_tsni(a) {
   }
 };
 myBind_inst_53_30_tsni = function myBind_inst_53_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_53_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_53_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -6687,7 +6642,7 @@ myReturn_inst_53_31_32_tsni = function myReturn_inst_53_31_32_tsni(a) {
   }
 };
 simpleApply_inst_54_tsni = function simpleApply_inst_54_tsni(env, t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp, arr, tmp1;
+  let param0, param1, param01, param11, x, b, e, tmp, tmp1, tmp2;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -6698,12 +6653,12 @@ simpleApply_inst_54_tsni = function simpleApply_inst_54_tsni(env, t, a) {
       b = param11;
       e = param1;
       tmp = lambda.Thunk(a, env);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         x,
         tmp
       ]);
-      tmp1 = NofibPrelude.Cons(arr, e);
-      return lambda.simpleEval(tmp1, b)
+      tmp2 = NofibPrelude.Cons(tmp1, e);
+      return lambda.simpleEval(tmp2, b)
     } else {
       throw globalThis.Error("bad application")
     }
@@ -6712,9 +6667,8 @@ simpleApply_inst_54_tsni = function simpleApply_inst_54_tsni(env, t, a) {
   }
 };
 simpleEvalCon_inst_54_tsni = function simpleEvalCon_inst_54_tsni(env, e) {
-  let e_, param0, c, tmp;
-  tmp = lambda.simpleEval(env, e);
-  e_ = tmp;
+  let e_, param0, c;
+  e_ = lambda.simpleEval(env, e);
   if (e_ instanceof lambda.Con.class) {
     param0 = e_.i;
     c = param0;
@@ -6758,7 +6712,7 @@ lookup_inst_54_55_tsni = function lookup_inst_54_55_tsni(k, t) {
   }
 };
 simpleEval_inst_56_tsni = function simpleEval_inst_56_tsni(env, ter) {
-  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     v2 = param0;
@@ -6776,26 +6730,23 @@ simpleEval_inst_56_tsni = function simpleEval_inst_56_tsni(env, ter) {
     param1 = ter.b;
     u1 = param0;
     v1 = param1;
-    tmp2 = simpleEvalCon_inst_56_tsni(env, u1);
-    u_1 = tmp2;
-    tmp3 = simpleEvalCon_inst_56_tsni(env, v1);
-    v_ = tmp3;
-    tmp4 = u_1 + v_;
-    return lambda.Con(tmp4)
+    u_1 = simpleEvalCon_inst_56_tsni(env, u1);
+    v_ = simpleEvalCon_inst_56_tsni(env, v1);
+    tmp2 = u_1 + v_;
+    return lambda.Con(tmp2)
   } else if (ter instanceof lambda.Lam.class) {
     param0 = ter.s;
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp5 = lambda.Lam(x, b1);
-    return lambda.Thunk(tmp5, env)
+    tmp3 = lambda.Lam(x, b1);
+    return lambda.Thunk(tmp3, env)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp6 = simpleEval_inst_56_tsni(env, u);
-    u_ = tmp6;
+    u_ = simpleEval_inst_56_tsni(env, u);
     return lambda.simpleApply(env, u_, v)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
@@ -6804,10 +6755,9 @@ simpleEval_inst_56_tsni = function simpleEval_inst_56_tsni(env, ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp7 = simpleEval_inst_56_tsni(env, c);
-    val_ = tmp7;
-    tmp8 = lambda.Con(0);
-    scrut = lambda.eqTerm(val_, tmp8);
+    val_ = simpleEval_inst_56_tsni(env, c);
+    tmp4 = lambda.Con(0);
+    scrut = lambda.eqTerm(val_, tmp4);
     if (scrut === true) {
       return simpleEval_inst_56_tsni(env, a)
     } else {
@@ -6824,9 +6774,8 @@ simpleEval_inst_56_tsni = function simpleEval_inst_56_tsni(env, ter) {
   }
 };
 simpleEvalCon_inst_56_tsni = function simpleEvalCon_inst_56_tsni(env, e) {
-  let e_, param0, c, tmp;
-  tmp = simpleEval_inst_56_tsni(env, e);
-  e_ = tmp;
+  let e_, param0, c;
+  e_ = simpleEval_inst_56_tsni(env, e);
   if (e_ instanceof lambda.Con.class) {
     param0 = e_.i;
     c = param0;
@@ -6870,7 +6819,7 @@ lookup_inst_56_55_tsni = function lookup_inst_56_55_tsni(k, t) {
   }
 };
 simpleEval_inst_57_tsni = function simpleEval_inst_57_tsni(env, ter) {
-  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     v2 = param0;
@@ -6888,26 +6837,23 @@ simpleEval_inst_57_tsni = function simpleEval_inst_57_tsni(env, ter) {
     param1 = ter.b;
     u1 = param0;
     v1 = param1;
-    tmp2 = lambda.simpleEvalCon(env, u1);
-    u_1 = tmp2;
-    tmp3 = lambda.simpleEvalCon(env, v1);
-    v_ = tmp3;
-    tmp4 = u_1 + v_;
-    return lambda.Con(tmp4)
+    u_1 = lambda.simpleEvalCon(env, u1);
+    v_ = lambda.simpleEvalCon(env, v1);
+    tmp2 = u_1 + v_;
+    return lambda.Con(tmp2)
   } else if (ter instanceof lambda.Lam.class) {
     param0 = ter.s;
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp5 = lambda.Lam(x, b1);
-    return lambda.Thunk(tmp5, env)
+    tmp3 = lambda.Lam(x, b1);
+    return lambda.Thunk(tmp3, env)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp6 = simpleEval_inst_57_tsni(env, u);
-    u_ = tmp6;
+    u_ = simpleEval_inst_57_tsni(env, u);
     return simpleApply_inst_57_tsni(env, u_, v)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
@@ -6916,10 +6862,9 @@ simpleEval_inst_57_tsni = function simpleEval_inst_57_tsni(env, ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp7 = simpleEval_inst_57_tsni(env, c);
-    val_ = tmp7;
-    tmp8 = lambda.Con(0);
-    scrut = lambda.eqTerm(val_, tmp8);
+    val_ = simpleEval_inst_57_tsni(env, c);
+    tmp4 = lambda.Con(0);
+    scrut = lambda.eqTerm(val_, tmp4);
     if (scrut === true) {
       return simpleEval_inst_57_tsni(env, a)
     } else {
@@ -6936,7 +6881,7 @@ simpleEval_inst_57_tsni = function simpleEval_inst_57_tsni(env, ter) {
   }
 };
 simpleApply_inst_57_tsni = function simpleApply_inst_57_tsni(env, t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp, arr, tmp1;
+  let param0, param1, param01, param11, x, b, e, tmp, tmp1, tmp2;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -6947,12 +6892,12 @@ simpleApply_inst_57_tsni = function simpleApply_inst_57_tsni(env, t, a) {
       b = param11;
       e = param1;
       tmp = lambda.Thunk(a, env);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         x,
         tmp
       ]);
-      tmp1 = NofibPrelude.Cons(arr, e);
-      return simpleEval_inst_57_tsni(tmp1, b)
+      tmp2 = NofibPrelude.Cons(tmp1, e);
+      return simpleEval_inst_57_tsni(tmp2, b)
     } else {
       throw globalThis.Error("bad application")
     }
@@ -6998,13 +6943,12 @@ pp_inst_58_tsni = function pp_inst_58_tsni(t) {
   return lambda.ppn(0, t)
 };
 ppenv_inst_58_tsni = function ppenv_inst_58_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_58_tsni;
-  tmp2 = flatMap_inst_58_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_58_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_58_1_tsni(lambda_inst_58_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_58_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_58_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -7147,13 +7091,12 @@ ppn_inst_59_tsni = function ppn_inst_59_tsni(n, ter) {
   }
 };
 ppenv_inst_59_tsni = function ppenv_inst_59_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_59_tsni;
-  tmp2 = flatMap_inst_59_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_59_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_59_1_tsni(lambda_inst_59_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_59_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_59_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -7361,7 +7304,7 @@ traverseTerm_inst_61_62_tsni = function traverseTerm_inst_61_62_tsni(t) {
   return eval_inst_61_62_tsni(t)
 };
 eval_inst_61_62_tsni = function eval_inst_61_62_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -7387,16 +7330,16 @@ eval_inst_61_62_tsni = function eval_inst_61_62_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_61_62_20_tsni(x, b1));
-    return myBind_inst_61_62_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_61_62_20_tsni(x, b1));
+    return myBind_inst_61_62_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_61_62_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_61_62_tsni1(v));
-    return myBind_inst_61_62_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_61_62_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_61_62_tsni1(v));
+    return myBind_inst_61_62_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -7404,14 +7347,14 @@ eval_inst_61_62_tsni = function eval_inst_61_62_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_61_62_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_61_62_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_61_62_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_61_62_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_61_62_87_tsni(lambda.incr, lambda_inst_61_62_31_tsni)
   } else {
@@ -7442,7 +7385,7 @@ lambda$_inst_61_62_tsni1 = function lambda$_inst_61_62_tsni(v, u_) {
   return apply_inst_61_62_tsni(u_, v)
 };
 apply_inst_61_62_tsni = function apply_inst_61_62_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -7452,8 +7395,8 @@ apply_inst_61_62_tsni = function apply_inst_61_62_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_61_62_tsni2(a, x, b, e));
-      return myBind_inst_61_62_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_61_62_tsni2(a, x, b, e));
+      return myBind_inst_61_62_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -7485,10 +7428,9 @@ lambda$_inst_61_62_tsni3 = function lambda$_inst_61_62_tsni(v, u_) {
   return myBind_inst_61_62_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_61_62_tsni = function traverseCon_inst_61_62_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_61_62_tsni(t);
-  tmp1 = lambda_inst_61_62_14_tsni;
-  return myBind_inst_61_62_81_tsni(tmp, tmp1)
+  return myBind_inst_61_62_81_tsni(tmp, lambda_inst_61_62_14_tsni)
 };
 lambda_inst_61_62_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -7520,9 +7462,9 @@ myReturn_inst_61_62_31_32_tsni = function myReturn_inst_61_62_31_32_tsni(a) {
   }
 };
 myBind_inst_61_62_30_tsni = function myBind_inst_61_62_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_61_62_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -7547,9 +7489,9 @@ myReturn_inst_61_62_29_27_tsni = function myReturn_inst_61_62_29_27_tsni(a) {
   }
 };
 pushVar_inst_61_62_23_tsni = function pushVar_inst_61_62_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_61_62_23_24_tsni(v, t, m));
-  return myBind_inst_61_62_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_23_24_tsni(v, t, m));
+  return myBind_inst_61_62_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_61_62_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -7557,13 +7499,13 @@ lambda_inst_61_62_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_61_62_23_24_25_tsni = function lambda$_inst_61_62_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_61_62_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_61_62_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_61_62_23_24_25_26_tsni = function withEnv_inst_61_62_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -7582,9 +7524,9 @@ myReturn_inst_61_62_23_24_25_26_27_tsni = function myReturn_inst_61_62_23_24_25_
   }
 };
 myBind_inst_61_62_23_28_tsni = function myBind_inst_61_62_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_61_62_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -7598,18 +7540,17 @@ lambda_inst_61_62_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_61_62_23_24_25_26_27_11_12_tsni = function lambda$_inst_61_62_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 lambda_inst_61_62_20_tsni = (undefined, function (x, b) {
   return (env) => {
@@ -7634,9 +7575,9 @@ myReturn_inst_61_62_20_21_22_tsni = function myReturn_inst_61_62_20_21_22_tsni(a
   }
 };
 myBind_inst_61_62_19_tsni = function myBind_inst_61_62_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_61_62_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -7688,9 +7629,9 @@ myReturn_inst_61_62_14_15_tsni = function myReturn_inst_61_62_14_15_tsni(a) {
   }
 };
 myBind_inst_61_62_13_tsni = function myBind_inst_61_62_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_61_62_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -7764,9 +7705,9 @@ myReturn_inst_61_62_4_5_6_9_tsni = function myReturn_inst_61_62_4_5_6_9_tsni(a) 
   }
 };
 myBind_inst_61_62_4_10_tsni = function myBind_inst_61_62_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_61_62_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -7780,10 +7721,10 @@ lambda_inst_61_62_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_61_62_4_5_6_9_11_12_tsni = function lambda$_inst_61_62_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -7791,8 +7732,7 @@ lambda$_inst_61_62_4_5_6_9_11_12_tsni = function lambda$_inst_61_62_4_5_6_9_11_1
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 pp_inst_61_63_tsni = function pp_inst_61_63_tsni(t) {
   return ppn_inst_61_63_tsni(0, t)
@@ -7879,13 +7819,12 @@ ppn_inst_61_63_tsni = function ppn_inst_61_63_tsni(n, ter) {
   }
 };
 ppenv_inst_61_63_tsni = function ppenv_inst_61_63_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_61_63_tsni;
-  tmp2 = flatMap_inst_61_63_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_61_63_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_61_63_1_tsni(lambda_inst_61_63_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_61_63_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_61_63_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -8031,13 +7970,12 @@ ppn_inst_61_64_tsni = function ppn_inst_61_64_tsni(n, ter) {
   }
 };
 ppenv_inst_61_64_tsni = function ppenv_inst_61_64_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_61_64_tsni;
-  tmp2 = flatMap_inst_61_64_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_61_64_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_61_64_1_tsni(lambda_inst_61_64_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_61_64_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_61_64_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -8099,7 +8037,7 @@ append_inst_61_64_1_2_tsni = function append_inst_61_64_1_2_tsni(xs, ys) {
   }
 };
 simpleEval_inst_65_66_tsni = function simpleEval_inst_65_66_tsni(env, ter) {
-  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     v2 = param0;
@@ -8117,26 +8055,23 @@ simpleEval_inst_65_66_tsni = function simpleEval_inst_65_66_tsni(env, ter) {
     param1 = ter.b;
     u1 = param0;
     v1 = param1;
-    tmp2 = simpleEvalCon_inst_65_66_tsni(env, u1);
-    u_1 = tmp2;
-    tmp3 = simpleEvalCon_inst_65_66_tsni(env, v1);
-    v_ = tmp3;
-    tmp4 = u_1 + v_;
-    return lambda.Con(tmp4)
+    u_1 = simpleEvalCon_inst_65_66_tsni(env, u1);
+    v_ = simpleEvalCon_inst_65_66_tsni(env, v1);
+    tmp2 = u_1 + v_;
+    return lambda.Con(tmp2)
   } else if (ter instanceof lambda.Lam.class) {
     param0 = ter.s;
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp5 = lambda.Lam(x, b1);
-    return lambda.Thunk(tmp5, env)
+    tmp3 = lambda.Lam(x, b1);
+    return lambda.Thunk(tmp3, env)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp6 = simpleEval_inst_65_66_tsni(env, u);
-    u_ = tmp6;
+    u_ = simpleEval_inst_65_66_tsni(env, u);
     return simpleApply_inst_65_66_tsni(env, u_, v)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
@@ -8145,10 +8080,9 @@ simpleEval_inst_65_66_tsni = function simpleEval_inst_65_66_tsni(env, ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp7 = simpleEval_inst_65_66_tsni(env, c);
-    val_ = tmp7;
-    tmp8 = lambda.Con(0);
-    scrut = lambda.eqTerm(val_, tmp8);
+    val_ = simpleEval_inst_65_66_tsni(env, c);
+    tmp4 = lambda.Con(0);
+    scrut = lambda.eqTerm(val_, tmp4);
     if (scrut === true) {
       return simpleEval_inst_65_66_tsni(env, a)
     } else {
@@ -8165,7 +8099,7 @@ simpleEval_inst_65_66_tsni = function simpleEval_inst_65_66_tsni(env, ter) {
   }
 };
 simpleApply_inst_65_66_tsni = function simpleApply_inst_65_66_tsni(env, t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp, arr, tmp1;
+  let param0, param1, param01, param11, x, b, e, tmp, tmp1, tmp2;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -8176,12 +8110,12 @@ simpleApply_inst_65_66_tsni = function simpleApply_inst_65_66_tsni(env, t, a) {
       b = param11;
       e = param1;
       tmp = lambda.Thunk(a, env);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         x,
         tmp
       ]);
-      tmp1 = NofibPrelude.Cons(arr, e);
-      return simpleEval_inst_65_66_tsni(tmp1, b)
+      tmp2 = NofibPrelude.Cons(tmp1, e);
+      return simpleEval_inst_65_66_tsni(tmp2, b)
     } else {
       throw globalThis.Error("bad application")
     }
@@ -8190,9 +8124,8 @@ simpleApply_inst_65_66_tsni = function simpleApply_inst_65_66_tsni(env, t, a) {
   }
 };
 simpleEvalCon_inst_65_66_tsni = function simpleEvalCon_inst_65_66_tsni(env, e) {
-  let e_, param0, c, tmp;
-  tmp = simpleEval_inst_65_66_tsni(env, e);
-  e_ = tmp;
+  let e_, param0, c;
+  e_ = simpleEval_inst_65_66_tsni(env, e);
   if (e_ instanceof lambda.Con.class) {
     param0 = e_.i;
     c = param0;
@@ -8236,20 +8169,19 @@ lookup_inst_65_66_55_tsni = function lookup_inst_65_66_55_tsni(k, t) {
   }
 };
 ev_inst_67_68_tsni = function ev_inst_67_68_tsni(t) {
-  let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = traverseTerm_inst_67_68_62_tsni(t);
-  tmp1 = lambda.myRunState(tmp, NofibPrelude.Nil);
-  envt2 = tmp1;
+  envt2 = lambda.myRunState(tmp, NofibPrelude.Nil);
   if (runtime.Tuple.isArrayLike(envt2) && envt2.length === 2) {
     first0 = runtime.Tuple.get(envt2, 0);
     first1 = runtime.Tuple.get(envt2, 1);
     env = first0;
     t2 = first1;
-    tmp2 = pp_inst_67_68_63_tsni(t2);
-    tmp3 = NofibPrelude.nofibStringToList("  ");
-    tmp4 = ppenv_inst_67_68_64_tsni(env);
-    tmp5 = NofibPrelude.append(tmp3, tmp4);
-    return NofibPrelude.append(tmp2, tmp5)
+    tmp1 = pp_inst_67_68_63_tsni(t2);
+    tmp2 = NofibPrelude.nofibStringToList("  ");
+    tmp3 = ppenv_inst_67_68_64_tsni(env);
+    tmp4 = NofibPrelude.append(tmp2, tmp3);
+    return NofibPrelude.append(tmp1, tmp4)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -8339,13 +8271,12 @@ ppn_inst_67_68_64_tsni = function ppn_inst_67_68_64_tsni(n, ter) {
   }
 };
 ppenv_inst_67_68_64_tsni = function ppenv_inst_67_68_64_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_67_68_64_tsni;
-  tmp2 = flatMap_inst_67_68_64_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_67_68_64_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_67_68_64_1_tsni(lambda_inst_67_68_64_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_67_68_64_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_67_68_64_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -8491,13 +8422,12 @@ ppn_inst_67_68_63_tsni = function ppn_inst_67_68_63_tsni(n, ter) {
   }
 };
 ppenv_inst_67_68_63_tsni = function ppenv_inst_67_68_63_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_67_68_63_tsni;
-  tmp2 = flatMap_inst_67_68_63_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_67_68_63_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_67_68_63_1_tsni(lambda_inst_67_68_63_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_67_68_63_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_67_68_63_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -8562,7 +8492,7 @@ traverseTerm_inst_67_68_62_tsni = function traverseTerm_inst_67_68_62_tsni(t) {
   return eval_inst_67_68_62_tsni(t)
 };
 eval_inst_67_68_62_tsni = function eval_inst_67_68_62_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -8588,16 +8518,16 @@ eval_inst_67_68_62_tsni = function eval_inst_67_68_62_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_67_68_62_20_tsni(x, b1));
-    return myBind_inst_67_68_62_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_67_68_62_20_tsni(x, b1));
+    return myBind_inst_67_68_62_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_67_68_62_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_67_68_62_tsni1(v));
-    return myBind_inst_67_68_62_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_67_68_62_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_67_68_62_tsni1(v));
+    return myBind_inst_67_68_62_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -8605,14 +8535,14 @@ eval_inst_67_68_62_tsni = function eval_inst_67_68_62_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_67_68_62_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_67_68_62_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_67_68_62_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_67_68_62_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_67_68_62_87_tsni(lambda.incr, lambda_inst_67_68_62_31_tsni)
   } else {
@@ -8643,7 +8573,7 @@ lambda$_inst_67_68_62_tsni1 = function lambda$_inst_67_68_62_tsni(v, u_) {
   return apply_inst_67_68_62_tsni(u_, v)
 };
 apply_inst_67_68_62_tsni = function apply_inst_67_68_62_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -8653,8 +8583,8 @@ apply_inst_67_68_62_tsni = function apply_inst_67_68_62_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_67_68_62_tsni2(a, x, b, e));
-      return myBind_inst_67_68_62_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_67_68_62_tsni2(a, x, b, e));
+      return myBind_inst_67_68_62_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -8686,10 +8616,9 @@ lambda$_inst_67_68_62_tsni3 = function lambda$_inst_67_68_62_tsni(v, u_) {
   return myBind_inst_67_68_62_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_67_68_62_tsni = function traverseCon_inst_67_68_62_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_67_68_62_tsni(t);
-  tmp1 = lambda_inst_67_68_62_14_tsni;
-  return myBind_inst_67_68_62_81_tsni(tmp, tmp1)
+  return myBind_inst_67_68_62_81_tsni(tmp, lambda_inst_67_68_62_14_tsni)
 };
 lambda_inst_67_68_62_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -8770,9 +8699,9 @@ myReturn_inst_67_68_62_4_5_6_9_tsni = function myReturn_inst_67_68_62_4_5_6_9_ts
   }
 };
 myBind_inst_67_68_62_4_10_tsni = function myBind_inst_67_68_62_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -8786,10 +8715,10 @@ lambda_inst_67_68_62_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_67_68_62_4_5_6_9_11_12_tsni = function lambda$_inst_67_68_62_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -8797,13 +8726,12 @@ lambda$_inst_67_68_62_4_5_6_9_11_12_tsni = function lambda$_inst_67_68_62_4_5_6_
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_67_68_62_13_tsni = function myBind_inst_67_68_62_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -8855,9 +8783,9 @@ myReturn_inst_67_68_62_16_17_18_tsni = function myReturn_inst_67_68_62_16_17_18_
   }
 };
 myBind_inst_67_68_62_19_tsni = function myBind_inst_67_68_62_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -8888,9 +8816,9 @@ myReturn_inst_67_68_62_20_21_22_tsni = function myReturn_inst_67_68_62_20_21_22_
   }
 };
 pushVar_inst_67_68_62_23_tsni = function pushVar_inst_67_68_62_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_23_24_tsni(v, t, m));
-  return myBind_inst_67_68_62_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_23_24_tsni(v, t, m));
+  return myBind_inst_67_68_62_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_67_68_62_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -8898,13 +8826,13 @@ lambda_inst_67_68_62_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_67_68_62_23_24_25_tsni = function lambda$_inst_67_68_62_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_67_68_62_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_67_68_62_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_67_68_62_23_24_25_26_tsni = function withEnv_inst_67_68_62_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -8923,9 +8851,9 @@ myReturn_inst_67_68_62_23_24_25_26_27_tsni = function myReturn_inst_67_68_62_23_
   }
 };
 myBind_inst_67_68_62_23_28_tsni = function myBind_inst_67_68_62_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -8939,18 +8867,17 @@ lambda_inst_67_68_62_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_67_68_62_23_24_25_26_27_11_12_tsni = function lambda$_inst_67_68_62_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_67_68_62_29_tsni = function withEnv_inst_67_68_62_29_tsni(tmp, m) {
   let tmp1;
@@ -8969,9 +8896,9 @@ myReturn_inst_67_68_62_29_27_tsni = function myReturn_inst_67_68_62_29_27_tsni(a
   }
 };
 myBind_inst_67_68_62_30_tsni = function myBind_inst_67_68_62_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -9009,7 +8936,7 @@ mainSimple_inst_69_70_tsni = function mainSimple_inst_69_70_tsni(args) {
   }
 };
 simpleEval_inst_69_70_66_tsni = function simpleEval_inst_69_70_66_tsni(env, ter) {
-  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     v2 = param0;
@@ -9027,26 +8954,23 @@ simpleEval_inst_69_70_66_tsni = function simpleEval_inst_69_70_66_tsni(env, ter)
     param1 = ter.b;
     u1 = param0;
     v1 = param1;
-    tmp2 = simpleEvalCon_inst_69_70_66_tsni(env, u1);
-    u_1 = tmp2;
-    tmp3 = simpleEvalCon_inst_69_70_66_tsni(env, v1);
-    v_ = tmp3;
-    tmp4 = u_1 + v_;
-    return lambda.Con(tmp4)
+    u_1 = simpleEvalCon_inst_69_70_66_tsni(env, u1);
+    v_ = simpleEvalCon_inst_69_70_66_tsni(env, v1);
+    tmp2 = u_1 + v_;
+    return lambda.Con(tmp2)
   } else if (ter instanceof lambda.Lam.class) {
     param0 = ter.s;
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp5 = lambda.Lam(x, b1);
-    return lambda.Thunk(tmp5, env)
+    tmp3 = lambda.Lam(x, b1);
+    return lambda.Thunk(tmp3, env)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp6 = simpleEval_inst_69_70_66_tsni(env, u);
-    u_ = tmp6;
+    u_ = simpleEval_inst_69_70_66_tsni(env, u);
     return simpleApply_inst_69_70_66_tsni(env, u_, v)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
@@ -9055,10 +8979,9 @@ simpleEval_inst_69_70_66_tsni = function simpleEval_inst_69_70_66_tsni(env, ter)
     c = param0;
     a = param1;
     b = param2;
-    tmp7 = simpleEval_inst_69_70_66_tsni(env, c);
-    val_ = tmp7;
-    tmp8 = lambda.Con(0);
-    scrut = lambda.eqTerm(val_, tmp8);
+    val_ = simpleEval_inst_69_70_66_tsni(env, c);
+    tmp4 = lambda.Con(0);
+    scrut = lambda.eqTerm(val_, tmp4);
     if (scrut === true) {
       return simpleEval_inst_69_70_66_tsni(env, a)
     } else {
@@ -9075,7 +8998,7 @@ simpleEval_inst_69_70_66_tsni = function simpleEval_inst_69_70_66_tsni(env, ter)
   }
 };
 simpleApply_inst_69_70_66_tsni = function simpleApply_inst_69_70_66_tsni(env, t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp, arr, tmp1;
+  let param0, param1, param01, param11, x, b, e, tmp, tmp1, tmp2;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -9086,12 +9009,12 @@ simpleApply_inst_69_70_66_tsni = function simpleApply_inst_69_70_66_tsni(env, t,
       b = param11;
       e = param1;
       tmp = lambda.Thunk(a, env);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         x,
         tmp
       ]);
-      tmp1 = NofibPrelude.Cons(arr, e);
-      return simpleEval_inst_69_70_66_tsni(tmp1, b)
+      tmp2 = NofibPrelude.Cons(tmp1, e);
+      return simpleEval_inst_69_70_66_tsni(tmp2, b)
     } else {
       throw globalThis.Error("bad application")
     }
@@ -9100,9 +9023,8 @@ simpleApply_inst_69_70_66_tsni = function simpleApply_inst_69_70_66_tsni(env, t,
   }
 };
 simpleEvalCon_inst_69_70_66_tsni = function simpleEvalCon_inst_69_70_66_tsni(env, e) {
-  let e_, param0, c, tmp;
-  tmp = simpleEval_inst_69_70_66_tsni(env, e);
-  e_ = tmp;
+  let e_, param0, c;
+  e_ = simpleEval_inst_69_70_66_tsni(env, e);
   if (e_ instanceof lambda.Con.class) {
     param0 = e_.i;
     c = param0;
@@ -9158,20 +9080,19 @@ mainMonad_inst_69_71_tsni = function mainMonad_inst_69_71_tsni(args) {
   }
 };
 ev_inst_69_71_68_tsni = function ev_inst_69_71_68_tsni(t) {
-  let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = traverseTerm_inst_69_71_68_62_tsni(t);
-  tmp1 = lambda.myRunState(tmp, NofibPrelude.Nil);
-  envt2 = tmp1;
+  envt2 = lambda.myRunState(tmp, NofibPrelude.Nil);
   if (runtime.Tuple.isArrayLike(envt2) && envt2.length === 2) {
     first0 = runtime.Tuple.get(envt2, 0);
     first1 = runtime.Tuple.get(envt2, 1);
     env = first0;
     t2 = first1;
-    tmp2 = pp_inst_69_71_68_63_tsni(t2);
-    tmp3 = NofibPrelude.nofibStringToList("  ");
-    tmp4 = ppenv_inst_69_71_68_64_tsni(env);
-    tmp5 = NofibPrelude.append(tmp3, tmp4);
-    return NofibPrelude.append(tmp2, tmp5)
+    tmp1 = pp_inst_69_71_68_63_tsni(t2);
+    tmp2 = NofibPrelude.nofibStringToList("  ");
+    tmp3 = ppenv_inst_69_71_68_64_tsni(env);
+    tmp4 = NofibPrelude.append(tmp2, tmp3);
+    return NofibPrelude.append(tmp1, tmp4)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -9180,7 +9101,7 @@ traverseTerm_inst_69_71_68_62_tsni = function traverseTerm_inst_69_71_68_62_tsni
   return eval_inst_69_71_68_62_tsni(t)
 };
 eval_inst_69_71_68_62_tsni = function eval_inst_69_71_68_62_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -9206,16 +9127,16 @@ eval_inst_69_71_68_62_tsni = function eval_inst_69_71_68_62_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_69_71_68_62_20_tsni(x, b1));
-    return myBind_inst_69_71_68_62_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_69_71_68_62_20_tsni(x, b1));
+    return myBind_inst_69_71_68_62_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_69_71_68_62_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_69_71_68_62_tsni1(v));
-    return myBind_inst_69_71_68_62_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_69_71_68_62_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_69_71_68_62_tsni1(v));
+    return myBind_inst_69_71_68_62_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -9223,14 +9144,14 @@ eval_inst_69_71_68_62_tsni = function eval_inst_69_71_68_62_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_69_71_68_62_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_69_71_68_62_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_69_71_68_62_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_69_71_68_62_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_69_71_68_62_87_tsni(lambda.incr, lambda_inst_69_71_68_62_31_tsni)
   } else {
@@ -9261,7 +9182,7 @@ lambda$_inst_69_71_68_62_tsni1 = function lambda$_inst_69_71_68_62_tsni(v, u_) {
   return apply_inst_69_71_68_62_tsni(u_, v)
 };
 apply_inst_69_71_68_62_tsni = function apply_inst_69_71_68_62_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -9271,8 +9192,8 @@ apply_inst_69_71_68_62_tsni = function apply_inst_69_71_68_62_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_69_71_68_62_tsni2(a, x, b, e));
-      return myBind_inst_69_71_68_62_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_tsni2(a, x, b, e));
+      return myBind_inst_69_71_68_62_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -9304,10 +9225,9 @@ lambda$_inst_69_71_68_62_tsni3 = function lambda$_inst_69_71_68_62_tsni(v, u_) {
   return myBind_inst_69_71_68_62_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_69_71_68_62_tsni = function traverseCon_inst_69_71_68_62_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_69_71_68_62_tsni(t);
-  tmp1 = lambda_inst_69_71_68_62_14_tsni;
-  return myBind_inst_69_71_68_62_81_tsni(tmp, tmp1)
+  return myBind_inst_69_71_68_62_81_tsni(tmp, lambda_inst_69_71_68_62_14_tsni)
 };
 lambda_inst_69_71_68_62_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -9339,9 +9259,9 @@ myReturn_inst_69_71_68_62_31_32_tsni = function myReturn_inst_69_71_68_62_31_32_
   }
 };
 myBind_inst_69_71_68_62_30_tsni = function myBind_inst_69_71_68_62_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -9366,9 +9286,9 @@ myReturn_inst_69_71_68_62_29_27_tsni = function myReturn_inst_69_71_68_62_29_27_
   }
 };
 pushVar_inst_69_71_68_62_23_tsni = function pushVar_inst_69_71_68_62_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_23_24_tsni(v, t, m));
-  return myBind_inst_69_71_68_62_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_23_24_tsni(v, t, m));
+  return myBind_inst_69_71_68_62_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_69_71_68_62_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -9376,13 +9296,13 @@ lambda_inst_69_71_68_62_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_69_71_68_62_23_24_25_tsni = function lambda$_inst_69_71_68_62_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_69_71_68_62_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_69_71_68_62_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_69_71_68_62_23_24_25_26_tsni = function withEnv_inst_69_71_68_62_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -9401,9 +9321,9 @@ myReturn_inst_69_71_68_62_23_24_25_26_27_tsni = function myReturn_inst_69_71_68_
   }
 };
 myBind_inst_69_71_68_62_23_28_tsni = function myBind_inst_69_71_68_62_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -9417,18 +9337,17 @@ lambda_inst_69_71_68_62_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_69_71_68_62_23_24_25_26_27_11_12_tsni = function lambda$_inst_69_71_68_62_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 lambda_inst_69_71_68_62_20_tsni = (undefined, function (x, b) {
   return (env) => {
@@ -9453,9 +9372,9 @@ myReturn_inst_69_71_68_62_20_21_22_tsni = function myReturn_inst_69_71_68_62_20_
   }
 };
 myBind_inst_69_71_68_62_19_tsni = function myBind_inst_69_71_68_62_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -9507,9 +9426,9 @@ myReturn_inst_69_71_68_62_14_15_tsni = function myReturn_inst_69_71_68_62_14_15_
   }
 };
 myBind_inst_69_71_68_62_13_tsni = function myBind_inst_69_71_68_62_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -9583,9 +9502,9 @@ myReturn_inst_69_71_68_62_4_5_6_9_tsni = function myReturn_inst_69_71_68_62_4_5_
   }
 };
 myBind_inst_69_71_68_62_4_10_tsni = function myBind_inst_69_71_68_62_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -9599,10 +9518,10 @@ lambda_inst_69_71_68_62_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_69_71_68_62_4_5_6_9_11_12_tsni = function lambda$_inst_69_71_68_62_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -9610,8 +9529,7 @@ lambda$_inst_69_71_68_62_4_5_6_9_11_12_tsni = function lambda$_inst_69_71_68_62_
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 pp_inst_69_71_68_63_tsni = function pp_inst_69_71_68_63_tsni(t) {
   return ppn_inst_69_71_68_63_tsni(0, t)
@@ -9698,13 +9616,12 @@ ppn_inst_69_71_68_63_tsni = function ppn_inst_69_71_68_63_tsni(n, ter) {
   }
 };
 ppenv_inst_69_71_68_63_tsni = function ppenv_inst_69_71_68_63_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_69_71_68_63_tsni;
-  tmp2 = flatMap_inst_69_71_68_63_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_69_71_68_63_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_69_71_68_63_1_tsni(lambda_inst_69_71_68_63_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_69_71_68_63_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_69_71_68_63_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -9850,13 +9767,12 @@ ppn_inst_69_71_68_64_tsni = function ppn_inst_69_71_68_64_tsni(n, ter) {
   }
 };
 ppenv_inst_69_71_68_64_tsni = function ppenv_inst_69_71_68_64_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_69_71_68_64_tsni;
-  tmp2 = flatMap_inst_69_71_68_64_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_69_71_68_64_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_69_71_68_64_1_tsni(lambda_inst_69_71_68_64_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_69_71_68_64_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_69_71_68_64_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -9918,16 +9834,15 @@ append_inst_69_71_68_64_1_2_tsni = function append_inst_69_71_68_64_1_2_tsni(xs,
   }
 };
 testLambda_nofib_inst_72_73_tsni = function testLambda_nofib_inst_72_73_tsni(n) {
-  let tmp, tmp1, tmp2, tmp3, arr;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.Cons(n, NofibPrelude.Nil);
   tmp1 = mainSimple_inst_72_73_70_tsni(tmp);
   tmp2 = NofibPrelude.Cons(n, NofibPrelude.Nil);
   tmp3 = mainMonad_inst_72_73_71_tsni(tmp2);
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     tmp1,
     tmp3
-  ]);
-  return arr
+  ])
 };
 mainMonad_inst_72_73_71_tsni = function mainMonad_inst_72_73_71_tsni(args) {
   let scrut, tmp, tmp1, tmp2;
@@ -9942,20 +9857,19 @@ mainMonad_inst_72_73_71_tsni = function mainMonad_inst_72_73_71_tsni(args) {
   }
 };
 ev_inst_72_73_71_68_tsni = function ev_inst_72_73_71_68_tsni(t) {
-  let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+  let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = traverseTerm_inst_72_73_71_68_62_tsni(t);
-  tmp1 = lambda.myRunState(tmp, NofibPrelude.Nil);
-  envt2 = tmp1;
+  envt2 = lambda.myRunState(tmp, NofibPrelude.Nil);
   if (runtime.Tuple.isArrayLike(envt2) && envt2.length === 2) {
     first0 = runtime.Tuple.get(envt2, 0);
     first1 = runtime.Tuple.get(envt2, 1);
     env = first0;
     t2 = first1;
-    tmp2 = pp_inst_72_73_71_68_63_tsni(t2);
-    tmp3 = NofibPrelude.nofibStringToList("  ");
-    tmp4 = ppenv_inst_72_73_71_68_64_tsni(env);
-    tmp5 = NofibPrelude.append(tmp3, tmp4);
-    return NofibPrelude.append(tmp2, tmp5)
+    tmp1 = pp_inst_72_73_71_68_63_tsni(t2);
+    tmp2 = NofibPrelude.nofibStringToList("  ");
+    tmp3 = ppenv_inst_72_73_71_68_64_tsni(env);
+    tmp4 = NofibPrelude.append(tmp2, tmp3);
+    return NofibPrelude.append(tmp1, tmp4)
   } else {
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
   }
@@ -10045,13 +9959,12 @@ ppn_inst_72_73_71_68_64_tsni = function ppn_inst_72_73_71_68_64_tsni(n, ter) {
   }
 };
 ppenv_inst_72_73_71_68_64_tsni = function ppenv_inst_72_73_71_68_64_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_72_73_71_68_64_tsni;
-  tmp2 = flatMap_inst_72_73_71_68_64_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_72_73_71_68_64_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_72_73_71_68_64_1_tsni(lambda_inst_72_73_71_68_64_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_72_73_71_68_64_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_72_73_71_68_64_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -10197,13 +10110,12 @@ ppn_inst_72_73_71_68_63_tsni = function ppn_inst_72_73_71_68_63_tsni(n, ter) {
   }
 };
 ppenv_inst_72_73_71_68_63_tsni = function ppenv_inst_72_73_71_68_63_tsni(env) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
+  let tmp, tmp1, tmp2, tmp3;
   tmp = NofibPrelude.nofibStringToList("[");
-  tmp1 = lambda_inst_72_73_71_68_63_tsni;
-  tmp2 = flatMap_inst_72_73_71_68_63_1_tsni(tmp1, env);
-  tmp3 = NofibPrelude.nofibStringToList("]");
-  tmp4 = append_inst_72_73_71_68_63_74_tsni(tmp2, tmp3);
-  return NofibPrelude.append(tmp, tmp4)
+  tmp1 = flatMap_inst_72_73_71_68_63_1_tsni(lambda_inst_72_73_71_68_63_tsni, env);
+  tmp2 = NofibPrelude.nofibStringToList("]");
+  tmp3 = append_inst_72_73_71_68_63_74_tsni(tmp1, tmp2);
+  return NofibPrelude.append(tmp, tmp3)
 };
 lambda_inst_72_73_71_68_63_tsni = (undefined, function (caseScrut) {
   let first1, first0, v, t, tmp, tmp1, tmp2, tmp3, tmp4;
@@ -10268,7 +10180,7 @@ traverseTerm_inst_72_73_71_68_62_tsni = function traverseTerm_inst_72_73_71_68_6
   return eval_inst_72_73_71_68_62_tsni(t)
 };
 eval_inst_72_73_71_68_62_tsni = function eval_inst_72_73_71_68_62_tsni(ter) {
-  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+  let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     x1 = param0;
@@ -10294,16 +10206,16 @@ eval_inst_72_73_71_68_62_tsni = function eval_inst_72_73_71_68_62_tsni(ter) {
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp2 = runtime.safeCall(lambda_inst_72_73_71_68_62_20_tsni(x, b1));
-    return myBind_inst_72_73_71_68_62_83_tsni(lambda.myGet, tmp2)
+    lambda$this2 = runtime.safeCall(lambda_inst_72_73_71_68_62_20_tsni(x, b1));
+    return myBind_inst_72_73_71_68_62_83_tsni(lambda.myGet, lambda$this2)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp3 = traverseTerm_inst_72_73_71_68_62_tsni(u);
-    lambda$this2 = runtime.safeCall(lambda_inst_72_73_71_68_62_tsni1(v));
-    return myBind_inst_72_73_71_68_62_86_tsni(tmp3, lambda$this2)
+    tmp2 = traverseTerm_inst_72_73_71_68_62_tsni(u);
+    lambda$this3 = runtime.safeCall(lambda_inst_72_73_71_68_62_tsni1(v));
+    return myBind_inst_72_73_71_68_62_86_tsni(tmp2, lambda$this3)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
     param1 = ter.b;
@@ -10311,14 +10223,14 @@ eval_inst_72_73_71_68_62_tsni = function eval_inst_72_73_71_68_62_tsni(ter) {
     c = param0;
     a = param1;
     b = param2;
-    tmp4 = traverseTerm_inst_72_73_71_68_62_tsni(c);
-    tmp5 = runtime.safeCall(lambda_inst_72_73_71_68_62_tsni(a, b));
-    return lambda.myBind(tmp4, tmp5)
+    tmp3 = traverseTerm_inst_72_73_71_68_62_tsni(c);
+    lambda$this4 = runtime.safeCall(lambda_inst_72_73_71_68_62_tsni(a, b));
+    return lambda.myBind(tmp3, lambda$this4)
   } else if (ter instanceof lambda.Con.class) {
     param0 = ter.i;
     i = param0;
-    tmp6 = lambda.Con(i);
-    return lambda.myReturn(tmp6)
+    tmp4 = lambda.Con(i);
+    return lambda.myReturn(tmp4)
   } else if (ter instanceof lambda.Incr.class) {
     return myBind_inst_72_73_71_68_62_87_tsni(lambda.incr, lambda_inst_72_73_71_68_62_31_tsni)
   } else {
@@ -10349,7 +10261,7 @@ lambda$_inst_72_73_71_68_62_tsni1 = function lambda$_inst_72_73_71_68_62_tsni(v,
   return apply_inst_72_73_71_68_62_tsni(u_, v)
 };
 apply_inst_72_73_71_68_62_tsni = function apply_inst_72_73_71_68_62_tsni(t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp;
+  let param0, param1, param01, param11, x, b, e, lambda$this;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -10359,8 +10271,8 @@ apply_inst_72_73_71_68_62_tsni = function apply_inst_72_73_71_68_62_tsni(t, a) {
       x = param01;
       b = param11;
       e = param1;
-      tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_tsni2(a, x, b, e));
-      return myBind_inst_72_73_71_68_62_30_tsni(lambda.myGet, tmp)
+      lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_tsni2(a, x, b, e));
+      return myBind_inst_72_73_71_68_62_30_tsni(lambda.myGet, lambda$this)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -10392,10 +10304,9 @@ lambda$_inst_72_73_71_68_62_tsni3 = function lambda$_inst_72_73_71_68_62_tsni(v,
   return myBind_inst_72_73_71_68_62_19_tsni(tmp, lambda$this)
 };
 traverseCon_inst_72_73_71_68_62_tsni = function traverseCon_inst_72_73_71_68_62_tsni(t) {
-  let tmp, tmp1;
+  let tmp;
   tmp = traverseTerm_inst_72_73_71_68_62_tsni(t);
-  tmp1 = lambda_inst_72_73_71_68_62_14_tsni;
-  return myBind_inst_72_73_71_68_62_81_tsni(tmp, tmp1)
+  return myBind_inst_72_73_71_68_62_81_tsni(tmp, lambda_inst_72_73_71_68_62_14_tsni)
 };
 lambda_inst_72_73_71_68_62_tsni4 = (undefined, function (x) {
   return (e) => {
@@ -10476,9 +10387,9 @@ myReturn_inst_72_73_71_68_62_4_5_6_9_tsni = function myReturn_inst_72_73_71_68_6
   }
 };
 myBind_inst_72_73_71_68_62_4_10_tsni = function myBind_inst_72_73_71_68_62_4_10_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_4_10_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_4_10_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -10492,10 +10403,10 @@ lambda_inst_72_73_71_68_62_4_5_6_9_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_72_73_71_68_62_4_5_6_9_11_12_tsni = function lambda$_inst_72_73_71_68_62_4_5_6_9_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = (f) => {
+  return (f) => {
     let first1, first0, s_, a1, tmp;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
@@ -10503,13 +10414,12 @@ lambda$_inst_72_73_71_68_62_4_5_6_9_11_12_tsni = function lambda$_inst_72_73_71_
     a1 = first1;
     tmp = runtime.safeCall(f(a1));
     return lambda1.myRunState(tmp, s_)
-  };
-  return arr
+  }
 };
 myBind_inst_72_73_71_68_62_13_tsni = function myBind_inst_72_73_71_68_62_13_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_13_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_13_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -10561,9 +10471,9 @@ myReturn_inst_72_73_71_68_62_16_17_18_tsni = function myReturn_inst_72_73_71_68_
   }
 };
 myBind_inst_72_73_71_68_62_19_tsni = function myBind_inst_72_73_71_68_62_19_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_19_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_19_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -10594,9 +10504,9 @@ myReturn_inst_72_73_71_68_62_20_21_22_tsni = function myReturn_inst_72_73_71_68_
   }
 };
 pushVar_inst_72_73_71_68_62_23_tsni = function pushVar_inst_72_73_71_68_62_23_tsni(v, t, m) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_23_24_tsni(v, t, m));
-  return myBind_inst_72_73_71_68_62_23_28_tsni(lambda.myGet, tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_23_24_tsni(v, t, m));
+  return myBind_inst_72_73_71_68_62_23_28_tsni(lambda.myGet, lambda$this)
 };
 lambda_inst_72_73_71_68_62_23_24_tsni = (undefined, function (v, t, m) {
   return (env) => {
@@ -10604,13 +10514,13 @@ lambda_inst_72_73_71_68_62_23_24_tsni = (undefined, function (v, t, m) {
   }
 });
 lambda$_inst_72_73_71_68_62_23_24_25_tsni = function lambda$_inst_72_73_71_68_62_23_24_25_tsni(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return withEnv_inst_72_73_71_68_62_23_24_25_26_tsni(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return withEnv_inst_72_73_71_68_62_23_24_25_26_tsni(tmp1, m)
 };
 withEnv_inst_72_73_71_68_62_23_24_25_26_tsni = function withEnv_inst_72_73_71_68_62_23_24_25_26_tsni(tmp, m) {
   let tmp1;
@@ -10629,9 +10539,9 @@ myReturn_inst_72_73_71_68_62_23_24_25_26_27_tsni = function myReturn_inst_72_73_
   }
 };
 myBind_inst_72_73_71_68_62_23_28_tsni = function myBind_inst_72_73_71_68_62_23_28_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_23_28_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_23_28_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -10645,18 +10555,17 @@ lambda_inst_72_73_71_68_62_23_24_25_26_27_11_tsni = (undefined, function (a) {
   }
 });
 lambda$_inst_72_73_71_68_62_23_24_25_26_27_11_12_tsni = function lambda$_inst_72_73_71_68_62_23_24_25_26_27_11_12_tsni(a, s) {
-  let arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+  let _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
   _deforest_Deforest_Arr_2_0 = s;
   _deforest_Deforest_Arr_2_1 = a;
-  arr = () => {
+  return () => {
     let first1, first0, s_, a1;
     first0 = _deforest_Deforest_Arr_2_0;
     first1 = _deforest_Deforest_Arr_2_1;
     s_ = first0;
     a1 = first1;
     return a1
-  };
-  return arr
+  }
 };
 withEnv_inst_72_73_71_68_62_29_tsni = function withEnv_inst_72_73_71_68_62_29_tsni(tmp, m) {
   let tmp1;
@@ -10675,9 +10584,9 @@ myReturn_inst_72_73_71_68_62_29_27_tsni = function myReturn_inst_72_73_71_68_62_
   }
 };
 myBind_inst_72_73_71_68_62_30_tsni = function myBind_inst_72_73_71_68_62_30_tsni(m, f) {
-  let tmp, _deforest_MyState_r;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_30_76_tsni(m, f));
-  _deforest_MyState_r = tmp;
+  let lambda$this, _deforest_MyState_r;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_30_76_tsni(m, f));
+  _deforest_MyState_r = lambda$this;
   return (s) => {
     let param0, f1;
     param0 = _deforest_MyState_r;
@@ -10715,7 +10624,7 @@ mainSimple_inst_72_73_70_tsni = function mainSimple_inst_72_73_70_tsni(args) {
   }
 };
 simpleEval_inst_72_73_70_66_tsni = function simpleEval_inst_72_73_70_66_tsni(env, ter) {
-  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+  let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4;
   if (ter instanceof lambda.Var.class) {
     param0 = ter.s;
     v2 = param0;
@@ -10733,26 +10642,23 @@ simpleEval_inst_72_73_70_66_tsni = function simpleEval_inst_72_73_70_66_tsni(env
     param1 = ter.b;
     u1 = param0;
     v1 = param1;
-    tmp2 = simpleEvalCon_inst_72_73_70_66_tsni(env, u1);
-    u_1 = tmp2;
-    tmp3 = simpleEvalCon_inst_72_73_70_66_tsni(env, v1);
-    v_ = tmp3;
-    tmp4 = u_1 + v_;
-    return lambda.Con(tmp4)
+    u_1 = simpleEvalCon_inst_72_73_70_66_tsni(env, u1);
+    v_ = simpleEvalCon_inst_72_73_70_66_tsni(env, v1);
+    tmp2 = u_1 + v_;
+    return lambda.Con(tmp2)
   } else if (ter instanceof lambda.Lam.class) {
     param0 = ter.s;
     param1 = ter.t;
     x = param0;
     b1 = param1;
-    tmp5 = lambda.Lam(x, b1);
-    return lambda.Thunk(tmp5, env)
+    tmp3 = lambda.Lam(x, b1);
+    return lambda.Thunk(tmp3, env)
   } else if (ter instanceof lambda.App.class) {
     param0 = ter.a;
     param1 = ter.b;
     u = param0;
     v = param1;
-    tmp6 = simpleEval_inst_72_73_70_66_tsni(env, u);
-    u_ = tmp6;
+    u_ = simpleEval_inst_72_73_70_66_tsni(env, u);
     return simpleApply_inst_72_73_70_66_tsni(env, u_, v)
   } else if (ter instanceof lambda.IfZero.class) {
     param0 = ter.a;
@@ -10761,10 +10667,9 @@ simpleEval_inst_72_73_70_66_tsni = function simpleEval_inst_72_73_70_66_tsni(env
     c = param0;
     a = param1;
     b = param2;
-    tmp7 = simpleEval_inst_72_73_70_66_tsni(env, c);
-    val_ = tmp7;
-    tmp8 = lambda.Con(0);
-    scrut = lambda.eqTerm(val_, tmp8);
+    val_ = simpleEval_inst_72_73_70_66_tsni(env, c);
+    tmp4 = lambda.Con(0);
+    scrut = lambda.eqTerm(val_, tmp4);
     if (scrut === true) {
       return simpleEval_inst_72_73_70_66_tsni(env, a)
     } else {
@@ -10781,7 +10686,7 @@ simpleEval_inst_72_73_70_66_tsni = function simpleEval_inst_72_73_70_66_tsni(env
   }
 };
 simpleApply_inst_72_73_70_66_tsni = function simpleApply_inst_72_73_70_66_tsni(env, t, a) {
-  let param0, param1, param01, param11, x, b, e, tmp, arr, tmp1;
+  let param0, param1, param01, param11, x, b, e, tmp, tmp1, tmp2;
   if (t instanceof lambda.Thunk.class) {
     param0 = t.t;
     param1 = t.e;
@@ -10792,12 +10697,12 @@ simpleApply_inst_72_73_70_66_tsni = function simpleApply_inst_72_73_70_66_tsni(e
       b = param11;
       e = param1;
       tmp = lambda.Thunk(a, env);
-      arr = globalThis.Object.freeze([
+      tmp1 = globalThis.Object.freeze([
         x,
         tmp
       ]);
-      tmp1 = NofibPrelude.Cons(arr, e);
-      return simpleEval_inst_72_73_70_66_tsni(tmp1, b)
+      tmp2 = NofibPrelude.Cons(tmp1, e);
+      return simpleEval_inst_72_73_70_66_tsni(tmp2, b)
     } else {
       throw globalThis.Error("bad application")
     }
@@ -10806,9 +10711,8 @@ simpleApply_inst_72_73_70_66_tsni = function simpleApply_inst_72_73_70_66_tsni(e
   }
 };
 simpleEvalCon_inst_72_73_70_66_tsni = function simpleEvalCon_inst_72_73_70_66_tsni(env, e) {
-  let e_, param0, c, tmp;
-  tmp = simpleEval_inst_72_73_70_66_tsni(env, e);
-  e_ = tmp;
+  let e_, param0, c;
+  e_ = simpleEval_inst_72_73_70_66_tsni(env, e);
   if (e_ instanceof lambda.Con.class) {
     param0 = e_.i;
     c = param0;
@@ -10893,9 +10797,9 @@ myRunState_inst_3_13_76_77_79_tsni = function myRunState_inst_3_13_76_77_79_tsni
   return runtime.safeCall(m(s))
 };
 myBind_inst_3_80_tsni = function myBind_inst_3_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_3_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_3_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_3_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -10920,9 +10824,9 @@ myRunState_inst_3_80_76_77_78_tsni = function myRunState_inst_3_80_76_77_78_tsni
   return runtime.safeCall(m(s))
 };
 myBind_inst_3_81_tsni = function myBind_inst_3_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_3_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_3_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_3_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -10969,9 +10873,9 @@ myRunState_inst_3_19_76_77_78_tsni = function myRunState_inst_3_19_76_77_78_tsni
   return runtime.safeCall(m(s))
 };
 myBind_inst_3_82_tsni = function myBind_inst_3_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_3_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_3_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_3_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -10996,9 +10900,9 @@ myRunState_inst_3_82_76_77_78_tsni = function myRunState_inst_3_82_76_77_78_tsni
   return runtime.safeCall(m(s))
 };
 myBind_inst_3_83_tsni = function myBind_inst_3_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_3_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_3_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_3_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11075,9 +10979,9 @@ myRunState_inst_3_30_76_77_78_tsni = function myRunState_inst_3_30_76_77_78_tsni
   return runtime.safeCall(m(s))
 };
 myBind_inst_3_86_tsni = function myBind_inst_3_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_3_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_3_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_3_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11102,9 +11006,9 @@ myRunState_inst_3_86_76_77_78_tsni = function myRunState_inst_3_86_76_77_78_tsni
   return runtime.safeCall(m(s))
 };
 myBind_inst_3_87_tsni = function myBind_inst_3_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_3_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_3_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_3_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11154,9 +11058,9 @@ myRunState_inst_33_4_10_76_77_78_tsni = function myRunState_inst_33_4_10_76_77_7
   return runtime.safeCall(m(s))
 };
 myBind_inst_33_13_tsni = function myBind_inst_33_13_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_33_13_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_33_13_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_33_13_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11172,9 +11076,9 @@ myRunState_inst_33_13_76_77_79_tsni = function myRunState_inst_33_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_33_81_tsni = function myBind_inst_33_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_33_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_33_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_33_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11221,9 +11125,9 @@ myRunState_inst_33_19_76_77_78_tsni = function myRunState_inst_33_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_33_82_tsni = function myBind_inst_33_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_33_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_33_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_33_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11248,9 +11152,9 @@ myRunState_inst_33_82_76_77_78_tsni = function myRunState_inst_33_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_33_83_tsni = function myBind_inst_33_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_33_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_33_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_33_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11327,9 +11231,9 @@ myRunState_inst_33_30_76_77_78_tsni = function myRunState_inst_33_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_33_86_tsni = function myBind_inst_33_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_33_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_33_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_33_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11354,9 +11258,9 @@ myRunState_inst_33_86_76_77_78_tsni = function myRunState_inst_33_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_33_87_tsni = function myBind_inst_33_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_33_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_33_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_33_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11406,9 +11310,9 @@ myRunState_inst_34_4_10_76_77_78_tsni = function myRunState_inst_34_4_10_76_77_7
   return runtime.safeCall(m(s))
 };
 myBind_inst_34_13_tsni = function myBind_inst_34_13_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_34_13_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_34_13_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_34_13_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11424,9 +11328,9 @@ myRunState_inst_34_13_76_77_79_tsni = function myRunState_inst_34_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_34_81_tsni = function myBind_inst_34_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_34_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_34_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_34_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11473,9 +11377,9 @@ myRunState_inst_34_19_76_77_78_tsni = function myRunState_inst_34_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_34_82_tsni = function myBind_inst_34_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_34_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_34_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_34_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11500,9 +11404,9 @@ myRunState_inst_34_82_76_77_78_tsni = function myRunState_inst_34_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_34_83_tsni = function myBind_inst_34_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_34_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_34_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_34_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11579,9 +11483,9 @@ myRunState_inst_34_30_76_77_78_tsni = function myRunState_inst_34_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_34_86_tsni = function myBind_inst_34_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_34_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_34_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_34_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11606,9 +11510,9 @@ myRunState_inst_34_86_76_77_78_tsni = function myRunState_inst_34_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_34_87_tsni = function myBind_inst_34_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_34_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_34_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_34_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11671,9 +11575,9 @@ myRunState_inst_35_13_76_77_79_tsni = function myRunState_inst_35_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_35_80_tsni = function myBind_inst_35_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_35_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_35_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_35_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11698,9 +11602,9 @@ myRunState_inst_35_80_76_77_78_tsni = function myRunState_inst_35_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_35_81_tsni = function myBind_inst_35_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_35_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_35_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_35_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11725,9 +11629,9 @@ myRunState_inst_35_81_76_77_78_tsni = function myRunState_inst_35_81_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_35_19_tsni = function myBind_inst_35_19_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_35_19_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_35_19_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_35_19_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11752,9 +11656,9 @@ myRunState_inst_35_19_76_77_78_tsni = function myRunState_inst_35_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_35_83_tsni = function myBind_inst_35_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_35_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_35_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_35_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11831,9 +11735,9 @@ myRunState_inst_35_30_76_77_78_tsni = function myRunState_inst_35_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_35_86_tsni = function myBind_inst_35_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_35_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_35_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_35_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11858,9 +11762,9 @@ myRunState_inst_35_86_76_77_78_tsni = function myRunState_inst_35_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_35_87_tsni = function myBind_inst_35_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_35_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_35_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_35_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11923,9 +11827,9 @@ myRunState_inst_36_13_76_77_79_tsni = function myRunState_inst_36_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_36_80_tsni = function myBind_inst_36_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_36_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_36_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_36_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11950,9 +11854,9 @@ myRunState_inst_36_80_76_77_78_tsni = function myRunState_inst_36_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_36_81_tsni = function myBind_inst_36_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_36_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_36_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_36_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -11977,9 +11881,9 @@ myRunState_inst_36_81_76_77_78_tsni = function myRunState_inst_36_81_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_36_19_tsni = function myBind_inst_36_19_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_36_19_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_36_19_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_36_19_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12004,9 +11908,9 @@ myRunState_inst_36_19_76_77_78_tsni = function myRunState_inst_36_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_36_83_tsni = function myBind_inst_36_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_36_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_36_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_36_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12083,9 +11987,9 @@ myRunState_inst_36_30_76_77_78_tsni = function myRunState_inst_36_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_36_86_tsni = function myBind_inst_36_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_36_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_36_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_36_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12110,9 +12014,9 @@ myRunState_inst_36_86_76_77_78_tsni = function myRunState_inst_36_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_36_87_tsni = function myBind_inst_36_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_36_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_36_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_36_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12175,9 +12079,9 @@ myRunState_inst_37_13_76_77_79_tsni = function myRunState_inst_37_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_37_80_tsni = function myBind_inst_37_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_37_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_37_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_37_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12202,9 +12106,9 @@ myRunState_inst_37_80_76_77_78_tsni = function myRunState_inst_37_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_37_81_tsni = function myBind_inst_37_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_37_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_37_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_37_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12251,9 +12155,9 @@ myRunState_inst_37_19_76_77_78_tsni = function myRunState_inst_37_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_37_82_tsni = function myBind_inst_37_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_37_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_37_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_37_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12278,9 +12182,9 @@ myRunState_inst_37_82_76_77_78_tsni = function myRunState_inst_37_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_37_83_tsni = function myBind_inst_37_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_37_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_37_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_37_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12335,9 +12239,9 @@ myRunState_inst_37_29_84_85_tsni = function myRunState_inst_37_29_84_85_tsni(m, 
   return runtime.safeCall(m(s))
 };
 myBind_inst_37_30_tsni = function myBind_inst_37_30_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_37_30_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_37_30_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_37_30_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12362,9 +12266,9 @@ myRunState_inst_37_30_76_77_78_tsni = function myRunState_inst_37_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_37_87_tsni = function myBind_inst_37_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_37_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_37_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_37_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12427,9 +12331,9 @@ myRunState_inst_38_13_76_77_79_tsni = function myRunState_inst_38_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_38_80_tsni = function myBind_inst_38_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_38_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_38_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_38_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12454,9 +12358,9 @@ myRunState_inst_38_80_76_77_78_tsni = function myRunState_inst_38_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_38_81_tsni = function myBind_inst_38_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_38_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_38_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_38_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12503,9 +12407,9 @@ myRunState_inst_38_19_76_77_78_tsni = function myRunState_inst_38_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_38_82_tsni = function myBind_inst_38_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_38_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_38_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_38_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12530,9 +12434,9 @@ myRunState_inst_38_82_76_77_78_tsni = function myRunState_inst_38_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_38_83_tsni = function myBind_inst_38_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_38_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_38_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_38_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12587,9 +12491,9 @@ myRunState_inst_38_29_84_85_tsni = function myRunState_inst_38_29_84_85_tsni(m, 
   return runtime.safeCall(m(s))
 };
 myBind_inst_38_30_tsni = function myBind_inst_38_30_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_38_30_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_38_30_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_38_30_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12614,9 +12518,9 @@ myRunState_inst_38_30_76_77_78_tsni = function myRunState_inst_38_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_38_87_tsni = function myBind_inst_38_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_38_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_38_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_38_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12679,9 +12583,9 @@ myRunState_inst_39_13_76_77_79_tsni = function myRunState_inst_39_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_39_80_tsni = function myBind_inst_39_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_39_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12706,9 +12610,9 @@ myRunState_inst_39_80_76_77_78_tsni = function myRunState_inst_39_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_39_81_tsni = function myBind_inst_39_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_39_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12755,9 +12659,9 @@ myRunState_inst_39_19_76_77_78_tsni = function myRunState_inst_39_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_39_82_tsni = function myBind_inst_39_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_39_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12782,9 +12686,9 @@ myRunState_inst_39_82_76_77_78_tsni = function myRunState_inst_39_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_39_83_tsni = function myBind_inst_39_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_39_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12861,9 +12765,9 @@ myRunState_inst_39_30_76_77_78_tsni = function myRunState_inst_39_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_39_86_tsni = function myBind_inst_39_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_39_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12888,9 +12792,9 @@ myRunState_inst_39_86_76_77_78_tsni = function myRunState_inst_39_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_39_87_tsni = function myBind_inst_39_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_39_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_39_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_39_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12953,9 +12857,9 @@ myRunState_inst_40_13_76_77_79_tsni = function myRunState_inst_40_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_40_80_tsni = function myBind_inst_40_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_40_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_40_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_40_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -12980,9 +12884,9 @@ myRunState_inst_40_80_76_77_78_tsni = function myRunState_inst_40_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_40_81_tsni = function myBind_inst_40_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_40_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_40_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_40_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13029,9 +12933,9 @@ myRunState_inst_40_19_76_77_78_tsni = function myRunState_inst_40_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_40_82_tsni = function myBind_inst_40_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_40_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_40_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_40_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13056,9 +12960,9 @@ myRunState_inst_40_82_76_77_78_tsni = function myRunState_inst_40_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_40_83_tsni = function myBind_inst_40_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_40_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_40_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_40_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13135,9 +13039,9 @@ myRunState_inst_40_30_76_77_78_tsni = function myRunState_inst_40_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_40_86_tsni = function myBind_inst_40_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_40_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_40_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_40_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13162,9 +13066,9 @@ myRunState_inst_40_86_76_77_78_tsni = function myRunState_inst_40_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_40_87_tsni = function myBind_inst_40_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_40_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_40_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_40_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13227,9 +13131,9 @@ myRunState_inst_41_13_76_77_79_tsni = function myRunState_inst_41_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_41_80_tsni = function myBind_inst_41_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_41_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13254,9 +13158,9 @@ myRunState_inst_41_80_76_77_78_tsni = function myRunState_inst_41_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_41_81_tsni = function myBind_inst_41_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_41_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13303,9 +13207,9 @@ myRunState_inst_41_19_76_77_78_tsni = function myRunState_inst_41_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_41_82_tsni = function myBind_inst_41_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_41_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13330,9 +13234,9 @@ myRunState_inst_41_82_76_77_78_tsni = function myRunState_inst_41_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_41_83_tsni = function myBind_inst_41_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_41_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13392,9 +13296,9 @@ myRunState_inst_41_29_84_85_tsni = function myRunState_inst_41_29_84_85_tsni(m, 
   return runtime.safeCall(m(s))
 };
 myBind_inst_41_86_tsni = function myBind_inst_41_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_41_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13419,9 +13323,9 @@ myRunState_inst_41_86_76_77_78_tsni = function myRunState_inst_41_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_41_87_tsni = function myBind_inst_41_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_41_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_41_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_41_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13484,9 +13388,9 @@ myRunState_inst_42_13_76_77_79_tsni = function myRunState_inst_42_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_42_80_tsni = function myBind_inst_42_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_42_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_42_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_42_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13511,9 +13415,9 @@ myRunState_inst_42_80_76_77_78_tsni = function myRunState_inst_42_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_42_81_tsni = function myBind_inst_42_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_42_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_42_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_42_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13560,9 +13464,9 @@ myRunState_inst_42_19_76_77_78_tsni = function myRunState_inst_42_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_42_82_tsni = function myBind_inst_42_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_42_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_42_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_42_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13587,9 +13491,9 @@ myRunState_inst_42_82_76_77_78_tsni = function myRunState_inst_42_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_42_83_tsni = function myBind_inst_42_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_42_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_42_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_42_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13649,9 +13553,9 @@ myRunState_inst_42_29_84_85_tsni = function myRunState_inst_42_29_84_85_tsni(m, 
   return runtime.safeCall(m(s))
 };
 myBind_inst_42_86_tsni = function myBind_inst_42_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_42_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_42_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_42_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13676,9 +13580,9 @@ myRunState_inst_42_86_76_77_78_tsni = function myRunState_inst_42_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_42_87_tsni = function myBind_inst_42_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_42_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_42_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_42_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13718,9 +13622,9 @@ myMaybe_inst_48_5_6_7_75_tsni = function myMaybe_inst_48_5_6_7_75_tsni(d, f, x) 
   return runtime.safeCall(x(f))
 };
 myBind_inst_48_10_tsni = function myBind_inst_48_10_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_48_10_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_48_10_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_48_10_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13745,9 +13649,9 @@ myRunState_inst_48_10_76_77_78_tsni = function myRunState_inst_48_10_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_49_28_tsni = function myBind_inst_49_28_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_49_28_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_49_28_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_49_28_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13810,9 +13714,9 @@ myRunState_inst_50_13_76_77_79_tsni = function myRunState_inst_50_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_50_80_tsni = function myBind_inst_50_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_50_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_50_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_50_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13837,9 +13741,9 @@ myRunState_inst_50_80_76_77_78_tsni = function myRunState_inst_50_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_50_81_tsni = function myBind_inst_50_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_50_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_50_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_50_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13886,9 +13790,9 @@ myRunState_inst_50_19_76_77_78_tsni = function myRunState_inst_50_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_50_82_tsni = function myBind_inst_50_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_50_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_50_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_50_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13913,9 +13817,9 @@ myRunState_inst_50_82_76_77_78_tsni = function myRunState_inst_50_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_50_83_tsni = function myBind_inst_50_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_50_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_50_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_50_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -13992,9 +13896,9 @@ myRunState_inst_50_30_76_77_78_tsni = function myRunState_inst_50_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_50_86_tsni = function myBind_inst_50_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_50_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_50_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_50_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14019,9 +13923,9 @@ myRunState_inst_50_86_76_77_78_tsni = function myRunState_inst_50_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_50_87_tsni = function myBind_inst_50_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_50_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_50_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_50_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14084,9 +13988,9 @@ myRunState_inst_51_13_76_77_79_tsni = function myRunState_inst_51_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_51_80_tsni = function myBind_inst_51_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_51_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14111,9 +14015,9 @@ myRunState_inst_51_80_76_77_78_tsni = function myRunState_inst_51_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_51_81_tsni = function myBind_inst_51_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_51_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14160,9 +14064,9 @@ myRunState_inst_51_19_76_77_78_tsni = function myRunState_inst_51_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_51_82_tsni = function myBind_inst_51_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_51_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14187,9 +14091,9 @@ myRunState_inst_51_82_76_77_78_tsni = function myRunState_inst_51_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_51_83_tsni = function myBind_inst_51_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_51_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14266,9 +14170,9 @@ myRunState_inst_51_30_76_77_78_tsni = function myRunState_inst_51_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_51_86_tsni = function myBind_inst_51_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_51_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14293,9 +14197,9 @@ myRunState_inst_51_86_76_77_78_tsni = function myRunState_inst_51_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_51_87_tsni = function myBind_inst_51_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_51_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_51_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_51_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14358,9 +14262,9 @@ myRunState_inst_52_13_76_77_79_tsni = function myRunState_inst_52_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_52_80_tsni = function myBind_inst_52_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_52_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_52_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_52_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14385,9 +14289,9 @@ myRunState_inst_52_80_76_77_78_tsni = function myRunState_inst_52_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_52_81_tsni = function myBind_inst_52_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_52_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_52_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_52_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14434,9 +14338,9 @@ myRunState_inst_52_19_76_77_78_tsni = function myRunState_inst_52_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_52_82_tsni = function myBind_inst_52_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_52_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_52_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_52_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14461,9 +14365,9 @@ myRunState_inst_52_82_76_77_78_tsni = function myRunState_inst_52_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_52_83_tsni = function myBind_inst_52_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_52_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_52_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_52_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14518,9 +14422,9 @@ myRunState_inst_52_29_84_85_tsni = function myRunState_inst_52_29_84_85_tsni(m, 
   return runtime.safeCall(m(s))
 };
 myBind_inst_52_30_tsni = function myBind_inst_52_30_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_52_30_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_52_30_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_52_30_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14545,9 +14449,9 @@ myRunState_inst_52_30_76_77_78_tsni = function myRunState_inst_52_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_52_87_tsni = function myBind_inst_52_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_52_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_52_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_52_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14610,9 +14514,9 @@ myRunState_inst_53_13_76_77_79_tsni = function myRunState_inst_53_13_76_77_79_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_53_80_tsni = function myBind_inst_53_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_53_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_53_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_53_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14637,9 +14541,9 @@ myRunState_inst_53_80_76_77_78_tsni = function myRunState_inst_53_80_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_53_81_tsni = function myBind_inst_53_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_53_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_53_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_53_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14686,9 +14590,9 @@ myRunState_inst_53_19_76_77_78_tsni = function myRunState_inst_53_19_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_53_82_tsni = function myBind_inst_53_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_53_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_53_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_53_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14713,9 +14617,9 @@ myRunState_inst_53_82_76_77_78_tsni = function myRunState_inst_53_82_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_53_83_tsni = function myBind_inst_53_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_53_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_53_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_53_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14792,9 +14696,9 @@ myRunState_inst_53_30_76_77_78_tsni = function myRunState_inst_53_30_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_53_86_tsni = function myBind_inst_53_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_53_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_53_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_53_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14819,9 +14723,9 @@ myRunState_inst_53_86_76_77_78_tsni = function myRunState_inst_53_86_76_77_78_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_53_87_tsni = function myBind_inst_53_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_53_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_53_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_53_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14864,9 +14768,9 @@ append_inst_60_74_tsni = function append_inst_60_74_tsni(xs, ys) {
   return runtime.safeCall(xs(ys))
 };
 myBind_inst_61_62_87_tsni = function myBind_inst_61_62_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_61_62_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_61_62_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14891,9 +14795,9 @@ myRunState_inst_61_62_87_76_77_78_tsni = function myRunState_inst_61_62_87_76_77
   return runtime.safeCall(m(s))
 };
 myBind_inst_61_62_86_tsni = function myBind_inst_61_62_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_61_62_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_61_62_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14970,9 +14874,9 @@ myRunState_inst_61_62_29_84_85_tsni = function myRunState_inst_61_62_29_84_85_ts
   return runtime.safeCall(m(s))
 };
 myBind_inst_61_62_83_tsni = function myBind_inst_61_62_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_61_62_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_61_62_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -14997,9 +14901,9 @@ myRunState_inst_61_62_83_76_77_78_tsni = function myRunState_inst_61_62_83_76_77
   return runtime.safeCall(m(s))
 };
 myBind_inst_61_62_82_tsni = function myBind_inst_61_62_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_61_62_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_61_62_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15046,9 +14950,9 @@ myRunState_inst_61_62_19_76_77_78_tsni = function myRunState_inst_61_62_19_76_77
   return runtime.safeCall(m(s))
 };
 myBind_inst_61_62_81_tsni = function myBind_inst_61_62_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_61_62_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_61_62_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15073,9 +14977,9 @@ myRunState_inst_61_62_81_76_77_78_tsni = function myRunState_inst_61_62_81_76_77
   return runtime.safeCall(m(s))
 };
 myBind_inst_61_62_80_tsni = function myBind_inst_61_62_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_61_62_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_61_62_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_61_62_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15191,9 +15095,9 @@ myRunState_inst_67_68_62_13_76_77_79_tsni = function myRunState_inst_67_68_62_13
   return runtime.safeCall(m(s))
 };
 myBind_inst_67_68_62_80_tsni = function myBind_inst_67_68_62_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_67_68_62_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15218,9 +15122,9 @@ myRunState_inst_67_68_62_80_76_77_78_tsni = function myRunState_inst_67_68_62_80
   return runtime.safeCall(m(s))
 };
 myBind_inst_67_68_62_81_tsni = function myBind_inst_67_68_62_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_67_68_62_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15267,9 +15171,9 @@ myRunState_inst_67_68_62_19_76_77_78_tsni = function myRunState_inst_67_68_62_19
   return runtime.safeCall(m(s))
 };
 myBind_inst_67_68_62_82_tsni = function myBind_inst_67_68_62_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_67_68_62_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15294,9 +15198,9 @@ myRunState_inst_67_68_62_82_76_77_78_tsni = function myRunState_inst_67_68_62_82
   return runtime.safeCall(m(s))
 };
 myBind_inst_67_68_62_83_tsni = function myBind_inst_67_68_62_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_67_68_62_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15373,9 +15277,9 @@ myRunState_inst_67_68_62_30_76_77_78_tsni = function myRunState_inst_67_68_62_30
   return runtime.safeCall(m(s))
 };
 myBind_inst_67_68_62_86_tsni = function myBind_inst_67_68_62_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_67_68_62_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15400,9 +15304,9 @@ myRunState_inst_67_68_62_86_76_77_78_tsni = function myRunState_inst_67_68_62_86
   return runtime.safeCall(m(s))
 };
 myBind_inst_67_68_62_87_tsni = function myBind_inst_67_68_62_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_67_68_62_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_67_68_62_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_67_68_62_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15430,9 +15334,9 @@ myMaybe_inst_69_70_66_88_tsni = function myMaybe_inst_69_70_66_88_tsni(d, f, x) 
   return runtime.safeCall(x(f))
 };
 myBind_inst_69_71_68_62_87_tsni = function myBind_inst_69_71_68_62_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_69_71_68_62_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15457,9 +15361,9 @@ myRunState_inst_69_71_68_62_87_76_77_78_tsni = function myRunState_inst_69_71_68
   return runtime.safeCall(m(s))
 };
 myBind_inst_69_71_68_62_86_tsni = function myBind_inst_69_71_68_62_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_69_71_68_62_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15536,9 +15440,9 @@ myRunState_inst_69_71_68_62_29_84_85_tsni = function myRunState_inst_69_71_68_62
   return runtime.safeCall(m(s))
 };
 myBind_inst_69_71_68_62_83_tsni = function myBind_inst_69_71_68_62_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_69_71_68_62_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15563,9 +15467,9 @@ myRunState_inst_69_71_68_62_83_76_77_78_tsni = function myRunState_inst_69_71_68
   return runtime.safeCall(m(s))
 };
 myBind_inst_69_71_68_62_82_tsni = function myBind_inst_69_71_68_62_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_69_71_68_62_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15612,9 +15516,9 @@ myRunState_inst_69_71_68_62_19_76_77_78_tsni = function myRunState_inst_69_71_68
   return runtime.safeCall(m(s))
 };
 myBind_inst_69_71_68_62_81_tsni = function myBind_inst_69_71_68_62_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_69_71_68_62_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15639,9 +15543,9 @@ myRunState_inst_69_71_68_62_81_76_77_78_tsni = function myRunState_inst_69_71_68
   return runtime.safeCall(m(s))
 };
 myBind_inst_69_71_68_62_80_tsni = function myBind_inst_69_71_68_62_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_69_71_68_62_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_69_71_68_62_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_69_71_68_62_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15754,9 +15658,9 @@ myRunState_inst_72_73_71_68_62_13_76_77_79_tsni = function myRunState_inst_72_73
   return runtime.safeCall(m(s))
 };
 myBind_inst_72_73_71_68_62_80_tsni = function myBind_inst_72_73_71_68_62_80_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_80_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_80_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_72_73_71_68_62_80_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15781,9 +15685,9 @@ myRunState_inst_72_73_71_68_62_80_76_77_78_tsni = function myRunState_inst_72_73
   return runtime.safeCall(m(s))
 };
 myBind_inst_72_73_71_68_62_81_tsni = function myBind_inst_72_73_71_68_62_81_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_81_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_81_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_72_73_71_68_62_81_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15830,9 +15734,9 @@ myRunState_inst_72_73_71_68_62_19_76_77_78_tsni = function myRunState_inst_72_73
   return runtime.safeCall(m(s))
 };
 myBind_inst_72_73_71_68_62_82_tsni = function myBind_inst_72_73_71_68_62_82_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_82_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_82_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_72_73_71_68_62_82_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15857,9 +15761,9 @@ myRunState_inst_72_73_71_68_62_82_76_77_78_tsni = function myRunState_inst_72_73
   return runtime.safeCall(m(s))
 };
 myBind_inst_72_73_71_68_62_83_tsni = function myBind_inst_72_73_71_68_62_83_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_83_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_83_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_72_73_71_68_62_83_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15936,9 +15840,9 @@ myRunState_inst_72_73_71_68_62_30_76_77_78_tsni = function myRunState_inst_72_73
   return runtime.safeCall(m(s))
 };
 myBind_inst_72_73_71_68_62_86_tsni = function myBind_inst_72_73_71_68_62_86_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_86_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_86_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_72_73_71_68_62_86_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -15963,9 +15867,9 @@ myRunState_inst_72_73_71_68_62_86_76_77_78_tsni = function myRunState_inst_72_73
   return runtime.safeCall(m(s))
 };
 myBind_inst_72_73_71_68_62_87_tsni = function myBind_inst_72_73_71_68_62_87_tsni(m, f) {
-  let tmp;
-  tmp = runtime.safeCall(lambda_inst_72_73_71_68_62_87_76_tsni(m, f));
-  return lambda.MyState(tmp)
+  let lambda$this;
+  lambda$this = runtime.safeCall(lambda_inst_72_73_71_68_62_87_76_tsni(m, f));
+  return lambda.MyState(lambda$this)
 };
 lambda_inst_72_73_71_68_62_87_76_tsni = (undefined, function (m, f) {
   return (s) => {
@@ -16015,7 +15919,7 @@ lambda24 = (undefined, function (dummy) {
 lambda25 = (undefined, function (x) {
   return x
 });
-lambda17 = (undefined, function (t) {
+lambda16 = (undefined, function (t) {
   return traverseTerm_inst_3_tsni(t)
 });
 lambda$16 = function lambda$(x, e) {
@@ -16023,7 +15927,7 @@ lambda$16 = function lambda$(x, e) {
   tmp = lookupVar_inst_33_4_tsni(x);
   return myBind_inst_33_13_tsni(tmp, lambda_inst_33_tsni5)
 };
-lambda16 = (undefined, function (x) {
+lambda17 = (undefined, function (x) {
   return (e) => {
     return lambda$_inst_34_tsni4(x, e)
   }
@@ -16034,7 +15938,7 @@ lambda$15 = function lambda$(u_, v_) {
   tmp1 = lambda1.Con(tmp);
   return lambda1.myReturn(tmp1)
 };
-lambda19 = (undefined, function (u_) {
+lambda18 = (undefined, function (u_) {
   return (v_) => {
     return lambda$15(u_, v_)
   }
@@ -16045,7 +15949,7 @@ lambda$14 = function lambda$(v, u_) {
   lambda$this = runtime.safeCall(lambda_inst_35_16_tsni(u_));
   return myBind_inst_35_19_tsni(tmp, lambda$this)
 };
-lambda18 = (undefined, function (v) {
+lambda19 = (undefined, function (v) {
   return (u_) => {
     return lambda$_inst_36_tsni3(v, u_)
   }
@@ -16112,13 +16016,13 @@ lambda14 = (undefined, function (_t) {
   }
 });
 lambda$9 = function lambda$(v, t, m, env) {
-  let arr, tmp;
-  arr = globalThis.Object.freeze([
+  let tmp, tmp1;
+  tmp = globalThis.Object.freeze([
     v,
     t
   ]);
-  tmp = NofibPrelude.Cons(arr, env);
-  return lambda1.withEnv(tmp, m)
+  tmp1 = NofibPrelude.Cons(tmp, env);
+  return lambda1.withEnv(tmp1, m)
 };
 lambda13 = (undefined, function (v, t, m) {
   return (env) => {
@@ -16200,12 +16104,10 @@ lambda9 = (undefined, function (b, d) {
   }
 });
 lambda$1 = function lambda$(a, s) {
-  let arr;
-  arr = globalThis.Object.freeze([
+  return globalThis.Object.freeze([
     s,
     a
-  ]);
-  return arr
+  ])
 };
 lambda3 = (undefined, function (a) {
   return (s) => {
@@ -16239,7 +16141,7 @@ globalThis.Object.freeze(class lambda {
     runtime.Unit;
   }
   static {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, lambda27;
+    let lambda27, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34;
     this.MyState = function MyState(r) {
       return globalThis.Object.freeze(new MyState.class(r));
     };
@@ -16254,12 +16156,10 @@ globalThis.Object.freeze(class lambda {
       static [definitionMetadata] = ["class", "MyState", ["r"]]; 
     });
     lambda27 = (undefined, function (s) {
-      let arr;
-      arr = globalThis.Object.freeze([
+      return globalThis.Object.freeze([
         s,
         s
-      ]);
-      return arr
+      ])
     });
     tmp = lambda.MyState(lambda27);
     this.myGet = tmp;
@@ -16478,9 +16378,9 @@ globalThis.Object.freeze(class lambda {
     }
   } 
   static myBind(m, f) {
-    let tmp;
-    tmp = runtime.safeCall(lambda2(m, f));
-    return lambda.MyState(tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda2(m, f));
+    return lambda.MyState(lambda$this)
   } 
   static myReturn(a) {
     let lambda$this;
@@ -16689,21 +16589,20 @@ globalThis.Object.freeze(class lambda {
     return lambda.myReturn(tmp1)
   } 
   static pushVar(v, t, m) {
-    let tmp;
-    tmp = runtime.safeCall(lambda_inst_49_24_tsni(v, t, m));
-    return myBind_inst_49_28_tsni(lambda.myGet, tmp)
+    let lambda$this;
+    lambda$this = runtime.safeCall(lambda_inst_49_24_tsni(v, t, m));
+    return myBind_inst_49_28_tsni(lambda.myGet, lambda$this)
   } 
   static traverseTerm(t) {
     return eval_inst_50_tsni(t)
   } 
   static traverseCon(t) {
-    let tmp, tmp1;
+    let tmp;
     tmp = traverseTerm_inst_51_tsni(t);
-    tmp1 = lambda_inst_51_14_tsni;
-    return myBind_inst_51_81_tsni(tmp, tmp1)
+    return myBind_inst_51_81_tsni(tmp, lambda_inst_51_14_tsni)
   } 
   static apply(t, a) {
-    let param0, param1, param01, param11, x, b, e, tmp;
+    let param0, param1, param01, param11, x, b, e, lambda$this;
     if (t instanceof lambda.Thunk.class) {
       param0 = t.t;
       param1 = t.e;
@@ -16713,8 +16612,8 @@ globalThis.Object.freeze(class lambda {
         x = param01;
         b = param11;
         e = param1;
-        tmp = runtime.safeCall(lambda_inst_52_tsni2(a, x, b, e));
-        return myBind_inst_52_30_tsni(lambda.myGet, tmp)
+        lambda$this = runtime.safeCall(lambda_inst_52_tsni2(a, x, b, e));
+        return myBind_inst_52_30_tsni(lambda.myGet, lambda$this)
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -16723,7 +16622,7 @@ globalThis.Object.freeze(class lambda {
     }
   } 
   static eval(ter) {
-    let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, lambda$this, lambda$this1, lambda$this2;
+    let param0, i, param1, param2, c, a, b, u, v, x, b1, t, e, u1, v1, x1, tmp, tmp1, tmp2, tmp3, tmp4, lambda$this, lambda$this1, lambda$this2, lambda$this3, lambda$this4;
     if (ter instanceof lambda.Var.class) {
       param0 = ter.s;
       x1 = param0;
@@ -16749,16 +16648,16 @@ globalThis.Object.freeze(class lambda {
       param1 = ter.t;
       x = param0;
       b1 = param1;
-      tmp2 = runtime.safeCall(lambda_inst_53_20_tsni(x, b1));
-      return myBind_inst_53_83_tsni(lambda.myGet, tmp2)
+      lambda$this2 = runtime.safeCall(lambda_inst_53_20_tsni(x, b1));
+      return myBind_inst_53_83_tsni(lambda.myGet, lambda$this2)
     } else if (ter instanceof lambda.App.class) {
       param0 = ter.a;
       param1 = ter.b;
       u = param0;
       v = param1;
-      tmp3 = traverseTerm_inst_53_tsni(u);
-      lambda$this2 = runtime.safeCall(lambda_inst_53_tsni1(v));
-      return myBind_inst_53_86_tsni(tmp3, lambda$this2)
+      tmp2 = traverseTerm_inst_53_tsni(u);
+      lambda$this3 = runtime.safeCall(lambda_inst_53_tsni1(v));
+      return myBind_inst_53_86_tsni(tmp2, lambda$this3)
     } else if (ter instanceof lambda.IfZero.class) {
       param0 = ter.a;
       param1 = ter.b;
@@ -16766,14 +16665,14 @@ globalThis.Object.freeze(class lambda {
       c = param0;
       a = param1;
       b = param2;
-      tmp4 = traverseTerm_inst_53_tsni(c);
-      tmp5 = runtime.safeCall(lambda_inst_53_tsni(a, b));
-      return lambda.myBind(tmp4, tmp5)
+      tmp3 = traverseTerm_inst_53_tsni(c);
+      lambda$this4 = runtime.safeCall(lambda_inst_53_tsni(a, b));
+      return lambda.myBind(tmp3, lambda$this4)
     } else if (ter instanceof lambda.Con.class) {
       param0 = ter.i;
       i = param0;
-      tmp6 = lambda.Con(i);
-      return lambda.myReturn(tmp6)
+      tmp4 = lambda.Con(i);
+      return lambda.myReturn(tmp4)
     } else if (ter instanceof lambda.Incr.class) {
       return myBind_inst_53_87_tsni(lambda.incr, lambda_inst_53_31_tsni)
     } else {
@@ -16781,7 +16680,7 @@ globalThis.Object.freeze(class lambda {
     }
   } 
   static simpleEval(env, ter) {
-    let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+    let param0, param1, t, e, param2, c, a, b, val_, scrut, u, v, u_, x, b1, u1, v1, u_1, v_, e1, v2, tmp, tmp1, tmp2, tmp3, tmp4;
     if (ter instanceof lambda.Var.class) {
       param0 = ter.s;
       v2 = param0;
@@ -16799,26 +16698,23 @@ globalThis.Object.freeze(class lambda {
       param1 = ter.b;
       u1 = param0;
       v1 = param1;
-      tmp2 = simpleEvalCon_inst_54_tsni(env, u1);
-      u_1 = tmp2;
-      tmp3 = simpleEvalCon_inst_54_tsni(env, v1);
-      v_ = tmp3;
-      tmp4 = u_1 + v_;
-      return lambda.Con(tmp4)
+      u_1 = simpleEvalCon_inst_54_tsni(env, u1);
+      v_ = simpleEvalCon_inst_54_tsni(env, v1);
+      tmp2 = u_1 + v_;
+      return lambda.Con(tmp2)
     } else if (ter instanceof lambda.Lam.class) {
       param0 = ter.s;
       param1 = ter.t;
       x = param0;
       b1 = param1;
-      tmp5 = lambda.Lam(x, b1);
-      return lambda.Thunk(tmp5, env)
+      tmp3 = lambda.Lam(x, b1);
+      return lambda.Thunk(tmp3, env)
     } else if (ter instanceof lambda.App.class) {
       param0 = ter.a;
       param1 = ter.b;
       u = param0;
       v = param1;
-      tmp6 = lambda.simpleEval(env, u);
-      u_ = tmp6;
+      u_ = lambda.simpleEval(env, u);
       return simpleApply_inst_54_tsni(env, u_, v)
     } else if (ter instanceof lambda.IfZero.class) {
       param0 = ter.a;
@@ -16827,10 +16723,9 @@ globalThis.Object.freeze(class lambda {
       c = param0;
       a = param1;
       b = param2;
-      tmp7 = lambda.simpleEval(env, c);
-      val_ = tmp7;
-      tmp8 = lambda.Con(0);
-      scrut = lambda.eqTerm(val_, tmp8);
+      val_ = lambda.simpleEval(env, c);
+      tmp4 = lambda.Con(0);
+      scrut = lambda.eqTerm(val_, tmp4);
       if (scrut === true) {
         return lambda.simpleEval(env, a)
       } else {
@@ -16847,7 +16742,7 @@ globalThis.Object.freeze(class lambda {
     }
   } 
   static simpleApply(env, t, a) {
-    let param0, param1, param01, param11, x, b, e, tmp, arr, tmp1;
+    let param0, param1, param01, param11, x, b, e, tmp, tmp1, tmp2;
     if (t instanceof lambda.Thunk.class) {
       param0 = t.t;
       param1 = t.e;
@@ -16858,12 +16753,12 @@ globalThis.Object.freeze(class lambda {
         b = param11;
         e = param1;
         tmp = lambda.Thunk(a, env);
-        arr = globalThis.Object.freeze([
+        tmp1 = globalThis.Object.freeze([
           x,
           tmp
         ]);
-        tmp1 = NofibPrelude.Cons(arr, e);
-        return simpleEval_inst_56_tsni(tmp1, b)
+        tmp2 = NofibPrelude.Cons(tmp1, e);
+        return simpleEval_inst_56_tsni(tmp2, b)
       } else {
         throw globalThis.Error("bad application")
       }
@@ -16872,9 +16767,8 @@ globalThis.Object.freeze(class lambda {
     }
   } 
   static simpleEvalCon(env, e) {
-    let e_, param0, c, tmp;
-    tmp = simpleEval_inst_57_tsni(env, e);
-    e_ = tmp;
+    let e_, param0, c;
+    e_ = simpleEval_inst_57_tsni(env, e);
     if (e_ instanceof lambda.Con.class) {
       param0 = e_.i;
       c = param0;
@@ -16979,13 +16873,12 @@ globalThis.Object.freeze(class lambda {
     return ppn_inst_59_tsni(0, t)
   } 
   static ppenv(env) {
-    let tmp, tmp1, tmp2, tmp3, tmp4;
+    let tmp, tmp1, tmp2, tmp3;
     tmp = NofibPrelude.nofibStringToList("[");
-    tmp1 = lambda_inst_60_tsni;
-    tmp2 = flatMap_inst_60_1_tsni(tmp1, env);
-    tmp3 = NofibPrelude.nofibStringToList("]");
-    tmp4 = append_inst_60_74_tsni(tmp2, tmp3);
-    return NofibPrelude.append(tmp, tmp4)
+    tmp1 = flatMap_inst_60_1_tsni(lambda_inst_60_tsni, env);
+    tmp2 = NofibPrelude.nofibStringToList("]");
+    tmp3 = append_inst_60_74_tsni(tmp1, tmp2);
+    return NofibPrelude.append(tmp, tmp3)
   } 
   static showTerm(t) {
     let param0, a, tmp, tmp1, tmp2;
@@ -17001,20 +16894,19 @@ globalThis.Object.freeze(class lambda {
     }
   } 
   static ev(t) {
-    let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
+    let envt2, first1, first0, env, t2, tmp, tmp1, tmp2, tmp3, tmp4;
     tmp = traverseTerm_inst_61_62_tsni(t);
-    tmp1 = lambda.myRunState(tmp, NofibPrelude.Nil);
-    envt2 = tmp1;
+    envt2 = lambda.myRunState(tmp, NofibPrelude.Nil);
     if (runtime.Tuple.isArrayLike(envt2) && envt2.length === 2) {
       first0 = runtime.Tuple.get(envt2, 0);
       first1 = runtime.Tuple.get(envt2, 1);
       env = first0;
       t2 = first1;
-      tmp2 = pp_inst_61_63_tsni(t2);
-      tmp3 = NofibPrelude.nofibStringToList("  ");
-      tmp4 = ppenv_inst_61_64_tsni(env);
-      tmp5 = NofibPrelude.append(tmp3, tmp4);
-      return NofibPrelude.append(tmp2, tmp5)
+      tmp1 = pp_inst_61_63_tsni(t2);
+      tmp2 = NofibPrelude.nofibStringToList("  ");
+      tmp3 = ppenv_inst_61_64_tsni(env);
+      tmp4 = NofibPrelude.append(tmp2, tmp3);
+      return NofibPrelude.append(tmp1, tmp4)
     } else {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
@@ -17045,16 +16937,15 @@ globalThis.Object.freeze(class lambda {
     }
   } 
   static testLambda_nofib(n) {
-    let tmp, tmp1, tmp2, tmp3, arr;
+    let tmp, tmp1, tmp2, tmp3;
     tmp = NofibPrelude.Cons(n, NofibPrelude.Nil);
     tmp1 = mainSimple_inst_69_70_tsni(tmp);
     tmp2 = NofibPrelude.Cons(n, NofibPrelude.Nil);
     tmp3 = mainMonad_inst_69_71_tsni(tmp2);
-    arr = globalThis.Object.freeze([
+    return globalThis.Object.freeze([
       tmp1,
       tmp3
-    ]);
-    return arr
+    ])
   } 
   static main() {
     let tmp;

@@ -3,7 +3,7 @@ const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../../../../../hkmc2/shared/src/test/mlscript-compile/Runtime.mjs";
 import Term from "./../../../../../../hkmc2/shared/src/test/mlscript-compile/Term.mjs";
 import NofibPrelude from "./NofibPrelude.mjs";
-let lscomp, lscomp2, lscomp1, cryptarithm11, lambda, lscomp$, lscomp1$, lscomp2$, enumFromTo_inst_0_1_tsni, take_inst_0_2_tsni, lambda_inst_3_4_tsni, take_inst_3_4_2_tsni, enumFromTo_inst_3_4_1_tsni, enumFromTo_inst_3_5_tsni, testCryptarithm_nofib_inst_6_7_tsni, enumFromTo_inst_6_7_5_tsni, lambda_inst_6_7_4_tsni, enumFromTo_inst_6_7_4_1_tsni, take_inst_6_7_4_2_tsni, permutations_inst_0_8_tsni, permutations_inst_3_4_8_tsni, map_inst_3_9_tsni, map_inst_6_7_9_tsni, permutations_inst_6_7_4_8_tsni, match_ls_arm_Nil_inst_0_8_tsni, match_ls_arm_Nil_inst_3_4_8_tsni, match_ls_arm_Nil_inst_6_7_4_8_tsni;
+let lscomp, lscomp2, lscomp1, cryptarithm11, lambda, lscomp$, lscomp1$, lscomp2$, enumFromTo_inst_0_1_tsni, take_inst_0_2_tsni, lambda_inst_3_4_tsni, take_inst_3_4_2_tsni, enumFromTo_inst_3_4_1_tsni, enumFromTo_inst_3_5_tsni, testCryptarithm_nofib_inst_6_7_tsni, lambda_inst_6_7_4_tsni, enumFromTo_inst_6_7_4_1_tsni, take_inst_6_7_4_2_tsni, enumFromTo_inst_6_7_5_tsni, permutations_inst_0_8_tsni, permutations_inst_3_4_8_tsni, map_inst_3_9_tsni, permutations_inst_6_7_4_8_tsni, map_inst_6_7_9_tsni, match_ls_arm_Nil_inst_0_8_tsni, match_ls_arm_Nil_inst_3_4_8_tsni, match_ls_arm_Nil_inst_6_7_4_8_tsni;
 match_ls_arm_Nil_inst_0_8_tsni = (undefined, function () {
   return NofibPrelude.Cons(NofibPrelude.Nil, NofibPrelude.Nil)
 });
@@ -60,13 +60,12 @@ take_inst_0_2_tsni = function take_inst_0_2_tsni(n, ls) {
   return runtime.safeCall(ls(n))
 };
 lambda_inst_3_4_tsni = (undefined, function (i) {
-  let p0, tmp, tmp1, tmp2, tmp3;
+  let p0, tmp, tmp1, tmp2;
   tmp = 9 + i;
   tmp1 = enumFromTo_inst_3_4_1_tsni(0, tmp);
-  tmp2 = take_inst_3_4_2_tsni(10, tmp1);
-  p0 = tmp2;
-  tmp3 = permutations_inst_3_4_8_tsni(p0);
-  return NofibPrelude.filter(cryptarithm11.condition, tmp3)
+  p0 = take_inst_3_4_2_tsni(10, tmp1);
+  tmp2 = permutations_inst_3_4_8_tsni(p0);
+  return NofibPrelude.filter(cryptarithm11.condition, tmp2)
 });
 take_inst_3_4_2_tsni = function take_inst_3_4_2_tsni(n, ls) {
   return runtime.safeCall(ls(n))
@@ -139,43 +138,17 @@ enumFromTo_inst_3_5_tsni = function enumFromTo_inst_3_5_tsni(a, b) {
   }
 };
 testCryptarithm_nofib_inst_6_7_tsni = function testCryptarithm_nofib_inst_6_7_tsni(n) {
-  let tmp, tmp1;
-  tmp = lambda_inst_6_7_4_tsni;
-  tmp1 = enumFromTo_inst_6_7_5_tsni(1, n);
-  return map_inst_6_7_9_tsni(tmp, tmp1)
-};
-enumFromTo_inst_6_7_5_tsni = function enumFromTo_inst_6_7_5_tsni(a, b) {
-  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
-  scrut = a <= b;
-  if (scrut === true) {
-    tmp = a + 1;
-    tmp1 = enumFromTo_inst_6_7_5_tsni(tmp, b);
-    _deforest_Cons_head = a;
-    _deforest_Cons_tail = tmp1;
-    return (f) => {
-      let param0, param1, x, xs, tmp2, tmp3;
-      param0 = _deforest_Cons_head;
-      param1 = _deforest_Cons_tail;
-      x = param0;
-      xs = param1;
-      tmp2 = runtime.safeCall(f(x));
-      tmp3 = map_inst_6_7_9_tsni(f, xs);
-      return NofibPrelude.Cons(tmp2, tmp3)
-    }
-  } else {
-    return (f) => {
-      return NofibPrelude.Nil
-    }
-  }
+  let tmp;
+  tmp = enumFromTo_inst_6_7_5_tsni(1, n);
+  return map_inst_6_7_9_tsni(lambda_inst_6_7_4_tsni, tmp)
 };
 lambda_inst_6_7_4_tsni = (undefined, function (i) {
-  let p0, tmp, tmp1, tmp2, tmp3;
+  let p0, tmp, tmp1, tmp2;
   tmp = 9 + i;
   tmp1 = enumFromTo_inst_6_7_4_1_tsni(0, tmp);
-  tmp2 = take_inst_6_7_4_2_tsni(10, tmp1);
-  p0 = tmp2;
-  tmp3 = permutations_inst_6_7_4_8_tsni(p0);
-  return NofibPrelude.filter(cryptarithm11.condition, tmp3)
+  p0 = take_inst_6_7_4_2_tsni(10, tmp1);
+  tmp2 = permutations_inst_6_7_4_8_tsni(p0);
+  return NofibPrelude.filter(cryptarithm11.condition, tmp2)
 });
 enumFromTo_inst_6_7_4_1_tsni = function enumFromTo_inst_6_7_4_1_tsni(a, b) {
   let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
@@ -223,6 +196,30 @@ enumFromTo_inst_6_7_4_1_tsni = function enumFromTo_inst_6_7_4_1_tsni(a, b) {
 take_inst_6_7_4_2_tsni = function take_inst_6_7_4_2_tsni(n, ls) {
   return runtime.safeCall(ls(n))
 };
+enumFromTo_inst_6_7_5_tsni = function enumFromTo_inst_6_7_5_tsni(a, b) {
+  let scrut, tmp, tmp1, _deforest_Cons_head, _deforest_Cons_tail;
+  scrut = a <= b;
+  if (scrut === true) {
+    tmp = a + 1;
+    tmp1 = enumFromTo_inst_6_7_5_tsni(tmp, b);
+    _deforest_Cons_head = a;
+    _deforest_Cons_tail = tmp1;
+    return (f) => {
+      let param0, param1, x, xs, tmp2, tmp3;
+      param0 = _deforest_Cons_head;
+      param1 = _deforest_Cons_tail;
+      x = param0;
+      xs = param1;
+      tmp2 = runtime.safeCall(f(x));
+      tmp3 = map_inst_6_7_9_tsni(f, xs);
+      return NofibPrelude.Cons(tmp2, tmp3)
+    }
+  } else {
+    return (f) => {
+      return NofibPrelude.Nil
+    }
+  }
+};
 permutations_inst_0_8_tsni = function permutations_inst_0_8_tsni(ls) {
   return runtime.safeCall(ls())
 };
@@ -232,20 +229,19 @@ permutations_inst_3_4_8_tsni = function permutations_inst_3_4_8_tsni(ls) {
 map_inst_3_9_tsni = function map_inst_3_9_tsni(f, xs) {
   return runtime.safeCall(xs(f))
 };
-map_inst_6_7_9_tsni = function map_inst_6_7_9_tsni(f, xs) {
-  return runtime.safeCall(xs(f))
-};
 permutations_inst_6_7_4_8_tsni = function permutations_inst_6_7_4_8_tsni(ls) {
   return runtime.safeCall(ls())
 };
+map_inst_6_7_9_tsni = function map_inst_6_7_9_tsni(f, xs) {
+  return runtime.safeCall(xs(f))
+};
 lambda = (undefined, function (i) {
-  let p0, tmp, tmp1, tmp2, tmp3;
+  let p0, tmp, tmp1, tmp2;
   tmp = 9 + i;
   tmp1 = enumFromTo_inst_0_1_tsni(0, tmp);
-  tmp2 = take_inst_0_2_tsni(10, tmp1);
-  p0 = tmp2;
-  tmp3 = permutations_inst_0_8_tsni(p0);
-  return NofibPrelude.filter(cryptarithm11.condition, tmp3)
+  p0 = take_inst_0_2_tsni(10, tmp1);
+  tmp2 = permutations_inst_0_8_tsni(p0);
+  return NofibPrelude.filter(cryptarithm11.condition, tmp2)
 });
 lscomp2$ = function lscomp2$(j, t1, p2) {
   let param0, param1, r, t2, tmp;
@@ -446,10 +442,9 @@ globalThis.Object.freeze(class cryptarithm1 {
     }
   } 
   static testCryptarithm_nofib(n) {
-    let tmp, tmp1;
-    tmp = lambda_inst_3_4_tsni;
-    tmp1 = enumFromTo_inst_3_5_tsni(1, n);
-    return map_inst_3_9_tsni(tmp, tmp1)
+    let tmp;
+    tmp = enumFromTo_inst_3_5_tsni(1, n);
+    return map_inst_3_9_tsni(lambda_inst_3_4_tsni, tmp)
   } 
   static main() {
     return testCryptarithm_nofib_inst_6_7_tsni(1)
