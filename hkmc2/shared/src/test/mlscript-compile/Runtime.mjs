@@ -690,7 +690,7 @@ globalThis.Object.freeze(class Runtime {
     return runtime.safeCall(globalThis.console.log(tmp2))
   } 
   static debugContTrace(contTrace) {
-    let scrut, scrut1, vis, hl, cur, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, arr, tmp5, tmp6, arr1, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
+    let scrut, scrut1, vis, hl, cur, scrut2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
     if (contTrace instanceof Runtime.ContTrace.class) {
       tmp = globalThis.console.log("resumed: ", contTrace.resumed);
       scrut = contTrace.last === contTrace;
@@ -705,19 +705,17 @@ globalThis.Object.freeze(class Runtime {
       } else {
         tmp2 = runtime.Unit;
       }
-      tmp3 = globalThis.Object.freeze(new globalThis.Set());
-      vis = tmp3;
-      tmp4 = globalThis.Object.freeze(new globalThis.Map());
-      hl = tmp4;
-      arr = globalThis.Object.freeze([
+      vis = globalThis.Object.freeze(new globalThis.Set());
+      hl = globalThis.Object.freeze(new globalThis.Map());
+      tmp3 = globalThis.Object.freeze([
         contTrace.last
       ]);
-      tmp5 = globalThis.Object.freeze(new globalThis.Set(arr));
-      tmp6 = hl.set("last", tmp5);
-      arr1 = globalThis.Object.freeze([
+      tmp4 = globalThis.Object.freeze(new globalThis.Set(tmp3));
+      tmp5 = hl.set("last", tmp4);
+      tmp6 = globalThis.Object.freeze([
         contTrace.lastHandler
       ]);
-      tmp7 = globalThis.Object.freeze(new globalThis.Set(arr1));
+      tmp7 = globalThis.Object.freeze(new globalThis.Set(tmp6));
       tmp8 = hl.set("last-handler", tmp7);
       tmp9 = Runtime.showFunctionContChain(contTrace.next, hl, vis, 0);
       tmp10 = runtime.safeCall(globalThis.console.log(tmp9));

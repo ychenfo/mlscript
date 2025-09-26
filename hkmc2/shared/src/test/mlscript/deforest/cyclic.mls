@@ -161,9 +161,9 @@ fun zipWith(xsys, f) = if xsys is
   [Nil, Nil] then Nil
 zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│ JS (unsanitized):
-//│ let zipWith, tmp10, tmp11, arr, lambda;
+//│ let zipWith, tmp10, tmp11, tmp12, lambda;
 //│ zipWith = function zipWith(xsys, f) {
-//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp12, arr1, tmp13;
+//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp13, tmp14, tmp15;
 //│   if (runtime.Tuple.isArrayLike(xsys) && xsys.length === 2) {
 //│     first0 = runtime.Tuple.get(xsys, 0);
 //│     first1 = runtime.Tuple.get(xsys, 1);
@@ -177,13 +177,13 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│         param11 = first1.t;
 //│         hy = param01;
 //│         ty = param11;
-//│         tmp12 = runtime.safeCall(f(hx, hy));
-//│         arr1 = globalThis.Object.freeze([
+//│         tmp13 = runtime.safeCall(f(hx, hy));
+//│         tmp14 = globalThis.Object.freeze([
 //│           tx,
 //│           ty
 //│         ]);
-//│         tmp13 = zipWith(arr1, f);
-//│         return Cons1(tmp12, tmp13)
+//│         tmp15 = zipWith(tmp14, f);
+//│         return Cons1(tmp13, tmp15)
 //│       } else {
 //│         throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│       }
@@ -202,19 +202,19 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│ };
 //│ tmp10 = Predef.id(Nil1);
 //│ tmp11 = Predef.id(Nil1);
-//│ arr = globalThis.Object.freeze([
+//│ tmp12 = globalThis.Object.freeze([
 //│   tmp10,
 //│   tmp11
 //│ ]);
 //│ lambda = (undefined, function (x, y) { return x });
-//│ zipWith(arr, lambda)
+//│ zipWith(tmp12, lambda)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
 //│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
 //│ 
-//│ let zipWith, tmp10, tmp11, arr, lambda, zipWith_inst_0_tsni, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, match_xsys_arm_Deforest_Arr_2_inst_0_tsni;
+//│ let zipWith, tmp10, tmp11, tmp12, lambda, zipWith_inst_0_tsni, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, match_xsys_arm_Deforest_Arr_2_inst_0_tsni;
 //│ match_xsys_arm_Deforest_Arr_2_inst_0_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_0_tsni, _deforest_Deforest_Arr_2_1_inst_0_tsni) {
-//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp12, arr1, tmp13, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
+//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp13, tmp14, tmp15, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
 //│   first0 = _deforest_Deforest_Arr_2_0_inst_0_tsni;
 //│   first1 = _deforest_Deforest_Arr_2_1_inst_0_tsni;
 //│   if (first0 instanceof Cons1.class) {
@@ -227,14 +227,14 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│       param11 = first1.t;
 //│       hy = param01;
 //│       ty = param11;
-//│       tmp12 = runtime.safeCall(f(hx, hy));
+//│       tmp13 = runtime.safeCall(f(hx, hy));
 //│       _deforest_Deforest_Arr_2_01 = tx;
 //│       _deforest_Deforest_Arr_2_11 = ty;
-//│       arr1 = (f1) => {
+//│       tmp14 = (f1) => {
 //│         return match_xsys_arm_Deforest_Arr_2_inst_0_tsni(f1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
 //│       };
-//│       tmp13 = zipWith_inst_0_tsni(arr1, f);
-//│       return Cons1(tmp12, tmp13)
+//│       tmp15 = zipWith_inst_0_tsni(tmp14, f);
+//│       return Cons1(tmp13, tmp15)
 //│     } else {
 //│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│     }
@@ -252,7 +252,7 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│   return runtime.safeCall(xsys(f))
 //│ };
 //│ zipWith = function zipWith(xsys, f) {
-//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp12, arr1, tmp13;
+//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp13, tmp14, tmp15;
 //│   if (runtime.Tuple.isArrayLike(xsys) && xsys.length === 2) {
 //│     first0 = runtime.Tuple.get(xsys, 0);
 //│     first1 = runtime.Tuple.get(xsys, 1);
@@ -266,13 +266,13 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│         param11 = first1.t;
 //│         hy = param01;
 //│         ty = param11;
-//│         tmp12 = runtime.safeCall(f(hx, hy));
-//│         arr1 = globalThis.Object.freeze([
+//│         tmp13 = runtime.safeCall(f(hx, hy));
+//│         tmp14 = globalThis.Object.freeze([
 //│           tx,
 //│           ty
 //│         ]);
-//│         tmp13 = zipWith(arr1, f);
-//│         return Cons1(tmp12, tmp13)
+//│         tmp15 = zipWith(tmp14, f);
+//│         return Cons1(tmp13, tmp15)
 //│       } else {
 //│         throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│       }
@@ -293,17 +293,17 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│ tmp11 = Predef.id(Nil1);
 //│ _deforest_Deforest_Arr_2_0 = tmp10;
 //│ _deforest_Deforest_Arr_2_1 = tmp11;
-//│ arr = (f) => {
+//│ tmp12 = (f) => {
 //│   return match_xsys_arm_Deforest_Arr_2_inst_0_tsni(f, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
 //│ };
 //│ lambda = (undefined, function (x, y) { return x });
-//│ zipWith_inst_0_tsni(arr, lambda)
+//│ zipWith_inst_0_tsni(tmp12, lambda)
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Nil
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Arr(false,List(Arg(None,Ref(tx)), Arg(None,Ref(ty))))@1@inst_0_tsni --> Ref(xsys)@inst_0_tsni@Deforest_Arr_2
-//│ Arr(false,List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@2@inst__tsni --> Ref(xsys)@inst_0_tsni@Deforest_Arr_2
+//│ Tuple(false,List(Arg(None,Ref(tx)), Arg(None,Ref(ty))))@1@inst_0_tsni --> Ref(xsys)@inst_0_tsni@Deforest_Arr_2
+//│ Tuple(false,List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@2@inst__tsni --> Ref(xsys)@inst_0_tsni@Deforest_Arr_2
 //│ -------------- executing -------------
 //│ = Nil
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

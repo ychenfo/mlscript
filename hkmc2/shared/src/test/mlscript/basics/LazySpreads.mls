@@ -21,17 +21,15 @@ fun buildPalindrome = case
 //│ buildPalindrome = function buildPalindrome() {
 //│   let lambda;
 //│   lambda = (undefined, function (caseScrut) {
-//│     let n, arr9, tmp, tmp1, tmp2, arr10;
+//│     let n, tmp3, tmp4, tmp5;
 //│     if (caseScrut === 0) {
-//│       arr9 = globalThis.Object.freeze([]);
-//│       return arr9
+//│       return globalThis.Object.freeze([])
 //│     } else {
 //│       n = caseScrut;
-//│       tmp = buildPalindrome();
-//│       tmp1 = n - 1;
-//│       tmp2 = tmp(tmp1);
-//│       arr10 = globalThis.Object.freeze(runtime.Tuple.lazyConcat(n, runtime.Tuple.split, tmp2, n));
-//│       return arr10
+//│       tmp3 = buildPalindrome();
+//│       tmp4 = n - 1;
+//│       tmp5 = tmp3(tmp4);
+//│       return globalThis.Object.freeze(runtime.Tuple.lazyConcat(n, runtime.Tuple.split, tmp5, n))
 //│     }
 //│   });
 //│   return lambda

@@ -74,7 +74,7 @@ f(A) + f(A)
 //│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
 //│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
 //│ 
-//│ let f1, tmp, tmp1, f_inst_0_tsni, f_inst_1_tsni;
+//│ let f1, tmp, tmp1, f_inst_0_tsni, f_inst_1_tsni, lambda, lambda1;
 //│ f_inst_0_tsni = function f_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())
 //│ };
@@ -88,8 +88,12 @@ f(A) + f(A)
 //│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
-//│ tmp = f_inst_1_tsni(() => { return 1 });
-//│ tmp1 = f_inst_0_tsni(() => { return 1 });
+//│ lambda = () => {
+//│   return 1
+//│ };
+//│ tmp = f_inst_1_tsni(lambda);
+//│ lambda1 = () => { return 1 };
+//│ tmp1 = f_inst_0_tsni(lambda1);
 //│ tmp + tmp1
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
@@ -129,7 +133,7 @@ let useless = if lsit is [a, b] then 0
 //│ useless = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Arr(false,List(Arg(None,Lit(IntLit(2))), Arg(None,Lit(IntLit(1)))))@0@inst__tsni --> Ref(lsit)@inst__tsni@Deforest_Arr_2
+//│ Tuple(false,List(Arg(None,Lit(IntLit(2))), Arg(None,Lit(IntLit(1)))))@0@inst__tsni --> Ref(lsit)@inst__tsni@Deforest_Arr_2
 //│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 

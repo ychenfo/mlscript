@@ -115,9 +115,9 @@ fun f(a) = if a is
 let p = AA(AA(AA(10)))
 test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ JS (unsanitized):
-//│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+//│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
 //│ test = function test(x) {
-//│   let t, param0, param01, param02, a, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   let t, param0, param01, param02, a, tmp15, tmp16, tmp17, tmp18, tmp19;
 //│   if (x instanceof AA1.class) {
 //│     param0 = x.x;
 //│     if (param0 instanceof AA1.class) {
@@ -125,22 +125,22 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│       if (param01 instanceof AA1.class) {
 //│         param02 = param01.x;
 //│         a = param02;
-//│         tmp16 = a;
+//│         tmp15 = a;
 //│       } else {
-//│         tmp16 = 4;
+//│         tmp15 = 4;
 //│       }
 //│     } else {
-//│       tmp16 = 4;
+//│       tmp15 = 4;
 //│     }
 //│   } else {
-//│     tmp16 = 4;
+//│     tmp15 = 4;
 //│   }
-//│   t = tmp16;
-//│   tmp17 = 5 * 4;
-//│   tmp18 = t + tmp17;
-//│   tmp19 = tmp18 - 3;
-//│   tmp20 = tmp19 + 2;
-//│   return tmp20 - 1
+//│   t = tmp15;
+//│   tmp16 = 5 * 4;
+//│   tmp17 = t + tmp16;
+//│   tmp18 = tmp17 - 3;
+//│   tmp19 = tmp18 + 2;
+//│   return tmp19 - 1
 //│ };
 //│ f1 = function f(a) {
 //│   let param0;
@@ -157,23 +157,22 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ };
 //│ tmp4 = AA1(10);
 //│ tmp5 = AA1(tmp4);
-//│ tmp6 = AA1(tmp5);
-//│ p = tmp6;
-//│ tmp7 = test(p);
-//│ tmp8 = f1(p);
-//│ tmp9 = tmp7 + tmp8;
-//│ tmp10 = AA1(10);
+//│ p = AA1(tmp5);
+//│ tmp6 = test(p);
+//│ tmp7 = f1(p);
+//│ tmp8 = tmp6 + tmp7;
+//│ tmp9 = AA1(10);
+//│ tmp10 = AA1(tmp9);
 //│ tmp11 = AA1(tmp10);
-//│ tmp12 = AA1(tmp11);
-//│ tmp13 = test(tmp12);
-//│ tmp14 = tmp9 + tmp13;
-//│ tmp15 = test(B1);
-//│ tmp14 + tmp15
+//│ tmp12 = test(tmp11);
+//│ tmp13 = tmp8 + tmp12;
+//│ tmp14 = test(B1);
+//│ tmp13 + tmp14
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
 //│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
 //│ 
-//│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, test_inst_0_tsni, test_inst_1_tsni, test_inst_2_tsni, _deforest_AA_x1, _deforest_AA_x2, _deforest_AA_x3, _deforest_AA_x4;
+//│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, test_inst_0_tsni, test_inst_1_tsni, test_inst_2_tsni, _deforest_AA_x1, _deforest_AA_x2, _deforest_AA_x3, _deforest_AA_x4, lambda;
 //│ test_inst_0_tsni = function test_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())
 //│ };
@@ -181,27 +180,27 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│   return runtime.safeCall(x())
 //│ };
 //│ test_inst_2_tsni = function test_inst_2_tsni(x) {
-//│   let t, param0, param01, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   let t, param0, param01, tmp15, tmp16, tmp17, tmp18, tmp19;
 //│   if (x instanceof AA1.class) {
 //│     param0 = x.x;
 //│     if (param0 instanceof AA1.class) {
 //│       param01 = param0.x;
 //│       return runtime.safeCall(param01())
 //│     } else {
-//│       tmp16 = 4;
+//│       tmp15 = 4;
 //│     }
 //│   } else {
-//│     tmp16 = 4;
+//│     tmp15 = 4;
 //│   }
-//│   t = tmp16;
-//│   tmp17 = 5 * 4;
-//│   tmp18 = t + tmp17;
-//│   tmp19 = tmp18 - 3;
-//│   tmp20 = tmp19 + 2;
-//│   return tmp20 - 1
+//│   t = tmp15;
+//│   tmp16 = 5 * 4;
+//│   tmp17 = t + tmp16;
+//│   tmp18 = tmp17 - 3;
+//│   tmp19 = tmp18 + 2;
+//│   return tmp19 - 1
 //│ };
 //│ test = function test(x) {
-//│   let t, param0, param01, param02, a, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   let t, param0, param01, param02, a, tmp15, tmp16, tmp17, tmp18, tmp19;
 //│   if (x instanceof AA1.class) {
 //│     param0 = x.x;
 //│     if (param0 instanceof AA1.class) {
@@ -209,22 +208,22 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│       if (param01 instanceof AA1.class) {
 //│         param02 = param01.x;
 //│         a = param02;
-//│         tmp16 = a;
+//│         tmp15 = a;
 //│       } else {
-//│         tmp16 = 4;
+//│         tmp15 = 4;
 //│       }
 //│     } else {
-//│       tmp16 = 4;
+//│       tmp15 = 4;
 //│     }
 //│   } else {
-//│     tmp16 = 4;
+//│     tmp15 = 4;
 //│   }
-//│   t = tmp16;
-//│   tmp17 = 5 * 4;
-//│   tmp18 = t + tmp17;
-//│   tmp19 = tmp18 - 3;
-//│   tmp20 = tmp19 + 2;
-//│   return tmp20 - 1
+//│   t = tmp15;
+//│   tmp16 = 5 * 4;
+//│   tmp17 = t + tmp16;
+//│   tmp18 = tmp17 - 3;
+//│   tmp19 = tmp18 + 2;
+//│   return tmp19 - 1
 //│ };
 //│ f1 = function f(a) {
 //│   let param0;
@@ -241,61 +240,61 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ };
 //│ _deforest_AA_x4 = 10;
 //│ tmp4 = () => {
-//│   let t, param0, a, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│   let t, param0, a, tmp15, tmp16, tmp17, tmp18, tmp19;
 //│   param0 = _deforest_AA_x4;
 //│   a = param0;
-//│   tmp16 = a;
-//│   t = tmp16;
-//│   tmp17 = 5 * 4;
-//│   tmp18 = t + tmp17;
-//│   tmp19 = tmp18 - 3;
-//│   tmp20 = tmp19 + 2;
-//│   return tmp20 - 1
+//│   tmp15 = a;
+//│   t = tmp15;
+//│   tmp16 = 5 * 4;
+//│   tmp17 = t + tmp16;
+//│   tmp18 = tmp17 - 3;
+//│   tmp19 = tmp18 + 2;
+//│   return tmp19 - 1
 //│ };
 //│ tmp5 = AA1(tmp4);
-//│ tmp6 = AA1(tmp5);
-//│ p = tmp6;
-//│ tmp7 = test_inst_2_tsni(p);
-//│ tmp8 = f1(p);
-//│ tmp9 = tmp7 + tmp8;
+//│ p = AA1(tmp5);
+//│ tmp6 = test_inst_2_tsni(p);
+//│ tmp7 = f1(p);
+//│ tmp8 = tmp6 + tmp7;
 //│ _deforest_AA_x3 = 10;
-//│ tmp10 = () => {
-//│   let t, param0, a, tmp16, tmp17, tmp18, tmp19, tmp20;
+//│ tmp9 = () => {
+//│   let t, param0, a, tmp15, tmp16, tmp17, tmp18, tmp19;
 //│   param0 = _deforest_AA_x3;
 //│   a = param0;
-//│   tmp16 = a;
-//│   t = tmp16;
-//│   tmp17 = 5 * 4;
-//│   tmp18 = t + tmp17;
-//│   tmp19 = tmp18 - 3;
-//│   tmp20 = tmp19 + 2;
-//│   return tmp20 - 1
+//│   tmp15 = a;
+//│   t = tmp15;
+//│   tmp16 = 5 * 4;
+//│   tmp17 = t + tmp16;
+//│   tmp18 = tmp17 - 3;
+//│   tmp19 = tmp18 + 2;
+//│   return tmp19 - 1
 //│ };
-//│ _deforest_AA_x2 = tmp10;
-//│ tmp11 = () => {
+//│ _deforest_AA_x2 = tmp9;
+//│ tmp10 = () => {
 //│   let param0;
 //│   param0 = _deforest_AA_x2;
 //│   return runtime.safeCall(param0())
 //│ };
-//│ _deforest_AA_x1 = tmp11;
-//│ tmp12 = () => {
+//│ _deforest_AA_x1 = tmp10;
+//│ tmp11 = () => {
 //│   let param0;
 //│   param0 = _deforest_AA_x1;
 //│   return runtime.safeCall(param0())
 //│ };
-//│ tmp13 = test_inst_1_tsni(tmp12);
-//│ tmp14 = tmp9 + tmp13;
-//│ tmp15 = test_inst_0_tsni(() => {
-//│   let t, tmp16, tmp17, tmp18, tmp19, tmp20;
-//│   tmp16 = 4;
-//│   t = tmp16;
-//│   tmp17 = 5 * 4;
-//│   tmp18 = t + tmp17;
-//│   tmp19 = tmp18 - 3;
-//│   tmp20 = tmp19 + 2;
-//│   return tmp20 - 1
-//│ });
-//│ tmp14 + tmp15
+//│ tmp12 = test_inst_1_tsni(tmp11);
+//│ tmp13 = tmp8 + tmp12;
+//│ lambda = () => {
+//│   let t, tmp15, tmp16, tmp17, tmp18, tmp19;
+//│   tmp15 = 4;
+//│   t = tmp15;
+//│   tmp16 = 5 * 4;
+//│   tmp17 = t + tmp16;
+//│   tmp18 = tmp17 - 3;
+//│   tmp19 = tmp18 + 2;
+//│   return tmp19 - 1
+//│ };
+//│ tmp14 = test_inst_0_tsni(lambda);
+//│ tmp13 + tmp14
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 78
 //│ p = AA(AA(AA(10)))

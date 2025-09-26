@@ -548,7 +548,7 @@ fun f(x) = if x is
   A then 1
 f(id(A)) + f(A)
 //│ JS (unsanitized):
-//│ let f10, tmp113, tmp114, tmp115;
+//│ let f10, tmp111, tmp112, tmp113;
 //│ f10 = function f(x1) {
 //│   if (x1 instanceof A1.class) {
 //│     return 1
@@ -556,15 +556,15 @@ f(id(A)) + f(A)
 //│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
-//│ tmp113 = Predef.id(A1);
-//│ tmp114 = f10(tmp113);
-//│ tmp115 = f10(A1);
-//│ tmp114 + tmp115
+//│ tmp111 = Predef.id(A1);
+//│ tmp112 = f10(tmp111);
+//│ tmp113 = f10(A1);
+//│ tmp112 + tmp113
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
 //│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
 //│ 
-//│ let f10, tmp113, tmp114, tmp115, f_inst_0_tsni7;
+//│ let f10, tmp111, tmp112, tmp113, f_inst_0_tsni7, lambda9;
 //│ f_inst_0_tsni7 = function f_inst_0_tsni(x1) {
 //│   return runtime.safeCall(x1())
 //│ };
@@ -575,10 +575,11 @@ f(id(A)) + f(A)
 //│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
-//│ tmp113 = Predef.id(A1);
-//│ tmp114 = f10(tmp113);
-//│ tmp115 = f_inst_0_tsni7(() => { return 1 });
-//│ tmp114 + tmp115
+//│ tmp111 = Predef.id(A1);
+//│ tmp112 = f10(tmp111);
+//│ lambda9 = () => { return 1 };
+//│ tmp113 = f_inst_0_tsni7(lambda9);
+//│ tmp112 + tmp113
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>

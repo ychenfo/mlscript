@@ -355,12 +355,11 @@ test()
 if [1, 2] is
   [a, b] then a + b
 //│ JS (unsanitized):
-//│ let scrut1, first1, first0, a1, b, arr;
-//│ arr = globalThis.Object.freeze([
+//│ let scrut1, first1, first0, a1, b;
+//│ scrut1 = globalThis.Object.freeze([
 //│   1,
 //│   2
 //│ ]);
-//│ scrut1 = arr;
 //│ if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 2) {
 //│   first0 = runtime.Tuple.get(scrut1, 0);
 //│   first1 = runtime.Tuple.get(scrut1, 1);
@@ -372,10 +371,10 @@ if [1, 2] is
 //│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
 //│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
 //│ 
-//│ let scrut1, arr, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
+//│ let scrut1, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1;
 //│ _deforest_Deforest_Arr_2_0 = 1;
 //│ _deforest_Deforest_Arr_2_1 = 2;
-//│ arr = () => {
+//│ scrut1 = () => {
 //│   let first1, first0, a1, b;
 //│   first0 = _deforest_Deforest_Arr_2_0;
 //│   first1 = _deforest_Deforest_Arr_2_1;
@@ -383,13 +382,12 @@ if [1, 2] is
 //│   b = first1;
 //│   return a1 + b
 //│ };
-//│ scrut1 = arr;
 //│ runtime.safeCall(scrut1())
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Arr(false,List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(2)))))@0@inst__tsni --> Ref($scrut)@inst__tsni@Deforest_Arr_2
+//│ Tuple(false,List(Arg(None,Lit(IntLit(1))), Arg(None,Lit(IntLit(2)))))@0@inst__tsni --> Ref($scrut)@inst__tsni@Deforest_Arr_2
 //│ -------------- executing -------------
 //│ = 3
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -432,7 +430,7 @@ f([])
 //│ = 4
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Arr(false,List())@1@inst__tsni --> Ref(ls)@inst_0_tsni@Deforest_Arr_0
+//│ Tuple(false,List())@1@inst__tsni --> Ref(ls)@inst_0_tsni@Deforest_Arr_0
 //│ -------------- executing -------------
 //│ = 4
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

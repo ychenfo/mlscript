@@ -43,13 +43,11 @@ data class Outer(a, b) with
 //│         Predef.print(tmp5);
 //│       }
 //│       i1(d) {
-//│         let arr;
-//│         arr = globalThis.Object.freeze([
+//│         return globalThis.Object.freeze([
 //│           this$Outer.b,
 //│           this.c,
 //│           d
-//│         ]);
-//│         return arr
+//│         ])
 //│       }
 //│       toString() { return runtime.render(this); }
 //│       static [definitionMetadata] = ["class", "Inner", ["c"]]; 

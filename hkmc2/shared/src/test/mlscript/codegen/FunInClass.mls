@@ -35,26 +35,22 @@ fun test(a) =
 //│       tmp = Predef.print(a);
 //│     }
 //│     f(c) {
-//│       let arr;
-//│       arr = globalThis.Object.freeze([
+//│       return globalThis.Object.freeze([
 //│         a,
 //│         this.b,
 //│         c
-//│       ]);
-//│       return arr
+//│       ])
 //│     } 
 //│     g(d) {
 //│       let h;
 //│       const this$Inner = this;
 //│       h = function h(e) {
-//│         let arr;
-//│         arr = globalThis.Object.freeze([
+//│         return globalThis.Object.freeze([
 //│           a,
 //│           this$Inner.b,
 //│           d,
 //│           e
-//│         ]);
-//│         return arr
+//│         ])
 //│       };
 //│       return h(d)
 //│     }
@@ -85,7 +81,7 @@ fun test(a) =
 //│ JS (unsanitized):
 //│ let test2;
 //│ test2 = function test(a) {
-//│   let C11, C21, tmp1, tmp2, arr;
+//│   let C11, C21, tmp, tmp1;
 //│   C11 = function C1(b) {
 //│     return globalThis.Object.freeze(new C1.class(b));
 //│   };
@@ -94,13 +90,13 @@ fun test(a) =
 //│       C11.class = this
 //│     }
 //│     constructor(b) {
-//│       let arr1;
+//│       let tmp2;
 //│       this.b = b;
-//│       arr1 = globalThis.Object.freeze([
+//│       tmp2 = globalThis.Object.freeze([
 //│         a,
 //│         this.b
 //│       ]);
-//│       Predef.print(arr1);
+//│       Predef.print(tmp2);
 //│     }
 //│     toString() { return runtime.render(this); }
 //│     static [definitionMetadata] = ["class", "C1", ["b"]]; 
@@ -113,21 +109,20 @@ fun test(a) =
 //│       C21.class = this
 //│     }
 //│     constructor(b) {
-//│       let arr1;
+//│       let tmp2;
 //│       this.b = b;
-//│       arr1 = globalThis.Object.freeze([
+//│       tmp2 = globalThis.Object.freeze([
 //│         a,
 //│         this.b
 //│       ]);
-//│       Predef.print(arr1);
+//│       Predef.print(tmp2);
 //│     }
 //│     toString() { return runtime.render(this); }
 //│     static [definitionMetadata] = ["class", "C2", ["b"]]; 
 //│   });
-//│   tmp1 = C11(1);
-//│   tmp2 = C21(2);
-//│   arr = globalThis.Object.freeze([ tmp1, tmp2 ]);
-//│   return arr
+//│   tmp = C11(1);
+//│   tmp1 = C21(2);
+//│   return globalThis.Object.freeze([ tmp, tmp1 ])
 //│ };
 
 test(123)

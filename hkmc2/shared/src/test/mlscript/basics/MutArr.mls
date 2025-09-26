@@ -4,7 +4,7 @@
 :sjs
 let t = [0, 1, 2]
 //│ JS (unsanitized):
-//│ let t, arr; arr = globalThis.Object.freeze([ 0, 1, 2 ]); t = arr;
+//│ let t; t = globalThis.Object.freeze([ 0, 1, 2 ]);
 //│ t = [0, 1, 2]
 
 :re
