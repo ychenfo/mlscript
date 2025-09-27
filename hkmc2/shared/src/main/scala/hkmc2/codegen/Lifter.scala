@@ -551,9 +551,9 @@ class Lifter(handlerPaths: Opt[HandlerPaths])(using State, Raise):
       val fakeCtorBms = d match
         case c: ClsLikeDefn if !modLocal.isDefined => S(BlockMemberSymbol(d.sym.nme + "$ctor", Nil))
         case _ => N
-
+      
       val singleCallBms = BlockMemberSymbol(d.sym.nme + "$", Tree.DummyTermDef(syntax.Fun) :: Nil)
-
+      
       val info = LiftedInfo(
         includedCaptures, includedLocals, clsCaptures,
         refBms, fakeCtorBms, singleCallBms

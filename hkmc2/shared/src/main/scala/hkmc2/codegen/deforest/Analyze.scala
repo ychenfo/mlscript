@@ -125,7 +125,6 @@ class DeforestPreAnalyzer(
     def apply(n: Int) = store.getOrElseUpdate.curried(n):
       ClassSymbol(Tree.DummyTypeDef(syntax.Cls), Tree.Ident(s"Deforest_Arr_$n"))
   val noProdStratVar = freshVar("primitive", N).asProdStrat
-  val resultIdToResult = mutable.Map.empty[ResultId, Result]
   val topLevelFunSymToFun = mutable.Map.empty[BlockMemberSymbol, FunDefn]
   val matchScrutToMatchBlock = mutable.Map.empty[ResultId, Match]
   val matchScrutToParentMatchScruts = mutable.Map.empty[ResultId, Ls[ResultId]]
@@ -141,10 +140,10 @@ class DeforestPreAnalyzer(
     case _ => symToStratVar(s)
   def getTopLevelFunDefnForSym(s: BlockMemberSymbol) = topLevelFunSymToFun.get(s)
   def getCtorSymFromCtorLikeExprId(id: ResultId): Opt[ClassLikeSymbol] =
-    resultIdToResult(id).getCtorSymFromCtorLikeExpr(using this)
+    dState.resultIdToResult(id).getCtorSymFromCtorLikeExpr(using this)
   def getMatchFromMatchScrutExprId(scrutExprId: ResultId): Opt[Match] =
     matchScrutToMatchBlock.get(scrutExprId)
-  def getResult(id: ResultId) = resultIdToResult(id)
+  def getResult(id: ResultId) = dState.resultIdToResult(id)
   def getStableResultId(id: ResultId) = resultIdToStableId.getOrElseUpdate.curried(id):
     val prev = stableResuldIt
     stableResuldIt += 1
@@ -153,7 +152,7 @@ class DeforestPreAnalyzer(
     def chk(s: BlockMemberSymbol) =
       assert(s.isFunction)
       s
-    resultIdToResult(id) match
+    dState.resultIdToResult(id) match
       case s: Select => chk(s.symbol.get.asBlkMember.get)
       case Value.Ref(l) => chk(l.asBlkMember.get)
       case _ => die
@@ -175,7 +174,6 @@ class DeforestPreAnalyzer(
       if !imported then
         topLevelLikeComputations ::= fun
         val dummyRef = Value.Ref(fun.sym)
-        resultIdToResult += dummyRef.uid -> dummyRef
         dummyRefsToTopLevelLikeFuns += fun.sym -> dummyRef.asInstanceOf[Value.Ref]
   private def isPrivatelyDefined(s: Symbol) =
     imported && importedInfo.privateSymbols.contains(s)
@@ -207,7 +205,6 @@ class DeforestPreAnalyzer(
     case _ => lastWords(s"$s")
   
   override def applyResult(r: Result): Unit =
-    resultIdToResult += r.uid -> r
     r match
       case DeforestTupSelect(scrut, idx) =>
         selsToMatchingArmsContainingIt += r.uid -> inMatchScrutsArms
@@ -215,7 +212,6 @@ class DeforestPreAnalyzer(
     super.applyResult(r)
   
   override def applyPath(p: Path): Unit =
-    resultIdToResult += p.uid -> p
     p match
       case s@Select(path, nme) =>
         selsToMatchingArmsContainingIt += s.uid -> inMatchScrutsArms
@@ -228,7 +224,6 @@ class DeforestPreAnalyzer(
     super.applyPath(p)
   
   override def applyValue(v: Value): Unit =
-    resultIdToResult += v.uid -> v
     v match
       case Value.Ref(l) =>
         if l.isFunction then usedFunSyms += l.asBlkMember.get

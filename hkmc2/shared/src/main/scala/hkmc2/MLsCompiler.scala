@@ -114,12 +114,8 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
             preludeFile)
           deforestResult match
             case Right(msg) =>
-              println(msg) // TODO: no println
               le
             case Left(prog -> summary -> detail) =>
-              // if summary.nonEmpty then
-                // println("-----summary-----")
-                // println(summary.mapLines(l => s"\t$l"))
               prog
             
       val baseScp: utils.Scope =

@@ -25,8 +25,8 @@ enum FinalDest:
   case Match(val matchId: MatchId, val arm: Opt[ClassLikeSymbol])(val selsInArm: Ls[SelId], val tmpSymbolForASpecificCtorId: Ls[TempSymbol])
   case Sel(val s: SelId)
   def toString(pre: DeforestPreAnalyzer): String = this match
-    case Match(matchId, arm) => pre.resultIdToResult(matchId._1).toString() + "@" + matchId._2.makeSuffix(pre) + "@" + arm.fold("dflt")(_.nme)
-    case Sel(s) => pre.resultIdToResult(s._1).toString() + "@" + s._2.makeSuffix(pre)
+    case Match(matchId, arm) => pre.getResult(matchId._1).toString() + "@" + matchId._2.makeSuffix(pre) + "@" + arm.fold("dflt")(_.nme)
+    case Sel(s) => pre.getResult(s._1).toString() + "@" + s._2.makeSuffix(pre)
   
 
   
