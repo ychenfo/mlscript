@@ -101,8 +101,7 @@ abstract class Symbol(using State) extends Located:
       case S(defn: TypeLikeDef) => S(defn.bsym)
       case S(defn: TermDefinition) => S(defn.sym)
       case N => N
-    case _ => N
-  
+    case _ => N  
 
   /** Get the symbol corresponding to the "representative" of a set of overloaded definitions,
     * or the sole definition, if it is not overloaded.

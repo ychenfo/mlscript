@@ -487,7 +487,6 @@ enum Case:
 
 sealed trait TrivialResult extends Result
 
-
 sealed abstract class Result extends AutoLocated:
 // // * Used for debugging locations:
 // sealed abstract class Result extends AutoLocated with ProductWithExtraInfo:
