@@ -74,15 +74,15 @@ object Deforest:
     elabSt: Elaborator.State,
     ctx: Elaborator.Ctx,
   ): ImportedInfo =
-    given TraceLogger = new TraceLogger:
+    given localTL: TraceLogger = new TraceLogger:
       override def doTrace: Bool = false
     
     val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
       val semBlk -> _ = elabSt.importedFileNameToSemBlk(file)
-      val resolver = Resolver(tl)
+      val resolver = Resolver(localTL)
       resolver.traverseBlock(semBlk)(using Resolver.ICtx.empty)
       val low = codegen.Lowering()(using
-        cfg.copy(liftDefns = S(LiftDefns())), tl, raise, elabSt, ctx)
+        cfg.copy(liftDefns = S(LiftDefns())), localTL, raise, elabSt, ctx)
       low.program(semBlk)
     val traverser = new GetInfoOfImportedFile(cfg.deforest.get)
     traverser(prog.main)
@@ -101,7 +101,7 @@ object Deforest:
     ctx: Elaborator.Ctx,
     st: State,
     elabSt: Elaborator.State,
-  ): Either[Program -> String -> String, String] = 
+  ): Either[Program, String] = 
     val importedInfo =
       val trulyImported = p.imports
         .map: (_, path) =>
@@ -118,24 +118,7 @@ object Deforest:
       val ana = new DeforestConstrainSolver(col)
       val rwp = new DeforestRewritePrepare(ana)
       val rw = new DeforestRewriter(rwp)
-      val detail = col.constraints
-        .map: (p, c) =>
-          (s"$p --> $c")
-        .mkString("\n")
-      
-      val summary = rwp.ctorIdToFinalDest
-        .map: (ctorid, dest) =>
-          pre.getResult(ctorid._1).toString() +
-          "@" +
-          pre.getStableResultId(ctorid._1) +
-          "@" +
-          ctorid._2.makeSuffix(pre) +
-          " --> " +
-          dest.toString(pre)
-        .mkString("\n")
-
       val deforestRes = rw()
-      L:
-        Program(p.imports, deforestRes) -> summary -> detail
+      L(Program(p.imports, deforestRes))
     catch
       case NotDeforestableException(msg) => R(msg)

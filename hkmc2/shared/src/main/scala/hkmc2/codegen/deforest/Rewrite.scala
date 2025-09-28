@@ -30,8 +30,9 @@ enum FinalDest:
   
 
   
-class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.State):
+class DeforestRewritePrepare(val sol: DeforestConstrainSolver):
   drwp =>
+  given eState: Elaborator.State = sol.collector.elabState
   given dState: Deforest.State = sol.dState
   val preAnalyzer = sol.preAnalyzer
 
@@ -231,9 +232,24 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver)(using Elaborator.
     def apply(m: MatchId) = store.getOrElseUpdate.curried(m):
       new FreeVarTraverserForMatchConsideringDeforestation(m, drwp).freeVars
 
+  preAnalyzer.tl.log(
+    "---------- deforest summary ----------\n" ++
+    ctorIdToFinalDest
+      .map: (ctorid, dest) =>
+        preAnalyzer.getResult(ctorid._1).toString() +
+        "@" +
+        preAnalyzer.getStableResultId(ctorid._1) +
+        "@" +
+        ctorid._2.makeSuffix(preAnalyzer) +
+        " --> " +
+        dest.toString(preAnalyzer)
+      .mkString("\n"),
+    true)
+  
+  
 
-
-class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare)(using Elaborator.State):
+class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
+  given eState: Elaborator.State = rewritePrepare.eState
   given dState: Deforest.State = rewritePrepare.dState
   val preAnalyzer = rewritePrepare.preAnalyzer
   

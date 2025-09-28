@@ -47,8 +47,15 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
     override def emitDbg(str: String): Unit = output(str)
   
   val deforestTL = new TraceLogger:
-    override def doTrace: Bool = deforestInfo.isSet
+    override def doTrace: Bool = true
     override def emitDbg(str: String): Unit = output(str)
+    override def trace[T](pre: => Str, post: T => Str = noPostTrace)(thunk: => T): T =
+      if deforestInfo.isSet then log(pre)
+      enter()
+      val res = try thunk finally exit()
+      if (post isnt noPostTrace) && deforestInfo.isSet then log(post(res))
+      res
+    
   
   lazy val host =
     hostCreated = true
@@ -102,10 +109,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       if deforestFlag.isSet then
         import codegen.deforest.*
         output(">>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>")
-        preludeFile.givenIn:
+        new TraceLogger { override def doTrace: Bool = false }.givenIn:
           Deforest(le, wd) match
             case R(msg) => output(s"Not deforestable: $msg")
-            case L(deforestRes -> _ -> _) =>
+            case L(deforestRes) =>
               val jsStr = baseScp.nest.givenIn:
                 jsb.program(deforestRes, N, wd).stripBreaks.mkString(100)
               output(jsStr)
@@ -259,15 +266,10 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         val collector = CollectTopLevelDefs(le.main.definedVars.filter(_.isFunction).map(_.asInstanceOf[BlockMemberSymbol]))
         deforestState.topLevelFunInPrevDiffBlocks.addAll(collector.apply(le.main))
         
-        
-        preludeFile.givenIn:
+        deforestTL.givenIn:
           Deforest(le, wd) match
             case R(msg) => output(s"Not deforestable: $msg")
-            case L(deforestRes -> summary -> detail) =>
-              if deforestInfo.isSet then
-                output(detail)
-              output("---------- deforest summary ----------")
-              output(summary)
+            case L(deforestRes) =>
               val resSym -> resNme = getResSymAndResNme("block$res_deforest")
               val deforestRes2 = assignResultSymForBlock(deforestRes, resSym)
               if showLoweredTree.isSet then

@@ -112,10 +112,8 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
             new Deforest.State(),
             State)
           deforestResult match
-            case Right(msg) =>
-              le
-            case Left(prog -> summary -> detail) =>
-              prog
+            case Right(msg) => le
+            case Left(prog) => prog
             
       val baseScp: utils.Scope =
         utils.Scope.empty

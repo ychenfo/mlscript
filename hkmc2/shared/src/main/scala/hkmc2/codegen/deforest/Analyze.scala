@@ -631,8 +631,13 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
           processResult(value)
         case _ => throw NotDeforestableException("no support for array with spread")
       new Ctor(r.uid, instantiationId)(preAnalyzer.arrBlkMemSym(elems.length), args)
-
-
+  
+  preAnalyzer.tl.trace(constraints
+    .map: (p, c) =>
+      (s"$p --> $c")
+    .mkString("\n")
+  )(())
+  
 class DeforestConstrainSolver(val collector: DeforestConstraintsCollector):
   given dState: Deforest.State = collector.dState
   
