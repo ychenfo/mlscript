@@ -98,7 +98,7 @@ class Watcher(dirs: Ls[File]):
         given Config =
           if path.segments.contains("nofib-deforest") then
             Config.default.copy(deforest = S(Config.Deforestation(
-              seethroughModules = Set("NofibPrelude"),
+              seethroughModules = Set(rootPath/"hkmc2Benchmarks"/"src"/"test"/"bench"/"mlscript-compile"/"nofib-deforest"/"NofibPrelude.mls"),
               seeThroughLazySymbolsNames = Set("lazy"),
               seeThroughForceSymbolsNames = Set("force")
             )))

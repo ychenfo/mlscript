@@ -9,6 +9,7 @@ import utils.*
 import mlscript.utils.*, shorthands.*
 import scala.collection.mutable
 import hkmc2.Config.LiftDefns
+import hkmc2.syntax.Keyword.in
 
 
 case class ImportedInfo(
@@ -17,7 +18,16 @@ case class ImportedInfo(
   funAndDefs: Ls[BlockMemberSymbol -> FunDefn],
   lazySymbols: Ls[Symbol],
   forceSymbols: Ls[Symbol],
-  privateSymbols: Ls[BlockMemberSymbol])
+  privateSymbols: Ls[BlockMemberSymbol]):
+  
+  def :::(other: ImportedInfo) =
+    ImportedInfo(
+      otherImports ::: other.otherImports,
+      innerSymbolsToOutterSymbols ::: other.innerSymbolsToOutterSymbols,
+      funAndDefs ::: other.funAndDefs,
+      lazySymbols ::: other.lazySymbols,
+      forceSymbols ::: other.forceSymbols,
+      privateSymbols ::: other.privateSymbols)
 
 object ImportedInfo:
   val empty = ImportedInfo(Nil, Nil, Nil, Nil, Nil, Nil)
@@ -30,7 +40,8 @@ class GetInfoOfImportedFile(cfg: Config.Deforestation) extends BlockTraverser:
   var privateFunSyms = Set.empty[BlockMemberSymbol]
   override def applyDefn(defn: Defn): Unit = defn match
     case clsLike: ClsLikeDefn
-      if clsLike.companion.isDefined && cfg.seethroughModules.contains(clsLike.sym.nme) =>
+      if clsLike.companion.isDefined &&
+      cfg.seethroughModules.exists(p => p.baseName == clsLike.sym.nme) =>
       val comp = clsLike.companion.get
       innerToOutter = S(comp.isym -> clsLike.sym)
       funAndDefs :::= comp.methods.map(f => f.sym -> f)
@@ -56,7 +67,7 @@ object Deforest:
     val resultIdToResult = mutable.Map.empty[Uid[Result], Result]
     object ResultUidState extends Uid.Result.State
   
-  def deforestImport(path: Str, wd: os.Path)(using
+  def deforestImport(file: os.Path)(using
     cfg: Config,
     raise: Raise,
     st: State,
@@ -66,11 +77,6 @@ object Deforest:
     given TraceLogger = new TraceLogger:
       override def doTrace: Bool = false
     
-    val file =
-      if path.startsWith("/")
-      then os.Path(path)
-      else wd / os.RelPath(path)
-    assert(file.ext == "mls")
     val prog = st.importedFileNameToLoweredBlock.getOrElseUpdate.curried(file):
       val semBlk -> _ = elabSt.importedFileNameToSemBlk(file)
       val resolver = Resolver(tl)
@@ -95,14 +101,16 @@ object Deforest:
     ctx: Elaborator.Ctx,
     st: State,
     elabSt: Elaborator.State,
-    preludeFile: os.Path
-  ): Either[Program -> String -> String, String] =    
+  ): Either[Program -> String -> String, String] = 
     val importedInfo =
       val trulyImported = p.imports
-        .find: (outterSym, path) =>
-          cfg.deforest.get.seethroughModules.exists(path.contains)
-        .fold(ImportedInfo.empty): (outterSym, path) =>
-          deforestImport(path.replace(".mjs", ".mls"), wd)
+        .map: (_, path) =>
+          if path.startsWith("/")
+            then os.Path(path.replace(".mjs", ".mls"))
+            else wd / os.RelPath(path.replace(".mjs", ".mls"))
+        .filter(cfg.deforest.get.seethroughModules.contains)
+        .foldLeft(ImportedInfo.empty): (acc, path) =>
+          acc ::: deforestImport(path)
       trulyImported.copy(funAndDefs = trulyImported.funAndDefs ++ st.topLevelFunInPrevDiffBlocks)
     try
       val pre = new DeforestPreAnalyzer(p.main, importedInfo)

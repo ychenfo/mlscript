@@ -110,8 +110,7 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
             raise,
             newCtx,
             new Deforest.State(),
-            State,
-            preludeFile)
+            State)
           deforestResult match
             case Right(msg) =>
               le

@@ -45,7 +45,7 @@ object Config:
   case class LiftDefns() // there may be other settings in the future, having it as a case class now
   
   case class Deforestation(
-    val seethroughModules: Set[String],
+    val seethroughModules: Set[os.Path],
     val seeThroughLazySymbolsNames: Set[String],
     val seeThroughForceSymbolsNames: Set[String]
   )

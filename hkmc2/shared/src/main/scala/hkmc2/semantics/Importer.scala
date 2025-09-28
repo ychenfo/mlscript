@@ -62,8 +62,8 @@ class Importer:
               
               given newCtx: Elaborator.Ctx =
                 val shouldFullyElab = config.deforest.fold(false): dConfig =>
-                  dConfig.seethroughModules.exists(path.contains)
-                if shouldFullyElab then // TODO:
+                  dConfig.seethroughModules.contains(file)
+                if shouldFullyElab then
                   prelude.copy(mode = Mode.Full).nestLocal("prelude")
                 else
                   prelude.copy(mode = Mode.Light).nestLocal("prelude")

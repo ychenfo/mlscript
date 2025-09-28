@@ -91,7 +91,7 @@ abstract class MLsDiffMaker extends DiffMaker:
       liftDefns = Opt.when(liftDefns.isSet)(LiftDefns()),
       deforest = Opt.when(deforestation.isSet):
         Config.Deforestation(
-          seethroughModules = Set("NofibPrelude"),
+          seethroughModules = Set(os.Path(rootPath)/"hkmc2Benchmarks"/"src"/"test"/"bench"/"mlscript-compile"/"nofib-deforest"/"NofibPrelude.mls"),
           seeThroughForceSymbolsNames = Set("force"),
           seeThroughLazySymbolsNames = Set("lazy"))
     )

@@ -51,7 +51,7 @@ class CompileTestRunner
         given Config =
           if file.segments.contains("nofib-deforest") then
             Config.default.copy(deforest = S(Config.Deforestation(
-              seethroughModules = Set("NofibPrelude"),
+              seethroughModules = Set(workingDir/"hkmc2Benchmarks"/"src"/"test"/"bench"/"mlscript-compile"/"nofib-deforest"/"NofibPrelude.mls"),
               seeThroughLazySymbolsNames = Set("lazy"),
               seeThroughForceSymbolsNames = Set("force")
             )))
