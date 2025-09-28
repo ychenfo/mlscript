@@ -62,7 +62,7 @@ class Importer:
               
               given newCtx: Elaborator.Ctx =
                 val shouldFullyElab = config.deforest.fold(false): dConfig =>
-                  dConfig.importedPublicModNames.exists(path.contains)
+                  dConfig.seethroughModules.exists(path.contains)
                 if shouldFullyElab then // TODO:
                   prelude.copy(mode = Mode.Full).nestLocal("prelude")
                 else

@@ -30,7 +30,7 @@ class GetInfoOfImportedFile(cfg: Config.Deforestation) extends BlockTraverser:
   var privateFunSyms = Set.empty[BlockMemberSymbol]
   override def applyDefn(defn: Defn): Unit = defn match
     case clsLike: ClsLikeDefn
-      if clsLike.companion.isDefined && cfg.importedPublicModNames.contains(clsLike.sym.nme) =>
+      if clsLike.companion.isDefined && cfg.seethroughModules.contains(clsLike.sym.nme) =>
       val comp = clsLike.companion.get
       innerToOutter = S(comp.isym -> clsLike.sym)
       funAndDefs :::= comp.methods.map(f => f.sym -> f)
@@ -100,7 +100,7 @@ object Deforest:
     val importedInfo =
       val trulyImported = p.imports
         .find: (outterSym, path) =>
-          cfg.deforest.get.importedPublicModNames.exists(path.contains)
+          cfg.deforest.get.seethroughModules.exists(path.contains)
         .fold(ImportedInfo.empty): (outterSym, path) =>
           deforestImport(path.replace(".mjs", ".mls"), wd)
       trulyImported.copy(funAndDefs = trulyImported.funAndDefs ++ st.topLevelFunInPrevDiffBlocks)

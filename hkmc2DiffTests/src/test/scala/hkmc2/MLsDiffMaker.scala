@@ -91,7 +91,7 @@ abstract class MLsDiffMaker extends DiffMaker:
       liftDefns = Opt.when(liftDefns.isSet)(LiftDefns()),
       deforest = Opt.when(deforestation.isSet):
         Config.Deforestation(
-          importedPublicModNames = Set("NofibPrelude"),
+          seethroughModules = Set("NofibPrelude"),
           seeThroughForceSymbolsNames = Set("force"),
           seeThroughLazySymbolsNames = Set("lazy"))
     )

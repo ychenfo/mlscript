@@ -98,7 +98,7 @@ class Watcher(dirs: Ls[File]):
         given Config =
           if path.segments.contains("nofib-deforest") then
             Config.default.copy(deforest = S(Config.Deforestation(
-              importedPublicModNames = Set("NofibPrelude"),
+              seethroughModules = Set("NofibPrelude"),
               seeThroughLazySymbolsNames = Set("lazy"),
               seeThroughForceSymbolsNames = Set("force")
             )))

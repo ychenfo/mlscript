@@ -51,7 +51,7 @@ class CompileTestRunner
         given Config =
           if file.segments.contains("nofib-deforest") then
             Config.default.copy(deforest = S(Config.Deforestation(
-              importedPublicModNames = Set("NofibPrelude"),
+              seethroughModules = Set("NofibPrelude"),
               seeThroughLazySymbolsNames = Set("lazy"),
               seeThroughForceSymbolsNames = Set("force")
             )))
