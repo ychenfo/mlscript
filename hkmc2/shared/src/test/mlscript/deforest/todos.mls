@@ -315,5 +315,5 @@ fun test() =
 test()
 //│ = Local(2)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: cls like defn inside a function
+//│ Not deforestable: no support for fun containing a cls like def
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

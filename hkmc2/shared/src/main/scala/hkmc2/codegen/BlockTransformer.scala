@@ -150,7 +150,6 @@ class BlockTransformer(subst: SymbolSubst):
   def applyValDefn(defn: ValDefn): ValDefn =
     val ValDefn(tsym, sym, rhs) = defn
     val tsym2 = tsym.subst
-    // println(s"++++++ $tsym(${tsym.uid}) $tsym2(${tsym2.uid})")
     val sym2 = sym.subst
     val rhs2 = applyPath(rhs)
     if (tsym2 is tsym) && (sym2 is sym) && (rhs2 is rhs)
@@ -176,7 +175,6 @@ class BlockTransformer(subst: SymbolSubst):
     =>
       val own2 = own.mapConserve(_.subst)
       val isym2 = isym.subst
-      // println(s"??? $isym(${isym.uid}) $isym2(${isym2.uid})")
       val sym2 = sym.subst
       val paramsOpt2 = paramsOpt.mapConserve(applyParamList)
       val auxParams2 = auxParams.mapConserve(applyParamList)

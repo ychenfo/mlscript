@@ -183,7 +183,7 @@ let xs = new Oopsie
 //│ ╟── which references the symbol introduced here
 //│ ║  l.176: 	let xs = new Oopsie
 //│ ╙──       	    ^^
-//│ ═══[RUNTIME ERROR] ReferenceError: xs_not_found is not defined
+//│ ═══[RUNTIME ERROR] ReferenceError: xs is not defined
 
 // ——— ——— ———
 
@@ -389,19 +389,18 @@ module Foo(x)
 //│   }
 //│   static #x;
 //│   static {
-//│     Foo4.#x = x_not_found;
+//│     Foo4.#x = x;
 //│   }
 //│   toString() { return runtime.render(this); }
 //│   static [definitionMetadata] = ["class", "Foo"]; 
 //│ });
-//│ ═══[RUNTIME ERROR] ReferenceError: x_not_found is not defined
 
 :fixme // proper compilation error
 :sjs
 module Foo(val x)
 //│ ╔══[COMPILATION ERROR] No definition found in scope for member 'x'
 //│ ╟── which references the symbol introduced here
-//│ ║  l.401: 	module Foo(val x)
+//│ ║  l.400: 	module Foo(val x)
 //│ ╙──       	               ^
 //│ JS (unsanitized):
 //│ let Foo7;
@@ -413,19 +412,18 @@ module Foo(val x)
 //│     runtime.Unit;
 //│   }
 //│   static {
-//│     this.x = x_not_found;
+//│     this.x = x;
 //│   }
 //│   toString() { return runtime.render(this); }
 //│   static [definitionMetadata] = ["class", "Foo"]; 
 //│ });
-//│ ═══[RUNTIME ERROR] ReferenceError: x_not_found is not defined
 
 // ——— ——— ———
 
 // TODO support syntax?
 data class Foo(mut x)
 //│ ╔══[ERROR] Expected a valid parameter, found 'mut'-modified identifier
-//│ ║  l.426: 	data class Foo(mut x)
+//│ ║  l.424: 	data class Foo(mut x)
 //│ ╙──       	                   ^
 
 // ——— ——— ———

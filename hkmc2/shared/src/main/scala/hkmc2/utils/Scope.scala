@@ -42,13 +42,12 @@ case class Scope
   var thisProxyDefined: Bool = false
   
   private def thisError(thisSym: InnerSymbol)(using Raise): Nothing =
-    raise(InternalError(msg"`this` not in scope: ${thisSym.toString} ${thisSym.uid.toString()}" -> N :: Nil,
+    raise(InternalError(msg"`this` not in scope: ${thisSym.toString}" -> N :: Nil,
       source = Diagnostic.Source.Compilation))
     die
   
   def addToBindings(symbol: Local, name: String, shadow: Bool) =
-    // FIXME: deforestation makes this assertion fail
-    if !shadow then assert(lookup(symbol).isEmpty, (symbol, symbol.getClass(), this.showAsTree))
+    if !shadow then assert(lookup(symbol).isEmpty, (symbol, this.showAsTree))
     bindings += symbol -> name
     existingNames += name
   
@@ -114,7 +113,7 @@ case class Scope
           (if extraLoc.isEmpty then Nil else msg"which references the symbol introduced here" -> extraLoc :: Nil),
         extraInfo = Some(l -> l.getClass -> this),
         source = Diagnostic.Source.Compilation))
-      l.nme + "_not_found"
+      l.nme
   
   // * Note: it is sound for an existing name to have been allocated with a different prefix (which is only cosmetic)
   def allocateOrGetName(l: Local, prefix: Str = ""): Str =

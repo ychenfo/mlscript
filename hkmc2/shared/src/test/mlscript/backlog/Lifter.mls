@@ -172,7 +172,7 @@ fun foo(x, y) =
 
 :expect 12
 foo(10, 0)
-//│ ═══[RUNTIME ERROR] ReferenceError: M$_not_found is not defined
+//│ ═══[RUNTIME ERROR] ReferenceError: M$ is not defined
 //│ ═══[RUNTIME ERROR] Expected: '12', got: 'undefined'
 
 
@@ -211,6 +211,6 @@ fun f =
       h
   M.g
 //│ ═══[WARNING] Modules are not yet lifted.
-//│ /!!!\ Uncaught error: hkmc2.InternalError: `this` not in scope: class:M 1063
+//│ /!!!\ Uncaught error: hkmc2.InternalError: `this` not in scope: class:M
 
 

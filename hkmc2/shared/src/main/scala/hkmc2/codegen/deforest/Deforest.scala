@@ -146,7 +146,6 @@ class RenewSymbolSubst(b: Block)(using Elaborator.State) extends SymbolSubst:
       case s: TopLevelSymbol => s
       case s: ErrorSymbol => new ErrorSymbol(s.nme, s.tree)
   
-  // println(b.topLvlDefinedVars.map(s => s"$s ${s.uid.toString()}"))
   for s <- b.topLvlDefinedVars.toList.sortBy(_.uid) do
     map.addOne(s, cloneSym(s))
     
@@ -222,6 +221,8 @@ extension (b: Block)
           rest + defn.sym
         case ClsLikeDefn(owner, isym, sym, k, paramsOpt, auxParams, parentPath, methods, privateFields, publicFields, preCtor, ctor, companion) =>
           val rest = rst.topLvlDefinedVars
+          // inner symbols also needs to be renewed because they are allocated
+          // in the same level of scope in `JSBuilder.reserveNames`
           companion.map(_.isym).toSet ++ rest + defn.sym + isym
     case HandleBlock(lhs, res, par, args, cls, hdr, bod, rst) => rst.topLvlDefinedVars + res + lhs
     case TryBlock(sub, fin, rst) => sub.topLvlDefinedVars ++ fin.topLvlDefinedVars ++ rst.topLvlDefinedVars

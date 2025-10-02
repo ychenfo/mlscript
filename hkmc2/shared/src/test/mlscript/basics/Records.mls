@@ -82,7 +82,7 @@ let rcd =
 //│ ╟── which references the symbol introduced here
 //│ ║  l.71: 	let rcd =
 //│ ╙──      	    ^^^
-//│ ═══[RUNTIME ERROR] ReferenceError: rcd_not_found is not defined
+//│ rcd = {foo: 1, bar: "..."}
 
 
 // * How about this syntax?

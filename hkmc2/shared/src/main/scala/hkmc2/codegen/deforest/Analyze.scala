@@ -889,17 +889,11 @@ extension (b: Block)
     case Continue(_) => Set.empty
     case Define(defn, rst) =>
       val rest = rst.deforestDefinedVars
-      // if defn.isOwned then rest else
-      defn match
-        case fdef: FunDefn => rest ++ fdef.deforestDefinedVars
-        case _: ValDefn => rest + defn.sym
-        case c: ClsLikeDefn =>
-          rest + c.sym + c.isym ++ c.preCtor.deforestDefinedVars ++
-            c.ctor.deforestDefinedVars ++ c.methods.flatMap(_.deforestDefinedVars) ++
-            c.companion.iterator.flatMap: c =>
-              c.ctor.deforestDefinedVars ++ c.methods.flatMap(_.deforestDefinedVars) ++
-              c.publicFields.flatMap(x => x._1 :: x._2 :: Nil) ++ c.privateFields + c.isym
-        // case _ => throw NotDeforestableException(s"no support for fun containing a cls like def")
+      if defn.isOwned then rest else
+        defn match
+          case fdef: FunDefn => rest ++ fdef.deforestDefinedVars
+          case _: ValDefn => rest + defn.sym
+          case _ => throw NotDeforestableException(s"no support for fun containing a cls like def")
     case HandleBlock(lhs, res, par, args, cls, hdr, bod, rst) => rst.deforestDefinedVars + res
     case TryBlock(sub, fin, rst) => sub.deforestDefinedVars ++ fin.deforestDefinedVars ++ rst.deforestDefinedVars
     case Label(lbl, bod, rst) => bod.deforestDefinedVars ++ rst.deforestDefinedVars
