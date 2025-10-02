@@ -81,9 +81,6 @@ modSome(Some(17), 3)
 //│ tmp8 = Some1(17);
 //│ modSome(tmp8, 3)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
-//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
-//│ 
 //│ let modSome, tmp8, modSome_inst_0_tsni, _deforest_Some_x, match_x_arm_Some_inst_0_tsni;
 //│ match_x_arm_Some_inst_0_tsni = (undefined, function (m, _deforest_Some_x_inst_0_tsni) {
 //│   let param0, n, scrut, tmp9, tmp10, _deforest_Some_x1;
@@ -209,9 +206,6 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│ lambda = (undefined, function (x, y) { return x });
 //│ zipWith(tmp12, lambda)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
-//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
-//│ 
 //│ let zipWith, tmp10, tmp11, tmp12, lambda, zipWith_inst_0_tsni, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, match_xsys_arm_Deforest_Arr_2_inst_0_tsni;
 //│ match_xsys_arm_Deforest_Arr_2_inst_0_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_0_tsni, _deforest_Deforest_Arr_2_1_inst_0_tsni) {
 //│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp13, tmp14, tmp15, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;

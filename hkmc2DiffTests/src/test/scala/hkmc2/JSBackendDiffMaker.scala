@@ -112,9 +112,9 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         new TraceLogger { override def doTrace: Bool = false }.givenIn:
           Deforest(le, wd) match
             case R(msg) => output(s"Not deforestable: $msg")
-            case L(deforestRes) =>
+            case L(deforestRes -> _) =>
               val jsStr = baseScp.nest.givenIn:
-                jsb.program(deforestRes, N, wd).stripBreaks.mkString(100)
+                jsb.programBody(deforestRes, N, wd).stripBreaks.mkString(100)
               output(jsStr)
         output("<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<")
     
@@ -269,7 +269,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
         deforestTL.givenIn:
           Deforest(le, wd) match
             case R(msg) => output(s"Not deforestable: $msg")
-            case L(deforestRes) =>
+            case L(deforestRes -> _) =>
               val resSym -> resNme = getResSymAndResNme("block$res_deforest")
               val deforestRes2 = assignResultSymForBlock(deforestRes, resSym)
               if showLoweredTree.isSet then

@@ -18,7 +18,7 @@ f(1)
 //│ ╟── which references the symbol introduced here
 //│ ║  l.3: 	fun f: Any -> Any
 //│ ╙──     	^^^^^^^^^^^^^^^^^
-//│ ═══[RUNTIME ERROR] ReferenceError: f is not defined
+//│ ═══[RUNTIME ERROR] ReferenceError: f_not_found is not defined
 
 // no errors if we don't generate code
 f(1)
@@ -35,7 +35,7 @@ g(0)
 //│ ╟── which references the symbol introduced here
 //│ ║  l.26: 	fun g(x) = f(x)
 //│ ╙──      	^^^^^^^^^^^^^^^
-//│ ═══[RUNTIME ERROR] ReferenceError: g is not defined
+//│ ═══[RUNTIME ERROR] ReferenceError: g_not_found is not defined
 
 :js
 :ge

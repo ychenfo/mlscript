@@ -24,6 +24,7 @@ x
 //│ ╟── which references the symbol introduced here
 //│ ║  l.17: 	val x
 //│ ╙──      	^^^^^
+//│ ═══[RUNTIME ERROR] ReferenceError: x_not_found is not defined
 
 
 val x: Int
@@ -31,11 +32,12 @@ val x: Int
 :ge
 x
 //│ ╔══[COMPILATION ERROR] No definition found in scope for member 'x'
-//│ ║  l.32: 	x
+//│ ║  l.33: 	x
 //│ ║        	^
 //│ ╟── which references the symbol introduced here
-//│ ║  l.29: 	val x: Int
+//│ ║  l.30: 	val x: Int
 //│ ╙──      	^^^^^^^^^^
+//│ ═══[RUNTIME ERROR] ReferenceError: x_not_found is not defined
 
 
 fun p: Int
@@ -43,12 +45,12 @@ fun p: Int
 :ge
 p
 //│ ╔══[COMPILATION ERROR] No definition found in scope for member 'p'
-//│ ║  l.44: 	p
+//│ ║  l.46: 	p
 //│ ║        	^
 //│ ╟── which references the symbol introduced here
-//│ ║  l.41: 	fun p: Int
+//│ ║  l.43: 	fun p: Int
 //│ ╙──      	^^^^^^^^^^
-//│ ═══[RUNTIME ERROR] ReferenceError: p is not defined
+//│ ═══[RUNTIME ERROR] ReferenceError: p_not_found is not defined
 
 
 // :ctx
@@ -57,25 +59,25 @@ fun (++) test: (Int, Int) -> Int
 :ge
 test(1, 2)
 //│ ╔══[COMPILATION ERROR] No definition found in scope for member 'test'
-//│ ║  l.58: 	test(1, 2)
+//│ ║  l.60: 	test(1, 2)
 //│ ║        	^^^^
 //│ ╟── which references the symbol introduced here
-//│ ║  l.55: 	fun (++) test: (Int, Int) -> Int
+//│ ║  l.57: 	fun (++) test: (Int, Int) -> Int
 //│ ╙──      	^^^^^^^^^^^^^^^^^^^^^^^^^
-//│ ═══[RUNTIME ERROR] ReferenceError: test is not defined
+//│ ═══[RUNTIME ERROR] ReferenceError: test_not_found is not defined
 
 :sjs
 :ge
 1 ++ 1
 //│ ╔══[COMPILATION ERROR] No definition found in scope for member 'test'
-//│ ║  l.69: 	1 ++ 1
+//│ ║  l.71: 	1 ++ 1
 //│ ║        	  ^^
 //│ ╟── which references the symbol introduced here
-//│ ║  l.55: 	fun (++) test: (Int, Int) -> Int
+//│ ║  l.57: 	fun (++) test: (Int, Int) -> Int
 //│ ╙──      	^^^^^^^^^^^^^^^^^^^^^^^^^
 //│ JS (unsanitized):
-//│ let tmp2; tmp2 = test(); runtime.safeCall(tmp2(1, 1))
-//│ ═══[RUNTIME ERROR] ReferenceError: test is not defined
+//│ let tmp2; tmp2 = test_not_found(); runtime.safeCall(tmp2(1, 1))
+//│ ═══[RUNTIME ERROR] ReferenceError: test_not_found is not defined
 
 
 declare class C

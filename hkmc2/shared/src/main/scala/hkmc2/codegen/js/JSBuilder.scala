@@ -547,8 +547,8 @@ class JSBuilder(using TL, State, Ctx) extends CodeBuilder:
     go(p.main)
   
   def program(p: Program, exprt: Opt[BlockMemberSymbol], wd: os.Path)(using Raise, Scope): Document =
-    scope.allocateName(State.definitionMetadataSymbol)
-    scope.allocateName(State.prettyPrintSymbol)
+    scope.allocateName(State.definitionMetadataSymbol/* , shadow = true */)
+    scope.allocateName(State.prettyPrintSymbol/* , shadow = true */)
     doc"""const ${getVar(State.definitionMetadataSymbol, N)} = globalThis.Symbol.for("mlscript.definitionMetadata");"""
       :/: doc"""const ${getVar(State.prettyPrintSymbol, N)} = globalThis.Symbol.for("mlscript.prettyPrint");"""
       :/: programBody(p, exprt, wd)

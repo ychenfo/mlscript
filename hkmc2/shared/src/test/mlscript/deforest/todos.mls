@@ -61,9 +61,6 @@ f(AA(AA(3)))
 //│ tmp1 = AA1(tmp);
 //│ f(tmp1)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
-//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
-//│ 
 //│ let f, tmp, tmp1, f_inst_0_tsni, _deforest_AA_x;
 //│ f_inst_0_tsni = function f_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())
@@ -115,7 +112,7 @@ fun f(a) = if a is
 let p = AA(AA(AA(10)))
 test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ JS (unsanitized):
-//│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
+//│ let test, f2, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
 //│ test = function test(x) {
 //│   let t, param0, param01, param02, a, tmp15, tmp16, tmp17, tmp18, tmp19;
 //│   if (x instanceof AA1.class) {
@@ -142,7 +139,7 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│   tmp19 = tmp18 + 2;
 //│   return tmp19 - 1
 //│ };
-//│ f1 = function f(a) {
+//│ f2 = function f(a) {
 //│   let param0;
 //│   if (a instanceof AA1.class) {
 //│     param0 = a.x;
@@ -159,7 +156,7 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ tmp5 = AA1(tmp4);
 //│ p = AA1(tmp5);
 //│ tmp6 = test(p);
-//│ tmp7 = f1(p);
+//│ tmp7 = f2(p);
 //│ tmp8 = tmp6 + tmp7;
 //│ tmp9 = AA1(10);
 //│ tmp10 = AA1(tmp9);
@@ -169,10 +166,7 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ tmp14 = test(B1);
 //│ tmp13 + tmp14
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
-//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
-//│ 
-//│ let test, f1, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, test_inst_0_tsni, test_inst_1_tsni, test_inst_2_tsni, _deforest_AA_x1, _deforest_AA_x2, _deforest_AA_x3, _deforest_AA_x4, lambda;
+//│ let test, f2, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, test_inst_0_tsni, test_inst_1_tsni, test_inst_2_tsni, _deforest_AA_x1, _deforest_AA_x2, _deforest_AA_x3, _deforest_AA_x4, lambda;
 //│ test_inst_0_tsni = function test_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())
 //│ };
@@ -225,7 +219,7 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│   tmp19 = tmp18 + 2;
 //│   return tmp19 - 1
 //│ };
-//│ f1 = function f(a) {
+//│ f2 = function f(a) {
 //│   let param0;
 //│   if (a instanceof AA1.class) {
 //│     param0 = a.x;
@@ -254,7 +248,7 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ tmp5 = AA1(tmp4);
 //│ p = AA1(tmp5);
 //│ tmp6 = test_inst_2_tsni(p);
-//│ tmp7 = f1(p);
+//│ tmp7 = f2(p);
 //│ tmp8 = tmp6 + tmp7;
 //│ _deforest_AA_x3 = 10;
 //│ tmp9 = () => {
@@ -321,5 +315,5 @@ fun test() =
 test()
 //│ = Local(2)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ Not deforestable: no support for fun containing a cls like def
+//│ Not deforestable: cls like defn inside a function
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

@@ -548,35 +548,32 @@ fun f(x) = if x is
   A then 1
 f(id(A)) + f(A)
 //│ JS (unsanitized):
-//│ let f10, tmp111, tmp112, tmp113;
-//│ f10 = function f(x1) {
-//│   if (x1 instanceof A1.class) {
+//│ let f19, tmp111, tmp112, tmp113;
+//│ f19 = function f(x2) {
+//│   if (x2 instanceof A1.class) {
 //│     return 1
 //│   } else {
 //│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ tmp111 = Predef.id(A1);
-//│ tmp112 = f10(tmp111);
-//│ tmp113 = f10(A1);
+//│ tmp112 = f19(tmp111);
+//│ tmp113 = f19(A1);
 //│ tmp112 + tmp113
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
-//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
-//│ 
-//│ let f10, tmp111, tmp112, tmp113, f_inst_0_tsni7, lambda9;
-//│ f_inst_0_tsni7 = function f_inst_0_tsni(x1) {
-//│   return runtime.safeCall(x1())
+//│ let f19, tmp111, tmp112, tmp113, f_inst_0_tsni7, lambda9;
+//│ f_inst_0_tsni7 = function f_inst_0_tsni(x2) {
+//│   return runtime.safeCall(x2())
 //│ };
-//│ f10 = function f(x1) {
-//│   if (x1 instanceof A1.class) {
+//│ f19 = function f(x2) {
+//│   if (x2 instanceof A1.class) {
 //│     return 1
 //│   } else {
 //│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
 //│ tmp111 = Predef.id(A1);
-//│ tmp112 = f10(tmp111);
+//│ tmp112 = f19(tmp111);
 //│ lambda9 = () => { return 1 };
 //│ tmp113 = f_inst_0_tsni7(lambda9);
 //│ tmp112 + tmp113

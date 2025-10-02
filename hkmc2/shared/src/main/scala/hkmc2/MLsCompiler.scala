@@ -8,6 +8,7 @@ import utils.*
 import hkmc2.semantics.MemberSymbol
 import hkmc2.semantics.Elaborator
 import hkmc2.semantics.Resolver
+import hkmc2.semantics.BlockMemberSymbol
 import hkmc2.syntax.Keyword.`override`
 import semantics.Elaborator.{Ctx, State}
 import hkmc2.codegen.deforest.Deforest
@@ -97,9 +98,10 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
         codegen.js.JSBuilder()
       val le = low.program(blk)
       
-      val lowered =
+      val nme = file.baseName
+      val (lowered -> exportedSymbol) =
         if cfg.deforest.isEmpty then
-          le
+          (le -> parsed.definedSymbols.find(_._1 === nme).map(_._2))
         else
           val deforestLow = ltl.givenIn:
             cfg.copy(liftDefns = S(LiftDefns())).givenIn:
@@ -112,8 +114,13 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
             new Deforest.State(),
             State)
           deforestResult match
-            case Right(msg) => le
-            case Left(prog) => prog
+            case Right(msg) => le -> parsed.definedSymbols.find(_._1 === nme).map(_._2)
+            case Left(prog -> renewSym) =>
+              prog ->
+              parsed.definedSymbols
+                .find(_._1 === nme)
+                .map: s =>
+                  renewSym.applyLocal(s._2).asInstanceOf[BlockMemberSymbol]
             
       val baseScp: utils.Scope =
         utils.Scope.empty
@@ -121,8 +128,9 @@ class MLsCompiler(preludeFile: os.Path, mkOutput: ((Str => Unit) => Unit) => Uni
       // * Having `module id"import" with ...` in `prelude.mls` will generate `globalThis.import` that is undefined.
       baseScp.addToBindings(Elaborator.State.importSymbol, "import", shadow = false)
       val nestedScp = baseScp.nest
-      val nme = file.baseName
-      val exportedSymbol = parsed.definedSymbols.find(_._1 === nme).map(_._2)
+      // val nme = file.baseName
+      // val exportedSymbol =
+      //   lowered.main.definedVars.find(n => n.nme === nme && n.asMod.isDefined).flatMap(_.asBlkMember)
       val je = nestedScp.givenIn:
         jsb.program(lowered, exportedSymbol, wd)
       val jsStr = je.stripBreaks.mkString(100)

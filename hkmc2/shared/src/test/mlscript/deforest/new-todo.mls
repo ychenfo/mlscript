@@ -59,29 +59,26 @@ test()
 fun f(x) = if x is A then 1
 f(A) + f(A)
 //│ JS (unsanitized):
-//│ let f1, tmp, tmp1;
-//│ f1 = function f(x) {
+//│ let f2, tmp, tmp1;
+//│ f2 = function f(x) {
 //│   if (x instanceof A1.class) {
 //│     return 1
 //│   } else {
 //│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│   }
 //│ };
-//│ tmp = f1(A1);
-//│ tmp1 = f1(A1);
+//│ tmp = f2(A1);
+//│ tmp1 = f2(A1);
 //│ tmp + tmp1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
-//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
-//│ 
-//│ let f1, tmp, tmp1, f_inst_0_tsni, f_inst_1_tsni, lambda, lambda1;
+//│ let f2, tmp, tmp1, f_inst_0_tsni, f_inst_1_tsni, lambda, lambda1;
 //│ f_inst_0_tsni = function f_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())
 //│ };
 //│ f_inst_1_tsni = function f_inst_1_tsni(x) {
 //│   return runtime.safeCall(x())
 //│ };
-//│ f1 = function f(x) {
+//│ f2 = function f(x) {
 //│   if (x instanceof A1.class) {
 //│     return 1
 //│   } else {

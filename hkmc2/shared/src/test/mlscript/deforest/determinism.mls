@@ -24,9 +24,6 @@ if B(1,2,3,4,5) is
 //│   0
 //│ } else { throw globalThis.Object.freeze(new globalThis.Error("match error")) }
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
-//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
-//│ 
 //│ let scrut, _deforest_B_a, _deforest_B_b, _deforest_B_c, _deforest_B_d, _deforest_B_e;
 //│ _deforest_B_a = 1;
 //│ _deforest_B_b = 2;
@@ -108,9 +105,6 @@ c2 of A(A(A(A(A(A(1))))))
 //│ tmp5 = A1(tmp4);
 //│ c2(tmp5)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ const definitionMetadata1 = globalThis.Symbol.for("mlscript.definitionMetadata");
-//│ const prettyPrint1 = globalThis.Symbol.for("mlscript.prettyPrint");
-//│ 
 //│ let c2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, c2_inst_0_tsni, _deforest_A_a, _deforest_A_a1, _deforest_A_a2, _deforest_A_a3, _deforest_A_a4, _deforest_A_a5;
 //│ c2_inst_0_tsni = function c2_inst_0_tsni(x) {
 //│   return runtime.safeCall(x())

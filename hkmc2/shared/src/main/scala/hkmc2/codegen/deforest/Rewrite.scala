@@ -220,6 +220,7 @@ class DeforestRewritePrepare(val sol: DeforestConstrainSolver):
   
   
   val alwaysNonFreeVars =
+    preAnalyzer.importedInfo.funAndDefs.unzip._1.toSet ++
     sol.preAnalyzer.b.definedVars ++
     newSymToInstIdAndOldSym.keySet ++
     fusingMatchIdToMatchRestFunSymbols.values ++
