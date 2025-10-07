@@ -1,0 +1,262 @@
+:js
+
+import "./mlscript-compile/Benchmark.mls"
+open Benchmark
+
+let suite = mkSuite()
+//│ suite = Suite { name: undefined, options: {name: undefined} }
+
+abstract class List[out T]: Cons[T] | Nil
+data class (::) Cons[out T](head: T, tail: List[T]) extends List[T]
+object Nil extends List
+
+fun intQuot(a, b) = Math.trunc(a / b)
+fun intRem(a, b) = a - (b * intQuot(a, b))
+fun quotRem(a, b) = [intQuot(a, b), intRem(a, b)]
+
+fun enumFromTo(a, b) = if a <= b then a :: enumFromTo(a + 1, b) else Nil
+
+fun abs(x) = Math.abs(x)
+
+fun map(f, xs) = if xs is
+  x :: xs then f(x) :: map(f, xs)
+  Nil then Nil
+
+fun nofibStringToList(s) =
+  fun go(i) = if i < s.length then s.charAt(i) :: go(i + 1) else Nil
+  go(0)
+
+fun nofibListToString(ls) = if ls is
+  Nil then ""
+  h :: t then h + nofibListToString(t)
+
+fun stringOfInt(x) = x + ""
+
+fun (+:) append(xs, ys) = if xs is
+  Nil then ys
+  x :: xs then x :: append(xs, ys)
+
+fun concat(ls) = if ls is
+  Nil then Nil
+  x :: xs then append(x, concat(xs))
+
+fun listLen(ls) =
+  fun l(ls, a) = if ls is
+    Nil then a
+    h :: t then l(t, a + 1)
+  l(ls, 0)
+
+fun tail(l) = if l is h :: t then t
+
+fun replicate(n, x) = if n == 0 then Nil else x :: replicate(n - 1, x)
+
+fun foldr(f, z, xs) = if xs is
+  Nil then z
+  h :: t then f(h, foldr(f, z, t))
+
+fun reverse(l) =
+  fun r(l', l) = if l is x :: xs then r(x :: l', xs) else l'
+  r(Nil, l)
+
+:...
+//│ ————————————————————————————————————————————————————————————————————————————————
+module ansi with
+
+  val cls = nofibStringToList("L")
+
+  fun goto(x, y) = "E" :: "[" :: (nofibStringToList(stringOfInt(y)) +: (";" :: nofibStringToList(stringOfInt(x)) +: nofibStringToList("H")))
+
+  fun at(x_y, s) = if x_y is [x, y] then goto(x, y) +: s
+
+  fun highlight(s) = nofibStringToList("ESC[7m") +: s +: nofibStringToList("ESC[0m")
+
+  fun end(xs) = nofibStringToList("")
+
+  fun readChar(eof, consume, cs) = if cs is
+    Nil then eof(Nil)
+    c :: cs then consume(c, cs)
+
+  fun peekChar(eof, consume, cs) = if cs is
+    Nil then eof(Nil)
+    c :: cs then consume(c, c :: cs)
+
+  fun pressAnyKey(prog, x) = readChar(prog, (c, x) => prog(x), x)
+
+  fun unreadChar(c, prog, cs) = prog(c :: cs)
+
+  fun writeChar(c, prog, cs) = c :: prog(cs)
+
+  fun writeString(s, prog, cs) = s +: prog(cs)
+
+  fun writes(ss, a, b) = writeString(concat(ss), a, b)
+
+  fun ringBell(prog, cs) = writeChar("B", prog, cs)
+
+  fun clearScreen(a, b) = writeString(cls, a, b)
+
+  fun writeAt(x_y, s, a) = if x_y is [x, y] then p => writeString(goto(x, y) +: s, a, p)
+
+  fun moveTo(x_y, a) = if x_y is [x, y] then p => writeString(goto(x, y), a, p)
+
+  fun returnn(s, consume) = consume(reverse(s))
+
+  fun deletee(n, s, l, consume, d) = if n > 0 then writeString(nofibStringToList("BS_BS"), loop(n - 1, tail(s), l, consume), d) else ringBell(loop(0, nofibStringToList(""), l, consume), d)
+
+  fun loop(n, s, l, consume) = x => readChar of
+    returnn(s, consume)
+    (c, d) => if
+              c == "B" then deletee(n, s, l, consume, d) 
+              c == "D" then deletee(n, s, l, consume, d)
+              c == "`" then returnn(s, consume)(d)
+              n < l then writeChar(c, loop(n + 1, c :: s, l, consume), d)
+              else ringBell(loop(n, s, l, consume), d)
+    x
+
+  fun readAt(x_y, l, consume) = writeAt(x_y, replicate(l, "_"), moveTo(x_y, loop(0, "", l, consume)))
+
+  fun promptReadAt(x_y, l, prompt, consume) = if x_y is [x, y] then
+    writeAt([x, y], prompt, readAt([x + listLen(prompt), y], l, consume))
+
+  fun program(input) = writes(
+    cls ::
+    at([17, 5], highlight(nofibStringToList("Demonstration program"))) ::
+    at([48, 5], nofibStringToList("Version 1.0")) ::
+    at([17, 7], nofibStringToList("This program illustrates a simple approach")) ::
+    at([17, 8], nofibStringToList("to screen-based interactive programs using")) ::
+    at([17, 9], nofibStringToList("the Hugs functional programming system.")) ::
+    at([17, 11], nofibStringToList("Please press any key to continue ...")) ::
+    Nil,
+    x => pressAnyKey(promptReadAt(
+      [17, 15],
+      18,
+      nofibStringToList("Please enter your name: "),
+      (name) =>
+        let reply = nofibStringToList("Hello ") +: name +: nofibStringToList("!")
+        writeAt(
+          [40 - (listLen(reply) / 2), 18],
+          reply,
+          moveTo(
+            [1, 23],
+            y => writeString(nofibStringToList("I'm waiting..."), x => pressAnyKey(end, x), y)
+          )
+        )
+    ), x),
+    input
+  )
+
+  fun testAnsi_nofib(n) = foldr(compose, (x) => x, replicate(n, program))(nofibStringToList("testtesttest"))
+
+  fun main() = nofibListToString(testAnsi_nofib(1))
+//│ ————————————————————————————————————————————————————————————————————————————————
+
+:silent
+suite.add of
+  "original"
+  () => ansi.main()
+
+
+
+
+:...
+//│ ————————————————————————————————————————————————————————————————————————————————
+module ansi_flatten with
+
+  val cls = nofibStringToList("L")
+
+  fun goto(x, y) = "E" :: "[" :: (nofibStringToList(stringOfInt(y)) +: (";" :: nofibStringToList(stringOfInt(x)) +: nofibStringToList("H")))
+
+  fun at(x, y, s) = goto(x, y) +: s
+
+  fun highlight(s) = nofibStringToList("ESC[7m") +: s +: nofibStringToList("ESC[0m")
+
+  fun end(xs) = nofibStringToList("")
+
+  fun readChar(eof, consume, cs) = if cs is
+    Nil then eof(Nil)
+    c :: cs then consume(c, cs)
+
+  fun peekChar(eof, consume, cs) = if cs is
+    Nil then eof(Nil)
+    c :: cs then consume(c, c :: cs)
+
+  fun pressAnyKey(prog, x) = readChar(prog, (c, x) => prog(x), x)
+
+  fun unreadChar(c, prog, cs) = prog(c :: cs)
+
+  fun writeChar(c, prog, cs) = c :: prog(cs)
+
+  fun writeString(s, prog, cs) = s +: prog(cs)
+
+  fun writes(ss, a, b) = writeString(concat(ss), a, b)
+
+  fun ringBell(prog, cs) = writeChar("B", prog, cs)
+
+  fun clearScreen(a, b) = writeString(cls, a, b)
+
+  fun writeAt(x, y, s, a) = p => writeString(goto(x, y) +: s, a, p)
+
+  fun moveTo(x, y, a) = p => writeString(goto(x, y), a, p)
+
+  fun returnn(s, consume) = consume(reverse(s))
+
+  fun deletee(n, s, l, consume, d) = if n > 0 then writeString(nofibStringToList("BS_BS"), loop(n - 1, tail(s), l, consume), d) else ringBell(loop(0, nofibStringToList(""), l, consume), d)
+
+  fun loop(n, s, l, consume) = x => readChar of
+    returnn(s, consume)
+    (c, d) => if
+              c == "B" then deletee(n, s, l, consume, d) 
+              c == "D" then deletee(n, s, l, consume, d)
+              c == "`" then returnn(s, consume)(d)
+              n < l then writeChar(c, loop(n + 1, c :: s, l, consume), d)
+              else ringBell(loop(n, s, l, consume), d)
+    x
+
+  fun readAt(x, y, l, consume) = writeAt(x, y, replicate(l, "_"), moveTo(x, y, loop(0, "", l, consume)))
+
+  fun promptReadAt(x, y, l, prompt, consume) =
+    writeAt(x, y, prompt, readAt(x + listLen(prompt), y, l, consume))
+
+  fun program(input) = writes(
+    cls ::
+    at(17, 5, highlight(nofibStringToList("Demonstration program"))) ::
+    at(48, 5, nofibStringToList("Version 1.0")) ::
+    at(17, 7, nofibStringToList("This program illustrates a simple approach")) ::
+    at(17, 8, nofibStringToList("to screen-based interactive programs using")) ::
+    at(17, 9, nofibStringToList("the Hugs functional programming system.")) ::
+    at(17, 11, nofibStringToList("Please press any key to continue ...")) ::
+    Nil,
+    x => pressAnyKey(promptReadAt(
+      17, 15,
+      18,
+      nofibStringToList("Please enter your name: "),
+      (name) =>
+        let reply = nofibStringToList("Hello ") +: name +: nofibStringToList("!")
+        writeAt(
+          40 - (listLen(reply) / 2),
+          18,
+          reply,
+          moveTo(
+            1,
+            23,
+            y => writeString(nofibStringToList("I'm waiting..."), x => pressAnyKey(end, x), y)
+          )
+        )
+    ), x),
+    input
+  )
+
+  fun testAnsi_nofib(n) = foldr(compose, (x) => x, replicate(n, program))(nofibStringToList("testtesttest"))
+
+  fun main() = nofibListToString(testAnsi_nofib(1))
+//│ ————————————————————————————————————————————————————————————————————————————————
+
+:silent
+suite.add of
+  "flatten"
+  () => ansi_flatten.main()
+
+
+
+
+suite |> runSuite
+writeResults(suite, "ansi-flatten.json")
