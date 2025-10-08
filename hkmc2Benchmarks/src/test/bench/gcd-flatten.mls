@@ -110,10 +110,10 @@ module gcd_flatten with
   fun main() = testGcd_nofib(40)
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-:silent
-suite.add of
-  "flatten"
-  () => gcd_flatten.main()
+// :silent
+// suite.add of
+//   "flatten"
+//   () => gcd_flatten.main()
 
 
 
@@ -170,10 +170,10 @@ module gcd_flatten_2 with
 //│ ————————————————————————————————————————————————————————————————————————————————
 
 
-:silent
-suite.add of
-  "flatten_2"
-  () => gcd_flatten_2.main()
+// :silent
+// suite.add of
+//   "flatten_2"
+//   () => gcd_flatten_2.main()
 
 
 
@@ -238,7 +238,7 @@ module gcd_flatten_3 with
 
 :silent
 suite.add of
-  "flatten_3"
+  "flatten"
   () => gcd_flatten_3.main()
 
 

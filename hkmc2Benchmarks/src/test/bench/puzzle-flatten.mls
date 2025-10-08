@@ -411,10 +411,10 @@ module puzzle_flatten_1 with
   fun main() = nofibListToString(testPuzzle_nofib(2 :: Nil))
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-:silent
-suite.add of
-  "flatten_1"
-  () => puzzle_flatten_1.main()
+// :silent
+// suite.add of
+//   "flatten_1"
+//   () => puzzle_flatten_1.main()
 
 
 
@@ -687,7 +687,7 @@ module puzzle_flatten_2 with
 
 :silent
 suite.add of
-  "flatten_2"
+  "flatten"
   () => puzzle_flatten_2.main()
 
 

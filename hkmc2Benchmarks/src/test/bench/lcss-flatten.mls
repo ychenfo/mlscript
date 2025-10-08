@@ -62,7 +62,7 @@ module lcss with
 
 :silent
 suite.add of
-  "origin"
+  "original"
   () => lcss.main()
 
 
