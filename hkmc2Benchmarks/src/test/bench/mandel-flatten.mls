@@ -1,0 +1,192 @@
+:js
+
+import "../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+import "./mlscript-compile/NofibPrelude.mls"
+import "./mlscript-compile/Benchmark.mls"
+
+open NofibPrelude
+open Benchmark
+
+let suite = mkSuite()
+//│ suite = Suite { name: undefined, options: {name: undefined} }
+
+
+
+
+:...
+//│ ————————————————————————————————————————————————————————————————————————————————
+module mandel with
+  data class Pixmap(a: Int, b: Int, c: Int, d:List[[Int, Int, Int]])
+
+  fun createPixmap(width, height, max, colours) = Pixmap(width, height, max, colours)
+
+  data class Complex(r: Num, i: Num)
+
+  fun comp_magnitude(c) = if c is Complex(a, b) then sqrt(a * a + b * b)
+
+  fun comp_times(x, y) = if
+    x is Complex(a, b) and y is Complex(c, d) then Complex((a * c) - (b * d), (a * d) + (b * c))
+
+  fun comp_plus(x, y) = if
+    x is Complex(a, b) and y is Complex(c, d) then Complex(a + c, b + d)
+
+  fun mandel(c) =
+    fun infiniteMandel() = lazy of () =>
+      LzCons(c, map_lz((z => comp_plus(comp_times(z, z), c)), infiniteMandel()))
+    infiniteMandel()
+
+  fun diverge(cmplx, radius) =
+    comp_magnitude(cmplx) > radius
+
+  fun whenDiverge(limit, radius, c) =
+    fun walkIt(ls) = if force(ls) is
+      LzNil then 0
+      LzCons(x, xs) and
+        diverge(x, radius) then 0
+        else 1 + walkIt(xs)
+    
+    walkIt(take_lz_lz(limit, mandel(c)))
+
+  fun parallelMandel(mat, limit, radius) = map(c => whenDiverge(limit, radius, c), mat)
+
+  fun mandelset(x, y, x_, y_, screenX, screenY, lIMIT) =
+    fun prettyRGB(s) =
+      let t = lIMIT - s
+      [s, t, t]
+    
+    fun windowToViewport(s, t) =
+      Complex(x + ((s * (x_ - x)) / screenX), y + ((t * (y_ - y)) / screenY))
+    
+    fun lscomp1(ls1) = if ls1 is
+      Nil then Nil
+      t :: t1 then
+        fun lscomp2(ls2) = if ls2 is
+          Nil then lscomp1(t1)
+          s :: t2 then windowToViewport(s, t) :: lscomp2(t2)
+        lscomp2(enumFromTo(1, screenX))
+    
+    let result = parallelMandel(lscomp1(enumFromTo(1, screenY)), lIMIT, max(x_ - x, y_ - y) / 2)
+    
+    createPixmap(screenX, screenY, lIMIT, map(prettyRGB, result))
+
+
+  fun testMandel_nofib(dummy) =
+    let minx = -2.0
+    let miny = -2.0
+    let maxx = 2.0
+    let maxy = 2.0
+    let screenX = 25
+    let screenY = 25
+    let limit = 75
+    mandelset(minx, miny, maxx, maxy, screenX, screenY, limit)
+//│ ————————————————————————————————————————————————————————————————————————————————
+
+:silent
+suite.add of
+  "original"
+  () => mandel.testMandel_nofib(0)
+
+
+
+
+
+
+:...
+//│ ————————————————————————————————————————————————————————————————————————————————
+module mandel_flatten with
+  type LazyList2[out T1, T2] = Lazy[LzList2[T1, T2]]
+  abstract class LzList2[out T1, T2]: LzCons2[T1, T2] | LzNil2
+  data class LzCons2[out T1, T2](h1: T1, h2: T2, tail: LazyList2[T1, T2]) extends LzList2[T1, T2]
+  object LzNil2 extends LzList2
+  
+  fun map2_lz(f1, f2, ls) = lazy of () =>
+    if force(ls) is
+      LzNil2 then LzNil2
+      LzCons2(a, b, t) then LzCons2(f1(a, b), f2(a, b), map2_lz(f1, f2, t))
+  
+  fun take2_lz_lz(n, ls) = lazy of () =>
+    if n > 0 and force(ls) is
+      LzNil2 then LzNil2
+      LzCons2(h1, h2, t) then LzCons2(h1, h2, take2_lz_lz(n - 1, t))
+    else LzNil2
+  
+  
+  abstract class List2[out T1, T2]: Cons2[T1, T2] | Nil2
+  data class Cons2[out T1, T2](head1: T1, head2: T2, tail: List2[T1, T2]) extends List2[T1, T2]
+  object Nil2 extends List2
+
+  fun map2(f, ls2) = if ls2 is
+    Cons2(h1, h2, t) then f(h1, h2) :: map2(f, t)
+    Nil2 then Nil
+
+  data class Pixmap(a: Int, b: Int, c: Int, d:List[[Int, Int, Int]])
+
+  fun createPixmap(width, height, max, colours) = Pixmap(width, height, max, colours)
+
+  data class Complex(r: Num, i: Num)
+
+  fun comp_magnitude(a, b) = sqrt(a * a + b * b)
+
+  fun mandel(a, b) =
+    fun infiniteMandel() = lazy of () =>
+      LzCons2(a, b, map2_lz(
+        ((z1, z2) => (z1 * z1) - (z2 * z2) + a),
+        ((z1, z2) => (z1 * z2) + (z2 * z1) + b),
+        infiniteMandel()))
+    infiniteMandel()
+
+  fun diverge(a, b, radius) =
+    comp_magnitude(a, b) > radius
+
+  fun whenDiverge(limit, radius, a, b) =
+    fun walkIt(ls) = if force(ls) is
+      LzNil2 then 0
+      LzCons2(x1, x2, xs) and
+        diverge(x1, x2, radius) then 0
+        else 1 + walkIt(xs)
+    
+    walkIt(take2_lz_lz(limit, mandel(a, b)))
+
+  fun parallelMandel(mat, limit, radius) = map2((a, b) => whenDiverge(limit, radius, a, b), mat)
+
+  fun mandelset(x, y, x_, y_, screenX, screenY, lIMIT) =
+    fun prettyRGB(s) =
+      let t = lIMIT - s
+      [s, t, t]
+    
+    fun windowToViewport(s, t) =
+      Complex(x + ((s * (x_ - x)) / screenX), y + ((t * (y_ - y)) / screenY))
+    
+    fun lscomp1(ls1) = if ls1 is
+      Nil then Nil2
+      t :: t1 then
+        fun lscomp2(ls2) = if ls2 is
+          Nil then lscomp1(t1)
+          s :: t2 then Cons2(x + ((s * (x_ - x)) / screenX), y + ((t * (y_ - y)) / screenY), lscomp2(t2))
+        lscomp2(enumFromTo(1, screenX))
+    
+    let result = parallelMandel(lscomp1(enumFromTo(1, screenY)), lIMIT, max(x_ - x, y_ - y) / 2)
+    
+    createPixmap(screenX, screenY, lIMIT, map(prettyRGB, result))
+
+
+  fun testMandel_nofib(dummy) =
+    let minx = -2.0
+    let miny = -2.0
+    let maxx = 2.0
+    let maxy = 2.0
+    let screenX = 25
+    let screenY = 25
+    let limit = 75
+    mandelset(minx, miny, maxx, maxy, screenX, screenY, limit)
+//│ ————————————————————————————————————————————————————————————————————————————————
+
+:silent
+suite.add of
+  "flatten"
+  () => mandel_flatten.testMandel_nofib(0)
+
+
+
+suite |> runSuite
+writeResults(suite, "mandel-flatten.json")
