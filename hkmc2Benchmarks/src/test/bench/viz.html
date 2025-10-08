@@ -63,6 +63,17 @@
       background-color: white;
     }
 
+    .normalization-control {
+      margin-bottom: 20px;
+    }
+
+    .normalization-control label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
     .benchmark-selection {
       margin-bottom: 20px;
     }
@@ -231,6 +242,13 @@
         <input type="file" id="fileInput" multiple accept=".json">
       </div>
 
+      <div class="normalization-control">
+        <label for="normalizeCheckbox">
+          <input type="checkbox" id="normalizeCheckbox" onchange="updateChart()">
+          <strong>Normalize data within each file</strong> (show relative performance within files)
+        </label>
+      </div>
+
       <div class="benchmark-selection" id="benchmarkSelection" style="display: none;">
         <h3>Select Benchmarks to Display:</h3>
         <div class="control-buttons">
@@ -261,6 +279,7 @@
             <th>MOE (ms)</th>
             <th>SEM (ms)</th>
             <th>Hz</th>
+            <th>Normalized Mean</th>
           </tr>
         </thead>
         <tbody id="rawDataBody"></tbody>
@@ -452,6 +471,7 @@
 
     function updateChart() {
       const filteredData = benchmarkData.filter(d => selectedBenchmarks.includes(d.label));
+      const normalize = document.getElementById('normalizeCheckbox').checked;
 
       if (filteredData.length === 0) {
         document.getElementById('benchmarkChart').innerHTML =
@@ -459,35 +479,80 @@
         return;
       }
 
+      let plotData;
+      let yAxisTitle;
+
+      if (normalize) {
+        // Normalize data within each file
+        const fileGroups = {};
+        
+        // Group data by filename
+        filteredData.forEach(d => {
+          if (!fileGroups[d.filename]) {
+            fileGroups[d.filename] = [];
+          }
+          fileGroups[d.filename].push(d);
+        });
+
+        // Calculate normalization factors for each file
+        const normalizationFactors = {};
+        Object.keys(fileGroups).forEach(filename => {
+          const fileData = fileGroups[filename];
+          const minMean = Math.min(...fileData.map(d => d.mean_ms));
+          normalizationFactors[filename] = minMean;
+        });
+
+        // Create normalized data
+        plotData = filteredData.map(d => ({
+          ...d,
+          normalized_mean: d.mean_ms / normalizationFactors[d.filename],
+          normalized_moe: d.moe_ms / normalizationFactors[d.filename]
+        }));
+
+        yAxisTitle = 'Normalized Time (relative to fastest in file)';
+      } else {
+        plotData = filteredData;
+        yAxisTitle = 'Time (milliseconds)';
+      }
+
       const trace = {
-        x: filteredData.map(d => d.label),
-        y: filteredData.map(d => d.mean_ms),
+        x: plotData.map(d => d.label),
+        y: plotData.map(d => normalize ? d.normalized_mean : d.mean_ms),
+        customdata: plotData.map(d => d.mean_ms),
         error_y: {
           type: 'data',
-          array: filteredData.map(d => d.moe_ms),
+          array: plotData.map(d => normalize ? d.normalized_moe : d.moe_ms),
           visible: true,
           color: 'red',
           thickness: 2,
           width: 3
         },
         type: 'bar',
-        name: 'Mean Time (ms)',
-        text: filteredData.map(d => `${d.mean_ms.toFixed(4)} ms`),
+        name: normalize ? 'Normalized Mean Time' : 'Mean Time (ms)',
+        text: plotData.map(d => normalize ? 
+          `${d.normalized_mean.toFixed(2)}x` : 
+          `${d.mean_ms.toFixed(4)} ms`),
         textposition: 'outside',
         hovertemplate: '<b>%{x}</b><br>' +
-          'Mean Time: %{y:.4f} ms<br>' +
-          'Margin of Error: %{error_y.array:.4f} ms<br>' +
+          (normalize ? 
+            'Normalized Time: %{y:.2f}x<br>' +
+            'Normalized MOE: %{error_y.array:.2f}x<br>' +
+            'Actual Mean: %{customdata:.4f} ms<br>' :
+            'Mean Time: %{y:.4f} ms<br>' +
+            'Margin of Error: %{error_y.array:.4f} ms<br>') +
           '<extra></extra>'
       };
 
       const layout = {
-        title: 'Benchmark Results - Mean Execution Time with Error Bars',
+        title: normalize ? 
+          'Benchmark Results - Normalized Execution Time (Relative to Fastest in Each File)' :
+          'Benchmark Results - Mean Execution Time with Error Bars',
         xaxis: {
           title: 'Benchmark (name#filename)',
           tickangle: 45
         },
         yaxis: {
-          title: 'Time (milliseconds)'
+          title: yAxisTitle
         },
         height: 600,
         showlegend: false,
@@ -519,6 +584,13 @@
         tabContent.className = `tab-content ${index === 0 ? 'active' : ''}`;
         tabContent.id = `tab-${filename}`;
 
+        // Calculate normalized values for this file
+        const minMean = Math.min(...fileData.map(d => d.mean_ms));
+        const normalizedData = fileData.map(d => ({
+          ...d,
+          normalized_mean: d.mean_ms / minMean
+        }));
+
         // Create metrics
         const avgTime = fileData.reduce((sum, d) => sum + d.mean_ms, 0) / fileData.length;
         const avgHz = fileData.filter(d => d.hz > 0).reduce((sum, d) => sum + d.hz, 0) / fileData.filter(d => d.hz > 0).length || 0;
@@ -537,6 +609,10 @@
                         <div class="metric-title">Average Frequency</div>
                         <div class="metric-value">${avgHz > 0 ? avgHz.toFixed(2) + ' Hz' : 'N/A'}</div>
                       </div>
+                      <div class="metric-card">
+                        <div class="metric-title">Fastest Benchmark</div>
+                        <div class="metric-value">${minMean.toFixed(4)} ms</div>
+                      </div>
                     </div>
                     <table class="table">
                       <thead>
@@ -546,16 +622,18 @@
                           <th>MOE (ms)</th>
                           <th>SEM (ms)</th>
                           <th>Frequency (Hz)</th>
+                          <th>Normalized</th>
                         </tr>
                       </thead>
                       <tbody>
-                        ${fileData.map(d => `
+                        ${normalizedData.map(d => `
                           <tr>
                             <td>${d.name}</td>
                             <td>${d.mean_ms.toFixed(4)}</td>
                             <td>${d.moe_ms.toFixed(4)}</td>
                             <td>${d.sem_ms.toFixed(4)}</td>
                             <td>${d.hz > 0 ? d.hz.toFixed(2) : 'N/A'}</td>
+                            <td>${d.normalized_mean.toFixed(2)}x</td>
                           </tr>
                         `).join('')}
                       </tbody>
@@ -586,7 +664,23 @@
       const tbody = document.getElementById('rawDataBody');
       tbody.innerHTML = '';
 
+      // Calculate normalized values for all data
+      const fileGroups = {};
       benchmarkData.forEach(d => {
+        if (!fileGroups[d.filename]) {
+          fileGroups[d.filename] = [];
+        }
+        fileGroups[d.filename].push(d);
+      });
+
+      const normalizationFactors = {};
+      Object.keys(fileGroups).forEach(filename => {
+        const minMean = Math.min(...fileGroups[filename].map(d => d.mean_ms));
+        normalizationFactors[filename] = minMean;
+      });
+
+      benchmarkData.forEach(d => {
+        const normalizedMean = d.mean_ms / normalizationFactors[d.filename];
         const row = document.createElement('tr');
         row.innerHTML = `
                     <td>${d.label}</td>
@@ -594,6 +688,7 @@
                     <td>${d.moe_ms.toFixed(4)}</td>
                     <td>${d.sem_ms.toFixed(4)}</td>
                     <td>${d.hz > 0 ? d.hz.toFixed(2) : 'N/A'}</td>
+                    <td>${normalizedMean.toFixed(2)}x</td>
                 `;
         tbody.appendChild(row);
       });
