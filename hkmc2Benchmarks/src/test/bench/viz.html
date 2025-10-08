@@ -18,7 +18,7 @@
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
       background-color: white;
       padding: 30px;
@@ -72,6 +72,18 @@
       align-items: center;
       gap: 10px;
       cursor: pointer;
+    }
+
+    .grouping-control {
+      margin-bottom: 20px;
+    }
+
+    .grouping-control select {
+      padding: 8px 12px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      background-color: white;
+      font-size: 14px;
     }
 
     .benchmark-selection {
@@ -226,6 +238,28 @@
       margin: 20px 0;
       border-left: 4px solid #ffc107;
     }
+
+    .file-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin: 15px 0;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border-radius: 5px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+    }
   </style>
 </head>
 
@@ -249,6 +283,14 @@
         </label>
       </div>
 
+      <div class="grouping-control">
+        <label for="groupingSelect"><strong>Group by:</strong></label>
+        <select id="groupingSelect" onchange="updateChart()">
+          <option value="benchmark">Benchmark Name</option>
+          <option value="file">File Name</option>
+        </select>
+      </div>
+
       <div class="benchmark-selection" id="benchmarkSelection" style="display: none;">
         <h3>Select Benchmarks to Display:</h3>
         <div class="control-buttons">
@@ -260,6 +302,7 @@
     </div>
 
     <div class="chart-container">
+      <div id="fileLegend" style="display: none;"></div>
       <div id="benchmarkChart"></div>
     </div>
 
@@ -275,6 +318,7 @@
         <thead>
           <tr>
             <th>Benchmark</th>
+            <th>File</th>
             <th>Mean (ms)</th>
             <th>MOE (ms)</th>
             <th>SEM (ms)</th>
@@ -291,6 +335,14 @@
     let benchmarkData = [];
     let allBenchmarks = [];
     let selectedBenchmarks = [];
+
+    // Color palette for files
+    const fileColors = [
+      '#1f77b4', '#ff7f0e', '#2ca02c', '#d62728', '#9467bd',
+      '#8c564b', '#e377c2', '#7f7f7f', '#bcbd22', '#17becf',
+      '#aec7e8', '#ffbb78', '#98df8a', '#ff9896', '#c5b0d5',
+      '#c49c94', '#f7b6d2', '#c7c7c7', '#dbdb8d', '#9edae5'
+    ];
 
     // Load example data
     function loadExampleData() {
@@ -339,6 +391,15 @@
           moe_ms: 0.0031,
           sem_ms: 0.00158,
           hz: 4566
+        },
+        {
+          name: 'renderComponent',
+          filename: 'benchmark2',
+          label: 'renderComponent#benchmark2',
+          mean_ms: 0.205,
+          moe_ms: 0.0030,
+          sem_ms: 0.00153,
+          hz: 4878
         }
       ];
 
@@ -472,12 +533,21 @@
     function updateChart() {
       const filteredData = benchmarkData.filter(d => selectedBenchmarks.includes(d.label));
       const normalize = document.getElementById('normalizeCheckbox').checked;
+      const grouping = document.getElementById('groupingSelect').value;
 
       if (filteredData.length === 0) {
         document.getElementById('benchmarkChart').innerHTML =
           '<div class="warning">Please select at least one benchmark to display the chart.</div>';
+        document.getElementById('fileLegend').style.display = 'none';
         return;
       }
+
+      // Get unique files and assign colors
+      const uniqueFiles = [...new Set(filteredData.map(d => d.filename))];
+      const fileColorMap = {};
+      uniqueFiles.forEach((filename, index) => {
+        fileColorMap[filename] = fileColors[index % fileColors.length];
+      });
 
       let plotData;
       let yAxisTitle;
@@ -497,8 +567,7 @@
         // Calculate normalization factors for each file
         const normalizationFactors = {};
         Object.keys(fileGroups).forEach(filename => {
-          const fileData = fileGroups[filename];
-          const minMean = Math.min(...fileData.map(d => d.mean_ms));
+          const minMean = Math.min(...fileGroups[filename].map(d => d.mean_ms));
           normalizationFactors[filename] = minMean;
         });
 
@@ -515,51 +584,165 @@
         yAxisTitle = 'Time (milliseconds)';
       }
 
-      const trace = {
-        x: plotData.map(d => d.label),
-        y: plotData.map(d => normalize ? d.normalized_mean : d.mean_ms),
-        customdata: plotData.map(d => d.mean_ms),
-        error_y: {
-          type: 'data',
-          array: plotData.map(d => normalize ? d.normalized_moe : d.moe_ms),
-          visible: true,
-          color: 'red',
-          thickness: 2,
-          width: 3
-        },
-        type: 'bar',
-        name: normalize ? 'Normalized Mean Time' : 'Mean Time (ms)',
-        text: plotData.map(d => normalize ? 
-          `${d.normalized_mean.toFixed(2)}x` : 
-          `${d.mean_ms.toFixed(4)} ms`),
-        textposition: 'outside',
-        hovertemplate: '<b>%{x}</b><br>' +
-          (normalize ? 
-            'Normalized Time: %{y:.2f}x<br>' +
-            'Normalized MOE: %{error_y.array:.2f}x<br>' +
-            'Actual Mean: %{customdata:.4f} ms<br>' :
-            'Mean Time: %{y:.4f} ms<br>' +
-            'Margin of Error: %{error_y.array:.4f} ms<br>') +
-          '<extra></extra>'
-      };
+      // Create traces based on grouping
+      let traces = [];
+      let layout;
 
-      const layout = {
-        title: normalize ? 
-          'Benchmark Results - Normalized Execution Time (Relative to Fastest in Each File)' :
-          'Benchmark Results - Mean Execution Time with Error Bars',
-        xaxis: {
-          title: 'Benchmark (name#filename)',
-          tickangle: 45
-        },
-        yaxis: {
-          title: yAxisTitle
-        },
-        height: 600,
-        showlegend: false,
-        template: 'plotly_white'
-      };
+      if (grouping === 'file') {
+        // Group by file - each file becomes a separate trace
+        traces = uniqueFiles.map(filename => {
+          const fileData = plotData.filter(d => d.filename === filename);
+          const benchmarkNames = fileData.map(d => d.name);
+          const values = fileData.map(d => normalize ? d.normalized_mean : d.mean_ms);
+          const errors = fileData.map(d => normalize ? d.normalized_moe : d.moe_ms);
+          const original = fileData.map(d => d.moe_ms);
 
-      Plotly.newPlot('benchmarkChart', [trace], layout, { responsive: true });
+          return {
+            x: benchmarkNames,
+            y: values,
+            error_y: {
+              type: 'data',
+              array: errors,
+              visible: true,
+              color: fileColorMap[filename],
+              thickness: 2,
+              width: 3
+            },
+            customdata: original,
+            type: 'bar',
+            name: filename,
+            marker: {
+              color: fileColorMap[filename]
+            },
+            text: values.map(v => normalize ? `${v.toFixed(2)}x` : `${v.toFixed(4)} ms`),
+            textposition: 'outside',
+            hovertemplate: `<b>%{x}</b><br>File: ${filename}<br>` +
+              (normalize ? 
+                'Normalized Time: %{y:.2f}x<br>' +
+                'Normalized MOE: %{error_y.array:.2f}x<br>' +
+                'Original Mean: %{customdata:.4f} ms<br>' :
+                'Mean Time: %{y:.4f} ms<br>' +
+                'Margin of Error: %{error_y.array:.4f} ms<br>') +
+              '<extra></extra>'
+          };
+        });
+
+        layout = {
+          title: normalize ? 
+            'Benchmark Results - Normalized Execution Time (Grouped by File)' :
+            'Benchmark Results - Mean Execution Time (Grouped by File)',
+          xaxis: {
+            title: 'Benchmark Name',
+            tickangle: -45,
+            type: 'category'
+          },
+          yaxis: {
+            title: yAxisTitle
+          },
+          barmode: 'group',
+          height: 600,
+          showlegend: true,
+          legend: {
+            orientation: 'h',
+            y: -0.2
+          },
+          template: 'plotly_white',
+          margin: {
+            b: 100,
+            t: 80
+          }
+        };
+      } else {
+        // Group by benchmark - each benchmark becomes a separate trace
+        const uniqueBenchmarks = [...new Set(plotData.map(d => d.name))];
+        
+        traces = uniqueBenchmarks.map(benchmarkName => {
+          const benchmarkData = plotData.filter(d => d.name === benchmarkName);
+          const filenames = benchmarkData.map(d => d.filename);
+          const values = benchmarkData.map(d => normalize ? d.normalized_mean : d.mean_ms);
+          const errors = benchmarkData.map(d => normalize ? d.normalized_moe : d.moe_ms);
+          const original = benchmarkData.map(d => d.moe_ms);
+
+          return {
+            x: filenames,
+            y: values,
+            error_y: {
+              type: 'data',
+              array: errors,
+              visible: true,
+              color: 'rgba(0,0,0,0.5)',
+              thickness: 2,
+              width: 3
+            },
+            customdata: original,
+            type: 'bar',
+            name: benchmarkName,
+            text: values.map(v => normalize ? `${v.toFixed(2)}x` : `${v.toFixed(4)} ms`),
+            textposition: 'outside',
+            hovertemplate: `<b>${benchmarkName}</b><br>File: %{x}<br>` +
+              (normalize ? 
+                'Normalized Time: %{y:.2f}x<br>' +
+                'Normalized MOE: %{error_y.array:.2f}x<br>' +
+                'Original Mean: %{customdata:.4f} ms<br>' :
+                'Mean Time: %{y:.4f} ms<br>' +
+                'Margin of Error: %{error_y.array:.4f} ms<br>') +
+              '<extra></extra>'
+          };
+        });
+
+        layout = {
+          title: normalize ? 
+            'Benchmark Results - Normalized Execution Time (Grouped by Benchmark)' :
+            'Benchmark Results - Mean Execution Time (Grouped by Benchmark)',
+          xaxis: {
+            title: 'File Name',
+            tickangle: -45,
+            type: 'category'
+          },
+          yaxis: {
+            title: yAxisTitle
+          },
+          barmode: 'group',
+          height: 600,
+          showlegend: true,
+          legend: {
+            orientation: 'h',
+            y: -0.2
+          },
+          template: 'plotly_white',
+          margin: {
+            b: 100,
+            t: 80
+          }
+        };
+      }
+
+      // Update file legend
+      updateFileLegend(uniqueFiles, fileColorMap);
+
+      Plotly.newPlot('benchmarkChart', traces, layout, { responsive: true });
+    }
+
+    function updateFileLegend(files, colorMap) {
+      const legendContainer = document.getElementById('fileLegend');
+      if (files.length > 1) {
+        legendContainer.innerHTML = '<h4>File Legend:</h4><div class="file-legend"></div>';
+        const legend = legendContainer.querySelector('.file-legend');
+        
+        files.forEach(filename => {
+          const legendItem = document.createElement('div');
+          legendItem.className = 'legend-item';
+          legendItem.innerHTML = `
+            <div class="legend-color" style="background-color: ${colorMap[filename]}"></div>
+            <span>${filename}</span>
+          `;
+          legend.appendChild(legendItem);
+        });
+        
+        legendContainer.style.display = 'block';
+      } else {
+        legendContainer.style.display = 'none';
+      }
     }
 
     function createStatsTabs() {
@@ -683,7 +866,8 @@
         const normalizedMean = d.mean_ms / normalizationFactors[d.filename];
         const row = document.createElement('tr');
         row.innerHTML = `
-                    <td>${d.label}</td>
+                    <td>${d.name}</td>
+                    <td>${d.filename}</td>
                     <td>${d.mean_ms.toFixed(4)}</td>
                     <td>${d.moe_ms.toFixed(4)}</td>
                     <td>${d.sem_ms.toFixed(4)}</td>
