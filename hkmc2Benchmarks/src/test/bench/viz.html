@@ -74,6 +74,44 @@
       cursor: pointer;
     }
 
+    .normalization-baseline {
+      margin: 15px 0 20px 20px;
+      padding: 15px;
+      background-color: #e9ecef;
+      border-radius: 5px;
+      display: none;
+    }
+
+    .baseline-selectors {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .baseline-selector {
+      background-color: white;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #ced4da;
+    }
+
+    .baseline-selector label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #495057;
+    }
+
+    .baseline-selector select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      background-color: white;
+      font-size: 14px;
+    }
+
     .grouping-control {
       margin-bottom: 20px;
     }
@@ -260,6 +298,15 @@
       height: 16px;
       border-radius: 3px;
     }
+
+    .baseline-info {
+      background-color: #e7f3ff;
+      border-left: 4px solid #007bff;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
   </style>
 </head>
 
@@ -278,9 +325,14 @@
 
       <div class="normalization-control">
         <label for="normalizeCheckbox">
-          <input type="checkbox" id="normalizeCheckbox" onchange="updateChart()">
+          <input type="checkbox" id="normalizeCheckbox" onchange="toggleNormalization()">
           <strong>Normalize data within each file</strong> (show relative performance within files)
         </label>
+        
+        <div class="normalization-baseline" id="normalizationBaseline">
+          <h4>Select Normalization Baseline:</h4>
+          <div class="baseline-selectors" id="baselineSelectors"></div>
+        </div>
       </div>
 
       <div class="grouping-control">
@@ -302,6 +354,7 @@
     </div>
 
     <div class="chart-container">
+      <div id="baselineInfo" class="baseline-info" style="display: none;"></div>
       <div id="fileLegend" style="display: none;"></div>
       <div id="benchmarkChart"></div>
     </div>
@@ -324,6 +377,7 @@
             <th>SEM (ms)</th>
             <th>Hz</th>
             <th>Normalized Mean</th>
+            <th>Baseline</th>
           </tr>
         </thead>
         <tbody id="rawDataBody"></tbody>
@@ -335,6 +389,7 @@
     let benchmarkData = [];
     let allBenchmarks = [];
     let selectedBenchmarks = [];
+    let baselineSelections = {};
 
     // Color palette for files
     const fileColors = [
@@ -426,6 +481,7 @@
       if (files.length === 0) return;
 
       benchmarkData = [];
+      baselineSelections = {};
       let filesProcessed = 0;
 
       Array.from(files).forEach(file => {
@@ -465,8 +521,70 @@
       });
     });
 
+    function toggleNormalization() {
+      const normalize = document.getElementById('normalizeCheckbox').checked;
+      const baselineDiv = document.getElementById('normalizationBaseline');
+      
+      if (normalize) {
+        baselineDiv.style.display = 'block';
+        createBaselineSelectors();
+      } else {
+        baselineDiv.style.display = 'none';
+      }
+      updateChart();
+    }
+
+    function createBaselineSelectors() {
+      const container = document.getElementById('baselineSelectors');
+      container.innerHTML = '';
+
+      const uniqueFiles = [...new Set(benchmarkData.map(d => d.filename))];
+      
+      uniqueFiles.forEach(filename => {
+        const fileData = benchmarkData.filter(d => d.filename === filename);
+        const selectorDiv = document.createElement('div');
+        selectorDiv.className = 'baseline-selector';
+        
+        const label = document.createElement('label');
+        label.textContent = `Baseline for ${filename}:`;
+        
+        const select = document.createElement('select');
+        select.id = `baseline-${filename}`;
+        
+        // Add default option (fastest)
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '__fastest__';
+        defaultOption.textContent = 'Fastest (auto)';
+        select.appendChild(defaultOption);
+        
+        // Add options for each benchmark in this file
+        fileData.forEach(benchmark => {
+          const option = document.createElement('option');
+          option.value = benchmark.name;
+          option.textContent = `${benchmark.name} (${benchmark.mean_ms.toFixed(4)} ms)`;
+          select.appendChild(option);
+        });
+        
+        // Set default selection
+        if (!baselineSelections[filename]) {
+          baselineSelections[filename] = '__fastest__';
+        }
+        select.value = baselineSelections[filename];
+        
+        select.addEventListener('change', function() {
+          baselineSelections[filename] = this.value;
+          updateChart();
+        });
+        
+        selectorDiv.appendChild(label);
+        selectorDiv.appendChild(select);
+        container.appendChild(selectorDiv);
+      });
+    }
+
     function updateInterface() {
       createBenchmarkSelection();
+      createBaselineSelectors();
       updateChart();
       createStatsTabs();
       updateRawDataTable();
@@ -531,7 +649,8 @@
     }
 
     function updateChart() {
-      const filteredData = benchmarkData.filter(d => selectedBenchmarks.includes(d.label));
+      const filteredData = benchmarkData.filter(d => selectedBenchmarks.includes(d.label))
+      filteredData.sort((d1, d2) => d1.filename.localeCompare(d2.filename));
       const normalize = document.getElementById('normalizeCheckbox').checked;
       const grouping = document.getElementById('groupingSelect').value;
 
@@ -539,6 +658,7 @@
         document.getElementById('benchmarkChart').innerHTML =
           '<div class="warning">Please select at least one benchmark to display the chart.</div>';
         document.getElementById('fileLegend').style.display = 'none';
+        document.getElementById('baselineInfo').style.display = 'none';
         return;
       }
 
@@ -551,9 +671,10 @@
 
       let plotData;
       let yAxisTitle;
+      let baselineInfo = '';
 
       if (normalize) {
-        // Normalize data within each file
+        // Normalize data within each file using selected baselines
         const fileGroups = {};
         
         // Group data by filename
@@ -564,24 +685,68 @@
           fileGroups[d.filename].push(d);
         });
 
-        // Calculate normalization factors for each file
+        // Calculate normalization factors for each file based on selected baseline
         const normalizationFactors = {};
+        const baselineBenchmarks = {};
+        
         Object.keys(fileGroups).forEach(filename => {
-          const minMean = Math.min(...fileGroups[filename].map(d => d.mean_ms));
-          normalizationFactors[filename] = minMean;
+          const fileData = fileGroups[filename];
+          const baselineSelection = baselineSelections[filename] || '__fastest__';
+          
+          let baselineValue;
+          let baselineName;
+          
+          if (baselineSelection === '__fastest__') {
+            // Use the fastest benchmark as baseline
+            baselineValue = Math.min(...fileData.map(d => d.mean_ms));
+            const fastestBenchmark = fileData.find(d => d.mean_ms === baselineValue);
+            baselineName = fastestBenchmark ? fastestBenchmark.name : 'fastest';
+          } else {
+            // Use the selected benchmark as baseline
+            const baselineBenchmark = fileData.find(d => d.name === baselineSelection);
+            if (baselineBenchmark) {
+              baselineValue = baselineBenchmark.mean_ms;
+              baselineName = baselineBenchmark.name;
+            } else {
+              // Fallback to fastest if selected benchmark not found
+              baselineValue = Math.min(...fileData.map(d => d.mean_ms));
+              const fastestBenchmark = fileData.find(d => d.mean_ms === baselineValue);
+              baselineName = fastestBenchmark ? fastestBenchmark.name : 'fastest';
+            }
+          }
+          
+          normalizationFactors[filename] = baselineValue;
+          baselineBenchmarks[filename] = baselineName;
         });
 
         // Create normalized data
         plotData = filteredData.map(d => ({
           ...d,
           normalized_mean: d.mean_ms / normalizationFactors[d.filename],
-          normalized_moe: d.moe_ms / normalizationFactors[d.filename]
+          normalized_moe: d.moe_ms / normalizationFactors[d.filename],
+          baseline_benchmark: baselineBenchmarks[d.filename],
+          baseline_value: normalizationFactors[d.filename]
         }));
 
-        yAxisTitle = 'Normalized Time (relative to fastest in file)';
+        yAxisTitle = 'Normalized Time (relative to baseline)';
+        
+        // Create baseline info text
+        baselineInfo = '<strong>Normalization Baselines:</strong> ';
+        baselineInfo += Object.keys(baselineBenchmarks).map(filename => 
+          `${filename}: ${baselineBenchmarks[filename]} (${normalizationFactors[filename].toFixed(4)} ms)`
+        ).join('; ');
       } else {
         plotData = filteredData;
         yAxisTitle = 'Time (milliseconds)';
+      }
+
+      // Update baseline info display
+      const baselineInfoDiv = document.getElementById('baselineInfo');
+      if (normalize && baselineInfo) {
+        baselineInfoDiv.innerHTML = baselineInfo;
+        baselineInfoDiv.style.display = 'block';
+      } else {
+        baselineInfoDiv.style.display = 'none';
       }
 
       // Create traces based on grouping
@@ -595,7 +760,7 @@
           const benchmarkNames = fileData.map(d => d.name);
           const values = fileData.map(d => normalize ? d.normalized_mean : d.mean_ms);
           const errors = fileData.map(d => normalize ? d.normalized_moe : d.moe_ms);
-          const original = fileData.map(d => d.moe_ms);
+          const originalMeans = fileData.map(d => d.mean_ms);
 
           return {
             x: benchmarkNames,
@@ -608,7 +773,7 @@
               thickness: 2,
               width: 3
             },
-            customdata: original,
+            customdata: originalMeans,
             type: 'bar',
             name: filename,
             marker: {
@@ -621,6 +786,9 @@
                 'Normalized Time: %{y:.2f}x<br>' +
                 'Normalized MOE: %{error_y.array:.2f}x<br>' +
                 'Original Mean: %{customdata:.4f} ms<br>' :
+                // 'Baseline: %{customdata.baselineNames customdata.baselineValues:.4f} ms<br>' :
+                // 'Original Mean: %{originalMeans[%{pointIndex}].toFixed(4)} ms<br>' +
+                // `Baseline: ${fileData[0].baseline_benchmark} (${fileData[0].baseline_value.toFixed(4)} ms)<br>` :
                 'Mean Time: %{y:.4f} ms<br>' +
                 'Margin of Error: %{error_y.array:.4f} ms<br>') +
               '<extra></extra>'
@@ -661,7 +829,9 @@
           const filenames = benchmarkData.map(d => d.filename);
           const values = benchmarkData.map(d => normalize ? d.normalized_mean : d.mean_ms);
           const errors = benchmarkData.map(d => normalize ? d.normalized_moe : d.moe_ms);
-          const original = benchmarkData.map(d => d.moe_ms);
+          const originalMeans = benchmarkData.map(d => d.mean_ms);
+          const baselineValues = benchmarkData.map(d => d.baseline_value);
+          const baselineNames = benchmarkData.map(d => d.baseline_benchmark);
 
           return {
             x: filenames,
@@ -674,7 +844,10 @@
               thickness: 2,
               width: 3
             },
-            customdata: original,
+            // customdata: originalMeans.zip
+              // baselineNames: baselineNames,
+              // baselineValues: baselineValues
+            // },
             type: 'bar',
             name: benchmarkName,
             text: values.map(v => normalize ? `${v.toFixed(2)}x` : `${v.toFixed(4)} ms`),
@@ -682,8 +855,11 @@
             hovertemplate: `<b>${benchmarkName}</b><br>File: %{x}<br>` +
               (normalize ? 
                 'Normalized Time: %{y:.2f}x<br>' +
-                'Normalized MOE: %{error_y.array:.2f}x<br>' +
-                'Original Mean: %{customdata:.4f} ms<br>' :
+                'Normalized MOE: %{error_y.array:.2f}x<br>' :
+                // 'Original Mean: %{customdata.originalMeans:.4f} ms<br>' +
+                // 'Baseline: %{customdata.baselineNames customdata.baselineValues:.4f} ms<br>' :
+                // 'Original Mean: ${originalMeans[%{pointIndex}].toFixed(4)} ms<br>' +
+                // 'Baseline: ${baselineNames[%{pointIndex}]} (${baselineValues[%{pointIndex}].toFixed(4)} ms)<br>' :
                 'Mean Time: %{y:.4f} ms<br>' +
                 'Margin of Error: %{error_y.array:.4f} ms<br>') +
               '<extra></extra>'
@@ -767,11 +943,31 @@
         tabContent.className = `tab-content ${index === 0 ? 'active' : ''}`;
         tabContent.id = `tab-${filename}`;
 
-        // Calculate normalized values for this file
-        const minMean = Math.min(...fileData.map(d => d.mean_ms));
+        // Calculate normalized values for this file (using current baseline selection)
+        const baselineSelection = baselineSelections[filename] || '__fastest__';
+        let baselineValue;
+        let baselineName;
+        
+        if (baselineSelection === '__fastest__') {
+          baselineValue = Math.min(...fileData.map(d => d.mean_ms));
+          const fastestBenchmark = fileData.find(d => d.mean_ms === baselineValue);
+          baselineName = fastestBenchmark ? fastestBenchmark.name : 'fastest';
+        } else {
+          const baselineBenchmark = fileData.find(d => d.name === baselineSelection);
+          if (baselineBenchmark) {
+            baselineValue = baselineBenchmark.mean_ms;
+            baselineName = baselineBenchmark.name;
+          } else {
+            baselineValue = Math.min(...fileData.map(d => d.mean_ms));
+            const fastestBenchmark = fileData.find(d => d.mean_ms === baselineValue);
+            baselineName = fastestBenchmark ? fastestBenchmark.name : 'fastest';
+          }
+        }
+
         const normalizedData = fileData.map(d => ({
           ...d,
-          normalized_mean: d.mean_ms / minMean
+          normalized_mean: d.mean_ms / baselineValue,
+          baseline_benchmark: baselineName
         }));
 
         // Create metrics
@@ -793,8 +989,8 @@
                         <div class="metric-value">${avgHz > 0 ? avgHz.toFixed(2) + ' Hz' : 'N/A'}</div>
                       </div>
                       <div class="metric-card">
-                        <div class="metric-title">Fastest Benchmark</div>
-                        <div class="metric-value">${minMean.toFixed(4)} ms</div>
+                        <div class="metric-title">Baseline (${baselineName})</div>
+                        <div class="metric-value">${baselineValue.toFixed(4)} ms</div>
                       </div>
                     </div>
                     <table class="table">
@@ -847,7 +1043,7 @@
       const tbody = document.getElementById('rawDataBody');
       tbody.innerHTML = '';
 
-      // Calculate normalized values for all data
+      // Calculate normalized values for all data using current baseline selections
       const fileGroups = {};
       benchmarkData.forEach(d => {
         if (!fileGroups[d.filename]) {
@@ -857,9 +1053,27 @@
       });
 
       const normalizationFactors = {};
+      const baselineNames = {};
+      
       Object.keys(fileGroups).forEach(filename => {
-        const minMean = Math.min(...fileGroups[filename].map(d => d.mean_ms));
-        normalizationFactors[filename] = minMean;
+        const fileData = fileGroups[filename];
+        const baselineSelection = baselineSelections[filename] || '__fastest__';
+        
+        if (baselineSelection === '__fastest__') {
+          normalizationFactors[filename] = Math.min(...fileData.map(d => d.mean_ms));
+          const fastestBenchmark = fileData.find(d => d.mean_ms === normalizationFactors[filename]);
+          baselineNames[filename] = fastestBenchmark ? fastestBenchmark.name : 'fastest';
+        } else {
+          const baselineBenchmark = fileData.find(d => d.name === baselineSelection);
+          if (baselineBenchmark) {
+            normalizationFactors[filename] = baselineBenchmark.mean_ms;
+            baselineNames[filename] = baselineBenchmark.name;
+          } else {
+            normalizationFactors[filename] = Math.min(...fileData.map(d => d.mean_ms));
+            const fastestBenchmark = fileData.find(d => d.mean_ms === normalizationFactors[filename]);
+            baselineNames[filename] = fastestBenchmark ? fastestBenchmark.name : 'fastest';
+          }
+        }
       });
 
       benchmarkData.forEach(d => {
@@ -873,6 +1087,7 @@
                     <td>${d.sem_ms.toFixed(4)}</td>
                     <td>${d.hz > 0 ? d.hz.toFixed(2) : 'N/A'}</td>
                     <td>${normalizedMean.toFixed(2)}x</td>
+                    <td>${baselineNames[d.filename]}</td>
                 `;
         tbody.appendChild(row);
       });
