@@ -1,0 +1,88 @@
+:js
+
+
+import "../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+import "../mlscript-compile/NofibPrelude.mls"
+import "../mlscript-compile/Benchmark.mls"
+
+
+open NofibPrelude
+open Benchmark
+
+fun zipArr(arr1, arr2) =
+  let len = Math.min(arr1.length, arr2.length)
+  let result = Array(len)
+  let i = 0
+  while i < len do
+    set result.[i] = [arr1.[i], arr2.[i]]
+    set i += 1
+  result
+
+fun scanlArr(f, init, arr) =
+  let result = Array(arr.length + 1)
+  set result.[0] = init
+  let i = 0
+  while i < arr.length do
+    set result.[i + 1] = f(result.[i], arr.[i])
+    set i += 1
+  result
+
+fun mapArrLoop(f, arr) =
+  let result = Array(arr.length)
+  let i = 0
+  while i < arr.length do
+    set result.[i] = f(arr.[i])
+    set i += 1
+  result
+fun mapArrForeach(f, arr) =
+  let result = Array(arr.length)
+  let _ = arr.forEach((x, i, _) => set result.[i] = f(x))
+  result
+fun mapArrMethod(f, arr) =
+  arr.map((x, i, _) => f(x))
+
+fun takeArrMethod(n, arr) =
+  arr.slice(0, n)
+fun takeArrLoop(n, arr) =
+  let result = Array(n)
+  let i = 0
+  while i < n do
+    set result.[i] = arr.[i]
+    set i += 1
+  result
+
+fun arrToList(arr) =
+  let res = Nil
+  let i = arr.length - 1
+  while i >= 0 do
+    set res = arr.[i] :: res
+    set i -= 1
+  res
+
+
+
+let suite = mkSuite()
+//│ suite = Suite { name: undefined, options: {name: undefined} }
+
+:silent
+let SIZE = 1000000
+let arr = Array(SIZE)
+arr.fill(0)
+
+:silent
+suite.add of
+  "method"
+  () => mapArrMethod(x => x + 1, arr)
+
+:silent
+suite.add of
+  "foreach"
+  () => mapArrForeach(x => x + 1, arr)
+
+:silent
+suite.add of
+  "loop"
+  () => mapArrLoop(x => x + 1, arr)
+
+suite |> runSuite
+writeResults(suite, "arrayOps-map.json")

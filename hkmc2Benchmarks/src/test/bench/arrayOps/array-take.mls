@@ -1,0 +1,42 @@
+:js
+
+
+import "../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+import "../mlscript-compile/NofibPrelude.mls"
+import "../mlscript-compile/Benchmark.mls"
+
+
+open NofibPrelude
+open Benchmark
+
+fun takeArrMethod(n, arr) =
+  arr.slice(0, n)
+fun takeArrLoop(n, arr) =
+  let result = Array(n)
+  let i = 0
+  while i < n do
+    set result.[i] = arr.[i]
+    set i += 1
+  result
+
+let suite = mkSuite()
+//│ suite = Suite { name: undefined, options: {name: undefined} }
+
+:silent
+let SIZE = 1000000
+let arr = Array(SIZE)
+arr.fill(0)
+
+:silent
+suite.add of
+  "method"
+  () => takeArrMethod(SIZE / 2, arr)
+
+:silent
+suite.add of
+  "loop"
+  () => takeArrLoop(SIZE / 2, arr)
+
+suite |> runSuite
+writeResults(suite, "arrayOps-take.json")
+

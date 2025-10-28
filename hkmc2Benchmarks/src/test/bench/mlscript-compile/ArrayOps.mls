@@ -1,0 +1,87 @@
+import "../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+import "./NofibPrelude.mls"
+open Predef
+open NofibPrelude
+
+
+module ArrayOps with ...
+
+fun zip3Arr(arr1, arr2, arr3) =
+  let len = Math.min(arr1.length, arr2.length, arr3.length)
+  let result = Array(len)
+  let i = 0
+  while i < len do
+    set result.[i] = [arr1.[i], arr2.[i], arr3.[i]]
+    set i += 1
+  result
+
+fun zipArr(arr1, arr2) =
+  let len = Math.min(arr1.length, arr2.length)
+  let result = Array(len)
+  let i = 0
+  while i < len do
+    set result.[i] = [arr1.[i], arr2.[i]]
+    set i += 1
+  result
+
+fun scanlArr(f, init, arr) =
+  let result = Array(arr.length + 1)
+  set result.[0] = init
+  let i = 0
+  while i < arr.length do
+    set result.[i + 1] = f(result.[i], arr.[i])
+    set i += 1
+  result
+
+fun mapArr(f, arr) =
+  let result = Array(arr.length)
+  let i = 0
+  while i < arr.length do
+    set result.[i] = f(arr.[i])
+    set i += 1
+  result
+
+fun takeArr(n, arr) = arr.slice(0, n)
+
+fun leaveArr(n, arr) = arr.slice(n, arr.length)
+
+fun arrToList(arr) =
+  let res = Nil
+  let i = arr.length - 1
+  while i >= 0 do
+    set res = arr.[i] :: res
+    set i -= 1
+  res
+
+fun enumFromThenToArr(a, step, b) =
+  let len = if step >= a then Math.max(0, Math.floor((b - a) / (step - a)) + 1) else Math.max(0, Math.floor((a - b) / (a - step)) + 1)
+  let result = Array(len)
+  let i = 0
+  while i < len do
+    set result.[i] = a + i * (step - a)
+    set i += 1
+  result
+
+fun reverseArr(arr) =
+  let result = Array(arr.length)
+  let i = 0
+  while i < arr.length do
+    set result.[i] = arr.[arr.length - 1 - i]
+    set i += 1
+  result
+
+fun inArr(x, arr) =
+  let i = 0
+  let found = false
+  while (i < arr.length) && (not found) do
+    if arr.[i] == x do
+      set found = true
+    set i += 1
+  found
+
+fun consArrInPlace(x, arr) =
+  arr.unshift(x)
+  arr
+
+
+
