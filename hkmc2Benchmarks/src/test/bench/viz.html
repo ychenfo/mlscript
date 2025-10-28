@@ -9,6 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Benchmark Results Visualization</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
+  <!-- jsPDF and svg2pdf for client-side SVG -> PDF conversion -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://unpkg.com/svg2pdf.js@1.4.7/dist/svg2pdf.min.js"></script>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -341,6 +344,18 @@
           <option value="benchmark">Benchmark Name</option>
           <option value="file">File Name</option>
         </select>
+      </div>
+
+      <div class="export-control" style="margin-top:10px;">
+        <h4>Export</h4>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+          <label>Font size: <input id="exportFontSize" type="number" value="12" min="6" max="40" style="width:80px"></label>
+          <label>Width (px): <input id="exportWidth" type="number" value="1200" min="200" style="width:110px"></label>
+          <label>Height (px): <input id="exportHeight" type="number" value="800" min="200" style="width:110px"></label>
+          <button class="btn btn-primary" onclick="exportSVG()">Export SVG</button>
+          <button class="btn btn-secondary" onclick="exportPDF()">Export PDF</button>
+        </div>
+        <div style="margin-top:6px;color:#6c757d;font-size:12px;">PDF export uses jsPDF + svg2pdf; font size/size apply to exported image only.</div>
       </div>
 
       <div class="benchmark-selection" id="benchmarkSelection" style="display: none;">
@@ -1095,6 +1110,194 @@
 
     // Initialize with example data
     loadExampleData();
+
+    // ---- Export helpers ----
+    // Download a blob as a file
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    }
+
+    // Convert a data URL or raw SVG string to plain SVG text robustly.
+    // Handles:
+    // - data:image/svg+xml;base64,....
+    // - data:image/svg+xml;utf8,.... or data:image/svg+xml;charset=utf-8,.... (percent-encoded)
+    // - raw SVG string (starts with '<')
+    function svgDataUrlToText(data) {
+      if (!data) return '';
+
+      // If it's a data URL, split header/payload
+      if (typeof data === 'string' && data.startsWith('data:')) {
+        const comma = data.indexOf(',');
+        if (comma === -1) return '';
+        const header = data.slice(0, comma);
+        const payload = data.slice(comma + 1);
+
+        if (header.includes('base64')) {
+          // base64 payload
+          try {
+            return atob(payload);
+          } catch (err) {
+            // Fallback: sometimes payload may not be strictly base64; try percent-decode
+            try {
+              return decodeURIComponent(payload);
+            } catch (e2) {
+              console.error('Failed to decode base64 SVG payload, returning raw payload', err, e2);
+              return payload;
+            }
+          }
+        } else {
+          // Not base64: payload likely percent-encoded UTF-8
+          try {
+            return decodeURIComponent(payload);
+          } catch (err) {
+            // If decode fails, return payload as-is
+            return payload;
+          }
+        }
+      }
+
+      // Not a data URL: if it looks like an SVG return as-is
+      if (typeof data === 'string') return data;
+      return '';
+    }
+
+    // Export the Plotly chart as SVG
+    async function exportSVG() {
+      const fontSize = parseInt(document.getElementById('exportFontSize').value, 10) || 12;
+      const width = parseInt(document.getElementById('exportWidth').value, 10) || 1200;
+      const height = parseInt(document.getElementById('exportHeight').value, 10) || 800;
+
+      const gd = document.getElementById('benchmarkChart');
+      if (!gd || !gd.data) {
+        alert('No chart to export');
+        return;
+      }
+
+      try {
+        const { offscreenDiv } = await createExportFigure(gd, fontSize, width, height);
+        const svgDataUrl = await Plotly.toImage(offscreenDiv, { format: 'svg', width, height });
+        const svgText = svgDataUrlToText(svgDataUrl);
+        const blob = new Blob([svgText], { type: 'image/svg+xml;charset=utf-8' });
+        downloadBlob(blob, 'benchmark-plot.svg');
+        // cleanup
+        Plotly.purge(offscreenDiv);
+        offscreenDiv.remove();
+      } catch (err) {
+        console.error('SVG export failed', err);
+        alert('SVG export failed: ' + (err && err.message ? err.message : err));
+      }
+    }
+
+    // Export the Plotly chart as PDF using jsPDF + svg2pdf
+    async function exportPDF() {
+      const fontSize = parseInt(document.getElementById('exportFontSize').value, 10) || 12;
+      const width = parseInt(document.getElementById('exportWidth').value, 10) || 1200;
+      const height = parseInt(document.getElementById('exportHeight').value, 10) || 800;
+
+      const gd = document.getElementById('benchmarkChart');
+      if (!gd || !gd.data) {
+        alert('No chart to export');
+        return;
+      }
+
+      try {
+        const { offscreenDiv } = await createExportFigure(gd, fontSize, width, height);
+        const svgDataUrl = await Plotly.toImage(offscreenDiv, { format: 'svg', width, height });
+        const svgText = svgDataUrlToText(svgDataUrl);
+
+        const parser = new DOMParser();
+        const svgDoc = parser.parseFromString(svgText, 'image/svg+xml');
+        const svgElement = svgDoc.documentElement;
+
+        // Convert px to points for jsPDF assuming 96 DPI
+        const pxToPt = pts => pts * 72 / 96;
+        const pdfWidth = pxToPt(width);
+        const pdfHeight = pxToPt(height);
+
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF({ unit: 'pt', format: [pdfWidth, pdfHeight] });
+
+        // Use svg2pdf to render SVG into the PDF
+        svg2pdf(svgElement, pdf, { xOffset: 0, yOffset: 0, scale: 1 });
+
+        const pdfBlob = pdf.output('blob');
+        downloadBlob(pdfBlob, 'benchmark-plot.pdf');
+
+        // cleanup
+        Plotly.purge(offscreenDiv);
+        offscreenDiv.remove();
+      } catch (err) {
+        console.error('PDF export failed', err);
+        alert('PDF export failed: ' + (err && err.message ? err.message : err));
+      }
+    }
+
+    // Create an offscreen Plotly figure cloned from gd with adjusted font sizes and margins
+    // Returns { offscreenDiv }
+    async function createExportFigure(gd, fontSize, width, height) {
+      // Deep clone data and layout
+      const traces = JSON.parse(JSON.stringify(gd.data || []));
+      const layout = JSON.parse(JSON.stringify(gd.layout || {}));
+
+      // Apply font sizes to layout-level properties
+      layout.font = Object.assign({}, layout.font || {}, { size: fontSize });
+      if (layout.title && typeof layout.title === 'object') {
+        layout.title.font = Object.assign({}, layout.title.font || {}, { size: Math.round(fontSize * 1.2) });
+      } else if (layout.title) {
+        // if title is a string, convert to object for consistency
+        layout.title = { text: layout.title, font: { size: Math.round(fontSize * 1.2) } };
+      }
+
+      // Axis fonts
+      layout.xaxis = Object.assign({}, layout.xaxis || {});
+      layout.yaxis = Object.assign({}, layout.yaxis || {});
+      layout.xaxis.title = Object.assign({}, layout.xaxis.title || {}, { font: Object.assign({}, (layout.xaxis.title && layout.xaxis.title.font) || {}, { size: fontSize }) });
+      layout.yaxis.title = Object.assign({}, layout.yaxis.title || {}, { font: Object.assign({}, (layout.yaxis.title && layout.yaxis.title.font) || {}, { size: fontSize }) });
+      layout.xaxis.tickfont = Object.assign({}, layout.xaxis.tickfont || {}, { size: fontSize });
+      layout.yaxis.tickfont = Object.assign({}, layout.yaxis.tickfont || {}, { size: fontSize });
+
+      // Legend font
+      layout.legend = Object.assign({}, layout.legend || {}, { font: Object.assign({}, (layout.legend && layout.legend.font) || {}, { size: Math.max(10, Math.round(fontSize * 0.9)) }) });
+
+      // Adjust margins to avoid truncation of rotated tick labels and outside text
+      const baseBottom = Math.max(80, Math.round(fontSize * 6));
+      const baseTop = Math.max(60, Math.round(fontSize * 4));
+      layout.margin = Object.assign({}, layout.margin || {}, { b: baseBottom, t: baseTop });
+
+      // Set explicit width/height
+      layout.width = width;
+      layout.height = height;
+      layout.autosize = false;
+
+      // Update trace-level textfont if traces have text
+      traces.forEach(trace => {
+        if (trace.text) {
+          trace.textfont = Object.assign({}, trace.textfont || {}, { size: Math.max(8, fontSize) });
+        }
+        // if bar chart with marker labels outside, increase automargin to avoid clipping
+        trace.autosize = trace.autosize || false;
+      });
+
+      // Create an offscreen div, render the plot there, and return it
+      const offscreenDiv = document.createElement('div');
+      offscreenDiv.style.position = 'fixed';
+      offscreenDiv.style.left = '-20000px';
+      offscreenDiv.style.top = '0';
+      offscreenDiv.style.width = width + 'px';
+      offscreenDiv.style.height = height + 'px';
+      document.body.appendChild(offscreenDiv);
+
+      // Use staticPlot=true to avoid interactive overhead
+      await Plotly.newPlot(offscreenDiv, traces, layout, { staticPlot: true, responsive: false });
+      return { offscreenDiv };
+    }
   </script>
 </body>
 
