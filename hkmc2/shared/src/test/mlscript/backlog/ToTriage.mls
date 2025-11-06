@@ -312,12 +312,12 @@ if x > 0
   then A
   then B
 //│ ╔══[ERROR] Unexpected infix use of keyword 'then' here
-//│ ║  l.295: 	if x > 0
+//│ ║  l.311: 	if x > 0
 //│ ║         	   ^^^^^
-//│ ║  l.296: 	  then A
+//│ ║  l.312: 	  then A
 //│ ╙──       	^^^^^^^^
 //│ ╔══[ERROR] Name not found: B
-//│ ║  l.297: 	  then B
+//│ ║  l.313: 	  then B
 //│ ╙──       	       ^
 
 // ——— ——— ———
@@ -330,22 +330,22 @@ Foo(1, 2, 3).args
 :todo
 if Foo(1, 2, 3) is Foo(...args) then args
 //│ ╔══[ERROR] Unrecognized pattern (spread)
-//│ ║  l.315: 	if Foo(1, 2, 3) is Foo(...args) then args
+//│ ║  l.331: 	if Foo(1, 2, 3) is Foo(...args) then args
 //│ ╙──       	                       ^^^^^^^
 //│ ╔══[ERROR] The constructor does not take any arguments but found one argument.
-//│ ║  l.315: 	if Foo(1, 2, 3) is Foo(...args) then args
+//│ ║  l.331: 	if Foo(1, 2, 3) is Foo(...args) then args
 //│ ╙──       	                       ^^^^^^^
 //│ ═══[RUNTIME ERROR] Error: match error
 
 if Foo(1, 2, 3) is Foo(a, b, c) then [a, b, c]
 //│ ╔══[ERROR] The constructor does not take any arguments but found three arguments.
-//│ ║  l.324: 	if Foo(1, 2, 3) is Foo(a, b, c) then [a, b, c]
+//│ ║  l.340: 	if Foo(1, 2, 3) is Foo(a, b, c) then [a, b, c]
 //│ ╙──       	                       ^^^^^^^
 //│ ═══[RUNTIME ERROR] Error: match error
 
 if Foo(1, 2, 3) is Foo(arg) then arg
 //│ ╔══[ERROR] The constructor does not take any arguments but found one argument.
-//│ ║  l.330: 	if Foo(1, 2, 3) is Foo(arg) then arg
+//│ ║  l.346: 	if Foo(1, 2, 3) is Foo(arg) then arg
 //│ ╙──       	                       ^^^
 //│ ═══[RUNTIME ERROR] Error: match error
 
@@ -379,10 +379,10 @@ fun foo() =
   let bar(x: Str): Str = x + x
   bar("test")
 //│ ╔══[ERROR] Unsupported let binding shape
-//│ ║  l.363: 	  let bar(x: Str): Str = x + x
+//│ ║  l.379: 	  let bar(x: Str): Str = x + x
 //│ ╙──       	      ^^^^^^^^^^^^^^^^^^^^^^^^
 //│ ╔══[ERROR] Expected 0 arguments, got 1
-//│ ║  l.364: 	  bar("test")
+//│ ║  l.380: 	  bar("test")
 //│ ╙──       	     ^^^^^^^^
 
 // ——— ——— ———
@@ -392,7 +392,7 @@ fun foo() =
 module Foo(x)
 //│ ╔══[COMPILATION ERROR] No definition found in scope for member 'x'
 //│ ╟── which references the symbol introduced here
-//│ ║  l.376: 	module Foo(x)
+//│ ║  l.392: 	module Foo(x)
 //│ ╙──       	           ^
 //│ JS (unsanitized):
 //│ let Foo5;
@@ -416,7 +416,7 @@ module Foo(x)
 module Foo(val x)
 //│ ╔══[COMPILATION ERROR] No definition found in scope for member 'x'
 //│ ╟── which references the symbol introduced here
-//│ ║  l.400: 	module Foo(val x)
+//│ ║  l.416: 	module Foo(val x)
 //│ ╙──       	               ^
 //│ JS (unsanitized):
 //│ let Foo7;
@@ -439,7 +439,7 @@ module Foo(val x)
 // TODO support syntax?
 data class Foo(mut x)
 //│ ╔══[ERROR] Expected a valid parameter, found 'mut'-modified identifier
-//│ ║  l.424: 	data class Foo(mut x)
+//│ ║  l.440: 	data class Foo(mut x)
 //│ ╙──       	                   ^
 
 // ——— ——— ———
@@ -456,10 +456,10 @@ set this.pc = 0
 set
   (this).pc = 0
 //│ ╔══[ERROR] Cannot use 'this' outside of an object scope.
-//│ ║  l.441: 	set this.pc = 0
+//│ ║  l.455: 	set this.pc = 0
 //│ ╙──       	    ^^^^
 //│ ╔══[ERROR] Cannot use 'this' outside of an object scope.
-//│ ║  l.443: 	  (this).pc = 0
+//│ ║  l.457: 	  (this).pc = 0
 //│ ╙──       	   ^^^^
 
 // But this doesn't...
@@ -468,10 +468,10 @@ set
 set
   this.pc = 0
 //│ ╔══[PARSE ERROR] Unexpected static selector here
-//│ ║  l.455: 	  this.pc = 0
+//│ ║  l.469: 	  this.pc = 0
 //│ ╙──       	      ^^^
 //│ ╔══[ERROR] Expected a right-hand side for this assignment
-//│ ║  l.455: 	  this.pc = 0
+//│ ║  l.469: 	  this.pc = 0
 //│ ╙──       	  ^^^^
 
 // ——— ——— ———

@@ -561,7 +561,7 @@ f(id(A)) + f(A)
 //│ tmp113 = f19(A1);
 //│ tmp112 + tmp113
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ let f19, tmp111, tmp112, tmp113, f_inst_0_tsni7, lambda9;
+//│ let f19, tmp111, tmp112, tmp113, f_inst_0_tsni7, lambda11;
 //│ f_inst_0_tsni7 = function f_inst_0_tsni(x2) {
 //│   return runtime.safeCall(x2())
 //│ };
@@ -574,8 +574,8 @@ f(id(A)) + f(A)
 //│ };
 //│ tmp111 = Predef.id(A1);
 //│ tmp112 = f19(tmp111);
-//│ lambda9 = () => { return 1 };
-//│ tmp113 = f_inst_0_tsni7(lambda9);
+//│ lambda11 = () => { return 1 };
+//│ tmp113 = f_inst_0_tsni7(lambda11);
 //│ tmp112 + tmp113
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 2

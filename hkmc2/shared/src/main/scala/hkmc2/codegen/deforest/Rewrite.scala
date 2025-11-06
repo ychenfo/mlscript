@@ -481,17 +481,9 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
             super.applyBlock(b)
       case _ => super.applyBlock(b)
     
-    override def applyResult(r: Result): Result = r match
-      case _: Call =>
-        // calls to fusing contructors are handled in `applyResult2`
-        // here we only handle calls to non-fusing constructors and functions
-        assert(!rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId))
-        super.applyResult(r)
-      case _ => super.applyResult(r)
     
-    override def applyResult2(r: Result)(k: Result => Block): Block =
+    override def applyResult(r: Result)(k: Result => Block): Block =
       def handleCallLike(ctorResId: ResultId)(args: Ls[Path]) =
-        val c = preAnalyzer.getCtorSymFromCtorLikeExprId(ctorResId).get.asCls.get
         rewritePrepare.ctorIdToFinalDest(ctorResId.withInstId) match
           case matchDest@FinalDest.Match(matchId, whichArm) =>
             // use pre-determined symbols
@@ -500,15 +492,16 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
               .zip(args)
               .foldRight(k(matchArmsOfFusingMatches.getOrElseUpdate(ctorResId.withInstId))):
                 case (tmpSym, arg) -> rest =>
-                  applyResult2(arg): r =>
+                  applyPath(arg): r =>
                     Assign(tmpSym, r, rest)
           case FinalDest.Sel(s) =>
+            val c = preAnalyzer.getCtorSymFromCtorLikeExprId(ctorResId).get.asCls.get
             val selFieldName = DeforestTupSelect.getDeforestSelNameFromResult(preAnalyzer.getResult(s._1)).name
             val idx = c.getClsParamNames(preAnalyzer).indexWhere(_ === selFieldName)
             k(args(idx))
       r match
         case DeforestTupSelect(v, idx) if rewritePrepare.rewritingSelIds(r.uid.withInstId) =>
-          k(applyPath(v))
+          applyPath(v)(k)
         case DeforestTupSelect(v, idx) if rewritePrepare.selIdsInAllArmsToSymbolsToReplace.get(r.uid.withInstId).isDefined =>
           k(Value.Ref(rewritePrepare.selIdsInAllArmsToSymbolsToReplace(r.uid.withInstId)))
         case call@Call(f, args) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(call.uid.withInstId) =>
@@ -523,100 +516,66 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
           handleCallLike(v.uid):
             elems.map:
               case Arg(N, value) => value
-        case s@Select(p, nme)
-          if s.symbol.flatMap(_.asObj).isDefined && rewritePrepare.ctorIdToFinalDest.isDefinedAt(s.uid.withInstId) =>
-          k(matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId))
-        case Value.Ref(l)
-          if l.asObj.isDefined && rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId) =>
-          k(matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId))
-        
-        case r @ Call(fun, args) =>
-          val fun2 = applyPath(fun)
-          val args2 -> newBindings = applyArgs(args)
-          newBindings.foldRight(k(if (fun2 is fun) && (args2 is args) then r else Call(fun2, args2)(r.isMlsFun, r.mayRaiseEffects))):
-            case ((sym, res), acc) => Assign(sym, res, acc)
-        case Instantiate(mut, cls, args) =>
-          val cls2 = applyPath(cls)
-          val args2 -> newBindings = applyArgs(args)
-          newBindings.foldRight(k(if (cls2 is cls) && (args2 is args) then r else Instantiate(mut, cls2, args2))):
-            case ((sym, res), acc) => Assign(sym, res, acc)
-        case Tuple(mut, elems) =>
-          val elems2 -> newBindings = applyArgs(elems)
-          newBindings.foldRight(k(if (elems2 is elems) then r else Tuple(mut, elems2))):
-            case ((sym, res), acc) => Assign(sym, res, acc)
-        case Record(mut, fields) => ???
-        
-        case _ => super.applyResult2(r)(k)
+        case _ => super.applyResult(r)(k)
     
-    def applyArgs(args: List[Arg]): (List[Arg], List[BlockMemberSymbol -> Result]) =
-      args.foldRight[(List[Arg], List[BlockMemberSymbol -> Result])](Nil -> Nil):
-        case (arg, (newArgs, bindings)) =>
-          arg.value match
-            case s@Select(p, nme)
-              if s.symbol.flatMap(_.asObj).isDefined && rewritePrepare.ctorIdToFinalDest.isDefinedAt(s.uid.withInstId) =>
-              val lambdaSym = BlockMemberSymbol("lambda", Nil, false)
-              val lambdaBody = matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId)
-              (Arg(arg.spread, Value.Ref(lambdaSym)) :: newArgs) -> ((lambdaSym -> lambdaBody) :: bindings)
-            case r@Value.Ref(l)
-              if l.asObj.isDefined && rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId) =>
-              val lambdaSym = BlockMemberSymbol("lambda", Nil, false)
-              val lambdaBody = matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId)
-              (Arg(arg.spread, Value.Ref(lambdaSym)) :: newArgs) -> ((lambdaSym -> lambdaBody) :: bindings)
-            case _ =>
-              val newArg = applyArg(arg)
-              (newArg :: newArgs) -> bindings
-          
-    
-    
-    override def applyPath(p: Path): Path = p match
+    override def applyPath(p: Path)(k: Path => Block): Block = p match
       // a selection which is a consumer on its own
-      case Select(qual, _) if rewritePrepare.rewritingSelIds(p.uid.withInstId) => applyPath(qual)
+      case Select(qual, _) if rewritePrepare.rewritingSelIds(p.uid.withInstId) => applyPath(qual)(k)
       // a selection inside a fusing match that needs to be replaced by pre-computed symbols
       case s: Select if rewritePrepare.selIdsInAllArmsToSymbolsToReplace.get(s.uid.withInstId).isDefined =>
-        Value.Ref(rewritePrepare.selIdsInAllArmsToSymbolsToReplace(s.uid.withInstId))
+        k(Value.Ref(rewritePrepare.selIdsInAllArmsToSymbolsToReplace(s.uid.withInstId)))
       case s@Select(p, nme) => s.symbol.flatMap(_.asObj) match
         // a fusing object constructor
         case Some(obj) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(s.uid.withInstId) =>
-          lastWords("unreachable")
+          // lastWords("unreachable")
+          val lamSym = TempSymbol(N, "lambda")
+          Assign(
+            lamSym,
+            matchArmsOfFusingMatches.getOrElseUpdate(s.uid.withInstId),
+            k(Value.Ref(lamSym)))
         case _ => s.symbol.flatMap(_.asBlkMember) match
           case Some(blk) if blk.isFunction && preAnalyzer.topLevelDefinedFunSyms.contains(blk) =>
             val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
               val currentSym = preAnalyzer.getReferredFunSym(currentReferSite)
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
             val newInstId = if inTheSameRecursiveGroup then instId else instId :+ s.uid
-            rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)): m =>
+            rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyPath(s)(k)): m =>
               if m(blk) is blk then
                 // the new symbol being the same as the old symbol means
                 // that this refer site should refer to the in-place rewritten
                 // function, and to refer to the function defined in the original
                 // place the selection is still needed.
-                s
+                k(s)
               else
-                Value.Ref(m(blk))
-          case _ => super.applyPath(s)
-      case v: Value => applyValue(v)
-      case _ => super.applyPath(p)
+                k(Value.Ref(m(blk)))
+          case _ => super.applyPath(s)(k)
+      case v: Value => applyValue(v)(k)
+      case _ => super.applyPath(p)(k)
     
-    override def applyValue(v: Value): Value = v match
+    override def applyValue(v: Value)(k: Value => Block): Block = v match
       case r@Value.Ref(l) => l.asObj match
         case Some(obj) if rewritePrepare.ctorIdToFinalDest.isDefinedAt(r.uid.withInstId) =>
-          lastWords("unreachable")
+          val lamSym = TempSymbol(N, "lambda")
+          Assign(
+            lamSym,
+            matchArmsOfFusingMatches.getOrElseUpdate(r.uid.withInstId),
+            k(Value.Ref(lamSym)))
         case None => l.asBlkMember match
           case Some(blk) if blk.isFunction && preAnalyzer.topLevelDefinedFunSyms.contains(blk) =>
             val inTheSameRecursiveGroup = instId.lastOption.fold(false): currentReferSite =>
               val currentSym = preAnalyzer.getReferredFunSym(currentReferSite)
               rewritePrepare.sol.collector.funSymToProdStratScheme.recursiveGroups(currentSym).contains(blk)
             val newInstId = if inTheSameRecursiveGroup then instId else instId :+ r.uid
-            rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyValue(v)): m =>
-              Value.Ref(m(blk))
+            rewritePrepare.instIdToMappingFromOldToNewSyms.get(newInstId).fold(super.applyValue(v)(k)): m =>
+              k(Value.Ref(m(blk)))
           case _ =>
             preAnalyzer.importedInfo.innerSymbolsToOutterSymbols
               .find: (in, out) =>
                 l is in
-              .fold(super.applyValue(v)): (in, out) =>
-                Value.Ref(out)
-        case _ => super.applyValue(v)
-      case _ => super.applyValue(v)
+              .fold(super.applyValue(v)(k)): (in, out) =>
+                k(Value.Ref(out))
+        case _ => super.applyValue(v)(k)
+      case _ => super.applyValue(v)(k)
     
     override def applyFunDefn(fun: FunDefn): FunDefn =
       if instId.isEmpty then
@@ -783,9 +742,9 @@ class FreeVarTraverserForMatchConsideringDeforestation(
     (result.diff(blk.definedVars)).toList.sortBy(_.uid)
 
 class ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) extends BlockTransformer(new SymbolSubst()):
-  override def applyValue(v: Value): Value = v match
-    case Value.Ref(l) => Value.Ref(freeVarsAndTheirNewSyms.getOrElse(l, l))
-    case _ => super.applyValue(v)
+  override def applyValue(v: Value)(k: Value => Block): Block = v match
+    case Value.Ref(l) => k(Value.Ref(freeVarsAndTheirNewSyms.getOrElse(l, l)))
+    case _ => super.applyValue(v)(k)
 
 class HasExplicitRetTraverser(b: Block) extends BlockTraverserShallow:
   var result = false
