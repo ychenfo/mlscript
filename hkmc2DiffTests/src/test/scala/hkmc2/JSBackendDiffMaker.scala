@@ -236,7 +236,7 @@ abstract class JSBackendDiffMaker extends MLsDiffMaker:
       
       if ppLoweredTree.isSet then
         output(s"Pretty Lowered:")
-        output(Printer.mkDocument(le)(using summon[Raise], baseScp).toString)
+        output(Printer.mkDocument(le)(using summon[Raise], baseScp).toString())
       
       val (preStr, jsStr) = mkJS(le)
       executeJS(preStr, jsStr, resNme)

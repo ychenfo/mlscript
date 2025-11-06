@@ -26,15 +26,15 @@ object LambdaRewriter:
       case _ =>
         var lambdasList: List[(BlockMemberSymbol, Lambda)] = Nil
         val lambdaRewriter = new BlockDataTransformer(SymbolSubst()):
-          override def applyResult(r: Result): Result = r match
+          override def applyResult(r: Result)(k: Result => Block): Block = r match
             case lam: Lambda => 
               val sym = BlockMemberSymbol(
                 "lambda",
                 syntax.Tree.DummyTermDef(syntax.Fun) :: Nil,
                 nameIsMeaningful = false)
               lambdasList ::= (sym -> super.applyLam(lam))
-              Value.Ref(sym)
-            case _ => super.applyResult(r)
+              k(Value.Ref(sym))
+            case _ => super.applyResult(r)(k)
         val blk = lambdaRewriter.applyBlock(b)
         (blk, lambdasList)
     
