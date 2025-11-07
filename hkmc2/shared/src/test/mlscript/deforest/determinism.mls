@@ -8,19 +8,19 @@ data class B(a, b, c, d, e)
 if B(1,2,3,4,5) is
   B(a,b,c,d,e) then 0
 //│ JS (unsanitized):
-//│ let scrut, param0, param1, param2, param3, param4, a, b, c, d, e;
+//│ let scrut, e, a, b, c, d, argument0$, argument1$, argument2$, argument3$, argument4$;
 //│ scrut = B1(1, 2, 3, 4, 5);
 //│ if (scrut instanceof B1.class) {
-//│   param0 = scrut.a;
-//│   param1 = scrut.b;
-//│   param2 = scrut.c;
-//│   param3 = scrut.d;
-//│   param4 = scrut.e;
-//│   a = param0;
-//│   b = param1;
-//│   c = param2;
-//│   d = param3;
-//│   e = param4;
+//│   argument0$ = scrut.a;
+//│   argument1$ = scrut.b;
+//│   argument2$ = scrut.c;
+//│   argument3$ = scrut.d;
+//│   argument4$ = scrut.e;
+//│   e = argument4$;
+//│   d = argument3$;
+//│   c = argument2$;
+//│   b = argument1$;
+//│   a = argument0$;
 //│   0
 //│ } else { throw globalThis.Object.freeze(new globalThis.Error("match error")) }
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -31,17 +31,17 @@ if B(1,2,3,4,5) is
 //│ _deforest_B_d = 4;
 //│ _deforest_B_e = 5;
 //│ scrut = () => {
-//│   let param0, param1, param2, param3, param4, a, b, c, d, e;
-//│   param0 = _deforest_B_a;
-//│   param1 = _deforest_B_b;
-//│   param2 = _deforest_B_c;
-//│   param3 = _deforest_B_d;
-//│   param4 = _deforest_B_e;
-//│   a = param0;
-//│   b = param1;
-//│   c = param2;
-//│   d = param3;
-//│   e = param4;
+//│   let e, a, b, c, d, argument0$, argument1$, argument2$, argument3$, argument4$;
+//│   argument0$ = _deforest_B_a;
+//│   argument1$ = _deforest_B_b;
+//│   argument2$ = _deforest_B_c;
+//│   argument3$ = _deforest_B_d;
+//│   argument4$ = _deforest_B_e;
+//│   e = argument4$;
+//│   d = argument3$;
+//│   c = argument2$;
+//│   b = argument1$;
+//│   a = argument0$;
 //│   return 0
 //│ };
 //│ runtime.safeCall(scrut())
@@ -63,39 +63,46 @@ c2 of A(A(A(A(A(A(1))))))
 //│ JS (unsanitized):
 //│ let c2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
 //│ c2 = function c2(x) {
-//│   let param01, param02, param03, param04, param05, param06, a1;
-//│   if (x instanceof A1.class) {
-//│     param01 = x.a;
-//│     if (param01 instanceof A1.class) {
-//│       param02 = param01.a;
-//│       if (param02 instanceof A1.class) {
-//│         param03 = param02.a;
-//│         if (param03 instanceof A1.class) {
-//│           param04 = param03.a;
-//│           if (param04 instanceof A1.class) {
-//│             param05 = param04.a;
-//│             if (param05 instanceof A1.class) {
-//│               param06 = param05.a;
-//│               a1 = param06;
-//│               return a1
+//│   let a1, argument0$1, argument0$2, argument0$3, argument0$4, argument0$5, argument0$6, tmp6;
+//│   split_root$: {
+//│     split_default$: {
+//│       if (x instanceof A1.class) {
+//│         argument0$1 = x.a;
+//│         if (argument0$1 instanceof A1.class) {
+//│           argument0$2 = argument0$1.a;
+//│           if (argument0$2 instanceof A1.class) {
+//│             argument0$3 = argument0$2.a;
+//│             if (argument0$3 instanceof A1.class) {
+//│               argument0$4 = argument0$3.a;
+//│               if (argument0$4 instanceof A1.class) {
+//│                 argument0$5 = argument0$4.a;
+//│                 if (argument0$5 instanceof A1.class) {
+//│                   argument0$6 = argument0$5.a;
+//│                   a1 = argument0$6;
+//│                   tmp6 = a1;
+//│                   break split_root$
+//│                 } else {
+//│                   break split_default$
+//│                 }
+//│               } else {
+//│                 break split_default$
+//│               }
 //│             } else {
-//│               throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│               break split_default$
 //│             }
 //│           } else {
-//│             throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│             break split_default$
 //│           }
 //│         } else {
-//│           throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│           break split_default$
 //│         }
 //│       } else {
-//│         throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│         break split_default$
 //│       }
-//│     } else {
-//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│     }
-//│   } else {
-//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"));
 //│   }
+//│   return tmp6
 //│ };
 //│ tmp = A1(1);
 //│ tmp1 = A1(tmp);
@@ -105,93 +112,9 @@ c2 of A(A(A(A(A(A(1))))))
 //│ tmp5 = A1(tmp4);
 //│ c2(tmp5)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ let c2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, c2_inst_0_tsni, _deforest_A_a, _deforest_A_a1, _deforest_A_a2, _deforest_A_a3, _deforest_A_a4, _deforest_A_a5;
-//│ c2_inst_0_tsni = function c2_inst_0_tsni(x) {
-//│   return runtime.safeCall(x())
-//│ };
-//│ c2 = function c2(x) {
-//│   let param01, param02, param03, param04, param05, param06, a1;
-//│   if (x instanceof A1.class) {
-//│     param01 = x.a;
-//│     if (param01 instanceof A1.class) {
-//│       param02 = param01.a;
-//│       if (param02 instanceof A1.class) {
-//│         param03 = param02.a;
-//│         if (param03 instanceof A1.class) {
-//│           param04 = param03.a;
-//│           if (param04 instanceof A1.class) {
-//│             param05 = param04.a;
-//│             if (param05 instanceof A1.class) {
-//│               param06 = param05.a;
-//│               a1 = param06;
-//│               return a1
-//│             } else {
-//│               throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│             }
-//│           } else {
-//│             throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│           }
-//│         } else {
-//│           throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│         }
-//│       } else {
-//│         throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│       }
-//│     } else {
-//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│     }
-//│   } else {
-//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│   }
-//│ };
-//│ _deforest_A_a5 = 1;
-//│ tmp = () => {
-//│   let param01, a1;
-//│   param01 = _deforest_A_a5;
-//│   a1 = param01;
-//│   return a1
-//│ };
-//│ _deforest_A_a4 = tmp;
-//│ tmp1 = () => {
-//│   let param01;
-//│   param01 = _deforest_A_a4;
-//│   return runtime.safeCall(param01())
-//│ };
-//│ _deforest_A_a3 = tmp1;
-//│ tmp2 = () => {
-//│   let param01;
-//│   param01 = _deforest_A_a3;
-//│   return runtime.safeCall(param01())
-//│ };
-//│ _deforest_A_a2 = tmp2;
-//│ tmp3 = () => {
-//│   let param01;
-//│   param01 = _deforest_A_a2;
-//│   return runtime.safeCall(param01())
-//│ };
-//│ _deforest_A_a1 = tmp3;
-//│ tmp4 = () => {
-//│   let param01;
-//│   param01 = _deforest_A_a1;
-//│   return runtime.safeCall(param01())
-//│ };
-//│ _deforest_A_a = tmp4;
-//│ tmp5 = () => {
-//│   let param01;
-//│   param01 = _deforest_A_a;
-//│   return runtime.safeCall(param01())
-//│ };
-//│ c2_inst_0_tsni(tmp5)
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(x),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Assign(a,Ref($argument0$),Assign($tmp,Ref(a),Break($split_root$)))))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:A),List(Arg(None,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@A
-//│ Call(Ref(member:A),List(Arg(None,Ref($tmp))))@2@inst__tsni --> Ref($param0)@inst_0_tsni@A
-//│ Call(Ref(member:A),List(Arg(None,Ref($tmp))))@3@inst__tsni --> Ref($param0)@inst_0_tsni@A
-//│ Call(Ref(member:A),List(Arg(None,Ref($tmp))))@4@inst__tsni --> Ref($param0)@inst_0_tsni@A
-//│ Call(Ref(member:A),List(Arg(None,Ref($tmp))))@5@inst__tsni --> Ref($param0)@inst_0_tsni@A
-//│ Call(Ref(member:A),List(Arg(None,Lit(IntLit(1)))))@6@inst__tsni --> Ref($param0)@inst_0_tsni@A
-//│ -------------- executing -------------
-//│ = 1
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(x),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Match(Ref($argument0$),List((Cls(class:A,Select(Ref(member:A),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Assign(a,Ref($argument0$),Assign($tmp,Ref(a),Break($split_root$)))))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

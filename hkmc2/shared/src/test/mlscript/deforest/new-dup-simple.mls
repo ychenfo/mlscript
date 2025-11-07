@@ -355,16 +355,16 @@ test()
 if [1, 2] is
   [a, b] then a + b
 //│ JS (unsanitized):
-//│ let scrut2, first1, first0, a1, b;
+//│ let scrut2, a1, b, element1$, element0$;
 //│ scrut2 = globalThis.Object.freeze([
 //│   1,
 //│   2
 //│ ]);
 //│ if (runtime.Tuple.isArrayLike(scrut2) && scrut2.length === 2) {
-//│   first0 = runtime.Tuple.get(scrut2, 0);
-//│   first1 = runtime.Tuple.get(scrut2, 1);
-//│   a1 = first0;
-//│   b = first1;
+//│   element0$ = runtime.Tuple.get(scrut2, 0);
+//│   element1$ = runtime.Tuple.get(scrut2, 1);
+//│   b = element1$;
+//│   a1 = element0$;
 //│   a1 + b
 //│ } else { throw globalThis.Object.freeze(new globalThis.Error("match error")) }
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
@@ -372,11 +372,11 @@ if [1, 2] is
 //│ _deforest_Deforest_Arr_2_0 = 1;
 //│ _deforest_Deforest_Arr_2_1 = 2;
 //│ scrut2 = () => {
-//│   let first1, first0, a1, b;
-//│   first0 = _deforest_Deforest_Arr_2_0;
-//│   first1 = _deforest_Deforest_Arr_2_1;
-//│   a1 = first0;
-//│   b = first1;
+//│   let a1, b, element1$, element0$;
+//│   element0$ = _deforest_Deforest_Arr_2_0;
+//│   element1$ = _deforest_Deforest_Arr_2_1;
+//│   b = element1$;
+//│   a1 = element0$;
 //│   return a1 + b
 //│ };
 //│ runtime.safeCall(scrut2())

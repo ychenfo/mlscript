@@ -558,7 +558,7 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
           tpeVar.asProdStrat
         case _ => die
     case c@Call(f, args) => handleCallLike(f, args.map {case Arg(N, value) => value}, c)
-    case i@Instantiate(false, cls, args) => handleCallLike(cls, args.map {case Arg(N, value) => value}, i)
+    case i@Instantiate(_, cls, args) => handleCallLike(cls, args.map {case Arg(N, value) => value}, i)
     case sel@Select(p, nme) => sel.symbol match
       case Some(s) if s.asObj.isDefined =>
           new Ctor(sel.uid, instantiationId)(s.asObj.get, Nil)
@@ -896,7 +896,7 @@ extension (b: Block)
           case _ => throw NotDeforestableException(s"no support for fun containing a cls like def")
     case HandleBlock(lhs, res, par, args, cls, hdr, bod, rst) => rst.deforestDefinedVars + res
     case TryBlock(sub, fin, rst) => sub.deforestDefinedVars ++ fin.deforestDefinedVars ++ rst.deforestDefinedVars
-    case Label(lbl, bod, rst) => bod.deforestDefinedVars ++ rst.deforestDefinedVars
+    case Label(lbl, loop, bod, rst) => bod.deforestDefinedVars ++ rst.deforestDefinedVars
 
 
 extension (p: Path)

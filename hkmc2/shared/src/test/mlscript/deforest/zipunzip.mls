@@ -28,17 +28,7 @@ fun testUnzipZip(n) = unzip(zip(id(enumFromTo(1, n)), id(enumFromTo(2, n + 3))))
 testUnzipZip(3)
 //│ = Pair(Cons(1, Cons(2, Nil)), Cons(2, Cons(3, Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@4@inst_0_1_tsni --> Ref(ls_unzip)@inst_0_3_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Ref(x)), Arg(None,Ref(y))))@5@inst_0_1_tsni --> Ref($param0)@inst_0_3_tsni@Pair
-//│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(ls_unzip)@inst_0_3_tsni@Nil
-//│ Ref(member:Nil)@7@inst_0_1_tsni --> Ref(ls_unzip)@inst_0_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@4@inst_2_1_tsni --> Ref(ls_unzip)@inst_2_3_tsni@Cons
-//│ Call(Ref(member:Pair),List(Arg(None,Ref(x)), Arg(None,Ref(y))))@5@inst_2_1_tsni --> Ref($param0)@inst_2_3_tsni@Pair
-//│ Ref(member:Nil)@6@inst_2_1_tsni --> Ref(ls_unzip)@inst_2_3_tsni@Nil
-//│ Ref(member:Nil)@7@inst_2_1_tsni --> Ref(ls_unzip)@inst_2_3_tsni@Nil
-//│ -------------- executing -------------
-//│ = Pair(Cons(1, Cons(2, Nil)), Cons(2, Cons(3, Nil)))
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_1$,false,Match(Ref(xs_zip),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(xs_zip),Ident(h)),Assign($argument1$,Select(Ref(xs_zip),Ident(t)),Assign(xt,Ref($argument1$),Assign(x,Ref($argument0$),Match(Ref(ys_zip),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(ys_zip),Ident(h)),Assign($argument1$,Select(Ref(ys_zip),Ident(t)),Assign(yt,Ref($argument1$),Assign(y,Ref($argument0$),Assign($tmp,Call(Ref(member:Pair),List(Arg(None,Ref(x)), Arg(None,Ref(y)))),Assign($tmp,Call(Ref(member:zip),List(Arg(None,Ref(xt)), Arg(None,Ref(yt)))),Assign($tmp,Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp)))),Break($split_root$)))))))))),Some(Break($split_1$)),End()))))))),Some(Break($split_1$)),End()),Assign($tmp,Ref(member:Nil),End())),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -55,17 +45,7 @@ fun testZipUnzip(n) = if unzip(id(makeZippedList(n))) is
 testZipUnzip(3)
 //│ = Cons(Pair(3, 4), Cons(Pair(2, 3), Cons(Pair(1, 2), Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Ref(member:Nil)@4@inst_0_1_tsni --> Ref(xs_zip)@inst_0_3_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref(atail))))@5@inst_0_1_tsni --> Ref(xs_zip)@inst_0_3_tsni@Cons
-//│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(ys_zip)@inst_0_3_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(b)), Arg(None,Ref(btail))))@7@inst_0_1_tsni --> Ref(ys_zip)@inst_0_3_tsni@Cons
-//│ Ref(member:Nil)@4@inst_2_1_tsni --> Ref(xs_zip)@inst_2_3_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref(atail))))@5@inst_2_1_tsni --> Ref(xs_zip)@inst_2_3_tsni@Cons
-//│ Ref(member:Nil)@6@inst_2_1_tsni --> Ref(ys_zip)@inst_2_3_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(b)), Arg(None,Ref(btail))))@7@inst_2_1_tsni --> Ref(ys_zip)@inst_2_3_tsni@Cons
-//│ -------------- executing -------------
-//│ = Cons(Pair(3, 4), Cons(Pair(2, 3), Cons(Pair(1, 2), Nil)))
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(ls_unzip),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(ls_unzip),Ident(h)),Assign($argument1$,Select(Ref(ls_unzip),Ident(t)),Match(Ref($argument0$),List((Cls(class:Pair,Select(Ref(member:Pair),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Assign($argument1$,Select(Ref($argument0$),Ident(b)),Assign(t,Ref($argument1$),Assign(b,Ref($argument1$),Assign(a,Ref($argument0$),Assign($scrut,Call(Ref(member:unzip),List(Arg(None,Ref(t)))),Match(Ref($scrut),List((Cls(class:Pair,Select(Ref(member:Pair),Ident(class))),Assign($argument0$,Select(Ref($scrut),Ident(a)),Assign($argument1$,Select(Ref($scrut),Ident(b)),Assign(btail,Ref($argument1$),Assign(atail,Ref($argument0$),Assign($tmp,Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref(atail)))),Assign($tmp,Call(Ref(member:Cons),List(Arg(None,Ref(b)), Arg(None,Ref(btail)))),Assign($tmp,Call(Ref(member:Pair),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp)))),Break($split_root$)))))))))),Some(Break($split_default$)),End()))))))))),Some(Break($split_default$)),End())))), (Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Assign($tmp,Call(Ref(member:Pair),List(Arg(None,Ref(member:Nil)), Arg(None,Ref(member:Nil)))),Break($split_root$)))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -91,26 +71,5 @@ testZipMapBothUnzip(4)
 //│   Cons(Pair(4, 16), Cons(Pair(3, 9), Cons(Pair(2, 4), Nil)))
 //│ )
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Ref(member:Nil)@6@inst_0_1_tsni --> Ref(ls_map)@inst_0_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref(atail))))@7@inst_0_1_tsni --> Ref(ls_map)@inst_0_2_tsni@Cons
-//│ Ref(member:Nil)@8@inst_0_1_tsni --> Ref(ls_map)@inst_0_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(b)), Arg(None,Ref(btail))))@9@inst_0_1_tsni --> Ref(ls_map)@inst_0_3_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_0_2_tsni --> Ref(xs_zip)@inst_0_5_tsni@Cons
-//│ Ref(member:Nil)@11@inst_0_2_tsni --> Ref(xs_zip)@inst_0_5_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_0_3_tsni --> Ref(ys_zip)@inst_0_5_tsni@Cons
-//│ Ref(member:Nil)@11@inst_0_3_tsni --> Ref(ys_zip)@inst_0_5_tsni@dflt
-//│ Ref(member:Nil)@6@inst_4_1_tsni --> Ref(ls_map)@inst_4_2_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref(atail))))@7@inst_4_1_tsni --> Ref(ls_map)@inst_4_2_tsni@Cons
-//│ Ref(member:Nil)@8@inst_4_1_tsni --> Ref(ls_map)@inst_4_3_tsni@Nil
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(b)), Arg(None,Ref(btail))))@9@inst_4_1_tsni --> Ref(ls_map)@inst_4_3_tsni@Cons
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_4_2_tsni --> Ref(xs_zip)@inst_4_5_tsni@Cons
-//│ Ref(member:Nil)@11@inst_4_2_tsni --> Ref(xs_zip)@inst_4_5_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_4_3_tsni --> Ref(ys_zip)@inst_4_5_tsni@Cons
-//│ Ref(member:Nil)@11@inst_4_3_tsni --> Ref(ys_zip)@inst_4_5_tsni@dflt
-//│ -------------- executing -------------
-//│ = Cons(
-//│   Pair(5, 25),
-//│   Cons(Pair(4, 16), Cons(Pair(3, 9), Cons(Pair(2, 4), Nil)))
-//│ )
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(ls_unzip),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(ls_unzip),Ident(h)),Assign($argument1$,Select(Ref(ls_unzip),Ident(t)),Match(Ref($argument0$),List((Cls(class:Pair,Select(Ref(member:Pair),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Assign($argument1$,Select(Ref($argument0$),Ident(b)),Assign(t,Ref($argument1$),Assign(b,Ref($argument1$),Assign(a,Ref($argument0$),Assign($scrut,Call(Ref(member:unzip),List(Arg(None,Ref(t)))),Match(Ref($scrut),List((Cls(class:Pair,Select(Ref(member:Pair),Ident(class))),Assign($argument0$,Select(Ref($scrut),Ident(a)),Assign($argument1$,Select(Ref($scrut),Ident(b)),Assign(btail,Ref($argument1$),Assign(atail,Ref($argument0$),Assign($tmp,Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref(atail)))),Assign($tmp,Call(Ref(member:Cons),List(Arg(None,Ref(b)), Arg(None,Ref(btail)))),Assign($tmp,Call(Ref(member:Pair),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp)))),Break($split_root$)))))))))),Some(Break($split_default$)),End()))))))))),Some(Break($split_default$)),End())))), (Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Assign($tmp,Call(Ref(member:Pair),List(Arg(None,Ref(member:Nil)), Arg(None,Ref(member:Nil)))),Break($split_root$)))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

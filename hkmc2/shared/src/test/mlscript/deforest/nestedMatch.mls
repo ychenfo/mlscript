@@ -104,13 +104,7 @@ fun f(x) =
 f(AA(AA(A))) + f(AA(AA(A)))
 //│ = "A3A3"
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@3@inst__tsni --> Ref($param0)@inst_0_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@4@inst__tsni --> Ref(x)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@5@inst__tsni --> Ref($param0)@inst_1_tsni@AA
-//│ -------------- executing -------------
-//│ = "A3A3"
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(x),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Assign(a,Ref($argument0$),Assign($tmp,Ref(a),Break($split_root$)))))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Assign(t,Ref($tmp),Return(Call(Ref(builtin:+),List(Arg(None,Ref(t)), Arg(None,Lit(IntLit(3))))),false)))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -120,11 +114,7 @@ fun c2(x) = if x is
 c2(AA(AA(0)))
 //│ = 0
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@1@inst__tsni --> Ref(x)@inst_0_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(0)))))@2@inst__tsni --> Ref($param0)@inst_0_tsni@AA
-//│ -------------- executing -------------
-//│ = 0
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(x),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Assign(a,Ref($argument0$),Assign($tmp,Ref(a),Break($split_root$)))))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -134,12 +124,7 @@ fun f(a) = if a is
 f(AA(BB(B)))
 //│ = 3
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@1@inst__tsni --> Ref(a)@inst_0_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(None,Ref(member:B))))@2@inst__tsni --> Ref($param0)@inst_0_tsni@BB
-//│ Ref(member:B)@3@inst__tsni --> Ref($param0)@inst_0_tsni@B
-//│ -------------- executing -------------
-//│ = 3
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(a),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref(a),Ident(x)),Match(Ref($argument0$),List((Cls(class:BB,Select(Ref(member:BB),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Match(Ref($argument0$),List((Cls(object:B,Select(Ref(member:B),Ident(class))),Assign($tmp,Lit(IntLit(3)),Break($split_root$)))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -239,12 +224,7 @@ test(p) + f(p) + test(AA(A))
 //│ = "105035"
 //│ p = AA(AA(AA("10")))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(None,Ref(member:A))))@2@inst__tsni --> Ref(x)@inst_0_tsni@AA
-//│ Ref(member:A)@3@inst__tsni --> Ref($param0)@inst_0_tsni@dflt
-//│ Call(Ref(member:AA),List(Arg(None,Lit(StrLit(10)))))@4@inst__tsni --> Ref($param0)@inst_1_tsni@AA
-//│ -------------- executing -------------
-//│ = "105035"
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_1$,false,Match(Ref(x),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Assign(a,Ref($argument0$),Assign($tmp,Ref(a),Break($split_root$)))))),Some(Break($split_1$)),End())))),Some(Break($split_1$)),End())))),Some(Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),End()),Assign($tmp,Lit(StrLit(3)),End())),Assign(t,Ref($tmp),Return(Call(Ref(builtin:+),List(Arg(None,Ref(t)), Arg(None,Lit(StrLit(5))))),false)))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -395,14 +375,7 @@ fun p(x) = AA(x)
 test(p(BB(3))) + test(p(CC(3))) + c(p(A))
 //│ = 12
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(None,Ref(x))))@6@inst_0_tsni --> Ref(x)@inst_3_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(None,Ref(x))))@6@inst_1_tsni --> Ref(x)@inst_4_tsni@AA
-//│ Call(Ref(member:CC),List(Arg(None,Lit(IntLit(3)))))@7@inst__tsni --> Ref($param0)@inst_4_tsni@CC
-//│ Call(Ref(member:AA),List(Arg(None,Ref(x))))@6@inst_2_tsni --> Ref(x)@inst_5_tsni@AA
-//│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(3)))))@8@inst__tsni --> Ref($param0)@inst_5_tsni@BB
-//│ -------------- executing -------------
-//│ = 12
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_1$,false,Match(Ref(x),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(x)),Match(Ref($argument0$),List((Cls(class:BB,Select(Ref(member:BB),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Assign(b,Ref($argument0$),Assign($tmp,Ref(b),Break($split_root$))))), (Cls(class:CC,Select(Ref(member:CC),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Assign(c,Ref($argument0$),Assign($tmp,Ref(c),Break($split_root$)))))),Some(Break($split_1$)),End())))),Some(Break($split_1$)),End()),Assign($tmp,Lit(IntLit(0)),End())),Assign(n,Ref($tmp),Return(Call(Ref(builtin:+),List(Arg(None,Ref(n)), Arg(None,Lit(IntLit(3))))),false)))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -449,8 +422,5 @@ test(p) + f(p)
 //│ = 15
 //│ p = AA(AA(AA(10)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(10)))))@1@inst__tsni --> Ref($param0)@inst_0_tsni@AA
-//│ -------------- executing -------------
-//│ = 15
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(x),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Assign(a,Ref($argument0$),Assign($tmp,Ref(a),Break($split_root$)))))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End())))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Assign(t,Ref($tmp),Return(Call(Ref(builtin:+),List(Arg(None,Ref(t)), Arg(None,Lit(IntLit(5))))),false)))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<

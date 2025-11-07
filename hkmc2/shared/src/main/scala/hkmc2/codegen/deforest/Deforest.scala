@@ -219,11 +219,11 @@ extension (b: Block)
         case ValDefn(tsym, sym, rhs) =>
           val rest = rst.topLvlDefinedVars
           rest + defn.sym
-        case ClsLikeDefn(owner, isym, sym, k, paramsOpt, auxParams, parentPath, methods, privateFields, publicFields, preCtor, ctor, companion) =>
+        case ClsLikeDefn(owner, isym, sym, k, paramsOpt, auxParams, parentPath, methods, privateFields, publicFields, preCtor, ctor, companion, bufferable) =>
           val rest = rst.topLvlDefinedVars
           // inner symbols also needs to be renewed because they are allocated
           // in the same level of scope in `JSBuilder.reserveNames`
           companion.map(_.isym).toSet ++ rest + defn.sym + isym
     case HandleBlock(lhs, res, par, args, cls, hdr, bod, rst) => rst.topLvlDefinedVars + res + lhs
     case TryBlock(sub, fin, rst) => sub.topLvlDefinedVars ++ fin.topLvlDefinedVars ++ rst.topLvlDefinedVars
-    case Label(lbl, bod, rst) => bod.topLvlDefinedVars ++ rst.topLvlDefinedVars
+    case Label(lbl, loop, bod, rst) => bod.topLvlDefinedVars ++ rst.topLvlDefinedVars

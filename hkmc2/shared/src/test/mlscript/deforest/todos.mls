@@ -114,22 +114,28 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ JS (unsanitized):
 //│ let test, f2, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14;
 //│ test = function test(x) {
-//│   let t, param0, param01, param02, a, tmp15, tmp16, tmp17, tmp18, tmp19;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
-//│     if (param0 instanceof AA1.class) {
-//│       param01 = param0.x;
-//│       if (param01 instanceof AA1.class) {
-//│         param02 = param01.x;
-//│         a = param02;
-//│         tmp15 = a;
+//│   let t, a, argument0$, argument0$1, argument0$2, tmp15, tmp16, tmp17, tmp18, tmp19;
+//│   split_root$: {
+//│     split_1$: {
+//│       if (x instanceof AA1.class) {
+//│         argument0$ = x.x;
+//│         if (argument0$ instanceof AA1.class) {
+//│           argument0$1 = argument0$.x;
+//│           if (argument0$1 instanceof AA1.class) {
+//│             argument0$2 = argument0$1.x;
+//│             a = argument0$2;
+//│             tmp15 = a;
+//│             break split_root$
+//│           } else {
+//│             break split_1$
+//│           }
+//│         } else {
+//│           break split_1$
+//│         }
 //│       } else {
-//│         tmp15 = 4;
+//│         break split_1$
 //│       }
-//│     } else {
-//│       tmp15 = 4;
 //│     }
-//│   } else {
 //│     tmp15 = 4;
 //│   }
 //│   t = tmp15;
@@ -140,17 +146,24 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│   return tmp19 - 1
 //│ };
 //│ f2 = function f(a) {
-//│   let param0;
-//│   if (a instanceof AA1.class) {
-//│     param0 = a.x;
-//│     if (param0 instanceof AA1.class) {
-//│       return 0
-//│     } else {
-//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│   let argument0$, tmp15;
+//│   split_root$: {
+//│     split_default$: {
+//│       if (a instanceof AA1.class) {
+//│         argument0$ = a.x;
+//│         if (argument0$ instanceof AA1.class) {
+//│           tmp15 = 0;
+//│           break split_root$
+//│         } else {
+//│           break split_default$
+//│         }
+//│       } else {
+//│         break split_default$
+//│       }
 //│     }
-//│   } else {
-//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"));
 //│   }
+//│   return tmp15
 //│ };
 //│ tmp4 = AA1(10);
 //│ tmp5 = AA1(tmp4);
@@ -166,141 +179,12 @@ test(p) + f(p) + test(AA(AA(AA(10)))) + test(B)
 //│ tmp14 = test(B1);
 //│ tmp13 + tmp14
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ let test, f2, p, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, test_inst_0_tsni, test_inst_1_tsni, test_inst_2_tsni, _deforest_AA_x1, _deforest_AA_x2, _deforest_AA_x3, _deforest_AA_x4, lambda;
-//│ test_inst_0_tsni = function test_inst_0_tsni(x) {
-//│   return runtime.safeCall(x())
-//│ };
-//│ test_inst_1_tsni = function test_inst_1_tsni(x) {
-//│   return runtime.safeCall(x())
-//│ };
-//│ test_inst_2_tsni = function test_inst_2_tsni(x) {
-//│   let t, param0, param01, tmp15, tmp16, tmp17, tmp18, tmp19;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
-//│     if (param0 instanceof AA1.class) {
-//│       param01 = param0.x;
-//│       return runtime.safeCall(param01())
-//│     } else {
-//│       tmp15 = 4;
-//│     }
-//│   } else {
-//│     tmp15 = 4;
-//│   }
-//│   t = tmp15;
-//│   tmp16 = 5 * 4;
-//│   tmp17 = t + tmp16;
-//│   tmp18 = tmp17 - 3;
-//│   tmp19 = tmp18 + 2;
-//│   return tmp19 - 1
-//│ };
-//│ test = function test(x) {
-//│   let t, param0, param01, param02, a, tmp15, tmp16, tmp17, tmp18, tmp19;
-//│   if (x instanceof AA1.class) {
-//│     param0 = x.x;
-//│     if (param0 instanceof AA1.class) {
-//│       param01 = param0.x;
-//│       if (param01 instanceof AA1.class) {
-//│         param02 = param01.x;
-//│         a = param02;
-//│         tmp15 = a;
-//│       } else {
-//│         tmp15 = 4;
-//│       }
-//│     } else {
-//│       tmp15 = 4;
-//│     }
-//│   } else {
-//│     tmp15 = 4;
-//│   }
-//│   t = tmp15;
-//│   tmp16 = 5 * 4;
-//│   tmp17 = t + tmp16;
-//│   tmp18 = tmp17 - 3;
-//│   tmp19 = tmp18 + 2;
-//│   return tmp19 - 1
-//│ };
-//│ f2 = function f(a) {
-//│   let param0;
-//│   if (a instanceof AA1.class) {
-//│     param0 = a.x;
-//│     if (param0 instanceof AA1.class) {
-//│       return 0
-//│     } else {
-//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│     }
-//│   } else {
-//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│   }
-//│ };
-//│ _deforest_AA_x4 = 10;
-//│ tmp4 = () => {
-//│   let t, param0, a, tmp15, tmp16, tmp17, tmp18, tmp19;
-//│   param0 = _deforest_AA_x4;
-//│   a = param0;
-//│   tmp15 = a;
-//│   t = tmp15;
-//│   tmp16 = 5 * 4;
-//│   tmp17 = t + tmp16;
-//│   tmp18 = tmp17 - 3;
-//│   tmp19 = tmp18 + 2;
-//│   return tmp19 - 1
-//│ };
-//│ tmp5 = AA1(tmp4);
-//│ p = AA1(tmp5);
-//│ tmp6 = test_inst_2_tsni(p);
-//│ tmp7 = f2(p);
-//│ tmp8 = tmp6 + tmp7;
-//│ _deforest_AA_x3 = 10;
-//│ tmp9 = () => {
-//│   let t, param0, a, tmp15, tmp16, tmp17, tmp18, tmp19;
-//│   param0 = _deforest_AA_x3;
-//│   a = param0;
-//│   tmp15 = a;
-//│   t = tmp15;
-//│   tmp16 = 5 * 4;
-//│   tmp17 = t + tmp16;
-//│   tmp18 = tmp17 - 3;
-//│   tmp19 = tmp18 + 2;
-//│   return tmp19 - 1
-//│ };
-//│ _deforest_AA_x2 = tmp9;
-//│ tmp10 = () => {
-//│   let param0;
-//│   param0 = _deforest_AA_x2;
-//│   return runtime.safeCall(param0())
-//│ };
-//│ _deforest_AA_x1 = tmp10;
-//│ tmp11 = () => {
-//│   let param0;
-//│   param0 = _deforest_AA_x1;
-//│   return runtime.safeCall(param0())
-//│ };
-//│ tmp12 = test_inst_1_tsni(tmp11);
-//│ tmp13 = tmp8 + tmp12;
-//│ lambda = () => {
-//│   let t, tmp15, tmp16, tmp17, tmp18, tmp19;
-//│   tmp15 = 4;
-//│   t = tmp15;
-//│   tmp16 = 5 * 4;
-//│   tmp17 = t + tmp16;
-//│   tmp18 = tmp17 - 3;
-//│   tmp19 = tmp18 + 2;
-//│   return tmp19 - 1
-//│ };
-//│ tmp14 = test_inst_0_tsni(lambda);
-//│ tmp13 + tmp14
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_1$,false,Match(Ref(x),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Assign(a,Ref($argument0$),Assign($tmp,Ref(a),Break($split_root$)))))),Some(Break($split_1$)),End())))),Some(Break($split_1$)),End())))),Some(Break($split_1$)),End()),Assign($tmp,Lit(IntLit(4)),End())),Assign(t,Ref($tmp),Assign($tmp,Call(Ref(builtin:*),List(Arg(None,Lit(IntLit(5))), Arg(None,Lit(IntLit(4))))),Assign($tmp,Call(Ref(builtin:+),List(Arg(None,Ref(t)), Arg(None,Ref($tmp)))),Assign($tmp,Call(Ref(builtin:-),List(Arg(None,Ref($tmp)), Arg(None,Lit(IntLit(3))))),Assign($tmp,Call(Ref(builtin:+),List(Arg(None,Ref($tmp)), Arg(None,Lit(IntLit(2))))),Return(Call(Ref(builtin:-),List(Arg(None,Ref($tmp)), Arg(None,Lit(IntLit(1))))),false)))))))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = 78
 //│ p = AA(AA(AA(10)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Ref(member:B)@3@inst__tsni --> Ref(x)@inst_0_tsni@dflt
-//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@4@inst__tsni --> Ref(x)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(None,Ref($tmp))))@5@inst__tsni --> Ref($param0)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(10)))))@6@inst__tsni --> Ref($param0)@inst_1_tsni@AA
-//│ Call(Ref(member:AA),List(Arg(None,Lit(IntLit(10)))))@7@inst__tsni --> Ref($param0)@inst_2_tsni@AA
-//│ -------------- executing -------------
-//│ = 78
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_1$,false,Match(Ref(x),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Match(Ref($argument0$),List((Cls(class:AA,Select(Ref(member:AA),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(x)),Assign(a,Ref($argument0$),Assign($tmp,Ref(a),Break($split_root$)))))),Some(Break($split_1$)),End())))),Some(Break($split_1$)),End())))),Some(Break($split_1$)),End()),Assign($tmp,Lit(IntLit(4)),End())),Assign(t,Ref($tmp),Assign($tmp,Call(Ref(builtin:*),List(Arg(None,Lit(IntLit(5))), Arg(None,Lit(IntLit(4))))),Assign($tmp,Call(Ref(builtin:+),List(Arg(None,Ref(t)), Arg(None,Ref($tmp)))),Assign($tmp,Call(Ref(builtin:-),List(Arg(None,Ref($tmp)), Arg(None,Lit(IntLit(3))))),Assign($tmp,Call(Ref(builtin:+),List(Arg(None,Ref($tmp)), Arg(None,Lit(IntLit(2))))),Return(Call(Ref(builtin:-),List(Arg(None,Ref($tmp)), Arg(None,Lit(IntLit(1))))),false)))))))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 

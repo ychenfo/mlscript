@@ -270,10 +270,7 @@ last(p)
 //│ = Some(2)
 //│ p = Cons(1, Cons(2, Nil))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ 
-//│ -------------- executing -------------
-//│ = Some(2)
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(ls),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(ls),Ident(h)),Assign($argument1$,Select(Ref(ls),Ident(t)),Assign(t,Ref($argument1$),Assign(h,Ref($argument0$),Match(Ref(t),List((Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Assign($tmp,Call(Ref(member:Some),List(Arg(None,Ref(h)))),Break($split_root$))), (Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(t),Ident(h)),Assign($argument1$,Select(Ref(t),Ident(t)),Assign($tmp,Call(Ref(member:last),List(Arg(None,Ref(t)))),Break($split_root$)))))),Some(Break($split_default$)),End())))))), (Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Assign($tmp,Ref(member:None),Break($split_root$)))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -437,12 +434,12 @@ fun g2() = f()
 fun main() = f()
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:B)@7@inst_0_tsni --> Ref($scrut)@inst_0_tsni@B
-//│ Ref(member:B)@7@inst_1_tsni --> Ref($scrut)@inst_1_tsni@B
-//│ Ref(member:B)@7@inst_2_tsni --> Ref($scrut)@inst_2_tsni@B
-//│ Ref(member:B)@7@inst_3_tsni --> Ref($scrut)@inst_3_tsni@B
-//│ Ref(member:B)@7@inst_4_tsni --> Ref($scrut)@inst_4_tsni@B
-//│ Ref(member:B)@7@inst_5_6_tsni --> Ref($scrut)@inst_5_6_tsni@B
+//│ Ref(member:B)@7@inst_0_tsni --> Ref(member:B)@inst_0_tsni@B
+//│ Ref(member:B)@7@inst_1_tsni --> Ref(member:B)@inst_1_tsni@B
+//│ Ref(member:B)@7@inst_2_tsni --> Ref(member:B)@inst_2_tsni@B
+//│ Ref(member:B)@7@inst_3_tsni --> Ref(member:B)@inst_3_tsni@B
+//│ Ref(member:B)@7@inst_4_tsni --> Ref(member:B)@inst_4_tsni@B
+//│ Ref(member:B)@7@inst_5_6_tsni --> Ref(member:B)@inst_5_6_tsni@B
 //│ -------------- executing -------------
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 

@@ -146,8 +146,8 @@ fun f() =
   if A is A then y
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:A)@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
-//│ Ref(member:A)@2@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
+//│ Ref(member:A)@2@inst_0_tsni --> Ref(member:A)@inst_0_tsni@A
+//│ Ref(member:A)@2@inst_1_tsni --> Ref(member:A)@inst_1_tsni@A
 //│ -------------- executing -------------
 //│ ═══[RUNTIME ERROR] ReferenceError: MMM2 is not defined
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -172,12 +172,7 @@ fun g(b) =
   else
     C
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Ref(member:A)@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
-//│ Ref(member:A)@3@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
-//│ Ref(member:C)@4@inst_0_tsni --> Ref($scrut)@inst_0_tsni@C
-//│ Ref(member:D)@5@inst_1_tsni --> Ref($scrut)@inst_1_tsni@D
-//│ -------------- executing -------------
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_1$,false,Assign($scrut,Call(Select(Ref(member:M),Ident(f)),List(Arg(None,Lit(IntLit(0))))),Match(Ref($scrut),List((Cls(object:B,Select(Ref(member:B),Ident(class))),Break($split_1$)), (Cls(object:D,Select(Ref(member:D),Ident(class))),Break($split_1$))),Some(Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),End())),Assign($tmp,Ref(member:A),End())),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 

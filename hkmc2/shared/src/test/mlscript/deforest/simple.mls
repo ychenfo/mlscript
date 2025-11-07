@@ -312,9 +312,9 @@ p(AA(1))
 //│ = 2
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:A)@4@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
-//│ Ref(member:A)@4@inst_1_2_tsni --> Ref($scrut)@inst_1_2_tsni@A
-//│ Ref(member:A)@4@inst_3_2_tsni --> Ref($scrut)@inst_3_2_tsni@A
+//│ Ref(member:A)@4@inst_0_tsni --> Ref(member:A)@inst_0_tsni@A
+//│ Ref(member:A)@4@inst_1_2_tsni --> Ref(member:A)@inst_1_2_tsni@A
+//│ Ref(member:A)@4@inst_3_2_tsni --> Ref(member:A)@inst_3_2_tsni@A
 //│ -------------- executing -------------
 //│ = 2
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -464,8 +464,8 @@ test()
 //│ = 5
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:A)@2@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
-//│ Ref(member:A)@2@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
+//│ Ref(member:A)@2@inst_0_tsni --> Ref(member:A)@inst_0_tsni@A
+//│ Ref(member:A)@2@inst_1_tsni --> Ref(member:A)@inst_1_tsni@A
 //│ -------------- executing -------------
 //│ = 5
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -612,11 +612,7 @@ fun f(a, b) = if a is
 f(A, B)
 //│ = 1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Ref(member:A)@1@inst__tsni --> Ref(a)@inst_0_tsni@A
-//│ Ref(member:B)@2@inst__tsni --> Ref(b)@inst_0_tsni@B
-//│ -------------- executing -------------
-//│ = 1
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_1$,false,Match(Ref(a),List((Cls(object:A,Select(Ref(member:A),Ident(class))),Match(Ref(b),List((Cls(object:B,Select(Ref(member:B),Ident(class))),Assign($tmp,Lit(IntLit(1)),Break($split_root$)))),Some(Break($split_1$)),End()))),Some(Break($split_1$)),End()),Assign($tmp,Lit(IntLit(0)),End())),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -655,13 +651,13 @@ c(B)
 //│ ═══[RUNTIME ERROR] Error: e1
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ ---------- deforest summary ----------
-//│ Ref(member:A)@6@inst_0_tsni --> Ref($scrut)@inst_0_tsni@A
-//│ Ref(member:A)@6@inst_1_tsni --> Ref($scrut)@inst_1_tsni@A
+//│ Ref(member:A)@6@inst_0_tsni --> Ref(member:A)@inst_0_tsni@A
+//│ Ref(member:A)@6@inst_1_tsni --> Ref(member:A)@inst_1_tsni@A
 //│ Ref(member:B)@7@inst__tsni --> Ref(x)@inst_1_tsni@dflt
-//│ Ref(member:A)@6@inst_2_tsni --> Ref($scrut)@inst_2_tsni@A
+//│ Ref(member:A)@6@inst_2_tsni --> Ref(member:A)@inst_2_tsni@A
 //│ Instantiate(false,Select(Ref(member:AA),Ident(class)),List(Arg(None,Lit(IntLit(2)))))@8@inst_3_tsni --> Ref(x)@inst_2_tsni@AA
 //│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(3)))))@9@inst_3_tsni --> Ref(x)@inst_2_tsni@BB
-//│ Ref(member:A)@6@inst_4_tsni --> Ref($scrut)@inst_4_tsni@A
+//│ Ref(member:A)@6@inst_4_tsni --> Ref(member:A)@inst_4_tsni@A
 //│ Instantiate(false,Select(Ref(member:AA),Ident(class)),List(Arg(None,Lit(IntLit(2)))))@8@inst_5_tsni --> Ref(x)@inst_4_tsni@AA
 //│ Call(Ref(member:BB),List(Arg(None,Lit(IntLit(3)))))@9@inst_5_tsni --> Ref(x)@inst_4_tsni@BB
 //│ -------------- executing -------------

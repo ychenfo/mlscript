@@ -37,41 +37,7 @@ fun test() =
 test()
 //│ = Cons(Pair(1, 3), Cons(Pair(2, 4), Cons(Pair(3, 5), Nil)))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@8@inst_0_1_tsni --> Ref(xs_zip)@inst_0_3_tsni@Cons
-//│ Ref(member:Nil)@9@inst_0_1_tsni --> Ref(xs_zip)@inst_0_3_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@8@inst_0_2_tsni --> Ref(ys_zip)@inst_0_3_tsni@Cons
-//│ Ref(member:Nil)@9@inst_0_2_tsni --> Ref(ys_zip)@inst_0_3_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_0_3_tsni --> Ref(ls2)@inst_0_tsni@Cons
-//│ Ref(member:Nil)@11@inst_0_3_tsni --> Ref(ls2)@inst_0_tsni@dflt
-//│ Ref(member:Nil)@12@inst_0_3_tsni --> Ref(ls2)@inst_0_tsni@dflt
-//│ Call(Ref(member:Pair),List(Arg(None,Ref(x)), Arg(None,Ref(y))))@13@inst_0_3_tsni --> Ref($param0)@inst_0_tsni@Pair
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@8@inst_0_4_tsni --> Ref(xs_zip)@inst_0_6_tsni@Cons
-//│ Ref(member:Nil)@9@inst_0_4_tsni --> Ref(xs_zip)@inst_0_6_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@8@inst_0_5_tsni --> Ref(ys_zip)@inst_0_6_tsni@Cons
-//│ Ref(member:Nil)@9@inst_0_5_tsni --> Ref(ys_zip)@inst_0_6_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_0_6_tsni --> Ref(ls)@inst_0_tsni@Cons
-//│ Ref(member:Nil)@11@inst_0_6_tsni --> Ref(ls)@inst_0_tsni@dflt
-//│ Ref(member:Nil)@12@inst_0_6_tsni --> Ref(ls)@inst_0_tsni@dflt
-//│ Call(Ref(member:Pair),List(Arg(None,Ref(x)), Arg(None,Ref(y))))@13@inst_0_6_tsni --> Ref($param0)@inst_0_tsni@Pair
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@8@inst_7_1_tsni --> Ref(xs_zip)@inst_7_3_tsni@Cons
-//│ Ref(member:Nil)@9@inst_7_1_tsni --> Ref(xs_zip)@inst_7_3_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@8@inst_7_2_tsni --> Ref(ys_zip)@inst_7_3_tsni@Cons
-//│ Ref(member:Nil)@9@inst_7_2_tsni --> Ref(ys_zip)@inst_7_3_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_7_3_tsni --> Ref(ls2)@inst_7_tsni@Cons
-//│ Ref(member:Nil)@11@inst_7_3_tsni --> Ref(ls2)@inst_7_tsni@dflt
-//│ Ref(member:Nil)@12@inst_7_3_tsni --> Ref(ls2)@inst_7_tsni@dflt
-//│ Call(Ref(member:Pair),List(Arg(None,Ref(x)), Arg(None,Ref(y))))@13@inst_7_3_tsni --> Ref($param0)@inst_7_tsni@Pair
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@8@inst_7_4_tsni --> Ref(xs_zip)@inst_7_6_tsni@Cons
-//│ Ref(member:Nil)@9@inst_7_4_tsni --> Ref(xs_zip)@inst_7_6_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref(a)), Arg(None,Ref($tmp))))@8@inst_7_5_tsni --> Ref(ys_zip)@inst_7_6_tsni@Cons
-//│ Ref(member:Nil)@9@inst_7_5_tsni --> Ref(ys_zip)@inst_7_6_tsni@dflt
-//│ Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@10@inst_7_6_tsni --> Ref(ls)@inst_7_tsni@Cons
-//│ Ref(member:Nil)@11@inst_7_6_tsni --> Ref(ls)@inst_7_tsni@dflt
-//│ Ref(member:Nil)@12@inst_7_6_tsni --> Ref(ls)@inst_7_tsni@dflt
-//│ Call(Ref(member:Pair),List(Arg(None,Ref(x)), Arg(None,Ref(y))))@13@inst_7_6_tsni --> Ref($param0)@inst_7_tsni@Pair
-//│ -------------- executing -------------
-//│ = Cons(Pair(1, 3), Cons(Pair(2, 4), Cons(Pair(3, 5), Nil)))
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_1$,false,Match(Ref(ls),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(ls),Ident(h)),Assign($argument1$,Select(Ref(ls),Ident(t)),Match(Ref($argument0$),List((Cls(class:Pair,Select(Ref(member:Pair),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Assign($argument1$,Select(Ref($argument0$),Ident(b)),Assign(t,Ref($argument1$),Assign(y1,Ref($argument1$),Assign(x,Ref($argument0$),Define(FunDefn(None,member:lscomp2,List(ParamList(‹›,List(Param(‹›,ls2,None,Modulefulness(None))),None)),Label($split_root$,false,Label($split_1$,false,Match(Ref(ls2),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(ls2),Ident(h)),Assign($argument1$,Select(Ref(ls2),Ident(t)),Match(Ref($argument0$),List((Cls(class:Pair,Select(Ref(member:Pair),Ident(class))),Assign($argument0$,Select(Ref($argument0$),Ident(a)),Assign($argument1$,Select(Ref($argument0$),Ident(b)),Assign(t2,Ref($argument1$),Assign(z,Ref($argument1$),Assign(y2,Ref($argument0$),Assign($scrut,Call(Ref(builtin:==),List(Arg(None,Ref(y1)), Arg(None,Ref(y2)))),Match(Ref($scrut),List((Lit(BoolLit(true)),Assign($tmp,Call(Ref(member:Pair),List(Arg(None,Ref(x)), Arg(None,Ref(z)))),Assign($tmp,Call(Ref(member:lscomp2),List(Arg(None,Ref(t2)))),Assign($tmp,Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp)))),Break($split_root$)))))),Some(Assign($tmp,Call(Ref(member:lscomp2),List(Arg(None,Ref(t2)))),Break($split_root$))),End()))))))))),Some(Break($split_1$)),End()))))),Some(Break($split_1$)),End()),Assign($tmp,Call(Ref(member:lscomp1),List(Arg(None,Ref(t)))),End())),Return(Ref($tmp),false))),Assign($tmp,Call(Ref(builtin:+),List(Arg(None,Ref(x)), Arg(None,Lit(IntLit(2))))),Assign($tmp,Call(Ref(member:enumFromTo),List(Arg(None,Ref(x)), Arg(None,Ref($tmp)))),Assign($tmp,Call(Ref(builtin:+),List(Arg(None,Ref(y1)), Arg(None,Lit(IntLit(1))))),Assign($tmp,Call(Ref(member:enumFromTo),List(Arg(None,Ref(y1)), Arg(None,Ref($tmp)))),Assign($tmp,Call(Ref(member:zip),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp)))),Assign($tmp,Call(Ref(member:lscomp2),List(Arg(None,Ref($tmp)))),Break($split_root$))))))))))))))),Some(Break($split_1$)),End()))))),Some(Break($split_1$)),End()),Assign($tmp,Ref(member:Nil),End())),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 

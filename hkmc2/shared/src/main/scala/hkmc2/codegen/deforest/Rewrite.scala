@@ -469,7 +469,8 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
               acc || preAnalyzer.matchScrutToMatchBlock(pid).rest.hasExplicitRet
           val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || oneOfParentMatchRestHasExplicitRet
           val freeVars = rewritePrepare.freeVarsOfOriginalMatchesConsideringDeforestation(scrut.uid.withInstId)
-          Return(Call(scrut, freeVars.asArgsList)(false, false), !needExplicitRet)
+          applyPath(scrut): newScrut =>
+            Return(Call(newScrut, freeVars.asArgsList)(false, false), !needExplicitRet)
         else
           val allArmWillBeNonEnd =
             dflt.fold(false)(_.willBeNonEndTailBlock(instId, rewritePrepare)) &&

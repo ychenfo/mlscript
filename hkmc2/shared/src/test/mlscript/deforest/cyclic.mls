@@ -60,10 +60,10 @@ modSome(Some(17), 3)
 //│ JS (unsanitized):
 //│ let modSome, tmp8;
 //│ modSome = function modSome(x, m) {
-//│   let param0, n, scrut, tmp9, tmp10;
+//│   let n, scrut, argument0$, tmp9, tmp10;
 //│   if (x instanceof Some1.class) {
-//│     param0 = x.x;
-//│     n = param0;
+//│     argument0$ = x.x;
+//│     n = argument0$;
 //│     scrut = n >= m;
 //│     if (scrut === true) {
 //│       tmp9 = n - m;
@@ -83,9 +83,9 @@ modSome(Some(17), 3)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
 //│ let modSome, tmp8, modSome_inst_0_tsni, _deforest_Some_x, match_x_arm_Some_inst_0_tsni;
 //│ match_x_arm_Some_inst_0_tsni = (undefined, function (m, _deforest_Some_x_inst_0_tsni) {
-//│   let param0, n, scrut, tmp9, tmp10, _deforest_Some_x1;
-//│   param0 = _deforest_Some_x_inst_0_tsni;
-//│   n = param0;
+//│   let n, scrut, argument0$, tmp9, tmp10, _deforest_Some_x1;
+//│   argument0$ = _deforest_Some_x_inst_0_tsni;
+//│   n = argument0$;
 //│   scrut = n >= m;
 //│   if (scrut === true) {
 //│     tmp9 = n - m;
@@ -102,10 +102,10 @@ modSome(Some(17), 3)
 //│   return runtime.safeCall(x(m))
 //│ };
 //│ modSome = function modSome(x, m) {
-//│   let param0, n, scrut, tmp9, tmp10;
+//│   let n, scrut, argument0$, tmp9, tmp10;
 //│   if (x instanceof Some1.class) {
-//│     param0 = x.x;
-//│     n = param0;
+//│     argument0$ = x.x;
+//│     n = argument0$;
 //│     scrut = n >= m;
 //│     if (scrut === true) {
 //│       tmp9 = n - m;
@@ -145,9 +145,7 @@ fun maxOpt2(ls, x) = if ls is
       h > m then maxOpt2(t, Some(h))
       else maxOpt2(t, Some(m))
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ 
-//│ -------------- executing -------------
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Label($split_1$,false,Match(Ref(ls),List((Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Assign($tmp,Ref(x),Break($split_root$))), (Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref(ls),Ident(h)),Assign($argument1$,Select(Ref(ls),Ident(t)),Assign(t,Ref($argument1$),Assign(h,Ref($argument0$),Match(Ref(x),List((Cls(object:None,Select(Ref(member:None),Ident(class))),Break($split_1$)), (Cls(class:Some,Select(Ref(member:Some),Ident(class))),Assign($argument0$,Select(Ref(x),Ident(x)),Assign(m,Ref($argument0$),Assign($scrut,Call(Ref(builtin:>),List(Arg(None,Ref(h)), Arg(None,Ref(m)))),Match(Ref($scrut),List((Lit(BoolLit(true)),Break($split_1$))),Some(Assign($tmp,Call(Ref(member:Some),List(Arg(None,Ref(m)))),Assign($tmp,Call(Ref(member:maxOpt2),List(Arg(None,Ref(t)), Arg(None,Ref($tmp)))),Break($split_root$)))),End())))))),Some(Break($split_default$)),End()))))))),Some(Break($split_default$)),End()),Assign($tmp,Call(Ref(member:Some),List(Arg(None,Ref(h)))),Assign($tmp,Call(Ref(member:maxOpt2),List(Arg(None,Ref(t)), Arg(None,Ref($tmp)))),Break($split_root$)))),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
@@ -160,42 +158,50 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│ JS (unsanitized):
 //│ let zipWith, tmp10, tmp11, tmp12, lambda;
 //│ zipWith = function zipWith(xsys, f) {
-//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp13, tmp14, tmp15;
-//│   if (runtime.Tuple.isArrayLike(xsys) && xsys.length === 2) {
-//│     first0 = runtime.Tuple.get(xsys, 0);
-//│     first1 = runtime.Tuple.get(xsys, 1);
-//│     if (first0 instanceof Cons1.class) {
-//│       param0 = first0.h;
-//│       param1 = first0.t;
-//│       hx = param0;
-//│       tx = param1;
-//│       if (first1 instanceof Cons1.class) {
-//│         param01 = first1.h;
-//│         param11 = first1.t;
-//│         hy = param01;
-//│         ty = param11;
-//│         tmp13 = runtime.safeCall(f(hx, hy));
-//│         tmp14 = globalThis.Object.freeze([
-//│           tx,
-//│           ty
-//│         ]);
-//│         tmp15 = zipWith(tmp14, f);
-//│         return Cons1(tmp13, tmp15)
+//│   let hy, ty, hx, tx, element1$, element0$, argument0$, argument1$, argument0$1, argument1$1, tmp13, tmp14, tmp15, tmp16;
+//│   split_root$: {
+//│     split_default$: {
+//│       if (runtime.Tuple.isArrayLike(xsys) && xsys.length === 2) {
+//│         element0$ = runtime.Tuple.get(xsys, 0);
+//│         element1$ = runtime.Tuple.get(xsys, 1);
+//│         if (element0$ instanceof Cons1.class) {
+//│           argument0$ = element0$.h;
+//│           argument1$ = element0$.t;
+//│           if (element1$ instanceof Cons1.class) {
+//│             argument0$1 = element1$.h;
+//│             argument1$1 = element1$.t;
+//│             ty = argument1$1;
+//│             hy = argument0$1;
+//│             tx = argument1$;
+//│             hx = argument0$;
+//│             tmp13 = runtime.safeCall(f(hx, hy));
+//│             tmp14 = globalThis.Object.freeze([
+//│               tx,
+//│               ty
+//│             ]);
+//│             tmp15 = zipWith(tmp14, f);
+//│             tmp16 = Cons1(tmp13, tmp15);
+//│             break split_root$
+//│           } else {
+//│             break split_default$
+//│           }
+//│         } else if (element0$ instanceof Nil1.class) {
+//│           if (element1$ instanceof Nil1.class) {
+//│             tmp16 = Nil1;
+//│             break split_root$
+//│           } else {
+//│             break split_default$
+//│           }
+//│         } else {
+//│           break split_default$
+//│         }
 //│       } else {
-//│         throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│         break split_default$
 //│       }
-//│     } else if (first0 instanceof Nil1.class) {
-//│       if (first1 instanceof Nil1.class) {
-//│         return Nil1
-//│       } else {
-//│         throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│       }
-//│     } else {
-//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
 //│     }
-//│   } else {
-//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
+//│     throw globalThis.Object.freeze(new globalThis.Error("match error"));
 //│   }
+//│   return tmp16
 //│ };
 //│ tmp10 = Predef.id(Nil1);
 //│ tmp11 = Predef.id(Nil1);
@@ -206,98 +212,9 @@ zipWith([id(Nil), id(Nil)], (x, y) => x)
 //│ lambda = (undefined, function (x, y) { return x });
 //│ zipWith(tmp12, lambda)
 //│ >>>>>>>>>>>>>>>>>>>>>>>>> Deforestation JS >>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ let zipWith, tmp10, tmp11, tmp12, lambda, zipWith_inst_0_tsni, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1, match_xsys_arm_Deforest_Arr_2_inst_0_tsni;
-//│ match_xsys_arm_Deforest_Arr_2_inst_0_tsni = (undefined, function (f, _deforest_Deforest_Arr_2_0_inst_0_tsni, _deforest_Deforest_Arr_2_1_inst_0_tsni) {
-//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp13, tmp14, tmp15, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11;
-//│   first0 = _deforest_Deforest_Arr_2_0_inst_0_tsni;
-//│   first1 = _deforest_Deforest_Arr_2_1_inst_0_tsni;
-//│   if (first0 instanceof Cons1.class) {
-//│     param0 = first0.h;
-//│     param1 = first0.t;
-//│     hx = param0;
-//│     tx = param1;
-//│     if (first1 instanceof Cons1.class) {
-//│       param01 = first1.h;
-//│       param11 = first1.t;
-//│       hy = param01;
-//│       ty = param11;
-//│       tmp13 = runtime.safeCall(f(hx, hy));
-//│       _deforest_Deforest_Arr_2_01 = tx;
-//│       _deforest_Deforest_Arr_2_11 = ty;
-//│       tmp14 = (f1) => {
-//│         return match_xsys_arm_Deforest_Arr_2_inst_0_tsni(f1, _deforest_Deforest_Arr_2_01, _deforest_Deforest_Arr_2_11)
-//│       };
-//│       tmp15 = zipWith_inst_0_tsni(tmp14, f);
-//│       return Cons1(tmp13, tmp15)
-//│     } else {
-//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│     }
-//│   } else if (first0 instanceof Nil1.class) {
-//│     if (first1 instanceof Nil1.class) {
-//│       return Nil1
-//│     } else {
-//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│     }
-//│   } else {
-//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│   }
-//│ });
-//│ zipWith_inst_0_tsni = function zipWith_inst_0_tsni(xsys, f) {
-//│   return runtime.safeCall(xsys(f))
-//│ };
-//│ zipWith = function zipWith(xsys, f) {
-//│   let first1, first0, param0, param1, hx, tx, param01, param11, hy, ty, tmp13, tmp14, tmp15;
-//│   if (runtime.Tuple.isArrayLike(xsys) && xsys.length === 2) {
-//│     first0 = runtime.Tuple.get(xsys, 0);
-//│     first1 = runtime.Tuple.get(xsys, 1);
-//│     if (first0 instanceof Cons1.class) {
-//│       param0 = first0.h;
-//│       param1 = first0.t;
-//│       hx = param0;
-//│       tx = param1;
-//│       if (first1 instanceof Cons1.class) {
-//│         param01 = first1.h;
-//│         param11 = first1.t;
-//│         hy = param01;
-//│         ty = param11;
-//│         tmp13 = runtime.safeCall(f(hx, hy));
-//│         tmp14 = globalThis.Object.freeze([
-//│           tx,
-//│           ty
-//│         ]);
-//│         tmp15 = zipWith(tmp14, f);
-//│         return Cons1(tmp13, tmp15)
-//│       } else {
-//│         throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│       }
-//│     } else if (first0 instanceof Nil1.class) {
-//│       if (first1 instanceof Nil1.class) {
-//│         return Nil1
-//│       } else {
-//│         throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│       }
-//│     } else {
-//│       throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│     }
-//│   } else {
-//│     throw globalThis.Object.freeze(new globalThis.Error("match error"))
-//│   }
-//│ };
-//│ tmp10 = Predef.id(Nil1);
-//│ tmp11 = Predef.id(Nil1);
-//│ _deforest_Deforest_Arr_2_0 = tmp10;
-//│ _deforest_Deforest_Arr_2_1 = tmp11;
-//│ tmp12 = (f) => {
-//│   return match_xsys_arm_Deforest_Arr_2_inst_0_tsni(f, _deforest_Deforest_Arr_2_0, _deforest_Deforest_Arr_2_1)
-//│ };
-//│ lambda = (undefined, function (x, y) { return x });
-//│ zipWith_inst_0_tsni(tmp12, lambda)
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(xsys),List((Tup(2,false),Assign($element0$,Call(Select(Select(Ref($runtime),Ident(Tuple)),Ident(get)),List(Arg(None,Ref(xsys)), Arg(None,Lit(IntLit(0))))),Assign($element1$,Call(Select(Select(Ref($runtime),Ident(Tuple)),Ident(get)),List(Arg(None,Ref(xsys)), Arg(None,Lit(IntLit(1))))),Match(Ref($element0$),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref($element0$),Ident(h)),Assign($argument1$,Select(Ref($element0$),Ident(t)),Match(Ref($element1$),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref($element1$),Ident(h)),Assign($argument1$,Select(Ref($element1$),Ident(t)),Assign(ty,Ref($argument1$),Assign(hy,Ref($argument0$),Assign(tx,Ref($argument1$),Assign(hx,Ref($argument0$),Assign($tmp,Call(Ref(f),List(Arg(None,Ref(hx)), Arg(None,Ref(hy)))),Assign($tmp,Tuple(false,List(Arg(None,Ref(tx)), Arg(None,Ref(ty)))),Assign($tmp,Call(Ref(member:zipWith),List(Arg(None,Ref($tmp)), Arg(None,Ref(f)))),Assign($tmp,Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp)))),Break($split_root$))))))))))))),Some(Break($split_default$)),End())))), (Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Match(Ref($element1$),List((Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Assign($tmp,Ref(member:Nil),Break($split_root$)))),Some(Break($split_default$)),End()))),Some(Break($split_default$)),End()))))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<< Deforestation JS <<<<<<<<<<<<<<<<<<<<<<<<<<
 //│ = Nil
 //│ >>>>>>>>>>>>>>>>>>>>>>>>>>> Deforestation >>>>>>>>>>>>>>>>>>>>>>>>>>>
-//│ ---------- deforest summary ----------
-//│ Tuple(false,List(Arg(None,Ref(tx)), Arg(None,Ref(ty))))@1@inst_0_tsni --> Ref(xsys)@inst_0_tsni@Deforest_Arr_2
-//│ Tuple(false,List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp))))@2@inst__tsni --> Ref(xsys)@inst_0_tsni@Deforest_Arr_2
-//│ -------------- executing -------------
-//│ = Nil
+//│ Not deforestable: not supported: Label($split_root$,false,Label($split_default$,false,Match(Ref(xsys),List((Tup(2,false),Assign($element0$,Call(Select(Select(Ref($runtime),Ident(Tuple)),Ident(get)),List(Arg(None,Ref(xsys)), Arg(None,Lit(IntLit(0))))),Assign($element1$,Call(Select(Select(Ref($runtime),Ident(Tuple)),Ident(get)),List(Arg(None,Ref(xsys)), Arg(None,Lit(IntLit(1))))),Match(Ref($element0$),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref($element0$),Ident(h)),Assign($argument1$,Select(Ref($element0$),Ident(t)),Match(Ref($element1$),List((Cls(class:Cons,Select(Ref(member:Cons),Ident(class))),Assign($argument0$,Select(Ref($element1$),Ident(h)),Assign($argument1$,Select(Ref($element1$),Ident(t)),Assign(ty,Ref($argument1$),Assign(hy,Ref($argument0$),Assign(tx,Ref($argument1$),Assign(hx,Ref($argument0$),Assign($tmp,Call(Ref(f),List(Arg(None,Ref(hx)), Arg(None,Ref(hy)))),Assign($tmp,Tuple(false,List(Arg(None,Ref(tx)), Arg(None,Ref(ty)))),Assign($tmp,Call(Ref(member:zipWith),List(Arg(None,Ref($tmp)), Arg(None,Ref(f)))),Assign($tmp,Call(Ref(member:Cons),List(Arg(None,Ref($tmp)), Arg(None,Ref($tmp)))),Break($split_root$))))))))))))),Some(Break($split_default$)),End())))), (Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Match(Ref($element1$),List((Cls(object:Nil,Select(Ref(member:Nil),Ident(class))),Assign($tmp,Ref(member:Nil),Break($split_root$)))),Some(Break($split_default$)),End()))),Some(Break($split_default$)),End()))))),Some(Break($split_default$)),End()),Throw(Instantiate(false,Select(Ref(globalThis:globalThis),Ident(Error)),List(Arg(None,Lit(StrLit(match error))))))),Return(Ref($tmp),false))
 //│ <<<<<<<<<<<<<<<<<<<<<<<<<<< Deforestation <<<<<<<<<<<<<<<<<<<<<<<<<<<
