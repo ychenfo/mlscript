@@ -45,11 +45,11 @@ class BlockTransformer(subst: SymbolSubst):
                 (arms2 is arms) &&
                 (dflt2 is dflt) && (rst2 is rst)
               then b else Match(scrut2, arms2, dflt2, rst2)
-    case Label(lbl, bod, rst) =>
+    case Label(lbl, loop, bod, rst) =>
       val lbl2 = applyLocal(lbl)
       val bod2 = applySubBlock(bod)
       val rst2 = applySubBlock(rst)
-      if (lbl2 is lbl) && (bod2 is bod) && (rst2 is rst) then b else Label(lbl2, bod2, rst2)
+      if (lbl2 is lbl) && (bod2 is bod) && (rst2 is rst) then b else Label(lbl2, loop, bod2, rst2)
     case Begin(sub, rst) =>
       val sub2 = applySubBlock(sub)
       val rst2 = applySubBlock(rst)
@@ -186,7 +186,7 @@ class BlockTransformer(subst: SymbolSubst):
     case defn: FunDefn => k(applyFunDefn(defn))
     case defn: ValDefn => applyValDefn(defn)(k)
     case ClsLikeDefn(own, isym, sym, kind, paramsOpt, auxParams, parentPath, methods,
-        privateFields, publicFields, preCtor, ctor, mod)
+        privateFields, publicFields, preCtor, ctor, mod, bufferable)
     =>
       val own2 = own.mapConserve(_.subst)
       val isym2 = isym.subst
@@ -211,7 +211,7 @@ class BlockTransformer(subst: SymbolSubst):
               (preCtor2 is preCtor) && (ctor2 is ctor) &&
               (mod2 is mod)
             then defn else ClsLikeDefn(own2, isym2, sym2, kind, paramsOpt2, 
-              auxParams2, parentPath2, methods2, privateFields2, publicFields2, preCtor2, ctor2, mod2)
+              auxParams2, parentPath2, methods2, privateFields2, publicFields2, preCtor2, ctor2, mod2, bufferable)
       parentPath match
         case Some(pp) => applyPath(pp): pp2 =>
           withoutParentPath:

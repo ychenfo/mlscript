@@ -214,7 +214,7 @@ final class LlirBuilder(using Elaborator.State)(tl: TraceLogger, uid: FreshInt):
   private def bClsLikeDef(e: ClsLikeDefn)(using ctx: Ctx)(using Raise, Scope): ClassInfo =
     trace[ClassInfo](s"bClsLikeDef begin", x => s"bClsLikeDef end: ${x.show}"):
       val ClsLikeDefn(
-        _own, isym, _sym, kind, paramsOpt, auxParams, parentSym, methods, privateFields, publicFields, preCtor, ctor, mod) = e
+        _own, isym, _sym, kind, paramsOpt, auxParams, parentSym, methods, privateFields, publicFields, preCtor, ctor, mod, bufferable) = e
       if !ctx.isTopLevel then
         bErrStop(msg"Non top-level definition ${isym.toString()} not supported")
       else
@@ -478,7 +478,7 @@ final class LlirBuilder(using Elaborator.State)(tl: TraceLogger, uid: FreshInt):
           Ls(Arg(N, Value.Lit(Tree.StrLit(e))))))
       if ident.name === "Error" =>
         Node.Panic(e)
-      case Label(label, body, rest) => TODO("Label not supported")
+      case Label(label, loop, body, rest) => TODO("Label not supported")
       case Break(label) => TODO("Break not supported")
       case Continue(label) => TODO("Continue not supported")
       case Begin(sub, rest) =>
@@ -519,7 +519,7 @@ final class LlirBuilder(using Elaborator.State)(tl: TraceLogger, uid: FreshInt):
   def registerClasses(b: Block)(using ctx: Ctx)(using Raise, Scope): Ctx =
     b match
     case Define(cd @ ClsLikeDefn(_own, isym, sym, kind, _paramsOpt, auxParams,
-        parentSym, methods, privateFields, publicFields, preCtor, ctor, mod), rest) =>
+        parentSym, methods, privateFields, publicFields, preCtor, ctor, mod, bufferable), rest) =>
       if !auxParams.isEmpty then
         bErrStop(msg"The class ${sym.nme} has auxiliary parameters, which are not yet supported")
       val c = bClsLikeDef(cd)
@@ -546,7 +546,7 @@ final class LlirBuilder(using Elaborator.State)(tl: TraceLogger, uid: FreshInt):
         case Match(scrut, arms, dflt, rest) => applyBlock(rest)
         case Return(res, implct) =>
         case Throw(exc) =>
-        case Label(label, body, rest) => applyBlock(rest)
+        case Label(label, loop, body, rest) => applyBlock(rest)
         case Break(label) =>
         case Continue(label) =>
         case Begin(sub, rest) => applyBlock(rest)

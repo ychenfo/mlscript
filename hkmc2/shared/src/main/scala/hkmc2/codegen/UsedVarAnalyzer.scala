@@ -138,7 +138,7 @@ class UsedVarAnalyzer(b: Block, handlerPaths: Opt[HandlerPaths])(using State):
             accessed = accessed.addMutated(lhs)
             applyResult(rhs)
             applyBlock(rest)
-          case Label(label, body, rest) =>
+          case Label(label, loop, body, rest) =>
             accessed ++= blkAccessesShallow(body, S(label))
             applyBlock(rest)
           case _ => super.applyBlock(b)
@@ -173,7 +173,7 @@ class UsedVarAnalyzer(b: Block, handlerPaths: Opt[HandlerPaths])(using State):
         blkAccessesShallow(f.body).withoutLocals(fVars)
       case c: ClsLikeDefn =>
         val methodSyms = c.methods.map(_.sym).toSet
-        c.methods.foldLeft(blkAccessesShallow(c.preCtor) ++ blkAccessesShallow(c.ctor)):
+        val ret = c.methods.foldLeft(blkAccessesShallow(c.preCtor) ++ blkAccessesShallow(c.ctor)):
           case (acc, fDefn) =>
             // class methods do not need to be lifted, so we don't count calls to their methods.
             // a previous reference to this class's block member symbol is enough to assume any
@@ -182,6 +182,11 @@ class UsedVarAnalyzer(b: Block, handlerPaths: Opt[HandlerPaths])(using State):
             // however, we must keep references to the class itself!
             val defnAccess = findAccessesShallow(fDefn)
             acc ++ defnAccess.withoutBms(methodSyms)
+        if c.parentPath.isDefined && isHandlerClsPath(c.parentPath.get) then
+          // for continuation classes, treat them like they only read variables
+          AccessInfo(ret.accessed ++ ret.mutated, Set.empty, ret.refdDefns)
+        else
+          ret
       case _: ValDefn => AccessInfo.empty
     
     accessedCache.getOrElseUpdate(defn.sym, create)
@@ -307,7 +312,7 @@ class UsedVarAnalyzer(b: Block, handlerPaths: Opt[HandlerPaths])(using State):
             infos.map(merge) // IMPORTANT: rec all first, then merge, since each branch is mutually exclusive
             dfltInfo.map(merge)
             applyBlock(rest)
-          case Label(label, body, rest) =>
+          case Label(label, loop, body, rest) =>
             // for now, if the loop body mutates a variable and that variable is accessed or mutated by a defn,
             // or if it reads a variable that is later mutated by an instance inside the loop,
             // we put it in a capture. this preserves the current semantics of the IR (even though it's incorrect).
@@ -333,16 +338,7 @@ class UsedVarAnalyzer(b: Block, handlerPaths: Opt[HandlerPaths])(using State):
 
         def handleCalledBms(called: BlockMemberSymbol): Unit = defnSyms.get(called) match
           case None => ()
-          case Some(defn) =>
-            // special case continuation classes
-            defn match
-              case c: ClsLikeDefn => c.parentPath match
-                case S(path) if isHandlerClsPath(path) => return
-                    // treat the continuation class as if it does not exist
-                case _ => ()
-              case _ => ()
-            
-
+          case Some(defn) => 
             val AccessInfo(accessed, muted, refd) = accessMap(defn.sym)
             val muts = muted.intersect(thisVars)
             val reads = defn.freeVars.intersect(thisVars) -- muts
