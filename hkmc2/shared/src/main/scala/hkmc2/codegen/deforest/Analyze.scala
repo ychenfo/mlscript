@@ -109,6 +109,55 @@ class DeforestPreAnalyzer(
   given stratVarUidState: Uid.StratVar.State = new Uid.StratVar.State
   import StratVarState.freshVar
   
+  enum InCtx:
+    case ClsLk(sym: Symbol)
+    case Fn(f: FunDefn)
+    case Lbl(l: Label)
+    case Mtch(m: Match, cse: Opt[ClassLikeSymbol])
+    
+  object ctxTracker:
+    var ctx: Ls[InCtx] = Nil
+    def fn = ctx
+      .find:
+        case _: InCtx.Fn => true
+        case _ => false
+      .map(_.asInstanceOf[InCtx.Fn].f)
+    def lbls = ctx.collect:
+      case l: InCtx.Lbl => l.l
+    def mtchs = ctx.collect:
+      case m: InCtx.Mtch => m.m
+    def inCls(c: Symbol) = ctx = InCtx.ClsLk(c) :: ctx
+    def inFn[T](f: FunDefn)(body: => T) =
+      ctx = InCtx.Fn(f) :: ctx
+      body
+      endCtx
+    def inLbl[T](l: Label)(body: => T) =
+      ctx = InCtx.Lbl(l) :: ctx
+      body
+      endCtx
+    def inMtch[T](m: Match, cse: Opt[ClassLikeSymbol])(body: => T) =
+      ctx = InCtx.Mtch(m, cse) :: ctx
+      body
+      endCtx
+    def endCtx = ctx = ctx.tail
+    
+  val matchScrutToCtxOfMatch = mutable.Map.empty[ResultId, Ls[InCtx]]
+  val labelSymToCtxOfLabel = mutable.Map.empty[Symbol, Ls[InCtx]]
+  
+  def fullRestOf(mScrutIdOrLabelSym: ResultId | Symbol): Block =
+    val selfRest -> inCtx = mScrutIdOrLabelSym match
+      case lSym: Symbol => labelSymToLabelBlk(lSym).rest -> labelSymToCtxOfLabel(lSym)
+      case _ =>
+        val scrutId = mScrutIdOrLabelSym.asInstanceOf[ResultId]
+        matchScrutToMatchBlock(scrutId).rest -> matchScrutToCtxOfMatch(scrutId)
+    inCtx
+      .collect:
+        case InCtx.Lbl(l) => l.rest
+        case InCtx.Mtch(m, cse) => m.rest
+      .foldLeft(selfRest)(Begin.apply)
+      .flattened
+  
+  
   // this contains
   // - top level functions
   // - exported functions in modules
@@ -134,6 +183,7 @@ class DeforestPreAnalyzer(
   val ownedValDefSyms = mutable.Set.empty[BlockMemberSymbol]
   lazy val topLevelDefinedFunSyms = topLevelFunSymToFun.keySet
   val nonTopLevelDefinedFunSyms = mutable.Set.empty[BlockMemberSymbol]
+  val labelSymToLabelBlk = mutable.Map.empty[Symbol, Label]
   def getProdVarForSym(s: Symbol) = s match
     case _: (BuiltinSymbol | TopLevelSymbol) => noProdStratVar
     case _ if s.asCls.isDefined => noProdStratVar
@@ -178,13 +228,14 @@ class DeforestPreAnalyzer(
   private def isPrivatelyDefined(s: Symbol) =
     imported && importedInfo.privateSymbols.contains(s)
   override def applyFunDefn(fun: FunDefn): Unit =
-    inFunDef match
+    ctxTracker.fn match
       case N =>
         handleable = moduleFuns.fold(true)(s => s.contains(fun.sym))
         inFunDef = S(fun.sym)
-        symsDefinedForFun = S(fun.deforestDefinedVars)
-        super.applyFunDefn(fun)
-        maybeCollectFun(fun)
+        ctxTracker.inFn(fun):
+          symsDefinedForFun = S(fun.deforestDefinedVars)
+          super.applyFunDefn(fun)
+          maybeCollectFun(fun)
         inFunDef = N
         symsDefinedForFun = N
       case S(value) =>
@@ -234,6 +285,7 @@ class DeforestPreAnalyzer(
   
   override def applyBlock(b: Block): Unit = b match
     case m@Match(scrut, arms, dflt, rest) =>
+      matchScrutToCtxOfMatch += scrut.uid -> ctxTracker.ctx
       matchScrutToMatchBlock += scrut.uid -> m
       matchScrutToParentMatchScruts += scrut.uid -> inMatchScruts
       applyPath(scrut)
@@ -244,14 +296,22 @@ class DeforestPreAnalyzer(
           case Case.Cls(cls, path) => S(cls)
           case _ => N
         inMatchScrutsArms = (scrut.uid -> cse) :: inMatchScrutsArms
-        applyCase(arm._1); applySubBlock(arm._2)
+        ctxTracker.inMtch(m, cse):
+          applyCase(arm._1); applySubBlock(arm._2)
         inMatchScrutsArms = prev
       
       inMatchScrutsArms = (scrut.uid -> N) :: inMatchScrutsArms
-      dflt.foreach(applySubBlock)
+      ctxTracker.inMtch(m, N):
+        dflt.foreach(applySubBlock)
       inMatchScrutsArms = prev
       
       applySubBlock(rest)
+    case l: Label =>
+      labelSymToCtxOfLabel += l.label -> ctxTracker.ctx
+      labelSymToLabelBlk += l.label -> l
+      ctxTracker.inLbl(l):
+        applyBlock(l.body)
+      applyBlock(l.rest)
     case _ => super.applyBlock(b)
   
   override def applyDefn(defn: Defn): Unit = defn match
@@ -457,6 +517,11 @@ class DeforestConstraintsCollector(val preAnalyzer: DeforestPreAnalyzer):
     case Throw(exc) =>
       processResult(exc)
       freshVar("throw", cc.forFun).asProdStrat
+    case Label(l, false, body, rest) =>
+      processBlock(body)
+      processBlock(rest)
+    case Break(_) =>
+      freshVar("break", cc.forFun).asProdStrat
     case _ => throw NotDeforestableException(s"not supported: $b")
 
   def processResult(r: Result)(using

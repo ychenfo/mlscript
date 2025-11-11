@@ -343,7 +343,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
         else // build a new function for the rest of this fusing match
           val sym = rewritePrepare.fusingMatchIdToMatchRestFunSymbols(matchId)
           val freeVars = withTheRestOfPossiblyFusingMatch
-            .sortedFvsForTransformedBlocks(rewritePrepare.alwaysNonFreeVars)
+            .sortedFvsForTransformedBlocks(rewritePrepare.alwaysNonFreeVars)(using preAnalyzer)
           val newSymbols = freeVars.map(s => VarSymbol(Tree.Ident(s.nme)))
           val newFunDef = FunDefn(N, sym, newSymbols.asParamList :: Nil,
             withTheRestOfPossiblyFusingMatch.replaceSymbols(freeVars.zip(newSymbols).toMap))
@@ -409,7 +409,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
             // this rewrittenBody here already has its selection replaced with
             // the pre-computed var symbols (if the arm is used multiple times)
             // or the temp symbols (if the arm is used only once)
-            val rewrittenBody = Begin(Transform(dest.matchId._2)(originalMatchArmBody), transformedRest).flattened
+            val rewrittenBody = Begin(Transform(dest.matchId._2, rewritingFusionBranch = true)(originalMatchArmBody), transformedRest).flattened
             val res = maybeFunSym match
               case N => R(rewrittenBody)
               case Some(funSym) =>
@@ -456,7 +456,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
   // rewrite ctor and dtors
   // replace selections in match arms
   // replace refer site symbols to their new symbols
-  class Transform(instId: InstantiationId) extends BlockTransformer(uselessSymbolSubst):
+  class Transform(instId: InstantiationId, rewritingFusionBranch: Bool = false) extends BlockTransformer(uselessSymbolSubst):
     extension (resId: ResultId)
       def withInstId = resId -> instId
     override def applyBlock(b: Block): Block = b match
@@ -467,11 +467,22 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
           val oneOfParentMatchRestHasExplicitRet =
             preAnalyzer.matchScrutToParentMatchScruts(scrut.uid).foldRight(false): (pid, acc) =>
               acc || preAnalyzer.matchScrutToMatchBlock(pid).rest.hasExplicitRet
-          val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) || oneOfParentMatchRestHasExplicitRet
+          // val needExplicitRet = rest.hasExplicitRet || arms.exists(_._2.hasExplicitRet) //|| oneOfParentMatchRestHasExplicitRet
+          val needExplicitRet =
+            rest.hasExplicitRet ||
+            arms.exists(_._2.hasExplicitRet) ||
+            locally:
+              import preAnalyzer.InCtx
+              preAnalyzer.matchScrutToCtxOfMatch(scrut.uid).exists:
+                case InCtx.Lbl(l) => l.rest.hasExplicitRet
+                case InCtx.Mtch(m, cse) => m.rest.hasExplicitRet
+                case _ => false
+              
           val freeVars = rewritePrepare.freeVarsOfOriginalMatchesConsideringDeforestation(scrut.uid.withInstId)
           applyPath(scrut): newScrut =>
             Return(Call(newScrut, freeVars.asArgsList)(false, false), !needExplicitRet)
         else
+          // this is just a dead code elimination
           val allArmWillBeNonEnd =
             dflt.fold(false)(_.willBeNonEndTailBlock(instId, rewritePrepare)) &&
             arms.forall:
@@ -480,6 +491,8 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
             super.applyBlock(Match(scrut, arms, dflt, End("")))
           else
             super.applyBlock(b)
+      case Break(label) if rewritingFusionBranch =>
+        applyBlock(preAnalyzer.fullRestOf(label))
       case _ => super.applyBlock(b)
     
     
@@ -611,7 +624,7 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
 // free vars that may be introduced by deforestation:
 // 1. the free vars from the `rest` of the their parent matches
 // 2. the free vars caused by the substitution of selections of scrutinees of their parent matches
-class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends BlockTraverser:
+class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol])(using pre: DeforestPreAnalyzer) extends BlockTraverser:
   protected val ctx = mutable.Set.from(alwaysDefined)
   protected val result = mutable.Set.empty[Symbol]
   
@@ -647,7 +660,7 @@ class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends Block
         applyBlock(rest)
         ctx -= sym
       case c: ClsLikeDefn => die // not supported
-    
+    case Break(label) => applyBlock(pre.fullRestOf(label))
     case _ => super.applyBlock(b)
       
   override def applyValue(v: Value): Unit = v match
@@ -674,7 +687,10 @@ class FreeVarTraverser(val blk: Block, alwaysDefined: Set[Symbol]) extends Block
 class FreeVarTraverserForMatchConsideringDeforestation(
   matchId: MatchId,
   drwp: DeforestRewritePrepare
-) extends FreeVarTraverser(drwp.preAnalyzer.matchScrutToMatchBlock(matchId._1), drwp.alwaysNonFreeVars):
+) extends FreeVarTraverser(
+  drwp.preAnalyzer.matchScrutToMatchBlock(matchId._1),
+  drwp.alwaysNonFreeVars
+)(using drwp.preAnalyzer):
   given dState: Deforest.State = drwp.dState
   val instantiationId = matchId._2
   val preAnalyzer = drwp.preAnalyzer
@@ -729,16 +745,17 @@ class FreeVarTraverserForMatchConsideringDeforestation(
     case _ => super.applyPath(p)
   
   override lazy val freeVars: List[Symbol] = 
-    val Match(_, arms, dflt, rest) = blk: @unchecked
-    val parentMatchRest = drwp.preAnalyzer
-      .matchScrutToParentMatchScruts(matchId._1)
-      .foldRight[Block](End("")): (p, acc) =>
-        Begin(preAnalyzer.matchScrutToMatchBlock(p).rest, acc)
+    val Match(scrut, arms, dflt, _) = blk: @unchecked
+    val realRest = preAnalyzer.fullRestOf(scrut.uid)
+    // val parentMatchRest = drwp.preAnalyzer
+    //   .matchScrutToParentMatchScruts(matchId._1)
+    //   .foldRight[Block](End("")): (p, acc) =>
+    //     Begin(preAnalyzer.matchScrutToMatchBlock(p).rest, acc)
     (arms.map(_._2) ++ dflt).foreach: a =>
       // dflt may just be `throw error``, and `rest` may use vars assigned in non default arms.
       // So use `flattened` to remove dead code (after `throw error`) and spurious free vars.
       // Also take care of the `rest`s of its parent match blocks.
-      val realArm = Begin(a, Begin(rest, parentMatchRest)).flattened
+      val realArm = Begin(a, realRest).flattened
       applyBlock(realArm)
     (result.diff(blk.definedVars)).toList.sortBy(_.uid)
 
@@ -776,7 +793,7 @@ class WillBeNonEndTailBlockTraverser(b: Block, instId: InstantiationId, drwp: De
 extension (b: Block)
   def replaceSymbols(freeVarsAndTheirNewSyms: Map[Symbol, Symbol]) =
     new ReplaceLocalSymTransformer(freeVarsAndTheirNewSyms).applyBlock(b)
-  def sortedFvsForTransformedBlocks(alwaysDefined: Set[Symbol]) =
+  def sortedFvsForTransformedBlocks(alwaysDefined: Set[Symbol])(using DeforestPreAnalyzer) =
     new FreeVarTraverser(b, alwaysDefined).freeVars
   def hasExplicitRet =
     new HasExplicitRetTraverser(b).result
