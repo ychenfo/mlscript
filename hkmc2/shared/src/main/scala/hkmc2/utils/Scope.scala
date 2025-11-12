@@ -113,7 +113,7 @@ case class Scope
           (if extraLoc.isEmpty then Nil else msg"which references the symbol introduced here" -> extraLoc :: Nil),
         extraInfo = Some(l -> l.getClass -> this),
         source = Diagnostic.Source.Compilation))
-      l.nme
+      l.nme + "_not_found"
   
   // * Note: it is sound for an existing name to have been allocated with a different prefix (which is only cosmetic)
   def allocateOrGetName(l: Local, prefix: Str = ""): Str =

@@ -491,6 +491,11 @@ class DeforestRewriter(val rewritePrepare: DeforestRewritePrepare):
             super.applyBlock(Match(scrut, arms, dflt, End("")))
           else
             super.applyBlock(b)
+      case Label(lSym, loop, body, rest) =>
+        if body.willBeNonEndTailBlock(instId, rewritePrepare) then
+          applyBlock(body)
+        else
+          super.applyBlock(b)
       case Break(label) if rewritingFusionBranch =>
         applyBlock(preAnalyzer.fullRestOf(label))
       case _ => super.applyBlock(b)
@@ -785,7 +790,8 @@ class WillBeNonEndTailBlockTraverser(b: Block, instId: InstantiationId, drwp: De
           arms.forall:
             case (_, b) => b.willBeNonEndTailBlock(instId, drwp)
     case _: End => ()
-    case _: BlockTail => result = true
+    // TODO: what about break/continue? maybe just a full DCE
+    case _: (Return | Throw) => result = true
     case _ => super.applyBlock(b)
   
   applyBlock(b)
