@@ -204,3 +204,53 @@ class A with
 //│ ║  l.195: 	  fun g(x) = if x == 0 then 1 else @tailcall f(x - 1)
 //│ ╙──       	                                             ^^^^^^^^
 //│ = 0
+
+
+data object Nil
+data class (::) Cons(h, t)
+fun gen(x, acc) = if x < 0 then acc else gen(x - 1, x :: acc) 
+
+
+:expect 500500
+:sir
+fun rev(ls, acc) = if ls is
+  Nil then acc
+  Cons(h, t) then rev(t, () => h + acc())
+fun sum(ls) = ls()
+sum(rev(gen(1000, Nil), () => 0))
+//│ Lowered:
+//│ let rev⁰, sum⁰, tmp, lambda⁰, tmp1;
+//│ define rev⁰ as fun (ls, acc) {
+//│   loop loopLabel:
+//│     let t, h, arg$Cons$0$, arg$Cons$1$, lambda, ls_tmp, acc_tmp;
+//│     set ls_tmp = ls;
+//│     set acc_tmp = acc;
+//│     match ls
+//│       Nil⁰ =>
+//│         return acc
+//│       Cons⁰ =>
+//│         set arg$Cons$0$ = ls.h⁰;
+//│         set arg$Cons$1$ = ls.t⁰;
+//│         set t = arg$Cons$1$;
+//│         set h = arg$Cons$0$;
+//│         define lambda as fun () {
+//│           let tmp2;
+//│           set tmp2 = acc_tmp();
+//│           return +⁰(h, tmp2)
+//│         };
+//│         set ls = t;
+//│         set acc = lambda¹;
+//│         continue loopLabel
+//│       else
+//│         throw new globalThis⁰.Error⁰("match error")
+//│     end
+//│   end
+//│ };
+//│ define sum⁰ as fun (ls1) {
+//│   return ls1()
+//│ };
+//│ set tmp = gen⁰(1000, Nil⁰);
+//│ define lambda⁰ as fun () { return 0 };
+//│ set tmp1 = rev¹(tmp, lambda²);
+//│ sum¹(tmp1)
+//│ = 500500

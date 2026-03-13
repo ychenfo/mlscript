@@ -332,8 +332,37 @@ class TailRecOpt(using State, TL, Raise):
         case _ => super.applyBlock(b)
       
       def rewrite(b: Block) =
-        applyBlock(symRewriter.applyBlock(b))
-    
+        val transformed = applyBlock(symRewriter.applyBlock(b))
+
+        val assignedCaptures: Map[VarSymbol, TempSymbol] = paramSyms.map:
+          case sym => sym -> TempSymbol(N, sym.nme + "_tmp")
+        .toMap
+
+        val captureRefRewriter = new BlockTransformer(SymbolSubst()):
+          override def applyValue(v: Value)(k: Value => Block): Block = v match
+            case Value.Ref(vs: VarSymbol, disamb) if assignedCaptures.contains(vs) =>
+              k(Value.Ref(assignedCaptures(vs), disamb))
+            case _ => super.applyValue(v)(k)
+
+        val lambdaRewriter = new BlockTransformerShallow(SymbolSubst()):
+          override def applyDefn(defn: Defn)(k: Defn => Block): Block = defn match
+            case fun: FunDefn =>
+              val newBody = captureRefRewriter.applyBlock(fun.body)
+              k(if newBody is fun.body then fun
+                else FunDefn(fun.owner, fun.sym, fun.dSym, fun.params, newBody)(fun.forceTailRec))
+            case _ => super.applyDefn(defn)(k)
+          override def applyLam(lam: Lambda): Lambda =
+            val newBody = captureRefRewriter.applyBlock(lam.body)
+            if newBody is lam.body then lam
+            else Lambda(lam.params, newBody)
+
+        val rewritten = lambdaRewriter.applyBlock(transformed)
+        if rewritten is transformed then transformed
+        else
+          val withCopies = assignedCaptures.toList.foldRight(rewritten):
+            case ((original, copy), acc) => Assign(copy, Value.Ref(original), acc)
+          Scoped(assignedCaptures.values.toSet, withCopies)
+
     val arms = funs.map: f =>
       Case.Lit(Tree.IntLit(dSymIds(f.dSym))) -> FunRewriter(f).rewrite(f.body)
     
