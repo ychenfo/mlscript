@@ -1409,11 +1409,27 @@ class Lowering()(using Config, TL, Raise, State, Ctx, SymbolPrinter):
   
   def program(main: st.Blk, symbolsToPreserve: Set[BoundSymbol]): Program =
     
-    val (imps, funs, letValSyms, rest) = splitBlock(main.stats, Nil, Nil, Nil, Nil)
+    val (imps, funs, letValClsSyms, rest) = splitBlock(main.stats, Nil, Nil, Nil, Nil)
+    
+    // given loweringCtx: LoweringCtx = LoweringCtx.empty
+    
+    // FIXME: dedup with line 259?
+    val lets = letValClsSyms.flatMap:
+      // case cls: ClassLikeDef =>
+      //   if cls.owner.isEmpty && cls.hasDeclareModifier.isEmpty then
+      //     loweringCtx.collectScopedSym(cls.bsym)
+      //   N
+      // case vl: TermDefinition =>
+      //   if vl.owner.isEmpty && vl.hasDeclareModifier.isEmpty then
+      //     loweringCtx.collectScopedSym(vl.sym)
+      //   N
+      case ld: LetDecl => S(ld)
+      case _ => N
+    
     
     val blk =
       inScopedBlockExcept(symbolsToPreserve)(using LoweringCtx.empty):
-        block(funs ::: rest, R(main.res))(ImplctRet)
+        block(funs ::: lets ::: rest, R(main.res))(ImplctRet)
     
     val desug = LambdaRewriter.desugar(blk)
     
