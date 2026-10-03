@@ -1,0 +1,175 @@
+:js
+:noInline
+:flowBasedOpt debugDpe
+
+
+// the dead `x` is dropped when `g` is only called from a function
+:soir
+private fun g(x, y) = y
+fun h(z) = print(g(z, 4))
+h(1)
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > g⁰#0 @ g¹ -> eliminable: {0}
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define g⁰ as fun g¹(y) {
+//│   return y
+//│ };
+//│ define h⁰ as fun h¹(z) { let tmp; set tmp = g¹(4); return Predef⁰.print⁰(tmp) };
+//│ return h¹(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ > 4
+
+
+// a class ctor is never rewritten, so its call to `g` keeps every argument,
+// and in mono mode that keeps `x` for the call from `h` as well
+:soir
+private fun g(x, y) = y
+class B(z) with
+  print(g(z, 4))
+fun h(z) = print(g(z, 4))
+B(1)
+h(1)
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define g² as fun g³(x, y) {
+//│   return y
+//│ };
+//│ define h² as fun h³(z) {
+//│   let tmp;
+//│   set tmp = g³(z, 4);
+//│   return Predef⁰.print⁰(tmp)
+//│ };
+//│ define B⁰ as class B² {
+//│   private val z⁰;
+//│   constructor B¹(z) {
+//│     let tmp;
+//│     set B².this.z⁰ = z;
+//│     set tmp = g³(B².this.z⁰, 4);
+//│     do Predef⁰.print⁰(tmp);
+//│     end
+//│   }
+//│ };
+//│ do B¹(1);
+//│ return h³(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ > 4
+//│ > 4
+
+
+// in poly mode, only the ctor's instance of `g` keeps `x`
+:flowBasedOpt poly debugDpe
+:soir
+private fun g(x, y) = y
+class B(z) with
+  print(g(z, 4))
+fun h(z) = print(g(z, 4))
+B(1)
+h(1)
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > g⁴#0 @ h⁴.g⁵ -> eliminable: {0}
+//│ dead-param-elim > g⁴#0 @ h⁵.g⁵ -> eliminable: {0}
+//│ dead-param-elim > h⁶#0 @ h⁵ -> eliminable: {0}
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let h_g$g, h_g$g1, h$h;
+//│ @private
+//│ define h_g$g as fun h_g$g⁰(y) {
+//│   return y
+//│ };
+//│ @private
+//│ define h_g$g1 as fun h_g$g¹(y) {
+//│   return y
+//│ };
+//│ define h$h as fun h$h⁰() {
+//│   let tmp;
+//│   set tmp = h_g$g¹(4);
+//│   return Predef⁰.print⁰(tmp)
+//│ };
+//│ @private
+//│ define g⁴ as fun g⁵(x, y) {
+//│   return y
+//│ };
+//│ define h⁴ as fun h⁵(z) {
+//│   let tmp;
+//│   set tmp = h_g$g⁰(4);
+//│   return Predef⁰.print⁰(tmp)
+//│ };
+//│ define B³ as class B⁵ {
+//│   private val z¹;
+//│   constructor B⁴(z) {
+//│     let tmp;
+//│     set B⁵.this.z¹ = z;
+//│     set tmp = g⁵(B⁵.this.z¹, 4);
+//│     do Predef⁰.print⁰(tmp);
+//│     end
+//│   }
+//│ };
+//│ do B⁴(1);
+//│ return h$h⁰()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ > 4
+//│ > 4
+
+
+// the instance of `mk` in `main` drops the dead `u`
+:flowBasedOpt poly debugDpe
+:soir
+private fun mk(u, n) = B(n)
+class B(n)
+mk(0, 2)
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > mk⁰#0 @ mk¹ -> eliminable: {0}
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let mk$mk;
+//│ @private
+//│ define mk$mk as fun mk$mk⁰(n) {
+//│   return B⁶(n)
+//│ };
+//│ @private
+//│ define mk⁰ as fun mk¹(u, n) {
+//│   return B⁶(n)
+//│ };
+//│ define B⁷ as class B⁸ { constructor B⁶ };
+//│ return mk$mk⁰(2)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = B(_)
+
+
+// `mk` constructs `B`, whose ctor calls `mk`, so they form one group, which is never rewritten
+:flowBasedOpt poly debugDpe
+:soir
+private fun mk(u, n) = B(n)
+class B(n) with
+  if n > 0 do mk(0, n - 1)
+mk(0, 2)
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define mk² as fun mk³(u, n) {
+//│   return B⁹(n)
+//│ };
+//│ define B¹⁰ as class B¹¹ {
+//│   private val n⁰;
+//│   constructor B⁹(n) {
+//│     let scrut, tmp;
+//│     set B¹¹.this.n⁰ = n;
+//│     set scrut = >⁰(B¹¹.this.n⁰, 0);
+//│     match scrut
+//│       true =>
+//│         set tmp = -⁰(B¹¹.this.n⁰, 1);
+//│         do mk³(0, tmp);
+//│         end
+//│       else
+//│         end
+//│     end
+//│   }
+//│ };
+//│ return mk³(0, 2)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = B(_)

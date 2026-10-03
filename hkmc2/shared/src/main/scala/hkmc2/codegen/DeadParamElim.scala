@@ -55,7 +55,7 @@ class DeadParamElimSolver(val constraintSolver: FlowConstraintSolver, traceLogge
       collector.synthesizedInstIdToFunSym.get(instId).exists: rootFunSym =>
         prodFun.exprId match
           case (funSym: TermSymbol, _) =>
-            (collector.funToSccRep(funSym), collector.funToSccRep(rootFunSym)) match
+            (collector.sccRep(funSym), collector.sccRep(rootFunSym)) match
             case S(rep1) -> S(rep2) => rep1 is rep2
             case _ => false
           case _ => false
@@ -64,7 +64,7 @@ class DeadParamElimSolver(val constraintSolver: FlowConstraintSolver, traceLogge
     val prodRoots = Buffer.empty[(ProdFun, Int)]
     val consRoots = Buffer.empty[(ConsFun, Int)]
     for prodFun <- prodFuns do
-      if isSyntheticRoot(prodFun) || prodFun.dests.contains(UnknownCons) then
+      if isSyntheticRoot(prodFun) || prodFun.dests.contains(UnknownCons) || collector.isBlocked(prodFun) then
         prodFun.params.indices.foreach: i =>
           prodRoots += prodFun -> i
       else
@@ -81,7 +81,7 @@ class DeadParamElimSolver(val constraintSolver: FlowConstraintSolver, traceLogge
             prodRoots += prodFun -> i
 
     for consFun <- consFuns do
-      if consFun.srcs.contains(UnknownProd) then
+      if consFun.srcs.contains(UnknownProd) || collector.isBlocked(consFun) then
         consFun.params.indices.foreach: i =>
           consRoots += consFun -> i
       else

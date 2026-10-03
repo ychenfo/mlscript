@@ -71,14 +71,18 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
       // skip synthesized instIds — those rewrite in-place
       if path.nonEmpty && !collector.synthesizedInstIdToFunSym.contains(path)
     do
+      val referredFun = path.last.getReferredFun.getOrElse(lastWords(
+        s"instantiation path ${path.map(_.nme).mkString(".")} does not end in a function; a solver kept a blocked decision"))
       res.getOrElseUpdate(
         path,
-        collector.funToSccGroups(path.last.getReferredFun.get)
-          .map: f =>
-            val name = path.mkFunName + s"$$${f.nme}"
-            f -> (
-              new BlockMemberSymbol(name, Nil, true),
-              new TermSymbol(Fun, N, Tree.Ident(name), erasedType = f.erasedType))
+        collector.sccGroups(referredFun)
+          .map:
+            case f: TermSymbol =>
+              val name = path.mkFunName + s"$$${f.nme}"
+              f -> (
+                new BlockMemberSymbol(name, Nil, true),
+                new TermSymbol(Fun, N, Tree.Ident(name), erasedType = f.erasedType))
+            case cls: ClassSymbol => lastWords(s"the group of ${cls.nme} is copied, but a class is never specialized")
           .toMap)
     res
   end newPolyFnSyms
@@ -90,14 +94,14 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
         (instId, funSymMap) <- newPolyFnSyms
         (referringFun, (bms, tSym)) <- funSymMap.toList.sortBy(_._1.uid)
       yield
-        val original = pre.res.funSymToFunDefn(referringFun)
+        val original = pre.rootDefn(referringFun)
         mkPolyFunCopy(original, bms, tSym, mkRewriter(instId).rewriteFunDefn(original))
     
     val newFuns = newPolyFuns ++ otherNewFunDefns
     
     val rewrittenInPlace = Map.from[TermSymbol, RewrittenFunDefn]:
       for (selfInstId, funSym) <- collector.synthesizedInstIdToFunSym yield
-        funSym -> mkRewriter(selfInstId).rewriteFunDefn(pre.res.funSymToFunDefn(funSym))
+        funSym -> mkRewriter(selfInstId).rewriteFunDefn(pre.rootDefn(funSym))
     
     val newMainBody = Scoped(
       Set.from(newFuns.map(_.sym)),
@@ -123,8 +127,7 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
       case Nil => refId :: Nil
       case pathTo :+ called =>
         val lastRefedSymbol = called.getReferredFun.get
-        val funToSccRepMap = collector.funToSccRep
-        (funToSccRepMap(lastRefedSymbol), funToSccRepMap(refSym)) match
+        (collector.sccRep(lastRefedSymbol), collector.sccRep(refSym)) match
           case (S(a), S(b)) if a is b => instId
           case _ => instId :+ refId
       case _ => lastWords(s"newRefId: impossible InstantiationId shape $instId")

@@ -1,0 +1,120 @@
+:js
+:deforest
+
+
+data class Cons(h, t)
+data object Nil
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+
+
+// a class ctor is never rewritten, so `Cons(1, Nil)` built in its body is not fused with `hd`,
+// while `Cons(2, Nil)` built in `f` is
+:soir
+:noInline
+fun hd(xs) = if xs is Cons(h, _) then h else 0
+class B with
+  print(hd(Cons(1, Nil)))
+fun f() = hd(Cons(2, Nil))
+new B
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > Cons⁰(2, Nil⁰) ->
+//│ deforest > 	match: xs⁰
+//│ deforest > 	fields: xs⁰.h⁰
+//│ deforest > 	fields: xs⁰.t⁰
+//│ deforest > Cons⁰(2, Nil⁰) ->
+//│ deforest > 	match: xs⁰
+//│ deforest > 	fields: xs⁰.h⁰
+//│ deforest > 	fields: xs⁰.t⁰
+//│ deforest > <<< fusing <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let f_hd$hd, f$f, f_hd$hd1, f_hd$xs_Cons, f_hd$xs_Cons1;
+//│ @private
+//│ define f_hd$hd as fun f_hd$hd⁰(xs) {
+//│   return xs(undefined, undefined)
+//│ };
+//│ @private
+//│ define f$f as fun f$f⁰() {
+//│   let tmp;
+//│   set tmp = f_hd$xs_Cons⁰(2);
+//│   return f_hd$hd¹(tmp)
+//│ };
+//│ @private
+//│ define f_hd$hd1 as fun f_hd$hd¹(xs) {
+//│   return xs(undefined, undefined)
+//│ };
+//│ @affine(1) @private
+//│ define f_hd$xs_Cons as fun f_hd$xs_Cons¹(Cons_h)(fv_h, fv_arg$Cons$0$) {
+//│   return Cons_h
+//│ };
+//│ @affine(1) @private
+//│ define f_hd$xs_Cons1 as fun f_hd$xs_Cons⁰(Cons_h)(fv_h, fv_arg$Cons$0$) {
+//│   return Cons_h
+//│ };
+//│ define hd⁰ as fun hd¹(xs) {
+//│   match xs
+//│     Cons¹ =>
+//│       return xs.h⁰
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ define f⁰ as fun f¹() {
+//│   let tmp;
+//│   set tmp = f_hd$xs_Cons¹(2);
+//│   return f_hd$hd⁰(tmp)
+//│ };
+//│ define B⁰ as class B¹ {
+//│   constructor() {
+//│     let tmp, tmp1;
+//│     set tmp = Cons⁰(1, Nil⁰);
+//│     set tmp1 = hd¹(tmp);
+//│     do Predef⁰.print⁰(tmp1);
+//│     end
+//│   }
+//│ };
+//│ do new B¹();
+//│ return f$f⁰()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ > 1
+//│ = 2
+
+
+// nor is a match in a ctor body fused with the list passed to the ctor
+:soir
+:noInline
+class B(xs) with
+  print(if xs is Cons(h, _) then h else 0)
+fun mk() = B(Cons(1, Nil))
+mk()
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define mk⁰ as fun mk¹() {
+//│   let tmp;
+//│   set tmp = Cons⁰(1, Nil⁰);
+//│   return B²(tmp)
+//│ };
+//│ define B³ as class B⁴ {
+//│   private val xs¹;
+//│   constructor B²(xs) {
+//│     let arg$Cons$0$, tmp;
+//│     set B⁴.this.xs¹ = xs;
+//│     match B⁴.this.xs¹
+//│       Cons¹ =>
+//│         set arg$Cons$0$ = B⁴.this.xs¹.h⁰;
+//│         do B⁴.this.xs¹.t⁰;
+//│         set tmp = arg$Cons$0$;
+//│         end
+//│       else
+//│         set tmp = 0;
+//│         end
+//│     do Predef⁰.print⁰(tmp);
+//│     end
+//│   }
+//│ };
+//│ return mk¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ > 1
+//│ = B(_)

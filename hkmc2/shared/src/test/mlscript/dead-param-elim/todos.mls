@@ -37,7 +37,7 @@ c(p(true))
 //│ deforest > 	match: x⁰
 //│ deforest > <<< fusing <<<
 //│ eta-expansion > >>> eta-expansion targets shapes >>>
-//│ eta-expansion > p$p⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > p$p⁰#0 @ p$p¹: [1, 1]
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
 //│ dead-param-elim > >>> dead-param-elim results >>>
 //│ dead-param-elim > <<< dead-param-elim results <<<
@@ -97,11 +97,11 @@ sumPlus(enum(3))
 //│ deforest > 	fields: ls⁰.t⁰
 //│ deforest > <<< fusing <<<
 //│ eta-expansion > >>> eta-expansion targets shapes >>>
-//│ eta-expansion > enum$enum⁰#0 @ <root>: [1, 9]
+//│ eta-expansion > enum$enum⁰#0 @ enum$enum¹: [1, 9]
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
 //│ dead-param-elim > >>> dead-param-elim results >>>
-//│ dead-param-elim > sumPlus$ls_Cons⁰#1 @ <root> -> eliminable: {0, 5}
-//│ dead-param-elim > sumPlus$ls_Nil⁰#1 @ <root> -> eliminable: {0, 5}
+//│ dead-param-elim > sumPlus$ls_Cons⁰#1 @ sumPlus$ls_Cons¹ -> eliminable: {0, 5}
+//│ dead-param-elim > sumPlus$ls_Nil⁰#1 @ sumPlus$ls_Nil¹ -> eliminable: {0, 5}
 //│ dead-param-elim > <<< dead-param-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let enum$enum$worker;
@@ -177,7 +177,7 @@ c(p(true))
 //│ deforest > 	match: x²
 //│ deforest > <<< fusing <<<
 //│ eta-expansion > >>> eta-expansion targets shapes >>>
-//│ eta-expansion > p$p⁰#0 @ <root>: [1, 0]
+//│ eta-expansion > p$p⁰#0 @ p$p¹: [1, 0]
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
 //│ dead-param-elim > >>> dead-param-elim results >>>
 //│ dead-param-elim > <<< dead-param-elim results <<<
@@ -214,3 +214,56 @@ c(p(true))
 //│ return p$p$worker¹(true)
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ = 1
+
+
+// TODO: an over-applied call's extra argument is eliminable while no param is, which fails the debug check pairing the two
+:fixme
+:e
+fun over(x) = x
+over(1, 2)
+//│ ╔══[COMPILATION ERROR] Expected 1 arguments, got 2
+//│ ║  l.223: 	over(1, 2)
+//│ ╙──       	    ^^^^^^
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ /!!!\ Uncaught error: java.lang.AssertionError: assertion failed
+
+fun exact(x) = x
+exact(1)
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ = 1
+
+// the same drop also removes the runtime arity error the unoptimized program raises
+:e
+:flowBasedOpt
+:soir
+fun dropped(x) = x
+dropped(1, 2)
+//│ ╔══[COMPILATION ERROR] Expected 1 arguments, got 2
+//│ ║  l.248: 	dropped(1, 2)
+//│ ╙──       	       ^^^^^^
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define dropped⁰ as fun dropped¹(x) { return x }; return 1
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+:e
+:re
+:flowBasedOpt off
+fun kept(x) = x
+kept(1, 2)
+//│ ╔══[COMPILATION ERROR] Expected 1 arguments, got 2
+//│ ║  l.263: 	kept(1, 2)
+//│ ╙──       	    ^^^^^^
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ ═══[RUNTIME ERROR] Error: Function 'kept' expected 1 argument but got 2
