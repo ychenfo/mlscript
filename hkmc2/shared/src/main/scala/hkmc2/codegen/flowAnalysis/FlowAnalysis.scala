@@ -325,6 +325,8 @@ class FlowPreAnalyzer(val pgrm: Program)(using
   private var currentAffinityCount = res.affinityCounts
   // the functions scanned code refers to and the classes it constructs, of which those of earlier blocks become roots here
   private val usedDefns = mutable.Queue.empty[RootSym]
+  // the functions and classes whose code is scanned, local or not, so that a use of one is never taken for a foreign root
+  private val scannedDefns = MutSet.empty[RootSym]
   
   
   // main's own code, which lists the roots it defines without entering them
@@ -338,8 +340,8 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     val isForeignRoot = d match
       // only a public function, as a private one may have lost params to dpe in its own block
       case f: TermSymbol =>
-        !res.funSymToFunDefn.contains(f) && f.irFunDefn.exists(_.visibility is Visibility.Public) && (f.getState is eState)
-      case cls: ClassSymbol => !res.clsSymToClsDefn.contains(cls) && cls.irClsLikeDefn.isDefined
+        !scannedDefns(f) && f.irFunDefn.exists(_.visibility is Visibility.Public) && (f.getState is eState)
+      case cls: ClassSymbol => !scannedDefns(cls) && cls.irClsLikeDefn.isDefined
     if isForeignRoot then
       res.foreignRoots.add(d)
       scanRoot(d)
@@ -352,8 +354,6 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     val foreignRoots = LinkedHashSet.empty[RootSym]
     // the vals defined where main's code runs, read through their symbols
     val rootVals = LinkedHashSet.empty[TermSymbol]
-    val funSymToFunDefn = MutMap.empty[TermSymbol, FunDefn]
-    val clsSymToClsDefn = MutMap.empty[ClassSymbol, ClsLikeDefn]
     val matchScrutToMatchBlock = MutMap.empty[ResultId, Match]
     val labelSymToLabelBlk = MutMap.empty[LabelSymbol, Label]
     val matchScrutToCtxOfMatch = MutMap.empty[ResultId, Ls[InCtx]]
@@ -432,8 +432,7 @@ class FlowPreAnalyzer(val pgrm: Program)(using
       for pl <- fun.params do
         pl.params.foreach(p => locallyDefined += p.sym)
         pl.restParam.foreach(p => locallyDefined += p.sym)
-      withCtx(InCtx.Fn(fun))(withCaptureInfo(fun.dSym, locallyDefined)(body)):
-        res.funSymToFunDefn(fun.dSym) = fun
+      withCtx(InCtx.Fn(fun))(withCaptureInfo(fun.dSym, locallyDefined)(body))()
     
     inline def inLabelBody(label: Label)(inline body: => Any) =
       withCtx(InCtx.LblBody(label))(body):
@@ -646,13 +645,14 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     case Value.Lit(lit) => ()
   
   override def applyFunDefn(fun: FunDefn): Unit =
+    softAssert(fun.dSym.irDefn.exists(_ is fun), s"function ${fun.dSym} is not its symbol's ir definition")
     // a function defined where main's code runs is a root, scanned as a unit of its own
     if ctxTracker.isTopLvlLikeFunCtx then
-      softAssert(fun.dSym.irDefn.exists(_ is fun), s"root function ${fun.dSym} is not its symbol's ir definition")
       res.localRoots.add(fun.dSym)
     else scanFun(fun)
   
   private def scanFun(fun: FunDefn): Unit =
+    scannedDefns += fun.dSym
     ctxTracker.inFun(fun):
       ctxTracker.registerStratVar(fun.dSym, fun.sym.nme)
       currentCaptureInfo.foreach(_.locallyDefined += fun.dSym)
@@ -664,11 +664,12 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     ctxTracker.inTopLvl(S(d)):
       d match
       case f: TermSymbol => scanFun(rootDefn(f))
-      case cls: ClassSymbol =>
-        scanCtor(cls.irClsLikeDefn.getOrElse(lastWords(s"root class ${cls.nme} has no ir definition")))
+      case cls: ClassSymbol => scanCtor(rootDefn(cls))
   
   def rootDefn(f: TermSymbol): FunDefn =
     f.irFunDefn.getOrElse(lastWords(s"root function ${f.nme} has no ir definition"))
+  def rootDefn(cls: ClassSymbol): ClsLikeDefn =
+    cls.irClsLikeDefn.getOrElse(lastWords(s"root class ${cls.nme} has no ir definition"))
   
   override def applyLam(lam: Lambda): Unit =
     ctxTracker.inLam(lam):
@@ -696,10 +697,11 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     case cls@ClsLikeDefn(own, isym, sym, ctorSym, k, paramsOpt, auxParams, parentPath, methods,
         privateFields, publicFields, preCtor, ctor, mod, bufferable)
     =>
+      for clsSym <- isym.asCls do
+        softAssert(clsSym.irClsLikeDefn.exists(_ is cls), s"class ${clsSym} is not its symbol's ir definition")
       // a class defined where main's code runs is a root, whose ctor is scanned as a unit of its own
       isym.asCls match
       case S(clsSym) if ctxTracker.isTopLvlLikeFunCtx =>
-        softAssert(clsSym.irClsLikeDefn.exists(_ is cls), s"root class ${clsSym} is not its symbol's ir definition")
         res.localRoots.add(clsSym)
       case _ => scanCtor(cls)
       ctxTracker.inCls(cls):
@@ -722,7 +724,7 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     lastWords("handled inline in `applyDefn`")
   
   private def scanCtor(cls: ClsLikeDefn): Unit =
-    cls.isym.asCls.foreach(res.clsSymToClsDefn(_) = cls)
+    cls.isym.asCls.foreach(scannedDefns += _)
     ctxTracker.inCls(cls):
       cls.paramsOpt.foreach(applyParamList)
       cls.auxParams.foreach(applyParamList)
@@ -831,7 +833,7 @@ class FlowConstraintsCollector(
         d match
         case f: TermSymbol => CollectAllReferredRoots.applyBlock(preAnalyzer.rootDefn(f).body)
         case cls: ClassSymbol =>
-          val defn = preAnalyzer.res.clsSymToClsDefn(cls)
+          val defn = preAnalyzer.rootDefn(cls)
           CollectAllReferredRoots.applyBlock(defn.preCtor)
           CollectAllReferredRoots.applyBlock(defn.ctor)
         referred
@@ -844,7 +846,7 @@ class FlowConstraintsCollector(
             given ConstraintsCollector = cc.forCodeOf(d, N)
             d match
             case f: TermSymbol => collectFunction(preAnalyzer.rootDefn(f))
-            case cls: ClassSymbol => processCtorBody(preAnalyzer.res.clsSymToClsDefn(cls))
+            case cls: ClassSymbol => processCtorBody(preAnalyzer.rootDefn(cls))
           if nonAffineTracking then
             for
               sym <- preAnalyzer.res.nonAffineSyms
@@ -854,7 +856,7 @@ class FlowConstraintsCollector(
           for d <- group do
             val exposed = d match
               case f: TermSymbol => generatedVars(f) :: Nil
-              case cls: ClassSymbol => ctorParamVars(preAnalyzer.res.clsSymToClsDefn(cls))
+              case cls: ClassSymbol => ctorParamVars(preAnalyzer.rootDefn(cls))
             schemes(d) = ProdStratScheme(exposed, cc.constraints)
     end ProdStratSchemeAnalysisInScc
     
@@ -1182,7 +1184,7 @@ class FlowConstraintsCollector(
           ctor match
           case cls: ClassSymbol =>
             val modeled = for
-              defn <- preAnalyzer.res.clsSymToClsDefn.get(cls)
+              defn <- cls.irClsLikeDefn
               paramFields <- ctorParamFields(defn)
               if argsStrat.sizeCompare(paramFields) === 0
             yield defn -> paramFields

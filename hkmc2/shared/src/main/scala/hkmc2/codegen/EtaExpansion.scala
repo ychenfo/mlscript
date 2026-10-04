@@ -38,6 +38,9 @@ class EtaExpansionSolver(val constraintSolver: FlowConstraintSolver, tl: TraceLo
   
   private val cache = MutMap.empty[ProdFun, Ls[EtaTargets]]
   
+  private def funDefn(f: TermSymbol): FunDefn =
+    f.irFunDefn.getOrElse(lastWords(s"function ${f.nme} has no ir definition"))
+  
   // the result is a list describing the target shape
   // e.g., entries with arities of 1, 0, 2, 3 means
   // fun f(x) = x
@@ -60,7 +63,7 @@ class EtaExpansionSolver(val constraintSolver: FlowConstraintSolver, tl: TraceLo
             case lamDef: Lambda => lamDef.affine
             case other => lastWords(s"expected lambda result, got $other")
         case (fSym: TermSymbol, whichPl: Int) =>
-          val fnDefn = constraintSolver.collector.preAnalyzer.res.funSymToFunDefn(fSym)
+          val fnDefn = funDefn(fSym)
           fnDefn.affineInfo.contains(whichPl)
         case (sym, _) => lastWords(s"prodFunIsAffine: expected TermSymbol funId, got $sym")
       end prodFunIsAffine
@@ -125,7 +128,7 @@ class EtaExpansionSolver(val constraintSolver: FlowConstraintSolver, tl: TraceLo
     def addFunShapeIfChanged(): Unit =
       def isEtaExpanded(funId: FunId, shape: Ls[EtaTargets]): Bool = funId match
         case (funSym: TermSymbol, _) =>
-          val prev = constraintSolver.preAnalyzer.res.funSymToFunDefn(funSym).params.size
+          val prev = funDefn(funSym).params.size
           val now = shape.size
           now > prev
         case _: ResultId => shape.size > 1
