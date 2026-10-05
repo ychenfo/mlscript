@@ -31,6 +31,8 @@ class DeadConstructorElimSolver(val constraintSolver: FlowConstraintSolver, trac
   given tl: TraceLogger = traceLogger
   given fState: FlowAnalysis.State = constraintSolver.fState
   given eState: Elaborator.State = constraintSolver.eState
+  given raise: Raise = constraintSolver.preAnalyzer.raise
+  given symbolPrinter: SymbolPrinter = constraintSolver.preAnalyzer.traceSymbolPrinter
   
   val collector: FlowConstraintsCollector = constraintSolver.collector
   
@@ -75,8 +77,10 @@ class DeadConstructorElimSolver(val constraintSolver: FlowConstraintSolver, trac
   end deadCtors
   
   if tl.doTrace then
+    given ShowCfg = ShowCfg.internal
+    
     tl.log(">>> dead-constructor-elim results >>>")
-    for ctorStr <- deadCtors.toSeq.map(_.exprId.getResult.showDbg).sorted do
+    for ctorStr <- deadCtors.toSeq.map(dc => s"${dc.exprId.getResult.showDbg} @ ${dc.instId.showInstId}").sorted do
       tl.log(s"eliminable: $ctorStr")
     tl.log("<<< dead-constructor-elim results <<<")
   end if

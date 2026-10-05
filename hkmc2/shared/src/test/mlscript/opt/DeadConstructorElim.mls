@@ -23,7 +23,7 @@ fun f() =
   if b is A then 1 else 0
 f()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Tuple(false, [1, 2])
+//│ dead-constructor-elim > eliminable: Tuple(false, [1, 2]) @ f⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define f⁰ as fun f¹() {
@@ -47,7 +47,7 @@ fun g() =
   2
 g()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A²‹term:A⁰›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:A²‹term:A⁰›, [[1]]) @ g⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define g⁰ as fun g¹() { return 2 }; return g¹()
@@ -127,7 +127,7 @@ fun f() =
   2
 f() + f()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A²‹term:A⁰›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:A²‹term:A⁰›, [[1]]) @ f²
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp, tmp1;
@@ -148,9 +148,9 @@ fun g() =
   2
 g() + g()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]])
-//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]])
-//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]]) @ g²
+//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]]) @ g³
+//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]]) @ g⁴
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp, tmp1, g$g, g$g1;
@@ -211,7 +211,7 @@ fun ctor() = C(1)
 fun app(k) = k(ctor())
 app(c => 2) + app(c => if c is C then 1 else 0)
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:C²‹term:C⁰›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:C²‹term:C⁰›, [[1]]) @ app².ctor⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp, lambda, tmp1, lambda$lambda, app$app, app_ctor$ctor;
@@ -293,7 +293,7 @@ fun r() =
   2
 r()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A²‹term:A⁰›, [[tmp:tmp⁰]])
+//│ dead-constructor-elim > eliminable: Call(member:A²‹term:A⁰›, [[tmp:tmp⁰]]) @ r⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define r⁰ as fun r¹() { do Predef⁰.print⁰(1); return 2 }; return r¹()
@@ -310,7 +310,7 @@ fun s(y) =
   2
 s(new O)
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A²‹term:A⁰›, [[Select(y⁰, Ident(x))]])
+//│ dead-constructor-elim > eliminable: Call(member:A²‹term:A⁰›, [[Select(y⁰, Ident(x))]]) @ s⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp; define s⁰ as fun s¹(y) { do y.x﹖; return 2 }; set tmp = new O⁰(); return s¹(tmp)
@@ -327,7 +327,7 @@ fun t(y) =
   2
 t(new O)
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Tuple(false, [Select(y¹, Ident(z)), 1, Select(y¹, Ident(x)), DynSelect(y¹, "z", false)])
+//│ dead-constructor-elim > eliminable: Tuple(false, [Select(y⁰, Ident(z)), 1, Select(y⁰, Ident(x)), DynSelect(y⁰, "z", false)]) @ t⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp;
@@ -349,7 +349,7 @@ fun u(y) =
   if b is A then 1 else 0
 u(new O)
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Tuple(false, [Select(y², Ident(z)), Select(y², Ident(x))])
+//│ dead-constructor-elim > eliminable: Tuple(false, [Select(y⁰, Ident(z)), Select(y⁰, Ident(x))]) @ u⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp;
@@ -516,28 +516,28 @@ fun liftedField() =
   A([1], [2]).a
 liftedField()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Tuple(false, [2])
+//│ dead-constructor-elim > eliminable: Tuple(false, [2]) @ liftedField⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let A;
-//│ define A as class A⁴ {
+//│ define A as class A³ {
 //│   private val captured¹;
 //│   val a⁰;
 //│   val b⁰;
-//│   constructor A³(a, b, captured) {
-//│     set A⁴.this.captured¹ = captured;
+//│   constructor A²(a, b, captured) {
+//│     set A³.this.captured¹ = captured;
 //│     define a⁰ as val a¹ = a;
 //│     define b⁰ as val b¹ = b;
 //│     end
 //│   }
 //│   method get³ = fun get⁴() {
-//│     return A⁴.this.captured¹
+//│     return A³.this.captured¹
 //│   }
 //│ };
 //│ define liftedField⁰ as fun liftedField¹() {
 //│   let tmp, tmp1;
 //│   set tmp = [1];
-//│   set tmp1 = new A⁴(tmp, undefined, 0);
+//│   set tmp1 = new A³(tmp, undefined, 0);
 //│   return tmp1.a¹
 //│ };
 //│ return liftedField¹()
@@ -561,7 +561,7 @@ go()
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define mk⁰ as fun mk¹(k) {
-//│   return A⁵(10)
+//│   return A⁴(10)
 //│ };
 //│ define go⁰ as fun go¹() {
 //│   let baseCall, tmp, tmp1;
@@ -570,15 +570,15 @@ go()
 //│   set tmp1 = baseCall(tmp);
 //│   return tmp1.both﹖()
 //│ };
-//│ define A⁶ as class A⁷ {
+//│ define A⁵ as class A⁶ {
 //│   private val x⁴;
-//│   private val y³;
-//│   constructor A⁵(x, y) {
-//│     set A⁷.this.x⁴ = x;
-//│     set A⁷.this.y³ = y;
+//│   private val y⁰;
+//│   constructor A⁴(x, y) {
+//│     set A⁶.this.x⁴ = x;
+//│     set A⁶.this.y⁰ = y;
 //│     end
 //│   }
-//│   method both⁰ = fun both¹() { return [A⁷.this.x⁴, A⁷.this.y³] }
+//│   method both⁰ = fun both¹() { return [A⁶.this.x⁴, A⁶.this.y⁰] }
 //│ };
 //│ return go¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
@@ -607,7 +607,7 @@ inherited()
 //│ define inherited⁰ as fun inherited¹() {
 //│   let scrut, tmp;
 //│   set tmp = [4];
-//│   set scrut = B³(tmp);
+//│   set scrut = B¹(tmp);
 //│   match scrut
 //│     C¹ =>
 //│       return scrut.z⁰
@@ -615,7 +615,7 @@ inherited()
 //│       return 0
 //│   end
 //│ };
-//│ define B⁴ as class B⁵ extends C¹ { constructor B³ };
+//│ define B² as class B³ extends C¹ { constructor B¹ };
 //│ return inherited¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ = [4]
@@ -637,7 +637,7 @@ inheritedViaDynSelect()
 fun callTuple() = [1](2)
 callTuple()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Tuple(false, [1])
+//│ dead-constructor-elim > eliminable: Tuple(false, [1]) @ callTuple⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define callTuple⁰ as fun callTuple¹() { return undefined(2) }; return callTuple¹()
@@ -681,7 +681,7 @@ dcN()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ define dcN⁰ as fun dcN¹() { let tmp; set tmp = A⁸(1); do N⁰(tmp); return 2 }; return dcN¹()
+//│ define dcN⁰ as fun dcN¹() { let tmp; set tmp = A⁷(1); do N⁰(tmp); return 2 }; return dcN¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ > A(1)
 //│ = 2
@@ -695,8 +695,8 @@ fun dcE() =
   2
 dcE()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[1]])
-//│ dead-constructor-elim > eliminable: Call(member:E⁰‹term:E¹›, [[tmp:tmp¹]])
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[1]]) @ dcE⁰
+//│ dead-constructor-elim > eliminable: Call(member:E⁰‹term:E¹›, [[tmp:tmp⁰]]) @ dcE⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define dcE⁰ as fun dcE¹() { return 2 }; return dcE¹()
@@ -714,8 +714,8 @@ dcEused()
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define dcEused⁰ as fun dcEused¹() {
 //│   let tmp, tmp1;
-//│   set tmp = A⁸(1);
-//│   set tmp1 = E¹(tmp);
+//│   set tmp = A⁷(1);
+//│   set tmp1 = E⁰(tmp);
 //│   return tmp1.get⁵()
 //│ };
 //│ return dcEused¹()
@@ -750,7 +750,7 @@ dcL()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ define dcL⁰ as fun dcL¹() { let tmp; set tmp = A⁸(1); do L⁰(tmp); return 2 }; return dcL¹()
+//│ define dcL⁰ as fun dcL¹() { let tmp; set tmp = A⁷(1); do L⁰(tmp); return 2 }; return dcL¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ > L(A(1))
 //│ = 2
@@ -765,19 +765,19 @@ class B(z) with
   print(g(z, 2))
 g(A(3), 4)
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[3]])
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[3]]) @ <root>
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define g⁴ as fun g⁵(x, y) {
 //│   return y
 //│ };
-//│ define B⁶ as class B⁸ {
+//│ define B⁴ as class B⁶ {
 //│   private val z¹;
-//│   constructor B⁷(z) {
+//│   constructor B⁵(z) {
 //│     let tmp;
-//│     set B⁸.this.z¹ = z;
-//│     set tmp = g⁵(B⁸.this.z¹, 2);
+//│     set B⁶.this.z¹ = z;
+//│     set tmp = g⁵(B⁶.this.z¹, 2);
 //│     do Predef⁰.print⁰(tmp);
 //│     end
 //│   }
@@ -804,7 +804,7 @@ class C with
 //│ set tmp = [1];
 //│ @private
 //│ define pv⁰ as val pv¹ = tmp;
-//│ define C³ as class C⁴ { val v²; constructor() { define v² as val v³ = pv¹; end } };
+//│ define C² as class C³ { val v²; constructor() { define v² as val v³ = pv¹; end } };
 //│ end
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ pv = [1]
@@ -827,25 +827,25 @@ fun selfCtor() =
   0
 selfCtor()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[9]])
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[9]]) @ selfCtor⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define selfCtor⁰ as fun selfCtor¹() {
-//│   do B⁹(undefined, 2);
+//│   do B⁷(undefined, 2);
 //│   return 0
 //│ };
-//│ define B¹⁰ as class B¹¹ {
+//│ define B⁸ as class B⁹ {
 //│   private val x⁵;
 //│   private val n²;
-//│   constructor B⁹(x, n) {
+//│   constructor B⁷(x, n) {
 //│     let scrut, tmp;
-//│     set B¹¹.this.x⁵ = x;
-//│     set B¹¹.this.n² = n;
-//│     set scrut = >⁰(B¹¹.this.n², 0);
+//│     set B⁹.this.x⁵ = x;
+//│     set B⁹.this.n² = n;
+//│     set scrut = >⁰(B⁹.this.n², 0);
 //│     match scrut
 //│       true =>
-//│         set tmp = -⁰(B¹¹.this.n², 1);
-//│         do B⁹(B¹¹.this.x⁵, tmp);
+//│         set tmp = -⁰(B⁹.this.n², 1);
+//│         do B⁷(B⁹.this.x⁵, tmp);
 //│         end
 //│       else
 //│         end
@@ -872,43 +872,43 @@ mutualCtors()
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define mutualCtors⁰ as fun mutualCtors¹() {
 //│   let tmp;
-//│   set tmp = A⁸(7);
-//│   do B¹²(tmp, 3);
+//│   set tmp = A⁷(7);
+//│   do B¹⁰(tmp, 3);
 //│   return 0
 //│ };
-//│ define B¹³ as class B¹⁴ {
+//│ define B¹¹ as class B¹² {
 //│   private val x⁶;
 //│   private val n³;
-//│   constructor B¹²(x, n) {
+//│   constructor B¹⁰(x, n) {
 //│     let scrut, tmp;
-//│     set B¹⁴.this.x⁶ = x;
-//│     set B¹⁴.this.n³ = n;
-//│     set scrut = >⁰(B¹⁴.this.n³, 0);
+//│     set B¹².this.x⁶ = x;
+//│     set B¹².this.n³ = n;
+//│     set scrut = >⁰(B¹².this.n³, 0);
 //│     match scrut
 //│       true =>
-//│         set tmp = -⁰(B¹⁴.this.n³, 1);
-//│         do C⁵(B¹⁴.this.x⁶, tmp);
+//│         set tmp = -⁰(B¹².this.n³, 1);
+//│         do C⁴(B¹².this.x⁶, tmp);
 //│         end
 //│       else
 //│         end
 //│     end
 //│   }
 //│ };
-//│ define C⁶ as class C⁷ {
+//│ define C⁵ as class C⁶ {
 //│   private val x⁷;
 //│   private val n⁴;
-//│   constructor C⁵(x, n) {
+//│   constructor C⁴(x, n) {
 //│     let scrut, tmp;
-//│     set C⁷.this.x⁷ = x;
-//│     set C⁷.this.n⁴ = n;
-//│     set scrut = >⁰(C⁷.this.n⁴, 0);
+//│     set C⁶.this.x⁷ = x;
+//│     set C⁶.this.n⁴ = n;
+//│     set scrut = >⁰(C⁶.this.n⁴, 0);
 //│     match scrut
 //│       true =>
-//│         set tmp = -⁰(C⁷.this.n⁴, 1);
-//│         do B¹²(C⁷.this.x⁷, tmp);
+//│         set tmp = -⁰(C⁶.this.n⁴, 1);
+//│         do B¹⁰(C⁶.this.x⁷, tmp);
 //│         end
 //│       else
-//│         do Predef⁰.print⁰(C⁷.this.x⁷);
+//│         do Predef⁰.print⁰(C⁶.this.x⁷);
 //│         end
 //│     end
 //│   }
@@ -936,16 +936,16 @@ polyCtor()
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define polyCtor⁰ as fun polyCtor¹() {
 //│   let tmp;
-//│   set tmp = A⁸(3);
-//│   do B¹⁵(tmp);
+//│   set tmp = A⁷(3);
+//│   do B¹³(tmp);
 //│   return 0
 //│ };
 //│ define pr⁰ as fun pr¹(x) {
 //│   return Predef⁰.print⁰(x)
 //│ };
-//│ define B¹⁶ as class B¹⁷ {
-//│   private val y⁵;
-//│   constructor B¹⁵(y) { set B¹⁷.this.y⁵ = y; do pr¹(B¹⁷.this.y⁵); end }
+//│ define B¹⁴ as class B¹⁵ {
+//│   private val y²;
+//│   constructor B¹³(y) { set B¹⁵.this.y² = y; do pr¹(B¹⁵.this.y²); end }
 //│ };
 //│ return polyCtor¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
@@ -966,27 +966,27 @@ fun ctorCallsIdent() =
   0
 ctorCallsIdent()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[1]])
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[1]]) @ ctorCallsIdent¹
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[1]]) @ ctorCallsIdent⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let ctorCallsIdent$ctorCallsIdent;
 //│ define ctorCallsIdent$ctorCallsIdent as fun ctorCallsIdent$ctorCallsIdent⁰() {
-//│   do B¹⁸(undefined);
+//│   do B¹⁶(undefined);
 //│   return 0
 //│ };
 //│ define ident⁰ as fun ident¹(x) {
 //│   return x
 //│ };
 //│ define ctorCallsIdent⁰ as fun ctorCallsIdent¹() {
-//│   do B¹⁸(undefined);
+//│   do B¹⁶(undefined);
 //│   return 0
 //│ };
-//│ define B¹⁹ as class B²⁰ {
-//│   private val y⁶;
-//│   constructor B¹⁸(y) {
-//│     set B²⁰.this.y⁶ = y;
-//│     do ident¹(B²⁰.this.y⁶);
+//│ define B¹⁷ as class B¹⁸ {
+//│   private val y³;
+//│   constructor B¹⁶(y) {
+//│     set B¹⁸.this.y³ = y;
+//│     do ident¹(B¹⁸.this.y³);
 //│     end
 //│   }
 //│ };
@@ -1007,8 +1007,8 @@ fun ctorCycle() =
   0
 ctorCycle()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[5]])
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[5]])
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[5]]) @ ctorCycle¹
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[5]]) @ ctorCycle⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let ctorCycle$ctorCycle;
@@ -1017,24 +1017,24 @@ ctorCycle()
 //│   return 0
 //│ };
 //│ define mk³ as fun mk²(x, n) {
-//│   return B²¹(x, n)
+//│   return B¹⁹(x, n)
 //│ };
 //│ define ctorCycle⁰ as fun ctorCycle¹() {
 //│   do mk²(undefined, 2);
 //│   return 0
 //│ };
-//│ define B²² as class B²³ {
+//│ define B²⁰ as class B²¹ {
 //│   private val x⁸;
 //│   private val n⁵;
-//│   constructor B²¹(x, n) {
+//│   constructor B¹⁹(x, n) {
 //│     let scrut, tmp;
-//│     set B²³.this.x⁸ = x;
-//│     set B²³.this.n⁵ = n;
-//│     set scrut = >⁰(B²³.this.n⁵, 0);
+//│     set B²¹.this.x⁸ = x;
+//│     set B²¹.this.n⁵ = n;
+//│     set scrut = >⁰(B²¹.this.n⁵, 0);
 //│     match scrut
 //│       true =>
-//│         set tmp = -⁰(B²³.this.n⁵, 1);
-//│         do mk²(B²³.this.x⁸, tmp);
+//│         set tmp = -⁰(B²¹.this.n⁵, 1);
+//│         do mk²(B²¹.this.x⁸, tmp);
 //│         end
 //│       else
 //│         end
@@ -1060,7 +1060,7 @@ fun privInCtor() =
   0
 privInCtor()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[1]]) @ privInCtor⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
@@ -1068,12 +1068,12 @@ privInCtor()
 //│   return x
 //│ };
 //│ define privInCtor⁰ as fun privInCtor¹() {
-//│   do B²⁴(undefined);
+//│   do B²²(undefined);
 //│   return 0
 //│ };
-//│ define B²⁵ as class B²⁶ {
-//│   private val y⁷;
-//│   constructor B²⁴(y) { set B²⁶.this.y⁷ = y; do same¹(B²⁶.this.y⁷); end }
+//│ define B²³ as class B²⁴ {
+//│   private val y⁴;
+//│   constructor B²²(y) { set B²⁴.this.y⁴ = y; do same¹(B²⁴.this.y⁴); end }
 //│ };
 //│ return privInCtor¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
@@ -1090,22 +1090,22 @@ fun lamInCtor() =
   0
 lamInCtor()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:A⁹‹term:A⁸›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:A⁸‹term:A⁷›, [[1]]) @ lamInCtor⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define lamInCtor⁰ as fun lamInCtor¹() {
-//│   do B²⁷(undefined);
+//│   do B²⁵(undefined);
 //│   return 0
 //│ };
-//│ define B²⁸ as class B²⁹ {
-//│   private val y⁸;
-//│   constructor B²⁷(y) {
+//│ define B²⁶ as class B²⁷ {
+//│   private val y⁵;
+//│   constructor B²⁵(y) {
 //│     let lambda;
-//│     set B²⁹.this.y⁸ = y;
+//│     set B²⁷.this.y⁵ = y;
 //│     define lambda as fun lambda⁵(x) {
 //│       return x
 //│     };
-//│     do lambda⁵(B²⁹.this.y⁸);
+//│     do lambda⁵(B²⁷.this.y⁵);
 //│     end
 //│   }
 //│ };
@@ -1129,7 +1129,7 @@ fun twoSites() =
   0
 twoSites()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Instantiate(false, member:B³⁰‹class:B³¹›, [[]])
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:B²⁸‹class:B²⁹›, [[]]) @ twoSites⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define twoSites⁰ as fun twoSites¹() {
@@ -1137,28 +1137,28 @@ twoSites()
 //│   define lambda as fun lambda⁶(x) {
 //│     return 3
 //│   };
-//│   do A¹⁰(lambda⁶, undefined);
+//│   do A⁸(lambda⁶, undefined);
 //│   define lambda1 as fun lambda⁷(x) {
 //│     return x
 //│   };
-//│   set tmp = new C⁸();
-//│   do A¹⁰(lambda⁷, tmp);
+//│   set tmp = new C⁷();
+//│   do A⁸(lambda⁷, tmp);
 //│   return 0
 //│ };
-//│ define B³⁰ as class B³¹ {
-//│   constructor B³²
+//│ define B²⁸ as class B³⁰ {
+//│   constructor B²⁹
 //│ };
-//│ define C⁹ as class C⁸ {
-//│   constructor C¹⁰
+//│ define C⁸ as class C⁷ {
+//│   constructor C⁹
 //│ };
-//│ define A¹¹ as class A¹² {
+//│ define A⁹ as class A¹⁰ {
 //│   private val f⁴;
 //│   private val x⁹;
-//│   constructor A¹⁰(f, x) {
+//│   constructor A⁸(f, x) {
 //│     let tmp;
-//│     set A¹².this.f⁴ = f;
-//│     set A¹².this.x⁹ = x;
-//│     set tmp = A¹².this.f⁴(A¹².this.x⁹);
+//│     set A¹⁰.this.f⁴ = f;
+//│     set A¹⁰.this.x⁹ = x;
+//│     set tmp = A¹⁰.this.f⁴(A¹⁰.this.x⁹);
 //│     do Predef⁰.print⁰(tmp);
 //│     end
 //│   }
@@ -1182,7 +1182,7 @@ fun ctorBodyAlloc() = ignore([2])
 new B
 ctorBodyAlloc()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Tuple(false, [2])
+//│ dead-constructor-elim > eliminable: Tuple(false, [2]) @ ctorBodyAlloc⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
@@ -1192,7 +1192,7 @@ ctorBodyAlloc()
 //│ define ctorBodyAlloc⁰ as fun ctorBodyAlloc¹() {
 //│   return ignore¹(undefined)
 //│ };
-//│ define B³³ as class B³⁴ {
+//│ define B³¹ as class B³² {
 //│   constructor() {
 //│     let tmp, tmp1;
 //│     set tmp = [1];
@@ -1201,7 +1201,7 @@ ctorBodyAlloc()
 //│     end
 //│   }
 //│ };
-//│ do new B³⁴();
+//│ do new B³²();
 //│ return ctorBodyAlloc¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ > 0
@@ -1225,7 +1225,7 @@ fun earlierBlock() =
   a + b
 earlierBlock()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Tuple(false, [1])
+//│ dead-constructor-elim > eliminable: Tuple(false, [1]) @ earlierBlock⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define earlierBlock⁰ as fun earlierBlock¹() {
@@ -1260,7 +1260,7 @@ fun earlierCls() =
   0
 earlierCls()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Instantiate(false, member:B³⁵‹class:B³⁶›, [[]])
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:B³³‹class:B³⁴›, [[]]) @ earlierCls⁰
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define earlierCls⁰ as fun earlierCls¹() {
@@ -1268,12 +1268,12 @@ earlierCls()
 //│   define lambda as fun lambda⁸(x) {
 //│     return 3
 //│   };
-//│   set tmp = new B³⁶();
-//│   do A¹³(lambda⁸, tmp);
+//│   set tmp = new B³³();
+//│   do A¹¹(lambda⁸, tmp);
 //│   define lambda1 as fun lambda⁹(x) {
 //│     return 3
 //│   };
-//│   do C¹¹(lambda⁹, undefined);
+//│   do C¹⁰(lambda⁹, undefined);
 //│   return 0
 //│ };
 //│ return earlierCls¹()
@@ -1281,3 +1281,30 @@ earlierCls()
 //│ > B()
 //│ > 3
 //│ = 0
+
+
+:flowBasedOpt poly debugDce
+:noInline
+:noTailRec
+fun f(x) =
+  if x < 0 then 3
+  else
+    let unused = new B()
+    g(x - 1)
+fun g(x) =
+  if x < 0 then 5
+  else
+    let unused = new O
+    f(x - 1)
+fun main() = f(4)
+fun main2() = g(4)
+//│ dead-constructor-elim > >>> dead-constructor-elim results >>>
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:B³⁴‹class:B³³›, [[]]) @ f⁵
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:B³⁴‹class:B³³›, [[]]) @ g⁶
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:B³⁴‹class:B³³›, [[]]) @ main2⁰.g⁷
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:B³⁴‹class:B³³›, [[]]) @ main⁰.f⁶
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:O¹‹class:O⁰›, [[]]) @ f⁵
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:O¹‹class:O⁰›, [[]]) @ g⁶
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:O¹‹class:O⁰›, [[]]) @ main2⁰.g⁷
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:O¹‹class:O⁰›, [[]]) @ main⁰.f⁶
+//│ dead-constructor-elim > <<< dead-constructor-elim results <<<
