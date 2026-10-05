@@ -330,3 +330,155 @@ f(1)
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ = 3
 
+
+
+// a copy that expands a nested `g` must not make the in-place `g(x)` look unsaturated, hence pure and movable
+:flowBasedOpt debugEta poly
+:soir
+:noInline
+:expect 13
+@affine(1) fun k1(a)(b) = a + b
+fun k2(a)(b) = a * b
+fun f(k, x) =
+  fun g(y) =
+    if y > 1 do print("g")
+    k(y)
+  let h = g(x)
+  print("between")
+  h(2)
+f(k1, 1) + f(k2, 5)
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > g⁹#0 @ f¹²: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ FAILURE: Unexpected internal error
+//│ FAILURE LOCATION: softAssert (TailRecOpt.scala:86)
+//│ ╔══[INTERNAL ERROR] Compiler reached an unexpected state at 'TailRecOpt.scala:86': Call node passes 2 argument lists to term:g⁹, which can receive 1.
+//│ ╟── The compilation result may be incorrect.
+//│ ╙── This is a compiler bug; please report it to the maintainers.
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, f$f;
+//│ define f$f as fun f$f⁰(k, x) {
+//│   let g;
+//│   define g as fun g¹⁰(y)(eta$0$0) {
+//│     let scrut;
+//│     set scrut = >⁰(y, 1);
+//│     match scrut
+//│       true =>
+//│         do Predef⁰.print⁰("g");
+//│         return k(y)(eta$0$0)
+//│       else
+//│         return k(y)(eta$0$0)
+//│     end
+//│   };
+//│   do Predef⁰.print⁰("between");
+//│   return g¹⁰(x)(2)
+//│ };
+//│ @affine(1)
+//│ define k1⁰ as fun k1¹(a)(b) {
+//│   return +⁰(a, b)
+//│ };
+//│ define k2⁰ as fun k2¹(a)(b) {
+//│   return *⁰(a, b)
+//│ };
+//│ define f¹² as fun f¹³(k, x) {
+//│   let g;
+//│   define g as fun g⁹(y) {
+//│     let scrut;
+//│     set scrut = >⁰(y, 1);
+//│     match scrut
+//│       true =>
+//│         do Predef⁰.print⁰("g");
+//│         return k(y)
+//│       else
+//│         return k(y)
+//│     end
+//│   };
+//│   do Predef⁰.print⁰("between");
+//│   return g⁹(x)(2)
+//│ };
+//│ set tmp = f$f⁰(k1¹, 1);
+//│ set tmp1 = f¹³(k2¹, 5);
+//│ return +⁰(tmp, tmp1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ > between
+//│ > between
+//│ > g
+//│ = 13
+
+
+// the in-place DPE rebuilds the statement `g(x)`, which must not look unsaturated, hence pure and droppable
+:flowBasedOpt debugEta debugDpe poly
+:soir
+:noInline
+:expect 3
+@affine(1) fun k1(a)(b) = a + b
+fun k2(a)(b) = a * b
+fun f(k, x) =
+  fun g(y, d) =
+    if y > 1 do print("g")
+    k(y)
+  g(x, 0)
+  let h = g(x, 0)
+  h(2)
+f(k1, 1)
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > g¹¹#0 @ f¹⁴: [2, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > g¹¹#0 @ f¹⁵ -> eliminable: {1}
+//│ dead-param-elim > g¹¹#0 @ f¹⁴ -> eliminable: {1}
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let f$f;
+//│ define f$f as fun f$f¹(k, x) {
+//│   let g;
+//│   define g as fun g¹¹(y)(eta$0$0) {
+//│     let scrut;
+//│     set scrut = >⁰(y, 1);
+//│     match scrut
+//│       true =>
+//│         do Predef⁰.print⁰("g");
+//│         return k(y)(eta$0$0)
+//│       else
+//│         return k(y)(eta$0$0)
+//│     end
+//│   };
+//│   do g¹¹(x);
+//│   return g¹¹(x)(2)
+//│ };
+//│ @affine(1)
+//│ define k1² as fun k1³(a)(b) {
+//│   return +⁰(a, b)
+//│ };
+//│ define k2² as fun k2³(a)(b) {
+//│   return *⁰(a, b)
+//│ };
+//│ define f¹⁴ as fun f¹⁵(k, x) {
+//│   let g, h;
+//│   define g as fun g¹²(y) {
+//│     let scrut;
+//│     set scrut = >⁰(y, 1);
+//│     match scrut
+//│       true =>
+//│         do Predef⁰.print⁰("g");
+//│         return k(y)
+//│       else
+//│         return k(y)
+//│     end
+//│   };
+//│   set h = g¹²(x);
+//│   return h(2)
+//│ };
+//│ return f$f¹(k1³, 1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 3
+
+:noInline
+:expect 10
+f(k2, 5)
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ > g
+//│ = 10

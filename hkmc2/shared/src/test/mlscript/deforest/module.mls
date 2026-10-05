@@ -100,6 +100,11 @@ DeforestList.res + DeforestList.main()
 //│ deforest > DeforestList¹.this.Nil¹ ->
 //│ deforest > 	match: ls¹
 //│ deforest > <<< fusing <<<
+//│ FAILURE: Unexpected internal error
+//│ FAILURE LOCATION: softAssert (FlowAnalysis.scala:641)
+//│ ╔══[INTERNAL ERROR] Compiler reached an unexpected state at 'FlowAnalysis.scala:641': function term:helper is not its symbol's ir definition
+//│ ╟── The compilation result may be incorrect.
+//│ ╙── This is a compiler bug; please report it to the maintainers.
 //│ = 5056
 
 

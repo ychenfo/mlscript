@@ -104,18 +104,6 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
     
     val newFuns = newPolyFuns ++ otherNewFunDefns
     
-    // building the new functions rewrote parts of their originals under the original symbols, which the originals keep
-    object RestoreIrDefns extends BlockTraverser:
-      override def applyDefn(defn: Defn): Unit =
-        defn.defnSym.foreach(_.irDefn = S(defn))
-        super.applyDefn(defn)
-      override def applyClsLikeDefn(defn: ClsLikeDefn): Unit =
-        (defn.methods ::: defn.companion.toList.flatMap(_.methods)).foreach(m => m.dSym.irDefn = S(m))
-        super.applyClsLikeDefn(defn)
-    RestoreIrDefns.applyBlock(pre.pgrm.main)
-    for (_, funSymMap) <- newPolyFnSyms; f <- funSymMap.keysIterator do
-      RestoreIrDefns.applyFunDefn(pre.rootDefn(f))
-    
     val rewrittenInPlace = Map.from[TermSymbol, RewrittenFunDefn]:
       for (selfInstId, funSym) <- collector.synthesizedInstIdToFunSymForInPlaceRewrite yield
         assert(pre.res.localRoots.contains(funSym), s"${funSym.nme} is rewritten in place, but is not defined in this program")
