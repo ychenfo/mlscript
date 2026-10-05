@@ -322,7 +322,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver)(using Raise)
 
   // Rewrites the program under a specific instantiation id
   // from the polymorphic analysis
-  private class Rewriter(instId: InstantiationId) extends InstantiationRewriter(instId):
+  private class Rewriter(instId: InstantiationId, needsRestoreIrDefn: Bool) extends InstantiationRewriter(instId):
     
     override def rewriteFunDefn(fun: FunDefn): RewrittenFunDefn =
       fun.params -> applyBlock(fun.body)
@@ -405,6 +405,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver)(using Raise)
         case Some(labelRestFunSym) =>
           val labelRestFunFvs = restFnFvs(labelRestFunId)
           Return(mkCall(labelRestFunSym, labelRestFunFvs))
+      case Define(defn, _) if needsRestoreIrDefn => restoringIrDefns(defn)(super.applyBlock(b))
       case _ => super.applyBlock(b)
   end Rewriter
   
@@ -469,7 +470,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver)(using Raise)
   // ====== start: implements the abstract members of `PolyInstantiationRewrite` ======
   def solvers: Iterable[FlowAnalysisSolverResult] = solver :: Nil
   
-  def mkRewriter(instId: InstantiationId) = new Rewriter(instId)
+  def mkRewriter(instId: InstantiationId, needsRestoreIrDefn: Bool) = new Rewriter(instId, needsRestoreIrDefn)
   
   def mkPolyFunCopy(
     original: FunDefn,
@@ -506,7 +507,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver)(using Raise)
         val restFunSym = restFunSyms(dtorId)
         val restFunArgs = restFnFvs(dtorId)
         val actualBody = Begin(
-          new Rewriter(instId).applyBlock(ogBody),
+          new Rewriter(instId, needsRestoreIrDefn = true).applyBlock(ogBody),
           Return(mkCall(restFunSym, restFunArgs)))
         val refreshedFvSymbols = dtorBranchFnFvs(branchId._1).map(s => s -> new VarSymbol(Tree.Ident(s"fv_${s.nme}"), erasedType = s.mapErasedValueType))
         val bodyWithCorrectSymbols = refreshExtractedBody(refreshedFvSymbols.toMap, actualBody)
@@ -521,7 +522,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver)(using Raise)
       for (restFunId, (bms, tsym)) <- restFunSyms yield
         val instId = restFunId.getInstId
         val (ogBody, parent) = restOriginalBodiesAndParentRest(restFunId.withoutInstId)
-        val transformedOgBody = new Rewriter(instId).applyBlock(ogBody)
+        val transformedOgBody = new Rewriter(instId, needsRestoreIrDefn = true).applyBlock(ogBody)
         val actualBody = parent match
           case Some(parentRestId) =>
             val parentRestFunId = parentRestId.withInstId(instId)
@@ -542,7 +543,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver)(using Raise)
   end otherNewFunDefns
   
   def mkRootRewriter(rewrittenInPlace: Map[TermSymbol, RewrittenFunDefn]) =
-    new Rewriter(Nil):
+    new Rewriter(Nil, needsRestoreIrDefn = false):
       override def applyFunDefn(fun: FunDefn): FunDefn =
         rewrittenInPlace.get(fun.dSym) match
           case Some((params, rewrittenBody)) =>

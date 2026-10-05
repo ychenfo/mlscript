@@ -389,11 +389,6 @@ map(x => x + 4, enumFromTo(1, 4))
 //│ deforest > Nil⁰ ->
 //│ deforest > 	match: ls¹³
 //│ deforest > <<< fusing <<<
-//│ FAILURE: Unexpected internal error
-//│ FAILURE LOCATION: softAssert (FlowAnalysis.scala:641)
-//│ ╔══[INTERNAL ERROR] Compiler reached an unexpected state at 'FlowAnalysis.scala:641': function term:lambda is not its symbol's ir definition
-//│ ╟── The compilation result may be incorrect.
-//│ ╙── This is a compiler bug; please report it to the maintainers.
 //│ = Cons(5, Cons(6, Cons(7, Nil)))
 
 
