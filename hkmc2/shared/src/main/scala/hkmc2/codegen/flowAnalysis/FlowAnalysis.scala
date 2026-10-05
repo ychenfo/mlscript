@@ -54,13 +54,6 @@ object FlowAnalysis:
         resultId.getResult match
         case FunRef(f, _) => Some(f)
         case _ => None
-      // the root a use site instantiates: the function it refers to, or the class it constructs, seen or not
-      def getInstantiatedRoot(using Elaborator.State): Opt[RootSym] =
-        resultId.getResult match
-        case FunRef(f, _) => S(f)
-        case CtorProducer(cls: ClassSymbol, _, _) => S(cls)
-        case Value.This(cls: ClassSymbol) => S(cls)
-        case _ => N
       def showRefSite(using SymbolPrinter, Raise, ShowCfg): Str =
         summon[SymbolPrinter].printSymbol(resultId)
     
@@ -799,7 +792,10 @@ class FlowConstraintsCollector(
     def groupAllows(d: RootSym, emission: RootMode => Bool) = sccGroups.getOrElse(d, d :: Nil).forall(m => emission(roots(m)))
     def isEmitted(site: ResultId) = synthesizedInstIdToFunSym.get(site :: Nil) match
       case S(f) => groupAllows(f, _.rewrittenInPlace)
-      case N => site.getInstantiatedRoot.exists(groupAllows(_, _.specialized))
+      case N => site.getResult match
+        case FunRef(f, _) => groupAllows(f, _.specialized)
+        case CtorProducer(cls: ClassSymbol, _, _) => groupAllows(cls, _.specialized)
+        case _ => false
     s.instantiationId.exists(_.exists(!isEmitted(_)))
 
   val allRealCtors = mutable.Buffer.empty[Ctor]
