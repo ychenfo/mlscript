@@ -65,25 +65,30 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
   
   val newPolyFnSyms : LinkedHashMap[InstantiationId, Map[TermSymbol, (BlockMemberSymbol, TermSymbol)]] =
     val res = LinkedHashMap.empty[InstantiationId, Map[TermSymbol, (BlockMemberSymbol, TermSymbol)]]
+    def copiedAt(path: InstantiationId): Ls[RootSym] =
+      collector.synthesizedInstIdToFunSymForInPlaceRewrite.get(path) match
+      // an in-place instance emits in place and copies the rest of its group
+      case S(entry) => collector.sccGroups.get(entry).fold(Nil)(_.filterNot(_ is entry))
+      case N =>
+        val referredFun = path.last.getReferredFun.getOrElse(lastWords(
+          s"instantiation path ${path.map(_.nme).mkString(".")} does not end in a function; a solver kept a blocked decision"))
+        collector.sccGroups(referredFun)
     for
       instId <- solvers.iterator.flatMap(_.polyInstIds)
       path <- instId.inits
-      // skip synthesized instIds — those rewrite in-place
-      if path.nonEmpty && !collector.synthesizedInstIdToFunSymForInPlaceRewrite.contains(path)
+      if path.nonEmpty && !res.contains(path)
+      copied = copiedAt(path)
+      if copied.nonEmpty
     do
-      val referredFun = path.last.getReferredFun.getOrElse(lastWords(
-        s"instantiation path ${path.map(_.nme).mkString(".")} does not end in a function; a solver kept a blocked decision"))
-      res.getOrElseUpdate(
-        path,
-        collector.sccGroups(referredFun)
-          .map:
-            case f: TermSymbol =>
-              val name = path.mkFunName + s"$$${f.nme}"
-              f -> (
-                new BlockMemberSymbol(name, Nil, true),
-                new TermSymbol(Fun, N, Tree.Ident(name), erasedType = f.erasedType))
-            case cls: ClassSymbol => lastWords(s"the group of ${cls.nme} is copied, but a class is never specialized")
-          .toMap)
+      res(path) = copied
+        .map:
+          case f: TermSymbol =>
+            val name = path.mkFunName + s"$$${f.nme}"
+            f -> (
+              new BlockMemberSymbol(name, Nil, true),
+              new TermSymbol(Fun, N, Tree.Ident(name), erasedType = f.erasedType))
+          case cls: ClassSymbol => lastWords(s"the group of ${cls.nme} is copied, but a class is never specialized")
+        .toMap
     res
   end newPolyFnSyms
   
@@ -148,7 +153,11 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
     object PolyFnRef:
       def unapply(p: Path): Opt[Value.MemberRef] = p match
         case ref@FunRef(f, _) =>
-          newPolyFnSyms.get(newRefId(ref.uid, f)).map: syms =>
+          val path = newRefId(ref.uid, f)
+          for
+            syms <- newPolyFnSyms.get(path)
+            if !collector.synthesizedInstIdToFunSymForInPlaceRewrite.get(path).contains(f)
+          yield
             val (bms, tSym) = syms(f)
             bms.asMemberRef(tSym)
         case _ => N

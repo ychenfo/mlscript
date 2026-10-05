@@ -788,13 +788,13 @@ class FlowConstraintsCollector(
   
   // a strategy is rewritable only if the code of each site of its path is emitted
   def isBlocked(s: StratWithOrigin[?]): Bool =
-    // a group is emitted only as a whole: in place at an in-place site, as a specialized copy at any other
-    def groupAllows(d: RootSym, emission: RootMode => Bool) = sccGroups.getOrElse(d, d :: Nil).forall(m => emission(roots(m)))
+    // a group is emitted only as a whole: as specialized copies, except that an in-place site's entry is rewritten in place
+    def groupAllows(d: RootSym, emitted: RootSym => Bool) = sccGroups.getOrElse(d, d :: Nil).forall(emitted)
     def isEmitted(site: ResultId) = synthesizedInstIdToFunSymForInPlaceRewrite.get(site :: Nil) match
-      case S(f) => groupAllows(f, _.rewrittenInPlace)
+      case S(f) => groupAllows(f, m => if m is f then roots(m).rewrittenInPlace else roots(m).specialized)
       case N => site.getResult match
-        case FunRef(f, _) => groupAllows(f, _.specialized)
-        case CtorProducer(cls: ClassSymbol, _, _) => groupAllows(cls, _.specialized)
+        case FunRef(f, _) => groupAllows(f, roots(_).specialized)
+        case CtorProducer(cls: ClassSymbol, _, _) => groupAllows(cls, roots(_).specialized)
         case _ => false
     s.instantiationId.exists(_.exists(!isEmitted(_)))
 
