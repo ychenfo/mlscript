@@ -69,7 +69,7 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
       instId <- solvers.iterator.flatMap(_.polyInstIds)
       path <- instId.inits
       // skip synthesized instIds — those rewrite in-place
-      if path.nonEmpty && !collector.synthesizedInstIdToFunSym.contains(path)
+      if path.nonEmpty && !collector.synthesizedInstIdToFunSymForInPlaceRewrite.contains(path)
     do
       val referredFun = path.last.getReferredFun.getOrElse(lastWords(
         s"instantiation path ${path.map(_.nme).mkString(".")} does not end in a function; a solver kept a blocked decision"))
@@ -112,7 +112,8 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
       RestoreIrDefns.applyFunDefn(pre.rootDefn(f))
     
     val rewrittenInPlace = Map.from[TermSymbol, RewrittenFunDefn]:
-      for (selfInstId, funSym) <- collector.synthesizedInstIdToFunSym yield
+      for (selfInstId, funSym) <- collector.synthesizedInstIdToFunSymForInPlaceRewrite yield
+        assert(pre.res.localRoots.contains(funSym), s"${funSym.nme} is rewritten in place, but is not defined in this program")
         funSym -> mkRewriter(selfInstId).rewriteFunDefn(pre.rootDefn(funSym))
     
     val newMainBody = Scoped(

@@ -52,7 +52,7 @@ class DeadParamElimSolver(val constraintSolver: FlowConstraintSolver, traceLogge
   val (liveParams, liveCallSiteParams) =
     def isSyntheticRoot(prodFun: ProdFun): Bool =
       val instId = prodFun.instantiationId.get
-      collector.synthesizedInstIdToFunSym.get(instId).exists: rootFunSym =>
+      collector.synthesizedInstIdToFunSymForInPlaceRewrite.get(instId).exists: rootFunSym =>
         prodFun.exprId match
           case (funSym: TermSymbol, _) =>
             (collector.sccRep(funSym), collector.sccRep(rootFunSym)) match

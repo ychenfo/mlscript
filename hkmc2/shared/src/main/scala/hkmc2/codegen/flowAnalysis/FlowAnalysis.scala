@@ -784,13 +784,13 @@ class FlowConstraintsCollector(
   def sccRep(d: RootSym): Opt[RootSym] = sccGroups.get(d).map(_.head)
   
   // the one-site path of each local root function's in-place code
-  val synthesizedInstIdToFunSym = LinkedHashMap.empty[InstantiationId, TermSymbol]
+  val synthesizedInstIdToFunSymForInPlaceRewrite = LinkedHashMap.empty[InstantiationId, TermSymbol]
   
   // a strategy is rewritable only if the code of each site of its path is emitted
   def isBlocked(s: StratWithOrigin[?]): Bool =
     // a group is emitted only as a whole: in place at an in-place site, as a specialized copy at any other
     def groupAllows(d: RootSym, emission: RootMode => Bool) = sccGroups.getOrElse(d, d :: Nil).forall(m => emission(roots(m)))
-    def isEmitted(site: ResultId) = synthesizedInstIdToFunSym.get(site :: Nil) match
+    def isEmitted(site: ResultId) = synthesizedInstIdToFunSymForInPlaceRewrite.get(site :: Nil) match
       case S(f) => groupAllows(f, _.rewrittenInPlace)
       case N => site.getResult match
         case FunRef(f, _) => groupAllows(f, _.specialized)
@@ -857,7 +857,7 @@ class FlowConstraintsCollector(
     end ProdStratSchemeAnalysisInScc
     
     // every scheme is ready before any code instantiates it
-    ProdStratSchemeAnalysisInScc.queryAll(roots.keys.filter(roots(_).poly))
+    ProdStratSchemeAnalysisInScc.queryAll(roots.keysIterator.filter(roots(_).poly))
     
     // the site of a synthesized use of root `f`, the one-site path its own code is analyzed under
     def ownSite(f: TermSymbol): ResultId = preAnalyzer.rootDefn(f).sym.asMemberRef(f).uid
@@ -866,12 +866,29 @@ class FlowConstraintsCollector(
     globalCollector.givenIn: cc ?=>
       cc.constrain(preAnalyzer.res.primitiveStratVar, UnknownCons)
       cc.constrain(UnknownProd, preAnalyzer.res.primitiveStratVar)
-      // the code collected as is: main's under `Nil`, and each mono function's under a site of its own
+      
       processBlock(preAnalyzer.pgrm.main)(using cc, UnknownCons)
-      for case (f: TermSymbol, mode) <- roots if !mode.poly do
-        val site = ownSite(f)
-        if mode.rewrittenInPlace then synthesizedInstIdToFunSym(site :: Nil) = f
-        collectFunction(preAnalyzer.rootDefn(f))(using cc.forCodeOf(f, S(site :: Nil)))
+      
+      // the code of each root, and its uses by code we cannot see
+      for (d, mode) <- roots do (d, mode) match
+        // a mono function's code is collected as is under a site of its own, and code we cannot see may call a public one rewritten in place
+        case (f: TermSymbol, RootMode(poly = false, rewrittenInPlace = inPlace)) =>
+          val site = ownSite(f)
+          if inPlace then synthesizedInstIdToFunSymForInPlaceRewrite(site :: Nil) = f
+          collectFunction(preAnalyzer.rootDefn(f))(using cc.forCodeOf(f, S(site :: Nil)))
+          if inPlace && (preAnalyzer.rootDefn(f).visibility is Visibility.Public) then
+            cc.constrain(generatedVars(f), UnknownCons)
+        // a poly function's code is rewritten in place as one more instance, which serves every caller without a copy
+        case (f: TermSymbol, RootMode(poly = true, rewrittenInPlace = true)) =>
+          val site = ownSite(f)
+          synthesizedInstIdToFunSymForInPlaceRewrite(site :: Nil) = f
+          cc.constrain(schemes(f).instantiate(site, f).head, UnknownCons)
+        // a poly function of an earlier block only has the instances of its uses
+        case (_: TermSymbol, RootMode(poly = true, rewrittenInPlace = false)) => ()
+        // code we cannot see may construct any class defined here
+        case (cls: ClassSymbol, _) =>
+          if preAnalyzer.res.localRoots.contains(cls) then
+            for p <- schemes(cls).instantiate(Value.This(cls)(N).uid, cls) do cc.constrain(UnknownProd, p)
 
       // this places non-affine constraints correctly:
       // non-affine constraints on symbols owned by a poly scc group are handled
@@ -882,25 +899,12 @@ class FlowConstraintsCollector(
           stratVar <- preAnalyzer.res.generatedVars.get(sym)
           if stratVar.generatedFor.flatMap(sccRep).isEmpty
         do cc.constrain(stratVar, NonAffine)
-
+      
       for
         v <- preAnalyzer.res.rootVals
         if v.irDefn.getOrElse(lastWords(s"root val ${v.nme} has no ir definition")).visibility is Visibility.Public
       do
         cc.constrain(generatedVars(v), UnknownCons)
-
-      // a poly function's code is rewritten in place as one more instance, which serves every caller without a copy
-      for case (f: TermSymbol, mode) <- roots if mode.poly && mode.rewrittenInPlace do
-        val site = ownSite(f)
-        synthesizedInstIdToFunSym(site :: Nil) = f
-        cc.constrain(schemes(f).instantiate(site, f).head, UnknownCons)
-      // code we cannot see may call a public mono function, and construct any class defined here
-      for d <- preAnalyzer.res.localRoots do d match
-        case f: TermSymbol =>
-          if !roots(f).poly && (preAnalyzer.rootDefn(f).visibility is Visibility.Public) then
-            cc.constrain(generatedVars(f), UnknownCons)
-        case cls: ClassSymbol =>
-          for p <- schemes(cls).instantiate(Value.This(cls)(N).uid, cls) do cc.constrain(UnknownProd, p)
     
     // =========================
     
