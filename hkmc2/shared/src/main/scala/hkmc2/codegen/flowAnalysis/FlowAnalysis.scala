@@ -112,15 +112,15 @@ type SelField = TermSymbol | Int
 type FunId = (funSym: TermSymbol, whichParamList: Int) | ResultId
 type OriginId = ResultId | FunId
 type ConcreteFunId = ConcreteId[FunId]
-// the symbols that get a strat var: locals, params, and the term symbols of functions, vals and fields
 type StratVarSym = LocalVarSymbol | TermSymbol
-// the root definitions, each analyzed as a unit of its own: functions, and classes for their ctors
 type RootSym = TermSymbol | ClassSymbol
 
 
 object TrackableFieldSelect:
   def unapply(s: Select): Opt[Path -> (field: TermSymbol, owner: ClassSymbol)] =
     s.symbol match
+    // TODO: this _.decl is still use term instead of irDefn?
+    // hmm can we get rid of this _.isInstanceOf[Param]?
     case S(sSym) if sSym.asTrm.exists(_.decl.exists(_.isInstanceOf[Param])) =>
       val tSym = sSym.asTrm.get
       for
@@ -293,6 +293,7 @@ case class ConcreteId[A <: OriginId](exprId: A, instId: InstantiationId):
     case r: ResultId => s"${r.getResult}"
 
 
+// TODO:
 // `exposed` are the vars a use links to: a function's own var, or a class's ctor params
 class ProdStratScheme(val exposed: Ls[StratVar], val constraints: Ls[ProdStrat -> ConsStrat])
 
@@ -373,7 +374,8 @@ class FlowPreAnalyzer(val pgrm: Program)(using
   end res
   
   enum InCtx:
-    case TopLvl()
+    // `root` is the unit scanned under this frame (N for main's), which owns the vars bound there
+    case TopLvl(root: Opt[RootSym])
     case Mod(mod: ClsLikeBody)
     case ModCtor(mod: ClsLikeBody)
     case Cls(cls: ClsLikeDefn)
@@ -388,11 +390,9 @@ class FlowPreAnalyzer(val pgrm: Program)(using
   
   private object ctxTracker:
     private var ctx: Ls[InCtx] = Nil
-    // the root whose code is being scanned (N for main's), which owns the vars bound there
-    private var currentRoot: Opt[RootSym] = N
     private def isTopLvlLikeFunCtx(ctx0: Ls[InCtx]): Boolean =
       ctx0.forall:
-        case InCtx.TopLvl() => true
+        case InCtx.TopLvl(_) => true
         case InCtx.Mod(_) => true
         case InCtx.ModCtor(_) => true
         case InCtx.BegnBody(_) => true
@@ -403,11 +403,14 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     def isTopLvlLikeFunCtx: Boolean = isTopLvlLikeFunCtx(ctx)
     def isTopLvlLikeModuleCtx: Boolean =
       ctx.forall:
-        case InCtx.TopLvl() => true
+        case InCtx.TopLvl(_) => true
         case InCtx.BegnBody(_) => true
         case InCtx.Scped(_) => true
         case _ => false
     def registerStratVar(sym: StratVarSym, nme: String): Unit =
+      val currentRoot = ctx.lastOption match
+        case S(InCtx.TopLvl(root)) => root
+        case c => lastWords(s"var registered outside a top-level frame: $c")
       res.generatedVars.getOrElseUpdate(sym, freshVar(nme, S(sym), currentRoot))
     
     private inline def withCtx(newCtx: InCtx)(inline body: => Any)(after: => Unit = ()): Unit =
@@ -460,8 +463,7 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     // each unit is scanned in a top-level context of its own
     inline def inTopLvl(root: Opt[RootSym])(inline body: => Any) =
       assert(ctx.isEmpty)
-      currentRoot = root
-      withCtx(InCtx.TopLvl())(body):
+      withCtx(InCtx.TopLvl(root))(body):
         assert(ctx.isEmpty)
     
     inline def inModCtor(mod: ClsLikeBody)(inline body: => Any) =
@@ -785,7 +787,7 @@ class FlowConstraintsCollector(
   
   // the one-site path of each local root function's in-place code
   val synthesizedInstIdToFunSymForInPlaceRewrite = LinkedHashMap.empty[InstantiationId, TermSymbol]
-  
+  // TODO: clean this up along with the RootMode design...
   // a strategy is rewritable only if the code of each site of its path is emitted
   def isBlocked(s: StratWithOrigin[?]): Bool =
     // a group is emitted only as a whole: as specialized copies, except that an in-place site's entry is rewritten in place
