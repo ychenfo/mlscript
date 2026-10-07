@@ -234,3 +234,25 @@ Test.Test2.foo(AA(2))
 //│ deforest > 	fields: a⁰.x¹
 //│ deforest > <<< fusing <<<
 //│ ═══[RUNTIME ERROR] ReferenceError: Test2 is not defined
+
+
+// TODO: objects are not lifted, so fusing copies a nested definition, which deforestation does not support
+:fixme
+data class D(x)
+fun f(d) = if d is
+  D(x) then
+    object O with
+      val v = x
+    O.v
+f(D(1))
+//│ ╔══[WARNING] Objects are not yet lifted.
+//│ ║  l.244: 	    object O with
+//│ ╙──       	           ^
+//│ deforest > >>> fusing >>>
+//│ deforest > D⁰(1) ->
+//│ deforest > 	match: d⁰
+//│ deforest > 	fields: d⁰.x⁴
+//│ deforest > <<< fusing <<<
+//│ /!!!\ Uncaught error: scala.NotImplementedError: deforestation copying the nested definition O (deforestation expects a lifted program) (of class String)
+
+

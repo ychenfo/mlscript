@@ -20,7 +20,7 @@ class FlowAnalysisBasedRewrite(
 
   private case class EtaParamList(params: ParamList, args: Ls[Arg])
   
-  class Rewriter(instId: InstantiationId, needsRestoreIrDefn: Bool) extends InstantiationRewriter(instId):
+  class Rewriter(instId: InstantiationId, forCopy: Bool) extends InstantiationRewriter(instId):
     
     // dead parameter elimination states and helper functions
     private val activeEliminatedParams = MutSet.empty[VarSymbol]
@@ -144,7 +144,7 @@ class FlowAnalysisBasedRewrite(
             Scoped(
               Set.single(tmp),
               Assign(tmp, res2, Return(etaCall(tmp.asPath).withLocOf(res2))))
-      case Define(defn, _) if needsRestoreIrDefn => restoringIrDefns(defn)(super.applyBlock(b))
+      case Define(defn, _) if forCopy => restoringIrDefns(defn)(super.applyBlock(b))
       case _ => super.applyBlock(b)
     
     override def applyResult(r: Result)(k: Result => Block): Block =
@@ -231,10 +231,10 @@ class FlowAnalysisBasedRewrite(
   def solvers: Iterable[FlowAnalysisSolverResult] =
     deadParamElimSolver :: etaExpansionSolver :: deadConstructorElimSolver :: Nil
   
-  def mkRewriter(instId: InstantiationId, needsRestoreIrDefn: Bool) = new Rewriter(instId, needsRestoreIrDefn)
+  def mkRewriter(instId: InstantiationId, forCopy: Bool) = new Rewriter(instId, forCopy)
   
   def mkRootRewriter(rewrittenInPlace: Map[TermSymbol, RewrittenFunDefn]) =
-    new Rewriter(Nil, needsRestoreIrDefn = false):
+    new Rewriter(Nil, forCopy = false):
       override def applyFunDefn(fun: FunDefn): FunDefn =
         rewrittenInPlace.get(fun.dSym) match
           case S((params, body)) =>
