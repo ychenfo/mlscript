@@ -997,6 +997,12 @@ class FlowConstraintsCollector(
             capturedSymStrat <- generatedVars.get(v)
           do
             cc.constrain(capturedSymStrat, capUB)
+          // a partial application closes over the params of the lists it has applied
+          for
+            earlier <- params.take(whichParamList)
+            p <- earlier.restParam ++: earlier.params
+          do
+            cc.constrain(generatedVars(p.sym), capUB)
           new ProdFun(plFunId, cc.instId)(
             ps.params.map(p => generatedVars(p.sym)),
             ps.restParam.map(p => generatedVars(p.sym)),

@@ -67,11 +67,13 @@ c(AA(7))
 //│ deforest > lambda$here_for_c¹
 //│ deforest > lambda$here_for_c⁰
 //│ deforest > lambda_for_lambda⁰
+//│ deforest > p_for_c¹
+//│ deforest > p_for_c⁰
+//│ deforest > p_for_lambda$_for_c¹
+//│ deforest > p_for_lambda$_for_c⁰
+//│ deforest > tmp⁰
 //│ deforest > <<< non-affine syms <<<
 //│ deforest > >>> fusing >>>
-//│ deforest > AA⁰(7) ->
-//│ deforest > 	match: p¹
-//│ deforest > 	fields: p¹.x⁰
 //│ deforest > <<< fusing <<<
 //│ = 14
 
@@ -100,7 +102,7 @@ fun c(x) = if x is AA(_) then 0
 let p = AA(10) in
   c(p) + c(p)
 //│ deforest > >>> non-affine syms >>>
-//│ deforest > p²
+//│ deforest > p¹
 //│ deforest > <<< non-affine syms <<<
 //│ deforest > >>> fusing >>>
 //│ deforest > <<< fusing <<<
@@ -164,7 +166,7 @@ fun c2(x) = if x is AA(AA(_)) then 1 else 0
 let p = AA(AA(AA(10))) in
   c1(p) + c2(p)
 //│ deforest > >>> non-affine syms >>>
-//│ deforest > p²
+//│ deforest > p¹
 //│ deforest > tmp¹
 //│ deforest > tmp⁰
 //│ deforest > <<< non-affine syms <<<
@@ -213,8 +215,8 @@ nest_consume(nest_pickB, nest_prod(10))
 //│ deforest > <<< non-affine syms <<<
 //│ deforest > >>> fusing >>>
 //│ deforest > AA⁰(tmp⁰) ->
-//│ deforest > 	match: p²
-//│ deforest > 	fields: p².x⁰
+//│ deforest > 	match: p¹
+//│ deforest > 	fields: p¹.x⁰
 //│ deforest > <<< fusing <<<
 //│ = 22
 
@@ -431,8 +433,7 @@ foo of AA of () => 1
 
 
 
-// TODO: non-affinity misses that the result of `g(p)` is called twice, so eta expansion repeats `mk`'s effect
-:fixme
+// the result of `g(p)` is called twice, so `p` is not affine and eta expansion must not repeat `mk`'s effect
 :flowBasedOpt
 :noInline
 :expect 15
@@ -448,24 +449,27 @@ c(mk(7)) + n
 //│ deforest > >>> non-affine syms >>>
 //│ deforest > call_res_for_c¹
 //│ deforest > call_res_for_c⁰
+//│ deforest > call_res⁰
 //│ deforest > cap_ub_(term:g,1)_for_g_for_c¹
 //│ deforest > cap_ub_(term:g,1)_for_g_for_c⁰
 //│ deforest > cl_for_c¹
 //│ deforest > cl_for_c⁰
+//│ deforest > mk_res_for_mk⁰
+//│ deforest > p_for_c¹
+//│ deforest > p_for_c⁰
+//│ deforest > p_for_g_for_c¹
+//│ deforest > p_for_g_for_c⁰
+//│ deforest > tmp⁵
+//│ deforest > x_for_mk⁰
 //│ deforest > <<< non-affine syms <<<
 //│ deforest > >>> accumulator syms >>>
 //│ deforest > <<< accumulator syms <<<
 //│ deforest > >>> fusing >>>
-//│ deforest > AA⁰(x³) ->
-//│ deforest > 	match: p³
-//│ deforest > 	fields: p³.x⁰
 //│ deforest > <<< fusing <<<
-//│ ═══[RUNTIME ERROR] Expected: '15', got: '16'
-//│ = 16
-//│ n = 2
+//│ = 15
+//│ n = 1
 
-// TODO: the same for a closure, which lifting turns into a curried function
-:fixme
+// the same for a closure, which lifting turns into a curried function
 :flowBasedOpt
 :noInline
 :expect 15
@@ -480,6 +484,7 @@ c(mk(7)) + n
 //│ deforest > >>> non-affine syms >>>
 //│ deforest > call_res_for_c¹
 //│ deforest > call_res_for_c⁰
+//│ deforest > call_res⁰
 //│ deforest > cap_ub_(term:lambda$,1)_for_lambda$_for_c¹
 //│ deforest > cap_ub_(term:lambda$,1)_for_lambda$_for_c⁰
 //│ deforest > cl_for_c¹
@@ -487,16 +492,19 @@ c(mk(7)) + n
 //│ deforest > lambda$here_for_c¹
 //│ deforest > lambda$here_for_c⁰
 //│ deforest > lambda_for_lambda⁰
+//│ deforest > mk_res_for_mk⁰
+//│ deforest > p_for_c¹
+//│ deforest > p_for_c⁰
+//│ deforest > p_for_lambda$_for_c¹
+//│ deforest > p_for_lambda$_for_c⁰
+//│ deforest > tmp⁵
+//│ deforest > x_for_mk⁰
 //│ deforest > <<< non-affine syms <<<
 //│ deforest > >>> accumulator syms >>>
 //│ deforest > <<< accumulator syms <<<
 //│ deforest > >>> fusing >>>
-//│ deforest > AA⁰(x⁴) ->
-//│ deforest > 	match: p⁴
-//│ deforest > 	fields: p⁴.x⁰
 //│ deforest > <<< fusing <<<
-//│ ═══[RUNTIME ERROR] Expected: '15', got: '16'
-//│ = 16
-//│ n = 2
+//│ = 15
+//│ n = 1
 
 
