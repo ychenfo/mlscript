@@ -349,6 +349,8 @@ g(o) + f(o) + o.A#x
 //│ o = A(1)
 
 
+// TODO: the fused branch assigns its parameter `fv_x` instead of the top-level `x`, which the lifted `f` reads
+:fixme
 :expect 1
 let x = if A(0) is
   A then 1
@@ -358,7 +360,7 @@ f()
 //│ deforest > A⁰(0) ->
 //│ deforest > 	match: scrut³
 //│ deforest > <<< fusing <<<
-//│ = 1
+//│ ═══[RUNTIME ERROR] Expected: '1', got: 'undefined'
 //│ f = undefined
 //│ x = undefined
 

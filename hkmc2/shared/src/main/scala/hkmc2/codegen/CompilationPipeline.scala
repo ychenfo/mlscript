@@ -34,6 +34,11 @@ class CompilationPipeline(using Config, Raise, State, Ctx, SymbolPrinter):
       passHook(passName, before, result)
     
     runPass("LambdaRewriter")(LambdaRewriter.desugar)
+    // deforestation does not support nested definitions
+    runPass("Lifter"): prog =>
+      if config.deforest.isDefined then
+        blockPass(Lifter(_).transform)(prog)
+      else prog
     runPass("Deforest"): prog =>
       val outterTl = tl
       config.deforest match
