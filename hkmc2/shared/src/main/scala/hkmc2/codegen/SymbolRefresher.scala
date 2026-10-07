@@ -16,48 +16,35 @@ class SymbolRefresherWalker(mapping: MutMap[Symbol, Symbol])(using State) extend
     mapping(k) = v
   
   private def refreshTempSymbol(s: TempSymbol) =
-    assertUpdate(s, new TempSymbol(s.trm, s.erasedType, s.nme))
+    assertUpdate(s, SymbolRefresher.freshTempSymbol(s))
 
   private def refreshVarSymbol(s: VarSymbol) =
-    val ns = new VarSymbol(s.id, s.erasedType)
-    ns.sourceAliases = s.sourceAliases
-    assertUpdate(s, ns)
+    assertUpdate(s, SymbolRefresher.freshVarSymbol(s))
   
   private def refreshBlockMemberSymbol(s: BlockMemberSymbol) =
-    val ns = new BlockMemberSymbol(s.nme, s.trees, s.nameIsMeaningful)
-    ns.sourceAliases = s.sourceAliases
-    assertUpdate(s, ns)
+    assertUpdate(s, SymbolRefresher.freshBlockMemberSymbol(s))
 
   private def refreshLabelSymbol(s: LabelSymbol) =
-    assertUpdate(s, new LabelSymbol(s.trm, s.nme))
+    assertUpdate(s, SymbolRefresher.freshLabelSymbol(s))
 
   private def refreshTermSymbol(s: TermSymbol) =
     // Inner symbol (if present) must be traversed at this point.
-    val ns = new TermSymbol(s.k, s.owner.map(o => mapping.getOrElse(o, o).asInstanceOf[InnerSymbol]), s.id, s.erasedType)
-    ns.sourceAliases = s.sourceAliases
-    assertUpdate(s, ns)
+    assertUpdate(s, SymbolRefresher.freshTermSymbol(s, mapping))
 
   private def refreshClassSymbol(s: ClassSymbol) =
-    val ns = new ClassSymbol(s.tree, s.id)
-    assertUpdate(s, ns)
-    // defn is relied by JSBuilder to identify whether a class should be lifted
-    s.defn match
-    case s @ S(_) => ns.defn = s
-    case N =>
+    assertUpdate(s, SymbolRefresher.freshClassSymbol(s))
 
   private def refreshModuleOrObjectSymbol(s: ModuleOrObjectSymbol) =
-    assertUpdate(s, new ModuleOrObjectSymbol(s.tree, s.id))
+    assertUpdate(s, SymbolRefresher.freshModuleOrObjectSymbol(s))
 
   private def refreshPatternSymbol(s: PatternSymbol) =
-    assertUpdate(s, new PatternSymbol(s.id, s.params, s.body))
+    assertUpdate(s, SymbolRefresher.freshPatternSymbol(s))
 
   private def refreshTopLevelSymbol(s: TopLevelSymbol) =
-    assertUpdate(s, new TopLevelSymbol(s.nme))
+    assertUpdate(s, SymbolRefresher.freshTopLevelSymbol(s))
 
   private def refreshClassCtorSymbol(s: ClassCtorSymbol) =
-    assertUpdate(s, new ClassCtorSymbol(s.k,
-      s.owner.map(o => mapping.getOrElse(o, o).asInstanceOf[InnerSymbol]),
-      mapping.getOrElse(s.associatedCls, s.associatedCls).asInstanceOf[ClassSymbol]))
+    assertUpdate(s, SymbolRefresher.freshClassCtorSymbol(s, mapping))
 
   private def refreshParamList(pl: ParamList) =
     for
@@ -138,6 +125,51 @@ class SymbolRefresherWalker(mapping: MutMap[Symbol, Symbol])(using State) extend
     applyBlock(ctor)
 
 object SymbolRefresher:
+  
+  def freshTempSymbol(s: TempSymbol)(using State): TempSymbol =
+    new TempSymbol(s.trm, s.erasedType, s.nme)
+  
+  def freshVarSymbol(s: VarSymbol)(using State): VarSymbol =
+    val ns = new VarSymbol(s.id, s.erasedType)
+    ns.sourceAliases = s.sourceAliases
+    ns
+  
+  def freshBlockMemberSymbol(s: BlockMemberSymbol)(using State): BlockMemberSymbol =
+    val ns = new BlockMemberSymbol(s.nme, s.trees, s.nameIsMeaningful)
+    ns.sourceAliases = s.sourceAliases
+    ns
+  
+  def freshLabelSymbol(s: LabelSymbol)(using State): LabelSymbol =
+    new LabelSymbol(s.trm, s.nme)
+  
+  // the owner, if refreshed, must already be in `mapping`
+  def freshTermSymbol(s: TermSymbol, mapping: collection.Map[Symbol, Symbol])(using State): TermSymbol =
+    val ns = new TermSymbol(s.k, s.owner.map(o => mapping.getOrElse(o, o).asInstanceOf[InnerSymbol]), s.id, s.erasedType)
+    ns.sourceAliases = s.sourceAliases
+    ns
+  
+  def freshClassSymbol(s: ClassSymbol)(using State): ClassSymbol =
+    val ns = new ClassSymbol(s.tree, s.id)
+    // defn is relied by JSBuilder to identify whether a class should be lifted
+    s.defn match
+    case s @ S(_) => ns.defn = s
+    case N =>
+    ns
+  
+  def freshModuleOrObjectSymbol(s: ModuleOrObjectSymbol)(using State): ModuleOrObjectSymbol =
+    new ModuleOrObjectSymbol(s.tree, s.id)
+  
+  def freshPatternSymbol(s: PatternSymbol)(using State): PatternSymbol =
+    new PatternSymbol(s.id, s.params, s.body)
+  
+  def freshTopLevelSymbol(s: TopLevelSymbol)(using State): TopLevelSymbol =
+    new TopLevelSymbol(s.nme)
+  
+  // the owner and the associated class, if refreshed, must already be in `mapping`
+  def freshClassCtorSymbol(s: ClassCtorSymbol, mapping: collection.Map[Symbol, Symbol])(using State): ClassCtorSymbol =
+    new ClassCtorSymbol(s.k,
+      s.owner.map(o => mapping.getOrElse(o, o).asInstanceOf[InnerSymbol]),
+      mapping.getOrElse(s.associatedCls, s.associatedCls).asInstanceOf[ClassSymbol])
   
   def initSymbolSubst(m: collection.Map[Symbol, Symbol]) =
     new SymbolSubst:
