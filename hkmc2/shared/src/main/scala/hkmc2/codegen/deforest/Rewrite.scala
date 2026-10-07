@@ -322,7 +322,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver)(using Raise)
 
   // Rewrites the program under a specific instantiation id
   // from the polymorphic analysis
-  private class Rewriter(instId: InstantiationId, forCopy: Bool) extends InstantiationRewriter(instId):
+  private class Rewriter(instId: InstantiationId, forCopy: Bool) extends InstantiationRewriter(instId, SymbolSubst.Id):
     
     override def rewriteFunDefn(fun: FunDefn): RewrittenFunDefn =
       fun.params -> applyBlock(fun.body)

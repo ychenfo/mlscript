@@ -121,20 +121,10 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
 
   // rewrites the program as seen from one instantiation path `instId`
   // helps subclass compute the symbol for the instantiated fun defns
-  protected abstract class InstantiationRewriter(val instId: InstantiationId)
-    extends BlockTransformer(SymbolSubst.Id):
+  protected abstract class InstantiationRewriter(val instId: InstantiationId, subst: SymbolSubst)
+    extends BlockTransformer(subst):
     
     def rewriteFunDefn(fun: FunDefn): RewrittenFunDefn
-    
-    // rewriting for a copy rebuilds the original's defns under their symbols, which must stay owned by the original
-    protected def restoringIrDefns(defn: Defn)(rewrite: => Block): Block =
-      val owned = defn.defnSym.toList ::: (defn match
-        case cls: ClsLikeDefn => (cls.methods ::: cls.companion.toList.flatMap(_.methods)).map(_.dSym)
-        case _ => Nil)
-      val owners = owned.map(s => s -> s.irDefn)
-      val b2 = rewrite
-      for (s, d) <- owners do s.irDefn = d
-      b2
     
     extension (resId: ResultId) def concreteId = ConcreteId(resId, instId)
     

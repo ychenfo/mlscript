@@ -20,7 +20,9 @@ class FlowAnalysisBasedRewrite(
 
   private case class EtaParamList(params: ParamList, args: Ls[Arg])
   
-  class Rewriter(instId: InstantiationId, forCopy: Bool) extends InstantiationRewriter(instId):
+  // with `refresh`, it builds a copy whose bound symbols are all fresh
+  class Rewriter(instId: InstantiationId, refresh: Opt[IncrementalSymbolRefresh])
+    extends InstantiationRewriter(instId, refresh.getOrElse(SymbolSubst.Id)):
     
     // dead parameter elimination states and helper functions
     private val activeEliminatedParams = MutSet.empty[VarSymbol]
@@ -107,6 +109,7 @@ class FlowAnalysisBasedRewrite(
     
     override def rewriteFunDefn(fun: FunDefn): RewrittenFunDefn =
       val FunDefn(_, _, dSym, params, body) = fun
+      refresh.foreach(r => params.foreach(r.bindParams))
       val etaParams = etaParamLists(ConcreteId((dSym, 0), instId), params)
       val (keptParams, removed) = filterFunParams(dSym, params)
       val params2 = keptParams.mapConserve(applyParamList) ::: etaParams.map(_.params)
@@ -124,7 +127,25 @@ class FlowAnalysisBasedRewrite(
     override def applyValue(v: Value)(k: Value => Block): Block = v match
       case ref@Value.SimpleRef(l: VarSymbol) if activeEliminatedParams(l) =>
         k(Value.Lit(Tree.UnitLit(false))(ref.toLoc))
+      // a copy is defined outside the module whose method it copies
+      case Value.This(l) if refresh.isDefined && pre.res.modSymToBms.contains(l) =>
+        k(pre.res.modSymToBms(l).asMemberRef(l.asMod.get))
+      case Value.MemberRef(bms, disamb) =>
+        refresh.foreach(_.bindReferent(bms, disamb))
+        super.applyValue(v)(k)
       case _ => super.applyValue(v)(k)
+    
+    override def applyCase(cse: Case)(k: Case => Block): Block =
+      cse match
+      case Case.Cls(cls, Value.MemberRef(bms, _)) => refresh.foreach(_.bindReferent(bms, cls))
+      case _ =>
+      super.applyCase(cse)(k)
+    
+    override def applyScopedBlock(b: Block): Block =
+      b match
+      case Scoped(syms, _) => refresh.foreach(_.bindScoped(syms))
+      case _ =>
+      super.applyScopedBlock(b)
     
     override def applyBlock(b: Block): Block = b match
       case Assign(lhs: VarSymbol, rhs, rst) if activeEliminatedParams(lhs) =>
@@ -144,7 +165,9 @@ class FlowAnalysisBasedRewrite(
             Scoped(
               Set.single(tmp),
               Assign(tmp, res2, Return(etaCall(tmp.asPath).withLocOf(res2))))
-      case Define(defn, _) if forCopy => restoringIrDefns(defn)(super.applyBlock(b))
+      case Label(lbl, _, _, _) =>
+        refresh.foreach(_.bindLabel(lbl))
+        super.applyBlock(b)
       case _ => super.applyBlock(b)
     
     override def applyResult(r: Result)(k: Result => Block): Block =
@@ -181,21 +204,25 @@ class FlowAnalysisBasedRewrite(
         val eliminable = deadParamElimSolver.eliminableCallSiteArgs(ConcreteId(c.uid, instId))
         applyPath(fun): fun2 =>
           rewriteArgs(args, eliminable): args2 =>
-            k(
-              if (fun2 is fun) && (args2 is args) then c
-              else Call(fun2, args2 ne_:: restArgss)(c.metadata, c.toLoc)
-            )
+            applyArgss(restArgss): restArgss2 =>
+              k(
+                if (fun2 is fun) && (args2 is args) && (restArgss2 is restArgss) then c
+                else Call(fun2, args2 ne_:: restArgss2)(c.metadata, c.toLoc)
+              )
       case i@Instantiate(mut, cls, args :: restArgss) if args.forall(_.spread.isEmpty) =>
         val eliminable = deadParamElimSolver.eliminableCallSiteArgs(ConcreteId(i.uid, instId))
         applyPath(cls): cls2 =>
           rewriteArgs(args, eliminable): args2 =>
-            k(
-              if (cls2 is cls) && (args2 is args) then i
-              else Instantiate(mut, cls2, args2 :: restArgss)(i.metadata, i.toLoc)
-            )
+            applyArgss(restArgss): restArgss2 =>
+              k(
+                if (cls2 is cls) && (args2 is args) && (restArgss2 is restArgss) then i
+                else Instantiate(mut, cls2, args2 :: restArgss2)(i.metadata, i.toLoc)
+              )
       case _ => super.applyResult(r)(k)
     
-    override def applyDefn(defn: Defn)(k: Defn => Block): Block = defn match
+    override def applyDefn(defn: Defn)(k: Defn => Block): Block =
+      refresh.foreach(_.bindDefn(defn))
+      defn match
       case cls: ClsLikeDefn =>
         withEtaArgss(Nil):
           super.applyDefn(cls)(k)
@@ -208,14 +235,20 @@ class FlowAnalysisBasedRewrite(
     
     override def applyFunDefn(fun: FunDefn): FunDefn =
       val (params2, body2) = rewriteFunDefn(fun)
-      if (params2 is fun.params) && (body2 is fun.body) then fun
-      else FunDefn(fun.owner, fun.sym, fun.dSym, params2, body2)(fun.configOverride, fun.annotations)
+      val owner2 = fun.owner.mapConserve(_.subst)
+      val sym2 = fun.sym.subst
+      val dSym2 = fun.dSym.subst
+      if (owner2 is fun.owner) && (sym2 is fun.sym) && (dSym2 is fun.dSym) && (params2 is fun.params) && (body2 is fun.body)
+        then fun
+      else FunDefn(owner2, sym2, dSym2, params2, body2)(fun.configOverride, fun.annotations)
     
     override def applyLam(lam: Lambda): Lambda =
       val lamId: ConcreteFunId = ConcreteId(lam.uid, instId)
+      refresh.foreach(_.bindParams(lam.params))
       val etaParams = etaParamLists(lamId, lam.params :: Nil)
-      val (params2, removed) =
+      val (keptParams, removed) =
         filterParamList(lam.params, deadParamElimSolver.eliminableParams(lamId))
+      val params2 = applyParamList(keptParams)
       val body2 = withEliminatedParams(removed):
         withEtaArgss(etaParams.map(_.args)):
           applyFunBodyLikeBlock(lam.body)
@@ -231,10 +264,11 @@ class FlowAnalysisBasedRewrite(
   def solvers: Iterable[FlowAnalysisSolverResult] =
     deadParamElimSolver :: etaExpansionSolver :: deadConstructorElimSolver :: Nil
   
-  def mkRewriter(instId: InstantiationId, forCopy: Bool) = new Rewriter(instId, forCopy)
+  def mkRewriter(instId: InstantiationId, forCopy: Bool) =
+    new Rewriter(instId, Option.when(forCopy)(new IncrementalSymbolRefresh))
   
   def mkRootRewriter(rewrittenInPlace: Map[TermSymbol, RewrittenFunDefn]) =
-    new Rewriter(Nil, forCopy = false):
+    new Rewriter(Nil, N):
       override def applyFunDefn(fun: FunDefn): FunDefn =
         rewrittenInPlace.get(fun.dSym) match
           case S((params, body)) =>
@@ -248,29 +282,8 @@ class FlowAnalysisBasedRewrite(
     tSym: TermSymbol,
     rewritten: RewrittenFunDefn,
   ): FunDefn =
-    class RefreshSymbol(existingMapping: Map[Symbol, Symbol]) extends SymbolRefresher(existingMapping):
-      override def applyValue(v: Value)(k: Value => Block): Block = v match
-        case Value.This(l) =>
-          pre.res.modSymToBms.get(l) match
-            case Some(bms) =>
-              k(bms.asMemberRef(l.asMod.get))
-            case None => super.applyValue(v)(k)
-        case _ => super.applyValue(v)(k)
-    end RefreshSymbol
-    
-    val (rewrittenParams, rewrittenBody) = rewritten
-    val refreshParamMap = MutMap.empty[Symbol, Symbol]
-    def refreshParam(p: Param): Param =
-      val newSym = new VarSymbol(Tree.Ident(p.sym.name), erasedType = p.sym.erasedType)
-      refreshParamMap(p.sym) = newSym
-      Param(p.flags, newSym, p.sign, p.modulefulness)(p.toLoc)
-    val refreshedParams = rewrittenParams.map:
-      case pl @ ParamList(flags, params, restParam) =>
-        ParamList(flags, params.map(refreshParam), restParam.map(refreshParam))(pl.toLoc)
-    FunDefn(
-      N, bms, tSym, refreshedParams,
-      new RefreshSymbol(refreshParamMap.toMap).apply(rewrittenBody))(
-        original.configOverride, original.annotations)
+    // the copy rewriter has already refreshed the bound symbols
+    FunDefn(N, bms, tSym, rewritten.params, rewritten.body)(original.configOverride, original.annotations)
   end mkPolyFunCopy
   
   def otherNewFunDefns: Iterable[FunDefn] = Nil

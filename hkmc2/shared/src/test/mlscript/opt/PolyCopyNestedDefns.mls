@@ -1,0 +1,109 @@
+:js
+
+
+// the copy of `f` refreshes its nested class, which `isC` refers to before it is defined
+:flowBasedOpt poly
+:soir
+:noInline
+:expect 13
+@affine(1) fun k1(a)(b) = a + b
+fun k2(a)(b) = a * b
+fun f(k, x) =
+  fun isC(o) = o is C
+  fun g(y) = k(y)
+  class C(a) with
+    fun get() = a
+  let c = new C(x)
+  let h = g(c.get())
+  if isC(c) then h(2) else 0
+f(k1, 1) + f(k2, 5)
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, f$f;
+//│ define f$f as fun f$f⁰(k, x) {
+//│   let C, g, isC, c, scrut, tmp2;
+//│   define isC as fun isC⁰(o) {
+//│     match o
+//│       C⁰ =>
+//│         return true
+//│       else
+//│         return false
+//│     end
+//│   };
+//│   define g as fun g⁰(y)(eta$0$0) {
+//│     return k(y)(eta$0$0)
+//│   };
+//│   define C as class C⁰ {
+//│     private val a⁰;
+//│     constructor C¹(a) {
+//│       set C⁰.this.a⁰ = a;
+//│       end
+//│     }
+//│     method get⁰ = fun get¹() {
+//│       return C⁰.this.a⁰
+//│     }
+//│   };
+//│   set c = new C⁰(x);
+//│   set tmp2 = c.get﹖();
+//│   set scrut = isC⁰(c);
+//│   match scrut
+//│     true =>
+//│       return g⁰(tmp2)(2)
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ @affine(1)
+//│ define k1⁰ as fun k1¹(a)(b) {
+//│   return +⁰(a, b)
+//│ };
+//│ define k2⁰ as fun k2¹(a)(b) {
+//│   return *⁰(a, b)
+//│ };
+//│ define f⁰ as fun f¹(k, x) {
+//│   let C, g, isC, c, h, scrut, tmp2;
+//│   define isC as fun isC¹(o) {
+//│     match o
+//│       C² =>
+//│         return true
+//│       else
+//│         return false
+//│     end
+//│   };
+//│   define g as fun g¹(y) {
+//│     return k(y)
+//│   };
+//│   define C as class C² {
+//│     private val a¹;
+//│     constructor C³(a) {
+//│       set C².this.a¹ = a;
+//│       end
+//│     }
+//│     method get² = fun get³() {
+//│       return C².this.a¹
+//│     }
+//│   };
+//│   set c = new C²(x);
+//│   set tmp2 = c.get﹖();
+//│   set h = g¹(tmp2);
+//│   set scrut = isC¹(c);
+//│   match scrut
+//│     true =>
+//│       return h(2)
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ set tmp = f$f⁰(k1¹, 1);
+//│ set tmp1 = f¹(k2¹, 5);
+//│ return +⁰(tmp, tmp1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 13
+
+// scanning `f` as an earlier block's root checks that its nested definitions still own their symbols
+:flowBasedOpt poly
+:noInline
+:expect 12
+f(k2, 6)
+//│ = 12
+
+

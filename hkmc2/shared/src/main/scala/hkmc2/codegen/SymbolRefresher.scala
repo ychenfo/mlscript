@@ -202,3 +202,98 @@ private class SymbolRefresherInternal(m: MutMap[Symbol, Symbol])(using State) ex
     case s: LocalVarSymbol => m.getOrElse(s, s).asInstanceOf[LocalVarSymbol]
   
 class SymbolRefresher(m: Map[Symbol, Symbol])(using State) extends SymbolRefresherInternal(MutMap.from(m))
+
+
+// a refresh that a transformer fills in binder by binder while copying a block, so the copy needs no prior walk;
+// it relies on binders preceding their uses, which `Scoped` ensures for the definitions it binds
+class IncrementalSymbolRefresh(using State, Raise) extends SymbolSubst:
+  
+  import SymbolRefresher.*
+  
+  private val mapping = MutMap.empty[Symbol, Symbol]
+  
+  // symbols the copy uses as they are, so that binding one of them later is caught
+  private val usedAsIs = MutSet.empty[Symbol]
+  
+  private def lookup[T <: Symbol](s: T): T = mapping.get(s) match
+    case S(ns) => ns.asInstanceOf[T]
+    case N =>
+      usedAsIs += s
+      s
+  
+  override def mapBlockMemberSym(s: BlockMemberSymbol): BlockMemberSymbol = lookup(s)
+  override def mapTempSym(s: TempSymbol): TempSymbol = lookup(s)
+  override def mapVarSym(s: VarSymbol): VarSymbol = lookup(s)
+  override def mapClassCtorSym(s: ClassCtorSymbol): ClassCtorSymbol = lookup(s)
+  override def mapClsSym(s: ClassSymbol): ClassSymbol = lookup(s)
+  override def mapModuleSym(s: ModuleOrObjectSymbol): ModuleOrObjectSymbol = lookup(s)
+  override def mapPatSym(s: PatternSymbol): PatternSymbol = lookup(s)
+  override def mapTopLevelSym(s: TopLevelSymbol): TopLevelSymbol = lookup(s)
+  override def mapLabelSym(s: LabelSymbol): LabelSymbol = lookup(s)
+  
+  // a member of a copied class may be selected before the class definition is reached
+  override def mapTermSym(s: TermSymbol): TermSymbol =
+    if s.owner.exists(isBound) then bindDefnSym(s)
+    lookup(s)
+  
+  def isBound(s: Symbol): Bool = mapping.isDefinedAt(s)
+  
+  private def bind[T <: Symbol](s: T, fresh: T): Unit =
+    softAssert(!usedAsIs(s), s"${s} is used unrefreshed before its binder in a copy")
+    assert(!isBound(s), s"already bound: $s")
+    mapping(s) = fresh
+  
+  def bindScoped(syms: collection.Set[ScopedSymbol]): Unit =
+    for s <- syms.toList.sortBy(_.uid) do s match
+      case s: TempSymbol => bind(s, freshTempSymbol(s))
+      case s: VarSymbol => bind(s, freshVarSymbol(s))
+      case s: BlockMemberSymbol => bind(s, freshBlockMemberSymbol(s))
+  
+  def bindLabel(l: LabelSymbol): Unit = bind(l, freshLabelSymbol(l))
+  
+  def bindParams(pl: ParamList): Unit =
+    for p <- pl.restParam ++: pl.params do bind(p.sym, freshVarSymbol(p.sym))
+  
+  // the symbols a definition introduces besides its block member symbol, which references may reach first
+  private def bindDefnSym(s: Symbol): Unit = if !isBound(s) then s match
+    case s: ClassCtorSymbol =>
+      bindDefnSym(s.associatedCls)
+      bind(s, freshClassCtorSymbol(s, mapping))
+    case s: TermSymbol => bind(s, freshTermSymbol(s, mapping))
+    case s: ClassSymbol => bind(s, freshClassSymbol(s))
+    case s: ModuleOrObjectSymbol => bind(s, freshModuleOrObjectSymbol(s))
+    case s: PatternSymbol => bind(s, freshPatternSymbol(s))
+    case s: TopLevelSymbol => bind(s, freshTopLevelSymbol(s))
+    case _ =>
+  
+  def bindReferent(bms: BlockMemberSymbol, disamb: Symbol): Unit =
+    if isBound(bms) then bindDefnSym(disamb)
+  
+  def bindDefn(defn: Defn): Unit =
+    assert(isBound(defn.sym), s"BlockMemberSymbol ${defn.sym} for ${defn.getClass.getSimpleName} is a free variable for this block")
+    defn match
+    case fun: FunDefn => bindDefnSym(fun.dSym)
+    case v: ValDefn => bindDefnSym(v.tsym)
+    case cls: ClsLikeDefn =>
+      bindDefnSym(cls.isym)
+      cls.ctorSym.foreach(bindDefnSym)
+      cls.paramsOpt.foreach(bindParams)
+      cls.auxParams.foreach(bindParams)
+      bindMembers(cls.methods, cls.privateFields, cls.publicFields)
+      cls.companion.foreach: comp =>
+        bindDefnSym(comp.isym)
+        bindMembers(comp.methods, comp.privateFields, comp.publicFields)
+  
+  // members are bound by their class rather than by a `Scoped`, and their params when their method is reached
+  private def bindMembers(
+    methods: Ls[FunDefn],
+    privateFields: Ls[TermSymbol],
+    publicFields: Ls[BlockMemberSymbol -> TermSymbol],
+  ): Unit =
+    for m <- methods do
+      bind(m.sym, freshBlockMemberSymbol(m.sym))
+      bindDefnSym(m.dSym)
+    privateFields.foreach(bindDefnSym)
+    for (bms, _) <- publicFields do bind(bms, freshBlockMemberSymbol(bms))
+
+end IncrementalSymbolRefresh
