@@ -431,3 +431,72 @@ foo of AA of () => 1
 
 
 
+// TODO: non-affinity misses that the result of `g(p)` is called twice, so eta expansion repeats `mk`'s effect
+:fixme
+:flowBasedOpt
+:noInline
+:expect 15
+let n = 0
+fun mk(x) =
+  set n = n + 1
+  AA(x)
+fun g(p)() = if p is AA(v) then v
+fun c(p) =
+  let cl = g(p)
+  cl() + cl()
+c(mk(7)) + n
+//│ deforest > >>> non-affine syms >>>
+//│ deforest > call_res_for_c¹
+//│ deforest > call_res_for_c⁰
+//│ deforest > cap_ub_(term:g,1)_for_g_for_c¹
+//│ deforest > cap_ub_(term:g,1)_for_g_for_c⁰
+//│ deforest > cl_for_c¹
+//│ deforest > cl_for_c⁰
+//│ deforest > <<< non-affine syms <<<
+//│ deforest > >>> accumulator syms >>>
+//│ deforest > <<< accumulator syms <<<
+//│ deforest > >>> fusing >>>
+//│ deforest > AA⁰(x³) ->
+//│ deforest > 	match: p³
+//│ deforest > 	fields: p³.x⁰
+//│ deforest > <<< fusing <<<
+//│ ═══[RUNTIME ERROR] Expected: '15', got: '16'
+//│ = 16
+//│ n = 2
+
+// TODO: the same for a closure, which lifting turns into a curried function
+:fixme
+:flowBasedOpt
+:noInline
+:expect 15
+let n = 0
+fun mk(x) =
+  set n = n + 1
+  AA(x)
+fun c(p) =
+  let cl = () => if p is AA(v) then v
+  cl() + cl()
+c(mk(7)) + n
+//│ deforest > >>> non-affine syms >>>
+//│ deforest > call_res_for_c¹
+//│ deforest > call_res_for_c⁰
+//│ deforest > cap_ub_(term:lambda$,1)_for_lambda$_for_c¹
+//│ deforest > cap_ub_(term:lambda$,1)_for_lambda$_for_c⁰
+//│ deforest > cl_for_c¹
+//│ deforest > cl_for_c⁰
+//│ deforest > lambda$here_for_c¹
+//│ deforest > lambda$here_for_c⁰
+//│ deforest > lambda_for_lambda⁰
+//│ deforest > <<< non-affine syms <<<
+//│ deforest > >>> accumulator syms >>>
+//│ deforest > <<< accumulator syms <<<
+//│ deforest > >>> fusing >>>
+//│ deforest > AA⁰(x⁴) ->
+//│ deforest > 	match: p⁴
+//│ deforest > 	fields: p⁴.x⁰
+//│ deforest > <<< fusing <<<
+//│ ═══[RUNTIME ERROR] Expected: '15', got: '16'
+//│ = 16
+//│ n = 2
+
+
