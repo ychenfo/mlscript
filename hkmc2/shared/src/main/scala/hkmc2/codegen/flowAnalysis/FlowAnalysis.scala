@@ -347,15 +347,21 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     // the roots of earlier blocks that the scanned code uses, read through their symbols
     val foreignRoots = LinkedHashSet.empty[RootSym]
     // the vals defined where main's code runs, read through their symbols
+    // the exported vals should be already available
+    
     val rootVals = LinkedHashSet.empty[TermSymbol]
     val matchScrutToMatchBlock = MutMap.empty[ResultId, Match]
     val labelSymToLabelBlk = MutMap.empty[LabelSymbol, Label]
     val matchScrutToCtxOfMatch = MutMap.empty[ResultId, Ls[InCtx]]
     val labelSymToCtxOfLabel = MutMap.empty[LabelSymbol, Ls[InCtx]]
     val selToCtxOfSel = MutMap.empty[ResultId, Ls[InCtx]]
+    // bms can be picked up inside the inner symbol
     val modSymToBms = MutMap.empty[InnerSymbol, BlockMemberSymbol]
+    // can be stored in the symbol themselves, that should work for exported symbols
     val generatedVars = MutMap.empty[StratVarSym, StratVar]
+    // 
     val capturedVars = MutMap.empty[TermSymbol | ResultId, LinkedHashSet[StratVarSym]]
+    // 
     val affinityCounts = MutMap.empty[StratVarSym, Int].withDefaultValue(0)
     def getEnclosingMatchesForSel(selExprId: ResultId) =
       selToCtxOfSel.get(selExprId).fold(Iterator.empty):

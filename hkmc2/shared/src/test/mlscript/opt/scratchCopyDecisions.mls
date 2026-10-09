@@ -1,0 +1,72 @@
+:js
+
+
+// a dead ctor in a poly copy whose arg mentions a nested defn the copy refreshes
+:flowBasedOpt debugDce poly
+:soir
+:noInline
+:noOpt
+:expect 13
+class A(a)
+@affine(1) fun k1(a)(b) = a + b
+fun k2(a)(b) = a * b
+fun f(k, x) =
+  fun g(y) = k(y)
+  let d = new A(g)
+  let h = g(x)
+  h(2)
+f(k1, 1) + f(k2, 5)
+//│ dead-constructor-elim > >>> dead-constructor-elim results >>>
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:A⁰‹class:A¹›, [[member:g⁰‹term:g¹›]]) @ f²
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:A⁰‹class:A¹›, [[member:g⁰‹term:g¹›]]) @ f¹
+//│ dead-constructor-elim > eliminable: Instantiate(false, member:A⁰‹class:A¹›, [[member:g⁰‹term:g¹›]]) @ f⁰
+//│ dead-constructor-elim > <<< dead-constructor-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, f$f, f$f1;
+//│ define f$f as fun f$f⁰(k, x) {
+//│   let g, d, h;
+//│   define g as fun g⁰(y)(eta$0$0) {
+//│     return k(y)(eta$0$0)
+//│   };
+//│   set d = undefined;
+//│   set h = g⁰(x);
+//│   return h(2)
+//│ };
+//│ define f$f1 as fun f$f¹(k, x) {
+//│   let g, d, h;
+//│   define g as fun g¹(y) {
+//│     return k(y)
+//│   };
+//│   set d = undefined;
+//│   set h = g¹(x);
+//│   return h(2)
+//│ };
+//│ @affine(1)
+//│ define k1⁰ as fun k1¹(a)(b) {
+//│   return +⁰(a, b)
+//│ };
+//│ define k2⁰ as fun k2¹(a)(b) {
+//│   return *⁰(a, b)
+//│ };
+//│ define f⁰ as fun f¹(k, x) {
+//│   let g, d, h;
+//│   define g as fun g²(y) {
+//│     return k(y)
+//│   };
+//│   set d = undefined;
+//│   set h = g²(x);
+//│   return h(2)
+//│ };
+//│ define A⁰ as class A² {
+//│   private val a⁰;
+//│   constructor A¹(a) {
+//│     set A².this.a⁰ = a;
+//│     end
+//│   }
+//│ };
+//│ set tmp = f$f⁰(k1¹, 1);
+//│ set tmp1 = f$f¹(k2¹, 5);
+//│ return +⁰(tmp, tmp1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 13
+

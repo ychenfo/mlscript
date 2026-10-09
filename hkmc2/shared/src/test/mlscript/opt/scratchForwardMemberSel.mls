@@ -1,0 +1,240 @@
+:js
+
+
+// a member of a nested object selected in a copy before the object's definition
+:flowBasedOpt poly
+:soir
+:noInline
+:noOpt
+:expect 24
+@affine(1) fun k1(a)(b) = a + b
+fun k2(a)(b) = a * b
+fun f(k, x) =
+  fun g(y) = k(y + O.foo)
+  object O with
+    val foo = x
+  let h = g(x)
+  h(2)
+f(k1, 1) + f(k2, 5)
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, f$f;
+//│ define f$f as fun f$f⁰(k, x) {
+//│   let g, O, h;
+//│   define g as fun g⁰(y)(eta$0$0) {
+//│     let tmp2;
+//│     set tmp2 = +⁰(y, O⁰.foo⁰);
+//│     return k(tmp2)(eta$0$0)
+//│   };
+//│   define O as object O⁰ {
+//│     val foo¹;
+//│     constructor() {
+//│       define foo¹ as val foo⁰ = x;
+//│       end
+//│     }
+//│   };
+//│   set h = g⁰(x);
+//│   return h(2)
+//│ };
+//│ @affine(1)
+//│ define k1⁰ as fun k1¹(a)(b) {
+//│   return +⁰(a, b)
+//│ };
+//│ define k2⁰ as fun k2¹(a)(b) {
+//│   return *⁰(a, b)
+//│ };
+//│ define f⁰ as fun f¹(k, x) {
+//│   let g, O, h;
+//│   define g as fun g¹(y) {
+//│     let tmp2;
+//│     set tmp2 = +⁰(y, O¹.foo²);
+//│     return k(tmp2)
+//│   };
+//│   define O as object O¹ {
+//│     val foo³;
+//│     constructor() {
+//│       define foo³ as val foo² = x;
+//│       end
+//│     }
+//│   };
+//│   set h = g¹(x);
+//│   return h(2)
+//│ };
+//│ set tmp = f$f⁰(k1¹, 1);
+//│ set tmp1 = f¹(k2¹, 5);
+//│ return +⁰(tmp, tmp1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 24
+
+
+// a member selected through a typed param in a copy before the class definition
+:fixme
+:flowBasedOpt poly
+:soir
+:noInline
+:noOpt
+:expect 24
+@affine(1) fun k1(a)(b) = a + b
+fun k2(a)(b) = a * b
+fun f(kk, x) =
+  fun g(y) = kk(y)
+  fun k(q: C) = q.x
+  data class C(x)
+  let h = g(k(C(x)) + x)
+  h(2)
+f(k1, 1) + f(k2, 5)
+//│ ╔══[INTERNAL ERROR] Compiler reached an unexpected state at 'SymbolRefresher.scala:242': term:C/x is used unrefreshed before its binder in a copy
+//│ ╟── The compilation result may be incorrect.
+//│ ╙── This is a compiler bug; please report it to the maintainers.
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, f$f;
+//│ define f$f as fun f$f¹(kk, x) {
+//│   let C, g, k, h, tmp2, tmp3, tmp4;
+//│   define g as fun g²(y)(eta$0$0) {
+//│     return kk(y)(eta$0$0)
+//│   };
+//│   define k as fun k⁰(q) {
+//│     return q.x⁰
+//│   };
+//│   @data
+//│   define C as class C¹ {
+//│     val x¹;
+//│     constructor C⁰(x1) {
+//│       define x¹ as val x² = x1;
+//│       end
+//│     }
+//│   };
+//│   set tmp2 = C⁰(x);
+//│   set tmp3 = k⁰((tmp2 as! C²));
+//│   set tmp4 = +⁰(tmp3, x);
+//│   set h = g²(tmp4);
+//│   return h(2)
+//│ };
+//│ @affine(1)
+//│ define k1² as fun k1³(a)(b) {
+//│   return +⁰(a, b)
+//│ };
+//│ define k2² as fun k2³(a)(b) {
+//│   return *⁰(a, b)
+//│ };
+//│ define f² as fun f³(kk, x) {
+//│   let C, g, k, h, tmp2, tmp3, tmp4;
+//│   define g as fun g³(y) {
+//│     return kk(y)
+//│   };
+//│   define k as fun k¹(q) {
+//│     return q.x⁰
+//│   };
+//│   @data
+//│   define C as class C² {
+//│     val x³;
+//│     constructor C³(x1) {
+//│       define x³ as val x⁰ = x1;
+//│       end
+//│     }
+//│   };
+//│   set tmp2 = C³(x);
+//│   set tmp3 = k¹((tmp2 as! C²));
+//│   set tmp4 = +⁰(tmp3, x);
+//│   set h = g³(tmp4);
+//│   return h(2)
+//│ };
+//│ set tmp = f$f¹(k1³, 1);
+//│ set tmp1 = f³(k2³, 5);
+//│ return +⁰(tmp, tmp1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 24
+
+
+// a class pattern in a copy before the class definition
+:fixme
+:flowBasedOpt poly
+:soir
+:noInline
+:noOpt
+:expect 24
+@affine(1) fun k1(a)(b) = a + b
+fun k2(a)(b) = a * b
+fun f(kk, x) =
+  fun g(y) = kk(y)
+  fun mt(q) = if q is C(v) then v else 0
+  data class C(x)
+  let h = g(mt(C(x)) + x)
+  h(2)
+f(k1, 1) + f(k2, 5)
+//│ ╔══[INTERNAL ERROR] Compiler reached an unexpected state at 'SymbolRefresher.scala:242': term:C/x is used unrefreshed before its binder in a copy
+//│ ╟── The compilation result may be incorrect.
+//│ ╙── This is a compiler bug; please report it to the maintainers.
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, f$f;
+//│ define f$f as fun f$f²(kk, x) {
+//│   let C, g, mt, h, tmp2, tmp3, tmp4;
+//│   define g as fun g⁴(y)(eta$0$0) {
+//│     return kk(y)(eta$0$0)
+//│   };
+//│   define mt as fun mt⁰(q) {
+//│     let v, arg$C$0$;
+//│     match q
+//│       C⁴ =>
+//│         set arg$C$0$ = q.x⁴;
+//│         set v = arg$C$0$;
+//│         return v
+//│       else
+//│         return 0
+//│     end
+//│   };
+//│   @data
+//│   define C as class C⁴ {
+//│     val x⁵;
+//│     constructor C⁵(x1) {
+//│       define x⁵ as val x⁶ = x1;
+//│       end
+//│     }
+//│   };
+//│   set tmp2 = C⁵(x);
+//│   set tmp3 = mt⁰(tmp2);
+//│   set tmp4 = +⁰(tmp3, x);
+//│   set h = g⁴(tmp4);
+//│   return h(2)
+//│ };
+//│ @affine(1)
+//│ define k1⁴ as fun k1⁵(a)(b) {
+//│   return +⁰(a, b)
+//│ };
+//│ define k2⁴ as fun k2⁵(a)(b) {
+//│   return *⁰(a, b)
+//│ };
+//│ define f⁴ as fun f⁵(kk, x) {
+//│   let C, g, mt, h, tmp2, tmp3, tmp4;
+//│   define g as fun g⁵(y) {
+//│     return kk(y)
+//│   };
+//│   define mt as fun mt¹(q) {
+//│     let v, arg$C$0$;
+//│     match q
+//│       C⁶ =>
+//│         set arg$C$0$ = q.x⁴;
+//│         set v = arg$C$0$;
+//│         return v
+//│       else
+//│         return 0
+//│     end
+//│   };
+//│   @data
+//│   define C as class C⁶ {
+//│     val x⁷;
+//│     constructor C⁷(x1) {
+//│       define x⁷ as val x⁴ = x1;
+//│       end
+//│     }
+//│   };
+//│   set tmp2 = C⁷(x);
+//│   set tmp3 = mt¹(tmp2);
+//│   set tmp4 = +⁰(tmp3, x);
+//│   set h = g⁵(tmp4);
+//│   return h(2)
+//│ };
+//│ set tmp = f$f²(k1⁵, 1);
+//│ set tmp1 = f⁵(k2⁵, 5);
+//│ return +⁰(tmp, tmp1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 24

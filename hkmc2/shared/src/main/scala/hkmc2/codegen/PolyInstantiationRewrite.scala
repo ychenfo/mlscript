@@ -121,10 +121,46 @@ abstract class PolyInstantiationRewrite(val constraintSolver: FlowConstraintSolv
 
   // rewrites the program as seen from one instantiation path `instId`
   // helps subclass compute the symbol for the instantiated fun defns
-  protected abstract class InstantiationRewriter(val instId: InstantiationId, subst: SymbolSubst)
-    extends BlockTransformer(subst):
+  // with `refresh`, it builds a copy whose bound symbols are all fresh
+  protected abstract class InstantiationRewriter(val instId: InstantiationId, refresh: Opt[IncrementalSymbolRefresh])
+    extends BlockTransformer(refresh.getOrElse(SymbolSubst.Id)):
     
     def rewriteFunDefn(fun: FunDefn): RewrittenFunDefn
+    
+    override def applyValue(v: Value)(k: Value => Block): Block = v match
+      // a copy is defined outside the module whose method it copies
+      case Value.This(l) if refresh.isDefined && pre.res.modSymToBms.contains(l) =>
+        k(pre.res.modSymToBms(l).asMemberRef(l.asMod.get))
+      case Value.MemberRef(bms, disamb) =>
+        refresh.foreach(_.bindReferent(bms, disamb))
+        super.applyValue(v)(k)
+      case _ => super.applyValue(v)(k)
+    
+    override def applyCase(cse: Case)(k: Case => Block): Block =
+      cse match
+      case Case.Cls(cls, Value.MemberRef(bms, _)) => refresh.foreach(_.bindReferent(bms, cls))
+      case _ =>
+      super.applyCase(cse)(k)
+    
+    override def applyScopedBlock(b: Block): Block =
+      b match
+      case Scoped(syms, _) => refresh.foreach(_.bindScoped(syms))
+      case _ =>
+      super.applyScopedBlock(b)
+    
+    override def applyBlock(b: Block): Block =
+      b match
+      case Label(lbl, _, _, _) => refresh.foreach(_.bindLabel(lbl))
+      case _ =>
+      super.applyBlock(b)
+    
+    override def applyDefn(defn: Defn)(k: Defn => Block): Block =
+      refresh.foreach(_.bindDefn(defn))
+      super.applyDefn(defn)(k)
+    
+    override def applyLam(lam: Lambda): Lambda =
+      refresh.foreach(_.bindParams(lam.params))
+      super.applyLam(lam)
     
     extension (resId: ResultId) def concreteId = ConcreteId(resId, instId)
     

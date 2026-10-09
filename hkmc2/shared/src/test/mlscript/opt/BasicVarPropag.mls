@@ -478,3 +478,27 @@ in y + 1
 //│ = 2
 
 
+let n = 0
+fun bump() = set n = n + 1
+//│ n = 0
+
+// TODO: the call to a function of an earlier block is assumed not to write the top-level `n`
+:fixme
+:expect 1
+set n = 0
+bump()
+n
+//│ ═══[RUNTIME ERROR] Expected: '1', got: '0'
+//│ = 0
+
+// control: the same in one block
+:expect 1
+let m = 0
+fun bumpM() = set m = m + 1
+set m = 0
+bumpM()
+m
+//│ = 1
+//│ m = 1
+
+

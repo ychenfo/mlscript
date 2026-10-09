@@ -20,9 +20,8 @@ class FlowAnalysisBasedRewrite(
 
   private case class EtaParamList(params: ParamList, args: Ls[Arg])
   
-  // with `refresh`, it builds a copy whose bound symbols are all fresh
   class Rewriter(instId: InstantiationId, refresh: Opt[IncrementalSymbolRefresh])
-    extends InstantiationRewriter(instId, refresh.getOrElse(SymbolSubst.Id)):
+    extends InstantiationRewriter(instId, refresh):
     
     // dead parameter elimination states and helper functions
     private val activeEliminatedParams = MutSet.empty[VarSymbol]
@@ -127,25 +126,7 @@ class FlowAnalysisBasedRewrite(
     override def applyValue(v: Value)(k: Value => Block): Block = v match
       case ref@Value.SimpleRef(l: VarSymbol) if activeEliminatedParams(l) =>
         k(Value.Lit(Tree.UnitLit(false))(ref.toLoc))
-      // a copy is defined outside the module whose method it copies
-      case Value.This(l) if refresh.isDefined && pre.res.modSymToBms.contains(l) =>
-        k(pre.res.modSymToBms(l).asMemberRef(l.asMod.get))
-      case Value.MemberRef(bms, disamb) =>
-        refresh.foreach(_.bindReferent(bms, disamb))
-        super.applyValue(v)(k)
       case _ => super.applyValue(v)(k)
-    
-    override def applyCase(cse: Case)(k: Case => Block): Block =
-      cse match
-      case Case.Cls(cls, Value.MemberRef(bms, _)) => refresh.foreach(_.bindReferent(bms, cls))
-      case _ =>
-      super.applyCase(cse)(k)
-    
-    override def applyScopedBlock(b: Block): Block =
-      b match
-      case Scoped(syms, _) => refresh.foreach(_.bindScoped(syms))
-      case _ =>
-      super.applyScopedBlock(b)
     
     override def applyBlock(b: Block): Block = b match
       case Assign(lhs: VarSymbol, rhs, rst) if activeEliminatedParams(lhs) =>
@@ -165,9 +146,6 @@ class FlowAnalysisBasedRewrite(
             Scoped(
               Set.single(tmp),
               Assign(tmp, res2, Return(etaCall(tmp.asPath).withLocOf(res2))))
-      case Label(lbl, _, _, _) =>
-        refresh.foreach(_.bindLabel(lbl))
-        super.applyBlock(b)
       case _ => super.applyBlock(b)
     
     override def applyResult(r: Result)(k: Result => Block): Block =
@@ -220,9 +198,7 @@ class FlowAnalysisBasedRewrite(
               )
       case _ => super.applyResult(r)(k)
     
-    override def applyDefn(defn: Defn)(k: Defn => Block): Block =
-      refresh.foreach(_.bindDefn(defn))
-      defn match
+    override def applyDefn(defn: Defn)(k: Defn => Block): Block = defn match
       case cls: ClsLikeDefn =>
         withEtaArgss(Nil):
           super.applyDefn(cls)(k)

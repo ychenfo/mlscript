@@ -1,0 +1,319 @@
+:js
+
+
+// the IR shape of each kind of reference to a local definition
+:lot
+fun f(y) =
+  fun g(a) = a
+  fun k(q: C) = q.x
+  data class C(x) with
+    val w = x
+    fun m(z) = x + w + z
+  object O with
+    val foo = 1
+    fun bar() = foo
+  let c = C(1)
+  let d = new C(2)
+  let s = c.x + c.w + c.m(1) + O.foo + O.bar() + g(y) + k(d)
+  if c is C(p) then p + s else 0
+f(1)
+//│ —————————————| Lowered IR Tree |————————————————————————————————————————————————————————————————————
+//│ Program:
+//│   main = Define:
+//│     defn = FunDefn:
+//│       sym = member:f⁰
+//│       dSym = term:f¹
+//│       params = Ls of
+//│         ParamList:
+//│           params = Ls of
+//│             Param:
+//│               sym = y⁰
+//│               modulefulness = Modulefulness of N
+//│       body = Scoped(syms = {member:C⁰, member:g⁰, member:k⁰, member:O⁰, c⁰, d⁰, s⁰, p⁰, tmp:tmp⁰, tmp:tmp¹, tmp:tmp², tmp:tmp³, tmp:tmp⁴, tmp:tmp⁵, tmp:tmp⁶, tmp:tmp⁷, tmp:tmp⁸, tmp:arg$C$0$⁰}):
+//│         body = Define:
+//│           defn = FunDefn:
+//│             sym = member:g⁰
+//│             dSym = term:g¹
+//│             params = Ls of
+//│               ParamList:
+//│                 params = Ls of
+//│                   Param:
+//│                     sym = a⁰
+//│                     modulefulness = Modulefulness of N
+//│             body = Return of SimpleRef of a⁰
+//│           rest = Define: \
+//│           defn = FunDefn:
+//│             sym = member:k⁰
+//│             dSym = term:k¹
+//│             params = Ls of
+//│               ParamList:
+//│                 params = Ls of
+//│                   Param:
+//│                     sym = q⁰
+//│                     sign = S of Resolved{sym=class:C¹}:
+//│                       t = Ref{sym=member:C⁰} of member:C⁰
+//│                       sym = class:C¹
+//│                     modulefulness = Modulefulness of N
+//│             body = Return of Select{sym=term:C¹/x⁰}:
+//│               qual = SimpleRef of q⁰
+//│               name = Ident of "x"
+//│           rest = Define: \
+//│           defn = ClsLikeDefn:
+//│             isym = class:C¹
+//│             sym = member:C⁰
+//│             ctorSym = S of term:C²
+//│             k = Cls
+//│             auxParams = Ls of
+//│               ParamList:
+//│                 params = Ls of
+//│                   Param:
+//│                     flags = (val)
+//│                     sym = x¹
+//│                     modulefulness = Modulefulness of N
+//│             methods = Ls of
+//│               FunDefn:
+//│                 owner = S of class:C¹
+//│                 sym = member:m⁰
+//│                 dSym = term:C¹/m¹
+//│                 params = Ls of
+//│                   ParamList:
+//│                     params = Ls of
+//│                       Param:
+//│                         sym = z⁰
+//│                         modulefulness = Modulefulness of N
+//│                 body = Scoped(syms = {tmp:tmp⁹}):
+//│                   body = Assign:
+//│                     lhs = tmp:tmp⁹
+//│                     rhs = Call:
+//│                       fun = SimpleRef of builtin:+⁰
+//│                       argss = Ls of
+//│                         Ls of
+//│                           Arg:
+//│                             value = Select{sym=term:C¹/x⁰}:
+//│                               qual = This of class:C¹
+//│                               name = Ident of "x"
+//│                           Arg:
+//│                             value = Select{sym=term:C¹/w⁰}:
+//│                               qual = This of class:C¹
+//│                               name = Ident of "w"
+//│                     rest = Return of Call:
+//│                       fun = SimpleRef of builtin:+⁰
+//│                       argss = Ls of
+//│                         Ls of
+//│                           Arg:
+//│                             value = SimpleRef of tmp:tmp⁹
+//│                           Arg:
+//│                             value = SimpleRef of z⁰
+//│             publicFields = Ls of
+//│               Tuple2:
+//│                 _1 = member:x²
+//│                 _2 = term:C¹/x⁰
+//│               Tuple2:
+//│                 _1 = member:w¹
+//│                 _2 = term:C¹/w⁰
+//│             ctor = Define:
+//│               defn = ValDefn:
+//│                 tsym = term:C¹/x⁰
+//│                 sym = member:x²
+//│                 rhs = SimpleRef of x¹
+//│               rest = Define: \
+//│               defn = ValDefn:
+//│                 tsym = term:C¹/w⁰
+//│                 sym = member:w¹
+//│                 rhs = Select{sym=term:C¹/x⁰}:
+//│                   qual = This of class:C¹
+//│                   name = Ident of "x"
+//│           rest = Define: \
+//│           defn = ClsLikeDefn:
+//│             isym = object:O¹
+//│             sym = member:O⁰
+//│             k = Obj
+//│             auxParams = Ls of
+//│               ParamList: ‹empty›
+//│             methods = Ls of
+//│               FunDefn:
+//│                 owner = S of object:O¹
+//│                 sym = member:bar⁰
+//│                 dSym = term:O¹/bar¹
+//│                 params = Ls of
+//│                   ParamList: ‹empty›
+//│                 body = Return of Select{sym=term:O¹/foo⁰}:
+//│                   qual = This of object:O¹
+//│                   name = Ident of "foo"
+//│             publicFields = Ls of
+//│               Tuple2:
+//│                 _1 = member:foo¹
+//│                 _2 = term:O¹/foo⁰
+//│             ctor = Define:
+//│               defn = ValDefn:
+//│                 tsym = term:O¹/foo⁰
+//│                 sym = member:foo¹
+//│                 rhs = Lit of IntLit of 1
+//│           rest = Assign: \
+//│           lhs = c⁰
+//│           rhs = Call:
+//│             fun = MemberRef{disamb=term:C²}:
+//│               bms = member:C⁰
+//│               disamb = term:C²
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = Lit of IntLit of 1
+//│           rest = Assign: \
+//│           lhs = d⁰
+//│           rhs = Instantiate:
+//│             mut = false
+//│             cls = MemberRef{disamb=class:C¹}:
+//│               bms = member:C⁰
+//│               disamb = class:C¹
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = Lit of IntLit of 2
+//│           rest = Assign: \
+//│           lhs = tmp:tmp⁰
+//│           rhs = Call:
+//│             fun = SimpleRef of builtin:+⁰
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = Select:
+//│                     qual = SimpleRef of c⁰
+//│                     name = Ident of "x"
+//│                 Arg:
+//│                   value = Select:
+//│                     qual = SimpleRef of c⁰
+//│                     name = Ident of "w"
+//│           rest = Assign: \
+//│           lhs = tmp:tmp¹
+//│           rhs = Call:
+//│             fun = Select:
+//│               qual = SimpleRef of c⁰
+//│               name = Ident of "m"
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = Lit of IntLit of 1
+//│           rest = Assign: \
+//│           lhs = tmp:tmp²
+//│           rhs = Call:
+//│             fun = SimpleRef of builtin:+⁰
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp⁰
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp¹
+//│           rest = Assign: \
+//│           lhs = tmp:tmp³
+//│           rhs = Call:
+//│             fun = SimpleRef of builtin:+⁰
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp²
+//│                 Arg:
+//│                   value = Select{sym=term:O¹/foo⁰}:
+//│                     qual = MemberRef{disamb=object:O¹}:
+//│                       bms = member:O⁰
+//│                       disamb = object:O¹
+//│                     name = Ident of "foo"
+//│           rest = Assign: \
+//│           lhs = tmp:tmp⁴
+//│           rhs = Call:
+//│             fun = Select{sym=term:O¹/bar¹}:
+//│               qual = MemberRef{disamb=object:O¹}:
+//│                 bms = member:O⁰
+//│                 disamb = object:O¹
+//│               name = Ident of "bar"
+//│             argss = Ls of
+//│               Nil
+//│           rest = Assign: \
+//│           lhs = tmp:tmp⁵
+//│           rhs = Call:
+//│             fun = SimpleRef of builtin:+⁰
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp³
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp⁴
+//│           rest = Assign: \
+//│           lhs = tmp:tmp⁶
+//│           rhs = Call:
+//│             fun = MemberRef{disamb=term:g¹}:
+//│               bms = member:g⁰
+//│               disamb = term:g¹
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = SimpleRef of y⁰
+//│           rest = Assign: \
+//│           lhs = tmp:tmp⁷
+//│           rhs = Call:
+//│             fun = SimpleRef of builtin:+⁰
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp⁵
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp⁶
+//│           rest = Assign: \
+//│           lhs = tmp:tmp⁸
+//│           rhs = Call:
+//│             fun = MemberRef{disamb=term:k¹}:
+//│               bms = member:k⁰
+//│               disamb = term:k¹
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = Cast:
+//│                     value = SimpleRef of d⁰
+//│                     target = ValueLike(?)
+//│                     check = true
+//│           rest = Assign: \
+//│           lhs = s⁰
+//│           rhs = Call:
+//│             fun = SimpleRef of builtin:+⁰
+//│             argss = Ls of
+//│               Ls of
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp⁷
+//│                 Arg:
+//│                   value = SimpleRef of tmp:tmp⁸
+//│           rest = Match: \
+//│           scrut = SimpleRef of c⁰
+//│           arms = Ls of
+//│             Tuple2:
+//│               _1 = Cls:
+//│                 cls = class:C¹
+//│                 path = MemberRef{disamb=class:C¹}:
+//│                   bms = member:C⁰
+//│                   disamb = class:C¹
+//│               _2 = Assign:
+//│                 lhs = tmp:arg$C$0$⁰
+//│                 rhs = Select{sym=term:C¹/x⁰}:
+//│                   qual = SimpleRef of c⁰
+//│                   name = Ident of "x"
+//│                 rest = Assign: \
+//│                 lhs = p⁰
+//│                 rhs = SimpleRef of tmp:arg$C$0$⁰
+//│                 rest = Return of Call:
+//│                   fun = SimpleRef of builtin:+⁰
+//│                   argss = Ls of
+//│                     Ls of
+//│                       Arg:
+//│                         value = SimpleRef of p⁰
+//│                       Arg:
+//│                         value = SimpleRef of s⁰
+//│           dflt = S of Return of Lit of IntLit of 0
+//│     rest = Return of Call:
+//│       fun = MemberRef{disamb=term:f¹}:
+//│         bms = member:f⁰
+//│         disamb = term:f¹
+//│       argss = Ls of
+//│         Ls of
+//│           Arg:
+//│             value = Lit of IntLit of 1
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 11

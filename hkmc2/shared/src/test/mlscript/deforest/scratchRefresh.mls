@@ -1,0 +1,105 @@
+:js
+:deforest
+
+data class A(x)
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+
+
+:sir
+module M with
+  fun g(y) = y + 1
+  fun f(x) = if x is A(y) then g(y) else 0
+M.f(A(1))
+//│ deforest > >>> fusing >>>
+//│ deforest > A⁰(1) ->
+//│ deforest > 	match: x⁰
+//│ deforest > 	fields: x⁰.x¹
+//│ deforest > <<< fusing <<<
+//│ ———————————————| Lowered IR |———————————————————————————————————————————————————————————————————————
+//│ let tmp, f$f, f$x_A, f$x_rest, A_x;
+//│ @private
+//│ define f$f as fun f$f⁰(x) {
+//│   let y, arg$A$0$;
+//│   return x(y, arg$A$0$)
+//│ };
+//│ @affine(1) @private
+//│ define f$x_A as fun f$x_A⁰(A_x1)(fv_y, fv_arg$A$0$) {
+//│   set fv_arg$A$0$ = A_x1;
+//│   set fv_y = fv_arg$A$0$;
+//│   return M⁰.g⁰(fv_y)
+//│ };
+//│ @private
+//│ define f$x_rest as fun f$x_rest⁰() {
+//│   return null
+//│ };
+//│ define M¹ as class M²
+//│ module M⁰ {
+//│   method g¹ = fun g⁰(y) {
+//│     return +⁰(y, 1)
+//│   }
+//│   method f⁰ = fun f¹(x) {
+//│     let y, arg$A$0$;
+//│     match x
+//│       A¹ =>
+//│         set arg$A$0$ = x.x¹;
+//│         set y = arg$A$0$;
+//│         return M⁰.this.g⁰(y)
+//│       else
+//│         return 0
+//│     end
+//│   }
+//│ };
+//│ set A_x = 1;
+//│ set tmp = f$x_A⁰(A_x);
+//│ return f$f⁰(tmp)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 2
+
+
+fun h(y) = y + 1
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+
+:sir
+fun test(x) = if x is A(y) then h(y) else 0
+test(A(1))
+//│ deforest > >>> fusing >>>
+//│ deforest > A⁰(1) ->
+//│ deforest > 	match: x²
+//│ deforest > 	fields: x².x¹
+//│ deforest > <<< fusing <<<
+//│ ———————————————| Lowered IR |———————————————————————————————————————————————————————————————————————
+//│ let tmp, test$test, test$x_A, test$x_rest, A_x;
+//│ @private
+//│ define test$test as fun test$test⁰(x) {
+//│   let y, arg$A$0$;
+//│   return x(h⁰, y, arg$A$0$)
+//│ };
+//│ @affine(1) @private
+//│ define test$x_A as fun test$x_A⁰(A_x1)(fv_h, fv_y, fv_arg$A$0$) {
+//│   set fv_arg$A$0$ = A_x1;
+//│   set fv_y = fv_arg$A$0$;
+//│   return fv_h(fv_y)
+//│ };
+//│ @private
+//│ define test$x_rest as fun test$x_rest⁰() {
+//│   return null
+//│ };
+//│ define test⁰ as fun test¹(x) {
+//│   let y, arg$A$0$;
+//│   match x
+//│     A¹ =>
+//│       set arg$A$0$ = x.x¹;
+//│       set y = arg$A$0$;
+//│       return h⁰(y)
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ set A_x = 1;
+//│ set tmp = test$x_A⁰(A_x);
+//│ return test$test⁰(tmp)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 2
+

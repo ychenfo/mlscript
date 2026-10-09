@@ -297,20 +297,6 @@ h()
 //│ deforest > 	fields: ls³.t⁰
 //│ deforest > Nil⁰ ->
 //│ deforest > 	match: ls³
-//│ deforest > Cons⁰(1, tmp¹⁶) ->
-//│ deforest > 	match: ls⁴
-//│ deforest > 	fields: ls⁴.h⁰
-//│ deforest > 	fields: ls⁴.t⁰
-//│ deforest > Cons⁰(2, tmp¹⁷) ->
-//│ deforest > 	match: ls⁴
-//│ deforest > 	fields: ls⁴.h⁰
-//│ deforest > 	fields: ls⁴.t⁰
-//│ deforest > Cons⁰(3, Nil⁰) ->
-//│ deforest > 	match: ls⁴
-//│ deforest > 	fields: ls⁴.h⁰
-//│ deforest > 	fields: ls⁴.t⁰
-//│ deforest > Nil⁰ ->
-//│ deforest > 	match: ls⁴
 //│ deforest > Cons⁰(1, tmp¹⁴) ->
 //│ deforest > 	match: ls³
 //│ deforest > 	fields: ls³.h⁰
@@ -339,20 +325,6 @@ h()
 //│ deforest > 	fields: ls³.t⁰
 //│ deforest > Nil⁰ ->
 //│ deforest > 	match: ls³
-//│ deforest > Cons⁰(1, tmp¹⁶) ->
-//│ deforest > 	match: ls⁴
-//│ deforest > 	fields: ls⁴.h⁰
-//│ deforest > 	fields: ls⁴.t⁰
-//│ deforest > Cons⁰(2, tmp¹⁷) ->
-//│ deforest > 	match: ls⁴
-//│ deforest > 	fields: ls⁴.h⁰
-//│ deforest > 	fields: ls⁴.t⁰
-//│ deforest > Cons⁰(3, Nil⁰) ->
-//│ deforest > 	match: ls⁴
-//│ deforest > 	fields: ls⁴.h⁰
-//│ deforest > 	fields: ls⁴.t⁰
-//│ deforest > Nil⁰ ->
-//│ deforest > 	match: ls⁴
 //│ deforest > <<< fusing <<<
 //│ = Cons(
 //│   [1, 1],
