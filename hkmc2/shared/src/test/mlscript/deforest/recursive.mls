@@ -567,10 +567,10 @@ map(x => if x is A then 1 else 0, A :: B :: Nil)
 //│ deforest > 	match: xs_map¹
 //│ deforest > 	fields: xs_map¹.h⁰
 //│ deforest > 	fields: xs_map¹.t⁰
-//│ deforest > B⁰ ->
-//│ deforest > 	match: x³
 //│ deforest > Nil⁰ ->
 //│ deforest > 	match: xs_map¹
+//│ deforest > B⁰ ->
+//│ deforest > 	match: x³
 //│ deforest > <<< fusing <<<
 //│ = Cons(1, Cons(0, Nil))
 
@@ -598,23 +598,23 @@ c(T(A, T(B, L, L), T(A, L, L)))
 //│ deforest > 	fields: x⁴.n⁴
 //│ deforest > 	fields: x⁴.l⁰
 //│ deforest > 	fields: x⁴.r⁰
+//│ deforest > L⁰ ->
+//│ deforest > 	match: x⁴
+//│ deforest > L⁰ ->
+//│ deforest > 	match: x⁴
 //│ deforest > A⁰ ->
 //│ deforest > 	match: n⁵
-//│ deforest > L⁰ ->
-//│ deforest > 	match: x⁴
-//│ deforest > L⁰ ->
-//│ deforest > 	match: x⁴
 //│ deforest > T⁰(B⁰, L⁰, L⁰) ->
 //│ deforest > 	match: x⁴
 //│ deforest > 	fields: x⁴.n⁴
 //│ deforest > 	fields: x⁴.l⁰
 //│ deforest > 	fields: x⁴.r⁰
+//│ deforest > L⁰ ->
+//│ deforest > 	match: x⁴
+//│ deforest > L⁰ ->
+//│ deforest > 	match: x⁴
 //│ deforest > B⁰ ->
 //│ deforest > 	match: n⁵
-//│ deforest > L⁰ ->
-//│ deforest > 	match: x⁴
-//│ deforest > L⁰ ->
-//│ deforest > 	match: x⁴
 //│ deforest > <<< fusing <<<
 //│ = T(0, T(1, L, L), T(0, L, L))
 

@@ -26,10 +26,10 @@ fun external() = new External()
 //│ flow-analysis > >>> effect-analysis results >>>
 //│ flow-analysis > function effectful⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > function external⁰#0 @ <root> -> UnsafeEta
-//│ flow-analysis > function instantiated⁰#0 @ <root> -> UnsafeEta
-//│ flow-analysis > function mutable_field⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function instantiated⁰#0 @ <root> -> Pure
+//│ flow-analysis > function mutable_field⁰#0 @ <root> -> Pure
 //│ flow-analysis > function nested⁰#0 @ <root> -> UnsafeEta
-//│ flow-analysis > function stored⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function stored⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 
 
@@ -182,7 +182,7 @@ fun curried(first, second) = Curried(first)(second)
 fun new_curried(first, second) = new Curried(first)(second)
 fun partial(first) = Curried(first)
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function curried⁰#0 @ curried¹ -> UnsafeEta
-//│ flow-analysis > function new_curried⁰#0 @ new_curried¹ -> UnsafeEta
-//│ flow-analysis > function partial⁰#0 @ partial¹ -> UnsafeEta
+//│ flow-analysis > function curried⁰#0 @ curried¹ -> Pure
+//│ flow-analysis > function new_curried⁰#0 @ new_curried¹ -> Pure
+//│ flow-analysis > function partial⁰#0 @ partial¹ -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<

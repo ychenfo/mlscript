@@ -1,0 +1,275 @@
+:js
+
+#config(inlining: None, liftDefns: Some(LiftDefns), flowBasedOpt: Some(FlowBasedOpt(logEffects: true, debugEta: true, mono: true)))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+class C(val x)
+class D(val x, mut val y)
+declare fun unknown(o): Anything
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * Reading a field of a frozen object is pure.
+:expect 3
+@affine(1) fun add(t)(y) = t + y
+private fun read(o: C) = add(o.x)
+fun f(n) = read(new C(n))
+f(1)(2)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> Pure
+//│ flow-analysis > function read⁰#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call read⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > read⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 3
+
+
+// * So is reading a field of a mutable object that is never written.
+:expect 3
+@affine(1) fun add(t)(y) = t + y
+private fun read(o: C) = add(o.x)
+fun f(n) = read(new mut C(n))
+f(1)(2)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> Pure
+//│ flow-analysis > function read⁰#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call read⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > read⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 3
+
+
+// * A write anywhere makes the reads of that field effects, even the reads that run before it.
+:expect 1
+@affine(1) fun add(t)(y) = t + y
+private fun read(o: C) = add(o.x)
+private fun bump(o: C) = set o.x = o.x + 1
+private fun g(o: C) =
+  let h = read(o)
+  bump(o)
+  h(0)
+fun f(n) = g(new mut C(n))
+f(1)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function bump⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function read⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call +⁰@result⁵#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result⁷#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result⁶#0 @ <root> -> Pure
+//│ flow-analysis > call bump⁰@result³#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call g⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call h⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > call read⁰@result⁴#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 1
+
+
+// * Writing a field is an effect.
+@affine(1) fun add(t)(y) = t + y
+private fun write(o: C, n) =
+  set o.x = n
+  add(n)
+fun f(n) = write(new mut C(0), n)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function write⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call +⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call write⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * Writing a field of an object allocated by the same function is an effect too: there is no masking.
+@affine(1) fun add(t)(y) = t + y
+fun f(n) =
+  let o = new mut C(0)
+  set o.x = n
+  add(o.x)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call +⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * Unknown code may write any field of a mutable object...
+@affine(1) fun add(t)(y) = t + y
+private fun read(o: C) = add(o.x)
+private fun g(o: C) =
+  unknown(o)
+  read(o)
+fun f(n) = g(new mut C(n))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function read⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call +⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call g⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call read⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call unknown@result²#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * ...but only the `mut val` fields of a frozen one.
+@affine(1) fun add(t)(y) = t + y
+private fun readX(o: D) = add(o.x)
+private fun readY(o: D) = add(o.y)
+private fun g(o: D) =
+  unknown(o)
+  [readX(o), readY(o)]
+fun f(n) = g(new D(n, n))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function readX⁰#0 @ <root> -> Pure
+//│ flow-analysis > function readY⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call +⁰@result⁶#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result⁵#0 @ <root> -> Pure
+//│ flow-analysis > call g⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call readX⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > call readY⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call unknown@result³#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > readX⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * Writing one field does not make the reads of another field effects.
+:expect 3
+@affine(1) fun add(t)(y) = t + y
+private fun readX(o: D) = add(o.x)
+private fun g(o: D) =
+  set o.y = 0
+  readX(o)
+fun f(n) = g(new mut D(n, n))
+f(1)(2)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function readX⁰#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result⁵#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call g⁰@result²#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call readX⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > readX⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 3
+
+
+// * A value written into a field flows to the reads of that field,
+// * so calling the function read from it observes the written function's effect.
+class A(val f)
+private fun swap(o: A) =
+  set o.f = () =>
+    print("called")
+    2
+  if o is A(f) then f
+private fun call(k) =
+  let t = k()
+  @affine(0) (y) => t + y
+fun main() =
+  let h = call(swap(new mut A(() => 1)))
+  print("before")
+  h(0)
+main()
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function call⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function lambda$⁰#0 @ <root> -> Pure
+//│ flow-analysis > function lambda$⁰#1 @ <root> -> Pure
+//│ flow-analysis > function lambda²#0 @ <root> -> Pure
+//│ flow-analysis > function lambda¹#0 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function main⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function swap⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call +⁰@result⁸#0 @ <root> -> Pure
+//│ flow-analysis > call call⁰@result³#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call h⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call k⁰@result⁶#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call lambda$⁰@result⁵#0 @ <root> -> Pure
+//│ flow-analysis > call lambda¹@result⁹#0 @ <root> -> Pure
+//│ flow-analysis > call main⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call print@result²#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call print@result⁷#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call swap⁰@result⁴#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ > called
+//│ > before
+//│ = 2
+
+
+
+
+private fun f(c: C) = 
+  let cap = c.x
+  @affine(0) () => cap
+f(new C(4))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f⁰#0 @ <root> -> Pure
+//│ flow-analysis > function lambda$⁰#0 @ <root> -> Pure
+//│ flow-analysis > function lambda$⁰#1 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call lambda$⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call lambda⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f⁰#0 @ <root>: [1, 0]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = fun

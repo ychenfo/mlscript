@@ -53,3 +53,29 @@ foo(bar, 123)
 //│ = 1
 
 
+// * Not fused: the object is written after construction
+:expect 2
+class C(val x)
+fun f() =
+  let o = new mut C(1)
+  set o.x = 2
+  if o is C(x) then x else 0
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ = 2
+
+// * Not fused: the read field may hold a written value rather than the constructor argument
+:expect 1
+fun g() =
+  let o = new mut C(A)
+  set o.x = B
+  if o.x is
+    A then 0
+    B then 1
+g()
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ = 1
+
+

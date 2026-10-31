@@ -151,7 +151,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver, additionalTopLevelSymbo
         branchFunParamFieldSyms.getOrElseUpdate(
           destBranchId,
           locally:
-            val completeArgs: Ls[SelField] = ctorInfo.args.unzip._1
+            val completeArgs: Ls[SelField] = ctorInfo.args.map(_.field)
             val selsInfos: Map[SelField, CtorDtorId] = sels
               .iterator
               .map: sel =>
@@ -325,7 +325,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver, additionalTopLevelSymbo
         def mkCtorFieldSyms(ctorDtorId: CtorDtorId): Ls[TempSymbol] =
           val ctorInfo = solver.fusingCtorInfo(ctorDtorId)
           val clsNme = ctorInfo.ctor.ctorClsName
-          ctorInfo.args.unzip._1.map: f =>
+          ctorInfo.args.map(_.field).map: f =>
             new TempSymbol(N, initErasedType = f.erasedFieldType, s"${clsNme}_${f.fieldName}")
         end mkCtorFieldSyms
         
@@ -333,7 +333,7 @@ class DeforestRewriter(val solver: DeforestFusionSolver, additionalTopLevelSymbo
         case None => super.applyResult(ctor)(k)
         case Some(FinalDestSel(_, field)) =>
           val ctorInfo = solver.fusingCtorInfo(ctor.uid.concreteId)
-          val idx = ctorInfo.args.unzip._1.indexOf(field)
+          val idx = ctorInfo.args.map(_.field).indexOf(field)
           val fieldSyms = mkCtorFieldSyms(ctor.uid.concreteId)
           args.zip(fieldSyms).foldRight(k(fieldSyms(idx).asSimpleRef)):
             case (Arg(N, a) -> s, rest) =>

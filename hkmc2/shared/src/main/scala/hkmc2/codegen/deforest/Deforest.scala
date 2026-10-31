@@ -59,7 +59,11 @@ class DeforestFusionSolver(val constraintSolver: FlowConstraintSolver)(using Con
     def mergeDests(dests: Set[ConcreteCtorConsumer | MarkerConsStrat]): Opt[FinalDest] =
       def selsSelectingTheSameSymbol(sels: Set[FieldSel]) =
         sels.map(s => s.field).size == 1
-      if dests.exists(_.isInstanceOf[MarkerConsStrat]) then
+      // fusing a written object would read its fields from the constructor arguments
+      if dests.exists:
+        case _: MarkerConsStrat | _: FieldWrite => true
+        case _: Dtor | _: FieldSel => false
+      then
         N
       else
         val (dtors, sels) = dests.partitionMap:
@@ -153,6 +157,7 @@ object Deforest:
       nonAffineTracking = dCfg.effectiveTrackNonAffine,
       accumulatorTracking = dCfg.effectiveTrackAccumulator,
       logEffects = dCfg.config.logEffects,
+      noFreeze = cfg.noFreeze,
     )
     val solver = new DeforestFusionSolver(flowAnalysisRes)
     if !solver.hasWorkToDo then p

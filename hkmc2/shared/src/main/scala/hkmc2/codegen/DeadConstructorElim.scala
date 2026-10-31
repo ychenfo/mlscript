@@ -41,19 +41,7 @@ class DeadConstructorElimSolver(val constraintSolver: FlowConstraintSolver, trac
       case CtorProducer(cls: ClassSymbol, args, selectedFrom) =>
         // TODO: should be able to remove this later when we can reason about
         // ctor flow and side effect properly
-        def hasSimpleCtor(cls: ClsLikeDefn): Bool =
-          val params = (cls.paramsOpt.toList ::: cls.auxParams).flatMap(_.allParams).map(_.sym).toSet[Symbol]
-          @annotation.tailrec
-          def onlyStoresParams(b: Block): Bool = b match
-            case AssignField(Value.This(self), _, Value.SimpleRef(p), rest) if self is cls.isym =>
-              onlyStoresParams(rest)
-            case Define(ValDefn(_, _, Value.SimpleRef(p)), rest) =>
-              onlyStoresParams(rest)
-            case End(_) => true
-            case _ => false
-          onlyStoresParams(cls.preCtor) && onlyStoresParams(cls.ctor)
-        end hasSimpleCtor
-        cls.irClsLikeDefn.exists(hasSimpleCtor)
+        FlowAnalysis.hasSimpleCtor(cls)
       case _ => false
     
     val allCtorStrats = collector.allRealCtors.filter(_.instantiationId.isDefined)
@@ -63,7 +51,7 @@ class DeadConstructorElimSolver(val constraintSolver: FlowConstraintSolver, trac
         c.dests.exists:
           case NonAffine | Accumulator => false
           case UnknownCons => true
-          case _: FieldSel | _: Dtor => true
+          case _: FieldSel | _: Dtor | _: FieldWrite => true
       .map(_.concreteId)
       .toSet
     

@@ -80,6 +80,7 @@ object FlowAnalysis:
     nonAffineTracking: Bool,
     accumulatorTracking: Bool,
     logEffects: Bool,
+    noFreeze: Bool,
   )(using TraceLogger, Elaborator.State, Raise, SymbolPrinter) =
     given State = new State
     val pre = new FlowPreAnalyzer(pgrm)
@@ -88,6 +89,7 @@ object FlowAnalysis:
       mono,
       nonAffineTracking,
       accumulatorTracking,
+      noFreeze,
     )
     val solver = new FlowConstraintSolver(constrCol)
     val tl = summon[TraceLogger]
@@ -104,6 +106,20 @@ object FlowAnalysis:
         case N => s.defn.exists: fun =>
           whichArgList < fun.params.size && fun.annotations.exists(_.isInstanceOf[Annot.Pure])
       case _ => false
+
+  // whether constructing an instance only stores the constructor's parameters into fields
+  private[codegen] def hasSimpleCtor(cls: ClassSymbol): Bool =
+    cls.irClsLikeDefn.exists: defn =>
+      val params = (defn.paramsOpt.toList ::: defn.auxParams).flatMap(_.allParams).map(_.sym).toSet[Symbol]
+      @annotation.tailrec
+      def onlyStoresParams(b: Block): Bool = b match
+        case AssignField(Value.This(self), _, Value.SimpleRef(p), rest) if (self is defn.isym) && params(p) =>
+          onlyStoresParams(rest)
+        case Define(ValDefn(_, _, Value.SimpleRef(p)), rest) if params(p) =>
+          onlyStoresParams(rest)
+        case End(_) => true
+        case _ => false
+      onlyStoresParams(defn.preCtor) && onlyStoresParams(defn.ctor)
 
   def mkTraceLogger(
     cfg: Config.FlowAnalysisConfig,
@@ -131,15 +147,18 @@ class ResultId(val result: Result, name: Str)(using eState: Elaborator.State) ex
 type InstantiationId = Ls[ResultId]
 type CtorCls = ClassLikeSymbol | Int
 type SelField = TermSymbol | Int
+// `value` holds the constructor argument and every value that may be written into the field;
+// `effect` becomes unsafe if the field may be written, and flows into the effect of its reads
+type CtorField = (field: SelField, value: StratVar, effect: StratVar)
 type FunId = (funSym: TermSymbol, whichParamList: Int) | ResultId
 type CallId = (exprId: ResultId, whichArgList: Int)
 type OriginId = ResultId | FunId | CallId
 type ConcreteFunId = ConcreteId[FunId]
 
 
-object TrackableFieldSelect:
-  def unapply(s: Select): Opt[Path -> (field: TermSymbol, owner: ClassSymbol)] =
-    s.symbol match
+object TrackableField:
+  def unapply(sym: Opt[Symbol]): Opt[(field: TermSymbol, owner: ClassSymbol)] =
+    sym match
     case S(sSym) if sSym.asTrm.exists(_.decl.exists(_.isInstanceOf[Param])) =>
       val tSym = sSym.asTrm.get
       for
@@ -150,8 +169,12 @@ object TrackableFieldSelect:
         // visible in the IR. For instance, `Array`'s `length` field is also read on tuples,
         // which are not constructed as `Array` instances.
         if !cls.defn.exists(Inheritance.isExternal)
-      yield s.qual -> (tSym, cls)
+      yield (tSym, cls)
     case _ => N
+
+object TrackableFieldSelect:
+  def unapply(s: Select): Opt[Path -> (field: TermSymbol, owner: ClassSymbol)] =
+    TrackableField.unapply(s.symbol).map(s.qual -> _)
 
 object PossibleTrackableTupleSelect:
   def unapply(s: Result)(using eState: Elaborator.State): Opt[Value.SimpleRef -> Int] =
@@ -282,11 +305,15 @@ class Ctor(
   val instantiationId: Opt[InstantiationId]
 )(
   val ctor: CtorCls,
-  val args: Ls[SelField -> ProdStrat]
+  val args: Ls[CtorField],
+  // only the `mut val` fields of a frozen object can be written
+  val frozen: Bool,
 ) extends ProdStrat with StratWithOrigin[ResultId]:
   val dests = MutSet.empty[ConcreteCtorConsumer | MarkerConsStrat]
+  def arg(field: SelField): CtorField =
+    args.find(_.field is field).getOrElse(lastWords(s"no field $field in $this"))
   override def toString(): String =
-    s"$ctor(${args.map(_.toString()).mkString(", ")})"
+    s"$ctor(${args.map(_.value.toString()).mkString(", ")})"
 
 
 class ConsFun(
@@ -313,7 +340,18 @@ class FieldSel(
 )(
   val field: SelField,
   val selectsFrom: CtorCls,
-  val consVar: StratVar
+  val consVar: StratVar,
+  // the effect of the reading code, which observes the field if it may be written
+  val effect: StratVar | NoProd,
+) extends ConsStrat with ConcreteCtorConsumer
+
+class FieldWrite(
+  val exprId: ResultId,
+  val instantiationId: Opt[InstantiationId]
+)(
+  val field: SelField,
+  val writesTo: CtorCls,
+  val rhs: ProdStrat,
 ) extends ConsStrat with ConcreteCtorConsumer
 
 class Dtor(
@@ -713,6 +751,7 @@ class FlowConstraintsCollector(
   val mono: Bool,
   val nonAffineTracking: Bool,
   val accumulatorTracking: Bool,
+  val noFreeze: Bool,
 ):
   given FlowPreAnalyzer = preAnalyzer
   given Raise = preAnalyzer.raise
@@ -749,6 +788,15 @@ class FlowConstraintsCollector(
   private def registerCtor(c: Ctor)(using cc: ConstraintsCollector): Ctor =
     if cc.forFunGroup.isEmpty then allRealCtors += c
     c
+  
+  private def mkCtorFields(fields: Ls[SelField], argsStrat: Ls[ProdStrat])(using cc: ConstraintsCollector): Ls[CtorField] =
+    fields.zip(argsStrat).map: (field, argStrat) =>
+      val fieldName = field match
+        case field: TermSymbol => field.nme
+        case idx: Int => idx.toString
+      val value = freshVar(s"field_$fieldName", cc.forFun)
+      cc.constrain(argStrat, value)
+      (field = field, value = value, effect = freshVar(s"field_effect_$fieldName", cc.forFun))
   
   private val generatedVars: collection.Map[Symbol, StratVar] = // TODO: tighten `Symbol` type!
     preAnalyzer.res.generatedVars.withDefaultValue(preAnalyzer.res.primitiveStratVar)
@@ -873,7 +921,8 @@ class FlowConstraintsCollector(
         case c: Ctor => registerCtor(
           new Ctor(c.exprId, updateInstantiationId(c.instantiationId))(
             c.ctor,
-            c.args.map((a, b) => a -> duplicateProdStrat(b))))
+            c.args.map(a => (field = a.field, value = duplicateVarState(a.value), effect = duplicateVarState(a.effect))),
+            c.frozen))
       def duplicateConsStrat(c: ConsStrat): ConsStrat = c match
         case v: StratVar => duplicateVarState(v)
         case c: ConsFun =>
@@ -890,7 +939,13 @@ class FlowConstraintsCollector(
           new FieldSel(fSel.exprId, updateInstantiationId(fSel.instantiationId))(
             fSel.field,
             fSel.selectsFrom,
-            duplicateVarState(fSel.consVar))
+            duplicateVarState(fSel.consVar),
+            duplicateVarStateOpt(fSel.effect))
+        case fWrite: FieldWrite =>
+          new FieldWrite(fWrite.exprId, updateInstantiationId(fWrite.instantiationId))(
+            fWrite.field,
+            fWrite.writesTo,
+            duplicateProdStrat(fWrite.rhs))
         case dtor: Dtor => new Dtor(dtor.exprId, updateInstantiationId(dtor.instantiationId))
       val newProd = duplicateVarState(pScheme.s)
       pScheme.constraints.foreach: (p, c) =>
@@ -1041,10 +1096,20 @@ class FlowConstraintsCollector(
         processBlock(sub)
         processBlock(finallyDo)
         processBlock(rest)
-      case AssignField(lhs, nme, rhs, rest) =>
+      case write @ AssignField(lhs, nme, rhs, rest) =>
         markUnsafeEta()
-        constrainOpaqueResult(lhs)
-        constrainOpaqueResult(rhs)
+        write.symbol match
+        case TrackableField(field, owner) =>
+          val lhsStrat = processResult(lhs)
+          // stored values are treated as escaping, so that written fields need none of the markers
+          // (eg, non-affinity) that constructor arguments receive
+          val stored = freshVar("stored", cc.forFun)
+          cc.constrain(processResult(rhs), stored)
+          cc.constrain(lhsStrat, new FieldWrite(lhs.uid, instId)(field, owner, stored))
+          cc.constrain(stored, UnknownCons)
+        case _ =>
+          constrainOpaqueResult(lhs)
+          constrainOpaqueResult(rhs)
         processBlock(rest)
       case AssignDynField(lhs, fld, kind, rhs, rest) =>
         markUnsafeEta()
@@ -1079,6 +1144,7 @@ class FlowConstraintsCollector(
         effect
       def constrainConstructorEffect(result: Result): Unit =
         val unsafeEta = result match
+          case CtorProducer(cls: ClassSymbol, _, _) if FlowAnalysis.hasSimpleCtor(cls) => false
           case call: Call => !FlowAnalysis.isPureCall(call, call.argss.size - 1)
           case _: Instantiate => true
           case _ => false
@@ -1104,12 +1170,11 @@ class FlowConstraintsCollector(
           callRes
       r match
         case sel@TrackableSelect(from, field, owner) =>
-          markUnsafeEta()
           val fromStrat = processResult(from)
           val selRes = freshVar("sel_res", cc.forFun)
           cc.constrain(
             fromStrat,
-            new FieldSel(sel.uid, instId)(field, owner, selRes))
+            new FieldSel(sel.uid, instId)(field, owner, selRes, currentEffect.getOrElse(NoProd)))
           selRes
         case c@CtorProducer(ctor, args, selectedFrom) if args.forall(_.spread.isEmpty) =>
           constrainConstructorEffect(c)
@@ -1117,6 +1182,14 @@ class FlowConstraintsCollector(
             cc.constrain(processResult(qual), UnknownCons)
           val argsStrat = args.map:
             case Arg(_, a) => processResult(a)
+          val frozen = !noFreeze && c.match
+            case Instantiate(mut, _, _) => !mut
+            case Tuple(mut, _) => !mut
+            // the constructor function of a class freezes the instance
+            case _: Call => true
+            // module objects may have mutable fields
+            case _: Path => false
+            case r => lastWords(s"unexpected constructor producer: $r")
           ctor match
           case cls: ClassSymbol =>
             cls.tree.clsParams.size match
@@ -1124,7 +1197,7 @@ class FlowConstraintsCollector(
               val clsParams = cls.tree.clsParams.head // TODO use irDefn here and elsewhere
               // TODO: properly check the parameter lists, which may change after passes like lifting
               // softTODO(argsStrat.size === clsParams.size, s"mismatched ctor arg and cls param sizes")
-              registerCtor(new Ctor(c.uid, instId)(ctor, clsParams.zip(argsStrat)))
+              registerCtor(new Ctor(c.uid, instId)(ctor, mkCtorFields(clsParams, argsStrat), frozen))
             case _ =>
               // - the size of 0 means we don't know the cls param symbols,
               // so we constrain args with UnknownCons and this CtorProducer gives UnknownProd
@@ -1132,9 +1205,9 @@ class FlowConstraintsCollector(
               //   constrain args with UnknownCons and this CtorProducer gives UnknownProd
               for a <- argsStrat do cc.constrain(a, UnknownCons)
               UnknownProd
-          case _: ModuleOrObjectSymbol => registerCtor(new Ctor(c.uid, instId)(ctor, Nil))
+          case _: ModuleOrObjectSymbol => registerCtor(new Ctor(c.uid, instId)(ctor, Nil, frozen))
           case tupSize: Int =>
-            registerCtor(new Ctor(c.uid, instId)(tupSize, (0 until tupSize).zip(argsStrat).toList))
+            registerCtor(new Ctor(c.uid, instId)(tupSize, mkCtorFields((0 until tupSize).toList, argsStrat), frozen))
         case c@CtorProducer(_, args, selectedFrom) =>
           markUnsafeEta()
           for qual <- selectedFrom do
@@ -1345,6 +1418,17 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
       c.exprId.exprId.getResult match
         case call: Call if FlowAnalysis.isPureCall(call, c.exprId.whichArgList) => NoProd
         case _ => c.effect
+    
+    def writeField(field: CtorField, value: ProdStrat): Unit =
+      handle(value, field.value)
+      handle(UnsafeEta, field.effect)
+    def observeRead(sel: FieldSel, readEffect: ProdStrat): Unit = sel.effect match
+      case e: StratVar => handle(readEffect, e)
+      case NoProd => ()
+    def unknownMayWrite(c: Ctor, field: SelField): Bool =
+      !c.frozen || field.match
+        case field: TermSymbol => field.k is syntax.MutVal
+        case _: Int => false
     def handle(constraint: ProdStrat -> ConsStrat): Unit =
       assert:
         val (prod, cons) = constraint
@@ -1362,9 +1446,9 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         if d.selectsFrom === c.ctor then
           addCtorDest(c, d)
           addDtorSrc(d, c)
-          handle(
-            c.args.find(_._1 is d.field).get._2,
-            d.consVar)
+          val field = c.arg(d.field)
+          handle(field.value, d.consVar)
+          observeRead(d, field.effect)
         // An inherited field is initialized by a parent constructor, which can receive any
         // of the subclass constructor's arguments. This analysis does not relate them to
         // the field, so the instance and the selected value must be treated as unknown.
@@ -1373,16 +1457,26 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         else if mayInheritFields(c.ctor, d.selectsFrom) then
           handle(c, UnknownCons)
           handle(UnknownProd, d)
+      case (c: Ctor, w: FieldWrite) =>
+        if w.writesTo === c.ctor then
+          addCtorDest(c, w)
+          addDtorSrc(w, c)
+          writeField(c.arg(w.field), w.rhs)
+        // as for `FieldSel`: the subclass constructor arguments do not tell which field is written
+        else if mayInheritFields(c.ctor, w.writesTo) then
+          handle(c, UnknownCons)
       case (c: Ctor, UnknownCons) =>
         addCtorDest(c, UnknownCons)
-        for (_, argProd) <- c.args do handle(argProd, UnknownCons)
+        for a <- c.args do handle(a.value, UnknownCons)
+        for a <- c.args if unknownMayWrite(c, a.field) do
+          writeField(a, UnknownProd)
       case (c: Ctor, x@(NonAffine | Accumulator)) =>
         addCtorDest(c, x)
-        for (_, argProd) <- c.args do handle(argProd, x)
+        for a <- c.args do handle(a.value, x)
       case (c: Ctor, i: IntoParam) =>
-        for (_, argProd) <- c.args do handle(argProd, i.s.asPossibleAccumulator)
+        for a <- c.args do handle(a.value, i.s.asPossibleAccumulator)
       case (c: Ctor, p: PossibleAccumulator) =>
-        for (_, argProd) <- c.args do handle(argProd, p)
+        for a <- c.args do handle(a.value, p)
       case (p: ProdFun, c: ConsFun) =>
         addFunDest(p, c)
         addFunSrc(c, p)
@@ -1425,6 +1519,9 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
       case (UnknownProd, sel: FieldSel) =>
         addDtorSrc(sel, UnknownProd)
         handle(UnknownProd, sel.consVar)
+        observeRead(sel, UnsafeEta)
+      case (UnknownProd, w: FieldWrite) =>
+        addDtorSrc(w, UnknownProd)
       case (UnknownProd, c: ConsFun) =>
         addFunSrc(c, UnknownProd)
         for a <- c.params do handle(a, UnknownCons)
@@ -1454,6 +1551,16 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
   
   logNonAffineSyms
   logAccumulatorSyms
+  
+  // a ctor arg reaches `PossibleAccumulator` through its field var, never as the param var itself,
+  // so `handle` misses a param that flows back into itself through a ctor field
+  if collector.accumulatorTracking then softTODO(
+    !collector.allRealCtors.exists: c =>
+      c.args.exists: a =>
+        a.value.upperBounds.exists:
+          case pAcc: PossibleAccumulator => pAcc.s.upperBounds.contains(a.value)
+          case _ => false,
+    "accumulator detection through constructor fields")
 
 
 end FlowConstraintSolver

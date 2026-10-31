@@ -70,6 +70,7 @@ c(AA(7))
 //│ deforest > cap_ub_(term:lambda,0)_for_lambda⁰
 //│ deforest > cl_for_c¹
 //│ deforest > cl_for_c⁰
+//│ deforest > field_x⁰
 //│ deforest > lambda$_for_lambda$⁰
 //│ deforest > lambda$here_for_c¹
 //│ deforest > lambda$here_for_c⁰
@@ -113,6 +114,7 @@ let p = AA(10) in
   c(p) + c(p)
 //│ deforest > >>> non-affine syms >>>
 //│ deforest > cap_ub_(term:c,0)_for_c⁰
+//│ deforest > field_x⁰
 //│ deforest > p¹
 //│ deforest > <<< non-affine syms <<<
 //│ deforest > >>> fusing >>>
@@ -130,6 +132,7 @@ apply(c, AA(3))
 //│ deforest > cap_ub_(term:c,0)_for_c⁰
 //│ deforest > f_for_apply¹
 //│ deforest > f_for_apply⁰
+//│ deforest > field_x⁰
 //│ deforest > tmp⁰
 //│ deforest > x_for_apply¹
 //│ deforest > x_for_apply⁰
@@ -144,6 +147,7 @@ fun c(k, x) = if k is AA(_) then x.AA#x + x.AA#x + x.AA#x
 c(AA(0), AA(3))
 //│ deforest > >>> non-affine syms >>>
 //│ deforest > cap_ub_(term:c,0)_for_c⁰
+//│ deforest > field_x⁰
 //│ deforest > tmp⁰
 //│ deforest > x_for_c¹
 //│ deforest > x_for_c⁰
@@ -171,6 +175,7 @@ c(AA(1))
 //│ deforest > cap_ub_(term:_d$,1)_for__d$⁰
 //│ deforest > cap_ub_(term:_d,0)_for__d⁰
 //│ deforest > cap_ub_(term:c,0)_for_c⁰
+//│ deforest > field_x⁰
 //│ deforest > tmp⁰
 //│ deforest > y_for__d$⁰
 //│ deforest > y_for_c¹
@@ -189,6 +194,9 @@ let p = AA(AA(AA(10))) in
 //│ deforest > >>> non-affine syms >>>
 //│ deforest > cap_ub_(term:c1,0)_for_c1⁰
 //│ deforest > cap_ub_(term:c2,0)_for_c2⁰
+//│ deforest > field_x²
+//│ deforest > field_x¹
+//│ deforest > field_x⁰
 //│ deforest > p¹
 //│ deforest > tmp¹
 //│ deforest > tmp⁰
@@ -209,6 +217,8 @@ apply(c1, c2, Many(Once(10)))
 //│ deforest > cap_ub_(term:apply,0)_for_apply⁰
 //│ deforest > cap_ub_(term:c1,0)_for_c1⁰
 //│ deforest > cap_ub_(term:c2,0)_for_c2⁰
+//│ deforest > field_x¹
+//│ deforest > field_x⁰
 //│ deforest > p_for_apply¹
 //│ deforest > p_for_apply⁰
 //│ deforest > tmp¹
@@ -234,6 +244,8 @@ nest_consume(nest_pickB, nest_prod(10))
 //│ deforest > cap_ub_(term:nest_prod,0)_for_nest_prod⁰
 //│ deforest > f_for_nest_consume¹
 //│ deforest > f_for_nest_consume⁰
+//│ deforest > field_x_for_nest_prod¹
+//│ deforest > field_x_for_nest_prod⁰
 //│ deforest > i_for_nest_consume¹
 //│ deforest > i_for_nest_consume⁰
 //│ deforest > nest_pickB_for_nest_pickB⁰
@@ -251,6 +263,7 @@ nest_consume(nest_pickB, nest_prod(10))
 
 
 // accumulator
+:todo
 :deforest logAccumulator logNonAffine
 fun length(ls) = if ls is
   h :: t then 1 + length(t)
@@ -268,10 +281,17 @@ length(from(5, Nil))
 //│ deforest > tmp_for_from⁰
 //│ deforest > <<< non-affine syms <<<
 //│ deforest > >>> accumulator syms >>>
-//│ deforest > acc_for_from¹
-//│ deforest > acc_for_from⁰
 //│ deforest > <<< accumulator syms <<<
+//│ ╔══[INTERNAL ERROR] Compiler reached an unsupported state: accumulator detection through constructor fields
+//│ ╟── The compilation result may be incorrect.
+//│ ╙── This is a known compiler limitation; if it is a blocker for you, please report it to the maintainers.
 //│ deforest > >>> fusing >>>
+//│ deforest > Nil⁰ ->
+//│ deforest > 	match: ls⁰
+//│ deforest > Cons⁰(n⁰, acc⁰) ->
+//│ deforest > 	match: ls⁰
+//│ deforest > 	fields: ls⁰.h⁰
+//│ deforest > 	fields: ls⁰.t⁰
 //│ deforest > <<< fusing <<<
 //│ = 5
 
@@ -291,16 +311,16 @@ length(append(id(1 :: Nil), 2 :: Nil))
 //│ deforest > >>> accumulator syms >>>
 //│ deforest > <<< accumulator syms <<<
 //│ deforest > >>> fusing >>>
-//│ deforest > Cons⁰(h⁰, tmp¹) ->
-//│ deforest > 	match: ls⁰
-//│ deforest > 	fields: ls⁰.h¹
-//│ deforest > 	fields: ls⁰.t⁰
+//│ deforest > Cons⁰(h¹, tmp¹) ->
+//│ deforest > 	match: ls¹
+//│ deforest > 	fields: ls¹.h⁰
+//│ deforest > 	fields: ls¹.t⁰
 //│ deforest > Cons⁰(2, Nil⁰) ->
-//│ deforest > 	match: ls⁰
-//│ deforest > 	fields: ls⁰.h¹
-//│ deforest > 	fields: ls⁰.t⁰
+//│ deforest > 	match: ls¹
+//│ deforest > 	fields: ls¹.h⁰
+//│ deforest > 	fields: ls¹.t⁰
 //│ deforest > Nil⁰ ->
-//│ deforest > 	match: ls⁰
+//│ deforest > 	match: ls¹
 //│ deforest > <<< fusing <<<
 //│ = 2
 
@@ -332,15 +352,15 @@ length(ping(id(1 :: 2 :: Nil), 3 :: 4 :: Nil))
 //│ deforest > <<< accumulator syms <<<
 //│ deforest > >>> fusing >>>
 //│ deforest > Cons⁰(3, tmp²) ->
-//│ deforest > 	match: ls¹
-//│ deforest > 	fields: ls¹.h¹
-//│ deforest > 	fields: ls¹.t⁰
+//│ deforest > 	match: ls²
+//│ deforest > 	fields: ls².h⁰
+//│ deforest > 	fields: ls².t⁰
 //│ deforest > Cons⁰(4, Nil⁰) ->
-//│ deforest > 	match: ls¹
-//│ deforest > 	fields: ls¹.h¹
-//│ deforest > 	fields: ls¹.t⁰
+//│ deforest > 	match: ls²
+//│ deforest > 	fields: ls².h⁰
+//│ deforest > 	fields: ls².t⁰
 //│ deforest > Nil⁰ ->
-//│ deforest > 	match: ls¹
+//│ deforest > 	match: ls²
 //│ deforest > <<< fusing <<<
 //│ = 2
 
@@ -364,11 +384,11 @@ sum(append(id(Nil), Nil), 0)
 //│ deforest > <<< accumulator syms <<<
 //│ deforest > >>> fusing >>>
 //│ deforest > Cons⁰(h², tmp³) ->
-//│ deforest > 	match: ls²
-//│ deforest > 	fields: ls².h¹
-//│ deforest > 	fields: ls².t⁰
+//│ deforest > 	match: ls³
+//│ deforest > 	fields: ls³.h⁰
+//│ deforest > 	fields: ls³.t⁰
 //│ deforest > Nil⁰ ->
-//│ deforest > 	match: ls²
+//│ deforest > 	match: ls³
 //│ deforest > <<< fusing <<<
 //│ = 0
 
@@ -409,11 +429,11 @@ length(flatten(id((1 :: Nil) :: Nil)))
 //│ deforest > <<< accumulator syms <<<
 //│ deforest > >>> fusing >>>
 //│ deforest > Cons⁰(h³, tmp⁴) ->
-//│ deforest > 	match: ls³
-//│ deforest > 	fields: ls³.h¹
-//│ deforest > 	fields: ls³.t⁰
+//│ deforest > 	match: ls⁴
+//│ deforest > 	fields: ls⁴.h⁰
+//│ deforest > 	fields: ls⁴.t⁰
 //│ deforest > Nil⁰ ->
-//│ deforest > 	match: ls³
+//│ deforest > 	match: ls⁴
 //│ deforest > <<< fusing <<<
 //│ = 1
 
@@ -426,6 +446,8 @@ fun alias_then_patmat(x) =
 alias_then_patmat(Cons(12, 13))
 //│ deforest > >>> non-affine syms >>>
 //│ deforest > cap_ub_(term:alias_then_patmat,0)_for_alias_then_patmat⁰
+//│ deforest > field_h⁰
+//│ deforest > field_t⁰
 //│ deforest > tmp⁵
 //│ deforest > x_for_alias_then_patmat¹
 //│ deforest > x_for_alias_then_patmat⁰
@@ -471,6 +493,7 @@ foo of AA of () => 1
 //│ deforest > cap_ub_(term:lambda,0)_for_lambda⁰
 //│ deforest > f_for_foo¹
 //│ deforest > f_for_foo⁰
+//│ deforest > field_x⁰
 //│ deforest > lambda_for_lambda⁰
 //│ deforest > sel_res_for_foo¹
 //│ deforest > sel_res_for_foo⁰
@@ -515,6 +538,7 @@ c(mk(7))
 //│ deforest > cl_for_c⁰
 //│ deforest > expensive_for_expensive⁰
 //│ deforest > expensive_res_for_expensive_for_mk⁰
+//│ deforest > field_x_for_mk⁰
 //│ deforest > g_for_g⁰
 //│ deforest > mk_res_for_mk⁰
 //│ deforest > p_for_c¹
@@ -574,6 +598,7 @@ c(AA(7), AA(8))
 //│ deforest > cap_ub_(term:g,1)_for_g⁰
 //│ deforest > cl_for_c¹
 //│ deforest > cl_for_c⁰
+//│ deforest > field_x⁰
 //│ deforest > g_for_g⁰
 //│ deforest > p_for_c¹
 //│ deforest > p_for_c⁰
@@ -618,6 +643,7 @@ c(mk(7))
 //│ deforest > cl_for_c⁰
 //│ deforest > expensive_for_expensive⁰
 //│ deforest > expensive_res_for_expensive_for_mk⁰
+//│ deforest > field_x_for_mk⁰
 //│ deforest > g_for_g⁰
 //│ deforest > mk_res_for_mk⁰
 //│ deforest > p_for_c¹
@@ -695,6 +721,7 @@ c(mk(7))
 //│ deforest > cap_ub_(term:mk,0)_for_mk⁰
 //│ deforest > expensive_for_expensive⁰
 //│ deforest > expensive_res_for_expensive_for_mk⁰
+//│ deforest > field_x_for_mk⁰
 //│ deforest > lambda$_for_lambda$⁰
 //│ deforest > lambda_for_lambda⁰
 //│ deforest > mk_res_for_mk⁰

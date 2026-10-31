@@ -320,6 +320,7 @@ object FlowAnalysisBasedRewrite:
         nonAffineTracking = optCfg.config.effectiveTrackNonAffine,
         accumulatorTracking = optCfg.config.effectiveTrackAccumulator,
         logEffects = optCfg.config.logEffects,
+        noFreeze = cfg.noFreeze,
       )
     
     val etaExpansionSolver =
