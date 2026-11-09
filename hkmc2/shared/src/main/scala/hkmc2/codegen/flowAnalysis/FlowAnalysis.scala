@@ -402,8 +402,12 @@ class FlowPreAnalyzer(val pgrm: Program)(using
   // information through ProdFuns.
   private case class CaptureTrackingInfo(
     locallyDefined: MutSet[Symbol],
-    captured: LinkedHashSet[Symbol]
-  )
+    // each captured symbol with the member symbol it was referred through, if any:
+    // `Scoped` lists local functions by member symbol, while references record their term symbol
+    captured: LinkedHashMap[Symbol, Opt[BlockMemberSymbol]]
+  ):
+    def defines(sym: Symbol, member: Opt[BlockMemberSymbol]): Bool =
+      locallyDefined.contains(sym) || member.exists(locallyDefined.contains)
   private var currentCaptureInfo: Opt[CaptureTrackingInfo] = N
   private var currentAffinityCount = res.affinityCounts
   
@@ -559,22 +563,22 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     case _: ClassCtorSymbol => ()
     case _ => currentAffinityCount(s) += 1
   
-  private def recordRefInCaptures(l: LocalVarSymbol | TermSymbol): Unit =
+  private def recordRefInCaptures(l: LocalVarSymbol | TermSymbol, member: Opt[BlockMemberSymbol]): Unit =
     (l, currentCaptureInfo) match
     case (_: ClassCtorSymbol, _) | (_, N) => ()
     case (_, S(capInfo)) =>
-      if !capInfo.locallyDefined.contains(l) then
-        capInfo.captured += l
+      if !capInfo.defines(l, member) then
+        capInfo.captured(l) = member
 
   private def withCaptureInfo(owner: FunId, locallyDefined: MutSet[Symbol])(body: => Any): Unit =
     val outerCapInfo = currentCaptureInfo
-    val newCapInfo = CaptureTrackingInfo(locallyDefined, LinkedHashSet.empty)
+    val newCapInfo = CaptureTrackingInfo(locallyDefined, LinkedHashMap.empty)
     currentCaptureInfo = S(newCapInfo)
     body
     currentCaptureInfo = outerCapInfo
     outerCapInfo.foreach: outer =>
-      outer.captured ++= newCapInfo.captured.iterator.filterNot(outer.locallyDefined.contains)
-    res.capturedVars(owner) = newCapInfo.captured
+      outer.captured ++= newCapInfo.captured.iterator.filterNot((sym, member) => outer.defines(sym, member))
+    res.capturedVars(owner) = LinkedHashSet.from(newCapInfo.captured.keysIterator)
   
   override def applyBlock(b: Block): Unit = b match
     case scpd@Scoped(syms, body) =>
@@ -622,7 +626,7 @@ class FlowPreAnalyzer(val pgrm: Program)(using
       applyBlock(rest)
     case Assign(lhs, rhs, rest) =>
       lhs match
-        case l: (LocalVarSymbol | TermSymbol) => recordRefInCaptures(l)
+        case l: (LocalVarSymbol | TermSymbol) => recordRefInCaptures(l, N)
         case _ => ()
       applyResult(rhs)
       applyBlock(rest)
@@ -671,15 +675,15 @@ class FlowPreAnalyzer(val pgrm: Program)(using
   private def applyValueSimpleRef(v: Value.SimpleRef, recordAffinity: Bool) =
     v.sym match
     case s: LocalVarSymbol =>
-      recordRefInCaptures(s)
+      recordRefInCaptures(s, N)
       if recordAffinity then recordAffinityUse(s)
     case _ => ()
 
   private def applyValueMemberRef(v: Value.MemberRef, recordAffinity: Bool) =
-    val Value.MemberRef(_, disamb) = v
+    val Value.MemberRef(member, disamb) = v
     disamb match
     case s: TermSymbol =>
-      recordRefInCaptures(s)
+      recordRefInCaptures(s, S(member))
       if recordAffinity then recordAffinityUse(s)
     case _ => ()
   
