@@ -11,7 +11,7 @@
 let state = 0
 fun effect() = set state += 42
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function effect⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function effect⁰#0 @ <root> -> Pure
 //│ flow-analysis > call +⁰@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ eta-expansion > >>> eta-expansion targets shapes >>>

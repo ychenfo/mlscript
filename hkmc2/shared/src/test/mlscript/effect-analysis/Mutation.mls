@@ -12,7 +12,7 @@ let state = 0
 fun mutate() =
   set state = 42
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function mutate⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function mutate⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ state = 0
 
@@ -104,7 +104,7 @@ let state = 0
 fun observe() =
   state
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function observe⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function observe⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ state = 0
 
@@ -148,7 +148,7 @@ set state = 42
 fun observe_mutable() =
   state
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function observe_mutable⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function observe_mutable⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ state = 42
 let state = 0
@@ -156,7 +156,7 @@ fun observe_mutable() =
   state
 set state = 42
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function observe_mutable⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function observe_mutable⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ state = 42
 
@@ -257,7 +257,7 @@ let state = 0
 fun mutate_if(cond) =
   if cond do set state = 42
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function mutate_if⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function mutate_if⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ state = 0
 
@@ -279,7 +279,7 @@ fun mutate_loop(again) =
     set state = 42
     set again = false
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function mutate_loop⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function mutate_loop⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ state = 0
 

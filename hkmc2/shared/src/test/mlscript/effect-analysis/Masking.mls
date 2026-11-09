@@ -1,0 +1,386 @@
+:js
+
+#config(inlining: None, liftDefns: Some(LiftDefns), flowBasedOpt: Some(FlowBasedOpt(logEffects: true, debugEta: true, mono: true)))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+class C(val x)
+declare fun unknown(o): Anything
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * A write to a cell created during the call is not an effect of the function.
+:expect 3
+@affine(1) fun add(t)(y) = t + y
+fun f(n) =
+  let o = new mut C(0)
+  set o.C#x = n
+  add(o.C#x)
+f(1)(2)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function add⁰#1 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 3
+
+
+// * The helper is effectful because the cell is its input; its caller created the cell.
+private fun write(o, n) =
+  set o.C#x = n
+  n
+fun f(n) = write(new mut C(0), n)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f⁰#0 @ <root> -> Pure
+//│ flow-analysis > function write⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call write⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * A closure writing a cell it captures is effectful; creating the closure is not.
+fun mk() =
+  let o = new mut C(0)
+  (n) =>
+    set o.C#x = n
+    n
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function lambda$⁰#0 @ <root> -> Pure
+//│ flow-analysis > function lambda$⁰#1 @ <root> -> UnsafeEta
+//│ flow-analysis > function lambda⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function mk⁰#0 @ <root> -> Pure
+//│ flow-analysis > call lambda$⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call lambda⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * Writing an object held by a top-level binding is an effect.
+let o = new mut C(0)
+fun g(n) =
+  set o.C#x = n
+  n
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ o = C(0)
+
+
+// * The callback can return a cell from an earlier call of `f`, so the write must stay.
+:expect 1
+private fun f(k, n) =
+  let o = new mut C(0)
+  let t = k(o)
+  set t.C#x = n
+  @affine(0) (z) => o
+fun main() =
+  let o = f(x => x, 5)(0)
+  let h = f(x => o, 1)
+  let v = o.C#x
+  h(0)
+  v
+main()
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function lambda$¹#0 @ <root> -> Pure
+//│ flow-analysis > function lambda$¹#1 @ <root> -> Pure
+//│ flow-analysis > function lambda$⁰#0 @ <root> -> Pure
+//│ flow-analysis > function lambda$⁰#1 @ <root> -> Pure
+//│ flow-analysis > function lambda²#0 @ <root> -> Pure
+//│ flow-analysis > function lambda¹#0 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> Pure
+//│ flow-analysis > function main⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call baseCall⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result²#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call f⁰@result⁵#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call h⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call k⁰@result⁷#0 @ <root> -> Pure
+//│ flow-analysis > call lambda$¹@result³#0 @ <root> -> Pure
+//│ flow-analysis > call lambda$⁰@result⁶#0 @ <root> -> Pure
+//│ flow-analysis > call lambda¹@result⁹#0 @ <root> -> Pure
+//│ flow-analysis > call lambda⁰@result⁸#0 @ <root> -> Pure
+//│ flow-analysis > call main⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 1
+
+
+// * A cell only handed to a callback that ignores it was not given to the function.
+private fun h(cb) =
+  let o = new mut C(0)
+  cb(o)
+  set o.C#x = 1
+  0
+h(x => 0)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function h⁰#0 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> Pure
+//│ flow-analysis > call cb⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call h⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 0
+
+
+// * A callback writing its argument puts the cell's name in its own effect.
+private fun h(cb) =
+  let o = new mut C(0)
+  cb(o)
+  set o.C#x = 1
+  0
+private fun put(x) =
+  set x.C#x = 2
+  0
+h(put)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function h⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function put⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call cb⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call h⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 0
+
+
+// * An unknown effect in the body always stays.
+private fun f() =
+  unknown(0)
+  0
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call unknown@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * An unknown effect of an input the body never uses does not count.
+private fun g(k) = 0
+g(() => unknown(0))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function g⁰#0 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call g⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call unknown@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 0
+
+
+// * That effect also stays in the callers of the function performing the write.
+let o = new mut C(0)
+fun g(n) =
+  set o.C#x = n
+  n
+fun f(n) = g(n)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call g⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ o = C(0)
+
+
+// * A cell handed to a callback can come back holding an older cell: `h` only reaches `q`
+// * through the contents of its own cell, so those contents must count at the positive sign.
+:expect 1
+private fun fill(prev)(x) =
+  set x.C#x = prev
+  0
+private fun h(cb) =
+  let r = new mut C(new mut C(0))
+  cb(r)
+  let t = r.C#x
+  set t.C#x = 1
+  0
+private fun m(q) = h(fill(q))
+fun main() =
+  let o = new mut C(0)
+  m(o)
+  o.C#x
+main()
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function fill⁰#0 @ <root> -> Pure
+//│ flow-analysis > function fill⁰#1 @ <root> -> UnsafeEta
+//│ flow-analysis > function h⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function main⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function m⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call cb⁰@result⁴#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call fill⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call h⁰@result²#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call main⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call m⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 1
+
+
+// * A function inside a cell handed to a callback can be called with an older cell and store it
+// * in `h`'s local: the cell's contents must also count at the negative sign, so that the
+// * function's parameter counts at the positive one.
+:expect 5
+private fun k(r)(c) =
+  set r.C#x = c
+  0
+private fun g(q)(w) =
+  let f = w.C#x
+  f(q)
+  0
+private fun h(gg) =
+  let r = new mut C(new mut C(0))
+  gg(new mut C(k(r)))
+  let q = r.C#x
+  set q.C#x = 5
+  0
+private fun m(q) = h(g(q))
+fun main() =
+  let o = new mut C(0)
+  m(o)
+  o.C#x
+main()
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function g⁰#0 @ <root> -> Pure
+//│ flow-analysis > function g⁰#1 @ <root> -> UnsafeEta
+//│ flow-analysis > function h⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function k⁰#0 @ <root> -> Pure
+//│ flow-analysis > function k⁰#1 @ <root> -> UnsafeEta
+//│ flow-analysis > function main⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function m⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call f⁰@result⁶#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call gg⁰@result⁴#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call g⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call h⁰@result²#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call k⁰@result⁵#0 @ <root> -> Pure
+//│ flow-analysis > call main⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call m⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 5
+
+
+// * LIMIT: the write only touches this call's cell, but the cell comes back through the callback's
+// * result, so its name counts as visible and the write stays, although eta would be safe here.
+private fun f(k) =
+  let o = new mut C(0)
+  set o.C#x = 1
+  k(o)
+f(x => x)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function lambda⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call k⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = C(1)
+
+
+// * LIMIT: with one copy of `f`, a callback that ignores the cell is merged with one that returns it.
+private fun f(k) =
+  let o = new mut C(0)
+  set o.C#x = 1
+  k(o)
+fun a() = f(x => x)
+fun b() = f(x => 0)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function a⁰#0 @ <root> -> Pure
+//│ flow-analysis > function b⁰#0 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function lambda¹#0 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call k⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * The blocks below analyze each use of a function separately.
+#config(inlining: None, liftDefns: Some(LiftDefns), flowBasedOpt: Some(FlowBasedOpt(logEffects: true, debugEta: true, mono: false)))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * The same program: only the instance whose callback returns the cell keeps the write.
+private fun f(k) =
+  let o = new mut C(0)
+  set o.C#x = 1
+  k(o)
+fun a() = f(x => x)
+fun b() = f(x => 0)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function a¹#0 @ a⁰ -> Pure
+//│ flow-analysis > function b¹#0 @ b⁰ -> Pure
+//│ flow-analysis > function f⁰#0 @ a⁰.f² -> UnsafeEta
+//│ flow-analysis > function f⁰#0 @ b⁰.f¹ -> Pure
+//│ flow-analysis > function f⁰#0 @ f³ -> UnsafeEta
+//│ flow-analysis > function lambda²#0 @ a⁰.lambda³ -> Pure
+//│ flow-analysis > function lambda²#0 @ lambda⁴ -> Pure
+//│ flow-analysis > function lambda⁰#0 @ b⁰.lambda¹ -> Pure
+//│ flow-analysis > function lambda⁰#0 @ lambda⁵ -> Pure
+//│ flow-analysis > call f⁰@result²#0 @ a⁰ -> UnsafeEta
+//│ flow-analysis > call f⁰@result¹#0 @ b⁰ -> Pure
+//│ flow-analysis > call k⁰@result⁰#0 @ a⁰.f² -> Pure
+//│ flow-analysis > call k⁰@result⁰#0 @ b⁰.f¹ -> Pure
+//│ flow-analysis > call k⁰@result⁰#0 @ f³ -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * Every instance masks its own cell, while each instance of the helper still has the effect.
+private fun write(o, n) =
+  set o.C#x = n
+  n
+private fun f(n) = write(new mut C(0), n)
+fun a() = f(1)
+fun b() = f(2)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function a¹#0 @ a⁰ -> Pure
+//│ flow-analysis > function b¹#0 @ b⁰ -> Pure
+//│ flow-analysis > function f⁰#0 @ a⁰.f² -> Pure
+//│ flow-analysis > function f⁰#0 @ b⁰.f¹ -> Pure
+//│ flow-analysis > function f⁰#0 @ f³ -> Pure
+//│ flow-analysis > function write⁰#0 @ a⁰.f².write¹ -> UnsafeEta
+//│ flow-analysis > function write⁰#0 @ b⁰.f¹.write¹ -> UnsafeEta
+//│ flow-analysis > function write⁰#0 @ f³.write¹ -> UnsafeEta
+//│ flow-analysis > function write⁰#0 @ write² -> UnsafeEta
+//│ flow-analysis > call f⁰@result²#0 @ a⁰ -> Pure
+//│ flow-analysis > call f⁰@result¹#0 @ b⁰ -> Pure
+//│ flow-analysis > call write⁰@result⁰#0 @ a⁰.f² -> UnsafeEta
+//│ flow-analysis > call write⁰@result⁰#0 @ b⁰.f¹ -> UnsafeEta
+//│ flow-analysis > call write⁰@result⁰#0 @ f³ -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+

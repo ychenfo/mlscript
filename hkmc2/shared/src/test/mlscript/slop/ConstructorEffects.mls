@@ -48,12 +48,12 @@ fun callback(run: () -> Int) = Callback(run)
 //│ flow-analysis > function callback⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > function called⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > function observed⁰#0 @ <root> -> UnsafeEta
-//│ flow-analysis > function update⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function update⁰#0 @ <root> -> Pure
 //│ flow-analysis > function written⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call +⁰@result³#0 @ <root> -> Pure
 //│ flow-analysis > call +⁰@result¹#0 @ <root> -> Pure
 //│ flow-analysis > call run@result⁰#0 @ <root> -> UnsafeEta
-//│ flow-analysis > call update⁰@result²#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call update⁰@result²#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ state = 0
 

@@ -148,7 +148,7 @@ type InstantiationId = Ls[ResultId]
 type CtorCls = ClassLikeSymbol | Int
 type SelField = TermSymbol | Int
 // `value` holds the constructor argument and every value that may be written into the field;
-// `effect` becomes unsafe if the field may be written, and flows into the effect of its reads
+// `effect` names the field in write effects: it receives them if the field may be written, and flows into the effect of its reads
 type CtorField = (field: SelField, value: StratVar, effect: StratVar)
 type FunId = (funSym: TermSymbol, whichParamList: Int) | ResultId
 type CallId = (exprId: ResultId, whichArgList: Int)
@@ -239,12 +239,21 @@ class StratVar(val name: Str, val sourceSymbol: Opt[Symbol], val generatedForFun
   val lowerBounds = LinkedHashSet.empty[ProdStrat]
   lazy val asIntoParam = new StratVar.IntoParamImpl(this)
   lazy val asPossibleAccumulator = new StratVar.PossibleAccumulatorImpl(this)
+  lazy val asEff = new StratVar.EffImpl(this)
+  lazy val asReachPos = new StratVar.ReachImpl(this, true)
+  lazy val asReachNeg = new StratVar.ReachImpl(this, false)
+  def asReach(positive: Bool): StratVar.ReachImpl = if positive then asReachPos else asReachNeg
 
 object StratVar:
   final class IntoParamImpl private[StratVar] (val s: StratVar) extends ConsStrat:
     override def toString(): String = s"IntoParam($s)"
   final class PossibleAccumulatorImpl private[StratVar] (val s: StratVar) extends ConsStrat:
     override def toString(): String = s"PossibleAccumulator($s)"
+  // `Mask` finds effects by identity in `lowerBounds`, so `asEff` must be the only way to get one
+  final class EffImpl private[StratVar] (val name: StratVar) extends ProdStrat:
+    override def toString(): String = s"Eff($name)"
+  final class ReachImpl private[StratVar] (val visible: StratVar, val positive: Bool) extends ConsStrat:
+    override def toString(): String = s"Reach(${if positive then "+" else "-"}, $visible)"
   
 
   def freshVar(nme: String)(using fState: FlowAnalysis.State): StratVar =
@@ -264,6 +273,8 @@ object StratVar:
 
 type IntoParam = StratVar.IntoParamImpl
 type PossibleAccumulator = StratVar.PossibleAccumulatorImpl
+type Eff = StratVar.EffImpl
+type Reach = StratVar.ReachImpl
 
 sealed trait StratWithOrigin[A <: OriginId]:
   def exprId: A
@@ -334,6 +345,12 @@ case object NonAffine extends MarkerConsStrat
 
 case object Accumulator extends MarkerConsStrat
 
+// callers see a body's effect only if it is also reachable from the function's inputs;
+// one `Mask` sits on each of the two vars and checks the `other` when an effect lands on its own,
+// so the effect reaches `filteredEffect` on whichever arrival comes second
+class Mask(val other: StratVar, val filteredEffect: StratVar, val onBody: Bool) extends ConsStrat:
+  override def toString(): String = s"Mask($other, $filteredEffect, onBody = $onBody)"
+
 class FieldSel(
   val exprId: ResultId,
   val instantiationId: Opt[InstantiationId]
@@ -352,6 +369,7 @@ class FieldWrite(
   val field: SelField,
   val writesTo: CtorCls,
   val rhs: ProdStrat,
+  val effect: StratVar | NoProd,
 ) extends ConsStrat with ConcreteCtorConsumer
 
 class Dtor(
@@ -417,10 +435,11 @@ class FlowPreAnalyzer(val pgrm: Program)(using
       .iterator
       .collect:
         case (sym, n) if n > 1 => sym
-      .filterNot:
-        case ts: TermSymbol => rootFunDefns.contains(ts)
-        case _ => false
+      .filterNot(isRootFun)
       .toSet
+    def isRootFun(s: Symbol): Bool = s match
+      case ts: TermSymbol => rootFunDefns.contains(ts)
+      case _ => false
 
   end res
   
@@ -803,11 +822,6 @@ class FlowConstraintsCollector(
   private val generatedEffects: collection.Map[Symbol, StratVar] = // TODO: tighten `Symbol` type! // TODO: use at access sites of getters!
     preAnalyzer.res.generatedEffects.withDefaultValue(preAnalyzer.res.primitiveStratVar)
 
-  // * This is for effect analysis. The nonlocal variables that are potentially shared. 
-  // * If a function accesses a nonlocal, it is conservatively considered unsafe for eta-expansion. 
-  private val nonlocals = preAnalyzer.res.capturedVars.valuesIterator.flatten
-    .filterNot(_ == eState.runtimeSymbol).toSet
-  
   locally {
     val funsToProdStratScheme = MutMap.empty[TermSymbol, ProdStratScheme]
 
@@ -918,6 +932,7 @@ class FlowConstraintsCollector(
         case UnknownProd => UnknownProd
         case UnsafeEta => UnsafeEta
         case NoProd => NoProd
+        case _: Eff => lastWords("`Eff` is only created while solving, after schemes are instantiated")
         case c: Ctor => registerCtor(
           new Ctor(c.exprId, updateInstantiationId(c.instantiationId))(
             c.ctor,
@@ -935,6 +950,8 @@ class FlowConstraintsCollector(
         case Accumulator => Accumulator
         case pAcc: PossibleAccumulator => duplicateVarState(pAcc.s).asPossibleAccumulator
         case iPrm: IntoParam => duplicateVarState(iPrm.s).asIntoParam
+        case r: Reach => duplicateVarState(r.visible).asReach(r.positive)
+        case m: Mask => new Mask(duplicateVarState(m.other), duplicateVarState(m.filteredEffect), m.onBody)
         case fSel: FieldSel =>
           new FieldSel(fSel.exprId, updateInstantiationId(fSel.instantiationId))(
             fSel.field,
@@ -945,7 +962,8 @@ class FlowConstraintsCollector(
           new FieldWrite(fWrite.exprId, updateInstantiationId(fWrite.instantiationId))(
             fWrite.field,
             fWrite.writesTo,
-            duplicateProdStrat(fWrite.rhs))
+            duplicateProdStrat(fWrite.rhs),
+            duplicateVarStateOpt(fWrite.effect))
         case dtor: Dtor => new Dtor(dtor.exprId, updateInstantiationId(dtor.instantiationId))
       val newProd = duplicateVarState(pScheme.s)
       pScheme.constraints.foreach: (p, c) =>
@@ -977,6 +995,10 @@ class FlowConstraintsCollector(
         case _: ResultId => N
       val effect =
         freshVar(s"effect_$funLamId", sourceSymbol, cc.forFun)
+      val visible = freshVar(s"visible_$funLamId", cc.forFun)
+      val filteredEffect = freshVar(s"filtered_effect_$funLamId", cc.forFun)
+      cc.constrain(effect, new Mask(visible, filteredEffect, onBody = true))
+      cc.constrain(visible, new Mask(effect, filteredEffect, onBody = false))
       params.foreach: ps =>
         ps.restParam.foreach: p =>
           generatedVars(p.sym).constrainOpaque
@@ -990,7 +1012,7 @@ class FlowConstraintsCollector(
           // A declared curried function runs its body only at the final list.
           // Applying earlier parameter lists only captures arguments; each needs its own, initially pure summary.
           val effectParamList =
-            if whichParamList == params.size - 1 then effect
+            if whichParamList == params.size - 1 then filteredEffect
             else freshVar(s"effect_$plFunId", cc.forFun)
           val capUB = freshVar(s"cap_ub_$plFunId", cc.forFun)
           for
@@ -998,6 +1020,10 @@ class FlowConstraintsCollector(
             capturedSymStrat <- generatedVars.get(v)
           do
             cc.constrain(capturedSymStrat, capUB)
+            // naming a top-level function must not make its latent effects visible
+            if !preAnalyzer.res.isRootFun(v) then cc.constrain(capturedSymStrat, visible.asReachPos)
+          for p <- ps.params ++ ps.restParam do
+            cc.constrain(generatedVars(p.sym), visible.asReachPos)
           new ProdFun(plFunId, cc.instId)(
             ps.params.map(p => generatedVars(p.sym)),
             ps.paramCountLB,
@@ -1089,7 +1115,6 @@ class FlowConstraintsCollector(
         lhs.match
           case NoSymbol => ()
           case lhs: (LocalVarSymbol | TermSymbol) =>
-            if nonlocals.contains(lhs) then markUnsafeEta()
             cc.constrain(rhsStrat, generatedVars(lhs))
         processBlock(rest)
       case TryBlock(sub, finallyDo, rest) =>
@@ -1097,7 +1122,6 @@ class FlowConstraintsCollector(
         processBlock(finallyDo)
         processBlock(rest)
       case write @ AssignField(lhs, nme, rhs, rest) =>
-        markUnsafeEta()
         write.symbol match
         case TrackableField(field, owner) =>
           val lhsStrat = processResult(lhs)
@@ -1105,9 +1129,10 @@ class FlowConstraintsCollector(
           // (eg, non-affinity) that constructor arguments receive
           val stored = freshVar("stored", cc.forFun)
           cc.constrain(processResult(rhs), stored)
-          cc.constrain(lhsStrat, new FieldWrite(lhs.uid, instId)(field, owner, stored))
+          cc.constrain(lhsStrat, new FieldWrite(lhs.uid, instId)(field, owner, stored, currentEffect.getOrElse(NoProd)))
           cc.constrain(stored, UnknownCons)
         case _ =>
+          markUnsafeEta()
           constrainOpaqueResult(lhs)
           constrainOpaqueResult(rhs)
         processBlock(rest)
@@ -1289,14 +1314,6 @@ class FlowConstraintsCollector(
               lastWords("type aliases should not occur as runtime member references")
             generatedVars(disamb)
           case Value.SimpleRef(sym) =>
-            if nonlocals.contains(sym) then
-              // A special case to avoid regression in deforest/eta-expansion/basic.mls
-              // To be superseded by our capture analysis / masking.
-              val isParam = currentEffect.flatMap(_.sourceSymbol).exists:
-                case fun: TermSymbol => preAnalyzer.res.funSymToFunDefn.get(fun).exists:
-                  _.params.exists(_.paramSyms.contains(sym))
-                case _ => false
-              if !isParam then markUnsafeEta()
             generatedVars(sym)
           case Value.This(_) => UnknownProd
           case Value.Lit(lit) => UnknownProd
@@ -1419,11 +1436,8 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         case call: Call if FlowAnalysis.isPureCall(call, c.exprId.whichArgList) => NoProd
         case _ => c.effect
     
-    def writeField(field: CtorField, value: ProdStrat): Unit =
-      handle(value, field.value)
-      handle(UnsafeEta, field.effect)
-    def observeRead(sel: FieldSel, readEffect: ProdStrat): Unit = sel.effect match
-      case e: StratVar => handle(readEffect, e)
+    def observe(effect: StratVar | NoProd, observed: ProdStrat): Unit = effect match
+      case e: StratVar => handle(observed, e)
       case NoProd => ()
     def unknownMayWrite(c: Ctor, field: SelField): Bool =
       !c.frozen || field.match
@@ -1448,7 +1462,7 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
           addDtorSrc(d, c)
           val field = c.arg(d.field)
           handle(field.value, d.consVar)
-          observeRead(d, field.effect)
+          observe(d.effect, field.effect)
         // An inherited field is initialized by a parent constructor, which can receive any
         // of the subclass constructor's arguments. This analysis does not relate them to
         // the field, so the instance and the selected value must be treated as unknown.
@@ -1461,15 +1475,20 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         if w.writesTo === c.ctor then
           addCtorDest(c, w)
           addDtorSrc(w, c)
-          writeField(c.arg(w.field), w.rhs)
+          val field = c.arg(w.field)
+          handle(w.rhs, field.value)
+          handle(field.effect.asEff, field.effect)
+          observe(w.effect, field.effect.asEff)
         // as for `FieldSel`: the subclass constructor arguments do not tell which field is written
         else if mayInheritFields(c.ctor, w.writesTo) then
           handle(c, UnknownCons)
+          observe(w.effect, UnsafeEta)
       case (c: Ctor, UnknownCons) =>
         addCtorDest(c, UnknownCons)
         for a <- c.args do handle(a.value, UnknownCons)
         for a <- c.args if unknownMayWrite(c, a.field) do
-          writeField(a, UnknownProd)
+          handle(UnknownProd, a.value)
+          handle(UnsafeEta, a.effect)
       case (c: Ctor, x@(NonAffine | Accumulator)) =>
         addCtorDest(c, x)
         for a <- c.args do handle(a.value, x)
@@ -1514,14 +1533,29 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         handle(p.capturedVarUpperbound, i.s.asPossibleAccumulator)
       case (p: ProdFun, c: PossibleAccumulator) =>
         handle(p.capturedVarUpperbound, c)
+      // every field is treated as mutable, so its contents are reachable at both signs
+      case (c: Ctor, r: Reach) =>
+        for a <- c.args do
+          handle(a.value, r.visible.asReachPos)
+          handle(a.value, r.visible.asReachNeg)
+          if r.positive then handle(a.effect, r.visible)
+      case (p: ProdFun, r: Reach) =>
+        for a <- p.params ++ p.restParam do a match
+          case v: StratVar => handle(v, r.visible.asReach(!r.positive))
+          case _ => ()
+        handle(p.res, r)
+        if r.positive then p.effect match
+          case e: StratVar => handle(e, r.visible)
+          case NoProd => ()
       case (UnknownProd, d: Dtor) =>
         addDtorSrc(d, UnknownProd)
       case (UnknownProd, sel: FieldSel) =>
         addDtorSrc(sel, UnknownProd)
         handle(UnknownProd, sel.consVar)
-        observeRead(sel, UnsafeEta)
+        observe(sel.effect, UnsafeEta)
       case (UnknownProd, w: FieldWrite) =>
         addDtorSrc(w, UnknownProd)
+        observe(w.effect, UnsafeEta)
       case (UnknownProd, c: ConsFun) =>
         addFunSrc(c, UnknownProd)
         for a <- c.params do handle(a, UnknownCons)
@@ -1530,6 +1564,12 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         inferredCallEffect(c) match
         case NoProd => ()
         case ce: StratVar => handle(UnsafeEta, ce)
+      case (e: Eff, m: Mask) =>
+        if m.other.lowerBounds.contains(e) then handle(e, m.filteredEffect)
+      // an unknown effect cannot be on state the function created, but one that only
+      // reaches the visible side comes from an input the body may never use
+      case (UnsafeEta, m: Mask) =>
+        if m.onBody then handle(UnsafeEta, m.filteredEffect)
       case (p: StratVar, c: StratVar) =>
         if p.upperBounds.add(c) then
           for l <- p.lowerBounds do handle(l, c)

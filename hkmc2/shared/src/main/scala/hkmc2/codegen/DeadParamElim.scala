@@ -63,6 +63,7 @@ class DeadParamElimSolver(val constraintSolver: FlowConstraintSolver, traceLogge
             if ubs.exists:
               case _: StratVar => false
               case _: IntoParam => false
+              case _: Reach => false
               case NonAffine | Accumulator => false
               case _ => true
             then prodRoots += prodFun -> i
