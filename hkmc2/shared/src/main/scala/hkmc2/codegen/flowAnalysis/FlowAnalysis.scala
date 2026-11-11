@@ -434,6 +434,8 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     val nonlocallyAssigned = MutSet.empty[Symbol]
     // the val bound to each member, which a reference resolved to a class may stand for (eg, `val Alias = Box`)
     val valOfMember = MutMap.empty[BlockMemberSymbol, TermSymbol]
+    // the variables of top-level `Scoped` blocks and the top-level vals
+    val topLevelBindings = LinkedHashSet.empty[Symbol]
     def getEnclosingMatchesForSel(selExprId: ResultId) =
       selToCtxOfSel.get(selExprId).fold(Iterator.empty):
         _.iterator
@@ -589,7 +591,9 @@ class FlowPreAnalyzer(val pgrm: Program)(using
       for s <- syms do
         s match
         case s: BlockMemberSymbol => ()
-        case _ => ctxTracker.registerStratVar(s, s.nme)
+        case _ =>
+          ctxTracker.registerStratVar(s, s.nme)
+          if ctxTracker.isTopLvlLikeModuleCtx then res.topLevelBindings += s
       currentCaptureInfo.foreach(_.locallyDefined ++= syms)
       ctxTracker.inScoped(scpd):
         applyBlock(body)
@@ -732,6 +736,7 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     res.valOfMember(defn.sym) = defn.tsym
     if ctxTracker.isTopLvlLikeModuleCtx then
       res.rootValDefns.addOne(defn.tsym -> defn)
+      res.topLevelBindings += defn.tsym
     currentCaptureInfo.foreach(_.locallyDefined += defn.tsym)
     applyPath(defn.rhs)
   
@@ -1010,6 +1015,12 @@ class FlowConstraintsCollector(
       val filteredEffect = freshVar(s"filtered_effect_$funLamId", cc.forFun)
       cc.constrain(effect, new Mask(visible, filteredEffect, onBody = true))
       cc.constrain(visible, new Mask(effect, filteredEffect, onBody = false))
+      // state held by a top-level binding outlives every call, so every function sees it as if it captured
+      // the binding: otherwise a function writing it only through a callee would mask that callee's write
+      for
+        sym <- preAnalyzer.res.topLevelBindings
+        bindingStrat <- generatedVars.get(sym)
+      do cc.constrain(bindingStrat, visible.asReachPos)
       params.foreach: ps =>
         ps.restParam.foreach: p =>
           generatedVars(p.sym).constrainOpaque

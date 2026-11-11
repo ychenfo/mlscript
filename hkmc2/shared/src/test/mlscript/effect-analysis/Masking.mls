@@ -431,8 +431,8 @@ fun b() = f(x => 0, 1)
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
 
 
-// * FIXME: `f` writes the top-level cell through `g` but is reported pure, because neither its
-// * parameters nor its captures mention the cell.
+// * `f` writes the top-level cell through `g`: neither its parameters nor its captures mention the cell,
+// * but every function sees the state of top-level bindings.
 :expect 1
 private val o = new mut C(0)
 private fun g(n) =
@@ -441,9 +441,9 @@ private fun g(n) =
 private fun f(n) = g(n)
 f(1)
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function f⁰#0 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
-//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call g⁰@result¹#0 @ <root> -> UnsafeEta
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ eta-expansion > >>> eta-expansion targets shapes >>>
@@ -452,7 +452,7 @@ f(1)
 //│ o = C(1)
 
 
-// * FIXME: the same in a mutually recursive group: only `g` names the top-level cell.
+// * The same in a mutually recursive group, where only `g` names the top-level cell.
 :noTailRec
 :expect 0
 private val o = new mut C(0)
@@ -462,12 +462,12 @@ private fun g(n) =
   if n > 0 then f(n - 1) else n
 f(1)
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function f⁰#0 @ <root> -> Pure
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call -⁰@result²#0 @ <root> -> Pure
 //│ flow-analysis > call >⁰@result³#0 @ <root> -> Pure
-//│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
-//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call g⁰@result⁴#0 @ <root> -> UnsafeEta
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ eta-expansion > >>> eta-expansion targets shapes >>>
@@ -660,7 +660,7 @@ fun b() = f(x => 0, 1)
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
 
 
-// * FIXME: copying `g` for each use does not help: the top-level cell only reaches the copy of `g`'s filter.
+// * The same with each use analyzed separately: the top-level cell reaches the filter of every copy.
 :expect 1
 private val o = new mut C(0)
 private fun g(n) =
@@ -669,12 +669,12 @@ private fun g(n) =
 private fun f(n) = g(n)
 f(1)
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function f¹#0 @ f² -> Pure
-//│ flow-analysis > function f¹#0 @ f⁰ -> Pure
+//│ flow-analysis > function f¹#0 @ f² -> UnsafeEta
+//│ flow-analysis > function f¹#0 @ f⁰ -> UnsafeEta
 //│ flow-analysis > function g⁰#0 @ f².g¹ -> UnsafeEta
 //│ flow-analysis > function g⁰#0 @ f⁰.g¹ -> UnsafeEta
 //│ flow-analysis > function g⁰#0 @ g² -> UnsafeEta
-//│ flow-analysis > call f¹@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call f¹@result¹#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call g⁰@result⁰#0 @ f² -> UnsafeEta
 //│ flow-analysis > call g⁰@result⁰#0 @ f⁰ -> UnsafeEta
 //│ flow-analysis > <<< effect-analysis results <<<
@@ -684,7 +684,7 @@ f(1)
 //│ o = C(1)
 
 
-// * FIXME: the same in a mutually recursive group: only `g` names the top-level cell.
+// * The same in a mutually recursive group, where only `g` names the top-level cell.
 :noTailRec
 :expect 0
 private val o = new mut C(0)
@@ -694,9 +694,9 @@ private fun g(n) =
   if n > 0 then f(n - 1) else n
 f(1)
 //│ flow-analysis > >>> effect-analysis results >>>
-//│ flow-analysis > function f⁰#0 @ f² -> Pure
-//│ flow-analysis > function f⁰#0 @ f¹ -> Pure
-//│ flow-analysis > function f⁰#0 @ g⁰ -> Pure
+//│ flow-analysis > function f⁰#0 @ f² -> UnsafeEta
+//│ flow-analysis > function f⁰#0 @ f¹ -> UnsafeEta
+//│ flow-analysis > function f⁰#0 @ g⁰ -> UnsafeEta
 //│ flow-analysis > function g¹#0 @ f² -> UnsafeEta
 //│ flow-analysis > function g¹#0 @ f¹ -> UnsafeEta
 //│ flow-analysis > function g¹#0 @ g⁰ -> UnsafeEta
@@ -706,10 +706,10 @@ f(1)
 //│ flow-analysis > call >⁰@result¹#0 @ f² -> Pure
 //│ flow-analysis > call >⁰@result¹#0 @ f¹ -> Pure
 //│ flow-analysis > call >⁰@result¹#0 @ g⁰ -> Pure
-//│ flow-analysis > call f⁰@result³#0 @ f² -> Pure
-//│ flow-analysis > call f⁰@result³#0 @ f¹ -> Pure
-//│ flow-analysis > call f⁰@result³#0 @ g⁰ -> Pure
-//│ flow-analysis > call f⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result³#0 @ f² -> UnsafeEta
+//│ flow-analysis > call f⁰@result³#0 @ f¹ -> UnsafeEta
+//│ flow-analysis > call f⁰@result³#0 @ g⁰ -> UnsafeEta
+//│ flow-analysis > call f⁰@result⁴#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call g¹@result⁰#0 @ f² -> UnsafeEta
 //│ flow-analysis > call g¹@result⁰#0 @ f¹ -> UnsafeEta
 //│ flow-analysis > call g¹@result⁰#0 @ g⁰ -> UnsafeEta

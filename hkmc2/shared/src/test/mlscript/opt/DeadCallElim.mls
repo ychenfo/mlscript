@@ -268,6 +268,51 @@ foo()
 //│ = 6
 
 
+// * `viaPut` writes a cell held by a top-level binding only through `put`; its result is unused, but the call stays.
+:soir
+:noInline
+:expect 1
+private val cell = new mut C(0)
+private fun put(n) =
+  set cell.C#x = n
+  n
+private fun viaPut(n) = put(n)
+fun main() =
+  let r = viaPut(1)
+  cell.C#x
+main()
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp;
+//│ @private
+//│ define put⁰ as fun put¹(n) {
+//│   set cell⁰.x⁰ = n;
+//│   return n
+//│ };
+//│ @private
+//│ define viaPut⁰ as fun viaPut¹(n) {
+//│   return put¹(n)
+//│ };
+//│ define main⁰ as fun main¹() {
+//│   do viaPut¹(1);
+//│   return cell⁰.x⁰
+//│ };
+//│ set tmp = new mut C⁰(0);
+//│ @private
+//│ define cell¹ as val cell⁰ = tmp;
+//│ return main¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+//│ cell = C(1)
+
+
 // * Each use of `app` is analyzed separately: the copy for `a` calls a pure callback and drops the call,
 // * the copy for `b` keeps it.
 :flowBasedOpt debugDead poly
