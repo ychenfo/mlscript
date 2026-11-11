@@ -51,15 +51,15 @@ pattern Steps = @compile (Step as Steps | _)
 //│                   set tmp7 = +⁰(tmp6, c);
 //│                   do Predef⁰.print⁰(tmp7);
 //│                   set inlinedVal1 = Lit⁰((c as! Int⁰));
-//│                   return new runtime⁰.MatchSuccess⁰(inlinedVal1, null)
+//│                   return new runtime⁰.MatchSuccess⁰(inlinedVal1, undefined)
 //│                 else
-//│                   return new runtime⁰.MatchFailure⁰("topmost")
+//│                   return new runtime⁰.MatchFailure⁰(undefined)
 //│               end
 //│             else
-//│               return new runtime⁰.MatchFailure⁰("topmost")
+//│               return new runtime⁰.MatchFailure⁰(undefined)
 //│           end
 //│         else
-//│           return new runtime⁰.MatchFailure⁰("never")
+//│           return new runtime⁰.MatchFailure⁰(undefined)
 //│       end
 //│     };
 //│     set matcher0$ = lambda⁰;
@@ -248,7 +248,7 @@ pattern Steps = @compile (Step as Steps | _)
 //│         else
 //│           end
 //│       end
-//│     set inlinedVal = new runtime⁰.MatchSuccess⁰(finalResult, null);
+//│     set inlinedVal = new runtime⁰.MatchSuccess⁰(finalResult, undefined);
 //│     match inlinedVal
 //│       MatchSuccess⁰ =>
 //│         set output = inlinedVal.output⁰;

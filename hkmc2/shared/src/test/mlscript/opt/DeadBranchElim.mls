@@ -8,6 +8,10 @@ data class B(y)
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 
 
 // * No `B` ever reaches `f`, so its branch goes; the default stays.
@@ -24,6 +28,10 @@ f(A(1))
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > eliminable: B in match on v⁰ @ <root>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp;
 //│ @private
@@ -52,6 +60,10 @@ fun g(v) = if v is
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define g⁰ as fun g¹(v) { match v A⁰ => return v.x⁰ B⁰ => return v.y⁰ else return 0 end }; end
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
@@ -70,6 +82,10 @@ lit(A(1))
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp;
 //│ @private
@@ -106,6 +122,10 @@ k()
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define f² as fun f³(v) {
@@ -144,6 +164,10 @@ a() + b()
 //│ dead-branch-elim > eliminable: B in match on v⁰ @ a¹.h¹
 //│ dead-branch-elim > eliminable: B in match on v⁰ @ a⁰.h¹
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp, tmp1, b_h$h, a_h$h, b_h$h1, b$b, a_h$h1, a$a;
 //│ @private @private

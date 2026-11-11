@@ -1,0 +1,338 @@
+:js
+:flowBasedOpt debugDead
+
+// * dead-read elimination is off by default (see its TODO in `Config.scala`)
+#config(flowBasedOpt: Some(FlowBasedOpt(deadReadElim: true)))
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+
+
+class C(val x)
+class P(val a, val b)
+declare fun unknown(o): Anything
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+
+
+// * (a) A lambda stored in a variable that nothing uses is removed.
+:soir
+:noInline
+:expect 1
+fun f(x) =
+  let g = y => y + x
+  x
+f(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > eliminable: Call(builtin:+⁰, [[y⁰, x⁰]]) @ <root>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > eliminable: g⁰#0 @ <root>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define f⁰ as fun f¹(x) { return x }; return f¹(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * (a) A lambda handed to unknown code stays.
+:soir
+:noInline
+fun f(x) = unknown(y => y + x)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define f² as fun f³(x) {
+//│   let lambda;
+//│   define lambda as fun lambda⁰(y) { return +⁰(y, x) };
+//│   return globalThis⁰.unknown⁰(lambda⁰)
+//│ };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+
+// * (b) The field `a` is never read, so its argument becomes unit; the site and the class stay.
+// * (Tuples are left alone: patterns read every element through `Tuple.get`, which rejects `undefined`.)
+:soir
+:noInline
+:expect 2
+private fun mk(x) = P(x, 2)
+fun f(x) = mk(x).P#b
+f(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > eliminable: {0} of Call(member:P⁰‹term:P¹›, [[x⁰, 2]]) @ <root>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define mk⁰ as fun mk¹() {
+//│   return P⁰(undefined, 2)
+//│ };
+//│ define f⁴ as fun f⁵(x) { let tmp; set tmp = mk¹(); return tmp.b⁰ };
+//│ return f⁵(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 2
+
+
+// * (b) An object handed to unknown code keeps all its fields.
+:soir
+:noInline
+fun f(x) = unknown(P(x, 2))
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define f⁶ as fun f⁷(x) { let tmp; set tmp = P⁰(x, 2); return globalThis⁰.unknown⁰(tmp) }; end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+
+// * (c) A read of a field that is never written, whose result is unused, is removed.
+:soir
+:noInline
+:expect 2
+fun f(x) =
+  let p = P(x, 2)
+  let t = p.P#a
+  p.P#b
+f(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > eliminable: {0} of Call(member:P¹‹term:P⁰›, [[x⁰, 2]]) @ <root>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > eliminable: Select(p⁰, Ident(a)) @ <root>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define f⁸ as fun f⁹(x) { let p; set p = P⁰(undefined, 2); return p.b⁰ }; return f⁹(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 2
+
+
+// * (c) A read of a field that is written is not listed (the block simplifier still drops the unused read).
+// * The initial value is never read, so (b) turns it into unit.
+:soir
+:noInline
+:expect 0
+fun f(x) =
+  let o = new mut C(0)
+  set o.C#x = x
+  let t = o.C#x
+  0
+f(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > eliminable: {0} of Instantiate(true, member:C⁰‹class:C¹›, [[0]]) @ <root>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define f¹⁰ as fun f¹¹(x) {
+//│   let o;
+//│   set o = new mut C⁰(undefined);
+//│   set o.x⁰ = x;
+//│   return 0
+//│ };
+//│ return f¹¹(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 0
+
+
+// * (d) A mutable object that is never read, written, matched, or leaked is already removed by
+// * dead-constructor elimination.
+:soir
+:noInline
+:expect 1
+fun f(x) =
+  let o = new mut C(x)
+  1
+f(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > eliminable: {0} of Instantiate(true, member:C¹‹class:C⁰›, [[x¹]]) @ <root>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define f¹² as fun f¹³(x) { return 1 }; return f¹³(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * (d) A mutable object that is written but never read stays.
+:soir
+:noInline
+:expect 1
+fun f(x) =
+  let o = new mut C(0)
+  set o.C#x = x
+  1
+f(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > eliminable: {0} of Instantiate(true, member:C¹‹class:C⁰›, [[0]]) @ <root>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define f¹⁴ as fun f¹⁵(x) {
+//│   let o;
+//│   set o = new mut C⁰(undefined);
+//│   set o.x⁰ = x;
+//│   return 1
+//│ };
+//│ return f¹⁵(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * In poly mode, the copy of `mk` used by `onlyB` drops the unread field `a`, which makes the call to `work`
+// * that computed it dead, and that call goes in the same run; the copy used by `onlyA` keeps both.
+:flowBasedOpt debugDead poly
+:soir
+:noInline
+:expect [3, 2]
+private fun work(x) = x + 1
+private fun mk(x) = P(work(x), x)
+fun onlyB(x) = mk(x).P#b
+fun onlyA(x) = mk(x).P#a
+[onlyB(3), onlyA(1)]
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x², 1]]) @ onlyB¹.mk².work²
+//│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x², 1]]) @ onlyB⁰.mk².work²
+//│ dead-call-elim > eliminable: Call(member:work⁰‹term:work¹›, [[x¹]]) @ onlyB¹.mk²
+//│ dead-call-elim > eliminable: Call(member:work⁰‹term:work¹›, [[x¹]]) @ onlyB⁰.mk²
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > eliminable: {0} of Call(member:P¹‹term:P⁰›, [[tmp:tmp⁰, x¹]]) @ onlyB¹.mk²
+//│ dead-field-elim > eliminable: {0} of Call(member:P¹‹term:P⁰›, [[tmp:tmp⁰, x¹]]) @ onlyB⁰.mk²
+//│ dead-field-elim > eliminable: {1} of Call(member:P¹‹term:P⁰›, [[tmp:tmp⁰, x¹]]) @ onlyA¹.mk³
+//│ dead-field-elim > eliminable: {1} of Call(member:P¹‹term:P⁰›, [[tmp:tmp⁰, x¹]]) @ onlyA⁰.mk³
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, onlyB_mk$mk, onlyB_mk$mk1, onlyB$onlyB, onlyA_mk$mk, onlyA$onlyA, onlyA_mk$mk1;
+//│ @private @private
+//│ define onlyB_mk$mk as fun onlyB_mk$mk⁰(x) {
+//│   return P⁰(undefined, x)
+//│ };
+//│ @private @private
+//│ define onlyB_mk$mk1 as fun onlyB_mk$mk¹(x) {
+//│   return P⁰(undefined, x)
+//│ };
+//│ @private
+//│ define onlyB$onlyB as fun onlyB$onlyB⁰(x) {
+//│   let tmp2;
+//│   set tmp2 = onlyB_mk$mk¹(x);
+//│   return tmp2.b⁰
+//│ };
+//│ @private @private
+//│ define onlyA_mk$mk as fun onlyA_mk$mk⁰(x) {
+//│   let tmp2;
+//│   set tmp2 = work⁰(x);
+//│   return P⁰(tmp2, undefined)
+//│ };
+//│ @private
+//│ define onlyA$onlyA as fun onlyA$onlyA⁰(x) {
+//│   let tmp2;
+//│   set tmp2 = onlyA_mk$mk⁰(x);
+//│   return tmp2.a⁰
+//│ };
+//│ @private @private
+//│ define onlyA_mk$mk1 as fun onlyA_mk$mk¹(x) {
+//│   let tmp2;
+//│   set tmp2 = work⁰(x);
+//│   return P⁰(tmp2, undefined)
+//│ };
+//│ @private
+//│ define work¹ as fun work⁰(x) {
+//│   return +⁰(x, 1)
+//│ };
+//│ @private
+//│ define mk² as fun mk³(x) {
+//│   let tmp2;
+//│   set tmp2 = work⁰(x);
+//│   return P⁰(tmp2, x)
+//│ };
+//│ define onlyB⁰ as fun onlyB¹(x) {
+//│   let tmp2;
+//│   set tmp2 = onlyB_mk$mk⁰(x);
+//│   return tmp2.b⁰
+//│ };
+//│ define onlyA⁰ as fun onlyA¹(x) {
+//│   let tmp2;
+//│   set tmp2 = onlyA_mk$mk¹(x);
+//│   return tmp2.a⁰
+//│ };
+//│ set tmp = onlyB$onlyB⁰(3);
+//│ set tmp1 = onlyA$onlyA⁰(1);
+//│ return [tmp, tmp1]
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = [3, 2]

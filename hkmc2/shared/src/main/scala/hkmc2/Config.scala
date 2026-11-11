@@ -273,6 +273,14 @@ object Config:
     deadCallElim: Bool = true,
     // removes match branches testing a class that no value of the scrutinee is an instance of
     deadBranchElim: Bool = true,
+    // removes local functions and lambdas whose values are never used
+    deadLambdaElim: Bool = true,
+    // replaces constructor arguments whose fields are never read by the unit literal
+    deadFieldElim: Bool = true,
+    // removes reads of immutable tracked fields whose results are never used
+    // TODO: off by default: in poly mode it miscompiles nofib `lambda` (a read of `Some#x` whose
+    // result reaches `x => x` and is then used gets removed); not minimized yet, mono is unaffected
+    deadReadElim: Bool = false,
   ):
     def effectiveDebugEta: Bool = debug || debugEta
     def effectiveDebugDpe: Bool = debug || debugDpe
@@ -733,6 +741,9 @@ object ConfigParser:
       var debugDead = base.debugDead
       var deadCallElim = base.deadCallElim
       var deadBranchElim = base.deadBranchElim
+      var deadLambdaElim = base.deadLambdaElim
+      var deadFieldElim = base.deadFieldElim
+      var deadReadElim = base.deadReadElim
       args.foreach:
         case NamedArg("debug", value) =>
           setFrom(value)(parseBool)(v => debug = v)
@@ -760,6 +771,12 @@ object ConfigParser:
           setFrom(value)(parseBool)(v => deadCallElim = v)
         case NamedArg("deadBranchElim", value) =>
           setFrom(value)(parseBool)(v => deadBranchElim = v)
+        case NamedArg("deadLambdaElim", value) =>
+          setFrom(value)(parseBool)(v => deadLambdaElim = v)
+        case NamedArg("deadFieldElim", value) =>
+          setFrom(value)(parseBool)(v => deadFieldElim = v)
+        case NamedArg("deadReadElim", value) =>
+          setFrom(value)(parseBool)(v => deadReadElim = v)
         case other =>
           unsupported(passName, other)
       S(Config.FlowAnalysisConfig(
@@ -776,6 +793,9 @@ object ConfigParser:
         debugDead,
         deadCallElim,
         deadBranchElim,
+        deadLambdaElim,
+        deadFieldElim,
+        deadReadElim,
       ))
     case _ =>
       expect(s"${passName}(...)")(tree)

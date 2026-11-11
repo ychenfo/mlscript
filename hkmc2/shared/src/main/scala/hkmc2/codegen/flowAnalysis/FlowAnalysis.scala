@@ -1360,8 +1360,10 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
   val callEffectVars = LinkedHashMap.empty[ConcreteId[CallId], StratVar | NoProd]
   // every concrete call site, including those whose callee has no modeled producer (no `srcs`)
   val allConsFuns = LinkedHashSet.empty[ConsFun]
-  // every concrete match, including those whose scrutinee has no modeled producer (no `srcs`)
-  val allDtors = LinkedHashSet.empty[Dtor]
+  // every concrete match and field read, including those whose scrutinee has no modeled producer (no `srcs`)
+  val allCtorConsumers = LinkedHashSet.empty[ConcreteCtorConsumer]
+  // the consumers each function value is directly constrained against; dests omit vars and some consumers
+  val prodFunUpperBounds = LinkedHashMap.empty[ProdFun, LinkedHashSet[ConsStrat]]
   
   private def addCtorDest(c: Ctor, d: ConcreteCtorConsumer | MarkerConsStrat): Unit =
     if c.dests.isEmpty then ctorsWithDests += c
@@ -1492,7 +1494,10 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         case c: ConsFun =>
           callEffectVars(c.concreteId) = c.effect
           allConsFuns += c
-        case d: Dtor => allDtors += d
+        case d: (Dtor | FieldSel) => allCtorConsumers += d
+        case _ => ()
+      constraint match
+        case (p: ProdFun, c) => prodFunUpperBounds.getOrElseUpdate(p, LinkedHashSet.empty) += c
         case _ => ()
       constraint match
       case (c: Ctor, d: Dtor) =>

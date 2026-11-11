@@ -35,10 +35,10 @@ private fun strictEagerAdd(x, ...xs) = xs.reduce(=> _ + _, x)
 
 // Lambdas and a variadic parameter followed by fixed parameters need the same
 // initial shape, including when the collected array is empty.
+// (definitions in the same block as the use: a private definition is local to its block)
+:expect [0, 2, 0, 2]
 private fun size = (...xs) => xs.length
 private fun middle(first, ...xs, last) = xs.length
-
-:expect [0, 2, 0, 2]
 [size(), size(1, 2), middle(1, 2), middle(1, 2, 3, 4)]
 //│ = [0, 2, 0, 2]
 

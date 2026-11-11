@@ -18,6 +18,9 @@ class FlowAnalysisBasedRewrite(
   val deadConstructorElimSolver: DeadConstructorElimResult,
   val deadCallElimSolver: DeadCallElimResult,
   val deadBranchElimSolver: DeadBranchElimResult,
+  val deadLambdaElimSolver: DeadLambdaElimResult,
+  val deadFieldElimSolver: DeadFieldElimResult,
+  val deadReadElimSolver: DeadReadElimResult,
 )(using Raise) extends PolyInstantiationRewrite(constraintSolver):
 
   private case class EtaParamList(params: LoweredParamList, args: Ls[Arg])
@@ -56,6 +59,17 @@ class FlowAnalysisBasedRewrite(
           removed ++= removed2
           pl2
       (if changed then params2 else params) -> removed.toSet
+    
+    
+    // dead local functions: their definitions are dropped, and references to them in scope read unit
+    private val activeDeadFuns = MutSet.empty[Symbol]
+    
+    private def isDeadLocalFun(fun: FunDefn): Bool =
+      fun.params.nonEmpty && deadLambdaElimSolver.deadLambdas.contains(ConcreteId((fun.dSym, 0), instId))
+    
+    // looks up a site without allocating a `ResultId` for nodes the analysis never saw
+    private def analyzedId(r: Result): Opt[ConcreteId[ResultId]] =
+      fState.resultToResultId.get(r).map(ConcreteId(_, instId))
     
     
     // eta expansion states and helper functions
@@ -135,6 +149,8 @@ class FlowAnalysisBasedRewrite(
     override def applyValue(v: Value)(k: Value => Block): Block = v match
       case ref@Value.SimpleRef(l: VarSymbol) if activeEliminatedParams(l) =>
         k(Value.Lit(Tree.UnitLit(false))(ref.toLoc))
+      case ref@Value.MemberRef(_, disamb) if activeDeadFuns(disamb) =>
+        k(Value.Lit(Tree.UnitLit(false))(ref.toLoc))
       case Value.This(l) if refreshSymbolMappingForCopy.isDefined =>
         pre.res.modSymToBms.get(l) match
         case S(bms) => k(bms.asMemberRef(l.asMod.get))
@@ -145,6 +161,11 @@ class FlowAnalysisBasedRewrite(
       case Assign(lhs: VarSymbol, rhs, rst) if activeEliminatedParams(lhs) =>
         applyResult(rhs): rhs2 =>
           Assign.discard(rhs2, applySubBlock(rst))
+      // the solver found that the function value reaches no call, no unknown code, and no other use
+      case Define(fun: FunDefn, rest) if isDeadLocalFun(fun) =>
+        activeDeadFuns += fun.dSym
+        try applySubBlock(rest)
+        finally activeDeadFuns -= fun.dSym
       // the solver found that no value reaching the scrutinee is an instance of these classes
       case Match(scrut, arms, dflt, rest) if deadBranchElimSolver.deadBranches.contains(ConcreteId(scrut.uid, instId)) =>
         val dead = deadBranchElimSolver.deadBranches(ConcreteId(scrut.uid, instId))
@@ -204,6 +225,28 @@ class FlowAnalysisBasedRewrite(
       case ctorSite@CtorProducer(_, args, selectedFrom)
         if deadConstructorElimSolver.deadCtors.contains(ConcreteId(ctorSite.uid, instId)) =>
         replaceByUnit(ctorSite, selectedFrom.toList ::: args.map(_.value))
+      // a lambda has no operands to evaluate
+      case lam: Lambda if deadLambdaElimSolver.deadLambdas.contains(ConcreteId(lam.uid, instId)) =>
+        replaceByUnit(lam, Nil)
+      // the solver checked that these fields are never read, and that the class has no constructor code
+      case ctorSite@CtorProducer(_, args, _) if analyzedId(ctorSite).exists(deadFieldElimSolver.deadFieldArgs.contains) =>
+        val dead = deadFieldElimSolver.deadFieldArgs(ConcreteId(ctorSite.uid, instId))
+        // `rewriteArgs` drops the dead args, evaluating impure ones in order; they come back as unit
+        rewriteArgs(args, dead): keptArgs =>
+          val kept = keptArgs.iterator
+          val args2 = args.indices.iterator.map: i =>
+            if dead(i) then Arg(N, Value.Lit(Tree.UnitLit(false))(args(i).value.toLoc)) else kept.next()
+          .toList
+          k(ctorSite match
+            case i@Instantiate(mut, cls, _) => Instantiate(mut, cls, args2 :: Nil)(i.metadata, i.toLoc)
+            case c@Call(fun, _) => Call(fun, (args2 :: Nil).ne_!)(c.metadata, c.toLoc)
+            case t@Tuple(mut, _) => Tuple(mut, args2)(t.toLoc)
+            case other => lastWords(s"not a rewritable construction site: $other"))
+      // a read of a field that is never written, whose result is unused
+      case sel@(_: Select | _: Call) if analyzedId(sel).exists(deadReadElimSolver.deadReads) =>
+        replaceByUnit(sel, sel match
+          case Select(qual, _) => qual :: Nil
+          case Call(fun, argss) => fun :: argss.flatten.map(_.value))
       // the solver checked that the result is dead and that no arg list has an effect visible to the caller
       case c@Call(fun, argss) if deadCallElimSolver.deadCalls.contains(ConcreteId(c.uid, instId)) =>
         replaceByUnit(c, fun :: argss.flatten.map(_.value))
@@ -277,7 +320,7 @@ class FlowAnalysisBasedRewrite(
   // ====== start: implements the abstract members of `PolyInstantiationRewrite` ======
   def solvers: Iterable[FlowAnalysisSolverResult] =
     deadParamElimSolver :: etaExpansionSolver :: deadConstructorElimSolver :: deadCallElimSolver ::
-      deadBranchElimSolver :: Nil
+      deadBranchElimSolver :: deadLambdaElimSolver :: deadFieldElimSolver :: deadReadElimSolver :: Nil
   
   override def specializedSignature(fun: TermSymbol, instId: InstantiationId, sig: ErasedFuncSignature): ErasedFuncSignature =
     val paramLists = sig.paramLists.zipWithIndex.map: (pl, i) =>
@@ -360,6 +403,19 @@ object FlowAnalysisBasedRewrite:
       if optCfg.config.deadBranchElim then new DeadBranchElimSolver(
         flowAnalysisRes, mkTl("dead-branch-elim > ", optCfg.config.effectiveDebugDead))
       else NoDeadBranchElim
+    val deadLambdaElimSolver =
+      if optCfg.config.deadLambdaElim then new DeadLambdaElimSolver(
+        flowAnalysisRes, mkTl("dead-lambda-elim > ", optCfg.config.effectiveDebugDead))
+      else NoDeadLambdaElim
+    val deadFieldElimSolver =
+      // the Wasm backend stores fields of primitive types unboxed, where the unit literal does not fit
+      if optCfg.config.deadFieldElim && (cfg.target is CompilationTarget.JS) then new DeadFieldElimSolver(
+        flowAnalysisRes, mkTl("dead-field-elim > ", optCfg.config.effectiveDebugDead))
+      else NoDeadFieldElim
+    val deadReadElimSolver =
+      if optCfg.config.deadReadElim then new DeadReadElimSolver(
+        flowAnalysisRes, mkTl("dead-read-elim > ", optCfg.config.effectiveDebugDead))
+      else NoDeadReadElim
     new FlowAnalysisBasedRewrite(
       flowAnalysisRes,
       deadParamElimSolver,
@@ -367,4 +423,7 @@ object FlowAnalysisBasedRewrite:
       deadConstructorElimSolver,
       deadCallElimSolver,
       deadBranchElimSolver,
+      deadLambdaElimSolver,
+      deadFieldElimSolver,
+      deadReadElimSolver,
     )()

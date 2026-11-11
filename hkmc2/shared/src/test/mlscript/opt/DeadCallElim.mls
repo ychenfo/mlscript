@@ -8,6 +8,10 @@ declare fun unknown(o): Anything
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 
 
 // * The result of `work` only goes into a parameter that dead-parameter elimination removes,
@@ -25,6 +29,10 @@ f(1)
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define work⁰ as fun work¹(x) {
@@ -57,11 +65,16 @@ g(1)
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > eliminable: {0} of Instantiate(true, member:C⁰‹class:C¹›, [[0]]) @ <root>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define local⁰ as fun local¹(n) {
 //│   let o;
-//│   set o = new mut C⁰(0);
+//│   set o = new mut C⁰(undefined);
 //│   set o.x⁰ = n;
 //│   return o.x⁰
 //│ };
@@ -87,6 +100,10 @@ h()
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define write⁰ as fun write¹(o, n) {
@@ -109,6 +126,10 @@ fun u() =
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define u⁰ as fun u¹() { do globalThis⁰.unknown⁰(1); return 0 }; end
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
@@ -129,6 +150,10 @@ k(1)
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define work² as fun work³(x) {
@@ -154,6 +179,10 @@ count()
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define count⁰ as fun count¹() {
 //│   let bump, n;
@@ -183,6 +212,10 @@ let o = new O(1)
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define O⁰ as class O² {
 //│   val v⁰;
@@ -206,6 +239,10 @@ o.M.get()
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ = 2
 
 
@@ -224,6 +261,10 @@ foo()
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ = 6
 
 
@@ -248,6 +289,10 @@ b()
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let a_app$app, a$a;
 //│ @private @private
@@ -288,6 +333,10 @@ b()
 #config(flowBasedOpt: Some(FlowBasedOpt(deadCallElim: false)))
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 
 
 :flowBasedOpt debugDead mono
@@ -304,11 +353,16 @@ fun g(n) =
 g(1)
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > eliminable: {0} of Instantiate(true, member:C¹‹class:C⁰›, [[0]]) @ <root>
+//│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define local² as fun local³(n) {
 //│   let o;
-//│   set o = new mut C⁰(0);
+//│   set o = new mut C⁰(undefined);
 //│   set o.x⁰ = n;
 //│   return o.x⁰
 //│ };
