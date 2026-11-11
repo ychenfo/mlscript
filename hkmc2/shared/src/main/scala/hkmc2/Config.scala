@@ -271,6 +271,8 @@ object Config:
     debugDead: Bool = false,
     // removes pure calls whose results are never used
     deadCallElim: Bool = true,
+    // removes match branches testing a class that no value of the scrutinee is an instance of
+    deadBranchElim: Bool = true,
   ):
     def effectiveDebugEta: Bool = debug || debugEta
     def effectiveDebugDpe: Bool = debug || debugDpe
@@ -730,6 +732,7 @@ object ConfigParser:
       var logEffects = base.logEffects
       var debugDead = base.debugDead
       var deadCallElim = base.deadCallElim
+      var deadBranchElim = base.deadBranchElim
       args.foreach:
         case NamedArg("debug", value) =>
           setFrom(value)(parseBool)(v => debug = v)
@@ -755,6 +758,8 @@ object ConfigParser:
           setFrom(value)(parseBool)(v => debugDead = v)
         case NamedArg("deadCallElim", value) =>
           setFrom(value)(parseBool)(v => deadCallElim = v)
+        case NamedArg("deadBranchElim", value) =>
+          setFrom(value)(parseBool)(v => deadBranchElim = v)
         case other =>
           unsupported(passName, other)
       S(Config.FlowAnalysisConfig(
@@ -770,6 +775,7 @@ object ConfigParser:
         logEffects,
         debugDead,
         deadCallElim,
+        deadBranchElim,
       ))
     case _ =>
       expect(s"${passName}(...)")(tree)

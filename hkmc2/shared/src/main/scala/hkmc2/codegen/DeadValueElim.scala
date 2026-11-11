@@ -74,3 +74,79 @@ class DeadCallElimSolver(val constraintSolver: FlowConstraintSolver, traceLogger
     tl.log("<<< dead-call-elim results <<<")
   end if
 end DeadCallElimSolver
+
+
+abstract class DeadBranchElimResult extends FlowAnalysisSolverResult:
+  // per match, identified by its scrutinee, the classes whose branches never match
+  def deadBranches: collection.Map[ConcreteId[ResultId], Set[ClassLikeSymbol]]
+  
+  final def hasWorkToDo: Bool = deadBranches.nonEmpty
+  
+  final def polyInstIds: Iterator[InstantiationId] = deadBranches.keysIterator.map(_.instId)
+  
+end DeadBranchElimResult
+
+
+object NoDeadBranchElim extends DeadBranchElimResult:
+  val deadBranches = Map.empty[ConcreteId[ResultId], Set[ClassLikeSymbol]]
+
+
+class DeadBranchElimSolver(val constraintSolver: FlowConstraintSolver, traceLogger: TraceLogger) extends DeadBranchElimResult:
+  given tl: TraceLogger = traceLogger
+  given fState: FlowAnalysis.State = constraintSolver.fState
+  given eState: Elaborator.State = constraintSolver.eState
+  given raise: Raise = constraintSolver.preAnalyzer.raise
+  given symbolPrinter: SymbolPrinter = constraintSolver.preAnalyzer.traceSymbolPrinter
+  
+  // matches where every class branch would go and there is no default, so nothing is removed
+  val keptWholeMatches = Buffer.empty[ConcreteId[ResultId]]
+  
+  val deadBranches =
+    
+    // instances of these are only ever created as `Ctor`s; other classes (external, multi-list, objects) may come from elsewhere
+    def isTrackedDataClass(cls: ClassLikeSymbol): Bool = cls match
+      case cls: ClassSymbol =>
+        cls.defn.exists(d => !Inheritance.isExternal(d)) && cls.tree.clsParams.size === 1
+      case _ => false
+    
+    val dtorsByMatch = LinkedHashMap.empty[ConcreteId[ResultId], Buffer[Dtor]]
+    for d <- constraintSolver.allDtors do
+      dtorsByMatch.getOrElseUpdate(d.concreteId, Buffer.empty) += d
+    
+    val res = LinkedHashMap.empty[ConcreteId[ResultId], Set[ClassLikeSymbol]]
+    for
+      (id, dtors) <- dtorsByMatch
+      // empty `srcs` means no producer of the scrutinee is modeled, so absence of a class says nothing
+      if dtors.forall(_.srcs.nonEmpty)
+      srcs = dtors.iterator.flatMap(_.srcs).toSet
+      if !srcs.contains(UnknownProd)
+      m <- constraintSolver.preAnalyzer.res.matchScrutToMatchBlock.get(id.exprId)
+    do
+      val srcClasses = srcs.collect:
+        case c: Ctor => c.ctor
+      // a branch on `cls` can only match a value built by `cls` or, through inheritance, by a subclass
+      val dead = m.arms.iterator.collect:
+        case (Case.Cls(cls, _), _)
+          if isTrackedDataClass(cls)
+          && !srcClasses.exists(c => (c is cls) || constraintSolver.mayInheritFields(c, cls))
+        => cls
+      .toSet
+      val clsArms = m.arms.collect:
+        case (Case.Cls(cls, _), _) => cls
+      if dead.nonEmpty then
+        if m.dflt.isEmpty && clsArms.forall(dead.contains) then keptWholeMatches += id
+        else res(id) = dead
+    res
+  end deadBranches
+  
+  if tl.isTracing then
+    given ShowCfg = ShowCfg.internal
+    def showMatch(id: ConcreteId[ResultId]): Str = dbg"match on ${id.exprId.getResult.showDbg} @ ${id.instId.showInstId}"
+    tl.log(">>> dead-branch-elim results >>>")
+    val lines =
+      deadBranches.iterator.map((id, clss) => s"eliminable: ${clss.map(_.nme).toSeq.sorted.mkString(", ")} in ${showMatch(id)}")
+      ++ keptWholeMatches.iterator.map(id => s"kept, as no branch would be left: ${showMatch(id)}")
+    for line <- lines.toSeq.sorted do tl.log(line)
+    tl.log("<<< dead-branch-elim results <<<")
+  end if
+end DeadBranchElimSolver

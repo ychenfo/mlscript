@@ -6,6 +6,8 @@ class C(val x)
 declare fun unknown(o): Anything
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 
 
 // * The result of `work` only goes into a parameter that dead-parameter elimination removes,
@@ -21,6 +23,8 @@ f(1)
 //│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x¹, 1]]) @ <root>
 //│ dead-call-elim > eliminable: Call(member:work⁰‹term:work¹›, [[x⁰]]) @ <root>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define work⁰ as fun work¹(x) {
@@ -51,6 +55,8 @@ g(1)
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > eliminable: Call(member:local⁰‹term:local¹›, [[n⁰]]) @ <root>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define local⁰ as fun local¹(n) {
@@ -79,6 +85,8 @@ fun h() =
 h()
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define write⁰ as fun write¹(o, n) {
@@ -99,6 +107,8 @@ fun u() =
   0
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define u⁰ as fun u¹() { do globalThis⁰.unknown⁰(1); return 0 }; end
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
@@ -117,6 +127,8 @@ k(1)
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > eliminable: Call(member:work²‹term:work³›, [[a⁰]]) @ <root>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define work² as fun work³(x) {
@@ -140,6 +152,8 @@ fun count() =
 count()
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define count⁰ as fun count¹() {
 //│   let bump, n;
@@ -167,6 +181,8 @@ class O(val v) with
 let o = new O(1)
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ define O⁰ as class O² {
 //│   val v⁰;
@@ -188,6 +204,8 @@ let o = new O(1)
 o.M.get()
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ = 2
 
 
@@ -204,6 +222,8 @@ fun foo() =
 foo()
 //│ dead-call-elim > >>> dead-call-elim results >>>
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ = 6
 
 
@@ -226,6 +246,8 @@ b()
 //│ dead-call-elim > eliminable: Call(k², [[x²]]) @ a⁰.app⁰
 //│ dead-call-elim > eliminable: Call(member:app¹‹term:app²›, [[member:lambda⁰‹term:lambda¹›, 1]]) @ a¹
 //│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let a_app$app, a$a;
 //│ @private @private
@@ -264,6 +286,8 @@ b()
 
 // * The switch turns the rewrite off.
 #config(flowBasedOpt: Some(FlowBasedOpt(deadCallElim: false)))
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 
 
 :flowBasedOpt debugDead mono
@@ -278,6 +302,8 @@ fun g(n) =
   let r = local(n)
   n
 g(1)
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define local² as fun local³(n) {

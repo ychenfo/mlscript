@@ -17,6 +17,7 @@ class FlowAnalysisBasedRewrite(
   val etaExpansionSolver: EtaExpansionResult,
   val deadConstructorElimSolver: DeadConstructorElimResult,
   val deadCallElimSolver: DeadCallElimResult,
+  val deadBranchElimSolver: DeadBranchElimResult,
 )(using Raise) extends PolyInstantiationRewrite(constraintSolver):
 
   private case class EtaParamList(params: LoweredParamList, args: Ls[Arg])
@@ -144,6 +145,13 @@ class FlowAnalysisBasedRewrite(
       case Assign(lhs: VarSymbol, rhs, rst) if activeEliminatedParams(lhs) =>
         applyResult(rhs): rhs2 =>
           Assign.discard(rhs2, applySubBlock(rst))
+      // the solver found that no value reaching the scrutinee is an instance of these classes
+      case Match(scrut, arms, dflt, rest) if deadBranchElimSolver.deadBranches.contains(ConcreteId(scrut.uid, instId)) =>
+        val dead = deadBranchElimSolver.deadBranches(ConcreteId(scrut.uid, instId))
+        val keptArms = arms.filterNot:
+          case (Case.Cls(cls, _), _) => dead.contains(cls)
+          case _ => false
+        super.applyBlock(Match(scrut, keptArms, dflt, rest))
       case Return(res) if activeEtaArgss.nonEmpty =>
         applyResult(res): res2 =>
           if activeEtaArgss.isEmpty then Return(res2)
@@ -268,7 +276,8 @@ class FlowAnalysisBasedRewrite(
   
   // ====== start: implements the abstract members of `PolyInstantiationRewrite` ======
   def solvers: Iterable[FlowAnalysisSolverResult] =
-    deadParamElimSolver :: etaExpansionSolver :: deadConstructorElimSolver :: deadCallElimSolver :: Nil
+    deadParamElimSolver :: etaExpansionSolver :: deadConstructorElimSolver :: deadCallElimSolver ::
+      deadBranchElimSolver :: Nil
   
   override def specializedSignature(fun: TermSymbol, instId: InstantiationId, sig: ErasedFuncSignature): ErasedFuncSignature =
     val paramLists = sig.paramLists.zipWithIndex.map: (pl, i) =>
@@ -347,10 +356,15 @@ object FlowAnalysisBasedRewrite:
       if optCfg.config.deadCallElim then new DeadCallElimSolver(
         flowAnalysisRes, mkTl("dead-call-elim > ", optCfg.config.effectiveDebugDead))
       else NoDeadCallElim
+    val deadBranchElimSolver =
+      if optCfg.config.deadBranchElim then new DeadBranchElimSolver(
+        flowAnalysisRes, mkTl("dead-branch-elim > ", optCfg.config.effectiveDebugDead))
+      else NoDeadBranchElim
     new FlowAnalysisBasedRewrite(
       flowAnalysisRes,
       deadParamElimSolver,
       etaExpansionSolver,
       deadConstructorElimSolver,
       deadCallElimSolver,
+      deadBranchElimSolver,
     )()

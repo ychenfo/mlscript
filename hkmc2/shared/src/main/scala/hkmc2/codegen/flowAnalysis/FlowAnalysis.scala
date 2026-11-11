@@ -1360,6 +1360,8 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
   val callEffectVars = LinkedHashMap.empty[ConcreteId[CallId], StratVar | NoProd]
   // every concrete call site, including those whose callee has no modeled producer (no `srcs`)
   val allConsFuns = LinkedHashSet.empty[ConsFun]
+  // every concrete match, including those whose scrutinee has no modeled producer (no `srcs`)
+  val allDtors = LinkedHashSet.empty[Dtor]
   
   private def addCtorDest(c: Ctor, d: ConcreteCtorConsumer | MarkerConsStrat): Unit =
     if c.dests.isEmpty then ctorsWithDests += c
@@ -1377,7 +1379,7 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
   /** Whether instances of `cls` may have the fields of `ancestor` through inheritance.
     * A class whose parent chain is not known is assumed to possibly inherit them.
     * TODO: cache inheritance set in header object to avoid retraversals, here and elsewhere (eg erased types). */
-  private def mayInheritFields(cls: CtorCls, ancestor: CtorCls): Bool = (cls, ancestor) match
+  def mayInheritFields(cls: CtorCls, ancestor: CtorCls): Bool = (cls, ancestor) match
     case (cls: ClassLikeSymbol, ancestor: ClassLikeSymbol) =>
       def go(cur: ClassLikeSymbol, seen: Set[ClassLikeSymbol]): Bool =
         cur.irClassHeader.fold(ClassHeader.Parent.Unknown)(_.parent) match
@@ -1490,6 +1492,7 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         case c: ConsFun =>
           callEffectVars(c.concreteId) = c.effect
           allConsFuns += c
+        case d: Dtor => allDtors += d
         case _ => ()
       constraint match
       case (c: Ctor, d: Dtor) =>

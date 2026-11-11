@@ -1,0 +1,222 @@
+:js
+:flowBasedOpt debugDead
+
+
+data class A(x)
+data class B(y)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+
+
+// * No `B` ever reaches `f`, so its branch goes; the default stays.
+:soir
+:noInline
+:expect 1
+private fun f(v) = if v is
+  A(x) then x
+  B(y) then y
+  else 0
+f(A(1))
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > eliminable: B in match on v⁰ @ <root>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp;
+//│ @private
+//│ define f⁰ as fun f¹(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ set tmp = A¹(1);
+//│ return f¹(tmp)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * A public function can receive anything from unknown code: nothing goes.
+:soir
+:noInline
+fun g(v) = if v is
+  A(x) then x
+  B(y) then y
+  else 0
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define g⁰ as fun g¹(v) { match v A⁰ => return v.x⁰ B⁰ => return v.y⁰ else return 0 end }; end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+
+// * Literal patterns are left alone.
+:soir
+:noInline
+:expect 1
+private fun lit(v) = if v is
+  A(x) then x
+  0 then 2
+  else 3
+lit(A(1))
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp;
+//│ @private
+//│ define lit⁰ as fun lit¹(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     0 =>
+//│       return 2
+//│     else
+//│       return 3
+//│   end
+//│ };
+//│ set tmp = A¹(1);
+//│ return lit¹(tmp)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * LIMIT: `f(B(2))` is removed by the same run (its result is unused), but its `B` still counts.
+:soir
+:noInline
+:expect 1
+private fun f(v) = if v is
+  A(x) then x
+  B(y) then y
+  else 0
+fun k() =
+  let r = f(B(2))
+  f(A(1))
+k()
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > eliminable: Call(member:f²‹term:f³›, [[tmp:tmp⁰]]) @ <root>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define f² as fun f³(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     B⁰ =>
+//│       return v.y⁰
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ define k⁰ as fun k¹() { let tmp; do B¹(2); set tmp = A¹(1); return f³(tmp) };
+//│ return k¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * Each use of `h` is analyzed separately: each copy keeps only the branch of the class it receives.
+:flowBasedOpt debugDead poly
+:soir
+:noInline
+:expect 3
+private fun h(v) = if v is
+  A(x) then x
+  B(y) then y
+  else 0
+fun a() = h(A(1))
+fun b() = h(B(2))
+a() + b()
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > eliminable: A in match on v⁰ @ b¹.h⁰
+//│ dead-branch-elim > eliminable: A in match on v⁰ @ b⁰.h⁰
+//│ dead-branch-elim > eliminable: B in match on v⁰ @ a¹.h¹
+//│ dead-branch-elim > eliminable: B in match on v⁰ @ a⁰.h¹
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, b_h$h, a_h$h, b_h$h1, b$b, a_h$h1, a$a;
+//│ @private @private
+//│ define b_h$h as fun b_h$h⁰(v) {
+//│   match v
+//│     B⁰ =>
+//│       return v.y⁰
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ @private @private
+//│ define a_h$h as fun a_h$h⁰(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ @private @private
+//│ define b_h$h1 as fun b_h$h¹(v) {
+//│   match v
+//│     B⁰ =>
+//│       return v.y⁰
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ @private
+//│ define b$b as fun b$b⁰() {
+//│   let tmp2;
+//│   set tmp2 = B¹(2);
+//│   return b_h$h¹(tmp2)
+//│ };
+//│ @private @private
+//│ define a_h$h1 as fun a_h$h¹(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ @private
+//│ define a$a as fun a$a⁰() {
+//│   let tmp2;
+//│   set tmp2 = A¹(1);
+//│   return a_h$h¹(tmp2)
+//│ };
+//│ @private
+//│ define h⁰ as fun h¹(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     B⁰ =>
+//│       return v.y⁰
+//│     else
+//│       return 0
+//│   end
+//│ };
+//│ define a⁰ as fun a¹() {
+//│   let tmp2;
+//│   set tmp2 = A¹(1);
+//│   return a_h$h⁰(tmp2)
+//│ };
+//│ define b⁰ as fun b¹() {
+//│   let tmp2;
+//│   set tmp2 = B¹(2);
+//│   return b_h$h⁰(tmp2)
+//│ };
+//│ set tmp = a$a⁰();
+//│ set tmp1 = b$b⁰();
+//│ return +⁰(tmp, tmp1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 3

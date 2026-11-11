@@ -65,17 +65,7 @@ h()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ define h⁰ as fun h¹() {
-//│   let a;
-//│   set a = A⁰(1);
-//│   match a
-//│     B⁰ =>
-//│       return 1
-//│     else
-//│       return 2
-//│   end
-//│ };
-//│ return h¹()
+//│ define h⁰ as fun h¹() { do A⁰(1); return 2 }; return h¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ = 2
 
@@ -149,9 +139,9 @@ fun g() =
   2
 g() + g()
 //│ dead-constructor-elim > >>> dead-constructor-elim results >>>
-//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]])
-//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]])
-//│ dead-constructor-elim > eliminable: Call(member:B¹‹term:B²›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:B⁰‹term:B¹›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:B⁰‹term:B¹›, [[1]])
+//│ dead-constructor-elim > eliminable: Call(member:B⁰‹term:B¹›, [[1]])
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ let tmp, tmp1, g$g, g$g1;
