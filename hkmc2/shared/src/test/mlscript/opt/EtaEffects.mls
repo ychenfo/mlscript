@@ -31,7 +31,7 @@ node()()
 //│ flow-analysis > function leaf⁰#0 @ <root> -> Pure
 //│ flow-analysis > function node⁰#0 @ <root> -> Pure
 //│ flow-analysis > function pure⁰#0 @ <root> -> Pure
-//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall¹@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > call node⁰@result¹#0 @ <root> -> Pure
 //│ flow-analysis > call pure⁰@result²#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
@@ -51,7 +51,7 @@ node()()
 //│ flow-analysis > >>> effect-analysis results >>>
 //│ flow-analysis > function leaf⁰#0 @ <root> -> Pure
 //│ flow-analysis > function node⁰#0 @ <root> -> UnsafeEta
-//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall¹@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > call effect⁰@result²#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call node⁰@result¹#0 @ <root> -> UnsafeEta
 //│ flow-analysis > <<< effect-analysis results <<<
@@ -75,8 +75,8 @@ node()()()
 //│ flow-analysis > function leaf_2⁰#0 @ <root> -> Pure
 //│ flow-analysis > function node⁰#0 @ <root> -> Pure
 //│ flow-analysis > function pure⁰#0 @ <root> -> Pure
-//│ flow-analysis > call baseCall⁰@result¹#0 @ <root> -> Pure
-//│ flow-analysis > call callPrefix⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall¹@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call callPrefix¹@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > call node⁰@result²#0 @ <root> -> Pure
 //│ flow-analysis > call pure⁰@result³#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
@@ -99,8 +99,8 @@ node()()()
 //│ flow-analysis > function leaf_1⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > function leaf_2⁰#0 @ <root> -> Pure
 //│ flow-analysis > function node⁰#0 @ <root> -> Pure
-//│ flow-analysis > call baseCall⁰@result¹#0 @ <root> -> UnsafeEta
-//│ flow-analysis > call callPrefix⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall¹@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call callPrefix¹@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > call effect⁰@result³#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call node⁰@result²#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<

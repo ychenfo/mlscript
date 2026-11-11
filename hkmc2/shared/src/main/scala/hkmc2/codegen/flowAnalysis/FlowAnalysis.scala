@@ -81,9 +81,11 @@ object FlowAnalysis:
     accumulatorTracking: Bool,
     logEffects: Bool,
     noFreeze: Bool,
+    // count a use in a loop, and of top-level state, as many uses (see `FlowPreAnalyzer.recordAffinityUse`)
+    conservativeAffinity: Bool,
   )(using TraceLogger, Elaborator.State, Raise, SymbolPrinter) =
     given State = new State
-    val pre = new FlowPreAnalyzer(pgrm)
+    val pre = new FlowPreAnalyzer(pgrm, conservativeAffinity)
     val constrCol = new FlowConstraintsCollector(
       pre,
       mono,
@@ -386,7 +388,7 @@ case class ConcreteId[A <: OriginId](exprId: A, instId: InstantiationId):
 
 class ProdStratScheme(val s: StratVar, val constraints: Ls[ProdStrat -> ConsStrat])
 
-class FlowPreAnalyzer(val pgrm: Program)(using
+class FlowPreAnalyzer(val pgrm: Program, val conservativeAffinity: Bool)(using
   val tl: TraceLogger,
   val eState: Elaborator.State,
   val fState: FlowAnalysis.State,
@@ -524,6 +526,16 @@ class FlowPreAnalyzer(val pgrm: Program)(using
         res.matchScrutToMatchBlock.addOne(m.scrut.uid -> m)
         res.matchScrutToCtxOfMatch.addOne(m.scrut.uid -> ctx)
     
+    // whether the current code may run several times per run of the enclosing function or lambda
+    def isInLoopOfCurrentFun: Boolean =
+      ctx.iterator
+        .takeWhile:
+          case InCtx.Fn(_) | InCtx.Lam(_) => false
+          case _ => true
+        .exists:
+          case InCtx.LblBody(l) => l.loop
+          case _ => false
+    
     def isEnclosingMatchScrutSym(sym: Symbol): Boolean =
       ctx.exists:
         case InCtx.MtchBody(m, _) => m.scrut match
@@ -567,7 +579,8 @@ class FlowPreAnalyzer(val pgrm: Program)(using
   private def recordAffinityUse(s: LocalVarSymbol | TermSymbol): Unit =
     s match
     case _: ClassCtorSymbol => ()
-    case _ => currentAffinityCount(s) += 1
+    // syntactic counting misses that a use in a loop body runs once per iteration
+    case _ => currentAffinityCount(s) += (if conservativeAffinity && ctxTracker.isInLoopOfCurrentFun then 2 else 1)
   
   private def recordRefInCaptures(l: LocalVarSymbol | TermSymbol, member: Opt[BlockMemberSymbol]): Unit =
     (l, currentCaptureInfo) match
@@ -892,6 +905,13 @@ class FlowConstraintsCollector(
           sym <- preAnalyzer.res.nonAffineSyms
           stratVar <- preAnalyzer.res.generatedVars.get(sym)
           if mono || stratVar.generatedForFun.isEmpty
+        do cc.constrain(stratVar, NonAffine)
+      // root functions never count as non-affine, so a value they read from top-level state may be used
+      // once per call of theirs, any number of times
+      if nonAffineTracking && preAnalyzer.conservativeAffinity then
+        for
+          sym <- preAnalyzer.res.topLevelBindings
+          stratVar <- preAnalyzer.res.generatedVars.get(sym)
         do cc.constrain(stratVar, NonAffine)
 
       for

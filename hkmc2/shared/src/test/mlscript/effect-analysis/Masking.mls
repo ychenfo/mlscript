@@ -29,7 +29,7 @@ f(1)(2)
 //│ flow-analysis > function f⁰#0 @ <root> -> Pure
 //│ flow-analysis > call +⁰@result³#0 @ <root> -> Pure
 //│ flow-analysis > call add⁰@result²#0 @ <root> -> Pure
-//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall¹@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ eta-expansion > >>> eta-expansion targets shapes >>>

@@ -158,6 +158,7 @@ object Deforest:
       accumulatorTracking = dCfg.effectiveTrackAccumulator,
       logEffects = dCfg.config.logEffects,
       noFreeze = cfg.noFreeze,
+      conservativeAffinity = false,
     )
     val solver = new DeforestFusionSolver(flowAnalysisRes)
     if !solver.hasWorkToDo then p

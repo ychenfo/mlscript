@@ -373,19 +373,24 @@ object FlowAnalysisBasedRewrite:
   ): Program =
     def mkTl(prefix: Str, debug: Bool) =
       FlowAnalysis.mkTraceLogger(optCfg.config.copy(debug = debug), prefix, tl.sink)(using tl.debugPrinter)
+    val runsEta = eta && (cfg.liftDefns.isDefined || cfg.deforest.isDefined)
+    // inferring one-shot functions needs the non-affinity markers, counted with loops and top-level state
+    val infersAffine = runsEta && optCfg.config.inferAffine
     val flowAnalysisRes = mkTl("flow-analysis > ", optCfg.debug).givenIn:
       FlowAnalysis(
         p,
         mono = optCfg.mono,
-        nonAffineTracking = optCfg.config.effectiveTrackNonAffine,
+        nonAffineTracking = optCfg.config.effectiveTrackNonAffine || infersAffine,
         accumulatorTracking = optCfg.config.effectiveTrackAccumulator,
         logEffects = optCfg.config.logEffects,
         noFreeze = cfg.noFreeze,
+        conservativeAffinity = infersAffine,
       )
     
     val etaExpansionSolver =
-      if eta && (cfg.liftDefns.isDefined || cfg.deforest.isDefined) then new EtaExpansionSolver(
-        flowAnalysisRes, mkTl("eta-expansion > ", optCfg.effectiveDebugEta))
+      if runsEta then new EtaExpansionSolver(
+        flowAnalysisRes, mkTl("eta-expansion > ", optCfg.effectiveDebugEta),
+        infersAffine, mkTl("infer-affine > ", optCfg.config.effectiveDebugAffine))
       else NoEtaExpansion
     val deadParamElimSolver =
       if dpe then new DeadParamElimSolver(

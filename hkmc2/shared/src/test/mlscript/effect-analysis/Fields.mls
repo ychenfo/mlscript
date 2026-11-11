@@ -29,7 +29,7 @@ f(1)(2)
 //│ flow-analysis > function read⁰#0 @ <root> -> Pure
 //│ flow-analysis > call +⁰@result⁴#0 @ <root> -> Pure
 //│ flow-analysis > call add⁰@result³#0 @ <root> -> Pure
-//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall¹@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
 //│ flow-analysis > call read⁰@result²#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
@@ -53,7 +53,7 @@ f(1)(2)
 //│ flow-analysis > function read⁰#0 @ <root> -> Pure
 //│ flow-analysis > call +⁰@result⁴#0 @ <root> -> Pure
 //│ flow-analysis > call add⁰@result³#0 @ <root> -> Pure
-//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall¹@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
 //│ flow-analysis > call read⁰@result²#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
@@ -114,11 +114,6 @@ fun f(n) = write(new mut C(0), n)
 //│ eta-expansion > >>> eta-expansion targets shapes >>>
 //│ eta-expansion > f⁰#0 @ <root>: [1, 1]
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
-//│ FAILURE: Unexpected internal error
-//│ FAILURE LOCATION: softAssert (TailRecOpt.scala:86)
-//│ ╔══[INTERNAL ERROR] Compiler reached an unexpected state at 'TailRecOpt.scala:86': Call node passes 2 argument lists to term:write⁰, which can receive 1.
-//│ ╟── The compilation result may be incorrect.
-//│ ╙── This is a compiler bug; please report it to the maintainers.
 
 
 // * Writing a field of an object allocated by the same function is an effect too: there is no masking.
@@ -206,7 +201,7 @@ f(1)(2)
 //│ flow-analysis > function readX⁰#0 @ <root> -> Pure
 //│ flow-analysis > call +⁰@result⁵#0 @ <root> -> Pure
 //│ flow-analysis > call add⁰@result⁴#0 @ <root> -> Pure
-//│ flow-analysis > call baseCall⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall¹@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
 //│ flow-analysis > call g⁰@result²#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call readX⁰@result³#0 @ <root> -> Pure
@@ -215,11 +210,6 @@ f(1)(2)
 //│ eta-expansion > f⁰#0 @ <root>: [1, 1]
 //│ eta-expansion > readX⁰#0 @ <root>: [1, 1]
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
-//│ FAILURE: Unexpected internal error
-//│ FAILURE LOCATION: softAssert (TailRecOpt.scala:86)
-//│ ╔══[INTERNAL ERROR] Compiler reached an unexpected state at 'TailRecOpt.scala:86': Call node passes 2 argument lists to term:g⁰, which can receive 1.
-//│ ╟── The compilation result may be incorrect.
-//│ ╙── This is a compiler bug; please report it to the maintainers.
 //│ = 3
 
 

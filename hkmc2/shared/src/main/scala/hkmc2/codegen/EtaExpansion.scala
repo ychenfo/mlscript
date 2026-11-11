@@ -2,7 +2,7 @@ package hkmc2
 package codegen
 
 import scala.annotation.tailrec
-import scala.collection.mutable.{Map as MutMap, LinkedHashMap}
+import scala.collection.mutable.{Map as MutMap, LinkedHashMap, LinkedHashSet}
 
 import hkmc2.utils.*, shorthands.*
 import utils.*
@@ -33,13 +33,22 @@ object NoEtaExpansion extends EtaExpansionResult:
   val etaExpandedFunShape = Map.empty[ConcreteFunId, Ls[EtaTargets]]
 
 
-class EtaExpansionSolver(val constraintSolver: FlowConstraintSolver, tl: TraceLogger) extends EtaExpansionResult:
+class EtaExpansionSolver(
+  val constraintSolver: FlowConstraintSolver,
+  tl: TraceLogger,
+  inferAffine: Bool,
+  affineTl: TraceLogger,
+) extends EtaExpansionResult:
   given fState: FlowAnalysis.State = constraintSolver.fState
   given eState: Elaborator.State = constraintSolver.eState
   given raise: Raise = constraintSolver.preAnalyzer.raise
   given symbolPrinter: SymbolPrinter = constraintSolver.preAnalyzer.traceSymbolPrinter
   
   private val cache = MutMap.empty[ProdFun, Ls[EtaTargets]]
+  
+  // the returned functions treated as one-shot only because no `NonAffine` reaches their captures
+  // (only checked for unannotated ones, as `prodFunIsAffine` tries the annotation first)
+  private val inferredAffine = LinkedHashSet.empty[ProdFun]
   
   // the result is a list describing the target shape
   // e.g., entries with arities of 1, 0, 2, 3 means
@@ -56,7 +65,16 @@ class EtaExpansionSolver(val constraintSolver: FlowConstraintSolver, tl: TraceLo
         case _ => false
       end isDeclaredNextParamList
       
-      def prodFunIsAffine(pf: ProdFun) =
+      def prodFunIsAffine(pf: ProdFun) = isAnnotatedAffine(pf) || isInferredAffine(pf)
+      
+      // every use of a function value marks its captures `NonAffine` if the value may be called
+      // more than once: it is non-affine itself, escapes, is called in a loop, or is held by top-level state
+      def isInferredAffine(pf: ProdFun): Bool =
+        val affine = inferAffine && !constraintSolver.AllUpperBounds(pf.capturedVarUpperbound).contains(NonAffine)
+        if affine then inferredAffine += pf
+        affine
+      
+      def isAnnotatedAffine(pf: ProdFun) =
         pf.exprId match
         case lamId: ResultId =>
           lamId.getResult match
@@ -66,7 +84,7 @@ class EtaExpansionSolver(val constraintSolver: FlowConstraintSolver, tl: TraceLo
           val fnDefn = constraintSolver.collector.preAnalyzer.res.funSymToFunDefn(fSym)
           fnDefn.affineInfo.contains(whichPl)
         case (sym, _) => lastWords(s"prodFunIsAffine: expected TermSymbol funId, got $sym")
-      end prodFunIsAffine
+      end isAnnotatedAffine
       
       res match
       case resPf: ProdFun =>
@@ -156,6 +174,14 @@ class EtaExpansionSolver(val constraintSolver: FlowConstraintSolver, tl: TraceLo
     for (id, shape) <- etaExpandedFunShape do
       tl.log(dbg"${id.showConcreteFunId}: ${shape.map(_.ppParamInfo).mkString("[", ", ", "]")}")
     tl.log("<<< eta-expansion targets shapes <<<")
+  end if
+  
+  if affineTl.isTracing then
+    given ShowCfg = ShowCfg.internal
+    affineTl.log(">>> inferred affine >>>")
+    for pfStr <- inferredAffine.toSeq.map(_.concreteId.showConcreteFunId).distinct.sorted do
+      affineTl.log(pfStr)
+    affineTl.log("<<< inferred affine <<<")
   end if
 end EtaExpansionSolver
 

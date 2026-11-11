@@ -281,11 +281,16 @@ object Config:
     // TODO: off by default: in poly mode it miscompiles nofib `lambda` (a read of `Some#x` whose
     // result reaches `x => x` and is then used gets removed); not minimized yet, mono is unaffected
     deadReadElim: Bool = false,
+    // also treats a returned function as one-shot when the flow analysis finds it non-affine nowhere
+    inferAffine: Bool = true,
+    // logs the functions that eta-expansion treats as one-shot by inference only
+    debugAffine: Bool = false,
   ):
     def effectiveDebugEta: Bool = debug || debugEta
     def effectiveDebugDpe: Bool = debug || debugDpe
     def effectiveDebugDce: Bool = debug || debugDce
     def effectiveDebugDead: Bool = debug || debugDead
+    def effectiveDebugAffine: Bool = debug || debugAffine
 
     def effectiveTrackNonAffine: Bool =
       trackNonAffine || logNonAffine
@@ -744,6 +749,8 @@ object ConfigParser:
       var deadLambdaElim = base.deadLambdaElim
       var deadFieldElim = base.deadFieldElim
       var deadReadElim = base.deadReadElim
+      var inferAffine = base.inferAffine
+      var debugAffine = base.debugAffine
       args.foreach:
         case NamedArg("debug", value) =>
           setFrom(value)(parseBool)(v => debug = v)
@@ -777,6 +784,10 @@ object ConfigParser:
           setFrom(value)(parseBool)(v => deadFieldElim = v)
         case NamedArg("deadReadElim", value) =>
           setFrom(value)(parseBool)(v => deadReadElim = v)
+        case NamedArg("inferAffine", value) =>
+          setFrom(value)(parseBool)(v => inferAffine = v)
+        case NamedArg("debugAffine", value) =>
+          setFrom(value)(parseBool)(v => debugAffine = v)
         case other =>
           unsupported(passName, other)
       S(Config.FlowAnalysisConfig(
@@ -796,6 +807,8 @@ object ConfigParser:
         deadLambdaElim,
         deadFieldElim,
         deadReadElim,
+        inferAffine,
+        debugAffine,
       ))
     case _ =>
       expect(s"${passName}(...)")(tree)

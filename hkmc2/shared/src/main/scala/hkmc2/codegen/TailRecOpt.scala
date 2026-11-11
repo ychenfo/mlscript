@@ -76,14 +76,9 @@ class TailRecOpt(checkAnnotations: Bool)(using Config, State, TL, Raise, Ctx):
     val cmp = c.argss.sizeCompare(f.params.size)
     // A zero-argument-list definition may still be invoked by a `Call` node:
     // the callee body is evaluated as a nullary thunk, and the call's argument
-    // lists are then applied to the returned value. For non-nullary callees,
-    // passing more argument lists than the callee can receive violates the IR
-    // invariant that a `Call` node does not pass more arguments than a non-nullary
-    // callee can receive.
-    softAssert(
-      cmp <= 0 || f.params.isEmpty,
-      s"Call node passes ${c.argss.size} argument lists to ${f.dSym.showDbg}, which can receive ${f.params.size}.",
-    )
+    // lists are then applied to the returned value.
+    // eta-expansion (flow-based optimization) can also pass more argument lists than a
+    // non-nullary callee receives, applying the extra ones to its result; such a call is not saturated
     cmp === 0
   
   /** Coerces `r` to the declared return type of `sym`, if a coercion is required. */

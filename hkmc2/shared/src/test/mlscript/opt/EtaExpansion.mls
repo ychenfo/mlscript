@@ -369,7 +369,7 @@ fun f(k, x) =
   h(2)
 f(k1, 1) + f(k2, 5)
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ let a, b, tmp, tmp1, f_a_b$b, f_a$a, f$f;
+//│ let a, b, tmp, tmp1, f_a_b$b, f_a$a, f$f, f_a_b$b1, f_a$a1, f$f1;
 //│ @private
 //│ define f_a_b$b as fun f_a_b$b⁰(k, y)(eta$0$0) {
 //│   return k(y)(eta$0$0)
@@ -381,6 +381,18 @@ f(k1, 1) + f(k2, 5)
 //│ @private
 //│ define f$f as fun f$f⁰(k, x) {
 //│   return f_a$a⁰(k, x)(2)
+//│ };
+//│ @private
+//│ define f_a_b$b1 as fun f_a_b$b¹(k, y)(eta$0$0) {
+//│   return k(y)(eta$0$0)
+//│ };
+//│ @private
+//│ define f_a$a1 as fun f_a$a¹(k, y)(eta$0$0) {
+//│   return f_a_b$b¹(k, y)(eta$0$0)
+//│ };
+//│ @private
+//│ define f$f1 as fun f$f¹(k, x) {
+//│   return f_a$a¹(k, x)(2)
 //│ };
 //│ define a as fun a⁰(k, y) {
 //│   return b⁰(k, y)
@@ -400,8 +412,8 @@ f(k1, 1) + f(k2, 5)
 //│   set h = a⁰(k, x);
 //│   return h(2)
 //│ };
-//│ set tmp = f$f⁰(k1³, 1);
-//│ set tmp1 = f¹¹(k2³, 5);
+//│ set tmp = f$f¹(k1³, 1);
+//│ set tmp1 = f$f⁰(k2³, 5);
 //│ return +⁰(tmp, tmp1)
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ = 13
@@ -424,13 +436,13 @@ fun f(k, x) =
 f(k1, 1) + f(k2, 5)
 //│ ═══[WARNING] Cannot yet lift class/module `C` as it is used in an instance check.
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ let g, get, tmp, tmp1, f_g$g, f$f;
+//│ let g, get, tmp, tmp1, f_g$g, f$f, f_g$g1, f$f1;
 //│ @private
 //│ define f_g$g as fun f_g$g⁰(k, y)(eta$0$0) {
 //│   return k(y)(eta$0$0)
 //│ };
 //│ @private
-//│ define f$f as fun f$f¹(k, x) {
+//│ define f$f as fun f$f²(k, x) {
 //│   let C, tmp2, tmp3;
 //│   define C as class C¹ {
 //│     val x⁰;
@@ -443,10 +455,28 @@ f(k1, 1) + f(k2, 5)
 //│   set tmp3 = get⁰(C¹, tmp2);
 //│   return f_g$g⁰(k, tmp3)(2)
 //│ };
+//│ @private
+//│ define f_g$g1 as fun f_g$g¹(k, y)(eta$0$0) {
+//│   return k(y)(eta$0$0)
+//│ };
+//│ @private
+//│ define f$f1 as fun f$f³(k, x) {
+//│   let C, tmp2, tmp3;
+//│   define C as class C³ {
+//│     val x²;
+//│     constructor C²(x1) {
+//│       define x² as val x³ = x1;
+//│       end
+//│     }
+//│   };
+//│   set tmp2 = new C³(x);
+//│   set tmp3 = get⁰(C³, tmp2);
+//│   return f_g$g¹(k, tmp3)(2)
+//│ };
 //│ define get as fun get⁰(C$, o) {
 //│   match o
-//│     C² =>
-//│       return o.x²
+//│     C⁴ =>
+//│       return o.x⁴
 //│     else
 //│       throw new globalThis⁰.Error⁰("match error")
 //│   end
@@ -463,20 +493,20 @@ f(k1, 1) + f(k2, 5)
 //│ };
 //│ define f¹² as fun f¹³(k, x) {
 //│   let C, h, tmp2, tmp3;
-//│   define C as class C² {
-//│     val x³;
-//│     constructor C³(x1) {
-//│       define x³ as val x² = x1;
+//│   define C as class C⁴ {
+//│     val x⁵;
+//│     constructor C⁵(x1) {
+//│       define x⁵ as val x⁴ = x1;
 //│       end
 //│     }
 //│   };
-//│   set tmp2 = new C²(x);
-//│   set tmp3 = get⁰(C², tmp2);
+//│   set tmp2 = new C⁴(x);
+//│   set tmp3 = get⁰(C⁴, tmp2);
 //│   set h = g⁹(k, tmp3);
 //│   return h(2)
 //│ };
-//│ set tmp = f$f¹(k1⁵, 1);
-//│ set tmp1 = f¹³(k2⁵, 5);
+//│ set tmp = f$f³(k1⁵, 1);
+//│ set tmp1 = f$f²(k2⁵, 5);
 //│ return +⁰(tmp, tmp1)
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ = 13

@@ -98,7 +98,7 @@ val saved = make()
 //│ flow-analysis > call +⁰@result²#0 @ <root> -> Pure
 //│ flow-analysis > call keep⁰@result³#0 @ <root> -> Pure
 //│ flow-analysis > call make⁰@result¹#0 @ <root> -> UnsafeEta
-//│ flow-analysis > call saved⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call saved¹@result⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ = [1, 7]
 //│ calls = 1
@@ -119,7 +119,7 @@ saved_snapshot()
 //│ flow-analysis > function keep_snapshot⁰#1 @ <root> -> UnsafeEta
 //│ flow-analysis > function snapshot⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call keep_snapshot⁰@result²#0 @ <root> -> Pure
-//│ flow-analysis > call saved_snapshot⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call saved_snapshot¹@result⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call snapshot⁰@result¹#0 @ <root> -> UnsafeEta
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ = 41

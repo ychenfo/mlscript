@@ -1,0 +1,354 @@
+:js
+:lift
+:flowBasedOpt debugEta debugAffine
+
+
+class C(val x)
+declare fun unknown(o): Anything
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+
+
+// * The closure returned by `f` is called twice: it is not one-shot, so `f` is not expanded.
+:soir
+:noInline
+:expect 9
+private fun work(x) = x + 1
+private fun f(x) =
+  let c = work(x)
+  y => c + y
+fun main() =
+  let g = f(1)
+  g(2) + g(3)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, lambda$;
+//│ @inline @private
+//│ define lambda$ as fun lambda$⁰(c)(y) {
+//│   return lambda⁰(c, y)
+//│ };
+//│ @private
+//│ define lambda as fun lambda⁰(c, y) {
+//│   return +⁰(c, y)
+//│ };
+//│ @private
+//│ define work⁰ as fun work¹(x) {
+//│   return +⁰(x, 1)
+//│ };
+//│ @private
+//│ define f⁰ as fun f¹(x) {
+//│   let c;
+//│   set c = work¹(x);
+//│   return lambda$⁰(c)
+//│ };
+//│ define main⁰ as fun main¹() {
+//│   let g, tmp, tmp1;
+//│   set g = f¹(1);
+//│   set tmp = g(2);
+//│   set tmp1 = g(3);
+//│   return +⁰(tmp, tmp1)
+//│ };
+//│ return main¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 9
+
+
+// * The same `f`, whose result is only ever applied right away: it is expanded.
+:soir
+:noInline
+:expect 4
+private fun work(x) = x + 1
+private fun f(x) =
+  let c = work(x)
+  y => c + y
+fun main() = f(1)(2)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f²#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > lambda$¹#1 @ <root>
+//│ infer-affine > <<< inferred affine <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, lambda$;
+//│ @inline @private
+//│ define lambda$ as fun lambda$¹(c)(y) {
+//│   return lambda¹(c, y)
+//│ };
+//│ @private
+//│ define lambda as fun lambda¹(c, y) {
+//│   return +⁰(c, y)
+//│ };
+//│ @private
+//│ define work² as fun work³(x) {
+//│   return +⁰(x, 1)
+//│ };
+//│ @private
+//│ define f² as fun f³(x)(eta$0$0) {
+//│   let c;
+//│   set c = work³(x);
+//│   return lambda$¹(c)(eta$0$0)
+//│ };
+//│ define main² as fun main³() { return f³(1)(2) };
+//│ return main³()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 4
+
+
+// * The closure goes to unknown code, which may call it any number of times: no expansion.
+:soir
+:noInline
+private fun work(x) = x + 1
+private fun f(x) =
+  let c = work(x)
+  y => c + y
+fun main() = unknown(f(1))
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, lambda$;
+//│ @inline @private
+//│ define lambda$ as fun lambda$²(c)(y) {
+//│   return lambda²(c, y)
+//│ };
+//│ @private
+//│ define lambda as fun lambda²(c, y) {
+//│   return +⁰(c, y)
+//│ };
+//│ @private
+//│ define work⁴ as fun work⁵(x) {
+//│   return +⁰(x, 1)
+//│ };
+//│ @private
+//│ define f⁴ as fun f⁵(x) {
+//│   let c;
+//│   set c = work⁵(x);
+//│   return lambda$²(c)
+//│ };
+//│ define main⁴ as fun main⁵() { let tmp; set tmp = f⁵(1); return globalThis⁰.unknown⁰(tmp) };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+
+// * A closure over a fresh mutable cell, called twice: no expansion.
+:soir
+:noInline
+:expect 5
+private fun mk(x) =
+  let o = new mut C(x)
+  y =>
+    set o.C#x = o.C#x + y
+    o.C#x
+fun main() =
+  let g = mk(1)
+  g(1) + g(1)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, lambda$;
+//│ @inline @private
+//│ define lambda$ as fun lambda$³(o)(y) {
+//│   return lambda³(o, y)
+//│ };
+//│ @private
+//│ define lambda as fun lambda³(o, y) {
+//│   let tmp;
+//│   set tmp = +⁰(o.x⁰, y);
+//│   set o.x⁰ = tmp;
+//│   return o.x⁰
+//│ };
+//│ @private
+//│ define mk⁰ as fun mk¹(x) {
+//│   let o;
+//│   set o = new mut C⁰(x);
+//│   return lambda$³(o)
+//│ };
+//│ define main⁶ as fun main⁷() {
+//│   let g, tmp, tmp1;
+//│   set g = mk¹(1);
+//│   set tmp = g(1);
+//│   set tmp1 = g(1);
+//│   return +⁰(tmp, tmp1)
+//│ };
+//│ return main⁷()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 5
+
+
+// * One call site, but in a loop: no expansion.
+:soir
+:noInline
+:expect 8
+private fun work(x) = x + 1
+private fun f(x) =
+  let c = work(x)
+  y => c + y
+fun main() =
+  let g = f(1)
+  let i = 0
+  let s = 0
+  while i < 2 do
+    set s = s + g(2)
+    set i = i + 1
+  s
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, lambda$;
+//│ @inline @private
+//│ define lambda$ as fun lambda$⁴(c)(y) {
+//│   return lambda⁴(c, y)
+//│ };
+//│ @private
+//│ define lambda as fun lambda⁴(c, y) {
+//│   return +⁰(c, y)
+//│ };
+//│ @private
+//│ define work⁶ as fun work⁷(x) {
+//│   return +⁰(x, 1)
+//│ };
+//│ @private
+//│ define f⁶ as fun f⁷(x) {
+//│   let c;
+//│   set c = work⁷(x);
+//│   return lambda$⁴(c)
+//│ };
+//│ define main⁸ as fun main⁹() {
+//│   let g, i, s;
+//│   set g = f⁷(1);
+//│   set i = 0;
+//│   set s = 0;
+//│   loop lbl:
+//│     let scrut, tmp, tmp1, tmp2;
+//│     set scrut = <⁰(i, 2);
+//│     match scrut
+//│       true =>
+//│         set tmp = g(2);
+//│         set tmp1 = +⁰(s, tmp);
+//│         set s = tmp1;
+//│         set tmp2 = +⁰(i, 1);
+//│         set i = tmp2;
+//│         continue lbl
+//│       else
+//│         end
+//│     end
+//│   return s
+//│ };
+//│ return main⁹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 8
+
+
+// * One call site, in a function that runs twice and reads the closure from top-level state: no expansion.
+:soir
+:noInline
+:expect 8
+private fun work(x) = x + 1
+private fun f(x) =
+  let c = work(x)
+  y => c + y
+private val g = f(1)
+private fun h() = g(2)
+h() + h()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, tmp1, tmp2, lambda, lambda$;
+//│ @inline @private
+//│ define lambda$ as fun lambda$⁵(c)(y) {
+//│   return lambda⁵(c, y)
+//│ };
+//│ @private
+//│ define lambda as fun lambda⁵(c, y) {
+//│   return +⁰(c, y)
+//│ };
+//│ @private
+//│ define work⁸ as fun work⁹(x) {
+//│   return +⁰(x, 1)
+//│ };
+//│ @private
+//│ define f⁸ as fun f⁹(x) {
+//│   let c;
+//│   set c = work⁹(x);
+//│   return lambda$⁵(c)
+//│ };
+//│ @private
+//│ define h⁰ as fun h¹() {
+//│   return g⁰(2)
+//│ };
+//│ set tmp = f⁹(1);
+//│ @private
+//│ define g¹ as val g⁰ = tmp;
+//│ set tmp1 = h¹();
+//│ set tmp2 = h¹();
+//│ return +⁰(tmp1, tmp2)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 8
+//│ g = fun
+
+
+// * With the switch off, only annotations count.
+#config(flowBasedOpt: Some(FlowBasedOpt(inferAffine: false)))
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+
+
+:soir
+:noInline
+:expect 4
+private fun work(x) = x + 1
+private fun f(x) =
+  let c = work(x)
+  y => c + y
+fun main() = f(1)(2)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, lambda$;
+//│ @inline @private
+//│ define lambda$ as fun lambda$⁶(c)(y) {
+//│   return lambda⁶(c, y)
+//│ };
+//│ @private
+//│ define lambda as fun lambda⁶(c, y) {
+//│   return +⁰(c, y)
+//│ };
+//│ @private
+//│ define work¹⁰ as fun work¹¹(x) {
+//│   return +⁰(x, 1)
+//│ };
+//│ @private
+//│ define f¹⁰ as fun f¹¹(x) {
+//│   let c;
+//│   set c = work¹¹(x);
+//│   return lambda$⁶(c)
+//│ };
+//│ define main¹⁰ as fun main¹¹() {
+//│   let baseCall;
+//│   set baseCall = f¹¹(1);
+//│   return baseCall(2)
+//│ };
+//│ return main¹¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 4
