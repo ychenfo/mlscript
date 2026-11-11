@@ -116,7 +116,7 @@ abstract class MLsDiffMaker extends DiffMaker:
     "noLogAccumulator",
   )
   private val FlowBasedOptKnownFlags =
-    Set("debug", "debugEta", "debugDpe", "debugDce", "on", "off", "mono", "poly")
+    Set("debug", "debugEta", "debugDpe", "debugDce", "debugDead", "on", "off", "mono", "poly")
   
   def mkConfig: Config =
     import Config.*
@@ -222,6 +222,7 @@ abstract class MLsDiffMaker extends DiffMaker:
               debugEta = flags.contains("debugEta"),
               debugDpe = flags.contains("debugDpe"),
               debugDce = flags.contains("debugDce"),
+              debugDead = flags.contains("debugDead"),
             ))),
         dataFlowAnalysis = noOptimizations.isUnset,
       ),
@@ -346,6 +347,7 @@ abstract class MLsDiffMaker extends DiffMaker:
             debugDpe = false,
             debugDce = false,
             logEffects = false,
+            debugDead = false,
           ))
       ))
       processTrees(

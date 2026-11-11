@@ -16,6 +16,7 @@ class FlowAnalysisBasedRewrite(
   val deadParamElimSolver: DeadParamElimResult,
   val etaExpansionSolver: EtaExpansionResult,
   val deadConstructorElimSolver: DeadConstructorElimResult,
+  val deadCallElimSolver: DeadCallElimResult,
 )(using Raise) extends PolyInstantiationRewrite(constraintSolver):
 
   private case class EtaParamList(params: LoweredParamList, args: Ls[Arg])
@@ -184,13 +185,20 @@ class FlowAnalysisBasedRewrite(
           rec(args, 0, false, Nil)
       end rewriteArgs
       
+      // a removed site becomes the unit literal, after evaluating its impure operands in order
+      def replaceByUnit(site: Result, operands: Ls[Path]): Block =
+        operands.reverseIterator
+          .filterNot(_.isPure)
+          .foldLeft(k(Value.Lit(Tree.UnitLit(false))(site.toLoc))): (rest, p) =>
+            applyPath(p)(Assign.discard(_, rest))
+      
       r match
       case ctorSite@CtorProducer(_, args, selectedFrom)
         if deadConstructorElimSolver.deadCtors.contains(ConcreteId(ctorSite.uid, instId)) =>
-        (args.reverseIterator.map(_.value) ++ selectedFrom)
-          .filterNot(_.isPure)
-          .foldLeft(k(Value.Lit(Tree.UnitLit(false))(ctorSite.toLoc))): (rest, p) =>
-            applyPath(p)(Assign.discard(_, rest))
+        replaceByUnit(ctorSite, selectedFrom.toList ::: args.map(_.value))
+      // the solver checked that the result is dead and that no arg list has an effect visible to the caller
+      case c@Call(fun, argss) if deadCallElimSolver.deadCalls.contains(ConcreteId(c.uid, instId)) =>
+        replaceByUnit(c, fun :: argss.flatten.map(_.value))
       case c@Call(fun, argss) =>
         def rewriteArgss(argLists: Iterator[(Ls[Arg], Int)])(k: Ls[Ls[Arg]] => Block): Block = argLists.nextOption() match
           case N => k(Nil)
@@ -260,7 +268,7 @@ class FlowAnalysisBasedRewrite(
   
   // ====== start: implements the abstract members of `PolyInstantiationRewrite` ======
   def solvers: Iterable[FlowAnalysisSolverResult] =
-    deadParamElimSolver :: etaExpansionSolver :: deadConstructorElimSolver :: Nil
+    deadParamElimSolver :: etaExpansionSolver :: deadConstructorElimSolver :: deadCallElimSolver :: Nil
   
   override def specializedSignature(fun: TermSymbol, instId: InstantiationId, sig: ErasedFuncSignature): ErasedFuncSignature =
     val paramLists = sig.paramLists.zipWithIndex.map: (pl, i) =>
@@ -335,9 +343,14 @@ object FlowAnalysisBasedRewrite:
       if dce then new DeadConstructorElimSolver(
         flowAnalysisRes, mkTl("dead-constructor-elim > ", optCfg.effectiveDebugDce))
       else NoDeadConstructorElim
+    val deadCallElimSolver =
+      if optCfg.config.deadCallElim then new DeadCallElimSolver(
+        flowAnalysisRes, mkTl("dead-call-elim > ", optCfg.config.effectiveDebugDead))
+      else NoDeadCallElim
     new FlowAnalysisBasedRewrite(
       flowAnalysisRes,
       deadParamElimSolver,
       etaExpansionSolver,
       deadConstructorElimSolver,
+      deadCallElimSolver,
     )()

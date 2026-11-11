@@ -98,7 +98,7 @@ object FlowAnalysis:
     solver
   
   // * FIXME: not all symbols have irDefn; add and look up an irHeader instead
-  private[flowAnalysis] def isPureCall(call: Call, whichArgList: Int): Bool = call.fun match
+  private[codegen] def isPureCall(call: Call, whichArgList: Int): Bool = call.fun match
     case Value.SimpleRef(b: BuiltinSymbol) => whichArgList == 0 && b.isPure
     case p => p.targetSymbol.exists:
       case s: TermSymbol => s.irFunDefn match
@@ -430,6 +430,10 @@ class FlowPreAnalyzer(val pgrm: Program)(using
     val generatedEffects = MutMap.empty[Symbol, StratVar] // TODO: tighten `Symbol` type! // TODO: populate for getters!
     val capturedVars = MutMap.empty[FunId, LinkedHashSet[Symbol]]
     val affinityCounts = MutMap.empty[Symbol, Int].withDefaultValue(0)
+    // variables assigned by a function or lambda that does not define them; callers can observe such writes
+    val nonlocallyAssigned = MutSet.empty[Symbol]
+    // the val bound to each member, which a reference resolved to a class may stand for (eg, `val Alias = Box`)
+    val valOfMember = MutMap.empty[BlockMemberSymbol, TermSymbol]
     def getEnclosingMatchesForSel(selExprId: ResultId) =
       selToCtxOfSel.get(selExprId).fold(Iterator.empty):
         _.iterator
@@ -626,7 +630,9 @@ class FlowPreAnalyzer(val pgrm: Program)(using
       applyBlock(rest)
     case Assign(lhs, rhs, rest) =>
       lhs match
-        case l: (LocalVarSymbol | TermSymbol) => recordRefInCaptures(l, N)
+        case l: (LocalVarSymbol | TermSymbol) =>
+          recordRefInCaptures(l, N)
+          if currentCaptureInfo.exists(!_.defines(l, N)) then res.nonlocallyAssigned += l
         case _ => ()
       applyResult(rhs)
       applyBlock(rest)
@@ -723,6 +729,7 @@ class FlowPreAnalyzer(val pgrm: Program)(using
   
   override def applyValDefn(defn: ValDefn): Unit =
     ctxTracker.registerStratVar(defn.tsym, defn.tsym.nme)
+    res.valOfMember(defn.sym) = defn.tsym
     if ctxTracker.isTopLvlLikeModuleCtx then
       res.rootValDefns.addOne(defn.tsym -> defn)
     currentCaptureInfo.foreach(_.locallyDefined += defn.tsym)
@@ -1063,6 +1070,9 @@ class FlowConstraintsCollector(
     
     def processClsLikeDefn(cls: ClsLikeDefn)(using cc: ConstraintsCollector, currentEffect: Opt[StratVar]): Unit =
       cls.methodKeys.valuesIterator.foreach(constrainOpaqueResult)
+      // constructor args flow into the fields of a `Ctor`, never into these vars, which are therefore unknown;
+      // without a producer, a call through such a param would look like it has no callee consuming its args
+      (cls.paramsOpt.toList ::: cls.auxParams).foreach(_.allParams.foreach(p => cc.constrain(UnknownProd, generatedVars(p.sym))))
       cls.privateFields.foreach(sym => generatedVars(sym).constrainOpaque)
       cls.publicFields.foreach: (_, tsym) =>
         generatedVars(tsym).constrainOpaque
@@ -1079,6 +1089,10 @@ class FlowConstraintsCollector(
           generatedVars(tsym).constrainOpaque
         mod.methods.foreach: fun =>
           processFunctionDefn(fun)
+          // only root functions get an escape constraint below; the method of a nested module
+          // can be called from code this analysis never sees, eg, a later block
+          if !preAnalyzer.res.rootFunDefns.contains(fun.dSym) then
+            cc.constrain(generatedVars(fun.dSym), UnknownCons)
         processBlock(mod.ctor)(using cc, UnknownCons, N /* FIXME: ctor effects should NOT be discarded */)
     
     def constrainOpaqueResult(r: Result)(using cc: ConstraintsCollector, currentEffect: Opt[StratVar]): Unit =
@@ -1120,6 +1134,9 @@ class FlowConstraintsCollector(
           case NoSymbol => ()
           case lhs: (LocalVarSymbol | TermSymbol) =>
             cc.constrain(rhsStrat, generatedVars(lhs))
+            // variable writes have no effect var of their own: a write to a variable of an enclosing scope
+            // is unsafe, which keeps calls to the writer; writes to the writer's own locals stay invisible
+            if preAnalyzer.res.nonlocallyAssigned(lhs) then markUnsafeEta()
         processBlock(rest)
       case TryBlock(sub, finallyDo, rest) =>
         processBlock(sub)
@@ -1304,11 +1321,13 @@ class FlowConstraintsCollector(
             val valueStrat = processResult(value)
             cc.constrain(valueStrat, UnknownCons)
             valueStrat
-          case Value.MemberRef(_, disamb) =>
+          case Value.MemberRef(member, disamb) =>
             disamb match
             case _: ClassSymbol | _: PatternSymbol =>
               // Just accessing the binding is pure.
-              ()
+              // the reference reads a val resolved to this class, whose value is then used in a way not modeled
+              preAnalyzer.res.valOfMember.get(member).foreach: valSym =>
+                cc.constrain(generatedVars(valSym), UnknownCons)
             case sym: TermSymbol =>
               // (Accessing mutable fields is a Select)
               if !sym.isAccessPure then markUnsafeEta()
@@ -1339,6 +1358,8 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
   val consFunsWithSrcs = mutable.Buffer.empty[ConsFun]
   val functionEffectVars = LinkedHashMap.empty[ConcreteId[FunId], StratVar | NoProd]
   val callEffectVars = LinkedHashMap.empty[ConcreteId[CallId], StratVar | NoProd]
+  // every concrete call site, including those whose callee has no modeled producer (no `srcs`)
+  val allConsFuns = LinkedHashSet.empty[ConsFun]
   
   private def addCtorDest(c: Ctor, d: ConcreteCtorConsumer | MarkerConsStrat): Unit =
     if c.dests.isEmpty then ctorsWithDests += c
@@ -1392,6 +1413,18 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
           query(lb)
           computed(lb)
     
+  
+  // whether an upper bound of a value uses it: vars only pass it on (`AllUpperBounds` follows them),
+  // and the markers record facts for other analyses
+  def isConcreteConsumer(c: ConsStrat): Bool = c match
+    case _: ConsFun | _: FieldSel | _: FieldWrite | _: Dtor | UnknownCons => true
+    case _: StratVar | _: IntoParam | _: Reach | NonAffine | Accumulator => false
+    // `Mask` only bounds effect vars, and `PossibleAccumulator` only appears with accumulator tracking;
+    // both count as uses, as they always have in dead-parameter elimination
+    case _: PossibleAccumulator | _: Mask => true
+  
+  // the shared notion of a dead value: nothing ever calls, selects from, writes to, matches on, or leaks it
+  def isDeadValue(v: StratVar): Bool = !AllUpperBounds(v).exists(isConcreteConsumer)
   
   private def logNonAffineSyms: Unit =
     tl.scoped(FlowAnalysis.TraceScope.NonAffineSyms):
@@ -1454,7 +1487,9 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         hasConcreteInstantiationId(cons)
       registerFunctionEffects(constraint._1)
       constraint._2 match
-        case c: ConsFun => callEffectVars(c.concreteId) = c.effect
+        case c: ConsFun =>
+          callEffectVars(c.concreteId) = c.effect
+          allConsFuns += c
         case _ => ()
       constraint match
       case (c: Ctor, d: Dtor) =>

@@ -118,7 +118,7 @@ f(3)
 //│ dead-param-elim > f¹⁸#0 @ <root> -> eliminable: {0}
 //│ dead-param-elim > <<< dead-param-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ @private define f¹⁸ as fun f¹⁹() { return 0 }; do f¹⁹(); do f¹⁹(); return f¹⁹()
+//│ @private define f¹⁸ as fun f¹⁹() { return 0 }; return f¹⁹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ = 0
 
@@ -131,7 +131,7 @@ private fun g() =
 //│ dead-param-elim > f²⁰#0 @ <root> -> eliminable: {0}
 //│ dead-param-elim > <<< dead-param-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ @private define g⁰ as fun g¹() { let f; define f as fun f²⁰() { return 3 }; return f²⁰() }; end
+//│ @private define g⁰ as fun g¹() { return undefined }; end
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 
 
@@ -276,7 +276,7 @@ fun f() = case [...x, y, z] then x
 //│       throw new globalThis⁰.Error⁰("match error")
 //│   end
 //│ };
-//│ define f²¹ as fun f²²() { return lambda⁰ };
+//│ define f²⁰ as fun f²¹() { return lambda⁰ };
 //│ end
 //│ dead-param-elim > >>> dead-param-elim results >>>
 //│ dead-param-elim > <<< dead-param-elim results <<<
@@ -293,7 +293,7 @@ fun f(c) = Runtime.Tuple.get(c, 1) + 1
 //│ ———————————————| Lowered IR |———————————————————————————————————————————————————————————————————————
 //│ import "..." as Runtime;
 //│ do runtime⁰.resetEffects﹖();
-//│ define f²³ as fun f²⁴(c) {
+//│ define f²² as fun f²³(c) {
 //│   let tmp, pc, curDepth;
 //│   do runtime⁰.checkDepth﹖();
 //│   match runtime⁰.curEffect﹖
@@ -302,7 +302,7 @@ fun f(c) = Runtime.Tuple.get(c, 1) + 1
 //│       set tmp = Runtime⁰.Tuple⁰.get⁰(c, 1);
 //│       return +⁰(tmp, 1)
 //│     else
-//│       return runtime⁰.unwind﹖(f²⁴, -1, "basic.mls:292:1", null, null, 1, 1, c, 0)
+//│       return runtime⁰.unwind﹖(f²³, -1, "basic.mls:292:1", null, null, 1, 1, c, 0)
 //│   end
 //│ };
 //│ end
@@ -315,7 +315,7 @@ private fun f(a) = g(a)
 private fun g(x) = 3
 f(1)
 //│ dead-param-elim > >>> dead-param-elim results >>>
-//│ dead-param-elim > f²⁵#0 @ <root> -> eliminable: {0}
+//│ dead-param-elim > f²⁴#0 @ <root> -> eliminable: {0}
 //│ dead-param-elim > g²#0 @ <root> -> eliminable: {0}
 //│ dead-param-elim > <<< dead-param-elim results <<<
 //│ = 3
@@ -325,9 +325,9 @@ fun f(a) = g(a)
 fun g(x) = 3
 f(1)
 //│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > g²#0 @ f²⁴.g³ -> eliminable: {0}
 //│ dead-param-elim > g²#0 @ f²⁵.g³ -> eliminable: {0}
-//│ dead-param-elim > g²#0 @ f²⁶.g³ -> eliminable: {0}
-//│ dead-param-elim > f²⁷#0 @ f²⁶ -> eliminable: {0}
+//│ dead-param-elim > f²⁶#0 @ f²⁵ -> eliminable: {0}
 //│ dead-param-elim > <<< dead-param-elim results <<<
 //│ = 3
 

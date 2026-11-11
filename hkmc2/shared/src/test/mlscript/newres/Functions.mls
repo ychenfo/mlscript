@@ -21,7 +21,6 @@ foo(1, 2)
 //│ ╟── Function 'foo' expected 1 argument, but got 2
 //│ ║  l.XX: 	private fun foo(x) = x + 1
 //│ ╙──      	^^^^^^^^^^^^^^^^^^
-//│ = 2
 
 
 :sr

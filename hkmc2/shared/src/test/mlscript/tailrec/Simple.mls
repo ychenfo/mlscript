@@ -32,15 +32,7 @@ fun f(x) = f(x + 1)
 fun f(x) = f(f(x) + 1)
 //│ ————————————| JS (unsanitized) |————————————————————————————————————————————————————————————————————
 //│ let f3;
-//│ f3 = function f(x) {
-//│   loopLabel: while (true) {
-//│     let tmp, tmp1;
-//│     tmp = f3(x);
-//│     tmp1 = tmp + 1;
-//│     x = tmp1;
-//│     continue loopLabel;
-//│   }
-//│ };
+//│ f3 = function f(x) { loopLabel: while (true) { f3(x); x = undefined; continue loopLabel; } };
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 
 module A with

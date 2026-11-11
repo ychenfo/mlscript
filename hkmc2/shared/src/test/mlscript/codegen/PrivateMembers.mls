@@ -7,9 +7,7 @@ module M with
   private fun g(b) = b
   g(2)
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ define M⁰ as class M¹
-//│ module M² { constructor { do M².this.g⁰(); end } method g¹ = fun g⁰() { return undefined } };
-//│ end
+//│ define M⁰ as class M¹ module M² { method g⁰ = fun g¹() { return undefined } }; end
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 
 

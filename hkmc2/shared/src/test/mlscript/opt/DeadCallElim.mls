@@ -1,0 +1,292 @@
+:js
+:flowBasedOpt debugDead
+
+
+class C(val x)
+declare fun unknown(o): Anything
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+
+
+// * The result of `work` only goes into a parameter that dead-parameter elimination removes,
+// * so the call is removed in the same run.
+:soir
+:noInline
+:expect 0
+private fun work(x) = x + 1
+private fun ignore(y) = 0
+fun f(x) = ignore(work(x))
+f(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x¹, 1]]) @ <root>
+//│ dead-call-elim > eliminable: Call(member:work⁰‹term:work¹›, [[x⁰]]) @ <root>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define work⁰ as fun work¹(x) {
+//│   return undefined
+//│ };
+//│ @private
+//│ define ignore⁰ as fun ignore¹() {
+//│   return 0
+//│ };
+//│ define f⁰ as fun f¹(x) { return ignore¹() };
+//│ return f¹(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 0
+
+
+// * A call that only writes a cell its callee created itself has no effect visible to the caller.
+:soir
+:noInline
+:expect 1
+private fun local(n) =
+  let o = new mut C(0)
+  set o.C#x = n
+  o.C#x
+fun g(n) =
+  let r = local(n)
+  n
+g(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > eliminable: Call(member:local⁰‹term:local¹›, [[n⁰]]) @ <root>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define local⁰ as fun local¹(n) {
+//│   let o;
+//│   set o = new mut C⁰(0);
+//│   set o.x⁰ = n;
+//│   return o.x⁰
+//│ };
+//│ define g⁰ as fun g¹(n) { return n };
+//│ return g¹(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * A call that writes a cell its caller passed in stays.
+:soir
+:noInline
+:expect 1
+private fun write(o, n) =
+  set o.C#x = n
+  n
+fun h() =
+  let o = new mut C(0)
+  let r = write(o, 1)
+  o.C#x
+h()
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define write⁰ as fun write¹(o, n) {
+//│   set o.x⁰ = n;
+//│   return n
+//│ };
+//│ define h⁰ as fun h¹() { let o; set o = new mut C⁰(0); do write¹(o, 1); return o.x⁰ };
+//│ return h¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * A call to unknown code stays.
+:soir
+:noInline
+fun u() =
+  let r = unknown(1)
+  0
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define u⁰ as fun u¹() { do globalThis⁰.unknown⁰(1); return 0 }; end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+
+// * LIMIT: `a` is only used by the second call, which this same run removes; that use still counts.
+:soir
+:noInline
+:expect 1
+private fun work(x) = x + 1
+fun k(x) =
+  let a = work(x)
+  let b = work(a)
+  x
+k(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > eliminable: Call(member:work²‹term:work³›, [[a⁰]]) @ <root>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define work² as fun work³(x) {
+//│   return +⁰(x, 1)
+//│ };
+//│ define k⁰ as fun k¹(x) { do work³(x); return x };
+//│ return k¹(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * A call that assigns a variable of an enclosing scope stays, although its result is unused.
+:soir
+:noInline
+:expect 1
+fun count() =
+  let n = 0
+  fun bump() = set n = n + 1
+  bump()
+  n
+count()
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define count⁰ as fun count¹() {
+//│   let bump, n;
+//│   define bump as fun bump⁰() {
+//│     let tmp;
+//│     set tmp = +⁰(n, 1);
+//│     set n = tmp;
+//│     return runtime⁰.Unit⁰
+//│   };
+//│   set n = 0;
+//│   do bump⁰();
+//│   return n
+//│ };
+//│ return count¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * A method of a module nested in a class can be called from a later block, so its result is used.
+:soir
+:noInline
+class O(val v) with
+  module M with
+    fun get() = v + 1
+let o = new O(1)
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ define O⁰ as class O² {
+//│   val v⁰;
+//│   constructor O¹(v) {
+//│     define v⁰ as val v¹ = v;
+//│     define M⁰ as class M¹
+//│     module M² {
+//│       method get⁰ = fun get¹() { return +⁰(O².this.v¹, 1) }
+//│     };
+//│     end
+//│   }
+//│ };
+//│ set o⁰ = new O²(1);
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ o = O(1)
+
+:expect 2
+o.M.get()
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ = 2
+
+
+// * Lifting turns the reassigned closure into a field of a capture object, read through a class parameter;
+// * the argument of the call through that field is used.
+:lift
+:expect 6
+fun foo() =
+  let f = ()
+  set f = n =>
+    if n <= 0 then 0
+    else n + f(n - 1)
+  f(3)
+foo()
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ = 6
+
+
+// * Each use of `app` is analyzed separately: the copy for `a` calls a pure callback and drops the call,
+// * the copy for `b` keeps it.
+:flowBasedOpt debugDead poly
+:soir
+:noInline
+private fun app(k, x) =
+  let r = k(x)
+  0
+fun a() = app(x => x + 1, 1)
+fun b() = app(x => print(x), 2)
+a()
+b()
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x¹, 1]]) @ a¹
+//│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x¹, 1]]) @ a⁰
+//│ dead-call-elim > eliminable: Call(k², [[x²]]) @ a¹.app⁰
+//│ dead-call-elim > eliminable: Call(k², [[x²]]) @ a⁰.app⁰
+//│ dead-call-elim > eliminable: Call(member:app¹‹term:app²›, [[member:lambda⁰‹term:lambda¹›, 1]]) @ a¹
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let a_app$app, a$a;
+//│ @private @private
+//│ define a_app$app as fun a_app$app⁰(k, x) {
+//│   return 0
+//│ };
+//│ @private
+//│ define a$a as fun a$a⁰() {
+//│   return undefined
+//│ };
+//│ @private
+//│ define app⁰ as fun app¹(k, x) {
+//│   do k(x);
+//│   return 0
+//│ };
+//│ define a⁰ as fun a¹() {
+//│   let lambda;
+//│   define lambda as fun lambda⁰(x) {
+//│     return undefined
+//│   };
+//│   return a_app$app⁰(lambda⁰, 1)
+//│ };
+//│ define b⁰ as fun b¹() {
+//│   let lambda;
+//│   define lambda as fun lambda¹(x) {
+//│     return Predef⁰.print⁰(x)
+//│   };
+//│   return app¹(lambda¹, 2)
+//│ };
+//│ do a$a⁰();
+//│ return b¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ > 2
+//│ = 0
+
+
+// * The switch turns the rewrite off.
+#config(flowBasedOpt: Some(FlowBasedOpt(deadCallElim: false)))
+
+
+:flowBasedOpt debugDead mono
+:soir
+:noInline
+:expect 1
+private fun local(n) =
+  let o = new mut C(0)
+  set o.C#x = n
+  o.C#x
+fun g(n) =
+  let r = local(n)
+  n
+g(1)
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define local² as fun local³(n) {
+//│   let o;
+//│   set o = new mut C⁰(0);
+//│   set o.x⁰ = n;
+//│   return o.x⁰
+//│ };
+//│ define g² as fun g³(n) { do local³(n); return n };
+//│ return g³(1)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1

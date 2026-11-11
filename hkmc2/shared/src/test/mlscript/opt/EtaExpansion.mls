@@ -195,7 +195,6 @@ main1(true)
 //│ @private
 //│ define main1⁰ as fun main1¹(b) {
 //│   let tmp, tmp1;
-//│   do f1¹(b);
 //│   set tmp = g1¹();
 //│   set tmp1 = h1¹(2);
 //│   return +⁰(tmp, tmp1)

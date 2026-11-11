@@ -5,8 +5,7 @@
 :sjs
 fun foo() = if false do foo()
 //│ ————————————| JS (unsanitized) |————————————————————————————————————————————————————————————————————
-//│ let foo;
-//│ foo = function foo() { if (false === true) { foo(); return runtime.Unit } return runtime.Unit; };
+//│ let foo; foo = function foo() { if (false === true) { return runtime.Unit } return runtime.Unit; };
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 // * ...but this is (so it's tailrec-optimized)
 :sjs

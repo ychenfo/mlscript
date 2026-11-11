@@ -217,19 +217,14 @@ app(c => 2) + app(c => if c is C then 1 else 0)
 //│ dead-constructor-elim > eliminable: Call(member:C²‹term:C⁰›, [[1]])
 //│ dead-constructor-elim > <<< dead-constructor-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ let tmp, lambda, tmp1, lambda$lambda, app$app, app_ctor$ctor;
+//│ let tmp, lambda, tmp1, lambda$lambda, app$app;
 //│ @private
 //│ define lambda$lambda as fun lambda$lambda⁰() {
 //│   return 2
 //│ };
 //│ @private
 //│ define app$app as fun app$app⁰(k) {
-//│   do app_ctor$ctor⁰();
 //│   return k()
-//│ };
-//│ @private
-//│ define app_ctor$ctor as fun app_ctor$ctor⁰() {
-//│   return undefined
 //│ };
 //│ define ctor⁰ as fun ctor¹() {
 //│   return C⁰(1)

@@ -287,7 +287,6 @@ fun f(a)(...z) = if z is
 //│         return a
 //│       Array(1+) =>
 //│         let inlinedVal, tmp1;
-//│         do runtime⁰.Tuple⁰.get⁰(z, 0);
 //│         set tmp1 = -¹(z.length⁰, 0);
 //│         set inlinedVal = z.slice⁰(1, tmp1);
 //│         set tmp = +⁰(a, 1);
@@ -494,7 +493,6 @@ fun f(n)(a)(...z) =
 //│             return a
 //│           Array(1+) =>
 //│             let inlinedVal, tmp2;
-//│             do runtime⁰.Tuple⁰.get⁰(z, 0);
 //│             set tmp2 = -¹(z.length⁰, 0);
 //│             set inlinedVal = z.slice⁰(1, tmp2);
 //│             set tmp1 = +⁰(a, 1);

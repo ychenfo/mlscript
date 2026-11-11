@@ -267,10 +267,15 @@ object Config:
     debugDpe: Bool = false,
     debugDce: Bool = false,
     logEffects: Bool = false,
+    // logs the results of the dead-value eliminations below
+    debugDead: Bool = false,
+    // removes pure calls whose results are never used
+    deadCallElim: Bool = true,
   ):
     def effectiveDebugEta: Bool = debug || debugEta
     def effectiveDebugDpe: Bool = debug || debugDpe
     def effectiveDebugDce: Bool = debug || debugDce
+    def effectiveDebugDead: Bool = debug || debugDead
 
     def effectiveTrackNonAffine: Bool =
       trackNonAffine || logNonAffine
@@ -723,6 +728,8 @@ object ConfigParser:
       var debugDpe = base.debugDpe
       var debugDce = base.debugDce
       var logEffects = base.logEffects
+      var debugDead = base.debugDead
+      var deadCallElim = base.deadCallElim
       args.foreach:
         case NamedArg("debug", value) =>
           setFrom(value)(parseBool)(v => debug = v)
@@ -744,6 +751,10 @@ object ConfigParser:
           setFrom(value)(parseBool)(v => debugDce = v)
         case NamedArg("logEffects", value) =>
           setFrom(value)(parseBool)(v => logEffects = v)
+        case NamedArg("debugDead", value) =>
+          setFrom(value)(parseBool)(v => debugDead = v)
+        case NamedArg("deadCallElim", value) =>
+          setFrom(value)(parseBool)(v => deadCallElim = v)
         case other =>
           unsupported(passName, other)
       S(Config.FlowAnalysisConfig(
@@ -757,6 +768,8 @@ object ConfigParser:
         debugDpe,
         debugDce,
         logEffects,
+        debugDead,
+        deadCallElim,
       ))
     case _ =>
       expect(s"${passName}(...)")(tree)
