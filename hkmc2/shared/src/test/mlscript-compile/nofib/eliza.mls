@@ -9,27 +9,27 @@ module eliza with ...
 
 
 
-fun toUpper(c: Str) = c.toUpperCase()
+private fun toUpper(c: Str) = c.toUpperCase()
 
-fun lz_map(f: Function, ls) = lazy of () =>
+private fun lz_map(f: Function, ls) = lazy of () =>
   if ls is
     Nil then LzNil
     h :: t then LzCons(f(h), lz_map(f, t))
 
-fun append_lz(xs, ys) = if xs is
+private fun append_lz(xs, ys) = if xs is
   Nil then force(ys)
   h :: t then lazy of () => LzCons(h, append_lz(t, ys))
 
-fun cycle(xs) = append_lz(xs, lazy of () => cycle(xs))
+private fun cycle(xs) = append_lz(xs, lazy of () => cycle(xs))
 
-fun isSpace(c) = c === " "
+private fun isSpace(c) = c === " "
 
-fun words(s) = if leaveWhile(eliza.isSpace, s) is
+private fun words(s) = if leaveWhile(eliza.isSpace, s) is
   Nil then Nil
   h2h :: t2t and
     break_(eliza.isSpace, h2h :: t2t) is [w, s_] then w :: eliza.words(s_)
 
-fun unwords(ws) =
+private fun unwords(ws) =
   fun go(ws) = if ws is
     Nil then Nil
     w :: ws then " " :: w +: go(ws)
@@ -37,21 +37,21 @@ fun unwords(ws) =
     Nil then Nil
     w :: ws then w +: go(ws)
 
-fun null_lz(ls) = if force(ls) is
+private fun null_lz(ls) = if force(ls) is
   LzNil then true
   LzCons(h, t) then false
 
-fun trim(ls) =
+private fun trim(ls) =
   fun cons(x, xs) = if inList(x, nofibStringToList(" .!?,")) and null_(xs) then Nil else x :: xs
   foldr(cons, Nil, leaveWhile(x => inList(x, nofibStringToList(" .!?,")), ls))
 
-fun repeated(kt_rp) = if kt_rp is [kt, r :: rp] then [r, [kt, rp]]
+private fun repeated(kt_rp) = if kt_rp is [kt, r :: rp] then [r, [kt, rp]]
 
-fun newKeyTab(kt_, kt_rp) = if kt_rp is [kt, rp] then [kt_, rp]
+private fun newKeyTab(kt_, kt_rp) = if kt_rp is [kt, rp] then [kt_, rp]
 
-fun keyTabOf(kt_rp) = if kt_rp is [kt, rp] then kt
+private fun keyTabOf(kt_rp) = if kt_rp is [kt, rp] then kt
 
-fun makeResponse(cs, us) = if cs is
+private fun makeResponse(cs, us) = if cs is
   "?" :: cs_ then cs_ +: nofibStringToList(" ") +: us +: nofibStringToList("?")
   "." :: cs_ then cs_ +: nofibStringToList(" ") +: us +: nofibStringToList(".")
   else cs
@@ -254,19 +254,19 @@ val initial =
   [lscomp(eliza.respMsgs), eliza.cycle(eliza.repeatMsgs)]
 //│ initial = [[[[["C","A","N"],["Y","O","U"]], Lazy([function])],[[["C","A","N"],["I"]], Lazy([function])],[[["Y","O","U"],["A","R","E"]], Lazy([function])],[[["Y","O","U","'","R","E"]], Lazy([function])],[[["I"],["D","O","N","'","T"]], Lazy([function])],[[["I"],["F","E","E","L"]], Lazy([function])],[[["W","H","Y"],["D","O","N","'","T"],["Y","O","U"]], Lazy([function])],[[["W","H","Y"],["C","A","N","'","T"],["I"]], Lazy([function])],[[["A","R","E"],["Y","O","U"]], Lazy([function])],[[["I"],["C","A","N","'","T"]], Lazy([function])],[[["I"],["A","M"]], Lazy([function])],[[["I","'","M"]], Lazy([function])],[[["Y","O","U"]], Lazy([function])],[[["Y","E","S"]], Lazy([function])],[[["N","O"]], Lazy([function])],[[["C","O","M","P","U","T","E","R"]], Lazy([function])],[[["C","O","M","P","U","T","E","R","S"]], Lazy([function])],[[["I"],["W","A","N","T"]], Lazy([function])],[[["W","H","A","T"]], Lazy([function])],[[["H","O","W"]], Lazy([function])],[[["W","H","O"]], Lazy([function])],[[["W","H","E","R","E"]], Lazy([function])],[[["W","H","E","N"]], Lazy([function])],[[["N","A","M","E"]], Lazy([function])],[[["W","H","Y"]], Lazy([function])],[[["C","A","U","S","E"]], Lazy([function])],[[["B","E","C","A","U","S","E"]], Lazy([function])],[[["D","R","E","A","M"]], Lazy([function])],[[["S","O","R","R","Y"]], Lazy([function])],[[["H","I"]], Lazy([function])],[[["D","R","E","A","M","S"]], Lazy([function])],[[["M","A","Y","B","E"]], Lazy([function])],[[["H","E","L","L","O"]], Lazy([function])],[[["A","L","W","A","Y","S"]], Lazy([function])],[[["Y","O","U","R"]], Lazy([function])],[[["A","L","I","K","E"]], Lazy([function])],[[["T","H","I","N","K"]], Lazy([function])],[[["F","R","I","E","N","D","S"]], Lazy([function])],[[["F","R","I","E","N","D"]], Lazy([function])],[[], Lazy([function])]], Lazy([function])]
 
-fun prefix(xxs, yys) = if xxs is
+private fun prefix(xxs, yys) = if xxs is
   Nil then true
   x :: xs and
     force(yys) is
       LzNil then false
       LzCons(y, ys) then listEq(x, y) && prefix(xs, ys)
 
-fun tails(xs) = lazy of () =>
+private fun tails(xs) = lazy of () =>
   if xs is
     Nil then LzNil
     xss then LzCons(xss, tails(tail(xss)))
 
-fun ucase(ls) = map(toUpper, ls)
+private fun ucase(ls) = map(toUpper, ls)
 
 val conjugates =
   let oneways = [nofibStringToList("me"), nofibStringToList("you")] :: Nil
@@ -284,7 +284,7 @@ val conjugates =
   prepare(oneways +: concat(lscomp(bothways)))
 //│ conjugates = [[["M","E"], ["y","o","u"]],[["A","R","E"], ["a","m"]],[["A","M"], ["a","r","e"]],[["W","E","'","R","E"], ["w","a","s"]],[["W","A","S"], ["w","e","'","r","e"]],[["Y","O","U"], ["I"]],[["I"], ["y","o","u"]],[["Y","O","U","R"], ["m","y"]],[["M","Y"], ["y","o","u","r"]],[["I","'","V","E"], ["y","o","u","'","v","e"]],[["Y","O","U","'","V","E"], ["I","'","v","e"]],[["I","'","M"], ["y","o","u","'","r","e"]],[["Y","O","U","'","R","E"], ["I","'","m"]]]
 
-fun conjug(d, w) =
+private fun conjug(d, w) =
   fun maybe(d, xs) = if null_(xs) then d else xs
   fun conj(w) =
     fun lscomp(ls) = if ls is
@@ -301,14 +301,14 @@ fun conjug(d, w) =
     foldr(cons, Nil, ls)
   unwords(trailingI(map(conj, maybe(d, w))))
 
-fun replies(key, l) =
+private fun replies(key, l) =
   map_lz of
     x => conjug(l, leave(listLen(key), x))
     filter_lz of
       ls => prefix(key, lz_map(ucase, ls))
       tails(l)
 
-fun answer(st, l) =
+private fun answer(st, l) =
   fun cons(e, r_es) = if r_es is [r, es] then [r, e :: es]
   fun ans(e_es, l) = if e_es is
     [key, a_as] :: es and force(a_as) is LzCons(a, as_) then
@@ -318,13 +318,13 @@ fun answer(st, l) =
       else [makeResponse(a, head_lz(rs)), [key, as_] :: es]
   if ans(keyTabOf(st), l) is [response, kt] then [response, newKeyTab(kt, st)]
 
-fun session(rs, prev, ls) = if ls is
+private fun session(rs, prev, ls) = if ls is
   Nil then Nil
   l :: ls and
     (if listEqBy(listEq, prev, l) then repeated(rs) else answer(rs, l)) is [response, rs_] then
       response +: nofibStringToList("\n\n") +: session(rs_, l, ls)
 
-fun testEliza_nofib(n) =
+private fun testEliza_nofib(n) =
   let input = Predef.id of
     nofibStringToList("Are we alone?") ::
     nofibStringToList("That the Roswell event was actually an alien encounter. Do you agreed?") ::

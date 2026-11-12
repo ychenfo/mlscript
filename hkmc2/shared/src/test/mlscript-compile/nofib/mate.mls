@@ -9,30 +9,30 @@ module mate with ...
 
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun rqpart(le: Function, x, ys, rle, rgt, r) = if ys is
+private fun rqpart(le: Function, x, ys, rle, rgt, r) = if ys is
   Nil then qsort(le, rle, x :: qsort(le, rgt, r))
   y :: ys and
     le(y, x) then rqpart(le, x, ys, y :: rle, rgt, r)
     else rqpart(le, x, ys, rle, y :: rgt, r)
 
-fun rqsort(le, xs, r) = if xs is
+private fun rqsort(le, xs, r) = if xs is
   Nil then r
   x :: Nil then x :: r
   x :: xs then rqpart(le, x, xs, Nil, Nil, r)
 
-fun qpart(le: Function, x, ys, rlt, rge, r) = if ys is
+private fun qpart(le: Function, x, ys, rlt, rge, r) = if ys is
   Nil then rqsort(le, rlt, x :: rqsort(le, rge, r))
   y :: ys and
     le(x, y) then qpart(le, x, ys, rlt, y :: rge, r)
     else qpart(le, x, ys, y :: rlt, rge, r)
 
-fun qsort(le, xs, r) = if xs is
+private fun qsort(le, xs, r) = if xs is
   Nil then r
   x :: Nil then x :: r
   x :: xs then qpart(le, x, xs, Nil, Nil, r)
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun sort(l) = qsort of
+private fun sort(l) = qsort of
   (a, b) => if a is [aa, _] and b is [bb, _] then listLen(aa) <= listLen(bb)
   l
   Nil
@@ -65,32 +65,32 @@ data class MoveInFull(a: Piece, b: Square, c: Move)
 
 data class Solution(a: MoveInFull, b: List[[List[MoveInFull],Solution]])
 
-fun kindOrder(k) = if k is
+private fun kindOrder(k) = if k is
   King then 1
   Queen then 2
   Rook then 3
   Bishop then 4
   Knight then 5
   Pawn then 6
-fun colourOrder(c) = if c is Black then 1 else 2
-fun pieceCompare(p1, p2) = if p1 is [c1, k1] and p2 is [c2, k2] then
+private fun colourOrder(c) = if c is Black then 1 else 2
+private fun pieceCompare(p1, p2) = if p1 is [c1, k1] and p2 is [c2, k2] then
   let co = colourOrder(c1) - colourOrder(c2)
   if co === 0 then kindOrder(k1) - kindOrder(k2) else co
-fun squareCompare(s1, s2) = if s1 is [f1, r1] and s2 is [f2, r2] then
+private fun squareCompare(s1, s2) = if s1 is [f1, r1] and s2 is [f2, r2] then
   let ro = r1 - r2
   if ro === 0 then f1 - f2 else ro
-fun optPieceCompare(op1, op2) = if
+private fun optPieceCompare(op1, op2) = if
   op1 is None and op2 is None then 0
   op1 is None and op2 is Some(_) then -1
   op1 is Some(_) and op2 is None then 1
   op1 is Some(p1) and op2 is Some(p2) then pieceCompare(p1, p2)
-fun moveCompare(m1, m2) = if m1 is Move(ma1, mb1, mc1) and m2 is Move(ma2, mb2, mc2) then
+private fun moveCompare(m1, m2) = if m1 is Move(ma1, mb1, mc1) and m2 is Move(ma2, mb2, mc2) then
   let ac = squareCompare(ma1, ma2)
   if ac === 0 then
     let bc = optPieceCompare(mb1, mb2)
     if bc === 0 then optPieceCompare(mc1, mc2) else bc
   else ac
-fun moveInFullCompare(mif1, mif2) =
+private fun moveInFullCompare(mif1, mif2) =
   if mif1 is MoveInFull(p1, s1, m1) and mif2 is MoveInFull(p2, s2, m2) then
     let pc = pieceCompare(p1, p2)
     if pc === 0 then
@@ -98,37 +98,37 @@ fun moveInFullCompare(mif1, mif2) =
       if sc === 0 then moveCompare(m1, m2) else sc
     else pc
 
-fun maybe[A, B](d: B, f: A -> B, x: Option[A]): B = if x is
+private fun maybe[A, B](d: B, f: A -> B, x: Option[A]): B = if x is
   None then d
   Some(x) then f(x)
 
-fun isUpper(c: Str) = let x = c.charCodeAt(0) in (x >= 65 and x <= 90)
+private fun isUpper(c: Str) = let x = c.charCodeAt(0) in (x >= 65 and x <= 90)
 
-fun isLower(c: Str) = let x = c.charCodeAt(0) in (x >= 97 and x <= 122)
+private fun isLower(c: Str) = let x = c.charCodeAt(0) in (x >= 97 and x <= 122)
 
-fun toLower(c: Str) = if isUpper(c) then String.fromCharCode(c.charCodeAt(0) + 32) else c
+private fun toLower(c: Str) = if isUpper(c) then String.fromCharCode(c.charCodeAt(0) + 32) else c
 
-fun words(s) = if leaveWhile(x => x === " ", s) is
+private fun words(s) = if leaveWhile(x => x === " ", s) is
   Nil then Nil
   s_ and
     break_(x => x === " ", s_) is [w, s__] then w :: words(s__)
 
-fun unlines(ls) = concat(map(l => append(l, "\n" :: Nil), ls))
+private fun unlines(ls) = concat(map(l => append(l, "\n" :: Nil), ls))
 
-fun lines(s) = if break_(x => x === "\n", s) is [l, s_] then
+private fun lines(s) = if break_(x => x === "\n", s) is [l, s_] then
   Cons of
     l
     if s_ is
       Nil then Nil
       Cons(_, s__) then lines(s__)
 
-fun any(p: Function, ls) = if ls is
+private fun any(p: Function, ls) = if ls is
   Nil then false
   x :: xs then p(x) || any(p, xs)
 
-fun showColour(c) = nofibStringToList(if c is Black then "Black" else "White")
+private fun showColour(c) = nofibStringToList(if c is Black then "Black" else "White")
 
-fun pieceAt(bd, sq) = if bd is Board(wkss, bkss) then
+private fun pieceAt(bd, sq) = if bd is Board(wkss, bkss) then
   fun pieceAtWith(c, n, ls) = if ls is
     Nil then n
     [k, s] :: xs and
@@ -136,7 +136,7 @@ fun pieceAt(bd, sq) = if bd is Board(wkss, bkss) then
       else pieceAtWith(c, n, xs)
   pieceAtWith(White, pieceAtWith(Black, None, bkss), wkss)
 
-fun kindToChar(k) = if k is
+private fun kindToChar(k) = if k is
   King then "K"
   Queen then "Q"
   Rook then "R"
@@ -144,11 +144,11 @@ fun kindToChar(k) = if k is
   Knight then "N"
   Pawn then "P"
 
-fun pieceToChar(p) = if p is
+private fun pieceToChar(p) = if p is
   [Black, k] then kindToChar(k)
   [White, k] then toLower(kindToChar(k))
 
-fun showBoard(bd) =
+private fun showBoard(bd) =
   fun showRank(r) =
     fun consFile(f, s) = if pieceAt(bd, [f, r]) is
       None then nofibStringToList(" -") +: s
@@ -156,9 +156,9 @@ fun showBoard(bd) =
     foldr(consFile, Nil, enumFromTo(1, 8))
   unlines(map(showRank, reverse(enumFromTo(1, 8))))
 
-fun showPiece(p) = if p is [c, k] then kindToChar(k) :: Nil
+private fun showPiece(p) = if p is [c, k] then kindToChar(k) :: Nil
 
-fun showSquare(c, x_y) = if x_y is [x, y] then
+private fun showSquare(c, x_y) = if x_y is [x, y] then
   atIndex(
     x - 1,
     nofibStringToList("QR") ::
@@ -172,51 +172,51 @@ fun showSquare(c, x_y) = if x_y is [x, y] then
   ) +:
   nofibStringToList(stringOfInt(if c is Black then 9 - y else y))
 
-fun emptyAtAll(bd, e: Function) = if bd is Board(wkss, bkss) then
+private fun emptyAtAll(bd, e: Function) = if bd is Board(wkss, bkss) then
   fun emptyAtAllAnd(b, ls) = if ls is
     Nil then b
     [_, s] :: xs then (not(e(s)) and emptyAtAllAnd(b, xs))
   emptyAtAllAnd(emptyAtAllAnd(true, bkss), wkss)
 
-fun rPa(sq, kss) = if kss is
+private fun rPa(sq, kss) = if kss is
   Nil then throw Error("rPa")
   [k, s] :: kss then if eqTup2(s, sq) then kss else [k, s] :: rPa(sq, kss)
 
-fun rmPieceAt(c, sq, bd) = if bd is Board(wkss, bkss) and c is
+private fun rmPieceAt(c, sq, bd) = if bd is Board(wkss, bkss) and c is
   White then Board(rPa(sq, wkss), bkss)
   Black then Board(wkss, rPa(sq, bkss))
 
-fun putPieceAt(sq, c_k, bd) =
+private fun putPieceAt(sq, c_k, bd) =
   if c_k is [c, k] and bd is Board(wkss, bkss) and c is
     White then Board([k, sq] :: wkss, bkss)
     Black then Board(wkss, [k, sq] :: bkss)
 
-fun kSq(kss) = if kss is
+private fun kSq(kss) = if kss is
   [King, s] :: _ then s
   _ :: kss then kSq(kss)
   Nil then throw Error("kSq")
 
-fun kingSquare(c, bd) = if bd is Board(wkss, bkss) and c is
+private fun kingSquare(c, bd) = if bd is Board(wkss, bkss) and c is
   White then kSq(wkss)
   Black then kSq(bkss)
 
-fun opponent(c) = if c is White then Black else White
+private fun opponent(c) = if c is White then Black else White
 
-fun colourOf(c_k) = if c_k is [c, _] then c
+private fun colourOf(c_k) = if c_k is [c, _] then c
 
-fun kindOf(c_k) = if c_k is [_, k] then k
+private fun kindOf(c_k) = if c_k is [_, k] then k
 
-fun onboard(p_q) = if p_q is [p, q] then
+private fun onboard(p_q) = if p_q is [p, q] then
   (p >= 1 and p <= 8) and (q >= 1 and q <= 8)
 
-fun forcesColoured(c, bd) = if bd is Board(wkss, bkss) and c is
+private fun forcesColoured(c, bd) = if bd is Board(wkss, bkss) and c is
   White then wkss
   Black then bkss
 
 val emptyBoard = Board(Nil, Nil)
 //│ emptyBoard = Board([], [])
 
-fun showMove(withPiece, m) = if m is MoveInFull([c, k], sq, Move(sq_, mcp, mpp)) then
+private fun showMove(withPiece, m) = if m is MoveInFull([c, k], sq, Move(sq_, mcp, mpp)) then
   let capt = mcp is Some(_)
   let prom = mpp is Some(_)
   (if withPiece then
@@ -228,22 +228,22 @@ fun showMove(withPiece, m) = if m is MoveInFull([c, k], sq, Move(sq_, mcp, mpp))
   showSquare(c, sq_) +:
   maybe(Nil, pp => "(" :: append(showPiece(pp), ")" :: Nil), mpp)
 
-fun showMoveInFull(a) = showMove(true, a)
+private fun showMoveInFull(a) = showMove(true, a)
 
-fun showMovesAfter(p_, mifs) = if mifs is
+private fun showMovesAfter(p_, mifs) = if mifs is
   Nil then Nil
   MoveInFull(p, sq, d_) :: mifs and p_ is MoveInFull(p_, sq_, _) then
     nofibStringToList(", ") +:
     showMove(not(eqTup2(p, p_)) || not(eqTup2(sq, sq_)), MoveInFull(p, sq, d_)) +:
     showMovesAfter(MoveInFull(p, sq, d_), mifs)
 
-fun showMoves(mifs) = if mifs is
+private fun showMoves(mifs) = if mifs is
   Nil then throw Error("showMoves")
   mif :: mifs then
     showMoveInFull(mif) +:
     showMovesAfter(mif, mifs)
 
-fun sift(c, bd, ms, sqs) = if sqs is
+private fun sift(c, bd, ms, sqs) = if sqs is
   Nil then ms
   sq :: sqs and
     onboard(sq) and pieceAt(bd, sq) is
@@ -253,7 +253,7 @@ fun sift(c, bd, ms, sqs) = if sqs is
         else sift(c, bd, Move(sq, Some(p_), None) :: ms, sqs)
     else sift(c, bd, ms, sqs)
 
-fun moveLine(bd, c, sq, inc: Function, cont: Function) = 
+private fun moveLine(bd, c, sq, inc: Function, cont: Function) = 
   fun ml(sq, ms) = 
     let sq_ = inc(sq)
     if onboard(sq_) and pieceAt(bd, sq_) is
@@ -264,7 +264,7 @@ fun moveLine(bd, c, sq, inc: Function, cont: Function) =
     else cont(ms)
   ms => ml(sq, ms)
 
-fun bishopmoves(c, sq, bd) =
+private fun bishopmoves(c, sq, bd) =
   (moveLine of
     bd
     c
@@ -288,7 +288,7 @@ fun bishopmoves(c, sq, bd) =
           x => x
   ) of Nil
 
-fun rookmoves(c, sq, bd) =
+private fun rookmoves(c, sq, bd) =
   (moveLine of
     bd
     c
@@ -312,7 +312,7 @@ fun rookmoves(c, sq, bd) =
           x => x
   ) of Nil
 
-fun kingmoves(c, pq, bd) = if pq is [p, q] then
+private fun kingmoves(c, pq, bd) = if pq is [p, q] then
   sift of
     c
     bd
@@ -326,7 +326,7 @@ fun kingmoves(c, pq, bd) = if pq is [p, q] then
     [p, q - 1] ::
     [p + 1, q - 1] :: Nil
 
-fun knightmoves(c, pq, bd) = if pq is [p, q] then
+private fun knightmoves(c, pq, bd) = if pq is [p, q] then
   sift of
     c
     bd
@@ -340,7 +340,7 @@ fun knightmoves(c, pq, bd) = if pq is [p, q] then
     [p - 1, q - 2] ::
     [p + 1, q - 2] :: Nil
 
-fun pawnmoves(c, pq, bd) = if pq is [p, q] then
+private fun pawnmoves(c, pq, bd) = if pq is [p, q] then
   let fwd = if c is White then 1 else -1
   fun promote(xy, mcp) = if xy is [x, y] and
     ((c is Black) and y === 1) || ((c is White) and y === 8) then
@@ -373,9 +373,9 @@ fun pawnmoves(c, pq, bd) = if pq is [p, q] then
   let caps = concat(lscomp1([p + 1, q + fwd] :: [p - 1, q + fwd] :: Nil))
   movs +: caps
 
-fun queenmoves(c, sq, bd) = bishopmoves(c, sq, bd) +: rookmoves(c, sq, bd)
+private fun queenmoves(c, sq, bd) = bishopmoves(c, sq, bd) +: rookmoves(c, sq, bd)
 
-fun kingincheck(c, bd) =
+private fun kingincheck(c, bd) =
   fun givesCheck(kxy) = if kxy is [k, [x, y]] then
     fun kthreat(param) = if kingSquare(c, bd) is [xk, yk] and param is
       King then (abs(x - xk) <= 1) and (abs(y - yk) <= 1)
@@ -393,7 +393,7 @@ fun kingincheck(c, bd) =
     kthreat(k)
   any(givesCheck, forcesColoured(opponent(c), bd))
 
-fun tryMove(c, ksq, m, bd) = if 
+private fun tryMove(c, ksq, m, bd) = if 
   ksq is [k, sq] and m is Move(sq_, mcp, mpp) then
     let p = [c, k]
     let bd1 = rmPieceAt(c, sq, bd)
@@ -407,7 +407,7 @@ fun tryMove(c, ksq, m, bd) = if
   else
     throw Error(m)
 
-fun rawmoves(c, ksq, bd) = if ksq is [k, sq] then
+private fun rawmoves(c, ksq, bd) = if ksq is [k, sq] then
   let m = if k is
     King then kingmoves
     Queen then queenmoves
@@ -418,7 +418,7 @@ fun rawmoves(c, ksq, bd) = if ksq is [k, sq] then
   let res = m(c, sq, bd)
   res
 
-fun moveDetailsFor(c, bd) = foldr of
+private fun moveDetailsFor(c, bd) = foldr of
   (ksq, ms) => foldr of
     (rm, ms_) => maybe(x => x, h => (t => h :: t), tryMove(c, ksq, rm, bd))(ms_)
     ms
@@ -426,15 +426,15 @@ fun moveDetailsFor(c, bd) = foldr of
   Nil
   forcesColoured(c, bd)
 
-fun comment(s) = (s is Nil) || listEq(take(2, s), nofibStringToList("--"))
+private fun comment(s) = (s is Nil) || listEq(take(2, s), nofibStringToList("--"))
 
-fun last(ls) = if ls is
+private fun last(ls) = if ls is
   x :: Nil then x
   h :: t then last(t)
 
-fun intOfString(s) = globalThis.parseInt(nofibListToString(s))
+private fun intOfString(s) = globalThis.parseInt(nofibListToString(s))
 
-fun parseGoal(ls) = if ls is
+private fun parseGoal(ls) = if ls is
   gltxt :: Nil then
     let ws = words(gltxt)
     let c = if listEq(head(ws), nofibStringToList("Black")) then Black else White
@@ -442,7 +442,7 @@ fun parseGoal(ls) = if ls is
     [c, n]
   else throw Error("parseGoal")
 
-fun parseSquare(r, f, c) = if c === "-" then Nil else
+private fun parseSquare(r, f, c) = if c === "-" then Nil else
   let clr = if isUpper(c) then Black else White
   let kin = if toLower(c) ===
     "k" then King
@@ -453,34 +453,34 @@ fun parseSquare(r, f, c) = if c === "-" then Nil else
     "p" then Pawn
   [[clr, kin], [f, r]] :: Nil
 
-fun parseRank(r, x) = concat of zipWith of
+private fun parseRank(r, x) = concat of zipWith of
   (a, b) => parseSquare(r, a, b)
   enumFromTo(1, 8)
   filter(pp => not(pp === " "), x)
 
 
-fun parseBoard(ls) =
+private fun parseBoard(ls) =
   fun addPiece(p_sq, x) = if p_sq is [p, sq] then putPieceAt(sq, p, x)
   foldr of
     addPiece
     emptyBoard
     concat(zipWith(parseRank, reverse(enumFromTo(1, 8)), ls))
 
-fun parseProblem(s) =
+private fun parseProblem(s) =
   let bdtxt_gltxt = splitAt(8, filter(x => not(comment(x)), s))
   if bdtxt_gltxt is [bdtxt, gltxt] then
     let bd = parseBoard(bdtxt)
     let gl = parseGoal(gltxt)
     [bd, gl]
 
-fun readProblem(s) = parseProblem(lines(s))
+private fun readProblem(s) = parseProblem(lines(s))
 
-fun foldr_lz(f: Function, a, x) = if x is
+private fun foldr_lz(f: Function, a, x) = if x is
   h :: t then f(h, lazy of () => foldr_lz(f, a, t))
   Nil then a
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun replies(bd, c, n) =
+private fun replies(bd, c, n) =
   let mds = moveDetailsFor(c, bd)
   fun solnAnd(mifb, rest) = if mifb is [mif, b] then
     let sm = solution(b, opponent(c), n - 1)
@@ -497,7 +497,7 @@ fun replies(bd, c, n) =
     > 0 then foldr_lz(solnAnd, Some(Nil), mds)
     else throw Error("n < 0")
 
-fun solution(bd, c, n) =
+private fun solution(bd, c, n) =
   fun solnOr(mifb, other) = if mifb is
     [mif, b] then
       let rsm = replies(b, opponent(c), n - 1)
@@ -516,10 +516,10 @@ fun solution(bd, c, n) =
 
 data class Soln(a: MoveInFull, b: List[[List[MoveInFull],Soln]])
 
-fun tab(n) = if n <= 0 then Nil else " " :: tab(n - 1)
+private fun tab(n) = if n <= 0 then Nil else " " :: tab(n - 1)
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun showReplies(rs, n) = if rs is
+private fun showReplies(rs, n) = if rs is
   Nil then Nil
   [mifs, s] :: rs then
     tab(n) +:
@@ -529,7 +529,7 @@ fun showReplies(rs, n) = if rs is
     showSoln(s, n + 1) +:
     showReplies(rs, n)
 
-fun showSoln(s, n) = if s is Soln(mif, rs) then
+private fun showSoln(s, n) = if s is Soln(mif, rs) then
   nofibStringToList(stringOfInt(n)) +:
   nofibStringToList(". ") +:
   showMoveInFull(mif) +:
@@ -546,9 +546,9 @@ fun showSoln(s, n) = if s is Soln(mif, rs) then
 
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun compact(s) = if s is Solution(mif, rs) then Soln(mif, foldr(insertCompact, Nil, rs))
+private fun compact(s) = if s is Solution(mif, rs) then Soln(mif, foldr(insertCompact, Nil, rs))
 
-fun insertCompact(mif_s, ls) = if mif_s is [mif, s] then
+private fun insertCompact(mif_s, ls) = if mif_s is [mif, s] then
   fun insert(x, ls) = if ls is
     Nil then x :: Nil
     y :: ys then if moveInFullCompare(x, y) > 0 then y :: insert(x, ys) else x :: y :: ys
@@ -566,13 +566,13 @@ fun insertCompact(mif_s, ls) = if mif_s is [mif, s] then
   ic(ls)
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun showResult(s) = if s is
+private fun showResult(s) = if s is
   None then nofibStringToList("No solution!")
   Some(s) then showSoln(compact(s), 1)
 
-fun solve(bd, c, n) = showResult(solution(bd, c, (2 * n) - 1))
+private fun solve(bd, c, n) = showResult(solution(bd, c, (2 * n) - 1))
 
-fun testMate_nofib(dummy) = 
+private fun testMate_nofib(dummy) = 
   let input = nofibStringToList of
     fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/heathcote3.prob").toString()
   let bdcn = readProblem(input)

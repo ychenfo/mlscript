@@ -11,22 +11,22 @@ type String = List[Char]
 
 
 
-fun lookup(k, t) = if t is
+private fun lookup(k, t) = if t is
   Nil then None
   [x, v] :: t then if listEq(k, x) then Some(v) else lookup(k, t)
 
 data class MyState[S, A](r: S -> [S, A])
 
-fun myRunState(m, s) = if m is MyState(f) then f(s)
+private fun myRunState(m, s) = if m is MyState(f) then f(s)
 
-fun myBind(m, f: Function) = MyState(s => if myRunState(m, s) is [s_, a] then myRunState(f(a), s_))
+private fun myBind(m, f: Function) = MyState(s => if myRunState(m, s) is [s_, a] then myRunState(f(a), s_))
 
-fun myReturn(a) = MyState(s => [s, a])
+private fun myReturn(a) = MyState(s => [s, a])
 
 val myGet = MyState(s => [s, s])
 //│ myGet = MyState([function])
 
-fun myEvalState(m, s) = if myRunState(m, s) is [s_, a] then a
+private fun myEvalState(m, s) = if myRunState(m, s) is [s_, a] then a
 
 
 abstract class Term: Var | Con | Incr | Add | Lam | App | IfZero | Thunk
@@ -46,14 +46,14 @@ data
 object Unit
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun eqEnv(a, b) = if a is
+private fun eqEnv(a, b) = if a is
   Nil and b is Nil then true
   [s1, t1] :: b and b is [s2, t2] :: d and
     listEq(s1, s2) and eqTerm(t1, t2) then eqEnv(b, d)
     else false
   else false
 
-fun eqTerm(a, b) = if a is
+private fun eqTerm(a, b) = if a is
   Var(a) and b is Var(b) then listEq(a, b)
   Con(a) and b is Con(b) then a === b
   Incr and b is Incr then true
@@ -65,35 +65,35 @@ fun eqTerm(a, b) = if a is
   else false
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun myMaybe(d, f: Function, x) = if x is Some(x) then f(x)
+private fun myMaybe(d, f: Function, x) = if x is Some(x) then f(x)
 
 val incr = myReturn(Unit)
 //│ incr = MyState([function])
 
-fun lookupVar(v) =
+private fun lookupVar(v) =
   fun lookup2(env) = myMaybe(dummy => throw Error("undefined"), x => x, lookup(v, env))
   myBind(myGet, env => myReturn(lookup2(env)))
 
-fun withEnv(tmp, m) = myReturn(myEvalState(m, tmp))
+private fun withEnv(tmp, m) = myReturn(myEvalState(m, tmp))
 
-fun pushVar(v, t, m) = myBind(myGet, env => withEnv([v, t] :: env, m))
+private fun pushVar(v, t, m) = myBind(myGet, env => withEnv([v, t] :: env, m))
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun traverseTerm(t) = eval(t)
+private fun traverseTerm(t) = eval(t)
 
-fun traverseCon(t) =
+private fun traverseCon(t) =
   myBind(
     traverseTerm(t),
     _t => if _t is Con(c) then myReturn(c) else throw Error("Not a Con")
   )
 
-fun apply(t, a) = if t is Thunk(Lam(x, b), e) then
+private fun apply(t, a) = if t is Thunk(Lam(x, b), e) then
   myBind(
     myGet,
     orig => withEnv(e, pushVar(x, Thunk(a, orig), traverseTerm(b)))
   )
 
-fun eval(ter) = if ter is
+private fun eval(ter) = if ter is
   Var(x) then
     myBind of
       myGet
@@ -114,7 +114,7 @@ fun eval(ter) = if ter is
 //│ ————————————————————————————————————————————————————————————————————————————————
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun simpleEval(env, ter) = if ter is
+private fun simpleEval(env, ter) = if ter is
   Var(v) then simpleEval(env, myMaybe(dummy => throw Error("undefined var"), x => x, lookup(v, env)))
   Con(e) then Con(e)
   Incr then Con(0)
@@ -132,19 +132,19 @@ fun simpleEval(env, ter) = if ter is
   Thunk(t, e) then simpleEval(e, t)
   else throw Error(ter)
 
-fun simpleApply(env, t, a) = if t is
+private fun simpleApply(env, t, a) = if t is
   Thunk(Lam(x, b), e) then simpleEval([x, Thunk(a, env)] :: e, b)
   else throw Error("bad application")
 
-fun simpleEvalCon(env, e) =
+private fun simpleEvalCon(env, e) =
   let e_ = simpleEval(env, e)
   if e_ is Con(c) then c else throw Error("Not a Con")
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun bracket(ot, ths, t) = if ths <= ot then "(" :: (t +: nofibStringToList(")")) else t
+private fun bracket(ot, ths, t) = if ths <= ot then "(" :: (t +: nofibStringToList(")")) else t
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun ppn(n, ter) = if ter is
+private fun ppn(n, ter) = if ter is
   Var(v) then v
   Con(i) then nofibStringToList(stringOfInt(i))
   Incr then nofibStringToList("INCR")
@@ -154,9 +154,9 @@ fun ppn(n, ter) = if ter is
   IfZero(c, a, b) then bracket(n, 0, nofibStringToList("IF ") +: ppn(0, c) +: nofibStringToList(" THEN ") +: ppn(0, a) +: nofibStringToList(" ELSE ") +: ppn(0, b))
   Thunk(t, e) then bracket(n, 0, ppn(3, t) +: nofibStringToList("::") +: ppenv(e))
 
-fun pp(t) = ppn(0, t)
+private fun pp(t) = ppn(0, t)
 
-fun ppenv(env) =
+private fun ppenv(env) =
   nofibStringToList("[") +:
   flatMap(
     case { [v, t] then v +: nofibStringToList("=") +: pp(t) +: nofibStringToList(", ") }
@@ -180,22 +180,22 @@ val partialSum0 = Lam(nofibStringToList("sum"), Lam(nofibStringToList("n"), IfZe
 val sum0 = App(fix, partialSum0)
 //│ sum0 = App(Lam(["F"], App(Lam(["x"], App(Var(["F"]), App(Var(["x"]), Var(["x"])))), Lam(["x"], App(Var(["F"]), App(Var(["x"]), Var(["x"])))))), Lam(["s","u","m"], Lam(["n"], IfZero(Var(["n"]), Con(0), Add(Var(["n"]), App(Var(["s","u","m"]), Add(Var(["n"]), Con(-1))))))))
 
-fun showTerm(t) = if t is Con(a) then nofibStringToList("Con ") +: nofibStringToList(stringOfInt(a))
+private fun showTerm(t) = if t is Con(a) then nofibStringToList("Con ") +: nofibStringToList(stringOfInt(a))
 
-fun ev(t) =
+private fun ev(t) =
   let envt2 = myRunState(traverseTerm(t), Nil)
   if envt2 is [env, t2] then pp(t2) +: nofibStringToList("  ") +: ppenv(env)
 
-fun mainSimple(args) =
+private fun mainSimple(args) =
   if null_(args)
   then throw Error("Args: number-to-sum-up-to")
   else showTerm(simpleEval(Nil, App(sum0, Con(head(args)))))
 
-fun mainMonad(args) =
+private fun mainMonad(args) =
   if null_(args)
   then throw Error("Args: number-to-sum-up-to")
   else ev(App(sum0, Con(head(args))))
 
-fun testLambda_nofib(n) = [mainSimple(n :: Nil), mainMonad(n :: Nil)]
+private fun testLambda_nofib(n) = [mainSimple(n :: Nil), mainMonad(n :: Nil)]
 
 fun main() = testLambda_nofib(80).toString()

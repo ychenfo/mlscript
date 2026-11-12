@@ -7,7 +7,7 @@ module banner with ...
 
 
 
-val blank =
+private val blank =
   nofibStringToList("     ") ::
   nofibStringToList("     ") ::
   nofibStringToList("     ") ::
@@ -75,27 +75,27 @@ val digits =
   (nofibStringToList(" 999 ") :: nofibStringToList("9   9") :: nofibStringToList(" 999 ") :: nofibStringToList("  9  ") :: nofibStringToList("99   ") :: Nil) :: Nil
 //│ digits = [[[" ","O","O","O"," "],["0"," "," ","0","0"],["0"," ","0"," ","0"],["0","0"," "," ","0"],[" ","0","0","0"," "]],[[" "," ","1"," "," "],[" ","1","1"," "," "],[" "," ","1"," "," "],[" "," ","1"," "," "],["1","1","1","1","1"]],[[" ","2","2","2"," "],["2"," "," "," ","2"],[" "," "," ","2"," "],[" "," ","2"," "," "],["2","2","2","2","2"]],[["3","3","3","3"," "],[" "," "," "," ","3"],[" ","3","3","3"," "],[" "," "," "," ","3"],["3","3","3","3"," "]],[[" "," "," ","4"," "],[" "," ","4","4"," "],[" ","4"," ","4"," "],["4","4","4","4","4"],[" "," "," ","4"," "]],[["5","5","5","5","5"],["5"," "," "," "," "],["5","5","5","5"," "],[" "," "," "," ","5"],["5","5","5","5"," "]],[[" "," "," ","6","6"],[" "," ","6"," "," "],[" ","6","6","6"," "],["6"," "," "," ","6"],[" ","6","6","6"," "]],[["7","7","7","7","7"],[" "," "," "," ","7"],[" "," "," ","7"," "],[" "," "," ","7"," "],[" "," ","7"," "," "]],[[" ","8","8","8"," "],["8"," "," "," ","8"],[" ","8","8","8"," "],["8"," "," "," ","8"],[" ","8","8","8"," "]],[[" ","9","9","9"," "],["9"," "," "," ","9"],[" ","9","9","9"," "],[" "," ","9"," "," "],["9","9"," "," "," "]]]
 
-fun unlines(ls) = concat(map(x => x +: ("\n" :: Nil), ls))
+private fun unlines(ls) = concat(map(x => x +: ("\n" :: Nil), ls))
 
-fun join(ls) = foldr1((xs, ys) => xs +: (" " :: " " :: Nil) +: ys, ls)
+private fun join(ls) = foldr1((xs, ys) => xs +: (" " :: " " :: Nil) +: ys, ls)
 
-fun isUpper(c) =
+private fun isUpper(c) =
   let n = int_of_char(c)
   (n >= 65) and (n <= 90)
 
-fun isLower(c) =
+private fun isLower(c) =
   let n = int_of_char(c)
   (n >= 97) and (n <= 122)
 
-fun isDigit(c) =
+private fun isDigit(c) =
   let n = int_of_char(c)
   (n >= 48) and (n <= 57)
 
-fun isSpace(c) =
+private fun isSpace(c) =
   let n = int_of_char(c)
   (n == 32)
 
-fun picChar(c) =
+private fun picChar(c) =
 
   fun lscomp(ls) = if ls is
     Nil then Nil
@@ -112,9 +112,9 @@ fun picChar(c) =
     c === "=" then reverse(slant)
     else head(lscomp(punct) +: Nil :: Nil :: Nil)
 
-fun say(s) = "\n" :: (unlines(map(join, transpose(map(picChar, s)))))
+private fun say(s) = "\n" :: (unlines(map(join, transpose(map(picChar, s)))))
 
-fun testBanner_nofib(n) =
+private fun testBanner_nofib(n) =
   let x = nofibStringToList("Is this not a great banner?")
   say(concat(replicate(n, x)))
 

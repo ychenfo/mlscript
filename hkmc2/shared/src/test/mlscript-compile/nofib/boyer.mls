@@ -74,32 +74,32 @@ object ERROR extends Term
 
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun termLsEq(h1t1, h2t2) = if
+private fun termLsEq(h1t1, h2t2) = if
   h1t1 is h1 :: t1 and h2t2 is h2 :: t2 and
     termEq(h1, h2) then termLsEq(t1, t2)
     else false
   else true
 
-fun termEq(t1, t2) = if
+private fun termEq(t1, t2) = if
   t1 is Var(i1) and t2 is Var(i2) then i1 === i2
   t1 is Fun(f1, ts1, _) and t2 is Fun(f2, ts2, _) then (f1 === f2) and termLsEq(ts1, ts2)
   else false
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun termInList(term, ht) = if ht is
+private fun termInList(term, ht) = if ht is
   h :: t and
     termEq(term, h) then true
     else termInList(term, t)
   Nil then false
 
-fun find(vid, ls) = if ls is
+private fun find(vid, ls) = if ls is
   Nil then [false, ERROR]
   [vid2, val2] :: bs and
     vid === vid2 then [true, val2]
     else find(vid, bs)
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun one_way_unify1(term1, term2, subst) = if
+private fun one_way_unify1(term1, term2, subst) = if
   term2 is Var(vid2) and find(vid2, subst) is [found, v2] and
     found then [termEq(term1, v2), subst]
     else [true, [vid2, term1] :: subst]
@@ -108,43 +108,43 @@ fun one_way_unify1(term1, term2, subst) = if
     else [false, Nil]
   else [false, Nil]
 
-fun one_way_unify1_lst(tts1, tts2, subst) = if
+private fun one_way_unify1_lst(tts1, tts2, subst) = if
   tts1 is Nil and tts2 is Nil then [true, subst]
   tts1 is t1 :: ts1 and tts2 is t2 :: ts2 and one_way_unify1(t1, t2, subst) is [hd_ok, subst_] and one_way_unify1_lst(ts1, ts2, subst_) is [tl_ok, subst__] then [hd_ok and tl_ok, subst__]
   else [false, Nil]
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun one_way_unify(term1, term2) = one_way_unify1(term1, term2, Nil)
+private fun one_way_unify(term1, term2) = one_way_unify1(term1, term2, Nil)
 
-fun apply_subst(subst, t) = if t is
+private fun apply_subst(subst, t) = if t is
   Var(vid) and find(vid, subst) is [found, value] and
     found then value
     else Var(vid)
   Fun(f, args, ls) then Fun(f, map(x => apply_subst(subst, x), args), ls)
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun rewrite_with_lemmas_helper(term, lss) = if lss is
+private fun rewrite_with_lemmas_helper(term, lss) = if lss is
   Nil then term
   [lhs, rhs] :: ls and one_way_unify(term, lhs) is [unified, subst] and
     unified then rewrite(apply_subst(subst, rhs))
     else rewrite_with_lemmas_helper(term, ls)
 
-fun rewrite_with_lemmas(term, lss) = rewrite_with_lemmas_helper(term, force(lss))
+private fun rewrite_with_lemmas(term, lss) = rewrite_with_lemmas_helper(term, force(lss))
 
-fun rewrite(t) = if t is
+private fun rewrite(t) = if t is
   Var(v) then Var(v)
   Fun(f, args, lemmas) then rewrite_with_lemmas(Fun(f, map(rewrite, args), lemmas), lemmas)
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun truep(x, l) = if x is
+private fun truep(x, l) = if x is
   Fun(TRUE, _, _) then true
   else termInList(x, l)
 
-fun falsep(x, l) = if x is
+private fun falsep(x, l) = if x is
   Fun(FALSE, _, _) then true
   else termInList(x, l)
 
-fun tautologyp(x, true_lst, false_lst) = if
+private fun tautologyp(x, true_lst, false_lst) = if
   truep(x, true_lst) then true
   falsep(x, false_lst) then false
   x is
@@ -154,9 +154,9 @@ fun tautologyp(x, true_lst, false_lst) = if
       else tautologyp(t, cond :: true_lst, false_lst) and tautologyp(e, true_lst, cond :: false_lst)
     else false
 
-fun tautp(x) = tautologyp(rewrite(x), Nil, Nil)
+private fun tautp(x) = tautologyp(rewrite(x), Nil, Nil)
 
-fun test0(xxxx) =
+private fun test0(xxxx) =
   let a       =    Var(A)
   let b       =    Var(B)
   let c       =    Var(C)
@@ -308,7 +308,7 @@ fun test0(xxxx) =
 
   tautp(apply_subst(subst0, theorem))
 
-fun testBoyer_nofib(n) = all(test0, replicate(n, Var(X)))
+private fun testBoyer_nofib(n) = all(test0, replicate(n, Var(X)))
 
 fun main() = testBoyer_nofib(5)
 

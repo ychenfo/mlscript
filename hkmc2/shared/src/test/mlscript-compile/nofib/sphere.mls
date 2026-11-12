@@ -15,32 +15,32 @@ val infinity = 100000000.0
 //│ infinity = 100000000
 //│ pi = 3.141592653589793
 
-fun vecadd(a1, a2) =
+private fun vecadd(a1, a2) =
   if a1 is [x1, y1, z1] and a2 is [x2, y2, z2] then
     [x1 + x2, y1 + y2, z1 + z2]
 
-fun vecsub(a1, a2) =
+private fun vecsub(a1, a2) =
   if a1 is [x1, y1, z1] and a2 is [x2, y2, z2] then
     [x1 - x2, y1 - y2, z1 - z2]
 
-fun vecmult(a1, a2) =
+private fun vecmult(a1, a2) =
   if a1 is [x1, y1, z1] and a2 is [x2, y2, z2] then
     [x1 * x2, y1 * y2, z1 * z2]
 
-fun vecsum(param) = foldr(vecadd, [0.0, 0.0, 0.0], param)
+private fun vecsum(param) = foldr(vecadd, [0.0, 0.0, 0.0], param)
 
-fun vecnorm(xyz) = if xyz is [x, y, z] then
+private fun vecnorm(xyz) = if xyz is [x, y, z] then
   let len = sqrt(x * x + y * y + z * z)
   [[x / len , y / len, z / len], len]
 
-fun vecscale(xyz, a) = if xyz is [x, y, z] then [a * x, a * y, a * z]
+private fun vecscale(xyz, a) = if xyz is [x, y, z] then [a * x, a * y, a * z]
 
-fun vecdot(x1, x2) = if x1 is [x1, y1, z1] and x2 is [x2, y2, z2] then x1 * x2 + y1 * y2 + z1 * z2
+private fun vecdot(x1, x2) = if x1 is [x1, y1, z1] and x2 is [x2, y2, z2] then x1 * x2 + y1 * y2 + z1 * z2
 
-fun veccross(x1, x2) = if x1 is [x1, y1, z1] and x2 is [x2, y2, z2] then
+private fun veccross(x1, x2) = if x1 is [x1, y1, z1] and x2 is [x2, y2, z2] then
   [(y1 * z2) - (y2 * z1), (z1 * x2) - (z2 * x1), (x1 * y2) - (x2 * y1)]
 
-fun is_zerovector(x) = if x is [x, y, z] then (x < epsilon) && (y < epsilon) && (z < epsilon)
+private fun is_zerovector(x) = if x is [x, y, z] then (x < epsilon) && (y < epsilon) && (z < epsilon)
 
 abstract class Light: Directional | Point
 
@@ -49,11 +49,11 @@ data
     Directional(x: [Num, Num, Num], y: [Num, Num, Num]) extends Light
     Point(x: [Num, Num, Num], y: [Num, Num, Num]) extends Light
 
-fun lightpos(p) = if p is Point(pos, col) then pos
+private fun lightpos(p) = if p is Point(pos, col) then pos
 
-fun lightdir(d) = if d is Directional(dir, col) then fst(vecnorm(dir))
+private fun lightdir(d) = if d is Directional(dir, col) then fst(vecnorm(dir))
 
-fun lightcolour(x) = if x is
+private fun lightcolour(x) = if x is
   Directional(dir, col) then col
   Point(pos, col) then col
 
@@ -70,7 +70,7 @@ data
     Refract(v: Num) extends Surfspec
     Body(v: [Num, Num, Num]) extends Surfspec
 
-fun ambientsurf(ss) =
+private fun ambientsurf(ss) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     x :: t and
@@ -80,7 +80,7 @@ fun ambientsurf(ss) =
   head(append(lscomp(ss), ([0.0, 0.0, 0.0] :: Nil)))
 
 
-fun diffusesurf(ss) =
+private fun diffusesurf(ss) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     x :: t and
@@ -90,7 +90,7 @@ fun diffusesurf(ss) =
   head(append(lscomp(ss), ([0.0, 0.0, 0.0] :: Nil)))
 
 
-fun specularsurf(ss) =
+private fun specularsurf(ss) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     x :: t and
@@ -100,7 +100,7 @@ fun specularsurf(ss) =
   head(append(lscomp(ss), ([0.0, 0.0, 0.0] :: Nil)))
 
 
-fun specpowsurf(ss) =
+private fun specpowsurf(ss) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     x :: t and
@@ -110,7 +110,7 @@ fun specpowsurf(ss) =
   head(append(lscomp(ss), (8.0 :: Nil)))
 
 
-fun reflectsurf(ss) =
+private fun reflectsurf(ss) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     x :: t and
@@ -120,7 +120,7 @@ fun reflectsurf(ss) =
   head(append(lscomp(ss), (0.0 :: Nil)))
 
 
-fun transmitsurf(ss) =
+private fun transmitsurf(ss) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     x :: t and
@@ -130,7 +130,7 @@ fun transmitsurf(ss) =
   head(append(lscomp(ss), (0.0 :: Nil)))
 
 
-fun refractsurf(ss) =
+private fun refractsurf(ss) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     x :: t and
@@ -140,7 +140,7 @@ fun refractsurf(ss) =
   head(append(lscomp(ss), (1.0 :: Nil)))
 
 
-fun bodysurf(ss) =
+private fun bodysurf(ss) =
   fun lscomp(ls) = if ls is
     Nil then Nil
     x :: t and
@@ -152,7 +152,7 @@ fun bodysurf(ss) =
 
 data class Sphere(pos: [Num, Num, Num], radius: Num, surface: List[Surfspec])
 
-fun spheresurf(s) = if s is Sphere(pos, rad, surf) then surf
+private fun spheresurf(s) = if s is Sphere(pos, rad, surf) then surf
 
 val lookat = [0.0, 0.0, 0.0]
 val vup = [0.0, 0.0, 1.0]
@@ -192,12 +192,12 @@ val background = [0.078, 0.361, 0.753]
 //│ testspheres = [Sphere([0, 0, 0], 0.5, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([0.272166, 0.272166, 0.544331], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([0.643951, 0.172546, 0], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([0.172546, 0.643951, 0], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([-0.371785, 0.0996195, 0.544331], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([-0.471405, 0.471405, 0], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([-0.643951, -0.172546, 0], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([0.0996195, -0.371785, 0.544331], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([-0.172546, -0.643951, 0], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)]),Sphere([0.471405, -0.471405, 0], 0.166667, [Ambient([0.035, 0.0325, 0.025]),Diffuse([0.5, 0.45, 0.35]),Specular([0.8, 0.8, 0.8]),Specpow(3),Reflect(0.5)])]
 //│ vup = [0, 0, 1]
 
-fun spherenormal(pos, sp) = if sp is Sphere(spos, rad, _) then
+private fun spherenormal(pos, sp) = if sp is Sphere(spos, rad, _) then
   vecscale(vecsub(pos, spos), 1 / rad)
 
-fun dtor(x) = x * pi / 180.0
+private fun dtor(x) = x * pi / 180.0
 
-fun camparams(lookfrom, lookat, vup, fov, winsize) =
+private fun camparams(lookfrom, lookat, vup, fov, winsize) =
   let initfirstray = vecsub(lookat, lookfrom)
   if vecnorm(initfirstray) is
     [lookdir, dist] and vecnorm(veccross(lookdir, vup)) is [scrni, _] and vecnorm(veccross(scrni, lookdir)) is [scrnj, _] then
@@ -212,7 +212,7 @@ fun camparams(lookfrom, lookat, vup, fov, winsize) =
       let firstray = vecsub(initfirstray, vecadd(vecscale(scrnx, (0.5 * xwinsize)), vecscale(scrny, (0.5 * ywinsize))))
       [firstray, scrnx, scrny]
 
-fun sphereintersect(pos, dir, sp) =
+private fun sphereintersect(pos, dir, sp) =
   if sp is Sphere(spos, rad, _) then
     let m = vecsub(pos, spos)
     let bm = vecdot(m, dir)
@@ -227,7 +227,7 @@ fun sphereintersect(pos, dir, sp) =
         else [true, shi]
       else [true, slo]
 
-fun trace(spheres, pos, dir) =
+private fun trace(spheres, pos, dir) =
   fun f(d1s1, d2s2) =
     if d1s1 is [d1, s1] and d2s2 is [d2, s2_] and
       d1 < d2 then [d1, s1]
@@ -249,7 +249,7 @@ fun trace(spheres, pos, dir) =
       [true, mindist, sp]
 
 
-fun refractray(newindex, olddir, innorm) =
+private fun refractray(newindex, olddir, innorm) =
   let dotp = -vecdot(olddir, innorm)
   let matchIdent_17 = if dotp < 0.0 then
     [vecscale(innorm, -1.0), -dotp, 1.0 / newindex]
@@ -264,11 +264,11 @@ fun refractray(newindex, olddir, innorm) =
       else
         ([false, vecadd(vecscale(norm, t), vecscale(olddir, nr))])
 
-fun lightdirection(l, pt) = if l is
+private fun lightdirection(l, pt) = if l is
   Directional(dir, col) then [fst(vecnorm(dir)), infinity]
   Point(pos, col) then vecnorm(vecsub(pos, pt))
 
-fun shadowed(pos, dir, lcolour) =
+private fun shadowed(pos, dir, lcolour) =
   if trace(testspheres, vecadd(pos, vecscale(dir, epsilon)), dir) is
     [is_hit, dist, sp] then
       if not(is_hit) then
@@ -276,7 +276,7 @@ fun shadowed(pos, dir, lcolour) =
       else
         [true, lcolour]
 
-fun lightray(l, pos, norm, refl, surf) =
+private fun lightray(l, pos, norm, refl, surf) =
   if lightdirection(l, pos) is
     [ldir, dist] then
       let cosangle = vecdot(ldir, norm)
@@ -299,7 +299,7 @@ fun lightray(l, pos, norm, refl, surf) =
             else vecadd(diffcont, speccont)
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun shade(lights, sp, lookpos, dir, dist, contrib) =
+private fun shade(lights, sp, lookpos, dir, dist, contrib) =
   let hitpos = vecadd(lookpos, vecscale(dir, dist))
   let ambientlight = [1.0, 1.0, 1.0]
   let surf = spheresurf(sp)
@@ -321,7 +321,7 @@ fun shade(lights, sp, lookpos, dir, dist, contrib) =
     let rcol = if is_zerovector(reflectiv) then trcol else (reflectray(hitpos, refl, lights, reflectiv, contrib, trcol))
     rcol
 
-fun transmitray(lights, colour, pos, dir, index, intens, contrib, norm) =
+private fun transmitray(lights, colour, pos, dir, index, intens, contrib, norm) =
   let newcontrib = vecmult(intens, contrib)
   if refractray(index, dir, norm) is
     [is_tir, newdir] then
@@ -338,7 +338,7 @@ fun transmitray(lights, colour, pos, dir, index, intens, contrib, norm) =
           else
             ([false, vecadd(vecmult(newcol, intens), colour)])
 
-fun reflectray(pos, newdir, lights, intens, contrib, colour) =
+private fun reflectray(pos, newdir, lights, intens, contrib, colour) =
   let newcontrib = vecmult(intens, contrib)
   let nearpos = vecadd(pos, vecscale(newdir, epsilon))
   if trace(testspheres, nearpos, newdir) is [is_hit, dist, sp] then
@@ -353,19 +353,19 @@ fun reflectray(pos, newdir, lights, intens, contrib, colour) =
         (vecadd(colour, vecmult(newcol, intens)))
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun tracepixel(spheres, lights, x, y, firstray, scrnx, scrny) =
+private fun tracepixel(spheres, lights, x, y, firstray, scrnx, scrny) =
   let pos = lookfrom
   if vecnorm(vecadd(vecadd(firstray, vecscale(scrnx, x)), vecscale(scrny, y))) is [dir, tracepixel_Tup2_1] and trace(spheres, pos, dir) is [hit, dist, sp] and
     hit then shade(lights, sp, pos, dir, dist, [1.0, 1.0, 1.0])
     else background
 
-fun z_of_int(x) = globalThis.BigInt(x)
+private fun z_of_int(x) = globalThis.BigInt(x)
 
-fun hash(param) =
+private fun hash(param) =
   fun u8(x) = z_of_int(round(255 * x))
   foldr(((rgb, acc) => if rgb is [r, g, b] then u8(r) + (u8(g) * z_of_int(7)) + (u8(b) * z_of_int(23)) + (acc * z_of_int(61))), z_of_int(0), param)
 
-fun ray(winsize) =
+private fun ray(winsize) =
   let lights = testlights
   if camparams(lookfrom, lookat, vup, fov, winsize) is [firstray, scrnx, scrny] then
     fun f(i, j) = tracepixel(testspheres, lights, i, j, firstray, scrnx, scrny)
@@ -378,9 +378,9 @@ fun ray(winsize) =
         lscomp2(enumFromTo(0, winsize - 1))
     lscomp1(enumFromTo(0, winsize - 1))
 
-fun run(winsize) = hash(map(snd, ray(winsize)))
+private fun run(winsize) = hash(map(snd, ray(winsize)))
 
-fun testSphere_nofib(n) = run(n)
+private fun testSphere_nofib(n) = run(n)
 
 
 fun main() = testSphere_nofib(30)

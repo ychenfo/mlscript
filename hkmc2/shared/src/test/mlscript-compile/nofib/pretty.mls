@@ -36,25 +36,25 @@ val cNil = CNil
 val cNL = CNewline
 //│ cNL = CNewline
 
-fun cAppend(cs1, cs2) = CAppend(cs1, cs2)
+private fun cAppend(cs1, cs2) = CAppend(cs1, cs2)
 
-fun cIndent(n, cs) = CIndent(n, cs)
+private fun cIndent(n, cs) = CIndent(n, cs)
 
-fun cStr(s) = CStr(s)
+private fun cStr(s) = CStr(s)
 
-fun cCh(c) = CCh(c)
+private fun cCh(c) = CCh(c)
 
-fun mkIndent(n, s) = if n
+private fun mkIndent(n, s) = if n
   === 0 then s
   >= 8 then "\t" :: mkIndent(n - 8, s)
   else " " :: mkIndent(n - 1, s)
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun flattenS(nlp, seqs) = if seqs is
+private fun flattenS(nlp, seqs) = if seqs is
   Nil then Nil
   [col, seq] :: seqs then flatten(col, nlp, seq, seqs)
 
-fun flatten(n, nlp, cseq, seqs) = if cseq is
+private fun flatten(n, nlp, cseq, seqs) = if cseq is
   CNil then flattenS(nlp, seqs)
   CAppend(seq1, seq2) then flatten(n, nlp, seq1, [n, seq2] :: seqs)
   CIndent(n_, seq) then flatten(n_ + n, nlp, seq, seqs)
@@ -67,78 +67,78 @@ fun flatten(n, nlp, cseq, seqs) = if cseq is
     else c :: flattenS(false, seqs)
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun cShow(seq) = flatten(0, true, seq, Nil)
+private fun cShow(seq) = flatten(0, true, seq, Nil)
 
 data class MkPrettyRep(cseq: CSeq, n: Int, b1: Bool, b2: Bool)
 
-fun ppShow(width, p: Function) = if p(width, false) is
+private fun ppShow(width, p: Function) = if p(width, false) is
   MkPrettyRep(seq, ll, emp, sl) then cShow(seq)
 
-fun ppUnformatted(p: Function) = if p(80, false) is
+private fun ppUnformatted(p: Function) = if p(80, false) is
   MkPrettyRep(seq, ll, emp, sl) then cShow(seq)
 
-fun ppNil(width, is_vert) = MkPrettyRep(cNil, 0, true, width >= 0)
+private fun ppNil(width, is_vert) = MkPrettyRep(cNil, 0, true, width >= 0)
 
-fun ppStr(s, width, is_vert) =
+private fun ppStr(s, width, is_vert) =
   let ls = listLen(s)
   MkPrettyRep(cStr(s), ls, false, width >= ls)
 
-fun ppChar(c, width, is_vert) = MkPrettyRep(cCh(c), 1, false, width >= 1)
+private fun ppChar(c, width, is_vert) = MkPrettyRep(cCh(c), 1, false, width >= 1)
 
-fun ppInt(n, width, is_vert) = ppStr(nofibStringToList(stringOfInt(n)), width, is_vert)
+private fun ppInt(n, width, is_vert) = ppStr(nofibStringToList(stringOfInt(n)), width, is_vert)
 
-fun pp_SP(a, b) = ppStr(nofibStringToList(", "), a, b)
+private fun pp_SP(a, b) = ppStr(nofibStringToList(", "), a, b)
 
-fun ppSP(a, b) = ppChar(" ", a, b)
+private fun ppSP(a, b) = ppChar(" ", a, b)
 
-fun ppLbrack(a, b) = ppChar("[", a, b)
+private fun ppLbrack(a, b) = ppChar("[", a, b)
 
-fun ppRbrack(a, b) = ppChar("]", a, b)
+private fun ppRbrack(a, b) = ppChar("]", a, b)
 
-fun ppLparen(a, b) = ppChar("(", a, b)
+private fun ppLparen(a, b) = ppChar("(", a, b)
 
-fun ppRparen(a, b) = ppChar(")", a, b)
+private fun ppRparen(a, b) = ppChar(")", a, b)
 
-fun ppSemi(a, b) = ppChar(";", a, b)
+private fun ppSemi(a, b) = ppChar(";", a, b)
 
-fun ppComma(a, b) = ppChar(",", a, b)
+private fun ppComma(a, b) = ppChar(",", a, b)
 
-fun andL(a, b) = if a then b else false
+private fun andL(a, b) = if a then b else false
 
-fun orL(a, b) = if a then true else b
+private fun orL(a, b) = if a then true else b
 
-fun ppBeside(p1: Function, p2: Function, width, is_vert) = if p1(width, false) is
+private fun ppBeside(p1: Function, p2: Function, width, is_vert) = if p1(width, false) is
   MkPrettyRep(seq1, ll1, emp1, sl1) and p2(width - ll1, false) is
     MkPrettyRep(seq2, ll2, emp2, sl2) then
       MkPrettyRep(cAppend(seq1, cIndent(ll1, seq2)), ll1 + ll2, andL(emp1, emp2), andL(width >= 0, andL(sl1, sl2)))
 
-fun ppBesides(ps: List[Function]) = if ps is
+private fun ppBesides(ps: List[Function]) = if ps is
   Nil then ppNil
   else foldr1((a, b) => (c, d) => ppBeside(a, b, c, d), ps)
 
-fun ppBesideSP(p1: Function, p2: Function, width, is_vert) = if p1(width, false) is MkPrettyRep(seq1, ll1, emp1, sl1) then
+private fun ppBesideSP(p1: Function, p2: Function, width, is_vert) = if p1(width, false) is MkPrettyRep(seq1, ll1, emp1, sl1) then
   let li = if emp1 then 0 else ll1 + 1
   if p2(width - li, false) is MkPrettyRep(seq2, ll2, emp2, sl2) then
     let wi = if emp1 then 0 else 1
     let sp = if orL(emp1, emp2) then cNil else cCh(" ")
     MkPrettyRep(cAppend(seq1, cAppend(sp, cIndent(li, seq2))), li + ll2, andL(emp1, emp2), andL(width >= wi, andL(sl1, sl2)))
 
-fun ppCat(ps) = if ps is Nil then ppNil else foldr1((a, b) => (c, d) => ppBesideSP(a, b, c, d), ps)
+private fun ppCat(ps) = if ps is Nil then ppNil else foldr1((a, b) => (c, d) => ppBesideSP(a, b, c, d), ps)
 
-fun ppAbove(p1: Function, p2: Function, width, is_vert) = if p1(width, true) is
+private fun ppAbove(p1: Function, p2: Function, width, is_vert) = if p1(width, true) is
   MkPrettyRep(seq1, ll1, emp1, sl1) and p2(width, true) is
     MkPrettyRep(seq2, ll2, emp2, sl2) then
       let nl = if orL(emp1, emp2) then cNil else cNL
       MkPrettyRep(cAppend(seq1, cAppend(nl, seq2)), ll2, andL(emp1, emp2), false)
 
-fun ppAboves(ps: List[Function], a, b) = if ps is Nil then ppNil(a, b) else foldr1((a, b) => (c, d) => ppAbove(a, b, c, d), ps)(a, b)
+private fun ppAboves(ps: List[Function], a, b) = if ps is Nil then ppNil(a, b) else foldr1((a, b) => (c, d) => ppAbove(a, b, c, d), ps)(a, b)
 
-fun ppNest(n, p: Function, width, is_vert) = if
+private fun ppNest(n, p: Function, width, is_vert) = if
   is_vert and p(width - n, true) is MkPrettyRep(seq, ll, emp, sl) then
     MkPrettyRep(cIndent(n, seq), ll + n, emp, sl)
   else p(width, false)
 
-fun ppHang(p1: Function, n, p2: Function, width, is_vert) = if p1(width, false) is
+private fun ppHang(p1: Function, n, p2: Function, width, is_vert) = if p1(width, false) is
   MkPrettyRep(seq1, ll1, emp1, sl1) and p2(width - (ll1 + 1), false) is
     MkPrettyRep(seq2, ll2, emp2, sl2) and p2(width - n, false) is
       MkPrettyRep(seq2_, ll2_, emp2_, sl2_) and
@@ -147,7 +147,7 @@ fun ppHang(p1: Function, n, p2: Function, width, is_vert) = if p1(width, false) 
           MkPrettyRep(cAppend(seq1, cAppend(cCh(" "), cIndent(ll1 + 1, seq2))), ll1 + 1 + ll2, false, andL(sl1, sl2))
         else MkPrettyRep(cAppend(seq1, cAppend(cNL, cIndent(n, seq2_))), ll2_, false, false)
 
-fun testPretty_nofib() =
+private fun testPretty_nofib() =
   fun pp_word(a, b) = ppStr(nofibStringToList("xxxxx"), a, b)
   let pp_words = replicate(50, pp_word)
   fun pretty_stuff(a, b) = ppAboves(

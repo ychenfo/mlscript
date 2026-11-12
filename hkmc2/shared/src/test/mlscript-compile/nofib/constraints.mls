@@ -14,66 +14,66 @@ data class Assign(varr: Int, value: Int)
 data class CSP(vars: Int, vals: Int, rel: Function)
 
 //│ ————————————————————————————————————————————————————————————————————————————————
-fun qsort(le, ls, r) = if ls is
+private fun qsort(le, ls, r) = if ls is
   Nil then r
   x :: Nil then x :: r
   x :: xs then qpart(le, x, xs, Nil, Nil, r)
 
-fun qpart(le: Function, x, ls, rlt, rge, r) = if ls is
+private fun qpart(le: Function, x, ls, rlt, rge, r) = if ls is
   Nil then rqsort(le, rlt, x :: rqsort(le, rge, r))
   y :: ys and
     le(x, y) then qpart(le, x, ys, rlt, y :: rge, r)
     else qpart(le, x, ys, y :: rlt, rge, r)
 
-fun rqsort(le, ls, r) = if ls is
+private fun rqsort(le, ls, r) = if ls is
   Nil then r
   x :: Nil then x :: r
   x :: xs then rqpart(le, x, xs, Nil, Nil, r)
 
-fun rqpart(le: Function, x, ls, rle, rgt, r) = if ls is
+private fun rqpart(le: Function, x, ls, rle, rgt, r) = if ls is
   Nil then rqsort(le, rle, x :: qsort(le, rgt, r))
   y :: ys and
     le(y, x) then rqpart(le, x, ys, y :: rle, rgt, r)
     else rqpart(le, x, ys, rle, y :: rgt, r)
 //│ ————————————————————————————————————————————————————————————————————————————————
 
-fun level(a) = if a is Assign(v, _) then v
+private fun level(a) = if a is Assign(v, _) then v
 
-fun value(a) = if a is Assign(_, v) then v
+private fun value(a) = if a is Assign(_, v) then v
 
-fun maxLevel(ls) = if ls is
+private fun maxLevel(ls) = if ls is
   Nil then 0
   Assign(v, _) :: t then v
 
-fun complete(csp, s) = if csp is CSP(v, _, _) then maxLevel(s) == v
+private fun complete(csp, s) = if csp is CSP(v, _, _) then maxLevel(s) == v
 
-fun safe(as1, as2) = if as1 is Assign(i, m) and as2 is Assign(j, n) then not(m == n) and not(abs(i - j) == abs(m - n))
+private fun safe(as1, as2) = if as1 is Assign(i, m) and as2 is Assign(j, n) then not(m == n) and not(abs(i - j) == abs(m - n))
 
-fun queens(n) = CSP(n, n, safe)
+private fun queens(n) = CSP(n, n, safe)
 
 // -- Figure 2.  Trees in Haskell.
 data class Node[out T](lab: T, children: List[Node[T]])
 
-fun label(n) = if n is Node(l, _) then l
+private fun label(n) = if n is Node(l, _) then l
 
-fun mapTree(f: Function, n) = if n is Node(l, c) then Node(f(l), map((x => mapTree(f, x)), c))
+private fun mapTree(f: Function, n) = if n is Node(l, c) then Node(f(l), map((x => mapTree(f, x)), c))
 
-fun foldTree(f: Function, n) = if n is Node(l, c) then f(l, map((x => foldTree(f, x)), c))
+private fun foldTree(f: Function, n) = if n is Node(l, c) then f(l, map((x => foldTree(f, x)), c))
 
-fun filterTree(p: Function, t) =
+private fun filterTree(p: Function, t) =
   fun f1(a, cs) = Node(a, filter(x => p(label(x)), cs))
   foldTree(f1, t)
 
-fun prune(p: Function, t) = filterTree(x => not(p(x)), t)
+private fun prune(p: Function, t) = filterTree(x => not(p(x)), t)
 
-fun leaves(t) = if t is
+private fun leaves(t) = if t is
   Node(leaf, Nil) then leaf :: Nil
   Node(_, cs) then concat(map(leaves, cs))
 
-fun initTree(f: Function, x) = Node(x, map(y => initTree(f, y), f(x)))
+private fun initTree(f: Function, x) = Node(x, map(y => initTree(f, y), f(x)))
 
 // -- Figure 3.  Simple backtracking solver for CSPs.
-fun mkTree(csp) = if csp is CSP(vars, vals, rel) then
+private fun mkTree(csp) = if csp is CSP(vars, vals, rel) then
   fun next(ss) =
     if maxLevel(ss) < vars then
       fun lscomp1(ls) = if ls is
@@ -87,19 +87,19 @@ fun mkTree(csp) = if csp is CSP(vars, vals, rel) then
   initTree(next, Nil)
 
 
-fun earliestInconsistency(csp, aas) = if csp is CSP(vars, vals, rel) and aas is
+private fun earliestInconsistency(csp, aas) = if csp is CSP(vars, vals, rel) and aas is
   Nil then None
   a :: as_ and filter(x => not(rel(a, x)), reverse(as_)) is
     Nil then None
     b :: _ then Some([level(a), level(b)])
 
-fun labelInconsistencies(csp, t) =
+private fun labelInconsistencies(csp, t) =
   fun f2(s) = [s, earliestInconsistency(csp, s)]
 
   mapTree(f2, t)
 
 
-fun btsolver0(csp) =
+private fun btsolver0(csp) =
   filter of
     x => complete(csp, x)
     leaves of
@@ -114,17 +114,17 @@ abstract class ConflictSet: Known | Unknown
 data class Known(vs: List[Int]) extends ConflictSet
 object Unknown extends ConflictSet
 
-fun knownConflict(c) = if c is
+private fun knownConflict(c) = if c is
   Known(a :: as_) then true
   else false
 
-fun knownSolution(c) = if c is
+private fun knownSolution(c) = if c is
   Known(Nil) then true
   else false
 
-fun checkComplete(csp, s) = if complete(csp, s) then Known(Nil) else Unknown
+private fun checkComplete(csp, s) = if complete(csp, s) then Known(Nil) else Unknown
 
-fun search(labeler: Function, csp) =
+private fun search(labeler: Function, csp) =
   map of
     fst
     filter of
@@ -133,14 +133,14 @@ fun search(labeler: Function, csp) =
         x => knownConflict(snd(x))
         labeler(csp, mkTree(csp))
 
-fun bt(csp, t) =
+private fun bt(csp, t) =
   fun f3(s) = [s, (if earliestInconsistency(csp, s) is Some([a, b]) then Known(a :: b :: Nil) else checkComplete(csp, s))]
 
   mapTree(f3, t)
 
 // -- Figure 8. Backmarking.
 
-fun emptyTable(csp) = if csp is CSP(vars, vals, rel) then
+private fun emptyTable(csp) = if csp is CSP(vars, vals, rel) then
   fun lscomp1(ls) = if ls is
     Nil then Nil
     n :: t1 then
@@ -153,7 +153,7 @@ fun emptyTable(csp) = if csp is CSP(vars, vals, rel) then
   Nil :: lscomp1(enumFromTo(1, vars))
 
 
-fun fillTable(s, csp, tbl) = if s is
+private fun fillTable(s, csp, tbl) = if s is
   Nil then tbl
   Assign(var_, val_) :: as_ and csp is CSP(vars, vals, rel) then
     fun f4(cs, varval) = if varval is [varr, vall] and
@@ -171,7 +171,7 @@ fun fillTable(s, csp, tbl) = if s is
     zipWith((x, y) => zipWith(f4, x, y), tbl, lscomp1(enumFromTo(var_ + 1, vars)))
 
 
-fun lookupCache(csp, t) =
+private fun lookupCache(csp, t) =
   fun f5(csp, tp) = if tp is
     [Nil, tbl] then [[Nil, Unknown], tbl]
     [a :: as_, tbl] then
@@ -182,19 +182,19 @@ fun lookupCache(csp, t) =
   mapTree(x => f5(csp, x), t)
 
 
-fun cacheChecks(csp, tbl, n) = if n is Node(s, cs) then
+private fun cacheChecks(csp, tbl, n) = if n is Node(s, cs) then
   Node([s, tbl], map(x => cacheChecks(csp, fillTable(s, csp, tail(tbl)), x), cs))
 
-fun bm(csp, t) = mapTree(fst, lookupCache(csp, cacheChecks(csp, emptyTable(csp), t)))
+private fun bm(csp, t) = mapTree(fst, lookupCache(csp, cacheChecks(csp, emptyTable(csp), t)))
 
 // -- Figure 10. Conflict-directed backjumping.
-fun combine(ls, acc) = if ls is
+private fun combine(ls, acc) = if ls is
   Nil then acc
   [s, Known(cs)] :: css and
     notElem(maxLevel(s), cs) then cs
     else combine(css, union(cs, acc))
 
-fun bj_(csp, t) =
+private fun bj_(csp, t) =
   fun f7(tp2, chs) = if tp2 is
     [a, Known(cs)] then Node([a, Known(cs)], chs)
     [a, Unknown] and
@@ -205,7 +205,7 @@ fun bj_(csp, t) =
   foldTree(f7, t)
 
 
-fun bj(csp, t) =
+private fun bj(csp, t) =
   fun f6(tp2, chs) = if tp2 is
     [a, Known(cs)] then Node([a, Known(cs)], chs)
     [a, Unknown] then Node([a, Known(combine(map(label, chs), Nil))], chs)
@@ -213,16 +213,16 @@ fun bj(csp, t) =
   foldTree(f6, t)
 
 
-fun bjbt(csp, t) = bj(csp, bt(csp, t))
+private fun bjbt(csp, t) = bj(csp, bt(csp, t))
 
-fun bjbt_(csp, t) = bj_(csp, bt(csp, t))
+private fun bjbt_(csp, t) = bj_(csp, bt(csp, t))
 
 // -- Figure 11. Forward checking.
-fun collect(ls) = if ls is
+private fun collect(ls) = if ls is
   Nil then Nil
   Known(cs) :: css then union(cs, collect(css))
 
-fun domainWipeout(csp, t) = if csp is CSP(vars, vals, rel) then
+private fun domainWipeout(csp, t) = if csp is CSP(vars, vals, rel) then
   fun f8(tp2) = if tp2 is [[as_, cs], tbl] then
     let wipedDomains = 
       fun lscomp1(ls) = if ls is
@@ -237,11 +237,11 @@ fun domainWipeout(csp, t) = if csp is CSP(vars, vals, rel) then
   mapTree(f8, t)
 
 
-fun fc(csp, t) = domainWipeout(csp, lookupCache(csp, cacheChecks(csp, emptyTable(csp), t)))
+private fun fc(csp, t) = domainWipeout(csp, lookupCache(csp, cacheChecks(csp, emptyTable(csp), t)))
 
-fun try_(n, algorithm) = listLen(search(algorithm, queens(n)))
+private fun try_(n, algorithm) = listLen(search(algorithm, queens(n)))
 
-fun testConstraints_nofib(n) = map(x => try_(n, x), bt :: bm :: bjbt :: bjbt_ :: fc :: Nil)
+private fun testConstraints_nofib(n) = map(x => try_(n, x), bt :: bm :: bjbt :: bjbt_ :: fc :: Nil)
 
 
 fun main() = testConstraints_nofib(6).toString()

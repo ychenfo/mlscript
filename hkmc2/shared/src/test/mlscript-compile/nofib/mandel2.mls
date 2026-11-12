@@ -45,24 +45,24 @@ val right = [ 1, 0]
 //│ size = 200
 //│ up = [0, -1]
 
-fun equalp(p1, p2) = if p1 is [x1, x2] and p2 is [y1, y2] then (x1 == y1) and (x2 == y2)
+private fun equalp(p1, p2) = if p1 is [x1, x2] and p2 is [y1, y2] then (x1 == y1) and (x2 == y2)
 
-fun np(x) = pmn + (x * delta_p)
+private fun np(x) = pmn + (x * delta_p)
 
-fun nq(y) = qmn + (y * delta_q)
+private fun nq(y) = qmn + (y * delta_q)
 
-fun radius(x, y) = (x * x) + (y * y)
+private fun radius(x, y) = (x * x) + (y * y)
 
-fun new_x(x, y, p) = (x * x) - (y * y) + p
+private fun new_x(x, y, p) = (x * x) - (y * y) + p
 
-fun new_y(x, y, q) = (2.0 * x * y) + q
+private fun new_y(x, y, q) = (2.0 * x * y) + q
 
-fun finite(t) = if t is
+private fun finite(t) = if t is
   Leaf(c) then c == c
   NS(t1, t2) then finite(t1) and finite(t2)
   EW(t1, t2) then finite(t1) and finite(t2)
 
-fun check_radius(p, q, k, x, y) = 
+private fun check_radius(p, q, k, x, y) = 
   let xn = new_x(x, y, p)
   let yn = new_y(x, y, q)
   let r = radius(xn, yn)
@@ -72,9 +72,9 @@ fun check_radius(p, q, k, x, y) =
     r > m then kp
     else check_radius(p, q, kp, xn, yn)
 
-fun point_colour(xy) = if xy is [x, y] then check_radius(np(x), nq(y), 0, 0.0, 0.0)
+private fun point_colour(xy) = if xy is [x, y] then check_radius(np(x), nq(y), 0, 0.0, 0.0)
 
-fun check_perim(x1y1, x2y2) =
+private fun check_perim(x1y1, x2y2) =
   let col1         = point_colour(x1y1)
   if x1y1 is [x1, y1] and x2y2 is [x2, y2] then
 
@@ -100,7 +100,7 @@ fun check_perim(x1y1, x2y2) =
       else -1
 
 
-fun build_tree(x1y1, x2y2) =
+private fun build_tree(x1y1, x2y2) =
   if x1y1 is [x1, y1] and x2y2 is [x2, y2] then
     let rec_col = check_perim(x1y1, x2y2)
     if
@@ -119,7 +119,7 @@ fun build_tree(x1y1, x2y2) =
       split == "NS" then NS(build_tree(nsp1, nsp2), build_tree(nsp3, nsp4))
       else EW(build_tree(ewp1, ewp2), build_tree(ewp3, ewp4))
 
-fun testMandel2_nofib(n) =
+private fun testMandel2_nofib(n) =
   finite(build_tree([0,0], [size, intDiv(size, 2)]))
 
 

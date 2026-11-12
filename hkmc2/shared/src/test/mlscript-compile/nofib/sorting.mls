@@ -8,14 +8,14 @@ module sorting with ...
 
 
 
-fun int_of_char(c) = c.codePointAt(0)
+private fun int_of_char(c) = c.codePointAt(0)
 
 object
   EQ
   GT
   LT
 
-fun compareList(xs, ys) = if xs is
+private fun compareList(xs, ys) = if xs is
   Nil and ys is
     Nil then EQ
     _ :: _ then LT
@@ -25,25 +25,25 @@ fun compareList(xs, ys) = if xs is
     int_of_char(x) < int_of_char(y) then LT
     else GT
 
-fun gtList(a, b) = compareList(a, b) is GT
+private fun gtList(a, b) = compareList(a, b) is GT
 
-fun leList(a, b) = not(gtList(a, b))
+private fun leList(a, b) = not(gtList(a, b))
 
-fun ltList(a, b) = compareList(a, b) is LT
+private fun ltList(a, b) = compareList(a, b) is LT
 
-fun geList(a, b) = not(ltList(a, b))
+private fun geList(a, b) = not(ltList(a, b))
 
-fun eqList(a, b) = compareList(a, b) is EQ
+private fun eqList(a, b) = compareList(a, b) is EQ
 
-fun prependToAll(sep, xs) = if xs is
+private fun prependToAll(sep, xs) = if xs is
   Nil then Nil
   x :: xs_ then sep :: x :: prependToAll(sep, xs_)
 
-fun intersperse(sep, xs) = if xs is
+private fun intersperse(sep, xs) = if xs is
   Nil then Nil
   x :: xs_ then x :: prependToAll(sep, xs_)
 
-fun lines(s) = if
+private fun lines(s) = if
   s is Nil then Nil
   break_(x => x === "\n", s) is [l, s_] then
     let tt = if s_ is
@@ -51,19 +51,19 @@ fun lines(s) = if
       _ :: s__ then lines(s__)
     l :: tt
 
-fun unlines(ls) = concat(map(l => l +: ("\n" :: Nil), ls))
+private fun unlines(ls) = concat(map(l => l +: ("\n" :: Nil), ls))
 
-fun odd(x) = intMod(x, 2) === 0
+private fun odd(x) = intMod(x, 2) === 0
 
-fun z_of_int(x) = globalThis.BigInt(x)
+private fun z_of_int(x) = globalThis.BigInt(x)
 
-fun hash(str) = foldl(
+private fun hash(str) = foldl(
   (acc, c) => z_of_int(int_of_char(c)) + (acc * z_of_int(31)),
   z_of_int(0),
   str
 )
 
-fun quickSort(xs) = if xs is
+private fun quickSort(xs) = if xs is
   Nil then Nil
   x :: xs_ then
     fun lscomp1(ls) = if ls is
@@ -78,19 +78,19 @@ fun quickSort(xs) = if xs is
         else lscomp2(t)
     quickSort(lscomp1(xs_)) +: (x :: quickSort(lscomp2(xs_)))
 
-fun select(p, x, ts_fs) = if ts_fs is [ts, fs] and
+private fun select(p, x, ts_fs) = if ts_fs is [ts, fs] and
   p(x) then [x :: ts, fs]
   else [ts, x :: fs]
 
-fun partition(p, xs) = foldr((x, y) => select(p, x, y), [Nil, Nil], xs)
+private fun partition(p, xs) = foldr((x, y) => select(p, x, y), [Nil, Nil], xs)
 
-fun quickSort2(xs) = if xs is
+private fun quickSort2(xs) = if xs is
   Nil then Nil
   x :: xs_ then
     if partition(y => geList(x, y), xs_) is [lo, hi] then
       quickSort2(lo) +: (x :: quickSort2(hi))
 
-fun quickerSort(xss) = if xss is
+private fun quickerSort(xss) = if xss is
   Nil then Nil
   x :: Nil then x :: Nil
   x :: xs then
@@ -101,7 +101,7 @@ fun quickerSort(xss) = if xss is
         else split(x, lo, y :: hi, ys_)
     split(x, Nil, Nil, xs)
 
-fun insertSort(xss) = if xss is
+private fun insertSort(xss) = if xss is
   Nil then Nil
   x :: xs then
     fun trins(rev, xs, ys) = if xs is
@@ -118,7 +118,7 @@ object Tip extends Tree[Nothing]
 
 data class Branch[T](a: T, l: Tree[T], r: Tree[T]) extends Tree[T]
 
-fun treeSort(param) =
+private fun treeSort(param) =
   fun mkTree(innerparam) =
     fun to_tree(x, t) = if t is
       Tip then Branch(x, Tip, Tip)
@@ -140,7 +140,7 @@ data
     Twig2[T](a: T) extends Tree2[T]
     Branch2[T](a: T, l: Tree2[T], r: Tree2[T]) extends Tree2[T]
 
-fun treeSort2(param) =
+private fun treeSort2(param) =
   fun mkTree(innerparam) =
     fun to_tree(x, t) = if t is
       Tip2 then Twig2(x)
@@ -157,7 +157,7 @@ fun treeSort2(param) =
     Branch2(x, l, r) then readTree(l) +: (x :: readTree(r))
   readTree(mkTree(param))
 
-fun heapSort(xs) =
+private fun heapSort(xs) =
   fun heap(k, xs) = if xs is
     Nil then Tip
     x :: xs_ then to_heap(k, x, heap(k + 1, xs_))
@@ -179,7 +179,7 @@ fun heapSort(xs) =
       else Branch(y, Branch(x, l1, r1), mix(l2, r2))
   clear(heap(0, xs))
 
-fun mergeSort(param) =
+private fun mergeSort(param) =
   fun runsplit(run, xs) = if
     run is Nil and xs is Nil then Nil
     xs is Nil then run :: Nil
@@ -204,7 +204,7 @@ fun mergeSort(param) =
       else y :: merge(x :: xs_, ys_)
   merge_lists(runsplit(Nil, param))
 
-fun mangle(inpt) =
+private fun mangle(inpt) =
   fun sort(param) =
     foldr(
       (f, g) => x => f(g(x)),
@@ -213,7 +213,7 @@ fun mangle(inpt) =
     )(param)
   unlines(sort(lines(inpt)))
 
-fun testSorting_nofib(d) =
+private fun testSorting_nofib(d) =
   let f = nofibStringToList of fs.readFileSync("./hkmc2/shared/src/test/mlscript/nofib/input/Main.hs").toString()
   hash(mangle(f))
 

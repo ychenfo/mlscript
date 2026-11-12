@@ -11,27 +11,27 @@ module mandel with ...
 
 data class Pixmap(a: Int, b: Int, c: Int, d:List[[Int, Int, Int]])
 
-fun createPixmap(width, height, max, colours) = Pixmap(width, height, max, colours)
+private fun createPixmap(width, height, max, colours) = Pixmap(width, height, max, colours)
 
 data class Complex(r: Num, i: Num)
 
-fun comp_magnitude(c) = if c is Complex(a, b) then sqrt(a * a + b * b)
+private fun comp_magnitude(c) = if c is Complex(a, b) then sqrt(a * a + b * b)
 
-fun comp_times(x, y) = if
+private fun comp_times(x, y) = if
   x is Complex(a, b) and y is Complex(c, d) then Complex((a * c) - (b * d), (a * d) + (b * c))
 
-fun comp_plus(x, y) = if
+private fun comp_plus(x, y) = if
   x is Complex(a, b) and y is Complex(c, d) then Complex(a + c, b + d)
 
-fun mandel(c) =
+private fun mandel(c) =
   fun infiniteMandel() = lazy of () =>
     LzCons(c, map_lz((z => comp_plus(comp_times(z, z), c)), infiniteMandel()))
   infiniteMandel()
 
-fun diverge(cmplx, radius) =
+private fun diverge(cmplx, radius) =
   comp_magnitude(cmplx) > radius
 
-fun whenDiverge(limit, radius, c) =
+private fun whenDiverge(limit, radius, c) =
   fun walkIt(ls) = if force(ls) is
     LzNil then 0
     LzCons(x, xs) and
@@ -40,9 +40,9 @@ fun whenDiverge(limit, radius, c) =
 
   walkIt(take_lz_lz(limit, mandel(c)))
 
-fun parallelMandel(mat, limit, radius) = map(c => whenDiverge(limit, radius, c), mat)
+private fun parallelMandel(mat, limit, radius) = map(c => whenDiverge(limit, radius, c), mat)
 
-fun mandelset(x, y, x_, y_, screenX, screenY, lIMIT) =
+private fun mandelset(x, y, x_, y_, screenX, screenY, lIMIT) =
   fun prettyRGB(s) =
     let t = lIMIT - s
     [s, t, t]
@@ -63,7 +63,7 @@ fun mandelset(x, y, x_, y_, screenX, screenY, lIMIT) =
   createPixmap(screenX, screenY, lIMIT, map(prettyRGB, result))
 
 
-fun testMandel_nofib(dummy) =
+private fun testMandel_nofib(dummy) =
   let minx = -2.0
   let miny = -2.0
   let maxx = 2.0

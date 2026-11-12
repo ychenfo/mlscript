@@ -9,46 +9,46 @@ module cryptarithm2 with ...
 
 object Unit
 
-fun unlines(ls) = concat of map(x => x +: ("\n" :: Nil), ls)
+private fun unlines(ls) = concat of map(x => x +: ("\n" :: Nil), ls)
 
-fun lookup(k, t) = if t is
+private fun lookup(k, t) = if t is
   Nil then None
   [x, v] :: t then if k === x then Some(v) else lookup(k, t)
 
-fun delete_(xs, e) = deleteBy((x, y) => x === y, e, xs)
+private fun delete_(xs, e) = deleteBy((x, y) => x === y, e, xs)
 
-fun listDiff(a, ls) = foldl(delete_, a, ls)
+private fun listDiff(a, ls) = foldl(delete_, a, ls)
 
 data class StateT[S, M, A](run: Function)
 
-fun runStateT(m, s) = if m is StateT(run) then run(s)
+private fun runStateT(m, s) = if m is StateT(run) then run(s)
 
-fun bind(m, f: Function) =
+private fun bind(m, f: Function) =
   StateT of
     s => concat of map(case { [a, ss] then runStateT(f(a), ss) }, runStateT(m, s))
 
-fun return_(a) = StateT(s => [a, s] :: Nil)
+private fun return_(a) = StateT(s => [a, s] :: Nil)
 
-fun mapM(f: Function, ls) = foldr((a, r) => bind(f(a), x => bind(r, xs => return_(x :: xs))), return_(Nil), ls)
+private fun mapM(f: Function, ls) = foldr((a, r) => bind(f(a), x => bind(r, xs => return_(x :: xs))), return_(Nil), ls)
 
-fun lift(ls) = StateT(s => concat(map(x => [x, s] :: Nil, ls)))
+private fun lift(ls) = StateT(s => concat(map(x => [x, s] :: Nil, ls)))
 
-fun execStateT(m, s) = concat(map(case { [a, s] then s :: Nil }, runStateT(m, s)))
+private fun execStateT(m, s) = concat(map(case { [a, s] then s :: Nil }, runStateT(m, s)))
 
-fun guard(b) = if b then StateT(s => [Unit, s] :: Nil) else StateT(s => Nil)
+private fun guard(b) = if b then StateT(s => [Unit, s] :: Nil) else StateT(s => Nil)
 
-fun put(s) = StateT(x => [Unit, s] :: Nil)
+private fun put(s) = StateT(x => [Unit, s] :: Nil)
 
 val get = StateT(s => [s, s] :: Nil)
 //│ get = StateT([function])
 
 data class Digits(i: List[Int], c: List[[Char, Int]])
 
-fun digits(d) = if d is Digits(a, b) then a
+private fun digits(d) = if d is Digits(a, b) then a
 
-fun digitEnv(d) = if d is Digits(a, b) then b
+private fun digitEnv(d) = if d is Digits(a, b) then b
 
-fun permute(c) =
+private fun permute(c) =
   bind of
     get
     st =>
@@ -60,7 +60,7 @@ fun permute(c) =
               put(Digits(iss, [c, i] :: digitEnv(st)))
               _p => return_(i)
 
-fun select(c) =
+private fun select(c) =
   bind of
     get
     st =>
@@ -68,11 +68,11 @@ fun select(c) =
         Some(r) then return_(r)
         None then permute(c)
 
-fun rest(ls) = if ls is
+private fun rest(ls) = if ls is
   Nil then Nil
   x :: xs then xs
 
-fun solve(tops, bots, carry) = if bots is
+private fun solve(tops, bots, carry) = if bots is
   bot :: botss then
     bind of
       if tops is
@@ -86,7 +86,7 @@ fun solve(tops, bots, carry) = if bots is
   Nil and tops is Nil and carry === 0 then return_(Unit)
   else StateT(_p => Nil)
 
-fun puzzle(top, bot) =
+private fun puzzle(top, bot) =
   let solution = solve(transpose(map(reverse, top)), reverse(bot), 0)
   let answer = if execStateT(solution, Digits(enumFromTo(0, 9), Nil)) is a :: _ then a
   let env = digitEnv(answer)
@@ -101,7 +101,7 @@ fun puzzle(top, bot) =
       case { [c, i] then c :: nofibStringToList(" => ") +: nofibStringToList(stringOfInt(i)) }
       env
 
-fun testCryptarithm2_nofib(n) =
+private fun testCryptarithm2_nofib(n) =
   let args =
     nofibStringToList("THIRTY") ::
     nofibStringToList("TWELVE") ::

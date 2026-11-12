@@ -8,14 +8,14 @@ module scc with ...
 
 
 
-fun dfs(r: Function, vsns, xs) = if vsns is [vs, ns] and
+private fun dfs(r: Function, vsns, xs) = if vsns is [vs, ns] and
   xs is
     Nil then [vs, ns]
     x :: xs and
       inList(x, vs) then dfs(r, [vs, ns], xs)
       dfs(r, [x :: vs, Nil], r(x)) is [vs', ns'] then dfs(r, [vs', (x :: ns') +: ns], xs)
 
-fun stronglyConnComp(es, vs) =
+private fun stronglyConnComp(es, vs) =
   fun swap(a) = if a is [f, s] then [s, f]
 
   fun new_range(xys, w) = if xys is
@@ -40,7 +40,7 @@ fun stronglyConnComp(es, vs) =
       vs
 
 
-fun testScc_nofib(d) =
+private fun testScc_nofib(d) =
   let a = 1
   let b = 2
   let c = 3
