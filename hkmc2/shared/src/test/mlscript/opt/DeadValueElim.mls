@@ -270,10 +270,10 @@ fun onlyA(x) = mk(x).P#a
 //│ dead-lambda-elim > >>> dead-lambda-elim results >>>
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
-//│ dead-field-elim > eliminable: {0} of Call(member:P¹‹term:P⁰›, [[tmp:tmp⁰, x¹]]) @ onlyB¹.mk²
-//│ dead-field-elim > eliminable: {0} of Call(member:P¹‹term:P⁰›, [[tmp:tmp⁰, x¹]]) @ onlyB⁰.mk²
-//│ dead-field-elim > eliminable: {1} of Call(member:P¹‹term:P⁰›, [[tmp:tmp⁰, x¹]]) @ onlyA¹.mk³
-//│ dead-field-elim > eliminable: {1} of Call(member:P¹‹term:P⁰›, [[tmp:tmp⁰, x¹]]) @ onlyA⁰.mk³
+//│ dead-field-elim > eliminable: {0} of Call(member:P¹‹term:P⁰›, [[tmp:tmp², x¹]]) @ onlyB¹.mk²
+//│ dead-field-elim > eliminable: {0} of Call(member:P¹‹term:P⁰›, [[tmp:tmp², x¹]]) @ onlyB⁰.mk²
+//│ dead-field-elim > eliminable: {1} of Call(member:P¹‹term:P⁰›, [[tmp:tmp², x¹]]) @ onlyA¹.mk³
+//│ dead-field-elim > eliminable: {1} of Call(member:P¹‹term:P⁰›, [[tmp:tmp², x¹]]) @ onlyA⁰.mk³
 //│ dead-field-elim > <<< dead-field-elim results <<<
 //│ dead-read-elim > >>> dead-read-elim results >>>
 //│ dead-read-elim > <<< dead-read-elim results <<<

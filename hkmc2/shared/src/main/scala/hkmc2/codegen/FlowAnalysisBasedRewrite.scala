@@ -373,9 +373,8 @@ object FlowAnalysisBasedRewrite:
   ): Program =
     def mkTl(prefix: Str, debug: Bool) =
       FlowAnalysis.mkTraceLogger(optCfg.config.copy(debug = debug), prefix, tl.sink)(using tl.debugPrinter)
-    val runsEta = eta && (cfg.liftDefns.isDefined || cfg.deforest.isDefined)
     // inferring one-shot functions needs the non-affinity markers, counted with loops and top-level state
-    val infersAffine = runsEta && optCfg.config.inferAffine
+    val infersAffine = eta && optCfg.config.inferAffine
     val flowAnalysisRes = mkTl("flow-analysis > ", optCfg.debug).givenIn:
       FlowAnalysis(
         p,
@@ -388,7 +387,7 @@ object FlowAnalysisBasedRewrite:
       )
     
     val etaExpansionSolver =
-      if runsEta then new EtaExpansionSolver(
+      if eta then new EtaExpansionSolver(
         flowAnalysisRes, mkTl("eta-expansion > ", optCfg.effectiveDebugEta),
         infersAffine, mkTl("infer-affine > ", optCfg.config.effectiveDebugAffine))
       else NoEtaExpansion

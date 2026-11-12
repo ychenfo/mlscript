@@ -326,11 +326,12 @@ fun b() = app(x => print(x), 2)
 a()
 b()
 //│ dead-call-elim > >>> dead-call-elim results >>>
-//│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x¹, 1]]) @ a¹
+//│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x¹, 1]]) @ a³
 //│ dead-call-elim > eliminable: Call(builtin:+⁰, [[x¹, 1]]) @ a⁰
-//│ dead-call-elim > eliminable: Call(k², [[x²]]) @ a¹.app⁰
+//│ dead-call-elim > eliminable: Call(k², [[x²]]) @ a³.app⁰
 //│ dead-call-elim > eliminable: Call(k², [[x²]]) @ a⁰.app⁰
-//│ dead-call-elim > eliminable: Call(member:app¹‹term:app²›, [[member:lambda⁰‹term:lambda¹›, 1]]) @ a¹
+//│ dead-call-elim > eliminable: Call(member:app¹‹term:app²›, [[member:lambda⁰‹term:lambda¹›, 1]]) @ a³
+//│ dead-call-elim > eliminable: Call(member:a¹‹term:a²›, [[]]) @ <root>
 //│ dead-call-elim > <<< dead-call-elim results <<<
 //│ dead-branch-elim > >>> dead-branch-elim results >>>
 //│ dead-branch-elim > <<< dead-branch-elim results <<<
@@ -339,14 +340,10 @@ b()
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ let a_app$app, a$a;
+//│ let a_app$app;
 //│ @private @private
 //│ define a_app$app as fun a_app$app⁰(k, x) {
 //│   return 0
-//│ };
-//│ @private
-//│ define a$a as fun a$a⁰() {
-//│   return undefined
 //│ };
 //│ @private
 //│ define app⁰ as fun app¹(k, x) {
@@ -367,7 +364,6 @@ b()
 //│   };
 //│   return app¹(lambda¹, 2)
 //│ };
-//│ do a$a⁰();
 //│ return b¹()
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ > 2

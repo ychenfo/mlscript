@@ -79,7 +79,7 @@ object Config:
     // sanityChecks = S(SanityChecks(light = true)),
     checkCasts = true,
     effectHandlers = N,
-    liftDefns = S(LiftDefns()),
+    liftDefns = N,
     patMatConsequentSharingThreshold = default.patMatConsequentSharingThreshold, // minimum: 1
     target = CompilationTarget.JS,
     rewriteWhileLoops = false,

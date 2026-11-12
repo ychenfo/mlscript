@@ -861,11 +861,14 @@ class FlowConstraintsCollector(
         protected def successors(f: TermSymbol): Ls[TermSymbol] =
           var callees = Ls.empty[TermSymbol]
           object CollectAllReferredFun extends BlockTraverser:
-            override def applyPath(p: Path) = p match
+            override def applyPath(p: Path) =
+              p match
               case FunRef(callee, _) =>
                 if preAnalyzer.res.rootFunDefns.contains(callee) then
                   callees ::= callee
               case _ => ()
+              // a reference can sit inside another path, eg, a lifted closure under a `Cast`
+              super.applyPath(p)
           CollectAllReferredFun.applyBlock(preAnalyzer.res.rootFunDefns(f).body)
           callees
         protected def isHandled(f: TermSymbol) = funsToProdStratScheme.contains(f)
@@ -1199,11 +1202,10 @@ class FlowConstraintsCollector(
         case ValDefn(tsym, sym, rhs) =>
           val rhsStrat = processResult(rhs)
           cc.constrain(rhsStrat, generatedVars(tsym))
+        // defining a function only creates a closure: its body's effects go to the function's own effect var
         case fun: FunDefn =>
-          // The eta optimizer requires lifting. 
-          // Other definitions are deliberately opaque.
-          markUnsafeEta()
           processFunctionDefn(fun)
+        // Other definitions are deliberately opaque.
         case cls: ClsLikeDefn =>
           markUnsafeEta()
           processClsLikeDefn(cls)
@@ -1328,7 +1330,12 @@ class FlowConstraintsCollector(
             funsToProdStratScheme.get(f) match
             case Some(fScheme) =>
               fScheme.instantiate(refSite.uid, f)
-            case None => generatedVars(f)
+            case None =>
+              // in poly mode a root function's body only produces into its scheme, so its var stays empty:
+              // only a reference from within its own SCC, which is being analyzed, may have no scheme yet
+              softAssert(mono || !preAnalyzer.res.rootFunDefns.contains(f) || funToSccGroups.contains(f),
+                s"reference to root function ${f.nme} analyzed before its scheme")
+              generatedVars(f)
           case s @ SuperSelect(qual, base, key) =>
             markUnsafeEta()
             cc.constrain(processResult(key), UnknownCons)

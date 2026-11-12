@@ -1,0 +1,498 @@
+:js
+
+
+// * A state-monad program reduced from nofib `lambda`. The lifter turns `env => ...` into a root function
+// * that `lookupVar` refers to only under a cast. In poly mode, the call graph used to miss that reference,
+// * so `lookupVar` was analyzed before the lambda had a scheme, its `MyState` held no function, and
+// * dead-parameter elimination dropped the state argument of `myRunState` (the program returned `undefined`).
+#config(liftDefns: Some(LiftDefns), flowBasedOpt: Some(FlowBasedOpt(mono: false, debugDpe: true, debugDead: true)))
+// #config(liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: false, debugDpe: true, debugDead: true)))
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+:expect 42
+:sir
+:soir
+data class MyState[S, A](r: S -> [S, A])
+private fun myRunState(m, s) = if m is MyState(f) then f(s)
+private fun myBind(m, f) = MyState(s => if myRunState(m, s) is [s_, a] then myRunState(f(a), s_))
+private fun myReturn(a) = MyState(s => [s, a])
+data class Some(x)
+private fun lookup(t) = Some(t)
+private fun myMaybe(f, x) = if x is Some(x) then f(x)
+private fun lookupVar() = MyState(env => [env, myMaybe(x => x, lookup(env))])
+private fun eval(n) = if n is
+  0 then myBind(lookupVar(), t => eval(t))
+  else myReturn(n)
+private fun main() = if myRunState(eval(0), 42) is [s, a] then a
+main()
+//│ ———————————————| Lowered IR |———————————————————————————————————————————————————————————————————————
+//│ let lambda, lambda1, lambda2, lambda3, lambda4, lambda$, lambda$1;
+//│ define lambda4 as fun lambda⁰(t) {
+//│   return eval⁰(t)
+//│ };
+//│ define lambda2 as fun lambda¹(x) {
+//│   return x
+//│ };
+//│ define lambda3 as fun lambda²(env) {
+//│   let tmp, tmp1;
+//│   set tmp = lookup⁰(env);
+//│   set tmp1 = myMaybe⁰(lambda¹, tmp);
+//│   return [env, tmp1]
+//│ };
+//│ @inline
+//│ define lambda$1 as fun lambda$⁰(a)(s) {
+//│   return lambda³(a, s)
+//│ };
+//│ define lambda1 as fun lambda³(a, s) {
+//│   return [s, a]
+//│ };
+//│ @inline
+//│ define lambda$ as fun lambda$¹(m, f)(s) {
+//│   return lambda⁴(m, f, s)
+//│ };
+//│ define lambda as fun lambda⁴(m, f, s) {
+//│   let scrut, a, s_, element1$, element0$, tmp;
+//│   set scrut = myRunState⁰(m, s);
+//│   match scrut
+//│     Array(2) =>
+//│       set element0$ = runtime⁰.Tuple⁰.get⁰(scrut, 0);
+//│       set element1$ = runtime⁰.Tuple⁰.get⁰(scrut, 1);
+//│       set a = element1$;
+//│       set s_ = element0$;
+//│       set tmp = f(a);
+//│       return myRunState⁰(tmp, s_)
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ @private
+//│ define myRunState¹ as fun myRunState⁰(m, s) {
+//│   let f, arg$MyState$0$;
+//│   match m
+//│     MyState⁰ =>
+//│       set arg$MyState$0$ = m.r⁰;
+//│       set f = arg$MyState$0$;
+//│       return f(s)
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ @private
+//│ define myBind⁰ as fun myBind¹(m, f) {
+//│   let lambda$here;
+//│   set lambda$here = lambda$¹(m, f);
+//│   return MyState¹((lambda$here as! Function⁰))
+//│ };
+//│ @private
+//│ define myReturn⁰ as fun myReturn¹(a) {
+//│   let lambda$here;
+//│   set lambda$here = lambda$⁰(a);
+//│   return MyState¹((lambda$here as! Function⁰))
+//│ };
+//│ @private
+//│ define lookup¹ as fun lookup⁰(t) {
+//│   return Some⁰(t)
+//│ };
+//│ @private
+//│ define myMaybe¹ as fun myMaybe⁰(f, x) {
+//│   let x1, arg$Some$0$;
+//│   match x
+//│     Some¹ =>
+//│       set arg$Some$0$ = x.x⁰;
+//│       set x1 = arg$Some$0$;
+//│       return f(x1)
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ @private
+//│ define lookupVar⁰ as fun lookupVar¹() {
+//│   return MyState¹((lambda² as! Function⁰))
+//│ };
+//│ @private
+//│ define eval¹ as fun eval⁰(n) {
+//│   let tmp;
+//│   match n
+//│     0 =>
+//│       set tmp = lookupVar¹();
+//│       return myBind¹(tmp, lambda⁰)
+//│     else
+//│       return myReturn¹(n)
+//│   end
+//│ };
+//│ @private
+//│ define main⁰ as fun main¹() {
+//│   let scrut, s, a, element1$, element0$, tmp;
+//│   set tmp = eval⁰(0);
+//│   set scrut = myRunState⁰(tmp, 42);
+//│   match scrut
+//│     Array(2) =>
+//│       set element0$ = runtime⁰.Tuple⁰.get⁰(scrut, 0);
+//│       set element1$ = runtime⁰.Tuple⁰.get⁰(scrut, 1);
+//│       set a = element1$;
+//│       set s = element0$;
+//│       return a
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ @data
+//│ define MyState² as class MyState⁰ {
+//│   val r¹;
+//│   constructor MyState¹(r) {
+//│     define r¹ as val r⁰ = r;
+//│     end
+//│   }
+//│ };
+//│ @data
+//│ define Some² as class Some¹ {
+//│   val x¹;
+//│   constructor Some⁰(x) { define x¹ as val x⁰ = x; end }
+//│ };
+//│ return main¹()
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, lambda1, lambda2, lambda$, lambda$1;
+//│ define lambda2 as fun lambda⁰(t) {
+//│   match t
+//│     0 =>
+//│       let inlinedVal;
+//│       set inlinedVal = MyState¹((lambda² as! Function⁰));
+//│       return MyState¹((lambda$¹(inlinedVal, lambda⁰) as! Function⁰))
+//│     else
+//│       return MyState¹((lambda$⁰(t) as! Function⁰))
+//│   end
+//│ };
+//│ define lambda1 as fun lambda²(env) {
+//│   let inlinedVal, arg$Some$0$;
+//│   set inlinedVal = Some⁰(env);
+//│   match inlinedVal
+//│     Some¹ =>
+//│       set arg$Some$0$ = inlinedVal.x⁰;
+//│       return [env, arg$Some$0$]
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ @inline
+//│ define lambda$1 as fun lambda$⁰(a)(s) {
+//│   return [s, a]
+//│ };
+//│ @inline
+//│ define lambda$ as fun lambda$¹(m, f)(s) {
+//│   return lambda⁴(m, f, s)
+//│ };
+//│ define lambda as fun lambda⁴(m, f, s) {
+//│   let element1$, element0$, tmp, inlinedVal;
+//│   match m
+//│     MyState⁰ =>
+//│       set inlinedVal = m.r⁰(s);
+//│       match inlinedVal
+//│         Array(2) =>
+//│           set element0$ = runtime⁰.Tuple⁰.get⁰(inlinedVal, 0);
+//│           set element1$ = runtime⁰.Tuple⁰.get⁰(inlinedVal, 1);
+//│           set tmp = f(element1$);
+//│           match tmp
+//│             MyState⁰ =>
+//│               return tmp.r⁰(element0$)
+//│             else
+//│               throw new globalThis⁰.Error⁰("match error")
+//│           end
+//│         else
+//│           throw new globalThis⁰.Error⁰("match error")
+//│       end
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ @private
+//│ define myRunState¹ as fun myRunState⁰(m, s) {
+//│   match m
+//│     MyState⁰ =>
+//│       return m.r⁰(s)
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ @private
+//│ define myBind⁰ as fun myBind¹(m, f) {
+//│   return MyState¹((lambda$¹(m, f) as! Function⁰))
+//│ };
+//│ @private
+//│ define myReturn⁰ as fun myReturn¹(a) {
+//│   return MyState¹((lambda$⁰(a) as! Function⁰))
+//│ };
+//│ @private
+//│ define lookup¹ as fun lookup⁰(t) {
+//│   return Some⁰(t)
+//│ };
+//│ @private
+//│ define myMaybe¹ as fun myMaybe⁰(f, x) {
+//│   let arg$Some$0$;
+//│   match x
+//│     Some¹ =>
+//│       set arg$Some$0$ = x.x⁰;
+//│       return f(arg$Some$0$)
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ @private
+//│ define lookupVar⁰ as fun lookupVar¹() {
+//│   return MyState¹((lambda² as! Function⁰))
+//│ };
+//│ @private
+//│ define eval¹ as fun eval⁰(n) {
+//│   match n
+//│     0 =>
+//│       let inlinedVal;
+//│       set inlinedVal = MyState¹((lambda² as! Function⁰));
+//│       return MyState¹((lambda$¹(inlinedVal, lambda⁰) as! Function⁰))
+//│     else
+//│       return MyState¹((lambda$⁰(n) as! Function⁰))
+//│   end
+//│ };
+//│ @private
+//│ define main⁰ as fun main¹() {
+//│   let inlinedVal, inlinedVal1;
+//│   match 0
+//│     0 =>
+//│       let inlinedVal2;
+//│       set inlinedVal2 = MyState¹((lambda² as! Function⁰));
+//│       set inlinedVal1 = MyState¹((lambda$¹(inlinedVal2, lambda⁰) as! Function⁰));
+//│       match inlinedVal1
+//│         MyState⁰ =>
+//│           set inlinedVal = inlinedVal1.r⁰(42);
+//│           match inlinedVal
+//│             Array(2) =>
+//│               do runtime⁰.Tuple⁰.get⁰(inlinedVal, 0);
+//│               return runtime⁰.Tuple⁰.get⁰(inlinedVal, 1)
+//│             else
+//│               throw new globalThis⁰.Error⁰("match error")
+//│           end
+//│         else
+//│           throw new globalThis⁰.Error⁰("match error")
+//│       end
+//│     else
+//│       set inlinedVal1 = MyState¹((lambda$⁰(0) as! Function⁰));
+//│       set inlinedVal = inlinedVal1.r⁰(42);
+//│       match inlinedVal
+//│         Array(2) =>
+//│           do runtime⁰.Tuple⁰.get⁰(inlinedVal, 0);
+//│           return runtime⁰.Tuple⁰.get⁰(inlinedVal, 1)
+//│         else
+//│           throw new globalThis⁰.Error⁰("match error")
+//│       end
+//│   end
+//│ };
+//│ @data
+//│ define MyState² as class MyState⁰ {
+//│   val r¹;
+//│   constructor MyState¹(r) {
+//│     define r¹ as val r⁰ = r;
+//│     end
+//│   }
+//│ };
+//│ @data
+//│ define Some² as class Some¹ {
+//│   val x¹;
+//│   constructor Some⁰(x) { define x¹ as val x⁰ = x; end }
+//│ };
+//│ return main¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 42
+
+
+// * Control: the same with the lifter, in mono mode.
+#config(liftDefns: Some(LiftDefns), flowBasedOpt: Some(FlowBasedOpt(mono: true, debugDpe: true, debugDead: true)))
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+:noSanityCheck
+:expect 42
+data class MyState[S, A](r: S -> [S, A])
+fun myRunState(m, s) = if m is MyState(f) then f(s)
+fun myBind(m, f) = MyState(s => if myRunState(m, s) is [s_, a] then myRunState(f(a), s_))
+fun myReturn(a) = MyState(s => [s, a])
+data class Some(x)
+fun lookup(t) = Some(t)
+fun myMaybe(f, x) = if x is Some(x) then f(x)
+fun lookupVar() = MyState(env => [env, myMaybe(x => x, lookup(env))])
+fun eval(n) = if n is
+  0 then myBind(lookupVar(), t => eval(t))
+  else myReturn(n)
+fun main() = if myRunState(eval(0), 42) is [s, a] then a
+main()
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ = 42
+
+
+// * Control: the same without the lifter, in poly mode.
+#config(liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: false, debugDpe: true, debugDead: true)))
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+:noSanityCheck
+:expect 42
+data class MyState[S, A](r: S -> [S, A])
+fun myRunState(m, s) = if m is MyState(f) then f(s)
+fun myBind(m, f) = MyState(s => if myRunState(m, s) is [s_, a] then myRunState(f(a), s_))
+fun myReturn(a) = MyState(s => [s, a])
+data class Some(x)
+fun lookup(t) = Some(t)
+fun myMaybe(f, x) = if x is Some(x) then f(x)
+fun lookupVar() = MyState(env => [env, myMaybe(x => x, lookup(env))])
+fun eval(n) = if n is
+  0 then myBind(lookupVar(), t => eval(t))
+  else myReturn(n)
+fun main() = if myRunState(eval(0), 42) is [s, a] then a
+main()
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ = 42
+
+
+// * Control: the same lifted by hand in the lifter's shape (a body function taking the captures and
+// * parameters, plus a curried wrapper forwarding to it), without the lifter, in poly mode.
+#config(liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: false, debugDpe: true, debugDead: true)))
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+:noSanityCheck
+:expect 42
+data class MyState[S, A](r: S -> [S, A])
+fun myRunState(m, s) = if m is MyState(f) then f(s)
+fun bindBody(m, f, s) = if myRunState(m, s) is [s_, a] then myRunState(f(a), s_)
+fun bindL(m, f)(s) = bindBody(m, f, s)
+fun myBind(m, f) = MyState(bindL(m, f))
+fun returnBody(a, s) = [s, a]
+fun returnL(a)(s) = returnBody(a, s)
+fun myReturn(a) = MyState(returnL(a))
+data class Some(x)
+fun lookup(t) = Some(t)
+fun myMaybe(f, x) = if x is Some(x) then f(x)
+fun idL(x) = x
+fun lookupL(env) = [env, myMaybe(idL, lookup(env))]
+fun lookupVar() = MyState(lookupL)
+fun evalL(t) = eval(t)
+fun eval(n) = if n is
+  0 then myBind(lookupVar(), evalL)
+  else myReturn(n)
+fun main() = if myRunState(eval(0), 42) is [s, a] then a
+main()
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > returnBody⁰#0 @ main².eval².myReturn².returnL⁰.returnBody¹ -> eliminable: {1}
+//│ dead-param-elim > returnBody⁰#0 @ main³.eval².myReturn².returnL⁰.returnBody¹ -> eliminable: {1}
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ = 42
+
+
+// * FIXME (diff tests only): dead-parameter elimination passes `undefined` for a dropped parameter, and here it
+// * ends up in the unused first element of the tuple. The result is right, but the pattern `[s, a]` still reads
+// * that element, and the sanity checks reject a call returning `undefined`.
+#config(liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: false, inferAffine: false, debugDpe: true)))
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+:fixme
+:expect 42
+fun returnBody(a, s) = [s, a]
+fun returnL(a)(s) = returnBody(a, s)
+fun eval(n) = if n is
+  0 then s => returnL(s)(s)
+  else returnL(n)
+fun main() = if eval(0)(42) is [s, a] then a
+main()
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > returnBody⁰#0 @ main².eval².returnL⁰.returnBody¹ -> eliminable: {1}
+//│ dead-param-elim > returnBody⁰#0 @ main².eval².returnL¹.returnBody¹ -> eliminable: {1}
+//│ dead-param-elim > returnL²#1 @ main².eval².returnL¹ -> eliminable: {0}
+//│ dead-param-elim > returnBody⁰#0 @ main³.eval².returnL⁰.returnBody¹ -> eliminable: {1}
+//│ dead-param-elim > returnBody⁰#0 @ main³.eval².returnL¹.returnBody¹ -> eliminable: {1}
+//│ dead-param-elim > returnL²#1 @ main³.eval².returnL¹ -> eliminable: {0}
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ ═══[RUNTIME ERROR] Error: MLscript call unexpectedly returned `undefined`, the forbidden value.
+//│ ═══[RUNTIME ERROR] Expected: '42', got: 'undefined'

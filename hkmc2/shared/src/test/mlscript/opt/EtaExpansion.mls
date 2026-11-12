@@ -281,12 +281,15 @@ app(returnRest2(0))
 //│ = [2, 3]
 
 
-// * It doesn't eta-expand if there's no lifting :)
+// * It also eta-expands without lifting.
 :expect 42
 #config(liftDefns: None)
 @affine(0) fun leaf() = 42
 fun node() = leaf
 node()()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > node⁰#0 @ <root>: [0, 0]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
 //│ dead-param-elim > >>> dead-param-elim results >>>
 //│ dead-param-elim > <<< dead-param-elim results <<<
 //│ = 42
@@ -512,3 +515,182 @@ f(k1, 1) + f(k2, 5)
 //│ = 13
 
 
+
+
+// * The blocks below keep local functions and lambdas local.
+#config(liftDefns: None)
+
+
+// * A returned lambda used once is expanded.
+:flowBasedOpt mono debugEta
+:soir
+:noInline
+:expect 3
+private fun add(t) = y => t + y
+private fun f(n) = add(n)
+fun main() = f(1)(2)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f¹⁴#0 @ <root>: [1, 1]
+//│ eta-expansion > add⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define add⁰ as fun add¹(t)(eta$0$0) {
+//│   let lambda;
+//│   @private
+//│   define lambda as fun lambda⁰(y) {
+//│     return +⁰(t, y)
+//│   };
+//│   return lambda⁰(eta$0$0)
+//│ };
+//│ @private
+//│ define f¹⁴ as fun f¹⁵(n)(eta$0$0) {
+//│   return add¹(n)(eta$0$0)
+//│ };
+//│ define main⁰ as fun main¹() { return f¹⁵(1)(2) };
+//│ return main¹()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 3
+
+
+// * A returned local function used once is expanded.
+:flowBasedOpt mono debugEta
+:soir
+:noInline
+:expect 3
+private fun mk(a) =
+  fun g(b) = a + b
+  g
+fun main() = mk(1)(2)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > mk⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define mk⁰ as fun mk¹(a)(eta$0$0) {
+//│   let g;
+//│   define g as fun g¹⁰(b) {
+//│     return +⁰(a, b)
+//│   };
+//│   return g¹⁰(eta$0$0)
+//│ };
+//│ define main² as fun main³() { return mk¹(1)(2) };
+//│ return main³()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 3
+
+
+// * The same, analyzing each use separately.
+:flowBasedOpt poly debugEta
+:expect 3
+private fun mk(a) =
+  fun g(b) = a + b
+  g
+fun main() = mk(1)(2)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > mk²#0 @ main⁴.mk³: [1, 1]
+//│ eta-expansion > mk²#0 @ main⁵.mk³: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 3
+
+
+// * Defining a helper is not an effect: the expanded function defines it on each call.
+:flowBasedOpt mono debugEta
+:soir
+:noInline
+:expect 6
+private fun f(a) =
+  fun inc(x) = x + 1
+  y => inc(a) + inc(y)
+fun main() = f(1)(3)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f¹⁶#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define f¹⁶ as fun f¹⁷(a)(eta$0$0) {
+//│   let inc, lambda;
+//│   define inc as fun inc⁰(x) {
+//│     return +⁰(x, 1)
+//│   };
+//│   @private
+//│   define lambda as fun lambda¹(y) {
+//│     let tmp, tmp1;
+//│     set tmp = inc⁰(a);
+//│     set tmp1 = inc⁰(y);
+//│     return +⁰(tmp, tmp1)
+//│   };
+//│   return lambda¹(eta$0$0)
+//│ };
+//│ define main⁴ as fun main⁵() { return f¹⁷(1)(3) };
+//│ return main⁵()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 6
+
+
+class O(val x)
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * A closure over a cell it writes, called twice: not expanded, so both calls share the cell.
+:flowBasedOpt mono debugEta
+:expect 3
+private fun mk() =
+  let o = new mut O(0)
+  n =>
+    set o.O#x = o.O#x + n
+    o.O#x
+fun main() =
+  let h = mk()
+  h(1)
+  h(2)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 3
+
+
+// can also eta expand local functions
+:flowBasedOpt mono debugEta
+:expect 2
+private fun outter() =
+  fun mk() =
+    let o = new mut O(0)
+    n =>
+      set o.O#x = o.O#x + n
+      o.O#x
+  mk()
+fun main() =
+  let h = outter()
+  h(2)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > outter⁰#0 @ <root>: [0, 1]
+//│ eta-expansion > mk²#0 @ <root>: [0, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 2
+
+
+:flowBasedOpt mono debugEta
+:expect 2
+private fun outter() =
+  let mk = () =>
+    let o = new mut O(0)
+    n =>
+      set o.O#x = o.O#x + n
+      o.O#x
+  mk()
+fun main() =
+  let h = outter()
+  h(2)
+main()
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > outter⁰#0 @ <root>: [0, 1]
+//│ eta-expansion > lambda²#0 @ <root>: [0, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 2

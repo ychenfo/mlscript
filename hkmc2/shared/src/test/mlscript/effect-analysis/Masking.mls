@@ -726,10 +726,12 @@ f(1)
 #config(inlining: None, liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(logEffects: true, debugEta: true, mono: true)))
 //│ flow-analysis > >>> effect-analysis results >>>
 //│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
 
 
 // * `f` and `g` see the captured cell through each other.
-// * `main` is unsafe only because defining a local function always counts as an effect.
+// * `main` creates the cell, so it masks the writes.
 :noTailRec
 :expect 0
 fun main() =
@@ -743,20 +745,24 @@ main()
 //│ flow-analysis > >>> effect-analysis results >>>
 //│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
 //│ flow-analysis > function g⁰#0 @ <root> -> UnsafeEta
-//│ flow-analysis > function main⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function main⁰#0 @ <root> -> Pure
 //│ flow-analysis > call -⁰@result³#0 @ <root> -> Pure
 //│ flow-analysis > call >⁰@result⁴#0 @ <root> -> Pure
 //│ flow-analysis > call f⁰@result²#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call f⁰@result¹#0 @ <root> -> UnsafeEta
 //│ flow-analysis > call g⁰@result⁵#0 @ <root> -> UnsafeEta
-//│ flow-analysis > call main⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call main⁰@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
 //│ = 0
 
 
 #config(inlining: None, liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(logEffects: true, debugEta: true, mono: false)))
 //│ flow-analysis > >>> effect-analysis results >>>
 //│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
 
 
 // * The first program again, analyzing each use separately.
@@ -775,8 +781,8 @@ main()
 //│ flow-analysis > function f⁰#0 @ main⁰ -> UnsafeEta
 //│ flow-analysis > function g⁰#0 @ main² -> UnsafeEta
 //│ flow-analysis > function g⁰#0 @ main⁰ -> UnsafeEta
-//│ flow-analysis > function main¹#0 @ main² -> UnsafeEta
-//│ flow-analysis > function main¹#0 @ main⁰ -> UnsafeEta
+//│ flow-analysis > function main¹#0 @ main² -> Pure
+//│ flow-analysis > function main¹#0 @ main⁰ -> Pure
 //│ flow-analysis > call -⁰@result²#0 @ main² -> Pure
 //│ flow-analysis > call -⁰@result²#0 @ main⁰ -> Pure
 //│ flow-analysis > call >⁰@result¹#0 @ main² -> Pure
@@ -787,8 +793,10 @@ main()
 //│ flow-analysis > call f⁰@result⁴#0 @ main⁰ -> UnsafeEta
 //│ flow-analysis > call g⁰@result⁰#0 @ main² -> UnsafeEta
 //│ flow-analysis > call g⁰@result⁰#0 @ main⁰ -> UnsafeEta
-//│ flow-analysis > call main¹@result⁵#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call main¹@result⁵#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
 //│ = 0
 
 

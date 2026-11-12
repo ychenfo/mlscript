@@ -51,3 +51,1522 @@ h(2)
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
 //│ = 3
 //│ h = fun
+
+
+// * implicit match-error default, without and with `:aggressive`
+#config(inlining: None, liftDefns: Some(LiftDefns), flowBasedOpt: Some(FlowBasedOpt(logEffects: true, debugDead: true, mono: true)))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+data class A(x)
+data class B(y)
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+:soir
+:noAggressive
+private fun f(v) = if v is
+  A(x) then x
+  B(y) then y
+fun main() = f(A(1))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function main⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call f⁰@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > eliminable: B in match on v⁰ @ <root>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define f⁰ as fun f¹(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     else
+//│       throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ define main⁰ as fun main¹() { let tmp; set tmp = A¹(1); return f¹(tmp) };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+:soir
+:aggressive
+private fun f(v) = if v is
+  A(x) then x
+  B(y) then y
+fun main() = f(A(1))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f²#0 @ <root> -> Pure
+//│ flow-analysis > function main²#0 @ <root> -> Pure
+//│ flow-analysis > call f²@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > eliminable: B in match on v⁰ @ <root>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define f² as fun f³(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     else
+//│       @pure throw new globalThis⁰.Error⁰("match error")
+//│   end
+//│ };
+//│ define main² as fun main³() { let tmp; set tmp = A¹(1); return f³(tmp) };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+:soir
+:aggressive
+private fun f(v) = if v is
+  A(x) then x
+  B(y) then y
+  else throw Error("impossible")
+fun main() = f(A(1))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function f⁴#0 @ <root> -> UnsafeEta
+//│ flow-analysis > function main⁴#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call Error@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call f⁴@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > eliminable: B in match on v⁰ @ <root>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define f⁴ as fun f⁵(v) {
+//│   match v
+//│     A⁰ =>
+//│       return v.x⁰
+//│     else
+//│       throw globalThis⁰.Error¹("impossible")
+//│   end
+//│ };
+//│ define main⁴ as fun main⁵() { let tmp; set tmp = A¹(1); return f⁵(tmp) };
+//│ end
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+
+
+// * no lifting, mono: why is `f` not expanded?
+#config(inlining: None, liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: true, debugEta: true, debugAffine: true, logNonAffine: true, logEffects: true)))
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+:expect 3
+private fun add(t) = y => t + y
+private fun f(n) = add(n)
+fun main() = f(1)(2)
+main()
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > add_for_add⁰
+//│ flow-analysis > cap_ub_(term:add,0)_for_add⁰
+//│ flow-analysis > cap_ub_(term:f,0)_for_f⁰
+//│ flow-analysis > cap_ub_(term:main,0)_for_main⁰
+//│ flow-analysis > f_for_f⁰
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function f⁶#0 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> Pure
+//│ flow-analysis > function main⁶#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call f⁶@result²#0 @ <root> -> Pure
+//│ flow-analysis > call main⁶@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f⁶#0 @ <root>: [1, 1]
+//│ eta-expansion > add⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > lambda⁰#0 @ <root>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ = 3
+
+
+// * the same with inlining on
+#config(liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: true, debugEta: true)))
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+
+:expect 3
+private fun add(t) = y => t + y
+private fun f(n) = add(n)
+fun main() = f(1)(2)
+main()
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > add_for_add⁰
+//│ flow-analysis > cap_ub_(term:add,0)_for_add⁰
+//│ flow-analysis > cap_ub_(term:f,0)_for_f⁰
+//│ flow-analysis > cap_ub_(term:main,0)_for_main⁰
+//│ flow-analysis > f_for_f⁰
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function add⁰#0 @ <root> -> Pure
+//│ flow-analysis > function f⁶#0 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> Pure
+//│ flow-analysis > function main⁶#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call f⁶@result²#0 @ <root> -> Pure
+//│ flow-analysis > call main⁶@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f⁶#0 @ <root>: [1, 1]
+//│ eta-expansion > add⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > lambda⁰#0 @ <root>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ = 3
+
+
+// * an argument of a call whose callee has no modeled producer
+#config(inlining: None, liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: true, debugDead: true, deadReadElim: true)))
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+
+data class A(x)
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+
+// * (1) a method parameter
+:soir
+:expect 2
+private fun inc(n) = n + 1
+class K with
+  fun run(f) = f(inc(1))
+new K().run(x => x)
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > cap_ub_(term:lambda,0)_for_lambda⁰
+//│ flow-analysis > tmp⁰
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function inc⁰#0 @ <root> -> Pure
+//│ flow-analysis > function lambda⁰#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call f⁶@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call inc⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > call run@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let tmp, lambda;
+//│ @private
+//│ define inc⁰ as fun inc¹(n) {
+//│   return +⁰(n, 1)
+//│ };
+//│ define K⁰ as class K¹ {
+//│   method run⁰ = fun run¹(f) {
+//│     let tmp1;
+//│     set tmp1 = inc¹(1);
+//│     return f(tmp1)
+//│   }
+//│ };
+//│ set tmp = new K¹();
+//│ define lambda as fun lambda⁰(x) { return x };
+//│ return tmp.run¹(lambda⁰)
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 2
+
+// * (2) a class parameter used in a method
+:soir
+:expect 2
+private fun inc(n) = n + 1
+class K(f) with
+  fun run() = f(inc(1))
+new K(x => x).run()
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > cap_ub_(term:lambda,0)_for_lambda⁰
+//│ flow-analysis > field_f⁰
+//│ flow-analysis > lambda_for_lambda⁰
+//│ flow-analysis > tmp⁰
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function inc²#0 @ <root> -> Pure
+//│ flow-analysis > function lambda¹#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call f@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call inc²@result²#0 @ <root> -> Pure
+//│ flow-analysis > call run@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, tmp;
+//│ @private
+//│ define inc² as fun inc³(n) {
+//│   return +⁰(n, 1)
+//│ };
+//│ define K² as class K⁴ {
+//│   private val f⁶;
+//│   constructor K³(f) {
+//│     set K⁴.this.f⁶ = f;
+//│     end
+//│   }
+//│   method run² = fun run³() {
+//│     let tmp1;
+//│     set tmp1 = inc³(1);
+//│     return K⁴.this.f⁶(tmp1)
+//│   }
+//│ };
+//│ define lambda as fun lambda¹(x) { return x };
+//│ set tmp = new K⁴(lambda¹);
+//│ return tmp.run³()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 2
+
+// * (3) a class parameter, with a read of a known object
+:soir
+:expect 1
+class K(f) with
+  fun run() =
+    let a = A(1)
+    f(a.x)
+new K(x => x).run()
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > cap_ub_(term:lambda,0)_for_lambda⁰
+//│ flow-analysis > field_f⁰
+//│ flow-analysis > lambda_for_lambda⁰
+//│ flow-analysis > tmp⁰
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function lambda²#0 @ <root> -> Pure
+//│ flow-analysis > call f@result¹#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call run@result⁰#0 @ <root> -> UnsafeEta
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
+//│ let lambda, tmp;
+//│ define K⁵ as class K⁷ {
+//│   private val f⁷;
+//│   constructor K⁶(f) {
+//│     set K⁷.this.f⁷ = f;
+//│     end
+//│   }
+//│   method run⁴ = fun run⁵() {
+//│     let a;
+//│     set a = A²(1);
+//│     return K⁷.this.f⁷(a.x﹖)
+//│   }
+//│ };
+//│ define lambda as fun lambda²(x) { return x };
+//│ set tmp = new K⁷(lambda²);
+//│ return tmp.run⁵()
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+
+// * LiftedLostEdge: which lifter-specific detail breaks the hand-lifted control?
+#config(inlining: None, liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: false, debugDpe: true)))
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+
+// * (a) closure stored through a temporary, as the lifter does
+:noSanityCheck
+:expect 42
+data class MyState[S, A](r: S -> [S, A])
+private fun myRunState(m, s) = if m is MyState(f) then f(s)
+private fun bindBody(m, f, s) = if myRunState(m, s) is [s_, a] then myRunState(f(a), s_)
+private fun bindL(m, f)(s) = bindBody(m, f, s)
+private fun myBind(m, f) =
+  let h = bindL(m, f)
+  MyState(h)
+private fun returnBody(a, s) = [s, a]
+private fun returnL(a)(s) = returnBody(a, s)
+private fun myReturn(a) =
+  let h = returnL(a)
+  MyState(h)
+data class Some(x)
+private fun lookup(t) = Some(t)
+private fun myMaybe(f, x) = if x is Some(x) then f(x)
+private fun idL(x) = x
+private fun lookupL(env) = [env, myMaybe(idL, lookup(env))]
+private fun lookupVar() = MyState(lookupL)
+private fun evalL(t) = eval(t)
+private fun eval(n) = if n is
+  0 then myBind(lookupVar(), evalL)
+  else myReturn(n)
+private fun main() = if myRunState(eval(0), 42) is [s, a] then a
+main()
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > a_for_myReturn_for_eval_for_main¹
+//│ flow-analysis > a_for_myReturn_for_eval_for_main⁰
+//│ flow-analysis > a_for_myReturn_for_eval¹
+//│ flow-analysis > a_for_myReturn_for_eval⁰
+//│ flow-analysis > a_for_myReturn⁰
+//│ flow-analysis > a_for_returnL_for_myReturn_for_eval_for_main¹
+//│ flow-analysis > a_for_returnL_for_myReturn_for_eval_for_main⁰
+//│ flow-analysis > a_for_returnL_for_myReturn_for_eval¹
+//│ flow-analysis > a_for_returnL_for_myReturn_for_eval⁰
+//│ flow-analysis > a_for_returnL_for_myReturn⁰
+//│ flow-analysis > a_for_returnL⁰
+//│ flow-analysis > arg$Some$0$_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > arg$Some$0$_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > arg$Some$0$_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > arg$Some$0$_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > bindBody_for_bindBody⁰
+//│ flow-analysis > bindL_for_bindL⁰
+//│ flow-analysis > call_res_for_eval_for_main¹
+//│ flow-analysis > call_res_for_eval_for_main⁰
+//│ flow-analysis > call_res_for_eval¹
+//│ flow-analysis > call_res_for_eval⁰
+//│ flow-analysis > call_res_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > call_res_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > call_res_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > call_res_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > call_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > call_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > call_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > call_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > cap_ub_(term:bindBody,0)_for_bindBody⁰
+//│ flow-analysis > cap_ub_(term:bindL,0)_for_bindL⁰
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL_for_myBind⁰
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL⁰
+//│ flow-analysis > cap_ub_(term:eval,0)_for_eval_for_main¹
+//│ flow-analysis > cap_ub_(term:eval,0)_for_eval_for_main⁰
+//│ flow-analysis > cap_ub_(term:eval,0)_for_eval¹
+//│ flow-analysis > cap_ub_(term:eval,0)_for_eval⁰
+//│ flow-analysis > cap_ub_(term:evalL,0)_for_evalL_for_main¹
+//│ flow-analysis > cap_ub_(term:evalL,0)_for_evalL_for_main⁰
+//│ flow-analysis > cap_ub_(term:evalL,0)_for_evalL¹
+//│ flow-analysis > cap_ub_(term:evalL,0)_for_evalL⁰
+//│ flow-analysis > cap_ub_(term:idL,0)_for_idL⁰
+//│ flow-analysis > cap_ub_(term:lookup,0)_for_lookup⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL⁰
+//│ flow-analysis > cap_ub_(term:lookupVar,0)_for_lookupVar⁰
+//│ flow-analysis > cap_ub_(term:main,0)_for_main⁰
+//│ flow-analysis > cap_ub_(term:myBind,0)_for_myBind⁰
+//│ flow-analysis > cap_ub_(term:myMaybe,0)_for_myMaybe⁰
+//│ flow-analysis > cap_ub_(term:myReturn,0)_for_myReturn⁰
+//│ flow-analysis > cap_ub_(term:myRunState,0)_for_myRunState⁰
+//│ flow-analysis > cap_ub_(term:returnBody,0)_for_returnBody⁰
+//│ flow-analysis > cap_ub_(term:returnL,0)_for_returnL⁰
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL_for_myReturn_for_eval_for_main¹
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL_for_myReturn_for_eval_for_main⁰
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL_for_myReturn_for_eval¹
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL_for_myReturn_for_eval⁰
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL_for_myReturn⁰
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL⁰
+//│ flow-analysis > element0$_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > element0$_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > element0$_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > element0$_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > element1$_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > element1$_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > element1$_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > element1$_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > env_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > env_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > env_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > env_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > env_for_lookupL_for_lookupVar⁰
+//│ flow-analysis > env_for_lookupL⁰
+//│ flow-analysis > evalL_for_evalL_for_main¹
+//│ flow-analysis > evalL_for_evalL_for_main⁰
+//│ flow-analysis > evalL_for_evalL¹
+//│ flow-analysis > evalL_for_evalL⁰
+//│ flow-analysis > eval_for_eval_for_main¹
+//│ flow-analysis > eval_for_eval_for_main⁰
+//│ flow-analysis > eval_for_eval²
+//│ flow-analysis > eval_for_eval¹
+//│ flow-analysis > eval_for_eval⁰
+//│ flow-analysis > f_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > f_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > f_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > f_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > f_for_bindL_for_myBind⁰
+//│ flow-analysis > f_for_bindL⁰
+//│ flow-analysis > f_for_myBind_for_eval_for_main¹
+//│ flow-analysis > f_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > f_for_myBind_for_eval¹
+//│ flow-analysis > f_for_myBind_for_eval⁰
+//│ flow-analysis > f_for_myBind⁰
+//│ flow-analysis > field_0_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > field_0_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > field_0_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > field_0_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > field_1_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > field_1_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > field_1_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > field_1_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > field_r_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > field_r_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > field_r_for_lookupVar_for_eval¹
+//│ flow-analysis > field_r_for_lookupVar_for_eval⁰
+//│ flow-analysis > field_x_for_lookup_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > field_x_for_lookup_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > field_x_for_lookup_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > field_x_for_lookup_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > idL_for_idL⁰
+//│ flow-analysis > idL_res_for_idL_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > idL_res_for_idL_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > idL_res_for_idL_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > idL_res_for_idL_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > lookupL_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > lookupL_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > lookupL_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > lookupL_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > lookupL_for_lookupL⁰
+//│ flow-analysis > lookupVar_for_lookupVar⁰
+//│ flow-analysis > lookupVar_res_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > lookupVar_res_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > lookupVar_res_for_lookupVar_for_eval¹
+//│ flow-analysis > lookupVar_res_for_lookupVar_for_eval⁰
+//│ flow-analysis > lookup_for_lookup⁰
+//│ flow-analysis > m_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > m_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > m_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > m_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > m_for_bindL_for_myBind⁰
+//│ flow-analysis > m_for_bindL⁰
+//│ flow-analysis > m_for_myBind_for_eval_for_main¹
+//│ flow-analysis > m_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > m_for_myBind_for_eval¹
+//│ flow-analysis > m_for_myBind_for_eval⁰
+//│ flow-analysis > m_for_myBind⁰
+//│ flow-analysis > myBind_for_myBind⁰
+//│ flow-analysis > myMaybe_for_myMaybe⁰
+//│ flow-analysis > myMaybe_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > myMaybe_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > myMaybe_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > myMaybe_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > myReturn_for_myReturn⁰
+//│ flow-analysis > myRunState_for_myRunState⁰
+//│ flow-analysis > n_for_eval_for_main¹
+//│ flow-analysis > n_for_eval_for_main⁰
+//│ flow-analysis > n_for_eval¹
+//│ flow-analysis > n_for_eval⁰
+//│ flow-analysis > returnBody_for_returnBody⁰
+//│ flow-analysis > returnL_for_returnL⁰
+//│ flow-analysis > s__for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > s__for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > s__for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > s__for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > s_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > s_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > s_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > s_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > s_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > s_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > s_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > s_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval_for_main²
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval_for_main³
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval²
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval³
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > s_for_myRunState_for_main¹
+//│ flow-analysis > s_for_myRunState_for_main⁰
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval_for_main²
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval_for_main³
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval²
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval³
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > sel_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > sel_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > sel_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > sel_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > t_for_evalL_for_main¹
+//│ flow-analysis > t_for_evalL_for_main⁰
+//│ flow-analysis > t_for_evalL¹
+//│ flow-analysis > t_for_evalL⁰
+//│ flow-analysis > t_for_lookup_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > t_for_lookup_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > t_for_lookup_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > t_for_lookup_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > tmp_for_eval_for_main¹
+//│ flow-analysis > tmp_for_eval_for_main⁰
+//│ flow-analysis > tmp_for_eval¹
+//│ flow-analysis > tmp_for_eval⁰
+//│ flow-analysis > tmp_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > tmp_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > tmp_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > tmp_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > x_for_idL_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > x_for_idL_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > x_for_idL_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > x_for_idL_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > x_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > x_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > x_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > x_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function bindBody¹#0 @ bindBody² -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ bindL².bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ eval².myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ myBind².bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#0 @ bindL² -> Pure
+//│ flow-analysis > function bindL⁰#0 @ evalL¹.myBind⁰.bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#0 @ eval².myBind⁰.bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#0 @ main⁶.eval¹.myBind⁰.bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#0 @ main⁸.eval¹.myBind⁰.bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#0 @ myBind².bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#1 @ bindL² -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ evalL¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ eval².myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ main⁶.eval¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ main⁸.eval¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ myBind².bindL¹ -> UnsafeEta
+//│ flow-analysis > function evalL⁰#0 @ evalL¹ -> UnsafeEta
+//│ flow-analysis > function evalL⁰#0 @ eval² -> UnsafeEta
+//│ flow-analysis > function evalL⁰#0 @ main⁶.eval¹ -> UnsafeEta
+//│ flow-analysis > function evalL⁰#0 @ main⁸.eval¹ -> UnsafeEta
+//│ flow-analysis > function eval⁰#0 @ evalL¹ -> UnsafeEta
+//│ flow-analysis > function eval⁰#0 @ eval² -> UnsafeEta
+//│ flow-analysis > function eval⁰#0 @ main⁶.eval¹ -> UnsafeEta
+//│ flow-analysis > function eval⁰#0 @ main⁸.eval¹ -> UnsafeEta
+//│ flow-analysis > function idL⁰#0 @ evalL¹.lookupVar⁰.lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ eval².lookupVar⁰.lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ idL² -> Pure
+//│ flow-analysis > function idL⁰#0 @ lookupL².idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ lookupVar².lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function lookupL⁰#0 @ evalL¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ eval².lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ lookupL² -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ lookupVar².lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupVar¹#0 @ evalL¹.lookupVar⁰ -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ eval².lookupVar⁰ -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ lookupVar² -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ main⁶.eval¹.lookupVar⁰ -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ main⁸.eval¹.lookupVar⁰ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ evalL¹.lookupVar⁰.lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ eval².lookupVar⁰.lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ lookupL².lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ lookupVar².lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ lookup² -> Pure
+//│ flow-analysis > function lookup⁰#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function main⁷#0 @ main⁶ -> UnsafeEta
+//│ flow-analysis > function main⁷#0 @ main⁸ -> UnsafeEta
+//│ flow-analysis > function myBind¹#0 @ evalL¹.myBind⁰ -> UnsafeEta
+//│ flow-analysis > function myBind¹#0 @ eval².myBind⁰ -> UnsafeEta
+//│ flow-analysis > function myBind¹#0 @ main⁶.eval¹.myBind⁰ -> UnsafeEta
+//│ flow-analysis > function myBind¹#0 @ main⁸.eval¹.myBind⁰ -> UnsafeEta
+//│ flow-analysis > function myBind¹#0 @ myBind² -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ evalL¹.lookupVar⁰.lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ eval².lookupVar⁰.lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ lookupL².myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ lookupVar².lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ myMaybe² -> UnsafeEta
+//│ flow-analysis > function myReturn¹#0 @ evalL¹.myReturn⁰ -> UnsafeEta
+//│ flow-analysis > function myReturn¹#0 @ eval².myReturn⁰ -> UnsafeEta
+//│ flow-analysis > function myReturn¹#0 @ main⁶.eval¹.myReturn⁰ -> UnsafeEta
+//│ flow-analysis > function myReturn¹#0 @ main⁸.eval¹.myReturn⁰ -> UnsafeEta
+//│ flow-analysis > function myReturn¹#0 @ myReturn² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ bindBody².myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ bindBody².myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ bindL².bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ bindL².bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ eval².myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ eval².myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁶.myRunState³ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁸.myRunState³ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ myBind².bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ myBind².bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ myRunState⁴ -> UnsafeEta
+//│ flow-analysis > function returnBody⁰#0 @ evalL¹.myReturn⁰.returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ eval².myReturn⁰.returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ main⁶.eval¹.myReturn⁰.returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ main⁸.eval¹.myReturn⁰.returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ myReturn².returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ returnBody² -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ returnL².returnBody¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ evalL¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ eval².myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ main⁶.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ main⁸.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ myReturn².returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ returnL² -> Pure
+//│ flow-analysis > function returnL⁰#1 @ evalL¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ eval².myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ main⁶.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ main⁸.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ myReturn².returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ returnL² -> Pure
+//│ flow-analysis > call bindBody¹@result⁴#0 @ bindL² -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ evalL¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ eval².myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ main⁶.eval¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ main⁸.eval¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ myBind².bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindL⁰@result⁹#0 @ evalL¹.myBind⁰ -> Pure
+//│ flow-analysis > call bindL⁰@result⁹#0 @ eval².myBind⁰ -> Pure
+//│ flow-analysis > call bindL⁰@result⁹#0 @ main⁶.eval¹.myBind⁰ -> Pure
+//│ flow-analysis > call bindL⁰@result⁹#0 @ main⁸.eval¹.myBind⁰ -> Pure
+//│ flow-analysis > call bindL⁰@result⁹#0 @ myBind² -> Pure
+//│ flow-analysis > call eval⁰@result¹⁴#0 @ evalL¹ -> UnsafeEta
+//│ flow-analysis > call eval⁰@result¹⁴#0 @ eval² -> UnsafeEta
+//│ flow-analysis > call eval⁰@result¹⁴#0 @ main⁶.eval¹ -> UnsafeEta
+//│ flow-analysis > call eval⁰@result¹⁴#0 @ main⁸.eval¹ -> UnsafeEta
+//│ flow-analysis > call eval⁰@result¹⁵#0 @ main⁶ -> UnsafeEta
+//│ flow-analysis > call eval⁰@result¹⁵#0 @ main⁸ -> UnsafeEta
+//│ flow-analysis > call f¹⁰@result¹²#0 @ evalL¹.lookupVar⁰.lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ eval².lookupVar⁰.lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ lookupL².myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ lookupVar².lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ myMaybe² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ bindBody².myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ bindBody².myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ bindL².bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ bindL².bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ eval².myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ eval².myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁶.myRunState³ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁸.myRunState³ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ myBind².bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ myBind².bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ myRunState⁴ -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ bindBody² -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ bindL².bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ eval².myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ myBind².bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call lookupVar¹@result¹⁰#0 @ evalL¹ -> Pure
+//│ flow-analysis > call lookupVar¹@result¹⁰#0 @ eval² -> Pure
+//│ flow-analysis > call lookupVar¹@result¹⁰#0 @ main⁶.eval¹ -> Pure
+//│ flow-analysis > call lookupVar¹@result¹⁰#0 @ main⁸.eval¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ evalL¹.lookupVar⁰.lookupL¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ eval².lookupVar⁰.lookupL¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ lookupL² -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ lookupVar².lookupL¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹ -> Pure
+//│ flow-analysis > call main⁷@result¹⁷#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call myBind¹@result³#0 @ evalL¹ -> UnsafeEta
+//│ flow-analysis > call myBind¹@result³#0 @ eval² -> UnsafeEta
+//│ flow-analysis > call myBind¹@result³#0 @ main⁶.eval¹ -> UnsafeEta
+//│ flow-analysis > call myBind¹@result³#0 @ main⁸.eval¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ evalL¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ eval².lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ lookupL² -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ lookupVar².lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myReturn¹@result⁰#0 @ evalL¹ -> UnsafeEta
+//│ flow-analysis > call myReturn¹@result⁰#0 @ eval² -> UnsafeEta
+//│ flow-analysis > call myReturn¹@result⁰#0 @ main⁶.eval¹ -> UnsafeEta
+//│ flow-analysis > call myReturn¹@result⁰#0 @ main⁸.eval¹ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result¹⁶#0 @ main⁶ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result¹⁶#0 @ main⁸ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ bindBody² -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ bindL².bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ eval².myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ myBind².bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ bindBody² -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ bindL².bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ eval².myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ myBind².bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call returnBody⁰@result¹#0 @ evalL¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ eval².myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ main⁶.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ main⁸.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ myReturn².returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ returnL² -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ evalL¹.myReturn⁰ -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ eval².myReturn⁰ -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ main⁶.eval¹.myReturn⁰ -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ main⁸.eval¹.myReturn⁰ -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ myReturn² -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main⁶
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main⁸
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ = 42
+
+// * (b) wrappers marked @inline, as the lifter does
+:noSanityCheck
+:expect 42
+data class MyState[S, A](r: S -> [S, A])
+private fun myRunState(m, s) = if m is MyState(f) then f(s)
+private fun bindBody(m, f, s) = if myRunState(m, s) is [s_, a] then myRunState(f(a), s_)
+@inline private fun bindL(m, f)(s) = bindBody(m, f, s)
+private fun myBind(m, f) = MyState(bindL(m, f))
+private fun returnBody(a, s) = [s, a]
+@inline private fun returnL(a)(s) = returnBody(a, s)
+private fun myReturn(a) = MyState(returnL(a))
+data class Some(x)
+private fun lookup(t) = Some(t)
+private fun myMaybe(f, x) = if x is Some(x) then f(x)
+private fun idL(x) = x
+private fun lookupL(env) = [env, myMaybe(idL, lookup(env))]
+private fun lookupVar() = MyState(lookupL)
+private fun evalL(t) = eval(t)
+private fun eval(n) = if n is
+  0 then myBind(lookupVar(), evalL)
+  else myReturn(n)
+private fun main() = if myRunState(eval(0), 42) is [s, a] then a
+main()
+//│ FAILURE: Unexpected compilation error
+//│ FAILURE LOCATION: subterm (Elaborator.scala:1759)
+//│ ╔══[COMPILATION ERROR] Name not found: inline
+//│ ║  l.1030: 	@inline private fun bindL(m, f)(s) = bindBody(m, f, s)
+//│ ╙──        	^^^^^^^
+//│ FAILURE: Unexpected compilation error
+//│ FAILURE LOCATION: subterm (Elaborator.scala:1759)
+//│ ╔══[COMPILATION ERROR] Name not found: inline
+//│ ║  l.1033: 	@inline private fun returnL(a)(s) = returnBody(a, s)
+//│ ╙──        	^^^^^^^
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > a_for_myReturn_for_eval¹
+//│ flow-analysis > a_for_myReturn_for_eval⁰
+//│ flow-analysis > a_for_myReturn⁰
+//│ flow-analysis > a_for_returnL_for_myReturn_for_eval¹
+//│ flow-analysis > a_for_returnL_for_myReturn_for_eval⁰
+//│ flow-analysis > a_for_returnL_for_myReturn⁰
+//│ flow-analysis > a_for_returnL⁰
+//│ flow-analysis > arg$Some$0$_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > arg$Some$0$_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > arg$Some$0$_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > arg$Some$0$_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > bindBody_for_bindBody⁰
+//│ flow-analysis > bindL_for_bindL⁰
+//│ flow-analysis > call_res_for_eval¹
+//│ flow-analysis > call_res_for_eval⁰
+//│ flow-analysis > call_res_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > call_res_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > call_res_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > call_res_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > call_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > call_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > call_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > call_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > cap_ub_(term:bindBody,0)_for_bindBody⁰
+//│ flow-analysis > cap_ub_(term:bindL,0)_for_bindL⁰
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL_for_myBind⁰
+//│ flow-analysis > cap_ub_(term:bindL,1)_for_bindL⁰
+//│ flow-analysis > cap_ub_(term:eval,0)_for_eval¹
+//│ flow-analysis > cap_ub_(term:eval,0)_for_eval⁰
+//│ flow-analysis > cap_ub_(term:evalL,0)_for_evalL¹
+//│ flow-analysis > cap_ub_(term:evalL,0)_for_evalL⁰
+//│ flow-analysis > cap_ub_(term:idL,0)_for_idL⁰
+//│ flow-analysis > cap_ub_(term:lookup,0)_for_lookup⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL⁰
+//│ flow-analysis > cap_ub_(term:lookupVar,0)_for_lookupVar⁰
+//│ flow-analysis > cap_ub_(term:main,0)_for_main⁰
+//│ flow-analysis > cap_ub_(term:myBind,0)_for_myBind⁰
+//│ flow-analysis > cap_ub_(term:myMaybe,0)_for_myMaybe⁰
+//│ flow-analysis > cap_ub_(term:myReturn,0)_for_myReturn⁰
+//│ flow-analysis > cap_ub_(term:myRunState,0)_for_myRunState⁰
+//│ flow-analysis > cap_ub_(term:returnBody,0)_for_returnBody⁰
+//│ flow-analysis > cap_ub_(term:returnL,0)_for_returnL⁰
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL_for_myReturn_for_eval¹
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL_for_myReturn_for_eval⁰
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL_for_myReturn⁰
+//│ flow-analysis > cap_ub_(term:returnL,1)_for_returnL⁰
+//│ flow-analysis > element0$_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > element0$_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > element0$_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > element0$_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > element1$_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > element1$_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > element1$_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > element1$_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > env_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > env_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > env_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > env_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > env_for_lookupL_for_lookupVar⁰
+//│ flow-analysis > env_for_lookupL⁰
+//│ flow-analysis > evalL_for_evalL¹
+//│ flow-analysis > evalL_for_evalL⁰
+//│ flow-analysis > eval_for_eval²
+//│ flow-analysis > eval_for_eval¹
+//│ flow-analysis > eval_for_eval⁰
+//│ flow-analysis > f_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > f_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > f_for_bindL_for_myBind⁰
+//│ flow-analysis > f_for_bindL⁰
+//│ flow-analysis > f_for_myBind_for_eval¹
+//│ flow-analysis > f_for_myBind_for_eval⁰
+//│ flow-analysis > f_for_myBind⁰
+//│ flow-analysis > field_0_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > field_0_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > field_0_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > field_0_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > field_1_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > field_1_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > field_1_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > field_1_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > field_r_for_lookupVar_for_eval¹
+//│ flow-analysis > field_r_for_lookupVar_for_eval⁰
+//│ flow-analysis > field_x_for_lookup_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > field_x_for_lookup_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > field_x_for_lookup_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > field_x_for_lookup_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > idL_for_idL⁰
+//│ flow-analysis > idL_res_for_idL_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > idL_res_for_idL_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > idL_res_for_idL_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > idL_res_for_idL_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > lookupL_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > lookupL_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > lookupL_for_lookupL⁰
+//│ flow-analysis > lookupVar_for_lookupVar⁰
+//│ flow-analysis > lookupVar_res_for_lookupVar_for_eval¹
+//│ flow-analysis > lookupVar_res_for_lookupVar_for_eval⁰
+//│ flow-analysis > lookup_for_lookup⁰
+//│ flow-analysis > m_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > m_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > m_for_bindL_for_myBind⁰
+//│ flow-analysis > m_for_bindL⁰
+//│ flow-analysis > m_for_myBind_for_eval¹
+//│ flow-analysis > m_for_myBind_for_eval⁰
+//│ flow-analysis > m_for_myBind⁰
+//│ flow-analysis > myBind_for_myBind⁰
+//│ flow-analysis > myMaybe_for_myMaybe⁰
+//│ flow-analysis > myMaybe_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > myMaybe_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > myMaybe_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > myMaybe_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > myReturn_for_myReturn⁰
+//│ flow-analysis > myRunState_for_myRunState⁰
+//│ flow-analysis > n_for_eval_for_main¹
+//│ flow-analysis > n_for_eval_for_main⁰
+//│ flow-analysis > n_for_eval¹
+//│ flow-analysis > n_for_eval⁰
+//│ flow-analysis > returnBody_for_returnBody⁰
+//│ flow-analysis > returnL_for_returnL⁰
+//│ flow-analysis > s__for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > s__for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > s__for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > s__for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > s_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > s_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > s_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > s_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > s_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > s_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > s_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > s_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval_for_main²
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval_for_main³
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval²
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval³
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > s_for_myRunState_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > s_for_myRunState_for_main¹
+//│ flow-analysis > s_for_myRunState_for_main⁰
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval_for_main²
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval_for_main³
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval²
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval³
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval¹
+//│ flow-analysis > sel_res_for_bindBody_for_bindL_for_myBind_for_eval⁰
+//│ flow-analysis > sel_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > sel_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > sel_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > sel_res_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > t_for_evalL_for_main¹
+//│ flow-analysis > t_for_evalL_for_main⁰
+//│ flow-analysis > t_for_evalL¹
+//│ flow-analysis > t_for_evalL⁰
+//│ flow-analysis > t_for_lookup_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > t_for_lookup_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > t_for_lookup_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > t_for_lookup_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > tmp_for_eval¹
+//│ flow-analysis > tmp_for_eval⁰
+//│ flow-analysis > tmp_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > tmp_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > tmp_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > tmp_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > x_for_idL_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > x_for_idL_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > x_for_idL_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > x_for_idL_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > x_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main¹
+//│ flow-analysis > x_for_myMaybe_for_lookupL_for_lookupVar_for_eval_for_main⁰
+//│ flow-analysis > x_for_myMaybe_for_lookupL_for_lookupVar_for_eval¹
+//│ flow-analysis > x_for_myMaybe_for_lookupL_for_lookupVar_for_eval⁰
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function bindBody¹#0 @ bindBody² -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ bindL².bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ eval².myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindBody¹#0 @ myBind².bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#0 @ bindL² -> Pure
+//│ flow-analysis > function bindL⁰#0 @ evalL¹.myBind⁰.bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#0 @ eval².myBind⁰.bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#0 @ main⁶.eval¹.myBind⁰.bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#0 @ main⁸.eval¹.myBind⁰.bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#0 @ myBind².bindL¹ -> Pure
+//│ flow-analysis > function bindL⁰#1 @ bindL² -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ evalL¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ eval².myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ main⁶.eval¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ main⁸.eval¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > function bindL⁰#1 @ myBind².bindL¹ -> UnsafeEta
+//│ flow-analysis > function evalL⁰#0 @ evalL¹ -> Pure
+//│ flow-analysis > function evalL⁰#0 @ eval² -> Pure
+//│ flow-analysis > function evalL⁰#0 @ main⁶.eval¹ -> Pure
+//│ flow-analysis > function evalL⁰#0 @ main⁸.eval¹ -> Pure
+//│ flow-analysis > function eval⁰#0 @ evalL¹ -> Pure
+//│ flow-analysis > function eval⁰#0 @ eval² -> Pure
+//│ flow-analysis > function eval⁰#0 @ main⁶.eval¹ -> Pure
+//│ flow-analysis > function eval⁰#0 @ main⁸.eval¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ evalL¹.lookupVar⁰.lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ eval².lookupVar⁰.lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ idL² -> Pure
+//│ flow-analysis > function idL⁰#0 @ lookupL².idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ lookupVar².lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function idL⁰#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹.idL¹ -> Pure
+//│ flow-analysis > function lookupL⁰#0 @ evalL¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ eval².lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ lookupL² -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ lookupVar².lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupL⁰#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > function lookupVar¹#0 @ evalL¹.lookupVar⁰ -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ eval².lookupVar⁰ -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ lookupVar² -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ main⁶.eval¹.lookupVar⁰ -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ main⁸.eval¹.lookupVar⁰ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ evalL¹.lookupVar⁰.lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ eval².lookupVar⁰.lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ lookupL².lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ lookupVar².lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ lookup² -> Pure
+//│ flow-analysis > function lookup⁰#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function lookup⁰#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹.lookup¹ -> Pure
+//│ flow-analysis > function main⁷#0 @ main⁶ -> UnsafeEta
+//│ flow-analysis > function main⁷#0 @ main⁸ -> UnsafeEta
+//│ flow-analysis > function myBind¹#0 @ evalL¹.myBind⁰ -> Pure
+//│ flow-analysis > function myBind¹#0 @ eval².myBind⁰ -> Pure
+//│ flow-analysis > function myBind¹#0 @ main⁶.eval¹.myBind⁰ -> Pure
+//│ flow-analysis > function myBind¹#0 @ main⁸.eval¹.myBind⁰ -> Pure
+//│ flow-analysis > function myBind¹#0 @ myBind² -> Pure
+//│ flow-analysis > function myMaybe⁰#0 @ evalL¹.lookupVar⁰.lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ eval².lookupVar⁰.lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ lookupL².myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ lookupVar².lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹.myMaybe¹ -> UnsafeEta
+//│ flow-analysis > function myMaybe⁰#0 @ myMaybe² -> UnsafeEta
+//│ flow-analysis > function myReturn¹#0 @ evalL¹.myReturn⁰ -> Pure
+//│ flow-analysis > function myReturn¹#0 @ eval².myReturn⁰ -> Pure
+//│ flow-analysis > function myReturn¹#0 @ main⁶.eval¹.myReturn⁰ -> Pure
+//│ flow-analysis > function myReturn¹#0 @ main⁸.eval¹.myReturn⁰ -> Pure
+//│ flow-analysis > function myReturn¹#0 @ myReturn² -> Pure
+//│ flow-analysis > function myRunState⁰#0 @ bindBody².myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ bindBody².myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ bindL².bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ bindL².bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ eval².myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ eval².myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁶.myRunState³ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ main⁸.myRunState³ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ myBind².bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ myBind².bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > function myRunState⁰#0 @ myRunState⁴ -> UnsafeEta
+//│ flow-analysis > function returnBody⁰#0 @ evalL¹.myReturn⁰.returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ eval².myReturn⁰.returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ main⁶.eval¹.myReturn⁰.returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ main⁸.eval¹.myReturn⁰.returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ myReturn².returnL¹.returnBody¹ -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ returnBody² -> Pure
+//│ flow-analysis > function returnBody⁰#0 @ returnL².returnBody¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ evalL¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ eval².myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ main⁶.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ main⁸.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ myReturn².returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#0 @ returnL² -> Pure
+//│ flow-analysis > function returnL⁰#1 @ evalL¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ eval².myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ main⁶.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ main⁸.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ myReturn².returnL¹ -> Pure
+//│ flow-analysis > function returnL⁰#1 @ returnL² -> Pure
+//│ flow-analysis > call bindBody¹@result⁴#0 @ bindL² -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ evalL¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ eval².myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ main⁶.eval¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ main⁸.eval¹.myBind⁰.bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindBody¹@result⁴#0 @ myBind².bindL¹ -> UnsafeEta
+//│ flow-analysis > call bindL⁰@result⁹#0 @ evalL¹.myBind⁰ -> Pure
+//│ flow-analysis > call bindL⁰@result⁹#0 @ eval².myBind⁰ -> Pure
+//│ flow-analysis > call bindL⁰@result⁹#0 @ main⁶.eval¹.myBind⁰ -> Pure
+//│ flow-analysis > call bindL⁰@result⁹#0 @ main⁸.eval¹.myBind⁰ -> Pure
+//│ flow-analysis > call bindL⁰@result⁹#0 @ myBind² -> Pure
+//│ flow-analysis > call eval⁰@result¹⁴#0 @ evalL¹ -> Pure
+//│ flow-analysis > call eval⁰@result¹⁴#0 @ eval² -> Pure
+//│ flow-analysis > call eval⁰@result¹⁴#0 @ main⁶.eval¹ -> Pure
+//│ flow-analysis > call eval⁰@result¹⁴#0 @ main⁸.eval¹ -> Pure
+//│ flow-analysis > call eval⁰@result¹⁵#0 @ main⁶ -> Pure
+//│ flow-analysis > call eval⁰@result¹⁵#0 @ main⁸ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ evalL¹.lookupVar⁰.lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ eval².lookupVar⁰.lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ lookupL².myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ lookupVar².lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹.myMaybe¹ -> Pure
+//│ flow-analysis > call f¹⁰@result¹²#0 @ myMaybe² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ bindBody².myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ bindBody².myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ bindL².bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ bindL².bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ eval².myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ eval².myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁶.myRunState³ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ main⁸.myRunState³ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ myBind².bindL¹.bindBody⁰.myRunState² -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ myBind².bindL¹.bindBody⁰.myRunState¹ -> UnsafeEta
+//│ flow-analysis > call f⁸@result⁵#0 @ myRunState⁴ -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ bindBody² -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ bindL².bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call f⁹@result⁷#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰ -> Pure
+//│ flow-analysis > call f⁹@result⁷#0 @ eval².myBind⁰.bindL¹.bindBody⁰ -> Pure
+//│ flow-analysis > call f⁹@result⁷#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰ -> Pure
+//│ flow-analysis > call f⁹@result⁷#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰ -> Pure
+//│ flow-analysis > call f⁹@result⁷#0 @ myBind².bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call lookupVar¹@result¹⁰#0 @ evalL¹ -> Pure
+//│ flow-analysis > call lookupVar¹@result¹⁰#0 @ eval² -> Pure
+//│ flow-analysis > call lookupVar¹@result¹⁰#0 @ main⁶.eval¹ -> Pure
+//│ flow-analysis > call lookupVar¹@result¹⁰#0 @ main⁸.eval¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ evalL¹.lookupVar⁰.lookupL¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ eval².lookupVar⁰.lookupL¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ lookupL² -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ lookupVar².lookupL¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹ -> Pure
+//│ flow-analysis > call lookup⁰@result¹³#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹ -> Pure
+//│ flow-analysis > call main⁷@result¹⁷#0 @ <root> -> UnsafeEta
+//│ flow-analysis > call myBind¹@result³#0 @ evalL¹ -> Pure
+//│ flow-analysis > call myBind¹@result³#0 @ eval² -> Pure
+//│ flow-analysis > call myBind¹@result³#0 @ main⁶.eval¹ -> Pure
+//│ flow-analysis > call myBind¹@result³#0 @ main⁸.eval¹ -> Pure
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ evalL¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ eval².lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ lookupL² -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ lookupVar².lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ main⁶.eval¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myMaybe⁰@result¹¹#0 @ main⁸.eval¹.lookupVar⁰.lookupL¹ -> UnsafeEta
+//│ flow-analysis > call myReturn¹@result⁰#0 @ evalL¹ -> Pure
+//│ flow-analysis > call myReturn¹@result⁰#0 @ eval² -> Pure
+//│ flow-analysis > call myReturn¹@result⁰#0 @ main⁶.eval¹ -> Pure
+//│ flow-analysis > call myReturn¹@result⁰#0 @ main⁸.eval¹ -> Pure
+//│ flow-analysis > call myRunState⁰@result¹⁶#0 @ main⁶ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result¹⁶#0 @ main⁸ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ bindBody² -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ bindL².bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ eval².myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁶#0 @ myBind².bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ bindBody² -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ bindL².bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ evalL¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ eval².myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ main⁶.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ main⁸.eval¹.myBind⁰.bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call myRunState⁰@result⁸#0 @ myBind².bindL¹.bindBody⁰ -> UnsafeEta
+//│ flow-analysis > call returnBody⁰@result¹#0 @ evalL¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ eval².myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ main⁶.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ main⁸.eval¹.myReturn⁰.returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ myReturn².returnL¹ -> Pure
+//│ flow-analysis > call returnBody⁰@result¹#0 @ returnL² -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ evalL¹.myReturn⁰ -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ eval².myReturn⁰ -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ main⁶.eval¹.myReturn⁰ -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ main⁸.eval¹.myReturn⁰ -> Pure
+//│ flow-analysis > call returnL⁰@result²#0 @ myReturn² -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > returnBody⁰#0 @ main⁶.eval¹.myReturn⁰.returnL¹.returnBody¹ -> eliminable: {1}
+//│ dead-param-elim > returnBody⁰#0 @ main⁸.eval¹.myReturn⁰.returnL¹.returnBody¹ -> eliminable: {1}
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main⁶
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main⁸
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ = 42
+
+
+// * can a hand-written program put a function reference inside a cast?
+#config(inlining: None, liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: false)))
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+
+:sir
+data class MyState(r: Function)
+private fun lookupL(env) = [env, env]
+private fun g(f: Function) = f
+private fun lookupVar() = [MyState(lookupL), g(lookupL)]
+//│ FAILURE: Unexpected compilation error
+//│ FAILURE LOCATION: traverseSign (Resolver.scala:1120)
+//│ ╔══[COMPILATION ERROR] Expected 2 type arguments, got none
+//│ ║  l.1499: 	data class MyState(r: Function)
+//│ ╙──        	                      ^^^^^^^^
+//│ FAILURE: Unexpected compilation error
+//│ FAILURE LOCATION: traverseSign (Resolver.scala:1120)
+//│ ╔══[COMPILATION ERROR] Expected 2 type arguments, got none
+//│ ║  l.1501: 	private fun g(f: Function) = f
+//│ ╙──        	                 ^^^^^^^^
+//│ ———————————————| Lowered IR |———————————————————————————————————————————————————————————————————————
+//│ @private
+//│ define lookupL⁰ as fun lookupL¹(env) {
+//│   return [env, env]
+//│ };
+//│ @private
+//│ define g⁰ as fun g¹(f) {
+//│   return f
+//│ };
+//│ @private
+//│ define lookupVar⁰ as fun lookupVar¹() {
+//│   let tmp, tmp1;
+//│   set tmp = MyState⁰(lookupL¹);
+//│   set tmp1 = g¹(lookupL¹);
+//│   return [tmp, tmp1]
+//│ };
+//│ @data
+//│ define MyState¹ as class MyState² {
+//│   val r⁰;
+//│   constructor MyState⁰(r) { define r⁰ as val r¹ = r; end }
+//│ };
+//│ end
+//│ flow-analysis > >>> non-affine syms >>>
+//│ flow-analysis > cap_ub_(term:g,0)_for_g⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar¹
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL_for_lookupVar⁰
+//│ flow-analysis > cap_ub_(term:lookupL,0)_for_lookupL⁰
+//│ flow-analysis > cap_ub_(term:lookupVar,0)_for_lookupVar⁰
+//│ flow-analysis > env_for_lookupL_for_lookupVar¹
+//│ flow-analysis > env_for_lookupL_for_lookupVar⁰
+//│ flow-analysis > env_for_lookupL⁰
+//│ flow-analysis > g_for_g⁰
+//│ flow-analysis > lookupL_for_lookupL⁰
+//│ flow-analysis > <<< non-affine syms <<<
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function g¹#0 @ g³ -> Pure
+//│ flow-analysis > function g¹#0 @ lookupVar².g² -> Pure
+//│ flow-analysis > function lookupL¹#0 @ lookupL⁴ -> Pure
+//│ flow-analysis > function lookupL¹#0 @ lookupVar².lookupL² -> Pure
+//│ flow-analysis > function lookupL¹#0 @ lookupVar².lookupL³ -> Pure
+//│ flow-analysis > function lookupVar¹#0 @ lookupVar² -> Pure
+//│ flow-analysis > call g¹@result⁰#0 @ lookupVar² -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ infer-affine > >>> inferred affine >>>
+//│ infer-affine > <<< inferred affine <<<
+//│ dead-param-elim > >>> dead-param-elim results >>>
+//│ dead-param-elim > <<< dead-param-elim results <<<
+//│ dead-call-elim > >>> dead-call-elim results >>>
+//│ dead-call-elim > <<< dead-call-elim results <<<
+//│ dead-branch-elim > >>> dead-branch-elim results >>>
+//│ dead-branch-elim > <<< dead-branch-elim results <<<
+//│ dead-lambda-elim > >>> dead-lambda-elim results >>>
+//│ dead-lambda-elim > <<< dead-lambda-elim results <<<
+//│ dead-field-elim > >>> dead-field-elim results >>>
+//│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
