@@ -17,23 +17,25 @@ declare fun unknown(o): Anything
 
 // * A write to a cell created during the call is not an effect of the function.
 :expect 3
-@affine(1) fun add(t)(y) = t + y
+fun add(t)(y) = t + y
 fun f(n) =
   let o = new mut C(0)
   set o.C#x = n
   add(o.C#x)
-f(1)(2)
+fun main() = f(1)(2)
+main()
 //│ flow-analysis > >>> effect-analysis results >>>
 //│ flow-analysis > function add⁰#0 @ <root> -> Pure
 //│ flow-analysis > function add⁰#1 @ <root> -> Pure
 //│ flow-analysis > function f⁰#0 @ <root> -> Pure
-//│ flow-analysis > call +⁰@result³#0 @ <root> -> Pure
-//│ flow-analysis > call add⁰@result²#0 @ <root> -> Pure
-//│ flow-analysis > call baseCall¹@result⁰#0 @ <root> -> Pure
-//│ flow-analysis > call f⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > function main⁰#0 @ <root> -> Pure
+//│ flow-analysis > call +⁰@result⁴#0 @ <root> -> Pure
+//│ flow-analysis > call add⁰@result³#0 @ <root> -> Pure
+//│ flow-analysis > call baseCall⁰@result¹#0 @ <root> -> Pure
+//│ flow-analysis > call f⁰@result²#0 @ <root> -> Pure
+//│ flow-analysis > call main⁰@result⁰#0 @ <root> -> Pure
 //│ flow-analysis > <<< effect-analysis results <<<
 //│ eta-expansion > >>> eta-expansion targets shapes >>>
-//│ eta-expansion > f⁰#0 @ <root>: [1, 1]
 //│ eta-expansion > <<< eta-expansion targets shapes <<<
 //│ = 3
 

@@ -70,7 +70,8 @@ class EtaExpansionSolver(
       // every use of a function value marks its captures `NonAffine` if the value may be called
       // more than once: it is non-affine itself, escapes, is called in a loop, or is held by top-level state
       def isInferredAffine(pf: ProdFun): Bool =
-        val affine = inferAffine && !constraintSolver.AllUpperBounds(pf.capturedVarUpperbound).contains(NonAffine)
+        // val affine = inferAffine && !constraintSolver.AllUpperBounds(pf.capturedVarUpperbound).contains(NonAffine)
+        val affine = inferAffine && !pf.dests.contains(NonAffine)
         if affine then inferredAffine += pf
         affine
       

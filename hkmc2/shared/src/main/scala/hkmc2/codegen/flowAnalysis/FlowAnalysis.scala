@@ -1603,7 +1603,9 @@ class FlowConstraintSolver(val collector: FlowConstraintsCollector):
         p.restParam.foreach(r => handle(UnknownProd, r))
         handle(p.res, UnknownCons)
         // unknown code may call the function any number of times
-        if collector.nonAffineTracking then handle(p.capturedVarUpperbound, NonAffine)
+        if collector.nonAffineTracking then
+          addFunDest(p, NonAffine)
+          handle(p.capturedVarUpperbound, NonAffine)
       case (p: ProdFun, x@(NonAffine | Accumulator)) =>
         addFunDest(p, x)
         handle(p.capturedVarUpperbound, x)

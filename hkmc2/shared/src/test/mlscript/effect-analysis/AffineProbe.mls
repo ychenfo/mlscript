@@ -1,0 +1,53 @@
+:js
+
+#config(inlining: None, liftDefns: Some(LiftDefns), flowBasedOpt: Some(FlowBasedOpt(logEffects: false, debugEta: true, mono: true)))
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+class C(val x)
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * same as the first Masking test, called at top level
+private fun add(t)(y) = t + y
+private fun f(n) =
+  let o = new mut C(0)
+  set o.C#x = n
+  add(o.C#x)
+f(1)(2)
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 3
+
+
+// * the same, called from inside a function
+private fun add(t)(y) = t + y
+private fun f(n) =
+  let o = new mut C(0)
+  set o.C#x = n
+  add(o.C#x)
+fun main() = f(1)(2)
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > f⁰#0 @ <root>: [1, 1]
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+
+// * the returned closure escapes to callers outside this block
+fun mk() =
+  let o = new mut C(0)
+  (n) =>
+    set o.C#x = o.C#x + n
+    o.C#x
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+
+:expect 3
+let h = mk()
+h(1)
+h(2)
+//│ eta-expansion > >>> eta-expansion targets shapes >>>
+//│ eta-expansion > <<< eta-expansion targets shapes <<<
+//│ = 3
+//│ h = fun
