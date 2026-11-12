@@ -1136,6 +1136,17 @@ class FlowConstraintsCollector(
       // TODO: don't register such constraints unless a flag is on
       currentEffect.foreach(e => cc.constrain(UnsafeEta, e))
 
+    // the paths a reference to a definition evaluates besides the definition itself
+    def constrainSelectionOperands(refSite: Path, selectedFrom: Opt[Path])(using cc: ConstraintsCollector, currentEffect: Opt[StratVar]): Unit =
+      refSite match
+        case DynSelect(_, key, DynSelectKind.Member(_)) => cc.constrain(processResult(key), UnknownCons)
+        case SuperSelect(_, base, key) =>
+          cc.constrain(processResult(base), UnknownCons)
+          cc.constrain(processResult(key), UnknownCons)
+        case _ => ()
+      for qual <- selectedFrom do
+        cc.constrain(processResult(qual), UnknownCons)
+
     def processBlock(b: Block)(using cc: ConstraintsCollector, blkRes: ConsStrat, currentEffect: Opt[StratVar]): Unit =
       val instId = cc.instId
       b match
@@ -1319,14 +1330,7 @@ class FlowConstraintsCollector(
             // ? It's a special case for module getters but I'm not sure if
             // ? this is good enough. It just conservatively marks it unsafe.
             if f.irFunDefn.fold(!f.isAccessPure)(_.params.isEmpty) then markUnsafeEta()
-            refSite match
-              case DynSelect(_, key, DynSelectKind.Member(_)) => cc.constrain(processResult(key), UnknownCons)
-              case SuperSelect(_, base, key) =>
-                cc.constrain(processResult(base), UnknownCons)
-                cc.constrain(processResult(key), UnknownCons)
-              case _ => ()
-            for qual <- selectedFrom do
-              cc.constrain(processResult(qual), UnknownCons)
+            constrainSelectionOperands(refSite, selectedFrom)
             funsToProdStratScheme.get(f) match
             case Some(fScheme) =>
               fScheme.instantiate(refSite.uid, f)
@@ -1336,6 +1340,16 @@ class FlowConstraintsCollector(
               softAssert(mono || !preAnalyzer.res.rootFunDefns.contains(f) || funToSccGroups.contains(f),
                 s"reference to root function ${f.nme} analyzed before its scheme")
               generatedVars(f)
+          // a class reference only reads its binding, directly or through its owner (eg, `M.this.A` inside a module)
+          case refSite @ MemberRefTo(cls: (ClassSymbol | PatternSymbol), selectedFrom) =>
+            refSite match
+            // the reference reads a val resolved to this class, whose value is then used in a way not modeled
+            case Value.MemberRef(member, _) =>
+              preAnalyzer.res.valOfMember.get(member).foreach: valSym =>
+                cc.constrain(generatedVars(valSym), UnknownCons)
+            case _ => ()
+            constrainSelectionOperands(refSite, selectedFrom)
+            generatedVars(cls)
           case s @ SuperSelect(qual, base, key) =>
             markUnsafeEta()
             cc.constrain(processResult(key), UnknownCons)
@@ -1362,10 +1376,7 @@ class FlowConstraintsCollector(
           case Value.MemberRef(member, disamb) =>
             disamb match
             case _: ClassSymbol | _: PatternSymbol =>
-              // Just accessing the binding is pure.
-              // the reference reads a val resolved to this class, whose value is then used in a way not modeled
-              preAnalyzer.res.valOfMember.get(member).foreach: valSym =>
-                cc.constrain(generatedVars(valSym), UnknownCons)
+              lastWords("class references should be handled by the `MemberRefTo` case above")
             case sym: TermSymbol =>
               // (Accessing mutable fields is a Select)
               if !sym.isAccessPure then markUnsafeEta()

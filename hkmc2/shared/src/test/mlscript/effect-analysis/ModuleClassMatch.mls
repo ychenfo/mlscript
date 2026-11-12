@@ -1,0 +1,47 @@
+:js
+:aggressive
+
+#config(inlining: None, flowBasedOpt: Some(FlowBasedOpt(logEffects: true)))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > <<< effect-analysis results <<<
+
+
+// * Matching on a data class in a module: the class is reached as `M.this.A`, which only reads the
+// * class binding, so `noRead` is `Pure` like the same function at the top level (below).
+module M with
+  data class A(x)
+  private fun noRead(v) = if v is
+    A(x) then 1
+    else 0
+  fun main() = noRead(A(1))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function main⁰#0 @ <root> -> Pure
+//│ flow-analysis > function noRead⁰#0 @ <root> -> Pure
+//│ flow-analysis > call noRead@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+
+
+// * Control: the same at the top level.
+data class A(x)
+private fun noRead(v) = if v is
+  A(x) then 1
+  else 0
+fun main() = noRead(A(1))
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function main⁰#0 @ <root> -> Pure
+//│ flow-analysis > function noRead⁰#0 @ <root> -> Pure
+//│ flow-analysis > call noRead⁰@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<
+
+
+// * Control: a tuple match in a module.
+module N with
+  private fun first(v) = if v is
+    [a, b] then a
+    else 0
+  fun main() = first([1, 2])
+//│ flow-analysis > >>> effect-analysis results >>>
+//│ flow-analysis > function first⁰#0 @ <root> -> Pure
+//│ flow-analysis > function main⁰#0 @ <root> -> Pure
+//│ flow-analysis > call first@result⁰#0 @ <root> -> Pure
+//│ flow-analysis > <<< effect-analysis results <<<

@@ -278,9 +278,7 @@ object Config:
     // replaces constructor arguments whose fields are never read by the unit literal
     deadFieldElim: Bool = true,
     // removes reads of immutable tracked fields whose results are never used
-    // TODO: off by default: in poly mode it miscompiles nofib `lambda` (a read of `Some#x` whose
-    // result reaches `x => x` and is then used gets removed); not minimized yet, mono is unaffected
-    deadReadElim: Bool = false,
+    deadReadElim: Bool = true,
     // also treats a returned function as one-shot when the flow analysis finds it non-affine nowhere
     inferAffine: Bool = true,
     // logs the functions that eta-expansion treats as one-shot by inference only

@@ -67,6 +67,8 @@ h(2)
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 
 data class A(x)
 data class B(y)
@@ -82,6 +84,8 @@ data class B(y)
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 
 :soir
 :noAggressive
@@ -105,6 +109,8 @@ fun main() = f(A(1))
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define f⁰ as fun f¹(v) {
@@ -141,6 +147,8 @@ fun main() = f(A(1))
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define f² as fun f³(v) {
@@ -179,6 +187,8 @@ fun main() = f(A(1))
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define f⁴ as fun f⁵(v) {
@@ -212,6 +222,8 @@ fun main() = f(A(1))
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 
 :expect 3
 private fun add(t) = y => t + y
@@ -251,6 +263,8 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ = 3
 
 
@@ -272,6 +286,8 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 
 :expect 3
 private fun add(t) = y => t + y
@@ -311,6 +327,8 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ = 3
 
 
@@ -1027,10 +1045,10 @@ main()
 data class MyState[S, A](r: S -> [S, A])
 private fun myRunState(m, s) = if m is MyState(f) then f(s)
 private fun bindBody(m, f, s) = if myRunState(m, s) is [s_, a] then myRunState(f(a), s_)
-@inline private fun bindL(m, f)(s) = bindBody(m, f, s)
+private fun bindL(m, f)(s) = bindBody(m, f, s)
 private fun myBind(m, f) = MyState(bindL(m, f))
 private fun returnBody(a, s) = [s, a]
-@inline private fun returnL(a)(s) = returnBody(a, s)
+private fun returnL(a)(s) = returnBody(a, s)
 private fun myReturn(a) = MyState(returnL(a))
 data class Some(x)
 private fun lookup(t) = Some(t)
@@ -1044,16 +1062,6 @@ private fun eval(n) = if n is
   else myReturn(n)
 private fun main() = if myRunState(eval(0), 42) is [s, a] then a
 main()
-//│ FAILURE: Unexpected compilation error
-//│ FAILURE LOCATION: subterm (Elaborator.scala:1759)
-//│ ╔══[COMPILATION ERROR] Name not found: inline
-//│ ║  l.1030: 	@inline private fun bindL(m, f)(s) = bindBody(m, f, s)
-//│ ╙──        	^^^^^^^
-//│ FAILURE: Unexpected compilation error
-//│ FAILURE LOCATION: subterm (Elaborator.scala:1759)
-//│ ╔══[COMPILATION ERROR] Name not found: inline
-//│ ║  l.1033: 	@inline private fun returnL(a)(s) = returnBody(a, s)
-//│ ╙──        	^^^^^^^
 //│ flow-analysis > >>> non-affine syms >>>
 //│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval_for_main¹
 //│ flow-analysis > a_for_bindBody_for_bindL_for_myBind_for_eval_for_main⁰
@@ -1496,20 +1504,10 @@ main()
 //│ dead-read-elim > <<< dead-read-elim results <<<
 
 :sir
-data class MyState(r: Function)
+data class MyState(r)
 private fun lookupL(env) = [env, env]
-private fun g(f: Function) = f
+private fun g(f) = f
 private fun lookupVar() = [MyState(lookupL), g(lookupL)]
-//│ FAILURE: Unexpected compilation error
-//│ FAILURE LOCATION: traverseSign (Resolver.scala:1120)
-//│ ╔══[COMPILATION ERROR] Expected 2 type arguments, got none
-//│ ║  l.1499: 	data class MyState(r: Function)
-//│ ╙──        	                      ^^^^^^^^
-//│ FAILURE: Unexpected compilation error
-//│ FAILURE LOCATION: traverseSign (Resolver.scala:1120)
-//│ ╔══[COMPILATION ERROR] Expected 2 type arguments, got none
-//│ ║  l.1501: 	private fun g(f: Function) = f
-//│ ╙──        	                 ^^^^^^^^
 //│ ———————————————| Lowered IR |———————————————————————————————————————————————————————————————————————
 //│ @private
 //│ define lookupL⁰ as fun lookupL¹(env) {

@@ -17,6 +17,8 @@
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 
 :expect 42
 :sir
@@ -169,24 +171,28 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main²
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main³
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ ——————————————| Optimized IR |——————————————————————————————————————————————————————————————————————
-//│ let lambda, lambda1, lambda2, lambda$, lambda$1;
+//│ let lambda, lambda1, lambda2, lambda$, lambda$1, inlinedVal, inlinedVal1;
 //│ define lambda2 as fun lambda⁰(t) {
 //│   match t
 //│     0 =>
-//│       let inlinedVal;
-//│       set inlinedVal = MyState¹((lambda² as! Function⁰));
-//│       return MyState¹((lambda$¹(inlinedVal, lambda⁰) as! Function⁰))
+//│       let inlinedVal2;
+//│       set inlinedVal2 = MyState¹((lambda² as! Function⁰));
+//│       return MyState¹((lambda$¹(inlinedVal2, lambda⁰) as! Function⁰))
 //│     else
 //│       return MyState¹((lambda$⁰(t) as! Function⁰))
 //│   end
 //│ };
 //│ define lambda1 as fun lambda²(env) {
-//│   let inlinedVal, arg$Some$0$;
-//│   set inlinedVal = Some⁰(env);
-//│   match inlinedVal
+//│   let inlinedVal2, arg$Some$0$;
+//│   set inlinedVal2 = Some⁰(env);
+//│   match inlinedVal2
 //│     Some¹ =>
-//│       set arg$Some$0$ = inlinedVal.x⁰;
+//│       set arg$Some$0$ = inlinedVal2.x⁰;
 //│       return [env, arg$Some$0$]
 //│     else
 //│       throw new globalThis⁰.Error⁰("match error")
@@ -201,14 +207,14 @@ main()
 //│   return lambda⁴(m, f, s)
 //│ };
 //│ define lambda as fun lambda⁴(m, f, s) {
-//│   let element1$, element0$, tmp, inlinedVal;
+//│   let element1$, element0$, tmp, inlinedVal2;
 //│   match m
 //│     MyState⁰ =>
-//│       set inlinedVal = m.r⁰(s);
-//│       match inlinedVal
+//│       set inlinedVal2 = m.r⁰(s);
+//│       match inlinedVal2
 //│         Array(2) =>
-//│           set element0$ = runtime⁰.Tuple⁰.get⁰(inlinedVal, 0);
-//│           set element1$ = runtime⁰.Tuple⁰.get⁰(inlinedVal, 1);
+//│           set element0$ = runtime⁰.Tuple⁰.get⁰(inlinedVal2, 0);
+//│           set element1$ = runtime⁰.Tuple⁰.get⁰(inlinedVal2, 1);
 //│           set tmp = f(element1$);
 //│           match tmp
 //│             MyState⁰ =>
@@ -263,28 +269,27 @@ main()
 //│ define eval¹ as fun eval⁰(n) {
 //│   match n
 //│     0 =>
-//│       let inlinedVal;
-//│       set inlinedVal = MyState¹((lambda² as! Function⁰));
-//│       return MyState¹((lambda$¹(inlinedVal, lambda⁰) as! Function⁰))
+//│       let inlinedVal2;
+//│       set inlinedVal2 = MyState¹((lambda² as! Function⁰));
+//│       return MyState¹((lambda$¹(inlinedVal2, lambda⁰) as! Function⁰))
 //│     else
 //│       return MyState¹((lambda$⁰(n) as! Function⁰))
 //│   end
 //│ };
 //│ @private
 //│ define main⁰ as fun main¹() {
-//│   let inlinedVal, inlinedVal1;
+//│   let inlinedVal2, inlinedVal3;
 //│   match 0
 //│     0 =>
-//│       let inlinedVal2;
-//│       set inlinedVal2 = MyState¹((lambda² as! Function⁰));
-//│       set inlinedVal1 = MyState¹((lambda$¹(inlinedVal2, lambda⁰) as! Function⁰));
-//│       match inlinedVal1
+//│       let inlinedVal4;
+//│       set inlinedVal4 = MyState¹((lambda² as! Function⁰));
+//│       set inlinedVal3 = MyState¹((lambda$¹(inlinedVal4, lambda⁰) as! Function⁰));
+//│       match inlinedVal3
 //│         MyState⁰ =>
-//│           set inlinedVal = inlinedVal1.r⁰(42);
-//│           match inlinedVal
+//│           set inlinedVal2 = inlinedVal3.r⁰(42);
+//│           match inlinedVal2
 //│             Array(2) =>
-//│               do runtime⁰.Tuple⁰.get⁰(inlinedVal, 0);
-//│               return runtime⁰.Tuple⁰.get⁰(inlinedVal, 1)
+//│               return runtime⁰.Tuple⁰.get⁰(inlinedVal2, 1)
 //│             else
 //│               throw new globalThis⁰.Error⁰("match error")
 //│           end
@@ -292,12 +297,11 @@ main()
 //│           throw new globalThis⁰.Error⁰("match error")
 //│       end
 //│     else
-//│       set inlinedVal1 = MyState¹((lambda$⁰(0) as! Function⁰));
-//│       set inlinedVal = inlinedVal1.r⁰(42);
-//│       match inlinedVal
+//│       set inlinedVal3 = MyState¹((lambda$⁰(0) as! Function⁰));
+//│       set inlinedVal2 = inlinedVal3.r⁰(42);
+//│       match inlinedVal2
 //│         Array(2) =>
-//│           do runtime⁰.Tuple⁰.get⁰(inlinedVal, 0);
-//│           return runtime⁰.Tuple⁰.get⁰(inlinedVal, 1)
+//│           return runtime⁰.Tuple⁰.get⁰(inlinedVal2, 1)
 //│         else
 //│           throw new globalThis⁰.Error⁰("match error")
 //│       end
@@ -314,9 +318,38 @@ main()
 //│ @data
 //│ define Some² as class Some¹ {
 //│   val x¹;
-//│   constructor Some⁰(x) { define x¹ as val x⁰ = x; end }
+//│   constructor Some⁰(x) {
+//│     define x¹ as val x⁰ = x;
+//│     end
+//│   }
 //│ };
-//│ return main¹()
+//│ match 0
+//│   0 =>
+//│     let inlinedVal2;
+//│     set inlinedVal2 = MyState¹((lambda² as! Function⁰));
+//│     set inlinedVal1 = MyState¹((lambda$¹(inlinedVal2, lambda⁰) as! Function⁰));
+//│     match inlinedVal1
+//│       MyState⁰ =>
+//│         set inlinedVal = inlinedVal1.r⁰(42);
+//│         match inlinedVal
+//│           Array(2) =>
+//│             return runtime⁰.Tuple⁰.get⁰(inlinedVal, 1)
+//│           else
+//│             throw new globalThis⁰.Error⁰("match error")
+//│         end
+//│       else
+//│         throw new globalThis⁰.Error⁰("match error")
+//│     end
+//│   else
+//│     set inlinedVal1 = MyState¹((lambda$⁰(0) as! Function⁰));
+//│     set inlinedVal = inlinedVal1.r⁰(42);
+//│     match inlinedVal
+//│       Array(2) =>
+//│         return runtime⁰.Tuple⁰.get⁰(inlinedVal, 1)
+//│       else
+//│         throw new globalThis⁰.Error⁰("match error")
+//│     end
+//│ end
 //│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
 //│ = 42
 
@@ -333,6 +366,8 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 
 :noSanityCheck
 :expect 42
@@ -359,6 +394,8 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ = 42
 
 
@@ -374,6 +411,8 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 
 :noSanityCheck
 :expect 42
@@ -400,6 +439,10 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main²
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main³
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ = 42
 
 
@@ -416,6 +459,8 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > <<< dead-read-elim results <<<
 
 :noSanityCheck
 :expect 42
@@ -451,13 +496,18 @@ main()
 //│ dead-lambda-elim > <<< dead-lambda-elim results <<<
 //│ dead-field-elim > >>> dead-field-elim results >>>
 //│ dead-field-elim > <<< dead-field-elim results <<<
+//│ dead-read-elim > >>> dead-read-elim results >>>
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main²
+//│ dead-read-elim > eliminable: Call(Select(Select(runtime⁰, Ident(Tuple)), Ident(get)), [[tmp:scrut⁰, 0]]) @ main³
+//│ dead-read-elim > <<< dead-read-elim results <<<
 //│ = 42
 
 
 // * FIXME (diff tests only): dead-parameter elimination passes `undefined` for a dropped parameter, and here it
 // * ends up in the unused first element of the tuple. The result is right, but the pattern `[s, a]` still reads
-// * that element, and the sanity checks reject a call returning `undefined`.
-#config(liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: false, inferAffine: false, debugDpe: true)))
+// * that element, and the sanity checks reject a call returning `undefined`. (Dead-read elimination would remove that read
+// * and hide the problem, so it is off here.)
+#config(liftDefns: None, flowBasedOpt: Some(FlowBasedOpt(mono: false, inferAffine: false, deadReadElim: false, debugDpe: true)))
 //│ dead-param-elim > >>> dead-param-elim results >>>
 //│ dead-param-elim > <<< dead-param-elim results <<<
 //│ dead-call-elim > >>> dead-call-elim results >>>
