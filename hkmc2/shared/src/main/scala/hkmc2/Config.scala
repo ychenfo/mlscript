@@ -79,7 +79,7 @@ object Config:
     // sanityChecks = S(SanityChecks(light = true)),
     checkCasts = true,
     effectHandlers = N,
-    liftDefns = S(LiftDefns()),
+    liftDefns = N,
     patMatConsequentSharingThreshold = default.patMatConsequentSharingThreshold, // minimum: 1
     target = CompilationTarget.JS,
     rewriteWhileLoops = false,
@@ -89,7 +89,7 @@ object Config:
     commentGeneratedCode = false,
     noFreeze = false,
     noModuleCheck = false,
-    aggressive = true,
+    aggressive = false,
     debug = Debug.default,
     optimizer = Optimizer.FastOpt,
     checkInvariants = false,
@@ -263,12 +263,12 @@ object Config:
     logNonAffine: Bool,
     logAccumulator: Bool,
     // `debug` turns on all three at once
-    debugEta: Bool = true,
-    debugDpe: Bool = true,
-    debugDce: Bool = true,
+    debugEta: Bool = false,
+    debugDpe: Bool = false,
+    debugDce: Bool = false,
     logEffects: Bool = false,
     // logs the results of the dead-value eliminations below
-    debugDead: Bool = true,
+    debugDead: Bool = false,
     // removes pure calls whose results are never used
     deadCallElim: Bool = true,
     // removes match branches testing a class that no value of the scrutinee is an instance of
@@ -299,7 +299,7 @@ object Config:
   object FlowAnalysisConfig:
     val defaultMono = FlowAnalysisConfig(
       debug = false,
-      mono = false,
+      mono = true,
       trackNonAffine = false,
       trackAccumulator = false,
       logNonAffine = false,
@@ -387,7 +387,6 @@ object Config:
     )
     
     val FastOpt = Optimizer(
-      // deforest = S(Deforest.default),
       deforest = N,
       tailRecOpt = true,
       inlining = S(Inliner(default.inlineThreshold)),

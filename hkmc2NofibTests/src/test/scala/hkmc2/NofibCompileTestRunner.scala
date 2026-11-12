@@ -13,6 +13,6 @@ end NofibCompileTestRunner
 
 object NofibCompileTestRunner:
   
-  given cctx: CompilerCtx = TestFolders.compilerCtx(os.pwd)
+  given cctx: CompilerCtx = TestFolders.nofibCompilerCtx(os.pwd)
 
 end NofibCompileTestRunner

@@ -933,6 +933,11 @@ class Lifter(topLevelBlk: Block)(using State, Raise, Config):
   private def dupParams(plist: List[Param]): List[Param] = plist.map(dupParam)
   private def dupParamList(plist: LoweredParamList): LoweredParamList =
     plist.copy(params = dupParams(plist.params), restParam = plist.restParam.map(dupParam))(plist.toLoc)
+
+  // a definition lifted out of another one can only be referred to by the code it was lifted from;
+  // flow analysis treats a public top-level function as callable by unknown code
+  private def liftedAnnotations(annotations: Ls[Annot]): Ls[Annot] =
+    if Visibility.of(annotations) is Visibility.Private then annotations else Annot.Private :: annotations
   
   /* CONCRETE IMPLS */
   
@@ -1088,8 +1093,9 @@ class Lifter(topLevelBlk: Block)(using State, Raise, Config):
       val withCapture = addExtraSyms(newBod)
       val newDefn = fun.copy(owner = N, sym = mainSym, dSym = mainDsym, params = newPlists, body = withCapture)(
         fun.configOverride,
-        if liftedFromStagedModule && !fun.isStaged then Annot.Modifier(Keyword.`staged`)(N) :: fun.annotations
-        else fun.annotations)
+        liftedAnnotations(
+          if liftedFromStagedModule && !fun.isStaged then Annot.Modifier(Keyword.`staged`)(N) :: fun.annotations
+          else fun.annotations))
       LifterResult(newDefn, rewriter.extraDefns.toList)
     
     // Definition with the auxiliary parameters as a new first parameter list.
@@ -1121,7 +1127,7 @@ class Lifter(topLevelBlk: Block)(using State, Raise, Config):
         auxDsym,
         newPlists,
         bod
-      )(N, if fun.noInline then annotations else Annot.Inline()(N) :: annotations)
+      )(N, liftedAnnotations(if fun.noInline then annotations else Annot.Inline()(N) :: annotations))
     
     private val aux = Lazy[Defn](mkAuxDefn)
     
@@ -1250,7 +1256,7 @@ class Lifter(topLevelBlk: Block)(using State, Raise, Config):
       )))
       val bod = Return(inst)
       
-      FunDefn(N, flattenedSym, flattenedDSym, allParamLists, bod)(N, annotations = Nil)
+      FunDefn(N, flattenedSym, flattenedDSym, allParamLists, bod)(N, annotations = liftedAnnotations(Nil))
     
     private val flat = Lazy[Defn](mkFlattenedDefn)
     

@@ -39,6 +39,8 @@ class Watcher(dirs: Ls[File]):
   private val watcherWorkingDir = os.pwd/os.up
   given cctx: CompilerCtx = CompilerCtx.fresh(FileSystem.default,
     TestFolders.compilerPaths(watcherWorkingDir), Config.default(TestFolders.mainTestDir(watcherWorkingDir)))
+  // the nofib programs are compiled with the benchmark setup, as by the nofib compile runner
+  private val nofibCctx: CompilerCtx = TestFolders.nofibCompilerCtx(watcherWorkingDir)
   
   val watcher: DirectoryWatcher = DirectoryWatcher.builder()
     .logger(org.slf4j.helpers.NOPLogger.NOP_LOGGER)
@@ -110,9 +112,11 @@ class Watcher(dirs: Ls[File]):
       val isModuleFile = path.segments.contains("mlscript-compile")
       if isModuleFile
       then
+        val moduleCctx =
+          if TestFolders.nofibCompileDirs(watcherWorkingDir).exists(TestFolders.isInDir(path, _)) then nofibCctx else cctx
         MLsCompiler(
           mkRaise = ReportFormatter(System.out.println, rootPath, colorize = true).mkRaise
-        ).compileModule(path)
+        )(using moduleCctx).compileModule(path)
       else
         val dm = new MainDiffMaker(rootPath.toString, path, preludePath, predefPath, relativeName):
           def cctx = Watcher.this.cctx

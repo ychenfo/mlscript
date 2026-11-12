@@ -44,6 +44,20 @@ object TestFolders:
     import io.PlatformPath.given
     CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), Config.default(mainTestDir(wd)))
   
+  // the benchmark setup: only the nofib programs are compiled with it (lifting, aggressive, poly flow-based opt with logs)
+  def nofibConfig(wd: os.Path): Config =
+    import io.PlatformPath.given
+    Config.default(mainTestDir(wd)).copy(liftDefns = S(Config.LiftDefns()), aggressive = true).mapOptimizer: opt =>
+      opt.copy(
+        // deforest = S(Config.Deforest.default),
+        flowBasedOpt = S(Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
+          mono = false, debugEta = true, debugDpe = true, debugDce = true, debugDead = true))))
+  
+  // a fresh context for the nofib compile tests, whose root configuration is `nofibConfig`
+  def nofibCompilerCtx(wd: os.Path): CompilerCtx =
+    import io.PlatformPath.given
+    CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), nofibConfig(wd))
+  
   // ——— Diff test subdirectories excluded from the main DiffTestRunner ———
   
   /** Diff test subdirectories that belong to the hkmc2NofibTests project. */
