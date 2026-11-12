@@ -1,0 +1,53 @@
+FILE                                  RAW     RAW.GZ      UNMIN   UNMIN.GZ        MIN     MIN.GZ
+ansi.mjs                            72994       5521      49989       4381      49413       4174
+atom.mjs                             8599       1679       5357       1245       5206       1236
+awards.mjs                          14532       2515       8176       1823       7823       1812
+banner.mjs                          37454       6324      19940       4990      19743       4955
+boyer.mjs                           99516       9637      53249       7398      51529       7358
+boyer2.mjs                         449893      25074     172772      11045     165037      11103
+calendar.mjs                        18570       3414      10890       2626      10659       2596
+cichelli.mjs                       153869       9035      83948       6837      82498       6741
+circsim.mjs                        373258      17603     230977      12236     228472      12004
+clausify.mjs                        34476       4426      16869       3002      16284       3013
+constraints.mjs                     91156       7811      51060       5667      49746       5490
+cryptarithm1.mjs                     9128       1656       4864       1160       4770       1146
+cryptarithm2.mjs                   348308      14888     250004      11910     247632      11697
+cse.mjs                             34037       4430      23038       3471      22310       3298
+eliza.mjs                           56178      10046      33282       7870      32695       7771
+fish.mjs                           318985      13465     221517      10752     219625      10504
+gcd.mjs                              8671       1756       4436       1200       4318       1203
+integer.mjs                         22357       2682      13604       2383      12906       2371
+knights.mjs                        220863      14382     112735       9741     109960       9731
+lambda.mjs                         304157      16578     180783      12813     176661      12609
+lastpiece.mjs                      971058      49653     390318      21069     380624      20995
+lcss.mjs                             7316       1632       4087       1222       3959       1211
+life.mjs                            20929       3541      13062       2696      12458       2668
+mandel.mjs                          11718       2419       6483       1732       6316       1690
+mandel2.mjs                         15091       2732       6906       1841       6559       1831
+mate.mjs                          2901209     126484    1469943      52231    1435927      52085
+minimax.mjs                         61814       7346      33967       5191      31072       5100
+myEmpty.mjs                          1304        483        972        419        950        410
+NofibPrelude.mjs                    54953       6368      29105       4673      27495       4713
+para.mjs                            94544       8754      48392       5914      46819       5779
+power.mjs                           45114       4827      27721       3858      26237       3825
+pretty.mjs                         148166       8341      84049       6287      80763       6331
+primetest.mjs                       23192       3888      12589       2713      12157       2743
+puzzle.mjs                          78256       5511      36009       3623      34597       3639
+rsa.mjs                              7471       2032       4786       1581       4617       1559
+scc.mjs                             10814       1782       6160       1356       6061       1294
+secretary.mjs                        5257       1340       3430       1065       3343       1036
+sorting.mjs                         40441       5235      22314       3922      21460       3877
+sphere.mjs                         338916      16655     159541       9544     156770       9206
+treejoin.mjs                        16421       2518       9146       1810       8869       1801
+
+TOTAL                             7530985     434463    3916470     255297    3824340     252605
+
+Processed 40 files.
+
+Columns:
+RAW       = Original JavaScript
+RAW.GZ    = Original gzip
+UNMIN     = Terser without compression
+UNMIN.GZ  = Uncompressed-mode gzip
+MIN       = Terser with compression
+MIN.GZ    = Compressed-mode gzip

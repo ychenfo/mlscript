@@ -1,0 +1,90 @@
+ansi.mjs                             0              0           1405                        ansi.mjs                             0              0            463
+atom.mjs                             0              0            225                        atom.mjs                             0              0            225
+awards.mjs                           0              0            404                        awards.mjs                           0              0            404
+banner.mjs                           0              0            714                        banner.mjs                           0              0            714
+boyer.mjs                            0              0           2656                        boyer.mjs                            0              0           2656
+boyer2.mjs                           0              0           9257                        boyer2.mjs                           0              0           1491
+calendar.mjs                         0              0            489                        calendar.mjs                         0              0            489
+cichelli.mjs                         0              0           3154                        cichelli.mjs                         0              0            785
+circsim.mjs                          0              0           6959                        circsim.mjs                          0              0           2151
+clausify.mjs                         0              0            922                        clausify.mjs                         0              0            739
+constraints.mjs                      0              0           2211                        constraints.mjs                      0              0           1263
+cryptarithm1.mjs                     0              0            205                        cryptarithm1.mjs                     0              0            205
+cryptarithm2.mjs                     0              0           5363                        cryptarithm2.mjs                     0              0            705
+cse.mjs                              0              0            965                        cse.mjs                              0              0            676
+eliza.mjs                            0              0           1275                        eliza.mjs                            0              0           1275
+fish.mjs                             0              0           6666                        fish.mjs                             0              0           1456
+gcd.mjs                              0              0            255                        gcd.mjs                              0              0            255
+integer.mjs                          0              0            499                        integer.mjs                          0              0            287
+knights.mjs                          0              0           4825                        knights.mjs                          0              0           1537
+lambda.mjs                           0              0           6519                        lambda.mjs                           0              0           1090
+lastpiece.mjs                        0              0          20902                        lastpiece.mjs                        0              0           2959
+lcss.mjs                             0              0            204                        lcss.mjs                             0              0            198
+life.mjs                             0              0            556                        life.mjs                             0              0            556
+mandel.mjs                           0              0            317                        mandel.mjs                           0              0            305
+mandel2.mjs                          0              0            465                        mandel2.mjs                          0              0            452
+mate.mjs                             0              0          57299                        mate.mjs                             0              0           2977
+minimax.mjs                          0              0           1633                        minimax.mjs                          0              0           1384
+myEmpty.mjs                          0              0             49                        myEmpty.mjs                          0              0             44
+NofibPrelude.mjs                     0              0           1694                        NofibPrelude.mjs                     0              0           1694
+para.mjs                             0              0           2338                        para.mjs                             0              0           1218
+power.mjs                            0              0           1250                        power.mjs                            0              0           1250
+pretty.mjs                           0              0           3046                        pretty.mjs                           0              0            813
+primetest.mjs                        0              0            675                        primetest.mjs                        0              0            632
+puzzle.mjs                           0              0           1724                        puzzle.mjs                           0              0            849
+rsa.mjs                              0              0            225                        rsa.mjs                              0              0            211
+scc.mjs                              0              0            329                        scc.mjs                              0              0            272
+secretary.mjs                        0              0            148                        secretary.mjs                        0              0            148
+sorting.mjs                          0              0           1115                        sorting.mjs                          0              0           1105
+sphere.mjs                           0              0           7069                        sphere.mjs                           0              0           1546
+SUM:                                 0              0         156441                        SUM:                                 0              0          37801
+treejoin.mjs                         0              0            435                        treejoin.mjs                         0              0            322
+
+
+
+
+
+
+
+ansi.mjs                             0              0            463
+atom.mjs                             0              0            225
+awards.mjs                           0              0            404
+banner.mjs                           0              0            714
+boyer.mjs                            0              0           2656
+boyer2.mjs                           0              0           1496
+calendar.mjs                         0              0            489
+cichelli.mjs                         0              0            786
+circsim.mjs                          0              0           2162
+clausify.mjs                         0              0            739
+constraints.mjs                      0              0           1263
+cryptarithm1.mjs                     0              0            205
+cryptarithm2.mjs                     0              0            705
+cse.mjs                              0              0            688
+eliza.mjs                            0              0           1275
+fish.mjs                             0              0           1456
+gcd.mjs                              0              0            255
+github.com/AlDanial/cloc v 2.02  T=0.06 s (653.1 files/s, 617957.2 lines/s)
+integer.mjs                          0              0            287
+knights.mjs                          0              0           1535
+lambda.mjs                           0              0           1090
+lastpiece.mjs                        0              0           2965
+lcss.mjs                             0              0            198
+life.mjs                             0              0            556
+mandel.mjs                           0              0            305
+mandel2.mjs                          0              0            452
+mate.mjs                             0              0           2976
+minimax.mjs                          0              0           1384
+myEmpty.mjs                          0              0             45
+NofibPrelude.mjs                     0              0           1694
+para.mjs                             0              0           1224
+power.mjs                            0              0           1250
+pretty.mjs                           0              0            810
+primetest.mjs                        0              0            632
+puzzle.mjs                           0              0            849
+rsa.mjs                              0              0            211
+scc.mjs                              0              0            272
+secretary.mjs                        0              0            148
+sorting.mjs                          0              0           1105
+sphere.mjs                           0              0           1553
+SUM:                                 0              0          37845
+treejoin.mjs                         0              0            323
