@@ -44,20 +44,82 @@ object TestFolders:
     import io.PlatformPath.given
     CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), Config.default(mainTestDir(wd)))
   
+  // the lifting and aggressive setup shared by the benchmark programs (nofib and flow-opt)
+  def benchConfig(wd: os.Path): Config =
+    import io.PlatformPath.given
+    Config.default(mainTestDir(wd)).copy(liftDefns = S(Config.LiftDefns()), aggressive = true)
+
   // the benchmark setup: only the nofib programs are compiled with it (lifting, aggressive, poly flow-based opt with logs)
   def nofibConfig(wd: os.Path): Config =
     import io.PlatformPath.given
-    Config.default(mainTestDir(wd)).copy(liftDefns = S(Config.LiftDefns()), aggressive = true).mapOptimizer: opt =>
+    benchConfig(wd).mapOptimizer: opt =>
       opt.copy(
         // deforest = S(Config.Deforest.default),
-        flowBasedOpt = S(Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
-          mono = false, debugEta = true, debugDpe = true, debugDce = true, debugDead = true))))
+        // flowBasedOpt = S(Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
+        //   // mono = false,
+        //   mono = true,
+        //   // debugEta = false, debugDpe = false, debugDce = false, debugDead = false)))
+        //   debugEta = true, debugDpe = true, debugDce = true, debugDead = true)))
+        deforest = N,
+        flowBasedOpt = N
+      )
   
   // a fresh context for the nofib compile tests, whose root configuration is `nofibConfig`
   def nofibCompilerCtx(wd: os.Path): CompilerCtx =
     import io.PlatformPath.given
     CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), nofibConfig(wd))
+
+  // flow-opt base: the benchmark setup with deforest and flow-based opt off
+  def flowBaseConfig(wd: os.Path): Config =
+    import io.PlatformPath.given
+    benchConfig(wd).mapOptimizer: opt =>
+      opt.copy(
+        deforest = S(Config.Deforest.default),
+        flowBasedOpt = N
+      )
   
+  // flow-opt opt: its own setup, currently the same as flow-opt base
+  def flowOptConfig(wd: os.Path): Config =
+    import io.PlatformPath.given
+    benchConfig(wd).mapOptimizer: opt =>
+      opt.copy(
+        deforest = S(Config.Deforest.default),
+        flowBasedOpt = S(Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
+          // mono = false,
+          mono = true,
+          // debugEta = false, debugDpe = false, debugDce = false, debugDead = false)))
+          debugEta = true, debugDpe = true, debugDce = true, debugDead = true)))
+      )
+  
+  // flow-opt other: its own setup, currently the same as flow-opt base
+  def flowOtherConfig(wd: os.Path): Config =
+    import io.PlatformPath.given
+    benchConfig(wd).mapOptimizer: opt =>
+      opt.copy(
+        deforest = N,
+        flowBasedOpt = S(Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
+          mono = false,
+          // debugEta = false, debugDpe = false, debugDce = false, debugDead = false)))
+          debugEta = true, debugDpe = true, debugDce = true, debugDead = true)))
+      )
+
+  // a fresh context for the flow-opt base compile tests, whose root configuration is `flowBaseConfig`
+  def flowBaseCompilerCtx(wd: os.Path): CompilerCtx =
+    import io.PlatformPath.given
+    CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), flowBaseConfig(wd))
+
+
+  // a fresh context for the flow-opt opt compile tests, whose root configuration is `flowOptConfig`
+  def flowOptCompilerCtx(wd: os.Path): CompilerCtx =
+    import io.PlatformPath.given
+    CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), flowOptConfig(wd))
+
+
+  // a fresh context for the flow-opt other compile tests, whose root configuration is `flowOtherConfig`
+  def flowOtherCompilerCtx(wd: os.Path): CompilerCtx =
+    import io.PlatformPath.given
+    CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), flowOtherConfig(wd))
+
   // ——— Diff test subdirectories excluded from the main DiffTestRunner ———
   
   /** Diff test subdirectories that belong to the hkmc2NofibTests project. */
@@ -76,6 +138,17 @@ object TestFolders:
   def slopDiffDir(wd: os.Path): os.Path =
     diffTestDir(wd)/"slop"
 
+  // the flow-opt variants, each a directory of the same name under `mlscript/` and `mlscript-compile/`
+  val flowVariants: Ls[Str] = "flowopt-base" :: "flowopt-opt" :: "flowopt-other" :: Nil
+
+  /** Diff test subdirectory of one flow-opt variant, for its hkmc2Flow*Tests project. */
+  def flowDiffDir(wd: os.Path, variant: Str): os.Path =
+    diffTestDir(wd)/variant
+
+  /** Diff test subdirectories of all the flow-opt variants. */
+  def flowDiffDirs(wd: os.Path): Ls[os.Path] =
+    flowVariants.map(flowDiffDir(wd, _))
+
   /** Diff test directories that are always excluded (staging, mlscript-compile). */
   def alwaysExcludedDiffDirs(wd: os.Path): Ls[os.Path] =
     (diffTestDir(wd)/"ucs"/"staging") :: compileTestDir(wd) :: Nil
@@ -86,6 +159,7 @@ object TestFolders:
     appsDiffDir(wd) ::
     wasmDiffDir(wd) ::
     slopDiffDir(wd) ::
+    flowDiffDirs(wd) :::
     alwaysExcludedDiffDirs(wd)
   
   /** Check whether a file should be excluded from the given list of excluded
@@ -102,7 +176,7 @@ object TestFolders:
   
   /** Directories whose compile files are excluded from the main CompileTestRunner. */
   def mainExcludedCompileDirs(wd: os.Path): Ls[os.Path] =
-    nofibCompileDirs(wd) ::: appsCompileDirs(wd) ::: wasmCompileDirs(wd)
+    nofibCompileDirs(wd) ::: appsCompileDirs(wd) ::: wasmCompileDirs(wd) ::: flowCompileDirs(wd)
   
   /** Compile test directories for the hkmc2NofibTests project.
     * We walk from `bench/` so test names include the `mlscript-compile/` prefix. */
@@ -118,5 +192,13 @@ object TestFolders:
     * We walk from `mainTestDir` so test names include the `mlscript-compile/` prefix.. */
   def wasmCompileDirs(wd: os.Path): Ls[os.Path] =
     compileTestDir(wd)/"wasm" :: Nil
-  
+
+  /** Compile test directory of one flow-opt variant, for its hkmc2Flow*Tests project. */
+  def flowCompileDir(wd: os.Path, variant: Str): os.Path =
+    compileTestDir(wd)/variant
+
+  /** Compile test directories of all the flow-opt variants. */
+  def flowCompileDirs(wd: os.Path): Ls[os.Path] =
+    flowVariants.map(flowCompileDir(wd, _))
+
 end TestFolders

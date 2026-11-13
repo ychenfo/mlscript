@@ -1,0 +1,31 @@
+:.
+:js
+
+
+import "../../../mlscript-compile/flowopt-base/eff/mpuz.mls"
+mpuz.main()
+//│ = Cons(
+//│   Cons(
+//│     [74, 0],
+//│     Cons(
+//│       [73, 1],
+//│       Cons(
+//│         [68, 8],
+//│         Cons(
+//│           [69, 2],
+//│           Cons(
+//│             [67, 5],
+//│             Cons(
+//│               [66, 6],
+//│               Cons(
+//│                 [70, 4],
+//│                 Cons([72, 7], Cons([71, 3], Cons([65, 9], Nil)))
+//│               )
+//│             )
+//│           )
+//│         )
+//│       )
+//│     )
+//│   ),
+//│   Nil
+//│ )

@@ -1,0 +1,7 @@
+:.
+:js
+
+
+import "../../../mlscript-compile/flowopt-opt/eff/minimax.mls"
+minimax.main()
+//│ = [[549946, 10], [16168, 10]]

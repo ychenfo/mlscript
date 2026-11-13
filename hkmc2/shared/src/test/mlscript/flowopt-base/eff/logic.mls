@@ -1,0 +1,7 @@
+:.
+:js
+
+
+import "../../../mlscript-compile/flowopt-base/eff/logic.mls"
+logic.main()
+//│ = true

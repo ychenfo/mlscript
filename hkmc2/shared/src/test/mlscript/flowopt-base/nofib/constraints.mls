@@ -1,0 +1,6 @@
+:.
+:js
+
+import "../../../mlscript-compile/flowopt-base/nofib/constraints.mls"
+constraints.main()
+//│ = "[4,4,4,4,4]"
