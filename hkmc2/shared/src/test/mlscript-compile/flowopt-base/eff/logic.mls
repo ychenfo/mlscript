@@ -1,0 +1,290 @@
+#lang(0.3.x)
+
+import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+
+// a prolog-style peg-solitaire search compiled into sml in continuation-passing style: unification on
+// mutable logic variables, with a global trail for backtracking
+// source: the sml/nj benchmark suite's programs/logic, as the single file run by the fco paper
+// (its artifact's benchmarks/logic.sml)
+// port changes:
+// - structures Term/Trail/Unify/Data/Main are flattened into top-level functions; a logic variable
+//   `REF of term option ref` holds a `Ref` cell, so same_ref and the occurs check compare cells with `===`/`!==`
+// - module-level state stays module-level (user's decision): the trail cells `global_trail`/`trail_counter`,
+//   and a new cell `found`
+// - the `Done` exception is replaced by `found` (user's decision): the final success continuation sets it,
+//   and `unify` returns at once when it is set (the check is at unify's entry, which now takes `sc` as a second
+//   parameter list; `trail` has no check); so the search returns normally after the first solution, and every
+//   `trail` restores global_trail/trail_counter on the way out (the original never restored them when Done
+//   escaped, so they grew from run to run)
+// - `main` resets the cells, runs `exists (fn Z => solution2 Z (fn () => …))` once and returns `!found`
+//   (testit printed "yes"; the 60-run loop of doit is dropped)
+// - data.sml is translated mechanically, keeping its nesting: variables are lowercased, `exists` is `exists_`,
+//   list literals are `::` chains; the module-level strings and constants (cons_s, CON_x_s, …) stay
+//   module-level `val`s
+
+module logic with ...
+
+
+
+data class (::) Cons(head, tail)
+object Nil
+
+data class Some(value)
+object None
+
+class Ref(val value)
+
+
+// term.sml
+
+data class STR(f, ts)
+data class INT(n)
+data class CON(s)
+data class REF(r)
+
+
+// trail.sml
+
+private val global_trail = new mut Ref(Nil)
+private val trail_counter = new mut Ref(0)
+
+private fun unwind_trail(n, tr) = if
+  n == 0 then tr
+  tr is r :: tr1 then
+    set r.Ref#value = None
+    unwind_trail(n - 1, tr1)
+
+private fun reset_trail() = set global_trail.Ref#value = Nil
+
+private fun trail(func) =
+  let tc0 = trail_counter.Ref#value
+  func()
+  set global_trail.Ref#value = unwind_trail(trail_counter.Ref#value - tc0, global_trail.Ref#value)
+  set trail_counter.Ref#value = tc0
+
+private fun bind(r, t) =
+  set r.Ref#value = Some(t)
+  set global_trail.Ref#value = r :: global_trail.Ref#value
+  set trail_counter.Ref#value = trail_counter.Ref#value + 1
+
+
+// unify.sml
+
+private val found = new mut Ref(false)
+
+private fun same_ref(r, t) = if t is REF(r1) then r === r1 else false
+
+private fun occurs_check(r)(t) =
+  fun oc(t) = if t is
+    STR(_, ts) then ocs(ts)
+    REF(r1) then (if r1.Ref#value is
+      Some(s) then oc(s)
+      else r !== r1)
+    CON(_) then true
+    INT(_) then true
+  fun ocs(ts) = if ts is
+    Nil then true
+    t :: ts1 then oc(t) && ocs(ts1)
+  oc(t)
+
+private fun deref(t) = if
+  t is REF(x) and x.Ref#value is Some(s) then deref(s)
+  else t
+
+private fun unify1(p1, p2)(sc) = if
+  p1 is REF(r) then unify_REF(r, p2)(sc)
+  p2 is REF(r) then unify_REF(r, p1)(sc)
+  p1 is STR(f, ts) and p2 is STR(g, ss) then if f == g then unifys(ts, ss)(sc) else ()
+  p1 is CON(f) and p2 is CON(g) then if f == g then sc() else ()
+  p1 is INT(f) and p2 is INT(g) then if f == g then sc() else ()
+  else ()
+
+private fun unifys(l1, l2)(sc) = if
+  l1 is Nil and l2 is Nil then sc()
+  l1 is t :: ts and l2 is s :: ss then unify1(deref(t), deref(s))(() => unifys(ts, ss)(sc))
+  else ()
+
+private fun unify_REF(r, t)(sc) =
+  if same_ref(r, t) then sc()
+  else if occurs_check(r)(t) then
+    bind(r, t)
+    sc()
+  else ()
+
+private fun unify(s, t)(sc) = if found.Ref#value then () else unify1(deref(s), deref(t))(sc)
+
+
+// data.sml
+
+private val cons_s = "cons"
+private val x_s = "x"
+private val nil_s = "nil"
+private val o_s = "o"
+private val s_s = "s"
+private val con_o_s = CON(o_s)
+private val con_nil_s = CON(nil_s)
+private val con_x_s = CON(x_s)
+
+private fun exists_(sc) = sc(REF(new mut Ref(None)))
+
+private fun move_horiz(unify, exists_, trail)(t_1, t_2)(sc) =
+  trail(() =>
+    trail(() =>
+      trail(() =>
+        trail(() =>
+          trail(() =>
+            trail(() =>
+              trail(() =>
+                trail(() =>
+                  trail(() =>
+                    trail(() =>
+                      trail(() =>
+                        exists_(t =>
+                          exists_(tt =>
+                            unify(t_1, STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: t :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                              unify(t_2, STR(cons_s, STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: t :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                                sc())))))
+                      exists_(p1 =>
+                        exists_(p5 =>
+                          exists_(tt =>
+                            unify(t_1, STR(cons_s, STR(cons_s, p1 :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, p5 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                              unify(t_2, STR(cons_s, STR(cons_s, p1 :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: STR(cons_s, p5 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                                sc()))))))
+                    exists_(p1 =>
+                      exists_(p2 =>
+                        exists_(tt =>
+                          unify(t_1, STR(cons_s, STR(cons_s, p1 :: STR(cons_s, p2 :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                            unify(t_2, STR(cons_s, STR(cons_s, p1 :: STR(cons_s, p2 :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                              sc()))))))
+                  exists_(l1 =>
+                    exists_(p4 =>
+                      exists_(tt =>
+                        unify(t_1, STR(cons_s, l1 :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, p4 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil))(() =>
+                          unify(t_2, STR(cons_s, l1 :: STR(cons_s, STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: STR(cons_s, p4 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil))(() =>
+                            sc()))))))
+                exists_(l1 =>
+                  exists_(p1 =>
+                    exists_(tt =>
+                      unify(t_1, STR(cons_s, l1 :: STR(cons_s, STR(cons_s, p1 :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil))(() =>
+                        unify(t_2, STR(cons_s, l1 :: STR(cons_s, STR(cons_s, p1 :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil))(() =>
+                          sc()))))))
+              exists_(l1 =>
+                exists_(l2 =>
+                  exists_(tt =>
+                    unify(t_1, STR(cons_s, l1 :: STR(cons_s, l2 :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil) :: Nil))(() =>
+                      unify(t_2, STR(cons_s, l1 :: STR(cons_s, l2 :: STR(cons_s, STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil) :: Nil))(() =>
+                        sc()))))))
+            exists_(t =>
+              exists_(tt =>
+                unify(t_1, STR(cons_s, STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: t :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                  unify(t_2, STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: t :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                    sc())))))
+          exists_(p1 =>
+            exists_(p5 =>
+              exists_(tt =>
+                unify(t_1, STR(cons_s, STR(cons_s, p1 :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, p5 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                  unify(t_2, STR(cons_s, STR(cons_s, p1 :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: STR(cons_s, p5 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                    sc()))))))
+        exists_(p1 =>
+          exists_(p2 =>
+            exists_(tt =>
+              unify(t_1, STR(cons_s, STR(cons_s, p1 :: STR(cons_s, p2 :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                unify(t_2, STR(cons_s, STR(cons_s, p1 :: STR(cons_s, p2 :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil))(() =>
+                  sc()))))))
+      exists_(l1 =>
+        exists_(p4 =>
+          exists_(tt =>
+            unify(t_1, STR(cons_s, l1 :: STR(cons_s, STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, p4 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil))(() =>
+              unify(t_2, STR(cons_s, l1 :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: STR(cons_s, p4 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil))(() =>
+                sc()))))))
+    exists_(l1 =>
+      exists_(p1 =>
+        exists_(tt =>
+          unify(t_1, STR(cons_s, l1 :: STR(cons_s, STR(cons_s, p1 :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil))(() =>
+            unify(t_2, STR(cons_s, l1 :: STR(cons_s, STR(cons_s, p1 :: STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil))(() =>
+              sc()))))))
+  exists_(l1 =>
+    exists_(l2 =>
+      exists_(tt =>
+        unify(t_1, STR(cons_s, l1 :: STR(cons_s, l2 :: STR(cons_s, STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil) :: Nil))(() =>
+          unify(t_2, STR(cons_s, l1 :: STR(cons_s, l2 :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_o_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: tt :: Nil) :: Nil) :: Nil))(() =>
+            sc())))))
+
+private fun rotate(unify, exists_, trail)(t_1, t_2)(sc) =
+  exists_(p11 =>
+    exists_(p12 =>
+      exists_(p13 =>
+        exists_(p14 =>
+          exists_(p15 =>
+            exists_(p21 =>
+              exists_(p22 =>
+                exists_(p23 =>
+                  exists_(p24 =>
+                    exists_(p31 =>
+                      exists_(p32 =>
+                        exists_(p33 =>
+                          exists_(p41 =>
+                            exists_(p42 =>
+                              exists_(p51 =>
+                                unify(t_1, STR(cons_s, STR(cons_s, p11 :: STR(cons_s, p12 :: STR(cons_s, p13 :: STR(cons_s, p14 :: STR(cons_s, p15 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p21 :: STR(cons_s, p22 :: STR(cons_s, p23 :: STR(cons_s, p24 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p31 :: STR(cons_s, p32 :: STR(cons_s, p33 :: con_nil_s :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p41 :: STR(cons_s, p42 :: con_nil_s :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p51 :: con_nil_s :: Nil) :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil))(() =>
+                                  unify(t_2, STR(cons_s, STR(cons_s, p51 :: STR(cons_s, p41 :: STR(cons_s, p31 :: STR(cons_s, p21 :: STR(cons_s, p11 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p42 :: STR(cons_s, p32 :: STR(cons_s, p22 :: STR(cons_s, p12 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p33 :: STR(cons_s, p23 :: STR(cons_s, p13 :: con_nil_s :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p24 :: STR(cons_s, p14 :: con_nil_s :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p15 :: con_nil_s :: Nil) :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil))(() =>
+                                    sc())))))))))))))))))
+
+private fun move(unify, exists_, trail)(t_1, t_2)(sc) =
+  trail(() =>
+    trail(() =>
+      exists_(x =>
+        exists_(y =>
+          unify(t_1, x)(() =>
+            unify(t_2, y)(() =>
+              move_horiz(unify, exists_, trail)(x, y)(sc))))))
+    exists_(x =>
+      exists_(x1 =>
+        exists_(y =>
+          exists_(y1 =>
+            unify(t_1, x)(() =>
+              unify(t_2, y)(() =>
+                rotate(unify, exists_, trail)(x, x1)(() =>
+                  move_horiz(unify, exists_, trail)(x1, y1)(() =>
+                    rotate(unify, exists_, trail)(y, y1)(sc))))))))))
+  exists_(x =>
+    exists_(x1 =>
+      exists_(y =>
+        exists_(y1 =>
+          unify(t_1, x)(() =>
+            unify(t_2, y)(() =>
+              rotate(unify, exists_, trail)(x1, x)(() =>
+                move_horiz(unify, exists_, trail)(x1, y1)(() =>
+                  rotate(unify, exists_, trail)(y1, y)(sc)))))))))
+
+private fun solitaire(unify, exists_, trail)(t_1, t_2, t_3)(sc) =
+  trail(() =>
+    exists_(x =>
+      unify(t_1, x)(() =>
+        unify(t_2, STR(cons_s, x :: con_nil_s :: Nil))(() =>
+          unify(t_3, INT(0))(() =>
+            sc())))))
+  exists_(n =>
+    exists_(x =>
+      exists_(y =>
+        exists_(z =>
+          unify(t_1, x)(() =>
+            unify(t_2, STR(cons_s, x :: z :: Nil))(() =>
+              unify(t_3, STR(s_s, n :: Nil))(() =>
+                move(unify, exists_, trail)(x, y)(() =>
+                  solitaire(unify, exists_, trail)(y, z, n)(sc)))))))))
+
+private fun solution2(unify, exists_, trail)(t_1)(sc) =
+  exists_(x =>
+    unify(t_1, x)(() =>
+      solitaire(unify, exists_, trail)(STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: con_nil_s :: Nil) :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil), x, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, INT(0) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil))(sc)))
+
+
+// main.sml
+
+fun main() =
+  set found.Ref#value = false
+  reset_trail()
+  set trail_counter.Ref#value = 0
+  exists_(z => solution2(unify, exists_, trail)(z)(() => set found.Ref#value = true))
+  found.Ref#value
