@@ -1,0 +1,22 @@
+:.
+:js
+
+
+import "../../../mlscript-compile/nofib/sml/tardis.mls"
+tardis.main()
+//│ = Cons(
+//│   236,
+//│   Cons(
+//│     206,
+//│     Cons(
+//│       176,
+//│       Cons(
+//│         146,
+//│         Cons(
+//│           126,
+//│           Cons(117, Cons(98, Cons(70, Cons(40, Cons(20, Cons(0, Nil))))))
+//│         )
+//│       )
+//│     )
+//│   )
+//│ )
