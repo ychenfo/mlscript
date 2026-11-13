@@ -81,13 +81,16 @@ class CompilationPipeline(using Config, Raise, State, Ctx, SymbolPrinter):
     // which can simplify the variables in branch bodies,
     // see hkmc2/shared/src/test/mlscript/dead-param-elim/todos.mls
     
+    // * The simplifier is instantiated once and applied twice below so that both passes draw from
+    // * a single automatic-inlining growth budget for this compilation unit.
+    val simplifier = BlockSimplifier(preservedSymbols, otl, printer)
+    
+    runPass("BlockSimplifier 0")(simplifier.apply)
+    
     runPass("FlowAnalysisBasedRewrite")(otl.givenIn(FlowAnalysisBasedRewrite.apply))
     
     runPass("WorkerWrapper")(WorkerWrapper(preservedSymbols, otl, printer))
     
-    // * The simplifier is instantiated once and applied twice below so that both passes draw from
-    // * a single automatic-inlining growth budget for this compilation unit.
-    val simplifier = BlockSimplifier(preservedSymbols, otl, printer)
     
     // * First simplification pass
     runPass("BlockSimplifier 1")(simplifier.apply)

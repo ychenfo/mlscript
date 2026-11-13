@@ -1,0 +1,758 @@
+#lang(0.3.x)
+
+import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+
+open annotations { pure }
+
+// "simple": a 2-d hydrodynamics and heat-conduction simulation on a grid
+// source: the sml/nj benchmark suite, as the mlton suite's single-file copy in the webs artifact
+// (zenodo 15050194), 3cps/test/programs/from-mlton/simple.sml (grid_max = 100, step_count = 1)
+// port changes:
+// - functor Simple is applied once, so its body is flattened into top-level code with grid_max = 100 and
+//   step_count = 1; its module-level values (grid bounds, coefficient tables, nbc, …) stay module-level `val`s,
+//   built in order as when the functor is applied (module-level state is fine for this program, as for logic);
+//   Control.trace stays a module-level cell, false, guarding the silenced prints
+// - Array2 (record {size, value}) is the data class A2; Basis arrays are `mut` tuples filled by a recursive
+//   helper; Math.sqrt/cos/sin, abs and Real.trunc are `@pure` wrappers over js Math; `real` is the identity
+// - `for {from, step, to} body` is `for_(from, step, to)(body)`; `from` is `from_`
+// - a function whose tuple argument is passed as a value (nodes and zones, e.g. `north`, `zone_A`, the
+//   `fn zone => …` callbacks, `work_done`, `heat_flow`, the interior_function callbacks) keeps ONE tuple
+//   parameter; directly called functions with literal tuple arguments take several parameters
+// - point-free values (`val northeast = north o east`, `val zone_corner_northeast = north`,
+//   `val reflect_north = fn x => reflect north x`) become functions with an explicit parameter
+// - nested `let … in … end` blocks in `val` bindings are flattened into the enclosing block (names kept
+//   distinct, order kept); `val (a, b) = e` is `if e is [a, b] then …`; primed names x' are x_p, upper-case
+//   names are lower-cased (A, M, U, W, Gamma, …)
+// - the three diagnostic `handle`s (handle Sqrt / Overflow, which print and re-raise on error paths) are
+//   dropped, and with them ohandle; the impossible MaxList/MinList/SumList and Array2.Subscript raises are
+//   left out; Real.toString in the trace print is a dummy (printing is silenced anyway)
+
+module simple with ...
+
+
+
+data class (::) Cons(head, tail)
+object Nil
+
+class Ref(val value)
+
+@pure private fun sqrt(x) = globalThis.Math.sqrt(x)
+
+@pure private fun cos(x) = globalThis.Math.cos(x)
+
+@pure private fun sin(x) = globalThis.Math.sin(x)
+
+@pure private fun abs(x) = globalThis.Math.abs(x)
+
+@pure private fun trunc(x) = globalThis.Math.trunc(x)
+
+private fun real(i) = i
+
+private fun hd(l) = if l is x :: xs then x
+
+private fun append(l1, l2) = if l1 is
+  Nil then l2
+  x :: xs then x :: append(xs, l2)
+
+private fun rev(l) =
+  fun go(l, acc) = if l is
+    Nil then acc
+    x :: xs then go(xs, x :: acc)
+  go(l, Nil)
+
+private fun map(f)(l) = if l is
+  Nil then Nil
+  x :: xs then f(x) :: map(f)(xs)
+
+private fun compose(f, g) = x => f(g(x))
+
+private fun fillArray(arr, i, n, x) = if i == n then arr else
+  set arr.[i] = x
+  fillArray(arr, i + 1, n, x)
+
+private fun arrayArray(n, v) = fillArray(mut [], 0, n, v)
+
+private fun arraySub(a, i) = a.[i]
+
+private fun arrayUpdate(a, i, v) = set a.[i] = v
+
+private fun print_(s) = ()
+
+private fun realToString(x) = ""
+
+
+private val grid_max = 100
+
+private val step_count = 1
+
+// structure Control
+private val trace = new mut Ref(false)
+
+// structure Array2: A2(size, value)
+data class A2(size, value)
+
+private fun a2Index(i, s) = if i is [i1, i2] and s is [s1, s2] and i1 >= 0 && i1 < s1 && i2 >= 0 && i2 < s2 then
+  i1 * s2 + i2
+
+private fun a2Array(bnds, v) = if bnds is [i1, i2] then A2(bnds, arrayArray(i1 * i2, v))
+
+private fun a2Sub(a, indx) = if a is A2(size, value) then arraySub(value, a2Index(indx, size))
+
+private fun a2Update(a, i, v) = if a is A2(size, value) then arrayUpdate(value, a2Index(i, size), v)
+
+
+// the original's inner `f2(e, a :: r) = f(e, f2(a, r))` is not a tail call; on the ~9,600-element lists of
+// map_interior_zones it overflows the js stack, so this applies f in the same order (last element first)
+// with a tail-recursive loop over the reversed list
+private fun fold(f)(l) = if l is
+  Nil then b => b
+  a :: r then b =>
+    fun loop(l2, acc) = if l2 is
+      Nil then acc
+      x :: xs then loop(xs, f(x, acc))
+    loop(rev(l), b)
+
+private fun min(x, y) = if x < y then x else y
+
+private fun max(x, y) = if x < y then y else x
+
+private fun max_list(l) = if l is _ :: _ then fold(max)(l)(hd(l))
+
+private fun min_list(l) = if l is _ :: _ then fold(min)(l)(hd(l))
+
+private fun sum_list(l) = if l is _ :: _ then fold((a, b) => a + b)(l)(0.0)
+
+private fun for_(start, delta, endd)(body) =
+  if delta > 0 && endd >= start then
+    fun f(x) = if x > endd then () else
+      body(x)
+      f(x + delta)
+    f(start)
+  else if endd <= start then
+    fun f(x) = if x < endd then () else
+      body(x)
+      f(x + delta)
+    f(start)
+  else ()
+
+private fun from_(n, m) = if n > m then Nil else n :: from_(n + 1, m)
+
+private fun flatten(l) = if l is
+  Nil then Nil
+  x :: xs then append(x, flatten(xs))
+
+private fun pow(x, y) = if y == 0 then 1.0 else x * pow(x, y - 1)
+
+private fun array2(bounds, v) = if bounds is [[l1, u1], [l2, u2]] then
+  [a2Array([u1 - l1 + 1, u2 - l2 + 1], v), bounds]
+
+private fun sub2(arr, kl) = if arr is [a, [[lb1, ub1], [lb2, ub2]]] and kl is [k, l] then
+  a2Sub(a, [k - lb1, l - lb2])
+
+private fun update2(arr, kl, v) = if arr is [a, [[lb1, _], [lb2, _]]] and kl is [k, l] then
+  a2Update(a, [k - lb1, l - lb2], v)
+
+private fun array1(lu, v) = if lu is [l, u] then [arrayArray(u - l + 1, v), [l, u]]
+
+private fun sub1(arr, i) = if arr is [a, [l, u]] then arraySub(a, i - l)
+
+private fun update1(arr, i, v) = if arr is [a, [l, _]] then arrayUpdate(a, i - l, v)
+
+private fun bounds1(arr) = if arr is [_, b] then b
+
+
+// specification of the state variable computation
+
+private val grid_size = [[2, grid_max], [2, grid_max]]
+
+private fun north(kl) = if kl is [k, l] then [k - 1, l]
+private fun south(kl) = if kl is [k, l] then [k + 1, l]
+
+private fun east(kl) = if kl is [k, l] then [k, l + 1]
+private fun west(kl) = if kl is [k, l] then [k, l - 1]
+
+private fun northeast(sub2, update2, pow, north, south, east, west)(x) = compose(north, east)(x)
+private fun southeast(sub2, update2, pow, north, south, east, west)(x) = compose(south, east)(x)
+private fun northwest(sub2, update2, pow, north, south, east, west)(x) = compose(north, west)(x)
+private fun southwest(sub2, update2, pow, north, south, east, west)(x) = compose(south, west)(x)
+
+private fun farnorth(sub2, update2, pow, north, south, east, west)(x) = compose(north, north)(x)
+private fun farsouth(sub2, update2, pow, north, south, east, west)(x) = compose(south, south)(x)
+private fun fareast(sub2, update2, pow, north, south, east, west)(x) = compose(east, east)(x)
+private fun farwest(sub2, update2, pow, north, south, east, west)(x) = compose(west, west)(x)
+
+private fun zone_A(kl) = if kl is [k, l] then [k, l]
+private fun zone_B(kl) = if kl is [k, l] then [k + 1, l]
+
+private fun zone_C(kl) = if kl is [k, l] then [k + 1, l + 1]
+private fun zone_D(kl) = if kl is [k, l] then [k, l + 1]
+
+private fun zone_corner_northeast(sub2, update2, pow, north, south, east, west)(zone) = north(zone)
+private fun zone_corner_northwest(sub2, update2, pow, north, south, east, west)(zone) = northwest(sub2, update2, pow, north, south, east, west)(zone)
+private fun zone_corner_southeast(zone) = zone
+private fun zone_corner_southwest(sub2, update2, pow, north, south, east, west)(zone) = west(zone)
+
+private val kmin = if grid_size is [[x, _], _] then x
+private val kmax = if grid_size is [[_, x], _] then x
+private val lmin = if grid_size is [_, [x, _]] then x
+private val lmax = if grid_size is [_, [_, x]] then x
+
+private val dimension_all_nodes = [[kmin - 1, kmax + 1], [lmin - 1, lmax + 1]]
+
+private val dimension_interior_nodes = [[kmin, kmax], [lmin, lmax]]
+private fun for_interior_nodes(f) =
+  for_(kmin, 1, kmax)(k => for_(lmin, 1, lmax)(l => f(k)(l)))
+
+private val dimension_all_zones = [[kmin, kmax + 1], [lmin, lmax + 1]]
+private fun for_all_zones(f) =
+  for_(kmin, 1, kmax + 1)(k => for_(lmin, 1, lmax + 1)(l => f([k, l])))
+
+private val dimension_interior_zones = [[kmin + 1, kmax], [lmin + 1, lmax]]
+private fun for_interior_zones(f) =
+  for_(kmin + 1, 1, kmax)(k => for_(lmin + 1, 1, lmax)(l => f([k, l])))
+
+private fun map_interior_nodes(f) =
+  flatten(map(k => map(l => f([k, l]))(from_(lmin, lmax)))(from_(kmin, kmax)))
+private fun map_interior_zones(f) =
+  flatten(map(k => map(l => f([k, l]))(from_(lmin + 1, lmax)))(from_(kmin + 1, kmax)))
+
+private fun for_north_ward_interior_zones(f) =
+  for_(kmax, -1, kmin + 1)(k => for_(lmin + 1, 1, lmax)(l => f([k, l])))
+private fun for_west_ward_interior_zones(f) =
+  for_(kmin + 1, 1, kmax)(k => for_(lmax, -1, lmin + 1)(l => f([k, l])))
+
+private fun for_north_zones(f) = for_(lmin, 1, lmax + 1)(l => f([kmin, l]))
+private fun for_south_zones(f) = for_(lmin + 1, 1, lmax)(l => f([kmax + 1, l]))
+private fun for_east_zones(f) = for_(kmin + 1, 1, kmax + 1)(k => f([k, lmax + 1]))
+private fun for_west_zones(f) = for_(kmin + 1, 1, kmax + 1)(k => f([k, lmin]))
+
+private fun reflect(sub2, update2, pow, north, south, east, west)(dir)(node)(a) = sub2(a, dir(node))
+private fun reflect_north(sub2, update2, pow, north, south, east, west)(x) = reflect(sub2, update2, pow, north, south, east, west)(north)(x)
+private fun reflect_south(sub2, update2, pow, north, south, east, west)(x) = reflect(sub2, update2, pow, north, south, east, west)(south)(x)
+private fun reflect_east(sub2, update2, pow, north, south, east, west)(x) = reflect(sub2, update2, pow, north, south, east, west)(east)(x)
+private fun reflect_west(sub2, update2, pow, north, south, east, west)(x) = reflect(sub2, update2, pow, north, south, east, west)(west)(x)
+
+private fun for_north_nodes(f) = for_(lmin, 1, lmax - 1)(l => f([kmin - 1, l]))
+private fun for_south_nodes(f) = for_(lmin, 1, lmax - 1)(l => f([kmax + 1, l]))
+private fun for_east_nodes(f) = for_(kmin, 1, kmax - 1)(k => f([k, lmax + 1]))
+private fun for_west_nodes(f) = for_(kmin, 1, kmax - 1)(k => f([k, lmin - 1]))
+
+private val north_east_corner = [kmin - 1, lmax + 1]
+private val north_west_corner = [kmin - 1, lmin - 1]
+private val south_east_corner = [kmax + 1, lmax + 1]
+private val south_west_corner = [kmax + 1, lmin - 1]
+
+private val west_of_north_east = [kmin - 1, lmax]
+private val west_of_south_east = [kmax + 1, lmax]
+private val north_of_south_east = [kmax, lmax + 1]
+private val north_of_south_west = [kmax, lmin - 1]
+
+
+// initialization of parameters
+
+private val constant_heat_source = 0.0
+private val deltat_maximum = 0.01
+private val specific_heat = 0.1
+private val p_coeffs =
+  let m = array2([[0, 2], [0, 2]], 0.0)
+  update2(m, [1, 1], 0.06698)
+  m
+private val e_coeffs =
+  let m = array2([[0, 2], [0, 2]], 0.0)
+  update2(m, [0, 1], 0.1)
+  m
+private val p_poly = array2([[1, 4], [1, 5]], p_coeffs)
+
+private val e_poly = array2([[1, 4], [1, 5]], e_coeffs)
+
+private val rho_table =
+  let vv = array1([1, 3], 0.0)
+  update1(vv, 2, 1.0)
+  update1(vv, 3, 100.0)
+  vv
+private val theta_table =
+  let vv = array1([1, 4], 0.0)
+  update1(vv, 2, 3.0)
+  update1(vv, 3, 300.0)
+  update1(vv, 4, 3000.0)
+  vv
+
+private val extract_energy_tables_from_constants = [e_poly, 2, rho_table, theta_table]
+private val extract_pressure_tables_from_constants = [p_poly, 2, rho_table, theta_table]
+
+private val nbc =
+  let m = array2(dimension_all_zones, 1)
+  for_(lmin + 1, 1, lmax)(j => update2(m, [kmax + 1, j], 2))
+  update2(m, [kmin, lmin], 4)
+  update2(m, [kmin, lmax + 1], 4)
+  update2(m, [kmax + 1, lmin], 4)
+  update2(m, [kmax + 1, lmax + 1], 4)
+  m
+private val pbb =
+  let a = array1([1, 4], 0.0)
+  update1(a, 2, 6.0)
+  a
+private val pb =
+  let a = array1([1, 4], 1.0)
+  update1(a, 2, 0.0)
+  update1(a, 3, 0.0)
+  a
+private val qb = pb
+
+private val all_zero_nodes = array2(dimension_all_nodes, 0.0)
+
+private val all_zero_zones = array2(dimension_all_zones, 0.0)
+
+
+// positional coordinates (page 9-10)
+
+private fun make_position_matrix(sub2, update2, pow, north, south, east, west)(interior_function) =
+  let r_p = array2(dimension_all_nodes, 0.0)
+  let z_p = array2(dimension_all_nodes, 0.0)
+  fun boundary_position(rx, zx, ry, zy, ra, za) =
+    let rax = ra - rx
+    let zax = za - zx
+    let ryx = ry - rx
+    let zyx = zy - zx
+    let omega = 2.0 * (rax * ryx + zax * zyx) / (ryx * ryx + zyx * zyx)
+    let rb = rx - rax + omega * ryx
+    let zb = zx - zax + omega * zyx
+    [rb, zb]
+  fun reflect_node(x_dir, y_dir, a_dir, node) =
+    let rx = reflect(sub2, update2, pow, north, south, east, west)(x_dir)(node)(r_p)
+    let zx = reflect(sub2, update2, pow, north, south, east, west)(x_dir)(node)(z_p)
+    let ry = reflect(sub2, update2, pow, north, south, east, west)(y_dir)(node)(r_p)
+    let zy = reflect(sub2, update2, pow, north, south, east, west)(y_dir)(node)(z_p)
+    let ra = reflect(sub2, update2, pow, north, south, east, west)(a_dir)(node)(r_p)
+    let za = reflect(sub2, update2, pow, north, south, east, west)(a_dir)(node)(z_p)
+    boundary_position(rx, zx, ry, zy, ra, za)
+  fun u2(rvzv)(n) = if rvzv is [rv, zv] then
+    update2(r_p, n, rv)
+    update2(z_p, n, zv)
+  for_interior_nodes(k => l => u2(interior_function([k, l]))([k, l]))
+  for_north_nodes(n => u2(reflect_node(south, southeast(sub2, update2, pow, north, south, east, west), farsouth(sub2, update2, pow, north, south, east, west), n))(n))
+  for_south_nodes(n => u2(reflect_node(north, northeast(sub2, update2, pow, north, south, east, west), farnorth(sub2, update2, pow, north, south, east, west), n))(n))
+  for_east_nodes(n => u2(reflect_node(west, southwest(sub2, update2, pow, north, south, east, west), farwest(sub2, update2, pow, north, south, east, west), n))(n))
+  for_west_nodes(n => u2(reflect_node(east, southeast(sub2, update2, pow, north, south, east, west), fareast(sub2, update2, pow, north, south, east, west), n))(n))
+  u2(reflect_node(south, southwest(sub2, update2, pow, north, south, east, west), farsouth(sub2, update2, pow, north, south, east, west), west_of_north_east))(west_of_north_east)
+  u2(reflect_node(north, northwest(sub2, update2, pow, north, south, east, west), farnorth(sub2, update2, pow, north, south, east, west), west_of_south_east))(west_of_south_east)
+  u2(reflect_node(west, northwest(sub2, update2, pow, north, south, east, west), farwest(sub2, update2, pow, north, south, east, west), north_of_south_east))(north_of_south_east)
+  u2(reflect_node(east, northeast(sub2, update2, pow, north, south, east, west), fareast(sub2, update2, pow, north, south, east, west), north_of_south_west))(north_of_south_west)
+  u2(reflect_node(southwest(sub2, update2, pow, north, south, east, west), west, farwest(sub2, update2, pow, north, south, east, west), north_east_corner))(north_east_corner)
+  u2(reflect_node(northwest(sub2, update2, pow, north, south, east, west), west, farwest(sub2, update2, pow, north, south, east, west), south_east_corner))(south_east_corner)
+  u2(reflect_node(southeast(sub2, update2, pow, north, south, east, west), south, farsouth(sub2, update2, pow, north, south, east, west), north_west_corner))(north_west_corner)
+  u2(reflect_node(northeast(sub2, update2, pow, north, south, east, west), east, fareast(sub2, update2, pow, north, south, east, west), south_west_corner))(south_west_corner)
+  [r_p, z_p]
+
+
+// physical properties of a zone (page 10)
+
+private fun zone_area_vol(sub2, update2, pow, north, south, east, west)(rz, zone) = if rz is [r, z] then
+  let r1 = sub2(r, zone_corner_southwest(sub2, update2, pow, north, south, east, west)(zone))
+  let z1 = sub2(z, zone_corner_southwest(sub2, update2, pow, north, south, east, west)(zone))
+  let r2 = sub2(r, zone_corner_southeast(zone))
+  let z2 = sub2(z, zone_corner_southeast(zone))
+  let r3 = sub2(r, zone_corner_northeast(sub2, update2, pow, north, south, east, west)(zone))
+  let z3 = sub2(z, zone_corner_northeast(sub2, update2, pow, north, south, east, west)(zone))
+  let r4 = sub2(r, zone_corner_northwest(sub2, update2, pow, north, south, east, west)(zone))
+  let z4 = sub2(z, zone_corner_northwest(sub2, update2, pow, north, south, east, west)(zone))
+  let area1 = (r2 - r1) * (z3 - z1) - (r3 - r2) * (z3 - z2)
+  let radius1 = 0.3333 * (r1 + r2 + r3)
+  let volume1 = area1 * radius1
+  let area2 = (r3 - r1) * (z4 - z3) - (r4 - r3) * (z3 - z1)
+  let radius2 = 0.3333 * (r1 + r3 + r4)
+  let volume2 = area2 * radius2
+  [area1 + area2, volume1 + volume2]
+
+
+// velocity (page 8)
+
+private fun make_velocity(sub2, update2, pow, north, south, east, west)(uw, rz, p, q, alpha, rho, delta_t) = if uw is [u, w] and rz is [r, z] then
+  fun line_integral(p, z, node) =
+    sub2(p, zone_A(node)) * (sub2(z, west(node)) - sub2(z, north(node))) +
+      sub2(p, zone_B(node)) * (sub2(z, south(node)) - sub2(z, west(node))) +
+      sub2(p, zone_C(node)) * (sub2(z, east(node)) - sub2(z, south(node))) +
+      sub2(p, zone_D(node)) * (sub2(z, north(node)) - sub2(z, east(node)))
+  fun regional_mass(node) =
+    0.5 * (sub2(rho, zone_A(node)) * sub2(alpha, zone_A(node)) +
+      sub2(rho, zone_B(node)) * sub2(alpha, zone_B(node)) +
+      sub2(rho, zone_C(node)) * sub2(alpha, zone_C(node)) +
+      sub2(rho, zone_D(node)) * sub2(alpha, zone_D(node)))
+  fun velocity(node) =
+    let d = regional_mass(node)
+    let n1 = -(line_integral(p, z, node)) - line_integral(q, z, node)
+    let n2 = line_integral(p, r, node) + line_integral(q, r, node)
+    let u_dot = n1 / d
+    let w_dot = n2 / d
+    [sub2(u, node) + delta_t * u_dot, sub2(w, node) + delta_t * w_dot]
+  let uu = array2(dimension_interior_nodes, 0.0)
+  let ww = array2(dimension_interior_nodes, 0.0)
+  for_interior_nodes(k => l => if velocity([k, l]) is [uv, wv] then
+    update2(uu, [k, l], uv)
+    update2(ww, [k, l], wv))
+  [uu, ww]
+
+private fun make_position(sub2, update2, pow, north, south, east, west)(rz, delta_t, uw_p) = if rz is [r, z] and uw_p is [u_p, w_p] then
+  fun interior_position(node) =
+    [sub2(r, node) + delta_t * sub2(u_p, node), sub2(z, node) + delta_t * sub2(w_p, node)]
+  make_position_matrix(sub2, update2, pow, north, south, east, west)(interior_position)
+
+private fun make_area_density_volume(sub2, update2, pow, north, south, east, west)(rho, s, x_p) =
+  let alpha_p = array2(dimension_all_zones, 0.0)
+  let s_p = array2(dimension_all_zones, 0.0)
+  let rho_p = array2(dimension_all_zones, 0.0)
+  fun interior_area(zone) = if zone_area_vol(sub2, update2, pow, north, south, east, west)(x_p, zone) is [area, vol] then
+    let density = sub2(rho, zone) * sub2(s, zone) / vol
+    [area, vol, density]
+  fun reflect_area_vol_density(reflect_function) =
+    [reflect_function(alpha_p), reflect_function(s_p), reflect_function(rho_p)]
+  fun update_asr(zone, asr) = if asr is [a, s, r] then
+    update2(alpha_p, zone, a)
+    update2(s_p, zone, s)
+    update2(rho_p, zone, r)
+  fun r_area_vol_den(reflect_dir, zone) =
+    let asr = reflect_area_vol_density(reflect_dir(zone))
+    update_asr(zone, asr)
+  for_interior_zones(zone => update_asr(zone, interior_area(zone)))
+  for_south_zones(zone => r_area_vol_den(reflect_north(sub2, update2, pow, north, south, east, west), zone))
+  for_east_zones(zone => r_area_vol_den(reflect_west(sub2, update2, pow, north, south, east, west), zone))
+  for_west_zones(zone => r_area_vol_den(reflect_east(sub2, update2, pow, north, south, east, west), zone))
+  for_north_zones(zone => r_area_vol_den(reflect_south(sub2, update2, pow, north, south, east, west), zone))
+  [alpha_p, rho_p, s_p]
+
+
+// artifical viscosity (page 11)
+
+private fun make_viscosity(sub2, update2, pow, north, south, east, west)(p, uw_p, rz_p, alpha_p, rho_p) = if uw_p is [u_p, w_p] and rz_p is [r_p, z_p] then
+  fun interior_viscosity(zone) =
+    fun upper_del(f) =
+      0.5 * ((sub2(f, zone_corner_southeast(zone)) - sub2(f, zone_corner_northeast(sub2, update2, pow, north, south, east, west)(zone))) +
+        (sub2(f, zone_corner_southwest(sub2, update2, pow, north, south, east, west)(zone)) - sub2(f, zone_corner_northwest(sub2, update2, pow, north, south, east, west)(zone))))
+    fun lower_del(f) =
+      0.5 * ((sub2(f, zone_corner_southeast(zone)) - sub2(f, zone_corner_southwest(sub2, update2, pow, north, south, east, west)(zone))) +
+        (sub2(f, zone_corner_northeast(sub2, update2, pow, north, south, east, west)(zone)) - sub2(f, zone_corner_northwest(sub2, update2, pow, north, south, east, west)(zone))))
+    let xi = pow(upper_del(r_p), 2) + pow(upper_del(z_p), 2)
+    let eta = pow(lower_del(r_p), 2) + pow(lower_del(z_p), 2)
+    let upper_disc = upper_del(r_p) * lower_del(w_p) - upper_del(z_p) * lower_del(u_p)
+    let lower_disc = upper_del(u_p) * lower_del(z_p) - upper_del(w_p) * lower_del(r_p)
+    let upper_ubar = if upper_disc < 0.0 then upper_disc / xi else 0.0
+    let lower_ubar = if lower_disc < 0.0 then lower_disc / eta else 0.0
+    let gamma = 1.6
+    let speed_of_sound = gamma * sub2(p, zone) / sub2(rho_p, zone)
+    let ubar = pow(upper_ubar, 2) + pow(lower_ubar, 2)
+    let viscosity = sub2(rho_p, zone) * (1.5 * ubar + 0.5 * speed_of_sound * sqrt(ubar))
+    let length = sqrt(pow(upper_del(r_p), 2) + pow(lower_del(r_p), 2))
+    let courant_delta = 0.5 * sub2(alpha_p, zone) / (speed_of_sound * length)
+    [viscosity, courant_delta]
+  let q_p = array2(dimension_all_zones, 0.0)
+  let d = array2(dimension_all_zones, 0.0)
+  fun reflect_viscosity_cdelta(direction, zone) =
+    sub2(q_p, direction(zone)) * sub1(qb, sub2(nbc, zone))
+  fun do_zones(dir, zone) = update2(q_p, zone, reflect_viscosity_cdelta(dir, zone))
+  for_interior_zones(zone => if interior_viscosity(zone) is [qv, dv] then
+    update2(q_p, zone, qv)
+    update2(d, zone, dv))
+  for_south_zones(zone => do_zones(north, zone))
+  for_east_zones(zone => do_zones(west, zone))
+  for_west_zones(zone => do_zones(east, zone))
+  for_north_zones(zone => do_zones(south, zone))
+  [q_p, d]
+
+
+// pressure and energy polynomial (page 12)
+
+private fun polynomial(sub2, update2, pow, north, south, east, west)(g, degree, rho_table, theta_table, rho_value, theta_value) =
+  fun table_search(table, value) = if bounds1(table) is [low, high] then
+    fun search_down(i) = if value > sub1(table, i - 1) then i else search_down(i - 1)
+    if value > sub1(table, high) then high + 1
+    else if value <= sub1(table, low) then low
+    else search_down(high)
+  let rho_index = table_search(rho_table, rho_value)
+  let theta_index = table_search(theta_table, theta_value)
+  let a = sub2(g, [rho_index, theta_index])
+  fun from_(n, m) = if n > m then Nil else n :: from_(n + 1, m)
+  fun f(i, j) = sub2(a, [i, j]) * pow(rho_value, i) * pow(theta_value, j)
+  sum_list(map(i => sum_list(map(j => f(i, j))(from_(0, degree))))(from_(0, degree)))
+
+private fun zonal_pressure(sub2, update2, pow, north, south, east, west)(rho_value, theta_value) =
+  if extract_pressure_tables_from_constants is [g, degree, rho_table, theta_table] then
+    polynomial(sub2, update2, pow, north, south, east, west)(g, degree, rho_table, theta_table, rho_value, theta_value)
+
+private fun zonal_energy(sub2, update2, pow, north, south, east, west)(rho_value, theta_value) =
+  if extract_energy_tables_from_constants is [g, degree, rho_table, theta_table] then
+    polynomial(sub2, update2, pow, north, south, east, west)(g, degree, rho_table, theta_table, rho_value, theta_value)
+
+private val dx = 0.000001
+private val tiny = 0.000001
+
+private fun newton_raphson(f, x) =
+  fun iter(x, fx) =
+    if fx > tiny then
+      let fxdx = f(x + dx)
+      let denom = fxdx - fx
+      if denom < tiny then iter(x, tiny) else iter(x - fx * dx / denom, fxdx)
+    else x
+  iter(x, f(x))
+
+
+// temperature (page 13-14)
+
+private fun make_temperature(sub2, update2, pow, north, south, east, west)(p, epsilon, rho, theta, rho_prime, q_prime) =
+  fun interior_temperature(zone) =
+    let qkl = sub2(q_prime, zone)
+    let rho_kl = sub2(rho, zone)
+    let rho_prime_kl = sub2(rho_prime, zone)
+    let tau_kl = 1.0 / rho_prime_kl - 1.0 / rho_kl
+    fun energy_equation(epsilon_kl)(theta_kl) = epsilon_kl - zonal_energy(sub2, update2, pow, north, south, east, west)(rho_kl, theta_kl)
+    let epsilon_0 = sub2(epsilon, zone)
+    fun revised_energy(pkl) = epsilon_0 - (pkl + qkl) * tau_kl
+    fun revised_temperature(epsilon_kl)(theta_kl) = newton_raphson(energy_equation(epsilon_kl), theta_kl)
+    fun revised_pressure(theta_kl) = zonal_pressure(sub2, update2, pow, north, south, east, west)(rho_kl, theta_kl)
+    let p_0 = sub2(p, zone)
+    let theta_0 = sub2(theta, zone)
+    let epsilon_1 = revised_energy(p_0)
+    let theta_1 = revised_temperature(epsilon_1)(theta_0)
+    let p_1 = revised_pressure(theta_1)
+    let epsilon_2 = revised_energy(p_1)
+    let theta_2 = revised_temperature(epsilon_2)(theta_1)
+    theta_2
+  let m = array2(dimension_all_zones, constant_heat_source)
+  for_interior_zones(zone => update2(m, zone, interior_temperature(zone)))
+  m
+
+
+// heat conduction
+
+private fun make_cc(sub2, update2, pow, north, south, east, west)(alpha_prime, theta_hat) =
+  fun interior_cc(zone) =
+    0.0001 * pow(sub2(theta_hat, zone), 2) * sqrt(abs(sub2(theta_hat, zone))) / sub2(alpha_prime, zone)
+  let cc = array2(dimension_all_zones, 0.0)
+  for_interior_zones(zone => update2(cc, zone, interior_cc(zone)))
+  for_south_zones(zone => update2(cc, zone, reflect_north(sub2, update2, pow, north, south, east, west)(zone)(cc)))
+  for_west_zones(zone => update2(cc, zone, reflect_east(sub2, update2, pow, north, south, east, west)(zone)(cc)))
+  for_east_zones(zone => update2(cc, zone, reflect_west(sub2, update2, pow, north, south, east, west)(zone)(cc)))
+  for_north_zones(zone => update2(cc, zone, reflect_south(sub2, update2, pow, north, south, east, west)(zone)(cc)))
+  cc
+
+private fun make_sigma(sub2, update2, pow, north, south, east, west)(deltat, rho_prime, alpha_prime) =
+  fun interior_sigma(zone) =
+    sub2(rho_prime, zone) * sub2(alpha_prime, zone) * specific_heat / deltat
+  let m = array2(dimension_interior_zones, 0.0)
+  if trace.Ref#value then print_("\t\tmake_sigma:deltat = " + realToString(deltat) + "\n") else ()
+  for_interior_zones(zone => update2(m, zone, interior_sigma(zone)))
+  m
+
+private fun make_gamma(sub2, update2, pow, north, south, east, west)(rz_prime, cc, succeeding, adjacent) = if rz_prime is [r_prime, z_prime] then
+  fun interior_gamma(zone) =
+    let r1 = sub2(r_prime, zone_corner_southeast(zone))
+    let z1 = sub2(z_prime, zone_corner_southeast(zone))
+    let r2 = sub2(r_prime, zone_corner_southeast(adjacent(zone)))
+    let z2 = sub2(z_prime, zone_corner_southeast(adjacent(zone)))
+    let cross_section = 0.5 * (r1 + r2) * (pow(r1 - r2, 2) + pow(z1 - z2, 2))
+    let c1 = sub2(cc, zone)
+    let c2 = sub2(cc, succeeding(zone))
+    let specific_conductivity = 2.0 * c1 * c2 / (c1 + c2)
+    cross_section * specific_conductivity
+  let m = array2(dimension_all_zones, 0.0)
+  for_interior_zones(zone => update2(m, zone, interior_gamma(zone)))
+  m
+
+private fun make_ab(sub2, update2, pow, north, south, east, west)(theta, sigma, gamma_, preceding) =
+  let a = array2(dimension_all_zones, 0.0)
+  let b = array2(dimension_all_zones, 0.0)
+  fun interior_ab(zone) =
+    let denom = sub2(sigma, zone) + sub2(gamma_, zone) + sub2(gamma_, preceding(zone)) * (1.0 - sub2(a, preceding(zone)))
+    let nume1 = sub2(gamma_, zone)
+    let nume2 = sub2(gamma_, preceding(zone)) * sub2(b, preceding(zone)) + sub2(sigma, zone) * sub2(theta, zone)
+    [nume1 / denom, nume2 / denom]
+  let f = zone => update2(b, zone, sub2(theta, zone))
+  for_north_zones(f)
+  for_south_zones(f)
+  for_west_zones(f)
+  for_east_zones(f)
+  for_interior_zones(zone => if interior_ab(zone) is [ab1, ab2] then
+    update2(a, zone, ab1)
+    update2(b, zone, ab2))
+  [a, b]
+
+private fun make_theta(sub2, update2, pow, north, south, east, west)(a, b, succeeding, int_zones) =
+  let theta = array2(dimension_all_zones, constant_heat_source)
+  fun interior_theta(zone) = sub2(a, zone) * sub2(theta, succeeding(zone)) + sub2(b, zone)
+  int_zones(kl => if kl is [k, l] then update2(theta, [k, l], interior_theta([k, l])))
+  theta
+
+private fun compute_heat_conduction(sub2, update2, pow, north, south, east, west)(theta_hat, deltat, x_p, alpha_p, rho_p) =
+  let sigma = make_sigma(sub2, update2, pow, north, south, east, west)(deltat, rho_p, alpha_p)
+  if trace.Ref#value then print_("\tdone make_sigma(sub2, update2, pow, north, south, east, west)\n") else ()
+  let cc = make_cc(sub2, update2, pow, north, south, east, west)(alpha_p, theta_hat)
+  if trace.Ref#value then print_("\tdone make_cc(sub2, update2, pow, north, south, east, west)\n") else ()
+  let gamma_k = make_gamma(sub2, update2, pow, north, south, east, west)(x_p, cc, north, east)
+  if trace.Ref#value then print_("\tdone make_gamma(sub2, update2, pow, north, south, east, west)\n") else ()
+  if make_ab(sub2, update2, pow, north, south, east, west)(theta_hat, sigma, gamma_k, north) is [a_k, b_k] then
+    if trace.Ref#value then print_("\tdone make_ab(sub2, update2, pow, north, south, east, west)\n") else ()
+    let theta_k = make_theta(sub2, update2, pow, north, south, east, west)(a_k, b_k, south, for_north_ward_interior_zones)
+    if trace.Ref#value then print_("\tdone make_theta(sub2, update2, pow, north, south, east, west)\n") else ()
+    let gamma_l = make_gamma(sub2, update2, pow, north, south, east, west)(x_p, cc, west, south)
+    if trace.Ref#value then print_("\tdone make_gamma(sub2, update2, pow, north, south, east, west)\n") else ()
+    if make_ab(sub2, update2, pow, north, south, east, west)(theta_k, sigma, gamma_l, west) is [a_l, b_l] then
+      if trace.Ref#value then print_("\tdone make_ab(sub2, update2, pow, north, south, east, west)\n") else ()
+      let theta_l = make_theta(sub2, update2, pow, north, south, east, west)(a_l, b_l, east, for_west_ward_interior_zones)
+      if trace.Ref#value then print_("\tdone make_theta(sub2, update2, pow, north, south, east, west)\n") else ()
+      [theta_l, gamma_k, gamma_l]
+
+
+// final pressure and energy calculation
+
+private fun make_pressure(sub2, update2, pow, north, south, east, west)(rho_p, theta_p) =
+  let p = array2(dimension_all_zones, 0.0)
+  fun boundary_p(direction, zone) =
+    sub1(pbb, sub2(nbc, zone)) + sub1(pb, sub2(nbc, zone)) * sub2(p, direction(zone))
+  for_interior_zones(zone => update2(p, zone, zonal_pressure(sub2, update2, pow, north, south, east, west)(sub2(rho_p, zone), sub2(theta_p, zone))))
+  for_south_zones(zone => update2(p, zone, boundary_p(north, zone)))
+  for_east_zones(zone => update2(p, zone, boundary_p(west, zone)))
+  for_west_zones(zone => update2(p, zone, boundary_p(east, zone)))
+  for_north_zones(zone => update2(p, zone, boundary_p(south, zone)))
+  p
+
+private fun make_energy(sub2, update2, pow, north, south, east, west)(rho_p, theta_p) =
+  let epsilon_p = array2(dimension_all_zones, 0.0)
+  for_interior_zones(zone => update2(epsilon_p, zone, zonal_energy(sub2, update2, pow, north, south, east, west)(sub2(rho_p, zone), sub2(theta_p, zone))))
+  for_south_zones(zone => update2(epsilon_p, zone, reflect_north(sub2, update2, pow, north, south, east, west)(zone)(epsilon_p)))
+  for_west_zones(zone => update2(epsilon_p, zone, reflect_east(sub2, update2, pow, north, south, east, west)(zone)(epsilon_p)))
+  for_east_zones(zone => update2(epsilon_p, zone, reflect_west(sub2, update2, pow, north, south, east, west)(zone)(epsilon_p)))
+  for_north_zones(zone => update2(epsilon_p, zone, reflect_south(sub2, update2, pow, north, south, east, west)(zone)(epsilon_p)))
+  epsilon_p
+
+
+// energy error calculation (page 20)
+
+private fun compute_energy_error(sub2, update2, pow, north, south, east, west)(uw_p, rz_p, p_p, q_p, epsilon_p, theta_p, rho_p, alpha_p, gamma_k, gamma_l, deltat) =
+  if uw_p is [u_p, w_p] and rz_p is [r_p, z_p] then
+    fun mass(zone) = sub2(rho_p, zone) * sub2(alpha_p, zone)
+    let internal_energy = sum_list(map_interior_zones(z => sub2(epsilon_p, z) * mass(z)))
+    fun kinetic(node) =
+      let average_mass = 0.25 * (mass(zone_A(node)) + mass(zone_B(node)) + mass(zone_C(node)) + mass(zone_D(node)))
+      let v_square = pow(sub2(u_p, node), 2) + pow(sub2(w_p, node), 2)
+      0.5 * average_mass * v_square
+    let kinetic_energy = sum_list(map_interior_nodes(kinetic))
+    fun work_done(nodes) = if nodes is [node1, node2] then
+      let r1 = sub2(r_p, node1)
+      let r2 = sub2(r_p, node2)
+      let z1 = sub2(z_p, node1)
+      let z2 = sub2(z_p, node2)
+      let u1 = sub2(p_p, node1)
+      let u2 = sub2(p_p, node2)
+      let w1 = sub2(z_p, node1)
+      let w2 = sub2(z_p, node2)
+      let p1 = sub2(p_p, node1)
+      let p2 = sub2(p_p, node2)
+      let q1 = sub2(q_p, node1)
+      let q2 = sub2(q_p, node2)
+      let force = 0.5 * (p1 + p2 + q1 + q2)
+      let radius = 0.5 * (r1 + r2)
+      let area = 0.5 * ((r1 - r2) * (u1 - u2) - (z1 - z2) * (w1 - w2))
+      force * radius * area * deltat
+    fun from_(n, m) = if n > m then Nil else n :: from_(n + 1, m)
+    let north_line = map(l => [west([kmin, l]), [kmin, l]])(from_(lmin + 1, lmax))
+    let south_line = map(l => [west([kmax, l]), [kmax, l]])(from_(lmin + 1, lmax))
+    let east_line = map(k => [south([k, lmax]), [k, lmax]])(from_(kmin + 1, kmax))
+    let west_line = map(k => [south([k, lmin + 1]), [k, lmin + 1]])(from_(kmin + 1, kmax))
+    let w1 = sum_list(map(work_done)(north_line))
+    let w2 = sum_list(map(work_done)(south_line))
+    let w3 = sum_list(map(work_done)(east_line))
+    let w4 = sum_list(map(work_done)(west_line))
+    let boundary_work = w1 + w2 + w3 + w4
+    fun heat_flow(gamma_)(zones) = if zones is [zone1, zone2] then
+      deltat * sub2(gamma_, zone1) * (sub2(theta_p, zone1) - sub2(theta_p, zone2))
+    let k_north = kmin + 1
+    let north_flow = map(l => [north([k_north, l]), [k_north, l]])(from_(lmin + 1, lmax))
+    let k_south = kmax
+    let south_flow = map(l => [south([k_south, l]), [k_south, l]])(from_(lmin + 2, lmax - 1))
+    let l_east = lmax
+    let east_flow = map(k => [east([k, l_east]), [k, l_east]])(from_(kmin + 2, kmax))
+    let l_west = lmin + 1
+    let west_flow = map(k => [west([k, l_west]), [k, l_west]])(from_(kmin + 2, kmax))
+    let h1 = sum_list(map(heat_flow(gamma_k))(north_flow))
+    let h2 = sum_list(map(heat_flow(gamma_k))(south_flow))
+    let h3 = sum_list(map(heat_flow(gamma_l))(east_flow))
+    let h4 = sum_list(map(heat_flow(gamma_l))(west_flow))
+    let boundary_heat = h1 + h2 + h3 + h4
+    internal_energy + kinetic_energy - boundary_heat - boundary_work
+
+private fun compute_time_step(sub2, update2, pow, north, south, east, west)(d, theta_hat, theta_p) =
+  let deltat_courant = min_list(map_interior_zones(zone => sub2(d, zone)))
+  let deltat_conduct = max_list(map_interior_zones(z => abs(sub2(theta_hat, z) - sub2(theta_p, z)) / sub2(theta_hat, z)))
+  let deltat_minimum = min(deltat_courant, deltat_conduct)
+  min(deltat_maximum, deltat_minimum)
+
+private fun compute_initial_state(sub2, update2, pow, north, south, east, west)() =
+  let v = [all_zero_nodes, all_zero_nodes]
+  fun interior_position(kl) = if kl is [k, l] then
+    let pi = 3.1415926535898
+    let rp = real(lmax - lmin)
+    let z1 = real(10 + k - kmin)
+    let zz = (-0.5 + real(l - lmin) / rp) * pi
+    [z1 * cos(zz), z1 * sin(zz)]
+  let x = make_position_matrix(sub2, update2, pow, north, south, east, west)(interior_position)
+  let a2 = array2(dimension_all_zones, 0.0)
+  let s2 = array2(dimension_all_zones, 0.0)
+  fun reflect_area_vol(f) = [f(a2), f(s2)]
+  fun u2(f, z) = if reflect_area_vol(f(z)) is [a, s] then
+    update2(a2, z, a)
+    update2(s2, z, s)
+  for_interior_zones(z => if zone_area_vol(sub2, update2, pow, north, south, east, west)(x, z) is [a, s] then
+    update2(a2, z, a)
+    update2(s2, z, s))
+  for_south_zones(z => u2(reflect_north(sub2, update2, pow, north, south, east, west), z))
+  for_east_zones(z => u2(reflect_west(sub2, update2, pow, north, south, east, west), z))
+  for_west_zones(z => u2(reflect_east(sub2, update2, pow, north, south, east, west), z))
+  for_north_zones(z => u2(reflect_south(sub2, update2, pow, north, south, east, west), z))
+  let alpha = a2
+  let s = s2
+  let rr = array2(dimension_all_zones, 0.0)
+  for_all_zones(z => update2(rr, z, 1.4))
+  let rho = rr
+  let tt = array2(dimension_all_zones, constant_heat_source)
+  for_interior_zones(z => update2(tt, z, 0.0001))
+  let theta = tt
+  let p = make_pressure(sub2, update2, pow, north, south, east, west)(rho, theta)
+  let q = all_zero_zones
+  let epsilon = make_energy(sub2, update2, pow, north, south, east, west)(rho, theta)
+  let deltat = 0.01
+  let c = 0.0
+  [v, x, alpha, s, rho, p, q, epsilon, theta, deltat, c]
+
+private fun compute_next_state(sub2, update2, pow, north, south, east, west)(state) =
+  if state is [v, x, alpha, s, rho, p, q, epsilon, theta, deltat, c] then
+    let v_p = make_velocity(sub2, update2, pow, north, south, east, west)(v, x, p, q, alpha, rho, deltat)
+    if trace.Ref#value then print_("done make_velocity(sub2, update2, pow, north, south, east, west)\n") else ()
+    let x_p = make_position(sub2, update2, pow, north, south, east, west)(x, deltat, v_p)
+    if trace.Ref#value then print_("done make_position(sub2, update2, pow, north, south, east, west)\n") else ()
+    if make_area_density_volume(sub2, update2, pow, north, south, east, west)(rho, s, x_p) is [alpha_p, rho_p, s_p] then
+      if trace.Ref#value then print_("done make_area_density_volume(sub2, update2, pow, north, south, east, west)\n") else ()
+      if make_viscosity(sub2, update2, pow, north, south, east, west)(p, v_p, x_p, alpha_p, rho_p) is [q_p, d] then
+        if trace.Ref#value then print_("done make_viscosity(sub2, update2, pow, north, south, east, west)\n") else ()
+        let theta_hat = make_temperature(sub2, update2, pow, north, south, east, west)(p, epsilon, rho, theta, rho_p, q_p)
+        if trace.Ref#value then print_("done make_temperature(sub2, update2, pow, north, south, east, west)\n") else ()
+        if compute_heat_conduction(sub2, update2, pow, north, south, east, west)(theta_hat, deltat, x_p, alpha_p, rho_p) is [theta_p, gamma_k, gamma_l] then
+          if trace.Ref#value then print_("done compute_heat_conduction(sub2, update2, pow, north, south, east, west)\n") else ()
+          let p_p = make_pressure(sub2, update2, pow, north, south, east, west)(rho_p, theta_p)
+          if trace.Ref#value then print_("done make_pressure(sub2, update2, pow, north, south, east, west)\n") else ()
+          let epsilon_p = make_energy(sub2, update2, pow, north, south, east, west)(rho_p, theta_p)
+          if trace.Ref#value then print_("done make_energy(sub2, update2, pow, north, south, east, west)\n") else ()
+          let c_p = compute_energy_error(sub2, update2, pow, north, south, east, west)(v_p, x_p, p_p, q_p, epsilon_p, theta_p, rho_p, alpha_p, gamma_k, gamma_l, deltat)
+          if trace.Ref#value then print_("done compute_energy_error(sub2, update2, pow, north, south, east, west)\n") else ()
+          let deltat_p = compute_time_step(sub2, update2, pow, north, south, east, west)(d, theta_hat, theta_p)
+          if trace.Ref#value then print_("done compute_time_step(sub2, update2, pow, north, south, east, west)\n\n") else ()
+          [v_p, x_p, alpha_p, s_p, rho_p, p_p, q_p, epsilon_p, theta_p, deltat_p, c_p]
+
+private fun runit(sub2, update2, pow, north, south, east, west)() =
+  fun iter(i, state) = if i == 0 then state else
+    print_(".")
+    iter(i - 1, compute_next_state(sub2, update2, pow, north, south, east, west)(state))
+  iter(step_count, compute_initial_state(sub2, update2, pow, north, south, east, west)())
+
+fun main() = if runit(sub2, update2, pow, north, south, east, west)() is [_, _, _, _, _, _, _, _, _, delta_p, c_p] then
+  let delta = trunc(delta_p)
+  let c = trunc(c_p * 10000.0)
+  [delta, c]

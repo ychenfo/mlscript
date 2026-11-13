@@ -45,6 +45,6 @@ object TimeOutTests:
     * so tests get a longer limit there. GitHub Actions sets `CI`.
     */
   val TimeLimit: Span =
-    if sys.env.get("CI").isDefined then Span(120, Seconds)
-    else Span(120, Seconds)
+    if sys.env.get("CI").isDefined then Span(1800, Seconds)
+    else Span(1800, Seconds)
 

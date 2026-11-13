@@ -1,0 +1,7 @@
+:.
+:js
+
+
+import "../../../mlscript-compile/nofib/sml/logic.mls"
+logic.main()
+//│ = true

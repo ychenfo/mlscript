@@ -1,0 +1,212 @@
+#lang(0.3.x)
+
+import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+
+open annotations { pure }
+
+// smith normal form of an integer matrix by repeated row and column operations
+// source: henry cejtin's mlton benchmark, as adapted for 3cps (ints instead of IntInf, a 3x3 input,
+// `div` instead of `quot`) in the webs artifact (zenodo 15050194),
+// 3cps/test/programs/examples/smith-normal-form.sml
+// port changes:
+// - structures Array/Int/IntInf/Matrix are flattened into top-level functions (Matrix.* → matrix*);
+//   the 3cps primitive array_alloc fills a `mut` tuple, array_length/sub/update are `.length`/`.[i]`/`set .[i]`
+// - a matrix stays a tuple [height, width, flat row-major array]; `Matrix.width` still returns the height,
+//   as in the original (no effect on the square test matrix)
+// - `div`/`mod` round towards -inf as in sml: `@pure` wrappers over js Math.floor
+// - the `raise sizeError`/`raise index`/`raise Size` cases are left out (implicit match error); the guard of
+//   Matrix.make is negated to `height >= 0 && width >= 0` so that the raise can be left out
+// - printing is silenced: the progress lines `dd` prints on every iteration go to a no-op `print_`
+// - unused definitions are dropped (Array.array, Matrix.store, Matrix.map, Matrix.naturalFold, the
+//   exception declarations)
+// - the module-level `table` becomes a zero-parameter function
+// - `main` returns entry (2, 2) of the result, which Main.snf compared with 12; under sml semantics it is -12
+//   (sml/nj gives diag(2, 6, -12); with `quot` instead of `div` diag(2, -6, -12)), so the driver checks -12
+
+module smithNormalForm with ...
+
+
+
+data class (::) Cons(head, tail)
+object Nil
+
+@pure private fun floor(x) = globalThis.Math.floor(x)
+
+private fun intDiv(a, b) = floor(a / b)
+
+private fun intMod(a, b) = a - b * intDiv(a, b)
+
+private fun listNth(l, n) = if l is x :: xs then
+  if n == 0 then x else listNth(xs, n - 1)
+
+private fun fillArray(arr, i, n, x) = if i == n then arr else
+  set arr.[i] = x
+  fillArray(arr, i + 1, n, x)
+
+// the 3cps primitive
+private fun array_alloc(n, init) = fillArray(mut [], 0, n, init)
+
+
+// basis library stuff
+
+private fun arrayLength(a) = a.length
+
+private fun arraySub(a, i) = a.[i]
+
+private fun arrayUpdate(a, i, x) = set a.[i] = x
+
+private fun arrayTabulate(n, f) = if n > 0 then
+  let arr = array_alloc(n, f(0))
+  fun init(i) =
+    if i < n then
+      arrayUpdate(arr, i, f(i))
+      init(i + 1)
+    else ()
+  init(1)
+  arr
+
+private fun intMin(x, y) = if x < y then x else y
+
+private fun intInfAbs(x) = if x < 0 then -x else x
+
+
+private fun matrixMake(height, width, generator) = if height >= 0 && width >= 0 then
+  [height, width, arrayTabulate(height * width, z => generator(intDiv(z, width), intMod(z, width)))]
+
+private fun matrixHeight(m) = if m is [height, _, _] then height
+
+private fun matrixWidth(m) = if m is [width, _, _] then width
+
+private fun matrixFetch(m, row, col) = if m is [height, width, mat] and
+  0 <= row && row < height && 0 <= col && col < width then arraySub(mat, col + width * row)
+
+private fun matrixFetchRow(m, row) = if m is [height, width, mat] and 0 <= row && row < height then
+  let offset = width * row
+  col => if 0 <= col && col < width then arraySub(mat, col + offset)
+
+private fun matrixFetchCol(m, col) = if m is [height, width, mat] and 0 <= col && col < width then
+  row => if 0 <= row && row < height then arraySub(mat, col + width * row)
+
+private fun matrixStoreRow(m, row) = if m is [height, width, mat] and 0 <= row && row < height then
+  let offset = width * row
+  (col, entry) => if 0 <= col && col < width then arrayUpdate(mat, col + offset, entry)
+
+private fun matrixStoreCol(m, col) = if m is [height, width, mat] and 0 <= col && col < width then
+  (row, entry) => if 0 <= row && row < height then arrayUpdate(mat, col + width * row, entry)
+
+private fun swapLoop(from1, to1, from2, to2, limit) =
+  fun loop(i) =
+    if i == limit then ()
+    else
+      let tmp = from1(i)
+      to1(i, from2(i))
+      to2(i, tmp)
+      loop(i + 1)
+  loop(0)
+
+private fun matrixRowSwap(m, row1, row2) = if m is [height, width, _] and
+  0 <= row1 && row1 < height && 0 <= row2 && row2 < height then
+    if row1 == row2 then ()
+    else swapLoop(matrixFetchRow(m, row1), matrixStoreRow(m, row1), matrixFetchRow(m, row2), matrixStoreRow(m, row2), width)
+
+private fun matrixColSwap(m, col1, col2) = if m is [height, width, _] and
+  0 <= col1 && col1 < width && 0 <= col2 && col2 < width then
+    if col1 == col2 then ()
+    else swapLoop(matrixFetchCol(m, col1), matrixStoreCol(m, col1), matrixFetchCol(m, col2), matrixStoreCol(m, col2), height)
+
+private fun opLoop(from1, from2, to2, limit, f) =
+  fun loop(i) =
+    if i == limit then ()
+    else
+      to2(i, f(from1(i), from2(i)))
+      loop(i + 1)
+  loop(0)
+
+private fun matrixRowOp(m, row1, row2, f) = if m is [height, width, _] and
+  0 <= row1 && row1 < height && 0 <= row2 && row2 < height && row1 != row2 then
+    opLoop(matrixFetchRow(m, row1), matrixFetchRow(m, row2), matrixStoreRow(m, row2), width, f)
+
+private fun matrixColOp(m, col1, col2, f) = if m is [height, width, _] and
+  0 <= col1 && col1 < width && 0 <= col2 && col2 < width && col1 != col2 then
+    opLoop(matrixFetchCol(m, col1), matrixFetchCol(m, col2), matrixStoreCol(m, col2), height, f)
+
+private fun matrixCopy(m) = if m is [height, width, mat] then
+  [height, width, arrayTabulate(arrayLength(mat), i => arraySub(mat, i))]
+
+
+private fun print_(s) = ()
+
+private fun smaller(a, b) = a != 0 && (b == 0 || intInfAbs(a) < intInfAbs(b))
+
+private fun smithNormalForm(mat0) =
+  let height = matrixHeight(mat0)
+  let width = matrixWidth(mat0)
+  let mat = matrixCopy(mat0)
+  let range = intMin(width, height)
+  fun dd(pos) =
+    let matCol = matrixFetchCol(mat, pos)
+    let matRow = matrixFetchRow(mat, pos)
+    print_("dd: pos = " + "\n")
+    fun swapRowLoop(best, bestRow, bestCol, row) =
+      print_("swap row loop\n")
+      if row >= height then
+        matrixRowSwap(mat, pos, bestRow)
+        matrixColSwap(mat, pos, bestCol)
+      else
+        let matRow = matrixFetchRow(mat, row)
+        fun swapColLoop(best, bestRow, bestCol, col) =
+          if col >= width then swapRowLoop(best, bestRow, bestCol, row + 1)
+          else
+            let next = matRow(col)
+            if smaller(next, best) then swapColLoop(next, row, col, col + 1)
+            else swapColLoop(best, bestRow, bestCol, col + 1)
+        swapColLoop(best, bestRow, bestCol, pos)
+    fun rowLoop(row) =
+      print_("row loop\n")
+      if row < height then
+        if matCol(row) == 0 then rowLoop(row + 1)
+        else
+          // should "div" be "quot"?
+          let x = -(intDiv(matCol(row), matCol(pos)))
+          matrixRowOp(mat, pos, row, (lhs, rhs) => lhs * x + rhs)
+          if matCol(row) == 0 then rowLoop(row + 1)
+          else hitPosAgain()
+      else
+        fun colLoop(col) =
+          print_("col loop\n")
+          if col < width then
+            if matRow(col) == 0 then colLoop(col + 1)
+            else
+              let x = -(intDiv(matRow(col), matRow(pos)))
+              matrixColOp(mat, pos, col, (lhs, rhs) => lhs * x + rhs)
+              if matRow(col) == 0 then colLoop(col + 1)
+              else hitPosAgain()
+          else ()
+        colLoop(pos + 1)
+    fun hitPosAgain() =
+      swapRowLoop(0, pos, pos, pos)
+      rowLoop(pos + 1)
+    hitPosAgain()
+  fun loop(pos) =
+    if pos == range then mat
+    else
+      dd(pos)
+      loop(pos + 1)
+  loop(0)
+
+
+private fun table() =
+  (2 :: 4 :: 4 :: Nil) ::
+  (-6 :: 6 :: 12 :: Nil) ::
+  (10 :: -4 :: -16 :: Nil) ::
+  Nil
+
+private fun f(x, y) = listNth(listNth(table(), x), y)
+
+private fun snf() =
+  let dim = 3
+  let big = matrixMake(dim, dim, f)
+  let entry = matrixFetch(smithNormalForm(big), 2, 2)
+  entry
+
+fun main() = snf()

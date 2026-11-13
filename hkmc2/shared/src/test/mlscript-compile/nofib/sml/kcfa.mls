@@ -1,0 +1,579 @@
+#lang(0.3.x)
+
+import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+
+// k-cfa (k = 1) abstract interpreter for cps lambda calculus
+// source: john reppy's port of matthew might's racket k-cfa, as kept in the
+// webs artifact (zenodo 15050194), 3cps/test/programs/examples/k-cfa.sml
+// port changes:
+// - structures are flattened into top-level functions; the three hand-written red-black trees stay
+//   separate, with prefixed names: Var.Map → varMap*/Vm*, D.Set → set*/Set*, Store.Map → storeMap*/Sm*
+// - aliases (`val compare = Int.compare`, `val join = Set.union`, …) are resolved to their targets;
+//   point-free partial applications (Time.compare/same, BEnv.compare, Store.compare/update/join)
+//   become functions with explicit parameters; `empty` values become calls of the trees' `empty`
+// - the Basis functions used (List.map/exists/foldl/collate/append) are defined here, curried as in the Basis
+// - LAMBDA keeps its `label * var list * call` argument as one tuple field, since the code passes
+//   that tuple around (`Clos(lam, benv)`, `LAMBDA lam`)
+// - the impossible `raise Fail` lookups and partial matches are left out (implicit match error)
+// - the module-level `local` block building `stdExample` with a module-level `labelCount` ref becomes
+//   the function `stdExample()`, so the counter is a cell local to it (labels 2–15 as in the original)
+// - `Params.k` (unused) is dropped; `main` returns the monovariant store as [variable, lambda labels]
+
+module kcfa with ...
+
+
+
+data class (::) Cons(head, tail)
+object Nil
+
+data class Some(value)
+object None
+
+class Ref(val value)
+
+object LESS
+object EQUAL
+object GREATER
+
+
+// sml basis
+
+private fun intCompare(s1, s2) = if
+  s1 < s2 then LESS
+  s2 < s1 then GREATER
+  else EQUAL
+
+private fun stringCompare(s1, s2) = if
+  s1 < s2 then LESS
+  s2 < s1 then GREATER
+  else EQUAL
+
+private fun append(l1, l2) = if l1 is
+  Nil then l2
+  x :: xs then x :: append(xs, l2)
+
+private fun listMap(f)(l) = if l is
+  Nil then Nil
+  x :: xs then f(x) :: listMap(f)(xs)
+
+private fun listExists(f)(l) = if l is
+  Nil then false
+  x :: xs then f(x) || listExists(f)(xs)
+
+private fun listFoldl(f)(init)(l) = if l is
+  Nil then init
+  x :: xs then listFoldl(f)(f(x, init))(xs)
+
+private fun listCollate(cmp)(l1, l2) = if
+  l1 is Nil and l2 is Nil then EQUAL
+  l1 is Nil then LESS
+  l2 is Nil then GREATER
+  l1 is x :: xs and l2 is y :: ys then
+    let order = cmp(x, y)
+    if order is EQUAL then listCollate(cmp)(xs, ys) else order
+
+private fun listPairFoldl(f)(init)(l1, l2) =
+  fun foldf(xs, ys, accum) =
+    if xs is x :: xs1 and ys is y :: ys1 then foldf(xs1, ys1, f(x, y, accum)) else accum
+  foldf(l1, l2, init)
+
+private fun listPairAllEq(pred)(l1, l2) = if
+  l1 is Nil and l2 is Nil then true
+  l1 is x :: xs and l2 is y :: ys then pred(x, y) && listPairAllEq(pred)(xs, ys)
+  else false
+
+
+// syntax
+
+private fun labelSame(l1, l2) = l1 == l2
+
+// an abbreviated version of the RedBlackMapFn functor from the SML/NJ Library
+object VmR
+object VmB
+
+object VmE
+data class VmT(color, left, key, value, right)
+
+data class VmMAP(nItems, tree)
+
+private fun varMapEmpty() = VmMAP(0, VmE)
+
+private fun varMapInsert(map, xk, x) = if map is VmMAP(nItems, m) then
+  let nItems1 = new mut Ref(nItems)
+  fun ins(s) = if s is
+    VmE then
+      set nItems1.Ref#value = nItems + 1
+      VmT(VmR, VmE, xk, x, VmE)
+    VmT(color, a, yk, y, b) then if stringCompare(xk, yk) is
+      LESS then if a is
+        VmT(VmR, c, zk, z, d) then (if stringCompare(xk, zk) is
+          LESS then
+            let c1 = ins(c)
+            if c1 is VmT(VmR, e, wk, w, f) then VmT(VmR, VmT(VmB, e, wk, w, f), zk, z, VmT(VmB, d, yk, y, b))
+            else VmT(VmB, VmT(VmR, c1, zk, z, d), yk, y, b)
+          EQUAL then VmT(color, VmT(VmR, c, xk, x, d), yk, y, b)
+          GREATER then
+            let d1 = ins(d)
+            if d1 is VmT(VmR, e, wk, w, f) then VmT(VmR, VmT(VmB, c, zk, z, e), wk, w, VmT(VmB, f, yk, y, b))
+            else VmT(VmB, VmT(VmR, c, zk, z, d1), yk, y, b))
+        else VmT(VmB, ins(a), yk, y, b)
+      EQUAL then VmT(color, a, xk, x, b)
+      GREATER then if b is
+        VmT(VmR, c, zk, z, d) then (if stringCompare(xk, zk) is
+          LESS then
+            let c1 = ins(c)
+            if c1 is VmT(VmR, e, wk, w, f) then VmT(VmR, VmT(VmB, a, yk, y, e), wk, w, VmT(VmB, f, zk, z, d))
+            else VmT(VmB, a, yk, y, VmT(VmR, c1, zk, z, d))
+          EQUAL then VmT(color, a, yk, y, VmT(VmR, c, xk, x, d))
+          GREATER then
+            let d1 = ins(d)
+            if d1 is VmT(VmR, e, wk, w, f) then VmT(VmR, VmT(VmB, a, yk, y, c), zk, z, VmT(VmB, e, wk, w, f))
+            else VmT(VmB, a, yk, y, VmT(VmR, c, zk, z, d1)))
+        else VmT(VmB, a, yk, y, ins(b))
+  if ins(m) is VmT(_, a, yk, y, b) then VmMAP(nItems1.Ref#value, VmT(VmB, a, yk, y, b))
+
+private fun varMapFind(map, k) = if map is VmMAP(_, t) then
+  fun find1(t) = if t is
+    VmE then None
+    VmT(_, a, yk, y, b) then if stringCompare(k, yk) is
+      LESS then find1(a)
+      EQUAL then Some(y)
+      GREATER then find1(b)
+  find1(t)
+
+private fun varMapNext(stack) = if stack is
+  t :: rest and t is VmT(_, _, _, _, b) then [t, varMapLeft(b, rest)]
+  else [VmE, Nil]
+
+private fun varMapLeft(t, rest) = if t is
+  VmE then rest
+  VmT(_, a, _, _, _) then varMapLeft(a, t :: rest)
+
+private fun varMapStart(m) = varMapLeft(m, Nil)
+
+private fun varMapCollate(cmpRng) =
+  fun cmp(t1, t2) =
+    let p1 = varMapNext(t1)
+    let p2 = varMapNext(t2)
+    if
+      p1 is [VmE, _] and p2 is [VmE, _] then EQUAL
+      p1 is [VmE, _] then LESS
+      p2 is [VmE, _] then GREATER
+      p1 is [VmT(_, _, xk, x, _), r1] and p2 is [VmT(_, _, yk, y, _), r2] then
+        let order = stringCompare(xk, yk)
+        if order is EQUAL then
+          let order1 = cmpRng(x, y)
+          if order1 is EQUAL then cmp(r1, r2) else order1
+        else order
+  (map1, map2) => if map1 is VmMAP(_, m1) and map2 is VmMAP(_, m2) then cmp(varMapStart(m1), varMapStart(m2))
+
+data class VAR(label, x)
+data class LAMBDA(lam)
+
+data class CALL(label, f, args)
+data class RET(label, x)
+
+private fun compareLambda(lam1, lam2) = if lam1 is [lab1, _, _] and lam2 is [lab2, _, _] then
+  intCompare(lab1, lab2)
+
+private fun compareExp(e1, e2) = if
+  e1 is VAR(_, x) and e2 is VAR(_, y) then stringCompare(x, y)
+  e1 is VAR then LESS
+  e2 is VAR then GREATER
+  e1 is LAMBDA(lam1) and e2 is LAMBDA(lam2) then compareLambda(lam1, lam2)
+
+private fun sameCall(c1, c2) = if
+  c1 is CALL(l1, _, _) and c2 is CALL(l2, _, _) then l1 == l2
+  c1 is RET(l1, _) and c2 is RET(l2, _) then l1 == l2
+  else false
+
+
+// time = lab^k: in k-cfa, time is a bounded memory of program history,
+// the last k call sites through which the program has traversed
+
+private fun timeCompare(t1, t2) = listCollate(intCompare)(t1, t2)
+
+private fun timeSame(t1, t2) = listPairAllEq(labelSame)(t1, t2)
+
+
+// a binding is minted each time a variable gets bound to a value;
+// in pure cps, the only kind of addresses are bindings
+data class Bnd(x, t)
+
+private fun bindCompare(b1, b2) = if b1 is Bnd(x, t1) and b2 is Bnd(y, t2) then
+  let order = stringCompare(x, y)
+  if order is EQUAL then timeCompare(t1, t2) else order
+
+
+private fun benvCompare(benv1, benv2) = varMapCollate(bindCompare)(benv1, benv2)
+
+private fun benvLookup(benv, x) = if varMapFind(benv, x) is Some(adr) then adr
+
+private fun benvExtend1(benv, xs, adrs) =
+  listPairFoldl((x, adr, benv) => varMapInsert(benv, x, adr))(benv)(xs, adrs)
+
+
+// closures pair a lambda term with a binding environment that determines the value of its free variables;
+// for pure cps, closures are the only kind of value
+data class Clos(lam, benv)
+
+private fun lambdaOf(clos) = if clos is Clos(lam, _) then LAMBDA(lam)
+
+private fun benvOf(clos) = if clos is Clos(_, benv) then benv
+
+private fun closureCompare(clos1, clos2) = if clos1 is Clos(lam1, benv1) and clos2 is Clos(lam2, benv2) then
+  let order = compareLambda(lam1, lam2)
+  if order is EQUAL then benvCompare(benv1, benv2) else order
+
+
+// an abstract denotable value is a set of possible values
+// an abbreviated version of the RedBlackSetFn functor from the SML/NJ Library
+object SetR
+object SetB
+
+object SetE
+data class SetT(color, left, item, right)
+
+data class SET(n, tree)
+
+private fun setSingleton(x) = SET(1, SetT(SetB, SetE, x, SetE))
+
+// functions for walking the tree while keeping a stack of parents to be visited
+private fun setNext(stack) = if stack is
+  t :: rest and t is SetT(_, _, _, b) then [t, setLeft(b, rest)]
+  else [SetE, Nil]
+
+private fun setLeft(t, rest) = if t is
+  SetE then rest
+  SetT(_, a, _, _) then setLeft(a, t :: rest)
+
+private fun setStart(m) = setLeft(m, Nil)
+
+// return the lexical order of two sets
+private fun setCompare(set1, set2) = if set1 is SET(_, s1) and set2 is SET(_, s2) then
+  fun cmp(t1, t2) =
+    let p1 = setNext(t1)
+    let p2 = setNext(t2)
+    if
+      p1 is [SetE, _] and p2 is [SetE, _] then EQUAL
+      p1 is [SetE, _] then LESS
+      p2 is [SetE, _] then GREATER
+      p1 is [SetT(_, _, x, _), r1] and p2 is [SetT(_, _, y, _), r2] then
+        let order = closureCompare(x, y)
+        if order is EQUAL then cmp(r1, r2) else order
+  cmp(setStart(s1), setStart(s2))
+
+// support for constructing red-black trees in linear time from increasing ordered sequences
+// (based on a description by r. hinze); the elements in the digits are ordered with the largest
+// on the left, whereas the elements of the trees are ordered with the largest on the right
+object SetZERO
+data class SetONE(item, tree, digit)
+data class SetTWO(item1, tree1, item2, tree2, digit)
+
+// add an item that is guaranteed to be larger than any in l
+private fun setAddItem(a, l) =
+  fun incr(a1, t1, d) = if d is
+    SetZERO then SetONE(a1, t1, SetZERO)
+    SetONE(a2, t2, r) then SetTWO(a1, t1, a2, t2, r)
+    SetTWO(a2, t2, a3, t3, r) then SetONE(a1, t1, incr(a2, SetT(SetB, t3, a3, t2), r))
+  incr(a, SetE, l)
+
+// link the digits into a tree
+private fun setLinkAll(t) =
+  fun link(t1, d) = if d is
+    SetZERO then t1
+    SetONE(a, t2, r) then link(SetT(SetB, t2, a, t1), r)
+    SetTWO(a1, t2, a2, t3, r) then link(SetT(SetB, SetT(SetR, t3, a2, t2), a1, t1), r)
+  link(SetE, t)
+
+// return the union of the two sets
+private fun setUnion(set1, set2) = if set1 is SET(_, s1) and set2 is SET(_, s2) then
+  fun ins(p, n, result) = if p is
+    [SetE, _] then [n, result]
+    [SetT(_, _, x, _), r] then ins(setNext(r), n + 1, setAddItem(x, result))
+  fun union1(t1, t2, n, result) =
+    let p1 = setNext(t1)
+    let p2 = setNext(t2)
+    if
+      p1 is [SetE, _] and p2 is [SetE, _] then [n, result]
+      p1 is [SetE, _] then ins(p2, n, result)
+      p2 is [SetE, _] then ins(p1, n, result)
+      p1 is [SetT(_, _, x, _), r1] and p2 is [SetT(_, _, y, _), r2] then if closureCompare(x, y) is
+        LESS then union1(r1, t2, n + 1, setAddItem(x, result))
+        EQUAL then union1(r1, r2, n + 1, setAddItem(x, result))
+        GREATER then union1(t1, r2, n + 1, setAddItem(y, result))
+  if union1(setStart(s1), setStart(s2), 0, SetZERO) is [n, result] then SET(n, setLinkAll(result))
+
+private fun setFoldl(f)(init)(s) = if s is SET(_, m) then
+  fun foldf(t, accum) = if t is
+    SetE then accum
+    SetT(_, a, x, b) then foldf(b, f(x, foldf(a, accum)))
+  foldf(m, init)
+
+
+// a store (or a heap/memory) maps addresses to denotable values
+// an abbreviated version of the RedBlackMapFn functor from the SML/NJ Library
+object SmR
+object SmB
+
+object SmE
+data class SmT(color, left, key, value, right)
+
+data class SmMAP(nItems, tree)
+
+private fun storeMapEmpty() = SmMAP(0, SmE)
+
+private fun storeMapInsertWith(comb)(map, xk, x) = if map is SmMAP(nItems, m) then
+  let nItems1 = new mut Ref(nItems)
+  fun ins(s) = if s is
+    SmE then
+      set nItems1.Ref#value = nItems + 1
+      SmT(SmR, SmE, xk, x, SmE)
+    SmT(color, a, yk, y, b) then if bindCompare(xk, yk) is
+      LESS then if a is
+        SmT(SmR, c, zk, z, d) then (if bindCompare(xk, zk) is
+          LESS then
+            let c1 = ins(c)
+            if c1 is SmT(SmR, e, wk, w, f) then SmT(SmR, SmT(SmB, e, wk, w, f), zk, z, SmT(SmB, d, yk, y, b))
+            else SmT(SmB, SmT(SmR, c1, zk, z, d), yk, y, b)
+          EQUAL then SmT(color, SmT(SmR, c, xk, comb(z, x), d), yk, y, b)
+          GREATER then
+            let d1 = ins(d)
+            if d1 is SmT(SmR, e, wk, w, f) then SmT(SmR, SmT(SmB, c, zk, z, e), wk, w, SmT(SmB, f, yk, y, b))
+            else SmT(SmB, SmT(SmR, c, zk, z, d1), yk, y, b))
+        else SmT(SmB, ins(a), yk, y, b)
+      EQUAL then SmT(color, a, xk, comb(y, x), b)
+      GREATER then if b is
+        SmT(SmR, c, zk, z, d) then (if bindCompare(xk, zk) is
+          LESS then
+            let c1 = ins(c)
+            if c1 is SmT(SmR, e, wk, w, f) then SmT(SmR, SmT(SmB, a, yk, y, e), wk, w, SmT(SmB, f, zk, z, d))
+            else SmT(SmB, a, yk, y, SmT(SmR, c1, zk, z, d))
+          EQUAL then SmT(color, a, yk, y, SmT(SmR, c, xk, comb(z, x), d))
+          GREATER then
+            let d1 = ins(d)
+            if d1 is SmT(SmR, e, wk, w, f) then SmT(SmR, SmT(SmB, a, yk, y, c), zk, z, SmT(SmB, e, wk, w, f))
+            else SmT(SmB, a, yk, y, SmT(SmR, c, zk, z, d1)))
+        else SmT(SmB, a, yk, y, ins(b))
+  if ins(m) is SmT(_, a, yk, y, b) then SmMAP(nItems1.Ref#value, SmT(SmB, a, yk, y, b))
+
+private fun storeMapFind(map, k) = if map is SmMAP(_, t) then
+  fun find1(t) = if t is
+    SmE then None
+    SmT(_, a, yk, y, b) then if bindCompare(k, yk) is
+      LESS then find1(a)
+      EQUAL then Some(y)
+      GREATER then find1(b)
+  find1(t)
+
+private fun storeMapFoldli(f) =
+  fun foldf(t, accum) = if t is
+    SmE then accum
+    SmT(_, a, xk, x, b) then foldf(b, f(xk, x, foldf(a, accum)))
+  init => map => if map is SmMAP(_, m) then foldf(m, init)
+
+private fun storeMapNext(stack) = if stack is
+  t :: rest and t is SmT(_, _, _, _, b) then [t, storeMapLeft(b, rest)]
+  else [SmE, Nil]
+
+private fun storeMapLeft(t, rest) = if t is
+  SmE then rest
+  SmT(_, a, _, _, _) then storeMapLeft(a, t :: rest)
+
+private fun storeMapStart(m) = storeMapLeft(m, Nil)
+
+private fun storeMapCollate(cmpRng) =
+  fun cmp(t1, t2) =
+    let p1 = storeMapNext(t1)
+    let p2 = storeMapNext(t2)
+    if
+      p1 is [SmE, _] and p2 is [SmE, _] then EQUAL
+      p1 is [SmE, _] then LESS
+      p2 is [SmE, _] then GREATER
+      p1 is [SmT(_, _, xk, x, _), r1] and p2 is [SmT(_, _, yk, y, _), r2] then
+        let order = bindCompare(xk, yk)
+        if order is EQUAL then
+          let order1 = cmpRng(x, y)
+          if order1 is EQUAL then cmp(r1, r2) else order1
+        else order
+  (map1, map2) => if map1 is SmMAP(_, m1) and map2 is SmMAP(_, m2) then cmp(storeMapStart(m1), storeMapStart(m2))
+
+// support for constructing red-black trees in linear time from increasing ordered sequences
+// (based on a description by r. hinze); the elements in the digits are ordered with the largest
+// on the left, whereas the elements of the trees are ordered with the largest on the right
+object SmZERO
+data class SmONE(key, value, tree, digit)
+data class SmTWO(key1, value1, tree1, key2, value2, tree2, digit)
+
+// add an item that is guaranteed to be larger than any in l
+private fun storeMapAddItem(ak, a, l) =
+  fun incr(ak1, a1, t1, d) = if d is
+    SmZERO then SmONE(ak1, a1, t1, SmZERO)
+    SmONE(ak2, a2, t2, r) then SmTWO(ak1, a1, t1, ak2, a2, t2, r)
+    SmTWO(ak2, a2, t2, ak3, a3, t3, r) then SmONE(ak1, a1, t1, incr(ak2, a2, SmT(SmB, t3, ak3, a3, t2), r))
+  incr(ak, a, SmE, l)
+
+// link the digits into a tree
+private fun storeMapLinkAll(t) =
+  fun link(t1, d) = if d is
+    SmZERO then t1
+    SmONE(ak, a, t2, r) then link(SmT(SmB, t2, ak, a, t1), r)
+    SmTWO(ak1, a1, t2, ak2, a2, t3, r) then link(SmT(SmB, SmT(SmR, t3, ak2, a2, t2), ak1, a1, t1), r)
+  link(SmE, t)
+
+private fun storeMapWrap(f)(map1, map2) = if map1 is SmMAP(_, m1) and map2 is SmMAP(_, m2) then
+  if f(storeMapStart(m1), storeMapStart(m2), 0, SmZERO) is [n, result] then SmMAP(n, storeMapLinkAll(result))
+
+private fun storeMapIns(p, n, result) = if p is
+  [SmE, _] then [n, result]
+  [SmT(_, _, xk, x, _), r] then storeMapIns(storeMapNext(r), n + 1, storeMapAddItem(xk, x, result))
+
+// return a map whose domain is the union of the domains of the two input maps,
+// using the supplied function to define the map on elements that are in both domains
+private fun storeMapUnionWith(mergeFn) =
+  fun union(t1, t2, n, result) =
+    let p1 = storeMapNext(t1)
+    let p2 = storeMapNext(t2)
+    if
+      p1 is [SmE, _] and p2 is [SmE, _] then [n, result]
+      p1 is [SmE, _] then storeMapIns(p2, n, result)
+      p2 is [SmE, _] then storeMapIns(p1, n, result)
+      p1 is [SmT(_, _, xk, x, _), r1] and p2 is [SmT(_, _, yk, y, _), r2] then if bindCompare(xk, yk) is
+        LESS then union(r1, t2, n + 1, storeMapAddItem(xk, x, result))
+        EQUAL then union(r1, r2, n + 1, storeMapAddItem(xk, mergeFn(x, y), result))
+        GREATER then union(t1, r2, n + 1, storeMapAddItem(yk, y, result))
+  storeMapWrap(union)
+
+private fun storeCompare(st1, st2) = storeMapCollate(setCompare)(st1, st2)
+
+private fun storeLookup(st, adr) = if storeMapFind(st, adr) is Some(dv) then dv
+
+private fun storeUpdate(st, adr, dv) = storeMapInsertWith(setUnion)(st, adr, dv)
+
+private fun storeUpdate1(st, adrs, dvs) =
+  listPairFoldl((adr, dv, st) => storeUpdate(st, adr, dv))(st)(adrs, dvs)
+
+private fun storeJoin(st1, st2) = storeMapUnionWith(setUnion)(st1, st2)
+
+
+// abstract state space
+data class State(call, benv, store, time)
+
+private fun storeOf(state) = if state is State(_, _, st, _) then st
+
+private fun stateSame(state1, state2) =
+  if state1 is State(call1, bev1, st1, t1) and state2 is State(call2, bev2, st2, t2) then
+    timeSame(t1, t2) && sameCall(call1, call2) && (benvCompare(bev1, bev2) is EQUAL) && (storeCompare(st1, st2) is EQUAL)
+
+private fun initState(call) = State(call, varMapEmpty(), storeMapEmpty(), Nil)
+
+
+// k-cfa parameters: change these to alter the behavior of the analysis
+
+// == List.take (lab :: t, k)
+private fun tick(call, t) = if call is CALL(lab, _, _) then lab :: Nil
+
+private fun alloc(t)(x) = Bnd(x, t)
+
+
+// k-cfa abstract interpreter
+
+private fun atomEval(benv, store) =
+  fun eval(e) = if e is
+    VAR(_, x) then storeLookup(store, benvLookup(benv, x))
+    LAMBDA(lam) then setSingleton(Clos(lam, benv))
+  eval
+
+private fun absNext(state) = if
+  state is State(call, benv, store, time) and call is CALL(lab, f, args) then
+    let time1 = tick(call, time)
+    let procs = atomEval(benv, store)(f)
+    let params = listMap(atomEval(benv, store))(args)
+    fun apply(clos, states) = if clos is Clos(lam, benv1) and lam is [_, formals, call1] then
+      let bindings = listMap(alloc(time1))(formals)
+      let benv2 = benvExtend1(benv1, formals, bindings)
+      let store1 = storeUpdate1(store, bindings, params)
+      State(call1, benv2, store1, time1) :: states
+    setFoldl(apply)(Nil)(procs)
+  else Nil
+
+
+// state-space exploration
+
+private fun member(sts, st) = listExists(st1 => stateSame(st, st1))(sts)
+
+// insert into sorted list of expressions
+private fun insertExp(exp, exps) = if exps is
+  Nil then exp :: Nil
+  e :: exps1 then if compareExp(exp, e) is
+    LESS then e :: insertExp(exp, exps1)
+    GREATER then exp :: e :: exps1
+    EQUAL then e :: exps1
+
+// monomorphic store utilities
+private fun monoBinding(b) = if b is Bnd(x, _) then x
+
+private fun monoValue(clos) = if clos is Clos(lam, _) then LAMBDA(lam)
+
+private fun monoValues(d) = setFoldl((v, exps) => monoValue(v) :: exps)(Nil)(d)
+
+private fun monoStoreUpdate(mst, x, exp) = if mst is
+  Nil then [x, exp :: Nil] :: Nil
+  [y, exps] :: r then if stringCompare(x, y) is
+    LESS then [y, exps] :: monoStoreUpdate(r, x, exp)
+    GREATER then [x, exp :: Nil] :: [y, exps] :: r
+    EQUAL then [y, insertExp(exp, exps)] :: r
+
+private fun monoStoreUpdate1(mst, x, exps) =
+  listFoldl((exp, mst) => monoStoreUpdate(mst, x, exp))(mst)(exps)
+
+private fun explore(seen, todo) = if todo is
+  Nil then seen
+  st :: sts then
+    if member(seen, st) then explore(seen, sts)
+    else explore(st :: seen, append(absNext(st), sts))
+
+private fun summarize(states) =
+  listFoldl((state, sum) => storeJoin(storeOf(state), sum))(storeMapEmpty())(states)
+
+private fun monovariantStore(st) =
+  storeMapFoldli((b, d, mst) => if b is Bnd(x, _) then monoStoreUpdate1(mst, x, monoValues(d)))(Nil)(st)
+
+
+// the standard example, in direct style:
+// (let* ((id (lambda (x) x))
+//        (a  (id (lambda (z) (halt z))))
+//        (b  (id (lambda (y) (halt y)))))
+//   (halt b))
+private fun stdExample() =
+  let labelCount = new mut Ref(1)
+  fun newLabel() =
+    let n = labelCount.Ref#value + 1
+    set labelCount.Ref#value = n
+    n
+  fun var_(x) = VAR(newLabel(), x)
+  fun lambda(formals)(call) = LAMBDA([newLabel(), formals, call])
+  fun call(f)(args) = CALL(newLabel(), f, args)
+  fun return_(x) = RET(newLabel(), x)
+  fun mkLet(x)(e1)(e2) = call(lambda(x :: Nil)(e2))(e1 :: Nil)
+  mkLet("id")(lambda("x" :: "k" :: Nil)(call(var_("k"))(var_("x") :: Nil)))(
+    call(var_("id"))(
+      lambda("z" :: Nil)(return_("z")) ::
+      lambda("a" :: Nil)(
+        call(var_("id"))(
+          lambda("y" :: Nil)(return_("y")) ::
+          lambda("b" :: Nil)(return_("b")) ::
+          Nil)) ::
+      Nil))
+
+private fun doit() =
+  let states = explore(Nil, initState(stdExample()) :: Nil)
+  let summary = summarize(states)
+  let monoSummary = monovariantStore(summary)
+  monoSummary
+
+// the monovariant store as [variable, labels of its lambdas];
+// expected: x: 11, 8; k: 15, 13; id: 5; b: 11; a: 8
+fun main() =
+  let lambdaLabel = e => if e is LAMBDA(lam) and lam is [label, _, _] then label
+  listMap(p => if p is [x, exps] then [x, listMap(lambdaLabel)(exps)])(doit())

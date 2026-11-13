@@ -1,0 +1,237 @@
+#lang(0.3.x)
+
+import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+
+// builds the whole tic-tac-toe game tree by minimax, plainly and with a transposition table
+// source: the sml/nj benchmark suite's programs/minimax (a modified manticore benchmark by adam shaw),
+// as the single file run by the fco paper (its artifact's benchmarks/minimax.sml); only the program part
+// (tic-tac-toe.sml and main.sml, l.784-1065) is ported, not the suite's pasted Array/List/Option library
+// port changes:
+// - structures TicTacToe and Main are flattened into top-level functions; the signature is erased; the Basis
+//   functions used (List.nth/tabulate/all/exists/foldl/foldr, map, rev, hd, tl, isSome, `o`, Int.max,
+//   Array.tabulate/sub/update) are defined here, curried as in the Basis; the table is a `mut` tuple
+// - the impossible `raise Fail "subscript"`, `raise Fail "illegal move"` and `raise List.Empty` cases are left
+//   out (moveTo's guard is negated so its raise can be left out)
+// - `case p of X => … | Y => …`: `Y` is not a constructor but a variable pattern, i.e. `O`; ported as `else`
+// - point-free `listmax`/`listmin` become functions with an explicit parameter; module-level values (rows,
+//   cols, diags, empty) become zero-parameter functions
+// - unused definitions are dropped (isEmpty, size, and Main's name/iters/doit)
+// - `main` returns [nodes, max depth] of both trees, as testit's printTree computes them (sml/nj:
+//   gameTree [549946, 10], gameTreeWithTT [16168, 10]); printTree is `treeStats`, returning instead of printing
+
+module minimax with ...
+
+
+
+data class (::) Cons(head, tail)
+object Nil
+
+data class Some(value)
+object None
+
+
+// basis library
+
+private fun hd(l) = if l is x :: xs then x
+
+private fun tl(l) = if l is x :: xs then xs
+
+private fun listNth(l, n) = if l is x :: xs then
+  if n == 0 then x else listNth(xs, n - 1)
+
+private fun listTabulate(n, f) =
+  fun go(i) = if i >= n then Nil else f(i) :: go(i + 1)
+  go(0)
+
+private fun listAll(p)(l) = if l is
+  Nil then true
+  x :: xs then p(x) && listAll(p)(xs)
+
+private fun listExists(p)(l) = if l is
+  Nil then false
+  x :: xs then p(x) || listExists(p)(xs)
+
+private fun listFoldl(f)(init)(l) = if l is
+  Nil then init
+  x :: xs then listFoldl(f)(f(x, init))(xs)
+
+private fun listFoldr(f)(init)(l) = if l is
+  Nil then init
+  x :: xs then f(x, listFoldr(f)(init)(xs))
+
+private fun map(f)(l) = if l is
+  Nil then Nil
+  x :: xs then f(x) :: map(f)(xs)
+
+private fun rev(l) =
+  fun go(l, acc) = if l is
+    Nil then acc
+    x :: xs then go(xs, x :: acc)
+  go(l, Nil)
+
+private fun isSome(o) = if o is
+  Some(_) then true
+  None then false
+
+private fun not_(b) = if b is
+  false then true
+  true then false
+
+// sml's `f o g`
+private fun compose(f, g) = x => f(g(x))
+
+private fun intMax(a, b) = if a > b then a else b
+
+private fun fillTabulate(arr, i, n, f) = if i == n then arr else
+  set arr.[i] = f(i)
+  fillTabulate(arr, i + 1, n, f)
+
+private fun arrayTabulate(n, f) = fillTabulate(mut [], 0, n, f)
+
+private fun arraySub(a, i) = a.[i]
+
+private fun arrayUpdate(a, i, x) = set a.[i] = x
+
+
+// tic-tac-toe.sml
+
+private fun snd(p) = if p is [_, y] then y
+
+object X
+object O
+
+// boards are lists of `Some(player)`/`None` of length 9:
+// 0 1 2
+// 3 4 5
+// 6 7 8
+private fun rows() = (0 :: 1 :: 2 :: Nil) :: (3 :: 4 :: 5 :: Nil) :: (6 :: 7 :: 8 :: Nil) :: Nil
+private fun cols() = (0 :: 3 :: 6 :: Nil) :: (1 :: 4 :: 7 :: Nil) :: (2 :: 5 :: 8 :: Nil) :: Nil
+private fun diags() = (0 :: 4 :: 8 :: Nil) :: (2 :: 4 :: 6 :: Nil) :: Nil
+
+private fun empty() = listTabulate(9, i => None)
+
+private fun isOccupied(b, i) = isSome(listNth(b, i))
+
+private fun find(b, i) = listNth(b, i)
+
+private fun playerEq(p1, p2) = if
+  p1 is X and p2 is X then true
+  p1 is O and p2 is O then true
+  else false
+
+private fun playerOccupies(p)(b)(i) = if find(b, i) is
+  Some(p1) then playerEq(p, p1)
+  None then false
+
+private fun putAt(x, xs, i) = if
+  i == 0 then x :: tl(xs)
+  i > 0 then hd(xs) :: putAt(x, tl(xs), i - 1)
+
+private fun moveTo(b, p)(i) = if isOccupied(b, i) is false then putAt(Some(p), b, i)
+
+private fun hasTrip(b, p)(t) = listAll(playerOccupies(p)(b))(t)
+
+private fun hasRow(b, p) = listExists(hasTrip(b, p))(rows())
+
+private fun hasCol(b, p) = listExists(hasTrip(b, p))(cols())
+
+private fun hasDiag(b, p) = listExists(hasTrip(b, p))(diags())
+
+private fun isFull(b) = listAll(isSome)(b)
+
+private fun isWinFor(b)(p) = hasRow(b, p) || hasCol(b, p) || hasDiag(b, p)
+
+private fun isWin(b) = isWinFor(b)(X) || isWinFor(b)(O)
+
+// X moves last
+private fun isCat(b) = isFull(b) && not_(isWinFor(b)(X)) && not_(isWinFor(b)(O))
+
+// -1 if O wins, 1 if X wins, 0 otherwise;
+// this coarse heuristic function suffices b/c we can build the *whole* tree
+private fun score(b) = if isWinFor(b)(X) then 1 else if isWinFor(b)(O) then -1 else 0
+
+// general tree
+data class Rose(x, kids)
+
+private fun mkLeaf(x) = Rose(x, Nil)
+
+private fun allMoves(b) =
+  fun f(n, m, acc) = if m is
+    Nil then rev(acc)
+    Some(_) :: more then f(n + 1, more, acc)
+    None :: more then f(n + 1, more, n :: acc)
+  f(0, b, Nil)
+
+private fun other(p) = if p is
+  X then O
+  O then X
+
+private fun top(t) = if t is Rose(x, _) then x
+
+private fun listExtreme(e)(l) = if l is n :: ns then listFoldl(e)(n)(ns)
+
+private fun listmax(l) = listExtreme((a, b) => if a > b then a else b)(l)
+
+private fun listmin(l) = listExtreme((a, b) => if a < b then a else b)(l)
+
+private fun gameOver(b) = isWin(b) || isCat(b)
+
+// a list of all possible successor states given a board and a player to move
+private fun successors(b, p) = map(moveTo(b, p))(allMoves(b))
+
+// build the tree and score it at the same time; p is the player to move; X is max, O is min
+private fun minimax(p)(b) =
+  if gameOver(b) then mkLeaf([b, score(b)])
+  else
+    let trees = map(minimax(other(p)))(successors(b, p))
+    let scores = map(compose(snd, top))(trees)
+    if p is
+      X then Rose([b, listmax(scores)], trees)
+      else Rose([b, listmin(scores)], trees)
+
+// construct the game tree starting with an empty board
+private fun gameTree() = minimax(X)(empty())
+
+// map a board to a unique integer
+private fun boardToIndex(p, b) =
+  fun handleItem(i) = if i is
+    Some(X) then 1
+    Some(O) then 2
+    None then 0
+  let start = [if p is X then 1 else 0, 3]
+  if listFoldr((i, acc) => if acc is [sum, base] then [sum + handleItem(i) * base, base * 3])(start)(b) is [res, _] then
+    res
+
+// construct the game tree starting with an empty board using a transposition table
+private fun gameTreeWithTT() =
+  let unused = -2
+  // 3^10 = 59,049
+  let transTable = arrayTabulate(59049, i => unused)
+  fun lookupTrans(p, b) =
+    let x = arraySub(transTable, boardToIndex(p, b))
+    if x == -2 then None else Some(x)
+  fun setTrans(p, b, i) = arrayUpdate(transTable, boardToIndex(p, b), i)
+  fun minimaxTT(p)(b) =
+    if gameOver(b) then mkLeaf([b, score(b)])
+    else
+      if lookupTrans(p, b) is
+        Some(x) then Rose([b, x], Nil)
+        None then
+          let trees = map(minimaxTT(other(p)))(successors(b, p))
+          let scores = map(compose(snd, top))(trees)
+          let final = if p is
+            X then listmax(scores)
+            else listmin(scores)
+          setTrans(p, b, final)
+          Rose([b, final], trees)
+  minimaxTT(X)(empty())
+
+
+// main.sml: testit's printTree, returning [# nodes, max depth] instead of printing
+private fun treeStats(tr) =
+  fun sz(t) = if t is Rose(_, kids) then
+    fun doKid(t, acc) = if acc is [n, d] and sz(t) is [n1, d1] then [n + n1, intMax(d, d1)]
+    if listFoldl(doKid)([0, 0])(kids) is [n, d] then [n + 1, d + 1]
+  sz(tr)
+
+fun main() = [treeStats(gameTree()), treeStats(gameTreeWithTT())]

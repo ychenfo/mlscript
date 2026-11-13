@@ -1,0 +1,288 @@
+#lang(0.3.x)
+
+import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
+
+open annotations { pure }
+
+// travelling salesman by divide and conquer
+// source: john reppy's single-file version of the sml/nj suite's tsp (originally from olden),
+// as kept in the webs artifact (zenodo 15050194), 3cps/test/programs/examples/broken/tsp.sml
+// port changes:
+// - structures Math/Rand/Tree/BuildTree/TSP/Main are flattened into top-level functions;
+//   module-level constants become locals of the functions using them (Rand's `q`/`r` precomputed),
+//   the unused m_e … m_e6 are dropped
+// - sqrt, ln and integer div wrap js Math as `@pure` functions
+// - (not a change) the nodes' `prev`/`next` refs are `Ref` cells, and sml `=` on refs in `sameNd` is `===`
+// - the impossible NULL cases and `raise Fail "distance"` are left out (implicit match error)
+// - `divideSz` (a top-level `ref 150` that is only read) is passed from `main` as the constant 150
+// - `main` returns the tour's point count and length, computed like the sml/nj driver's `printLength`
+//   (here `tourLength`); sml/nj gives 255 points, length 22.66156738284888
+
+module tsp with ...
+
+
+
+class Ref(val value)
+
+@pure private fun sqrt(x) = globalThis.Math.sqrt(x)
+
+@pure private fun ln(x) = globalThis.Math.log(x)
+
+@pure private fun intDiv(a, b) = globalThis.Math.floor(a / b)
+
+private fun intMod(a, b) = a - b * intDiv(a, b)
+
+
+private fun chk(seed) =
+  let m_1 = 2147483647 - 1
+  if
+    seed <= 0 then 1
+    seed > m_1 then m_1
+    else seed
+
+private fun random_(seed) =
+  let a = 48271
+  let m = 2147483647
+  // m div a, m mod a
+  let q = 44488
+  let r = 3399
+  let hi = intDiv(seed, q)
+  let lo = intMod(seed, q)
+  let test = a * lo - r * hi
+  if test > 0 then test else test + m
+
+private fun mkRandom(seed) =
+  let seedRef = new mut Ref(chk(seed))
+  () =>
+    set seedRef.Ref#value = random_(seedRef.Ref#value)
+    seedRef.Ref#value
+
+private fun norm(s) =
+  let scale = 1.0 / 2147483647.0
+  scale * s
+
+
+// ND(left, right, x, y, sz, prev, next)
+object NULL
+data class ND(left, right, x, y, sz, prev, next)
+
+private fun mkNode(l, r, x, y, sz) = ND(l, r, x, y, sz, new mut Ref(NULL), new mut Ref(NULL))
+
+
+object X_AXIS
+object Y_AXIS
+
+// builds a 2d tree of n nodes in specified range with dir as primary axis
+private fun buildTree(n, dir, min_x, min_y, max_x, max_y) =
+  let rand = mkRandom(314)
+  fun drand48() = norm(rand())
+  fun median(min, max, n) =
+    let m_e12 = 162754.79141900392083592475
+    let t = drand48()
+    let retval =
+      if t > 0.5 then ln(1.0 - (2.0 * (m_e12 - 1.0) * (t - 0.5) / m_e12)) / 12.0
+      else -(ln(1.0 - (2.0 * (m_e12 - 1.0) * t / m_e12)) / 12.0)
+    min + ((retval + 1.0) * (max - min) / 2.0)
+  fun uniform(min, max) = min + (drand48() * (max - min))
+  fun build(n, dir, min_x, min_y, max_x, max_y) = if
+    n == 0 then NULL
+    dir is X_AXIS then
+      let med = median(min_y, max_y, n)
+      fun mkTree(min, max) = build(intDiv(n, 2), Y_AXIS, min_x, max_x, min, max)
+      mkNode(mkTree(min_y, med), mkTree(med, max_y), uniform(min_x, max_x), med, n)
+    dir is Y_AXIS then
+      let med = median(min_x, max_x, n)
+      fun mkTree(min, max) = build(intDiv(n, 2), X_AXIS, min, max, min_y, max_y)
+      mkNode(mkTree(min_x, med), mkTree(med, max_x), med, uniform(min_y, max_y), n)
+  build(n, dir, min_x, min_y, max_x, max_y)
+
+
+private fun setPrev(nd, x) = if nd is ND(_, _, _, _, _, prev, _) then
+  set prev.Ref#value = x
+
+private fun setNext(nd, x) = if nd is ND(_, _, _, _, _, _, next) then
+  set next.Ref#value = x
+
+private fun link(a, b) = if a is ND(_, _, _, _, _, _, next) and b is ND(_, _, _, _, _, prev, _) then
+  set next.Ref#value = b
+  set prev.Ref#value = a
+
+private fun sameNd(a, b) = if
+  a is ND(_, _, _, _, _, _, next) and b is ND(_, _, _, _, _, _, next1) then next === next1
+  a is NULL and b is NULL then true
+  else false
+
+// find euclidean distance from a to b
+private fun distance(a, b) = if a is ND(_, _, ax, ay, _, _, _) and b is ND(_, _, bx, by, _, _, _) then
+  sqrt((ax - bx) * (ax - bx) + (ay - by) * (ay - by))
+
+// sling tree nodes into a list -- requires root to be tail of list, and
+// only fills in next field, not prev
+private fun makeList(t) = if t is
+  NULL then NULL
+  ND(left, right, _, _, _, _, t_next) then
+    let l = makeList(left)
+    let r = makeList(right)
+    let retVal = if
+      l is NULL and r is NULL then t
+      l is ND and r is NULL then
+        setNext(left, t)
+        l
+      l is NULL and r is ND then
+        setNext(right, t)
+        r
+      l is ND and r is ND then
+        setNext(right, t)
+        setNext(left, r)
+        l
+    set t_next.Ref#value = NULL
+    retVal
+
+// reverse orientation of list
+private fun reverse(t) = if t is
+  NULL then ()
+  ND(_, _, _, _, _, prev, next) then
+    fun rev(back, tmp) = if tmp is
+      NULL then ()
+      ND(_, _, _, _, _, prev, next) then
+        let tmp1 = next.Ref#value
+        set next.Ref#value = back
+        setPrev(back, tmp)
+        rev(tmp, tmp1)
+    setNext(prev.Ref#value, NULL)
+    set prev.Ref#value = NULL
+    rev(t, next.Ref#value)
+
+// use closest-point heuristic from cormen leiserson and rivest
+private fun conquer(t) = if t is
+  NULL then NULL
+  else
+    let cycle = makeList(t)
+    if cycle is ND(_, _, _, _, _, cycle_prev, cycle_next) then
+      fun loop(t) = if t is
+        NULL then ()
+        ND(_, _, _, _, _, prev, doNext1) then
+          let doNext = doNext1.Ref#value
+          fun findMinDist(min, minDist, tmp) = if tmp is ND(_, _, _, _, _, _, next) then
+            if sameNd(cycle, tmp) then min
+            else
+              let test = distance(t, tmp)
+              if test < minDist then findMinDist(tmp, test, next.Ref#value)
+              else findMinDist(min, minDist, next.Ref#value)
+          let min = findMinDist(cycle, distance(t, cycle), cycle_next.Ref#value)
+          if min is ND(_, _, _, _, _, min_prev1, min_next1) then
+            let min_prev = min_prev1.Ref#value
+            let min_next = min_next1.Ref#value
+            let minToNext = distance(min, min_next)
+            let minToPrev = distance(min, min_prev)
+            let tToNext = distance(t, min_next)
+            let tToPrev = distance(t, min_prev)
+            if tToPrev - minToPrev < tToNext - minToNext then
+              // insert between min and min_prev
+              link(min_prev, t)
+              link(t, min)
+            else
+              link(min, t)
+              link(t, min_next)
+            loop(doNext)
+      let t1 = cycle_next.Ref#value
+      // create initial cycle
+      set cycle_next.Ref#value = cycle
+      set cycle_prev.Ref#value = cycle
+      loop(t1)
+      cycle
+
+// merge two cycles as per karp
+private fun merge(a, b, t) = if a is ND(_, _, _, _, _, _, next) then
+  fun locateCycle(start) = if start is ND(_, _, _, _, _, _, next) then
+    fun findMin(min, minDist, tmp) = if tmp is ND(_, _, _, _, _, _, next) then
+      if sameNd(start, tmp) then [min, minDist]
+      else
+        let test = distance(t, tmp)
+        if test < minDist then findMin(tmp, test, next.Ref#value)
+        else findMin(min, minDist, next.Ref#value)
+    if findMin(start, distance(t, start), next.Ref#value) is [min, minDist] and min is ND(_, _, _, _, _, prev1, next1) then
+      let prev = prev1.Ref#value
+      let next = next1.Ref#value
+      let minToNext = distance(min, next)
+      let minToPrev = distance(min, prev)
+      let tToNext = distance(t, next)
+      let tToPrev = distance(t, prev)
+      // would insert between min and prev, or between min and next
+      if tToPrev - minToPrev < tToNext - minToNext then [prev, tToPrev, min, minDist]
+      else [min, minDist, next, tToNext]
+  // compute location for first cycle, then for second cycle
+  if locateCycle(a) is [p1, tToP1, n1, tToN1] and locateCycle(b) is [p2, tToP2, n2, tToN2] then
+    // now we have 4 choices to complete:
+    //   1:t,p1 t,p2 n1,n2
+    //   2:t,p1 t,n2 n1,p2
+    //   3:t,n1 t,p2 p1,n2
+    //   4:t,n1 t,n2 p1,p2
+    let n1ToN2 = distance(n1, n2)
+    let n1ToP2 = distance(n1, p2)
+    let p1ToN2 = distance(p1, n2)
+    let p1ToP2 = distance(p1, p2)
+    fun choose(testChoice, test, choice, minDist) =
+      if test < minDist then [testChoice, test] else [choice, minDist]
+    let choice0 = 1
+    let minDist0 = tToP1 + tToP2 + n1ToN2
+    if choose(2, tToP1 + tToN2 + n1ToP2, choice0, minDist0) is [choice1, minDist1] and
+      choose(3, tToN1 + tToP2 + p1ToN2, choice1, minDist1) is [choice2, minDist2] and
+        choose(4, tToN1 + tToN2 + p1ToP2, choice2, minDist2) is [choice, minDist] then
+          if choice is
+            1 then
+              // 1:p1,t t,p2 n2,n1 -- reverse 2!
+              reverse(n2)
+              link(p1, t)
+              link(t, p2)
+              link(n2, n1)
+            2 then
+              // 2:p1,t t,n2 p2,n1 -- ok
+              link(p1, t)
+              link(t, n2)
+              link(p2, n1)
+            3 then
+              // 3:p2,t t,n1 p1,n2 -- ok
+              link(p2, t)
+              link(t, n1)
+              link(p1, n2)
+            else
+              // 4:n1,t t,n2 p2,p1 -- reverse 1!
+              reverse(n1)
+              link(n1, t)
+              link(t, n2)
+              link(p2, p1)
+          t
+
+// compute tsp for the tree t -- use conquer for problems <= sz
+private fun tsp(t, sz) = if t is
+  ND(left, right, _, _, sz1, _, _) then
+    if sz1 <= sz then conquer(t)
+    else merge(tsp(left, sz), tsp(right, sz), t)
+  NULL then NULL
+
+
+private fun mkTree(n) = buildTree(n, X_AXIS, 0.0, 1.0, 0.0, 1.0)
+
+private fun doit(n, divideSz) = tsp(mkTree(n), divideSz)
+
+// the sml/nj driver's printLength, returning [point count, tour length] instead of printing
+private fun tourLength(start) = if start is
+  NULL then [0, 0.0]
+  ND(_, _, x, y, _, _, next) then
+    fun cycle(t) = if t is
+      ND(_, _, _, _, _, _, next1) then next === next1
+      else false
+    fun dist(ax, ay, bx, by) =
+      let dx = ax - bx
+      let dy = ay - by
+      sqrt(dx * dx + dy * dy)
+    fun length(t, px, py, n, len) = if t is
+      NULL then [n, len + dist(px, py, x, y)]
+      ND(_, _, x1, y1, _, _, next1) then
+        if cycle(t) then [n, len + dist(px, py, x1, y1)]
+        else length(next1.Ref#value, x1, y1, n + 1, len + dist(px, py, x1, y1))
+    if cycle(next.Ref#value) then [1, 0.0]
+    else length(next.Ref#value, x, y, 1, 0.0)
+
+fun main() = tourLength(doit(255, 150))
