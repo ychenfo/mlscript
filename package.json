@@ -4,5 +4,8 @@
     "benchmark": "^2.1.4",
     "binaryen": "^131.0.0",
     "typescript": "^4.7.4"
+  },
+  "devDependencies": {
+    "tinybench": "^6.2.3"
   }
 }
