@@ -683,14 +683,6 @@ lambda = (undefined, function (tsp2, seedRef) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #mkTree(n) {
-    return tsp.#buildTree(n, tsp.X_AXIS, 0.0, 1.0, 0.0, 1.0)
-  }
-  static #doit(n, divideSz) {
-    let tmp;
-    tmp = tsp.#mkTree(n);
-    return tsp.#tsp(tmp, divideSz)
-  }
   static #tourLength(start) {
     let arg$ND$2$, arg$ND$3$, arg$ND$6$;
     if (start instanceof tsp.NULL.class) {
@@ -799,9 +791,10 @@ lambda = (undefined, function (tsp2, seedRef) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static main() {
-    let tmp;
-    tmp = tsp.#doit(255, 150);
-    return tsp.#tourLength(tmp)
+    let tmp, tmp1;
+    tmp = tsp.#buildTree(255, tsp.X_AXIS, 0.0, 1.0, 0.0, 1.0);
+    tmp1 = tsp.#tsp(tmp, 150);
+    return tsp.#tourLength(tmp1)
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "tsp"];

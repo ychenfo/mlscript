@@ -581,11 +581,8 @@ let fft1;
       return fft.#loop_np$tailrec(i, np)
     }
   }
-  static #doit() {
-    return fft.#loop_np(1)(16)
-  }
   static main() {
-    return fft.#doit()
+    return fft.#loop_np(1)(16)
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "fft"];

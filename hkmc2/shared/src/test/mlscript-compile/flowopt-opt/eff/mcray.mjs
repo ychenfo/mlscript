@@ -16,8 +16,206 @@ const getHitInfo$accessorSymbol = globalThis.Symbol("getHitInfo");
 const closer$accessorSymbol = globalThis.Symbol("closer");
 const rayToRGB$accessorSymbol = globalThis.Symbol("rayToRGB");
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
-let go, hitTest1, hitTest11, trace, mcray1, lambda, lambda1, lambda$, hitTest1$, lambda$1, hitTest1$1, lambda$2, lambda$3, main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay, main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$, main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel, main_test_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda, main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$, main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1, main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$, main_test_buildScene_makeScene_lambertian_lambda$$lambda$, main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda, main_test_buildScene_makeScene_lambertian_lambda$$lambda$1, main_test_buildScene_makeScene_metal_lambda$$lambda$, main_test_buildScene_makeScene_lambertian_lambda$$lambda$2, main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda1, main_test_buildScene_makeScene_lambertian_lambda$$lambda$3, main_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, main_test_rayTracer_traceRay_lambda$_trace$trace, main_test_rayTracer_traceRay_lambda$$lambda$, test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, test_rayTracer_traceRay_lambda$_trace$trace, rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, aaPixelToRGB_raysForPixel_listTabulate_go$go, raysForPixel_listTabulate_go$go, main_test_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda, main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1, main_test_buildScene_makeScene_metal_lambda$_lambda$lambda, main_test_buildScene_makeScene_metal_lambda$$lambda$1, main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker;
-main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay = function main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay(mcray2, rng, hvec, vvec, pos, r1, c1, ulcDir) {
+let go, hitTest1, hitTest11, trace, mcray1, lambda, lambda1, lambda$, hitTest1$, lambda$1, hitTest1$1, lambda$2, lambda$3, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_lambertian_lambda$$lambda$, main_buildScene_makeScene_lambertian_lambda$$lambda$1, main_buildScene_makeScene_metal_lambda$$lambda$, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1, main_buildScene_makeScene_lambertian_lambda$$lambda$2, main_buildScene_makeScene_lambertian_lambda$$lambda$3, main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$, main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$, main_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel, main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, main_rayTracer_traceRay_lambda$_trace$trace, main_rayTracer_traceRay_lambda$$lambda$, rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, aaPixelToRGB_raysForPixel_listTabulate_go$go, raysForPixel_listTabulate_go$go, main_buildScene_makeScene_metal_lambda$_lambda$lambda, main_buildScene_makeScene_metal_lambda$$lambda$1, main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda, main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker;
+main_buildScene_makeScene_lambertian_lambda$_lambda$lambda = function main_buildScene_makeScene_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit) {
+  let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
+  if (hit instanceof mcray2.MatHit.class) {
+    let inlinedVal, inlinedVal1, inlinedVal2, scrut, tmp3, tmp4, inlinedVal3, inlinedVal4;
+    arg$MatHit$1$ = hit.pt;
+    arg$MatHit$2$ = hit.norm;
+    tmp = mcray2[vec3RandomPointInSphere$accessorSymbol](rng);
+    tmp1 = mcray2[vec3Add$accessorSymbol](arg$MatHit$2$, tmp);
+    inlinedVal3 = mcray2[vec3Dot$accessorSymbol](tmp1, tmp1);
+    inlinedVal4 = runtime.safeCall(globalThis.Math.sqrt(inlinedVal3));
+    scrut = inlinedVal4 < 0.0001;
+    if (scrut === true) {
+      let inlinedVal5;
+      inlinedVal5 = globalThis.Object.freeze([
+        0.0,
+        0.0,
+        0.0
+      ]);
+      inlinedVal2 = globalThis.Object.freeze([
+        0.0,
+        inlinedVal5
+      ]);
+    } else {
+      tmp3 = 1.0 / inlinedVal4;
+      tmp4 = mcray2[vec3Scale$accessorSymbol](tmp3, tmp1);
+      inlinedVal2 = globalThis.Object.freeze([
+        inlinedVal4,
+        tmp4
+      ]);
+    }
+    if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
+      inlinedVal1 = runtime.Tuple.get(inlinedVal2, 1);
+      inlinedVal = globalThis.Object.freeze([
+        arg$MatHit$1$,
+        inlinedVal1
+      ]);
+      tmp2 = globalThis.Object.freeze([
+        albedo,
+        inlinedVal
+      ]);
+      return mcray2.Some(tmp2)
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_buildScene_makeScene_lambertian_lambda$$lambda$ = function main_buildScene_makeScene_lambertian_lambda$$lambda$(mcray2, rng, albedo) {
+  return (ray, hit) => {
+    return main_buildScene_makeScene_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit)
+  }
+};
+main_buildScene_makeScene_lambertian_lambda$$lambda$1 = function main_buildScene_makeScene_lambertian_lambda$$lambda$() {
+  return () => {
+    return globalThis.Object.freeze([
+      0.0,
+      0.0,
+      0.0
+    ])
+  }
+};
+main_buildScene_makeScene_metal_lambda$$lambda$ = function main_buildScene_makeScene_metal_lambda$$lambda$() {
+  return () => {
+    return globalThis.Object.freeze([
+      0.0,
+      0.0,
+      0.0
+    ])
+  }
+};
+main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1 = function main_buildScene_makeScene_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit) {
+  let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
+  if (hit instanceof mcray2.MatHit.class) {
+    let inlinedVal, inlinedVal1, inlinedVal2, scrut, tmp3, tmp4, inlinedVal3, inlinedVal4;
+    arg$MatHit$1$ = hit.pt;
+    arg$MatHit$2$ = hit.norm;
+    tmp = mcray2[vec3RandomPointInSphere$accessorSymbol](rng);
+    tmp1 = mcray2[vec3Add$accessorSymbol](arg$MatHit$2$, tmp);
+    inlinedVal3 = mcray2[vec3Dot$accessorSymbol](tmp1, tmp1);
+    inlinedVal4 = runtime.safeCall(globalThis.Math.sqrt(inlinedVal3));
+    scrut = inlinedVal4 < 0.0001;
+    if (scrut === true) {
+      let inlinedVal5;
+      inlinedVal5 = globalThis.Object.freeze([
+        0.0,
+        0.0,
+        0.0
+      ]);
+      inlinedVal2 = globalThis.Object.freeze([
+        0.0,
+        inlinedVal5
+      ]);
+    } else {
+      tmp3 = 1.0 / inlinedVal4;
+      tmp4 = mcray2[vec3Scale$accessorSymbol](tmp3, tmp1);
+      inlinedVal2 = globalThis.Object.freeze([
+        inlinedVal4,
+        tmp4
+      ]);
+    }
+    if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
+      inlinedVal1 = runtime.Tuple.get(inlinedVal2, 1);
+      inlinedVal = globalThis.Object.freeze([
+        arg$MatHit$1$,
+        inlinedVal1
+      ]);
+      tmp2 = globalThis.Object.freeze([
+        albedo,
+        inlinedVal
+      ]);
+      return mcray2.Some(tmp2)
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_buildScene_makeScene_lambertian_lambda$$lambda$2 = function main_buildScene_makeScene_lambertian_lambda$$lambda$(mcray2, rng, albedo) {
+  return (ray, hit) => {
+    return main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1(mcray2, rng, albedo, hit)
+  }
+};
+main_buildScene_makeScene_lambertian_lambda$$lambda$3 = function main_buildScene_makeScene_lambertian_lambda$$lambda$() {
+  return () => {
+    return globalThis.Object.freeze([
+      0.0,
+      0.0,
+      0.0
+    ])
+  }
+};
+main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$ = function main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$() {
+  return () => {
+    return globalThis.Object.freeze([
+      0.0,
+      0.0,
+      0.0
+    ])
+  }
+};
+main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$ = function main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$() {
+  return () => {
+    return globalThis.Object.freeze([
+      0.0,
+      0.0,
+      0.0
+    ])
+  }
+};
+main_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda = function main_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit) {
+  let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
+  if (hit instanceof mcray2.MatHit.class) {
+    let inlinedVal, inlinedVal1, inlinedVal2, scrut, tmp3, tmp4, inlinedVal3, inlinedVal4;
+    arg$MatHit$1$ = hit.pt;
+    arg$MatHit$2$ = hit.norm;
+    tmp = mcray2[vec3RandomPointInSphere$accessorSymbol](rng);
+    tmp1 = mcray2[vec3Add$accessorSymbol](arg$MatHit$2$, tmp);
+    inlinedVal3 = mcray2[vec3Dot$accessorSymbol](tmp1, tmp1);
+    inlinedVal4 = runtime.safeCall(globalThis.Math.sqrt(inlinedVal3));
+    scrut = inlinedVal4 < 0.0001;
+    if (scrut === true) {
+      let inlinedVal5;
+      inlinedVal5 = globalThis.Object.freeze([
+        0.0,
+        0.0,
+        0.0
+      ]);
+      inlinedVal2 = globalThis.Object.freeze([
+        0.0,
+        inlinedVal5
+      ]);
+    } else {
+      tmp3 = 1.0 / inlinedVal4;
+      tmp4 = mcray2[vec3Scale$accessorSymbol](tmp3, tmp1);
+      inlinedVal2 = globalThis.Object.freeze([
+        inlinedVal4,
+        tmp4
+      ]);
+    }
+    if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
+      inlinedVal1 = runtime.Tuple.get(inlinedVal2, 1);
+      inlinedVal = globalThis.Object.freeze([
+        arg$MatHit$1$,
+        inlinedVal1
+      ]);
+      tmp2 = globalThis.Object.freeze([
+        albedo,
+        inlinedVal
+      ]);
+      return mcray2.Some(tmp2)
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1 = function main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$(mcray2, rng, albedo) {
+  return (ray, hit) => {
+    return main_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit)
+  }
+};
+main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay = function main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay(mcray2, rng, hvec, vvec, pos, r1, c1, ulcDir) {
   let tmp, tmp1, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, tmp2, scale, tmp3, scale1, inlinedVal4, x, tmp4, x1, tmp5, inlinedVal5, inlinedVal6, inlinedVal7, scrut, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11;
   scale1 = 1.0 / 2147483647.0;
   x1 = rng.value;
@@ -74,17 +272,17 @@ main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay = function main
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$ = function main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$(mcray2, rng, hvec, vvec, pos, r1, c1, ulcDir) {
+main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$ = function main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$(mcray2, rng, hvec, vvec, pos, r1, c1, ulcDir) {
   return () => {
-    return main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay(mcray2, rng, hvec, vvec, pos, r1, c1, ulcDir)
+    return main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay(mcray2, rng, hvec, vvec, pos, r1, c1, ulcDir)
   }
 };
-main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel = function main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel(rng, cam) {
+main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel = function main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel(rng, cam) {
   return (r, c) => {
-    return main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker(rng, cam, r, c)
+    return main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker(rng, cam, r, c)
   }
 };
-main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker = function main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker(rng, cam, r, c) {
+main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker = function main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker(rng, cam, r, c) {
   let ulcDir, arg$Cam$2$, arg$Cam$3$, arg$Cam$4$, arg$Cam$5$, arg$Cam$6$;
   if (cam instanceof mcray1.Cam.class) {
     let f;
@@ -94,210 +292,12 @@ main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker = function mai
     arg$Cam$5$ = cam.hvec;
     arg$Cam$6$ = cam.vvec;
     ulcDir = mcray1[vec3Sub$accessorSymbol](arg$Cam$4$, arg$Cam$3$);
-    f = main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$(mcray1, rng, arg$Cam$5$, arg$Cam$6$, arg$Cam$3$, r, c, ulcDir);
-    return main_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray1, arg$Cam$2$, f, 0)
+    f = main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$(mcray1, rng, arg$Cam$5$, arg$Cam$6$, arg$Cam$3$, r, c, ulcDir);
+    return main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray1, arg$Cam$2$, f, 0)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_test_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda = function main_test_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit) {
-  let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
-  if (hit instanceof mcray2.MatHit.class) {
-    let inlinedVal, inlinedVal1, inlinedVal2, scrut, tmp3, tmp4, inlinedVal3, inlinedVal4;
-    arg$MatHit$1$ = hit.pt;
-    arg$MatHit$2$ = hit.norm;
-    tmp = mcray2[vec3RandomPointInSphere$accessorSymbol](rng);
-    tmp1 = mcray2[vec3Add$accessorSymbol](arg$MatHit$2$, tmp);
-    inlinedVal3 = mcray2[vec3Dot$accessorSymbol](tmp1, tmp1);
-    inlinedVal4 = runtime.safeCall(globalThis.Math.sqrt(inlinedVal3));
-    scrut = inlinedVal4 < 0.0001;
-    if (scrut === true) {
-      let inlinedVal5;
-      inlinedVal5 = globalThis.Object.freeze([
-        0.0,
-        0.0,
-        0.0
-      ]);
-      inlinedVal2 = globalThis.Object.freeze([
-        0.0,
-        inlinedVal5
-      ]);
-    } else {
-      tmp3 = 1.0 / inlinedVal4;
-      tmp4 = mcray2[vec3Scale$accessorSymbol](tmp3, tmp1);
-      inlinedVal2 = globalThis.Object.freeze([
-        inlinedVal4,
-        tmp4
-      ]);
-    }
-    if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-      inlinedVal1 = runtime.Tuple.get(inlinedVal2, 1);
-      inlinedVal = globalThis.Object.freeze([
-        arg$MatHit$1$,
-        inlinedVal1
-      ]);
-      tmp2 = globalThis.Object.freeze([
-        albedo,
-        inlinedVal
-      ]);
-      return mcray2.Some(tmp2)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$ = function main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$(mcray2, rng, albedo) {
-  return (ray, hit) => {
-    return main_test_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit)
-  }
-};
-main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1 = function main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$() {
-  return () => {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-};
-main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$ = function main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$() {
-  return () => {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-};
-main_test_buildScene_makeScene_lambertian_lambda$$lambda$ = function main_test_buildScene_makeScene_lambertian_lambda$$lambda$() {
-  return () => {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-};
-main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda = function main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit) {
-  let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
-  if (hit instanceof mcray2.MatHit.class) {
-    let inlinedVal, inlinedVal1, inlinedVal2, scrut, tmp3, tmp4, inlinedVal3, inlinedVal4;
-    arg$MatHit$1$ = hit.pt;
-    arg$MatHit$2$ = hit.norm;
-    tmp = mcray2[vec3RandomPointInSphere$accessorSymbol](rng);
-    tmp1 = mcray2[vec3Add$accessorSymbol](arg$MatHit$2$, tmp);
-    inlinedVal3 = mcray2[vec3Dot$accessorSymbol](tmp1, tmp1);
-    inlinedVal4 = runtime.safeCall(globalThis.Math.sqrt(inlinedVal3));
-    scrut = inlinedVal4 < 0.0001;
-    if (scrut === true) {
-      let inlinedVal5;
-      inlinedVal5 = globalThis.Object.freeze([
-        0.0,
-        0.0,
-        0.0
-      ]);
-      inlinedVal2 = globalThis.Object.freeze([
-        0.0,
-        inlinedVal5
-      ]);
-    } else {
-      tmp3 = 1.0 / inlinedVal4;
-      tmp4 = mcray2[vec3Scale$accessorSymbol](tmp3, tmp1);
-      inlinedVal2 = globalThis.Object.freeze([
-        inlinedVal4,
-        tmp4
-      ]);
-    }
-    if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-      inlinedVal1 = runtime.Tuple.get(inlinedVal2, 1);
-      inlinedVal = globalThis.Object.freeze([
-        arg$MatHit$1$,
-        inlinedVal1
-      ]);
-      tmp2 = globalThis.Object.freeze([
-        albedo,
-        inlinedVal
-      ]);
-      return mcray2.Some(tmp2)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_test_buildScene_makeScene_lambertian_lambda$$lambda$1 = function main_test_buildScene_makeScene_lambertian_lambda$$lambda$(mcray2, rng, albedo) {
-  return (ray, hit) => {
-    return main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit)
-  }
-};
-main_test_buildScene_makeScene_metal_lambda$$lambda$ = function main_test_buildScene_makeScene_metal_lambda$$lambda$() {
-  return () => {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-};
-main_test_buildScene_makeScene_lambertian_lambda$$lambda$2 = function main_test_buildScene_makeScene_lambertian_lambda$$lambda$() {
-  return () => {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-};
-main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda1 = function main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit) {
-  let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
-  if (hit instanceof mcray2.MatHit.class) {
-    let inlinedVal, inlinedVal1, inlinedVal2, scrut, tmp3, tmp4, inlinedVal3, inlinedVal4;
-    arg$MatHit$1$ = hit.pt;
-    arg$MatHit$2$ = hit.norm;
-    tmp = mcray2[vec3RandomPointInSphere$accessorSymbol](rng);
-    tmp1 = mcray2[vec3Add$accessorSymbol](arg$MatHit$2$, tmp);
-    inlinedVal3 = mcray2[vec3Dot$accessorSymbol](tmp1, tmp1);
-    inlinedVal4 = runtime.safeCall(globalThis.Math.sqrt(inlinedVal3));
-    scrut = inlinedVal4 < 0.0001;
-    if (scrut === true) {
-      let inlinedVal5;
-      inlinedVal5 = globalThis.Object.freeze([
-        0.0,
-        0.0,
-        0.0
-      ]);
-      inlinedVal2 = globalThis.Object.freeze([
-        0.0,
-        inlinedVal5
-      ]);
-    } else {
-      tmp3 = 1.0 / inlinedVal4;
-      tmp4 = mcray2[vec3Scale$accessorSymbol](tmp3, tmp1);
-      inlinedVal2 = globalThis.Object.freeze([
-        inlinedVal4,
-        tmp4
-      ]);
-    }
-    if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-      inlinedVal1 = runtime.Tuple.get(inlinedVal2, 1);
-      inlinedVal = globalThis.Object.freeze([
-        arg$MatHit$1$,
-        inlinedVal1
-      ]);
-      tmp2 = globalThis.Object.freeze([
-        albedo,
-        inlinedVal
-      ]);
-      return mcray2.Some(tmp2)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_test_buildScene_makeScene_lambertian_lambda$$lambda$3 = function main_test_buildScene_makeScene_lambertian_lambda$$lambda$(mcray2, rng, albedo) {
-  return (ray, hit) => {
-    return main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda1(mcray2, rng, albedo, hit)
-  }
-};
-main_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go = function main_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, i) {
+main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go = function main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, i) {
   let scrut, tmp, tmp1, tmp2;
   scrut = i >= n;
   if (scrut === true) {
@@ -305,10 +305,10 @@ main_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go = function main
   }
   tmp = runtime.safeCall(f());
   tmp1 = i + 1;
-  tmp2 = main_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, tmp1);
+  tmp2 = main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, tmp1);
   return mcray2.Cons(tmp, tmp2);
 };
-main_test_rayTracer_traceRay_lambda$_trace$trace = function main_test_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, ray, depth) {
+main_rayTracer_traceRay_lambda$_trace$trace = function main_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, ray, depth) {
   let scrut, scrut1, arg$ObjHit$0$, arg$Some$0$, element1$, element0$, tmp, tmp1, tmp2;
   scrut = depth <= 0;
   if (scrut === true) {
@@ -374,7 +374,7 @@ main_test_rayTracer_traceRay_lambda$_trace$trace = function main_test_rayTracer_
               if (arg$MatHit$3$ instanceof mcray1.Material.class) {
                 inlinedVal1 = runtime.safeCall(arg$MatHit$3$.emit());
                 tmp = depth - 1;
-                tmp1 = main_test_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, element1$, tmp);
+                tmp1 = main_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, element1$, tmp);
                 tmp2 = mcray2[rgbModulate$accessorSymbol](element0$, tmp1);
                 return mcray2[rgbAdd$accessorSymbol](inlinedVal1, tmp2)
               }
@@ -391,103 +391,9 @@ main_test_rayTracer_traceRay_lambda$_trace$trace = function main_test_rayTracer_
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-main_test_rayTracer_traceRay_lambda$$lambda$ = function main_test_rayTracer_traceRay_lambda$$lambda$(mcray2, world, maxDepth, minMaxT) {
+main_rayTracer_traceRay_lambda$$lambda$ = function main_rayTracer_traceRay_lambda$$lambda$(mcray2, world, maxDepth, minMaxT) {
   return (ray) => {
-    return main_test_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, ray, maxDepth)
-  }
-};
-test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go = function test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return mcray2.Nil
-  }
-  tmp = runtime.safeCall(f());
-  tmp1 = i + 1;
-  tmp2 = test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, tmp1);
-  return mcray2.Cons(tmp, tmp2);
-};
-test_rayTracer_traceRay_lambda$_trace$trace = function test_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, ray, depth) {
-  let scrut, scrut1, arg$ObjHit$0$, arg$Some$0$, element1$, element0$, tmp, tmp1, tmp2;
-  scrut = depth <= 0;
-  if (scrut === true) {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-  {
-    let receiver, inlinedVal;
-    receiver = mcray2;
-    if (world instanceof receiver.Obj.class) {
-      inlinedVal = runtime.safeCall(world.hit(ray, minMaxT));
-      if (inlinedVal instanceof mcray2.Miss.class) {
-        let element1$1, element1$2, tmp3, tmp4, tmp5;
-        if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
-          element1$1 = runtime.Tuple.get(ray, 1);
-          if (runtime.Tuple.isArrayLike(element1$1) && element1$1.length === 3) {
-            let inlinedVal1, tmp6, tmp7, tmp8;
-            element1$2 = runtime.Tuple.get(element1$1, 1);
-            inlinedVal1 = globalThis.Object.freeze([
-              1.0,
-              1.0,
-              1.0
-            ]);
-            tmp3 = element1$2 + 1.0;
-            tmp4 = 0.5 * tmp3;
-            tmp5 = globalThis.Object.freeze([
-              0.5,
-              0.7,
-              1.0
-            ]);
-            tmp6 = 1.0 - tmp4;
-            tmp7 = mcray1[rgbScale$accessorSymbol](tmp6, inlinedVal1);
-            tmp8 = mcray1[rgbScale$accessorSymbol](tmp4, tmp5);
-            return mcray1[rgbAdd$accessorSymbol](tmp7, tmp8)
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      } else if (inlinedVal instanceof mcray2.ObjHit.class) {
-        arg$ObjHit$0$ = inlinedVal.hit;
-        scrut1 = mcray2[getHitInfo$accessorSymbol](arg$ObjHit$0$, ray);
-        if (scrut1 instanceof mcray2.None.class) {
-          let arg$MatHit$3$;
-          if (arg$ObjHit$0$ instanceof mcray1.MatHit.class) {
-            arg$MatHit$3$ = arg$ObjHit$0$.material;
-            if (arg$MatHit$3$ instanceof mcray1.Material.class) {
-              return runtime.safeCall(arg$MatHit$3$.emit())
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        } else if (scrut1 instanceof mcray2.Some.class) {
-          arg$Some$0$ = scrut1.value;
-          if (runtime.Tuple.isArrayLike(arg$Some$0$) && arg$Some$0$.length === 2) {
-            let inlinedVal1, arg$MatHit$3$;
-            element0$ = runtime.Tuple.get(arg$Some$0$, 0);
-            element1$ = runtime.Tuple.get(arg$Some$0$, 1);
-            if (arg$ObjHit$0$ instanceof mcray1.MatHit.class) {
-              arg$MatHit$3$ = arg$ObjHit$0$.material;
-              if (arg$MatHit$3$ instanceof mcray1.Material.class) {
-                inlinedVal1 = runtime.safeCall(arg$MatHit$3$.emit());
-                tmp = depth - 1;
-                tmp1 = test_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, element1$, tmp);
-                tmp2 = mcray2[rgbModulate$accessorSymbol](element0$, tmp1);
-                return mcray2[rgbAdd$accessorSymbol](inlinedVal1, tmp2)
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    return main_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, ray, maxDepth)
   }
 };
 rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go = function rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, i) {
@@ -523,7 +429,7 @@ raysForPixel_listTabulate_go$go = function raysForPixel_listTabulate_go$go(mcray
   tmp2 = raysForPixel_listTabulate_go$go(mcray2, n, f, tmp1);
   return mcray2.Cons(tmp, tmp2);
 };
-main_test_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda = function main_test_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit) {
+main_buildScene_makeScene_metal_lambda$_lambda$lambda = function main_buildScene_makeScene_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit) {
   let scrut, element1$, arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
     element1$ = runtime.Tuple.get(ray, 1);
@@ -587,12 +493,12 @@ main_test_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda = functi
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1 = function main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$(mcray2, rng, albedo, fuzz) {
+main_buildScene_makeScene_metal_lambda$$lambda$1 = function main_buildScene_makeScene_metal_lambda$$lambda$(mcray2, rng, albedo, fuzz) {
   return (ray, hit) => {
-    return main_test_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit)
+    return main_buildScene_makeScene_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit)
   }
 };
-main_test_buildScene_makeScene_metal_lambda$_lambda$lambda = function main_test_buildScene_makeScene_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit) {
+main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda = function main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit) {
   let scrut, element1$, arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
     element1$ = runtime.Tuple.get(ray, 1);
@@ -656,9 +562,9 @@ main_test_buildScene_makeScene_metal_lambda$_lambda$lambda = function main_test_
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_test_buildScene_makeScene_metal_lambda$$lambda$1 = function main_test_buildScene_makeScene_metal_lambda$$lambda$(mcray2, rng, albedo, fuzz) {
+main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1 = function main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$(mcray2, rng, albedo, fuzz) {
   return (ray, hit) => {
-    return main_test_buildScene_makeScene_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit)
+    return main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit)
   }
 };
 trace = function trace(mcray2, world, minMaxT, ray, depth) {
@@ -1473,9 +1379,8 @@ go = function go(mcray2, n, f, i) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static main() {
-    let rng, rng1, element1$, element0$, inlinedVal, cam, tmp, tmp1, inlinedVal1, inlinedVal2, inlinedVal3, pw, aspect, theta, flen, imgCenter, ulc, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, scrut, tmp13, tmp14, inlinedVal9, scrut1, tmp15, tmp16, inlinedVal10, scrut2, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, mcray2, rng2, x, z, objs, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, inlinedVal15, inlinedVal16, inlinedVal17, inlinedVal18, lambda$here, lambda$here1, rSq, invR, hitTest1$here, lambda$here2, lambda$here3, rSq1, invR1, hitTest1$here1, lambda$here4, lambda$here5, rSq2, invR2, hitTest1$here2, inlinedVal19, inlinedVal20;
+    let rng, element1$, element0$, inlinedVal, cam, tmp, tmp1, inlinedVal1, inlinedVal2, inlinedVal3, pw, aspect, theta, flen, imgCenter, ulc, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, scrut, tmp13, tmp14, inlinedVal9, scrut1, tmp15, tmp16, inlinedVal10, scrut2, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, mcray2, rng1, x, z, objs, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, inlinedVal15, inlinedVal16, inlinedVal17, inlinedVal18, lambda$here, lambda$here1, rSq, invR, hitTest1$here, lambda$here2, lambda$here3, rSq1, invR1, hitTest1$here1, lambda$here4, lambda$here5, rSq2, invR2, hitTest1$here2, inlinedVal19, inlinedVal20;
     rng = new mcray.Ref.class(1234567);
-    rng1 = rng;
     tmp = globalThis.Object.freeze([
       13.0,
       2.0,
@@ -1596,8 +1501,8 @@ go = function go(mcray2, n, f, i) {
             0.5,
             0.5
           ]);
-          lambda$here = main_test_buildScene_makeScene_lambertian_lambda$$lambda$2();
-          lambda$here1 = main_test_buildScene_makeScene_lambertian_lambda$$lambda$3(mcray1, rng, inlinedVal12);
+          lambda$here = main_buildScene_makeScene_lambertian_lambda$$lambda$1();
+          lambda$here1 = main_buildScene_makeScene_lambertian_lambda$$lambda$(mcray1, rng, inlinedVal12);
           inlinedVal13 = mcray1.Material(lambda$here, lambda$here1);
           rSq = 1000.0 * 1000.0;
           invR = 1.0 / 1000.0;
@@ -1613,8 +1518,8 @@ go = function go(mcray2, n, f, i) {
             0.6,
             0.5
           ]);
-          lambda$here2 = main_test_buildScene_makeScene_metal_lambda$$lambda$();
-          lambda$here3 = main_test_buildScene_makeScene_metal_lambda$$lambda$1(mcray1, rng, tmp22, 0.0);
+          lambda$here2 = main_buildScene_makeScene_metal_lambda$$lambda$();
+          lambda$here3 = main_buildScene_makeScene_metal_lambda$$lambda$1(mcray1, rng, tmp22, 0.0);
           inlinedVal15 = mcray1.Material(lambda$here2, lambda$here3);
           rSq1 = 1.0 * 1.0;
           invR1 = 1.0 / 1.0;
@@ -1631,8 +1536,8 @@ go = function go(mcray2, n, f, i) {
             0.2,
             0.1
           ]);
-          lambda$here4 = main_test_buildScene_makeScene_lambertian_lambda$$lambda$();
-          lambda$here5 = main_test_buildScene_makeScene_lambertian_lambda$$lambda$1(mcray1, rng, tmp25);
+          lambda$here4 = main_buildScene_makeScene_lambertian_lambda$$lambda$3();
+          lambda$here5 = main_buildScene_makeScene_lambertian_lambda$$lambda$2(mcray1, rng, tmp25);
           inlinedVal17 = mcray1.Material(lambda$here4, lambda$here5);
           rSq2 = 1.0 * 1.0;
           invR2 = 1.0 / 1.0;
@@ -1642,7 +1547,7 @@ go = function go(mcray2, n, f, i) {
           tmp27 = mcray1.Cons(inlinedVal16, tmp26);
           tmp28 = mcray1.Cons(inlinedVal14, tmp27);
           mcray2 = mcray1;
-          rng2 = rng;
+          rng1 = rng;
           x = -11;
           z = -11;
           objs = tmp28;
@@ -1654,33 +1559,33 @@ go = function go(mcray2, n, f, i) {
                 let inlinedVal25, x1, z1, c, scrut5, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, inlinedVal26, inlinedVal27, inlinedVal28, scale, scale1, scale2, x2, tmp46, x3, tmp47, x4, tmp48, inlinedVal29, inlinedVal30, inlinedVal31, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, inlinedVal32, inlinedVal33, inlinedVal34;
                 tmp29 = z + 1;
                 scale = 1.0 / 2147483647.0;
-                x4 = rng2.value;
+                x4 = rng1.value;
                 tmp48 = x4 * 48271;
                 tmp53 = tmp48 / 2147483647;
                 inlinedVal32 = runtime.safeCall(globalThis.Math.floor(tmp53));
                 tmp54 = 2147483647 * inlinedVal32;
                 inlinedVal29 = tmp48 - tmp54;
-                rng2.value = inlinedVal29;
+                rng1.value = inlinedVal29;
                 inlinedVal26 = scale * inlinedVal29;
                 scale1 = 1.0 / 2147483647.0;
-                x3 = rng2.value;
+                x3 = rng1.value;
                 tmp47 = x3 * 48271;
                 tmp51 = tmp47 / 2147483647;
                 inlinedVal33 = runtime.safeCall(globalThis.Math.floor(tmp51));
                 tmp52 = 2147483647 * inlinedVal33;
                 inlinedVal30 = tmp47 - tmp52;
-                rng2.value = inlinedVal30;
+                rng1.value = inlinedVal30;
                 inlinedVal27 = scale1 * inlinedVal30;
                 tmp32 = 0.9 * inlinedVal27;
                 x1 = x + tmp32;
                 scale2 = 1.0 / 2147483647.0;
-                x2 = rng2.value;
+                x2 = rng1.value;
                 tmp46 = x2 * 48271;
                 tmp49 = tmp46 / 2147483647;
                 inlinedVal34 = runtime.safeCall(globalThis.Math.floor(tmp49));
                 tmp50 = 2147483647 * inlinedVal34;
                 inlinedVal31 = tmp46 - tmp50;
-                rng2.value = inlinedVal31;
+                rng1.value = inlinedVal31;
                 inlinedVal28 = scale2 * inlinedVal31;
                 tmp33 = 0.9 * inlinedVal28;
                 z1 = z + tmp33;
@@ -1693,60 +1598,60 @@ go = function go(mcray2, n, f, i) {
                 if (scrut5 === true) {
                   let inlinedVal35, inlinedVal36, inlinedVal37, inlinedVal38, inlinedVal39, inlinedVal40, inlinedVal41, inlinedVal42, scale3, scale4, scale5, scale6, scale7, scale8, lambda$here6, lambda$here7, rSq3, invR3, hitTest1$here3, x5, tmp55, x6, tmp56, x7, tmp57, x8, tmp58, x9, tmp59, x10, tmp60, inlinedVal43, inlinedVal44, inlinedVal45, inlinedVal46, inlinedVal47, inlinedVal48, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, inlinedVal49, inlinedVal50, inlinedVal51, inlinedVal52, inlinedVal53, inlinedVal54;
                   scale3 = 1.0 / 2147483647.0;
-                  x10 = rng2.value;
+                  x10 = rng1.value;
                   tmp60 = x10 * 48271;
                   tmp71 = tmp60 / 2147483647;
                   inlinedVal49 = runtime.safeCall(globalThis.Math.floor(tmp71));
                   tmp72 = 2147483647 * inlinedVal49;
                   inlinedVal43 = tmp60 - tmp72;
-                  rng2.value = inlinedVal43;
+                  rng1.value = inlinedVal43;
                   inlinedVal35 = scale3 * inlinedVal43;
                   scale4 = 1.0 / 2147483647.0;
-                  x9 = rng2.value;
+                  x9 = rng1.value;
                   tmp59 = x9 * 48271;
                   tmp69 = tmp59 / 2147483647;
                   inlinedVal50 = runtime.safeCall(globalThis.Math.floor(tmp69));
                   tmp70 = 2147483647 * inlinedVal50;
                   inlinedVal44 = tmp59 - tmp70;
-                  rng2.value = inlinedVal44;
+                  rng1.value = inlinedVal44;
                   inlinedVal36 = scale4 * inlinedVal44;
                   tmp34 = inlinedVal35 * inlinedVal36;
                   scale5 = 1.0 / 2147483647.0;
-                  x8 = rng2.value;
+                  x8 = rng1.value;
                   tmp58 = x8 * 48271;
                   tmp67 = tmp58 / 2147483647;
                   inlinedVal51 = runtime.safeCall(globalThis.Math.floor(tmp67));
                   tmp68 = 2147483647 * inlinedVal51;
                   inlinedVal45 = tmp58 - tmp68;
-                  rng2.value = inlinedVal45;
+                  rng1.value = inlinedVal45;
                   inlinedVal37 = scale5 * inlinedVal45;
                   scale6 = 1.0 / 2147483647.0;
-                  x7 = rng2.value;
+                  x7 = rng1.value;
                   tmp57 = x7 * 48271;
                   tmp65 = tmp57 / 2147483647;
                   inlinedVal52 = runtime.safeCall(globalThis.Math.floor(tmp65));
                   tmp66 = 2147483647 * inlinedVal52;
                   inlinedVal46 = tmp57 - tmp66;
-                  rng2.value = inlinedVal46;
+                  rng1.value = inlinedVal46;
                   inlinedVal38 = scale6 * inlinedVal46;
                   tmp35 = inlinedVal37 * inlinedVal38;
                   scale7 = 1.0 / 2147483647.0;
-                  x6 = rng2.value;
+                  x6 = rng1.value;
                   tmp56 = x6 * 48271;
                   tmp63 = tmp56 / 2147483647;
                   inlinedVal53 = runtime.safeCall(globalThis.Math.floor(tmp63));
                   tmp64 = 2147483647 * inlinedVal53;
                   inlinedVal47 = tmp56 - tmp64;
-                  rng2.value = inlinedVal47;
+                  rng1.value = inlinedVal47;
                   inlinedVal39 = scale7 * inlinedVal47;
                   scale8 = 1.0 / 2147483647.0;
-                  x5 = rng2.value;
+                  x5 = rng1.value;
                   tmp55 = x5 * 48271;
                   tmp61 = tmp55 / 2147483647;
                   inlinedVal54 = runtime.safeCall(globalThis.Math.floor(tmp61));
                   tmp62 = 2147483647 * inlinedVal54;
                   inlinedVal48 = tmp55 - tmp62;
-                  rng2.value = inlinedVal48;
+                  rng1.value = inlinedVal48;
                   inlinedVal40 = scale8 * inlinedVal48;
                   tmp36 = inlinedVal39 * inlinedVal40;
                   tmp37 = globalThis.Object.freeze([
@@ -1754,8 +1659,8 @@ go = function go(mcray2, n, f, i) {
                     tmp35,
                     tmp36
                   ]);
-                  lambda$here6 = main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1();
-                  lambda$here7 = main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$(mcray1, rng2, tmp37);
+                  lambda$here6 = main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$();
+                  lambda$here7 = main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1(mcray1, rng1, tmp37);
                   inlinedVal41 = mcray1.Material(lambda$here6, lambda$here7);
                   rSq3 = 0.2 * 0.2;
                   invR3 = 1.0 / 0.2;
@@ -1765,35 +1670,35 @@ go = function go(mcray2, n, f, i) {
                 } else {
                   let inlinedVal35, inlinedVal36, inlinedVal37, inlinedVal38, inlinedVal39, inlinedVal40, scale3, scale4, scale5, scale6, lambda$here6, lambda$here7, rSq3, invR3, hitTest1$here3, x5, tmp55, x6, tmp56, x7, tmp57, x8, tmp58, inlinedVal41, inlinedVal42, inlinedVal43, inlinedVal44, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, inlinedVal45, inlinedVal46, inlinedVal47, inlinedVal48;
                   scale3 = 1.0 / 2147483647.0;
-                  x8 = rng2.value;
+                  x8 = rng1.value;
                   tmp58 = x8 * 48271;
                   tmp65 = tmp58 / 2147483647;
                   inlinedVal45 = runtime.safeCall(globalThis.Math.floor(tmp65));
                   tmp66 = 2147483647 * inlinedVal45;
                   inlinedVal41 = tmp58 - tmp66;
-                  rng2.value = inlinedVal41;
+                  rng1.value = inlinedVal41;
                   inlinedVal35 = scale3 * inlinedVal41;
                   tmp38 = 1.0 + inlinedVal35;
                   tmp39 = 0.5 * tmp38;
                   scale4 = 1.0 / 2147483647.0;
-                  x7 = rng2.value;
+                  x7 = rng1.value;
                   tmp57 = x7 * 48271;
                   tmp63 = tmp57 / 2147483647;
                   inlinedVal46 = runtime.safeCall(globalThis.Math.floor(tmp63));
                   tmp64 = 2147483647 * inlinedVal46;
                   inlinedVal42 = tmp57 - tmp64;
-                  rng2.value = inlinedVal42;
+                  rng1.value = inlinedVal42;
                   inlinedVal36 = scale4 * inlinedVal42;
                   tmp40 = 1.0 + inlinedVal36;
                   tmp41 = 0.5 * tmp40;
                   scale5 = 1.0 / 2147483647.0;
-                  x6 = rng2.value;
+                  x6 = rng1.value;
                   tmp56 = x6 * 48271;
                   tmp61 = tmp56 / 2147483647;
                   inlinedVal47 = runtime.safeCall(globalThis.Math.floor(tmp61));
                   tmp62 = 2147483647 * inlinedVal47;
                   inlinedVal43 = tmp56 - tmp62;
-                  rng2.value = inlinedVal43;
+                  rng1.value = inlinedVal43;
                   inlinedVal37 = scale5 * inlinedVal43;
                   tmp42 = 1.0 + inlinedVal37;
                   tmp43 = 0.5 * tmp42;
@@ -1803,17 +1708,17 @@ go = function go(mcray2, n, f, i) {
                     tmp43
                   ]);
                   scale6 = 1.0 / 2147483647.0;
-                  x5 = rng2.value;
+                  x5 = rng1.value;
                   tmp55 = x5 * 48271;
                   tmp59 = tmp55 / 2147483647;
                   inlinedVal48 = runtime.safeCall(globalThis.Math.floor(tmp59));
                   tmp60 = 2147483647 * inlinedVal48;
                   inlinedVal44 = tmp55 - tmp60;
-                  rng2.value = inlinedVal44;
+                  rng1.value = inlinedVal44;
                   inlinedVal38 = scale6 * inlinedVal44;
                   tmp45 = 0.5 * inlinedVal38;
-                  lambda$here6 = main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$();
-                  lambda$here7 = main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1(mcray1, rng2, tmp44, tmp45);
+                  lambda$here6 = main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$();
+                  lambda$here7 = main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1(mcray1, rng1, tmp44, tmp45);
                   inlinedVal39 = mcray1.Material(lambda$here6, lambda$here7);
                   rSq3 = 0.2 * 0.2;
                   invR3 = 1.0 / 0.2;
@@ -1851,10 +1756,10 @@ go = function go(mcray2, n, f, i) {
               0.001,
               inlinedVal26
             ]);
-            trace1 = main_test_rayTracer_traceRay_lambda$$lambda$(mcray1, element1$, 20, minMaxT);
+            trace1 = main_rayTracer_traceRay_lambda$$lambda$(mcray1, element1$, 20, minMaxT);
             if (element0$ instanceof mcray1.Cam.class) {
               arg$Cam$2$ = element0$.ns;
-              rfp = main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel(rng1, element0$);
+              rfp = main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel(rng, element0$);
               scrut3 = arg$Cam$2$ == 0;
               if (scrut3 === true) {
                 inlinedVal25 = lambda$2(mcray1, trace1, rfp, 1.0);
@@ -1891,31 +1796,29 @@ export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { hitTest1$1 as _$_modulePrivate_$_hitTest1$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };
 export { lambda$3 as _$_modulePrivate_$_lambda$3 };
-export { main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay as _$_modulePrivate_$_main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay };
-export { main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$ as _$_modulePrivate_$_main_test_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$ };
-export { main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel as _$_modulePrivate_$_main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel };
-export { main_test_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda as _$_modulePrivate_$_main_test_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda };
-export { main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$ as _$_modulePrivate_$_main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$ };
-export { main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1 as _$_modulePrivate_$_main_test_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1 };
-export { main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$ as _$_modulePrivate_$_main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$ };
-export { main_test_buildScene_makeScene_lambertian_lambda$$lambda$ as _$_modulePrivate_$_main_test_buildScene_makeScene_lambertian_lambda$$lambda$ };
-export { main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda as _$_modulePrivate_$_main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda };
-export { main_test_buildScene_makeScene_lambertian_lambda$$lambda$1 as _$_modulePrivate_$_main_test_buildScene_makeScene_lambertian_lambda$$lambda$1 };
-export { main_test_buildScene_makeScene_metal_lambda$$lambda$ as _$_modulePrivate_$_main_test_buildScene_makeScene_metal_lambda$$lambda$ };
-export { main_test_buildScene_makeScene_lambertian_lambda$$lambda$2 as _$_modulePrivate_$_main_test_buildScene_makeScene_lambertian_lambda$$lambda$2 };
-export { main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_test_buildScene_makeScene_lambertian_lambda$_lambda$lambda1 };
-export { main_test_buildScene_makeScene_lambertian_lambda$$lambda$3 as _$_modulePrivate_$_main_test_buildScene_makeScene_lambertian_lambda$$lambda$3 };
-export { main_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go as _$_modulePrivate_$_main_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go };
-export { main_test_rayTracer_traceRay_lambda$_trace$trace as _$_modulePrivate_$_main_test_rayTracer_traceRay_lambda$_trace$trace };
-export { main_test_rayTracer_traceRay_lambda$$lambda$ as _$_modulePrivate_$_main_test_rayTracer_traceRay_lambda$$lambda$ };
-export { test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go as _$_modulePrivate_$_test_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go };
-export { test_rayTracer_traceRay_lambda$_trace$trace as _$_modulePrivate_$_test_rayTracer_traceRay_lambda$_trace$trace };
+export { main_buildScene_makeScene_lambertian_lambda$_lambda$lambda as _$_modulePrivate_$_main_buildScene_makeScene_lambertian_lambda$_lambda$lambda };
+export { main_buildScene_makeScene_lambertian_lambda$$lambda$ as _$_modulePrivate_$_main_buildScene_makeScene_lambertian_lambda$$lambda$ };
+export { main_buildScene_makeScene_lambertian_lambda$$lambda$1 as _$_modulePrivate_$_main_buildScene_makeScene_lambertian_lambda$$lambda$1 };
+export { main_buildScene_makeScene_metal_lambda$$lambda$ as _$_modulePrivate_$_main_buildScene_makeScene_metal_lambda$$lambda$ };
+export { main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1 };
+export { main_buildScene_makeScene_lambertian_lambda$$lambda$2 as _$_modulePrivate_$_main_buildScene_makeScene_lambertian_lambda$$lambda$2 };
+export { main_buildScene_makeScene_lambertian_lambda$$lambda$3 as _$_modulePrivate_$_main_buildScene_makeScene_lambertian_lambda$$lambda$3 };
+export { main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$ as _$_modulePrivate_$_main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$ };
+export { main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$ as _$_modulePrivate_$_main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$ };
+export { main_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda as _$_modulePrivate_$_main_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda };
+export { main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1 as _$_modulePrivate_$_main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1 };
+export { main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay as _$_modulePrivate_$_main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay };
+export { main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$ as _$_modulePrivate_$_main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$ };
+export { main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel as _$_modulePrivate_$_main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel };
+export { main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go as _$_modulePrivate_$_main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go };
+export { main_rayTracer_traceRay_lambda$_trace$trace as _$_modulePrivate_$_main_rayTracer_traceRay_lambda$_trace$trace };
+export { main_rayTracer_traceRay_lambda$$lambda$ as _$_modulePrivate_$_main_rayTracer_traceRay_lambda$$lambda$ };
 export { rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go as _$_modulePrivate_$_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go };
 export { aaPixelToRGB_raysForPixel_listTabulate_go$go as _$_modulePrivate_$_aaPixelToRGB_raysForPixel_listTabulate_go$go };
 export { raysForPixel_listTabulate_go$go as _$_modulePrivate_$_raysForPixel_listTabulate_go$go };
-export { main_test_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda as _$_modulePrivate_$_main_test_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda };
-export { main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1 as _$_modulePrivate_$_main_test_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1 };
-export { main_test_buildScene_makeScene_metal_lambda$_lambda$lambda as _$_modulePrivate_$_main_test_buildScene_makeScene_metal_lambda$_lambda$lambda };
-export { main_test_buildScene_makeScene_metal_lambda$$lambda$1 as _$_modulePrivate_$_main_test_buildScene_makeScene_metal_lambda$$lambda$1 };
-export { main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker as _$_modulePrivate_$_main_test_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker };
+export { main_buildScene_makeScene_metal_lambda$_lambda$lambda as _$_modulePrivate_$_main_buildScene_makeScene_metal_lambda$_lambda$lambda };
+export { main_buildScene_makeScene_metal_lambda$$lambda$1 as _$_modulePrivate_$_main_buildScene_makeScene_metal_lambda$$lambda$1 };
+export { main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda as _$_modulePrivate_$_main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda };
+export { main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1 as _$_modulePrivate_$_main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1 };
+export { main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker as _$_modulePrivate_$_main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker };
 export default mcray1;

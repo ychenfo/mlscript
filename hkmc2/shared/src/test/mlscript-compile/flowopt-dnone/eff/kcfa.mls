@@ -510,12 +510,9 @@ private fun stdExample() =
           Nil)) ::
       Nil))
 
-private fun doit() =
+fun main() =
+  let lambdaLabel = e => if e is LAMBDA(lam) and lam is [label, _, _] then label
   let states = explore(Nil, initState(stdExample()) :: Nil)
   let summary = summarize(states)
   let monoSummary = monovariantStore(summary)
-  monoSummary
-
-fun main() =
-  let lambdaLabel = e => if e is LAMBDA(lam) and lam is [label, _, _] then label
-  listMap(p => if p is [x, exps] then [x, listMap(lambdaLabel)(exps)])(doit())
+  listMap(p => if p is [x, exps] then [x, listMap(lambdaLabel)(exps)])(monoSummary)

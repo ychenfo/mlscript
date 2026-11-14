@@ -7,8 +7,8 @@ const sameNd$accessorSymbol = globalThis.Symbol("sameNd");
 const distance$accessorSymbol = globalThis.Symbol("distance");
 const reverse$accessorSymbol = globalThis.Symbol("reverse");
 const conquer$accessorSymbol = globalThis.Symbol("conquer");
-let locateCycle, tsp1, build_mkTree_mkTree, main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree, main_doit_mkTree_buildTree_mkRandom_lambda$_lambda$lambda, main_doit_mkTree_buildTree_mkRandom_lambda$$lambda$, doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree, mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree, buildTree_build_mkTree_mkTree$build_mkTree_mkTree, main_doit_tsp$tsp, doit_tsp$tsp;
-main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(id, param0, param1, param2, param3, param4, param5, param6, param7) {
+let locateCycle, tsp1, build_mkTree_mkTree, main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree, main_buildTree_mkRandom_lambda$_lambda$lambda, main_buildTree_mkRandom_lambda$$lambda$, buildTree_build_mkTree_mkTree$build_mkTree_mkTree, main_tsp$tsp;
+main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(id, param0, param1, param2, param3, param4, param5, param6, param7) {
   loopLabel: while (true) {
     switch (id) {
       case 0:
@@ -50,8 +50,8 @@ main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function ma
             tmp24 = tmp22 * tmp23;
             tmp25 = tmp24 / 2.0;
             inlinedVal2 = param5 + tmp25;
-            tmp = main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(1, param0, param1, param2, param4, param6, param5, inlinedVal2, undefined);
-            tmp1 = main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(1, param0, param1, param2, param4, param6, inlinedVal2, param7, undefined);
+            tmp = main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(1, param0, param1, param2, param4, param6, param5, inlinedVal2, undefined);
+            tmp1 = main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(1, param0, param1, param2, param4, param6, inlinedVal2, param7, undefined);
             tmp8 = runtime.safeCall(param1());
             scale = 1.0 / 2147483647.0;
             inlinedVal1 = scale * tmp8;
@@ -93,8 +93,8 @@ main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function ma
             tmp24 = tmp22 * tmp23;
             tmp25 = tmp24 / 2.0;
             inlinedVal2 = param4 + tmp25;
-            tmp2 = main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(2, param0, param1, param2, param5, param7, param4, inlinedVal2, undefined);
-            tmp3 = main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(2, param0, param1, param2, param5, param7, inlinedVal2, param6, undefined);
+            tmp2 = main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(2, param0, param1, param2, param5, param7, param4, inlinedVal2, undefined);
+            tmp3 = main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(2, param0, param1, param2, param5, param7, inlinedVal2, param6, undefined);
             tmp8 = runtime.safeCall(param1());
             scale = 1.0 / 2147483647.0;
             inlinedVal1 = scale * tmp8;
@@ -144,7 +144,7 @@ main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function ma
     }
   }
 };
-main_doit_mkTree_buildTree_mkRandom_lambda$_lambda$lambda = function main_doit_mkTree_buildTree_mkRandom_lambda$_lambda$lambda(seedRef) {
+main_buildTree_mkRandom_lambda$_lambda$lambda = function main_buildTree_mkRandom_lambda$_lambda$lambda(seedRef) {
   let seed, inlinedVal, test, scrut, tmp, tmp1, inlinedVal1, inlinedVal2, tmp2, tmp3, inlinedVal3, tmp4;
   seed = seedRef.value;
   tmp3 = seed / 44488;
@@ -165,281 +165,9 @@ main_doit_mkTree_buildTree_mkRandom_lambda$_lambda$lambda = function main_doit_m
   seedRef.value = inlinedVal;
   return seedRef.value
 };
-main_doit_mkTree_buildTree_mkRandom_lambda$$lambda$ = function main_doit_mkTree_buildTree_mkRandom_lambda$$lambda$(seedRef) {
+main_buildTree_mkRandom_lambda$$lambda$ = function main_buildTree_mkRandom_lambda$$lambda$(seedRef) {
   return () => {
-    return main_doit_mkTree_buildTree_mkRandom_lambda$_lambda$lambda(seedRef)
-  }
-};
-doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(id, param0, param1, param2, param3, param4, param5, param6, param7) {
-  loopLabel: while (true) {
-    switch (id) {
-      case 0:
-        {
-          let scrut, tmp, tmp1, tmp2, tmp3;
-          scrut = param2 == 0;
-          if (scrut === true) {
-            return param0.NULL
-          }
-          if (param3 instanceof param0.X_AXIS.class) {
-            let tmp4, tmp5, inlinedVal, tmp6, tmp7, tmp8, inlinedVal1, scale, inlinedVal2, scrut1, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, inlinedVal3, scale1;
-            tmp26 = runtime.safeCall(param1());
-            scale1 = 1.0 / 2147483647.0;
-            inlinedVal3 = scale1 * tmp26;
-            scrut1 = inlinedVal3 > 0.5;
-            if (scrut1 === true) {
-              let inlinedVal4;
-              tmp9 = 162754.79141900392083592475 - 1.0;
-              tmp10 = 2.0 * tmp9;
-              tmp11 = inlinedVal3 - 0.5;
-              tmp12 = tmp10 * tmp11;
-              tmp13 = tmp12 / 162754.79141900392083592475;
-              tmp14 = 1.0 - tmp13;
-              inlinedVal4 = runtime.safeCall(globalThis.Math.log(tmp14));
-              tmp15 = inlinedVal4 / 12.0;
-            } else {
-              let inlinedVal4;
-              tmp16 = 162754.79141900392083592475 - 1.0;
-              tmp17 = 2.0 * tmp16;
-              tmp18 = tmp17 * inlinedVal3;
-              tmp19 = tmp18 / 162754.79141900392083592475;
-              tmp20 = 1.0 - tmp19;
-              inlinedVal4 = runtime.safeCall(globalThis.Math.log(tmp20));
-              tmp21 = inlinedVal4 / 12.0;
-              tmp15 = - tmp21;
-            }
-            tmp22 = tmp15 + 1.0;
-            tmp23 = param7 - param5;
-            tmp24 = tmp22 * tmp23;
-            tmp25 = tmp24 / 2.0;
-            inlinedVal2 = param5 + tmp25;
-            tmp = doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(1, param0, param1, param2, param4, param6, param5, inlinedVal2, undefined);
-            tmp1 = doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(1, param0, param1, param2, param4, param6, inlinedVal2, param7, undefined);
-            tmp8 = runtime.safeCall(param1());
-            scale = 1.0 / 2147483647.0;
-            inlinedVal1 = scale * tmp8;
-            tmp6 = param6 - param4;
-            tmp7 = inlinedVal1 * tmp6;
-            inlinedVal = param4 + tmp7;
-            tmp4 = new param0.Ref.class(param0.NULL);
-            tmp5 = new param0.Ref.class(param0.NULL);
-            return param0.ND(tmp, tmp1, inlinedVal, inlinedVal2, param2, tmp4, tmp5)
-          } else if (param3 instanceof param0.Y_AXIS.class) {
-            let tmp4, tmp5, inlinedVal, tmp6, tmp7, tmp8, inlinedVal1, scale, inlinedVal2, scrut1, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, inlinedVal3, scale1;
-            tmp26 = runtime.safeCall(param1());
-            scale1 = 1.0 / 2147483647.0;
-            inlinedVal3 = scale1 * tmp26;
-            scrut1 = inlinedVal3 > 0.5;
-            if (scrut1 === true) {
-              let inlinedVal4;
-              tmp9 = 162754.79141900392083592475 - 1.0;
-              tmp10 = 2.0 * tmp9;
-              tmp11 = inlinedVal3 - 0.5;
-              tmp12 = tmp10 * tmp11;
-              tmp13 = tmp12 / 162754.79141900392083592475;
-              tmp14 = 1.0 - tmp13;
-              inlinedVal4 = runtime.safeCall(globalThis.Math.log(tmp14));
-              tmp15 = inlinedVal4 / 12.0;
-            } else {
-              let inlinedVal4;
-              tmp16 = 162754.79141900392083592475 - 1.0;
-              tmp17 = 2.0 * tmp16;
-              tmp18 = tmp17 * inlinedVal3;
-              tmp19 = tmp18 / 162754.79141900392083592475;
-              tmp20 = 1.0 - tmp19;
-              inlinedVal4 = runtime.safeCall(globalThis.Math.log(tmp20));
-              tmp21 = inlinedVal4 / 12.0;
-              tmp15 = - tmp21;
-            }
-            tmp22 = tmp15 + 1.0;
-            tmp23 = param6 - param4;
-            tmp24 = tmp22 * tmp23;
-            tmp25 = tmp24 / 2.0;
-            inlinedVal2 = param4 + tmp25;
-            tmp2 = doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(2, param0, param1, param2, param5, param7, param4, inlinedVal2, undefined);
-            tmp3 = doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(2, param0, param1, param2, param5, param7, inlinedVal2, param6, undefined);
-            tmp8 = runtime.safeCall(param1());
-            scale = 1.0 / 2147483647.0;
-            inlinedVal1 = scale * tmp8;
-            tmp6 = param7 - param5;
-            tmp7 = inlinedVal1 * tmp6;
-            inlinedVal = param5 + tmp7;
-            tmp4 = new param0.Ref.class(param0.NULL);
-            tmp5 = new param0.Ref.class(param0.NULL);
-            return param0.ND(tmp2, tmp3, inlinedVal2, inlinedVal, param2, tmp4, tmp5)
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      case 1:
-        {
-          let param6_tmp, param5_tmp, param4_tmp, param3_tmp, inlinedVal, tmp;
-          tmp = param2 / 2;
-          inlinedVal = runtime.safeCall(globalThis.Math.floor(tmp));
-          param6_tmp = param6;
-          param5_tmp = param5;
-          param4_tmp = param4;
-          param3_tmp = param3;
-          param2 = inlinedVal;
-          param3 = param0.Y_AXIS;
-          param4 = param3_tmp;
-          param5 = param4_tmp;
-          param6 = param5_tmp;
-          param7 = param6_tmp;
-          id = 0;
-          continue loopLabel;
-        }
-      case 2:
-        {
-          let param4_tmp, param3_tmp, inlinedVal, tmp;
-          tmp = param2 / 2;
-          inlinedVal = runtime.safeCall(globalThis.Math.floor(tmp));
-          param4_tmp = param4;
-          param3_tmp = param3;
-          param2 = inlinedVal;
-          param3 = param0.X_AXIS;
-          param4 = param5;
-          param5 = param6;
-          param6 = param3_tmp;
-          param7 = param4_tmp;
-          id = 0;
-          continue loopLabel;
-        }
-    }
-  }
-};
-mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(id, param0, param1, param2, param3, param4, param5, param6, param7) {
-  loopLabel: while (true) {
-    switch (id) {
-      case 0:
-        {
-          let scrut, tmp, tmp1, tmp2, tmp3;
-          scrut = param2 == 0;
-          if (scrut === true) {
-            return param0.NULL
-          }
-          if (param3 instanceof param0.X_AXIS.class) {
-            let tmp4, tmp5, inlinedVal, tmp6, tmp7, tmp8, inlinedVal1, scale, inlinedVal2, scrut1, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, inlinedVal3, scale1;
-            tmp26 = runtime.safeCall(param1());
-            scale1 = 1.0 / 2147483647.0;
-            inlinedVal3 = scale1 * tmp26;
-            scrut1 = inlinedVal3 > 0.5;
-            if (scrut1 === true) {
-              let inlinedVal4;
-              tmp9 = 162754.79141900392083592475 - 1.0;
-              tmp10 = 2.0 * tmp9;
-              tmp11 = inlinedVal3 - 0.5;
-              tmp12 = tmp10 * tmp11;
-              tmp13 = tmp12 / 162754.79141900392083592475;
-              tmp14 = 1.0 - tmp13;
-              inlinedVal4 = runtime.safeCall(globalThis.Math.log(tmp14));
-              tmp15 = inlinedVal4 / 12.0;
-            } else {
-              let inlinedVal4;
-              tmp16 = 162754.79141900392083592475 - 1.0;
-              tmp17 = 2.0 * tmp16;
-              tmp18 = tmp17 * inlinedVal3;
-              tmp19 = tmp18 / 162754.79141900392083592475;
-              tmp20 = 1.0 - tmp19;
-              inlinedVal4 = runtime.safeCall(globalThis.Math.log(tmp20));
-              tmp21 = inlinedVal4 / 12.0;
-              tmp15 = - tmp21;
-            }
-            tmp22 = tmp15 + 1.0;
-            tmp23 = param7 - param5;
-            tmp24 = tmp22 * tmp23;
-            tmp25 = tmp24 / 2.0;
-            inlinedVal2 = param5 + tmp25;
-            tmp = mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(1, param0, param1, param2, param4, param6, param5, inlinedVal2, undefined);
-            tmp1 = mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(1, param0, param1, param2, param4, param6, inlinedVal2, param7, undefined);
-            tmp8 = runtime.safeCall(param1());
-            scale = 1.0 / 2147483647.0;
-            inlinedVal1 = scale * tmp8;
-            tmp6 = param6 - param4;
-            tmp7 = inlinedVal1 * tmp6;
-            inlinedVal = param4 + tmp7;
-            tmp4 = new param0.Ref.class(param0.NULL);
-            tmp5 = new param0.Ref.class(param0.NULL);
-            return param0.ND(tmp, tmp1, inlinedVal, inlinedVal2, param2, tmp4, tmp5)
-          } else if (param3 instanceof param0.Y_AXIS.class) {
-            let tmp4, tmp5, inlinedVal, tmp6, tmp7, tmp8, inlinedVal1, scale, inlinedVal2, scrut1, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, inlinedVal3, scale1;
-            tmp26 = runtime.safeCall(param1());
-            scale1 = 1.0 / 2147483647.0;
-            inlinedVal3 = scale1 * tmp26;
-            scrut1 = inlinedVal3 > 0.5;
-            if (scrut1 === true) {
-              let inlinedVal4;
-              tmp9 = 162754.79141900392083592475 - 1.0;
-              tmp10 = 2.0 * tmp9;
-              tmp11 = inlinedVal3 - 0.5;
-              tmp12 = tmp10 * tmp11;
-              tmp13 = tmp12 / 162754.79141900392083592475;
-              tmp14 = 1.0 - tmp13;
-              inlinedVal4 = runtime.safeCall(globalThis.Math.log(tmp14));
-              tmp15 = inlinedVal4 / 12.0;
-            } else {
-              let inlinedVal4;
-              tmp16 = 162754.79141900392083592475 - 1.0;
-              tmp17 = 2.0 * tmp16;
-              tmp18 = tmp17 * inlinedVal3;
-              tmp19 = tmp18 / 162754.79141900392083592475;
-              tmp20 = 1.0 - tmp19;
-              inlinedVal4 = runtime.safeCall(globalThis.Math.log(tmp20));
-              tmp21 = inlinedVal4 / 12.0;
-              tmp15 = - tmp21;
-            }
-            tmp22 = tmp15 + 1.0;
-            tmp23 = param6 - param4;
-            tmp24 = tmp22 * tmp23;
-            tmp25 = tmp24 / 2.0;
-            inlinedVal2 = param4 + tmp25;
-            tmp2 = mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(2, param0, param1, param2, param5, param7, param4, inlinedVal2, undefined);
-            tmp3 = mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(2, param0, param1, param2, param5, param7, inlinedVal2, param6, undefined);
-            tmp8 = runtime.safeCall(param1());
-            scale = 1.0 / 2147483647.0;
-            inlinedVal1 = scale * tmp8;
-            tmp6 = param7 - param5;
-            tmp7 = inlinedVal1 * tmp6;
-            inlinedVal = param5 + tmp7;
-            tmp4 = new param0.Ref.class(param0.NULL);
-            tmp5 = new param0.Ref.class(param0.NULL);
-            return param0.ND(tmp2, tmp3, inlinedVal2, inlinedVal, param2, tmp4, tmp5)
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      case 1:
-        {
-          let param6_tmp, param5_tmp, param4_tmp, param3_tmp, inlinedVal, tmp;
-          tmp = param2 / 2;
-          inlinedVal = runtime.safeCall(globalThis.Math.floor(tmp));
-          param6_tmp = param6;
-          param5_tmp = param5;
-          param4_tmp = param4;
-          param3_tmp = param3;
-          param2 = inlinedVal;
-          param3 = param0.Y_AXIS;
-          param4 = param3_tmp;
-          param5 = param4_tmp;
-          param6 = param5_tmp;
-          param7 = param6_tmp;
-          id = 0;
-          continue loopLabel;
-        }
-      case 2:
-        {
-          let param4_tmp, param3_tmp, inlinedVal, tmp;
-          tmp = param2 / 2;
-          inlinedVal = runtime.safeCall(globalThis.Math.floor(tmp));
-          param4_tmp = param4;
-          param3_tmp = param3;
-          param2 = inlinedVal;
-          param3 = param0.X_AXIS;
-          param4 = param5;
-          param5 = param6;
-          param6 = param3_tmp;
-          param7 = param4_tmp;
-          id = 0;
-          continue loopLabel;
-        }
-    }
+    return main_buildTree_mkRandom_lambda$_lambda$lambda(seedRef)
   }
 };
 buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function buildTree_build_mkTree_mkTree$build_mkTree_mkTree(id, param0, param1, param2, param3, param4, param5, param6, param7) {
@@ -578,7 +306,7 @@ buildTree_build_mkTree_mkTree$build_mkTree_mkTree = function buildTree_build_mkT
     }
   }
 };
-main_doit_tsp$tsp = function main_doit_tsp$tsp(t, sz) {
+main_tsp$tsp = function main_tsp$tsp(t, sz) {
   let scrut, arg$ND$0$, arg$ND$1$, arg$ND$4$, tmp, tmp1;
   if (t instanceof tsp1.ND.class) {
     arg$ND$0$ = t.left;
@@ -590,135 +318,8 @@ main_doit_tsp$tsp = function main_doit_tsp$tsp(t, sz) {
     }
     {
       let scrut1, n1ToN2, n1ToP2, p1ToN2, p1ToP2, minDist0, scrut2, element3$, element2$, element1$, element0$, element3$1, element2$1, element1$1, element0$1, tmp2, element1$2, element0$2, element1$3, element0$3, element0$4, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
-      tmp = main_doit_tsp$tsp(arg$ND$0$, sz);
-      tmp1 = main_doit_tsp$tsp(arg$ND$1$, sz);
-      if (tmp instanceof tsp1.ND.class) {
-        scrut1 = locateCycle(tsp1, t, tmp);
-        if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 4) {
-          element0$ = runtime.Tuple.get(scrut1, 0);
-          element1$ = runtime.Tuple.get(scrut1, 1);
-          element2$ = runtime.Tuple.get(scrut1, 2);
-          element3$ = runtime.Tuple.get(scrut1, 3);
-          scrut2 = locateCycle(tsp1, t, tmp1);
-          if (runtime.Tuple.isArrayLike(scrut2) && scrut2.length === 4) {
-            let inlinedVal, scrut3;
-            element0$1 = runtime.Tuple.get(scrut2, 0);
-            element1$1 = runtime.Tuple.get(scrut2, 1);
-            element2$1 = runtime.Tuple.get(scrut2, 2);
-            element3$1 = runtime.Tuple.get(scrut2, 3);
-            n1ToN2 = tsp1[distance$accessorSymbol](element2$, element2$1);
-            n1ToP2 = tsp1[distance$accessorSymbol](element2$, element0$1);
-            p1ToN2 = tsp1[distance$accessorSymbol](element0$, element2$1);
-            p1ToP2 = tsp1[distance$accessorSymbol](element0$, element0$1);
-            tmp2 = element1$ + element1$1;
-            minDist0 = tmp2 + n1ToN2;
-            tmp3 = element1$ + element3$1;
-            tmp4 = tmp3 + n1ToP2;
-            scrut3 = tmp4 < minDist0;
-            if (scrut3 === true) {
-              inlinedVal = globalThis.Object.freeze([
-                2,
-                tmp4
-              ]);
-            } else {
-              inlinedVal = globalThis.Object.freeze([
-                1,
-                minDist0
-              ]);
-            }
-            if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
-              let inlinedVal1, scrut4;
-              element0$2 = runtime.Tuple.get(inlinedVal, 0);
-              element1$2 = runtime.Tuple.get(inlinedVal, 1);
-              tmp5 = element3$ + element1$1;
-              tmp6 = tmp5 + p1ToN2;
-              scrut4 = tmp6 < element1$2;
-              if (scrut4 === true) {
-                inlinedVal1 = globalThis.Object.freeze([
-                  3,
-                  tmp6
-                ]);
-              } else {
-                inlinedVal1 = globalThis.Object.freeze([
-                  element0$2,
-                  element1$2
-                ]);
-              }
-              if (runtime.Tuple.isArrayLike(inlinedVal1) && inlinedVal1.length === 2) {
-                let inlinedVal2, scrut5;
-                element0$3 = runtime.Tuple.get(inlinedVal1, 0);
-                element1$3 = runtime.Tuple.get(inlinedVal1, 1);
-                tmp7 = element3$ + element3$1;
-                tmp8 = tmp7 + p1ToP2;
-                scrut5 = tmp8 < element1$3;
-                if (scrut5 === true) {
-                  inlinedVal2 = globalThis.Object.freeze([
-                    4,
-                    tmp8
-                  ]);
-                } else {
-                  inlinedVal2 = globalThis.Object.freeze([
-                    element0$3,
-                    element1$3
-                  ]);
-                }
-                if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-                  element0$4 = runtime.Tuple.get(inlinedVal2, 0);
-                  switch (element0$4) {
-                    case 1:
-                      tsp1[reverse$accessorSymbol](element2$1);
-                      tsp1[link$accessorSymbol](element0$, t);
-                      tsp1[link$accessorSymbol](t, element0$1);
-                      tsp1[link$accessorSymbol](element2$1, element2$);
-                      return t;
-                    case 2:
-                      tsp1[link$accessorSymbol](element0$, t);
-                      tsp1[link$accessorSymbol](t, element2$1);
-                      tsp1[link$accessorSymbol](element0$1, element2$);
-                      return t;
-                    case 3:
-                      tsp1[link$accessorSymbol](element0$1, t);
-                      tsp1[link$accessorSymbol](t, element2$);
-                      tsp1[link$accessorSymbol](element0$, element2$1);
-                      return t;
-                  }
-                  tsp1[reverse$accessorSymbol](element2$);
-                  tsp1[link$accessorSymbol](element2$, t);
-                  tsp1[link$accessorSymbol](t, element2$1);
-                  tsp1[link$accessorSymbol](element0$1, element0$);
-                  return t
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-  } else if (t instanceof tsp1.NULL.class) {
-    return tsp1.NULL
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_tsp$tsp = function doit_tsp$tsp(t, sz) {
-  let scrut, arg$ND$0$, arg$ND$1$, arg$ND$4$, tmp, tmp1;
-  if (t instanceof tsp1.ND.class) {
-    arg$ND$0$ = t.left;
-    arg$ND$1$ = t.right;
-    arg$ND$4$ = t.sz;
-    scrut = arg$ND$4$ <= sz;
-    if (scrut === true) {
-      return tsp1[conquer$accessorSymbol](t)
-    }
-    {
-      let scrut1, n1ToN2, n1ToP2, p1ToN2, p1ToP2, minDist0, scrut2, element3$, element2$, element1$, element0$, element3$1, element2$1, element1$1, element0$1, tmp2, element1$2, element0$2, element1$3, element0$3, element0$4, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
-      tmp = doit_tsp$tsp(arg$ND$0$, sz);
-      tmp1 = doit_tsp$tsp(arg$ND$1$, sz);
+      tmp = main_tsp$tsp(arg$ND$0$, sz);
+      tmp1 = main_tsp$tsp(arg$ND$1$, sz);
       if (tmp instanceof tsp1.ND.class) {
         scrut1 = locateCycle(tsp1, t, tmp);
         if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 4) {
@@ -1595,20 +1196,20 @@ locateCycle = function locateCycle(tsp2, t, start) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static main() {
-    let inlinedVal, dir, inlinedVal1, rand, seedRef, inlinedVal2;
-    dir = tsp1.X_AXIS;
+    let tmp, dir, inlinedVal, rand, seedRef, inlinedVal1;
+    dir = tsp.X_AXIS;
     if (false === true) {
-      inlinedVal2 = 1;
+      inlinedVal1 = 1;
     } else if (false === true) {
-      inlinedVal2 = 2147483646;
+      inlinedVal1 = 2147483646;
     } else {
-      inlinedVal2 = 314;
+      inlinedVal1 = 314;
     }
-    seedRef = new tsp1.Ref.class(inlinedVal2);
-    rand = main_doit_mkTree_buildTree_mkRandom_lambda$$lambda$(seedRef);
-    inlinedVal1 = main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(0, tsp1, rand, 255, dir, 0.0, 1.0, 0.0, 1.0);
-    inlinedVal = main_doit_tsp$tsp(inlinedVal1, 150);
-    return tsp.#tourLength(inlinedVal)
+    seedRef = new tsp1.Ref.class(inlinedVal1);
+    rand = main_buildTree_mkRandom_lambda$$lambda$(seedRef);
+    inlinedVal = main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree(0, tsp1, rand, 255, dir, 0.0, 1.0, 0.0, 1.0);
+    tmp = main_tsp$tsp(inlinedVal, 150);
+    return tsp.#tourLength(tmp)
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "tsp"];
@@ -1616,12 +1217,9 @@ locateCycle = function locateCycle(tsp2, t, start) {
 export { locateCycle as _$_modulePrivate_$_locateCycle };
 export { tsp1 as _$_modulePrivate_$_tsp };
 export { build_mkTree_mkTree as _$_modulePrivate_$_build_mkTree_mkTree };
-export { main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree as _$_modulePrivate_$_main_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree };
-export { main_doit_mkTree_buildTree_mkRandom_lambda$_lambda$lambda as _$_modulePrivate_$_main_doit_mkTree_buildTree_mkRandom_lambda$_lambda$lambda };
-export { main_doit_mkTree_buildTree_mkRandom_lambda$$lambda$ as _$_modulePrivate_$_main_doit_mkTree_buildTree_mkRandom_lambda$$lambda$ };
-export { doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree as _$_modulePrivate_$_doit_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree };
-export { mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree as _$_modulePrivate_$_mkTree_buildTree_build_mkTree_mkTree$build_mkTree_mkTree };
+export { main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree as _$_modulePrivate_$_main_buildTree_build_mkTree_mkTree$build_mkTree_mkTree };
+export { main_buildTree_mkRandom_lambda$_lambda$lambda as _$_modulePrivate_$_main_buildTree_mkRandom_lambda$_lambda$lambda };
+export { main_buildTree_mkRandom_lambda$$lambda$ as _$_modulePrivate_$_main_buildTree_mkRandom_lambda$$lambda$ };
 export { buildTree_build_mkTree_mkTree$build_mkTree_mkTree as _$_modulePrivate_$_buildTree_build_mkTree_mkTree$build_mkTree_mkTree };
-export { main_doit_tsp$tsp as _$_modulePrivate_$_main_doit_tsp$tsp };
-export { doit_tsp$tsp as _$_modulePrivate_$_doit_tsp$tsp };
+export { main_tsp$tsp as _$_modulePrivate_$_main_tsp$tsp };
 export default tsp1;

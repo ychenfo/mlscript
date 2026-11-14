@@ -14,64 +14,7 @@ const boardToIndex$accessorSymbol = globalThis.Symbol("boardToIndex");
 const listExists$tailrec$accessorSymbol = globalThis.Symbol("listExists$tailrec");
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
 const map$tailrec$accessorSymbol = globalThis.Symbol("map$tailrec");
-let go, minimaxTT, doKid, sz, minimax1, lambda, lambda1, lambda2, lambda$, lambda$1, lambda$2, lambda$3, doKid$, minimaxTT$worker;
-doKid$ = function doKid$(minimax2) {
-  return (t, acc) => {
-    return doKid(minimax2, t, acc)
-  }
-};
-doKid = function doKid(minimax2, t, acc) {
-  let scrut, element1$, element0$, element1$1, element0$1, tmp;
-  if (runtime.Tuple.isArrayLike(acc) && acc.length === 2) {
-    element0$ = runtime.Tuple.get(acc, 0);
-    element1$ = runtime.Tuple.get(acc, 1);
-    scrut = sz(minimax2, t);
-    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-      let scrut1;
-      element0$1 = runtime.Tuple.get(scrut, 0);
-      element1$1 = runtime.Tuple.get(scrut, 1);
-      tmp = element0$ + element0$1;
-      scrut1 = element1$ > element1$1;
-      if (scrut1 === true) {
-        return globalThis.Object.freeze([
-          tmp,
-          element1$
-        ])
-      }
-      return globalThis.Object.freeze([
-        tmp,
-        element1$1
-      ]);
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-sz = function sz(minimax2, t) {
-  let arg$Rose$1$, element1$, element0$, tmp, tmp1, tmp2;
-  if (t instanceof minimax2.Rose.class) {
-    let f, inlinedVal;
-    arg$Rose$1$ = t.kids;
-    tmp = globalThis.Object.freeze([
-      0,
-      0
-    ]);
-    f = doKid$(minimax2);
-    inlinedVal = minimax2[listFoldl$tailrec$accessorSymbol](f, tmp, arg$Rose$1$);
-    if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
-      element0$ = runtime.Tuple.get(inlinedVal, 0);
-      element1$ = runtime.Tuple.get(inlinedVal, 1);
-      tmp1 = element0$ + 1;
-      tmp2 = element1$ + 1;
-      return globalThis.Object.freeze([
-        tmp1,
-        tmp2
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
+let go, doKid, sz, minimaxTT, minimax1, lambda, lambda1, lambda2, lambda$, lambda$1, lambda$2, doKid$, lambda$3, minimaxTT$worker;
 lambda$3 = (undefined, function (unused) {
   return (i) => {
     return unused
@@ -282,6 +225,63 @@ minimaxTT$worker = function minimaxTT$worker(minimax2, transTable, p, b) {
     ]);
     return minimax2.Rose(tmp1, minimax2.Nil);
   }
+};
+doKid$ = function doKid$(minimax2) {
+  return (t, acc) => {
+    return doKid(minimax2, t, acc)
+  }
+};
+doKid = function doKid(minimax2, t, acc) {
+  let scrut, element1$, element0$, element1$1, element0$1, tmp;
+  if (runtime.Tuple.isArrayLike(acc) && acc.length === 2) {
+    element0$ = runtime.Tuple.get(acc, 0);
+    element1$ = runtime.Tuple.get(acc, 1);
+    scrut = sz(minimax2, t);
+    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+      let scrut1;
+      element0$1 = runtime.Tuple.get(scrut, 0);
+      element1$1 = runtime.Tuple.get(scrut, 1);
+      tmp = element0$ + element0$1;
+      scrut1 = element1$ > element1$1;
+      if (scrut1 === true) {
+        return globalThis.Object.freeze([
+          tmp,
+          element1$
+        ])
+      }
+      return globalThis.Object.freeze([
+        tmp,
+        element1$1
+      ]);
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+sz = function sz(minimax2, t) {
+  let arg$Rose$1$, element1$, element0$, tmp, tmp1, tmp2;
+  if (t instanceof minimax2.Rose.class) {
+    let f, inlinedVal;
+    arg$Rose$1$ = t.kids;
+    tmp = globalThis.Object.freeze([
+      0,
+      0
+    ]);
+    f = doKid$(minimax2);
+    inlinedVal = minimax2[listFoldl$tailrec$accessorSymbol](f, tmp, arg$Rose$1$);
+    if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+      element0$ = runtime.Tuple.get(inlinedVal, 0);
+      element1$ = runtime.Tuple.get(inlinedVal, 1);
+      tmp1 = element0$ + 1;
+      tmp2 = element1$ + 1;
+      return globalThis.Object.freeze([
+        tmp1,
+        tmp2
+      ])
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 lambda$2 = (undefined, function (minimax2) {
   return (i, acc) => {
@@ -986,11 +986,6 @@ go = function go(minimax2, n, f, i) {
       return minimax.Rose(tmp9, trees);
     }
   }
-  static #gameTree() {
-    let tmp;
-    tmp = minimax.#empty();
-    return minimax.#minimax(minimax.X)(tmp)
-  }
   static #boardToIndex(p, b) {
     let start, scrut, tmp, element0$, lambda$here;
     if (p instanceof minimax.X.class) {
@@ -1011,23 +1006,20 @@ go = function go(minimax2, n, f, i) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #gameTreeWithTT() {
-    let transTable, tmp, lambda$here, p;
-    lambda$here = lambda$3(-2);
-    transTable = minimax.#arrayTabulate(59049, lambda$here);
-    tmp = minimax.#empty();
-    p = minimax.X;
-    return minimaxTT$worker(minimax, transTable, p, tmp)
-  }
   static #treeStats(tr) {
     return sz(minimax, tr)
   }
   static main() {
-    let tmp, tmp1, tmp2, tmp3;
-    tmp = minimax.#gameTree();
-    tmp1 = minimax.#treeStats(tmp);
-    tmp2 = minimax.#gameTreeWithTT();
-    tmp3 = minimax.#treeStats(tmp2);
+    let tree, transTable, tmp, tmp1, tmp2, tmp3, lambda$here, p, inlinedVal;
+    tmp = minimax.#empty();
+    tree = minimax.#minimax(minimax.X)(tmp);
+    lambda$here = lambda$3(-2);
+    transTable = minimax.#arrayTabulate(59049, lambda$here);
+    tmp1 = minimax.#treeStats(tree);
+    tmp2 = minimax.#empty();
+    p = minimax.X;
+    inlinedVal = minimaxTT$worker(minimax, transTable, p, tmp2);
+    tmp3 = minimax.#treeStats(inlinedVal);
     return globalThis.Object.freeze([
       tmp1,
       tmp3
@@ -1037,9 +1029,9 @@ go = function go(minimax2, n, f, i) {
   static [definitionMetadata] = ["class", "minimax"];
 });
 export { go as _$_modulePrivate_$_go };
-export { minimaxTT as _$_modulePrivate_$_minimaxTT };
 export { doKid as _$_modulePrivate_$_doKid };
 export { sz as _$_modulePrivate_$_sz };
+export { minimaxTT as _$_modulePrivate_$_minimaxTT };
 export { minimax1 as _$_modulePrivate_$_minimax };
 export { lambda as _$_modulePrivate_$_lambda };
 export { lambda1 as _$_modulePrivate_$_lambda1 };
@@ -1047,7 +1039,7 @@ export { lambda2 as _$_modulePrivate_$_lambda2 };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };
-export { lambda$3 as _$_modulePrivate_$_lambda$3 };
 export { doKid$ as _$_modulePrivate_$_doKid$ };
+export { lambda$3 as _$_modulePrivate_$_lambda$3 };
 export { minimaxTT$worker as _$_modulePrivate_$_minimaxTT$worker };
 export default minimax1;

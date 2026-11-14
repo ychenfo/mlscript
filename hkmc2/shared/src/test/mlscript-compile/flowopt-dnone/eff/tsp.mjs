@@ -7,7 +7,7 @@ const sameNd$accessorSymbol = globalThis.Symbol("sameNd");
 const distance$accessorSymbol = globalThis.Symbol("distance");
 const reverse$accessorSymbol = globalThis.Symbol("reverse");
 const conquer$accessorSymbol = globalThis.Symbol("conquer");
-let median, tsp1, lambda, lambda$, main_doit_tsp$tsp, doit_tsp$tsp, main_doit_tsp_merge_locateCycle$scrut_tup2, main_doit_tsp_merge$scrut_tup4, main_doit_tsp_merge_locateCycle$scrut_tup21, main_doit_tsp_merge$scrut_tup41, doit_tsp_merge_locateCycle$scrut_tup2, doit_tsp_merge$scrut_tup4, doit_tsp_merge_locateCycle$scrut_tup21, doit_tsp_merge$scrut_tup41, tsp_merge_locateCycle$scrut_tup2, tsp_merge$scrut_tup4, tsp_merge_locateCycle$scrut_tup21, tsp_merge$scrut_tup41, tsp_merge$scrut_tup4$worker, tsp_merge_locateCycle$scrut_tup2$worker, tsp_merge$scrut_tup4$worker1, tsp_merge_locateCycle$scrut_tup2$worker1, tsp_merge$scrut_tup2$worker, tsp_merge$scrut_tup2$worker1, doit_tsp_merge$scrut_tup2$worker, doit_tsp_merge$scrut_tup2$worker1, doit_tsp_merge$scrut_tup4$worker, doit_tsp_merge_locateCycle$scrut_tup2$worker, doit_tsp_merge$scrut_tup4$worker1, doit_tsp_merge_locateCycle$scrut_tup2$worker1, main_doit_tsp_merge$scrut_tup4$worker, main_doit_tsp_merge_locateCycle$scrut_tup2$worker, main_doit_tsp_merge$scrut_tup4$worker1, main_doit_tsp_merge_locateCycle$scrut_tup2$worker1, main_doit_tsp_merge$scrut_tup2$worker, main_doit_tsp_merge$scrut_tup2$worker1, mkTree_mkTree$mkTree, mkTree_mkTree$mkTree1, main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker, mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree, doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree;
+let median, tsp1, lambda, lambda$, main_tsp$tsp, main_tsp_merge_locateCycle$scrut_tup2, main_tsp_merge$scrut_tup4, main_tsp_merge_locateCycle$scrut_tup21, main_tsp_merge$scrut_tup41, tsp_merge_locateCycle$scrut_tup2, tsp_merge$scrut_tup4, tsp_merge_locateCycle$scrut_tup21, tsp_merge$scrut_tup41, tsp_merge$scrut_tup4$worker, tsp_merge_locateCycle$scrut_tup2$worker, tsp_merge$scrut_tup4$worker1, tsp_merge_locateCycle$scrut_tup2$worker1, tsp_merge$scrut_tup2$worker, tsp_merge$scrut_tup2$worker1, main_tsp_merge$scrut_tup2$worker, main_tsp_merge$scrut_tup2$worker1, main_tsp_merge$scrut_tup4$worker, main_tsp_merge_locateCycle$scrut_tup2$worker, main_tsp_merge$scrut_tup4$worker1, main_tsp_merge_locateCycle$scrut_tup2$worker1, mkTree_mkTree$mkTree, mkTree_mkTree$mkTree1, main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker;
 mkTree_mkTree$mkTree = function mkTree_mkTree$mkTree(id, param0, param1, param2, param3, param4, param5, param6) {
   switch (id) {
     case 0:
@@ -116,7 +116,7 @@ mkTree_mkTree$mkTree1 = function mkTree_mkTree$mkTree(id, param0, param1, param2
       }
   }
 };
-main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker = function main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker(id, param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14) {
+main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker = function main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker(id, param0, param1, param2, param3, param4, param5, param6, param7, param8, param9, param10, param11, param12, param13, param14) {
   switch (id) {
     case 0:
       {
@@ -137,7 +137,7 @@ main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_A
             inlinedVal3 = param0.NULL;
           } else {
             let inlinedVal7;
-            inlinedVal7 = main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker(1, undefined, param0, param1, param3, param4, inlinedVal5, undefined, fv_med, param6, undefined, undefined, undefined, undefined, undefined, undefined);
+            inlinedVal7 = main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker(1, undefined, param0, param1, param3, param4, inlinedVal5, undefined, fv_med, param6, undefined, undefined, undefined, undefined, undefined, undefined);
             inlinedVal3 = inlinedVal7;
           }
           tmp7 = inlinedVal / 2;
@@ -147,7 +147,7 @@ main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_A
             inlinedVal4 = param0.NULL;
           } else {
             let inlinedVal7;
-            inlinedVal7 = main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker(1, undefined, param0, param1, fv_med, param4, inlinedVal6, undefined, param5, param6, undefined, undefined, undefined, undefined, undefined, undefined);
+            inlinedVal7 = main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker(1, undefined, param0, param1, fv_med, param4, inlinedVal6, undefined, param5, param6, undefined, undefined, undefined, undefined, undefined, undefined);
             inlinedVal4 = inlinedVal7;
           }
           tmp5 = runtime.safeCall(param1());
@@ -165,8 +165,8 @@ main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_A
       {
         let tmp, tmp1, inlinedVal, tmp2, tmp3, tmp4, inlinedVal1, scale;
         param11 = median(param1, param2, param7, param8, param5);
-        param12 = main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker(0, param1, param2, param5, param3, param4, param7, param11, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
-        param13 = main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker(0, param1, param2, param5, param3, param4, param11, param8, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+        param12 = main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker(0, param1, param2, param5, param3, param4, param7, param11, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
+        param13 = main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker(0, param1, param2, param5, param3, param4, param11, param8, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined);
         tmp4 = runtime.safeCall(param2());
         scale = 1.0 / 2147483647.0;
         inlinedVal1 = scale * tmp4;
@@ -179,115 +179,7 @@ main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_A
       }
   }
 };
-mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree = function mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree(id, param0, param1, param2, param3, param4, param5, param6) {
-  switch (id) {
-    case 0:
-      {
-        let inlinedVal, scrut, tmp;
-        tmp = param2 / 2;
-        inlinedVal = runtime.safeCall(globalThis.Math.floor(tmp));
-        scrut = inlinedVal == 0;
-        if (scrut === true) {
-          return param0.NULL
-        }
-        {
-          let fv_med, fv_tmp, fv_tmp1, tmp1, tmp2, inlinedVal1, tmp3, tmp4, tmp5, inlinedVal2, scale;
-          fv_med = median(param0, param1, param3, param5, inlinedVal);
-          fv_tmp = mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree(1, param0, param1, inlinedVal, param4, param6, param3, fv_med);
-          fv_tmp1 = mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree(1, param0, param1, inlinedVal, param4, param6, fv_med, param5);
-          tmp5 = runtime.safeCall(param1());
-          scale = 1.0 / 2147483647.0;
-          inlinedVal2 = scale * tmp5;
-          tmp3 = param6 - param4;
-          tmp4 = inlinedVal2 * tmp3;
-          inlinedVal1 = param4 + tmp4;
-          tmp1 = new param0.Ref.class(param0.NULL);
-          tmp2 = new param0.Ref.class(param0.NULL);
-          return param0.ND(fv_tmp, fv_tmp1, fv_med, inlinedVal1, inlinedVal, tmp1, tmp2);
-        }
-      }
-    case 1:
-      {
-        let inlinedVal, scrut, tmp;
-        tmp = param2 / 2;
-        inlinedVal = runtime.safeCall(globalThis.Math.floor(tmp));
-        scrut = inlinedVal == 0;
-        if (scrut === true) {
-          return param0.NULL
-        }
-        {
-          let fv_med, fv_tmp, fv_tmp1, tmp1, tmp2, inlinedVal1, tmp3, tmp4, tmp5, inlinedVal2, scale;
-          fv_med = median(param0, param1, param6, param4, inlinedVal);
-          fv_tmp = mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree(0, param0, param1, inlinedVal, param5, param3, param6, fv_med);
-          fv_tmp1 = mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree(0, param0, param1, inlinedVal, param5, param3, fv_med, param4);
-          tmp5 = runtime.safeCall(param1());
-          scale = 1.0 / 2147483647.0;
-          inlinedVal2 = scale * tmp5;
-          tmp3 = param3 - param5;
-          tmp4 = inlinedVal2 * tmp3;
-          inlinedVal1 = param5 + tmp4;
-          tmp1 = new param0.Ref.class(param0.NULL);
-          tmp2 = new param0.Ref.class(param0.NULL);
-          return param0.ND(fv_tmp, fv_tmp1, inlinedVal1, fv_med, inlinedVal, tmp1, tmp2);
-        }
-      }
-  }
-};
-doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree = function doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree(id, param0, param1, param2, param3, param4, param5, param6) {
-  switch (id) {
-    case 0:
-      {
-        let inlinedVal, scrut, tmp;
-        tmp = param2 / 2;
-        inlinedVal = runtime.safeCall(globalThis.Math.floor(tmp));
-        scrut = inlinedVal == 0;
-        if (scrut === true) {
-          return param0.NULL
-        }
-        {
-          let fv_med, fv_tmp, fv_tmp1, tmp1, tmp2, inlinedVal1, tmp3, tmp4, tmp5, inlinedVal2, scale;
-          fv_med = median(param0, param1, param3, param5, inlinedVal);
-          fv_tmp = doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree(1, param0, param1, inlinedVal, param4, param6, param3, fv_med);
-          fv_tmp1 = doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree(1, param0, param1, inlinedVal, param4, param6, fv_med, param5);
-          tmp5 = runtime.safeCall(param1());
-          scale = 1.0 / 2147483647.0;
-          inlinedVal2 = scale * tmp5;
-          tmp3 = param6 - param4;
-          tmp4 = inlinedVal2 * tmp3;
-          inlinedVal1 = param4 + tmp4;
-          tmp1 = new param0.Ref.class(param0.NULL);
-          tmp2 = new param0.Ref.class(param0.NULL);
-          return param0.ND(fv_tmp, fv_tmp1, fv_med, inlinedVal1, inlinedVal, tmp1, tmp2);
-        }
-      }
-    case 1:
-      {
-        let inlinedVal, scrut, tmp;
-        tmp = param2 / 2;
-        inlinedVal = runtime.safeCall(globalThis.Math.floor(tmp));
-        scrut = inlinedVal == 0;
-        if (scrut === true) {
-          return param0.NULL
-        }
-        {
-          let fv_med, fv_tmp, fv_tmp1, tmp1, tmp2, inlinedVal1, tmp3, tmp4, tmp5, inlinedVal2, scale;
-          fv_med = median(param0, param1, param6, param4, inlinedVal);
-          fv_tmp = doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree(0, param0, param1, inlinedVal, param5, param3, param6, fv_med);
-          fv_tmp1 = doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree(0, param0, param1, inlinedVal, param5, param3, fv_med, param4);
-          tmp5 = runtime.safeCall(param1());
-          scale = 1.0 / 2147483647.0;
-          inlinedVal2 = scale * tmp5;
-          tmp3 = param3 - param5;
-          tmp4 = inlinedVal2 * tmp3;
-          inlinedVal1 = param5 + tmp4;
-          tmp1 = new param0.Ref.class(param0.NULL);
-          tmp2 = new param0.Ref.class(param0.NULL);
-          return param0.ND(fv_tmp, fv_tmp1, inlinedVal1, fv_med, inlinedVal, tmp1, tmp2);
-        }
-      }
-  }
-};
-main_doit_tsp$tsp = function main_doit_tsp$tsp(t, sz) {
+main_tsp$tsp = function main_tsp$tsp(t, sz) {
   let scrut, arg$ND$0$, arg$ND$1$, arg$ND$4$, tmp, tmp1;
   if (t instanceof tsp1.ND.class) {
     arg$ND$0$ = t.left;
@@ -299,8 +191,8 @@ main_doit_tsp$tsp = function main_doit_tsp$tsp(t, sz) {
     }
     {
       let b, t1;
-      tmp = main_doit_tsp$tsp(arg$ND$0$, sz);
-      tmp1 = main_doit_tsp$tsp(arg$ND$1$, sz);
+      tmp = main_tsp$tsp(arg$ND$0$, sz);
+      tmp1 = main_tsp$tsp(arg$ND$1$, sz);
       b = tmp1;
       t1 = t;
       if (tmp instanceof tsp1.ND.class) {
@@ -324,7 +216,7 @@ main_doit_tsp$tsp = function main_doit_tsp$tsp(t, sz) {
                 arg$ND$6$1 = tmp3.next;
                 scrut1 = tsp3[sameNd$accessorSymbol](start, tmp3);
                 if (scrut1 === true) {
-                  inlinedVal1 = main_doit_tsp_merge_locateCycle$scrut_tup21(min, minDist);
+                  inlinedVal1 = main_tsp_merge_locateCycle$scrut_tup2(min, minDist);
                   break inlinedLbl
                 }
                 test = tsp3[distance$accessorSymbol](t3, tmp3);
@@ -353,129 +245,12 @@ main_doit_tsp$tsp = function main_doit_tsp$tsp(t, sz) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_tsp$tsp = function doit_tsp$tsp(t, sz) {
-  let scrut, arg$ND$0$, arg$ND$1$, arg$ND$4$, tmp, tmp1;
-  if (t instanceof tsp1.ND.class) {
-    arg$ND$0$ = t.left;
-    arg$ND$1$ = t.right;
-    arg$ND$4$ = t.sz;
-    scrut = arg$ND$4$ <= sz;
-    if (scrut === true) {
-      return tsp1[conquer$accessorSymbol](t)
-    }
-    {
-      let b, t1;
-      tmp = doit_tsp$tsp(arg$ND$0$, sz);
-      tmp1 = doit_tsp$tsp(arg$ND$1$, sz);
-      b = tmp1;
-      t1 = t;
-      if (tmp instanceof tsp1.ND.class) {
-        let tsp2, t2, inlinedVal, arg$ND$6$, tmp2;
-        tsp2 = tsp1;
-        t2 = t;
-        if (tmp instanceof tsp2.ND.class) {
-          let tsp3, t3, start, min, minDist, tmp3, inlinedVal1;
-          arg$ND$6$ = tmp.next;
-          tmp2 = tsp1[distance$accessorSymbol](t, tmp);
-          tsp3 = tsp1;
-          t3 = t;
-          start = tmp;
-          min = tmp;
-          minDist = tmp2;
-          tmp3 = arg$ND$6$.value;
-          inlinedLbl: {
-            loopLabel: while (true) {
-              let scrut1, test, scrut2, arg$ND$6$1;
-              if (tmp3 instanceof tsp3.ND.class) {
-                arg$ND$6$1 = tmp3.next;
-                scrut1 = tsp3[sameNd$accessorSymbol](start, tmp3);
-                if (scrut1 === true) {
-                  inlinedVal1 = doit_tsp_merge_locateCycle$scrut_tup2(min, minDist);
-                  break inlinedLbl
-                }
-                test = tsp3[distance$accessorSymbol](t3, tmp3);
-                scrut2 = test < minDist;
-                if (scrut2 === true) {
-                  min = tmp3;
-                  minDist = test;
-                  tmp3 = arg$ND$6$1.value;
-                  continue loopLabel
-                }
-                tmp3 = arg$ND$6$1.value;
-                continue loopLabel;
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-          }
-          inlinedVal = inlinedVal1(undefined, undefined, undefined, undefined, tsp2, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, t2, undefined, undefined, undefined, undefined);
-          return inlinedVal(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, t1, b, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-  } else if (t instanceof tsp1.NULL.class) {
-    return tsp1.NULL
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_doit_tsp_merge$scrut_tup2$worker1 = function main_doit_tsp_merge$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp, fv_n1) {
-  switch (tup2_0) {
-    case 1:
-      tsp1[reverse$accessorSymbol](fv_n2);
-      tsp1[link$accessorSymbol](fv_p1, fv_t);
-      tsp1[link$accessorSymbol](fv_t, fv_p2);
-      tsp1[link$accessorSymbol](fv_n2, fv_n1);
-      return fv_t;
-    case 2:
-      tsp1[link$accessorSymbol](fv_p1, fv_t);
-      tsp1[link$accessorSymbol](fv_t, fv_n2);
-      tsp1[link$accessorSymbol](fv_p2, fv_n1);
-      return fv_t;
-    case 3:
-      tsp1[link$accessorSymbol](fv_p2, fv_t);
-      tsp1[link$accessorSymbol](fv_t, fv_n1);
-      tsp1[link$accessorSymbol](fv_p1, fv_n2);
-      return fv_t;
-  }
-  tsp1[reverse$accessorSymbol](fv_n1);
-  tsp1[link$accessorSymbol](fv_n1, fv_t);
-  tsp1[link$accessorSymbol](fv_t, fv_n2);
-  tsp1[link$accessorSymbol](fv_p2, fv_p1);
-  return fv_t
-};
-main_doit_tsp_merge$scrut_tup2$worker = function main_doit_tsp_merge$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist1, fv_choice1, fv_tmp, fv_tToN1, fv_tToP2, fv_tmp1, fv_p1ToN2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist2, fv_choice2, fv_tmp2, fv_tToN2, fv_tmp3, fv_p1ToP2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1) {
-  let scrut;
-  fv_tmp = fv_tToN1 + fv_tToP2;
-  fv_tmp1 = fv_tmp + fv_p1ToN2;
-  scrut = fv_tmp1 < tup2_1;
-  if (scrut === true) {
-    let fv_tmp5, fv_tmp6, scrut1;
-    fv_tmp5 = fv_tToN1 + fv_tToN2;
-    fv_tmp6 = fv_tmp5 + fv_p1ToP2;
-    scrut1 = fv_tmp6 < fv_tmp1;
-    if (scrut1 === true) {
-      return main_doit_tsp_merge$scrut_tup2$worker1(4, fv_tmp6, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1)
-    }
-    return main_doit_tsp_merge$scrut_tup2$worker1(3, fv_tmp1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1);
-  }
-  {
-    let fv_tmp5, fv_tmp6, scrut1;
-    fv_tmp5 = fv_tToN1 + fv_tToN2;
-    fv_tmp6 = fv_tmp5 + fv_p1ToP2;
-    scrut1 = fv_tmp6 < tup2_1;
-    if (scrut1 === true) {
-      return main_doit_tsp_merge$scrut_tup2$worker1(4, fv_tmp6, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1)
-    }
-    return main_doit_tsp_merge$scrut_tup2$worker1(tup2_0, tup2_1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1);
-  }
-};
-main_doit_tsp_merge_locateCycle$scrut_tup2 = function main_doit_tsp_merge_locateCycle$scrut_tup2(tup2_0, tup2_1) {
+main_tsp_merge_locateCycle$scrut_tup2 = function main_tsp_merge_locateCycle$scrut_tup2(tup2_0, tup2_1) {
   return (fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) => {
-    return main_doit_tsp_merge_locateCycle$scrut_tup2$worker1(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut)
+    return main_tsp_merge_locateCycle$scrut_tup2$worker1(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut)
   }
 };
-main_doit_tsp_merge_locateCycle$scrut_tup2$worker1 = function main_doit_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) {
+main_tsp_merge_locateCycle$scrut_tup2$worker1 = function main_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) {
   if (tup2_0 instanceof fv_tsp.ND.class) {
     fv_arg$ND$5$ = tup2_0.prev;
     fv_arg$ND$6$ = tup2_0.next;
@@ -489,64 +264,18 @@ main_doit_tsp_merge_locateCycle$scrut_tup2$worker1 = function main_doit_tsp_merg
     fv_tmp1 = fv_tToNext - fv_minToNext;
     fv_scrut = fv_tmp < fv_tmp1;
     if (fv_scrut === true) {
-      return main_doit_tsp_merge$scrut_tup4(fv_prev, fv_tToPrev, tup2_0, tup2_1)
+      return main_tsp_merge$scrut_tup4(fv_prev, fv_tToPrev, tup2_0, tup2_1)
     }
-    return main_doit_tsp_merge$scrut_tup4(tup2_0, tup2_1, fv_next, fv_tToNext);
+    return main_tsp_merge$scrut_tup4(tup2_0, tup2_1, fv_next, fv_tToNext);
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_tsp_merge$scrut_tup4 = function main_doit_tsp_merge$scrut_tup4(tup4_0, tup4_1, tup4_2, tup4_3) {
-  return (fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1, fv_n1ToP2, fv_p1ToN2, fv_p1, fv_p1ToP2, fv_choice0, fv_tmp, fv_tToP1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, fv_tmp4, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, fv_t, fv_tmp7) => {
-    return main_doit_tsp_merge$scrut_tup4$worker1(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1, fv_n1ToP2, fv_p1ToN2, fv_p1, fv_p1ToP2, fv_choice0, fv_tmp, fv_tToP1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, fv_tmp4, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, fv_t, fv_tmp7)
-  }
-};
-main_doit_tsp_merge$scrut_tup4$worker1 = function main_doit_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1, fv_n1ToP2, fv_p1ToN2, fv_p1, fv_p1ToP2, fv_choice0, fv_tmp, fv_tToP1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, fv_tmp4, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, fv_t, fv_tmp7) {
-  let scrut;
-  fv_n1ToN2 = tsp1[distance$accessorSymbol](fv_n1, tup4_2);
-  fv_n1ToP2 = tsp1[distance$accessorSymbol](fv_n1, tup4_0);
-  fv_p1ToN2 = tsp1[distance$accessorSymbol](fv_p1, tup4_2);
-  fv_p1ToP2 = tsp1[distance$accessorSymbol](fv_p1, tup4_0);
-  fv_tmp = fv_tToP1 + tup4_1;
-  fv_minDist0 = fv_tmp + fv_n1ToN2;
-  fv_tmp1 = fv_tToP1 + tup4_3;
-  fv_tmp2 = fv_tmp1 + fv_n1ToP2;
-  scrut = fv_tmp2 < fv_minDist0;
-  if (scrut === true) {
-    return main_doit_tsp_merge$scrut_tup2$worker(2, fv_tmp2, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, tup4_1, fv_tmp4, fv_p1ToN2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, tup4_3, fv_tmp6, fv_p1ToP2, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, tup4_2, fv_p1, fv_t, tup4_0, fv_tmp7, fv_n1)
-  }
-  return main_doit_tsp_merge$scrut_tup2$worker(1, fv_minDist0, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, tup4_1, fv_tmp4, fv_p1ToN2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, tup4_3, fv_tmp6, fv_p1ToP2, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, tup4_2, fv_p1, fv_t, tup4_0, fv_tmp7, fv_n1);
-};
-main_doit_tsp_merge_locateCycle$scrut_tup21 = function main_doit_tsp_merge_locateCycle$scrut_tup2(tup2_0, tup2_1) {
-  return (fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) => {
-    return main_doit_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut)
-  }
-};
-main_doit_tsp_merge_locateCycle$scrut_tup2$worker = function main_doit_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) {
-  if (tup2_0 instanceof fv_tsp.ND.class) {
-    fv_arg$ND$5$ = tup2_0.prev;
-    fv_arg$ND$6$ = tup2_0.next;
-    fv_prev = fv_arg$ND$5$.value;
-    fv_next = fv_arg$ND$6$.value;
-    fv_minToNext = fv_tsp[distance$accessorSymbol](tup2_0, fv_next);
-    fv_minToPrev = fv_tsp[distance$accessorSymbol](tup2_0, fv_prev);
-    fv_tToNext = fv_tsp[distance$accessorSymbol](fv_t, fv_next);
-    fv_tToPrev = fv_tsp[distance$accessorSymbol](fv_t, fv_prev);
-    fv_tmp = fv_tToPrev - fv_minToPrev;
-    fv_tmp1 = fv_tToNext - fv_minToNext;
-    fv_scrut = fv_tmp < fv_tmp1;
-    if (fv_scrut === true) {
-      return main_doit_tsp_merge$scrut_tup41(fv_prev, fv_tToPrev, tup2_0, tup2_1)
-    }
-    return main_doit_tsp_merge$scrut_tup41(tup2_0, tup2_1, fv_next, fv_tToNext);
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_doit_tsp_merge$scrut_tup41 = function main_doit_tsp_merge$scrut_tup4(tup4_0, tup4_1, tup4_2, tup4_3) {
+main_tsp_merge$scrut_tup4 = function main_tsp_merge$scrut_tup4(tup4_0, tup4_1, tup4_2, tup4_3) {
   return (fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN1, fv_n1, fv_tToP1, fv_p1, fv_scrut, fv_t, fv_b, fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1ToP2, fv_p1ToN2, fv_p1ToP2, fv_choice0, fv_tmp, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_tmp7) => {
-    return main_doit_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN1, fv_n1, fv_tToP1, fv_p1, fv_scrut, fv_t, fv_b, fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1ToP2, fv_p1ToN2, fv_p1ToP2, fv_choice0, fv_tmp, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_tmp7)
+    return main_tsp_merge$scrut_tup4$worker1(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN1, fv_n1, fv_tToP1, fv_p1, fv_scrut, fv_t, fv_b, fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1ToP2, fv_p1ToN2, fv_p1ToP2, fv_choice0, fv_tmp, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_tmp7)
   }
 };
-main_doit_tsp_merge$scrut_tup4$worker = function main_doit_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN1, fv_n1, fv_tToP1, fv_p1, fv_scrut, fv_t, fv_b, fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1ToP2, fv_p1ToN2, fv_p1ToP2, fv_choice0, fv_tmp, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_tmp7) {
+main_tsp_merge$scrut_tup4$worker1 = function main_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN1, fv_n1, fv_tToP1, fv_p1, fv_scrut, fv_t, fv_b, fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1ToP2, fv_p1ToN2, fv_p1ToP2, fv_choice0, fv_tmp, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_tmp7) {
   let tsp2, t, inlinedVal, arg$ND$6$, tmp;
   tsp2 = tsp1;
   t = fv_t;
@@ -567,7 +296,7 @@ main_doit_tsp_merge$scrut_tup4$worker = function main_doit_tsp_merge$scrut_tup4$
           arg$ND$6$1 = tmp1.next;
           scrut = tsp3[sameNd$accessorSymbol](start, tmp1);
           if (scrut === true) {
-            inlinedVal1 = main_doit_tsp_merge_locateCycle$scrut_tup2(min, minDist);
+            inlinedVal1 = main_tsp_merge_locateCycle$scrut_tup21(min, minDist);
             break inlinedLbl
           }
           test = tsp3[distance$accessorSymbol](t1, tmp1);
@@ -589,12 +318,12 @@ main_doit_tsp_merge$scrut_tup4$worker = function main_doit_tsp_merge$scrut_tup4$
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_tsp_merge_locateCycle$scrut_tup2 = function doit_tsp_merge_locateCycle$scrut_tup2(tup2_0, tup2_1) {
+main_tsp_merge_locateCycle$scrut_tup21 = function main_tsp_merge_locateCycle$scrut_tup2(tup2_0, tup2_1) {
   return (fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) => {
-    return doit_tsp_merge_locateCycle$scrut_tup2$worker1(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut)
+    return main_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut)
   }
 };
-doit_tsp_merge_locateCycle$scrut_tup2$worker1 = function doit_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) {
+main_tsp_merge_locateCycle$scrut_tup2$worker = function main_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) {
   if (tup2_0 instanceof fv_tsp.ND.class) {
     fv_arg$ND$5$ = tup2_0.prev;
     fv_arg$ND$6$ = tup2_0.next;
@@ -608,91 +337,18 @@ doit_tsp_merge_locateCycle$scrut_tup2$worker1 = function doit_tsp_merge_locateCy
     fv_tmp1 = fv_tToNext - fv_minToNext;
     fv_scrut = fv_tmp < fv_tmp1;
     if (fv_scrut === true) {
-      return doit_tsp_merge$scrut_tup4(fv_prev, fv_tToPrev, tup2_0, tup2_1)
+      return main_tsp_merge$scrut_tup41(fv_prev, fv_tToPrev, tup2_0, tup2_1)
     }
-    return doit_tsp_merge$scrut_tup4(tup2_0, tup2_1, fv_next, fv_tToNext);
+    return main_tsp_merge$scrut_tup41(tup2_0, tup2_1, fv_next, fv_tToNext);
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_tsp_merge$scrut_tup4 = function doit_tsp_merge$scrut_tup4(tup4_0, tup4_1, tup4_2, tup4_3) {
-  return (fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN1, fv_n1, fv_tToP1, fv_p1, fv_scrut, fv_t, fv_b, fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1ToP2, fv_p1ToN2, fv_p1ToP2, fv_choice0, fv_tmp, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_tmp7) => {
-    return doit_tsp_merge$scrut_tup4$worker1(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN1, fv_n1, fv_tToP1, fv_p1, fv_scrut, fv_t, fv_b, fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1ToP2, fv_p1ToN2, fv_p1ToP2, fv_choice0, fv_tmp, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_tmp7)
-  }
-};
-doit_tsp_merge$scrut_tup4$worker1 = function doit_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN1, fv_n1, fv_tToP1, fv_p1, fv_scrut, fv_t, fv_b, fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1ToP2, fv_p1ToN2, fv_p1ToP2, fv_choice0, fv_tmp, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_tmp7) {
-  let tsp2, t, inlinedVal, arg$ND$6$, tmp;
-  tsp2 = tsp1;
-  t = fv_t;
-  if (fv_b instanceof tsp2.ND.class) {
-    let tsp3, t1, start, min, minDist, tmp1, inlinedVal1;
-    arg$ND$6$ = fv_b.next;
-    tmp = tsp1[distance$accessorSymbol](fv_t, fv_b);
-    tsp3 = tsp1;
-    t1 = fv_t;
-    start = fv_b;
-    min = fv_b;
-    minDist = tmp;
-    tmp1 = arg$ND$6$.value;
-    inlinedLbl: {
-      loopLabel: while (true) {
-        let scrut, test, scrut1, arg$ND$6$1;
-        if (tmp1 instanceof tsp3.ND.class) {
-          arg$ND$6$1 = tmp1.next;
-          scrut = tsp3[sameNd$accessorSymbol](start, tmp1);
-          if (scrut === true) {
-            inlinedVal1 = doit_tsp_merge_locateCycle$scrut_tup21(min, minDist);
-            break inlinedLbl
-          }
-          test = tsp3[distance$accessorSymbol](t1, tmp1);
-          scrut1 = test < minDist;
-          if (scrut1 === true) {
-            min = tmp1;
-            minDist = test;
-            tmp1 = arg$ND$6$1.value;
-            continue loopLabel
-          }
-          tmp1 = arg$ND$6$1.value;
-          continue loopLabel;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-    }
-    inlinedVal = inlinedVal1(undefined, undefined, undefined, undefined, tsp2, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, t, undefined, undefined, undefined, undefined);
-    return inlinedVal(fv_element0$1, fv_element1$1, fv_element2$1, fv_element3$1, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, tup4_2, fv_n1ToP2, fv_p1ToN2, tup4_0, fv_p1ToP2, fv_choice0, fv_tmp, tup4_1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist1, fv_choice1, fv_tmp3, tup4_3, fv_tmp4, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut3, fv_element0$4, fv_element1$4, fv_minDist, fv_choice, fv_t, fv_tmp7)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_tsp_merge_locateCycle$scrut_tup21 = function doit_tsp_merge_locateCycle$scrut_tup2(tup2_0, tup2_1) {
-  return (fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) => {
-    return doit_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut)
-  }
-};
-doit_tsp_merge_locateCycle$scrut_tup2$worker = function doit_tsp_merge_locateCycle$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_min, fv_tsp, fv_arg$ND$0$, fv_arg$ND$1$, fv_arg$ND$2$, fv_arg$ND$3$, fv_arg$ND$4$, fv_arg$ND$5$, fv_arg$ND$6$, fv_next1, fv_prev1, fv_prev, fv_next, fv_minToNext, fv_minToPrev, fv_tToNext, fv_t, fv_tToPrev, fv_tmp, fv_tmp1, fv_scrut) {
-  if (tup2_0 instanceof fv_tsp.ND.class) {
-    fv_arg$ND$5$ = tup2_0.prev;
-    fv_arg$ND$6$ = tup2_0.next;
-    fv_prev = fv_arg$ND$5$.value;
-    fv_next = fv_arg$ND$6$.value;
-    fv_minToNext = fv_tsp[distance$accessorSymbol](tup2_0, fv_next);
-    fv_minToPrev = fv_tsp[distance$accessorSymbol](tup2_0, fv_prev);
-    fv_tToNext = fv_tsp[distance$accessorSymbol](fv_t, fv_next);
-    fv_tToPrev = fv_tsp[distance$accessorSymbol](fv_t, fv_prev);
-    fv_tmp = fv_tToPrev - fv_minToPrev;
-    fv_tmp1 = fv_tToNext - fv_minToNext;
-    fv_scrut = fv_tmp < fv_tmp1;
-    if (fv_scrut === true) {
-      return doit_tsp_merge$scrut_tup41(fv_prev, fv_tToPrev, tup2_0, tup2_1)
-    }
-    return doit_tsp_merge$scrut_tup41(tup2_0, tup2_1, fv_next, fv_tToNext);
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_tsp_merge$scrut_tup41 = function doit_tsp_merge$scrut_tup4(tup4_0, tup4_1, tup4_2, tup4_3) {
+main_tsp_merge$scrut_tup41 = function main_tsp_merge$scrut_tup4(tup4_0, tup4_1, tup4_2, tup4_3) {
   return (fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1, fv_n1ToP2, fv_p1ToN2, fv_p1, fv_p1ToP2, fv_choice0, fv_tmp, fv_tToP1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, fv_tmp4, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, fv_t, fv_tmp7) => {
-    return doit_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1, fv_n1ToP2, fv_p1ToN2, fv_p1, fv_p1ToP2, fv_choice0, fv_tmp, fv_tToP1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, fv_tmp4, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, fv_t, fv_tmp7)
+    return main_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1, fv_n1ToP2, fv_p1ToN2, fv_p1, fv_p1ToP2, fv_choice0, fv_tmp, fv_tToP1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, fv_tmp4, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, fv_t, fv_tmp7)
   }
 };
-doit_tsp_merge$scrut_tup4$worker = function doit_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1, fv_n1ToP2, fv_p1ToN2, fv_p1, fv_p1ToP2, fv_choice0, fv_tmp, fv_tToP1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, fv_tmp4, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, fv_t, fv_tmp7) {
+main_tsp_merge$scrut_tup4$worker = function main_tsp_merge$scrut_tup4$worker(tup4_0, tup4_1, tup4_2, tup4_3, fv_element0$, fv_element1$, fv_element2$, fv_element3$, fv_tToN2, fv_n2, fv_tToP2, fv_p2, fv_n1ToN2, fv_n1, fv_n1ToP2, fv_p1ToN2, fv_p1, fv_p1ToP2, fv_choice0, fv_tmp, fv_tToP1, fv_minDist0, fv_tmp1, fv_tmp2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, fv_tmp4, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, fv_tmp6, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, fv_t, fv_tmp7) {
   let scrut;
   fv_n1ToN2 = tsp1[distance$accessorSymbol](fv_n1, tup4_2);
   fv_n1ToP2 = tsp1[distance$accessorSymbol](fv_n1, tup4_0);
@@ -704,11 +360,11 @@ doit_tsp_merge$scrut_tup4$worker = function doit_tsp_merge$scrut_tup4$worker(tup
   fv_tmp2 = fv_tmp1 + fv_n1ToP2;
   scrut = fv_tmp2 < fv_minDist0;
   if (scrut === true) {
-    return doit_tsp_merge$scrut_tup2$worker1(2, fv_tmp2, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, tup4_1, fv_tmp4, fv_p1ToN2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, tup4_3, fv_tmp6, fv_p1ToP2, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, tup4_2, fv_p1, fv_t, tup4_0, fv_tmp7, fv_n1)
+    return main_tsp_merge$scrut_tup2$worker1(2, fv_tmp2, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, tup4_1, fv_tmp4, fv_p1ToN2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, tup4_3, fv_tmp6, fv_p1ToP2, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, tup4_2, fv_p1, fv_t, tup4_0, fv_tmp7, fv_n1)
   }
-  return doit_tsp_merge$scrut_tup2$worker1(1, fv_minDist0, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, tup4_1, fv_tmp4, fv_p1ToN2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, tup4_3, fv_tmp6, fv_p1ToP2, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, tup4_2, fv_p1, fv_t, tup4_0, fv_tmp7, fv_n1);
+  return main_tsp_merge$scrut_tup2$worker1(1, fv_minDist0, fv_element0$1, fv_element1$1, fv_minDist1, fv_choice1, fv_tmp3, fv_tToN1, tup4_1, fv_tmp4, fv_p1ToN2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist2, fv_choice2, fv_tmp5, tup4_3, fv_tmp6, fv_p1ToP2, fv_scrut2, fv_element0$3, fv_element1$3, fv_minDist, fv_choice, tup4_2, fv_p1, fv_t, tup4_0, fv_tmp7, fv_n1);
 };
-doit_tsp_merge$scrut_tup2$worker1 = function (tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist1, fv_choice1, fv_tmp, fv_tToN1, fv_tToP2, fv_tmp1, fv_p1ToN2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist2, fv_choice2, fv_tmp2, fv_tToN2, fv_tmp3, fv_p1ToP2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1) {
+main_tsp_merge$scrut_tup2$worker1 = function (tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist1, fv_choice1, fv_tmp, fv_tToN1, fv_tToP2, fv_tmp1, fv_p1ToN2, fv_scrut, fv_element0$1, fv_element1$1, fv_minDist2, fv_choice2, fv_tmp2, fv_tToN2, fv_tmp3, fv_p1ToP2, fv_scrut1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1) {
   let scrut;
   fv_tmp = fv_tToN1 + fv_tToP2;
   fv_tmp1 = fv_tmp + fv_p1ToN2;
@@ -719,9 +375,9 @@ doit_tsp_merge$scrut_tup2$worker1 = function (tup2_0, tup2_1, fv_element0$, fv_e
     fv_tmp6 = fv_tmp5 + fv_p1ToP2;
     scrut1 = fv_tmp6 < fv_tmp1;
     if (scrut1 === true) {
-      return doit_tsp_merge$scrut_tup2$worker(4, fv_tmp6, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1)
+      return main_tsp_merge$scrut_tup2$worker(4, fv_tmp6, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1)
     }
-    return doit_tsp_merge$scrut_tup2$worker(3, fv_tmp1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1);
+    return main_tsp_merge$scrut_tup2$worker(3, fv_tmp1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1);
   }
   {
     let fv_tmp5, fv_tmp6, scrut1;
@@ -729,12 +385,12 @@ doit_tsp_merge$scrut_tup2$worker1 = function (tup2_0, tup2_1, fv_element0$, fv_e
     fv_tmp6 = fv_tmp5 + fv_p1ToP2;
     scrut1 = fv_tmp6 < tup2_1;
     if (scrut1 === true) {
-      return doit_tsp_merge$scrut_tup2$worker(4, fv_tmp6, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1)
+      return main_tsp_merge$scrut_tup2$worker(4, fv_tmp6, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1)
     }
-    return doit_tsp_merge$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1);
+    return main_tsp_merge$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$2, fv_element1$2, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp4, fv_n1);
   }
 };
-doit_tsp_merge$scrut_tup2$worker = function doit_tsp_merge$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp, fv_n1) {
+main_tsp_merge$scrut_tup2$worker = function main_tsp_merge$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_minDist, fv_choice, fv_n2, fv_p1, fv_t, fv_p2, fv_tmp, fv_n1) {
   switch (tup2_0) {
     case 1:
       tsp1[reverse$accessorSymbol](fv_n2);
@@ -1479,26 +1135,26 @@ lambda = (undefined, function (tsp2, seedRef) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static main() {
-    let inlinedVal, inlinedVal1, seedRef, scrut, inlinedVal2;
+    let tmp, inlinedVal, seedRef, scrut, inlinedVal1;
     if (false === true) {
-      inlinedVal2 = 1;
+      inlinedVal1 = 1;
     } else if (false === true) {
-      inlinedVal2 = 2147483646;
+      inlinedVal1 = 2147483646;
     } else {
-      inlinedVal2 = 314;
+      inlinedVal1 = 314;
     }
-    seedRef = new tsp1.Ref.class(inlinedVal2);
+    seedRef = new tsp1.Ref.class(inlinedVal1);
     scrut = 255 == 0;
     if (scrut === true) {
-      inlinedVal1 = tsp1.NULL;
+      inlinedVal = tsp1.NULL;
     } else {
-      let fv_rand, inlinedVal3;
+      let fv_rand, inlinedVal2;
       fv_rand = lambda$(tsp1, seedRef);
-      inlinedVal3 = main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker(1, undefined, tsp1, fv_rand, 0.0, 0.0, 255, undefined, 1.0, 1.0, undefined, undefined, undefined, undefined, undefined, undefined);
-      inlinedVal1 = inlinedVal3;
+      inlinedVal2 = main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker(1, undefined, tsp1, fv_rand, 0.0, 0.0, 255, undefined, 1.0, 1.0, undefined, undefined, undefined, undefined, undefined, undefined);
+      inlinedVal = inlinedVal2;
     }
-    inlinedVal = main_doit_tsp$tsp(inlinedVal1, 150);
-    return tsp.#tourLength(inlinedVal)
+    tmp = main_tsp$tsp(inlinedVal, 150);
+    return tsp.#tourLength(tmp)
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "tsp"];
@@ -1507,16 +1163,11 @@ export { median as _$_modulePrivate_$_median };
 export { tsp1 as _$_modulePrivate_$_tsp };
 export { lambda as _$_modulePrivate_$_lambda };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
-export { main_doit_tsp$tsp as _$_modulePrivate_$_main_doit_tsp$tsp };
-export { doit_tsp$tsp as _$_modulePrivate_$_doit_tsp$tsp };
-export { main_doit_tsp_merge_locateCycle$scrut_tup2 as _$_modulePrivate_$_main_doit_tsp_merge_locateCycle$scrut_tup2 };
-export { main_doit_tsp_merge$scrut_tup4 as _$_modulePrivate_$_main_doit_tsp_merge$scrut_tup4 };
-export { main_doit_tsp_merge_locateCycle$scrut_tup21 as _$_modulePrivate_$_main_doit_tsp_merge_locateCycle$scrut_tup21 };
-export { main_doit_tsp_merge$scrut_tup41 as _$_modulePrivate_$_main_doit_tsp_merge$scrut_tup41 };
-export { doit_tsp_merge_locateCycle$scrut_tup2 as _$_modulePrivate_$_doit_tsp_merge_locateCycle$scrut_tup2 };
-export { doit_tsp_merge$scrut_tup4 as _$_modulePrivate_$_doit_tsp_merge$scrut_tup4 };
-export { doit_tsp_merge_locateCycle$scrut_tup21 as _$_modulePrivate_$_doit_tsp_merge_locateCycle$scrut_tup21 };
-export { doit_tsp_merge$scrut_tup41 as _$_modulePrivate_$_doit_tsp_merge$scrut_tup41 };
+export { main_tsp$tsp as _$_modulePrivate_$_main_tsp$tsp };
+export { main_tsp_merge_locateCycle$scrut_tup2 as _$_modulePrivate_$_main_tsp_merge_locateCycle$scrut_tup2 };
+export { main_tsp_merge$scrut_tup4 as _$_modulePrivate_$_main_tsp_merge$scrut_tup4 };
+export { main_tsp_merge_locateCycle$scrut_tup21 as _$_modulePrivate_$_main_tsp_merge_locateCycle$scrut_tup21 };
+export { main_tsp_merge$scrut_tup41 as _$_modulePrivate_$_main_tsp_merge$scrut_tup41 };
 export { tsp_merge_locateCycle$scrut_tup2 as _$_modulePrivate_$_tsp_merge_locateCycle$scrut_tup2 };
 export { tsp_merge$scrut_tup4 as _$_modulePrivate_$_tsp_merge$scrut_tup4 };
 export { tsp_merge_locateCycle$scrut_tup21 as _$_modulePrivate_$_tsp_merge_locateCycle$scrut_tup21 };
@@ -1527,21 +1178,13 @@ export { tsp_merge$scrut_tup4$worker1 as _$_modulePrivate_$_tsp_merge$scrut_tup4
 export { tsp_merge_locateCycle$scrut_tup2$worker1 as _$_modulePrivate_$_tsp_merge_locateCycle$scrut_tup2$worker1 };
 export { tsp_merge$scrut_tup2$worker as _$_modulePrivate_$_tsp_merge$scrut_tup2$worker };
 export { tsp_merge$scrut_tup2$worker1 as _$_modulePrivate_$_tsp_merge$scrut_tup2$worker1 };
-export { doit_tsp_merge$scrut_tup2$worker as _$_modulePrivate_$_doit_tsp_merge$scrut_tup2$worker };
-export { doit_tsp_merge$scrut_tup2$worker1 as _$_modulePrivate_$_doit_tsp_merge$scrut_tup2$worker1 };
-export { doit_tsp_merge$scrut_tup4$worker as _$_modulePrivate_$_doit_tsp_merge$scrut_tup4$worker };
-export { doit_tsp_merge_locateCycle$scrut_tup2$worker as _$_modulePrivate_$_doit_tsp_merge_locateCycle$scrut_tup2$worker };
-export { doit_tsp_merge$scrut_tup4$worker1 as _$_modulePrivate_$_doit_tsp_merge$scrut_tup4$worker1 };
-export { doit_tsp_merge_locateCycle$scrut_tup2$worker1 as _$_modulePrivate_$_doit_tsp_merge_locateCycle$scrut_tup2$worker1 };
-export { main_doit_tsp_merge$scrut_tup4$worker as _$_modulePrivate_$_main_doit_tsp_merge$scrut_tup4$worker };
-export { main_doit_tsp_merge_locateCycle$scrut_tup2$worker as _$_modulePrivate_$_main_doit_tsp_merge_locateCycle$scrut_tup2$worker };
-export { main_doit_tsp_merge$scrut_tup4$worker1 as _$_modulePrivate_$_main_doit_tsp_merge$scrut_tup4$worker1 };
-export { main_doit_tsp_merge_locateCycle$scrut_tup2$worker1 as _$_modulePrivate_$_main_doit_tsp_merge_locateCycle$scrut_tup2$worker1 };
-export { main_doit_tsp_merge$scrut_tup2$worker as _$_modulePrivate_$_main_doit_tsp_merge$scrut_tup2$worker };
-export { main_doit_tsp_merge$scrut_tup2$worker1 as _$_modulePrivate_$_main_doit_tsp_merge$scrut_tup2$worker1 };
+export { main_tsp_merge$scrut_tup2$worker as _$_modulePrivate_$_main_tsp_merge$scrut_tup2$worker };
+export { main_tsp_merge$scrut_tup2$worker1 as _$_modulePrivate_$_main_tsp_merge$scrut_tup2$worker1 };
+export { main_tsp_merge$scrut_tup4$worker as _$_modulePrivate_$_main_tsp_merge$scrut_tup4$worker };
+export { main_tsp_merge_locateCycle$scrut_tup2$worker as _$_modulePrivate_$_main_tsp_merge_locateCycle$scrut_tup2$worker };
+export { main_tsp_merge$scrut_tup4$worker1 as _$_modulePrivate_$_main_tsp_merge$scrut_tup4$worker1 };
+export { main_tsp_merge_locateCycle$scrut_tup2$worker1 as _$_modulePrivate_$_main_tsp_merge_locateCycle$scrut_tup2$worker1 };
 export { mkTree_mkTree$mkTree as _$_modulePrivate_$_mkTree_mkTree$mkTree };
 export { mkTree_mkTree$mkTree1 as _$_modulePrivate_$_mkTree_mkTree$mkTree1 };
-export { main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker as _$_modulePrivate_$_main_doit_mkTree_buildTree_build$mkTree_main_doit_mkTree_buildTree_build$dir_X_AXIS$worker };
-export { mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree as _$_modulePrivate_$_mkTree_buildTree_build$mkTree_mkTree_buildTree_build$mkTree };
-export { doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree as _$_modulePrivate_$_doit_mkTree_buildTree_build$mkTree_doit_mkTree_buildTree_build$mkTree };
+export { main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker as _$_modulePrivate_$_main_buildTree_build$mkTree_main_buildTree_build$dir_X_AXIS$worker };
 export default tsp1;

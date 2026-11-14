@@ -172,6 +172,4 @@ private fun nSizes() = 14
 
 private fun loop_np(i)(np) = if i > nSizes() then Nil else test(np) :: loop_np(i + 1)(np * 2)
 
-private fun doit() = loop_np(1)(16)
-
-fun main() = doit()
+fun main() = loop_np(1)(16)

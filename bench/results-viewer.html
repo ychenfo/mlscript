@@ -354,7 +354,8 @@ function fmtBytes(b) {
   return a >= 1e6 ? `${sig(b / 1e6, 3)} MB` : a >= 1e3 ? `${sig(b / 1e3, 3)} KB` : `${b} B`
 }
 const fmtMetric = (m, x) => METRICS[m].kind === "time" ? fmtTime(x) : fmtBytes(x)
-const fmtRatio = x => `${x >= 10 ? x.toFixed(0) : sig(x, 2)}×`
+// two decimals below 10 so that ratios near 1 stay visible (1.04× must not print as 1×); trailing zeros dropped for axis ticks
+const fmtRatio = x => `${+x.toFixed(x >= 100 ? 0 : x >= 10 ? 1 : 2)}×`
 const fmtPlot = (m, x) => state.mode === "ratio" ? fmtRatio(x) : fmtMetric(m, x)
 
 function relErr(m, r) {
@@ -459,7 +460,7 @@ function point(p, v, m) {
 const tipLines = pt => {
   const lines = [[METRICS[pt.m].label, fmtMetric(pt.m, pt.abs)]]
   if (pt.ratio != null && pt.v !== state.baseline) lines.push([`vs ${state.baseline}`, fmtRatio(pt.ratio)])
-  if (pt.relAbs != null) lines.push(["± (tinybench)", `${(pt.relAbs * 100).toFixed(2)}%`])
+  if (pt.relAbs != null) lines.push([pt.m === "lat_med_ns" ? "MAD / median" : "± margin (rme)", `${(pt.relAbs * 100).toFixed(2)}%`])
   lines.push(["form", state.form])
   return lines
 }
@@ -778,8 +779,8 @@ function figureGroups() {
     .filter(g => g.length).map(g => ({ members: g, base: g[0] }))
 }
 const figureHint = () => state.figMode === "groups"
-  ? `Each group is normalized to its first variant (= 1): ${figureGroups().map(g => g.members.map(v => `${v} (${FIG_COLOR_NAMES[variants.indexOf(v) % 8]})`).join(", ")).join(" | ")}. Whiskers are tinybench's ± combined as in ratio mode. "save as PDF" opens the print dialog sized to the figure: pick "Save as PDF" as the destination.`
-  : `Bars are normalized to the baseline (${state.baseline} = 1), whiskers are tinybench's ± combined as in ratio mode. Bar order and colour (reorder with ◀ ▶ on the chips): ${figVariants().map(v => `${v} (${FIG_COLOR_NAMES[variants.indexOf(v) % 8]})`).join(", ")}. "save as PDF" opens the print dialog sized to the figure: pick "Save as PDF" as the destination.`
+  ? `Each group is normalized to its first variant (= 1): ${figureGroups().map(g => g.members.map(v => `${v} (${FIG_COLOR_NAMES[variants.indexOf(v) % 8]})`).join(", ")).join(" | ")}. Whiskers are tinybench's relative margin of error (average) or MAD (median), combined as √(a²+b²) with the baseline's. "save as PDF" opens the print dialog sized to the figure: pick "Save as PDF" as the destination.`
+  : `Bars are normalized to the baseline (${state.baseline} = 1), whiskers are tinybench's relative margin of error (average) or MAD (median), combined as √(a²+b²) with the baseline's. Bar order and colour (reorder with ◀ ▶ on the chips): ${figVariants().map(v => `${v} (${FIG_COLOR_NAMES[variants.indexOf(v) % 8]})`).join(", ")}. "save as PDF" opens the print dialog sized to the figure: pick "Save as PDF" as the destination.`
 
 function figurePanels() {
   const m = state.metric, groups = figureGroups()
@@ -970,7 +971,7 @@ function render() {
     ? "Each cell is the geometric mean over programs of x / y (x = left of the slash, y = the other variant), so below 1× means x is smaller or faster. Counts: programs with ratio below 1−band, within the band, above 1+band. Time pools the three forms (same code) per program before the mean. Sizes are per form: RAW is the compiled module, UNMIN / MIN are terser mangle / compress+mangle, .GZ is gzipped."
     : state.tab === "table"
     ? "Click a column header to sort. Small grey numbers are ratios to the baseline variant."
-    : "Whiskers are tinybench's ± as reported (relative margin for the average, absolute for the median); in ratio mode the two relative errors are combined as √(a²+b²). Hover for exact values."
+    : "Whiskers: for the average, tinybench's relative margin of error of the mean (rme); for the median, its MAD (median absolute deviation), which is the spread of the samples and not a confidence interval. In ratio mode the two relative errors are combined as √(a²+b²). Hover for exact values."
   refreshChips()
   if (state.tab === "presets") renderPresets(); else if (state.tab === "figure") renderFigure(); else if (state.tab === "summary") renderSummary(); else if (state.tab === "bars") renderBars(); else if (state.tab === "scatter") renderScatter(); else renderTable()
 }

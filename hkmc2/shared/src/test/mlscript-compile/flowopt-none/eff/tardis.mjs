@@ -625,28 +625,8 @@ getBw1 = function getBw1(tardis2, r) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
   }
-  static #score(game) {
-    let finalFrameScore, initialFw, scrut, arg$Game$0$, arg$Game$1$, element0$, tmp, tmp1;
-    if (game instanceof tardis.Game.class) {
-      arg$Game$0$ = game.frames;
-      arg$Game$1$ = game.lastFrame;
-      finalFrameScore = tardis.#lframeScore(arg$Game$1$);
-      initialFw = tardis.Cons(lambda10, tardis.Nil);
-      tmp = go(tardis, finalFrameScore, arg$Game$0$);
-      tmp1 = tardis.#initialBw(arg$Game$1$);
-      scrut = tardis.#run(tmp, tmp1, initialFw);
-      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-        element0$ = runtime.Tuple.get(scrut, 0);
-        runtime.Tuple.get(scrut, 1);
-        runtime.Tuple.get(scrut, 2);
-        return tardis.#map(lambda11)(element0$)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static main() {
-    let sampleGame, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
+    let sampleGame, finalFrameScore, initialFw, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, arg$Game$0$, arg$Game$1$, element0$, tmp13, tmp14;
     tmp = tardis.Spare(9);
     tmp1 = tardis.Frame(8, 1);
     tmp2 = tardis.Spare(7);
@@ -661,7 +641,23 @@ getBw1 = function getBw1(tardis2, r) {
     tmp11 = tardis.Cons(tardis.Strike, tmp10);
     tmp12 = tardis.LStrike(10, 10);
     sampleGame = tardis.Game(tmp11, tmp12);
-    return tardis.#score(sampleGame)
+    if (sampleGame instanceof tardis.Game.class) {
+      arg$Game$0$ = sampleGame.frames;
+      arg$Game$1$ = sampleGame.lastFrame;
+      finalFrameScore = tardis.#lframeScore(arg$Game$1$);
+      initialFw = tardis.Cons(lambda10, tardis.Nil);
+      tmp13 = go(tardis, finalFrameScore, arg$Game$0$);
+      tmp14 = tardis.#initialBw(arg$Game$1$);
+      scrut = tardis.#run(tmp13, tmp14, initialFw);
+      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
+        element0$ = runtime.Tuple.get(scrut, 0);
+        runtime.Tuple.get(scrut, 1);
+        runtime.Tuple.get(scrut, 2);
+        return tardis.#map(lambda11)(element0$)
+      }
+      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "tardis"];

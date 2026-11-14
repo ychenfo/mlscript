@@ -2615,21 +2615,17 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
     labelCount.value = n1;
     return kcfa.CALL(n1, inlinedVal15, tmp12)
   }
-  static #doit() {
-    let states, summary, tmp, tmp1, tmp2;
+  static main() {
+    let lambdaLabel, states, summary, monoSummary, tmp, tmp1, tmp2, lambda$here;
+    lambdaLabel = lambda$12(kcfa);
     tmp = kcfa.#stdExample();
     tmp1 = kcfa.#initState(tmp);
     tmp2 = kcfa.Cons(tmp1, kcfa.Nil);
     states = kcfa.#explore(kcfa.Nil, tmp2);
     summary = kcfa.#summarize(states);
-    return kcfa.#monovariantStore(summary)
-  }
-  static main() {
-    let lambdaLabel, tmp, lambda$here;
-    lambdaLabel = lambda$12(kcfa);
-    tmp = kcfa.#doit();
+    monoSummary = kcfa.#monovariantStore(summary);
     lambda$here = lambda$11(kcfa, lambdaLabel);
-    return kcfa.#listMap(lambda$here)(tmp)
+    return kcfa.#listMap(lambda$here)(monoSummary)
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "kcfa"];

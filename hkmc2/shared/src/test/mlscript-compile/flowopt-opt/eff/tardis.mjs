@@ -6,8 +6,26 @@ const pure$accessorSymbol = globalThis.Symbol("pure");
 const getPast$accessorSymbol = globalThis.Symbol("getPast");
 const getFuture$accessorSymbol = globalThis.Symbol("getFuture");
 const bind$accessorSymbol = globalThis.Symbol("bind");
-let getBw1, go, tardis1, lambda, lambda1, lambda2, lambda3, getBw1$, lambda$, lambda$1, lambda$2, lambda$3, main_score_go_lambda$_lambda_score1$_score1$score1, main_score_go_lambda$_lambda_score1$$score1$, main_score_go_lambda$_lambda_throws1$_throws1$throws1, main_score_go_lambda$_lambda_throws1$$throws1$, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, main_score_go_fix_get$_get$get, main_score_go_fix_get$$get$, score_go_fix_get$_get$get, score_go_fix_get$$get$, score_go_fix$fix, score_go$lambda$, score_go$go, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, score_go_lambda$$lambda$, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, score_go_lambda$_lambda_throws1$_throws1$throws1, score_go_lambda$_lambda_throws1$$throws1$, score_go_lambda$_lambda_score1$_score1$score1, score_go_lambda$_lambda_score1$$score1$, score_go_lambda$$lambda$1, go_lambda$_lambda_score1$_score1$score1, go_lambda$_lambda_score1$$score1$, go_lambda$$lambda$, go$lambda$, go_lambda$_lambda_throws1$_throws1$throws1, go_lambda$_lambda_throws1$$throws1$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, go_fix_get$_get$get, go_fix_get$$get$, go_fix$fix, lambda$_lambda$_lambda_score1$_score1$score1, lambda$_lambda$_lambda_score1$$score1$, lambda$_lambda$$lambda$, lambda$$go, lambda$_lambda$_lambda_throws1$_throws1$throws1, lambda$_lambda$_lambda_throws1$$throws1$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, lambda$_fix_get$_get$get, lambda$_fix_get$$get$, lambda$_fix$fix, score_go_bind$bind, score_go_bind$bind1, go_bind$bind, main_score_initialBw$initialBw, lambda$_bind$bind, lambda$_bind$bind$worker, main_score_initialBw$initialBw$worker, go_bind$bind$worker, score_go_bind$bind$worker, score_go_bind$bind$worker1, lambda$_fix$fix$worker, lambda$_lambda$_lambda$lambda$worker, go_fix$fix$worker, go_lambda$_lambda$lambda$worker, score_go_lambda$_lambda$lambda$worker, score_go_lambda$_lambda$lambda$worker1, score_go_fix$fix$worker, main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker, main_score_go$go$worker;
-main_score_go$go$worker = function main_score_go$go$worker(tardis2, finalFrameScore, frames, eta$0$0, eta$0$1) {
+let getBw1, go, tardis1, lambda, lambda1, lambda2, lambda3, getBw1$, lambda$, lambda$1, lambda$2, lambda$3, main_go_fix_get$_get$get, main_go_fix_get$$get$, main_go$go, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, main_go_lambda$_lambda_throws1$_throws1$throws1, main_go_lambda$_lambda_throws1$$throws1$, main_go_lambda$_lambda_score1$_score1$score1, main_go_lambda$_lambda_score1$$score1$, go_lambda$_lambda_score1$_score1$score1, go_lambda$_lambda_score1$$score1$, go_lambda$$lambda$, go$lambda$, go_lambda$_lambda_throws1$_throws1$throws1, go_lambda$_lambda_throws1$$throws1$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, go_fix_get$_get$get, go_fix_get$$get$, go_fix$fix, lambda$_lambda$_lambda_score1$_score1$score1, lambda$_lambda$_lambda_score1$$score1$, lambda$_lambda$$lambda$, lambda$$go, lambda$_lambda$_lambda_throws1$_throws1$throws1, lambda$_lambda$_lambda_throws1$$throws1$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, lambda$_fix_get$_get$get, lambda$_fix_get$$get$, lambda$_fix$fix, go_bind$bind, main_initialBw$initialBw, lambda$_bind$bind, lambda$_bind$bind$worker, main_initialBw$initialBw$worker, go_bind$bind$worker, lambda$_fix$fix$worker, lambda$_lambda$_lambda$lambda$worker, go_fix$fix$worker, go_lambda$_lambda$lambda$worker, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker, main_go$go$worker;
+main_go_fix_get$_get$get = function main_go_fix_get$_get$get(tardis2, r) {
+  let scrut;
+  scrut = r.value;
+  if (scrut instanceof tardis2.Some.class) {
+    return runtime.safeCall(scrut.value(undefined))
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_go_fix_get$$get$ = function main_go_fix_get$$get$(tardis2, r) {
+  return () => {
+    return main_go_fix_get$_get$get(tardis2, r)
+  }
+};
+main_go$go = function main_go$go(tardis2, finalFrameScore, frames) {
+  return (eta$0$0, eta$0$1) => {
+    return main_go$go$worker(tardis2, finalFrameScore, frames, eta$0$0, eta$0$1)
+  }
+};
+main_go$go$worker = function main_go$go$worker(tardis2, finalFrameScore, frames, eta$0$0, eta$0$1) {
   let arg$Cons$0$, arg$Cons$1$;
   if (frames instanceof tardis2.Nil.class) {
     let m, r, scrut, element1$, element0$, element1$1, element0$1, tmp, getBw1$here;
@@ -51,9 +69,9 @@ main_score_go$go$worker = function main_score_go$go$worker(tardis2, finalFrameSc
     arg$Cons$1$ = frames.tail;
     r = new tardis1.Ref.class(tardis1.None);
     r1 = new tardis1.Ref.class(tardis1.None);
-    p = main_score_go_fix_get$$get$(tardis1, r1);
+    p = main_go_fix_get$$get$(tardis1, r1);
     r2 = new tardis1.Ref.class(tardis1.None);
-    bw = main_score_go_lambda$_lambda_throws1$$throws1$(p);
+    bw = main_go_lambda$_lambda_throws1$$throws1$(p);
     inlinedVal2 = globalThis.Object.freeze([
       runtime.Unit,
       bw,
@@ -72,7 +90,7 @@ main_score_go$go$worker = function main_score_go$go$worker(tardis2, finalFrameSc
         element0$3 = runtime.Tuple.get(scrut, 0);
         element1$5 = runtime.Tuple.get(scrut, 1);
         tardis3 = tardis2;
-        score1 = main_score_go_lambda$_lambda_score1$$score1$(p);
+        score1 = main_go_lambda$_lambda_score1$$score1$(p);
         eta$0$01 = getBw1$(tardis1, r);
         if (element0$3 instanceof tardis3.Cons.class) {
           let r4, element2$5, element1$7, element2$6, element1$8, element0$5, tmp5, bw1, inlinedVal5;
@@ -89,7 +107,7 @@ main_score_go$go$worker = function main_score_go$go$worker(tardis2, finalFrameSc
             let inlinedVal6, lambda$here;
             element1$7 = runtime.Tuple.get(inlinedVal5, 1);
             element2$5 = runtime.Tuple.get(inlinedVal5, 2);
-            lambda$here = main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, arg$Cons$0$, arg$Cons$0$1);
+            lambda$here = main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, arg$Cons$0$, arg$Cons$0$1);
             inlinedVal6 = tardis2[bind$accessorSymbol](tardis2[getFuture$accessorSymbol])(lambda$here)(eta$0$01, element2$5);
             if (runtime.Tuple.isArrayLike(inlinedVal6) && inlinedVal6.length === 3) {
               element0$5 = runtime.Tuple.get(inlinedVal6, 0);
@@ -139,7 +157,7 @@ main_score_go$go$worker = function main_score_go$go$worker(tardis2, finalFrameSc
                       let inlinedVal7;
                       element1$ = runtime.Tuple.get(inlinedVal, 1);
                       element2$ = runtime.Tuple.get(inlinedVal, 2);
-                      inlinedVal7 = main_score_go$go$worker(tardis2, finalFrameScore, arg$Cons$1$, eta$0$0, element2$);
+                      inlinedVal7 = main_go$go$worker(tardis2, finalFrameScore, arg$Cons$1$, eta$0$0, element2$);
                       if (runtime.Tuple.isArrayLike(inlinedVal7) && inlinedVal7.length === 3) {
                         element0$ = runtime.Tuple.get(inlinedVal7, 0);
                         element1$1 = runtime.Tuple.get(inlinedVal7, 1);
@@ -173,82 +191,28 @@ main_score_go$go$worker = function main_score_go$go$worker(tardis2, finalFrameSc
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_score_go_lambda$_lambda_score1$_score1$score1 = function main_score_go_lambda$_lambda_score1$_score1$score1(p) {
-  let tmp, element0$;
-  tmp = runtime.safeCall(p());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    element0$ = runtime.Tuple.get(tmp, 0);
-    return runtime.safeCall(element0$())
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, secondThrow, firstThrow) {
+  let tmp, lambda$here;
+  tmp = globalThis.Object.freeze([
+    firstThrow,
+    secondThrow
+  ]);
+  lambda$here = lambda$2(score, secondThrow, firstThrow);
+  return globalThis.Object.freeze([
+    lambda$here,
+    tmp
+  ])
 };
-main_score_go_lambda$_lambda_score1$$score1$ = function main_score_go_lambda$_lambda_score1$$score1$(p) {
-  return () => {
-    return main_score_go_lambda$_lambda_score1$_score1$score1(p)
-  }
-};
-main_score_go_lambda$_lambda_throws1$_throws1$throws1 = function main_score_go_lambda$_lambda_throws1$_throws1$throws1(p) {
-  let tmp;
-  tmp = runtime.safeCall(p());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    return runtime.Tuple.get(tmp, 1)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_score_go_lambda$_lambda_throws1$$throws1$ = function main_score_go_lambda$_lambda_throws1$$throws1$(p) {
-  return () => {
-    return main_score_go_lambda$_lambda_throws1$_throws1$throws1(p)
-  }
-};
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, element1$, element0$;
-  tmp = runtime.safeCall(score());
-  tmp1 = tmp + 10;
-  tmp2 = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 2) {
-    element0$ = runtime.Tuple.get(tmp2, 0);
-    tmp3 = tmp1 + element0$;
-    tmp4 = runtime.safeCall(nextThrows());
-    if (runtime.Tuple.isArrayLike(tmp4) && tmp4.length === 2) {
-      element1$ = runtime.Tuple.get(tmp4, 1);
-      return tmp3 + element1$
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
-  return () => {
-    return main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows)
-  }
-};
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, lambda$here, element0$;
-  tmp = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    element0$ = runtime.Tuple.get(tmp, 0);
-    tmp1 = globalThis.Object.freeze([
-      10,
-      element0$
-    ]);
-    lambda$here = main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows);
-    return globalThis.Object.freeze([
-      lambda$here,
-      tmp1
-    ])
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, secondThrow, firstThrow) {
   return (_) => {
-    return main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows)
+    return main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, secondThrow, firstThrow)
   }
 };
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker(tardis2, f, score, nextThrows, eta$0$0, eta$0$1) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker(tardis2, f, score, nextThrows, eta$0$0, eta$0$1) {
   let arg$Frame$0$, arg$Frame$1$, arg$Spare$0$;
   if (f instanceof tardis2.Strike.class) {
     let a;
-    a = main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows);
+    a = main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2(score, nextThrows);
     return globalThis.Object.freeze([
       a,
       eta$0$0,
@@ -257,7 +221,7 @@ main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambd
   } else if (f instanceof tardis2.Spare.class) {
     let a;
     arg$Spare$0$ = f.firstThrow;
-    a = main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1(score, nextThrows, arg$Spare$0$);
+    a = main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1(score, nextThrows, arg$Spare$0$);
     return globalThis.Object.freeze([
       a,
       eta$0$0,
@@ -267,7 +231,7 @@ main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambd
     let a;
     arg$Frame$0$ = f.firstThrow;
     arg$Frame$1$ = f.secondThrow;
-    a = main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2(score, arg$Frame$1$, arg$Frame$0$);
+    a = main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, arg$Frame$1$, arg$Frame$0$);
     return globalThis.Object.freeze([
       a,
       eta$0$0,
@@ -276,14 +240,14 @@ main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambd
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, f, score) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, f, score) {
   return (nextThrows) => {
     return (eta$0$0, eta$0$1) => {
-      return main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker(tardis2, f, score, nextThrows, eta$0$0, eta$0$1)
+      return main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker(tardis2, f, score, nextThrows, eta$0$0, eta$0$1)
     }
   }
 };
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
   let tmp, tmp1, tmp2, element0$;
   tmp = runtime.safeCall(score());
   tmp1 = tmp + 10;
@@ -294,286 +258,30 @@ main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambd
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
   return () => {
-    return main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows)
+    return main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows)
   }
 };
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows, firstThrow) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows, firstThrow) {
   let tmp, tmp1, lambda$here;
   tmp = 10 - firstThrow;
   tmp1 = globalThis.Object.freeze([
     firstThrow,
     tmp
   ]);
-  lambda$here = main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1(score, nextThrows);
+  lambda$here = main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows);
   return globalThis.Object.freeze([
     lambda$here,
     tmp1
   ])
 };
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows, firstThrow) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows, firstThrow) {
   return (_) => {
-    return main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows, firstThrow)
+    return main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows, firstThrow)
   }
 };
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, secondThrow, firstThrow) {
-  let tmp, lambda$here;
-  tmp = globalThis.Object.freeze([
-    firstThrow,
-    secondThrow
-  ]);
-  lambda$here = lambda$2(score, secondThrow, firstThrow);
-  return globalThis.Object.freeze([
-    lambda$here,
-    tmp
-  ])
-};
-main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 = function main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, secondThrow, firstThrow) {
-  return (_) => {
-    return main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2(score, secondThrow, firstThrow)
-  }
-};
-main_score_go_fix_get$_get$get = function main_score_go_fix_get$_get$get(tardis2, r) {
-  let scrut;
-  scrut = r.value;
-  if (scrut instanceof tardis2.Some.class) {
-    return runtime.safeCall(scrut.value(undefined))
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_score_go_fix_get$$get$ = function main_score_go_fix_get$$get$(tardis2, r) {
-  return () => {
-    return main_score_go_fix_get$_get$get(tardis2, r)
-  }
-};
-score_go_fix_get$_get$get = function score_go_fix_get$_get$get(tardis2, r) {
-  let scrut;
-  scrut = r.value;
-  if (scrut instanceof tardis2.Some.class) {
-    return runtime.safeCall(scrut.value(undefined))
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go_fix_get$$get$ = function score_go_fix_get$$get$(tardis2, r) {
-  return () => {
-    return score_go_fix_get$_get$get(tardis2, r)
-  }
-};
-score_go_fix$fix = function score_go_fix$fix(f) {
-  return (bw, fw) => {
-    return score_go_fix$fix$worker(f, bw, fw)
-  }
-};
-score_go_fix$fix$worker = function score_go_fix$fix$worker(f, bw, fw) {
-  let r, scrut, element2$, element1$, element0$, callPrefix, tmp, get$here;
-  r = new tardis1.Ref.class(tardis1.None);
-  get$here = score_go_fix_get$$get$(tardis1, r);
-  callPrefix = runtime.safeCall(f(get$here));
-  scrut = runtime.safeCall(callPrefix(bw, fw));
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-    element0$ = runtime.Tuple.get(scrut, 0);
-    element1$ = runtime.Tuple.get(scrut, 1);
-    element2$ = runtime.Tuple.get(scrut, 2);
-    tmp = tardis1.Some(element0$);
-    r.value = tmp;
-    return globalThis.Object.freeze([
-      element0$,
-      element1$,
-      element2$
-    ])
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go$go = function score_go$go(tardis2, finalFrameScore, frames) {
-  let arg$Cons$0$, arg$Cons$1$, tmp, lambda$here, lambda$here1, lambda$here2;
-  if (frames instanceof tardis2.Nil.class) {
-    lambda$here = score_go_lambda$$lambda$1(tardis2, finalFrameScore);
-    return score_go_bind$bind(tardis2[getPast$accessorSymbol])(lambda$here)
-  } else if (frames instanceof tardis2.Cons.class) {
-    arg$Cons$0$ = frames.head;
-    arg$Cons$1$ = frames.tail;
-    lambda$here1 = score_go_lambda$$lambda$(tardis2, arg$Cons$0$);
-    tmp = score_go_fix$fix(lambda$here1);
-    lambda$here2 = score_go$lambda$(tardis2, finalFrameScore, arg$Cons$1$);
-    return score_go_bind$bind1(tmp)(lambda$here2)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go$lambda$ = function score_go$lambda$(tardis2, finalFrameScore, fs) {
-  return () => {
-    return score_go$go(tardis2, finalFrameScore, fs)
-  }
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, secondThrow, firstThrow) {
-  let tmp, lambda$here;
-  tmp = globalThis.Object.freeze([
-    firstThrow,
-    secondThrow
-  ]);
-  lambda$here = lambda$2(score, secondThrow, firstThrow);
-  return globalThis.Object.freeze([
-    lambda$here,
-    tmp
-  ])
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, secondThrow, firstThrow) {
-  return (_) => {
-    return score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, secondThrow, firstThrow)
-  }
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda(tardis2, f, score, nextThrows) {
-  let arg$Frame$0$, arg$Frame$1$, arg$Spare$0$, lambda$here, lambda$here1, lambda$here2;
-  if (f instanceof tardis2.Strike.class) {
-    lambda$here = score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2(score, nextThrows);
-    return tardis2[pure$accessorSymbol](lambda$here)
-  } else if (f instanceof tardis2.Spare.class) {
-    arg$Spare$0$ = f.firstThrow;
-    lambda$here1 = score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1(score, nextThrows, arg$Spare$0$);
-    return tardis2[pure$accessorSymbol](lambda$here1)
-  } else if (f instanceof tardis2.Frame.class) {
-    arg$Frame$0$ = f.firstThrow;
-    arg$Frame$1$ = f.secondThrow;
-    lambda$here2 = score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, arg$Frame$1$, arg$Frame$0$);
-    return tardis2[pure$accessorSymbol](lambda$here2)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, f, score) {
-  return (nextThrows) => {
-    return score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda(tardis2, f, score, nextThrows)
-  }
-};
-score_go_lambda$_lambda$lambda$worker1 = function score_go_lambda$_lambda$lambda$worker(tardis2, f, p, eta$0$0, eta$0$1) {
-  let r, element2$, element1$, element2$1, element1$1, element0$, tmp, bw, inlinedVal;
-  r = new tardis1.Ref.class(tardis1.None);
-  bw = score_go_lambda$_lambda_throws1$$throws1$(p);
-  inlinedVal = globalThis.Object.freeze([
-    runtime.Unit,
-    bw,
-    eta$0$1
-  ]);
-  if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 3) {
-    let m, inlinedVal1, r1, scrut, element1$2, element0$1, element2$2, element1$3, element0$2, tmp1, getBw1$here;
-    element1$ = runtime.Tuple.get(inlinedVal, 1);
-    element2$ = runtime.Tuple.get(inlinedVal, 2);
-    m = tardis2[getPast$accessorSymbol];
-    r1 = new tardis1.Ref.class(tardis1.None);
-    getBw1$here = getBw1$(tardis1, r1);
-    scrut = runtime.safeCall(m(getBw1$here, element2$));
-    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-      let tardis3, score1, inlinedVal2, arg$Cons$0$, tmp2;
-      element0$1 = runtime.Tuple.get(scrut, 0);
-      element1$2 = runtime.Tuple.get(scrut, 1);
-      tardis3 = tardis2;
-      score1 = score_go_lambda$_lambda_score1$$score1$(p);
-      if (element0$1 instanceof tardis3.Cons.class) {
-        let r2, element2$3, element1$4, element2$4, element1$5, element0$3, tmp3, bw1, inlinedVal3;
-        arg$Cons$0$ = element0$1.head;
-        tmp2 = tardis2.Cons(score1, element0$1);
-        r2 = new tardis1.Ref.class(tardis1.None);
-        bw1 = getBw1$(tardis1, r2);
-        inlinedVal3 = globalThis.Object.freeze([
-          runtime.Unit,
-          bw1,
-          tmp2
-        ]);
-        if (runtime.Tuple.isArrayLike(inlinedVal3) && inlinedVal3.length === 3) {
-          let inlinedVal4, lambda$here;
-          element1$4 = runtime.Tuple.get(inlinedVal3, 1);
-          element2$3 = runtime.Tuple.get(inlinedVal3, 2);
-          lambda$here = score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, f, arg$Cons$0$);
-          inlinedVal4 = tardis2[bind$accessorSymbol](tardis2[getFuture$accessorSymbol])(lambda$here)(eta$0$0, element2$3);
-          if (runtime.Tuple.isArrayLike(inlinedVal4) && inlinedVal4.length === 3) {
-            element0$3 = runtime.Tuple.get(inlinedVal4, 0);
-            element1$5 = runtime.Tuple.get(inlinedVal4, 1);
-            element2$4 = runtime.Tuple.get(inlinedVal4, 2);
-            tmp3 = tardis1.Some(element1$5);
-            r2.value = tmp3;
-            inlinedVal2 = globalThis.Object.freeze([
-              element0$3,
-              element1$4,
-              element2$4
-            ]);
-            if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 3) {
-              element0$2 = runtime.Tuple.get(inlinedVal2, 0);
-              element1$3 = runtime.Tuple.get(inlinedVal2, 1);
-              element2$2 = runtime.Tuple.get(inlinedVal2, 2);
-              tmp1 = tardis1.Some(element1$3);
-              r1.value = tmp1;
-              inlinedVal1 = globalThis.Object.freeze([
-                element0$2,
-                element1$2,
-                element2$2
-              ]);
-              if (runtime.Tuple.isArrayLike(inlinedVal1) && inlinedVal1.length === 3) {
-                element0$ = runtime.Tuple.get(inlinedVal1, 0);
-                element1$1 = runtime.Tuple.get(inlinedVal1, 1);
-                element2$1 = runtime.Tuple.get(inlinedVal1, 2);
-                tmp = tardis1.Some(element1$1);
-                r.value = tmp;
-                return globalThis.Object.freeze([
-                  element0$,
-                  element1$,
-                  element2$1
-                ])
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go_lambda$$lambda$ = function score_go_lambda$$lambda$(tardis2, f) {
-  return (p) => {
-    return (eta$0$0, eta$0$1) => {
-      return score_go_lambda$_lambda$lambda$worker1(tardis2, f, p, eta$0$0, eta$0$1)
-    }
-  }
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, tmp2, element0$;
-  tmp = runtime.safeCall(score());
-  tmp1 = tmp + 10;
-  tmp2 = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 2) {
-    element0$ = runtime.Tuple.get(tmp2, 0);
-    return tmp1 + element0$
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
-  return () => {
-    return score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows)
-  }
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows, firstThrow) {
-  let tmp, tmp1, lambda$here;
-  tmp = 10 - firstThrow;
-  tmp1 = globalThis.Object.freeze([
-    firstThrow,
-    tmp
-  ]);
-  lambda$here = score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows);
-  return globalThis.Object.freeze([
-    lambda$here,
-    tmp1
-  ])
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows, firstThrow) {
-  return (_) => {
-    return score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows, firstThrow)
-  }
-};
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
   let tmp, tmp1, tmp2, tmp3, tmp4, element1$, element0$;
   tmp = runtime.safeCall(score());
   tmp1 = tmp + 10;
@@ -590,12 +298,12 @@ score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_la
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
   return () => {
-    return score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows)
+    return main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows)
   }
 };
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
   let tmp, tmp1, lambda$here, element0$;
   tmp = runtime.safeCall(nextThrows());
   if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
@@ -604,7 +312,7 @@ score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_la
       10,
       element0$
     ]);
-    lambda$here = score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1(score, nextThrows);
+    lambda$here = main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1(score, nextThrows);
     return globalThis.Object.freeze([
       lambda$here,
       tmp1
@@ -612,12 +320,12 @@ score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_la
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 = function score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
+main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 = function main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
   return (_) => {
-    return score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2(score, nextThrows)
+    return main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2(score, nextThrows)
   }
 };
-score_go_lambda$_lambda_throws1$_throws1$throws1 = function score_go_lambda$_lambda_throws1$_throws1$throws1(p) {
+main_go_lambda$_lambda_throws1$_throws1$throws1 = function main_go_lambda$_lambda_throws1$_throws1$throws1(p) {
   let tmp;
   tmp = runtime.safeCall(p());
   if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
@@ -625,12 +333,12 @@ score_go_lambda$_lambda_throws1$_throws1$throws1 = function score_go_lambda$_lam
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-score_go_lambda$_lambda_throws1$$throws1$ = function score_go_lambda$_lambda_throws1$$throws1$(p) {
+main_go_lambda$_lambda_throws1$$throws1$ = function main_go_lambda$_lambda_throws1$$throws1$(p) {
   return () => {
-    return score_go_lambda$_lambda_throws1$_throws1$throws1(p)
+    return main_go_lambda$_lambda_throws1$_throws1$throws1(p)
   }
 };
-score_go_lambda$_lambda_score1$_score1$score1 = function score_go_lambda$_lambda_score1$_score1$score1(p) {
+main_go_lambda$_lambda_score1$_score1$score1 = function main_go_lambda$_lambda_score1$_score1$score1(p) {
   let tmp, element0$;
   tmp = runtime.safeCall(p());
   if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
@@ -639,30 +347,9 @@ score_go_lambda$_lambda_score1$_score1$score1 = function score_go_lambda$_lambda
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-score_go_lambda$_lambda_score1$$score1$ = function score_go_lambda$_lambda_score1$$score1$(p) {
+main_go_lambda$_lambda_score1$$score1$ = function main_go_lambda$_lambda_score1$$score1$(p) {
   return () => {
-    return score_go_lambda$_lambda_score1$_score1$score1(p)
-  }
-};
-score_go_lambda$_lambda$lambda$worker = function score_go_lambda$_lambda$lambda$worker(tardis2, finalFrameScore, scores, eta$0$0) {
-  let arg$Cons$0$, tmp, lambda$here;
-  if (scores instanceof tardis2.Cons.class) {
-    arg$Cons$0$ = scores.head;
-    lambda$here = lambda$3(finalFrameScore, arg$Cons$0$);
-    tmp = tardis2.Cons(lambda$here, scores);
-    return globalThis.Object.freeze([
-      tmp,
-      eta$0$0,
-      undefined
-    ])
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go_lambda$$lambda$1 = function score_go_lambda$$lambda$(tardis2, finalFrameScore) {
-  return (scores) => {
-    return (eta$0$0) => {
-      return score_go_lambda$_lambda$lambda$worker(tardis2, finalFrameScore, scores, eta$0$0)
-    }
+    return main_go_lambda$_lambda_score1$_score1$score1(p)
   }
 };
 go_lambda$_lambda_score1$_score1$score1 = function go_lambda$_lambda_score1$_score1$score1(p) {
@@ -1247,70 +934,6 @@ lambda$_fix$fix$worker = function lambda$_fix$fix$worker(f, bw, fw) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-score_go_bind$bind = function score_go_bind$bind(m) {
-  return (f) => {
-    return (bw, fw) => {
-      return score_go_bind$bind$worker1(m, f, bw, fw)
-    }
-  }
-};
-score_go_bind$bind$worker1 = function score_go_bind$bind$worker(m, f, bw, fw) {
-  let r, scrut, scrut1, element1$, element0$, element1$1, element0$1, callPrefix, tmp, getBw1$here;
-  r = new tardis1.Ref.class(tardis1.None);
-  getBw1$here = getBw1$(tardis1, r);
-  scrut = runtime.safeCall(m(getBw1$here, fw));
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-    element0$ = runtime.Tuple.get(scrut, 0);
-    element1$ = runtime.Tuple.get(scrut, 1);
-    callPrefix = runtime.safeCall(f(element0$));
-    scrut1 = runtime.safeCall(callPrefix(bw));
-    if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 3) {
-      element0$1 = runtime.Tuple.get(scrut1, 0);
-      element1$1 = runtime.Tuple.get(scrut1, 1);
-      tmp = tardis1.Some(element1$1);
-      r.value = tmp;
-      return globalThis.Object.freeze([
-        element0$1,
-        element1$,
-        undefined
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go_bind$bind1 = function score_go_bind$bind(m) {
-  return (f) => {
-    return (bw, fw) => {
-      return score_go_bind$bind$worker(m, f, bw, fw)
-    }
-  }
-};
-score_go_bind$bind$worker = function score_go_bind$bind$worker(m, f, bw, fw) {
-  let r, scrut, scrut1, element2$, element1$, element1$1, element0$, callPrefix, tmp, getBw1$here;
-  r = new tardis1.Ref.class(tardis1.None);
-  getBw1$here = getBw1$(tardis1, r);
-  scrut = runtime.safeCall(m(getBw1$here, fw));
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-    element1$ = runtime.Tuple.get(scrut, 1);
-    element2$ = runtime.Tuple.get(scrut, 2);
-    callPrefix = runtime.safeCall(f());
-    scrut1 = runtime.safeCall(callPrefix(bw, element2$));
-    if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 3) {
-      element0$ = runtime.Tuple.get(scrut1, 0);
-      element1$1 = runtime.Tuple.get(scrut1, 1);
-      tmp = tardis1.Some(element1$1);
-      r.value = tmp;
-      return globalThis.Object.freeze([
-        element0$,
-        element1$,
-        undefined
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
 go_bind$bind = function go_bind$bind(m) {
   return (f) => {
     return (bw, fw) => {
@@ -1344,12 +967,12 @@ go_bind$bind$worker = function go_bind$bind$worker(m, f, bw, fw) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_score_initialBw$initialBw = function main_score_initialBw$initialBw(lastFrame) {
+main_initialBw$initialBw = function main_initialBw$initialBw(lastFrame) {
   return () => {
-    return main_score_initialBw$initialBw$worker(lastFrame)
+    return main_initialBw$initialBw$worker(lastFrame)
   }
 };
-main_score_initialBw$initialBw$worker = function main_score_initialBw$initialBw$worker(lastFrame) {
+main_initialBw$initialBw$worker = function main_initialBw$initialBw$worker(lastFrame) {
   let arg$LStrike$0$;
   if (lastFrame instanceof tardis1.LStrike.class) {
     arg$LStrike$0$ = lastFrame.bonus1;
@@ -1653,6 +1276,14 @@ getBw1 = function getBw1(tardis2, r) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
+  static #map(f) {
+    return (l) => {
+      return tardis.#map$tailrec(f, l)
+    }
+  }
+  static #run(m, bw, fw) {
+    return runtime.safeCall(m(bw, fw))
+  }
   static #pure(a) {
     return (bw, fw) => {
       return globalThis.Object.freeze([
@@ -1708,7 +1339,7 @@ getBw1 = function getBw1(tardis2, r) {
     }
   }
   static main() {
-    let sampleGame, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, initialFw, arg$Game$0$, arg$Game$1$, element0$;
+    let sampleGame, initialFw, scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, arg$Game$0$, arg$Game$1$, element0$, tmp13, tmp14;
     tmp = tardis.Spare(9);
     tmp1 = tardis.Frame(8, 1);
     tmp2 = tardis.Spare(7);
@@ -1723,22 +1354,22 @@ getBw1 = function getBw1(tardis2, r) {
     tmp11 = tardis.Cons(tardis.Strike, tmp10);
     tmp12 = tardis.LStrike(10, 10);
     sampleGame = tardis.Game(tmp11, tmp12);
-    if (sampleGame instanceof tardis1.Game.class) {
-      let inlinedVal, arg$LStrike$0$, arg$LStrike$1$, tmp13;
+    if (sampleGame instanceof tardis.Game.class) {
+      let inlinedVal, arg$LStrike$0$, arg$LStrike$1$, tmp15;
       arg$Game$0$ = sampleGame.frames;
       arg$Game$1$ = sampleGame.lastFrame;
       if (arg$Game$1$ instanceof tardis1.LStrike.class) {
-        let eta$0$0, inlinedVal1;
         arg$LStrike$0$ = arg$Game$1$.bonus1;
         arg$LStrike$1$ = arg$Game$1$.bonus2;
-        tmp13 = 10 + arg$LStrike$0$;
-        inlinedVal = tmp13 + arg$LStrike$1$;
-        initialFw = tardis1.Cons(lambda2, tardis1.Nil);
-        eta$0$0 = main_score_initialBw$initialBw(arg$Game$1$);
-        inlinedVal1 = main_score_go$go$worker(tardis1, inlinedVal, arg$Game$0$, eta$0$0, initialFw);
-        if (runtime.Tuple.isArrayLike(inlinedVal1) && inlinedVal1.length === 3) {
-          element0$ = runtime.Tuple.get(inlinedVal1, 0);
-          return tardis1.#map$tailrec(lambda3, element0$)
+        tmp15 = 10 + arg$LStrike$0$;
+        inlinedVal = tmp15 + arg$LStrike$1$;
+        initialFw = tardis.Cons(lambda2, tardis.Nil);
+        tmp13 = main_go$go(tardis, inlinedVal, arg$Game$0$);
+        tmp14 = main_initialBw$initialBw(arg$Game$1$);
+        scrut = tardis.#run(tmp13, tmp14, initialFw);
+        if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
+          element0$ = runtime.Tuple.get(scrut, 0);
+          return tardis.#map(lambda3)(element0$)
         }
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
@@ -1761,46 +1392,24 @@ export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };
 export { lambda$3 as _$_modulePrivate_$_lambda$3 };
-export { main_score_go_lambda$_lambda_score1$_score1$score1 as _$_modulePrivate_$_main_score_go_lambda$_lambda_score1$_score1$score1 };
-export { main_score_go_lambda$_lambda_score1$$score1$ as _$_modulePrivate_$_main_score_go_lambda$_lambda_score1$$score1$ };
-export { main_score_go_lambda$_lambda_throws1$_throws1$throws1 as _$_modulePrivate_$_main_score_go_lambda$_lambda_throws1$_throws1$throws1 };
-export { main_score_go_lambda$_lambda_throws1$$throws1$ as _$_modulePrivate_$_main_score_go_lambda$_lambda_throws1$$throws1$ };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 };
-export { main_score_go_fix_get$_get$get as _$_modulePrivate_$_main_score_go_fix_get$_get$get };
-export { main_score_go_fix_get$$get$ as _$_modulePrivate_$_main_score_go_fix_get$$get$ };
-export { score_go_fix_get$_get$get as _$_modulePrivate_$_score_go_fix_get$_get$get };
-export { score_go_fix_get$$get$ as _$_modulePrivate_$_score_go_fix_get$$get$ };
-export { score_go_fix$fix as _$_modulePrivate_$_score_go_fix$fix };
-export { score_go$lambda$ as _$_modulePrivate_$_score_go$lambda$ };
-export { score_go$go as _$_modulePrivate_$_score_go$go };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ };
-export { score_go_lambda$$lambda$ as _$_modulePrivate_$_score_go_lambda$$lambda$ };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 };
-export { score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 as _$_modulePrivate_$_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 };
-export { score_go_lambda$_lambda_throws1$_throws1$throws1 as _$_modulePrivate_$_score_go_lambda$_lambda_throws1$_throws1$throws1 };
-export { score_go_lambda$_lambda_throws1$$throws1$ as _$_modulePrivate_$_score_go_lambda$_lambda_throws1$$throws1$ };
-export { score_go_lambda$_lambda_score1$_score1$score1 as _$_modulePrivate_$_score_go_lambda$_lambda_score1$_score1$score1 };
-export { score_go_lambda$_lambda_score1$$score1$ as _$_modulePrivate_$_score_go_lambda$_lambda_score1$$score1$ };
-export { score_go_lambda$$lambda$1 as _$_modulePrivate_$_score_go_lambda$$lambda$1 };
+export { main_go_fix_get$_get$get as _$_modulePrivate_$_main_go_fix_get$_get$get };
+export { main_go_fix_get$$get$ as _$_modulePrivate_$_main_go_fix_get$$get$ };
+export { main_go$go as _$_modulePrivate_$_main_go$go };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 };
+export { main_go_lambda$_lambda_throws1$_throws1$throws1 as _$_modulePrivate_$_main_go_lambda$_lambda_throws1$_throws1$throws1 };
+export { main_go_lambda$_lambda_throws1$$throws1$ as _$_modulePrivate_$_main_go_lambda$_lambda_throws1$$throws1$ };
+export { main_go_lambda$_lambda_score1$_score1$score1 as _$_modulePrivate_$_main_go_lambda$_lambda_score1$_score1$score1 };
+export { main_go_lambda$_lambda_score1$$score1$ as _$_modulePrivate_$_main_go_lambda$_lambda_score1$$score1$ };
 export { go_lambda$_lambda_score1$_score1$score1 as _$_modulePrivate_$_go_lambda$_lambda_score1$_score1$score1 };
 export { go_lambda$_lambda_score1$$score1$ as _$_modulePrivate_$_go_lambda$_lambda_score1$$score1$ };
 export { go_lambda$$lambda$ as _$_modulePrivate_$_go_lambda$$lambda$ };
@@ -1843,23 +1452,16 @@ export { lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_la
 export { lambda$_fix_get$_get$get as _$_modulePrivate_$_lambda$_fix_get$_get$get };
 export { lambda$_fix_get$$get$ as _$_modulePrivate_$_lambda$_fix_get$$get$ };
 export { lambda$_fix$fix as _$_modulePrivate_$_lambda$_fix$fix };
-export { score_go_bind$bind as _$_modulePrivate_$_score_go_bind$bind };
-export { score_go_bind$bind1 as _$_modulePrivate_$_score_go_bind$bind1 };
 export { go_bind$bind as _$_modulePrivate_$_go_bind$bind };
-export { main_score_initialBw$initialBw as _$_modulePrivate_$_main_score_initialBw$initialBw };
+export { main_initialBw$initialBw as _$_modulePrivate_$_main_initialBw$initialBw };
 export { lambda$_bind$bind as _$_modulePrivate_$_lambda$_bind$bind };
 export { lambda$_bind$bind$worker as _$_modulePrivate_$_lambda$_bind$bind$worker };
-export { main_score_initialBw$initialBw$worker as _$_modulePrivate_$_main_score_initialBw$initialBw$worker };
+export { main_initialBw$initialBw$worker as _$_modulePrivate_$_main_initialBw$initialBw$worker };
 export { go_bind$bind$worker as _$_modulePrivate_$_go_bind$bind$worker };
-export { score_go_bind$bind$worker as _$_modulePrivate_$_score_go_bind$bind$worker };
-export { score_go_bind$bind$worker1 as _$_modulePrivate_$_score_go_bind$bind$worker1 };
 export { lambda$_fix$fix$worker as _$_modulePrivate_$_lambda$_fix$fix$worker };
 export { lambda$_lambda$_lambda$lambda$worker as _$_modulePrivate_$_lambda$_lambda$_lambda$lambda$worker };
 export { go_fix$fix$worker as _$_modulePrivate_$_go_fix$fix$worker };
 export { go_lambda$_lambda$lambda$worker as _$_modulePrivate_$_go_lambda$_lambda$lambda$worker };
-export { score_go_lambda$_lambda$lambda$worker as _$_modulePrivate_$_score_go_lambda$_lambda$lambda$worker };
-export { score_go_lambda$_lambda$lambda$worker1 as _$_modulePrivate_$_score_go_lambda$_lambda$lambda$worker1 };
-export { score_go_fix$fix$worker as _$_modulePrivate_$_score_go_fix$fix$worker };
-export { main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker as _$_modulePrivate_$_main_score_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker };
-export { main_score_go$go$worker as _$_modulePrivate_$_main_score_go$go$worker };
+export { main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker as _$_modulePrivate_$_main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker };
+export { main_go$go$worker as _$_modulePrivate_$_main_go$go$worker };
 export default tardis1;

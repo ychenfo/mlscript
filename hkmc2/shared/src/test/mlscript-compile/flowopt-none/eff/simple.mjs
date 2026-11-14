@@ -5,8 +5,14 @@ import Predef from "./../../Predef.mjs";
 const rev$accessorSymbol = globalThis.Symbol("rev");
 const for_$accessorSymbol = globalThis.Symbol("for_");
 const from_$accessorSymbol = globalThis.Symbol("from_");
+const pow$accessorSymbol = globalThis.Symbol("pow");
+const sub2$accessorSymbol = globalThis.Symbol("sub2");
 const update2$accessorSymbol = globalThis.Symbol("update2");
 const sub1$accessorSymbol = globalThis.Symbol("sub1");
+const north$accessorSymbol = globalThis.Symbol("north");
+const south$accessorSymbol = globalThis.Symbol("south");
+const east$accessorSymbol = globalThis.Symbol("east");
+const west$accessorSymbol = globalThis.Symbol("west");
 const northeast$accessorSymbol = globalThis.Symbol("northeast");
 const southeast$accessorSymbol = globalThis.Symbol("southeast");
 const southwest$accessorSymbol = globalThis.Symbol("southwest");
@@ -38,47 +44,47 @@ interior_position$1 = function interior_position$(simple2) {
     return interior_position1(simple2, kl)
   }
 };
-lambda$82 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, x, a2, s2) {
+lambda$82 = (undefined, function (simple2, x, a2, s2) {
   return (z) => {
-    return lambda51(simple2, sub2, update2, pow, north, south, east, west, x, a2, s2, z)
+    return lambda51(simple2, x, a2, s2, z)
   }
 });
-lambda$81 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2) {
+lambda$81 = (undefined, function (simple2, a2, s2) {
   return (z) => {
     let tmp;
-    tmp = simple2[reflect_north$accessorSymbol](sub2, update2, pow, north, south, east, west);
-    return u2(update2, a2, s2, tmp, z)
+    tmp = simple2[reflect_north$accessorSymbol](simple2[sub2$accessorSymbol], simple2[update2$accessorSymbol], simple2[pow$accessorSymbol], simple2[north$accessorSymbol], simple2[south$accessorSymbol], simple2[east$accessorSymbol], simple2[west$accessorSymbol]);
+    return u2(simple2, a2, s2, tmp, z)
   }
 });
-lambda$80 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2) {
+lambda$80 = (undefined, function (simple2, a2, s2) {
   return (z) => {
     let tmp;
-    tmp = simple2[reflect_west$accessorSymbol](sub2, update2, pow, north, south, east, west);
-    return u2(update2, a2, s2, tmp, z)
+    tmp = simple2[reflect_west$accessorSymbol](simple2[sub2$accessorSymbol], simple2[update2$accessorSymbol], simple2[pow$accessorSymbol], simple2[north$accessorSymbol], simple2[south$accessorSymbol], simple2[east$accessorSymbol], simple2[west$accessorSymbol]);
+    return u2(simple2, a2, s2, tmp, z)
   }
 });
-lambda$79 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2) {
+lambda$79 = (undefined, function (simple2, a2, s2) {
   return (z) => {
     let tmp;
-    tmp = simple2[reflect_east$accessorSymbol](sub2, update2, pow, north, south, east, west);
-    return u2(update2, a2, s2, tmp, z)
+    tmp = simple2[reflect_east$accessorSymbol](simple2[sub2$accessorSymbol], simple2[update2$accessorSymbol], simple2[pow$accessorSymbol], simple2[north$accessorSymbol], simple2[south$accessorSymbol], simple2[east$accessorSymbol], simple2[west$accessorSymbol]);
+    return u2(simple2, a2, s2, tmp, z)
   }
 });
-lambda$78 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2) {
+lambda$78 = (undefined, function (simple2, a2, s2) {
   return (z) => {
     let tmp;
-    tmp = simple2[reflect_south$accessorSymbol](sub2, update2, pow, north, south, east, west);
-    return u2(update2, a2, s2, tmp, z)
+    tmp = simple2[reflect_south$accessorSymbol](simple2[sub2$accessorSymbol], simple2[update2$accessorSymbol], simple2[pow$accessorSymbol], simple2[north$accessorSymbol], simple2[south$accessorSymbol], simple2[east$accessorSymbol], simple2[west$accessorSymbol]);
+    return u2(simple2, a2, s2, tmp, z)
   }
 });
-lambda$77 = (undefined, function (update2, rr) {
+lambda$77 = (undefined, function (simple2, rr) {
   return (z) => {
-    return runtime.safeCall(update2(rr, z, 1.4))
+    return simple2[update2$accessorSymbol](rr, z, 1.4)
   }
 });
-lambda$76 = (undefined, function (update2, tt) {
+lambda$76 = (undefined, function (simple2, tt) {
   return (z) => {
-    return runtime.safeCall(update2(tt, z, 0.0001))
+    return simple2[update2$accessorSymbol](tt, z, 0.0001)
   }
 });
 interior_position1 = function interior_position(simple2, kl) {
@@ -106,7 +112,7 @@ interior_position1 = function interior_position(simple2, kl) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-u2 = function u2(update2, a2, s2, f, z) {
+u2 = function u2(simple2, a2, s2, f, z) {
   let element1$, element0$, tmp, inlinedVal, tmp1, tmp2;
   tmp = runtime.safeCall(f(z));
   tmp1 = runtime.safeCall(tmp(a2));
@@ -118,19 +124,19 @@ u2 = function u2(update2, a2, s2, f, z) {
   if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
     element0$ = runtime.Tuple.get(inlinedVal, 0);
     element1$ = runtime.Tuple.get(inlinedVal, 1);
-    runtime.safeCall(update2(a2, z, element0$));
-    return runtime.safeCall(update2(s2, z, element1$))
+    simple2[update2$accessorSymbol](a2, z, element0$);
+    return simple2[update2$accessorSymbol](s2, z, element1$)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda51 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, x, a2, s2, z) {
+lambda51 = (undefined, function (simple2, x, a2, s2, z) {
   let scrut, element1$, element0$;
-  scrut = simple2[zone_area_vol$accessorSymbol](sub2, update2, pow, north, south, east, west)(x, z);
+  scrut = simple2[zone_area_vol$accessorSymbol](simple2[sub2$accessorSymbol], simple2[update2$accessorSymbol], simple2[pow$accessorSymbol], simple2[north$accessorSymbol], simple2[south$accessorSymbol], simple2[east$accessorSymbol], simple2[west$accessorSymbol])(x, z);
   if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
     element0$ = runtime.Tuple.get(scrut, 0);
     element1$ = runtime.Tuple.get(scrut, 1);
-    runtime.safeCall(update2(a2, z, element0$));
-    return runtime.safeCall(update2(s2, z, element1$))
+    simple2[update2$accessorSymbol](a2, z, element0$);
+    return simple2[update2$accessorSymbol](s2, z, element1$)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
@@ -1892,8 +1898,14 @@ lambda52 = (undefined, function (simple2, m, j) {
   static get [rev$accessorSymbol]() { return simple.#rev; }
   static get [for_$accessorSymbol]() { return simple.#for_; }
   static get [from_$accessorSymbol]() { return simple.#from_; }
+  static get [pow$accessorSymbol]() { return simple.#pow; }
+  static get [sub2$accessorSymbol]() { return simple.#sub2; }
   static get [update2$accessorSymbol]() { return simple.#update2; }
   static get [sub1$accessorSymbol]() { return simple.#sub1; }
+  static get [north$accessorSymbol]() { return simple.#north; }
+  static get [south$accessorSymbol]() { return simple.#south; }
+  static get [east$accessorSymbol]() { return simple.#east; }
+  static get [west$accessorSymbol]() { return simple.#west; }
   static get [northeast$accessorSymbol]() { return simple.#northeast; }
   static get [southeast$accessorSymbol]() { return simple.#southeast; }
   static get [southwest$accessorSymbol]() { return simple.#southwest; }
@@ -2319,12 +2331,6 @@ lambda52 = (undefined, function (simple2, m, j) {
   static #trunc(x) {
     return runtime.safeCall(globalThis.Math.trunc(x))
   }
-  static #hd(l) {
-    if (l instanceof simple.Cons.class) {
-      return l.head
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #append(l1, l2) {
     let arg$Cons$0$, arg$Cons$1$, tmp;
     if (l1 instanceof simple.Nil.class) {
@@ -2487,24 +2493,6 @@ lambda52 = (undefined, function (simple2, m, j) {
       return y
     }
     return x;
-  }
-  static #max_list(l) {
-    let baseCall, tmp;
-    if (l instanceof simple.Cons.class) {
-      baseCall = simple.#fold(simple.#max)(l);
-      tmp = simple.#hd(l);
-      return runtime.safeCall(baseCall(tmp))
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #min_list(l) {
-    let baseCall, tmp;
-    if (l instanceof simple.Cons.class) {
-      baseCall = simple.#fold(simple.#min)(l);
-      tmp = simple.#hd(l);
-      return runtime.safeCall(baseCall(tmp))
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #sum_list(l) {
     let baseCall;
@@ -3338,15 +3326,6 @@ lambda52 = (undefined, function (simple2, m, j) {
     }
     return inlinedVal
   }
-  static #make_temperature(sub2, update2, pow, north, south, east, west) {
-    return (p, epsilon, rho, theta, rho_prime, q_prime) => {
-      let m, lambda$here;
-      m = simple.#array2(simple.#dimension_all_zones, simple.#constant_heat_source);
-      lambda$here = lambda$45(simple, sub2, update2, pow, north, south, east, west, p, epsilon, rho, theta, rho_prime, q_prime, m);
-      simple.#for_interior_zones(lambda$here);
-      return m
-    }
-  }
   static #make_cc(sub2, update2, pow, north, south, east, west) {
     return (alpha_prime, theta_hat) => {
       let cc, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
@@ -3611,166 +3590,189 @@ lambda52 = (undefined, function (simple2, m, j) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
   }
-  static #compute_time_step(sub2, update2, pow, north, south, east, west) {
-    return (d, theta_hat, theta_p) => {
-      let deltat_courant, deltat_conduct, deltat_minimum, tmp, tmp1, lambda$here, lambda$here1;
-      lambda$here = lambda$75(sub2, d);
-      tmp = simple.#map_interior_zones(lambda$here);
-      deltat_courant = simple.#min_list(tmp);
-      lambda$here1 = lambda$74(simple, sub2, theta_hat, theta_p);
-      tmp1 = simple.#map_interior_zones(lambda$here1);
-      deltat_conduct = simple.#max_list(tmp1);
-      deltat_minimum = simple.#min(deltat_courant, deltat_conduct);
-      return simple.#min(simple.#deltat_maximum, deltat_minimum)
-    }
-  }
-  static #compute_initial_state(sub2, update2, pow, north, south, east, west) {
-    return () => {
-      let v, x, a2, s2, rr, tt, p, q, epsilon, interior_position$here, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, lambda$here5, lambda$here6;
-      v = globalThis.Object.freeze([
-        simple.#all_zero_nodes,
-        simple.#all_zero_nodes
-      ]);
-      interior_position$here = interior_position$1(simple);
-      x = simple.#make_position_matrix(sub2, update2, pow, north, south, east, west)(interior_position$here);
-      a2 = simple.#array2(simple.#dimension_all_zones, 0.0);
-      s2 = simple.#array2(simple.#dimension_all_zones, 0.0);
-      lambda$here = lambda$82(simple, sub2, update2, pow, north, south, east, west, x, a2, s2);
-      simple.#for_interior_zones(lambda$here);
-      lambda$here1 = lambda$81(simple, sub2, update2, pow, north, south, east, west, a2, s2);
-      simple.#for_south_zones(lambda$here1);
-      lambda$here2 = lambda$80(simple, sub2, update2, pow, north, south, east, west, a2, s2);
-      simple.#for_east_zones(lambda$here2);
-      lambda$here3 = lambda$79(simple, sub2, update2, pow, north, south, east, west, a2, s2);
-      simple.#for_west_zones(lambda$here3);
-      lambda$here4 = lambda$78(simple, sub2, update2, pow, north, south, east, west, a2, s2);
-      simple.#for_north_zones(lambda$here4);
-      rr = simple.#array2(simple.#dimension_all_zones, 0.0);
-      lambda$here5 = lambda$77(update2, rr);
-      simple.#for_all_zones(lambda$here5);
-      tt = simple.#array2(simple.#dimension_all_zones, simple.#constant_heat_source);
-      lambda$here6 = lambda$76(update2, tt);
-      simple.#for_interior_zones(lambda$here6);
-      p = simple.#make_pressure(sub2, update2, pow, north, south, east, west)(rr, tt);
-      q = simple.#all_zero_zones;
-      epsilon = simple.#make_energy(sub2, update2, pow, north, south, east, west)(rr, tt);
-      return globalThis.Object.freeze([
-        v,
-        x,
-        a2,
-        s2,
-        rr,
-        p,
-        q,
-        epsilon,
-        tt,
-        0.01,
-        0.0
-      ])
-    }
-  }
-  static #compute_next_state(sub2, update2, pow, north, south, east, west) {
-    return (state) => {
-      let v_p, scrut, x_p, scrut1, scrut2, scrut3, scrut4, scrut5, theta_hat, scrut6, scrut7, scrut8, p_p, scrut9, epsilon_p, scrut10, c_p, scrut11, deltat_p, scrut12, element9$, element8$, element7$, element6$, element5$, element4$, element3$, element2$, element1$, element0$, element2$1, element1$1, element0$1, element1$2, element0$2, element2$2, element1$3, element0$3;
-      if (runtime.Tuple.isArrayLike(state) && state.length === 11) {
-        element0$ = runtime.Tuple.get(state, 0);
-        element1$ = runtime.Tuple.get(state, 1);
-        element2$ = runtime.Tuple.get(state, 2);
-        element3$ = runtime.Tuple.get(state, 3);
-        element4$ = runtime.Tuple.get(state, 4);
-        element5$ = runtime.Tuple.get(state, 5);
-        element6$ = runtime.Tuple.get(state, 6);
-        element7$ = runtime.Tuple.get(state, 7);
-        element8$ = runtime.Tuple.get(state, 8);
-        element9$ = runtime.Tuple.get(state, 9);
-        runtime.Tuple.get(state, 10);
-        v_p = simple.#make_velocity(sub2, update2, pow, north, south, east, west)(element0$, element1$, element5$, element6$, element2$, element4$, element9$);
-        scrut = simple.#trace.value;
+  static main() {
+    let initial_state, v, x, a2, s2, rr, tt, p, q, epsilon, delta, c, element10$, element9$, tmp, interior_position$here, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, lambda$here5, lambda$here6, simple2, i, state, inlinedVal;
+    v = globalThis.Object.freeze([
+      simple.#all_zero_nodes,
+      simple.#all_zero_nodes
+    ]);
+    interior_position$here = interior_position$1(simple);
+    x = simple.#make_position_matrix(simple.#sub2, simple.#update2, simple.#pow, simple.#north, simple.#south, simple.#east, simple.#west)(interior_position$here);
+    a2 = simple.#array2(simple.#dimension_all_zones, 0.0);
+    s2 = simple.#array2(simple.#dimension_all_zones, 0.0);
+    lambda$here = lambda$82(simple, x, a2, s2);
+    simple.#for_interior_zones(lambda$here);
+    lambda$here1 = lambda$81(simple, a2, s2);
+    simple.#for_south_zones(lambda$here1);
+    lambda$here2 = lambda$80(simple, a2, s2);
+    simple.#for_east_zones(lambda$here2);
+    lambda$here3 = lambda$79(simple, a2, s2);
+    simple.#for_west_zones(lambda$here3);
+    lambda$here4 = lambda$78(simple, a2, s2);
+    simple.#for_north_zones(lambda$here4);
+    rr = simple.#array2(simple.#dimension_all_zones, 0.0);
+    lambda$here5 = lambda$77(simple, rr);
+    simple.#for_all_zones(lambda$here5);
+    tt = simple.#array2(simple.#dimension_all_zones, simple.#constant_heat_source);
+    lambda$here6 = lambda$76(simple, tt);
+    simple.#for_interior_zones(lambda$here6);
+    p = simple.#make_pressure(simple.#sub2, simple.#update2, simple.#pow, simple.#north, simple.#south, simple.#east, simple.#west)(rr, tt);
+    q = simple.#all_zero_zones;
+    epsilon = simple.#make_energy(simple.#sub2, simple.#update2, simple.#pow, simple.#north, simple.#south, simple.#east, simple.#west)(rr, tt);
+    initial_state = globalThis.Object.freeze([
+      v,
+      x,
+      a2,
+      s2,
+      rr,
+      p,
+      q,
+      epsilon,
+      tt,
+      0.01,
+      0.0
+    ]);
+    simple2 = simple;
+    i = simple.#step_count;
+    state = initial_state;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut, v_p, x_p, scrut1, scrut2, scrut3, p_p, epsilon_p, c_p, element9$1, element8$, element7$, element6$, element5$, element4$, element3$, element2$, element1$, element0$, element2$1, element1$1, element0$1, element1$2, element0$2, element2$2, element1$3, element0$3, tmp1, tmp2;
+        scrut = i == 0;
         if (scrut === true) {
-          simple.#print_("done make_velocity(sub2, update2, pow, north, south, east, west)\n");
+          inlinedVal = state;
+          break inlinedLbl
         }
-        x_p = simple.#make_position(sub2, update2, pow, north, south, east, west)(element1$, element9$, v_p);
-        scrut1 = simple.#trace.value;
-        if (scrut1 === true) {
-          simple.#print_("done make_position(sub2, update2, pow, north, south, east, west)\n");
-        }
-        scrut2 = simple.#make_area_density_volume(sub2, update2, pow, north, south, east, west)(element4$, element3$, x_p);
-        if (runtime.Tuple.isArrayLike(scrut2) && scrut2.length === 3) {
-          element0$1 = runtime.Tuple.get(scrut2, 0);
-          element1$1 = runtime.Tuple.get(scrut2, 1);
-          element2$1 = runtime.Tuple.get(scrut2, 2);
-          scrut3 = simple.#trace.value;
-          if (scrut3 === true) {
-            simple.#print_("done make_area_density_volume(sub2, update2, pow, north, south, east, west)\n");
-          }
-          scrut4 = simple.#make_viscosity(sub2, update2, pow, north, south, east, west)(element5$, v_p, x_p, element0$1, element1$1);
-          if (runtime.Tuple.isArrayLike(scrut4) && scrut4.length === 2) {
-            element0$2 = runtime.Tuple.get(scrut4, 0);
-            element1$2 = runtime.Tuple.get(scrut4, 1);
-            scrut5 = simple.#trace.value;
-            if (scrut5 === true) {
-              simple.#print_("done make_viscosity(sub2, update2, pow, north, south, east, west)\n");
-            }
-            theta_hat = simple.#make_temperature(sub2, update2, pow, north, south, east, west)(element5$, element7$, element4$, element8$, element1$1, element0$2);
-            scrut6 = simple.#trace.value;
-            if (scrut6 === true) {
-              simple.#print_("done make_temperature(sub2, update2, pow, north, south, east, west)\n");
-            }
-            scrut7 = simple.#compute_heat_conduction(sub2, update2, pow, north, south, east, west)(theta_hat, element9$, x_p, element0$1, element1$1);
-            if (runtime.Tuple.isArrayLike(scrut7) && scrut7.length === 3) {
-              element0$3 = runtime.Tuple.get(scrut7, 0);
-              element1$3 = runtime.Tuple.get(scrut7, 1);
-              element2$2 = runtime.Tuple.get(scrut7, 2);
-              scrut8 = simple.#trace.value;
-              if (scrut8 === true) {
-                simple.#print_("done compute_heat_conduction(sub2, update2, pow, north, south, east, west)\n");
+        if (runtime.Tuple.isArrayLike(state) && state.length === 11) {
+          element0$ = runtime.Tuple.get(state, 0);
+          element1$ = runtime.Tuple.get(state, 1);
+          element2$ = runtime.Tuple.get(state, 2);
+          element3$ = runtime.Tuple.get(state, 3);
+          element4$ = runtime.Tuple.get(state, 4);
+          element5$ = runtime.Tuple.get(state, 5);
+          element6$ = runtime.Tuple.get(state, 6);
+          element7$ = runtime.Tuple.get(state, 7);
+          element8$ = runtime.Tuple.get(state, 8);
+          element9$1 = runtime.Tuple.get(state, 9);
+          runtime.Tuple.get(state, 10);
+          v_p = simple2.#make_velocity(simple2.#sub2, simple2.#update2, simple2.#pow, simple2.#north, simple2.#south, simple2.#east, simple2.#west)(element0$, element1$, element5$, element6$, element2$, element4$, element9$1);
+          x_p = simple2.#make_position(simple2.#sub2, simple2.#update2, simple2.#pow, simple2.#north, simple2.#south, simple2.#east, simple2.#west)(element1$, element9$1, v_p);
+          scrut1 = simple2.#make_area_density_volume(simple2.#sub2, simple2.#update2, simple2.#pow, simple2.#north, simple2.#south, simple2.#east, simple2.#west)(element4$, element3$, x_p);
+          if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 3) {
+            element0$1 = runtime.Tuple.get(scrut1, 0);
+            element1$1 = runtime.Tuple.get(scrut1, 1);
+            element2$1 = runtime.Tuple.get(scrut1, 2);
+            scrut2 = simple2.#make_viscosity(simple2.#sub2, simple2.#update2, simple2.#pow, simple2.#north, simple2.#south, simple2.#east, simple2.#west)(element5$, v_p, x_p, element0$1, element1$1);
+            if (runtime.Tuple.isArrayLike(scrut2) && scrut2.length === 2) {
+              let sub2, update2, pow, north, south, east, west, m, f, tmp3, lambda$here7;
+              element0$2 = runtime.Tuple.get(scrut2, 0);
+              element1$2 = runtime.Tuple.get(scrut2, 1);
+              sub2 = simple2.#sub2;
+              update2 = simple2.#update2;
+              pow = simple2.#pow;
+              north = simple2.#north;
+              south = simple2.#south;
+              east = simple2.#east;
+              west = simple2.#west;
+              m = simple2.#array2(simple2.#dimension_all_zones, simple2.#constant_heat_source);
+              f = lambda$45(simple2, sub2, update2, pow, north, south, east, west, element5$, element7$, element4$, element8$, element1$1, element0$2, m);
+              tmp3 = simple2.#kmin + 1;
+              lambda$here7 = lambda$7(simple2, f);
+              simple2.#for_(tmp3, 1, simple2.#kmax)(lambda$here7);
+              scrut3 = simple2.#compute_heat_conduction(simple2.#sub2, simple2.#update2, simple2.#pow, simple2.#north, simple2.#south, simple2.#east, simple2.#west)(m, element9$1, x_p, element0$1, element1$1);
+              if (runtime.Tuple.isArrayLike(scrut3) && scrut3.length === 3) {
+                let sub21, f1, inlinedVal1, receiver, inlinedVal2, f2, inlinedVal3, receiver1, inlinedVal4, inlinedVal5, x1, inlinedVal6, scrut4, scrut5, tmp4, tmp5, tmp6, tmp7, f3, inlinedVal7;
+                element0$3 = runtime.Tuple.get(scrut3, 0);
+                element1$3 = runtime.Tuple.get(scrut3, 1);
+                element2$2 = runtime.Tuple.get(scrut3, 2);
+                p_p = simple2.#make_pressure(simple2.#sub2, simple2.#update2, simple2.#pow, simple2.#north, simple2.#south, simple2.#east, simple2.#west)(element1$1, element0$3);
+                epsilon_p = simple2.#make_energy(simple2.#sub2, simple2.#update2, simple2.#pow, simple2.#north, simple2.#south, simple2.#east, simple2.#west)(element1$1, element0$3);
+                c_p = simple2.#compute_energy_error(simple2.#sub2, simple2.#update2, simple2.#pow, simple2.#north, simple2.#south, simple2.#east, simple2.#west)(v_p, x_p, p_p, element0$2, epsilon_p, element0$3, element1$1, element0$1, element1$3, element2$2, element9$1);
+                sub21 = simple2.#sub2;
+                f1 = lambda$75(sub21, element1$2);
+                tmp6 = simple2.#kmin + 1;
+                tmp7 = simple2.#from_(tmp6, simple2.#kmax);
+                f3 = lambda$11(simple2, f1);
+                inlinedVal7 = simple2.#map$tailrec(f3, tmp7);
+                inlinedVal1 = simple2.#flatten(inlinedVal7);
+                receiver = simple2;
+                if (inlinedVal1 instanceof receiver.Cons.class) {
+                  let receiver2, f4, inlinedVal8, receiver3, inlinedVal9, f5, inlinedVal10;
+                  receiver2 = simple2;
+                  f4 = simple2.#min;
+                  if (inlinedVal1 instanceof receiver2.Nil.class) {
+                    inlinedVal8 = lambda53;
+                  } else if (inlinedVal1 instanceof receiver2.Cons.class) {
+                    inlinedVal8 = lambda$2(simple2, f4, inlinedVal1);
+                  } else {
+                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
+                  }
+                  receiver3 = simple2;
+                  if (inlinedVal1 instanceof receiver3.Cons.class) {
+                    inlinedVal9 = inlinedVal1.head;
+                    inlinedVal2 = runtime.safeCall(inlinedVal8(inlinedVal9));
+                    f2 = lambda$74(simple2, sub21, m, element0$3);
+                    tmp4 = simple2.#kmin + 1;
+                    tmp5 = simple2.#from_(tmp4, simple2.#kmax);
+                    f5 = lambda$11(simple2, f2);
+                    inlinedVal10 = simple2.#map$tailrec(f5, tmp5);
+                    inlinedVal3 = simple2.#flatten(inlinedVal10);
+                    receiver1 = simple2;
+                    if (inlinedVal3 instanceof receiver1.Cons.class) {
+                      let receiver4, f6, inlinedVal11, receiver5, inlinedVal12;
+                      receiver4 = simple2;
+                      f6 = simple2.#max;
+                      if (inlinedVal3 instanceof receiver4.Nil.class) {
+                        inlinedVal11 = lambda53;
+                      } else if (inlinedVal3 instanceof receiver4.Cons.class) {
+                        inlinedVal11 = lambda$2(simple2, f6, inlinedVal3);
+                      } else {
+                        throw globalThis.Object.freeze(new globalThis.Error("match error"))
+                      }
+                      receiver5 = simple2;
+                      if (inlinedVal3 instanceof receiver5.Cons.class) {
+                        inlinedVal12 = inlinedVal3.head;
+                        inlinedVal4 = runtime.safeCall(inlinedVal11(inlinedVal12));
+                        scrut5 = inlinedVal2 < inlinedVal4;
+                        if (scrut5 === true) {
+                          inlinedVal5 = inlinedVal2;
+                        } else {
+                          inlinedVal5 = inlinedVal4;
+                        }
+                        x1 = simple2.#deltat_maximum;
+                        scrut4 = x1 < inlinedVal5;
+                        if (scrut4 === true) {
+                          inlinedVal6 = x1;
+                        } else {
+                          inlinedVal6 = inlinedVal5;
+                        }
+                        tmp1 = globalThis.Object.freeze([
+                          v_p,
+                          x_p,
+                          element0$1,
+                          element2$1,
+                          element1$1,
+                          p_p,
+                          element0$2,
+                          epsilon_p,
+                          element0$3,
+                          inlinedVal6,
+                          c_p
+                        ]);
+                        tmp2 = i - 1;
+                        i = tmp2;
+                        state = tmp1;
+                        continue loopLabel
+                      }
+                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                    }
+                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                  }
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
               }
-              p_p = simple.#make_pressure(sub2, update2, pow, north, south, east, west)(element1$1, element0$3);
-              scrut9 = simple.#trace.value;
-              if (scrut9 === true) {
-                simple.#print_("done make_pressure(sub2, update2, pow, north, south, east, west)\n");
-              }
-              epsilon_p = simple.#make_energy(sub2, update2, pow, north, south, east, west)(element1$1, element0$3);
-              scrut10 = simple.#trace.value;
-              if (scrut10 === true) {
-                simple.#print_("done make_energy(sub2, update2, pow, north, south, east, west)\n");
-              }
-              c_p = simple.#compute_energy_error(sub2, update2, pow, north, south, east, west)(v_p, x_p, p_p, element0$2, epsilon_p, element0$3, element1$1, element0$1, element1$3, element2$2, element9$);
-              scrut11 = simple.#trace.value;
-              if (scrut11 === true) {
-                simple.#print_("done compute_energy_error(sub2, update2, pow, north, south, east, west)\n");
-              }
-              deltat_p = simple.#compute_time_step(sub2, update2, pow, north, south, east, west)(element1$2, theta_hat, element0$3);
-              scrut12 = simple.#trace.value;
-              if (scrut12 === true) {
-                simple.#print_("done compute_time_step(sub2, update2, pow, north, south, east, west)\n\n");
-                return globalThis.Object.freeze([
-                  v_p,
-                  x_p,
-                  element0$1,
-                  element2$1,
-                  element1$1,
-                  p_p,
-                  element0$2,
-                  epsilon_p,
-                  element0$3,
-                  deltat_p,
-                  c_p
-                ])
-              }
-              return globalThis.Object.freeze([
-                v_p,
-                x_p,
-                element0$1,
-                element2$1,
-                element1$1,
-                p_p,
-                element0$2,
-                epsilon_p,
-                element0$3,
-                deltat_p,
-                c_p
-              ]);
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
           }
@@ -3778,56 +3780,19 @@ lambda52 = (undefined, function (simple2, m, j) {
         }
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
-  }
-  static #runit(sub2, update2, pow, north, south, east, west) {
-    return () => {
-      let tmp, simple2, sub21, update21, pow1, north1, south1, east1, west1, i, state, inlinedVal;
-      tmp = simple.#compute_initial_state(sub2, update2, pow, north, south, east, west)();
-      simple2 = simple;
-      sub21 = sub2;
-      update21 = update2;
-      pow1 = pow;
-      north1 = north;
-      south1 = south;
-      east1 = east;
-      west1 = west;
-      i = simple.#step_count;
-      state = tmp;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let scrut, tmp1, tmp2;
-          scrut = i == 0;
-          if (scrut === true) {
-            inlinedVal = state;
-            break inlinedLbl
-          }
-          tmp1 = i - 1;
-          tmp2 = simple2.#compute_next_state(sub21, update21, pow1, north1, south1, east1, west1)(state);
-          i = tmp1;
-          state = tmp2;
-          continue loopLabel;
-        }
-      }
-      return inlinedVal
-    }
-  }
-  static main() {
-    let scrut, delta, c, element10$, element9$, tmp;
-    scrut = simple.#runit(simple.#sub2, simple.#update2, simple.#pow, simple.#north, simple.#south, simple.#east, simple.#west)();
-    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 11) {
-      runtime.Tuple.get(scrut, 0);
-      runtime.Tuple.get(scrut, 1);
-      runtime.Tuple.get(scrut, 2);
-      runtime.Tuple.get(scrut, 3);
-      runtime.Tuple.get(scrut, 4);
-      runtime.Tuple.get(scrut, 5);
-      runtime.Tuple.get(scrut, 6);
-      runtime.Tuple.get(scrut, 7);
-      runtime.Tuple.get(scrut, 8);
-      element9$ = runtime.Tuple.get(scrut, 9);
-      element10$ = runtime.Tuple.get(scrut, 10);
+    if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 11) {
+      runtime.Tuple.get(inlinedVal, 0);
+      runtime.Tuple.get(inlinedVal, 1);
+      runtime.Tuple.get(inlinedVal, 2);
+      runtime.Tuple.get(inlinedVal, 3);
+      runtime.Tuple.get(inlinedVal, 4);
+      runtime.Tuple.get(inlinedVal, 5);
+      runtime.Tuple.get(inlinedVal, 6);
+      runtime.Tuple.get(inlinedVal, 7);
+      runtime.Tuple.get(inlinedVal, 8);
+      element9$ = runtime.Tuple.get(inlinedVal, 9);
+      element10$ = runtime.Tuple.get(inlinedVal, 10);
       delta = simple.#trunc(element9$);
       tmp = element10$ * 10000.0;
       c = simple.#trunc(tmp);

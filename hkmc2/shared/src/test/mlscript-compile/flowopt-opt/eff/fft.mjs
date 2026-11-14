@@ -3,8 +3,8 @@ const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
 const fft$accessorSymbol = globalThis.Symbol("fft");
-let fft1, main_doit_loop_np_loop_np$tailrec$loop_np$tailrec, doit_loop_np_loop_np$tailrec$loop_np$tailrec, loop_np_loop_np$tailrec$loop_np$tailrec;
-main_doit_loop_np_loop_np$tailrec$loop_np$tailrec = function main_doit_loop_np_loop_np$tailrec$loop_np$tailrec(i, np) {
+let fft1, main_loop_np_loop_np$tailrec$loop_np$tailrec, loop_np_loop_np$tailrec$loop_np$tailrec;
+main_loop_np_loop_np$tailrec$loop_np$tailrec = function main_loop_np_loop_np$tailrec$loop_np$tailrec(i, np) {
   let scrut, tmp, tmp1, tmp2;
   scrut = i > 14;
   if (scrut === true) {
@@ -196,205 +196,7 @@ main_doit_loop_np_loop_np$tailrec$loop_np$tailrec = function main_doit_loop_np_l
       }
       tmp = i + 1;
       tmp1 = np * 2;
-      tmp2 = main_doit_loop_np_loop_np$tailrec$loop_np$tailrec(tmp, tmp1);
-      return fft1.Cons(inlinedVal, tmp2)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-doit_loop_np_loop_np$tailrec$loop_np$tailrec = function doit_loop_np_loop_np$tailrec$loop_np$tailrec(i, np) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i > 14;
-  if (scrut === true) {
-    return fft1.Nil
-  }
-  {
-    let np1, inlinedVal, npm, pxr, pxi, t, scrut1, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, element1$, element0$, np2, npm1, pxr1, pxi1, t1, i1, np3, pxr2, pxi2, i2, zr, zi, kr, ki, inlinedVal1, inlinedVal2, tmp10, tmp11, tmp12, tmp13, inlinedVal3, arr, i3, n, x, inlinedVal4, arr1, i4, n1, x1, inlinedVal5, inlinedVal6;
-    np1 = np;
-    tmp10 = np / 2;
-    inlinedVal3 = runtime.safeCall(globalThis.Math.floor(tmp10));
-    npm = inlinedVal3 - 1;
-    tmp3 = np + 2;
-    tmp11 = [];
-    arr = tmp11;
-    i3 = 0;
-    n = tmp3;
-    x = 0.0;
-    inlinedLbl: {
-      loopLabel: while (true) {
-        let scrut2, tmp14;
-        scrut2 = i3 == n;
-        if (scrut2 === true) {
-          inlinedVal4 = arr;
-          break inlinedLbl
-        }
-        arr[i3] = x;
-        tmp14 = i3 + 1;
-        i3 = tmp14;
-        continue loopLabel;
-      }
-    }
-    inlinedVal2 = inlinedVal4;
-    pxr = inlinedVal4;
-    tmp4 = np + 2;
-    tmp12 = [];
-    arr1 = tmp12;
-    i4 = 0;
-    n1 = tmp4;
-    x1 = 0.0;
-    inlinedLbl1: {
-      loopLabel1: while (true) {
-        let scrut2, tmp14;
-        scrut2 = i4 == n1;
-        if (scrut2 === true) {
-          inlinedVal5 = arr1;
-          break inlinedLbl1
-        }
-        arr1[i4] = x1;
-        tmp14 = i4 + 1;
-        i4 = tmp14;
-        continue loopLabel1;
-      }
-    }
-    pxi = inlinedVal5;
-    t = 3.141592653589793 / np;
-    tmp5 = np - 1.0;
-    tmp6 = tmp5 * 0.5;
-    inlinedVal2[1] = tmp6;
-    inlinedVal5[1] = 0.0;
-    tmp13 = np / 2;
-    inlinedVal6 = runtime.safeCall(globalThis.Math.floor(tmp13));
-    tmp7 = inlinedVal6 + 1;
-    tmp8 = - 0.5;
-    inlinedVal2[tmp7] = tmp8;
-    tmp9 = inlinedVal6 + 1;
-    inlinedVal5[tmp9] = 0.0;
-    np2 = np;
-    npm1 = npm;
-    pxr1 = inlinedVal2;
-    pxi1 = inlinedVal5;
-    t1 = t;
-    i1 = 1;
-    inlinedLbl2: {
-      loopLabel2: while (true) {
-        let scrut2, j, z, y, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23;
-        scrut2 = i1 > npm1;
-        if (scrut2 === true) {
-          break inlinedLbl2
-        }
-        {
-          let inlinedVal7, inlinedVal8;
-          j = np2 - i1;
-          tmp14 = i1 + 1;
-          tmp15 = - 0.5;
-          pxr1[tmp14] = tmp15;
-          tmp16 = j + 1;
-          tmp17 = - 0.5;
-          pxr1[tmp16] = tmp17;
-          z = t1 * i1;
-          inlinedVal7 = runtime.safeCall(globalThis.Math.cos(z));
-          inlinedVal8 = runtime.safeCall(globalThis.Math.sin(z));
-          tmp18 = inlinedVal7 / inlinedVal8;
-          tmp19 = 0.5 * tmp18;
-          y = - tmp19;
-          tmp20 = i1 + 1;
-          pxi1[tmp20] = y;
-          tmp21 = j + 1;
-          tmp22 = - y;
-          pxi1[tmp21] = tmp22;
-          tmp23 = i1 + 1;
-          i1 = tmp23;
-          continue loopLabel2;
-        }
-      }
-    }
-    fft1[fft$accessorSymbol](pxr)(pxi)(np1);
-    np3 = np1;
-    pxr2 = pxr;
-    pxi2 = pxi;
-    i2 = 0;
-    zr = 0.0;
-    zi = 0.0;
-    kr = 0;
-    ki = 0;
-    inlinedLbl3: {
-      loopLabel3: while (true) {
-        let scrut2, scrut3, scrut4, tmp14, tmp15, tmp16, element0$1, tmp17, tmp18, element0$2, tmp19;
-        scrut2 = i2 >= np3;
-        if (scrut2 === true) {
-          inlinedVal1 = globalThis.Object.freeze([
-            zr,
-            zi
-          ]);
-          break inlinedLbl3
-        }
-        {
-          let inlinedVal7, inlinedVal8;
-          tmp14 = i2 + 1;
-          inlinedVal7 = pxr2.at(tmp14);
-          tmp15 = inlinedVal7 - i2;
-          inlinedVal8 = runtime.safeCall(globalThis.Math.abs(tmp15));
-          scrut3 = zr < inlinedVal8;
-          if (scrut3 === true) {
-            tmp16 = globalThis.Object.freeze([
-              inlinedVal8,
-              i2
-            ]);
-          } else {
-            tmp16 = globalThis.Object.freeze([
-              zr,
-              kr
-            ]);
-          }
-          if (runtime.Tuple.isArrayLike(tmp16) && tmp16.length === 2) {
-            let inlinedVal9, inlinedVal10;
-            element0$1 = runtime.Tuple.get(tmp16, 0);
-            tmp17 = i2 + 1;
-            inlinedVal9 = pxi2.at(tmp17);
-            inlinedVal10 = runtime.safeCall(globalThis.Math.abs(inlinedVal9));
-            scrut4 = zi < inlinedVal10;
-            if (scrut4 === true) {
-              tmp18 = globalThis.Object.freeze([
-                inlinedVal10,
-                i2
-              ]);
-            } else {
-              tmp18 = globalThis.Object.freeze([
-                zi,
-                ki
-              ]);
-            }
-            if (runtime.Tuple.isArrayLike(tmp18) && tmp18.length === 2) {
-              element0$2 = runtime.Tuple.get(tmp18, 0);
-              tmp19 = i2 + 1;
-              i2 = tmp19;
-              zr = element0$1;
-              zi = element0$2;
-              kr = undefined;
-              ki = undefined;
-              continue loopLabel3
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-    }
-    if (runtime.Tuple.isArrayLike(inlinedVal1) && inlinedVal1.length === 2) {
-      let inlinedVal7, inlinedVal8;
-      element0$ = runtime.Tuple.get(inlinedVal1, 0);
-      element1$ = runtime.Tuple.get(inlinedVal1, 1);
-      inlinedVal7 = runtime.safeCall(globalThis.Math.abs(element0$));
-      inlinedVal8 = runtime.safeCall(globalThis.Math.abs(element1$));
-      scrut1 = inlinedVal7 < inlinedVal8;
-      if (scrut1 === true) {
-        inlinedVal = element1$;
-      } else {
-        inlinedVal = element0$;
-      }
-      tmp = i + 1;
-      tmp1 = np * 2;
-      tmp2 = doit_loop_np_loop_np$tailrec$loop_np$tailrec(tmp, tmp1);
+      tmp2 = main_loop_np_loop_np$tailrec$loop_np$tailrec(tmp, tmp1);
       return fft1.Cons(inlinedVal, tmp2)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -1173,13 +975,12 @@ loop_np_loop_np$tailrec$loop_np$tailrec = function loop_np_loop_np$tailrec$loop_
     return 14
   }
   static main() {
-    return main_doit_loop_np_loop_np$tailrec$loop_np$tailrec(1, 16)
+    return main_loop_np_loop_np$tailrec$loop_np$tailrec(1, 16)
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "fft"];
 });
 export { fft1 as _$_modulePrivate_$_fft };
-export { main_doit_loop_np_loop_np$tailrec$loop_np$tailrec as _$_modulePrivate_$_main_doit_loop_np_loop_np$tailrec$loop_np$tailrec };
-export { doit_loop_np_loop_np$tailrec$loop_np$tailrec as _$_modulePrivate_$_doit_loop_np_loop_np$tailrec$loop_np$tailrec };
+export { main_loop_np_loop_np$tailrec$loop_np$tailrec as _$_modulePrivate_$_main_loop_np_loop_np$tailrec$loop_np$tailrec };
 export { loop_np_loop_np$tailrec$loop_np$tailrec as _$_modulePrivate_$_loop_np_loop_np$tailrec$loop_np$tailrec };
 export default fft1;

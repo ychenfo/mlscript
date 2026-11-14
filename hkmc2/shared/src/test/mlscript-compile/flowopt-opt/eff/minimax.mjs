@@ -13,23 +13,23 @@ const listExists$tailrec$accessorSymbol = globalThis.Symbol("listExists$tailrec"
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
 const listFoldr$tailrec$accessorSymbol = globalThis.Symbol("listFoldr$tailrec");
 const map$tailrec$accessorSymbol = globalThis.Symbol("map$tailrec");
-let go, minimaxTT, doKid, sz, minimax1, lambda, lambda1, lambda2, lambda$, lambda$1, doKid$, main_gameTree_empty_lambda$$lambda$, main_gameTreeWithTT_empty_lambda$$lambda$, main_gameTreeWithTT_lambda$$lambda$, main_gameTree_empty_listTabulate_go$go, main_gameTreeWithTT_empty_listTabulate_go$go, gameTreeWithTT_empty_listTabulate_go$go, gameTree_empty_listTabulate_go$go, empty_listTabulate_go$go, main_gameTree_minimax_snd$snd, main_gameTree_minimax$minimax, main_gameTreeWithTT_minimaxTT$minimaxTT, main_gameTreeWithTT_minimaxTT_snd$snd, gameTreeWithTT_minimaxTT$minimaxTT, gameTreeWithTT_minimaxTT_snd$snd, gameTree_minimax_snd$snd, gameTree_minimax$minimax, minimax_snd$snd, minimaxTT_snd$snd, minimaxTT$worker, gameTree_minimax$minimax$worker, gameTreeWithTT_minimaxTT$minimaxTT$worker, main_gameTreeWithTT_minimaxTT$minimaxTT$worker, main_gameTree_minimax$minimax$worker;
-main_gameTree_empty_lambda$$lambda$ = function main_gameTree_empty_lambda$$lambda$(minimax2) {
+let go, doKid, sz, minimaxTT, minimax1, lambda, lambda1, lambda2, lambda$, lambda$1, doKid$, main_empty_lambda$$lambda$, main_lambda$$lambda$, main_empty_lambda$$lambda$1, main_empty_listTabulate_go$go, main_empty_listTabulate_go$go1, empty_listTabulate_go$go, main_minimax_snd$snd, main_minimax$minimax, main_minimaxTT$minimaxTT, main_minimaxTT_snd$snd, minimax_snd$snd, minimaxTT_snd$snd, minimaxTT$worker, main_minimaxTT$minimaxTT$worker, main_minimax$minimax$worker;
+main_empty_lambda$$lambda$ = function main_empty_lambda$$lambda$(minimax2) {
   return () => {
     return minimax2.None
   }
 };
-main_gameTreeWithTT_empty_lambda$$lambda$ = function main_gameTreeWithTT_empty_lambda$$lambda$(minimax2) {
-  return () => {
-    return minimax2.None
-  }
-};
-main_gameTreeWithTT_lambda$$lambda$ = function main_gameTreeWithTT_lambda$$lambda$(unused) {
+main_lambda$$lambda$ = function main_lambda$$lambda$(unused) {
   return () => {
     return unused
   }
 };
-main_gameTree_empty_listTabulate_go$go = function main_gameTree_empty_listTabulate_go$go(minimax2, n, f, i) {
+main_empty_lambda$$lambda$1 = function main_empty_lambda$$lambda$(minimax2) {
+  return () => {
+    return minimax2.None
+  }
+};
+main_empty_listTabulate_go$go = function main_empty_listTabulate_go$go(minimax2, n, f, i) {
   let scrut, tmp, tmp1, tmp2;
   scrut = i >= n;
   if (scrut === true) {
@@ -37,10 +37,10 @@ main_gameTree_empty_listTabulate_go$go = function main_gameTree_empty_listTabula
   }
   tmp = runtime.safeCall(f());
   tmp1 = i + 1;
-  tmp2 = main_gameTree_empty_listTabulate_go$go(minimax2, n, f, tmp1);
+  tmp2 = main_empty_listTabulate_go$go(minimax2, n, f, tmp1);
   return minimax2.Cons(tmp, tmp2);
 };
-main_gameTreeWithTT_empty_listTabulate_go$go = function main_gameTreeWithTT_empty_listTabulate_go$go(minimax2, n, f, i) {
+main_empty_listTabulate_go$go1 = function main_empty_listTabulate_go$go(minimax2, n, f, i) {
   let scrut, tmp, tmp1, tmp2;
   scrut = i >= n;
   if (scrut === true) {
@@ -48,29 +48,7 @@ main_gameTreeWithTT_empty_listTabulate_go$go = function main_gameTreeWithTT_empt
   }
   tmp = runtime.safeCall(f());
   tmp1 = i + 1;
-  tmp2 = main_gameTreeWithTT_empty_listTabulate_go$go(minimax2, n, f, tmp1);
-  return minimax2.Cons(tmp, tmp2);
-};
-gameTreeWithTT_empty_listTabulate_go$go = function gameTreeWithTT_empty_listTabulate_go$go(minimax2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return minimax2.Nil
-  }
-  tmp = runtime.safeCall(f());
-  tmp1 = i + 1;
-  tmp2 = gameTreeWithTT_empty_listTabulate_go$go(minimax2, n, f, tmp1);
-  return minimax2.Cons(tmp, tmp2);
-};
-gameTree_empty_listTabulate_go$go = function gameTree_empty_listTabulate_go$go(minimax2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return minimax2.Nil
-  }
-  tmp = runtime.safeCall(f());
-  tmp1 = i + 1;
-  tmp2 = gameTree_empty_listTabulate_go$go(minimax2, n, f, tmp1);
+  tmp2 = main_empty_listTabulate_go$go1(minimax2, n, f, tmp1);
   return minimax2.Cons(tmp, tmp2);
 };
 empty_listTabulate_go$go = function empty_listTabulate_go$go(minimax2, n, f, i) {
@@ -84,18 +62,18 @@ empty_listTabulate_go$go = function empty_listTabulate_go$go(minimax2, n, f, i) 
   tmp2 = empty_listTabulate_go$go(minimax2, n, f, tmp1);
   return minimax2.Cons(tmp, tmp2);
 };
-main_gameTree_minimax_snd$snd = function main_gameTree_minimax_snd$snd(p) {
+main_minimax_snd$snd = function main_minimax_snd$snd(p) {
   if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
     return runtime.Tuple.get(p, 1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_gameTree_minimax$minimax = function main_gameTree_minimax$minimax(p) {
+main_minimax$minimax = function main_minimax$minimax(p) {
   return (b) => {
-    return main_gameTree_minimax$minimax$worker(p, b)
+    return main_minimax$minimax$worker(p, b)
   }
 };
-main_gameTree_minimax$minimax$worker = function main_gameTree_minimax$minimax$worker(p, b) {
+main_minimax$minimax$worker = function main_minimax$minimax$worker(p, b) {
   let tmp, tmp1, tmp2, inlinedVal, p1, tmp3, p2, inlinedVal1;
   p1 = minimax1.X;
   tmp3 = minimax1[rows$accessorSymbol]();
@@ -245,10 +223,10 @@ main_gameTree_minimax$minimax$worker = function main_gameTree_minimax$minimax$wo
     tmp4 = minimax1[allMoves$accessorSymbol](b);
     f2 = minimax1[moveTo$accessorSymbol](b, p);
     inlinedVal5 = minimax1[map$tailrec$accessorSymbol](f2, tmp4);
-    f = main_gameTree_minimax$minimax(inlinedVal2);
+    f = main_minimax$minimax(inlinedVal2);
     inlinedVal3 = minimax1[map$tailrec$accessorSymbol](f, inlinedVal5);
     g = minimax1[top$accessorSymbol];
-    f1 = lambda$(main_gameTree_minimax_snd$snd, g);
+    f1 = lambda$(main_minimax_snd$snd, g);
     inlinedVal4 = minimax1[map$tailrec$accessorSymbol](f1, inlinedVal3);
     if (p instanceof minimax1.X.class) {
       let arg$Cons$0$, arg$Cons$1$;
@@ -282,12 +260,12 @@ main_gameTree_minimax$minimax$worker = function main_gameTree_minimax$minimax$wo
     }
   }
 };
-main_gameTreeWithTT_minimaxTT$minimaxTT = function main_gameTreeWithTT_minimaxTT$minimaxTT(minimax2, transTable, p) {
+main_minimaxTT$minimaxTT = function main_minimaxTT$minimaxTT(minimax2, transTable, p) {
   return (b) => {
-    return main_gameTreeWithTT_minimaxTT$minimaxTT$worker(minimax2, transTable, p, b)
+    return main_minimaxTT$minimaxTT$worker(minimax2, transTable, p, b)
   }
 };
-main_gameTreeWithTT_minimaxTT$minimaxTT$worker = function main_gameTreeWithTT_minimaxTT$minimaxTT$worker(minimax2, transTable, p, b) {
+main_minimaxTT$minimaxTT$worker = function main_minimaxTT$minimaxTT$worker(minimax2, transTable, p, b) {
   let tmp, arg$Some$0$, tmp1, tmp2, tmp3, inlinedVal, p1, tmp4, p2, inlinedVal1;
   p1 = minimax2.X;
   tmp4 = minimax2[rows$accessorSymbol]();
@@ -454,10 +432,10 @@ main_gameTreeWithTT_minimaxTT$minimaxTT$worker = function main_gameTreeWithTT_mi
         tmp6 = minimax2[allMoves$accessorSymbol](b);
         f3 = minimax2[moveTo$accessorSymbol](b, p);
         inlinedVal9 = minimax2[map$tailrec$accessorSymbol](f3, tmp6);
-        f1 = main_gameTreeWithTT_minimaxTT$minimaxTT(minimax2, transTable, inlinedVal6);
+        f1 = main_minimaxTT$minimaxTT(minimax2, transTable, inlinedVal6);
         inlinedVal7 = minimax2[map$tailrec$accessorSymbol](f1, inlinedVal9);
         g = minimax2[top$accessorSymbol];
-        f2 = lambda$(main_gameTreeWithTT_minimaxTT_snd$snd, g);
+        f2 = lambda$(main_minimaxTT_snd$snd, g);
         inlinedVal8 = minimax2[map$tailrec$accessorSymbol](f2, inlinedVal7);
         if (p instanceof minimax2.X.class) {
           let arg$Cons$0$, arg$Cons$1$;
@@ -515,448 +493,11 @@ main_gameTreeWithTT_minimaxTT$minimaxTT$worker = function main_gameTreeWithTT_mi
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-main_gameTreeWithTT_minimaxTT_snd$snd = function main_gameTreeWithTT_minimaxTT_snd$snd(p) {
+main_minimaxTT_snd$snd = function main_minimaxTT_snd$snd(p) {
   if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
     return runtime.Tuple.get(p, 1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-gameTreeWithTT_minimaxTT$minimaxTT = function gameTreeWithTT_minimaxTT$minimaxTT(minimax2, transTable, p) {
-  return (b) => {
-    return gameTreeWithTT_minimaxTT$minimaxTT$worker(minimax2, transTable, p, b)
-  }
-};
-gameTreeWithTT_minimaxTT$minimaxTT$worker = function gameTreeWithTT_minimaxTT$minimaxTT$worker(minimax2, transTable, p, b) {
-  let tmp, arg$Some$0$, tmp1, tmp2, tmp3, inlinedVal, p1, tmp4, p2, inlinedVal1;
-  p1 = minimax2.X;
-  tmp4 = minimax2[rows$accessorSymbol]();
-  p2 = minimax2[hasTrip$accessorSymbol](b, p1);
-  inlinedVal1 = minimax2[listExists$tailrec$accessorSymbol](p2, tmp4);
-  if (inlinedVal1 === false) {
-    let tmp5, p3, inlinedVal2;
-    tmp5 = minimax2[cols$accessorSymbol]();
-    p3 = minimax2[hasTrip$accessorSymbol](b, p1);
-    inlinedVal2 = minimax2[listExists$tailrec$accessorSymbol](p3, tmp5);
-    if (inlinedVal2 === false) {
-      let inlinedVal3, p4, inlinedVal4, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
-      tmp6 = minimax2.Cons(8, minimax2.Nil);
-      tmp7 = minimax2.Cons(4, tmp6);
-      tmp8 = minimax2.Cons(0, tmp7);
-      tmp9 = minimax2.Cons(6, minimax2.Nil);
-      tmp10 = minimax2.Cons(4, tmp9);
-      tmp11 = minimax2.Cons(2, tmp10);
-      tmp12 = minimax2.Cons(tmp11, minimax2.Nil);
-      inlinedVal3 = minimax2.Cons(tmp8, tmp12);
-      p4 = minimax2[hasTrip$accessorSymbol](b, p1);
-      inlinedVal4 = minimax2[listExists$tailrec$accessorSymbol](p4, inlinedVal3);
-      if (inlinedVal4 === false) {
-        let p5, tmp13, p6, inlinedVal5;
-        p5 = minimax2.O;
-        tmp13 = minimax2[rows$accessorSymbol]();
-        p6 = minimax2[hasTrip$accessorSymbol](b, p5);
-        inlinedVal5 = minimax2[listExists$tailrec$accessorSymbol](p6, tmp13);
-        if (inlinedVal5 === false) {
-          let tmp14, p7, inlinedVal6;
-          tmp14 = minimax2[cols$accessorSymbol]();
-          p7 = minimax2[hasTrip$accessorSymbol](b, p5);
-          inlinedVal6 = minimax2[listExists$tailrec$accessorSymbol](p7, tmp14);
-          if (inlinedVal6 === false) {
-            let inlinedVal7, p8, inlinedVal8, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
-            tmp15 = minimax2.Cons(8, minimax2.Nil);
-            tmp16 = minimax2.Cons(4, tmp15);
-            tmp17 = minimax2.Cons(0, tmp16);
-            tmp18 = minimax2.Cons(6, minimax2.Nil);
-            tmp19 = minimax2.Cons(4, tmp18);
-            tmp20 = minimax2.Cons(2, tmp19);
-            tmp21 = minimax2.Cons(tmp20, minimax2.Nil);
-            inlinedVal7 = minimax2.Cons(tmp17, tmp21);
-            p8 = minimax2[hasTrip$accessorSymbol](b, p5);
-            inlinedVal8 = minimax2[listExists$tailrec$accessorSymbol](p8, inlinedVal7);
-            if (inlinedVal8 === false) {
-              inlinedVal = minimax2[isCat$accessorSymbol](b);
-            } else {
-              inlinedVal = true;
-            }
-          } else {
-            inlinedVal = true;
-          }
-        } else {
-          inlinedVal = true;
-        }
-      } else {
-        inlinedVal = true;
-      }
-    } else {
-      inlinedVal = true;
-    }
-  } else {
-    inlinedVal = true;
-  }
-  if (inlinedVal === true) {
-    let inlinedVal2, p3, tmp5, p4, inlinedVal3;
-    p3 = minimax2.X;
-    tmp5 = minimax2[rows$accessorSymbol]();
-    p4 = minimax2[hasTrip$accessorSymbol](b, p3);
-    inlinedVal3 = minimax2[listExists$tailrec$accessorSymbol](p4, tmp5);
-    if (inlinedVal3 === false) {
-      let tmp6, p5, inlinedVal4;
-      tmp6 = minimax2[cols$accessorSymbol]();
-      p5 = minimax2[hasTrip$accessorSymbol](b, p3);
-      inlinedVal4 = minimax2[listExists$tailrec$accessorSymbol](p5, tmp6);
-      if (inlinedVal4 === false) {
-        let inlinedVal5, p6, inlinedVal6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
-        tmp7 = minimax2.Cons(8, minimax2.Nil);
-        tmp8 = minimax2.Cons(4, tmp7);
-        tmp9 = minimax2.Cons(0, tmp8);
-        tmp10 = minimax2.Cons(6, minimax2.Nil);
-        tmp11 = minimax2.Cons(4, tmp10);
-        tmp12 = minimax2.Cons(2, tmp11);
-        tmp13 = minimax2.Cons(tmp12, minimax2.Nil);
-        inlinedVal5 = minimax2.Cons(tmp9, tmp13);
-        p6 = minimax2[hasTrip$accessorSymbol](b, p3);
-        inlinedVal6 = minimax2[listExists$tailrec$accessorSymbol](p6, inlinedVal5);
-        if (inlinedVal6 === true) {
-          inlinedVal2 = 1;
-        } else {
-          let p7, tmp14, p8, inlinedVal7;
-          p7 = minimax2.O;
-          tmp14 = minimax2[rows$accessorSymbol]();
-          p8 = minimax2[hasTrip$accessorSymbol](b, p7);
-          inlinedVal7 = minimax2[listExists$tailrec$accessorSymbol](p8, tmp14);
-          if (inlinedVal7 === false) {
-            let tmp15, p9, inlinedVal8;
-            tmp15 = minimax2[cols$accessorSymbol]();
-            p9 = minimax2[hasTrip$accessorSymbol](b, p7);
-            inlinedVal8 = minimax2[listExists$tailrec$accessorSymbol](p9, tmp15);
-            if (inlinedVal8 === false) {
-              let inlinedVal9, p10, inlinedVal10, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22;
-              tmp16 = minimax2.Cons(8, minimax2.Nil);
-              tmp17 = minimax2.Cons(4, tmp16);
-              tmp18 = minimax2.Cons(0, tmp17);
-              tmp19 = minimax2.Cons(6, minimax2.Nil);
-              tmp20 = minimax2.Cons(4, tmp19);
-              tmp21 = minimax2.Cons(2, tmp20);
-              tmp22 = minimax2.Cons(tmp21, minimax2.Nil);
-              inlinedVal9 = minimax2.Cons(tmp18, tmp22);
-              p10 = minimax2[hasTrip$accessorSymbol](b, p7);
-              inlinedVal10 = minimax2[listExists$tailrec$accessorSymbol](p10, inlinedVal9);
-              if (inlinedVal10 === true) {
-                inlinedVal2 = -1;
-              } else {
-                inlinedVal2 = 0;
-              }
-            } else {
-              inlinedVal2 = -1;
-            }
-          } else {
-            inlinedVal2 = -1;
-          }
-        }
-      } else {
-        inlinedVal2 = 1;
-      }
-    } else {
-      inlinedVal2 = 1;
-    }
-    tmp = globalThis.Object.freeze([
-      b,
-      inlinedVal2
-    ]);
-    return minimax2.Rose(tmp, minimax2.Nil)
-  }
-  {
-    let inlinedVal2, scrut, inlinedVal3, inlinedVal4, start, tmp5, f, inlinedVal5;
-    if (p instanceof minimax1.X.class) {
-      tmp5 = 1;
-    } else {
-      tmp5 = 0;
-    }
-    start = globalThis.Object.freeze([
-      tmp5,
-      3
-    ]);
-    f = lambda$1(minimax1);
-    inlinedVal5 = minimax1[listFoldr$tailrec$accessorSymbol](f, start, b);
-    if (runtime.Tuple.isArrayLike(inlinedVal5) && inlinedVal5.length === 2) {
-      inlinedVal4 = runtime.Tuple.get(inlinedVal5, 0);
-      inlinedVal3 = transTable.at(inlinedVal4);
-      scrut = inlinedVal3 == -2;
-      if (scrut === true) {
-        let inlinedVal6, f1, inlinedVal7, g, f2, inlinedVal8, tmp6, f3, inlinedVal9, inlinedVal10, start1, tmp7, f4, inlinedVal11;
-        if (p instanceof minimax2.X.class) {
-          inlinedVal6 = minimax2.O;
-        } else if (p instanceof minimax2.O.class) {
-          inlinedVal6 = minimax2.X;
-        } else {
-          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-        }
-        tmp6 = minimax2[allMoves$accessorSymbol](b);
-        f3 = minimax2[moveTo$accessorSymbol](b, p);
-        inlinedVal9 = minimax2[map$tailrec$accessorSymbol](f3, tmp6);
-        f1 = gameTreeWithTT_minimaxTT$minimaxTT(minimax2, transTable, inlinedVal6);
-        inlinedVal7 = minimax2[map$tailrec$accessorSymbol](f1, inlinedVal9);
-        g = minimax2[top$accessorSymbol];
-        f2 = lambda$(gameTreeWithTT_minimaxTT_snd$snd, g);
-        inlinedVal8 = minimax2[map$tailrec$accessorSymbol](f2, inlinedVal7);
-        if (p instanceof minimax2.X.class) {
-          let arg$Cons$0$, arg$Cons$1$;
-          if (inlinedVal8 instanceof minimax2.Cons.class) {
-            let inlinedVal12;
-            arg$Cons$0$ = inlinedVal8.head;
-            arg$Cons$1$ = inlinedVal8.tail;
-            inlinedVal12 = minimax2[listFoldl$tailrec$accessorSymbol](lambda, arg$Cons$0$, arg$Cons$1$);
-            tmp2 = inlinedVal12;
-          } else {
-            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-          }
-        } else {
-          let arg$Cons$0$, arg$Cons$1$;
-          if (inlinedVal8 instanceof minimax2.Cons.class) {
-            let inlinedVal12;
-            arg$Cons$0$ = inlinedVal8.head;
-            arg$Cons$1$ = inlinedVal8.tail;
-            inlinedVal12 = minimax2[listFoldl$tailrec$accessorSymbol](lambda1, arg$Cons$0$, arg$Cons$1$);
-            tmp2 = inlinedVal12;
-          } else {
-            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-          }
-        }
-        if (p instanceof minimax1.X.class) {
-          tmp7 = 1;
-        } else {
-          tmp7 = 0;
-        }
-        start1 = globalThis.Object.freeze([
-          tmp7,
-          3
-        ]);
-        f4 = lambda$1(minimax1);
-        inlinedVal11 = minimax1[listFoldr$tailrec$accessorSymbol](f4, start1, b);
-        if (runtime.Tuple.isArrayLike(inlinedVal11) && inlinedVal11.length === 2) {
-          inlinedVal10 = runtime.Tuple.get(inlinedVal11, 0);
-          transTable[inlinedVal10] = tmp2;
-          tmp3 = globalThis.Object.freeze([
-            b,
-            tmp2
-          ]);
-          return minimax2.Rose(tmp3, inlinedVal7)
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      inlinedVal2 = minimax2.Some(inlinedVal3);
-      arg$Some$0$ = inlinedVal2.value;
-      tmp1 = globalThis.Object.freeze([
-        b,
-        arg$Some$0$
-      ]);
-      return minimax2.Rose(tmp1, minimax2.Nil);
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-gameTreeWithTT_minimaxTT_snd$snd = function gameTreeWithTT_minimaxTT_snd$snd(p) {
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    return runtime.Tuple.get(p, 1)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-gameTree_minimax_snd$snd = function gameTree_minimax_snd$snd(p) {
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    return runtime.Tuple.get(p, 1)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-gameTree_minimax$minimax = function gameTree_minimax$minimax(p) {
-  return (b) => {
-    return gameTree_minimax$minimax$worker(p, b)
-  }
-};
-gameTree_minimax$minimax$worker = function gameTree_minimax$minimax$worker(p, b) {
-  let tmp, tmp1, tmp2, inlinedVal, p1, tmp3, p2, inlinedVal1;
-  p1 = minimax1.X;
-  tmp3 = minimax1[rows$accessorSymbol]();
-  p2 = minimax1[hasTrip$accessorSymbol](b, p1);
-  inlinedVal1 = minimax1[listExists$tailrec$accessorSymbol](p2, tmp3);
-  if (inlinedVal1 === false) {
-    let tmp4, p3, inlinedVal2;
-    tmp4 = minimax1[cols$accessorSymbol]();
-    p3 = minimax1[hasTrip$accessorSymbol](b, p1);
-    inlinedVal2 = minimax1[listExists$tailrec$accessorSymbol](p3, tmp4);
-    if (inlinedVal2 === false) {
-      let inlinedVal3, p4, inlinedVal4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11;
-      tmp5 = minimax1.Cons(8, minimax1.Nil);
-      tmp6 = minimax1.Cons(4, tmp5);
-      tmp7 = minimax1.Cons(0, tmp6);
-      tmp8 = minimax1.Cons(6, minimax1.Nil);
-      tmp9 = minimax1.Cons(4, tmp8);
-      tmp10 = minimax1.Cons(2, tmp9);
-      tmp11 = minimax1.Cons(tmp10, minimax1.Nil);
-      inlinedVal3 = minimax1.Cons(tmp7, tmp11);
-      p4 = minimax1[hasTrip$accessorSymbol](b, p1);
-      inlinedVal4 = minimax1[listExists$tailrec$accessorSymbol](p4, inlinedVal3);
-      if (inlinedVal4 === false) {
-        let p5, tmp12, p6, inlinedVal5;
-        p5 = minimax1.O;
-        tmp12 = minimax1[rows$accessorSymbol]();
-        p6 = minimax1[hasTrip$accessorSymbol](b, p5);
-        inlinedVal5 = minimax1[listExists$tailrec$accessorSymbol](p6, tmp12);
-        if (inlinedVal5 === false) {
-          let tmp13, p7, inlinedVal6;
-          tmp13 = minimax1[cols$accessorSymbol]();
-          p7 = minimax1[hasTrip$accessorSymbol](b, p5);
-          inlinedVal6 = minimax1[listExists$tailrec$accessorSymbol](p7, tmp13);
-          if (inlinedVal6 === false) {
-            let inlinedVal7, p8, inlinedVal8, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20;
-            tmp14 = minimax1.Cons(8, minimax1.Nil);
-            tmp15 = minimax1.Cons(4, tmp14);
-            tmp16 = minimax1.Cons(0, tmp15);
-            tmp17 = minimax1.Cons(6, minimax1.Nil);
-            tmp18 = minimax1.Cons(4, tmp17);
-            tmp19 = minimax1.Cons(2, tmp18);
-            tmp20 = minimax1.Cons(tmp19, minimax1.Nil);
-            inlinedVal7 = minimax1.Cons(tmp16, tmp20);
-            p8 = minimax1[hasTrip$accessorSymbol](b, p5);
-            inlinedVal8 = minimax1[listExists$tailrec$accessorSymbol](p8, inlinedVal7);
-            if (inlinedVal8 === false) {
-              inlinedVal = minimax1[isCat$accessorSymbol](b);
-            } else {
-              inlinedVal = true;
-            }
-          } else {
-            inlinedVal = true;
-          }
-        } else {
-          inlinedVal = true;
-        }
-      } else {
-        inlinedVal = true;
-      }
-    } else {
-      inlinedVal = true;
-    }
-  } else {
-    inlinedVal = true;
-  }
-  if (inlinedVal === true) {
-    let inlinedVal2, p3, tmp4, p4, inlinedVal3;
-    p3 = minimax1.X;
-    tmp4 = minimax1[rows$accessorSymbol]();
-    p4 = minimax1[hasTrip$accessorSymbol](b, p3);
-    inlinedVal3 = minimax1[listExists$tailrec$accessorSymbol](p4, tmp4);
-    if (inlinedVal3 === false) {
-      let tmp5, p5, inlinedVal4;
-      tmp5 = minimax1[cols$accessorSymbol]();
-      p5 = minimax1[hasTrip$accessorSymbol](b, p3);
-      inlinedVal4 = minimax1[listExists$tailrec$accessorSymbol](p5, tmp5);
-      if (inlinedVal4 === false) {
-        let inlinedVal5, p6, inlinedVal6, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
-        tmp6 = minimax1.Cons(8, minimax1.Nil);
-        tmp7 = minimax1.Cons(4, tmp6);
-        tmp8 = minimax1.Cons(0, tmp7);
-        tmp9 = minimax1.Cons(6, minimax1.Nil);
-        tmp10 = minimax1.Cons(4, tmp9);
-        tmp11 = minimax1.Cons(2, tmp10);
-        tmp12 = minimax1.Cons(tmp11, minimax1.Nil);
-        inlinedVal5 = minimax1.Cons(tmp8, tmp12);
-        p6 = minimax1[hasTrip$accessorSymbol](b, p3);
-        inlinedVal6 = minimax1[listExists$tailrec$accessorSymbol](p6, inlinedVal5);
-        if (inlinedVal6 === true) {
-          inlinedVal2 = 1;
-        } else {
-          let p7, tmp13, p8, inlinedVal7;
-          p7 = minimax1.O;
-          tmp13 = minimax1[rows$accessorSymbol]();
-          p8 = minimax1[hasTrip$accessorSymbol](b, p7);
-          inlinedVal7 = minimax1[listExists$tailrec$accessorSymbol](p8, tmp13);
-          if (inlinedVal7 === false) {
-            let tmp14, p9, inlinedVal8;
-            tmp14 = minimax1[cols$accessorSymbol]();
-            p9 = minimax1[hasTrip$accessorSymbol](b, p7);
-            inlinedVal8 = minimax1[listExists$tailrec$accessorSymbol](p9, tmp14);
-            if (inlinedVal8 === false) {
-              let inlinedVal9, p10, inlinedVal10, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
-              tmp15 = minimax1.Cons(8, minimax1.Nil);
-              tmp16 = minimax1.Cons(4, tmp15);
-              tmp17 = minimax1.Cons(0, tmp16);
-              tmp18 = minimax1.Cons(6, minimax1.Nil);
-              tmp19 = minimax1.Cons(4, tmp18);
-              tmp20 = minimax1.Cons(2, tmp19);
-              tmp21 = minimax1.Cons(tmp20, minimax1.Nil);
-              inlinedVal9 = minimax1.Cons(tmp17, tmp21);
-              p10 = minimax1[hasTrip$accessorSymbol](b, p7);
-              inlinedVal10 = minimax1[listExists$tailrec$accessorSymbol](p10, inlinedVal9);
-              if (inlinedVal10 === true) {
-                inlinedVal2 = -1;
-              } else {
-                inlinedVal2 = 0;
-              }
-            } else {
-              inlinedVal2 = -1;
-            }
-          } else {
-            inlinedVal2 = -1;
-          }
-        }
-      } else {
-        inlinedVal2 = 1;
-      }
-    } else {
-      inlinedVal2 = 1;
-    }
-    tmp = globalThis.Object.freeze([
-      b,
-      inlinedVal2
-    ]);
-    return minimax1.Rose(tmp, minimax1.Nil)
-  }
-  {
-    let inlinedVal2, f, inlinedVal3, g, f1, inlinedVal4, tmp4, f2, inlinedVal5;
-    if (p instanceof minimax1.X.class) {
-      inlinedVal2 = minimax1.O;
-    } else if (p instanceof minimax1.O.class) {
-      inlinedVal2 = minimax1.X;
-    } else {
-      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-    }
-    tmp4 = minimax1[allMoves$accessorSymbol](b);
-    f2 = minimax1[moveTo$accessorSymbol](b, p);
-    inlinedVal5 = minimax1[map$tailrec$accessorSymbol](f2, tmp4);
-    f = gameTree_minimax$minimax(inlinedVal2);
-    inlinedVal3 = minimax1[map$tailrec$accessorSymbol](f, inlinedVal5);
-    g = minimax1[top$accessorSymbol];
-    f1 = lambda$(gameTree_minimax_snd$snd, g);
-    inlinedVal4 = minimax1[map$tailrec$accessorSymbol](f1, inlinedVal3);
-    if (p instanceof minimax1.X.class) {
-      let arg$Cons$0$, arg$Cons$1$;
-      if (inlinedVal4 instanceof minimax1.Cons.class) {
-        let inlinedVal6;
-        arg$Cons$0$ = inlinedVal4.head;
-        arg$Cons$1$ = inlinedVal4.tail;
-        inlinedVal6 = minimax1[listFoldl$tailrec$accessorSymbol](lambda, arg$Cons$0$, arg$Cons$1$);
-        tmp1 = globalThis.Object.freeze([
-          b,
-          inlinedVal6
-        ]);
-        return minimax1.Rose(tmp1, inlinedVal3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    {
-      let arg$Cons$0$, arg$Cons$1$;
-      if (inlinedVal4 instanceof minimax1.Cons.class) {
-        let inlinedVal6;
-        arg$Cons$0$ = inlinedVal4.head;
-        arg$Cons$1$ = inlinedVal4.tail;
-        inlinedVal6 = minimax1[listFoldl$tailrec$accessorSymbol](lambda1, arg$Cons$0$, arg$Cons$1$);
-        tmp2 = globalThis.Object.freeze([
-          b,
-          inlinedVal6
-        ]);
-        return minimax1.Rose(tmp2, inlinedVal3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-  }
 };
 minimax_snd$snd = function minimax_snd$snd(p) {
   if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
@@ -967,63 +508,6 @@ minimax_snd$snd = function minimax_snd$snd(p) {
 minimaxTT_snd$snd = function minimaxTT_snd$snd(p) {
   if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
     return runtime.Tuple.get(p, 1)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doKid$ = function doKid$(minimax2) {
-  return (t, acc) => {
-    return doKid(minimax2, t, acc)
-  }
-};
-doKid = function doKid(minimax2, t, acc) {
-  let scrut, element1$, element0$, element1$1, element0$1, tmp;
-  if (runtime.Tuple.isArrayLike(acc) && acc.length === 2) {
-    element0$ = runtime.Tuple.get(acc, 0);
-    element1$ = runtime.Tuple.get(acc, 1);
-    scrut = sz(minimax2, t);
-    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-      let scrut1;
-      element0$1 = runtime.Tuple.get(scrut, 0);
-      element1$1 = runtime.Tuple.get(scrut, 1);
-      tmp = element0$ + element0$1;
-      scrut1 = element1$ > element1$1;
-      if (scrut1 === true) {
-        return globalThis.Object.freeze([
-          tmp,
-          element1$
-        ])
-      }
-      return globalThis.Object.freeze([
-        tmp,
-        element1$1
-      ]);
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-sz = function sz(minimax2, t) {
-  let arg$Rose$1$, element1$, element0$, tmp, tmp1, tmp2;
-  if (t instanceof minimax2.Rose.class) {
-    let f, inlinedVal;
-    arg$Rose$1$ = t.kids;
-    tmp = globalThis.Object.freeze([
-      0,
-      0
-    ]);
-    f = doKid$(minimax2);
-    inlinedVal = minimax2[listFoldl$tailrec$accessorSymbol](f, tmp, arg$Rose$1$);
-    if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
-      element0$ = runtime.Tuple.get(inlinedVal, 0);
-      element1$ = runtime.Tuple.get(inlinedVal, 1);
-      tmp1 = element0$ + 1;
-      tmp2 = element1$ + 1;
-      return globalThis.Object.freeze([
-        tmp1,
-        tmp2
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
@@ -1259,6 +743,63 @@ minimaxTT$worker = function minimaxTT$worker(minimax2, transTable, p, b) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
+};
+doKid$ = function doKid$(minimax2) {
+  return (t, acc) => {
+    return doKid(minimax2, t, acc)
+  }
+};
+doKid = function doKid(minimax2, t, acc) {
+  let scrut, element1$, element0$, element1$1, element0$1, tmp;
+  if (runtime.Tuple.isArrayLike(acc) && acc.length === 2) {
+    element0$ = runtime.Tuple.get(acc, 0);
+    element1$ = runtime.Tuple.get(acc, 1);
+    scrut = sz(minimax2, t);
+    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+      let scrut1;
+      element0$1 = runtime.Tuple.get(scrut, 0);
+      element1$1 = runtime.Tuple.get(scrut, 1);
+      tmp = element0$ + element0$1;
+      scrut1 = element1$ > element1$1;
+      if (scrut1 === true) {
+        return globalThis.Object.freeze([
+          tmp,
+          element1$
+        ])
+      }
+      return globalThis.Object.freeze([
+        tmp,
+        element1$1
+      ]);
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+sz = function sz(minimax2, t) {
+  let arg$Rose$1$, element1$, element0$, tmp, tmp1, tmp2;
+  if (t instanceof minimax2.Rose.class) {
+    let f, inlinedVal;
+    arg$Rose$1$ = t.kids;
+    tmp = globalThis.Object.freeze([
+      0,
+      0
+    ]);
+    f = doKid$(minimax2);
+    inlinedVal = minimax2[listFoldl$tailrec$accessorSymbol](f, tmp, arg$Rose$1$);
+    if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+      element0$ = runtime.Tuple.get(inlinedVal, 0);
+      element1$ = runtime.Tuple.get(inlinedVal, 1);
+      tmp1 = element0$ + 1;
+      tmp2 = element1$ + 1;
+      return globalThis.Object.freeze([
+        tmp1,
+        tmp2
+      ])
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 lambda$1 = (undefined, function (minimax2) {
   return (i, acc) => {
@@ -1920,37 +1461,38 @@ go = function go(minimax2, n, f, i) {
     return sz(minimax, tr)
   }
   static main() {
-    let tmp, tmp1, p, inlinedVal, tmp2, arr, i, n, f, inlinedVal1, f1, inlinedVal2, p1, inlinedVal3, f2, inlinedVal4;
-    f2 = main_gameTree_empty_lambda$$lambda$(minimax1);
-    inlinedVal4 = main_gameTree_empty_listTabulate_go$go(minimax1, 9, f2, 0);
-    p1 = minimax1.X;
-    inlinedVal3 = main_gameTree_minimax$minimax$worker(p1, inlinedVal4);
-    tmp = minimax.#treeStats(inlinedVal3);
+    let tree, tmp, tmp1, p, inlinedVal, p1, inlinedVal1, f, inlinedVal2, tmp2, arr, i, n, f1, inlinedVal3, f2, inlinedVal4;
+    f2 = main_empty_lambda$$lambda$(minimax1);
+    inlinedVal4 = main_empty_listTabulate_go$go(minimax1, 9, f2, 0);
+    p = minimax.X;
+    inlinedVal = main_minimax$minimax$worker(p, inlinedVal4);
+    tree = inlinedVal;
     tmp2 = [];
     arr = tmp2;
     i = 0;
     n = 59049;
-    f = main_gameTreeWithTT_lambda$$lambda$(-2);
+    f1 = main_lambda$$lambda$(-2);
     inlinedLbl: {
       loopLabel: while (true) {
         let scrut, tmp3, tmp4;
         scrut = i == n;
         if (scrut === true) {
-          inlinedVal1 = arr;
+          inlinedVal3 = arr;
           break inlinedLbl
         }
-        tmp3 = runtime.safeCall(f());
+        tmp3 = runtime.safeCall(f1());
         arr[i] = tmp3;
         tmp4 = i + 1;
         i = tmp4;
         continue loopLabel;
       }
     }
-    f1 = main_gameTreeWithTT_empty_lambda$$lambda$(minimax1);
-    inlinedVal2 = main_gameTreeWithTT_empty_listTabulate_go$go(minimax1, 9, f1, 0);
-    p = minimax1.X;
-    inlinedVal = main_gameTreeWithTT_minimaxTT$minimaxTT$worker(minimax1, inlinedVal1, p, inlinedVal2);
-    tmp1 = minimax.#treeStats(inlinedVal);
+    tmp = minimax.#treeStats(tree);
+    f = main_empty_lambda$$lambda$1(minimax1);
+    inlinedVal2 = main_empty_listTabulate_go$go1(minimax1, 9, f, 0);
+    p1 = minimax.X;
+    inlinedVal1 = main_minimaxTT$minimaxTT$worker(minimax, inlinedVal3, p1, inlinedVal2);
+    tmp1 = minimax.#treeStats(inlinedVal1);
     return globalThis.Object.freeze([
       tmp,
       tmp1
@@ -1960,9 +1502,9 @@ go = function go(minimax2, n, f, i) {
   static [definitionMetadata] = ["class", "minimax"];
 });
 export { go as _$_modulePrivate_$_go };
-export { minimaxTT as _$_modulePrivate_$_minimaxTT };
 export { doKid as _$_modulePrivate_$_doKid };
 export { sz as _$_modulePrivate_$_sz };
+export { minimaxTT as _$_modulePrivate_$_minimaxTT };
 export { minimax1 as _$_modulePrivate_$_minimax };
 export { lambda as _$_modulePrivate_$_lambda };
 export { lambda1 as _$_modulePrivate_$_lambda1 };
@@ -1970,27 +1512,19 @@ export { lambda2 as _$_modulePrivate_$_lambda2 };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { doKid$ as _$_modulePrivate_$_doKid$ };
-export { main_gameTree_empty_lambda$$lambda$ as _$_modulePrivate_$_main_gameTree_empty_lambda$$lambda$ };
-export { main_gameTreeWithTT_empty_lambda$$lambda$ as _$_modulePrivate_$_main_gameTreeWithTT_empty_lambda$$lambda$ };
-export { main_gameTreeWithTT_lambda$$lambda$ as _$_modulePrivate_$_main_gameTreeWithTT_lambda$$lambda$ };
-export { main_gameTree_empty_listTabulate_go$go as _$_modulePrivate_$_main_gameTree_empty_listTabulate_go$go };
-export { main_gameTreeWithTT_empty_listTabulate_go$go as _$_modulePrivate_$_main_gameTreeWithTT_empty_listTabulate_go$go };
-export { gameTreeWithTT_empty_listTabulate_go$go as _$_modulePrivate_$_gameTreeWithTT_empty_listTabulate_go$go };
-export { gameTree_empty_listTabulate_go$go as _$_modulePrivate_$_gameTree_empty_listTabulate_go$go };
+export { main_empty_lambda$$lambda$ as _$_modulePrivate_$_main_empty_lambda$$lambda$ };
+export { main_lambda$$lambda$ as _$_modulePrivate_$_main_lambda$$lambda$ };
+export { main_empty_lambda$$lambda$1 as _$_modulePrivate_$_main_empty_lambda$$lambda$1 };
+export { main_empty_listTabulate_go$go as _$_modulePrivate_$_main_empty_listTabulate_go$go };
+export { main_empty_listTabulate_go$go1 as _$_modulePrivate_$_main_empty_listTabulate_go$go1 };
 export { empty_listTabulate_go$go as _$_modulePrivate_$_empty_listTabulate_go$go };
-export { main_gameTree_minimax_snd$snd as _$_modulePrivate_$_main_gameTree_minimax_snd$snd };
-export { main_gameTree_minimax$minimax as _$_modulePrivate_$_main_gameTree_minimax$minimax };
-export { main_gameTreeWithTT_minimaxTT$minimaxTT as _$_modulePrivate_$_main_gameTreeWithTT_minimaxTT$minimaxTT };
-export { main_gameTreeWithTT_minimaxTT_snd$snd as _$_modulePrivate_$_main_gameTreeWithTT_minimaxTT_snd$snd };
-export { gameTreeWithTT_minimaxTT$minimaxTT as _$_modulePrivate_$_gameTreeWithTT_minimaxTT$minimaxTT };
-export { gameTreeWithTT_minimaxTT_snd$snd as _$_modulePrivate_$_gameTreeWithTT_minimaxTT_snd$snd };
-export { gameTree_minimax_snd$snd as _$_modulePrivate_$_gameTree_minimax_snd$snd };
-export { gameTree_minimax$minimax as _$_modulePrivate_$_gameTree_minimax$minimax };
+export { main_minimax_snd$snd as _$_modulePrivate_$_main_minimax_snd$snd };
+export { main_minimax$minimax as _$_modulePrivate_$_main_minimax$minimax };
+export { main_minimaxTT$minimaxTT as _$_modulePrivate_$_main_minimaxTT$minimaxTT };
+export { main_minimaxTT_snd$snd as _$_modulePrivate_$_main_minimaxTT_snd$snd };
 export { minimax_snd$snd as _$_modulePrivate_$_minimax_snd$snd };
 export { minimaxTT_snd$snd as _$_modulePrivate_$_minimaxTT_snd$snd };
 export { minimaxTT$worker as _$_modulePrivate_$_minimaxTT$worker };
-export { gameTree_minimax$minimax$worker as _$_modulePrivate_$_gameTree_minimax$minimax$worker };
-export { gameTreeWithTT_minimaxTT$minimaxTT$worker as _$_modulePrivate_$_gameTreeWithTT_minimaxTT$minimaxTT$worker };
-export { main_gameTreeWithTT_minimaxTT$minimaxTT$worker as _$_modulePrivate_$_main_gameTreeWithTT_minimaxTT$minimaxTT$worker };
-export { main_gameTree_minimax$minimax$worker as _$_modulePrivate_$_main_gameTree_minimax$minimax$worker };
+export { main_minimaxTT$minimaxTT$worker as _$_modulePrivate_$_main_minimaxTT$minimaxTT$worker };
+export { main_minimax$minimax$worker as _$_modulePrivate_$_main_minimax$minimax$worker };
 export default minimax1;

@@ -70,35 +70,33 @@ private fun initialBw(lastFrame)() = if lastFrame is
   LSpare(bonus1, throw1) then [throw1, 10 - throw1]
   LFrame(throw1, throw2) then [throw1, throw2]
 
-private fun score(game) = if game is Game(frames, lastFrame) then
-  let finalFrameScore = lframeScore(lastFrame)
-  
-  fun go(frames) = if frames is
-    Nil then
-      bind(getPast)(scores => if scores is score :: _ then
-        pure((() => finalFrameScore + score()) :: scores))
-    f :: fs then
-      bind(fix(p =>
-        let score1 = () => fst(p(()))()
-        let throws1 = () => snd(p(()))
-        bind(sendPast(throws1))(_ =>
-          bind(getPast)(scores => if scores is score :: _ then
-            bind(sendFuture(score1 :: scores))(_ =>
-              bind(getFuture)(nextThrows =>
-                if f is
-                  Strike then pure(_ =>
-                    [() => score() + 10 + fst(nextThrows()) + snd(nextThrows()), [10, fst(nextThrows())]])
-                  Spare(firstThrow) then pure(_ =>
-                    [() => score() + 10 + fst(nextThrows()), [firstThrow, 10 - firstThrow]])
-                  Frame(firstThrow, secondThrow) then pure(_ =>
-                    [() => score() + firstThrow + secondThrow, [firstThrow, secondThrow]])))))))(_ => go(fs))
-  
-  let initialFw = (() => 0) :: Nil
-  if run(go(frames), initialBw(lastFrame), initialFw) is [scores, bw, fw] then
-    map(th => th())(scores)
-
 fun main() =
   let sampleGame = Game(
     Strike :: Spare(9) :: Strike :: Strike :: Strike :: Frame(8, 1) :: Spare(7) :: Strike :: Strike :: Nil,
     LStrike(10, 10))
-  score(sampleGame)
+  if sampleGame is Game(frames, lastFrame) then
+    let finalFrameScore = lframeScore(lastFrame)
+    
+    fun go(frames) = if frames is
+      Nil then
+        bind(getPast)(scores => if scores is score :: _ then
+          pure((() => finalFrameScore + score()) :: scores))
+      f :: fs then
+        bind(fix(p =>
+          let score1 = () => fst(p(()))()
+          let throws1 = () => snd(p(()))
+          bind(sendPast(throws1))(_ =>
+            bind(getPast)(scores => if scores is score :: _ then
+              bind(sendFuture(score1 :: scores))(_ =>
+                bind(getFuture)(nextThrows =>
+                  if f is
+                    Strike then pure(_ =>
+                      [() => score() + 10 + fst(nextThrows()) + snd(nextThrows()), [10, fst(nextThrows())]])
+                    Spare(firstThrow) then pure(_ =>
+                      [() => score() + 10 + fst(nextThrows()), [firstThrow, 10 - firstThrow]])
+                    Frame(firstThrow, secondThrow) then pure(_ =>
+                      [() => score() + firstThrow + secondThrow, [firstThrow, secondThrow]])))))))(_ => go(fs))
+    
+    let initialFw = (() => 0) :: Nil
+    if run(go(frames), initialBw(lastFrame), initialFw) is [scores, bw, fw] then
+      map(th => th())(scores)

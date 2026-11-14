@@ -160,8 +160,6 @@ private fun minimax(p)(b) =
       X then Rose([b, listmax(scores)], trees)
       else Rose([b, listmin(scores)], trees)
 
-private fun gameTree() = minimax(X)(empty())
-
 private fun boardToIndex(p, b) =
   fun handleItem(i) = if i is
     Some(X) then 1
@@ -171,7 +169,14 @@ private fun boardToIndex(p, b) =
   if listFoldr((i, acc) => if acc is [sum, base] then [sum + handleItem(i) * base, base * 3])(start)(b) is [res, _] then
     res
 
-private fun gameTreeWithTT() =
+private fun treeStats(tr) =
+  fun sz(t) = if t is Rose(_, kids) then
+    fun doKid(t, acc) = if acc is [n, d] and sz(t) is [n1, d1] then [n + n1, intMax(d, d1)]
+    if listFoldl(doKid)([0, 0])(kids) is [n, d] then [n + 1, d + 1]
+  sz(tr)
+
+fun main() =
+  let tree = minimax(X)(empty())
   let unused = -2
   let transTable = arrayTabulate(59049, i => unused)
   fun lookupTrans(p, b) =
@@ -191,13 +196,4 @@ private fun gameTreeWithTT() =
             else listmin(scores)
           setTrans(p, b, final)
           Rose([b, final], trees)
-  minimaxTT(X)(empty())
-
-
-private fun treeStats(tr) =
-  fun sz(t) = if t is Rose(_, kids) then
-    fun doKid(t, acc) = if acc is [n, d] and sz(t) is [n1, d1] then [n + n1, intMax(d, d1)]
-    if listFoldl(doKid)([0, 0])(kids) is [n, d] then [n + 1, d + 1]
-  sz(tr)
-
-fun main() = [treeStats(gameTree()), treeStats(gameTreeWithTT())]
+  [treeStats(tree), treeStats(minimaxTT(X)(empty()))]

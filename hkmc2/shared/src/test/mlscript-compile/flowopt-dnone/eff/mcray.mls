@@ -280,8 +280,6 @@ private fun buildScene(rng, wid, ht, ns) =
   let world = makeScene(rng)
   [cam, world]
 
-private fun test(rng, wid, ht, ns) = if buildScene(rng, wid, ht, ns) is [cam, world] then rayTracer(rng, cam, world)
-
 fun main() =
   let rng = new mut Ref(1234567)
-  test(rng, 3, 2, 5)
+  if buildScene(rng, 3, 2, 5) is [cam, world] then rayTracer(rng, cam, world)

@@ -1345,20 +1345,16 @@ go = function go(mcray2, n, f, i) {
       world
     ])
   }
-  static #test(rng, wid, ht, ns) {
-    let scrut, element1$, element0$;
-    scrut = mcray.#buildScene(rng, wid, ht, ns);
+  static main() {
+    let rng, scrut, element1$, element0$;
+    rng = new mcray.Ref.class(1234567);
+    scrut = mcray.#buildScene(rng, 3, 2, 5);
     if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
       element0$ = runtime.Tuple.get(scrut, 0);
       element1$ = runtime.Tuple.get(scrut, 1);
       return mcray.#rayTracer(rng, element0$, element1$)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static main() {
-    let rng;
-    rng = new mcray.Ref.class(1234567);
-    return mcray.#test(rng, 3, 2, 5)
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "mcray"];

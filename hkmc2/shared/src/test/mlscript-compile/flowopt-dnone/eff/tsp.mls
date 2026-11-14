@@ -226,10 +226,6 @@ private fun tsp(t, sz) = if t is
   NULL then NULL
 
 
-private fun mkTree(n) = buildTree(n, X_AXIS, 0.0, 1.0, 0.0, 1.0)
-
-private fun doit(n, divideSz) = tsp(mkTree(n), divideSz)
-
 private fun tourLength(start) = if start is
   NULL then [0, 0.0]
   ND(_, _, x, y, _, _, next) then
@@ -248,4 +244,4 @@ private fun tourLength(start) = if start is
     if cycle(next.Ref#value) then [1, 0.0]
     else length(next.Ref#value, x, y, 1, 0.0)
 
-fun main() = tourLength(doit(255, 150))
+fun main() = tourLength(tsp(buildTree(255, X_AXIS, 0.0, 1.0, 0.0, 1.0), 150))
