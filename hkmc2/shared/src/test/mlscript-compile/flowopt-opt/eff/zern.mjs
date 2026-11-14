@@ -180,7 +180,7 @@ main_ztest_lambda$_lambda_tabulateCM$tabulateCM = function main_ztest_lambda$_la
       }
     }
   }
-  return zern.Arr2(arr, undefined, undefined, undefined)
+  return zern1.Arr2(arr, undefined, undefined, undefined)
 };
 main_ztest_lambda$_lambda_tabulateRM$tabulateRM = function main_ztest_lambda$_lambda_tabulateRM$tabulateRM(nrows, ncols, f) {
   let nelts, arr, id, param1, param2, param3, param4, param5, param6, param7, tmp, arr1, i, n, x, inlinedVal;
@@ -250,7 +250,7 @@ main_ztest_lambda$_lambda_tabulateRM$tabulateRM = function main_ztest_lambda$_la
       }
     }
   }
-  return zern.Arr2(arr, undefined, undefined, undefined)
+  return zern1.Arr2(arr, undefined, undefined, undefined)
 };
 main_ztest_lambda$$lambda$1 = function main_ztest_lambda$$lambda$() {
   return (x) => {
@@ -366,7 +366,7 @@ ztest_lambda$_lambda_tabulateRM$tabulateRM = function ztest_lambda$_lambda_tabul
       }
     }
   }
-  return zern.Arr2(arr, undefined, undefined, undefined)
+  return zern1.Arr2(arr, undefined, undefined, undefined)
 };
 ztest_lambda$_lambda$lambda = function ztest_lambda$_lambda$lambda(zern2) {
   let lambda$here, t, inlinedVal;
@@ -458,7 +458,7 @@ ztest_lambda$_lambda_tabulateCM$tabulateCM = function ztest_lambda$_lambda_tabul
       }
     }
   }
-  return zern.Arr2(arr, undefined, undefined, undefined)
+  return zern1.Arr2(arr, undefined, undefined, undefined)
 };
 ztest_lambda$_lambda_lambda$_lambda$lambda = function ztest_lambda$_lambda_lambda$_lambda$lambda(r, c) {
   let tmp, tmp1;
@@ -2132,7 +2132,7 @@ iter = function iter(n, f, k) {
     }
     lambda$here3 = ztest_array_mkArray_lambda$$lambda$(0.0, inlinedVal8);
     zern1.#dotimes(nelts2)(lambda$here3);
-    inlinedVal = zern.Arr2(inlinedVal8, undefined, undefined, nelts2);
+    inlinedVal = zern1.Arr2(inlinedVal8, undefined, undefined, nelts2);
     tmp2 = zern.#ny();
     tmp3 = zern.#nx();
     nelts1 = zern1.#chkSize(tmp2, tmp3);
@@ -2182,7 +2182,7 @@ iter = function iter(n, f, k) {
     }
     lambda$here1 = ztest_array_mkArray_lambda$$lambda$2(0.0, inlinedVal10);
     zern1.#dotimes(nelts)(lambda$here1);
-    inlinedVal2 = zern.Arr2(inlinedVal10, undefined, undefined, nelts);
+    inlinedVal2 = zern1.Arr2(inlinedVal10, undefined, undefined, nelts);
     tmp6 = zern.#ncoefs();
     lambda$here = ztest_lambda$$lambda$();
     coefs = zern.#collect(tmp6)(lambda$here);
@@ -2298,7 +2298,7 @@ iter = function iter(n, f, k) {
     }
     lambda$here = main_ztest_array_mkArray_lambda$$lambda$2(0.0, inlinedVal10);
     zern1.#dotimes(nelts)(lambda$here);
-    inlinedVal = zern.Arr2(inlinedVal10, undefined, undefined, nelts);
+    inlinedVal = zern1.Arr2(inlinedVal10, undefined, undefined, nelts);
     inlinedVal1 = 128;
     nelts1 = zern1.#chkSize(128, 128);
     tmp1 = [];
@@ -2345,7 +2345,7 @@ iter = function iter(n, f, k) {
     }
     lambda$here2 = main_ztest_array_mkArray_lambda$$lambda$(0.0, inlinedVal12);
     zern1.#dotimes(nelts2)(lambda$here2);
-    inlinedVal3 = zern.Arr2(inlinedVal12, undefined, undefined, nelts2);
+    inlinedVal3 = zern1.Arr2(inlinedVal12, undefined, undefined, nelts2);
     f = main_ztest_lambda$$lambda$1();
     l = zern1.Nil;
     inlinedVal4 = g$tailrec(zern1, f, 15, l);

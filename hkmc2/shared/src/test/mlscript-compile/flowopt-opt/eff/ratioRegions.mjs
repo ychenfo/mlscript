@@ -3134,14 +3134,14 @@ preflow_push = function preflow_push(ratioRegions2, c_right, c_down, w, height, 
         p1 = lambda$17(ratioRegions3, width1, h1, e1, m11);
         inlinedVal3 = loop2(height1, p1, 0);
         if (inlinedVal3 === true) {
-          tmp4 = ratioRegions.PInt(undefined);
-          tmp5 = ratioRegions.PString(undefined);
-          tmp6 = ratioRegions.PInt(undefined);
-          tmp7 = ratioRegions.PString(undefined);
-          tmp8 = ratioRegions.PInt(undefined);
-          tmp9 = ratioRegions.PString(undefined);
-          tmp10 = ratioRegions.PInt(undefined);
-          tmp11 = ratioRegions.PString(undefined);
+          tmp4 = ratioRegions3.PInt(undefined);
+          tmp5 = ratioRegions3.PString(undefined);
+          tmp6 = ratioRegions3.PInt(undefined);
+          tmp7 = ratioRegions3.PString(undefined);
+          tmp8 = ratioRegions3.PInt(undefined);
+          tmp9 = ratioRegions3.PString(undefined);
+          tmp10 = ratioRegions3.PInt(undefined);
+          tmp11 = ratioRegions3.PString(undefined);
           tmp12 = ratioRegions3.Cons(tmp11, ratioRegions3.Nil);
           tmp13 = ratioRegions3.Cons(tmp10, tmp12);
           tmp14 = ratioRegions3.Cons(tmp9, tmp13);
@@ -3213,14 +3213,14 @@ preflow_push = function preflow_push(ratioRegions2, c_right, c_down, w, height, 
           loop5(ratioRegions3, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
           tmp22 = relabels1.value + 1;
           relabels1.value = tmp22;
-          tmp23 = ratioRegions.PInt(undefined);
-          tmp24 = ratioRegions.PString(undefined);
-          tmp25 = ratioRegions.PInt(undefined);
-          tmp26 = ratioRegions.PString(undefined);
-          tmp27 = ratioRegions.PInt(undefined);
-          tmp28 = ratioRegions.PString(undefined);
-          tmp29 = ratioRegions.PInt(undefined);
-          tmp30 = ratioRegions.PString(undefined);
+          tmp23 = ratioRegions3.PInt(undefined);
+          tmp24 = ratioRegions3.PString(undefined);
+          tmp25 = ratioRegions3.PInt(undefined);
+          tmp26 = ratioRegions3.PString(undefined);
+          tmp27 = ratioRegions3.PInt(undefined);
+          tmp28 = ratioRegions3.PString(undefined);
+          tmp29 = ratioRegions3.PInt(undefined);
+          tmp30 = ratioRegions3.PString(undefined);
           tmp31 = ratioRegions3.Cons(tmp30, ratioRegions3.Nil);
           tmp32 = ratioRegions3.Cons(tmp29, tmp31);
           tmp33 = ratioRegions3.Cons(tmp28, tmp32);
@@ -3301,28 +3301,27 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
     let v, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, inlinedVal;
     inlinedVal = lg_v < 0;
     if (inlinedVal === true) {
-      let ratioRegions3, ratioRegions4, height1, f, scrut, arr, pushes, lifts, relabels, tmp10, tmp11, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions5, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, relabels1, i, p;
+      let ratioRegions3, height1, f, scrut, arr, pushes, lifts, relabels, tmp10, tmp11, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions4, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, relabels1, i, p;
       tmp = ratioRegions2.PInt(undefined);
       tmp1 = ratioRegions2.Cons(tmp, ratioRegions2.Nil);
       loop_loop$loop(ratioRegions2, "V-MAX=~s~%", 0, tmp1);
       tmp2 = v_max + 1;
-      ratioRegions3 = ratioRegions2;
-      lambda$here = lambda$9(ratioRegions3, width, f_t, e);
-      ratioRegions3[doo$accessorSymbol](height, lambda$here);
-      lambda$here1 = lambda$8(ratioRegions3, width, f_right);
-      ratioRegions3[doo$accessorSymbol](height, lambda$here1);
+      lambda$here = lambda$9(ratioRegions2, width, f_t, e);
+      ratioRegions2[doo$accessorSymbol](height, lambda$here);
+      lambda$here1 = lambda$8(ratioRegions2, width, f_right);
+      ratioRegions2[doo$accessorSymbol](height, lambda$here1);
       tmp10 = height - 1;
-      lambda$here2 = lambda$7(ratioRegions3, width, f_down);
-      ratioRegions3[doo$accessorSymbol](tmp10, lambda$here2);
-      lambda$here3 = lambda$6(ratioRegions3, width, e);
-      ratioRegions3[doo$accessorSymbol](height, lambda$here3);
+      lambda$here2 = lambda$7(ratioRegions2, width, f_down);
+      ratioRegions2[doo$accessorSymbol](tmp10, lambda$here2);
+      lambda$here3 = lambda$6(ratioRegions2, width, e);
+      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
       tmp11 = width - 1;
-      lambda$here4 = lambda$5(ratioRegions3, height, e);
-      ratioRegions3[doo$accessorSymbol](tmp11, lambda$here4);
-      pushes = new ratioRegions3.Ref.class(0);
-      lifts = new ratioRegions3.Ref.class(0);
-      relabels = new ratioRegions3.Ref.class(0);
-      ratioRegions5 = ratioRegions3;
+      lambda$here4 = lambda$5(ratioRegions2, height, e);
+      ratioRegions2[doo$accessorSymbol](tmp11, lambda$here4);
+      pushes = new ratioRegions2.Ref.class(0);
+      lifts = new ratioRegions2.Ref.class(0);
+      relabels = new ratioRegions2.Ref.class(0);
+      ratioRegions4 = ratioRegions2;
       c_right1 = c_right;
       c_down1 = c_down;
       w1 = w;
@@ -3347,7 +3346,7 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
         loopLabel1: while (true) {
           let tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, lambda$here5, lambda$here6, lambda$here7, inlinedVal1, inlinedVal2, tmp49, tmp50, tmp51;
           tmp49 = i / 6;
-          tmp50 = ratioRegions5[floor$accessorSymbol](tmp49);
+          tmp50 = ratioRegions4[floor$accessorSymbol](tmp49);
           tmp51 = 6 * tmp50;
           inlinedVal1 = i - tmp51;
           inlinedVal2 = inlinedVal1 == 0;
@@ -3369,46 +3368,46 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
           }
           if (tmp12 === true) {
             let p1, inlinedVal3, q2, tail, lambda$here8, lambda$here9;
-            q2 = new ratioRegions5.Ref.class(ratioRegions5.QNil);
-            tail = new ratioRegions5.Ref.class(ratioRegions5.QNil);
-            lambda$here8 = lambda$25(ratioRegions5, width1, h1, marked1, m11);
-            ratioRegions5[doo$accessorSymbol](height2, lambda$here8);
-            lambda$here9 = lambda$24(ratioRegions5, w1, width1, f_t1, h1, marked1, v1, q2, tail);
-            ratioRegions5[doo$accessorSymbol](height2, lambda$here9);
-            loop5(ratioRegions5, c_right1, c_down1, height2, width1, f_right1, f_down1, h1, marked1, q2, tail);
+            q2 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+            tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+            lambda$here8 = lambda$25(ratioRegions4, width1, h1, marked1, m11);
+            ratioRegions4[doo$accessorSymbol](height2, lambda$here8);
+            lambda$here9 = lambda$24(ratioRegions4, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+            ratioRegions4[doo$accessorSymbol](height2, lambda$here9);
+            loop5(ratioRegions4, c_right1, c_down1, height2, width1, f_right1, f_down1, h1, marked1, q2, tail);
             tmp13 = relabels1.value + 1;
             relabels1.value = tmp13;
-            p1 = lambda$17(ratioRegions5, width1, h1, e1, m11);
+            p1 = lambda$17(ratioRegions4, width1, h1, e1, m11);
             inlinedVal3 = loop2(height2, p1, 0);
             if (inlinedVal3 === true) {
-              tmp14 = ratioRegions.PInt(undefined);
-              tmp15 = ratioRegions.PString(undefined);
-              tmp16 = ratioRegions.PInt(undefined);
-              tmp17 = ratioRegions.PString(undefined);
-              tmp18 = ratioRegions.PInt(undefined);
-              tmp19 = ratioRegions.PString(undefined);
-              tmp20 = ratioRegions.PInt(undefined);
-              tmp21 = ratioRegions.PString(undefined);
-              tmp22 = ratioRegions5.Cons(tmp21, ratioRegions5.Nil);
-              tmp23 = ratioRegions5.Cons(tmp20, tmp22);
-              tmp24 = ratioRegions5.Cons(tmp19, tmp23);
-              tmp25 = ratioRegions5.Cons(tmp18, tmp24);
-              tmp26 = ratioRegions5.Cons(tmp17, tmp25);
-              tmp27 = ratioRegions5.Cons(tmp16, tmp26);
-              tmp28 = ratioRegions5.Cons(tmp15, tmp27);
-              tmp29 = ratioRegions5.Cons(tmp14, tmp28);
-              loop4(ratioRegions5, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp29);
+              tmp14 = ratioRegions4.PInt(undefined);
+              tmp15 = ratioRegions4.PString(undefined);
+              tmp16 = ratioRegions4.PInt(undefined);
+              tmp17 = ratioRegions4.PString(undefined);
+              tmp18 = ratioRegions4.PInt(undefined);
+              tmp19 = ratioRegions4.PString(undefined);
+              tmp20 = ratioRegions4.PInt(undefined);
+              tmp21 = ratioRegions4.PString(undefined);
+              tmp22 = ratioRegions4.Cons(tmp21, ratioRegions4.Nil);
+              tmp23 = ratioRegions4.Cons(tmp20, tmp22);
+              tmp24 = ratioRegions4.Cons(tmp19, tmp23);
+              tmp25 = ratioRegions4.Cons(tmp18, tmp24);
+              tmp26 = ratioRegions4.Cons(tmp17, tmp25);
+              tmp27 = ratioRegions4.Cons(tmp16, tmp26);
+              tmp28 = ratioRegions4.Cons(tmp15, tmp27);
+              tmp29 = ratioRegions4.Cons(tmp14, tmp28);
+              loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp29);
               break inlinedLbl
             }
             {
               let inlinedVal4;
               inlinedVal4 = q1.length;
-              lambda$here5 = lambda$16(ratioRegions5, q1);
-              ratioRegions5[doo$accessorSymbol](inlinedVal4, lambda$here5);
-              lambda$here6 = lambda$15(ratioRegions5, width1, marked1);
-              ratioRegions5[doo$accessorSymbol](height2, lambda$here6);
-              lambda$here7 = lambda$14(ratioRegions5, width1, h1, e1, marked1, q1);
-              ratioRegions5[doo$accessorSymbol](height2, lambda$here7);
+              lambda$here5 = lambda$16(ratioRegions4, q1);
+              ratioRegions4[doo$accessorSymbol](inlinedVal4, lambda$here5);
+              lambda$here6 = lambda$15(ratioRegions4, width1, marked1);
+              ratioRegions4[doo$accessorSymbol](height2, lambda$here6);
+              lambda$here7 = lambda$14(ratioRegions4, width1, h1, e1, marked1, q1);
+              ratioRegions4[doo$accessorSymbol](height2, lambda$here7);
               p = true;
               continue loopLabel1;
             }
@@ -3416,7 +3415,7 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
           {
             let v2, p1, i1, inlinedVal3;
             v2 = q1;
-            p1 = lambda$13(ratioRegions5, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, m11, v1);
+            p1 = lambda$13(ratioRegions4, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, m11, v1);
             i1 = 0;
             inlinedLbl1: {
               loopLabel2: while (true) {
@@ -3443,7 +3442,7 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
               let inlinedVal4;
               inlinedVal4 = q1.length;
               tmp30 = inlinedVal4 - 1;
-              loopK(ratioRegions5, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, tmp30);
+              loopK(ratioRegions4, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, tmp30);
               tmp31 = i + 1;
               i = tmp31;
               p = false;
@@ -3451,50 +3450,50 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
             }
             {
               let q2, tail, lambda$here8, lambda$here9;
-              q2 = new ratioRegions5.Ref.class(ratioRegions5.QNil);
-              tail = new ratioRegions5.Ref.class(ratioRegions5.QNil);
-              lambda$here8 = lambda$25(ratioRegions5, width1, h1, marked1, m11);
-              ratioRegions5[doo$accessorSymbol](height2, lambda$here8);
-              lambda$here9 = lambda$24(ratioRegions5, w1, width1, f_t1, h1, marked1, v1, q2, tail);
-              ratioRegions5[doo$accessorSymbol](height2, lambda$here9);
-              loop5(ratioRegions5, c_right1, c_down1, height2, width1, f_right1, f_down1, h1, marked1, q2, tail);
+              q2 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+              tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+              lambda$here8 = lambda$25(ratioRegions4, width1, h1, marked1, m11);
+              ratioRegions4[doo$accessorSymbol](height2, lambda$here8);
+              lambda$here9 = lambda$24(ratioRegions4, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+              ratioRegions4[doo$accessorSymbol](height2, lambda$here9);
+              loop5(ratioRegions4, c_right1, c_down1, height2, width1, f_right1, f_down1, h1, marked1, q2, tail);
               tmp32 = relabels1.value + 1;
               relabels1.value = tmp32;
-              tmp33 = ratioRegions.PInt(undefined);
-              tmp34 = ratioRegions.PString(undefined);
-              tmp35 = ratioRegions.PInt(undefined);
-              tmp36 = ratioRegions.PString(undefined);
-              tmp37 = ratioRegions.PInt(undefined);
-              tmp38 = ratioRegions.PString(undefined);
-              tmp39 = ratioRegions.PInt(undefined);
-              tmp40 = ratioRegions.PString(undefined);
-              tmp41 = ratioRegions5.Cons(tmp40, ratioRegions5.Nil);
-              tmp42 = ratioRegions5.Cons(tmp39, tmp41);
-              tmp43 = ratioRegions5.Cons(tmp38, tmp42);
-              tmp44 = ratioRegions5.Cons(tmp37, tmp43);
-              tmp45 = ratioRegions5.Cons(tmp36, tmp44);
-              tmp46 = ratioRegions5.Cons(tmp35, tmp45);
-              tmp47 = ratioRegions5.Cons(tmp34, tmp46);
-              tmp48 = ratioRegions5.Cons(tmp33, tmp47);
-              loop4(ratioRegions5, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp48);
+              tmp33 = ratioRegions4.PInt(undefined);
+              tmp34 = ratioRegions4.PString(undefined);
+              tmp35 = ratioRegions4.PInt(undefined);
+              tmp36 = ratioRegions4.PString(undefined);
+              tmp37 = ratioRegions4.PInt(undefined);
+              tmp38 = ratioRegions4.PString(undefined);
+              tmp39 = ratioRegions4.PInt(undefined);
+              tmp40 = ratioRegions4.PString(undefined);
+              tmp41 = ratioRegions4.Cons(tmp40, ratioRegions4.Nil);
+              tmp42 = ratioRegions4.Cons(tmp39, tmp41);
+              tmp43 = ratioRegions4.Cons(tmp38, tmp42);
+              tmp44 = ratioRegions4.Cons(tmp37, tmp43);
+              tmp45 = ratioRegions4.Cons(tmp36, tmp44);
+              tmp46 = ratioRegions4.Cons(tmp35, tmp45);
+              tmp47 = ratioRegions4.Cons(tmp34, tmp46);
+              tmp48 = ratioRegions4.Cons(tmp33, tmp47);
+              loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp48);
               break inlinedLbl;
             }
           }
         }
       }
-      ratioRegions4 = ratioRegions2;
+      ratioRegions3 = ratioRegions2;
       height1 = height;
-      f = loop_min_cut_lambda$$lambda$(ratioRegions4, width, h, m1);
+      f = loop_min_cut_lambda$$lambda$(ratioRegions2, width, h, m1);
       scrut = height > 0;
       if (scrut === true) {
         let n, f1, arr1, i1, scrut1, arr2;
         scrut1 = width > 0;
         if (scrut1 === true) {
           let inlinedVal1, n1, f2, arr3, i2;
-          inlinedVal1 = lambda26(ratioRegions4, h, m1, 0, 0);
-          arr2 = ratioRegions4[array_alloc$accessorSymbol](width, inlinedVal1);
+          inlinedVal1 = lambda26(ratioRegions2, h, m1, 0, 0);
+          arr2 = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal1);
           n1 = width;
-          f2 = lambda$2(ratioRegions4, h, m1, 0);
+          f2 = lambda$2(ratioRegions2, h, m1, 0);
           arr3 = arr2;
           i2 = 1;
           inlinedLbl1: {
@@ -3511,7 +3510,7 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
               break inlinedLbl1;
             }
           }
-          arr = ratioRegions4[array_alloc$accessorSymbol](height1, arr2);
+          arr = ratioRegions3[array_alloc$accessorSymbol](height1, arr2);
           n = height1;
           f1 = f;
           arr1 = arr;
@@ -3537,7 +3536,7 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
     {
-      let p, inlinedVal1, i, c, inlinedVal2, ratioRegions3, pushes, lifts, relabels, tmp10, tmp11, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions4, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, relabels1, i1, p1;
+      let p, inlinedVal1, i, c, inlinedVal2, pushes, lifts, relabels, tmp10, tmp11, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions3, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, relabels1, i1, p1;
       i = lg_v;
       c = 1;
       inlinedLbl: {
@@ -3563,23 +3562,22 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
       tmp7 = ratioRegions2.Cons(tmp4, tmp6);
       tmp8 = ratioRegions2.Cons(tmp3, tmp7);
       loop_loop$loop(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp8);
-      ratioRegions3 = ratioRegions2;
-      lambda$here = lambda$9(ratioRegions3, width, f_t, e);
-      ratioRegions3[doo$accessorSymbol](height, lambda$here);
-      lambda$here1 = lambda$8(ratioRegions3, width, f_right);
-      ratioRegions3[doo$accessorSymbol](height, lambda$here1);
+      lambda$here = lambda$9(ratioRegions2, width, f_t, e);
+      ratioRegions2[doo$accessorSymbol](height, lambda$here);
+      lambda$here1 = lambda$8(ratioRegions2, width, f_right);
+      ratioRegions2[doo$accessorSymbol](height, lambda$here1);
       tmp10 = height - 1;
-      lambda$here2 = lambda$7(ratioRegions3, width, f_down);
-      ratioRegions3[doo$accessorSymbol](tmp10, lambda$here2);
-      lambda$here3 = lambda$6(ratioRegions3, width, e);
-      ratioRegions3[doo$accessorSymbol](height, lambda$here3);
+      lambda$here2 = lambda$7(ratioRegions2, width, f_down);
+      ratioRegions2[doo$accessorSymbol](tmp10, lambda$here2);
+      lambda$here3 = lambda$6(ratioRegions2, width, e);
+      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
       tmp11 = width - 1;
-      lambda$here4 = lambda$5(ratioRegions3, height, e);
-      ratioRegions3[doo$accessorSymbol](tmp11, lambda$here4);
-      pushes = new ratioRegions3.Ref.class(0);
-      lifts = new ratioRegions3.Ref.class(0);
-      relabels = new ratioRegions3.Ref.class(0);
-      ratioRegions4 = ratioRegions3;
+      lambda$here4 = lambda$5(ratioRegions2, height, e);
+      ratioRegions2[doo$accessorSymbol](tmp11, lambda$here4);
+      pushes = new ratioRegions2.Ref.class(0);
+      lifts = new ratioRegions2.Ref.class(0);
+      relabels = new ratioRegions2.Ref.class(0);
+      ratioRegions3 = ratioRegions2;
       c_right1 = c_right;
       c_down1 = c_down;
       w1 = w;
@@ -3604,7 +3602,7 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
         loopLabel2: while (true) {
           let tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, lambda$here5, lambda$here6, lambda$here7, inlinedVal3, inlinedVal4, tmp49, tmp50, tmp51;
           tmp49 = i1 / 6;
-          tmp50 = ratioRegions4[floor$accessorSymbol](tmp49);
+          tmp50 = ratioRegions3[floor$accessorSymbol](tmp49);
           tmp51 = 6 * tmp50;
           inlinedVal3 = i1 - tmp51;
           inlinedVal4 = inlinedVal3 == 0;
@@ -3626,46 +3624,46 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
           }
           if (tmp12 === true) {
             let p2, inlinedVal5, q2, tail, lambda$here8, lambda$here9;
-            q2 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
-            tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
-            lambda$here8 = lambda$25(ratioRegions4, width1, h1, marked1, m11);
-            ratioRegions4[doo$accessorSymbol](height1, lambda$here8);
-            lambda$here9 = lambda$24(ratioRegions4, w1, width1, f_t1, h1, marked1, v1, q2, tail);
-            ratioRegions4[doo$accessorSymbol](height1, lambda$here9);
-            loop5(ratioRegions4, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
+            q2 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+            tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+            lambda$here8 = lambda$25(ratioRegions3, width1, h1, marked1, m11);
+            ratioRegions3[doo$accessorSymbol](height1, lambda$here8);
+            lambda$here9 = lambda$24(ratioRegions3, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+            ratioRegions3[doo$accessorSymbol](height1, lambda$here9);
+            loop5(ratioRegions3, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
             tmp13 = relabels1.value + 1;
             relabels1.value = tmp13;
-            p2 = lambda$17(ratioRegions4, width1, h1, e1, m11);
+            p2 = lambda$17(ratioRegions3, width1, h1, e1, m11);
             inlinedVal5 = loop2(height1, p2, 0);
             if (inlinedVal5 === true) {
-              tmp14 = ratioRegions.PInt(undefined);
-              tmp15 = ratioRegions.PString(undefined);
-              tmp16 = ratioRegions.PInt(undefined);
-              tmp17 = ratioRegions.PString(undefined);
-              tmp18 = ratioRegions.PInt(undefined);
-              tmp19 = ratioRegions.PString(undefined);
-              tmp20 = ratioRegions.PInt(undefined);
-              tmp21 = ratioRegions.PString(undefined);
-              tmp22 = ratioRegions4.Cons(tmp21, ratioRegions4.Nil);
-              tmp23 = ratioRegions4.Cons(tmp20, tmp22);
-              tmp24 = ratioRegions4.Cons(tmp19, tmp23);
-              tmp25 = ratioRegions4.Cons(tmp18, tmp24);
-              tmp26 = ratioRegions4.Cons(tmp17, tmp25);
-              tmp27 = ratioRegions4.Cons(tmp16, tmp26);
-              tmp28 = ratioRegions4.Cons(tmp15, tmp27);
-              tmp29 = ratioRegions4.Cons(tmp14, tmp28);
-              loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp29);
+              tmp14 = ratioRegions3.PInt(undefined);
+              tmp15 = ratioRegions3.PString(undefined);
+              tmp16 = ratioRegions3.PInt(undefined);
+              tmp17 = ratioRegions3.PString(undefined);
+              tmp18 = ratioRegions3.PInt(undefined);
+              tmp19 = ratioRegions3.PString(undefined);
+              tmp20 = ratioRegions3.PInt(undefined);
+              tmp21 = ratioRegions3.PString(undefined);
+              tmp22 = ratioRegions3.Cons(tmp21, ratioRegions3.Nil);
+              tmp23 = ratioRegions3.Cons(tmp20, tmp22);
+              tmp24 = ratioRegions3.Cons(tmp19, tmp23);
+              tmp25 = ratioRegions3.Cons(tmp18, tmp24);
+              tmp26 = ratioRegions3.Cons(tmp17, tmp25);
+              tmp27 = ratioRegions3.Cons(tmp16, tmp26);
+              tmp28 = ratioRegions3.Cons(tmp15, tmp27);
+              tmp29 = ratioRegions3.Cons(tmp14, tmp28);
+              loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp29);
               break inlinedLbl1
             }
             {
               let inlinedVal6;
               inlinedVal6 = q1.length;
-              lambda$here5 = lambda$16(ratioRegions4, q1);
-              ratioRegions4[doo$accessorSymbol](inlinedVal6, lambda$here5);
-              lambda$here6 = lambda$15(ratioRegions4, width1, marked1);
-              ratioRegions4[doo$accessorSymbol](height1, lambda$here6);
-              lambda$here7 = lambda$14(ratioRegions4, width1, h1, e1, marked1, q1);
-              ratioRegions4[doo$accessorSymbol](height1, lambda$here7);
+              lambda$here5 = lambda$16(ratioRegions3, q1);
+              ratioRegions3[doo$accessorSymbol](inlinedVal6, lambda$here5);
+              lambda$here6 = lambda$15(ratioRegions3, width1, marked1);
+              ratioRegions3[doo$accessorSymbol](height1, lambda$here6);
+              lambda$here7 = lambda$14(ratioRegions3, width1, h1, e1, marked1, q1);
+              ratioRegions3[doo$accessorSymbol](height1, lambda$here7);
               p1 = true;
               continue loopLabel2;
             }
@@ -3673,7 +3671,7 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
           {
             let v2, p2, i2, inlinedVal5;
             v2 = q1;
-            p2 = lambda$13(ratioRegions4, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, m11, v1);
+            p2 = lambda$13(ratioRegions3, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, m11, v1);
             i2 = 0;
             inlinedLbl2: {
               loopLabel3: while (true) {
@@ -3700,7 +3698,7 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
               let inlinedVal6;
               inlinedVal6 = q1.length;
               tmp30 = inlinedVal6 - 1;
-              loopK(ratioRegions4, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, tmp30);
+              loopK(ratioRegions3, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, tmp30);
               tmp31 = i1 + 1;
               i1 = tmp31;
               p1 = false;
@@ -3708,32 +3706,32 @@ loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
             }
             {
               let q2, tail, lambda$here8, lambda$here9;
-              q2 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
-              tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
-              lambda$here8 = lambda$25(ratioRegions4, width1, h1, marked1, m11);
-              ratioRegions4[doo$accessorSymbol](height1, lambda$here8);
-              lambda$here9 = lambda$24(ratioRegions4, w1, width1, f_t1, h1, marked1, v1, q2, tail);
-              ratioRegions4[doo$accessorSymbol](height1, lambda$here9);
-              loop5(ratioRegions4, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
+              q2 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+              tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+              lambda$here8 = lambda$25(ratioRegions3, width1, h1, marked1, m11);
+              ratioRegions3[doo$accessorSymbol](height1, lambda$here8);
+              lambda$here9 = lambda$24(ratioRegions3, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+              ratioRegions3[doo$accessorSymbol](height1, lambda$here9);
+              loop5(ratioRegions3, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
               tmp32 = relabels1.value + 1;
               relabels1.value = tmp32;
-              tmp33 = ratioRegions.PInt(undefined);
-              tmp34 = ratioRegions.PString(undefined);
-              tmp35 = ratioRegions.PInt(undefined);
-              tmp36 = ratioRegions.PString(undefined);
-              tmp37 = ratioRegions.PInt(undefined);
-              tmp38 = ratioRegions.PString(undefined);
-              tmp39 = ratioRegions.PInt(undefined);
-              tmp40 = ratioRegions.PString(undefined);
-              tmp41 = ratioRegions4.Cons(tmp40, ratioRegions4.Nil);
-              tmp42 = ratioRegions4.Cons(tmp39, tmp41);
-              tmp43 = ratioRegions4.Cons(tmp38, tmp42);
-              tmp44 = ratioRegions4.Cons(tmp37, tmp43);
-              tmp45 = ratioRegions4.Cons(tmp36, tmp44);
-              tmp46 = ratioRegions4.Cons(tmp35, tmp45);
-              tmp47 = ratioRegions4.Cons(tmp34, tmp46);
-              tmp48 = ratioRegions4.Cons(tmp33, tmp47);
-              loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp48);
+              tmp33 = ratioRegions3.PInt(undefined);
+              tmp34 = ratioRegions3.PString(undefined);
+              tmp35 = ratioRegions3.PInt(undefined);
+              tmp36 = ratioRegions3.PString(undefined);
+              tmp37 = ratioRegions3.PInt(undefined);
+              tmp38 = ratioRegions3.PString(undefined);
+              tmp39 = ratioRegions3.PInt(undefined);
+              tmp40 = ratioRegions3.PString(undefined);
+              tmp41 = ratioRegions3.Cons(tmp40, ratioRegions3.Nil);
+              tmp42 = ratioRegions3.Cons(tmp39, tmp41);
+              tmp43 = ratioRegions3.Cons(tmp38, tmp42);
+              tmp44 = ratioRegions3.Cons(tmp37, tmp43);
+              tmp45 = ratioRegions3.Cons(tmp36, tmp44);
+              tmp46 = ratioRegions3.Cons(tmp35, tmp45);
+              tmp47 = ratioRegions3.Cons(tmp34, tmp46);
+              tmp48 = ratioRegions3.Cons(tmp33, tmp47);
+              loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp48);
               break inlinedLbl1;
             }
           }
@@ -4589,7 +4587,7 @@ loop = function loop(max, f, i) {
                     inlinedVal13 = lg_v < 0;
                     if (inlinedVal13 === true) {
                       let ratioRegions3, height2, pushes, lifts, relabels, tmp18, tmp19, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions4, c_right2, c_down2, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i6, p, f6, scrut6, arr12;
-                      tmp8 = ratioRegions.PInt(undefined);
+                      tmp8 = ratioRegions2.PInt(undefined);
                       tmp9 = ratioRegions2.Cons(tmp8, ratioRegions2.Nil);
                       rao_ratio_region_loop_loop$loop(ratioRegions2, "V-MAX=~s~%", 0, tmp9);
                       tmp10 = v_max + 1;
@@ -4667,14 +4665,14 @@ loop = function loop(max, f, i) {
                             p1 = lambda$17(ratioRegions4, width2, h2, e2, m12);
                             inlinedVal16 = loop2(height3, p1, 0);
                             if (inlinedVal16 === true) {
-                              tmp22 = ratioRegions.PInt(undefined);
-                              tmp23 = ratioRegions.PString(undefined);
-                              tmp24 = ratioRegions.PInt(undefined);
-                              tmp25 = ratioRegions.PString(undefined);
-                              tmp26 = ratioRegions.PInt(undefined);
-                              tmp27 = ratioRegions.PString(undefined);
-                              tmp28 = ratioRegions.PInt(undefined);
-                              tmp29 = ratioRegions.PString(undefined);
+                              tmp22 = ratioRegions4.PInt(undefined);
+                              tmp23 = ratioRegions4.PString(undefined);
+                              tmp24 = ratioRegions4.PInt(undefined);
+                              tmp25 = ratioRegions4.PString(undefined);
+                              tmp26 = ratioRegions4.PInt(undefined);
+                              tmp27 = ratioRegions4.PString(undefined);
+                              tmp28 = ratioRegions4.PInt(undefined);
+                              tmp29 = ratioRegions4.PString(undefined);
                               tmp30 = ratioRegions4.Cons(tmp29, ratioRegions4.Nil);
                               tmp31 = ratioRegions4.Cons(tmp28, tmp30);
                               tmp32 = ratioRegions4.Cons(tmp27, tmp31);
@@ -4746,14 +4744,14 @@ loop = function loop(max, f, i) {
                               loop5(ratioRegions4, c_right2, c_down2, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
                               tmp40 = relabels1.value + 1;
                               relabels1.value = tmp40;
-                              tmp41 = ratioRegions.PInt(undefined);
-                              tmp42 = ratioRegions.PString(undefined);
-                              tmp43 = ratioRegions.PInt(undefined);
-                              tmp44 = ratioRegions.PString(undefined);
-                              tmp45 = ratioRegions.PInt(undefined);
-                              tmp46 = ratioRegions.PString(undefined);
-                              tmp47 = ratioRegions.PInt(undefined);
-                              tmp48 = ratioRegions.PString(undefined);
+                              tmp41 = ratioRegions4.PInt(undefined);
+                              tmp42 = ratioRegions4.PString(undefined);
+                              tmp43 = ratioRegions4.PInt(undefined);
+                              tmp44 = ratioRegions4.PString(undefined);
+                              tmp45 = ratioRegions4.PInt(undefined);
+                              tmp46 = ratioRegions4.PString(undefined);
+                              tmp47 = ratioRegions4.PInt(undefined);
+                              tmp48 = ratioRegions4.PString(undefined);
                               tmp49 = ratioRegions4.Cons(tmp48, ratioRegions4.Nil);
                               tmp50 = ratioRegions4.Cons(tmp47, tmp49);
                               tmp51 = ratioRegions4.Cons(tmp46, tmp50);
@@ -4843,9 +4841,9 @@ loop = function loop(max, f, i) {
                         }
                       }
                       v = v_max + inlinedVal15;
-                      tmp11 = ratioRegions.PInt(undefined);
-                      tmp12 = ratioRegions.PInt(undefined);
-                      tmp13 = ratioRegions.PInt(undefined);
+                      tmp11 = ratioRegions2.PInt(undefined);
+                      tmp12 = ratioRegions2.PInt(undefined);
+                      tmp13 = ratioRegions2.PInt(undefined);
                       tmp14 = ratioRegions2.Cons(tmp13, ratioRegions2.Nil);
                       tmp15 = ratioRegions2.Cons(tmp12, tmp14);
                       tmp16 = ratioRegions2.Cons(tmp11, tmp15);
@@ -4924,14 +4922,14 @@ loop = function loop(max, f, i) {
                             p2 = lambda$17(ratioRegions3, width2, h2, e2, m12);
                             inlinedVal18 = loop2(height2, p2, 0);
                             if (inlinedVal18 === true) {
-                              tmp22 = ratioRegions.PInt(undefined);
-                              tmp23 = ratioRegions.PString(undefined);
-                              tmp24 = ratioRegions.PInt(undefined);
-                              tmp25 = ratioRegions.PString(undefined);
-                              tmp26 = ratioRegions.PInt(undefined);
-                              tmp27 = ratioRegions.PString(undefined);
-                              tmp28 = ratioRegions.PInt(undefined);
-                              tmp29 = ratioRegions.PString(undefined);
+                              tmp22 = ratioRegions3.PInt(undefined);
+                              tmp23 = ratioRegions3.PString(undefined);
+                              tmp24 = ratioRegions3.PInt(undefined);
+                              tmp25 = ratioRegions3.PString(undefined);
+                              tmp26 = ratioRegions3.PInt(undefined);
+                              tmp27 = ratioRegions3.PString(undefined);
+                              tmp28 = ratioRegions3.PInt(undefined);
+                              tmp29 = ratioRegions3.PString(undefined);
                               tmp30 = ratioRegions3.Cons(tmp29, ratioRegions3.Nil);
                               tmp31 = ratioRegions3.Cons(tmp28, tmp30);
                               tmp32 = ratioRegions3.Cons(tmp27, tmp31);
@@ -5003,14 +5001,14 @@ loop = function loop(max, f, i) {
                               loop5(ratioRegions3, c_right2, c_down2, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
                               tmp40 = relabels1.value + 1;
                               relabels1.value = tmp40;
-                              tmp41 = ratioRegions.PInt(undefined);
-                              tmp42 = ratioRegions.PString(undefined);
-                              tmp43 = ratioRegions.PInt(undefined);
-                              tmp44 = ratioRegions.PString(undefined);
-                              tmp45 = ratioRegions.PInt(undefined);
-                              tmp46 = ratioRegions.PString(undefined);
-                              tmp47 = ratioRegions.PInt(undefined);
-                              tmp48 = ratioRegions.PString(undefined);
+                              tmp41 = ratioRegions3.PInt(undefined);
+                              tmp42 = ratioRegions3.PString(undefined);
+                              tmp43 = ratioRegions3.PInt(undefined);
+                              tmp44 = ratioRegions3.PString(undefined);
+                              tmp45 = ratioRegions3.PInt(undefined);
+                              tmp46 = ratioRegions3.PString(undefined);
+                              tmp47 = ratioRegions3.PInt(undefined);
+                              tmp48 = ratioRegions3.PString(undefined);
                               tmp49 = ratioRegions3.Cons(tmp48, ratioRegions3.Nil);
                               tmp50 = ratioRegions3.Cons(tmp47, tmp49);
                               tmp51 = ratioRegions3.Cons(tmp46, tmp50);
@@ -5325,7 +5323,7 @@ loop = function loop(max, f, i) {
                           inlinedVal19 = lg_v < 0;
                           if (inlinedVal19 === true) {
                             let ratioRegions3, height2, pushes, lifts, relabels, tmp21, tmp22, lambda$here2, lambda$here3, lambda$here4, lambda$here5, lambda$here6, ratioRegions4, c_right3, c_down3, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i9, p, f9, scrut9, arr18;
-                            tmp11 = ratioRegions.PInt(undefined);
+                            tmp11 = ratioRegions2.PInt(undefined);
                             tmp12 = ratioRegions2.Cons(tmp11, ratioRegions2.Nil);
                             doit_rao_ratio_region_loop_loop$loop(ratioRegions2, "V-MAX=~s~%", 0, tmp12);
                             tmp13 = v_max + 1;
@@ -5403,14 +5401,14 @@ loop = function loop(max, f, i) {
                                   p1 = lambda$17(ratioRegions4, width2, h2, e2, m12);
                                   inlinedVal22 = loop2(height3, p1, 0);
                                   if (inlinedVal22 === true) {
-                                    tmp25 = ratioRegions.PInt(undefined);
-                                    tmp26 = ratioRegions.PString(undefined);
-                                    tmp27 = ratioRegions.PInt(undefined);
-                                    tmp28 = ratioRegions.PString(undefined);
-                                    tmp29 = ratioRegions.PInt(undefined);
-                                    tmp30 = ratioRegions.PString(undefined);
-                                    tmp31 = ratioRegions.PInt(undefined);
-                                    tmp32 = ratioRegions.PString(undefined);
+                                    tmp25 = ratioRegions4.PInt(undefined);
+                                    tmp26 = ratioRegions4.PString(undefined);
+                                    tmp27 = ratioRegions4.PInt(undefined);
+                                    tmp28 = ratioRegions4.PString(undefined);
+                                    tmp29 = ratioRegions4.PInt(undefined);
+                                    tmp30 = ratioRegions4.PString(undefined);
+                                    tmp31 = ratioRegions4.PInt(undefined);
+                                    tmp32 = ratioRegions4.PString(undefined);
                                     tmp33 = ratioRegions4.Cons(tmp32, ratioRegions4.Nil);
                                     tmp34 = ratioRegions4.Cons(tmp31, tmp33);
                                     tmp35 = ratioRegions4.Cons(tmp30, tmp34);
@@ -5482,14 +5480,14 @@ loop = function loop(max, f, i) {
                                     loop5(ratioRegions4, c_right3, c_down3, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
                                     tmp43 = relabels1.value + 1;
                                     relabels1.value = tmp43;
-                                    tmp44 = ratioRegions.PInt(undefined);
-                                    tmp45 = ratioRegions.PString(undefined);
-                                    tmp46 = ratioRegions.PInt(undefined);
-                                    tmp47 = ratioRegions.PString(undefined);
-                                    tmp48 = ratioRegions.PInt(undefined);
-                                    tmp49 = ratioRegions.PString(undefined);
-                                    tmp50 = ratioRegions.PInt(undefined);
-                                    tmp51 = ratioRegions.PString(undefined);
+                                    tmp44 = ratioRegions4.PInt(undefined);
+                                    tmp45 = ratioRegions4.PString(undefined);
+                                    tmp46 = ratioRegions4.PInt(undefined);
+                                    tmp47 = ratioRegions4.PString(undefined);
+                                    tmp48 = ratioRegions4.PInt(undefined);
+                                    tmp49 = ratioRegions4.PString(undefined);
+                                    tmp50 = ratioRegions4.PInt(undefined);
+                                    tmp51 = ratioRegions4.PString(undefined);
                                     tmp52 = ratioRegions4.Cons(tmp51, ratioRegions4.Nil);
                                     tmp53 = ratioRegions4.Cons(tmp50, tmp52);
                                     tmp54 = ratioRegions4.Cons(tmp49, tmp53);
@@ -5579,9 +5577,9 @@ loop = function loop(max, f, i) {
                               }
                             }
                             v = v_max + inlinedVal21;
-                            tmp14 = ratioRegions.PInt(undefined);
-                            tmp15 = ratioRegions.PInt(undefined);
-                            tmp16 = ratioRegions.PInt(undefined);
+                            tmp14 = ratioRegions2.PInt(undefined);
+                            tmp15 = ratioRegions2.PInt(undefined);
+                            tmp16 = ratioRegions2.PInt(undefined);
                             tmp17 = ratioRegions2.Cons(tmp16, ratioRegions2.Nil);
                             tmp18 = ratioRegions2.Cons(tmp15, tmp17);
                             tmp19 = ratioRegions2.Cons(tmp14, tmp18);
@@ -5660,14 +5658,14 @@ loop = function loop(max, f, i) {
                                   p2 = lambda$17(ratioRegions3, width2, h2, e2, m12);
                                   inlinedVal24 = loop2(height2, p2, 0);
                                   if (inlinedVal24 === true) {
-                                    tmp25 = ratioRegions.PInt(undefined);
-                                    tmp26 = ratioRegions.PString(undefined);
-                                    tmp27 = ratioRegions.PInt(undefined);
-                                    tmp28 = ratioRegions.PString(undefined);
-                                    tmp29 = ratioRegions.PInt(undefined);
-                                    tmp30 = ratioRegions.PString(undefined);
-                                    tmp31 = ratioRegions.PInt(undefined);
-                                    tmp32 = ratioRegions.PString(undefined);
+                                    tmp25 = ratioRegions3.PInt(undefined);
+                                    tmp26 = ratioRegions3.PString(undefined);
+                                    tmp27 = ratioRegions3.PInt(undefined);
+                                    tmp28 = ratioRegions3.PString(undefined);
+                                    tmp29 = ratioRegions3.PInt(undefined);
+                                    tmp30 = ratioRegions3.PString(undefined);
+                                    tmp31 = ratioRegions3.PInt(undefined);
+                                    tmp32 = ratioRegions3.PString(undefined);
                                     tmp33 = ratioRegions3.Cons(tmp32, ratioRegions3.Nil);
                                     tmp34 = ratioRegions3.Cons(tmp31, tmp33);
                                     tmp35 = ratioRegions3.Cons(tmp30, tmp34);
@@ -5739,14 +5737,14 @@ loop = function loop(max, f, i) {
                                     loop5(ratioRegions3, c_right3, c_down3, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
                                     tmp43 = relabels1.value + 1;
                                     relabels1.value = tmp43;
-                                    tmp44 = ratioRegions.PInt(undefined);
-                                    tmp45 = ratioRegions.PString(undefined);
-                                    tmp46 = ratioRegions.PInt(undefined);
-                                    tmp47 = ratioRegions.PString(undefined);
-                                    tmp48 = ratioRegions.PInt(undefined);
-                                    tmp49 = ratioRegions.PString(undefined);
-                                    tmp50 = ratioRegions.PInt(undefined);
-                                    tmp51 = ratioRegions.PString(undefined);
+                                    tmp44 = ratioRegions3.PInt(undefined);
+                                    tmp45 = ratioRegions3.PString(undefined);
+                                    tmp46 = ratioRegions3.PInt(undefined);
+                                    tmp47 = ratioRegions3.PString(undefined);
+                                    tmp48 = ratioRegions3.PInt(undefined);
+                                    tmp49 = ratioRegions3.PString(undefined);
+                                    tmp50 = ratioRegions3.PInt(undefined);
+                                    tmp51 = ratioRegions3.PString(undefined);
                                     tmp52 = ratioRegions3.Cons(tmp51, ratioRegions3.Nil);
                                     tmp53 = ratioRegions3.Cons(tmp50, tmp52);
                                     tmp54 = ratioRegions3.Cons(tmp49, tmp53);
@@ -6066,7 +6064,7 @@ loop = function loop(max, f, i) {
                           inlinedVal19 = lg_v < 0;
                           if (inlinedVal19 === true) {
                             let ratioRegions3, height2, pushes, lifts, relabels, tmp20, tmp21, lambda$here2, lambda$here3, lambda$here4, lambda$here5, lambda$here6, ratioRegions4, c_right3, c_down3, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i9, p, f9, scrut8, arr18;
-                            tmp10 = ratioRegions.PInt(undefined);
+                            tmp10 = ratioRegions2.PInt(undefined);
                             tmp11 = ratioRegions2.Cons(tmp10, ratioRegions2.Nil);
                             main_doit_rao_ratio_region_loop_loop$loop(ratioRegions2, "V-MAX=~s~%", 0, tmp11);
                             tmp12 = v_max + 1;
@@ -6144,14 +6142,14 @@ loop = function loop(max, f, i) {
                                   p1 = lambda$17(ratioRegions4, width2, h2, e2, m12);
                                   inlinedVal22 = loop2(height3, p1, 0);
                                   if (inlinedVal22 === true) {
-                                    tmp24 = ratioRegions.PInt(undefined);
-                                    tmp25 = ratioRegions.PString(undefined);
-                                    tmp26 = ratioRegions.PInt(undefined);
-                                    tmp27 = ratioRegions.PString(undefined);
-                                    tmp28 = ratioRegions.PInt(undefined);
-                                    tmp29 = ratioRegions.PString(undefined);
-                                    tmp30 = ratioRegions.PInt(undefined);
-                                    tmp31 = ratioRegions.PString(undefined);
+                                    tmp24 = ratioRegions4.PInt(undefined);
+                                    tmp25 = ratioRegions4.PString(undefined);
+                                    tmp26 = ratioRegions4.PInt(undefined);
+                                    tmp27 = ratioRegions4.PString(undefined);
+                                    tmp28 = ratioRegions4.PInt(undefined);
+                                    tmp29 = ratioRegions4.PString(undefined);
+                                    tmp30 = ratioRegions4.PInt(undefined);
+                                    tmp31 = ratioRegions4.PString(undefined);
                                     tmp32 = ratioRegions4.Cons(tmp31, ratioRegions4.Nil);
                                     tmp33 = ratioRegions4.Cons(tmp30, tmp32);
                                     tmp34 = ratioRegions4.Cons(tmp29, tmp33);
@@ -6223,14 +6221,14 @@ loop = function loop(max, f, i) {
                                     loop5(ratioRegions4, c_right3, c_down3, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
                                     tmp42 = relabels1.value + 1;
                                     relabels1.value = tmp42;
-                                    tmp43 = ratioRegions.PInt(undefined);
-                                    tmp44 = ratioRegions.PString(undefined);
-                                    tmp45 = ratioRegions.PInt(undefined);
-                                    tmp46 = ratioRegions.PString(undefined);
-                                    tmp47 = ratioRegions.PInt(undefined);
-                                    tmp48 = ratioRegions.PString(undefined);
-                                    tmp49 = ratioRegions.PInt(undefined);
-                                    tmp50 = ratioRegions.PString(undefined);
+                                    tmp43 = ratioRegions4.PInt(undefined);
+                                    tmp44 = ratioRegions4.PString(undefined);
+                                    tmp45 = ratioRegions4.PInt(undefined);
+                                    tmp46 = ratioRegions4.PString(undefined);
+                                    tmp47 = ratioRegions4.PInt(undefined);
+                                    tmp48 = ratioRegions4.PString(undefined);
+                                    tmp49 = ratioRegions4.PInt(undefined);
+                                    tmp50 = ratioRegions4.PString(undefined);
                                     tmp51 = ratioRegions4.Cons(tmp50, ratioRegions4.Nil);
                                     tmp52 = ratioRegions4.Cons(tmp49, tmp51);
                                     tmp53 = ratioRegions4.Cons(tmp48, tmp52);
@@ -6320,9 +6318,9 @@ loop = function loop(max, f, i) {
                               }
                             }
                             v = v_max + inlinedVal21;
-                            tmp13 = ratioRegions.PInt(undefined);
-                            tmp14 = ratioRegions.PInt(undefined);
-                            tmp15 = ratioRegions.PInt(undefined);
+                            tmp13 = ratioRegions2.PInt(undefined);
+                            tmp14 = ratioRegions2.PInt(undefined);
+                            tmp15 = ratioRegions2.PInt(undefined);
                             tmp16 = ratioRegions2.Cons(tmp15, ratioRegions2.Nil);
                             tmp17 = ratioRegions2.Cons(tmp14, tmp16);
                             tmp18 = ratioRegions2.Cons(tmp13, tmp17);
@@ -6401,14 +6399,14 @@ loop = function loop(max, f, i) {
                                   p2 = lambda$17(ratioRegions3, width2, h2, e2, m12);
                                   inlinedVal24 = loop2(height2, p2, 0);
                                   if (inlinedVal24 === true) {
-                                    tmp24 = ratioRegions.PInt(undefined);
-                                    tmp25 = ratioRegions.PString(undefined);
-                                    tmp26 = ratioRegions.PInt(undefined);
-                                    tmp27 = ratioRegions.PString(undefined);
-                                    tmp28 = ratioRegions.PInt(undefined);
-                                    tmp29 = ratioRegions.PString(undefined);
-                                    tmp30 = ratioRegions.PInt(undefined);
-                                    tmp31 = ratioRegions.PString(undefined);
+                                    tmp24 = ratioRegions3.PInt(undefined);
+                                    tmp25 = ratioRegions3.PString(undefined);
+                                    tmp26 = ratioRegions3.PInt(undefined);
+                                    tmp27 = ratioRegions3.PString(undefined);
+                                    tmp28 = ratioRegions3.PInt(undefined);
+                                    tmp29 = ratioRegions3.PString(undefined);
+                                    tmp30 = ratioRegions3.PInt(undefined);
+                                    tmp31 = ratioRegions3.PString(undefined);
                                     tmp32 = ratioRegions3.Cons(tmp31, ratioRegions3.Nil);
                                     tmp33 = ratioRegions3.Cons(tmp30, tmp32);
                                     tmp34 = ratioRegions3.Cons(tmp29, tmp33);
@@ -6480,14 +6478,14 @@ loop = function loop(max, f, i) {
                                     loop5(ratioRegions3, c_right3, c_down3, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
                                     tmp42 = relabels1.value + 1;
                                     relabels1.value = tmp42;
-                                    tmp43 = ratioRegions.PInt(undefined);
-                                    tmp44 = ratioRegions.PString(undefined);
-                                    tmp45 = ratioRegions.PInt(undefined);
-                                    tmp46 = ratioRegions.PString(undefined);
-                                    tmp47 = ratioRegions.PInt(undefined);
-                                    tmp48 = ratioRegions.PString(undefined);
-                                    tmp49 = ratioRegions.PInt(undefined);
-                                    tmp50 = ratioRegions.PString(undefined);
+                                    tmp43 = ratioRegions3.PInt(undefined);
+                                    tmp44 = ratioRegions3.PString(undefined);
+                                    tmp45 = ratioRegions3.PInt(undefined);
+                                    tmp46 = ratioRegions3.PString(undefined);
+                                    tmp47 = ratioRegions3.PInt(undefined);
+                                    tmp48 = ratioRegions3.PString(undefined);
+                                    tmp49 = ratioRegions3.PInt(undefined);
+                                    tmp50 = ratioRegions3.PString(undefined);
                                     tmp51 = ratioRegions3.Cons(tmp50, ratioRegions3.Nil);
                                     tmp52 = ratioRegions3.Cons(tmp49, tmp51);
                                     tmp53 = ratioRegions3.Cons(tmp48, tmp52);
