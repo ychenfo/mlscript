@@ -162,18 +162,59 @@ class BlockSimplifier
     lazy val privateFieldsToRemove: Set[TermSymbol] =
       assert(analysisDone)
       privateVars.iterator.filterNot(usedPrivateFields).toSet
+    // only collected when `reachabilityBased`
     val privateModuleMethods = MutSet.empty[FunDefn]
-    // a method is referenced either by a `Select` carrying its term symbol or by a `MemberRef` to its block member symbol
     lazy val privateModuleMethodsToRemove: Set[TermSymbol] =
       assert(analysisDone)
-      privateModuleMethods.iterator.filterNot(m => usedPrivateFields(m.dSym) || usedVars(m.sym)).map(_.dSym).toSet
+      privateModuleMethods.iterator.map(_.dSym).filterNot(reachedFunctions).toSet
+    
+    // without a private ABI to preserve, a deletable function is used only if it is reachable from code that is kept
+    // anyway, so that dead functions referring to each other (e.g. copies of a recursive function) are removed together;
+    // with the private ABI preserved, another unit may inline a body that still refers to a function unused here
+    val reachabilityBased = !config.preservePrivateAbi
+    // the symbols referred to by each function body, keyed by the function's `dSym`, and by code outside any function
+    val referencesFrom = MutMap.empty[Opt[TermSymbol], MutSet[Symbol]]
+    val definedFunctions = MutSet.empty[FunDefn]
+    // the deletable functions reachable from the code that is kept anyway; the others are deleted
+    lazy val reachedFunctions: Set[TermSymbol] =
+      assert(analysisDone)
+      // exactly the functions that `applyBlock` and `applyObjBody` delete when they are not reached
+      val deletable =
+        definedFunctions.iterator.filter(f => f.isPure && localVars(f.sym) && !symbolsToPreserve(f.sym))
+        ++ privateModuleMethods
+      // a function is referred to by its `dSym` (selections, member refs) or by its block member symbol (member refs)
+      val deletableByRef = MutMap.empty[Symbol, TermSymbol]
+      deletable.foreach: f =>
+        deletableByRef(f.sym) = f.dSym
+        deletableByRef(f.dSym) = f.dSym
+      val reached = MutSet.empty[TermSymbol]
+      val worklist = Buffer.empty[Symbol]
+      referencesFrom.foreach: (owner, refs) =>
+        if owner.forall(o => !deletableByRef.contains(o)) then worklist ++= refs
+      while worklist.nonEmpty do
+        deletableByRef.get(worklist.remove(worklist.size - 1)).foreach: f =>
+          if reached.add(f) then worklist ++= referencesFrom.getOrElse(S(f), Nil)
+      reached.toSet
+    
     var tailLabels = MutSet.empty[LabelSymbol]
     
     def apply(prog: Program): Program =
       
       new BlockTraverser:
         
+        // the function whose body is being traversed, to which `referTo` attributes references
+        var currentFunction: Opt[TermSymbol] = N
+        
         applyProgram(prog)
+        
+        def referTo(sym: Symbol): Unit =
+          if reachabilityBased then referencesFrom.getOrElseUpdate(currentFunction, MutSet.empty) += sym
+        
+        override def applyFunDefn(fun: FunDefn): Unit =
+          val outer = currentFunction
+          currentFunction = S(fun.dSym)
+          super.applyFunDefn(fun)
+          currentFunction = outer
         
         override def applyPath(p: Path): Unit =
           p match
@@ -181,11 +222,16 @@ class BlockSimplifier
               sel.symbol.foreach:
                 case ts: TermSymbol =>
                   usedPrivateFields += ts
+                  referTo(ts)
                 case _ =>
             case Value.SimpleRef(loc: LocalVarSymbol) =>
               usedVars += loc
-            case Value.MemberRef(loc, _) =>
+            case Value.MemberRef(loc, disamb) =>
               usedVars += loc
+              referTo(loc)
+              referTo(disamb)
+            case DynSelect(_, _, DynSelectKind.Member(sym)) => referTo(sym)
+            case sel: SuperSelect => referTo(sel.symbol)
             case Cast(_, target, _) => markCastTarget(target)
             case _ =>
           super.applyPath(p)
@@ -202,7 +248,9 @@ class BlockSimplifier
           */
         def markCastTarget(target: ErasedValueType): Unit =
           target.canonicalize match
-            case ErasedType.AnyRef(_, tpeSym) => usedVars += tpeSym.bms.get
+            case ErasedType.AnyRef(_, tpeSym) =>
+              usedVars += tpeSym.bms.get
+              referTo(tpeSym.bms.get)
             case _ =>
 
         override def applyResult(r: Result): Unit =
@@ -215,8 +263,7 @@ class BlockSimplifier
           privateVars ++= defn.privateFields
           defn.companion.foreach: body =>
             privateVars ++= body.privateFields
-            // with the private ABI preserved, another unit may inline a body that still calls an unused private method
-            if !config.preservePrivateAbi then
+            if reachabilityBased then
               privateModuleMethods ++= body.methods.iterator.filter(_.dSym.isPrivate)
           super.applyClsLikeDefn(defn)
         
@@ -224,6 +271,9 @@ class BlockSimplifier
           b match
             case Define(defn, rst) =>
               definedVars += defn.sym
+              defn match
+                case fun: FunDefn if reachabilityBased => definedFunctions += fun
+                case _ =>
             case Scoped(syms, _) =>
               localVars ++= syms
             case Break(lbl) => usedLabels += lbl
@@ -322,9 +372,12 @@ class BlockSimplifier
       // * Remove local pure definitions that are never read (and are not preserved)
       case Define(defn, rest) =>
         val defnSym = defn.sym
+        val used = defn match
+          case fun: FunDefn if reachabilityBased => reachedFunctions(fun.dSym)
+          case _ => usedVars(defnSym)
         if !defn.isPure
         || !localVars(defnSym)
-        || usedVars(defnSym)
+        || used
         || symbolsToPreserve(defnSym)
         then super.applyBlock(b)
         else

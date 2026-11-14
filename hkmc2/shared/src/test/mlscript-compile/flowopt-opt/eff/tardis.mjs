@@ -2,11 +2,10 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
-const pure$accessorSymbol = globalThis.Symbol("pure");
 const getPast$accessorSymbol = globalThis.Symbol("getPast");
 const getFuture$accessorSymbol = globalThis.Symbol("getFuture");
 const bind$accessorSymbol = globalThis.Symbol("bind");
-let getBw1, go, tardis1, lambda, lambda1, lambda2, lambda3, getBw1$, lambda$, lambda$1, lambda$2, lambda$3, main_go_fix_get$_get$get, main_go_fix_get$$get$, main_go$go, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, main_go_lambda$_lambda_throws1$_throws1$throws1, main_go_lambda$_lambda_throws1$$throws1$, main_go_lambda$_lambda_score1$_score1$score1, main_go_lambda$_lambda_score1$$score1$, go_lambda$_lambda_score1$_score1$score1, go_lambda$_lambda_score1$$score1$, go_lambda$$lambda$, go$lambda$, go_lambda$_lambda_throws1$_throws1$throws1, go_lambda$_lambda_throws1$$throws1$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, go_fix_get$_get$get, go_fix_get$$get$, go_fix$fix, lambda$_lambda$_lambda_score1$_score1$score1, lambda$_lambda$_lambda_score1$$score1$, lambda$_lambda$$lambda$, lambda$$go, lambda$_lambda$_lambda_throws1$_throws1$throws1, lambda$_lambda$_lambda_throws1$$throws1$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, lambda$_fix_get$_get$get, lambda$_fix_get$$get$, lambda$_fix$fix, go_bind$bind, main_initialBw$initialBw, lambda$_bind$bind, lambda$_bind$bind$worker, main_initialBw$initialBw$worker, go_bind$bind$worker, lambda$_fix$fix$worker, lambda$_lambda$_lambda$lambda$worker, go_fix$fix$worker, go_lambda$_lambda$lambda$worker, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker, main_go$go$worker;
+let getBw1, tardis1, lambda, lambda1, lambda2, getBw1$, lambda$, lambda$1, main_go_fix_get$_get$get, main_go_fix_get$$get$, main_go$go, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2, main_go_lambda$_lambda_throws1$_throws1$throws1, main_go_lambda$_lambda_throws1$$throws1$, main_go_lambda$_lambda_score1$_score1$score1, main_go_lambda$_lambda_score1$$score1$, main_initialBw$initialBw, main_initialBw$initialBw$worker, main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda$worker, main_go$go$worker;
 main_go_fix_get$_get$get = function main_go_fix_get$_get$get(tardis2, r) {
   let scrut;
   scrut = r.value;
@@ -40,7 +39,7 @@ main_go$go$worker = function main_go$go$worker(tardis2, finalFrameScore, frames,
       tardis3 = tardis2;
       if (element0$ instanceof tardis3.Cons.class) {
         arg$Cons$0$1 = element0$.head;
-        lambda$here = lambda$3(finalFrameScore, arg$Cons$0$1);
+        lambda$here = lambda$1(finalFrameScore, arg$Cons$0$1);
         tmp1 = tardis2.Cons(lambda$here, element0$);
         inlinedVal = globalThis.Object.freeze([
           tmp1,
@@ -197,7 +196,7 @@ main_go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lam
     firstThrow,
     secondThrow
   ]);
-  lambda$here = lambda$2(score, secondThrow, firstThrow);
+  lambda$here = lambda$(score, secondThrow, firstThrow);
   return globalThis.Object.freeze([
     lambda$here,
     tmp
@@ -352,621 +351,6 @@ main_go_lambda$_lambda_score1$$score1$ = function main_go_lambda$_lambda_score1$
     return main_go_lambda$_lambda_score1$_score1$score1(p)
   }
 };
-go_lambda$_lambda_score1$_score1$score1 = function go_lambda$_lambda_score1$_score1$score1(p) {
-  let tmp, element0$;
-  tmp = runtime.safeCall(p());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    element0$ = runtime.Tuple.get(tmp, 0);
-    return runtime.safeCall(element0$())
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_lambda$_lambda_score1$$score1$ = function go_lambda$_lambda_score1$$score1$(p) {
-  return () => {
-    return go_lambda$_lambda_score1$_score1$score1(p)
-  }
-};
-go_lambda$_lambda$lambda$worker = function go_lambda$_lambda$lambda$worker(tardis2, f, p, eta$0$0, eta$0$1) {
-  let r, element2$, element1$, element2$1, element1$1, element0$, tmp, bw, inlinedVal;
-  r = new tardis1.Ref.class(tardis1.None);
-  bw = go_lambda$_lambda_throws1$$throws1$(p);
-  inlinedVal = globalThis.Object.freeze([
-    runtime.Unit,
-    bw,
-    eta$0$1
-  ]);
-  if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 3) {
-    let m, inlinedVal1, r1, scrut, element1$2, element0$1, element2$2, element1$3, element0$2, tmp1, getBw1$here;
-    element1$ = runtime.Tuple.get(inlinedVal, 1);
-    element2$ = runtime.Tuple.get(inlinedVal, 2);
-    m = tardis2[getPast$accessorSymbol];
-    r1 = new tardis1.Ref.class(tardis1.None);
-    getBw1$here = getBw1$(tardis1, r1);
-    scrut = runtime.safeCall(m(getBw1$here, element2$));
-    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-      let tardis3, score1, arg$Cons$0$, tmp2;
-      element0$1 = runtime.Tuple.get(scrut, 0);
-      element1$2 = runtime.Tuple.get(scrut, 1);
-      tardis3 = tardis2;
-      score1 = go_lambda$_lambda_score1$$score1$(p);
-      if (element0$1 instanceof tardis3.Cons.class) {
-        let inlinedVal2, r2, element2$3, element1$4, element2$4, element1$5, element0$3, tmp3, bw1, inlinedVal3;
-        arg$Cons$0$ = element0$1.head;
-        tmp2 = tardis2.Cons(score1, element0$1);
-        r2 = new tardis1.Ref.class(tardis1.None);
-        bw1 = getBw1$(tardis1, r2);
-        inlinedVal3 = globalThis.Object.freeze([
-          runtime.Unit,
-          bw1,
-          tmp2
-        ]);
-        if (runtime.Tuple.isArrayLike(inlinedVal3) && inlinedVal3.length === 3) {
-          let inlinedVal4, lambda$here;
-          element1$4 = runtime.Tuple.get(inlinedVal3, 1);
-          element2$3 = runtime.Tuple.get(inlinedVal3, 2);
-          lambda$here = go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, f, arg$Cons$0$);
-          inlinedVal4 = tardis2[bind$accessorSymbol](tardis2[getFuture$accessorSymbol])(lambda$here)(eta$0$0, element2$3);
-          if (runtime.Tuple.isArrayLike(inlinedVal4) && inlinedVal4.length === 3) {
-            element0$3 = runtime.Tuple.get(inlinedVal4, 0);
-            element1$5 = runtime.Tuple.get(inlinedVal4, 1);
-            element2$4 = runtime.Tuple.get(inlinedVal4, 2);
-            tmp3 = tardis1.Some(element1$5);
-            r2.value = tmp3;
-            inlinedVal2 = globalThis.Object.freeze([
-              element0$3,
-              element1$4,
-              element2$4
-            ]);
-            if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 3) {
-              element0$2 = runtime.Tuple.get(inlinedVal2, 0);
-              element1$3 = runtime.Tuple.get(inlinedVal2, 1);
-              element2$2 = runtime.Tuple.get(inlinedVal2, 2);
-              tmp1 = tardis1.Some(element1$3);
-              r1.value = tmp1;
-              inlinedVal1 = globalThis.Object.freeze([
-                element0$2,
-                element1$2,
-                element2$2
-              ]);
-              if (runtime.Tuple.isArrayLike(inlinedVal1) && inlinedVal1.length === 3) {
-                element0$ = runtime.Tuple.get(inlinedVal1, 0);
-                element1$1 = runtime.Tuple.get(inlinedVal1, 1);
-                element2$1 = runtime.Tuple.get(inlinedVal1, 2);
-                tmp = tardis1.Some(element1$1);
-                r.value = tmp;
-                return globalThis.Object.freeze([
-                  element0$,
-                  element1$,
-                  element2$1
-                ])
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_lambda$$lambda$ = function go_lambda$$lambda$(tardis2, f) {
-  return (p) => {
-    return (eta$0$0, eta$0$1) => {
-      return go_lambda$_lambda$lambda$worker(tardis2, f, p, eta$0$0, eta$0$1)
-    }
-  }
-};
-go$lambda$ = function go$lambda$(tardis2, finalFrameScore, fs) {
-  return () => {
-    return go(tardis2, finalFrameScore, fs)
-  }
-};
-go_lambda$_lambda_throws1$_throws1$throws1 = function go_lambda$_lambda_throws1$_throws1$throws1(p) {
-  let tmp;
-  tmp = runtime.safeCall(p());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    return runtime.Tuple.get(tmp, 1)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_lambda$_lambda_throws1$$throws1$ = function go_lambda$_lambda_throws1$$throws1$(p) {
-  return () => {
-    return go_lambda$_lambda_throws1$_throws1$throws1(p)
-  }
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, element1$, element0$;
-  tmp = runtime.safeCall(score());
-  tmp1 = tmp + 10;
-  tmp2 = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 2) {
-    element0$ = runtime.Tuple.get(tmp2, 0);
-    runtime.Tuple.get(tmp2, 1);
-    tmp3 = tmp1 + element0$;
-    tmp4 = runtime.safeCall(nextThrows());
-    if (runtime.Tuple.isArrayLike(tmp4) && tmp4.length === 2) {
-      runtime.Tuple.get(tmp4, 0);
-      element1$ = runtime.Tuple.get(tmp4, 1);
-      return tmp3 + element1$
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
-  return () => {
-    return go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows)
-  }
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, lambda$here, element0$;
-  tmp = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    element0$ = runtime.Tuple.get(tmp, 0);
-    runtime.Tuple.get(tmp, 1);
-    tmp1 = globalThis.Object.freeze([
-      10,
-      element0$
-    ]);
-    lambda$here = go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows);
-    return globalThis.Object.freeze([
-      lambda$here,
-      tmp1
-    ])
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
-  return (_) => {
-    return go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows)
-  }
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda(tardis2, f, score, nextThrows) {
-  let arg$Frame$0$, arg$Frame$1$, arg$Spare$0$, lambda$here, lambda$here1, lambda$here2;
-  if (f instanceof tardis2.Strike.class) {
-    lambda$here = go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows);
-    return tardis2[pure$accessorSymbol](lambda$here)
-  } else if (f instanceof tardis2.Spare.class) {
-    arg$Spare$0$ = f.firstThrow;
-    lambda$here1 = go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1(score, nextThrows, arg$Spare$0$);
-    return tardis2[pure$accessorSymbol](lambda$here1)
-  } else if (f instanceof tardis2.Frame.class) {
-    arg$Frame$0$ = f.firstThrow;
-    arg$Frame$1$ = f.secondThrow;
-    lambda$here2 = go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2(score, arg$Frame$1$, arg$Frame$0$);
-    return tardis2[pure$accessorSymbol](lambda$here2)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, f, score) {
-  return (nextThrows) => {
-    return go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda(tardis2, f, score, nextThrows)
-  }
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, tmp2, element0$;
-  tmp = runtime.safeCall(score());
-  tmp1 = tmp + 10;
-  tmp2 = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 2) {
-    element0$ = runtime.Tuple.get(tmp2, 0);
-    runtime.Tuple.get(tmp2, 1);
-    return tmp1 + element0$
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
-  return () => {
-    return go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows)
-  }
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows, firstThrow) {
-  let tmp, tmp1, lambda$here;
-  tmp = 10 - firstThrow;
-  tmp1 = globalThis.Object.freeze([
-    firstThrow,
-    tmp
-  ]);
-  lambda$here = go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1(score, nextThrows);
-  return globalThis.Object.freeze([
-    lambda$here,
-    tmp1
-  ])
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows, firstThrow) {
-  return (_) => {
-    return go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows, firstThrow)
-  }
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, secondThrow, firstThrow) {
-  let tmp, lambda$here;
-  tmp = globalThis.Object.freeze([
-    firstThrow,
-    secondThrow
-  ]);
-  lambda$here = lambda$2(score, secondThrow, firstThrow);
-  return globalThis.Object.freeze([
-    lambda$here,
-    tmp
-  ])
-};
-go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 = function go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, secondThrow, firstThrow) {
-  return (_) => {
-    return go_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2(score, secondThrow, firstThrow)
-  }
-};
-go_fix_get$_get$get = function go_fix_get$_get$get(tardis2, r) {
-  let scrut;
-  scrut = r.value;
-  if (scrut instanceof tardis2.Some.class) {
-    return runtime.safeCall(scrut.value(undefined))
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_fix_get$$get$ = function go_fix_get$$get$(tardis2, r) {
-  return () => {
-    return go_fix_get$_get$get(tardis2, r)
-  }
-};
-go_fix$fix = function go_fix$fix(f) {
-  return (bw, fw) => {
-    return go_fix$fix$worker(f, bw, fw)
-  }
-};
-go_fix$fix$worker = function go_fix$fix$worker(f, bw, fw) {
-  let r, scrut, element2$, element1$, element0$, callPrefix, tmp, get$here;
-  r = new tardis1.Ref.class(tardis1.None);
-  get$here = go_fix_get$$get$(tardis1, r);
-  callPrefix = runtime.safeCall(f(get$here));
-  scrut = runtime.safeCall(callPrefix(bw, fw));
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-    element0$ = runtime.Tuple.get(scrut, 0);
-    element1$ = runtime.Tuple.get(scrut, 1);
-    element2$ = runtime.Tuple.get(scrut, 2);
-    tmp = tardis1.Some(element0$);
-    r.value = tmp;
-    return globalThis.Object.freeze([
-      element0$,
-      element1$,
-      element2$
-    ])
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$_lambda_score1$_score1$score1 = function lambda$_lambda$_lambda_score1$_score1$score1(p) {
-  let tmp, element0$;
-  tmp = runtime.safeCall(p());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    element0$ = runtime.Tuple.get(tmp, 0);
-    return runtime.safeCall(element0$())
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$_lambda_score1$$score1$ = function lambda$_lambda$_lambda_score1$$score1$(p) {
-  return () => {
-    return lambda$_lambda$_lambda_score1$_score1$score1(p)
-  }
-};
-lambda$_lambda$_lambda$lambda$worker = function lambda$_lambda$_lambda$lambda$worker(tardis2, f, p, eta$0$0, eta$0$1) {
-  let r, element2$, element1$, element2$1, element1$1, element0$, tmp, bw, inlinedVal;
-  r = new tardis1.Ref.class(tardis1.None);
-  bw = lambda$_lambda$_lambda_throws1$$throws1$(p);
-  inlinedVal = globalThis.Object.freeze([
-    runtime.Unit,
-    bw,
-    eta$0$1
-  ]);
-  if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 3) {
-    let m, inlinedVal1, r1, scrut, element1$2, element0$1, element2$2, element1$3, element0$2, tmp1, getBw1$here;
-    element1$ = runtime.Tuple.get(inlinedVal, 1);
-    element2$ = runtime.Tuple.get(inlinedVal, 2);
-    m = tardis2[getPast$accessorSymbol];
-    r1 = new tardis1.Ref.class(tardis1.None);
-    getBw1$here = getBw1$(tardis1, r1);
-    scrut = runtime.safeCall(m(getBw1$here, element2$));
-    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-      let tardis3, score1, arg$Cons$0$, tmp2;
-      element0$1 = runtime.Tuple.get(scrut, 0);
-      element1$2 = runtime.Tuple.get(scrut, 1);
-      tardis3 = tardis2;
-      score1 = lambda$_lambda$_lambda_score1$$score1$(p);
-      if (element0$1 instanceof tardis3.Cons.class) {
-        let inlinedVal2, r2, element2$3, element1$4, element2$4, element1$5, element0$3, tmp3, bw1, inlinedVal3;
-        arg$Cons$0$ = element0$1.head;
-        tmp2 = tardis2.Cons(score1, element0$1);
-        r2 = new tardis1.Ref.class(tardis1.None);
-        bw1 = getBw1$(tardis1, r2);
-        inlinedVal3 = globalThis.Object.freeze([
-          runtime.Unit,
-          bw1,
-          tmp2
-        ]);
-        if (runtime.Tuple.isArrayLike(inlinedVal3) && inlinedVal3.length === 3) {
-          let inlinedVal4, lambda$here;
-          element1$4 = runtime.Tuple.get(inlinedVal3, 1);
-          element2$3 = runtime.Tuple.get(inlinedVal3, 2);
-          lambda$here = lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, f, arg$Cons$0$);
-          inlinedVal4 = tardis2[bind$accessorSymbol](tardis2[getFuture$accessorSymbol])(lambda$here)(eta$0$0, element2$3);
-          if (runtime.Tuple.isArrayLike(inlinedVal4) && inlinedVal4.length === 3) {
-            element0$3 = runtime.Tuple.get(inlinedVal4, 0);
-            element1$5 = runtime.Tuple.get(inlinedVal4, 1);
-            element2$4 = runtime.Tuple.get(inlinedVal4, 2);
-            tmp3 = tardis1.Some(element1$5);
-            r2.value = tmp3;
-            inlinedVal2 = globalThis.Object.freeze([
-              element0$3,
-              element1$4,
-              element2$4
-            ]);
-            if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 3) {
-              element0$2 = runtime.Tuple.get(inlinedVal2, 0);
-              element1$3 = runtime.Tuple.get(inlinedVal2, 1);
-              element2$2 = runtime.Tuple.get(inlinedVal2, 2);
-              tmp1 = tardis1.Some(element1$3);
-              r1.value = tmp1;
-              inlinedVal1 = globalThis.Object.freeze([
-                element0$2,
-                element1$2,
-                element2$2
-              ]);
-              if (runtime.Tuple.isArrayLike(inlinedVal1) && inlinedVal1.length === 3) {
-                element0$ = runtime.Tuple.get(inlinedVal1, 0);
-                element1$1 = runtime.Tuple.get(inlinedVal1, 1);
-                element2$1 = runtime.Tuple.get(inlinedVal1, 2);
-                tmp = tardis1.Some(element1$1);
-                r.value = tmp;
-                return globalThis.Object.freeze([
-                  element0$,
-                  element1$,
-                  element2$1
-                ])
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$$lambda$ = function lambda$_lambda$$lambda$(tardis2, f) {
-  return (p) => {
-    return (eta$0$0, eta$0$1) => {
-      return lambda$_lambda$_lambda$lambda$worker(tardis2, f, p, eta$0$0, eta$0$1)
-    }
-  }
-};
-lambda$$go = function lambda$$go(tardis2, finalFrameScore, frames) {
-  let arg$Cons$0$, arg$Cons$1$, tmp, lambda$here, lambda$here1, lambda$here2;
-  if (frames instanceof tardis2.Nil.class) {
-    lambda$here = lambda$1(tardis2, finalFrameScore);
-    return tardis2[bind$accessorSymbol](tardis2[getPast$accessorSymbol])(lambda$here)
-  } else if (frames instanceof tardis2.Cons.class) {
-    arg$Cons$0$ = frames.head;
-    arg$Cons$1$ = frames.tail;
-    lambda$here1 = lambda$_lambda$$lambda$(tardis2, arg$Cons$0$);
-    tmp = lambda$_fix$fix(lambda$here1);
-    lambda$here2 = lambda$(tardis2, finalFrameScore, arg$Cons$1$);
-    return lambda$_bind$bind(tmp)(lambda$here2)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$_lambda_throws1$_throws1$throws1 = function lambda$_lambda$_lambda_throws1$_throws1$throws1(p) {
-  let tmp;
-  tmp = runtime.safeCall(p());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    return runtime.Tuple.get(tmp, 1)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$_lambda_throws1$$throws1$ = function lambda$_lambda$_lambda_throws1$$throws1$(p) {
-  return () => {
-    return lambda$_lambda$_lambda_throws1$_throws1$throws1(p)
-  }
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, element1$, element0$;
-  tmp = runtime.safeCall(score());
-  tmp1 = tmp + 10;
-  tmp2 = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 2) {
-    element0$ = runtime.Tuple.get(tmp2, 0);
-    runtime.Tuple.get(tmp2, 1);
-    tmp3 = tmp1 + element0$;
-    tmp4 = runtime.safeCall(nextThrows());
-    if (runtime.Tuple.isArrayLike(tmp4) && tmp4.length === 2) {
-      runtime.Tuple.get(tmp4, 0);
-      element1$ = runtime.Tuple.get(tmp4, 1);
-      return tmp3 + element1$
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$ = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
-  return () => {
-    return lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows)
-  }
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, lambda$here, element0$;
-  tmp = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
-    element0$ = runtime.Tuple.get(tmp, 0);
-    runtime.Tuple.get(tmp, 1);
-    tmp1 = globalThis.Object.freeze([
-      10,
-      element0$
-    ]);
-    lambda$here = lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows);
-    return globalThis.Object.freeze([
-      lambda$here,
-      tmp1
-    ])
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$ = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
-  return (_) => {
-    return lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows)
-  }
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda(tardis2, f, score, nextThrows) {
-  let arg$Frame$0$, arg$Frame$1$, arg$Spare$0$, lambda$here, lambda$here1, lambda$here2;
-  if (f instanceof tardis2.Strike.class) {
-    lambda$here = lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows);
-    return tardis2[pure$accessorSymbol](lambda$here)
-  } else if (f instanceof tardis2.Spare.class) {
-    arg$Spare$0$ = f.firstThrow;
-    lambda$here1 = lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1(score, nextThrows, arg$Spare$0$);
-    return tardis2[pure$accessorSymbol](lambda$here1)
-  } else if (f instanceof tardis2.Frame.class) {
-    arg$Frame$0$ = f.firstThrow;
-    arg$Frame$1$ = f.secondThrow;
-    lambda$here2 = lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2(score, arg$Frame$1$, arg$Frame$0$);
-    return tardis2[pure$accessorSymbol](lambda$here2)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$ = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$$lambda$(tardis2, f, score) {
-  return (nextThrows) => {
-    return lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda$lambda(tardis2, f, score, nextThrows)
-  }
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1 = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows) {
-  let tmp, tmp1, tmp2, element0$;
-  tmp = runtime.safeCall(score());
-  tmp1 = tmp + 10;
-  tmp2 = runtime.safeCall(nextThrows());
-  if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 2) {
-    element0$ = runtime.Tuple.get(tmp2, 0);
-    runtime.Tuple.get(tmp2, 1);
-    return tmp1 + element0$
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1 = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$(score, nextThrows) {
-  return () => {
-    return lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows)
-  }
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1 = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, nextThrows, firstThrow) {
-  let tmp, tmp1, lambda$here;
-  tmp = 10 - firstThrow;
-  tmp1 = globalThis.Object.freeze([
-    firstThrow,
-    tmp
-  ]);
-  lambda$here = lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda_lambda$$lambda$1(score, nextThrows);
-  return globalThis.Object.freeze([
-    lambda$here,
-    tmp1
-  ])
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$1 = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, nextThrows, firstThrow) {
-  return (_) => {
-    return lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda1(score, nextThrows, firstThrow)
-  }
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2 = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda(score, secondThrow, firstThrow) {
-  let tmp, lambda$here;
-  tmp = globalThis.Object.freeze([
-    firstThrow,
-    secondThrow
-  ]);
-  lambda$here = lambda$2(score, secondThrow, firstThrow);
-  return globalThis.Object.freeze([
-    lambda$here,
-    tmp
-  ])
-};
-lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$2 = function lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$$lambda$(score, secondThrow, firstThrow) {
-  return (_) => {
-    return lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$_lambda_lambda$_lambda$lambda2(score, secondThrow, firstThrow)
-  }
-};
-lambda$_fix_get$_get$get = function lambda$_fix_get$_get$get(tardis2, r) {
-  let scrut;
-  scrut = r.value;
-  if (scrut instanceof tardis2.Some.class) {
-    return runtime.safeCall(scrut.value(undefined))
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_fix_get$$get$ = function lambda$_fix_get$$get$(tardis2, r) {
-  return () => {
-    return lambda$_fix_get$_get$get(tardis2, r)
-  }
-};
-lambda$_fix$fix = function lambda$_fix$fix(f) {
-  return (bw, fw) => {
-    return lambda$_fix$fix$worker(f, bw, fw)
-  }
-};
-lambda$_fix$fix$worker = function lambda$_fix$fix$worker(f, bw, fw) {
-  let r, scrut, element2$, element1$, element0$, callPrefix, tmp, get$here;
-  r = new tardis1.Ref.class(tardis1.None);
-  get$here = lambda$_fix_get$$get$(tardis1, r);
-  callPrefix = runtime.safeCall(f(get$here));
-  scrut = runtime.safeCall(callPrefix(bw, fw));
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-    element0$ = runtime.Tuple.get(scrut, 0);
-    element1$ = runtime.Tuple.get(scrut, 1);
-    element2$ = runtime.Tuple.get(scrut, 2);
-    tmp = tardis1.Some(element0$);
-    r.value = tmp;
-    return globalThis.Object.freeze([
-      element0$,
-      element1$,
-      element2$
-    ])
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-go_bind$bind = function go_bind$bind(m) {
-  return (f) => {
-    return (bw, fw) => {
-      return go_bind$bind$worker(m, f, bw, fw)
-    }
-  }
-};
-go_bind$bind$worker = function go_bind$bind$worker(m, f, bw, fw) {
-  let r, scrut, scrut1, element2$, element1$, element2$1, element1$1, element0$, callPrefix, tmp, getBw1$here;
-  r = new tardis1.Ref.class(tardis1.None);
-  getBw1$here = getBw1$(tardis1, r);
-  scrut = runtime.safeCall(m(getBw1$here, fw));
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-    element1$ = runtime.Tuple.get(scrut, 1);
-    element2$ = runtime.Tuple.get(scrut, 2);
-    callPrefix = runtime.safeCall(f());
-    scrut1 = runtime.safeCall(callPrefix(bw, element2$));
-    if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 3) {
-      element0$ = runtime.Tuple.get(scrut1, 0);
-      element1$1 = runtime.Tuple.get(scrut1, 1);
-      element2$1 = runtime.Tuple.get(scrut1, 2);
-      tmp = tardis1.Some(element1$1);
-      r.value = tmp;
-      return globalThis.Object.freeze([
-        element0$,
-        element1$,
-        element2$1
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
 main_initialBw$initialBw = function main_initialBw$initialBw(lastFrame) {
   return () => {
     return main_initialBw$initialBw$worker(lastFrame)
@@ -983,96 +367,28 @@ main_initialBw$initialBw$worker = function main_initialBw$initialBw$worker(lastF
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda$_bind$bind = function lambda$_bind$bind(m) {
-  return (f) => {
-    return (bw, fw) => {
-      return lambda$_bind$bind$worker(m, f, bw, fw)
-    }
-  }
-};
-lambda$_bind$bind$worker = function lambda$_bind$bind$worker(m, f, bw, fw) {
-  let r, scrut, scrut1, element2$, element1$, element2$1, element1$1, element0$, callPrefix, tmp, getBw1$here;
-  r = new tardis1.Ref.class(tardis1.None);
-  getBw1$here = getBw1$(tardis1, r);
-  scrut = runtime.safeCall(m(getBw1$here, fw));
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-    element1$ = runtime.Tuple.get(scrut, 1);
-    element2$ = runtime.Tuple.get(scrut, 2);
-    callPrefix = runtime.safeCall(f(undefined));
-    scrut1 = runtime.safeCall(callPrefix(bw, element2$));
-    if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 3) {
-      element0$ = runtime.Tuple.get(scrut1, 0);
-      element1$1 = runtime.Tuple.get(scrut1, 1);
-      element2$1 = runtime.Tuple.get(scrut1, 2);
-      tmp = tardis1.Some(element1$1);
-      r.value = tmp;
-      return globalThis.Object.freeze([
-        element0$,
-        element1$,
-        element2$1
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$3 = (undefined, function (finalFrameScore, score) {
+lambda$1 = (undefined, function (finalFrameScore, score) {
   return () => {
     let tmp;
     tmp = runtime.safeCall(score());
     return finalFrameScore + tmp
   }
 });
-lambda$1 = (undefined, function (tardis2, finalFrameScore) {
-  return (scores) => {
-    return lambda(tardis2, finalFrameScore, scores)
-  }
-});
-lambda$2 = (undefined, function (score, secondThrow, firstThrow) {
+lambda$ = (undefined, function (score, secondThrow, firstThrow) {
   return () => {
-    return lambda1(score, secondThrow, firstThrow)
+    return lambda(score, secondThrow, firstThrow)
   }
 });
-lambda1 = (undefined, function (score, secondThrow, firstThrow) {
+lambda = (undefined, function (score, secondThrow, firstThrow) {
   let tmp, tmp1;
   tmp = runtime.safeCall(score());
   tmp1 = tmp + firstThrow;
   return tmp1 + secondThrow
 });
-lambda$ = (undefined, function (tardis2, finalFrameScore, fs) {
-  return (_) => {
-    return lambda$$go(tardis2, finalFrameScore, fs)
-  }
-});
-lambda = (undefined, function (tardis2, finalFrameScore, scores) {
-  let arg$Cons$0$, tmp, lambda$here;
-  if (scores instanceof tardis2.Cons.class) {
-    arg$Cons$0$ = scores.head;
-    lambda$here = lambda$3(finalFrameScore, arg$Cons$0$);
-    tmp = tardis2.Cons(lambda$here, scores);
-    return tardis2[pure$accessorSymbol](tmp)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-});
-go = function go(tardis2, finalFrameScore, frames) {
-  let arg$Cons$0$, arg$Cons$1$, tmp, lambda$here, lambda$here1, lambda$here2;
-  if (frames instanceof tardis2.Nil.class) {
-    lambda$here = lambda$1(tardis2, finalFrameScore);
-    return tardis2[bind$accessorSymbol](tardis2[getPast$accessorSymbol])(lambda$here)
-  } else if (frames instanceof tardis2.Cons.class) {
-    arg$Cons$0$ = frames.head;
-    arg$Cons$1$ = frames.tail;
-    lambda$here1 = go_lambda$$lambda$(tardis2, arg$Cons$0$);
-    tmp = go_fix$fix(lambda$here1);
-    lambda$here2 = go$lambda$(tardis2, finalFrameScore, arg$Cons$1$);
-    return go_bind$bind(tmp)(lambda$here2)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda2 = (undefined, function () {
+lambda1 = (undefined, function () {
   return 0
 });
-lambda3 = (undefined, function (th) {
+lambda2 = (undefined, function (th) {
   return runtime.safeCall(th())
 });
 getBw1$ = function getBw1$(tardis2, r) {
@@ -1092,7 +408,6 @@ getBw1 = function getBw1(tardis2, r) {
   static {
     tardis1 = this
   }
-  static get [pure$accessorSymbol]() { return tardis.#pure; }
   static get [getPast$accessorSymbol]() { return tardis.#getPast; }
   static get [getFuture$accessorSymbol]() { return tardis.#getFuture; }
   static get [bind$accessorSymbol]() { return tardis.#bind; }
@@ -1284,15 +599,6 @@ getBw1 = function getBw1(tardis2, r) {
   static #run(m, bw, fw) {
     return runtime.safeCall(m(bw, fw))
   }
-  static #pure(a) {
-    return (bw, fw) => {
-      return globalThis.Object.freeze([
-        a,
-        bw,
-        fw
-      ])
-    }
-  }
   static #getPast(bw, fw) {
     return globalThis.Object.freeze([
       fw,
@@ -1363,13 +669,13 @@ getBw1 = function getBw1(tardis2, r) {
         arg$LStrike$1$ = arg$Game$1$.bonus2;
         tmp15 = 10 + arg$LStrike$0$;
         inlinedVal = tmp15 + arg$LStrike$1$;
-        initialFw = tardis.Cons(lambda2, tardis.Nil);
+        initialFw = tardis.Cons(lambda1, tardis.Nil);
         tmp13 = main_go$go(tardis, inlinedVal, arg$Game$0$);
         tmp14 = main_initialBw$initialBw(arg$Game$1$);
         scrut = tardis.#run(tmp13, tmp14, initialFw);
         if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
           element0$ = runtime.Tuple.get(scrut, 0);
-          return tardis.#map(lambda3)(element0$)
+          return tardis.#map(lambda2)(element0$)
         }
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }

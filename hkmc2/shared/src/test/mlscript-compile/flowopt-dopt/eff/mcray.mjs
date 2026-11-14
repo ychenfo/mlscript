@@ -14,7 +14,7 @@ const getEmission$accessorSymbol = globalThis.Symbol("getEmission");
 const getHitInfo$accessorSymbol = globalThis.Symbol("getHitInfo");
 const closer$accessorSymbol = globalThis.Symbol("closer");
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
-let hitTest1, trace, mcray1, lambda, lambda$, lambda$1, lambda$2, hitTest1$, lambda$3, lambda$4, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_lambertian_lambda$$lambda$, main_buildScene_makeScene_sphereMake_hitTest1$_hitTest1$hitTest1, main_buildScene_makeScene_sphereMake_hitTest1$$hitTest1$, main_buildScene_makeScene_metal_lambda$_lambda$lambda, main_buildScene_makeScene_metal_lambda$$lambda$, main_buildScene_makeScene_sphereMake_hitTest1$_hitTest1$hitTest11, main_buildScene_makeScene_sphereMake_hitTest1$$hitTest1$1, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1, main_buildScene_makeScene_lambertian_lambda$$lambda$1, main_buildScene_makeScene_sphereMake_hitTest1$_hitTest1$hitTest12, main_buildScene_makeScene_sphereMake_hitTest1$$hitTest1$2, main_buildScene_makeScene_lp_randomSphere_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_lp_randomSphere_lambertian_lambda$$lambda$, main_buildScene_makeScene_lp_randomSphere_metal_lambda$_lambda$lambda, main_buildScene_makeScene_lp_randomSphere_metal_lambda$$lambda$, main_buildScene_makeScene_lp_randomSphere_sphereMake_hitTest1$_hitTest1$hitTest1, main_buildScene_makeScene_lp_randomSphere_sphereMake_hitTest1$$hitTest1$, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel, main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda, main_rayTracer_aaPixelToRGB_lambda$$lambda$, main_rayTracer_colorFromRGBWithGamma$colorFromRGBWithGamma, main_rayTracer_traceRay_lambda$_lambda_trace$trace, main_rayTracer_traceRay_lambda$$lambda$, rayTracer_traceRay_lambda$_lambda_trace$trace, traceRay_lambda$_lambda_trace$trace, lambda_trace$trace, lambda$_lambda_trace$trace, main_buildScene_makeScene_lambertian_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2, main_buildScene_makeScene_metal_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2, main_buildScene_makeScene_lambertian_lambda$_lambda_rayMake_vec3Normalize$scrut_tup21, main_buildScene_makeScene_lp_randomSphere_lambertian_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2, main_buildScene_makeScene_lp_randomSphere_metal_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2, main_buildScene_cameraMake_vec3Normalize$scrut_tup2, main_buildScene_cameraMake_vec3Normalize$scrut_tup21, main_buildScene_cameraMake_vec3Normalize$scrut_tup22, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay_rayMake_vec3Normalize$scrut_tup2, main_rayTracer_aaPixelToRGB_lambda$_lambda_listFoldl$l_Cons, main_rayTracer_aaPixelToRGB_lambda$_lambda_listFoldl$l_Nil, main_rayTracer_colorFromRGBWithGamma$c_tup3, main_rayTracer_traceRay_lambda$_lambda_trace$scrut_Some, main_rayTracer_traceRay_lambda$_lambda_trace$arg$Some$0$_tup2, main_rayTracer_traceRay_lambda$_lambda_trace$scrut_None, main_rayTracer_traceRay_lambda$_lambda_trace$arg$Some$0$_tup2$worker, main_rayTracer_colorFromRGBWithGamma$c_tup3$worker, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker;
+let hitTest1, mcray1, lambda, lambda$, lambda$1, lambda$2, hitTest1$, lambda$3, lambda$4, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_lambertian_lambda$$lambda$, main_buildScene_makeScene_sphereMake_hitTest1$_hitTest1$hitTest1, main_buildScene_makeScene_sphereMake_hitTest1$$hitTest1$, main_buildScene_makeScene_metal_lambda$_lambda$lambda, main_buildScene_makeScene_metal_lambda$$lambda$, main_buildScene_makeScene_sphereMake_hitTest1$_hitTest1$hitTest11, main_buildScene_makeScene_sphereMake_hitTest1$$hitTest1$1, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1, main_buildScene_makeScene_lambertian_lambda$$lambda$1, main_buildScene_makeScene_sphereMake_hitTest1$_hitTest1$hitTest12, main_buildScene_makeScene_sphereMake_hitTest1$$hitTest1$2, main_buildScene_makeScene_lp_randomSphere_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_lp_randomSphere_lambertian_lambda$$lambda$, main_buildScene_makeScene_lp_randomSphere_metal_lambda$_lambda$lambda, main_buildScene_makeScene_lp_randomSphere_metal_lambda$$lambda$, main_buildScene_makeScene_lp_randomSphere_sphereMake_hitTest1$_hitTest1$hitTest1, main_buildScene_makeScene_lp_randomSphere_sphereMake_hitTest1$$hitTest1$, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel, main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda, main_rayTracer_aaPixelToRGB_lambda$$lambda$, main_rayTracer_colorFromRGBWithGamma$colorFromRGBWithGamma, main_rayTracer_traceRay_lambda$_lambda_trace$trace, main_rayTracer_traceRay_lambda$$lambda$, main_buildScene_makeScene_lambertian_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2, main_buildScene_makeScene_metal_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2, main_buildScene_makeScene_lambertian_lambda$_lambda_rayMake_vec3Normalize$scrut_tup21, main_buildScene_makeScene_lp_randomSphere_lambertian_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2, main_buildScene_makeScene_lp_randomSphere_metal_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2, main_buildScene_cameraMake_vec3Normalize$scrut_tup2, main_buildScene_cameraMake_vec3Normalize$scrut_tup21, main_buildScene_cameraMake_vec3Normalize$scrut_tup22, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay_rayMake_vec3Normalize$scrut_tup2, main_rayTracer_aaPixelToRGB_lambda$_lambda_listFoldl$l_Cons, main_rayTracer_aaPixelToRGB_lambda$_lambda_listFoldl$l_Nil, main_rayTracer_colorFromRGBWithGamma$c_tup3, main_rayTracer_traceRay_lambda$_lambda_trace$scrut_Some, main_rayTracer_traceRay_lambda$_lambda_trace$arg$Some$0$_tup2, main_rayTracer_traceRay_lambda$_lambda_trace$scrut_None, main_rayTracer_traceRay_lambda$_lambda_trace$arg$Some$0$_tup2$worker, main_rayTracer_colorFromRGBWithGamma$c_tup3$worker, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker;
 main_buildScene_makeScene_lambertian_lambda$_lambda$lambda = function main_buildScene_makeScene_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit) {
   let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1;
   if (hit instanceof mcray2.MatHit.class) {
@@ -801,7 +801,7 @@ main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go = function main_rayT
   tmp2 = main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(n, f, tmp1);
   return main_rayTracer_aaPixelToRGB_lambda$_lambda_listFoldl$l_Cons(tmp, tmp2);
 };
-main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda = function main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda(mcray2, trace1, rfp, scale, r, c) {
+main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda = function main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda(mcray2, trace, rfp, scale, r, c) {
   let tmp, inlinedVal, f, inlinedVal1, element2$, element1$, element0$, tmp1, tmp2, tmp3;
   inlinedVal = globalThis.Object.freeze([
     0.0,
@@ -809,7 +809,7 @@ main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda = function main_rayTracer_aaPi
     0.0
   ]);
   tmp = runtime.safeCall(rfp(r, c));
-  f = lambda$4(mcray2, trace1);
+  f = lambda$4(mcray2, trace);
   inlinedVal1 = tmp(undefined, f, inlinedVal);
   if (runtime.Tuple.isArrayLike(inlinedVal1) && inlinedVal1.length === 3) {
     element0$ = runtime.Tuple.get(inlinedVal1, 0);
@@ -822,9 +822,9 @@ main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda = function main_rayTracer_aaPi
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_rayTracer_aaPixelToRGB_lambda$$lambda$ = function main_rayTracer_aaPixelToRGB_lambda$$lambda$(mcray2, trace1, rfp, scale) {
+main_rayTracer_aaPixelToRGB_lambda$$lambda$ = function main_rayTracer_aaPixelToRGB_lambda$$lambda$(mcray2, trace, rfp, scale) {
   return (r, c) => {
-    return main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda(mcray2, trace1, rfp, scale, r, c)
+    return main_rayTracer_aaPixelToRGB_lambda$_lambda$lambda(mcray2, trace, rfp, scale, r, c)
   }
 };
 main_rayTracer_colorFromRGBWithGamma$colorFromRGBWithGamma = function main_rayTracer_colorFromRGBWithGamma$colorFromRGBWithGamma(c) {
@@ -885,406 +885,6 @@ main_rayTracer_traceRay_lambda$_lambda_trace$trace = function main_rayTracer_tra
 main_rayTracer_traceRay_lambda$$lambda$ = function main_rayTracer_traceRay_lambda$$lambda$(mcray2, world, maxDepth, minMaxT) {
   return (ray) => {
     return main_rayTracer_traceRay_lambda$_lambda_trace$trace(mcray2, world, minMaxT, ray, maxDepth)
-  }
-};
-rayTracer_traceRay_lambda$_lambda_trace$trace = function rayTracer_traceRay_lambda$_lambda_trace$trace(mcray2, world, ray, depth) {
-  let scrut, scrut1, arg$ObjHit$0$, arg$Some$0$, element1$, element0$, tmp, tmp1, tmp2;
-  scrut = depth <= 0;
-  if (scrut === true) {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-  {
-    let receiver, inlinedVal;
-    receiver = mcray2;
-    if (world instanceof receiver.Obj.class) {
-      inlinedVal = runtime.safeCall(world.hit(ray, undefined));
-      if (inlinedVal instanceof mcray2.Miss.class) {
-        let element1$1, element1$2, tmp3, tmp4;
-        if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
-          runtime.Tuple.get(ray, 0);
-          element1$1 = runtime.Tuple.get(ray, 1);
-          if (runtime.Tuple.isArrayLike(element1$1) && element1$1.length === 3) {
-            let tmp5, fv_tmp, fv_tmp1, fv_tmp2, fv_tmp3, fv_tmp4, fv_tmp5, fv_tmp6, fv_tmp7, fv_tmp8;
-            runtime.Tuple.get(element1$1, 0);
-            element1$2 = runtime.Tuple.get(element1$1, 1);
-            runtime.Tuple.get(element1$1, 2);
-            tmp3 = element1$2 + 1.0;
-            tmp4 = 0.5 * tmp3;
-            tmp5 = 1.0 - tmp4;
-            fv_tmp = tmp5 * 1.0;
-            fv_tmp1 = tmp5 * 1.0;
-            fv_tmp2 = tmp5 * 1.0;
-            fv_tmp3 = tmp4 * 0.5;
-            fv_tmp4 = tmp4 * 0.7;
-            fv_tmp5 = tmp4 * 1.0;
-            fv_tmp6 = fv_tmp + fv_tmp3;
-            fv_tmp7 = fv_tmp1 + fv_tmp4;
-            fv_tmp8 = fv_tmp2 + fv_tmp5;
-            return globalThis.Object.freeze([
-              fv_tmp6,
-              fv_tmp7,
-              fv_tmp8
-            ])
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      } else if (inlinedVal instanceof mcray2.ObjHit.class) {
-        arg$ObjHit$0$ = inlinedVal.hit;
-        scrut1 = mcray2[getHitInfo$accessorSymbol](arg$ObjHit$0$, ray);
-        if (scrut1 instanceof mcray2.None.class) {
-          return mcray2[getEmission$accessorSymbol](arg$ObjHit$0$)
-        } else if (scrut1 instanceof mcray2.Some.class) {
-          arg$Some$0$ = scrut1.value;
-          if (runtime.Tuple.isArrayLike(arg$Some$0$) && arg$Some$0$.length === 2) {
-            let element2$, element1$1, element0$1, element2$1, element1$2, element0$2, element2$2, element1$3, element0$3, tmp3, tmp4, tmp5;
-            element0$ = runtime.Tuple.get(arg$Some$0$, 0);
-            element1$ = runtime.Tuple.get(arg$Some$0$, 1);
-            tmp = mcray2[getEmission$accessorSymbol](arg$ObjHit$0$);
-            tmp1 = depth - 1;
-            tmp2 = rayTracer_traceRay_lambda$_lambda_trace$trace(mcray2, world, element1$, tmp1);
-            if (runtime.Tuple.isArrayLike(element0$) && element0$.length === 3) {
-              element0$2 = runtime.Tuple.get(element0$, 0);
-              element1$2 = runtime.Tuple.get(element0$, 1);
-              element2$1 = runtime.Tuple.get(element0$, 2);
-              if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 3) {
-                element0$3 = runtime.Tuple.get(tmp2, 0);
-                element1$3 = runtime.Tuple.get(tmp2, 1);
-                element2$2 = runtime.Tuple.get(tmp2, 2);
-                tmp3 = element0$2 * element0$3;
-                tmp4 = element1$2 * element1$3;
-                tmp5 = element2$1 * element2$2;
-                if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 3) {
-                  let fv_tmp, fv_tmp1, fv_tmp2;
-                  element0$1 = runtime.Tuple.get(tmp, 0);
-                  element1$1 = runtime.Tuple.get(tmp, 1);
-                  element2$ = runtime.Tuple.get(tmp, 2);
-                  fv_tmp = element0$1 + tmp3;
-                  fv_tmp1 = element1$1 + tmp4;
-                  fv_tmp2 = element2$ + tmp5;
-                  return globalThis.Object.freeze([
-                    fv_tmp,
-                    fv_tmp1,
-                    fv_tmp2
-                  ])
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-traceRay_lambda$_lambda_trace$trace = function traceRay_lambda$_lambda_trace$trace(mcray2, world, ray, depth) {
-  let scrut, scrut1, arg$ObjHit$0$, arg$Some$0$, element1$, element0$, tmp, tmp1, tmp2;
-  scrut = depth <= 0;
-  if (scrut === true) {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-  {
-    let receiver, inlinedVal;
-    receiver = mcray2;
-    if (world instanceof receiver.Obj.class) {
-      inlinedVal = runtime.safeCall(world.hit(ray, undefined));
-      if (inlinedVal instanceof mcray2.Miss.class) {
-        let element1$1, element1$2, tmp3, tmp4;
-        if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
-          runtime.Tuple.get(ray, 0);
-          element1$1 = runtime.Tuple.get(ray, 1);
-          if (runtime.Tuple.isArrayLike(element1$1) && element1$1.length === 3) {
-            let tmp5, fv_tmp, fv_tmp1, fv_tmp2, fv_tmp3, fv_tmp4, fv_tmp5, fv_tmp6, fv_tmp7, fv_tmp8;
-            runtime.Tuple.get(element1$1, 0);
-            element1$2 = runtime.Tuple.get(element1$1, 1);
-            runtime.Tuple.get(element1$1, 2);
-            tmp3 = element1$2 + 1.0;
-            tmp4 = 0.5 * tmp3;
-            tmp5 = 1.0 - tmp4;
-            fv_tmp = tmp5 * 1.0;
-            fv_tmp1 = tmp5 * 1.0;
-            fv_tmp2 = tmp5 * 1.0;
-            fv_tmp3 = tmp4 * 0.5;
-            fv_tmp4 = tmp4 * 0.7;
-            fv_tmp5 = tmp4 * 1.0;
-            fv_tmp6 = fv_tmp + fv_tmp3;
-            fv_tmp7 = fv_tmp1 + fv_tmp4;
-            fv_tmp8 = fv_tmp2 + fv_tmp5;
-            return globalThis.Object.freeze([
-              fv_tmp6,
-              fv_tmp7,
-              fv_tmp8
-            ])
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      } else if (inlinedVal instanceof mcray2.ObjHit.class) {
-        arg$ObjHit$0$ = inlinedVal.hit;
-        scrut1 = mcray2[getHitInfo$accessorSymbol](arg$ObjHit$0$, ray);
-        if (scrut1 instanceof mcray2.None.class) {
-          return mcray2[getEmission$accessorSymbol](arg$ObjHit$0$)
-        } else if (scrut1 instanceof mcray2.Some.class) {
-          arg$Some$0$ = scrut1.value;
-          if (runtime.Tuple.isArrayLike(arg$Some$0$) && arg$Some$0$.length === 2) {
-            let element2$, element1$1, element0$1, element2$1, element1$2, element0$2, element2$2, element1$3, element0$3, tmp3, tmp4, tmp5;
-            element0$ = runtime.Tuple.get(arg$Some$0$, 0);
-            element1$ = runtime.Tuple.get(arg$Some$0$, 1);
-            tmp = mcray2[getEmission$accessorSymbol](arg$ObjHit$0$);
-            tmp1 = depth - 1;
-            tmp2 = traceRay_lambda$_lambda_trace$trace(mcray2, world, element1$, tmp1);
-            if (runtime.Tuple.isArrayLike(element0$) && element0$.length === 3) {
-              element0$2 = runtime.Tuple.get(element0$, 0);
-              element1$2 = runtime.Tuple.get(element0$, 1);
-              element2$1 = runtime.Tuple.get(element0$, 2);
-              if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 3) {
-                element0$3 = runtime.Tuple.get(tmp2, 0);
-                element1$3 = runtime.Tuple.get(tmp2, 1);
-                element2$2 = runtime.Tuple.get(tmp2, 2);
-                tmp3 = element0$2 * element0$3;
-                tmp4 = element1$2 * element1$3;
-                tmp5 = element2$1 * element2$2;
-                if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 3) {
-                  let fv_tmp, fv_tmp1, fv_tmp2;
-                  element0$1 = runtime.Tuple.get(tmp, 0);
-                  element1$1 = runtime.Tuple.get(tmp, 1);
-                  element2$ = runtime.Tuple.get(tmp, 2);
-                  fv_tmp = element0$1 + tmp3;
-                  fv_tmp1 = element1$1 + tmp4;
-                  fv_tmp2 = element2$ + tmp5;
-                  return globalThis.Object.freeze([
-                    fv_tmp,
-                    fv_tmp1,
-                    fv_tmp2
-                  ])
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda_trace$trace = function lambda_trace$trace(mcray2, world, ray, depth) {
-  let scrut, scrut1, arg$ObjHit$0$, arg$Some$0$, element1$, element0$, tmp, tmp1, tmp2;
-  scrut = depth <= 0;
-  if (scrut === true) {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-  {
-    let receiver, inlinedVal;
-    receiver = mcray2;
-    if (world instanceof receiver.Obj.class) {
-      inlinedVal = runtime.safeCall(world.hit(ray, undefined));
-      if (inlinedVal instanceof mcray2.Miss.class) {
-        let element1$1, element1$2, tmp3, tmp4;
-        if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
-          runtime.Tuple.get(ray, 0);
-          element1$1 = runtime.Tuple.get(ray, 1);
-          if (runtime.Tuple.isArrayLike(element1$1) && element1$1.length === 3) {
-            let tmp5, fv_tmp, fv_tmp1, fv_tmp2, fv_tmp3, fv_tmp4, fv_tmp5, fv_tmp6, fv_tmp7, fv_tmp8;
-            runtime.Tuple.get(element1$1, 0);
-            element1$2 = runtime.Tuple.get(element1$1, 1);
-            runtime.Tuple.get(element1$1, 2);
-            tmp3 = element1$2 + 1.0;
-            tmp4 = 0.5 * tmp3;
-            tmp5 = 1.0 - tmp4;
-            fv_tmp = tmp5 * 1.0;
-            fv_tmp1 = tmp5 * 1.0;
-            fv_tmp2 = tmp5 * 1.0;
-            fv_tmp3 = tmp4 * 0.5;
-            fv_tmp4 = tmp4 * 0.7;
-            fv_tmp5 = tmp4 * 1.0;
-            fv_tmp6 = fv_tmp + fv_tmp3;
-            fv_tmp7 = fv_tmp1 + fv_tmp4;
-            fv_tmp8 = fv_tmp2 + fv_tmp5;
-            return globalThis.Object.freeze([
-              fv_tmp6,
-              fv_tmp7,
-              fv_tmp8
-            ])
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      } else if (inlinedVal instanceof mcray2.ObjHit.class) {
-        arg$ObjHit$0$ = inlinedVal.hit;
-        scrut1 = mcray2[getHitInfo$accessorSymbol](arg$ObjHit$0$, ray);
-        if (scrut1 instanceof mcray2.None.class) {
-          return mcray2[getEmission$accessorSymbol](arg$ObjHit$0$)
-        } else if (scrut1 instanceof mcray2.Some.class) {
-          arg$Some$0$ = scrut1.value;
-          if (runtime.Tuple.isArrayLike(arg$Some$0$) && arg$Some$0$.length === 2) {
-            let element2$, element1$1, element0$1, element2$1, element1$2, element0$2, element2$2, element1$3, element0$3, tmp3, tmp4, tmp5;
-            element0$ = runtime.Tuple.get(arg$Some$0$, 0);
-            element1$ = runtime.Tuple.get(arg$Some$0$, 1);
-            tmp = mcray2[getEmission$accessorSymbol](arg$ObjHit$0$);
-            tmp1 = depth - 1;
-            tmp2 = lambda_trace$trace(mcray2, world, element1$, tmp1);
-            if (runtime.Tuple.isArrayLike(element0$) && element0$.length === 3) {
-              element0$2 = runtime.Tuple.get(element0$, 0);
-              element1$2 = runtime.Tuple.get(element0$, 1);
-              element2$1 = runtime.Tuple.get(element0$, 2);
-              if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 3) {
-                element0$3 = runtime.Tuple.get(tmp2, 0);
-                element1$3 = runtime.Tuple.get(tmp2, 1);
-                element2$2 = runtime.Tuple.get(tmp2, 2);
-                tmp3 = element0$2 * element0$3;
-                tmp4 = element1$2 * element1$3;
-                tmp5 = element2$1 * element2$2;
-                if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 3) {
-                  let fv_tmp, fv_tmp1, fv_tmp2;
-                  element0$1 = runtime.Tuple.get(tmp, 0);
-                  element1$1 = runtime.Tuple.get(tmp, 1);
-                  element2$ = runtime.Tuple.get(tmp, 2);
-                  fv_tmp = element0$1 + tmp3;
-                  fv_tmp1 = element1$1 + tmp4;
-                  fv_tmp2 = element2$ + tmp5;
-                  return globalThis.Object.freeze([
-                    fv_tmp,
-                    fv_tmp1,
-                    fv_tmp2
-                  ])
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda$_lambda_trace$trace = function lambda$_lambda_trace$trace(mcray2, world, ray, depth) {
-  let scrut, scrut1, arg$ObjHit$0$, arg$Some$0$, element1$, element0$, tmp, tmp1, tmp2;
-  scrut = depth <= 0;
-  if (scrut === true) {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-  {
-    let receiver, inlinedVal;
-    receiver = mcray2;
-    if (world instanceof receiver.Obj.class) {
-      inlinedVal = runtime.safeCall(world.hit(ray, undefined));
-      if (inlinedVal instanceof mcray2.Miss.class) {
-        let element1$1, element1$2, tmp3, tmp4;
-        if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
-          runtime.Tuple.get(ray, 0);
-          element1$1 = runtime.Tuple.get(ray, 1);
-          if (runtime.Tuple.isArrayLike(element1$1) && element1$1.length === 3) {
-            let tmp5, fv_tmp, fv_tmp1, fv_tmp2, fv_tmp3, fv_tmp4, fv_tmp5, fv_tmp6, fv_tmp7, fv_tmp8;
-            runtime.Tuple.get(element1$1, 0);
-            element1$2 = runtime.Tuple.get(element1$1, 1);
-            runtime.Tuple.get(element1$1, 2);
-            tmp3 = element1$2 + 1.0;
-            tmp4 = 0.5 * tmp3;
-            tmp5 = 1.0 - tmp4;
-            fv_tmp = tmp5 * 1.0;
-            fv_tmp1 = tmp5 * 1.0;
-            fv_tmp2 = tmp5 * 1.0;
-            fv_tmp3 = tmp4 * 0.5;
-            fv_tmp4 = tmp4 * 0.7;
-            fv_tmp5 = tmp4 * 1.0;
-            fv_tmp6 = fv_tmp + fv_tmp3;
-            fv_tmp7 = fv_tmp1 + fv_tmp4;
-            fv_tmp8 = fv_tmp2 + fv_tmp5;
-            return globalThis.Object.freeze([
-              fv_tmp6,
-              fv_tmp7,
-              fv_tmp8
-            ])
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      } else if (inlinedVal instanceof mcray2.ObjHit.class) {
-        arg$ObjHit$0$ = inlinedVal.hit;
-        scrut1 = mcray2[getHitInfo$accessorSymbol](arg$ObjHit$0$, ray);
-        if (scrut1 instanceof mcray2.None.class) {
-          return mcray2[getEmission$accessorSymbol](arg$ObjHit$0$)
-        } else if (scrut1 instanceof mcray2.Some.class) {
-          arg$Some$0$ = scrut1.value;
-          if (runtime.Tuple.isArrayLike(arg$Some$0$) && arg$Some$0$.length === 2) {
-            let element2$, element1$1, element0$1, element2$1, element1$2, element0$2, element2$2, element1$3, element0$3, tmp3, tmp4, tmp5;
-            element0$ = runtime.Tuple.get(arg$Some$0$, 0);
-            element1$ = runtime.Tuple.get(arg$Some$0$, 1);
-            tmp = mcray2[getEmission$accessorSymbol](arg$ObjHit$0$);
-            tmp1 = depth - 1;
-            tmp2 = lambda$_lambda_trace$trace(mcray2, world, element1$, tmp1);
-            if (runtime.Tuple.isArrayLike(element0$) && element0$.length === 3) {
-              element0$2 = runtime.Tuple.get(element0$, 0);
-              element1$2 = runtime.Tuple.get(element0$, 1);
-              element2$1 = runtime.Tuple.get(element0$, 2);
-              if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 3) {
-                element0$3 = runtime.Tuple.get(tmp2, 0);
-                element1$3 = runtime.Tuple.get(tmp2, 1);
-                element2$2 = runtime.Tuple.get(tmp2, 2);
-                tmp3 = element0$2 * element0$3;
-                tmp4 = element1$2 * element1$3;
-                tmp5 = element2$1 * element2$2;
-                if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 3) {
-                  let fv_tmp, fv_tmp1, fv_tmp2;
-                  element0$1 = runtime.Tuple.get(tmp, 0);
-                  element1$1 = runtime.Tuple.get(tmp, 1);
-                  element2$ = runtime.Tuple.get(tmp, 2);
-                  fv_tmp = element0$1 + tmp3;
-                  fv_tmp1 = element1$1 + tmp4;
-                  fv_tmp2 = element2$ + tmp5;
-                  return globalThis.Object.freeze([
-                    fv_tmp,
-                    fv_tmp1,
-                    fv_tmp2
-                  ])
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
 main_buildScene_makeScene_lambertian_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2 = function main_buildScene_makeScene_lambertian_lambda$_lambda_rayMake_vec3Normalize$scrut_tup2(tup2_1) {
@@ -1413,110 +1013,10 @@ main_rayTracer_traceRay_lambda$_lambda_trace$scrut_None = function main_rayTrace
     return fv_mcray[getEmission$accessorSymbol](fv_hit)
   }
 };
-trace = function trace(mcray2, world, ray, depth) {
-  let scrut, scrut1, arg$ObjHit$0$, arg$Some$0$, element1$, element0$, tmp, tmp1, tmp2;
-  scrut = depth <= 0;
-  if (scrut === true) {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-  {
-    let receiver, inlinedVal;
-    receiver = mcray2;
-    if (world instanceof receiver.Obj.class) {
-      inlinedVal = runtime.safeCall(world.hit(ray, undefined));
-      if (inlinedVal instanceof mcray2.Miss.class) {
-        let element1$1, element1$2, tmp3, tmp4;
-        if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
-          runtime.Tuple.get(ray, 0);
-          element1$1 = runtime.Tuple.get(ray, 1);
-          if (runtime.Tuple.isArrayLike(element1$1) && element1$1.length === 3) {
-            let tmp5, fv_tmp, fv_tmp1, fv_tmp2, fv_tmp3, fv_tmp4, fv_tmp5, fv_tmp6, fv_tmp7, fv_tmp8;
-            runtime.Tuple.get(element1$1, 0);
-            element1$2 = runtime.Tuple.get(element1$1, 1);
-            runtime.Tuple.get(element1$1, 2);
-            tmp3 = element1$2 + 1.0;
-            tmp4 = 0.5 * tmp3;
-            tmp5 = 1.0 - tmp4;
-            fv_tmp = tmp5 * 1.0;
-            fv_tmp1 = tmp5 * 1.0;
-            fv_tmp2 = tmp5 * 1.0;
-            fv_tmp3 = tmp4 * 0.5;
-            fv_tmp4 = tmp4 * 0.7;
-            fv_tmp5 = tmp4 * 1.0;
-            fv_tmp6 = fv_tmp + fv_tmp3;
-            fv_tmp7 = fv_tmp1 + fv_tmp4;
-            fv_tmp8 = fv_tmp2 + fv_tmp5;
-            return globalThis.Object.freeze([
-              fv_tmp6,
-              fv_tmp7,
-              fv_tmp8
-            ])
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      } else if (inlinedVal instanceof mcray2.ObjHit.class) {
-        arg$ObjHit$0$ = inlinedVal.hit;
-        scrut1 = mcray2[getHitInfo$accessorSymbol](arg$ObjHit$0$, ray);
-        if (scrut1 instanceof mcray2.None.class) {
-          return mcray2[getEmission$accessorSymbol](arg$ObjHit$0$)
-        } else if (scrut1 instanceof mcray2.Some.class) {
-          arg$Some$0$ = scrut1.value;
-          if (runtime.Tuple.isArrayLike(arg$Some$0$) && arg$Some$0$.length === 2) {
-            let element2$, element1$1, element0$1, element2$1, element1$2, element0$2, element2$2, element1$3, element0$3, tmp3, tmp4, tmp5;
-            element0$ = runtime.Tuple.get(arg$Some$0$, 0);
-            element1$ = runtime.Tuple.get(arg$Some$0$, 1);
-            tmp = mcray2[getEmission$accessorSymbol](arg$ObjHit$0$);
-            tmp1 = depth - 1;
-            tmp2 = trace(mcray2, world, element1$, tmp1);
-            if (runtime.Tuple.isArrayLike(element0$) && element0$.length === 3) {
-              element0$2 = runtime.Tuple.get(element0$, 0);
-              element1$2 = runtime.Tuple.get(element0$, 1);
-              element2$1 = runtime.Tuple.get(element0$, 2);
-              if (runtime.Tuple.isArrayLike(tmp2) && tmp2.length === 3) {
-                element0$3 = runtime.Tuple.get(tmp2, 0);
-                element1$3 = runtime.Tuple.get(tmp2, 1);
-                element2$2 = runtime.Tuple.get(tmp2, 2);
-                tmp3 = element0$2 * element0$3;
-                tmp4 = element1$2 * element1$3;
-                tmp5 = element2$1 * element2$2;
-                if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 3) {
-                  let fv_tmp, fv_tmp1, fv_tmp2;
-                  element0$1 = runtime.Tuple.get(tmp, 0);
-                  element1$1 = runtime.Tuple.get(tmp, 1);
-                  element2$ = runtime.Tuple.get(tmp, 2);
-                  fv_tmp = element0$1 + tmp3;
-                  fv_tmp1 = element1$1 + tmp4;
-                  fv_tmp2 = element2$ + tmp5;
-                  return globalThis.Object.freeze([
-                    fv_tmp,
-                    fv_tmp1,
-                    fv_tmp2
-                  ])
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda$4 = (undefined, function (mcray2, trace1) {
+lambda$4 = (undefined, function (mcray2, trace) {
   return (ray, c1) => {
     let tmp;
-    tmp = runtime.safeCall(trace1(ray));
+    tmp = runtime.safeCall(trace(ray));
     return mcray2[rgbAdd$accessorSymbol](c1, tmp)
   }
 });
@@ -2237,7 +1737,7 @@ lambda$ = (undefined, function () {
             fv_tmp13 = element1$2 + tmp14;
             fv_tmp14 = element2$2 + tmp15;
             if (runtime.Tuple.isArrayLike(inlinedVal4) && inlinedVal4.length === 3) {
-              let tmp29, tmp30, trace1, minMaxT, inlinedVal25, rfp, scrut3, arg$Cam$2$, tmp31, fv_tmp15, fv_tmp16, fv_tmp17, fv_element0$1, fv_element1$1, fv_element2$1, fv_tmp18, fv_tmp19, fv_tmp20, inlinedVal26;
+              let tmp29, tmp30, trace, minMaxT, inlinedVal25, rfp, scrut3, arg$Cam$2$, tmp31, fv_tmp15, fv_tmp16, fv_tmp17, fv_element0$1, fv_element1$1, fv_element2$1, fv_tmp18, fv_tmp19, fv_tmp20, inlinedVal26;
               element0$3 = runtime.Tuple.get(inlinedVal4, 0);
               element1$3 = runtime.Tuple.get(inlinedVal4, 1);
               element2$3 = runtime.Tuple.get(inlinedVal4, 2);
@@ -2518,7 +2018,7 @@ lambda$ = (undefined, function () {
                   0.001,
                   inlinedVal25
                 ]);
-                trace1 = main_rayTracer_traceRay_lambda$$lambda$(mcray1, inlinedVal1, 20, minMaxT);
+                trace = main_rayTracer_traceRay_lambda$$lambda$(mcray1, inlinedVal1, 20, minMaxT);
                 if (cam instanceof mcray1.Cam.class) {
                   arg$Cam$2$ = cam.ns;
                   rfp = main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel(rng, cam);
@@ -2528,7 +2028,7 @@ lambda$ = (undefined, function () {
                   } else {
                     tmp31 = 1.0 / arg$Cam$2$;
                   }
-                  tmp29 = main_rayTracer_aaPixelToRGB_lambda$$lambda$(mcray1, trace1, rfp, tmp31);
+                  tmp29 = main_rayTracer_aaPixelToRGB_lambda$$lambda$(mcray1, trace, rfp, tmp31);
                   tmp30 = mcray1.#makePixelRenderer(tmp29, main_rayTracer_colorFromRGBWithGamma$colorFromRGBWithGamma);
                   return mcray1.#foreachPixel(cam, tmp30)
                 }

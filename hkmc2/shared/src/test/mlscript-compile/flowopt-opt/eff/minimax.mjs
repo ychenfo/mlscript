@@ -13,7 +13,7 @@ const listExists$tailrec$accessorSymbol = globalThis.Symbol("listExists$tailrec"
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
 const listFoldr$tailrec$accessorSymbol = globalThis.Symbol("listFoldr$tailrec");
 const map$tailrec$accessorSymbol = globalThis.Symbol("map$tailrec");
-let go, doKid, sz, minimaxTT, minimax1, lambda, lambda1, lambda2, lambda$, lambda$1, doKid$, main_empty_lambda$$lambda$, main_lambda$$lambda$, main_empty_lambda$$lambda$1, main_empty_listTabulate_go$go, main_empty_listTabulate_go$go1, empty_listTabulate_go$go, main_minimax_snd$snd, main_minimax$minimax, main_minimaxTT$minimaxTT, main_minimaxTT_snd$snd, minimax_snd$snd, minimaxTT_snd$snd, minimaxTT$worker, main_minimaxTT$minimaxTT$worker, main_minimax$minimax$worker;
+let doKid, sz, minimax1, lambda, lambda1, lambda2, lambda$, lambda$1, doKid$, main_empty_lambda$$lambda$, main_lambda$$lambda$, main_empty_lambda$$lambda$1, main_empty_listTabulate_go$go, main_empty_listTabulate_go$go1, main_minimax_snd$snd, main_minimax$minimax, main_minimaxTT$minimaxTT, main_minimaxTT_snd$snd, main_minimaxTT$minimaxTT$worker, main_minimax$minimax$worker;
 main_empty_lambda$$lambda$ = function main_empty_lambda$$lambda$(minimax2) {
   return () => {
     return minimax2.None
@@ -49,17 +49,6 @@ main_empty_listTabulate_go$go1 = function main_empty_listTabulate_go$go(minimax2
   tmp = runtime.safeCall(f());
   tmp1 = i + 1;
   tmp2 = main_empty_listTabulate_go$go1(minimax2, n, f, tmp1);
-  return minimax2.Cons(tmp, tmp2);
-};
-empty_listTabulate_go$go = function empty_listTabulate_go$go(minimax2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return minimax2.Nil
-  }
-  tmp = runtime.safeCall(f());
-  tmp1 = i + 1;
-  tmp2 = empty_listTabulate_go$go(minimax2, n, f, tmp1);
   return minimax2.Cons(tmp, tmp2);
 };
 main_minimax_snd$snd = function main_minimax_snd$snd(p) {
@@ -499,251 +488,6 @@ main_minimaxTT_snd$snd = function main_minimaxTT_snd$snd(p) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-minimax_snd$snd = function minimax_snd$snd(p) {
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    return runtime.Tuple.get(p, 1)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-minimaxTT_snd$snd = function minimaxTT_snd$snd(p) {
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    return runtime.Tuple.get(p, 1)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-minimaxTT = function minimaxTT(minimax2, transTable, p) {
-  return (b) => {
-    return minimaxTT$worker(minimax2, transTable, p, b)
-  }
-};
-minimaxTT$worker = function minimaxTT$worker(minimax2, transTable, p, b) {
-  let tmp, arg$Some$0$, tmp1, tmp2, tmp3, inlinedVal, p1, tmp4, p2, inlinedVal1;
-  p1 = minimax2.X;
-  tmp4 = minimax2[rows$accessorSymbol]();
-  p2 = minimax2[hasTrip$accessorSymbol](b, p1);
-  inlinedVal1 = minimax2[listExists$tailrec$accessorSymbol](p2, tmp4);
-  if (inlinedVal1 === false) {
-    let tmp5, p3, inlinedVal2;
-    tmp5 = minimax2[cols$accessorSymbol]();
-    p3 = minimax2[hasTrip$accessorSymbol](b, p1);
-    inlinedVal2 = minimax2[listExists$tailrec$accessorSymbol](p3, tmp5);
-    if (inlinedVal2 === false) {
-      let inlinedVal3, p4, inlinedVal4, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
-      tmp6 = minimax2.Cons(8, minimax2.Nil);
-      tmp7 = minimax2.Cons(4, tmp6);
-      tmp8 = minimax2.Cons(0, tmp7);
-      tmp9 = minimax2.Cons(6, minimax2.Nil);
-      tmp10 = minimax2.Cons(4, tmp9);
-      tmp11 = minimax2.Cons(2, tmp10);
-      tmp12 = minimax2.Cons(tmp11, minimax2.Nil);
-      inlinedVal3 = minimax2.Cons(tmp8, tmp12);
-      p4 = minimax2[hasTrip$accessorSymbol](b, p1);
-      inlinedVal4 = minimax2[listExists$tailrec$accessorSymbol](p4, inlinedVal3);
-      if (inlinedVal4 === false) {
-        let p5, tmp13, p6, inlinedVal5;
-        p5 = minimax2.O;
-        tmp13 = minimax2[rows$accessorSymbol]();
-        p6 = minimax2[hasTrip$accessorSymbol](b, p5);
-        inlinedVal5 = minimax2[listExists$tailrec$accessorSymbol](p6, tmp13);
-        if (inlinedVal5 === false) {
-          let tmp14, p7, inlinedVal6;
-          tmp14 = minimax2[cols$accessorSymbol]();
-          p7 = minimax2[hasTrip$accessorSymbol](b, p5);
-          inlinedVal6 = minimax2[listExists$tailrec$accessorSymbol](p7, tmp14);
-          if (inlinedVal6 === false) {
-            let inlinedVal7, p8, inlinedVal8, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21;
-            tmp15 = minimax2.Cons(8, minimax2.Nil);
-            tmp16 = minimax2.Cons(4, tmp15);
-            tmp17 = minimax2.Cons(0, tmp16);
-            tmp18 = minimax2.Cons(6, minimax2.Nil);
-            tmp19 = minimax2.Cons(4, tmp18);
-            tmp20 = minimax2.Cons(2, tmp19);
-            tmp21 = minimax2.Cons(tmp20, minimax2.Nil);
-            inlinedVal7 = minimax2.Cons(tmp17, tmp21);
-            p8 = minimax2[hasTrip$accessorSymbol](b, p5);
-            inlinedVal8 = minimax2[listExists$tailrec$accessorSymbol](p8, inlinedVal7);
-            if (inlinedVal8 === false) {
-              inlinedVal = minimax2[isCat$accessorSymbol](b);
-            } else {
-              inlinedVal = true;
-            }
-          } else {
-            inlinedVal = true;
-          }
-        } else {
-          inlinedVal = true;
-        }
-      } else {
-        inlinedVal = true;
-      }
-    } else {
-      inlinedVal = true;
-    }
-  } else {
-    inlinedVal = true;
-  }
-  if (inlinedVal === true) {
-    let inlinedVal2, p3, tmp5, p4, inlinedVal3;
-    p3 = minimax2.X;
-    tmp5 = minimax2[rows$accessorSymbol]();
-    p4 = minimax2[hasTrip$accessorSymbol](b, p3);
-    inlinedVal3 = minimax2[listExists$tailrec$accessorSymbol](p4, tmp5);
-    if (inlinedVal3 === false) {
-      let tmp6, p5, inlinedVal4;
-      tmp6 = minimax2[cols$accessorSymbol]();
-      p5 = minimax2[hasTrip$accessorSymbol](b, p3);
-      inlinedVal4 = minimax2[listExists$tailrec$accessorSymbol](p5, tmp6);
-      if (inlinedVal4 === false) {
-        let inlinedVal5, p6, inlinedVal6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13;
-        tmp7 = minimax2.Cons(8, minimax2.Nil);
-        tmp8 = minimax2.Cons(4, tmp7);
-        tmp9 = minimax2.Cons(0, tmp8);
-        tmp10 = minimax2.Cons(6, minimax2.Nil);
-        tmp11 = minimax2.Cons(4, tmp10);
-        tmp12 = minimax2.Cons(2, tmp11);
-        tmp13 = minimax2.Cons(tmp12, minimax2.Nil);
-        inlinedVal5 = minimax2.Cons(tmp9, tmp13);
-        p6 = minimax2[hasTrip$accessorSymbol](b, p3);
-        inlinedVal6 = minimax2[listExists$tailrec$accessorSymbol](p6, inlinedVal5);
-        if (inlinedVal6 === true) {
-          inlinedVal2 = 1;
-        } else {
-          let p7, tmp14, p8, inlinedVal7;
-          p7 = minimax2.O;
-          tmp14 = minimax2[rows$accessorSymbol]();
-          p8 = minimax2[hasTrip$accessorSymbol](b, p7);
-          inlinedVal7 = minimax2[listExists$tailrec$accessorSymbol](p8, tmp14);
-          if (inlinedVal7 === false) {
-            let tmp15, p9, inlinedVal8;
-            tmp15 = minimax2[cols$accessorSymbol]();
-            p9 = minimax2[hasTrip$accessorSymbol](b, p7);
-            inlinedVal8 = minimax2[listExists$tailrec$accessorSymbol](p9, tmp15);
-            if (inlinedVal8 === false) {
-              let inlinedVal9, p10, inlinedVal10, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22;
-              tmp16 = minimax2.Cons(8, minimax2.Nil);
-              tmp17 = minimax2.Cons(4, tmp16);
-              tmp18 = minimax2.Cons(0, tmp17);
-              tmp19 = minimax2.Cons(6, minimax2.Nil);
-              tmp20 = minimax2.Cons(4, tmp19);
-              tmp21 = minimax2.Cons(2, tmp20);
-              tmp22 = minimax2.Cons(tmp21, minimax2.Nil);
-              inlinedVal9 = minimax2.Cons(tmp18, tmp22);
-              p10 = minimax2[hasTrip$accessorSymbol](b, p7);
-              inlinedVal10 = minimax2[listExists$tailrec$accessorSymbol](p10, inlinedVal9);
-              if (inlinedVal10 === true) {
-                inlinedVal2 = -1;
-              } else {
-                inlinedVal2 = 0;
-              }
-            } else {
-              inlinedVal2 = -1;
-            }
-          } else {
-            inlinedVal2 = -1;
-          }
-        }
-      } else {
-        inlinedVal2 = 1;
-      }
-    } else {
-      inlinedVal2 = 1;
-    }
-    tmp = globalThis.Object.freeze([
-      b,
-      inlinedVal2
-    ]);
-    return minimax2.Rose(tmp, minimax2.Nil)
-  }
-  {
-    let inlinedVal2, scrut, inlinedVal3, inlinedVal4, start, tmp5, f, inlinedVal5;
-    if (p instanceof minimax1.X.class) {
-      tmp5 = 1;
-    } else {
-      tmp5 = 0;
-    }
-    start = globalThis.Object.freeze([
-      tmp5,
-      3
-    ]);
-    f = lambda$1(minimax1);
-    inlinedVal5 = minimax1[listFoldr$tailrec$accessorSymbol](f, start, b);
-    if (runtime.Tuple.isArrayLike(inlinedVal5) && inlinedVal5.length === 2) {
-      inlinedVal4 = runtime.Tuple.get(inlinedVal5, 0);
-      inlinedVal3 = transTable.at(inlinedVal4);
-      scrut = inlinedVal3 == -2;
-      if (scrut === true) {
-        let inlinedVal6, f1, inlinedVal7, g, f2, inlinedVal8, tmp6, f3, inlinedVal9, inlinedVal10, start1, tmp7, f4, inlinedVal11;
-        if (p instanceof minimax2.X.class) {
-          inlinedVal6 = minimax2.O;
-        } else if (p instanceof minimax2.O.class) {
-          inlinedVal6 = minimax2.X;
-        } else {
-          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-        }
-        tmp6 = minimax2[allMoves$accessorSymbol](b);
-        f3 = minimax2[moveTo$accessorSymbol](b, p);
-        inlinedVal9 = minimax2[map$tailrec$accessorSymbol](f3, tmp6);
-        f1 = minimaxTT(minimax2, transTable, inlinedVal6);
-        inlinedVal7 = minimax2[map$tailrec$accessorSymbol](f1, inlinedVal9);
-        g = minimax2[top$accessorSymbol];
-        f2 = lambda$(minimaxTT_snd$snd, g);
-        inlinedVal8 = minimax2[map$tailrec$accessorSymbol](f2, inlinedVal7);
-        if (p instanceof minimax2.X.class) {
-          let arg$Cons$0$, arg$Cons$1$;
-          if (inlinedVal8 instanceof minimax2.Cons.class) {
-            let inlinedVal12;
-            arg$Cons$0$ = inlinedVal8.head;
-            arg$Cons$1$ = inlinedVal8.tail;
-            inlinedVal12 = minimax2[listFoldl$tailrec$accessorSymbol](lambda, arg$Cons$0$, arg$Cons$1$);
-            tmp2 = inlinedVal12;
-          } else {
-            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-          }
-        } else {
-          let arg$Cons$0$, arg$Cons$1$;
-          if (inlinedVal8 instanceof minimax2.Cons.class) {
-            let inlinedVal12;
-            arg$Cons$0$ = inlinedVal8.head;
-            arg$Cons$1$ = inlinedVal8.tail;
-            inlinedVal12 = minimax2[listFoldl$tailrec$accessorSymbol](lambda1, arg$Cons$0$, arg$Cons$1$);
-            tmp2 = inlinedVal12;
-          } else {
-            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-          }
-        }
-        if (p instanceof minimax1.X.class) {
-          tmp7 = 1;
-        } else {
-          tmp7 = 0;
-        }
-        start1 = globalThis.Object.freeze([
-          tmp7,
-          3
-        ]);
-        f4 = lambda$1(minimax1);
-        inlinedVal11 = minimax1[listFoldr$tailrec$accessorSymbol](f4, start1, b);
-        if (runtime.Tuple.isArrayLike(inlinedVal11) && inlinedVal11.length === 2) {
-          inlinedVal10 = runtime.Tuple.get(inlinedVal11, 0);
-          transTable[inlinedVal10] = tmp2;
-          tmp3 = globalThis.Object.freeze([
-            b,
-            tmp2
-          ]);
-          return minimax2.Rose(tmp3, inlinedVal7)
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      inlinedVal2 = minimax2.Some(inlinedVal3);
-      arg$Some$0$ = inlinedVal2.value;
-      tmp1 = globalThis.Object.freeze([
-        b,
-        arg$Some$0$
-      ]);
-      return minimax2.Rose(tmp1, minimax2.Nil);
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 doKid$ = function doKid$(minimax2) {
   return (t, acc) => {
     return doKid(minimax2, t, acc)
@@ -860,17 +604,6 @@ lambda$ = (undefined, function (f, g) {
     return runtime.safeCall(f(tmp))
   }
 });
-go = function go(minimax2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return minimax2.Nil
-  }
-  tmp = runtime.safeCall(f(i));
-  tmp1 = i + 1;
-  tmp2 = go(minimax2, n, f, tmp1);
-  return minimax2.Cons(tmp, tmp2);
-};
 (class minimax {
   static {
     minimax1 = this
@@ -1102,18 +835,6 @@ go = function go(minimax2, n, f, i) {
       return minimax.#listExists$tailrec(p, l)
     }
   }
-  static #listFoldl(f) {
-    return (init) => {
-      return (l) => {
-        return minimax.#listFoldl$tailrec(f, init, l)
-      }
-    }
-  }
-  static #map(f) {
-    return (l) => {
-      return minimax.#map$tailrec(f, l)
-    }
-  }
   static #rev(l) {
     let minimax2, l1, acc, inlinedVal;
     minimax2 = minimax;
@@ -1154,9 +875,6 @@ go = function go(minimax2, n, f, i) {
         return false;
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"))
-  }
-  static #compose(f, g) {
-    return lambda$(f, g)
   }
   static #rows() {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
@@ -1306,14 +1024,6 @@ go = function go(minimax2, n, f, i) {
       return true;
     }
   }
-  static #isWin(b) {
-    let tmp;
-    tmp = minimax.#isWinFor(b)(minimax.X);
-    if (tmp === false) {
-      return minimax.#isWinFor(b)(minimax.O)
-    }
-    return true;
-  }
   static #isCat(b) {
     let tmp, tmp1, tmp2, tmp3;
     tmp = minimax.#isFull(b);
@@ -1327,21 +1037,6 @@ go = function go(minimax2, n, f, i) {
       return false;
     }
     return false;
-  }
-  static #score(b) {
-    let scrut, scrut1;
-    scrut = minimax.#isWinFor(b)(minimax.X);
-    if (scrut === true) {
-      return 1
-    }
-    scrut1 = minimax.#isWinFor(b)(minimax.O);
-    if (scrut1 === true) {
-      return -1
-    }
-    return 0;
-  }
-  static #mkLeaf(x) {
-    return minimax.Rose(x, minimax.Nil)
   }
   static #allMoves(b) {
     let minimax2, n, m, acc, inlinedVal;
@@ -1378,84 +1073,11 @@ go = function go(minimax2, n, f, i) {
     }
     return inlinedVal
   }
-  static #other(p) {
-    if (p instanceof minimax.X.class) {
-      return minimax.O
-    } else if (p instanceof minimax.O.class) {
-      return minimax.X
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #top(t) {
     if (t instanceof minimax.Rose.class) {
       return t.x
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #listExtreme(e) {
-    return (l) => {
-      let arg$Cons$0$, arg$Cons$1$;
-      if (l instanceof minimax.Cons.class) {
-        arg$Cons$0$ = l.head;
-        arg$Cons$1$ = l.tail;
-        return minimax.#listFoldl(e)(arg$Cons$0$)(arg$Cons$1$)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-  }
-  static #listmax(l) {
-    return minimax.#listExtreme(lambda)(l)
-  }
-  static #listmin(l) {
-    return minimax.#listExtreme(lambda1)(l)
-  }
-  static #gameOver(b) {
-    let tmp;
-    tmp = minimax.#isWin(b);
-    if (tmp === false) {
-      return minimax.#isCat(b)
-    }
-    return true;
-  }
-  static #successors(b, p) {
-    let tmp, tmp1;
-    tmp = minimax.#moveTo(b, p);
-    tmp1 = minimax.#allMoves(b);
-    return minimax.#map(tmp)(tmp1)
-  }
-  static #minimax(p) {
-    return (b) => {
-      let scrut, trees, scores, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
-      scrut = minimax.#gameOver(b);
-      if (scrut === true) {
-        tmp = minimax.#score(b);
-        tmp1 = globalThis.Object.freeze([
-          b,
-          tmp
-        ]);
-        return minimax.#mkLeaf(tmp1)
-      }
-      tmp2 = minimax.#other(p);
-      tmp3 = minimax.#minimax(tmp2);
-      tmp4 = minimax.#successors(b, p);
-      trees = minimax.#map(tmp3)(tmp4);
-      tmp5 = minimax.#compose(minimax_snd$snd, minimax.#top);
-      scores = minimax.#map(tmp5)(trees);
-      if (p instanceof minimax.X.class) {
-        tmp6 = minimax.#listmax(scores);
-        tmp7 = globalThis.Object.freeze([
-          b,
-          tmp6
-        ]);
-        return minimax.Rose(tmp7, trees)
-      }
-      tmp8 = minimax.#listmin(scores);
-      tmp9 = globalThis.Object.freeze([
-        b,
-        tmp8
-      ]);
-      return minimax.Rose(tmp9, trees);
-    }
   }
   static #treeStats(tr) {
     return sz(minimax, tr)

@@ -11,12 +11,10 @@ const vec3Sub$accessorSymbol = globalThis.Symbol("vec3Sub");
 const vec3Scale$accessorSymbol = globalThis.Symbol("vec3Scale");
 const vec3Dot$accessorSymbol = globalThis.Symbol("vec3Dot");
 const vec3RandomPointInSphere$accessorSymbol = globalThis.Symbol("vec3RandomPointInSphere");
-const getEmission$accessorSymbol = globalThis.Symbol("getEmission");
 const getHitInfo$accessorSymbol = globalThis.Symbol("getHitInfo");
 const closer$accessorSymbol = globalThis.Symbol("closer");
-const rayToRGB$accessorSymbol = globalThis.Symbol("rayToRGB");
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
-let go, hitTest1, hitTest11, trace, mcray1, lambda, lambda1, lambda$, hitTest1$, lambda$1, hitTest1$1, lambda$2, lambda$3, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_lambertian_lambda$$lambda$, main_buildScene_makeScene_lambertian_lambda$$lambda$1, main_buildScene_makeScene_metal_lambda$$lambda$, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1, main_buildScene_makeScene_lambertian_lambda$$lambda$2, main_buildScene_makeScene_lambertian_lambda$$lambda$3, main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$, main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$, main_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel, main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, main_rayTracer_traceRay_lambda$_trace$trace, main_rayTracer_traceRay_lambda$$lambda$, rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, aaPixelToRGB_raysForPixel_listTabulate_go$go, raysForPixel_listTabulate_go$go, main_buildScene_makeScene_metal_lambda$_lambda$lambda, main_buildScene_makeScene_metal_lambda$$lambda$1, main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda, main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker;
+let hitTest1, hitTest11, mcray1, lambda, lambda1, lambda$, hitTest1$, lambda$1, hitTest1$1, lambda$2, lambda$3, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_lambertian_lambda$$lambda$, main_buildScene_makeScene_lambertian_lambda$$lambda$1, main_buildScene_makeScene_metal_lambda$$lambda$, main_buildScene_makeScene_lambertian_lambda$_lambda$lambda1, main_buildScene_makeScene_lambertian_lambda$$lambda$2, main_buildScene_makeScene_lambertian_lambda$$lambda$3, main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$, main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$, main_buildScene_makeScene_randomSphere_lambertian_lambda$_lambda$lambda, main_buildScene_makeScene_randomSphere_lambertian_lambda$$lambda$1, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$_mkRay$mkRay, main_rayTracer_aaPixelToRGB_raysForPixel_mkRay$$mkRay$, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel, main_rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go, main_rayTracer_traceRay_lambda$_trace$trace, main_rayTracer_traceRay_lambda$$lambda$, main_buildScene_makeScene_metal_lambda$_lambda$lambda, main_buildScene_makeScene_metal_lambda$$lambda$1, main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda, main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1, main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel$worker;
 main_buildScene_makeScene_lambertian_lambda$_lambda$lambda = function main_buildScene_makeScene_lambertian_lambda$_lambda$lambda(mcray2, rng, albedo, hit) {
   let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
   if (hit instanceof mcray2.MatHit.class) {
@@ -396,39 +394,6 @@ main_rayTracer_traceRay_lambda$$lambda$ = function main_rayTracer_traceRay_lambd
     return main_rayTracer_traceRay_lambda$_trace$trace(mcray2, world, minMaxT, ray, maxDepth)
   }
 };
-rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go = function rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return mcray2.Nil
-  }
-  tmp = runtime.safeCall(f());
-  tmp1 = i + 1;
-  tmp2 = rayTracer_aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, tmp1);
-  return mcray2.Cons(tmp, tmp2);
-};
-aaPixelToRGB_raysForPixel_listTabulate_go$go = function aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return mcray2.Nil
-  }
-  tmp = runtime.safeCall(f());
-  tmp1 = i + 1;
-  tmp2 = aaPixelToRGB_raysForPixel_listTabulate_go$go(mcray2, n, f, tmp1);
-  return mcray2.Cons(tmp, tmp2);
-};
-raysForPixel_listTabulate_go$go = function raysForPixel_listTabulate_go$go(mcray2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return mcray2.Nil
-  }
-  tmp = runtime.safeCall(f());
-  tmp1 = i + 1;
-  tmp2 = raysForPixel_listTabulate_go$go(mcray2, n, f, tmp1);
-  return mcray2.Cons(tmp, tmp2);
-};
 main_buildScene_makeScene_metal_lambda$_lambda$lambda = function main_buildScene_makeScene_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit) {
   let scrut, element1$, arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
@@ -567,61 +532,19 @@ main_buildScene_makeScene_randomSphere_metal_lambda$$lambda$1 = function main_bu
     return main_buildScene_makeScene_randomSphere_metal_lambda$_lambda$lambda(mcray2, rng, albedo, fuzz, ray, hit)
   }
 };
-trace = function trace(mcray2, world, minMaxT, ray, depth) {
-  let scrut, scrut1, arg$ObjHit$0$, arg$Some$0$, element1$, element0$, tmp, tmp1, tmp2, tmp3;
-  scrut = depth <= 0;
-  if (scrut === true) {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
-  {
-    let receiver, inlinedVal;
-    receiver = mcray2;
-    if (world instanceof receiver.Obj.class) {
-      inlinedVal = runtime.safeCall(world.hit(ray, minMaxT));
-      if (inlinedVal instanceof mcray2.Miss.class) {
-        return mcray2[rayToRGB$accessorSymbol](ray)
-      } else if (inlinedVal instanceof mcray2.ObjHit.class) {
-        arg$ObjHit$0$ = inlinedVal.hit;
-        scrut1 = mcray2[getHitInfo$accessorSymbol](arg$ObjHit$0$, ray);
-        if (scrut1 instanceof mcray2.None.class) {
-          return mcray2[getEmission$accessorSymbol](arg$ObjHit$0$)
-        } else if (scrut1 instanceof mcray2.Some.class) {
-          arg$Some$0$ = scrut1.value;
-          if (runtime.Tuple.isArrayLike(arg$Some$0$) && arg$Some$0$.length === 2) {
-            element0$ = runtime.Tuple.get(arg$Some$0$, 0);
-            element1$ = runtime.Tuple.get(arg$Some$0$, 1);
-            tmp = mcray2[getEmission$accessorSymbol](arg$ObjHit$0$);
-            tmp1 = depth - 1;
-            tmp2 = trace(mcray2, world, minMaxT, element1$, tmp1);
-            tmp3 = mcray2[rgbModulate$accessorSymbol](element0$, tmp2);
-            return mcray2[rgbAdd$accessorSymbol](tmp, tmp3)
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda$3 = (undefined, function (mcray2, trace1) {
+lambda$3 = (undefined, function (mcray2, trace) {
   return (ray, c1) => {
     let tmp;
-    tmp = runtime.safeCall(trace1(ray));
+    tmp = runtime.safeCall(trace(ray));
     return mcray2[rgbAdd$accessorSymbol](c1, tmp)
   }
 });
-lambda$2 = (undefined, function (mcray2, trace1, rfp, scale) {
+lambda$2 = (undefined, function (mcray2, trace, rfp, scale) {
   return (r, c) => {
-    return lambda1(mcray2, trace1, rfp, scale, r, c)
+    return lambda1(mcray2, trace, rfp, scale, r, c)
   }
 });
-lambda1 = (undefined, function (mcray2, trace1, rfp, scale, r, c) {
+lambda1 = (undefined, function (mcray2, trace, rfp, scale, r, c) {
   let tmp, inlinedVal, f, inlinedVal1;
   inlinedVal = globalThis.Object.freeze([
     0.0,
@@ -629,7 +552,7 @@ lambda1 = (undefined, function (mcray2, trace1, rfp, scale, r, c) {
     0.0
   ]);
   tmp = runtime.safeCall(rfp(r, c));
-  f = lambda$3(mcray2, trace1);
+  f = lambda$3(mcray2, trace);
   inlinedVal1 = mcray2[listFoldl$tailrec$accessorSymbol](f, inlinedVal, tmp);
   return mcray2[rgbScale$accessorSymbol](scale, inlinedVal1)
 });
@@ -711,17 +634,6 @@ lambda$ = (undefined, function (mcray2) {
     return mcray2.Miss
   }
 });
-go = function go(mcray2, n, f, i) {
-  let scrut, tmp, tmp1, tmp2;
-  scrut = i >= n;
-  if (scrut === true) {
-    return mcray2.Nil
-  }
-  tmp = runtime.safeCall(f(i));
-  tmp1 = i + 1;
-  tmp2 = go(mcray2, n, f, tmp1);
-  return mcray2.Cons(tmp, tmp2);
-};
 (class mcray {
   static {
     mcray1 = this
@@ -736,10 +648,8 @@ go = function go(mcray2, n, f, i) {
   static get [vec3Scale$accessorSymbol]() { return mcray.#vec3Scale; }
   static get [vec3Dot$accessorSymbol]() { return mcray.#vec3Dot; }
   static get [vec3RandomPointInSphere$accessorSymbol]() { return mcray.#vec3RandomPointInSphere; }
-  static get [getEmission$accessorSymbol]() { return mcray.#getEmission; }
   static get [getHitInfo$accessorSymbol]() { return mcray.#getHitInfo; }
   static get [closer$accessorSymbol]() { return mcray.#closer; }
-  static get [rayToRGB$accessorSymbol]() { return mcray.#rayToRGB; }
   static {
     mcray.Cons = function Cons(head, tail) {
       return globalThis.Object.freeze(new Cons.class(head, tail));
@@ -1034,20 +944,6 @@ go = function go(mcray2, n, f, i) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #rgbLerp(c1, t, c2) {
-    let tmp, tmp1, tmp2;
-    tmp = 1.0 - t;
-    tmp1 = mcray.#rgbScale(tmp, c1);
-    tmp2 = mcray.#rgbScale(t, c2);
-    return mcray.#rgbAdd(tmp1, tmp2)
-  }
-  static #rgbWhite() {
-    return globalThis.Object.freeze([
-      1.0,
-      1.0,
-      1.0
-    ])
-  }
   static #toByte(f) {
     let f1, scrut, scrut1, tmp;
     tmp = f * 255.99;
@@ -1214,17 +1110,6 @@ go = function go(mcray2, n, f, i) {
       continue loopLabel;
     }
   }
-  static #getEmission(hit) {
-    let arg$MatHit$3$;
-    if (hit instanceof mcray.MatHit.class) {
-      arg$MatHit$3$ = hit.material;
-      if (arg$MatHit$3$ instanceof mcray.Material.class) {
-        return runtime.safeCall(arg$MatHit$3$.emit(hit))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #getHitInfo(hit, ray) {
     let arg$MatHit$3$;
     if (hit instanceof mcray.MatHit.class) {
@@ -1352,29 +1237,6 @@ go = function go(mcray2, n, f, i) {
         }
       }
       return mcray.Img(arg$Cam$0$, arg$Cam$1$, inlinedVal)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #rayToRGB(ray) {
-    let element1$, element1$1, tmp, tmp1, tmp2, tmp3;
-    if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
-      runtime.Tuple.get(ray, 0);
-      element1$ = runtime.Tuple.get(ray, 1);
-      if (runtime.Tuple.isArrayLike(element1$) && element1$.length === 3) {
-        runtime.Tuple.get(element1$, 0);
-        element1$1 = runtime.Tuple.get(element1$, 1);
-        runtime.Tuple.get(element1$, 2);
-        tmp = mcray.#rgbWhite();
-        tmp1 = element1$1 + 1.0;
-        tmp2 = 0.5 * tmp1;
-        tmp3 = globalThis.Object.freeze([
-          0.5,
-          0.7,
-          1.0
-        ]);
-        return mcray.#rgbLerp(tmp, tmp2, tmp3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -1748,7 +1610,7 @@ go = function go(mcray2, n, f, i) {
             inlinedVal3
           ]);
           if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
-            let tmp29, trace1, inlinedVal25, minMaxT, inlinedVal26, rfp, scrut3, arg$Cam$2$, tmp30;
+            let tmp29, trace, inlinedVal25, minMaxT, inlinedVal26, rfp, scrut3, arg$Cam$2$, tmp30;
             element0$ = runtime.Tuple.get(inlinedVal, 0);
             element1$ = runtime.Tuple.get(inlinedVal, 1);
             inlinedVal26 = 1.0 / 0.0;
@@ -1756,16 +1618,16 @@ go = function go(mcray2, n, f, i) {
               0.001,
               inlinedVal26
             ]);
-            trace1 = main_rayTracer_traceRay_lambda$$lambda$(mcray1, element1$, 20, minMaxT);
+            trace = main_rayTracer_traceRay_lambda$$lambda$(mcray1, element1$, 20, minMaxT);
             if (element0$ instanceof mcray1.Cam.class) {
               arg$Cam$2$ = element0$.ns;
               rfp = main_rayTracer_aaPixelToRGB_raysForPixel$raysForPixel(rng, element0$);
               scrut3 = arg$Cam$2$ == 0;
               if (scrut3 === true) {
-                inlinedVal25 = lambda$2(mcray1, trace1, rfp, 1.0);
+                inlinedVal25 = lambda$2(mcray1, trace, rfp, 1.0);
               } else {
                 tmp30 = 1.0 / arg$Cam$2$;
-                inlinedVal25 = lambda$2(mcray1, trace1, rfp, tmp30);
+                inlinedVal25 = lambda$2(mcray1, trace, rfp, tmp30);
               }
               tmp29 = mcray1.#makePixelRenderer(inlinedVal25, mcray1.#colorFromRGBWithGamma);
               return mcray1.#foreachPixel(element0$, tmp29)
