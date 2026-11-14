@@ -13,7 +13,7 @@ const listExists$tailrec$accessorSymbol = globalThis.Symbol("listExists$tailrec"
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
 const listFoldr$tailrec$accessorSymbol = globalThis.Symbol("listFoldr$tailrec");
 const map$tailrec$accessorSymbol = globalThis.Symbol("map$tailrec");
-let go, minimaxTT, doKid, sz, minimax1, lambda, lambda1, lambda2, lambda$, lambda$1, doKid$, main_gameTree_empty_lambda$$lambda$, main_gameTreeWithTT_empty_lambda$$lambda$, main_gameTreeWithTT_lambda$$lambda$, gameTreeWithTT_lambda$$lambda$, gameTreeWithTT_empty_lambda$$lambda$, gameTree_empty_lambda$$lambda$, empty_lambda$$lambda$, main_gameTree_empty_listTabulate_go$go, main_gameTreeWithTT_empty_listTabulate_go$go, gameTreeWithTT_empty_listTabulate_go$go, gameTree_empty_listTabulate_go$go, empty_listTabulate_go$go, main_gameTree_minimax_snd$snd, main_gameTree_minimax$minimax, main_gameTreeWithTT_minimaxTT$minimaxTT, main_gameTreeWithTT_minimaxTT_snd$snd, gameTreeWithTT_minimaxTT$minimaxTT, gameTreeWithTT_minimaxTT_snd$snd, gameTree_minimax_snd$snd, gameTree_minimax$minimax, minimax_snd$snd, minimaxTT_snd$snd, minimaxTT$worker, gameTree_minimax$minimax$worker, gameTreeWithTT_minimaxTT$minimaxTT$worker, main_gameTreeWithTT_minimaxTT$minimaxTT$worker, main_gameTree_minimax$minimax$worker;
+let go, minimaxTT, doKid, sz, minimax1, lambda, lambda1, lambda2, lambda$, lambda$1, doKid$, main_gameTree_empty_lambda$$lambda$, main_gameTreeWithTT_empty_lambda$$lambda$, main_gameTreeWithTT_lambda$$lambda$, main_gameTree_empty_listTabulate_go$go, main_gameTreeWithTT_empty_listTabulate_go$go, gameTreeWithTT_empty_listTabulate_go$go, gameTree_empty_listTabulate_go$go, empty_listTabulate_go$go, main_gameTree_minimax_snd$snd, main_gameTree_minimax$minimax, main_gameTreeWithTT_minimaxTT$minimaxTT, main_gameTreeWithTT_minimaxTT_snd$snd, gameTreeWithTT_minimaxTT$minimaxTT, gameTreeWithTT_minimaxTT_snd$snd, gameTree_minimax_snd$snd, gameTree_minimax$minimax, minimax_snd$snd, minimaxTT_snd$snd, minimaxTT$worker, gameTree_minimax$minimax$worker, gameTreeWithTT_minimaxTT$minimaxTT$worker, main_gameTreeWithTT_minimaxTT$minimaxTT$worker, main_gameTree_minimax$minimax$worker;
 main_gameTree_empty_lambda$$lambda$ = function main_gameTree_empty_lambda$$lambda$(minimax2) {
   return () => {
     return minimax2.None
@@ -27,26 +27,6 @@ main_gameTreeWithTT_empty_lambda$$lambda$ = function main_gameTreeWithTT_empty_l
 main_gameTreeWithTT_lambda$$lambda$ = function main_gameTreeWithTT_lambda$$lambda$(unused) {
   return () => {
     return unused
-  }
-};
-gameTreeWithTT_lambda$$lambda$ = function gameTreeWithTT_lambda$$lambda$(unused) {
-  return () => {
-    return unused
-  }
-};
-gameTreeWithTT_empty_lambda$$lambda$ = function gameTreeWithTT_empty_lambda$$lambda$(minimax2) {
-  return () => {
-    return minimax2.None
-  }
-};
-gameTree_empty_lambda$$lambda$ = function gameTree_empty_lambda$$lambda$(minimax2) {
-  return () => {
-    return minimax2.None
-  }
-};
-empty_lambda$$lambda$ = function empty_lambda$$lambda$(minimax2) {
-  return () => {
-    return minimax2.None
   }
 };
 main_gameTree_empty_listTabulate_go$go = function main_gameTree_empty_listTabulate_go$go(minimax2, n, f, i) {
@@ -1571,9 +1551,6 @@ go = function go(minimax2, n, f, i) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
   }
-  static #listTabulate(n, f) {
-    return go(minimax, n, f, 0)
-  }
   static #listAll(p) {
     return (l) => {
       return minimax.#listAll$tailrec(p, l)
@@ -1588,13 +1565,6 @@ go = function go(minimax2, n, f, i) {
     return (init) => {
       return (l) => {
         return minimax.#listFoldl$tailrec(f, init, l)
-      }
-    }
-  }
-  static #listFoldr(f) {
-    return (init) => {
-      return (l) => {
-        return minimax.#listFoldr$tailrec(f, init, l)
       }
     }
   }
@@ -1647,47 +1617,6 @@ go = function go(minimax2, n, f, i) {
   static #compose(f, g) {
     return lambda$(f, g)
   }
-  static #intMax(a, b) {
-    let scrut;
-    scrut = a > b;
-    if (scrut === true) {
-      return a
-    }
-    return b;
-  }
-  static #fillTabulate(arr, i, n, f) {
-    loopLabel: while (true) {
-      let scrut, tmp, tmp1;
-      scrut = i == n;
-      if (scrut === true) {
-        return arr
-      }
-      tmp = runtime.safeCall(f(i));
-      arr[i] = tmp;
-      tmp1 = i + 1;
-      i = tmp1;
-      continue loopLabel;
-    }
-  }
-  static #arrayTabulate(n, f) {
-    let tmp;
-    tmp = [];
-    return minimax.#fillTabulate(tmp, 0, n, f)
-  }
-  static #arraySub(a, i) {
-    return a.at(i)
-  }
-  static #arrayUpdate(a, i, x) {
-    a[i] = x;
-    return runtime.Unit
-  }
-  static #snd(p) {
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      return runtime.Tuple.get(p, 1)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #rows() {
     let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
     tmp = minimax.Cons(2, minimax.Nil);
@@ -1728,11 +1657,6 @@ go = function go(minimax2, n, f, i) {
     tmp5 = minimax.Cons(2, tmp4);
     tmp6 = minimax.Cons(tmp5, minimax.Nil);
     return minimax.Cons(tmp2, tmp6)
-  }
-  static #empty() {
-    let f;
-    f = empty_lambda$$lambda$(minimax);
-    return empty_listTabulate_go$go(minimax1, 9, f, 0)
   }
   static #isOccupied(b, i) {
     let tmp;
@@ -1992,58 +1916,6 @@ go = function go(minimax2, n, f, i) {
       return minimax.Rose(tmp9, trees);
     }
   }
-  static #gameTree() {
-    let p, f, inlinedVal;
-    f = gameTree_empty_lambda$$lambda$(minimax1);
-    inlinedVal = gameTree_empty_listTabulate_go$go(minimax1, 9, f, 0);
-    p = minimax.X;
-    return gameTree_minimax$minimax$worker(p, inlinedVal)
-  }
-  static #boardToIndex(p, b) {
-    let start, scrut, tmp, lambda$here;
-    if (p instanceof minimax.X.class) {
-      tmp = 1;
-    } else {
-      tmp = 0;
-    }
-    start = globalThis.Object.freeze([
-      tmp,
-      3
-    ]);
-    lambda$here = lambda$1(minimax);
-    scrut = minimax.#listFoldr(lambda$here)(start)(b);
-    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-      return runtime.Tuple.get(scrut, 0)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #gameTreeWithTT() {
-    let p, f, inlinedVal, tmp, arr, i, n, f1, inlinedVal1;
-    tmp = [];
-    arr = tmp;
-    i = 0;
-    n = 59049;
-    f1 = gameTreeWithTT_lambda$$lambda$(-2);
-    inlinedLbl: {
-      loopLabel: while (true) {
-        let scrut, tmp1, tmp2;
-        scrut = i == n;
-        if (scrut === true) {
-          inlinedVal1 = arr;
-          break inlinedLbl
-        }
-        tmp1 = runtime.safeCall(f1());
-        arr[i] = tmp1;
-        tmp2 = i + 1;
-        i = tmp2;
-        continue loopLabel;
-      }
-    }
-    f = gameTreeWithTT_empty_lambda$$lambda$(minimax1);
-    inlinedVal = gameTreeWithTT_empty_listTabulate_go$go(minimax1, 9, f, 0);
-    p = minimax.X;
-    return gameTreeWithTT_minimaxTT$minimaxTT$worker(minimax, inlinedVal1, p, inlinedVal)
-  }
   static #treeStats(tr) {
     return sz(minimax, tr)
   }
@@ -2101,10 +1973,6 @@ export { doKid$ as _$_modulePrivate_$_doKid$ };
 export { main_gameTree_empty_lambda$$lambda$ as _$_modulePrivate_$_main_gameTree_empty_lambda$$lambda$ };
 export { main_gameTreeWithTT_empty_lambda$$lambda$ as _$_modulePrivate_$_main_gameTreeWithTT_empty_lambda$$lambda$ };
 export { main_gameTreeWithTT_lambda$$lambda$ as _$_modulePrivate_$_main_gameTreeWithTT_lambda$$lambda$ };
-export { gameTreeWithTT_lambda$$lambda$ as _$_modulePrivate_$_gameTreeWithTT_lambda$$lambda$ };
-export { gameTreeWithTT_empty_lambda$$lambda$ as _$_modulePrivate_$_gameTreeWithTT_empty_lambda$$lambda$ };
-export { gameTree_empty_lambda$$lambda$ as _$_modulePrivate_$_gameTree_empty_lambda$$lambda$ };
-export { empty_lambda$$lambda$ as _$_modulePrivate_$_empty_lambda$$lambda$ };
 export { main_gameTree_empty_listTabulate_go$go as _$_modulePrivate_$_main_gameTree_empty_listTabulate_go$go };
 export { main_gameTreeWithTT_empty_listTabulate_go$go as _$_modulePrivate_$_main_gameTreeWithTT_empty_listTabulate_go$go };
 export { gameTreeWithTT_empty_listTabulate_go$go as _$_modulePrivate_$_gameTreeWithTT_empty_listTabulate_go$go };

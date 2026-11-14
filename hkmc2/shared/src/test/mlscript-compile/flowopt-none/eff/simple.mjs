@@ -2316,23 +2316,8 @@ lambda52 = (undefined, function (simple2, m, j) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #sqrt(x) {
-    return runtime.safeCall(globalThis.Math.sqrt(x))
-  }
-  static #cos(x) {
-    return runtime.safeCall(globalThis.Math.cos(x))
-  }
-  static #sin(x) {
-    return runtime.safeCall(globalThis.Math.sin(x))
-  }
-  static #abs(x) {
-    return runtime.safeCall(globalThis.Math.abs(x))
-  }
   static #trunc(x) {
     return runtime.safeCall(globalThis.Math.trunc(x))
-  }
-  static #real(i) {
-    return i
   }
   static #hd(l) {
     if (l instanceof simple.Cons.class) {
@@ -2768,13 +2753,6 @@ lambda52 = (undefined, function (simple2, m, j) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #bounds1(arr) {
-    if (runtime.Tuple.isArrayLike(arr) && arr.length === 2) {
-      runtime.Tuple.get(arr, 0);
-      return runtime.Tuple.get(arr, 1)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #north(kl) {
     let element1$, element0$, tmp;
     if (runtime.Tuple.isArrayLike(kl) && kl.length === 2) {
@@ -2882,58 +2860,6 @@ lambda52 = (undefined, function (simple2, m, j) {
       baseCall = simple.#compose(west, west);
       return runtime.safeCall(baseCall(x))
     }
-  }
-  static #zone_A(kl) {
-    let element1$, element0$;
-    if (runtime.Tuple.isArrayLike(kl) && kl.length === 2) {
-      element0$ = runtime.Tuple.get(kl, 0);
-      element1$ = runtime.Tuple.get(kl, 1);
-      return globalThis.Object.freeze([
-        element0$,
-        element1$
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #zone_B(kl) {
-    let element1$, element0$, tmp;
-    if (runtime.Tuple.isArrayLike(kl) && kl.length === 2) {
-      element0$ = runtime.Tuple.get(kl, 0);
-      element1$ = runtime.Tuple.get(kl, 1);
-      tmp = element0$ + 1;
-      return globalThis.Object.freeze([
-        tmp,
-        element1$
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #zone_C(kl) {
-    let element1$, element0$, tmp, tmp1;
-    if (runtime.Tuple.isArrayLike(kl) && kl.length === 2) {
-      element0$ = runtime.Tuple.get(kl, 0);
-      element1$ = runtime.Tuple.get(kl, 1);
-      tmp = element0$ + 1;
-      tmp1 = element1$ + 1;
-      return globalThis.Object.freeze([
-        tmp,
-        tmp1
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #zone_D(kl) {
-    let element1$, element0$, tmp;
-    if (runtime.Tuple.isArrayLike(kl) && kl.length === 2) {
-      element0$ = runtime.Tuple.get(kl, 0);
-      element1$ = runtime.Tuple.get(kl, 1);
-      tmp = element1$ + 1;
-      return globalThis.Object.freeze([
-        element0$,
-        tmp
-      ])
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #zone_corner_northeast(sub2, update2, pow, north, south, east, west) {
     return (zone) => {

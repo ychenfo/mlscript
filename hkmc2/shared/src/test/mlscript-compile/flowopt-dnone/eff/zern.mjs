@@ -3,7 +3,7 @@ const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
 const tabulateRM$accessorSymbol = globalThis.Symbol("tabulateRM");
-let zern1, lambda, lambda1, lambda2, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, main_ztest_lambda$_lambda$lambda, main_ztest_lambda$$lambda$, ztest_lambda$_lambda$lambda, ztest_lambda$$lambda$, g$tailrec;
+let zern1, lambda, lambda1, lambda2, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, main_ztest_lambda$_lambda$lambda, main_ztest_lambda$$lambda$, g$tailrec;
 g$tailrec = function g$tailrec(zern2, f, n, l) {
   loopLabel: while (true) {
     let scrut, tmp, tmp1, tmp2;
@@ -28,17 +28,6 @@ main_ztest_lambda$_lambda$lambda = function main_ztest_lambda$_lambda$lambda(zer
 main_ztest_lambda$$lambda$ = function main_ztest_lambda$$lambda$(zern2) {
   return (x) => {
     return main_ztest_lambda$_lambda$lambda(zern2, x)
-  }
-};
-ztest_lambda$_lambda$lambda = function ztest_lambda$_lambda$lambda(zern2, x) {
-  let lambda$here, inlinedVal;
-  inlinedVal = zern1[tabulateRM$accessorSymbol];
-  lambda$here = lambda$6(zern2);
-  return runtime.safeCall(inlinedVal(128, 128, lambda$here))
-};
-ztest_lambda$$lambda$ = function ztest_lambda$$lambda$(zern2) {
-  return (x) => {
-    return ztest_lambda$_lambda$lambda(zern2, x)
   }
 };
 lambda$5 = (undefined, function (zern2) {
@@ -204,26 +193,6 @@ lambda$ = (undefined, function (zern2, v, arr) {
   static #cos(x) {
     return runtime.safeCall(globalThis.Math.cos(x))
   }
-  static #real(i) {
-    return i
-  }
-  static #listHd(l) {
-    if (l instanceof zern.Cons.class) {
-      return l.head
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #listTl(l) {
-    if (l instanceof zern.Cons.class) {
-      return l.tail
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #listPairApp(f) {
-    return (l1, l2) => {
-      return zern.#listPairApp$tailrec(f, l1, l2)
-    }
-  }
   static #fillArray(arr, i, n, x) {
     loopLabel: while (true) {
       let scrut, tmp;
@@ -236,13 +205,6 @@ lambda$ = (undefined, function (zern2, v, arr) {
       i = tmp;
       continue loopLabel;
     }
-  }
-  static #unsafeUpdate(a, i, x) {
-    a[i] = x;
-    return runtime.Unit
-  }
-  static #unsafeSub(a, i) {
-    return a.at(i)
   }
   static #mkRawArray(n) {
     let tmp;
@@ -271,13 +233,6 @@ lambda$ = (undefined, function (zern2, v, arr) {
       }
       return inlinedVal
     }
-  }
-  static #mkArray(n, v) {
-    let arr, lambda$here;
-    arr = zern.#mkRawArray(n);
-    lambda$here = lambda$(zern, v, arr);
-    zern.#dotimes(n)(lambda$here);
-    return arr
   }
   static #ltu(i, limit) {
     let tmp;
@@ -334,12 +289,6 @@ lambda$ = (undefined, function (zern2, v, arr) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #array(nrows, ncols, v) {
-    let nelts, tmp;
-    nelts = zern.#chkSize(nrows, ncols);
-    tmp = zern.#mkArray(nelts, v);
-    return zern.Arr2(tmp, nrows, ncols, nelts)
-  }
   static #tabulateRM(nrows, ncols, f) {
     let nelts, arr, id, param1, param2, param3, param4, param5, param6, param7;
     nelts = zern.#chkSize(nrows, ncols);
@@ -391,78 +340,6 @@ lambda$ = (undefined, function (zern2, v, arr) {
     }
     return zern.Arr2(arr, nrows, ncols, nelts)
   }
-  static #tabulateCM(nrows, ncols, f) {
-    let nelts, arr, delta, id, param1, param2, param3, param4, param5, param6, param7, param8;
-    nelts = zern.#chkSize(nrows, ncols);
-    arr = zern.#mkRawArray(nelts);
-    delta = nelts - 1;
-    id = 1;
-    param1 = nrows;
-    param2 = ncols;
-    param3 = f;
-    param4 = arr;
-    param5 = delta;
-    param6 = 0;
-    param7 = 0;
-    param8 = 0;
-    inlinedLbl: {
-      loopLabel: while (true) {
-        switch (id) {
-          case 0:
-            {
-              let scrut;
-              scrut = param7 < param2;
-              if (scrut === true) {
-                param6 = 0;
-                id = 1;
-                continue loopLabel
-              }
-              break inlinedLbl;
-            }
-          case 1:
-            {
-              let scrut, tmp, tmp1, tmp2, tmp3, tmp4;
-              scrut = param6 < param1;
-              if (scrut === true) {
-                tmp = runtime.safeCall(param3(param6, param7));
-                param4[param8] = tmp;
-                tmp1 = param6 + 1;
-                tmp2 = param8 + param2;
-                param6 = tmp1;
-                param8 = tmp2;
-                id = 1;
-                continue loopLabel
-              }
-              tmp3 = param7 + 1;
-              tmp4 = param8 - param5;
-              param6 = 0;
-              param7 = tmp3;
-              param8 = tmp4;
-              id = 0;
-              continue loopLabel;
-            }
-        }
-      }
-    }
-    return zern.Arr2(arr, nrows, ncols, nelts)
-  }
-  static #tabulate(t) {
-    if (t instanceof zern.RowMajor.class) {
-      return zern.#tabulateRM
-    } else if (t instanceof zern.ColMajor.class) {
-      return zern.#tabulateCM
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #sub(a, i, j) {
-    let arg$Arr2$0$, tmp;
-    if (a instanceof zern.Arr2.class) {
-      arg$Arr2$0$ = a.data_;
-      tmp = zern.#index(a, i, j);
-      return zern.#unsafeSub(arg$Arr2$0$, tmp)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #binop(d, s1, s2, f) {
     let arg$Arr2$0$, arg$Arr2$3$, arg$Arr2$0$1, arg$Arr2$0$2, lambda$here;
     if (d instanceof zern.Arr2.class) {
@@ -495,99 +372,12 @@ lambda$ = (undefined, function (zern2, v, arr) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #collect(n) {
-    return (f) => {
-      let l;
-      l = zern.Nil;
-      return g$tailrec(zern, f, n, l)
-    }
-  }
-  static #ncoefs() {
-    return 15
-  }
-  static #nx() {
-    return 128
-  }
-  static #ny() {
-    return zern.#nx()
-  }
-  static #mulsv(dst, sf, a) {
-    let lambda$here;
-    lambda$here = lambda$3(sf);
-    return zern.#unop(dst, a, lambda$here)
-  }
-  static #cisv(a, rpart, ipart) {
-    zern.#unop(rpart, a, zern.#cos);
-    zern.#unop(ipart, a, zern.#sin);
-    return globalThis.Object.freeze([
-      rpart,
-      ipart
-    ])
-  }
   static #mpadd(dst) {
     return (sf, src) => {
       let lambda$here;
       lambda$here = lambda$4(sf);
       return zern.#binop(dst, dst, src, lambda$here)
     }
-  }
-  static #zern(dst, rpart, ipart, coefs, zerns) {
-    let tmp, tmp1, tmp2, tmp3, tmp4;
-    tmp = zern.#listHd(coefs);
-    tmp1 = zern.#listHd(zerns);
-    zern.#mulsv(dst, tmp, tmp1);
-    tmp2 = zern.#mpadd(dst);
-    tmp3 = zern.#listTl(coefs);
-    tmp4 = zern.#listTl(zerns);
-    zern.#listPairApp(tmp2)(tmp3, tmp4);
-    return zern.#cisv(dst, rpart, ipart)
-  }
-  static #ztest() {
-    let sum, rpart, ipart, coefs, zerns, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, lambda$here, lambda$here1, f, arg$Cons$0$, arg$Cons$0$1, lambda$here2, arg$Cons$1$, arg$Cons$1$1;
-    tmp = zern.#ny();
-    tmp1 = zern.#nx();
-    sum = zern.#array(tmp, tmp1, 0.0);
-    tmp2 = zern.#ny();
-    tmp3 = zern.#nx();
-    rpart = zern.#array(tmp2, tmp3, 0.0);
-    tmp4 = zern.#ny();
-    tmp5 = zern.#nx();
-    ipart = zern.#array(tmp4, tmp5, 0.0);
-    tmp6 = zern.#ncoefs();
-    lambda$here = lambda$5(zern);
-    coefs = zern.#collect(tmp6)(lambda$here);
-    tmp7 = zern.#ncoefs();
-    lambda$here1 = ztest_lambda$$lambda$(zern);
-    zerns = zern.#collect(tmp7)(lambda$here1);
-    if (coefs instanceof zern1.Cons.class) {
-      arg$Cons$0$ = coefs.head;
-      if (zerns instanceof zern1.Cons.class) {
-        arg$Cons$0$1 = zerns.head;
-        lambda$here2 = lambda$3(arg$Cons$0$);
-        zern1.#unop(sum, arg$Cons$0$1, lambda$here2);
-        if (coefs instanceof zern1.Cons.class) {
-          arg$Cons$1$ = coefs.tail;
-          if (zerns instanceof zern1.Cons.class) {
-            let arg$Arr2$0$, tmp8;
-            arg$Cons$1$1 = zerns.tail;
-            f = zern1.#mpadd(sum);
-            zern1.#listPairApp$tailrec(f, arg$Cons$1$, arg$Cons$1$1);
-            zern1.#unop(rpart, sum, zern1.#cos);
-            zern1.#unop(ipart, sum, zern1.#sin);
-            if (rpart instanceof zern1.Arr2.class) {
-              arg$Arr2$0$ = rpart.data_;
-              tmp8 = zern1.#index(rpart, 0, 1);
-              return arg$Arr2$0$.at(tmp8)
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static main() {
     let inlinedVal, inlinedVal1, inlinedVal2, nelts, nelts1, nelts2, f, l, inlinedVal3, f1, l1, inlinedVal4, f2, arg$Cons$0$, arg$Cons$0$1, lambda$here, arg$Cons$1$, arg$Cons$1$1, lambda$here1, lambda$here2, lambda$here3, tmp, tmp1, tmp2, arr, i, n, x, inlinedVal5, arr1, i1, n1, x1, inlinedVal6, arr2, i2, n2, x2, inlinedVal7;
@@ -712,7 +502,5 @@ export { lambda$5 as _$_modulePrivate_$_lambda$5 };
 export { lambda$6 as _$_modulePrivate_$_lambda$6 };
 export { main_ztest_lambda$_lambda$lambda as _$_modulePrivate_$_main_ztest_lambda$_lambda$lambda };
 export { main_ztest_lambda$$lambda$ as _$_modulePrivate_$_main_ztest_lambda$$lambda$ };
-export { ztest_lambda$_lambda$lambda as _$_modulePrivate_$_ztest_lambda$_lambda$lambda };
-export { ztest_lambda$$lambda$ as _$_modulePrivate_$_ztest_lambda$$lambda$ };
 export { g$tailrec as _$_modulePrivate_$_g$tailrec };
 export default zern1;

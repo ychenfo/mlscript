@@ -200,7 +200,7 @@ input[type="number"], input[type="text"] {
     <label class="only-figure">font <input id="figFont" type="number" min="6" max="24" step="1" value="11" style="width:56px"></label>
     <label class="only-figure">y scale <select id="figScale">
       <option value="shared">shared</option>
-      <option value="panel">per panel</option>
+      <option value="group">per group (per baseline)</option>
     </select></label>
     <label class="only-figure">y max <input id="figYmax" type="number" min="0" step="0.1" placeholder="auto" style="width:64px"></label>
     <label class="only-figure"><input type="checkbox" id="figYlabels"> y labels</label>
@@ -803,7 +803,8 @@ function buildFigure() {
   const panels = figurePanels()
   if (!panels.length) return null
   const fs = state.figFont, pw = state.figW, ph = state.figH
-  const groups = figureGroups(), nSlots = groups.reduce((n, g) => n + g.members.length, 0), groupGap = 8
+  const groups = figureGroups(), nSlots = groups.reduce((n, g) => n + g.members.length, 0)
+  const perGroup = state.figScale === "group", groupGap = state.figYlabels && perGroup ? 28 : 8
   const cols = Math.max(1, Math.min(Math.floor(state.figCols) || 1, panels.length)), nRows = Math.ceil(panels.length / cols)
   const yl = state.figYlabels, title = state.figTitle.trim()
   const padL = yl ? 38 : 6, gapX = yl ? 38 : 12, padT = title ? fs + 16 : 6, titleH = fs + 6, gapY = 12, pad = 6
@@ -820,16 +821,25 @@ function buildFigure() {
   const bw = (pw - 12 - (groups.length - 1) * groupGap) / nSlots
   panels.forEach((pn, i) => {
     const px = padL + (i % cols) * (pw + gapX), py = padT + Math.floor(i / cols) * (titleH + ph + gapY) + titleH
-    const top = fixedTop ?? (state.figScale === "panel" ? extent(pn.bars) : sharedTop)
-    const y = v => py + ph - Math.min(Math.max(v / top, 0), 1) * ph
+    // one y mapping per group: with a shared scale they all use the same top, per group each uses its own bars
+    const tops = groups.map((_, gi) => fixedTop ?? (perGroup ? extent(pn.bars.filter(b => b.gi === gi)) : sharedTop))
+    const ys = tops.map(top => v => py + ph - Math.min(Math.max(v / top, 0), 1) * ph)
     svg.append(S("rect", { x: px, y: py, width: pw, height: ph, fill: "#EBEBEB" }))
-    for (const t of linDomain(0, top).ticks.filter(t => t <= top * 1.0001)) {
-      svg.append(S("line", { x1: px, x2: px + pw, y1: y(t), y2: y(t), stroke: "#fff", "stroke-width": 1 }))
-      if (yl) svg.append(text(px - 4, y(t) + fs * 0.35, String(+t.toPrecision(3)), fs - 2, "end"))
-    }
+    let slot0 = 0
+    groups.forEach((g, gi) => {
+      const x0 = px + 6 + slot0 * bw + gi * groupGap, x1 = x0 + g.members.length * bw
+      slot0 += g.members.length
+      const lo = gi === 0 ? px : x0 - groupGap / 2, hi = gi === groups.length - 1 ? px + pw : x1 + groupGap / 2
+      if (perGroup && gi > 0) svg.append(S("line", { x1: lo, x2: lo, y1: py, y2: py + ph, stroke: "#fff", "stroke-width": 3 }))
+      if (!pn.bars.some(b => b.gi === gi)) return
+      for (const t of linDomain(0, tops[gi]).ticks.filter(t => t <= tops[gi] * 1.0001)) {
+        svg.append(S("line", { x1: lo, x2: hi, y1: ys[gi](t), y2: ys[gi](t), stroke: "#fff", "stroke-width": 1 }))
+        if (yl && (gi === 0 || perGroup)) svg.append(text(gi === 0 ? px - 4 : x0 - 4, ys[gi](t) + fs * 0.35, String(+t.toPrecision(3)), fs - 2, "end"))
+      }
+    })
     svg.append(text(px, py - 4, pn.name, fs, "start"))
     for (const b of pn.bars) {
-      const x = px + 6 + b.slot * bw + b.gi * groupGap
+      const x = px + 6 + b.slot * bw + b.gi * groupGap, y = ys[b.gi]
       svg.append(S("rect", { x, y: y(b.val), width: bw, height: py + ph - y(b.val), fill: FIG_COLORS[variants.indexOf(b.v) % 8] }))
       if (b.rel != null) {
         const cx = x + bw / 2, a = y(b.val * (1 - b.rel)), c = y(b.val * (1 + b.rel)), cap = bw * 0.18

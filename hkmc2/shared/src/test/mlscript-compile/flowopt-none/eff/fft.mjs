@@ -50,12 +50,6 @@ let fft1;
     tmp4 = fft.#loop_np$tailrec(tmp2, tmp3);
     return fft.Cons(tmp1, tmp4);
   }
-  static #cos(x) {
-    return runtime.safeCall(globalThis.Math.cos(x))
-  }
-  static #sin(x) {
-    return runtime.safeCall(globalThis.Math.sin(x))
-  }
   static #abs(x) {
     return runtime.safeCall(globalThis.Math.abs(x))
   }
@@ -91,17 +85,9 @@ let fft1;
     tmp = [];
     return fft.#fillArray(tmp, 0, n, x)
   }
-  static #aSub(a, i) {
-    return a.at(i)
-  }
   static #aUpdate(a, i, x) {
     a[i] = x;
     return runtime.Unit
-  }
-  static #tpi() {
-    let tmp;
-    tmp = fft.#pi();
-    return 2.0 * tmp
   }
   static #fft(px) {
     return (py) => {

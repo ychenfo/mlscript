@@ -162,6 +162,11 @@ class BlockSimplifier
     lazy val privateFieldsToRemove: Set[TermSymbol] =
       assert(analysisDone)
       privateVars.iterator.filterNot(usedPrivateFields).toSet
+    val privateModuleMethods = MutSet.empty[FunDefn]
+    // a method is referenced either by a `Select` carrying its term symbol or by a `MemberRef` to its block member symbol
+    lazy val privateModuleMethodsToRemove: Set[TermSymbol] =
+      assert(analysisDone)
+      privateModuleMethods.iterator.filterNot(m => usedPrivateFields(m.dSym) || usedVars(m.sym)).map(_.dSym).toSet
     var tailLabels = MutSet.empty[LabelSymbol]
     
     def apply(prog: Program): Program =
@@ -208,7 +213,11 @@ class BlockSimplifier
         
         override def applyClsLikeDefn(defn: ClsLikeDefn): Unit =
           privateVars ++= defn.privateFields
-          defn.companion.foreach(body => privateVars ++= body.privateFields)
+          defn.companion.foreach: body =>
+            privateVars ++= body.privateFields
+            // with the private ABI preserved, another unit may inline a body that still calls an unused private method
+            if !config.preservePrivateAbi then
+              privateModuleMethods ++= body.methods.iterator.filter(_.dSym.isPrivate)
           super.applyClsLikeDefn(defn)
         
         override def applyBlock(b: Block): Unit =
@@ -360,9 +369,16 @@ class BlockSimplifier
     override def applyObjBody(defn: ClsLikeBody): ClsLikeBody =
       val defn2 = super.applyObjBody(defn)
       val privateFields2 = removeUnusedPrivateFields(defn2.privateFields)
-      if privateFields2 is defn2.privateFields
+      val methods2 = defn2.methods.filterConserve: m =>
+        val keep = !privateModuleMethodsToRemove(m.dSym)
+        if !keep then registerChange(s"rm unused private module method ${m.dSym.showDbg}")
+        keep
+      if (privateFields2 is defn2.privateFields) && (methods2 is defn2.methods)
       then defn2
-      else defn2.copy(privateFields = privateFields2)
+      else defn2.copy(
+        methods = methods2,
+        privateFields = privateFields2,
+        methodKeys = defn2.methodKeys.filterNot((sym, _) => privateModuleMethodsToRemove(sym)))
 
     override def applyClsLikeDefn(defn: ClsLikeDefn)(k: Defn => Block): Block =
       super.applyClsLikeDefn(defn):

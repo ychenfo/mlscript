@@ -2,7 +2,7 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
-let loop, loop_i, fft1, main_doit_loop_np_test$scrut_tup2, main_doit_loop_np_test_fft$scrut_tup2, doit_loop_np_test_fft$scrut_tup2, doit_loop_np_test$scrut_tup2, loop_np_test$scrut_tup2, loop_np_test_fft$scrut_tup2, test_fft$scrut_tup2, test$scrut_tup2, fft$scrut_tup2, loop_i$tailrec, loop_is2$tailrec, loop_k$tailrec, doit_loop_np$loop_np$tailrec, main_doit_loop_np$loop_np$tailrec, fft$scrut_tup2$worker, test$scrut_tup2$worker, test_fft$scrut_tup2$worker, loop_np_test_fft$scrut_tup2$worker, loop_np_test$scrut_tup2$worker, doit_loop_np_test$scrut_tup2$worker, doit_loop_np_test_fft$scrut_tup2$worker, main_doit_loop_np_test_fft$scrut_tup2$worker, main_doit_loop_np_test$scrut_tup2$worker;
+let loop, loop_i, fft1, main_doit_loop_np_test$scrut_tup2, main_doit_loop_np_test_fft$scrut_tup2, doit_loop_np_test_fft$scrut_tup2, doit_loop_np_test$scrut_tup2, loop_np_test$scrut_tup2, loop_np_test_fft$scrut_tup2, loop_i$tailrec, loop_is2$tailrec, loop_k$tailrec, doit_loop_np$loop_np$tailrec, main_doit_loop_np$loop_np$tailrec, loop_np_test_fft$scrut_tup2$worker, loop_np_test$scrut_tup2$worker, doit_loop_np_test$scrut_tup2$worker, doit_loop_np_test_fft$scrut_tup2$worker, main_doit_loop_np_test_fft$scrut_tup2$worker, main_doit_loop_np_test$scrut_tup2$worker;
 loop_i$tailrec = function loop_i$tailrec(fft2, px, py, n, i, j) {
   loopLabel: while (true) {
     let scrut, scrut1, tmp;
@@ -675,53 +675,6 @@ loop_np_test_fft$scrut_tup2$worker = function loop_np_test_fft$scrut_tup2$worker
   loop_i$tailrec(fft1, fv_px, fv_py, tup2_0, 1, 1);
   return tup2_0
 };
-test_fft$scrut_tup2 = function test_fft$scrut_tup2(tup2_0, tup2_1) {
-  return (fv_element0$, fv_element1$, fv_m, fv_n, fv_scrut, fv_np, fv_tmp, fv_tmp1, fv_px, fv_py) => {
-    return test_fft$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_m, fv_n, fv_scrut, fv_np, fv_tmp, fv_tmp1, fv_px, fv_py)
-  }
-};
-test_fft$scrut_tup2$worker = function test_fft$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_m, fv_n, fv_scrut, fv_np, fv_tmp, fv_tmp1, fv_px, fv_py) {
-  fv_scrut = tup2_0 != fv_np;
-  if (fv_scrut === true) {
-    fv_tmp = fv_np + 1;
-    loop(fft1, fv_px, fv_py, tup2_0, fv_tmp);
-  }
-  loop_k$tailrec(fft1, fv_px, fv_py, tup2_0, tup2_1, 1, tup2_0);
-  loop_is2$tailrec(fft1, fv_px, fv_py, tup2_0, 1, 4);
-  loop_i$tailrec(fft1, fv_px, fv_py, tup2_0, 1, 1);
-  return tup2_0
-};
-test$scrut_tup2 = function test$scrut_tup2(tup2_0, tup2_1) {
-  return (fv_element0$, fv_element1$, fv_zi, fv_zr, fv_tmp, fv_tmp1, fv_scrut, fv_tmp2, fv_zm) => {
-    return test$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_zi, fv_zr, fv_tmp, fv_tmp1, fv_scrut, fv_tmp2, fv_zm)
-  }
-};
-test$scrut_tup2$worker = function test$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_zi, fv_zr, fv_tmp, fv_tmp1, fv_scrut, fv_tmp2, fv_zm) {
-  let inlinedVal, inlinedVal1;
-  inlinedVal = runtime.safeCall(globalThis.Math.abs(tup2_0));
-  inlinedVal1 = runtime.safeCall(globalThis.Math.abs(tup2_1));
-  fv_scrut = inlinedVal < inlinedVal1;
-  if (fv_scrut === true) {
-    return tup2_1
-  }
-  return tup2_0;
-};
-fft$scrut_tup2 = function fft$scrut_tup2(tup2_0, tup2_1) {
-  return (fv_element0$, fv_element1$, fv_m, fv_n, fv_scrut, fv_np, fv_tmp, fv_tmp1, fv_px, fv_py) => {
-    return fft$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_m, fv_n, fv_scrut, fv_np, fv_tmp, fv_tmp1, fv_px, fv_py)
-  }
-};
-fft$scrut_tup2$worker = function fft$scrut_tup2$worker(tup2_0, tup2_1, fv_element0$, fv_element1$, fv_m, fv_n, fv_scrut, fv_np, fv_tmp, fv_tmp1, fv_px, fv_py) {
-  fv_scrut = tup2_0 != fv_np;
-  if (fv_scrut === true) {
-    fv_tmp = fv_np + 1;
-    loop(fft1, fv_px, fv_py, tup2_0, fv_tmp);
-  }
-  loop_k$tailrec(fft1, fv_px, fv_py, tup2_0, tup2_1, 1, tup2_0);
-  loop_is2$tailrec(fft1, fv_px, fv_py, tup2_0, 1, 4);
-  loop_i$tailrec(fft1, fv_px, fv_py, tup2_0, 1, 1);
-  return tup2_0
-};
 loop_i = function loop_i(fft2, np, npm, pxr, pxi, t, i) {
   loopLabel: while (true) {
     let scrut, j, z, y, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
@@ -962,204 +915,8 @@ loop = function loop(fft2, px, py, n, i) {
       return fft.Cons(inlinedVal, tmp3);
     }
   }
-  static #cos(x) {
-    return runtime.safeCall(globalThis.Math.cos(x))
-  }
-  static #sin(x) {
-    return runtime.safeCall(globalThis.Math.sin(x))
-  }
-  static #abs(x) {
-    return runtime.safeCall(globalThis.Math.abs(x))
-  }
-  static #floor(x) {
-    return runtime.safeCall(globalThis.Math.floor(x))
-  }
-  static #intDiv(a, b) {
-    let tmp;
-    tmp = a / b;
-    return fft.#floor(tmp)
-  }
-  static #fromInt(i) {
-    return i
-  }
-  static #pi() {
-    return 3.141592653589793
-  }
-  static #fillArray(arr, i, n, x) {
-    loopLabel: while (true) {
-      let scrut, tmp;
-      scrut = i == n;
-      if (scrut === true) {
-        return arr
-      }
-      arr[i] = x;
-      tmp = i + 1;
-      i = tmp;
-      continue loopLabel;
-    }
-  }
-  static #aArray(n, x) {
-    let tmp;
-    tmp = [];
-    return fft.#fillArray(tmp, 0, n, x)
-  }
-  static #aSub(a, i) {
-    return a.at(i)
-  }
-  static #aUpdate(a, i, x) {
-    a[i] = x;
-    return runtime.Unit
-  }
-  static #tpi() {
-    let tmp;
-    tmp = fft.#pi();
-    return 2.0 * tmp
-  }
-  static #fft(px) {
-    return (py) => {
-      return (np) => {
-        let np1, i, m, inlinedVal;
-        np1 = np;
-        i = 2;
-        m = 1;
-        inlinedLbl: {
-          loopLabel: while (true) {
-            let scrut, tmp, tmp1;
-            scrut = i < np1;
-            if (scrut === true) {
-              tmp = i + i;
-              tmp1 = m + 1;
-              i = tmp;
-              m = tmp1;
-              continue loopLabel
-            }
-            inlinedVal = fft$scrut_tup2(i, m);
-            break inlinedLbl;
-          }
-        }
-        return inlinedVal(undefined, undefined, undefined, undefined, undefined, np, undefined, undefined, px, py)
-      }
-    }
-  }
-  static #test(np) {
-    let enp, npm, pxr, pxi, t, n2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, np1, i, m, inlinedVal, np2, pxr1, pxi1, i1, zr, zi, inlinedVal1;
-    enp = fft.#fromInt(np);
-    tmp = fft.#intDiv(np, 2);
-    npm = tmp - 1;
-    tmp1 = np + 2;
-    pxr = fft.#aArray(tmp1, 0.0);
-    tmp2 = np + 2;
-    pxi = fft.#aArray(tmp2, 0.0);
-    tmp3 = fft.#pi();
-    t = tmp3 / enp;
-    tmp4 = enp - 1.0;
-    tmp5 = tmp4 * 0.5;
-    fft.#aUpdate(pxr, 1, tmp5);
-    fft.#aUpdate(pxi, 1, 0.0);
-    n2 = fft.#intDiv(np, 2);
-    tmp6 = n2 + 1;
-    tmp7 = - 0.5;
-    fft.#aUpdate(pxr, tmp6, tmp7);
-    tmp8 = n2 + 1;
-    fft.#aUpdate(pxi, tmp8, 0.0);
-    loop_i(fft, np, npm, pxr, pxi, t, 1);
-    np1 = np;
-    i = 2;
-    m = 1;
-    inlinedLbl: {
-      loopLabel: while (true) {
-        let scrut, tmp9, tmp10;
-        scrut = i < np1;
-        if (scrut === true) {
-          tmp9 = i + i;
-          tmp10 = m + 1;
-          i = tmp9;
-          m = tmp10;
-          continue loopLabel
-        }
-        inlinedVal = test_fft$scrut_tup2(i, m);
-        break inlinedLbl;
-      }
-    }
-    inlinedVal(undefined, undefined, undefined, undefined, undefined, np, undefined, undefined, pxr, pxi);
-    np2 = np;
-    pxr1 = pxr;
-    pxi1 = pxi;
-    i1 = 0;
-    zr = 0.0;
-    zi = 0.0;
-    inlinedLbl1: {
-      loopLabel1: while (true) {
-        let scrut, scrut1, tmp9, tmp10;
-        scrut = i1 >= np2;
-        if (scrut === true) {
-          inlinedVal1 = test$scrut_tup2(zr, zi);
-          break inlinedLbl1
-        }
-        {
-          let inlinedVal2, inlinedVal3;
-          tmp9 = i1 + 1;
-          inlinedVal2 = pxr1.at(tmp9);
-          tmp10 = inlinedVal2 - i1;
-          inlinedVal3 = runtime.safeCall(globalThis.Math.abs(tmp10));
-          scrut1 = zr < inlinedVal3;
-          if (scrut1 === true) {
-            let fv_tmp, fv_scrut, inlinedVal4, inlinedVal5;
-            fv_tmp = i1 + 1;
-            inlinedVal4 = pxi1.at(fv_tmp);
-            inlinedVal5 = runtime.safeCall(globalThis.Math.abs(inlinedVal4));
-            fv_scrut = zi < inlinedVal5;
-            if (fv_scrut === true) {
-              let fv_tmp1;
-              fv_tmp1 = i1 + 1;
-              i1 = fv_tmp1;
-              zr = inlinedVal3;
-              zi = inlinedVal5;
-              continue loopLabel1
-            }
-            {
-              let fv_tmp1;
-              fv_tmp1 = i1 + 1;
-              i1 = fv_tmp1;
-              zr = inlinedVal3;
-              continue loopLabel1;
-            }
-          }
-          {
-            let fv_tmp, fv_scrut, inlinedVal4, inlinedVal5;
-            fv_tmp = i1 + 1;
-            inlinedVal4 = pxi1.at(fv_tmp);
-            inlinedVal5 = runtime.safeCall(globalThis.Math.abs(inlinedVal4));
-            fv_scrut = zi < inlinedVal5;
-            if (fv_scrut === true) {
-              let fv_tmp1;
-              fv_tmp1 = i1 + 1;
-              i1 = fv_tmp1;
-              zi = inlinedVal5;
-              continue loopLabel1
-            }
-            {
-              let fv_tmp1;
-              fv_tmp1 = i1 + 1;
-              i1 = fv_tmp1;
-              continue loopLabel1;
-            }
-          }
-        }
-      }
-    }
-    return inlinedVal1(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined)
-  }
   static #nSizes() {
     return 14
-  }
-  static #loop_np(i) {
-    return (np) => {
-      return fft.#loop_np$tailrec(i, np)
-    }
-  }
-  static #doit() {
-    return doit_loop_np$loop_np$tailrec(1, 16)
   }
   static main() {
     return main_doit_loop_np$loop_np$tailrec(1, 16)
@@ -1176,17 +933,11 @@ export { doit_loop_np_test_fft$scrut_tup2 as _$_modulePrivate_$_doit_loop_np_tes
 export { doit_loop_np_test$scrut_tup2 as _$_modulePrivate_$_doit_loop_np_test$scrut_tup2 };
 export { loop_np_test$scrut_tup2 as _$_modulePrivate_$_loop_np_test$scrut_tup2 };
 export { loop_np_test_fft$scrut_tup2 as _$_modulePrivate_$_loop_np_test_fft$scrut_tup2 };
-export { test_fft$scrut_tup2 as _$_modulePrivate_$_test_fft$scrut_tup2 };
-export { test$scrut_tup2 as _$_modulePrivate_$_test$scrut_tup2 };
-export { fft$scrut_tup2 as _$_modulePrivate_$_fft$scrut_tup2 };
 export { loop_i$tailrec as _$_modulePrivate_$_loop_i$tailrec };
 export { loop_is2$tailrec as _$_modulePrivate_$_loop_is2$tailrec };
 export { loop_k$tailrec as _$_modulePrivate_$_loop_k$tailrec };
 export { doit_loop_np$loop_np$tailrec as _$_modulePrivate_$_doit_loop_np$loop_np$tailrec };
 export { main_doit_loop_np$loop_np$tailrec as _$_modulePrivate_$_main_doit_loop_np$loop_np$tailrec };
-export { fft$scrut_tup2$worker as _$_modulePrivate_$_fft$scrut_tup2$worker };
-export { test$scrut_tup2$worker as _$_modulePrivate_$_test$scrut_tup2$worker };
-export { test_fft$scrut_tup2$worker as _$_modulePrivate_$_test_fft$scrut_tup2$worker };
 export { loop_np_test_fft$scrut_tup2$worker as _$_modulePrivate_$_loop_np_test_fft$scrut_tup2$worker };
 export { loop_np_test$scrut_tup2$worker as _$_modulePrivate_$_loop_np_test$scrut_tup2$worker };
 export { doit_loop_np_test$scrut_tup2$worker as _$_modulePrivate_$_doit_loop_np_test$scrut_tup2$worker };

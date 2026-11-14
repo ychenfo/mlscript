@@ -2,95 +2,8 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
-let smithNormalForm1, lambda, lambda1, lambda2, lambda3, lambda4, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, main_snf_f$f, snf_f$f;
+let smithNormalForm1, lambda, lambda1, lambda2, lambda3, lambda4, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, main_snf_f$f;
 main_snf_f$f = function main_snf_f$f(x, y) {
-  let fv_scrut, fv_tmp;
-  fv_scrut = x == 0;
-  if (fv_scrut === true) {
-    let fv_scrut1, fv_tmp1;
-    fv_scrut1 = y == 0;
-    if (fv_scrut1 === true) {
-      return 2
-    }
-    {
-      let fv_scrut2, fv_tmp2;
-      fv_tmp1 = y - 1;
-      fv_scrut2 = fv_tmp1 == 0;
-      if (fv_scrut2 === true) {
-        return 4
-      }
-      {
-        let fv_scrut3;
-        fv_tmp2 = fv_tmp1 - 1;
-        fv_scrut3 = fv_tmp2 == 0;
-        if (fv_scrut3 === true) {
-          return 4
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-    }
-  }
-  {
-    let fv_scrut1, fv_tmp1;
-    fv_tmp = x - 1;
-    fv_scrut1 = fv_tmp == 0;
-    if (fv_scrut1 === true) {
-      let fv_scrut2, fv_tmp2;
-      fv_scrut2 = y == 0;
-      if (fv_scrut2 === true) {
-        return -6
-      }
-      {
-        let fv_scrut3, fv_tmp3;
-        fv_tmp2 = y - 1;
-        fv_scrut3 = fv_tmp2 == 0;
-        if (fv_scrut3 === true) {
-          return 6
-        }
-        {
-          let fv_scrut4;
-          fv_tmp3 = fv_tmp2 - 1;
-          fv_scrut4 = fv_tmp3 == 0;
-          if (fv_scrut4 === true) {
-            return 12
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-    }
-    {
-      let fv_scrut2;
-      fv_tmp1 = fv_tmp - 1;
-      fv_scrut2 = fv_tmp1 == 0;
-      if (fv_scrut2 === true) {
-        let fv_scrut3, fv_tmp2;
-        fv_scrut3 = y == 0;
-        if (fv_scrut3 === true) {
-          return 10
-        }
-        {
-          let fv_scrut4, fv_tmp3;
-          fv_tmp2 = y - 1;
-          fv_scrut4 = fv_tmp2 == 0;
-          if (fv_scrut4 === true) {
-            return -4
-          }
-          {
-            let fv_scrut5;
-            fv_tmp3 = fv_tmp2 - 1;
-            fv_scrut5 = fv_tmp3 == 0;
-            if (fv_scrut5 === true) {
-              return -16
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-        }
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-  }
-};
-snf_f$f = function snf_f$f(x, y) {
   let fv_scrut, fv_tmp;
   fv_scrut = x == 0;
   if (fv_scrut === true) {
@@ -321,36 +234,6 @@ lambda = (undefined, function (width, generator, z) {
       static [definitionMetadata] = ["object", "Nil"];
     });
   }
-  static #floor(x) {
-    return runtime.safeCall(globalThis.Math.floor(x))
-  }
-  static #intDiv(a, b) {
-    let tmp;
-    tmp = a / b;
-    return smithNormalForm.#floor(tmp)
-  }
-  static #intMod(a, b) {
-    smithNormalForm.#intDiv(a, b);
-    return runtime.Unit
-  }
-  static #listNth(l, n) {
-    loopLabel: while (true) {
-      let scrut, arg$Cons$0$, arg$Cons$1$, tmp;
-      if (l instanceof smithNormalForm.Cons.class) {
-        arg$Cons$0$ = l.head;
-        arg$Cons$1$ = l.tail;
-        scrut = n == 0;
-        if (scrut === true) {
-          return arg$Cons$0$
-        }
-        tmp = n - 1;
-        l = arg$Cons$1$;
-        n = tmp;
-        continue loopLabel;
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-  }
   static #fillArray(arr, i, n, x) {
     loopLabel: while (true) {
       let scrut, tmp;
@@ -374,10 +257,6 @@ lambda = (undefined, function (width, generator, z) {
   }
   static #arraySub(a, i) {
     return a.at(i)
-  }
-  static #arrayUpdate(a, i, x) {
-    a[i] = x;
-    return runtime.Unit
   }
   static #arrayTabulate(n, f) {
     let scrut, arr, tmp;
@@ -758,9 +637,6 @@ lambda = (undefined, function (width, generator, z) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #print_(s) {
-    return runtime.Unit
-  }
   static #smaller(a, b) {
     let tmp, tmp1, tmp2, tmp3;
     tmp = a != 0;
@@ -977,102 +853,6 @@ lambda = (undefined, function (width, generator, z) {
     }
     return inlinedVal
   }
-  static #table() {
-    return runtime.Unit
-  }
-  static #f(x, y) {
-    let fv_scrut, fv_tmp;
-    fv_scrut = x == 0;
-    if (fv_scrut === true) {
-      let fv_scrut1, fv_tmp1;
-      fv_scrut1 = y == 0;
-      if (fv_scrut1 === true) {
-        return 2
-      }
-      {
-        let fv_scrut2, fv_tmp2;
-        fv_tmp1 = y - 1;
-        fv_scrut2 = fv_tmp1 == 0;
-        if (fv_scrut2 === true) {
-          return 4
-        }
-        {
-          let fv_scrut3;
-          fv_tmp2 = fv_tmp1 - 1;
-          fv_scrut3 = fv_tmp2 == 0;
-          if (fv_scrut3 === true) {
-            return 4
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-    }
-    {
-      let fv_scrut1, fv_tmp1;
-      fv_tmp = x - 1;
-      fv_scrut1 = fv_tmp == 0;
-      if (fv_scrut1 === true) {
-        let fv_scrut2, fv_tmp2;
-        fv_scrut2 = y == 0;
-        if (fv_scrut2 === true) {
-          return -6
-        }
-        {
-          let fv_scrut3, fv_tmp3;
-          fv_tmp2 = y - 1;
-          fv_scrut3 = fv_tmp2 == 0;
-          if (fv_scrut3 === true) {
-            return 6
-          }
-          {
-            let fv_scrut4;
-            fv_tmp3 = fv_tmp2 - 1;
-            fv_scrut4 = fv_tmp3 == 0;
-            if (fv_scrut4 === true) {
-              return 12
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-        }
-      }
-      {
-        let fv_scrut2;
-        fv_tmp1 = fv_tmp - 1;
-        fv_scrut2 = fv_tmp1 == 0;
-        if (fv_scrut2 === true) {
-          let fv_scrut3, fv_tmp2;
-          fv_scrut3 = y == 0;
-          if (fv_scrut3 === true) {
-            return 10
-          }
-          {
-            let fv_scrut4, fv_tmp3;
-            fv_tmp2 = y - 1;
-            fv_scrut4 = fv_tmp2 == 0;
-            if (fv_scrut4 === true) {
-              return -4
-            }
-            {
-              let fv_scrut5;
-              fv_tmp3 = fv_tmp2 - 1;
-              fv_scrut5 = fv_tmp3 == 0;
-              if (fv_scrut5 === true) {
-                return -16
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-          }
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-    }
-  }
-  static #snf() {
-    let big, tmp;
-    big = smithNormalForm.#matrixMake(3, 3, snf_f$f);
-    tmp = smithNormalForm.#smithNormalForm(big);
-    return smithNormalForm.#matrixFetch(tmp, 2, 2)
-  }
   static main() {
     let big, tmp;
     big = smithNormalForm1.#matrixMake(3, 3, main_snf_f$f);
@@ -1097,5 +877,4 @@ export { lambda$5 as _$_modulePrivate_$_lambda$5 };
 export { lambda$6 as _$_modulePrivate_$_lambda$6 };
 export { lambda$7 as _$_modulePrivate_$_lambda$7 };
 export { main_snf_f$f as _$_modulePrivate_$_main_snf_f$f };
-export { snf_f$f as _$_modulePrivate_$_snf_f$f };
 export default smithNormalForm1;

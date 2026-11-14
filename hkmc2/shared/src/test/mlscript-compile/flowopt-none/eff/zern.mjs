@@ -187,9 +187,6 @@ lambda$ = (undefined, function (zern2, v, arr) {
   static #cos(x) {
     return runtime.safeCall(globalThis.Math.cos(x))
   }
-  static #real(i) {
-    return i
-  }
   static #listHd(l) {
     if (l instanceof zern.Cons.class) {
       return l.head
@@ -219,10 +216,6 @@ lambda$ = (undefined, function (zern2, v, arr) {
       i = tmp;
       continue loopLabel;
     }
-  }
-  static #unsafeUpdate(a, i, x) {
-    a[i] = x;
-    return runtime.Unit
   }
   static #unsafeSub(a, i) {
     return a.at(i)
@@ -428,14 +421,6 @@ lambda$ = (undefined, function (zern2, v, arr) {
       }
     }
     return zern.Arr2(arr, nrows, ncols, nelts)
-  }
-  static #tabulate(t) {
-    if (t instanceof zern.RowMajor.class) {
-      return zern.#tabulateRM
-    } else if (t instanceof zern.ColMajor.class) {
-      return zern.#tabulateCM
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #sub(a, i, j) {
     let arg$Arr2$0$, tmp;

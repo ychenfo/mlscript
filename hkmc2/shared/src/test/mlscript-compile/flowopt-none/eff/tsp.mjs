@@ -302,20 +302,6 @@ lambda = (undefined, function (tsp2, seedRef) {
   static #sqrt(x) {
     return runtime.safeCall(globalThis.Math.sqrt(x))
   }
-  static #ln(x) {
-    return runtime.safeCall(globalThis.Math.log(x))
-  }
-  static #intDiv(a, b) {
-    let tmp;
-    tmp = a / b;
-    return runtime.safeCall(globalThis.Math.floor(tmp))
-  }
-  static #intMod(a, b) {
-    let tmp, tmp1;
-    tmp = tsp.#intDiv(a, b);
-    tmp1 = b * tmp;
-    return a - tmp1
-  }
   static #chk(seed) {
     let scrut, scrut1;
     scrut = seed <= 0;
@@ -328,49 +314,16 @@ lambda = (undefined, function (tsp2, seedRef) {
     }
     return seed;
   }
-  static #random_(seed) {
-    let hi, lo, test, scrut, tmp, tmp1;
-    hi = tsp.#intDiv(seed, 44488);
-    lo = tsp.#intMod(seed, 44488);
-    tmp = 48271 * lo;
-    tmp1 = 3399 * hi;
-    test = tmp - tmp1;
-    scrut = test > 0;
-    if (scrut === true) {
-      return test
-    }
-    return test + 2147483647;
-  }
   static #mkRandom(seed) {
     let seedRef, tmp;
     tmp = tsp.#chk(seed);
     seedRef = new tsp.Ref.class(tmp);
     return lambda$(tsp, seedRef)
   }
-  static #norm(s) {
-    let scale;
-    scale = 1.0 / 2147483647.0;
-    return scale * s
-  }
-  static #mkNode(l, r, x, y, sz) {
-    let tmp, tmp1;
-    tmp = new tsp.Ref.class(tsp.NULL);
-    tmp1 = new tsp.Ref.class(tsp.NULL);
-    return tsp.ND(l, r, x, y, sz, tmp, tmp1)
-  }
   static #buildTree(n, dir, min_x, min_y, max_x, max_y) {
     let rand;
     rand = tsp.#mkRandom(314);
     return build_mkTree_mkTree(0, tsp, rand, n, dir, min_x, min_y, max_x, max_y)
-  }
-  static #setPrev(nd, x) {
-    let arg$ND$5$;
-    if (nd instanceof tsp.ND.class) {
-      arg$ND$5$ = nd.prev;
-      arg$ND$5$.value = x;
-      return runtime.Unit
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #setNext(nd, x) {
     let arg$ND$6$;

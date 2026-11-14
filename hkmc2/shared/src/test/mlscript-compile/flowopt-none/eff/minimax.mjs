@@ -656,14 +656,6 @@ go = function go(minimax2, n, f, i) {
   static #compose(f, g) {
     return lambda$(f, g)
   }
-  static #intMax(a, b) {
-    let scrut;
-    scrut = a > b;
-    if (scrut === true) {
-      return a
-    }
-    return b;
-  }
   static #fillTabulate(arr, i, n, f) {
     loopLabel: while (true) {
       let scrut, tmp, tmp1;
@@ -682,13 +674,6 @@ go = function go(minimax2, n, f, i) {
     let tmp;
     tmp = [];
     return minimax.#fillTabulate(tmp, 0, n, f)
-  }
-  static #arraySub(a, i) {
-    return a.at(i)
-  }
-  static #arrayUpdate(a, i, x) {
-    a[i] = x;
-    return runtime.Unit
   }
   static #snd(p) {
     if (runtime.Tuple.isArrayLike(p) && p.length === 2) {

@@ -581,22 +581,6 @@ getBw1 = function getBw1(tardis2, r) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
   }
-  static #fst(p) {
-    let element0$;
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      element0$ = runtime.Tuple.get(p, 0);
-      runtime.Tuple.get(p, 1);
-      return element0$
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #snd(p) {
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      return runtime.Tuple.get(p, 1)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #lframeScore(lastFrame) {
     let arg$LFrame$0$, arg$LFrame$1$, arg$LSpare$0$, arg$LStrike$0$, arg$LStrike$1$, tmp;
     if (lastFrame instanceof tardis.LStrike.class) {

@@ -2434,16 +2434,6 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
   static #floor(x) {
     return runtime.safeCall(globalThis.Math.floor(x))
   }
-  static #listApp(f) {
-    return (l) => {
-      return ratioRegions.#listApp$tailrec(f, l)
-    }
-  }
-  static #listExists(p) {
-    return (l) => {
-      return ratioRegions.#listExists$tailrec(p, l)
-    }
-  }
   static #fillArray(arr, i, n, x) {
     loopLabel: while (true) {
       let scrut, tmp;
@@ -2462,9 +2452,6 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
     tmp = [];
     return ratioRegions.#fillArray(tmp, 0, n, init)
   }
-  static #intToString(n) {
-    return ""
-  }
   static #intMin(a, b) {
     let scrut;
     scrut = a < b;
@@ -2472,18 +2459,6 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
       return a
     }
     return b;
-  }
-  static #not_(b) {
-    switch (b) {
-      case false:
-        return true;
-      case true:
-        return false;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-  }
-  static #print_(s) {
-    return runtime.Unit
   }
   static #doo(max, f) {
     let max1, f1, i, inlinedVal;
@@ -2505,12 +2480,6 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
       }
     }
     return inlinedVal
-  }
-  static #zero(x) {
-    return x == 0
-  }
-  static #cons(x, xs) {
-    return ratioRegions.Cons(x, xs)
   }
   static #make_vector(n, init) {
     let scrut;
@@ -2559,35 +2528,8 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #string_length(s) {
-    return s.length
-  }
-  static #string_ref(s, i) {
-    return s.at(i)
-  }
-  static #write_char(c) {
-    return runtime.Unit
-  }
-  static #modulo(a, b) {
-    let tmp, tmp1, tmp2;
-    tmp = a / b;
-    tmp1 = ratioRegions.#floor(tmp);
-    tmp2 = b * tmp1;
-    return a - tmp2
-  }
-  static #quotient(a, b) {
-    let tmp;
-    tmp = a / b;
-    return ratioRegions.#floor(tmp)
-  }
-  static #for_each(l, f) {
-    return ratioRegions.#listApp(f)(l)
-  }
   static #negative(x) {
     return x < 0
-  }
-  static #positive(x) {
-    return x > 0
   }
   static #min(l) {
     let arg$Cons$0$, arg$Cons$1$;
@@ -2650,9 +2592,6 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
     }
     return inlinedVal
   }
-  static #some(l, p) {
-    return ratioRegions.#listExists(p)(l)
-  }
   static #some_vector(v, p) {
     let v1, p1, i, inlinedVal;
     v1 = v;
@@ -2681,22 +2620,6 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
     }
     return inlinedVal
   }
-  static #px(p) {
-    let element0$;
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      element0$ = runtime.Tuple.get(p, 0);
-      runtime.Tuple.get(p, 1);
-      return element0$
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #py(p) {
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      return runtime.Tuple.get(p, 1)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #make_matrix(m, n, a) {
     let tmp, lambda$here;
     lambda$here = lambda$(ratioRegions, n, a);
@@ -2717,24 +2640,6 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
       arg$Matrix$0$ = mat.a;
       tmp = ratioRegions.#vector_ref(arg$Matrix$0$, 0);
       return ratioRegions.#vector_length(tmp)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #matrix_ref(mat, i, j) {
-    let arg$Matrix$0$, tmp;
-    if (mat instanceof ratioRegions.Matrix.class) {
-      arg$Matrix$0$ = mat.a;
-      tmp = ratioRegions.#vector_ref(arg$Matrix$0$, i);
-      return ratioRegions.#vector_ref(tmp, j)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #matrix_set(mat, i, j, x) {
-    let arg$Matrix$0$, tmp;
-    if (mat instanceof ratioRegions.Matrix.class) {
-      arg$Matrix$0$ = mat.a;
-      tmp = ratioRegions.#vector_ref(arg$Matrix$0$, i);
-      return ratioRegions.#vector_set(tmp, j, x)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -2834,30 +2739,6 @@ lambda = (undefined, function (ratioRegions2, n, a, i) {
       }
     }
     return inlinedVal
-  }
-  static #positive_min(x, y) {
-    let scrut;
-    scrut = ratioRegions.#negative(x);
-    if (scrut === true) {
-      return y
-    }
-    return ratioRegions.#intMin(x, y);
-  }
-  static #positive_minus(x, y) {
-    let scrut;
-    scrut = ratioRegions.#negative(x);
-    if (scrut === true) {
-      return x
-    }
-    return x - y;
-  }
-  static #positive_plus(x, y) {
-    let scrut;
-    scrut = ratioRegions.#negative(x);
-    if (scrut === true) {
-      return x
-    }
-    return x + y;
   }
   static #rao_ratio_region(c_right, c_down, w, lg_max_v) {
     let height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, ratioRegions2, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, lg_v, v_max, inlinedVal;

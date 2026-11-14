@@ -589,13 +589,6 @@ go = function go(mcray2, n, f, i) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
   }
-  static #listFoldl(f) {
-    return (init) => {
-      return (l) => {
-        return mcray.#listFoldl$tailrec(f, init, l)
-      }
-    }
-  }
   static #listTabulate(n, f) {
     return go(mcray, n, f, 0)
   }
@@ -722,13 +715,6 @@ go = function go(mcray2, n, f, i) {
     tmp2 = mcray.#rgbScale(t, c2);
     return mcray.#rgbAdd(tmp1, tmp2)
   }
-  static #rgbBlack() {
-    return globalThis.Object.freeze([
-      0.0,
-      0.0,
-      0.0
-    ])
-  }
   static #rgbWhite() {
     return globalThis.Object.freeze([
       1.0,
@@ -851,11 +837,6 @@ go = function go(mcray2, n, f, i) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #vec3Adds(v1, s, v2) {
-    let tmp;
-    tmp = mcray.#vec3Scale(s, v2);
-    return mcray.#vec3Add(v1, tmp)
-  }
   static #vec3Dot(v1, v2) {
     let element2$, element1$, element0$, element2$1, element1$1, element0$1, tmp, tmp1, tmp2, tmp3;
     if (runtime.Tuple.isArrayLike(v1) && v1.length === 3) {
@@ -941,13 +922,6 @@ go = function go(mcray2, n, f, i) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #vec3Reflect(v, n) {
-    let tmp, tmp1, tmp2;
-    tmp = mcray.#vec3Dot(v, n);
-    tmp1 = 2.0 * tmp;
-    tmp2 = - tmp1;
-    return mcray.#vec3Adds(v, tmp2, n)
-  }
   static #vec3RandomPointInSphere(rng) {
     loopLabel: while (true) {
       let pt, scrut, tmp, tmp1, tmp2, tmp3;
@@ -966,23 +940,6 @@ go = function go(mcray2, n, f, i) {
       }
       continue loopLabel;
     }
-  }
-  static #rayMake(origin, dir) {
-    let tmp;
-    tmp = mcray.#vec3Normalize(dir);
-    return globalThis.Object.freeze([
-      origin,
-      tmp
-    ])
-  }
-  static #rayEval(ray, t) {
-    let element1$, element0$;
-    if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
-      element0$ = runtime.Tuple.get(ray, 0);
-      element1$ = runtime.Tuple.get(ray, 1);
-      return mcray.#vec3Adds(element0$, t, element1$)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #getEmission(hit) {
     let arg$MatHit$3$;
@@ -1017,12 +974,6 @@ go = function go(mcray2, n, f, i) {
     lambda$here = lambda$3(mcray);
     lambda$here1 = lambda$2(mcray, rng, albedo, fuzz);
     return mcray.Material(lambda$here, lambda$here1)
-  }
-  static #hitTest(obj, ray, minMaxT) {
-    if (obj instanceof mcray.Obj.class) {
-      return runtime.safeCall(obj.hit(ray, minMaxT))
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #objectEmpty() {
     let lambda$here;

@@ -147,20 +147,6 @@ lambda = (undefined, function (smithNormalForm2, width, generator, z) {
       static [definitionMetadata] = ["object", "Nil"];
     });
   }
-  static #floor(x) {
-    return runtime.safeCall(globalThis.Math.floor(x))
-  }
-  static #intDiv(a, b) {
-    let tmp;
-    tmp = a / b;
-    return smithNormalForm.#floor(tmp)
-  }
-  static #intMod(a, b) {
-    let tmp, tmp1;
-    tmp = smithNormalForm.#intDiv(a, b);
-    tmp1 = b * tmp;
-    return a - tmp1
-  }
   static #listNth(l, n) {
     loopLabel: while (true) {
       let scrut, arg$Cons$0$, arg$Cons$1$, tmp;
@@ -202,10 +188,6 @@ lambda = (undefined, function (smithNormalForm2, width, generator, z) {
   }
   static #arraySub(a, i) {
     return a.at(i)
-  }
-  static #arrayUpdate(a, i, x) {
-    a[i] = x;
-    return runtime.Unit
   }
   static #arrayTabulate(n, f) {
     let scrut, arr, tmp;
@@ -597,9 +579,6 @@ lambda = (undefined, function (smithNormalForm2, width, generator, z) {
       ])
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #print_(s) {
-    return runtime.Unit
   }
   static #smaller(a, b) {
     let tmp, tmp1, tmp2, tmp3;

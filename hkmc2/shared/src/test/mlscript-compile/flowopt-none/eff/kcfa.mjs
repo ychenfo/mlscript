@@ -1731,9 +1731,6 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
   }
-  static #varMapStart(m) {
-    return kcfa.#varMapLeft(m, kcfa.Nil)
-  }
   static #varMapCollate(cmpRng) {
     return lambda$(kcfa, cmpRng)
   }
@@ -1824,33 +1821,6 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
     baseCall = kcfa.#varMapCollate(kcfa.#bindCompare);
     return runtime.safeCall(baseCall(benv1, benv2))
   }
-  static #benvLookup(benv, x) {
-    let scrut;
-    scrut = kcfa.#varMapFind(benv, x);
-    if (scrut instanceof kcfa.Some.class) {
-      return scrut.value
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #benvExtend1(benv, xs, adrs) {
-    let lambda$here;
-    lambda$here = lambda$1(kcfa);
-    return kcfa.#listPairFoldl(lambda$here)(benv)(xs, adrs)
-  }
-  static #lambdaOf(clos) {
-    let arg$Clos$0$;
-    if (clos instanceof kcfa.Clos.class) {
-      arg$Clos$0$ = clos.lam;
-      return kcfa.LAMBDA(arg$Clos$0$)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #benvOf(clos) {
-    if (clos instanceof kcfa.Clos.class) {
-      return clos.benv
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #closureCompare(clos1, clos2) {
     let order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
     if (clos1 instanceof kcfa.Clos.class) {
@@ -1868,11 +1838,6 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #setSingleton(x) {
-    let tmp;
-    tmp = kcfa.SetT(kcfa.SetB, kcfa.SetE, x, kcfa.SetE);
-    return kcfa.SET(1, tmp)
   }
   static #setNext(stack) {
     let arg$Cons$0$, arg$Cons$1$, arg$SetT$3$, tmp;
@@ -1995,9 +1960,6 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #setAddItem(a, l) {
-    return incr(kcfa, a, kcfa.SetE, l)
   }
   static #setLinkAll(t) {
     let kcfa2, t1, d, inlinedVal;
@@ -2361,42 +2323,10 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
   }
-  static #storeMapUnionWith(mergeFn) {
-    let union$here;
-    union$here = union$(kcfa, mergeFn);
-    return kcfa.#storeMapWrap(union$here)
-  }
   static #storeCompare(st1, st2) {
     let baseCall;
     baseCall = kcfa.#storeMapCollate(kcfa.#setCompare);
     return runtime.safeCall(baseCall(st1, st2))
-  }
-  static #storeLookup(st, adr) {
-    let scrut;
-    scrut = kcfa.#storeMapFind(st, adr);
-    if (scrut instanceof kcfa.Some.class) {
-      return scrut.value
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #storeUpdate(st, adr, dv) {
-    return kcfa.#storeMapInsertWith(kcfa.#setUnion)(st, adr, dv)
-  }
-  static #storeUpdate1(st, adrs, dvs) {
-    let lambda$here;
-    lambda$here = lambda$5(kcfa);
-    return kcfa.#listPairFoldl(lambda$here)(st)(adrs, dvs)
-  }
-  static #storeJoin(st1, st2) {
-    let baseCall;
-    baseCall = kcfa.#storeMapUnionWith(kcfa.#setUnion);
-    return runtime.safeCall(baseCall(st1, st2))
-  }
-  static #storeOf(state) {
-    if (state instanceof kcfa.State.class) {
-      return state.store
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #stateSame(state1, state2) {
     let scrut, scrut1, arg$State$0$, arg$State$1$, arg$State$2$, arg$State$3$, arg$State$0$1, arg$State$1$1, arg$State$2$1, arg$State$3$1, tmp, tmp1;
@@ -2502,25 +2432,6 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #monoBinding(b) {
-    if (b instanceof kcfa.Bnd.class) {
-      return b.x
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #monoValue(clos) {
-    let arg$Clos$0$;
-    if (clos instanceof kcfa.Clos.class) {
-      arg$Clos$0$ = clos.lam;
-      return kcfa.LAMBDA(arg$Clos$0$)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #monoValues(d) {
-    let lambda$here;
-    lambda$here = lambda$7(kcfa);
-    return kcfa.#setFoldl(lambda$here)(kcfa.Nil)(d)
-  }
   static #monoStoreUpdate(mst, x, exp) {
     let scrut, arg$Cons$0$, arg$Cons$1$, element1$, element0$, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9;
     if (mst instanceof kcfa.Nil.class) {
@@ -2569,11 +2480,6 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #monoStoreUpdate1(mst, x, exps) {
-    let lambda$here;
-    lambda$here = lambda$8(kcfa, x);
-    return kcfa.#listFoldl(lambda$here)(mst)(exps)
   }
   static #explore(seen, todo) {
     loopLabel: while (true) {

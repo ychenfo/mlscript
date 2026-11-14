@@ -2,7 +2,7 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
-let getBw1, get, go, tardis1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, score1, throws1, getBw1$, get$, lambda$, throws1$, score1$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, main_score_go_getPast$getPast, main_score_go$lambda$, main_score_go_bind$bind, main_score_go_lambda$_lambda_pure$pure, main_score_go_lambda$_lambda$lambda, main_score_go_lambda$$lambda$, main_score_go_lambda$$lambda$1, main_score_go_fix$fix, main_score_go_bind$bind1, score_go_fix$fix, score_go$lambda$, score_go$lambda, score_go$go, score_go_bind$bind, score_go_lambda$$lambda$, score_go_getPast$getPast, score_go_bind$bind1, score_go_lambda$_lambda_pure$pure, score_go_lambda$_lambda$lambda, score_go_lambda$$lambda$1, go_getPast$getPast, go$lambda$, go_bind$bind, go_lambda$_lambda_pure$pure, go_lambda$_lambda$lambda, go_lambda$$lambda$, go_lambda$$lambda$1, go_fix$fix, go_bind$bind1, lambda_getPast$getPast, lambda$lambda$, lambda_bind$bind, lambda_lambda$_lambda_pure$pure, lambda_lambda$_lambda$lambda, lambda_lambda$$lambda$, lambda_lambda$$lambda$1, lambda_fix$fix, lambda_bind$bind1, lambda$_getPast$getPast, lambda$$lambda, lambda$_bind$bind, lambda$_lambda$_lambda_pure$pure, lambda$_lambda$_lambda$lambda, lambda$_lambda$$lambda$, lambda$_lambda$$lambda$1, lambda$_fix$fix, lambda$_bind$bind1, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, main_score_go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, main_score_go_lambda$_lambda_bind$scrut_tup3, main_score_go_fix$scrut_tup3, main_score_go_bind$scrut_tup3, main_score_go$frames_Cons, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda$f_Strike, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda$f_Spare, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda$f_Frame, main_score_go$frames_Nil, score_go_bind$scrut_tup3, score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, score_go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, score_go_lambda$_lambda_bind$scrut_tup3, score_go_fix$scrut_tup3, go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, go_lambda$_lambda_bind$scrut_tup3, go_fix$scrut_tup3, go_bind$scrut_tup3, lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, lambda_lambda$_lambda_bind$scrut_tup3, lambda_fix$scrut_tup3, lambda_bind$scrut_tup3, lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, lambda$_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, lambda$_lambda$_lambda_bind$scrut_tup3, lambda$_fix$scrut_tup3, lambda$_bind$scrut_tup3, lambda$_bind$scrut_tup3$worker, lambda$_fix$scrut_tup3$worker, lambda$_lambda$_lambda_bind$scrut_tup3$worker, lambda$_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda$_bind$scrut_tup3$worker1, lambda$_bind$scrut_tup3$worker2, lambda_bind$scrut_tup3$worker, lambda_fix$scrut_tup3$worker, lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda_bind$scrut_tup3$worker1, lambda_bind$scrut_tup3$worker2, go_bind$scrut_tup3$worker, go_fix$scrut_tup3$worker, go_lambda$_lambda_bind$scrut_tup3$worker, go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, go_bind$scrut_tup3$worker1, go_bind$scrut_tup3$worker2, score_go_bind$scrut_tup3$worker, score_go_bind$scrut_tup3$worker1, score_go_fix$scrut_tup3$worker, score_go_lambda$_lambda_bind$scrut_tup3$worker, score_go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, score_go_bind$scrut_tup3$worker2, main_score_go$frames_Cons$worker, main_score_go_bind$scrut_tup3$worker, main_score_go_fix$scrut_tup3$worker, main_score_go_lambda$_lambda_bind$scrut_tup3$worker, main_score_go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, main_score_go_bind$scrut_tup3$worker1, main_score_go_bind$scrut_tup3$worker2, lambda$_bind$bind$worker, lambda$_fix$fix$worker, lambda$_lambda$_lambda$lambda$worker, lambda$_bind$bind$worker1, lambda_bind$bind$worker, lambda_fix$fix$worker, lambda_lambda$_lambda$lambda$worker, lambda_bind$bind$worker1, go_bind$bind$worker, go_fix$fix$worker, go_lambda$_lambda$lambda$worker, go_bind$bind$worker1, score_go_bind$bind$worker, score_go_lambda$_lambda$lambda$worker, score_go_bind$bind$worker1, score_go_fix$fix$worker, main_score_go_bind$bind$worker, main_score_go_fix$fix$worker, main_score_go_lambda$_lambda$lambda$worker, main_score_go_bind$bind$worker1;
+let getBw1, get, go, tardis1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, score1, throws1, getBw1$, get$, lambda$, throws1$, score1$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, main_score_go_getPast$getPast, main_score_go$lambda$, main_score_go_bind$bind, main_score_go_lambda$_lambda_pure$pure, main_score_go_lambda$_lambda$lambda, main_score_go_lambda$$lambda$, main_score_go_lambda$$lambda$1, main_score_go_fix$fix, main_score_go_bind$bind1, score_go_fix$fix, score_go$lambda$, score_go$lambda, score_go_bind$bind, score_go_lambda$$lambda$, score_go_getPast$getPast, score_go_bind$bind1, score_go_lambda$_lambda_pure$pure, score_go_lambda$_lambda$lambda, score_go_lambda$$lambda$1, go_getPast$getPast, go$lambda$, go_bind$bind, go_lambda$_lambda_pure$pure, go_lambda$_lambda$lambda, go_lambda$$lambda$, go_lambda$$lambda$1, go_fix$fix, go_bind$bind1, lambda_getPast$getPast, lambda$lambda$, lambda_bind$bind, lambda_lambda$_lambda_pure$pure, lambda_lambda$_lambda$lambda, lambda_lambda$$lambda$, lambda_lambda$$lambda$1, lambda_fix$fix, lambda_bind$bind1, lambda$_getPast$getPast, lambda$$lambda, lambda$_bind$bind, lambda$_lambda$_lambda_pure$pure, lambda$_lambda$_lambda$lambda, lambda$_lambda$$lambda$, lambda$_lambda$$lambda$1, lambda$_fix$fix, lambda$_bind$bind1, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, main_score_go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, main_score_go_lambda$_lambda_bind$scrut_tup3, main_score_go_fix$scrut_tup3, main_score_go_bind$scrut_tup3, main_score_go$frames_Cons, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda$f_Strike, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda$f_Spare, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda$f_Frame, main_score_go$frames_Nil, score_go_bind$scrut_tup3, score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, score_go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, score_go_lambda$_lambda_bind$scrut_tup3, score_go_fix$scrut_tup3, go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, go_lambda$_lambda_bind$scrut_tup3, go_fix$scrut_tup3, go_bind$scrut_tup3, lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, lambda_lambda$_lambda_bind$scrut_tup3, lambda_fix$scrut_tup3, lambda_bind$scrut_tup3, lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, lambda$_lambda$_lambda_lambda$_lambda_bind$scrut_tup3, lambda$_lambda$_lambda_bind$scrut_tup3, lambda$_fix$scrut_tup3, lambda$_bind$scrut_tup3, lambda$_bind$scrut_tup3$worker, lambda$_fix$scrut_tup3$worker, lambda$_lambda$_lambda_bind$scrut_tup3$worker, lambda$_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda$_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda$_bind$scrut_tup3$worker1, lambda$_bind$scrut_tup3$worker2, lambda_bind$scrut_tup3$worker, lambda_fix$scrut_tup3$worker, lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, lambda_bind$scrut_tup3$worker1, lambda_bind$scrut_tup3$worker2, go_bind$scrut_tup3$worker, go_fix$scrut_tup3$worker, go_lambda$_lambda_bind$scrut_tup3$worker, go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, go_bind$scrut_tup3$worker1, go_bind$scrut_tup3$worker2, score_go_bind$scrut_tup3$worker, score_go_bind$scrut_tup3$worker1, score_go_fix$scrut_tup3$worker, score_go_lambda$_lambda_bind$scrut_tup3$worker, score_go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, score_go_bind$scrut_tup3$worker2, main_score_go$frames_Cons$worker, main_score_go_bind$scrut_tup3$worker, main_score_go_fix$scrut_tup3$worker, main_score_go_lambda$_lambda_bind$scrut_tup3$worker, main_score_go_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, main_score_go_lambda$_lambda_lambda$_lambda_lambda$_lambda_lambda$_lambda_bind$scrut_tup3$worker, main_score_go_bind$scrut_tup3$worker1, main_score_go_bind$scrut_tup3$worker2, lambda$_bind$bind$worker, lambda$_fix$fix$worker, lambda$_lambda$_lambda$lambda$worker, lambda$_bind$bind$worker1, lambda_bind$bind$worker, lambda_fix$fix$worker, lambda_lambda$_lambda$lambda$worker, lambda_bind$bind$worker1, go_bind$bind$worker, go_fix$fix$worker, go_lambda$_lambda$lambda$worker, go_bind$bind$worker1, score_go_bind$bind$worker, score_go_lambda$_lambda$lambda$worker, score_go_bind$bind$worker1, score_go_fix$fix$worker, main_score_go_bind$bind$worker, main_score_go_fix$fix$worker, main_score_go_lambda$_lambda$lambda$worker, main_score_go_bind$bind$worker1;
 main_score_go_getPast$getPast = function main_score_go_getPast$getPast(bw, fw) {
   return (eta$0$6, eta$0$7, eta$0$8, eta$0$9, eta$0$10, eta$0$11, eta$0$12, eta$0$13, eta$0$14, eta$0$15, eta$0$16, eta$0$17) => {
     return main_score_go_bind$scrut_tup3$worker2(fw, bw, fw, eta$0$6, eta$0$7, eta$0$8, eta$0$9, eta$0$10, eta$0$11, eta$0$12, eta$0$13, eta$0$14, eta$0$15, eta$0$16, eta$0$17)
@@ -135,23 +135,21 @@ score_go_fix$fix$worker = function score_go_fix$fix$worker(f, bw, fw) {
   scrut = runtime.safeCall(callPrefix(bw, fw));
   return scrut(undefined, undefined, undefined, undefined, undefined, undefined, undefined, r)
 };
-score_go$go = function score_go$go(tardis2, finalFrameScore, frames) {
-  let arg$Cons$0$, arg$Cons$1$, tmp, lambda$here, lambda$here1, lambda$here2;
-  if (frames instanceof tardis2.Nil.class) {
+score_go$lambda = function score_go$lambda(tardis2, finalFrameScore, fs) {
+  let tardis3, arg$Cons$0$, arg$Cons$1$, tmp, lambda$here, lambda$here1, lambda$here2;
+  tardis3 = tardis2;
+  if (fs instanceof tardis3.Nil.class) {
     lambda$here = score_go_lambda$$lambda$1(tardis2, finalFrameScore);
     return score_go_bind$bind1(score_go_getPast$getPast)(lambda$here)
-  } else if (frames instanceof tardis2.Cons.class) {
-    arg$Cons$0$ = frames.head;
-    arg$Cons$1$ = frames.tail;
+  } else if (fs instanceof tardis3.Cons.class) {
+    arg$Cons$0$ = fs.head;
+    arg$Cons$1$ = fs.tail;
     lambda$here1 = score_go_lambda$$lambda$(tardis2, arg$Cons$0$);
     tmp = score_go_fix$fix(lambda$here1);
     lambda$here2 = score_go$lambda$(tardis2, finalFrameScore, arg$Cons$1$);
     return score_go_bind$bind(tmp)(lambda$here2)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-score_go$lambda = function score_go$lambda(tardis2, finalFrameScore, fs) {
-  return score_go$go(tardis2, finalFrameScore, fs)
 };
 score_go$lambda$ = function score_go$lambda$(tardis2, finalFrameScore, fs) {
   return (_) => {
@@ -1856,104 +1854,6 @@ getBw1 = function getBw1(tardis2, r) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #map(f) {
-    return (l) => {
-      return tardis.#map$tailrec(f, l)
-    }
-  }
-  static #run(m, bw, fw) {
-    return runtime.safeCall(m(bw, fw))
-  }
-  static #pure(a) {
-    return (bw, fw) => {
-      return runtime.Unit
-    }
-  }
-  static #getPast(bw, fw) {
-    return runtime.Unit
-  }
-  static #getFuture(bw, fw) {
-    return runtime.Unit
-  }
-  static #sendPast(bw) {
-    return (bw0, fw) => {
-      return runtime.Unit
-    }
-  }
-  static #sendFuture(fw) {
-    return (bw, fw0) => {
-      return runtime.Unit
-    }
-  }
-  static #bind(m) {
-    return (f) => {
-      return (bw, fw) => {
-        let r, scrut, scrut1, element2$, element0$, element1$, callPrefix, tmp;
-        r = new tardis.Ref.class(tardis.None);
-        scrut = runtime.safeCall(m(undefined, fw));
-        if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-          element0$ = runtime.Tuple.get(scrut, 0);
-          runtime.Tuple.get(scrut, 1);
-          element2$ = runtime.Tuple.get(scrut, 2);
-          callPrefix = runtime.safeCall(f(element0$));
-          scrut1 = runtime.safeCall(callPrefix(bw, element2$));
-          if (runtime.Tuple.isArrayLike(scrut1) && scrut1.length === 3) {
-            runtime.Tuple.get(scrut1, 0);
-            element1$ = runtime.Tuple.get(scrut1, 1);
-            runtime.Tuple.get(scrut1, 2);
-            tmp = tardis.Some(element1$);
-            r.value = tmp;
-            return runtime.Unit
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-    }
-  }
-  static #fix(f) {
-    return (bw, fw) => {
-      let r, scrut, element0$, callPrefix, tmp;
-      r = new tardis.Ref.class(tardis.None);
-      callPrefix = runtime.safeCall(f(undefined));
-      scrut = runtime.safeCall(callPrefix(bw, fw));
-      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-        element0$ = runtime.Tuple.get(scrut, 0);
-        runtime.Tuple.get(scrut, 1);
-        runtime.Tuple.get(scrut, 2);
-        tmp = tardis.Some(element0$);
-        r.value = tmp;
-        return runtime.Unit
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-  }
-  static #fst(p) {
-    let element0$;
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      element0$ = runtime.Tuple.get(p, 0);
-      runtime.Tuple.get(p, 1);
-      return element0$
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #snd(p) {
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      return runtime.Tuple.get(p, 1)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  static #lframeScore(lastFrame) {
-    let arg$LStrike$0$, arg$LStrike$1$, tmp;
-    if (lastFrame instanceof tardis.LStrike.class) {
-      arg$LStrike$0$ = lastFrame.bonus1;
-      arg$LStrike$1$ = lastFrame.bonus2;
-      tmp = 10 + arg$LStrike$0$;
-      return tmp + arg$LStrike$1$
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
   static #initialBw(lastFrame) {
     return () => {
       let arg$LStrike$0$;
@@ -1966,26 +1866,6 @@ getBw1 = function getBw1(tardis2, r) {
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
-  }
-  static #score(game) {
-    let finalFrameScore, initialFw, scrut, arg$Game$0$, arg$Game$1$, element0$, tmp, tmp1;
-    if (game instanceof tardis.Game.class) {
-      arg$Game$0$ = game.frames;
-      arg$Game$1$ = game.lastFrame;
-      finalFrameScore = tardis.#lframeScore(arg$Game$1$);
-      initialFw = tardis.Cons(lambda7, tardis.Nil);
-      tmp = score_go$go(tardis, finalFrameScore, arg$Game$0$);
-      tmp1 = tardis.#initialBw(arg$Game$1$);
-      scrut = tardis.#run(tmp, tmp1, initialFw);
-      if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 3) {
-        element0$ = runtime.Tuple.get(scrut, 0);
-        runtime.Tuple.get(scrut, 1);
-        runtime.Tuple.get(scrut, 2);
-        return tardis.#map(lambda8)(element0$)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static main() {
     let tmp, Cons_head, Cons_tail, Cons_head1, Cons_tail1, Cons_head2, Cons_tail2, Cons_head3, Cons_tail3, Cons_head4, Cons_tail4, Cons_head5, Cons_tail5, Cons_head6, Cons_tail6, Cons_head7, Cons_tail7, fv_initialFw, fv_element0$, Cons_tail8, f, bw, inlinedVal, r, inlinedVal1, r1, p, r2, inlinedVal2, arg$LStrike$0$, arg$LStrike$1$, tmp1;
@@ -2123,7 +2003,6 @@ export { main_score_go_bind$bind1 as _$_modulePrivate_$_main_score_go_bind$bind1
 export { score_go_fix$fix as _$_modulePrivate_$_score_go_fix$fix };
 export { score_go$lambda$ as _$_modulePrivate_$_score_go$lambda$ };
 export { score_go$lambda as _$_modulePrivate_$_score_go$lambda };
-export { score_go$go as _$_modulePrivate_$_score_go$go };
 export { score_go_bind$bind as _$_modulePrivate_$_score_go_bind$bind };
 export { score_go_lambda$$lambda$ as _$_modulePrivate_$_score_go_lambda$$lambda$ };
 export { score_go_getPast$getPast as _$_modulePrivate_$_score_go_getPast$getPast };

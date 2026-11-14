@@ -207,7 +207,7 @@ private fun rotate(unify, exists_, trail)(t_1, t_2)(sc) =
                                   unify(t_2, STR(cons_s, STR(cons_s, p51 :: STR(cons_s, p41 :: STR(cons_s, p31 :: STR(cons_s, p21 :: STR(cons_s, p11 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p42 :: STR(cons_s, p32 :: STR(cons_s, p22 :: STR(cons_s, p12 :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p33 :: STR(cons_s, p23 :: STR(cons_s, p13 :: con_nil_s :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p24 :: STR(cons_s, p14 :: con_nil_s :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, p15 :: con_nil_s :: Nil) :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil))(() =>
                                     sc())))))))))))))))))
 
-private fun move(unify, exists_, trail)(t_1, t_2)(sc) =
+private fun move(unify, exists_, trail, move_horiz, rotate)(t_1, t_2)(sc) =
   trail(() =>
     trail(() =>
       exists_(x =>
@@ -234,7 +234,7 @@ private fun move(unify, exists_, trail)(t_1, t_2)(sc) =
                 move_horiz(unify, exists_, trail)(x1, y1)(() =>
                   rotate(unify, exists_, trail)(y1, y)(sc)))))))))
 
-private fun solitaire(unify, exists_, trail)(t_1, t_2, t_3)(sc) =
+private fun solitaire(unify, exists_, trail, move_horiz, rotate)(t_1, t_2, t_3)(sc) =
   trail(() =>
     exists_(x =>
       unify(t_1, x)(() =>
@@ -248,13 +248,13 @@ private fun solitaire(unify, exists_, trail)(t_1, t_2, t_3)(sc) =
           unify(t_1, x)(() =>
             unify(t_2, STR(cons_s, x :: z :: Nil))(() =>
               unify(t_3, STR(s_s, n :: Nil))(() =>
-                move(unify, exists_, trail)(x, y)(() =>
-                  solitaire(unify, exists_, trail)(y, z, n)(sc)))))))))
+                move(unify, exists_, trail, move_horiz, rotate)(x, y)(() =>
+                  solitaire(unify, exists_, trail, move_horiz, rotate)(y, z, n)(sc)))))))))
 
-private fun solution2(unify, exists_, trail)(t_1)(sc) =
+private fun solution2(unify, exists_, trail, move_horiz, rotate)(t_1)(sc) =
   exists_(x =>
     unify(t_1, x)(() =>
-      solitaire(unify, exists_, trail)(STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: con_nil_s :: Nil) :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil), x, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, INT(0) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil))(sc)))
+      solitaire(unify, exists_, trail, move_horiz, rotate)(STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: con_nil_s :: Nil) :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil), x, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, INT(0) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil))(sc)))
 
 
 
@@ -262,5 +262,5 @@ fun main() =
   set found.Ref#value = false
   reset_trail()
   set trail_counter.Ref#value = 0
-  exists_(z => solution2(unify, exists_, trail)(z)(() => set found.Ref#value = true))
+  exists_(z => solution2(unify, exists_, trail, move_horiz, rotate)(z)(() => set found.Ref#value = true))
   found.Ref#value
