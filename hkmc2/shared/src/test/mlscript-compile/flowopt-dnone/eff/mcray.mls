@@ -4,26 +4,6 @@ import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
 
 open annotations { pure }
 
-// monte carlo ray tracer ("ray tracing in one weekend" by peter shirley)
-// source: john reppy's sml port of a uchicago cmsc 15100 project, as kept (and adapted for 3cps:
-// int random generator, no i/o) in the webs artifact (zenodo 15050194), 3cps/test/programs/examples/mc-ray.sml
-// port changes:
-// - structures are flattened into top-level functions; clashing names get their structure as prefix
-//   (rgbAdd/vec3Add, …), Material.Hit is `MatHit` and Object.Hit is `ObjHit`
-// - module-level values (Real.posInf, Math.pi, Vec3.zero, RGB.black, …, Object.empty) become
-//   zero-parameter functions
-// - sqrt/tan/floor wrap js Math as `@pure` functions; `real` is the identity
-// - the module-level generator state `Rand.state` is a cell `rng` allocated in `main` and passed to the
-//   functions that draw random numbers (rand, gen32, randomPointInSphere, lambertian, metal,
-//   raysForPixel, aaPixelToRGB, rayTracer, randomSphere, makeScene, buildScene, test); the scatter closures
-//   of lambertian/metal capture it
-// - definitions the test never reaches are dropped: Rand.init/randInt, Math.pow/atan2/sin/cos,
-//   RGB.adds/red/green/blue, Color.fromRGB, Vec3.e1/e2/e3/negate/mul/lerp/distance(Sq)/rotateX/Y/Z/map/app,
-//   Material.flat/normal/diffuseLight, Object.fmin/fmax/translate/rotateX/Y/Z, Camera.simpleCamera/
-//   rayForPixel/pixelToRGB, Trace.castRay, and the unused `obj1`/`objr` (List.hd/tl) in fromList
-// - the single-constructor match on `Cam` and the two-`Hit` case of `closer` are left as partial matches
-// - `main` returns `test (3, 2, 5)`; sml/nj gives the 3x2 pixels
-//   (217,233,255) (216,232,255) (218,233,255) (202,212,236) (138,143,162) (200,212,237)
 
 module mcray with ...
 
@@ -62,9 +42,6 @@ private fun real(x) = x
 private fun intMod(a, b) = a - b * floor(a / b)
 
 
-// park-miller rng (minstd) for 64-bit architectures, from
-// https://en.wikipedia.org/wiki/Lehmer_random_number_generator
-// (3cps has no words, hex literals or bit operations, so it uses integers)
 
 
 private fun gen32(rng) =
@@ -90,7 +67,6 @@ private fun rgbScale(s, c) = if c is [r, g, b] then [s * r, s * g, s * b]
 
 private fun rgbLerp(c1, t, c2) = rgbAdd(rgbScale(1.0 - t, c1), rgbScale(t, c2))
 
-// standard colors
 private fun rgbBlack() = [0.0, 0.0, 0.0]
 private fun rgbWhite() = [1.0, 1.0, 1.0]
 private fun rgbGray(v) = [v, v, v]
@@ -109,7 +85,6 @@ private fun colorFromRGBWithGamma(c) = if c is [r, g, b] then
   [cvt(r), cvt(g), cvt(b)]
 
 
-// operations on vectors in r^3 (scalar version)
 
 private fun epsilon() = 0.0001
 
@@ -154,7 +129,6 @@ private fun rayMake(origin, dir) = [origin, vec3Normalize(dir)]
 private fun rayEval(ray, t) = if ray is [origin, dir] then vec3Adds(origin, t, dir)
 
 
-// MatHit(t, pt, norm, material); Material(emit, scatter)
 data class MatHit(t, pt, norm, material)
 data class Material(emit, scatter)
 
@@ -219,13 +193,9 @@ private fun sphereMake(center, radius, material) =
   Obj(hitTest1)
 
 
-// Img(wid, ht, pixels)
 data class Img(wid, ht, pixels)
 
 
-// Cam(width of image, height of image, number of samples per pixel, position of camera,
-//     upper-left-corner of image plane, horizontal pixel-wide vector parallel to image pointing right,
-//     vertical pixel-wide vector parallel to image pointing down)
 data class Cam(wid, ht, ns, pos, ulc, hvec, vvec)
 
 private fun cameraMake(wid, ht, ns, pos, lookAt, up, fov) =
@@ -268,8 +238,6 @@ private fun aaPixelToRGB(rng, cam, trace) = if cam is Cam(_, _, ns, _, _, _, _) 
   (r, c) => rgbScale(scale, listFoldl((ray, c1) => rgbAdd(c1, trace(ray)))(rgbBlack())(rfp(r, c)))
 
 
-// given a world object and a maximum tracing depth, returns a function that
-// recursively traces a ray through the world to compute a color
 private fun traceRay(world, maxDepth) =
   let minMaxT = [0.001, posInf()]
   fun trace(ray, depth) =

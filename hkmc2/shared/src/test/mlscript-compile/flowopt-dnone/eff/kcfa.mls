@@ -2,22 +2,6 @@
 
 import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
 
-// k-cfa (k = 1) abstract interpreter for cps lambda calculus
-// source: john reppy's port of matthew might's racket k-cfa, as kept in the
-// webs artifact (zenodo 15050194), 3cps/test/programs/examples/k-cfa.sml
-// port changes:
-// - structures are flattened into top-level functions; the three hand-written red-black trees stay
-//   separate, with prefixed names: Var.Map → varMap*/Vm*, D.Set → set*/Set*, Store.Map → storeMap*/Sm*
-// - aliases (`val compare = Int.compare`, `val join = Set.union`, …) are resolved to their targets;
-//   point-free partial applications (Time.compare/same, BEnv.compare, Store.compare/update/join)
-//   become functions with explicit parameters; `empty` values become calls of the trees' `empty`
-// - the Basis functions used (List.map/exists/foldl/collate/append) are defined here, curried as in the Basis
-// - LAMBDA keeps its `label * var list * call` argument as one tuple field, since the code passes
-//   that tuple around (`Clos(lam, benv)`, `LAMBDA lam`)
-// - the impossible `raise Fail` lookups and partial matches are left out (implicit match error)
-// - the module-level `local` block building `stdExample` with a module-level `labelCount` ref becomes
-//   the function `stdExample()`, so the counter is a cell local to it (labels 2–15 as in the original)
-// - `Params.k` (unused) is dropped; `main` returns the monovariant store as [variable, lambda labels]
 
 module kcfa with ...
 
@@ -36,7 +20,6 @@ object EQUAL
 object GREATER
 
 
-// sml basis
 
 private fun intCompare(s1, s2) = if
   s1 < s2 then LESS
@@ -83,11 +66,9 @@ private fun listPairAllEq(pred)(l1, l2) = if
   else false
 
 
-// syntax
 
 private fun labelSame(l1, l2) = l1 == l2
 
-// an abbreviated version of the RedBlackMapFn functor from the SML/NJ Library
 object VmR
 object VmB
 
@@ -188,16 +169,12 @@ private fun sameCall(c1, c2) = if
   else false
 
 
-// time = lab^k: in k-cfa, time is a bounded memory of program history,
-// the last k call sites through which the program has traversed
 
 private fun timeCompare(t1, t2) = listCollate(intCompare)(t1, t2)
 
 private fun timeSame(t1, t2) = listPairAllEq(labelSame)(t1, t2)
 
 
-// a binding is minted each time a variable gets bound to a value;
-// in pure cps, the only kind of addresses are bindings
 data class Bnd(x, t)
 
 private fun bindCompare(b1, b2) = if b1 is Bnd(x, t1) and b2 is Bnd(y, t2) then
@@ -213,8 +190,6 @@ private fun benvExtend1(benv, xs, adrs) =
   listPairFoldl((x, adr, benv) => varMapInsert(benv, x, adr))(benv)(xs, adrs)
 
 
-// closures pair a lambda term with a binding environment that determines the value of its free variables;
-// for pure cps, closures are the only kind of value
 data class Clos(lam, benv)
 
 private fun lambdaOf(clos) = if clos is Clos(lam, _) then LAMBDA(lam)
@@ -226,8 +201,6 @@ private fun closureCompare(clos1, clos2) = if clos1 is Clos(lam1, benv1) and clo
   if order is EQUAL then benvCompare(benv1, benv2) else order
 
 
-// an abstract denotable value is a set of possible values
-// an abbreviated version of the RedBlackSetFn functor from the SML/NJ Library
 object SetR
 object SetB
 
@@ -238,7 +211,6 @@ data class SET(n, tree)
 
 private fun setSingleton(x) = SET(1, SetT(SetB, SetE, x, SetE))
 
-// functions for walking the tree while keeping a stack of parents to be visited
 private fun setNext(stack) = if stack is
   t :: rest and t is SetT(_, _, _, b) then [t, setLeft(b, rest)]
   else [SetE, Nil]
@@ -249,7 +221,6 @@ private fun setLeft(t, rest) = if t is
 
 private fun setStart(m) = setLeft(m, Nil)
 
-// return the lexical order of two sets
 private fun setCompare(set1, set2) = if set1 is SET(_, s1) and set2 is SET(_, s2) then
   fun cmp(t1, t2) =
     let p1 = setNext(t1)
@@ -263,14 +234,10 @@ private fun setCompare(set1, set2) = if set1 is SET(_, s1) and set2 is SET(_, s2
         if order is EQUAL then cmp(r1, r2) else order
   cmp(setStart(s1), setStart(s2))
 
-// support for constructing red-black trees in linear time from increasing ordered sequences
-// (based on a description by r. hinze); the elements in the digits are ordered with the largest
-// on the left, whereas the elements of the trees are ordered with the largest on the right
 object SetZERO
 data class SetONE(item, tree, digit)
 data class SetTWO(item1, tree1, item2, tree2, digit)
 
-// add an item that is guaranteed to be larger than any in l
 private fun setAddItem(a, l) =
   fun incr(a1, t1, d) = if d is
     SetZERO then SetONE(a1, t1, SetZERO)
@@ -278,7 +245,6 @@ private fun setAddItem(a, l) =
     SetTWO(a2, t2, a3, t3, r) then SetONE(a1, t1, incr(a2, SetT(SetB, t3, a3, t2), r))
   incr(a, SetE, l)
 
-// link the digits into a tree
 private fun setLinkAll(t) =
   fun link(t1, d) = if d is
     SetZERO then t1
@@ -286,7 +252,6 @@ private fun setLinkAll(t) =
     SetTWO(a1, t2, a2, t3, r) then link(SetT(SetB, SetT(SetR, t3, a2, t2), a1, t1), r)
   link(SetE, t)
 
-// return the union of the two sets
 private fun setUnion(set1, set2) = if set1 is SET(_, s1) and set2 is SET(_, s2) then
   fun ins(p, n, result) = if p is
     [SetE, _] then [n, result]
@@ -311,8 +276,6 @@ private fun setFoldl(f)(init)(s) = if s is SET(_, m) then
   foldf(m, init)
 
 
-// a store (or a heap/memory) maps addresses to denotable values
-// an abbreviated version of the RedBlackMapFn functor from the SML/NJ Library
 object SmR
 object SmB
 
@@ -398,14 +361,10 @@ private fun storeMapCollate(cmpRng) =
         else order
   (map1, map2) => if map1 is SmMAP(_, m1) and map2 is SmMAP(_, m2) then cmp(storeMapStart(m1), storeMapStart(m2))
 
-// support for constructing red-black trees in linear time from increasing ordered sequences
-// (based on a description by r. hinze); the elements in the digits are ordered with the largest
-// on the left, whereas the elements of the trees are ordered with the largest on the right
 object SmZERO
 data class SmONE(key, value, tree, digit)
 data class SmTWO(key1, value1, tree1, key2, value2, tree2, digit)
 
-// add an item that is guaranteed to be larger than any in l
 private fun storeMapAddItem(ak, a, l) =
   fun incr(ak1, a1, t1, d) = if d is
     SmZERO then SmONE(ak1, a1, t1, SmZERO)
@@ -413,7 +372,6 @@ private fun storeMapAddItem(ak, a, l) =
     SmTWO(ak2, a2, t2, ak3, a3, t3, r) then SmONE(ak1, a1, t1, incr(ak2, a2, SmT(SmB, t3, ak3, a3, t2), r))
   incr(ak, a, SmE, l)
 
-// link the digits into a tree
 private fun storeMapLinkAll(t) =
   fun link(t1, d) = if d is
     SmZERO then t1
@@ -428,8 +386,6 @@ private fun storeMapIns(p, n, result) = if p is
   [SmE, _] then [n, result]
   [SmT(_, _, xk, x, _), r] then storeMapIns(storeMapNext(r), n + 1, storeMapAddItem(xk, x, result))
 
-// return a map whose domain is the union of the domains of the two input maps,
-// using the supplied function to define the map on elements that are in both domains
 private fun storeMapUnionWith(mergeFn) =
   fun union(t1, t2, n, result) =
     let p1 = storeMapNext(t1)
@@ -456,7 +412,6 @@ private fun storeUpdate1(st, adrs, dvs) =
 private fun storeJoin(st1, st2) = storeMapUnionWith(setUnion)(st1, st2)
 
 
-// abstract state space
 data class State(call, benv, store, time)
 
 private fun storeOf(state) = if state is State(_, _, st, _) then st
@@ -468,15 +423,12 @@ private fun stateSame(state1, state2) =
 private fun initState(call) = State(call, varMapEmpty(), storeMapEmpty(), Nil)
 
 
-// k-cfa parameters: change these to alter the behavior of the analysis
 
-// == List.take (lab :: t, k)
 private fun tick(call, t) = if call is CALL(lab, _, _) then lab :: Nil
 
 private fun alloc(t)(x) = Bnd(x, t)
 
 
-// k-cfa abstract interpreter
 
 private fun atomEval(benv, store) =
   fun eval(e) = if e is
@@ -498,11 +450,9 @@ private fun absNext(state) = if
   else Nil
 
 
-// state-space exploration
 
 private fun member(sts, st) = listExists(st1 => stateSame(st, st1))(sts)
 
-// insert into sorted list of expressions
 private fun insertExp(exp, exps) = if exps is
   Nil then exp :: Nil
   e :: exps1 then if compareExp(exp, e) is
@@ -510,7 +460,6 @@ private fun insertExp(exp, exps) = if exps is
     GREATER then exp :: e :: exps1
     EQUAL then e :: exps1
 
-// monomorphic store utilities
 private fun monoBinding(b) = if b is Bnd(x, _) then x
 
 private fun monoValue(clos) = if clos is Clos(lam, _) then LAMBDA(lam)
@@ -540,11 +489,6 @@ private fun monovariantStore(st) =
   storeMapFoldli((b, d, mst) => if b is Bnd(x, _) then monoStoreUpdate1(mst, x, monoValues(d)))(Nil)(st)
 
 
-// the standard example, in direct style:
-// (let* ((id (lambda (x) x))
-//        (a  (id (lambda (z) (halt z))))
-//        (b  (id (lambda (y) (halt y)))))
-//   (halt b))
 private fun stdExample() =
   let labelCount = new mut Ref(1)
   fun newLabel() =
@@ -572,8 +516,6 @@ private fun doit() =
   let monoSummary = monovariantStore(summary)
   monoSummary
 
-// the monovariant store as [variable, labels of its lambdas];
-// expected: x: 11, 8; k: 15, 13; id: 5; b: 11; a: 8
 fun main() =
   let lambdaLabel = e => if e is LAMBDA(lam) and lam is [label, _, _] then label
   listMap(p => if p is [x, exps] then [x, listMap(lambdaLabel)(exps)])(doit())

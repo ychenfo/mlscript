@@ -4,24 +4,6 @@ import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
 
 open annotations { pure }
 
-// smith normal form of an integer matrix by repeated row and column operations
-// source: henry cejtin's mlton benchmark, as adapted for 3cps (ints instead of IntInf, a 3x3 input,
-// `div` instead of `quot`) in the webs artifact (zenodo 15050194),
-// 3cps/test/programs/examples/smith-normal-form.sml
-// port changes:
-// - structures Array/Int/IntInf/Matrix are flattened into top-level functions (Matrix.* → matrix*);
-//   the 3cps primitive array_alloc fills a `mut` tuple, array_length/sub/update are `.length`/`.[i]`/`set .[i]`
-// - a matrix stays a tuple [height, width, flat row-major array]; `Matrix.width` still returns the height,
-//   as in the original (no effect on the square test matrix)
-// - `div`/`mod` round towards -inf as in sml: `@pure` wrappers over js Math.floor
-// - the `raise sizeError`/`raise index`/`raise Size` cases are left out (implicit match error); the guard of
-//   Matrix.make is negated to `height >= 0 && width >= 0` so that the raise can be left out
-// - printing is silenced: the progress lines `dd` prints on every iteration go to a no-op `print_`
-// - unused definitions are dropped (Array.array, Matrix.store, Matrix.map, Matrix.naturalFold, the
-//   exception declarations)
-// - the module-level `table` becomes a zero-parameter function
-// - `main` returns entry (2, 2) of the result, which Main.snf compared with 12; under sml semantics it is -12
-//   (sml/nj gives diag(2, 6, -12); with `quot` instead of `div` diag(2, -6, -12)), so the driver checks -12
 
 module smithNormalForm with ...
 
@@ -43,11 +25,9 @@ private fun fillArray(arr, i, n, x) = if i == n then arr else
   set arr.[i] = x
   fillArray(arr, i + 1, n, x)
 
-// the 3cps primitive
 private fun array_alloc(n, init) = fillArray(mut [], 0, n, init)
 
 
-// basis library stuff
 
 private fun arrayLength(a) = a.length
 
@@ -166,7 +146,6 @@ private fun smithNormalForm(mat0) =
       if row < height then
         if matCol(row) == 0 then rowLoop(row + 1)
         else
-          // should "div" be "quot"?
           let x = -(intDiv(matCol(row), matCol(pos)))
           matrixRowOp(mat, pos, row, (lhs, rhs) => lhs * x + rhs)
           if matCol(row) == 0 then rowLoop(row + 1)

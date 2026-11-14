@@ -4,28 +4,6 @@ import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
 
 open annotations { pure }
 
-// "simple": a 2-d hydrodynamics and heat-conduction simulation on a grid
-// source: the sml/nj benchmark suite, as the mlton suite's single-file copy in the webs artifact
-// (zenodo 15050194), 3cps/test/programs/from-mlton/simple.sml (grid_max = 100, step_count = 1)
-// port changes:
-// - functor Simple is applied once, so its body is flattened into top-level code with grid_max = 100 and
-//   step_count = 1; its module-level values (grid bounds, coefficient tables, nbc, …) stay module-level `val`s,
-//   built in order as when the functor is applied (module-level state is fine for this program, as for logic);
-//   Control.trace stays a module-level cell, false, guarding the silenced prints
-// - Array2 (record {size, value}) is the data class A2; Basis arrays are `mut` tuples filled by a recursive
-//   helper; Math.sqrt/cos/sin, abs and Real.trunc are `@pure` wrappers over js Math; `real` is the identity
-// - `for {from, step, to} body` is `for_(from, step, to)(body)`; `from` is `from_`
-// - a function whose tuple argument is passed as a value (nodes and zones, e.g. `north`, `zone_A`, the
-//   `fn zone => …` callbacks, `work_done`, `heat_flow`, the interior_function callbacks) keeps ONE tuple
-//   parameter; directly called functions with literal tuple arguments take several parameters
-// - point-free values (`val northeast = north o east`, `val zone_corner_northeast = north`,
-//   `val reflect_north = fn x => reflect north x`) become functions with an explicit parameter
-// - nested `let … in … end` blocks in `val` bindings are flattened into the enclosing block (names kept
-//   distinct, order kept); `val (a, b) = e` is `if e is [a, b] then …`; primed names x' are x_p, upper-case
-//   names are lower-cased (A, M, U, W, Gamma, …)
-// - the three diagnostic `handle`s (handle Sqrt / Overflow, which print and re-raise on error paths) are
-//   dropped, and with them ohandle; the impossible MaxList/MinList/SumList and Array2.Subscript raises are
-//   left out; Real.toString in the trace print is a dummy (printing is silenced anyway)
 
 module simple with ...
 
@@ -85,10 +63,8 @@ private val grid_max = 100
 
 private val step_count = 1
 
-// structure Control
 private val trace = new mut Ref(false)
 
-// structure Array2: A2(size, value)
 data class A2(size, value)
 
 private fun a2Index(i, s) = if i is [i1, i2] and s is [s1, s2] and i1 >= 0 && i1 < s1 && i2 >= 0 && i2 < s2 then
@@ -101,9 +77,6 @@ private fun a2Sub(a, indx) = if a is A2(size, value) then arraySub(value, a2Inde
 private fun a2Update(a, i, v) = if a is A2(size, value) then arrayUpdate(value, a2Index(i, size), v)
 
 
-// the original's inner `f2(e, a :: r) = f(e, f2(a, r))` is not a tail call; on the ~9,600-element lists of
-// map_interior_zones it overflows the js stack, so this applies f in the same order (last element first)
-// with a tail-recursive loop over the reversed list
 private fun fold(f)(l) = if l is
   Nil then b => b
   a :: r then b =>
@@ -161,7 +134,6 @@ private fun update1(arr, i, v) = if arr is [a, [l, _]] then arrayUpdate(a, i - l
 private fun bounds1(arr) = if arr is [_, b] then b
 
 
-// specification of the state variable computation
 
 private val grid_size = [[2, grid_max], [2, grid_max]]
 
@@ -248,7 +220,6 @@ private val north_of_south_east = [kmax, lmax + 1]
 private val north_of_south_west = [kmax, lmin - 1]
 
 
-// initialization of parameters
 
 private val constant_heat_source = 0.0
 private val deltat_maximum = 0.01
@@ -304,7 +275,6 @@ private val all_zero_nodes = array2(dimension_all_nodes, 0.0)
 private val all_zero_zones = array2(dimension_all_zones, 0.0)
 
 
-// positional coordinates (page 9-10)
 
 private fun make_position_matrix(sub2, update2, pow, north, south, east, west)(interior_function) =
   let r_p = array2(dimension_all_nodes, 0.0)
@@ -345,7 +315,6 @@ private fun make_position_matrix(sub2, update2, pow, north, south, east, west)(i
   [r_p, z_p]
 
 
-// physical properties of a zone (page 10)
 
 private fun zone_area_vol(sub2, update2, pow, north, south, east, west)(rz, zone) = if rz is [r, z] then
   let r1 = sub2(r, zone_corner_southwest(sub2, update2, pow, north, south, east, west)(zone))
@@ -365,7 +334,6 @@ private fun zone_area_vol(sub2, update2, pow, north, south, east, west)(rz, zone
   [area1 + area2, volume1 + volume2]
 
 
-// velocity (page 8)
 
 private fun make_velocity(sub2, update2, pow, north, south, east, west)(uw, rz, p, q, alpha, rho, delta_t) = if uw is [u, w] and rz is [r, z] then
   fun line_integral(p, z, node) =
@@ -421,7 +389,6 @@ private fun make_area_density_volume(sub2, update2, pow, north, south, east, wes
   [alpha_p, rho_p, s_p]
 
 
-// artifical viscosity (page 11)
 
 private fun make_viscosity(sub2, update2, pow, north, south, east, west)(p, uw_p, rz_p, alpha_p, rho_p) = if uw_p is [u_p, w_p] and rz_p is [r_p, z_p] then
   fun interior_viscosity(zone) =
@@ -459,7 +426,6 @@ private fun make_viscosity(sub2, update2, pow, north, south, east, west)(p, uw_p
   [q_p, d]
 
 
-// pressure and energy polynomial (page 12)
 
 private fun polynomial(sub2, update2, pow, north, south, east, west)(g, degree, rho_table, theta_table, rho_value, theta_value) =
   fun table_search(table, value) = if bounds1(table) is [low, high] then
@@ -495,7 +461,6 @@ private fun newton_raphson(f, x) =
   iter(x, f(x))
 
 
-// temperature (page 13-14)
 
 private fun make_temperature(sub2, update2, pow, north, south, east, west)(p, epsilon, rho, theta, rho_prime, q_prime) =
   fun interior_temperature(zone) =
@@ -521,7 +486,6 @@ private fun make_temperature(sub2, update2, pow, north, south, east, west)(p, ep
   m
 
 
-// heat conduction
 
 private fun make_cc(sub2, update2, pow, north, south, east, west)(alpha_prime, theta_hat) =
   fun interior_cc(zone) =
@@ -601,7 +565,6 @@ private fun compute_heat_conduction(sub2, update2, pow, north, south, east, west
       [theta_l, gamma_k, gamma_l]
 
 
-// final pressure and energy calculation
 
 private fun make_pressure(sub2, update2, pow, north, south, east, west)(rho_p, theta_p) =
   let p = array2(dimension_all_zones, 0.0)
@@ -624,7 +587,6 @@ private fun make_energy(sub2, update2, pow, north, south, east, west)(rho_p, the
   epsilon_p
 
 
-// energy error calculation (page 20)
 
 private fun compute_energy_error(sub2, update2, pow, north, south, east, west)(uw_p, rz_p, p_p, q_p, epsilon_p, theta_p, rho_p, alpha_p, gamma_k, gamma_l, deltat) =
   if uw_p is [u_p, w_p] and rz_p is [r_p, z_p] then
