@@ -1,7 +1,0 @@
-:.
-:js
-
-
-import "../../../mlscript-compile/nofib/sml/smithNormalForm.mls"
-smithNormalForm.main()
-//│ = -12

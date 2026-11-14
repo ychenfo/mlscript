@@ -1,9 +1,10 @@
-// usage: node bench/tinybench-eff.mjs [--variants dnone,dopt,none,opt] [--only eff,nofib/ansi]
+// usage: node bench/tinybench.mjs [--variants dnone,dopt,none,opt] [--only eff,nofib/ansi]
 //          [--time 1000] [--min-samples 10] [--bench-min] [--sizes]
-// e.g. node --stack-size=16384 bench/tinybench-eff.mjs --only eff/fft --variants dnone,opt
-// e.g. node --stack-size=16384 bench/tinybench-eff.mjs --only eff,nofib/ansi --time 3000 --bench-min
-// e.g. node --stack-size=16384 bench/tinybench-eff.mjs --sizes --only nofib
-// e.g. node --stack-size=16384 bench/tinybench-eff.mjs --only eff/fft --min-samples 50
+// e.g. node --stack-size=16384 bench/tinybench.mjs --only eff --bench-min --time 1000 --min-samples 1
+// e.g. node --stack-size=16384 bench/tinybench.mjs --only eff/fft --variants dnone,opt
+// e.g. node --stack-size=16384 bench/tinybench.mjs --only eff,nofib/ansi --time 3000 --bench-min
+// e.g. node --stack-size=16384 bench/tinybench.mjs --sizes --only nofib
+// e.g. node --stack-size=16384 bench/tinybench.mjs --only eff/fft --min-samples 50
 // benchmarks `main()` of every compiled `flowopt-<variant>/{eff,nofib}/*.mjs`; one tinybench suite per program,
 // one task per variant, so the variants of the same program are directly comparable
 //   --bench-min  also benchmarks the terser outputs (written next to the sources as <prog>.terse.*.mjs,
@@ -14,7 +15,7 @@
 import { Bench } from "tinybench"
 import { minify } from "terser"
 import { gzipSync } from "node:zlib"
-import { readdirSync, readFileSync, writeFileSync } from "node:fs"
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { dirname, join } from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 
@@ -41,7 +42,9 @@ const groups = ["eff", "nofib"]
 const sourceFile = (v, prog) => join(compileDir, `flowopt-${v}`, prog + ".mjs")
 const terseFile = (v, prog, mode) => join(compileDir, `flowopt-${v}`, `${prog}.terse.${mode}.mjs`)
 const isTerseOutput = f => f.includes(".terse.")
-const programsOf = v => groups.flatMap(group => readdirSync(join(compileDir, `flowopt-${v}`, group))
+// a group directory is only created when its sources were compiled, so a missing one has no programs
+const programsOf = v => groups.flatMap(group => (existsSync(join(compileDir, `flowopt-${v}`, group))
+    ? readdirSync(join(compileDir, `flowopt-${v}`, group)) : [])
   .filter(f => f.endsWith(".mjs") && !isTerseOutput(f)).map(f => `${group}/${f.slice(0, -4)}`))
 
 // `--only` tokens: `group/name` is one program, `group` is every program of that group, `name` is that program in any group
@@ -51,6 +54,11 @@ const selected = prog => {
   return only.some(s => s === prog || s === group || s === name)
 }
 const programs = [...new Set(variants.flatMap(programsOf))].sort().filter(selected)
+if (programs.length === 0) {
+  console.error(`no compiled programs found under ${compileDir}/flowopt-<variant>/ for variants ${variants.join(",")}`
+    + (only ? ` and --only ${only.join(",")}` : "") + "; compile them first (ctest)")
+  process.exit(1)
+}
 
 // same two terser modes as nofib/runterse.fish (no `module`/`toplevel`, comments dropped)
 const terserModes = {

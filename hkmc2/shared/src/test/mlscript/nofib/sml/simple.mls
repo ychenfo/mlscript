@@ -1,7 +1,0 @@
-:.
-:js
-
-
-import "../../../mlscript-compile/nofib/sml/simple.mls"
-simple.main()
-//│ = [-33093, 6787]

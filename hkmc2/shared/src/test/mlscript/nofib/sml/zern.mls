@@ -1,7 +1,0 @@
-:.
-:js
-
-
-import "../../../mlscript-compile/nofib/sml/zern.mls"
-zern.main()
-//│ = 0.21900668709304172
