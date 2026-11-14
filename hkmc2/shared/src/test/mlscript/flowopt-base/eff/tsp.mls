@@ -1,7 +1,0 @@
-:.
-:js
-
-
-import "../../../mlscript-compile/flowopt-base/eff/tsp.mls"
-tsp.main()
-//│ = [255, 22.66156738284888]

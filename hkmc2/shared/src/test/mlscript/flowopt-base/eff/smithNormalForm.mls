@@ -1,7 +1,0 @@
-:.
-:js
-
-
-import "../../../mlscript-compile/flowopt-base/eff/smithNormalForm.mls"
-smithNormalForm.main()
-//│ = -12

@@ -13,6 +13,6 @@ end FlowOptCompileTestRunner
 
 object FlowOptCompileTestRunner:
   
-  given cctx: CompilerCtx = TestFolders.flowOptCompilerCtx(os.pwd)
+  given cctx: CompilerCtx = TestFolders.flowCompilerCtx(os.pwd, "flowopt-opt")
 
 end FlowOptCompileTestRunner

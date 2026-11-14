@@ -1,7 +1,0 @@
-:.
-:js
-
-
-import "../../../mlscript-compile/flowopt-base/eff/zern.mls"
-zern.main()
-//│ = 0.21900668709304172

@@ -1,0 +1,6 @@
+:.
+:js
+
+import "../../../mlscript-compile/flowopt-dnone/nofib/boyer.mls"
+boyer.main()
+//│ = true

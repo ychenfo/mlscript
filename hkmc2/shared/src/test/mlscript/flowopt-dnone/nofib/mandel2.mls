@@ -1,0 +1,8 @@
+:.
+:js
+
+import "../../../mlscript-compile/flowopt-dnone/nofib/mandel2.mls"
+mandel2.main()
+//│ = true
+
+      

@@ -2,2293 +2,686 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
+const floor$accessorSymbol = globalThis.Symbol("floor");
+const array_alloc$accessorSymbol = globalThis.Symbol("array_alloc");
+const intMin$accessorSymbol = globalThis.Symbol("intMin");
 const doo$accessorSymbol = globalThis.Symbol("doo");
+const vector_ref$accessorSymbol = globalThis.Symbol("vector_ref");
+const vector_set$accessorSymbol = globalThis.Symbol("vector_set");
+const negative$accessorSymbol = globalThis.Symbol("negative");
 const listApp$tailrec$accessorSymbol = globalThis.Symbol("listApp$tailrec");
 const listExists$tailrec$accessorSymbol = globalThis.Symbol("listExists$tailrec");
-let loop, init, loop1, loop2, loop3, loop4, enqueue, loop5, isNull, dequeue, loopK, push_t, loop6, ef_t, enqueue1, can_push_down, push_down, can_push_left, push_right, push_left, relabel, cf_t, can_lift, can_push_t, can_push_up, can_push_right, push_up, lift, loopPow, loop7, min_cut, ef_up, ef_right, cf_right, cf_down, ef_left, min_cut_includes_every_edge_to_t, cf_up, preflow_push, cf_left, ef_down, ratioRegions1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, lambda25, lambda26, lambda27, lambda28, lambda29, lambda30, lambda31, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13, lambda$14, lambda$15, lambda$16, lambda$17, lambda$18, lambda$19, lambda$20, lambda$21, lambda$22, lambda$23, lambda$24, lambda$25, lambda$26, lambda$27, lambda$28, lambda$29, lambda$30, lambda$31, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK, main_doit_rao_ratio_region_loop_preflow_push_loop$loop, main_doit_rao_ratio_region_loop_preflow_push$preflow_push, main_doit_rao_ratio_region_loop$loop, main_doit_rao_ratio_region$rao_ratio_region, main_doit$doit, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1, main_doit_rao_ratio_region_loop_preflow_push_loop$loop1, main_doit_rao_ratio_region_loop_preflow_push$preflow_push1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$, doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK, doit_rao_ratio_region_loop_preflow_push_loop$loop, doit_rao_ratio_region_loop_preflow_push$preflow_push, doit_rao_ratio_region_loop$loop, doit_rao_ratio_region$rao_ratio_region, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1, doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1, doit_rao_ratio_region_loop_preflow_push_loop$loop1, doit_rao_ratio_region_loop_preflow_push$preflow_push1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$, rao_ratio_region_loop_preflow_push_loop_loopK$loopK, rao_ratio_region_loop_preflow_push_loop$loop, rao_ratio_region_loop_preflow_push$preflow_push, rao_ratio_region_loop$loop, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1, rao_ratio_region_loop_preflow_push_loop_loopK$loopK1, rao_ratio_region_loop_preflow_push_loop$loop1, rao_ratio_region_loop_preflow_push$preflow_push1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1, loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift, loop_preflow_push_loop_loopK_lambda$_lambda$lambda, loop_preflow_push_loop_loopK_lambda$$lambda$, loop_preflow_push_loop_loopK$loopK, loop_preflow_push_loop$loop, loop_preflow_push$preflow_push, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop, loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1, loop_preflow_push_loop_loopK_lambda$_lambda$lambda1, loop_preflow_push_loop_loopK_lambda$$lambda$1, loop_preflow_push_loop_loopK$loopK1, loop_preflow_push_loop$loop1, loop_preflow_push$preflow_push1, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1, preflow_push_loop_loopK_lambda$_lambda_lift$lift, preflow_push_loop_loopK_lambda$_lambda$lambda, preflow_push_loop_loopK_lambda$$lambda$, preflow_push_loop_loopK$loopK, preflow_push_loop$loop, preflow_push_loop_loopK_lambda$_lambda_lift_min$min, preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop, loop_loopK_lambda$_lambda_lift$lift, loop_loopK_lambda$_lambda$lambda, loop_loopK_lambda$$lambda$, loop_loopK$loopK, loop_loopK_lambda$_lambda_lift_min$min, loop_loopK_lambda$_lambda_lift_min_loop$loop, lift_min$min, lift_min_loop$loop, loopK_lambda$_lambda_lift$lift, loopK_lambda$_lambda$lambda, loopK_lambda$$lambda$, loopK_lambda$_lambda_lift_min$min, loopK_lambda$_lambda_lift_min_loop$loop, lambda_lift$lift, lambda_lift_min$min, lambda_lift_min_loop$loop, lambda$_lambda_lift$lift, lambda$_lambda$lambda, lambda$_lambda_lift_min$min, lambda$_lambda_lift_min_loop$loop, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1, preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons, preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest, preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons, preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest, preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil, loop_loopK_lambda$_lambda_lift_min$l_Cons, loop_loopK_lambda$_lambda_lift_min$l_rest, loop_loopK_lambda$_lambda_lift_min_loop$l_Cons, loop_loopK_lambda$_lambda_lift_min_loop$l_rest, loop_loopK_lambda$_lambda_lift_min_loop$l_Nil, lift_min$l_Cons, lift_min$l_rest, lift_min_loop$l_Cons, lift_min_loop$l_rest, lift_min_loop$l_Nil, loopK_lambda$_lambda_lift_min$l_Cons, loopK_lambda$_lambda_lift_min$l_rest, loopK_lambda$_lambda_lift_min_loop$l_Cons, loopK_lambda$_lambda_lift_min_loop$l_rest, loopK_lambda$_lambda_lift_min_loop$l_Nil, lambda_lift_min$l_Cons, lambda_lift_min$l_rest, lambda_lift_min_loop$l_Cons, lambda_lift_min_loop$l_rest, lambda_lift_min_loop$l_Nil, lambda$_lambda_lift_min$l_Cons, lambda$_lambda_lift_min$l_rest, lambda$_lambda_lift_min_loop$l_Cons, lambda$_lambda_lift_min_loop$l_rest, lambda$_lambda_lift_min_loop$l_Nil, lambda$_lambda_lift_min_loop$l_Cons$worker, lambda_lift_min_loop$l_Cons$worker, loopK_lambda$_lambda_lift_min_loop$l_Cons$worker, lift_min_loop$l_Cons$worker, loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker, preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker, loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker, rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker, doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker, main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1;
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
+let loop, init, loop1, loop2, loop3, loop4, enqueue, loop5, isNull, dequeue, loopK, push_t, loop6, ef_t, enqueue1, can_push_down, push_down, can_push_left, push_right, push_left, relabel, cf_t, can_lift, can_push_t, can_push_up, can_push_right, push_up, lift, loopPow, loop7, min_cut, ef_up, ef_right, cf_right, cf_down, ef_left, min_cut_includes_every_edge_to_t, cf_up, preflow_push, cf_left, ef_down, ratioRegions1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, lambda25, lambda26, lambda27, lambda28, lambda29, lambda30, lambda31, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13, lambda$14, lambda$15, lambda$16, lambda$17, lambda$18, lambda$19, lambda$20, lambda$21, lambda$22, lambda$23, lambda$24, lambda$25, lambda$26, lambda$27, lambda$28, lambda$29, lambda$30, lambda$31, main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda, main_doit_rao_ratio_region_make_matrix_lambda$$lambda$, main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1, main_doit_rao_ratio_region_make_matrix_lambda$$lambda$1, main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2, main_doit_rao_ratio_region_make_matrix_lambda$$lambda$2, main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3, main_doit_rao_ratio_region_make_matrix_lambda$$lambda$3, main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4, main_doit_rao_ratio_region_make_matrix_lambda$$lambda$4, main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5, main_doit_rao_ratio_region_make_matrix_lambda$$lambda$5, main_doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda, main_doit_rao_ratio_region_loop_min_cut_lambda$$lambda$, main_doit_make_matrix_lambda$_lambda$lambda, main_doit_make_matrix_lambda$$lambda$, main_doit_make_matrix_lambda$_lambda$lambda1, main_doit_make_matrix_lambda$$lambda$1, main_doit_make_matrix_lambda$_lambda$lambda2, main_doit_make_matrix_lambda$$lambda$2, doit_make_matrix_lambda$_lambda$lambda, doit_make_matrix_lambda$$lambda$, doit_make_matrix_lambda$_lambda$lambda1, doit_make_matrix_lambda$$lambda$1, doit_make_matrix_lambda$_lambda$lambda2, doit_make_matrix_lambda$$lambda$2, doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda, doit_rao_ratio_region_loop_min_cut_lambda$$lambda$, doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda, doit_rao_ratio_region_make_matrix_lambda$$lambda$, doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1, doit_rao_ratio_region_make_matrix_lambda$$lambda$1, doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2, doit_rao_ratio_region_make_matrix_lambda$$lambda$2, doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3, doit_rao_ratio_region_make_matrix_lambda$$lambda$3, doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4, doit_rao_ratio_region_make_matrix_lambda$$lambda$4, doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5, doit_rao_ratio_region_make_matrix_lambda$$lambda$5, rao_ratio_region_make_matrix_lambda$_lambda$lambda, rao_ratio_region_make_matrix_lambda$$lambda$, rao_ratio_region_make_matrix_lambda$_lambda$lambda1, rao_ratio_region_make_matrix_lambda$$lambda$1, rao_ratio_region_make_matrix_lambda$_lambda$lambda2, rao_ratio_region_make_matrix_lambda$$lambda$2, rao_ratio_region_make_matrix_lambda$_lambda$lambda3, rao_ratio_region_make_matrix_lambda$$lambda$3, rao_ratio_region_make_matrix_lambda$_lambda$lambda4, rao_ratio_region_make_matrix_lambda$$lambda$4, rao_ratio_region_make_matrix_lambda$_lambda$lambda5, rao_ratio_region_make_matrix_lambda$$lambda$5, rao_ratio_region_loop_min_cut_lambda$_lambda$lambda, rao_ratio_region_loop_min_cut_lambda$$lambda$, make_matrix_lambda$_lambda$lambda, make_matrix_lambda$$lambda$, lambda$_lambda$lambda, loop_min_cut_lambda$_lambda$lambda, loop_min_cut_lambda$$lambda$, min_cut_lambda$_lambda$lambda, min_cut_lambda$$lambda$, lambda$_lambda$lambda1, main_doit_rao_ratio_region_loop_loop$loop, doit_rao_ratio_region_loop_loop$loop, rao_ratio_region_loop_loop$loop, loop_loop$loop;
+main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda = function main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
   if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+main_doit_rao_ratio_region_make_matrix_lambda$$lambda$ = function main_doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a)
+  }
+};
+main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1 = function main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
+main_doit_rao_ratio_region_make_matrix_lambda$$lambda$1 = function main_doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1(ratioRegions2, n, a)
   }
 };
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
-      case false:
-        {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
-          continue loopLabel;
-        }
-      case true:
-        return runtime.Unit;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop$loop = function main_doit_rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
-  loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push$preflow_push = function main_doit_rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  lambda$here = lambda$9(ratioRegions2, width, f_t, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here);
-  lambda$here1 = lambda$8(ratioRegions2, width, f_right);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-  tmp = height - 1;
-  lambda$here2 = lambda$7(ratioRegions2, width, f_down);
-  ratioRegions2[doo$accessorSymbol](tmp, lambda$here2);
-  lambda$here3 = lambda$6(ratioRegions2, width, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-  tmp1 = width - 1;
-  lambda$here4 = lambda$5(ratioRegions2, height, e);
-  ratioRegions2[doo$accessorSymbol](tmp1, lambda$here4);
-  pushes = new ratioRegions2.Ref.class(0);
-  lifts = new ratioRegions2.Ref.class(0);
-  relabels = new ratioRegions2.Ref.class(0);
-  return main_doit_rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
-};
-main_doit_rao_ratio_region_loop$loop = function main_doit_rao_ratio_region_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, lg_v, v_max) {
-  loopLabel: while (true) {
-    let v, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal;
-    inlinedVal = lg_v < 0;
-    if (inlinedVal === true) {
-      tmp = ratioRegions2.PInt(undefined);
-      tmp1 = ratioRegions2.Cons(tmp, ratioRegions2.Nil);
-      loop4(ratioRegions2, "V-MAX=~s~%", 0, tmp1);
-      tmp2 = v_max + 1;
-      main_doit_rao_ratio_region_loop_preflow_push$preflow_push1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, tmp2);
-      return min_cut(ratioRegions2, height, width, h, m1)
-    }
-    {
-      let p, inlinedVal1;
-      tmp3 = loopPow(lg_v, 1);
-      v = v_max + tmp3;
-      tmp4 = ratioRegions2.PInt(undefined);
-      tmp5 = ratioRegions2.PInt(undefined);
-      tmp6 = ratioRegions2.PInt(undefined);
-      tmp7 = ratioRegions2.Cons(tmp6, ratioRegions2.Nil);
-      tmp8 = ratioRegions2.Cons(tmp5, tmp7);
-      tmp9 = ratioRegions2.Cons(tmp4, tmp8);
-      loop4(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp9);
-      main_doit_rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v);
-      tmp10 = lg_v - 1;
-      p = lambda$3(ratioRegions2, width, h, m1);
-      inlinedVal1 = loop2(height, p, 0);
-      if (inlinedVal1 === true) {
-        lg_v = tmp10;
-        v_max = v;
-        continue loopLabel
-      }
-      lg_v = tmp10;
-      v_max = v_max;
-      continue loopLabel;
-    }
-  }
-};
-main_doit_rao_ratio_region$rao_ratio_region = function main_doit_rao_ratio_region$rao_ratio_region(c_right, c_down, w, lg_max_v) {
-  let m1, m2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, init1, scrut, arg$Matrix$0$, arg$Matrix$0$1;
-  if (w instanceof ratioRegions1.Matrix.class) {
-    let inlinedVal6;
-    arg$Matrix$0$1 = w.a;
-    inlinedVal6 = arg$Matrix$0$1.length;
-    if (w instanceof ratioRegions1.Matrix.class) {
-      let inlinedVal7, inlinedVal8, f, f1, f2, f3, f4, f5, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6;
-      arg$Matrix$0$ = w.a;
-      inlinedVal7 = arg$Matrix$0$.at(0);
-      inlinedVal8 = inlinedVal7.length;
-      tmp = inlinedVal8 - 1;
-      f = lambda$(tmp, 0);
-      scrut6 = inlinedVal6 > 0;
-      if (scrut6 === true) {
-        let inlinedVal9, tmp8, arr, i, n, x, inlinedVal10;
-        inlinedVal9 = lambda(tmp, 0);
-        tmp8 = [];
-        arr = tmp8;
-        i = 0;
-        n = inlinedVal6;
-        x = inlinedVal9;
-        inlinedLbl: {
-          loopLabel: while (true) {
-            let scrut7, tmp9;
-            scrut7 = i == n;
-            if (scrut7 === true) {
-              inlinedVal10 = arr;
-              break inlinedLbl
-            }
-            arr[i] = x;
-            tmp9 = i + 1;
-            i = tmp9;
-            continue loopLabel;
-          }
-        }
-        init(inlinedVal6, f, inlinedVal10, 1);
-        inlinedVal = ratioRegions1.Matrix(inlinedVal10);
-        tmp1 = inlinedVal6 - 1;
-        f1 = lambda$(inlinedVal8, 0);
-        scrut5 = tmp1 > 0;
-        if (scrut5 === true) {
-          let inlinedVal11, tmp9, arr1, i1, n1, x1, inlinedVal12;
-          inlinedVal11 = lambda(inlinedVal8, 0);
-          tmp9 = [];
-          arr1 = tmp9;
-          i1 = 0;
-          n1 = tmp1;
-          x1 = inlinedVal11;
-          inlinedLbl1: {
-            loopLabel1: while (true) {
-              let scrut7, tmp10;
-              scrut7 = i1 == n1;
-              if (scrut7 === true) {
-                inlinedVal12 = arr1;
-                break inlinedLbl1
-              }
-              arr1[i1] = x1;
-              tmp10 = i1 + 1;
-              i1 = tmp10;
-              continue loopLabel1;
-            }
-          }
-          init(tmp1, f1, inlinedVal12, 1);
-          inlinedVal1 = ratioRegions1.Matrix(inlinedVal12);
-          f2 = lambda$(inlinedVal8, 0);
-          scrut4 = inlinedVal6 > 0;
-          if (scrut4 === true) {
-            let inlinedVal13, tmp10, arr2, i2, n2, x2, inlinedVal14;
-            inlinedVal13 = lambda(inlinedVal8, 0);
-            tmp10 = [];
-            arr2 = tmp10;
-            i2 = 0;
-            n2 = inlinedVal6;
-            x2 = inlinedVal13;
-            inlinedLbl2: {
-              loopLabel2: while (true) {
-                let scrut7, tmp11;
-                scrut7 = i2 == n2;
-                if (scrut7 === true) {
-                  inlinedVal14 = arr2;
-                  break inlinedLbl2
-                }
-                arr2[i2] = x2;
-                tmp11 = i2 + 1;
-                i2 = tmp11;
-                continue loopLabel2;
-              }
-            }
-            init(inlinedVal6, f2, inlinedVal14, 1);
-            inlinedVal2 = ratioRegions1.Matrix(inlinedVal14);
-            f3 = lambda$(inlinedVal8, 0);
-            scrut3 = inlinedVal6 > 0;
-            if (scrut3 === true) {
-              let inlinedVal15, tmp11, arr3, i3, n3, x3, inlinedVal16;
-              inlinedVal15 = lambda(inlinedVal8, 0);
-              tmp11 = [];
-              arr3 = tmp11;
-              i3 = 0;
-              n3 = inlinedVal6;
-              x3 = inlinedVal15;
-              inlinedLbl3: {
-                loopLabel3: while (true) {
-                  let scrut7, tmp12;
-                  scrut7 = i3 == n3;
-                  if (scrut7 === true) {
-                    inlinedVal16 = arr3;
-                    break inlinedLbl3
-                  }
-                  arr3[i3] = x3;
-                  tmp12 = i3 + 1;
-                  i3 = tmp12;
-                  continue loopLabel3;
-                }
-              }
-              init(inlinedVal6, f3, inlinedVal16, 1);
-              inlinedVal3 = ratioRegions1.Matrix(inlinedVal16);
-              f4 = lambda$(inlinedVal8, 0);
-              scrut2 = inlinedVal6 > 0;
-              if (scrut2 === true) {
-                let inlinedVal17, tmp12, arr4, i4, n4, x4, inlinedVal18;
-                inlinedVal17 = lambda(inlinedVal8, 0);
-                tmp12 = [];
-                arr4 = tmp12;
-                i4 = 0;
-                n4 = inlinedVal6;
-                x4 = inlinedVal17;
-                inlinedLbl4: {
-                  loopLabel4: while (true) {
-                    let scrut7, tmp13;
-                    scrut7 = i4 == n4;
-                    if (scrut7 === true) {
-                      inlinedVal18 = arr4;
-                      break inlinedLbl4
-                    }
-                    arr4[i4] = x4;
-                    tmp13 = i4 + 1;
-                    i4 = tmp13;
-                    continue loopLabel4;
-                  }
-                }
-                init(inlinedVal6, f4, inlinedVal18, 1);
-                inlinedVal4 = ratioRegions1.Matrix(inlinedVal18);
-                f5 = lambda$(inlinedVal8, false);
-                scrut1 = inlinedVal6 > 0;
-                if (scrut1 === true) {
-                  let inlinedVal19, tmp13, arr5, i5, n5, x5, inlinedVal20;
-                  inlinedVal19 = lambda(inlinedVal8, false);
-                  tmp13 = [];
-                  arr5 = tmp13;
-                  i5 = 0;
-                  n5 = inlinedVal6;
-                  x5 = inlinedVal19;
-                  inlinedLbl5: {
-                    loopLabel5: while (true) {
-                      let scrut7, tmp14;
-                      scrut7 = i5 == n5;
-                      if (scrut7 === true) {
-                        inlinedVal20 = arr5;
-                        break inlinedLbl5
-                      }
-                      arr5[i5] = x5;
-                      tmp14 = i5 + 1;
-                      i5 = tmp14;
-                      continue loopLabel5;
-                    }
-                  }
-                  init(inlinedVal6, f5, inlinedVal20, 1);
-                  inlinedVal5 = ratioRegions1.Matrix(inlinedVal20);
-                  tmp2 = inlinedVal6 * inlinedVal8;
-                  m1 = tmp2 + 2;
-                  tmp3 = 2 * inlinedVal6;
-                  tmp4 = tmp3 * inlinedVal8;
-                  m2 = tmp4 + 2;
-                  tmp5 = 2 * inlinedVal6;
-                  tmp6 = tmp5 * inlinedVal8;
-                  tmp7 = tmp6 + 3;
-                  init1 = ratioRegions1.Nil;
-                  scrut = tmp7 > 0;
-                  if (scrut === true) {
-                    let tmp14, arr6, i6, n6, x6, inlinedVal21;
-                    tmp14 = [];
-                    arr6 = tmp14;
-                    i6 = 0;
-                    n6 = tmp7;
-                    x6 = init1;
-                    inlinedLbl6: {
-                      loopLabel6: while (true) {
-                        let scrut7, tmp15;
-                        scrut7 = i6 == n6;
-                        if (scrut7 === true) {
-                          inlinedVal21 = arr6;
-                          break inlinedLbl6
-                        }
-                        arr6[i6] = x6;
-                        tmp15 = i6 + 1;
-                        i6 = tmp15;
-                        continue loopLabel6;
-                      }
-                    }
-                    return main_doit_rao_ratio_region_loop$loop(ratioRegions1, c_right, c_down, w, inlinedVal6, inlinedVal8, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, m1, m2, inlinedVal21, lg_max_v, 0)
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2 = function main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit$doit = function main_doit$doit(n) {
-  let tmp, tmp1, tmp2, lambda$here, lambda$here1, inlinedVal, inlinedVal1, inlinedVal2, f, f1, f2, scrut, scrut1, scrut2;
-  tmp = n - 1;
-  f = lambda$(tmp, -1);
-  scrut2 = n > 0;
-  if (scrut2 === true) {
-    let inlinedVal3, tmp3, arr, i, n1, x, inlinedVal4;
-    inlinedVal3 = lambda(tmp, -1);
-    tmp3 = [];
-    arr = tmp3;
-    i = 0;
-    n1 = n;
-    x = inlinedVal3;
+main_doit_rao_ratio_region_make_matrix_lambda$$lambda$2 = function main_doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2(ratioRegions2, n, a)
+  }
+};
+main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3 = function main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_doit_rao_ratio_region_make_matrix_lambda$$lambda$3 = function main_doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3(ratioRegions2, n, a)
+  }
+};
+main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4 = function main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_doit_rao_ratio_region_make_matrix_lambda$$lambda$4 = function main_doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4(ratioRegions2, n, a)
+  }
+};
+main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5 = function main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_doit_rao_ratio_region_make_matrix_lambda$$lambda$5 = function main_doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5(ratioRegions2, n, a)
+  }
+};
+main_doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda = function main_doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y) {
+  let scrut, arr;
+  scrut = width > 0;
+  if (scrut === true) {
+    let inlinedVal, n, f, arr1, i;
+    inlinedVal = lambda26(ratioRegions2, h, m1, y, 0);
+    arr = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal);
+    n = width;
+    f = lambda$2(ratioRegions2, h, m1, y);
+    arr1 = arr;
+    i = 1;
     inlinedLbl: {
       loopLabel: while (true) {
-        let scrut3, tmp4;
-        scrut3 = i == n1;
-        if (scrut3 === true) {
-          inlinedVal4 = arr;
-          break inlinedLbl
+        let scrut1, tmp, tmp1;
+        scrut1 = i < n;
+        if (scrut1 === true) {
+          tmp = runtime.safeCall(f(i));
+          arr1[i] = tmp;
+          tmp1 = i + 1;
+          i = tmp1;
+          continue loopLabel
         }
-        arr[i] = x;
-        tmp4 = i + 1;
-        i = tmp4;
-        continue loopLabel;
+        break inlinedLbl;
       }
     }
-    init(n, f, inlinedVal4, 1);
-    inlinedVal = ratioRegions1.Matrix(inlinedVal4);
-    tmp1 = n - 1;
-    f1 = lambda$(n, -1);
-    scrut1 = tmp1 > 0;
-    if (scrut1 === true) {
-      let inlinedVal5, tmp4, arr1, i1, n2, x1, inlinedVal6;
-      inlinedVal5 = lambda(n, -1);
-      tmp4 = [];
-      arr1 = tmp4;
-      i1 = 0;
-      n2 = tmp1;
-      x1 = inlinedVal5;
-      inlinedLbl1: {
-        loopLabel1: while (true) {
-          let scrut3, tmp5;
-          scrut3 = i1 == n2;
-          if (scrut3 === true) {
-            inlinedVal6 = arr1;
-            break inlinedLbl1
-          }
-          arr1[i1] = x1;
-          tmp5 = i1 + 1;
-          i1 = tmp5;
-          continue loopLabel1;
+    return arr
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_doit_rao_ratio_region_loop_min_cut_lambda$$lambda$ = function main_doit_rao_ratio_region_loop_min_cut_lambda$$lambda$(ratioRegions2, width, h, m1) {
+  return (y) => {
+    return main_doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y)
+  }
+};
+main_doit_make_matrix_lambda$_lambda$lambda = function main_doit_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_doit_make_matrix_lambda$$lambda$ = function main_doit_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a)
+  }
+};
+main_doit_make_matrix_lambda$_lambda$lambda1 = function main_doit_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_doit_make_matrix_lambda$$lambda$1 = function main_doit_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_make_matrix_lambda$_lambda$lambda1(ratioRegions2, n, a)
+  }
+};
+main_doit_make_matrix_lambda$_lambda$lambda2 = function main_doit_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_doit_make_matrix_lambda$$lambda$2 = function main_doit_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return main_doit_make_matrix_lambda$_lambda$lambda2(ratioRegions2, n, a)
+  }
+};
+doit_make_matrix_lambda$_lambda$lambda = function doit_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_make_matrix_lambda$$lambda$ = function doit_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a)
+  }
+};
+doit_make_matrix_lambda$_lambda$lambda1 = function doit_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_make_matrix_lambda$$lambda$1 = function doit_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_make_matrix_lambda$_lambda$lambda1(ratioRegions2, n, a)
+  }
+};
+doit_make_matrix_lambda$_lambda$lambda2 = function doit_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_make_matrix_lambda$$lambda$2 = function doit_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_make_matrix_lambda$_lambda$lambda2(ratioRegions2, n, a)
+  }
+};
+doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda = function doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y) {
+  let scrut, arr;
+  scrut = width > 0;
+  if (scrut === true) {
+    let inlinedVal, n, f, arr1, i;
+    inlinedVal = lambda26(ratioRegions2, h, m1, y, 0);
+    arr = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal);
+    n = width;
+    f = lambda$2(ratioRegions2, h, m1, y);
+    arr1 = arr;
+    i = 1;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut1, tmp, tmp1;
+        scrut1 = i < n;
+        if (scrut1 === true) {
+          tmp = runtime.safeCall(f(i));
+          arr1[i] = tmp;
+          tmp1 = i + 1;
+          i = tmp1;
+          continue loopLabel
         }
+        break inlinedLbl;
       }
-      init(tmp1, f1, inlinedVal6, 1);
-      inlinedVal1 = ratioRegions1.Matrix(inlinedVal6);
-      lambda$here = lambda$29(ratioRegions1, n, n, inlinedVal);
-      ratioRegions1[doo$accessorSymbol](n, lambda$here);
-      tmp2 = n - 1;
-      lambda$here1 = lambda$28(ratioRegions1, n, n, inlinedVal1);
-      ratioRegions1[doo$accessorSymbol](tmp2, lambda$here1);
-      f2 = lambda$(n, 1);
-      scrut = n > 0;
-      if (scrut === true) {
-        let inlinedVal7, tmp5, arr2, i2, n3, x2, inlinedVal8;
-        inlinedVal7 = lambda(n, 1);
-        tmp5 = [];
-        arr2 = tmp5;
-        i2 = 0;
-        n3 = n;
-        x2 = inlinedVal7;
-        inlinedLbl2: {
-          loopLabel2: while (true) {
-            let scrut3, tmp6;
-            scrut3 = i2 == n3;
+    }
+    return arr
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_rao_ratio_region_loop_min_cut_lambda$$lambda$ = function doit_rao_ratio_region_loop_min_cut_lambda$$lambda$(ratioRegions2, width, h, m1) {
+  return (y) => {
+    return doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y)
+  }
+};
+doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda = function doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_rao_ratio_region_make_matrix_lambda$$lambda$ = function doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a)
+  }
+};
+doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1 = function doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_rao_ratio_region_make_matrix_lambda$$lambda$1 = function doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1(ratioRegions2, n, a)
+  }
+};
+doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2 = function doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_rao_ratio_region_make_matrix_lambda$$lambda$2 = function doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2(ratioRegions2, n, a)
+  }
+};
+doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3 = function doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_rao_ratio_region_make_matrix_lambda$$lambda$3 = function doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3(ratioRegions2, n, a)
+  }
+};
+doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4 = function doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_rao_ratio_region_make_matrix_lambda$$lambda$4 = function doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4(ratioRegions2, n, a)
+  }
+};
+doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5 = function doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+doit_rao_ratio_region_make_matrix_lambda$$lambda$5 = function doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5(ratioRegions2, n, a)
+  }
+};
+rao_ratio_region_make_matrix_lambda$_lambda$lambda = function rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+rao_ratio_region_make_matrix_lambda$$lambda$ = function rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a)
+  }
+};
+rao_ratio_region_make_matrix_lambda$_lambda$lambda1 = function rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+rao_ratio_region_make_matrix_lambda$$lambda$1 = function rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return rao_ratio_region_make_matrix_lambda$_lambda$lambda1(ratioRegions2, n, a)
+  }
+};
+rao_ratio_region_make_matrix_lambda$_lambda$lambda2 = function rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+rao_ratio_region_make_matrix_lambda$$lambda$2 = function rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return rao_ratio_region_make_matrix_lambda$_lambda$lambda2(ratioRegions2, n, a)
+  }
+};
+rao_ratio_region_make_matrix_lambda$_lambda$lambda3 = function rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+rao_ratio_region_make_matrix_lambda$$lambda$3 = function rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return rao_ratio_region_make_matrix_lambda$_lambda$lambda3(ratioRegions2, n, a)
+  }
+};
+rao_ratio_region_make_matrix_lambda$_lambda$lambda4 = function rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+rao_ratio_region_make_matrix_lambda$$lambda$4 = function rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return rao_ratio_region_make_matrix_lambda$_lambda$lambda4(ratioRegions2, n, a)
+  }
+};
+rao_ratio_region_make_matrix_lambda$_lambda$lambda5 = function rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+rao_ratio_region_make_matrix_lambda$$lambda$5 = function rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return rao_ratio_region_make_matrix_lambda$_lambda$lambda5(ratioRegions2, n, a)
+  }
+};
+rao_ratio_region_loop_min_cut_lambda$_lambda$lambda = function rao_ratio_region_loop_min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y) {
+  let scrut, arr;
+  scrut = width > 0;
+  if (scrut === true) {
+    let inlinedVal, n, f, arr1, i;
+    inlinedVal = lambda26(ratioRegions2, h, m1, y, 0);
+    arr = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal);
+    n = width;
+    f = lambda$2(ratioRegions2, h, m1, y);
+    arr1 = arr;
+    i = 1;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut1, tmp, tmp1;
+        scrut1 = i < n;
+        if (scrut1 === true) {
+          tmp = runtime.safeCall(f(i));
+          arr1[i] = tmp;
+          tmp1 = i + 1;
+          i = tmp1;
+          continue loopLabel
+        }
+        break inlinedLbl;
+      }
+    }
+    return arr
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+rao_ratio_region_loop_min_cut_lambda$$lambda$ = function rao_ratio_region_loop_min_cut_lambda$$lambda$(ratioRegions2, width, h, m1) {
+  return (y) => {
+    return rao_ratio_region_loop_min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y)
+  }
+};
+make_matrix_lambda$_lambda$lambda = function make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+make_matrix_lambda$$lambda$ = function make_matrix_lambda$$lambda$(ratioRegions2, n, a) {
+  return () => {
+    return make_matrix_lambda$_lambda$lambda(ratioRegions2, n, a)
+  }
+};
+lambda$_lambda$lambda = function lambda$_lambda$lambda(ratioRegions2, n, a) {
+  let scrut;
+  scrut = n > 0;
+  if (scrut === true) {
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+loop_min_cut_lambda$_lambda$lambda = function loop_min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y) {
+  let scrut, arr;
+  scrut = width > 0;
+  if (scrut === true) {
+    let inlinedVal, n, f, arr1, i;
+    inlinedVal = lambda26(ratioRegions2, h, m1, y, 0);
+    arr = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal);
+    n = width;
+    f = lambda$2(ratioRegions2, h, m1, y);
+    arr1 = arr;
+    i = 1;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut1, tmp, tmp1;
+        scrut1 = i < n;
+        if (scrut1 === true) {
+          tmp = runtime.safeCall(f(i));
+          arr1[i] = tmp;
+          tmp1 = i + 1;
+          i = tmp1;
+          continue loopLabel
+        }
+        break inlinedLbl;
+      }
+    }
+    return arr
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+loop_min_cut_lambda$$lambda$ = function loop_min_cut_lambda$$lambda$(ratioRegions2, width, h, m1) {
+  return (y) => {
+    return loop_min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y)
+  }
+};
+min_cut_lambda$_lambda$lambda = function min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y) {
+  let scrut, arr;
+  scrut = width > 0;
+  if (scrut === true) {
+    let inlinedVal, n, f, arr1, i;
+    inlinedVal = lambda26(ratioRegions2, h, m1, y, 0);
+    arr = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal);
+    n = width;
+    f = lambda$2(ratioRegions2, h, m1, y);
+    arr1 = arr;
+    i = 1;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut1, tmp, tmp1;
+        scrut1 = i < n;
+        if (scrut1 === true) {
+          tmp = runtime.safeCall(f(i));
+          arr1[i] = tmp;
+          tmp1 = i + 1;
+          i = tmp1;
+          continue loopLabel
+        }
+        break inlinedLbl;
+      }
+    }
+    return arr
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+min_cut_lambda$$lambda$ = function min_cut_lambda$$lambda$(ratioRegions2, width, h, m1) {
+  return (y) => {
+    return min_cut_lambda$_lambda$lambda(ratioRegions2, width, h, m1, y)
+  }
+};
+lambda$_lambda$lambda1 = function lambda$_lambda$lambda(ratioRegions2, width, h, m1, y) {
+  let scrut, arr;
+  scrut = width > 0;
+  if (scrut === true) {
+    let inlinedVal, n, f, arr1, i;
+    inlinedVal = lambda26(ratioRegions2, h, m1, y, 0);
+    arr = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal);
+    n = width;
+    f = lambda$2(ratioRegions2, h, m1, y);
+    arr1 = arr;
+    i = 1;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut1, tmp, tmp1;
+        scrut1 = i < n;
+        if (scrut1 === true) {
+          tmp = runtime.safeCall(f(i));
+          arr1[i] = tmp;
+          tmp1 = i + 1;
+          i = tmp1;
+          continue loopLabel
+        }
+        break inlinedLbl;
+      }
+    }
+    return arr
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+};
+main_doit_rao_ratio_region_loop_loop$loop = function main_doit_rao_ratio_region_loop_loop$loop(ratioRegions2, control_string, i, values) {
+  loopLabel: while (true) {
+    let scrut, scrut1, scrut2, scrut3, tmp, tmp1, arg$Cons$0$, arg$Cons$1$, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, inlinedVal;
+    inlinedVal = control_string.length;
+    tmp = i == inlinedVal;
+    switch (tmp) {
+      case false:
+        {
+          let inlinedVal1;
+          inlinedVal1 = control_string.at(i);
+          scrut = inlinedVal1 == "~";
+          if (scrut === true) {
+            let inlinedVal2;
+            tmp1 = i + 1;
+            inlinedVal2 = control_string.at(tmp1);
+            scrut1 = inlinedVal2 == "s";
+            if (scrut1 === true) {
+              if (values instanceof ratioRegions2.Cons.class) {
+                arg$Cons$0$ = values.head;
+                arg$Cons$1$ = values.tail;
+                if (arg$Cons$0$ instanceof ratioRegions2.PInt.class) {
+                  tmp2 = i + 2;
+                  i = tmp2;
+                  values = arg$Cons$1$;
+                  continue loopLabel
+                }
+                scrut3 = inlinedVal2 == "%";
+                if (scrut3 === true) {
+                  tmp3 = i + 2;
+                  i = tmp3;
+                  continue loopLabel
+                }
+                tmp4 = i + 1;
+                i = tmp4;
+                continue loopLabel;
+              }
+              scrut3 = inlinedVal2 == "%";
+              if (scrut3 === true) {
+                tmp5 = i + 2;
+                i = tmp5;
+                continue loopLabel
+              }
+              tmp6 = i + 1;
+              i = tmp6;
+              continue loopLabel;
+            }
+            scrut2 = inlinedVal2 == "a";
+            if (scrut2 === true) {
+              if (values instanceof ratioRegions2.Cons.class) {
+                arg$Cons$0$ = values.head;
+                arg$Cons$1$ = values.tail;
+              }
+            }
+            scrut3 = inlinedVal2 == "%";
             if (scrut3 === true) {
-              inlinedVal8 = arr2;
-              break inlinedLbl2
+              tmp7 = i + 2;
+              i = tmp7;
+              continue loopLabel
             }
-            arr2[i2] = x2;
-            tmp6 = i2 + 1;
-            i2 = tmp6;
-            continue loopLabel2;
-          }
-        }
-        init(n, f2, inlinedVal8, 1);
-        inlinedVal2 = ratioRegions1.Matrix(inlinedVal8);
-        return main_doit_rao_ratio_region$rao_ratio_region(inlinedVal, inlinedVal1, inlinedVal2, 15)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
-      case false:
-        {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
-          continue loopLabel;
-        }
-      case true:
-        return runtime.Unit;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop$loop1 = function main_doit_rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
-  loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push$preflow_push1 = function main_doit_rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  lambda$here = lambda$9(ratioRegions2, width, f_t, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here);
-  lambda$here1 = lambda$8(ratioRegions2, width, f_right);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-  tmp = height - 1;
-  lambda$here2 = lambda$7(ratioRegions2, width, f_down);
-  ratioRegions2[doo$accessorSymbol](tmp, lambda$here2);
-  lambda$here3 = lambda$6(ratioRegions2, width, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-  tmp1 = width - 1;
-  lambda$here4 = lambda$5(ratioRegions2, height, e);
-  ratioRegions2[doo$accessorSymbol](tmp1, lambda$here4);
-  pushes = new ratioRegions2.Ref.class(0);
-  lifts = new ratioRegions2.Ref.class(0);
-  relabels = new ratioRegions2.Ref.class(0);
-  return main_doit_rao_ratio_region_loop_preflow_push_loop$loop1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK = function doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
-      case false:
-        {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
-          continue loopLabel;
-        }
-      case true:
-        return runtime.Unit;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop$loop = function doit_rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
-  loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-doit_rao_ratio_region_loop_preflow_push$preflow_push = function doit_rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  lambda$here = lambda$9(ratioRegions2, width, f_t, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here);
-  lambda$here1 = lambda$8(ratioRegions2, width, f_right);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-  tmp = height - 1;
-  lambda$here2 = lambda$7(ratioRegions2, width, f_down);
-  ratioRegions2[doo$accessorSymbol](tmp, lambda$here2);
-  lambda$here3 = lambda$6(ratioRegions2, width, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-  tmp1 = width - 1;
-  lambda$here4 = lambda$5(ratioRegions2, height, e);
-  ratioRegions2[doo$accessorSymbol](tmp1, lambda$here4);
-  pushes = new ratioRegions2.Ref.class(0);
-  lifts = new ratioRegions2.Ref.class(0);
-  relabels = new ratioRegions2.Ref.class(0);
-  return doit_rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
-};
-doit_rao_ratio_region_loop$loop = function doit_rao_ratio_region_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, lg_v, v_max) {
-  loopLabel: while (true) {
-    let v, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal;
-    inlinedVal = lg_v < 0;
-    if (inlinedVal === true) {
-      tmp = ratioRegions2.PInt(undefined);
-      tmp1 = ratioRegions2.Cons(tmp, ratioRegions2.Nil);
-      loop4(ratioRegions2, "V-MAX=~s~%", 0, tmp1);
-      tmp2 = v_max + 1;
-      doit_rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, tmp2);
-      return min_cut(ratioRegions2, height, width, h, m1)
-    }
-    {
-      let p, inlinedVal1;
-      tmp3 = loopPow(lg_v, 1);
-      v = v_max + tmp3;
-      tmp4 = ratioRegions2.PInt(undefined);
-      tmp5 = ratioRegions2.PInt(undefined);
-      tmp6 = ratioRegions2.PInt(undefined);
-      tmp7 = ratioRegions2.Cons(tmp6, ratioRegions2.Nil);
-      tmp8 = ratioRegions2.Cons(tmp5, tmp7);
-      tmp9 = ratioRegions2.Cons(tmp4, tmp8);
-      loop4(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp9);
-      doit_rao_ratio_region_loop_preflow_push$preflow_push1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v);
-      tmp10 = lg_v - 1;
-      p = lambda$3(ratioRegions2, width, h, m1);
-      inlinedVal1 = loop2(height, p, 0);
-      if (inlinedVal1 === true) {
-        lg_v = tmp10;
-        v_max = v;
-        continue loopLabel
-      }
-      lg_v = tmp10;
-      v_max = v_max;
-      continue loopLabel;
-    }
-  }
-};
-doit_rao_ratio_region$rao_ratio_region = function doit_rao_ratio_region$rao_ratio_region(c_right, c_down, w, lg_max_v) {
-  let m1, m2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, init1, scrut, arg$Matrix$0$, arg$Matrix$0$1;
-  if (w instanceof ratioRegions1.Matrix.class) {
-    let inlinedVal6;
-    arg$Matrix$0$1 = w.a;
-    inlinedVal6 = arg$Matrix$0$1.length;
-    if (w instanceof ratioRegions1.Matrix.class) {
-      let inlinedVal7, inlinedVal8, f, f1, f2, f3, f4, f5, scrut1, scrut2, scrut3, scrut4, scrut5, scrut6;
-      arg$Matrix$0$ = w.a;
-      inlinedVal7 = arg$Matrix$0$.at(0);
-      inlinedVal8 = inlinedVal7.length;
-      tmp = inlinedVal8 - 1;
-      f = lambda$(tmp, 0);
-      scrut6 = inlinedVal6 > 0;
-      if (scrut6 === true) {
-        let inlinedVal9, tmp8, arr, i, n, x, inlinedVal10;
-        inlinedVal9 = lambda(tmp, 0);
-        tmp8 = [];
-        arr = tmp8;
-        i = 0;
-        n = inlinedVal6;
-        x = inlinedVal9;
-        inlinedLbl: {
-          loopLabel: while (true) {
-            let scrut7, tmp9;
-            scrut7 = i == n;
-            if (scrut7 === true) {
-              inlinedVal10 = arr;
-              break inlinedLbl
-            }
-            arr[i] = x;
-            tmp9 = i + 1;
-            i = tmp9;
+            tmp8 = i + 1;
+            i = tmp8;
             continue loopLabel;
           }
+          tmp9 = i + 1;
+          i = tmp9;
+          continue loopLabel;
         }
-        init(inlinedVal6, f, inlinedVal10, 1);
-        inlinedVal = ratioRegions1.Matrix(inlinedVal10);
-        tmp1 = inlinedVal6 - 1;
-        f1 = lambda$(inlinedVal8, 0);
-        scrut5 = tmp1 > 0;
-        if (scrut5 === true) {
-          let inlinedVal11, tmp9, arr1, i1, n1, x1, inlinedVal12;
-          inlinedVal11 = lambda(inlinedVal8, 0);
-          tmp9 = [];
-          arr1 = tmp9;
-          i1 = 0;
-          n1 = tmp1;
-          x1 = inlinedVal11;
-          inlinedLbl1: {
-            loopLabel1: while (true) {
-              let scrut7, tmp10;
-              scrut7 = i1 == n1;
-              if (scrut7 === true) {
-                inlinedVal12 = arr1;
-                break inlinedLbl1
-              }
-              arr1[i1] = x1;
-              tmp10 = i1 + 1;
-              i1 = tmp10;
-              continue loopLabel1;
-            }
-          }
-          init(tmp1, f1, inlinedVal12, 1);
-          inlinedVal1 = ratioRegions1.Matrix(inlinedVal12);
-          f2 = lambda$(inlinedVal8, 0);
-          scrut4 = inlinedVal6 > 0;
-          if (scrut4 === true) {
-            let inlinedVal13, tmp10, arr2, i2, n2, x2, inlinedVal14;
-            inlinedVal13 = lambda(inlinedVal8, 0);
-            tmp10 = [];
-            arr2 = tmp10;
-            i2 = 0;
-            n2 = inlinedVal6;
-            x2 = inlinedVal13;
-            inlinedLbl2: {
-              loopLabel2: while (true) {
-                let scrut7, tmp11;
-                scrut7 = i2 == n2;
-                if (scrut7 === true) {
-                  inlinedVal14 = arr2;
-                  break inlinedLbl2
+      case true:
+        return runtime.Unit;
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+  }
+};
+doit_rao_ratio_region_loop_loop$loop = function doit_rao_ratio_region_loop_loop$loop(ratioRegions2, control_string, i, values) {
+  loopLabel: while (true) {
+    let scrut, scrut1, scrut2, scrut3, tmp, tmp1, arg$Cons$0$, arg$Cons$1$, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, inlinedVal;
+    inlinedVal = control_string.length;
+    tmp = i == inlinedVal;
+    switch (tmp) {
+      case false:
+        {
+          let inlinedVal1;
+          inlinedVal1 = control_string.at(i);
+          scrut = inlinedVal1 == "~";
+          if (scrut === true) {
+            let inlinedVal2;
+            tmp1 = i + 1;
+            inlinedVal2 = control_string.at(tmp1);
+            scrut1 = inlinedVal2 == "s";
+            if (scrut1 === true) {
+              if (values instanceof ratioRegions2.Cons.class) {
+                arg$Cons$0$ = values.head;
+                arg$Cons$1$ = values.tail;
+                if (arg$Cons$0$ instanceof ratioRegions2.PInt.class) {
+                  tmp2 = i + 2;
+                  i = tmp2;
+                  values = arg$Cons$1$;
+                  continue loopLabel
                 }
-                arr2[i2] = x2;
-                tmp11 = i2 + 1;
-                i2 = tmp11;
-                continue loopLabel2;
+                scrut3 = inlinedVal2 == "%";
+                if (scrut3 === true) {
+                  tmp3 = i + 2;
+                  i = tmp3;
+                  continue loopLabel
+                }
+                tmp4 = i + 1;
+                i = tmp4;
+                continue loopLabel;
+              }
+              scrut3 = inlinedVal2 == "%";
+              if (scrut3 === true) {
+                tmp5 = i + 2;
+                i = tmp5;
+                continue loopLabel
+              }
+              tmp6 = i + 1;
+              i = tmp6;
+              continue loopLabel;
+            }
+            scrut2 = inlinedVal2 == "a";
+            if (scrut2 === true) {
+              if (values instanceof ratioRegions2.Cons.class) {
+                arg$Cons$0$ = values.head;
+                arg$Cons$1$ = values.tail;
               }
             }
-            init(inlinedVal6, f2, inlinedVal14, 1);
-            inlinedVal2 = ratioRegions1.Matrix(inlinedVal14);
-            f3 = lambda$(inlinedVal8, 0);
-            scrut3 = inlinedVal6 > 0;
+            scrut3 = inlinedVal2 == "%";
             if (scrut3 === true) {
-              let inlinedVal15, tmp11, arr3, i3, n3, x3, inlinedVal16;
-              inlinedVal15 = lambda(inlinedVal8, 0);
-              tmp11 = [];
-              arr3 = tmp11;
-              i3 = 0;
-              n3 = inlinedVal6;
-              x3 = inlinedVal15;
-              inlinedLbl3: {
-                loopLabel3: while (true) {
-                  let scrut7, tmp12;
-                  scrut7 = i3 == n3;
-                  if (scrut7 === true) {
-                    inlinedVal16 = arr3;
-                    break inlinedLbl3
-                  }
-                  arr3[i3] = x3;
-                  tmp12 = i3 + 1;
-                  i3 = tmp12;
-                  continue loopLabel3;
-                }
-              }
-              init(inlinedVal6, f3, inlinedVal16, 1);
-              inlinedVal3 = ratioRegions1.Matrix(inlinedVal16);
-              f4 = lambda$(inlinedVal8, 0);
-              scrut2 = inlinedVal6 > 0;
-              if (scrut2 === true) {
-                let inlinedVal17, tmp12, arr4, i4, n4, x4, inlinedVal18;
-                inlinedVal17 = lambda(inlinedVal8, 0);
-                tmp12 = [];
-                arr4 = tmp12;
-                i4 = 0;
-                n4 = inlinedVal6;
-                x4 = inlinedVal17;
-                inlinedLbl4: {
-                  loopLabel4: while (true) {
-                    let scrut7, tmp13;
-                    scrut7 = i4 == n4;
-                    if (scrut7 === true) {
-                      inlinedVal18 = arr4;
-                      break inlinedLbl4
-                    }
-                    arr4[i4] = x4;
-                    tmp13 = i4 + 1;
-                    i4 = tmp13;
-                    continue loopLabel4;
-                  }
-                }
-                init(inlinedVal6, f4, inlinedVal18, 1);
-                inlinedVal4 = ratioRegions1.Matrix(inlinedVal18);
-                f5 = lambda$(inlinedVal8, false);
-                scrut1 = inlinedVal6 > 0;
-                if (scrut1 === true) {
-                  let inlinedVal19, tmp13, arr5, i5, n5, x5, inlinedVal20;
-                  inlinedVal19 = lambda(inlinedVal8, false);
-                  tmp13 = [];
-                  arr5 = tmp13;
-                  i5 = 0;
-                  n5 = inlinedVal6;
-                  x5 = inlinedVal19;
-                  inlinedLbl5: {
-                    loopLabel5: while (true) {
-                      let scrut7, tmp14;
-                      scrut7 = i5 == n5;
-                      if (scrut7 === true) {
-                        inlinedVal20 = arr5;
-                        break inlinedLbl5
-                      }
-                      arr5[i5] = x5;
-                      tmp14 = i5 + 1;
-                      i5 = tmp14;
-                      continue loopLabel5;
-                    }
-                  }
-                  init(inlinedVal6, f5, inlinedVal20, 1);
-                  inlinedVal5 = ratioRegions1.Matrix(inlinedVal20);
-                  tmp2 = inlinedVal6 * inlinedVal8;
-                  m1 = tmp2 + 2;
-                  tmp3 = 2 * inlinedVal6;
-                  tmp4 = tmp3 * inlinedVal8;
-                  m2 = tmp4 + 2;
-                  tmp5 = 2 * inlinedVal6;
-                  tmp6 = tmp5 * inlinedVal8;
-                  tmp7 = tmp6 + 3;
-                  init1 = ratioRegions1.Nil;
-                  scrut = tmp7 > 0;
-                  if (scrut === true) {
-                    let tmp14, arr6, i6, n6, x6, inlinedVal21;
-                    tmp14 = [];
-                    arr6 = tmp14;
-                    i6 = 0;
-                    n6 = tmp7;
-                    x6 = init1;
-                    inlinedLbl6: {
-                      loopLabel6: while (true) {
-                        let scrut7, tmp15;
-                        scrut7 = i6 == n6;
-                        if (scrut7 === true) {
-                          inlinedVal21 = arr6;
-                          break inlinedLbl6
-                        }
-                        arr6[i6] = x6;
-                        tmp15 = i6 + 1;
-                        i6 = tmp15;
-                        continue loopLabel6;
-                      }
-                    }
-                    return doit_rao_ratio_region_loop$loop(ratioRegions1, c_right, c_down, w, inlinedVal6, inlinedVal8, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, m1, m2, inlinedVal21, lg_max_v, 0)
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              tmp7 = i + 2;
+              i = tmp7;
+              continue loopLabel
             }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            tmp8 = i + 1;
+            i = tmp8;
+            continue loopLabel;
           }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
-      case false:
-        {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
+          tmp9 = i + 1;
+          i = tmp9;
           continue loopLabel;
         }
       case true:
@@ -2297,453 +690,71 @@ doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 = function doit_rao_ra
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-doit_rao_ratio_region_loop_preflow_push_loop$loop1 = function doit_rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
+rao_ratio_region_loop_loop$loop = function rao_ratio_region_loop_loop$loop(ratioRegions2, control_string, i, values) {
   loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-doit_rao_ratio_region_loop_preflow_push$preflow_push1 = function doit_rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  lambda$here = lambda$9(ratioRegions2, width, f_t, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here);
-  lambda$here1 = lambda$8(ratioRegions2, width, f_right);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-  tmp = height - 1;
-  lambda$here2 = lambda$7(ratioRegions2, width, f_down);
-  ratioRegions2[doo$accessorSymbol](tmp, lambda$here2);
-  lambda$here3 = lambda$6(ratioRegions2, width, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-  tmp1 = width - 1;
-  lambda$here4 = lambda$5(ratioRegions2, height, e);
-  ratioRegions2[doo$accessorSymbol](tmp1, lambda$here4);
-  pushes = new ratioRegions2.Ref.class(0);
-  lifts = new ratioRegions2.Ref.class(0);
-  relabels = new ratioRegions2.Ref.class(0);
-  return doit_rao_ratio_region_loop_preflow_push_loop$loop1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK$loopK = function rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
+    let scrut, scrut1, scrut2, scrut3, tmp, tmp1, arg$Cons$0$, arg$Cons$1$, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, inlinedVal;
+    inlinedVal = control_string.length;
+    tmp = i == inlinedVal;
+    switch (tmp) {
       case false:
         {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
+          let inlinedVal1;
+          inlinedVal1 = control_string.at(i);
+          scrut = inlinedVal1 == "~";
+          if (scrut === true) {
+            let inlinedVal2;
+            tmp1 = i + 1;
+            inlinedVal2 = control_string.at(tmp1);
+            scrut1 = inlinedVal2 == "s";
+            if (scrut1 === true) {
+              if (values instanceof ratioRegions2.Cons.class) {
+                arg$Cons$0$ = values.head;
+                arg$Cons$1$ = values.tail;
+                if (arg$Cons$0$ instanceof ratioRegions2.PInt.class) {
+                  tmp2 = i + 2;
+                  i = tmp2;
+                  values = arg$Cons$1$;
+                  continue loopLabel
+                }
+                scrut3 = inlinedVal2 == "%";
+                if (scrut3 === true) {
+                  tmp3 = i + 2;
+                  i = tmp3;
+                  continue loopLabel
+                }
+                tmp4 = i + 1;
+                i = tmp4;
+                continue loopLabel;
+              }
+              scrut3 = inlinedVal2 == "%";
+              if (scrut3 === true) {
+                tmp5 = i + 2;
+                i = tmp5;
+                continue loopLabel
+              }
+              tmp6 = i + 1;
+              i = tmp6;
+              continue loopLabel;
+            }
+            scrut2 = inlinedVal2 == "a";
+            if (scrut2 === true) {
+              if (values instanceof ratioRegions2.Cons.class) {
+                arg$Cons$0$ = values.head;
+                arg$Cons$1$ = values.tail;
+              }
+            }
+            scrut3 = inlinedVal2 == "%";
+            if (scrut3 === true) {
+              tmp7 = i + 2;
+              i = tmp7;
+              continue loopLabel
+            }
+            tmp8 = i + 1;
+            i = tmp8;
+            continue loopLabel;
+          }
+          tmp9 = i + 1;
+          i = tmp9;
           continue loopLabel;
         }
       case true:
@@ -2752,491 +763,71 @@ rao_ratio_region_loop_preflow_push_loop_loopK$loopK = function rao_ratio_region_
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-rao_ratio_region_loop_preflow_push_loop$loop = function rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
+loop_loop$loop = function loop_loop$loop(ratioRegions2, control_string, i, values) {
   loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-rao_ratio_region_loop_preflow_push$preflow_push = function rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  lambda$here = lambda$9(ratioRegions2, width, f_t, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here);
-  lambda$here1 = lambda$8(ratioRegions2, width, f_right);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-  tmp = height - 1;
-  lambda$here2 = lambda$7(ratioRegions2, width, f_down);
-  ratioRegions2[doo$accessorSymbol](tmp, lambda$here2);
-  lambda$here3 = lambda$6(ratioRegions2, width, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-  tmp1 = width - 1;
-  lambda$here4 = lambda$5(ratioRegions2, height, e);
-  ratioRegions2[doo$accessorSymbol](tmp1, lambda$here4);
-  pushes = new ratioRegions2.Ref.class(0);
-  lifts = new ratioRegions2.Ref.class(0);
-  relabels = new ratioRegions2.Ref.class(0);
-  return rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
-};
-rao_ratio_region_loop$loop = function rao_ratio_region_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, lg_v, v_max) {
-  loopLabel: while (true) {
-    let v, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal;
-    inlinedVal = lg_v < 0;
-    if (inlinedVal === true) {
-      tmp = ratioRegions2.PInt(undefined);
-      tmp1 = ratioRegions2.Cons(tmp, ratioRegions2.Nil);
-      loop4(ratioRegions2, "V-MAX=~s~%", 0, tmp1);
-      tmp2 = v_max + 1;
-      rao_ratio_region_loop_preflow_push$preflow_push1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, tmp2);
-      return min_cut(ratioRegions2, height, width, h, m1)
-    }
-    {
-      let p, inlinedVal1;
-      tmp3 = loopPow(lg_v, 1);
-      v = v_max + tmp3;
-      tmp4 = ratioRegions2.PInt(undefined);
-      tmp5 = ratioRegions2.PInt(undefined);
-      tmp6 = ratioRegions2.PInt(undefined);
-      tmp7 = ratioRegions2.Cons(tmp6, ratioRegions2.Nil);
-      tmp8 = ratioRegions2.Cons(tmp5, tmp7);
-      tmp9 = ratioRegions2.Cons(tmp4, tmp8);
-      loop4(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp9);
-      rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v);
-      tmp10 = lg_v - 1;
-      p = lambda$3(ratioRegions2, width, h, m1);
-      inlinedVal1 = loop2(height, p, 0);
-      if (inlinedVal1 === true) {
-        lg_v = tmp10;
-        v_max = v;
-        continue loopLabel
-      }
-      lg_v = tmp10;
-      v_max = v_max;
-      continue loopLabel;
-    }
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 = function rao_ratio_region_loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
+    let scrut, scrut1, scrut2, scrut3, tmp, tmp1, arg$Cons$0$, arg$Cons$1$, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, inlinedVal;
+    inlinedVal = control_string.length;
+    tmp = i == inlinedVal;
+    switch (tmp) {
       case false:
         {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
+          let inlinedVal1;
+          inlinedVal1 = control_string.at(i);
+          scrut = inlinedVal1 == "~";
+          if (scrut === true) {
+            let inlinedVal2;
+            tmp1 = i + 1;
+            inlinedVal2 = control_string.at(tmp1);
+            scrut1 = inlinedVal2 == "s";
+            if (scrut1 === true) {
+              if (values instanceof ratioRegions2.Cons.class) {
+                arg$Cons$0$ = values.head;
+                arg$Cons$1$ = values.tail;
+                if (arg$Cons$0$ instanceof ratioRegions2.PInt.class) {
+                  tmp2 = i + 2;
+                  i = tmp2;
+                  values = arg$Cons$1$;
+                  continue loopLabel
+                }
+                scrut3 = inlinedVal2 == "%";
+                if (scrut3 === true) {
+                  tmp3 = i + 2;
+                  i = tmp3;
+                  continue loopLabel
+                }
+                tmp4 = i + 1;
+                i = tmp4;
+                continue loopLabel;
+              }
+              scrut3 = inlinedVal2 == "%";
+              if (scrut3 === true) {
+                tmp5 = i + 2;
+                i = tmp5;
+                continue loopLabel
+              }
+              tmp6 = i + 1;
+              i = tmp6;
+              continue loopLabel;
+            }
+            scrut2 = inlinedVal2 == "a";
+            if (scrut2 === true) {
+              if (values instanceof ratioRegions2.Cons.class) {
+                arg$Cons$0$ = values.head;
+                arg$Cons$1$ = values.tail;
+              }
+            }
+            scrut3 = inlinedVal2 == "%";
+            if (scrut3 === true) {
+              tmp7 = i + 2;
+              i = tmp7;
+              continue loopLabel
+            }
+            tmp8 = i + 1;
+            i = tmp8;
+            continue loopLabel;
+          }
+          tmp9 = i + 1;
+          i = tmp9;
           continue loopLabel;
         }
       case true:
@@ -3244,3039 +835,6 @@ rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 = function rao_ratio_region
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-};
-rao_ratio_region_loop_preflow_push_loop$loop1 = function rao_ratio_region_loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
-  loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        rao_ratio_region_loop_preflow_push_loop_loopK$loopK1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-rao_ratio_region_loop_preflow_push$preflow_push1 = function rao_ratio_region_loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  lambda$here = lambda$9(ratioRegions2, width, f_t, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here);
-  lambda$here1 = lambda$8(ratioRegions2, width, f_right);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-  tmp = height - 1;
-  lambda$here2 = lambda$7(ratioRegions2, width, f_down);
-  ratioRegions2[doo$accessorSymbol](tmp, lambda$here2);
-  lambda$here3 = lambda$6(ratioRegions2, width, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-  tmp1 = width - 1;
-  lambda$here4 = lambda$5(ratioRegions2, height, e);
-  ratioRegions2[doo$accessorSymbol](tmp1, lambda$here4);
-  pushes = new ratioRegions2.Ref.class(0);
-  lifts = new ratioRegions2.Ref.class(0);
-  relabels = new ratioRegions2.Ref.class(0);
-  return rao_ratio_region_loop_preflow_push_loop$loop1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift = function loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-loop_preflow_push_loop_loopK_lambda$_lambda$lambda = function loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-loop_preflow_push_loop_loopK_lambda$$lambda$ = function loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-loop_preflow_push_loop_loopK$loopK = function loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
-      case false:
-        {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
-          continue loopLabel;
-        }
-      case true:
-        return runtime.Unit;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-loop_preflow_push_loop$loop = function loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
-  loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-loop_preflow_push$preflow_push = function loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  lambda$here = lambda$9(ratioRegions2, width, f_t, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here);
-  lambda$here1 = lambda$8(ratioRegions2, width, f_right);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-  tmp = height - 1;
-  lambda$here2 = lambda$7(ratioRegions2, width, f_down);
-  ratioRegions2[doo$accessorSymbol](tmp, lambda$here2);
-  lambda$here3 = lambda$6(ratioRegions2, width, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-  tmp1 = width - 1;
-  lambda$here4 = lambda$5(ratioRegions2, height, e);
-  ratioRegions2[doo$accessorSymbol](tmp1, lambda$here4);
-  pushes = new ratioRegions2.Ref.class(0);
-  lifts = new ratioRegions2.Ref.class(0);
-  relabels = new ratioRegions2.Ref.class(0);
-  return loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 = function loop_preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-loop_preflow_push_loop_loopK_lambda$$lambda$1 = function loop_preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return loop_preflow_push_loop_loopK_lambda$_lambda$lambda1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-loop_preflow_push_loop_loopK$loopK1 = function loop_preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
-      case false:
-        {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = loop_preflow_push_loop_loopK_lambda$$lambda$1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
-          continue loopLabel;
-        }
-      case true:
-        return runtime.Unit;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-loop_preflow_push_loop$loop1 = function loop_preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
-  loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        loop_preflow_push_loop_loopK$loopK1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-loop_preflow_push$preflow_push1 = function loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  lambda$here = lambda$9(ratioRegions2, width, f_t, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here);
-  lambda$here1 = lambda$8(ratioRegions2, width, f_right);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-  tmp = height - 1;
-  lambda$here2 = lambda$7(ratioRegions2, width, f_down);
-  ratioRegions2[doo$accessorSymbol](tmp, lambda$here2);
-  lambda$here3 = lambda$6(ratioRegions2, width, e);
-  ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-  tmp1 = width - 1;
-  lambda$here4 = lambda$5(ratioRegions2, height, e);
-  ratioRegions2[doo$accessorSymbol](tmp1, lambda$here4);
-  pushes = new ratioRegions2.Ref.class(0);
-  lifts = new ratioRegions2.Ref.class(0);
-  relabels = new ratioRegions2.Ref.class(0);
-  return loop_preflow_push_loop$loop1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-preflow_push_loop_loopK_lambda$_lambda_lift$lift = function preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-preflow_push_loop_loopK_lambda$_lambda$lambda = function preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        preflow_push_loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-preflow_push_loop_loopK_lambda$$lambda$ = function preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return preflow_push_loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-preflow_push_loop_loopK$loopK = function preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
-      case false:
-        {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = preflow_push_loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
-          continue loopLabel;
-        }
-      case true:
-        return runtime.Unit;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-preflow_push_loop$loop = function preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
-  loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
-    tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
-    inlinedVal1 = inlinedVal == 0;
-    if (inlinedVal1 === true) {
-      let inlinedVal3;
-      switch (p) {
-        case false:
-          inlinedVal3 = true;
-          break;
-        case true:
-          inlinedVal3 = false;
-          break;
-        default:
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      tmp = inlinedVal3;
-    } else {
-      tmp = false;
-    }
-    if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
-      q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-      lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-      lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-      ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-      loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-      tmp1 = relabels.value + 1;
-      relabels.value = tmp1;
-      p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
-        tmp2 = ratioRegions2.PInt(undefined);
-        tmp3 = ratioRegions2.PString(undefined);
-        tmp4 = ratioRegions2.PInt(undefined);
-        tmp5 = ratioRegions2.PString(undefined);
-        tmp6 = ratioRegions2.PInt(undefined);
-        tmp7 = ratioRegions2.PString(undefined);
-        tmp8 = ratioRegions2.PInt(undefined);
-        tmp9 = ratioRegions2.PString(undefined);
-        tmp10 = ratioRegions2.Cons(tmp9, ratioRegions2.Nil);
-        tmp11 = ratioRegions2.Cons(tmp8, tmp10);
-        tmp12 = ratioRegions2.Cons(tmp7, tmp11);
-        tmp13 = ratioRegions2.Cons(tmp6, tmp12);
-        tmp14 = ratioRegions2.Cons(tmp5, tmp13);
-        tmp15 = ratioRegions2.Cons(tmp4, tmp14);
-        tmp16 = ratioRegions2.Cons(tmp3, tmp15);
-        tmp17 = ratioRegions2.Cons(tmp2, tmp16);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
-      }
-      {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
-        lambda$here1 = lambda$15(ratioRegions2, width, marked);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here1);
-        lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here2);
-        p = true;
-        continue loopLabel;
-      }
-    }
-    {
-      let p1, inlinedVal3;
-      p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        preflow_push_loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
-        tmp19 = i + 1;
-        i = tmp19;
-        p = false;
-        continue loopLabel
-      }
-      {
-        let q1, tail, lambda$here3, lambda$here4;
-        q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
-        lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here3);
-        lambda$here4 = lambda$24(ratioRegions2, w, width, f_t, h, marked, v, q1, tail);
-        ratioRegions2[doo$accessorSymbol](height, lambda$here4);
-        loop5(ratioRegions2, c_right, c_down, height, width, f_right, f_down, h, marked, q1, tail);
-        tmp20 = relabels.value + 1;
-        relabels.value = tmp20;
-        tmp21 = ratioRegions2.PInt(undefined);
-        tmp22 = ratioRegions2.PString(undefined);
-        tmp23 = ratioRegions2.PInt(undefined);
-        tmp24 = ratioRegions2.PString(undefined);
-        tmp25 = ratioRegions2.PInt(undefined);
-        tmp26 = ratioRegions2.PString(undefined);
-        tmp27 = ratioRegions2.PInt(undefined);
-        tmp28 = ratioRegions2.PString(undefined);
-        tmp29 = ratioRegions2.Cons(tmp28, ratioRegions2.Nil);
-        tmp30 = ratioRegions2.Cons(tmp27, tmp29);
-        tmp31 = ratioRegions2.Cons(tmp26, tmp30);
-        tmp32 = ratioRegions2.Cons(tmp25, tmp31);
-        tmp33 = ratioRegions2.Cons(tmp24, tmp32);
-        tmp34 = ratioRegions2.Cons(tmp23, tmp33);
-        tmp35 = ratioRegions2.Cons(tmp22, tmp34);
-        tmp36 = ratioRegions2.Cons(tmp21, tmp35);
-        return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp36);
-      }
-    }
-  }
-};
-preflow_push_loop_loopK_lambda$_lambda_lift_min$min = function preflow_push_loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop = function preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-loop_loopK_lambda$_lambda_lift$lift = function loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-loop_loopK_lambda$_lambda$lambda = function loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        loop_loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-loop_loopK_lambda$$lambda$ = function loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return loop_loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-loop_loopK$loopK = function loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, k) {
-  loopLabel: while (true) {
-    let tmp, inlinedVal;
-    inlinedVal = k < 0;
-    switch (inlinedVal) {
-      case false:
-        {
-          let inlinedVal1, x, f, f1;
-          inlinedVal1 = q.at(k);
-          x = ratioRegions2.Nil;
-          q[k] = x;
-          f = lambda$19(ratioRegions2, marked);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = loop_loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
-          ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
-          tmp = k - 1;
-          k = tmp;
-          continue loopLabel;
-        }
-      case true:
-        return runtime.Unit;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-loop_loopK_lambda$_lambda_lift_min$min = function loop_loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-loop_loopK_lambda$_lambda_lift_min_loop$loop = function loop_loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-lift_min$min = function lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-lift_min_loop$loop = function lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-loopK_lambda$_lambda_lift$lift = function loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-loopK_lambda$_lambda$lambda = function loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        loopK_lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-loopK_lambda$$lambda$ = function loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
-  return (p) => {
-    return loopK_lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
-  }
-};
-loopK_lambda$_lambda_lift_min$min = function loopK_lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-loopK_lambda$_lambda_lift_min_loop$loop = function loopK_lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-lambda_lift$lift = function lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda_lift_min$min = function lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-lambda_lift_min_loop$loop = function lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-lambda$_lambda_lift$lift = function lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
-  tmp = width - 1;
-  scrut = x == tmp;
-  if (scrut === true) {
-    tmp1 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp2 = x + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp3 = m2;
-    }
-    tmp1 = tmp3;
-  }
-  scrut1 = x == 0;
-  if (scrut1 === true) {
-    tmp4 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp5 = x - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp6 = m2;
-    }
-    tmp4 = tmp6;
-  }
-  tmp7 = height - 1;
-  scrut2 = y == tmp7;
-  if (scrut2 === true) {
-    tmp8 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp9 = y + 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp10 = m2;
-    }
-    tmp8 = tmp10;
-  }
-  scrut3 = y == 0;
-  if (scrut3 === true) {
-    tmp11 = m1;
-  } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
-    if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
-      tmp12 = y - 1;
-      if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
-        arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
-      } else {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-    } else {
-      tmp13 = m2;
-    }
-    tmp11 = tmp13;
-  }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
-    tmp14 = 0;
-  } else {
-    tmp14 = m2;
-  }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$lambda = function lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
-  if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-    element0$ = runtime.Tuple.get(p, 0);
-    runtime.Tuple.get(p, 1);
-    if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
-      runtime.Tuple.get(p, 0);
-      element1$ = runtime.Tuple.get(p, 1);
-      scrut = can_push_right(ratioRegions2, c_right, width, f_right, h, e, element1$, element0$);
-      if (scrut === true) {
-        tmp = pushes.value + 1;
-        pushes.value = tmp;
-        push_right(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut1 = can_push_left(ratioRegions2, c_right, f_right, h, e, element1$, element0$);
-      if (scrut1 === true) {
-        tmp1 = pushes.value + 1;
-        pushes.value = tmp1;
-        push_left(ratioRegions2, c_right, f_right, h, e, marked, q, element1$, element0$);
-      }
-      scrut2 = can_push_down(ratioRegions2, c_down, height, f_down, h, e, element1$, element0$);
-      if (scrut2 === true) {
-        tmp2 = pushes.value + 1;
-        pushes.value = tmp2;
-        push_down(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut3 = can_push_up(ratioRegions2, c_down, f_down, h, e, element1$, element0$);
-      if (scrut3 === true) {
-        tmp3 = pushes.value + 1;
-        pushes.value = tmp3;
-        push_up(ratioRegions2, c_down, f_down, h, e, marked, q, element1$, element0$);
-      }
-      scrut4 = can_push_t(ratioRegions2, w, f_t, h, e, v, element1$, element0$);
-      if (scrut4 === true) {
-        tmp4 = pushes.value + 1;
-        pushes.value = tmp4;
-        push_t(ratioRegions2, w, f_t, e, v, element1$, element0$);
-      }
-      scrut5 = can_lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, element1$, element0$);
-      if (scrut5 === true) {
-        tmp5 = lifts.value + 1;
-        lifts.value = tmp5;
-        lambda$_lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
-      }
-      if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
-        arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
-          case false:
-            return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
-          case true:
-            return runtime.Unit;
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda_lift_min$min = function lambda$_lambda_lift_min$min(l) {
-  return l(undefined, undefined, undefined, undefined)
-};
-lambda$_lambda_lift_min_loop$loop = function lambda$_lambda_lift_min_loop$loop(ratioRegions2, l, min) {
-  return l(undefined, undefined, undefined, undefined, undefined, ratioRegions2, min)
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons = function preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons = function preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker = function preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil = function preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-loop_loopK_lambda$_lambda_lift_min$l_Cons = function loop_loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-loop_loopK_lambda$_lambda_lift_min_loop$l_Cons = function loop_loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker = function loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-loop_loopK_lambda$_lambda_lift_min_loop$l_Nil = function loop_loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-lift_min$l_Cons = function lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-lift_min_loop$l_Cons = function lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-lift_min_loop$l_Cons$worker = function lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-lift_min_loop$l_Nil = function lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-loopK_lambda$_lambda_lift_min$l_Cons = function loopK_lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-loopK_lambda$_lambda_lift_min_loop$l_Cons = function loopK_lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-loopK_lambda$_lambda_lift_min_loop$l_Cons$worker = function loopK_lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-loopK_lambda$_lambda_lift_min_loop$l_Nil = function loopK_lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-lambda_lift_min$l_Cons = function lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-lambda_lift_min_loop$l_Cons = function lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-lambda_lift_min_loop$l_Cons$worker = function lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-lambda_lift_min_loop$l_Nil = function lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-lambda$_lambda_lift_min$l_Cons = function lambda$_lambda_lift_min$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l1, fv_x) => {
-    return Cons_tail(undefined, undefined, undefined, undefined, undefined, ratioRegions1, Cons_head)
-  }
-};
-lambda$_lambda_lift_min_loop$l_Cons = function lambda$_lambda_lift_min_loop$l_Cons(Cons_head, Cons_tail) {
-  return (fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) => {
-    return lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min)
-  }
-};
-lambda$_lambda_lift_min_loop$l_Cons$worker = function lambda$_lambda_lift_min_loop$l_Cons$worker(Cons_head, Cons_tail, fv_arg$Cons$0$, fv_arg$Cons$1$, fv_l2, fv_x, fv_tmp, fv_ratioRegions, fv_min) {
-  let scrut;
-  scrut = fv_min < Cons_head;
-  if (scrut === true) {
-    return runtime.Unit
-  }
-  return runtime.Unit;
-};
-lambda$_lambda_lift_min_loop$l_Nil = function lambda$_lambda_lift_min_loop$l_Nil() {
-  return (fv_min) => {
-    return fv_min
-  }
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 = function main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 = function doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 = function rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 = function loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest = function preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest = function preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-loop_loopK_lambda$_lambda_lift_min$l_rest = function loop_loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-loop_loopK_lambda$_lambda_lift_min_loop$l_rest = function loop_loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-lift_min$l_rest = function lift_min$l_rest() {
-  return null
-};
-lift_min_loop$l_rest = function lift_min_loop$l_rest() {
-  return null
-};
-loopK_lambda$_lambda_lift_min$l_rest = function loopK_lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-loopK_lambda$_lambda_lift_min_loop$l_rest = function loopK_lambda$_lambda_lift_min_loop$l_rest() {
-  return null
-};
-lambda_lift_min$l_rest = function lambda_lift_min$l_rest() {
-  return null
-};
-lambda_lift_min_loop$l_rest = function lambda_lift_min_loop$l_rest() {
-  return null
-};
-lambda$_lambda_lift_min$l_rest = function lambda$_lambda_lift_min$l_rest() {
-  return null
-};
-lambda$_lambda_lift_min_loop$l_rest = function lambda$_lambda_lift_min_loop$l_rest() {
-  return null
 };
 lambda$31 = (undefined, function (ratioRegions2, height, width, c_right, y) {
   return (x) => {
@@ -6783,9 +1341,7 @@ lambda5 = (undefined, function (ratioRegions2, h, e, m1, y, x) {
 });
 lambda$17 = (undefined, function (ratioRegions2, width, h, e, m1) {
   return (y) => {
-    let p;
-    p = lambda$23(ratioRegions2, h, e, m1, y);
-    return loop2(width, p, 0)
+    return lambda6(ratioRegions2, width, h, e, m1, y)
   }
 });
 lambda$16 = (undefined, function (ratioRegions2, q) {
@@ -6887,9 +1443,7 @@ lambda12 = (undefined, function (ratioRegions2, c_right, c_down, w, height, widt
 });
 lambda$13 = (undefined, function (ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v) {
   return (ps) => {
-    let p;
-    p = lambda$20(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-    return ratioRegions2[listExists$tailrec$accessorSymbol](p, ps)
+    return lambda13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v, ps)
   }
 });
 lambda$19 = (undefined, function (ratioRegions2, marked) {
@@ -6899,7 +1453,7 @@ lambda$19 = (undefined, function (ratioRegions2, marked) {
 });
 lambda$18 = (undefined, function (ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts) {
   return (p) => {
-    return lambda$_lambda$lambda(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
+    return lambda15(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p)
   }
 });
 lambda14 = (undefined, function (ratioRegions2, marked, p) {
@@ -6924,7 +1478,7 @@ lambda14 = (undefined, function (ratioRegions2, marked, p) {
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
 lambda15 = (undefined, function (ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, p) {
-  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, arg$Matrix$0$, element1$, element0$;
+  let scrut, scrut1, scrut2, scrut3, scrut4, scrut5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, inlinedVal1, arg$Matrix$0$, tmp6, element1$, element0$;
   if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
     element0$ = runtime.Tuple.get(p, 0);
     runtime.Tuple.get(p, 1);
@@ -6965,15 +1519,14 @@ lambda15 = (undefined, function (ratioRegions2, c_right, c_down, w, height, widt
       if (scrut5 === true) {
         tmp5 = lifts.value + 1;
         lifts.value = tmp5;
-        lambda_lift$lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
+        lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, element1$, element0$);
       }
       if (e instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal1, inlinedVal2;
         arg$Matrix$0$ = e.a;
-        inlinedVal1 = arg$Matrix$0$.at(element1$);
-        inlinedVal2 = inlinedVal1.at(element0$);
-        inlinedVal = inlinedVal2 == 0;
-        switch (inlinedVal) {
+        tmp6 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, element1$);
+        inlinedVal = ratioRegions2[vector_ref$accessorSymbol](tmp6, element0$);
+        inlinedVal1 = inlinedVal == 0;
+        switch (inlinedVal1) {
           case false:
             return enqueue1(ratioRegions2, h, marked, q, element1$, element0$);
           case true:
@@ -7026,7 +1579,7 @@ loopK = function loopK(ratioRegions2, c_right, c_down, w, height, width, f_right
           q[k] = x;
           f = lambda$19(ratioRegions2, marked);
           ratioRegions2[listApp$tailrec$accessorSymbol](f, inlinedVal1);
-          f1 = loopK_lambda$$lambda$(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
+          f1 = lambda$18(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts);
           ratioRegions2[listApp$tailrec$accessorSymbol](f1, inlinedVal1);
           tmp = k - 1;
           k = tmp;
@@ -7044,18 +1597,15 @@ lambda$12 = (undefined, function (ratioRegions2, f_t, e, y) {
   }
 });
 lambda16 = (undefined, function (ratioRegions2, f_t, e, y, x) {
-  let arg$Matrix$0$, arg$Matrix$0$1;
+  let arg$Matrix$0$, tmp, arg$Matrix$0$1, tmp1;
   if (e instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal;
     arg$Matrix$0$1 = e.a;
-    inlinedVal = arg$Matrix$0$1.at(y);
-    inlinedVal[x] = 0;
+    tmp1 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, y);
+    ratioRegions2[vector_set$accessorSymbol](tmp1, x, 0);
     if (f_t instanceof ratioRegions2.Matrix.class) {
-      let inlinedVal1;
       arg$Matrix$0$ = f_t.a;
-      inlinedVal1 = arg$Matrix$0$.at(y);
-      inlinedVal1[x] = 0;
-      return runtime.Unit
+      tmp = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+      return ratioRegions2[vector_set$accessorSymbol](tmp, x, 0)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -7074,13 +1624,11 @@ lambda$11 = (undefined, function (ratioRegions2, f_right, y) {
   }
 });
 lambda18 = (undefined, function (ratioRegions2, f_right, y, x) {
-  let arg$Matrix$0$;
+  let arg$Matrix$0$, tmp;
   if (f_right instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal;
     arg$Matrix$0$ = f_right.a;
-    inlinedVal = arg$Matrix$0$.at(y);
-    inlinedVal[x] = 0;
-    return runtime.Unit
+    tmp = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+    return ratioRegions2[vector_set$accessorSymbol](tmp, x, 0)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
@@ -7095,13 +1643,11 @@ lambda$10 = (undefined, function (ratioRegions2, f_down, y) {
   }
 });
 lambda20 = (undefined, function (ratioRegions2, f_down, y, x) {
-  let arg$Matrix$0$;
+  let arg$Matrix$0$, tmp;
   if (f_down instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal;
     arg$Matrix$0$ = f_down.a;
-    inlinedVal = arg$Matrix$0$.at(y);
-    inlinedVal[x] = 0;
-    return runtime.Unit
+    tmp = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+    return ratioRegions2[vector_set$accessorSymbol](tmp, x, 0)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
@@ -7190,8 +1736,9 @@ cf_t = function cf_t(ratioRegions2, w, f_t, v, y, x) {
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 ef_t = function ef_t(ratioRegions2, w, f_t, v, y, x) {
-  cf_t(ratioRegions2, w, f_t, v, y, x);
-  return runtime.Unit
+  let tmp;
+  tmp = cf_t(ratioRegions2, w, f_t, v, y, x);
+  return tmp > 0
 };
 can_push_right = function can_push_right(ratioRegions2, c_right, width, f_right, h, e, y, x) {
   let tmp, tmp1, tmp2, tmp3;
@@ -7665,71 +2212,69 @@ can_lift = function can_lift(ratioRegions2, c_right, c_down, w, height, width, f
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 push_right = function push_right(ratioRegions2, c_right, f_right, h, e, marked, q, y, x) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, inlinedVal, inlinedVal1, inlinedVal2, arg$Matrix$0$, arg$Matrix$0$1, arg$Matrix$0$2, arg$Matrix$0$3, arg$Matrix$0$4, arg$Matrix$0$5, arg$Matrix$0$6;
+  let tmp, tmp1, tmp2, tmp3, tmp4, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, arg$Matrix$0$, tmp5, scrut, arg$Matrix$0$1, tmp6, arg$Matrix$0$2, arg$Matrix$0$3, arg$Matrix$0$4, arg$Matrix$0$5, arg$Matrix$0$6;
   if (e instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal3, inlinedVal4, inlinedVal5;
+    let inlinedVal4, inlinedVal5, inlinedVal6;
     arg$Matrix$0$6 = e.a;
-    inlinedVal3 = arg$Matrix$0$6.at(y);
-    inlinedVal4 = inlinedVal3.at(x);
+    inlinedVal4 = arg$Matrix$0$6.at(y);
+    inlinedVal5 = inlinedVal4.at(x);
     tmp = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal5 = inlinedVal4 < 0;
-    if (inlinedVal5 === true) {
+    inlinedVal6 = inlinedVal5 < 0;
+    if (inlinedVal6 === true) {
       inlinedVal = tmp;
     } else {
-      let inlinedVal6, scrut;
-      scrut = inlinedVal4 < tmp;
-      if (scrut === true) {
-        inlinedVal6 = inlinedVal4;
+      let inlinedVal7, scrut1;
+      scrut1 = inlinedVal5 < tmp;
+      if (scrut1 === true) {
+        inlinedVal7 = inlinedVal5;
       } else {
-        inlinedVal6 = tmp;
+        inlinedVal7 = tmp;
       }
-      inlinedVal = inlinedVal6;
+      inlinedVal = inlinedVal7;
     }
     if (f_right instanceof ratioRegions2.Matrix.class) {
-      let inlinedVal6, inlinedVal7;
+      let inlinedVal7, inlinedVal8;
       arg$Matrix$0$5 = f_right.a;
-      inlinedVal6 = arg$Matrix$0$5.at(y);
-      inlinedVal7 = inlinedVal6.at(x);
-      tmp1 = inlinedVal7 + inlinedVal;
+      inlinedVal7 = arg$Matrix$0$5.at(y);
+      inlinedVal8 = inlinedVal7.at(x);
+      tmp1 = inlinedVal8 + inlinedVal;
       if (f_right instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal8;
+        let inlinedVal9;
         arg$Matrix$0$4 = f_right.a;
-        inlinedVal8 = arg$Matrix$0$4.at(y);
-        inlinedVal8[x] = tmp1;
+        inlinedVal9 = arg$Matrix$0$4.at(y);
+        inlinedVal9[x] = tmp1;
         if (e instanceof ratioRegions2.Matrix.class) {
-          let inlinedVal9, inlinedVal10, inlinedVal11;
+          let inlinedVal10, inlinedVal11, inlinedVal12;
           arg$Matrix$0$3 = e.a;
-          inlinedVal9 = arg$Matrix$0$3.at(y);
-          inlinedVal10 = inlinedVal9.at(x);
-          inlinedVal11 = inlinedVal10 < 0;
-          if (inlinedVal11 === true) {
-            inlinedVal1 = inlinedVal10;
+          inlinedVal10 = arg$Matrix$0$3.at(y);
+          inlinedVal11 = inlinedVal10.at(x);
+          inlinedVal12 = inlinedVal11 < 0;
+          if (inlinedVal12 === true) {
+            inlinedVal1 = inlinedVal11;
           } else {
-            inlinedVal1 = inlinedVal10 - inlinedVal;
+            inlinedVal1 = inlinedVal11 - inlinedVal;
           }
           if (e instanceof ratioRegions2.Matrix.class) {
-            let inlinedVal12;
+            let inlinedVal13;
             arg$Matrix$0$2 = e.a;
-            inlinedVal12 = arg$Matrix$0$2.at(y);
-            inlinedVal12[x] = inlinedVal1;
+            inlinedVal13 = arg$Matrix$0$2.at(y);
+            inlinedVal13[x] = inlinedVal1;
             tmp2 = x + 1;
             tmp3 = x + 1;
             if (e instanceof ratioRegions2.Matrix.class) {
-              let inlinedVal13, inlinedVal14, inlinedVal15;
               arg$Matrix$0$1 = e.a;
-              inlinedVal13 = arg$Matrix$0$1.at(y);
-              inlinedVal14 = inlinedVal13.at(tmp3);
-              inlinedVal15 = inlinedVal14 < 0;
-              if (inlinedVal15 === true) {
-                inlinedVal2 = inlinedVal14;
+              tmp6 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, y);
+              inlinedVal2 = ratioRegions2[vector_ref$accessorSymbol](tmp6, tmp3);
+              scrut = ratioRegions2[negative$accessorSymbol](inlinedVal2);
+              if (scrut === true) {
+                inlinedVal3 = inlinedVal2;
               } else {
-                inlinedVal2 = inlinedVal14 + inlinedVal;
+                inlinedVal3 = inlinedVal2 + inlinedVal;
               }
               if (e instanceof ratioRegions2.Matrix.class) {
-                let inlinedVal16;
                 arg$Matrix$0$ = e.a;
-                inlinedVal16 = arg$Matrix$0$.at(y);
-                inlinedVal16[tmp2] = inlinedVal2;
+                tmp5 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+                ratioRegions2[vector_set$accessorSymbol](tmp5, tmp2, inlinedVal3);
                 tmp4 = x + 1;
                 return enqueue1(ratioRegions2, h, marked, q, y, tmp4)
               }
@@ -7748,73 +2293,59 @@ push_right = function push_right(ratioRegions2, c_right, f_right, h, e, marked, 
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 push_left = function push_left(ratioRegions2, c_right, f_right, h, e, marked, q, y, x) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, inlinedVal, inlinedVal1, inlinedVal2, arg$Matrix$0$, arg$Matrix$0$1, arg$Matrix$0$2, arg$Matrix$0$3, arg$Matrix$0$4, arg$Matrix$0$5, arg$Matrix$0$6;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, arg$Matrix$0$, tmp7, scrut, arg$Matrix$0$1, tmp8, arg$Matrix$0$2, tmp9, scrut1, arg$Matrix$0$3, tmp10, arg$Matrix$0$4, tmp11, arg$Matrix$0$5, tmp12, scrut2, arg$Matrix$0$6, tmp13;
   if (e instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal3, inlinedVal4, inlinedVal5;
     arg$Matrix$0$6 = e.a;
-    inlinedVal3 = arg$Matrix$0$6.at(y);
-    inlinedVal4 = inlinedVal3.at(x);
+    tmp13 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$6, y);
+    inlinedVal = ratioRegions2[vector_ref$accessorSymbol](tmp13, x);
     tmp = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal5 = inlinedVal4 < 0;
-    if (inlinedVal5 === true) {
-      inlinedVal = tmp;
+    scrut2 = ratioRegions2[negative$accessorSymbol](inlinedVal);
+    if (scrut2 === true) {
+      inlinedVal1 = tmp;
     } else {
-      let inlinedVal6, scrut;
-      scrut = inlinedVal4 < tmp;
-      if (scrut === true) {
-        inlinedVal6 = inlinedVal4;
-      } else {
-        inlinedVal6 = tmp;
-      }
-      inlinedVal = inlinedVal6;
+      inlinedVal1 = ratioRegions2[intMin$accessorSymbol](inlinedVal, tmp);
     }
     tmp1 = x - 1;
     tmp2 = x - 1;
     if (f_right instanceof ratioRegions2.Matrix.class) {
-      let inlinedVal6, inlinedVal7;
       arg$Matrix$0$5 = f_right.a;
-      inlinedVal6 = arg$Matrix$0$5.at(y);
-      inlinedVal7 = inlinedVal6.at(tmp2);
-      tmp3 = inlinedVal7 - inlinedVal;
+      tmp12 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$5, y);
+      inlinedVal2 = ratioRegions2[vector_ref$accessorSymbol](tmp12, tmp2);
+      tmp3 = inlinedVal2 - inlinedVal1;
       if (f_right instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal8;
         arg$Matrix$0$4 = f_right.a;
-        inlinedVal8 = arg$Matrix$0$4.at(y);
-        inlinedVal8[tmp1] = tmp3;
+        tmp11 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$4, y);
+        ratioRegions2[vector_set$accessorSymbol](tmp11, tmp1, tmp3);
         if (e instanceof ratioRegions2.Matrix.class) {
-          let inlinedVal9, inlinedVal10, inlinedVal11;
           arg$Matrix$0$3 = e.a;
-          inlinedVal9 = arg$Matrix$0$3.at(y);
-          inlinedVal10 = inlinedVal9.at(x);
-          inlinedVal11 = inlinedVal10 < 0;
-          if (inlinedVal11 === true) {
-            inlinedVal1 = inlinedVal10;
+          tmp10 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$3, y);
+          inlinedVal3 = ratioRegions2[vector_ref$accessorSymbol](tmp10, x);
+          scrut1 = ratioRegions2[negative$accessorSymbol](inlinedVal3);
+          if (scrut1 === true) {
+            inlinedVal4 = inlinedVal3;
           } else {
-            inlinedVal1 = inlinedVal10 - inlinedVal;
+            inlinedVal4 = inlinedVal3 - inlinedVal1;
           }
           if (e instanceof ratioRegions2.Matrix.class) {
-            let inlinedVal12;
             arg$Matrix$0$2 = e.a;
-            inlinedVal12 = arg$Matrix$0$2.at(y);
-            inlinedVal12[x] = inlinedVal1;
+            tmp9 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$2, y);
+            ratioRegions2[vector_set$accessorSymbol](tmp9, x, inlinedVal4);
             tmp4 = x - 1;
             tmp5 = x - 1;
             if (e instanceof ratioRegions2.Matrix.class) {
-              let inlinedVal13, inlinedVal14, inlinedVal15;
               arg$Matrix$0$1 = e.a;
-              inlinedVal13 = arg$Matrix$0$1.at(y);
-              inlinedVal14 = inlinedVal13.at(tmp5);
-              inlinedVal15 = inlinedVal14 < 0;
-              if (inlinedVal15 === true) {
-                inlinedVal2 = inlinedVal14;
+              tmp8 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, y);
+              inlinedVal5 = ratioRegions2[vector_ref$accessorSymbol](tmp8, tmp5);
+              scrut = ratioRegions2[negative$accessorSymbol](inlinedVal5);
+              if (scrut === true) {
+                inlinedVal6 = inlinedVal5;
               } else {
-                inlinedVal2 = inlinedVal14 + inlinedVal;
+                inlinedVal6 = inlinedVal5 + inlinedVal1;
               }
               if (e instanceof ratioRegions2.Matrix.class) {
-                let inlinedVal16;
                 arg$Matrix$0$ = e.a;
-                inlinedVal16 = arg$Matrix$0$.at(y);
-                inlinedVal16[tmp4] = inlinedVal2;
+                tmp7 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+                ratioRegions2[vector_set$accessorSymbol](tmp7, tmp4, inlinedVal6);
                 tmp6 = x - 1;
                 return enqueue1(ratioRegions2, h, marked, q, y, tmp6)
               }
@@ -7833,71 +2364,57 @@ push_left = function push_left(ratioRegions2, c_right, f_right, h, e, marked, q,
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 push_down = function push_down(ratioRegions2, c_down, f_down, h, e, marked, q, y, x) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, inlinedVal, inlinedVal1, inlinedVal2, arg$Matrix$0$, arg$Matrix$0$1, arg$Matrix$0$2, arg$Matrix$0$3, arg$Matrix$0$4, arg$Matrix$0$5, arg$Matrix$0$6;
+  let tmp, tmp1, tmp2, tmp3, tmp4, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, arg$Matrix$0$, tmp5, scrut, arg$Matrix$0$1, tmp6, arg$Matrix$0$2, tmp7, scrut1, arg$Matrix$0$3, tmp8, arg$Matrix$0$4, tmp9, arg$Matrix$0$5, tmp10, scrut2, arg$Matrix$0$6, tmp11;
   if (e instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal3, inlinedVal4, inlinedVal5;
     arg$Matrix$0$6 = e.a;
-    inlinedVal3 = arg$Matrix$0$6.at(y);
-    inlinedVal4 = inlinedVal3.at(x);
+    tmp11 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$6, y);
+    inlinedVal = ratioRegions2[vector_ref$accessorSymbol](tmp11, x);
     tmp = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal5 = inlinedVal4 < 0;
-    if (inlinedVal5 === true) {
-      inlinedVal = tmp;
+    scrut2 = ratioRegions2[negative$accessorSymbol](inlinedVal);
+    if (scrut2 === true) {
+      inlinedVal1 = tmp;
     } else {
-      let inlinedVal6, scrut;
-      scrut = inlinedVal4 < tmp;
-      if (scrut === true) {
-        inlinedVal6 = inlinedVal4;
-      } else {
-        inlinedVal6 = tmp;
-      }
-      inlinedVal = inlinedVal6;
+      inlinedVal1 = ratioRegions2[intMin$accessorSymbol](inlinedVal, tmp);
     }
     if (f_down instanceof ratioRegions2.Matrix.class) {
-      let inlinedVal6, inlinedVal7;
       arg$Matrix$0$5 = f_down.a;
-      inlinedVal6 = arg$Matrix$0$5.at(y);
-      inlinedVal7 = inlinedVal6.at(x);
-      tmp1 = inlinedVal7 + inlinedVal;
+      tmp10 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$5, y);
+      inlinedVal2 = ratioRegions2[vector_ref$accessorSymbol](tmp10, x);
+      tmp1 = inlinedVal2 + inlinedVal1;
       if (f_down instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal8;
         arg$Matrix$0$4 = f_down.a;
-        inlinedVal8 = arg$Matrix$0$4.at(y);
-        inlinedVal8[x] = tmp1;
+        tmp9 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$4, y);
+        ratioRegions2[vector_set$accessorSymbol](tmp9, x, tmp1);
         if (e instanceof ratioRegions2.Matrix.class) {
-          let inlinedVal9, inlinedVal10, inlinedVal11;
           arg$Matrix$0$3 = e.a;
-          inlinedVal9 = arg$Matrix$0$3.at(y);
-          inlinedVal10 = inlinedVal9.at(x);
-          inlinedVal11 = inlinedVal10 < 0;
-          if (inlinedVal11 === true) {
-            inlinedVal1 = inlinedVal10;
+          tmp8 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$3, y);
+          inlinedVal3 = ratioRegions2[vector_ref$accessorSymbol](tmp8, x);
+          scrut1 = ratioRegions2[negative$accessorSymbol](inlinedVal3);
+          if (scrut1 === true) {
+            inlinedVal4 = inlinedVal3;
           } else {
-            inlinedVal1 = inlinedVal10 - inlinedVal;
+            inlinedVal4 = inlinedVal3 - inlinedVal1;
           }
           if (e instanceof ratioRegions2.Matrix.class) {
-            let inlinedVal12;
             arg$Matrix$0$2 = e.a;
-            inlinedVal12 = arg$Matrix$0$2.at(y);
-            inlinedVal12[x] = inlinedVal1;
+            tmp7 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$2, y);
+            ratioRegions2[vector_set$accessorSymbol](tmp7, x, inlinedVal4);
             tmp2 = y + 1;
             tmp3 = y + 1;
             if (e instanceof ratioRegions2.Matrix.class) {
-              let inlinedVal13, inlinedVal14, inlinedVal15;
               arg$Matrix$0$1 = e.a;
-              inlinedVal13 = arg$Matrix$0$1.at(tmp3);
-              inlinedVal14 = inlinedVal13.at(x);
-              inlinedVal15 = inlinedVal14 < 0;
-              if (inlinedVal15 === true) {
-                inlinedVal2 = inlinedVal14;
+              tmp6 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, tmp3);
+              inlinedVal5 = ratioRegions2[vector_ref$accessorSymbol](tmp6, x);
+              scrut = ratioRegions2[negative$accessorSymbol](inlinedVal5);
+              if (scrut === true) {
+                inlinedVal6 = inlinedVal5;
               } else {
-                inlinedVal2 = inlinedVal14 + inlinedVal;
+                inlinedVal6 = inlinedVal5 + inlinedVal1;
               }
               if (e instanceof ratioRegions2.Matrix.class) {
-                let inlinedVal16;
                 arg$Matrix$0$ = e.a;
-                inlinedVal16 = arg$Matrix$0$.at(tmp2);
-                inlinedVal16[x] = inlinedVal2;
+                tmp5 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, tmp2);
+                ratioRegions2[vector_set$accessorSymbol](tmp5, x, inlinedVal6);
                 tmp4 = y + 1;
                 return enqueue1(ratioRegions2, h, marked, q, tmp4, x)
               }
@@ -7916,73 +2433,59 @@ push_down = function push_down(ratioRegions2, c_down, f_down, h, e, marked, q, y
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 push_up = function push_up(ratioRegions2, c_down, f_down, h, e, marked, q, y, x) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, inlinedVal, inlinedVal1, inlinedVal2, arg$Matrix$0$, arg$Matrix$0$1, arg$Matrix$0$2, arg$Matrix$0$3, arg$Matrix$0$4, arg$Matrix$0$5, arg$Matrix$0$6;
+  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, arg$Matrix$0$, tmp7, scrut, arg$Matrix$0$1, tmp8, arg$Matrix$0$2, tmp9, scrut1, arg$Matrix$0$3, tmp10, arg$Matrix$0$4, tmp11, arg$Matrix$0$5, tmp12, scrut2, arg$Matrix$0$6, tmp13;
   if (e instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal3, inlinedVal4, inlinedVal5;
     arg$Matrix$0$6 = e.a;
-    inlinedVal3 = arg$Matrix$0$6.at(y);
-    inlinedVal4 = inlinedVal3.at(x);
+    tmp13 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$6, y);
+    inlinedVal = ratioRegions2[vector_ref$accessorSymbol](tmp13, x);
     tmp = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal5 = inlinedVal4 < 0;
-    if (inlinedVal5 === true) {
-      inlinedVal = tmp;
+    scrut2 = ratioRegions2[negative$accessorSymbol](inlinedVal);
+    if (scrut2 === true) {
+      inlinedVal1 = tmp;
     } else {
-      let inlinedVal6, scrut;
-      scrut = inlinedVal4 < tmp;
-      if (scrut === true) {
-        inlinedVal6 = inlinedVal4;
-      } else {
-        inlinedVal6 = tmp;
-      }
-      inlinedVal = inlinedVal6;
+      inlinedVal1 = ratioRegions2[intMin$accessorSymbol](inlinedVal, tmp);
     }
     tmp1 = y - 1;
     tmp2 = y - 1;
     if (f_down instanceof ratioRegions2.Matrix.class) {
-      let inlinedVal6, inlinedVal7;
       arg$Matrix$0$5 = f_down.a;
-      inlinedVal6 = arg$Matrix$0$5.at(tmp2);
-      inlinedVal7 = inlinedVal6.at(x);
-      tmp3 = inlinedVal7 - inlinedVal;
+      tmp12 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$5, tmp2);
+      inlinedVal2 = ratioRegions2[vector_ref$accessorSymbol](tmp12, x);
+      tmp3 = inlinedVal2 - inlinedVal1;
       if (f_down instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal8;
         arg$Matrix$0$4 = f_down.a;
-        inlinedVal8 = arg$Matrix$0$4.at(tmp1);
-        inlinedVal8[x] = tmp3;
+        tmp11 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$4, tmp1);
+        ratioRegions2[vector_set$accessorSymbol](tmp11, x, tmp3);
         if (e instanceof ratioRegions2.Matrix.class) {
-          let inlinedVal9, inlinedVal10, inlinedVal11;
           arg$Matrix$0$3 = e.a;
-          inlinedVal9 = arg$Matrix$0$3.at(y);
-          inlinedVal10 = inlinedVal9.at(x);
-          inlinedVal11 = inlinedVal10 < 0;
-          if (inlinedVal11 === true) {
-            inlinedVal1 = inlinedVal10;
+          tmp10 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$3, y);
+          inlinedVal3 = ratioRegions2[vector_ref$accessorSymbol](tmp10, x);
+          scrut1 = ratioRegions2[negative$accessorSymbol](inlinedVal3);
+          if (scrut1 === true) {
+            inlinedVal4 = inlinedVal3;
           } else {
-            inlinedVal1 = inlinedVal10 - inlinedVal;
+            inlinedVal4 = inlinedVal3 - inlinedVal1;
           }
           if (e instanceof ratioRegions2.Matrix.class) {
-            let inlinedVal12;
             arg$Matrix$0$2 = e.a;
-            inlinedVal12 = arg$Matrix$0$2.at(y);
-            inlinedVal12[x] = inlinedVal1;
+            tmp9 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$2, y);
+            ratioRegions2[vector_set$accessorSymbol](tmp9, x, inlinedVal4);
             tmp4 = y - 1;
             tmp5 = y - 1;
             if (e instanceof ratioRegions2.Matrix.class) {
-              let inlinedVal13, inlinedVal14, inlinedVal15;
               arg$Matrix$0$1 = e.a;
-              inlinedVal13 = arg$Matrix$0$1.at(tmp5);
-              inlinedVal14 = inlinedVal13.at(x);
-              inlinedVal15 = inlinedVal14 < 0;
-              if (inlinedVal15 === true) {
-                inlinedVal2 = inlinedVal14;
+              tmp8 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, tmp5);
+              inlinedVal5 = ratioRegions2[vector_ref$accessorSymbol](tmp8, x);
+              scrut = ratioRegions2[negative$accessorSymbol](inlinedVal5);
+              if (scrut === true) {
+                inlinedVal6 = inlinedVal5;
               } else {
-                inlinedVal2 = inlinedVal14 + inlinedVal;
+                inlinedVal6 = inlinedVal5 + inlinedVal1;
               }
               if (e instanceof ratioRegions2.Matrix.class) {
-                let inlinedVal16;
                 arg$Matrix$0$ = e.a;
-                inlinedVal16 = arg$Matrix$0$.at(tmp4);
-                inlinedVal16[x] = inlinedVal2;
+                tmp7 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, tmp4);
+                ratioRegions2[vector_set$accessorSymbol](tmp7, x, inlinedVal6);
                 tmp6 = y - 1;
                 return enqueue1(ratioRegions2, h, marked, q, tmp6, x)
               }
@@ -8001,54 +2504,41 @@ push_up = function push_up(ratioRegions2, c_down, f_down, h, e, marked, q, y, x)
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 push_t = function push_t(ratioRegions2, w, f_t, e, v, y, x) {
-  let tmp, tmp1, inlinedVal, inlinedVal1, arg$Matrix$0$, arg$Matrix$0$1, arg$Matrix$0$2, arg$Matrix$0$3, arg$Matrix$0$4;
+  let tmp, tmp1, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, arg$Matrix$0$, tmp2, scrut, arg$Matrix$0$1, tmp3, arg$Matrix$0$2, tmp4, arg$Matrix$0$3, tmp5, scrut1, arg$Matrix$0$4, tmp6;
   if (e instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2, inlinedVal3, inlinedVal4;
     arg$Matrix$0$4 = e.a;
-    inlinedVal2 = arg$Matrix$0$4.at(y);
-    inlinedVal3 = inlinedVal2.at(x);
+    tmp6 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$4, y);
+    inlinedVal = ratioRegions2[vector_ref$accessorSymbol](tmp6, x);
     tmp = cf_t(ratioRegions2, w, f_t, v, y, x);
-    inlinedVal4 = inlinedVal3 < 0;
-    if (inlinedVal4 === true) {
-      inlinedVal = tmp;
+    scrut1 = ratioRegions2[negative$accessorSymbol](inlinedVal);
+    if (scrut1 === true) {
+      inlinedVal1 = tmp;
     } else {
-      let inlinedVal5, scrut;
-      scrut = inlinedVal3 < tmp;
-      if (scrut === true) {
-        inlinedVal5 = inlinedVal3;
-      } else {
-        inlinedVal5 = tmp;
-      }
-      inlinedVal = inlinedVal5;
+      inlinedVal1 = ratioRegions2[intMin$accessorSymbol](inlinedVal, tmp);
     }
     if (f_t instanceof ratioRegions2.Matrix.class) {
-      let inlinedVal5, inlinedVal6;
       arg$Matrix$0$3 = f_t.a;
-      inlinedVal5 = arg$Matrix$0$3.at(y);
-      inlinedVal6 = inlinedVal5.at(x);
-      tmp1 = inlinedVal6 + inlinedVal;
+      tmp5 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$3, y);
+      inlinedVal2 = ratioRegions2[vector_ref$accessorSymbol](tmp5, x);
+      tmp1 = inlinedVal2 + inlinedVal1;
       if (f_t instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal7;
         arg$Matrix$0$2 = f_t.a;
-        inlinedVal7 = arg$Matrix$0$2.at(y);
-        inlinedVal7[x] = tmp1;
+        tmp4 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$2, y);
+        ratioRegions2[vector_set$accessorSymbol](tmp4, x, tmp1);
         if (e instanceof ratioRegions2.Matrix.class) {
-          let inlinedVal8, inlinedVal9, inlinedVal10;
           arg$Matrix$0$1 = e.a;
-          inlinedVal8 = arg$Matrix$0$1.at(y);
-          inlinedVal9 = inlinedVal8.at(x);
-          inlinedVal10 = inlinedVal9 < 0;
-          if (inlinedVal10 === true) {
-            inlinedVal1 = inlinedVal9;
+          tmp3 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, y);
+          inlinedVal3 = ratioRegions2[vector_ref$accessorSymbol](tmp3, x);
+          scrut = ratioRegions2[negative$accessorSymbol](inlinedVal3);
+          if (scrut === true) {
+            inlinedVal4 = inlinedVal3;
           } else {
-            inlinedVal1 = inlinedVal9 - inlinedVal;
+            inlinedVal4 = inlinedVal3 - inlinedVal1;
           }
           if (e instanceof ratioRegions2.Matrix.class) {
-            let inlinedVal11;
             arg$Matrix$0$ = e.a;
-            inlinedVal11 = arg$Matrix$0$.at(y);
-            inlinedVal11[x] = inlinedVal1;
-            return runtime.Unit
+            tmp2 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+            return ratioRegions2[vector_set$accessorSymbol](tmp2, x, inlinedVal4)
           }
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
@@ -8061,24 +2551,23 @@ push_t = function push_t(ratioRegions2, w, f_t, e, v, y, x) {
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 lift = function lift(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, m1, m2, v, y, x) {
-  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, arg$Matrix$0$, tmp16, inlinedVal, inlinedVal1, scrut4;
+  let scrut, scrut1, scrut2, scrut3, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, inlinedVal, arg$Matrix$0$, tmp21, arg$Cons$0$, arg$Cons$1$, tmp22, inlinedVal1;
   tmp = width - 1;
   scrut = x == tmp;
   if (scrut === true) {
     tmp1 = m1;
   } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_right(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
+    let tmp23, inlinedVal2;
+    tmp23 = cf_right(ratioRegions2, c_right, f_right, y, x);
+    inlinedVal2 = tmp23 > 0;
     if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
+      let inlinedVal3, arg$Matrix$0$1, tmp24;
       tmp2 = x + 1;
       if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
         arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp2);
-        tmp3 = inlinedVal4;
+        tmp24 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, y);
+        inlinedVal3 = ratioRegions2[vector_ref$accessorSymbol](tmp24, tmp2);
+        tmp3 = inlinedVal3;
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -8091,18 +2580,17 @@ lift = function lift(ratioRegions2, c_right, c_down, w, height, width, f_right, 
   if (scrut1 === true) {
     tmp4 = m1;
   } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_left(ratioRegions2, c_right, f_right, y, x);
-    inlinedVal2 = tmp17 > 0;
+    let tmp23, inlinedVal2;
+    tmp23 = cf_left(ratioRegions2, c_right, f_right, y, x);
+    inlinedVal2 = tmp23 > 0;
     if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
+      let inlinedVal3, arg$Matrix$0$1, tmp24;
       tmp5 = x - 1;
       if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
         arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(y);
-        inlinedVal4 = inlinedVal3.at(tmp5);
-        tmp6 = inlinedVal4;
+        tmp24 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, y);
+        inlinedVal3 = ratioRegions2[vector_ref$accessorSymbol](tmp24, tmp5);
+        tmp6 = inlinedVal3;
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -8116,18 +2604,17 @@ lift = function lift(ratioRegions2, c_right, c_down, w, height, width, f_right, 
   if (scrut2 === true) {
     tmp8 = m1;
   } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_down(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
+    let tmp23, inlinedVal2;
+    tmp23 = cf_down(ratioRegions2, c_down, f_down, y, x);
+    inlinedVal2 = tmp23 > 0;
     if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
+      let inlinedVal3, arg$Matrix$0$1, tmp24;
       tmp9 = y + 1;
       if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
         arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp9);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp10 = inlinedVal4;
+        tmp24 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, tmp9);
+        inlinedVal3 = ratioRegions2[vector_ref$accessorSymbol](tmp24, x);
+        tmp10 = inlinedVal3;
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -8140,18 +2627,17 @@ lift = function lift(ratioRegions2, c_right, c_down, w, height, width, f_right, 
   if (scrut3 === true) {
     tmp11 = m1;
   } else {
-    let tmp17, inlinedVal2;
-    tmp17 = cf_up(ratioRegions2, c_down, f_down, y, x);
-    inlinedVal2 = tmp17 > 0;
+    let tmp23, inlinedVal2;
+    tmp23 = cf_up(ratioRegions2, c_down, f_down, y, x);
+    inlinedVal2 = tmp23 > 0;
     if (inlinedVal2 === true) {
-      let arg$Matrix$0$1;
+      let inlinedVal3, arg$Matrix$0$1, tmp24;
       tmp12 = y - 1;
       if (h instanceof ratioRegions2.Matrix.class) {
-        let inlinedVal3, inlinedVal4;
         arg$Matrix$0$1 = h.a;
-        inlinedVal3 = arg$Matrix$0$1.at(tmp12);
-        inlinedVal4 = inlinedVal3.at(x);
-        tmp13 = inlinedVal4;
+        tmp24 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, tmp12);
+        inlinedVal3 = ratioRegions2[vector_ref$accessorSymbol](tmp24, x);
+        tmp13 = inlinedVal3;
       } else {
         throw globalThis.Object.freeze(new globalThis.Error("match error"))
       }
@@ -8160,124 +2646,29 @@ lift = function lift(ratioRegions2, c_right, c_down, w, height, width, f_right, 
     }
     tmp11 = tmp13;
   }
-  tmp16 = cf_t(ratioRegions2, w, f_t, v, y, x);
-  inlinedVal = tmp16 > 0;
-  if (inlinedVal === true) {
+  tmp22 = cf_t(ratioRegions2, w, f_t, v, y, x);
+  inlinedVal1 = tmp22 > 0;
+  if (inlinedVal1 === true) {
     tmp14 = 0;
   } else {
     tmp14 = m2;
   }
-  scrut4 = tmp1 < tmp4;
-  if (scrut4 === true) {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp1 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp1 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp1 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp1;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
+  tmp15 = ratioRegions2.Cons(tmp14, ratioRegions2.Nil);
+  tmp16 = ratioRegions2.Cons(tmp11, tmp15);
+  tmp17 = ratioRegions2.Cons(tmp8, tmp16);
+  tmp18 = ratioRegions2.Cons(tmp4, tmp17);
+  tmp19 = ratioRegions2.Cons(tmp1, tmp18);
+  if (tmp19 instanceof ratioRegions2.Cons.class) {
+    arg$Cons$0$ = tmp19.head;
+    arg$Cons$1$ = tmp19.tail;
+    inlinedVal = loop1(ratioRegions2, arg$Cons$1$, arg$Cons$0$);
+    tmp20 = 1 + inlinedVal;
+    if (h instanceof ratioRegions2.Matrix.class) {
+      arg$Matrix$0$ = h.a;
+      tmp21 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+      return ratioRegions2[vector_set$accessorSymbol](tmp21, x, tmp20)
     }
-    inlinedVal1 = inlinedVal2;
-  } else {
-    let inlinedVal2, scrut5;
-    scrut5 = tmp4 < tmp8;
-    if (scrut5 === true) {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp4 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp4 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp4;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    } else {
-      let inlinedVal3, scrut6;
-      scrut6 = tmp8 < tmp11;
-      if (scrut6 === true) {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp8 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp8;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      } else {
-        let inlinedVal4, scrut7;
-        scrut7 = tmp11 < tmp14;
-        if (scrut7 === true) {
-          inlinedVal4 = tmp11;
-        } else {
-          inlinedVal4 = tmp14;
-        }
-        inlinedVal3 = inlinedVal4;
-      }
-      inlinedVal2 = inlinedVal3;
-    }
-    inlinedVal1 = inlinedVal2;
-  }
-  tmp15 = 1 + inlinedVal1;
-  if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal2;
-    arg$Matrix$0$ = h.a;
-    inlinedVal2 = arg$Matrix$0$.at(y);
-    inlinedVal2[x] = tmp15;
-    return runtime.Unit
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
@@ -8293,30 +2684,30 @@ relabel = function relabel(ratioRegions2, c_right, c_down, w, height, width, f_r
 };
 loop6 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, i, p) {
   loopLabel: while (true) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, inlinedVal2;
+    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, lambda$here, lambda$here1, lambda$here2, inlinedVal, inlinedVal1, tmp37, tmp38, tmp39;
     tmp37 = i / 6;
-    inlinedVal2 = runtime.safeCall(globalThis.Math.floor(tmp37));
-    tmp38 = 6 * inlinedVal2;
-    inlinedVal = i - tmp38;
+    tmp38 = ratioRegions2[floor$accessorSymbol](tmp37);
+    tmp39 = 6 * tmp38;
+    inlinedVal = i - tmp39;
     inlinedVal1 = inlinedVal == 0;
     if (inlinedVal1 === true) {
-      let inlinedVal3;
+      let inlinedVal2;
       switch (p) {
         case false:
-          inlinedVal3 = true;
+          inlinedVal2 = true;
           break;
         case true:
-          inlinedVal3 = false;
+          inlinedVal2 = false;
           break;
         default:
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
-      tmp = inlinedVal3;
+      tmp = inlinedVal2;
     } else {
       tmp = false;
     }
     if (tmp === true) {
-      let p1, inlinedVal3, q1, tail, lambda$here3, lambda$here4;
+      let p1, inlinedVal2, q1, tail, lambda$here3, lambda$here4;
       q1 = new ratioRegions2.Ref.class(ratioRegions2.QNil);
       tail = new ratioRegions2.Ref.class(ratioRegions2.QNil);
       lambda$here3 = lambda$25(ratioRegions2, width, h, marked, m1);
@@ -8327,8 +2718,8 @@ loop6 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
       tmp1 = relabels.value + 1;
       relabels.value = tmp1;
       p1 = lambda$17(ratioRegions2, width, h, e, m1);
-      inlinedVal3 = loop2(height, p1, 0);
-      if (inlinedVal3 === true) {
+      inlinedVal2 = loop2(height, p1, 0);
+      if (inlinedVal2 === true) {
         tmp2 = ratioRegions2.PInt(undefined);
         tmp3 = ratioRegions2.PString(undefined);
         tmp4 = ratioRegions2.PInt(undefined);
@@ -8348,10 +2739,10 @@ loop6 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
         return loop4(ratioRegions2, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp17)
       }
       {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
+        let inlinedVal3;
+        inlinedVal3 = q.length;
         lambda$here = lambda$16(ratioRegions2, q);
-        ratioRegions2[doo$accessorSymbol](inlinedVal4, lambda$here);
+        ratioRegions2[doo$accessorSymbol](inlinedVal3, lambda$here);
         lambda$here1 = lambda$15(ratioRegions2, width, marked);
         ratioRegions2[doo$accessorSymbol](height, lambda$here1);
         lambda$here2 = lambda$14(ratioRegions2, width, h, e, marked, q);
@@ -8361,14 +2752,36 @@ loop6 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right,
       }
     }
     {
-      let p1, inlinedVal3;
+      let v1, p1, i1, inlinedVal2;
+      v1 = q;
       p1 = lambda$13(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, m1, v);
-      inlinedVal3 = loop3(q, p1, 0);
-      if (inlinedVal3 === true) {
-        let inlinedVal4;
-        inlinedVal4 = q.length;
-        tmp18 = inlinedVal4 - 1;
-        loop_loopK$loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
+      i1 = 0;
+      inlinedLbl: {
+        loopLabel1: while (true) {
+          let tmp40, tmp41, tmp42, inlinedVal3;
+          inlinedVal3 = v1.length;
+          tmp40 = i1 < inlinedVal3;
+          if (tmp40 === true) {
+            let inlinedVal4;
+            inlinedVal4 = v1.at(i1);
+            tmp41 = runtime.safeCall(p1(inlinedVal4));
+            if (tmp41 === false) {
+              tmp42 = i1 + 1;
+              i1 = tmp42;
+              continue loopLabel1
+            }
+            inlinedVal2 = true;
+            break inlinedLbl;
+          }
+          inlinedVal2 = false;
+          break inlinedLbl;
+        }
+      }
+      if (inlinedVal2 === true) {
+        let inlinedVal3;
+        inlinedVal3 = q.length;
+        tmp18 = inlinedVal3 - 1;
+        loopK(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, tmp18);
         tmp19 = i + 1;
         i = tmp19;
         p = false;
@@ -8423,38 +2836,32 @@ lambda21 = (undefined, function (ratioRegions2, width, f_down, y) {
   return ratioRegions2[doo$accessorSymbol](width, lambda$here)
 });
 lambda22 = (undefined, function (ratioRegions2, width, e, y) {
-  let tmp, arg$Matrix$0$, arg$Matrix$0$1;
+  let tmp, arg$Matrix$0$, tmp1, arg$Matrix$0$1, tmp2;
   tmp = width - 1;
   if (e instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal;
     arg$Matrix$0$1 = e.a;
-    inlinedVal = arg$Matrix$0$1.at(y);
-    inlinedVal[tmp] = -1;
+    tmp2 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, y);
+    ratioRegions2[vector_set$accessorSymbol](tmp2, tmp, -1);
     if (e instanceof ratioRegions2.Matrix.class) {
-      let inlinedVal1;
       arg$Matrix$0$ = e.a;
-      inlinedVal1 = arg$Matrix$0$.at(y);
-      inlinedVal1[0] = -1;
-      return runtime.Unit
+      tmp1 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+      return ratioRegions2[vector_set$accessorSymbol](tmp1, 0, -1)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
 lambda23 = (undefined, function (ratioRegions2, height, e, x) {
-  let tmp, arg$Matrix$0$, arg$Matrix$0$1;
+  let tmp, arg$Matrix$0$, tmp1, arg$Matrix$0$1, tmp2;
   tmp = height - 1;
   if (e instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal;
     arg$Matrix$0$1 = e.a;
-    inlinedVal = arg$Matrix$0$1.at(tmp);
-    inlinedVal[x] = -1;
+    tmp2 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$1, tmp);
+    ratioRegions2[vector_set$accessorSymbol](tmp2, x, -1);
     if (e instanceof ratioRegions2.Matrix.class) {
-      let inlinedVal1;
       arg$Matrix$0$ = e.a;
-      inlinedVal1 = arg$Matrix$0$.at(0);
-      inlinedVal1[x] = -1;
-      return runtime.Unit
+      tmp1 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, 0);
+      return ratioRegions2[vector_set$accessorSymbol](tmp1, x, -1)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -8466,21 +2873,18 @@ lambda$4 = (undefined, function (ratioRegions2, h, m1, y) {
   }
 });
 lambda24 = (undefined, function (ratioRegions2, h, m1, y, x) {
-  let arg$Matrix$0$;
+  let inlinedVal, arg$Matrix$0$, tmp;
   if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal, inlinedVal1;
     arg$Matrix$0$ = h.a;
-    inlinedVal = arg$Matrix$0$.at(y);
-    inlinedVal1 = inlinedVal.at(x);
-    return inlinedVal1 == m1
+    tmp = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+    inlinedVal = ratioRegions2[vector_ref$accessorSymbol](tmp, x);
+    return inlinedVal == m1
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
 lambda$3 = (undefined, function (ratioRegions2, width, h, m1) {
   return (y) => {
-    let p;
-    p = lambda$4(ratioRegions2, h, m1, y);
-    return loop2(width, p, 0)
+    return lambda25(ratioRegions2, width, h, m1, y)
   }
 });
 lambda25 = (undefined, function (ratioRegions2, width, h, m1, y) {
@@ -8494,13 +2898,12 @@ lambda$2 = (undefined, function (ratioRegions2, h, m1, y) {
   }
 });
 lambda26 = (undefined, function (ratioRegions2, h, m1, y, x) {
-  let tmp, arg$Matrix$0$;
+  let tmp, inlinedVal, arg$Matrix$0$, tmp1;
   if (h instanceof ratioRegions2.Matrix.class) {
-    let inlinedVal, inlinedVal1;
     arg$Matrix$0$ = h.a;
-    inlinedVal = arg$Matrix$0$.at(y);
-    inlinedVal1 = inlinedVal.at(x);
-    tmp = inlinedVal1 == m1;
+    tmp1 = ratioRegions2[vector_ref$accessorSymbol](arg$Matrix$0$, y);
+    inlinedVal = ratioRegions2[vector_ref$accessorSymbol](tmp1, x);
+    tmp = inlinedVal == m1;
     switch (tmp) {
       case false:
         return true;
@@ -8513,41 +2916,39 @@ lambda26 = (undefined, function (ratioRegions2, h, m1, y, x) {
 });
 lambda$1 = (undefined, function (ratioRegions2, width, h, m1) {
   return (y) => {
-    return lambda27(ratioRegions2, width, h, m1, y)
+    return lambda$_lambda$lambda1(ratioRegions2, width, h, m1, y)
   }
 });
 lambda27 = (undefined, function (ratioRegions2, width, h, m1, y) {
-  let f, scrut;
-  f = lambda$2(ratioRegions2, h, m1, y);
+  let scrut, arr;
   scrut = width > 0;
   if (scrut === true) {
-    let inlinedVal, tmp, arr, i, n, x, inlinedVal1;
+    let inlinedVal, n, f, arr1, i;
     inlinedVal = lambda26(ratioRegions2, h, m1, y, 0);
-    tmp = [];
-    arr = tmp;
-    i = 0;
+    arr = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal);
     n = width;
-    x = inlinedVal;
+    f = lambda$2(ratioRegions2, h, m1, y);
+    arr1 = arr;
+    i = 1;
     inlinedLbl: {
       loopLabel: while (true) {
-        let scrut1, tmp1;
-        scrut1 = i == n;
+        let scrut1, tmp, tmp1;
+        scrut1 = i < n;
         if (scrut1 === true) {
-          inlinedVal1 = arr;
-          break inlinedLbl
+          tmp = runtime.safeCall(f(i));
+          arr1[i] = tmp;
+          tmp1 = i + 1;
+          i = tmp1;
+          continue loopLabel
         }
-        arr[i] = x;
-        tmp1 = i + 1;
-        i = tmp1;
-        continue loopLabel;
+        break inlinedLbl;
       }
     }
-    init(width, f, inlinedVal1, 1);
-    return inlinedVal1
+    return arr
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-loopPow = function loopPow(i, c) {
+loopPow = function loopPow(ratioRegions2, i, c) {
   loopLabel: while (true) {
     let tmp, tmp1, inlinedVal;
     inlinedVal = i == 0;
@@ -8638,23 +3039,27 @@ cf_up = function cf_up(ratioRegions2, c_down, f_down, y, x) {
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 ef_right = function ef_right(ratioRegions2, c_right, f_right, y, x) {
-  cf_right(ratioRegions2, c_right, f_right, y, x);
-  return runtime.Unit
+  let tmp;
+  tmp = cf_right(ratioRegions2, c_right, f_right, y, x);
+  return tmp > 0
 };
 ef_left = function ef_left(ratioRegions2, c_right, f_right, y, x) {
-  cf_left(ratioRegions2, c_right, f_right, y, x);
-  return runtime.Unit
+  let tmp;
+  tmp = cf_left(ratioRegions2, c_right, f_right, y, x);
+  return tmp > 0
 };
 ef_down = function ef_down(ratioRegions2, c_down, f_down, y, x) {
-  cf_down(ratioRegions2, c_down, f_down, y, x);
-  return runtime.Unit
+  let tmp;
+  tmp = cf_down(ratioRegions2, c_down, f_down, y, x);
+  return tmp > 0
 };
 ef_up = function ef_up(ratioRegions2, c_down, f_down, y, x) {
-  cf_up(ratioRegions2, c_down, f_down, y, x);
-  return runtime.Unit
+  let tmp;
+  tmp = cf_up(ratioRegions2, c_down, f_down, y, x);
+  return tmp > 0
 };
 preflow_push = function preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v) {
-  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
+  let pushes, lifts, relabels, tmp, tmp1, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions3, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, relabels1, i, p, inlinedVal;
   lambda$here = lambda$9(ratioRegions2, width, f_t, e);
   ratioRegions2[doo$accessorSymbol](height, lambda$here);
   lambda$here1 = lambda$8(ratioRegions2, width, f_right);
@@ -8670,7 +3075,167 @@ preflow_push = function preflow_push(ratioRegions2, c_right, c_down, w, height, 
   pushes = new ratioRegions2.Ref.class(0);
   lifts = new ratioRegions2.Ref.class(0);
   relabels = new ratioRegions2.Ref.class(0);
-  return preflow_push_loop$loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v, pushes, lifts, relabels, 0, false)
+  ratioRegions3 = ratioRegions2;
+  c_right1 = c_right;
+  c_down1 = c_down;
+  w1 = w;
+  height1 = height;
+  width1 = width;
+  f_right1 = f_right;
+  f_down1 = f_down;
+  f_t1 = f_t;
+  h1 = h;
+  e1 = e;
+  marked1 = marked;
+  m11 = m1;
+  m21 = m2;
+  q1 = q;
+  v1 = v;
+  pushes1 = pushes;
+  lifts1 = lifts;
+  relabels1 = relabels;
+  i = 0;
+  p = false;
+  inlinedLbl: {
+    loopLabel: while (true) {
+      let tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, lambda$here5, lambda$here6, lambda$here7, inlinedVal1, inlinedVal2, tmp39, tmp40, tmp41;
+      tmp39 = i / 6;
+      tmp40 = ratioRegions3[floor$accessorSymbol](tmp39);
+      tmp41 = 6 * tmp40;
+      inlinedVal1 = i - tmp41;
+      inlinedVal2 = inlinedVal1 == 0;
+      if (inlinedVal2 === true) {
+        let inlinedVal3;
+        switch (p) {
+          case false:
+            inlinedVal3 = true;
+            break;
+          case true:
+            inlinedVal3 = false;
+            break;
+          default:
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+        tmp2 = inlinedVal3;
+      } else {
+        tmp2 = false;
+      }
+      if (tmp2 === true) {
+        let p1, inlinedVal3, q2, tail, lambda$here8, lambda$here9;
+        q2 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+        tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+        lambda$here8 = lambda$25(ratioRegions3, width1, h1, marked1, m11);
+        ratioRegions3[doo$accessorSymbol](height1, lambda$here8);
+        lambda$here9 = lambda$24(ratioRegions3, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+        ratioRegions3[doo$accessorSymbol](height1, lambda$here9);
+        loop5(ratioRegions3, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
+        tmp3 = relabels1.value + 1;
+        relabels1.value = tmp3;
+        p1 = lambda$17(ratioRegions3, width1, h1, e1, m11);
+        inlinedVal3 = loop2(height1, p1, 0);
+        if (inlinedVal3 === true) {
+          tmp4 = ratioRegions.PInt(undefined);
+          tmp5 = ratioRegions.PString(undefined);
+          tmp6 = ratioRegions.PInt(undefined);
+          tmp7 = ratioRegions.PString(undefined);
+          tmp8 = ratioRegions.PInt(undefined);
+          tmp9 = ratioRegions.PString(undefined);
+          tmp10 = ratioRegions.PInt(undefined);
+          tmp11 = ratioRegions.PString(undefined);
+          tmp12 = ratioRegions3.Cons(tmp11, ratioRegions3.Nil);
+          tmp13 = ratioRegions3.Cons(tmp10, tmp12);
+          tmp14 = ratioRegions3.Cons(tmp9, tmp13);
+          tmp15 = ratioRegions3.Cons(tmp8, tmp14);
+          tmp16 = ratioRegions3.Cons(tmp7, tmp15);
+          tmp17 = ratioRegions3.Cons(tmp6, tmp16);
+          tmp18 = ratioRegions3.Cons(tmp5, tmp17);
+          tmp19 = ratioRegions3.Cons(tmp4, tmp18);
+          inlinedVal = loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp19);
+          break inlinedLbl
+        }
+        {
+          let inlinedVal4;
+          inlinedVal4 = q1.length;
+          lambda$here5 = lambda$16(ratioRegions3, q1);
+          ratioRegions3[doo$accessorSymbol](inlinedVal4, lambda$here5);
+          lambda$here6 = lambda$15(ratioRegions3, width1, marked1);
+          ratioRegions3[doo$accessorSymbol](height1, lambda$here6);
+          lambda$here7 = lambda$14(ratioRegions3, width1, h1, e1, marked1, q1);
+          ratioRegions3[doo$accessorSymbol](height1, lambda$here7);
+          p = true;
+          continue loopLabel;
+        }
+      }
+      {
+        let v2, p1, i1, inlinedVal3;
+        v2 = q1;
+        p1 = lambda$13(ratioRegions3, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, m11, v1);
+        i1 = 0;
+        inlinedLbl1: {
+          loopLabel1: while (true) {
+            let tmp42, tmp43, tmp44, inlinedVal4;
+            inlinedVal4 = v2.length;
+            tmp42 = i1 < inlinedVal4;
+            if (tmp42 === true) {
+              let inlinedVal5;
+              inlinedVal5 = v2.at(i1);
+              tmp43 = runtime.safeCall(p1(inlinedVal5));
+              if (tmp43 === false) {
+                tmp44 = i1 + 1;
+                i1 = tmp44;
+                continue loopLabel1
+              }
+              inlinedVal3 = true;
+              break inlinedLbl1;
+            }
+            inlinedVal3 = false;
+            break inlinedLbl1;
+          }
+        }
+        if (inlinedVal3 === true) {
+          let inlinedVal4;
+          inlinedVal4 = q1.length;
+          tmp20 = inlinedVal4 - 1;
+          loopK(ratioRegions3, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, tmp20);
+          tmp21 = i + 1;
+          i = tmp21;
+          p = false;
+          continue loopLabel
+        }
+        {
+          let q2, tail, lambda$here8, lambda$here9;
+          q2 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+          tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+          lambda$here8 = lambda$25(ratioRegions3, width1, h1, marked1, m11);
+          ratioRegions3[doo$accessorSymbol](height1, lambda$here8);
+          lambda$here9 = lambda$24(ratioRegions3, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+          ratioRegions3[doo$accessorSymbol](height1, lambda$here9);
+          loop5(ratioRegions3, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
+          tmp22 = relabels1.value + 1;
+          relabels1.value = tmp22;
+          tmp23 = ratioRegions.PInt(undefined);
+          tmp24 = ratioRegions.PString(undefined);
+          tmp25 = ratioRegions.PInt(undefined);
+          tmp26 = ratioRegions.PString(undefined);
+          tmp27 = ratioRegions.PInt(undefined);
+          tmp28 = ratioRegions.PString(undefined);
+          tmp29 = ratioRegions.PInt(undefined);
+          tmp30 = ratioRegions.PString(undefined);
+          tmp31 = ratioRegions3.Cons(tmp30, ratioRegions3.Nil);
+          tmp32 = ratioRegions3.Cons(tmp29, tmp31);
+          tmp33 = ratioRegions3.Cons(tmp28, tmp32);
+          tmp34 = ratioRegions3.Cons(tmp27, tmp33);
+          tmp35 = ratioRegions3.Cons(tmp26, tmp34);
+          tmp36 = ratioRegions3.Cons(tmp25, tmp35);
+          tmp37 = ratioRegions3.Cons(tmp24, tmp36);
+          tmp38 = ratioRegions3.Cons(tmp23, tmp37);
+          inlinedVal = loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp38);
+          break inlinedLbl;
+        }
+      }
+    }
+  }
+  return inlinedVal
 };
 min_cut_includes_every_edge_to_t = function min_cut_includes_every_edge_to_t(ratioRegions2, height, width, h, m1) {
   let p;
@@ -8678,69 +3243,511 @@ min_cut_includes_every_edge_to_t = function min_cut_includes_every_edge_to_t(rat
   return loop2(height, p, 0)
 };
 min_cut = function min_cut(ratioRegions2, height, width, h, m1) {
-  let f, scrut;
-  f = lambda$1(ratioRegions2, width, h, m1);
+  let f, scrut, arr;
+  f = min_cut_lambda$$lambda$(ratioRegions2, width, h, m1);
   scrut = height > 0;
   if (scrut === true) {
-    let inlinedVal, tmp, arr, i, n, x, inlinedVal1;
-    inlinedVal = lambda27(ratioRegions2, width, h, m1, 0);
-    tmp = [];
-    arr = tmp;
-    i = 0;
-    n = height;
-    x = inlinedVal;
-    inlinedLbl: {
-      loopLabel: while (true) {
-        let scrut1, tmp1;
-        scrut1 = i == n;
-        if (scrut1 === true) {
-          inlinedVal1 = arr;
-          break inlinedLbl
+    let n, f1, arr1, i, scrut1, arr2;
+    scrut1 = width > 0;
+    if (scrut1 === true) {
+      let inlinedVal, n1, f2, arr3, i1;
+      inlinedVal = lambda26(ratioRegions2, h, m1, 0, 0);
+      arr2 = ratioRegions2[array_alloc$accessorSymbol](width, inlinedVal);
+      n1 = width;
+      f2 = lambda$2(ratioRegions2, h, m1, 0);
+      arr3 = arr2;
+      i1 = 1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut2, tmp, tmp1;
+          scrut2 = i1 < n1;
+          if (scrut2 === true) {
+            tmp = runtime.safeCall(f2(i1));
+            arr3[i1] = tmp;
+            tmp1 = i1 + 1;
+            i1 = tmp1;
+            continue loopLabel
+          }
+          break inlinedLbl;
         }
-        arr[i] = x;
-        tmp1 = i + 1;
-        i = tmp1;
-        continue loopLabel;
       }
+      arr = ratioRegions2[array_alloc$accessorSymbol](height, arr2);
+      n = height;
+      f1 = f;
+      arr1 = arr;
+      i = 1;
+      inlinedLbl1: {
+        loopLabel1: while (true) {
+          let scrut2, tmp, tmp1;
+          scrut2 = i < n;
+          if (scrut2 === true) {
+            tmp = runtime.safeCall(f1(i));
+            arr1[i] = tmp;
+            tmp1 = i + 1;
+            i = tmp1;
+            continue loopLabel1
+          }
+          break inlinedLbl1;
+        }
+      }
+      return arr
     }
-    init(height, f, inlinedVal1, 1);
-    return inlinedVal1
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 loop7 = function loop(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, lg_v, v_max) {
   loopLabel: while (true) {
-    let v, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal;
+    let v, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, inlinedVal;
     inlinedVal = lg_v < 0;
     if (inlinedVal === true) {
+      let ratioRegions3, ratioRegions4, height1, f, scrut, arr, pushes, lifts, relabels, tmp10, tmp11, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions5, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, relabels1, i, p;
       tmp = ratioRegions2.PInt(undefined);
       tmp1 = ratioRegions2.Cons(tmp, ratioRegions2.Nil);
-      loop4(ratioRegions2, "V-MAX=~s~%", 0, tmp1);
+      loop_loop$loop(ratioRegions2, "V-MAX=~s~%", 0, tmp1);
       tmp2 = v_max + 1;
-      loop_preflow_push$preflow_push(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, tmp2);
-      return min_cut(ratioRegions2, height, width, h, m1)
+      ratioRegions3 = ratioRegions2;
+      lambda$here = lambda$9(ratioRegions3, width, f_t, e);
+      ratioRegions3[doo$accessorSymbol](height, lambda$here);
+      lambda$here1 = lambda$8(ratioRegions3, width, f_right);
+      ratioRegions3[doo$accessorSymbol](height, lambda$here1);
+      tmp10 = height - 1;
+      lambda$here2 = lambda$7(ratioRegions3, width, f_down);
+      ratioRegions3[doo$accessorSymbol](tmp10, lambda$here2);
+      lambda$here3 = lambda$6(ratioRegions3, width, e);
+      ratioRegions3[doo$accessorSymbol](height, lambda$here3);
+      tmp11 = width - 1;
+      lambda$here4 = lambda$5(ratioRegions3, height, e);
+      ratioRegions3[doo$accessorSymbol](tmp11, lambda$here4);
+      pushes = new ratioRegions3.Ref.class(0);
+      lifts = new ratioRegions3.Ref.class(0);
+      relabels = new ratioRegions3.Ref.class(0);
+      ratioRegions5 = ratioRegions3;
+      c_right1 = c_right;
+      c_down1 = c_down;
+      w1 = w;
+      height2 = height;
+      width1 = width;
+      f_right1 = f_right;
+      f_down1 = f_down;
+      f_t1 = f_t;
+      h1 = h;
+      e1 = e;
+      marked1 = marked;
+      m11 = m1;
+      m21 = m2;
+      q1 = q;
+      v1 = tmp2;
+      pushes1 = pushes;
+      lifts1 = lifts;
+      relabels1 = relabels;
+      i = 0;
+      p = false;
+      inlinedLbl: {
+        loopLabel1: while (true) {
+          let tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, lambda$here5, lambda$here6, lambda$here7, inlinedVal1, inlinedVal2, tmp49, tmp50, tmp51;
+          tmp49 = i / 6;
+          tmp50 = ratioRegions5[floor$accessorSymbol](tmp49);
+          tmp51 = 6 * tmp50;
+          inlinedVal1 = i - tmp51;
+          inlinedVal2 = inlinedVal1 == 0;
+          if (inlinedVal2 === true) {
+            let inlinedVal3;
+            switch (p) {
+              case false:
+                inlinedVal3 = true;
+                break;
+              case true:
+                inlinedVal3 = false;
+                break;
+              default:
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            tmp12 = inlinedVal3;
+          } else {
+            tmp12 = false;
+          }
+          if (tmp12 === true) {
+            let p1, inlinedVal3, q2, tail, lambda$here8, lambda$here9;
+            q2 = new ratioRegions5.Ref.class(ratioRegions5.QNil);
+            tail = new ratioRegions5.Ref.class(ratioRegions5.QNil);
+            lambda$here8 = lambda$25(ratioRegions5, width1, h1, marked1, m11);
+            ratioRegions5[doo$accessorSymbol](height2, lambda$here8);
+            lambda$here9 = lambda$24(ratioRegions5, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+            ratioRegions5[doo$accessorSymbol](height2, lambda$here9);
+            loop5(ratioRegions5, c_right1, c_down1, height2, width1, f_right1, f_down1, h1, marked1, q2, tail);
+            tmp13 = relabels1.value + 1;
+            relabels1.value = tmp13;
+            p1 = lambda$17(ratioRegions5, width1, h1, e1, m11);
+            inlinedVal3 = loop2(height2, p1, 0);
+            if (inlinedVal3 === true) {
+              tmp14 = ratioRegions.PInt(undefined);
+              tmp15 = ratioRegions.PString(undefined);
+              tmp16 = ratioRegions.PInt(undefined);
+              tmp17 = ratioRegions.PString(undefined);
+              tmp18 = ratioRegions.PInt(undefined);
+              tmp19 = ratioRegions.PString(undefined);
+              tmp20 = ratioRegions.PInt(undefined);
+              tmp21 = ratioRegions.PString(undefined);
+              tmp22 = ratioRegions5.Cons(tmp21, ratioRegions5.Nil);
+              tmp23 = ratioRegions5.Cons(tmp20, tmp22);
+              tmp24 = ratioRegions5.Cons(tmp19, tmp23);
+              tmp25 = ratioRegions5.Cons(tmp18, tmp24);
+              tmp26 = ratioRegions5.Cons(tmp17, tmp25);
+              tmp27 = ratioRegions5.Cons(tmp16, tmp26);
+              tmp28 = ratioRegions5.Cons(tmp15, tmp27);
+              tmp29 = ratioRegions5.Cons(tmp14, tmp28);
+              loop4(ratioRegions5, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp29);
+              break inlinedLbl
+            }
+            {
+              let inlinedVal4;
+              inlinedVal4 = q1.length;
+              lambda$here5 = lambda$16(ratioRegions5, q1);
+              ratioRegions5[doo$accessorSymbol](inlinedVal4, lambda$here5);
+              lambda$here6 = lambda$15(ratioRegions5, width1, marked1);
+              ratioRegions5[doo$accessorSymbol](height2, lambda$here6);
+              lambda$here7 = lambda$14(ratioRegions5, width1, h1, e1, marked1, q1);
+              ratioRegions5[doo$accessorSymbol](height2, lambda$here7);
+              p = true;
+              continue loopLabel1;
+            }
+          }
+          {
+            let v2, p1, i1, inlinedVal3;
+            v2 = q1;
+            p1 = lambda$13(ratioRegions5, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, m11, v1);
+            i1 = 0;
+            inlinedLbl1: {
+              loopLabel2: while (true) {
+                let tmp52, tmp53, tmp54, inlinedVal4;
+                inlinedVal4 = v2.length;
+                tmp52 = i1 < inlinedVal4;
+                if (tmp52 === true) {
+                  let inlinedVal5;
+                  inlinedVal5 = v2.at(i1);
+                  tmp53 = runtime.safeCall(p1(inlinedVal5));
+                  if (tmp53 === false) {
+                    tmp54 = i1 + 1;
+                    i1 = tmp54;
+                    continue loopLabel2
+                  }
+                  inlinedVal3 = true;
+                  break inlinedLbl1;
+                }
+                inlinedVal3 = false;
+                break inlinedLbl1;
+              }
+            }
+            if (inlinedVal3 === true) {
+              let inlinedVal4;
+              inlinedVal4 = q1.length;
+              tmp30 = inlinedVal4 - 1;
+              loopK(ratioRegions5, c_right1, c_down1, w1, height2, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, tmp30);
+              tmp31 = i + 1;
+              i = tmp31;
+              p = false;
+              continue loopLabel1
+            }
+            {
+              let q2, tail, lambda$here8, lambda$here9;
+              q2 = new ratioRegions5.Ref.class(ratioRegions5.QNil);
+              tail = new ratioRegions5.Ref.class(ratioRegions5.QNil);
+              lambda$here8 = lambda$25(ratioRegions5, width1, h1, marked1, m11);
+              ratioRegions5[doo$accessorSymbol](height2, lambda$here8);
+              lambda$here9 = lambda$24(ratioRegions5, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+              ratioRegions5[doo$accessorSymbol](height2, lambda$here9);
+              loop5(ratioRegions5, c_right1, c_down1, height2, width1, f_right1, f_down1, h1, marked1, q2, tail);
+              tmp32 = relabels1.value + 1;
+              relabels1.value = tmp32;
+              tmp33 = ratioRegions.PInt(undefined);
+              tmp34 = ratioRegions.PString(undefined);
+              tmp35 = ratioRegions.PInt(undefined);
+              tmp36 = ratioRegions.PString(undefined);
+              tmp37 = ratioRegions.PInt(undefined);
+              tmp38 = ratioRegions.PString(undefined);
+              tmp39 = ratioRegions.PInt(undefined);
+              tmp40 = ratioRegions.PString(undefined);
+              tmp41 = ratioRegions5.Cons(tmp40, ratioRegions5.Nil);
+              tmp42 = ratioRegions5.Cons(tmp39, tmp41);
+              tmp43 = ratioRegions5.Cons(tmp38, tmp42);
+              tmp44 = ratioRegions5.Cons(tmp37, tmp43);
+              tmp45 = ratioRegions5.Cons(tmp36, tmp44);
+              tmp46 = ratioRegions5.Cons(tmp35, tmp45);
+              tmp47 = ratioRegions5.Cons(tmp34, tmp46);
+              tmp48 = ratioRegions5.Cons(tmp33, tmp47);
+              loop4(ratioRegions5, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp48);
+              break inlinedLbl;
+            }
+          }
+        }
+      }
+      ratioRegions4 = ratioRegions2;
+      height1 = height;
+      f = loop_min_cut_lambda$$lambda$(ratioRegions4, width, h, m1);
+      scrut = height > 0;
+      if (scrut === true) {
+        let n, f1, arr1, i1, scrut1, arr2;
+        scrut1 = width > 0;
+        if (scrut1 === true) {
+          let inlinedVal1, n1, f2, arr3, i2;
+          inlinedVal1 = lambda26(ratioRegions4, h, m1, 0, 0);
+          arr2 = ratioRegions4[array_alloc$accessorSymbol](width, inlinedVal1);
+          n1 = width;
+          f2 = lambda$2(ratioRegions4, h, m1, 0);
+          arr3 = arr2;
+          i2 = 1;
+          inlinedLbl1: {
+            loopLabel2: while (true) {
+              let scrut2, tmp12, tmp13;
+              scrut2 = i2 < n1;
+              if (scrut2 === true) {
+                tmp12 = runtime.safeCall(f2(i2));
+                arr3[i2] = tmp12;
+                tmp13 = i2 + 1;
+                i2 = tmp13;
+                continue loopLabel2
+              }
+              break inlinedLbl1;
+            }
+          }
+          arr = ratioRegions4[array_alloc$accessorSymbol](height1, arr2);
+          n = height1;
+          f1 = f;
+          arr1 = arr;
+          i1 = 1;
+          inlinedLbl2: {
+            loopLabel3: while (true) {
+              let scrut2, tmp12, tmp13;
+              scrut2 = i1 < n;
+              if (scrut2 === true) {
+                tmp12 = runtime.safeCall(f1(i1));
+                arr1[i1] = tmp12;
+                tmp13 = i1 + 1;
+                i1 = tmp13;
+                continue loopLabel3
+              }
+              break inlinedLbl2;
+            }
+          }
+          return arr
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+      throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
     {
-      let p, inlinedVal1;
-      tmp3 = loopPow(lg_v, 1);
-      v = v_max + tmp3;
+      let p, inlinedVal1, i, c, inlinedVal2, ratioRegions3, pushes, lifts, relabels, tmp10, tmp11, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions4, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, relabels1, i1, p1;
+      i = lg_v;
+      c = 1;
+      inlinedLbl: {
+        loopLabel1: while (true) {
+          let tmp12, tmp13, inlinedVal3;
+          inlinedVal3 = i == 0;
+          if (inlinedVal3 === true) {
+            inlinedVal2 = c;
+            break inlinedLbl
+          }
+          tmp12 = i - 1;
+          tmp13 = c + c;
+          i = tmp12;
+          c = tmp13;
+          continue loopLabel1;
+        }
+      }
+      v = v_max + inlinedVal2;
+      tmp3 = ratioRegions2.PInt(undefined);
       tmp4 = ratioRegions2.PInt(undefined);
       tmp5 = ratioRegions2.PInt(undefined);
-      tmp6 = ratioRegions2.PInt(undefined);
-      tmp7 = ratioRegions2.Cons(tmp6, ratioRegions2.Nil);
-      tmp8 = ratioRegions2.Cons(tmp5, tmp7);
-      tmp9 = ratioRegions2.Cons(tmp4, tmp8);
-      loop4(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp9);
-      loop_preflow_push$preflow_push1(ratioRegions2, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, v);
-      tmp10 = lg_v - 1;
+      tmp6 = ratioRegions2.Cons(tmp5, ratioRegions2.Nil);
+      tmp7 = ratioRegions2.Cons(tmp4, tmp6);
+      tmp8 = ratioRegions2.Cons(tmp3, tmp7);
+      loop_loop$loop(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp8);
+      ratioRegions3 = ratioRegions2;
+      lambda$here = lambda$9(ratioRegions3, width, f_t, e);
+      ratioRegions3[doo$accessorSymbol](height, lambda$here);
+      lambda$here1 = lambda$8(ratioRegions3, width, f_right);
+      ratioRegions3[doo$accessorSymbol](height, lambda$here1);
+      tmp10 = height - 1;
+      lambda$here2 = lambda$7(ratioRegions3, width, f_down);
+      ratioRegions3[doo$accessorSymbol](tmp10, lambda$here2);
+      lambda$here3 = lambda$6(ratioRegions3, width, e);
+      ratioRegions3[doo$accessorSymbol](height, lambda$here3);
+      tmp11 = width - 1;
+      lambda$here4 = lambda$5(ratioRegions3, height, e);
+      ratioRegions3[doo$accessorSymbol](tmp11, lambda$here4);
+      pushes = new ratioRegions3.Ref.class(0);
+      lifts = new ratioRegions3.Ref.class(0);
+      relabels = new ratioRegions3.Ref.class(0);
+      ratioRegions4 = ratioRegions3;
+      c_right1 = c_right;
+      c_down1 = c_down;
+      w1 = w;
+      height1 = height;
+      width1 = width;
+      f_right1 = f_right;
+      f_down1 = f_down;
+      f_t1 = f_t;
+      h1 = h;
+      e1 = e;
+      marked1 = marked;
+      m11 = m1;
+      m21 = m2;
+      q1 = q;
+      v1 = v;
+      pushes1 = pushes;
+      lifts1 = lifts;
+      relabels1 = relabels;
+      i1 = 0;
+      p1 = false;
+      inlinedLbl1: {
+        loopLabel2: while (true) {
+          let tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, lambda$here5, lambda$here6, lambda$here7, inlinedVal3, inlinedVal4, tmp49, tmp50, tmp51;
+          tmp49 = i1 / 6;
+          tmp50 = ratioRegions4[floor$accessorSymbol](tmp49);
+          tmp51 = 6 * tmp50;
+          inlinedVal3 = i1 - tmp51;
+          inlinedVal4 = inlinedVal3 == 0;
+          if (inlinedVal4 === true) {
+            let inlinedVal5;
+            switch (p1) {
+              case false:
+                inlinedVal5 = true;
+                break;
+              case true:
+                inlinedVal5 = false;
+                break;
+              default:
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            tmp12 = inlinedVal5;
+          } else {
+            tmp12 = false;
+          }
+          if (tmp12 === true) {
+            let p2, inlinedVal5, q2, tail, lambda$here8, lambda$here9;
+            q2 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+            tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+            lambda$here8 = lambda$25(ratioRegions4, width1, h1, marked1, m11);
+            ratioRegions4[doo$accessorSymbol](height1, lambda$here8);
+            lambda$here9 = lambda$24(ratioRegions4, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+            ratioRegions4[doo$accessorSymbol](height1, lambda$here9);
+            loop5(ratioRegions4, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
+            tmp13 = relabels1.value + 1;
+            relabels1.value = tmp13;
+            p2 = lambda$17(ratioRegions4, width1, h1, e1, m11);
+            inlinedVal5 = loop2(height1, p2, 0);
+            if (inlinedVal5 === true) {
+              tmp14 = ratioRegions.PInt(undefined);
+              tmp15 = ratioRegions.PString(undefined);
+              tmp16 = ratioRegions.PInt(undefined);
+              tmp17 = ratioRegions.PString(undefined);
+              tmp18 = ratioRegions.PInt(undefined);
+              tmp19 = ratioRegions.PString(undefined);
+              tmp20 = ratioRegions.PInt(undefined);
+              tmp21 = ratioRegions.PString(undefined);
+              tmp22 = ratioRegions4.Cons(tmp21, ratioRegions4.Nil);
+              tmp23 = ratioRegions4.Cons(tmp20, tmp22);
+              tmp24 = ratioRegions4.Cons(tmp19, tmp23);
+              tmp25 = ratioRegions4.Cons(tmp18, tmp24);
+              tmp26 = ratioRegions4.Cons(tmp17, tmp25);
+              tmp27 = ratioRegions4.Cons(tmp16, tmp26);
+              tmp28 = ratioRegions4.Cons(tmp15, tmp27);
+              tmp29 = ratioRegions4.Cons(tmp14, tmp28);
+              loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp29);
+              break inlinedLbl1
+            }
+            {
+              let inlinedVal6;
+              inlinedVal6 = q1.length;
+              lambda$here5 = lambda$16(ratioRegions4, q1);
+              ratioRegions4[doo$accessorSymbol](inlinedVal6, lambda$here5);
+              lambda$here6 = lambda$15(ratioRegions4, width1, marked1);
+              ratioRegions4[doo$accessorSymbol](height1, lambda$here6);
+              lambda$here7 = lambda$14(ratioRegions4, width1, h1, e1, marked1, q1);
+              ratioRegions4[doo$accessorSymbol](height1, lambda$here7);
+              p1 = true;
+              continue loopLabel2;
+            }
+          }
+          {
+            let v2, p2, i2, inlinedVal5;
+            v2 = q1;
+            p2 = lambda$13(ratioRegions4, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, m11, v1);
+            i2 = 0;
+            inlinedLbl2: {
+              loopLabel3: while (true) {
+                let tmp52, tmp53, tmp54, inlinedVal6;
+                inlinedVal6 = v2.length;
+                tmp52 = i2 < inlinedVal6;
+                if (tmp52 === true) {
+                  let inlinedVal7;
+                  inlinedVal7 = v2.at(i2);
+                  tmp53 = runtime.safeCall(p2(inlinedVal7));
+                  if (tmp53 === false) {
+                    tmp54 = i2 + 1;
+                    i2 = tmp54;
+                    continue loopLabel3
+                  }
+                  inlinedVal5 = true;
+                  break inlinedLbl2;
+                }
+                inlinedVal5 = false;
+                break inlinedLbl2;
+              }
+            }
+            if (inlinedVal5 === true) {
+              let inlinedVal6;
+              inlinedVal6 = q1.length;
+              tmp30 = inlinedVal6 - 1;
+              loopK(ratioRegions4, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked1, m11, m21, q1, v1, pushes1, lifts1, tmp30);
+              tmp31 = i1 + 1;
+              i1 = tmp31;
+              p1 = false;
+              continue loopLabel2
+            }
+            {
+              let q2, tail, lambda$here8, lambda$here9;
+              q2 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+              tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+              lambda$here8 = lambda$25(ratioRegions4, width1, h1, marked1, m11);
+              ratioRegions4[doo$accessorSymbol](height1, lambda$here8);
+              lambda$here9 = lambda$24(ratioRegions4, w1, width1, f_t1, h1, marked1, v1, q2, tail);
+              ratioRegions4[doo$accessorSymbol](height1, lambda$here9);
+              loop5(ratioRegions4, c_right1, c_down1, height1, width1, f_right1, f_down1, h1, marked1, q2, tail);
+              tmp32 = relabels1.value + 1;
+              relabels1.value = tmp32;
+              tmp33 = ratioRegions.PInt(undefined);
+              tmp34 = ratioRegions.PString(undefined);
+              tmp35 = ratioRegions.PInt(undefined);
+              tmp36 = ratioRegions.PString(undefined);
+              tmp37 = ratioRegions.PInt(undefined);
+              tmp38 = ratioRegions.PString(undefined);
+              tmp39 = ratioRegions.PInt(undefined);
+              tmp40 = ratioRegions.PString(undefined);
+              tmp41 = ratioRegions4.Cons(tmp40, ratioRegions4.Nil);
+              tmp42 = ratioRegions4.Cons(tmp39, tmp41);
+              tmp43 = ratioRegions4.Cons(tmp38, tmp42);
+              tmp44 = ratioRegions4.Cons(tmp37, tmp43);
+              tmp45 = ratioRegions4.Cons(tmp36, tmp44);
+              tmp46 = ratioRegions4.Cons(tmp35, tmp45);
+              tmp47 = ratioRegions4.Cons(tmp34, tmp46);
+              tmp48 = ratioRegions4.Cons(tmp33, tmp47);
+              loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp48);
+              break inlinedLbl1;
+            }
+          }
+        }
+      }
+      tmp9 = lg_v - 1;
       p = lambda$3(ratioRegions2, width, h, m1);
       inlinedVal1 = loop2(height, p, 0);
       if (inlinedVal1 === true) {
-        lg_v = tmp10;
+        lg_v = tmp9;
         v_max = v;
         continue loopLabel
       }
-      lg_v = tmp10;
+      lg_v = tmp9;
       v_max = v_max;
       continue loopLabel;
     }
@@ -8834,40 +3841,20 @@ loop4 = function loop(ratioRegions2, control_string, i, values) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-lambda$ = (undefined, function (n, a) {
+lambda$ = (undefined, function (ratioRegions2, n, a) {
   return (i) => {
-    return lambda(n, a)
+    return lambda$_lambda$lambda(ratioRegions2, n, a)
   }
 });
-lambda = (undefined, function (n, a) {
+lambda = (undefined, function (ratioRegions2, n, a, i) {
   let scrut;
   scrut = n > 0;
   if (scrut === true) {
-    let tmp, arr, i, n1, x, inlinedVal;
-    tmp = [];
-    arr = tmp;
-    i = 0;
-    n1 = n;
-    x = a;
-    inlinedLbl: {
-      loopLabel: while (true) {
-        let scrut1, tmp1;
-        scrut1 = i == n1;
-        if (scrut1 === true) {
-          inlinedVal = arr;
-          break inlinedLbl
-        }
-        arr[i] = x;
-        tmp1 = i + 1;
-        i = tmp1;
-        continue loopLabel;
-      }
-    }
-    return inlinedVal
+    return ratioRegions2[array_alloc$accessorSymbol](n, a)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-loop3 = function loop(v, p, i) {
+loop3 = function loop(ratioRegions2, v, p, i) {
   loopLabel: while (true) {
     let tmp, tmp1, tmp2, inlinedVal;
     inlinedVal = v.length;
@@ -8924,7 +3911,7 @@ loop1 = function loop(ratioRegions2, l, min) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-init = function init(n, f, arr, i) {
+init = function init(ratioRegions2, n, f, arr, i) {
   loopLabel: while (true) {
     let scrut, tmp, tmp1;
     scrut = i < n;
@@ -8957,7 +3944,13 @@ loop = function loop(max, f, i) {
   }
   static get [listExists$tailrec$accessorSymbol]() { return ratioRegions.#listExists$tailrec; }
   static get [listApp$tailrec$accessorSymbol]() { return ratioRegions.#listApp$tailrec; }
+  static get [floor$accessorSymbol]() { return ratioRegions.#floor; }
+  static get [array_alloc$accessorSymbol]() { return ratioRegions.#array_alloc; }
+  static get [intMin$accessorSymbol]() { return ratioRegions.#intMin; }
   static get [doo$accessorSymbol]() { return ratioRegions.#doo; }
+  static get [vector_ref$accessorSymbol]() { return ratioRegions.#vector_ref; }
+  static get [vector_set$accessorSymbol]() { return ratioRegions.#vector_set; }
+  static get [negative$accessorSymbol]() { return ratioRegions.#negative; }
   static {
     ratioRegions.Cons = function Cons(head, tail) {
       return globalThis.Object.freeze(new Cons.class(head, tail));
@@ -9177,10 +4170,10 @@ loop = function loop(max, f, i) {
     return inlinedVal
   }
   static #zero(x) {
-    return runtime.Unit
+    return x == 0
   }
   static #cons(x, xs) {
-    return runtime.Unit
+    return ratioRegions.Cons(x, xs)
   }
   static #make_vector(n, init1) {
     let scrut;
@@ -9204,9 +4197,27 @@ loop = function loop(max, f, i) {
     let scrut, arr, tmp;
     scrut = n > 0;
     if (scrut === true) {
+      let n1, f1, arr1, i;
       tmp = runtime.safeCall(f(0));
       arr = ratioRegions.#array_alloc(n, tmp);
-      init(n, f, arr, 1);
+      n1 = n;
+      f1 = f;
+      arr1 = arr;
+      i = 1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut1, tmp1, tmp2;
+          scrut1 = i < n1;
+          if (scrut1 === true) {
+            tmp1 = runtime.safeCall(f1(i));
+            arr1[i] = tmp1;
+            tmp2 = i + 1;
+            i = tmp2;
+            continue loopLabel
+          }
+          break inlinedLbl;
+        }
+      }
       return arr
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -9221,13 +4232,16 @@ loop = function loop(max, f, i) {
     return runtime.Unit
   }
   static #modulo(a, b) {
-    let tmp;
+    let tmp, tmp1, tmp2;
     tmp = a / b;
-    ratioRegions.#floor(tmp);
-    return runtime.Unit
+    tmp1 = ratioRegions.#floor(tmp);
+    tmp2 = b * tmp1;
+    return a - tmp2
   }
   static #quotient(a, b) {
-    return runtime.Unit
+    let tmp;
+    tmp = a / b;
+    return ratioRegions.#floor(tmp)
   }
   static #for_each(l, f) {
     return ratioRegions.#listApp(f)(l)
@@ -9236,11 +4250,14 @@ loop = function loop(max, f, i) {
     return x < 0
   }
   static #positive(x) {
-    return runtime.Unit
+    return x > 0
   }
   static #min(l) {
+    let arg$Cons$0$, arg$Cons$1$;
     if (l instanceof ratioRegions.Cons.class) {
-      return runtime.Unit
+      arg$Cons$0$ = l.head;
+      arg$Cons$1$ = l.tail;
+      return loop1(ratioRegions, arg$Cons$1$, arg$Cons$0$)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -9251,7 +4268,32 @@ loop = function loop(max, f, i) {
     return ratioRegions.#listExists(p)(l)
   }
   static #some_vector(v, p) {
-    return loop3(v, p, 0)
+    let v1, p1, i, inlinedVal;
+    v1 = v;
+    p1 = p;
+    i = 0;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let tmp, tmp1, tmp2, inlinedVal1;
+        inlinedVal1 = v1.length;
+        tmp = i < inlinedVal1;
+        if (tmp === true) {
+          let inlinedVal2;
+          inlinedVal2 = v1.at(i);
+          tmp1 = runtime.safeCall(p1(inlinedVal2));
+          if (tmp1 === false) {
+            tmp2 = i + 1;
+            i = tmp2;
+            continue loopLabel
+          }
+          inlinedVal = true;
+          break inlinedLbl;
+        }
+        inlinedVal = false;
+        break inlinedLbl;
+      }
+    }
+    return inlinedVal
   }
   static #px(p) {
     let element0$;
@@ -9270,10 +4312,33 @@ loop = function loop(max, f, i) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #make_matrix(m, n, a) {
-    let tmp, lambda$here;
-    lambda$here = lambda$(n, a);
-    tmp = ratioRegions.#map_n_vector(m, lambda$here);
-    return ratioRegions.Matrix(tmp)
+    let scrut, arr;
+    scrut = m > 0;
+    if (scrut === true) {
+      let n1, f, arr1, i, inlinedVal;
+      inlinedVal = make_matrix_lambda$_lambda$lambda(ratioRegions, n, a);
+      arr = ratioRegions1.#array_alloc(m, inlinedVal);
+      n1 = m;
+      f = make_matrix_lambda$$lambda$(ratioRegions, n, a);
+      arr1 = arr;
+      i = 1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut1, tmp, tmp1;
+          scrut1 = i < n1;
+          if (scrut1 === true) {
+            tmp = runtime.safeCall(f());
+            arr1[i] = tmp;
+            tmp1 = i + 1;
+            i = tmp1;
+            continue loopLabel
+          }
+          break inlinedLbl;
+        }
+      }
+      return ratioRegions.Matrix(arr)
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #matrix_rows(mat) {
     let arg$Matrix$0$;
@@ -9319,7 +4384,7 @@ loop = function loop(max, f, i) {
     if (scrut === true) {
       return y
     }
-    return runtime.Unit;
+    return ratioRegions.#intMin(x, y);
   }
   static #positive_minus(x, y) {
     let scrut;
@@ -9327,7 +4392,7 @@ loop = function loop(max, f, i) {
     if (scrut === true) {
       return x
     }
-    return runtime.Unit;
+    return x - y;
   }
   static #positive_plus(x, y) {
     let scrut;
@@ -9335,47 +4400,2141 @@ loop = function loop(max, f, i) {
     if (scrut === true) {
       return x
     }
-    return runtime.Unit;
+    return x + y;
   }
   static #rao_ratio_region(c_right, c_down, w, lg_max_v) {
-    let height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+    let height, width, f_right, f_down, f_t, h, e, m1, m2, q, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, ratioRegions2, c_right1, c_down1, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked, m11, m21, q1, lg_v, v_max, inlinedVal6, scrut, arr, scrut1, arr1, scrut2, arr2, scrut3, arr3, scrut4, arr4, scrut5, arr5;
     height = ratioRegions.#matrix_rows(w);
     width = ratioRegions.#matrix_columns(w);
     tmp = width - 1;
-    f_right = ratioRegions.#make_matrix(height, tmp, 0);
-    tmp1 = height - 1;
-    f_down = ratioRegions.#make_matrix(tmp1, width, 0);
-    f_t = ratioRegions.#make_matrix(height, width, 0);
-    h = ratioRegions.#make_matrix(height, width, 0);
-    e = ratioRegions.#make_matrix(height, width, 0);
-    marked = ratioRegions.#make_matrix(height, width, false);
-    tmp2 = height * width;
-    m1 = tmp2 + 2;
-    tmp3 = 2 * height;
-    tmp4 = tmp3 * width;
-    m2 = tmp4 + 2;
-    tmp5 = 2 * height;
-    tmp6 = tmp5 * width;
-    tmp7 = tmp6 + 3;
-    q = ratioRegions.#make_vector(tmp7, ratioRegions.Nil);
-    return rao_ratio_region_loop$loop(ratioRegions, c_right, c_down, w, height, width, f_right, f_down, f_t, h, e, marked, m1, m2, q, lg_max_v, 0)
+    scrut5 = height > 0;
+    if (scrut5 === true) {
+      let n, f, arr6, i, inlinedVal7;
+      inlinedVal7 = rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions1, tmp, 0);
+      arr5 = ratioRegions1.#array_alloc(height, inlinedVal7);
+      n = height;
+      f = rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions1, tmp, 0);
+      arr6 = arr5;
+      i = 1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut6, tmp8, tmp9;
+          scrut6 = i < n;
+          if (scrut6 === true) {
+            tmp8 = runtime.safeCall(f());
+            arr6[i] = tmp8;
+            tmp9 = i + 1;
+            i = tmp9;
+            continue loopLabel
+          }
+          break inlinedLbl;
+        }
+      }
+      inlinedVal = ratioRegions1.Matrix(arr5);
+      f_right = inlinedVal;
+      tmp1 = height - 1;
+      scrut4 = tmp1 > 0;
+      if (scrut4 === true) {
+        let n1, f1, arr7, i1, inlinedVal8;
+        inlinedVal8 = rao_ratio_region_make_matrix_lambda$_lambda$lambda1(ratioRegions1, width, 0);
+        arr4 = ratioRegions1.#array_alloc(tmp1, inlinedVal8);
+        n1 = tmp1;
+        f1 = rao_ratio_region_make_matrix_lambda$$lambda$1(ratioRegions1, width, 0);
+        arr7 = arr4;
+        i1 = 1;
+        inlinedLbl1: {
+          loopLabel1: while (true) {
+            let scrut6, tmp8, tmp9;
+            scrut6 = i1 < n1;
+            if (scrut6 === true) {
+              tmp8 = runtime.safeCall(f1());
+              arr7[i1] = tmp8;
+              tmp9 = i1 + 1;
+              i1 = tmp9;
+              continue loopLabel1
+            }
+            break inlinedLbl1;
+          }
+        }
+        inlinedVal1 = ratioRegions1.Matrix(arr4);
+        f_down = inlinedVal1;
+        scrut3 = height > 0;
+        if (scrut3 === true) {
+          let n2, f2, arr8, i2, inlinedVal9;
+          inlinedVal9 = rao_ratio_region_make_matrix_lambda$_lambda$lambda2(ratioRegions1, width, 0);
+          arr3 = ratioRegions1.#array_alloc(height, inlinedVal9);
+          n2 = height;
+          f2 = rao_ratio_region_make_matrix_lambda$$lambda$2(ratioRegions1, width, 0);
+          arr8 = arr3;
+          i2 = 1;
+          inlinedLbl2: {
+            loopLabel2: while (true) {
+              let scrut6, tmp8, tmp9;
+              scrut6 = i2 < n2;
+              if (scrut6 === true) {
+                tmp8 = runtime.safeCall(f2());
+                arr8[i2] = tmp8;
+                tmp9 = i2 + 1;
+                i2 = tmp9;
+                continue loopLabel2
+              }
+              break inlinedLbl2;
+            }
+          }
+          inlinedVal2 = ratioRegions1.Matrix(arr3);
+          f_t = inlinedVal2;
+          scrut2 = height > 0;
+          if (scrut2 === true) {
+            let n3, f3, arr9, i3, inlinedVal10;
+            inlinedVal10 = rao_ratio_region_make_matrix_lambda$_lambda$lambda3(ratioRegions1, width, 0);
+            arr2 = ratioRegions1.#array_alloc(height, inlinedVal10);
+            n3 = height;
+            f3 = rao_ratio_region_make_matrix_lambda$$lambda$3(ratioRegions1, width, 0);
+            arr9 = arr2;
+            i3 = 1;
+            inlinedLbl3: {
+              loopLabel3: while (true) {
+                let scrut6, tmp8, tmp9;
+                scrut6 = i3 < n3;
+                if (scrut6 === true) {
+                  tmp8 = runtime.safeCall(f3());
+                  arr9[i3] = tmp8;
+                  tmp9 = i3 + 1;
+                  i3 = tmp9;
+                  continue loopLabel3
+                }
+                break inlinedLbl3;
+              }
+            }
+            inlinedVal3 = ratioRegions1.Matrix(arr2);
+            h = inlinedVal3;
+            scrut1 = height > 0;
+            if (scrut1 === true) {
+              let n4, f4, arr10, i4, inlinedVal11;
+              inlinedVal11 = rao_ratio_region_make_matrix_lambda$_lambda$lambda4(ratioRegions1, width, 0);
+              arr1 = ratioRegions1.#array_alloc(height, inlinedVal11);
+              n4 = height;
+              f4 = rao_ratio_region_make_matrix_lambda$$lambda$4(ratioRegions1, width, 0);
+              arr10 = arr1;
+              i4 = 1;
+              inlinedLbl4: {
+                loopLabel4: while (true) {
+                  let scrut6, tmp8, tmp9;
+                  scrut6 = i4 < n4;
+                  if (scrut6 === true) {
+                    tmp8 = runtime.safeCall(f4());
+                    arr10[i4] = tmp8;
+                    tmp9 = i4 + 1;
+                    i4 = tmp9;
+                    continue loopLabel4
+                  }
+                  break inlinedLbl4;
+                }
+              }
+              inlinedVal4 = ratioRegions1.Matrix(arr1);
+              e = inlinedVal4;
+              scrut = height > 0;
+              if (scrut === true) {
+                let n5, f5, arr11, i5, inlinedVal12;
+                inlinedVal12 = rao_ratio_region_make_matrix_lambda$_lambda$lambda5(ratioRegions1, width, false);
+                arr = ratioRegions1.#array_alloc(height, inlinedVal12);
+                n5 = height;
+                f5 = rao_ratio_region_make_matrix_lambda$$lambda$5(ratioRegions1, width, false);
+                arr11 = arr;
+                i5 = 1;
+                inlinedLbl5: {
+                  loopLabel5: while (true) {
+                    let scrut6, tmp8, tmp9;
+                    scrut6 = i5 < n5;
+                    if (scrut6 === true) {
+                      tmp8 = runtime.safeCall(f5());
+                      arr11[i5] = tmp8;
+                      tmp9 = i5 + 1;
+                      i5 = tmp9;
+                      continue loopLabel5
+                    }
+                    break inlinedLbl5;
+                  }
+                }
+                inlinedVal5 = ratioRegions1.Matrix(arr);
+                tmp2 = height * width;
+                m1 = tmp2 + 2;
+                tmp3 = 2 * height;
+                tmp4 = tmp3 * width;
+                m2 = tmp4 + 2;
+                tmp5 = 2 * height;
+                tmp6 = tmp5 * width;
+                tmp7 = tmp6 + 3;
+                q = ratioRegions.#make_vector(tmp7, ratioRegions.Nil);
+                ratioRegions2 = ratioRegions;
+                c_right1 = c_right;
+                c_down1 = c_down;
+                w1 = w;
+                height1 = height;
+                width1 = width;
+                f_right1 = f_right;
+                f_down1 = f_down;
+                f_t1 = f_t;
+                h1 = h;
+                e1 = e;
+                marked = inlinedVal5;
+                m11 = m1;
+                m21 = m2;
+                q1 = q;
+                lg_v = lg_max_v;
+                v_max = 0;
+                inlinedLbl6: {
+                  loopLabel6: while (true) {
+                    let v, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, inlinedVal13;
+                    inlinedVal13 = lg_v < 0;
+                    if (inlinedVal13 === true) {
+                      let ratioRegions3, height2, pushes, lifts, relabels, tmp18, tmp19, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions4, c_right2, c_down2, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i6, p, f6, scrut6, arr12;
+                      tmp8 = ratioRegions.PInt(undefined);
+                      tmp9 = ratioRegions2.Cons(tmp8, ratioRegions2.Nil);
+                      rao_ratio_region_loop_loop$loop(ratioRegions2, "V-MAX=~s~%", 0, tmp9);
+                      tmp10 = v_max + 1;
+                      lambda$here = lambda$9(ratioRegions2, width1, f_t1, e1);
+                      ratioRegions2.#doo(height1, lambda$here);
+                      lambda$here1 = lambda$8(ratioRegions2, width1, f_right1);
+                      ratioRegions2.#doo(height1, lambda$here1);
+                      tmp18 = height1 - 1;
+                      lambda$here2 = lambda$7(ratioRegions2, width1, f_down1);
+                      ratioRegions2.#doo(tmp18, lambda$here2);
+                      lambda$here3 = lambda$6(ratioRegions2, width1, e1);
+                      ratioRegions2.#doo(height1, lambda$here3);
+                      tmp19 = width1 - 1;
+                      lambda$here4 = lambda$5(ratioRegions2, height1, e1);
+                      ratioRegions2.#doo(tmp19, lambda$here4);
+                      pushes = new ratioRegions2.Ref.class(0);
+                      lifts = new ratioRegions2.Ref.class(0);
+                      relabels = new ratioRegions2.Ref.class(0);
+                      ratioRegions4 = ratioRegions2;
+                      c_right2 = c_right1;
+                      c_down2 = c_down1;
+                      w2 = w1;
+                      height3 = height1;
+                      width2 = width1;
+                      f_right2 = f_right1;
+                      f_down2 = f_down1;
+                      f_t2 = f_t1;
+                      h2 = h1;
+                      e2 = e1;
+                      marked1 = marked;
+                      m12 = m11;
+                      m22 = m21;
+                      q2 = q1;
+                      v1 = tmp10;
+                      pushes1 = pushes;
+                      lifts1 = lifts;
+                      relabels1 = relabels;
+                      i6 = 0;
+                      p = false;
+                      inlinedLbl7: {
+                        loopLabel7: while (true) {
+                          let tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, lambda$here5, lambda$here6, lambda$here7, inlinedVal14, inlinedVal15, tmp57, tmp58, tmp59;
+                          tmp57 = i6 / 6;
+                          tmp58 = ratioRegions4.#floor(tmp57);
+                          tmp59 = 6 * tmp58;
+                          inlinedVal14 = i6 - tmp59;
+                          inlinedVal15 = inlinedVal14 == 0;
+                          if (inlinedVal15 === true) {
+                            let inlinedVal16;
+                            switch (p) {
+                              case false:
+                                inlinedVal16 = true;
+                                break;
+                              case true:
+                                inlinedVal16 = false;
+                                break;
+                              default:
+                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                            }
+                            tmp20 = inlinedVal16;
+                          } else {
+                            tmp20 = false;
+                          }
+                          if (tmp20 === true) {
+                            let p1, inlinedVal16, q3, tail, lambda$here8, lambda$here9;
+                            q3 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                            tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                            lambda$here8 = lambda$25(ratioRegions4, width2, h2, marked1, m12);
+                            ratioRegions4.#doo(height3, lambda$here8);
+                            lambda$here9 = lambda$24(ratioRegions4, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                            ratioRegions4.#doo(height3, lambda$here9);
+                            loop5(ratioRegions4, c_right2, c_down2, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                            tmp21 = relabels1.value + 1;
+                            relabels1.value = tmp21;
+                            p1 = lambda$17(ratioRegions4, width2, h2, e2, m12);
+                            inlinedVal16 = loop2(height3, p1, 0);
+                            if (inlinedVal16 === true) {
+                              tmp22 = ratioRegions.PInt(undefined);
+                              tmp23 = ratioRegions.PString(undefined);
+                              tmp24 = ratioRegions.PInt(undefined);
+                              tmp25 = ratioRegions.PString(undefined);
+                              tmp26 = ratioRegions.PInt(undefined);
+                              tmp27 = ratioRegions.PString(undefined);
+                              tmp28 = ratioRegions.PInt(undefined);
+                              tmp29 = ratioRegions.PString(undefined);
+                              tmp30 = ratioRegions4.Cons(tmp29, ratioRegions4.Nil);
+                              tmp31 = ratioRegions4.Cons(tmp28, tmp30);
+                              tmp32 = ratioRegions4.Cons(tmp27, tmp31);
+                              tmp33 = ratioRegions4.Cons(tmp26, tmp32);
+                              tmp34 = ratioRegions4.Cons(tmp25, tmp33);
+                              tmp35 = ratioRegions4.Cons(tmp24, tmp34);
+                              tmp36 = ratioRegions4.Cons(tmp23, tmp35);
+                              tmp37 = ratioRegions4.Cons(tmp22, tmp36);
+                              loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp37);
+                              break inlinedLbl7
+                            }
+                            {
+                              let inlinedVal17;
+                              inlinedVal17 = q2.length;
+                              lambda$here5 = lambda$16(ratioRegions4, q2);
+                              ratioRegions4.#doo(inlinedVal17, lambda$here5);
+                              lambda$here6 = lambda$15(ratioRegions4, width2, marked1);
+                              ratioRegions4.#doo(height3, lambda$here6);
+                              lambda$here7 = lambda$14(ratioRegions4, width2, h2, e2, marked1, q2);
+                              ratioRegions4.#doo(height3, lambda$here7);
+                              p = true;
+                              continue loopLabel7;
+                            }
+                          }
+                          {
+                            let v2, p1, i7, inlinedVal16;
+                            v2 = q2;
+                            p1 = lambda$13(ratioRegions4, c_right2, c_down2, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, m12, v1);
+                            i7 = 0;
+                            inlinedLbl8: {
+                              loopLabel8: while (true) {
+                                let tmp60, tmp61, tmp62, inlinedVal17;
+                                inlinedVal17 = v2.length;
+                                tmp60 = i7 < inlinedVal17;
+                                if (tmp60 === true) {
+                                  let inlinedVal18;
+                                  inlinedVal18 = v2.at(i7);
+                                  tmp61 = runtime.safeCall(p1(inlinedVal18));
+                                  if (tmp61 === false) {
+                                    tmp62 = i7 + 1;
+                                    i7 = tmp62;
+                                    continue loopLabel8
+                                  }
+                                  inlinedVal16 = true;
+                                  break inlinedLbl8;
+                                }
+                                inlinedVal16 = false;
+                                break inlinedLbl8;
+                              }
+                            }
+                            if (inlinedVal16 === true) {
+                              let inlinedVal17;
+                              inlinedVal17 = q2.length;
+                              tmp38 = inlinedVal17 - 1;
+                              loopK(ratioRegions4, c_right2, c_down2, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, tmp38);
+                              tmp39 = i6 + 1;
+                              i6 = tmp39;
+                              p = false;
+                              continue loopLabel7
+                            }
+                            {
+                              let q3, tail, lambda$here8, lambda$here9;
+                              q3 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                              tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                              lambda$here8 = lambda$25(ratioRegions4, width2, h2, marked1, m12);
+                              ratioRegions4.#doo(height3, lambda$here8);
+                              lambda$here9 = lambda$24(ratioRegions4, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                              ratioRegions4.#doo(height3, lambda$here9);
+                              loop5(ratioRegions4, c_right2, c_down2, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                              tmp40 = relabels1.value + 1;
+                              relabels1.value = tmp40;
+                              tmp41 = ratioRegions.PInt(undefined);
+                              tmp42 = ratioRegions.PString(undefined);
+                              tmp43 = ratioRegions.PInt(undefined);
+                              tmp44 = ratioRegions.PString(undefined);
+                              tmp45 = ratioRegions.PInt(undefined);
+                              tmp46 = ratioRegions.PString(undefined);
+                              tmp47 = ratioRegions.PInt(undefined);
+                              tmp48 = ratioRegions.PString(undefined);
+                              tmp49 = ratioRegions4.Cons(tmp48, ratioRegions4.Nil);
+                              tmp50 = ratioRegions4.Cons(tmp47, tmp49);
+                              tmp51 = ratioRegions4.Cons(tmp46, tmp50);
+                              tmp52 = ratioRegions4.Cons(tmp45, tmp51);
+                              tmp53 = ratioRegions4.Cons(tmp44, tmp52);
+                              tmp54 = ratioRegions4.Cons(tmp43, tmp53);
+                              tmp55 = ratioRegions4.Cons(tmp42, tmp54);
+                              tmp56 = ratioRegions4.Cons(tmp41, tmp55);
+                              loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp56);
+                              break inlinedLbl7;
+                            }
+                          }
+                        }
+                      }
+                      ratioRegions3 = ratioRegions2;
+                      height2 = height1;
+                      f6 = rao_ratio_region_loop_min_cut_lambda$$lambda$(ratioRegions2, width1, h1, m11);
+                      scrut6 = height1 > 0;
+                      if (scrut6 === true) {
+                        let n6, f7, arr13, i7, scrut7, arr14;
+                        scrut7 = width1 > 0;
+                        if (scrut7 === true) {
+                          let inlinedVal14, n7, f8, arr15, i8;
+                          inlinedVal14 = lambda26(ratioRegions2, h1, m11, 0, 0);
+                          arr14 = ratioRegions2.#array_alloc(width1, inlinedVal14);
+                          n7 = width1;
+                          f8 = lambda$2(ratioRegions2, h1, m11, 0);
+                          arr15 = arr14;
+                          i8 = 1;
+                          inlinedLbl8: {
+                            loopLabel8: while (true) {
+                              let scrut8, tmp20, tmp21;
+                              scrut8 = i8 < n7;
+                              if (scrut8 === true) {
+                                tmp20 = runtime.safeCall(f8(i8));
+                                arr15[i8] = tmp20;
+                                tmp21 = i8 + 1;
+                                i8 = tmp21;
+                                continue loopLabel8
+                              }
+                              break inlinedLbl8;
+                            }
+                          }
+                          arr12 = ratioRegions3.#array_alloc(height2, arr14);
+                          n6 = height2;
+                          f7 = f6;
+                          arr13 = arr12;
+                          i7 = 1;
+                          inlinedLbl9: {
+                            loopLabel9: while (true) {
+                              let scrut8, tmp20, tmp21;
+                              scrut8 = i7 < n6;
+                              if (scrut8 === true) {
+                                tmp20 = runtime.safeCall(f7(i7));
+                                arr13[i7] = tmp20;
+                                tmp21 = i7 + 1;
+                                i7 = tmp21;
+                                continue loopLabel9
+                              }
+                              break inlinedLbl9;
+                            }
+                          }
+                          inlinedVal6 = arr12;
+                          break inlinedLbl6
+                        }
+                        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                      }
+                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                    }
+                    {
+                      let p, inlinedVal14, i6, c, inlinedVal15, pushes, lifts, relabels, tmp18, tmp19, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4, ratioRegions3, c_right2, c_down2, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i7, p1;
+                      i6 = lg_v;
+                      c = 1;
+                      inlinedLbl7: {
+                        loopLabel7: while (true) {
+                          let tmp20, tmp21, inlinedVal16;
+                          inlinedVal16 = i6 == 0;
+                          if (inlinedVal16 === true) {
+                            inlinedVal15 = c;
+                            break inlinedLbl7
+                          }
+                          tmp20 = i6 - 1;
+                          tmp21 = c + c;
+                          i6 = tmp20;
+                          c = tmp21;
+                          continue loopLabel7;
+                        }
+                      }
+                      v = v_max + inlinedVal15;
+                      tmp11 = ratioRegions.PInt(undefined);
+                      tmp12 = ratioRegions.PInt(undefined);
+                      tmp13 = ratioRegions.PInt(undefined);
+                      tmp14 = ratioRegions2.Cons(tmp13, ratioRegions2.Nil);
+                      tmp15 = ratioRegions2.Cons(tmp12, tmp14);
+                      tmp16 = ratioRegions2.Cons(tmp11, tmp15);
+                      rao_ratio_region_loop_loop$loop(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp16);
+                      lambda$here = lambda$9(ratioRegions2, width1, f_t1, e1);
+                      ratioRegions2.#doo(height1, lambda$here);
+                      lambda$here1 = lambda$8(ratioRegions2, width1, f_right1);
+                      ratioRegions2.#doo(height1, lambda$here1);
+                      tmp18 = height1 - 1;
+                      lambda$here2 = lambda$7(ratioRegions2, width1, f_down1);
+                      ratioRegions2.#doo(tmp18, lambda$here2);
+                      lambda$here3 = lambda$6(ratioRegions2, width1, e1);
+                      ratioRegions2.#doo(height1, lambda$here3);
+                      tmp19 = width1 - 1;
+                      lambda$here4 = lambda$5(ratioRegions2, height1, e1);
+                      ratioRegions2.#doo(tmp19, lambda$here4);
+                      pushes = new ratioRegions2.Ref.class(0);
+                      lifts = new ratioRegions2.Ref.class(0);
+                      relabels = new ratioRegions2.Ref.class(0);
+                      ratioRegions3 = ratioRegions2;
+                      c_right2 = c_right1;
+                      c_down2 = c_down1;
+                      w2 = w1;
+                      height2 = height1;
+                      width2 = width1;
+                      f_right2 = f_right1;
+                      f_down2 = f_down1;
+                      f_t2 = f_t1;
+                      h2 = h1;
+                      e2 = e1;
+                      marked1 = marked;
+                      m12 = m11;
+                      m22 = m21;
+                      q2 = q1;
+                      v1 = v;
+                      pushes1 = pushes;
+                      lifts1 = lifts;
+                      relabels1 = relabels;
+                      i7 = 0;
+                      p1 = false;
+                      inlinedLbl8: {
+                        loopLabel8: while (true) {
+                          let tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, lambda$here5, lambda$here6, lambda$here7, inlinedVal16, inlinedVal17, tmp57, tmp58, tmp59;
+                          tmp57 = i7 / 6;
+                          tmp58 = ratioRegions3.#floor(tmp57);
+                          tmp59 = 6 * tmp58;
+                          inlinedVal16 = i7 - tmp59;
+                          inlinedVal17 = inlinedVal16 == 0;
+                          if (inlinedVal17 === true) {
+                            let inlinedVal18;
+                            switch (p1) {
+                              case false:
+                                inlinedVal18 = true;
+                                break;
+                              case true:
+                                inlinedVal18 = false;
+                                break;
+                              default:
+                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                            }
+                            tmp20 = inlinedVal18;
+                          } else {
+                            tmp20 = false;
+                          }
+                          if (tmp20 === true) {
+                            let p2, inlinedVal18, q3, tail, lambda$here8, lambda$here9;
+                            q3 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                            tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                            lambda$here8 = lambda$25(ratioRegions3, width2, h2, marked1, m12);
+                            ratioRegions3.#doo(height2, lambda$here8);
+                            lambda$here9 = lambda$24(ratioRegions3, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                            ratioRegions3.#doo(height2, lambda$here9);
+                            loop5(ratioRegions3, c_right2, c_down2, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                            tmp21 = relabels1.value + 1;
+                            relabels1.value = tmp21;
+                            p2 = lambda$17(ratioRegions3, width2, h2, e2, m12);
+                            inlinedVal18 = loop2(height2, p2, 0);
+                            if (inlinedVal18 === true) {
+                              tmp22 = ratioRegions.PInt(undefined);
+                              tmp23 = ratioRegions.PString(undefined);
+                              tmp24 = ratioRegions.PInt(undefined);
+                              tmp25 = ratioRegions.PString(undefined);
+                              tmp26 = ratioRegions.PInt(undefined);
+                              tmp27 = ratioRegions.PString(undefined);
+                              tmp28 = ratioRegions.PInt(undefined);
+                              tmp29 = ratioRegions.PString(undefined);
+                              tmp30 = ratioRegions3.Cons(tmp29, ratioRegions3.Nil);
+                              tmp31 = ratioRegions3.Cons(tmp28, tmp30);
+                              tmp32 = ratioRegions3.Cons(tmp27, tmp31);
+                              tmp33 = ratioRegions3.Cons(tmp26, tmp32);
+                              tmp34 = ratioRegions3.Cons(tmp25, tmp33);
+                              tmp35 = ratioRegions3.Cons(tmp24, tmp34);
+                              tmp36 = ratioRegions3.Cons(tmp23, tmp35);
+                              tmp37 = ratioRegions3.Cons(tmp22, tmp36);
+                              loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp37);
+                              break inlinedLbl8
+                            }
+                            {
+                              let inlinedVal19;
+                              inlinedVal19 = q2.length;
+                              lambda$here5 = lambda$16(ratioRegions3, q2);
+                              ratioRegions3.#doo(inlinedVal19, lambda$here5);
+                              lambda$here6 = lambda$15(ratioRegions3, width2, marked1);
+                              ratioRegions3.#doo(height2, lambda$here6);
+                              lambda$here7 = lambda$14(ratioRegions3, width2, h2, e2, marked1, q2);
+                              ratioRegions3.#doo(height2, lambda$here7);
+                              p1 = true;
+                              continue loopLabel8;
+                            }
+                          }
+                          {
+                            let v2, p2, i8, inlinedVal18;
+                            v2 = q2;
+                            p2 = lambda$13(ratioRegions3, c_right2, c_down2, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, m12, v1);
+                            i8 = 0;
+                            inlinedLbl9: {
+                              loopLabel9: while (true) {
+                                let tmp60, tmp61, tmp62, inlinedVal19;
+                                inlinedVal19 = v2.length;
+                                tmp60 = i8 < inlinedVal19;
+                                if (tmp60 === true) {
+                                  let inlinedVal20;
+                                  inlinedVal20 = v2.at(i8);
+                                  tmp61 = runtime.safeCall(p2(inlinedVal20));
+                                  if (tmp61 === false) {
+                                    tmp62 = i8 + 1;
+                                    i8 = tmp62;
+                                    continue loopLabel9
+                                  }
+                                  inlinedVal18 = true;
+                                  break inlinedLbl9;
+                                }
+                                inlinedVal18 = false;
+                                break inlinedLbl9;
+                              }
+                            }
+                            if (inlinedVal18 === true) {
+                              let inlinedVal19;
+                              inlinedVal19 = q2.length;
+                              tmp38 = inlinedVal19 - 1;
+                              loopK(ratioRegions3, c_right2, c_down2, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, tmp38);
+                              tmp39 = i7 + 1;
+                              i7 = tmp39;
+                              p1 = false;
+                              continue loopLabel8
+                            }
+                            {
+                              let q3, tail, lambda$here8, lambda$here9;
+                              q3 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                              tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                              lambda$here8 = lambda$25(ratioRegions3, width2, h2, marked1, m12);
+                              ratioRegions3.#doo(height2, lambda$here8);
+                              lambda$here9 = lambda$24(ratioRegions3, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                              ratioRegions3.#doo(height2, lambda$here9);
+                              loop5(ratioRegions3, c_right2, c_down2, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                              tmp40 = relabels1.value + 1;
+                              relabels1.value = tmp40;
+                              tmp41 = ratioRegions.PInt(undefined);
+                              tmp42 = ratioRegions.PString(undefined);
+                              tmp43 = ratioRegions.PInt(undefined);
+                              tmp44 = ratioRegions.PString(undefined);
+                              tmp45 = ratioRegions.PInt(undefined);
+                              tmp46 = ratioRegions.PString(undefined);
+                              tmp47 = ratioRegions.PInt(undefined);
+                              tmp48 = ratioRegions.PString(undefined);
+                              tmp49 = ratioRegions3.Cons(tmp48, ratioRegions3.Nil);
+                              tmp50 = ratioRegions3.Cons(tmp47, tmp49);
+                              tmp51 = ratioRegions3.Cons(tmp46, tmp50);
+                              tmp52 = ratioRegions3.Cons(tmp45, tmp51);
+                              tmp53 = ratioRegions3.Cons(tmp44, tmp52);
+                              tmp54 = ratioRegions3.Cons(tmp43, tmp53);
+                              tmp55 = ratioRegions3.Cons(tmp42, tmp54);
+                              tmp56 = ratioRegions3.Cons(tmp41, tmp55);
+                              loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp56);
+                              break inlinedLbl8;
+                            }
+                          }
+                        }
+                      }
+                      tmp17 = lg_v - 1;
+                      p = lambda$3(ratioRegions2, width1, h1, m11);
+                      inlinedVal14 = loop2(height1, p, 0);
+                      if (inlinedVal14 === true) {
+                        lg_v = tmp17;
+                        v_max = v;
+                        continue loopLabel6
+                      }
+                      lg_v = tmp17;
+                      v_max = v_max;
+                      continue loopLabel6;
+                    }
+                  }
+                }
+                return inlinedVal6
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #doit(n) {
-    let c_right, c_down, tmp, tmp1, tmp2, tmp3, lambda$here, lambda$here1;
+    let c_right, c_down, tmp, tmp1, tmp2, lambda$here, lambda$here1, inlinedVal, inlinedVal1, inlinedVal2, c_right1, c_down1, w, lg_max_v, height, width, f_right, f_down, f_t, h, e, m1, m2, q, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, ratioRegions2, c_right2, c_down2, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked, m11, m21, q1, lg_v, v_max, inlinedVal9, scrut, arr, scrut1, arr1, scrut2, arr2, scrut3, arr3, scrut4, arr4, scrut5, arr5, scrut6, arr6, scrut7, arr7, scrut8, arr8;
     tmp = n - 1;
-    c_right = ratioRegions.#make_matrix(n, tmp, -1);
-    tmp1 = n - 1;
-    c_down = ratioRegions.#make_matrix(tmp1, n, -1);
-    lambda$here = lambda$29(ratioRegions, n, n, c_right);
-    ratioRegions.#doo(n, lambda$here);
-    tmp2 = n - 1;
-    lambda$here1 = lambda$28(ratioRegions, n, n, c_down);
-    ratioRegions.#doo(tmp2, lambda$here1);
-    tmp3 = ratioRegions.#make_matrix(n, n, 1);
-    return doit_rao_ratio_region$rao_ratio_region(c_right, c_down, tmp3, 15)
+    scrut8 = n > 0;
+    if (scrut8 === true) {
+      let n1, f, arr9, i, inlinedVal10;
+      inlinedVal10 = doit_make_matrix_lambda$_lambda$lambda(ratioRegions1, tmp, -1);
+      arr8 = ratioRegions1.#array_alloc(n, inlinedVal10);
+      n1 = n;
+      f = doit_make_matrix_lambda$$lambda$(ratioRegions1, tmp, -1);
+      arr9 = arr8;
+      i = 1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut9, tmp11, tmp12;
+          scrut9 = i < n1;
+          if (scrut9 === true) {
+            tmp11 = runtime.safeCall(f());
+            arr9[i] = tmp11;
+            tmp12 = i + 1;
+            i = tmp12;
+            continue loopLabel
+          }
+          break inlinedLbl;
+        }
+      }
+      inlinedVal = ratioRegions1.Matrix(arr8);
+      c_right = inlinedVal;
+      tmp1 = n - 1;
+      scrut7 = tmp1 > 0;
+      if (scrut7 === true) {
+        let n2, f1, arr10, i1, inlinedVal11;
+        inlinedVal11 = doit_make_matrix_lambda$_lambda$lambda1(ratioRegions1, n, -1);
+        arr7 = ratioRegions1.#array_alloc(tmp1, inlinedVal11);
+        n2 = tmp1;
+        f1 = doit_make_matrix_lambda$$lambda$1(ratioRegions1, n, -1);
+        arr10 = arr7;
+        i1 = 1;
+        inlinedLbl1: {
+          loopLabel1: while (true) {
+            let scrut9, tmp11, tmp12;
+            scrut9 = i1 < n2;
+            if (scrut9 === true) {
+              tmp11 = runtime.safeCall(f1());
+              arr10[i1] = tmp11;
+              tmp12 = i1 + 1;
+              i1 = tmp12;
+              continue loopLabel1
+            }
+            break inlinedLbl1;
+          }
+        }
+        inlinedVal1 = ratioRegions1.Matrix(arr7);
+        c_down = inlinedVal1;
+        lambda$here = lambda$29(ratioRegions, n, n, c_right);
+        ratioRegions.#doo(n, lambda$here);
+        tmp2 = n - 1;
+        lambda$here1 = lambda$28(ratioRegions, n, n, inlinedVal1);
+        ratioRegions.#doo(tmp2, lambda$here1);
+        scrut6 = n > 0;
+        if (scrut6 === true) {
+          let n3, f2, arr11, i2, inlinedVal12;
+          inlinedVal12 = doit_make_matrix_lambda$_lambda$lambda2(ratioRegions1, n, 1);
+          arr6 = ratioRegions1.#array_alloc(n, inlinedVal12);
+          n3 = n;
+          f2 = doit_make_matrix_lambda$$lambda$2(ratioRegions1, n, 1);
+          arr11 = arr6;
+          i2 = 1;
+          inlinedLbl2: {
+            loopLabel2: while (true) {
+              let scrut9, tmp11, tmp12;
+              scrut9 = i2 < n3;
+              if (scrut9 === true) {
+                tmp11 = runtime.safeCall(f2());
+                arr11[i2] = tmp11;
+                tmp12 = i2 + 1;
+                i2 = tmp12;
+                continue loopLabel2
+              }
+              break inlinedLbl2;
+            }
+          }
+          inlinedVal2 = ratioRegions1.Matrix(arr6);
+          c_right1 = c_right;
+          c_down1 = c_down;
+          w = inlinedVal2;
+          lg_max_v = 15;
+          height = ratioRegions1.#matrix_rows(inlinedVal2);
+          width = ratioRegions1.#matrix_columns(inlinedVal2);
+          tmp3 = width - 1;
+          scrut = height > 0;
+          if (scrut === true) {
+            let n4, f3, arr12, i3, inlinedVal13;
+            inlinedVal13 = doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5(ratioRegions1, tmp3, 0);
+            arr = ratioRegions1.#array_alloc(height, inlinedVal13);
+            n4 = height;
+            f3 = doit_rao_ratio_region_make_matrix_lambda$$lambda$5(ratioRegions1, tmp3, 0);
+            arr12 = arr;
+            i3 = 1;
+            inlinedLbl3: {
+              loopLabel3: while (true) {
+                let scrut9, tmp11, tmp12;
+                scrut9 = i3 < n4;
+                if (scrut9 === true) {
+                  tmp11 = runtime.safeCall(f3());
+                  arr12[i3] = tmp11;
+                  tmp12 = i3 + 1;
+                  i3 = tmp12;
+                  continue loopLabel3
+                }
+                break inlinedLbl3;
+              }
+            }
+            inlinedVal3 = ratioRegions1.Matrix(arr);
+            f_right = inlinedVal3;
+            tmp4 = height - 1;
+            scrut1 = tmp4 > 0;
+            if (scrut1 === true) {
+              let n5, f4, arr13, i4, inlinedVal14;
+              inlinedVal14 = doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4(ratioRegions1, width, 0);
+              arr1 = ratioRegions1.#array_alloc(tmp4, inlinedVal14);
+              n5 = tmp4;
+              f4 = doit_rao_ratio_region_make_matrix_lambda$$lambda$4(ratioRegions1, width, 0);
+              arr13 = arr1;
+              i4 = 1;
+              inlinedLbl4: {
+                loopLabel4: while (true) {
+                  let scrut9, tmp11, tmp12;
+                  scrut9 = i4 < n5;
+                  if (scrut9 === true) {
+                    tmp11 = runtime.safeCall(f4());
+                    arr13[i4] = tmp11;
+                    tmp12 = i4 + 1;
+                    i4 = tmp12;
+                    continue loopLabel4
+                  }
+                  break inlinedLbl4;
+                }
+              }
+              inlinedVal4 = ratioRegions1.Matrix(arr1);
+              f_down = inlinedVal4;
+              scrut2 = height > 0;
+              if (scrut2 === true) {
+                let n6, f5, arr14, i5, inlinedVal15;
+                inlinedVal15 = doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3(ratioRegions1, width, 0);
+                arr2 = ratioRegions1.#array_alloc(height, inlinedVal15);
+                n6 = height;
+                f5 = doit_rao_ratio_region_make_matrix_lambda$$lambda$3(ratioRegions1, width, 0);
+                arr14 = arr2;
+                i5 = 1;
+                inlinedLbl5: {
+                  loopLabel5: while (true) {
+                    let scrut9, tmp11, tmp12;
+                    scrut9 = i5 < n6;
+                    if (scrut9 === true) {
+                      tmp11 = runtime.safeCall(f5());
+                      arr14[i5] = tmp11;
+                      tmp12 = i5 + 1;
+                      i5 = tmp12;
+                      continue loopLabel5
+                    }
+                    break inlinedLbl5;
+                  }
+                }
+                inlinedVal5 = ratioRegions1.Matrix(arr2);
+                f_t = inlinedVal5;
+                scrut3 = height > 0;
+                if (scrut3 === true) {
+                  let n7, f6, arr15, i6, inlinedVal16;
+                  inlinedVal16 = doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2(ratioRegions1, width, 0);
+                  arr3 = ratioRegions1.#array_alloc(height, inlinedVal16);
+                  n7 = height;
+                  f6 = doit_rao_ratio_region_make_matrix_lambda$$lambda$2(ratioRegions1, width, 0);
+                  arr15 = arr3;
+                  i6 = 1;
+                  inlinedLbl6: {
+                    loopLabel6: while (true) {
+                      let scrut9, tmp11, tmp12;
+                      scrut9 = i6 < n7;
+                      if (scrut9 === true) {
+                        tmp11 = runtime.safeCall(f6());
+                        arr15[i6] = tmp11;
+                        tmp12 = i6 + 1;
+                        i6 = tmp12;
+                        continue loopLabel6
+                      }
+                      break inlinedLbl6;
+                    }
+                  }
+                  inlinedVal6 = ratioRegions1.Matrix(arr3);
+                  h = inlinedVal6;
+                  scrut4 = height > 0;
+                  if (scrut4 === true) {
+                    let n8, f7, arr16, i7, inlinedVal17;
+                    inlinedVal17 = doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1(ratioRegions1, width, 0);
+                    arr4 = ratioRegions1.#array_alloc(height, inlinedVal17);
+                    n8 = height;
+                    f7 = doit_rao_ratio_region_make_matrix_lambda$$lambda$1(ratioRegions1, width, 0);
+                    arr16 = arr4;
+                    i7 = 1;
+                    inlinedLbl7: {
+                      loopLabel7: while (true) {
+                        let scrut9, tmp11, tmp12;
+                        scrut9 = i7 < n8;
+                        if (scrut9 === true) {
+                          tmp11 = runtime.safeCall(f7());
+                          arr16[i7] = tmp11;
+                          tmp12 = i7 + 1;
+                          i7 = tmp12;
+                          continue loopLabel7
+                        }
+                        break inlinedLbl7;
+                      }
+                    }
+                    inlinedVal7 = ratioRegions1.Matrix(arr4);
+                    e = inlinedVal7;
+                    scrut5 = height > 0;
+                    if (scrut5 === true) {
+                      let n9, f8, arr17, i8, inlinedVal18;
+                      inlinedVal18 = doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions1, width, false);
+                      arr5 = ratioRegions1.#array_alloc(height, inlinedVal18);
+                      n9 = height;
+                      f8 = doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions1, width, false);
+                      arr17 = arr5;
+                      i8 = 1;
+                      inlinedLbl8: {
+                        loopLabel8: while (true) {
+                          let scrut9, tmp11, tmp12;
+                          scrut9 = i8 < n9;
+                          if (scrut9 === true) {
+                            tmp11 = runtime.safeCall(f8());
+                            arr17[i8] = tmp11;
+                            tmp12 = i8 + 1;
+                            i8 = tmp12;
+                            continue loopLabel8
+                          }
+                          break inlinedLbl8;
+                        }
+                      }
+                      inlinedVal8 = ratioRegions1.Matrix(arr5);
+                      tmp5 = height * width;
+                      m1 = tmp5 + 2;
+                      tmp6 = 2 * height;
+                      tmp7 = tmp6 * width;
+                      m2 = tmp7 + 2;
+                      tmp8 = 2 * height;
+                      tmp9 = tmp8 * width;
+                      tmp10 = tmp9 + 3;
+                      q = ratioRegions1.#make_vector(tmp10, ratioRegions1.Nil);
+                      ratioRegions2 = ratioRegions1;
+                      c_right2 = c_right1;
+                      c_down2 = c_down1;
+                      w1 = w;
+                      height1 = height;
+                      width1 = width;
+                      f_right1 = f_right;
+                      f_down1 = f_down;
+                      f_t1 = f_t;
+                      h1 = h;
+                      e1 = e;
+                      marked = inlinedVal8;
+                      m11 = m1;
+                      m21 = m2;
+                      q1 = q;
+                      lg_v = lg_max_v;
+                      v_max = 0;
+                      inlinedLbl9: {
+                        loopLabel9: while (true) {
+                          let v, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, inlinedVal19;
+                          inlinedVal19 = lg_v < 0;
+                          if (inlinedVal19 === true) {
+                            let ratioRegions3, height2, pushes, lifts, relabels, tmp21, tmp22, lambda$here2, lambda$here3, lambda$here4, lambda$here5, lambda$here6, ratioRegions4, c_right3, c_down3, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i9, p, f9, scrut9, arr18;
+                            tmp11 = ratioRegions.PInt(undefined);
+                            tmp12 = ratioRegions2.Cons(tmp11, ratioRegions2.Nil);
+                            doit_rao_ratio_region_loop_loop$loop(ratioRegions2, "V-MAX=~s~%", 0, tmp12);
+                            tmp13 = v_max + 1;
+                            lambda$here2 = lambda$9(ratioRegions2, width1, f_t1, e1);
+                            ratioRegions2.#doo(height1, lambda$here2);
+                            lambda$here3 = lambda$8(ratioRegions2, width1, f_right1);
+                            ratioRegions2.#doo(height1, lambda$here3);
+                            tmp21 = height1 - 1;
+                            lambda$here4 = lambda$7(ratioRegions2, width1, f_down1);
+                            ratioRegions2.#doo(tmp21, lambda$here4);
+                            lambda$here5 = lambda$6(ratioRegions2, width1, e1);
+                            ratioRegions2.#doo(height1, lambda$here5);
+                            tmp22 = width1 - 1;
+                            lambda$here6 = lambda$5(ratioRegions2, height1, e1);
+                            ratioRegions2.#doo(tmp22, lambda$here6);
+                            pushes = new ratioRegions2.Ref.class(0);
+                            lifts = new ratioRegions2.Ref.class(0);
+                            relabels = new ratioRegions2.Ref.class(0);
+                            ratioRegions4 = ratioRegions2;
+                            c_right3 = c_right2;
+                            c_down3 = c_down2;
+                            w2 = w1;
+                            height3 = height1;
+                            width2 = width1;
+                            f_right2 = f_right1;
+                            f_down2 = f_down1;
+                            f_t2 = f_t1;
+                            h2 = h1;
+                            e2 = e1;
+                            marked1 = marked;
+                            m12 = m11;
+                            m22 = m21;
+                            q2 = q1;
+                            v1 = tmp13;
+                            pushes1 = pushes;
+                            lifts1 = lifts;
+                            relabels1 = relabels;
+                            i9 = 0;
+                            p = false;
+                            inlinedLbl10: {
+                              loopLabel10: while (true) {
+                                let tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, lambda$here7, lambda$here8, lambda$here9, inlinedVal20, inlinedVal21, tmp60, tmp61, tmp62;
+                                tmp60 = i9 / 6;
+                                tmp61 = ratioRegions4.#floor(tmp60);
+                                tmp62 = 6 * tmp61;
+                                inlinedVal20 = i9 - tmp62;
+                                inlinedVal21 = inlinedVal20 == 0;
+                                if (inlinedVal21 === true) {
+                                  let inlinedVal22;
+                                  switch (p) {
+                                    case false:
+                                      inlinedVal22 = true;
+                                      break;
+                                    case true:
+                                      inlinedVal22 = false;
+                                      break;
+                                    default:
+                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                                  }
+                                  tmp23 = inlinedVal22;
+                                } else {
+                                  tmp23 = false;
+                                }
+                                if (tmp23 === true) {
+                                  let p1, inlinedVal22, q3, tail, lambda$here10, lambda$here11;
+                                  q3 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                                  tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                                  lambda$here10 = lambda$25(ratioRegions4, width2, h2, marked1, m12);
+                                  ratioRegions4.#doo(height3, lambda$here10);
+                                  lambda$here11 = lambda$24(ratioRegions4, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                                  ratioRegions4.#doo(height3, lambda$here11);
+                                  loop5(ratioRegions4, c_right3, c_down3, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                                  tmp24 = relabels1.value + 1;
+                                  relabels1.value = tmp24;
+                                  p1 = lambda$17(ratioRegions4, width2, h2, e2, m12);
+                                  inlinedVal22 = loop2(height3, p1, 0);
+                                  if (inlinedVal22 === true) {
+                                    tmp25 = ratioRegions.PInt(undefined);
+                                    tmp26 = ratioRegions.PString(undefined);
+                                    tmp27 = ratioRegions.PInt(undefined);
+                                    tmp28 = ratioRegions.PString(undefined);
+                                    tmp29 = ratioRegions.PInt(undefined);
+                                    tmp30 = ratioRegions.PString(undefined);
+                                    tmp31 = ratioRegions.PInt(undefined);
+                                    tmp32 = ratioRegions.PString(undefined);
+                                    tmp33 = ratioRegions4.Cons(tmp32, ratioRegions4.Nil);
+                                    tmp34 = ratioRegions4.Cons(tmp31, tmp33);
+                                    tmp35 = ratioRegions4.Cons(tmp30, tmp34);
+                                    tmp36 = ratioRegions4.Cons(tmp29, tmp35);
+                                    tmp37 = ratioRegions4.Cons(tmp28, tmp36);
+                                    tmp38 = ratioRegions4.Cons(tmp27, tmp37);
+                                    tmp39 = ratioRegions4.Cons(tmp26, tmp38);
+                                    tmp40 = ratioRegions4.Cons(tmp25, tmp39);
+                                    loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp40);
+                                    break inlinedLbl10
+                                  }
+                                  {
+                                    let inlinedVal23;
+                                    inlinedVal23 = q2.length;
+                                    lambda$here7 = lambda$16(ratioRegions4, q2);
+                                    ratioRegions4.#doo(inlinedVal23, lambda$here7);
+                                    lambda$here8 = lambda$15(ratioRegions4, width2, marked1);
+                                    ratioRegions4.#doo(height3, lambda$here8);
+                                    lambda$here9 = lambda$14(ratioRegions4, width2, h2, e2, marked1, q2);
+                                    ratioRegions4.#doo(height3, lambda$here9);
+                                    p = true;
+                                    continue loopLabel10;
+                                  }
+                                }
+                                {
+                                  let v2, p1, i10, inlinedVal22;
+                                  v2 = q2;
+                                  p1 = lambda$13(ratioRegions4, c_right3, c_down3, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, m12, v1);
+                                  i10 = 0;
+                                  inlinedLbl11: {
+                                    loopLabel11: while (true) {
+                                      let tmp63, tmp64, tmp65, inlinedVal23;
+                                      inlinedVal23 = v2.length;
+                                      tmp63 = i10 < inlinedVal23;
+                                      if (tmp63 === true) {
+                                        let inlinedVal24;
+                                        inlinedVal24 = v2.at(i10);
+                                        tmp64 = runtime.safeCall(p1(inlinedVal24));
+                                        if (tmp64 === false) {
+                                          tmp65 = i10 + 1;
+                                          i10 = tmp65;
+                                          continue loopLabel11
+                                        }
+                                        inlinedVal22 = true;
+                                        break inlinedLbl11;
+                                      }
+                                      inlinedVal22 = false;
+                                      break inlinedLbl11;
+                                    }
+                                  }
+                                  if (inlinedVal22 === true) {
+                                    let inlinedVal23;
+                                    inlinedVal23 = q2.length;
+                                    tmp41 = inlinedVal23 - 1;
+                                    loopK(ratioRegions4, c_right3, c_down3, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, tmp41);
+                                    tmp42 = i9 + 1;
+                                    i9 = tmp42;
+                                    p = false;
+                                    continue loopLabel10
+                                  }
+                                  {
+                                    let q3, tail, lambda$here10, lambda$here11;
+                                    q3 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                                    tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                                    lambda$here10 = lambda$25(ratioRegions4, width2, h2, marked1, m12);
+                                    ratioRegions4.#doo(height3, lambda$here10);
+                                    lambda$here11 = lambda$24(ratioRegions4, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                                    ratioRegions4.#doo(height3, lambda$here11);
+                                    loop5(ratioRegions4, c_right3, c_down3, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                                    tmp43 = relabels1.value + 1;
+                                    relabels1.value = tmp43;
+                                    tmp44 = ratioRegions.PInt(undefined);
+                                    tmp45 = ratioRegions.PString(undefined);
+                                    tmp46 = ratioRegions.PInt(undefined);
+                                    tmp47 = ratioRegions.PString(undefined);
+                                    tmp48 = ratioRegions.PInt(undefined);
+                                    tmp49 = ratioRegions.PString(undefined);
+                                    tmp50 = ratioRegions.PInt(undefined);
+                                    tmp51 = ratioRegions.PString(undefined);
+                                    tmp52 = ratioRegions4.Cons(tmp51, ratioRegions4.Nil);
+                                    tmp53 = ratioRegions4.Cons(tmp50, tmp52);
+                                    tmp54 = ratioRegions4.Cons(tmp49, tmp53);
+                                    tmp55 = ratioRegions4.Cons(tmp48, tmp54);
+                                    tmp56 = ratioRegions4.Cons(tmp47, tmp55);
+                                    tmp57 = ratioRegions4.Cons(tmp46, tmp56);
+                                    tmp58 = ratioRegions4.Cons(tmp45, tmp57);
+                                    tmp59 = ratioRegions4.Cons(tmp44, tmp58);
+                                    loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp59);
+                                    break inlinedLbl10;
+                                  }
+                                }
+                              }
+                            }
+                            ratioRegions3 = ratioRegions2;
+                            height2 = height1;
+                            f9 = doit_rao_ratio_region_loop_min_cut_lambda$$lambda$(ratioRegions2, width1, h1, m11);
+                            scrut9 = height1 > 0;
+                            if (scrut9 === true) {
+                              let n10, f10, arr19, i10, scrut10, arr20;
+                              scrut10 = width1 > 0;
+                              if (scrut10 === true) {
+                                let inlinedVal20, n11, f11, arr21, i11;
+                                inlinedVal20 = lambda26(ratioRegions2, h1, m11, 0, 0);
+                                arr20 = ratioRegions2.#array_alloc(width1, inlinedVal20);
+                                n11 = width1;
+                                f11 = lambda$2(ratioRegions2, h1, m11, 0);
+                                arr21 = arr20;
+                                i11 = 1;
+                                inlinedLbl11: {
+                                  loopLabel11: while (true) {
+                                    let scrut11, tmp23, tmp24;
+                                    scrut11 = i11 < n11;
+                                    if (scrut11 === true) {
+                                      tmp23 = runtime.safeCall(f11(i11));
+                                      arr21[i11] = tmp23;
+                                      tmp24 = i11 + 1;
+                                      i11 = tmp24;
+                                      continue loopLabel11
+                                    }
+                                    break inlinedLbl11;
+                                  }
+                                }
+                                arr18 = ratioRegions3.#array_alloc(height2, arr20);
+                                n10 = height2;
+                                f10 = f9;
+                                arr19 = arr18;
+                                i10 = 1;
+                                inlinedLbl12: {
+                                  loopLabel12: while (true) {
+                                    let scrut11, tmp23, tmp24;
+                                    scrut11 = i10 < n10;
+                                    if (scrut11 === true) {
+                                      tmp23 = runtime.safeCall(f10(i10));
+                                      arr19[i10] = tmp23;
+                                      tmp24 = i10 + 1;
+                                      i10 = tmp24;
+                                      continue loopLabel12
+                                    }
+                                    break inlinedLbl12;
+                                  }
+                                }
+                                inlinedVal9 = arr18;
+                                break inlinedLbl9
+                              }
+                              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                            }
+                            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                          }
+                          {
+                            let p, inlinedVal20, i9, c, inlinedVal21, pushes, lifts, relabels, tmp21, tmp22, lambda$here2, lambda$here3, lambda$here4, lambda$here5, lambda$here6, ratioRegions3, c_right3, c_down3, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i10, p1;
+                            i9 = lg_v;
+                            c = 1;
+                            inlinedLbl10: {
+                              loopLabel10: while (true) {
+                                let tmp23, tmp24, inlinedVal22;
+                                inlinedVal22 = i9 == 0;
+                                if (inlinedVal22 === true) {
+                                  inlinedVal21 = c;
+                                  break inlinedLbl10
+                                }
+                                tmp23 = i9 - 1;
+                                tmp24 = c + c;
+                                i9 = tmp23;
+                                c = tmp24;
+                                continue loopLabel10;
+                              }
+                            }
+                            v = v_max + inlinedVal21;
+                            tmp14 = ratioRegions.PInt(undefined);
+                            tmp15 = ratioRegions.PInt(undefined);
+                            tmp16 = ratioRegions.PInt(undefined);
+                            tmp17 = ratioRegions2.Cons(tmp16, ratioRegions2.Nil);
+                            tmp18 = ratioRegions2.Cons(tmp15, tmp17);
+                            tmp19 = ratioRegions2.Cons(tmp14, tmp18);
+                            doit_rao_ratio_region_loop_loop$loop(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp19);
+                            lambda$here2 = lambda$9(ratioRegions2, width1, f_t1, e1);
+                            ratioRegions2.#doo(height1, lambda$here2);
+                            lambda$here3 = lambda$8(ratioRegions2, width1, f_right1);
+                            ratioRegions2.#doo(height1, lambda$here3);
+                            tmp21 = height1 - 1;
+                            lambda$here4 = lambda$7(ratioRegions2, width1, f_down1);
+                            ratioRegions2.#doo(tmp21, lambda$here4);
+                            lambda$here5 = lambda$6(ratioRegions2, width1, e1);
+                            ratioRegions2.#doo(height1, lambda$here5);
+                            tmp22 = width1 - 1;
+                            lambda$here6 = lambda$5(ratioRegions2, height1, e1);
+                            ratioRegions2.#doo(tmp22, lambda$here6);
+                            pushes = new ratioRegions2.Ref.class(0);
+                            lifts = new ratioRegions2.Ref.class(0);
+                            relabels = new ratioRegions2.Ref.class(0);
+                            ratioRegions3 = ratioRegions2;
+                            c_right3 = c_right2;
+                            c_down3 = c_down2;
+                            w2 = w1;
+                            height2 = height1;
+                            width2 = width1;
+                            f_right2 = f_right1;
+                            f_down2 = f_down1;
+                            f_t2 = f_t1;
+                            h2 = h1;
+                            e2 = e1;
+                            marked1 = marked;
+                            m12 = m11;
+                            m22 = m21;
+                            q2 = q1;
+                            v1 = v;
+                            pushes1 = pushes;
+                            lifts1 = lifts;
+                            relabels1 = relabels;
+                            i10 = 0;
+                            p1 = false;
+                            inlinedLbl11: {
+                              loopLabel11: while (true) {
+                                let tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, lambda$here7, lambda$here8, lambda$here9, inlinedVal22, inlinedVal23, tmp60, tmp61, tmp62;
+                                tmp60 = i10 / 6;
+                                tmp61 = ratioRegions3.#floor(tmp60);
+                                tmp62 = 6 * tmp61;
+                                inlinedVal22 = i10 - tmp62;
+                                inlinedVal23 = inlinedVal22 == 0;
+                                if (inlinedVal23 === true) {
+                                  let inlinedVal24;
+                                  switch (p1) {
+                                    case false:
+                                      inlinedVal24 = true;
+                                      break;
+                                    case true:
+                                      inlinedVal24 = false;
+                                      break;
+                                    default:
+                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                                  }
+                                  tmp23 = inlinedVal24;
+                                } else {
+                                  tmp23 = false;
+                                }
+                                if (tmp23 === true) {
+                                  let p2, inlinedVal24, q3, tail, lambda$here10, lambda$here11;
+                                  q3 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                                  tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                                  lambda$here10 = lambda$25(ratioRegions3, width2, h2, marked1, m12);
+                                  ratioRegions3.#doo(height2, lambda$here10);
+                                  lambda$here11 = lambda$24(ratioRegions3, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                                  ratioRegions3.#doo(height2, lambda$here11);
+                                  loop5(ratioRegions3, c_right3, c_down3, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                                  tmp24 = relabels1.value + 1;
+                                  relabels1.value = tmp24;
+                                  p2 = lambda$17(ratioRegions3, width2, h2, e2, m12);
+                                  inlinedVal24 = loop2(height2, p2, 0);
+                                  if (inlinedVal24 === true) {
+                                    tmp25 = ratioRegions.PInt(undefined);
+                                    tmp26 = ratioRegions.PString(undefined);
+                                    tmp27 = ratioRegions.PInt(undefined);
+                                    tmp28 = ratioRegions.PString(undefined);
+                                    tmp29 = ratioRegions.PInt(undefined);
+                                    tmp30 = ratioRegions.PString(undefined);
+                                    tmp31 = ratioRegions.PInt(undefined);
+                                    tmp32 = ratioRegions.PString(undefined);
+                                    tmp33 = ratioRegions3.Cons(tmp32, ratioRegions3.Nil);
+                                    tmp34 = ratioRegions3.Cons(tmp31, tmp33);
+                                    tmp35 = ratioRegions3.Cons(tmp30, tmp34);
+                                    tmp36 = ratioRegions3.Cons(tmp29, tmp35);
+                                    tmp37 = ratioRegions3.Cons(tmp28, tmp36);
+                                    tmp38 = ratioRegions3.Cons(tmp27, tmp37);
+                                    tmp39 = ratioRegions3.Cons(tmp26, tmp38);
+                                    tmp40 = ratioRegions3.Cons(tmp25, tmp39);
+                                    loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp40);
+                                    break inlinedLbl11
+                                  }
+                                  {
+                                    let inlinedVal25;
+                                    inlinedVal25 = q2.length;
+                                    lambda$here7 = lambda$16(ratioRegions3, q2);
+                                    ratioRegions3.#doo(inlinedVal25, lambda$here7);
+                                    lambda$here8 = lambda$15(ratioRegions3, width2, marked1);
+                                    ratioRegions3.#doo(height2, lambda$here8);
+                                    lambda$here9 = lambda$14(ratioRegions3, width2, h2, e2, marked1, q2);
+                                    ratioRegions3.#doo(height2, lambda$here9);
+                                    p1 = true;
+                                    continue loopLabel11;
+                                  }
+                                }
+                                {
+                                  let v2, p2, i11, inlinedVal24;
+                                  v2 = q2;
+                                  p2 = lambda$13(ratioRegions3, c_right3, c_down3, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, m12, v1);
+                                  i11 = 0;
+                                  inlinedLbl12: {
+                                    loopLabel12: while (true) {
+                                      let tmp63, tmp64, tmp65, inlinedVal25;
+                                      inlinedVal25 = v2.length;
+                                      tmp63 = i11 < inlinedVal25;
+                                      if (tmp63 === true) {
+                                        let inlinedVal26;
+                                        inlinedVal26 = v2.at(i11);
+                                        tmp64 = runtime.safeCall(p2(inlinedVal26));
+                                        if (tmp64 === false) {
+                                          tmp65 = i11 + 1;
+                                          i11 = tmp65;
+                                          continue loopLabel12
+                                        }
+                                        inlinedVal24 = true;
+                                        break inlinedLbl12;
+                                      }
+                                      inlinedVal24 = false;
+                                      break inlinedLbl12;
+                                    }
+                                  }
+                                  if (inlinedVal24 === true) {
+                                    let inlinedVal25;
+                                    inlinedVal25 = q2.length;
+                                    tmp41 = inlinedVal25 - 1;
+                                    loopK(ratioRegions3, c_right3, c_down3, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, tmp41);
+                                    tmp42 = i10 + 1;
+                                    i10 = tmp42;
+                                    p1 = false;
+                                    continue loopLabel11
+                                  }
+                                  {
+                                    let q3, tail, lambda$here10, lambda$here11;
+                                    q3 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                                    tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                                    lambda$here10 = lambda$25(ratioRegions3, width2, h2, marked1, m12);
+                                    ratioRegions3.#doo(height2, lambda$here10);
+                                    lambda$here11 = lambda$24(ratioRegions3, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                                    ratioRegions3.#doo(height2, lambda$here11);
+                                    loop5(ratioRegions3, c_right3, c_down3, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                                    tmp43 = relabels1.value + 1;
+                                    relabels1.value = tmp43;
+                                    tmp44 = ratioRegions.PInt(undefined);
+                                    tmp45 = ratioRegions.PString(undefined);
+                                    tmp46 = ratioRegions.PInt(undefined);
+                                    tmp47 = ratioRegions.PString(undefined);
+                                    tmp48 = ratioRegions.PInt(undefined);
+                                    tmp49 = ratioRegions.PString(undefined);
+                                    tmp50 = ratioRegions.PInt(undefined);
+                                    tmp51 = ratioRegions.PString(undefined);
+                                    tmp52 = ratioRegions3.Cons(tmp51, ratioRegions3.Nil);
+                                    tmp53 = ratioRegions3.Cons(tmp50, tmp52);
+                                    tmp54 = ratioRegions3.Cons(tmp49, tmp53);
+                                    tmp55 = ratioRegions3.Cons(tmp48, tmp54);
+                                    tmp56 = ratioRegions3.Cons(tmp47, tmp55);
+                                    tmp57 = ratioRegions3.Cons(tmp46, tmp56);
+                                    tmp58 = ratioRegions3.Cons(tmp45, tmp57);
+                                    tmp59 = ratioRegions3.Cons(tmp44, tmp58);
+                                    loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp59);
+                                    break inlinedLbl11;
+                                  }
+                                }
+                              }
+                            }
+                            tmp20 = lg_v - 1;
+                            p = lambda$3(ratioRegions2, width1, h1, m11);
+                            inlinedVal20 = loop2(height1, p, 0);
+                            if (inlinedVal20 === true) {
+                              lg_v = tmp20;
+                              v_max = v;
+                              continue loopLabel9
+                            }
+                            lg_v = tmp20;
+                            v_max = v_max;
+                            continue loopLabel9;
+                          }
+                        }
+                      }
+                      return inlinedVal9
+                    }
+                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                  }
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static main() {
-    return main_doit$doit(5)
+    let n, c_right, c_down, tmp, tmp1, lambda$here, lambda$here1, inlinedVal, inlinedVal1, inlinedVal2, c_right1, c_down1, w, lg_max_v, arr, scrut, arr1, scrut1, arr2, height, width, f_right, f_down, f_t, h, e, m1, m2, q, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, ratioRegions2, c_right2, c_down2, w1, height1, width1, f_right1, f_down1, f_t1, h1, e1, marked, m11, m21, q1, lg_v, v_max, inlinedVal9, scrut2, arr3, scrut3, arr4, scrut4, arr5, scrut5, arr6, scrut6, arr7, scrut7, arr8;
+    n = 5;
+    if (true === true) {
+      let n1, f, arr9, i, inlinedVal10;
+      inlinedVal10 = main_doit_make_matrix_lambda$_lambda$lambda2(ratioRegions1, 4, -1);
+      arr = ratioRegions1.#array_alloc(5, inlinedVal10);
+      n1 = 5;
+      f = main_doit_make_matrix_lambda$$lambda$2(ratioRegions1, 4, -1);
+      arr9 = arr;
+      i = 1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut8, tmp10, tmp11;
+          scrut8 = i < n1;
+          if (scrut8 === true) {
+            tmp10 = runtime.safeCall(f());
+            arr9[i] = tmp10;
+            tmp11 = i + 1;
+            i = tmp11;
+            continue loopLabel
+          }
+          break inlinedLbl;
+        }
+      }
+      inlinedVal = ratioRegions1.Matrix(arr);
+      c_right = inlinedVal;
+      tmp = n - 1;
+      scrut = tmp > 0;
+      if (scrut === true) {
+        let n2, f1, arr10, i1, inlinedVal11;
+        inlinedVal11 = main_doit_make_matrix_lambda$_lambda$lambda1(ratioRegions1, n, -1);
+        arr1 = ratioRegions1.#array_alloc(tmp, inlinedVal11);
+        n2 = tmp;
+        f1 = main_doit_make_matrix_lambda$$lambda$1(ratioRegions1, n, -1);
+        arr10 = arr1;
+        i1 = 1;
+        inlinedLbl1: {
+          loopLabel1: while (true) {
+            let scrut8, tmp10, tmp11;
+            scrut8 = i1 < n2;
+            if (scrut8 === true) {
+              tmp10 = runtime.safeCall(f1());
+              arr10[i1] = tmp10;
+              tmp11 = i1 + 1;
+              i1 = tmp11;
+              continue loopLabel1
+            }
+            break inlinedLbl1;
+          }
+        }
+        inlinedVal1 = ratioRegions1.Matrix(arr1);
+        c_down = inlinedVal1;
+        lambda$here = lambda$29(ratioRegions1, n, n, c_right);
+        ratioRegions1.#doo(n, lambda$here);
+        tmp1 = n - 1;
+        lambda$here1 = lambda$28(ratioRegions1, n, n, inlinedVal1);
+        ratioRegions1.#doo(tmp1, lambda$here1);
+        scrut1 = n > 0;
+        if (scrut1 === true) {
+          let n3, f2, arr11, i2, inlinedVal12;
+          inlinedVal12 = main_doit_make_matrix_lambda$_lambda$lambda(ratioRegions1, n, 1);
+          arr2 = ratioRegions1.#array_alloc(n, inlinedVal12);
+          n3 = n;
+          f2 = main_doit_make_matrix_lambda$$lambda$(ratioRegions1, n, 1);
+          arr11 = arr2;
+          i2 = 1;
+          inlinedLbl2: {
+            loopLabel2: while (true) {
+              let scrut8, tmp10, tmp11;
+              scrut8 = i2 < n3;
+              if (scrut8 === true) {
+                tmp10 = runtime.safeCall(f2());
+                arr11[i2] = tmp10;
+                tmp11 = i2 + 1;
+                i2 = tmp11;
+                continue loopLabel2
+              }
+              break inlinedLbl2;
+            }
+          }
+          inlinedVal2 = ratioRegions1.Matrix(arr2);
+          c_right1 = c_right;
+          c_down1 = c_down;
+          w = inlinedVal2;
+          lg_max_v = 15;
+          height = ratioRegions1.#matrix_rows(inlinedVal2);
+          width = ratioRegions1.#matrix_columns(inlinedVal2);
+          tmp2 = width - 1;
+          scrut2 = height > 0;
+          if (scrut2 === true) {
+            let n4, f3, arr12, i3, inlinedVal13;
+            inlinedVal13 = main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda(ratioRegions1, tmp2, 0);
+            arr3 = ratioRegions1.#array_alloc(height, inlinedVal13);
+            n4 = height;
+            f3 = main_doit_rao_ratio_region_make_matrix_lambda$$lambda$(ratioRegions1, tmp2, 0);
+            arr12 = arr3;
+            i3 = 1;
+            inlinedLbl3: {
+              loopLabel3: while (true) {
+                let scrut8, tmp10, tmp11;
+                scrut8 = i3 < n4;
+                if (scrut8 === true) {
+                  tmp10 = runtime.safeCall(f3());
+                  arr12[i3] = tmp10;
+                  tmp11 = i3 + 1;
+                  i3 = tmp11;
+                  continue loopLabel3
+                }
+                break inlinedLbl3;
+              }
+            }
+            inlinedVal3 = ratioRegions1.Matrix(arr3);
+            f_right = inlinedVal3;
+            tmp3 = height - 1;
+            scrut3 = tmp3 > 0;
+            if (scrut3 === true) {
+              let n5, f4, arr13, i4, inlinedVal14;
+              inlinedVal14 = main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1(ratioRegions1, width, 0);
+              arr4 = ratioRegions1.#array_alloc(tmp3, inlinedVal14);
+              n5 = tmp3;
+              f4 = main_doit_rao_ratio_region_make_matrix_lambda$$lambda$1(ratioRegions1, width, 0);
+              arr13 = arr4;
+              i4 = 1;
+              inlinedLbl4: {
+                loopLabel4: while (true) {
+                  let scrut8, tmp10, tmp11;
+                  scrut8 = i4 < n5;
+                  if (scrut8 === true) {
+                    tmp10 = runtime.safeCall(f4());
+                    arr13[i4] = tmp10;
+                    tmp11 = i4 + 1;
+                    i4 = tmp11;
+                    continue loopLabel4
+                  }
+                  break inlinedLbl4;
+                }
+              }
+              inlinedVal4 = ratioRegions1.Matrix(arr4);
+              f_down = inlinedVal4;
+              scrut4 = height > 0;
+              if (scrut4 === true) {
+                let n6, f5, arr14, i5, inlinedVal15;
+                inlinedVal15 = main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2(ratioRegions1, width, 0);
+                arr5 = ratioRegions1.#array_alloc(height, inlinedVal15);
+                n6 = height;
+                f5 = main_doit_rao_ratio_region_make_matrix_lambda$$lambda$2(ratioRegions1, width, 0);
+                arr14 = arr5;
+                i5 = 1;
+                inlinedLbl5: {
+                  loopLabel5: while (true) {
+                    let scrut8, tmp10, tmp11;
+                    scrut8 = i5 < n6;
+                    if (scrut8 === true) {
+                      tmp10 = runtime.safeCall(f5());
+                      arr14[i5] = tmp10;
+                      tmp11 = i5 + 1;
+                      i5 = tmp11;
+                      continue loopLabel5
+                    }
+                    break inlinedLbl5;
+                  }
+                }
+                inlinedVal5 = ratioRegions1.Matrix(arr5);
+                f_t = inlinedVal5;
+                scrut5 = height > 0;
+                if (scrut5 === true) {
+                  let n7, f6, arr15, i6, inlinedVal16;
+                  inlinedVal16 = main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3(ratioRegions1, width, 0);
+                  arr6 = ratioRegions1.#array_alloc(height, inlinedVal16);
+                  n7 = height;
+                  f6 = main_doit_rao_ratio_region_make_matrix_lambda$$lambda$3(ratioRegions1, width, 0);
+                  arr15 = arr6;
+                  i6 = 1;
+                  inlinedLbl6: {
+                    loopLabel6: while (true) {
+                      let scrut8, tmp10, tmp11;
+                      scrut8 = i6 < n7;
+                      if (scrut8 === true) {
+                        tmp10 = runtime.safeCall(f6());
+                        arr15[i6] = tmp10;
+                        tmp11 = i6 + 1;
+                        i6 = tmp11;
+                        continue loopLabel6
+                      }
+                      break inlinedLbl6;
+                    }
+                  }
+                  inlinedVal6 = ratioRegions1.Matrix(arr6);
+                  h = inlinedVal6;
+                  scrut6 = height > 0;
+                  if (scrut6 === true) {
+                    let n8, f7, arr16, i7, inlinedVal17;
+                    inlinedVal17 = main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4(ratioRegions1, width, 0);
+                    arr7 = ratioRegions1.#array_alloc(height, inlinedVal17);
+                    n8 = height;
+                    f7 = main_doit_rao_ratio_region_make_matrix_lambda$$lambda$4(ratioRegions1, width, 0);
+                    arr16 = arr7;
+                    i7 = 1;
+                    inlinedLbl7: {
+                      loopLabel7: while (true) {
+                        let scrut8, tmp10, tmp11;
+                        scrut8 = i7 < n8;
+                        if (scrut8 === true) {
+                          tmp10 = runtime.safeCall(f7());
+                          arr16[i7] = tmp10;
+                          tmp11 = i7 + 1;
+                          i7 = tmp11;
+                          continue loopLabel7
+                        }
+                        break inlinedLbl7;
+                      }
+                    }
+                    inlinedVal7 = ratioRegions1.Matrix(arr7);
+                    e = inlinedVal7;
+                    scrut7 = height > 0;
+                    if (scrut7 === true) {
+                      let n9, f8, arr17, i8, inlinedVal18;
+                      inlinedVal18 = main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5(ratioRegions1, width, false);
+                      arr8 = ratioRegions1.#array_alloc(height, inlinedVal18);
+                      n9 = height;
+                      f8 = main_doit_rao_ratio_region_make_matrix_lambda$$lambda$5(ratioRegions1, width, false);
+                      arr17 = arr8;
+                      i8 = 1;
+                      inlinedLbl8: {
+                        loopLabel8: while (true) {
+                          let scrut8, tmp10, tmp11;
+                          scrut8 = i8 < n9;
+                          if (scrut8 === true) {
+                            tmp10 = runtime.safeCall(f8());
+                            arr17[i8] = tmp10;
+                            tmp11 = i8 + 1;
+                            i8 = tmp11;
+                            continue loopLabel8
+                          }
+                          break inlinedLbl8;
+                        }
+                      }
+                      inlinedVal8 = ratioRegions1.Matrix(arr8);
+                      tmp4 = height * width;
+                      m1 = tmp4 + 2;
+                      tmp5 = 2 * height;
+                      tmp6 = tmp5 * width;
+                      m2 = tmp6 + 2;
+                      tmp7 = 2 * height;
+                      tmp8 = tmp7 * width;
+                      tmp9 = tmp8 + 3;
+                      q = ratioRegions1.#make_vector(tmp9, ratioRegions1.Nil);
+                      ratioRegions2 = ratioRegions1;
+                      c_right2 = c_right1;
+                      c_down2 = c_down1;
+                      w1 = w;
+                      height1 = height;
+                      width1 = width;
+                      f_right1 = f_right;
+                      f_down1 = f_down;
+                      f_t1 = f_t;
+                      h1 = h;
+                      e1 = e;
+                      marked = inlinedVal8;
+                      m11 = m1;
+                      m21 = m2;
+                      q1 = q;
+                      lg_v = lg_max_v;
+                      v_max = 0;
+                      inlinedLbl9: {
+                        loopLabel9: while (true) {
+                          let v, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, inlinedVal19;
+                          inlinedVal19 = lg_v < 0;
+                          if (inlinedVal19 === true) {
+                            let ratioRegions3, height2, pushes, lifts, relabels, tmp20, tmp21, lambda$here2, lambda$here3, lambda$here4, lambda$here5, lambda$here6, ratioRegions4, c_right3, c_down3, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i9, p, f9, scrut8, arr18;
+                            tmp10 = ratioRegions.PInt(undefined);
+                            tmp11 = ratioRegions2.Cons(tmp10, ratioRegions2.Nil);
+                            main_doit_rao_ratio_region_loop_loop$loop(ratioRegions2, "V-MAX=~s~%", 0, tmp11);
+                            tmp12 = v_max + 1;
+                            lambda$here2 = lambda$9(ratioRegions2, width1, f_t1, e1);
+                            ratioRegions2.#doo(height1, lambda$here2);
+                            lambda$here3 = lambda$8(ratioRegions2, width1, f_right1);
+                            ratioRegions2.#doo(height1, lambda$here3);
+                            tmp20 = height1 - 1;
+                            lambda$here4 = lambda$7(ratioRegions2, width1, f_down1);
+                            ratioRegions2.#doo(tmp20, lambda$here4);
+                            lambda$here5 = lambda$6(ratioRegions2, width1, e1);
+                            ratioRegions2.#doo(height1, lambda$here5);
+                            tmp21 = width1 - 1;
+                            lambda$here6 = lambda$5(ratioRegions2, height1, e1);
+                            ratioRegions2.#doo(tmp21, lambda$here6);
+                            pushes = new ratioRegions2.Ref.class(0);
+                            lifts = new ratioRegions2.Ref.class(0);
+                            relabels = new ratioRegions2.Ref.class(0);
+                            ratioRegions4 = ratioRegions2;
+                            c_right3 = c_right2;
+                            c_down3 = c_down2;
+                            w2 = w1;
+                            height3 = height1;
+                            width2 = width1;
+                            f_right2 = f_right1;
+                            f_down2 = f_down1;
+                            f_t2 = f_t1;
+                            h2 = h1;
+                            e2 = e1;
+                            marked1 = marked;
+                            m12 = m11;
+                            m22 = m21;
+                            q2 = q1;
+                            v1 = tmp12;
+                            pushes1 = pushes;
+                            lifts1 = lifts;
+                            relabels1 = relabels;
+                            i9 = 0;
+                            p = false;
+                            inlinedLbl10: {
+                              loopLabel10: while (true) {
+                                let tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, lambda$here7, lambda$here8, lambda$here9, inlinedVal20, inlinedVal21, tmp59, tmp60, tmp61;
+                                tmp59 = i9 / 6;
+                                tmp60 = ratioRegions4.#floor(tmp59);
+                                tmp61 = 6 * tmp60;
+                                inlinedVal20 = i9 - tmp61;
+                                inlinedVal21 = inlinedVal20 == 0;
+                                if (inlinedVal21 === true) {
+                                  let inlinedVal22;
+                                  switch (p) {
+                                    case false:
+                                      inlinedVal22 = true;
+                                      break;
+                                    case true:
+                                      inlinedVal22 = false;
+                                      break;
+                                    default:
+                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                                  }
+                                  tmp22 = inlinedVal22;
+                                } else {
+                                  tmp22 = false;
+                                }
+                                if (tmp22 === true) {
+                                  let p1, inlinedVal22, q3, tail, lambda$here10, lambda$here11;
+                                  q3 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                                  tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                                  lambda$here10 = lambda$25(ratioRegions4, width2, h2, marked1, m12);
+                                  ratioRegions4.#doo(height3, lambda$here10);
+                                  lambda$here11 = lambda$24(ratioRegions4, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                                  ratioRegions4.#doo(height3, lambda$here11);
+                                  loop5(ratioRegions4, c_right3, c_down3, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                                  tmp23 = relabels1.value + 1;
+                                  relabels1.value = tmp23;
+                                  p1 = lambda$17(ratioRegions4, width2, h2, e2, m12);
+                                  inlinedVal22 = loop2(height3, p1, 0);
+                                  if (inlinedVal22 === true) {
+                                    tmp24 = ratioRegions.PInt(undefined);
+                                    tmp25 = ratioRegions.PString(undefined);
+                                    tmp26 = ratioRegions.PInt(undefined);
+                                    tmp27 = ratioRegions.PString(undefined);
+                                    tmp28 = ratioRegions.PInt(undefined);
+                                    tmp29 = ratioRegions.PString(undefined);
+                                    tmp30 = ratioRegions.PInt(undefined);
+                                    tmp31 = ratioRegions.PString(undefined);
+                                    tmp32 = ratioRegions4.Cons(tmp31, ratioRegions4.Nil);
+                                    tmp33 = ratioRegions4.Cons(tmp30, tmp32);
+                                    tmp34 = ratioRegions4.Cons(tmp29, tmp33);
+                                    tmp35 = ratioRegions4.Cons(tmp28, tmp34);
+                                    tmp36 = ratioRegions4.Cons(tmp27, tmp35);
+                                    tmp37 = ratioRegions4.Cons(tmp26, tmp36);
+                                    tmp38 = ratioRegions4.Cons(tmp25, tmp37);
+                                    tmp39 = ratioRegions4.Cons(tmp24, tmp38);
+                                    loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp39);
+                                    break inlinedLbl10
+                                  }
+                                  {
+                                    let inlinedVal23;
+                                    inlinedVal23 = q2.length;
+                                    lambda$here7 = lambda$16(ratioRegions4, q2);
+                                    ratioRegions4.#doo(inlinedVal23, lambda$here7);
+                                    lambda$here8 = lambda$15(ratioRegions4, width2, marked1);
+                                    ratioRegions4.#doo(height3, lambda$here8);
+                                    lambda$here9 = lambda$14(ratioRegions4, width2, h2, e2, marked1, q2);
+                                    ratioRegions4.#doo(height3, lambda$here9);
+                                    p = true;
+                                    continue loopLabel10;
+                                  }
+                                }
+                                {
+                                  let v2, p1, i10, inlinedVal22;
+                                  v2 = q2;
+                                  p1 = lambda$13(ratioRegions4, c_right3, c_down3, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, m12, v1);
+                                  i10 = 0;
+                                  inlinedLbl11: {
+                                    loopLabel11: while (true) {
+                                      let tmp62, tmp63, tmp64, inlinedVal23;
+                                      inlinedVal23 = v2.length;
+                                      tmp62 = i10 < inlinedVal23;
+                                      if (tmp62 === true) {
+                                        let inlinedVal24;
+                                        inlinedVal24 = v2.at(i10);
+                                        tmp63 = runtime.safeCall(p1(inlinedVal24));
+                                        if (tmp63 === false) {
+                                          tmp64 = i10 + 1;
+                                          i10 = tmp64;
+                                          continue loopLabel11
+                                        }
+                                        inlinedVal22 = true;
+                                        break inlinedLbl11;
+                                      }
+                                      inlinedVal22 = false;
+                                      break inlinedLbl11;
+                                    }
+                                  }
+                                  if (inlinedVal22 === true) {
+                                    let inlinedVal23;
+                                    inlinedVal23 = q2.length;
+                                    tmp40 = inlinedVal23 - 1;
+                                    loopK(ratioRegions4, c_right3, c_down3, w2, height3, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, tmp40);
+                                    tmp41 = i9 + 1;
+                                    i9 = tmp41;
+                                    p = false;
+                                    continue loopLabel10
+                                  }
+                                  {
+                                    let q3, tail, lambda$here10, lambda$here11;
+                                    q3 = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                                    tail = new ratioRegions4.Ref.class(ratioRegions4.QNil);
+                                    lambda$here10 = lambda$25(ratioRegions4, width2, h2, marked1, m12);
+                                    ratioRegions4.#doo(height3, lambda$here10);
+                                    lambda$here11 = lambda$24(ratioRegions4, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                                    ratioRegions4.#doo(height3, lambda$here11);
+                                    loop5(ratioRegions4, c_right3, c_down3, height3, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                                    tmp42 = relabels1.value + 1;
+                                    relabels1.value = tmp42;
+                                    tmp43 = ratioRegions.PInt(undefined);
+                                    tmp44 = ratioRegions.PString(undefined);
+                                    tmp45 = ratioRegions.PInt(undefined);
+                                    tmp46 = ratioRegions.PString(undefined);
+                                    tmp47 = ratioRegions.PInt(undefined);
+                                    tmp48 = ratioRegions.PString(undefined);
+                                    tmp49 = ratioRegions.PInt(undefined);
+                                    tmp50 = ratioRegions.PString(undefined);
+                                    tmp51 = ratioRegions4.Cons(tmp50, ratioRegions4.Nil);
+                                    tmp52 = ratioRegions4.Cons(tmp49, tmp51);
+                                    tmp53 = ratioRegions4.Cons(tmp48, tmp52);
+                                    tmp54 = ratioRegions4.Cons(tmp47, tmp53);
+                                    tmp55 = ratioRegions4.Cons(tmp46, tmp54);
+                                    tmp56 = ratioRegions4.Cons(tmp45, tmp55);
+                                    tmp57 = ratioRegions4.Cons(tmp44, tmp56);
+                                    tmp58 = ratioRegions4.Cons(tmp43, tmp57);
+                                    loop4(ratioRegions4, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp58);
+                                    break inlinedLbl10;
+                                  }
+                                }
+                              }
+                            }
+                            ratioRegions3 = ratioRegions2;
+                            height2 = height1;
+                            f9 = main_doit_rao_ratio_region_loop_min_cut_lambda$$lambda$(ratioRegions2, width1, h1, m11);
+                            scrut8 = height1 > 0;
+                            if (scrut8 === true) {
+                              let n10, f10, arr19, i10, scrut9, arr20;
+                              scrut9 = width1 > 0;
+                              if (scrut9 === true) {
+                                let inlinedVal20, n11, f11, arr21, i11;
+                                inlinedVal20 = lambda26(ratioRegions2, h1, m11, 0, 0);
+                                arr20 = ratioRegions2.#array_alloc(width1, inlinedVal20);
+                                n11 = width1;
+                                f11 = lambda$2(ratioRegions2, h1, m11, 0);
+                                arr21 = arr20;
+                                i11 = 1;
+                                inlinedLbl11: {
+                                  loopLabel11: while (true) {
+                                    let scrut10, tmp22, tmp23;
+                                    scrut10 = i11 < n11;
+                                    if (scrut10 === true) {
+                                      tmp22 = runtime.safeCall(f11(i11));
+                                      arr21[i11] = tmp22;
+                                      tmp23 = i11 + 1;
+                                      i11 = tmp23;
+                                      continue loopLabel11
+                                    }
+                                    break inlinedLbl11;
+                                  }
+                                }
+                                arr18 = ratioRegions3.#array_alloc(height2, arr20);
+                                n10 = height2;
+                                f10 = f9;
+                                arr19 = arr18;
+                                i10 = 1;
+                                inlinedLbl12: {
+                                  loopLabel12: while (true) {
+                                    let scrut10, tmp22, tmp23;
+                                    scrut10 = i10 < n10;
+                                    if (scrut10 === true) {
+                                      tmp22 = runtime.safeCall(f10(i10));
+                                      arr19[i10] = tmp22;
+                                      tmp23 = i10 + 1;
+                                      i10 = tmp23;
+                                      continue loopLabel12
+                                    }
+                                    break inlinedLbl12;
+                                  }
+                                }
+                                inlinedVal9 = arr18;
+                                break inlinedLbl9
+                              }
+                              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                            }
+                            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                          }
+                          {
+                            let p, inlinedVal20, i9, c, inlinedVal21, pushes, lifts, relabels, tmp20, tmp21, lambda$here2, lambda$here3, lambda$here4, lambda$here5, lambda$here6, ratioRegions3, c_right3, c_down3, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, relabels1, i10, p1;
+                            i9 = lg_v;
+                            c = 1;
+                            inlinedLbl10: {
+                              loopLabel10: while (true) {
+                                let tmp22, tmp23, inlinedVal22;
+                                inlinedVal22 = i9 == 0;
+                                if (inlinedVal22 === true) {
+                                  inlinedVal21 = c;
+                                  break inlinedLbl10
+                                }
+                                tmp22 = i9 - 1;
+                                tmp23 = c + c;
+                                i9 = tmp22;
+                                c = tmp23;
+                                continue loopLabel10;
+                              }
+                            }
+                            v = v_max + inlinedVal21;
+                            tmp13 = ratioRegions.PInt(undefined);
+                            tmp14 = ratioRegions.PInt(undefined);
+                            tmp15 = ratioRegions.PInt(undefined);
+                            tmp16 = ratioRegions2.Cons(tmp15, ratioRegions2.Nil);
+                            tmp17 = ratioRegions2.Cons(tmp14, tmp16);
+                            tmp18 = ratioRegions2.Cons(tmp13, tmp17);
+                            main_doit_rao_ratio_region_loop_loop$loop(ratioRegions2, "LG-V=~s, V-MAX=~s, V=~s~%", 0, tmp18);
+                            lambda$here2 = lambda$9(ratioRegions2, width1, f_t1, e1);
+                            ratioRegions2.#doo(height1, lambda$here2);
+                            lambda$here3 = lambda$8(ratioRegions2, width1, f_right1);
+                            ratioRegions2.#doo(height1, lambda$here3);
+                            tmp20 = height1 - 1;
+                            lambda$here4 = lambda$7(ratioRegions2, width1, f_down1);
+                            ratioRegions2.#doo(tmp20, lambda$here4);
+                            lambda$here5 = lambda$6(ratioRegions2, width1, e1);
+                            ratioRegions2.#doo(height1, lambda$here5);
+                            tmp21 = width1 - 1;
+                            lambda$here6 = lambda$5(ratioRegions2, height1, e1);
+                            ratioRegions2.#doo(tmp21, lambda$here6);
+                            pushes = new ratioRegions2.Ref.class(0);
+                            lifts = new ratioRegions2.Ref.class(0);
+                            relabels = new ratioRegions2.Ref.class(0);
+                            ratioRegions3 = ratioRegions2;
+                            c_right3 = c_right2;
+                            c_down3 = c_down2;
+                            w2 = w1;
+                            height2 = height1;
+                            width2 = width1;
+                            f_right2 = f_right1;
+                            f_down2 = f_down1;
+                            f_t2 = f_t1;
+                            h2 = h1;
+                            e2 = e1;
+                            marked1 = marked;
+                            m12 = m11;
+                            m22 = m21;
+                            q2 = q1;
+                            v1 = v;
+                            pushes1 = pushes;
+                            lifts1 = lifts;
+                            relabels1 = relabels;
+                            i10 = 0;
+                            p1 = false;
+                            inlinedLbl11: {
+                              loopLabel11: while (true) {
+                                let tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, lambda$here7, lambda$here8, lambda$here9, inlinedVal22, inlinedVal23, tmp59, tmp60, tmp61;
+                                tmp59 = i10 / 6;
+                                tmp60 = ratioRegions3.#floor(tmp59);
+                                tmp61 = 6 * tmp60;
+                                inlinedVal22 = i10 - tmp61;
+                                inlinedVal23 = inlinedVal22 == 0;
+                                if (inlinedVal23 === true) {
+                                  let inlinedVal24;
+                                  switch (p1) {
+                                    case false:
+                                      inlinedVal24 = true;
+                                      break;
+                                    case true:
+                                      inlinedVal24 = false;
+                                      break;
+                                    default:
+                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                                  }
+                                  tmp22 = inlinedVal24;
+                                } else {
+                                  tmp22 = false;
+                                }
+                                if (tmp22 === true) {
+                                  let p2, inlinedVal24, q3, tail, lambda$here10, lambda$here11;
+                                  q3 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                                  tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                                  lambda$here10 = lambda$25(ratioRegions3, width2, h2, marked1, m12);
+                                  ratioRegions3.#doo(height2, lambda$here10);
+                                  lambda$here11 = lambda$24(ratioRegions3, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                                  ratioRegions3.#doo(height2, lambda$here11);
+                                  loop5(ratioRegions3, c_right3, c_down3, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                                  tmp23 = relabels1.value + 1;
+                                  relabels1.value = tmp23;
+                                  p2 = lambda$17(ratioRegions3, width2, h2, e2, m12);
+                                  inlinedVal24 = loop2(height2, p2, 0);
+                                  if (inlinedVal24 === true) {
+                                    tmp24 = ratioRegions.PInt(undefined);
+                                    tmp25 = ratioRegions.PString(undefined);
+                                    tmp26 = ratioRegions.PInt(undefined);
+                                    tmp27 = ratioRegions.PString(undefined);
+                                    tmp28 = ratioRegions.PInt(undefined);
+                                    tmp29 = ratioRegions.PString(undefined);
+                                    tmp30 = ratioRegions.PInt(undefined);
+                                    tmp31 = ratioRegions.PString(undefined);
+                                    tmp32 = ratioRegions3.Cons(tmp31, ratioRegions3.Nil);
+                                    tmp33 = ratioRegions3.Cons(tmp30, tmp32);
+                                    tmp34 = ratioRegions3.Cons(tmp29, tmp33);
+                                    tmp35 = ratioRegions3.Cons(tmp28, tmp34);
+                                    tmp36 = ratioRegions3.Cons(tmp27, tmp35);
+                                    tmp37 = ratioRegions3.Cons(tmp26, tmp36);
+                                    tmp38 = ratioRegions3.Cons(tmp25, tmp37);
+                                    tmp39 = ratioRegions3.Cons(tmp24, tmp38);
+                                    loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a, terminated early~%", 0, tmp39);
+                                    break inlinedLbl11
+                                  }
+                                  {
+                                    let inlinedVal25;
+                                    inlinedVal25 = q2.length;
+                                    lambda$here7 = lambda$16(ratioRegions3, q2);
+                                    ratioRegions3.#doo(inlinedVal25, lambda$here7);
+                                    lambda$here8 = lambda$15(ratioRegions3, width2, marked1);
+                                    ratioRegions3.#doo(height2, lambda$here8);
+                                    lambda$here9 = lambda$14(ratioRegions3, width2, h2, e2, marked1, q2);
+                                    ratioRegions3.#doo(height2, lambda$here9);
+                                    p1 = true;
+                                    continue loopLabel11;
+                                  }
+                                }
+                                {
+                                  let v2, p2, i11, inlinedVal24;
+                                  v2 = q2;
+                                  p2 = lambda$13(ratioRegions3, c_right3, c_down3, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, m12, v1);
+                                  i11 = 0;
+                                  inlinedLbl12: {
+                                    loopLabel12: while (true) {
+                                      let tmp62, tmp63, tmp64, inlinedVal25;
+                                      inlinedVal25 = v2.length;
+                                      tmp62 = i11 < inlinedVal25;
+                                      if (tmp62 === true) {
+                                        let inlinedVal26;
+                                        inlinedVal26 = v2.at(i11);
+                                        tmp63 = runtime.safeCall(p2(inlinedVal26));
+                                        if (tmp63 === false) {
+                                          tmp64 = i11 + 1;
+                                          i11 = tmp64;
+                                          continue loopLabel12
+                                        }
+                                        inlinedVal24 = true;
+                                        break inlinedLbl12;
+                                      }
+                                      inlinedVal24 = false;
+                                      break inlinedLbl12;
+                                    }
+                                  }
+                                  if (inlinedVal24 === true) {
+                                    let inlinedVal25;
+                                    inlinedVal25 = q2.length;
+                                    tmp40 = inlinedVal25 - 1;
+                                    loopK(ratioRegions3, c_right3, c_down3, w2, height2, width2, f_right2, f_down2, f_t2, h2, e2, marked1, m12, m22, q2, v1, pushes1, lifts1, tmp40);
+                                    tmp41 = i10 + 1;
+                                    i10 = tmp41;
+                                    p1 = false;
+                                    continue loopLabel11
+                                  }
+                                  {
+                                    let q3, tail, lambda$here10, lambda$here11;
+                                    q3 = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                                    tail = new ratioRegions3.Ref.class(ratioRegions3.QNil);
+                                    lambda$here10 = lambda$25(ratioRegions3, width2, h2, marked1, m12);
+                                    ratioRegions3.#doo(height2, lambda$here10);
+                                    lambda$here11 = lambda$24(ratioRegions3, w2, width2, f_t2, h2, marked1, v1, q3, tail);
+                                    ratioRegions3.#doo(height2, lambda$here11);
+                                    loop5(ratioRegions3, c_right3, c_down3, height2, width2, f_right2, f_down2, h2, marked1, q3, tail);
+                                    tmp42 = relabels1.value + 1;
+                                    relabels1.value = tmp42;
+                                    tmp43 = ratioRegions.PInt(undefined);
+                                    tmp44 = ratioRegions.PString(undefined);
+                                    tmp45 = ratioRegions.PInt(undefined);
+                                    tmp46 = ratioRegions.PString(undefined);
+                                    tmp47 = ratioRegions.PInt(undefined);
+                                    tmp48 = ratioRegions.PString(undefined);
+                                    tmp49 = ratioRegions.PInt(undefined);
+                                    tmp50 = ratioRegions.PString(undefined);
+                                    tmp51 = ratioRegions3.Cons(tmp50, ratioRegions3.Nil);
+                                    tmp52 = ratioRegions3.Cons(tmp49, tmp51);
+                                    tmp53 = ratioRegions3.Cons(tmp48, tmp52);
+                                    tmp54 = ratioRegions3.Cons(tmp47, tmp53);
+                                    tmp55 = ratioRegions3.Cons(tmp46, tmp54);
+                                    tmp56 = ratioRegions3.Cons(tmp45, tmp55);
+                                    tmp57 = ratioRegions3.Cons(tmp44, tmp56);
+                                    tmp58 = ratioRegions3.Cons(tmp43, tmp57);
+                                    loop4(ratioRegions3, "~s push~a, ~s lift~a, ~s relabel~a, ~s wave~a~%", 0, tmp58);
+                                    break inlinedLbl11;
+                                  }
+                                }
+                              }
+                            }
+                            tmp19 = lg_v - 1;
+                            p = lambda$3(ratioRegions2, width1, h1, m11);
+                            inlinedVal20 = loop2(height1, p, 0);
+                            if (inlinedVal20 === true) {
+                              lg_v = tmp19;
+                              v_max = v;
+                              continue loopLabel9
+                            }
+                            lg_v = tmp19;
+                            v_max = v_max;
+                            continue loopLabel9;
+                          }
+                        }
+                      }
+                      return inlinedVal9
+                    }
+                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                  }
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "ratioRegions"];
@@ -9486,185 +6645,70 @@ export { lambda$28 as _$_modulePrivate_$_lambda$28 };
 export { lambda$29 as _$_modulePrivate_$_lambda$29 };
 export { lambda$30 as _$_modulePrivate_$_lambda$30 };
 export { lambda$31 as _$_modulePrivate_$_lambda$31 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop$loop as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop$loop };
-export { main_doit_rao_ratio_region_loop_preflow_push$preflow_push as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push$preflow_push };
-export { main_doit_rao_ratio_region_loop$loop as _$_modulePrivate_$_main_doit_rao_ratio_region_loop$loop };
-export { main_doit_rao_ratio_region$rao_ratio_region as _$_modulePrivate_$_main_doit_rao_ratio_region$rao_ratio_region };
-export { main_doit$doit as _$_modulePrivate_$_main_doit$doit };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop$loop1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop$loop1 };
-export { main_doit_rao_ratio_region_loop_preflow_push$preflow_push1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push$preflow_push1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK };
-export { doit_rao_ratio_region_loop_preflow_push_loop$loop as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop$loop };
-export { doit_rao_ratio_region_loop_preflow_push$preflow_push as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push$preflow_push };
-export { doit_rao_ratio_region_loop$loop as _$_modulePrivate_$_doit_rao_ratio_region_loop$loop };
-export { doit_rao_ratio_region$rao_ratio_region as _$_modulePrivate_$_doit_rao_ratio_region$rao_ratio_region };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop$loop1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop$loop1 };
-export { doit_rao_ratio_region_loop_preflow_push$preflow_push1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push$preflow_push1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$ };
-export { rao_ratio_region_loop_preflow_push_loop_loopK$loopK as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK$loopK };
-export { rao_ratio_region_loop_preflow_push_loop$loop as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop$loop };
-export { rao_ratio_region_loop_preflow_push$preflow_push as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push$preflow_push };
-export { rao_ratio_region_loop$loop as _$_modulePrivate_$_rao_ratio_region_loop$loop };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$$lambda$1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK$loopK1 };
-export { rao_ratio_region_loop_preflow_push_loop$loop1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop$loop1 };
-export { rao_ratio_region_loop_preflow_push$preflow_push1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push$preflow_push1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift };
-export { loop_preflow_push_loop_loopK_lambda$_lambda$lambda as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda$lambda };
-export { loop_preflow_push_loop_loopK_lambda$$lambda$ as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$$lambda$ };
-export { loop_preflow_push_loop_loopK$loopK as _$_modulePrivate_$_loop_preflow_push_loop_loopK$loopK };
-export { loop_preflow_push_loop$loop as _$_modulePrivate_$_loop_preflow_push_loop$loop };
-export { loop_preflow_push$preflow_push as _$_modulePrivate_$_loop_preflow_push$preflow_push };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift$lift1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda$lambda1 };
-export { loop_preflow_push_loop_loopK_lambda$$lambda$1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$$lambda$1 };
-export { loop_preflow_push_loop_loopK$loopK1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK$loopK1 };
-export { loop_preflow_push_loop$loop1 as _$_modulePrivate_$_loop_preflow_push_loop$loop1 };
-export { loop_preflow_push$preflow_push1 as _$_modulePrivate_$_loop_preflow_push$preflow_push1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$min1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop1 };
-export { preflow_push_loop_loopK_lambda$_lambda_lift$lift as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift$lift };
-export { preflow_push_loop_loopK_lambda$_lambda$lambda as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda$lambda };
-export { preflow_push_loop_loopK_lambda$$lambda$ as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$$lambda$ };
-export { preflow_push_loop_loopK$loopK as _$_modulePrivate_$_preflow_push_loop_loopK$loopK };
-export { preflow_push_loop$loop as _$_modulePrivate_$_preflow_push_loop$loop };
-export { preflow_push_loop_loopK_lambda$_lambda_lift_min$min as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift_min$min };
-export { preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$loop };
-export { loop_loopK_lambda$_lambda_lift$lift as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift$lift };
-export { loop_loopK_lambda$_lambda$lambda as _$_modulePrivate_$_loop_loopK_lambda$_lambda$lambda };
-export { loop_loopK_lambda$$lambda$ as _$_modulePrivate_$_loop_loopK_lambda$$lambda$ };
-export { loop_loopK$loopK as _$_modulePrivate_$_loop_loopK$loopK };
-export { loop_loopK_lambda$_lambda_lift_min$min as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift_min$min };
-export { loop_loopK_lambda$_lambda_lift_min_loop$loop as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift_min_loop$loop };
-export { lift_min$min as _$_modulePrivate_$_lift_min$min };
-export { lift_min_loop$loop as _$_modulePrivate_$_lift_min_loop$loop };
-export { loopK_lambda$_lambda_lift$lift as _$_modulePrivate_$_loopK_lambda$_lambda_lift$lift };
-export { loopK_lambda$_lambda$lambda as _$_modulePrivate_$_loopK_lambda$_lambda$lambda };
-export { loopK_lambda$$lambda$ as _$_modulePrivate_$_loopK_lambda$$lambda$ };
-export { loopK_lambda$_lambda_lift_min$min as _$_modulePrivate_$_loopK_lambda$_lambda_lift_min$min };
-export { loopK_lambda$_lambda_lift_min_loop$loop as _$_modulePrivate_$_loopK_lambda$_lambda_lift_min_loop$loop };
-export { lambda_lift$lift as _$_modulePrivate_$_lambda_lift$lift };
-export { lambda_lift_min$min as _$_modulePrivate_$_lambda_lift_min$min };
-export { lambda_lift_min_loop$loop as _$_modulePrivate_$_lambda_lift_min_loop$loop };
-export { lambda$_lambda_lift$lift as _$_modulePrivate_$_lambda$_lambda_lift$lift };
+export { main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda };
+export { main_doit_rao_ratio_region_make_matrix_lambda$$lambda$ as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$$lambda$ };
+export { main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$$lambda$1 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$$lambda$1 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$$lambda$2 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$$lambda$2 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$$lambda$3 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$$lambda$3 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$$lambda$4 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$$lambda$4 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5 };
+export { main_doit_rao_ratio_region_make_matrix_lambda$$lambda$5 as _$_modulePrivate_$_main_doit_rao_ratio_region_make_matrix_lambda$$lambda$5 };
+export { main_doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda };
+export { main_doit_rao_ratio_region_loop_min_cut_lambda$$lambda$ as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_min_cut_lambda$$lambda$ };
+export { main_doit_make_matrix_lambda$_lambda$lambda as _$_modulePrivate_$_main_doit_make_matrix_lambda$_lambda$lambda };
+export { main_doit_make_matrix_lambda$$lambda$ as _$_modulePrivate_$_main_doit_make_matrix_lambda$$lambda$ };
+export { main_doit_make_matrix_lambda$_lambda$lambda1 as _$_modulePrivate_$_main_doit_make_matrix_lambda$_lambda$lambda1 };
+export { main_doit_make_matrix_lambda$$lambda$1 as _$_modulePrivate_$_main_doit_make_matrix_lambda$$lambda$1 };
+export { main_doit_make_matrix_lambda$_lambda$lambda2 as _$_modulePrivate_$_main_doit_make_matrix_lambda$_lambda$lambda2 };
+export { main_doit_make_matrix_lambda$$lambda$2 as _$_modulePrivate_$_main_doit_make_matrix_lambda$$lambda$2 };
+export { doit_make_matrix_lambda$_lambda$lambda as _$_modulePrivate_$_doit_make_matrix_lambda$_lambda$lambda };
+export { doit_make_matrix_lambda$$lambda$ as _$_modulePrivate_$_doit_make_matrix_lambda$$lambda$ };
+export { doit_make_matrix_lambda$_lambda$lambda1 as _$_modulePrivate_$_doit_make_matrix_lambda$_lambda$lambda1 };
+export { doit_make_matrix_lambda$$lambda$1 as _$_modulePrivate_$_doit_make_matrix_lambda$$lambda$1 };
+export { doit_make_matrix_lambda$_lambda$lambda2 as _$_modulePrivate_$_doit_make_matrix_lambda$_lambda$lambda2 };
+export { doit_make_matrix_lambda$$lambda$2 as _$_modulePrivate_$_doit_make_matrix_lambda$$lambda$2 };
+export { doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda as _$_modulePrivate_$_doit_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda };
+export { doit_rao_ratio_region_loop_min_cut_lambda$$lambda$ as _$_modulePrivate_$_doit_rao_ratio_region_loop_min_cut_lambda$$lambda$ };
+export { doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda };
+export { doit_rao_ratio_region_make_matrix_lambda$$lambda$ as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$$lambda$ };
+export { doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda1 };
+export { doit_rao_ratio_region_make_matrix_lambda$$lambda$1 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$$lambda$1 };
+export { doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda2 };
+export { doit_rao_ratio_region_make_matrix_lambda$$lambda$2 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$$lambda$2 };
+export { doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda3 };
+export { doit_rao_ratio_region_make_matrix_lambda$$lambda$3 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$$lambda$3 };
+export { doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda4 };
+export { doit_rao_ratio_region_make_matrix_lambda$$lambda$4 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$$lambda$4 };
+export { doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$_lambda$lambda5 };
+export { doit_rao_ratio_region_make_matrix_lambda$$lambda$5 as _$_modulePrivate_$_doit_rao_ratio_region_make_matrix_lambda$$lambda$5 };
+export { rao_ratio_region_make_matrix_lambda$_lambda$lambda as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$_lambda$lambda };
+export { rao_ratio_region_make_matrix_lambda$$lambda$ as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$$lambda$ };
+export { rao_ratio_region_make_matrix_lambda$_lambda$lambda1 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$_lambda$lambda1 };
+export { rao_ratio_region_make_matrix_lambda$$lambda$1 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$$lambda$1 };
+export { rao_ratio_region_make_matrix_lambda$_lambda$lambda2 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$_lambda$lambda2 };
+export { rao_ratio_region_make_matrix_lambda$$lambda$2 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$$lambda$2 };
+export { rao_ratio_region_make_matrix_lambda$_lambda$lambda3 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$_lambda$lambda3 };
+export { rao_ratio_region_make_matrix_lambda$$lambda$3 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$$lambda$3 };
+export { rao_ratio_region_make_matrix_lambda$_lambda$lambda4 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$_lambda$lambda4 };
+export { rao_ratio_region_make_matrix_lambda$$lambda$4 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$$lambda$4 };
+export { rao_ratio_region_make_matrix_lambda$_lambda$lambda5 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$_lambda$lambda5 };
+export { rao_ratio_region_make_matrix_lambda$$lambda$5 as _$_modulePrivate_$_rao_ratio_region_make_matrix_lambda$$lambda$5 };
+export { rao_ratio_region_loop_min_cut_lambda$_lambda$lambda as _$_modulePrivate_$_rao_ratio_region_loop_min_cut_lambda$_lambda$lambda };
+export { rao_ratio_region_loop_min_cut_lambda$$lambda$ as _$_modulePrivate_$_rao_ratio_region_loop_min_cut_lambda$$lambda$ };
+export { make_matrix_lambda$_lambda$lambda as _$_modulePrivate_$_make_matrix_lambda$_lambda$lambda };
+export { make_matrix_lambda$$lambda$ as _$_modulePrivate_$_make_matrix_lambda$$lambda$ };
 export { lambda$_lambda$lambda as _$_modulePrivate_$_lambda$_lambda$lambda };
-export { lambda$_lambda_lift_min$min as _$_modulePrivate_$_lambda$_lambda_lift_min$min };
-export { lambda$_lambda_lift_min_loop$loop as _$_modulePrivate_$_lambda$_lambda_lift_min_loop$loop };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest1 };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil1 };
-export { preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_Cons };
-export { preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift_min$l_rest };
-export { preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons };
-export { preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_rest };
-export { preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil };
-export { loop_loopK_lambda$_lambda_lift_min$l_Cons as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift_min$l_Cons };
-export { loop_loopK_lambda$_lambda_lift_min$l_rest as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift_min$l_rest };
-export { loop_loopK_lambda$_lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons };
-export { loop_loopK_lambda$_lambda_lift_min_loop$l_rest as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift_min_loop$l_rest };
-export { loop_loopK_lambda$_lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift_min_loop$l_Nil };
-export { lift_min$l_Cons as _$_modulePrivate_$_lift_min$l_Cons };
-export { lift_min$l_rest as _$_modulePrivate_$_lift_min$l_rest };
-export { lift_min_loop$l_Cons as _$_modulePrivate_$_lift_min_loop$l_Cons };
-export { lift_min_loop$l_rest as _$_modulePrivate_$_lift_min_loop$l_rest };
-export { lift_min_loop$l_Nil as _$_modulePrivate_$_lift_min_loop$l_Nil };
-export { loopK_lambda$_lambda_lift_min$l_Cons as _$_modulePrivate_$_loopK_lambda$_lambda_lift_min$l_Cons };
-export { loopK_lambda$_lambda_lift_min$l_rest as _$_modulePrivate_$_loopK_lambda$_lambda_lift_min$l_rest };
-export { loopK_lambda$_lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_loopK_lambda$_lambda_lift_min_loop$l_Cons };
-export { loopK_lambda$_lambda_lift_min_loop$l_rest as _$_modulePrivate_$_loopK_lambda$_lambda_lift_min_loop$l_rest };
-export { loopK_lambda$_lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_loopK_lambda$_lambda_lift_min_loop$l_Nil };
-export { lambda_lift_min$l_Cons as _$_modulePrivate_$_lambda_lift_min$l_Cons };
-export { lambda_lift_min$l_rest as _$_modulePrivate_$_lambda_lift_min$l_rest };
-export { lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_lambda_lift_min_loop$l_Cons };
-export { lambda_lift_min_loop$l_rest as _$_modulePrivate_$_lambda_lift_min_loop$l_rest };
-export { lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_lambda_lift_min_loop$l_Nil };
-export { lambda$_lambda_lift_min$l_Cons as _$_modulePrivate_$_lambda$_lambda_lift_min$l_Cons };
-export { lambda$_lambda_lift_min$l_rest as _$_modulePrivate_$_lambda$_lambda_lift_min$l_rest };
-export { lambda$_lambda_lift_min_loop$l_Cons as _$_modulePrivate_$_lambda$_lambda_lift_min_loop$l_Cons };
-export { lambda$_lambda_lift_min_loop$l_rest as _$_modulePrivate_$_lambda$_lambda_lift_min_loop$l_rest };
-export { lambda$_lambda_lift_min_loop$l_Nil as _$_modulePrivate_$_lambda$_lambda_lift_min_loop$l_Nil };
-export { lambda$_lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_lambda$_lambda_lift_min_loop$l_Cons$worker };
-export { lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_lambda_lift_min_loop$l_Cons$worker };
-export { loopK_lambda$_lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker };
-export { lift_min_loop$l_Cons$worker as _$_modulePrivate_$_lift_min_loop$l_Cons$worker };
-export { loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker };
-export { preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker };
-export { loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 as _$_modulePrivate_$_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker };
-export { rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 as _$_modulePrivate_$_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker };
-export { doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 as _$_modulePrivate_$_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker };
-export { main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_preflow_push_loop_loopK_lambda$_lambda_lift_min_loop$l_Cons$worker1 };
+export { loop_min_cut_lambda$_lambda$lambda as _$_modulePrivate_$_loop_min_cut_lambda$_lambda$lambda };
+export { loop_min_cut_lambda$$lambda$ as _$_modulePrivate_$_loop_min_cut_lambda$$lambda$ };
+export { min_cut_lambda$_lambda$lambda as _$_modulePrivate_$_min_cut_lambda$_lambda$lambda };
+export { min_cut_lambda$$lambda$ as _$_modulePrivate_$_min_cut_lambda$$lambda$ };
+export { lambda$_lambda$lambda1 as _$_modulePrivate_$_lambda$_lambda$lambda1 };
+export { main_doit_rao_ratio_region_loop_loop$loop as _$_modulePrivate_$_main_doit_rao_ratio_region_loop_loop$loop };
+export { doit_rao_ratio_region_loop_loop$loop as _$_modulePrivate_$_doit_rao_ratio_region_loop_loop$loop };
+export { rao_ratio_region_loop_loop$loop as _$_modulePrivate_$_rao_ratio_region_loop_loop$loop };
+export { loop_loop$loop as _$_modulePrivate_$_loop_loop$loop };
 export default ratioRegions1;

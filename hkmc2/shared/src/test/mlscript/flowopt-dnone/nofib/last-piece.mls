@@ -1,0 +1,37 @@
+:.
+:js
+
+import "../../../mlscript-compile/flowopt-dnone/nofib/lastpiece.mls"
+print of
+  lastpiece.main()
+//│ > Success!
+//│ >   accchhff
+//│ >   aacnghhf
+//│ >   innnglhf
+//│ >   inmggllf
+//│ >   iimgelkk
+//│ >   dimeelkb
+//│ >   dmmejkkb
+//│ >   ddjjjjbb
+//│ >   
+//│ > Success!
+//│ >   acccjjjj
+//│ >   aacffjgb
+//│ >   hhddfggb
+//│ >   lhhdfgbb
+//│ >   llhdfgnm
+//│ >   lkkennnm
+//│ >   lkeeniim
+//│ >   kkeiiimm
+//│ >   
+//│ > Success!
+//│ >   ammmmccc
+//│ >   aaiimnch
+//│ >   iiinnnhh
+//│ >   gggnlhhj
+//│ >   fkgglljj
+//│ >   fkkklbdj
+//│ >   feeklbdj
+//│ >   ffeebbdd
+//│ >   
+//│ > 

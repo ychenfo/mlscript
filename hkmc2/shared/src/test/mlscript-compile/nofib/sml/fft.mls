@@ -4,24 +4,6 @@ import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
 
 open annotations { pure }
 
-// the "fast fourier transform" (fft) benchmark (double precision)
-// source: the sml/nj benchmark suite's programs/fft/main.sml, as the single file run by the fco paper
-// (its artifact's benchmarks/fft.sml)
-// port changes:
-// - structure Main is flattened into top-level functions; Real64Array (`A`) is a `mut` tuple filled by a
-//   recursive helper, with A.array/sub/update as aArray/aSub/aUpdate; Real64.fromInt is the identity and
-//   Math.cos/sin/abs and integer `div` (floor) are `@pure` wrappers over js Math
-// - the output stream is dropped: `doit` passes NONE, so say/printr/printi print nothing
-// - `test` returns `zm` instead of printing it, and `loop_np` returns the list of `zm` for each size
-// - the size bound `N` (now `nSizes`) is 14 instead of 21 (np = 16 … 131072): all 21 sizes take ~12s even
-//   under sml/nj, and the driver repeats runs anyway
-// - names that sml shadows within one block are renamed: the last stage's loop_is/loop_i0 are
-//   loop_is2/loop_i02, test's second loop_i is loop_i2, re-bound r1/s2/r2 are r1b/s2b/r2b; `is` is `is_`
-// - the module-level values tpi and N become zero-parameter functions
-// - expected output: `zm` is the largest error of the transform against its exact values; the port's zm have the
-//   magnitude of sml/nj's at every size (1e-15 … 1e-10) and match it exactly at 16 points, but not bit for bit
-//   elsewhere (sml/nj: 8.88e-16 3.55e-15 1.07e-14 2.84e-14 5.68e-14 1.17e-13 3.41e-13 7.96e-13 1.40e-12 3.64e-12
-//   7.28e-12 1.46e-11 2.91e-11 6.55e-11), presumably from last-bit differences of js and sml/nj cos/sin
 
 module fft with ...
 
@@ -115,7 +97,6 @@ private fun fft(px)(py)(np) =
         loop_j(1)(0.0)
         loop_k(k + 1)(intDiv(n2, 2))
     loop_k(1)(n)
-    // last stage, length=2 butterfly
     fun loop_is2(is_)(id) =
       if is_ >= n then ()
       else
@@ -133,7 +114,6 @@ private fun fft(px)(py)(np) =
         loop_i02(is_)
         loop_is2(2 * id - 1)(4 * id)
     loop_is2(1)(4)
-    // bit reverse counter
     fun loop_i(i)(j) =
       if i >= n then ()
       else

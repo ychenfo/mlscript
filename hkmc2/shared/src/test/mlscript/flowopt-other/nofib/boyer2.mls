@@ -1,7 +1,0 @@
-:.
-:js
-
-import "../../../mlscript-compile/flowopt-other/nofib/boyer2.mls"
-boyer2.main()
-//│ = "The term is a tautology"
-

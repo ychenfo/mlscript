@@ -1,0 +1,6 @@
+:.
+:js
+
+import "../../../mlscript-compile/flowopt-none/nofib/clausify.mls"
+clausify.main()
+//│ = "a <=\na <=\na <=\na <=\na <=\na <=\na <=\na <=\na <=\na <=\n"

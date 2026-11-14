@@ -1,8 +1,0 @@
-:.
-:js
-
-import "../../../mlscript-compile/flowopt-other/nofib/mandel2.mls"
-mandel2.main()
-//│ = true
-
-      

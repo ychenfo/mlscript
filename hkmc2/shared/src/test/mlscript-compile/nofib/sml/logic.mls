@@ -2,25 +2,6 @@
 
 import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
 
-// a prolog-style peg-solitaire search compiled into sml in continuation-passing style: unification on
-// mutable logic variables, with a global trail for backtracking
-// source: the sml/nj benchmark suite's programs/logic, as the single file run by the fco paper
-// (its artifact's benchmarks/logic.sml)
-// port changes:
-// - structures Term/Trail/Unify/Data/Main are flattened into top-level functions; a logic variable
-//   `REF of term option ref` holds a `Ref` cell, so same_ref and the occurs check compare cells with `===`/`!==`
-// - module-level state stays module-level (user's decision): the trail cells `global_trail`/`trail_counter`,
-//   and a new cell `found`
-// - the `Done` exception is replaced by `found` (user's decision): the final success continuation sets it,
-//   and `unify` returns at once when it is set (the check is at unify's entry, which now takes `sc` as a second
-//   parameter list; `trail` has no check); so the search returns normally after the first solution, and every
-//   `trail` restores global_trail/trail_counter on the way out (the original never restored them when Done
-//   escaped, so they grew from run to run)
-// - `main` resets the cells, runs `exists (fn Z => solution2 Z (fn () => …))` once and returns `!found`
-//   (testit printed "yes"; the 60-run loop of doit is dropped)
-// - data.sml is translated mechanically, keeping its nesting: variables are lowercased, `exists` is `exists_`,
-//   list literals are `::` chains; the module-level strings and constants (cons_s, CON_x_s, …) stay
-//   module-level `val`s
 
 module logic with ...
 
@@ -35,7 +16,6 @@ object None
 class Ref(val value)
 
 
-// term.sml
 
 data class STR(f, ts)
 data class INT(n)
@@ -43,7 +23,6 @@ data class CON(s)
 data class REF(r)
 
 
-// trail.sml
 
 private val global_trail = new mut Ref(Nil)
 private val trail_counter = new mut Ref(0)
@@ -68,7 +47,6 @@ private fun bind(r, t) =
   set trail_counter.Ref#value = trail_counter.Ref#value + 1
 
 
-// unify.sml
 
 private val found = new mut Ref(false)
 
@@ -114,7 +92,6 @@ private fun unify_REF(r, t)(sc) =
 private fun unify(s, t)(sc) = if found.Ref#value then () else unify1(deref(s), deref(t))(sc)
 
 
-// data.sml
 
 private val cons_s = "cons"
 private val x_s = "x"
@@ -280,7 +257,6 @@ private fun solution2(unify, exists_, trail)(t_1)(sc) =
       solitaire(unify, exists_, trail)(STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_o_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: STR(cons_s, con_x_s :: con_nil_s :: Nil) :: Nil) :: STR(cons_s, STR(cons_s, con_x_s :: con_nil_s :: Nil) :: con_nil_s :: Nil) :: Nil) :: Nil) :: Nil) :: Nil), x, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, STR(s_s, INT(0) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil) :: Nil))(sc)))
 
 
-// main.sml
 
 fun main() =
   set found.Ref#value = false

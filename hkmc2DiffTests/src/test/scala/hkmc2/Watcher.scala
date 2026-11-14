@@ -42,9 +42,8 @@ class Watcher(dirs: Ls[File]):
   // the nofib programs are compiled with the benchmark setup, as by the nofib compile runner
   private val nofibCctx: CompilerCtx = TestFolders.nofibCompilerCtx(watcherWorkingDir)
   // the flow-opt programs are compiled with their variant's setup, as by the flow-opt compile runners
-  private val flowBaseCctx: CompilerCtx = TestFolders.flowBaseCompilerCtx(watcherWorkingDir)
-  private val flowOptCctx: CompilerCtx = TestFolders.flowOptCompilerCtx(watcherWorkingDir)
-  private val flowOtherCctx: CompilerCtx = TestFolders.flowOtherCompilerCtx(watcherWorkingDir)
+  private val flowCctxs: List[(os.Path, CompilerCtx)] = TestFolders.flowVariants.map: variant =>
+    TestFolders.flowCompileDir(watcherWorkingDir, variant) -> TestFolders.flowCompilerCtx(watcherWorkingDir, variant)
   
   val watcher: DirectoryWatcher = DirectoryWatcher.builder()
     .logger(org.slf4j.helpers.NOPLogger.NOP_LOGGER)
@@ -118,10 +117,7 @@ class Watcher(dirs: Ls[File]):
       then
         val moduleCctx =
           if TestFolders.nofibCompileDirs(watcherWorkingDir).exists(TestFolders.isInDir(path, _)) then nofibCctx
-          else if TestFolders.isInDir(path, TestFolders.flowCompileDir(watcherWorkingDir, "flowopt-base")) then flowBaseCctx
-          else if TestFolders.isInDir(path, TestFolders.flowCompileDir(watcherWorkingDir, "flowopt-opt")) then flowOptCctx
-          else if TestFolders.isInDir(path, TestFolders.flowCompileDir(watcherWorkingDir, "flowopt-other")) then flowOtherCctx
-          else cctx
+          else flowCctxs.find((dir, _) => TestFolders.isInDir(path, dir)).map(_._2).getOrElse(cctx)
         MLsCompiler(
           mkRaise = ReportFormatter(System.out.println, rootPath, colorize = true).mkRaise
         )(using moduleCctx).compileModule(path)

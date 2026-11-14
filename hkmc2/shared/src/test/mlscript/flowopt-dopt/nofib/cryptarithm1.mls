@@ -1,0 +1,7 @@
+:.
+:js
+
+:fixme
+import "../../../mlscript-compile/flowopt-dopt/nofib/cryptarithm1.mls"
+cryptarithm1.main()
+//│ /!!!\ Uncaught error: java.lang.Exception: Internal Error: ReplHost could not read more from NodeJS stdout.

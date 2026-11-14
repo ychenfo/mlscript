@@ -69,56 +69,29 @@ object TestFolders:
     import io.PlatformPath.given
     CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), nofibConfig(wd))
 
-  // flow-opt base: the benchmark setup with deforest and flow-based opt off
-  def flowBaseConfig(wd: os.Path): Config =
+  // flow-opt setup of one variant: deforest on or off, and flow-based opt off or on (mono or poly),
+  // with its eta/dpe/dce/dead logs on; `flowopt-none` is the benchmark setup with both off
+  def flowConfig(wd: os.Path, variant: Str): Config =
     import io.PlatformPath.given
+    val (deforest, flowBasedMono) = variant match
+      case "flowopt-dnone" => (true, N)
+      case "flowopt-dopt" => (true, S(true))
+      case "flowopt-none" => (false, N)
+      case "flowopt-opt" => (false, S(false))
     benchConfig(wd).mapOptimizer: opt =>
       opt.copy(
-        deforest = S(Config.Deforest.default),
-        flowBasedOpt = N
-      )
-  
-  // flow-opt opt: its own setup, currently the same as flow-opt base
-  def flowOptConfig(wd: os.Path): Config =
-    import io.PlatformPath.given
-    benchConfig(wd).mapOptimizer: opt =>
-      opt.copy(
-        deforest = S(Config.Deforest.default),
-        flowBasedOpt = S(Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
-          // mono = false,
-          mono = true,
-          // debugEta = false, debugDpe = false, debugDce = false, debugDead = false)))
-          debugEta = true, debugDpe = true, debugDce = true, debugDead = true)))
-      )
-  
-  // flow-opt other: its own setup, currently the same as flow-opt base
-  def flowOtherConfig(wd: os.Path): Config =
-    import io.PlatformPath.given
-    benchConfig(wd).mapOptimizer: opt =>
-      opt.copy(
-        deforest = N,
-        flowBasedOpt = S(Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
-          mono = false,
-          // debugEta = false, debugDpe = false, debugDce = false, debugDead = false)))
-          debugEta = true, debugDpe = true, debugDce = true, debugDead = true)))
+        deforest = if deforest then S(Config.Deforest.default) else N,
+        flowBasedOpt = flowBasedMono.map: mono =>
+          Config.FlowBasedOpt(Config.FlowAnalysisConfig.defaultMono.copy(
+            mono = mono,
+            // debugEta = false, debugDpe = false, debugDce = false, debugDead = false)))
+            debugEta = true, debugDpe = true, debugDce = true, debugDead = true))
       )
 
-  // a fresh context for the flow-opt base compile tests, whose root configuration is `flowBaseConfig`
-  def flowBaseCompilerCtx(wd: os.Path): CompilerCtx =
+  // a fresh context for the compile tests of one flow-opt variant, whose root configuration is `flowConfig`
+  def flowCompilerCtx(wd: os.Path, variant: Str): CompilerCtx =
     import io.PlatformPath.given
-    CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), flowBaseConfig(wd))
-
-
-  // a fresh context for the flow-opt opt compile tests, whose root configuration is `flowOptConfig`
-  def flowOptCompilerCtx(wd: os.Path): CompilerCtx =
-    import io.PlatformPath.given
-    CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), flowOptConfig(wd))
-
-
-  // a fresh context for the flow-opt other compile tests, whose root configuration is `flowOtherConfig`
-  def flowOtherCompilerCtx(wd: os.Path): CompilerCtx =
-    import io.PlatformPath.given
-    CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), flowOtherConfig(wd))
+    CompilerCtx.fresh(io.FileSystem.default, compilerPaths(wd), flowConfig(wd, variant))
 
   // ——— Diff test subdirectories excluded from the main DiffTestRunner ———
   
@@ -139,7 +112,7 @@ object TestFolders:
     diffTestDir(wd)/"slop"
 
   // the flow-opt variants, each a directory of the same name under `mlscript/` and `mlscript-compile/`
-  val flowVariants: Ls[Str] = "flowopt-base" :: "flowopt-opt" :: "flowopt-other" :: Nil
+  val flowVariants: Ls[Str] = "flowopt-dnone" :: "flowopt-dopt" :: "flowopt-none" :: "flowopt-opt" :: Nil
 
   /** Diff test subdirectory of one flow-opt variant, for its hkmc2Flow*Tests project. */
   def flowDiffDir(wd: os.Path, variant: Str): os.Path =

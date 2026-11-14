@@ -1,11 +1,16 @@
-// usage: node bench/tinybench-eff.mjs [--variants base,opt,other] [--only fft,tsp]
-//          [--time 1000] [--min-samples 10] [--iterations 20] [--bench-min] [--sizes]
-// benchmarks `main()` of every compiled `flowopt-<variant>/eff/*.mjs`; one tinybench suite per program,
+// usage: node bench/tinybench-eff.mjs [--variants dnone,dopt,none,opt] [--only eff,nofib/ansi]
+//          [--time 1000] [--min-samples 10] [--bench-min] [--sizes]
+// e.g. node --stack-size=16384 bench/tinybench-eff.mjs --only eff/fft --variants dnone,opt
+// e.g. node --stack-size=16384 bench/tinybench-eff.mjs --only eff,nofib/ansi --time 3000 --bench-min
+// e.g. node --stack-size=16384 bench/tinybench-eff.mjs --sizes --only nofib
+// e.g. node --stack-size=16384 bench/tinybench-eff.mjs --only eff/fft --min-samples 50
+// benchmarks `main()` of every compiled `flowopt-<variant>/{eff,nofib}/*.mjs`; one tinybench suite per program,
 // one task per variant, so the variants of the same program are directly comparable
 //   --bench-min  also benchmarks the terser outputs (written next to the sources as <prog>.terse.*.mjs,
 //                like nofib/runterse.fish does, so that their relative imports keep working)
 //   --sizes      instead of timing, prints per-variant byte sizes (raw / terser mangle only / terser compress+mangle,
 //                each plain and gzipped), the same columns as nofib/runterse.fish
+//   --only       programs to run: a group (eff, nofib), a program as group/name (eff/fft), or a bare name (fft)
 import { Bench } from "tinybench"
 import { minify } from "terser"
 import { gzipSync } from "node:zlib"
@@ -18,29 +23,34 @@ const compileDir = join(dirname(fileURLToPath(import.meta.url)),
 
 const args = Object.fromEntries(process.argv.slice(2).reduce((acc, a, i, all) =>
   a.startsWith("--") ? [...acc, [a.slice(2), all[i + 1]]] : acc, []))
-const variants = (args.variants ?? "base,opt,other").split(",")
+const variants = (args.variants ?? "dnone,dopt,none,opt").split(",")
 const only = args.only?.split(",")
 const time = Number(args.time ?? 1000)
 const minSamples = Number(args["min-samples"] ?? 10)
-const fixedIterations = args.iterations === undefined ? undefined : Number(args.iterations)
 const benchMin = "bench-min" in args
 const sizes = "sizes" in args
 
-// one sample count per program, shared by all its variants so they stay comparable:
-// enough calls to fill `time` given the slowest variant's probe call, but at least `minSamples`
-// (--iterations overrides this with an exact count); time 0 makes tinybench run exactly `n` calls
-const benchOptionsFor = slowestProbeMs => {
-  const n = fixedIterations ?? Math.max(minSamples, Math.ceil(time / slowestProbeMs))
-  return { n, options: { time: 0, iterations: n, warmupTime: 0, warmupIterations: Math.ceil(n / 4) } }
-}
+// without `concurrency: "task"`, tinybench samples a task until both `time` ms and `iterations` samples are reached
+// (`iterations` is a floor, not a cap): a slow program stops right after `minSamples`, a fast one runs for `time` ms
+// the same rule with `warmupTime: 0` makes exactly `warmupIterations` warmup calls
+const benchOptions = { time, iterations: minSamples, warmupTime: 0, warmupIterations: Math.ceil(minSamples / 4) }
+const benchDescription = `at least ${time} ms and ${minSamples} samples each`
 
-const effDir = v => join(compileDir, `flowopt-${v}`, "eff")
-const sourceFile = (v, prog) => join(effDir(v), prog + ".mjs")
+// a program is `group/name`, e.g. `eff/fft`; its compiled module is `flowopt-<variant>/<group>/<name>.mjs`
+const groups = ["eff", "nofib"]
+const sourceFile = (v, prog) => join(compileDir, `flowopt-${v}`, prog + ".mjs")
+const terseFile = (v, prog, mode) => join(compileDir, `flowopt-${v}`, `${prog}.terse.${mode}.mjs`)
 const isTerseOutput = f => f.includes(".terse.")
-const programsOf = v => readdirSync(effDir(v))
-  .filter(f => f.endsWith(".mjs") && !isTerseOutput(f)).map(f => f.slice(0, -4))
+const programsOf = v => groups.flatMap(group => readdirSync(join(compileDir, `flowopt-${v}`, group))
+  .filter(f => f.endsWith(".mjs") && !isTerseOutput(f)).map(f => `${group}/${f.slice(0, -4)}`))
 
-const programs = [...new Set(variants.flatMap(programsOf))].sort().filter(p => !only || only.includes(p))
+// `--only` tokens: `group/name` is one program, `group` is every program of that group, `name` is that program in any group
+const selected = prog => {
+  if (!only) return true
+  const [group, name] = prog.split("/")
+  return only.some(s => s === prog || s === group || s === name)
+}
+const programs = [...new Set(variants.flatMap(programsOf))].sort().filter(selected)
 
 // same two terser modes as nofib/runterse.fish (no `module`/`toplevel`, comments dropped)
 const terserModes = {
@@ -81,7 +91,7 @@ const entriesOf = async prog => {
     if (benchMin) {
       const outputs = await terse(readFileSync(sourceFile(v, prog), "utf8"))
       for (const [mode, code] of Object.entries(outputs)) {
-        const file = join(effDir(v), `${prog}.terse.${mode}.mjs`)
+        const file = terseFile(v, prog, mode)
         writeFileSync(file, code)
         entries.push({ label: `${v} ${mode === "compressed" ? "min" : "unmin"}`, file })
       }
@@ -96,14 +106,12 @@ for (const prog of programs) {
   const mods = []
   for (const { label, file } of await entriesOf(prog)) {
     const mod = (await import(pathToFileURL(file))).default
-    const start = performance.now()
-    mod.main() // probe call: fails early, and its duration (cold, so an overestimate) sizes the sample count
-    mods.push({ label, mod, probeMs: performance.now() - start })
+    mod.main() // probe call: a broken entry fails before any of the program's variants is timed
+    mods.push({ label, mod })
   }
-  const { n, options } = benchOptionsFor(Math.max(...mods.map(m => m.probeMs)))
-  const bench = new Bench(options)
+  const bench = new Bench(benchOptions)
   for (const { label, mod } of mods) bench.add(`${prog} [${label}]`, () => { mod.main() })
-  console.log(`\n== ${prog} (${n} samples each)`)
+  console.log(`\n== ${prog} (${benchDescription})`)
   await bench.run()
   console.table(bench.table())
 }

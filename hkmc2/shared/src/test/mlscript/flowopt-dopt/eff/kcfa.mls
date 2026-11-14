@@ -1,0 +1,16 @@
+:.
+:js
+
+
+import "../../../mlscript-compile/flowopt-dopt/eff/kcfa.mls"
+kcfa.main()
+//│ = Cons(
+//│   ["x", Cons(11, Cons(8, Nil))],
+//│   Cons(
+//│     ["k", Cons(15, Cons(13, Nil))],
+//│     Cons(
+//│       ["id", Cons(5, Nil)],
+//│       Cons(["b", Cons(11, Nil)], Cons(["a", Cons(8, Nil)], Nil))
+//│     )
+//│   )
+//│ )

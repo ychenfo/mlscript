@@ -1,6 +1,0 @@
-:.
-:js
-
-import "../../../mlscript-compile/flowopt-other/nofib/life.mls"
-life.main()
-//│ = 468

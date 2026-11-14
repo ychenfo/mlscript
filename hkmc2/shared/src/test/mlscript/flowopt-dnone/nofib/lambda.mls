@@ -1,0 +1,6 @@
+:.
+:js
+
+import "../../../mlscript-compile/flowopt-dnone/nofib/lambda.mls"
+lambda.main()
+//│ = "[\"C\",\"o\",\"n\",\" \",\"3\",\"2\",\"4\",\"0\"],[\"3\",\"2\",\"4\",\"0\",\" \",\" \",\"[\",\"]\"]"

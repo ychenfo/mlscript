@@ -4,27 +4,6 @@ import "../../../../../../../hkmc2/shared/src/test/mlscript-compile/Predef.mls"
 
 open annotations { pure }
 
-// e-field generation from a sum of zernike phase screens (david mcclain's language study), over a
-// 2-d float array library (mcclain's adaptation of sml/nj's Array2)
-// source: the mlton benchmark suite's zern.sml (also in the sml/nj suite), as copied in the webs artifact
-// (zenodo 15050194), 3cps/test/programs/from-mlton/zern.sml
-// port changes:
-// - structures FastRealArray2 and MSpeed are flattened into top-level functions; the record
-//   {data, nrows, ncols, nelts} is the data class Arr2, read by pattern matching; Real64Array is a `mut` tuple
-//   filled by a recursive helper (unsafeSub/unsafeUpdate are `.[i]`/`set .[i]`); Math.sin/cos are `@pure`
-//   wrappers over js Math; real/LargeReal.fromInt are the identity
-// - unused definitions are dropped: of FastRealArray2 only array, tabulate (both traversals), sub, unop and
-//   binop and what they reach are kept (gone: the region type and iterators with their refs, fromList,
-//   update, row/column, app/modify/fold(i), transpose, extract, copy, rmSub/rmUpdate, unopi/binopi,
-//   fill/fillf, dimensions/size/nCols/nRows, the `index` datatype); of MSpeed the timing (report_times,
-//   time_iterations, `Time`), `nel`, `fromInt` and the silenced `print`
-// - chkSize: the `handle Overflow => raise General.Size` around `nrows*ncols` is dropped (js numbers do not
-//   overflow at this size, and the handler never fires); its guards are negated so that the
-//   `raise General.Size` cases can be left out; `index`'s `raise General.Subscript` is left out too
-// - `ztest niter` (time `niter` runs, raise if |rpart(0, 1) - 0.219| >= 0.001) becomes `ztest()`, which runs
-//   the body once and returns rpart(0, 1); sml/nj gives 0.21900668709304166, the port 0.21900668709304172
-//   (last-bit differences of js and sml/nj cos/sin, presumably; within the original's 0.001 tolerance)
-// - module-level values (max_length, ncoefs, nx, ny) become zero-parameter functions
 
 module zern with ...
 
@@ -54,7 +33,6 @@ private fun fillArray(arr, i, n, x) = if i == n then arr else
   fillArray(arr, i + 1, n, x)
 
 
-// array2.sml (FastRealArray2)
 
 private fun unsafeUpdate(a, i, x) = set a.[i] = x
 
@@ -62,13 +40,11 @@ private fun unsafeSub(a, i) = a.[i]
 
 private fun mkRawArray(n) = fillArray(mut [], 0, n, 0.0)
 
-// Arr2(data, nrows, ncols, nelts); `data` is a keyword, so the field is data_
 data class Arr2(data_, nrows, ncols, nelts)
 
 object RowMajor
 object ColMajor
 
-// going forward is twice as fast as backward!
 private fun dotimes(n)(f) =
   fun iter(k) =
     if k >= n then ()
@@ -82,7 +58,6 @@ private fun mkArray(n, v) =
   dotimes(n)(ix => unsafeUpdate(arr, ix, v))
   arr
 
-// compute the index of an array element
 private fun ltu(i, limit) = i >= 0 && i < limit
 
 private fun unsafeIndex(arr, i, j) = if arr is Arr2(_, nrows, ncols, _) then i * ncols + j
@@ -90,7 +65,6 @@ private fun unsafeIndex(arr, i, j) = if arr is Arr2(_, nrows, ncols, _) then i *
 private fun index(arr, i, j) = if arr is Arr2(_, nrows, ncols, _) and ltu(i, nrows) && ltu(j, ncols) then
   unsafeIndex(arr, i, j)
 
-// arbitrary - but this is 128 MB
 private fun max_length() = 4096 * 4096
 
 private fun chkSize(nrows, ncols) = if nrows > 0 && ncols > 0 then
@@ -140,10 +114,7 @@ private fun unop(d, s, f) = if d is Arr2(dst, _, _, nelts) and s is Arr2(src, _,
   dotimes(nelts)(ix => unsafeUpdate(dst, ix, f(unsafeSub(src, ix))))
 
 
-// test of zernick phase screen e-field generation (MSpeed)
-// this is 1.9 times faster than idl!!!!
 
-// setup working vectors and arrays
 private fun collect(n)(f) =
   fun g(n)(l) = if n == 0 then l else g(n - 1)(f(n) :: l)
   g(n)(Nil)
@@ -152,19 +123,15 @@ private fun ncoefs() = 15
 private fun nx() = 128
 private fun ny() = nx()
 
-// generate an array from a scaled vector
 private fun mulsv(dst, sf, a) = unop(dst, a, vsrc => sf * vsrc)
 
-// compute the complex exponential of an array
 private fun cisv(a, rpart, ipart) =
   unop(rpart, a, cos)
   unop(ipart, a, sin)
   [rpart, ipart]
 
-// accumulate scaled vectors into an array
 private fun mpadd(dst)(sf, src) = binop(dst, dst, src, (vdst, vsrc) => vdst + sf * vsrc)
 
-// compute an e-field from a set of zernike screens
 private fun zern(dst, rpart, ipart, coefs, zerns) =
   mulsv(dst, listHd(coefs), listHd(zerns))
   listPairApp(mpadd(dst))(listTl(coefs), listTl(zerns))

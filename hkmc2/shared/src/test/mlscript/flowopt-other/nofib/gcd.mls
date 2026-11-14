@@ -1,7 +1,0 @@
-:.
-:js
-
-
-import "../../../mlscript-compile/flowopt-other/nofib/gcd.mls"
-gcd.main()
-//│ = 5021
