@@ -84,8 +84,6 @@ const printSizes = async prog => {
       MIN: bytes(compressed), "MIN.GZ": gzBytes(compressed),
     }
   }
-  const baseline = Object.values(rows)[0]
-  for (const row of Object.values(rows)) row["MIN.GZ vs first"] = (row["MIN.GZ"] / baseline["MIN.GZ"]).toFixed(2)
   console.log(`\n== ${prog}`)
   console.table(rows)
 }

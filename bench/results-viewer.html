@@ -1,0 +1,975 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bench results explorer</title>
+<style>
+:root {
+  color-scheme: light;
+  --surface: #fcfcfb;
+  --panel: #f5f5f3;
+  --text: #0b0b0b;
+  --text-2: #52514e;
+  --muted: #7a7974;
+  --grid: #e8e7e3;
+  --axis: #bdbcb5;
+  --hover: #ecebe7;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a; --s4: #eda100;
+  --s5: #e87ba4; --s6: #008300; --s7: #6250d6; --s8: #e34948;
+}
+@media (prefers-color-scheme: dark) {
+  :root:where(:not([data-theme="light"])) {
+    color-scheme: dark;
+    --surface: #1a1a19;
+    --panel: #232321;
+    --text: #f0efec;
+    --text-2: #c3c2b7;
+    --muted: #8c8b84;
+    --grid: #2c2c2a;
+    --axis: #4a4a46;
+    --hover: #2e2e2b;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+    --s5: #d55181; --s6: #0ca30c; --s7: #9085e9; --s8: #e66767;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #1a1a19;
+  --panel: #232321;
+  --text: #f0efec;
+  --text-2: #c3c2b7;
+  --muted: #8c8b84;
+  --grid: #2c2c2a;
+  --axis: #4a4a46;
+  --hover: #2e2e2b;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; --s4: #c98500;
+  --s5: #d55181; --s6: #0ca30c; --s7: #9085e9; --s8: #e66767;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 20px 16px 48px; background: var(--surface); color: var(--text);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+main { max-width: 1100px; margin: 0 auto; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 14px; }
+h1 { font-size: 20px; margin: 0; font-weight: 650; }
+#status { color: var(--text-2); font-size: 13px; flex: 1 1 300px; }
+button, select, summary {
+  font: inherit; color: var(--text); background: var(--panel);
+  border: 1px solid var(--axis); border-radius: 6px; padding: 4px 9px; cursor: pointer;
+}
+select { padding: 4px 6px; }
+button:hover, select:hover, summary:hover { background: var(--hover); }
+button:focus-visible, select:focus-visible, summary:focus-visible, input:focus-visible {
+  outline: 2px solid var(--s1); outline-offset: 1px;
+}
+
+.tabs { display: flex; gap: 4px; margin-bottom: 10px; }
+.tabs button { border-radius: 6px; }
+.tabs button[aria-selected="true"] { background: var(--text); color: var(--surface); border-color: var(--text); }
+
+.controls { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin-bottom: 8px; }
+.controls label { display: inline-flex; align-items: center; gap: 6px; color: var(--text-2); font-size: 13px; }
+.hidden { display: none !important; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 9px; border-radius: 999px;
+  background: var(--panel); border: 1px solid var(--axis); cursor: pointer; user-select: none; font-size: 13px;
+}
+.chip[aria-pressed="false"] { opacity: 0.45; }
+.chip .mv { padding: 0 3px; color: var(--text-2); font-size: 11px; }
+.chip .mv:hover { color: var(--text); }
+.chip .sw { width: 10px; height: 10px; border-radius: 2px; display: inline-block; }
+.chip.plain .sw { display: none; }
+details.programs { margin: 6px 0 10px; }
+details.programs summary { display: inline-block; }
+details.programs .chips { margin-top: 8px; }
+details.programs .bulk { margin-left: 6px; }
+
+.note { color: var(--muted); font-size: 12px; margin: 4px 0 10px; }
+#chart { width: 100%; }
+#chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.empty { color: var(--text-2); padding: 40px 0; text-align: center; }
+
+svg text { fill: var(--text-2); font: 12px system-ui, -apple-system, "Segoe UI", sans-serif; }
+svg text.lbl { fill: var(--text); }
+svg text.faint { fill: var(--muted); }
+svg .grid { stroke: var(--grid); stroke-width: 1; }
+svg .axis { stroke: var(--axis); stroke-width: 1; }
+svg .ref { stroke: var(--text-2); stroke-width: 1.5; }
+svg .whisker { stroke: var(--text); stroke-width: 1.5; fill: none; opacity: 0.75; }
+svg .bar.hot { stroke: var(--text); stroke-width: 1.5; }
+svg .pt { stroke: var(--surface); stroke-width: 2; }
+svg .pt.hot { stroke: var(--text); stroke-width: 2; }
+svg .hit { fill: transparent; }
+
+#tip {
+  position: fixed; z-index: 10; pointer-events: none; max-width: 320px;
+  background: var(--panel); color: var(--text); border: 1px solid var(--axis); border-radius: 8px;
+  padding: 8px 10px; font-size: 12.5px; box-shadow: 0 4px 16px rgba(0,0,0,.18);
+}
+#tip .t { display: flex; align-items: center; gap: 6px; font-weight: 650; margin-bottom: 4px; }
+#tip .sw { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+#tip .r { display: flex; justify-content: space-between; gap: 18px; }
+#tip .r span:first-child { color: var(--text-2); }
+#tip .r span:last-child { font-variant-numeric: tabular-nums; }
+
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+th, td { padding: 6px 10px; border-bottom: 1px solid var(--grid); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+th { cursor: pointer; color: var(--text-2); font-weight: 600; user-select: none; }
+th:hover { color: var(--text); }
+td .x { color: var(--muted); font-size: 12px; margin-left: 6px; }
+.tablewrap { overflow-x: auto; }
+.sec { margin-top: 22px; }
+.sec .hd { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.sec h3 { font-size: 14px; margin: 0; font-weight: 650; }
+.sec button { padding: 1px 8px; font-size: 12px; }
+tr.geo td { font-weight: 650; border-top: 2px solid var(--axis); }
+input[type="number"], input[type="text"] {
+  font: inherit; color: var(--text); background: var(--panel);
+  border: 1px solid var(--axis); border-radius: 6px; padding: 3px 6px;
+}
+#printfig { display: none; }
+@media print {
+  body.printing-figure main, body.printing-figure #tip { display: none !important; }
+  body.printing-figure { background: #fff; padding: 0; }
+  body.printing-figure #printfig { display: block; }
+  #printfig svg { display: block; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Bench results explorer</h1>
+    <div id="status"></div>
+    <label class="note" style="margin:0">load csv / txt <input id="file" type="file" multiple accept=".csv,.txt,text/csv,text/plain"></label>
+    <button id="theme" title="cycle auto / light / dark">theme: auto</button>
+  </header>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" data-tab="presets" aria-selected="false">Presets</button>
+    <button role="tab" data-tab="summary" aria-selected="true">Summary</button>
+    <button role="tab" data-tab="bars" aria-selected="false">Compare</button>
+    <button role="tab" data-tab="scatter" aria-selected="false">Size vs time</button>
+    <button role="tab" data-tab="table" aria-selected="false">Table</button>
+    <button role="tab" data-tab="figure" aria-selected="false">Figure</button>
+  </div>
+
+  <div class="controls" id="controls">
+    <label class="only-summary">pairs <select id="pairs">
+      <option value="base">each variant vs baseline</option>
+      <option value="all">all ordered pairs</option>
+    </select></label>
+    <label class="only-summary">flat band ± <input id="band" type="number" min="0" max="50" step="1" value="0" style="width:56px"> %</label>
+    <button class="only-summary" id="copy">copy as TSV</button>
+    <label class="only-presets">pairs <input id="presetPairs" type="text" style="width:320px" placeholder="x/y, x/y"></label>
+    <label class="only-presets">time <select id="presetTime">
+      <option value="lat_avg_ns">average</option>
+      <option value="lat_med_ns">median</option>
+    </select></label>
+    <label id="datasetLabel" class="hidden">dataset <select id="dataset"></select></label>
+    <label class="only-bars only-table only-figure">metric <select id="metric"></select></label>
+    <label class="only-scatter">x <select id="sx"></select></label>
+    <label class="only-scatter">y <select id="sy"></select></label>
+    <label>form <select id="form" title="raw = compiled module; unmin / min = terser outputs. Their code is equivalent, so for latency the three forms mostly show the noise level."></select></label>
+    <label>show <select id="mode">
+      <option value="ratio">ratio to baseline</option>
+      <option value="abs">absolute</option>
+    </select></label>
+    <label>baseline <select id="baseline"></select></label>
+    <label><input type="checkbox" id="log" checked> log scale</label>
+    <label class="only-bars">sort <select id="sort">
+      <option value="name">name</option>
+      <option value="base">baseline value</option>
+      <option value="spread">largest ratio</option>
+    </select></label>
+    <label class="only-scatter"><input type="checkbox" id="labels"> label points</label>
+    <label class="only-figure">layout <select id="figMode">
+      <option value="single">one baseline, all variants</option>
+      <option value="groups">groups, each with its own baseline</option>
+    </select></label>
+    <label id="figGroupsLabel" class="hidden">groups <input id="figGroups" type="text" style="width:240px" placeholder="none, opt | dnone, dopt" title="variants drawn side by side in every panel; groups are separated by |, and the first variant of a group is its baseline (= 1)"></label>
+    <label class="only-figure">columns <input id="figCols" type="number" min="1" max="30" step="1" value="6" style="width:56px"></label>
+    <label class="only-figure">panel w <input id="figW" type="number" min="40" max="600" step="10" value="120" style="width:64px"></label>
+    <label class="only-figure">panel h <input id="figH" type="number" min="40" max="600" step="10" value="110" style="width:64px"></label>
+    <label class="only-figure">font <input id="figFont" type="number" min="6" max="24" step="1" value="11" style="width:56px"></label>
+    <label class="only-figure">y scale <select id="figScale">
+      <option value="shared">shared</option>
+      <option value="panel">per panel</option>
+    </select></label>
+    <label class="only-figure">y max <input id="figYmax" type="number" min="0" step="0.1" placeholder="auto" style="width:64px"></label>
+    <label class="only-figure"><input type="checkbox" id="figYlabels"> y labels</label>
+    <label class="only-figure"><input type="checkbox" id="figErr" checked> error bars</label>
+    <label class="only-figure">title <input id="figTitle" type="text" placeholder="(none)" style="width:140px"></label>
+    <button class="only-figure" id="dlSvg">download SVG</button>
+    <button class="only-figure" id="dlPdf">save as PDF</button>
+  </div>
+  <div class="chips" id="variants" aria-label="variants"></div>
+  <details class="programs">
+    <summary id="progsum">Programs</summary>
+    <div class="chips" id="programs"></div>
+  </details>
+  <div class="note" id="hint"></div>
+
+  <div id="chart"></div>
+</main>
+<div id="tip" class="hidden"></div>
+<div id="printfig"></div>
+<style id="pagestyle"></style>
+
+<script>
+"use strict"
+const $ = s => document.querySelector(s)
+const NS = "http://www.w3.org/2000/svg"
+
+// ---------- data ----------
+const METRICS = {
+  lat_avg_ns: { label: "latency (avg)", kind: "time" },
+  lat_med_ns: { label: "latency (median)", kind: "time" },
+  bytes: { label: "size (bytes)", kind: "bytes" },
+  gz_bytes: { label: "size (gzipped)", kind: "bytes" },
+}
+const TEXT_COLS = ["program", "variant", "form"]
+
+// every loaded file is one dataset; `rows` / `byKey` always alias the dataset selected by `state.ds`
+let datasets = [], rows = [], byKey = new Map(), programs = [], variants = [], forms = [], available = []
+const state = {
+  tab: "presets", ds: 0, presetPairs: "", presetTime: "lat_avg_ns", figMode: "single", figGroups: "", figCols: 6, figW: 120, figH: 110, figFont: 11, figScale: "shared", figYmax: "", figYlabels: false, figErr: true, figTitle: "", pairs: "base", band: 0, metric: "lat_avg_ns", form: "raw", mode: "ratio", baseline: null, log: true,
+  sort: "name", sx: "gz_bytes", sy: "lat_avg_ns", labels: false,
+  hiddenVariants: new Set(), hiddenPrograms: new Set(), tableSort: { key: "program", dir: 1 },
+}
+
+function parseCsv(text) {
+  const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean)
+  const head = lines[0].split(",")
+  return lines.slice(1).map(l => {
+    const cells = l.split(",")
+    const row = {}
+    head.forEach((c, i) => { row[c] = TEXT_COLS.includes(c) ? cells[i] : (cells[i] === "" || cells[i] === undefined ? null : Number(cells[i])) })
+    return row
+  })
+}
+// same parsing as bench/parse-results.mjs, for the raw console output of bench/tinybench.mjs
+const SIZE_FORMS = { raw: ["RAW", "RAW.GZ"], unmin: ["UNMIN", "UNMIN.GZ"], min: ["MIN", "MIN.GZ"] }
+function parseTxt(text) {
+  const out = new Map()
+  const rowOf = (program, variant, form) => {
+    const key = `${program}|${variant}|${form}`
+    if (!out.has(key)) out.set(key, { program, variant, form, bytes: null, gz_bytes: null, lat_avg_ns: null, lat_avg_err_pct: null, lat_med_ns: null, lat_med_err_ns: null })
+    return out.get(key)
+  }
+  const strip = c => c.trim().replace(/^'|'$/g, "")
+  const withError = c => {
+    const m = strip(c).match(/^([\d.]+) ± ([\d.]+)%?$/)
+    if (!m) throw new Error(`cannot parse measurement cell: ${c}`)
+    return [Number(m[1]), Number(m[2])]
+  }
+  let program = null, header = null
+  for (const line of text.split("\n")) {
+    const section = line.match(/^== (\S+)/)
+    if (section) { program = section[1]; header = null; continue }
+    if (!line.startsWith("│") || program === null) continue
+    const cells = line.split("│").slice(1, -1)
+    if (cells[0].trim() === "(index)") { header = cells.map(c => c.trim()); continue }
+    if (header === null) throw new Error(`table row before its header in ${program}`)
+    const cell = name => cells[header.indexOf(name)]
+    if (header.includes("Task name")) {
+      const task = strip(cell("Task name")).match(/^(\S+) \[(\S+)(?: (unmin|min))?\]$/)
+      if (!task) throw new Error(`cannot parse task name: ${cell("Task name")}`)
+      const row = rowOf(task[1], task[2], task[3] ?? "raw")
+      ;[row.lat_avg_ns, row.lat_avg_err_pct] = withError(cell("Latency avg (ns)"))
+      ;[row.lat_med_ns, row.lat_med_err_ns] = withError(cell("Latency med (ns)"))
+    } else if (header.includes("RAW")) {
+      for (const [form, [b, g]] of Object.entries(SIZE_FORMS)) {
+        const row = rowOf(program, cells[0].trim(), form)
+        row.bytes = Number(cell(b)); row.gz_bytes = Number(cell(g))
+      }
+    } else throw new Error(`unknown table header in ${program}: ${header.join(",")}`)
+  }
+  return [...out.values()]
+}
+const looksLikeTxt = text => /^== \S+/m.test(text) && text.includes("│")
+const uniq = xs => [...new Set(xs)]
+const get = (p, v, f) => byKey.get(`${p}|${v}|${f}`)
+
+// names such as size-time-mac-11.14 / size-time-win-11.14 become mac / win
+function shortLabels(names) {
+  if (names.length < 2) return names
+  const pre = names.reduce((a, b) => { let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return a.slice(0, i) })
+  const suf = names.reduce((a, b) => { let i = 0; while (i < a.length && i < b.length && a[a.length - 1 - i] === b[b.length - 1 - i]) i++; return a.slice(a.length - i) })
+  const cut = names.map(n => n.slice(pre.length, n.length - suf.length))
+  return cut.every(Boolean) ? cut : names
+}
+const mkDataset = (name, rs) => ({ name, label: name, rows: rs, byKey: new Map(rs.map(r => [`${r.program}|${r.variant}|${r.form}`, r])) })
+function selectDataset(i) {
+  state.ds = i
+  rows = datasets[i].rows; byKey = datasets[i].byKey
+}
+function load(text) { loadAll([{ name: "data", text }]) }
+function loadAll(files) {
+  const parsed = []
+  for (const f of files) {
+    let rs
+    try { rs = looksLikeTxt(f.text) ? parseTxt(f.text) : parseCsv(f.text) }
+    catch (e) { $("#status").textContent = `could not parse ${f.name}: ${e.message}`; return }
+    if (!rs.length) { $("#status").textContent = `no rows found in ${f.name}`; return }
+    parsed.push(mkDataset(f.name, rs))
+  }
+  shortLabels(parsed.map(d => d.name)).forEach((l, i) => { parsed[i].label = l })
+  datasets = parsed
+  selectDataset(0)
+  const all = datasets.flatMap(d => d.rows)
+  programs = uniq(all.map(r => r.program))
+  variants = uniq(all.map(r => r.variant))
+  forms = uniq(all.map(r => r.form))
+  available = Object.keys(METRICS).filter(m => all.some(r => r[m] != null))
+  state.baseline = variants[0]
+  state.form = forms.includes("raw") ? "raw" : forms[0]
+  state.metric = available.includes("lat_avg_ns") ? "lat_avg_ns" : available[0]
+  state.sx = available.includes("gz_bytes") ? "gz_bytes" : available[0]
+  state.sy = available.includes("lat_avg_ns") ? "lat_avg_ns" : available[available.length - 1]
+  state.order = [...variants]
+  state.figGroups = ["none", "opt", "dnone", "dopt"].every(v => variants.includes(v)) ? "none, opt | dnone, dopt" : variants.join(", ")
+  const preferred = ["dnone/none", "dopt/dnone", "opt/none", "dopt/none"].filter(t => t.split("/").every(v => variants.includes(v)))
+  state.presetPairs = (preferred.length ? preferred : variants.slice(1).map(v => `${v}/${variants[0]}`)).join(", ")
+  state.hiddenVariants.clear(); state.hiddenPrograms.clear()
+  buildControls()
+  render()
+}
+
+// ---------- formatting ----------
+const sig = (x, n) => String(+x.toPrecision(n))
+function fmtTime(ns) {
+  const a = Math.abs(ns)
+  const [d, u] = a >= 1e9 ? [1e9, "s"] : a >= 1e6 ? [1e6, "ms"] : a >= 1e3 ? [1e3, "µs"] : [1, "ns"]
+  return `${sig(ns / d, 3)} ${u}`
+}
+function fmtBytes(b) {
+  const a = Math.abs(b)
+  return a >= 1e6 ? `${sig(b / 1e6, 3)} MB` : a >= 1e3 ? `${sig(b / 1e3, 3)} KB` : `${b} B`
+}
+const fmtMetric = (m, x) => METRICS[m].kind === "time" ? fmtTime(x) : fmtBytes(x)
+const fmtRatio = x => `${x >= 10 ? x.toFixed(0) : sig(x, 2)}×`
+const fmtPlot = (m, x) => state.mode === "ratio" ? fmtRatio(x) : fmtMetric(m, x)
+
+function relErr(m, r) {
+  if (!r) return null
+  if (m === "lat_avg_ns" && r.lat_avg_err_pct != null) return r.lat_avg_err_pct / 100
+  if (m === "lat_med_ns" && r.lat_med_err_ns != null && r.lat_med_ns > 0) return r.lat_med_err_ns / r.lat_med_ns
+  return null
+}
+
+function variantColor(v) {
+  const i = variants.indexOf(v)
+  if (state.tab === "figure") return FIG_COLORS[i % 8]
+  return i < 8 ? `var(--s${i + 1})` : "var(--muted)"
+}
+
+// ---------- scales ----------
+function niceStep(raw) {
+  const e = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / e
+  return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * e
+}
+function linDomain(lo, hi) {
+  if (lo === hi) hi = lo + 1
+  const step = niceStep((hi - lo) / 6)
+  const a = Math.floor(lo / step + 1e-9) * step, b = Math.ceil(hi / step - 1e-9) * step
+  const ticks = []
+  for (let v = a; v <= b + step / 2; v += step) ticks.push(+v.toPrecision(12))
+  return { lo: a, hi: b, ticks, labeled: () => true }
+}
+function logDomain(lo, hi) {
+  if (lo === hi) { lo *= 0.8; hi *= 1.25 }
+  const e0 = Math.floor(Math.log10(lo)), e1 = Math.ceil(Math.log10(hi))
+  const all = []
+  for (let e = e0; e <= e1; e++) for (const m of [1, 2, 5]) all.push(+(m * Math.pow(10, e)).toPrecision(12))
+  const a = Math.max(...all.filter(t => t <= lo * (1 + 1e-9)))
+  const b = Math.min(...all.filter(t => t >= hi * (1 - 1e-9)))
+  const ticks = all.filter(t => t >= a && t <= b)
+  const labelAll = Math.log10(b / a) <= 2.5
+  const isDecade = t => Math.abs(Math.log10(t) - Math.round(Math.log10(t))) < 1e-9
+  return { lo: a, hi: b, ticks, labeled: t => labelAll || isDecade(t) }
+}
+function makeDomain(vals, log, anchor) {
+  let v = vals.filter(x => x != null && isFinite(x) && (!log || x > 0))
+  if (anchor != null) v.push(anchor)
+  if (!v.length) v = [1]
+  const lo = Math.min(...v), hi = Math.max(...v)
+  return log ? logDomain(lo, hi) : linDomain(lo, hi)
+}
+function makeScale(d, a, b, log) {
+  const f = log
+    ? v => (Math.log(Math.max(v, d.lo)) - Math.log(d.lo)) / (Math.log(d.hi) - Math.log(d.lo))
+    : v => (v - d.lo) / (d.hi - d.lo)
+  return v => a + (b - a) * f(v)
+}
+
+// ---------- dom helpers ----------
+function S(tag, attrs = {}, text) {
+  const e = document.createElementNS(NS, tag)
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v)
+  if (text !== undefined) e.textContent = text
+  return e
+}
+function H(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag)
+  for (const [k, v] of Object.entries(attrs)) k === "class" ? (e.className = v) : e.setAttribute(k, v)
+  for (const k of kids) e.append(k)
+  return e
+}
+
+const tip = $("#tip")
+function showTip(evt, title, color, lines) {
+  tip.replaceChildren(
+    H("div", { class: "t" }, Object.assign(H("span", { class: "sw" }), color ? { style: `background:${color}` } : {}), title),
+    ...lines.map(([k, v]) => H("div", { class: "r" }, H("span", {}, k), H("span", {}, v))))
+  tip.classList.remove("hidden")
+  const pad = 14, w = tip.offsetWidth, h = tip.offsetHeight
+  let x = evt.clientX + pad, y = evt.clientY + pad
+  if (x + w > innerWidth - 8) x = evt.clientX - w - pad
+  if (y + h > innerHeight - 8) y = evt.clientY - h - pad
+  tip.style.left = `${Math.max(8, x)}px`; tip.style.top = `${Math.max(8, y)}px`
+}
+const hideTip = () => tip.classList.add("hidden")
+
+// ---------- chart data ----------
+const visPrograms = () => programs.filter(p => !state.hiddenPrograms.has(p))
+const visVariants = () => variants.filter(v => !state.hiddenVariants.has(v))
+// bar order of the figure, independent of `variants` so that colours stay tied to the variant
+const figVariants = () => state.order.filter(v => !state.hiddenVariants.has(v))
+const plotVariants = () => visVariants().filter(v => state.mode === "abs" || v !== state.baseline)
+
+// one point of a metric for (program, variant): absolute value, ratio to baseline, relative error of the plotted quantity
+function point(p, v, m) {
+  const r = get(p, v, state.form), x = r?.[m]
+  if (x == null) return null
+  const b = get(p, state.baseline, state.form), bx = b?.[m]
+  const ratio = bx != null && bx > 0 ? x / bx : null
+  const ra = relErr(m, r), rb = relErr(m, b)
+  const relRatio = ra != null && rb != null ? Math.hypot(ra, rb) : null
+  const plotted = state.mode === "ratio" ? ratio : x
+  if (plotted == null) return null
+  return { p, v, m, abs: x, ratio, plotted, rel: state.mode === "ratio" ? relRatio : ra, relAbs: ra }
+}
+const tipLines = pt => {
+  const lines = [[METRICS[pt.m].label, fmtMetric(pt.m, pt.abs)]]
+  if (pt.ratio != null && pt.v !== state.baseline) lines.push([`vs ${state.baseline}`, fmtRatio(pt.ratio)])
+  if (pt.relAbs != null) lines.push(["± (tinybench)", `${(pt.relAbs * 100).toFixed(2)}%`])
+  lines.push(["form", state.form])
+  return lines
+}
+
+function sortedPrograms(m) {
+  const ps = visPrograms()
+  if (state.sort === "name") return ps.sort((a, b) => a.localeCompare(b))
+  if (state.sort === "base") {
+    const val = p => get(p, state.baseline, state.form)?.[m] ?? -Infinity
+    return ps.sort((a, b) => val(b) - val(a))
+  }
+  const spread = p => Math.max(0, ...variants.filter(v => v !== state.baseline).map(v => {
+    const q = point(p, v, m)
+    return q?.ratio ? Math.abs(Math.log(q.ratio)) : 0
+  }))
+  return ps.sort((a, b) => spread(b) - spread(a))
+}
+
+// ---------- bars ----------
+function renderBars() {
+  const host = $("#chart"), m = state.metric, ratio = state.mode === "ratio"
+  const vs = plotVariants(), ps = sortedPrograms(m)
+  const groups = ps.map(p => ({ p, bars: vs.map(v => point(p, v, m)) }))
+  const all = groups.flatMap(g => g.bars).filter(Boolean)
+  if (!all.length) { host.replaceChildren(H("div", { class: "empty" }, "nothing to plot for this selection")); return }
+
+  const log = state.log
+  const extent = all.flatMap(b => [b.plotted, b.rel != null ? b.plotted * (1 - b.rel) : null, b.rel != null ? b.plotted * (1 + b.rel) : null])
+  const d = makeDomain(extent, log, ratio ? 1 : log ? null : 0)
+  const W = Math.max(host.clientWidth, 320)
+  const left = Math.min(170, 14 + 7 * Math.max(...ps.map(p => p.length))), right = 28, top = 34, bottom = 34
+  const barH = 13, gap = 2, groupGap = 16
+  const groupH = vs.length * barH + (vs.length - 1) * gap
+  const H_ = top + bottom + groups.length * (groupH + groupGap) - groupGap
+  const sx = makeScale(d, left, W - right, log)
+  const anchor = ratio ? sx(1) : log ? left : sx(0)
+
+  const svg = S("svg", { viewBox: `0 0 ${W} ${H_}`, role: "img", "aria-label": `${METRICS[m].label} per program and variant` })
+  for (const t of d.ticks) {
+    const x = sx(t)
+    svg.append(S("line", { class: "grid", x1: x, x2: x, y1: top - 6, y2: H_ - bottom + 6 }))
+    if (d.labeled(t)) {
+      const lab = fmtPlot(m, t)
+      svg.append(S("text", { class: "faint", x, y: top - 12, "text-anchor": "middle" }, lab))
+      svg.append(S("text", { class: "faint", x, y: H_ - bottom + 22, "text-anchor": "middle" }, lab))
+    }
+  }
+  svg.append(S("line", { class: ratio ? "ref" : "axis", x1: anchor, x2: anchor, y1: top - 6, y2: H_ - bottom + 6 }))
+  if (ratio) svg.append(S("text", { class: "lbl", x: anchor + 4, y: top - 22 }, `1× = ${state.baseline}`))
+
+  groups.forEach((g, gi) => {
+    const y0 = top + gi * (groupH + groupGap)
+    svg.append(S("text", { class: "lbl", x: left - 10, y: y0 + groupH / 2 + 4, "text-anchor": "end" }, g.p.replace(/^eff\//, "")))
+    g.bars.forEach((b, k) => {
+      if (!b) return
+      const y = y0 + k * (barH + gap), cy = y + barH / 2
+      const xv = sx(b.plotted), x = Math.min(xv, anchor), w = Math.max(Math.abs(xv - anchor), 1)
+      const rect = S("rect", { class: "bar", x, y, width: w, height: barH, rx: 2, style: `fill:${variantColor(b.v)}` })
+      svg.append(rect)
+      if (b.rel != null) {
+        const e = b.plotted * b.rel, a = sx(Math.max(b.plotted - e, d.lo)), c = sx(b.plotted + e)
+        svg.append(S("path", { class: "whisker", d: `M${a},${cy - 3}V${cy + 3}M${a},${cy}H${c}M${c},${cy - 3}V${cy + 3}` }))
+      }
+      const hit = S("rect", { class: "hit", x: left, y: y - gap / 2, width: W - right - left, height: barH + gap })
+      hit.addEventListener("mousemove", e => { rect.classList.add("bar", "hot"); showTip(e, `${b.p} · ${b.v}`, variantColor(b.v), tipLines(b)) })
+      hit.addEventListener("mouseleave", () => { rect.classList.remove("hot"); hideTip() })
+      svg.append(hit)
+    })
+  })
+  host.replaceChildren(svg)
+}
+
+// ---------- scatter ----------
+const SHAPES = [
+  (x, y, r) => `M${x - r},${y}a${r},${r} 0 1,0 ${2 * r},0a${r},${r} 0 1,0 ${-2 * r},0`,
+  (x, y, r) => `M${x - r},${y - r}h${2 * r}v${2 * r}h${-2 * r}z`,
+  (x, y, r) => `M${x},${y - r * 1.2}L${x + r * 1.1},${y + r * 0.9}H${x - r * 1.1}z`,
+  (x, y, r) => `M${x},${y - r * 1.3}L${x + r * 1.3},${y}L${x},${y + r * 1.3}L${x - r * 1.3},${y}z`,
+]
+function renderScatter() {
+  const host = $("#chart"), ratio = state.mode === "ratio", log = state.log
+  const pts = []
+  for (const p of visPrograms()) for (const v of plotVariants()) {
+    const a = point(p, v, state.sx), b = point(p, v, state.sy)
+    if (a && b) pts.push({ p, v, a, b })
+  }
+  if (!pts.length) { host.replaceChildren(H("div", { class: "empty" }, "nothing to plot for this selection")); return }
+
+  const W = Math.max(host.clientWidth, 320), Ht = 540
+  const left = 76, right = 28, top = 24, bottom = 58
+  const dx = makeDomain(pts.map(q => q.a.plotted), log, ratio ? 1 : null)
+  const dy = makeDomain(pts.map(q => q.b.plotted), log, ratio ? 1 : null)
+  const sx = makeScale(dx, left, W - right, log), sy = makeScale(dy, Ht - bottom, top, log)
+
+  const svg = S("svg", { viewBox: `0 0 ${W} ${Ht}`, role: "img", "aria-label": `${METRICS[state.sy].label} against ${METRICS[state.sx].label}` })
+  for (const t of dx.ticks) {
+    svg.append(S("line", { class: "grid", x1: sx(t), x2: sx(t), y1: top, y2: Ht - bottom }))
+    if (dx.labeled(t)) svg.append(S("text", { class: "faint", x: sx(t), y: Ht - bottom + 18, "text-anchor": "middle" }, fmtAxis(state.sx, t)))
+  }
+  for (const t of dy.ticks) {
+    svg.append(S("line", { class: "grid", x1: left, x2: W - right, y1: sy(t), y2: sy(t) }))
+    if (dy.labeled(t)) svg.append(S("text", { class: "faint", x: left - 8, y: sy(t) + 4, "text-anchor": "end" }, fmtAxis(state.sy, t)))
+  }
+  svg.append(S("line", { class: "axis", x1: left, x2: W - right, y1: Ht - bottom, y2: Ht - bottom }))
+  svg.append(S("line", { class: "axis", x1: left, x2: left, y1: top, y2: Ht - bottom }))
+  if (ratio) {
+    svg.append(S("line", { class: "ref", x1: sx(1), x2: sx(1), y1: top, y2: Ht - bottom }))
+    svg.append(S("line", { class: "ref", x1: left, x2: W - right, y1: sy(1), y2: sy(1) }))
+    svg.append(S("text", { class: "faint", x: left + 8, y: Ht - bottom - 8 }, `↙ lower than ${state.baseline} on both`))
+  }
+  const suffix = ratio ? ` (ratio to ${state.baseline})` : ""
+  svg.append(S("text", { class: "lbl", x: (left + W - right) / 2, y: Ht - 10, "text-anchor": "middle" }, METRICS[state.sx].label + suffix))
+  svg.append(S("text", { class: "lbl", transform: `translate(16,${(top + Ht - bottom) / 2}) rotate(-90)`, "text-anchor": "middle" }, METRICS[state.sy].label + suffix))
+
+  for (const q of pts) {
+    const x = sx(q.a.plotted), y = sy(q.b.plotted), shape = SHAPES[variants.indexOf(q.v) % SHAPES.length]
+    const mark = S("path", { class: "pt", d: shape(x, y, 6.5), style: `fill:${variantColor(q.v)}` })
+    mark.addEventListener("mousemove", e => {
+      mark.classList.add("hot")
+      showTip(e, `${q.p} · ${q.v}`, variantColor(q.v), [
+        [METRICS[state.sx].label, fmtMetric(state.sx, q.a.abs) + (q.a.ratio != null && q.v !== state.baseline ? ` (${fmtRatio(q.a.ratio)})` : "")],
+        [METRICS[state.sy].label, fmtMetric(state.sy, q.b.abs) + (q.b.ratio != null && q.v !== state.baseline ? ` (${fmtRatio(q.b.ratio)})` : "")],
+        ["form", state.form]])
+    })
+    mark.addEventListener("mouseleave", () => { mark.classList.remove("hot"); hideTip() })
+    svg.append(mark)
+    if (state.labels) svg.append(S("text", { class: "faint", x: x + 10, y: y + 4 }, q.p.replace(/^eff\//, "")))
+  }
+  host.replaceChildren(svg)
+}
+const fmtAxis = (m, t) => state.mode === "ratio" ? fmtRatio(t) : fmtMetric(m, t)
+
+// ---------- table ----------
+function renderTable() {
+  const host = $("#chart"), m = state.metric
+  const vs = visVariants()
+  const rowsData = visPrograms().map(p => ({
+    p, cells: Object.fromEntries(vs.map(v => [v, point2(p, v, m)])),
+  }))
+  const key = state.tableSort.key, dir = state.tableSort.dir
+  const val = r => key === "program" ? r.p : (r.cells[key]?.abs ?? -Infinity)
+  rowsData.sort((a, b) => key === "program" ? dir * val(a).localeCompare(val(b)) : dir * (val(a) - val(b)))
+
+  const th = (label, k) => {
+    const arrow = state.tableSort.key === k ? (dir > 0 ? " ▲" : " ▼") : ""
+    const e = H("th", {}, label + arrow)
+    e.addEventListener("click", () => { state.tableSort = { key: k, dir: state.tableSort.key === k ? -dir : (k === "program" ? 1 : -1) }; render() })
+    return e
+  }
+  const table = H("table", {},
+    H("thead", {}, H("tr", {}, th("program", "program"), ...vs.map(v => th(v, v)))),
+    H("tbody", {}, ...rowsData.map(r => H("tr", {}, H("td", {}, r.p),
+      ...vs.map(v => {
+        const c = r.cells[v]
+        if (!c) return H("td", {}, "–")
+        const td = H("td", {}, fmtMetric(m, c.abs))
+        if (c.ratio != null && v !== state.baseline) td.append(H("span", { class: "x" }, fmtRatio(c.ratio)))
+        return td
+      })))))
+  host.replaceChildren(H("div", { class: "tablewrap" }, table))
+}
+// table cells always carry the absolute value and the ratio, whatever the show mode is
+function point2(p, v, m) {
+  const saved = state.mode
+  state.mode = "abs"
+  const abs = point(p, v, m)
+  state.mode = saved
+  if (!abs) return null
+  const b = get(p, state.baseline, state.form)?.[m]
+  return { ...abs, ratio: b ? abs.abs / b : null }
+}
+
+// ---------- summary ----------
+const geomean = xs => Math.exp(xs.reduce((s, x) => s + Math.log(x), 0) / xs.length)
+let summaryTsv = ""
+function summaryMeasures() {
+  const sizes = ["raw", "unmin", "min"].filter(f => forms.includes(f)).flatMap(f => [
+    { label: f.toUpperCase(), forms: [f], field: "bytes" },
+    { label: f.toUpperCase() + ".GZ", forms: [f], field: "gz_bytes" },
+  ])
+  const times = [{ label: "time avg", forms, field: "lat_avg_ns" }, { label: "time med", forms, field: "lat_med_ns" }]
+  return [...sizes, ...times].filter(m => rows.some(r => r[m.field] != null && m.forms.includes(r.form)))
+}
+// per-program ratio x / y of a measure; a measure over several forms is pooled by geometric mean per program
+function programRatios(ms, x, y, ps) {
+  return ps.flatMap(p => {
+    const rs = ms.forms.map(f => {
+      const a = get(p, x, f)?.[ms.field], b = get(p, y, f)?.[ms.field]
+      return a > 0 && b > 0 ? a / b : null
+    }).filter(r => r != null)
+    return rs.length ? [geomean(rs)] : []
+  })
+}
+function renderSummary() {
+  const host = $("#chart"), ps = visPrograms(), vs = visVariants(), ms = summaryMeasures()
+  const pairs = state.pairs === "base"
+    ? vs.filter(v => v !== state.baseline).map(v => [v, state.baseline])
+    : vs.flatMap(x => vs.filter(y => y !== x).map(y => [x, y]))
+  if (!pairs.length || !ps.length || !ms.length) { host.replaceChildren(H("div", { class: "empty" }, "nothing to summarize for this selection")); return }
+  const lo = 1 - state.band / 100, hi = 1 + state.band / 100
+  const cell = (m, [x, y]) => {
+    const rs = programRatios(m, x, y, ps)
+    if (!rs.length) return null
+    return { g: geomean(rs), down: rs.filter(r => r < lo).length, flat: rs.filter(r => r >= lo && r <= hi).length, up: rs.filter(r => r > hi).length, n: rs.length }
+  }
+  const tsv = [["pair", ...ms.map(m => m.label)].join("\t")]
+  const body = pairs.map(pr => {
+    const cs = ms.map(m => cell(m, pr))
+    tsv.push([`${pr[0]}/${pr[1]}`, ...cs.map(c => c ? c.g.toFixed(3) : "")].join("\t"))
+    return H("tr", {}, H("td", {}, `${pr[0]} / ${pr[1]}`), ...cs.map(c => {
+      if (!c) return H("td", {}, "–")
+      const td = H("td", { title: `${c.n} programs: ${c.down} below ${lo.toFixed(2)}×, ${c.flat} within the band, ${c.up} above ${hi.toFixed(2)}×` }, `${c.g.toFixed(2)}×`)
+      td.append(H("span", { class: "x" }, `${c.down}↓ ${c.flat}≈ ${c.up}↑`))
+      return td
+    }))
+  })
+  summaryTsv = tsv.join("\n") + "\n"
+  host.replaceChildren(H("div", { class: "tablewrap" }, H("table", {},
+    H("thead", {}, H("tr", {}, H("th", {}, "x / y"), ...ms.map(m => H("th", { style: "cursor:default" }, m.label)))),
+    H("tbody", {}, ...body))))
+}
+const tableTsv = table => [...table.querySelectorAll("tr")].map(tr => [...tr.children].map(c => c.textContent).join("\t")).join("\n") + "\n"
+async function copyText(text, btn) {
+  const idle = btn.textContent
+  try { await navigator.clipboard.writeText(text) }
+  catch {
+    const t = Object.assign(document.createElement("textarea"), { value: text })
+    document.body.append(t); t.select(); document.execCommand("copy"); t.remove()
+  }
+  btn.textContent = "copied"; setTimeout(() => { btn.textContent = idle }, 1200)
+}
+$("#copy").addEventListener("click", () => copyText(summaryTsv, $("#copy")))
+
+// ---------- presets ----------
+// the tables used in the discussion: ratios x / y per pair, one cell part per loaded dataset (time) or from the first dataset (size)
+function parsePairs() {
+  const pairs = [], bad = []
+  for (const tok of state.presetPairs.split(",").map(t => t.trim()).filter(Boolean)) {
+    const [x, y] = tok.split("/").map(t => t.trim())
+    variants.includes(x) && variants.includes(y) && x !== y ? pairs.push([x, y]) : bad.push(tok)
+  }
+  return { pairs, bad }
+}
+const dsRatio = (ds, p, x, y, field, fs) => {
+  const rs = fs.map(f => {
+    const a = ds.byKey.get(`${p}|${x}|${f}`)?.[field], b = ds.byKey.get(`${p}|${y}|${f}`)?.[field]
+    return a > 0 && b > 0 ? a / b : null
+  }).filter(r => r != null)
+  return rs.length ? geomean(rs) : null
+}
+const geoOver = vals => { const v = vals.filter(x => x != null); return v.length ? geomean(v) : null }
+const fmt2 = x => x == null ? "–" : x.toFixed(2)
+const joinDs = vals => vals.map(fmt2).join(" | ")
+
+function matrix(headers, body, geoRow) {
+  return H("div", { class: "tablewrap" }, H("table", {},
+    H("thead", {}, H("tr", {}, ...headers.map(h => H("th", { style: "cursor:default" }, h)))),
+    H("tbody", {}, ...body.map(r => H("tr", {}, ...r.map(c => H("td", {}, c)))),
+      ...(geoRow ? [H("tr", { class: "geo" }, ...geoRow.map(c => H("td", {}, c)))] : []))))
+}
+
+function renderPresets() {
+  const host = $("#chart"), ps = visPrograms().sort((a, b) => a.localeCompare(b))
+  const { pairs, bad } = parsePairs()
+  const labels = datasets.map(d => d.label).join(" | ")
+  const ds0 = datasets[0], tf = state.presetTime, tfName = tf === "lat_med_ns" ? "median" : "average"
+  const sizeForm = f => forms.includes(f) ? f : forms[0]
+  const rawF = sizeForm("raw"), minF = sizeForm("min")
+  if (!pairs.length || !ps.length) { host.replaceChildren(H("div", { class: "empty" }, "no valid pairs to show; write them as x/y, x/y in the pairs box")); return }
+
+  const timeCell = (p, x, y, field) => joinDs(datasets.map(ds => dsRatio(ds, p, x, y, field, forms)))
+  const timeGeo = (x, y, field) => joinDs(datasets.map(ds => geoOver(ps.map(p => dsRatio(ds, p, x, y, field, forms)))))
+  const sizeGeo = (x, y, field, f) => fmt2(geoOver(ps.map(p => dsRatio(ds0, p, x, y, field, [f]))))
+  const pairName = ([x, y]) => `${x} / ${y}`
+  const short = p => p.replace(/^eff\//, "")
+  const section = (title, table) => {
+    const btn = H("button", {}, "copy TSV")
+    btn.addEventListener("click", () => copyText(tableTsv(table), btn))
+    return H("div", { class: "sec" }, H("div", { class: "hd" }, H("h3", {}, title), btn), table)
+  }
+  const sizeCols = uniq([rawF, "unmin", minF].filter(f => forms.includes(f)))
+    .flatMap(f => [[f.toUpperCase(), "bytes", f], [`${f.toUpperCase()}.GZ`, "gz_bytes", f]])
+  const sizeCell = (p, pr) => `${fmt2(dsRatio(ds0, p, ...pr, "bytes", [rawF]))} / ${fmt2(dsRatio(ds0, p, ...pr, "gz_bytes", [minF]))}`
+
+  const intro = [
+    "Every cell is a ratio x / y: below 1× means x is smaller or faster.",
+    "Time pools the forms of the same code (geometric mean per program)" + (datasets.length > 1 ? `; time cells are ${labels}.` : "."),
+    `Sizes come from ${ds0.label}.`,
+    bad.length ? `Ignored pairs (unknown or equal variants): ${bad.join(", ")}.` : "",
+  ].filter(Boolean).join(" ")
+  host.replaceChildren(
+    H("div", { class: "note" }, intro),
+    section("Pair geomeans: sizes and time", matrix(
+      ["x / y", ...sizeCols.map(c => c[0]), `time avg (${labels})`, `time med (${labels})`],
+      pairs.map(pr => [pairName(pr), ...sizeCols.map(([, field, f]) => sizeGeo(...pr, field, f)), timeGeo(...pr, "lat_avg_ns"), timeGeo(...pr, "lat_med_ns")]), null)),
+    section(`Time per program (${tfName})`, matrix(["program", ...pairs.map(pairName)],
+      ps.map(p => [short(p), ...pairs.map(pr => timeCell(p, ...pr, tf))]),
+      ["geomean", ...pairs.map(pr => timeGeo(...pr, tf))])),
+    section(`Size per program (${rawF.toUpperCase()} / ${minF.toUpperCase()}.GZ)`, matrix(["program", ...pairs.map(pairName)],
+      ps.map(p => [short(p), ...pairs.map(pr => sizeCell(p, pr))]),
+      ["geomean", ...pairs.map(pr => `${sizeGeo(...pr, "bytes", rawF)} / ${sizeGeo(...pr, "gz_bytes", minF)}`)])),
+    ...pairs.map(pr => section(`${pairName(pr)} in detail`, matrix(
+      ["program", `time ${tfName} (${labels})`, minF.toUpperCase(), `${minF.toUpperCase()}.GZ`],
+      ps.map(p => [short(p), timeCell(p, ...pr, tf), fmt2(dsRatio(ds0, p, ...pr, "bytes", [minF])), fmt2(dsRatio(ds0, p, ...pr, "gz_bytes", [minF]))]),
+      ["geomean", timeGeo(...pr, tf), sizeGeo(...pr, "bytes", minF), sizeGeo(...pr, "gz_bytes", minF)]))))
+}
+
+// ---------- figure ----------
+// fixed light colours (ColorBrewer Set2) so the exported figure does not depend on the page theme
+const FIG_COLORS = ["#66C2A5", "#FC8D62", "#8DA0CB", "#E78AC3", "#A6D854", "#FFD92F", "#E5C494", "#B3B3B3"]
+const FIG_COLOR_NAMES = ["green", "orange", "blue", "pink", "lime", "yellow", "tan", "grey"]
+// the groups drawn side by side in every panel; a group is normalized to its `base` variant (= 1)
+function figureGroups() {
+  if (state.figMode === "single") return [{ members: figVariants(), base: state.baseline }]
+  return state.figGroups.split("|").map(g => g.split(",").map(v => v.trim()).filter(v => variants.includes(v)))
+    .filter(g => g.length).map(g => ({ members: g, base: g[0] }))
+}
+const figureHint = () => state.figMode === "groups"
+  ? `Each group is normalized to its first variant (= 1): ${figureGroups().map(g => g.members.map(v => `${v} (${FIG_COLOR_NAMES[variants.indexOf(v) % 8]})`).join(", ")).join(" | ")}. Whiskers are tinybench's ± combined as in ratio mode. "save as PDF" opens the print dialog sized to the figure: pick "Save as PDF" as the destination.`
+  : `Bars are normalized to the baseline (${state.baseline} = 1), whiskers are tinybench's ± combined as in ratio mode. Bar order and colour (reorder with ◀ ▶ on the chips): ${figVariants().map(v => `${v} (${FIG_COLOR_NAMES[variants.indexOf(v) % 8]})`).join(", ")}. "save as PDF" opens the print dialog sized to the figure: pick "Save as PDF" as the destination.`
+
+function figurePanels() {
+  const m = state.metric, groups = figureGroups()
+  return visPrograms().sort((a, b) => a.localeCompare(b)).map(p => {
+    let idx = 0
+    const bars = groups.flatMap((g, gi) => {
+      const baseRow = get(p, g.base, state.form), base = baseRow?.[m]
+      return g.members.flatMap(v => {
+        const slot = idx++, r = get(p, v, state.form), x = r?.[m]
+        if (x == null || !(base > 0)) return []
+        const ra = relErr(m, r), rb = relErr(m, baseRow)
+        const rel = !state.figErr ? null : v === g.base ? ra : ra != null && rb != null ? Math.hypot(ra, rb) : null
+        return [{ v, gi, slot, val: x / base, rel }]
+      })
+    })
+    return { name: p.replace(/^eff\//, ""), bars }
+  }).filter(pn => pn.bars.length)
+}
+
+function buildFigure() {
+  const panels = figurePanels()
+  if (!panels.length) return null
+  const fs = state.figFont, pw = state.figW, ph = state.figH
+  const groups = figureGroups(), nSlots = groups.reduce((n, g) => n + g.members.length, 0), groupGap = 8
+  const cols = Math.max(1, Math.min(Math.floor(state.figCols) || 1, panels.length)), nRows = Math.ceil(panels.length / cols)
+  const yl = state.figYlabels, title = state.figTitle.trim()
+  const padL = yl ? 38 : 6, gapX = yl ? 38 : 12, padT = title ? fs + 16 : 6, titleH = fs + 6, gapY = 12, pad = 6
+  const W = padL + cols * pw + (cols - 1) * gapX + pad, H = padT + nRows * (titleH + ph) + (nRows - 1) * gapY + pad
+  const extent = bars => Math.max(1e-9, ...bars.map(b => b.val * (1 + (b.rel ?? 0)))) * 1.05
+  const fixedTop = Number(state.figYmax) > 0 ? Number(state.figYmax) : null
+  const sharedTop = fixedTop ?? extent(panels.flatMap(pn => pn.bars))
+  const text = (x, y, str, size, anchor, weight) => S("text", { x, y, "text-anchor": anchor,
+    style: `font-family:Helvetica,Arial,sans-serif;font-size:${size}px;fill:#000${weight ? `;font-weight:${weight}` : ""}` }, str)
+
+  const svg = S("svg", { xmlns: NS, width: W, height: H, viewBox: `0 0 ${W} ${H}` })
+  svg.append(S("rect", { x: 0, y: 0, width: W, height: H, fill: "#fff" }))
+  if (title) svg.append(text(padL, fs + 4, title, fs + 2, "start", "bold"))
+  const bw = (pw - 12 - (groups.length - 1) * groupGap) / nSlots
+  panels.forEach((pn, i) => {
+    const px = padL + (i % cols) * (pw + gapX), py = padT + Math.floor(i / cols) * (titleH + ph + gapY) + titleH
+    const top = fixedTop ?? (state.figScale === "panel" ? extent(pn.bars) : sharedTop)
+    const y = v => py + ph - Math.min(Math.max(v / top, 0), 1) * ph
+    svg.append(S("rect", { x: px, y: py, width: pw, height: ph, fill: "#EBEBEB" }))
+    for (const t of linDomain(0, top).ticks.filter(t => t <= top * 1.0001)) {
+      svg.append(S("line", { x1: px, x2: px + pw, y1: y(t), y2: y(t), stroke: "#fff", "stroke-width": 1 }))
+      if (yl) svg.append(text(px - 4, y(t) + fs * 0.35, String(+t.toPrecision(3)), fs - 2, "end"))
+    }
+    svg.append(text(px, py - 4, pn.name, fs, "start"))
+    for (const b of pn.bars) {
+      const x = px + 6 + b.slot * bw + b.gi * groupGap
+      svg.append(S("rect", { x, y: y(b.val), width: bw, height: py + ph - y(b.val), fill: FIG_COLORS[variants.indexOf(b.v) % 8] }))
+      if (b.rel != null) {
+        const cx = x + bw / 2, a = y(b.val * (1 - b.rel)), c = y(b.val * (1 + b.rel)), cap = bw * 0.18
+        svg.append(S("path", { d: `M${cx},${a}V${c}M${cx - cap},${a}H${cx + cap}M${cx - cap},${c}H${cx + cap}`, stroke: "#222", "stroke-width": 1, fill: "none" }))
+      }
+    }
+  })
+  return svg
+}
+function renderFigure() {
+  const svg = buildFigure()
+  if (!svg) { $("#chart").replaceChildren(H("div", { class: "empty" }, "nothing to plot for this selection")); return }
+  svg.style.cssText = `width:${svg.getAttribute("width")}px;max-width:100%;height:auto;overflow:visible`
+  $("#chart").replaceChildren(svg)
+}
+$("#dlSvg").addEventListener("click", () => {
+  const svg = buildFigure()
+  if (!svg) return
+  const blob = new Blob(['<?xml version="1.0" encoding="UTF-8"?>\n' + new XMLSerializer().serializeToString(svg)], { type: "image/svg+xml" })
+  const a = Object.assign(document.createElement("a"), { href: URL.createObjectURL(blob), download: `bench-${state.metric}-${state.form}.svg` })
+  document.body.append(a); a.click(); a.remove(); URL.revokeObjectURL(a.href)
+})
+$("#dlPdf").addEventListener("click", () => {
+  const svg = buildFigure()
+  if (!svg) return
+  $("#pagestyle").textContent = `@page { size: ${svg.getAttribute("width")}px ${svg.getAttribute("height")}px; margin: 0 }`
+  $("#printfig").replaceChildren(svg)
+  document.body.classList.add("printing-figure")
+  window.print()
+})
+addEventListener("afterprint", () => { document.body.classList.remove("printing-figure"); $("#printfig").replaceChildren() })
+
+// ---------- controls ----------
+function fillSelect(sel, items, current) {
+  sel.replaceChildren(...items.map(([v, l]) => Object.assign(H("option", { value: v }, l), { selected: v === current })))
+}
+function chip(label, pressed, color, onClick) {
+  const c = H("span", { class: color ? "chip" : "chip plain", role: "button", tabindex: "0", "aria-pressed": String(pressed) },
+    Object.assign(H("span", { class: "sw" }), color ? { style: `background:${color}` } : {}), label)
+  const act = () => onClick()
+  c.addEventListener("click", act)
+  c.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); act() } })
+  return c
+}
+function buildControls() {
+  const ms = available.map(m => [m, METRICS[m].label])
+  fillSelect($("#metric"), ms, state.metric)
+  fillSelect($("#sx"), ms, state.sx)
+  fillSelect($("#sy"), ms, state.sy)
+  fillSelect($("#form"), forms.map(f => [f, f]), state.form)
+  fillSelect($("#baseline"), variants.map(v => [v, v]), state.baseline)
+  fillSelect($("#dataset"), datasets.map((d, i) => [String(i), d.label]), String(state.ds))
+  $("#datasetLabel").classList.toggle("hidden", datasets.length < 2)
+  $("#presetPairs").value = state.presetPairs
+  $("#figGroups").value = state.figGroups
+  $("#status").textContent = `${datasets.map(d => `${d.label}: ${d.rows.length} rows`).join(" · ")} · ${programs.length} programs · variants ${variants.join(", ")} · forms ${forms.join(", ")}`
+  refreshChips()
+}
+function moveBar(v, d) {
+  const i = state.order.indexOf(v), j = i + d
+  if (j < 0 || j >= state.order.length) return
+  ;[state.order[i], state.order[j]] = [state.order[j], state.order[i]]
+  render()
+}
+function refreshChips() {
+  const inFigure = state.tab === "figure"
+  $("#variants").replaceChildren(...(inFigure ? state.order : variants).map(v => {
+    const c = chip(v + (v === state.baseline ? " (baseline)" : ""), !state.hiddenVariants.has(v), variantColor(v), () => {
+      state.hiddenVariants.has(v) ? state.hiddenVariants.delete(v) : state.hiddenVariants.add(v); render()
+    })
+    if (inFigure) for (const [sym, d, tip] of [["◀", -1, "move left"], ["▶", 1, "move right"]]) {
+      const b = H("span", { class: "mv", role: "button", tabindex: "0", title: tip }, sym)
+      const move = e => { e.stopPropagation(); moveBar(v, d) }
+      b.addEventListener("click", move)
+      b.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); move(e) } })
+      c.append(b)
+    }
+    return c
+  }))
+  const pc = $("#programs")
+  const bulk = (label, fn) => { const b = H("button", { class: "bulk" }, label); b.addEventListener("click", () => { fn(); render() }); return b }
+  pc.replaceChildren(
+    bulk("all", () => state.hiddenPrograms.clear()), bulk("none", () => programs.forEach(p => state.hiddenPrograms.add(p))),
+    ...programs.map(p => chip(p, !state.hiddenPrograms.has(p), null, () => {
+      state.hiddenPrograms.has(p) ? state.hiddenPrograms.delete(p) : state.hiddenPrograms.add(p); render()
+    })))
+  $("#progsum").textContent = `Programs (${visPrograms().length}/${programs.length})`
+}
+
+function bind(sel, key, parse = x => x) {
+  $(sel).addEventListener("change", e => { state[key] = parse(e.target.type === "checkbox" ? e.target.checked : e.target.value); render() })
+}
+bind("#metric", "metric"); bind("#sx", "sx"); bind("#sy", "sy"); bind("#form", "form")
+for (const [id, key] of [["#figCols", "figCols"], ["#figW", "figW"], ["#figH", "figH"], ["#figFont", "figFont"]]) bind(id, key, Number)
+bind("#figScale", "figScale"); bind("#figYmax", "figYmax"); bind("#figYlabels", "figYlabels"); bind("#figErr", "figErr"); bind("#figTitle", "figTitle")
+bind("#presetPairs", "presetPairs"); bind("#presetTime", "presetTime"); bind("#figMode", "figMode"); bind("#figGroups", "figGroups")
+bind("#pairs", "pairs"); bind("#band", "band", Number); bind("#mode", "mode"); bind("#baseline", "baseline"); bind("#log", "log"); bind("#sort", "sort"); bind("#labels", "labels")
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => { state.tab = b.dataset.tab; render() }))
+
+const readFiles = async fs => loadAll(await Promise.all([...fs].map(async f => ({ name: f.name.replace(/\.[^.]+$/, ""), text: await f.text() }))))
+$("#file").addEventListener("change", e => { if (e.target.files.length) readFiles(e.target.files) })
+$("#dataset").addEventListener("change", e => { selectDataset(Number(e.target.value)); render() })
+addEventListener("dragover", e => e.preventDefault())
+addEventListener("drop", e => { e.preventDefault(); if (e.dataTransfer.files.length) readFiles(e.dataTransfer.files) })
+
+const themes = ["auto", "light", "dark"]
+let themeIx = 0
+$("#theme").addEventListener("click", () => {
+  themeIx = (themeIx + 1) % themes.length
+  const t = themes[themeIx]
+  t === "auto" ? delete document.documentElement.dataset.theme : (document.documentElement.dataset.theme = t)
+  $("#theme").textContent = `theme: ${t}`
+})
+
+function render() {
+  hideTip()
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === state.tab)))
+  for (const t of ["presets", "summary", "bars", "scatter", "table", "figure"])
+    document.querySelectorAll(`.only-${t}`).forEach(e => e.classList.toggle("hidden", state.tab !== t && !e.className.split(" ").some(c => c === `only-${state.tab}`)))
+  $("#log").parentElement.classList.toggle("hidden", ["table", "summary", "figure", "presets"].includes(state.tab))
+  $("#form").parentElement.classList.toggle("hidden", state.tab === "summary" || state.tab === "presets")
+  $("#mode").parentElement.classList.toggle("hidden", state.tab === "summary" || state.tab === "figure" || state.tab === "presets")
+  const groupsMode = state.tab === "figure" && state.figMode === "groups"
+  $("#baseline").parentElement.classList.toggle("hidden", state.tab === "presets" || groupsMode || (state.tab === "summary" && state.pairs === "all"))
+  $("#variants").classList.toggle("hidden", state.tab === "presets" || groupsMode)
+  $("#figGroupsLabel").classList.toggle("hidden", !groupsMode)
+  $("#hint").textContent = state.tab === "presets" ? "Pairs are comma-separated x/y, each the ratio of x to y. Load several files at once (pick or drop more than one) to see their time results side by side in one cell. Every table has its own copy button (TSV)." : state.tab === "figure" ? figureHint() : state.tab === "summary"
+    ? "Each cell is the geometric mean over programs of x / y (x = left of the slash, y = the other variant), so below 1× means x is smaller or faster. Counts: programs with ratio below 1−band, within the band, above 1+band. Time pools the three forms (same code) per program before the mean. Sizes are per form: RAW is the compiled module, UNMIN / MIN are terser mangle / compress+mangle, .GZ is gzipped."
+    : state.tab === "table"
+    ? "Click a column header to sort. Small grey numbers are ratios to the baseline variant."
+    : "Whiskers are tinybench's ± as reported (relative margin for the average, absolute for the median); in ratio mode the two relative errors are combined as √(a²+b²). Hover for exact values."
+  refreshChips()
+  if (state.tab === "presets") renderPresets(); else if (state.tab === "figure") renderFigure(); else if (state.tab === "summary") renderSummary(); else if (state.tab === "bars") renderBars(); else if (state.tab === "scatter") renderScatter(); else renderTable()
+}
+
+let pending = 0
+new ResizeObserver(() => { cancelAnimationFrame(pending); pending = requestAnimationFrame(() => { if (rows.length && state.tab !== "table" && state.tab !== "summary" && state.tab !== "figure" && state.tab !== "presets") render() }) }).observe($("#chart"))
+
+$("#status").textContent = "no data loaded"
+$("#chart").replaceChildren(H("div", { class: "empty" }, "Drop a .csv (from bench/parse-results.mjs) or the raw .txt output of bench/tinybench.mjs onto this page, or use the load button above."))
+</script>
+</body>
+</html>
