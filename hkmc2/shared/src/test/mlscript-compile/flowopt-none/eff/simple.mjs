@@ -2,6 +2,7 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
+const rev$accessorSymbol = globalThis.Symbol("rev");
 const for_$accessorSymbol = globalThis.Symbol("for_");
 const from_$accessorSymbol = globalThis.Symbol("from_");
 const update2$accessorSymbol = globalThis.Symbol("update2");
@@ -29,25 +30,9 @@ const qb$accessorSymbol = globalThis.Symbol("qb");
 const zone_area_vol$accessorSymbol = globalThis.Symbol("zone_area_vol");
 const zonal_pressure$accessorSymbol = globalThis.Symbol("zonal_pressure");
 const zonal_energy$accessorSymbol = globalThis.Symbol("zonal_energy");
-const dx$accessorSymbol = globalThis.Symbol("dx");
-const tiny$accessorSymbol = globalThis.Symbol("tiny");
-const compute_next_state$accessorSymbol = globalThis.Symbol("compute_next_state");
+const newton_raphson$accessorSymbol = globalThis.Symbol("newton_raphson");
 const map$tailrec$accessorSymbol = globalThis.Symbol("map$tailrec");
-let go, loop, f, f1, boundary_position, reflect_node, u2, regional_mass, line_integral, velocity, interior_position, reflect_area_vol_density, r_area_vol_den, interior_area, update_asr, lower_del, upper_del, reflect_viscosity_cdelta, do_zones, interior_viscosity, search_down, f2, from_, table_search, iter, revised_pressure, revised_energy, energy_equation, revised_temperature, interior_temperature, interior_cc, interior_sigma, interior_gamma, interior_ab, interior_theta, boundary_p, heat_flow, work_done, from_1, kinetic, mass, reflect_area_vol, interior_position1, u21, iter1, simple1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, lambda25, lambda26, lambda27, lambda28, lambda29, lambda30, lambda31, lambda32, lambda33, lambda34, lambda35, lambda36, lambda37, lambda38, lambda39, lambda40, lambda41, lambda42, lambda43, lambda44, lambda45, lambda46, lambda47, lambda48, lambda49, lambda50, lambda51, lambda52, lambda53, lambda54, lambda55, lambda56, lambda57, lambda58, lambda59, lambda60, lambda61, lambda62, lambda63, lambda64, lambda65, lambda66, lambda67, lambda68, lambda69, lambda70, lambda71, lambda72, lambda73, lambda74, lambda75, lambda76, lambda77, lambda78, lambda79, lambda80, lambda81, lambda82, lambda83, lambda84, f3, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13, lambda$14, lambda$15, lambda$16, lambda$17, lambda$18, lambda$19, lambda$20, lambda$21, lambda$22, lambda$23, lambda$24, lambda$25, lambda$26, lambda$27, lambda$28, lambda$29, lambda$30, lambda$31, lambda$32, interior_position$, lambda$33, lambda$34, lambda$35, lambda$36, lambda$37, lambda$38, lambda$39, lambda$40, lambda$41, lambda$42, lambda$43, lambda$44, lambda$45, lambda$46, lambda$47, lambda$48, lambda$49, lambda$50, lambda$51, lambda$52, lambda$53, f$, lambda$54, lambda$55, lambda$56, lambda$57, lambda$58, lambda$59, lambda$60, lambda$61, lambda$62, lambda$63, lambda$64, lambda$65, lambda$66, lambda$67, lambda$68, lambda$69, lambda$70, lambda$71, lambda$72, lambda$73, work_done$, kinetic$, lambda$74, lambda$75, lambda$76, lambda$77, lambda$78, lambda$79, lambda$80, lambda$81, lambda$82, interior_position$1, u2$worker, revised_temperature$worker, heat_flow$worker;
-iter1 = function iter(simple2, sub2, update2, pow, north, south, east, west, i, state) {
-  loopLabel: while (true) {
-    let scrut, tmp, tmp1;
-    scrut = i == 0;
-    if (scrut === true) {
-      return state
-    }
-    tmp = i - 1;
-    tmp1 = simple2[compute_next_state$accessorSymbol](sub2, update2, pow, north, south, east, west)(state);
-    i = tmp;
-    state = tmp1;
-    continue loopLabel;
-  }
-};
+let reflect_node, line_integral, interior_position, r_area_vol_den, update_asr, lower_del, upper_del, do_zones, from_, table_search, energy_equation, heat_flow, work_done, from_1, kinetic, interior_position1, u2, simple1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, lambda16, lambda17, lambda18, lambda19, lambda20, lambda21, lambda22, lambda23, lambda24, lambda25, lambda26, lambda27, lambda28, lambda29, lambda30, lambda31, lambda32, lambda33, lambda34, lambda35, lambda36, lambda37, lambda38, lambda39, lambda40, lambda41, lambda42, lambda43, lambda44, lambda45, lambda46, lambda47, lambda48, lambda49, lambda50, lambda51, lambda52, lambda53, lambda54, lambda55, lambda56, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13, lambda$14, lambda$15, lambda$16, lambda$17, lambda$18, lambda$19, lambda$20, lambda$21, lambda$22, lambda$23, lambda$24, lambda$25, lambda$26, lambda$27, lambda$28, lambda$29, lambda$30, lambda$31, lambda$32, interior_position$, lambda$33, lambda$34, lambda$35, lambda$36, lambda$37, lambda$38, lambda$39, lambda$40, lambda$41, lambda$42, lambda$43, lambda$44, lambda$45, lambda$46, lambda$47, lambda$48, lambda$49, lambda$50, lambda$51, lambda$52, lambda$53, f$, lambda$54, lambda$55, lambda$56, lambda$57, lambda$58, lambda$59, lambda$60, lambda$61, lambda$62, lambda$63, lambda$64, lambda$65, lambda$66, lambda$67, lambda$68, lambda$69, lambda$70, lambda$71, lambda$72, lambda$73, work_done$, kinetic$, lambda$74, lambda$75, lambda$76, lambda$77, lambda$78, lambda$79, lambda$80, lambda$81, lambda$82, interior_position$1, heat_flow$worker;
 interior_position$1 = function interior_position$(simple2) {
   return (kl) => {
     return interior_position1(simple2, kl)
@@ -55,35 +40,35 @@ interior_position$1 = function interior_position$(simple2) {
 };
 lambda$82 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, x, a2, s2) {
   return (z) => {
-    return lambda72(simple2, sub2, update2, pow, north, south, east, west, x, a2, s2, z)
+    return lambda51(simple2, sub2, update2, pow, north, south, east, west, x, a2, s2, z)
   }
 });
 lambda$81 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2) {
   return (z) => {
     let tmp;
     tmp = simple2[reflect_north$accessorSymbol](sub2, update2, pow, north, south, east, west);
-    return u21(update2, a2, s2, tmp, z)
+    return u2(update2, a2, s2, tmp, z)
   }
 });
 lambda$80 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2) {
   return (z) => {
     let tmp;
     tmp = simple2[reflect_west$accessorSymbol](sub2, update2, pow, north, south, east, west);
-    return u21(update2, a2, s2, tmp, z)
+    return u2(update2, a2, s2, tmp, z)
   }
 });
 lambda$79 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2) {
   return (z) => {
     let tmp;
     tmp = simple2[reflect_east$accessorSymbol](sub2, update2, pow, north, south, east, west);
-    return u21(update2, a2, s2, tmp, z)
+    return u2(update2, a2, s2, tmp, z)
   }
 });
 lambda$78 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2) {
   return (z) => {
     let tmp;
     tmp = simple2[reflect_south$accessorSymbol](sub2, update2, pow, north, south, east, west);
-    return u21(update2, a2, s2, tmp, z)
+    return u2(update2, a2, s2, tmp, z)
   }
 });
 lambda$77 = (undefined, function (update2, rr) {
@@ -121,18 +106,9 @@ interior_position1 = function interior_position(simple2, kl) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-reflect_area_vol = function reflect_area_vol(a2, s2, f4) {
-  let tmp, tmp1;
-  tmp = runtime.safeCall(f4(a2));
-  tmp1 = runtime.safeCall(f4(s2));
-  return globalThis.Object.freeze([
-    tmp,
-    tmp1
-  ])
-};
-u21 = function u2(update2, a2, s2, f4, z) {
+u2 = function u2(update2, a2, s2, f, z) {
   let element1$, element0$, tmp, inlinedVal, tmp1, tmp2;
-  tmp = runtime.safeCall(f4(z));
+  tmp = runtime.safeCall(f(z));
   tmp1 = runtime.safeCall(tmp(a2));
   tmp2 = runtime.safeCall(tmp(s2));
   inlinedVal = globalThis.Object.freeze([
@@ -147,7 +123,7 @@ u21 = function u2(update2, a2, s2, f4, z) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda72 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, x, a2, s2, z) {
+lambda51 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, x, a2, s2, z) {
   let scrut, element1$, element0$;
   scrut = simple2[zone_area_vol$accessorSymbol](sub2, update2, pow, north, south, east, west)(x, z);
   if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
@@ -158,32 +134,6 @@ lambda72 = (undefined, function (simple2, sub2, update2, pow, north, south, east
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda73 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2, z) {
-  let tmp;
-  tmp = simple2[reflect_north$accessorSymbol](sub2, update2, pow, north, south, east, west);
-  return u21(update2, a2, s2, tmp, z)
-});
-lambda74 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2, z) {
-  let tmp;
-  tmp = simple2[reflect_west$accessorSymbol](sub2, update2, pow, north, south, east, west);
-  return u21(update2, a2, s2, tmp, z)
-});
-lambda75 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2, z) {
-  let tmp;
-  tmp = simple2[reflect_east$accessorSymbol](sub2, update2, pow, north, south, east, west);
-  return u21(update2, a2, s2, tmp, z)
-});
-lambda76 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, a2, s2, z) {
-  let tmp;
-  tmp = simple2[reflect_south$accessorSymbol](sub2, update2, pow, north, south, east, west);
-  return u21(update2, a2, s2, tmp, z)
-});
-lambda77 = (undefined, function (update2, rr, z) {
-  return runtime.safeCall(update2(rr, z, 1.4))
-});
-lambda78 = (undefined, function (update2, tt, z) {
-  return runtime.safeCall(update2(tt, z, 0.0001))
-});
 lambda$75 = (undefined, function (sub2, d) {
   return (zone) => {
     return runtime.safeCall(sub2(d, zone))
@@ -191,13 +141,10 @@ lambda$75 = (undefined, function (sub2, d) {
 });
 lambda$74 = (undefined, function (simple2, sub2, theta_hat, theta_p) {
   return (z) => {
-    return lambda71(simple2, sub2, theta_hat, theta_p, z)
+    return lambda50(simple2, sub2, theta_hat, theta_p, z)
   }
 });
-lambda70 = (undefined, function (sub2, d, zone) {
-  return runtime.safeCall(sub2(d, zone))
-});
-lambda71 = (undefined, function (simple2, sub2, theta_hat, theta_p, z) {
+lambda50 = (undefined, function (simple2, sub2, theta_hat, theta_p, z) {
   let tmp, tmp1, tmp2, tmp3, inlinedVal;
   tmp = runtime.safeCall(sub2(theta_hat, z));
   tmp1 = runtime.safeCall(sub2(theta_p, z));
@@ -218,55 +165,49 @@ work_done$ = function work_done$(sub2, p_p, q_p, deltat, z_p, r_p) {
 };
 lambda$73 = (undefined, function (sub2, epsilon_p, rho_p, alpha_p) {
   return (z) => {
-    return lambda61(sub2, epsilon_p, rho_p, alpha_p, z)
+    return lambda41(sub2, epsilon_p, rho_p, alpha_p, z)
   }
 });
 lambda$72 = (undefined, function (simple2, west) {
   return (l) => {
-    return lambda62(simple2, west, l)
+    return lambda42(simple2, west, l)
   }
 });
 lambda$71 = (undefined, function (simple2, west) {
   return (l) => {
-    return lambda63(simple2, west, l)
+    return lambda43(simple2, west, l)
   }
 });
 lambda$70 = (undefined, function (simple2, south) {
   return (k) => {
-    return lambda64(simple2, south, k)
+    return lambda44(simple2, south, k)
   }
 });
 lambda$69 = (undefined, function (simple2, south) {
   return (k) => {
-    return lambda65(simple2, south, k)
+    return lambda45(simple2, south, k)
   }
 });
 lambda$68 = (undefined, function (north, k_north) {
   return (l) => {
-    return lambda66(north, k_north, l)
+    return lambda46(north, k_north, l)
   }
 });
 lambda$67 = (undefined, function (south, k_south) {
   return (l) => {
-    return lambda67(south, k_south, l)
+    return lambda47(south, k_south, l)
   }
 });
 lambda$66 = (undefined, function (east, l_east) {
   return (k) => {
-    return lambda68(east, l_east, k)
+    return lambda48(east, l_east, k)
   }
 });
 lambda$65 = (undefined, function (west, l_west) {
   return (k) => {
-    return lambda69(west, l_west, k)
+    return lambda49(west, l_west, k)
   }
 });
-mass = function mass(sub2, rho_p, alpha_p, zone) {
-  let tmp, tmp1;
-  tmp = runtime.safeCall(sub2(rho_p, zone));
-  tmp1 = runtime.safeCall(sub2(alpha_p, zone));
-  return tmp * tmp1
-};
 kinetic = function kinetic(simple2, sub2, pow, rho_p, alpha_p, u_p, w_p, node) {
   let average_mass, v_square, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, element1$, element0$;
   if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
@@ -335,7 +276,7 @@ kinetic = function kinetic(simple2, sub2, pow, rho_p, alpha_p, u_p, w_p, node) {
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 work_done = function work_done(sub2, p_p, q_p, deltat, z_p, r_p, nodes) {
-  let r1, r2, z1, z2, u1, u22, w1, w2, p1, p2, q1, q2, force, radius, area, element1$, element0$, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
+  let r1, r2, z1, z2, u1, u21, w1, w2, p1, p2, q1, q2, force, radius, area, element1$, element0$, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
   if (runtime.Tuple.isArrayLike(nodes) && nodes.length === 2) {
     element0$ = runtime.Tuple.get(nodes, 0);
     element1$ = runtime.Tuple.get(nodes, 1);
@@ -344,7 +285,7 @@ work_done = function work_done(sub2, p_p, q_p, deltat, z_p, r_p, nodes) {
     z1 = runtime.safeCall(sub2(z_p, element0$));
     z2 = runtime.safeCall(sub2(z_p, element1$));
     u1 = runtime.safeCall(sub2(p_p, element0$));
-    u22 = runtime.safeCall(sub2(p_p, element1$));
+    u21 = runtime.safeCall(sub2(p_p, element1$));
     w1 = runtime.safeCall(sub2(z_p, element0$));
     w2 = runtime.safeCall(sub2(z_p, element1$));
     p1 = runtime.safeCall(sub2(p_p, element0$));
@@ -358,7 +299,7 @@ work_done = function work_done(sub2, p_p, q_p, deltat, z_p, r_p, nodes) {
     tmp3 = r1 + r2;
     radius = 0.5 * tmp3;
     tmp4 = r1 - r2;
-    tmp5 = u1 - u22;
+    tmp5 = u1 - u21;
     tmp6 = tmp4 * tmp5;
     tmp7 = z1 - z2;
     tmp8 = w1 - w2;
@@ -400,7 +341,7 @@ heat_flow$worker = function heat_flow$worker(sub2, theta_p, deltat, gamma_, zone
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda61 = (undefined, function (sub2, epsilon_p, rho_p, alpha_p, z) {
+lambda41 = (undefined, function (sub2, epsilon_p, rho_p, alpha_p, z) {
   let tmp, inlinedVal, tmp1, tmp2;
   tmp = runtime.safeCall(sub2(epsilon_p, z));
   tmp1 = runtime.safeCall(sub2(rho_p, z));
@@ -408,7 +349,7 @@ lambda61 = (undefined, function (sub2, epsilon_p, rho_p, alpha_p, z) {
   inlinedVal = tmp1 * tmp2;
   return tmp * inlinedVal
 });
-lambda62 = (undefined, function (simple2, west, l) {
+lambda42 = (undefined, function (simple2, west, l) {
   let tmp, tmp1, tmp2;
   tmp = globalThis.Object.freeze([
     simple2[kmin$accessorSymbol],
@@ -424,7 +365,7 @@ lambda62 = (undefined, function (simple2, west, l) {
     tmp2
   ])
 });
-lambda63 = (undefined, function (simple2, west, l) {
+lambda43 = (undefined, function (simple2, west, l) {
   let tmp, tmp1, tmp2;
   tmp = globalThis.Object.freeze([
     simple2[kmax$accessorSymbol],
@@ -440,7 +381,7 @@ lambda63 = (undefined, function (simple2, west, l) {
     tmp2
   ])
 });
-lambda64 = (undefined, function (simple2, south, k) {
+lambda44 = (undefined, function (simple2, south, k) {
   let tmp, tmp1, tmp2;
   tmp = globalThis.Object.freeze([
     k,
@@ -456,7 +397,7 @@ lambda64 = (undefined, function (simple2, south, k) {
     tmp2
   ])
 });
-lambda65 = (undefined, function (simple2, south, k) {
+lambda45 = (undefined, function (simple2, south, k) {
   let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = simple2[lmin$accessorSymbol] + 1;
   tmp1 = globalThis.Object.freeze([
@@ -474,7 +415,7 @@ lambda65 = (undefined, function (simple2, south, k) {
     tmp4
   ])
 });
-lambda66 = (undefined, function (north, k_north, l) {
+lambda46 = (undefined, function (north, k_north, l) {
   let tmp, tmp1, tmp2;
   tmp = globalThis.Object.freeze([
     k_north,
@@ -490,7 +431,7 @@ lambda66 = (undefined, function (north, k_north, l) {
     tmp2
   ])
 });
-lambda67 = (undefined, function (south, k_south, l) {
+lambda47 = (undefined, function (south, k_south, l) {
   let tmp, tmp1, tmp2;
   tmp = globalThis.Object.freeze([
     k_south,
@@ -506,7 +447,7 @@ lambda67 = (undefined, function (south, k_south, l) {
     tmp2
   ])
 });
-lambda68 = (undefined, function (east, l_east, k) {
+lambda48 = (undefined, function (east, l_east, k) {
   let tmp, tmp1, tmp2;
   tmp = globalThis.Object.freeze([
     k,
@@ -522,7 +463,7 @@ lambda68 = (undefined, function (east, l_east, k) {
     tmp2
   ])
 });
-lambda69 = (undefined, function (west, l_west, k) {
+lambda49 = (undefined, function (west, l_west, k) {
   let tmp, tmp1, tmp2;
   tmp = globalThis.Object.freeze([
     k,
@@ -540,55 +481,55 @@ lambda69 = (undefined, function (west, l_west, k) {
 });
 lambda$64 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, epsilon_p) {
   return (zone) => {
-    return lambda56(simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, epsilon_p, zone)
+    return lambda36(simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, epsilon_p, zone)
   }
 });
 lambda$63 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p) {
   return (zone) => {
-    return lambda57(simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone)
+    return lambda37(simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone)
   }
 });
 lambda$62 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p) {
   return (zone) => {
-    return lambda58(simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone)
+    return lambda38(simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone)
   }
 });
 lambda$61 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p) {
   return (zone) => {
-    return lambda59(simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone)
+    return lambda39(simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone)
   }
 });
 lambda$60 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p) {
   return (zone) => {
-    return lambda60(simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone)
+    return lambda40(simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone)
   }
 });
-lambda56 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, epsilon_p, zone) {
+lambda36 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, epsilon_p, zone) {
   let tmp, tmp1, tmp2;
   tmp = runtime.safeCall(sub2(rho_p, zone));
   tmp1 = runtime.safeCall(sub2(theta_p, zone));
   tmp2 = simple2[zonal_energy$accessorSymbol](sub2, update2, pow, north, south, east, west)(tmp, tmp1);
   return runtime.safeCall(update2(epsilon_p, zone, tmp2))
 });
-lambda57 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone) {
+lambda37 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone) {
   let inlinedVal, tmp;
   tmp = runtime.safeCall(north(zone));
   inlinedVal = runtime.safeCall(sub2(epsilon_p, tmp));
   return runtime.safeCall(update2(epsilon_p, zone, inlinedVal))
 });
-lambda58 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone) {
+lambda38 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone) {
   let inlinedVal, tmp;
   tmp = runtime.safeCall(east(zone));
   inlinedVal = runtime.safeCall(sub2(epsilon_p, tmp));
   return runtime.safeCall(update2(epsilon_p, zone, inlinedVal))
 });
-lambda59 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone) {
+lambda39 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone) {
   let inlinedVal, tmp;
   tmp = runtime.safeCall(west(zone));
   inlinedVal = runtime.safeCall(sub2(epsilon_p, tmp));
   return runtime.safeCall(update2(epsilon_p, zone, inlinedVal))
 });
-lambda60 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone) {
+lambda40 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, epsilon_p, zone) {
   let inlinedVal, tmp;
   tmp = runtime.safeCall(south(zone));
   inlinedVal = runtime.safeCall(sub2(epsilon_p, tmp));
@@ -596,48 +537,37 @@ lambda60 = (undefined, function (simple2, sub2, update2, pow, north, south, east
 });
 lambda$59 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, p) {
   return (zone) => {
-    return lambda51(simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, p, zone)
+    return lambda31(simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, p, zone)
   }
 });
 lambda$58 = (undefined, function (simple2, sub2, update2, north, p) {
   return (zone) => {
-    return lambda52(simple2, sub2, update2, north, p, zone)
+    return lambda32(simple2, sub2, update2, north, p, zone)
   }
 });
 lambda$57 = (undefined, function (simple2, sub2, update2, west, p) {
   return (zone) => {
-    return lambda53(simple2, sub2, update2, west, p, zone)
+    return lambda33(simple2, sub2, update2, west, p, zone)
   }
 });
 lambda$56 = (undefined, function (simple2, sub2, update2, east, p) {
   return (zone) => {
-    return lambda54(simple2, sub2, update2, east, p, zone)
+    return lambda34(simple2, sub2, update2, east, p, zone)
   }
 });
 lambda$55 = (undefined, function (simple2, sub2, update2, south, p) {
   return (zone) => {
-    return lambda55(simple2, sub2, update2, south, p, zone)
+    return lambda35(simple2, sub2, update2, south, p, zone)
   }
 });
-boundary_p = function boundary_p(simple2, sub2, p, direction, zone) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
-  tmp = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
-  tmp1 = simple2[sub1$accessorSymbol](simple2[pbb$accessorSymbol], tmp);
-  tmp2 = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
-  tmp3 = simple2[sub1$accessorSymbol](simple2[pb$accessorSymbol], tmp2);
-  tmp4 = runtime.safeCall(direction(zone));
-  tmp5 = runtime.safeCall(sub2(p, tmp4));
-  tmp6 = tmp3 * tmp5;
-  return tmp1 + tmp6
-};
-lambda51 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, p, zone) {
+lambda31 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho_p, theta_p, p, zone) {
   let tmp, tmp1, tmp2;
   tmp = runtime.safeCall(sub2(rho_p, zone));
   tmp1 = runtime.safeCall(sub2(theta_p, zone));
   tmp2 = simple2[zonal_pressure$accessorSymbol](sub2, update2, pow, north, south, east, west)(tmp, tmp1);
   return runtime.safeCall(update2(p, zone, tmp2))
 });
-lambda52 = (undefined, function (simple2, sub2, update2, north, p, zone) {
+lambda32 = (undefined, function (simple2, sub2, update2, north, p, zone) {
   let inlinedVal, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   tmp = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
   tmp1 = simple2[sub1$accessorSymbol](simple2[pbb$accessorSymbol], tmp);
@@ -649,7 +579,7 @@ lambda52 = (undefined, function (simple2, sub2, update2, north, p, zone) {
   inlinedVal = tmp1 + tmp6;
   return runtime.safeCall(update2(p, zone, inlinedVal))
 });
-lambda53 = (undefined, function (simple2, sub2, update2, west, p, zone) {
+lambda33 = (undefined, function (simple2, sub2, update2, west, p, zone) {
   let inlinedVal, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   tmp = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
   tmp1 = simple2[sub1$accessorSymbol](simple2[pbb$accessorSymbol], tmp);
@@ -661,7 +591,7 @@ lambda53 = (undefined, function (simple2, sub2, update2, west, p, zone) {
   inlinedVal = tmp1 + tmp6;
   return runtime.safeCall(update2(p, zone, inlinedVal))
 });
-lambda54 = (undefined, function (simple2, sub2, update2, east, p, zone) {
+lambda34 = (undefined, function (simple2, sub2, update2, east, p, zone) {
   let inlinedVal, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   tmp = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
   tmp1 = simple2[sub1$accessorSymbol](simple2[pbb$accessorSymbol], tmp);
@@ -673,7 +603,7 @@ lambda54 = (undefined, function (simple2, sub2, update2, east, p, zone) {
   inlinedVal = tmp1 + tmp6;
   return runtime.safeCall(update2(p, zone, inlinedVal))
 });
-lambda55 = (undefined, function (simple2, sub2, update2, south, p, zone) {
+lambda35 = (undefined, function (simple2, sub2, update2, south, p, zone) {
   let inlinedVal, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6;
   tmp = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
   tmp1 = simple2[sub1$accessorSymbol](simple2[pbb$accessorSymbol], tmp);
@@ -687,19 +617,10 @@ lambda55 = (undefined, function (simple2, sub2, update2, south, p, zone) {
 });
 lambda$54 = (undefined, function (sub2, update2, a, b, succeeding, theta) {
   return (kl) => {
-    return lambda50(sub2, update2, a, b, succeeding, theta, kl)
+    return lambda30(sub2, update2, a, b, succeeding, theta, kl)
   }
 });
-interior_theta = function interior_theta(sub2, a, b, succeeding, theta, zone) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
-  tmp = runtime.safeCall(sub2(a, zone));
-  tmp1 = runtime.safeCall(succeeding(zone));
-  tmp2 = runtime.safeCall(sub2(theta, tmp1));
-  tmp3 = tmp * tmp2;
-  tmp4 = runtime.safeCall(sub2(b, zone));
-  return tmp3 + tmp4
-};
-lambda50 = (undefined, function (sub2, update2, a, b, succeeding, theta, kl) {
+lambda30 = (undefined, function (sub2, update2, a, b, succeeding, theta, kl) {
   let element1$, element0$, tmp, tmp1;
   if (runtime.Tuple.isArrayLike(kl) && kl.length === 2) {
     let inlinedVal, tmp2, tmp3, tmp4, tmp5, tmp6;
@@ -732,11 +653,11 @@ f$ = function f$(sub2, update2, theta, b) {
 };
 lambda$53 = (undefined, function (sub2, update2, theta, sigma, gamma_, preceding, a, b) {
   return (zone) => {
-    return lambda49(sub2, update2, theta, sigma, gamma_, preceding, a, b, zone)
+    return lambda29(sub2, update2, theta, sigma, gamma_, preceding, a, b, zone)
   }
 });
-interior_ab = function interior_ab(sub2, theta, sigma, gamma_, preceding, a, b, zone) {
-  let denom, nume1, nume2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18;
+lambda29 = (undefined, function (sub2, update2, theta, sigma, gamma_, preceding, a, b, zone) {
+  let element1$, element0$, inlinedVal, denom, nume1, nume2, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18;
   tmp = runtime.safeCall(sub2(sigma, zone));
   tmp1 = runtime.safeCall(sub2(gamma_, zone));
   tmp2 = tmp + tmp1;
@@ -759,22 +680,13 @@ interior_ab = function interior_ab(sub2, theta, sigma, gamma_, preceding, a, b, 
   nume2 = tmp13 + tmp16;
   tmp17 = nume1 / denom;
   tmp18 = nume2 / denom;
-  return globalThis.Object.freeze([
+  inlinedVal = globalThis.Object.freeze([
     tmp17,
     tmp18
-  ])
-};
-f3 = function f(sub2, update2, theta, b, zone) {
-  let tmp;
-  tmp = runtime.safeCall(sub2(theta, zone));
-  return runtime.safeCall(update2(b, zone, tmp))
-};
-lambda49 = (undefined, function (sub2, update2, theta, sigma, gamma_, preceding, a, b, zone) {
-  let scrut, element1$, element0$;
-  scrut = interior_ab(sub2, theta, sigma, gamma_, preceding, a, b, zone);
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-    element0$ = runtime.Tuple.get(scrut, 0);
-    element1$ = runtime.Tuple.get(scrut, 1);
+  ]);
+  if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+    element0$ = runtime.Tuple.get(inlinedVal, 0);
+    element1$ = runtime.Tuple.get(inlinedVal, 1);
     runtime.safeCall(update2(a, zone, element0$));
     return runtime.safeCall(update2(b, zone, element1$))
   }
@@ -782,13 +694,11 @@ lambda49 = (undefined, function (sub2, update2, theta, sigma, gamma_, preceding,
 });
 lambda$52 = (undefined, function (simple2, sub2, update2, pow, cc, succeeding, adjacent, r_prime, z_prime, m) {
   return (zone) => {
-    let tmp;
-    tmp = interior_gamma(simple2, sub2, pow, cc, succeeding, adjacent, r_prime, z_prime, zone);
-    return runtime.safeCall(update2(m, zone, tmp))
+    return lambda28(simple2, sub2, update2, pow, cc, succeeding, adjacent, r_prime, z_prime, m, zone)
   }
 });
-interior_gamma = function interior_gamma(simple2, sub2, pow, cc, succeeding, adjacent, r_prime, z_prime, zone) {
-  let r1, z1, r2, z2, cross_section, c1, c2, specific_conductivity, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
+lambda28 = (undefined, function (simple2, sub2, update2, pow, cc, succeeding, adjacent, r_prime, z_prime, m, zone) {
+  let inlinedVal, r1, z1, r2, z2, cross_section, c1, c2, specific_conductivity, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12;
   r1 = runtime.safeCall(sub2(r_prime, zone));
   z1 = runtime.safeCall(sub2(z_prime, zone));
   tmp = runtime.safeCall(adjacent(zone));
@@ -810,27 +720,15 @@ interior_gamma = function interior_gamma(simple2, sub2, pow, cc, succeeding, adj
   tmp11 = tmp10 * c2;
   tmp12 = c1 + c2;
   specific_conductivity = tmp11 / tmp12;
-  return cross_section * specific_conductivity
-};
-lambda48 = (undefined, function (simple2, sub2, update2, pow, cc, succeeding, adjacent, r_prime, z_prime, m, zone) {
-  let tmp;
-  tmp = interior_gamma(simple2, sub2, pow, cc, succeeding, adjacent, r_prime, z_prime, zone);
-  return runtime.safeCall(update2(m, zone, tmp))
+  inlinedVal = cross_section * specific_conductivity;
+  return runtime.safeCall(update2(m, zone, inlinedVal))
 });
 lambda$51 = (undefined, function (simple2, sub2, update2, deltat, rho_prime, alpha_prime, m) {
   return (zone) => {
-    return lambda47(simple2, sub2, update2, deltat, rho_prime, alpha_prime, m, zone)
+    return lambda27(simple2, sub2, update2, deltat, rho_prime, alpha_prime, m, zone)
   }
 });
-interior_sigma = function interior_sigma(simple2, sub2, deltat, rho_prime, alpha_prime, zone) {
-  let tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(sub2(rho_prime, zone));
-  tmp1 = runtime.safeCall(sub2(alpha_prime, zone));
-  tmp2 = tmp * tmp1;
-  tmp3 = tmp2 * simple2[specific_heat$accessorSymbol];
-  return tmp3 / deltat
-};
-lambda47 = (undefined, function (simple2, sub2, update2, deltat, rho_prime, alpha_prime, m, zone) {
+lambda27 = (undefined, function (simple2, sub2, update2, deltat, rho_prime, alpha_prime, m, zone) {
   let inlinedVal, tmp, tmp1, tmp2, tmp3;
   tmp = runtime.safeCall(sub2(rho_prime, zone));
   tmp1 = runtime.safeCall(sub2(alpha_prime, zone));
@@ -841,44 +739,30 @@ lambda47 = (undefined, function (simple2, sub2, update2, deltat, rho_prime, alph
 });
 lambda$50 = (undefined, function (simple2, sub2, update2, pow, alpha_prime, theta_hat, cc) {
   return (zone) => {
-    let tmp;
-    tmp = interior_cc(simple2, sub2, pow, alpha_prime, theta_hat, zone);
-    return runtime.safeCall(update2(cc, zone, tmp))
+    return lambda22(simple2, sub2, update2, pow, alpha_prime, theta_hat, cc, zone)
   }
 });
 lambda$49 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc) {
   return (zone) => {
-    return lambda43(simple2, sub2, update2, pow, north, south, east, west, cc, zone)
+    return lambda23(simple2, sub2, update2, pow, north, south, east, west, cc, zone)
   }
 });
 lambda$48 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc) {
   return (zone) => {
-    return lambda44(simple2, sub2, update2, pow, north, south, east, west, cc, zone)
+    return lambda24(simple2, sub2, update2, pow, north, south, east, west, cc, zone)
   }
 });
 lambda$47 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc) {
   return (zone) => {
-    return lambda45(simple2, sub2, update2, pow, north, south, east, west, cc, zone)
+    return lambda25(simple2, sub2, update2, pow, north, south, east, west, cc, zone)
   }
 });
 lambda$46 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc) {
   return (zone) => {
-    return lambda46(simple2, sub2, update2, pow, north, south, east, west, cc, zone)
+    return lambda26(simple2, sub2, update2, pow, north, south, east, west, cc, zone)
   }
 });
-interior_cc = function interior_cc(simple2, sub2, pow, alpha_prime, theta_hat, zone) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal, inlinedVal1;
-  tmp = runtime.safeCall(sub2(theta_hat, zone));
-  tmp1 = runtime.safeCall(pow(tmp, 2));
-  tmp2 = 0.0001 * tmp1;
-  tmp3 = runtime.safeCall(sub2(theta_hat, zone));
-  inlinedVal = runtime.safeCall(globalThis.Math.abs(tmp3));
-  inlinedVal1 = runtime.safeCall(globalThis.Math.sqrt(inlinedVal));
-  tmp4 = tmp2 * inlinedVal1;
-  tmp5 = runtime.safeCall(sub2(alpha_prime, zone));
-  return tmp4 / tmp5
-};
-lambda42 = (undefined, function (simple2, sub2, update2, pow, alpha_prime, theta_hat, cc, zone) {
+lambda22 = (undefined, function (simple2, sub2, update2, pow, alpha_prime, theta_hat, cc, zone) {
   let inlinedVal, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, inlinedVal1, inlinedVal2;
   tmp = runtime.safeCall(sub2(theta_hat, zone));
   tmp1 = runtime.safeCall(pow(tmp, 2));
@@ -891,25 +775,25 @@ lambda42 = (undefined, function (simple2, sub2, update2, pow, alpha_prime, theta
   inlinedVal = tmp4 / tmp5;
   return runtime.safeCall(update2(cc, zone, inlinedVal))
 });
-lambda43 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc, zone) {
+lambda23 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc, zone) {
   let inlinedVal, tmp;
   tmp = runtime.safeCall(north(zone));
   inlinedVal = runtime.safeCall(sub2(cc, tmp));
   return runtime.safeCall(update2(cc, zone, inlinedVal))
 });
-lambda44 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc, zone) {
+lambda24 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc, zone) {
   let inlinedVal, tmp;
   tmp = runtime.safeCall(east(zone));
   inlinedVal = runtime.safeCall(sub2(cc, tmp));
   return runtime.safeCall(update2(cc, zone, inlinedVal))
 });
-lambda45 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc, zone) {
+lambda25 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc, zone) {
   let inlinedVal, tmp;
   tmp = runtime.safeCall(west(zone));
   inlinedVal = runtime.safeCall(sub2(cc, tmp));
   return runtime.safeCall(update2(cc, zone, inlinedVal))
 });
-lambda46 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc, zone) {
+lambda26 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, cc, zone) {
   let inlinedVal, tmp;
   tmp = runtime.safeCall(south(zone));
   inlinedVal = runtime.safeCall(sub2(cc, tmp));
@@ -922,36 +806,13 @@ energy_equation = function energy_equation(simple2, sub2, update2, pow, north, s
     return epsilon_kl - tmp
   }
 };
-revised_energy = function revised_energy(qkl, tau_kl, epsilon_0, pkl) {
-  let tmp, tmp1;
-  tmp = pkl + qkl;
-  tmp1 = tmp * tau_kl;
-  return epsilon_0 - tmp1
-};
-revised_temperature = function revised_temperature(simple2, sub2, update2, pow, north, south, east, west, rho_kl, epsilon_kl) {
-  return (theta_kl) => {
-    return revised_temperature$worker(simple2, sub2, update2, pow, north, south, east, west, rho_kl, epsilon_kl, theta_kl)
-  }
-};
-revised_temperature$worker = function revised_temperature$worker(simple2, sub2, update2, pow, north, south, east, west, rho_kl, epsilon_kl, theta_kl) {
-  let f4, inlinedVal, tmp;
-  f4 = energy_equation(simple2, sub2, update2, pow, north, south, east, west, rho_kl, epsilon_kl);
-  tmp = simple2[zonal_energy$accessorSymbol](sub2, update2, pow, north, south, east, west)(rho_kl, theta_kl);
-  inlinedVal = epsilon_kl - tmp;
-  return iter(simple2, f4, theta_kl, inlinedVal)
-};
-revised_pressure = function revised_pressure(simple2, sub2, update2, pow, north, south, east, west, rho_kl, theta_kl) {
-  return simple2[zonal_pressure$accessorSymbol](sub2, update2, pow, north, south, east, west)(rho_kl, theta_kl)
-};
 lambda$45 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, p, epsilon, rho, theta, rho_prime, q_prime, m) {
   return (zone) => {
-    let tmp;
-    tmp = interior_temperature(simple2, sub2, update2, pow, north, south, east, west, p, epsilon, rho, theta, rho_prime, q_prime, zone);
-    return runtime.safeCall(update2(m, zone, tmp))
+    return lambda21(simple2, sub2, update2, pow, north, south, east, west, p, epsilon, rho, theta, rho_prime, q_prime, m, zone)
   }
 });
-interior_temperature = function interior_temperature(simple2, sub2, update2, pow, north, south, east, west, p, epsilon, rho, theta, rho_prime, q_prime, zone) {
-  let qkl, rho_kl, rho_prime_kl, tau_kl, epsilon_0, p_0, theta_0, tmp, tmp1, inlinedVal, inlinedVal1, inlinedVal2, f4, tmp2, tmp3, f5, inlinedVal3, tmp4, tmp5, inlinedVal4, inlinedVal5, tmp6, tmp7;
+lambda21 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, p, epsilon, rho, theta, rho_prime, q_prime, m, zone) {
+  let qkl, rho_kl, rho_prime_kl, tau_kl, epsilon_0, p_0, theta_0, tmp, tmp1, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
   qkl = runtime.safeCall(sub2(q_prime, zone));
   rho_kl = runtime.safeCall(sub2(rho, zone));
   rho_prime_kl = runtime.safeCall(sub2(rho_prime, zone));
@@ -961,70 +822,25 @@ interior_temperature = function interior_temperature(simple2, sub2, update2, pow
   epsilon_0 = runtime.safeCall(sub2(epsilon, zone));
   p_0 = runtime.safeCall(sub2(p, zone));
   theta_0 = runtime.safeCall(sub2(theta, zone));
-  tmp4 = p_0 + qkl;
-  tmp5 = tmp4 * tau_kl;
-  inlinedVal = epsilon_0 - tmp5;
-  f5 = energy_equation(simple2, sub2, update2, pow, north, south, east, west, rho_kl, inlinedVal);
-  tmp7 = simple2[zonal_energy$accessorSymbol](sub2, update2, pow, north, south, east, west)(rho_kl, theta_0);
-  inlinedVal4 = inlinedVal - tmp7;
-  inlinedVal3 = iter(simple2, f5, theta_0, inlinedVal4);
-  inlinedVal1 = simple2[zonal_pressure$accessorSymbol](sub2, update2, pow, north, south, east, west)(rho_kl, inlinedVal3);
-  tmp2 = inlinedVal1 + qkl;
+  tmp2 = p_0 + qkl;
   tmp3 = tmp2 * tau_kl;
-  inlinedVal2 = epsilon_0 - tmp3;
-  f4 = energy_equation(simple2, sub2, update2, pow, north, south, east, west, rho_kl, inlinedVal2);
-  tmp6 = simple2[zonal_energy$accessorSymbol](sub2, update2, pow, north, south, east, west)(rho_kl, inlinedVal3);
-  inlinedVal5 = inlinedVal2 - tmp6;
-  return iter(simple2, f4, inlinedVal3, inlinedVal5)
-};
-lambda41 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, p, epsilon, rho, theta, rho_prime, q_prime, m, zone) {
-  let tmp;
-  tmp = interior_temperature(simple2, sub2, update2, pow, north, south, east, west, p, epsilon, rho, theta, rho_prime, q_prime, zone);
-  return runtime.safeCall(update2(m, zone, tmp))
+  inlinedVal = epsilon_0 - tmp3;
+  tmp4 = energy_equation(simple2, sub2, update2, pow, north, south, east, west, rho_kl, inlinedVal);
+  inlinedVal1 = simple2[newton_raphson$accessorSymbol](tmp4, theta_0);
+  inlinedVal2 = simple2[zonal_pressure$accessorSymbol](sub2, update2, pow, north, south, east, west)(rho_kl, inlinedVal1);
+  tmp5 = inlinedVal2 + qkl;
+  tmp6 = tmp5 * tau_kl;
+  inlinedVal3 = epsilon_0 - tmp6;
+  tmp7 = energy_equation(simple2, sub2, update2, pow, north, south, east, west, rho_kl, inlinedVal3);
+  inlinedVal4 = simple2[newton_raphson$accessorSymbol](tmp7, inlinedVal1);
+  return runtime.safeCall(update2(m, zone, inlinedVal4))
 });
-iter = function iter(simple2, f4, x, fx) {
-  loopLabel: while (true) {
-    let scrut, fxdx, denom, scrut1, tmp, tmp1, tmp2, tmp3;
-    scrut = fx > simple2[tiny$accessorSymbol];
-    if (scrut === true) {
-      tmp = x + simple2[dx$accessorSymbol];
-      fxdx = runtime.safeCall(f4(tmp));
-      denom = fxdx - fx;
-      scrut1 = denom < simple2[tiny$accessorSymbol];
-      if (scrut1 === true) {
-        fx = simple2[tiny$accessorSymbol];
-        continue loopLabel
-      }
-      tmp1 = fx * simple2[dx$accessorSymbol];
-      tmp2 = tmp1 / denom;
-      tmp3 = x - tmp2;
-      x = tmp3;
-      fx = fxdx;
-      continue loopLabel;
-    }
-    return x;
-  }
-};
-search_down = function search_down(simple2, table, value, i) {
-  loopLabel: while (true) {
-    let scrut, tmp, tmp1, tmp2;
-    tmp = i - 1;
-    tmp1 = simple2[sub1$accessorSymbol](table, tmp);
-    scrut = value > tmp1;
-    if (scrut === true) {
-      return i
-    }
-    tmp2 = i - 1;
-    i = tmp2;
-    continue loopLabel;
-  }
-};
 lambda$44 = (undefined, function (sub2, pow, rho_value, theta_value, a, i) {
   return (j) => {
-    return lambda39(sub2, pow, rho_value, theta_value, a, i, j)
+    return lambda19(sub2, pow, rho_value, theta_value, a, i, j)
   }
 });
-lambda39 = (undefined, function (sub2, pow, rho_value, theta_value, a, i, j) {
+lambda19 = (undefined, function (sub2, pow, rho_value, theta_value, a, i, j) {
   let tmp, tmp1, tmp2, tmp3, tmp4;
   tmp = globalThis.Object.freeze([
     i,
@@ -1038,7 +854,7 @@ lambda39 = (undefined, function (sub2, pow, rho_value, theta_value, a, i, j) {
 });
 lambda$43 = (undefined, function (simple2, sub2, pow, degree, rho_value, theta_value, a) {
   return (i) => {
-    return lambda40(simple2, sub2, pow, degree, rho_value, theta_value, a, i)
+    return lambda20(simple2, sub2, pow, degree, rho_value, theta_value, a, i)
   }
 });
 table_search = function table_search(simple2, table, value) {
@@ -1059,7 +875,29 @@ table_search = function table_search(simple2, table, value) {
       if (scrut1 === true) {
         return element0$
       }
-      return search_down(simple2, table, value, element1$);
+      {
+        let simple3, table1, value1, i, inlinedVal;
+        simple3 = simple2;
+        table1 = table;
+        value1 = value;
+        i = element1$;
+        inlinedLbl: {
+          loopLabel: while (true) {
+            let scrut2, tmp2, tmp3, tmp4;
+            tmp2 = i - 1;
+            tmp3 = simple3[sub1$accessorSymbol](table1, tmp2);
+            scrut2 = value1 > tmp3;
+            if (scrut2 === true) {
+              inlinedVal = i;
+              break inlinedLbl
+            }
+            tmp4 = i - 1;
+            i = tmp4;
+            continue loopLabel;
+          }
+        }
+        return inlinedVal;
+      }
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -1075,68 +913,54 @@ from_ = function from_(simple2, n, m) {
   tmp1 = from_(simple2, tmp, m);
   return simple2.Cons(n, tmp1);
 };
-f2 = function f(sub2, pow, rho_value, theta_value, a, i, j) {
-  let tmp, tmp1, tmp2, tmp3, tmp4;
-  tmp = globalThis.Object.freeze([
-    i,
-    j
-  ]);
-  tmp1 = runtime.safeCall(sub2(a, tmp));
-  tmp2 = runtime.safeCall(pow(rho_value, i));
-  tmp3 = tmp1 * tmp2;
-  tmp4 = runtime.safeCall(pow(theta_value, j));
-  return tmp3 * tmp4
-};
-lambda40 = (undefined, function (simple2, sub2, pow, degree, rho_value, theta_value, a, i) {
-  let tmp, f4, inlinedVal;
+lambda20 = (undefined, function (simple2, sub2, pow, degree, rho_value, theta_value, a, i) {
+  let tmp, f, inlinedVal;
   tmp = from_(simple2, 0, degree);
-  f4 = lambda$44(sub2, pow, rho_value, theta_value, a, i);
-  inlinedVal = simple2[map$tailrec$accessorSymbol](f4, tmp);
+  f = lambda$44(sub2, pow, rho_value, theta_value, a, i);
+  inlinedVal = simple2[map$tailrec$accessorSymbol](f, tmp);
   if (inlinedVal instanceof simple2.Cons.class) {
     if (inlinedVal instanceof simple2.Nil.class) {
       return 0.0
     } else if (inlinedVal instanceof simple2.Cons.class) {
-      let inlinedVal1;
-      inlinedVal1 = go(simple2, inlinedVal, simple2.Nil);
-      return loop(simple2, lambda, inlinedVal1, 0.0)
+      return lambda54(simple2, lambda, inlinedVal, 0.0)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-upper_del = function upper_del(simple2, sub2, update2, pow, north, south, east, west, zone, f4) {
+upper_del = function upper_del(simple2, sub2, update2, pow, north, south, east, west, zone, f) {
   let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, inlinedVal, inlinedVal1, inlinedVal2, tmp7;
-  tmp = runtime.safeCall(sub2(f4, zone));
+  tmp = runtime.safeCall(sub2(f, zone));
   inlinedVal = runtime.safeCall(north(zone));
-  tmp1 = runtime.safeCall(sub2(f4, inlinedVal));
+  tmp1 = runtime.safeCall(sub2(f, inlinedVal));
   tmp2 = tmp - tmp1;
   inlinedVal1 = runtime.safeCall(west(zone));
-  tmp3 = runtime.safeCall(sub2(f4, inlinedVal1));
+  tmp3 = runtime.safeCall(sub2(f, inlinedVal1));
   tmp7 = runtime.safeCall(west(zone));
   inlinedVal2 = runtime.safeCall(north(tmp7));
-  tmp4 = runtime.safeCall(sub2(f4, inlinedVal2));
+  tmp4 = runtime.safeCall(sub2(f, inlinedVal2));
   tmp5 = tmp3 - tmp4;
   tmp6 = tmp2 + tmp5;
   return 0.5 * tmp6
 };
-lower_del = function lower_del(simple2, sub2, update2, pow, north, south, east, west, zone, f4) {
+lower_del = function lower_del(simple2, sub2, update2, pow, north, south, east, west, zone, f) {
   let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, inlinedVal, inlinedVal1, inlinedVal2, tmp7;
-  tmp = runtime.safeCall(sub2(f4, zone));
+  tmp = runtime.safeCall(sub2(f, zone));
   inlinedVal = runtime.safeCall(west(zone));
-  tmp1 = runtime.safeCall(sub2(f4, inlinedVal));
+  tmp1 = runtime.safeCall(sub2(f, inlinedVal));
   tmp2 = tmp - tmp1;
   inlinedVal1 = runtime.safeCall(north(zone));
-  tmp3 = runtime.safeCall(sub2(f4, inlinedVal1));
+  tmp3 = runtime.safeCall(sub2(f, inlinedVal1));
   tmp7 = runtime.safeCall(west(zone));
   inlinedVal2 = runtime.safeCall(north(tmp7));
-  tmp4 = runtime.safeCall(sub2(f4, inlinedVal2));
+  tmp4 = runtime.safeCall(sub2(f, inlinedVal2));
   tmp5 = tmp3 - tmp4;
   tmp6 = tmp2 + tmp5;
   return 0.5 * tmp6
 };
 lambda$42 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, p, alpha_p, rho_p, u_p, w_p, z_p, r_p, q_p, d) {
   return (zone) => {
-    return lambda34(simple2, sub2, update2, pow, north, south, east, west, p, alpha_p, rho_p, u_p, w_p, z_p, r_p, q_p, d, zone)
+    return lambda18(simple2, sub2, update2, pow, north, south, east, west, p, alpha_p, rho_p, u_p, w_p, z_p, r_p, q_p, d, zone)
   }
 });
 lambda$41 = (undefined, function (simple2, sub2, update2, north, q_p) {
@@ -1159,8 +983,17 @@ lambda$38 = (undefined, function (simple2, sub2, update2, south, q_p) {
     return do_zones(simple2, sub2, update2, q_p, south, zone)
   }
 });
-interior_viscosity = function interior_viscosity(simple2, sub2, update2, pow, north, south, east, west, p, alpha_p, rho_p, u_p, w_p, z_p, r_p, zone) {
-  let xi, eta, upper_disc, lower_disc, scrut, scrut1, speed_of_sound, ubar, viscosity, courant_delta, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, inlinedVal, inlinedVal1;
+do_zones = function do_zones(simple2, sub2, update2, q_p, dir, zone) {
+  let inlinedVal, tmp, tmp1, tmp2, tmp3;
+  tmp = runtime.safeCall(dir(zone));
+  tmp1 = runtime.safeCall(sub2(q_p, tmp));
+  tmp2 = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
+  tmp3 = simple2[sub1$accessorSymbol](simple2[qb$accessorSymbol], tmp2);
+  inlinedVal = tmp1 * tmp3;
+  return runtime.safeCall(update2(q_p, zone, inlinedVal))
+};
+lambda18 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, p, alpha_p, rho_p, u_p, w_p, z_p, r_p, q_p, d, zone) {
+  let element1$, element0$, inlinedVal, xi, eta, upper_disc, lower_disc, scrut, scrut1, speed_of_sound, ubar, viscosity, courant_delta, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, inlinedVal1, inlinedVal2;
   tmp = upper_del(simple2, sub2, update2, pow, north, south, east, west, zone, r_p);
   tmp1 = runtime.safeCall(pow(tmp, 2));
   tmp2 = upper_del(simple2, sub2, update2, pow, north, south, east, west, zone, z_p);
@@ -1207,8 +1040,8 @@ interior_viscosity = function interior_viscosity(simple2, sub2, update2, pow, no
   tmp27 = runtime.safeCall(sub2(rho_p, zone));
   tmp28 = 1.5 * ubar;
   tmp29 = 0.5 * speed_of_sound;
-  inlinedVal = runtime.safeCall(globalThis.Math.sqrt(ubar));
-  tmp30 = tmp29 * inlinedVal;
+  inlinedVal1 = runtime.safeCall(globalThis.Math.sqrt(ubar));
+  tmp30 = tmp29 * inlinedVal1;
   tmp31 = tmp28 + tmp30;
   viscosity = tmp27 * tmp31;
   tmp32 = upper_del(simple2, sub2, update2, pow, north, south, east, west, zone, r_p);
@@ -1216,85 +1049,26 @@ interior_viscosity = function interior_viscosity(simple2, sub2, update2, pow, no
   tmp34 = lower_del(simple2, sub2, update2, pow, north, south, east, west, zone, r_p);
   tmp35 = runtime.safeCall(pow(tmp34, 2));
   tmp36 = tmp33 + tmp35;
-  inlinedVal1 = runtime.safeCall(globalThis.Math.sqrt(tmp36));
+  inlinedVal2 = runtime.safeCall(globalThis.Math.sqrt(tmp36));
   tmp37 = runtime.safeCall(sub2(alpha_p, zone));
   tmp38 = 0.5 * tmp37;
-  tmp39 = speed_of_sound * inlinedVal1;
+  tmp39 = speed_of_sound * inlinedVal2;
   courant_delta = tmp38 / tmp39;
-  return globalThis.Object.freeze([
+  inlinedVal = globalThis.Object.freeze([
     viscosity,
     courant_delta
-  ])
-};
-reflect_viscosity_cdelta = function reflect_viscosity_cdelta(simple2, sub2, q_p, direction, zone) {
-  let tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(direction(zone));
-  tmp1 = runtime.safeCall(sub2(q_p, tmp));
-  tmp2 = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
-  tmp3 = simple2[sub1$accessorSymbol](simple2[qb$accessorSymbol], tmp2);
-  return tmp1 * tmp3
-};
-do_zones = function do_zones(simple2, sub2, update2, q_p, dir, zone) {
-  let inlinedVal, tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(dir(zone));
-  tmp1 = runtime.safeCall(sub2(q_p, tmp));
-  tmp2 = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
-  tmp3 = simple2[sub1$accessorSymbol](simple2[qb$accessorSymbol], tmp2);
-  inlinedVal = tmp1 * tmp3;
-  return runtime.safeCall(update2(q_p, zone, inlinedVal))
-};
-lambda34 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, p, alpha_p, rho_p, u_p, w_p, z_p, r_p, q_p, d, zone) {
-  let scrut, element1$, element0$;
-  scrut = interior_viscosity(simple2, sub2, update2, pow, north, south, east, west, p, alpha_p, rho_p, u_p, w_p, z_p, r_p, zone);
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-    element0$ = runtime.Tuple.get(scrut, 0);
-    element1$ = runtime.Tuple.get(scrut, 1);
+  ]);
+  if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+    element0$ = runtime.Tuple.get(inlinedVal, 0);
+    element1$ = runtime.Tuple.get(inlinedVal, 1);
     runtime.safeCall(update2(q_p, zone, element0$));
     return runtime.safeCall(update2(d, zone, element1$))
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda35 = (undefined, function (simple2, sub2, update2, north, q_p, zone) {
-  let inlinedVal, tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(north(zone));
-  tmp1 = runtime.safeCall(sub2(q_p, tmp));
-  tmp2 = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
-  tmp3 = simple2[sub1$accessorSymbol](simple2[qb$accessorSymbol], tmp2);
-  inlinedVal = tmp1 * tmp3;
-  return runtime.safeCall(update2(q_p, zone, inlinedVal))
-});
-lambda36 = (undefined, function (simple2, sub2, update2, west, q_p, zone) {
-  let inlinedVal, tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(west(zone));
-  tmp1 = runtime.safeCall(sub2(q_p, tmp));
-  tmp2 = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
-  tmp3 = simple2[sub1$accessorSymbol](simple2[qb$accessorSymbol], tmp2);
-  inlinedVal = tmp1 * tmp3;
-  return runtime.safeCall(update2(q_p, zone, inlinedVal))
-});
-lambda37 = (undefined, function (simple2, sub2, update2, east, q_p, zone) {
-  let inlinedVal, tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(east(zone));
-  tmp1 = runtime.safeCall(sub2(q_p, tmp));
-  tmp2 = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
-  tmp3 = simple2[sub1$accessorSymbol](simple2[qb$accessorSymbol], tmp2);
-  inlinedVal = tmp1 * tmp3;
-  return runtime.safeCall(update2(q_p, zone, inlinedVal))
-});
-lambda38 = (undefined, function (simple2, sub2, update2, south, q_p, zone) {
-  let inlinedVal, tmp, tmp1, tmp2, tmp3;
-  tmp = runtime.safeCall(south(zone));
-  tmp1 = runtime.safeCall(sub2(q_p, tmp));
-  tmp2 = runtime.safeCall(sub2(simple2[nbc$accessorSymbol], zone));
-  tmp3 = simple2[sub1$accessorSymbol](simple2[qb$accessorSymbol], tmp2);
-  inlinedVal = tmp1 * tmp3;
-  return runtime.safeCall(update2(q_p, zone, inlinedVal))
-});
 lambda$37 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho, s, x_p, alpha_p, s_p, rho_p) {
   return (zone) => {
-    let tmp;
-    tmp = interior_area(simple2, sub2, update2, pow, north, south, east, west, rho, s, x_p, zone);
-    return update_asr(update2, alpha_p, s_p, rho_p, zone, tmp)
+    return lambda17(simple2, sub2, update2, pow, north, south, east, west, rho, s, x_p, alpha_p, s_p, rho_p, zone)
   }
 });
 lambda$36 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, alpha_p, s_p, rho_p) {
@@ -1325,35 +1099,6 @@ lambda$33 = (undefined, function (simple2, sub2, update2, pow, north, south, eas
     return r_area_vol_den(update2, alpha_p, s_p, rho_p, tmp, zone)
   }
 });
-interior_area = function interior_area(simple2, sub2, update2, pow, north, south, east, west, rho, s, x_p, zone) {
-  let scrut, density, element1$, element0$, tmp, tmp1, tmp2;
-  scrut = simple2[zone_area_vol$accessorSymbol](sub2, update2, pow, north, south, east, west)(x_p, zone);
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-    element0$ = runtime.Tuple.get(scrut, 0);
-    element1$ = runtime.Tuple.get(scrut, 1);
-    tmp = runtime.safeCall(sub2(rho, zone));
-    tmp1 = runtime.safeCall(sub2(s, zone));
-    tmp2 = tmp * tmp1;
-    density = tmp2 / element1$;
-    return globalThis.Object.freeze([
-      element0$,
-      element1$,
-      density
-    ])
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-reflect_area_vol_density = function reflect_area_vol_density(alpha_p, s_p, rho_p, reflect_function) {
-  let tmp, tmp1, tmp2;
-  tmp = runtime.safeCall(reflect_function(alpha_p));
-  tmp1 = runtime.safeCall(reflect_function(s_p));
-  tmp2 = runtime.safeCall(reflect_function(rho_p));
-  return globalThis.Object.freeze([
-    tmp,
-    tmp1,
-    tmp2
-  ])
-};
 update_asr = function update_asr(update2, alpha_p, s_p, rho_p, zone, asr) {
   let element2$, element1$, element0$;
   if (runtime.Tuple.isArrayLike(asr) && asr.length === 3) {
@@ -1379,70 +1124,24 @@ r_area_vol_den = function r_area_vol_den(update2, alpha_p, s_p, rho_p, reflect_d
   ]);
   return update_asr(update2, alpha_p, s_p, rho_p, zone, inlinedVal)
 };
-lambda29 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho, s, x_p, alpha_p, s_p, rho_p, zone) {
-  let tmp;
-  tmp = interior_area(simple2, sub2, update2, pow, north, south, east, west, rho, s, x_p, zone);
-  return update_asr(update2, alpha_p, s_p, rho_p, zone, tmp)
-});
-lambda30 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, alpha_p, s_p, rho_p, zone) {
-  let inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, tmp, tmp1, tmp2;
-  tmp2 = runtime.safeCall(north(zone));
-  inlinedVal1 = runtime.safeCall(sub2(alpha_p, tmp2));
-  tmp1 = runtime.safeCall(north(zone));
-  inlinedVal2 = runtime.safeCall(sub2(s_p, tmp1));
-  tmp = runtime.safeCall(north(zone));
-  inlinedVal3 = runtime.safeCall(sub2(rho_p, tmp));
-  inlinedVal = globalThis.Object.freeze([
-    inlinedVal1,
-    inlinedVal2,
-    inlinedVal3
-  ]);
-  return update_asr(update2, alpha_p, s_p, rho_p, zone, inlinedVal)
-});
-lambda31 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, alpha_p, s_p, rho_p, zone) {
-  let inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, tmp, tmp1, tmp2;
-  tmp2 = runtime.safeCall(west(zone));
-  inlinedVal1 = runtime.safeCall(sub2(alpha_p, tmp2));
-  tmp1 = runtime.safeCall(west(zone));
-  inlinedVal2 = runtime.safeCall(sub2(s_p, tmp1));
-  tmp = runtime.safeCall(west(zone));
-  inlinedVal3 = runtime.safeCall(sub2(rho_p, tmp));
-  inlinedVal = globalThis.Object.freeze([
-    inlinedVal1,
-    inlinedVal2,
-    inlinedVal3
-  ]);
-  return update_asr(update2, alpha_p, s_p, rho_p, zone, inlinedVal)
-});
-lambda32 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, alpha_p, s_p, rho_p, zone) {
-  let inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, tmp, tmp1, tmp2;
-  tmp2 = runtime.safeCall(east(zone));
-  inlinedVal1 = runtime.safeCall(sub2(alpha_p, tmp2));
-  tmp1 = runtime.safeCall(east(zone));
-  inlinedVal2 = runtime.safeCall(sub2(s_p, tmp1));
-  tmp = runtime.safeCall(east(zone));
-  inlinedVal3 = runtime.safeCall(sub2(rho_p, tmp));
-  inlinedVal = globalThis.Object.freeze([
-    inlinedVal1,
-    inlinedVal2,
-    inlinedVal3
-  ]);
-  return update_asr(update2, alpha_p, s_p, rho_p, zone, inlinedVal)
-});
-lambda33 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, alpha_p, s_p, rho_p, zone) {
-  let inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, tmp, tmp1, tmp2;
-  tmp2 = runtime.safeCall(south(zone));
-  inlinedVal1 = runtime.safeCall(sub2(alpha_p, tmp2));
-  tmp1 = runtime.safeCall(south(zone));
-  inlinedVal2 = runtime.safeCall(sub2(s_p, tmp1));
-  tmp = runtime.safeCall(south(zone));
-  inlinedVal3 = runtime.safeCall(sub2(rho_p, tmp));
-  inlinedVal = globalThis.Object.freeze([
-    inlinedVal1,
-    inlinedVal2,
-    inlinedVal3
-  ]);
-  return update_asr(update2, alpha_p, s_p, rho_p, zone, inlinedVal)
+lambda17 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, rho, s, x_p, alpha_p, s_p, rho_p, zone) {
+  let inlinedVal, scrut, density, element1$, element0$, tmp, tmp1, tmp2;
+  scrut = simple2[zone_area_vol$accessorSymbol](sub2, update2, pow, north, south, east, west)(x_p, zone);
+  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
+    element0$ = runtime.Tuple.get(scrut, 0);
+    element1$ = runtime.Tuple.get(scrut, 1);
+    tmp = runtime.safeCall(sub2(rho, zone));
+    tmp1 = runtime.safeCall(sub2(s, zone));
+    tmp2 = tmp * tmp1;
+    density = tmp2 / element1$;
+    inlinedVal = globalThis.Object.freeze([
+      element0$,
+      element1$,
+      density
+    ]);
+    return update_asr(update2, alpha_p, s_p, rho_p, zone, inlinedVal)
+  }
+  throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
 interior_position$ = function interior_position$(sub2, delta_t, r, z, u_p, w_p) {
   return (node) => {
@@ -1466,29 +1165,144 @@ interior_position = function interior_position(sub2, delta_t, r, z, u_p, w_p, no
 };
 lambda$32 = (undefined, function (simple2, sub2, update2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, uu, ww, k) {
   return (l) => {
-    return lambda84(simple2, sub2, update2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, uu, ww, k, l)
+    return lambda56(simple2, sub2, update2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, uu, ww, k, l)
   }
 });
-lambda84 = (undefined, function (simple2, sub2, update2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, uu, ww, k, l) {
-  let scrut, element1$, element0$, tmp, tmp1, tmp2;
+lambda56 = (undefined, function (simple2, sub2, update2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, uu, ww, k, l) {
+  let element1$, element0$, tmp, tmp1, tmp2, inlinedVal, n1, n2, u_dot, w_dot, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, inlinedVal1, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, inlinedVal2, inlinedVal3, element1$1, element0$1, element1$2, element0$2;
   tmp = globalThis.Object.freeze([
     k,
     l
   ]);
-  scrut = velocity(simple2, sub2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, tmp);
-  if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-    element0$ = runtime.Tuple.get(scrut, 0);
-    element1$ = runtime.Tuple.get(scrut, 1);
-    tmp1 = globalThis.Object.freeze([
-      k,
-      l
+  if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
+    element0$1 = runtime.Tuple.get(tmp, 0);
+    element1$1 = runtime.Tuple.get(tmp, 1);
+    inlinedVal2 = globalThis.Object.freeze([
+      element0$1,
+      element1$1
     ]);
-    runtime.safeCall(update2(uu, tmp1, element0$));
-    tmp2 = globalThis.Object.freeze([
-      k,
-      l
-    ]);
-    return runtime.safeCall(update2(ww, tmp2, element1$))
+    tmp14 = runtime.safeCall(sub2(rho, inlinedVal2));
+    if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
+      let inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, element1$3, element0$3, tmp29, element1$4, element0$4, tmp30, element1$5, element0$5, tmp31, tmp32, element1$6, element0$6, tmp33, tmp34, element1$7, element0$7, tmp35, element1$8, element0$8, tmp36;
+      element0$2 = runtime.Tuple.get(tmp, 0);
+      element1$2 = runtime.Tuple.get(tmp, 1);
+      inlinedVal3 = globalThis.Object.freeze([
+        element0$2,
+        element1$2
+      ]);
+      tmp15 = runtime.safeCall(sub2(alpha, inlinedVal3));
+      tmp16 = tmp14 * tmp15;
+      if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
+        element0$8 = runtime.Tuple.get(tmp, 0);
+        element1$8 = runtime.Tuple.get(tmp, 1);
+        tmp36 = element0$8 + 1;
+        inlinedVal4 = globalThis.Object.freeze([
+          tmp36,
+          element1$8
+        ]);
+        tmp17 = runtime.safeCall(sub2(rho, inlinedVal4));
+        if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
+          element0$7 = runtime.Tuple.get(tmp, 0);
+          element1$7 = runtime.Tuple.get(tmp, 1);
+          tmp35 = element0$7 + 1;
+          inlinedVal5 = globalThis.Object.freeze([
+            tmp35,
+            element1$7
+          ]);
+          tmp18 = runtime.safeCall(sub2(alpha, inlinedVal5));
+          tmp19 = tmp17 * tmp18;
+          if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
+            element0$6 = runtime.Tuple.get(tmp, 0);
+            element1$6 = runtime.Tuple.get(tmp, 1);
+            tmp33 = element0$6 + 1;
+            tmp34 = element1$6 + 1;
+            inlinedVal6 = globalThis.Object.freeze([
+              tmp33,
+              tmp34
+            ]);
+            tmp20 = runtime.safeCall(sub2(rho, inlinedVal6));
+            if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
+              element0$5 = runtime.Tuple.get(tmp, 0);
+              element1$5 = runtime.Tuple.get(tmp, 1);
+              tmp31 = element0$5 + 1;
+              tmp32 = element1$5 + 1;
+              inlinedVal7 = globalThis.Object.freeze([
+                tmp31,
+                tmp32
+              ]);
+              tmp21 = runtime.safeCall(sub2(alpha, inlinedVal7));
+              tmp22 = tmp20 * tmp21;
+              tmp23 = tmp19 + tmp22;
+              if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
+                element0$4 = runtime.Tuple.get(tmp, 0);
+                element1$4 = runtime.Tuple.get(tmp, 1);
+                tmp30 = element1$4 + 1;
+                inlinedVal8 = globalThis.Object.freeze([
+                  element0$4,
+                  tmp30
+                ]);
+                tmp24 = runtime.safeCall(sub2(rho, inlinedVal8));
+                if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
+                  element0$3 = runtime.Tuple.get(tmp, 0);
+                  element1$3 = runtime.Tuple.get(tmp, 1);
+                  tmp29 = element1$3 + 1;
+                  inlinedVal9 = globalThis.Object.freeze([
+                    element0$3,
+                    tmp29
+                  ]);
+                  tmp25 = runtime.safeCall(sub2(alpha, inlinedVal9));
+                  tmp26 = tmp24 * tmp25;
+                  tmp27 = tmp23 + tmp26;
+                  tmp28 = tmp16 + tmp27;
+                  inlinedVal1 = 0.5 * tmp28;
+                  tmp3 = line_integral(simple2, sub2, north, south, east, west, p, z, tmp);
+                  tmp4 = - tmp3;
+                  tmp5 = line_integral(simple2, sub2, north, south, east, west, q, z, tmp);
+                  n1 = tmp4 - tmp5;
+                  tmp6 = line_integral(simple2, sub2, north, south, east, west, p, r, tmp);
+                  tmp7 = line_integral(simple2, sub2, north, south, east, west, q, r, tmp);
+                  n2 = tmp6 + tmp7;
+                  u_dot = n1 / inlinedVal1;
+                  w_dot = n2 / inlinedVal1;
+                  tmp8 = runtime.safeCall(sub2(u, tmp));
+                  tmp9 = delta_t * u_dot;
+                  tmp10 = tmp8 + tmp9;
+                  tmp11 = runtime.safeCall(sub2(w, tmp));
+                  tmp12 = delta_t * w_dot;
+                  tmp13 = tmp11 + tmp12;
+                  inlinedVal = globalThis.Object.freeze([
+                    tmp10,
+                    tmp13
+                  ]);
+                  if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+                    element0$ = runtime.Tuple.get(inlinedVal, 0);
+                    element1$ = runtime.Tuple.get(inlinedVal, 1);
+                    tmp1 = globalThis.Object.freeze([
+                      k,
+                      l
+                    ]);
+                    runtime.safeCall(update2(uu, tmp1, element0$));
+                    tmp2 = globalThis.Object.freeze([
+                      k,
+                      l
+                    ]);
+                    return runtime.safeCall(update2(ww, tmp2, element1$))
+                  }
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    }
+    throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
@@ -1572,138 +1386,12 @@ line_integral = function line_integral(simple2, sub2, north, south, east, west, 
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-regional_mass = function regional_mass(simple2, sub2, alpha, rho, node) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, inlinedVal, inlinedVal1, element1$, element0$, element1$1, element0$1;
-  if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
-    element0$1 = runtime.Tuple.get(node, 0);
-    element1$1 = runtime.Tuple.get(node, 1);
-    inlinedVal = globalThis.Object.freeze([
-      element0$1,
-      element1$1
-    ]);
-    tmp = runtime.safeCall(sub2(rho, inlinedVal));
-    if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
-      let inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, element1$2, element0$2, tmp15, element1$3, element0$3, tmp16, element1$4, element0$4, tmp17, tmp18, element1$5, element0$5, tmp19, tmp20, element1$6, element0$6, tmp21, element1$7, element0$7, tmp22;
-      element0$ = runtime.Tuple.get(node, 0);
-      element1$ = runtime.Tuple.get(node, 1);
-      inlinedVal1 = globalThis.Object.freeze([
-        element0$,
-        element1$
-      ]);
-      tmp1 = runtime.safeCall(sub2(alpha, inlinedVal1));
-      tmp2 = tmp * tmp1;
-      if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
-        element0$7 = runtime.Tuple.get(node, 0);
-        element1$7 = runtime.Tuple.get(node, 1);
-        tmp22 = element0$7 + 1;
-        inlinedVal2 = globalThis.Object.freeze([
-          tmp22,
-          element1$7
-        ]);
-        tmp3 = runtime.safeCall(sub2(rho, inlinedVal2));
-        if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
-          element0$6 = runtime.Tuple.get(node, 0);
-          element1$6 = runtime.Tuple.get(node, 1);
-          tmp21 = element0$6 + 1;
-          inlinedVal3 = globalThis.Object.freeze([
-            tmp21,
-            element1$6
-          ]);
-          tmp4 = runtime.safeCall(sub2(alpha, inlinedVal3));
-          tmp5 = tmp3 * tmp4;
-          if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
-            element0$5 = runtime.Tuple.get(node, 0);
-            element1$5 = runtime.Tuple.get(node, 1);
-            tmp19 = element0$5 + 1;
-            tmp20 = element1$5 + 1;
-            inlinedVal4 = globalThis.Object.freeze([
-              tmp19,
-              tmp20
-            ]);
-            tmp6 = runtime.safeCall(sub2(rho, inlinedVal4));
-            if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
-              element0$4 = runtime.Tuple.get(node, 0);
-              element1$4 = runtime.Tuple.get(node, 1);
-              tmp17 = element0$4 + 1;
-              tmp18 = element1$4 + 1;
-              inlinedVal5 = globalThis.Object.freeze([
-                tmp17,
-                tmp18
-              ]);
-              tmp7 = runtime.safeCall(sub2(alpha, inlinedVal5));
-              tmp8 = tmp6 * tmp7;
-              tmp9 = tmp5 + tmp8;
-              if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
-                element0$3 = runtime.Tuple.get(node, 0);
-                element1$3 = runtime.Tuple.get(node, 1);
-                tmp16 = element1$3 + 1;
-                inlinedVal6 = globalThis.Object.freeze([
-                  element0$3,
-                  tmp16
-                ]);
-                tmp10 = runtime.safeCall(sub2(rho, inlinedVal6));
-                if (runtime.Tuple.isArrayLike(node) && node.length === 2) {
-                  element0$2 = runtime.Tuple.get(node, 0);
-                  element1$2 = runtime.Tuple.get(node, 1);
-                  tmp15 = element1$2 + 1;
-                  inlinedVal7 = globalThis.Object.freeze([
-                    element0$2,
-                    tmp15
-                  ]);
-                  tmp11 = runtime.safeCall(sub2(alpha, inlinedVal7));
-                  tmp12 = tmp10 * tmp11;
-                  tmp13 = tmp9 + tmp12;
-                  tmp14 = tmp2 + tmp13;
-                  return 0.5 * tmp14
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-velocity = function velocity(simple2, sub2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, node) {
-  let d, n1, n2, u_dot, w_dot, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
-  d = regional_mass(simple2, sub2, alpha, rho, node);
-  tmp = line_integral(simple2, sub2, north, south, east, west, p, z, node);
-  tmp1 = - tmp;
-  tmp2 = line_integral(simple2, sub2, north, south, east, west, q, z, node);
-  n1 = tmp1 - tmp2;
-  tmp3 = line_integral(simple2, sub2, north, south, east, west, p, r, node);
-  tmp4 = line_integral(simple2, sub2, north, south, east, west, q, r, node);
-  n2 = tmp3 + tmp4;
-  u_dot = n1 / d;
-  w_dot = n2 / d;
-  tmp5 = runtime.safeCall(sub2(u, node));
-  tmp6 = delta_t * u_dot;
-  tmp7 = tmp5 + tmp6;
-  tmp8 = runtime.safeCall(sub2(w, node));
-  tmp9 = delta_t * w_dot;
-  tmp10 = tmp8 + tmp9;
-  return globalThis.Object.freeze([
-    tmp7,
-    tmp10
-  ])
-};
-lambda28 = (undefined, function (simple2, sub2, update2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, uu, ww, k) {
-  return lambda$32(simple2, sub2, update2, north, south, east, west, p, q, alpha, rho, delta_t, u, w, r, z, uu, ww, k)
-});
 lambda$30 = (undefined, function (update2, interior_function, r_p, z_p, k) {
   return (l) => {
-    return lambda83(update2, interior_function, r_p, z_p, k, l)
+    return lambda55(update2, interior_function, r_p, z_p, k, l)
   }
 });
-lambda83 = (undefined, function (update2, interior_function, r_p, z_p, k, l) {
+lambda55 = (undefined, function (update2, interior_function, r_p, z_p, k, l) {
   let tmp, tmp1, tmp2, element1$, element0$;
   tmp = globalThis.Object.freeze([
     k,
@@ -1729,30 +1417,42 @@ lambda$29 = (undefined, function (update2, interior_function, r_p, z_p) {
 });
 lambda$28 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p) {
   return (n) => {
-    return lambda24(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n)
+    return lambda13(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n)
   }
 });
 lambda$27 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p) {
   return (n) => {
-    return lambda25(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n)
+    return lambda14(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n)
   }
 });
 lambda$26 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p) {
   return (n) => {
-    return lambda26(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n)
+    return lambda15(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n)
   }
 });
 lambda$25 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p) {
   return (n) => {
-    return lambda27(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n)
+    return lambda16(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n)
   }
 });
-boundary_position = function boundary_position(rx, zx, ry, zy, ra, za) {
-  let rax, zax, ryx, zyx, omega, rb, zb, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10;
-  rax = ra - rx;
-  zax = za - zx;
-  ryx = ry - rx;
-  zyx = zy - zx;
+reflect_node = function reflect_node(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, x_dir, y_dir, a_dir, node) {
+  let inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, rax, zax, ryx, zyx, omega, rb, zb, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16;
+  tmp16 = runtime.safeCall(x_dir(node));
+  inlinedVal = runtime.safeCall(sub2(r_p, tmp16));
+  tmp15 = runtime.safeCall(x_dir(node));
+  inlinedVal1 = runtime.safeCall(sub2(z_p, tmp15));
+  tmp14 = runtime.safeCall(y_dir(node));
+  inlinedVal2 = runtime.safeCall(sub2(r_p, tmp14));
+  tmp13 = runtime.safeCall(y_dir(node));
+  inlinedVal3 = runtime.safeCall(sub2(z_p, tmp13));
+  tmp12 = runtime.safeCall(a_dir(node));
+  inlinedVal4 = runtime.safeCall(sub2(r_p, tmp12));
+  tmp11 = runtime.safeCall(a_dir(node));
+  inlinedVal5 = runtime.safeCall(sub2(z_p, tmp11));
+  rax = inlinedVal4 - inlinedVal;
+  zax = inlinedVal5 - inlinedVal1;
+  ryx = inlinedVal2 - inlinedVal;
+  zyx = inlinedVal3 - inlinedVal1;
   tmp = rax * ryx;
   tmp1 = zax * zyx;
   tmp2 = tmp + tmp1;
@@ -1761,10 +1461,10 @@ boundary_position = function boundary_position(rx, zx, ry, zy, ra, za) {
   tmp5 = zyx * zyx;
   tmp6 = tmp4 + tmp5;
   omega = tmp3 / tmp6;
-  tmp7 = rx - rax;
+  tmp7 = inlinedVal - rax;
   tmp8 = omega * ryx;
   rb = tmp7 + tmp8;
-  tmp9 = zx - zax;
+  tmp9 = inlinedVal1 - zax;
   tmp10 = omega * zyx;
   zb = tmp9 + tmp10;
   return globalThis.Object.freeze([
@@ -1772,41 +1472,7 @@ boundary_position = function boundary_position(rx, zx, ry, zy, ra, za) {
     zb
   ])
 };
-reflect_node = function reflect_node(simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, x_dir, y_dir, a_dir, node) {
-  let inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, tmp, tmp1, tmp2, tmp3, tmp4, tmp5;
-  tmp5 = runtime.safeCall(x_dir(node));
-  inlinedVal = runtime.safeCall(sub2(r_p, tmp5));
-  tmp4 = runtime.safeCall(x_dir(node));
-  inlinedVal1 = runtime.safeCall(sub2(z_p, tmp4));
-  tmp3 = runtime.safeCall(y_dir(node));
-  inlinedVal2 = runtime.safeCall(sub2(r_p, tmp3));
-  tmp2 = runtime.safeCall(y_dir(node));
-  inlinedVal3 = runtime.safeCall(sub2(z_p, tmp2));
-  tmp1 = runtime.safeCall(a_dir(node));
-  inlinedVal4 = runtime.safeCall(sub2(r_p, tmp1));
-  tmp = runtime.safeCall(a_dir(node));
-  inlinedVal5 = runtime.safeCall(sub2(z_p, tmp));
-  return boundary_position(inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5)
-};
-u2 = function u2(update2, r_p, z_p, rvzv) {
-  return (n) => {
-    return u2$worker(update2, r_p, z_p, rvzv, n)
-  }
-};
-u2$worker = function u2$worker(update2, r_p, z_p, rvzv, n) {
-  let element1$, element0$;
-  if (runtime.Tuple.isArrayLike(rvzv) && rvzv.length === 2) {
-    element0$ = runtime.Tuple.get(rvzv, 0);
-    element1$ = runtime.Tuple.get(rvzv, 1);
-    runtime.safeCall(update2(r_p, n, element0$));
-    return runtime.safeCall(update2(z_p, n, element1$))
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda23 = (undefined, function (update2, interior_function, r_p, z_p, k) {
-  return lambda$30(update2, interior_function, r_p, z_p, k)
-});
-lambda24 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n) {
+lambda13 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n) {
   let tmp, tmp1, tmp2, element1$, element0$;
   tmp = simple2[southeast$accessorSymbol](sub2, update2, pow, north, south, east, west);
   tmp1 = simple2[farsouth$accessorSymbol](sub2, update2, pow, north, south, east, west);
@@ -1819,7 +1485,7 @@ lambda24 = (undefined, function (simple2, sub2, update2, pow, north, south, east
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda25 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n) {
+lambda14 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n) {
   let tmp, tmp1, tmp2, element1$, element0$;
   tmp = simple2[northeast$accessorSymbol](sub2, update2, pow, north, south, east, west);
   tmp1 = simple2[farnorth$accessorSymbol](sub2, update2, pow, north, south, east, west);
@@ -1832,7 +1498,7 @@ lambda25 = (undefined, function (simple2, sub2, update2, pow, north, south, east
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda26 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n) {
+lambda15 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n) {
   let tmp, tmp1, tmp2, element1$, element0$;
   tmp = simple2[southwest$accessorSymbol](sub2, update2, pow, north, south, east, west);
   tmp1 = simple2[farwest$accessorSymbol](sub2, update2, pow, north, south, east, west);
@@ -1845,7 +1511,7 @@ lambda26 = (undefined, function (simple2, sub2, update2, pow, north, south, east
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda27 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n) {
+lambda16 = (undefined, function (simple2, sub2, update2, pow, north, south, east, west, r_p, z_p, n) {
   let tmp, tmp1, tmp2, element1$, element0$;
   tmp = simple2[southeast$accessorSymbol](sub2, update2, pow, north, south, east, west);
   tmp1 = simple2[fareast$accessorSymbol](sub2, update2, pow, north, south, east, west);
@@ -1858,419 +1524,301 @@ lambda27 = (undefined, function (simple2, sub2, update2, pow, north, south, east
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda$24 = (undefined, function (simple2, f4) {
+lambda$24 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda22(simple2, f4, k)
+    return lambda12(simple2, f, k)
   }
 });
-lambda22 = (undefined, function (simple2, f4, k) {
+lambda12 = (undefined, function (simple2, f, k) {
   let tmp, tmp1;
   tmp = simple2[lmin$accessorSymbol] - 1;
   tmp1 = globalThis.Object.freeze([
     k,
     tmp
   ]);
-  return runtime.safeCall(f4(tmp1))
+  return runtime.safeCall(f(tmp1))
 });
-lambda$23 = (undefined, function (simple2, f4) {
+lambda$23 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda21(simple2, f4, k)
+    return lambda11(simple2, f, k)
   }
 });
-lambda21 = (undefined, function (simple2, f4, k) {
+lambda11 = (undefined, function (simple2, f, k) {
   let tmp, tmp1;
   tmp = simple2[lmax$accessorSymbol] + 1;
   tmp1 = globalThis.Object.freeze([
     k,
     tmp
   ]);
-  return runtime.safeCall(f4(tmp1))
+  return runtime.safeCall(f(tmp1))
 });
-lambda$22 = (undefined, function (simple2, f4) {
+lambda$22 = (undefined, function (simple2, f) {
   return (l) => {
-    return lambda20(simple2, f4, l)
+    return lambda10(simple2, f, l)
   }
 });
-lambda20 = (undefined, function (simple2, f4, l) {
+lambda10 = (undefined, function (simple2, f, l) {
   let tmp, tmp1;
   tmp = simple2[kmax$accessorSymbol] + 1;
   tmp1 = globalThis.Object.freeze([
     tmp,
     l
   ]);
-  return runtime.safeCall(f4(tmp1))
+  return runtime.safeCall(f(tmp1))
 });
-lambda$21 = (undefined, function (simple2, f4) {
+lambda$21 = (undefined, function (simple2, f) {
   return (l) => {
-    return lambda19(simple2, f4, l)
+    return lambda9(simple2, f, l)
   }
 });
-lambda19 = (undefined, function (simple2, f4, l) {
+lambda9 = (undefined, function (simple2, f, l) {
   let tmp, tmp1;
   tmp = simple2[kmin$accessorSymbol] - 1;
   tmp1 = globalThis.Object.freeze([
     tmp,
     l
   ]);
-  return runtime.safeCall(f4(tmp1))
+  return runtime.safeCall(f(tmp1))
 });
-lambda$20 = (undefined, function (simple2, f4) {
+lambda$20 = (undefined, function (simple2, f) {
   return (k) => {
     let tmp;
     tmp = globalThis.Object.freeze([
       k,
       simple2[lmin$accessorSymbol]
     ]);
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda18 = (undefined, function (simple2, f4, k) {
-  let tmp;
-  tmp = globalThis.Object.freeze([
-    k,
-    simple2[lmin$accessorSymbol]
-  ]);
-  return runtime.safeCall(f4(tmp))
-});
-lambda$19 = (undefined, function (simple2, f4) {
+lambda$19 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda17(simple2, f4, k)
+    return lambda8(simple2, f, k)
   }
 });
-lambda17 = (undefined, function (simple2, f4, k) {
+lambda8 = (undefined, function (simple2, f, k) {
   let tmp, tmp1;
   tmp = simple2[lmax$accessorSymbol] + 1;
   tmp1 = globalThis.Object.freeze([
     k,
     tmp
   ]);
-  return runtime.safeCall(f4(tmp1))
+  return runtime.safeCall(f(tmp1))
 });
-lambda$18 = (undefined, function (simple2, f4) {
+lambda$18 = (undefined, function (simple2, f) {
   return (l) => {
-    return lambda16(simple2, f4, l)
+    return lambda7(simple2, f, l)
   }
 });
-lambda16 = (undefined, function (simple2, f4, l) {
+lambda7 = (undefined, function (simple2, f, l) {
   let tmp, tmp1;
   tmp = simple2[kmax$accessorSymbol] + 1;
   tmp1 = globalThis.Object.freeze([
     tmp,
     l
   ]);
-  return runtime.safeCall(f4(tmp1))
+  return runtime.safeCall(f(tmp1))
 });
-lambda$17 = (undefined, function (simple2, f4) {
+lambda$17 = (undefined, function (simple2, f) {
   return (l) => {
     let tmp;
     tmp = globalThis.Object.freeze([
       simple2[kmin$accessorSymbol],
       l
     ]);
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda15 = (undefined, function (simple2, f4, l) {
-  let tmp;
-  tmp = globalThis.Object.freeze([
-    simple2[kmin$accessorSymbol],
-    l
-  ]);
-  return runtime.safeCall(f4(tmp))
-});
-lambda$16 = (undefined, function (f4, k) {
+lambda$16 = (undefined, function (f, k) {
   return (l) => {
     let tmp;
     tmp = globalThis.Object.freeze([
       k,
       l
     ]);
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda13 = (undefined, function (f4, k, l) {
-  let tmp;
-  tmp = globalThis.Object.freeze([
-    k,
-    l
-  ]);
-  return runtime.safeCall(f4(tmp))
-});
-lambda$15 = (undefined, function (simple2, f4) {
+lambda$15 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda14(simple2, f4, k)
+    return lambda6(simple2, f, k)
   }
 });
-lambda14 = (undefined, function (simple2, f4, k) {
+lambda6 = (undefined, function (simple2, f, k) {
   let tmp, lambda$here;
   tmp = simple2[lmin$accessorSymbol] + 1;
-  lambda$here = lambda$16(f4, k);
+  lambda$here = lambda$16(f, k);
   return simple2[for_$accessorSymbol](simple2[lmax$accessorSymbol], -1, tmp)(lambda$here)
 });
-lambda$14 = (undefined, function (f4, k) {
+lambda$14 = (undefined, function (f, k) {
   return (l) => {
     let tmp;
     tmp = globalThis.Object.freeze([
       k,
       l
     ]);
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda11 = (undefined, function (f4, k, l) {
-  let tmp;
-  tmp = globalThis.Object.freeze([
-    k,
-    l
-  ]);
-  return runtime.safeCall(f4(tmp))
-});
-lambda$13 = (undefined, function (simple2, f4) {
+lambda$13 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda12(simple2, f4, k)
+    return lambda5(simple2, f, k)
   }
 });
-lambda12 = (undefined, function (simple2, f4, k) {
+lambda5 = (undefined, function (simple2, f, k) {
   let tmp, lambda$here;
   tmp = simple2[lmin$accessorSymbol] + 1;
-  lambda$here = lambda$14(f4, k);
+  lambda$here = lambda$14(f, k);
   return simple2[for_$accessorSymbol](tmp, 1, simple2[lmax$accessorSymbol])(lambda$here)
 });
-lambda$12 = (undefined, function (f4, k) {
+lambda$12 = (undefined, function (f, k) {
   return (l) => {
     let tmp;
     tmp = globalThis.Object.freeze([
       k,
       l
     ]);
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda9 = (undefined, function (f4, k, l) {
-  let tmp;
-  tmp = globalThis.Object.freeze([
-    k,
-    l
-  ]);
-  return runtime.safeCall(f4(tmp))
-});
-lambda$11 = (undefined, function (simple2, f4) {
+lambda$11 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda10(simple2, f4, k)
+    return lambda4(simple2, f, k)
   }
 });
-lambda10 = (undefined, function (simple2, f4, k) {
-  let tmp, tmp1, f5;
+lambda4 = (undefined, function (simple2, f, k) {
+  let tmp, tmp1, f1;
   tmp = simple2[lmin$accessorSymbol] + 1;
   tmp1 = simple2[from_$accessorSymbol](tmp, simple2[lmax$accessorSymbol]);
-  f5 = lambda$12(f4, k);
-  return simple2[map$tailrec$accessorSymbol](f5, tmp1)
+  f1 = lambda$12(f, k);
+  return simple2[map$tailrec$accessorSymbol](f1, tmp1)
 });
-lambda$10 = (undefined, function (f4, k) {
+lambda$10 = (undefined, function (f, k) {
   return (l) => {
     let tmp;
     tmp = globalThis.Object.freeze([
       k,
       l
     ]);
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda7 = (undefined, function (f4, k, l) {
-  let tmp;
-  tmp = globalThis.Object.freeze([
-    k,
-    l
-  ]);
-  return runtime.safeCall(f4(tmp))
-});
-lambda$9 = (undefined, function (simple2, f4) {
+lambda$9 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda8(simple2, f4, k)
+    return lambda3(simple2, f, k)
   }
 });
-lambda8 = (undefined, function (simple2, f4, k) {
-  let tmp, f5;
+lambda3 = (undefined, function (simple2, f, k) {
+  let tmp, f1;
   tmp = simple2[from_$accessorSymbol](simple2[lmin$accessorSymbol], simple2[lmax$accessorSymbol]);
-  f5 = lambda$10(f4, k);
-  return simple2[map$tailrec$accessorSymbol](f5, tmp)
+  f1 = lambda$10(f, k);
+  return simple2[map$tailrec$accessorSymbol](f1, tmp)
 });
-lambda$8 = (undefined, function (f4, k) {
+lambda$8 = (undefined, function (f, k) {
   return (l) => {
     let tmp;
     tmp = globalThis.Object.freeze([
       k,
       l
     ]);
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda5 = (undefined, function (f4, k, l) {
-  let tmp;
-  tmp = globalThis.Object.freeze([
-    k,
-    l
-  ]);
-  return runtime.safeCall(f4(tmp))
-});
-lambda$7 = (undefined, function (simple2, f4) {
+lambda$7 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda6(simple2, f4, k)
+    return lambda2(simple2, f, k)
   }
 });
-lambda6 = (undefined, function (simple2, f4, k) {
+lambda2 = (undefined, function (simple2, f, k) {
   let tmp, lambda$here;
   tmp = simple2[lmin$accessorSymbol] + 1;
-  lambda$here = lambda$8(f4, k);
+  lambda$here = lambda$8(f, k);
   return simple2[for_$accessorSymbol](tmp, 1, simple2[lmax$accessorSymbol])(lambda$here)
 });
-lambda$6 = (undefined, function (f4, k) {
+lambda$6 = (undefined, function (f, k) {
   return (l) => {
     let tmp;
     tmp = globalThis.Object.freeze([
       k,
       l
     ]);
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda3 = (undefined, function (f4, k, l) {
-  let tmp;
-  tmp = globalThis.Object.freeze([
-    k,
-    l
-  ]);
-  return runtime.safeCall(f4(tmp))
-});
-lambda$5 = (undefined, function (simple2, f4) {
+lambda$5 = (undefined, function (simple2, f) {
   return (k) => {
-    return lambda4(simple2, f4, k)
+    return lambda1(simple2, f, k)
   }
 });
-lambda4 = (undefined, function (simple2, f4, k) {
+lambda1 = (undefined, function (simple2, f, k) {
   let tmp, lambda$here;
   tmp = simple2[lmax$accessorSymbol] + 1;
-  lambda$here = lambda$6(f4, k);
+  lambda$here = lambda$6(f, k);
   return simple2[for_$accessorSymbol](simple2[lmin$accessorSymbol], 1, tmp)(lambda$here)
 });
-lambda$4 = (undefined, function (f4, k) {
+lambda$4 = (undefined, function (f, k) {
   return (l) => {
     let callPrefix;
-    callPrefix = runtime.safeCall(f4(k));
+    callPrefix = runtime.safeCall(f(k));
     return runtime.safeCall(callPrefix(l))
   }
 });
-lambda1 = (undefined, function (f4, k, l) {
-  let callPrefix;
-  callPrefix = runtime.safeCall(f4(k));
-  return runtime.safeCall(callPrefix(l))
-});
-lambda$3 = (undefined, function (simple2, f4) {
+lambda$3 = (undefined, function (simple2, f) {
   return (k) => {
     let lambda$here;
-    lambda$here = lambda$4(f4, k);
+    lambda$here = lambda$4(f, k);
     return simple2[for_$accessorSymbol](simple2[lmin$accessorSymbol], 1, simple2[lmax$accessorSymbol])(lambda$here)
   }
 });
-lambda2 = (undefined, function (simple2, f4, k) {
-  let lambda$here;
-  lambda$here = lambda$4(f4, k);
-  return simple2[for_$accessorSymbol](simple2[lmin$accessorSymbol], 1, simple2[lmax$accessorSymbol])(lambda$here)
-});
-f = function f(delta, endd, body, x) {
-  loopLabel: while (true) {
-    let scrut, tmp;
-    scrut = x > endd;
-    if (scrut === true) {
-      return runtime.Unit
-    }
-    runtime.safeCall(body(x));
-    tmp = x + delta;
-    x = tmp;
-    continue loopLabel;
-  }
-};
-f1 = function f(delta, endd, body, x) {
-  loopLabel: while (true) {
-    let scrut, tmp;
-    scrut = x < endd;
-    if (scrut === true) {
-      return runtime.Unit
-    }
-    runtime.safeCall(body(x));
-    tmp = x + delta;
-    x = tmp;
-    continue loopLabel;
-  }
-};
 lambda = (undefined, function (a, b) {
   return a + b
 });
-loop = function loop(simple2, f4, l2, acc) {
-  loopLabel: while (true) {
-    let arg$Cons$0$, arg$Cons$1$, tmp;
-    if (l2 instanceof simple2.Nil.class) {
-      return acc
-    } else if (l2 instanceof simple2.Cons.class) {
-      arg$Cons$0$ = l2.head;
-      arg$Cons$1$ = l2.tail;
-      tmp = runtime.safeCall(f4(arg$Cons$0$, acc));
-      l2 = arg$Cons$1$;
-      acc = tmp;
-      continue loopLabel
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda$2 = (undefined, function (simple2, f4, l) {
+lambda$2 = (undefined, function (simple2, f, l) {
   return (b) => {
-    let inlinedVal;
-    inlinedVal = go(simple2, l, simple2.Nil);
-    return loop(simple2, f4, inlinedVal, b)
+    return lambda54(simple2, f, l, b)
   }
 });
-lambda82 = (undefined, function (simple2, f4, l, b) {
-  let inlinedVal;
-  inlinedVal = go(simple2, l, simple2.Nil);
-  return loop(simple2, f4, inlinedVal, b)
+lambda54 = (undefined, function (simple2, f, l, b) {
+  let tmp, simple3, f1, l2, acc, inlinedVal;
+  tmp = simple2[rev$accessorSymbol](l);
+  simple3 = simple2;
+  f1 = f;
+  l2 = tmp;
+  acc = b;
+  inlinedLbl: {
+    loopLabel: while (true) {
+      let arg$Cons$0$, arg$Cons$1$, tmp1;
+      if (l2 instanceof simple3.Nil.class) {
+        inlinedVal = acc;
+        break inlinedLbl
+      } else if (l2 instanceof simple3.Cons.class) {
+        arg$Cons$0$ = l2.head;
+        arg$Cons$1$ = l2.tail;
+        tmp1 = runtime.safeCall(f1(arg$Cons$0$, acc));
+        l2 = arg$Cons$1$;
+        acc = tmp1;
+        continue loopLabel
+      }
+      throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    }
+  }
+  return inlinedVal
 });
-lambda81 = (undefined, function (b) {
+lambda53 = (undefined, function (b) {
   return b
 });
-lambda$1 = (undefined, function (f4, g) {
+lambda$1 = (undefined, function (f, g) {
   return (x) => {
     let tmp;
     tmp = runtime.safeCall(g(x));
-    return runtime.safeCall(f4(tmp))
+    return runtime.safeCall(f(tmp))
   }
 });
-lambda80 = (undefined, function (f4, g, x) {
-  let tmp;
-  tmp = runtime.safeCall(g(x));
-  return runtime.safeCall(f4(tmp))
-});
-go = function go(simple2, l, acc) {
-  loopLabel: while (true) {
-    let arg$Cons$0$, arg$Cons$1$, tmp;
-    if (l instanceof simple2.Nil.class) {
-      return acc
-    } else if (l instanceof simple2.Cons.class) {
-      arg$Cons$0$ = l.head;
-      arg$Cons$1$ = l.tail;
-      tmp = simple2.Cons(arg$Cons$0$, acc);
-      l = arg$Cons$1$;
-      acc = tmp;
-      continue loopLabel
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 lambda$ = (undefined, function (simple2, m) {
   return (j) => {
-    return lambda79(simple2, m, j)
+    return lambda52(simple2, m, j)
   }
 });
-lambda79 = (undefined, function (simple2, m, j) {
+lambda52 = (undefined, function (simple2, m, j) {
   let tmp, tmp1;
   tmp = simple2[kmax$accessorSymbol] + 1;
   tmp1 = globalThis.Object.freeze([
@@ -2340,11 +1888,8 @@ lambda79 = (undefined, function (simple2, m, j) {
   static set [pb$accessorSymbol](value) { simple.#pb = value; }
   static get [qb$accessorSymbol]() { return simple.#qb; }
   static set [qb$accessorSymbol](value) { simple.#qb = value; }
-  static get [dx$accessorSymbol]() { return simple.#dx; }
-  static set [dx$accessorSymbol](value) { simple.#dx = value; }
-  static get [tiny$accessorSymbol]() { return simple.#tiny; }
-  static set [tiny$accessorSymbol](value) { simple.#tiny = value; }
   static get [map$tailrec$accessorSymbol]() { return simple.#map$tailrec; }
+  static get [rev$accessorSymbol]() { return simple.#rev; }
   static get [for_$accessorSymbol]() { return simple.#for_; }
   static get [from_$accessorSymbol]() { return simple.#from_; }
   static get [update2$accessorSymbol]() { return simple.#update2; }
@@ -2363,7 +1908,7 @@ lambda79 = (undefined, function (simple2, m, j) {
   static get [zone_area_vol$accessorSymbol]() { return simple.#zone_area_vol; }
   static get [zonal_pressure$accessorSymbol]() { return simple.#zonal_pressure; }
   static get [zonal_energy$accessorSymbol]() { return simple.#zonal_energy; }
-  static get [compute_next_state$accessorSymbol]() { return simple.#compute_next_state; }
+  static get [newton_raphson$accessorSymbol]() { return simple.#newton_raphson; }
   static {
     let scrut, scrut1, scrut2, scrut3, m, m1, vv, vv1, m2, a, a1, tmp, tmp1, tmp2, tmp3, element0$, element0$1, element0$2, element1$, element1$1, element0$3, element1$2, element1$3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, tmp18, tmp19, tmp20, tmp21, tmp22, tmp23, tmp24, tmp25, tmp26, tmp27, tmp28, tmp29, tmp30, tmp31, tmp32, tmp33, tmp34, tmp35, tmp36, tmp37, tmp38, tmp39, tmp40, tmp41, tmp42, tmp43, tmp44, tmp45, tmp46, tmp47, tmp48, tmp49, tmp50, tmp51, tmp52, tmp53, tmp54, tmp55, tmp56, tmp57, tmp58, tmp59, tmp60, tmp61, tmp62, tmp63, tmp64, tmp65, tmp66, tmp67, tmp68, tmp69, tmp70, tmp71, tmp72, tmp73, tmp74, tmp75, tmp76, lambda$here;
     simple.Cons = function Cons(head, tail) {
@@ -2758,15 +2303,15 @@ lambda79 = (undefined, function (simple2, m, j) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"))
     }
   }
-  static #map$tailrec(f4, l) {
+  static #map$tailrec(f, l) {
     let arg$Cons$0$, arg$Cons$1$, tmp, tmp1;
     if (l instanceof simple.Nil.class) {
       return simple.Nil
     } else if (l instanceof simple.Cons.class) {
       arg$Cons$0$ = l.head;
       arg$Cons$1$ = l.tail;
-      tmp = runtime.safeCall(f4(arg$Cons$0$));
-      tmp1 = simple.#map$tailrec(f4, arg$Cons$1$);
+      tmp = runtime.safeCall(f(arg$Cons$0$));
+      tmp1 = simple.#map$tailrec(f, arg$Cons$1$);
       return simple.Cons(tmp, tmp1)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -2808,15 +2353,36 @@ lambda79 = (undefined, function (simple2, m, j) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #rev(l) {
-    return go(simple, l, simple.Nil)
+    let simple2, l1, acc, inlinedVal;
+    simple2 = simple;
+    l1 = l;
+    acc = simple.Nil;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let arg$Cons$0$, arg$Cons$1$, tmp;
+        if (l1 instanceof simple2.Nil.class) {
+          inlinedVal = acc;
+          break inlinedLbl
+        } else if (l1 instanceof simple2.Cons.class) {
+          arg$Cons$0$ = l1.head;
+          arg$Cons$1$ = l1.tail;
+          tmp = simple2.Cons(arg$Cons$0$, acc);
+          l1 = arg$Cons$1$;
+          acc = tmp;
+          continue loopLabel
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+    }
+    return inlinedVal
   }
-  static #map(f4) {
+  static #map(f) {
     return (l) => {
-      return simple.#map$tailrec(f4, l)
+      return simple.#map$tailrec(f, l)
     }
   }
-  static #compose(f4, g) {
-    return lambda$1(f4, g)
+  static #compose(f, g) {
+    return lambda$1(f, g)
   }
   static #fillArray(arr, i, n, x) {
     loopLabel: while (true) {
@@ -2911,12 +2477,12 @@ lambda79 = (undefined, function (simple2, m, j) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #fold(f4) {
+  static #fold(f) {
     return (l) => {
       if (l instanceof simple.Nil.class) {
-        return lambda81
+        return lambda53
       } else if (l instanceof simple.Cons.class) {
-        return lambda$2(simple, f4, l)
+        return lambda$2(simple, f, l)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -3387,74 +2953,74 @@ lambda79 = (undefined, function (simple2, m, j) {
       return runtime.safeCall(west(zone))
     }
   }
-  static #for_interior_nodes(f4) {
+  static #for_interior_nodes(f) {
     let lambda$here;
-    lambda$here = lambda$3(simple, f4);
+    lambda$here = lambda$3(simple, f);
     return simple.#for_(simple.#kmin, 1, simple.#kmax)(lambda$here)
   }
-  static #for_all_zones(f4) {
+  static #for_all_zones(f) {
     let tmp, lambda$here;
     tmp = simple.#kmax + 1;
-    lambda$here = lambda$5(simple, f4);
+    lambda$here = lambda$5(simple, f);
     return simple.#for_(simple.#kmin, 1, tmp)(lambda$here)
   }
-  static #for_interior_zones(f4) {
+  static #for_interior_zones(f) {
     let tmp, lambda$here;
     tmp = simple.#kmin + 1;
-    lambda$here = lambda$7(simple, f4);
+    lambda$here = lambda$7(simple, f);
     return simple.#for_(tmp, 1, simple.#kmax)(lambda$here)
   }
-  static #map_interior_nodes(f4) {
+  static #map_interior_nodes(f) {
     let tmp, tmp1, lambda$here;
     tmp = simple.#from_(simple.#kmin, simple.#kmax);
-    lambda$here = lambda$9(simple, f4);
+    lambda$here = lambda$9(simple, f);
     tmp1 = simple.#map(lambda$here)(tmp);
     return simple.#flatten(tmp1)
   }
-  static #map_interior_zones(f4) {
+  static #map_interior_zones(f) {
     let tmp, tmp1, tmp2, lambda$here;
     tmp = simple.#kmin + 1;
     tmp1 = simple.#from_(tmp, simple.#kmax);
-    lambda$here = lambda$11(simple, f4);
+    lambda$here = lambda$11(simple, f);
     tmp2 = simple.#map(lambda$here)(tmp1);
     return simple.#flatten(tmp2)
   }
-  static #for_north_ward_interior_zones(f4) {
+  static #for_north_ward_interior_zones(f) {
     let tmp, lambda$here;
     tmp = simple.#kmin + 1;
-    lambda$here = lambda$13(simple, f4);
+    lambda$here = lambda$13(simple, f);
     return simple.#for_(simple.#kmax, -1, tmp)(lambda$here)
   }
-  static #for_west_ward_interior_zones(f4) {
+  static #for_west_ward_interior_zones(f) {
     let tmp, lambda$here;
     tmp = simple.#kmin + 1;
-    lambda$here = lambda$15(simple, f4);
+    lambda$here = lambda$15(simple, f);
     return simple.#for_(tmp, 1, simple.#kmax)(lambda$here)
   }
-  static #for_north_zones(f4) {
+  static #for_north_zones(f) {
     let tmp, lambda$here;
     tmp = simple.#lmax + 1;
-    lambda$here = lambda$17(simple, f4);
+    lambda$here = lambda$17(simple, f);
     return simple.#for_(simple.#lmin, 1, tmp)(lambda$here)
   }
-  static #for_south_zones(f4) {
+  static #for_south_zones(f) {
     let tmp, lambda$here;
     tmp = simple.#lmin + 1;
-    lambda$here = lambda$18(simple, f4);
+    lambda$here = lambda$18(simple, f);
     return simple.#for_(tmp, 1, simple.#lmax)(lambda$here)
   }
-  static #for_east_zones(f4) {
+  static #for_east_zones(f) {
     let tmp, tmp1, lambda$here;
     tmp = simple.#kmin + 1;
     tmp1 = simple.#kmax + 1;
-    lambda$here = lambda$19(simple, f4);
+    lambda$here = lambda$19(simple, f);
     return simple.#for_(tmp, 1, tmp1)(lambda$here)
   }
-  static #for_west_zones(f4) {
+  static #for_west_zones(f) {
     let tmp, tmp1, lambda$here;
     tmp = simple.#kmin + 1;
     tmp1 = simple.#kmax + 1;
-    lambda$here = lambda$20(simple, f4);
+    lambda$here = lambda$20(simple, f);
     return simple.#for_(tmp, 1, tmp1)(lambda$here)
   }
   static #reflect(sub2, update2, pow, north, south, east, west) {
@@ -3488,28 +3054,28 @@ lambda79 = (undefined, function (simple2, m, j) {
       return simple.#reflect(sub2, update2, pow, north, south, east, west)(west)(x)
     }
   }
-  static #for_north_nodes(f4) {
+  static #for_north_nodes(f) {
     let tmp, lambda$here;
     tmp = simple.#lmax - 1;
-    lambda$here = lambda$21(simple, f4);
+    lambda$here = lambda$21(simple, f);
     return simple.#for_(simple.#lmin, 1, tmp)(lambda$here)
   }
-  static #for_south_nodes(f4) {
+  static #for_south_nodes(f) {
     let tmp, lambda$here;
     tmp = simple.#lmax - 1;
-    lambda$here = lambda$22(simple, f4);
+    lambda$here = lambda$22(simple, f);
     return simple.#for_(simple.#lmin, 1, tmp)(lambda$here)
   }
-  static #for_east_nodes(f4) {
+  static #for_east_nodes(f) {
     let tmp, lambda$here;
     tmp = simple.#kmax - 1;
-    lambda$here = lambda$23(simple, f4);
+    lambda$here = lambda$23(simple, f);
     return simple.#for_(simple.#kmin, 1, tmp)(lambda$here)
   }
-  static #for_west_nodes(f4) {
+  static #for_west_nodes(f) {
     let tmp, lambda$here;
     tmp = simple.#kmax - 1;
-    lambda$here = lambda$24(simple, f4);
+    lambda$here = lambda$24(simple, f);
     return simple.#for_(simple.#kmin, 1, tmp)(lambda$here)
   }
   static #make_position_matrix(sub2, update2, pow, north, south, east, west) {
@@ -3813,10 +3379,38 @@ lambda79 = (undefined, function (simple2, m, j) {
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
   }
-  static #newton_raphson(f4, x) {
-    let tmp;
-    tmp = runtime.safeCall(f4(x));
-    return iter(simple, f4, x, tmp)
+  static #newton_raphson(f, x) {
+    let tmp, simple2, f1, x1, fx, inlinedVal;
+    tmp = runtime.safeCall(f(x));
+    simple2 = simple;
+    f1 = f;
+    x1 = x;
+    fx = tmp;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut, fxdx, denom, scrut1, tmp1, tmp2, tmp3, tmp4;
+        scrut = fx > simple2.#tiny;
+        if (scrut === true) {
+          tmp1 = x1 + simple2.#dx;
+          fxdx = runtime.safeCall(f1(tmp1));
+          denom = fxdx - fx;
+          scrut1 = denom < simple2.#tiny;
+          if (scrut1 === true) {
+            fx = simple2.#tiny;
+            continue loopLabel
+          }
+          tmp2 = fx * simple2.#dx;
+          tmp3 = tmp2 / denom;
+          tmp4 = x1 - tmp3;
+          x1 = tmp4;
+          fx = fxdx;
+          continue loopLabel;
+        }
+        inlinedVal = x1;
+        break inlinedLbl;
+      }
+    }
+    return inlinedVal
   }
   static #make_temperature(sub2, update2, pow, north, south, east, west) {
     return (p, epsilon, rho, theta, rho_prime, q_prime) => {
@@ -3876,14 +3470,14 @@ lambda79 = (undefined, function (simple2, m, j) {
   }
   static #make_ab(sub2, update2, pow, north, south, east, west) {
     return (theta, sigma, gamma_, preceding) => {
-      let a, b, f4, lambda$here;
+      let a, b, f, lambda$here;
       a = simple.#array2(simple.#dimension_all_zones, 0.0);
       b = simple.#array2(simple.#dimension_all_zones, 0.0);
-      f4 = f$(sub2, update2, theta, b);
-      simple.#for_north_zones(f4);
-      simple.#for_south_zones(f4);
-      simple.#for_west_zones(f4);
-      simple.#for_east_zones(f4);
+      f = f$(sub2, update2, theta, b);
+      simple.#for_north_zones(f);
+      simple.#for_south_zones(f);
+      simple.#for_west_zones(f);
+      simple.#for_east_zones(f);
       lambda$here = lambda$53(sub2, update2, theta, sigma, gamma_, preceding, a, b);
       simple.#for_interior_zones(lambda$here);
       return globalThis.Object.freeze([
@@ -4263,9 +3857,34 @@ lambda79 = (undefined, function (simple2, m, j) {
   }
   static #runit(sub2, update2, pow, north, south, east, west) {
     return () => {
-      let tmp;
+      let tmp, simple2, sub21, update21, pow1, north1, south1, east1, west1, i, state, inlinedVal;
       tmp = simple.#compute_initial_state(sub2, update2, pow, north, south, east, west)();
-      return iter1(simple, sub2, update2, pow, north, south, east, west, simple.#step_count, tmp)
+      simple2 = simple;
+      sub21 = sub2;
+      update21 = update2;
+      pow1 = pow;
+      north1 = north;
+      south1 = south;
+      east1 = east;
+      west1 = west;
+      i = simple.#step_count;
+      state = tmp;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut, tmp1, tmp2;
+          scrut = i == 0;
+          if (scrut === true) {
+            inlinedVal = state;
+            break inlinedLbl
+          }
+          tmp1 = i - 1;
+          tmp2 = simple2.#compute_next_state(sub21, update21, pow1, north1, south1, east1, west1)(state);
+          i = tmp1;
+          state = tmp2;
+          continue loopLabel;
+        }
+      }
+      return inlinedVal
     }
   }
   static main() {
@@ -4296,51 +3915,23 @@ lambda79 = (undefined, function (simple2, m, j) {
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "simple"];
 });
-export { go as _$_modulePrivate_$_go };
-export { loop as _$_modulePrivate_$_loop };
-export { f as _$_modulePrivate_$_f };
-export { f1 as _$_modulePrivate_$_f1 };
-export { boundary_position as _$_modulePrivate_$_boundary_position };
 export { reflect_node as _$_modulePrivate_$_reflect_node };
-export { u2 as _$_modulePrivate_$_u2 };
-export { regional_mass as _$_modulePrivate_$_regional_mass };
 export { line_integral as _$_modulePrivate_$_line_integral };
-export { velocity as _$_modulePrivate_$_velocity };
 export { interior_position as _$_modulePrivate_$_interior_position };
-export { reflect_area_vol_density as _$_modulePrivate_$_reflect_area_vol_density };
 export { r_area_vol_den as _$_modulePrivate_$_r_area_vol_den };
-export { interior_area as _$_modulePrivate_$_interior_area };
 export { update_asr as _$_modulePrivate_$_update_asr };
 export { lower_del as _$_modulePrivate_$_lower_del };
 export { upper_del as _$_modulePrivate_$_upper_del };
-export { reflect_viscosity_cdelta as _$_modulePrivate_$_reflect_viscosity_cdelta };
 export { do_zones as _$_modulePrivate_$_do_zones };
-export { interior_viscosity as _$_modulePrivate_$_interior_viscosity };
-export { search_down as _$_modulePrivate_$_search_down };
-export { f2 as _$_modulePrivate_$_f2 };
 export { from_ as _$_modulePrivate_$_from_ };
 export { table_search as _$_modulePrivate_$_table_search };
-export { iter as _$_modulePrivate_$_iter };
-export { revised_pressure as _$_modulePrivate_$_revised_pressure };
-export { revised_energy as _$_modulePrivate_$_revised_energy };
 export { energy_equation as _$_modulePrivate_$_energy_equation };
-export { revised_temperature as _$_modulePrivate_$_revised_temperature };
-export { interior_temperature as _$_modulePrivate_$_interior_temperature };
-export { interior_cc as _$_modulePrivate_$_interior_cc };
-export { interior_sigma as _$_modulePrivate_$_interior_sigma };
-export { interior_gamma as _$_modulePrivate_$_interior_gamma };
-export { interior_ab as _$_modulePrivate_$_interior_ab };
-export { interior_theta as _$_modulePrivate_$_interior_theta };
-export { boundary_p as _$_modulePrivate_$_boundary_p };
 export { heat_flow as _$_modulePrivate_$_heat_flow };
 export { work_done as _$_modulePrivate_$_work_done };
 export { from_1 as _$_modulePrivate_$_from_1 };
 export { kinetic as _$_modulePrivate_$_kinetic };
-export { mass as _$_modulePrivate_$_mass };
-export { reflect_area_vol as _$_modulePrivate_$_reflect_area_vol };
 export { interior_position1 as _$_modulePrivate_$_interior_position1 };
-export { u21 as _$_modulePrivate_$_u21 };
-export { iter1 as _$_modulePrivate_$_iter1 };
+export { u2 as _$_modulePrivate_$_u2 };
 export { simple1 as _$_modulePrivate_$_simple };
 export { lambda as _$_modulePrivate_$_lambda };
 export { lambda1 as _$_modulePrivate_$_lambda1 };
@@ -4399,35 +3990,6 @@ export { lambda53 as _$_modulePrivate_$_lambda53 };
 export { lambda54 as _$_modulePrivate_$_lambda54 };
 export { lambda55 as _$_modulePrivate_$_lambda55 };
 export { lambda56 as _$_modulePrivate_$_lambda56 };
-export { lambda57 as _$_modulePrivate_$_lambda57 };
-export { lambda58 as _$_modulePrivate_$_lambda58 };
-export { lambda59 as _$_modulePrivate_$_lambda59 };
-export { lambda60 as _$_modulePrivate_$_lambda60 };
-export { lambda61 as _$_modulePrivate_$_lambda61 };
-export { lambda62 as _$_modulePrivate_$_lambda62 };
-export { lambda63 as _$_modulePrivate_$_lambda63 };
-export { lambda64 as _$_modulePrivate_$_lambda64 };
-export { lambda65 as _$_modulePrivate_$_lambda65 };
-export { lambda66 as _$_modulePrivate_$_lambda66 };
-export { lambda67 as _$_modulePrivate_$_lambda67 };
-export { lambda68 as _$_modulePrivate_$_lambda68 };
-export { lambda69 as _$_modulePrivate_$_lambda69 };
-export { lambda70 as _$_modulePrivate_$_lambda70 };
-export { lambda71 as _$_modulePrivate_$_lambda71 };
-export { lambda72 as _$_modulePrivate_$_lambda72 };
-export { lambda73 as _$_modulePrivate_$_lambda73 };
-export { lambda74 as _$_modulePrivate_$_lambda74 };
-export { lambda75 as _$_modulePrivate_$_lambda75 };
-export { lambda76 as _$_modulePrivate_$_lambda76 };
-export { lambda77 as _$_modulePrivate_$_lambda77 };
-export { lambda78 as _$_modulePrivate_$_lambda78 };
-export { lambda79 as _$_modulePrivate_$_lambda79 };
-export { lambda80 as _$_modulePrivate_$_lambda80 };
-export { lambda81 as _$_modulePrivate_$_lambda81 };
-export { lambda82 as _$_modulePrivate_$_lambda82 };
-export { lambda83 as _$_modulePrivate_$_lambda83 };
-export { lambda84 as _$_modulePrivate_$_lambda84 };
-export { f3 as _$_modulePrivate_$_f3 };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };
@@ -4516,7 +4078,5 @@ export { lambda$80 as _$_modulePrivate_$_lambda$80 };
 export { lambda$81 as _$_modulePrivate_$_lambda$81 };
 export { lambda$82 as _$_modulePrivate_$_lambda$82 };
 export { interior_position$1 as _$_modulePrivate_$_interior_position$1 };
-export { u2$worker as _$_modulePrivate_$_u2$worker };
-export { revised_temperature$worker as _$_modulePrivate_$_revised_temperature$worker };
 export { heat_flow$worker as _$_modulePrivate_$_heat_flow$worker };
 export default simple1;

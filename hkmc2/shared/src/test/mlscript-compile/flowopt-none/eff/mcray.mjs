@@ -6,7 +6,6 @@ const within$accessorSymbol = globalThis.Symbol("within");
 const rgbAdd$accessorSymbol = globalThis.Symbol("rgbAdd");
 const rgbModulate$accessorSymbol = globalThis.Symbol("rgbModulate");
 const rgbScale$accessorSymbol = globalThis.Symbol("rgbScale");
-const toByte$accessorSymbol = globalThis.Symbol("toByte");
 const vec3Add$accessorSymbol = globalThis.Symbol("vec3Add");
 const vec3Sub$accessorSymbol = globalThis.Symbol("vec3Sub");
 const vec3Scale$accessorSymbol = globalThis.Symbol("vec3Scale");
@@ -16,73 +15,8 @@ const getEmission$accessorSymbol = globalThis.Symbol("getEmission");
 const getHitInfo$accessorSymbol = globalThis.Symbol("getHitInfo");
 const closer$accessorSymbol = globalThis.Symbol("closer");
 const rayToRGB$accessorSymbol = globalThis.Symbol("rayToRGB");
-const randomSphere$accessorSymbol = globalThis.Symbol("randomSphere");
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
-let go, cvt, hitTest1, hitTest11, colLp, rowLp, mkRay, trace, lp, mcray1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, hitTest1$, lambda$5, hitTest1$1, mkRay$, lambda$6, lambda$7, lambda$8, rowLp_colLp;
-rowLp_colLp = function rowLp_colLp(id, param0, param1, param2, param3, param4, param5) {
-  loopLabel: while (true) {
-    switch (id) {
-      case 0:
-        {
-          let scrut, tmp, tmp1;
-          scrut = param3 < 0;
-          if (scrut === true) {
-            return param4
-          }
-          {
-            let param4_tmp;
-            tmp = param3 - 1;
-            tmp1 = param2 - 1;
-            param4_tmp = param4;
-            param3 = tmp;
-            param4 = tmp1;
-            param5 = param4_tmp;
-            id = 1;
-            continue loopLabel;
-          }
-        }
-      case 1:
-        {
-          let scrut, tmp, tmp1, tmp2;
-          scrut = param4 < 0;
-          if (scrut === true) {
-            param4 = param5;
-            id = 0;
-            continue loopLabel
-          }
-          tmp = param4 - 1;
-          tmp1 = runtime.safeCall(param1(param3, param4));
-          tmp2 = param0.Cons(tmp1, param5);
-          param4 = tmp;
-          param5 = tmp2;
-          id = 1;
-          continue loopLabel;
-        }
-    }
-  }
-};
-lp = function lp(mcray2, rng, x, z, objs) {
-  loopLabel: while (true) {
-    let scrut, scrut1, tmp, tmp1, tmp2, tmp3;
-    scrut = z < 11;
-    if (scrut === true) {
-      tmp = z + 1;
-      tmp1 = mcray2[randomSphere$accessorSymbol](rng, x, z);
-      tmp2 = mcray2.Cons(tmp1, objs);
-      z = tmp;
-      objs = tmp2;
-      continue loopLabel
-    }
-    scrut1 = x < 11;
-    if (scrut1 === true) {
-      tmp3 = x + 1;
-      x = tmp3;
-      z = -11;
-      continue loopLabel
-    }
-    return objs;
-  }
-};
+let go, hitTest1, hitTest11, mkRay, trace, mcray1, lambda, lambda1, lambda2, lambda3, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, hitTest1$, lambda$5, hitTest1$1, mkRay$, lambda$6, lambda$7, lambda$8;
 lambda$8 = (undefined, function (mcray2, world, maxDepth, minMaxT) {
   return (ray) => {
     return trace(mcray2, world, minMaxT, ray, maxDepth)
@@ -130,9 +64,6 @@ trace = function trace(mcray2, world, minMaxT, ray, depth) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-lambda8 = (undefined, function (mcray2, world, maxDepth, minMaxT, ray) {
-  return trace(mcray2, world, minMaxT, ray, maxDepth)
-});
 lambda$7 = (undefined, function (mcray2, trace1) {
   return (ray, c1) => {
     let tmp;
@@ -140,17 +71,12 @@ lambda$7 = (undefined, function (mcray2, trace1) {
     return mcray2[rgbAdd$accessorSymbol](c1, tmp)
   }
 });
-lambda6 = (undefined, function (mcray2, trace1, ray, c1) {
-  let tmp;
-  tmp = runtime.safeCall(trace1(ray));
-  return mcray2[rgbAdd$accessorSymbol](c1, tmp)
-});
 lambda$6 = (undefined, function (mcray2, trace1, rfp, scale) {
   return (r, c) => {
-    return lambda7(mcray2, trace1, rfp, scale, r, c)
+    return lambda3(mcray2, trace1, rfp, scale, r, c)
   }
 });
-lambda7 = (undefined, function (mcray2, trace1, rfp, scale, r, c) {
+lambda3 = (undefined, function (mcray2, trace1, rfp, scale, r, c) {
   let tmp, inlinedVal, f, inlinedVal1;
   inlinedVal = globalThis.Object.freeze([
     0.0,
@@ -225,12 +151,6 @@ mkRay = function mkRay(mcray2, rng, hvec, vvec, pos, r1, c1, ulcDir, i) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-rowLp = function rowLp(mcray2, pr, wid, r, colors) {
-  return rowLp_colLp(0, mcray2, pr, wid, r, colors, undefined)
-};
-colLp = function colLp(mcray2, pr, wid, r, c, colors) {
-  return rowLp_colLp(1, mcray2, pr, wid, r, c, colors)
-};
 hitTest1$1 = function hitTest1$(mcray2, center, material, rSq, invR) {
   return (ray, minMaxT) => {
     return hitTest11(mcray2, center, material, rSq, invR, ray, minMaxT)
@@ -282,10 +202,10 @@ hitTest11 = function hitTest1(mcray2, center, material, rSq, invR, ray, minMaxT)
 };
 lambda$5 = (undefined, function (mcray2, ray, minMaxT) {
   return (obj, mhit) => {
-    return lambda5(mcray2, ray, minMaxT, obj, mhit)
+    return lambda2(mcray2, ray, minMaxT, obj, mhit)
   }
 });
-lambda5 = (undefined, function (mcray2, ray, minMaxT, obj, mhit) {
+lambda2 = (undefined, function (mcray2, ray, minMaxT, obj, mhit) {
   let inlinedVal;
   if (obj instanceof mcray2.Obj.class) {
     inlinedVal = runtime.safeCall(obj.hit(ray, minMaxT));
@@ -309,9 +229,6 @@ lambda$4 = (undefined, function (mcray2) {
     return mcray2.Miss
   }
 });
-lambda4 = (undefined, function (mcray2, ray, minMaxT) {
-  return mcray2.Miss
-});
 lambda$3 = (undefined, function (mcray2) {
   return (hit) => {
     return globalThis.Object.freeze([
@@ -323,17 +240,10 @@ lambda$3 = (undefined, function (mcray2) {
 });
 lambda$2 = (undefined, function (mcray2, rng, albedo, fuzz) {
   return (ray, hit) => {
-    return lambda3(mcray2, rng, albedo, fuzz, ray, hit)
+    return lambda1(mcray2, rng, albedo, fuzz, ray, hit)
   }
 });
-lambda2 = (undefined, function (mcray2, hit) {
-  return globalThis.Object.freeze([
-    0.0,
-    0.0,
-    0.0
-  ])
-});
-lambda3 = (undefined, function (mcray2, rng, albedo, fuzz, ray, hit) {
+lambda1 = (undefined, function (mcray2, rng, albedo, fuzz, ray, hit) {
   let scrut, element1$, arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
   if (runtime.Tuple.isArrayLike(ray) && ray.length === 2) {
     runtime.Tuple.get(ray, 0);
@@ -410,17 +320,10 @@ lambda$1 = (undefined, function (mcray2) {
 });
 lambda$ = (undefined, function (mcray2, rng, albedo) {
   return (ray, hit) => {
-    return lambda1(mcray2, rng, albedo, ray, hit)
+    return lambda(mcray2, rng, albedo, ray, hit)
   }
 });
-lambda = (undefined, function (mcray2, hit) {
-  return globalThis.Object.freeze([
-    0.0,
-    0.0,
-    0.0
-  ])
-});
-lambda1 = (undefined, function (mcray2, rng, albedo, ray, hit) {
+lambda = (undefined, function (mcray2, rng, albedo, ray, hit) {
   let arg$MatHit$1$, arg$MatHit$2$, tmp, tmp1, tmp2;
   if (hit instanceof mcray2.MatHit.class) {
     let inlinedVal, inlinedVal1, inlinedVal2, scrut, tmp3, tmp4, inlinedVal3, inlinedVal4;
@@ -467,11 +370,6 @@ lambda1 = (undefined, function (mcray2, rng, albedo, ray, hit) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-cvt = function cvt(mcray2, f) {
-  let inlinedVal;
-  inlinedVal = runtime.safeCall(globalThis.Math.sqrt(f));
-  return mcray2[toByte$accessorSymbol](inlinedVal)
-};
 go = function go(mcray2, n, f, i) {
   let scrut, tmp, tmp1, tmp2;
   scrut = i >= n;
@@ -492,7 +390,6 @@ go = function go(mcray2, n, f, i) {
   static get [rgbAdd$accessorSymbol]() { return mcray.#rgbAdd; }
   static get [rgbModulate$accessorSymbol]() { return mcray.#rgbModulate; }
   static get [rgbScale$accessorSymbol]() { return mcray.#rgbScale; }
-  static get [toByte$accessorSymbol]() { return mcray.#toByte; }
   static get [vec3Add$accessorSymbol]() { return mcray.#vec3Add; }
   static get [vec3Sub$accessorSymbol]() { return mcray.#vec3Sub; }
   static get [vec3Scale$accessorSymbol]() { return mcray.#vec3Scale; }
@@ -502,7 +399,6 @@ go = function go(mcray2, n, f, i) {
   static get [getHitInfo$accessorSymbol]() { return mcray.#getHitInfo; }
   static get [closer$accessorSymbol]() { return mcray.#closer; }
   static get [rayToRGB$accessorSymbol]() { return mcray.#rayToRGB; }
-  static get [randomSphere$accessorSymbol]() { return mcray.#randomSphere; }
   static {
     mcray.Cons = function Cons(head, tail) {
       return globalThis.Object.freeze(new Cons.class(head, tail));
@@ -1214,22 +1110,71 @@ go = function go(mcray2, n, f, i) {
     tmp15 = mcray.#vec3Scale(tmp14, up1);
     return mcray.Cam(wid, ht, ns, pos, ulc, tmp13, tmp15)
   }
-  static #makePixelRenderer(toRGB, cvt1) {
+  static #makePixelRenderer(toRGB, cvt) {
     return (r, c) => {
       let tmp;
       tmp = runtime.safeCall(toRGB(r, c));
-      return runtime.safeCall(cvt1(tmp))
+      return runtime.safeCall(cvt(tmp))
     }
   }
   static #foreachPixel(cam, pr) {
     let arg$Cam$0$, arg$Cam$1$, tmp;
     if (cam instanceof mcray.Cam.class) {
-      let colors, inlinedVal;
+      let colors, id, param0, param1, param2, param3, param4, param5, inlinedVal;
       arg$Cam$0$ = cam.wid;
       arg$Cam$1$ = cam.ht;
       tmp = arg$Cam$1$ - 1;
       colors = mcray.Nil;
-      inlinedVal = rowLp_colLp(0, mcray, pr, arg$Cam$0$, tmp, colors, undefined);
+      id = 0;
+      param0 = mcray;
+      param1 = pr;
+      param2 = arg$Cam$0$;
+      param3 = tmp;
+      param4 = colors;
+      param5 = undefined;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          switch (id) {
+            case 0:
+              {
+                let scrut, tmp1, tmp2;
+                scrut = param3 < 0;
+                if (scrut === true) {
+                  inlinedVal = param4;
+                  break inlinedLbl
+                }
+                {
+                  let param4_tmp;
+                  tmp1 = param3 - 1;
+                  tmp2 = param2 - 1;
+                  param4_tmp = param4;
+                  param3 = tmp1;
+                  param4 = tmp2;
+                  param5 = param4_tmp;
+                  id = 1;
+                  continue loopLabel;
+                }
+              }
+            case 1:
+              {
+                let scrut, tmp1, tmp2, tmp3;
+                scrut = param4 < 0;
+                if (scrut === true) {
+                  param4 = param5;
+                  id = 0;
+                  continue loopLabel
+                }
+                tmp1 = param4 - 1;
+                tmp2 = runtime.safeCall(param1(param3, param4));
+                tmp3 = param0.Cons(tmp2, param5);
+                param4 = tmp1;
+                param5 = tmp3;
+                id = 1;
+                continue loopLabel;
+              }
+          }
+        }
+      }
       return mcray.Img(arg$Cam$0$, arg$Cam$1$, inlinedVal)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -1361,7 +1306,7 @@ go = function go(mcray2, n, f, i) {
     return mcray.#sphereMake(c, 0.2, tmp16);
   }
   static #makeScene(rng) {
-    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17;
+    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, mcray2, rng1, x, z, objs, inlinedVal;
     tmp = - 1000.0;
     tmp1 = globalThis.Object.freeze([
       0.0,
@@ -1399,8 +1344,35 @@ go = function go(mcray2, n, f, i) {
     tmp14 = mcray.Cons(tmp13, mcray.Nil);
     tmp15 = mcray.Cons(tmp8, tmp14);
     tmp16 = mcray.Cons(tmp4, tmp15);
-    tmp17 = lp(mcray, rng, -11, -11, tmp16);
-    return mcray.#fromList(tmp17)
+    mcray2 = mcray;
+    rng1 = rng;
+    x = -11;
+    z = -11;
+    objs = tmp16;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut, scrut1, tmp17, tmp18, tmp19, tmp20;
+        scrut = z < 11;
+        if (scrut === true) {
+          tmp17 = z + 1;
+          tmp18 = mcray2.#randomSphere(rng1, x, z);
+          tmp19 = mcray2.Cons(tmp18, objs);
+          z = tmp17;
+          objs = tmp19;
+          continue loopLabel
+        }
+        scrut1 = x < 11;
+        if (scrut1 === true) {
+          tmp20 = x + 1;
+          x = tmp20;
+          z = -11;
+          continue loopLabel
+        }
+        inlinedVal = objs;
+        break inlinedLbl;
+      }
+    }
+    return mcray.#fromList(inlinedVal)
   }
   static #buildScene(rng, wid, ht, ns) {
     let cam, world, tmp, tmp1, tmp2;
@@ -1441,24 +1413,15 @@ go = function go(mcray2, n, f, i) {
   static [definitionMetadata] = ["class", "mcray"];
 });
 export { go as _$_modulePrivate_$_go };
-export { cvt as _$_modulePrivate_$_cvt };
 export { hitTest1 as _$_modulePrivate_$_hitTest1 };
 export { hitTest11 as _$_modulePrivate_$_hitTest11 };
-export { colLp as _$_modulePrivate_$_colLp };
-export { rowLp as _$_modulePrivate_$_rowLp };
 export { mkRay as _$_modulePrivate_$_mkRay };
 export { trace as _$_modulePrivate_$_trace };
-export { lp as _$_modulePrivate_$_lp };
 export { mcray1 as _$_modulePrivate_$_mcray };
 export { lambda as _$_modulePrivate_$_lambda };
 export { lambda1 as _$_modulePrivate_$_lambda1 };
 export { lambda2 as _$_modulePrivate_$_lambda2 };
 export { lambda3 as _$_modulePrivate_$_lambda3 };
-export { lambda4 as _$_modulePrivate_$_lambda4 };
-export { lambda5 as _$_modulePrivate_$_lambda5 };
-export { lambda6 as _$_modulePrivate_$_lambda6 };
-export { lambda7 as _$_modulePrivate_$_lambda7 };
-export { lambda8 as _$_modulePrivate_$_lambda8 };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };
@@ -1471,5 +1434,4 @@ export { mkRay$ as _$_modulePrivate_$_mkRay$ };
 export { lambda$6 as _$_modulePrivate_$_lambda$6 };
 export { lambda$7 as _$_modulePrivate_$_lambda$7 };
 export { lambda$8 as _$_modulePrivate_$_lambda$8 };
-export { rowLp_colLp as _$_modulePrivate_$_rowLp_colLp };
 export default mcray1;

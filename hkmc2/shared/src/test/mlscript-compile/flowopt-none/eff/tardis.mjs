@@ -9,7 +9,7 @@ const sendPast$accessorSymbol = globalThis.Symbol("sendPast");
 const sendFuture$accessorSymbol = globalThis.Symbol("sendFuture");
 const bind$accessorSymbol = globalThis.Symbol("bind");
 const fix$accessorSymbol = globalThis.Symbol("fix");
-let getBw1, get, go, tardis1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda14, lambda15, score1, throws1, getBw1$, get$, lambda$, lambda$1, lambda$2, lambda$3, throws1$, score1$, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13;
+let getBw1, get, go, tardis1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, score1, throws1, getBw1$, get$, lambda$, lambda$1, lambda$2, lambda$3, throws1$, score1$, lambda$4, lambda$5, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, lambda$13;
 lambda$13 = (undefined, function (finalFrameScore, score) {
   return () => {
     let tmp;
@@ -17,14 +17,9 @@ lambda$13 = (undefined, function (finalFrameScore, score) {
     return finalFrameScore + tmp
   }
 });
-lambda = (undefined, function (finalFrameScore, score) {
-  let tmp;
-  tmp = runtime.safeCall(score());
-  return finalFrameScore + tmp
-});
 lambda$2 = (undefined, function (tardis2, finalFrameScore) {
   return (scores) => {
-    return lambda1(tardis2, finalFrameScore, scores)
+    return lambda(tardis2, finalFrameScore, scores)
   }
 });
 score1$ = function score1$(tardis2, p) {
@@ -39,10 +34,10 @@ throws1$ = function throws1$(tardis2, p) {
 };
 lambda$12 = (undefined, function (tardis2, score, nextThrows) {
   return () => {
-    return lambda2(tardis2, score, nextThrows)
+    return lambda1(tardis2, score, nextThrows)
   }
 });
-lambda2 = (undefined, function (tardis2, score, nextThrows) {
+lambda1 = (undefined, function (tardis2, score, nextThrows) {
   let tmp, tmp1, tmp2, tmp3, tmp4, element1$, element0$;
   tmp = runtime.safeCall(score());
   tmp1 = tmp + 10;
@@ -63,15 +58,15 @@ lambda2 = (undefined, function (tardis2, score, nextThrows) {
 });
 lambda$9 = (undefined, function (tardis2, score, nextThrows) {
   return (_) => {
-    return lambda3(tardis2, score, nextThrows, _)
+    return lambda2(tardis2, score, nextThrows, _)
   }
 });
 lambda$11 = (undefined, function (tardis2, score, nextThrows) {
   return () => {
-    return lambda4(tardis2, score, nextThrows)
+    return lambda3(tardis2, score, nextThrows)
   }
 });
-lambda4 = (undefined, function (tardis2, score, nextThrows) {
+lambda3 = (undefined, function (tardis2, score, nextThrows) {
   let tmp, tmp1, tmp2, element0$;
   tmp = runtime.safeCall(score());
   tmp1 = tmp + 10;
@@ -85,15 +80,15 @@ lambda4 = (undefined, function (tardis2, score, nextThrows) {
 });
 lambda$8 = (undefined, function (tardis2, score, nextThrows, firstThrow) {
   return (_) => {
-    return lambda5(tardis2, score, nextThrows, firstThrow, _)
+    return lambda4(tardis2, score, nextThrows, firstThrow, _)
   }
 });
 lambda$10 = (undefined, function (score, secondThrow, firstThrow) {
   return () => {
-    return lambda6(score, secondThrow, firstThrow)
+    return lambda5(score, secondThrow, firstThrow)
   }
 });
-lambda6 = (undefined, function (score, secondThrow, firstThrow) {
+lambda5 = (undefined, function (score, secondThrow, firstThrow) {
   let tmp, tmp1;
   tmp = runtime.safeCall(score());
   tmp1 = tmp + firstThrow;
@@ -101,10 +96,10 @@ lambda6 = (undefined, function (score, secondThrow, firstThrow) {
 });
 lambda$7 = (undefined, function (score, secondThrow, firstThrow) {
   return (_) => {
-    return lambda7(score, secondThrow, firstThrow, _)
+    return lambda6(score, secondThrow, firstThrow, _)
   }
 });
-lambda3 = (undefined, function (tardis2, score, nextThrows, _) {
+lambda2 = (undefined, function (tardis2, score, nextThrows, _) {
   let tmp, tmp1, lambda$here, element0$;
   tmp = runtime.safeCall(nextThrows());
   if (runtime.Tuple.isArrayLike(tmp) && tmp.length === 2) {
@@ -122,7 +117,7 @@ lambda3 = (undefined, function (tardis2, score, nextThrows, _) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda5 = (undefined, function (tardis2, score, nextThrows, firstThrow, _) {
+lambda4 = (undefined, function (tardis2, score, nextThrows, firstThrow, _) {
   let tmp, tmp1, lambda$here;
   tmp = 10 - firstThrow;
   tmp1 = globalThis.Object.freeze([
@@ -135,7 +130,7 @@ lambda5 = (undefined, function (tardis2, score, nextThrows, firstThrow, _) {
     tmp1
   ])
 });
-lambda7 = (undefined, function (score, secondThrow, firstThrow, _) {
+lambda6 = (undefined, function (score, secondThrow, firstThrow, _) {
   let tmp, lambda$here;
   tmp = globalThis.Object.freeze([
     firstThrow,
@@ -149,10 +144,10 @@ lambda7 = (undefined, function (score, secondThrow, firstThrow, _) {
 });
 lambda$6 = (undefined, function (tardis2, f, score) {
   return (nextThrows) => {
-    return lambda8(tardis2, f, score, nextThrows)
+    return lambda7(tardis2, f, score, nextThrows)
   }
 });
-lambda8 = (undefined, function (tardis2, f, score, nextThrows) {
+lambda7 = (undefined, function (tardis2, f, score, nextThrows) {
   let arg$Frame$0$, arg$Frame$1$, arg$Spare$0$, lambda$here, lambda$here1, lambda$here2;
   if (f instanceof tardis2.Strike.class) {
     lambda$here = lambda$9(tardis2, score, nextThrows);
@@ -176,17 +171,12 @@ lambda$5 = (undefined, function (tardis2, f, score) {
     return tardis2[bind$accessorSymbol](tardis2[getFuture$accessorSymbol])(lambda$here)
   }
 });
-lambda9 = (undefined, function (tardis2, f, score, _) {
-  let lambda$here;
-  lambda$here = lambda$6(tardis2, f, score);
-  return tardis2[bind$accessorSymbol](tardis2[getFuture$accessorSymbol])(lambda$here)
-});
 lambda$4 = (undefined, function (tardis2, f, score11) {
   return (scores) => {
-    return lambda10(tardis2, f, score11, scores)
+    return lambda8(tardis2, f, score11, scores)
   }
 });
-lambda10 = (undefined, function (tardis2, f, score11, scores) {
+lambda8 = (undefined, function (tardis2, f, score11, scores) {
   let arg$Cons$0$, tmp, tmp1, lambda$here;
   if (scores instanceof tardis2.Cons.class) {
     arg$Cons$0$ = scores.head;
@@ -223,14 +213,9 @@ throws1 = function throws1(tardis2, p) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda11 = (undefined, function (tardis2, f, score11, _) {
-  let lambda$here;
-  lambda$here = lambda$4(tardis2, f, score11);
-  return tardis2[bind$accessorSymbol](tardis2[getPast$accessorSymbol])(lambda$here)
-});
 lambda$1 = (undefined, function (tardis2, f) {
   return (p) => {
-    return lambda12(tardis2, f, p)
+    return lambda9(tardis2, f, p)
   }
 });
 lambda$ = (undefined, function (tardis2, finalFrameScore, fs) {
@@ -238,7 +223,7 @@ lambda$ = (undefined, function (tardis2, finalFrameScore, fs) {
     return go(tardis2, finalFrameScore, fs)
   }
 });
-lambda1 = (undefined, function (tardis2, finalFrameScore, scores) {
+lambda = (undefined, function (tardis2, finalFrameScore, scores) {
   let arg$Cons$0$, tmp, lambda$here;
   if (scores instanceof tardis2.Cons.class) {
     arg$Cons$0$ = scores.head;
@@ -248,16 +233,13 @@ lambda1 = (undefined, function (tardis2, finalFrameScore, scores) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda12 = (undefined, function (tardis2, f, p) {
+lambda9 = (undefined, function (tardis2, f, p) {
   let score11, throws11, tmp, lambda$here;
   score11 = score1$(tardis2, p);
   throws11 = throws1$(tardis2, p);
   tmp = tardis2[sendPast$accessorSymbol](throws11);
   lambda$here = lambda$3(tardis2, f, score11);
   return tardis2[bind$accessorSymbol](tmp)(lambda$here)
-});
-lambda13 = (undefined, function (tardis2, finalFrameScore, fs, _) {
-  return go(tardis2, finalFrameScore, fs)
 });
 go = function go(tardis2, finalFrameScore, frames) {
   let arg$Cons$0$, arg$Cons$1$, tmp, lambda$here, lambda$here1, lambda$here2;
@@ -274,10 +256,10 @@ go = function go(tardis2, finalFrameScore, frames) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda14 = (undefined, function () {
+lambda10 = (undefined, function () {
   return 0
 });
-lambda15 = (undefined, function (th) {
+lambda11 = (undefined, function (th) {
   return runtime.safeCall(th())
 });
 get$ = function get$(tardis2, r) {
@@ -665,7 +647,7 @@ getBw1 = function getBw1(tardis2, r) {
       arg$Game$0$ = game.frames;
       arg$Game$1$ = game.lastFrame;
       finalFrameScore = tardis.#lframeScore(arg$Game$1$);
-      initialFw = tardis.Cons(lambda14, tardis.Nil);
+      initialFw = tardis.Cons(lambda10, tardis.Nil);
       tmp = go(tardis, finalFrameScore, arg$Game$0$);
       tmp1 = tardis.#initialBw(arg$Game$1$);
       scrut = tardis.#run(tmp, tmp1, initialFw);
@@ -673,7 +655,7 @@ getBw1 = function getBw1(tardis2, r) {
         element0$ = runtime.Tuple.get(scrut, 0);
         runtime.Tuple.get(scrut, 1);
         runtime.Tuple.get(scrut, 2);
-        return tardis.#map(lambda15)(element0$)
+        return tardis.#map(lambda11)(element0$)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -716,10 +698,6 @@ export { lambda8 as _$_modulePrivate_$_lambda8 };
 export { lambda9 as _$_modulePrivate_$_lambda9 };
 export { lambda10 as _$_modulePrivate_$_lambda10 };
 export { lambda11 as _$_modulePrivate_$_lambda11 };
-export { lambda12 as _$_modulePrivate_$_lambda12 };
-export { lambda13 as _$_modulePrivate_$_lambda13 };
-export { lambda14 as _$_modulePrivate_$_lambda14 };
-export { lambda15 as _$_modulePrivate_$_lambda15 };
 export { score1 as _$_modulePrivate_$_score1 };
 export { throws1 as _$_modulePrivate_$_throws1 };
 export { getBw1$ as _$_modulePrivate_$_getBw1$ };

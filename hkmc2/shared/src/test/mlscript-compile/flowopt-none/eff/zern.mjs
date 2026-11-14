@@ -4,98 +4,7 @@ import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
 const tabulateRM$accessorSymbol = globalThis.Symbol("tabulateRM");
 const tabulateCM$accessorSymbol = globalThis.Symbol("tabulateCM");
-let iter, lp1, lp2, lp11, lp21, g, zern1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7, lp1_lp2, lp1_lp21, g$tailrec;
-lp1_lp2 = function lp1_lp2(id, param0, param1, param2, param3, param4, param5, param6, param7) {
-  loopLabel: while (true) {
-    switch (id) {
-      case 0:
-        {
-          let scrut;
-          scrut = param5 < param1;
-          if (scrut === true) {
-            param6 = 0;
-            id = 1;
-            continue loopLabel
-          }
-          return runtime.Unit;
-        }
-      case 1:
-        {
-          let scrut, tmp, tmp1, tmp2, tmp3;
-          scrut = param6 < param2;
-          if (scrut === true) {
-            tmp = runtime.safeCall(param3(param5, param6));
-            param4[param7] = tmp;
-            tmp1 = param6 + 1;
-            tmp2 = param7 + 1;
-            param6 = tmp1;
-            param7 = tmp2;
-            id = 1;
-            continue loopLabel
-          }
-          tmp3 = param5 + 1;
-          param5 = tmp3;
-          param6 = 0;
-          id = 0;
-          continue loopLabel;
-        }
-    }
-  }
-};
-lp1_lp21 = function lp1_lp2(id, param0, param1, param2, param3, param4, param5, param6, param7, param8) {
-  loopLabel: while (true) {
-    switch (id) {
-      case 0:
-        {
-          let scrut;
-          scrut = param7 < param2;
-          if (scrut === true) {
-            param6 = 0;
-            id = 1;
-            continue loopLabel
-          }
-          return runtime.Unit;
-        }
-      case 1:
-        {
-          let scrut, tmp, tmp1, tmp2, tmp3, tmp4;
-          scrut = param6 < param1;
-          if (scrut === true) {
-            tmp = runtime.safeCall(param3(param6, param7));
-            param4[param8] = tmp;
-            tmp1 = param6 + 1;
-            tmp2 = param8 + param2;
-            param6 = tmp1;
-            param8 = tmp2;
-            id = 1;
-            continue loopLabel
-          }
-          tmp3 = param7 + 1;
-          tmp4 = param8 - param5;
-          param6 = 0;
-          param7 = tmp3;
-          param8 = tmp4;
-          id = 0;
-          continue loopLabel;
-        }
-    }
-  }
-};
-g$tailrec = function g$tailrec(zern2, f, n, l) {
-  loopLabel: while (true) {
-    let scrut, tmp, tmp1, tmp2;
-    scrut = n == 0;
-    if (scrut === true) {
-      return l
-    }
-    tmp = n - 1;
-    tmp1 = runtime.safeCall(f(n));
-    tmp2 = zern2.Cons(tmp1, l);
-    n = tmp;
-    l = tmp2;
-    continue loopLabel;
-  }
-};
+let zern1, lambda, lambda1, lambda2, lambda3, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6, lambda$7;
 lambda$6 = (undefined, function (zern2) {
   return (x) => {
     return 1 + x
@@ -103,10 +12,10 @@ lambda$6 = (undefined, function (zern2) {
 });
 lambda$7 = (undefined, function (zern2) {
   return (r, c) => {
-    return lambda6(zern2, r, c)
+    return lambda2(zern2, r, c)
   }
 });
-lambda6 = (undefined, function (zern2, r, c) {
+lambda2 = (undefined, function (zern2, r, c) {
   let tmp, tmp1;
   tmp = 128 * r;
   tmp1 = tmp + c;
@@ -114,13 +23,10 @@ lambda6 = (undefined, function (zern2, r, c) {
 });
 lambda$5 = (undefined, function (zern2) {
   return (x) => {
-    return lambda7(zern2, x)
+    return lambda3(zern2, x)
   }
 });
-lambda5 = (undefined, function (zern2, x) {
-  return 1 + x
-});
-lambda7 = (undefined, function (zern2, x) {
+lambda3 = (undefined, function (zern2, x) {
   let lambda$here, t, inlinedVal;
   t = zern2.RowMajor;
   if (t instanceof zern2.RowMajor.class) {
@@ -140,30 +46,17 @@ lambda$4 = (undefined, function (sf) {
     return vdst + tmp
   }
 });
-lambda4 = (undefined, function (sf, vdst, vsrc) {
-  let tmp;
-  tmp = sf * vsrc;
-  return vdst + tmp
-});
 lambda$3 = (undefined, function (sf) {
   return (vsrc) => {
     return sf * vsrc
   }
 });
-lambda3 = (undefined, function (sf, vsrc) {
-  return sf * vsrc
-});
-g = function g(zern2, f, n) {
-  return (l) => {
-    return g$tailrec(zern2, f, n, l)
-  }
-};
 lambda$2 = (undefined, function (zern2, f, dst, src) {
   return (ix) => {
-    return lambda2(zern2, f, dst, src, ix)
+    return lambda1(zern2, f, dst, src, ix)
   }
 });
-lambda2 = (undefined, function (zern2, f, dst, src, ix) {
+lambda1 = (undefined, function (zern2, f, dst, src, ix) {
   let tmp, inlinedVal;
   inlinedVal = src.at(ix);
   tmp = runtime.safeCall(f(inlinedVal));
@@ -172,10 +65,10 @@ lambda2 = (undefined, function (zern2, f, dst, src, ix) {
 });
 lambda$1 = (undefined, function (zern2, f, dst, src1, src2) {
   return (ix) => {
-    return lambda1(zern2, f, dst, src1, src2, ix)
+    return lambda(zern2, f, dst, src1, src2, ix)
   }
 });
-lambda1 = (undefined, function (zern2, f, dst, src1, src2, ix) {
+lambda = (undefined, function (zern2, f, dst, src1, src2, ix) {
   let tmp, inlinedVal, inlinedVal1;
   inlinedVal = src1.at(ix);
   inlinedVal1 = src2.at(ix);
@@ -183,41 +76,12 @@ lambda1 = (undefined, function (zern2, f, dst, src1, src2, ix) {
   dst[ix] = tmp;
   return runtime.Unit
 });
-lp11 = function lp1(zern2, nrows, ncols, f, arr, delta, i, j, k) {
-  return lp1_lp21(0, zern2, nrows, ncols, f, arr, delta, i, j, k)
-};
-lp21 = function lp2(zern2, nrows, ncols, f, arr, delta, i, j, k) {
-  return lp1_lp21(1, zern2, nrows, ncols, f, arr, delta, i, j, k)
-};
-lp1 = function lp1(zern2, nrows, ncols, f, arr, i, j, k) {
-  return lp1_lp2(0, zern2, nrows, ncols, f, arr, i, j, k)
-};
-lp2 = function lp2(zern2, nrows, ncols, f, arr, i, j, k) {
-  return lp1_lp2(1, zern2, nrows, ncols, f, arr, i, j, k)
-};
 lambda$ = (undefined, function (zern2, v, arr) {
   return (ix) => {
     arr[ix] = v;
     return runtime.Unit
   }
 });
-lambda = (undefined, function (zern2, v, arr, ix) {
-  arr[ix] = v;
-  return runtime.Unit
-});
-iter = function iter(n, f, k) {
-  loopLabel: while (true) {
-    let scrut, tmp;
-    scrut = k >= n;
-    if (scrut === true) {
-      return runtime.Unit
-    }
-    runtime.safeCall(f(k));
-    tmp = k + 1;
-    k = tmp;
-    continue loopLabel;
-  }
-};
 (class zern {
   static {
     zern1 = this
@@ -460,18 +324,109 @@ iter = function iter(n, f, k) {
     return zern.Arr2(tmp, nrows, ncols, nelts)
   }
   static #tabulateRM(nrows, ncols, f) {
-    let nelts, arr;
+    let nelts, arr, id, param1, param2, param3, param4, param5, param6, param7;
     nelts = zern.#chkSize(nrows, ncols);
     arr = zern.#mkRawArray(nelts);
-    lp1_lp2(1, zern, nrows, ncols, f, arr, 0, 0, 0);
+    id = 1;
+    param1 = nrows;
+    param2 = ncols;
+    param3 = f;
+    param4 = arr;
+    param5 = 0;
+    param6 = 0;
+    param7 = 0;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        switch (id) {
+          case 0:
+            {
+              let scrut;
+              scrut = param5 < param1;
+              if (scrut === true) {
+                param6 = 0;
+                id = 1;
+                continue loopLabel
+              }
+              break inlinedLbl;
+            }
+          case 1:
+            {
+              let scrut, tmp, tmp1, tmp2, tmp3;
+              scrut = param6 < param2;
+              if (scrut === true) {
+                tmp = runtime.safeCall(param3(param5, param6));
+                param4[param7] = tmp;
+                tmp1 = param6 + 1;
+                tmp2 = param7 + 1;
+                param6 = tmp1;
+                param7 = tmp2;
+                id = 1;
+                continue loopLabel
+              }
+              tmp3 = param5 + 1;
+              param5 = tmp3;
+              param6 = 0;
+              id = 0;
+              continue loopLabel;
+            }
+        }
+      }
+    }
     return zern.Arr2(arr, nrows, ncols, nelts)
   }
   static #tabulateCM(nrows, ncols, f) {
-    let nelts, arr, delta;
+    let nelts, arr, delta, id, param1, param2, param3, param4, param5, param6, param7, param8;
     nelts = zern.#chkSize(nrows, ncols);
     arr = zern.#mkRawArray(nelts);
     delta = nelts - 1;
-    lp1_lp21(1, zern, nrows, ncols, f, arr, delta, 0, 0, 0);
+    id = 1;
+    param1 = nrows;
+    param2 = ncols;
+    param3 = f;
+    param4 = arr;
+    param5 = delta;
+    param6 = 0;
+    param7 = 0;
+    param8 = 0;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        switch (id) {
+          case 0:
+            {
+              let scrut;
+              scrut = param7 < param2;
+              if (scrut === true) {
+                param6 = 0;
+                id = 1;
+                continue loopLabel
+              }
+              break inlinedLbl;
+            }
+          case 1:
+            {
+              let scrut, tmp, tmp1, tmp2, tmp3, tmp4;
+              scrut = param6 < param1;
+              if (scrut === true) {
+                tmp = runtime.safeCall(param3(param6, param7));
+                param4[param8] = tmp;
+                tmp1 = param6 + 1;
+                tmp2 = param8 + param2;
+                param6 = tmp1;
+                param8 = tmp2;
+                id = 1;
+                continue loopLabel
+              }
+              tmp3 = param7 + 1;
+              tmp4 = param8 - param5;
+              param6 = 0;
+              param7 = tmp3;
+              param8 = tmp4;
+              id = 0;
+              continue loopLabel;
+            }
+        }
+      }
+    }
     return zern.Arr2(arr, nrows, ncols, nelts)
   }
   static #tabulate(t) {
@@ -525,9 +480,29 @@ iter = function iter(n, f, k) {
   }
   static #collect(n) {
     return (f) => {
-      let l;
+      let l, zern2, f1, n1, l1, inlinedVal;
       l = zern.Nil;
-      return g$tailrec(zern, f, n, l)
+      zern2 = zern;
+      f1 = f;
+      n1 = n;
+      l1 = l;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut, tmp, tmp1, tmp2;
+          scrut = n1 == 0;
+          if (scrut === true) {
+            inlinedVal = l1;
+            break inlinedLbl
+          }
+          tmp = n1 - 1;
+          tmp1 = runtime.safeCall(f1(n1));
+          tmp2 = zern2.Cons(tmp1, l1);
+          n1 = tmp;
+          l1 = tmp2;
+          continue loopLabel;
+        }
+      }
+      return inlinedVal
     }
   }
   static #ncoefs() {
@@ -601,21 +576,11 @@ iter = function iter(n, f, k) {
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "zern"];
 });
-export { iter as _$_modulePrivate_$_iter };
-export { lp1 as _$_modulePrivate_$_lp1 };
-export { lp2 as _$_modulePrivate_$_lp2 };
-export { lp11 as _$_modulePrivate_$_lp11 };
-export { lp21 as _$_modulePrivate_$_lp21 };
-export { g as _$_modulePrivate_$_g };
 export { zern1 as _$_modulePrivate_$_zern };
 export { lambda as _$_modulePrivate_$_lambda };
 export { lambda1 as _$_modulePrivate_$_lambda1 };
 export { lambda2 as _$_modulePrivate_$_lambda2 };
 export { lambda3 as _$_modulePrivate_$_lambda3 };
-export { lambda4 as _$_modulePrivate_$_lambda4 };
-export { lambda5 as _$_modulePrivate_$_lambda5 };
-export { lambda6 as _$_modulePrivate_$_lambda6 };
-export { lambda7 as _$_modulePrivate_$_lambda7 };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };
@@ -624,7 +589,4 @@ export { lambda$4 as _$_modulePrivate_$_lambda$4 };
 export { lambda$5 as _$_modulePrivate_$_lambda$5 };
 export { lambda$6 as _$_modulePrivate_$_lambda$6 };
 export { lambda$7 as _$_modulePrivate_$_lambda$7 };
-export { lp1_lp2 as _$_modulePrivate_$_lp1_lp2 };
-export { lp1_lp21 as _$_modulePrivate_$_lp1_lp21 };
-export { g$tailrec as _$_modulePrivate_$_g$tailrec };
 export default zern1;

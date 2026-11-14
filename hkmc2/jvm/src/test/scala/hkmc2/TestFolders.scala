@@ -78,7 +78,7 @@ object TestFolders:
       case "flowopt-dopt" => (true, S(true))
       case "flowopt-none" => (false, N)
       case "flowopt-opt" => (false, S(false))
-    benchConfig(wd).mapOptimizer: opt =>
+    benchConfig(wd).copy(preservePrivateAbi = false).mapOptimizer: opt =>
       opt.copy(
         deforest = if deforest then S(Config.Deforest.default) else N,
         flowBasedOpt = flowBasedMono.map: mono =>

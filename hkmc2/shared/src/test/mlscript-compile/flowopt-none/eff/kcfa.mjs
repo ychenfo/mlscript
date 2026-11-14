@@ -2,14 +2,16 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
+const listPairFoldl$accessorSymbol = globalThis.Symbol("listPairFoldl");
 const varMapInsert$accessorSymbol = globalThis.Symbol("varMapInsert");
+const varMapFind$accessorSymbol = globalThis.Symbol("varMapFind");
 const varMapNext$accessorSymbol = globalThis.Symbol("varMapNext");
 const varMapLeft$accessorSymbol = globalThis.Symbol("varMapLeft");
 const bindCompare$accessorSymbol = globalThis.Symbol("bindCompare");
-const closureCompare$accessorSymbol = globalThis.Symbol("closureCompare");
 const setNext$accessorSymbol = globalThis.Symbol("setNext");
 const setUnion$accessorSymbol = globalThis.Symbol("setUnion");
 const storeMapInsertWith$accessorSymbol = globalThis.Symbol("storeMapInsertWith");
+const storeMapFind$accessorSymbol = globalThis.Symbol("storeMapFind");
 const storeMapNext$accessorSymbol = globalThis.Symbol("storeMapNext");
 const storeMapLeft$accessorSymbol = globalThis.Symbol("storeMapLeft");
 const storeMapWrap$accessorSymbol = globalThis.Symbol("storeMapWrap");
@@ -19,18 +21,18 @@ const alloc$accessorSymbol = globalThis.Symbol("alloc");
 const monoStoreUpdate$accessorSymbol = globalThis.Symbol("monoStoreUpdate");
 const listMap$tailrec$accessorSymbol = globalThis.Symbol("listMap$tailrec");
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
-let foldf, ins, find1, cmp, cmp1, incr, link, union1, ins1, foldf1, ins2, find11, foldf2, cmp2, incr1, link1, union, eval1, apply, return_, newLabel, lambda, var_, mkLet, call, kcfa1, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, union$, lambda$5, eval$, apply$, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, mkLet$worker, call$worker, lambda$worker;
+let ins, incr, ins1, foldf, ins2, foldf1, incr1, union, eval1, apply, kcfa1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, union$, lambda$5, eval$, apply$, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12;
 lambda$12 = (undefined, function (kcfa2) {
   return (e) => {
-    return lambda8(kcfa2, e)
+    return lambda3(kcfa2, e)
   }
 });
 lambda$11 = (undefined, function (kcfa2, lambdaLabel) {
   return (p) => {
-    return lambda9(kcfa2, lambdaLabel, p)
+    return lambda4(kcfa2, lambdaLabel, p)
   }
 });
-lambda8 = (undefined, function (kcfa2, e) {
+lambda3 = (undefined, function (kcfa2, e) {
   let arg$LAMBDA$0$, element0$;
   if (e instanceof kcfa2.LAMBDA.class) {
     arg$LAMBDA$0$ = e.lam;
@@ -44,7 +46,7 @@ lambda8 = (undefined, function (kcfa2, e) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda9 = (undefined, function (kcfa2, lambdaLabel, p) {
+lambda4 = (undefined, function (kcfa2, lambdaLabel, p) {
   let element1$, element0$;
   if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
     let inlinedVal;
@@ -58,80 +60,12 @@ lambda9 = (undefined, function (kcfa2, lambdaLabel, p) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-newLabel = function newLabel(labelCount) {
-  let n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return n
-};
-var_ = function var_(kcfa2, labelCount, x) {
-  let n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return kcfa2.VAR(n, x)
-};
-lambda = function lambda(kcfa2, labelCount, formals) {
-  return (call1) => {
-    return lambda$worker(kcfa2, labelCount, formals, call1)
-  }
-};
-lambda$worker = function lambda$worker(kcfa2, labelCount, formals, call1) {
-  let tmp, n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  tmp = globalThis.Object.freeze([
-    n,
-    formals,
-    call1
-  ]);
-  return kcfa2.LAMBDA(tmp)
-};
-call = function call(kcfa2, labelCount, f) {
-  return (args) => {
-    return call$worker(kcfa2, labelCount, f, args)
-  }
-};
-call$worker = function call$worker(kcfa2, labelCount, f, args) {
-  let n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return kcfa2.CALL(n, f, args)
-};
-return_ = function return_(kcfa2, labelCount, x) {
-  let n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return kcfa2.RET(n, x)
-};
-mkLet = function mkLet(kcfa2, labelCount, x) {
-  return (e1) => {
-    return (e2) => {
-      return mkLet$worker(kcfa2, labelCount, x, e1, e2)
-    }
-  }
-};
-mkLet$worker = function mkLet$worker(kcfa2, labelCount, x, e1, e2) {
-  let tmp, tmp1, inlinedVal, n, tmp2, n1;
-  tmp = kcfa2.Cons(x, kcfa2.Nil);
-  n1 = labelCount.value + 1;
-  labelCount.value = n1;
-  tmp2 = globalThis.Object.freeze([
-    n1,
-    tmp,
-    e2
-  ]);
-  inlinedVal = kcfa2.LAMBDA(tmp2);
-  tmp1 = kcfa2.Cons(e1, kcfa2.Nil);
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return kcfa2.CALL(n, inlinedVal, tmp1)
-};
 lambda$10 = (undefined, function (kcfa2) {
   return (b, d, mst) => {
-    return lambda7(kcfa2, b, d, mst)
+    return lambda2(kcfa2, b, d, mst)
   }
 });
-lambda7 = (undefined, function (kcfa2, b, d, mst) {
+lambda2 = (undefined, function (kcfa2, b, d, mst) {
   let arg$Bnd$0$;
   if (b instanceof kcfa2.Bnd.class) {
     let f, init, inlinedVal, f1, arg$SET$1$;
@@ -140,7 +74,7 @@ lambda7 = (undefined, function (kcfa2, b, d, mst) {
     init = kcfa2.Nil;
     if (d instanceof kcfa2.SET.class) {
       arg$SET$1$ = d.tree;
-      inlinedVal = foldf1(kcfa2, f, arg$SET$1$, init);
+      inlinedVal = foldf(kcfa2, f, arg$SET$1$, init);
       f1 = lambda$8(kcfa2, arg$Bnd$0$);
       return kcfa2[listFoldl$tailrec$accessorSymbol](f1, mst, inlinedVal)
     }
@@ -150,10 +84,10 @@ lambda7 = (undefined, function (kcfa2, b, d, mst) {
 });
 lambda$9 = (undefined, function (kcfa2) {
   return (state, sum) => {
-    return lambda6(kcfa2, state, sum)
+    return lambda1(kcfa2, state, sum)
   }
 });
-lambda6 = (undefined, function (kcfa2, state, sum) {
+lambda1 = (undefined, function (kcfa2, state, sum) {
   let arg$State$2$;
   if (state instanceof kcfa2.State.class) {
     let mergeFn, union$here;
@@ -169,15 +103,12 @@ lambda$8 = (undefined, function (kcfa2, x) {
     return kcfa2[monoStoreUpdate$accessorSymbol](mst, x, exp)
   }
 });
-lambda5 = (undefined, function (kcfa2, x, exp, mst) {
-  return kcfa2[monoStoreUpdate$accessorSymbol](mst, x, exp)
-});
 lambda$7 = (undefined, function (kcfa2) {
   return (v, exps) => {
-    return lambda4(kcfa2, v, exps)
+    return lambda(kcfa2, v, exps)
   }
 });
-lambda4 = (undefined, function (kcfa2, v, exps) {
+lambda = (undefined, function (kcfa2, v, exps) {
   let inlinedVal, arg$Clos$0$;
   if (v instanceof kcfa2.Clos.class) {
     arg$Clos$0$ = v.lam;
@@ -191,9 +122,6 @@ lambda$6 = (undefined, function (kcfa2, st) {
     return kcfa2[stateSame$accessorSymbol](st, st1)
   }
 });
-lambda3 = (undefined, function (kcfa2, st, st1) {
-  return kcfa2[stateSame$accessorSymbol](st, st1)
-});
 apply$ = function apply$(kcfa2, store, time1, params) {
   return (clos, states) => {
     return apply(kcfa2, store, time1, params, clos, states)
@@ -205,16 +133,16 @@ apply = function apply(kcfa2, store, time1, params, clos, states) {
     arg$Clos$0$ = clos.lam;
     arg$Clos$1$ = clos.benv;
     if (runtime.Tuple.isArrayLike(arg$Clos$0$) && arg$Clos$0$.length === 3) {
-      let f, inlinedVal, f1, inlinedVal1, f2, inlinedVal2;
+      let f, inlinedVal, inlinedVal1, inlinedVal2, lambda$here, lambda$here1;
       runtime.Tuple.get(arg$Clos$0$, 0);
       element1$ = runtime.Tuple.get(arg$Clos$0$, 1);
       element2$ = runtime.Tuple.get(arg$Clos$0$, 2);
       f = kcfa2[alloc$accessorSymbol](time1);
       inlinedVal = kcfa2[listMap$tailrec$accessorSymbol](f, element1$);
-      f1 = lambda$1(kcfa2);
-      inlinedVal1 = foldf(kcfa2, f1, element1$, inlinedVal, arg$Clos$1$);
-      f2 = lambda$5(kcfa2);
-      inlinedVal2 = foldf(kcfa2, f2, inlinedVal, params, store);
+      lambda$here1 = lambda$1(kcfa2);
+      inlinedVal1 = kcfa2[listPairFoldl$accessorSymbol](lambda$here1)(arg$Clos$1$)(element1$, inlinedVal);
+      lambda$here = lambda$5(kcfa2);
+      inlinedVal2 = kcfa2[listPairFoldl$accessorSymbol](lambda$here)(store)(inlinedVal, params);
       tmp = kcfa2.State(element2$, inlinedVal1, inlinedVal2, time1);
       return kcfa2.Cons(tmp, states)
     }
@@ -230,23 +158,14 @@ eval$ = function eval$(kcfa2, benv, store) {
 eval1 = (undefined, function (kcfa2, benv, store, e) {
   let arg$LAMBDA$0$, arg$VAR$1$, tmp;
   if (e instanceof kcfa2.VAR.class) {
-    let arg$Some$0$, inlinedVal, arg$VmMAP$1$;
+    let scrut, scrut1, arg$Some$0$;
     arg$VAR$1$ = e.x;
-    if (benv instanceof kcfa2.VmMAP.class) {
-      arg$VmMAP$1$ = benv.tree;
-      inlinedVal = find1(kcfa2, arg$VAR$1$, arg$VmMAP$1$);
-      if (inlinedVal instanceof kcfa2.Some.class) {
-        let inlinedVal1, arg$SmMAP$1$;
-        arg$Some$0$ = inlinedVal.value;
-        if (store instanceof kcfa2.SmMAP.class) {
-          arg$SmMAP$1$ = store.tree;
-          inlinedVal1 = find11(kcfa2, arg$Some$0$, arg$SmMAP$1$);
-          if (inlinedVal1 instanceof kcfa2.Some.class) {
-            return inlinedVal1.value
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    scrut1 = kcfa2[varMapFind$accessorSymbol](benv, arg$VAR$1$);
+    if (scrut1 instanceof kcfa2.Some.class) {
+      arg$Some$0$ = scrut1.value;
+      scrut = kcfa2[storeMapFind$accessorSymbol](store, arg$Some$0$);
+      if (scrut instanceof kcfa2.Some.class) {
+        return scrut.value
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -264,9 +183,6 @@ lambda$5 = (undefined, function (kcfa2) {
   return (adr, dv, st) => {
     return kcfa2[storeMapInsertWith$accessorSymbol](kcfa2[setUnion$accessorSymbol])(st, adr, dv)
   }
-});
-lambda2 = (undefined, function (kcfa2, adr, dv, st) {
-  return kcfa2[storeMapInsertWith$accessorSymbol](kcfa2[setUnion$accessorSymbol])(st, adr, dv)
 });
 union$ = function union$(kcfa2, mergeFn) {
   return (t1, t2, n, result) => {
@@ -357,37 +273,6 @@ union = function union(kcfa2, mergeFn, t1, t2, n, result) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-link1 = function link(kcfa2, t1, d) {
-  loopLabel: while (true) {
-    let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1, tmp2;
-    if (d instanceof kcfa2.SmZERO.class) {
-      return t1
-    } else if (d instanceof kcfa2.SmONE.class) {
-      arg$SmONE$0$ = d.key;
-      arg$SmONE$1$ = d.value;
-      arg$SmONE$2$ = d.tree;
-      arg$SmONE$3$ = d.digit;
-      tmp = kcfa2.SmT(kcfa2.SmB, arg$SmONE$2$, arg$SmONE$0$, arg$SmONE$1$, t1);
-      t1 = tmp;
-      d = arg$SmONE$3$;
-      continue loopLabel
-    } else if (d instanceof kcfa2.SmTWO.class) {
-      arg$SmTWO$0$ = d.key1;
-      arg$SmTWO$1$ = d.value1;
-      arg$SmTWO$2$ = d.tree1;
-      arg$SmTWO$3$ = d.key2;
-      arg$SmTWO$4$ = d.value2;
-      arg$SmTWO$5$ = d.tree2;
-      arg$SmTWO$6$ = d.digit;
-      tmp1 = kcfa2.SmT(kcfa2.SmR, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
-      tmp2 = kcfa2.SmT(kcfa2.SmB, tmp1, arg$SmTWO$0$, arg$SmTWO$1$, t1);
-      t1 = tmp2;
-      d = arg$SmTWO$6$;
-      continue loopLabel
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 incr1 = function incr(kcfa2, ak1, a1, t1, d) {
   let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1;
   if (d instanceof kcfa2.SmZERO.class) {
@@ -414,82 +299,93 @@ incr1 = function incr(kcfa2, ak1, a1, t1, d) {
 };
 lambda$4 = (undefined, function (kcfa2, cmpRng) {
   return (map1, map2) => {
-    return lambda13(kcfa2, cmpRng, map1, map2)
+    return lambda7(kcfa2, cmpRng, map1, map2)
   }
 });
-cmp2 = function cmp(kcfa2, cmpRng, t1, t2) {
-  loopLabel: while (true) {
-    let p1, p2, order, order1, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1;
-    p1 = kcfa2[storeMapNext$accessorSymbol](t1);
-    p2 = kcfa2[storeMapNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SmE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          runtime.Tuple.get(p2, 1);
-          if (element0$1 instanceof kcfa2.SmE.class) {
-            return kcfa2.EQUAL
-          }
-          return kcfa2.LESS;
-        }
-        return kcfa2.LESS;
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SmE.class) {
-          return kcfa2.GREATER
-        }
-        if (element0$ instanceof kcfa2.SmT.class) {
-          arg$SmT$2$ = element0$.key;
-          arg$SmT$3$ = element0$.value;
-          if (element0$1 instanceof kcfa2.SmT.class) {
-            arg$SmT$2$1 = element0$1.key;
-            arg$SmT$3$1 = element0$1.value;
-            order = kcfa2[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-            if (order instanceof kcfa2.EQUAL.class) {
-              order1 = runtime.safeCall(cmpRng(arg$SmT$3$, arg$SmT$3$1));
-              if (order1 instanceof kcfa2.EQUAL.class) {
-                t1 = element1$;
-                t2 = element1$1;
-                continue loopLabel
-              }
-              return order1;
-            }
-            return order;
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SmT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      runtime.Tuple.get(p2, 1);
-      if (element0$1 instanceof kcfa2.SmE.class) {
-        return kcfa2.GREATER
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda13 = (undefined, function (kcfa2, cmpRng, map1, map2) {
+lambda7 = (undefined, function (kcfa2, cmpRng, map1, map2) {
   let arg$SmMAP$1$, arg$SmMAP$1$1;
   if (map1 instanceof kcfa2.SmMAP.class) {
     arg$SmMAP$1$ = map1.tree;
     if (map2 instanceof kcfa2.SmMAP.class) {
-      let inlinedVal, inlinedVal1;
+      let inlinedVal, inlinedVal1, kcfa3, cmpRng1, t1, t2, inlinedVal2;
       arg$SmMAP$1$1 = map2.tree;
       inlinedVal = kcfa2[storeMapLeft$accessorSymbol](arg$SmMAP$1$, kcfa2.Nil);
       inlinedVal1 = kcfa2[storeMapLeft$accessorSymbol](arg$SmMAP$1$1, kcfa2.Nil);
-      return cmp2(kcfa2, cmpRng, inlinedVal, inlinedVal1)
+      kcfa3 = kcfa2;
+      cmpRng1 = cmpRng;
+      t1 = inlinedVal;
+      t2 = inlinedVal1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let p1, p2, order, order1, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1;
+          p1 = kcfa3[storeMapNext$accessorSymbol](t1);
+          p2 = kcfa3[storeMapNext$accessorSymbol](t2);
+          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
+            element0$ = runtime.Tuple.get(p1, 0);
+            element1$ = runtime.Tuple.get(p1, 1);
+            if (element0$ instanceof kcfa3.SmE.class) {
+              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+                element0$1 = runtime.Tuple.get(p2, 0);
+                runtime.Tuple.get(p2, 1);
+                if (element0$1 instanceof kcfa3.SmE.class) {
+                  inlinedVal2 = kcfa3.EQUAL;
+                  break inlinedLbl
+                }
+                inlinedVal2 = kcfa3.LESS;
+                break inlinedLbl;
+              }
+              inlinedVal2 = kcfa3.LESS;
+              break inlinedLbl;
+            }
+            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+              element0$1 = runtime.Tuple.get(p2, 0);
+              element1$1 = runtime.Tuple.get(p2, 1);
+              if (element0$1 instanceof kcfa3.SmE.class) {
+                inlinedVal2 = kcfa3.GREATER;
+                break inlinedLbl
+              }
+              if (element0$ instanceof kcfa3.SmT.class) {
+                arg$SmT$2$ = element0$.key;
+                arg$SmT$3$ = element0$.value;
+                if (element0$1 instanceof kcfa3.SmT.class) {
+                  arg$SmT$2$1 = element0$1.key;
+                  arg$SmT$3$1 = element0$1.value;
+                  order = kcfa3[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
+                  if (order instanceof kcfa3.EQUAL.class) {
+                    order1 = runtime.safeCall(cmpRng1(arg$SmT$3$, arg$SmT$3$1));
+                    if (order1 instanceof kcfa3.EQUAL.class) {
+                      t1 = element1$;
+                      t2 = element1$1;
+                      continue loopLabel
+                    }
+                    inlinedVal2 = order1;
+                    break inlinedLbl;
+                  }
+                  inlinedVal2 = order;
+                  break inlinedLbl;
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            if (element0$ instanceof kcfa3.SmT.class) {
+              throw globalThis.Object.freeze(new globalThis.Error("match error"))
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+            element0$1 = runtime.Tuple.get(p2, 0);
+            runtime.Tuple.get(p2, 1);
+            if (element0$1 instanceof kcfa3.SmE.class) {
+              inlinedVal2 = kcfa3.GREATER;
+              break inlinedLbl
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+      }
+      return inlinedVal2
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -497,14 +393,14 @@ lambda13 = (undefined, function (kcfa2, cmpRng, map1, map2) {
 });
 lambda$3 = (undefined, function (kcfa2, f, init) {
   return (map) => {
-    return lambda12(kcfa2, f, init, map)
+    return lambda6(kcfa2, f, init, map)
   }
 });
-lambda12 = (undefined, function (kcfa2, f, init, map) {
+lambda6 = (undefined, function (kcfa2, f, init, map) {
   let arg$SmMAP$1$;
   if (map instanceof kcfa2.SmMAP.class) {
     arg$SmMAP$1$ = map.tree;
-    return foldf2(kcfa2, f, arg$SmMAP$1$, init)
+    return foldf1(kcfa2, f, arg$SmMAP$1$, init)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
@@ -513,7 +409,7 @@ lambda$2 = (undefined, function (kcfa2, f) {
     return lambda$3(kcfa2, f, init)
   }
 });
-foldf2 = function foldf(kcfa2, f, t, accum) {
+foldf1 = function foldf(kcfa2, f, t, accum) {
   loopLabel: while (true) {
     let arg$SmT$1$, arg$SmT$2$, arg$SmT$3$, arg$SmT$4$, tmp, tmp1;
     if (t instanceof kcfa2.SmE.class) {
@@ -523,39 +419,11 @@ foldf2 = function foldf(kcfa2, f, t, accum) {
       arg$SmT$2$ = t.key;
       arg$SmT$3$ = t.value;
       arg$SmT$4$ = t.right;
-      tmp = foldf2(kcfa2, f, arg$SmT$1$, accum);
+      tmp = foldf1(kcfa2, f, arg$SmT$1$, accum);
       tmp1 = runtime.safeCall(f(arg$SmT$2$, arg$SmT$3$, tmp));
       t = arg$SmT$4$;
       accum = tmp1;
       continue loopLabel
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda11 = (undefined, function (kcfa2, f, init) {
-  return lambda$3(kcfa2, f, init)
-});
-find11 = function find1(kcfa2, k, t) {
-  loopLabel: while (true) {
-    let scrut, arg$SmT$1$, arg$SmT$2$, arg$SmT$3$, arg$SmT$4$;
-    if (t instanceof kcfa2.SmE.class) {
-      return kcfa2.None
-    } else if (t instanceof kcfa2.SmT.class) {
-      arg$SmT$1$ = t.left;
-      arg$SmT$2$ = t.key;
-      arg$SmT$3$ = t.value;
-      arg$SmT$4$ = t.right;
-      scrut = kcfa2[bindCompare$accessorSymbol](k, arg$SmT$2$);
-      if (scrut instanceof kcfa2.LESS.class) {
-        t = arg$SmT$1$;
-        continue loopLabel
-      } else if (scrut instanceof kcfa2.EQUAL.class) {
-        return kcfa2.Some(arg$SmT$3$)
-      } else if (scrut instanceof kcfa2.GREATER.class) {
-        t = arg$SmT$4$;
-        continue loopLabel
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -683,7 +551,7 @@ ins2 = function ins(kcfa2, comb, xk, x, nItems, nItems1, s) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-foldf1 = function foldf(kcfa2, f, t, accum) {
+foldf = function foldf(kcfa2, f, t, accum) {
   loopLabel: while (true) {
     let arg$SetT$1$, arg$SetT$2$, arg$SetT$3$, tmp, tmp1;
     if (t instanceof kcfa2.SetE.class) {
@@ -692,7 +560,7 @@ foldf1 = function foldf(kcfa2, f, t, accum) {
       arg$SetT$1$ = t.left;
       arg$SetT$2$ = t.item;
       arg$SetT$3$ = t.right;
-      tmp = foldf1(kcfa2, f, arg$SetT$1$, accum);
+      tmp = foldf(kcfa2, f, arg$SetT$1$, accum);
       tmp1 = runtime.safeCall(f(arg$SetT$2$, tmp));
       t = arg$SetT$3$;
       accum = tmp1;
@@ -728,115 +596,6 @@ ins1 = function ins(kcfa2, p, n, result) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-union1 = function union1(kcfa2, t1, t2, n, result) {
-  loopLabel: while (true) {
-    let p1, p2, scrut, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1, tmp, tmp1, tmp2;
-    p1 = kcfa2[setNext$accessorSymbol](t1);
-    p2 = kcfa2[setNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SetE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          runtime.Tuple.get(p2, 1);
-          if (element0$1 instanceof kcfa2.SetE.class) {
-            return globalThis.Object.freeze([
-              n,
-              result
-            ])
-          }
-          return ins1(kcfa2, p2, n, result);
-        }
-        return ins1(kcfa2, p2, n, result);
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SetE.class) {
-          return ins1(kcfa2, p1, n, result)
-        }
-        if (element0$ instanceof kcfa2.SetT.class) {
-          arg$SetT$2$ = element0$.item;
-          if (element0$1 instanceof kcfa2.SetT.class) {
-            arg$SetT$2$1 = element0$1.item;
-            scrut = kcfa2[closureCompare$accessorSymbol](arg$SetT$2$, arg$SetT$2$1);
-            if (scrut instanceof kcfa2.LESS.class) {
-              let inlinedVal;
-              tmp = n + 1;
-              inlinedVal = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-              t1 = element1$;
-              n = tmp;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.EQUAL.class) {
-              let inlinedVal;
-              tmp1 = n + 1;
-              inlinedVal = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-              t1 = element1$;
-              t2 = element1$1;
-              n = tmp1;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.GREATER.class) {
-              let inlinedVal;
-              tmp2 = n + 1;
-              inlinedVal = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
-              t2 = element1$1;
-              n = tmp2;
-              result = inlinedVal;
-              continue loopLabel
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SetT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      runtime.Tuple.get(p2, 1);
-      if (element0$1 instanceof kcfa2.SetE.class) {
-        return ins1(kcfa2, p1, n, result)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-link = function link(kcfa2, t1, d) {
-  loopLabel: while (true) {
-    let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1, tmp2;
-    if (d instanceof kcfa2.SetZERO.class) {
-      return t1
-    } else if (d instanceof kcfa2.SetONE.class) {
-      arg$SetONE$0$ = d.item;
-      arg$SetONE$1$ = d.tree;
-      arg$SetONE$2$ = d.digit;
-      tmp = kcfa2.SetT(kcfa2.SetB, arg$SetONE$1$, arg$SetONE$0$, t1);
-      t1 = tmp;
-      d = arg$SetONE$2$;
-      continue loopLabel
-    } else if (d instanceof kcfa2.SetTWO.class) {
-      arg$SetTWO$0$ = d.item1;
-      arg$SetTWO$1$ = d.tree1;
-      arg$SetTWO$2$ = d.item2;
-      arg$SetTWO$3$ = d.tree2;
-      arg$SetTWO$4$ = d.digit;
-      tmp1 = kcfa2.SetT(kcfa2.SetR, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-      tmp2 = kcfa2.SetT(kcfa2.SetB, tmp1, arg$SetTWO$0$, t1);
-      t1 = tmp2;
-      d = arg$SetTWO$4$;
-      continue loopLabel
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 incr = function incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
@@ -858,185 +617,113 @@ incr = function incr(kcfa2, a1, t1, d) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-cmp1 = function cmp(kcfa2, t1, t2) {
-  loopLabel: while (true) {
-    let p1, p2, order, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
-    p1 = kcfa2[setNext$accessorSymbol](t1);
-    p2 = kcfa2[setNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SetE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          runtime.Tuple.get(p2, 1);
-          if (element0$1 instanceof kcfa2.SetE.class) {
-            return kcfa2.EQUAL
-          }
-          return kcfa2.LESS;
-        }
-        return kcfa2.LESS;
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SetE.class) {
-          return kcfa2.GREATER
-        }
-        if (element0$ instanceof kcfa2.SetT.class) {
-          arg$SetT$2$ = element0$.item;
-          if (element0$1 instanceof kcfa2.SetT.class) {
-            arg$SetT$2$1 = element0$1.item;
-            order = kcfa2[closureCompare$accessorSymbol](arg$SetT$2$, arg$SetT$2$1);
-            if (order instanceof kcfa2.EQUAL.class) {
-              t1 = element1$;
-              t2 = element1$1;
-              continue loopLabel
-            }
-            return order;
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SetT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      runtime.Tuple.get(p2, 1);
-      if (element0$1 instanceof kcfa2.SetE.class) {
-        return kcfa2.GREATER
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 lambda$1 = (undefined, function (kcfa2) {
   return (x, adr, benv) => {
     return kcfa2[varMapInsert$accessorSymbol](benv, x, adr)
   }
 });
-lambda1 = (undefined, function (kcfa2, x, adr, benv) {
-  return kcfa2[varMapInsert$accessorSymbol](benv, x, adr)
-});
 lambda$ = (undefined, function (kcfa2, cmpRng) {
   return (map1, map2) => {
-    return lambda10(kcfa2, cmpRng, map1, map2)
+    return lambda5(kcfa2, cmpRng, map1, map2)
   }
 });
-cmp = function cmp(kcfa2, cmpRng, t1, t2) {
-  loopLabel: while (true) {
-    let p1, p2, order1, element1$, element0$, arg$VmT$2$, arg$VmT$3$, element1$1, element0$1, arg$VmT$2$1, arg$VmT$3$1;
-    p1 = kcfa2[varMapNext$accessorSymbol](t1);
-    p2 = kcfa2[varMapNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.VmE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          runtime.Tuple.get(p2, 1);
-          if (element0$1 instanceof kcfa2.VmE.class) {
-            return kcfa2.EQUAL
-          }
-          return kcfa2.LESS;
-        }
-        return kcfa2.LESS;
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.VmE.class) {
-          return kcfa2.GREATER
-        }
-        if (element0$ instanceof kcfa2.VmT.class) {
-          arg$VmT$2$ = element0$.key;
-          arg$VmT$3$ = element0$.value;
-          if (element0$1 instanceof kcfa2.VmT.class) {
-            let scrut, scrut1;
-            arg$VmT$2$1 = element0$1.key;
-            arg$VmT$3$1 = element0$1.value;
-            scrut = arg$VmT$2$ < arg$VmT$2$1;
-            if (scrut === true) {
-              return kcfa2.LESS
-            }
-            scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-            if (scrut1 === true) {
-              return kcfa2.GREATER
-            }
-            order1 = runtime.safeCall(cmpRng(arg$VmT$3$, arg$VmT$3$1));
-            if (order1 instanceof kcfa2.EQUAL.class) {
-              t1 = element1$;
-              t2 = element1$1;
-              continue loopLabel
-            }
-            return order1;
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.VmT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      runtime.Tuple.get(p2, 1);
-      if (element0$1 instanceof kcfa2.VmE.class) {
-        return kcfa2.GREATER
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda10 = (undefined, function (kcfa2, cmpRng, map1, map2) {
+lambda5 = (undefined, function (kcfa2, cmpRng, map1, map2) {
   let arg$VmMAP$1$, arg$VmMAP$1$1;
   if (map1 instanceof kcfa2.VmMAP.class) {
     arg$VmMAP$1$ = map1.tree;
     if (map2 instanceof kcfa2.VmMAP.class) {
-      let inlinedVal, inlinedVal1;
+      let inlinedVal, inlinedVal1, kcfa3, cmpRng1, t1, t2, inlinedVal2;
       arg$VmMAP$1$1 = map2.tree;
       inlinedVal = kcfa2[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa2.Nil);
       inlinedVal1 = kcfa2[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa2.Nil);
-      return cmp(kcfa2, cmpRng, inlinedVal, inlinedVal1)
+      kcfa3 = kcfa2;
+      cmpRng1 = cmpRng;
+      t1 = inlinedVal;
+      t2 = inlinedVal1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let p1, p2, order1, element1$, element0$, arg$VmT$2$, arg$VmT$3$, element1$1, element0$1, arg$VmT$2$1, arg$VmT$3$1;
+          p1 = kcfa3[varMapNext$accessorSymbol](t1);
+          p2 = kcfa3[varMapNext$accessorSymbol](t2);
+          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
+            element0$ = runtime.Tuple.get(p1, 0);
+            element1$ = runtime.Tuple.get(p1, 1);
+            if (element0$ instanceof kcfa3.VmE.class) {
+              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+                element0$1 = runtime.Tuple.get(p2, 0);
+                runtime.Tuple.get(p2, 1);
+                if (element0$1 instanceof kcfa3.VmE.class) {
+                  inlinedVal2 = kcfa3.EQUAL;
+                  break inlinedLbl
+                }
+                inlinedVal2 = kcfa3.LESS;
+                break inlinedLbl;
+              }
+              inlinedVal2 = kcfa3.LESS;
+              break inlinedLbl;
+            }
+            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+              element0$1 = runtime.Tuple.get(p2, 0);
+              element1$1 = runtime.Tuple.get(p2, 1);
+              if (element0$1 instanceof kcfa3.VmE.class) {
+                inlinedVal2 = kcfa3.GREATER;
+                break inlinedLbl
+              }
+              if (element0$ instanceof kcfa3.VmT.class) {
+                arg$VmT$2$ = element0$.key;
+                arg$VmT$3$ = element0$.value;
+                if (element0$1 instanceof kcfa3.VmT.class) {
+                  let inlinedVal3, scrut, scrut1;
+                  arg$VmT$2$1 = element0$1.key;
+                  arg$VmT$3$1 = element0$1.value;
+                  scrut = arg$VmT$2$ < arg$VmT$2$1;
+                  if (scrut === true) {
+                    inlinedVal3 = kcfa3.LESS;
+                    inlinedVal2 = inlinedVal3;
+                    break inlinedLbl
+                  }
+                  scrut1 = arg$VmT$2$1 < arg$VmT$2$;
+                  if (scrut1 === true) {
+                    inlinedVal3 = kcfa3.GREATER;
+                    inlinedVal2 = inlinedVal3;
+                    break inlinedLbl
+                  }
+                  order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
+                  if (order1 instanceof kcfa3.EQUAL.class) {
+                    t1 = element1$;
+                    t2 = element1$1;
+                    continue loopLabel
+                  }
+                  inlinedVal2 = order1;
+                  break inlinedLbl;
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            if (element0$ instanceof kcfa3.VmT.class) {
+              throw globalThis.Object.freeze(new globalThis.Error("match error"))
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+            element0$1 = runtime.Tuple.get(p2, 0);
+            runtime.Tuple.get(p2, 1);
+            if (element0$1 instanceof kcfa3.VmE.class) {
+              inlinedVal2 = kcfa3.GREATER;
+              break inlinedLbl
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+      }
+      return inlinedVal2
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-find1 = function find1(kcfa2, k, t) {
-  loopLabel: while (true) {
-    let arg$VmT$1$, arg$VmT$2$, arg$VmT$3$, arg$VmT$4$;
-    if (t instanceof kcfa2.VmE.class) {
-      return kcfa2.None
-    } else if (t instanceof kcfa2.VmT.class) {
-      let scrut, scrut1;
-      arg$VmT$1$ = t.left;
-      arg$VmT$2$ = t.key;
-      arg$VmT$3$ = t.value;
-      arg$VmT$4$ = t.right;
-      scrut = k < arg$VmT$2$;
-      if (scrut === true) {
-        t = arg$VmT$1$;
-        continue loopLabel
-      }
-      scrut1 = arg$VmT$2$ < k;
-      if (scrut1 === true) {
-        t = arg$VmT$4$;
-        continue loopLabel
-      }
-      return kcfa2.Some(arg$VmT$3$);
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
   let c1, d1, c11, d11, arg$VmT$0$, arg$VmT$1$, arg$VmT$2$, arg$VmT$3$, arg$VmT$4$, tmp, arg$VmT$0$1, arg$VmT$1$1, arg$VmT$2$1, arg$VmT$3$1, arg$VmT$4$1, tmp1, arg$VmT$0$2, arg$VmT$1$2, arg$VmT$2$2, arg$VmT$3$2, arg$VmT$4$2, tmp2, tmp3, tmp4, tmp5, arg$VmT$0$3, arg$VmT$1$3, arg$VmT$2$3, arg$VmT$3$3, arg$VmT$4$3, tmp6, tmp7, tmp8, arg$VmT$0$4, arg$VmT$1$4, arg$VmT$2$4, arg$VmT$3$4, arg$VmT$4$4, tmp9, arg$VmT$0$5, arg$VmT$1$5, arg$VmT$2$5, arg$VmT$3$5, arg$VmT$4$5, tmp10, tmp11, tmp12, tmp13, arg$VmT$0$6, arg$VmT$1$6, arg$VmT$2$6, arg$VmT$3$6, arg$VmT$4$6, tmp14, tmp15, tmp16;
   if (s instanceof kcfa2.VmE.class) {
@@ -1190,40 +877,22 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-foldf = function foldf(kcfa2, f, xs, ys, accum) {
-  loopLabel: while (true) {
-    let arg$Cons$0$, arg$Cons$1$, arg$Cons$0$1, arg$Cons$1$1, tmp;
-    if (xs instanceof kcfa2.Cons.class) {
-      arg$Cons$0$ = xs.head;
-      arg$Cons$1$ = xs.tail;
-      if (ys instanceof kcfa2.Cons.class) {
-        arg$Cons$0$1 = ys.head;
-        arg$Cons$1$1 = ys.tail;
-        tmp = runtime.safeCall(f(arg$Cons$0$, arg$Cons$0$1, accum));
-        xs = arg$Cons$1$;
-        ys = arg$Cons$1$1;
-        accum = tmp;
-        continue loopLabel
-      }
-      return accum;
-    }
-    return accum;
-  }
-};
 (class kcfa {
   static {
     kcfa1 = this
   }
   static get [listFoldl$tailrec$accessorSymbol]() { return kcfa.#listFoldl$tailrec; }
   static get [listMap$tailrec$accessorSymbol]() { return kcfa.#listMap$tailrec; }
+  static get [listPairFoldl$accessorSymbol]() { return kcfa.#listPairFoldl; }
   static get [varMapInsert$accessorSymbol]() { return kcfa.#varMapInsert; }
+  static get [varMapFind$accessorSymbol]() { return kcfa.#varMapFind; }
   static get [varMapNext$accessorSymbol]() { return kcfa.#varMapNext; }
   static get [varMapLeft$accessorSymbol]() { return kcfa.#varMapLeft; }
   static get [bindCompare$accessorSymbol]() { return kcfa.#bindCompare; }
-  static get [closureCompare$accessorSymbol]() { return kcfa.#closureCompare; }
   static get [setNext$accessorSymbol]() { return kcfa.#setNext; }
   static get [setUnion$accessorSymbol]() { return kcfa.#setUnion; }
   static get [storeMapInsertWith$accessorSymbol]() { return kcfa.#storeMapInsertWith; }
+  static get [storeMapFind$accessorSymbol]() { return kcfa.#storeMapFind; }
   static get [storeMapNext$accessorSymbol]() { return kcfa.#storeMapNext; }
   static get [storeMapLeft$accessorSymbol]() { return kcfa.#storeMapLeft; }
   static get [storeMapWrap$accessorSymbol]() { return kcfa.#storeMapWrap; }
@@ -1739,15 +1408,15 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "SmTWO", ["key1", "value1", "tree1", "key2", "value2", "tree2", "digit"]];
     });
-    kcfa.State = function State(call1, benv, store, time) {
-      return globalThis.Object.freeze(new State.class(call1, benv, store, time));
+    kcfa.State = function State(call, benv, store, time) {
+      return globalThis.Object.freeze(new State.class(call, benv, store, time));
     };
     (class State {
       static {
         kcfa.State.class = this
       }
-      constructor(call1, benv, store, time) {
-        this.call = call1;
+      constructor(call, benv, store, time) {
+        this.call = call;
         this.benv = benv;
         this.store = store;
         this.time = time;
@@ -1783,7 +1452,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
       return false;
     }
   }
-  static #listCollate$tailrec(cmp3, l1, l2) {
+  static #listCollate$tailrec(cmp, l1, l2) {
     loopLabel: while (true) {
       let order, arg$Cons$0$, arg$Cons$1$, arg$Cons$0$1, arg$Cons$1$1;
       if (l1 instanceof kcfa.Nil.class) {
@@ -1801,7 +1470,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
         if (l2 instanceof kcfa.Cons.class) {
           arg$Cons$0$1 = l2.head;
           arg$Cons$1$1 = l2.tail;
-          order = runtime.safeCall(cmp3(arg$Cons$0$, arg$Cons$0$1));
+          order = runtime.safeCall(cmp(arg$Cons$0$, arg$Cons$0$1));
           if (order instanceof kcfa.EQUAL.class) {
             l1 = arg$Cons$1$;
             l2 = arg$Cons$1$1;
@@ -1914,15 +1583,43 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
       }
     }
   }
-  static #listCollate(cmp3) {
+  static #listCollate(cmp) {
     return (l1, l2) => {
-      return kcfa.#listCollate$tailrec(cmp3, l1, l2)
+      return kcfa.#listCollate$tailrec(cmp, l1, l2)
     }
   }
   static #listPairFoldl(f) {
     return (init) => {
       return (l1, l2) => {
-        return foldf(kcfa, f, l1, l2, init)
+        let kcfa2, f1, xs, ys, accum, inlinedVal;
+        kcfa2 = kcfa;
+        f1 = f;
+        xs = l1;
+        ys = l2;
+        accum = init;
+        inlinedLbl: {
+          loopLabel: while (true) {
+            let arg$Cons$0$, arg$Cons$1$, arg$Cons$0$1, arg$Cons$1$1, tmp;
+            if (xs instanceof kcfa2.Cons.class) {
+              arg$Cons$0$ = xs.head;
+              arg$Cons$1$ = xs.tail;
+              if (ys instanceof kcfa2.Cons.class) {
+                arg$Cons$0$1 = ys.head;
+                arg$Cons$1$1 = ys.tail;
+                tmp = runtime.safeCall(f1(arg$Cons$0$, arg$Cons$0$1, accum));
+                xs = arg$Cons$1$;
+                ys = arg$Cons$1$1;
+                accum = tmp;
+                continue loopLabel
+              }
+              inlinedVal = accum;
+              break inlinedLbl;
+            }
+            inlinedVal = accum;
+            break inlinedLbl;
+          }
+        }
+        return inlinedVal
       }
     }
   }
@@ -1959,8 +1656,40 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   static #varMapFind(map, k) {
     let arg$VmMAP$1$;
     if (map instanceof kcfa.VmMAP.class) {
+      let kcfa2, k1, t, inlinedVal;
       arg$VmMAP$1$ = map.tree;
-      return find1(kcfa, k, arg$VmMAP$1$)
+      kcfa2 = kcfa;
+      k1 = k;
+      t = arg$VmMAP$1$;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let arg$VmT$1$, arg$VmT$2$, arg$VmT$3$, arg$VmT$4$;
+          if (t instanceof kcfa2.VmE.class) {
+            inlinedVal = kcfa2.None;
+            break inlinedLbl
+          } else if (t instanceof kcfa2.VmT.class) {
+            let scrut, scrut1;
+            arg$VmT$1$ = t.left;
+            arg$VmT$2$ = t.key;
+            arg$VmT$3$ = t.value;
+            arg$VmT$4$ = t.right;
+            scrut = k1 < arg$VmT$2$;
+            if (scrut === true) {
+              t = arg$VmT$1$;
+              continue loopLabel
+            }
+            scrut1 = arg$VmT$2$ < k1;
+            if (scrut1 === true) {
+              t = arg$VmT$4$;
+              continue loopLabel
+            }
+            inlinedVal = kcfa2.Some(arg$VmT$3$);
+            break inlinedLbl;
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+      }
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -2191,10 +1920,77 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     if (set1 instanceof kcfa.SET.class) {
       arg$SET$1$ = set1.tree;
       if (set2 instanceof kcfa.SET.class) {
+        let kcfa2, t1, t2, inlinedVal;
         arg$SET$1$1 = set2.tree;
         tmp = kcfa.#setStart(arg$SET$1$);
         tmp1 = kcfa.#setStart(arg$SET$1$1);
-        return cmp1(kcfa, tmp, tmp1)
+        kcfa2 = kcfa;
+        t1 = tmp;
+        t2 = tmp1;
+        inlinedLbl: {
+          loopLabel: while (true) {
+            let p1, p2, order, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
+            p1 = kcfa2.#setNext(t1);
+            p2 = kcfa2.#setNext(t2);
+            if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
+              element0$ = runtime.Tuple.get(p1, 0);
+              element1$ = runtime.Tuple.get(p1, 1);
+              if (element0$ instanceof kcfa2.SetE.class) {
+                if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+                  element0$1 = runtime.Tuple.get(p2, 0);
+                  runtime.Tuple.get(p2, 1);
+                  if (element0$1 instanceof kcfa2.SetE.class) {
+                    inlinedVal = kcfa2.EQUAL;
+                    break inlinedLbl
+                  }
+                  inlinedVal = kcfa2.LESS;
+                  break inlinedLbl;
+                }
+                inlinedVal = kcfa2.LESS;
+                break inlinedLbl;
+              }
+              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+                element0$1 = runtime.Tuple.get(p2, 0);
+                element1$1 = runtime.Tuple.get(p2, 1);
+                if (element0$1 instanceof kcfa2.SetE.class) {
+                  inlinedVal = kcfa2.GREATER;
+                  break inlinedLbl
+                }
+                if (element0$ instanceof kcfa2.SetT.class) {
+                  arg$SetT$2$ = element0$.item;
+                  if (element0$1 instanceof kcfa2.SetT.class) {
+                    arg$SetT$2$1 = element0$1.item;
+                    order = kcfa2.#closureCompare(arg$SetT$2$, arg$SetT$2$1);
+                    if (order instanceof kcfa2.EQUAL.class) {
+                      t1 = element1$;
+                      t2 = element1$1;
+                      continue loopLabel
+                    }
+                    inlinedVal = order;
+                    break inlinedLbl;
+                  }
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              }
+              if (element0$ instanceof kcfa2.SetT.class) {
+                throw globalThis.Object.freeze(new globalThis.Error("match error"))
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+              element0$1 = runtime.Tuple.get(p2, 0);
+              runtime.Tuple.get(p2, 1);
+              if (element0$1 instanceof kcfa2.SetE.class) {
+                inlinedVal = kcfa2.GREATER;
+                break inlinedLbl
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+        }
+        return inlinedVal
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -2204,20 +2000,144 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     return incr(kcfa, a, kcfa.SetE, l)
   }
   static #setLinkAll(t) {
-    return link(kcfa, kcfa.SetE, t)
+    let kcfa2, t1, d, inlinedVal;
+    kcfa2 = kcfa;
+    t1 = kcfa.SetE;
+    d = t;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1, tmp2;
+        if (d instanceof kcfa2.SetZERO.class) {
+          inlinedVal = t1;
+          break inlinedLbl
+        } else if (d instanceof kcfa2.SetONE.class) {
+          arg$SetONE$0$ = d.item;
+          arg$SetONE$1$ = d.tree;
+          arg$SetONE$2$ = d.digit;
+          tmp = kcfa2.SetT(kcfa2.SetB, arg$SetONE$1$, arg$SetONE$0$, t1);
+          t1 = tmp;
+          d = arg$SetONE$2$;
+          continue loopLabel
+        } else if (d instanceof kcfa2.SetTWO.class) {
+          arg$SetTWO$0$ = d.item1;
+          arg$SetTWO$1$ = d.tree1;
+          arg$SetTWO$2$ = d.item2;
+          arg$SetTWO$3$ = d.tree2;
+          arg$SetTWO$4$ = d.digit;
+          tmp1 = kcfa2.SetT(kcfa2.SetR, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+          tmp2 = kcfa2.SetT(kcfa2.SetB, tmp1, arg$SetTWO$0$, t1);
+          t1 = tmp2;
+          d = arg$SetTWO$4$;
+          continue loopLabel
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+    }
+    return inlinedVal
   }
   static #setUnion(set1, set2) {
-    let scrut, arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp, tmp1, tmp2;
+    let arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp, tmp1, tmp2;
     if (set1 instanceof kcfa.SET.class) {
       arg$SET$1$ = set1.tree;
       if (set2 instanceof kcfa.SET.class) {
+        let kcfa2, t1, t2, n, result, inlinedVal;
         arg$SET$1$1 = set2.tree;
         tmp = kcfa.#setStart(arg$SET$1$);
         tmp1 = kcfa.#setStart(arg$SET$1$1);
-        scrut = union1(kcfa, tmp, tmp1, 0, kcfa.SetZERO);
-        if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-          element0$ = runtime.Tuple.get(scrut, 0);
-          element1$ = runtime.Tuple.get(scrut, 1);
+        kcfa2 = kcfa;
+        t1 = tmp;
+        t2 = tmp1;
+        n = 0;
+        result = kcfa.SetZERO;
+        inlinedLbl: {
+          loopLabel: while (true) {
+            let p1, p2, scrut, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp3, tmp4, tmp5;
+            p1 = kcfa2.#setNext(t1);
+            p2 = kcfa2.#setNext(t2);
+            if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
+              element0$1 = runtime.Tuple.get(p1, 0);
+              element1$1 = runtime.Tuple.get(p1, 1);
+              if (element0$1 instanceof kcfa2.SetE.class) {
+                if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+                  element0$2 = runtime.Tuple.get(p2, 0);
+                  runtime.Tuple.get(p2, 1);
+                  if (element0$2 instanceof kcfa2.SetE.class) {
+                    inlinedVal = globalThis.Object.freeze([
+                      n,
+                      result
+                    ]);
+                    break inlinedLbl
+                  }
+                  inlinedVal = ins1(kcfa2, p2, n, result);
+                  break inlinedLbl;
+                }
+                inlinedVal = ins1(kcfa2, p2, n, result);
+                break inlinedLbl;
+              }
+              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+                element0$2 = runtime.Tuple.get(p2, 0);
+                element1$2 = runtime.Tuple.get(p2, 1);
+                if (element0$2 instanceof kcfa2.SetE.class) {
+                  inlinedVal = ins1(kcfa2, p1, n, result);
+                  break inlinedLbl
+                }
+                if (element0$1 instanceof kcfa2.SetT.class) {
+                  arg$SetT$2$ = element0$1.item;
+                  if (element0$2 instanceof kcfa2.SetT.class) {
+                    arg$SetT$2$1 = element0$2.item;
+                    scrut = kcfa2.#closureCompare(arg$SetT$2$, arg$SetT$2$1);
+                    if (scrut instanceof kcfa2.LESS.class) {
+                      let inlinedVal1;
+                      tmp3 = n + 1;
+                      inlinedVal1 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                      t1 = element1$1;
+                      n = tmp3;
+                      result = inlinedVal1;
+                      continue loopLabel
+                    } else if (scrut instanceof kcfa2.EQUAL.class) {
+                      let inlinedVal1;
+                      tmp4 = n + 1;
+                      inlinedVal1 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                      t1 = element1$1;
+                      t2 = element1$2;
+                      n = tmp4;
+                      result = inlinedVal1;
+                      continue loopLabel
+                    } else if (scrut instanceof kcfa2.GREATER.class) {
+                      let inlinedVal1;
+                      tmp5 = n + 1;
+                      inlinedVal1 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
+                      t2 = element1$2;
+                      n = tmp5;
+                      result = inlinedVal1;
+                      continue loopLabel
+                    }
+                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                  }
+                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              }
+              if (element0$1 instanceof kcfa2.SetT.class) {
+                throw globalThis.Object.freeze(new globalThis.Error("match error"))
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
+              element0$2 = runtime.Tuple.get(p2, 0);
+              runtime.Tuple.get(p2, 1);
+              if (element0$2 instanceof kcfa2.SetE.class) {
+                inlinedVal = ins1(kcfa2, p1, n, result);
+                break inlinedLbl
+              }
+              throw globalThis.Object.freeze(new globalThis.Error("match error"));
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+        }
+        if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+          element0$ = runtime.Tuple.get(inlinedVal, 0);
+          element1$ = runtime.Tuple.get(inlinedVal, 1);
           tmp2 = kcfa.#setLinkAll(element1$);
           return kcfa.SET(element0$, tmp2)
         }
@@ -2233,7 +2153,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
         let arg$SET$1$;
         if (s instanceof kcfa.SET.class) {
           arg$SET$1$ = s.tree;
-          return foldf1(kcfa, f, arg$SET$1$, init)
+          return foldf(kcfa, f, arg$SET$1$, init)
         }
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
@@ -2266,8 +2186,39 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   static #storeMapFind(map, k) {
     let arg$SmMAP$1$;
     if (map instanceof kcfa.SmMAP.class) {
+      let kcfa2, k1, t, inlinedVal;
       arg$SmMAP$1$ = map.tree;
-      return find11(kcfa, k, arg$SmMAP$1$)
+      kcfa2 = kcfa;
+      k1 = k;
+      t = arg$SmMAP$1$;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut, arg$SmT$1$, arg$SmT$2$, arg$SmT$3$, arg$SmT$4$;
+          if (t instanceof kcfa2.SmE.class) {
+            inlinedVal = kcfa2.None;
+            break inlinedLbl
+          } else if (t instanceof kcfa2.SmT.class) {
+            arg$SmT$1$ = t.left;
+            arg$SmT$2$ = t.key;
+            arg$SmT$3$ = t.value;
+            arg$SmT$4$ = t.right;
+            scrut = kcfa2.#bindCompare(k1, arg$SmT$2$);
+            if (scrut instanceof kcfa2.LESS.class) {
+              t = arg$SmT$1$;
+              continue loopLabel
+            } else if (scrut instanceof kcfa2.EQUAL.class) {
+              inlinedVal = kcfa2.Some(arg$SmT$3$);
+              break inlinedLbl
+            } else if (scrut instanceof kcfa2.GREATER.class) {
+              t = arg$SmT$4$;
+              continue loopLabel
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+      }
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -2322,7 +2273,43 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     return incr1(kcfa, ak, a, kcfa.SmE, l)
   }
   static #storeMapLinkAll(t) {
-    return link1(kcfa, kcfa.SmE, t)
+    let kcfa2, t1, d, inlinedVal;
+    kcfa2 = kcfa;
+    t1 = kcfa.SmE;
+    d = t;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1, tmp2;
+        if (d instanceof kcfa2.SmZERO.class) {
+          inlinedVal = t1;
+          break inlinedLbl
+        } else if (d instanceof kcfa2.SmONE.class) {
+          arg$SmONE$0$ = d.key;
+          arg$SmONE$1$ = d.value;
+          arg$SmONE$2$ = d.tree;
+          arg$SmONE$3$ = d.digit;
+          tmp = kcfa2.SmT(kcfa2.SmB, arg$SmONE$2$, arg$SmONE$0$, arg$SmONE$1$, t1);
+          t1 = tmp;
+          d = arg$SmONE$3$;
+          continue loopLabel
+        } else if (d instanceof kcfa2.SmTWO.class) {
+          arg$SmTWO$0$ = d.key1;
+          arg$SmTWO$1$ = d.value1;
+          arg$SmTWO$2$ = d.tree1;
+          arg$SmTWO$3$ = d.key2;
+          arg$SmTWO$4$ = d.value2;
+          arg$SmTWO$5$ = d.tree2;
+          arg$SmTWO$6$ = d.digit;
+          tmp1 = kcfa2.SmT(kcfa2.SmR, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+          tmp2 = kcfa2.SmT(kcfa2.SmB, tmp1, arg$SmTWO$0$, arg$SmTWO$1$, t1);
+          t1 = tmp2;
+          d = arg$SmTWO$6$;
+          continue loopLabel
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+    }
+    return inlinedVal
   }
   static #storeMapWrap(f) {
     return (map1, map2) => {
@@ -2445,16 +2432,16 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #initState(call1) {
+  static #initState(call) {
     let tmp, tmp1;
     tmp = kcfa.#varMapEmpty();
     tmp1 = kcfa.#storeMapEmpty();
-    return kcfa.State(call1, tmp, tmp1, kcfa.Nil)
+    return kcfa.State(call, tmp, tmp1, kcfa.Nil)
   }
-  static #tick(call1, t) {
+  static #tick(call, t) {
     let arg$CALL$0$;
-    if (call1 instanceof kcfa.CALL.class) {
-      arg$CALL$0$ = call1.label;
+    if (call instanceof kcfa.CALL.class) {
+      arg$CALL$0$ = call.label;
       return kcfa.Cons(arg$CALL$0$, kcfa.Nil)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -2625,102 +2612,102 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     return runtime.safeCall(callPrefix(st))
   }
   static #stdExample() {
-    let labelCount, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, n, tmp11, n1, n2, tmp12, n3, n4, tmp13, n5, n6, n7, tmp14, n8, n9, n10, tmp15, n11, n12, n13, n14, tmp16, tmp17, inlinedVal15, n15, tmp18, n16;
+    let labelCount, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, tmp11, tmp12, inlinedVal15, tmp13, n, n1, n2, tmp14, n3, n4, tmp15, n5, n6, tmp16, n7, n8, n9, tmp17, n10, n11, n12, tmp18, n13, n14, n15, n16;
     labelCount = new kcfa.Ref.class(1);
     tmp = kcfa.Cons("k", kcfa.Nil);
     tmp1 = kcfa.Cons("x", tmp);
+    n16 = labelCount.value + 1;
+    labelCount.value = n16;
+    inlinedVal = kcfa.VAR(n16, "k");
+    n15 = labelCount.value + 1;
+    labelCount.value = n15;
+    inlinedVal1 = kcfa.VAR(n15, "x");
+    tmp2 = kcfa.Cons(inlinedVal1, kcfa.Nil);
     n14 = labelCount.value + 1;
     labelCount.value = n14;
-    inlinedVal = kcfa.VAR(n14, "k");
+    inlinedVal2 = kcfa.CALL(n14, inlinedVal, tmp2);
     n13 = labelCount.value + 1;
     labelCount.value = n13;
-    inlinedVal1 = kcfa.VAR(n13, "x");
-    tmp2 = kcfa.Cons(inlinedVal1, kcfa.Nil);
-    n12 = labelCount.value + 1;
-    labelCount.value = n12;
-    inlinedVal2 = kcfa.CALL(n12, inlinedVal, tmp2);
-    n11 = labelCount.value + 1;
-    labelCount.value = n11;
-    tmp15 = globalThis.Object.freeze([
-      n11,
+    tmp18 = globalThis.Object.freeze([
+      n13,
       tmp1,
       inlinedVal2
     ]);
-    inlinedVal3 = kcfa.LAMBDA(tmp15);
+    inlinedVal3 = kcfa.LAMBDA(tmp18);
+    n12 = labelCount.value + 1;
+    labelCount.value = n12;
+    inlinedVal4 = kcfa.VAR(n12, "id");
+    tmp3 = kcfa.Cons("z", kcfa.Nil);
+    n11 = labelCount.value + 1;
+    labelCount.value = n11;
+    inlinedVal5 = kcfa.RET(n11, "z");
     n10 = labelCount.value + 1;
     labelCount.value = n10;
-    inlinedVal4 = kcfa.VAR(n10, "id");
-    tmp3 = kcfa.Cons("z", kcfa.Nil);
-    n9 = labelCount.value + 1;
-    labelCount.value = n9;
-    inlinedVal5 = kcfa.RET(n9, "z");
-    n8 = labelCount.value + 1;
-    labelCount.value = n8;
-    tmp14 = globalThis.Object.freeze([
-      n8,
+    tmp17 = globalThis.Object.freeze([
+      n10,
       tmp3,
       inlinedVal5
     ]);
-    inlinedVal6 = kcfa.LAMBDA(tmp14);
+    inlinedVal6 = kcfa.LAMBDA(tmp17);
     tmp4 = kcfa.Cons("a", kcfa.Nil);
+    n9 = labelCount.value + 1;
+    labelCount.value = n9;
+    inlinedVal7 = kcfa.VAR(n9, "id");
+    tmp5 = kcfa.Cons("y", kcfa.Nil);
+    n8 = labelCount.value + 1;
+    labelCount.value = n8;
+    inlinedVal8 = kcfa.RET(n8, "y");
     n7 = labelCount.value + 1;
     labelCount.value = n7;
-    inlinedVal7 = kcfa.VAR(n7, "id");
-    tmp5 = kcfa.Cons("y", kcfa.Nil);
-    n6 = labelCount.value + 1;
-    labelCount.value = n6;
-    inlinedVal8 = kcfa.RET(n6, "y");
-    n5 = labelCount.value + 1;
-    labelCount.value = n5;
-    tmp13 = globalThis.Object.freeze([
-      n5,
+    tmp16 = globalThis.Object.freeze([
+      n7,
       tmp5,
       inlinedVal8
     ]);
-    inlinedVal9 = kcfa.LAMBDA(tmp13);
+    inlinedVal9 = kcfa.LAMBDA(tmp16);
     tmp6 = kcfa.Cons("b", kcfa.Nil);
-    n4 = labelCount.value + 1;
-    labelCount.value = n4;
-    inlinedVal10 = kcfa.RET(n4, "b");
-    n3 = labelCount.value + 1;
-    labelCount.value = n3;
-    tmp12 = globalThis.Object.freeze([
-      n3,
+    n6 = labelCount.value + 1;
+    labelCount.value = n6;
+    inlinedVal10 = kcfa.RET(n6, "b");
+    n5 = labelCount.value + 1;
+    labelCount.value = n5;
+    tmp15 = globalThis.Object.freeze([
+      n5,
       tmp6,
       inlinedVal10
     ]);
-    inlinedVal11 = kcfa.LAMBDA(tmp12);
+    inlinedVal11 = kcfa.LAMBDA(tmp15);
     tmp7 = kcfa.Cons(inlinedVal11, kcfa.Nil);
     tmp8 = kcfa.Cons(inlinedVal9, tmp7);
-    n2 = labelCount.value + 1;
-    labelCount.value = n2;
-    inlinedVal12 = kcfa.CALL(n2, inlinedVal7, tmp8);
-    n1 = labelCount.value + 1;
-    labelCount.value = n1;
-    tmp11 = globalThis.Object.freeze([
-      n1,
+    n4 = labelCount.value + 1;
+    labelCount.value = n4;
+    inlinedVal12 = kcfa.CALL(n4, inlinedVal7, tmp8);
+    n3 = labelCount.value + 1;
+    labelCount.value = n3;
+    tmp14 = globalThis.Object.freeze([
+      n3,
       tmp4,
       inlinedVal12
     ]);
-    inlinedVal13 = kcfa.LAMBDA(tmp11);
+    inlinedVal13 = kcfa.LAMBDA(tmp14);
     tmp9 = kcfa.Cons(inlinedVal13, kcfa.Nil);
     tmp10 = kcfa.Cons(inlinedVal6, tmp9);
+    n2 = labelCount.value + 1;
+    labelCount.value = n2;
+    inlinedVal14 = kcfa.CALL(n2, inlinedVal4, tmp10);
+    tmp11 = kcfa.Cons("id", kcfa.Nil);
     n = labelCount.value + 1;
     labelCount.value = n;
-    inlinedVal14 = kcfa.CALL(n, inlinedVal4, tmp10);
-    tmp16 = kcfa.Cons("id", kcfa.Nil);
-    n16 = labelCount.value + 1;
-    labelCount.value = n16;
-    tmp18 = globalThis.Object.freeze([
-      n16,
-      tmp16,
+    tmp13 = globalThis.Object.freeze([
+      n,
+      tmp11,
       inlinedVal14
     ]);
-    inlinedVal15 = kcfa.LAMBDA(tmp18);
-    tmp17 = kcfa.Cons(inlinedVal3, kcfa.Nil);
-    n15 = labelCount.value + 1;
-    labelCount.value = n15;
-    return kcfa.CALL(n15, inlinedVal15, tmp17)
+    inlinedVal15 = kcfa.LAMBDA(tmp13);
+    tmp12 = kcfa.Cons(inlinedVal3, kcfa.Nil);
+    n1 = labelCount.value + 1;
+    labelCount.value = n1;
+    return kcfa.CALL(n1, inlinedVal15, tmp12)
   }
   static #doit() {
     let states, summary, tmp, tmp1, tmp2;
@@ -2741,32 +2728,18 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "kcfa"];
 });
-export { foldf as _$_modulePrivate_$_foldf };
 export { ins as _$_modulePrivate_$_ins };
-export { find1 as _$_modulePrivate_$_find1 };
-export { cmp as _$_modulePrivate_$_cmp };
-export { cmp1 as _$_modulePrivate_$_cmp1 };
 export { incr as _$_modulePrivate_$_incr };
-export { link as _$_modulePrivate_$_link };
-export { union1 as _$_modulePrivate_$_union1 };
 export { ins1 as _$_modulePrivate_$_ins1 };
-export { foldf1 as _$_modulePrivate_$_foldf1 };
+export { foldf as _$_modulePrivate_$_foldf };
 export { ins2 as _$_modulePrivate_$_ins2 };
-export { find11 as _$_modulePrivate_$_find11 };
-export { foldf2 as _$_modulePrivate_$_foldf2 };
-export { cmp2 as _$_modulePrivate_$_cmp2 };
+export { foldf1 as _$_modulePrivate_$_foldf1 };
 export { incr1 as _$_modulePrivate_$_incr1 };
-export { link1 as _$_modulePrivate_$_link1 };
 export { union as _$_modulePrivate_$_union };
 export { eval1 as _$_modulePrivate_$_eval };
 export { apply as _$_modulePrivate_$_apply };
-export { return_ as _$_modulePrivate_$_return_ };
-export { newLabel as _$_modulePrivate_$_newLabel };
-export { lambda as _$_modulePrivate_$_lambda };
-export { var_ as _$_modulePrivate_$_var_ };
-export { mkLet as _$_modulePrivate_$_mkLet };
-export { call as _$_modulePrivate_$_call };
 export { kcfa1 as _$_modulePrivate_$_kcfa };
+export { lambda as _$_modulePrivate_$_lambda };
 export { lambda1 as _$_modulePrivate_$_lambda1 };
 export { lambda2 as _$_modulePrivate_$_lambda2 };
 export { lambda3 as _$_modulePrivate_$_lambda3 };
@@ -2774,12 +2747,6 @@ export { lambda4 as _$_modulePrivate_$_lambda4 };
 export { lambda5 as _$_modulePrivate_$_lambda5 };
 export { lambda6 as _$_modulePrivate_$_lambda6 };
 export { lambda7 as _$_modulePrivate_$_lambda7 };
-export { lambda8 as _$_modulePrivate_$_lambda8 };
-export { lambda9 as _$_modulePrivate_$_lambda9 };
-export { lambda10 as _$_modulePrivate_$_lambda10 };
-export { lambda11 as _$_modulePrivate_$_lambda11 };
-export { lambda12 as _$_modulePrivate_$_lambda12 };
-export { lambda13 as _$_modulePrivate_$_lambda13 };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };
@@ -2796,7 +2763,4 @@ export { lambda$9 as _$_modulePrivate_$_lambda$9 };
 export { lambda$10 as _$_modulePrivate_$_lambda$10 };
 export { lambda$11 as _$_modulePrivate_$_lambda$11 };
 export { lambda$12 as _$_modulePrivate_$_lambda$12 };
-export { mkLet$worker as _$_modulePrivate_$_mkLet$worker };
-export { call$worker as _$_modulePrivate_$_call$worker };
-export { lambda$worker as _$_modulePrivate_$_lambda$worker };
 export default kcfa1;

@@ -7,7 +7,7 @@ const exists_$accessorSymbol = globalThis.Symbol("exists_");
 const foreach$accessorSymbol = globalThis.Symbol("foreach");
 const map$accessorSymbol = globalThis.Symbol("map");
 const sub$accessorSymbol = globalThis.Symbol("sub");
-let loop, recordResult, stringValue, letterValue, setLetterValue, testOk, mpuz1, lambda, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6;
+let loop, mpuz1, lambda, lambda1, lambda2, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, lambda$5, lambda$6;
 lambda$6 = (undefined, function (letterValues) {
   return (c, v) => {
     return lambda(letterValues, c, v)
@@ -29,20 +29,12 @@ lambda$5 = (undefined, function (letterValues) {
     ])
   }
 });
-lambda1 = (undefined, function (letterValues, c) {
-  let inlinedVal;
-  inlinedVal = letterValues.at(c);
-  return globalThis.Object.freeze([
-    c,
-    inlinedVal
-  ])
-});
 lambda$4 = (undefined, function (mpuz2, a, b, c, d, e, letters, letterValues, found, values, letters1, c1) {
   return (p) => {
-    return lambda2(mpuz2, a, b, c, d, e, letters, letterValues, found, values, letters1, c1, p)
+    return lambda1(mpuz2, a, b, c, d, e, letters, letterValues, found, values, letters1, c1, p)
   }
 });
-lambda2 = (undefined, function (mpuz2, a, b, c, d, e, letters, letterValues, found, values, letters1, c1, p) {
+lambda1 = (undefined, function (mpuz2, a, b, c, d, e, letters, letterValues, found, values, letters1, c1, p) {
   let scrut, element1$, element0$;
   if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
     element0$ = runtime.Tuple.get(p, 0);
@@ -64,15 +56,12 @@ lambda$3 = (undefined, function (c) {
     return c == c1
   }
 });
-lambda3 = (undefined, function (c, c1) {
-  return c == c1
-});
 lambda$2 = (undefined, function (mpuz2) {
   return (c, letters) => {
-    return lambda4(mpuz2, c, letters)
+    return lambda2(mpuz2, c, letters)
   }
 });
-lambda4 = (undefined, function (mpuz2, c, letters) {
+lambda2 = (undefined, function (mpuz2, c, letters) {
   let scrut, lambda$here;
   lambda$here = lambda$3(c);
   scrut = mpuz2[exists_$accessorSymbol](letters, lambda$here);
@@ -98,74 +87,51 @@ lambda$ = (undefined, function (mpuz2) {
     ])
   }
 });
-letterValue = function letterValue(letterValues, c) {
-  return letterValues.at(c)
-};
-setLetterValue = function setLetterValue(letterValues, c, v) {
-  letterValues[c] = v;
-  return runtime.Unit
-};
-stringValue = function stringValue(mpuz2, letterValues, s) {
-  let lambda$here;
-  lambda$here = lambda$6(letterValues);
-  return mpuz2[fold$accessorSymbol](s, 0, lambda$here)
-};
-recordResult = function recordResult(mpuz2, letters, letterValues, found) {
-  let tmp, tmp1, lambda$here;
-  lambda$here = lambda$5(letterValues);
-  tmp = mpuz2[map$accessorSymbol](letters, lambda$here);
-  tmp1 = mpuz2.Cons(tmp, found.value);
-  found.value = tmp1;
-  return runtime.Unit
-};
-testOk = function testOk(mpuz2, a, b, c, d, e, letters, letterValues, found) {
-  let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, lambda$here, lambda$here1, lambda$here2, lambda$here3, lambda$here4;
-  tmp = mpuz2[sub$accessorSymbol](b, 1);
-  inlinedVal = letterValues.at(tmp);
-  tmp1 = mpuz2[sub$accessorSymbol](b, 0);
-  inlinedVal1 = letterValues.at(tmp1);
-  lambda$here4 = lambda$6(letterValues);
-  inlinedVal2 = mpuz2[fold$accessorSymbol](a, 0, lambda$here4);
-  lambda$here3 = lambda$6(letterValues);
-  inlinedVal3 = mpuz2[fold$accessorSymbol](b, 0, lambda$here3);
-  lambda$here2 = lambda$6(letterValues);
-  inlinedVal4 = mpuz2[fold$accessorSymbol](c, 0, lambda$here2);
-  lambda$here1 = lambda$6(letterValues);
-  inlinedVal5 = mpuz2[fold$accessorSymbol](d, 0, lambda$here1);
-  lambda$here = lambda$6(letterValues);
-  inlinedVal6 = mpuz2[fold$accessorSymbol](e, 0, lambda$here);
-  tmp2 = inlinedVal2 * inlinedVal;
-  tmp3 = tmp2 == inlinedVal4;
-  if (tmp3 === true) {
-    tmp5 = inlinedVal2 * inlinedVal1;
-    tmp4 = tmp5 == inlinedVal5;
-    if (tmp4 === true) {
-      tmp7 = inlinedVal2 * inlinedVal3;
-      tmp6 = tmp7 == inlinedVal6;
-      if (tmp6 === true) {
-        tmp9 = inlinedVal5 * 10;
-        tmp10 = inlinedVal4 + tmp9;
-        tmp8 = tmp10 == inlinedVal6;
-        if (tmp8 === true) {
-          let tmp11, tmp12, lambda$here5;
-          lambda$here5 = lambda$5(letterValues);
-          tmp11 = mpuz2[map$accessorSymbol](letters, lambda$here5);
-          tmp12 = mpuz2.Cons(tmp11, found.value);
-          found.value = tmp12;
-          return runtime.Unit
+loop = function loop(mpuz2, a, b, c, d, e, letters, letterValues, found, values, letters1) {
+  let arg$Cons$0$, arg$Cons$1$, lambda$here;
+  if (letters1 instanceof mpuz2.Nil.class) {
+    let tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, lambda$here1, lambda$here2, lambda$here3, lambda$here4, lambda$here5;
+    tmp = mpuz2[sub$accessorSymbol](b, 1);
+    inlinedVal = letterValues.at(tmp);
+    tmp1 = mpuz2[sub$accessorSymbol](b, 0);
+    inlinedVal1 = letterValues.at(tmp1);
+    lambda$here1 = lambda$6(letterValues);
+    inlinedVal2 = mpuz2[fold$accessorSymbol](a, 0, lambda$here1);
+    lambda$here2 = lambda$6(letterValues);
+    inlinedVal3 = mpuz2[fold$accessorSymbol](b, 0, lambda$here2);
+    lambda$here3 = lambda$6(letterValues);
+    inlinedVal4 = mpuz2[fold$accessorSymbol](c, 0, lambda$here3);
+    lambda$here4 = lambda$6(letterValues);
+    inlinedVal5 = mpuz2[fold$accessorSymbol](d, 0, lambda$here4);
+    lambda$here5 = lambda$6(letterValues);
+    inlinedVal6 = mpuz2[fold$accessorSymbol](e, 0, lambda$here5);
+    tmp2 = inlinedVal2 * inlinedVal;
+    tmp3 = tmp2 == inlinedVal4;
+    if (tmp3 === true) {
+      tmp5 = inlinedVal2 * inlinedVal1;
+      tmp4 = tmp5 == inlinedVal5;
+      if (tmp4 === true) {
+        tmp7 = inlinedVal2 * inlinedVal3;
+        tmp6 = tmp7 == inlinedVal6;
+        if (tmp6 === true) {
+          tmp9 = inlinedVal5 * 10;
+          tmp10 = inlinedVal4 + tmp9;
+          tmp8 = tmp10 == inlinedVal6;
+          if (tmp8 === true) {
+            let tmp11, tmp12, lambda$here6;
+            lambda$here6 = lambda$5(letterValues);
+            tmp11 = mpuz2[map$accessorSymbol](letters, lambda$here6);
+            tmp12 = mpuz2.Cons(tmp11, found.value);
+            found.value = tmp12;
+            return runtime.Unit
+          }
+          return runtime.Unit;
         }
         return runtime.Unit;
       }
       return runtime.Unit;
     }
     return runtime.Unit;
-  }
-  return runtime.Unit;
-};
-loop = function loop(mpuz2, a, b, c, d, e, letters, letterValues, found, values, letters1) {
-  let arg$Cons$0$, arg$Cons$1$, lambda$here;
-  if (letters1 instanceof mpuz2.Nil.class) {
-    return testOk(mpuz2, a, b, c, d, e, letters, letterValues, found)
   } else if (letters1 instanceof mpuz2.Cons.class) {
     arg$Cons$0$ = letters1.head;
     arg$Cons$1$ = letters1.tail;
@@ -174,19 +140,6 @@ loop = function loop(mpuz2, a, b, c, d, e, letters, letterValues, found, values,
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda5 = (undefined, function (mpuz2, s, letters) {
-  let lambda$here;
-  lambda$here = lambda$2(mpuz2);
-  return mpuz2[fold$accessorSymbol](s, letters, lambda$here)
-});
-lambda6 = (undefined, function (mpuz2, v) {
-  let tmp;
-  tmp = new mpuz2.Ref.class(false);
-  return globalThis.Object.freeze([
-    v,
-    tmp
-  ])
-});
 (class mpuz {
   static {
     mpuz1 = this
@@ -389,19 +342,10 @@ lambda6 = (undefined, function (mpuz2, v) {
   static [definitionMetadata] = ["class", "mpuz"];
 });
 export { loop as _$_modulePrivate_$_loop };
-export { recordResult as _$_modulePrivate_$_recordResult };
-export { stringValue as _$_modulePrivate_$_stringValue };
-export { letterValue as _$_modulePrivate_$_letterValue };
-export { setLetterValue as _$_modulePrivate_$_setLetterValue };
-export { testOk as _$_modulePrivate_$_testOk };
 export { mpuz1 as _$_modulePrivate_$_mpuz };
 export { lambda as _$_modulePrivate_$_lambda };
 export { lambda1 as _$_modulePrivate_$_lambda1 };
 export { lambda2 as _$_modulePrivate_$_lambda2 };
-export { lambda3 as _$_modulePrivate_$_lambda3 };
-export { lambda4 as _$_modulePrivate_$_lambda4 };
-export { lambda5 as _$_modulePrivate_$_lambda5 };
-export { lambda6 as _$_modulePrivate_$_lambda6 };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };

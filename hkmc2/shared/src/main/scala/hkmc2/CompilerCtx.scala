@@ -188,7 +188,7 @@ class CompilerCtx(
           blockPrinter.worksheet(p)(using irPrintingScp).mkString(100)
         val pipeline = new codegen.CompilationPipeline:
           override def extraSymbolsToPreserveFrom(prog: codegen.Program): Set[codegen.ScopedSymbol] =
-            collectCompilationUnitSymbols(prog)
+            if artifactConfig.preservePrivateAbi then collectCompilationUnitSymbols(prog) else Set.empty
           override def preOptimizeHook(prog: codegen.Program): Unit =
             DebugOutputHandler.showLoweredTree(prog)(display)
             DebugOutputHandler.showIR(prog, false, blockPrinter, 100)(display)(using artifactConfig, irPrintingScp)

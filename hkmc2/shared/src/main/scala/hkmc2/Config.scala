@@ -34,6 +34,9 @@ case class Config(
   noFreeze: Bool,
   noModuleCheck: Bool,
   aggressive: Bool,
+  // keep every top-level definition of a compiled unit, even unused ones, so that other units
+  // inlining its bodies can import them; when off, the simplifier may drop the unused ones
+  preservePrivateAbi: Bool,
   debug: Debug,
   optimizer: Optimizer,
   // Check internal invariants whose checks are too costly to always run, such as MemberStorage.privateOwner's.
@@ -90,6 +93,7 @@ object Config:
     noFreeze = false,
     noModuleCheck = false,
     aggressive = false,
+    preservePrivateAbi = true,
     debug = Debug.default,
     optimizer = Optimizer.FastOpt,
     checkInvariants = false,

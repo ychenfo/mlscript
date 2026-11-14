@@ -2,8 +2,10 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
+const listPairFoldl$accessorSymbol = globalThis.Symbol("listPairFoldl");
 const labelSame$accessorSymbol = globalThis.Symbol("labelSame");
 const varMapInsert$accessorSymbol = globalThis.Symbol("varMapInsert");
+const varMapFind$accessorSymbol = globalThis.Symbol("varMapFind");
 const varMapNext$accessorSymbol = globalThis.Symbol("varMapNext");
 const varMapLeft$accessorSymbol = globalThis.Symbol("varMapLeft");
 const compareLambda$accessorSymbol = globalThis.Symbol("compareLambda");
@@ -11,7 +13,9 @@ const sameCall$accessorSymbol = globalThis.Symbol("sameCall");
 const bindCompare$accessorSymbol = globalThis.Symbol("bindCompare");
 const setNext$accessorSymbol = globalThis.Symbol("setNext");
 const setLeft$accessorSymbol = globalThis.Symbol("setLeft");
+const setLinkAll$accessorSymbol = globalThis.Symbol("setLinkAll");
 const storeMapInsertWith$accessorSymbol = globalThis.Symbol("storeMapInsertWith");
+const storeMapFind$accessorSymbol = globalThis.Symbol("storeMapFind");
 const storeMapNext$accessorSymbol = globalThis.Symbol("storeMapNext");
 const storeMapLeft$accessorSymbol = globalThis.Symbol("storeMapLeft");
 const storeMapWrap$accessorSymbol = globalThis.Symbol("storeMapWrap");
@@ -21,19 +25,19 @@ const monoStoreUpdate$accessorSymbol = globalThis.Symbol("monoStoreUpdate");
 const listMap$tailrec$accessorSymbol = globalThis.Symbol("listMap$tailrec");
 const listFoldl$tailrec$accessorSymbol = globalThis.Symbol("listFoldl$tailrec");
 const listPairAllEq$tailrec$accessorSymbol = globalThis.Symbol("listPairAllEq$tailrec");
-let foldf, ins, find1, cmp, cmp1, incr, link, union1, ins1, foldf1, ins2, find11, foldf2, cmp2, incr1, link1, union, eval1, apply, return_, newLabel, lambda, var_, mkLet, call, kcfa1, lambda1, lambda2, lambda3, lambda4, lambda5, lambda6, lambda7, lambda8, lambda9, lambda10, lambda11, lambda12, lambda13, lambda$, lambda$1, lambda$2, lambda$3, lambda$4, union$, lambda$5, eval$, apply$, lambda$6, lambda$7, lambda$8, lambda$9, lambda$10, lambda$11, lambda$12, main_doit_summarize_lambda$_lambda_setUnion$setUnion, main_doit_summarize_lambda$_lambda$lambda, main_doit_summarize_lambda$$lambda$, main_doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare, main_doit_explore_member_lambda$_stateSame$stateSame, main_doit_explore_member_lambda$$lambda$, main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion, main_doit_explore_absNext_apply$_apply_lambda$$lambda$, main_doit_explore_absNext_apply$_apply$apply, main_doit_explore_absNext_apply$$apply$, doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion, doit_explore_absNext_apply$_apply_lambda$$lambda$, doit_explore_absNext_apply$_apply$apply, doit_explore_absNext_apply$$apply$, doit_explore_member_lambda$_stateSame$stateSame, doit_explore_member_lambda$$lambda$, doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare, doit_summarize_lambda$_lambda_setUnion$setUnion, doit_summarize_lambda$_lambda$lambda, doit_summarize_lambda$$lambda$, summarize_lambda$_lambda_setUnion$setUnion, summarize_lambda$_lambda$lambda, summarize_lambda$$lambda$, explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare, explore_member_lambda$_stateSame$stateSame, explore_member_lambda$$lambda$, explore_absNext_apply$_apply_lambda$_setUnion$setUnion, explore_absNext_apply$_apply_lambda$$lambda$, explore_absNext_apply$_apply$apply, explore_absNext_apply$$apply$, member_lambda$_stateSame$stateSame, member_lambda$$lambda$, member_lambda$_stateSame_storeCompare_setCompare$setCompare, absNext_apply$_apply_lambda$_setUnion$setUnion, absNext_apply$_apply_lambda$$lambda$, absNext_apply$_apply$apply, absNext_apply$$apply$, stateSame_storeCompare_setCompare$setCompare, storeJoin_setUnion$setUnion, storeUpdate1_lambda$_setUnion$setUnion, storeUpdate1_lambda$$lambda$, storeUpdate_setUnion$setUnion, storeCompare_setCompare$setCompare, lambda_setUnion$setUnion, lambda$_setUnion$setUnion, apply_lambda$_setUnion$setUnion, apply_lambda$$lambda$, apply$_apply_lambda$_setUnion$setUnion, apply$_apply_lambda$$lambda$, apply$_apply$apply, lambda_stateSame_storeCompare_setCompare$setCompare, lambda$_stateSame_storeCompare_setCompare$setCompare, lambda$_stateSame$stateSame, lambda_setUnion$setUnion1, lambda$_lambda_setUnion$setUnion, lambda$_lambda$lambda, main_doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, main_doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, main_doit_monovariantStore_lambda$_lambda_lambda$$lambda$, main_doit_monovariantStore_lambda$_lambda$lambda, main_doit_monovariantStore_lambda$$lambda$, doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, doit_monovariantStore_lambda$_lambda_lambda$$lambda$, doit_monovariantStore_lambda$_lambda$lambda, doit_monovariantStore_lambda$$lambda$, monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, monovariantStore_lambda$_lambda_lambda$$lambda$, monovariantStore_lambda$_lambda$lambda, monovariantStore_lambda$$lambda$, lambda_lambda$_monoStoreUpdate_insertExp$insertExp, lambda_lambda$_monoStoreUpdate$monoStoreUpdate, lambda_lambda$$lambda$, lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, lambda$_lambda_lambda$$lambda$, lambda$_lambda$lambda1, doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr, doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1, doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2, doit_summarize_lambda$_lambda_setUnion_union1_incr$incr, doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3, doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr, doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns, doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1, doit_summarize_lambda$_lambda_union$_union_incr$incr, doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2, doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr, doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1, doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2, doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr, doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3, doit_explore_absNext_atomEval_eval$_eval$eval, doit_explore_absNext_atomEval_eval$$eval$, main_doit_explore_absNext_atomEval_eval$_eval$eval, main_doit_explore_absNext_atomEval_eval$$eval$, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3, main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr, main_doit_summarize_lambda$_lambda_union$_union_incr$incr, main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1, main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2, main_doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns, main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr, main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr, main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1, main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2, main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3, main_lambda$_lambda$lambda, main_lambda$$lambda$, summarize_lambda$_lambda_union$_union$union, summarize_lambda$_lambda_union$$union$, storeJoin_storeMapUnionWith_union$_union$union, storeJoin_storeMapUnionWith_union$$union$, storeMapUnionWith_union$_union$union, storeMapUnionWith_union$$union$, storeMapCollate_lambda$_lambda$lambda, storeMapCollate_lambda$$lambda$, varMapCollate_lambda$_lambda$lambda, varMapCollate_lambda$$lambda$, lambda$_lambda$lambda2, lambda$_lambda$lambda3, union$_union$union, lambda_union$_union$union, lambda_union$$union$, lambda$_lambda_union$_union$union, lambda$_lambda_union$$union$, mkLet$worker, call$worker, lambda$worker;
+let ins, incr, ins1, foldf, ins2, foldf1, incr1, eval1, kcfa1, lambda, lambda1, lambda2, lambda$, lambda$1, lambda$2, eval$, lambda$3, lambda$4, lambda$5, main_doit_summarize_lambda$_lambda_setUnion$setUnion, main_doit_summarize_lambda$_lambda$lambda, main_doit_summarize_lambda$$lambda$, main_doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare, main_doit_explore_member_lambda$_stateSame$stateSame, main_doit_explore_member_lambda$$lambda$, main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion, main_doit_explore_absNext_apply$_apply_lambda$$lambda$, main_doit_explore_absNext_apply$_apply$apply, main_doit_explore_absNext_apply$$apply$, doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion, doit_explore_absNext_apply$_apply_lambda$$lambda$, doit_explore_absNext_apply$_apply$apply, doit_explore_absNext_apply$$apply$, doit_explore_member_lambda$_stateSame$stateSame, doit_explore_member_lambda$$lambda$, doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare, doit_summarize_lambda$_lambda_setUnion$setUnion, doit_summarize_lambda$_lambda$lambda, doit_summarize_lambda$$lambda$, summarize_lambda$_lambda_setUnion$setUnion, summarize_lambda$_lambda$lambda, summarize_lambda$$lambda$, explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare, explore_member_lambda$_stateSame$stateSame, explore_member_lambda$$lambda$, explore_absNext_apply$_apply_lambda$_setUnion$setUnion, explore_absNext_apply$_apply_lambda$$lambda$, explore_absNext_apply$_apply$apply, explore_absNext_apply$$apply$, member_lambda$_stateSame$stateSame, member_lambda$$lambda$, member_lambda$_stateSame_storeCompare_setCompare$setCompare, absNext_apply$_apply_lambda$_setUnion$setUnion, absNext_apply$_apply_lambda$$lambda$, absNext_apply$_apply$apply, absNext_apply$$apply$, stateSame_storeCompare_setCompare$setCompare, storeJoin_setUnion$setUnion, storeUpdate1_lambda$_setUnion$setUnion, storeUpdate1_lambda$$lambda$, storeUpdate_setUnion$setUnion, storeCompare_setCompare$setCompare, main_doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, main_doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, main_doit_monovariantStore_lambda$_lambda_lambda$$lambda$, main_doit_monovariantStore_lambda$_lambda$lambda, main_doit_monovariantStore_lambda$$lambda$, doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, doit_monovariantStore_lambda$_lambda_lambda$$lambda$, doit_monovariantStore_lambda$_lambda$lambda, doit_monovariantStore_lambda$$lambda$, monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, monovariantStore_lambda$_lambda_lambda$$lambda$, monovariantStore_lambda$_lambda$lambda, monovariantStore_lambda$$lambda$, lambda_lambda$_monoStoreUpdate_insertExp$insertExp, lambda_lambda$_monoStoreUpdate$monoStoreUpdate, lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp, lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate, doit_summarize_lambda$_lambda_setUnion_ins_incr$incr, doit_summarize_lambda$_lambda_setUnion_incr$incr, doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1, doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2, doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3, doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr, doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns, doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1, doit_summarize_lambda$_lambda_union$_union_incr$incr, doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2, doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr, doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr, doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1, doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2, doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3, doit_explore_absNext_atomEval_eval$_eval$eval, doit_explore_absNext_atomEval_eval$$eval$, main_doit_explore_absNext_atomEval_eval$_eval$eval, main_doit_explore_absNext_atomEval_eval$$eval$, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr, main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3, main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr, main_doit_summarize_lambda$_lambda_union$_union_incr$incr, main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1, main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2, main_doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns, main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr, main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1, main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2, main_doit_summarize_lambda$_lambda_setUnion_incr$incr, main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3, main_lambda$_lambda$lambda, main_lambda$$lambda$, summarize_lambda$_lambda_union$_union$union, summarize_lambda$_lambda_union$$union$, storeJoin_storeMapUnionWith_union$_union$union, storeJoin_storeMapUnionWith_union$$union$, storeMapUnionWith_union$_union$union, storeMapUnionWith_union$$union$, storeMapCollate_lambda$_lambda$lambda, storeMapCollate_lambda$$lambda$, varMapCollate_lambda$_lambda$lambda, varMapCollate_lambda$$lambda$;
 main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summarize_lambda$_lambda_setUnion$setUnion(set1, set2) {
   let arg$SET$1$, arg$SET$1$1, element1$;
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
@@ -48,7 +52,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
@@ -77,7 +81,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                           arg$SetT$2$2 = element0$2.item;
                           tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                           tmp4 = n1 + 1;
-                          inlinedVal4 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                          inlinedVal4 = main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                           p = tmp3;
                           n1 = tmp4;
                           result1 = inlinedVal4;
@@ -88,7 +92,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                       throw globalThis.Object.freeze(new globalThis.Error("match error"));
                     }
                   }
-                  inlinedVal2 = inlinedVal3;
+                  inlinedVal = inlinedVal3;
                   break inlinedLbl;
                 }
               }
@@ -115,7 +119,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                         arg$SetT$2$2 = element0$2.item;
                         tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                         tmp4 = n1 + 1;
-                        inlinedVal4 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                        inlinedVal4 = main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                         p = tmp3;
                         n1 = tmp4;
                         result1 = inlinedVal4;
@@ -126,7 +130,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
                   }
                 }
-                inlinedVal2 = inlinedVal3;
+                inlinedVal = inlinedVal3;
                 break inlinedLbl;
               }
             }
@@ -156,7 +160,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                         arg$SetT$2$2 = element0$2.item;
                         tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                         tmp4 = n1 + 1;
-                        inlinedVal4 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                        inlinedVal4 = main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                         p = tmp3;
                         n1 = tmp4;
                         result1 = inlinedVal4;
@@ -167,7 +171,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
                   }
                 }
-                inlinedVal2 = inlinedVal3;
+                inlinedVal = inlinedVal3;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -243,17 +247,19 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                                             arg$VmT$2$ = element0$4.key;
                                             arg$VmT$3$ = element0$4.value;
                                             if (element0$5 instanceof kcfa4.VmT.class) {
-                                              let scrut2, scrut3;
+                                              let inlinedVal8, scrut2, scrut3;
                                               arg$VmT$2$1 = element0$5.key;
                                               arg$VmT$3$1 = element0$5.value;
                                               scrut2 = arg$VmT$2$ < arg$VmT$2$1;
                                               if (scrut2 === true) {
-                                                inlinedVal7 = kcfa4.LESS;
+                                                inlinedVal8 = kcfa4.LESS;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               scrut3 = arg$VmT$2$1 < arg$VmT$2$;
                                               if (scrut3 === true) {
-                                                inlinedVal7 = kcfa4.GREATER;
+                                                inlinedVal8 = kcfa4.GREATER;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -297,7 +303,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                           if (inlinedVal3 instanceof kcfa2.LESS.class) {
                             let inlinedVal5;
                             tmp = n + 1;
-                            inlinedVal5 = main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = main_doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             n = tmp;
                             result = inlinedVal5;
@@ -305,7 +311,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                           } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                             let inlinedVal5;
                             tmp1 = n + 1;
-                            inlinedVal5 = main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = main_doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             t2 = element1$2;
                             n = tmp1;
@@ -314,7 +320,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                           } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                             let inlinedVal5;
                             tmp2 = n + 1;
-                            inlinedVal5 = main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
+                            inlinedVal5 = main_doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                             t2 = element1$2;
                             n = tmp2;
                             result = inlinedVal5;
@@ -364,7 +370,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                       arg$SetT$2$2 = element0$2.item;
                       tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                       tmp4 = n1 + 1;
-                      inlinedVal4 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                      inlinedVal4 = main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                       p = tmp3;
                       n1 = tmp4;
                       result1 = inlinedVal4;
@@ -375,7 +381,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
                   throw globalThis.Object.freeze(new globalThis.Error("match error"));
                 }
               }
-              inlinedVal2 = inlinedVal3;
+              inlinedVal = inlinedVal3;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -383,9 +389,9 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
         let kcfa3, t11, d, inlinedVal3;
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
         kcfa3 = kcfa1;
         t11 = kcfa1.SetE;
         d = element1$;
@@ -656,13 +662,13 @@ main_doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = 
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, inlinedVal2;
+      let kcfa2, t1, t2, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       inlinedLbl: {
         loopLabel: while (true) {
           let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
@@ -675,20 +681,20 @@ main_doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = 
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = kcfa2.EQUAL;
+                  inlinedVal = kcfa2.EQUAL;
                   break inlinedLbl
                 }
-                inlinedVal2 = kcfa2.LESS;
+                inlinedVal = kcfa2.LESS;
                 break inlinedLbl;
               }
-              inlinedVal2 = kcfa2.LESS;
+              inlinedVal = kcfa2.LESS;
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$1 = runtime.Tuple.get(p2, 0);
               element1$1 = runtime.Tuple.get(p2, 1);
               if (element0$1 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = kcfa2.GREATER;
+                inlinedVal = kcfa2.GREATER;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -764,17 +770,19 @@ main_doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = 
                                             arg$VmT$2$ = element0$4.key;
                                             arg$VmT$3$ = element0$4.value;
                                             if (element0$5 instanceof kcfa4.VmT.class) {
-                                              let scrut2, scrut3;
+                                              let inlinedVal8, scrut2, scrut3;
                                               arg$VmT$2$1 = element0$5.key;
                                               arg$VmT$3$1 = element0$5.value;
                                               scrut2 = arg$VmT$2$ < arg$VmT$2$1;
                                               if (scrut2 === true) {
-                                                inlinedVal7 = kcfa4.LESS;
+                                                inlinedVal8 = kcfa4.LESS;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               scrut3 = arg$VmT$2$1 < arg$VmT$2$;
                                               if (scrut3 === true) {
-                                                inlinedVal7 = kcfa4.GREATER;
+                                                inlinedVal8 = kcfa4.GREATER;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -820,7 +828,7 @@ main_doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = 
                             t2 = element1$1;
                             continue loopLabel
                           }
-                          inlinedVal2 = inlinedVal3;
+                          inlinedVal = inlinedVal3;
                           break inlinedLbl;
                         }
                         throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -843,7 +851,7 @@ main_doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = 
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$1 = runtime.Tuple.get(p2, 0);
             if (element0$1 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = kcfa2.GREATER;
+              inlinedVal = kcfa2.GREATER;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -851,7 +859,7 @@ main_doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = 
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      return inlinedVal2
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -921,17 +929,19 @@ main_doit_explore_member_lambda$_stateSame$stateSame = function main_doit_explor
                         arg$VmT$2$ = element0$.key;
                         arg$VmT$3$ = element0$.value;
                         if (element0$1 instanceof kcfa3.VmT.class) {
-                          let scrut, scrut1;
+                          let inlinedVal4, scrut, scrut1;
                           arg$VmT$2$1 = element0$1.key;
                           arg$VmT$3$1 = element0$1.value;
                           scrut = arg$VmT$2$ < arg$VmT$2$1;
                           if (scrut === true) {
-                            inlinedVal3 = kcfa3.LESS;
+                            inlinedVal4 = kcfa3.LESS;
+                            inlinedVal3 = inlinedVal4;
                             break inlinedLbl
                           }
                           scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                           if (scrut1 === true) {
-                            inlinedVal3 = kcfa3.GREATER;
+                            inlinedVal4 = kcfa3.GREATER;
+                            inlinedVal3 = inlinedVal4;
                             break inlinedLbl
                           }
                           order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -1078,13 +1088,13 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
@@ -1099,7 +1109,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
@@ -1128,7 +1138,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                           arg$SetT$2$2 = element0$2.item;
                           tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                           tmp4 = n1 + 1;
-                          inlinedVal4 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                          inlinedVal4 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                           p = tmp3;
                           n1 = tmp4;
                           result1 = inlinedVal4;
@@ -1139,7 +1149,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                       throw globalThis.Object.freeze(new globalThis.Error("match error"));
                     }
                   }
-                  inlinedVal2 = inlinedVal3;
+                  inlinedVal = inlinedVal3;
                   break inlinedLbl;
                 }
               }
@@ -1166,7 +1176,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                         arg$SetT$2$2 = element0$2.item;
                         tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                         tmp4 = n1 + 1;
-                        inlinedVal4 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                        inlinedVal4 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                         p = tmp3;
                         n1 = tmp4;
                         result1 = inlinedVal4;
@@ -1177,7 +1187,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
                   }
                 }
-                inlinedVal2 = inlinedVal3;
+                inlinedVal = inlinedVal3;
                 break inlinedLbl;
               }
             }
@@ -1207,7 +1217,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                         arg$SetT$2$2 = element0$2.item;
                         tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                         tmp4 = n1 + 1;
-                        inlinedVal4 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                        inlinedVal4 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                         p = tmp3;
                         n1 = tmp4;
                         result1 = inlinedVal4;
@@ -1218,7 +1228,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
                   }
                 }
-                inlinedVal2 = inlinedVal3;
+                inlinedVal = inlinedVal3;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -1294,17 +1304,19 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                                             arg$VmT$2$ = element0$4.key;
                                             arg$VmT$3$ = element0$4.value;
                                             if (element0$5 instanceof kcfa4.VmT.class) {
-                                              let scrut2, scrut3;
+                                              let inlinedVal8, scrut2, scrut3;
                                               arg$VmT$2$1 = element0$5.key;
                                               arg$VmT$3$1 = element0$5.value;
                                               scrut2 = arg$VmT$2$ < arg$VmT$2$1;
                                               if (scrut2 === true) {
-                                                inlinedVal7 = kcfa4.LESS;
+                                                inlinedVal8 = kcfa4.LESS;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               scrut3 = arg$VmT$2$1 < arg$VmT$2$;
                                               if (scrut3 === true) {
-                                                inlinedVal7 = kcfa4.GREATER;
+                                                inlinedVal8 = kcfa4.GREATER;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -1348,7 +1360,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                           if (inlinedVal3 instanceof kcfa2.LESS.class) {
                             let inlinedVal5;
                             tmp = n + 1;
-                            inlinedVal5 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             n = tmp;
                             result = inlinedVal5;
@@ -1356,7 +1368,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                           } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                             let inlinedVal5;
                             tmp1 = n + 1;
-                            inlinedVal5 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             t2 = element1$2;
                             n = tmp1;
@@ -1365,7 +1377,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                           } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                             let inlinedVal5;
                             tmp2 = n + 1;
-                            inlinedVal5 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
+                            inlinedVal5 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                             t2 = element1$2;
                             n = tmp2;
                             result = inlinedVal5;
@@ -1415,7 +1427,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                       arg$SetT$2$2 = element0$2.item;
                       tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                       tmp4 = n1 + 1;
-                      inlinedVal4 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                      inlinedVal4 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                       p = tmp3;
                       n1 = tmp4;
                       result1 = inlinedVal4;
@@ -1426,7 +1438,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
                   throw globalThis.Object.freeze(new globalThis.Error("match error"));
                 }
               }
-              inlinedVal2 = inlinedVal3;
+              inlinedVal = inlinedVal3;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -1434,9 +1446,9 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
         let kcfa3, t11, d, inlinedVal3;
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
         kcfa3 = kcfa1;
         t11 = kcfa1.SetE;
         d = element1$;
@@ -1488,15 +1500,15 @@ main_doit_explore_absNext_apply$_apply$apply = function main_doit_explore_absNex
     arg$Clos$0$ = clos.lam;
     arg$Clos$1$ = clos.benv;
     if (runtime.Tuple.isArrayLike(arg$Clos$0$) && arg$Clos$0$.length === 3) {
-      let f, inlinedVal, f1, inlinedVal1, f2, inlinedVal2;
+      let f, inlinedVal, inlinedVal1, inlinedVal2, lambda$here, lambda$here1;
       element1$ = runtime.Tuple.get(arg$Clos$0$, 1);
       element2$ = runtime.Tuple.get(arg$Clos$0$, 2);
       f = kcfa2[alloc$accessorSymbol](time1);
       inlinedVal = kcfa2[listMap$tailrec$accessorSymbol](f, element1$);
-      f1 = lambda$1(kcfa2);
-      inlinedVal1 = foldf(kcfa2, f1, element1$, inlinedVal, arg$Clos$1$);
-      f2 = main_doit_explore_absNext_apply$_apply_lambda$$lambda$(kcfa2);
-      inlinedVal2 = foldf(kcfa2, f2, inlinedVal, params, store);
+      lambda$here1 = lambda$(kcfa2);
+      inlinedVal1 = kcfa2[listPairFoldl$accessorSymbol](lambda$here1)(arg$Clos$1$)(element1$, inlinedVal);
+      lambda$here = main_doit_explore_absNext_apply$_apply_lambda$$lambda$(kcfa2);
+      inlinedVal2 = kcfa2[listPairFoldl$accessorSymbol](lambda$here)(store)(inlinedVal, params);
       tmp = kcfa2.State(element2$, inlinedVal1, inlinedVal2, time1);
       return kcfa2.Cons(tmp, states)
     }
@@ -1514,13 +1526,13 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
@@ -1535,7 +1547,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
@@ -1564,7 +1576,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                           arg$SetT$2$2 = element0$2.item;
                           tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                           tmp4 = n1 + 1;
-                          inlinedVal4 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                          inlinedVal4 = doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                           p = tmp3;
                           n1 = tmp4;
                           result1 = inlinedVal4;
@@ -1575,7 +1587,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                       throw globalThis.Object.freeze(new globalThis.Error("match error"));
                     }
                   }
-                  inlinedVal2 = inlinedVal3;
+                  inlinedVal = inlinedVal3;
                   break inlinedLbl;
                 }
               }
@@ -1602,7 +1614,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                         arg$SetT$2$2 = element0$2.item;
                         tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                         tmp4 = n1 + 1;
-                        inlinedVal4 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                        inlinedVal4 = doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                         p = tmp3;
                         n1 = tmp4;
                         result1 = inlinedVal4;
@@ -1613,7 +1625,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
                   }
                 }
-                inlinedVal2 = inlinedVal3;
+                inlinedVal = inlinedVal3;
                 break inlinedLbl;
               }
             }
@@ -1643,7 +1655,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                         arg$SetT$2$2 = element0$2.item;
                         tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                         tmp4 = n1 + 1;
-                        inlinedVal4 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                        inlinedVal4 = doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                         p = tmp3;
                         n1 = tmp4;
                         result1 = inlinedVal4;
@@ -1654,7 +1666,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
                   }
                 }
-                inlinedVal2 = inlinedVal3;
+                inlinedVal = inlinedVal3;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -1730,17 +1742,19 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                                             arg$VmT$2$ = element0$4.key;
                                             arg$VmT$3$ = element0$4.value;
                                             if (element0$5 instanceof kcfa4.VmT.class) {
-                                              let scrut2, scrut3;
+                                              let inlinedVal8, scrut2, scrut3;
                                               arg$VmT$2$1 = element0$5.key;
                                               arg$VmT$3$1 = element0$5.value;
                                               scrut2 = arg$VmT$2$ < arg$VmT$2$1;
                                               if (scrut2 === true) {
-                                                inlinedVal7 = kcfa4.LESS;
+                                                inlinedVal8 = kcfa4.LESS;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               scrut3 = arg$VmT$2$1 < arg$VmT$2$;
                                               if (scrut3 === true) {
-                                                inlinedVal7 = kcfa4.GREATER;
+                                                inlinedVal8 = kcfa4.GREATER;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -1784,7 +1798,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                           if (inlinedVal3 instanceof kcfa2.LESS.class) {
                             let inlinedVal5;
                             tmp = n + 1;
-                            inlinedVal5 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             n = tmp;
                             result = inlinedVal5;
@@ -1792,7 +1806,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                           } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                             let inlinedVal5;
                             tmp1 = n + 1;
-                            inlinedVal5 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             t2 = element1$2;
                             n = tmp1;
@@ -1801,7 +1815,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                           } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                             let inlinedVal5;
                             tmp2 = n + 1;
-                            inlinedVal5 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
+                            inlinedVal5 = doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                             t2 = element1$2;
                             n = tmp2;
                             result = inlinedVal5;
@@ -1851,7 +1865,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                       arg$SetT$2$2 = element0$2.item;
                       tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                       tmp4 = n1 + 1;
-                      inlinedVal4 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                      inlinedVal4 = doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                       p = tmp3;
                       n1 = tmp4;
                       result1 = inlinedVal4;
@@ -1862,7 +1876,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
                   throw globalThis.Object.freeze(new globalThis.Error("match error"));
                 }
               }
-              inlinedVal2 = inlinedVal3;
+              inlinedVal = inlinedVal3;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -1870,9 +1884,9 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
         let kcfa3, t11, d, inlinedVal3;
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
         kcfa3 = kcfa1;
         t11 = kcfa1.SetE;
         d = element1$;
@@ -1924,15 +1938,15 @@ doit_explore_absNext_apply$_apply$apply = function doit_explore_absNext_apply$_a
     arg$Clos$0$ = clos.lam;
     arg$Clos$1$ = clos.benv;
     if (runtime.Tuple.isArrayLike(arg$Clos$0$) && arg$Clos$0$.length === 3) {
-      let f, inlinedVal, f1, inlinedVal1, f2, inlinedVal2;
+      let f, inlinedVal, inlinedVal1, inlinedVal2, lambda$here, lambda$here1;
       element1$ = runtime.Tuple.get(arg$Clos$0$, 1);
       element2$ = runtime.Tuple.get(arg$Clos$0$, 2);
       f = kcfa2[alloc$accessorSymbol](time1);
       inlinedVal = kcfa2[listMap$tailrec$accessorSymbol](f, element1$);
-      f1 = lambda$1(kcfa2);
-      inlinedVal1 = foldf(kcfa2, f1, element1$, inlinedVal, arg$Clos$1$);
-      f2 = doit_explore_absNext_apply$_apply_lambda$$lambda$(kcfa2);
-      inlinedVal2 = foldf(kcfa2, f2, inlinedVal, params, store);
+      lambda$here1 = lambda$(kcfa2);
+      inlinedVal1 = kcfa2[listPairFoldl$accessorSymbol](lambda$here1)(arg$Clos$1$)(element1$, inlinedVal);
+      lambda$here = doit_explore_absNext_apply$_apply_lambda$$lambda$(kcfa2);
+      inlinedVal2 = kcfa2[listPairFoldl$accessorSymbol](lambda$here)(store)(inlinedVal, params);
       tmp = kcfa2.State(element2$, inlinedVal1, inlinedVal2, time1);
       return kcfa2.Cons(tmp, states)
     }
@@ -2009,17 +2023,19 @@ doit_explore_member_lambda$_stateSame$stateSame = function doit_explore_member_l
                         arg$VmT$2$ = element0$.key;
                         arg$VmT$3$ = element0$.value;
                         if (element0$1 instanceof kcfa3.VmT.class) {
-                          let scrut, scrut1;
+                          let inlinedVal4, scrut, scrut1;
                           arg$VmT$2$1 = element0$1.key;
                           arg$VmT$3$1 = element0$1.value;
                           scrut = arg$VmT$2$ < arg$VmT$2$1;
                           if (scrut === true) {
-                            inlinedVal3 = kcfa3.LESS;
+                            inlinedVal4 = kcfa3.LESS;
+                            inlinedVal3 = inlinedVal4;
                             break inlinedLbl
                           }
                           scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                           if (scrut1 === true) {
-                            inlinedVal3 = kcfa3.GREATER;
+                            inlinedVal4 = kcfa3.GREATER;
+                            inlinedVal3 = inlinedVal4;
                             break inlinedLbl
                           }
                           order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -2166,13 +2182,13 @@ doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = funct
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, inlinedVal2;
+      let kcfa2, t1, t2, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       inlinedLbl: {
         loopLabel: while (true) {
           let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
@@ -2185,20 +2201,20 @@ doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = funct
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = kcfa2.EQUAL;
+                  inlinedVal = kcfa2.EQUAL;
                   break inlinedLbl
                 }
-                inlinedVal2 = kcfa2.LESS;
+                inlinedVal = kcfa2.LESS;
                 break inlinedLbl;
               }
-              inlinedVal2 = kcfa2.LESS;
+              inlinedVal = kcfa2.LESS;
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$1 = runtime.Tuple.get(p2, 0);
               element1$1 = runtime.Tuple.get(p2, 1);
               if (element0$1 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = kcfa2.GREATER;
+                inlinedVal = kcfa2.GREATER;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -2274,17 +2290,19 @@ doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = funct
                                             arg$VmT$2$ = element0$4.key;
                                             arg$VmT$3$ = element0$4.value;
                                             if (element0$5 instanceof kcfa4.VmT.class) {
-                                              let scrut2, scrut3;
+                                              let inlinedVal8, scrut2, scrut3;
                                               arg$VmT$2$1 = element0$5.key;
                                               arg$VmT$3$1 = element0$5.value;
                                               scrut2 = arg$VmT$2$ < arg$VmT$2$1;
                                               if (scrut2 === true) {
-                                                inlinedVal7 = kcfa4.LESS;
+                                                inlinedVal8 = kcfa4.LESS;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               scrut3 = arg$VmT$2$1 < arg$VmT$2$;
                                               if (scrut3 === true) {
-                                                inlinedVal7 = kcfa4.GREATER;
+                                                inlinedVal8 = kcfa4.GREATER;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -2330,7 +2348,7 @@ doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = funct
                             t2 = element1$1;
                             continue loopLabel
                           }
-                          inlinedVal2 = inlinedVal3;
+                          inlinedVal = inlinedVal3;
                           break inlinedLbl;
                         }
                         throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -2353,7 +2371,7 @@ doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = funct
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$1 = runtime.Tuple.get(p2, 0);
             if (element0$1 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = kcfa2.GREATER;
+              inlinedVal = kcfa2.GREATER;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -2361,7 +2379,7 @@ doit_explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = funct
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      return inlinedVal2
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -2372,13 +2390,13 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
@@ -2393,7 +2411,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
@@ -2422,7 +2440,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                           arg$SetT$2$2 = element0$2.item;
                           tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                           tmp4 = n1 + 1;
-                          inlinedVal4 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                          inlinedVal4 = doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                           p = tmp3;
                           n1 = tmp4;
                           result1 = inlinedVal4;
@@ -2433,7 +2451,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                       throw globalThis.Object.freeze(new globalThis.Error("match error"));
                     }
                   }
-                  inlinedVal2 = inlinedVal3;
+                  inlinedVal = inlinedVal3;
                   break inlinedLbl;
                 }
               }
@@ -2460,7 +2478,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                         arg$SetT$2$2 = element0$2.item;
                         tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                         tmp4 = n1 + 1;
-                        inlinedVal4 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                        inlinedVal4 = doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                         p = tmp3;
                         n1 = tmp4;
                         result1 = inlinedVal4;
@@ -2471,7 +2489,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
                   }
                 }
-                inlinedVal2 = inlinedVal3;
+                inlinedVal = inlinedVal3;
                 break inlinedLbl;
               }
             }
@@ -2501,7 +2519,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                         arg$SetT$2$2 = element0$2.item;
                         tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                         tmp4 = n1 + 1;
-                        inlinedVal4 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                        inlinedVal4 = doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                         p = tmp3;
                         n1 = tmp4;
                         result1 = inlinedVal4;
@@ -2512,7 +2530,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
                   }
                 }
-                inlinedVal2 = inlinedVal3;
+                inlinedVal = inlinedVal3;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -2588,17 +2606,19 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                                             arg$VmT$2$ = element0$4.key;
                                             arg$VmT$3$ = element0$4.value;
                                             if (element0$5 instanceof kcfa4.VmT.class) {
-                                              let scrut2, scrut3;
+                                              let inlinedVal8, scrut2, scrut3;
                                               arg$VmT$2$1 = element0$5.key;
                                               arg$VmT$3$1 = element0$5.value;
                                               scrut2 = arg$VmT$2$ < arg$VmT$2$1;
                                               if (scrut2 === true) {
-                                                inlinedVal7 = kcfa4.LESS;
+                                                inlinedVal8 = kcfa4.LESS;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               scrut3 = arg$VmT$2$1 < arg$VmT$2$;
                                               if (scrut3 === true) {
-                                                inlinedVal7 = kcfa4.GREATER;
+                                                inlinedVal8 = kcfa4.GREATER;
+                                                inlinedVal7 = inlinedVal8;
                                                 break inlinedLbl1
                                               }
                                               order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -2642,7 +2662,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                           if (inlinedVal3 instanceof kcfa2.LESS.class) {
                             let inlinedVal5;
                             tmp = n + 1;
-                            inlinedVal5 = doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             n = tmp;
                             result = inlinedVal5;
@@ -2650,7 +2670,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                           } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                             let inlinedVal5;
                             tmp1 = n + 1;
-                            inlinedVal5 = doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
+                            inlinedVal5 = doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                             t1 = element1$1;
                             t2 = element1$2;
                             n = tmp1;
@@ -2659,7 +2679,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                           } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                             let inlinedVal5;
                             tmp2 = n + 1;
-                            inlinedVal5 = doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
+                            inlinedVal5 = doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                             t2 = element1$2;
                             n = tmp2;
                             result = inlinedVal5;
@@ -2709,7 +2729,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                       arg$SetT$2$2 = element0$2.item;
                       tmp3 = kcfa3[setNext$accessorSymbol](element1$3);
                       tmp4 = n1 + 1;
-                      inlinedVal4 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
+                      inlinedVal4 = doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa3, arg$SetT$2$2, kcfa3.SetE, result1);
                       p = tmp3;
                       n1 = tmp4;
                       result1 = inlinedVal4;
@@ -2720,7 +2740,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
                   throw globalThis.Object.freeze(new globalThis.Error("match error"));
                 }
               }
-              inlinedVal2 = inlinedVal3;
+              inlinedVal = inlinedVal3;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -2728,9 +2748,9 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
         let kcfa3, t11, d, inlinedVal3;
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
         kcfa3 = kcfa1;
         t11 = kcfa1.SetE;
         d = element1$;
@@ -2997,22 +3017,22 @@ doit_summarize_lambda$$lambda$ = function doit_summarize_lambda$$lambda$(kcfa2) 
   }
 };
 summarize_lambda$_lambda_setUnion$setUnion = function summarize_lambda$_lambda_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
+  let arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp;
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
         loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
+          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp1, tmp2, tmp3;
           p1 = kcfa2[setNext$accessorSymbol](t1);
           p2 = kcfa2[setNext$accessorSymbol](t2);
           if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
@@ -3022,23 +3042,23 @@ summarize_lambda$_lambda_setUnion$setUnion = function summarize_lambda$_lambda_s
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$2 = runtime.Tuple.get(p2, 0);
                 if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
                   break inlinedLbl
                 }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
+                inlinedVal = ins1(kcfa2, p2, n, result);
                 break inlinedLbl;
               }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
+              inlinedVal = ins1(kcfa2, p2, n, result);
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$2 = runtime.Tuple.get(p2, 0);
               element1$2 = runtime.Tuple.get(p2, 1);
               if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
+                inlinedVal = ins1(kcfa2, p1, n, result);
                 break inlinedLbl
               }
               if (element0$1 instanceof kcfa2.SetT.class) {
@@ -3100,17 +3120,19 @@ summarize_lambda$_lambda_setUnion$setUnion = function summarize_lambda$_lambda_s
                                       arg$VmT$2$ = element0$3.key;
                                       arg$VmT$3$ = element0$3.value;
                                       if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$4.key;
                                         arg$VmT$3$1 = element0$4.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -3154,27 +3176,27 @@ summarize_lambda$_lambda_setUnion$setUnion = function summarize_lambda$_lambda_s
                       }
                       if (inlinedVal3 instanceof kcfa2.LESS.class) {
                         let inlinedVal4;
-                        tmp = n + 1;
+                        tmp1 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
-                        n = tmp;
+                        n = tmp1;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                         let inlinedVal4;
-                        tmp1 = n + 1;
+                        tmp2 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
                         t2 = element1$2;
-                        n = tmp1;
+                        n = tmp2;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                         let inlinedVal4;
-                        tmp2 = n + 1;
+                        tmp3 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                         t2 = element1$2;
-                        n = tmp2;
+                        n = tmp3;
                         result = inlinedVal4;
                         continue loopLabel
                       }
@@ -3196,7 +3218,7 @@ summarize_lambda$_lambda_setUnion$setUnion = function summarize_lambda$_lambda_s
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$2 = runtime.Tuple.get(p2, 0);
             if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
+              inlinedVal = ins1(kcfa2, p1, n, result);
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -3204,12 +3226,11 @@ summarize_lambda$_lambda_setUnion$setUnion = function summarize_lambda$_lambda_s
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+        element0$ = runtime.Tuple.get(inlinedVal, 0);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
+        tmp = kcfa1[setLinkAll$accessorSymbol](element1$);
+        return kcfa1.SET(element0$, tmp)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -3237,13 +3258,13 @@ explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = function e
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, inlinedVal2;
+      let kcfa2, t1, t2, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       inlinedLbl: {
         loopLabel: while (true) {
           let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
@@ -3256,20 +3277,20 @@ explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = function e
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = kcfa2.EQUAL;
+                  inlinedVal = kcfa2.EQUAL;
                   break inlinedLbl
                 }
-                inlinedVal2 = kcfa2.LESS;
+                inlinedVal = kcfa2.LESS;
                 break inlinedLbl;
               }
-              inlinedVal2 = kcfa2.LESS;
+              inlinedVal = kcfa2.LESS;
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$1 = runtime.Tuple.get(p2, 0);
               element1$1 = runtime.Tuple.get(p2, 1);
               if (element0$1 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = kcfa2.GREATER;
+                inlinedVal = kcfa2.GREATER;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -3331,17 +3352,19 @@ explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = function e
                                       arg$VmT$2$ = element0$2.key;
                                       arg$VmT$3$ = element0$2.value;
                                       if (element0$3 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$3.key;
                                         arg$VmT$3$1 = element0$3.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -3388,7 +3411,7 @@ explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = function e
                         t2 = element1$1;
                         continue loopLabel
                       }
-                      inlinedVal2 = inlinedVal3;
+                      inlinedVal = inlinedVal3;
                       break inlinedLbl;
                     }
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -3407,7 +3430,7 @@ explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = function e
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$1 = runtime.Tuple.get(p2, 0);
             if (element0$1 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = kcfa2.GREATER;
+              inlinedVal = kcfa2.GREATER;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -3415,7 +3438,7 @@ explore_member_lambda$_stateSame_storeCompare_setCompare$setCompare = function e
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      return inlinedVal2
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -3485,17 +3508,19 @@ explore_member_lambda$_stateSame$stateSame = function explore_member_lambda$_sta
                         arg$VmT$2$ = element0$.key;
                         arg$VmT$3$ = element0$.value;
                         if (element0$1 instanceof kcfa3.VmT.class) {
-                          let scrut, scrut1;
+                          let inlinedVal4, scrut, scrut1;
                           arg$VmT$2$1 = element0$1.key;
                           arg$VmT$3$1 = element0$1.value;
                           scrut = arg$VmT$2$ < arg$VmT$2$1;
                           if (scrut === true) {
-                            inlinedVal3 = kcfa3.LESS;
+                            inlinedVal4 = kcfa3.LESS;
+                            inlinedVal3 = inlinedVal4;
                             break inlinedLbl
                           }
                           scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                           if (scrut1 === true) {
-                            inlinedVal3 = kcfa3.GREATER;
+                            inlinedVal4 = kcfa3.GREATER;
+                            inlinedVal3 = inlinedVal4;
                             break inlinedLbl
                           }
                           order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -3638,22 +3663,22 @@ explore_member_lambda$$lambda$ = function explore_member_lambda$$lambda$(kcfa2, 
   }
 };
 explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function explore_absNext_apply$_apply_lambda$_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
+  let arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp;
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
         loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
+          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp1, tmp2, tmp3;
           p1 = kcfa2[setNext$accessorSymbol](t1);
           p2 = kcfa2[setNext$accessorSymbol](t2);
           if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
@@ -3663,23 +3688,23 @@ explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function explore_absNex
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$2 = runtime.Tuple.get(p2, 0);
                 if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
                   break inlinedLbl
                 }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
+                inlinedVal = ins1(kcfa2, p2, n, result);
                 break inlinedLbl;
               }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
+              inlinedVal = ins1(kcfa2, p2, n, result);
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$2 = runtime.Tuple.get(p2, 0);
               element1$2 = runtime.Tuple.get(p2, 1);
               if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
+                inlinedVal = ins1(kcfa2, p1, n, result);
                 break inlinedLbl
               }
               if (element0$1 instanceof kcfa2.SetT.class) {
@@ -3741,17 +3766,19 @@ explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function explore_absNex
                                       arg$VmT$2$ = element0$3.key;
                                       arg$VmT$3$ = element0$3.value;
                                       if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$4.key;
                                         arg$VmT$3$1 = element0$4.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -3795,27 +3822,27 @@ explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function explore_absNex
                       }
                       if (inlinedVal3 instanceof kcfa2.LESS.class) {
                         let inlinedVal4;
-                        tmp = n + 1;
+                        tmp1 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
-                        n = tmp;
+                        n = tmp1;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                         let inlinedVal4;
-                        tmp1 = n + 1;
+                        tmp2 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
                         t2 = element1$2;
-                        n = tmp1;
+                        n = tmp2;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                         let inlinedVal4;
-                        tmp2 = n + 1;
+                        tmp3 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                         t2 = element1$2;
-                        n = tmp2;
+                        n = tmp3;
                         result = inlinedVal4;
                         continue loopLabel
                       }
@@ -3837,7 +3864,7 @@ explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function explore_absNex
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$2 = runtime.Tuple.get(p2, 0);
             if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
+              inlinedVal = ins1(kcfa2, p1, n, result);
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -3845,12 +3872,11 @@ explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function explore_absNex
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+        element0$ = runtime.Tuple.get(inlinedVal, 0);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
+        tmp = kcfa1[setLinkAll$accessorSymbol](element1$);
+        return kcfa1.SET(element0$, tmp)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -3869,16 +3895,16 @@ explore_absNext_apply$_apply$apply = function explore_absNext_apply$_apply$apply
     arg$Clos$0$ = clos.lam;
     arg$Clos$1$ = clos.benv;
     if (runtime.Tuple.isArrayLike(arg$Clos$0$) && arg$Clos$0$.length === 3) {
-      let f, inlinedVal, f1, inlinedVal1, f2, inlinedVal2;
+      let f, inlinedVal, inlinedVal1, inlinedVal2, lambda$here, lambda$here1;
       runtime.Tuple.get(arg$Clos$0$, 0);
       element1$ = runtime.Tuple.get(arg$Clos$0$, 1);
       element2$ = runtime.Tuple.get(arg$Clos$0$, 2);
       f = kcfa2[alloc$accessorSymbol](time1);
       inlinedVal = kcfa2[listMap$tailrec$accessorSymbol](f, element1$);
-      f1 = lambda$1(kcfa2);
-      inlinedVal1 = foldf(kcfa2, f1, element1$, inlinedVal, arg$Clos$1$);
-      f2 = explore_absNext_apply$_apply_lambda$$lambda$(kcfa2);
-      inlinedVal2 = foldf(kcfa2, f2, inlinedVal, params, store);
+      lambda$here1 = lambda$(kcfa2);
+      inlinedVal1 = kcfa2[listPairFoldl$accessorSymbol](lambda$here1)(arg$Clos$1$)(element1$, inlinedVal);
+      lambda$here = explore_absNext_apply$_apply_lambda$$lambda$(kcfa2);
+      inlinedVal2 = kcfa2[listPairFoldl$accessorSymbol](lambda$here)(store)(inlinedVal, params);
       tmp = kcfa2.State(element2$, inlinedVal1, inlinedVal2, time1);
       return kcfa2.Cons(tmp, states)
     }
@@ -3955,17 +3981,19 @@ member_lambda$_stateSame$stateSame = function member_lambda$_stateSame$stateSame
                         arg$VmT$2$ = element0$.key;
                         arg$VmT$3$ = element0$.value;
                         if (element0$1 instanceof kcfa3.VmT.class) {
-                          let scrut, scrut1;
+                          let inlinedVal4, scrut, scrut1;
                           arg$VmT$2$1 = element0$1.key;
                           arg$VmT$3$1 = element0$1.value;
                           scrut = arg$VmT$2$ < arg$VmT$2$1;
                           if (scrut === true) {
-                            inlinedVal3 = kcfa3.LESS;
+                            inlinedVal4 = kcfa3.LESS;
+                            inlinedVal3 = inlinedVal4;
                             break inlinedLbl
                           }
                           scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                           if (scrut1 === true) {
-                            inlinedVal3 = kcfa3.GREATER;
+                            inlinedVal4 = kcfa3.GREATER;
+                            inlinedVal3 = inlinedVal4;
                             break inlinedLbl
                           }
                           order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -4112,13 +4140,13 @@ member_lambda$_stateSame_storeCompare_setCompare$setCompare = function member_la
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, inlinedVal2;
+      let kcfa2, t1, t2, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       inlinedLbl: {
         loopLabel: while (true) {
           let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
@@ -4131,20 +4159,20 @@ member_lambda$_stateSame_storeCompare_setCompare$setCompare = function member_la
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = kcfa2.EQUAL;
+                  inlinedVal = kcfa2.EQUAL;
                   break inlinedLbl
                 }
-                inlinedVal2 = kcfa2.LESS;
+                inlinedVal = kcfa2.LESS;
                 break inlinedLbl;
               }
-              inlinedVal2 = kcfa2.LESS;
+              inlinedVal = kcfa2.LESS;
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$1 = runtime.Tuple.get(p2, 0);
               element1$1 = runtime.Tuple.get(p2, 1);
               if (element0$1 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = kcfa2.GREATER;
+                inlinedVal = kcfa2.GREATER;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -4206,17 +4234,19 @@ member_lambda$_stateSame_storeCompare_setCompare$setCompare = function member_la
                                       arg$VmT$2$ = element0$2.key;
                                       arg$VmT$3$ = element0$2.value;
                                       if (element0$3 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$3.key;
                                         arg$VmT$3$1 = element0$3.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -4263,7 +4293,7 @@ member_lambda$_stateSame_storeCompare_setCompare$setCompare = function member_la
                         t2 = element1$1;
                         continue loopLabel
                       }
-                      inlinedVal2 = inlinedVal3;
+                      inlinedVal = inlinedVal3;
                       break inlinedLbl;
                     }
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -4282,7 +4312,7 @@ member_lambda$_stateSame_storeCompare_setCompare$setCompare = function member_la
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$1 = runtime.Tuple.get(p2, 0);
             if (element0$1 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = kcfa2.GREATER;
+              inlinedVal = kcfa2.GREATER;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -4290,29 +4320,29 @@ member_lambda$_stateSame_storeCompare_setCompare$setCompare = function member_la
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      return inlinedVal2
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 absNext_apply$_apply_lambda$_setUnion$setUnion = function absNext_apply$_apply_lambda$_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
+  let arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp;
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
         loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
+          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp1, tmp2, tmp3;
           p1 = kcfa2[setNext$accessorSymbol](t1);
           p2 = kcfa2[setNext$accessorSymbol](t2);
           if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
@@ -4322,23 +4352,23 @@ absNext_apply$_apply_lambda$_setUnion$setUnion = function absNext_apply$_apply_l
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$2 = runtime.Tuple.get(p2, 0);
                 if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
                   break inlinedLbl
                 }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
+                inlinedVal = ins1(kcfa2, p2, n, result);
                 break inlinedLbl;
               }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
+              inlinedVal = ins1(kcfa2, p2, n, result);
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$2 = runtime.Tuple.get(p2, 0);
               element1$2 = runtime.Tuple.get(p2, 1);
               if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
+                inlinedVal = ins1(kcfa2, p1, n, result);
                 break inlinedLbl
               }
               if (element0$1 instanceof kcfa2.SetT.class) {
@@ -4400,17 +4430,19 @@ absNext_apply$_apply_lambda$_setUnion$setUnion = function absNext_apply$_apply_l
                                       arg$VmT$2$ = element0$3.key;
                                       arg$VmT$3$ = element0$3.value;
                                       if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$4.key;
                                         arg$VmT$3$1 = element0$4.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -4454,27 +4486,27 @@ absNext_apply$_apply_lambda$_setUnion$setUnion = function absNext_apply$_apply_l
                       }
                       if (inlinedVal3 instanceof kcfa2.LESS.class) {
                         let inlinedVal4;
-                        tmp = n + 1;
+                        tmp1 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
-                        n = tmp;
+                        n = tmp1;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                         let inlinedVal4;
-                        tmp1 = n + 1;
+                        tmp2 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
                         t2 = element1$2;
-                        n = tmp1;
+                        n = tmp2;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                         let inlinedVal4;
-                        tmp2 = n + 1;
+                        tmp3 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                         t2 = element1$2;
-                        n = tmp2;
+                        n = tmp3;
                         result = inlinedVal4;
                         continue loopLabel
                       }
@@ -4496,7 +4528,7 @@ absNext_apply$_apply_lambda$_setUnion$setUnion = function absNext_apply$_apply_l
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$2 = runtime.Tuple.get(p2, 0);
             if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
+              inlinedVal = ins1(kcfa2, p1, n, result);
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -4504,12 +4536,11 @@ absNext_apply$_apply_lambda$_setUnion$setUnion = function absNext_apply$_apply_l
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+        element0$ = runtime.Tuple.get(inlinedVal, 0);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
+        tmp = kcfa1[setLinkAll$accessorSymbol](element1$);
+        return kcfa1.SET(element0$, tmp)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -4528,16 +4559,16 @@ absNext_apply$_apply$apply = function absNext_apply$_apply$apply(kcfa2, store, t
     arg$Clos$0$ = clos.lam;
     arg$Clos$1$ = clos.benv;
     if (runtime.Tuple.isArrayLike(arg$Clos$0$) && arg$Clos$0$.length === 3) {
-      let f, inlinedVal, f1, inlinedVal1, f2, inlinedVal2;
+      let f, inlinedVal, inlinedVal1, inlinedVal2, lambda$here, lambda$here1;
       runtime.Tuple.get(arg$Clos$0$, 0);
       element1$ = runtime.Tuple.get(arg$Clos$0$, 1);
       element2$ = runtime.Tuple.get(arg$Clos$0$, 2);
       f = kcfa2[alloc$accessorSymbol](time1);
       inlinedVal = kcfa2[listMap$tailrec$accessorSymbol](f, element1$);
-      f1 = lambda$1(kcfa2);
-      inlinedVal1 = foldf(kcfa2, f1, element1$, inlinedVal, arg$Clos$1$);
-      f2 = absNext_apply$_apply_lambda$$lambda$(kcfa2);
-      inlinedVal2 = foldf(kcfa2, f2, inlinedVal, params, store);
+      lambda$here1 = lambda$(kcfa2);
+      inlinedVal1 = kcfa2[listPairFoldl$accessorSymbol](lambda$here1)(arg$Clos$1$)(element1$, inlinedVal);
+      lambda$here = absNext_apply$_apply_lambda$$lambda$(kcfa2);
+      inlinedVal2 = kcfa2[listPairFoldl$accessorSymbol](lambda$here)(store)(inlinedVal, params);
       tmp = kcfa2.State(element2$, inlinedVal1, inlinedVal2, time1);
       return kcfa2.Cons(tmp, states)
     }
@@ -4555,13 +4586,13 @@ stateSame_storeCompare_setCompare$setCompare = function stateSame_storeCompare_s
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, inlinedVal2;
+      let kcfa2, t1, t2, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       inlinedLbl: {
         loopLabel: while (true) {
           let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
@@ -4574,20 +4605,20 @@ stateSame_storeCompare_setCompare$setCompare = function stateSame_storeCompare_s
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = kcfa2.EQUAL;
+                  inlinedVal = kcfa2.EQUAL;
                   break inlinedLbl
                 }
-                inlinedVal2 = kcfa2.LESS;
+                inlinedVal = kcfa2.LESS;
                 break inlinedLbl;
               }
-              inlinedVal2 = kcfa2.LESS;
+              inlinedVal = kcfa2.LESS;
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$1 = runtime.Tuple.get(p2, 0);
               element1$1 = runtime.Tuple.get(p2, 1);
               if (element0$1 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = kcfa2.GREATER;
+                inlinedVal = kcfa2.GREATER;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -4649,17 +4680,19 @@ stateSame_storeCompare_setCompare$setCompare = function stateSame_storeCompare_s
                                       arg$VmT$2$ = element0$2.key;
                                       arg$VmT$3$ = element0$2.value;
                                       if (element0$3 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$3.key;
                                         arg$VmT$3$1 = element0$3.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -4706,7 +4739,7 @@ stateSame_storeCompare_setCompare$setCompare = function stateSame_storeCompare_s
                         t2 = element1$1;
                         continue loopLabel
                       }
-                      inlinedVal2 = inlinedVal3;
+                      inlinedVal = inlinedVal3;
                       break inlinedLbl;
                     }
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -4725,7 +4758,7 @@ stateSame_storeCompare_setCompare$setCompare = function stateSame_storeCompare_s
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$1 = runtime.Tuple.get(p2, 0);
             if (element0$1 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = kcfa2.GREATER;
+              inlinedVal = kcfa2.GREATER;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -4733,29 +4766,29 @@ stateSame_storeCompare_setCompare$setCompare = function stateSame_storeCompare_s
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      return inlinedVal2
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 storeJoin_setUnion$setUnion = function storeJoin_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
+  let arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp;
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
         loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
+          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp1, tmp2, tmp3;
           p1 = kcfa2[setNext$accessorSymbol](t1);
           p2 = kcfa2[setNext$accessorSymbol](t2);
           if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
@@ -4765,23 +4798,23 @@ storeJoin_setUnion$setUnion = function storeJoin_setUnion$setUnion(set1, set2) {
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$2 = runtime.Tuple.get(p2, 0);
                 if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
                   break inlinedLbl
                 }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
+                inlinedVal = ins1(kcfa2, p2, n, result);
                 break inlinedLbl;
               }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
+              inlinedVal = ins1(kcfa2, p2, n, result);
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$2 = runtime.Tuple.get(p2, 0);
               element1$2 = runtime.Tuple.get(p2, 1);
               if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
+                inlinedVal = ins1(kcfa2, p1, n, result);
                 break inlinedLbl
               }
               if (element0$1 instanceof kcfa2.SetT.class) {
@@ -4843,17 +4876,19 @@ storeJoin_setUnion$setUnion = function storeJoin_setUnion$setUnion(set1, set2) {
                                       arg$VmT$2$ = element0$3.key;
                                       arg$VmT$3$ = element0$3.value;
                                       if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$4.key;
                                         arg$VmT$3$1 = element0$4.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -4897,27 +4932,27 @@ storeJoin_setUnion$setUnion = function storeJoin_setUnion$setUnion(set1, set2) {
                       }
                       if (inlinedVal3 instanceof kcfa2.LESS.class) {
                         let inlinedVal4;
-                        tmp = n + 1;
+                        tmp1 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
-                        n = tmp;
+                        n = tmp1;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                         let inlinedVal4;
-                        tmp1 = n + 1;
+                        tmp2 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
                         t2 = element1$2;
-                        n = tmp1;
+                        n = tmp2;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                         let inlinedVal4;
-                        tmp2 = n + 1;
+                        tmp3 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                         t2 = element1$2;
-                        n = tmp2;
+                        n = tmp3;
                         result = inlinedVal4;
                         continue loopLabel
                       }
@@ -4939,7 +4974,7 @@ storeJoin_setUnion$setUnion = function storeJoin_setUnion$setUnion(set1, set2) {
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$2 = runtime.Tuple.get(p2, 0);
             if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
+              inlinedVal = ins1(kcfa2, p1, n, result);
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -4947,12 +4982,11 @@ storeJoin_setUnion$setUnion = function storeJoin_setUnion$setUnion(set1, set2) {
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+        element0$ = runtime.Tuple.get(inlinedVal, 0);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
+        tmp = kcfa1[setLinkAll$accessorSymbol](element1$);
+        return kcfa1.SET(element0$, tmp)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -4961,22 +4995,22 @@ storeJoin_setUnion$setUnion = function storeJoin_setUnion$setUnion(set1, set2) {
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
 storeUpdate1_lambda$_setUnion$setUnion = function storeUpdate1_lambda$_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
+  let arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp;
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
         loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
+          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp1, tmp2, tmp3;
           p1 = kcfa2[setNext$accessorSymbol](t1);
           p2 = kcfa2[setNext$accessorSymbol](t2);
           if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
@@ -4986,23 +5020,23 @@ storeUpdate1_lambda$_setUnion$setUnion = function storeUpdate1_lambda$_setUnion$
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$2 = runtime.Tuple.get(p2, 0);
                 if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
                   break inlinedLbl
                 }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
+                inlinedVal = ins1(kcfa2, p2, n, result);
                 break inlinedLbl;
               }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
+              inlinedVal = ins1(kcfa2, p2, n, result);
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$2 = runtime.Tuple.get(p2, 0);
               element1$2 = runtime.Tuple.get(p2, 1);
               if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
+                inlinedVal = ins1(kcfa2, p1, n, result);
                 break inlinedLbl
               }
               if (element0$1 instanceof kcfa2.SetT.class) {
@@ -5064,17 +5098,19 @@ storeUpdate1_lambda$_setUnion$setUnion = function storeUpdate1_lambda$_setUnion$
                                       arg$VmT$2$ = element0$3.key;
                                       arg$VmT$3$ = element0$3.value;
                                       if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$4.key;
                                         arg$VmT$3$1 = element0$4.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -5118,27 +5154,27 @@ storeUpdate1_lambda$_setUnion$setUnion = function storeUpdate1_lambda$_setUnion$
                       }
                       if (inlinedVal3 instanceof kcfa2.LESS.class) {
                         let inlinedVal4;
-                        tmp = n + 1;
+                        tmp1 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
-                        n = tmp;
+                        n = tmp1;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                         let inlinedVal4;
-                        tmp1 = n + 1;
+                        tmp2 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
                         t2 = element1$2;
-                        n = tmp1;
+                        n = tmp2;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                         let inlinedVal4;
-                        tmp2 = n + 1;
+                        tmp3 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                         t2 = element1$2;
-                        n = tmp2;
+                        n = tmp3;
                         result = inlinedVal4;
                         continue loopLabel
                       }
@@ -5160,7 +5196,7 @@ storeUpdate1_lambda$_setUnion$setUnion = function storeUpdate1_lambda$_setUnion$
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$2 = runtime.Tuple.get(p2, 0);
             if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
+              inlinedVal = ins1(kcfa2, p1, n, result);
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -5168,12 +5204,11 @@ storeUpdate1_lambda$_setUnion$setUnion = function storeUpdate1_lambda$_setUnion$
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+        element0$ = runtime.Tuple.get(inlinedVal, 0);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
+        tmp = kcfa1[setLinkAll$accessorSymbol](element1$);
+        return kcfa1.SET(element0$, tmp)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -5187,22 +5222,22 @@ storeUpdate1_lambda$$lambda$ = function storeUpdate1_lambda$$lambda$(kcfa2) {
   }
 };
 storeUpdate_setUnion$setUnion = function storeUpdate_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
+  let arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp;
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
+      let kcfa2, t1, t2, n, result, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       n = 0;
       result = kcfa1.SetZERO;
       inlinedLbl: {
         loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
+          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp1, tmp2, tmp3;
           p1 = kcfa2[setNext$accessorSymbol](t1);
           p2 = kcfa2[setNext$accessorSymbol](t2);
           if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
@@ -5212,23 +5247,23 @@ storeUpdate_setUnion$setUnion = function storeUpdate_setUnion$setUnion(set1, set
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$2 = runtime.Tuple.get(p2, 0);
                 if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
+                  inlinedVal = globalThis.Object.freeze([
                     n,
                     result
                   ]);
                   break inlinedLbl
                 }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
+                inlinedVal = ins1(kcfa2, p2, n, result);
                 break inlinedLbl;
               }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
+              inlinedVal = ins1(kcfa2, p2, n, result);
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$2 = runtime.Tuple.get(p2, 0);
               element1$2 = runtime.Tuple.get(p2, 1);
               if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
+                inlinedVal = ins1(kcfa2, p1, n, result);
                 break inlinedLbl
               }
               if (element0$1 instanceof kcfa2.SetT.class) {
@@ -5290,17 +5325,19 @@ storeUpdate_setUnion$setUnion = function storeUpdate_setUnion$setUnion(set1, set
                                       arg$VmT$2$ = element0$3.key;
                                       arg$VmT$3$ = element0$3.value;
                                       if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$4.key;
                                         arg$VmT$3$1 = element0$4.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -5344,27 +5381,27 @@ storeUpdate_setUnion$setUnion = function storeUpdate_setUnion$setUnion(set1, set
                       }
                       if (inlinedVal3 instanceof kcfa2.LESS.class) {
                         let inlinedVal4;
-                        tmp = n + 1;
+                        tmp1 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
-                        n = tmp;
+                        n = tmp1;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
                         let inlinedVal4;
-                        tmp1 = n + 1;
+                        tmp2 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
                         t1 = element1$1;
                         t2 = element1$2;
-                        n = tmp1;
+                        n = tmp2;
                         result = inlinedVal4;
                         continue loopLabel
                       } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
                         let inlinedVal4;
-                        tmp2 = n + 1;
+                        tmp3 = n + 1;
                         inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
                         t2 = element1$2;
-                        n = tmp2;
+                        n = tmp3;
                         result = inlinedVal4;
                         continue loopLabel
                       }
@@ -5386,7 +5423,7 @@ storeUpdate_setUnion$setUnion = function storeUpdate_setUnion$setUnion(set1, set
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$2 = runtime.Tuple.get(p2, 0);
             if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
+              inlinedVal = ins1(kcfa2, p1, n, result);
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -5394,12 +5431,11 @@ storeUpdate_setUnion$setUnion = function storeUpdate_setUnion$setUnion(set1, set
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
+      if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+        element0$ = runtime.Tuple.get(inlinedVal, 0);
+        element1$ = runtime.Tuple.get(inlinedVal, 1);
+        tmp = kcfa1[setLinkAll$accessorSymbol](element1$);
+        return kcfa1.SET(element0$, tmp)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -5412,13 +5448,13 @@ storeCompare_setCompare$setCompare = function storeCompare_setCompare$setCompare
   if (set1 instanceof kcfa1.SET.class) {
     arg$SET$1$ = set1.tree;
     if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, inlinedVal2;
+      let kcfa2, t1, t2, inlinedVal, inlinedVal1, inlinedVal2;
       arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
+      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
+      inlinedVal2 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
       kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
+      t1 = inlinedVal1;
+      t2 = inlinedVal2;
       inlinedLbl: {
         loopLabel: while (true) {
           let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
@@ -5431,20 +5467,20 @@ storeCompare_setCompare$setCompare = function storeCompare_setCompare$setCompare
               if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
                 element0$1 = runtime.Tuple.get(p2, 0);
                 if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = kcfa2.EQUAL;
+                  inlinedVal = kcfa2.EQUAL;
                   break inlinedLbl
                 }
-                inlinedVal2 = kcfa2.LESS;
+                inlinedVal = kcfa2.LESS;
                 break inlinedLbl;
               }
-              inlinedVal2 = kcfa2.LESS;
+              inlinedVal = kcfa2.LESS;
               break inlinedLbl;
             }
             if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
               element0$1 = runtime.Tuple.get(p2, 0);
               element1$1 = runtime.Tuple.get(p2, 1);
               if (element0$1 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = kcfa2.GREATER;
+                inlinedVal = kcfa2.GREATER;
                 break inlinedLbl
               }
               if (element0$ instanceof kcfa2.SetT.class) {
@@ -5506,17 +5542,19 @@ storeCompare_setCompare$setCompare = function storeCompare_setCompare$setCompare
                                       arg$VmT$2$ = element0$2.key;
                                       arg$VmT$3$ = element0$2.value;
                                       if (element0$3 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
+                                        let inlinedVal7, scrut, scrut1;
                                         arg$VmT$2$1 = element0$3.key;
                                         arg$VmT$3$1 = element0$3.value;
                                         scrut = arg$VmT$2$ < arg$VmT$2$1;
                                         if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
+                                          inlinedVal7 = kcfa4.LESS;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                         if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
+                                          inlinedVal7 = kcfa4.GREATER;
+                                          inlinedVal6 = inlinedVal7;
                                           break inlinedLbl1
                                         }
                                         order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -5563,7 +5601,7 @@ storeCompare_setCompare$setCompare = function storeCompare_setCompare$setCompare
                         t2 = element1$1;
                         continue loopLabel
                       }
-                      inlinedVal2 = inlinedVal3;
+                      inlinedVal = inlinedVal3;
                       break inlinedLbl;
                     }
                     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -5582,7 +5620,7 @@ storeCompare_setCompare$setCompare = function storeCompare_setCompare$setCompare
           if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
             element0$1 = runtime.Tuple.get(p2, 0);
             if (element0$1 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = kcfa2.GREATER;
+              inlinedVal = kcfa2.GREATER;
               break inlinedLbl
             }
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -5590,1967 +5628,9 @@ storeCompare_setCompare$setCompare = function storeCompare_setCompare$setCompare
           throw globalThis.Object.freeze(new globalThis.Error("match error"));
         }
       }
-      return inlinedVal2
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda_setUnion$setUnion = function lambda_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
-  if (set1 instanceof kcfa1.SET.class) {
-    arg$SET$1$ = set1.tree;
-    if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
-      arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
-      kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      n = 0;
-      result = kcfa1.SetZERO;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
-          p1 = kcfa2[setNext$accessorSymbol](t1);
-          p2 = kcfa2[setNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$1 = runtime.Tuple.get(p1, 0);
-            element1$1 = runtime.Tuple.get(p1, 1);
-            if (element0$1 instanceof kcfa2.SetE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$2 = runtime.Tuple.get(p2, 0);
-                if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
-                    n,
-                    result
-                  ]);
-                  break inlinedLbl
-                }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
-                break inlinedLbl;
-              }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$2 = runtime.Tuple.get(p2, 0);
-              element1$2 = runtime.Tuple.get(p2, 1);
-              if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
-                break inlinedLbl
-              }
-              if (element0$1 instanceof kcfa2.SetT.class) {
-                arg$SetT$2$ = element0$1.item;
-                if (element0$2 instanceof kcfa2.SetT.class) {
-                  let inlinedVal3, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-                  arg$SetT$2$1 = element0$2.item;
-                  if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-                    arg$Clos$0$ = arg$SetT$2$.lam;
-                    arg$Clos$1$ = arg$SetT$2$.benv;
-                    if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                      arg$Clos$0$1 = arg$SetT$2$1.lam;
-                      arg$Clos$1$1 = arg$SetT$2$1.benv;
-                      order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                      if (order instanceof kcfa1.EQUAL.class) {
-                        let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                        cmpRng = kcfa1[bindCompare$accessorSymbol];
-                        kcfa3 = kcfa1;
-                        if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                          arg$VmMAP$1$ = arg$Clos$1$.tree;
-                          if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                            let inlinedVal4, inlinedVal5, kcfa4, cmpRng1, t11, t21, inlinedVal6;
-                            arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                            inlinedVal4 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                            inlinedVal5 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                            kcfa4 = kcfa1;
-                            cmpRng1 = cmpRng;
-                            t11 = inlinedVal4;
-                            t21 = inlinedVal5;
-                            inlinedLbl1: {
-                              loopLabel1: while (true) {
-                                let p11, p21, order1, element1$3, element0$3, arg$VmT$2$, arg$VmT$3$, element1$4, element0$4, arg$VmT$2$1, arg$VmT$3$1;
-                                p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                                p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                                if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                                  element0$3 = runtime.Tuple.get(p11, 0);
-                                  element1$3 = runtime.Tuple.get(p11, 1);
-                                  if (element0$3 instanceof kcfa4.VmE.class) {
-                                    if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                      element0$4 = runtime.Tuple.get(p21, 0);
-                                      if (element0$4 instanceof kcfa4.VmE.class) {
-                                        inlinedVal6 = kcfa4.EQUAL;
-                                        break inlinedLbl1
-                                      }
-                                      inlinedVal6 = kcfa4.LESS;
-                                      break inlinedLbl1;
-                                    }
-                                    inlinedVal6 = kcfa4.LESS;
-                                    break inlinedLbl1;
-                                  }
-                                  if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                    element0$4 = runtime.Tuple.get(p21, 0);
-                                    element1$4 = runtime.Tuple.get(p21, 1);
-                                    if (element0$4 instanceof kcfa4.VmE.class) {
-                                      inlinedVal6 = kcfa4.GREATER;
-                                      break inlinedLbl1
-                                    }
-                                    if (element0$3 instanceof kcfa4.VmT.class) {
-                                      arg$VmT$2$ = element0$3.key;
-                                      arg$VmT$3$ = element0$3.value;
-                                      if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
-                                        arg$VmT$2$1 = element0$4.key;
-                                        arg$VmT$3$1 = element0$4.value;
-                                        scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                        if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
-                                          break inlinedLbl1
-                                        }
-                                        scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                        if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
-                                          break inlinedLbl1
-                                        }
-                                        order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                        if (order1 instanceof kcfa4.EQUAL.class) {
-                                          t11 = element1$3;
-                                          t21 = element1$4;
-                                          continue loopLabel1
-                                        }
-                                        inlinedVal6 = order1;
-                                        break inlinedLbl1;
-                                      }
-                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                    }
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                  }
-                                  if (element0$3 instanceof kcfa4.VmT.class) {
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                  element0$4 = runtime.Tuple.get(p21, 0);
-                                  if (element0$4 instanceof kcfa4.VmE.class) {
-                                    inlinedVal6 = kcfa4.GREATER;
-                                    break inlinedLbl1
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                            }
-                            inlinedVal3 = inlinedVal6;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        inlinedVal3 = order;
-                      }
-                      if (inlinedVal3 instanceof kcfa2.LESS.class) {
-                        let inlinedVal4;
-                        tmp = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        n = tmp;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
-                        let inlinedVal4;
-                        tmp1 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        t2 = element1$2;
-                        n = tmp1;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
-                        let inlinedVal4;
-                        tmp2 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
-                        t2 = element1$2;
-                        n = tmp2;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$1 instanceof kcfa2.SetT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$2 = runtime.Tuple.get(p2, 0);
-            if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_setUnion$setUnion = function lambda$_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
-  if (set1 instanceof kcfa1.SET.class) {
-    arg$SET$1$ = set1.tree;
-    if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
-      arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
-      kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      n = 0;
-      result = kcfa1.SetZERO;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
-          p1 = kcfa2[setNext$accessorSymbol](t1);
-          p2 = kcfa2[setNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$1 = runtime.Tuple.get(p1, 0);
-            element1$1 = runtime.Tuple.get(p1, 1);
-            if (element0$1 instanceof kcfa2.SetE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$2 = runtime.Tuple.get(p2, 0);
-                if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
-                    n,
-                    result
-                  ]);
-                  break inlinedLbl
-                }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
-                break inlinedLbl;
-              }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$2 = runtime.Tuple.get(p2, 0);
-              element1$2 = runtime.Tuple.get(p2, 1);
-              if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
-                break inlinedLbl
-              }
-              if (element0$1 instanceof kcfa2.SetT.class) {
-                arg$SetT$2$ = element0$1.item;
-                if (element0$2 instanceof kcfa2.SetT.class) {
-                  let inlinedVal3, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-                  arg$SetT$2$1 = element0$2.item;
-                  if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-                    arg$Clos$0$ = arg$SetT$2$.lam;
-                    arg$Clos$1$ = arg$SetT$2$.benv;
-                    if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                      arg$Clos$0$1 = arg$SetT$2$1.lam;
-                      arg$Clos$1$1 = arg$SetT$2$1.benv;
-                      order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                      if (order instanceof kcfa1.EQUAL.class) {
-                        let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                        cmpRng = kcfa1[bindCompare$accessorSymbol];
-                        kcfa3 = kcfa1;
-                        if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                          arg$VmMAP$1$ = arg$Clos$1$.tree;
-                          if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                            let inlinedVal4, inlinedVal5, kcfa4, cmpRng1, t11, t21, inlinedVal6;
-                            arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                            inlinedVal4 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                            inlinedVal5 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                            kcfa4 = kcfa1;
-                            cmpRng1 = cmpRng;
-                            t11 = inlinedVal4;
-                            t21 = inlinedVal5;
-                            inlinedLbl1: {
-                              loopLabel1: while (true) {
-                                let p11, p21, order1, element1$3, element0$3, arg$VmT$2$, arg$VmT$3$, element1$4, element0$4, arg$VmT$2$1, arg$VmT$3$1;
-                                p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                                p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                                if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                                  element0$3 = runtime.Tuple.get(p11, 0);
-                                  element1$3 = runtime.Tuple.get(p11, 1);
-                                  if (element0$3 instanceof kcfa4.VmE.class) {
-                                    if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                      element0$4 = runtime.Tuple.get(p21, 0);
-                                      if (element0$4 instanceof kcfa4.VmE.class) {
-                                        inlinedVal6 = kcfa4.EQUAL;
-                                        break inlinedLbl1
-                                      }
-                                      inlinedVal6 = kcfa4.LESS;
-                                      break inlinedLbl1;
-                                    }
-                                    inlinedVal6 = kcfa4.LESS;
-                                    break inlinedLbl1;
-                                  }
-                                  if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                    element0$4 = runtime.Tuple.get(p21, 0);
-                                    element1$4 = runtime.Tuple.get(p21, 1);
-                                    if (element0$4 instanceof kcfa4.VmE.class) {
-                                      inlinedVal6 = kcfa4.GREATER;
-                                      break inlinedLbl1
-                                    }
-                                    if (element0$3 instanceof kcfa4.VmT.class) {
-                                      arg$VmT$2$ = element0$3.key;
-                                      arg$VmT$3$ = element0$3.value;
-                                      if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
-                                        arg$VmT$2$1 = element0$4.key;
-                                        arg$VmT$3$1 = element0$4.value;
-                                        scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                        if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
-                                          break inlinedLbl1
-                                        }
-                                        scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                        if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
-                                          break inlinedLbl1
-                                        }
-                                        order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                        if (order1 instanceof kcfa4.EQUAL.class) {
-                                          t11 = element1$3;
-                                          t21 = element1$4;
-                                          continue loopLabel1
-                                        }
-                                        inlinedVal6 = order1;
-                                        break inlinedLbl1;
-                                      }
-                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                    }
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                  }
-                                  if (element0$3 instanceof kcfa4.VmT.class) {
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                  element0$4 = runtime.Tuple.get(p21, 0);
-                                  if (element0$4 instanceof kcfa4.VmE.class) {
-                                    inlinedVal6 = kcfa4.GREATER;
-                                    break inlinedLbl1
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                            }
-                            inlinedVal3 = inlinedVal6;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        inlinedVal3 = order;
-                      }
-                      if (inlinedVal3 instanceof kcfa2.LESS.class) {
-                        let inlinedVal4;
-                        tmp = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        n = tmp;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
-                        let inlinedVal4;
-                        tmp1 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        t2 = element1$2;
-                        n = tmp1;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
-                        let inlinedVal4;
-                        tmp2 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
-                        t2 = element1$2;
-                        n = tmp2;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$1 instanceof kcfa2.SetT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$2 = runtime.Tuple.get(p2, 0);
-            if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-apply_lambda$_setUnion$setUnion = function apply_lambda$_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
-  if (set1 instanceof kcfa1.SET.class) {
-    arg$SET$1$ = set1.tree;
-    if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
-      arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
-      kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      n = 0;
-      result = kcfa1.SetZERO;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
-          p1 = kcfa2[setNext$accessorSymbol](t1);
-          p2 = kcfa2[setNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$1 = runtime.Tuple.get(p1, 0);
-            element1$1 = runtime.Tuple.get(p1, 1);
-            if (element0$1 instanceof kcfa2.SetE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$2 = runtime.Tuple.get(p2, 0);
-                if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
-                    n,
-                    result
-                  ]);
-                  break inlinedLbl
-                }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
-                break inlinedLbl;
-              }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$2 = runtime.Tuple.get(p2, 0);
-              element1$2 = runtime.Tuple.get(p2, 1);
-              if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
-                break inlinedLbl
-              }
-              if (element0$1 instanceof kcfa2.SetT.class) {
-                arg$SetT$2$ = element0$1.item;
-                if (element0$2 instanceof kcfa2.SetT.class) {
-                  let inlinedVal3, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-                  arg$SetT$2$1 = element0$2.item;
-                  if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-                    arg$Clos$0$ = arg$SetT$2$.lam;
-                    arg$Clos$1$ = arg$SetT$2$.benv;
-                    if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                      arg$Clos$0$1 = arg$SetT$2$1.lam;
-                      arg$Clos$1$1 = arg$SetT$2$1.benv;
-                      order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                      if (order instanceof kcfa1.EQUAL.class) {
-                        let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                        cmpRng = kcfa1[bindCompare$accessorSymbol];
-                        kcfa3 = kcfa1;
-                        if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                          arg$VmMAP$1$ = arg$Clos$1$.tree;
-                          if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                            let inlinedVal4, inlinedVal5, kcfa4, cmpRng1, t11, t21, inlinedVal6;
-                            arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                            inlinedVal4 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                            inlinedVal5 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                            kcfa4 = kcfa1;
-                            cmpRng1 = cmpRng;
-                            t11 = inlinedVal4;
-                            t21 = inlinedVal5;
-                            inlinedLbl1: {
-                              loopLabel1: while (true) {
-                                let p11, p21, order1, element1$3, element0$3, arg$VmT$2$, arg$VmT$3$, element1$4, element0$4, arg$VmT$2$1, arg$VmT$3$1;
-                                p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                                p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                                if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                                  element0$3 = runtime.Tuple.get(p11, 0);
-                                  element1$3 = runtime.Tuple.get(p11, 1);
-                                  if (element0$3 instanceof kcfa4.VmE.class) {
-                                    if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                      element0$4 = runtime.Tuple.get(p21, 0);
-                                      if (element0$4 instanceof kcfa4.VmE.class) {
-                                        inlinedVal6 = kcfa4.EQUAL;
-                                        break inlinedLbl1
-                                      }
-                                      inlinedVal6 = kcfa4.LESS;
-                                      break inlinedLbl1;
-                                    }
-                                    inlinedVal6 = kcfa4.LESS;
-                                    break inlinedLbl1;
-                                  }
-                                  if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                    element0$4 = runtime.Tuple.get(p21, 0);
-                                    element1$4 = runtime.Tuple.get(p21, 1);
-                                    if (element0$4 instanceof kcfa4.VmE.class) {
-                                      inlinedVal6 = kcfa4.GREATER;
-                                      break inlinedLbl1
-                                    }
-                                    if (element0$3 instanceof kcfa4.VmT.class) {
-                                      arg$VmT$2$ = element0$3.key;
-                                      arg$VmT$3$ = element0$3.value;
-                                      if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
-                                        arg$VmT$2$1 = element0$4.key;
-                                        arg$VmT$3$1 = element0$4.value;
-                                        scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                        if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
-                                          break inlinedLbl1
-                                        }
-                                        scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                        if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
-                                          break inlinedLbl1
-                                        }
-                                        order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                        if (order1 instanceof kcfa4.EQUAL.class) {
-                                          t11 = element1$3;
-                                          t21 = element1$4;
-                                          continue loopLabel1
-                                        }
-                                        inlinedVal6 = order1;
-                                        break inlinedLbl1;
-                                      }
-                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                    }
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                  }
-                                  if (element0$3 instanceof kcfa4.VmT.class) {
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                  element0$4 = runtime.Tuple.get(p21, 0);
-                                  if (element0$4 instanceof kcfa4.VmE.class) {
-                                    inlinedVal6 = kcfa4.GREATER;
-                                    break inlinedLbl1
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                            }
-                            inlinedVal3 = inlinedVal6;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        inlinedVal3 = order;
-                      }
-                      if (inlinedVal3 instanceof kcfa2.LESS.class) {
-                        let inlinedVal4;
-                        tmp = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        n = tmp;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
-                        let inlinedVal4;
-                        tmp1 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        t2 = element1$2;
-                        n = tmp1;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
-                        let inlinedVal4;
-                        tmp2 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
-                        t2 = element1$2;
-                        n = tmp2;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$1 instanceof kcfa2.SetT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$2 = runtime.Tuple.get(p2, 0);
-            if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-apply_lambda$$lambda$ = function apply_lambda$$lambda$(kcfa2) {
-  return (adr, dv, st) => {
-    return kcfa2[storeMapInsertWith$accessorSymbol](apply_lambda$_setUnion$setUnion)(st, adr, dv)
-  }
-};
-apply$_apply_lambda$_setUnion$setUnion = function apply$_apply_lambda$_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
-  if (set1 instanceof kcfa1.SET.class) {
-    arg$SET$1$ = set1.tree;
-    if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
-      arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
-      kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      n = 0;
-      result = kcfa1.SetZERO;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
-          p1 = kcfa2[setNext$accessorSymbol](t1);
-          p2 = kcfa2[setNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$1 = runtime.Tuple.get(p1, 0);
-            element1$1 = runtime.Tuple.get(p1, 1);
-            if (element0$1 instanceof kcfa2.SetE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$2 = runtime.Tuple.get(p2, 0);
-                if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
-                    n,
-                    result
-                  ]);
-                  break inlinedLbl
-                }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
-                break inlinedLbl;
-              }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$2 = runtime.Tuple.get(p2, 0);
-              element1$2 = runtime.Tuple.get(p2, 1);
-              if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
-                break inlinedLbl
-              }
-              if (element0$1 instanceof kcfa2.SetT.class) {
-                arg$SetT$2$ = element0$1.item;
-                if (element0$2 instanceof kcfa2.SetT.class) {
-                  let inlinedVal3, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-                  arg$SetT$2$1 = element0$2.item;
-                  if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-                    arg$Clos$0$ = arg$SetT$2$.lam;
-                    arg$Clos$1$ = arg$SetT$2$.benv;
-                    if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                      arg$Clos$0$1 = arg$SetT$2$1.lam;
-                      arg$Clos$1$1 = arg$SetT$2$1.benv;
-                      order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                      if (order instanceof kcfa1.EQUAL.class) {
-                        let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                        cmpRng = kcfa1[bindCompare$accessorSymbol];
-                        kcfa3 = kcfa1;
-                        if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                          arg$VmMAP$1$ = arg$Clos$1$.tree;
-                          if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                            let inlinedVal4, inlinedVal5, kcfa4, cmpRng1, t11, t21, inlinedVal6;
-                            arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                            inlinedVal4 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                            inlinedVal5 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                            kcfa4 = kcfa1;
-                            cmpRng1 = cmpRng;
-                            t11 = inlinedVal4;
-                            t21 = inlinedVal5;
-                            inlinedLbl1: {
-                              loopLabel1: while (true) {
-                                let p11, p21, order1, element1$3, element0$3, arg$VmT$2$, arg$VmT$3$, element1$4, element0$4, arg$VmT$2$1, arg$VmT$3$1;
-                                p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                                p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                                if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                                  element0$3 = runtime.Tuple.get(p11, 0);
-                                  element1$3 = runtime.Tuple.get(p11, 1);
-                                  if (element0$3 instanceof kcfa4.VmE.class) {
-                                    if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                      element0$4 = runtime.Tuple.get(p21, 0);
-                                      if (element0$4 instanceof kcfa4.VmE.class) {
-                                        inlinedVal6 = kcfa4.EQUAL;
-                                        break inlinedLbl1
-                                      }
-                                      inlinedVal6 = kcfa4.LESS;
-                                      break inlinedLbl1;
-                                    }
-                                    inlinedVal6 = kcfa4.LESS;
-                                    break inlinedLbl1;
-                                  }
-                                  if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                    element0$4 = runtime.Tuple.get(p21, 0);
-                                    element1$4 = runtime.Tuple.get(p21, 1);
-                                    if (element0$4 instanceof kcfa4.VmE.class) {
-                                      inlinedVal6 = kcfa4.GREATER;
-                                      break inlinedLbl1
-                                    }
-                                    if (element0$3 instanceof kcfa4.VmT.class) {
-                                      arg$VmT$2$ = element0$3.key;
-                                      arg$VmT$3$ = element0$3.value;
-                                      if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
-                                        arg$VmT$2$1 = element0$4.key;
-                                        arg$VmT$3$1 = element0$4.value;
-                                        scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                        if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
-                                          break inlinedLbl1
-                                        }
-                                        scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                        if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
-                                          break inlinedLbl1
-                                        }
-                                        order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                        if (order1 instanceof kcfa4.EQUAL.class) {
-                                          t11 = element1$3;
-                                          t21 = element1$4;
-                                          continue loopLabel1
-                                        }
-                                        inlinedVal6 = order1;
-                                        break inlinedLbl1;
-                                      }
-                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                    }
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                  }
-                                  if (element0$3 instanceof kcfa4.VmT.class) {
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                  element0$4 = runtime.Tuple.get(p21, 0);
-                                  if (element0$4 instanceof kcfa4.VmE.class) {
-                                    inlinedVal6 = kcfa4.GREATER;
-                                    break inlinedLbl1
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                            }
-                            inlinedVal3 = inlinedVal6;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        inlinedVal3 = order;
-                      }
-                      if (inlinedVal3 instanceof kcfa2.LESS.class) {
-                        let inlinedVal4;
-                        tmp = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        n = tmp;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
-                        let inlinedVal4;
-                        tmp1 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        t2 = element1$2;
-                        n = tmp1;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
-                        let inlinedVal4;
-                        tmp2 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
-                        t2 = element1$2;
-                        n = tmp2;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$1 instanceof kcfa2.SetT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$2 = runtime.Tuple.get(p2, 0);
-            if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-apply$_apply_lambda$$lambda$ = function apply$_apply_lambda$$lambda$(kcfa2) {
-  return (adr, dv, st) => {
-    return kcfa2[storeMapInsertWith$accessorSymbol](apply$_apply_lambda$_setUnion$setUnion)(st, adr, dv)
-  }
-};
-apply$_apply$apply = function apply$_apply$apply(kcfa2, store, time1, params, clos, states) {
-  let arg$Clos$0$, arg$Clos$1$, element2$, element1$, tmp;
-  if (clos instanceof kcfa2.Clos.class) {
-    arg$Clos$0$ = clos.lam;
-    arg$Clos$1$ = clos.benv;
-    if (runtime.Tuple.isArrayLike(arg$Clos$0$) && arg$Clos$0$.length === 3) {
-      let f, inlinedVal, f1, inlinedVal1, f2, inlinedVal2;
-      runtime.Tuple.get(arg$Clos$0$, 0);
-      element1$ = runtime.Tuple.get(arg$Clos$0$, 1);
-      element2$ = runtime.Tuple.get(arg$Clos$0$, 2);
-      f = kcfa2[alloc$accessorSymbol](time1);
-      inlinedVal = kcfa2[listMap$tailrec$accessorSymbol](f, element1$);
-      f1 = lambda$1(kcfa2);
-      inlinedVal1 = foldf(kcfa2, f1, element1$, inlinedVal, arg$Clos$1$);
-      f2 = apply$_apply_lambda$$lambda$(kcfa2);
-      inlinedVal2 = foldf(kcfa2, f2, inlinedVal, params, store);
-      tmp = kcfa2.State(element2$, inlinedVal1, inlinedVal2, time1);
-      return kcfa2.Cons(tmp, states)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda_stateSame_storeCompare_setCompare$setCompare = function lambda_stateSame_storeCompare_setCompare$setCompare(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1;
-  if (set1 instanceof kcfa1.SET.class) {
-    arg$SET$1$ = set1.tree;
-    if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, inlinedVal2;
-      arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
-      kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
-          p1 = kcfa2[setNext$accessorSymbol](t1);
-          p2 = kcfa2[setNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$ = runtime.Tuple.get(p1, 0);
-            element1$ = runtime.Tuple.get(p1, 1);
-            if (element0$ instanceof kcfa2.SetE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$1 = runtime.Tuple.get(p2, 0);
-                if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = kcfa2.EQUAL;
-                  break inlinedLbl
-                }
-                inlinedVal2 = kcfa2.LESS;
-                break inlinedLbl;
-              }
-              inlinedVal2 = kcfa2.LESS;
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$1 = runtime.Tuple.get(p2, 0);
-              element1$1 = runtime.Tuple.get(p2, 1);
-              if (element0$1 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = kcfa2.GREATER;
-                break inlinedLbl
-              }
-              if (element0$ instanceof kcfa2.SetT.class) {
-                arg$SetT$2$ = element0$.item;
-                if (element0$1 instanceof kcfa2.SetT.class) {
-                  let inlinedVal3, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-                  arg$SetT$2$1 = element0$1.item;
-                  if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-                    arg$Clos$0$ = arg$SetT$2$.lam;
-                    arg$Clos$1$ = arg$SetT$2$.benv;
-                    if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                      arg$Clos$0$1 = arg$SetT$2$1.lam;
-                      arg$Clos$1$1 = arg$SetT$2$1.benv;
-                      order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                      if (order instanceof kcfa1.EQUAL.class) {
-                        let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                        cmpRng = kcfa1[bindCompare$accessorSymbol];
-                        kcfa3 = kcfa1;
-                        if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                          arg$VmMAP$1$ = arg$Clos$1$.tree;
-                          if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                            let inlinedVal4, inlinedVal5, kcfa4, cmpRng1, t11, t21, inlinedVal6;
-                            arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                            inlinedVal4 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                            inlinedVal5 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                            kcfa4 = kcfa1;
-                            cmpRng1 = cmpRng;
-                            t11 = inlinedVal4;
-                            t21 = inlinedVal5;
-                            inlinedLbl1: {
-                              loopLabel1: while (true) {
-                                let p11, p21, order1, element1$2, element0$2, arg$VmT$2$, arg$VmT$3$, element1$3, element0$3, arg$VmT$2$1, arg$VmT$3$1;
-                                p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                                p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                                if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                                  element0$2 = runtime.Tuple.get(p11, 0);
-                                  element1$2 = runtime.Tuple.get(p11, 1);
-                                  if (element0$2 instanceof kcfa4.VmE.class) {
-                                    if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                      element0$3 = runtime.Tuple.get(p21, 0);
-                                      if (element0$3 instanceof kcfa4.VmE.class) {
-                                        inlinedVal6 = kcfa4.EQUAL;
-                                        break inlinedLbl1
-                                      }
-                                      inlinedVal6 = kcfa4.LESS;
-                                      break inlinedLbl1;
-                                    }
-                                    inlinedVal6 = kcfa4.LESS;
-                                    break inlinedLbl1;
-                                  }
-                                  if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                    element0$3 = runtime.Tuple.get(p21, 0);
-                                    element1$3 = runtime.Tuple.get(p21, 1);
-                                    if (element0$3 instanceof kcfa4.VmE.class) {
-                                      inlinedVal6 = kcfa4.GREATER;
-                                      break inlinedLbl1
-                                    }
-                                    if (element0$2 instanceof kcfa4.VmT.class) {
-                                      arg$VmT$2$ = element0$2.key;
-                                      arg$VmT$3$ = element0$2.value;
-                                      if (element0$3 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
-                                        arg$VmT$2$1 = element0$3.key;
-                                        arg$VmT$3$1 = element0$3.value;
-                                        scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                        if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
-                                          break inlinedLbl1
-                                        }
-                                        scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                        if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
-                                          break inlinedLbl1
-                                        }
-                                        order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                        if (order1 instanceof kcfa4.EQUAL.class) {
-                                          t11 = element1$2;
-                                          t21 = element1$3;
-                                          continue loopLabel1
-                                        }
-                                        inlinedVal6 = order1;
-                                        break inlinedLbl1;
-                                      }
-                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                    }
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                  }
-                                  if (element0$2 instanceof kcfa4.VmT.class) {
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                  element0$3 = runtime.Tuple.get(p21, 0);
-                                  if (element0$3 instanceof kcfa4.VmE.class) {
-                                    inlinedVal6 = kcfa4.GREATER;
-                                    break inlinedLbl1
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                            }
-                            inlinedVal3 = inlinedVal6;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        inlinedVal3 = order;
-                      }
-                      if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
-                        t1 = element1$;
-                        t2 = element1$1;
-                        continue loopLabel
-                      }
-                      inlinedVal2 = inlinedVal3;
-                      break inlinedLbl;
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$ instanceof kcfa2.SetT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$1 = runtime.Tuple.get(p2, 0);
-            if (element0$1 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = kcfa2.GREATER;
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      return inlinedVal2
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_stateSame_storeCompare_setCompare$setCompare = function lambda$_stateSame_storeCompare_setCompare$setCompare(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1;
-  if (set1 instanceof kcfa1.SET.class) {
-    arg$SET$1$ = set1.tree;
-    if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, inlinedVal2;
-      arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
-      kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
-          p1 = kcfa2[setNext$accessorSymbol](t1);
-          p2 = kcfa2[setNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$ = runtime.Tuple.get(p1, 0);
-            element1$ = runtime.Tuple.get(p1, 1);
-            if (element0$ instanceof kcfa2.SetE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$1 = runtime.Tuple.get(p2, 0);
-                if (element0$1 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = kcfa2.EQUAL;
-                  break inlinedLbl
-                }
-                inlinedVal2 = kcfa2.LESS;
-                break inlinedLbl;
-              }
-              inlinedVal2 = kcfa2.LESS;
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$1 = runtime.Tuple.get(p2, 0);
-              element1$1 = runtime.Tuple.get(p2, 1);
-              if (element0$1 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = kcfa2.GREATER;
-                break inlinedLbl
-              }
-              if (element0$ instanceof kcfa2.SetT.class) {
-                arg$SetT$2$ = element0$.item;
-                if (element0$1 instanceof kcfa2.SetT.class) {
-                  let inlinedVal3, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-                  arg$SetT$2$1 = element0$1.item;
-                  if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-                    arg$Clos$0$ = arg$SetT$2$.lam;
-                    arg$Clos$1$ = arg$SetT$2$.benv;
-                    if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                      arg$Clos$0$1 = arg$SetT$2$1.lam;
-                      arg$Clos$1$1 = arg$SetT$2$1.benv;
-                      order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                      if (order instanceof kcfa1.EQUAL.class) {
-                        let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                        cmpRng = kcfa1[bindCompare$accessorSymbol];
-                        kcfa3 = kcfa1;
-                        if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                          arg$VmMAP$1$ = arg$Clos$1$.tree;
-                          if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                            let inlinedVal4, inlinedVal5, kcfa4, cmpRng1, t11, t21, inlinedVal6;
-                            arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                            inlinedVal4 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                            inlinedVal5 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                            kcfa4 = kcfa1;
-                            cmpRng1 = cmpRng;
-                            t11 = inlinedVal4;
-                            t21 = inlinedVal5;
-                            inlinedLbl1: {
-                              loopLabel1: while (true) {
-                                let p11, p21, order1, element1$2, element0$2, arg$VmT$2$, arg$VmT$3$, element1$3, element0$3, arg$VmT$2$1, arg$VmT$3$1;
-                                p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                                p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                                if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                                  element0$2 = runtime.Tuple.get(p11, 0);
-                                  element1$2 = runtime.Tuple.get(p11, 1);
-                                  if (element0$2 instanceof kcfa4.VmE.class) {
-                                    if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                      element0$3 = runtime.Tuple.get(p21, 0);
-                                      if (element0$3 instanceof kcfa4.VmE.class) {
-                                        inlinedVal6 = kcfa4.EQUAL;
-                                        break inlinedLbl1
-                                      }
-                                      inlinedVal6 = kcfa4.LESS;
-                                      break inlinedLbl1;
-                                    }
-                                    inlinedVal6 = kcfa4.LESS;
-                                    break inlinedLbl1;
-                                  }
-                                  if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                    element0$3 = runtime.Tuple.get(p21, 0);
-                                    element1$3 = runtime.Tuple.get(p21, 1);
-                                    if (element0$3 instanceof kcfa4.VmE.class) {
-                                      inlinedVal6 = kcfa4.GREATER;
-                                      break inlinedLbl1
-                                    }
-                                    if (element0$2 instanceof kcfa4.VmT.class) {
-                                      arg$VmT$2$ = element0$2.key;
-                                      arg$VmT$3$ = element0$2.value;
-                                      if (element0$3 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
-                                        arg$VmT$2$1 = element0$3.key;
-                                        arg$VmT$3$1 = element0$3.value;
-                                        scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                        if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
-                                          break inlinedLbl1
-                                        }
-                                        scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                        if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
-                                          break inlinedLbl1
-                                        }
-                                        order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                        if (order1 instanceof kcfa4.EQUAL.class) {
-                                          t11 = element1$2;
-                                          t21 = element1$3;
-                                          continue loopLabel1
-                                        }
-                                        inlinedVal6 = order1;
-                                        break inlinedLbl1;
-                                      }
-                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                    }
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                  }
-                                  if (element0$2 instanceof kcfa4.VmT.class) {
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                  element0$3 = runtime.Tuple.get(p21, 0);
-                                  if (element0$3 instanceof kcfa4.VmE.class) {
-                                    inlinedVal6 = kcfa4.GREATER;
-                                    break inlinedLbl1
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                            }
-                            inlinedVal3 = inlinedVal6;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        inlinedVal3 = order;
-                      }
-                      if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
-                        t1 = element1$;
-                        t2 = element1$1;
-                        continue loopLabel
-                      }
-                      inlinedVal2 = inlinedVal3;
-                      break inlinedLbl;
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$ instanceof kcfa2.SetT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$1 = runtime.Tuple.get(p2, 0);
-            if (element0$1 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = kcfa2.GREATER;
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      return inlinedVal2
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_stateSame$stateSame = function lambda$_stateSame$stateSame(state1, state2) {
-  let arg$State$0$, arg$State$1$, arg$State$2$, arg$State$3$, arg$State$0$1, arg$State$1$1, arg$State$2$1, arg$State$3$1, tmp;
-  if (state1 instanceof kcfa1.State.class) {
-    arg$State$0$ = state1.call;
-    arg$State$1$ = state1.benv;
-    arg$State$2$ = state1.store;
-    arg$State$3$ = state1.time;
-    if (state2 instanceof kcfa1.State.class) {
-      let pred, inlinedVal;
-      arg$State$0$1 = state2.call;
-      arg$State$1$1 = state2.benv;
-      arg$State$2$1 = state2.store;
-      arg$State$3$1 = state2.time;
-      pred = kcfa1[labelSame$accessorSymbol];
-      inlinedVal = kcfa1[listPairAllEq$tailrec$accessorSymbol](pred, arg$State$3$, arg$State$3$1);
-      if (inlinedVal === true) {
-        tmp = kcfa1[sameCall$accessorSymbol](arg$State$0$, arg$State$0$1);
-        if (tmp === true) {
-          let cmpRng, kcfa2, arg$VmMAP$1$, arg$VmMAP$1$1;
-          cmpRng = kcfa1[bindCompare$accessorSymbol];
-          kcfa2 = kcfa1;
-          if (arg$State$1$ instanceof kcfa2.VmMAP.class) {
-            arg$VmMAP$1$ = arg$State$1$.tree;
-            if (arg$State$1$1 instanceof kcfa2.VmMAP.class) {
-              let inlinedVal1, inlinedVal2, kcfa3, cmpRng1, t1, t2, inlinedVal3;
-              arg$VmMAP$1$1 = arg$State$1$1.tree;
-              inlinedVal1 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-              inlinedVal2 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-              kcfa3 = kcfa1;
-              cmpRng1 = cmpRng;
-              t1 = inlinedVal1;
-              t2 = inlinedVal2;
-              inlinedLbl: {
-                loopLabel: while (true) {
-                  let p1, p2, order1, element1$, element0$, arg$VmT$2$, arg$VmT$3$, element1$1, element0$1, arg$VmT$2$1, arg$VmT$3$1;
-                  p1 = kcfa3[varMapNext$accessorSymbol](t1);
-                  p2 = kcfa3[varMapNext$accessorSymbol](t2);
-                  if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-                    element0$ = runtime.Tuple.get(p1, 0);
-                    element1$ = runtime.Tuple.get(p1, 1);
-                    if (element0$ instanceof kcfa3.VmE.class) {
-                      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                        element0$1 = runtime.Tuple.get(p2, 0);
-                        if (element0$1 instanceof kcfa3.VmE.class) {
-                          inlinedVal3 = kcfa3.EQUAL;
-                          break inlinedLbl
-                        }
-                        inlinedVal3 = kcfa3.LESS;
-                        break inlinedLbl;
-                      }
-                      inlinedVal3 = kcfa3.LESS;
-                      break inlinedLbl;
-                    }
-                    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                      element0$1 = runtime.Tuple.get(p2, 0);
-                      element1$1 = runtime.Tuple.get(p2, 1);
-                      if (element0$1 instanceof kcfa3.VmE.class) {
-                        inlinedVal3 = kcfa3.GREATER;
-                        break inlinedLbl
-                      }
-                      if (element0$ instanceof kcfa3.VmT.class) {
-                        arg$VmT$2$ = element0$.key;
-                        arg$VmT$3$ = element0$.value;
-                        if (element0$1 instanceof kcfa3.VmT.class) {
-                          let scrut, scrut1;
-                          arg$VmT$2$1 = element0$1.key;
-                          arg$VmT$3$1 = element0$1.value;
-                          scrut = arg$VmT$2$ < arg$VmT$2$1;
-                          if (scrut === true) {
-                            inlinedVal3 = kcfa3.LESS;
-                            break inlinedLbl
-                          }
-                          scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                          if (scrut1 === true) {
-                            inlinedVal3 = kcfa3.GREATER;
-                            break inlinedLbl
-                          }
-                          order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                          if (order1 instanceof kcfa3.EQUAL.class) {
-                            t1 = element1$;
-                            t2 = element1$1;
-                            continue loopLabel
-                          }
-                          inlinedVal3 = order1;
-                          break inlinedLbl;
-                        }
-                        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    if (element0$ instanceof kcfa3.VmT.class) {
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                    element0$1 = runtime.Tuple.get(p2, 0);
-                    if (element0$1 instanceof kcfa3.VmE.class) {
-                      inlinedVal3 = kcfa3.GREATER;
-                      break inlinedLbl
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-              }
-              if (inlinedVal3 instanceof kcfa1.EQUAL.class) {
-                let kcfa4, arg$SmMAP$1$, arg$SmMAP$1$1;
-                kcfa4 = kcfa1;
-                if (arg$State$2$ instanceof kcfa4.SmMAP.class) {
-                  arg$SmMAP$1$ = arg$State$2$.tree;
-                  if (arg$State$2$1 instanceof kcfa4.SmMAP.class) {
-                    let inlinedVal4, inlinedVal5, kcfa5, cmpRng2, t11, t21, inlinedVal6;
-                    arg$SmMAP$1$1 = arg$State$2$1.tree;
-                    inlinedVal4 = kcfa1[storeMapLeft$accessorSymbol](arg$SmMAP$1$, kcfa1.Nil);
-                    inlinedVal5 = kcfa1[storeMapLeft$accessorSymbol](arg$SmMAP$1$1, kcfa1.Nil);
-                    kcfa5 = kcfa1;
-                    cmpRng2 = lambda$_stateSame_storeCompare_setCompare$setCompare;
-                    t11 = inlinedVal4;
-                    t21 = inlinedVal5;
-                    inlinedLbl1: {
-                      loopLabel1: while (true) {
-                        let p1, p2, order, order1, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1;
-                        p1 = kcfa5[storeMapNext$accessorSymbol](t11);
-                        p2 = kcfa5[storeMapNext$accessorSymbol](t21);
-                        if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-                          element0$ = runtime.Tuple.get(p1, 0);
-                          element1$ = runtime.Tuple.get(p1, 1);
-                          if (element0$ instanceof kcfa5.SmE.class) {
-                            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                              element0$1 = runtime.Tuple.get(p2, 0);
-                              if (element0$1 instanceof kcfa5.SmE.class) {
-                                inlinedVal6 = kcfa5.EQUAL;
-                                break inlinedLbl1
-                              }
-                              inlinedVal6 = kcfa5.LESS;
-                              break inlinedLbl1;
-                            }
-                            inlinedVal6 = kcfa5.LESS;
-                            break inlinedLbl1;
-                          }
-                          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                            element0$1 = runtime.Tuple.get(p2, 0);
-                            element1$1 = runtime.Tuple.get(p2, 1);
-                            if (element0$1 instanceof kcfa5.SmE.class) {
-                              inlinedVal6 = kcfa5.GREATER;
-                              break inlinedLbl1
-                            }
-                            if (element0$ instanceof kcfa5.SmT.class) {
-                              arg$SmT$2$ = element0$.key;
-                              arg$SmT$3$ = element0$.value;
-                              if (element0$1 instanceof kcfa5.SmT.class) {
-                                arg$SmT$2$1 = element0$1.key;
-                                arg$SmT$3$1 = element0$1.value;
-                                order = kcfa5[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-                                if (order instanceof kcfa5.EQUAL.class) {
-                                  order1 = runtime.safeCall(cmpRng2(arg$SmT$3$, arg$SmT$3$1));
-                                  if (order1 instanceof kcfa5.EQUAL.class) {
-                                    t11 = element1$;
-                                    t21 = element1$1;
-                                    continue loopLabel1
-                                  }
-                                  inlinedVal6 = order1;
-                                  break inlinedLbl1;
-                                }
-                                inlinedVal6 = order;
-                                break inlinedLbl1;
-                              }
-                              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                            }
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                          }
-                          if (element0$ instanceof kcfa5.SmT.class) {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                        }
-                        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                          element0$1 = runtime.Tuple.get(p2, 0);
-                          if (element0$1 instanceof kcfa5.SmE.class) {
-                            inlinedVal6 = kcfa5.GREATER;
-                            break inlinedLbl1
-                          }
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                        }
-                        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                      }
-                    }
-                    if (inlinedVal6 instanceof kcfa1.EQUAL.class) {
-                      return true
-                    }
-                    return false;
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              return false;
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        return false;
-      }
-      return false;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda_setUnion$setUnion1 = function lambda_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
-  if (set1 instanceof kcfa1.SET.class) {
-    arg$SET$1$ = set1.tree;
-    if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
-      arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
-      kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      n = 0;
-      result = kcfa1.SetZERO;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
-          p1 = kcfa2[setNext$accessorSymbol](t1);
-          p2 = kcfa2[setNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$1 = runtime.Tuple.get(p1, 0);
-            element1$1 = runtime.Tuple.get(p1, 1);
-            if (element0$1 instanceof kcfa2.SetE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$2 = runtime.Tuple.get(p2, 0);
-                if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
-                    n,
-                    result
-                  ]);
-                  break inlinedLbl
-                }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
-                break inlinedLbl;
-              }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$2 = runtime.Tuple.get(p2, 0);
-              element1$2 = runtime.Tuple.get(p2, 1);
-              if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
-                break inlinedLbl
-              }
-              if (element0$1 instanceof kcfa2.SetT.class) {
-                arg$SetT$2$ = element0$1.item;
-                if (element0$2 instanceof kcfa2.SetT.class) {
-                  let inlinedVal3, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-                  arg$SetT$2$1 = element0$2.item;
-                  if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-                    arg$Clos$0$ = arg$SetT$2$.lam;
-                    arg$Clos$1$ = arg$SetT$2$.benv;
-                    if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                      arg$Clos$0$1 = arg$SetT$2$1.lam;
-                      arg$Clos$1$1 = arg$SetT$2$1.benv;
-                      order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                      if (order instanceof kcfa1.EQUAL.class) {
-                        let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                        cmpRng = kcfa1[bindCompare$accessorSymbol];
-                        kcfa3 = kcfa1;
-                        if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                          arg$VmMAP$1$ = arg$Clos$1$.tree;
-                          if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                            let inlinedVal4, inlinedVal5, kcfa4, cmpRng1, t11, t21, inlinedVal6;
-                            arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                            inlinedVal4 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                            inlinedVal5 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                            kcfa4 = kcfa1;
-                            cmpRng1 = cmpRng;
-                            t11 = inlinedVal4;
-                            t21 = inlinedVal5;
-                            inlinedLbl1: {
-                              loopLabel1: while (true) {
-                                let p11, p21, order1, element1$3, element0$3, arg$VmT$2$, arg$VmT$3$, element1$4, element0$4, arg$VmT$2$1, arg$VmT$3$1;
-                                p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                                p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                                if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                                  element0$3 = runtime.Tuple.get(p11, 0);
-                                  element1$3 = runtime.Tuple.get(p11, 1);
-                                  if (element0$3 instanceof kcfa4.VmE.class) {
-                                    if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                      element0$4 = runtime.Tuple.get(p21, 0);
-                                      if (element0$4 instanceof kcfa4.VmE.class) {
-                                        inlinedVal6 = kcfa4.EQUAL;
-                                        break inlinedLbl1
-                                      }
-                                      inlinedVal6 = kcfa4.LESS;
-                                      break inlinedLbl1;
-                                    }
-                                    inlinedVal6 = kcfa4.LESS;
-                                    break inlinedLbl1;
-                                  }
-                                  if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                    element0$4 = runtime.Tuple.get(p21, 0);
-                                    element1$4 = runtime.Tuple.get(p21, 1);
-                                    if (element0$4 instanceof kcfa4.VmE.class) {
-                                      inlinedVal6 = kcfa4.GREATER;
-                                      break inlinedLbl1
-                                    }
-                                    if (element0$3 instanceof kcfa4.VmT.class) {
-                                      arg$VmT$2$ = element0$3.key;
-                                      arg$VmT$3$ = element0$3.value;
-                                      if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
-                                        arg$VmT$2$1 = element0$4.key;
-                                        arg$VmT$3$1 = element0$4.value;
-                                        scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                        if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
-                                          break inlinedLbl1
-                                        }
-                                        scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                        if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
-                                          break inlinedLbl1
-                                        }
-                                        order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                        if (order1 instanceof kcfa4.EQUAL.class) {
-                                          t11 = element1$3;
-                                          t21 = element1$4;
-                                          continue loopLabel1
-                                        }
-                                        inlinedVal6 = order1;
-                                        break inlinedLbl1;
-                                      }
-                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                    }
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                  }
-                                  if (element0$3 instanceof kcfa4.VmT.class) {
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                  element0$4 = runtime.Tuple.get(p21, 0);
-                                  if (element0$4 instanceof kcfa4.VmE.class) {
-                                    inlinedVal6 = kcfa4.GREATER;
-                                    break inlinedLbl1
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                            }
-                            inlinedVal3 = inlinedVal6;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        inlinedVal3 = order;
-                      }
-                      if (inlinedVal3 instanceof kcfa2.LESS.class) {
-                        let inlinedVal4;
-                        tmp = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        n = tmp;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
-                        let inlinedVal4;
-                        tmp1 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        t2 = element1$2;
-                        n = tmp1;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
-                        let inlinedVal4;
-                        tmp2 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
-                        t2 = element1$2;
-                        n = tmp2;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$1 instanceof kcfa2.SetT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$2 = runtime.Tuple.get(p2, 0);
-            if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda_setUnion$setUnion = function lambda$_lambda_setUnion$setUnion(set1, set2) {
-  let arg$SET$1$, arg$SET$1$1, element1$, element0$;
-  if (set1 instanceof kcfa1.SET.class) {
-    arg$SET$1$ = set1.tree;
-    if (set2 instanceof kcfa1.SET.class) {
-      let inlinedVal, inlinedVal1, kcfa2, t1, t2, n, result, inlinedVal2;
-      arg$SET$1$1 = set2.tree;
-      inlinedVal = kcfa1[setLeft$accessorSymbol](arg$SET$1$, kcfa1.Nil);
-      inlinedVal1 = kcfa1[setLeft$accessorSymbol](arg$SET$1$1, kcfa1.Nil);
-      kcfa2 = kcfa1;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      n = 0;
-      result = kcfa1.SetZERO;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, element1$1, element0$1, arg$SetT$2$, element1$2, element0$2, arg$SetT$2$1, tmp, tmp1, tmp2;
-          p1 = kcfa2[setNext$accessorSymbol](t1);
-          p2 = kcfa2[setNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$1 = runtime.Tuple.get(p1, 0);
-            element1$1 = runtime.Tuple.get(p1, 1);
-            if (element0$1 instanceof kcfa2.SetE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$2 = runtime.Tuple.get(p2, 0);
-                if (element0$2 instanceof kcfa2.SetE.class) {
-                  inlinedVal2 = globalThis.Object.freeze([
-                    n,
-                    result
-                  ]);
-                  break inlinedLbl
-                }
-                inlinedVal2 = ins1(kcfa2, p2, n, result);
-                break inlinedLbl;
-              }
-              inlinedVal2 = ins1(kcfa2, p2, n, result);
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$2 = runtime.Tuple.get(p2, 0);
-              element1$2 = runtime.Tuple.get(p2, 1);
-              if (element0$2 instanceof kcfa2.SetE.class) {
-                inlinedVal2 = ins1(kcfa2, p1, n, result);
-                break inlinedLbl
-              }
-              if (element0$1 instanceof kcfa2.SetT.class) {
-                arg$SetT$2$ = element0$1.item;
-                if (element0$2 instanceof kcfa2.SetT.class) {
-                  let inlinedVal3, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-                  arg$SetT$2$1 = element0$2.item;
-                  if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-                    arg$Clos$0$ = arg$SetT$2$.lam;
-                    arg$Clos$1$ = arg$SetT$2$.benv;
-                    if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                      arg$Clos$0$1 = arg$SetT$2$1.lam;
-                      arg$Clos$1$1 = arg$SetT$2$1.benv;
-                      order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                      if (order instanceof kcfa1.EQUAL.class) {
-                        let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                        cmpRng = kcfa1[bindCompare$accessorSymbol];
-                        kcfa3 = kcfa1;
-                        if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                          arg$VmMAP$1$ = arg$Clos$1$.tree;
-                          if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                            let inlinedVal4, inlinedVal5, kcfa4, cmpRng1, t11, t21, inlinedVal6;
-                            arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                            inlinedVal4 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                            inlinedVal5 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                            kcfa4 = kcfa1;
-                            cmpRng1 = cmpRng;
-                            t11 = inlinedVal4;
-                            t21 = inlinedVal5;
-                            inlinedLbl1: {
-                              loopLabel1: while (true) {
-                                let p11, p21, order1, element1$3, element0$3, arg$VmT$2$, arg$VmT$3$, element1$4, element0$4, arg$VmT$2$1, arg$VmT$3$1;
-                                p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                                p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                                if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                                  element0$3 = runtime.Tuple.get(p11, 0);
-                                  element1$3 = runtime.Tuple.get(p11, 1);
-                                  if (element0$3 instanceof kcfa4.VmE.class) {
-                                    if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                      element0$4 = runtime.Tuple.get(p21, 0);
-                                      if (element0$4 instanceof kcfa4.VmE.class) {
-                                        inlinedVal6 = kcfa4.EQUAL;
-                                        break inlinedLbl1
-                                      }
-                                      inlinedVal6 = kcfa4.LESS;
-                                      break inlinedLbl1;
-                                    }
-                                    inlinedVal6 = kcfa4.LESS;
-                                    break inlinedLbl1;
-                                  }
-                                  if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                    element0$4 = runtime.Tuple.get(p21, 0);
-                                    element1$4 = runtime.Tuple.get(p21, 1);
-                                    if (element0$4 instanceof kcfa4.VmE.class) {
-                                      inlinedVal6 = kcfa4.GREATER;
-                                      break inlinedLbl1
-                                    }
-                                    if (element0$3 instanceof kcfa4.VmT.class) {
-                                      arg$VmT$2$ = element0$3.key;
-                                      arg$VmT$3$ = element0$3.value;
-                                      if (element0$4 instanceof kcfa4.VmT.class) {
-                                        let scrut, scrut1;
-                                        arg$VmT$2$1 = element0$4.key;
-                                        arg$VmT$3$1 = element0$4.value;
-                                        scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                        if (scrut === true) {
-                                          inlinedVal6 = kcfa4.LESS;
-                                          break inlinedLbl1
-                                        }
-                                        scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                        if (scrut1 === true) {
-                                          inlinedVal6 = kcfa4.GREATER;
-                                          break inlinedLbl1
-                                        }
-                                        order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                        if (order1 instanceof kcfa4.EQUAL.class) {
-                                          t11 = element1$3;
-                                          t21 = element1$4;
-                                          continue loopLabel1
-                                        }
-                                        inlinedVal6 = order1;
-                                        break inlinedLbl1;
-                                      }
-                                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                    }
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                  }
-                                  if (element0$3 instanceof kcfa4.VmT.class) {
-                                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                  element0$4 = runtime.Tuple.get(p21, 0);
-                                  if (element0$4 instanceof kcfa4.VmE.class) {
-                                    inlinedVal6 = kcfa4.GREATER;
-                                    break inlinedLbl1
-                                  }
-                                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                            }
-                            inlinedVal3 = inlinedVal6;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        inlinedVal3 = order;
-                      }
-                      if (inlinedVal3 instanceof kcfa2.LESS.class) {
-                        let inlinedVal4;
-                        tmp = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        n = tmp;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.EQUAL.class) {
-                        let inlinedVal4;
-                        tmp1 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                        t1 = element1$1;
-                        t2 = element1$2;
-                        n = tmp1;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      } else if (inlinedVal3 instanceof kcfa2.GREATER.class) {
-                        let inlinedVal4;
-                        tmp2 = n + 1;
-                        inlinedVal4 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
-                        t2 = element1$2;
-                        n = tmp2;
-                        result = inlinedVal4;
-                        continue loopLabel
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$1 instanceof kcfa2.SetT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$2 = runtime.Tuple.get(p2, 0);
-            if (element0$2 instanceof kcfa2.SetE.class) {
-              inlinedVal2 = ins1(kcfa2, p1, n, result);
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      if (runtime.Tuple.isArrayLike(inlinedVal2) && inlinedVal2.length === 2) {
-        let inlinedVal3;
-        element0$ = runtime.Tuple.get(inlinedVal2, 0);
-        element1$ = runtime.Tuple.get(inlinedVal2, 1);
-        inlinedVal3 = link(kcfa1, kcfa1.SetE, element1$);
-        return kcfa1.SET(element0$, inlinedVal3)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$lambda = function lambda$_lambda$lambda(kcfa2, state, sum) {
-  let arg$State$2$;
-  if (state instanceof kcfa2.State.class) {
-    let union$here;
-    arg$State$2$ = state.store;
-    union$here = lambda$_lambda_union$$union$(kcfa2, lambda$_lambda_setUnion$setUnion);
-    return kcfa2[storeMapWrap$accessorSymbol](union$here)(arg$State$2$, sum)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
@@ -7658,11 +5738,11 @@ main_doit_monovariantStore_lambda$_lambda$lambda = function main_doit_monovarian
   if (b instanceof kcfa2.Bnd.class) {
     let f, init, inlinedVal, f1, arg$SET$1$;
     arg$Bnd$0$ = b.x;
-    f = lambda$7(kcfa2);
+    f = lambda$3(kcfa2);
     init = kcfa2.Nil;
     if (d instanceof kcfa2.SET.class) {
       arg$SET$1$ = d.tree;
-      inlinedVal = foldf1(kcfa2, f, arg$SET$1$, init);
+      inlinedVal = foldf(kcfa2, f, arg$SET$1$, init);
       f1 = main_doit_monovariantStore_lambda$_lambda_lambda$$lambda$(kcfa2, arg$Bnd$0$);
       return kcfa2[listFoldl$tailrec$accessorSymbol](f1, mst, inlinedVal)
     }
@@ -7779,11 +5859,11 @@ doit_monovariantStore_lambda$_lambda$lambda = function doit_monovariantStore_lam
   if (b instanceof kcfa2.Bnd.class) {
     let f, init, inlinedVal, f1, arg$SET$1$;
     arg$Bnd$0$ = b.x;
-    f = lambda$7(kcfa2);
+    f = lambda$3(kcfa2);
     init = kcfa2.Nil;
     if (d instanceof kcfa2.SET.class) {
       arg$SET$1$ = d.tree;
-      inlinedVal = foldf1(kcfa2, f, arg$SET$1$, init);
+      inlinedVal = foldf(kcfa2, f, arg$SET$1$, init);
       f1 = doit_monovariantStore_lambda$_lambda_lambda$$lambda$(kcfa2, arg$Bnd$0$);
       return kcfa2[listFoldl$tailrec$accessorSymbol](f1, mst, inlinedVal)
     }
@@ -7890,11 +5970,11 @@ monovariantStore_lambda$_lambda$lambda = function monovariantStore_lambda$_lambd
   if (b instanceof kcfa2.Bnd.class) {
     let f, init, inlinedVal, f1, arg$SET$1$;
     arg$Bnd$0$ = b.x;
-    f = lambda$7(kcfa2);
+    f = lambda$3(kcfa2);
     init = kcfa2.Nil;
     if (d instanceof kcfa2.SET.class) {
       arg$SET$1$ = d.tree;
-      inlinedVal = foldf1(kcfa2, f, arg$SET$1$, init);
+      inlinedVal = foldf(kcfa2, f, arg$SET$1$, init);
       f1 = monovariantStore_lambda$_lambda_lambda$$lambda$(kcfa2, arg$Bnd$0$);
       return kcfa2[listFoldl$tailrec$accessorSymbol](f1, mst, inlinedVal)
     }
@@ -7991,11 +6071,6 @@ lambda_lambda$_monoStoreUpdate$monoStoreUpdate = function lambda_lambda$_monoSto
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda_lambda$$lambda$ = function lambda_lambda$$lambda$(kcfa2, x) {
-  return (exp, mst) => {
-    return lambda_lambda$_monoStoreUpdate$monoStoreUpdate(mst, x, exp)
-  }
-};
 lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp = function lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp(exp, exps) {
   let arg$Cons$0$, arg$Cons$1$, tmp, tmp1;
   if (exps instanceof kcfa1.Nil.class) {
@@ -8080,29 +6155,7 @@ lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate = function lambda$_lambda
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda$_lambda_lambda$$lambda$ = function lambda$_lambda_lambda$$lambda$(kcfa2, x) {
-  return (exp, mst) => {
-    return lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate(mst, x, exp)
-  }
-};
-lambda$_lambda$lambda1 = function lambda$_lambda$lambda(kcfa2, b, d, mst) {
-  let arg$Bnd$0$;
-  if (b instanceof kcfa2.Bnd.class) {
-    let f, init, inlinedVal, f1, arg$SET$1$;
-    arg$Bnd$0$ = b.x;
-    f = lambda$7(kcfa2);
-    init = kcfa2.Nil;
-    if (d instanceof kcfa2.SET.class) {
-      arg$SET$1$ = d.tree;
-      inlinedVal = foldf1(kcfa2, f, arg$SET$1$, init);
-      f1 = lambda$_lambda_lambda$$lambda$(kcfa2, arg$Bnd$0$);
-      return kcfa2[listFoldl$tailrec$accessorSymbol](f1, mst, inlinedVal)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr = function doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+doit_summarize_lambda$_lambda_setUnion_ins_incr$incr = function doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8118,12 +6171,12 @@ doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr = function doit_summ
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 = function doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+doit_summarize_lambda$_lambda_setUnion_incr$incr = function doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8139,12 +6192,12 @@ doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 = function doit_sum
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 = function doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1 = function doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8160,12 +6213,12 @@ doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 = function doit_sum
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_summarize_lambda$_lambda_setUnion_union1_incr$incr = function doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, a1, t1, d) {
+doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2 = function doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8181,12 +6234,12 @@ doit_summarize_lambda$_lambda_setUnion_union1_incr$incr = function doit_summariz
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 = function doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3 = function doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8202,7 +6255,7 @@ doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 = function doit_sum
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -8331,7 +6384,7 @@ doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr = function doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr = function doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8347,12 +6400,12 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr = functi
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 = function doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr = function doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8368,12 +6421,12 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 = funct
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 = function doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1 = function doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8389,12 +6442,12 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 = funct
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr = function doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, a1, t1, d) {
+doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2 = function doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8410,12 +6463,12 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr = function d
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 = function doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3 = function doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8431,7 +6484,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 = funct
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -8439,23 +6492,14 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 = funct
 doit_explore_absNext_atomEval_eval$_eval$eval = function doit_explore_absNext_atomEval_eval$_eval$eval(kcfa2, benv, store, e) {
   let arg$LAMBDA$0$, arg$VAR$1$, tmp;
   if (e instanceof kcfa2.VAR.class) {
-    let arg$Some$0$, inlinedVal, arg$VmMAP$1$;
+    let scrut, scrut1, arg$Some$0$;
     arg$VAR$1$ = e.x;
-    if (benv instanceof kcfa2.VmMAP.class) {
-      arg$VmMAP$1$ = benv.tree;
-      inlinedVal = find1(kcfa2, arg$VAR$1$, arg$VmMAP$1$);
-      if (inlinedVal instanceof kcfa2.Some.class) {
-        let inlinedVal1, arg$SmMAP$1$;
-        arg$Some$0$ = inlinedVal.value;
-        if (store instanceof kcfa2.SmMAP.class) {
-          arg$SmMAP$1$ = store.tree;
-          inlinedVal1 = find11(kcfa2, arg$Some$0$, arg$SmMAP$1$);
-          if (inlinedVal1 instanceof kcfa2.Some.class) {
-            return inlinedVal1.value
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    scrut1 = kcfa2[varMapFind$accessorSymbol](benv, arg$VAR$1$);
+    if (scrut1 instanceof kcfa2.Some.class) {
+      arg$Some$0$ = scrut1.value;
+      scrut = kcfa2[storeMapFind$accessorSymbol](store, arg$Some$0$);
+      if (scrut instanceof kcfa2.Some.class) {
+        return scrut.value
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -8477,23 +6521,14 @@ doit_explore_absNext_atomEval_eval$$eval$ = function doit_explore_absNext_atomEv
 main_doit_explore_absNext_atomEval_eval$_eval$eval = function main_doit_explore_absNext_atomEval_eval$_eval$eval(kcfa2, benv, store, e) {
   let arg$LAMBDA$0$, arg$VAR$1$, tmp;
   if (e instanceof kcfa2.VAR.class) {
-    let arg$Some$0$, inlinedVal, arg$VmMAP$1$;
+    let scrut, scrut1, arg$Some$0$;
     arg$VAR$1$ = e.x;
-    if (benv instanceof kcfa2.VmMAP.class) {
-      arg$VmMAP$1$ = benv.tree;
-      inlinedVal = find1(kcfa2, arg$VAR$1$, arg$VmMAP$1$);
-      if (inlinedVal instanceof kcfa2.Some.class) {
-        let inlinedVal1, arg$SmMAP$1$;
-        arg$Some$0$ = inlinedVal.value;
-        if (store instanceof kcfa2.SmMAP.class) {
-          arg$SmMAP$1$ = store.tree;
-          inlinedVal1 = find11(kcfa2, arg$Some$0$, arg$SmMAP$1$);
-          if (inlinedVal1 instanceof kcfa2.Some.class) {
-            return inlinedVal1.value
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    scrut1 = kcfa2[varMapFind$accessorSymbol](benv, arg$VAR$1$);
+    if (scrut1 instanceof kcfa2.Some.class) {
+      arg$Some$0$ = scrut1.value;
+      scrut = kcfa2[storeMapFind$accessorSymbol](store, arg$Some$0$);
+      if (scrut instanceof kcfa2.Some.class) {
+        return scrut.value
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -8512,7 +6547,7 @@ main_doit_explore_absNext_atomEval_eval$$eval$ = function main_doit_explore_absN
     return main_doit_explore_absNext_atomEval_eval$_eval$eval(kcfa2, benv, store, e)
   }
 };
-main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8528,12 +6563,12 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr = f
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, a1, t1, d) {
+main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1 = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8549,12 +6584,12 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr = funct
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2 = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8570,12 +6605,12 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 = 
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8591,12 +6626,12 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 = 
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3 = function main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8612,7 +6647,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 = 
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -8741,7 +6776,7 @@ main_doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns = functi
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr = function main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr = function main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8757,12 +6792,12 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr = function main
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr = function main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, a1, t1, d) {
+main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1 = function main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8778,12 +6813,12 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr = function main_doi
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 = function main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2 = function main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8799,12 +6834,12 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 = function mai
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 = function main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+main_doit_summarize_lambda$_lambda_setUnion_incr$incr = function main_doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8820,12 +6855,12 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 = function mai
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 = function main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, a1, t1, d) {
+main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3 = function main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
     return kcfa2.SetONE(a1, t1, kcfa2.SetZERO)
@@ -8841,7 +6876,7 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 = function mai
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
     tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
+    tmp1 = main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -9260,17 +7295,19 @@ varMapCollate_lambda$_lambda$lambda = function varMapCollate_lambda$_lambda$lamb
                 arg$VmT$2$ = element0$.key;
                 arg$VmT$3$ = element0$.value;
                 if (element0$1 instanceof kcfa3.VmT.class) {
-                  let scrut, scrut1;
+                  let inlinedVal3, scrut, scrut1;
                   arg$VmT$2$1 = element0$1.key;
                   arg$VmT$3$1 = element0$1.value;
                   scrut = arg$VmT$2$ < arg$VmT$2$1;
                   if (scrut === true) {
-                    inlinedVal2 = kcfa3.LESS;
+                    inlinedVal3 = kcfa3.LESS;
+                    inlinedVal2 = inlinedVal3;
                     break inlinedLbl
                   }
                   scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                   if (scrut1 === true) {
-                    inlinedVal2 = kcfa3.GREATER;
+                    inlinedVal3 = kcfa3.GREATER;
+                    inlinedVal2 = inlinedVal3;
                     break inlinedLbl
                   }
                   order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -9313,467 +7350,12 @@ varMapCollate_lambda$$lambda$ = function varMapCollate_lambda$$lambda$(kcfa2, cm
     return varMapCollate_lambda$_lambda$lambda(kcfa2, cmpRng, map1, map2)
   }
 };
-lambda$_lambda$lambda2 = function lambda$_lambda$lambda(kcfa2, cmpRng, map1, map2) {
-  let arg$VmMAP$1$, arg$VmMAP$1$1;
-  if (map1 instanceof kcfa2.VmMAP.class) {
-    arg$VmMAP$1$ = map1.tree;
-    if (map2 instanceof kcfa2.VmMAP.class) {
-      let inlinedVal, inlinedVal1, kcfa3, cmpRng1, t1, t2, inlinedVal2;
-      arg$VmMAP$1$1 = map2.tree;
-      inlinedVal = kcfa2[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa2.Nil);
-      inlinedVal1 = kcfa2[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa2.Nil);
-      kcfa3 = kcfa2;
-      cmpRng1 = cmpRng;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, order1, element1$, element0$, arg$VmT$2$, arg$VmT$3$, element1$1, element0$1, arg$VmT$2$1, arg$VmT$3$1;
-          p1 = kcfa3[varMapNext$accessorSymbol](t1);
-          p2 = kcfa3[varMapNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$ = runtime.Tuple.get(p1, 0);
-            element1$ = runtime.Tuple.get(p1, 1);
-            if (element0$ instanceof kcfa3.VmE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$1 = runtime.Tuple.get(p2, 0);
-                if (element0$1 instanceof kcfa3.VmE.class) {
-                  inlinedVal2 = kcfa3.EQUAL;
-                  break inlinedLbl
-                }
-                inlinedVal2 = kcfa3.LESS;
-                break inlinedLbl;
-              }
-              inlinedVal2 = kcfa3.LESS;
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$1 = runtime.Tuple.get(p2, 0);
-              element1$1 = runtime.Tuple.get(p2, 1);
-              if (element0$1 instanceof kcfa3.VmE.class) {
-                inlinedVal2 = kcfa3.GREATER;
-                break inlinedLbl
-              }
-              if (element0$ instanceof kcfa3.VmT.class) {
-                arg$VmT$2$ = element0$.key;
-                arg$VmT$3$ = element0$.value;
-                if (element0$1 instanceof kcfa3.VmT.class) {
-                  let scrut, scrut1;
-                  arg$VmT$2$1 = element0$1.key;
-                  arg$VmT$3$1 = element0$1.value;
-                  scrut = arg$VmT$2$ < arg$VmT$2$1;
-                  if (scrut === true) {
-                    inlinedVal2 = kcfa3.LESS;
-                    break inlinedLbl
-                  }
-                  scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                  if (scrut1 === true) {
-                    inlinedVal2 = kcfa3.GREATER;
-                    break inlinedLbl
-                  }
-                  order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                  if (order1 instanceof kcfa3.EQUAL.class) {
-                    t1 = element1$;
-                    t2 = element1$1;
-                    continue loopLabel
-                  }
-                  inlinedVal2 = order1;
-                  break inlinedLbl;
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$ instanceof kcfa3.VmT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$1 = runtime.Tuple.get(p2, 0);
-            if (element0$1 instanceof kcfa3.VmE.class) {
-              inlinedVal2 = kcfa3.GREATER;
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      return inlinedVal2
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-lambda$_lambda$lambda3 = function lambda$_lambda$lambda(kcfa2, cmpRng, map1, map2) {
-  let arg$SmMAP$1$, arg$SmMAP$1$1;
-  if (map1 instanceof kcfa2.SmMAP.class) {
-    arg$SmMAP$1$ = map1.tree;
-    if (map2 instanceof kcfa2.SmMAP.class) {
-      let inlinedVal, inlinedVal1, kcfa3, cmpRng1, t1, t2, inlinedVal2;
-      arg$SmMAP$1$1 = map2.tree;
-      inlinedVal = kcfa2[storeMapLeft$accessorSymbol](arg$SmMAP$1$, kcfa2.Nil);
-      inlinedVal1 = kcfa2[storeMapLeft$accessorSymbol](arg$SmMAP$1$1, kcfa2.Nil);
-      kcfa3 = kcfa2;
-      cmpRng1 = cmpRng;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, order, order1, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1;
-          p1 = kcfa3[storeMapNext$accessorSymbol](t1);
-          p2 = kcfa3[storeMapNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$ = runtime.Tuple.get(p1, 0);
-            element1$ = runtime.Tuple.get(p1, 1);
-            if (element0$ instanceof kcfa3.SmE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$1 = runtime.Tuple.get(p2, 0);
-                if (element0$1 instanceof kcfa3.SmE.class) {
-                  inlinedVal2 = kcfa3.EQUAL;
-                  break inlinedLbl
-                }
-                inlinedVal2 = kcfa3.LESS;
-                break inlinedLbl;
-              }
-              inlinedVal2 = kcfa3.LESS;
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$1 = runtime.Tuple.get(p2, 0);
-              element1$1 = runtime.Tuple.get(p2, 1);
-              if (element0$1 instanceof kcfa3.SmE.class) {
-                inlinedVal2 = kcfa3.GREATER;
-                break inlinedLbl
-              }
-              if (element0$ instanceof kcfa3.SmT.class) {
-                arg$SmT$2$ = element0$.key;
-                arg$SmT$3$ = element0$.value;
-                if (element0$1 instanceof kcfa3.SmT.class) {
-                  arg$SmT$2$1 = element0$1.key;
-                  arg$SmT$3$1 = element0$1.value;
-                  order = kcfa3[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-                  if (order instanceof kcfa3.EQUAL.class) {
-                    order1 = runtime.safeCall(cmpRng1(arg$SmT$3$, arg$SmT$3$1));
-                    if (order1 instanceof kcfa3.EQUAL.class) {
-                      t1 = element1$;
-                      t2 = element1$1;
-                      continue loopLabel
-                    }
-                    inlinedVal2 = order1;
-                    break inlinedLbl;
-                  }
-                  inlinedVal2 = order;
-                  break inlinedLbl;
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$ instanceof kcfa3.SmT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$1 = runtime.Tuple.get(p2, 0);
-            if (element0$1 instanceof kcfa3.SmE.class) {
-              inlinedVal2 = kcfa3.GREATER;
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      return inlinedVal2
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-union$_union$union = function union$_union$union(kcfa2, mergeFn, t1, t2, n, result) {
-  loopLabel: while (true) {
-    let p1, p2, scrut, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1, tmp, tmp1, tmp2, tmp3;
-    p1 = kcfa2[storeMapNext$accessorSymbol](t1);
-    p2 = kcfa2[storeMapNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SmE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          if (element0$1 instanceof kcfa2.SmE.class) {
-            return globalThis.Object.freeze([
-              n,
-              result
-            ])
-          }
-          return kcfa2[storeMapIns$accessorSymbol](p2, n, result);
-        }
-        return kcfa2[storeMapIns$accessorSymbol](p2, n, result);
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SmE.class) {
-          return kcfa2[storeMapIns$accessorSymbol](p1, n, result)
-        }
-        if (element0$ instanceof kcfa2.SmT.class) {
-          arg$SmT$2$ = element0$.key;
-          arg$SmT$3$ = element0$.value;
-          if (element0$1 instanceof kcfa2.SmT.class) {
-            arg$SmT$2$1 = element0$1.key;
-            arg$SmT$3$1 = element0$1.value;
-            scrut = kcfa2[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-            if (scrut instanceof kcfa2.LESS.class) {
-              let inlinedVal;
-              tmp = n + 1;
-              inlinedVal = incr1(kcfa2, arg$SmT$2$, arg$SmT$3$, kcfa2.SmE, result);
-              t1 = element1$;
-              n = tmp;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.EQUAL.class) {
-              let inlinedVal;
-              tmp1 = n + 1;
-              tmp2 = runtime.safeCall(mergeFn(arg$SmT$3$, arg$SmT$3$1));
-              inlinedVal = incr1(kcfa2, arg$SmT$2$, tmp2, kcfa2.SmE, result);
-              t1 = element1$;
-              t2 = element1$1;
-              n = tmp1;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.GREATER.class) {
-              let inlinedVal;
-              tmp3 = n + 1;
-              inlinedVal = incr1(kcfa2, arg$SmT$2$1, arg$SmT$3$1, kcfa2.SmE, result);
-              t2 = element1$1;
-              n = tmp3;
-              result = inlinedVal;
-              continue loopLabel
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SmT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      if (element0$1 instanceof kcfa2.SmE.class) {
-        return kcfa2[storeMapIns$accessorSymbol](p1, n, result)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda_union$_union$union = function lambda_union$_union$union(kcfa2, mergeFn, t1, t2, n, result) {
-  loopLabel: while (true) {
-    let p1, p2, scrut, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1, tmp, tmp1, tmp2, tmp3;
-    p1 = kcfa2[storeMapNext$accessorSymbol](t1);
-    p2 = kcfa2[storeMapNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SmE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          if (element0$1 instanceof kcfa2.SmE.class) {
-            return globalThis.Object.freeze([
-              n,
-              result
-            ])
-          }
-          return kcfa2[storeMapIns$accessorSymbol](p2, n, result);
-        }
-        return kcfa2[storeMapIns$accessorSymbol](p2, n, result);
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SmE.class) {
-          return kcfa2[storeMapIns$accessorSymbol](p1, n, result)
-        }
-        if (element0$ instanceof kcfa2.SmT.class) {
-          arg$SmT$2$ = element0$.key;
-          arg$SmT$3$ = element0$.value;
-          if (element0$1 instanceof kcfa2.SmT.class) {
-            arg$SmT$2$1 = element0$1.key;
-            arg$SmT$3$1 = element0$1.value;
-            scrut = kcfa2[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-            if (scrut instanceof kcfa2.LESS.class) {
-              let inlinedVal;
-              tmp = n + 1;
-              inlinedVal = incr1(kcfa2, arg$SmT$2$, arg$SmT$3$, kcfa2.SmE, result);
-              t1 = element1$;
-              n = tmp;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.EQUAL.class) {
-              let inlinedVal;
-              tmp1 = n + 1;
-              tmp2 = runtime.safeCall(mergeFn(arg$SmT$3$, arg$SmT$3$1));
-              inlinedVal = incr1(kcfa2, arg$SmT$2$, tmp2, kcfa2.SmE, result);
-              t1 = element1$;
-              t2 = element1$1;
-              n = tmp1;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.GREATER.class) {
-              let inlinedVal;
-              tmp3 = n + 1;
-              inlinedVal = incr1(kcfa2, arg$SmT$2$1, arg$SmT$3$1, kcfa2.SmE, result);
-              t2 = element1$1;
-              n = tmp3;
-              result = inlinedVal;
-              continue loopLabel
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SmT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      if (element0$1 instanceof kcfa2.SmE.class) {
-        return kcfa2[storeMapIns$accessorSymbol](p1, n, result)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda_union$$union$ = function lambda_union$$union$(kcfa2, mergeFn) {
-  return (t1, t2, n, result) => {
-    return lambda_union$_union$union(kcfa2, mergeFn, t1, t2, n, result)
-  }
-};
-lambda$_lambda_union$_union$union = function lambda$_lambda_union$_union$union(kcfa2, mergeFn, t1, t2, n, result) {
-  loopLabel: while (true) {
-    let p1, p2, scrut, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1, tmp, tmp1, tmp2, tmp3;
-    p1 = kcfa2[storeMapNext$accessorSymbol](t1);
-    p2 = kcfa2[storeMapNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SmE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          if (element0$1 instanceof kcfa2.SmE.class) {
-            return globalThis.Object.freeze([
-              n,
-              result
-            ])
-          }
-          return kcfa2[storeMapIns$accessorSymbol](p2, n, result);
-        }
-        return kcfa2[storeMapIns$accessorSymbol](p2, n, result);
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SmE.class) {
-          return kcfa2[storeMapIns$accessorSymbol](p1, n, result)
-        }
-        if (element0$ instanceof kcfa2.SmT.class) {
-          arg$SmT$2$ = element0$.key;
-          arg$SmT$3$ = element0$.value;
-          if (element0$1 instanceof kcfa2.SmT.class) {
-            arg$SmT$2$1 = element0$1.key;
-            arg$SmT$3$1 = element0$1.value;
-            scrut = kcfa2[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-            if (scrut instanceof kcfa2.LESS.class) {
-              let inlinedVal;
-              tmp = n + 1;
-              inlinedVal = incr1(kcfa2, arg$SmT$2$, arg$SmT$3$, kcfa2.SmE, result);
-              t1 = element1$;
-              n = tmp;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.EQUAL.class) {
-              let inlinedVal;
-              tmp1 = n + 1;
-              tmp2 = runtime.safeCall(mergeFn(arg$SmT$3$, arg$SmT$3$1));
-              inlinedVal = incr1(kcfa2, arg$SmT$2$, tmp2, kcfa2.SmE, result);
-              t1 = element1$;
-              t2 = element1$1;
-              n = tmp1;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.GREATER.class) {
-              let inlinedVal;
-              tmp3 = n + 1;
-              inlinedVal = incr1(kcfa2, arg$SmT$2$1, arg$SmT$3$1, kcfa2.SmE, result);
-              t2 = element1$1;
-              n = tmp3;
-              result = inlinedVal;
-              continue loopLabel
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SmT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      if (element0$1 instanceof kcfa2.SmE.class) {
-        return kcfa2[storeMapIns$accessorSymbol](p1, n, result)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda$_lambda_union$$union$ = function lambda$_lambda_union$$union$(kcfa2, mergeFn) {
-  return (t1, t2, n, result) => {
-    return lambda$_lambda_union$_union$union(kcfa2, mergeFn, t1, t2, n, result)
-  }
-};
-lambda$12 = (undefined, function (kcfa2) {
-  return (e) => {
-    return lambda8(kcfa2, e)
-  }
-});
-lambda$11 = (undefined, function (kcfa2, lambdaLabel) {
+lambda$5 = (undefined, function (kcfa2, lambdaLabel) {
   return (p) => {
-    return lambda9(kcfa2, lambdaLabel, p)
+    return lambda1(kcfa2, lambdaLabel, p)
   }
 });
-lambda8 = (undefined, function (kcfa2, e) {
-  let arg$LAMBDA$0$, element0$;
-  if (e instanceof kcfa2.LAMBDA.class) {
-    arg$LAMBDA$0$ = e.lam;
-    if (runtime.Tuple.isArrayLike(arg$LAMBDA$0$) && arg$LAMBDA$0$.length === 3) {
-      element0$ = runtime.Tuple.get(arg$LAMBDA$0$, 0);
-      runtime.Tuple.get(arg$LAMBDA$0$, 1);
-      runtime.Tuple.get(arg$LAMBDA$0$, 2);
-      return element0$
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-});
-lambda9 = (undefined, function (kcfa2, lambdaLabel, p) {
+lambda1 = (undefined, function (kcfa2, lambdaLabel, p) {
   let element1$, element0$;
   if (runtime.Tuple.isArrayLike(p) && p.length === 2) {
     let inlinedVal;
@@ -9787,125 +7369,17 @@ lambda9 = (undefined, function (kcfa2, lambdaLabel, p) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-newLabel = function newLabel(labelCount) {
-  let n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return n
-};
-var_ = function var_(kcfa2, labelCount, x) {
-  let n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return kcfa2.VAR(n, x)
-};
-lambda = function lambda(kcfa2, labelCount, formals) {
-  return (call1) => {
-    return lambda$worker(kcfa2, labelCount, formals, call1)
-  }
-};
-lambda$worker = function lambda$worker(kcfa2, labelCount, formals, call1) {
-  let tmp, n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  tmp = globalThis.Object.freeze([
-    n,
-    formals,
-    call1
-  ]);
-  return kcfa2.LAMBDA(tmp)
-};
-call = function call(kcfa2, labelCount, f) {
-  return (args) => {
-    return call$worker(kcfa2, labelCount, f, args)
-  }
-};
-call$worker = function call$worker(kcfa2, labelCount, f, args) {
-  let n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return kcfa2.CALL(n, f, args)
-};
-return_ = function return_(kcfa2, labelCount, x) {
-  let n;
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return kcfa2.RET(n, x)
-};
-mkLet = function mkLet(kcfa2, labelCount, x) {
-  return (e1) => {
-    return (e2) => {
-      return mkLet$worker(kcfa2, labelCount, x, e1, e2)
-    }
-  }
-};
-mkLet$worker = function mkLet$worker(kcfa2, labelCount, x, e1, e2) {
-  let tmp, tmp1, inlinedVal, n, tmp2, n1;
-  tmp = kcfa2.Cons(x, kcfa2.Nil);
-  n1 = labelCount.value + 1;
-  labelCount.value = n1;
-  tmp2 = globalThis.Object.freeze([
-    n1,
-    tmp,
-    e2
-  ]);
-  inlinedVal = kcfa2.LAMBDA(tmp2);
-  tmp1 = kcfa2.Cons(e1, kcfa2.Nil);
-  n = labelCount.value + 1;
-  labelCount.value = n;
-  return kcfa2.CALL(n, inlinedVal, tmp1)
-};
-lambda$10 = (undefined, function (kcfa2) {
-  return (b, d, mst) => {
-    return lambda$_lambda$lambda1(kcfa2, b, d, mst)
-  }
-});
-lambda7 = (undefined, function (kcfa2, b, d, mst) {
-  let arg$Bnd$0$;
-  if (b instanceof kcfa2.Bnd.class) {
-    let f, init, inlinedVal, f1, arg$SET$1$;
-    arg$Bnd$0$ = b.x;
-    f = lambda$7(kcfa2);
-    init = kcfa2.Nil;
-    if (d instanceof kcfa2.SET.class) {
-      arg$SET$1$ = d.tree;
-      inlinedVal = foldf1(kcfa2, f, arg$SET$1$, init);
-      f1 = lambda_lambda$$lambda$(kcfa2, arg$Bnd$0$);
-      return kcfa2[listFoldl$tailrec$accessorSymbol](f1, mst, inlinedVal)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-});
-lambda$9 = (undefined, function (kcfa2) {
-  return (state, sum) => {
-    return lambda$_lambda$lambda(kcfa2, state, sum)
-  }
-});
-lambda6 = (undefined, function (kcfa2, state, sum) {
-  let arg$State$2$;
-  if (state instanceof kcfa2.State.class) {
-    let union$here;
-    arg$State$2$ = state.store;
-    union$here = lambda_union$$union$(kcfa2, lambda_setUnion$setUnion1);
-    return kcfa2[storeMapWrap$accessorSymbol](union$here)(arg$State$2$, sum)
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-});
-lambda$8 = (undefined, function (kcfa2, x) {
+lambda$4 = (undefined, function (kcfa2, x) {
   return (exp, mst) => {
     return kcfa2[monoStoreUpdate$accessorSymbol](mst, x, exp)
   }
 });
-lambda5 = (undefined, function (kcfa2, x, exp, mst) {
-  return kcfa2[monoStoreUpdate$accessorSymbol](mst, x, exp)
-});
-lambda$7 = (undefined, function (kcfa2) {
+lambda$3 = (undefined, function (kcfa2) {
   return (v, exps) => {
-    return lambda4(kcfa2, v, exps)
+    return lambda(kcfa2, v, exps)
   }
 });
-lambda4 = (undefined, function (kcfa2, v, exps) {
+lambda = (undefined, function (kcfa2, v, exps) {
   let inlinedVal, arg$Clos$0$;
   if (v instanceof kcfa2.Clos.class) {
     arg$Clos$0$ = v.lam;
@@ -9914,250 +7388,6 @@ lambda4 = (undefined, function (kcfa2, v, exps) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda$6 = (undefined, function (kcfa2, st) {
-  return (st1) => {
-    return lambda$_stateSame$stateSame(st, st1)
-  }
-});
-lambda3 = (undefined, function (kcfa2, st, st1) {
-  let arg$State$0$, arg$State$1$, arg$State$2$, arg$State$3$, arg$State$0$1, arg$State$1$1, arg$State$2$1, arg$State$3$1, tmp;
-  if (st instanceof kcfa1.State.class) {
-    arg$State$0$ = st.call;
-    arg$State$1$ = st.benv;
-    arg$State$2$ = st.store;
-    arg$State$3$ = st.time;
-    if (st1 instanceof kcfa1.State.class) {
-      let pred, inlinedVal;
-      arg$State$0$1 = st1.call;
-      arg$State$1$1 = st1.benv;
-      arg$State$2$1 = st1.store;
-      arg$State$3$1 = st1.time;
-      pred = kcfa1[labelSame$accessorSymbol];
-      inlinedVal = kcfa1[listPairAllEq$tailrec$accessorSymbol](pred, arg$State$3$, arg$State$3$1);
-      if (inlinedVal === true) {
-        tmp = kcfa1[sameCall$accessorSymbol](arg$State$0$, arg$State$0$1);
-        if (tmp === true) {
-          let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-          cmpRng = kcfa1[bindCompare$accessorSymbol];
-          kcfa3 = kcfa1;
-          if (arg$State$1$ instanceof kcfa3.VmMAP.class) {
-            arg$VmMAP$1$ = arg$State$1$.tree;
-            if (arg$State$1$1 instanceof kcfa3.VmMAP.class) {
-              let inlinedVal1, inlinedVal2, kcfa4, cmpRng1, t1, t2, inlinedVal3;
-              arg$VmMAP$1$1 = arg$State$1$1.tree;
-              inlinedVal1 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-              inlinedVal2 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-              kcfa4 = kcfa1;
-              cmpRng1 = cmpRng;
-              t1 = inlinedVal1;
-              t2 = inlinedVal2;
-              inlinedLbl: {
-                loopLabel: while (true) {
-                  let p1, p2, order1, element1$, element0$, arg$VmT$2$, arg$VmT$3$, element1$1, element0$1, arg$VmT$2$1, arg$VmT$3$1;
-                  p1 = kcfa4[varMapNext$accessorSymbol](t1);
-                  p2 = kcfa4[varMapNext$accessorSymbol](t2);
-                  if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-                    element0$ = runtime.Tuple.get(p1, 0);
-                    element1$ = runtime.Tuple.get(p1, 1);
-                    if (element0$ instanceof kcfa4.VmE.class) {
-                      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                        element0$1 = runtime.Tuple.get(p2, 0);
-                        if (element0$1 instanceof kcfa4.VmE.class) {
-                          inlinedVal3 = kcfa4.EQUAL;
-                          break inlinedLbl
-                        }
-                        inlinedVal3 = kcfa4.LESS;
-                        break inlinedLbl;
-                      }
-                      inlinedVal3 = kcfa4.LESS;
-                      break inlinedLbl;
-                    }
-                    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                      element0$1 = runtime.Tuple.get(p2, 0);
-                      element1$1 = runtime.Tuple.get(p2, 1);
-                      if (element0$1 instanceof kcfa4.VmE.class) {
-                        inlinedVal3 = kcfa4.GREATER;
-                        break inlinedLbl
-                      }
-                      if (element0$ instanceof kcfa4.VmT.class) {
-                        arg$VmT$2$ = element0$.key;
-                        arg$VmT$3$ = element0$.value;
-                        if (element0$1 instanceof kcfa4.VmT.class) {
-                          let scrut, scrut1;
-                          arg$VmT$2$1 = element0$1.key;
-                          arg$VmT$3$1 = element0$1.value;
-                          scrut = arg$VmT$2$ < arg$VmT$2$1;
-                          if (scrut === true) {
-                            inlinedVal3 = kcfa4.LESS;
-                            break inlinedLbl
-                          }
-                          scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                          if (scrut1 === true) {
-                            inlinedVal3 = kcfa4.GREATER;
-                            break inlinedLbl
-                          }
-                          order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                          if (order1 instanceof kcfa4.EQUAL.class) {
-                            t1 = element1$;
-                            t2 = element1$1;
-                            continue loopLabel
-                          }
-                          inlinedVal3 = order1;
-                          break inlinedLbl;
-                        }
-                        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                      }
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                    }
-                    if (element0$ instanceof kcfa4.VmT.class) {
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                    element0$1 = runtime.Tuple.get(p2, 0);
-                    if (element0$1 instanceof kcfa4.VmE.class) {
-                      inlinedVal3 = kcfa4.GREATER;
-                      break inlinedLbl
-                    }
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-              }
-              if (inlinedVal3 instanceof kcfa1.EQUAL.class) {
-                let kcfa5, arg$SmMAP$1$, arg$SmMAP$1$1;
-                kcfa5 = kcfa1;
-                if (arg$State$2$ instanceof kcfa5.SmMAP.class) {
-                  arg$SmMAP$1$ = arg$State$2$.tree;
-                  if (arg$State$2$1 instanceof kcfa5.SmMAP.class) {
-                    let inlinedVal4, inlinedVal5, kcfa6, cmpRng2, t11, t21, inlinedVal6;
-                    arg$SmMAP$1$1 = arg$State$2$1.tree;
-                    inlinedVal4 = kcfa1[storeMapLeft$accessorSymbol](arg$SmMAP$1$, kcfa1.Nil);
-                    inlinedVal5 = kcfa1[storeMapLeft$accessorSymbol](arg$SmMAP$1$1, kcfa1.Nil);
-                    kcfa6 = kcfa1;
-                    cmpRng2 = lambda_stateSame_storeCompare_setCompare$setCompare;
-                    t11 = inlinedVal4;
-                    t21 = inlinedVal5;
-                    inlinedLbl1: {
-                      loopLabel1: while (true) {
-                        let p1, p2, order, order1, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1;
-                        p1 = kcfa6[storeMapNext$accessorSymbol](t11);
-                        p2 = kcfa6[storeMapNext$accessorSymbol](t21);
-                        if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-                          element0$ = runtime.Tuple.get(p1, 0);
-                          element1$ = runtime.Tuple.get(p1, 1);
-                          if (element0$ instanceof kcfa6.SmE.class) {
-                            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                              element0$1 = runtime.Tuple.get(p2, 0);
-                              if (element0$1 instanceof kcfa6.SmE.class) {
-                                inlinedVal6 = kcfa6.EQUAL;
-                                break inlinedLbl1
-                              }
-                              inlinedVal6 = kcfa6.LESS;
-                              break inlinedLbl1;
-                            }
-                            inlinedVal6 = kcfa6.LESS;
-                            break inlinedLbl1;
-                          }
-                          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                            element0$1 = runtime.Tuple.get(p2, 0);
-                            element1$1 = runtime.Tuple.get(p2, 1);
-                            if (element0$1 instanceof kcfa6.SmE.class) {
-                              inlinedVal6 = kcfa6.GREATER;
-                              break inlinedLbl1
-                            }
-                            if (element0$ instanceof kcfa6.SmT.class) {
-                              arg$SmT$2$ = element0$.key;
-                              arg$SmT$3$ = element0$.value;
-                              if (element0$1 instanceof kcfa6.SmT.class) {
-                                arg$SmT$2$1 = element0$1.key;
-                                arg$SmT$3$1 = element0$1.value;
-                                order = kcfa6[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-                                if (order instanceof kcfa6.EQUAL.class) {
-                                  order1 = runtime.safeCall(cmpRng2(arg$SmT$3$, arg$SmT$3$1));
-                                  if (order1 instanceof kcfa6.EQUAL.class) {
-                                    t11 = element1$;
-                                    t21 = element1$1;
-                                    continue loopLabel1
-                                  }
-                                  inlinedVal6 = order1;
-                                  break inlinedLbl1;
-                                }
-                                inlinedVal6 = order;
-                                break inlinedLbl1;
-                              }
-                              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                            }
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                          }
-                          if (element0$ instanceof kcfa6.SmT.class) {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                        }
-                        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                          element0$1 = runtime.Tuple.get(p2, 0);
-                          if (element0$1 instanceof kcfa6.SmE.class) {
-                            inlinedVal6 = kcfa6.GREATER;
-                            break inlinedLbl1
-                          }
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                        }
-                        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                      }
-                    }
-                    if (inlinedVal6 instanceof kcfa1.EQUAL.class) {
-                      return true
-                    }
-                    return false;
-                  }
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              return false;
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        return false;
-      }
-      return false;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-});
-apply$ = function apply$(kcfa2, store, time1, params) {
-  return (clos, states) => {
-    return apply$_apply$apply(kcfa2, store, time1, params, clos, states)
-  }
-};
-apply = function apply(kcfa2, store, time1, params, clos, states) {
-  let arg$Clos$0$, arg$Clos$1$, element2$, element1$, tmp;
-  if (clos instanceof kcfa2.Clos.class) {
-    arg$Clos$0$ = clos.lam;
-    arg$Clos$1$ = clos.benv;
-    if (runtime.Tuple.isArrayLike(arg$Clos$0$) && arg$Clos$0$.length === 3) {
-      let f, inlinedVal, f1, inlinedVal1, f2, inlinedVal2;
-      runtime.Tuple.get(arg$Clos$0$, 0);
-      element1$ = runtime.Tuple.get(arg$Clos$0$, 1);
-      element2$ = runtime.Tuple.get(arg$Clos$0$, 2);
-      f = kcfa2[alloc$accessorSymbol](time1);
-      inlinedVal = kcfa2[listMap$tailrec$accessorSymbol](f, element1$);
-      f1 = lambda$1(kcfa2);
-      inlinedVal1 = foldf(kcfa2, f1, element1$, inlinedVal, arg$Clos$1$);
-      f2 = apply_lambda$$lambda$(kcfa2);
-      inlinedVal2 = foldf(kcfa2, f2, inlinedVal, params, store);
-      tmp = kcfa2.State(element2$, inlinedVal1, inlinedVal2, time1);
-      return kcfa2.Cons(tmp, states)
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
 eval$ = function eval$(kcfa2, benv, store) {
   return (e) => {
     return eval1(kcfa2, benv, store, e)
@@ -10166,23 +7396,14 @@ eval$ = function eval$(kcfa2, benv, store) {
 eval1 = (undefined, function (kcfa2, benv, store, e) {
   let arg$LAMBDA$0$, arg$VAR$1$, tmp;
   if (e instanceof kcfa2.VAR.class) {
-    let arg$Some$0$, inlinedVal, arg$VmMAP$1$;
+    let scrut, scrut1, arg$Some$0$;
     arg$VAR$1$ = e.x;
-    if (benv instanceof kcfa2.VmMAP.class) {
-      arg$VmMAP$1$ = benv.tree;
-      inlinedVal = find1(kcfa2, arg$VAR$1$, arg$VmMAP$1$);
-      if (inlinedVal instanceof kcfa2.Some.class) {
-        let inlinedVal1, arg$SmMAP$1$;
-        arg$Some$0$ = inlinedVal.value;
-        if (store instanceof kcfa2.SmMAP.class) {
-          arg$SmMAP$1$ = store.tree;
-          inlinedVal1 = find11(kcfa2, arg$Some$0$, arg$SmMAP$1$);
-          if (inlinedVal1 instanceof kcfa2.Some.class) {
-            return inlinedVal1.value
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+    scrut1 = kcfa2[varMapFind$accessorSymbol](benv, arg$VAR$1$);
+    if (scrut1 instanceof kcfa2.Some.class) {
+      arg$Some$0$ = scrut1.value;
+      scrut = kcfa2[storeMapFind$accessorSymbol](store, arg$Some$0$);
+      if (scrut instanceof kcfa2.Some.class) {
+        return scrut.value
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -10196,132 +7417,6 @@ eval1 = (undefined, function (kcfa2, benv, store, e) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda$5 = (undefined, function (kcfa2) {
-  return (adr, dv, st) => {
-    return kcfa2[storeMapInsertWith$accessorSymbol](lambda$_setUnion$setUnion)(st, adr, dv)
-  }
-});
-lambda2 = (undefined, function (kcfa2, adr, dv, st) {
-  return kcfa2[storeMapInsertWith$accessorSymbol](lambda_setUnion$setUnion)(st, adr, dv)
-});
-union$ = function union$(kcfa2, mergeFn) {
-  return (t1, t2, n, result) => {
-    return union$_union$union(kcfa2, mergeFn, t1, t2, n, result)
-  }
-};
-union = function union(kcfa2, mergeFn, t1, t2, n, result) {
-  loopLabel: while (true) {
-    let p1, p2, scrut, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1, tmp, tmp1, tmp2, tmp3;
-    p1 = kcfa2[storeMapNext$accessorSymbol](t1);
-    p2 = kcfa2[storeMapNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SmE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          if (element0$1 instanceof kcfa2.SmE.class) {
-            return globalThis.Object.freeze([
-              n,
-              result
-            ])
-          }
-          return kcfa2[storeMapIns$accessorSymbol](p2, n, result);
-        }
-        return kcfa2[storeMapIns$accessorSymbol](p2, n, result);
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SmE.class) {
-          return kcfa2[storeMapIns$accessorSymbol](p1, n, result)
-        }
-        if (element0$ instanceof kcfa2.SmT.class) {
-          arg$SmT$2$ = element0$.key;
-          arg$SmT$3$ = element0$.value;
-          if (element0$1 instanceof kcfa2.SmT.class) {
-            arg$SmT$2$1 = element0$1.key;
-            arg$SmT$3$1 = element0$1.value;
-            scrut = kcfa2[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-            if (scrut instanceof kcfa2.LESS.class) {
-              let inlinedVal;
-              tmp = n + 1;
-              inlinedVal = incr1(kcfa2, arg$SmT$2$, arg$SmT$3$, kcfa2.SmE, result);
-              t1 = element1$;
-              n = tmp;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.EQUAL.class) {
-              let inlinedVal;
-              tmp1 = n + 1;
-              tmp2 = runtime.safeCall(mergeFn(arg$SmT$3$, arg$SmT$3$1));
-              inlinedVal = incr1(kcfa2, arg$SmT$2$, tmp2, kcfa2.SmE, result);
-              t1 = element1$;
-              t2 = element1$1;
-              n = tmp1;
-              result = inlinedVal;
-              continue loopLabel
-            } else if (scrut instanceof kcfa2.GREATER.class) {
-              let inlinedVal;
-              tmp3 = n + 1;
-              inlinedVal = incr1(kcfa2, arg$SmT$2$1, arg$SmT$3$1, kcfa2.SmE, result);
-              t2 = element1$1;
-              n = tmp3;
-              result = inlinedVal;
-              continue loopLabel
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SmT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      if (element0$1 instanceof kcfa2.SmE.class) {
-        return kcfa2[storeMapIns$accessorSymbol](p1, n, result)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-link1 = function link(kcfa2, t1, d) {
-  loopLabel: while (true) {
-    let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1, tmp2;
-    if (d instanceof kcfa2.SmZERO.class) {
-      return t1
-    } else if (d instanceof kcfa2.SmONE.class) {
-      arg$SmONE$0$ = d.key;
-      arg$SmONE$1$ = d.value;
-      arg$SmONE$2$ = d.tree;
-      arg$SmONE$3$ = d.digit;
-      tmp = kcfa2.SmT(kcfa2.SmB, arg$SmONE$2$, arg$SmONE$0$, arg$SmONE$1$, t1);
-      t1 = tmp;
-      d = arg$SmONE$3$;
-      continue loopLabel
-    } else if (d instanceof kcfa2.SmTWO.class) {
-      arg$SmTWO$0$ = d.key1;
-      arg$SmTWO$1$ = d.value1;
-      arg$SmTWO$2$ = d.tree1;
-      arg$SmTWO$3$ = d.key2;
-      arg$SmTWO$4$ = d.value2;
-      arg$SmTWO$5$ = d.tree2;
-      arg$SmTWO$6$ = d.digit;
-      tmp1 = kcfa2.SmT(kcfa2.SmR, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
-      tmp2 = kcfa2.SmT(kcfa2.SmB, tmp1, arg$SmTWO$0$, arg$SmTWO$1$, t1);
-      t1 = tmp2;
-      d = arg$SmTWO$6$;
-      continue loopLabel
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 incr1 = function incr(kcfa2, ak1, a1, t1, d) {
   let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1;
   if (d instanceof kcfa2.SmZERO.class) {
@@ -10346,178 +7441,25 @@ incr1 = function incr(kcfa2, ak1, a1, t1, d) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-lambda$4 = (undefined, function (kcfa2, cmpRng) {
-  return (map1, map2) => {
-    return lambda$_lambda$lambda3(kcfa2, cmpRng, map1, map2)
-  }
-});
-cmp2 = function cmp(kcfa2, cmpRng, t1, t2) {
-  loopLabel: while (true) {
-    let p1, p2, order, order1, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1;
-    p1 = kcfa2[storeMapNext$accessorSymbol](t1);
-    p2 = kcfa2[storeMapNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SmE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          if (element0$1 instanceof kcfa2.SmE.class) {
-            return kcfa2.EQUAL
-          }
-          return kcfa2.LESS;
-        }
-        return kcfa2.LESS;
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SmE.class) {
-          return kcfa2.GREATER
-        }
-        if (element0$ instanceof kcfa2.SmT.class) {
-          arg$SmT$2$ = element0$.key;
-          arg$SmT$3$ = element0$.value;
-          if (element0$1 instanceof kcfa2.SmT.class) {
-            arg$SmT$2$1 = element0$1.key;
-            arg$SmT$3$1 = element0$1.value;
-            order = kcfa2[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-            if (order instanceof kcfa2.EQUAL.class) {
-              order1 = runtime.safeCall(cmpRng(arg$SmT$3$, arg$SmT$3$1));
-              if (order1 instanceof kcfa2.EQUAL.class) {
-                t1 = element1$;
-                t2 = element1$1;
-                continue loopLabel
-              }
-              return order1;
-            }
-            return order;
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SmT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      if (element0$1 instanceof kcfa2.SmE.class) {
-        return kcfa2.GREATER
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda13 = (undefined, function (kcfa2, cmpRng, map1, map2) {
-  let arg$SmMAP$1$, arg$SmMAP$1$1;
-  if (map1 instanceof kcfa2.SmMAP.class) {
-    arg$SmMAP$1$ = map1.tree;
-    if (map2 instanceof kcfa2.SmMAP.class) {
-      let inlinedVal, inlinedVal1, kcfa3, cmpRng1, t1, t2, inlinedVal2;
-      arg$SmMAP$1$1 = map2.tree;
-      inlinedVal = kcfa2[storeMapLeft$accessorSymbol](arg$SmMAP$1$, kcfa2.Nil);
-      inlinedVal1 = kcfa2[storeMapLeft$accessorSymbol](arg$SmMAP$1$1, kcfa2.Nil);
-      kcfa3 = kcfa2;
-      cmpRng1 = cmpRng;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, order, order1, element1$, element0$, arg$SmT$2$, arg$SmT$3$, element1$1, element0$1, arg$SmT$2$1, arg$SmT$3$1;
-          p1 = kcfa3[storeMapNext$accessorSymbol](t1);
-          p2 = kcfa3[storeMapNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$ = runtime.Tuple.get(p1, 0);
-            element1$ = runtime.Tuple.get(p1, 1);
-            if (element0$ instanceof kcfa3.SmE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$1 = runtime.Tuple.get(p2, 0);
-                if (element0$1 instanceof kcfa3.SmE.class) {
-                  inlinedVal2 = kcfa3.EQUAL;
-                  break inlinedLbl
-                }
-                inlinedVal2 = kcfa3.LESS;
-                break inlinedLbl;
-              }
-              inlinedVal2 = kcfa3.LESS;
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$1 = runtime.Tuple.get(p2, 0);
-              element1$1 = runtime.Tuple.get(p2, 1);
-              if (element0$1 instanceof kcfa3.SmE.class) {
-                inlinedVal2 = kcfa3.GREATER;
-                break inlinedLbl
-              }
-              if (element0$ instanceof kcfa3.SmT.class) {
-                arg$SmT$2$ = element0$.key;
-                arg$SmT$3$ = element0$.value;
-                if (element0$1 instanceof kcfa3.SmT.class) {
-                  arg$SmT$2$1 = element0$1.key;
-                  arg$SmT$3$1 = element0$1.value;
-                  order = kcfa3[bindCompare$accessorSymbol](arg$SmT$2$, arg$SmT$2$1);
-                  if (order instanceof kcfa3.EQUAL.class) {
-                    order1 = runtime.safeCall(cmpRng1(arg$SmT$3$, arg$SmT$3$1));
-                    if (order1 instanceof kcfa3.EQUAL.class) {
-                      t1 = element1$;
-                      t2 = element1$1;
-                      continue loopLabel
-                    }
-                    inlinedVal2 = order1;
-                    break inlinedLbl;
-                  }
-                  inlinedVal2 = order;
-                  break inlinedLbl;
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$ instanceof kcfa3.SmT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$1 = runtime.Tuple.get(p2, 0);
-            if (element0$1 instanceof kcfa3.SmE.class) {
-              inlinedVal2 = kcfa3.GREATER;
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      return inlinedVal2
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-});
-lambda$3 = (undefined, function (kcfa2, f, init) {
+lambda$2 = (undefined, function (kcfa2, f, init) {
   return (map) => {
-    return lambda12(kcfa2, f, init, map)
+    return lambda2(kcfa2, f, init, map)
   }
 });
-lambda12 = (undefined, function (kcfa2, f, init, map) {
+lambda2 = (undefined, function (kcfa2, f, init, map) {
   let arg$SmMAP$1$;
   if (map instanceof kcfa2.SmMAP.class) {
     arg$SmMAP$1$ = map.tree;
-    return foldf2(kcfa2, f, arg$SmMAP$1$, init)
+    return foldf1(kcfa2, f, arg$SmMAP$1$, init)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 });
-lambda$2 = (undefined, function (kcfa2, f) {
+lambda$1 = (undefined, function (kcfa2, f) {
   return (init) => {
-    return lambda$3(kcfa2, f, init)
+    return lambda$2(kcfa2, f, init)
   }
 });
-foldf2 = function foldf(kcfa2, f, t, accum) {
+foldf1 = function foldf(kcfa2, f, t, accum) {
   loopLabel: while (true) {
     let arg$SmT$1$, arg$SmT$2$, arg$SmT$3$, arg$SmT$4$, tmp, tmp1;
     if (t instanceof kcfa2.SmE.class) {
@@ -10527,39 +7469,11 @@ foldf2 = function foldf(kcfa2, f, t, accum) {
       arg$SmT$2$ = t.key;
       arg$SmT$3$ = t.value;
       arg$SmT$4$ = t.right;
-      tmp = foldf2(kcfa2, f, arg$SmT$1$, accum);
+      tmp = foldf1(kcfa2, f, arg$SmT$1$, accum);
       tmp1 = runtime.safeCall(f(arg$SmT$2$, arg$SmT$3$, tmp));
       t = arg$SmT$4$;
       accum = tmp1;
       continue loopLabel
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda11 = (undefined, function (kcfa2, f, init) {
-  return lambda$3(kcfa2, f, init)
-});
-find11 = function find1(kcfa2, k, t) {
-  loopLabel: while (true) {
-    let scrut, arg$SmT$1$, arg$SmT$2$, arg$SmT$3$, arg$SmT$4$;
-    if (t instanceof kcfa2.SmE.class) {
-      return kcfa2.None
-    } else if (t instanceof kcfa2.SmT.class) {
-      arg$SmT$1$ = t.left;
-      arg$SmT$2$ = t.key;
-      arg$SmT$3$ = t.value;
-      arg$SmT$4$ = t.right;
-      scrut = kcfa2[bindCompare$accessorSymbol](k, arg$SmT$2$);
-      if (scrut instanceof kcfa2.LESS.class) {
-        t = arg$SmT$1$;
-        continue loopLabel
-      } else if (scrut instanceof kcfa2.EQUAL.class) {
-        return kcfa2.Some(arg$SmT$3$)
-      } else if (scrut instanceof kcfa2.GREATER.class) {
-        t = arg$SmT$4$;
-        continue loopLabel
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -10687,7 +7601,7 @@ ins2 = function ins(kcfa2, comb, xk, x, nItems, nItems1, s) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-foldf1 = function foldf(kcfa2, f, t, accum) {
+foldf = function foldf(kcfa2, f, t, accum) {
   loopLabel: while (true) {
     let arg$SetT$1$, arg$SetT$2$, arg$SetT$3$, tmp, tmp1;
     if (t instanceof kcfa2.SetE.class) {
@@ -10696,7 +7610,7 @@ foldf1 = function foldf(kcfa2, f, t, accum) {
       arg$SetT$1$ = t.left;
       arg$SetT$2$ = t.item;
       arg$SetT$3$ = t.right;
-      tmp = foldf1(kcfa2, f, arg$SetT$1$, accum);
+      tmp = foldf(kcfa2, f, arg$SetT$1$, accum);
       tmp1 = runtime.safeCall(f(arg$SetT$2$, tmp));
       t = arg$SetT$3$;
       accum = tmp1;
@@ -10732,223 +7646,6 @@ ins1 = function ins(kcfa2, p, n, result) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
 };
-union1 = function union1(kcfa2, t1, t2, n, result) {
-  loopLabel: while (true) {
-    let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1, tmp, tmp1, tmp2;
-    p1 = kcfa2[setNext$accessorSymbol](t1);
-    p2 = kcfa2[setNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SetE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          if (element0$1 instanceof kcfa2.SetE.class) {
-            return globalThis.Object.freeze([
-              n,
-              result
-            ])
-          }
-          return ins1(kcfa2, p2, n, result);
-        }
-        return ins1(kcfa2, p2, n, result);
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SetE.class) {
-          return ins1(kcfa2, p1, n, result)
-        }
-        if (element0$ instanceof kcfa2.SetT.class) {
-          arg$SetT$2$ = element0$.item;
-          if (element0$1 instanceof kcfa2.SetT.class) {
-            let inlinedVal, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-            arg$SetT$2$1 = element0$1.item;
-            if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-              arg$Clos$0$ = arg$SetT$2$.lam;
-              arg$Clos$1$ = arg$SetT$2$.benv;
-              if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                arg$Clos$0$1 = arg$SetT$2$1.lam;
-                arg$Clos$1$1 = arg$SetT$2$1.benv;
-                order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                if (order instanceof kcfa1.EQUAL.class) {
-                  let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                  cmpRng = kcfa1[bindCompare$accessorSymbol];
-                  kcfa3 = kcfa1;
-                  if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                    arg$VmMAP$1$ = arg$Clos$1$.tree;
-                    if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                      let inlinedVal1, inlinedVal2, kcfa4, cmpRng1, t11, t21, inlinedVal3;
-                      arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                      inlinedVal1 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                      inlinedVal2 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                      kcfa4 = kcfa1;
-                      cmpRng1 = cmpRng;
-                      t11 = inlinedVal1;
-                      t21 = inlinedVal2;
-                      inlinedLbl: {
-                        loopLabel1: while (true) {
-                          let p11, p21, order1, element1$2, element0$2, arg$VmT$2$, arg$VmT$3$, element1$3, element0$3, arg$VmT$2$1, arg$VmT$3$1;
-                          p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                          p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                          if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                            element0$2 = runtime.Tuple.get(p11, 0);
-                            element1$2 = runtime.Tuple.get(p11, 1);
-                            if (element0$2 instanceof kcfa4.VmE.class) {
-                              if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                element0$3 = runtime.Tuple.get(p21, 0);
-                                if (element0$3 instanceof kcfa4.VmE.class) {
-                                  inlinedVal3 = kcfa4.EQUAL;
-                                  break inlinedLbl
-                                }
-                                inlinedVal3 = kcfa4.LESS;
-                                break inlinedLbl;
-                              }
-                              inlinedVal3 = kcfa4.LESS;
-                              break inlinedLbl;
-                            }
-                            if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                              element0$3 = runtime.Tuple.get(p21, 0);
-                              element1$3 = runtime.Tuple.get(p21, 1);
-                              if (element0$3 instanceof kcfa4.VmE.class) {
-                                inlinedVal3 = kcfa4.GREATER;
-                                break inlinedLbl
-                              }
-                              if (element0$2 instanceof kcfa4.VmT.class) {
-                                arg$VmT$2$ = element0$2.key;
-                                arg$VmT$3$ = element0$2.value;
-                                if (element0$3 instanceof kcfa4.VmT.class) {
-                                  let scrut, scrut1;
-                                  arg$VmT$2$1 = element0$3.key;
-                                  arg$VmT$3$1 = element0$3.value;
-                                  scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                  if (scrut === true) {
-                                    inlinedVal3 = kcfa4.LESS;
-                                    break inlinedLbl
-                                  }
-                                  scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                  if (scrut1 === true) {
-                                    inlinedVal3 = kcfa4.GREATER;
-                                    break inlinedLbl
-                                  }
-                                  order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                  if (order1 instanceof kcfa4.EQUAL.class) {
-                                    t11 = element1$2;
-                                    t21 = element1$3;
-                                    continue loopLabel1
-                                  }
-                                  inlinedVal3 = order1;
-                                  break inlinedLbl;
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                            }
-                            if (element0$2 instanceof kcfa4.VmT.class) {
-                              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                            }
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                          }
-                          if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                            element0$3 = runtime.Tuple.get(p21, 0);
-                            if (element0$3 instanceof kcfa4.VmE.class) {
-                              inlinedVal3 = kcfa4.GREATER;
-                              break inlinedLbl
-                            }
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                          }
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                        }
-                      }
-                      inlinedVal = inlinedVal3;
-                    } else {
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                    }
-                  } else {
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                  }
-                } else {
-                  inlinedVal = order;
-                }
-                if (inlinedVal instanceof kcfa2.LESS.class) {
-                  let inlinedVal1;
-                  tmp = n + 1;
-                  inlinedVal1 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                  t1 = element1$;
-                  n = tmp;
-                  result = inlinedVal1;
-                  continue loopLabel
-                } else if (inlinedVal instanceof kcfa2.EQUAL.class) {
-                  let inlinedVal1;
-                  tmp1 = n + 1;
-                  inlinedVal1 = incr(kcfa2, arg$SetT$2$, kcfa2.SetE, result);
-                  t1 = element1$;
-                  t2 = element1$1;
-                  n = tmp1;
-                  result = inlinedVal1;
-                  continue loopLabel
-                } else if (inlinedVal instanceof kcfa2.GREATER.class) {
-                  let inlinedVal1;
-                  tmp2 = n + 1;
-                  inlinedVal1 = incr(kcfa2, arg$SetT$2$1, kcfa2.SetE, result);
-                  t2 = element1$1;
-                  n = tmp2;
-                  result = inlinedVal1;
-                  continue loopLabel
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SetT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      if (element0$1 instanceof kcfa2.SetE.class) {
-        return ins1(kcfa2, p1, n, result)
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-link = function link(kcfa2, t1, d) {
-  loopLabel: while (true) {
-    let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1, tmp2;
-    if (d instanceof kcfa2.SetZERO.class) {
-      return t1
-    } else if (d instanceof kcfa2.SetONE.class) {
-      arg$SetONE$0$ = d.item;
-      arg$SetONE$1$ = d.tree;
-      arg$SetONE$2$ = d.digit;
-      tmp = kcfa2.SetT(kcfa2.SetB, arg$SetONE$1$, arg$SetONE$0$, t1);
-      t1 = tmp;
-      d = arg$SetONE$2$;
-      continue loopLabel
-    } else if (d instanceof kcfa2.SetTWO.class) {
-      arg$SetTWO$0$ = d.item1;
-      arg$SetTWO$1$ = d.tree1;
-      arg$SetTWO$2$ = d.item2;
-      arg$SetTWO$3$ = d.tree2;
-      arg$SetTWO$4$ = d.digit;
-      tmp1 = kcfa2.SetT(kcfa2.SetR, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-      tmp2 = kcfa2.SetT(kcfa2.SetB, tmp1, arg$SetTWO$0$, t1);
-      t1 = tmp2;
-      d = arg$SetTWO$4$;
-      continue loopLabel
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 incr = function incr(kcfa2, a1, t1, d) {
   let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1;
   if (d instanceof kcfa2.SetZERO.class) {
@@ -10970,369 +7667,11 @@ incr = function incr(kcfa2, a1, t1, d) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-cmp1 = function cmp(kcfa2, t1, t2) {
-  loopLabel: while (true) {
-    let p1, p2, element1$, element0$, arg$SetT$2$, element1$1, element0$1, arg$SetT$2$1;
-    p1 = kcfa2[setNext$accessorSymbol](t1);
-    p2 = kcfa2[setNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.SetE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          if (element0$1 instanceof kcfa2.SetE.class) {
-            return kcfa2.EQUAL
-          }
-          return kcfa2.LESS;
-        }
-        return kcfa2.LESS;
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.SetE.class) {
-          return kcfa2.GREATER
-        }
-        if (element0$ instanceof kcfa2.SetT.class) {
-          arg$SetT$2$ = element0$.item;
-          if (element0$1 instanceof kcfa2.SetT.class) {
-            let inlinedVal, order, arg$Clos$0$, arg$Clos$1$, arg$Clos$0$1, arg$Clos$1$1;
-            arg$SetT$2$1 = element0$1.item;
-            if (arg$SetT$2$ instanceof kcfa1.Clos.class) {
-              arg$Clos$0$ = arg$SetT$2$.lam;
-              arg$Clos$1$ = arg$SetT$2$.benv;
-              if (arg$SetT$2$1 instanceof kcfa1.Clos.class) {
-                arg$Clos$0$1 = arg$SetT$2$1.lam;
-                arg$Clos$1$1 = arg$SetT$2$1.benv;
-                order = kcfa1[compareLambda$accessorSymbol](arg$Clos$0$, arg$Clos$0$1);
-                if (order instanceof kcfa1.EQUAL.class) {
-                  let cmpRng, kcfa3, arg$VmMAP$1$, arg$VmMAP$1$1;
-                  cmpRng = kcfa1[bindCompare$accessorSymbol];
-                  kcfa3 = kcfa1;
-                  if (arg$Clos$1$ instanceof kcfa3.VmMAP.class) {
-                    arg$VmMAP$1$ = arg$Clos$1$.tree;
-                    if (arg$Clos$1$1 instanceof kcfa3.VmMAP.class) {
-                      let inlinedVal1, inlinedVal2, kcfa4, cmpRng1, t11, t21, inlinedVal3;
-                      arg$VmMAP$1$1 = arg$Clos$1$1.tree;
-                      inlinedVal1 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa1.Nil);
-                      inlinedVal2 = kcfa1[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa1.Nil);
-                      kcfa4 = kcfa1;
-                      cmpRng1 = cmpRng;
-                      t11 = inlinedVal1;
-                      t21 = inlinedVal2;
-                      inlinedLbl: {
-                        loopLabel1: while (true) {
-                          let p11, p21, order1, element1$2, element0$2, arg$VmT$2$, arg$VmT$3$, element1$3, element0$3, arg$VmT$2$1, arg$VmT$3$1;
-                          p11 = kcfa4[varMapNext$accessorSymbol](t11);
-                          p21 = kcfa4[varMapNext$accessorSymbol](t21);
-                          if (runtime.Tuple.isArrayLike(p11) && p11.length === 2) {
-                            element0$2 = runtime.Tuple.get(p11, 0);
-                            element1$2 = runtime.Tuple.get(p11, 1);
-                            if (element0$2 instanceof kcfa4.VmE.class) {
-                              if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                                element0$3 = runtime.Tuple.get(p21, 0);
-                                if (element0$3 instanceof kcfa4.VmE.class) {
-                                  inlinedVal3 = kcfa4.EQUAL;
-                                  break inlinedLbl
-                                }
-                                inlinedVal3 = kcfa4.LESS;
-                                break inlinedLbl;
-                              }
-                              inlinedVal3 = kcfa4.LESS;
-                              break inlinedLbl;
-                            }
-                            if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                              element0$3 = runtime.Tuple.get(p21, 0);
-                              element1$3 = runtime.Tuple.get(p21, 1);
-                              if (element0$3 instanceof kcfa4.VmE.class) {
-                                inlinedVal3 = kcfa4.GREATER;
-                                break inlinedLbl
-                              }
-                              if (element0$2 instanceof kcfa4.VmT.class) {
-                                arg$VmT$2$ = element0$2.key;
-                                arg$VmT$3$ = element0$2.value;
-                                if (element0$3 instanceof kcfa4.VmT.class) {
-                                  let scrut, scrut1;
-                                  arg$VmT$2$1 = element0$3.key;
-                                  arg$VmT$3$1 = element0$3.value;
-                                  scrut = arg$VmT$2$ < arg$VmT$2$1;
-                                  if (scrut === true) {
-                                    inlinedVal3 = kcfa4.LESS;
-                                    break inlinedLbl
-                                  }
-                                  scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                                  if (scrut1 === true) {
-                                    inlinedVal3 = kcfa4.GREATER;
-                                    break inlinedLbl
-                                  }
-                                  order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                                  if (order1 instanceof kcfa4.EQUAL.class) {
-                                    t11 = element1$2;
-                                    t21 = element1$3;
-                                    continue loopLabel1
-                                  }
-                                  inlinedVal3 = order1;
-                                  break inlinedLbl;
-                                }
-                                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                              }
-                              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                            }
-                            if (element0$2 instanceof kcfa4.VmT.class) {
-                              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                            }
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                          }
-                          if (runtime.Tuple.isArrayLike(p21) && p21.length === 2) {
-                            element0$3 = runtime.Tuple.get(p21, 0);
-                            if (element0$3 instanceof kcfa4.VmE.class) {
-                              inlinedVal3 = kcfa4.GREATER;
-                              break inlinedLbl
-                            }
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                          }
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-                        }
-                      }
-                      inlinedVal = inlinedVal3;
-                    } else {
-                      throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                    }
-                  } else {
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                  }
-                } else {
-                  inlinedVal = order;
-                }
-                if (inlinedVal instanceof kcfa2.EQUAL.class) {
-                  t1 = element1$;
-                  t2 = element1$1;
-                  continue loopLabel
-                }
-                return inlinedVal;
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.SetT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      if (element0$1 instanceof kcfa2.SetE.class) {
-        return kcfa2.GREATER
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda$1 = (undefined, function (kcfa2) {
+lambda$ = (undefined, function (kcfa2) {
   return (x, adr, benv) => {
     return kcfa2[varMapInsert$accessorSymbol](benv, x, adr)
   }
 });
-lambda1 = (undefined, function (kcfa2, x, adr, benv) {
-  return kcfa2[varMapInsert$accessorSymbol](benv, x, adr)
-});
-lambda$ = (undefined, function (kcfa2, cmpRng) {
-  return (map1, map2) => {
-    return lambda$_lambda$lambda2(kcfa2, cmpRng, map1, map2)
-  }
-});
-cmp = function cmp(kcfa2, cmpRng, t1, t2) {
-  loopLabel: while (true) {
-    let p1, p2, order1, element1$, element0$, arg$VmT$2$, arg$VmT$3$, element1$1, element0$1, arg$VmT$2$1, arg$VmT$3$1;
-    p1 = kcfa2[varMapNext$accessorSymbol](t1);
-    p2 = kcfa2[varMapNext$accessorSymbol](t2);
-    if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-      element0$ = runtime.Tuple.get(p1, 0);
-      element1$ = runtime.Tuple.get(p1, 1);
-      if (element0$ instanceof kcfa2.VmE.class) {
-        if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-          element0$1 = runtime.Tuple.get(p2, 0);
-          if (element0$1 instanceof kcfa2.VmE.class) {
-            return kcfa2.EQUAL
-          }
-          return kcfa2.LESS;
-        }
-        return kcfa2.LESS;
-      }
-      if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-        element0$1 = runtime.Tuple.get(p2, 0);
-        element1$1 = runtime.Tuple.get(p2, 1);
-        if (element0$1 instanceof kcfa2.VmE.class) {
-          return kcfa2.GREATER
-        }
-        if (element0$ instanceof kcfa2.VmT.class) {
-          arg$VmT$2$ = element0$.key;
-          arg$VmT$3$ = element0$.value;
-          if (element0$1 instanceof kcfa2.VmT.class) {
-            let scrut, scrut1;
-            arg$VmT$2$1 = element0$1.key;
-            arg$VmT$3$1 = element0$1.value;
-            scrut = arg$VmT$2$ < arg$VmT$2$1;
-            if (scrut === true) {
-              return kcfa2.LESS
-            }
-            scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-            if (scrut1 === true) {
-              return kcfa2.GREATER
-            }
-            order1 = runtime.safeCall(cmpRng(arg$VmT$3$, arg$VmT$3$1));
-            if (order1 instanceof kcfa2.EQUAL.class) {
-              t1 = element1$;
-              t2 = element1$1;
-              continue loopLabel
-            }
-            return order1;
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-        throw globalThis.Object.freeze(new globalThis.Error("match error"));
-      }
-      if (element0$ instanceof kcfa2.VmT.class) {
-        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-      element0$1 = runtime.Tuple.get(p2, 0);
-      if (element0$1 instanceof kcfa2.VmE.class) {
-        return kcfa2.GREATER
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-lambda10 = (undefined, function (kcfa2, cmpRng, map1, map2) {
-  let arg$VmMAP$1$, arg$VmMAP$1$1;
-  if (map1 instanceof kcfa2.VmMAP.class) {
-    arg$VmMAP$1$ = map1.tree;
-    if (map2 instanceof kcfa2.VmMAP.class) {
-      let inlinedVal, inlinedVal1, kcfa3, cmpRng1, t1, t2, inlinedVal2;
-      arg$VmMAP$1$1 = map2.tree;
-      inlinedVal = kcfa2[varMapLeft$accessorSymbol](arg$VmMAP$1$, kcfa2.Nil);
-      inlinedVal1 = kcfa2[varMapLeft$accessorSymbol](arg$VmMAP$1$1, kcfa2.Nil);
-      kcfa3 = kcfa2;
-      cmpRng1 = cmpRng;
-      t1 = inlinedVal;
-      t2 = inlinedVal1;
-      inlinedLbl: {
-        loopLabel: while (true) {
-          let p1, p2, order1, element1$, element0$, arg$VmT$2$, arg$VmT$3$, element1$1, element0$1, arg$VmT$2$1, arg$VmT$3$1;
-          p1 = kcfa3[varMapNext$accessorSymbol](t1);
-          p2 = kcfa3[varMapNext$accessorSymbol](t2);
-          if (runtime.Tuple.isArrayLike(p1) && p1.length === 2) {
-            element0$ = runtime.Tuple.get(p1, 0);
-            element1$ = runtime.Tuple.get(p1, 1);
-            if (element0$ instanceof kcfa3.VmE.class) {
-              if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-                element0$1 = runtime.Tuple.get(p2, 0);
-                if (element0$1 instanceof kcfa3.VmE.class) {
-                  inlinedVal2 = kcfa3.EQUAL;
-                  break inlinedLbl
-                }
-                inlinedVal2 = kcfa3.LESS;
-                break inlinedLbl;
-              }
-              inlinedVal2 = kcfa3.LESS;
-              break inlinedLbl;
-            }
-            if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-              element0$1 = runtime.Tuple.get(p2, 0);
-              element1$1 = runtime.Tuple.get(p2, 1);
-              if (element0$1 instanceof kcfa3.VmE.class) {
-                inlinedVal2 = kcfa3.GREATER;
-                break inlinedLbl
-              }
-              if (element0$ instanceof kcfa3.VmT.class) {
-                arg$VmT$2$ = element0$.key;
-                arg$VmT$3$ = element0$.value;
-                if (element0$1 instanceof kcfa3.VmT.class) {
-                  let scrut, scrut1;
-                  arg$VmT$2$1 = element0$1.key;
-                  arg$VmT$3$1 = element0$1.value;
-                  scrut = arg$VmT$2$ < arg$VmT$2$1;
-                  if (scrut === true) {
-                    inlinedVal2 = kcfa3.LESS;
-                    break inlinedLbl
-                  }
-                  scrut1 = arg$VmT$2$1 < arg$VmT$2$;
-                  if (scrut1 === true) {
-                    inlinedVal2 = kcfa3.GREATER;
-                    break inlinedLbl
-                  }
-                  order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
-                  if (order1 instanceof kcfa3.EQUAL.class) {
-                    t1 = element1$;
-                    t2 = element1$1;
-                    continue loopLabel
-                  }
-                  inlinedVal2 = order1;
-                  break inlinedLbl;
-                }
-                throw globalThis.Object.freeze(new globalThis.Error("match error"));
-              }
-              throw globalThis.Object.freeze(new globalThis.Error("match error"));
-            }
-            if (element0$ instanceof kcfa3.VmT.class) {
-              throw globalThis.Object.freeze(new globalThis.Error("match error"))
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          if (runtime.Tuple.isArrayLike(p2) && p2.length === 2) {
-            element0$1 = runtime.Tuple.get(p2, 0);
-            if (element0$1 instanceof kcfa3.VmE.class) {
-              inlinedVal2 = kcfa3.GREATER;
-              break inlinedLbl
-            }
-            throw globalThis.Object.freeze(new globalThis.Error("match error"));
-          }
-          throw globalThis.Object.freeze(new globalThis.Error("match error"));
-        }
-      }
-      return inlinedVal2
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-  throw globalThis.Object.freeze(new globalThis.Error("match error"));
-});
-find1 = function find1(kcfa2, k, t) {
-  loopLabel: while (true) {
-    let arg$VmT$1$, arg$VmT$2$, arg$VmT$3$, arg$VmT$4$;
-    if (t instanceof kcfa2.VmE.class) {
-      return kcfa2.None
-    } else if (t instanceof kcfa2.VmT.class) {
-      let scrut, scrut1;
-      arg$VmT$1$ = t.left;
-      arg$VmT$2$ = t.key;
-      arg$VmT$3$ = t.value;
-      arg$VmT$4$ = t.right;
-      scrut = k < arg$VmT$2$;
-      if (scrut === true) {
-        t = arg$VmT$1$;
-        continue loopLabel
-      }
-      scrut1 = arg$VmT$2$ < k;
-      if (scrut1 === true) {
-        t = arg$VmT$4$;
-        continue loopLabel
-      }
-      return kcfa2.Some(arg$VmT$3$);
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
   let c1, d1, c11, d11, arg$VmT$0$, arg$VmT$1$, arg$VmT$2$, arg$VmT$3$, arg$VmT$4$, tmp, arg$VmT$0$1, arg$VmT$1$1, arg$VmT$2$1, arg$VmT$3$1, arg$VmT$4$1, tmp1, arg$VmT$0$2, arg$VmT$1$2, arg$VmT$2$2, arg$VmT$3$2, arg$VmT$4$2, tmp2, tmp3, tmp4, tmp5, arg$VmT$0$3, arg$VmT$1$3, arg$VmT$2$3, arg$VmT$3$3, arg$VmT$4$3, tmp6, tmp7, tmp8, arg$VmT$0$4, arg$VmT$1$4, arg$VmT$2$4, arg$VmT$3$4, arg$VmT$4$4, tmp9, arg$VmT$0$5, arg$VmT$1$5, arg$VmT$2$5, arg$VmT$3$5, arg$VmT$4$5, tmp10, tmp11, tmp12, tmp13, arg$VmT$0$6, arg$VmT$1$6, arg$VmT$2$6, arg$VmT$3$6, arg$VmT$4$6, tmp14, tmp15, tmp16;
   if (s instanceof kcfa2.VmE.class) {
@@ -11486,26 +7825,6 @@ ins = function ins(kcfa2, xk, x, nItems, nItems1, s) {
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
-foldf = function foldf(kcfa2, f, xs, ys, accum) {
-  loopLabel: while (true) {
-    let arg$Cons$0$, arg$Cons$1$, arg$Cons$0$1, arg$Cons$1$1, tmp;
-    if (xs instanceof kcfa2.Cons.class) {
-      arg$Cons$0$ = xs.head;
-      arg$Cons$1$ = xs.tail;
-      if (ys instanceof kcfa2.Cons.class) {
-        arg$Cons$0$1 = ys.head;
-        arg$Cons$1$1 = ys.tail;
-        tmp = runtime.safeCall(f(arg$Cons$0$, arg$Cons$0$1, accum));
-        xs = arg$Cons$1$;
-        ys = arg$Cons$1$1;
-        accum = tmp;
-        continue loopLabel
-      }
-      return accum;
-    }
-    return accum;
-  }
-};
 (class kcfa {
   static {
     kcfa1 = this
@@ -11513,8 +7832,10 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   static get [listPairAllEq$tailrec$accessorSymbol]() { return kcfa.#listPairAllEq$tailrec; }
   static get [listFoldl$tailrec$accessorSymbol]() { return kcfa.#listFoldl$tailrec; }
   static get [listMap$tailrec$accessorSymbol]() { return kcfa.#listMap$tailrec; }
+  static get [listPairFoldl$accessorSymbol]() { return kcfa.#listPairFoldl; }
   static get [labelSame$accessorSymbol]() { return kcfa.#labelSame; }
   static get [varMapInsert$accessorSymbol]() { return kcfa.#varMapInsert; }
+  static get [varMapFind$accessorSymbol]() { return kcfa.#varMapFind; }
   static get [varMapNext$accessorSymbol]() { return kcfa.#varMapNext; }
   static get [varMapLeft$accessorSymbol]() { return kcfa.#varMapLeft; }
   static get [compareLambda$accessorSymbol]() { return kcfa.#compareLambda; }
@@ -11522,7 +7843,9 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   static get [bindCompare$accessorSymbol]() { return kcfa.#bindCompare; }
   static get [setNext$accessorSymbol]() { return kcfa.#setNext; }
   static get [setLeft$accessorSymbol]() { return kcfa.#setLeft; }
+  static get [setLinkAll$accessorSymbol]() { return kcfa.#setLinkAll; }
   static get [storeMapInsertWith$accessorSymbol]() { return kcfa.#storeMapInsertWith; }
+  static get [storeMapFind$accessorSymbol]() { return kcfa.#storeMapFind; }
   static get [storeMapNext$accessorSymbol]() { return kcfa.#storeMapNext; }
   static get [storeMapLeft$accessorSymbol]() { return kcfa.#storeMapLeft; }
   static get [storeMapWrap$accessorSymbol]() { return kcfa.#storeMapWrap; }
@@ -12037,15 +8360,15 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
       toString() { return runtime.render(this); }
       static [definitionMetadata] = ["class", "SmTWO", ["key1", "value1", "tree1", "key2", "value2", "tree2", "digit"]];
     });
-    kcfa.State = function State(call1, benv, store, time) {
-      return globalThis.Object.freeze(new State.class(call1, benv, store, time));
+    kcfa.State = function State(call, benv, store, time) {
+      return globalThis.Object.freeze(new State.class(call, benv, store, time));
     };
     (class State {
       static {
         kcfa.State.class = this
       }
-      constructor(call1, benv, store, time) {
-        this.call = call1;
+      constructor(call, benv, store, time) {
+        this.call = call;
         this.benv = benv;
         this.store = store;
         this.time = time;
@@ -12081,7 +8404,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
       return false;
     }
   }
-  static #listCollate$tailrec(cmp3, l1, l2) {
+  static #listCollate$tailrec(cmp, l1, l2) {
     loopLabel: while (true) {
       let order, arg$Cons$0$, arg$Cons$1$, arg$Cons$0$1, arg$Cons$1$1;
       if (l1 instanceof kcfa.Nil.class) {
@@ -12099,7 +8422,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
         if (l2 instanceof kcfa.Cons.class) {
           arg$Cons$0$1 = l2.head;
           arg$Cons$1$1 = l2.tail;
-          order = runtime.safeCall(cmp3(arg$Cons$0$, arg$Cons$0$1));
+          order = runtime.safeCall(cmp(arg$Cons$0$, arg$Cons$0$1));
           if (order instanceof kcfa.EQUAL.class) {
             l1 = arg$Cons$1$;
             l2 = arg$Cons$1$1;
@@ -12212,15 +8535,43 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
       }
     }
   }
-  static #listCollate(cmp3) {
+  static #listCollate(cmp) {
     return (l1, l2) => {
-      return kcfa.#listCollate$tailrec(cmp3, l1, l2)
+      return kcfa.#listCollate$tailrec(cmp, l1, l2)
     }
   }
   static #listPairFoldl(f) {
     return (init) => {
       return (l1, l2) => {
-        return foldf(kcfa, f, l1, l2, init)
+        let kcfa2, f1, xs, ys, accum, inlinedVal;
+        kcfa2 = kcfa;
+        f1 = f;
+        xs = l1;
+        ys = l2;
+        accum = init;
+        inlinedLbl: {
+          loopLabel: while (true) {
+            let arg$Cons$0$, arg$Cons$1$, arg$Cons$0$1, arg$Cons$1$1, tmp;
+            if (xs instanceof kcfa2.Cons.class) {
+              arg$Cons$0$ = xs.head;
+              arg$Cons$1$ = xs.tail;
+              if (ys instanceof kcfa2.Cons.class) {
+                arg$Cons$0$1 = ys.head;
+                arg$Cons$1$1 = ys.tail;
+                tmp = runtime.safeCall(f1(arg$Cons$0$, arg$Cons$0$1, accum));
+                xs = arg$Cons$1$;
+                ys = arg$Cons$1$1;
+                accum = tmp;
+                continue loopLabel
+              }
+              inlinedVal = accum;
+              break inlinedLbl;
+            }
+            inlinedVal = accum;
+            break inlinedLbl;
+          }
+        }
+        return inlinedVal
       }
     }
   }
@@ -12257,8 +8608,40 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   static #varMapFind(map, k) {
     let arg$VmMAP$1$;
     if (map instanceof kcfa.VmMAP.class) {
+      let kcfa2, k1, t, inlinedVal;
       arg$VmMAP$1$ = map.tree;
-      return find1(kcfa, k, arg$VmMAP$1$)
+      kcfa2 = kcfa;
+      k1 = k;
+      t = arg$VmMAP$1$;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let arg$VmT$1$, arg$VmT$2$, arg$VmT$3$, arg$VmT$4$;
+          if (t instanceof kcfa2.VmE.class) {
+            inlinedVal = kcfa2.None;
+            break inlinedLbl
+          } else if (t instanceof kcfa2.VmT.class) {
+            let scrut, scrut1;
+            arg$VmT$1$ = t.left;
+            arg$VmT$2$ = t.key;
+            arg$VmT$3$ = t.value;
+            arg$VmT$4$ = t.right;
+            scrut = k1 < arg$VmT$2$;
+            if (scrut === true) {
+              t = arg$VmT$1$;
+              continue loopLabel
+            }
+            scrut1 = arg$VmT$2$ < k1;
+            if (scrut1 === true) {
+              t = arg$VmT$4$;
+              continue loopLabel
+            }
+            inlinedVal = kcfa2.Some(arg$VmT$3$);
+            break inlinedLbl;
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+      }
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -12435,17 +8818,19 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                   arg$VmT$2$ = element0$.key;
                   arg$VmT$3$ = element0$.value;
                   if (element0$1 instanceof kcfa3.VmT.class) {
-                    let scrut, scrut1;
+                    let inlinedVal3, scrut, scrut1;
                     arg$VmT$2$1 = element0$1.key;
                     arg$VmT$3$1 = element0$1.value;
                     scrut = arg$VmT$2$ < arg$VmT$2$1;
                     if (scrut === true) {
-                      inlinedVal2 = kcfa3.LESS;
+                      inlinedVal3 = kcfa3.LESS;
+                      inlinedVal2 = inlinedVal3;
                       break inlinedLbl
                     }
                     scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                     if (scrut1 === true) {
-                      inlinedVal2 = kcfa3.GREATER;
+                      inlinedVal3 = kcfa3.GREATER;
+                      inlinedVal2 = inlinedVal3;
                       break inlinedLbl
                     }
                     order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -12493,7 +8878,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   }
   static #benvExtend1(benv, xs, adrs) {
     let lambda$here;
-    lambda$here = lambda$1(kcfa);
+    lambda$here = lambda$(kcfa);
     return kcfa.#listPairFoldl(lambda$here)(benv)(xs, adrs)
   }
   static #lambdaOf(clos) {
@@ -12566,17 +8951,19 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                         arg$VmT$2$ = element0$.key;
                         arg$VmT$3$ = element0$.value;
                         if (element0$1 instanceof kcfa3.VmT.class) {
-                          let scrut, scrut1;
+                          let inlinedVal3, scrut, scrut1;
                           arg$VmT$2$1 = element0$1.key;
                           arg$VmT$3$1 = element0$1.value;
                           scrut = arg$VmT$2$ < arg$VmT$2$1;
                           if (scrut === true) {
-                            inlinedVal2 = kcfa3.LESS;
+                            inlinedVal3 = kcfa3.LESS;
+                            inlinedVal2 = inlinedVal3;
                             break inlinedLbl
                           }
                           scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                           if (scrut1 === true) {
-                            inlinedVal2 = kcfa3.GREATER;
+                            inlinedVal3 = kcfa3.GREATER;
+                            inlinedVal2 = inlinedVal3;
                             break inlinedLbl
                           }
                           order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -12765,17 +9152,19 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                                         arg$VmT$2$ = element0$2.key;
                                         arg$VmT$3$ = element0$2.value;
                                         if (element0$3 instanceof kcfa4.VmT.class) {
-                                          let scrut, scrut1;
+                                          let inlinedVal5, scrut, scrut1;
                                           arg$VmT$2$1 = element0$3.key;
                                           arg$VmT$3$1 = element0$3.value;
                                           scrut = arg$VmT$2$ < arg$VmT$2$1;
                                           if (scrut === true) {
-                                            inlinedVal4 = kcfa4.LESS;
+                                            inlinedVal5 = kcfa4.LESS;
+                                            inlinedVal4 = inlinedVal5;
                                             break inlinedLbl1
                                           }
                                           scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                           if (scrut1 === true) {
-                                            inlinedVal4 = kcfa4.GREATER;
+                                            inlinedVal5 = kcfa4.GREATER;
+                                            inlinedVal4 = inlinedVal5;
                                             break inlinedLbl1
                                           }
                                           order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -12859,7 +9248,40 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     return incr(kcfa, a, kcfa.SetE, l)
   }
   static #setLinkAll(t) {
-    return link(kcfa, kcfa.SetE, t)
+    let kcfa2, t1, d, inlinedVal;
+    kcfa2 = kcfa;
+    t1 = kcfa.SetE;
+    d = t;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let arg$SetTWO$0$, arg$SetTWO$1$, arg$SetTWO$2$, arg$SetTWO$3$, arg$SetTWO$4$, arg$SetONE$0$, arg$SetONE$1$, arg$SetONE$2$, tmp, tmp1, tmp2;
+        if (d instanceof kcfa2.SetZERO.class) {
+          inlinedVal = t1;
+          break inlinedLbl
+        } else if (d instanceof kcfa2.SetONE.class) {
+          arg$SetONE$0$ = d.item;
+          arg$SetONE$1$ = d.tree;
+          arg$SetONE$2$ = d.digit;
+          tmp = kcfa2.SetT(kcfa2.SetB, arg$SetONE$1$, arg$SetONE$0$, t1);
+          t1 = tmp;
+          d = arg$SetONE$2$;
+          continue loopLabel
+        } else if (d instanceof kcfa2.SetTWO.class) {
+          arg$SetTWO$0$ = d.item1;
+          arg$SetTWO$1$ = d.tree1;
+          arg$SetTWO$2$ = d.item2;
+          arg$SetTWO$3$ = d.tree2;
+          arg$SetTWO$4$ = d.digit;
+          tmp1 = kcfa2.SetT(kcfa2.SetR, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+          tmp2 = kcfa2.SetT(kcfa2.SetB, tmp1, arg$SetTWO$0$, t1);
+          t1 = tmp2;
+          d = arg$SetTWO$4$;
+          continue loopLabel
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+    }
+    return inlinedVal
   }
   static #setUnion(set1, set2) {
     let arg$SET$1$, arg$SET$1$1, element1$, element0$, tmp, tmp1, tmp2;
@@ -12965,17 +9387,19 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                                         arg$VmT$2$ = element0$3.key;
                                         arg$VmT$3$ = element0$3.value;
                                         if (element0$4 instanceof kcfa4.VmT.class) {
-                                          let scrut, scrut1;
+                                          let inlinedVal5, scrut, scrut1;
                                           arg$VmT$2$1 = element0$4.key;
                                           arg$VmT$3$1 = element0$4.value;
                                           scrut = arg$VmT$2$ < arg$VmT$2$1;
                                           if (scrut === true) {
-                                            inlinedVal4 = kcfa4.LESS;
+                                            inlinedVal5 = kcfa4.LESS;
+                                            inlinedVal4 = inlinedVal5;
                                             break inlinedLbl1
                                           }
                                           scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                                           if (scrut1 === true) {
-                                            inlinedVal4 = kcfa4.GREATER;
+                                            inlinedVal5 = kcfa4.GREATER;
+                                            inlinedVal4 = inlinedVal5;
                                             break inlinedLbl1
                                           }
                                           order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -13087,7 +9511,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
         let arg$SET$1$;
         if (s instanceof kcfa.SET.class) {
           arg$SET$1$ = s.tree;
-          return foldf1(kcfa, f, arg$SET$1$, init)
+          return foldf(kcfa, f, arg$SET$1$, init)
         }
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
@@ -13120,13 +9544,44 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   static #storeMapFind(map, k) {
     let arg$SmMAP$1$;
     if (map instanceof kcfa.SmMAP.class) {
+      let kcfa2, k1, t, inlinedVal;
       arg$SmMAP$1$ = map.tree;
-      return find11(kcfa, k, arg$SmMAP$1$)
+      kcfa2 = kcfa;
+      k1 = k;
+      t = arg$SmMAP$1$;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let scrut, arg$SmT$1$, arg$SmT$2$, arg$SmT$3$, arg$SmT$4$;
+          if (t instanceof kcfa2.SmE.class) {
+            inlinedVal = kcfa2.None;
+            break inlinedLbl
+          } else if (t instanceof kcfa2.SmT.class) {
+            arg$SmT$1$ = t.left;
+            arg$SmT$2$ = t.key;
+            arg$SmT$3$ = t.value;
+            arg$SmT$4$ = t.right;
+            scrut = kcfa2.#bindCompare(k1, arg$SmT$2$);
+            if (scrut instanceof kcfa2.LESS.class) {
+              t = arg$SmT$1$;
+              continue loopLabel
+            } else if (scrut instanceof kcfa2.EQUAL.class) {
+              inlinedVal = kcfa2.Some(arg$SmT$3$);
+              break inlinedLbl
+            } else if (scrut instanceof kcfa2.GREATER.class) {
+              t = arg$SmT$4$;
+              continue loopLabel
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+      }
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #storeMapFoldli(f) {
-    return lambda$2(kcfa, f)
+    return lambda$1(kcfa, f)
   }
   static #storeMapNext(stack) {
     let arg$Cons$0$, arg$Cons$1$, arg$SmT$4$, tmp;
@@ -13176,7 +9631,43 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     return incr1(kcfa, ak, a, kcfa.SmE, l)
   }
   static #storeMapLinkAll(t) {
-    return link1(kcfa, kcfa.SmE, t)
+    let kcfa2, t1, d, inlinedVal;
+    kcfa2 = kcfa;
+    t1 = kcfa.SmE;
+    d = t;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let arg$SmTWO$0$, arg$SmTWO$1$, arg$SmTWO$2$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$5$, arg$SmTWO$6$, arg$SmONE$0$, arg$SmONE$1$, arg$SmONE$2$, arg$SmONE$3$, tmp, tmp1, tmp2;
+        if (d instanceof kcfa2.SmZERO.class) {
+          inlinedVal = t1;
+          break inlinedLbl
+        } else if (d instanceof kcfa2.SmONE.class) {
+          arg$SmONE$0$ = d.key;
+          arg$SmONE$1$ = d.value;
+          arg$SmONE$2$ = d.tree;
+          arg$SmONE$3$ = d.digit;
+          tmp = kcfa2.SmT(kcfa2.SmB, arg$SmONE$2$, arg$SmONE$0$, arg$SmONE$1$, t1);
+          t1 = tmp;
+          d = arg$SmONE$3$;
+          continue loopLabel
+        } else if (d instanceof kcfa2.SmTWO.class) {
+          arg$SmTWO$0$ = d.key1;
+          arg$SmTWO$1$ = d.value1;
+          arg$SmTWO$2$ = d.tree1;
+          arg$SmTWO$3$ = d.key2;
+          arg$SmTWO$4$ = d.value2;
+          arg$SmTWO$5$ = d.tree2;
+          arg$SmTWO$6$ = d.digit;
+          tmp1 = kcfa2.SmT(kcfa2.SmR, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+          tmp2 = kcfa2.SmT(kcfa2.SmB, tmp1, arg$SmTWO$0$, arg$SmTWO$1$, t1);
+          t1 = tmp2;
+          d = arg$SmTWO$6$;
+          continue loopLabel
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+    }
+    return inlinedVal
   }
   static #storeMapWrap(f) {
     return (map1, map2) => {
@@ -13410,17 +9901,19 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                           arg$VmT$2$ = element0$.key;
                           arg$VmT$3$ = element0$.value;
                           if (element0$1 instanceof kcfa3.VmT.class) {
-                            let scrut, scrut1;
+                            let inlinedVal3, scrut, scrut1;
                             arg$VmT$2$1 = element0$1.key;
                             arg$VmT$3$1 = element0$1.value;
                             scrut = arg$VmT$2$ < arg$VmT$2$1;
                             if (scrut === true) {
-                              inlinedVal2 = kcfa3.LESS;
+                              inlinedVal3 = kcfa3.LESS;
+                              inlinedVal2 = inlinedVal3;
                               break inlinedLbl
                             }
                             scrut1 = arg$VmT$2$1 < arg$VmT$2$;
                             if (scrut1 === true) {
-                              inlinedVal2 = kcfa3.GREATER;
+                              inlinedVal3 = kcfa3.GREATER;
+                              inlinedVal2 = inlinedVal3;
                               break inlinedLbl
                             }
                             order1 = runtime.safeCall(cmpRng1(arg$VmT$3$, arg$VmT$3$1));
@@ -13557,16 +10050,16 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
-  static #initState(call1) {
+  static #initState(call) {
     let tmp, tmp1;
     tmp = kcfa.#varMapEmpty();
     tmp1 = kcfa.#storeMapEmpty();
-    return kcfa.State(call1, tmp, tmp1, kcfa.Nil)
+    return kcfa.State(call, tmp, tmp1, kcfa.Nil)
   }
-  static #tick(call1, t) {
+  static #tick(call, t) {
     let arg$CALL$0$;
-    if (call1 instanceof kcfa.CALL.class) {
-      arg$CALL$0$ = call1.label;
+    if (call instanceof kcfa.CALL.class) {
+      arg$CALL$0$ = call.label;
       return kcfa.Cons(arg$CALL$0$, kcfa.Nil)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -13595,25 +10088,14 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
           inlinedVal = kcfa1.Cons(arg$CALL$0$, kcfa1.Nil);
           kcfa2 = kcfa1;
           if (arg$CALL$1$ instanceof kcfa2.VAR.class) {
-            let arg$Some$0$, inlinedVal2, arg$VmMAP$1$;
+            let scrut, scrut1, arg$Some$0$;
             arg$VAR$1$ = arg$CALL$1$.x;
-            if (arg$State$1$ instanceof kcfa2.VmMAP.class) {
-              arg$VmMAP$1$ = arg$State$1$.tree;
-              inlinedVal2 = find1(kcfa1, arg$VAR$1$, arg$VmMAP$1$);
-              if (inlinedVal2 instanceof kcfa2.Some.class) {
-                let inlinedVal3, arg$SmMAP$1$;
-                arg$Some$0$ = inlinedVal2.value;
-                if (arg$State$2$ instanceof kcfa2.SmMAP.class) {
-                  arg$SmMAP$1$ = arg$State$2$.tree;
-                  inlinedVal3 = find11(kcfa1, arg$Some$0$, arg$SmMAP$1$);
-                  if (inlinedVal3 instanceof kcfa2.Some.class) {
-                    inlinedVal1 = inlinedVal3.value;
-                  } else {
-                    throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                  }
-                } else {
-                  throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                }
+            scrut1 = kcfa1.#varMapFind(arg$State$1$, arg$VAR$1$);
+            if (scrut1 instanceof kcfa2.Some.class) {
+              arg$Some$0$ = scrut1.value;
+              scrut = kcfa1.#storeMapFind(arg$State$2$, arg$Some$0$);
+              if (scrut instanceof kcfa2.Some.class) {
+                inlinedVal1 = scrut.value;
               } else {
                 throw globalThis.Object.freeze(new globalThis.Error("match error"))
               }
@@ -13682,7 +10164,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   }
   static #monoValues(d) {
     let lambda$here;
-    lambda$here = lambda$7(kcfa);
+    lambda$here = lambda$3(kcfa);
     return kcfa.#setFoldl(lambda$here)(kcfa.Nil)(d)
   }
   static #monoStoreUpdate(mst, x, exp) {
@@ -13736,7 +10218,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   }
   static #monoStoreUpdate1(mst, x, exps) {
     let lambda$here;
-    lambda$here = lambda$8(kcfa, x);
+    lambda$here = lambda$4(kcfa, x);
     return kcfa.#listFoldl(lambda$here)(mst)(exps)
   }
   static #explore(seen, todo) {
@@ -13771,25 +10253,14 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                 inlinedVal2 = kcfa1.Cons(arg$CALL$0$, kcfa1.Nil);
                 kcfa2 = kcfa1;
                 if (arg$CALL$1$ instanceof kcfa2.VAR.class) {
-                  let arg$Some$0$, inlinedVal6, arg$VmMAP$1$;
+                  let scrut, scrut1, arg$Some$0$;
                   arg$VAR$1$ = arg$CALL$1$.x;
-                  if (arg$State$1$ instanceof kcfa2.VmMAP.class) {
-                    arg$VmMAP$1$ = arg$State$1$.tree;
-                    inlinedVal6 = find1(kcfa1, arg$VAR$1$, arg$VmMAP$1$);
-                    if (inlinedVal6 instanceof kcfa2.Some.class) {
-                      let inlinedVal7, arg$SmMAP$1$;
-                      arg$Some$0$ = inlinedVal6.value;
-                      if (arg$State$2$ instanceof kcfa2.SmMAP.class) {
-                        arg$SmMAP$1$ = arg$State$2$.tree;
-                        inlinedVal7 = find11(kcfa1, arg$Some$0$, arg$SmMAP$1$);
-                        if (inlinedVal7 instanceof kcfa2.Some.class) {
-                          inlinedVal5 = inlinedVal7.value;
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
-                      } else {
-                        throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                      }
+                  scrut1 = kcfa1.#varMapFind(arg$State$1$, arg$VAR$1$);
+                  if (scrut1 instanceof kcfa2.Some.class) {
+                    arg$Some$0$ = scrut1.value;
+                    scrut = kcfa1.#storeMapFind(arg$State$2$, arg$Some$0$);
+                    if (scrut instanceof kcfa2.Some.class) {
+                      inlinedVal5 = scrut.value;
                     } else {
                       throw globalThis.Object.freeze(new globalThis.Error("match error"))
                     }
@@ -13811,7 +10282,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                 init = kcfa1.Nil;
                 if (inlinedVal5 instanceof kcfa1.SET.class) {
                   arg$SET$1$ = inlinedVal5.tree;
-                  inlinedVal4 = foldf1(kcfa1, f2, arg$SET$1$, init);
+                  inlinedVal4 = foldf(kcfa1, f2, arg$SET$1$, init);
                   inlinedVal1 = inlinedVal4;
                 } else {
                   throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -13847,205 +10318,205 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     f = monovariantStore_lambda$$lambda$(kcfa);
     if (st instanceof kcfa2.SmMAP.class) {
       arg$SmMAP$1$ = st.tree;
-      return foldf2(kcfa1, f, arg$SmMAP$1$, eta$0$0)
+      return foldf1(kcfa1, f, arg$SmMAP$1$, eta$0$0)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #stdExample() {
-    let labelCount, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, n, tmp11, n1, n2, tmp12, n3, n4, tmp13, n5, n6, n7, tmp14, n8, n9, n10, tmp15, n11, n12, n13, n14, tmp16, tmp17, inlinedVal15, n15, tmp18, n16;
+    let labelCount, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, inlinedVal, inlinedVal1, inlinedVal2, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, tmp11, tmp12, inlinedVal15, tmp13, n, n1, n2, tmp14, n3, n4, tmp15, n5, n6, tmp16, n7, n8, n9, tmp17, n10, n11, n12, tmp18, n13, n14, n15, n16;
     labelCount = new kcfa.Ref.class(1);
     tmp = kcfa.Cons("k", kcfa.Nil);
     tmp1 = kcfa.Cons("x", tmp);
+    n16 = labelCount.value + 1;
+    labelCount.value = n16;
+    inlinedVal = kcfa.VAR(n16, "k");
+    n15 = labelCount.value + 1;
+    labelCount.value = n15;
+    inlinedVal1 = kcfa.VAR(n15, "x");
+    tmp2 = kcfa.Cons(inlinedVal1, kcfa.Nil);
     n14 = labelCount.value + 1;
     labelCount.value = n14;
-    inlinedVal = kcfa.VAR(n14, "k");
+    inlinedVal2 = kcfa.CALL(n14, inlinedVal, tmp2);
     n13 = labelCount.value + 1;
     labelCount.value = n13;
-    inlinedVal1 = kcfa.VAR(n13, "x");
-    tmp2 = kcfa.Cons(inlinedVal1, kcfa.Nil);
-    n12 = labelCount.value + 1;
-    labelCount.value = n12;
-    inlinedVal2 = kcfa.CALL(n12, inlinedVal, tmp2);
-    n11 = labelCount.value + 1;
-    labelCount.value = n11;
-    tmp15 = globalThis.Object.freeze([
-      n11,
+    tmp18 = globalThis.Object.freeze([
+      n13,
       tmp1,
       inlinedVal2
     ]);
-    inlinedVal3 = kcfa.LAMBDA(tmp15);
+    inlinedVal3 = kcfa.LAMBDA(tmp18);
+    n12 = labelCount.value + 1;
+    labelCount.value = n12;
+    inlinedVal4 = kcfa.VAR(n12, "id");
+    tmp3 = kcfa.Cons("z", kcfa.Nil);
+    n11 = labelCount.value + 1;
+    labelCount.value = n11;
+    inlinedVal5 = kcfa.RET(n11, "z");
     n10 = labelCount.value + 1;
     labelCount.value = n10;
-    inlinedVal4 = kcfa.VAR(n10, "id");
-    tmp3 = kcfa.Cons("z", kcfa.Nil);
-    n9 = labelCount.value + 1;
-    labelCount.value = n9;
-    inlinedVal5 = kcfa.RET(n9, "z");
-    n8 = labelCount.value + 1;
-    labelCount.value = n8;
-    tmp14 = globalThis.Object.freeze([
-      n8,
+    tmp17 = globalThis.Object.freeze([
+      n10,
       tmp3,
       inlinedVal5
     ]);
-    inlinedVal6 = kcfa.LAMBDA(tmp14);
+    inlinedVal6 = kcfa.LAMBDA(tmp17);
     tmp4 = kcfa.Cons("a", kcfa.Nil);
+    n9 = labelCount.value + 1;
+    labelCount.value = n9;
+    inlinedVal7 = kcfa.VAR(n9, "id");
+    tmp5 = kcfa.Cons("y", kcfa.Nil);
+    n8 = labelCount.value + 1;
+    labelCount.value = n8;
+    inlinedVal8 = kcfa.RET(n8, "y");
     n7 = labelCount.value + 1;
     labelCount.value = n7;
-    inlinedVal7 = kcfa.VAR(n7, "id");
-    tmp5 = kcfa.Cons("y", kcfa.Nil);
-    n6 = labelCount.value + 1;
-    labelCount.value = n6;
-    inlinedVal8 = kcfa.RET(n6, "y");
-    n5 = labelCount.value + 1;
-    labelCount.value = n5;
-    tmp13 = globalThis.Object.freeze([
-      n5,
+    tmp16 = globalThis.Object.freeze([
+      n7,
       tmp5,
       inlinedVal8
     ]);
-    inlinedVal9 = kcfa.LAMBDA(tmp13);
+    inlinedVal9 = kcfa.LAMBDA(tmp16);
     tmp6 = kcfa.Cons("b", kcfa.Nil);
-    n4 = labelCount.value + 1;
-    labelCount.value = n4;
-    inlinedVal10 = kcfa.RET(n4, "b");
-    n3 = labelCount.value + 1;
-    labelCount.value = n3;
-    tmp12 = globalThis.Object.freeze([
-      n3,
-      tmp6,
-      inlinedVal10
-    ]);
-    inlinedVal11 = kcfa.LAMBDA(tmp12);
-    tmp7 = kcfa.Cons(inlinedVal11, kcfa.Nil);
-    tmp8 = kcfa.Cons(inlinedVal9, tmp7);
-    n2 = labelCount.value + 1;
-    labelCount.value = n2;
-    inlinedVal12 = kcfa.CALL(n2, inlinedVal7, tmp8);
-    n1 = labelCount.value + 1;
-    labelCount.value = n1;
-    tmp11 = globalThis.Object.freeze([
-      n1,
-      tmp4,
-      inlinedVal12
-    ]);
-    inlinedVal13 = kcfa.LAMBDA(tmp11);
-    tmp9 = kcfa.Cons(inlinedVal13, kcfa.Nil);
-    tmp10 = kcfa.Cons(inlinedVal6, tmp9);
-    n = labelCount.value + 1;
-    labelCount.value = n;
-    inlinedVal14 = kcfa.CALL(n, inlinedVal4, tmp10);
-    tmp16 = kcfa.Cons("id", kcfa.Nil);
-    n16 = labelCount.value + 1;
-    labelCount.value = n16;
-    tmp18 = globalThis.Object.freeze([
-      n16,
-      tmp16,
-      inlinedVal14
-    ]);
-    inlinedVal15 = kcfa.LAMBDA(tmp18);
-    tmp17 = kcfa.Cons(inlinedVal3, kcfa.Nil);
-    n15 = labelCount.value + 1;
-    labelCount.value = n15;
-    return kcfa.CALL(n15, inlinedVal15, tmp17)
-  }
-  static #doit() {
-    let tmp, tmp1, inlinedVal, seen, todo, inlinedVal1, eta$0$0, inlinedVal2, f, inlinedVal3, labelCount, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, inlinedVal15, inlinedVal16, inlinedVal17, inlinedVal18, n, tmp13, n1, n2, tmp14, n3, n4, tmp15, n5, n6, n7, tmp16, n8, n9, n10, tmp17, n11, n12, n13, n14, tmp18, tmp19, inlinedVal19, n15, tmp20, n16, kcfa2, f1, arg$SmMAP$1$;
-    labelCount = new kcfa1.Ref.class(1);
-    tmp2 = kcfa1.Cons("k", kcfa1.Nil);
-    tmp3 = kcfa1.Cons("x", tmp2);
-    n14 = labelCount.value + 1;
-    labelCount.value = n14;
-    inlinedVal4 = kcfa1.VAR(n14, "k");
-    n13 = labelCount.value + 1;
-    labelCount.value = n13;
-    inlinedVal5 = kcfa1.VAR(n13, "x");
-    tmp4 = kcfa1.Cons(inlinedVal5, kcfa1.Nil);
-    n12 = labelCount.value + 1;
-    labelCount.value = n12;
-    inlinedVal6 = kcfa1.CALL(n12, inlinedVal4, tmp4);
-    n11 = labelCount.value + 1;
-    labelCount.value = n11;
-    tmp17 = globalThis.Object.freeze([
-      n11,
-      tmp3,
-      inlinedVal6
-    ]);
-    inlinedVal7 = kcfa1.LAMBDA(tmp17);
-    n10 = labelCount.value + 1;
-    labelCount.value = n10;
-    inlinedVal8 = kcfa1.VAR(undefined, "id");
-    tmp5 = kcfa1.Cons("z", kcfa1.Nil);
-    n9 = labelCount.value + 1;
-    labelCount.value = n9;
-    inlinedVal9 = kcfa1.RET(n9, "z");
-    n8 = labelCount.value + 1;
-    labelCount.value = n8;
-    tmp16 = globalThis.Object.freeze([
-      n8,
-      tmp5,
-      inlinedVal9
-    ]);
-    inlinedVal10 = kcfa1.LAMBDA(tmp16);
-    tmp6 = kcfa1.Cons("a", kcfa1.Nil);
-    n7 = labelCount.value + 1;
-    labelCount.value = n7;
-    inlinedVal11 = kcfa1.VAR(n7, "id");
-    tmp7 = kcfa1.Cons("y", kcfa1.Nil);
     n6 = labelCount.value + 1;
     labelCount.value = n6;
-    inlinedVal12 = kcfa1.RET(n6, "y");
+    inlinedVal10 = kcfa.RET(n6, "b");
     n5 = labelCount.value + 1;
     labelCount.value = n5;
     tmp15 = globalThis.Object.freeze([
       n5,
-      tmp7,
-      inlinedVal12
+      tmp6,
+      inlinedVal10
     ]);
-    inlinedVal13 = kcfa1.LAMBDA(tmp15);
-    tmp8 = kcfa1.Cons("b", kcfa1.Nil);
+    inlinedVal11 = kcfa.LAMBDA(tmp15);
+    tmp7 = kcfa.Cons(inlinedVal11, kcfa.Nil);
+    tmp8 = kcfa.Cons(inlinedVal9, tmp7);
     n4 = labelCount.value + 1;
     labelCount.value = n4;
-    inlinedVal14 = kcfa1.RET(n4, "b");
+    inlinedVal12 = kcfa.CALL(n4, inlinedVal7, tmp8);
     n3 = labelCount.value + 1;
     labelCount.value = n3;
     tmp14 = globalThis.Object.freeze([
       n3,
+      tmp4,
+      inlinedVal12
+    ]);
+    inlinedVal13 = kcfa.LAMBDA(tmp14);
+    tmp9 = kcfa.Cons(inlinedVal13, kcfa.Nil);
+    tmp10 = kcfa.Cons(inlinedVal6, tmp9);
+    n2 = labelCount.value + 1;
+    labelCount.value = n2;
+    inlinedVal14 = kcfa.CALL(n2, inlinedVal4, tmp10);
+    tmp11 = kcfa.Cons("id", kcfa.Nil);
+    n = labelCount.value + 1;
+    labelCount.value = n;
+    tmp13 = globalThis.Object.freeze([
+      n,
+      tmp11,
+      inlinedVal14
+    ]);
+    inlinedVal15 = kcfa.LAMBDA(tmp13);
+    tmp12 = kcfa.Cons(inlinedVal3, kcfa.Nil);
+    n1 = labelCount.value + 1;
+    labelCount.value = n1;
+    return kcfa.CALL(n1, inlinedVal15, tmp12)
+  }
+  static #doit() {
+    let tmp, tmp1, inlinedVal, seen, todo, inlinedVal1, eta$0$0, inlinedVal2, f, inlinedVal3, labelCount, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, inlinedVal15, inlinedVal16, inlinedVal17, inlinedVal18, tmp13, tmp14, inlinedVal19, tmp15, n, n1, n2, tmp16, n3, n4, tmp17, n5, n6, tmp18, n7, n8, n9, tmp19, n10, n11, n12, tmp20, n13, n14, n15, n16, kcfa2, f1, arg$SmMAP$1$;
+    labelCount = new kcfa1.Ref.class(1);
+    tmp2 = kcfa1.Cons("k", kcfa1.Nil);
+    tmp3 = kcfa1.Cons("x", tmp2);
+    n16 = labelCount.value + 1;
+    labelCount.value = n16;
+    inlinedVal4 = kcfa1.VAR(n16, "k");
+    n15 = labelCount.value + 1;
+    labelCount.value = n15;
+    inlinedVal5 = kcfa1.VAR(n15, "x");
+    tmp4 = kcfa1.Cons(inlinedVal5, kcfa1.Nil);
+    n14 = labelCount.value + 1;
+    labelCount.value = n14;
+    inlinedVal6 = kcfa1.CALL(n14, inlinedVal4, tmp4);
+    n13 = labelCount.value + 1;
+    labelCount.value = n13;
+    tmp20 = globalThis.Object.freeze([
+      n13,
+      tmp3,
+      inlinedVal6
+    ]);
+    inlinedVal7 = kcfa1.LAMBDA(tmp20);
+    n12 = labelCount.value + 1;
+    labelCount.value = n12;
+    inlinedVal8 = kcfa1.VAR(undefined, "id");
+    tmp5 = kcfa1.Cons("z", kcfa1.Nil);
+    n11 = labelCount.value + 1;
+    labelCount.value = n11;
+    inlinedVal9 = kcfa1.RET(n11, "z");
+    n10 = labelCount.value + 1;
+    labelCount.value = n10;
+    tmp19 = globalThis.Object.freeze([
+      n10,
+      tmp5,
+      inlinedVal9
+    ]);
+    inlinedVal10 = kcfa1.LAMBDA(tmp19);
+    tmp6 = kcfa1.Cons("a", kcfa1.Nil);
+    n9 = labelCount.value + 1;
+    labelCount.value = n9;
+    inlinedVal11 = kcfa1.VAR(n9, "id");
+    tmp7 = kcfa1.Cons("y", kcfa1.Nil);
+    n8 = labelCount.value + 1;
+    labelCount.value = n8;
+    inlinedVal12 = kcfa1.RET(n8, "y");
+    n7 = labelCount.value + 1;
+    labelCount.value = n7;
+    tmp18 = globalThis.Object.freeze([
+      n7,
+      tmp7,
+      inlinedVal12
+    ]);
+    inlinedVal13 = kcfa1.LAMBDA(tmp18);
+    tmp8 = kcfa1.Cons("b", kcfa1.Nil);
+    n6 = labelCount.value + 1;
+    labelCount.value = n6;
+    inlinedVal14 = kcfa1.RET(n6, "b");
+    n5 = labelCount.value + 1;
+    labelCount.value = n5;
+    tmp17 = globalThis.Object.freeze([
+      n5,
       tmp8,
       inlinedVal14
     ]);
-    inlinedVal15 = kcfa1.LAMBDA(tmp14);
+    inlinedVal15 = kcfa1.LAMBDA(tmp17);
     tmp9 = kcfa1.Cons(inlinedVal15, kcfa1.Nil);
     tmp10 = kcfa1.Cons(inlinedVal13, tmp9);
-    n2 = labelCount.value + 1;
-    labelCount.value = n2;
-    inlinedVal16 = kcfa1.CALL(n2, inlinedVal11, tmp10);
-    n1 = labelCount.value + 1;
-    labelCount.value = n1;
-    tmp13 = globalThis.Object.freeze([
-      n1,
+    n4 = labelCount.value + 1;
+    labelCount.value = n4;
+    inlinedVal16 = kcfa1.CALL(n4, inlinedVal11, tmp10);
+    n3 = labelCount.value + 1;
+    labelCount.value = n3;
+    tmp16 = globalThis.Object.freeze([
+      n3,
       tmp6,
       inlinedVal16
     ]);
-    inlinedVal17 = kcfa1.LAMBDA(tmp13);
+    inlinedVal17 = kcfa1.LAMBDA(tmp16);
     tmp11 = kcfa1.Cons(inlinedVal17, kcfa1.Nil);
     tmp12 = kcfa1.Cons(inlinedVal10, tmp11);
+    n2 = labelCount.value + 1;
+    labelCount.value = n2;
+    inlinedVal18 = kcfa1.CALL(n2, inlinedVal8, tmp12);
+    tmp13 = kcfa1.Cons("id", kcfa1.Nil);
     n = labelCount.value + 1;
     labelCount.value = n;
-    inlinedVal18 = kcfa1.CALL(n, inlinedVal8, tmp12);
-    tmp18 = kcfa1.Cons("id", kcfa1.Nil);
-    n16 = labelCount.value + 1;
-    labelCount.value = n16;
-    tmp20 = globalThis.Object.freeze([
-      n16,
-      tmp18,
+    tmp15 = globalThis.Object.freeze([
+      n,
+      tmp13,
       inlinedVal18
     ]);
-    inlinedVal19 = kcfa1.LAMBDA(tmp20);
-    tmp19 = kcfa1.Cons(inlinedVal7, kcfa1.Nil);
-    n15 = labelCount.value + 1;
-    labelCount.value = n15;
-    inlinedVal = kcfa1.CALL(n15, inlinedVal19, tmp19);
+    inlinedVal19 = kcfa1.LAMBDA(tmp15);
+    tmp14 = kcfa1.Cons(inlinedVal7, kcfa1.Nil);
+    n1 = labelCount.value + 1;
+    labelCount.value = n1;
+    inlinedVal = kcfa1.CALL(n1, inlinedVal19, tmp14);
     tmp = kcfa.#initState(inlinedVal);
     tmp1 = kcfa.Cons(tmp, kcfa.Nil);
     seen = kcfa.Nil;
@@ -14083,25 +10554,14 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                   inlinedVal22 = kcfa1.Cons(arg$CALL$0$, kcfa1.Nil);
                   kcfa3 = kcfa1;
                   if (arg$CALL$1$ instanceof kcfa3.VAR.class) {
-                    let arg$Some$0$, inlinedVal26, arg$VmMAP$1$;
+                    let scrut, scrut1, arg$Some$0$;
                     arg$VAR$1$ = arg$CALL$1$.x;
-                    if (arg$State$1$ instanceof kcfa3.VmMAP.class) {
-                      arg$VmMAP$1$ = arg$State$1$.tree;
-                      inlinedVal26 = find1(kcfa1, arg$VAR$1$, arg$VmMAP$1$);
-                      if (inlinedVal26 instanceof kcfa3.Some.class) {
-                        let inlinedVal27, arg$SmMAP$1$1;
-                        arg$Some$0$ = inlinedVal26.value;
-                        if (arg$State$2$ instanceof kcfa3.SmMAP.class) {
-                          arg$SmMAP$1$1 = arg$State$2$.tree;
-                          inlinedVal27 = find11(kcfa1, arg$Some$0$, arg$SmMAP$1$1);
-                          if (inlinedVal27 instanceof kcfa3.Some.class) {
-                            inlinedVal25 = inlinedVal27.value;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
+                    scrut1 = kcfa1.#varMapFind(arg$State$1$, arg$VAR$1$);
+                    if (scrut1 instanceof kcfa3.Some.class) {
+                      arg$Some$0$ = scrut1.value;
+                      scrut = kcfa1.#storeMapFind(arg$State$2$, arg$Some$0$);
+                      if (scrut instanceof kcfa3.Some.class) {
+                        inlinedVal25 = scrut.value;
                       } else {
                         throw globalThis.Object.freeze(new globalThis.Error("match error"))
                       }
@@ -14123,7 +10583,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                   init = kcfa1.Nil;
                   if (inlinedVal25 instanceof kcfa1.SET.class) {
                     arg$SET$1$ = inlinedVal25.tree;
-                    inlinedVal24 = foldf1(kcfa1, f4, arg$SET$1$, init);
+                    inlinedVal24 = foldf(kcfa1, f4, arg$SET$1$, init);
                     inlinedVal21 = inlinedVal24;
                   } else {
                     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -14154,108 +10614,108 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     f1 = doit_monovariantStore_lambda$$lambda$(kcfa1);
     if (inlinedVal3 instanceof kcfa2.SmMAP.class) {
       arg$SmMAP$1$ = inlinedVal3.tree;
-      return foldf2(kcfa1, f1, arg$SmMAP$1$, eta$0$0)
+      return foldf1(kcfa1, f1, arg$SmMAP$1$, eta$0$0)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static main() {
-    let lambdaLabel, lambda$here, tmp, inlinedVal, inlinedVal1, seen, todo, inlinedVal2, labelCount, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, inlinedVal15, inlinedVal16, inlinedVal17, n, tmp12, n1, n2, tmp13, n3, n4, tmp14, n5, n6, n7, tmp15, n8, n9, n10, tmp16, n11, n12, n13, n14, tmp17, tmp18, inlinedVal18, n15, tmp19, n16, inlinedVal19, f, inlinedVal20, eta$0$0, inlinedVal21, inlinedVal22, kcfa2, f1, inlinedVal23, arg$SmMAP$1$;
+    let lambdaLabel, lambda$here, tmp, inlinedVal, inlinedVal1, seen, todo, inlinedVal2, labelCount, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, inlinedVal3, inlinedVal4, inlinedVal5, inlinedVal6, inlinedVal7, inlinedVal8, inlinedVal9, inlinedVal10, inlinedVal11, inlinedVal12, inlinedVal13, inlinedVal14, inlinedVal15, inlinedVal16, inlinedVal17, tmp12, tmp13, inlinedVal18, tmp14, n, n1, n2, tmp15, n3, n4, tmp16, n5, n6, tmp17, n7, n8, n9, tmp18, n10, n11, n12, tmp19, n13, n14, n15, n16, inlinedVal19, f, inlinedVal20, eta$0$0, inlinedVal21, inlinedVal22, kcfa2, f1, inlinedVal23, arg$SmMAP$1$;
     lambdaLabel = main_lambda$$lambda$(kcfa);
     labelCount = new kcfa1.Ref.class(1);
     tmp1 = kcfa1.Cons("k", kcfa1.Nil);
     tmp2 = kcfa1.Cons("x", tmp1);
-    n14 = labelCount.value + 1;
-    labelCount.value = n14;
+    n16 = labelCount.value + 1;
+    labelCount.value = n16;
     inlinedVal3 = kcfa1.VAR(undefined, "k");
-    n13 = labelCount.value + 1;
-    labelCount.value = n13;
+    n15 = labelCount.value + 1;
+    labelCount.value = n15;
     inlinedVal4 = kcfa1.VAR(undefined, "x");
     tmp3 = kcfa1.Cons(inlinedVal4, kcfa1.Nil);
-    n12 = labelCount.value + 1;
-    labelCount.value = n12;
-    inlinedVal5 = kcfa1.CALL(n12, inlinedVal3, tmp3);
-    n11 = labelCount.value + 1;
-    labelCount.value = n11;
-    tmp16 = globalThis.Object.freeze([
-      n11,
+    n14 = labelCount.value + 1;
+    labelCount.value = n14;
+    inlinedVal5 = kcfa1.CALL(n14, inlinedVal3, tmp3);
+    n13 = labelCount.value + 1;
+    labelCount.value = n13;
+    tmp19 = globalThis.Object.freeze([
+      n13,
       tmp2,
       inlinedVal5
     ]);
-    inlinedVal6 = kcfa1.LAMBDA(tmp16);
-    n10 = labelCount.value + 1;
-    labelCount.value = n10;
+    inlinedVal6 = kcfa1.LAMBDA(tmp19);
+    n12 = labelCount.value + 1;
+    labelCount.value = n12;
     inlinedVal7 = kcfa1.VAR(undefined, "id");
     tmp4 = kcfa1.Cons("z", kcfa1.Nil);
-    n9 = labelCount.value + 1;
-    labelCount.value = n9;
-    inlinedVal8 = kcfa1.RET(n9, undefined);
-    n8 = labelCount.value + 1;
-    labelCount.value = n8;
-    tmp15 = globalThis.Object.freeze([
-      n8,
+    n11 = labelCount.value + 1;
+    labelCount.value = n11;
+    inlinedVal8 = kcfa1.RET(n11, undefined);
+    n10 = labelCount.value + 1;
+    labelCount.value = n10;
+    tmp18 = globalThis.Object.freeze([
+      n10,
       tmp4,
       inlinedVal8
     ]);
-    inlinedVal9 = kcfa1.LAMBDA(tmp15);
+    inlinedVal9 = kcfa1.LAMBDA(tmp18);
     tmp5 = kcfa1.Cons("a", kcfa1.Nil);
-    n7 = labelCount.value + 1;
-    labelCount.value = n7;
+    n9 = labelCount.value + 1;
+    labelCount.value = n9;
     inlinedVal10 = kcfa1.VAR(undefined, "id");
     tmp6 = kcfa1.Cons("y", kcfa1.Nil);
-    n6 = labelCount.value + 1;
-    labelCount.value = n6;
-    inlinedVal11 = kcfa1.RET(n6, undefined);
-    n5 = labelCount.value + 1;
-    labelCount.value = n5;
-    tmp14 = globalThis.Object.freeze([
-      n5,
+    n8 = labelCount.value + 1;
+    labelCount.value = n8;
+    inlinedVal11 = kcfa1.RET(n8, undefined);
+    n7 = labelCount.value + 1;
+    labelCount.value = n7;
+    tmp17 = globalThis.Object.freeze([
+      n7,
       tmp6,
       inlinedVal11
     ]);
-    inlinedVal12 = kcfa1.LAMBDA(tmp14);
+    inlinedVal12 = kcfa1.LAMBDA(tmp17);
     tmp7 = kcfa1.Cons("b", kcfa1.Nil);
-    n4 = labelCount.value + 1;
-    labelCount.value = n4;
-    inlinedVal13 = kcfa1.RET(n4, undefined);
-    n3 = labelCount.value + 1;
-    labelCount.value = n3;
-    tmp13 = globalThis.Object.freeze([
-      n3,
+    n6 = labelCount.value + 1;
+    labelCount.value = n6;
+    inlinedVal13 = kcfa1.RET(n6, undefined);
+    n5 = labelCount.value + 1;
+    labelCount.value = n5;
+    tmp16 = globalThis.Object.freeze([
+      n5,
       tmp7,
       inlinedVal13
     ]);
-    inlinedVal14 = kcfa1.LAMBDA(tmp13);
+    inlinedVal14 = kcfa1.LAMBDA(tmp16);
     tmp8 = kcfa1.Cons(inlinedVal14, kcfa1.Nil);
     tmp9 = kcfa1.Cons(inlinedVal12, tmp8);
-    n2 = labelCount.value + 1;
-    labelCount.value = n2;
-    inlinedVal15 = kcfa1.CALL(n2, inlinedVal10, tmp9);
-    n1 = labelCount.value + 1;
-    labelCount.value = n1;
-    tmp12 = globalThis.Object.freeze([
-      n1,
+    n4 = labelCount.value + 1;
+    labelCount.value = n4;
+    inlinedVal15 = kcfa1.CALL(n4, inlinedVal10, tmp9);
+    n3 = labelCount.value + 1;
+    labelCount.value = n3;
+    tmp15 = globalThis.Object.freeze([
+      n3,
       tmp5,
       inlinedVal15
     ]);
-    inlinedVal16 = kcfa1.LAMBDA(tmp12);
+    inlinedVal16 = kcfa1.LAMBDA(tmp15);
     tmp10 = kcfa1.Cons(inlinedVal16, kcfa1.Nil);
     tmp11 = kcfa1.Cons(inlinedVal9, tmp10);
+    n2 = labelCount.value + 1;
+    labelCount.value = n2;
+    inlinedVal17 = kcfa1.CALL(n2, inlinedVal7, tmp11);
+    tmp12 = kcfa1.Cons("id", kcfa1.Nil);
     n = labelCount.value + 1;
     labelCount.value = n;
-    inlinedVal17 = kcfa1.CALL(n, inlinedVal7, tmp11);
-    tmp17 = kcfa1.Cons("id", kcfa1.Nil);
-    n16 = labelCount.value + 1;
-    labelCount.value = n16;
-    tmp19 = globalThis.Object.freeze([
-      n16,
-      tmp17,
+    tmp14 = globalThis.Object.freeze([
+      n,
+      tmp12,
       inlinedVal17
     ]);
-    inlinedVal18 = kcfa1.LAMBDA(tmp19);
-    tmp18 = kcfa1.Cons(inlinedVal6, kcfa1.Nil);
-    n15 = labelCount.value + 1;
-    labelCount.value = n15;
-    inlinedVal = kcfa1.CALL(n15, inlinedVal18, tmp18);
+    inlinedVal18 = kcfa1.LAMBDA(tmp14);
+    tmp13 = kcfa1.Cons(inlinedVal6, kcfa1.Nil);
+    n1 = labelCount.value + 1;
+    labelCount.value = n1;
+    inlinedVal = kcfa1.CALL(n1, inlinedVal18, tmp13);
     inlinedVal21 = kcfa1.VmMAP(0, kcfa1.VmE);
     inlinedVal22 = kcfa1.SmMAP(0, kcfa1.SmE);
     inlinedVal1 = kcfa1.State(inlinedVal, inlinedVal21, inlinedVal22, kcfa1.Nil);
@@ -14295,25 +10755,14 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                   inlinedVal26 = kcfa1.Cons(arg$CALL$0$, kcfa1.Nil);
                   kcfa3 = kcfa1;
                   if (arg$CALL$1$ instanceof kcfa3.VAR.class) {
-                    let arg$Some$0$, inlinedVal30, arg$VmMAP$1$;
+                    let scrut, scrut1, arg$Some$0$;
                     arg$VAR$1$ = arg$CALL$1$.x;
-                    if (arg$State$1$ instanceof kcfa3.VmMAP.class) {
-                      arg$VmMAP$1$ = arg$State$1$.tree;
-                      inlinedVal30 = find1(kcfa1, arg$VAR$1$, arg$VmMAP$1$);
-                      if (inlinedVal30 instanceof kcfa3.Some.class) {
-                        let inlinedVal31, arg$SmMAP$1$1;
-                        arg$Some$0$ = inlinedVal30.value;
-                        if (arg$State$2$ instanceof kcfa3.SmMAP.class) {
-                          arg$SmMAP$1$1 = arg$State$2$.tree;
-                          inlinedVal31 = find11(kcfa1, arg$Some$0$, arg$SmMAP$1$1);
-                          if (inlinedVal31 instanceof kcfa3.Some.class) {
-                            inlinedVal29 = inlinedVal31.value;
-                          } else {
-                            throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                          }
-                        } else {
-                          throw globalThis.Object.freeze(new globalThis.Error("match error"))
-                        }
+                    scrut1 = kcfa1.#varMapFind(arg$State$1$, arg$VAR$1$);
+                    if (scrut1 instanceof kcfa3.Some.class) {
+                      arg$Some$0$ = scrut1.value;
+                      scrut = kcfa1.#storeMapFind(arg$State$2$, arg$Some$0$);
+                      if (scrut instanceof kcfa3.Some.class) {
+                        inlinedVal29 = scrut.value;
                       } else {
                         throw globalThis.Object.freeze(new globalThis.Error("match error"))
                       }
@@ -14335,7 +10784,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                   init = kcfa1.Nil;
                   if (inlinedVal29 instanceof kcfa1.SET.class) {
                     arg$SET$1$ = inlinedVal29.tree;
-                    inlinedVal28 = foldf1(kcfa1, f4, arg$SET$1$, init);
+                    inlinedVal28 = foldf(kcfa1, f4, arg$SET$1$, init);
                     inlinedVal25 = inlinedVal28;
                   } else {
                     throw globalThis.Object.freeze(new globalThis.Error("match error"))
@@ -14366,8 +10815,8 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     f1 = main_doit_monovariantStore_lambda$$lambda$(kcfa1);
     if (inlinedVal20 instanceof kcfa2.SmMAP.class) {
       arg$SmMAP$1$ = inlinedVal20.tree;
-      inlinedVal23 = foldf2(kcfa1, f1, arg$SmMAP$1$, eta$0$0);
-      lambda$here = lambda$11(kcfa, lambdaLabel);
+      inlinedVal23 = foldf1(kcfa1, f1, arg$SmMAP$1$, eta$0$0);
+      lambda$here = lambda$5(kcfa, lambdaLabel);
       return kcfa.#listMap(lambda$here)(inlinedVal23)
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
@@ -14375,61 +10824,25 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "kcfa"];
 });
-export { foldf as _$_modulePrivate_$_foldf };
 export { ins as _$_modulePrivate_$_ins };
-export { find1 as _$_modulePrivate_$_find1 };
-export { cmp as _$_modulePrivate_$_cmp };
-export { cmp1 as _$_modulePrivate_$_cmp1 };
 export { incr as _$_modulePrivate_$_incr };
-export { link as _$_modulePrivate_$_link };
-export { union1 as _$_modulePrivate_$_union1 };
 export { ins1 as _$_modulePrivate_$_ins1 };
-export { foldf1 as _$_modulePrivate_$_foldf1 };
+export { foldf as _$_modulePrivate_$_foldf };
 export { ins2 as _$_modulePrivate_$_ins2 };
-export { find11 as _$_modulePrivate_$_find11 };
-export { foldf2 as _$_modulePrivate_$_foldf2 };
-export { cmp2 as _$_modulePrivate_$_cmp2 };
+export { foldf1 as _$_modulePrivate_$_foldf1 };
 export { incr1 as _$_modulePrivate_$_incr1 };
-export { link1 as _$_modulePrivate_$_link1 };
-export { union as _$_modulePrivate_$_union };
 export { eval1 as _$_modulePrivate_$_eval };
-export { apply as _$_modulePrivate_$_apply };
-export { return_ as _$_modulePrivate_$_return_ };
-export { newLabel as _$_modulePrivate_$_newLabel };
-export { lambda as _$_modulePrivate_$_lambda };
-export { var_ as _$_modulePrivate_$_var_ };
-export { mkLet as _$_modulePrivate_$_mkLet };
-export { call as _$_modulePrivate_$_call };
 export { kcfa1 as _$_modulePrivate_$_kcfa };
+export { lambda as _$_modulePrivate_$_lambda };
 export { lambda1 as _$_modulePrivate_$_lambda1 };
 export { lambda2 as _$_modulePrivate_$_lambda2 };
-export { lambda3 as _$_modulePrivate_$_lambda3 };
-export { lambda4 as _$_modulePrivate_$_lambda4 };
-export { lambda5 as _$_modulePrivate_$_lambda5 };
-export { lambda6 as _$_modulePrivate_$_lambda6 };
-export { lambda7 as _$_modulePrivate_$_lambda7 };
-export { lambda8 as _$_modulePrivate_$_lambda8 };
-export { lambda9 as _$_modulePrivate_$_lambda9 };
-export { lambda10 as _$_modulePrivate_$_lambda10 };
-export { lambda11 as _$_modulePrivate_$_lambda11 };
-export { lambda12 as _$_modulePrivate_$_lambda12 };
-export { lambda13 as _$_modulePrivate_$_lambda13 };
 export { lambda$ as _$_modulePrivate_$_lambda$ };
 export { lambda$1 as _$_modulePrivate_$_lambda$1 };
 export { lambda$2 as _$_modulePrivate_$_lambda$2 };
+export { eval$ as _$_modulePrivate_$_eval$ };
 export { lambda$3 as _$_modulePrivate_$_lambda$3 };
 export { lambda$4 as _$_modulePrivate_$_lambda$4 };
-export { union$ as _$_modulePrivate_$_union$ };
 export { lambda$5 as _$_modulePrivate_$_lambda$5 };
-export { eval$ as _$_modulePrivate_$_eval$ };
-export { apply$ as _$_modulePrivate_$_apply$ };
-export { lambda$6 as _$_modulePrivate_$_lambda$6 };
-export { lambda$7 as _$_modulePrivate_$_lambda$7 };
-export { lambda$8 as _$_modulePrivate_$_lambda$8 };
-export { lambda$9 as _$_modulePrivate_$_lambda$9 };
-export { lambda$10 as _$_modulePrivate_$_lambda$10 };
-export { lambda$11 as _$_modulePrivate_$_lambda$11 };
-export { lambda$12 as _$_modulePrivate_$_lambda$12 };
 export { main_doit_summarize_lambda$_lambda_setUnion$setUnion as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion$setUnion };
 export { main_doit_summarize_lambda$_lambda$lambda as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda$lambda };
 export { main_doit_summarize_lambda$$lambda$ as _$_modulePrivate_$_main_doit_summarize_lambda$$lambda$ };
@@ -14473,19 +10886,6 @@ export { storeUpdate1_lambda$_setUnion$setUnion as _$_modulePrivate_$_storeUpdat
 export { storeUpdate1_lambda$$lambda$ as _$_modulePrivate_$_storeUpdate1_lambda$$lambda$ };
 export { storeUpdate_setUnion$setUnion as _$_modulePrivate_$_storeUpdate_setUnion$setUnion };
 export { storeCompare_setCompare$setCompare as _$_modulePrivate_$_storeCompare_setCompare$setCompare };
-export { lambda_setUnion$setUnion as _$_modulePrivate_$_lambda_setUnion$setUnion };
-export { lambda$_setUnion$setUnion as _$_modulePrivate_$_lambda$_setUnion$setUnion };
-export { apply_lambda$_setUnion$setUnion as _$_modulePrivate_$_apply_lambda$_setUnion$setUnion };
-export { apply_lambda$$lambda$ as _$_modulePrivate_$_apply_lambda$$lambda$ };
-export { apply$_apply_lambda$_setUnion$setUnion as _$_modulePrivate_$_apply$_apply_lambda$_setUnion$setUnion };
-export { apply$_apply_lambda$$lambda$ as _$_modulePrivate_$_apply$_apply_lambda$$lambda$ };
-export { apply$_apply$apply as _$_modulePrivate_$_apply$_apply$apply };
-export { lambda_stateSame_storeCompare_setCompare$setCompare as _$_modulePrivate_$_lambda_stateSame_storeCompare_setCompare$setCompare };
-export { lambda$_stateSame_storeCompare_setCompare$setCompare as _$_modulePrivate_$_lambda$_stateSame_storeCompare_setCompare$setCompare };
-export { lambda$_stateSame$stateSame as _$_modulePrivate_$_lambda$_stateSame$stateSame };
-export { lambda_setUnion$setUnion1 as _$_modulePrivate_$_lambda_setUnion$setUnion1 };
-export { lambda$_lambda_setUnion$setUnion as _$_modulePrivate_$_lambda$_lambda_setUnion$setUnion };
-export { lambda$_lambda$lambda as _$_modulePrivate_$_lambda$_lambda$lambda };
 export { main_doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp as _$_modulePrivate_$_main_doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp };
 export { main_doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate as _$_modulePrivate_$_main_doit_monovariantStore_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate };
 export { main_doit_monovariantStore_lambda$_lambda_lambda$$lambda$ as _$_modulePrivate_$_main_doit_monovariantStore_lambda$_lambda_lambda$$lambda$ };
@@ -14503,45 +10903,42 @@ export { monovariantStore_lambda$_lambda$lambda as _$_modulePrivate_$_monovarian
 export { monovariantStore_lambda$$lambda$ as _$_modulePrivate_$_monovariantStore_lambda$$lambda$ };
 export { lambda_lambda$_monoStoreUpdate_insertExp$insertExp as _$_modulePrivate_$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp };
 export { lambda_lambda$_monoStoreUpdate$monoStoreUpdate as _$_modulePrivate_$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate };
-export { lambda_lambda$$lambda$ as _$_modulePrivate_$_lambda_lambda$$lambda$ };
 export { lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp as _$_modulePrivate_$_lambda$_lambda_lambda$_monoStoreUpdate_insertExp$insertExp };
 export { lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate as _$_modulePrivate_$_lambda$_lambda_lambda$_monoStoreUpdate$monoStoreUpdate };
-export { lambda$_lambda_lambda$$lambda$ as _$_modulePrivate_$_lambda$_lambda_lambda$$lambda$ };
-export { lambda$_lambda$lambda1 as _$_modulePrivate_$_lambda$_lambda$lambda1 };
-export { doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr };
-export { doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 };
-export { doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 };
-export { doit_summarize_lambda$_lambda_setUnion_union1_incr$incr as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr };
-export { doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 };
+export { doit_summarize_lambda$_lambda_setUnion_ins_incr$incr as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr };
+export { doit_summarize_lambda$_lambda_setUnion_incr$incr as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_incr$incr };
+export { doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1 as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1 };
+export { doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2 as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2 };
+export { doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3 as _$_modulePrivate_$_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3 };
 export { doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr as _$_modulePrivate_$_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr };
 export { doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns as _$_modulePrivate_$_doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns };
 export { doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1 as _$_modulePrivate_$_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1 };
 export { doit_summarize_lambda$_lambda_union$_union_incr$incr as _$_modulePrivate_$_doit_summarize_lambda$_lambda_union$_union_incr$incr };
 export { doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2 as _$_modulePrivate_$_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2 };
-export { doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr };
-export { doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 };
-export { doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 };
-export { doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr };
-export { doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 };
+export { doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr };
+export { doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr };
+export { doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1 as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1 };
+export { doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2 as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2 };
+export { doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3 as _$_modulePrivate_$_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3 };
 export { doit_explore_absNext_atomEval_eval$_eval$eval as _$_modulePrivate_$_doit_explore_absNext_atomEval_eval$_eval$eval };
 export { doit_explore_absNext_atomEval_eval$$eval$ as _$_modulePrivate_$_doit_explore_absNext_atomEval_eval$$eval$ };
 export { main_doit_explore_absNext_atomEval_eval$_eval$eval as _$_modulePrivate_$_main_doit_explore_absNext_atomEval_eval$_eval$eval };
 export { main_doit_explore_absNext_atomEval_eval$$eval$ as _$_modulePrivate_$_main_doit_explore_absNext_atomEval_eval$$eval$ };
-export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr };
-export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr };
-export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 };
-export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 };
-export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 };
+export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr };
+export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1 as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr1 };
+export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2 as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr2 };
+export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_incr$incr };
+export { main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3 as _$_modulePrivate_$_main_doit_explore_absNext_apply$_apply_lambda$_setUnion_ins_incr$incr3 };
 export { main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr };
 export { main_doit_summarize_lambda$_lambda_union$_union_incr$incr as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_union$_union_incr$incr };
 export { main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1 as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1 };
 export { main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2 as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2 };
 export { main_doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_union$_union_storeMapIns$storeMapIns };
-export { main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr };
-export { main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr };
-export { main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 };
-export { main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 };
-export { main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 };
+export { main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr };
+export { main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1 as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr1 };
+export { main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2 as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr2 };
+export { main_doit_summarize_lambda$_lambda_setUnion_incr$incr as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_incr$incr };
+export { main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3 as _$_modulePrivate_$_main_doit_summarize_lambda$_lambda_setUnion_ins_incr$incr3 };
 export { main_lambda$_lambda$lambda as _$_modulePrivate_$_main_lambda$_lambda$lambda };
 export { main_lambda$$lambda$ as _$_modulePrivate_$_main_lambda$$lambda$ };
 export { summarize_lambda$_lambda_union$_union$union as _$_modulePrivate_$_summarize_lambda$_lambda_union$_union$union };
@@ -14554,14 +10951,4 @@ export { storeMapCollate_lambda$_lambda$lambda as _$_modulePrivate_$_storeMapCol
 export { storeMapCollate_lambda$$lambda$ as _$_modulePrivate_$_storeMapCollate_lambda$$lambda$ };
 export { varMapCollate_lambda$_lambda$lambda as _$_modulePrivate_$_varMapCollate_lambda$_lambda$lambda };
 export { varMapCollate_lambda$$lambda$ as _$_modulePrivate_$_varMapCollate_lambda$$lambda$ };
-export { lambda$_lambda$lambda2 as _$_modulePrivate_$_lambda$_lambda$lambda2 };
-export { lambda$_lambda$lambda3 as _$_modulePrivate_$_lambda$_lambda$lambda3 };
-export { union$_union$union as _$_modulePrivate_$_union$_union$union };
-export { lambda_union$_union$union as _$_modulePrivate_$_lambda_union$_union$union };
-export { lambda_union$$union$ as _$_modulePrivate_$_lambda_union$$union$ };
-export { lambda$_lambda_union$_union$union as _$_modulePrivate_$_lambda$_lambda_union$_union$union };
-export { lambda$_lambda_union$$union$ as _$_modulePrivate_$_lambda$_lambda_union$$union$ };
-export { mkLet$worker as _$_modulePrivate_$_mkLet$worker };
-export { call$worker as _$_modulePrivate_$_call$worker };
-export { lambda$worker as _$_modulePrivate_$_lambda$worker };
 export default kcfa1;

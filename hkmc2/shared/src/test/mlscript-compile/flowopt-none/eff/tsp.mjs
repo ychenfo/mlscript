@@ -2,10 +2,9 @@ const definitionMetadata = globalThis.Symbol.for("mlscript.definitionMetadata");
 const prettyPrint = globalThis.Symbol.for("mlscript.prettyPrint");
 import runtime from "./../../Runtime.mjs";
 import Predef from "./../../Predef.mjs";
-const link$accessorSymbol = globalThis.Symbol("link");
 const sameNd$accessorSymbol = globalThis.Symbol("sameNd");
 const distance$accessorSymbol = globalThis.Symbol("distance");
-let mkTree, mkTree1, uniform, median, build, drand48, rev, findMinDist, loop, findMin, choose, locateCycle, length, dist, cycle, tsp1, lambda, lambda$, build_mkTree_mkTree;
+let median, locateCycle, tsp1, lambda, lambda$, build_mkTree_mkTree;
 build_mkTree_mkTree = function build_mkTree_mkTree(id, param0, param1, param2, param3, param4, param5, param6, param7) {
   loopLabel: while (true) {
     switch (id) {
@@ -84,121 +83,48 @@ build_mkTree_mkTree = function build_mkTree_mkTree(id, param0, param1, param2, p
     }
   }
 };
-cycle = function cycle(tsp2, next, t) {
-  let arg$ND$6$;
-  if (t instanceof tsp2.ND.class) {
-    arg$ND$6$ = t.next;
-    return next === arg$ND$6$
-  }
-  return false;
-};
-dist = function dist(tsp2, ax, ay, bx, by) {
-  let dx, dy, tmp, tmp1, tmp2;
-  dx = ax - bx;
-  dy = ay - by;
-  tmp = dx * dx;
-  tmp1 = dy * dy;
-  tmp2 = tmp + tmp1;
-  return runtime.safeCall(globalThis.Math.sqrt(tmp2))
-};
-length = function length(tsp2, x, y, next, t, px, py, n, len) {
-  loopLabel: while (true) {
-    let arg$ND$2$, arg$ND$3$, arg$ND$6$, tmp, tmp1, tmp2, tmp3;
-    if (t instanceof tsp2.NULL.class) {
-      let dx, dy, tmp4, tmp5, tmp6, inlinedVal;
-      dx = px - x;
-      dy = py - y;
-      tmp4 = dx * dx;
-      tmp5 = dy * dy;
-      tmp6 = tmp4 + tmp5;
-      inlinedVal = runtime.safeCall(globalThis.Math.sqrt(tmp6));
-      tmp = len + inlinedVal;
-      return globalThis.Object.freeze([
-        n,
-        tmp
-      ])
-    } else if (t instanceof tsp2.ND.class) {
-      let tsp3, inlinedVal, arg$ND$6$1;
-      arg$ND$2$ = t.x;
-      arg$ND$3$ = t.y;
-      arg$ND$6$ = t.next;
-      tsp3 = tsp2;
-      if (t instanceof tsp3.ND.class) {
-        arg$ND$6$1 = t.next;
-        inlinedVal = next === arg$ND$6$1;
-      } else {
-        inlinedVal = false;
-      }
-      if (inlinedVal === true) {
-        let dx, dy, tmp4, tmp5, tmp6, inlinedVal1;
-        dx = px - arg$ND$2$;
-        dy = py - arg$ND$3$;
-        tmp4 = dx * dx;
-        tmp5 = dy * dy;
-        tmp6 = tmp4 + tmp5;
-        inlinedVal1 = runtime.safeCall(globalThis.Math.sqrt(tmp6));
-        tmp1 = len + inlinedVal1;
-        return globalThis.Object.freeze([
-          n,
-          tmp1
-        ])
-      }
-      {
-        let dx, dy, tmp4, tmp5, tmp6, inlinedVal1;
-        tmp2 = n + 1;
-        dx = px - arg$ND$2$;
-        dy = py - arg$ND$3$;
-        tmp4 = dx * dx;
-        tmp5 = dy * dy;
-        tmp6 = tmp4 + tmp5;
-        inlinedVal1 = runtime.safeCall(globalThis.Math.sqrt(tmp6));
-        tmp3 = len + inlinedVal1;
-        t = arg$ND$6$.value;
-        px = arg$ND$2$;
-        py = arg$ND$3$;
-        n = tmp2;
-        len = tmp3;
-        continue loopLabel;
-      }
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-findMin = function findMin(tsp2, t, start, min, minDist, tmp) {
-  loopLabel: while (true) {
-    let scrut, test, scrut1, arg$ND$6$;
-    if (tmp instanceof tsp2.ND.class) {
-      arg$ND$6$ = tmp.next;
-      scrut = tsp2[sameNd$accessorSymbol](start, tmp);
-      if (scrut === true) {
-        return globalThis.Object.freeze([
-          min,
-          minDist
-        ])
-      }
-      test = tsp2[distance$accessorSymbol](t, tmp);
-      scrut1 = test < minDist;
-      if (scrut1 === true) {
-        min = tmp;
-        minDist = test;
-        tmp = arg$ND$6$.value;
-        continue loopLabel
-      }
-      tmp = arg$ND$6$.value;
-      continue loopLabel;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
 locateCycle = function locateCycle(tsp2, t, start) {
-  let scrut, prev, next, minToNext, minToPrev, tToNext, tToPrev, scrut1, arg$ND$6$, element1$, element0$, arg$ND$5$, arg$ND$6$1, tmp, tmp1, tmp2;
+  let prev, next, minToNext, minToPrev, tToNext, tToPrev, scrut, arg$ND$6$, element1$, element0$, arg$ND$5$, arg$ND$6$1, tmp, tmp1, tmp2;
   if (start instanceof tsp2.ND.class) {
+    let tsp3, t1, start1, min, minDist, tmp3, inlinedVal;
     arg$ND$6$ = start.next;
     tmp = tsp2[distance$accessorSymbol](t, start);
-    scrut = findMin(tsp2, t, start, start, tmp, arg$ND$6$.value);
-    if (runtime.Tuple.isArrayLike(scrut) && scrut.length === 2) {
-      element0$ = runtime.Tuple.get(scrut, 0);
-      element1$ = runtime.Tuple.get(scrut, 1);
+    tsp3 = tsp2;
+    t1 = t;
+    start1 = start;
+    min = start;
+    minDist = tmp;
+    tmp3 = arg$ND$6$.value;
+    inlinedLbl: {
+      loopLabel: while (true) {
+        let scrut1, test, scrut2, arg$ND$6$2;
+        if (tmp3 instanceof tsp3.ND.class) {
+          arg$ND$6$2 = tmp3.next;
+          scrut1 = tsp3[sameNd$accessorSymbol](start1, tmp3);
+          if (scrut1 === true) {
+            inlinedVal = globalThis.Object.freeze([
+              min,
+              minDist
+            ]);
+            break inlinedLbl
+          }
+          test = tsp3[distance$accessorSymbol](t1, tmp3);
+          scrut2 = test < minDist;
+          if (scrut2 === true) {
+            min = tmp3;
+            minDist = test;
+            tmp3 = arg$ND$6$2.value;
+            continue loopLabel
+          }
+          tmp3 = arg$ND$6$2.value;
+          continue loopLabel;
+        }
+        throw globalThis.Object.freeze(new globalThis.Error("match error"));
+      }
+    }
+    if (runtime.Tuple.isArrayLike(inlinedVal) && inlinedVal.length === 2) {
+      element0$ = runtime.Tuple.get(inlinedVal, 0);
+      element1$ = runtime.Tuple.get(inlinedVal, 1);
       if (element0$ instanceof tsp2.ND.class) {
         arg$ND$5$ = element0$.prev;
         arg$ND$6$1 = element0$.next;
@@ -210,8 +136,8 @@ locateCycle = function locateCycle(tsp2, t, start) {
         tToPrev = tsp2[distance$accessorSymbol](t, prev);
         tmp1 = tToPrev - minToPrev;
         tmp2 = tToNext - minToNext;
-        scrut1 = tmp1 < tmp2;
-        if (scrut1 === true) {
+        scrut = tmp1 < tmp2;
+        if (scrut === true) {
           return globalThis.Object.freeze([
             prev,
             tToPrev,
@@ -231,116 +157,6 @@ locateCycle = function locateCycle(tsp2, t, start) {
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
-};
-choose = function choose(testChoice, test, choice, minDist) {
-  let scrut;
-  scrut = test < minDist;
-  if (scrut === true) {
-    return globalThis.Object.freeze([
-      testChoice,
-      test
-    ])
-  }
-  return globalThis.Object.freeze([
-    choice,
-    minDist
-  ]);
-};
-findMinDist = function findMinDist(tsp2, cycle1, t, min, minDist, tmp) {
-  loopLabel: while (true) {
-    let scrut, test, scrut1, arg$ND$6$;
-    if (tmp instanceof tsp2.ND.class) {
-      arg$ND$6$ = tmp.next;
-      scrut = tsp2[sameNd$accessorSymbol](cycle1, tmp);
-      if (scrut === true) {
-        return min
-      }
-      test = tsp2[distance$accessorSymbol](t, tmp);
-      scrut1 = test < minDist;
-      if (scrut1 === true) {
-        min = tmp;
-        minDist = test;
-        tmp = arg$ND$6$.value;
-        continue loopLabel
-      }
-      tmp = arg$ND$6$.value;
-      continue loopLabel;
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-loop = function loop(tsp2, cycle1, cycle_next, t) {
-  loopLabel: while (true) {
-    let doNext, min, min_prev, min_next, minToNext, minToPrev, tToNext, tToPrev, scrut, arg$ND$6$, tmp, arg$ND$5$, arg$ND$6$1, tmp1, tmp2;
-    if (t instanceof tsp2.NULL.class) {
-      return runtime.Unit
-    } else if (t instanceof tsp2.ND.class) {
-      arg$ND$6$ = t.next;
-      doNext = arg$ND$6$.value;
-      tmp = tsp2[distance$accessorSymbol](t, cycle1);
-      min = findMinDist(tsp2, cycle1, t, cycle1, tmp, cycle_next.value);
-      if (min instanceof tsp2.ND.class) {
-        arg$ND$5$ = min.prev;
-        arg$ND$6$1 = min.next;
-        min_prev = arg$ND$5$.value;
-        min_next = arg$ND$6$1.value;
-        minToNext = tsp2[distance$accessorSymbol](min, min_next);
-        minToPrev = tsp2[distance$accessorSymbol](min, min_prev);
-        tToNext = tsp2[distance$accessorSymbol](t, min_next);
-        tToPrev = tsp2[distance$accessorSymbol](t, min_prev);
-        tmp1 = tToPrev - minToPrev;
-        tmp2 = tToNext - minToNext;
-        scrut = tmp1 < tmp2;
-        if (scrut === true) {
-          tsp2[link$accessorSymbol](min_prev, t);
-          tsp2[link$accessorSymbol](t, min);
-          t = doNext;
-          continue loopLabel
-        }
-        tsp2[link$accessorSymbol](min, t);
-        tsp2[link$accessorSymbol](t, min_next);
-        t = doNext;
-        continue loopLabel;
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-rev = function rev(tsp2, back, tmp) {
-  loopLabel: while (true) {
-    let tmp1, arg$ND$6$;
-    if (tmp instanceof tsp2.NULL.class) {
-      return runtime.Unit
-    } else if (tmp instanceof tsp2.ND.class) {
-      let receiver, arg$ND$5$;
-      arg$ND$6$ = tmp.next;
-      tmp1 = arg$ND$6$.value;
-      arg$ND$6$.value = back;
-      receiver = tsp2;
-      if (back instanceof receiver.ND.class) {
-        arg$ND$5$ = back.prev;
-        arg$ND$5$.value = tmp;
-        back = tmp;
-        tmp = tmp1;
-        continue loopLabel
-      }
-      throw globalThis.Object.freeze(new globalThis.Error("match error"));
-    }
-    throw globalThis.Object.freeze(new globalThis.Error("match error"));
-  }
-};
-mkTree = function mkTree(tsp2, rand, n, min_x, max_x, min, max) {
-  return build_mkTree_mkTree(1, tsp2, rand, n, min_x, max_x, min, max, undefined)
-};
-mkTree1 = function mkTree(tsp2, rand, n, min_y, max_y, min, max) {
-  return build_mkTree_mkTree(2, tsp2, rand, n, min_y, max_y, min, max, undefined)
-};
-drand48 = function drand48(tsp2, rand) {
-  let tmp, scale;
-  tmp = runtime.safeCall(rand());
-  scale = 1.0 / 2147483647.0;
-  return scale * tmp
 };
 median = function median(tsp2, rand, min, max, n) {
   let scrut, tmp, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15, tmp16, tmp17, inlinedVal, scale;
@@ -375,18 +191,6 @@ median = function median(tsp2, rand, min, max, n) {
   tmp16 = tmp15 / 2.0;
   return min + tmp16
 };
-uniform = function uniform(tsp2, rand, min, max) {
-  let tmp, tmp1, tmp2, inlinedVal, scale;
-  tmp2 = runtime.safeCall(rand());
-  scale = 1.0 / 2147483647.0;
-  inlinedVal = scale * tmp2;
-  tmp = max - min;
-  tmp1 = inlinedVal * tmp;
-  return min + tmp1
-};
-build = function build(tsp2, rand, n, dir, min_x, min_y, max_x, max_y) {
-  return build_mkTree_mkTree(0, tsp2, rand, n, dir, min_x, min_y, max_x, max_y)
-};
 lambda$ = (undefined, function (tsp2, seedRef) {
   return () => {
     return lambda(tsp2, seedRef)
@@ -417,7 +221,6 @@ lambda = (undefined, function (tsp2, seedRef) {
   static {
     tsp1 = this
   }
-  static get [link$accessorSymbol]() { return tsp.#link; }
   static get [sameNd$accessorSymbol]() { return tsp.#sameNd; }
   static get [distance$accessorSymbol]() { return tsp.#distance; }
   static {
@@ -673,28 +476,128 @@ lambda = (undefined, function (tsp2, seedRef) {
     if (t instanceof tsp.NULL.class) {
       return runtime.Unit
     } else if (t instanceof tsp.ND.class) {
+      let tsp2, back, tmp, inlinedVal;
       arg$ND$5$ = t.prev;
       arg$ND$6$ = t.next;
       tsp.#setNext(arg$ND$5$.value, tsp.NULL);
       arg$ND$5$.value = tsp.NULL;
-      return rev(tsp, t, arg$ND$6$.value)
+      tsp2 = tsp;
+      back = t;
+      tmp = arg$ND$6$.value;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let tmp1, arg$ND$6$1;
+          if (tmp instanceof tsp2.NULL.class) {
+            inlinedVal = runtime.Unit;
+            break inlinedLbl
+          } else if (tmp instanceof tsp2.ND.class) {
+            let receiver, arg$ND$5$1;
+            arg$ND$6$1 = tmp.next;
+            tmp1 = arg$ND$6$1.value;
+            arg$ND$6$1.value = back;
+            receiver = tsp2;
+            if (back instanceof receiver.ND.class) {
+              arg$ND$5$1 = back.prev;
+              arg$ND$5$1.value = tmp;
+              back = tmp;
+              tmp = tmp1;
+              continue loopLabel
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+      }
+      return inlinedVal
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
   static #conquer(t) {
-    let cycle1, t1, arg$ND$5$, arg$ND$6$;
+    let cycle, t1, arg$ND$5$, arg$ND$6$;
     if (t instanceof tsp.NULL.class) {
       return tsp.NULL
     }
-    cycle1 = tsp.#makeList(t);
-    if (cycle1 instanceof tsp.ND.class) {
-      arg$ND$5$ = cycle1.prev;
-      arg$ND$6$ = cycle1.next;
+    cycle = tsp.#makeList(t);
+    if (cycle instanceof tsp.ND.class) {
+      let tsp2, cycle1, cycle_next, t2;
+      arg$ND$5$ = cycle.prev;
+      arg$ND$6$ = cycle.next;
       t1 = arg$ND$6$.value;
-      arg$ND$6$.value = cycle1;
-      arg$ND$5$.value = cycle1;
-      loop(tsp, cycle1, arg$ND$6$, t1);
-      return cycle1
+      arg$ND$6$.value = cycle;
+      arg$ND$5$.value = cycle;
+      tsp2 = tsp;
+      cycle1 = cycle;
+      cycle_next = arg$ND$6$;
+      t2 = t1;
+      inlinedLbl: {
+        loopLabel: while (true) {
+          let doNext, min_prev, min_next, minToNext, minToPrev, tToNext, tToPrev, scrut, arg$ND$6$1, tmp, arg$ND$5$1, arg$ND$6$2, tmp1, tmp2;
+          if (t2 instanceof tsp2.NULL.class) {
+            break inlinedLbl
+          } else if (t2 instanceof tsp2.ND.class) {
+            let tsp3, cycle2, t3, min, minDist, tmp3, inlinedVal;
+            arg$ND$6$1 = t2.next;
+            doNext = arg$ND$6$1.value;
+            tmp = tsp2.#distance(t2, cycle1);
+            tsp3 = tsp2;
+            cycle2 = cycle1;
+            t3 = t2;
+            min = cycle1;
+            minDist = tmp;
+            tmp3 = cycle_next.value;
+            inlinedLbl1: {
+              loopLabel1: while (true) {
+                let scrut1, test, scrut2, arg$ND$6$3;
+                if (tmp3 instanceof tsp3.ND.class) {
+                  arg$ND$6$3 = tmp3.next;
+                  scrut1 = tsp3.#sameNd(cycle2, tmp3);
+                  if (scrut1 === true) {
+                    inlinedVal = min;
+                    break inlinedLbl1
+                  }
+                  test = tsp3.#distance(t3, tmp3);
+                  scrut2 = test < minDist;
+                  if (scrut2 === true) {
+                    min = tmp3;
+                    minDist = test;
+                    tmp3 = arg$ND$6$3.value;
+                    continue loopLabel1
+                  }
+                  tmp3 = arg$ND$6$3.value;
+                  continue loopLabel1;
+                }
+                throw globalThis.Object.freeze(new globalThis.Error("match error"));
+              }
+            }
+            if (inlinedVal instanceof tsp2.ND.class) {
+              arg$ND$5$1 = inlinedVal.prev;
+              arg$ND$6$2 = inlinedVal.next;
+              min_prev = arg$ND$5$1.value;
+              min_next = arg$ND$6$2.value;
+              minToNext = tsp2.#distance(inlinedVal, min_next);
+              minToPrev = tsp2.#distance(inlinedVal, min_prev);
+              tToNext = tsp2.#distance(t2, min_next);
+              tToPrev = tsp2.#distance(t2, min_prev);
+              tmp1 = tToPrev - minToPrev;
+              tmp2 = tToNext - minToNext;
+              scrut = tmp1 < tmp2;
+              if (scrut === true) {
+                tsp2.#link(min_prev, t2);
+                tsp2.#link(t2, inlinedVal);
+                t2 = doNext;
+                continue loopLabel
+              }
+              tsp2.#link(inlinedVal, t2);
+              tsp2.#link(t2, min_next);
+              t2 = doNext;
+              continue loopLabel;
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+          throw globalThis.Object.freeze(new globalThis.Error("match error"));
+        }
+      }
+      return cycle
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -852,15 +755,93 @@ lambda = (undefined, function (tsp2, seedRef) {
       if (t instanceof tsp2.ND.class) {
         arg$ND$6$1 = t.next;
         inlinedVal = arg$ND$6$ === arg$ND$6$1;
-        if (inlinedVal === true) {
-          return globalThis.Object.freeze([
-            1,
-            0.0
-          ])
-        }
-        return length(tsp, arg$ND$2$, arg$ND$3$, arg$ND$6$, arg$ND$6$.value, arg$ND$2$, arg$ND$3$, 1, 0.0);
+      } else {
+        inlinedVal = false;
       }
-      return length(tsp, arg$ND$2$, arg$ND$3$, arg$ND$6$, arg$ND$6$.value, arg$ND$2$, arg$ND$3$, 1, 0.0);
+      if (inlinedVal === true) {
+        return globalThis.Object.freeze([
+          1,
+          0.0
+        ])
+      }
+      {
+        let tsp3, x, y, next, t1, px, py, n, len, inlinedVal1;
+        tsp3 = tsp;
+        x = arg$ND$2$;
+        y = arg$ND$3$;
+        next = arg$ND$6$;
+        t1 = arg$ND$6$.value;
+        px = arg$ND$2$;
+        py = arg$ND$3$;
+        n = 1;
+        len = 0.0;
+        inlinedLbl: {
+          loopLabel: while (true) {
+            let arg$ND$2$1, arg$ND$3$1, arg$ND$6$2, tmp, tmp1, tmp2, tmp3;
+            if (t1 instanceof tsp3.NULL.class) {
+              let dx, dy, tmp4, tmp5, tmp6, inlinedVal2;
+              dx = px - x;
+              dy = py - y;
+              tmp4 = dx * dx;
+              tmp5 = dy * dy;
+              tmp6 = tmp4 + tmp5;
+              inlinedVal2 = runtime.safeCall(globalThis.Math.sqrt(tmp6));
+              tmp = len + inlinedVal2;
+              inlinedVal1 = globalThis.Object.freeze([
+                n,
+                tmp
+              ]);
+              break inlinedLbl
+            } else if (t1 instanceof tsp3.ND.class) {
+              let tsp4, inlinedVal2, arg$ND$6$3;
+              arg$ND$2$1 = t1.x;
+              arg$ND$3$1 = t1.y;
+              arg$ND$6$2 = t1.next;
+              tsp4 = tsp3;
+              if (t1 instanceof tsp4.ND.class) {
+                arg$ND$6$3 = t1.next;
+                inlinedVal2 = next === arg$ND$6$3;
+              } else {
+                inlinedVal2 = false;
+              }
+              if (inlinedVal2 === true) {
+                let dx, dy, tmp4, tmp5, tmp6, inlinedVal3;
+                dx = px - arg$ND$2$1;
+                dy = py - arg$ND$3$1;
+                tmp4 = dx * dx;
+                tmp5 = dy * dy;
+                tmp6 = tmp4 + tmp5;
+                inlinedVal3 = runtime.safeCall(globalThis.Math.sqrt(tmp6));
+                tmp1 = len + inlinedVal3;
+                inlinedVal1 = globalThis.Object.freeze([
+                  n,
+                  tmp1
+                ]);
+                break inlinedLbl
+              }
+              {
+                let dx, dy, tmp4, tmp5, tmp6, inlinedVal3;
+                tmp2 = n + 1;
+                dx = px - arg$ND$2$1;
+                dy = py - arg$ND$3$1;
+                tmp4 = dx * dx;
+                tmp5 = dy * dy;
+                tmp6 = tmp4 + tmp5;
+                inlinedVal3 = runtime.safeCall(globalThis.Math.sqrt(tmp6));
+                tmp3 = len + inlinedVal3;
+                t1 = arg$ND$6$2.value;
+                px = arg$ND$2$1;
+                py = arg$ND$3$1;
+                n = tmp2;
+                len = tmp3;
+                continue loopLabel;
+              }
+            }
+            throw globalThis.Object.freeze(new globalThis.Error("match error"));
+          }
+        }
+        return inlinedVal1;
+      }
     }
     throw globalThis.Object.freeze(new globalThis.Error("match error"));
   }
@@ -872,21 +853,8 @@ lambda = (undefined, function (tsp2, seedRef) {
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "tsp"];
 });
-export { mkTree as _$_modulePrivate_$_mkTree };
-export { mkTree1 as _$_modulePrivate_$_mkTree1 };
-export { uniform as _$_modulePrivate_$_uniform };
 export { median as _$_modulePrivate_$_median };
-export { build as _$_modulePrivate_$_build };
-export { drand48 as _$_modulePrivate_$_drand48 };
-export { rev as _$_modulePrivate_$_rev };
-export { findMinDist as _$_modulePrivate_$_findMinDist };
-export { loop as _$_modulePrivate_$_loop };
-export { findMin as _$_modulePrivate_$_findMin };
-export { choose as _$_modulePrivate_$_choose };
 export { locateCycle as _$_modulePrivate_$_locateCycle };
-export { length as _$_modulePrivate_$_length };
-export { dist as _$_modulePrivate_$_dist };
-export { cycle as _$_modulePrivate_$_cycle };
 export { tsp1 as _$_modulePrivate_$_tsp };
 export { lambda as _$_modulePrivate_$_lambda };
 export { lambda$ as _$_modulePrivate_$_lambda$ };

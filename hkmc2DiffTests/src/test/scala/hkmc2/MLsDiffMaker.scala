@@ -182,6 +182,7 @@ abstract class MLsDiffMaker extends DiffMaker:
       noFreeze = noFreeze.isSet,
       noModuleCheck = noModuleCheck.isSet,
       aggressive = aggressive.isSet && noAggressive.isUnset,
+      preservePrivateAbi = true,
       debug = Config.Debug.default,
       optimizer = Optimizer(
         deforest = Opt.when(deforest.isSet):
