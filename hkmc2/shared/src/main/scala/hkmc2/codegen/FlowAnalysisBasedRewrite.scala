@@ -232,16 +232,23 @@ class FlowAnalysisBasedRewrite(
       case ctorSite@CtorProducer(_, args, _) if analyzedId(ctorSite).exists(deadFieldElimSolver.deadFieldArgs.contains) =>
         val dead = deadFieldElimSolver.deadFieldArgs(ConcreteId(ctorSite.uid, instId))
         // `rewriteArgs` drops the dead args, evaluating impure ones in order; they come back as unit
-        rewriteArgs(args, dead): keptArgs =>
-          val kept = keptArgs.iterator
-          val args2 = args.indices.iterator.map: i =>
-            if dead(i) then Arg(N, Value.Lit(Tree.UnitLit(false))(args(i).value.toLoc)) else kept.next()
-          .toList
-          k(ctorSite match
-            case i@Instantiate(mut, cls, _) => Instantiate(mut, cls, args2 :: Nil)(i.metadata, i.toLoc)
-            case c@Call(fun, _) => Call(fun, (args2 :: Nil).ne_!)(c.metadata, c.toLoc)
-            case t@Tuple(mut, _) => Tuple(mut, args2)(t.toLoc)
-            case other => lastWords(s"not a rewritable construction site: $other"))
+        def rewriteFieldArgs(kArgs: Ls[Arg] => Block): Block =
+          rewriteArgs(args, dead): keptArgs =>
+            val kept = keptArgs.iterator
+            kArgs(args.indices.iterator.map: i =>
+              if dead(i) then Arg(N, Value.Lit(Tree.UnitLit(false))(args(i).value.toLoc)) else kept.next()
+            .toList)
+        // the class path must go through `applyPath` too: in a copy defined outside a module,
+        // a class selected from the module's `this` has to be selected from the module's name
+        ctorSite match
+        case i@Instantiate(mut, cls, _) =>
+          applyPath(cls): cls2 =>
+            rewriteFieldArgs(args2 => k(Instantiate(mut, cls2, args2 :: Nil)(i.metadata, i.toLoc)))
+        case c@Call(fun, _) =>
+          applyPath(fun): fun2 =>
+            rewriteFieldArgs(args2 => k(Call(fun2, (args2 :: Nil).ne_!)(c.metadata, c.toLoc)))
+        case t@Tuple(mut, _) => rewriteFieldArgs(args2 => k(Tuple(mut, args2)(t.toLoc)))
+        case other => lastWords(s"not a rewritable construction site: $other")
       // a read of a field that is never written, whose result is unused
       case sel@(_: Select | _: Call) if analyzedId(sel).exists(deadReadElimSolver.deadReads) =>
         replaceByUnit(sel, sel match

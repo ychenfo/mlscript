@@ -399,7 +399,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
               arg$SetONE$0$ = d.item;
               arg$SetONE$1$ = d.tree;
               arg$SetONE$2$ = d.digit;
-              tmp = kcfa.SetT(undefined, arg$SetONE$1$, arg$SetONE$0$, t11);
+              tmp = kcfa3.SetT(undefined, arg$SetONE$1$, arg$SetONE$0$, t11);
               t11 = tmp;
               d = arg$SetONE$2$;
               continue loopLabel1
@@ -409,8 +409,8 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
               arg$SetTWO$2$ = d.item2;
               arg$SetTWO$3$ = d.tree2;
               arg$SetTWO$4$ = d.digit;
-              tmp1 = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-              tmp2 = kcfa.SetT(undefined, tmp1, arg$SetTWO$0$, t11);
+              tmp1 = kcfa3.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+              tmp2 = kcfa3.SetT(undefined, tmp1, arg$SetTWO$0$, t11);
               t11 = tmp2;
               d = arg$SetTWO$4$;
               continue loopLabel1
@@ -418,7 +418,7 @@ main_doit_summarize_lambda$_lambda_setUnion$setUnion = function main_doit_summar
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
           }
         }
-        return kcfa.SET(undefined, inlinedVal3)
+        return kcfa1.SET(undefined, inlinedVal3)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -615,7 +615,7 @@ main_doit_summarize_lambda$_lambda$lambda = function main_doit_summarize_lambda$
                 arg$SmONE$1$ = d.value;
                 arg$SmONE$2$ = d.tree;
                 arg$SmONE$3$ = d.digit;
-                tmp = kcfa.SmT(undefined, arg$SmONE$2$, arg$SmONE$0$, arg$SmONE$1$, t11);
+                tmp = kcfa4.SmT(undefined, arg$SmONE$2$, arg$SmONE$0$, arg$SmONE$1$, t11);
                 t11 = tmp;
                 d = arg$SmONE$3$;
                 continue loopLabel1
@@ -627,8 +627,8 @@ main_doit_summarize_lambda$_lambda$lambda = function main_doit_summarize_lambda$
                 arg$SmTWO$4$ = d.value2;
                 arg$SmTWO$5$ = d.tree2;
                 arg$SmTWO$6$ = d.digit;
-                tmp1 = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
-                tmp2 = kcfa.SmT(undefined, tmp1, arg$SmTWO$0$, arg$SmTWO$1$, t11);
+                tmp1 = kcfa4.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+                tmp2 = kcfa4.SmT(undefined, tmp1, arg$SmTWO$0$, arg$SmTWO$1$, t11);
                 t11 = tmp2;
                 d = arg$SmTWO$6$;
                 continue loopLabel1
@@ -636,7 +636,7 @@ main_doit_summarize_lambda$_lambda$lambda = function main_doit_summarize_lambda$
               throw globalThis.Object.freeze(new globalThis.Error("match error"));
             }
           }
-          return kcfa.SmMAP(undefined, inlinedVal3)
+          return kcfa1.SmMAP(undefined, inlinedVal3)
         }
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
@@ -1450,7 +1450,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
               arg$SetONE$0$ = d.item;
               arg$SetONE$1$ = d.tree;
               arg$SetONE$2$ = d.digit;
-              tmp = kcfa.SetT(undefined, arg$SetONE$1$, arg$SetONE$0$, t11);
+              tmp = kcfa3.SetT(undefined, arg$SetONE$1$, arg$SetONE$0$, t11);
               t11 = tmp;
               d = arg$SetONE$2$;
               continue loopLabel1
@@ -1460,8 +1460,8 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
               arg$SetTWO$2$ = d.item2;
               arg$SetTWO$3$ = d.tree2;
               arg$SetTWO$4$ = d.digit;
-              tmp1 = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-              tmp2 = kcfa.SetT(undefined, tmp1, arg$SetTWO$0$, t11);
+              tmp1 = kcfa3.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+              tmp2 = kcfa3.SetT(undefined, tmp1, arg$SetTWO$0$, t11);
               t11 = tmp2;
               d = arg$SetTWO$4$;
               continue loopLabel1
@@ -1469,7 +1469,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function main
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
           }
         }
-        return kcfa.SET(undefined, inlinedVal3)
+        return kcfa1.SET(undefined, inlinedVal3)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -1886,7 +1886,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
               arg$SetONE$0$ = d.item;
               arg$SetONE$1$ = d.tree;
               arg$SetONE$2$ = d.digit;
-              tmp = kcfa.SetT(undefined, arg$SetONE$1$, arg$SetONE$0$, t11);
+              tmp = kcfa3.SetT(undefined, arg$SetONE$1$, arg$SetONE$0$, t11);
               t11 = tmp;
               d = arg$SetONE$2$;
               continue loopLabel1
@@ -1896,8 +1896,8 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
               arg$SetTWO$2$ = d.item2;
               arg$SetTWO$3$ = d.tree2;
               arg$SetTWO$4$ = d.digit;
-              tmp1 = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-              tmp2 = kcfa.SetT(undefined, tmp1, arg$SetTWO$0$, t11);
+              tmp1 = kcfa3.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+              tmp2 = kcfa3.SetT(undefined, tmp1, arg$SetTWO$0$, t11);
               t11 = tmp2;
               d = arg$SetTWO$4$;
               continue loopLabel1
@@ -1905,7 +1905,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion$setUnion = function doit_expl
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
           }
         }
-        return kcfa.SET(undefined, inlinedVal3)
+        return kcfa1.SET(undefined, inlinedVal3)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -2744,7 +2744,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
               arg$SetONE$0$ = d.item;
               arg$SetONE$1$ = d.tree;
               arg$SetONE$2$ = d.digit;
-              tmp = kcfa.SetT(undefined, arg$SetONE$1$, arg$SetONE$0$, t11);
+              tmp = kcfa3.SetT(undefined, arg$SetONE$1$, arg$SetONE$0$, t11);
               t11 = tmp;
               d = arg$SetONE$2$;
               continue loopLabel1
@@ -2754,8 +2754,8 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
               arg$SetTWO$2$ = d.item2;
               arg$SetTWO$3$ = d.tree2;
               arg$SetTWO$4$ = d.digit;
-              tmp1 = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
-              tmp2 = kcfa.SetT(undefined, tmp1, arg$SetTWO$0$, t11);
+              tmp1 = kcfa3.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+              tmp2 = kcfa3.SetT(undefined, tmp1, arg$SetTWO$0$, t11);
               t11 = tmp2;
               d = arg$SetTWO$4$;
               continue loopLabel1
@@ -2763,7 +2763,7 @@ doit_summarize_lambda$_lambda_setUnion$setUnion = function doit_summarize_lambda
             throw globalThis.Object.freeze(new globalThis.Error("match error"));
           }
         }
-        return kcfa.SET(undefined, inlinedVal3)
+        return kcfa1.SET(undefined, inlinedVal3)
       }
       throw globalThis.Object.freeze(new globalThis.Error("match error"));
     }
@@ -2960,7 +2960,7 @@ doit_summarize_lambda$_lambda$lambda = function doit_summarize_lambda$_lambda$la
                 arg$SmONE$1$ = d.value;
                 arg$SmONE$2$ = d.tree;
                 arg$SmONE$3$ = d.digit;
-                tmp = kcfa.SmT(undefined, arg$SmONE$2$, arg$SmONE$0$, arg$SmONE$1$, t11);
+                tmp = kcfa4.SmT(undefined, arg$SmONE$2$, arg$SmONE$0$, arg$SmONE$1$, t11);
                 t11 = tmp;
                 d = arg$SmONE$3$;
                 continue loopLabel1
@@ -2972,8 +2972,8 @@ doit_summarize_lambda$_lambda$lambda = function doit_summarize_lambda$_lambda$la
                 arg$SmTWO$4$ = d.value2;
                 arg$SmTWO$5$ = d.tree2;
                 arg$SmTWO$6$ = d.digit;
-                tmp1 = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
-                tmp2 = kcfa.SmT(undefined, tmp1, arg$SmTWO$0$, arg$SmTWO$1$, t11);
+                tmp1 = kcfa4.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+                tmp2 = kcfa4.SmT(undefined, tmp1, arg$SmTWO$0$, arg$SmTWO$1$, t11);
                 t11 = tmp2;
                 d = arg$SmTWO$6$;
                 continue loopLabel1
@@ -2981,7 +2981,7 @@ doit_summarize_lambda$_lambda$lambda = function doit_summarize_lambda$_lambda$la
               throw globalThis.Object.freeze(new globalThis.Error("match error"));
             }
           }
-          return kcfa.SmMAP(undefined, inlinedVal3)
+          return kcfa1.SmMAP(undefined, inlinedVal3)
         }
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
@@ -8117,7 +8117,7 @@ doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr = function doit_summ
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8138,7 +8138,7 @@ doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 = function doit_sum
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8159,7 +8159,7 @@ doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 = function doit_sum
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8180,7 +8180,7 @@ doit_summarize_lambda$_lambda_setUnion_union1_incr$incr = function doit_summariz
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8201,7 +8201,7 @@ doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 = function doit_sum
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8225,7 +8225,7 @@ doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr
     arg$SmTWO$4$ = d.value2;
     arg$SmTWO$5$ = d.tree2;
     arg$SmTWO$6$ = d.digit;
-    tmp = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
     tmp1 = doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
     return kcfa2.SmONE(ak1, a1, t1, tmp1)
   }
@@ -8277,7 +8277,7 @@ doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr
     arg$SmTWO$4$ = d.value2;
     arg$SmTWO$5$ = d.tree2;
     arg$SmTWO$6$ = d.digit;
-    tmp = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
     tmp1 = doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
     return kcfa2.SmONE(ak1, a1, t1, tmp1)
   }
@@ -8301,7 +8301,7 @@ doit_summarize_lambda$_lambda_union$_union_incr$incr = function doit_summarize_l
     arg$SmTWO$4$ = d.value2;
     arg$SmTWO$5$ = d.tree2;
     arg$SmTWO$6$ = d.digit;
-    tmp = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
     tmp1 = doit_summarize_lambda$_lambda_union$_union_incr$incr(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
     return kcfa2.SmONE(ak1, a1, t1, tmp1)
   }
@@ -8325,7 +8325,7 @@ doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr
     arg$SmTWO$4$ = d.value2;
     arg$SmTWO$5$ = d.tree2;
     arg$SmTWO$6$ = d.digit;
-    tmp = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
     tmp1 = doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
     return kcfa2.SmONE(ak1, a1, t1, tmp1)
   }
@@ -8346,7 +8346,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr = functi
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8367,7 +8367,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 = funct
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8388,7 +8388,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 = funct
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8409,7 +8409,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr = function d
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8430,7 +8430,7 @@ doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 = funct
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8464,8 +8464,8 @@ doit_explore_absNext_atomEval_eval$_eval$eval = function doit_explore_absNext_at
     let tmp1;
     arg$LAMBDA$0$ = e.lam;
     tmp = kcfa2.Clos(arg$LAMBDA$0$, benv);
-    tmp1 = kcfa.SetT(undefined, kcfa2.SetE, tmp, kcfa2.SetE);
-    return kcfa.SET(undefined, tmp1)
+    tmp1 = kcfa2.SetT(undefined, kcfa2.SetE, tmp, kcfa2.SetE);
+    return kcfa2.SET(undefined, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
@@ -8502,8 +8502,8 @@ main_doit_explore_absNext_atomEval_eval$_eval$eval = function main_doit_explore_
     let tmp1;
     arg$LAMBDA$0$ = e.lam;
     tmp = kcfa2.Clos(arg$LAMBDA$0$, benv);
-    tmp1 = kcfa.SetT(undefined, kcfa2.SetE, tmp, kcfa2.SetE);
-    return kcfa.SET(undefined, tmp1)
+    tmp1 = kcfa2.SetT(undefined, kcfa2.SetE, tmp, kcfa2.SetE);
+    return kcfa2.SET(undefined, tmp1)
   }
   throw globalThis.Object.freeze(new globalThis.Error("match error"));
 };
@@ -8527,7 +8527,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr = f
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8548,7 +8548,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr = funct
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8569,7 +8569,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1 = 
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8590,7 +8590,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2 = 
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8611,7 +8611,7 @@ main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3 = 
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_explore_absNext_apply$_apply_lambda$_setUnion_union1_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8635,7 +8635,7 @@ main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr
     arg$SmTWO$4$ = d.value2;
     arg$SmTWO$5$ = d.tree2;
     arg$SmTWO$6$ = d.digit;
-    tmp = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
     tmp1 = main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
     return kcfa2.SmONE(ak1, a1, t1, tmp1)
   }
@@ -8659,7 +8659,7 @@ main_doit_summarize_lambda$_lambda_union$_union_incr$incr = function main_doit_s
     arg$SmTWO$4$ = d.value2;
     arg$SmTWO$5$ = d.tree2;
     arg$SmTWO$6$ = d.digit;
-    tmp = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
     tmp1 = main_doit_summarize_lambda$_lambda_union$_union_incr$incr(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
     return kcfa2.SmONE(ak1, a1, t1, tmp1)
   }
@@ -8683,7 +8683,7 @@ main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr
     arg$SmTWO$4$ = d.value2;
     arg$SmTWO$5$ = d.tree2;
     arg$SmTWO$6$ = d.digit;
-    tmp = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
     tmp1 = main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr1(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
     return kcfa2.SmONE(ak1, a1, t1, tmp1)
   }
@@ -8707,7 +8707,7 @@ main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr
     arg$SmTWO$4$ = d.value2;
     arg$SmTWO$5$ = d.tree2;
     arg$SmTWO$6$ = d.digit;
-    tmp = kcfa.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
+    tmp = kcfa2.SmT(undefined, arg$SmTWO$5$, arg$SmTWO$3$, arg$SmTWO$4$, arg$SmTWO$2$);
     tmp1 = main_doit_summarize_lambda$_lambda_union$_union_storeMapIns_storeMapAddItem_incr$incr2(kcfa2, arg$SmTWO$0$, arg$SmTWO$1$, tmp, arg$SmTWO$6$);
     return kcfa2.SmONE(ak1, a1, t1, tmp1)
   }
@@ -8756,7 +8756,7 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr = function main
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8777,7 +8777,7 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr = function main_doi
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_incr$incr(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8798,7 +8798,7 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1 = function mai
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr1(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8819,7 +8819,7 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2 = function mai
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr2(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -8840,7 +8840,7 @@ main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3 = function mai
     arg$SetTWO$2$ = d.item2;
     arg$SetTWO$3$ = d.tree2;
     arg$SetTWO$4$ = d.digit;
-    tmp = kcfa.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
+    tmp = kcfa2.SetT(undefined, arg$SetTWO$3$, arg$SetTWO$2$, arg$SetTWO$1$);
     tmp1 = main_doit_summarize_lambda$_lambda_setUnion_union1_ins_incr$incr3(kcfa2, arg$SetTWO$0$, tmp, arg$SetTWO$4$);
     return kcfa2.SetONE(a1, t1, tmp1)
   }
@@ -13624,8 +13624,8 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
             let tmp2;
             arg$LAMBDA$0$ = arg$CALL$1$.lam;
             tmp1 = kcfa1.Clos(arg$LAMBDA$0$, arg$State$1$);
-            tmp2 = kcfa.SetT(undefined, kcfa1.SetE, tmp1, kcfa1.SetE);
-            inlinedVal1 = kcfa.SET(undefined, tmp2);
+            tmp2 = kcfa1.SetT(undefined, kcfa1.SetE, tmp1, kcfa1.SetE);
+            inlinedVal1 = kcfa1.SET(undefined, tmp2);
           } else {
             throw globalThis.Object.freeze(new globalThis.Error("match error"))
           }
@@ -13800,8 +13800,8 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                   let tmp3;
                   arg$LAMBDA$0$ = arg$CALL$1$.lam;
                   tmp2 = kcfa1.Clos(arg$LAMBDA$0$, arg$State$1$);
-                  tmp3 = kcfa.SetT(undefined, kcfa1.SetE, tmp2, kcfa1.SetE);
-                  inlinedVal5 = kcfa.SET(undefined, tmp3);
+                  tmp3 = kcfa1.SetT(undefined, kcfa1.SetE, tmp2, kcfa1.SetE);
+                  inlinedVal5 = kcfa1.SET(undefined, tmp3);
                 } else {
                   throw globalThis.Object.freeze(new globalThis.Error("match error"))
                 }
@@ -13974,7 +13974,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     inlinedVal7 = kcfa1.LAMBDA(tmp17);
     n10 = labelCount.value + 1;
     labelCount.value = n10;
-    inlinedVal8 = kcfa.VAR(undefined, "id");
+    inlinedVal8 = kcfa1.VAR(undefined, "id");
     tmp5 = kcfa1.Cons("z", kcfa1.Nil);
     n9 = labelCount.value + 1;
     labelCount.value = n9;
@@ -14112,8 +14112,8 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                     let tmp24;
                     arg$LAMBDA$0$ = arg$CALL$1$.lam;
                     tmp23 = kcfa1.Clos(arg$LAMBDA$0$, arg$State$1$);
-                    tmp24 = kcfa.SetT(undefined, kcfa1.SetE, tmp23, kcfa1.SetE);
-                    inlinedVal25 = kcfa.SET(undefined, tmp24);
+                    tmp24 = kcfa1.SetT(undefined, kcfa1.SetE, tmp23, kcfa1.SetE);
+                    inlinedVal25 = kcfa1.SET(undefined, tmp24);
                   } else {
                     throw globalThis.Object.freeze(new globalThis.Error("match error"))
                   }
@@ -14146,7 +14146,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
     }
-    inlinedVal2 = kcfa.SmMAP(undefined, kcfa1.SmE);
+    inlinedVal2 = kcfa1.SmMAP(undefined, kcfa1.SmE);
     f = doit_summarize_lambda$$lambda$(kcfa1);
     inlinedVal3 = kcfa1.#listFoldl$tailrec(f, inlinedVal2, inlinedVal1);
     eta$0$0 = kcfa1.Nil;
@@ -14166,10 +14166,10 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     tmp2 = kcfa1.Cons("x", tmp1);
     n14 = labelCount.value + 1;
     labelCount.value = n14;
-    inlinedVal3 = kcfa.VAR(undefined, "k");
+    inlinedVal3 = kcfa1.VAR(undefined, "k");
     n13 = labelCount.value + 1;
     labelCount.value = n13;
-    inlinedVal4 = kcfa.VAR(undefined, "x");
+    inlinedVal4 = kcfa1.VAR(undefined, "x");
     tmp3 = kcfa1.Cons(inlinedVal4, kcfa1.Nil);
     n12 = labelCount.value + 1;
     labelCount.value = n12;
@@ -14184,11 +14184,11 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     inlinedVal6 = kcfa1.LAMBDA(tmp16);
     n10 = labelCount.value + 1;
     labelCount.value = n10;
-    inlinedVal7 = kcfa.VAR(undefined, "id");
+    inlinedVal7 = kcfa1.VAR(undefined, "id");
     tmp4 = kcfa1.Cons("z", kcfa1.Nil);
     n9 = labelCount.value + 1;
     labelCount.value = n9;
-    inlinedVal8 = kcfa.RET(n9, undefined);
+    inlinedVal8 = kcfa1.RET(n9, undefined);
     n8 = labelCount.value + 1;
     labelCount.value = n8;
     tmp15 = globalThis.Object.freeze([
@@ -14200,11 +14200,11 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     tmp5 = kcfa1.Cons("a", kcfa1.Nil);
     n7 = labelCount.value + 1;
     labelCount.value = n7;
-    inlinedVal10 = kcfa.VAR(undefined, "id");
+    inlinedVal10 = kcfa1.VAR(undefined, "id");
     tmp6 = kcfa1.Cons("y", kcfa1.Nil);
     n6 = labelCount.value + 1;
     labelCount.value = n6;
-    inlinedVal11 = kcfa.RET(n6, undefined);
+    inlinedVal11 = kcfa1.RET(n6, undefined);
     n5 = labelCount.value + 1;
     labelCount.value = n5;
     tmp14 = globalThis.Object.freeze([
@@ -14216,7 +14216,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
     tmp7 = kcfa1.Cons("b", kcfa1.Nil);
     n4 = labelCount.value + 1;
     labelCount.value = n4;
-    inlinedVal13 = kcfa.RET(n4, undefined);
+    inlinedVal13 = kcfa1.RET(n4, undefined);
     n3 = labelCount.value + 1;
     labelCount.value = n3;
     tmp13 = globalThis.Object.freeze([
@@ -14324,8 +14324,8 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
                     let tmp23;
                     arg$LAMBDA$0$ = arg$CALL$1$.lam;
                     tmp22 = kcfa1.Clos(arg$LAMBDA$0$, arg$State$1$);
-                    tmp23 = kcfa.SetT(undefined, kcfa1.SetE, tmp22, kcfa1.SetE);
-                    inlinedVal29 = kcfa.SET(undefined, tmp23);
+                    tmp23 = kcfa1.SetT(undefined, kcfa1.SetE, tmp22, kcfa1.SetE);
+                    inlinedVal29 = kcfa1.SET(undefined, tmp23);
                   } else {
                     throw globalThis.Object.freeze(new globalThis.Error("match error"))
                   }
@@ -14358,7 +14358,7 @@ foldf = function foldf(kcfa2, f, xs, ys, accum) {
         throw globalThis.Object.freeze(new globalThis.Error("match error"));
       }
     }
-    inlinedVal19 = kcfa.SmMAP(undefined, kcfa1.SmE);
+    inlinedVal19 = kcfa1.SmMAP(undefined, kcfa1.SmE);
     f = main_doit_summarize_lambda$$lambda$(kcfa1);
     inlinedVal20 = kcfa1.#listFoldl$tailrec(f, inlinedVal19, inlinedVal2);
     eta$0$0 = kcfa1.Nil;

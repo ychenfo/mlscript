@@ -4,52 +4,7 @@ import runtime from "./Runtime.mjs";
 import RuntimeJS from "./RuntimeJS.mjs";
 import Rendering from "./Rendering.mjs";
 import Term from "./Term.mjs";
-let Predef1, lambda, lambda1, lambda2, lambda$, lambda$1, lambda$2;
-lambda$2 = (undefined, function (Predef2) {
-  return (acc, x) => {
-    return lambda2(Predef2, acc, x)
-  }
-});
-lambda2 = (undefined, function (Predef2, acc, x) {
-  let tmp, args;
-  if (typeof x === 'string') {
-    tmp = true;
-  } else {
-    tmp = false;
-  }
-  args = [
-    tmp
-  ];
-  runtime.safeCall(Predef2.js_assert(...args));
-  return acc + x
-});
-lambda$1 = (undefined, function (Predef2, b) {
-  return (a, i, ..._) => {
-    return lambda1(Predef2, b, a, i, ..._)
-  }
-});
-lambda$ = (undefined, function (Predef2, a, b) {
-  return (field) => {
-    return lambda(Predef2, a, b, field)
-  }
-});
-lambda1 = (undefined, function (Predef2, b, a, i, ..._) {
-  let tmp;
-  tmp = runtime.safeCall(b.at(i));
-  return Predef2.equals(a, tmp)
-});
-lambda = (undefined, function (Predef2, a, b, field) {
-  let scrut, scrut1;
-  scrut = field !== null;
-  if (scrut === true) {
-    scrut1 = Predef2.equals(a[field], b[field]);
-    if (scrut1 === true) {
-      return true
-    }
-    return false;
-  }
-  return false;
-});
+let Predef1;
 (class Predef {
   static {
     Predef1 = this
@@ -182,16 +137,23 @@ lambda = (undefined, function (Predef2, a, b, field) {
     }
   }
   static equals(a, b) {
-    let scrut, scrut1, scrut2, ac, scrut3, md, scrut4, scrut5, scrut6, scrut7, scrut8, scrut9, lambda$here;
+    let scrut, a1, b1, scrut1, scrut2, ac, scrut3, md, scrut4, scrut5, scrut6, scrut7, scrut8, scrut9, lambda, lambda1;
     scrut = a === b;
     if (scrut === true) {
       return true
     }
     if (a instanceof globalThis.Array) {
+      a1 = a;
       if (b instanceof globalThis.Array) {
-        scrut1 = a.length === b.length;
+        b1 = b;
+        scrut1 = a1.length === b1.length;
         if (scrut1 === true) {
-          return runtime.safeCall(a.every(lambda$1(Predef, b)))
+          lambda1 = (undefined, function (a2, i, ..._) {
+            let tmp;
+            tmp = runtime.safeCall(b1.at(i));
+            return Predef.equals(a2, tmp)
+          });
+          return runtime.safeCall(a1.every(lambda1))
         }
       }
     }
@@ -211,8 +173,19 @@ lambda = (undefined, function (Predef2, a, b, field) {
                 md = ac[Predef.Symbols.definitionMetadata];
                 scrut4 = md !== undefined;
                 if (scrut4 === true) {
-                  lambda$here = lambda$(Predef, a, b);
-                  scrut5 = runtime.safeCall(md[2].every(lambda$here));
+                  lambda = (undefined, function (field) {
+                    let scrut10, scrut11;
+                    scrut10 = field !== null;
+                    if (scrut10 === true) {
+                      scrut11 = Predef.equals(a[field], b[field]);
+                      if (scrut11 === true) {
+                        return true
+                      }
+                      return false;
+                    }
+                    return false;
+                  });
+                  scrut5 = runtime.safeCall(md[2].every(lambda));
                   if (scrut5 === true) {
                     return true
                   }
@@ -339,9 +312,18 @@ lambda = (undefined, function (Predef2, a, b, field) {
     }
   }
   static mkStr(...xs) {
-    let callPrefix, lambda$here;
-    lambda$here = lambda$2(Predef);
-    callPrefix = runtime.safeCall(Predef.fold(lambda$here));
+    let lambda, callPrefix;
+    lambda = (undefined, function (acc, x) {
+      let tmp;
+      if (typeof x === 'string') {
+        tmp = true;
+      } else {
+        tmp = false;
+      }
+      Predef.check(tmp);
+      return acc + x
+    });
+    callPrefix = runtime.safeCall(Predef.fold(lambda));
     return runtime.safeCall(callPrefix(...xs))
   }
   static use(instance) {
@@ -357,10 +339,4 @@ lambda = (undefined, function (Predef2, a, b, field) {
   static [definitionMetadata] = ["class", "Predef"];
 });
 export { Predef1 as _$_modulePrivate_$_Predef };
-export { lambda as _$_modulePrivate_$_lambda };
-export { lambda1 as _$_modulePrivate_$_lambda1 };
-export { lambda2 as _$_modulePrivate_$_lambda2 };
-export { lambda$ as _$_modulePrivate_$_lambda$ };
-export { lambda$1 as _$_modulePrivate_$_lambda$1 };
-export { lambda$2 as _$_modulePrivate_$_lambda$2 };
 export default Predef1;
