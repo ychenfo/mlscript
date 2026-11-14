@@ -977,7 +977,8 @@ class JSBuilder(using Config, TL, State, Ctx) extends CodeBuilder:
     scope.allocateName(State.prettyPrintSymbol)
     doc"""const ${scope.lookup_!(State.definitionMetadataSymbol, N)} = globalThis.Symbol.for("mlscript.definitionMetadata");"""
       :/: doc"""const ${scope.lookup_!(State.prettyPrintSymbol, N)} = globalThis.Symbol.for("mlscript.prettyPrint");"""
-      :/: programBodyImpl(p, exprt, modulePath.up, exportPrivates = true)
+      // the private exports are the ABI that importers inlining this unit's bodies rely on
+      :/: programBodyImpl(p, exprt, modulePath.up, exportPrivates = config.preservePrivateAbi)
   
   def programBody(p: Program, exprt: Opt[BlockMemberSymbol], wd: io.Path)(using Raise, Scope): Document =
     programBodyImpl(p, exprt, wd, exportPrivates = false)

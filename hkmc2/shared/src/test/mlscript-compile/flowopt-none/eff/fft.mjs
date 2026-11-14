@@ -587,5 +587,4 @@ let fft1;
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "fft"];
 });
-export { fft1 as _$_modulePrivate_$_fft };
 export default fft1;

@@ -1028,18 +1028,4 @@ go = function go(minimax2, n, f, i) {
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "minimax"];
 });
-export { go as _$_modulePrivate_$_go };
-export { doKid as _$_modulePrivate_$_doKid };
-export { sz as _$_modulePrivate_$_sz };
-export { minimaxTT as _$_modulePrivate_$_minimaxTT };
-export { minimax1 as _$_modulePrivate_$_minimax };
-export { lambda as _$_modulePrivate_$_lambda };
-export { lambda1 as _$_modulePrivate_$_lambda1 };
-export { lambda2 as _$_modulePrivate_$_lambda2 };
-export { lambda$ as _$_modulePrivate_$_lambda$ };
-export { lambda$1 as _$_modulePrivate_$_lambda$1 };
-export { lambda$2 as _$_modulePrivate_$_lambda$2 };
-export { doKid$ as _$_modulePrivate_$_doKid$ };
-export { lambda$3 as _$_modulePrivate_$_lambda$3 };
-export { minimaxTT$worker as _$_modulePrivate_$_minimaxTT$worker };
 export default minimax1;

@@ -980,7 +980,4 @@ loop_np_loop_np$tailrec$loop_np$tailrec = function loop_np_loop_np$tailrec$loop_
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "fft"];
 });
-export { fft1 as _$_modulePrivate_$_fft };
-export { main_loop_np_loop_np$tailrec$loop_np$tailrec as _$_modulePrivate_$_main_loop_np_loop_np$tailrec$loop_np$tailrec };
-export { loop_np_loop_np$tailrec$loop_np$tailrec as _$_modulePrivate_$_loop_np_loop_np$tailrec$loop_np$tailrec };
 export default fft1;

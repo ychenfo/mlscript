@@ -735,19 +735,4 @@ loop = function loop(px, py, n, i) {
   toString() { return runtime.render(this); }
   static [definitionMetadata] = ["class", "fft"];
 });
-export { loop as _$_modulePrivate_$_loop };
-export { loop_i as _$_modulePrivate_$_loop_i };
-export { fft1 as _$_modulePrivate_$_fft };
-export { main_loop_np_test_fft$scrut_tup2 as _$_modulePrivate_$_main_loop_np_test_fft$scrut_tup2 };
-export { main_loop_np_test$scrut_tup2 as _$_modulePrivate_$_main_loop_np_test$scrut_tup2 };
-export { loop_np_test$scrut_tup2 as _$_modulePrivate_$_loop_np_test$scrut_tup2 };
-export { loop_np_test_fft$scrut_tup2 as _$_modulePrivate_$_loop_np_test_fft$scrut_tup2 };
-export { loop_i$tailrec as _$_modulePrivate_$_loop_i$tailrec };
-export { loop_is2$tailrec as _$_modulePrivate_$_loop_is2$tailrec };
-export { loop_k$tailrec as _$_modulePrivate_$_loop_k$tailrec };
-export { main_loop_np$loop_np$tailrec as _$_modulePrivate_$_main_loop_np$loop_np$tailrec };
-export { loop_np_test_fft$scrut_tup2$worker as _$_modulePrivate_$_loop_np_test_fft$scrut_tup2$worker };
-export { loop_np_test$scrut_tup2$worker as _$_modulePrivate_$_loop_np_test$scrut_tup2$worker };
-export { main_loop_np_test$scrut_tup2$worker as _$_modulePrivate_$_main_loop_np_test$scrut_tup2$worker };
-export { main_loop_np_test_fft$scrut_tup2$worker as _$_modulePrivate_$_main_loop_np_test_fft$scrut_tup2$worker };
 export default fft1;

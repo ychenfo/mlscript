@@ -647,43 +647,45 @@ private fun compute_time_step(sub2, update2, pow, north, south, east, west)(d, t
   let deltat_minimum = min(deltat_courant, deltat_conduct)
   min(deltat_maximum, deltat_minimum)
 
+private fun compute_initial_state(sub2, update2, pow, north, south, east, west)() =
+  let v = [all_zero_nodes, all_zero_nodes]
+  fun interior_position(kl) = if kl is [k, l] then
+    let pi = 3.1415926535898
+    let rp = real(lmax - lmin)
+    let z1 = real(10 + k - kmin)
+    let zz = (-0.5 + real(l - lmin) / rp) * pi
+    [z1 * cos(zz), z1 * sin(zz)]
+  let x = make_position_matrix(sub2, update2, pow, north, south, east, west)(interior_position)
+  let a2 = array2(dimension_all_zones, 0.0)
+  let s2 = array2(dimension_all_zones, 0.0)
+  fun reflect_area_vol(f) = [f(a2), f(s2)]
+  fun u2(f, z) = if reflect_area_vol(f(z)) is [a, s] then
+    update2(a2, z, a)
+    update2(s2, z, s)
+  for_interior_zones(z => if zone_area_vol(sub2, update2, pow, north, south, east, west)(x, z) is [a, s] then
+    update2(a2, z, a)
+    update2(s2, z, s))
+  for_south_zones(z => u2(reflect_north(sub2, update2, pow, north, south, east, west), z))
+  for_east_zones(z => u2(reflect_west(sub2, update2, pow, north, south, east, west), z))
+  for_west_zones(z => u2(reflect_east(sub2, update2, pow, north, south, east, west), z))
+  for_north_zones(z => u2(reflect_south(sub2, update2, pow, north, south, east, west), z))
+  let alpha = a2
+  let s = s2
+  let rr = array2(dimension_all_zones, 0.0)
+  for_all_zones(z => update2(rr, z, 1.4))
+  let rho = rr
+  let tt = array2(dimension_all_zones, constant_heat_source)
+  for_interior_zones(z => update2(tt, z, 0.0001))
+  let theta = tt
+  let p = make_pressure(sub2, update2, pow, north, south, east, west)(rho, theta)
+  let q = all_zero_zones
+  let epsilon = make_energy(sub2, update2, pow, north, south, east, west)(rho, theta)
+  let deltat = 0.01
+  let c = 0.0
+  [v, x, alpha, s, rho, p, q, epsilon, theta, deltat, c]
+
 fun main() =
-  let initial_state =
-    let v = [all_zero_nodes, all_zero_nodes]
-    fun interior_position(kl) = if kl is [k, l] then
-      let pi = 3.1415926535898
-      let rp = real(lmax - lmin)
-      let z1 = real(10 + k - kmin)
-      let zz = (-0.5 + real(l - lmin) / rp) * pi
-      [z1 * cos(zz), z1 * sin(zz)]
-    let x = make_position_matrix(sub2, update2, pow, north, south, east, west)(interior_position)
-    let a2 = array2(dimension_all_zones, 0.0)
-    let s2 = array2(dimension_all_zones, 0.0)
-    fun reflect_area_vol(f) = [f(a2), f(s2)]
-    fun u2(f, z) = if reflect_area_vol(f(z)) is [a, s] then
-      update2(a2, z, a)
-      update2(s2, z, s)
-    for_interior_zones(z => if zone_area_vol(sub2, update2, pow, north, south, east, west)(x, z) is [a, s] then
-      update2(a2, z, a)
-      update2(s2, z, s))
-    for_south_zones(z => u2(reflect_north(sub2, update2, pow, north, south, east, west), z))
-    for_east_zones(z => u2(reflect_west(sub2, update2, pow, north, south, east, west), z))
-    for_west_zones(z => u2(reflect_east(sub2, update2, pow, north, south, east, west), z))
-    for_north_zones(z => u2(reflect_south(sub2, update2, pow, north, south, east, west), z))
-    let alpha = a2
-    let s = s2
-    let rr = array2(dimension_all_zones, 0.0)
-    for_all_zones(z => update2(rr, z, 1.4))
-    let rho = rr
-    let tt = array2(dimension_all_zones, constant_heat_source)
-    for_interior_zones(z => update2(tt, z, 0.0001))
-    let theta = tt
-    let p = make_pressure(sub2, update2, pow, north, south, east, west)(rho, theta)
-    let q = all_zero_zones
-    let epsilon = make_energy(sub2, update2, pow, north, south, east, west)(rho, theta)
-    let deltat = 0.01
-    let c = 0.0
-    [v, x, alpha, s, rho, p, q, epsilon, theta, deltat, c]
+  let initial_state = compute_initial_state(sub2, update2, pow, north, south, east, west)()
   fun iter(i, state) = if i == 0 then state else
     print_(".")
     let next_state =

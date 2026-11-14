@@ -60,10 +60,11 @@ if (programs.length === 0) {
   process.exit(1)
 }
 
-// same two terser modes as nofib/runterse.fish (no `module`/`toplevel`, comments dropped)
+// the two terser modes of nofib/runterse.fish (comments dropped), plus `module: true`: the outputs are ES modules,
+// and without it terser keeps every top-level name verbatim, i.e. the long names of lifted functions and their copies
 const terserModes = {
-  uncompressed: { compress: false, mangle: true, format: { comments: false } },
-  compressed: { compress: {}, mangle: true, format: { comments: false } },
+  uncompressed: { module: true, compress: false, mangle: true, format: { comments: false } },
+  compressed: { module: true, compress: {}, mangle: true, format: { comments: false } },
 }
 const terse = async code => ({
   uncompressed: (await minify(code, terserModes.uncompressed)).code,
