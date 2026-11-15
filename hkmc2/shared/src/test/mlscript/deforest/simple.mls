@@ -703,6 +703,8 @@ g(A, AA(3))
 //│ deforest > >>> fusing >>>
 //│ deforest > A⁰ ->
 //│ deforest > 	match: k⁰
+//│ deforest > AA⁰(3) ->
+//│ deforest > 	select: aa
 //│ deforest > <<< fusing <<<
 //│ = 9
 

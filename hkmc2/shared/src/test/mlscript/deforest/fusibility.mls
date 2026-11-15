@@ -153,6 +153,8 @@ c(AA(0), AA(3))
 //│ deforest > x_for_c⁰
 //│ deforest > <<< non-affine syms <<<
 //│ deforest > >>> fusing >>>
+//│ deforest > AA⁰(3) ->
+//│ deforest > 	select: x
 //│ deforest > AA⁰(0) ->
 //│ deforest > 	match: k⁰
 //│ deforest > 	fields: k⁰.x⁰

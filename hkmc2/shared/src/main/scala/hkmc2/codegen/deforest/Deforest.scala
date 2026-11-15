@@ -61,21 +61,25 @@ class DeforestFusionSolver(val constraintSolver: FlowConstraintSolver)(using Con
         sels.map(s => s.field).size == 1
       // fusing a written object would read its fields from the constructor arguments
       if dests.exists:
-        case _: MarkerConsStrat | _: FieldWrite => true
-        case _: Dtor | _: FieldSel => false
+        case UnknownCons | Accumulator | _: FieldWrite => true
+        case NonAffine | _: Dtor | _: FieldSel => false
       then
         N
       else
-        val (dtors, sels) = dests.partitionMap:
+        val isNonAffine = dests.contains(NonAffine)
+        val (dtors, sels) = (dests - NonAffine).partitionMap:
           case d: Dtor => Left(d)
           case fs: FieldSel => Right(fs)
           case _ => die
+        // a select-only fusion replaces the object by its selected field and each select by a read of it,
+        // so several uses of the object duplicate no work
         if dtors.size == 0 && selsSelectingTheSameSymbol(sels) then
           S(FinalDestSel(
             sels.map(_.concreteId),
             sels.head.field
           ))
-        else if dtors.size != 1 then N
+        // a match fusion runs the branch function once per use of the object
+        else if isNonAffine || dtors.size != 1 then N
         else
           val dtor = dtors.head
           if selAndDtorIsSameConsumer(

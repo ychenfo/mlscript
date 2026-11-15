@@ -1,0 +1,204 @@
+:.
+
+
+object A
+object B
+class Ref(val value)
+class P(val a, val b)
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+
+
+// * Fused: a never-written `mut` cell only read through one field is replaced by its contents,
+// * across a call and a return, although `r` is used twice
+:sjs
+:expect 2
+fun mk(x) = new mut Ref(x)
+fun get(r) = r.Ref#value
+fun f() =
+  let r = mk(1)
+  get(r) + r.Ref#value
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut Ref⁰(x⁰) ->
+//│ deforest > 	select: value
+//│ deforest > new mut Ref⁰(x⁰) ->
+//│ deforest > 	select: value
+//│ deforest > <<< fusing <<<
+//│ ————————————| JS (unsanitized) |————————————————————————————————————————————————————————————————————
+//│ let f, get, mk;
+//│ mk = function mk(x) {
+//│   return new Ref1.class(x)
+//│ };
+//│ get = function get(r) { return r.value };
+//│ f = function f() { return 2 };
+//│ return 2
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 2
+
+// * Not fused: the cell is written
+:expect 3
+fun f() =
+  let r = new mut Ref(1)
+  set r.Ref#value = 2
+  r.Ref#value + 1
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ = 3
+
+// * `r1` fused, `r2` not: `get` is instantiated per call site, so the written cell does not reach `r1`'s reader
+:sjs
+:expect 3
+fun get(r) = r.Ref#value
+fun f() =
+  let r1 = new mut Ref(1)
+  let r2 = new mut Ref(1)
+  set r2.Ref#value = 2
+  get(r1) + get(r2)
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut Ref⁰(1) ->
+//│ deforest > 	select: value
+//│ deforest > new mut Ref⁰(1) ->
+//│ deforest > 	select: value
+//│ deforest > <<< fusing <<<
+//│ ————————————| JS (unsanitized) |————————————————————————————————————————————————————————————————————
+//│ let f2, get1, r2, inlinedVal;
+//│ get1 = function get(r1) {
+//│   return r1.value
+//│ };
+//│ f2 = function f() {
+//│   let r21, inlinedVal1;
+//│   r21 = new Ref1.class(1);
+//│   r21.value = 2;
+//│   inlinedVal1 = r21.value;
+//│   return 1 + inlinedVal1
+//│ };
+//│ r2 = new Ref1.class(1);
+//│ r2.value = 2;
+//│ inlinedVal = r2.value;
+//│ return 1 + inlinedVal
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 3
+
+// * Not fused: identity is observable through `===`
+:expect true
+fun f() =
+  let r = new mut Ref(1)
+  r === r && r.Ref#value === 1
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > <<< fusing <<<
+//│ = true
+
+// * Fused: several fields, but only one is ever selected
+:sjs
+:expect 1
+fun f() =
+  let p = new mut P(1, 2)
+  p.P#a
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut P⁰(1, 2) ->
+//│ deforest > 	select: a
+//│ deforest > new mut P⁰(1, 2) ->
+//│ deforest > 	select: a
+//│ deforest > <<< fusing <<<
+//│ ————————————| JS (unsanitized) |————————————————————————————————————————————————————————————————————
+//│ let f4; f4 = function f() { return 1 }; return 1
+//│ —————————————————| Output |—————————————————————————————————————————————————————————————————————————
+//│ = 1
+
+// * Fused: crossing a return
+:expect 1
+fun mk(x) = new mut Ref(x)
+fun f() =
+  let r = mk(1)
+  r.Ref#value
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut Ref⁰(x¹) ->
+//│ deforest > 	select: value
+//│ deforest > new mut Ref⁰(x¹) ->
+//│ deforest > 	select: value
+//│ deforest > <<< fusing <<<
+//│ = 1
+
+// * Fused: used by the call and by the select
+:expect 2
+fun get(r) = r.Ref#value
+fun f() =
+  let r = new mut Ref(1)
+  get(r) + r.Ref#value
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut Ref⁰(1) ->
+//│ deforest > 	select: value
+//│ deforest > new mut Ref⁰(1) ->
+//│ deforest > 	select: value
+//│ deforest > <<< fusing <<<
+//│ = 2
+
+// * Fused: crossing a call
+:expect 1
+fun get(r) = r.Ref#value
+fun f() =
+  let r = new mut Ref(1)
+  get(r)
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut Ref⁰(1) ->
+//│ deforest > 	select: value
+//│ deforest > new mut Ref⁰(1) ->
+//│ deforest > 	select: value
+//│ deforest > <<< fusing <<<
+//│ = 1
+
+// * Fused: two selects
+:expect 2
+fun f() =
+  let r = new mut Ref(1)
+  r.Ref#value + r.Ref#value
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut Ref⁰(1) ->
+//│ deforest > 	select: value
+//│ deforest > new mut Ref⁰(1) ->
+//│ deforest > 	select: value
+//│ deforest > <<< fusing <<<
+//│ = 2
+
+// * Fused although used twice: the constructor argument is still evaluated once
+:expect 2
+fun one() =
+  print("once")
+  1
+fun f() =
+  let r = new mut Ref(one())
+  r.Ref#value + r.Ref#value
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut Ref⁰(tmp⁰) ->
+//│ deforest > 	select: value
+//│ deforest > new mut Ref⁰(tmp⁰) ->
+//│ deforest > 	select: value
+//│ deforest > <<< fusing <<<
+//│ > once
+//│ = 2
+
+// * Only the cell is fused: the closure reads it once per call, so `AA` reaches its match twice
+:expect 2
+data class AA(aa)
+fun f() =
+  let r = new mut Ref(AA(1))
+  let cl = () => if r.Ref#value is AA(v) then v else 0
+  cl() + cl()
+f()
+//│ deforest > >>> fusing >>>
+//│ deforest > new mut Ref⁰(tmp¹) ->
+//│ deforest > 	select: value
+//│ deforest > new mut Ref⁰(tmp¹) ->
+//│ deforest > 	select: value
+//│ deforest > <<< fusing <<<
+//│ = 2
